@@ -32,7 +32,7 @@ allows. A link holds its whole document: if one holds anything private, say so.
   by the command line (`packages/doc/`).
 
 Out of scope: someone you gave a link to passing it on (a link is the document); a compromised device, browser
-or extension; a weak password; the security of Cloudflare or of a site a document links to; denial of service by
+or extension; a password sent alongside its link; the security of Cloudflare or of a site a document links to; denial of service by
 sheer volume; a scanner's report without a way the problem can be used.
 
 What the site protects against, and what it does not, is the threat model:

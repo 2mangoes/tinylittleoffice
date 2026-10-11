@@ -1750,14 +1750,24 @@
     gap: 0.625em;
     width: 100%;
   }
-  .to-password-label {
+  /* The password the app made: large, in Plex Mono so no letter is taken for another, all of it in view; Copy beside
+     it where there is room, under it on a phone. */
+  .to-password-shown {
     display: flex;
-    flex-direction: column;
-    gap: 0.2857em;
-    font-size: calc(0.875 * var(--to-scale));
-    color: var(--to-ink-2);
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5em;
   }
-  .to-password-new,
+  .to-password-made {
+    flex: 1 1 14em;
+    min-width: 0;
+    font-family: var(--to-font-mono);
+    font-size: calc(1.0625 * var(--to-scale));
+    text-align: center;
+  }
+  .to-password-another {
+    align-self: flex-start;
+  }
   .to-unlock-field {
     font-size: var(--to-scale);
     width: 100%;

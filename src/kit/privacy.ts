@@ -17,7 +17,7 @@
 import { forgetOpened } from './locked.ts';
 import { keeping, setKeeping, store } from './store.ts';
 import { decodeDoc, encodeDoc, isSealed, packDoc, unpackDoc } from './codec.ts';
-import { newLocker, PBKDF2_ITERATIONS, seal, unseal, unsealWith, type Locker } from './crypt.ts';
+import { newLocker, seal, unseal, unsealWith, type Locker } from './crypt.ts';
 import { forgetAll, keepAll, library, type Kept } from './library.ts';
 import { keptLinks } from './links.ts';
 import { parseHash } from './route.ts';
@@ -58,13 +58,11 @@ export const prefsKept = (): number => PREFS.filter((k) => store.get(k) !== null
 
 /* ---------- the password ---------- */
 
-/** How slow a password is to try. Lowered by the tests alone, for sealing and opening at once. */
-export const lockCost = { iterations: PBKDF2_ITERATIONS };
 /** The keys that opened documents this visit: memory only, never written. */
 const opened: Locker[] = [];
 
 /** A new password's locker. */
-export const lockWith = (password: string): Promise<Locker> => newLocker(password, lockCost.iterations);
+export const lockWith = (password: string): Promise<Locker> => newLocker(password);
 
 /** A document's text as its link's payload: sealed under the locker when there is one. */
 export async function pack(text: string, locker: Locker | null): Promise<string> {
@@ -75,7 +73,7 @@ export async function pack(text: string, locker: Locker | null): Promise<string>
 
 /** A password tried on a sealed payload: the text and its locker, or null when it is not the password. */
 export async function unlock(password: string, payload: string): Promise<{ text: string; locker: Locker } | null> {
-  const r = await unseal(password, payload, lockCost.iterations);
+  const r = await unseal(password, payload);
   if (!r) return null;
   opened.push(r.locker);
   return { text: unpackDoc(r.flag, r.bytes), locker: r.locker };

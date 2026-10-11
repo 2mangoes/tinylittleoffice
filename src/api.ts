@@ -8,12 +8,15 @@
  *   const url = link('sheet', 'Item | Cost:money\n--- | ---\nRent | 1200\n', { title: 'Budget' });
  *   read(url).text;   // the document's TLO text, its title in the head
  *   await text(url);  // what the document says, as Markdown (its text layer: src/doc/text.ts)
+ *   const { url, password } = await link('write', 'Salaries…\n', { seal: true });  // under a password the app made
  *
  * The apps' definitions (their names and templates) are a lazy import: `apps()` and `templates()` are
  * asynchronous so that the rest stays small.
  */
 import { parse as parseText, plainText, textMarkdown, textOf, write as writeDoc, withHead, type Doc } from './doc/index.ts';
-import { decodeDoc, encodeDoc, URL_LIMIT } from './kit/codec.ts';
+import { decodeDoc, encodeDoc, packDoc, URL_LIMIT } from './kit/codec.ts';
+import { newLocker, seal } from './kit/crypt.ts';
+import { generatePassword } from './kit/passwords.ts';
 import { isLang, parseHash, routeHash } from './kit/route.ts';
 import { appInHead, plainLink, readPlain, tloText } from './kit/plain.ts';
 import { diff, tally, type Change } from './kit/diff.ts';
@@ -49,12 +52,35 @@ export interface LinkOptions {
   lang?: string;
   /** The site the link opens on; this one by default. */
   site?: string;
+  /** Refused: the app makes every password (Paul, 2026-10-11); ask for one with `seal: true`. */
+  password?: never;
 }
+
+/** Under a password: the link holds only ciphertext, and the password, made here, is returned beside it. */
+export interface SealOptions extends LinkOptions {
+  seal: true;
+}
+
+/** What a sealed link is: the link, and the password that opens it (send it another way than the link). */
+export interface Sealed {
+  url: string;
+  password: string;
+}
+
+/** Said when a password is handed in: nobody chooses one, so nobody chooses a weak one. */
+export const PASSWORD_REFUSED = 'The app makes the password; ask for one with seal.';
 
 const APP = /^[a-z][a-z0-9-]*$/;
 
-/** The packed link for a document in an app: "<site><app>/#/v1/<app>/<payload>". */
-export function link(app: string, text: string, opts: LinkOptions = {}): string {
+/**
+ * The packed link for a document in an app: "<site><app>/#/v1/<app>/<payload>". With `seal: true`, the document
+ * sealed under a password the app makes (kit/passwords.ts, kit/crypt.ts), as the Password dialog does: the
+ * link and the password, asynchronously (WebCrypto is). A `password` given is refused.
+ */
+export function link(app: string, text: string, opts: SealOptions): Promise<Sealed>;
+export function link(app: string, text: string, opts?: LinkOptions): string;
+export function link(app: string, text: string, opts: LinkOptions & { seal?: boolean } = {}): string | Promise<Sealed> {
+  if ((opts as { password?: unknown }).password !== undefined) throw new Error(PASSWORD_REFUSED);
   if (!APP.test(app)) throw new Error(`Not an app id: "${app}"`);
   const head: Record<string, string> = {};
   if (opts.title) head.title = opts.title.replace(/\s+/g, ' ').trim();
@@ -62,8 +88,16 @@ export function link(app: string, text: string, opts: LinkOptions = {}): string 
   const doc = Object.keys(head).length ? withHead(text, head) : text;
   if (opts.lang && !isLang(opts.lang)) throw new Error(`Not a language code: "${opts.lang}" (as src/i18n names them: ht, pt-br, zh-hant)`);
   const site = (opts.site ?? SITE).replace(/\/?$/, '/');
-  const hash = routeHash(app, encodeDoc(doc), opts.view ?? '', !!opts.display, null, opts.lang || null);
-  return `${site}${app}/${hash}${opts.show ? (hash.includes('?') ? '&show' : '?show') : ''}`;
+  const at = (payload: string) => {
+    const hash = routeHash(app, payload, opts.view ?? '', !!opts.display, null, opts.lang || null);
+    return `${site}${app}/${hash}${opts.show ? (hash.includes('?') ? '&show' : '?show') : ''}`;
+  };
+  if (!opts.seal) return at(encodeDoc(doc));
+  return (async () => {
+    const password = generatePassword();
+    const { flag, bytes } = packDoc(doc);
+    return { url: at(await seal(await newLocker(password), flag, bytes)), password };
+  })();
 }
 
 /** The plain-parameter link for a document ("<site><app>/#title=…&doc=…"): longer, but readable and writable by hand. */

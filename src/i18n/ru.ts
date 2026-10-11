@@ -151,7 +151,6 @@ export default {
 
   // ---- privacy (kit/privacy.ts, kit/privacy-dialog.ts): the password, what the device holds ----
   // The Share dialog's head line: "Created 9 Oct 2026, 14:03 · by Paul".
-  'Again': 'Ещё раз',
   'Anyone with the link will need the password to open it. Nobody can reset it: lose it and the document is gone.': 'Чтобы открыть документ по ссылке, понадобится пароль. Сбросить его никто не может: потеряете пароль — потеряете документ.',
   'Change password': 'Сменить пароль',
   'Created {date}': 'Создано {date}',
@@ -182,7 +181,6 @@ export default {
   'Short links': 'Короткие ссылки',
   'Set a password, in Share': 'Задать пароль можно в «Поделиться»',
   'The short links made here, until they expire.': 'Короткие ссылки, созданные здесь, пока не истечёт их срок.',
-  'The two passwords differ': 'Пароли не совпадают',
   'Their names and links, for the home page.': 'Их названия и ссылки для главной страницы.',
   'Theme, the lifetime of short links.': 'Тема, срок жизни коротких ссылок.',
   'This document has a password. The link, and any short link made from it, holds only ciphertext.': 'У этого документа есть пароль. В ссылке и в любой короткой ссылке из неё только зашифрованный текст.',
@@ -199,9 +197,8 @@ export default {
   '{n|# document|# documents}': '{n|# документ|# документа|# документов|# документа}',
   '{n|# link|# links}': '{n|# ссылка|# ссылки|# ссылок|# ссылки}',
   '{n} set': 'Задано: {n}',
-  'Someone with the link can guess this offline. Use Generate, or four or more random words.': 'Тот, у кого есть ссылка, может подобрать его офлайн. Нажмите «Создать» или возьмите четыре и больше случайных слов.',
-  'This password can be guessed by anyone with the link. Set it anyway?': 'Этот пароль может подобрать любой, у кого есть ссылка. Всё равно задать?',
-  'Send the password another way than the link.': 'Передайте пароль иначе, чем ссылку.',
+  'Copy this and send it another way than the link. It cannot be shown again.': 'Скопируйте его и передайте иначе, чем ссылку. Показать его снова нельзя.',
+  'Make another': 'Создать другой',
 
   // ---- a document locked with a password, placed inside another (kit/locked.ts, kit/locked-doc.ts) ----
   // The card drawn where it sits; {app} is the app's name: "A Spreadsheet document, locked with a password".
@@ -1560,9 +1557,7 @@ export default {
   '{n|One document found|# documents found}': '{n|Найден # документ|Найдено # документа|Найдено # документов|Найдено # документа}',
   '{n} of {count}': '{n} из {count}',
   '{n} over': 'Больше на {n}',
-  'Generate a strong password': 'Создать надёжный пароль',
   'Password copied': 'Пароль скопирован',
-  'Twenty characters, made on this device and never sent anywhere. Copy it somewhere safe before you set it: there is no way to get it back.': 'Двадцать знаков, создаются на этом устройстве и никуда не отправляются. Скопируйте его в надёжное место, прежде чем задать: вернуть его нельзя.',
   'For you when presenting, never on the slide': 'Для вас во время показа, на слайде не видно',
   'Guest': 'Гость',
   'Name the line': 'Назвать линию',

@@ -93,3 +93,19 @@ test('measure counts the words a reader hears and the headings they move between
   const m = JSON.parse(run(['measure', 'write'], '# One two\n\nThree four.\n'));
   expect([m.words, m.headings]).toEqual([4, 1]);
 });
+
+test('link --seal prints the link and, on a second line, the password the app made; --password is refused', async () => {
+  const { unseal } = await import('../src/kit/crypt.ts');
+  const { unpackDoc } = await import('../src/kit/codec.ts');
+  const { parseHash } = await import('../src/kit/route.ts');
+  const [url, password, ...more] = run(['link', 'write', '--seal', '--title', 'Pay'], 'Salaries are up.\n').trimEnd().split('\n');
+  expect(more).toEqual([]);
+  expect(url).toMatch(/^https:\/\/tinylittleoffice\.com\/write\/#\/v1\/write\/E/);
+  expect(password).toMatch(/^[^-]{5}-[^-]{5}-[^-]{5}-[^-]{5}$/);
+  const opened = await unseal(password, parseHash(new URL(url).hash).payload);
+  expect(unpackDoc(opened!.flag, opened!.bytes)).toBe('---\ntitle: Pay\n---\nSalaries are up.\n');
+  const r = spawnSync(process.execPath, [CLI, 'link', 'write', '--seal', '--password', 'tulip'], { input: 'x\n', encoding: 'utf8' });
+  expect(r.status).toBe(2);
+  expect(r.stderr).toBe('tinyoffice: The app makes the password; ask for one with seal.\n');
+  expect(r.stdout).toBe('');
+});

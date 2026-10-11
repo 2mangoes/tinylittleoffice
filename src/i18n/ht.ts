@@ -153,7 +153,6 @@ export default {
 
   // ---- privacy (kit/privacy.ts, kit/privacy-dialog.ts): the password, what the device holds ----
   // The Share dialog's head line: "Created 9 Oct 2026, 14:03 · by Paul".
-  'Again': 'Ankò',
   'Anyone with the link will need the password to open it. Nobody can reset it: lose it and the document is gone.': 'Tout moun ki gen lyen an ap bezwen modpas la pou louvri l. Pesonn pa ka reyinisyalize l: si w pèdi l, dokiman an pèdi.',
   'Change password': 'Chanje modpas',
   'Created {date}': 'Kreye {date}',
@@ -184,7 +183,6 @@ export default {
   'Short links': 'Lyen kout',
   'Set a password, in Share': 'Mete yon modpas, nan Pataje',
   'The short links made here, until they expire.': 'Lyen kout ki fèt isit la, jiskaske yo ekspire.',
-  'The two passwords differ': 'De modpas yo pa menm',
   'Their names and links, for the home page.': 'Non yo ak lyen yo, pou paj akèy la.',
   'Theme, the lifetime of short links.': 'Tèm, dire lyen kout yo.',
   'This document has a password. The link, and any short link made from it, holds only ciphertext.': 'Dokiman sa a gen yon modpas. Lyen an, ak nenpòt lyen kout yo fè ak li, kenbe sèlman tèks chifre.',
@@ -201,9 +199,8 @@ export default {
   '{n|# document|# documents}': '{n|# dokiman|# dokiman}',
   '{n|# link|# links}': '{n|# lyen|# lyen}',
   '{n} set': '{n} mete',
-  'Someone with the link can guess this offline. Use Generate, or four or more random words.': 'Nenpòt moun ki gen lyen an ka devine l san entènèt. Sèvi ak Fè, oswa kat mo o aza oswa plis.',
-  'This password can be guessed by anyone with the link. Set it anyway?': 'Nenpòt moun ki gen lyen an ka devine modpas sa a. Mete l kanmenm?',
-  'Send the password another way than the link.': 'Voye modpas la yon lòt fason pase lyen an.',
+  'Copy this and send it another way than the link. It cannot be shown again.': 'Kopye l epi voye l yon lòt fason pase lyen an. Yo pa ka montre l ankò.',
+  'Make another': 'Fè yon lòt',
 
   // ---- a document locked with a password, placed inside another (kit/locked.ts, kit/locked-doc.ts) ----
   // The card drawn where it sits; {app} is the app's name: "A Spreadsheet document, locked with a password".
@@ -1562,9 +1559,7 @@ export default {
   '{n|One document found|# documents found}': '{n|Yon dokiman jwenn|# dokiman jwenn}',
   '{n} of {count}': '{n} sou {count}',
   '{n} over': '{n} anplis',
-  'Generate a strong password': 'Fè yon modpas solid',
   'Password copied': 'Modpas kopye',
-  'Twenty characters, made on this device and never sent anywhere. Copy it somewhere safe before you set it: there is no way to get it back.': 'Ven karaktè, fèt sou aparèy sa a epi yo pa janm voye yo okenn kote. Kopye l yon kote ki an sekirite anvan w mete l: pa gen fason pou jwenn li ankò.',
   'For you when presenting, never on the slide': 'Pou ou lè w ap prezante, pa janm sou dyapozitiv la',
   'Guest': 'Envite',
   'Name the line': 'Bay liy lan yon non',

@@ -106,9 +106,11 @@ and so does its sync service if that is on. Private does not change what the bro
 document as it is shown, and the password as it is typed. So does malware on
 the device. Nothing in a web page can defend against the browser it runs in.
 
-**A weak password.** The link carries everything needed to try passwords offline, at the attacker's own
-speed, with no limit and no lockout. The key derivation is slow on purpose (600,000 rounds of PBKDF2-SHA-256)
-but a short or common password falls anyway. `docs/crypto/password.md` gives the cost.
+**A password sent with the link.** The link carries everything needed to try passwords offline, at the
+attacker's own speed, with no limit and no lockout, but there is nothing likely to try: since 2026-10-11 every
+password is made by the app (about 116 random bits; nobody can set a weak one), so the key is one HKDF pass
+and not a slow hash (`docs/crypto/password.md` says why that is sound). What remains is the person: a password
+sent in the same message as its link protects nothing, which the Password dialog says.
 
 **A screenshot**, a photograph of the screen, a printout, an export. Once shown, it is shown.
 
@@ -141,7 +143,7 @@ Turning Saved off (from the phone) removes all of it.
 | The document in the fragment, not the path or a query | The host, its logs and every proxy on the way learning the document |
 | No accounts, no server storage of documents, except a short link's encrypted document, which the server cannot read and forgets when the link expires | A breach, a subpoena or a leak of stored documents: there are none to give but the ciphertext of short links not yet expired, without their keys |
 | Private by default; Saved only when switched on, and switched off erases | A shared or lost device holding what was done on it |
-| Password: PBKDF2-SHA-256, 600,000 rounds, random salt; AES-256-GCM with a fresh IV per edit | The link's holders, and anything it passes through, reading a document they were not told the password of; alteration of a sealed document |
+| Password: made by the app (about 116 random bits; none typed to set one), its key one HKDF-SHA-256 pass with a random salt; AES-256-GCM with a fresh IV per edit | The link's holders, and anything it passes through, reading a document they were not told the password of; alteration of a sealed document; a weak password chosen by a person |
 | A password never stored; the key held in memory for the visit, non-extractable | A device or a backup giving the password away |
 | A sealed document kept in the library with no title or first words | The library telling what a sealed document is |
 | A locked document's title reaches nothing but its own page: not the tab title or history, the library, a kept short link, a post, the embed, the QR file, or the share sheet (which gets no picture either) | History, tab sync and the apps a link is shared to telling what a sealed document is |

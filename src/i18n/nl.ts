@@ -152,7 +152,6 @@ export default {
 
   // ---- privacy (kit/privacy.ts, kit/privacy-dialog.ts): the password, what the device holds ----
   // The Share dialog's head line: "Created 9 Oct 2026, 14:03 · by Paul".
-  'Again': 'Opnieuw',
   'Anyone with the link will need the password to open it. Nobody can reset it: lose it and the document is gone.': 'Wie de link heeft, heeft het wachtwoord nodig om te openen. Niemand kan het resetten: kwijt is kwijt, en dan is het document weg.',
   'Change password': 'Wachtwoord wijzigen',
   'Created {date}': 'Gemaakt op {date}',
@@ -183,7 +182,6 @@ export default {
   'Short links': 'Korte links',
   'Set a password, in Share': 'Stel een wachtwoord in, bij Delen',
   'The short links made here, until they expire.': 'De korte links die hier zijn gemaakt, tot ze verlopen.',
-  'The two passwords differ': 'De twee wachtwoorden verschillen',
   'Their names and links, for the home page.': 'Hun namen en links, voor de startpagina.',
   'Theme, the lifetime of short links.': 'Thema, de levensduur van korte links.',
   'This document has a password. The link, and any short link made from it, holds only ciphertext.': 'Dit document heeft een wachtwoord. De link, en elke korte link daarvan, bevat alleen versleutelde tekst.',
@@ -200,9 +198,8 @@ export default {
   '{n|# document|# documents}': '{n|# document|# documenten}',
   '{n|# link|# links}': '{n|# link|# links}',
   '{n} set': '{n} ingesteld',
-  'Someone with the link can guess this offline. Use Generate, or four or more random words.': 'Wie de link heeft, kan dit offline raden. Gebruik Maken, of vier of meer willekeurige woorden.',
-  'This password can be guessed by anyone with the link. Set it anyway?': 'Iedereen met de link kan dit wachtwoord raden. Toch instellen?',
-  'Send the password another way than the link.': 'Stuur het wachtwoord via een andere weg dan de link.',
+  'Copy this and send it another way than the link. It cannot be shown again.': 'Kopieer het en stuur het via een andere weg dan de link. Het kan niet nog eens getoond worden.',
+  'Make another': 'Maak een ander',
 
   // ---- a document locked with a password, placed inside another (kit/locked.ts, kit/locked-doc.ts) ----
   // The card drawn where it sits; {app} is the app's name: "A Spreadsheet document, locked with a password".
@@ -1561,9 +1558,7 @@ export default {
   '{n|One document found|# documents found}': '{n|Eén document gevonden|# documenten gevonden}',
   '{n} of {count}': '{n} van {count}',
   '{n} over': '{n} te veel',
-  'Generate a strong password': 'Een sterk wachtwoord maken',
   'Password copied': 'Wachtwoord gekopieerd',
-  'Twenty characters, made on this device and never sent anywhere. Copy it somewhere safe before you set it: there is no way to get it back.': 'Twintig tekens, op dit apparaat gemaakt en nergens heen gestuurd. Kopieer het ergens veilig voordat je het instelt: er is geen manier om het terug te krijgen.',
   'For you when presenting, never on the slide': 'Voor jou tijdens het presenteren, nooit op de dia',
   'Guest': 'Gast',
   'Name the line': 'Noem de lijn',

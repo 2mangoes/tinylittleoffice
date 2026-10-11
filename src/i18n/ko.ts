@@ -151,7 +151,6 @@ export default {
 
   // ---- privacy (kit/privacy.ts, kit/privacy-dialog.ts): the password, what the device holds ----
   // The Share dialog's head line: "Created 9 Oct 2026, 14:03 · by Paul".
-  'Again': '다시',
   'Anyone with the link will need the password to open it. Nobody can reset it: lose it and the document is gone.': '링크를 가진 사람은 열 때 비밀번호가 필요해요. 아무도 재설정할 수 없으니 잃어버리면 문서도 사라져요.',
   'Change password': '비밀번호 변경',
   'Created {date}': '{date} 만듦',
@@ -182,7 +181,6 @@ export default {
   'Short links': '짧은 링크',
   'Set a password, in Share': '비밀번호는 공유에서 설정해요',
   'The short links made here, until they expire.': '여기서 만든 짧은 링크예요. 만료될 때까지 남아 있어요.',
-  'The two passwords differ': '두 비밀번호가 달라요',
   'Their names and links, for the home page.': '홈 화면에 보여 줄 이름과 링크예요.',
   'Theme, the lifetime of short links.': '테마, 짧은 링크의 유효 기간이에요.',
   'This document has a password. The link, and any short link made from it, holds only ciphertext.': '이 문서에는 비밀번호가 있어요. 링크와 거기서 만든 짧은 링크에는 암호문만 들어 있어요.',
@@ -199,9 +197,8 @@ export default {
   '{n|# document|# documents}': '문서 {n}개',
   '{n|# link|# links}': '링크 {n}개',
   '{n} set': '{n}개 설정됨',
-  'Someone with the link can guess this offline. Use Generate, or four or more random words.': '링크를 가진 사람은 오프라인에서 추측할 수 있어요. 만들기를 쓰거나, 무작위 단어 네 개 이상을 쓰세요.',
-  'This password can be guessed by anyone with the link. Set it anyway?': '링크가 있는 누구나 이 비밀번호를 추측할 수 있어요. 그래도 설정할까요?',
-  'Send the password another way than the link.': '비밀번호는 링크와 다른 방법으로 보내세요.',
+  'Copy this and send it another way than the link. It cannot be shown again.': '이것을 복사해서 링크와 다른 방법으로 보내세요. 다시 보여 줄 수 없어요.',
+  'Make another': '다른 것 만들기',
 
   // ---- a document locked with a password, placed inside another (kit/locked.ts, kit/locked-doc.ts) ----
   // The card drawn where it sits; {app} is the app's name: "A Spreadsheet document, locked with a password".
@@ -1560,9 +1557,7 @@ export default {
   '{n|One document found|# documents found}': '문서 {n|#}개를 찾았어요',
   '{n} of {count}': '{count}개 중 {n}',
   '{n} over': '{n} 초과',
-  'Generate a strong password': '강력한 비밀번호 만들기',
   'Password copied': '비밀번호를 복사했어요',
-  'Twenty characters, made on this device and never sent anywhere. Copy it somewhere safe before you set it: there is no way to get it back.': '스무 글자로, 이 기기에서 만들어지고 어디로도 전송되지 않아요. 설정하기 전에 안전한 곳에 복사해 두세요. 되찾을 방법이 없어요.',
   'For you when presenting, never on the slide': '발표할 때 나만 보는 글이에요. 슬라이드에는 나오지 않아요',
   'Guest': '손님',
   'Name the line': '선 이름 짓기',

@@ -9,6 +9,8 @@
  *   tinyoffice link <app> [file]                      a link for a document (a file, or stdin)
  *   tinyoffice link <file.tlo>                        a link for a .tlo file (its app is in its head)
  *        --title T  --by B  --view pdf|show|embed|…  --display  --lang ht  --plain  --site URL
+ *        --seal                                       under a password the app makes: the link, then
+ *                                                     the password on a second line (send it another way)
  *   tinyoffice read <link>                            the document's TLO text (--json: app, view, title, by too)
  *   tinyoffice read --text <link|file.tlo>            what it says, as Markdown: what a screen reader reads
  *   tinyoffice file <link> [--as tlo|md|csv|…] [--out path|-]
@@ -22,7 +24,7 @@
  *        (read --text, lint and measure also take <app> <file>, or <app> and stdin)
  */
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
-import { apps, compare, file, fromTlo, lint, link, markdown, measure, plain, read, templates } from '../../src/api.ts';
+import { apps, compare, file, fromTlo, lint, link, markdown, measure, PASSWORD_REFUSED, plain, read, templates } from '../../src/api.ts';
 import { slug } from '../../src/kit/draw.ts';
 
 const USAGE = readFileSync(new URL(import.meta.url), 'utf8')
@@ -37,7 +39,7 @@ const flags: Record<string, string | true> = {};
 const args: string[] = [];
 for (let i = 0; i < rest.length; i++) {
   const a = rest[i];
-  if (a.startsWith('--')) flags[a.slice(2)] = i + 1 < rest.length && !rest[i + 1].startsWith('--') && !['display', 'plain', 'json', 'text'].includes(a.slice(2)) ? rest[++i] : true;
+  if (a.startsWith('--')) flags[a.slice(2)] = i + 1 < rest.length && !rest[i + 1].startsWith('--') && !['display', 'plain', 'json', 'text', 'seal'].includes(a.slice(2)) ? rest[++i] : true;
   else args.push(a);
 }
 const str = (k: string) => (typeof flags[k] === 'string' ? (flags[k] as string) : undefined);
@@ -73,17 +75,18 @@ async function main() {
       return out(t ? t.text : die(`no template "${args[1]}"; tinyoffice templates ${args[0]} lists them`));
     }
     case 'link': {
+      if (flags.password !== undefined) die(PASSWORD_REFUSED);
       // One argument that is a file: a .tlo, its app in its head; else the app, then the file (or stdin).
       const tlo = args.length === 1 && existsSync(args[0]) ? fromTlo(words(args[0])) : null;
       const app = tlo?.app || (tlo ? die(`${args[0]} names no app in its head (app: sheet); say which: tinyoffice link <app> ${args[0]}`) : (args[0] ?? die('which app?')));
       const text = tlo ? tlo.text : words(args[1]);
       const view = str('view');
       const site = str('site');
-      return out(
-        flags.plain
-          ? plain(app, text, { title: str('title'), by: str('by'), view, site })
-          : link(app, text, { title: str('title'), by: str('by'), view: view === 'show' ? '' : view, show: view === 'show', display: !!flags.display, lang: str('lang'), site }),
-      );
+      if (flags.plain) return out(flags.seal ? die('a plain link cannot be sealed; leave out --plain') : plain(app, text, { title: str('title'), by: str('by'), view, site }));
+      const opts = { title: str('title'), by: str('by'), view: view === 'show' ? '' : view, show: view === 'show', display: !!flags.display, lang: str('lang'), site };
+      if (!flags.seal) return out(link(app, text, opts));
+      const sealed = await link(app, text, { ...opts, seal: true });
+      return out(`${sealed.url}\n${sealed.password}`);
     }
     case 'read': {
       if (flags.text) {

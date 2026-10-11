@@ -150,7 +150,6 @@ export default {
 
   // ---- privacy (kit/privacy.ts, kit/privacy-dialog.ts): the password, what the device holds ----
   // The Share dialog's head line: "Created 9 Oct 2026, 14:03 · by Paul".
-  'Again': 'もう一度',
   'Anyone with the link will need the password to open it. Nobody can reset it: lose it and the document is gone.': 'リンクを知っている人は、開くのにパスワードが必要です。パスワードは誰にもリセットできません。忘れるとドキュメントは開けなくなります。',
   'Change password': 'パスワードを変更',
   'Created {date}': '作成：{date}',
@@ -181,7 +180,6 @@ export default {
   'Short links': '短縮リンク',
   'Set a password, in Share': 'パスワードは「共有」で設定',
   'The short links made here, until they expire.': 'ここで作った短縮リンク（期限が切れるまで）。',
-  'The two passwords differ': '2つのパスワードが一致しません',
   'Their names and links, for the home page.': '名前とリンクです。ホームページに使います。',
   'Theme, the lifetime of short links.': 'テーマ、短縮リンクの有効期間です。',
   'This document has a password. The link, and any short link made from it, holds only ciphertext.': 'このドキュメントにはパスワードがあります。リンクも、そこから作った短縮リンクも、中身は暗号文だけです。',
@@ -198,9 +196,8 @@ export default {
   '{n|# document|# documents}': '{n|#件}のドキュメント',
   '{n|# link|# links}': '{n|#件}のリンク',
   '{n} set': '{n}件を設定',
-  'Someone with the link can guess this offline. Use Generate, or four or more random words.': 'リンクを持つ人はオフラインで推測できます。「作る」を使うか、ランダムな単語を4つ以上にしてください。',
-  'This password can be guessed by anyone with the link. Set it anyway?': 'このパスワードはリンクを持つ誰でも推測できます。それでも設定しますか？',
-  'Send the password another way than the link.': 'パスワードはリンクとは別の方法で送ってください。',
+  'Copy this and send it another way than the link. It cannot be shown again.': 'これをコピーして、リンクとは別の方法で送ってください。もう一度表示することはできません。',
+  'Make another': '別のものを作る',
 
   // ---- a document locked with a password, placed inside another (kit/locked.ts, kit/locked-doc.ts) ----
   // The card drawn where it sits; {app} is the app's name: "A Spreadsheet document, locked with a password".
@@ -1559,9 +1556,7 @@ export default {
   '{n|One document found|# documents found}': '{n|#件のドキュメントが見つかりました}',
   '{n} of {count}': '{count}件中{n}件',
   '{n} over': '{n}超過',
-  'Generate a strong password': '強いパスワードを作る',
   'Password copied': 'パスワードをコピーしました',
-  'Twenty characters, made on this device and never sent anywhere. Copy it somewhere safe before you set it: there is no way to get it back.': '20文字で、この端末の中で作られ、どこにも送られません。設定する前に安全な場所にコピーしてください。あとから取り戻す方法はありません。',
   'For you when presenting, never on the slide': '発表者用。スライドには表示されません',
   'Guest': 'ゲスト',
   'Name the line': '線に名前を付ける',

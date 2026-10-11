@@ -2,20 +2,16 @@
 // draws the locked card, a tap asks for the password, and opened the card draws the document for this visit
 // while the outer link goes on holding the sealed one; a slide the same; the embed view of a locked link is
 // the locked card with Unlock, and of a broken one says it cannot be read.
-import { test, expect, beforeAll, afterEach } from 'vitest';
+import { test, expect, afterEach } from 'vitest';
 import { mount, until } from './helpers.ts';
 import { decodeDoc, encodeDoc } from '../../src/kit/codec.ts';
-import { lockCost, lockWith, pack } from '../../src/kit/privacy.ts';
+import { lockWith, pack } from '../../src/kit/privacy.ts';
 import { forgetOpened, lockedFence } from '../../src/kit/locked.ts';
 import { parseHash } from '../../src/kit/route.ts';
 import { write } from '../../src/doc/index.ts';
 import type { ToShell } from '../../src/kit/shell.ts';
 import { setKeeping, store } from '../../src/kit/store.ts';
 
-beforeAll(() => {
-  // A password is slow to try on purpose; here, for both sides at once, it is quick.
-  lockCost.iterations = 1000;
-});
 afterEach(() => {
   forgetOpened();
   document.querySelectorAll('to-dialog').forEach((d) => d.remove());

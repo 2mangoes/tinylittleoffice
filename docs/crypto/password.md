@@ -1,25 +1,57 @@
 # A password on a document
 
 `src/kit/crypt.ts`, about a hundred lines. WebCrypto (`crypto.subtle`) and nothing else: no crypto library.
-Test vectors: `test/vectors/password.json`, checked by `test/crypto-vectors.test.ts` against the kit and
-against WebCrypto called by hand.
+Test vectors: `test/vectors/password.json`, made from their inputs and checked by `test/crypto-vectors.test.ts`
+against the kit and against WebCrypto called by hand.
+
+## The password is made by the app
+
+Since 2026-10-11 nobody types a password to set one (Paul: "Only you can generate passwords for users. That
+keeps them secure"). The Password dialog shows one the app made, with Copy and Make another, and seals the
+document with it; the API's `link(app, text, { seal: true })` and `tinyoffice link --seal` return one beside the
+link and refuse a password handed in ("The app makes the password; ask for one with seal."). Typing is left
+only where it must be: the person a sealed link was sent to types the password they were sent, to open it.
+
+A password is `generatePassword()` in `src/kit/passwords.ts`: twenty characters drawn from an alphabet of 56
+(letters and digits, with the look-alikes `l`, `I`, `1`, `o`, `O` and `0` left out), each chosen by
+`crypto.getRandomValues` with rejection so every character is equally likely, written in four groups of five
+with dashes (the dashes are part of it). That is 20 × log2(56), about **116 bits** of entropy. Nothing measures a password's strength any more: every password has the same.
 
 ## The parameters
 
 | | |
 |---|---|
-| Key derivation | PBKDF2 with HMAC-SHA-256 |
-| Iterations | 600,000 (`PBKDF2_ITERATIONS`) |
+| Key derivation | HKDF with SHA-256 (RFC 5869), one pass |
+| Input keying material | the password normalized to Unicode NFKC, then UTF-8 |
 | Salt | 16 bytes from `crypto.getRandomValues`, made when the password is set |
-| Password bytes | the password normalized to Unicode NFKC, then UTF-8 |
+| Info | the UTF-8 bytes of `tinylittleoffice sealed v1` |
 | Derived key | 32 bytes, imported as a non-extractable AES-GCM key |
 | Cipher | AES-256-GCM |
 | IV | 12 bytes from `crypto.getRandomValues`, fresh for every seal |
 | Tag | 16 bytes (WebCrypto's default), at the end of the ciphertext |
 | Additional data | none |
 
-NFKC means the same password typed another way (a no-break space for a space, the ligature `ﬁ` for `fi`, a
-full-width letter) gives the same key. The second vector shows it.
+NFKC is for the person typing to open: a password typed with a full-width letter, or pasted from somewhere that
+changed a character's form, gives the same key. The second vector shows it.
+
+## Why one HKDF pass is sound
+
+A key derivation function does one of two jobs. A password hash (PBKDF2, scrypt, Argon2) makes each guess
+expensive, because a password a person chose has little entropy and an attacker holding the ciphertext can
+try the likely ones offline: stretching buys back some of what the person did not choose. HKDF does the other
+job: it turns keying material that already has enough entropy, but may not be uniform or the right length, into
+a key. It is an extract step (HMAC-SHA-256 keyed by the salt over the input) and an expand step (HMAC-SHA-256
+keyed by that over the info), and its security rests on the input being hard to guess, not on being slow.
+
+Every password here is 116 random bits, so the password is the entropy and there is nothing to buy back.
+Guessing it offline means searching 2^116 passwords; at a trillion trillion (10^24) guesses a second, half of
+them takes over a thousand years, and no stretching would change the answer in a way that matters. What 600,000 rounds
+of PBKDF2 did before this date (when people typed passwords) was cost every reader a second or more on a phone
+at every open; with the passwords made by the app the rounds defended nothing, so they are gone.
+
+The salt still matters: two documents sealed under the same password get different keys, and nothing computed
+for one link helps with another. The info string names the format, so a key made here is for this and nothing
+else.
 
 ## The sealed payload
 
@@ -46,15 +78,15 @@ Reading takes `-` as 62 too; a link made before is the same bytes.
 So a sealed payload is `E` and at least 60 characters (16 + 12 + 1 + 16 = 45 bytes for an empty document).
 Anything shorter, or not base64url, is not a sealed payload.
 
-**There is no separate version byte.** `E` says "sealed with these parameters"; the `v1` in the route is the
-link format's version, outside the encryption. Different parameters would take a new first letter, and `E`
-would go on meaning exactly this. The plain (unsealed) payloads start with their flag letter, which is never
-`E`.
+**There is no separate version byte.** `E` says "sealed this way"; the `v1` in the route is the link format's
+version, outside the encryption. The plain (unsealed) payloads start with their flag letter, which is never
+`E`. Before launch, the change from PBKDF2 to HKDF kept the letter: a link sealed before 2026-10-11 does not
+open, and nothing is kept for it.
 
 ## What happens when
 
-- **A password is set.** A new salt is drawn and the key derived (the slow step), once. The document is
-  sealed under a fresh IV.
+- **A password is set.** The app makes it; a new salt is drawn and the key derived. The document is sealed
+  under a fresh IV. The password is shown in the dialog until it closes and never again.
 - **Each edit.** The same key and salt, a fresh IV, a new payload in the address bar. Random 12-byte IVs are
   safe for about 2^32 seals under one key, far beyond any document's edits.
 - **Opening.** The salt is read from the payload, the key derived from the password typed, and AES-GCM
@@ -68,29 +100,11 @@ would go on meaning exactly this. The plain (unsealed) payloads start with their
 
 ## What someone with the link can do
 
-They have the salt, the IV and the ciphertext, which is everything needed to test a guess. They can guess
-offline, as fast as their hardware goes, with no limit, no lockout and no one to notice. A right guess is
-certain (the tag matches); a wrong one is certain too.
-
-The cost of one guess is 600,000 rounds of HMAC-SHA-256, about 1.2 million SHA-256 compressions. A current
-high-end graphics card computes around 2×10^10 SHA-256 compressions a second, so roughly **20,000 guesses a
-second per card**. Rough times on one such card:
-
-| Password | Guesses | Time |
-|---|---|---|
-| any of the ten million most common passwords | 10^7 | under 10 minutes |
-| six lowercase letters | 3×10^8 | about 4 hours |
-| eight lowercase letters | 2×10^11 | about 4 months (a day on a hundred cards) |
-| four random words from a 7,776-word list | 4×10^15 | thousands of years |
-| five random words from that list | 3×10^19 | tens of millions of years |
-
-Cards get faster and attackers rent many. The protection is exactly as strong as the password, so the Password
-dialog says what one costs: under the fields, an estimate (`strength` in `src/kit/passwords.ts`: the length times
-log2 of the character sets used, and next to nothing for one of the commonest passwords or a run of one character;
-no library). Below 50 bits it says that someone with the link can guess it offline, and to use Generate or four or
-more random words; Set password then asks once. Under Set: send the password another way than the link. The site
-cannot slow an attacker who has the link; the iterations are the one lever, and they also cost the reader:
-deriving the key takes a moment on a laptop, longer on a phone, once a visit.
+They have the salt, the IV and the ciphertext, which is everything needed to test a guess, offline, with no
+limit and no lockout. A right guess is certain (the tag matches). But there is no likely guess to start from:
+the password is 116 random bits, and each guess is an HKDF and an AES-GCM decryption. The way in is not the
+link but the password's own path: the dialog says to copy it and send it another way than the link. Sent in the
+same message as the link, it protects nothing.
 
 What it does not hide: the document's length (the payload is the compressed document plus 45 bytes), the app
 it opens in (in the route, outside the tag), and that it has a password.
@@ -98,13 +112,15 @@ it opens in (in the route, outside the tag), and that it has a password.
 ## Checking it yourself
 
 `test/vectors/password.json` gives, for two fixed passwords, salts and IVs: the NFKC bytes, the derived key,
-the plaintext, the ciphertext with its tag, and the sealed text. With any PBKDF2 and AES-GCM:
+the plaintext, the ciphertext with its tag, and the sealed text. With any HKDF and AES-GCM:
 
 ```
-key   = PBKDF2-HMAC-SHA-256(passwordNfkcHex, saltHex, 600000, 32)   == keyHex
-out   = AES-256-GCM-encrypt(key, ivHex, plaintextHex, no AAD)        == ciphertextAndTagHex
-sealed = "E" + base64url(salt | iv | out)                             == sealed
+key    = HKDF-SHA-256(ikm = passwordNfkcHex, salt = saltHex, info = "tinylittleoffice sealed v1", 32)  == keyHex
+out    = AES-256-GCM-encrypt(key, ivHex, plaintextHex, no AAD)                                        == ciphertextAndTagHex
+sealed = "E" + base64url(salt | iv | out)                                                              == sealed
 ```
 
-The fixed salts and IVs exist only in the vectors; `sealAt` in crypt.ts, which takes an IV, is marked for
-tests, and a test fails if anything in the site calls it.
+The file is written by the test's own helper from the inputs it names (`TLO_WRITE_VECTORS=1 npx vitest run
+test/crypto-vectors.test.ts`), and the test fails when the file and the inputs disagree. The fixed salts and IVs
+exist only in the vectors; `sealAt` in crypt.ts, which takes an IV, is marked for tests, and a test fails if
+anything in the site calls it.

@@ -2,20 +2,17 @@
 // file… and a drop take a zip; under Saved its documents are kept, under Private a dialog lists them and offers to keep
 // them or open one; one document opens; and Download everything, then the zip opened on an empty device, gives the
 // same library.
-import { test, expect, afterEach, beforeAll, vi } from 'vitest';
+import { test, expect, afterEach, vi } from 'vitest';
 import { mount, said, tick, until } from './helpers.ts';
 import { encodeDoc } from '../../src/kit/codec.ts';
 import { keep, library, forgetAll } from '../../src/kit/library.ts';
 import { setKeeping } from '../../src/kit/store.ts';
-import { keeping, lockCost, lockWith, pack } from '../../src/kit/privacy.ts';
+import { keeping, lockWith, pack } from '../../src/kit/privacy.ts';
 import { zip } from '../../src/kit/zip.ts';
 import { toast as say } from '../../src/kit/toast.ts';
 import type { ToShell } from '../../src/kit/shell.ts';
 import type { ToDialog } from '../../src/kit/dialog.ts';
 
-beforeAll(() => {
-  lockCost.iterations = 1000;
-});
 afterEach(() => {
   vi.restoreAllMocks();
   setKeeping(true);

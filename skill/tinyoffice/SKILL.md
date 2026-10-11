@@ -521,6 +521,8 @@ compare(url, revised).changes;  // what the second link changed, block by block
 await templates('deck');        // what a deck can start from
 ```
 
+A document under a password: `await link(app, text, { seal: true })` (or `tinyoffice link --seal`) returns `{ url, password }`: the link holds only ciphertext, and the password is one the app made (twenty random characters). Give the person the password apart from the link, and tell them to send it another way than the link. You cannot choose the password: one handed in (`password:`, `--password`) is refused with "The app makes the password; ask for one with seal."
+
 A link opens in its reader's browser's language; `link(app, text, { lang: 'ht' })` (or `--lang ht`) makes one that opens in Haitian Creole, or any language the site has (`es`, `pt-br`, `zh-hant`, …), whatever the reader's browser says.
 
 A page of your own can import `https://tinylittleoffice.com/tinyoffice.js` instead: `link({ app, doc, title })` writes the plain link and `embed({ app, doc, title })` the `<iframe>` that shows the document's pages. In the API, `encode`/`decode` are the codec, `parse`/`write` the kernel (the document as a head and blocks, and back), `tlo`/`fromTlo` a `.tlo` file's text, `file(app, text, ext)` a file of the app's own formats that needs no browser. In a clone of github.com/aboard-io/tinylittleoffice, `node packages/doc/tinyoffice.ts` is the same from the command line: `link`, `read` (`read --text` for what it says, as Markdown), `file`, `diff`, `lint`, `measure`, `apps`, `templates`.

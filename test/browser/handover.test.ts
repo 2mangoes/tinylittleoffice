@@ -141,7 +141,6 @@ test('Password… from Share: Share closes, the password dialog alone is open; c
   // Done (a password set): Share is back too, saying so.
   share.querySelector<HTMLButtonElement>('.to-password-open')!.click();
   await only('to-dialog.to-password-dialog dialog');
-  for (const f of shell.querySelectorAll<HTMLInputElement>('.to-password-new')) ((f.value = 'maple orbit sugar lantern'), f.dispatchEvent(new Event('input', { bubbles: true })));
   shell.querySelector<HTMLButtonElement>('.to-password-set')!.click();
   await only('to-share dialog');
   await until(() => share.querySelector('.to-share-protect .to-trust-line')!.textContent!.includes('Protected by a password'));

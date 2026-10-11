@@ -140,7 +140,6 @@ export default {
   'Short link': 'ছোট লিংক',
 
   // ---- privacy (kit/privacy.ts, kit/privacy-dialog.ts): the password, what the device holds ----
-  'Again': 'আবার',
   'Anyone with the link will need the password to open it. Nobody can reset it: lose it and the document is gone.': 'লিংক থাকলেও খুলতে পাসওয়ার্ড লাগবে। কেউ এটি রিসেট করতে পারে না: হারালে নথিটিও হারিয়ে যাবে।',
   'Change password': 'পাসওয়ার্ড বদলান',
   'Created {date}': 'তৈরি হয়েছে {date}',
@@ -171,7 +170,6 @@ export default {
   'Short links': 'ছোট লিংক',
   'Set a password, in Share': 'পাসওয়ার্ড দিন, শেয়ারে',
   'The short links made here, until they expire.': 'এখানে বানানো ছোট লিংকগুলো, মেয়াদ শেষ হওয়া পর্যন্ত।',
-  'The two passwords differ': 'দুটি পাসওয়ার্ড মিলছে না',
   'Their names and links, for the home page.': 'হোম পাতাের জন্য এগুলোর নাম ও লিংক।',
   'Theme, the lifetime of short links.': 'থিম, ছোট লিংকের মেয়াদ।',
   'This document has a password. The link, and any short link made from it, holds only ciphertext.': 'এই নথিতে পাসওয়ার্ড আছে। লিংকে এবং এর থেকে বানানো ছোট লিংকে শুধু এনক্রিপ্ট করা লেখা থাকে।',
@@ -188,9 +186,8 @@ export default {
   '{n|# document|# documents}': '{n|#|#}টি নথি',
   '{n|# link|# links}': '{n|#|#}টি লিংক',
   '{n} set': '{n}টি দেওয়া',
-  'Someone with the link can guess this offline. Use Generate, or four or more random words.': 'লিংক যার কাছে আছে সে এটি অফলাইনে আন্দাজ করতে পারে। বানান ব্যবহার করুন, বা চার বা তার বেশি এলোমেলো শব্দ।',
-  'This password can be guessed by anyone with the link. Set it anyway?': 'লিংক যার কাছে আছে সে-ই এই পাসওয়ার্ড আন্দাজ করতে পারে। তবুও সেট করবেন?',
-  'Send the password another way than the link.': 'পাসওয়ার্ডটি লিংক ছাড়া অন্য কোনো উপায়ে পাঠান।',
+  'Copy this and send it another way than the link. It cannot be shown again.': 'এটি কপি করুন আর লিংক ছাড়া অন্য কোনো উপায়ে পাঠান। এটি আর দেখানো যাবে না।',
+  'Make another': 'আরেকটি বানান',
 
   // ---- a document locked with a password, placed inside another (kit/locked.ts, kit/locked-doc.ts) ----
   'Locked with a password': 'পাসওয়ার্ডের তালা দেওয়া',
@@ -1503,9 +1500,7 @@ export default {
   '{n|One document found|# documents found}': '{n|#|#}টি নথি পাওয়া গেছে',
   '{n} of {count}': '{count}-এর মধ্যে {n}',
   '{n} over': '{n} বেশি',
-  'Generate a strong password': 'শক্ত পাসওয়ার্ড বানান',
   'Password copied': 'পাসওয়ার্ড কপি হয়েছে',
-  'Twenty characters, made on this device and never sent anywhere. Copy it somewhere safe before you set it: there is no way to get it back.': 'বিশটি অক্ষর, এই ডিভাইসেই বানানো এবং কোথাও পাঠানো হয় না। দেওয়ার আগে নিরাপদ কোথাও কপি করে রাখুন: ফিরে পাওয়ার কোনো উপায় নেই।',
   'For you when presenting, never on the slide': 'প্রেজেন্ট করার সময় আপনার জন্য, স্লাইডে কখনও নয়',
   'Guest': 'অতিথি',
   'Name the line': 'রেখার নাম দিন',

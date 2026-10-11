@@ -152,7 +152,6 @@ export default {
 
   // ---- privacy (kit/privacy.ts, kit/privacy-dialog.ts): the password, what the device holds ----
   // The Share dialog's head line: "Created 9 Oct 2026, 14:03 · by Paul".
-  'Again': 'Jeszcze raz',
   'Anyone with the link will need the password to open it. Nobody can reset it: lose it and the document is gone.': 'Każdy, kto ma link, będzie potrzebował hasła, żeby otworzyć dokument. Nikt nie może go zresetować: jeśli je zgubisz, dokument przepada.',
   'Change password': 'Zmień hasło',
   'Created {date}': 'Utworzono {date}',
@@ -183,7 +182,6 @@ export default {
   'Short links': 'Krótkie linki',
   'Set a password, in Share': 'Ustaw hasło w Udostępnij',
   'The short links made here, until they expire.': 'Krótkie linki utworzone tutaj, do czasu ich wygaśnięcia.',
-  'The two passwords differ': 'Hasła się różnią',
   'Their names and links, for the home page.': 'Ich nazwy i linki, na stronę główną.',
   'Theme, the lifetime of short links.': 'Motyw, czas życia krótkich linków.',
   'This document has a password. The link, and any short link made from it, holds only ciphertext.': 'Ten dokument ma hasło. Link i każdy krótki link z niego zawierają tylko szyfrogram.',
@@ -200,9 +198,8 @@ export default {
   '{n|# document|# documents}': '{n|# dokument|# dokumenty|# dokumentów|# dokumentu}',
   '{n|# link|# links}': '{n|# link|# linki|# linków|# linku}',
   '{n} set': '{n} ustawione',
-  'Someone with the link can guess this offline. Use Generate, or four or more random words.': 'Każdy, kto ma link, może je odgadnąć offline. Użyj Wygeneruj albo czterech lub więcej losowych słów.',
-  'This password can be guessed by anyone with the link. Set it anyway?': 'To hasło może odgadnąć każdy, kto ma link. Ustawić mimo to?',
-  'Send the password another way than the link.': 'Wyślij hasło inną drogą niż link.',
+  'Copy this and send it another way than the link. It cannot be shown again.': 'Skopiuj je i wyślij inną drogą niż link. Nie da się go pokazać ponownie.',
+  'Make another': 'Utwórz inne',
 
   // ---- a document locked with a password, placed inside another (kit/locked.ts, kit/locked-doc.ts) ----
   // The card drawn where it sits; {app} is the app's name: "A Spreadsheet document, locked with a password".
@@ -1561,9 +1558,7 @@ export default {
   '{n|One document found|# documents found}': 'Znaleziono {n|# dokument|# dokumenty|# dokumentów|# dokumentu}',
   '{n} of {count}': '{n} z {count}',
   '{n} over': '{n} za dużo',
-  'Generate a strong password': 'Wygeneruj silne hasło',
   'Password copied': 'Skopiowano hasło',
-  'Twenty characters, made on this device and never sent anywhere. Copy it somewhere safe before you set it: there is no way to get it back.': 'Dwadzieścia znaków, utworzonych na tym urządzeniu i nigdzie nie wysyłanych. Skopiuj je w bezpieczne miejsce, zanim ustawisz hasło: nie ma jak go odzyskać.',
   'For you when presenting, never on the slide': 'Dla Ciebie podczas prezentowania, nigdy na slajdzie',
   'Guest': 'Gość',
   'Name the line': 'Nazwij linię',

@@ -152,7 +152,6 @@ export default {
 
   // ---- privacy (kit/privacy.ts, kit/privacy-dialog.ts): the password, what the device holds ----
   // The Share dialog's head line: "Created 9 Oct 2026, 14:03 · by Paul".
-    'Again': 'دوبارہ',
     'Anyone with the link will need the password to open it. Nobody can reset it: lose it and the document is gone.': 'جس کے پاس بھی لنک ہو اسے کھولنے کے لیے پاس ورڈ چاہیے ہوگا۔ اسے کوئی ری سیٹ نہیں کر سکتا: کھو گیا تو دستاویز گئی۔',
     'Change password': 'پاس ورڈ بدلیں',
     'Created {date}': 'بنائی گئی {date}',
@@ -183,7 +182,6 @@ export default {
     'Short links': 'مختصر لنکس',
   'Set a password, in Share': 'پاس ورڈ لگائیں، "شیئر" میں',
     'The short links made here, until they expire.': 'یہاں بنائے گئے مختصر لنکس، ان کی میعاد ختم ہونے تک۔',
-    'The two passwords differ': 'دونوں پاس ورڈ مختلف ہیں',
     'Their names and links, for the home page.': 'ان کے نام اور لنکس، ہوم پیج کے لیے۔',
   'Theme, the lifetime of short links.': 'تھیم، مختصر لنکس کی میعاد۔',
     'This document has a password. The link, and any short link made from it, holds only ciphertext.': 'اس دستاویز پر پاس ورڈ ہے۔ لنک میں، اور اس سے بنے ہر مختصر لنک میں، صرف انکرپٹڈ متن ہے۔',
@@ -200,9 +198,8 @@ export default {
     '{n|# document|# documents}': '{n|# دستاویز|# دستاویزات}',
     '{n|# link|# links}': '{n|# لنک|# لنکس}',
     '{n} set': '{n} مقرر',
-    'Someone with the link can guess this offline. Use Generate, or four or more random words.': 'جس کے پاس لنک ہے وہ اسے آف لائن اندازے سے کھول سکتا ہے۔ بنائیں استعمال کریں، یا چار یا زیادہ بے ترتیب الفاظ۔',
-    'This password can be guessed by anyone with the link. Set it anyway?': 'لنک والا کوئی بھی اس پاس ورڈ کا اندازہ لگا سکتا ہے۔ پھر بھی مقرر کریں؟',
-    'Send the password another way than the link.': 'پاس ورڈ لنک کے علاوہ کسی اور طریقے سے بھیجیں۔',
+    'Copy this and send it another way than the link. It cannot be shown again.': 'اسے کاپی کریں اور لنک کے علاوہ کسی اور طریقے سے بھیجیں۔ یہ دوبارہ نہیں دکھایا جا سکتا۔',
+    'Make another': 'دوسرا بنائیں',
 
   // ---- a document locked with a password, placed inside another (kit/locked.ts, kit/locked-doc.ts) ----
   // The card drawn where it sits; {app} is the app's name: "A Spreadsheet document, locked with a password".
@@ -1561,9 +1558,7 @@ export default {
     '{n|One document found|# documents found}': '{n|ایک دستاویز ملی|# دستاویزات ملیں}',
     '{n} of {count}': '{count} میں سے {n}',
     '{n} over': '{n} زیادہ',
-    'Generate a strong password': 'مضبوط پاس ورڈ بنائیں',
     'Password copied': 'پاس ورڈ کاپی ہو گیا',
-    'Twenty characters, made on this device and never sent anywhere. Copy it somewhere safe before you set it: there is no way to get it back.': 'بیس حروف، اسی ڈیوائس پر بنے اور کہیں نہیں بھیجے گئے۔ لگانے سے پہلے اسے کسی محفوظ جگہ کاپی کر لیں: اسے واپس پانے کا کوئی طریقہ نہیں۔',
     'For you when presenting, never on the slide': 'پیش کرتے وقت آپ کے لیے، سلائیڈ پر کبھی نہیں',
     'Guest': 'مہمان',
     'Name the line': 'لکیر کا نام رکھیں',

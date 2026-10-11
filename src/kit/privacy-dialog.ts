@@ -22,7 +22,7 @@ import { saveFile } from './exports.ts';
 import { zip } from './zip.ts';
 import { everything, forgetDocuments, forgetEverything, forgetLinks, forgetPrefs, holdings, keeping, lockWith, onPrivacy, remember, unlock, type Holdings } from './privacy.ts';
 import type { Locker } from './crypt.ts';
-import { generatePassword, guessable } from './passwords.ts';
+import { generatePassword } from './passwords.ts';
 import { unlockForm } from './locked-doc.ts';
 import type { ToDialog } from './dialog.ts';
 import './dialog.ts';
@@ -48,6 +48,7 @@ export class ToPrivacy extends LitElement {
     held: { state: true },
     wrong: { state: true },
     busy: { state: true },
+    made: { state: true },
   };
   /** The shell's: a document's, with its dialogs; else the Privacy dialog alone (the drawer's). */
   declare doc: boolean;
@@ -58,8 +59,10 @@ export class ToPrivacy extends LitElement {
   declare held: Holdings | null;
   /** The unlock dialog's last try was not the password. */
   declare wrong: boolean;
-  /** A password being tried, or set: the slow part. */
+  /** A password being tried, or set. */
   declare busy: boolean;
+  /** The password the Password dialog shows: made here, a new one each time it opens and at Make another. */
+  declare made: string;
   private off = () => {};
 
   constructor() {
@@ -70,6 +73,7 @@ export class ToPrivacy extends LitElement {
     this.wrong = false;
     this.busy = false;
     this.held = null;
+    this.made = '';
   }
   createRenderRoot() {
     return this;
@@ -130,8 +134,10 @@ export class ToPrivacy extends LitElement {
       this.busy = false;
     }
   }
-  /** Password…, from the Share dialog: Share hands over to it and comes back when it closes (one modal at a time). */
-  private passwordFrom(button: HTMLElement) {
+  /** Password…, from the Share dialog: Share hands over to it and comes back when it closes (one modal at a time). A new password each time. */
+  private async passwordFrom(button: HTMLElement) {
+    this.made = generatePassword();
+    await this.updateComplete;
     const next = this.dialogOf('to-password-dialog');
     const over = button.closest<ToDialog>('to-dialog');
     if (next) void (over ? over.handOver(next, button) : next.show());
@@ -195,54 +201,29 @@ export class ToPrivacy extends LitElement {
     </section>`;
   }
 
-  /** Set a password, change it, or take it off. Twice, so a slip of the finger does not lock the author out. */
+  /**
+   * Set a password, change it, or take it off. The app makes every password (Paul, 2026-10-11: "Only you can
+   * generate passwords for users. That keeps them secure"): one is shown, read-only, with Copy and Make another, and
+   * Set seals the document with it. Nothing to type, so nothing to mistype or to guess.
+   */
   private renderPassword() {
     const has = this.protected;
-    const fields = () => [...this.querySelectorAll<HTMLInputElement>('.to-password-new')];
-    const check = () => {
-      const [a, b] = fields().map((f) => f.value);
-      const go = this.querySelector<HTMLButtonElement>('.to-password-set');
-      if (go) go.disabled = !a || a !== b;
-      const differ = this.querySelector<HTMLElement>('.to-password-differ');
-      if (differ) differ.textContent = b && a !== b ? t('The two passwords differ') : '';
-      const cost = this.querySelector<HTMLElement>('.to-password-cost');
-      if (cost) cost.textContent = a && guessable(a) ? t('Someone with the link can guess this offline. Use Generate, or four or more random words.') : '';
-    };
-    // A guessable password is the author's to choose, asked once: the warning above says why.
     const submit = (e: Event) => {
       e.preventDefault();
-      const [a, b] = fields().map((f) => f.value);
-      if (!a || a !== b) return;
-      if (guessable(a) && !confirm(t('This password can be guessed by anyone with the link. Set it anyway?'))) return;
-      void this.setPassword(a);
+      if (this.made) void this.setPassword(this.made);
     };
-    // Generate: a strong password made here, shown in both fields so it can be read and copied before it is set.
-    const generate = () => {
-      const made = generatePassword();
-      for (const f of fields()) {
-        f.type = 'text';
-        f.value = made;
-      }
-      this.querySelector<HTMLElement>('.to-password-made')?.toggleAttribute('hidden', false);
-      check();
-    };
-    const copyMade = () => void copyText(fields()[0]?.value ?? '', t('Password copied'));
     return html`<form class="to-password" @submit=${submit}>
       <p>${has ? t('This document has a password. The link, and any short link made from it, holds only ciphertext.') : t('Anyone with the link will need the password to open it. Nobody can reset it: lose it and the document is gone.')}</p>
-      <label class="to-password-label"><span>${has ? t('New password') : t('Password')}</span><input type="password" class="to-password-new" autocomplete="new-password" @input=${check} /></label>
-      <label class="to-password-label"><span>${t('Again')}</span><input type="password" class="to-password-new" autocomplete="new-password" @input=${check} /></label>
-      <p class="to-password-differ to-hint" role="status"></p>
-      <p class="to-password-cost to-hint" role="status"></p>
-      <div class="to-row">
-        <button type="button" class="to-btn to-password-generate" @click=${generate}>${icon(UI.key, 16)}<span>${t('Generate a strong password')}</span></button>
-        <button type="button" class="to-btn to-password-copy" @click=${copyMade}>${icon(UI.copy, 16)}<span>${t('Copy')}</span></button>
+      <div class="to-password-shown">
+        <input type="text" class="to-password-made" readonly .value=${this.made} aria-label=${has ? t('New password') : t('Password')} autocomplete="off" spellcheck="false" autocapitalize="off" @focus=${(e: Event) => (e.target as HTMLInputElement).select()} />
+        <button type="button" class="to-btn to-password-copy" @click=${() => void copyText(this.made, t('Password copied'))}>${icon(UI.copy, 16)}<span>${t('Copy')}</span></button>
       </div>
-      <p class="to-password-made to-hint" role="status" hidden>${t('Twenty characters, made on this device and never sent anywhere. Copy it somewhere safe before you set it: there is no way to get it back.')}</p>
+      <button type="button" class="to-btn to-password-another" ?disabled=${this.busy} @click=${() => (this.made = generatePassword())}>${icon(UI.key, 16)}<span>${t('Make another')}</span></button>
+      <p class="to-password-send to-hint">${t('Copy this and send it another way than the link. It cannot be shown again.')}</p>
       <div class="to-row">
-        <button type="submit" class="to-btn primary to-password-set" disabled>${icon(UI.lock, 16)}<span>${this.busy ? t('Sealing…') : has ? t('Change password') : t('Set password')}</span></button>
+        <button type="submit" class="to-btn primary to-password-set" ?disabled=${this.busy || !this.made}>${icon(UI.lock, 16)}<span>${this.busy ? t('Sealing…') : has ? t('Change password') : t('Set password')}</span></button>
         ${has ? html`<button type="button" class="to-btn to-password-remove" ?disabled=${this.busy} @click=${() => void this.setPassword('')}>${icon(UI.unlock, 16)}<span>${t('Remove password')}</span></button>` : nothing}
       </div>
-      <p class="to-password-send to-hint">${t('Send the password another way than the link.')}</p>
     </form>`;
   }
 

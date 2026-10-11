@@ -3,9 +3,9 @@
 // WebCrypto called directly with the layout the documents describe, so the JSON is enough for another
 // implementation to check itself against.
 import { test, expect } from 'vitest';
-import { readFileSync, readdirSync } from 'node:fs';
+import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { fromBase64Url, toBase64Url } from '../src/kit/codec.ts';
-import { deriveKey, PBKDF2_ITERATIONS, sealAt, unseal } from '../src/kit/crypt.ts';
+import { deriveKey, sealAt, unseal } from '../src/kit/crypt.ts';
 import { sealShortAt, shortLink, unshorten } from '../src/kit/short.ts';
 
 const read = (name: string) => JSON.parse(readFileSync(new URL(`vectors/${name}`, import.meta.url), 'utf8'));
@@ -15,22 +15,55 @@ const b64 = (s: string) => Uint8Array.from(fromBase64Url(s));
 const utf8 = (s: string) => new TextEncoder().encode(s);
 const subtle = globalThis.crypto.subtle;
 
-test("password: the parameters are the documents' and the kit's", () => {
-  const v = read('password.json');
-  expect(v.kdf).toEqual({ name: 'PBKDF2', hash: 'SHA-256', iterations: PBKDF2_ITERATIONS, keyBytes: 32, saltBytes: 16, normalize: 'NFKC' });
-  expect(v.cipher).toEqual({ name: 'AES-GCM', keyBits: 256, ivBytes: 12, tagBytes: 16, additionalData: null });
+/** The password vectors, made from their inputs by WebCrypto alone, the layout docs/crypto/password.md gives. */
+const KDF = { name: 'HKDF', hash: 'SHA-256', info: 'tinylittleoffice sealed v1', keyBytes: 32, saltBytes: 16, normalize: 'NFKC' };
+const CIPHER = { name: 'AES-GCM', keyBits: 256, ivBytes: 12, tagBytes: 16, additionalData: null };
+const ABOUT =
+  "Tiny Little Office password sealing (src/kit/crypt.ts, docs/crypto/password.md). The password is one the app made (twenty characters from an alphabet of 56, about 116 bits); key = HKDF-SHA-256(ikm = NFKC(password) as UTF-8, salt, info = 'tinylittleoffice sealed v1' as UTF-8, 32 bytes); plaintext = the codec's flag byte then the document's bytes (flag 'r': UTF-8 as it is); sealed = 'E' + base64url without padding of salt[16] | iv[12] | AES-256-GCM(key, iv, plaintext) with its 16-byte tag last and no additional data. Fixed salts and IVs are for these vectors only: the site draws both from crypto.getRandomValues. Base64url here is RFC 4648's URL alphabet with '~' for 62 where the RFC has '-' (a hyphen is where a pasted link breaks a line), no padding; '-' is read as 62 too.";
+const INPUTS = [
+  { password: 'Hq7wN-3mXkd-RtP9z-aVb4s', saltHex: '000102030405060708090a0b0c0d0e0f', ivHex: '101112131415161718191a1b', flag: 'r', document: '---\ntitle: Vector\n---\nThe note passed in class.\n' },
+  {
+    password: 'Ｈq7wN-3mXkd-RtP9z-aVb4s',
+    saltHex: '808182838485868788898a8b8c8d8e8f',
+    ivHex: '909192939495969798999a9b',
+    flag: 'r',
+    document: 'Read NFKC: a password typed with a full-width letter is the same password, and opens the same document.\n',
+  },
+];
+async function passwordVector(v: (typeof INPUTS)[number]) {
+  const salt = unhex(v.saltHex),
+    iv = unhex(v.ivHex);
+  const ikm = utf8(v.password.normalize('NFKC'));
+  const base = await subtle.importKey('raw', ikm, 'HKDF', false, ['deriveBits']);
+  const key = new Uint8Array(await subtle.deriveBits({ name: 'HKDF', hash: 'SHA-256', salt, info: utf8(KDF.info) }, base, 256));
+  const plain = new Uint8Array([v.flag.charCodeAt(0), ...utf8(v.document)]);
+  const aes = await subtle.importKey('raw', key, 'AES-GCM', false, ['encrypt']);
+  const out = new Uint8Array(await subtle.encrypt({ name: 'AES-GCM', iv }, aes, plain));
+  return {
+    password: v.password,
+    passwordNfkcHex: hex(ikm),
+    saltHex: v.saltHex,
+    ivHex: v.ivHex,
+    keyHex: hex(key),
+    flag: v.flag,
+    document: v.document,
+    plaintextHex: hex(plain),
+    ciphertextAndTagHex: hex(out),
+    sealed: 'E' + toBase64Url(new Uint8Array([...salt, ...iv, ...out])),
+  };
+}
+
+test('password: the vectors file is what its inputs make (TLO_WRITE_VECTORS=1 writes it again)', async () => {
+  const made = { about: ABOUT, kdf: KDF, cipher: CIPHER, vectors: await Promise.all(INPUTS.map(passwordVector)) };
+  if (process.env.TLO_WRITE_VECTORS) writeFileSync(new URL('vectors/password.json', import.meta.url), JSON.stringify(made, null, 2) + '\n');
+  expect(read('password.json')).toEqual(made);
 });
 
 for (const [i, v] of (read('password.json').vectors as Record<string, string>[]).entries()) {
-  test(`password vector ${i + 1}: the key, the plaintext, the sealed text, and back`, async () => {
+  test(`password vector ${i + 1}: the kit derives the key, seals to the sealed text, and opens it`, async () => {
     const salt = unhex(v.saltHex),
       iv = unhex(v.ivHex);
-    expect(hex(utf8(v.password.normalize('NFKC')))).toBe(v.passwordNfkcHex);
-    // The key, as PBKDF2 gives it with no kit in between.
-    const base = await subtle.importKey('raw', unhex(v.passwordNfkcHex), 'PBKDF2', false, ['deriveBits']);
-    expect(hex(new Uint8Array(await subtle.deriveBits({ name: 'PBKDF2', hash: 'SHA-256', salt, iterations: 600_000 }, base, 256)))).toBe(v.keyHex);
-    // The kit seals the flag and the bytes to exactly this.
-    expect(v.plaintextHex).toBe(hex(new Uint8Array([v.flag.charCodeAt(0), ...utf8(v.document)])));
+    // The kit's key is the vector's: AES-GCM under the raw key opens what the kit sealed.
     expect(await sealAt({ salt, key: await deriveKey(v.password, salt) }, v.flag, utf8(v.document), iv)).toBe(v.sealed);
     // The layout: "E", then base64url of salt | iv | ciphertext and tag; AES-GCM by hand opens it.
     expect(v.sealed[0]).toBe('E');

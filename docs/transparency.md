@@ -36,7 +36,7 @@ leak. Everything here makes that checkable by a stranger.
 2. **A threat model** (gate). `docs/threat-model.md`: what we protect against (the host learning a document;
    a short link's service reading one; a shared link altered in transit; a scam link or a tracking picture
    inside a document), what we do not (someone you gave
-   the link to passing it on; a compromised device or browser extension; a weak password), and why each
+   the link to passing it on; a compromised device or browser extension; a password sent alongside its link), and why each
    design choice follows. Plain words, no reassurance.
    *Built, 2026-10-10.* `docs/threat-model.md`: what is protected against and what is not (a lost phone with
    Saved on, the browser's history and sync, a screenshot and everything the link passes through added to
@@ -79,7 +79,7 @@ leak. Everything here makes that checkable by a stranger.
    (`test/csp.test.ts`). Their bytes together are a line of `budgets.json` (`fonts`), and `scripts/check-build.ts`
    fails a build that names a face it does not hold.
 5. **The crypto in the open** (gate). One short document each, with test vectors in the repo and the fact
-   that it is WebCrypto with no library: `docs/crypto/password.md` (PBKDF2 → AES-GCM: parameters, the sealed
+   that it is WebCrypto with no library: `docs/crypto/password.md` (a password the app makes, HKDF → AES-GCM: parameters, the sealed
    payload form), `docs/crypto/short-links.md` (AES-256-GCM, the key in the fragment, ~~the owner
    capability~~ (struck 2026-10-11: a short link cannot be changed or recalled), what tinier stores and for how long, what its logs hold: nothing).
    *Built, 2026-10-10.* The two documents, with the byte layouts; the vectors in `test/vectors/password.json`

@@ -1,17 +1,19 @@
 /**
  * A password on a document. The packed text (kit/codec.ts) is encrypted with AES-256-GCM under a key
- * derived from the password by PBKDF2-SHA-256, and the link carries
+ * derived from the password by one HKDF-SHA-256 pass, and the link carries
  *   E<base64url(salt[16] | iv[12] | ciphertext)>
  * where the plaintext is the codec's flag byte followed by the packed bytes, so the tag authenticates the
- * flag too. Deriving the key is slow on purpose and happens once a visit; each edit then only runs AES-GCM
- * with a fresh IV. Anyone holding the link can try passwords offline, so the protection is exactly as strong
- * as the password. WebCrypto alone. (Ported from the old tree's src/lib/crypt.ts; parameters unchanged.)
+ * flag too. Every password is one the app made (kit/passwords.ts: about 116 random bits), so the password is
+ * the entropy and the KDF only turns it into a key: there is nothing to stretch, and opening costs a phone
+ * nothing (until 2026-10-11, 600,000 rounds of PBKDF2 defended typed passwords). Each edit runs AES-GCM with
+ * a fresh IV. WebCrypto alone. docs/crypto/password.md gives the layout and why it is sound.
  */
 import { fromBase64Url, isSealed, toBase64Url } from './codec.ts';
 
 export { isSealed };
 
-export const PBKDF2_ITERATIONS = 600_000;
+/** HKDF's info: names the format, so this key is for nothing else. */
+const INFO = new TextEncoder().encode('tinylittleoffice sealed v1');
 const SALT_LEN = 16;
 const IV_LEN = 12;
 
@@ -23,15 +25,16 @@ export interface Locker {
 
 const subtle = () => globalThis.crypto.subtle;
 
-export async function deriveKey(password: string, salt: Uint8Array, iterations = PBKDF2_ITERATIONS): Promise<CryptoKey> {
-  const base = await subtle().importKey('raw', new TextEncoder().encode(password.normalize('NFKC')), 'PBKDF2', false, ['deriveKey']);
-  return subtle().deriveKey({ name: 'PBKDF2', hash: 'SHA-256', salt: salt as BufferSource, iterations }, base, { name: 'AES-GCM', length: 256 }, false, ['encrypt', 'decrypt']);
+/** The key for a password and a salt: HKDF-SHA-256 over the password's NFKC bytes (as it is typed to open), the salt as HKDF's salt. */
+export async function deriveKey(password: string, salt: Uint8Array): Promise<CryptoKey> {
+  const base = await subtle().importKey('raw', new TextEncoder().encode(password.normalize('NFKC')), 'HKDF', false, ['deriveKey']);
+  return subtle().deriveKey({ name: 'HKDF', hash: 'SHA-256', salt: salt as BufferSource, info: INFO }, base, { name: 'AES-GCM', length: 256 }, false, ['encrypt', 'decrypt']);
 }
 
 /** A fresh locker for a new password. */
-export async function newLocker(password: string, iterations = PBKDF2_ITERATIONS): Promise<Locker> {
+export async function newLocker(password: string): Promise<Locker> {
   const salt = globalThis.crypto.getRandomValues(new Uint8Array(SALT_LEN));
-  return { salt, key: await deriveKey(password, salt, iterations) };
+  return { salt, key: await deriveKey(password, salt) };
 }
 
 /** Encrypt a flag and bytes into a link's payload, under a fresh IV. */
@@ -84,10 +87,10 @@ async function open(key: CryptoKey, iv: Uint8Array, ct: Uint8Array): Promise<{ f
  * Decrypt a sealed payload. Null for a wrong password or a damaged link (AES-GCM cannot tell the two apart).
  * The locker returned reuses the link's salt, so later edits are re-sealed without deriving again.
  */
-export async function unseal(password: string, payload: string, iterations = PBKDF2_ITERATIONS): Promise<{ locker: Locker; flag: string; bytes: Uint8Array } | null> {
+export async function unseal(password: string, payload: string): Promise<{ locker: Locker; flag: string; bytes: Uint8Array } | null> {
   const p = parts(payload);
   if (!p) return null;
-  const key = await deriveKey(password, p.salt, iterations);
+  const key = await deriveKey(password, p.salt);
   const opened = await open(key, p.iv, p.ct);
   return opened ? { locker: { salt: p.salt, key }, ...opened } : null;
 }

@@ -17,7 +17,7 @@ let sealed = '';
 const inner = '---\ntitle: Salaries\n---\nThe secret words\n';
 beforeAll(async () => {
   const { flag, bytes } = packDoc(inner);
-  sealed = await seal(await newLocker('pw', 1000), flag, bytes);
+  sealed = await seal(await newLocker('pw'), flag, bytes);
 });
 const link = () => `https://tinylittleoffice.com/${routeHash('write', sealed)}`;
 const outer = () => write({ head: {}, blocks: [{ k: 'p', runs: [{ t: 'Before' }] }, linkToFence(link())!, { k: 'p', runs: [{ t: 'After' }] }] });
@@ -85,8 +85,8 @@ test('the registry knows the fence, as it knows a QR code; a plain link still go
 
 test('a link cut short by ten characters does not open with the right password, and the words say it may be cut short, not that the password is wrong', async () => {
   const cut = sealed.slice(0, -10);
-  expect(await unseal('pw', sealed, 1000)).not.toBeNull();
-  expect(await unseal('pw', cut, 1000)).toBeNull();
+  expect(await unseal('pw', sealed)).not.toBeNull();
+  expect(await unseal('pw', cut)).toBeNull();
   expect(notOpened()).toBe('That password does not open this link. If you are sure of it, the link may have been cut short when it was copied: ask for it again, or for a short link.');
   expect(notOpened()).not.toMatch(/^Wrong password/);
 });

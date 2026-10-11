@@ -151,7 +151,6 @@ export default {
 
   // ---- privacy (kit/privacy.ts, kit/privacy-dialog.ts): the password, what the device holds ----
   // The Share dialog's head line: "Created 9 Oct 2026, 14:03 · by Paul".
-  'Again': '再输一次',
   'Anyone with the link will need the password to open it. Nobody can reset it: lose it and the document is gone.': '任何拿到链接的人都需要密码才能打开。没人能重置密码：丢了，文档就找不回来了。',
   'Change password': '更改密码',
   'Created {date}': '创建于 {date}',
@@ -182,7 +181,6 @@ export default {
   'Short links': '短链接',
   'Set a password, in Share': '设置密码，请在“分享”中操作',
   'The short links made here, until they expire.': '在这里生成的短链接，保留到过期为止。',
-  'The two passwords differ': '两次输入的密码不一致',
   'Their names and links, for the home page.': '它们的名称和链接，用于主页。',
   'Theme, the lifetime of short links.': '主题、短链接的有效期。',
   'This document has a password. The link, and any short link made from it, holds only ciphertext.': '此文档设有密码。链接以及由它生成的任何短链接里都只有密文。',
@@ -199,9 +197,8 @@ export default {
   '{n|# document|# documents}': '{n|# 份文档}',
   '{n|# link|# links}': '{n|# 个链接}',
   '{n} set': '已设置 {n} 项',
-  'Someone with the link can guess this offline. Use Generate, or four or more random words.': '拿到链接的人可以离线猜出它。请用“生成”，或用四个以上随机单词。',
-  'This password can be guessed by anyone with the link. Set it anyway?': '任何拿到链接的人都能猜出这个密码。仍然设置吗？',
-  'Send the password another way than the link.': '请用链接以外的途径发送密码。',
+  'Copy this and send it another way than the link. It cannot be shown again.': '复制它，并用链接以外的途径发送。它无法再次显示。',
+  'Make another': '再生成一个',
 
   // ---- a document locked with a password, placed inside another (kit/locked.ts, kit/locked-doc.ts) ----
   // The card drawn where it sits; {app} is the app's name: "A Spreadsheet document, locked with a password".
@@ -1560,9 +1557,7 @@ export default {
   '{n|One document found|# documents found}': '{n|找到 # 份文档}',
   '{n} of {count}': '{n} / {count}',
   '{n} over': '超出 {n}',
-  'Generate a strong password': '生成强密码',
   'Password copied': '密码已复制',
-  'Twenty characters, made on this device and never sent anywhere. Copy it somewhere safe before you set it: there is no way to get it back.': '二十个字符，在此设备上生成，不会发送到任何地方。设置前请先复制到安全的地方：没有办法找回。',
   'For you when presenting, never on the slide': '放映时给你看的，不会出现在幻灯片上',
   'Guest': '宾客',
   'Name the line': '给这条线命名',

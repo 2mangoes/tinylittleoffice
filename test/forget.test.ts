@@ -2,7 +2,7 @@
 // opens its document without being typed again, and a locked document's opened text is gone (Paul, 2026-10-12:
 // "Are we sure when I turn stuff off no cookies or local storage or in memory remains").
 import { beforeEach, expect, test } from 'vitest';
-import { lockCost, lockWith, pack, remember, reopen, setPrivate } from '../src/kit/privacy.ts';
+import { lockWith, pack, remember, reopen, setPrivate } from '../src/kit/privacy.ts';
 import { openedText, setOpened } from '../src/kit/locked.ts';
 
 /** localStorage, in memory, for node. */
@@ -20,7 +20,6 @@ class Mem {
 
 beforeEach(() => {
   (globalThis as Record<string, unknown>).localStorage = new Mem();
-  lockCost.iterations = 1000;
 });
 
 test('Private forgets the passwords the visit was given and the texts they opened', async () => {

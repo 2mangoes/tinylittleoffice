@@ -75,3 +75,25 @@ test('text(link): the document as what it says, in Markdown, its title first; ma
   expect(await text(link('todo', '- [x] Milk\n- [ ] Eggs\n', { title: 'Shop' }))).toBe('# Shop\n\n- [x] Milk\n- [ ] Eggs\n');
   expect(await markdown('calc', 'a = 2\na * 3\n')).toBe('a = 2\na * 3\n');
 });
+
+test('seal: the app makes the password (Paul, 2026-10-11); the link holds ciphertext and the password it returns opens it', async () => {
+  const { unseal } = await import('../src/kit/crypt.ts');
+  const { unpackDoc } = await import('../src/kit/codec.ts');
+  const { parseHash } = await import('../src/kit/route.ts');
+  const sealed = await link('write', 'Salaries are up.\n', { title: 'Pay', seal: true });
+  expect(sealed.password).toMatch(/^[^-]{5}-[^-]{5}-[^-]{5}-[^-]{5}$/);
+  expect(sealed.url).toMatch(/^https:\/\/tinylittleoffice\.com\/write\/#\/v1\/write\/E[A-Za-z0-9_~]+$/);
+  expect(sealed.url).not.toContain('Salaries');
+  const payload = parseHash(new URL(sealed.url).hash).payload;
+  const opened = await unseal(sealed.password, payload);
+  expect(unpackDoc(opened!.flag, opened!.bytes)).toBe('---\ntitle: Pay\n---\nSalaries are up.\n');
+  expect(await unseal('Hq7wN-3mXkd-RtP9z-aVb4s', payload)).toBeNull();
+  // Two seals, two passwords.
+  expect((await link('write', 'x', { seal: true })).password).not.toBe(sealed.password);
+});
+
+test('a password supplied from outside is refused, with or without seal', async () => {
+  const refused = 'The app makes the password; ask for one with seal.';
+  expect(() => link('write', 'x', { password: 'tulip' } as never)).toThrow(refused);
+  expect(() => link('write', 'x', { seal: true, password: 'tulip' } as never)).toThrow(refused);
+});

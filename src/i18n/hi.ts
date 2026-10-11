@@ -151,7 +151,6 @@ export default {
 
   // ---- privacy (kit/privacy.ts, kit/privacy-dialog.ts): the password, what the device holds ----
   // The Share dialog's head line: "Created 9 Oct 2026, 14:03 · by Paul".
-  'Again': 'दोबारा',
   'Anyone with the link will need the password to open it. Nobody can reset it: lose it and the document is gone.': 'लिंक वाले हर व्यक्ति को इसे खोलने के लिए पासवर्ड चाहिए होगा। इसे कोई रीसेट नहीं कर सकता: खो गया तो दस्तावेज़ भी गया।',
   'Change password': 'पासवर्ड बदलें',
   'Created {date}': 'बनाया: {date}',
@@ -182,7 +181,6 @@ export default {
   'Short links': 'शॉर्ट लिंक',
   'Set a password, in Share': 'पासवर्ड लगाने के लिए शेयर में जाएँ',
   'The short links made here, until they expire.': 'यहाँ बने शॉर्ट लिंक, उनकी मियाद ख़त्म होने तक।',
-  'The two passwords differ': 'दोनों पासवर्ड अलग हैं',
   'Their names and links, for the home page.': 'उनके नाम और लिंक, होम पेज के लिए।',
   'Theme, the lifetime of short links.': 'थीम, शॉर्ट लिंक की उम्र।',
   'This document has a password. The link, and any short link made from it, holds only ciphertext.': 'इस दस्तावेज़ पर पासवर्ड है। इसका लिंक, और इससे बना कोई भी शॉर्ट लिंक, सिर्फ़ एन्क्रिप्टेड रूप रखता है।',
@@ -199,9 +197,8 @@ export default {
   '{n|# document|# documents}': '{n|# दस्तावेज़|# दस्तावेज़}',
   '{n|# link|# links}': '{n|# लिंक|# लिंक}',
   '{n} set': '{n} सेट',
-  'Someone with the link can guess this offline. Use Generate, or four or more random words.': 'जिसके पास लिंक है, वह इसे ऑफ़लाइन अंदाज़ा लगाकर खोल सकता है। बनाएँ इस्तेमाल करें, या चार या उससे ज़्यादा बेतरतीब शब्द।',
-  'This password can be guessed by anyone with the link. Set it anyway?': 'लिंक वाला कोई भी इस पासवर्ड का अंदाज़ा लगा सकता है। फिर भी सेट करें?',
-  'Send the password another way than the link.': 'पासवर्ड लिंक से अलग किसी और तरीके से भेजें।',
+  'Copy this and send it another way than the link. It cannot be shown again.': 'इसे कॉपी करें और लिंक से अलग किसी और तरीके से भेजें। इसे दोबारा नहीं दिखाया जा सकता।',
+  'Make another': 'दूसरा बनाएँ',
 
   // ---- a document locked with a password, placed inside another (kit/locked.ts, kit/locked-doc.ts) ----
   // The card drawn where it sits; {app} is the app's name: "A Spreadsheet document, locked with a password".
@@ -1560,9 +1557,7 @@ export default {
   '{n|One document found|# documents found}': '{n|एक दस्तावेज़ मिला|# दस्तावेज़ मिले}',
   '{n} of {count}': '{count} में से {n}',
   '{n} over': '{n} ज़्यादा',
-  'Generate a strong password': 'मज़बूत पासवर्ड बनाएँ',
   'Password copied': 'पासवर्ड कॉपी हो गया',
-  'Twenty characters, made on this device and never sent anywhere. Copy it somewhere safe before you set it: there is no way to get it back.': 'बीस अक्षर, इसी डिवाइस पर बना और कहीं भेजा नहीं गया। लगाने से पहले इसे कहीं सुरक्षित कॉपी कर लें: इसे वापस पाने का कोई तरीका नहीं है।',
   'For you when presenting, never on the slide': 'प्रेज़ेंट करते समय आपके लिए, स्लाइड पर कभी नहीं',
   'Guest': 'मेहमान',
   'Name the line': 'लाइन को नाम दें',

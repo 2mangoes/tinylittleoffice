@@ -75,3 +75,38 @@ test('a locked document placed in a text on a phone: the locked card, a tap asks
   await expect(card.locator('.to-locked-open')).toHaveCount(0);
   expect(errors).toEqual([]);
 });
+
+test('the password the app made, on a phone: all of it in view inside 390px, Copy and Make another a finger big', async ({ page }, info) => {
+  test.skip(info.project.name !== 'phone', 'phone only');
+  const errors: string[] = [];
+  page.on('pageerror', (e) => errors.push(String(e)));
+  await page.goto('/#/v1/write');
+  await expect(page.locator('to-write-editor to-text .tx')).toBeVisible();
+  await page.locator('.to-burger').tap();
+  await page.locator('.to-drawer-share').tap();
+  await page.locator('.to-password-open').tap();
+  const dialog = page.locator('to-dialog.to-password-dialog dialog[open]');
+  await expect(dialog).toBeVisible();
+  const made = dialog.locator('.to-password-made');
+  await expect(made).toHaveValue(/^[^-]{5}-[^-]{5}-[^-]{5}-[^-]{5}$/);
+  // The whole password shown, nothing scrolled out of the box, and the box inside the screen.
+  const fit = await made.evaluate((el: HTMLInputElement) => ({ over: el.scrollWidth - el.clientWidth, size: parseFloat(getComputedStyle(el).fontSize), readOnly: el.readOnly }));
+  expect(fit.over).toBeLessThanOrEqual(0);
+  expect(fit.size).toBeGreaterThanOrEqual(16);
+  expect(fit.readOnly).toBe(true);
+  for (const b of [made, dialog.locator('.to-password-copy'), dialog.locator('.to-password-another'), dialog.locator('.to-password-set')]) {
+    const r = (await b.boundingBox())!;
+    expect(r.x).toBeGreaterThanOrEqual(0);
+    expect(r.x + r.width).toBeLessThanOrEqual(390.5);
+    expect(r.height).toBeGreaterThanOrEqual(44);
+  }
+  // A tap on the box zooms nothing: there is nothing to type.
+  await made.tap();
+  expect(await page.evaluate(() => window.visualViewport?.scale ?? 1)).toBe(1);
+  const first = await made.inputValue();
+  await dialog.locator('.to-password-another').tap();
+  await expect(made).not.toHaveValue(first);
+  if (process.env.SHOT) await page.screenshot({ path: `${process.env.SHOT}/password-phone.png` });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)).toBeLessThanOrEqual(0);
+  expect(errors).toEqual([]);
+});

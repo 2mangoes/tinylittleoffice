@@ -42,8 +42,8 @@ in one file.
 ## Privacy and security
 
 A link reveals its document to whoever holds it, and to everything it passes through: a chat service, an email
-provider, the browser's own history. A password encrypts the document in your browser (AES-256-GCM, under a key
-derived from the password), so the link holds only ciphertext, and nobody without the password sees anything of
+provider, the browser's own history. A password, which the app makes (nobody chooses a weak one), encrypts the
+document in your browser (AES-256-GCM, under a key derived from the password), so the link holds only ciphertext, and nobody without the password sees anything of
 it, not even its title. The short-link service holds a document encrypted under a key that travels only in the
 short link itself, which the service never receives, and forgets it when it expires. A document asks the web for
 nothing: it holds no pictures or frames from other sites, and the one thing that reaches another site by itself

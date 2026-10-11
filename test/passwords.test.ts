@@ -1,11 +1,12 @@
 import { expect, test } from 'vitest';
-import { generatePassword, guessable, PASSWORD_ALPHABET, strength } from '../src/kit/passwords.ts';
+import * as passwords from '../src/kit/passwords.ts';
+import { generatePassword, PASSWORD_ALPHABET } from '../src/kit/passwords.ts';
 
 test('a generated password is four groups of five from the alphabet, and never the same twice', () => {
   const p = generatePassword();
   expect(p).toMatch(/^[^-]{5}-[^-]{5}-[^-]{5}-[^-]{5}$/);
   for (const c of p.replace(/-/g, '')) expect(PASSWORD_ALPHABET.includes(c)).toBe(true);
-  expect(PASSWORD_ALPHABET).not.toMatch(/[lIO01]/);
+  expect(PASSWORD_ALPHABET).not.toMatch(/[lIoO01]/);
   const seen = new Set(Array.from({ length: 50 }, () => generatePassword()));
   expect(seen.size).toBe(50);
   expect(generatePassword(2, 8)).toMatch(/^[^-]{8}-[^-]{8}$/);
@@ -17,17 +18,12 @@ test('every character of the alphabet comes up over many draws (no character is 
   expect(counts.size).toBe(PASSWORD_ALPHABET.length);
 });
 
-test('the estimate: length × the character sets used, the commonest passwords next to nothing; under 50 bits is guessable offline', () => {
-  for (const p of ['1', 'password', 'abcdef', 'Password1', 'qwerty123', 'tulip', 'letmein!', '']) expect(guessable(p), p).toBe(true);
-  for (let i = 0; i < 20; i++) expect(guessable(generatePassword())).toBe(false);
-  expect(strength(generatePassword())).toBeGreaterThan(100);
-  // Four random words, as the warning says.
-  expect(guessable('maple orbit sugar lantern')).toBe(false);
-  // A common password dressed up is still common: case and a trailing digit or two do not hide it.
-  expect(strength('PASSWORD')).toBeLessThan(20);
-  expect(strength('password12')).toBeLessThan(20);
-  // Lower case alone: 26 letters, about 4.7 bits each.
-  expect(strength('kxzqwvjmtr')).toBeCloseTo(10 * Math.log2(26), 5);
-  // One character over and over is one guess per length.
-  expect(guessable('aaaaaaaaaaaaaaaaaaaa')).toBe(true);
+test('a generated password holds at least 100 bits: twenty characters from 56, about 116', () => {
+  expect(PASSWORD_ALPHABET.length).toBe(56);
+  expect(new Set(PASSWORD_ALPHABET).size).toBe(56);
+  expect(generatePassword().replace(/-/g, '').length * Math.log2(PASSWORD_ALPHABET.length)).toBeGreaterThan(100);
+});
+
+test('the app makes every password (Paul, 2026-10-11), so the module makes them and nothing else: no strength estimate', () => {
+  expect(Object.keys(passwords).sort()).toEqual(['PASSWORD_ALPHABET', 'generatePassword']);
 });

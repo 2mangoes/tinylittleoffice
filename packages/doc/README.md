@@ -12,6 +12,7 @@ echo "- [ ] Sweep" | tinyoffice link write --title Chores --by chores-agent
 tinyoffice link plan.tlo                         # a .tlo file names its app in its head
 tinyoffice link deck talk.md --view show         # a deck that opens presenting
 tinyoffice link sheet budget.md --plain          # the readable form: /sheet/#title=…&doc=…
+tinyoffice link write pay.md --seal              # under a password the app makes: the link, then the password
 tinyoffice read <link>                           # the document's TLO text (--json for app, title, by)
 tinyoffice read --text <link>                    # what it says, as Markdown: what a screen reader reads on its Display Link
 tinyoffice file <link>                           # <title>.tlo; --as md|csv|ics|docx|… for the app's own formats
@@ -37,6 +38,7 @@ import { link, plain, read, text, compare, encode, decode, parse, write, apps, t
 const url = link('sheet', 'Item | Cost:money\n--- | ---\nRent | 1200\n', { title: 'Budget', by: 'planner-agent' });
 read(url);               // { app: 'sheet', view: '', text: '---\ntitle: Budget\nby: planner-agent\n---\n…', title, by, display }
 compare(url, revised);   // { same, removed, added, changes: [{ kind: ' ' | '-' | '+', line }…] }
+await link('write', 'Salaries…\n', { seal: true });  // { url, password }: the app makes the password; one given is refused
 parse(read(url).text);   // the kernel's document: { head, blocks }; write() gives the text back
 await text(url);         // '# Budget\n\nItem | Cost\n--- | ---\nRent | $1,200.00\n': what it says, as Markdown
 await templates('deck'); // [{ id, name, blurb, text }…]

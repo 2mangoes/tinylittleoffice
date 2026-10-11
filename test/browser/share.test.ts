@@ -8,7 +8,7 @@ import { encodeDoc } from '../../src/kit/codec.ts';
 import { SHORT_LINK_MAX } from '../../src/kit/short.ts';
 import { decodeDoc } from '../../src/kit/codec.ts';
 import { keepLink, keptLinks, dropKept } from '../../src/kit/links.ts';
-import { lockCost, lockWith, pack } from '../../src/kit/privacy.ts';
+import { lockWith, pack } from '../../src/kit/privacy.ts';
 import { setKeeping, store } from '../../src/kit/store.ts';
 import type { ToShell } from '../../src/kit/shell.ts';
 import type { ToShare } from '../../src/kit/share-dialog.ts';
@@ -223,7 +223,6 @@ test('the QR code: drawn inline when the link fits, with PNG and SVG; else one s
 
 /** A sheet sealed with a password, opened with it: the shell's own document, its link ciphertext. */
 async function sealedSheet(title: string) {
-  lockCost.iterations = 1000;
   const text = `---\ntitle: ${title}\n---\nName | Phone\n--- | ---\nAda | 555 0101\n`;
   const shell = await mount(`#/v1/sheet/${await pack(text, await lockWith('pw'))}`);
   await until(() => !!shell.querySelector('to-dialog.to-unlock-dialog dialog[open] .to-unlock-field'));

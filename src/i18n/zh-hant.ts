@@ -153,7 +153,6 @@ export default {
 
   // ---- privacy (kit/privacy.ts, kit/privacy-dialog.ts): the password, what the device holds ----
   // The Share dialog's head line: "Created 9 Oct 2026, 14:03 · by Paul".
-  'Again': '再輸入一次',
   'Anyone with the link will need the password to open it. Nobody can reset it: lose it and the document is gone.': '任何拿到連結的人都需要密碼才能開啟。沒有人能重設密碼：忘記密碼，文件就打不開了。',
   'Change password': '更改密碼',
   'Created {date}': '建立於 {date}',
@@ -184,7 +183,6 @@ export default {
   'Short links': '短連結',
   'Set a password, in Share': '在「分享」裡設定密碼',
   'The short links made here, until they expire.': '在這裡建立的短連結，保留到過期為止。',
-  'The two passwords differ': '兩次輸入的密碼不一樣',
   'Their names and links, for the home page.': '它們的名稱和連結，供首頁使用。',
   'Theme, the lifetime of short links.': '主題、短連結的有效期限。',
   'This document has a password. The link, and any short link made from it, holds only ciphertext.': '這份文件設有密碼。連結和由它產生的任何短連結裡都只有密文。',
@@ -201,9 +199,8 @@ export default {
   '{n|# document|# documents}': '{n|# 份文件}',
   '{n|# link|# links}': '{n|# 個連結}',
   '{n} set': '已設定 {n} 個',
-  'Someone with the link can guess this offline. Use Generate, or four or more random words.': '拿到連結的人可以離線猜出它。請用「產生」，或用四個以上的隨機單字。',
-  'This password can be guessed by anyone with the link. Set it anyway?': '任何拿到連結的人都能猜出這個密碼。仍要設定嗎？',
-  'Send the password another way than the link.': '請用連結以外的途徑傳送密碼。',
+  'Copy this and send it another way than the link. It cannot be shown again.': '複製它，並用連結以外的途徑傳送。它無法再次顯示。',
+  'Make another': '再產生一個',
 
   // ---- a document locked with a password, placed inside another (kit/locked.ts, kit/locked-doc.ts) ----
   // The card drawn where it sits; {app} is the app's name: "A Spreadsheet document, locked with a password".
@@ -1562,9 +1559,7 @@ export default {
   '{n|One document found|# documents found}': '{n|找到 # 份文件}',
   '{n} of {count}': '{n}／{count}',
   '{n} over': '超出 {n}',
-  'Generate a strong password': '產生高強度密碼',
   'Password copied': '已複製密碼',
-  'Twenty characters, made on this device and never sent anywhere. Copy it somewhere safe before you set it: there is no way to get it back.': '二十個字元，在此裝置上產生，絕不會傳送到任何地方。設定之前請先複製到安全的地方：之後無法再取回。',
   'For you when presenting, never on the slide': '只給你在播放時看，不會出現在投影片上',
   'Guest': '賓客',
   'Name the line': '為這條線命名',

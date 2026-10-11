@@ -153,7 +153,6 @@ export default {
 
   // ---- privacy (kit/privacy.ts, kit/privacy-dialog.ts): the password, what the device holds ----
   // The Share dialog's head line: "Created 9 Oct 2026, 14:03 · by Paul".
-  'Again': 'Ще раз',
   'Anyone with the link will need the password to open it. Nobody can reset it: lose it and the document is gone.': 'Усім, хто має посилання, знадобиться пароль, щоб його відкрити. Скинути пароль ніхто не може: загубите його — документ пропав.',
   'Change password': 'Змінити пароль',
   'Created {date}': 'Створено {date}',
@@ -184,7 +183,6 @@ export default {
   'Short links': 'Короткі посилання',
   'Set a password, in Share': 'Пароль — у «Поділитися»',
   'The short links made here, until they expire.': 'Короткі посилання, створені тут, доки не спливе їхній термін.',
-  'The two passwords differ': 'Паролі не збігаються',
   'Their names and links, for the home page.': 'Їхні назви та посилання — для головної сторінки.',
   'Theme, the lifetime of short links.': 'Тема, термін дії коротких посилань.',
   'This document has a password. The link, and any short link made from it, holds only ciphertext.': 'У цього документа є пароль. У посиланні на нього, і в будь-якому коротшому посиланні, лише шифротекст.',
@@ -201,9 +199,8 @@ export default {
   '{n|# document|# documents}': '{n|# документ|# документи|# документів|# документа}',
   '{n|# link|# links}': '{n|# посилання|# посилання|# посилань|# посилання}',
   '{n} set': 'Задано: {n}',
-  'Someone with the link can guess this offline. Use Generate, or four or more random words.': 'Хто має посилання, може підібрати його офлайн. Натисніть «Створити» або візьміть чотири й більше випадкових слів.',
-  'This password can be guessed by anyone with the link. Set it anyway?': 'Цей пароль може підібрати будь-хто з посиланням. Однаково встановити?',
-  'Send the password another way than the link.': 'Передайте пароль інакше, ніж посилання.',
+  'Copy this and send it another way than the link. It cannot be shown again.': 'Скопіюйте його й передайте інакше, ніж посилання. Показати його знову не можна.',
+  'Make another': 'Створити інший',
 
   // ---- a document locked with a password, placed inside another (kit/locked.ts, kit/locked-doc.ts) ----
   // The card drawn where it sits; {app} is the app's name: "A Spreadsheet document, locked with a password".
@@ -1562,9 +1559,7 @@ export default {
   '{n|One document found|# documents found}': '{n|Знайдено # документ|Знайдено # документи|Знайдено # документів|Знайдено # документа}',
   '{n} of {count}': '{n} з {count}',
   '{n} over': 'Понад: {n}',
-  'Generate a strong password': 'Створити надійний пароль',
   'Password copied': 'Пароль скопійовано',
-  'Twenty characters, made on this device and never sent anywhere. Copy it somewhere safe before you set it: there is no way to get it back.': 'Двадцять символів, створених на цьому пристрої й нікуди не надісланих. Скопіюйте їх у безпечне місце, перш ніж задавати: повернути їх неможливо.',
   'For you when presenting, never on the slide': 'Для вас під час показу, ніколи на слайді',
   'Guest': 'Гість',
   'Name the line': 'Назвіть лінію',
