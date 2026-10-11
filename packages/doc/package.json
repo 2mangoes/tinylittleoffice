@@ -1,0 +1,23 @@
+{
+  "name": "@tinylittleoffice/doc",
+  "private": true,
+  "version": "1.0.0-next",
+  "description": "Tiny Little Office from the command line: links from files, files from links.",
+  "homepage": "https://tinylittleoffice.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aboard-io/tinylittleoffice",
+    "directory": "packages/doc"
+  },
+  "bugs": {
+    "url": "https://github.com/aboard-io/tinylittleoffice/issues"
+  },
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "tinyoffice": "tinyoffice.ts"
+  },
+  "engines": {
+    "node": ">=24"
+  }
+}

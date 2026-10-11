@@ -1,0 +1,78 @@
+// What a deploy checks of a build (scripts/check-build.ts): the policy's script hashes and version.json, on a
+// small build made here.
+import { test, expect, beforeEach, afterEach } from 'vitest';
+import { createHash } from 'node:crypto';
+import { mkdtempSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { checkBuild } from '../scripts/check-build.ts';
+
+const SCRIPT = 'document.title="cart"';
+const hash = (code: string) => `'sha256-${createHash('sha256').update(code).digest('base64')}'`;
+let dist = '';
+
+/** A build as vite.config.ts leaves it: pages, a chunk, the headers with the hashes, version.json. */
+function build(opts: { inline?: string } = {}) {
+  const put = (p: string, s: string) => (mkdirSync(join(dist, p, '..'), { recursive: true }), writeFileSync(join(dist, p), s));
+  put('index.html', `<!doctype html><script src="./theme.js"></script>${opts.inline ? `<script>${opts.inline}</script>` : ''}<script type="application/ld+json">{"a":1}</script>`);
+  put('write/index.html', '<!doctype html><title>Word Processor</title>');
+  put('assets/main-abc.js', 'export {}');
+  put('theme.js', '//');
+  put('version.json', JSON.stringify({ commit: 'a'.repeat(40), tag: '', built: '2026-10-10T00:00:00Z', csp: { scripts: [hash(SCRIPT).slice(1, -1)] } }));
+  put(
+    '_headers',
+    `/*\n  Content-Security-Policy: default-src 'self'; script-src 'self' ${hash(SCRIPT)}; object-src 'none'\n/embed/\n  Content-Security-Policy: script-src 'self' ${hash(SCRIPT)}; frame-ancestors *\n`,
+  );
+}
+
+beforeEach(() => {
+  dist = mkdtempSync(join(tmpdir(), 'tlo-dist-'));
+});
+afterEach(() => rmSync(dist, { recursive: true, force: true }));
+
+test('a build as the build writes it may ship', () => {
+  build();
+  expect(checkBuild(dist, [SCRIPT])).toEqual([]);
+});
+
+test('no build at all is said so', () => {
+  expect(checkBuild(join(dist, 'nothing'))).toEqual([`No build in ${join(dist, 'nothing')}: run npm run build`]);
+});
+
+test('the policy: the placeholder left, a page script or an inline script without its hash', () => {
+  build();
+  writeFileSync(join(dist, '_headers'), "/*\n  Content-Security-Policy: script-src 'self' {{scripts}};\n");
+  const problems = checkBuild(dist, [SCRIPT]);
+  expect(problems[0]).toBe('_headers still has {{scripts}}: the hashes were not written');
+  expect(problems[1]).toMatch(/^a page script is not in the policy: document\.title="cart"/);
+  build({ inline: 'alert(1)' });
+  expect(checkBuild(dist, [SCRIPT])).toEqual(['index.html has an inline script the policy does not allow']);
+  build({ inline: SCRIPT });
+  expect(checkBuild(dist, [SCRIPT])).toEqual([]);
+});
+
+test('version.json: missing, the wrong shape, or hashes that are not the policy’s', () => {
+  build();
+  writeFileSync(join(dist, 'version.json'), JSON.stringify({ commit: 'a', tag: '', built: '', csp: { scripts: ['sha256-other'] } }));
+  expect(checkBuild(dist, [SCRIPT])).toContain('version.json’s script hashes are not the policy’s');
+  writeFileSync(join(dist, 'version.json'), JSON.stringify({ commit: 'a' }));
+  expect(checkBuild(dist, [SCRIPT])).toContain('version.json is not { commit, tag, built, csp: { scripts } }');
+  rmSync(join(dist, 'version.json'));
+  expect(checkBuild(dist, [SCRIPT])).toContain('version.json is missing or not JSON');
+});
+
+test('the type: a font a stylesheet names or a page preloads is in the build, its licence beside it', () => {
+  build();
+  const put = (p: string, s: string) => (mkdirSync(join(dist, p, '..'), { recursive: true }), writeFileSync(join(dist, p), s));
+  put('assets/main-abc.css', "@font-face{font-family:'IBM Plex Sans';src:url(../fonts/IBMPlexSans-Regular.woff2) format('woff2')}@font-face{src:url('/fonts/IBMPlexMono-Regular.woff2')}");
+  put('write/index.html', '<!doctype html><link rel="preload" href="../fonts/IBMPlexSans-Regular.woff2" as="font" type="font/woff2" crossorigin />');
+  expect(checkBuild(dist, [SCRIPT])).toEqual([
+    'fonts/IBMPlexMono-Regular.woff2 is named by the build but is not in it',
+    'fonts/IBMPlexSans-Regular.woff2 is named by the build but is not in it',
+    'fonts/LICENSE.txt is missing: the fonts’ licence goes with them',
+  ]);
+  put('fonts/IBMPlexSans-Regular.woff2', 'wOF2');
+  put('fonts/IBMPlexMono-Regular.woff2', 'wOF2');
+  put('fonts/LICENSE.txt', 'SIL Open Font License');
+  expect(checkBuild(dist, [SCRIPT])).toEqual([]);
+});

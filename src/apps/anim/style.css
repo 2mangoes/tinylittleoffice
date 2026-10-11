@@ -1,0 +1,249 @@
+/* Motion: the stage, what the selected shape can be given, and the time under them. */
+@layer apps {
+  to-anim-editor {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    /* Its width, for the stage's frame (cqw). */
+    container-type: inline-size;
+  }
+  /* One line, always there, so the stage never jumps. */
+  .anim-hint {
+    margin: 0;
+    padding: 0.25rem 0 0.5rem;
+    min-height: 1.6em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  /* The stage's frame is the height the stage has when it fits, whatever the zoom: a zoomed stage scrolls inside it,
+     two fingers keep their point of it under them (kit/pinch.ts), and nothing under it moves. */
+  .anim-wrap {
+    padding: 0.75rem;
+    height: calc(max(10rem, min((100cqw - 1.5rem) * 5 / 8, var(--to-col-h) - 12.75rem)) + 1.5rem);
+    overflow: auto;
+    background: var(--to-surface-2);
+    border-radius: var(--to-radius);
+  }
+  svg.anim-stage {
+    display: block;
+    width: 100%;
+    max-height: calc(var(--to-col-h) - 12.75rem);
+    /* As wide as that height allows in the stage's shape, centred in the window's width. */
+    max-width: max(16rem, (var(--to-col-h) - 12.75rem) * 8 / 5);
+    min-height: 10rem;
+    height: auto;
+    aspect-ratio: 8 / 5;
+    margin: 0 auto;
+    background: var(--to-surface);
+    border: 1px solid var(--to-border);
+    border-radius: var(--to-radius);
+    /* A finger on the empty stage scrolls its frame and two zoom it (kit/pinch.ts); on a shape, a corner or the handle,
+       or while a drag is on, the stage keeps it. */
+    touch-action: pan-x pan-y;
+    user-select: none;
+    -webkit-user-select: none;
+    overflow: hidden;
+  }
+  svg.anim-stage.held,
+  .anim-stage .hit,
+  .anim-stage .hit .corner,
+  .anim-stage .hit .handle {
+    touch-action: none;
+  }
+  svg.anim-stage:focus-visible {
+    outline: 0.125rem solid var(--to-accent);
+    outline-offset: 0.125rem;
+  }
+  svg.anim-stage text {
+    font-family: var(--to-font);
+    pointer-events: none;
+  }
+  .anim-stage .hit > rect {
+    fill: transparent;
+    stroke: transparent;
+    cursor: move;
+  }
+  .anim-stage .hit.sel > rect {
+    stroke: var(--to-accent);
+    stroke-width: 1.5;
+    stroke-dasharray: 4 3;
+    vector-effect: non-scaling-stroke;
+  }
+  /* A pen shape's corners, draggable at the moment chosen, and the size handle; each reaches a finger's 44px (the transparent circle). */
+  .anim-stage .hit .corner,
+  .anim-stage .hit .handle {
+    pointer-events: all;
+    cursor: move;
+  }
+  .anim-stage .hit .handle {
+    cursor: nwse-resize;
+  }
+  .anim-stage .hit .reach {
+    fill: transparent;
+    stroke: none;
+  }
+  .anim-stage .hit .corner .dot,
+  .anim-stage .hit .handle rect {
+    fill: var(--to-surface);
+    stroke: var(--to-accent);
+    stroke-width: 2;
+    stroke-dasharray: none;
+    vector-effect: non-scaling-stroke;
+  }
+  /* Pixel art is the Drawing Tool's own: Draw mode here draws shapes (the menu stays where a background tile can be taken off). */
+  .anim-draw:not([data-tile]) .draw-mode {
+    display: none;
+  }
+
+  .anim-props {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(6.875em, 1fr));
+    gap: 0.375em 0.875em;
+    padding: 0.625em 0 0;
+  }
+  .anim-slider {
+    display: grid;
+    gap: 0.125em;
+    font-size: calc(0.85 * var(--to-scale));
+    color: var(--to-ink-2);
+  }
+  .anim-slider b {
+    font-weight: 400;
+    color: var(--to-ink);
+    font-variant-numeric: tabular-nums;
+  }
+  .anim-slider input,
+  .anim-scrub input {
+    accent-color: var(--to-accent);
+    width: 100%;
+    min-height: 2.4em;
+    margin: 0;
+  }
+
+  .anim-time {
+    display: grid;
+    gap: 0.5em;
+    margin-top: 0.625em;
+    padding: 0.5em 0 0.25em;
+    border-top: 1px solid var(--to-border);
+  }
+  .anim-transport {
+    display: flex;
+    align-items: center;
+    gap: 0.75em;
+  }
+  .anim-modes {
+    display: inline-flex;
+    gap: 0.25em;
+  }
+  .anim-clock {
+    margin-left: auto;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  /* The length (frames and its seconds), the speed and the repeat: one row that wraps on a phone. */
+  .anim-length {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.375em 0.75em;
+  }
+  .anim-field {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375em;
+    font-size: calc(0.85 * var(--to-scale));
+    color: var(--to-ink-2);
+  }
+  .anim-field input {
+    width: 4.5em;
+    min-height: 2.25em;
+    padding: 0.25em 0.5em;
+    /* 16px, so a phone does not zoom on it. */
+    font: var(--to-scale) var(--to-font);
+    font-variant-numeric: tabular-nums;
+    color: var(--to-ink);
+    background: var(--to-input-bg);
+    border: 1px solid var(--to-input-border);
+    border-radius: var(--to-radius-sm);
+  }
+  .anim-secs {
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .anim-scrub {
+    position: relative;
+    padding-bottom: 0.875em;
+  }
+  .anim-keys {
+    position: absolute;
+    left: 0.5em;
+    right: 0.5em;
+    bottom: 0;
+    height: 0.875em;
+  }
+  .anim-keys .key {
+    position: absolute;
+    top: 0;
+    width: 0.875em;
+    height: 0.875em;
+    margin-left: -0.4375em;
+    padding: 0;
+    border: 0.125em solid var(--to-accent);
+    border-radius: 50%;
+    background: var(--to-surface);
+    cursor: pointer;
+  }
+  .anim-keys .key.on {
+    background: var(--to-accent);
+  }
+  .anim-keys .key::before {
+    content: '';
+    position: absolute;
+    inset: -0.25em;
+  }
+  @media (pointer: coarse) {
+    /* A key dot is drawn 14px and reached at 44. */
+    .anim-keys .key::before {
+      inset: -0.9375em;
+    }
+    .anim-thumbs button,
+    .anim-field input {
+      min-height: 3.3em;
+    }
+  }
+  .anim-thumbs {
+    display: flex;
+    gap: 0.25em;
+    overflow-x: auto;
+    padding: 0.125em;
+    scroll-snap-type: x proximity;
+  }
+  .anim-thumbs button,
+  .anim-modes button {
+    touch-action: manipulation;
+  }
+  .anim-thumbs button {
+    flex: 1 0 4.8em;
+    max-width: 8.4em;
+    scroll-snap-align: start;
+    padding: 0;
+    border: 1px solid var(--to-border);
+    border-radius: 0.3em;
+    background: var(--to-surface);
+    cursor: pointer;
+    overflow: hidden;
+    aspect-ratio: 8 / 5;
+  }
+  .anim-thumbs button.on {
+    border-color: var(--to-accent);
+    box-shadow: 0 0 0 1px var(--to-accent);
+  }
+  .anim-thumbs svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+}

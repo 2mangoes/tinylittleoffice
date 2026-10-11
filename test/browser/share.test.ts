@@ -1,0 +1,386 @@
+// The Share dialog, section by section, and the banner a short link's visitor arrives under (Paul, 2026-10-09:
+// "The short link function modal needs to be redesigned … point out how many days are left before they expire.
+// Make this big and colorful at the top. Give people a copy button to copy into a new document.")
+import { test, expect, afterEach, onTestFinished, vi } from 'vitest';
+import { page } from 'vitest/browser';
+import { mount, tick, until, openShare, said } from './helpers.ts';
+import { encodeDoc } from '../../src/kit/codec.ts';
+import { SHORT_LINK_MAX } from '../../src/kit/short.ts';
+import { decodeDoc } from '../../src/kit/codec.ts';
+import { keepLink, keptLinks, dropKept } from '../../src/kit/links.ts';
+import { lockCost, lockWith, pack } from '../../src/kit/privacy.ts';
+import { setKeeping, store } from '../../src/kit/store.ts';
+import type { ToShell } from '../../src/kit/shell.ts';
+import type { ToShare } from '../../src/kit/share-dialog.ts';
+import type { ToDialog } from '../../src/kit/dialog.ts';
+
+const DAY = 86_400_000;
+afterEach(() => {
+  vi.restoreAllMocks();
+  vi.unstubAllGlobals();
+  vi.useRealTimers();
+  setKeeping(false);
+  store.remove('tinyoffice.shortTtl');
+  store.remove('tinyoffice.links');
+  history.replaceState(null, '', location.pathname);
+});
+
+const dialogOf = (shell: HTMLElement) => shell.querySelector<ToDialog>('to-dialog.to-share-dialog')!;
+async function open(shell: ToShell) {
+  await openShare(shell);
+  await until(() => dialogOf(shell).dialog.open && !!dialogOf(shell).querySelector('.to-share-links'));
+  return dialogOf(shell);
+}
+async function written(shell: ToShell, doc = 'Hello\n') {
+  const s = await mount(`#/v1/write/${encodeDoc(doc)}`);
+  await until(() => !!s.querySelector('to-write-editor'));
+  return s ?? shell;
+}
+/** What copyText hands the clipboard, while `body` runs. */
+async function clipboard(body: (copied: () => string) => Promise<void>) {
+  let copied = '';
+  const clip = navigator.clipboard.writeText;
+  navigator.clipboard.writeText = async (s: string) => void (copied = s);
+  try {
+    await body(() => copied);
+  } finally {
+    navigator.clipboard.writeText = clip;
+  }
+}
+
+test('the head: the title, and where the link fits in one line', async () => {
+  const shell = await written(null!, '---\ntitle: Notes\n---\nFirst words.\n');
+  const d = await open(shell);
+  expect(d.querySelector('.to-dialog-head h2')!.textContent).toBe('Notes');
+  expect(d.querySelector('.to-share-fit .to-fit-words')!.textContent!.trim()).toMatch(/^This link: [\d,]+ characters, (fits in a text message|too long for .+)$/);
+  // The rooms are a table in a popover off the head line, never in the dialog itself.
+  expect([...d.querySelectorAll('table, dl')].every((x) => x.closest('.to-rooms'))).toBe(true);
+  // The meter in the header opens the same dialog.
+  d.close();
+  await until(() => !shell.querySelector<ToShare>('to-share')!.sharing);
+  shell.querySelector<HTMLButtonElement>('.to-meter')!.click();
+  await until(() => d.dialog.open);
+});
+
+test('Copy link and Copy display link copy the two links; each says where it opens', async () => {
+  const shell = await written(null!);
+  const d = await open(shell);
+  const [link, display] = [d.querySelector<HTMLButtonElement>('.to-copy-link')!, d.querySelector<HTMLButtonElement>('.to-copy-display')!];
+  expect(link.textContent).toContain('Copy link');
+  expect(link.querySelector('small')!.textContent).toBe('Opens in the editor');
+  expect(display.querySelector('small')!.textContent).toBe('Opens as pages to read');
+  // Equal, side by side.
+  const [a, b] = [link.getBoundingClientRect(), display.getBoundingClientRect()];
+  expect(Math.round(a.width)).toBe(Math.round(b.width));
+  expect(Math.round(a.top)).toBe(Math.round(b.top));
+  await clipboard(async (copied) => {
+    display.click();
+    await until(() => copied() === shell.displayLink);
+    expect(copied().endsWith('?d')).toBe(true);
+    link.click();
+    await until(() => copied() === shell.link);
+  });
+  await until(() => said() === 'Link copied');
+});
+
+// A link is a copy (Paul, 2026-10-11: "docs are not collaborative like Google Docs: that's fine. Communicate it in all the
+// languages"): one sentence under the link, before the ways of sending it.
+test('Share says a link is a copy: one sentence under the link, before the ways of sending it', async () => {
+  const shell = await written(null!);
+  const d = await open(shell);
+  const line = d.querySelector<HTMLElement>('.to-share-copies')!;
+  expect(line.textContent).toBe('Whoever opens this link gets their own copy. Changes they make are in their link, not in yours: ask them to send theirs back.');
+  expect(line.previousElementSibling!.matches('.to-share-fit')).toBe(true);
+  expect(line.nextElementSibling!.matches('.to-share-links')).toBe(true);
+});
+
+test('the lifetimes: one row of segments, a week by default, the choice written to shortTtl and remembered', async () => {
+  let shell = await written(null!);
+  let d = await open(shell);
+  const radios = () => [...d.querySelectorAll<HTMLInputElement>('.to-share-short .to-ttl input[type=radio]')];
+  expect(radios().map((r) => r.parentElement!.textContent)).toEqual(['An hour', 'A day', 'A week', 'A month']);
+  expect(radios().find((r) => r.checked)!.value).toBe(String(7 * 86400));
+  expect(shell.querySelector<ToShare>('to-share')!.shortTtl).toBe(7 * 86400);
+  // One row.
+  expect(new Set(radios().map((r) => Math.round(r.parentElement!.getBoundingClientRect().top))).size).toBe(1);
+  radios()[3].click();
+  await shell.updateComplete;
+  expect(shell.querySelector<ToShare>('to-share')!.shortTtl).toBe(30 * 86400);
+  expect(store.get('tinyoffice.shortTtl')).toBe(String(30 * 86400));
+  // A new shell (the next document) starts at the choice.
+  shell = await written(null!);
+  expect(shell.querySelector<ToShare>('to-share')!.shortTtl).toBe(30 * 86400);
+  d = await open(shell);
+  expect(radios().find((r) => r.checked)!.value).toBe(String(30 * 86400));
+});
+
+test('Make calls the short service and shows the link in a read-only field with Copy', async () => {
+  const shell = await written(null!);
+  const calls: { url: string; body: { ttl: number } }[] = [];
+  vi.stubGlobal('fetch', async (url: string, init?: RequestInit) => {
+    calls.push({ url, body: JSON.parse(String(init?.body)) });
+    return new Response(JSON.stringify({ id: 'abcdefg', exp: Date.now() + 7 * DAY }), { status: 201, headers: { 'content-type': 'application/json' } });
+  });
+  const d = await open(shell);
+  // Said where the lifetime is chosen: it cannot be changed or recalled, and how many a day.
+  expect(d.querySelector('.to-share-short .to-short-fixed')!.textContent).toBe('A short link cannot be changed or recalled once made; it expires on its own.');
+  expect(d.querySelector('.to-share-short .to-short-fixed + .to-hint')!.textContent).toBe(
+    'Encrypted here: the service holds only ciphertext, and only until then. Up to a hundred links a day from one address.',
+  );
+  d.querySelector<HTMLButtonElement>('.to-make')!.click();
+  await until(() => !!d.querySelector('.to-short-field'));
+  expect(calls.length).toBe(1);
+  expect(calls[0].url).toMatch(/\/api$/);
+  expect(calls[0].body.ttl).toBe(7 * 86400);
+  const field = d.querySelector<HTMLInputElement>('.to-short-field')!;
+  expect(field.readOnly).toBe(true);
+  const copy = field.parentElement!.querySelector<HTMLButtonElement>('button')!;
+  expect(copy.textContent!.trim()).toBe('Copy');
+  // Copy sits at the field's right, on its line.
+  expect(copy.getBoundingClientRect().left).toBeGreaterThanOrEqual(field.getBoundingClientRect().right);
+  expect(d.querySelector('.to-short-expires')!.textContent).toMatch(/^Expires in 7 days \(/);
+});
+
+test('a short link says its limit before the press: over it, Make is disabled with the numbers, and the header says it too (Paul, 2026-10-11)', async () => {
+  // Under it: Make is pressable and there is no hint.
+  let shell = await written(null!);
+  let d = await open(shell);
+  expect(d.querySelector<HTMLButtonElement>('.to-make')!.disabled).toBe(false);
+  expect(d.querySelector('.to-short-why')).toBeNull();
+  expect(shell.querySelector('.to-meter')!.getAttribute('aria-label')).toMatch(/^[\d,]+ of [\d,]+ link characters left$/);
+  // Past some browsers' limit but not a short link's: the header says how much a short link holds.
+  shell = await written(null!, `${Array.from({ length: 900 }, () => Math.random().toString(36).slice(2, 8)).join(' ')}\n`);
+  expect(shell.querySelector('.to-meter')!.getAttribute('aria-label')).toMatch(/^[\d,]+ characters over the link limit; a short link holds 12,272$/);
+  d = await open(shell);
+  expect(d.querySelector<HTMLButtonElement>('.to-make')!.disabled).toBe(false);
+  expect(d.querySelector('.to-short-why')).toBeNull();
+  // Over it: random words, which do not compress, past what a short link holds.
+  const words = Array.from({ length: 4000 }, () => Math.random().toString(36).slice(2, 8)).join(' ');
+  shell = await written(null!, `${words}\n`);
+  d = await open(shell);
+  const n = new TextEncoder().encode(shell.link).length;
+  expect(n).toBeGreaterThan(SHORT_LINK_MAX);
+  const fmt = (x: number) => x.toLocaleString('en');
+  expect(d.querySelector<HTMLButtonElement>('.to-make')!.disabled).toBe(true);
+  expect(d.querySelector('.to-short-why')!.textContent).toBe(
+    `This document is ${fmt(n)} characters; a short link holds ${fmt(SHORT_LINK_MAX)}. Shorten it by ${fmt(n - SHORT_LINK_MAX)} and it will fit.`,
+  );
+  // The table of rooms has the short link, over.
+  const row = [...d.querySelectorAll('.to-rooms tr')].find((r) => r.querySelector('th')?.textContent === 'a short link')!;
+  expect(row.classList.contains('over')).toBe(true);
+  expect(row.textContent).toContain(`${fmt(n - SHORT_LINK_MAX)} over`);
+  // The header's meter names the short link, the first place the link no longer fits from the roomiest down.
+  expect(shell.querySelector('.to-meter')!.getAttribute('aria-label')).toMatch(/^[\d,]+ characters over what a short link holds$/);
+});
+
+test('every short link made is kept in the list folded under "n short links kept here", with Remove', async () => {
+  setKeeping(true);
+  keepLink({ link: `https://tinier.tinylittleoffice.com/zzzzzzz#${'K'.repeat(43)}`, title: 'Old notes', made: Date.now() - DAY, expires: Date.now() + 3 * DAY });
+  const shell = await written(null!, '---\ntitle: New notes\n---\nWords.\n');
+  vi.stubGlobal('fetch', async () => new Response(JSON.stringify({ id: 'abcdefg', exp: Date.now() + 7 * DAY }), { status: 201, headers: { 'content-type': 'application/json' } }));
+  const d = await open(shell);
+  let kept = d.querySelector<HTMLDetailsElement>('.to-kept-list')!;
+  expect(kept.querySelector('summary')!.textContent).toBe('1 short link kept here');
+  expect(kept.open).toBe(false);
+  kept.querySelector('summary')!.click();
+  await until(() => kept.open);
+  expect(kept.querySelector('li a')!.textContent).toBe('Old notes');
+  expect(kept.querySelector('li small')!.textContent).toMatch(/^Expires in 3 days/);
+
+  d.querySelector<HTMLButtonElement>('.to-make')!.click();
+  await until(() => d.querySelector('.to-kept-list summary')?.textContent === '2 short links kept here');
+  const made = keptLinks().find((l) => l.link.includes('/abcdefg#'))!;
+  expect(made).toMatchObject({ title: 'New notes', link: d.querySelector<HTMLInputElement>('.to-short-field')!.value });
+  // Nothing about owning it: the link is all there is.
+  expect(d.querySelector('.to-owner, .to-keep, .to-update, .to-forget, .to-extend')).toBeNull();
+  expect(Object.keys(made).sort()).toEqual(['expires', 'link', 'made', 'title']);
+  // Remove one.
+  kept = d.querySelector<HTMLDetailsElement>('.to-kept-list')!;
+  kept.open = true;
+  await tick();
+  [...kept.querySelectorAll<HTMLButtonElement>('li button')].at(-1)!.click();
+  await until(() => d.querySelector('.to-kept-list summary')?.textContent === '1 short link kept here');
+  dropKept(made.link);
+});
+
+test('the QR code: drawn inline when the link fits, with PNG and SVG; else one sentence why', async () => {
+  let shell = await written(null!);
+  let d = await open(shell);
+  const qr = () => d.querySelector('.to-share-qr')!;
+  expect(qr().querySelector('.to-qr-code svg')).not.toBeNull();
+  expect([...qr().querySelectorAll('button')].map((b) => b.textContent!.trim())).toContain('PNG');
+  expect([...qr().querySelectorAll('button')].map((b) => b.textContent!.trim())).toContain('SVG');
+  // Too much for any code: random words, which do not compress.
+  const words = Array.from({ length: 900 }, () => Math.random().toString(36).slice(2, 8)).join(' ');
+  shell = await written(null!, `${words}\n`);
+  expect(decodeDoc(location.hash.split('/').pop()!)).toContain(words.slice(0, 20));
+  d = await open(shell);
+  expect(qr().querySelector('.to-qr-code')).toBeNull();
+  expect(qr().querySelector('.to-qr-why')!.textContent).toMatch(/^This document is [\d,]+ bytes; the largest QR code holds/);
+});
+
+/* ---------- a document with a password ---------- */
+
+/** A sheet sealed with a password, opened with it: the shell's own document, its link ciphertext. */
+async function sealedSheet(title: string) {
+  lockCost.iterations = 1000;
+  const text = `---\ntitle: ${title}\n---\nName | Phone\n--- | ---\nAda | 555 0101\n`;
+  const shell = await mount(`#/v1/sheet/${await pack(text, await lockWith('pw'))}`);
+  await until(() => !!shell.querySelector('to-dialog.to-unlock-dialog dialog[open] .to-unlock-field'));
+  const field = shell.querySelector<HTMLInputElement>('.to-unlock-field')!;
+  field.value = 'pw';
+  field.dispatchEvent(new Event('input', { bubbles: true }));
+  shell.querySelector<HTMLButtonElement>('.to-unlock-go')!.click();
+  await until(() => !!shell.querySelector('to-sheet-editor'));
+  return shell;
+}
+
+test('a sealed document says nothing of itself: Share… sends no picture and no title, and Post, the QR file, the embed and a kept short link carry no title', async () => {
+  const shell = await sealedSheet('Mutual aid contacts');
+  const sent: ShareData[] = [];
+  // The device's share sheet, which takes files.
+  Object.defineProperty(navigator, 'share', { configurable: true, value: async (data: ShareData) => void sent.push(data) });
+  Object.defineProperty(navigator, 'canShare', { configurable: true, value: () => true });
+  onTestFinished(() => void (delete (navigator as { share?: unknown }).share, delete (navigator as { canShare?: unknown }).canShare));
+  const d = await open(shell);
+  expect(d.querySelector('.to-dialog-head h2')!.textContent).toBe('Locked document');
+  d.querySelector<HTMLButtonElement>('.to-share-native')!.click();
+  await until(() => sent.length === 1);
+  expect(sent[0].files).toBeUndefined();
+  expect(`${sent[0].title} ${sent[0].text}`).not.toContain('Mutual aid');
+  expect(sent[0].url).toBe(shell.link);
+  // Post: the compose box's words are not the title.
+  const opened = vi.spyOn(window, 'open').mockImplementation(() => null);
+  for (const cls of ['x', 'email']) {
+    d.querySelector<HTMLButtonElement>(`.to-post-${cls}`)!.click();
+    await until(() => !!document.querySelector('to-dialog.to-link-guard dialog[open] .lg-go'));
+    document.querySelector<HTMLButtonElement>('to-dialog.to-link-guard .lg-go')!.click();
+    await until(() => opened.mock.calls.length > 0);
+    expect(decodeURIComponent(String(opened.mock.calls.pop()![0]))).not.toContain('Mutual aid');
+    await tick(30);
+  }
+  // The QR code's file is "document-qr".
+  const names: string[] = [];
+  const w = window as unknown as { showSaveFilePicker?: unknown };
+  const had = w.showSaveFilePicker;
+  w.showSaveFilePicker = async (o: { suggestedName: string }) => (names.push(o.suggestedName), { createWritable: async () => ({ write: async () => {}, close: async () => {} }) });
+  try {
+    [...d.querySelectorAll<HTMLButtonElement>('.to-share-qr button')].find((b) => b.textContent!.trim() === 'SVG')!.click();
+    await until(() => names.length === 1);
+  } finally {
+    w.showSaveFilePicker = had;
+  }
+  expect(names).toEqual(['document-qr.svg']);
+  // The embed code's frame is not named after it.
+  await clipboard(async (copied) => {
+    d.querySelector<HTMLButtonElement>('.to-copy-embed')!.click();
+    await until(() => copied().includes('<iframe'));
+    expect(copied()).not.toContain('Mutual aid');
+  });
+  // A short link kept under Saved keeps no title.
+  setKeeping(true);
+  vi.stubGlobal('fetch', async () => new Response(JSON.stringify({ id: 'abcdefg', exp: Date.now() + 7 * DAY }), { status: 201, headers: { 'content-type': 'application/json' } }));
+  d.querySelector<HTMLButtonElement>('.to-make')!.click();
+  await until(() => keptLinks().some((l) => l.link.includes('/abcdefg#')));
+  const kept = keptLinks().find((l) => l.link.includes('/abcdefg#'))!;
+  expect(kept.title).toBe('');
+  dropKept(kept.link);
+});
+
+/* ---------- arriving by a short link ---------- */
+
+async function arrive(days: number, extra = '', ready = 'to-write-editor', doc = '---\ntitle: Plans\n---\nWords.\n') {
+  const now = new Date('2026-10-09T12:00:00Z').getTime();
+  vi.useFakeTimers({ toFake: ['Date'], now });
+  const shell = await mount(`#/v1/write/${encodeDoc(doc)}?s=abcdefg${extra}&x=${now + days * DAY}`);
+  await until(() => !!shell.querySelector(ready));
+  return shell;
+}
+
+test('the banner: how long the link has left, coloured by how soon', async () => {
+  for (const [days, words, urgency] of [
+    [12, 'This link expires in 12 days', 'ok'],
+    [3, 'This link expires in 3 days', 'soon'],
+    [3 / 24, 'This link expires in 3 hours', 'last'],
+  ] as const) {
+    const shell = await arrive(days);
+    const banner = shell.querySelector<HTMLElement>('.to-arrival')!;
+    expect(banner.querySelector('.to-arrival-words')!.textContent).toBe(words);
+    expect(banner.classList.contains(urgency)).toBe(true);
+    // Big, above the bar, below the header.
+    expect(parseFloat(getComputedStyle(banner.querySelector('.to-arrival-words')!).fontSize)).toBeGreaterThanOrEqual(20);
+    expect(banner.compareDocumentPosition(shell.querySelector('to-bar')!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    const header = shell.querySelector('.to-header')!.getBoundingClientRect();
+    expect(Math.round(banner.getBoundingClientRect().top)).toBe(Math.round(header.bottom));
+    // A short link cannot be extended: the banner has no Extend.
+    expect(banner.querySelector('.to-arrival-extend')).toBeNull();
+  }
+  // Each colour differs from the next, and the words read on it.
+  const colours: string[] = [];
+  for (const days of [12, 3, 0.1]) {
+    const b = (await arrive(days)).querySelector<HTMLElement>('.to-arrival')!;
+    colours.push(getComputedStyle(b).backgroundColor);
+  }
+  expect(new Set(colours).size).toBe(3);
+});
+
+test('the banner: a plain document has none; Close puts it away for the visit', async () => {
+  const plain = await written(null!);
+  expect(plain.querySelector('.to-arrival')).toBeNull();
+  const shell = await arrive(12);
+  shell.querySelector<HTMLButtonElement>('.to-arrival-close')!.click();
+  await until(() => !shell.querySelector('.to-arrival'));
+});
+
+test('Copy into a new document opens the same document as a fresh plain link, "Copy of …", in a new tab', async () => {
+  const shell = await arrive(12);
+  const opened: string[] = [];
+  vi.spyOn(window, 'open').mockImplementation((url?: string | URL) => (opened.push(String(url)), null));
+  shell.querySelector<HTMLButtonElement>('.to-arrival-copy')!.click();
+  expect(opened.length).toBe(1);
+  const u = new URL(opened[0]);
+  expect(u.hash).not.toContain('?');
+  const doc = decodeDoc(u.hash.replace('#/v1/write/', ''));
+  expect(doc).toContain('title: Copy of Plans');
+  expect(doc).toContain('Words.');
+  await until(() => said() === 'A copy opened in a new tab');
+});
+
+test('the banner on the Display Link too, at the top', async () => {
+  // "?s=…&d&x=…" still reads as the Display Link.
+  const shell = await arrive(5, '&d', '.to-display');
+  const banner = shell.querySelector<HTMLElement>('.to-arrival')!;
+  expect(banner.classList.contains('soon')).toBe(true);
+  expect(banner.querySelector('.to-arrival-copy')).not.toBeNull();
+});
+
+/* ---------- phones ---------- */
+
+test('at 390px: the Share dialog is one full-screen sheet, nothing wider, every button inside the screen; the banner too', async () => {
+  await page.viewport(390, 844);
+  try {
+    vi.stubGlobal('fetch', async () => new Response(JSON.stringify({ id: 'abcdefg', exp: Date.now() + 7 * DAY }), { status: 201, headers: { 'content-type': 'application/json' } }));
+    const shell = await arrive(12);
+    vi.useRealTimers();
+    await tick(50);
+    expect(document.documentElement.scrollWidth).toBeLessThanOrEqual(390);
+    for (const b of shell.querySelectorAll<HTMLElement>('.to-arrival .to-btn')) expect(b.getBoundingClientRect().right).toBeLessThanOrEqual(390);
+    const d = await open(shell);
+    await tick(50);
+    const box = d.querySelector('dialog')!.getBoundingClientRect();
+    expect(Math.round(box.left)).toBe(0);
+    expect(Math.round(box.top)).toBe(0);
+    expect(Math.round(box.width)).toBe(390);
+    expect(Math.round(box.height)).toBe(844);
+    const body = d.querySelector<HTMLElement>('.to-dialog-body')!;
+    expect(body.scrollWidth).toBeLessThanOrEqual(body.clientWidth);
+    for (const el of d.querySelectorAll<HTMLElement>('button, input, .to-ttl label')) {
+      if (!el.getClientRects().length || el.closest('details:not([open])')) continue;
+      const r = el.getBoundingClientRect();
+      expect(r.left).toBeGreaterThanOrEqual(0);
+      expect(r.right).toBeLessThanOrEqual(390);
+    }
+  } finally {
+    await page.viewport(1100, 800);
+  }
+});
