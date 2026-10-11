@@ -8,10 +8,13 @@
  *
  *   scrollerOf(el)        the nearest box that scrolls the way `el` would be scrolled (the column, a list's own box)
  *   reveal(el, opts)      `el` (or a rect over it, such as the caret's) brought inside what can be seen
+ *   revealCaret(box)      the caret in `box` brought inside what can be seen of the column, above the bar: the one rule
+ *                         for a caret, after an edit, a focus moved, the column settled or the window put back
  *   seen()                what can be seen: the visible window
  *   room()                where a menu, the context bar, the link box or the completion list may sit: the column's
  *                         box (<to-chrome>) within what can be seen
- *   pinWindow()           the window put back at its top, should the browser have slid it (iOS does, for a box focused)
+ *   pinWindow()           the window put back at its top, should the browser have slid it (iOS does, for a box focused
+ *                         and for a caret it finds under the keyboard); true when it had to
  *   gliding()             the column is moving for a phone's keyboard (kit/chrome.ts): the caret is kept in sight once it settles
  *
  * test/scroll.test.ts fails if any other module reads `window.scrollY` or scrolls the window.
@@ -133,9 +136,30 @@ export function reveal(el: Element | null | undefined, opts: Reveal = {}): void 
   }
 }
 
-/** The window back at its top: the page is the visible window and the column scrolls, so the window never should. */
-export function pinWindow(): void {
+/**
+ * The caret in `box` (a `<to-text>`, a field) brought inside what can be seen of the column, above a phone's bar and
+ * keyboard. A caret in a block with no words yet (the row or the paragraph Enter just made) has no rect of its own:
+ * its block stands in for it, the element the caret sits in, never the whole box (a document's box is the document,
+ * and revealing it scrolled to the top: Paul, 2026-10-11, "the cursor goes beneath the nav"). Nothing when the
+ * selection is not in `box`.
+ */
+export function revealCaret(box: Element): void {
+  const sel = document.getSelection();
+  if (!sel?.rangeCount || !box.contains(sel.focusNode)) return;
+  const range = sel.getRangeAt(0);
+  const r = range.getBoundingClientRect();
+  if (r.height) return reveal(box, { rect: r, margin: 8 });
+  const node = range.startContainer;
+  const at = node instanceof Element ? node : node.parentElement;
+  const el = at?.closest('[data-block], p, li, h1, h2, h3, h4, h5, h6, blockquote, td, th') ?? at;
+  reveal(el && box.contains(el) ? el : box, { margin: 8 });
+}
+
+/** The window back at its top: the page is the visible window and the column scrolls, so the window never should. True when it had slid. */
+export function pinWindow(): boolean {
   if (window.scrollX || window.scrollY) window.scrollTo(0, 0);
+  else return false;
+  return true;
 }
 
 /** The column is gliding to a keyboard's height (kit/chrome.ts): where the caret should be kept is known once it settles, and it is kept then. */

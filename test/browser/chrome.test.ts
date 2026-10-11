@@ -187,6 +187,38 @@ test('390×844 with a finger and a keyboard: Enter on the outline’s last row, 
   expect(Math.max(focused.bottom, caret.bottom)).toBeLessThanOrEqual(bar.top + 0.5);
 });
 
+test('390×844 with a finger and a keyboard: the window slid (as iOS slides it for a caret it finds under the keyboard) is put back at its top, and the caret brought above the bar the column’s way', async () => {
+  await page.viewport(390, 844);
+  await coarse(true);
+  const vv = fakeViewport();
+  const rows = Array.from({ length: 40 }, (_, i) => `- Row ${i + 1}`).join('\n') + '\n';
+  const shell = await mount(`#/v1/outline/${encodeDoc(rows)}`);
+  await until(() => shell.querySelectorAll('.ol-row to-text').length === 40 && !!shell.querySelector('to-outline-editor to-bar'));
+  const row = shell.querySelectorAll<HTMLElement>('.ol-row to-text')[12];
+  await userEvent.click(row);
+  vv.height = 844 - 336;
+  vv.dispatchEvent(new Event('resize'));
+  await until(() => !shell.querySelector('to-chrome')!.hasAttribute('gliding') && shell.querySelector('to-chrome')!.getBoundingClientRect().height <= 509);
+  // The column scrolled so the caret's row is under the bar and the keyboard; then the window slides, as Safari's own
+  // reveal does (the page may slide by the keyboard's height there), with no word from the visual viewport.
+  const main = shell.querySelector<HTMLElement>('.to-main')!;
+  main.scrollTop -= 600 - document.getSelection()!.getRangeAt(0).getBoundingClientRect().top;
+  await frame();
+  expect(document.getSelection()!.getRangeAt(0).getBoundingClientRect().top).toBeGreaterThan(508);
+  document.documentElement.style.height = 'calc(100% + 336px)';
+  try {
+    document.scrollingElement!.scrollTop = 300;
+    await until(() => document.scrollingElement!.scrollTop === 0);
+    await frame();
+    const bar = shell.querySelector<HTMLElement>('to-outline-editor to-bar')!.getBoundingClientRect();
+    const caret = document.getSelection()!.getRangeAt(0).getBoundingClientRect();
+    expect(caret.top).toBeGreaterThanOrEqual(0);
+    expect(caret.bottom).toBeLessThanOrEqual(bar.top + 0.5);
+  } finally {
+    document.documentElement.style.height = '';
+  }
+});
+
 test('390×844 with a finger and a keyboard: Enter at the end of a long text lands the new paragraph above the bar, the column not jumped to its top', async () => {
   await page.viewport(390, 844);
   await coarse(true);

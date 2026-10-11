@@ -60,7 +60,7 @@ import { icon, UI } from './icons.ts';
 import { t } from './i18n.ts';
 import { ago, type Kept } from './library.ts';
 import { expiresSentence, SHORT_LINK_MAX, timeLeft } from './short.ts';
-import { pinWindow, reveal } from './scroll.ts';
+import { pinWindow, revealCaret } from './scroll.ts';
 import { BAR_HERE, cmdTool } from './bar.ts';
 import { PALETTE } from './keys.ts';
 
@@ -205,7 +205,8 @@ export class ToChrome extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     window.visualViewport?.addEventListener('resize', this.fit);
-    window.visualViewport?.addEventListener('scroll', pinWindow);
+    window.visualViewport?.addEventListener('scroll', this.pin);
+    window.addEventListener('scroll', this.pin);
     window.addEventListener('resize', this.fit);
     for (const type of ['focusin', 'focusout', 'beforeinput']) document.addEventListener(type, this.onFocus);
     for (const type of ['pointerdown', 'keydown']) document.addEventListener(type, this.onPerson, true);
@@ -221,7 +222,8 @@ export class ToChrome extends LitElement {
   disconnectedCallback() {
     super.disconnectedCallback();
     window.visualViewport?.removeEventListener('resize', this.fit);
-    window.visualViewport?.removeEventListener('scroll', pinWindow);
+    window.visualViewport?.removeEventListener('scroll', this.pin);
+    window.removeEventListener('scroll', this.pin);
     window.removeEventListener('resize', this.fit);
     for (const type of ['focusin', 'focusout', 'beforeinput']) document.removeEventListener(type, this.onFocus);
     for (const type of ['pointerdown', 'keydown']) document.removeEventListener(type, this.onPerson, true);
@@ -247,7 +249,7 @@ export class ToChrome extends LitElement {
     // Under a finger a change of height is the keyboard: the bar fades while the column glides (kit.css), back when it settles.
     if (this.style.height && this.style.height !== h && matchMedia('(pointer: coarse)').matches) this.glide();
     this.style.height = h;
-    pinWindow();
+    this.pin();
   };
   /**
    * The chrome and its column hold still: only `main` scrolls. The browser scrolls any box to bring a focused element
@@ -270,11 +272,21 @@ export class ToChrome extends LitElement {
     clearTimeout(this.settleTimer);
     if (!this.hasAttribute('gliding')) return;
     this.removeAttribute('gliding');
+    this.keepCaret();
+  };
+  /** The caret, where a box being edited has it, inside what can be seen of the column (kit/scroll.ts revealCaret, the one rule). */
+  private keepCaret() {
     const at = document.activeElement;
-    const sel = document.getSelection();
-    if (!this.editing || !at || !this.contains(at) || !sel?.rangeCount || !at.contains(sel.anchorNode)) return;
-    const r = sel.getRangeAt(0).getBoundingClientRect();
-    if (r.height) reveal(at, { rect: r, margin: 8 });
+    if (this.editing && at && this.contains(at)) revealCaret(at);
+  }
+  /**
+   * The window slid (iOS slides it to bring a box it focused, or a caret it finds under the keyboard, into sight: a
+   * scroll of the window, which the visual viewport's own `scroll` does not always tell) is put back at its top, and the
+   * caret is brought into sight the column's way instead (Paul, 2026-10-11: "I keep losing my cursor in Outline
+   * because it's below the keyboard"). While the column glides, it is kept once it settles.
+   */
+  private pin = () => {
+    if (pinWindow() && !this.hasAttribute('gliding')) this.keepCaret();
   };
   private onGlided = (e: TransitionEvent) => e.target === this && e.propertyName === 'height' && this.settle();
 

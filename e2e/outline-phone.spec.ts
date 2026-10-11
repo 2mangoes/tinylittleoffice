@@ -186,3 +186,151 @@ test('outline: on a phone, a finger drags a row by its handle (pointer events, n
   expect(await page.evaluate(() => document.scrollingElement!.scrollTop)).toBe(0);
   expect(errors).toEqual([]);
 });
+
+/**
+ * A phone's keyboard, two ways (Paul, 2026-10-11: "I keep losing my cursor in Outline because it's below the
+ * keyboard"). iOS: the layout viewport stays 844 tall and the visual one shrinks to 508 a moment after a box takes the
+ * focus (`kbLate`), firing `resize`; and as Safari does, the window may then slide by up to the keyboard's height, which
+ * it does to bring a caret it finds under the keyboard into sight, as the keyboard comes and after each input. Plain:
+ * the window itself 390 by 508.
+ */
+const IOS = () => {
+  const real = window.visualViewport!;
+  let height: number | null = null;
+  const vv = new EventTarget();
+  for (const k of ['offsetTop', 'offsetLeft', 'pageTop', 'pageLeft', 'width', 'scale'] as const) Object.defineProperty(vv, k, { get: () => real[k] });
+  Object.defineProperty(vv, 'height', { get: () => height ?? real.height });
+  for (const type of ['resize', 'scroll']) real.addEventListener(type, () => vv.dispatchEvent(new Event(type)));
+  Object.defineProperty(window, 'visualViewport', { configurable: true, value: vv });
+  const w = window as unknown as { kbLate: number };
+  w.kbLate = 60;
+  const BOX = 'to-text, input, [contenteditable="true"]';
+  const keyboard = (up: boolean) => {
+    if ((height === 508) === up) return;
+    height = up ? 508 : null;
+    document.documentElement.style.height = up ? 'calc(100% + 336px)' : '';
+    vv.dispatchEvent(new Event('resize'));
+  };
+  /** Safari's own reveal: a caret under the keyboard brought up by sliding the window. */
+  const slide = () => {
+    if (height === null || !document.activeElement?.closest(BOX)) return;
+    const sel = document.getSelection();
+    let r = sel?.rangeCount ? sel.getRangeAt(0).getBoundingClientRect() : null;
+    if (!r || !r.height) r = document.activeElement.getBoundingClientRect();
+    if (r.bottom > 508) window.scrollTo(0, window.scrollY + r.bottom - 508 + 24);
+  };
+  document.addEventListener('focusin', (e) => {
+    if (!(e.target as Element).closest?.(BOX)) return;
+    setTimeout(() => {
+      if (!document.activeElement?.closest(BOX)) return;
+      document.documentElement.style.height = 'calc(100% + 336px)';
+      slide();
+      keyboard(true);
+    }, w.kbLate);
+  });
+  for (const type of ['beforeinput', 'keydown']) document.addEventListener(type, () => setTimeout(slide, 50), true);
+  // The focus gone from every box: the keyboard down.
+  document.addEventListener('focusout', () => setTimeout(() => !document.activeElement?.closest(BOX) && keyboard(false), 30));
+};
+
+for (const model of ['ios', 'plain'] as const) {
+  test(`outline: on a phone with the keyboard up (${model}), the caret stays above the bar after every edit and focus move, and the window never scrolls`, async ({ page }, info) => {
+    test.skip(info.project.name !== 'phone', 'phone only');
+    test.setTimeout(90_000);
+    const errors: string[] = [];
+    page.on('pageerror', (e) => errors.push(String(e)));
+    if (model === 'ios') await page.addInitScript(IOS);
+    await page.goto('/#/v1/outline');
+    const row = (at: number) => page.locator(`.ol-row[data-at="${at}"] to-text .tx`);
+    await expect(row(-1)).toBeVisible();
+    if (model === 'plain') await page.setViewportSize({ width: 390, height: 508 });
+    await row(-1).tap();
+    /** Where the caret is (its row's box where it has no rect of its own), what can be seen of the column above the bar, and the window's scroll. */
+    const where = () =>
+      page.evaluate(() => {
+        const sel = document.getSelection()!;
+        const n = sel.anchorNode;
+        const el = n instanceof Element ? n : n?.parentElement;
+        let r = sel.rangeCount ? sel.getRangeAt(0).getBoundingClientRect() : null;
+        if (!r || !r.height) r = el?.closest('.ol-row')?.getBoundingClientRect() ?? null;
+        const vv = window.visualViewport!;
+        const bar = document.querySelector('to-outline-editor to-bar')!.getBoundingClientRect();
+        const main = document.querySelector('.to-main')!.getBoundingClientRect();
+        const bottom = Math.min(vv.offsetTop + vv.height, bar.top);
+        const top = Math.max(vv.offsetTop, main.top);
+        return {
+          at: el?.closest<HTMLElement>('.ol-row')?.dataset.at ?? null,
+          caret: r && [Math.round(r.top), Math.round(r.bottom)],
+          room: [Math.round(top), Math.round(bottom)],
+          scrollY: window.scrollY,
+          vvTop: vv.offsetTop,
+        };
+      });
+    /** Once the column has settled (a keyboard's glide, a frame for the caret): the caret inside the room, the window at its top. */
+    const check = async (what: string) => {
+      await page.waitForFunction(() => !document.querySelector('to-chrome[gliding]') && document.getAnimations().every((a) => a.playState !== 'running'));
+      await page.waitForTimeout(80);
+      const w = await where();
+      const inside = !!w.caret && w.caret[0] >= w.room[0] - 1 && w.caret[1] <= w.room[1] + 1;
+      expect({ what, inside, scrollY: w.scrollY, vvTop: w.vvTop }, JSON.stringify(w)).toEqual({ what, inside: true, scrollY: 0, vvTop: 0 });
+    };
+    const value = () => page.evaluate(() => (document.querySelector('to-outline-editor') as HTMLElement & { value: string }).value);
+    // Twenty-six rows, Enter after each, then on typing.
+    for (let i = 0; i < 26; i++) {
+      await page.keyboard.type(`Item ${String.fromCharCode(65 + i)}`);
+      await page.keyboard.press('Enter');
+      await expect(row(i + 1)).toBeFocused();
+      await check(`enter ${i}`);
+    }
+    await page.keyboard.type('And on');
+    await check('typing on');
+    await expect.poll(async () => (await value()).split('\n').length).toBe(28);
+    // Indent and outdent.
+    await page.keyboard.press('Tab');
+    await check('tab');
+    await page.keyboard.press('Shift+Tab');
+    await check('shift+tab');
+    // A tap into a row near the bottom edge of what is seen, then Enter in the middle of its words.
+    const near = await page.evaluate(() => {
+      const bar = document.querySelector('to-outline-editor to-bar')!.getBoundingClientRect();
+      const rows = [...document.querySelectorAll<HTMLElement>('.ol-row')].filter((r) => r.getBoundingClientRect().bottom <= Math.min(bar.top, window.visualViewport!.height));
+      return Number(rows.at(-2)!.dataset.at);
+    });
+    await row(near).tap();
+    await check('tap near the foot');
+    await page.keyboard.press('ArrowLeft');
+    await page.keyboard.press('ArrowLeft');
+    await page.keyboard.press('Enter');
+    await check('enter in the middle');
+    await page.keyboard.press('Enter');
+    await page.keyboard.press('Enter');
+    await check('enter again');
+    // The Backspace join: to the start of the row, then join it to the one before.
+    await page.keyboard.press('Home');
+    await page.keyboard.press('Backspace');
+    await check('backspace');
+    // A fold: the row before gets a child, the caret goes to it and folds it.
+    await page.keyboard.press('End');
+    await page.keyboard.press('Enter');
+    await page.keyboard.type('Child');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('ArrowUp');
+    await page.keyboard.press('Meta+Alt+ArrowUp');
+    await check('fold');
+    // The keyboard's resize late, after the caret moved: a row tapped near the top, typed in fast.
+    await page.evaluate(() => ((window as unknown as { kbLate: number }).kbLate = 400));
+    await page.evaluate(() => (document.activeElement as HTMLElement).blur());
+    await page.waitForTimeout(100);
+    const last = await page.evaluate(() =>
+      Number([...document.querySelectorAll<HTMLElement>('.ol-row')].filter((r) => r.getBoundingClientRect().bottom <= window.visualViewport!.height - 60).at(-1)!.dataset.at),
+    );
+    await row(last).tap();
+    await page.keyboard.press('Enter');
+    await page.keyboard.type('Fast');
+    await page.keyboard.press('Enter');
+    await page.keyboard.type('Faster');
+    await page.waitForTimeout(400);
+    await check('late keyboard');
+    expect(errors).toEqual([]);
+  });
+}
