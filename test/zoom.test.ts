@@ -129,16 +129,18 @@ test('the size is kept on the device under Private too, like the language: a new
     vi.resetModules();
     const theme = await import('../src/kit/theme.ts');
     expect(device.getItem('to-theme')).toBeNull();
-    // Saved, then Private again: both stay on the device, where the language stays; the rest is gone, from memory too.
+    // Saved, then Private again: the switch turned off takes everything, the size and the theme too (Paul, 2026-10-12);
+    // set again under Private, they go back on the device, as the first visit's did.
     const again = await import('../src/kit/store.ts');
     again.setKeeping(true);
     again.store.set('tinyoffice.shortTtl', '1');
     again.store.set('to-theme', 'dark');
     again.setKeeping(false);
-    expect([device.getItem('tinyoffice.size'), device.getItem('to-theme'), device.getItem('tinyoffice.shortTtl')]).toEqual(['2', 'dark', null]);
+    expect(Object.keys(device)).toEqual([]);
+    expect(again.store.keys()).toEqual([]);
+    again.store.set('to-theme', 'dark');
+    expect(device.getItem('to-theme')).toBe('dark');
     expect(theme.theme()).toBe('dark');
-    // Forget everything still forgets them.
-    expect(again.store.keys().sort()).toEqual(['tinyoffice.size', 'to-theme']);
     for (const k of again.store.keys()) again.store.remove(k);
     expect(Object.keys(device)).toEqual([]);
   } finally {

@@ -14,6 +14,7 @@
  *
  * The shell and <to-privacy> (kit/privacy-dialog.ts) only call this.
  */
+import { forgetOpened } from './locked.ts';
 import { keeping, setKeeping, store } from './store.ts';
 import { decodeDoc, encodeDoc, isSealed, packDoc, unpackDoc } from './codec.ts';
 import { newLocker, PBKDF2_ITERATIONS, seal, unseal, unsealWith, type Locker } from './crypt.ts';
@@ -39,9 +40,17 @@ const changed = () => {
 
 export { keeping };
 
-/** The switch, turned: keep things from now on, or forget all of it and keep nothing. */
+/**
+ * The switch, turned: keep things from now on, or forget all of it and keep nothing: what the device holds, and
+ * what this visit holds in memory too, the passwords given and the texts they opened (Paul, 2026-10-12: "Are we
+ * sure when I turn stuff off no cookies or local storage or in memory remains").
+ */
 export async function setPrivate(privately: boolean) {
   setKeeping(!privately);
+  if (privately) {
+    opened.length = 0;
+    forgetOpened();
+  }
   changed();
 }
 

@@ -51,8 +51,9 @@ export const store = {
 
 /**
  * Keep things from now on (what the visit has set so far comes along), or stop: every trace goes, from the device
- * and from memory alike, so turning it on again starts from nothing (Paul, 2026-10-12: "I turn save off and then
- * back on and the documents it removed are still there"). The size and the theme stay, as in either state.
+ * and from memory alike, the size and the theme with the rest, so turning it on again starts from nothing (Paul,
+ * 2026-10-12: "I turn save off and then back on and the documents it removed are still there"). Changed afterwards,
+ * the size and the theme are written again: they are the two things a private visit keeps on the device.
  */
 export function setKeeping(on: boolean) {
   const l = local();
@@ -63,6 +64,7 @@ export function setKeeping(on: boolean) {
     memory.clear();
   } else {
     for (const k of Object.keys(l).filter(ours)) l.removeItem(k);
+    for (const k of DEVICE) l.removeItem(k);
     memory.clear();
     l.removeItem(KEEP);
   }
