@@ -118,8 +118,8 @@ test('a Display Link, as a screen reader is given it', async ({ page }, info) =>
       - paragraph:
         - strong: "Present:"
         - emphasis: Who came
-        - strong: "Apologies:"
-        - emphasis: Who sent them
+        - strong: "Absent:"
+        - emphasis: Who sent regrets
       - heading "1. The last minutes" [level=2]
       - paragraph:
         - emphasis: Agreed, or changed.
@@ -141,8 +141,8 @@ test('a Display Link, as a screen reader is given it', async ({ page }, info) =>
           - row "Printing and postage -$62.00":
             - cell "Printing and postage"
             - cell "-$62.00"
-          - row "Hall hire -$40.00":
-            - cell "Hall hire"
+          - row "Hall rental -$40.00":
+            - cell "Hall rental"
             - cell "-$40.00"
           - row "Balance on 30 September $1,453.00":
             - cell "Balance on 30 September"

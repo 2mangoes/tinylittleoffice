@@ -436,11 +436,12 @@ export class ToChrome extends LitElement {
     const cls = p.kind === 'embed' ? `to-display to-embed ${p.locked ? 'to-embed-locked' : ''}` : 'to-display';
     // The pages scroll and hold nothing to tab to: the column itself is in the tab order, to scroll by the keys.
     // The pages are a picture to two fingers (kit/shell.ts pinchZoom): spatial, so the size of everything is not what a pinch here sets.
+    // An <aside>: a landmark of its own, so a screen reader's landmark list and axe's region rule both place it.
     const copies = p.copies
-      ? html`<div class="to-copies" role="note">
+      ? html`<aside class="to-copies">
           <p>${t('Whoever opens this link gets their own copy. Changes they make are in their link, not in yours: ask them to send theirs back.')}</p>
           <button type="button" class="to-btn to-tool to-copies-close" aria-label=${t('Close')} title=${t('Close')} @click=${() => this.say('to-copies-close')}>${icon(UI.close, 18)}</button>
-        </div>`
+        </aside>`
       : nothing;
     // Shown as words (the Display Link's Text), the column reflows: a pinch is the size of everything, as in a text.
     return html`${head}${copies}${this.renderArrival()}<div class="to-column"><main class=${cls} ?data-spatial=${!p.reading} tabindex="0" aria-label=${p.title}>${this.main}</main></div>`;
