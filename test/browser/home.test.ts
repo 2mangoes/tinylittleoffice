@@ -93,6 +93,8 @@ async function openTemplates(shell: HTMLElement, app: string) {
   const tpl = shell.querySelector<HTMLElement>(`.to-app[aria-label="${app}"] to-templates`) as ToTemplates;
   tpl.show();
   await until(() => !!tpl.querySelector('dialog[open] [role=option] svg'));
+  // Measured in the site's own type: the self-hosted faces are loaded before a height is read.
+  await document.fonts.ready;
   return tpl;
 }
 /** Each preview against the heading's edge (the left, or the right in a right-to-left language) and its name's top. */
@@ -102,7 +104,8 @@ function previews(tpl: ToTemplates) {
   return [...tpl.dialog.querySelectorAll<HTMLElement>('[role=option]')].map((o) => {
     const thumb = o.querySelector('.to-thumb')!.getBoundingClientRect();
     const name = o.querySelector('.to-option-words > span')!.getBoundingClientRect();
-    return { edge: rtl ? h.right - thumb.right : thumb.left - h.left, top: thumb.top - name.top, long: (o.querySelector('small')?.getBoundingClientRect().height ?? 0) > thumb.height };
+    const blurb = o.querySelector('small')?.getBoundingClientRect().height ?? 0;
+    return { edge: rtl ? h.right - thumb.right : thumb.left - h.left, top: thumb.top - name.top, long: blurb > thumb.height, blurb, thumb: thumb.height };
   });
 }
 
@@ -116,7 +119,11 @@ for (const [w, h] of [
     try {
       const rows = previews(tpl);
       // A blurb taller than the preview is there to be beside (Cover letter's five lines on a phone).
-      if (w === 390) expect(rows.some((r) => r.long)).toBe(true);
+      if (w === 390)
+        expect(
+          rows.some((r) => r.long),
+          `no blurb taller than its preview: ${rows.map((r) => `${Math.round(r.blurb)}/${Math.round(r.thumb)}`).join(' ')}`,
+        ).toBe(true);
       // One column on a phone: every preview at the edge; two on a wide screen: the first column's.
       const edges = rows.map((r) => Math.round(r.edge));
       if (w === 390) expect(edges.every((e) => Math.abs(e) < 1)).toBe(true);
