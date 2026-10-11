@@ -34,12 +34,40 @@
   Content-Security-Policy: default-src 'self'; script-src 'self' {{scripts}}; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: {{img}}; font-src 'self'; connect-src 'self' data:; worker-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:; frame-ancestors *
   ! Cache-Control
   Cache-Control: no-cache, no-transform
-# For programs: the guide (/llms.txt), the API (/api.js, and the pieces of it under /api/) and the helper for
-# pages (/tinyoffice.js) from any origin.
+# For programs: the guides (/llms.txt, short; /llms-full.txt, whole; /llms/<app>.txt, an app each; the same at
+# /.well-known/llms.txt), the examples (/examples/<app>.json), the API (/api.js, and the pieces of it under /api/)
+# and the helper for pages (/tinyoffice.js) from any origin. The guides are plain text in UTF-8 and kept five
+# minutes, so an agent's second fetch is quick and a new guide is read within minutes of a deploy.
 /tinyoffice.js
   Access-Control-Allow-Origin: *
 /llms.txt
   Access-Control-Allow-Origin: *
+  ! Content-Type
+  Content-Type: text/plain; charset=utf-8
+  ! Cache-Control
+  Cache-Control: public, max-age=300
+/llms-full.txt
+  Access-Control-Allow-Origin: *
+  ! Content-Type
+  Content-Type: text/plain; charset=utf-8
+  ! Cache-Control
+  Cache-Control: public, max-age=300
+/llms/*
+  Access-Control-Allow-Origin: *
+  ! Content-Type
+  Content-Type: text/plain; charset=utf-8
+  ! Cache-Control
+  Cache-Control: public, max-age=300
+/.well-known/llms.txt
+  Access-Control-Allow-Origin: *
+  ! Content-Type
+  Content-Type: text/plain; charset=utf-8
+  ! Cache-Control
+  Cache-Control: public, max-age=300
+/examples/*
+  Access-Control-Allow-Origin: *
+  ! Cache-Control
+  Cache-Control: public, max-age=300
 /api.js
   Access-Control-Allow-Origin: *
 /api/*

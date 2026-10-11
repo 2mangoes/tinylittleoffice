@@ -1,7 +1,7 @@
 /**
- * The agent and sharing surface on the built site: /llms.txt and /api.js are served (and the API imports and
- * works in a page), a plain link becomes the packed one, the embed page shows the pages alone, and each app's
- * page names its own share card.
+ * The agent and sharing surface on the built site: /llms.txt (short), /llms-full.txt, the app pages, the examples
+ * and /api.js are served (and the API imports and works in a page, its examples too), a plain link becomes the
+ * packed one, the embed page shows the pages alone, and each app's page names its own share card.
  */
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
@@ -11,7 +11,13 @@ const axe = (page: import('@playwright/test').Page) => new AxeBuilder({ page }).
 test('/llms.txt and /api.js are served; the API makes a link that opens', async ({ page, request }) => {
   const llms = await request.get('/llms.txt');
   expect(llms.status()).toBe(200);
-  expect(await llms.text()).toContain('# Tiny Little Office links');
+  const short = await llms.text();
+  expect(short).toMatch(/^# Tiny Little Office\n/);
+  expect(short).toContain('llms-full.txt');
+  expect(await (await request.get('/llms-full.txt')).text()).toContain('# Tiny Little Office links');
+  expect(await (await request.get('/.well-known/llms.txt')).text()).toBe(short);
+  expect((await request.get('/llms/sheet.txt')).status()).toBe(200);
+  expect((await (await request.get('/examples/sheet.json')).json()).shapes[0]).toMatchObject({ id: 'money' });
   const api = await request.get('/api.js');
   expect(api.status()).toBe(200);
   expect(await api.text()).toMatch(/export\s*\{/);
@@ -19,8 +25,10 @@ test('/llms.txt and /api.js are served; the API makes a link that opens', async 
   const made = await page.evaluate(async () => {
     const api = await import(`${location.origin}/api.js`);
     const url: string = api.link('outline', '- [ ] Milk\n', { title: 'Shop', site: location.origin });
-    return { url, back: api.read(url).text, apps: (await api.apps()).length };
+    const [money] = await api.example('sheet', 'money');
+    return { url, back: api.read(url).text, apps: (await api.apps()).length, money: money.lint.length };
   });
+  expect(made.money).toBe(0);
   expect(made.back).toBe('---\ntitle: Shop\n---\n- [ ] Milk\n');
   expect(made.apps).toBe(10);
   await page.goto(made.url);

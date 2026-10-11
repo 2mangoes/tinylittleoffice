@@ -1,6 +1,6 @@
 import { defineConfig, loadEnv, type Plugin } from 'vite';
 import { createHash } from 'node:crypto';
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { copyFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { fillHeaders } from './scripts/headers.ts';
@@ -20,7 +20,7 @@ const fromSource = <T>(path: string): Promise<T> => import(pathToFileURL(resolve
  * written into _headers (public/_headers has the placeholders, scripts/headers.ts fills them); and which
  * build this is, dist/version.json (the commit, its tag and date, those hashes: scripts/version.ts). Each app's
  * page names its own share card (public/og/<id>.png, drawn by scripts/make-cards.ts) where there is one; dist/embed/index.html is the shell again, at the one address another site may frame (the embed
- * view, public/_headers).
+ * view, public/_headers). For agents, /.well-known/llms.txt is /llms.txt again and /examples/<app>.json each app's examples.
  */
 function afterBuild(site: string): Plugin {
   const attr = (s: string) => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;');
@@ -49,6 +49,12 @@ function afterBuild(site: string): Plugin {
         mkdirSync(resolve(dist, app.id), { recursive: true });
         writeFileSync(resolve(dist, app.id, 'index.html'), page);
       }
+      // For agents: the short guide where some look for it too, and each app's examples (packages/doc/examples, written
+      // by scripts/make-skill.ts) as static files, so an agent that can only fetch reads them.
+      mkdirSync(resolve(dist, '.well-known'), { recursive: true });
+      copyFileSync(resolve(dist, 'llms.txt'), resolve(dist, '.well-known', 'llms.txt'));
+      mkdirSync(resolve(dist, 'examples'), { recursive: true });
+      for (const app of apps()) copyFileSync(resolve(import.meta.dirname, 'packages/doc/examples', `${app.id}.json`), resolve(dist, 'examples', `${app.id}.json`));
       const hashes = pageScripts().map((code) => `'sha256-${createHash('sha256').update(code).digest('base64')}'`);
       writeFileSync(resolve(dist, '_headers'), fillHeaders(readFileSync(resolve(dist, '_headers'), 'utf8'), { scripts: hashes }));
       writeFileSync(resolve(dist, 'version.json'), versionJson(versionOf(gitFacts(import.meta.dirname), hashes)));

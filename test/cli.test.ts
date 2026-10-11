@@ -139,3 +139,37 @@ test('link --seal prints the link and, on a second line, the password the app ma
   expect(r.stderr).toBe('tinyoffice: The app makes the password; ask for one with seal.\n');
   expect(r.stdout).toBe('');
 });
+
+test('shapes, example and try: what an app reads, the smallest document of each shape, and a draft in one call', () => {
+  expect(run(['shapes', 'sheet']).split('\n')[0]).toMatch(/^money +a money column, /);
+  const venn = run(['example', 'diagram', 'venn']);
+  expect(venn).toMatch(/^## venn: a Venn diagram\n/);
+  for (const part of [
+    '```\n---\nkind: venn\n---\n',
+    'As a link: https://tinylittleoffice.com/diagram/#doc=',
+    'The JSON:\n\n{\n  "head": {',
+    'The lint: clean',
+    'The measures:\n\n{\n  "app": "diagram"',
+  ])
+    expect(venn).toContain(part);
+  const bad = spawnSync(process.execPath, [CLI, 'example', 'sheet', 'nope'], { encoding: 'utf8' });
+  expect([bad.status, bad.stderr]).toStrictEqual([2, 'tinyoffice: sheet has no shape "nope"; its shapes: money, formula, bar, line, pie, sankey, model, lock, date, check, percent, option\n']);
+  const draft = spawnSync(process.execPath, [CLI, 'try', 'diagram', '-', '--json'], { input: '---\nkind: venn\n---\n- Cats: 2,000 cases\n- Dogs: walks\n', encoding: 'utf8' });
+  expect(draft.status).toBe(1);
+  const t = JSON.parse(draft.stdout);
+  expect([t.lint[0].kind, t.measure.app, t.json.head.kind]).toStrictEqual(['comma-number', 'diagram', 'venn']);
+  expect(spawnSync(process.execPath, [CLI, 'try', 'write', '-'], { input: '# Hello\n', encoding: 'utf8' }).stdout).toMatch(/^The lint: clean\n\nThe measures:/);
+});
+
+test('example, run for every app and every shape, is clean every time', { timeout: 120_000 }, () => {
+  const ids = run(['apps'])
+    .trim()
+    .split('\n')
+    .map((l) => l.split(' ')[0]);
+  expect(ids).toContain('diagram');
+  for (const a of ids) {
+    const all = JSON.parse(run(['example', a, '--json'])) as { id: string; lint: unknown[]; text: string }[];
+    expect(all.length, a).toBeGreaterThan(0);
+    for (const x of all) expect(x.lint, `${a} ${x.id}`).toStrictEqual([]);
+  }
+});

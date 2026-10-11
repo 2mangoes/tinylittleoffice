@@ -26,14 +26,40 @@
  *                                                     failing formulas, and whether the link fits in a short
  *                                                     link (short: {fits, over}), as JSON
  *        (read --text, lint and measure also take <app> <file>, or <app> and stdin)
+ * In the published package (npm: tinylittleoffice) it is dist/tinyoffice.js, this file bundled with all it
+ * imports (vite.cli.config.ts), since Node strips no types under node_modules. What it says to `help` is USAGE.
  */
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
-import { apps, compare, file, fromJson, fromTlo, lint, link, markdown, measure, PASSWORD_REFUSED, plain, read, templates, toJson } from '../../src/api.ts';
+import { apps, compare, example, file, fromJson, fromTlo, lint, link, markdown, measure, PASSWORD_REFUSED, plain, read, shapes, templates, toJson, tryDraft } from '../../src/api.ts';
 import { slug } from '../../src/kit/draw.ts';
 
-const USAGE = readFileSync(new URL(import.meta.url), 'utf8')
-  .match(/\/\*\*\n([\s\S]*?)\*\//)![1]
-  .replace(/^ \* ?/gm, '');
+const USAGE = `tinyoffice (or tinylittleoffice, as npx runs it):
+
+  tinyoffice apps                                   every app: id, name, what for
+  tinyoffice templates <app>                        an app's templates: id and name
+  tinyoffice template <app> <id>                    a template's document (TLO)
+  tinyoffice link <app> [file]                      a link for a document (a file, or stdin)
+  tinyoffice link <file.tlo>                        a link for a .tlo file (its app is in its head)
+       --title T  --by B  --view pdf|show|embed|…  --display  --lang ht  --plain  --site URL
+  tinyoffice read <link>                            the document's TLO text (--json: app, view, title, by too)
+  tinyoffice read --text <link|file.tlo>            what it says, as Markdown: what a screen reader reads
+  tinyoffice file <link> [--as tlo|md|csv|…] [--out path|-]
+                                                    the document as a file, named after its title (.tlo by default)
+  tinyoffice diff <link> <link>                     what the second changed, block by block (exit 1 when they differ)
+  tinyoffice lint <link|file.tlo> [--json]          what the eye would have seen, a line a finding:
+                                                    app · slide or block · the finding · what to do (exit 1 on one)
+  tinyoffice measure <link|file.tlo>                the sizes the layouts chose, page by page, and each table's
+                                                    failing formulas, and whether the link fits in a short
+                                                    link (short: {fits, over}), as JSON
+       (read --text, lint and measure also take <app> <file>, or <app> and stdin)
+
+  tinyoffice shapes <app>                           the shapes an app reads, a line each: id, name, what for
+  tinyoffice example <app> [shape] [--json]         the smallest document that shows a shape, its JSON (the
+                                                    kernel's document), and what lint and measure say of it;
+                                                    every shape of the app's without one
+  tinyoffice try <app> <file|-> [--json]            a draft in one call: its lint, its measures and its JSON
+                                                    (exit 1 when the lint finds something)
+`;
 
 // Piped into `head`, the rest is not wanted: stop quietly.
 process.stdout.on('error', (e: NodeJS.ErrnoException) => (e.code === 'EPIPE' ? process.exit(0) : die(e.message)));
@@ -47,6 +73,7 @@ for (let i = 0; i < rest.length; i++) {
   else args.push(a);
 }
 const str = (k: string) => (typeof flags[k] === 'string' ? (flags[k] as string) : undefined);
+const findingLine = (f: { app: string; at: string; words: string; fix: string }) => `${f.app} · ${f.at} · ${f.words} · ${f.fix}`;
 const out = (s: string) => process.stdout.write(s.endsWith('\n') ? s : s + '\n');
 function die(message: string, code = 2): never {
   process.stderr.write(`tinyoffice: ${message}\n`);
@@ -130,13 +157,50 @@ async function main() {
       const { app, text } = documentOf();
       const found = await lint(app, text);
       if (flags.json) out(JSON.stringify({ findings: found }, null, 2));
-      else for (const f of found) out(`${f.app} · ${f.at} · ${f.words} · ${f.fix}`);
+      else for (const f of found) out(findingLine(f));
       if (found.length) process.exitCode = 1;
       return;
     }
     case 'measure': {
       const { app, text } = documentOf();
       return out(JSON.stringify(await measure(app, text), null, 2));
+    }
+    case 'shapes':
+      for (const sh of await shapes(args[0] ?? die('which app? tinyoffice apps lists them'))) out(`${sh.id.padEnd(10)} ${sh.name}, ${sh.for}`);
+      return;
+    case 'example': {
+      const all = await example(args[0] ?? die('which app? tinyoffice apps lists them'), args[1]);
+      if (flags.json) return out(JSON.stringify(all, null, 2));
+      for (const x of all) {
+        const fence = x.text.includes('```') ? '````' : '```';
+        out(
+          [
+            `## ${x.id}: ${x.name}`,
+            x.for,
+            `${fence}\n${x.text}${fence}`,
+            `As a link: ${x.link}`,
+            `The JSON:\n\n${JSON.stringify(x.json, null, 2)}`,
+            `The lint: ${x.lint.length ? '\n' + x.lint.map(findingLine).join('\n') : 'clean'}`,
+            `The measures:\n\n${JSON.stringify(x.measure, null, 2)}\n`,
+          ].join('\n\n'),
+        );
+      }
+      return;
+    }
+    case 'try': {
+      const app = args[0] ?? die('which app? tinyoffice apps lists them');
+      const t = await tryDraft(app, words(args[1] ?? die('which file? (- for stdin)')));
+      if (flags.json) out(JSON.stringify(t, null, 2));
+      else
+        out(
+          [
+            `The lint: ${t.lint.length ? '\n' + t.lint.map(findingLine).join('\n') : 'clean'}`,
+            `The measures:\n\n${JSON.stringify(t.measure, null, 2)}`,
+            `The JSON:\n\n${JSON.stringify(t.json, null, 2)}`,
+          ].join('\n\n'),
+        );
+      if (t.lint.length) process.exitCode = 1;
+      return;
     }
     case '':
     case 'help':

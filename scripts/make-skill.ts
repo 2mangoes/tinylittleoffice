@@ -1,11 +1,18 @@
 /**
- * The agent skill, skill/tinyoffice/SKILL.md, and the same guide for programs at /llms.txt (public/llms.txt),
- * written from the template skill/tinyoffice/SKILL.tpl.md and the registry: the apps, their templates and
- * files come from their definitions, so the guide cannot name an app, a template or a format the site does
- * not have. Every example is one of an app's own templates, and one that the kernel would not write back
- * byte for byte (write(parse(x)) === x), or whose plain link would not read back as itself, stops the build
- * of the guide: it cannot teach a shape the apps do not keep. `npm run skill` writes both; with --check it
- * writes nothing and fails when either is stale (test/lints.test.ts runs that).
+ * The agent skill, skill/tinyoffice/SKILL.md, and the guides for programs on the site, all written from the one
+ * template skill/tinyoffice/SKILL.tpl.md and the registry: the apps, their templates and files come from their
+ * definitions, so no guide can name an app, a template or a format the site does not have. Every example is one
+ * of an app's own templates, and one that the kernel would not write back byte for byte (write(parse(x)) === x),
+ * or whose plain link would not read back as itself, stops the build of the guide: it cannot teach a shape the
+ * apps do not keep.
+ *
+ *   skill/tinyoffice/SKILL.md       the skill, whole
+ *   public/llms-full.txt            the same, without the skill's front matter
+ *   public/llms.txt                 the short guide an agent fetches first, under 6 KB (makeShort)
+ *   public/llms/<app>.txt           a page on one app, under 4 KB: its words and rules, its shapes, an example
+ *   packages/doc/examples/<app>.json  each shape's example (scripts/shapes.ts), served at /examples/<app>.json
+ *
+ * `npm run skill` writes them; with --check it writes nothing and fails when one is stale (test/lints.test.ts runs that).
  *
  *   {{apps}}                the apps, a row each: id, name, what for
  *   {{tpl:<app>:<id>}}      that template: its TLO, and its plain link
@@ -21,9 +28,12 @@ import { apps, appOf } from '../src/kit/apps.ts';
 import { FUNCTIONS, parse, write } from '../src/doc/index.ts';
 import { plainLink, readPlain } from '../src/kit/plain.ts';
 import { skillCommands } from './commands.ts';
+import { examplesOf, type Example } from './shapes.ts';
 import { generate } from './generated.ts';
 
 const SITE = 'https://tinylittleoffice.com/';
+/** The API's line, as the short guide gives it. */
+export const API_LINE = `import { link, read, lint } from '${SITE}api.js'`;
 const at = (p: string) => fileURLToPath(new URL(`../${p}`, import.meta.url));
 
 function app(id: string) {
@@ -46,10 +56,10 @@ function example(all: Templates, id: string, tpl: string): string {
   return `${t.name}:\n\n${fence}\n${t.doc}${fence}\n\nAs a link: <${url}>`;
 }
 
-export async function makeSkill(): Promise<string> {
-  const all: Templates = new Map(await Promise.all(apps().map(async (a) => [a.id, await a.templates()] as const)));
+/** The template's placeholders filled: the skill whole, or a piece of it (an app's section, for its own page). */
+function fill(text: string, all: Templates): string {
   const table = ['| App | Name | For |', '| --- | --- | --- |', ...apps().map((a) => `| \`${a.id}\` | ${a.name} | ${a.blurb} |`)].join('\n');
-  return readFileSync(at('skill/tinyoffice/SKILL.tpl.md'), 'utf8')
+  return text
     .replace('{{apps}}', table)
     .replace('{{functions}}', FUNCTIONS.map(([name]) => `\`${name}\``).join(', '))
     .replace('{{commands}}', () => skillCommands())
@@ -69,10 +79,139 @@ export async function makeSkill(): Promise<string> {
     .replace(/ +\n/g, '\n');
 }
 
-/** /llms.txt: the same guide, without the skill's front matter. */
+const TEMPLATE = () => readFileSync(at('skill/tinyoffice/SKILL.tpl.md'), 'utf8');
+const templatesOf = async (): Promise<Templates> => new Map(await Promise.all(apps().map(async (a) => [a.id, await a.templates()] as const)));
+
+export async function makeSkill(): Promise<string> {
+  return fill(TEMPLATE(), await templatesOf());
+}
+
+/** /llms-full.txt: the same guide, without the skill's front matter. */
 export const makeLlms = (skill: string): string => skill.replace(/^---\n[\s\S]*?\n---\n\n/, '');
 
-if (process.argv[1] === fileURLToPath(import.meta.url)) {
-  const skill = await makeSkill();
-  generate({ 'skill/tinyoffice/SKILL.md': skill, 'public/llms.txt': makeLlms(skill) }, 'npm run skill');
+/** A `## ` section of the guide, its heading and words, up to the next. */
+function section(guide: string, heading: string): string {
+  const from = guide.indexOf(`\n## ${heading}\n`);
+  if (from < 0) throw new Error(`make-skill: the guide has no section "${heading}"`);
+  const to = guide.indexOf('\n## ', from + 1);
+  return guide.slice(from + 1, to < 0 ? undefined : to + 1);
 }
+
+/** Every app's examples, a shape each (scripts/shapes.ts), cut from its templates. */
+export async function makeExamples(all?: Templates): Promise<Map<string, Example[]>> {
+  const t = all ?? (await templatesOf());
+  return new Map(apps().map((a) => [a.id, examplesOf(a.id, t.get(a.id)!)] as const));
+}
+
+/**
+ * /llms.txt: the guide an agent reads first, under 6 KB, the long part a fetch away. Above its first `##`: what
+ * Tiny Little Office is (the template's first two sentences), the plain link (a document made with nothing but
+ * percent-encoding), the API's line, the three commands that give examples, and where the rest is. Then one
+ * example per app as a plain link, and the template's three rules, word for word.
+ */
+export async function makeShort(skill: string, examples?: Map<string, Example[]>): Promise<string> {
+  const ex = examples ?? (await makeExamples());
+  const guide = makeLlms(skill);
+  const intro = /^# .*\n\n(.*?\. .*?\.)(?: |\n)/.exec(guide)![1];
+  return [
+    '# Tiny Little Office',
+    '',
+    intro,
+    '',
+    'The document is TLO (Markdown with a few additions), percent-encoded after `#doc=`:',
+    '',
+    '```',
+    `${SITE}<app>/#doc=<percent-encoded TLO>`,
+    '```',
+    '',
+    `\`<app>\` is one of ${apps()
+      .map((a) => `\`${a.id}\``)
+      .join(', ')}. \`&title=\` names it and \`&by=\` says who made it. Keep the link under 2,000 characters and keep to the shapes shown here: a link written by hand is checked by nothing.`,
+    '',
+    `With a runtime: \`${API_LINE}\` in a browser, Deno or Bun; \`npx tinylittleoffice\` in Node. To learn a shape by example:`,
+    '',
+    '- `npx tinylittleoffice shapes <app>`: what the app reads, a line a shape',
+    '- `npx tinylittleoffice example <app> [shape]`: the smallest document that shows it, its JSON, its lint and measures',
+    '- `npx tinylittleoffice try <app> <file|->`: a draft’s lint, measures and JSON in one call',
+    '',
+    `Fetch only what you need: ${SITE}llms/<app>.txt is a page on one app; ${SITE}examples/<app>.json every shape of it, as a document, a link and JSON.`,
+    '',
+    '## One example per app',
+    '',
+    ...apps().map((a) => {
+      const e = ex.get(a.id)![0];
+      return `- \`${a.id}\` ${a.name}, ${e.name}: <${e.link}> (more: ${SITE}llms/${a.id}.txt)`;
+    }),
+    '',
+    section(guide, 'Three rules agents break first').trim(),
+    '',
+    '## More',
+    '',
+    `The whole description: ${SITE}llms-full.txt`,
+    '',
+  ].join('\n');
+}
+
+/** An app's own section of the template (`### <id>: …`), its examples left out: the words and the rules. */
+function appSection(id: string): string {
+  const tpl = TEMPLATE();
+  const from = tpl.search(new RegExp(`^### ${id}: `, 'm'));
+  if (from < 0) throw new Error(`make-skill: the template has no section "### ${id}:"`);
+  const rest = tpl.slice(from);
+  const to = rest.slice(4).search(/^##/m);
+  return rest
+    .slice(0, to < 0 ? undefined : to + 4)
+    .split('\n')
+    .filter((l) => !/^\{\{tpl:/.test(l))
+    .join('\n')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
+}
+
+/** /llms/<app>.txt: one app, under 4 KB: what it reads (the template's words on it, its rules), its shapes, and an example. */
+export function makeAppPage(id: string, all: Templates, ex: Example[]): string {
+  const a = app(id);
+  const e = ex[0];
+  const fence = e.text.includes('```') ? '````' : '```';
+  return [
+    `# ${a.name} (\`${id}\`), Tiny Little Office`,
+    '',
+    `${a.blurb.replace(/\.$/, '')}. A document is a link: ${SITE}${id}/#doc=<percent-encoded TLO>`,
+    '',
+    fill(appSection(id), all).replace(/^### .*\n\n/, ''),
+    '',
+    '## Shapes',
+    '',
+    ...ex.map((x) => `- \`${x.id}\` ${x.name}, ${x.for}`),
+    '',
+    `## Example: ${e.name}`,
+    '',
+    fence,
+    e.text + fence,
+    '',
+    `As a link: <${e.link}>`,
+    '',
+    `Every shape as a document, a link and JSON: ${SITE}examples/${id}.json. The whole description: ${SITE}llms-full.txt`,
+    '',
+  ].join('\n');
+}
+
+/** packages/doc/examples/<app>.json: the app's shapes and their examples, for the API, the command line and the site. */
+export const examplesJson = (id: string, ex: Example[]): string => `${JSON.stringify({ app: id, name: app(id).name, shapes: ex }, null, 2)}\n`;
+
+/** Every file `npm run skill` writes, by its path from the root. */
+export async function skillFiles(): Promise<Record<string, string>> {
+  const all = await templatesOf();
+  const skill = fill(TEMPLATE(), all);
+  const ex = await makeExamples(all);
+  return {
+    'skill/tinyoffice/SKILL.md': skill,
+    'public/llms-full.txt': makeLlms(skill),
+    'public/llms.txt': await makeShort(skill, ex),
+    ...Object.fromEntries(
+      apps().flatMap((a) => [[`public/llms/${a.id}.txt`, makeAppPage(a.id, all, ex.get(a.id)!)] as const, [`packages/doc/examples/${a.id}.json`, examplesJson(a.id, ex.get(a.id)!)] as const]),
+    ),
+  };
+}
+
+if (process.argv[1] === fileURLToPath(import.meta.url)) generate(await skillFiles(), 'npm run skill');

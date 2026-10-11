@@ -144,7 +144,7 @@ export function schemaOf(model: string): string {
     $id: 'https://raw.githubusercontent.com/aboard-io/tinylittleoffice/main/packages/doc/schema/tlo.schema.json',
     title: 'A Tiny Little Office document',
     description:
-      'The kernel’s document (src/doc/model.ts) as JSON: what toJson gives and fromJson takes (src/api.ts; `tinyoffice json`). Written from the types by scripts/schema.ts; never edit it by hand.',
+      'The kernel’s document (src/doc/model.ts) as JSON: what toJson gives and fromJson takes (src/api.ts; `tinyoffice json`). Written from the types by scripts/schema.ts (so a change is made there).',
     $ref: '#/$defs/Doc',
     $defs: Object.fromEntries(
       Object.keys(defs)

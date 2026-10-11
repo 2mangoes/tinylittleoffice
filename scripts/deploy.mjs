@@ -15,10 +15,13 @@
  *
  * What was last deployed is kept in .wrangler/deployed (this checkout's own record; with none, a change
  * counts as on screen). Wrangler deploys `wrangler.jsonc` (dist/ as static assets, with dist/_headers) and
- * `tinier/wrangler.jsonc`, with the account it is logged in to.
+ * `tinier/wrangler.jsonc`, with the account it is logged in to. Then the command line goes to npm (publishCli),
+ * when packages/doc's version is new and .env holds NPM_TOKEN.
  */
 import { execSync } from 'node:child_process';
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 
 const args = new Set(process.argv.slice(2));
 const known = ['--dry-run', '--visual', '--full'];
@@ -82,6 +85,50 @@ if (dry) {
 }
 run('the site', 'npx wrangler deploy');
 run('the shortener', 'npx wrangler deploy -c tinier/wrangler.jsonc');
+publishCli();
 mkdirSync('.wrangler', { recursive: true });
 writeFileSync(RECORD, head + '\n');
+
+/**
+ * The command line: packages/doc, published to npm as `tinylittleoffice` when its version is not the one npm has.
+ * The token is NPM_TOKEN in this checkout's .env (gitignored), handed to npm as NODE_AUTH_TOKEN through a .npmrc in
+ * a folder of its own that is removed after, never the home directory's and never in a log. With no token the step
+ * says so and the deploy goes on: the site does not wait for npm. A version with a part after "-" (1.0.0-next) is
+ * published under the dist-tag "next", as npm asks of a prerelease, so `npx tinylittleoffice` stays on the last release.
+ */
+function publishCli() {
+  const what = 'the command line, on npm';
+  process.stdout.write(`\n▸ ${what}\n`);
+  const { version } = JSON.parse(readFileSync('packages/doc/package.json', 'utf8'));
+  let published = '';
+  try {
+    published = execSync('npm view tinylittleoffice version', { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim();
+  } catch {
+    published = ''; // Not on npm yet.
+  }
+  if (published === version) return console.log(`  ✓ ${what}: ${version} is published already`);
+  const token = existsSync('.env')
+    ? /^NPM_TOKEN=(.+)$/m
+        .exec(readFileSync('.env', 'utf8'))?.[1]
+        .trim()
+        .replace(/^["']|["']$/g, '')
+    : undefined;
+  if (!token) return console.log(`  ✗ ${what}: no NPM_TOKEN in .env, so ${version} is not published (npm has ${published || 'none'}); the deploy goes on`);
+  const dir = mkdtempSync(join(tmpdir(), 'tlo-npm-'));
+  try {
+    writeFileSync(join(dir, '.npmrc'), '//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}\n');
+    execSync('npm run -s build:cli', { stdio: 'inherit' });
+    const tag = version.includes('-') ? ` --tag ${version.split('-')[1].split('.')[0]}` : '';
+    execSync(`npm publish --access public --provenance=false${tag}`, {
+      cwd: 'packages/doc',
+      stdio: 'inherit',
+      env: { ...process.env, NODE_AUTH_TOKEN: token, NPM_CONFIG_USERCONFIG: join(dir, '.npmrc') },
+    });
+    console.log(`  ✓ ${what}: ${version} published (npm had ${published || 'none'})`);
+  } catch {
+    console.log(`  ✗ ${what}: npm publish failed (above); the site is deployed`);
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+}
 console.log(`\nDeployed ${head.slice(0, 7)}.`);

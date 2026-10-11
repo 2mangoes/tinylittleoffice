@@ -107,5 +107,5 @@ export function editingDoc(text = readFileSync(at('docs/editing.md'), 'utf8')): 
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const skill = await makeSkill();
-  generate({ 'docs/editing.md': editingDoc(), 'skill/tinyoffice/SKILL.md': skill, 'public/llms.txt': makeLlms(skill) }, 'npm run commands');
+  generate({ 'docs/editing.md': editingDoc(), 'skill/tinyoffice/SKILL.md': skill, 'public/llms-full.txt': makeLlms(skill) }, 'npm run commands');
 }

@@ -18,6 +18,11 @@ function build(opts: { inline?: string } = {}) {
   put('write/index.html', '<!doctype html><title>Word Processor</title>');
   put('assets/main-abc.js', 'export {}');
   put('theme.js', '//');
+  put('llms.txt', '# Tiny Little Office');
+  put('.well-known/llms.txt', '# Tiny Little Office');
+  put('llms-full.txt', '# Tiny Little Office links');
+  put('llms/sheet.txt', '# Spreadsheet');
+  put('examples/sheet.json', '{}');
   put('version.json', JSON.stringify({ commit: 'a'.repeat(40), tag: '', built: '2026-10-10T00:00:00Z', csp: { scripts: [hash(SCRIPT).slice(1, -1)] } }));
   put(
     '_headers',
@@ -59,6 +64,18 @@ test('version.json: missing, the wrong shape, or hashes that are not the policyâ
   expect(checkBuild(dist, [SCRIPT])).toContain('version.json is not { commit, tag, built, csp: { scripts } }');
   rmSync(join(dist, 'version.json'));
   expect(checkBuild(dist, [SCRIPT])).toContain('version.json is missing or not JSON');
+});
+
+test('the guides for agents: both, the well-known copy the same, and each appâ€™s examples beside its page', () => {
+  build();
+  rmSync(join(dist, 'llms-full.txt'));
+  writeFileSync(join(dist, '.well-known/llms.txt'), 'old');
+  rmSync(join(dist, 'examples/sheet.json'));
+  expect(checkBuild(dist, [SCRIPT])).toEqual([
+    'llms-full.txt is missing: the guide for agents (npm run skill)',
+    '.well-known/llms.txt is not llms.txt',
+    'examples/sheet.json is missing: llms/sheet.txt sends agents to it',
+  ]);
 });
 
 test('the type: a font a stylesheet names or a page preloads is in the build, its licence beside it', () => {

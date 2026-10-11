@@ -20,5 +20,7 @@ test/commands-covered.json
 test/doc/corpus/*.json
 # The document's JSON Schema, written from the kernel's types by scripts/schema.ts.
 packages/doc/schema/
+# Each app's examples, as scripts/make-skill.ts writes them.
+packages/doc/examples/
 # A built site, bytes and all: the chunk-budget lint weighs it.
 test/fixtures/lints/built/

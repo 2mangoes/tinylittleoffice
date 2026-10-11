@@ -12,7 +12,11 @@
  *   toJson(read(url).text);  // the kernel's document as JSON (packages/doc/schema/tlo.schema.json); fromJson gives the text back
  *
  * The apps' definitions (their names and templates) are a lazy import: `apps()` and `templates()` are
- * asynchronous so that the rest stays small.
+ * asynchronous so that the rest stays small (budgets.json holds /api.js to its size). So are the examples:
+ * `shapes(app)` lists what an app reads, `example(app, shape)` gives the smallest document that shows a shape
+ * (cut from the app's templates by scripts/make-skill.ts into packages/doc/examples/<app>.json), and
+ * `tryDraft(app, text)` checks a draft in one call. In Node, which imports no module from a URL, the npm package
+ * `tinylittleoffice` is this module (packages/doc).
  */
 import { parse as parseText, plainText, textMarkdown, textOf, write as writeDoc, withHead, type Doc } from './doc/index.ts';
 import { docJson, jsonDoc } from './doc/json.ts';
@@ -237,4 +241,50 @@ export async function file(app: string, text: string, ext: string, ctx: { title?
   const format = (await formats(app)).includes(ext) ? formatOf(def, ext) : undefined;
   if (format) return format.build(text, { def, title: ctx.title ?? def.title(text), link: ctx.link ?? link(app, text) });
   throw new Error(`${def.name} makes no .${ext} without a browser: ${(await formats(app)).join(', ')}`);
+}
+
+/** A shape an app reads (a heading, a money column, a Venn, a title slide): its id, what it is called and what it is for. */
+export interface Shape {
+  id: string;
+  name: string;
+  for: string;
+}
+/** A shape's example: the smallest document cut from the app's templates that shows it, its plain link and its JSON (the kernel's document), with what the lint and the measures say of it. */
+export interface Example extends Shape {
+  /** Where it was cut from: "template budget". */
+  from: string;
+  text: string;
+  link: string;
+  json: Doc;
+  lint: import('./lint.ts').Finding[];
+  measure: import('./lint.ts').Measure;
+}
+type Kept = Omit<Example, 'lint' | 'measure'>;
+
+/** An app's examples as packages/doc/examples/<app>.json keeps them (written by scripts/make-skill.ts; the site serves them at /examples/<app>.json). */
+async function kept(app: string): Promise<Kept[]> {
+  if (!APP.test(app)) throw new Error(`Not an app id: "${app}"`);
+  try {
+    return ((await import(`../packages/doc/examples/${app}.json`, { with: { type: 'json' } })) as { default: { shapes: Kept[] } }).default.shapes;
+  } catch {
+    throw new Error(`No app "${app}"`);
+  }
+}
+
+/** The shapes an app reads, a line each: what to ask `example` for. */
+export async function shapes(app: string): Promise<Shape[]> {
+  return (await kept(app)).map(({ id, name, for: f }) => ({ id, name, for: f }));
+}
+
+/** The smallest document that shows a shape, its JSON, and what the lint and the measures say of it; every shape of the app's without one. Throws for a shape the app does not read, naming those it does. */
+export async function example(app: string, shape?: string): Promise<Example[]> {
+  const all = await kept(app);
+  const some = shape ? all.filter((x) => x.id === shape) : all;
+  if (!some.length) throw new Error(`${app} has no shape "${shape}"; its shapes: ${all.map((x) => x.id).join(', ')}`);
+  return Promise.all(some.map(async (x) => ({ ...x, lint: await lint(app, x.text), measure: await measure(app, x.text) })));
+}
+
+/** A draft in one call: what the lint finds, what the layouts measured, and the document as JSON (the kernel's). */
+export async function tryDraft(app: string, text: string): Promise<{ lint: import('./lint.ts').Finding[]; measure: import('./lint.ts').Measure; json: Doc }> {
+  return { lint: await lint(app, text), measure: await measure(app, text), json: parseText(text) };
 }

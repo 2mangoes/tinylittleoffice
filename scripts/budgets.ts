@@ -12,6 +12,9 @@
  *   languages  each language's strings, loaded when chosen (English is the keys themselves and ships in the code)
  *   editors    each app's editor chunk and its commands chunk, loaded when it opens, and `open`: all that opening
  *              it adds to the home page's load (the chunks and stylesheets the two imports preload, less home's)
+ *   api        /api.js, the API for programs and agents (vite.api.config.ts), its entry alone: what an import of it
+ *              fetches first; the apps' definitions, the lint and the examples are chunks of their own under /api/,
+ *              loaded when asked for, so an agent's import is one small fetch (under 25 KB, Paul's "speed is so important")
  *   fonts      the type, IBM Plex (dist/fonts/, from public/fonts/): every woff2 file's bytes together, as served (a
  *              woff2 is compressed already). Not a chunk and never all loaded at once: a page loads the faces its
  *              words need. A tripwire against a face added without meaning it.
@@ -37,6 +40,7 @@ export interface Sizes {
   templates: Record<string, number>;
   languages: Record<string, number>;
   editors: Record<string, { editor: number; commands: number; open: number }>;
+  api: number;
   fonts: number;
 }
 
@@ -113,6 +117,7 @@ export function measure(dist: string): Sizes {
         return [id, { editor: weigh(editor), commands: weigh(commands), open: sum(opened) }];
       }),
     ),
+    api: existsSync(join(dist, 'api.js')) ? gz(readFileSync(join(dist, 'api.js'))) : 0,
     fonts: fontBytes(join(dist, 'fonts')),
   };
 }

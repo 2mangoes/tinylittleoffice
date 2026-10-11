@@ -55,11 +55,15 @@ make is listed in [docs/network.md](docs/network.md).
 ## For agents
 
 An agent makes a document by writing its link, with no code: `https://tinylittleoffice.com/<app>/#doc=…` holds
-the document as text, in TLO, which is Markdown with a few additions. The guide to every app's format, with one
-of its templates as each example, is the skill, [skill/tinyoffice/SKILL.md](skill/tinyoffice/SKILL.md), served
-to any agent as [/llms.txt](public/llms.txt). A program can import the site's API, `/api.js`, to write and read
-links, check a document and make its files; [packages/doc](packages/doc/README.md) is the same from the command
-line.
+the document as text, in TLO, which is Markdown with a few additions. An agent reads [/llms.txt](public/llms.txt)
+first: under 6 KB, it gives the link's shape, the API's line and one example per app, and points to a page per
+app (`/llms/<app>.txt`) and each app's examples as JSON (`/examples/<app>.json`), so an agent that can only fetch
+takes one small file at a time. The whole guide, every app's format with its templates as examples, is
+[/llms-full.txt](public/llms-full.txt), the skill [skill/tinyoffice/SKILL.md](skill/tinyoffice/SKILL.md) without
+its front matter. A program can import the site's API, `/api.js` (in a browser, Deno or Bun), to write and read
+links, check a document and make its files; in Node, `npx tinylittleoffice` is the same from the command line, and
+`npx tinylittleoffice example <app> [shape]` prints the smallest document that shows a shape, with its JSON, its
+lint and its measures ([packages/doc](packages/doc/README.md), the npm package `tinylittleoffice`).
 
 ## For developers
 

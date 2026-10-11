@@ -2,8 +2,23 @@
 
 A document is a link: the whole thing is packed into the part of the URL after `#`, which no server ever sees.
 `tinyoffice` makes those links from files and files from those links, over `src/api.ts`, the module the site
-serves at `/api.js`. Node 24 runs it as it is, with no build: in a clone, `npm ci`, then
-`node packages/doc/tinyoffice.ts …` (or `npm run tinyoffice -- …`, or `npm link` here for a `tinyoffice` command).
+serves at `/api.js`.
+
+**An agent's quick start**, with Node 24 and nothing installed:
+
+```sh
+npx tinylittleoffice shapes sheet                # what a sheet reads: a money column, a formula, a bar chart…
+npx tinylittleoffice example sheet money         # the smallest sheet with a money column, its JSON, its lint and measures
+npx tinylittleoffice try deck draft.tlo          # a draft's lint, measures and JSON in one call (- for stdin)
+npx tinylittleoffice link deck draft.tlo         # its link, once the lint is clean
+```
+
+The npm package `tinylittleoffice` is this folder: `dist/tinyoffice.js` (the command line, as both
+`tinylittleoffice` and `tinyoffice`) and `dist/api.js` (`import { link, read, lint } from 'tinylittleoffice'` in
+Node), each built by `npm run build:cli` from the source here (vite.cli.config.ts: one file with everything it
+needs, no dependencies), with every app's examples in `examples/<app>.json`. The deploy publishes it when its
+version is new. In a clone, Node 24 runs the source as it is, with no build: `npm ci`, then
+`node packages/doc/tinyoffice.ts …` (or `npm run tinyoffice -- …`).
 
 ```sh
 tinyoffice apps                                  # every app, with a line on each
@@ -21,7 +36,15 @@ tinyoffice file <link>                           # <title>.tlo; --as md|json|csv
 tinyoffice diff <old link> <new link>            # what the second changed, block by block; exit 1 when they differ
 tinyoffice lint talk.tlo                         # what the eye would have seen, a line a finding; exit 1 on one
 tinyoffice measure <link>                        # the sizes the layouts chose, slide by slide, and failing formulas, as JSON
+tinyoffice shapes <app>                          # the shapes an app reads, a line each
+tinyoffice example <app> [shape]                 # the smallest document that shows a shape (every shape without one)
+tinyoffice try <app> <file|->                    # lint, measure and the JSON of a draft; exit 1 on a finding
 ```
+
+The examples are cut by `npm run skill` (scripts/make-skill.ts, scripts/shapes.ts) from the apps' own templates:
+for each shape, the smallest document that still shows it, comes back from the kernel byte for byte and lints
+clean. The site serves the same files at `https://tinylittleoffice.com/examples/<app>.json`, for an agent that
+can only fetch.
 
 Check a document with `lint` and `measure`, never by opening it: they read the same layout code that draws the
 pages (a connection naming no thing, a comma splitting a number, a label too long for its box, bullets under a
@@ -35,7 +58,7 @@ drawn by a browser: open the link with `view=pdf` (or `#/v1/<app>.pdf/…`) to h
 ## In code
 
 ```js
-import { link, plain, read, text, compare, encode, decode, parse, write, toJson, fromJson, apps, templates, file, lint, measure } from 'https://tinylittleoffice.com/api.js';
+import { link, plain, read, text, compare, encode, decode, parse, write, toJson, fromJson, apps, templates, file, lint, measure, shapes, example, tryDraft } from 'https://tinylittleoffice.com/api.js';
 
 const url = link('sheet', 'Item | Cost:money\n--- | ---\nRent | 1200\n', { title: 'Budget', by: 'planner-agent' });
 read(url);               // { app: 'sheet', view: '', text: '---\ntitle: Budget\nby: planner-agent\n---\n…', title, by, display }
@@ -47,6 +70,10 @@ await text(url);         // '# Budget\n\nItem | Cost\n--- | ---\nRent | $1,200.0
 await templates('deck'); // [{ id, name, blurb, text }…]
 await lint('deck', text); // [{ app, at: 'slide 3', block, kind, words, fix }…]; [] when clean
 await measure('deck', text); // { app, length, words, headings, slides: [{ slide, title: { px, lines, cut }, body: { px, over }, hidden }…] }
+await shapes('sheet');   // [{ id: 'money', name: 'a money column', for }…]
+await example('sheet', 'money'); // [{ id, name, for, from, text, link, json, lint, measure }]
+await tryDraft('deck', text); // { lint, measure, json }
 ```
 
-The guide to every app's format is the skill, `skill/tinyoffice/SKILL.md`, served as `/llms.txt`.
+The guide an agent reads first is `/llms.txt` (short); the guide to every app's format is the skill,
+`skill/tinyoffice/SKILL.md`, served as `/llms-full.txt`, with a page per app at `/llms/<app>.txt`.

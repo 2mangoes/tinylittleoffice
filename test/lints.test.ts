@@ -90,20 +90,25 @@ describe('generated outputs are fresh: each generating script, run with --check,
   });
   test.each([
     ['network-doc', 'docs/network.md, public/network.html'],
-    ['commands', 'docs/editing.md’s tables, the skill and /llms.txt'],
-    ['make-skill', 'the skill and /llms.txt'],
+    ['commands', 'docs/editing.md’s tables, the skill and /llms-full.txt'],
+    ['make-skill', 'the skill, /llms.txt, /llms-full.txt, the app pages and the examples'],
     ['dependencies', 'docs/dependencies.md'],
     ['exports-doc', 'docs/exports.md'],
     ['schema', 'packages/doc/schema/tlo.schema.json'],
-  ])('scripts/%s.ts --check (%s)', (script) => {
-    let said = '';
-    try {
-      execFileSync(process.execPath, [join(ROOT, 'scripts', `${script}.ts`), '--check'], { cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
-    } catch (e) {
-      said = String((e as { stderr?: string }).stderr || e);
-    }
-    expect(said).toBe('');
-  });
+  ])(
+    'scripts/%s.ts --check (%s)',
+    (script) => {
+      let said = '';
+      try {
+        execFileSync(process.execPath, [join(ROOT, 'scripts', `${script}.ts`), '--check'], { cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
+      } catch (e) {
+        said = String((e as { stderr?: string }).stderr || e);
+      }
+      expect(said).toBe('');
+      // make-skill cuts every app's examples from its templates and lints each: seconds, more on a busy machine.
+    },
+    60_000,
+  );
 });
 
 // The build in dist/ is held to them by scripts/budgets.ts, the build's last step, and by test/budgets.test.ts.
@@ -128,7 +133,7 @@ describe('chunk budgets: the built chunks within budgets.json', () => {
   });
   test('budgets.json has a budget for every chunk it weighs', () => {
     const budgets = readBudgets();
-    for (const k of ['main', 'apps', 'home', 'icons', 'iconsFull', 'fonts'] as const) expect(typeof budgets[k], k).toBe('number');
+    for (const k of ['main', 'apps', 'home', 'icons', 'iconsFull', 'api', 'fonts'] as const) expect(typeof budgets[k], k).toBe('number');
     expect(Object.keys(budgets.editors ?? {}).sort()).toStrictEqual(
       tree
         .filter((m) => /^src\/apps\/[^/]+\/editor\.ts$/.test(m.path))

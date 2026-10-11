@@ -1,0 +1,604 @@
+{
+  "app": "deck",
+  "name": "Presentation Builder",
+  "shapes": [
+    {
+      "id": "bullets",
+      "name": "a slide of bullets",
+      "for": "the usual slide: ## Headline, then - bullets",
+      "from": "template farm",
+      "text": "## Prices\n\n- Apples and pears: $2.25 a pound\n- Pumpkins: $8 each, any size\n",
+      "link": "https://tinylittleoffice.com/deck/#doc=%23%23+Prices%0A%0A-+Apples+and+pears%3A+%242.25+a+pound%0A-+Pumpkins%3A+%248+each%2C+any+size",
+      "json": {
+        "head": {},
+        "blocks": [
+          {
+            "k": "h",
+            "level": 2,
+            "runs": [
+              {
+                "t": "Prices"
+              }
+            ]
+          },
+          {
+            "k": "li",
+            "depth": 0,
+            "runs": [
+              {
+                "t": "Apples and pears: $2.25 a pound"
+              }
+            ]
+          },
+          {
+            "k": "li",
+            "depth": 0,
+            "runs": [
+              {
+                "t": "Pumpkins: $8 each, any size"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "title",
+      "name": "a title slide",
+      "for": "the cover: ## Headline {.title}, the line under it its subtitle",
+      "from": "template speakers",
+      "text": "## Lukas Brandt {.title}\n\n- Attendee · Kiel Ferries\n",
+      "link": "https://tinylittleoffice.com/deck/#doc=%23%23+Lukas+Brandt+%7B.title%7D%0A%0A-+Attendee+%C2%B7+Kiel+Ferries",
+      "json": {
+        "head": {},
+        "blocks": [
+          {
+            "k": "h",
+            "level": 2,
+            "a": {
+              "cls": [
+                "title"
+              ]
+            },
+            "runs": [
+              {
+                "t": "Lukas Brandt"
+              }
+            ]
+          },
+          {
+            "k": "li",
+            "depth": 0,
+            "runs": [
+              {
+                "t": "Attendee · Kiel Ferries"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "slides",
+      "name": "slides",
+      "for": "more than one: --- between them",
+      "from": "template speakers",
+      "text": "## Grace Mensah\n\n- Volunteer · ask me anything\n\n---\n\n## Lukas Brandt\n\n- Attendee · Kiel Ferries\n",
+      "link": "https://tinylittleoffice.com/deck/#doc=%23%23+Grace+Mensah%0A%0A-+Volunteer+%C2%B7+ask+me+anything%0A%0A---%0A%0A%23%23+Lukas+Brandt%0A%0A-+Attendee+%C2%B7+Kiel+Ferries",
+      "json": {
+        "head": {},
+        "blocks": [
+          {
+            "k": "h",
+            "level": 2,
+            "runs": [
+              {
+                "t": "Grace Mensah"
+              }
+            ]
+          },
+          {
+            "k": "li",
+            "depth": 0,
+            "runs": [
+              {
+                "t": "Volunteer · ask me anything"
+              }
+            ]
+          },
+          {
+            "k": "hr"
+          },
+          {
+            "k": "h",
+            "level": 2,
+            "runs": [
+              {
+                "t": "Lukas Brandt"
+              }
+            ]
+          },
+          {
+            "k": "li",
+            "depth": 0,
+            "runs": [
+              {
+                "t": "Attendee · Kiel Ferries"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "two",
+      "name": "two columns",
+      "for": "a comparison: {.two}, | alone between the columns",
+      "from": "template lesson",
+      "text": "## :moon: The eight phases {.two}\n\n- Waxing gibbous\n\n|\n\n- Waning crescent\n",
+      "link": "https://tinylittleoffice.com/deck/#doc=%23%23+%3Amoon%3A+The+eight+phases+%7B.two%7D%0A%0A-+Waxing+gibbous%0A%0A%7C%0A%0A-+Waning+crescent",
+      "json": {
+        "head": {},
+        "blocks": [
+          {
+            "k": "h",
+            "level": 2,
+            "a": {
+              "cls": [
+                "two"
+              ]
+            },
+            "runs": [
+              {
+                "t": "",
+                "ic": "moon"
+              },
+              {
+                "t": " The eight phases"
+              }
+            ]
+          },
+          {
+            "k": "li",
+            "depth": 0,
+            "runs": [
+              {
+                "t": "Waxing gibbous"
+              }
+            ]
+          },
+          {
+            "k": "p",
+            "runs": [
+              {
+                "t": "|"
+              }
+            ]
+          },
+          {
+            "k": "li",
+            "depth": 0,
+            "runs": [
+              {
+                "t": "Waning crescent"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "icon",
+      "name": "an icon slide",
+      "for": "bullets beside one big icon: ## :icon: Headline {.icon}",
+      "from": "template wedding",
+      "text": "## :book: How they met {.icon}\n\n- Theo let her have it. She made him read it anyway.\n",
+      "link": "https://tinylittleoffice.com/deck/#doc=%23%23+%3Abook%3A+How+they+met+%7B.icon%7D%0A%0A-+Theo+let+her+have+it.+She+made+him+read+it+anyway.",
+      "json": {
+        "head": {},
+        "blocks": [
+          {
+            "k": "h",
+            "level": 2,
+            "a": {
+              "cls": [
+                "icon"
+              ]
+            },
+            "runs": [
+              {
+                "t": "",
+                "ic": "book"
+              },
+              {
+                "t": " How they met"
+              }
+            ]
+          },
+          {
+            "k": "li",
+            "depth": 0,
+            "runs": [
+              {
+                "t": "Theo let her have it. She made him read it anyway."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "notes",
+      "name": "speaker notes",
+      "for": "what to say, not shown: > lines",
+      "from": "template conference",
+      "text": "## :heart: Obrigada\n\n- Questions, please\n\n> Leave this up through the questions.\n",
+      "link": "https://tinylittleoffice.com/deck/#doc=%23%23+%3Aheart%3A+Obrigada%0A%0A-+Questions%2C+please%0A%0A%3E+Leave+this+up+through+the+questions.",
+      "json": {
+        "head": {},
+        "blocks": [
+          {
+            "k": "h",
+            "level": 2,
+            "runs": [
+              {
+                "t": "",
+                "ic": "heart"
+              },
+              {
+                "t": " Obrigada"
+              }
+            ]
+          },
+          {
+            "k": "li",
+            "depth": 0,
+            "runs": [
+              {
+                "t": "Questions, please"
+              }
+            ]
+          },
+          {
+            "k": "quote",
+            "runs": [
+              {
+                "t": "Leave this up through the questions."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "chart",
+      "name": "a chart slide",
+      "for": "numbers drawn: a table with {chart=bar} (line, pie)",
+      "from": "template pitch",
+      "text": "## :trending-up: Traction\n\nMonth | Bags a month\n--- | ---\nAug | 1730\nSep | 2480\n{chart=line}\n",
+      "link": "https://tinylittleoffice.com/deck/#doc=%23%23+%3Atrending-up%3A+Traction%0A%0AMonth+%7C+Bags+a+month%0A---+%7C+---%0AAug+%7C+1730%0ASep+%7C+2480%0A%7Bchart%3Dline%7D",
+      "json": {
+        "head": {},
+        "blocks": [
+          {
+            "k": "h",
+            "level": 2,
+            "runs": [
+              {
+                "t": "",
+                "ic": "trending-up"
+              },
+              {
+                "t": " Traction"
+              }
+            ]
+          },
+          {
+            "k": "table",
+            "cols": [
+              {
+                "name": "Month",
+                "type": "text"
+              },
+              {
+                "name": "Bags a month",
+                "type": "text"
+              }
+            ],
+            "rows": [
+              [
+                "Aug",
+                "1730"
+              ],
+              [
+                "Sep",
+                "2480"
+              ]
+            ],
+            "a": {
+              "kv": {
+                "chart": "line"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "theme",
+      "name": "a theme",
+      "for": "colors and type: theme: midnight in the head",
+      "from": "template conference",
+      "text": "---\ntheme: ocean\n---\n## :heart: Obrigada\n\n- Questions, please\n",
+      "link": "https://tinylittleoffice.com/deck/#doc=---%0Atheme%3A+ocean%0A---%0A%23%23+%3Aheart%3A+Obrigada%0A%0A-+Questions%2C+please",
+      "json": {
+        "head": {
+          "theme": "ocean"
+        },
+        "blocks": [
+          {
+            "k": "h",
+            "level": 2,
+            "runs": [
+              {
+                "t": "",
+                "ic": "heart"
+              },
+              {
+                "t": " Obrigada"
+              }
+            ]
+          },
+          {
+            "k": "li",
+            "depth": 0,
+            "runs": [
+              {
+                "t": "Questions, please"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "poster",
+      "name": "a poster",
+      "for": "one page to print: format: poster",
+      "from": "template lost",
+      "text": "---\nformat: poster\n---\n## :cat: Lost cat: Pepper\n\n- Call or text Sam: (617) 555-0164\n",
+      "link": "https://tinylittleoffice.com/deck/#doc=---%0Aformat%3A+poster%0A---%0A%23%23+%3Acat%3A+Lost+cat%3A+Pepper%0A%0A-+Call+or+text+Sam%3A+%28617%29+555-0164",
+      "json": {
+        "head": {
+          "format": "poster"
+        },
+        "blocks": [
+          {
+            "k": "h",
+            "level": 2,
+            "runs": [
+              {
+                "t": "",
+                "ic": "cat"
+              },
+              {
+                "t": " Lost cat: Pepper"
+              }
+            ]
+          },
+          {
+            "k": "li",
+            "depth": 0,
+            "runs": [
+              {
+                "t": "Call or text Sam: (617) 555-0164"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "zine",
+      "name": "a zine",
+      "for": "eight pages folded from one sheet: format: zine",
+      "from": "template zine",
+      "text": "---\nformat: zine\n---\n## Doing nothing\n\n---\n\n## :heart: Until next time\n",
+      "link": "https://tinylittleoffice.com/deck/#doc=---%0Aformat%3A+zine%0A---%0A%23%23+Doing+nothing%0A%0A---%0A%0A%23%23+%3Aheart%3A+Until+next+time",
+      "json": {
+        "head": {
+          "format": "zine"
+        },
+        "blocks": [
+          {
+            "k": "h",
+            "level": 2,
+            "runs": [
+              {
+                "t": "Doing nothing"
+              }
+            ]
+          },
+          {
+            "k": "hr"
+          },
+          {
+            "k": "h",
+            "level": 2,
+            "runs": [
+              {
+                "t": "",
+                "ic": "heart"
+              },
+              {
+                "t": " Until next time"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "booklet",
+      "name": "a booklet",
+      "for": "eight to twenty pages: format: booklet",
+      "from": "template program",
+      "text": "---\nformat: booklet\n---\n## Thank you\n\n---\n\n## Silent Night\n",
+      "link": "https://tinylittleoffice.com/deck/#doc=---%0Aformat%3A+booklet%0A---%0A%23%23+Thank+you%0A%0A---%0A%0A%23%23+Silent+Night",
+      "json": {
+        "head": {
+          "format": "booklet"
+        },
+        "blocks": [
+          {
+            "k": "h",
+            "level": 2,
+            "runs": [
+              {
+                "t": "Thank you"
+              }
+            ]
+          },
+          {
+            "k": "hr"
+          },
+          {
+            "k": "h",
+            "level": 2,
+            "runs": [
+              {
+                "t": "Silent Night"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "brochure",
+      "name": "a brochure",
+      "for": "six panels, folded in three: format: brochure",
+      "from": "template farm",
+      "text": "---\nformat: brochure\n---\n## The barn\n\n---\n\n## :map-pin: Find us\n",
+      "link": "https://tinylittleoffice.com/deck/#doc=---%0Aformat%3A+brochure%0A---%0A%23%23+The+barn%0A%0A---%0A%0A%23%23+%3Amap-pin%3A+Find+us",
+      "json": {
+        "head": {
+          "format": "brochure"
+        },
+        "blocks": [
+          {
+            "k": "h",
+            "level": 2,
+            "runs": [
+              {
+                "t": "The barn"
+              }
+            ]
+          },
+          {
+            "k": "hr"
+          },
+          {
+            "k": "h",
+            "level": 2,
+            "runs": [
+              {
+                "t": "",
+                "ic": "map-pin"
+              },
+              {
+                "t": " Find us"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "comic",
+      "name": "a comic",
+      "for": "a panel a bullet: - :icon: What is said | caption",
+      "from": "template umbrella",
+      "text": "---\nformat: comic\n---\n## The door\n\n- :coffee: Tea? | He has never been inside.\n- :heart: Keep it. | I have three.\n",
+      "link": "https://tinylittleoffice.com/deck/#doc=---%0Aformat%3A+comic%0A---%0A%23%23+The+door%0A%0A-+%3Acoffee%3A+Tea%3F+%7C+He+has+never+been+inside.%0A-+%3Aheart%3A+Keep+it.+%7C+I+have+three.",
+      "json": {
+        "head": {
+          "format": "comic"
+        },
+        "blocks": [
+          {
+            "k": "h",
+            "level": 2,
+            "runs": [
+              {
+                "t": "The door"
+              }
+            ]
+          },
+          {
+            "k": "li",
+            "depth": 0,
+            "runs": [
+              {
+                "t": "",
+                "ic": "coffee"
+              },
+              {
+                "t": " Tea? | He has never been inside."
+              }
+            ]
+          },
+          {
+            "k": "li",
+            "depth": 0,
+            "runs": [
+              {
+                "t": "",
+                "ic": "heart"
+              },
+              {
+                "t": " Keep it. | I have three."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "badges",
+      "name": "name badges",
+      "for": "a page a person: format: badges",
+      "from": "template badges",
+      "text": "---\nformat: badges\n---\n## Priya Nair\n\n---\n\n## Tom Aldous\n",
+      "link": "https://tinylittleoffice.com/deck/#doc=---%0Aformat%3A+badges%0A---%0A%23%23+Priya+Nair%0A%0A---%0A%0A%23%23+Tom+Aldous",
+      "json": {
+        "head": {
+          "format": "badges"
+        },
+        "blocks": [
+          {
+            "k": "h",
+            "level": 2,
+            "runs": [
+              {
+                "t": "Priya Nair"
+              }
+            ]
+          },
+          {
+            "k": "hr"
+          },
+          {
+            "k": "h",
+            "level": 2,
+            "runs": [
+              {
+                "t": "Tom Aldous"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

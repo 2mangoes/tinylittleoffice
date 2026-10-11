@@ -105,16 +105,17 @@ test('no old name and no path of this machine anywhere in the tree (docs/history
   expect(`https://github.com/${REPO}`).toBe(URL);
 });
 
-test('the package says what it is and where it lives, and stays unpublished: a site, not a package', () => {
+test('the packages say what they are and where they live: the site stays unpublished, the command line is the npm package', () => {
   for (const path of ['package.json', 'packages/doc/package.json']) {
     const p = JSON.parse(read(path));
-    expect(p.private, path).toBe(true);
+    expect(p.private, path).toBe(path === 'package.json' ? true : undefined);
     expect(p.license, path).toBe('MIT');
     expect(p.homepage, path).toBe('https://tinylittleoffice.com');
     expect(p.repository, path).toEqual({ type: 'git', url: URL, ...(path === 'package.json' ? {} : { directory: 'packages/doc' }) });
     expect(p.bugs, path).toEqual({ url: `${URL}/issues` });
   }
   expect(JSON.parse(read('package.json')).name).toBe('tinylittleoffice');
+  expect(JSON.parse(read('packages/doc/package.json')).name).toBe('tinylittleoffice');
   expect(JSON.parse(read('package-lock.json')).name).toBe('tinylittleoffice');
 });
 

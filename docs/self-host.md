@@ -91,6 +91,12 @@ That runs the checks we run before shipping (the types, the strings, the unit an
 what the build wrote, and the smoke run on the built site when something on screen changed), then deploys
 the two Workers in turn. `npm run deploy -- --dry-run` checks and deploys nothing.
 
+Last, the deploy publishes the command line to npm, as `tinylittleoffice` (`npx tinylittleoffice lint …`), when
+`packages/doc/package.json` has a version npm does not and the checkout's `.env` holds `NPM_TOKEN` (a granular
+access token of the npm account that owns the package). Without one it says so and goes on: the site does not
+wait for npm. A copy of your own needs no package of its own: `npx tinylittleoffice link … --site https://your.site/`
+makes links to your copy.
+
 Open your site, write something, make a short link and open it in another browser.
 
 ## 5. Telling copies apart

@@ -6,6 +6,8 @@
  *   - dist/_headers has the scripts' hashes in place of {{scripts}}: every script the apps' pages carry
  *     (src/kit/page.ts) and every inline script of a built page, or the browser would refuse to run it.
  *   - dist/version.json has the shape of src/kit/version.ts and the same script hashes as the policy.
+ *   - the guides for agents: llms.txt (and the same at .well-known/llms.txt), llms-full.txt, and each app's
+ *     examples beside its page (examples/<app>.json for llms/<app>.txt).
  *   - the type: every font a built stylesheet names, and every font a page preloads, is a file of the build, with
  *     IBM's licence beside them (fonts/LICENSE.txt), so no page asks for a face that is not there.
  *
@@ -64,6 +66,15 @@ export function checkBuild(dist: string, scripts: string[] = []): string[] {
       for (const m of page.matchAll(/<script(?![^>]*\bsrc=)(?![^>]*type="application\/(?:ld\+)?json")[^>]*>([\s\S]*?)<\/script>/g))
         if (m[1].trim() && !allowed(hash(m[1]))) problems.push(`${f} has an inline script the policy does not allow`);
     }
+  }
+  // The guides for agents (scripts/make-skill.ts): the short one, also at /.well-known/llms.txt, the whole one, and for
+  // each app's page its examples.
+  for (const f of ['llms.txt', 'llms-full.txt', '.well-known/llms.txt']) if (!built.includes(f)) problems.push(`${f} is missing: the guide for agents (npm run skill)`);
+  if (built.includes('llms.txt') && built.includes('.well-known/llms.txt') && readFileSync(at('llms.txt'), 'utf8') !== readFileSync(at('.well-known/llms.txt'), 'utf8'))
+    problems.push('.well-known/llms.txt is not llms.txt');
+  for (const f of built.filter((b) => /^llms\/[a-z]+\.txt$/.test(b))) {
+    const json = `examples/${f.slice(5, -4)}.json`;
+    if (!built.includes(json)) problems.push(`${json} is missing: ${f} sends agents to it`);
   }
   // The type: what the stylesheets name and the pages preload is in the build, and its licence with it.
   const fonts = new Set<string>();
