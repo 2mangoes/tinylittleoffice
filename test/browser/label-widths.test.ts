@@ -89,7 +89,6 @@ const RAISED: { key: string; slot: Slot; langs: string[]; why: string }[] = [
   { key: 'Chart', slot: 'bar', langs: ['de', 'fr', 'nl', 'pl'], why: 'Diagramm, Graphique, Grafiek, Wykres: the glossary’s word for a chart, beside an English word Plex sets narrow' },
   { key: 'Time zone', slot: 'bar', langs: ['fr'], why: 'fuseau horaire is the only term' },
   // Russian: its words run a third longer than English.
-  { key: 'Effects', slot: 'bar', langs: ['ru'], why: 'Russian words are about a third longer than English; the glossary’s term has no shorter form with the meaning' },
   { key: 'Time zone', slot: 'bar', langs: ['ru'], why: 'Russian words are about a third longer than English; the glossary’s term has no shorter form with the meaning' },
   { key: 'Connect', slot: 'bar', langs: ['ru'], why: 'Russian words are about a third longer than English; the glossary’s term has no shorter form with the meaning' },
   { key: 'Draw as a family tree', slot: 'menu', langs: ['ru'], why: 'Russian words are about a third longer than English; the glossary’s term has no shorter form with the meaning' },
@@ -228,7 +227,8 @@ test('the slots are found: the bar commands that show their words, the menus’ 
   for (const id of ['outline.connect', 'draw.mode', 'draw.background', 'diagram.kind', 'sheet.chart', 'anim.draw', 'anim.move', 'anim.fx', 'cal.zone']) expect(wordedIds, id).toContain(id);
   const bar = measures.filter((m) => m.slot === 'bar');
   const menu = measures.filter((m) => m.slot === 'menu');
-  expect(bar.length).toBeGreaterThanOrEqual(7);
+  // (Six since the Animator's Effects left its bar for the chosen shape's sliders, round eighteen.)
+  expect(bar.length).toBeGreaterThanOrEqual(6);
   expect(menu.length).toBeGreaterThan(50);
   for (const m of menu) {
     // At 390px a menu is at most 374px, and its padding, an icon and keys leave the words less.

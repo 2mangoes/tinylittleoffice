@@ -353,6 +353,54 @@ export function setLength(doc: Doc, frames: number, fps: number): Op[] {
   ];
 }
 
+/**
+ * The frames rearranged: new frame n shows what old frame src[n] showed. Each shape's own keys go with their frames,
+ * and where a frame's old neighbour is not its new one (a frame cut out, put in twice, or moved) the shape is keyed
+ * there as it was, so every frame shows exactly what it did and the straight lines between keys run on unchanged.
+ */
+function reframe(doc: Doc, src: number[]): Op[] {
+  const v = readAnim(doc);
+  const last = src.length - 1;
+  const keys = v.keys.map((ks, i) => {
+    if (!ks.length) return ks;
+    const out: Key[] = [];
+    src.forEach((from, n) => {
+      const own = ks.find((k) => k.t === from);
+      const edge = (from > 0 && (n === 0 || src[n - 1] !== from - 1)) || (from < v.frames - 1 && (n === last || src[n + 1] !== from + 1));
+      if (own) out.push({ ...own, t: n });
+      else if (edge) out.push(tidyKey({ ...stateAt(v, i, from), t: n }));
+    });
+    return out;
+  });
+  return [...headOps(doc, src.length, v.fps), ...setKeys(doc, keys)];
+}
+const frameList = (doc: Doc) => Array.from({ length: readAnim(doc).frames }, (_, i) => i);
+
+/** Frame f shown twice (the motion a frame longer); [] at the longest. */
+export function duplicateFrame(doc: Doc, f: number): Op[] {
+  const src = frameList(doc);
+  if (src.length >= MAX_FRAMES || !(f in src)) return [];
+  src.splice(f, 0, f);
+  return reframe(doc, src);
+}
+
+/** Frame f cut out (the motion a frame shorter); [] at the shortest. */
+export function removeFrame(doc: Doc, f: number): Op[] {
+  const src = frameList(doc);
+  if (src.length <= MIN_FRAMES || !(f in src)) return [];
+  src.splice(f, 1);
+  return reframe(doc, src);
+}
+
+/** Frame f moved a frame earlier (by -1) or later (by 1), changing places with its neighbour; [] past either end. */
+export function moveFrame(doc: Doc, f: number, by: -1 | 1): Op[] {
+  const src = frameList(doc);
+  const g = f + by;
+  if (!(f in src) || !(g in src)) return [];
+  [src[f], src[g]] = [src[g], src[f]];
+  return reframe(doc, src);
+}
+
 /** How it repeats: a `head` op ([] when it is so already). */
 export function setLoop(doc: Doc, loop: Loop): Op[] {
   const value = loopText(loop);

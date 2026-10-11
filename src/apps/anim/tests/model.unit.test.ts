@@ -4,6 +4,7 @@ import { applyAll, invertAll, parse, write, type Doc, type Op } from '../../../d
 import {
   depthDim,
   drawingOf,
+  duplicateFrame,
   duplicateShape,
   duplicateShapes,
   follow,
@@ -12,11 +13,13 @@ import {
   keysOf,
   loopOf,
   loosen,
+  moveFrame,
   motionOf,
   pasteMotion,
   playhead,
   readAnim,
   redraw,
+  removeFrame,
   removeKey,
   removeShape,
   removeShapes,
@@ -385,4 +388,45 @@ test('turn: a keyed turn about the upright axis, written as u<deg> and read back
   expect(transformOf(v.shapes[1], v.shapes, { ...restKey(0), u: 60, s: 2 })).toContain('scale(1 2)');
   // The self-playing SVG samples a turning shape every frame.
   expect(animPage(v).svg.split('keyTimes="').at(-1)!.split('"')[0].split(';')).toHaveLength(24);
+});
+
+test('the frames of the filmstrip: duplicated, deleted and moved, every other frame shows what it showed; at the limits nothing', () => {
+  /** Every frame of the new motion shows the old one's frame src[n], each shape within a pixel (the keys are whole numbers). */
+  const shows = (text: string, ops: (doc: Doc) => Op[], src: number[]) => {
+    const was = readAnim(parse(text));
+    const now = readAnim(parse(after(text, ops)));
+    expect(now.frames).toBe(src.length);
+    src.forEach((from, n) =>
+      now.shapes.forEach((_, i) => {
+        const [a, b] = [stateAt(now, i, n), stateAt(was, i, from)];
+        for (const k of ['dx', 'dy', 'z', 'r'] as const) expect(Math.abs(a[k] - b[k]), `frame ${n} (was ${from}), shape ${i}, ${k}`).toBeLessThanOrEqual(1);
+        expect(Math.abs(a.s - b.s)).toBeLessThanOrEqual(0.1);
+        expect(a.fx).toBe(b.fx);
+      }),
+    );
+  };
+  const range = (n: number) => Array.from({ length: n }, (_, i) => i);
+  shows(LIFT, (d) => duplicateFrame(d, 5), [...range(6), 5, ...range(18).map((i) => i + 6)]);
+  shows(LIFT, (d) => duplicateFrame(d, 23), [...range(24), 23]);
+  shows(
+    LIFT,
+    (d) => removeFrame(d, 0),
+    range(23).map((i) => i + 1),
+  );
+  shows(LIFT, (d) => removeFrame(d, 10), [...range(10), ...range(13).map((i) => i + 11)]);
+  shows(LIFT, (d) => removeFrame(d, 23), range(23));
+  shows(LIFT, (d) => moveFrame(d, 5, 1), [...range(5), 6, 5, ...range(17).map((i) => i + 7)]);
+  shows(LIFT, (d) => moveFrame(d, 23, -1), [...range(22), 23, 22]);
+  // The last frame twice: its keys copied, nothing else written.
+  expect(keysTable(after(LIFT, (d) => duplicateFrame(d, 23)))).toBe(
+    'Shape | Keys\n--- | ---\n0 | 0,0,0,0,1,0; 23,0,-80,0,1,0,i; 24,0,-80,0,1,0,i\n1 | 0,0,0,0,1,0; 23,200,-200,80,1,-30,d; 24,200,-200,80,1,-30,d\n',
+  );
+  expect(after(LIFT, (d) => duplicateFrame(d, 23))).toMatch(/^---\nframes: 25\n/);
+  // Past the ends, and at the limits of the length: nothing.
+  expect(moveFrame(parse(LIFT), 0, -1)).toEqual([]);
+  expect(moveFrame(parse(LIFT), 23, 1)).toEqual([]);
+  expect(removeFrame(parse(LIFT.replace('frames: 24', 'frames: 2').replace(/; 23,/g, '; 1,')), 0)).toEqual([]);
+  expect(duplicateFrame(parse(LIFT.replace('frames: 24', 'frames: 120')), 3)).toEqual([]);
+  // A drawing that does not move: only the length changes.
+  expect(after(LIFT.replace(/\nShape \| Keys[\s\S]*$/, ''), (d) => removeFrame(d, 3))).toMatch(/^---\nframes: 23\nfps: 8\n---\nKind/);
 });

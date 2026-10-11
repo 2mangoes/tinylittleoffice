@@ -768,7 +768,6 @@ export default {
   'Moments': 'Moments', // same
   'Move': 'Déplacer',
   'Neon': 'Neon', // same
-  'Nothing here yet: switch to Draw and draw something.': 'Rien ici pour l’instant : passez à Dessin et dessinez quelque chose.',
   'Pause': 'Pause', // same
   'Play': 'Lire',
   'Pixel art is made in the Drawing Tool; the Animator moves shapes.': 'Le pixel art se fait dans l’Outil de dessin ; l’Animateur anime les formes.',
@@ -778,15 +777,23 @@ export default {
   'Size': 'Taille',
   'Spin': 'Rotation',
   'Stage: {alt}. Arrow keys move the shape in hand (or the time), comma and period step a frame, Space plays, K keeps a key.': 'Scène : {alt}. Les flèches déplacent la forme choisie (ou le temps), virgule et point avancent d’une image, Espace lit, K garde une image clé.',
-  'Tap a shape, then drag it to where it should be at this moment.': 'Touchez une forme, puis glissez-la où elle doit être à ce moment.',
   'The shapes in hand': 'Les formes choisies',
   'Time': 'Temps',
   'Wobble': 'Vacillement',
   '{now} s of {all} s': '{now} s sur {all} s',
+  'Settings': 'Réglages',
+  'This frame': 'Cette image',
+  'Duplicate this frame': 'Dupliquer cette image',
+  'A frame earlier': 'Une image plus tôt',
+  'A frame later': 'Une image plus tard',
+  'Delete this frame': 'Supprimer cette image',
+  'Draw the shapes; Move sets them going.': 'Dessinez les formes ; Déplacer les met en mouvement.',
+  'Nothing here yet: draw something first.': 'Rien ici pour l’instant : dessinez d’abord quelque chose.',
+  'Tap a shape, then drag it to where it goes.': 'Touchez une forme, puis glissez-la là où elle va.',
+  'Drag it to where it goes at {s} s.': 'Glissez-la là où elle va à {s} s.',
 
   'Anything from the Drawing Tool, moving: position, depth, size, spin and turn over time, with effects for memes.': 'Tout ce qui vient de l’Outil de dessin, en mouvement : position, profondeur, taille, rotation et retournement dans le temps, avec des effets pour les mèmes.',
   'Back and forth': 'Aller-retour',
-  'Drag to move it at {s} s; depth, size, spin and turn below; K keeps it here.': 'Glissez pour le déplacer à {s} s ; profondeur, taille, rotation et retournement dessous ; K le garde ici.',
   'Forward, then back': 'En avant, puis en arrière',
   'Frames': 'Images',
   'Frames a second': 'Images par seconde',

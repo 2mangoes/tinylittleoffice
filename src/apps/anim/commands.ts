@@ -1,17 +1,18 @@
 /**
- * The Animator's commands (kit/commands.ts), its editor the context: the bar (Play or Pause, Effects ▾), the mode (Draw
- * or Move), the repeat ▾, the bar under the shapes in hand (§5's order, for a motion: add a key here, remove this key
+ * The Animator's commands (kit/commands.ts), its editor the context: the bar (Play or Pause, Settings), the chosen shape's
+ * Effects ▾ (beside its sliders), the mode (Draw or Move, one control in the row above the bar), the repeat ▾ (in Settings), the frame in hand's menu in the
+ * filmstrip (duplicate, delete, a frame earlier or later), the bar under the shapes in hand (§5's order, for a motion: add a key here, remove this key
  * | edit the words, duplicate | copy, cut, paste | delete), and the stage's keys in Move mode (docs/editing.md §8:
  * Space plays, "," and "." step a frame, Home and End, K keys the shapes in hand, the arrows nudge them, Mod+arrows
  * size them, with none in hand Left and Right step a frame, Escape stops the playing and then lets the shapes go,
  * Mod+A, Mod+D, Enter edits the words, Delete). In Draw mode the keys are the Drawing Tool's.
  */
-import { ClipboardPaste, Copy, Key, PenTool, Play, Repeat, Scissors, Sparkles, Tag } from 'lucide';
+import { ArrowLeft, ArrowRight, ClipboardPaste, Copy, CopyPlus, Ellipsis, Key, PenTool, Play, Repeat, Scissors, Settings2, Sparkles, Tag } from 'lucide';
 import { register, type Command, commandsOf } from '../../kit/commands.ts';
 import { t } from '../../kit/i18n.ts';
 import { UI } from '../../kit/icons.ts';
 import { isLink } from '../draw/model.ts';
-import { EFFECTS, hasKey, setLoop, stateAt, type Loop } from './model.ts';
+import { EFFECTS, MAX_FRAMES, MIN_FRAMES, hasKey, setLoop, stateAt, type Loop } from './model.ts';
 import type { ToAnimEditor } from './editor.ts';
 
 type A = ToAnimEditor;
@@ -55,7 +56,7 @@ const ANIM: Command<A>[] = [
     pressed: (a) => a.playing,
     does: (a) => a.toggle(),
   }),
-  cmd('fx', 'Effects', { icon: Sparkles, menu: 'fx', where: ['bar'], when: moving, does: () => undefined }),
+  cmd('fx', 'Effects', { icon: Sparkles, menu: 'fx', where: ['in-doc'], when: moving, does: () => undefined }),
   ...EFFECTS.map((f) =>
     cmd(`fx.${f.letter}`, FX_NAMES[f.letter], {
       where: ['menu:fx'],
@@ -64,6 +65,12 @@ const ANIM: Command<A>[] = [
       does: (a) => a.toggleFx(f.letter),
     }),
   ),
+  cmd('settings', 'Settings', { icon: Settings2, hint: 'Length, speed and repeat', where: ['bar'], takesFocus: true, when: moving, does: (a) => a.openSettings() }),
+  cmd('frame', 'This frame', { icon: Ellipsis, menu: 'frame', where: ['in-doc'], when: moving, does: () => undefined }),
+  cmd('frame.duplicate', 'Duplicate this frame', { icon: CopyPlus, where: ['menu:frame'], disabled: (a) => a.view.frames >= MAX_FRAMES, does: (a) => a.duplicateFrame() }),
+  cmd('frame.earlier', 'A frame earlier', { icon: ArrowLeft, where: ['menu:frame'], disabled: (a) => a.frame <= 0, does: (a) => a.moveFrame(-1) }),
+  cmd('frame.later', 'A frame later', { icon: ArrowRight, where: ['menu:frame'], disabled: (a) => a.frame >= a.view.frames - 1, does: (a) => a.moveFrame(1) }),
+  cmd('frame.delete', 'Delete this frame', { icon: UI.trash, where: ['menu:frame'], disabled: (a) => a.view.frames <= MIN_FRAMES, does: (a) => a.removeFrame() }),
   cmd('draw', 'Draw', { icon: PenTool, where: ['drawer'], document: true, pressed: (a) => !moving(a), does: (a) => a.setMode('draw') }),
   cmd('move', 'Move', { icon: Play, where: ['drawer'], document: true, pressed: moving, does: (a) => a.setMode('move') }),
   cmd('loop', (a) => loopName(a?.view.loop ?? 'forever'), { icon: Repeat, menu: 'loop', where: ['drawer'], document: true, when: moving, does: () => undefined }),

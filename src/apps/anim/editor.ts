@@ -8,21 +8,25 @@
  * the words, duplicate, copy, cut, paste, delete); the arrows nudge them (with none in hand, and always by
  * comma and full stop, they step a frame); Enter or two taps open a shape's words in Draw; the clipboard
  * carries the shapes with their keys. Every change is operations on the document (model.ts), and an undo
- * puts the shapes in hand back. Under either mode, the time: Draw/Move and the clock; in Move mode the length
- * (frames, with its seconds), the speed (frames a second) and how it repeats (for ever, once, a number of
- * times, back and forth), the scrubber with the chosen shape's keys on it, and a strip of moments.
+ * puts the shapes in hand back. Laid out for a phone first (Paul, 2026-10-11: "all over the place with lots of white
+ * space"): in Move mode the stage, the filmstrip right under it (every frame, numbered, the one in hand outlined, with
+ * its menu: duplicate, delete, a frame earlier or later), the scrubber with the chosen shape's keys on it and the time
+ * at its end, then the chosen shape's sliders; the length (frames), the speed (frames a second) and how it repeats
+ * (for ever, once, a number of times, back and forth) behind Settings in the bar, a small sheet. Under either mode, at
+ * the column's foot above the bar, the row: Draw and Move as one control, and the mode's hint in full.
  */
 import { html, nothing, svg, type PropertyDeclarations, type PropertyValues } from 'lit';
 import { keyed } from 'lit/directives/keyed.js';
 import { live } from 'lit/directives/live.js';
 import { unsafeSVG } from 'lit/directives/unsafe-svg.js';
 import { Pause, Play, Repeat, Sparkles } from 'lucide';
-import { cmdBtn, cmdTool } from '../../kit/bar.ts';
+import { cmdBtn, cmdMenu, cmdTool } from '../../kit/bar.ts';
 import { contextOf, drawnIn, labelOf, runKey } from '../../kit/commands.ts';
 import COMMANDS, { loopName } from './commands.ts';
 import { DocElement, type DocChange, type Entry } from '../../kit/element.ts';
 import { t } from '../../kit/i18n.ts';
 import { type ContextEntry, type ToContext } from '../../kit/context.ts';
+import type { ToDialog } from '../../kit/dialog.ts';
 import { GENERATOR, docToHtml, htmlToBlocks } from '../../kit/clipboard.ts';
 import { toast } from '../../kit/toast.ts';
 import { pinchZoom } from '../../kit/pinch.ts';
@@ -36,7 +40,10 @@ import {
   MIN_FPS,
   MIN_FRAMES,
   drawingOf,
+  duplicateFrame,
+  moveFrame,
   playhead,
+  removeFrame,
   duplicateShapes,
   loosen,
   motionOf,
@@ -57,14 +64,15 @@ import { turnOf } from '../draw/view.ts';
 import '../../kit/bar.ts';
 import '../../kit/menu.ts';
 import '../../kit/context.ts';
+import '../../kit/dialog.ts';
 import './style.css';
 
 export const tag = 'to-anim-editor';
 
-/** At most this many little pictures under the scrubber. */
-const THUMBS = 16;
 /** How long a Mod+C, X or V waits for the browser's own clipboard event before doing it by hand (Safari's comes late, or never). */
 const CLIP_WAIT = 120;
+/** One of the Animator's own commands, by its name. */
+const own = (id: string) => COMMANDS.find((c) => c.id === `anim.${id}`)!;
 const clamp = (n: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, n));
 
 /** A drag on the stage: shapes moved, a pen shape's corner, or the size handle; its ops are written when the pointer lets go. */
@@ -164,6 +172,7 @@ export class ToAnimEditor extends DocElement<AnimView> {
       this.handOver = null;
       void draw.updateComplete.then(() => this.handDraw(list));
     }
+    if (changed.has('frame') || changed.has('mode')) this.showFrame();
     const bar = this.querySelector<ToContext>('.anim-context');
     if (!bar) return;
     if (this.mode !== 'move' || !this.sels.length || this.playing || this.drag) return void (bar.isOpen && bar.hide());
@@ -644,8 +653,44 @@ export class ToAnimEditor extends DocElement<AnimView> {
     this.zoom = clamp(Math.round((this.zoom - Math.sign(e.deltaY) * 0.25) * 4) / 4, 1, 4);
   }
 
-  /* ---------- menus ---------- */
+  /* ---------- the frames ---------- */
 
+  /** The frame in hand shown twice; the second of them in hand. */
+  duplicateFrame() {
+    const ops = duplicateFrame(this.doc, this.frame);
+    if (!ops.length) return;
+    this.act(ops);
+    this.frame++;
+  }
+  /** The frame in hand cut out; the one after it (or the new last) in hand. */
+  removeFrame() {
+    this.act(removeFrame(this.doc, this.frame));
+  }
+  /** The frame in hand moved a frame earlier or later; it stays in hand. */
+  moveFrame(by: -1 | 1) {
+    const to = this.frame + by;
+    if (to < 0 || to >= this.view.frames) return;
+    // (Two frames that show the same are the same either way round: nothing is written, and the one in hand moves on.)
+    this.act(moveFrame(this.doc, this.frame, by));
+    this.frame = to;
+  }
+  /** The frame in hand scrolled into the strip's view, the strip alone (never the column). */
+  private showFrame() {
+    const strip = this.querySelector<HTMLElement>('.anim-thumbs');
+    const on = strip?.querySelector<HTMLElement>('.anim-frame.on');
+    if (!strip || !on) return;
+    const [l, r] = [on.offsetLeft - strip.offsetLeft, on.offsetLeft - strip.offsetLeft + on.offsetWidth];
+    if (l < strip.scrollLeft) strip.scrollLeft = l;
+    else if (r > strip.scrollLeft + strip.clientWidth) strip.scrollLeft = r - strip.clientWidth;
+  }
+
+  /* ---------- settings ---------- */
+
+  /** The length, the speed and the repeat: a small sheet (Settings in the bar). */
+  openSettings() {
+    this.pause();
+    void this.querySelector<ToDialog>('to-dialog.anim-settings')?.show();
+  }
   /** A number field's words committed: the length or the speed, held to what it may be (the field shows what was kept). */
   private setNumber(which: 'frames' | 'fps', input: HTMLInputElement) {
     const n = Math.round(parseFloat(input.value));
@@ -655,7 +700,7 @@ export class ToAnimEditor extends DocElement<AnimView> {
     // Out of bounds or not a number: the field shows what the motion has.
     input.value = String(which === 'frames' ? this.view.frames : this.view.fps);
   }
-  /** The contextual bar under the shapes in hand (commands.ts; §5's order, for a motion). (Effects, depth, size and spin are the bar's and the sliders'.) */
+  /** The contextual bar under the shapes in hand (commands.ts; §5's order, for a motion). (Depth, size, spin, turn and the effects are beside the sliders.) */
   private contextItems(): ContextEntry[] {
     return this.sels.length ? (contextOf(COMMANDS, this) as ContextEntry[]) : [];
   }
@@ -667,30 +712,33 @@ export class ToAnimEditor extends DocElement<AnimView> {
     return html`${
       this.mode === 'draw'
         ? keyed(this.drawGen, html`<to-draw-editor class="anim-draw" ?data-tile=${tile} .value=${write(drawingOf(this.doc))} @docchange=${this.onDrawChange}></to-draw-editor>`)
-        : html`${this.renderBar()}
-            <p class="anim-hint to-hint">${this.hint()}</p>
-            ${this.renderStage()}${this.renderProps()}
-            <to-context class="anim-context" .label=${t('The shapes in hand')} .items=${this.contextItems()}></to-context>`
+        : html`${this.renderBar()} ${this.renderStage()}${this.renderTime()}${this.renderProps()}
+            <to-context class="anim-context" .label=${t('The shapes in hand')} .items=${this.contextItems()}></to-context>
+            ${this.renderSettings()}`
     }
-      ${this.renderTime()}`;
+      ${this.renderRow()}`;
   }
 
   private hint(): string {
-    if (!this.view.shapes.length) return t('Nothing here yet: switch to Draw and draw something.');
-    if (this.sel < 0) return t('Tap a shape, then drag it to where it should be at this moment.');
-    return t('Drag to move it at {s} s; depth, size, spin and turn below; K keeps it here.', { s: this.secs(this.frame) });
+    if (this.mode === 'draw') return t('Draw the shapes; Move sets them going.');
+    if (!this.view.shapes.length) return t('Nothing here yet: draw something first.');
+    if (this.sel < 0) return t('Tap a shape, then drag it to where it goes.');
+    return t('Drag it to where it goes at {s} s.', { s: this.secs(this.frame) });
   }
 
   private renderBar() {
-    const s = this.view.shapes[this.sel];
-    const own = (id: string) => COMMANDS.find((c) => c.id === `anim.${id}`)!;
     return html`<to-bar class="anim-bar">
-      ${cmdTool(own('play'), this, { icon: this.playing ? Pause : Play })}
-      <to-menu class="anim-fx" keep .label=${labelOf(own('fx'), this)} .icon=${Sparkles} caret ?disabled=${!s} .items=${drawnIn(COMMANDS, 'menu:fx', this)}></to-menu>
-      ${this.undoTools()}
+      ${cmdTool(own('play'), this, { icon: this.playing ? Pause : Play })} ${cmdTool(own('settings'), this)} ${this.undoTools()}
     </to-bar>`;
   }
 
+  /** The row at the column's foot, above the bar, in either mode: Draw and Move as one control, and what to do now, in full. */
+  private renderRow() {
+    return html`<div class="anim-row">
+      <span class="anim-modes" role="group" aria-label=${t('Mode')}>${cmdBtn(own('draw'), this, { keep: false })}${cmdBtn(own('move'), this, { keep: false })}</span>
+      <p class="anim-hint" aria-live="polite">${this.hint()}</p>
+    </div>`;
+  }
   private renderStage() {
     const a = this.anim;
     const now = this.playing ? this.clock : this.frame;
@@ -735,77 +783,60 @@ export class ToAnimEditor extends DocElement<AnimView> {
       ${slider(t('Size'), t('How large the shape is drawn: 1× is as drawn.'), 's', 0.2, 4, 0.1, `${at.s.toFixed(1)}×`)}
       ${slider(t('Spin'), t('Turns the shape around in the plane of the stage, like a wheel.'), 'r', -360, 360, 1, `${Math.round(at.r)}°`)}
       ${slider(t('Turn'), t('Turns the shape about its upright axis, like a card: edge on at 90°, mirrored past it.'), 'u', -360, 360, 1, `${Math.round(at.u ?? 0)}°`)}
+      <to-menu class="anim-fx" keep .label=${labelOf(own('fx'), this)} .icon=${Sparkles} caret .items=${drawnIn(COMMANDS, 'menu:fx', this)}></to-menu>
     </div>`;
   }
 
-  /** The length in frames (and so in seconds), the speed in frames a second, and how it repeats: fields and a menu, written as the head's frames, fps and loop. */
-  private renderLength() {
+  /** The sheet behind Settings: the length in frames, the speed in frames a second and how it repeats, one line each, and the length in seconds under them; written as the head's frames, fps and loop. */
+  private renderSettings() {
     const { frames, fps, loop } = this.view;
     const field = (which: 'frames' | 'fps', label: string, value: number, min: number, max: number) =>
       html`<label class="anim-field anim-${which}"><span>${label}</span><input type="number" inputmode="numeric" min=${min} max=${max} step="1" .value=${live(String(value))}
         @change=${(e: Event) => this.setNumber(which, e.target as HTMLInputElement)}
         @keydown=${(e: KeyboardEvent) => e.key === 'Enter' && !e.isComposing && (e.preventDefault(), this.setNumber(which, e.target as HTMLInputElement))} /></label>`;
-    return html`<div class="anim-length" role="group" aria-label=${t('Length, speed and repeat')}>
-      ${field('frames', t('Frames'), frames, MIN_FRAMES, MAX_FRAMES)}
-      <span class="anim-secs to-hint" aria-live="polite">${t('{s} s', { s: (frames / fps).toFixed(1) })}</span>
-      ${field('fps', t('Frames a second'), fps, MIN_FPS, MAX_FPS)}
+    return html`<to-dialog class="anim-settings" heading=${t('Length, speed and repeat')} .body=${html`<div class="anim-length">
+      ${field('frames', t('Frames'), frames, MIN_FRAMES, MAX_FRAMES)} ${field('fps', t('Frames a second'), fps, MIN_FPS, MAX_FPS)}
       <to-menu class="anim-loop" .label=${loopName(loop)} .icon=${Repeat} caret .items=${drawnIn(COMMANDS, 'menu:loop', this)}></to-menu>
-    </div>`;
+      <p class="anim-secs to-hint" aria-live="polite">${t('{s} s', { s: (frames / fps).toFixed(1) })}</p>
+    </div>`}></to-dialog>`;
   }
 
-  /** The little pictures of moments, one every few frames; drawn again when the document changes. */
+  /** Every frame's little picture; drawn again when the document changes. */
   private thumbnails() {
     const v = this.view;
-    if (this.thumbs?.of !== v) {
-      const step = Math.ceil(v.frames / THUMBS);
-      const list: { at: number; svg: string }[] = [];
-      for (let at = 0; at < v.frames; at += step) list.push({ at, svg: frameSvg(v, at, THEME) });
-      this.thumbs = { of: v, list };
-    }
+    if (this.thumbs?.of !== v) this.thumbs = { of: v, list: Array.from({ length: v.frames }, (_, at) => ({ at, svg: frameSvg(v, at, THEME) })) };
     return this.thumbs.list;
   }
 
+  /** Under the stage: the filmstrip (every frame, the one in hand outlined, its menu at the end), then the scrubber with the keys on it and the time at its end. */
   private renderTime() {
-    const { frames } = this.view;
+    const { frames, fps } = this.view;
     const shown = this.playing ? Math.floor(this.clock) : this.frame;
     const keys = this.view.keys[this.sel] ?? [];
-    const move = this.mode === 'move';
-    // The dots and the moments are tapped to go to a time: they never take the focus from the stage.
+    // The dots and the frames are tapped to go to a time: they never take the focus from the stage.
     const keep = (e: Event) => e.preventDefault();
     return html`<div class="anim-time">
-      <div class="anim-transport">
-        <span class="anim-modes" role="group" aria-label=${t('Mode')}>
-          ${cmdBtn(
-            COMMANDS.find((c) => c.id === 'anim.draw')!,
-            this,
-            { keep: false },
-          )} ${cmdBtn(
-            COMMANDS.find((c) => c.id === 'anim.move')!,
-            this,
-            { keep: false },
+      <div class="anim-strip">
+        <div class="anim-thumbs" role="group" aria-label=${t('Moments')}>
+          ${this.thumbnails().map(
+            (
+              m,
+            ) => html`<button type="button" class="anim-frame ${m.at === shown ? 'on' : ''}" aria-label=${t('Frame {n}, {s} s', { n: m.at + 1, s: this.secs(m.at) })} aria-pressed=${String(m.at === shown)} @mousedown=${keep} @click=${() => this.seek(m.at)}>
+              <svg viewBox="0 0 ${W} ${H}" aria-hidden="true">${unsafeSVG(m.svg)}</svg><span class="anim-n" aria-hidden="true">${m.at + 1}</span>
+            </button>`,
           )}
-        </span>
-        <span class="anim-clock to-hint">${t('{now} s of {all} s', { now: this.secs(shown), all: this.secs(frames - 1) })}</span>
+        </div>
+        ${cmdMenu(own('frame'), this, COMMANDS, 'anim-frame-menu')}
       </div>
-      ${
-        move
-          ? html`${this.renderLength()}<div class="anim-scrub">
-              <input type="range" aria-label=${t('Time')} min="0" max=${frames - 1} step="1" .value=${String(shown)} @input=${(e: Event) => this.seek(parseInt((e.target as HTMLInputElement).value, 10))} />
-              <div class="anim-keys">
-                ${keys.map((k) => html`<button type="button" class=${k.t === this.frame && !this.playing ? 'key on' : 'key'} style="left:${(k.t / Math.max(1, frames - 1)) * 100}%" aria-label=${t('Key at {s} s', { s: this.secs(k.t) })} @mousedown=${keep} @click=${() => this.seek(k.t)}></button>`)}
-              </div>
-            </div>
-            <div class="anim-thumbs" role="group" aria-label=${t('Moments')}>
-              ${this.thumbnails().map(
-                (
-                  m,
-                ) => html`<button type="button" class=${m.at === shown ? 'on' : ''} aria-label=${t('Frame {n}, {s} s', { n: m.at + 1, s: this.secs(m.at) })} aria-pressed=${String(m.at === shown)} @mousedown=${keep} @click=${() => this.seek(m.at)}>
-                  <svg viewBox="0 0 ${W} ${H}" aria-hidden="true">${unsafeSVG(m.svg)}</svg>
-                </button>`,
-              )}
-            </div>`
-          : nothing
-      }
+      <div class="anim-scrub">
+        <div class="anim-track">
+          <input type="range" aria-label=${t('Time')} min="0" max=${frames - 1} step="1" .value=${String(shown)} @input=${(e: Event) => this.seek(parseInt((e.target as HTMLInputElement).value, 10))} />
+          <div class="anim-keys">
+            ${keys.map((k) => html`<button type="button" class=${k.t === this.frame && !this.playing ? 'key on' : 'key'} style="left:${(k.t / Math.max(1, frames - 1)) * 100}%" aria-label=${t('Key at {s} s', { s: this.secs(k.t) })} @mousedown=${keep} @click=${() => this.seek(k.t)}></button>`)}
+          </div>
+        </div>
+        <span class="anim-clock">${t('{now} s of {all} s', { now: this.secs(shown), all: (frames / fps).toFixed(1) })}</span>
+      </div>
     </div>`;
   }
 }

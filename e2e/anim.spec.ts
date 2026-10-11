@@ -72,7 +72,12 @@ test('motion: a shape drawn, then moved at the last moment, keys itself there', 
     return document.elementFromPoint(r.left + r.width / 2 + 18, r.top + r.height / 2) === dot;
   });
   expect(reached).toBe(await page.evaluate(() => matchMedia('(pointer: coarse)').matches));
-  // The length is typed, the speed too, and the repeat chosen: the head says so, and the seconds follow.
+  // The Turn slider is there beside Depth, Size and Spin.
+  await expect(page.getByRole('slider', { name: /^Turn/ })).toBeVisible();
+  // The length is typed, the speed too, and the repeat chosen, in the sheet behind Settings (the shape let go first:
+  // on a phone its own row covers the bar): the head says so, and the seconds follow.
+  await page.keyboard.press('Escape');
+  await page.getByRole('button', { name: 'Settings' }).click();
   await page.getByRole('spinbutton', { name: 'Frames', exact: true }).fill('48');
   await page.keyboard.press('Enter');
   await page.getByRole('spinbutton', { name: 'Frames a second' }).fill('12');
@@ -81,8 +86,7 @@ test('motion: a shape drawn, then moved at the last moment, keys itself there', 
   await page.locator('.anim-loop > button').click();
   await page.getByRole('menuitemcheckbox', { name: /Back and forth/ }).click();
   await expect.poll(() => value(page)).toMatch(/^---\nframes: 48\nfps: 12\nloop: bounce\n---\n/);
-  // The Turn slider is there beside Depth, Size and Spin.
-  await expect(page.getByRole('slider', { name: /^Turn/ })).toBeVisible();
+  await page.getByRole('button', { name: 'Close' }).click();
   expect((await measure(page)).wide).toBeLessThanOrEqual(0);
   expect(errors).toEqual([]);
 });

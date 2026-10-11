@@ -8,6 +8,7 @@ import { page } from 'vitest/browser';
 import '../../../styles.css';
 import '../editor.ts';
 import type { ToAnimEditor } from '../editor.ts';
+import type { ToDialog } from '../../../kit/dialog.ts';
 import def from '../def.ts';
 import { until, tick } from '../../../../test/browser/helpers.ts';
 import { remScale } from '../../../kit/zoom.ts';
@@ -57,6 +58,11 @@ async function setField(el: ToAnimEditor, selector: string, value: string) {
   input.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true, cancelable: true }));
   await el.updateComplete;
 }
+/** Settings in the bar: the sheet with the length, the speed and the repeat, open. */
+async function settings(el: ToAnimEditor) {
+  button(el, 'Settings').click();
+  await until(() => !!el.querySelector('dialog.to-dialog[open] .anim-length'));
+}
 async function pick(el: HTMLElement, opener: HTMLElement, words: string) {
   opener.click();
   await until(() => !!document.querySelector('[popover]:popover-open'));
@@ -72,7 +78,9 @@ test('a drawing opens in Move mode; a tap selects the rocket, a drag keys it now
   const { el, last, changes } = await editor(LIFT);
   expect(byWords(el, 'Move').getAttribute('aria-pressed')).toBe('true');
   expect(el.querySelector('to-bar')).not.toBeNull();
-  expect(el.querySelectorAll('.anim-thumbs button')).toHaveLength(12);
+  // The filmstrip: every frame, numbered, the one in hand pressed.
+  expect(el.querySelectorAll('.anim-thumbs .anim-frame')).toHaveLength(24);
+  expect(el.querySelector('.anim-frame[aria-pressed=true] .anim-n')!.textContent).toBe('1');
   // The rocket's box is at (64, 288), 64 square: a tap in it selects it, and the hint and the sliders follow.
   await drag(el, 96, 320);
   expect(el.querySelector('.anim-stage .hit.sel')?.getAttribute('data-idx')).toBe('1');
@@ -116,11 +124,14 @@ test('K keeps a key; the effects menu, the sliders and Remove this key write the
   button(el, 'Remove this key').click();
   await el.updateComplete;
   expect(keysTable(last())).toContain('\n1 | 0,0,0,0,1,0; 23,200');
+  await settings(el);
   await setField(el, '.anim-fps input', '12');
   expect(last()!.startsWith('---\nframes: 24\nfps: 12\n---\n')).toBe(true);
   await setField(el, '.anim-frames input', '12');
   expect(last()!.startsWith('---\nframes: 12\nfps: 12\n---\n')).toBe(true);
   expect(keysTable(last())).toBe('Shape | Keys\n--- | ---\n0 | 0,0,0,0,1,0\n1 | 0,0,0,0,1,0\n');
+  el.querySelector<ToDialog>('to-dialog.anim-settings')!.close();
+  await until(() => !el.querySelector('dialog.to-dialog[open]'));
   await drag(el, 96, 320);
   key(el, 'Delete');
   await el.updateComplete;
@@ -219,6 +230,7 @@ test("the GIF repeats as the motion says (once: no loop block; bounce: there and
 
 test("Move mode's length, speed and repeat: the frames and fps fields write the head (out of bounds held, nonsense refused), the seconds follow; the repeat menu; the Turn slider keys a turn; playing once stops at the end", async () => {
   const { el, last } = await editor(LIFT);
+  await settings(el);
   const secs = () => el.querySelector('.anim-secs')!.textContent;
   expect(secs()).toBe('3.0 s');
   await setField(el, '.anim-frames input', '500');
@@ -235,6 +247,8 @@ test("Move mode's length, speed and repeat: the frames and fps fields write the 
   expect(last()!.startsWith('---\nframes: 120\nfps: 24\nloop: bounce\n---\n')).toBe(true);
   await pick(el, el.querySelector<HTMLButtonElement>('.anim-loop button')!, '3 times');
   expect(last()).toContain('\nloop: 3\n');
+  el.querySelector<ToDialog>('to-dialog.anim-settings')!.close();
+  await until(() => !el.querySelector('dialog.to-dialog[open]'));
   // The Turn slider: a key with its turn.
   await drag(el, 96, 320);
   const turn = el.querySelector<HTMLInputElement>('.anim-u input')!;
@@ -245,6 +259,7 @@ test("Move mode's length, speed and repeat: the frames and fps fields write the 
   await el.updateComplete;
   expect(keysTable(last())).toContain('\n1 | 0,0,0,0,1,0,,u180; 23,');
   // Played once from near the end, it stops on the last frame.
+  await settings(el);
   await pick(el, el.querySelector<HTMLButtonElement>('.anim-loop button')!, 'Play once');
   await setField(el, '.anim-frames input', '4');
   key(el, ' ');
@@ -407,7 +422,8 @@ test("a shape in hand has the contextual bar under it, in the standard's order, 
   expect(ctx.querySelector('.to-context')!.getBoundingClientRect().top).toBeGreaterThanOrEqual(box.bottom - 1);
   const bar = [...el.querySelectorAll<HTMLButtonElement>('to-bar.anim-bar > button, to-bar.anim-bar > to-menu > button')].map((b) => b.getAttribute('aria-label') ?? b.textContent!.trim());
   expect(bar.slice(-2)).toEqual(['Undo', 'Redo']);
-  for (const b of [...el.querySelectorAll<HTMLButtonElement>('to-bar.anim-bar button.to-tool'), ...ctx.querySelectorAll<HTMLButtonElement>('button')]) {
+  // (Settings opens a sheet, so it takes the focus as a dialog's opener does.)
+  for (const b of [...el.querySelectorAll<HTMLButtonElement>('to-bar.anim-bar button.to-tool:not(.cmd-anim-settings)'), ...ctx.querySelectorAll<HTMLButtonElement>('button')]) {
     const down = new MouseEvent('mousedown', { bubbles: true, cancelable: true });
     b.dispatchEvent(down);
     expect(down.defaultPrevented, b.getAttribute('aria-label')!).toBe(true);
@@ -616,4 +632,34 @@ test('a second finger is a pinch: the stage zooms about the fingers in its frame
   // The frame holds still: what is under it does not move.
   expect(wrap.getBoundingClientRect().height).toBeCloseTo(frameH, 0);
   expect(last()).toBe(before);
+});
+
+test("the filmstrip's menu acts on the frame in hand: moved a frame earlier, duplicated, deleted; each one undo step", async () => {
+  const { el, last } = await editor(LIFT);
+  const head = () => last()!.slice(0, last()!.indexOf('\n---\n', 4));
+  const inHand = () => el.querySelector('.anim-frame[aria-pressed=true] .anim-n')!.textContent;
+  el.querySelectorAll<HTMLButtonElement>('.anim-frame')[23].click();
+  await el.updateComplete;
+  const menu = () => el.querySelector<HTMLButtonElement>('.anim-frame-menu > button')!;
+  expect(menu().getAttribute('aria-label')).toBe('This frame');
+  // The last frame: Later is off; Earlier changes places with the one before, and it stays in hand.
+  menu().click();
+  await until(() => !!document.querySelector('[popover]:popover-open'));
+  const later = [...document.querySelectorAll<HTMLButtonElement>('[popover]:popover-open [role^=menuitem]')].find((x) => x.textContent!.includes('A frame later'))!;
+  expect(later.disabled).toBe(true);
+  later.closest<HTMLElement>('[popover]')!.hidePopover();
+  await pick(el, menu(), 'A frame earlier');
+  expect(inHand()).toBe('23');
+  expect(keysTable(last())).toContain('\n0 | 0,0,0,0,1,0; 21,0,-73,0,1,0; 22,0,-80,0,1,0,i; 23,0,-77,0,1,0\n');
+  await pick(el, menu(), 'A frame later');
+  expect(inHand()).toBe('24');
+  // Duplicated: a frame longer, the second of the two in hand; deleted: a frame shorter.
+  await pick(el, menu(), 'Duplicate this frame');
+  expect(head()).toContain('frames: 25');
+  expect(inHand()).toBe('25');
+  expect(el.querySelectorAll('.anim-frame')).toHaveLength(25);
+  await pick(el, menu(), 'Delete this frame');
+  expect(head()).toContain('frames: 24');
+  for (let i = 0; i < 4; i++) await undo(el);
+  expect(last()).toBe(LIFT);
 });
