@@ -235,6 +235,7 @@ export default {
   'Picture (PNG)': 'Afbeelding (PNG)',
   'Web page (HTML)': 'Webpagina (HTML)',
   'Text (TLO)': 'Tekst (TLO)',
+  'Data (JSON)': 'Gegevens (JSON)',
   'Downloaded {name}': '{name} gedownload',
   'Download failed': 'Downloaden mislukt',
   'Open in Tiny Little Office': 'Openen in Piepklein Kantoortje',

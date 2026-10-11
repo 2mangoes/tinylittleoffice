@@ -235,6 +235,7 @@ export default {
   'Picture (PNG)': 'Immagine (PNG)',
   'Web page (HTML)': 'Pagina web (HTML)',
   'Text (TLO)': 'Testo (TLO)',
+  'Data (JSON)': 'Dati (JSON)',
   'Downloaded {name}': 'Scaricato {name}',
   'Download failed': 'Download non riuscito',
   'Open in Tiny Little Office': 'Apri in Ufficio Piccolo Piccolo',

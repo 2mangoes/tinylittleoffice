@@ -1,6 +1,6 @@
 // The API (src/api.ts, served at /api.js): links made and read over the kernel, without a browser.
 import { test, expect } from 'vitest';
-import { apps, compare, decode, encode, file, formats, fromTlo, link, markdown, parse, plain, read, templates, text, tlo, write } from '../src/api.ts';
+import { apps, compare, decode, encode, file, formats, fromJson, fromTlo, link, markdown, parse, plain, read, templates, text, tlo, toJson, write } from '../src/api.ts';
 
 test('encode and decode are the codec; parse and write the kernel', () => {
   const text = '# Hello\n\nWorld\n';
@@ -14,7 +14,9 @@ test('link makes the packed link, with a title and by in the head; read takes it
   const url = link('sheet', 'Item | Cost:money\n--- | ---\nRent | 1200\n', { title: 'Budget', by: 'planner' });
   expect(url).toMatch(/^https:\/\/tinylittleoffice\.com\/sheet\/#\/v1\/sheet\/[yzr][A-Za-z0-9_~]+$/);
   const r = read(url);
-  expect(r).toEqual({ app: 'sheet', view: '', text: '---\ntitle: Budget\nby: planner\n---\nItem | Cost:money\n--- | ---\nRent | 1200\n', title: 'Budget', by: 'planner', display: false });
+  const said = '---\ntitle: Budget\nby: planner\n---\nItem | Cost:money\n--- | ---\nRent | 1200\n';
+  expect(r).toEqual({ app: 'sheet', view: '', text: said, json: toJson(said), title: 'Budget', by: 'planner', display: false });
+  expect(fromJson(r.json)).toBe(said);
   expect(link('write', 'x', { view: 'pdf', site: 'http://localhost:4178' })).toMatch(/^http:\/\/localhost:4178\/write\/#\/v1\/write\.pdf\//);
   expect(link('deck', '## A', { show: true }).endsWith('?show')).toBe(true);
   expect(read(link('write', 'x', { display: true })).display).toBe(true);
@@ -38,7 +40,8 @@ test('a link can open in a language: lang, beside the Display Link and the show 
 test('a plain link is read as the document it stands for', () => {
   const url = plain('outline', '- [ ] Milk\n', { title: 'Shop', by: 'agent' });
   expect(url).toBe('https://tinylittleoffice.com/outline/#title=Shop&by=agent&doc=-+%5B+%5D+Milk');
-  expect(read(url)).toEqual({ app: 'outline', view: '', text: '---\nby: agent\ntitle: Shop\n---\n- [ ] Milk\n', title: 'Shop', by: 'agent', display: false });
+  const said = '---\nby: agent\ntitle: Shop\n---\n- [ ] Milk\n';
+  expect(read(url)).toEqual({ app: 'outline', view: '', text: said, json: toJson(said), title: 'Shop', by: 'agent', display: false });
 });
 
 test('a .tlo file is the text with its app in the head, both ways', () => {
@@ -61,9 +64,11 @@ test('the apps, their templates and the files they make without a browser', asyn
   expect(tpl[0]).toMatchObject({ id: 'budget', name: 'Budget' });
   expect(tpl[0].text).toContain('=SUM(');
   await expect(templates('nope')).rejects.toThrow();
-  expect(await formats('sheet')).toEqual(expect.arrayContaining(['md', 'tlo', 'csv', 'xlsx']));
+  expect(await formats('sheet')).toEqual(expect.arrayContaining(['md', 'tlo', 'json', 'csv', 'xlsx']));
   expect(await file('sheet', 'A | B\n--- | ---\n1 | 2\n', 'csv')).toBeInstanceOf(Uint8Array);
   expect(await file('outline', '- [ ] Milk\n', 'tlo')).toBe('---\napp: outline\n---\n- [ ] Milk\n');
+  // The .json is the kernel's document with its app in its head, as the .tlo is the text with it.
+  expect(await file('outline', '- [ ] Milk\n', 'json')).toBe(toJson('---\napp: outline\n---\n- [ ] Milk\n'));
   expect(await file('sheet', 'A^[a note]\n', 'md')).toBe('A[^1]\n\n[^1]: a note\n');
   await expect(file('sheet', 'x', 'pptx')).rejects.toThrow(/makes no \.pptx/);
 });

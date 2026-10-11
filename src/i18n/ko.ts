@@ -234,6 +234,7 @@ export default {
   'Picture (PNG)': '그림 (PNG)',
   'Web page (HTML)': '웹 페이지 (HTML)',
   'Text (TLO)': '텍스트 (TLO)',
+  'Data (JSON)': '데이터 (JSON)',
   'Downloaded {name}': '{name}을(를) 다운로드했어요',
   'Download failed': '다운로드하지 못했어요',
   'Open in Tiny Little Office': 'Tiny Little Office에서 열기',

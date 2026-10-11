@@ -1,10 +1,11 @@
 /**
  * Every document as a file, by one mechanism: a format is one object (app.ts Export) that says what it is (its
  * extension, type and words), whether the browser shows it, whether it is drawn still, and how it builds its bytes
- * from the document alone. formatsOf(def) is the one list: the kit's five (KIT_FORMATS: the pages as a PDF, a picture
- * and a web page through pdfOf, picture and htmlOf, the web page its text layer first; Markdown; the text) less any the app makes its own way, then the
- * app's own. The Download table, the ".<ext>" route, exportAs and the share sheet read that list and nothing else, so
- * nothing here asks which extension it holds. (It replaced special cases in exportAs beside placeholder builders that
+ * from the document alone. formatsOf(def) is the one list: the kit's six (KIT_FORMATS: the pages as a PDF, a picture
+ * and a web page through pdfOf, picture and htmlOf, the web page its text layer first; Markdown; the text; the
+ * kernel's document as JSON) less any the app makes its own way, then the app's own. The Download table, the
+ * ".<ext>" route, exportAs and the share sheet read that list and nothing else, so nothing here asks which extension
+ * it holds. (It replaced special cases in exportAs beside placeholder builders that
  * returned empty bytes, with a second place deciding what the browser shows and a third what gets a link.)
  *
  * Print is not a format: the browser's dialog, through a hidden srcdoc frame with @page at the page's size, which
@@ -194,9 +195,10 @@ const titleOf = (doc: Doc, { def, title }: ExportContext) => title || def.title(
 const pagesOf = (doc: Doc, ctx: ExportContext, still?: boolean) => ctx.def.view(doc, still ? STILL : undefined);
 
 /**
- * The formats every app has: the .pdf file, a picture, a web page, Markdown, the text. Each builds its own bytes
+ * The formats every app has: the .pdf file, a picture, a web page, Markdown, the text, the JSON. Each builds its own bytes
  * through the pages (pdfOf, picture, htmlOf). Markdown is the document's own text (TLO is Markdown), its footnotes in
- * the reference form other readers know; a .tlo carries its app (kit/plain.ts).
+ * the reference form other readers know; a .tlo carries its app (kit/plain.ts), and so does a .json, the kernel's
+ * document as JSON (src/doc/json.ts; its schema is packages/doc/schema/tlo.schema.json).
  */
 export const KIT_FORMATS: readonly Export[] = [
   { ext: 'pdf', label: () => t('PDF file'), mime: 'application/pdf', shows: 'own', still: true, build: async (doc, ctx) => drawn(await pdfOf(pagesOf(doc, ctx, true), titleOf(doc, ctx))) },
@@ -210,6 +212,13 @@ export const KIT_FORMATS: readonly Export[] = [
   },
   { ext: 'md', label: () => t('Markdown'), mime: 'text/markdown;charset=utf-8', shows: 'text', build: (doc) => write(referenceNotes(parse(doc))) },
   { ext: 'tlo', label: () => t('Text (TLO)'), mime: 'text/plain;charset=utf-8', shows: 'text', build: (doc, { def }) => tloText(def.id, doc) },
+  {
+    ext: 'json',
+    label: () => t('Data (JSON)'),
+    mime: 'application/json',
+    shows: 'text',
+    build: async (doc, { def }) => (await import('../doc/json.ts')).docJson(parse(tloText(def.id, doc))),
+  },
 ];
 
 /**

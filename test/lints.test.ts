@@ -94,6 +94,7 @@ describe('generated outputs are fresh: each generating script, run with --check,
     ['make-skill', 'the skill and /llms.txt'],
     ['dependencies', 'docs/dependencies.md'],
     ['exports-doc', 'docs/exports.md'],
+    ['schema', 'packages/doc/schema/tlo.schema.json'],
   ])('scripts/%s.ts --check (%s)', (script) => {
     let said = '';
     try {

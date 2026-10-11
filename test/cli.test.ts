@@ -29,6 +29,36 @@ test('stdin, the plain form, a show link, and JSON', () => {
   expect(JSON.parse(run(['read', 'https://tinylittleoffice.com/outline/#title=Shop&doc=-+%5B+%5D+Milk', '--json']))).toMatchObject({ app: 'outline', title: 'Shop' });
 });
 
+test('json gives the document as JSON; read --json carries it; a link and a file come back from it; file --as json is the download', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'tlo-'));
+  const url = run(['link', 'outline', '--title', 'Chores'], '- [ ] Sweep \\ \n  - [x] Shop\n').trim();
+  const json = run(['json', url]);
+  expect(JSON.parse(json)).toStrictEqual({
+    head: { title: 'Chores' },
+    blocks: [
+      { k: 'li', depth: 0, done: false, runs: [{ t: 'Sweep  ' }] },
+      { k: 'li', depth: 1, done: true, runs: [{ t: 'Shop' }] },
+    ],
+  });
+  expect(JSON.parse(run(['read', url, '--json']))).toMatchObject({ app: 'outline', title: 'Chores', json: JSON.parse(json) });
+  // Back from JSON: the same link, the app given or named in the head.
+  writeFileSync(join(dir, 'chores.json'), json);
+  expect(run(['link', 'outline', '--json', join(dir, 'chores.json')]).trim()).toBe(url);
+  expect(run(['link', 'outline', '--json'], json).trim()).toBe(url);
+  const out = join(dir, 'chores.json');
+  expect(run(['file', url, '--as', 'json', '--out', out]).trim()).toBe(out);
+  expect(JSON.parse(readFileSync(out, 'utf8')).head).toStrictEqual({ title: 'Chores', app: 'outline' });
+  expect(run(['link', '--json', out]).trim()).toBe(url);
+  // A .tlo file, or an app and stdin, as lint takes them.
+  writeFileSync(join(dir, 'chores.tlo'), run(['file', url, '--out', '-']));
+  expect(run(['json', join(dir, 'chores.tlo')])).toBe(json);
+  expect(run(['json', 'outline'], run(['read', url]))).toBe(json);
+  // JSON that is not a document is said so, with where.
+  const bad = spawnSync(process.execPath, [CLI, 'link', 'write', '--json'], { input: '{"head":{},"blocks":[{"k":"p","runs":[{}]}]}', encoding: 'utf8' });
+  expect(bad.status).toBe(2);
+  expect(bad.stderr).toContain('blocks[0].runs[0].t is missing');
+});
+
 test('diff says what changed and exits 1; the same document exits 0; a bad link is said so', () => {
   const a = run(['link', 'outline'], '- [ ] Milk\n- [ ] Eggs\n').trim();
   const b = run(['link', 'outline'], '- [ ] Milk\n- [x] Eggs\n').trim();

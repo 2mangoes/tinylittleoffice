@@ -98,7 +98,7 @@ test("the Word Processor's Download menu is a row per format, each with view, do
   await openDownload(shell);
   const items = [...menu(shell).children].map((el) => el.getAttribute('aria-label') ?? el.textContent!.trim());
   expect(items[0]).toContain('Print, or save as PDF');
-  expect(rows(shell).map((r) => r.getAttribute('aria-label'))).toEqual(['PDF file', 'Picture (PNG)', 'Text (TLO)', 'Word (DOCX)', 'Markdown', 'Rich Text (RTF)', 'Web page (HTML)']);
+  expect(rows(shell).map((r) => r.getAttribute('aria-label'))).toEqual(['PDF file', 'Picture (PNG)', 'Text (TLO)', 'Data (JSON)', 'Word (DOCX)', 'Markdown', 'Rich Text (RTF)', 'Web page (HTML)']);
   // No share sheet here (a desktop browser): three actions; a .docx the browser cannot show has no View.
   expect(acts(row(shell, 'PDF file')).map((b) => b.getAttribute('aria-label'))).toEqual(['View the .pdf', 'Download the .pdf', 'Copy a link that downloads the .pdf']);
   expect(acts(row(shell, 'Word (DOCX)')).map((b) => b.getAttribute('aria-label'))).toEqual(['Download the .docx', 'Copy a link that downloads the .docx']);
@@ -297,7 +297,7 @@ test('the table reads each format: View where the browser shows the file, Share 
     shell = await mount(`#/v1/anim/${encodeDoc(appOf('anim')!.blank())}`);
     await until(() => !!shell.querySelector('to-anim-editor'));
     await openDownload(shell);
-    expect(rows(shell).map((r) => r.getAttribute('aria-label'))).toEqual(['PDF file', 'Picture (PNG)', 'Web page (HTML)', 'Markdown', 'Text (TLO)', 'Animated GIF', 'Animated SVG']);
+    expect(rows(shell).map((r) => r.getAttribute('aria-label'))).toEqual(['PDF file', 'Picture (PNG)', 'Web page (HTML)', 'Markdown', 'Text (TLO)', 'Data (JSON)', 'Animated GIF', 'Animated SVG']);
     expect(kinds(row(shell, 'Animated GIF'))).toEqual(['view', 'share', 'download', 'copy']);
     expect(acts(row(shell, 'Animated GIF')).map((b) => b.getAttribute('aria-label'))).toEqual(['View the .gif', 'Share the .gif…', 'Download the .gif', 'Copy a link that downloads the .gif']);
     menu(shell).hidePopover();

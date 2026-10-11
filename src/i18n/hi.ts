@@ -234,6 +234,7 @@ export default {
   'Picture (PNG)': 'तस्वीर (PNG)',
   'Web page (HTML)': 'वेब पेज (HTML)',
   'Text (TLO)': 'टेक्स्ट (TLO)',
+  'Data (JSON)': 'डेटा (JSON)',
   'Downloaded {name}': '{name} डाउनलोड हुआ',
   'Download failed': 'डाउनलोड नहीं हुआ',
   'Open in Tiny Little Office': 'Tiny Little Office में खोलें',

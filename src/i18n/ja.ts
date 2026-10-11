@@ -233,6 +233,7 @@ export default {
   'Picture (PNG)': '画像（PNG）',
   'Web page (HTML)': 'ウェブページ（HTML）',
   'Text (TLO)': 'テキスト（TLO）',
+  'Data (JSON)': 'データ（JSON）',
   'Downloaded {name}': '{name}をダウンロードしました',
   'Download failed': 'ダウンロードできませんでした',
   'Open in Tiny Little Office': 'ちいさなちいさなオフィスで開く',

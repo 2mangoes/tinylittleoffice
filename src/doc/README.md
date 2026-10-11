@@ -39,6 +39,13 @@ output. The inline writer keeps canonical text stable by escaping as little as r
 with only a backslash escaped, reads them back, and falls to full escaping only when they would read as other runs
 (so `5 * 3` and `snake_case` stay as written, and `a *b* c` as plain words becomes `a \*b\* c`).
 
+## As JSON (`json.ts`)
+
+`docJson(doc)` and `jsonDoc(json)`: the same document as JSON, its keys in the order the types name them, checked
+against `packages/doc/schema/tlo.schema.json` (written from `model.ts` by `scripts/schema.ts`) by a validator of its
+own; a document that does not fit throws with its path. It holds the schema, so it is imported on its own (and
+lazily by the kit), not through `index.ts`.
+
 ## Edits as operations (`ops.ts`)
 
 Eight primitives: `head`, `splice`, `move`, `text`, `cells`, `rows`, `cols`, `col`. `apply(doc, op)` is pure and

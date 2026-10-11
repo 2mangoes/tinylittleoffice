@@ -233,6 +233,7 @@ export default {
   'Picture (PNG)': 'Bild (PNG)',
   'Web page (HTML)': 'Webseite (HTML)',
   'Text (TLO)': 'Text (TLO)', // same
+  'Data (JSON)': 'Daten (JSON)',
   'Downloaded {name}': '{name} heruntergeladen',
   'Download failed': 'Download fehlgeschlagen',
   'Open in Tiny Little Office': 'In Winzig Kleines Büro öffnen',

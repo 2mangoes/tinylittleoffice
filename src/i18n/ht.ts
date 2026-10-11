@@ -236,6 +236,7 @@ export default {
   'Picture (PNG)': 'Foto (PNG)',
   'Web page (HTML)': 'Paj wèb (HTML)',
   'Text (TLO)': 'Tèks (TLO)',
+  'Data (JSON)': 'Done (JSON)',
   'Downloaded {name}': '{name} telechaje',
   'Download failed': 'Telechajman an echwe',
   'Open in Tiny Little Office': 'Louvri nan Tiny Little Office',

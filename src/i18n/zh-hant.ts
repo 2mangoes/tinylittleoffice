@@ -236,6 +236,7 @@ export default {
   'Picture (PNG)': '圖片（PNG）',
   'Web page (HTML)': '網頁（HTML）',
   'Text (TLO)': '文字（TLO）',
+  'Data (JSON)': '資料（JSON）',
   'Downloaded {name}': '已下載 {name}',
   'Download failed': '下載失敗',
   'Open in Tiny Little Office': '在小小辦公室開啟',

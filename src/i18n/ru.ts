@@ -234,6 +234,7 @@ export default {
   'Picture (PNG)': 'Картинка (PNG)',
   'Web page (HTML)': 'Веб-страница (HTML)',
   'Text (TLO)': 'Текст (TLO)',
+  'Data (JSON)': 'Данные (JSON)',
   'Downloaded {name}': 'Скачано: {name}',
   'Download failed': 'Не удалось скачать',
   'Open in Tiny Little Office': 'Открыть в Tiny Little Office',

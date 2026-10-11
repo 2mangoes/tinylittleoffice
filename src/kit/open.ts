@@ -2,7 +2,8 @@
  * Opening a file: a .tlo (the text a Download → Text (TLO) gives, its app in its head) opens as its own app
  * and title; a .md or .txt opens in the app open now, else the Word Processor, called by its file name when
  * it names nothing itself. Reached two ways: a file dropped anywhere on the page (the shell), and Open a
- * file… in the menu (the drawer's file picker). The document goes into a link and the link is followed: no
+ * file… in the menu (the drawer's file picker). A .json (Download → Data (JSON): the kernel's document, src/doc/json.ts)
+ * opens as its .tlo would, when it fits the schema; one that does not is said so. The document goes into a link and the link is followed: no
  * file is kept, nothing is sent.
  *
  * A zip goes in too (Paul, 2026-10-11: "Let me download all my docs as a single zip file and upload them too"):
@@ -14,6 +15,7 @@
 import { html } from 'lit';
 import { appOf } from './apps.ts';
 import { encodeDoc } from './codec.ts';
+import { write } from '../doc/index.ts';
 import { t } from './i18n.ts';
 import { icon, UI } from './icons.ts';
 import { readFile, readPlain, readZip, type InZip, type Plain } from './plain.ts';
@@ -25,7 +27,7 @@ import type { ToDialog } from './dialog.ts';
 import './dialog.ts';
 
 /** What the picker offers. */
-export const OPENS = '.tlo,.md,.markdown,.txt,text/plain,text/markdown,.zip,application/zip';
+export const OPENS = '.tlo,.md,.markdown,.txt,.json,text/plain,text/markdown,application/json,.zip,application/zip';
 
 const known = (id: string) => !!appOf(id);
 
@@ -42,6 +44,18 @@ export function hashFor(name: string, text: string, fallback: string): string {
   return plain ? linkOf(plain) : '';
 }
 
+const isJson = (file: File) => /\.json$/i.test(file.name) || /^application\/json/.test(file.type);
+
+/** A .json's document as a link's hash, as its .tlo would be ('' when it is not a document: not JSON, or not the schema's). */
+async function jsonHash(name: string, json: string, fallback: string): Promise<string> {
+  const { jsonDoc } = await import('../doc/json.ts');
+  try {
+    return hashFor(name, write(jsonDoc(json)), fallback);
+  } catch {
+    return '';
+  }
+}
+
 const isZip = (file: File) => /\.zip$/i.test(file.name) || /^application\/(?:x-)?zip/.test(file.type);
 
 /** Open a file: its document, in its app, as a new entry in the tab's history (Back returns); a zip's documents, kept or offered. */
@@ -51,7 +65,8 @@ export async function openFile(file: File, fallback: string): Promise<boolean> {
     toast(t('That file is too large to be a document here.'));
     return false;
   }
-  const hash = hashFor(file.name, await file.text(), fallback);
+  const words = await file.text();
+  const hash = isJson(file) ? await jsonHash(file.name, words, fallback) : hashFor(file.name, words, fallback);
   if (!hash) {
     toast(t('That file is not words Tiny Little Office can read.'));
     return false;

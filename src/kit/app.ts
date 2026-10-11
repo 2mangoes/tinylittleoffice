@@ -66,8 +66,8 @@ export interface ExportContext {
 
 /**
  * A file a document can become, saying everything about itself: its extension and type, its words in the Download
- * table, whether the browser shows it, whether it is drawn still, and how it is built. The kit's five (PDF, PNG,
- * HTML, Markdown, TLO, in kit/exports.ts) and an app's own are the same shape; an app's own with a kit format's
+ * table, whether the browser shows it, whether it is drawn still, and how it is built. The kit's six (PDF, PNG,
+ * HTML, Markdown, TLO, JSON, in kit/exports.ts) and an app's own are the same shape; an app's own with a kit format's
  * `ext` is used in its place (kit/exports.ts formatsOf, the one list everything reads).
  */
 export interface Export {

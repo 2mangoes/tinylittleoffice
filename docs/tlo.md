@@ -89,6 +89,51 @@ The shell's keys are `title`, `by` and `created` (and `app` in a `.tlo` file). A
 - ```` ```locked ```` holding a link's fragment, `#/v1/write/E…`: a document locked with a password, kept sealed. It is
   drawn as a locked card (its app and nothing more can be read) until its password is given in an editor.
 
+## The document as JSON
+
+The kernel's document can go in and out as JSON too, for a program or an agent that would rather hand over
+structure than write the text: the same document, a head and a list of blocks, nothing added or renamed. The
+API's `toJson(text)` gives it (and `read(url).json`; `tinyoffice json <link>` on the command line) and
+`fromJson(json)` gives the canonical TLO text back (`tinyoffice link <app> --json doc.json`), so for every
+document `fromJson(toJson(x)) === write(parse(x))`, byte for byte, every space with it. Download → Data (JSON)
+saves it as a `.json` file with `app` in its head, as a `.tlo` has, and Open a file… opens one again.
+
+The contract is the JSON Schema (2020-12) at
+[`packages/doc/schema/tlo.schema.json`](../packages/doc/schema/tlo.schema.json), written from the kernel's
+types in `src/doc/model.ts` by `scripts/schema.ts` (`npm run schema`; a test fails when it is stale). Its keys
+come in the order the types name them, `k` first; a head's and an attribute's keys in the document's own order.
+A document that does not fit is refused, naming where: `blocks[0].runs[0].t is missing`.
+
+```json
+{
+  "head": {
+    "title": "Chores"
+  },
+  "blocks": [
+    {
+      "k": "li",
+      "depth": 0,
+      "done": false,
+      "runs": [
+        {
+          "t": "Sweep",
+          "b": true
+        }
+      ]
+    }
+  ]
+}
+```
+
+is the text
+
+```
+---
+title: Chores
+---
+- [ ] **Sweep**
+```
+
 ## Each app's shape
 
 The examples are canonical: what the code writes.

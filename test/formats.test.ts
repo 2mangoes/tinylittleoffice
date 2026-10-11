@@ -18,7 +18,7 @@ test("every app's formats: the kit's less the ones it makes its own way, then it
     const list = formatsOf(def);
     const exts = list.map((f) => f.ext);
     expect(new Set(exts).size, def.id).toBe(exts.length);
-    for (const ext of ['pdf', 'png', 'html', 'md', 'tlo']) expect(exts, def.id).toContain(ext);
+    for (const ext of ['pdf', 'png', 'html', 'md', 'tlo', 'json']) expect(exts, def.id).toContain(ext);
     for (const f of list) {
       expect(f.label(), `${def.id}.${f.ext}`).toMatch(/\S/);
       expect(f.mime, `${def.id}.${f.ext}`).toMatch(/^[a-z]+\/[\w.+-]+(;charset=utf-8)?$/);
@@ -28,9 +28,9 @@ test("every app's formats: the kit's less the ones it makes its own way, then it
     for (const own of def.exports ?? []) expect(list.find((f) => f.ext === own.ext)).toBe(own);
   }
   const write = formatsOf(apps().find((a) => a.id === 'write')!);
-  expect(write.map((f) => f.ext)).toEqual(['pdf', 'png', 'tlo', 'docx', 'md', 'rtf', 'html']);
+  expect(write.map((f) => f.ext)).toEqual(['pdf', 'png', 'tlo', 'json', 'docx', 'md', 'rtf', 'html']);
   expect(write.filter((f) => f.still).map((f) => f.ext)).toEqual(['pdf', 'png']);
-  expect(Object.fromEntries(write.map((f) => [f.ext, f.shows]))).toEqual({ pdf: 'own', png: 'own', tlo: 'text', docx: null, md: 'text', rtf: null, html: 'own' });
+  expect(Object.fromEntries(write.map((f) => [f.ext, f.shows]))).toEqual({ pdf: 'own', png: 'own', tlo: 'text', json: 'text', docx: null, md: 'text', rtf: null, html: 'own' });
 });
 
 /** Whether a build failed only for want of a browser (a canvas, the page; kit/exports.ts's "not drawn"): left to the browser test. */

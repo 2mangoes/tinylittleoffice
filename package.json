@@ -39,6 +39,7 @@
     "docs:exports": "node scripts/exports-doc.ts",
     "docs:network": "node scripts/network-doc.ts",
     "docs:deps": "node scripts/dependencies.ts",
+    "schema": "node scripts/schema.ts",
     "fonts:box": "bash scripts/fonts-box.sh",
     "icons": "node scripts/icons.ts",
     "emoji": "node scripts/emoji.ts",

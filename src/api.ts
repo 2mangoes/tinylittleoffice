@@ -9,11 +9,13 @@
  *   read(url).text;   // the document's TLO text, its title in the head
  *   await text(url);  // what the document says, as Markdown (its text layer: src/doc/text.ts)
  *   const { url, password } = await link('write', 'Salaries…\n', { seal: true });  // under a password the app made
+ *   toJson(read(url).text);  // the kernel's document as JSON (packages/doc/schema/tlo.schema.json); fromJson gives the text back
  *
  * The apps' definitions (their names and templates) are a lazy import: `apps()` and `templates()` are
  * asynchronous so that the rest stays small.
  */
 import { parse as parseText, plainText, textMarkdown, textOf, write as writeDoc, withHead, type Doc } from './doc/index.ts';
+import { docJson, jsonDoc } from './doc/json.ts';
 import { decodeDoc, encodeDoc, packDoc, URL_LIMIT } from './kit/codec.ts';
 import { newLocker, seal } from './kit/crypt.ts';
 import { generatePassword } from './kit/passwords.ts';
@@ -36,6 +38,13 @@ export const decode = (payload: string): string => decodeDoc(payload);
 export const parse = (text: string): Doc => parseText(text);
 /** The kernel's document as canonical TLO text. */
 export const write = (doc: Doc): string => writeDoc(doc);
+/**
+ * TLO text as the kernel's document in JSON: its keys in the order the types name them, two-space indent. The
+ * contract is the JSON Schema at packages/doc/schema/tlo.schema.json, written from the kernel's types.
+ */
+export const toJson = (text: string): string => docJson(parseText(text));
+/** A document in JSON as canonical TLO text; one that does not fit the schema throws, naming the path of the fault. */
+export const fromJson = (json: string): string => writeDoc(jsonDoc(json));
 
 export interface LinkOptions {
   /** The document's name (into its head). */
@@ -109,6 +118,8 @@ export interface Read {
   view: string;
   /** The document's TLO text. */
   text: string;
+  /** The same document as JSON (toJson). */
+  json: string;
   /** The head's title, '' when it names none (an app may also take its name from its words). */
   title: string;
   /** The head's by, '' when it names no one. */
@@ -136,8 +147,9 @@ export function read(url: string): Read {
     ({ app, view } = p);
     text = p.title ? withHead(p.text, { title: p.title }) : p.text;
   }
-  const head = parseText(text).head;
-  return { app, view, text, title: head.title ?? '', by: head.by ?? '', display: route.display, ...(route.lang ? { lang: route.lang } : {}) };
+  const doc = parseText(text);
+  const head = doc.head;
+  return { app, view, text, json: docJson(doc), title: head.title ?? '', by: head.by ?? '', display: route.display, ...(route.lang ? { lang: route.lang } : {}) };
 }
 
 /**
@@ -209,11 +221,11 @@ export async function templates(app: string): Promise<{ id: string; name: string
 /** The files an app makes from a document without a browser (its own formats that need no drawing), by extension. */
 export async function formats(app: string): Promise<string[]> {
   const { appOf } = await import('./kit/apps.ts');
-  return ['md', 'tlo', ...(appOf(app)?.exports ?? []).map((x) => x.ext).filter((x) => x !== 'md')];
+  return ['md', 'tlo', 'json', ...(appOf(app)?.exports ?? []).map((x) => x.ext).filter((x) => x !== 'md')];
 }
 
 /**
- * A document as a file of one of its app's formats: 'md' and 'tlo' for every app, and the app's own where they
+ * A document as a file of one of its app's formats: 'md', 'tlo' and 'json' for every app, and the app's own where they
  * need no browser to draw them (a sheet's csv and xlsx, a calendar's ics, a text's docx…). Throws for a
  * format the app does not have, or one that needs a browser.
  */

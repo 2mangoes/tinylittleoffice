@@ -8,12 +8,16 @@
  *   tinyoffice template <app> <id>                    a template's document (TLO)
  *   tinyoffice link <app> [file]                      a link for a document (a file, or stdin)
  *   tinyoffice link <file.tlo>                        a link for a .tlo file (its app is in its head)
+ *   tinyoffice link [app] --json <file.json>          a link for a document in JSON (its app, or the one in its head)
  *        --title T  --by B  --view pdf|show|embed|…  --display  --lang ht  --plain  --site URL
  *        --seal                                       under a password the app makes: the link, then
  *                                                     the password on a second line (send it another way)
- *   tinyoffice read <link>                            the document's TLO text (--json: app, view, title, by too)
+ *   tinyoffice read <link>                            the document's TLO text (--json: app, view, title, by too,
+ *                                                     and the document as JSON)
+ *   tinyoffice json <link|file.tlo>                   the document as JSON: the kernel's own, to the schema in
+ *                                                     schema/tlo.schema.json (also <app> <file>, or <app> and stdin)
  *   tinyoffice read --text <link|file.tlo>            what it says, as Markdown: what a screen reader reads
- *   tinyoffice file <link> [--as tlo|md|csv|…] [--out path|-]
+ *   tinyoffice file <link> [--as tlo|md|json|csv|…] [--out path|-]
  *                                                     the document as a file, named after its title (.tlo by default)
  *   tinyoffice diff <link> <link>                     what the second changed, block by block (exit 1 when they differ)
  *   tinyoffice lint <link|file.tlo> [--json]          what the eye would have seen, a line a finding:
@@ -24,7 +28,7 @@
  *        (read --text, lint and measure also take <app> <file>, or <app> and stdin)
  */
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
-import { apps, compare, file, fromTlo, lint, link, markdown, measure, PASSWORD_REFUSED, plain, read, templates } from '../../src/api.ts';
+import { apps, compare, file, fromJson, fromTlo, lint, link, markdown, measure, PASSWORD_REFUSED, plain, read, templates, toJson } from '../../src/api.ts';
 import { slug } from '../../src/kit/draw.ts';
 
 const USAGE = readFileSync(new URL(import.meta.url), 'utf8')
@@ -76,9 +80,12 @@ async function main() {
     }
     case 'link': {
       if (flags.password !== undefined) die(PASSWORD_REFUSED);
-      // One argument that is a file: a .tlo, its app in its head; else the app, then the file (or stdin).
-      const tlo = args.length === 1 && existsSync(args[0]) ? fromTlo(words(args[0])) : null;
-      const app = tlo?.app || (tlo ? die(`${args[0]} names no app in its head (app: sheet); say which: tinyoffice link <app> ${args[0]}`) : (args[0] ?? die('which app?')));
+      // --json: the document is JSON (its app given, or in its head). One argument that is a file: a .tlo, its app in
+      // its head. Else the app, then the file (or stdin).
+      const one = args.length === 1 && existsSync(args[0]) ? args[0] : null;
+      const tlo = flags.json ? fromTlo(fromJson(words(one ?? args[1]))) : one ? fromTlo(words(one)) : null;
+      const given = one ? undefined : args[0];
+      const app = given || tlo?.app || die(one ? `${one} names no app in its head (app: sheet); say which: tinyoffice link <app> ${one}` : 'which app?');
       const text = tlo ? tlo.text : words(args[1]);
       const view = str('view');
       const site = str('site');
@@ -94,8 +101,10 @@ async function main() {
         return out(await markdown(app, text));
       }
       const r = read(args[0] ?? die('which link?'));
-      return out(flags.json ? JSON.stringify(r, null, 2) : r.text);
+      return out(flags.json ? JSON.stringify({ ...r, json: JSON.parse(r.json) }, null, 2) : r.text);
     }
+    case 'json':
+      return out(toJson(documentOf().text));
     case 'file': {
       const r = read(args[0] ?? die('which link?'));
       const ext = str('as') ?? 'tlo';

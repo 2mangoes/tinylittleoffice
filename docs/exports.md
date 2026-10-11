@@ -19,6 +19,7 @@ definitions by `node scripts/exports-doc.ts`; a test fails when it is out of dat
 | `.html` | Web page (HTML): a web page of its pages as pictures (an app with its own web page lists it below, and that one is used). |
 | `.md` | Markdown: the document exactly as its link holds it (docs/tlo.md). |
 | `.tlo` | Text (TLO): the document exactly as its link holds it (docs/tlo.md). |
+| `.json` | Data (JSON): the kernel’s document as JSON, its app in its head, to the schema at packages/doc/schema/tlo.schema.json (docs/tlo.md, The document as JSON); Open a file… opens it again. |
 
 Text files are UTF-8; only CSV carries a byte order mark, which Excel needs. A file is named from the
 document's title, or from what one of the app's documents is called.

@@ -219,6 +219,7 @@ export default {
   'Picture (PNG)': 'ছবি (PNG)',
   'Web page (HTML)': 'ওয়েব পাতা (HTML)',
   'Text (TLO)': 'টেক্সট (TLO)',
+  'Data (JSON)': 'ডেটা (JSON)',
   'Downloaded {name}': '{name} ডাউনলোড হয়েছে',
   'Download failed': 'ডাউনলোড হয়নি',
   'Open in Tiny Little Office': 'Tiny Little Office-এ খুলুন',

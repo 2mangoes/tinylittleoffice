@@ -234,6 +234,7 @@ export default {
   'Picture (PNG)': '图片（PNG）',
   'Web page (HTML)': '网页（HTML）',
   'Text (TLO)': '文本（TLO）',
+  'Data (JSON)': '数据（JSON）',
   'Downloaded {name}': '已下载{name}',
   'Download failed': '下载失败',
   'Open in Tiny Little Office': '在 小小办公室 中打开',

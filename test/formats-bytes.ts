@@ -16,7 +16,7 @@ export function looksLike(mime: string, out: Uint8Array | string): boolean {
   if (base === 'text/html') return /^<!doctype html>/i.test(text.trimStart());
   if (base === 'application/rtf') return text.startsWith('{\\rtf');
   if (base === 'text/calendar') return text.startsWith('BEGIN:VCALENDAR');
-  if (base === 'application/geo+json') return !!JSON.parse(text);
+  if (base === 'application/geo+json' || base === 'application/json') return !!JSON.parse(text);
   if (/xml/.test(base)) return text.trimStart().startsWith('<?xml');
   // A text: words, and no stray decoding.
   return base.startsWith('text/') && !text.includes('�');

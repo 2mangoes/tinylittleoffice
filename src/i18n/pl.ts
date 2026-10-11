@@ -235,6 +235,7 @@ export default {
   'Picture (PNG)': 'Obraz (PNG)',
   'Web page (HTML)': 'Strona internetowa (HTML)',
   'Text (TLO)': 'Tekst (TLO)',
+  'Data (JSON)': 'Dane (JSON)',
   'Downloaded {name}': 'Pobrano {name}',
   'Download failed': 'Pobieranie nie powiodło się',
   'Open in Tiny Little Office': 'Otwórz w Tiny Little Office',
