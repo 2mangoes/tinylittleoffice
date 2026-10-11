@@ -140,9 +140,22 @@ test('a zip of documents kept at once: in its order, the first newest; one alrea
     ['old', 1],
   ]);
   expect(new Set(library().map((k) => k.id)).size).toBe(3);
-  // Under Private nothing is kept.
+  // Under Private nothing is kept, and what was kept is gone: Saved again starts from nothing.
   setKeeping(false);
   expect(keepAll([{ app: 'write', title: 'X', hash: '#/v1/write/yx' }])).toBe(0);
   setKeeping(true);
-  expect(library().map((k) => k.title)).toEqual(['One', 'Two', 'old']);
+  expect(library()).toEqual([]);
+});
+
+test('Saved turned off and on again: the documents it removed stay removed (Paul, 2026-10-12)', () => {
+  setKeeping(true);
+  keep(entry('a', 1));
+  keep(entry('b', 2));
+  expect(library().length).toBe(2);
+  setKeeping(false);
+  expect(library()).toEqual([]);
+  expect(mem.length).toBe(0);
+  setKeeping(true);
+  expect(library()).toEqual([]);
+  expect(mem.getItem('tinyoffice.library')).toBeNull();
 });

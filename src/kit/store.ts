@@ -12,7 +12,7 @@ const KEEP = 'tinyoffice.keep';
 const memory = new Map<string, string>();
 /** Preferences kept on the device in either state, written there straight through `store`. */
 const DEVICE = ['tinyoffice.size', 'to-theme'];
-/** The keys this site writes that Private moves into memory; anything else in localStorage is not ours to touch. */
+/** The keys this site writes, and forgets when Private comes; anything else in localStorage is not ours to touch. */
 const ours = (k: string) => k !== KEEP && !DEVICE.includes(k) && k.startsWith('tinyoffice.');
 
 function local(): Storage | null {
@@ -49,7 +49,11 @@ export const store = {
   },
 };
 
-/** Keep things from now on (what the visit has set so far comes along), or stop: the device forgets all of it, the visit keeps its settings in memory. */
+/**
+ * Keep things from now on (what the visit has set so far comes along), or stop: every trace goes, from the device
+ * and from memory alike, so turning it on again starts from nothing (Paul, 2026-10-12: "I turn save off and then
+ * back on and the documents it removed are still there"). The size and the theme stay, as in either state.
+ */
 export function setKeeping(on: boolean) {
   const l = local();
   if (!l) return;
@@ -58,10 +62,8 @@ export function setKeeping(on: boolean) {
     for (const [k, v] of memory) l.setItem(k, v);
     memory.clear();
   } else {
-    for (const k of Object.keys(l).filter(ours)) {
-      memory.set(k, l.getItem(k)!);
-      l.removeItem(k);
-    }
+    for (const k of Object.keys(l).filter(ours)) l.removeItem(k);
+    memory.clear();
     l.removeItem(KEEP);
   }
 }
