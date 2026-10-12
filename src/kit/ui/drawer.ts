@@ -28,6 +28,8 @@
 import { LitElement, html, nothing, type TemplateResult } from 'lit';
 import type { AppDef } from '../core/app.ts';
 import { apps, siteRoot } from '../core/apps.ts';
+import { mark } from '../draw/mark.ts';
+import { unsafeSVG } from 'lit/directives/unsafe-svg.js';
 import { preloadTemplates, templateHash, templatesOf as arrivedTemplates } from './home.ts';
 import { library } from '../share/library.ts';
 import { icon, UI } from '../draw/icons.ts';
@@ -239,7 +241,7 @@ export class ToDrawer extends LitElement {
     const chosen = chosenLanguage() ?? '';
     return html`<dialog class="to-drawer" aria-label=${t('Tiny Little Office')} @close=${this.onClose} @toggle=${{ handleEvent: this.onToggle, capture: true }} @click=${(e: Event) => e.target === this.dialog && this.close()}>
       <div class="to-drawer-inner">
-        <!-- The head is the language picker and Close, the name not said again here (Paul, 2026-10-10). -->
+        <!-- The head is the language picker, then (away from home) the mark as the way home beside Close (Paul, 2026-10-12); the name is not said again here (2026-10-10). -->
         <header class="to-drawer-head">
           <label class="to-field to-drawer-lang" title=${t('Language')}>
             <select aria-label=${t('Language')} @change=${(e: Event) => void setLanguage((e.target as HTMLSelectElement).value || null)}>
@@ -247,6 +249,7 @@ export class ToDrawer extends LitElement {
               ${languages().map((c) => html`<option value=${c} ?selected=${c === chosen}>${languageName(c)}</option>`)}
             </select>
           </label>
+          ${this.def ? html`<a class="to-btn to-tool to-drawer-home" href="#/" aria-label=${t('Home')} title=${t('Home')} @click=${() => this.close()}>${unsafeSVG(mark(20))}</a>` : nothing}
           <button type="button" class="to-btn to-tool" aria-label=${t('Close')} title=${t('Close')} @click=${() => this.close()}>${icon(UI.close)}</button>
         </header>
         <section class="to-drawer-section to-drawer-save">

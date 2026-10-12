@@ -200,7 +200,7 @@ test('a kept document’s row holds its first page, small, once it is in sight; 
   }
 });
 
-test('the menu is a hamburger without a border, 44px, at the right; the Office mark is the favicon alone, the drawer’s head being the language picker', async () => {
+test('the menu is a hamburger without a border, 44px, at the right; the Office mark is the favicon and, away from home, the drawer’s way home beside Close', async () => {
   const shell = await mount('#/v1/write');
   const burger = shell.querySelector<HTMLButtonElement>('.to-burger')!;
   // A hamburger, not the mark (Paul, 2026-10-10: "Make the hamburger a hamburger").
@@ -222,7 +222,9 @@ test('the menu is a hamburger without a border, 44px, at the right; the Office m
   const head = drawer.querySelector('.to-drawer-head')!.getBoundingClientRect();
   expect(drawer.querySelector('.to-find')!.getBoundingClientRect().top).toBeGreaterThanOrEqual(head.bottom - 0.5);
   expect(drawer.querySelector('.to-drawer .to-brand')).toBeNull();
-  expect(drawer.querySelector('.to-drawer svg.to-mark')).toBeNull();
+  // The mark in the drawer is the way home, nothing else (Paul, 2026-10-12), with no words beside it.
+  expect([...drawer.querySelectorAll('.to-drawer svg.to-mark')].map((m) => m.closest('a')?.getAttribute('href'))).toEqual(['#/']);
+  expect(drawer.querySelector('.to-drawer-home')!.textContent!.trim()).toBe('');
   expect(indexHtml).toMatch(/<link rel="icon" href="\.\/favicon\.svg" type="image\/svg\+xml" \/>/);
 });
 

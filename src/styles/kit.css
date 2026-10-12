@@ -577,20 +577,25 @@
     padding: 0.5em;
     border-bottom: 1px solid var(--to-border);
   }
-  /* The drawer's head is the language picker and Close, not the name again (drawer.ts); the search sits under it. */
+  /* The drawer's head is the language picker at the start, a little narrower than the row (Paul, 2026-10-12: "Shrink the
+     language menu a little"), then the mark as the way home beside Close at the end, away from the home page (drawer.ts);
+     the search sits under it. */
   .to-drawer-head .to-drawer-lang {
     display: flex;
     align-items: center;
     gap: 0.5em;
-    flex: 1;
+    flex: 0 1 auto;
     min-width: 0;
     margin: 0;
   }
   .to-drawer-head .to-drawer-lang select {
-    flex: 1 1 0;
+    flex: 0 1 auto;
     width: auto;
     min-width: 0;
-    max-width: none; /* a field's select stops at 60%; the head's has the row */
+    max-width: 10em; /* a field's select stops at 60%; the head's at ten ems */
+  }
+  .to-drawer-head .to-drawer-home {
+    margin-inline-start: auto;
   }
   .to-dialog-head h2 {
     margin: 0;

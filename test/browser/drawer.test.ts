@@ -39,6 +39,8 @@ test("the hamburger opens the drawer, the home page's drawer has no app rows, Fi
   expect(find.placeholder).toBe('Find app, template, or command');
   // The drawer lists no apps anywhere (Paul, 2026-10-12: search finds them, and the home page is the list); Find still finds.
   expect(shell.querySelectorAll('.to-drawer-apps .to-app-head').length).toBe(0);
+  // At home there is no way home in the head: the page is home.
+  expect(shell.querySelector('.to-drawer-head .to-drawer-home')).toBeNull();
   find.value = 'zzz';
   find.dispatchEvent(new Event('input', { bubbles: true }));
   await until(() => shell.querySelectorAll('.to-drawer-apps a').length === 0);
@@ -316,6 +318,20 @@ test("the drawer's sections in Paul's order: the language, Save in browser, the 
   for (let i = 1; i < order.length; i++) expect(order[i - 1].compareDocumentPosition(order[i]) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
   // No rows of apps, at home or away (Paul, 2026-10-12).
   expect(dialog.querySelectorAll('.to-drawer-apps .to-app-head').length).toBe(0);
+  // The head, left to right: the language select, a little narrower than the row; the mark as the way home; Close (Paul, 2026-10-12).
+  const head = dialog.querySelector<HTMLElement>('.to-drawer-head')!;
+  const [lang, home, close] = [
+    head.querySelector<HTMLElement>('.to-drawer-lang select')!,
+    head.querySelector<HTMLElement>('a.to-drawer-home')!,
+    head.querySelector<HTMLElement>('button[aria-label=Close]')!,
+  ];
+  expect(home.getAttribute('href')).toBe('#/');
+  expect(home.getAttribute('aria-label')).toBe('Home');
+  expect(home.querySelector('svg.to-mark')).not.toBeNull();
+  expect(lang.getBoundingClientRect().width).toBeLessThan(head.getBoundingClientRect().width * 0.55);
+  expect(lang.getBoundingClientRect().right).toBeLessThanOrEqual(home.getBoundingClientRect().left);
+  expect(home.getBoundingClientRect().right).toBeLessThanOrEqual(close.getBoundingClientRect().left + 0.5);
+  expect(Math.round(home.getBoundingClientRect().height)).toBe(Math.round(close.getBoundingClientRect().height));
   // The size: the eye, then the stepper, no words; its name for a screen reader alone.
   const sz = dialog.querySelector<HTMLElement>('.to-size')!;
   expect(sz.getAttribute('aria-label')).toBe('Size of everything');
