@@ -10,10 +10,11 @@ import { fileURLToPath } from 'node:url';
 
 const root = resolve(fileURLToPath(import.meta.url), '../..');
 
-/** The @font-face rules of src/styles/fonts.css, each file as a data: URL. */
+/** The @font-face rules of src/styles/fonts.css that name a file, each file as a data: URL (the device's stand-ins, local(), left out: a picture drawn here is in Plex alone). */
 export function plexFaces(): string {
   const css = readFileSync(join(root, 'src/styles/fonts.css'), 'utf8').replace(/\/\*[\s\S]*?\*\//g, '');
   return [...css.matchAll(/@font-face\s*\{[^}]*\}/g)]
+    .filter((m) => m[0].includes("url('/fonts/"))
     .map((m) => m[0].replace(/url\('\/fonts\/([^']+)'\)/, (_, file: string) => `url('data:font/woff2;base64,${readFileSync(join(root, 'public/fonts', file)).toString('base64')}')`))
     .join('\n');
 }

@@ -84,7 +84,7 @@ test('the static HTML says what the rendered page shows: the apps’ names on th
   for (const a of apps()) expect(home).toContain(`<a href="${a.id}/">${a.name}</a>`);
   // The agents' line comes first, before the site's name and the apps', naming the guide and the fence.
   expect(home).toMatch(
-    /^<header id="to-first"><p>Agents: https:\/\/office\.example\.org\/llms\.txt says how to make a document as a link; a document goes inside another as a fence named by its app\.<\/p><h1>/,
+    /^<header id="to-first"><p class="sr-only">Agents: https:\/\/office\.example\.org\/llms\.txt says how to make a document as a link; a document goes inside another as a fence named by its app\.<\/p><h1>/,
   );
   expect(home.indexOf('llms.txt')).toBeLessThan(home.indexOf('<a href="write/">'));
   const write = firstHeader(read('write/index.html'));
@@ -95,9 +95,14 @@ test('the static HTML says what the rendered page shows: the apps’ names on th
     const page = firstHeader(read(`${a.id}/index.html`));
     for (const name of a.templates) expect(page, `${a.id}: ${name}`).toContain(`<li>${name.replace(/&/g, '&amp;').replace(/</g, '&lt;')}</li>`);
   }
-  // Nothing hidden: no class, no style, no hidden attribute on what a crawler reads first.
+  // The page as it is drawn before the app (kit.css, #to-first): the words a crawler reads, where the page shows them;
+  // what it does not show (the line for agents, an app's templates' names) out of sight as a screen reader's words are
+  // (.sr-only), and nothing else: no other class, no style, no hidden attribute.
   expect(read('write/index.html')).toMatch(/<header id="to-first">/);
-  expect(home).not.toMatch(/hidden|display:\s*none|sr-only|style=/);
+  expect(write).toMatch(/<\/p><ul class="sr-only"><li>/);
+  for (const first of [home, write]) expect(first.replaceAll(' class="sr-only"', ''), first).not.toMatch(/hidden|display:\s*none|class=|style=/);
+  expect(home.match(/class="sr-only"/g)).toHaveLength(1);
+  expect(write.match(/class="sr-only"/g)).toHaveLength(1);
 });
 
 test('what the check finds wrong: a page left out of the sitemap, structured data that does not say the page, a template not named', () => {

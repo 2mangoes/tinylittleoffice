@@ -74,6 +74,9 @@
     /* A row's inset inside the column, from its hover box to its icon (kit.css .to-app-open), in the document's scale;
        the home page's wordmark is set in by as much, so its first letter stands on the icons' edge. */
     --to-row-inset: calc(0.5 * var(--to-scale));
+    /* A field's inside, from its border to its words (kit.css, the fields), in the field's own ems: the title's box,
+       and the title an app's page shows before the app is there (kit.css, #to-first). */
+    --to-field-pad: 0.625em;
     /* The line: body text's, and the tighter one of headings and labels. */
     --to-line: 1.5;
     --to-line-label: 1.25;

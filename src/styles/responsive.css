@@ -12,6 +12,9 @@
     .to-main.to-wide:has(> to-write-editor) {
       padding-top: 0;
     }
+    #to-first > h1 + p {
+      margin-top: var(--to-bar-h);
+    }
   }
   @media (max-width: 760px) {
     :root {
@@ -187,6 +190,10 @@
     }
     to-chrome:not([editing]) .to-column.barred {
       padding-bottom: calc(var(--to-bar-h) + env(safe-area-inset-bottom));
+    }
+    /* The page before the app (kit.css, #to-first): no bar's room over the first words either. */
+    #to-first > h1 + p {
+      margin-top: 0;
     }
     .to-column.barred > main > .to-editor to-bar:not(:is(dialog, [popover], .to-dialog, .deck-show) *) {
       top: auto;

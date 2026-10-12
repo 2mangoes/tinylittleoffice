@@ -12,10 +12,57 @@ import { STACKS } from '../src/apps/write/look.ts';
 const root = new URL('../', import.meta.url);
 const read = (p: string) => readFileSync(new URL(p, root), 'utf8');
 const css = read('src/styles/fonts.css').replace(/\/\*[\s\S]*?\*\//g, '');
-const faces = [...css.matchAll(/@font-face\s*\{([^}]*)\}/g)].map((m) => {
-  const prop = (name: string) => new RegExp(`${name}:\\s*([^;]+);`).exec(m[1])?.[1].trim() ?? '';
-  return { family: prop('font-family').replace(/['"]/g, ''), weight: prop('font-weight'), style: prop('font-style'), src: prop('src'), range: prop('unicode-range'), display: prop('font-display') };
+const declared = [...css.matchAll(/@font-face\s*\{([^}]*)\}/g)].map((m) => {
+  const prop = (name: string) => new RegExp(`(?<![\\w-])${name}:\\s*([^;]+);`).exec(m[1])?.[1].trim().replace(/\s+/g, ' ') ?? '';
+  return {
+    family: prop('font-family').replace(/['"]/g, ''),
+    weight: prop('font-weight'),
+    style: prop('font-style'),
+    src: prop('src'),
+    range: prop('unicode-range'),
+    display: prop('font-display'),
+    adjust: ['size-adjust', 'ascent-override', 'descent-override', 'line-gap-override'].map(prop),
+  };
 });
+/** The faces the site serves, and the device's faces standing in for them while they are on their way. */
+const faces = declared.filter((f) => !f.src.startsWith('local('));
+const fallbacks = declared.filter((f) => f.src.startsWith('local('));
+/** The home page's wordmark before the app is the Serif's stand-in under a name of its own (kit.css, #to-first). */
+const wordmark = fallbacks.find((f) => f.family === 'IBM Plex Serif Stand-in');
+// A face on its way is drawn in a face of the device's, sized to Plex (Paul, 2026-10-12: "What can we do about fouc"):
+// declared just before it, the same family, weight, style and characters, so the browser reaches for it while the
+// file it asked for has not come (the last face declared is tried first), and the words take the room Plex will.
+test('each Sans, Serif and Mono face has a fallback of the device’s just before it, sized to Plex; none is a file, none is Plex', () => {
+  const plexFamilies = ['IBM Plex Sans', 'IBM Plex Serif', 'IBM Plex Mono'];
+  expect(fallbacks).toHaveLength(11);
+  // The wordmark's is the Serif's own stand-in, every descriptor the same but the name.
+  const serif = fallbacks.find((f) => f.family === 'IBM Plex Serif' && f.weight === '400' && f.style === 'normal');
+  expect({ ...wordmark, family: 'IBM Plex Serif' }).toEqual(serif);
+  for (const [i, f] of declared.entries()) {
+    if (!plexFamilies.includes(f.family) || f.src.startsWith('local(')) continue;
+    const before = declared
+      .slice(0, i)
+      .filter((d) => d !== wordmark)
+      .at(-1)!;
+    expect(before.src, `${f.family} ${f.weight} ${f.style}`).toMatch(/^local\(/);
+    expect([before.family, before.weight, before.style, before.range]).toEqual([f.family, f.weight, f.style, f.range]);
+  }
+  for (const f of fallbacks) {
+    const names = [...f.src.matchAll(/local\('([^']+)'\)/g)].map((m) => m[1]);
+    expect(f.src).toBe(names.map((n) => `local('${n}')`).join(', '));
+    expect(names.join(), f.family).not.toMatch(/Plex/);
+    // The size and the three metrics, each a percentage; the faces that come with the device need no font-display.
+    for (const v of f.adjust) expect(v, `${f.family} ${f.weight} ${f.style}`).toMatch(/^\d+(\.\d+)?%$/);
+    expect(f.display).toBe('');
+  }
+  // The device's Sans, Serif and Mono that share their widths (Arial, Helvetica and Liberation Sans; Times and Liberation
+  // Serif; Menlo, Courier New and Liberation Mono), so one size fits each.
+  const first = (family: string) => fallbacks.find((f) => f.family === family)!.src;
+  expect(first('IBM Plex Sans')).toMatch(/^local\('Arial'\).*local\('Helvetica'\).*local\('Liberation Sans'\)/);
+  expect(first('IBM Plex Serif')).toMatch(/^local\('Times New Roman'\).*local\('Times'\).*local\('Liberation Serif'\)/);
+  expect(first('IBM Plex Mono')).toMatch(/^local\('Menlo Regular'\).*local\('Courier New'\).*local\('Liberation Mono'\)/);
+});
+
 const fileOf = (src: string) => /url\(['"]?\/fonts\/([^'")]+)['"]?\)/.exec(src)?.[1];
 
 test('the faces: Plex Sans and Serif in four, Mono in two, Arabic and Devanagari in two; 400 and 600 only', () => {

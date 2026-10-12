@@ -183,3 +183,116 @@ test('a page in French asks for its page and the French file, and nothing else t
   const f = await fetched(page);
   expect(f.all.filter((r) => r.network && (had.has(r.path) || /^\/assets\//.test(r.path))).map((r) => r.path)).toEqual([expect.stringMatching(/^\/assets\/lang-fr-[\w-]{8}\.js$/)]);
 });
+
+/** Where a page's words are, in the order the page before the app and the page the shell draws both have them. */
+interface Placed {
+  at: number;
+  words: { what: string; x: number; y: number }[];
+  /** The faces still on their way when the words were placed. */
+  loading: string[];
+}
+
+/**
+ * The page before the app (Paul, 2026-10-12: "What can we do about fouc"): over a slow line, cold, the static header the
+ * build writes is drawn as the page it becomes (kit.css, #to-first) and the device's faces stand in for Plex at Plex's
+ * size (src/styles/fonts.css), so from the first paint through the shell's start and the faces' arrival nothing on the
+ * page moves. Two measures, on the home page and the Word Processor's, at a phone's width and a desktop's, over 1.5 Mbps
+ * with 150 ms of latency (the line the jump was seen on):
+ *
+ *   - the layout shifts Chromium reports (`layout-shift` entries, none after an input), summed from the page's start
+ *     until the shell has drawn and every face it asked for is in: under 0.05 (Google's "good" is 0.1). The shell's
+ *     page replaces the static one rather than moving it, which Chromium does not count as a shift (the build before
+ *     this measured 0 too), so this holds the faces' swap, and
+ *   - the jump itself: the words of the page before the app, where they were in the last frame before the shell took
+ *     them away, against the same words where the shell draws them once the faces are in (the wordmark and every app's
+ *     name; an app's name in the title box and its line where the first words go): within two pixels.
+ *
+ * What each measured is in the test's annotations.
+ */
+test('over a slow line the page before the app is the page the app draws, and nothing moves as the app and the faces arrive', async ({ browser, browserName }) => {
+  test.skip(browserName !== 'chromium', 'layout shifts are reported in Chromium');
+  test.setTimeout(180_000);
+  for (const viewport of [
+    { width: 390, height: 844 },
+    { width: 1100, height: 800 },
+  ])
+    for (const url of ['/', '/write/']) {
+      const context = await browser.newContext({ viewport });
+      await context.addInitScript(() => {
+        const w = window as unknown as { shifts: { value: number; at: number }[]; before: Placed | null };
+        w.shifts = [];
+        new PerformanceObserver((list) => {
+          for (const e of list.getEntries() as unknown as { value: number; hadRecentInput: boolean; startTime: number }[])
+            if (!e.hadRecentInput) w.shifts.push({ value: e.value, at: Math.round(e.startTime) });
+        }).observe({ type: 'layout-shift', buffered: true });
+        // Every frame while the static header is there: where its words are drawn (the last frame's is what the shell replaces).
+        w.before = null;
+        const rect = (el: Element, what: string) => {
+          const r = document.createRange();
+          r.selectNodeContents(el);
+          const b = r.getBoundingClientRect();
+          return { what, x: b.left, y: b.top + b.height / 2 };
+        };
+        const sample = () => {
+          const first = document.getElementById('to-first');
+          if (!first && document.querySelector('to-chrome')) return;
+          if (first?.querySelector('h1')) {
+            const line = first.querySelector('h1 + p');
+            const lineAt = line && {
+              what: 'line',
+              x: line.getBoundingClientRect().left + parseFloat(getComputedStyle(line).paddingLeft),
+              y: line.getBoundingClientRect().top + parseFloat(getComputedStyle(line).paddingTop),
+            };
+            w.before = {
+              at: Math.round(performance.now()),
+              words: [rect(first.querySelector('h1')!, 'title'), ...(lineAt ? [lineAt] : [...first.querySelectorAll('li > a')].map((a) => rect(a, a.textContent!)))],
+              loading: [...document.fonts].filter((f) => f.status === 'loading').map((f) => `${f.family} ${f.weight} ${f.style}`),
+            };
+          }
+          requestAnimationFrame(sample);
+        };
+        requestAnimationFrame(sample);
+      });
+      const page = await context.newPage();
+      const cdp = await context.newCDPSession(page);
+      await cdp.send('Network.enable');
+      await cdp.send('Network.emulateNetworkConditions', { offline: false, latency: 150, downloadThroughput: (1.5 * 1024 * 1024) / 8, uploadThroughput: (1.5 * 1024 * 1024) / 8 });
+      await page.goto(url, { waitUntil: 'commit' });
+      await expect(page.locator('#to-first')).toHaveCount(0, { timeout: 60_000 });
+      if (url === '/write/') await expect(page.locator('to-write-editor to-text .tx')).toBeVisible();
+      await page.evaluate(() => document.fonts.ready.then(() => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)))));
+      const { shifts, painted, before, after } = await page.evaluate(() => {
+        const w = window as unknown as { shifts: { value: number; at: number }[]; before: Placed | null };
+        const rect = (el: Element, what: string) => {
+          const r = document.createRange();
+          r.selectNodeContents(el);
+          const b = r.getBoundingClientRect();
+          return { what, x: b.left, y: b.top + b.height / 2 };
+        };
+        const title = document.querySelector<HTMLInputElement>('.to-title');
+        const tx = document.querySelector('to-write-editor .tx');
+        const words = title
+          ? [
+              (() => {
+                const s = getComputedStyle(title);
+                const r = title.getBoundingClientRect();
+                return { what: 'title', x: r.left + parseFloat(s.borderLeftWidth) + parseFloat(s.paddingLeft), y: r.top + r.height / 2 };
+              })(),
+              ...(tx ? [{ what: 'line', x: tx.getBoundingClientRect().left, y: tx.getBoundingClientRect().top }] : []),
+            ]
+          : [rect(document.querySelector('.to-brand')!, 'title'), ...[...document.querySelectorAll('.to-app-name')].map((n) => rect(n, n.textContent!))];
+        return { shifts: w.shifts, before: w.before, after: words, painted: Math.round(performance.getEntriesByName('first-paint')[0]?.startTime ?? -1) };
+      });
+      const sum = shifts.reduce((n, s) => n + s.value, 0);
+      const off = (before?.words ?? []).map((b, i) => ({ what: b.what, dx: Math.round((b.x - after[i]?.x) * 10) / 10, dy: Math.round((b.y - after[i]?.y) * 10) / 10 }));
+      test.info().annotations.push({
+        type: 'first paint',
+        description: `${url} at ${viewport.width}: first paint at ${painted} ms; layout shift ${sum.toFixed(4)}; the shell's words against the page before it (last seen at ${before?.at} ms, faces on their way then: ${before?.loading.join(', ') || 'none'}): ${JSON.stringify(off)}`,
+      });
+      expect(sum, `${url} at ${viewport.width}: ${JSON.stringify(shifts)}`).toBeLessThan(0.05);
+      expect(before, `${url} at ${viewport.width}: the page before the app was never drawn`).not.toBeNull();
+      expect(before!.words.map((b) => b.what)).toEqual(after.map((a) => a.what));
+      for (const o of off) expect(Math.max(Math.abs(o.dx), Math.abs(o.dy)), `${url} at ${viewport.width}: ${o.what} moved ${o.dx}, ${o.dy}`).toBeLessThanOrEqual(2);
+      await context.close();
+    }
+});

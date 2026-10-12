@@ -5,9 +5,11 @@
  *   - a page per app, dist/<id>/index.html: the shell with that app's name and line in its tags and its own
  *     canonical address, so a shared link previews as that app; dist/embed/index.html, the shell at the one
  *     address another site may frame (noindex);
- *   - in each page's <header id="to-first">, plain text the shell takes away as it starts (kit/core/shell.ts): on the
- *     home page the line for agents first (where /llms.txt is), then the apps' names, each a link to its page; on an app's page its name, its line and its
- *     templates' names. The words the rendered page shows, there before any script runs;
+ *   - in each page's <header id="to-first">, plain text the shell takes away as it starts (kit/core/shell.ts;
+ *     scripts/first.ts): on the home page the line for agents first (where /llms.txt is), then the apps' names, each a
+ *     link to its page; on an app's page its name, its line and its templates' names. The words the rendered page
+ *     shows, there before any script runs, drawn by the stylesheet where the rendered page shows them (kit.css,
+ *     #to-first): the line for agents and the templates' names, which it does not show, out of sight;
  *   - one JSON-LD block on each page, a schema.org WebApplication with that page's name, line and address
  *     (`type="application/ld+json"` runs nothing, so the Content-Security-Policy is as it was: scripts/check-build.ts);
  *   - dist/sitemap.xml, the home page and every app's page, dated by the commit; robots.txt names it (public/robots.txt
@@ -21,20 +23,13 @@ import { resolve } from 'node:path';
 import type { AppDef } from '../src/kit/core/app.ts';
 import { origin } from '../src/kit/core/network.ts';
 import { CARD_TAGS, tagCount } from '../tinier/cards.ts';
+import { agents, appFirst, homeFirst, SITE_NAME, text, type Listed } from './first.ts';
 
-/** An app as the pages name it: its route, name, line and templates' names. */
-export interface Listed {
-  id: string;
-  name: string;
-  blurb: string;
-  templates: string[];
-}
+export type { Listed };
 
 /** The registry's apps as the pages name them, their templates asked for (the build runs under node, in English). */
 export const listed = (apps: AppDef[]): Promise<Listed[]> => Promise.all(apps.map(async (a) => ({ id: a.id, name: a.name, blurb: a.blurb, templates: (await a.templates()).map((t) => t.name) })));
 
-const SITE_NAME = 'Tiny Little Office';
-const text = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const attr = (s: string) => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;');
 const unattr = (s: string) => s.replace(/&quot;/g, '"').replace(/&amp;/g, '&');
 
@@ -71,12 +66,6 @@ export function ldBlocks(page: string): unknown[] {
 export const firstHeader = (page: string) => /<header id="to-first">[\s\S]*?<\/header>/.exec(page)?.[0] ?? '';
 const withHeader = (page: string, inner: string) => page.replace(/<header id="to-first">[\s\S]*?<\/header>/, `<header id="to-first">${inner}</header>`);
 
-/**
- * The home page's first words, before the site's name: a fetcher that reads only the first few hundred characters
- * meets the guide for agents first, and that a document goes inside another.
- */
-export const agents = (site: string) => `Agents: ${site}llms.txt says how to make a document as a link; a document goes inside another as a fence named by its app.`;
-
 /** The sitemap of the home page and each app's page. */
 export function sitemap(site: string, ids: string[], lastmod: string): string {
   const url = (loc: string) => `  <url><loc>${text(loc)}</loc>${lastmod ? `<lastmod>${lastmod}</lastmod>` : ''}</url>\n`;
@@ -99,8 +88,7 @@ export function writePages(dist: string, { site, apps, built }: { site: string; 
   mkdirSync(resolve(dist, 'embed'), { recursive: true });
   writeFileSync(resolve(dist, 'embed', 'index.html'), shell.replace(/(src|href)="\.\//g, '$1="../').replace('</title>', '</title>\n    <meta name="robots" content="noindex" />'));
 
-  const names = apps.map((a) => `<li><a href="${a.id}/">${text(a.name)}</a></li>`).join('');
-  writeFileSync(resolve(dist, 'index.html'), ld(withHeader(shell, `<p>${text(agents(site))}</p><h1>${SITE_NAME}</h1><ul>${names}</ul>`), { name: SITE_NAME, description, url: site }));
+  writeFileSync(resolve(dist, 'index.html'), ld(withHeader(shell, homeFirst(site, apps)), { name: SITE_NAME, description, url: site }));
 
   for (const app of apps) {
     const title = `${app.name} · ${SITE_NAME}`;
@@ -115,9 +103,8 @@ export function writePages(dist: string, { site, apps, built }: { site: string; 
       .replace(/(<link rel="canonical" href=")[^"]*"/, `$1${site}${app.id}/"`)
       .replace(/(<meta (?:property="og|name="twitter):image" content=")[^"]*"/g, (m, a) => (card ? `${a}${site}og/${app.id}.png"` : m))
       .replace(/(<meta property="og:image:alt" content=")[^"]*"/, (m, a) => (card ? `${a}${attr(`${app.name}: ${app.blurb}`)}"` : m));
-    const first = `<h1>${text(app.name)}</h1><p>${text(app.blurb)}</p><ul>${app.templates.map((n) => `<li>${text(n)}</li>`).join('')}</ul>`;
     mkdirSync(resolve(dist, app.id), { recursive: true });
-    writeFileSync(resolve(dist, app.id, 'index.html'), ld(withHeader(page, first), { name: app.name, description: app.blurb, url: `${site}${app.id}/` }));
+    writeFileSync(resolve(dist, app.id, 'index.html'), ld(withHeader(page, appFirst(app)), { name: app.name, description: app.blurb, url: `${site}${app.id}/` }));
   }
 
   const robots = resolve(dist, 'robots.txt');
