@@ -85,13 +85,71 @@ let n = 0;
 
 /** Whether the last thing reached for was reached by a pointer (rather than a key): a menu opened so focuses itself, not its first item. */
 let byPointer = false;
+/** Where a pointer last pressed (its pointerdown, then its click) and when, by performance.now(). */
+let pressed: Spot | null = null;
 const MODIFIERS = new Set(['Shift', 'Control', 'Alt', 'Meta', 'AltGraph', 'CapsLock', 'Fn']);
 if (typeof document !== 'undefined') {
-  document.addEventListener('pointerdown', () => (byPointer = true), true);
+  const press = (e: MouseEvent) => (pressed = { x: e.clientX, y: e.clientY, at: performance.now() });
+  document.addEventListener('pointerdown', (e) => ((byPointer = true), press(e)), true);
+  // A click a key made (Enter on a button) has no place: detail 0.
+  document.addEventListener('click', (e) => e.detail > 0 && press(e), true);
   document.addEventListener('keydown', (e) => !MODIFIERS.has(e.key) && (byPointer = false), true);
 }
 /** Whether a pointer, not a key, opened what is opening now. */
 export const openedByPointer = () => byPointer;
+
+/** A place on the screen and a moment. */
+interface Spot {
+  x: number;
+  y: number;
+  at: number;
+}
+/** A finger's width: a press this near the one that opened a list is the same press again. */
+const SPOT_PX = 24;
+/** How long after a list opens a press at its opening spot is not a choice. */
+const SPOT_MS = 500;
+
+/**
+ * A list that opens under the press that opened it (the templates' dialog, over the whole screen: its first rows land
+ * where the button was) takes no press at that spot for the first moment (Paul, 2026-10-12: "Sometimes when I click a
+ * template the link to an app underneath opens up"). `open()` as the list opens remembers where the press that opened
+ * it was, if a pointer's and now; `down` and `stops`, on the list's pointerdown and click in the capture phase, swallow a press
+ * within SPOT_PX of that spot and within SPOT_MS of the open, or of the last press it swallowed (a double tap, a slow
+ * tap the browser delivers after the list opened, a finger that presses again because the list seemed slow): nothing
+ * is chosen and nothing closes. A press decided at its pointerdown is decided for its click; a click whose press began
+ * before the list opened (on the button) is decided by where it lands. A key's click (detail 0) always goes through.
+ */
+export class OpeningPress {
+  private spot: Spot | null = null;
+  /** The press under way in the list, decided at its pointerdown: swallowed or not; null, none began in the list. */
+  private held: boolean | null = null;
+  open() {
+    const now = performance.now();
+    this.spot = byPointer && pressed && now - pressed.at < SPOT_MS ? { ...pressed, at: now } : null;
+    this.held = null;
+  }
+  /** Whether a press here and now is the opening one again; if it is, the moment starts over. */
+  private again(e: MouseEvent): boolean {
+    const s = this.spot;
+    const now = performance.now();
+    if (!s || now - s.at > SPOT_MS || Math.hypot(e.clientX - s.x, e.clientY - s.y) > SPOT_PX) return false;
+    s.at = now;
+    return true;
+  }
+  /** On the list's pointerdown, in the capture phase: the press is decided as it begins. */
+  readonly down = { capture: true, handleEvent: (e: PointerEvent) => (this.held = this.again(e)) };
+  /** On a click in the list, in the capture phase: true when it is the opening press again, stopped here. */
+  stops(e: MouseEvent): boolean {
+    if (e.detail === 0) return false;
+    const held = this.held ?? this.again(e);
+    this.held = null;
+    if (held) {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+    }
+    return held;
+  }
+}
 
 /** The letters typed into each menu lately, for type-ahead. */
 const typed = new WeakMap<HTMLElement, { s: string; at: number }>();

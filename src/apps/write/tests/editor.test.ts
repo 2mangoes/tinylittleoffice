@@ -611,7 +611,7 @@ test("§4 a column's head and a row's number open their menus; the + adds a colu
   const { el, last } = await editor('A | B\n--- | ---\n1 | 2\n3 | 4\n');
   await until(() => !!cell(el, 'A1'));
   await pick(el, el.querySelectorAll<HTMLElement>('to-write-table .wt-col')[0], 'Add a column after');
-  await until(() => last() === 'A | ColB | B\n--- | --- | ---\n1 |  | 2\n3 |  | 4\n');
+  await until(() => last() === 'A | ColB:number | B\n--- | --- | ---\n1 |  | 2\n3 |  | 4\n');
   await pick(el, el.querySelectorAll<HTMLElement>('to-write-table .wt-col')[1], 'Remove this column');
   await until(() => last() === 'A | B\n--- | ---\n1 | 2\n3 | 4\n');
   el.querySelector<HTMLButtonElement>('to-write-table .wt-add-col')!.click();

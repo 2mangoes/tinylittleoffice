@@ -32,7 +32,7 @@ import { decodeDoc, encodeDoc, isSealed } from '../core/codec.ts';
 import { linesOf, search, type Seg } from '../share/search.ts';
 import { icon, UI } from '../draw/icons.ts';
 import { onLanguage, t } from '../core/i18n.ts';
-import { hoverFocus, menuKey, openedByPointer } from './menu.ts';
+import { hoverFocus, menuKey, OpeningPress, openedByPointer } from './menu.ts';
 import { CROPPED, pageSvg } from '../draw/draw.ts';
 import './preview.ts';
 import { startEditing } from './chrome.ts';
@@ -115,6 +115,8 @@ export class ToTemplates extends LitElement {
   readonly uid = `to-templates-${++n}`;
 
   private off = () => {};
+  /** The press that opened the list, which an option under it does not take for the first moment (menu.ts). */
+  private press = new OpeningPress();
 
   constructor() {
     super();
@@ -166,6 +168,7 @@ export class ToTemplates extends LitElement {
     void this.updateComplete.then(() => {
       if (this.dialog.open) return;
       this.dialog.showModal();
+      this.press.open();
       if (!this.bare) this.button.setAttribute('aria-expanded', 'true');
       // Opened by a key, the chosen template has the focus; by a pointer (or before a list with no Blank has arrived), the list itself, and the first arrow goes in.
       if (pointer) this.listbox.focus({ preventScroll: true });
@@ -179,6 +182,8 @@ export class ToTemplates extends LitElement {
     if (!this.bare) this.button.setAttribute('aria-expanded', 'false');
     if (document.activeElement === document.body || this.contains(document.activeElement)) void (this.bare ? focusBack(this.from) : this.button.focus());
   };
+  /** A click in the dialog, before its option has it: the opening press again is nothing; on the backdrop, the list closes. */
+  private onClick = { capture: true, handleEvent: (e: MouseEvent) => !this.press.stops(e) && e.target === this.dialog && this.hide() };
   /** The keys every menu here keeps (menu.ts). */
   private onKey = (e: KeyboardEvent) => menuKey(e, this.listbox, this.options(), () => this.hide());
   /** The id of the option shown chosen: '' is Blank, or the first template where the list has no Blank. */
@@ -208,7 +213,13 @@ export class ToTemplates extends LitElement {
       </button>`;
     if (this.via) return button;
     return html`${this.bare ? nothing : button}
-      <dialog class="to-dialog to-templates-dialog" aria-label=${t('Templates for {app}', { app: this.app.name })} @close=${this.onClose} @click=${(e: Event) => e.target === this.dialog && this.hide()}>
+      <dialog
+        class="to-dialog to-templates-dialog"
+        aria-label=${t('Templates for {app}', { app: this.app.name })}
+        @close=${this.onClose}
+        @pointerdown=${this.press.down}
+        @click=${this.onClick}
+      >
         <div class="to-dialog-inner">
           <header class="to-dialog-head to-listbox-head"><h2 id=${this.uid}>${t('{app} Templates', { app: this.app.name })}</h2><button type="button" class="to-btn to-tool to-listbox-close" aria-label=${t('Close')} title=${t('Close')} @click=${() => this.hide()}>${icon(UI.close, 18)}</button></header>
           <div class="to-listbox" role="listbox" tabindex="-1" aria-label=${t('Templates')} @keydown=${this.onKey}>

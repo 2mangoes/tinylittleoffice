@@ -1,12 +1,12 @@
 // The home page's foot (Paul, 2026-10-11 and -12): "An Aboard Foundry Project. Made with Respect in New York City." then "Beta version · GitHub · Email us", Aboard Foundry a link to aboard.com,
 // GitHub the repository, Email us a mail link; the sites open in a new tab, in the page's language.
 import { afterEach, expect, test } from 'vitest';
-import { page } from 'vitest/browser';
+import { cdp, page } from 'vitest/browser';
 import { setLanguage } from '../../src/kit/core/i18n.ts';
 import { keepSize, SIZE_MAX } from '../../src/kit/ui/zoom.ts';
-import type { ToTemplates } from '../../src/kit/ui/home.ts';
+import { preloadTemplates, type ToTemplates } from '../../src/kit/ui/home.ts';
 import { firstLines } from './firstline.ts';
-import { mount, until } from './helpers.ts';
+import { mount, tick, until } from './helpers.ts';
 import { encodeDoc } from '../../src/kit/core/codec.ts';
 
 afterEach(async () => {
@@ -302,3 +302,109 @@ for (const [w, h, lang] of [
     expect(words.bottom).toBeLessThanOrEqual(hr.bottom);
     expect(rtl ? burger.right - words.left : words.right - burger.left, 'the wordmark runs under the menu button').toBeLessThanOrEqual(0);
   });
+
+// A press at the spot the templates list opened under is not a choice for the first moment (Paul, 2026-10-12: "Sometimes
+// when I click a template the link to an app underneath opens up"): the list's first rows land where the button was, and
+// a double tap, a slow tap or a finger that pressed again chose Blank and opened the app. Real presses, through the
+// browser's own input (touch emulated, as a phone's), at points in this frame mapped to the page's.
+function onPage(x: number, y: number): { x: number; y: number } {
+  const f = window.frameElement?.getBoundingClientRect();
+  const s = f ? f.width / innerWidth : 1;
+  return { x: (f?.left ?? 0) + x * s, y: (f?.top ?? 0) + y * s };
+}
+async function tap(x: number, y: number) {
+  const p = onPage(x, y);
+  await cdp().send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [p] });
+  await cdp().send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+}
+async function click(x: number, y: number, clickCount = 1) {
+  const p = onPage(x, y);
+  await cdp().send('Input.dispatchMouseEvent', { type: 'mousePressed', ...p, button: 'left', clickCount });
+  await cdp().send('Input.dispatchMouseEvent', { type: 'mouseReleased', ...p, button: 'left', clickCount });
+}
+/** The middle of an element, in this frame. */
+const middle = (el: Element): [number, number] => {
+  const r = el.getBoundingClientRect();
+  return [r.left + r.width / 2, r.top + r.height / 2];
+};
+/** A home page with the Outliner's list ready to open under a finger or a mouse, and what to read after a press. */
+async function underPress(w: number, h: number) {
+  await page.viewport(w, h);
+  const shell = await mount('');
+  await until(() => !!shell.querySelector('.to-app'));
+  const tpl = shell.querySelector<HTMLElement>('.to-app[aria-label="Outliner"] to-templates') as ToTemplates;
+  // The templates are in before the press, so the list does not grow under the finger while the test reads it.
+  await preloadTemplates(tpl.app);
+  return { tpl, open: () => tpl.dialog.open, hash: () => location.hash };
+}
+const touch = (on: boolean) => cdp().send('Emulation.setTouchEmulationEnabled', on ? { enabled: true, maxTouchPoints: 5 } : { enabled: false });
+
+test('390×844 with a finger: taps again where the templates button was, 120, 300 and 700 ms on, choose nothing; a tap there 600 ms after the last chooses', async () => {
+  await touch(true);
+  try {
+    const { tpl, open, hash } = await underPress(390, 844);
+    const [x, y] = middle(tpl.button);
+    await tap(x, y);
+    await until(open, 'the list never opened');
+    const at = performance.now();
+    // What the spot holds once the list is open: an option (Blank, on a phone), the one a second tap chose.
+    expect(document.elementFromPoint(x, y)?.closest('[role=option]'), 'no option under the button').toBeTruthy();
+    for (const gap of [120, 300, 700]) {
+      await until(() => performance.now() - at >= gap, 2000);
+      await tap(x, y);
+      await tick(40);
+      expect(open(), `a tap ${gap} ms on closed the list`).toBe(true);
+      expect(hash(), `a tap ${gap} ms on opened an app`).toBe('');
+    }
+    // The rule lapses: the spot pressed again past the half second chooses the option there.
+    await tick(600);
+    await tap(x, y);
+    await until(() => !open(), 'a tap 600 ms after the last chose nothing');
+    expect(hash()).toMatch(/^#\/v1\/outline/);
+  } finally {
+    await touch(false);
+    document.querySelectorAll('dialog[open]').forEach((d) => (d as HTMLDialogElement).close());
+  }
+});
+
+test('390×844 with a finger: a tap 120 ms after the list opened, on an option 40px or more away, chooses it', async () => {
+  await touch(true);
+  try {
+    const { tpl, open, hash } = await underPress(390, 844);
+    const [x, y] = middle(tpl.button);
+    await tap(x, y);
+    await until(open, 'the list never opened');
+    const at = performance.now();
+    // A template's row, not the one under the spot (Blank, whose middle may be that far along its row).
+    const under = document.elementFromPoint(x, y)?.closest('[role=option]');
+    const away = [...tpl.dialog.querySelectorAll('[role=option]')]
+      .filter((o) => o !== under)
+      .map(middle)
+      .find(([ox, oy]) => Math.hypot(ox - x, oy - y) >= 40)!;
+    await until(() => performance.now() - at >= 120, 2000);
+    await tap(...away);
+    await until(() => !open(), 'a tap away from the spot chose nothing');
+    expect(hash()).toMatch(/^#\/v1\/outline\//);
+  } finally {
+    await touch(false);
+  }
+});
+
+test('1100 wide with a mouse: a double click on the templates button leaves the list open with nothing chosen', async () => {
+  const { tpl, open, hash } = await underPress(1100, 800);
+  try {
+    const [x, y] = middle(tpl.button);
+    await click(x, y, 1);
+    await click(x, y, 2);
+    await tick(40);
+    expect(open()).toBe(true);
+    expect(hash()).toBe('');
+    // A key still chooses at once: Enter on the option in hand.
+    tpl.listbox.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true }));
+    tpl.listbox.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
+    await until(() => !open(), 'Enter chose nothing');
+    expect(hash()).toMatch(/^#\/v1\/outline/);
+  } finally {
+    document.querySelectorAll('dialog[open]').forEach((d) => (d as HTMLDialogElement).close());
+  }
+});
