@@ -15,7 +15,8 @@
  *
  * Below the apps, the foot, one line: "An Aboard Foundry project. Made with respect in New York City. · Beta version ·
  * GitHub · Email" (Paul, 2026-10-12, verbatim; Aboard Foundry a link to aboard.com, GitHub the repository, Email
- * hello+tlo@aboard.com); the only words on the page beyond the apps' names. The two sites open in a new tab, unasked,
+ * hello+tlo@aboard.com), then the build's version once /version.json is read (its tag, or its commit); the only words on
+ * the page beyond the apps' names. The two sites open in a new tab, unasked,
  * and the mail link opens the mail app: the chrome's own links (kit/ui/link-guard.ts `data-to-chrome`).
  *
  * Above the apps, while Save in browser is on and something is kept, a search box over the library (kit/share/search.ts):
@@ -26,7 +27,7 @@
 import { LitElement, html, nothing } from 'lit';
 import { unsafeSVG } from 'lit/directives/unsafe-svg.js';
 import type { AppDef, Template } from '../core/app.ts';
-import { apps } from '../core/apps.ts';
+import { apps, siteRoot } from '../core/apps.ts';
 import { decodeDoc, encodeDoc, isSealed } from '../core/codec.ts';
 import { linesOf, search, type Seg } from '../share/search.ts';
 import { icon, UI } from '../draw/icons.ts';
@@ -40,7 +41,7 @@ import { ago, forget, library, type Kept } from '../share/library.ts';
 import { keeping, onPrivacy } from '../share/privacy.ts';
 import { focusBack } from './dialog.ts';
 import { origin } from '../core/network.ts';
-import { repoUrl } from '../core/version.ts';
+import { repoUrl, running, type Version } from '../core/version.ts';
 
 /** Where a note to the makers goes. */
 const MAIL = 'mailto:hello+tlo@aboard.com';
@@ -250,9 +251,11 @@ function keptLines(k: Kept): string[] {
 const segs = (s: Seg[]) => s.map((x) => (x.hit ? html`<mark>${x.t}</mark>` : x.t));
 
 export class ToHome extends LitElement {
-  static properties = { unfolded: { state: true }, query: { state: true } };
+  static properties = { unfolded: { state: true }, query: { state: true }, version: { state: true } };
   /** What the search box holds. */
   declare query: string;
+  /** The build this site runs, from its /version.json once read (kit/core/version.ts): its tag, or its commit's first seven letters, at the foot's end (Paul, 2026-10-12: "Start putting the version in the footer"). */
+  declare version: Version | null;
   /** The apps whose whole list of documents is shown, past the first five. */
   declare unfolded: Set<string>;
   private offs: (() => void)[] = [];
@@ -263,12 +266,14 @@ export class ToHome extends LitElement {
     super();
     this.unfolded = new Set();
     this.query = '';
+    this.version = null;
   }
   createRenderRoot() {
     return this;
   }
   connectedCallback() {
     super.connectedCallback();
+    void running(siteRoot()).then((v) => (this.version = v));
     window.addEventListener('pageshow', this.redraw);
     document.addEventListener('visibilitychange', this.onVisible);
     this.offs = [onLanguage(this.redraw), onPrivacy(this.redraw), () => window.removeEventListener('pageshow', this.redraw), () => document.removeEventListener('visibilitychange', this.onVisible)];
@@ -318,7 +323,7 @@ export class ToHome extends LitElement {
   private foot() {
     const [before, after = ''] = t('An {aboard} project. Made with respect in New York City.').split('{aboard}');
     return html`<footer class="to-home-foot">
-      <p>${before}<a href=${origin('maker')} target="_blank" rel="noopener" data-to-chrome>Aboard Foundry</a>${after} · ${t('Beta version')} · <a href=${repoUrl()} target="_blank" rel="noopener" data-to-chrome>GitHub</a> · <a href=${MAIL} data-to-chrome>${t('Email')}</a></p>
+      <p>${before}<a href=${origin('maker')} target="_blank" rel="noopener" data-to-chrome>Aboard Foundry</a>${after} · ${t('Beta version')} · <a href=${repoUrl()} target="_blank" rel="noopener" data-to-chrome>GitHub</a> · <a href=${MAIL} data-to-chrome>${t('Email')}</a>${this.version ? html` · ${this.version.tag || this.version.commit.slice(0, 7)}` : nothing}</p>
     </footer>`;
   }
   render() {

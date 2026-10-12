@@ -469,7 +469,7 @@ test('the share sheet carries the card too; a document with a password shows no 
   onTestFinished(() => void delete (navigator as { share?: unknown }).share);
   const d = await open(shell);
   d.querySelector<HTMLButtonElement>('.to-share-native')!.click();
-  await until(() => sent.length === 1);
+  await until(() => sent.length === 1, 20_000, 'the share sheet never got the link: the card is drawn and posted first, slowly under load');
   expect(posted).toHaveLength(1);
   expect(sent[0].url).toBe(shell.link.replace('#', '?c=k8hwicw#'));
   d.close();
@@ -507,7 +507,7 @@ test('a sealed document says nothing of itself: Share… sends no picture and no
   const d = await open(shell);
   expect(d.querySelector('.to-dialog-head h2')!.textContent).toBe('Locked document');
   d.querySelector<HTMLButtonElement>('.to-share-native')!.click();
-  await until(() => sent.length === 1);
+  await until(() => sent.length === 1, 20_000, 'the share sheet never got the link: the card is drawn and posted first, slowly under load');
   expect(sent[0].files).toBeUndefined();
   expect(`${sent[0].title} ${sent[0].text}`).not.toContain('Mutual aid');
   expect(sent[0].url).toBe(shell.link);

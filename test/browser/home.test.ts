@@ -1,6 +1,6 @@
 // The home page's foot (Paul, 2026-10-12): one line, "An Aboard Foundry project. Made with respect in New York City. · Beta version · GitHub · Email",
 // Aboard Foundry a link to aboard.com, GitHub the repository, Email a mail link; the sites open in a new tab, in the page's language.
-import { afterEach, expect, test } from 'vitest';
+import { afterEach, expect, test, vi } from 'vitest';
 import { cdp, page } from 'vitest/browser';
 import { setLanguage } from '../../src/kit/core/i18n.ts';
 import { keepSize, SIZE_MAX } from '../../src/kit/ui/zoom.ts';
@@ -406,5 +406,26 @@ test('1100 wide with a mouse: a double click on the templates button leaves the 
     expect(hash()).toMatch(/^#\/v1\/outline/);
   } finally {
     document.querySelectorAll('dialog[open]').forEach((d) => (d as HTMLDialogElement).close());
+  }
+});
+
+// Last in the file: the version once read is kept (kit/core/version.ts running), so the foot of every mount after this would carry it.
+test('the foot ends with the build’s version once /version.json is read: its tag, or its commit’s first seven letters (Paul, 2026-10-12)', async () => {
+  const real = globalThis.fetch;
+  vi.stubGlobal('fetch', async (input: RequestInfo | URL, init?: RequestInit) => {
+    const url = String(input instanceof Request ? input.url : input);
+    if (url.endsWith('/version.json'))
+      return new Response(JSON.stringify({ commit: 'abcdef0123456789abcdef0123456789abcdef01', tag: 'v9.9.9', built: '2026-10-12T00:00:00Z', csp: { scripts: [] } }), {
+        headers: { 'content-type': 'application/json' },
+      });
+    return real(input, init);
+  });
+  try {
+    const shell = await mount('');
+    await until(() => foot(shell).lines[0].endsWith(' · v9.9.9'), 'the version never reached the foot');
+    expect(foot(shell).lines[0]).toBe('An Aboard Foundry project. Made with respect in New York City. · Beta version · GitHub · Email · v9.9.9');
+    expect(foot(shell).links.map((a) => a.textContent)).toEqual(['Aboard Foundry', 'GitHub', 'Email']);
+  } finally {
+    vi.unstubAllGlobals();
   }
 });
