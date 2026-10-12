@@ -1553,7 +1553,6 @@ export default {
   '{n} of {count}': '{n} من {count}',
   '{n} over': 'زيادة {n}',
   'Password copied': 'تم نسخ كلمة المرور',
-  'For you when presenting, never on the slide': 'لك أثناء العرض، ولا تظهر على الشريحة أبدًا',
   'Guest': 'ضيف',
   'Name the line': 'سمِّ الخط',
   'Name this column': 'سمِّ هذا العمود',

@@ -1552,7 +1552,6 @@ export default {
   '{n} of {count}': '{count} में से {n}',
   '{n} over': '{n} ज़्यादा',
   'Password copied': 'पासवर्ड कॉपी हो गया',
-  'For you when presenting, never on the slide': 'प्रेज़ेंट करते समय आपके लिए, स्लाइड पर कभी नहीं',
   'Guest': 'मेहमान',
   'Name the line': 'लाइन को नाम दें',
   'Name this column': 'इस कॉलम को नाम दें',

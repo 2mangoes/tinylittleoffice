@@ -1551,7 +1551,6 @@ export default {
   '{n} of {count}': '{count}件中{n}件',
   '{n} over': '{n}超過',
   'Password copied': 'パスワードをコピーしました',
-  'For you when presenting, never on the slide': '発表者用。スライドには表示されません',
   'Guest': 'ゲスト',
   'Name the line': '線に名前を付ける',
   'Name this column': 'この列に名前を付ける',

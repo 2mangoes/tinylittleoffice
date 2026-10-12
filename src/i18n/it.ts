@@ -1553,7 +1553,6 @@ export default {
   '{n} of {count}': '{n} di {count}',
   '{n} over': '{n} in più',
   'Password copied': 'Password copiata',
-  'For you when presenting, never on the slide': 'Per te quando presenti, mai sulla diapositiva',
   'Guest': 'Ospite',
   'Name the line': 'Dai un nome alla linea',
   'Name this column': 'Dai un nome a questa colonna',

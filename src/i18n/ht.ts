@@ -1554,7 +1554,6 @@ export default {
   '{n} of {count}': '{n} sou {count}',
   '{n} over': '{n} anplis',
   'Password copied': 'Modpas kopye',
-  'For you when presenting, never on the slide': 'Pou ou lè w ap prezante, pa janm sou dyapozitiv la',
   'Guest': 'Envite',
   'Name the line': 'Bay liy lan yon non',
   'Name this column': 'Bay kolòn sa a yon non',

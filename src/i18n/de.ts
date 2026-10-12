@@ -1551,7 +1551,6 @@ export default {
   '{n} of {count}': '{n} von {count}',
   '{n} over': '{n} zu viel',
   'Password copied': 'Passwort kopiert',
-  'For you when presenting, never on the slide': 'Für dich beim Vortragen, nie auf der Folie',
   'Guest': 'Gast',
   'Name the line': 'Die Linie benennen',
   'Name this column': 'Diese Spalte benennen',

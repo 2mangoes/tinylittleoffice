@@ -1495,7 +1495,6 @@ export default {
   '{n} of {count}': '{count}-এর মধ্যে {n}',
   '{n} over': '{n} বেশি',
   'Password copied': 'পাসওয়ার্ড কপি হয়েছে',
-  'For you when presenting, never on the slide': 'প্রেজেন্ট করার সময় আপনার জন্য, স্লাইডে কখনও নয়',
   'Guest': 'অতিথি',
   'Name the line': 'রেখার নাম দিন',
   'Name this column': 'এই কলামের নাম দিন',

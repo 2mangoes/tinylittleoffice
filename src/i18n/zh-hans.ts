@@ -1552,7 +1552,6 @@ export default {
   '{n} of {count}': '{n} / {count}',
   '{n} over': '超出 {n}',
   'Password copied': '密码已复制',
-  'For you when presenting, never on the slide': '放映时给你看的，不会出现在幻灯片上',
   'Guest': '宾客',
   'Name the line': '给这条线命名',
   'Name this column': '给这一列命名',

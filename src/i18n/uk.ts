@@ -1554,7 +1554,6 @@ export default {
   '{n} of {count}': '{n} з {count}',
   '{n} over': 'Понад: {n}',
   'Password copied': 'Пароль скопійовано',
-  'For you when presenting, never on the slide': 'Для вас під час показу, ніколи на слайді',
   'Guest': 'Гість',
   'Name the line': 'Назвіть лінію',
   'Name this column': 'Назвіть цей стовпець',

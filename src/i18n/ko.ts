@@ -1552,7 +1552,6 @@ export default {
   '{n} of {count}': '{count}개 중 {n}',
   '{n} over': '{n} 초과',
   'Password copied': '비밀번호를 복사했어요',
-  'For you when presenting, never on the slide': '발표할 때 나만 보는 글이에요. 슬라이드에는 나오지 않아요',
   'Guest': '손님',
   'Name the line': '선 이름 짓기',
   'Name this column': '이 열 이름 짓기',

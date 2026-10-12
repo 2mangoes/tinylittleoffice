@@ -1553,7 +1553,6 @@ export default {
   '{n} of {count}': '{n} van {count}',
   '{n} over': '{n} te veel',
   'Password copied': 'Wachtwoord gekopieerd',
-  'For you when presenting, never on the slide': 'Voor jou tijdens het presenteren, nooit op de dia',
   'Guest': 'Gast',
   'Name the line': 'Noem de lijn',
   'Name this column': 'Noem deze kolom',

@@ -1577,7 +1577,6 @@ export default {
   '{n} of {count}': '{n} of {count}',
   '{n} over': '{n} over',
   'Password copied': 'Password copied',
-  'For you when presenting, never on the slide': 'For you when presenting, never on the slide',
   'Guest': 'Guest',
   'Name the line': 'Name the line',
   'Name this column': 'Name this column',

@@ -1552,7 +1552,6 @@ export default {
   '{n} of {count}': '{n} из {count}',
   '{n} over': 'Больше на {n}',
   'Password copied': 'Пароль скопирован',
-  'For you when presenting, never on the slide': 'Для вас во время показа, на слайде не видно',
   'Guest': 'Гость',
   'Name the line': 'Назвать линию',
   'Name this column': 'Назвать этот столбец',

@@ -932,7 +932,7 @@ export class ToDeckEditor extends DocElement<Slide[]> {
         <span class="deck-num">${foot}</span>
       </div>
       <h3 class="deck-notes-head" id="deck-notes-head">${t('Speaker notes')}</h3>
-      <to-text class="deck-notes" shape="lines" .blocks=${noteBlocks} label=${t('Speaker notes')} placeholder=${t('For you when presenting, never on the slide')} @text-ops=${(e: CustomEvent<TextOps>) => this.onOps('notes', e)} @focusin=${() => (this.field = 'notes')} @text-select=${(e: CustomEvent<Sel | null>) => this.onSelect('notes', e)} @text-exit=${() => this.focusBox(sub ? 'title' : 'words')}></to-text>`;
+      <to-text class="deck-notes" shape="lines" .blocks=${noteBlocks} label=${t('Speaker notes')} @text-ops=${(e: CustomEvent<TextOps>) => this.onOps('notes', e)} @focusin=${() => (this.field = 'notes')} @text-select=${(e: CustomEvent<Sel | null>) => this.onSelect('notes', e)} @text-exit=${() => this.focusBox(sub ? 'title' : 'words')}></to-text>`;
   }
   private renderRail(look: Look) {
     const st = this.settings;
