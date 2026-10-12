@@ -7,8 +7,8 @@
  * a deck uses is a different one where it can be, so the list shows what the Look menu does. One line a
  * template on what it is for: templates.md.
  */
-import type { Template } from '../../kit/app.ts';
-import { t } from '../../kit/i18n.ts';
+import type { Template } from '../../kit/core/app.ts';
+import { t } from '../../kit/core/i18n.ts';
 
 const slides = (...each: string[]) => each.join('\n\n---\n\n') + '\n';
 const headed = (head: Record<string, string>, ...each: string[]) =>

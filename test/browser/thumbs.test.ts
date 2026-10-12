@@ -2,17 +2,17 @@
 // 96 by 72 in the templates list beside words that ellipsise, 72 by 54 for a kept document, 48 by 36 in the found list.
 import { test, expect } from 'vitest';
 import { render, html } from 'lit';
-import '../../src/kit/home.ts';
-import type { ToTemplates } from '../../src/kit/home.ts';
-import type { ToPreview } from '../../src/kit/preview.ts';
-import type { ViewOpts } from '../../src/kit/app.ts';
-import { encodeDoc } from '../../src/kit/codec.ts';
-import { routeHash } from '../../src/kit/route.ts';
-import { UI } from '../../src/kit/icons.ts';
+import '../../src/kit/ui/home.ts';
+import type { ToTemplates } from '../../src/kit/ui/home.ts';
+import type { ToPreview } from '../../src/kit/ui/preview.ts';
+import type { ViewOpts } from '../../src/kit/core/app.ts';
+import { encodeDoc } from '../../src/kit/core/codec.ts';
+import { routeHash } from '../../src/kit/core/route.ts';
+import { UI } from '../../src/kit/draw/icons.ts';
 import { until } from './helpers.ts';
-import { remScale } from '../../src/kit/zoom.ts';
+import { remScale } from '../../src/kit/ui/zoom.ts';
 
-/** A box on the screen in sixteenths of a rem, at the default size (a rem is kit/zoom.ts BASE × 16px). */
+/** A box on the screen in sixteenths of a rem, at the default size (a rem is kit/ui/zoom.ts BASE × 16px). */
 const css = (r: DOMRect) => ({ width: r.width / remScale(), height: r.height / remScale() });
 import '../../src/styles.css';
 

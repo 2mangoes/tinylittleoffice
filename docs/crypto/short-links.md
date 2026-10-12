@@ -1,6 +1,6 @@
 # Short links
 
-`src/kit/short.ts` (the browser's side), `tinier/` (the service: `tinier.ts` is the whole of its logic,
+`src/kit/share/short.ts` (the browser's side), `tinier/` (the service: `tinier.ts` is the whole of its logic,
 `d1.ts` its rows in Cloudflare D1, `worker.ts` puts it on Cloudflare, `migrations/` its two
 tables, `page.html` the page that opens a short link). WebCrypto alone: no crypto library. Test vectors:
 `test/vectors/short-links.json`, checked by `test/crypto-vectors.test.ts`.

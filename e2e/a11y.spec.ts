@@ -8,9 +8,9 @@
  */
 import { test, expect, type Page } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
-import { apps } from '../src/kit/apps.ts';
-import { encodeDoc } from '../src/kit/codec.ts';
-import { routeHash } from '../src/kit/route.ts';
+import { apps } from '../src/kit/core/apps.ts';
+import { encodeDoc } from '../src/kit/core/codec.ts';
+import { routeHash } from '../src/kit/core/route.ts';
 
 // theme.js tells iOS alone that the page may not zoom (see smoke.spec.ts), which axe's meta-viewport rule cannot know.
 const axe = (page: Page) => new AxeBuilder({ page }).disableRules(['meta-viewport']).analyze();
@@ -31,7 +31,7 @@ async function drawn(page: Page) {
 }
 
 /**
- * Until the page is the one asked for and its theme is written: public/theme.js before the first paint, kit/theme.ts
+ * Until the page is the one asked for and its theme is written: public/theme.js before the first paint, kit/ui/theme.ts
  * after it. Under load a look at <html> came while the page was still on its way (an empty document, no data-theme
  * for five seconds): the wait is for the page to have read its head, with Playwright's own patience, then the theme.
  */

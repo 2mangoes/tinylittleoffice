@@ -2,7 +2,7 @@
 // its money shown in that currency (a code as the browser writes it), typed money read with a symbol or a code.
 import { expect, test } from 'vitest';
 import { column, columnText, currencyOf, evaluateTable, formatCell, formatMoney, parse, parseLiteral, tableAt, write } from '../../src/doc/index.ts';
-import { tableToXlsx } from '../../src/kit/xlsx.ts';
+import { tableToXlsx } from '../../src/kit/file/xlsx.ts';
 import { unzipSync, strFromU8 } from 'fflate';
 
 const gbp = (n: number) => new Intl.NumberFormat(undefined, { style: 'currency', currency: 'GBP' }).format(n);

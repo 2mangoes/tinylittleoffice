@@ -8,7 +8,7 @@ import { writeToDeck, writeToOutline } from '../src/apps/write/convert.ts';
 import { slidesOf } from '../src/apps/deck/model.ts';
 import { readOutline } from '../src/apps/outline/model.ts';
 import { dayOf } from '../src/apps/cal/model.ts';
-import { apps } from '../src/kit/apps.ts';
+import { apps } from '../src/kit/core/apps.ts';
 
 const stable = (s: string) => expect(write(parse(s))).toBe(s);
 

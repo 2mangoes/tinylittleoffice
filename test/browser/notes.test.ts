@@ -4,11 +4,11 @@
 // host finds a mark with (noteMarks, noteIndex).
 import { expect, test } from 'vitest';
 import { parse } from '../../src/doc/index.ts';
-import { noteIndex, noteMarks, type ToNotes } from '../../src/kit/notes.ts';
-import type { ToText } from '../../src/kit/text.ts';
+import { noteIndex, noteMarks, type ToNotes } from '../../src/kit/draw/notes.ts';
+import type { ToText } from '../../src/kit/text/text.ts';
 import { tick, until } from './helpers.ts';
 import '../../src/styles.css';
-import '../../src/kit/notes.ts';
+import '../../src/kit/draw/notes.ts';
 
 async function mount(notes: string[], backs = false) {
   document.body.innerHTML = '';

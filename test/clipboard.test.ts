@@ -3,10 +3,10 @@
 // (htmlToBlocks needs a DOM parser; it is tested in test/browser/text.test.ts.)
 import { expect, test } from 'vitest';
 import { parse, write } from '../src/doc/index.ts';
-import { copyData, docToHtml, fitBlocks, linkToFence, pasteFrom, runsToHtml, type Pasted } from '../src/kit/clipboard.ts';
-import { lookup } from '../src/kit/app.ts';
-import { encodeDoc } from '../src/kit/codec.ts';
-import { caret } from '../src/kit/textops.ts';
+import { copyData, docToHtml, fitBlocks, linkToFence, pasteFrom, runsToHtml, type Pasted } from '../src/kit/text/clipboard.ts';
+import { lookup } from '../src/kit/core/app.ts';
+import { encodeDoc } from '../src/kit/core/codec.ts';
+import { caret } from '../src/kit/text/textops.ts';
 
 const B = parse('# Head\n\nSome **bold** [words](https://x.y) :star: and^[a note] more.\n\n- a\n  1. b\n\n---\n\n![pic](https://p.q/r.png)\n').blocks;
 

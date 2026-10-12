@@ -1,5 +1,5 @@
 /**
- * The Emoji set of the icon picker: src/kit/emoji-data.ts, a compact table of [character, name, keywords,
+ * The Emoji set of the icon picker: src/kit/draw/emoji-data.ts, a compact table of [character, name, keywords,
  * group] for every base emoji, made from two pieces of Unicode's own data (there is no browser API that
  * lists emoji by name):
  *
@@ -14,7 +14,7 @@
  * pinned versions below when this runs, and the table is checked in. Run it again only to move to a newer
  * Unicode:
  *
- *   npm run emoji                         fetch, and write src/kit/emoji-data.ts
+ *   npm run emoji                         fetch, and write src/kit/draw/emoji-data.ts
  *   node scripts/emoji.ts <test.txt> <annotations.json> <derived.json>    from files already here
  */
 import { readFileSync, writeFileSync } from 'node:fs';
@@ -87,7 +87,7 @@ async function main() {
   const ann = JSON.parse(await get(annFile, SOURCES.annotations)).annotations.annotations as Annotations;
   const derived = JSON.parse(await get(derivedFile, SOURCES.derived)).annotationsDerived.annotations as Annotations;
   const table = build(test, ann, derived);
-  writeFileSync(join(root, 'src/kit/emoji-data.ts'), source(table));
+  writeFileSync(join(root, 'src/kit/draw/emoji-data.ts'), source(table));
   console.log(`emoji: ${table.rows.length} in ${table.groups.length} groups`);
 }
 

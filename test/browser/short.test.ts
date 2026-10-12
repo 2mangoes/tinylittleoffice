@@ -3,13 +3,13 @@
 // key, and nothing in it but the document and, for a visitor, the short link's id and expiry.
 import { test, expect, afterEach, vi } from 'vitest';
 import { mount, until, openShare } from './helpers.ts';
-import { encodeDoc } from '../../src/kit/codec.ts';
-import { unshorten } from '../../src/kit/short.ts';
-import type { ToText } from '../../src/kit/text.ts';
-import type { ToShell } from '../../src/kit/shell.ts';
-import type { ToShare } from '../../src/kit/share-dialog.ts';
-import type { ToDialog } from '../../src/kit/dialog.ts';
-import { store } from '../../src/kit/store.ts';
+import { encodeDoc } from '../../src/kit/core/codec.ts';
+import { unshorten } from '../../src/kit/share/short.ts';
+import type { ToText } from '../../src/kit/text/text.ts';
+import type { ToShell } from '../../src/kit/core/shell.ts';
+import type { ToShare } from '../../src/kit/ui/share-dialog.ts';
+import type { ToDialog } from '../../src/kit/ui/dialog.ts';
+import { store } from '../../src/kit/core/store.ts';
 
 const DAY = 86_400_000;
 afterEach(() => {

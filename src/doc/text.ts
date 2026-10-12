@@ -1,12 +1,12 @@
 /**
  * The text layer: a document as what it says, in the order it says it, for whoever cannot see its pages (a screen
  * reader on a Display Link), for whoever would rather read it reflowed (the Display Link's Text), for a web page made
- * of it (kit/exports.ts htmlOf) and for an agent (src/api.ts `text`, as Markdown). A small tree of nodes: headings,
+ * of it (kit/file/exports.ts htmlOf) and for an agent (src/api.ts `text`, as Markdown). A small tree of nodes: headings,
  * paragraphs (runs with their marks and links), lists (nested, a task with its state), tables (the values a reader
  * sees, worked out), fences as written, a document held in this one, footnotes, and the breaks between pages or slides.
  *
  * textOf builds it from the blocks every text-shaped app shares (Word Processor, Outliner, Presentation Builder,
- * Spreadsheet, Calculator); an app whose model is spatial gives its own in the same shape (kit/app.ts
+ * Spreadsheet, Calculator); an app whose model is spatial gives its own in the same shape (kit/core/app.ts
  * AppDef.text). A fence naming an app is another document: the host says how to read it (`inner`); with none, it is
  * its text as written. textMarkdown writes the nodes as Markdown through the kernel's own writer (TLO is Markdown),
  * so read back and written again it is the same bytes. Read-only: nothing here edits a document.

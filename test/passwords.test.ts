@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest';
-import * as passwords from '../src/kit/passwords.ts';
-import { generatePassword } from '../src/kit/passwords.ts';
+import * as passwords from '../src/kit/share/passwords.ts';
+import { generatePassword } from '../src/kit/share/passwords.ts';
 
 /** The characters many passwords are drawn from: the alphabet, as the passwords show it. */
 const drawn = new Set(Array.from({ length: 400 }, () => generatePassword().replace(/-/g, '')).join(''));

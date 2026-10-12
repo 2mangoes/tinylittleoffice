@@ -3,10 +3,10 @@
  * any frame, the whole as an SVG that plays itself, and every frame as a page for the GIF. Shapes are drawn
  * by Draw's own shapeSvg, so a drawing looks the same moving as still.
  */
-import type { Page } from '../../kit/app.ts';
-import { INK, pageSvg, r } from '../../kit/draw.ts';
-import { t } from '../../kit/i18n.ts';
-import { tilePattern } from '../../kit/tile.ts';
+import type { Page } from '../../kit/core/app.ts';
+import { INK, pageSvg, r } from '../../kit/draw/draw.ts';
+import { t } from '../../kit/core/i18n.ts';
+import { tilePattern } from '../../kit/draw/tile.ts';
 import type { Doc } from '../../doc/index.ts';
 import { H, W, bounds, describeDrawing, isLine, type Shape } from '../draw/model.ts';
 import { TILE_SIDE, arrowDefs, shapeSvg, type Theme } from '../draw/view.ts';

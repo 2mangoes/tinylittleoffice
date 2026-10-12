@@ -3,13 +3,13 @@
 // gets the browser's own warning.
 import { test, expect, afterEach } from 'vitest';
 import { mount, until, openDrawerDoc, said } from './helpers.ts';
-import { keeping } from '../../src/kit/store.ts';
-import { setPrivate } from '../../src/kit/privacy.ts';
-import { library } from '../../src/kit/library.ts';
-import { go } from '../../src/kit/route.ts';
-import { openFile } from '../../src/kit/open.ts';
-import type { ToShell } from '../../src/kit/shell.ts';
-import type { ToText } from '../../src/kit/text.ts';
+import { keeping } from '../../src/kit/core/store.ts';
+import { setPrivate } from '../../src/kit/share/privacy.ts';
+import { library } from '../../src/kit/share/library.ts';
+import { go } from '../../src/kit/core/route.ts';
+import { openFile } from '../../src/kit/file/open.ts';
+import type { ToShell } from '../../src/kit/core/shell.ts';
+import type { ToText } from '../../src/kit/text/text.ts';
 
 afterEach(async () => {
   if (keeping()) await setPrivate(true);
@@ -187,7 +187,7 @@ test('Turn on Save in browser and keep it here: saving turned on, the document k
   expect(keeping()).toBe(true);
   expect(library().map((k) => k.hash)).toContain(hash);
   await until(() => !!shell.querySelector('.to-toast.shown'));
-  // Said on the next frame (kit/toast.ts), so a repeat is said again.
+  // Said on the next frame (kit/ui/toast.ts), so a repeat is said again.
   await until(() => said() === 'Save in browser is on: this browser keeps the documents you open. Turn it off in the menu.');
 });
 

@@ -6,7 +6,7 @@
  * (model.ts): a line put in, changed or taken away is a `text` op, the tape's birth and end a `splice`, the
  * mode a `head` op. Units, conversions and algebra come from math.ts, a chunk fetched when the editor opens.
  *
- * The tape's lines are rows (kit/rows.ts): a tap on a line's grip, or Shift+Up/Down or Escape in it, chooses it
+ * The tape's lines are rows (kit/text/rows.ts): a tap on a line's grip, or Shift+Up/Down or Escape in it, chooses it
  * whole, with the bar under it (Edit, Move up, Move down, Duplicate | Copy, Cut, Paste | Delete) and the keys a
  * chosen thing has; a drag by the grip carries it. In a line's box: Alt+Up/Down move it, Mod+D copies it under
  * itself, Up and Down go to the line above and below, Enter is done (the caret to the line being typed),
@@ -19,15 +19,15 @@ import { html, nothing, type PropertyDeclarations } from 'lit';
 import { unsafeSVG } from 'lit/directives/unsafe-svg.js';
 import { GripVertical } from 'lucide';
 import { applyAll, write, type Doc, type Op } from '../../doc/index.ts';
-import { cmdTool, tool } from '../../kit/bar.ts';
-import { drawnIn, runKey } from '../../kit/commands.ts';
+import { cmdTool, tool } from '../../kit/ui/bar.ts';
+import { drawnIn, runKey } from '../../kit/core/commands.ts';
 import COMMANDS, { ENTRY, LINE } from './commands.ts';
-import { docToHtml, GENERATOR, pasteFrom } from '../../kit/clipboard.ts';
-import { DocElement, firstAt, type Entry } from '../../kit/element.ts';
-import { pageSvg, SERIES } from '../../kit/draw.ts';
-import { icon, UI } from '../../kit/icons.ts';
-import { t } from '../../kit/i18n.ts';
-import { Rows, type Clip, type RowRange, type RowSpan } from '../../kit/rows.ts';
+import { docToHtml, GENERATOR, pasteFrom } from '../../kit/text/clipboard.ts';
+import { DocElement, firstAt, type Entry } from '../../kit/core/element.ts';
+import { pageSvg, SERIES } from '../../kit/draw/draw.ts';
+import { icon, UI } from '../../kit/draw/icons.ts';
+import { t } from '../../kit/core/i18n.ts';
+import { Rows, type Clip, type RowRange, type RowSpan } from '../../kit/text/rows.ts';
 import {
   addLine,
   clearTape,
@@ -51,8 +51,8 @@ import {
   type Mode,
 } from './model.ts';
 import { graphPage } from './view.ts';
-import '../../kit/bar.ts';
-import '../../kit/insert.ts';
+import '../../kit/ui/bar.ts';
+import '../../kit/ui/insert.ts';
 import './style.css';
 
 export const tag = 'to-calc-editor';
@@ -109,7 +109,7 @@ export class ToCalcEditor extends DocElement<CalcView> {
   }
   connectedCallback() {
     super.connectedCallback();
-    // Its keys are the document: on a phone its bar is shown whatever has the focus (kit/chrome.ts).
+    // Its keys are the document: on a phone its bar is shown whatever has the focus (kit/ui/chrome.ts).
     this.dataset.bar = 'always';
     if (!this.ready) void loadEngine().then(() => (this.ready = true));
   }
@@ -304,7 +304,7 @@ export class ToCalcEditor extends DocElement<CalcView> {
     return this.view.lines.length > 0 && (box.selectionStart ?? 0) === 0 && (box.selectionEnd ?? 0) === box.value.length;
   }
 
-  /* ---------- lines chosen whole (kit/rows.ts) ---------- */
+  /* ---------- lines chosen whole (kit/text/rows.ts) ---------- */
 
   private removeSpan(s: RowSpan) {
     this.run((v) => replaceLines(v, s.from, s.to, []));

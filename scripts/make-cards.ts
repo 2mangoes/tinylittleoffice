@@ -6,7 +6,7 @@
  * scripts/icons.ts).
  *
  * The page is SVG, rasterised by Chromium (through Playwright, which the tests already have), as the kit's
- * raster (src/kit/raster.ts) does it in the browser: an <img> of the SVG drawn by the browser itself, so the
+ * raster (src/kit/draw/raster.ts) does it in the browser: an <img> of the SVG drawn by the browser itself, so the
  * card shows the page exactly as a person sees it. The words are in IBM Plex, the site's own faces carried in the
  * page (scripts/plex.ts), so nothing is fetched. The cards are kept in public/; run this
  * again when an app's name, line or first template changes.
@@ -16,10 +16,10 @@
 import { mkdirSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { apps } from '../src/kit/apps.ts';
-import type { AppDef } from '../src/kit/app.ts';
-import { FONT, INK, MUTED, PAPER, pageSvg, xml } from '../src/kit/draw.ts';
-import { markPaths } from '../src/kit/mark.ts';
+import { apps } from '../src/kit/core/apps.ts';
+import type { AppDef } from '../src/kit/core/app.ts';
+import { FONT, INK, MUTED, PAPER, pageSvg, xml } from '../src/kit/draw/draw.ts';
+import { markPaths } from '../src/kit/draw/mark.ts';
 import { plexFaces, shoot } from './plex.ts';
 
 const root = resolve(fileURLToPath(import.meta.url), '../..');

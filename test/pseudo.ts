@@ -4,7 +4,7 @@
  * runs left to right; ar-xb, with Arabic's six plural forms, right to left. Not shipped: tests register it.
  * (No node imports here: the browser tests use it too.)
  */
-import type { Strings } from '../src/kit/i18n.ts';
+import type { Strings } from '../src/kit/core/i18n.ts';
 
 const FROM = 'abcdeghiklnorstuyzABCDEGHIKLNORSTUYZ';
 const TO = 'àƀçđéĝĥîķļñöŕšţûýžÀƁÇĐÉĜĤÎĶĻÑÖŔŠŢÛÝŽ';

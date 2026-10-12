@@ -2,12 +2,12 @@
 // GitHub the repository, Email us a mail link; the sites open in a new tab, in the page's language.
 import { afterEach, expect, test } from 'vitest';
 import { page } from 'vitest/browser';
-import { setLanguage } from '../../src/kit/i18n.ts';
-import { keepSize, SIZE_MAX } from '../../src/kit/zoom.ts';
-import type { ToTemplates } from '../../src/kit/home.ts';
+import { setLanguage } from '../../src/kit/core/i18n.ts';
+import { keepSize, SIZE_MAX } from '../../src/kit/ui/zoom.ts';
+import type { ToTemplates } from '../../src/kit/ui/home.ts';
 import { firstLines } from './firstline.ts';
 import { mount, until } from './helpers.ts';
-import { encodeDoc } from '../../src/kit/codec.ts';
+import { encodeDoc } from '../../src/kit/core/codec.ts';
 
 afterEach(async () => {
   keepSize(1);
@@ -146,7 +146,7 @@ test('right to left, the previews sit at the far right, at the top of their rows
   const shell = await mount('');
   await setLanguage('ar');
   await until(() => document.documentElement.dir === 'rtl');
-  const name = (await import('../../src/kit/apps.ts')).apps().find((a) => a.id === 'write')!.name;
+  const name = (await import('../../src/kit/core/apps.ts')).apps().find((a) => a.id === 'write')!.name;
   const tpl = await openTemplates(shell, name);
   try {
     for (const r of previews(tpl)) {
@@ -173,8 +173,8 @@ test('at the largest size on a phone, an app whose name wraps keeps its icon bes
 // The search over the documents (Paul, 2026-10-12: "Get rid of 'search your documents' if there are no documents or we
 // are in private mode"): there only when Save in browser is on and something is kept.
 test('no search box under Private, a library in memory or not; none when Saved with nothing kept; the box once one is kept', async () => {
-  const { keep, forgetAll } = await import('../../src/kit/library.ts');
-  const { setKeeping, store } = await import('../../src/kit/store.ts');
+  const { keep, forgetAll } = await import('../../src/kit/share/library.ts');
+  const { setKeeping, store } = await import('../../src/kit/core/store.ts');
   const doc = { id: 'a', app: 'write', title: 'Plans', hash: `#/v1/write/${encodeDoc('---\ntitle: Plans\n---\nGo.\n')}`, at: Date.now() };
   try {
     // Private, a list written to the visit's memory as an old build did.
@@ -205,8 +205,8 @@ test('no search box under Private, a library in memory or not; none when Saved w
 // with the app names and icons. They're indented very much to the right"): a preview's edge on the icon's, the gap from
 // the preview to the words the gap from the icon to the name, and "n more" with them.
 async function drive(lang: string | null) {
-  const { keep, forgetAll } = await import('../../src/kit/library.ts');
-  const { setKeeping } = await import('../../src/kit/store.ts');
+  const { keep, forgetAll } = await import('../../src/kit/share/library.ts');
+  const { setKeeping } = await import('../../src/kit/core/store.ts');
   setKeeping(true);
   forgetAll();
   for (let i = 0; i < 7; i++) keep({ id: `d${i}`, app: 'write', title: `Plan ${i}`, hash: `#/v1/write/${encodeDoc(`---\ntitle: Plan ${i}\n---\nGo.\n`)}`, at: Date.now() - i });

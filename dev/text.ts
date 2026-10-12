@@ -5,12 +5,12 @@
  */
 import { html, render } from 'lit';
 import { applyAll, parse, write, type Doc } from '../src/doc/index.ts';
-import { History } from '../src/kit/history.ts';
-import { initLanguage } from '../src/kit/i18n.ts';
-import type { Shape, TextOps, ToText } from '../src/kit/text.ts';
-import { initTheme } from '../src/kit/theme.ts';
+import { History } from '../src/kit/text/history.ts';
+import { initLanguage } from '../src/kit/core/i18n.ts';
+import type { Shape, TextOps, ToText } from '../src/kit/text/text.ts';
+import { initTheme } from '../src/kit/ui/theme.ts';
 import '../src/styles.css';
-import '../src/kit/text.ts';
+import '../src/kit/text/text.ts';
 
 const SAMPLE = `# A title {.title}
 

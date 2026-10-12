@@ -1,16 +1,16 @@
 // The shell round a long document (the page is the visible window, the document scrolls in a column,
-// kit/chrome.ts). The header and the app's bar hold still while the column scrolls under them, the menu button at the
+// kit/ui/chrome.ts). The header and the app's bar hold still while the column scrolls under them, the menu button at the
 // top inline end; a short link's banner sits under the header. And the title, tapped, opens a row of its own across
 // the header, at a size that can be read: Enter keeps it, Escape puts back what was there.
 import { test, expect, afterEach, vi } from 'vitest';
 import { page, userEvent } from 'vitest/browser';
 import { mount, until, settled } from './helpers.ts';
-import { encodeDoc } from '../../src/kit/codec.ts';
-import { localDay } from '../../src/kit/library.ts';
-import { remScale } from '../../src/kit/zoom.ts';
-import type { ToShell } from '../../src/kit/shell.ts';
+import { encodeDoc } from '../../src/kit/core/codec.ts';
+import { localDay } from '../../src/kit/share/library.ts';
+import { remScale } from '../../src/kit/ui/zoom.ts';
+import type { ToShell } from '../../src/kit/core/shell.ts';
 
-/** A length on the screen in the stylesheet's own pixels, sixteenths of a rem: the normal size draws a rem at kit/zoom.ts BASE × 16px. */
+/** A length on the screen in the stylesheet's own pixels, sixteenths of a rem: the normal size draws a rem at kit/ui/zoom.ts BASE × 16px. */
 const css = (px: number) => px / remScale();
 
 afterEach(() => {

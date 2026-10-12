@@ -2,11 +2,11 @@
 // node test (test/walks.test.ts) reads it to prove every registry command joins the walk by being registered, and the
 // browser walk (test/browser/walks.test.ts) runs it against the real page with fast-check's model-based testing.
 //
-// A step is a thing a person does: a registry command in force (kit/commands.ts, through its `when`), a key, a word
+// A step is a thing a person does: a registry command in force (kit/core/commands.ts, through its `when`), a key, a word
 // typed, a tap outside whatever is open, the column scrolled, the drawer, a menu of the bar, Share, the templates, the
 // drawer's search by its key (Mod+K), a pinch, a phone's keyboard coming up or going, another app and back. The model says when a step may be
 // taken (`allowed`); the walk does it to the page and reads back what is open.
-import type { Command } from '../src/kit/commands.ts';
+import type { Command } from '../src/kit/core/commands.ts';
 
 export type Size = 'phone' | 'desktop';
 /** What is open over the document, the topmost: the menu's drawer, a modal dialog, a menu (a popover), the context bar. */

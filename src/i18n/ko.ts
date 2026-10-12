@@ -1,7 +1,7 @@
 /**
  * Tiny Little Office in Korean (해요체, as consumer software in Flushing and the city's Korean-American communities speaks). Keys are the English strings of en.ts.
  */
-import type { Strings } from '../kit/i18n.ts';
+import type { Strings } from '../kit/core/i18n.ts';
 
 export default {
   // ---- the shell: header ----
@@ -59,7 +59,7 @@ export default {
   'Tiny Little Office': 'Tiny Little Office', // same
   'About Tiny Little Office': 'Tiny Little Office 정보',
 
-  // ---- links that leave the site (kit/link-guard.ts) ----
+  // ---- links that leave the site (kit/ui/link-guard.ts) ----
   // The menu button's tooltip: the Office mark is the menu.
   'Tiny Little Office menu': 'Tiny Little Office 메뉴',
   // The question before a link that leaves the site: "You are leaving Tiny Little Office for" over the site's name, large.
@@ -78,7 +78,7 @@ export default {
 
   // ---- the copy kept on the device (status lines under the switch) ----
 
-  // ---- sharing: the Share dialog (kit/shell.ts), where the link fits (kit/limits.ts), the arrival banner ----
+  // ---- sharing: the Share dialog (kit/core/shell.ts), where the link fits (kit/share/limits.ts), the arrival banner ----
   'A copy opened in a new tab': '사본을 새 탭에서 열었어요',
   'Copy display link': '보기 링크 복사',
   'Copy into a new document': '새 문서로 복사',
@@ -131,7 +131,7 @@ export default {
   'Link': '링크',
   'Short link': '짧은 링크',
 
-  // ---- privacy (kit/privacy.ts, kit/privacy-dialog.ts): the password, what the device holds ----
+  // ---- privacy (kit/share/privacy.ts, kit/ui/privacy-dialog.ts): the password, what the device holds ----
   // The Share dialog's head line: "Created 9 Oct 2026, 14:03 · by Paul".
   'Anyone with the link will need the password to open it. Nobody can reset it: lose it and the document is gone.': '링크를 가진 사람은 열 때 비밀번호가 필요해요. 아무도 재설정할 수 없으니 잃어버리면 문서도 사라져요.',
   'Change password': '비밀번호 변경',
@@ -178,7 +178,7 @@ export default {
   'Copy this and send it another way than the link. It cannot be shown again.': '이것을 복사해서 링크와 다른 방법으로 보내세요. 다시 보여 줄 수 없어요.',
   'Make another': '다른 것 만들기',
 
-  // ---- a document locked with a password, placed inside another (kit/locked.ts, kit/locked-doc.ts) ----
+  // ---- a document locked with a password, placed inside another (kit/share/locked.ts, kit/ui/locked-doc.ts) ----
   // The card drawn where it sits; {app} is the app's name: "A Spreadsheet document, locked with a password".
   'Locked with a password': '비밀번호로 잠김',
   'A {app} document, locked with a password': '비밀번호로 잠긴 {app} 문서',
@@ -201,7 +201,7 @@ export default {
   // The group heading the Calendar and the Trip Planner sit under on the home page.
   'Plan': '계획',
   'Chosen tasks': '선택한 할 일',
-  // A link that opens the document (kit/compare.ts).
+  // A link that opens the document (kit/ui/compare.ts).
   'Open': '열기',
   'Task': '할 일',
   'Tasks': '할 일',
@@ -367,7 +367,7 @@ export default {
   'Terms of service': '이용 약관',
   'A small business\'s terms in plain words: booking, prices, keys, what if, ending.': '작은 가게의 약관을 쉬운 말로. 예약, 가격, 열쇠, 만약의 경우, 종료.',
 
-  // ---- Insert's dialog (kit/insert-dialogs.ts): Tiny Little Office Doc ----
+  // ---- Insert's dialog (kit/ui/insert-dialogs.ts): Tiny Little Office Doc ----
   'A Tiny Little Office link': 'Tiny Little Office 링크',
   'Opening the short link…': '짧은 링크를 여는 중…',
   'Paste the link of another Tiny Little Office document, long or short: its first page shows here.': '다른 Tiny Little Office 문서의 링크를 긴 것이든 짧은 것이든 붙여넣으세요. 첫 페이지가 여기에 나와요.',
@@ -376,11 +376,11 @@ export default {
   'Tiny Little Office Doc…': 'Tiny Little Office 문서…',
   // Insert ▾'s group of the apps a new document can be made in, inside this one.
   'A new document': '새 문서',
-  // ---- another document edited in place (kit/doc-dialog.ts); a table's size is Rows × Columns ----
+  // ---- another document edited in place (kit/ui/doc-dialog.ts); a table's size is Rows × Columns ----
   'Cancel': '취소',
   'Rows': '행',
 
-  // ---- charts (kit/chart.ts) ----
+  // ---- charts (kit/draw/chart.ts) ----
   'An empty chart': '빈 차트',
   'Bars': '막대',
   'Flows (Sankey)': '흐름 (생키)',
@@ -529,10 +529,10 @@ export default {
   'Unlock these cells': '이 셀 잠금 해제',
   'What it holds; sort; columns': '내용, 정렬, 열',
 
-  // ---- downloads: hand-offs to another app (kit/exports.ts) ----
+  // ---- downloads: hand-offs to another app (kit/file/exports.ts) ----
   'Open in': '다음에서 열기',
 
-  // ---- the icon library (kit/icons-picker.ts) ----
+  // ---- the icon library (kit/ui/icons-picker.ts) ----
   'Icon': '아이콘',
   'Favorites': '즐겨찾기',
   'Search icons': '아이콘 검색',

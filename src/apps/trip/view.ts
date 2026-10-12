@@ -4,8 +4,8 @@
  * Mercator, fitted to the stops, a graticule for scale) and asks no one for anything: OpenStreetMap's
  * pictures are the editor's, only while its map is on view.
  */
-import type { Page } from '../../kit/app.ts';
-import { ACCENT, clip, FAINT, LINE, MUTED, r, rect, SHADE, text, xml } from '../../kit/draw.ts';
+import type { Page } from '../../kit/core/app.ts';
+import { ACCENT, clip, FAINT, LINE, MUTED, r, rect, SHADE, text, xml } from '../../kit/draw/draw.ts';
 import { distanceKm, formatLeg, readTrip, routeKm, routeName, type TripView } from './model.ts';
 import type { Doc } from '../../doc/index.ts';
 

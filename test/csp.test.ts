@@ -1,9 +1,9 @@
-// The site's Content-Security-Policy: the site itself and the hosts src/kit/network.ts allows by each directive,
+// The site's Content-Security-Policy: the site itself and the hosts src/kit/core/network.ts allows by each directive,
 // and nowhere else. A document fetches nothing from any other site: no frame-src or media-src of the list's.
 import { test, expect } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { fillHeaders, sources } from '../scripts/headers.ts';
-import { reaches, type Directive } from '../src/kit/network.ts';
+import { reaches, type Directive } from '../src/kit/core/network.ts';
 
 const raw = readFileSync(new URL('../public/_headers', import.meta.url), 'utf8');
 const filled = fillHeaders(raw, { scripts: ["'sha256-x'"] });

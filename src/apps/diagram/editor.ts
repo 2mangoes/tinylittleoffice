@@ -27,15 +27,15 @@
 import { html, nothing, svg, type PropertyDeclarations } from 'lit';
 import { unsafeSVG } from 'lit/directives/unsafe-svg.js';
 import { apply, applyAll, normalRuns, parse, runLength, sliceRuns, write, type Block, type Doc, type Op, type Run } from '../../doc/index.ts';
-import { cmdMenu, cmdTool } from '../../kit/bar.ts';
-import { contextOf, drawnIn, runKey } from '../../kit/commands.ts';
+import { cmdMenu, cmdTool } from '../../kit/ui/bar.ts';
+import { contextOf, drawnIn, runKey } from '../../kit/core/commands.ts';
 import COMMANDS, { PICTURE, WORDS } from './commands.ts';
-import { GENERATOR, docToHtml, pasteFrom } from '../../kit/clipboard.ts';
-import { type ContextEntry, type ToContext } from '../../kit/context.ts';
-import { DocElement, firstAt, type Entry } from '../../kit/element.ts';
-import { t } from '../../kit/i18n.ts';
-import type { TextOps, ToText } from '../../kit/text.ts';
-import { caret, insertRuns } from '../../kit/textops.ts';
+import { GENERATOR, docToHtml, pasteFrom } from '../../kit/text/clipboard.ts';
+import { type ContextEntry, type ToContext } from '../../kit/ui/context.ts';
+import { DocElement, firstAt, type Entry } from '../../kit/core/element.ts';
+import { t } from '../../kit/core/i18n.ts';
+import type { TextOps, ToText } from '../../kit/text/text.ts';
+import { caret, insertRuns } from '../../kit/text/textops.ts';
 import { isLink, wordsOver } from '../draw/model.ts';
 import { arrowDefs, shapeSvg, type Theme } from '../draw/view.ts';
 import { KIND_ICON, kindHint, kindName, newWords, thingName } from './kinds.ts';
@@ -76,14 +76,14 @@ import {
   type KindId,
 } from './model.ts';
 import { layout, placeCards, regionAt, type DShape, type Diagram } from './view.ts';
-import { printPages } from '../../kit/exports.ts';
-import '../../kit/bar.ts';
-import '../../kit/context.ts';
-import '../../kit/insert.ts';
-import '../../kit/menu.ts';
-import '../../kit/text.ts';
-import { remScale } from '../../kit/zoom.ts';
-import { pinchZoom } from '../../kit/pinch.ts';
+import { printPages } from '../../kit/file/exports.ts';
+import '../../kit/ui/bar.ts';
+import '../../kit/ui/context.ts';
+import '../../kit/ui/insert.ts';
+import '../../kit/ui/menu.ts';
+import '../../kit/text/text.ts';
+import { remScale } from '../../kit/ui/zoom.ts';
+import { pinchZoom } from '../../kit/ui/pinch.ts';
 import './style.css';
 
 export const tag = 'to-diagram-editor';
@@ -524,7 +524,7 @@ export class ToDiagramEditor extends DocElement<DiagramView> {
   /* ---------- the things to do to the thing open ---------- */
 
   async iconFor(hit: Hit) {
-    const { chooseIcon } = await import('../../kit/icons-picker.ts');
+    const { chooseIcon } = await import('../../kit/ui/icons-picker.ts');
     const name = await chooseIcon({ emoji: false, none: true });
     if (name === null) return;
     this.change(withIcon(this.doc, hit, name), hit);

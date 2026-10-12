@@ -8,7 +8,7 @@
     clip: rect(0 0 0 0);
     white-space: nowrap;
   }
-  /* The Display Link's words, read by a screen reader behind the pages (kit/text-view.ts): shown should the keyboard reach a link in them. */
+  /* The Display Link's words, read by a screen reader behind the pages (kit/text/text-view.ts): shown should the keyboard reach a link in them. */
   .to-display-text.sr-only:focus-within {
     position: static;
     width: auto;
@@ -24,7 +24,7 @@
       transition: none !important;
       animation: none !important;
     }
-    /* The bar's fade while the column takes a keyboard's height is no motion: it stays, the height changing at once (kit/chrome.ts). */
+    /* The bar's fade while the column takes a keyboard's height is no motion: it stays, the height changing at once (kit/ui/chrome.ts). */
     .to-column.barred > main > .to-editor to-bar:not(:is(dialog, [popover], .to-dialog, .deck-show) *) {
       transition: opacity 0.12s ease !important;
     }

@@ -1,4 +1,4 @@
-// The spatial canvases (docs/editing.md "Pinch and size", kit/pinch.ts pinchZoom): two fingers spreading over the
+// The spatial canvases (docs/editing.md "Pinch and size", kit/ui/pinch.ts pinchZoom): two fingers spreading over the
 // Drawing Tool's canvas, the Diagram Maker's picture (an outline drawn as a mind map or a family tree is one), and the
 // Animator's stage zoom that picture about the fingers and leave the size of everything alone; the point under the
 // fingers stays under them; two fingers moving together pan the frame; lifted, the zoom is rounded to the canvas's
@@ -7,11 +7,11 @@
 import { test, expect, afterEach } from 'vitest';
 import { page } from 'vitest/browser';
 import { mount, tick, until, settled } from './helpers.ts';
-import { encodeDoc } from '../../src/kit/codec.ts';
-import { BASE, NAV_MAX, SIZE_MAX, keepSize, size, stepSize } from '../../src/kit/zoom.ts';
+import { encodeDoc } from '../../src/kit/core/codec.ts';
+import { BASE, NAV_MAX, SIZE_MAX, keepSize, size, stepSize } from '../../src/kit/ui/zoom.ts';
 import { outlineToFamily, outlineToMind, readOutline } from '../../src/apps/outline/model.ts';
 import { parse } from '../../src/doc/index.ts';
-import type { ToShell } from '../../src/kit/shell.ts';
+import type { ToShell } from '../../src/kit/core/shell.ts';
 
 afterEach(async () => {
   stepSize(0);

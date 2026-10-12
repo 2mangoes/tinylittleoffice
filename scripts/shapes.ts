@@ -10,8 +10,8 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { hasClass, attr, parse, plainText, write, type Block, type Doc } from '../src/doc/index.ts';
-import type { Template } from '../src/kit/app.ts';
-import { plainLink } from '../src/kit/plain.ts';
+import type { Template } from '../src/kit/core/app.ts';
+import { plainLink } from '../src/kit/core/plain.ts';
 import { lint } from '../src/lint.ts';
 
 /** A shape an app reads: its id (for `example <app> <id>`), what it is called, what it is for, and whether a document shows it. */

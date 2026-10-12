@@ -5,7 +5,7 @@
  *   - a page per app, dist/<id>/index.html: the shell with that app's name and line in its tags and its own
  *     canonical address, so a shared link previews as that app; dist/embed/index.html, the shell at the one
  *     address another site may frame (noindex);
- *   - in each page's <header id="to-first">, plain text the shell takes away as it starts (kit/shell.ts): on the
+ *   - in each page's <header id="to-first">, plain text the shell takes away as it starts (kit/core/shell.ts): on the
  *     home page the line for agents first (where /llms.txt is), then the apps' names, each a link to its page; on an app's page its name, its line and its
  *     templates' names. The words the rendered page shows, there before any script runs;
  *   - one JSON-LD block on each page, a schema.org WebApplication with that page's name, line and address
@@ -18,8 +18,8 @@
  */
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import type { AppDef } from '../src/kit/app.ts';
-import { origin } from '../src/kit/network.ts';
+import type { AppDef } from '../src/kit/core/app.ts';
+import { origin } from '../src/kit/core/network.ts';
 
 /** An app as the pages name it: its route, name, line and templates' names. */
 export interface Listed {

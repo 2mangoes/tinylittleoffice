@@ -26,7 +26,7 @@
  * Find in this document (Mod+F) goes from cell to matching cell: `find()` is the kit's Findable.
  *
  * On a phone with the keyboard up (Paul, 2026-10-11: "no room to navigate"): the header steps aside as for any box
- * (kit/chrome.ts `editing`), the formula strip takes the column's top with the menu button at its end, the column
+ * (kit/ui/chrome.ts `editing`), the formula strip takes the column's top with the menu button at its end, the column
  * heads are one line (the letter and the name, style.css), the table's box is what is left above the bar, and the cell
  * in hand is kept in sight as that box changes its height. A number, money or percent column asks for the numbers
  * keyboard, a date column for the digits, a formula for the letters from its = on; the bar's ABC (`letters`) asks for
@@ -35,20 +35,20 @@
 import { html, nothing, type PropertyDeclarations } from 'lit';
 import { unsafeSVG } from 'lit/directives/unsafe-svg.js';
 import { ArrowDown, ArrowUp, Lock, LockOpen, MoveHorizontal, Trash2 } from 'lucide';
-import { cmdMenu, cmdTool } from '../../kit/bar.ts';
-import { contextOf, drawnIn, runKey } from '../../kit/commands.ts';
+import { cmdMenu, cmdTool } from '../../kit/ui/bar.ts';
+import { contextOf, drawnIn, runKey } from '../../kit/core/commands.ts';
 import COMMANDS from './commands.ts';
-import type { TextOps, ToText, Sel } from '../../kit/text.ts';
-import { type ChartKind } from '../../kit/chart.ts';
-import { docToHtml, GENERATOR, htmlToBlocks } from '../../kit/clipboard.ts';
-import { type ContextEntry, type ToContext } from '../../kit/context.ts';
-import { DocElement, type Entry } from '../../kit/element.ts';
-import { icon, UI } from '../../kit/icons.ts';
-import { t } from '../../kit/i18n.ts';
-import type { MenuItem, ToMenu } from '../../kit/menu.ts';
-import { toast } from '../../kit/toast.ts';
-import type { Found } from '../../kit/find.ts';
-import { fold } from '../../kit/search.ts';
+import type { TextOps, ToText, Sel } from '../../kit/text/text.ts';
+import { type ChartKind } from '../../kit/draw/chart.ts';
+import { docToHtml, GENERATOR, htmlToBlocks } from '../../kit/text/clipboard.ts';
+import { type ContextEntry, type ToContext } from '../../kit/ui/context.ts';
+import { DocElement, type Entry } from '../../kit/core/element.ts';
+import { icon, UI } from '../../kit/draw/icons.ts';
+import { t } from '../../kit/core/i18n.ts';
+import type { MenuItem, ToMenu } from '../../kit/ui/menu.ts';
+import { toast } from '../../kit/ui/toast.ts';
+import type { Found } from '../../kit/ui/find.ts';
+import { fold } from '../../kit/share/search.ts';
 import {
   COL_NAMES,
   FUNCTIONS,
@@ -99,15 +99,15 @@ import {
   typeName,
   type SheetView,
 } from './model.ts';
-import { COLUMN_KINDS, choicesOf, kindItems } from '../../kit/columns.ts';
+import { COLUMN_KINDS, choicesOf, kindItems } from '../../kit/text/columns.ts';
 import { cellText, chartOf } from './view.ts';
-import '../../kit/bar.ts';
-import '../../kit/context.ts';
-import '../../kit/insert.ts';
-import '../../kit/menu.ts';
-import '../../kit/text.ts';
-import { remScale } from '../../kit/zoom.ts';
-import { reveal } from '../../kit/scroll.ts';
+import '../../kit/ui/bar.ts';
+import '../../kit/ui/context.ts';
+import '../../kit/ui/insert.ts';
+import '../../kit/ui/menu.ts';
+import '../../kit/text/text.ts';
+import { remScale } from '../../kit/ui/zoom.ts';
+import { reveal } from '../../kit/ui/scroll.ts';
 import './style.css';
 
 export const tag = 'to-sheet-editor';
@@ -480,7 +480,7 @@ export class ToSheetEditor extends DocElement<SheetView> {
     const td = at instanceof HTMLElement && this.contains(at) ? at.closest('td') : null;
     if (!td) return;
     this.reveal(at as HTMLElement);
-    // And the table's box itself inside the column, above the bar (kit/scroll.ts).
+    // And the table's box itself inside the column, above the bar (kit/ui/scroll.ts).
     reveal(td);
   });
   disconnectedCallback() {
@@ -730,7 +730,7 @@ export class ToSheetEditor extends DocElement<SheetView> {
     this.forget(e, r, c);
   }
 
-  /* ---------- Find in this document (kit/find.ts): the cells that hold every word, in reading order ---------- */
+  /* ---------- Find in this document (kit/ui/find.ts): the cells that hold every word, in reading order ---------- */
 
   /** The cells whose words (as typed, or as shown) hold every term; going to one selects it. */
   find(terms: string[]): Found {

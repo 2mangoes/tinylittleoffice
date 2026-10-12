@@ -10,7 +10,7 @@ import { describe, expect, test } from 'vitest';
 import { eagerTemplates, firstLoad, measure, overBudget, readBudgets, type Sizes } from '../scripts/budgets.ts';
 import { deadExports } from '../scripts/dead.ts';
 import { staleFiles } from '../scripts/generated.ts';
-import { ALLOWED, NOT_WORDS, WAIT_MS, bareWords, domNames, graphProblems, timedWaits, type Module } from './lints.ts';
+import { ALLOWED, KIT_FOLDERS, NOT_WORDS, WAIT_MS, bareWords, domNames, graphProblems, kitProblems, timedWaits, type Module } from './lints.ts';
 
 const ROOT = join(import.meta.dirname, '..');
 const FIXTURES = join(import.meta.dirname, 'fixtures/lints');
@@ -60,8 +60,8 @@ describe('the module graph: no cycle, and each layer imports only what is under 
     expect(graphProblems(modules(join(FIXTURES, 'graph')))).toStrictEqual([
       'an app imports another app: src/apps/a/editor.ts → src/apps/b/model.ts',
       'the kernel imports the kit or an app: src/doc/model.ts → src/kit/two.ts',
-      'the kit imports an app outside kit/apps.ts: src/kit/one.ts → src/apps/a/editor.ts',
-      'a language is imported outside kit/i18n.ts’s lazy load: src/kit/one.ts → src/i18n/fr.ts',
+      'the kit imports an app outside kit/core/apps.ts: src/kit/one.ts → src/apps/a/editor.ts',
+      'a language is imported outside kit/core/i18n.ts’s lazy load: src/kit/one.ts → src/i18n/fr.ts',
       'an import cycle: src/kit/one.ts → src/kit/two.ts → src/kit/one.ts',
     ]);
   });
@@ -71,6 +71,32 @@ describe('the module graph: no cycle, and each layer imports only what is under 
   test('every module shared between apps is still shared, so the list only shrinks', () => {
     const imported = new Set(graphProblems(tree).flatMap((p) => /^an app imports another app: \S+ → (\S+)$/.exec(p)?.[1] ?? []));
     expect(Object.keys(SHARED).filter((m) => !imported.has(m))).toStrictEqual([]);
+  });
+});
+
+describe('the kit in its six folders (docs/kit.md): nothing at its root, no barrel, every import naming its file', () => {
+  test('the fixture’s problems are found', () => {
+    const fixture: Module[] = [
+      { path: 'src/kit/stray.ts', source: '' },
+      { path: 'src/kit/core/index.ts', source: "export * from './app.ts';" },
+      { path: 'src/kit/core/app.ts', source: '' },
+      {
+        path: 'src/apps/a/editor.ts',
+        source: "import { a } from '../../kit/core/app.ts';\nimport { b } from '../../kit/draw.ts';\nimport { c } from '../../kit/misc/c.ts';\nimport { d } from '../../kit/core';",
+      },
+    ];
+    expect(kitProblems(fixture)).toStrictEqual([
+      "a file at the kit's root, in none of its folders: src/kit/stray.ts",
+      'a barrel in the kit: src/kit/core/index.ts',
+      'an import of the kit names no file in its six folders: src/apps/a/editor.ts → src/kit/draw.ts',
+      'an import of the kit names no file in its six folders: src/apps/a/editor.ts → src/kit/misc/c.ts',
+      'an import of the kit names no file in its six folders: src/apps/a/editor.ts → src/kit/core',
+    ]);
+  });
+  test('src/ and what reads it (test, scripts, packages, e2e, dev) have none, and the kit holds the six folders and nothing beside them', () => {
+    const readers = ['test', 'scripts', 'packages', 'e2e', 'dev'].flatMap((d) => modules(ROOT, d)).filter((m) => !m.path.startsWith('test/fixtures/'));
+    expect(kitProblems([...tree, ...readers])).toStrictEqual([]);
+    expect(readdirSync(join(ROOT, 'src/kit')).sort()).toStrictEqual([...KIT_FOLDERS].sort());
   });
 });
 
@@ -280,7 +306,7 @@ export const STALE: { word: RegExp; was: string }[] = [
 const STALE_OK: Record<string, string> = {
   'test/lints.test.ts': 'the list itself',
   'test/fixtures/lints/stale-words.md': 'the fixture the lint must catch',
-  'src/kit/icons-meta.ts': 'Lucide’s own tags for its icons ("signature", "kanban"), generated from its release',
+  'src/kit/draw/icons-meta.ts': 'Lucide’s own tags for its icons ("signature", "kanban"), generated from its release',
   'src/i18n/fr.ts': '"une signature" is French for a byline',
   'docs/github-setup.md': 'a tag signed with git’s signing key: a release’s provenance, not a document’s signature',
   'docs/self-host.md': '`npm audit signatures`, npm’s check of a package’s provenance',

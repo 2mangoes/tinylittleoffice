@@ -3,8 +3,8 @@
  * kernel (so each is canonical and round-trips byte for byte). Shapes first, the everyday ones before the
  * special, then pixels. templates.md says what each is for.
  */
-import type { Template } from '../../kit/app.ts';
-import { t } from '../../kit/i18n.ts';
+import type { Template } from '../../kit/core/app.ts';
+import { t } from '../../kit/core/i18n.ts';
 import { column, write, type Block, type Doc } from '../../doc/index.ts';
 
 /**

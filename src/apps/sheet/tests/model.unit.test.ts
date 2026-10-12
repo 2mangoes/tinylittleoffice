@@ -1,10 +1,10 @@
 // The sheet as a view of the document, and each command as the ops it produces: under node, no DOM.
 import { expect, test } from 'vitest';
 import { createHash } from 'node:crypto';
-import { pageSvg } from '../../../kit/draw.ts';
+import { pageSvg } from '../../../kit/draw/draw.ts';
 import { applyAll, parse, tableAt, write, type Doc } from '../../../doc/index.ts';
-import { chartData, suggestChart } from '../../../kit/chart.ts';
-import { toExcelFormula } from '../../../kit/xlsx.ts';
+import { chartData, suggestChart } from '../../../kit/draw/chart.ts';
+import { toExcelFormula } from '../../../kit/file/xlsx.ts';
 import { addColumn, deleteRows, insertRows, moveRows, putRect, reorderRefs, rowsMoved, readSheet, removable, removeColumn, rename, setCell, setChart, setLock, setType, sortBy } from '../model.ts';
 import { chartOf, chartOfSheet, gridPage, sheetPages, sheetToCsv, tablePage } from '../view.ts';
 import { templates } from '../templates.ts';

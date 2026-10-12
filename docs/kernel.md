@@ -1,6 +1,6 @@
 # The document kernel, the one editor, and the shell
 
-The document kernel (`src/doc/`), the one editor (`<to-text>`, `src/kit/text.ts`) and the shell around them, as they
+The document kernel (`src/doc/`), the one editor (`<to-text>`, `src/kit/text/text.ts`) and the shell around them, as they
 are. The code is the last word: each file of `src/doc/` and `src/kit/` begins by saying what it does. The apps are
 named here by their ids (write, sheet, deck, …); docs/tlo.md is each one's document as a person or a model writes it.
 
@@ -65,11 +65,11 @@ export const plainText = (runs: Run[]) => runs.map((r) => r.t).join('');
 export const text = (s: string): Run[] => parseInline(s);                 // the one way a string becomes runs
 ```
 
-**The envelope** (`src/kit/envelope.ts`). Three head keys belong to the document rather than its app: `title` (the
+**The envelope** (`src/kit/core/envelope.ts`). Three head keys belong to the document rather than its app: `title` (the
 editor's), and `by` and `created`, which the shell holds and puts into every change the editor makes, so an edit never
 drops them. `created` is stamped at the first change, to the minute, as `2026-10-05T14:32Z`; `by` is who made it, in
 the maker's own word. A document under a password is not a head field: its whole payload is sealed (`E…`,
-`src/kit/crypt.ts`), so nothing of it, the title included, is readable without the password.
+`src/kit/share/crypt.ts`), so nothing of it, the title included, is readable without the password.
 
 Eight block kinds. An embedded document is a `fence` whose `lang` is an app id (`refFence`/`fenceRef`), and `isInnerDoc(b)` in model.ts names that rule once. There is no picture kind and nothing from the web (Paul, 2026-10-11): a web address alone is a `p` of words, a link alone on a line is a `p` with a link, and `![alt](address)` reads as the words `!` and a link whose words are the alt. A lock and a chart are not fields of the table block: they ride on the head for a sheet document and on the table's attrs anywhere else (see `tableAt` in §5), as the format writes them, so every sheet example is byte-identical.
 
@@ -143,7 +143,7 @@ replaceSpan(doc, from, to, blocks): Op[]          // one splice
 
 `focusFirst()` is the editor's half of the open: the shell calls it once a document is first drawn for editing (a new one, a template, a link, after an unlock; not in display mode, an embed, a show link presenting, a locked document, or while a dialog is open), and each editor puts the focus in its own place with its own helper (`focusCell`, `focusBox`, `focusRow`, `focusTask`, `focusCanvas`…), `preventScroll` always: the Word Processor's first words (the caret at their start), the Spreadsheet's A1 (its words selected), the first slide's headline, the first row, the first task, the first card (else the stage's name), the Calculator's entry line, the Drawing Tool's canvas, the Animator's stage, the Diagram Maker's picture, the Calendar's today (else the month's first; a Gantt chart's first task), the Trip Planner's first stop's name (else the map). The shell never puts the focus on the title box or leaves it on the body.
 
-A keystroke costs only what it changed (Paul, 2026-10-10: "it's starting to feel really slow"): `docchange` still fires with the text on every edit, but the shell projects it into the link (pack, `replaceState`, the library's keep, the tab's title) only when typing pauses (150 ms), and flushes that projection at once before anything reads the link as the document (the window's blur, the focus leaving the editor, leaving the page, Share and every copy of the link, exports, the password, the title box; `currentHash()` in kit/route.ts outside the shell). A host never parses its own echo: `ours(value)` says the shell handed back the text it last wrote. A host draws again for a `text-select` only when `selectionMoved(key)` says its bar would show something else.
+A keystroke costs only what it changed (Paul, 2026-10-10: "it's starting to feel really slow"): `docchange` still fires with the text on every edit, but the shell projects it into the link (pack, `replaceState`, the library's keep, the tab's title) only when typing pauses (150 ms), and flushes that projection at once before anything reads the link as the document (the window's blur, the focus leaving the editor, leaving the page, Share and every copy of the link, exports, the password, the title box; `currentHash()` in kit/core/route.ts outside the shell). A host never parses its own echo: `ours(value)` says the shell handed back the text it last wrote. A host draws again for a `text-select` only when `selectionMoved(key)` says its bar would show something else.
 
 ### Each app: the view, and its commands as ops
 
@@ -165,7 +165,7 @@ What stays in the editor as state (not in the document) is listed last for each.
 
 ## 4. The editor: `<to-text>`
 
-`src/kit/text.ts`, one element. It edits a span of text blocks, model-driven; it never reads the DOM back except at `compositionend`.
+`src/kit/text/text.ts`, one element. It edits a span of text blocks, model-driven; it never reads the DOM back except at `compositionend`.
 
 ```ts
 export class ToText extends LitElement {
@@ -215,22 +215,22 @@ Lit `repeat` keyed by block object identity (a `WeakMap<Block, number>` hands ou
 
 ### Paste, copy, cut
 
-Copy/cut write `text/plain` = TLO of the selected blocks (`write` of the sliced blocks, runs cut at offsets) and `text/html` = `docToHtml` of the same with a `<meta name="generator" content="TinyLittleOffice">` marker. Paste, in order: (1) our own HTML (marker present) → parse the `text/plain` TLO → blocks; (2) a Tiny Little Office link alone → `splice` a fence (`linkToRef`); (3) a web address alone, doc shape → a `p` of that address (card); (4) `text/html` → `htmlToBlocks(body)` (`src/kit/clipboard.ts`: tags and styles to marks, `<ul>/<ol>/<li>` to li depth, Google Docs' `<b style="font-weight:normal">`, white-space collapse) → fitted to the shape; (5) plain text with a newline, doc shape → `parse` as TLO (lenient: pasted Markdown becomes headings, lists, tables); (6) plain text → `text` op. Fitting: `lines` keeps li/p only; `line` joins runs with spaces.
+Copy/cut write `text/plain` = TLO of the selected blocks (`write` of the sliced blocks, runs cut at offsets) and `text/html` = `docToHtml` of the same with a `<meta name="generator" content="TinyLittleOffice">` marker. Paste, in order: (1) our own HTML (marker present) → parse the `text/plain` TLO → blocks; (2) a Tiny Little Office link alone → `splice` a fence (`linkToRef`); (3) a web address alone, doc shape → a `p` of that address (card); (4) `text/html` → `htmlToBlocks(body)` (`src/kit/text/clipboard.ts`: tags and styles to marks, `<ul>/<ol>/<li>` to li depth, Google Docs' `<b style="font-weight:normal">`, white-space collapse) → fitted to the shape; (5) plain text with a newline, doc shape → `parse` as TLO (lenient: pasted Markdown becomes headings, lists, tables); (6) plain text → `text` op. Fitting: `lines` keeps li/p only; `line` joins runs with spaces.
 
 ### Undo/redo
 
-Undo is an op log (kit/history.ts; decision 2, §6): every change is a list of ops, recorded with the document it was made on, its inverse worked out by `invertAll` and kept beside it, with the selection before and after, so an undo puts the caret back where the change was. Letters typed within 700 ms fold into one entry, and a composition lands as one op. The title and the head's other fields are `head` ops like any other.
+Undo is an op log (kit/text/history.ts; decision 2, §6): every change is a list of ops, recorded with the document it was made on, its inverse worked out by `invertAll` and kept beside it, with the selection before and after, so an undo puts the caret back where the change was. Letters typed within 700 ms fold into one entry, and a composition lands as one op. The title and the head's other fields are `head` ops like any other.
 
 ### Atomic runs and blocks
 
-Footnote marks, icons and cards are `contenteditable=false`; a mark is `tabindex=0` and, on click, Enter or Space, says `text-note` ({block, nth}) for the host to open its note; Backspace/Delete beside or on one removes it (one `text` or `splice` op). A note's words are typed where the host draws them, at the foot (Write's endnotes, a slide's foot, under an outline): `<to-notes>` (kit/notes.ts) draws each note as a `line`-shaped `<to-text>` over `noteRuns(fn)` and tells the host `note-change` (one `text` op replacing that mark's run), `note-back` and `note-remove`; only a host with `notes` is offered the Footnote command.
+Footnote marks, icons and cards are `contenteditable=false`; a mark is `tabindex=0` and, on click, Enter or Space, says `text-note` ({block, nth}) for the host to open its note; Backspace/Delete beside or on one removes it (one `text` or `splice` op). A note's words are typed where the host draws them, at the foot (Write's endnotes, a slide's foot, under an outline): `<to-notes>` (kit/draw/notes.ts) draws each note as a `line`-shaped `<to-text>` over `noteRuns(fn)` and tells the host `note-change` (one `text` op replacing that mark's run), `note-back` and `note-remove`; only a host with `notes` is offered the Footnote command.
 
 ### Phones (iOS Safari)
 
-The editable's font-size is never below 16px (prevents the focus zoom); `focus({ preventScroll: true })` everywhere, and the page is the visible window with the document in a column that scrolls by itself (§7), so focusing never scrolls the page and the caret is kept inside the column through kit/scroll.ts; the formatting bar and popovers are placed inside the column's box (`room()`, kit/scroll.ts), which is the visual viewport's, so they sit above the keyboard; `autocapitalize="sentences"`, `enterkeyhint="enter"` (`"done"` for `line`); no `execCommand` anywhere; `-webkit-user-modify` not used; selection restore is deferred to `requestAnimationFrame` after render (Safari drops a selection set synchronously during a DOM swap); a `pointerdown` on a toolbar button `preventDefault()`s so the keyboard stays up.
+The editable's font-size is never below 16px (prevents the focus zoom); `focus({ preventScroll: true })` everywhere, and the page is the visible window with the document in a column that scrolls by itself (§7), so focusing never scrolls the page and the caret is kept inside the column through kit/ui/scroll.ts; the formatting bar and popovers are placed inside the column's box (`room()`, kit/ui/scroll.ts), which is the visual viewport's, so they sit above the keyboard; `autocapitalize="sentences"`, `enterkeyhint="enter"` (`"done"` for `line`); no `execCommand` anywhere; `-webkit-user-modify` not used; selection restore is deferred to `requestAnimationFrame` after render (Safari drops a selection set synchronously during a DOM swap); a `pointerdown` on a toolbar button `preventDefault()`s so the keyboard stays up.
 
 
-### Rows chosen whole: `src/kit/rows.ts`
+### Rows chosen whole: `src/kit/text/rows.ts`
 
 Every app with rows (Outline's items, Trip's stops, the schedule's tasks) chooses rows whole through one Lit `ReactiveController`, so the keys, the handle, the drag, the clipboard and the bar under a range are the same everywhere (docs/editing.md §3, §6). The host knows its rows and its document; the controller knows nothing of either.
 
@@ -305,15 +305,15 @@ Because `evaluate` takes any `Doc` and block index, a table block inside a Write
 
 ## 7. The shell, the chrome and the column (2026-10-10)
 
-The shell is thin. `<to-shell>` (kit/shell.ts) keeps the route, the document, its projection to the link (`writeLink`, `flushLink`, the 150 ms pause), the library's keep (kit/library.ts `Keeper`), the title and the editor's mounting. Around it are elements that take their state as properties and speak back by events, each under 500 lines:
+The shell is thin. `<to-shell>` (kit/core/shell.ts) keeps the route, the document, its projection to the link (`writeLink`, `flushLink`, the 150 ms pause), the library's keep (kit/share/library.ts `Keeper`), the title and the editor's mounting. Around it are elements that take their state as properties and speak back by events, each under 500 lines:
 
 | element | file | what it is | says back |
 |---|---|---|---|
-| `<to-chrome>` | kit/chrome.ts | where things sit: the header and its words, the menu button, the banners (a short link's time left, another version kept here), the column and the bar's place in it | `to-drawer-open`, `to-share-open`, `to-retitle`, `to-copy-new`, `to-arrival-close`, `to-other-close` |
-| `<to-share>` | kit/share-dialog.ts | the Share dialog: the link and where it fits, the short link, posting, the QR code, the embed code | `to-link-copied` |
-| `<to-privacy>` | kit/privacy-dialog.ts | unlock, the password, the lock beside the title (`trustButton`), the Share dialog's Password part (`renderProtect`), the Privacy dialog | `to-unlock`, `to-lock`, `to-share-open` |
+| `<to-chrome>` | kit/ui/chrome.ts | where things sit: the header and its words, the menu button, the banners (a short link's time left, another version kept here), the column and the bar's place in it | `to-drawer-open`, `to-share-open`, `to-retitle`, `to-copy-new`, `to-arrival-close`, `to-other-close` |
+| `<to-share>` | kit/ui/share-dialog.ts | the Share dialog: the link and where it fits, the short link, posting, the QR code, the embed code | `to-link-copied` |
+| `<to-privacy>` | kit/ui/privacy-dialog.ts | unlock, the password, the lock beside the title (`trustButton`), the Share dialog's Password part (`renderProtect`), the Privacy dialog | `to-unlock`, `to-lock`, `to-share-open` |
 
-and, as before, the editor, `<to-drawer>` (which, with a document open, begins with This document: Share… and Download), `<to-find>`, `<to-toast>` and the shortcuts dialog. The page's keys are kit/keys.ts `pageKey`.
+and, as before, the editor, `<to-drawer>` (which, with a document open, begins with This document: Share… and Download), `<to-find>`, `<to-toast>` and the shortcuts dialog. The page's keys are kit/core/keys.ts `pageKey`.
 
 **The page is the visible window; the column scrolls.** `html` and `body` are `height: 100%; overflow: hidden; overscroll-behavior: none` on the screen (print flows on). `<to-chrome>` is a column exactly the visual viewport's height, set from `visualViewport.height` as it resizes (the layout viewport's while a desktop pinch has zoomed in), and the window is put back at its top whenever it or the visual viewport scrolls (`pinWindow`; iOS slides the window, with no word from the visual viewport, for a caret it finds under the keyboard), the caret then brought into sight the column's way, so the layout viewport never slides. In it: the header, the banners, and `.to-column`, which holds the bar's place and `.to-main`, `overflow-y: auto; overscroll-behavior: contain`, the document. The column's height is `--to-col-h` on the chrome, for what fills it (the Drawing Tool's canvas, the Diagram Maker's picture, the Animator's stage, the Trip Planner's map, the Spreadsheet's box).
 
@@ -321,7 +321,7 @@ and, as before, the editor, `<to-drawer>` (which, with a document open, begins w
 
 **On a phone, editing.** Under a coarse pointer, while a box has the focus (a `<to-text>`, a field in an app), `<to-chrome>` has `editing` and the header steps aside; the menu button alone stays, floating on a card at the column's top inline end, and a short link's banner goes small. The header returns when the focus leaves the box (a tap outside, Escape, Done); a hop to the bar, a menu or a dialog and back is not leaving. The menu button is at the inline end on every screen (the right in a left-to-right language, the left in Arabic): the words begin at the inline start, so a button there would cover the first line and the caret, and on an iPhone the left edge is Safari's back swipe. The drawer slides in from the same side. Paul, 2026-10-10: "when editing, the top nav vanishes except for the hamburger. The secondary nav is now aligned bottom."
 
-**Scrolling, in one place.** kit/scroll.ts has `scrollerOf(el)` (the nearest box that scrolls, else the column), `reveal(el, opts)` (each box around it moved by what it takes, nothing behind a dialog or a popover, the window never) and `room()` (where a menu, the context bar, the link box or the completion list may sit: the column's box within the visual viewport). The caret kept in view (`revealCaret`, the one rule: after an edit or a focus moved, once the column settles from a keyboard's glide, and when the window has been put back), Find's match, a note, a completion, a card or a stop brought in, the Outliner's drag at the column's edge and a pinch keeping the words under the fingers all go through it. A node test (test/scroll.test.ts) fails on any other module that reads `window.scrollY` or scrolls the window.
+**Scrolling, in one place.** kit/ui/scroll.ts has `scrollerOf(el)` (the nearest box that scrolls, else the column), `reveal(el, opts)` (each box around it moved by what it takes, nothing behind a dialog or a popover, the window never) and `room()` (where a menu, the context bar, the link box or the completion list may sit: the column's box within the visual viewport). The caret kept in view (`revealCaret`, the one rule: after an edit or a focus moved, once the column settles from a keyboard's glide, and when the window has been put back), Find's match, a note, a completion, a card or a stop brought in, the Outliner's drag at the column's edge and a pinch keeping the words under the fingers all go through it. A node test (test/scroll.test.ts) fails on any other module that reads `window.scrollY` or scrolls the window.
 
 **Why, and the price.** Safari on iOS does not make the page shorter for the keyboard, only the visible window; a bar stuck to the page's top had to be measured into place (`--to-vv-top`, `--to-stuck-h`, a frame-by-frame watch after every resize, focus and touch) after events that came late or never, and was found parked a third of the way down. A column the visible window's height puts the bar where it belongs with nothing measured but the window. **The price is Safari's toolbar: it no longer collapses as the words scroll**, since the page itself never scrolls, so a phone shows a little less of the document than a page that scrolled the window would.
 
@@ -410,7 +410,7 @@ the focus (it puts the name back, and either key goes to the column's first cell
 left the focus on nothing (the home page's column has it); the palette opened by the tap that closed a menu gave the
 focus back to nothing (to the menu's button);
 a template chosen in the drawer asked to leave over the open drawer, two modals; printing left the focus on nothing;
-a dialog closed over a frame whose page had the focus, or over a menu it had closed, gave it to nothing (kit/dialog.ts
+a dialog closed over a frame whose page had the focus, or over a menu it had closed, gave it to nothing (kit/ui/dialog.ts
 `focusBack`, the drawer's too); Find closed with nothing found gave it to nothing; and on a phone the bar's button
 focused while the bar was away scrolled the whole chrome up by the header's height (the chrome now holds still).
 
@@ -431,8 +431,8 @@ says in the order it says it, and the pages are a picture of it.
   Connections as "A → B: label"; the mind map, the org chart and the rest), Calendar (each day a heading in the reader's
   language, its events with their times in the calendar's zone and how they repeat), Trip Planner (the stops in order
   with their notes), Drawing Tool and Animator (the alt, else a description from the shapes, and each shape's label). The
-  locked card says it is locked; a QR code, its address. `kit/text-layer.ts` `textLayer(def, doc)` picks.
-- **Drawn** (`kit/text-view.ts`): plain HTML, tables with column heads, a task's state said before its words, a link
+  locked card says it is locked; a QR code, its address. `kit/text/text-layer.ts` `textLayer(def, doc)` picks.
+- **Drawn** (`kit/text/text-view.ts`): plain HTML, tables with column heads, a task's state said before its words, a link
   through the link guard. The Display Link puts it
   first, visually hidden (shown should the keyboard reach a link in it), and the pages after it `aria-hidden`; its Text
   button shows the words in the pages' place, reflowed at the person's size in the theme's colors, the column no

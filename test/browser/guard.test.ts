@@ -3,16 +3,16 @@
 import { test, expect, afterEach, vi } from 'vitest';
 import { userEvent } from 'vitest/browser';
 import { mount, tick, until, settled } from './helpers.ts';
-import { appOf } from '../../src/kit/apps.ts';
-import { encodeDoc } from '../../src/kit/codec.ts';
-import { keep } from '../../src/kit/library.ts';
-import { setKeeping } from '../../src/kit/store.ts';
-import { openLink } from '../../src/kit/link-guard.ts';
-import { remScale } from '../../src/kit/zoom.ts';
-import { setLanguage, t } from '../../src/kit/i18n.ts';
-import type { ToShell } from '../../src/kit/shell.ts';
-import type { ToDrawer } from '../../src/kit/drawer.ts';
-import type { ToDialog } from '../../src/kit/dialog.ts';
+import { appOf } from '../../src/kit/core/apps.ts';
+import { encodeDoc } from '../../src/kit/core/codec.ts';
+import { keep } from '../../src/kit/share/library.ts';
+import { setKeeping } from '../../src/kit/core/store.ts';
+import { openLink } from '../../src/kit/ui/link-guard.ts';
+import { remScale } from '../../src/kit/ui/zoom.ts';
+import { setLanguage, t } from '../../src/kit/core/i18n.ts';
+import type { ToShell } from '../../src/kit/core/shell.ts';
+import type { ToDrawer } from '../../src/kit/ui/drawer.ts';
+import type { ToDialog } from '../../src/kit/ui/dialog.ts';
 import indexHtml from '../../index.html?raw';
 
 const CAT = 'https://pictures.example/cat.png';

@@ -3,7 +3,7 @@
  * short sentences, the computing words people say (fichye, lyen, modpas, telechaje), never French dressed as Creole. Keys are the English strings of en.ts.
  * Plurals have two forms, as Intl.PluralRules gives for ht (one, other); a counted noun is not marked, so both forms often read alike.
  */
-import type { Strings } from '../kit/i18n.ts';
+import type { Strings } from '../kit/core/i18n.ts';
 
 export default {
   // ---- the shell: header ----
@@ -61,7 +61,7 @@ export default {
   'Tiny Little Office': 'Tiny Little Office', // same
   'About Tiny Little Office': 'Apwopo Tiny Little Office',
 
-  // ---- links that leave the site (kit/link-guard.ts) ----
+  // ---- links that leave the site (kit/ui/link-guard.ts) ----
   // The menu button's tooltip: the Office mark is the menu.
   'Tiny Little Office menu': 'Meni Tiny Little Office',
   // The question before a link that leaves the site: "You are leaving Tiny Little Office for" over the site's name, large.
@@ -80,7 +80,7 @@ export default {
 
   // ---- the copy kept on the device (status lines under the switch) ----
 
-  // ---- sharing: the Share dialog (kit/shell.ts), where the link fits (kit/limits.ts), the arrival banner ----
+  // ---- sharing: the Share dialog (kit/core/shell.ts), where the link fits (kit/share/limits.ts), the arrival banner ----
   'A copy opened in a new tab': 'Yon kopi ki louvri nan yon nouvo onglè',
   'Copy display link': 'Kopye lyen afichaj',
   'Copy into a new document': 'Kopye nan yon nouvo dokiman',
@@ -133,7 +133,7 @@ export default {
   'Link': 'Lyen',
   'Short link': 'Lyen kout',
 
-  // ---- privacy (kit/privacy.ts, kit/privacy-dialog.ts): the password, what the device holds ----
+  // ---- privacy (kit/share/privacy.ts, kit/ui/privacy-dialog.ts): the password, what the device holds ----
   // The Share dialog's head line: "Created 9 Oct 2026, 14:03 · by Paul".
   'Anyone with the link will need the password to open it. Nobody can reset it: lose it and the document is gone.': 'Tout moun ki gen lyen an ap bezwen modpas la pou louvri l. Pesonn pa ka reyinisyalize l: si w pèdi l, dokiman an pèdi.',
   'Change password': 'Chanje modpas',
@@ -180,7 +180,7 @@ export default {
   'Copy this and send it another way than the link. It cannot be shown again.': 'Kopye l epi voye l yon lòt fason pase lyen an. Yo pa ka montre l ankò.',
   'Make another': 'Fè yon lòt',
 
-  // ---- a document locked with a password, placed inside another (kit/locked.ts, kit/locked-doc.ts) ----
+  // ---- a document locked with a password, placed inside another (kit/share/locked.ts, kit/ui/locked-doc.ts) ----
   // The card drawn where it sits; {app} is the app's name: "A Spreadsheet document, locked with a password".
   'Locked with a password': 'Bloke ak yon modpas',
   'A {app} document, locked with a password': 'Yon dokiman {app}, bloke ak yon modpas',
@@ -203,7 +203,7 @@ export default {
   // The group heading the Calendar and the Trip Planner sit under on the home page.
   'Plan': 'Planifikasyon',
   'Chosen tasks': 'Travay chwazi yo',
-  // A link that opens the document (kit/compare.ts).
+  // A link that opens the document (kit/ui/compare.ts).
   'Open': 'Louvri',
   'Task': 'Travay',
   'Tasks': 'Travay',
@@ -369,7 +369,7 @@ export default {
   'Terms of service': 'Kondisyon sèvis',
   'A small business\'s terms in plain words: booking, prices, keys, what if, ending.': 'Kondisyon yon ti biznis an mo senp: rezèvasyon, pri, kle, e si, fen.',
 
-  // ---- Insert's dialog (kit/insert-dialogs.ts): Tiny Little Office Doc ----
+  // ---- Insert's dialog (kit/ui/insert-dialogs.ts): Tiny Little Office Doc ----
   'A Tiny Little Office link': 'Yon lyen Tiny Little Office',
   'Opening the short link…': 'Ap louvri lyen kout la…',
   'Paste the link of another Tiny Little Office document, long or short: its first page shows here.': 'Kole lyen yon lòt dokiman Tiny Little Office, long oswa kout: premye paj li parèt isit la.',
@@ -378,11 +378,11 @@ export default {
   'Tiny Little Office Doc…': 'Dokiman Tiny Little Office…',
   // Insert ▾'s group of the apps a new document can be made in, inside this one.
   'A new document': 'Yon nouvo dokiman',
-  // ---- another document edited in place (kit/doc-dialog.ts); a table's size is Rows × Columns ----
+  // ---- another document edited in place (kit/ui/doc-dialog.ts); a table's size is Rows × Columns ----
   'Cancel': 'Anile',
   'Rows': 'Ranje',
 
-  // ---- charts (kit/chart.ts) ----
+  // ---- charts (kit/draw/chart.ts) ----
   'An empty chart': 'Yon graf vid',
   'Bars': 'Ba',
   'Flows (Sankey)': 'Koule (Sankey)',
@@ -531,10 +531,10 @@ export default {
   'Unlock these cells': 'Debloke selil sa yo',
   'What it holds; sort; columns': 'Sa l genyen; klase; kolòn',
 
-  // ---- downloads: hand-offs to another app (kit/exports.ts) ----
+  // ---- downloads: hand-offs to another app (kit/file/exports.ts) ----
   'Open in': 'Louvri nan',
 
-  // ---- the icon library (kit/icons-picker.ts) ----
+  // ---- the icon library (kit/ui/icons-picker.ts) ----
   'Icon': 'Ikòn',
   'Favorites': 'Favori',
   'Search icons': 'Chèche ikòn',

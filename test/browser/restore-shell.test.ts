@@ -4,14 +4,14 @@
 import { test, expect, afterEach } from 'vitest';
 import { page, userEvent } from 'vitest/browser';
 import { mount, tick, until } from './helpers.ts';
-import { encodeDoc } from '../../src/kit/codec.ts';
-import { forgetAll, keep, library } from '../../src/kit/library.ts';
-import { setKeeping } from '../../src/kit/store.ts';
-import { remScale, size, stepSize } from '../../src/kit/zoom.ts';
-import { place } from '../../src/kit/menu.ts';
-import { keysText } from '../../src/kit/commands.ts';
-import type { ToShell } from '../../src/kit/shell.ts';
-import type { ToFind } from '../../src/kit/find.ts';
+import { encodeDoc } from '../../src/kit/core/codec.ts';
+import { forgetAll, keep, library } from '../../src/kit/share/library.ts';
+import { setKeeping } from '../../src/kit/core/store.ts';
+import { remScale, size, stepSize } from '../../src/kit/ui/zoom.ts';
+import { place } from '../../src/kit/ui/menu.ts';
+import { keysText } from '../../src/kit/core/commands.ts';
+import type { ToShell } from '../../src/kit/core/shell.ts';
+import type { ToFind } from '../../src/kit/ui/find.ts';
 
 async function saved(body: () => Promise<void>) {
   setKeeping(true);

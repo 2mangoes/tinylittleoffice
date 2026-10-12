@@ -20,16 +20,16 @@ import { keyed } from 'lit/directives/keyed.js';
 import { live } from 'lit/directives/live.js';
 import { unsafeSVG } from 'lit/directives/unsafe-svg.js';
 import { Pause, Play, Repeat, Sparkles } from 'lucide';
-import { cmdBtn, cmdMenu, cmdTool } from '../../kit/bar.ts';
-import { contextOf, drawnIn, labelOf, runKey } from '../../kit/commands.ts';
+import { cmdBtn, cmdMenu, cmdTool } from '../../kit/ui/bar.ts';
+import { contextOf, drawnIn, labelOf, runKey } from '../../kit/core/commands.ts';
 import COMMANDS, { loopName } from './commands.ts';
-import { DocElement, type DocChange, type Entry } from '../../kit/element.ts';
-import { t } from '../../kit/i18n.ts';
-import { type ContextEntry, type ToContext } from '../../kit/context.ts';
-import type { ToDialog } from '../../kit/dialog.ts';
-import { GENERATOR, docToHtml, htmlToBlocks } from '../../kit/clipboard.ts';
-import { toast } from '../../kit/toast.ts';
-import { pinchZoom } from '../../kit/pinch.ts';
+import { DocElement, type DocChange, type Entry } from '../../kit/core/element.ts';
+import { t } from '../../kit/core/i18n.ts';
+import { type ContextEntry, type ToContext } from '../../kit/ui/context.ts';
+import type { ToDialog } from '../../kit/ui/dialog.ts';
+import { GENERATOR, docToHtml, htmlToBlocks } from '../../kit/text/clipboard.ts';
+import { toast } from '../../kit/ui/toast.ts';
+import { pinchZoom } from '../../kit/ui/pinch.ts';
 import { applyAll, parse, write, type Doc, type Op } from '../../doc/index.ts';
 import { GRID, H, W, bounds, isDrawn, isLink, shapesTable, type Shape } from '../draw/model.ts';
 import { THEME } from '../draw/editor.ts';
@@ -61,10 +61,10 @@ import {
 } from './model.ts';
 import { frameSvg, transformOf, altOf } from './view.ts';
 import { turnOf } from '../draw/view.ts';
-import '../../kit/bar.ts';
-import '../../kit/menu.ts';
-import '../../kit/context.ts';
-import '../../kit/dialog.ts';
+import '../../kit/ui/bar.ts';
+import '../../kit/ui/menu.ts';
+import '../../kit/ui/context.ts';
+import '../../kit/ui/dialog.ts';
 import './style.css';
 
 export const tag = 'to-anim-editor';
@@ -135,7 +135,7 @@ export class ToAnimEditor extends DocElement<AnimView> {
   private lastTap: { i: number; at: number } | null = null;
   /** The last Mod+C, X or V on the stage: done by the browser's own event or by hand, whichever comes first, never both. */
   private press: { clip: 'copy' | 'cut' | 'paste'; done: boolean; at: number } | null = null;
-  /** Two fingers are on the stage: the pinch is kit/pinch.ts's, and the pointers are not the shapes'. */
+  /** Two fingers are on the stage: the pinch is kit/ui/pinch.ts's, and the pointers are not the shapes'. */
   private pinching = false;
   private unpinch: (() => void) | null = null;
 

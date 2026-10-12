@@ -1,13 +1,13 @@
-// The command registry's lints (src/kit/commands.ts; docs/editing.md §10): each fails naming the command, the key or
+// The command registry's lints (src/kit/core/commands.ts; docs/editing.md §10): each fails naming the command, the key or
 // the string that broke its rule. And what the registry writes (docs/editing.md's tables, the skill's keys) is current.
 import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, test } from 'vitest';
-import { keyList, keyOf, keysText, labelOf, normalKey, runKey, command } from '../src/kit/commands.ts';
+import { keyList, keyOf, keysText, labelOf, normalKey, runKey, command } from '../src/kit/core/commands.ts';
 import { definedKeys } from '../scripts/i18n-extract.ts';
 import { editingTables } from '../scripts/commands.ts';
 import { makeSkill } from '../scripts/make-skill.ts';
-import { apps } from '../src/kit/apps.ts';
+import { apps } from '../src/kit/core/apps.ts';
 import { allCommands, collisions } from './commands-graph.ts';
 import { SHADOWS } from './commands-shadows.ts';
 
@@ -116,7 +116,7 @@ describe('the graph lints', () => {
     // No other module writes a key's spelling of its own.
     const files = (dir: string): string[] => readdirSync(dir).flatMap((f) => (statSync(join(dir, f)).isDirectory() ? files(join(dir, f)) : /\.ts$/.test(f) ? [join(dir, f)] : []));
     const spellers = files(join(root, 'src'))
-      .filter((f) => !f.endsWith('kit/commands.ts') && !f.includes('/i18n/') && !f.includes('/tests/'))
+      .filter((f) => !f.endsWith('kit/core/commands.ts') && !f.includes('/i18n/') && !f.includes('/tests/'))
       .filter((f) => /['"`]⌘|replace\(['"]Mod\+/.test(readFileSync(f, 'utf8')))
       .map((f) => f.slice(root.length + 1));
     expect(spellers).toStrictEqual([]);

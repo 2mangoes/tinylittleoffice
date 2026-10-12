@@ -6,8 +6,8 @@
  */
 import { Calculator } from 'lucide';
 import { apply, parse, write } from '../../doc/index.ts';
-import { defineApp, type Doc } from '../../kit/app.ts';
-import { t } from '../../kit/i18n.ts';
+import { defineApp, type Doc } from '../../kit/core/app.ts';
+import { t } from '../../kit/core/i18n.ts';
 import { calcPage, tapeText } from './view.ts';
 
 export const titleOf = (doc: Doc): string => parse(doc).head.title ?? '';

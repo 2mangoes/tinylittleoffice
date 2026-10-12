@@ -1,7 +1,7 @@
 // Presenting a step at a time: each app counts the steps its document builds up in, and draws a part of it on
 // the page the whole makes; a slide that shows a document builds as that document does.
 import { test, expect } from 'vitest';
-import { appOf } from '../src/kit/apps.ts';
+import { appOf } from '../src/kit/core/apps.ts';
 import { parse } from '../src/doc/index.ts';
 import { slidesOf } from '../src/apps/deck/model.ts';
 import { deckFrames, slideSteps } from '../src/apps/deck/view.ts';

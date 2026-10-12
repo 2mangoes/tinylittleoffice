@@ -6,11 +6,11 @@
  */
 import { Table2 } from 'lucide';
 import { apply, parse, write, type Doc as Kernel } from '../../doc/index.ts';
-import { defineApp, type Doc } from '../../kit/app.ts';
-import { utf8, pageSvg } from '../../kit/draw.ts';
-import { t } from '../../kit/i18n.ts';
-import { drawn, raster } from '../../kit/raster.ts';
-import { tableToXlsx } from '../../kit/xlsx.ts';
+import { defineApp, type Doc } from '../../kit/core/app.ts';
+import { utf8, pageSvg } from '../../kit/draw/draw.ts';
+import { t } from '../../kit/core/i18n.ts';
+import { drawn, raster } from '../../kit/draw/raster.ts';
+import { tableToXlsx } from '../../kit/file/xlsx.ts';
 import { readSheet } from './model.ts';
 import { cellText, chartOf, sheetPages, sheetToCsv } from './view.ts';
 import { sheetToCal } from './convert.ts';

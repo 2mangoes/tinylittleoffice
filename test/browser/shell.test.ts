@@ -4,15 +4,15 @@
 import { test, expect, afterEach, vi } from 'vitest';
 import { page } from 'vitest/browser';
 import { mount, openShare, tick, until } from './helpers.ts';
-import { apps } from '../../src/kit/apps.ts';
-import { decodeDoc } from '../../src/kit/codec.ts';
-import { forgetAll, keep, library, localDay } from '../../src/kit/library.ts';
-import { encodeDoc } from '../../src/kit/codec.ts';
-import { keeping, setKeeping, store } from '../../src/kit/store.ts';
-import { lockWith, pack } from '../../src/kit/privacy.ts';
-import { setLanguage } from '../../src/kit/i18n.ts';
-import type { ToShell } from '../../src/kit/shell.ts';
-import type { ToText } from '../../src/kit/text.ts';
+import { apps } from '../../src/kit/core/apps.ts';
+import { decodeDoc } from '../../src/kit/core/codec.ts';
+import { forgetAll, keep, library, localDay } from '../../src/kit/share/library.ts';
+import { encodeDoc } from '../../src/kit/core/codec.ts';
+import { keeping, setKeeping, store } from '../../src/kit/core/store.ts';
+import { lockWith, pack } from '../../src/kit/share/privacy.ts';
+import { setLanguage } from '../../src/kit/core/i18n.ts';
+import type { ToShell } from '../../src/kit/core/shell.ts';
+import type { ToText } from '../../src/kit/text/text.ts';
 
 /** Words typed into Write's editor at the caret's place, `at` (the end of what is there). */
 async function type(shell: ToShell, words: string, at = 0) {
@@ -41,7 +41,7 @@ afterEach(() => (history.replaceState(null, '', location.pathname), afterEachRem
 /** The documents told they are copies, forgotten: a test that opens a link sees the line afresh. */
 const afterEachRemove = () => store.remove('tinyoffice.copiesSaid');
 
-/** A document's text without the time the shell stamps it with at its first change (kit/envelope.ts), which it must carry. */
+/** A document's text without the time the shell stamps it with at its first change (kit/core/envelope.ts), which it must carry. */
 function unstamped(text: string): string {
   expect(text).toMatch(/\ncreated: \d{4}-\d\d-\d\dT\d\d:\d\dZ\n/);
   return text.replace(/\ncreated: [^\n]*\n/, '\n');

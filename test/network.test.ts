@@ -1,11 +1,11 @@
 // What leaves the browser (docs/transparency.md §1 items 1 and 7): every host the source names is on the
-// one list (src/kit/network.ts), src/ names a host only through that list, no analytics, error-reporting,
+// one list (src/kit/core/network.ts), src/ names a host only through that list, no analytics, error-reporting,
 // font-CDN or tag-manager host appears anywhere, and docs/network.md and /network are what the list says.
 // Builds are not run in tests, so this reads the source the build is made from.
 import { test, expect } from 'vitest';
 import { readFileSync, readdirSync } from 'node:fs';
 import { join, relative } from 'node:path';
-import { hostMatches, listed, reaches } from '../src/kit/network.ts';
+import { hostMatches, listed, reaches } from '../src/kit/core/network.ts';
 import { networkDoc, networkPage } from '../scripts/network-doc.ts';
 
 const root = join(import.meta.dirname, '..');
@@ -42,10 +42,10 @@ test('every host the source reaches is on the list, or localhost, or a namespace
   expect(stray).toEqual([]);
 });
 
-test('src/ names a host only through src/kit/network.ts', () => {
+test('src/ names a host only through src/kit/core/network.ts', () => {
   const named: string[] = [];
   for (const path of files('src')) {
-    if (isTest(path) || path === 'src/kit/network.ts') continue;
+    if (isTest(path) || path === 'src/kit/core/network.ts') continue;
     for (const host of hosts(code(readFileSync(join(root, path), 'utf8')))) if (!LOCAL.includes(host) && !NAMESPACES.includes(host)) named.push(`${path}: ${host}`);
   }
   expect(named).toEqual([]);

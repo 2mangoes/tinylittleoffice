@@ -5,11 +5,11 @@
  * presentation holds, so the parts PowerPoint always writes are written too. No DOM but the pictures,
  * which are asked for and may be none (under node they are).
  */
-import type { ExportContext } from '../../kit/app.ts';
-import { pageSvg, xml } from '../../kit/draw.ts';
-import { glyphNamed } from '../../kit/icons.ts';
-import { raster } from '../../kit/raster.ts';
-import { XML_HEAD, zip } from '../../kit/zip.ts';
+import type { ExportContext } from '../../kit/core/app.ts';
+import { pageSvg, xml } from '../../kit/draw/draw.ts';
+import { glyphNamed } from '../../kit/draw/icons.ts';
+import { raster } from '../../kit/draw/raster.ts';
+import { XML_HEAD, zip } from '../../kit/file/zip.ts';
 import { markNotes, noteNumbers, noteRuns, parse, plainText, type Doc, type Run } from '../../doc/index.ts';
 import { settingsOf, slideNotes, slidesOf, type Item, type Slide } from './model.ts';
 import { themeOf, type DeckTheme } from './theme.ts';

@@ -22,7 +22,7 @@ leak. Everything here makes that checkable by a stranger.
    site: there are no pictures from the web, no proxy for them and no embeds (the code is kept on the branch
    `web-pictures-and-embeds`). The CSP's `img-src` is the site, `data:`, `blob:` and the map's tiles (no
    `https:` at large), and it has no `frame-src` or `media-src` of another site's, held by `test/csp.test.ts`.
-   *Built, 2026-10-10.* `src/kit/network.ts` is the one list of every host the site can reach (what, when,
+   *Built, 2026-10-10.* `src/kit/core/network.ts` is the one list of every host the site can reach (what, when,
    what it carries, what stops it, the module, the CSP directive); every module that asks the web takes its
    host from it. `scripts/network-doc.ts` (`npm run docs:network`, run first by `npm run build`) writes
    `docs/network.md` and `public/network.html` (`/network`, plain HTML, no script, linked from About and the
@@ -54,8 +54,8 @@ leak. Everything here makes that checkable by a stranger.
    (`vite.api.config.ts`): a library build keeps the bundler's `//#region <path>` notes, which named where
    node_modules was on the building machine; they are off. The build writes `dist/version.json`
    (`scripts/version.ts`: the commit, its tag or "", the commit's own date in UTC, the policy's script
-   hashes; the shape is `src/kit/version.ts`), checked by `scripts/check-build.ts`; About reads it when it opens and says "Running commit abc1234", a link to the
-   commit on GitHub (`github.com` is on the list, `src/kit/network.ts` `source`). `scripts/verify-deploy.ts`
+   hashes; the shape is `src/kit/core/version.ts`), checked by `scripts/check-build.ts`; About reads it when it opens and says "Running commit abc1234", a link to the
+   commit on GitHub (`github.com` is on the list, `src/kit/core/network.ts` `source`). `scripts/verify-deploy.ts`
    (`npm run verify-deploy -- <url> [commit]`) reads the site's `/version.json`, builds that commit in a fresh
    checkout (or uses `dist/` when it is that build), fetches every file but `_headers`, and prints a table;
    exit 1 on any difference. The release is the `release` job of `.github/workflows/deploy.yml`. Signed

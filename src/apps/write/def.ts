@@ -5,9 +5,9 @@
  */
 import { PenLine } from 'lucide';
 import { parse } from '../../doc/index.ts';
-import { defineApp, isStill } from '../../kit/app.ts';
-import { utf8 } from '../../kit/draw.ts';
-import { t } from '../../kit/i18n.ts';
+import { defineApp, isStill } from '../../kit/core/app.ts';
+import { utf8 } from '../../kit/draw/draw.ts';
+import { t } from '../../kit/core/i18n.ts';
 import { retitle, titleOf } from './model.ts';
 import { docToDocx, docToHtml, docToMarkdown, docToRtf, pages } from './view.ts';
 import { writeToDeck, writeToOutline } from './convert.ts';

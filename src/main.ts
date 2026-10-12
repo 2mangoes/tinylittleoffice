@@ -3,9 +3,9 @@
  * (The size of everything is drawn by the shell.)
  */
 import './styles.css';
-import { initLanguage } from './kit/i18n.ts';
-import { initTheme } from './kit/theme.ts';
-import './kit/shell.ts';
+import { initLanguage } from './kit/core/i18n.ts';
+import { initTheme } from './kit/ui/theme.ts';
+import './kit/core/shell.ts';
 
 // After a new version is published, a page opened before it may ask for a piece of the old one that is
 // gone. Reloading (once) gets the new version.

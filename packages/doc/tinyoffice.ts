@@ -32,7 +32,7 @@
  */
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { apps, compare, example, file, fromJson, fromTlo, lint, link, markdown, measure, PASSWORD_REFUSED, plain, read, shapes, templates, toJson, tryDraft } from '../../src/api.ts';
-import { slug } from '../../src/kit/draw.ts';
+import { slug } from '../../src/kit/draw/draw.ts';
 
 const USAGE = `tinyoffice (or tinylittleoffice, as npx runs it):
 

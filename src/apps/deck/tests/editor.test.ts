@@ -11,8 +11,8 @@ import '../editor.ts';
 import type { ToDeckEditor } from '../editor.ts';
 import { templates } from '../templates.ts';
 import { tick, until } from '../../../../test/browser/helpers.ts';
-import { remScale } from '../../../kit/zoom.ts';
-import { encodeDoc } from '../../../kit/codec.ts';
+import { remScale } from '../../../kit/ui/zoom.ts';
+import { encodeDoc } from '../../../kit/core/codec.ts';
 
 async function editor(value = ''): Promise<{ el: ToDeckEditor; changes: string[]; last: () => string | undefined }> {
   document.body.innerHTML = '';

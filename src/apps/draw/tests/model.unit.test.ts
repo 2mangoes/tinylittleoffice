@@ -1,9 +1,9 @@
 // The drawing as a view of the document, and each command as the ops it produces: under node, no DOM.
 import { expect, test } from 'vitest';
 import { createHash } from 'node:crypto';
-import { pageSvg } from '../../../kit/draw.ts';
+import { pageSvg } from '../../../kit/draw/draw.ts';
 import { applyAll, parse, write, type Doc, type Op } from '../../../doc/index.ts';
-import { blankTile, parseTile, tileCss, tilePattern, tileRef, tileSvg } from '../../../kit/tile.ts';
+import { blankTile, parseTile, tileCss, tilePattern, tileRef, tileSvg } from '../../../kit/draw/tile.ts';
 import {
   addShape,
   describeDrawing,

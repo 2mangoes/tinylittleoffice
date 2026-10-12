@@ -5,8 +5,8 @@
 // fixtures are node tests in test/clipboard.test.ts.)
 import { expect, test } from 'vitest';
 import { parse, write, type Block } from '../../src/doc/index.ts';
-import { pasteFrom, type Pasted } from '../../src/kit/clipboard.ts';
-import type { Shape } from '../../src/kit/textops.ts';
+import { pasteFrom, type Pasted } from '../../src/kit/text/clipboard.ts';
+import type { Shape } from '../../src/kit/text/textops.ts';
 
 const tlo = (got: Pasted | null) => (got && 'blocks' in got ? write({ head: {}, blocks: got.blocks }) : JSON.stringify(got));
 const paste = (html: string, text: string, shape: Shape = 'doc') => pasteFrom({ html, text }, shape);
@@ -95,7 +95,7 @@ test("fitted to the host: a slide's words keep items and paragraphs, a table bec
 });
 
 test('found by the fuzz: an ordered item after a bulleted one starts its own list in our HTML; a pasted list never starts deeper than the text can say', async () => {
-  const { docToHtml, htmlToBlocks } = await import('../../src/kit/clipboard.ts');
+  const { docToHtml, htmlToBlocks } = await import('../../src/kit/text/clipboard.ts');
   const blocks: Block[] = [
     { k: 'li', depth: 0, runs: [{ t: 'a' }] },
     { k: 'li', depth: 0, ord: true, runs: [{ t: 'b' }] },

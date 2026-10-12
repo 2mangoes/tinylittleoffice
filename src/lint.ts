@@ -15,13 +15,13 @@
  * one whose value is an error is a finding. Loaded lazily by src/api.ts (`lint`, `measure`) and the command line.
  */
 import { parse, textCounts, textOf, type Doc } from './doc/index.ts';
-import { appOf } from './kit/apps.ts';
-import { textLayer } from './kit/text-layer.ts';
+import { appOf } from './kit/core/apps.ts';
+import { textLayer } from './kit/text/text-layer.ts';
 import { lintDiagram, measureDiagram } from './apps/diagram/lint.ts';
 import { lintDeck, measureDeck } from './apps/deck/lint.ts';
 import { lintSheet, measureSheet } from './apps/sheet/lint.ts';
 import { slidesOf } from './apps/deck/model.ts';
-import { SHORT_LINK_MAX } from './kit/short.ts';
+import { SHORT_LINK_MAX } from './kit/share/short.ts';
 
 /** One thing the eye would have seen: the block it is about, what kind of finding, the words that say it, what to do. */
 export interface Found {
@@ -96,7 +96,7 @@ export const findingLine = (f: Finding): string => `${f.app} · ${f.at} · ${f.w
 export interface Measure {
   app: string;
   length: number;
-  /** Whether the link fits in a short link (kit/short.ts SHORT_LINK_MAX), and by how many characters it does not. */
+  /** Whether the link fits in a short link (kit/share/short.ts SHORT_LINK_MAX), and by how many characters it does not. */
   short: { fits: boolean; over: number };
   slides?: ReturnType<typeof measureDeck>;
   diagram?: ReturnType<typeof measureDiagram>;

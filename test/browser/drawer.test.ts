@@ -2,13 +2,13 @@
 import { test, expect } from 'vitest';
 import { cdp } from 'vitest/browser';
 import { mount, openDrawerDoc, said, tick, until } from './helpers.ts';
-import { encodeDoc } from '../../src/kit/codec.ts';
-import { apps } from '../../src/kit/apps.ts';
-import { templatesOf } from '../../src/kit/home.ts';
-import { running } from '../../src/kit/version.ts';
-import { siteRoot } from '../../src/kit/apps.ts';
+import { encodeDoc } from '../../src/kit/core/codec.ts';
+import { apps } from '../../src/kit/core/apps.ts';
+import { templatesOf } from '../../src/kit/ui/home.ts';
+import { running } from '../../src/kit/core/version.ts';
+import { siteRoot } from '../../src/kit/core/apps.ts';
 import { page } from 'vitest/browser';
-import { keepSize, SIZE_MAX } from '../../src/kit/zoom.ts';
+import { keepSize, SIZE_MAX } from '../../src/kit/ui/zoom.ts';
 import { firstLines } from './firstline.ts';
 
 /** The drawer, opened by the menu button, drawn whole. */
@@ -59,8 +59,8 @@ test("the hamburger opens the drawer, the home page's drawer has no app rows, Fi
 });
 
 test('Find finds kept documents by title and templates by name or app, each under its heading; Enter opens the first', async () => {
-  const { setPrivate } = await import('../../src/kit/privacy.ts');
-  const { keep } = await import('../../src/kit/library.ts');
+  const { setPrivate } = await import('../../src/kit/share/privacy.ts');
+  const { keep } = await import('../../src/kit/share/library.ts');
   await setPrivate(false);
   try {
     keep({ id: 'm', app: 'write', title: 'Meeting with the printers', hash: '#/v1/write/ymeet', at: Date.now() });
@@ -133,8 +133,8 @@ test("a template from inside an app: each of the drawer's rows has its templates
 });
 
 test('Save in browser turned on says so; Cancel on "Remove all files and settings from this browser?" leaves things kept and puts the switch back on', async () => {
-  const { setPrivate } = await import('../../src/kit/privacy.ts');
-  const { keeping } = await import('../../src/kit/store.ts');
+  const { setPrivate } = await import('../../src/kit/share/privacy.ts');
+  const { keeping } = await import('../../src/kit/core/store.ts');
   await setPrivate(true);
   expect(keeping()).toBe(false);
   const shell = await mount('');
@@ -232,7 +232,7 @@ test('a device with no pointer at all (neither fine nor coarse: keys alone) has 
 // key with Ctrl, ⌘ or Alt is typed, no keys are written in the drawer, its menus or the commands its search finds; the
 // keys are each control's aria-keyshortcuts, never its name; Find in this document is a row of This document.
 test('under a finger with no keyboard the drawer, its menus and the commands it finds write no keys and name none; Find is a row', async () => {
-  const { keyboard } = await import('../../src/kit/commands.ts');
+  const { keyboard } = await import('../../src/kit/core/commands.ts');
   const named = (el: Element): string =>
     el.getAttribute('aria-label') ??
     [...el.childNodes]
@@ -340,8 +340,8 @@ test("the drawer's sections in Paul's order: the language, Save in browser, the 
 });
 
 test('one search, four kinds: Apps, Documents, Templates, Commands, each heading only with rows; a command runs and the drawer closes', async () => {
-  const { keep } = await import('../../src/kit/library.ts');
-  const { setPrivate } = await import('../../src/kit/privacy.ts');
+  const { keep } = await import('../../src/kit/share/library.ts');
+  const { setPrivate } = await import('../../src/kit/share/privacy.ts');
   await setPrivate(false);
   try {
     keep({ id: 'p', app: 'write', title: 'Processor parts', hash: '#/v1/write/yparts', at: Date.now() });
@@ -404,14 +404,14 @@ test('Mod+K opens the drawer with its search focused; the shortcuts list it by i
   const dialog = shell.querySelector<HTMLDialogElement>('dialog.to-drawer')!;
   await until(() => dialog.open && document.activeElement === dialog.querySelector('.to-find'));
   dialog.close();
-  const { shortcutGroups } = await import('../../src/kit/keys.ts');
+  const { shortcutGroups } = await import('../../src/kit/core/keys.ts');
   const page = shortcutGroups().find((g) => g.heading === 'This page')!;
   expect(page.keys.find((c) => c.keys === 'Mod+K')!.label).toBe('Find app, doc, template, or command');
   history.replaceState(null, '', location.pathname);
 });
 
 test("the language select begins 'Default: ' and the device's language named in itself, Default in the page's language", async () => {
-  const { setLanguage } = await import('../../src/kit/i18n.ts');
+  const { setLanguage } = await import('../../src/kit/core/i18n.ts');
   const real = Object.getOwnPropertyDescriptor(Navigator.prototype, 'languages')!;
   Object.defineProperty(navigator, 'languages', { configurable: true, get: () => ['fr-CA', 'en'] });
   try {
@@ -435,9 +435,9 @@ test("the language select begins 'Default: ' and the device's language named in 
 });
 
 test('Save in browser: off by default, its line says what turning it on does; on, what turning it off does; off forgets', async () => {
-  const { keeping } = await import('../../src/kit/store.ts');
-  const { setPrivate } = await import('../../src/kit/privacy.ts');
-  const { keep, library } = await import('../../src/kit/library.ts');
+  const { keeping } = await import('../../src/kit/core/store.ts');
+  const { setPrivate } = await import('../../src/kit/share/privacy.ts');
+  const { keep, library } = await import('../../src/kit/share/library.ts');
   expect(keeping()).toBe(false);
   const shell = await mount('');
   const dialog = await openDrawer(shell);
@@ -491,7 +491,7 @@ for (const scale of [1, 2])
   });
 
 // Paul, 2026-10-12: "Get rid of open a file and compare and zip download." A file still opens dropped on the page
-// (kit/open.ts); Compare is still the API's and the CLI's, and a #/compare link still opens it.
+// (kit/file/open.ts); Compare is still the API's and the CLI's, and a #/compare link still opens it.
 test('the drawer has no Open a file…, no Compare… and no Download everything, at home or in a document', async () => {
   for (const at of ['', `#/v1/write/${encodeDoc('# Plans\n\nWords.\n')}`]) {
     const shell = await mount(at);

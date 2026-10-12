@@ -1,5 +1,5 @@
 /**
- * The Drawing Tool's commands (kit/commands.ts), its editor the context, and the tables they are made from (the
+ * The Drawing Tool's commands (kit/core/commands.ts), its editor the context, and the tables they are made from (the
  * tools, the shapes, the inks, the text sizes, the alignments, the pixel inks). The bar: Insert ▾, Shapes or Pixels ▾,
  * the tools with their letters, an icon, Arrange ▾, the zoom; in pixel mode the inks, Eraser, Pencil, Fill, Clear and
  * Background. The context bar under the shape in hand: inks | fill or line style | text size and a text's alignment |
@@ -43,10 +43,10 @@ import {
   ZoomIn,
   ZoomOut,
 } from 'lucide';
-import { register, type Command, commandsOf } from '../../kit/commands.ts';
-import { t } from '../../kit/i18n.ts';
-import { UI } from '../../kit/icons.ts';
-import { TILE_INKS, TILE_SIDES, tileFilled } from '../../kit/tile.ts';
+import { register, type Command, commandsOf } from '../../kit/core/commands.ts';
+import { t } from '../../kit/core/i18n.ts';
+import { UI } from '../../kit/draw/icons.ts';
+import { TILE_INKS, TILE_SIDES, tileFilled } from '../../kit/draw/tile.ts';
 import { COLORS, isLink, nextAlign, type Align, type Color, type Fill, type Kind, type TextSize } from './model.ts';
 import type { ToDrawEditor } from './editor.ts';
 

@@ -1,6 +1,6 @@
-// What the second of two documents changed, block by block (kit/diff.ts).
+// What the second of two documents changed, block by block (kit/text/diff.ts).
 import { test, expect } from 'vitest';
-import { blocksOf, diff, diffLines, tally } from '../src/kit/diff.ts';
+import { blocksOf, diff, diffLines, tally } from '../src/kit/text/diff.ts';
 
 test('the longest common run is kept; what is left is taken out or put in, in reading order', () => {
   expect(diffLines(['a', 'b', 'c'], ['a', 'c', 'd'])).toEqual([

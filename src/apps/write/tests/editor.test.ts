@@ -11,13 +11,13 @@ import { parse } from '../../../doc/index.ts';
 import '../editor.ts';
 import type { ToWriteEditor } from '../editor.ts';
 import { templates } from '../templates.ts';
-import { isWords } from '../../../kit/textops.ts';
+import { isWords } from '../../../kit/text/textops.ts';
 import { mount, tick, until } from '../../../../test/browser/helpers.ts';
-import { remScale } from '../../../kit/zoom.ts';
+import { remScale } from '../../../kit/ui/zoom.ts';
 
 async function editor(value = ''): Promise<{ el: ToWriteEditor; changes: string[]; last: () => string | undefined }> {
   document.body.innerHTML = '';
-  // In a column as the shell's (kit/chrome.ts): the page never scrolls, the column does.
+  // In a column as the shell's (kit/ui/chrome.ts): the page never scrolls, the column does.
   const main = document.createElement('main');
   main.className = 'to-main';
   main.style.cssText = 'height: 100%; overflow-y: auto;';
@@ -132,7 +132,7 @@ test('a mark tapped puts the caret at the end of its note; a note emptied and le
   expect(notes(el).map((n) => n.textContent)).toEqual(['first', 'second', 'third']);
   chips()[1].click();
   await until(() => document.activeElement === notes(el)[1]);
-  expect(el.querySelector<import('../../../kit/text.ts').ToText>('.write-notes li:nth-child(2) to-text')!.sel?.focus.offset).toBe(6);
+  expect(el.querySelector<import('../../../kit/text/text.ts').ToText>('.write-notes li:nth-child(2) to-text')!.sel?.focus.offset).toBe(6);
   // Enter on a mark does the same.
   press(chips()[2], 'Enter');
   await until(() => document.activeElement === notes(el)[2]);

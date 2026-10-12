@@ -8,9 +8,9 @@
  *   PW_PORT=4424 npx playwright test e2e/reflow-phone.spec.ts --project=phone
  */
 import { test, expect, type Page } from '@playwright/test';
-import { apps } from '../src/kit/apps.ts';
-import { encodeDoc } from '../src/kit/codec.ts';
-import { routeHash } from '../src/kit/route.ts';
+import { apps } from '../src/kit/core/apps.ts';
+import { encodeDoc } from '../src/kit/core/codec.ts';
+import { routeHash } from '../src/kit/core/route.ts';
 
 /** Until the editor's element is defined and drawn, and the fonts are in. */
 async function drawn(page: Page) {

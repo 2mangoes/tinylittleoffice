@@ -2,7 +2,7 @@
 // Every command but a menu's opener is a step of some family's walk, allowed in at least one state of the model, and
 // every app is in a family. (The walks themselves are browser tests: test/browser/walks.test.ts.)
 import { describe, expect, test } from 'vitest';
-import { apps } from '../src/kit/apps.ts';
+import { apps } from '../src/kit/core/apps.ts';
 import { allCommands } from './commands-graph.ts';
 import { KNOWN } from './walks-known.ts';
 import { allowed, FAMILIES, familyCommands, KEYS, type Model, type Open, type Step } from './walks-model.ts';

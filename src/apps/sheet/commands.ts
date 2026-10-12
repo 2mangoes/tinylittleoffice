@@ -1,5 +1,5 @@
 /**
- * The Spreadsheet's commands (kit/commands.ts), its editor the context: the bar (Insert ▾, Chart ▾, Fill down, Fill
+ * The Spreadsheet's commands (kit/core/commands.ts), its editor the context: the bar (Insert ▾, Chart ▾, Fill down, Fill
  * right, Fit the columns, Show all the text, Lock), the bar under a block (fill | copy, cut, paste | clear), a row's
  * menu, and the grid's keys in a cell (docs/editing.md §4 and §8): the arrows, Enter and Shift+Enter, Tab and
  * Shift+Tab between cells; Shift+arrows stretch the block; F2 edits in place; Escape puts back what the cell held (or
@@ -10,9 +10,9 @@
  * listed by the editor after these.
  */
 import { ArrowDown, ArrowDownToLine, ArrowRightToLine, ArrowUp, CaseSensitive, ChartColumn, ClipboardPaste, Columns3, Copy, Eraser, Lock, Maximize2, Rows3, Scaling, Scissors, Trash2 } from 'lucide';
-import { CHART_KINDS, suggestChart } from '../../kit/chart.ts';
-import { register, type Command, commandsOf } from '../../kit/commands.ts';
-import { t } from '../../kit/i18n.ts';
+import { CHART_KINDS, suggestChart } from '../../kit/draw/chart.ts';
+import { register, type Command, commandsOf } from '../../kit/core/commands.ts';
+import { t } from '../../kit/core/i18n.ts';
 import { MAX_COLS, ROWS } from '../../doc/index.ts';
 import { chartOfSheet } from './view.ts';
 import type { ToSheetEditor } from './editor.ts';

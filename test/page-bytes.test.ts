@@ -3,8 +3,8 @@
 // is drawn changes them on purpose, in its own commit.
 import { test, expect } from 'vitest';
 import { createHash } from 'node:crypto';
-import { appOf } from '../src/kit/apps.ts';
-import { pageSvg } from '../src/kit/draw.ts';
+import { appOf } from '../src/kit/core/apps.ts';
+import { pageSvg } from '../src/kit/draw/draw.ts';
 
 const DOCS: [string, string][] = [
   ['write', '# The quay\n\nThe ferry leaves the quay at **nine** and the café closes at five.\n\n- a list\n- of two\n'],
@@ -28,6 +28,6 @@ test('the pages of three documents, and their thumbnails, are the same bytes as 
 });
 
 // Taken again when the type became IBM Plex: the pages name Plex first, a bold word is 600, and the widths
-// they are laid out by are Plex's (kit/draw.ts textWidth). The deck's page again when the codec's dictionary primed America/New_York
+// they are laid out by are Plex's (kit/draw/draw.ts textWidth). The deck's page again when the codec's dictionary primed America/New_York
 // the page's QR code carries the deck's link, and the link's bytes moved.
 const EXPECTED = ['write: 14652a4b18137bcc 14652a4b18137bcc', 'deck: 2d9654cfbd24e547 bd6ffaa363d2de69', 'draw: 9191bafafdf3e32c 9191bafafdf3e32c'];

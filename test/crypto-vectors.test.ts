@@ -4,9 +4,9 @@
 // implementation to check itself against.
 import { test, expect } from 'vitest';
 import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
-import { fromBase64Url, toBase64Url } from '../src/kit/codec.ts';
-import { deriveKey, sealAt, unseal } from '../src/kit/crypt.ts';
-import { sealShortAt, shortLink, unshorten } from '../src/kit/short.ts';
+import { fromBase64Url, toBase64Url } from '../src/kit/core/codec.ts';
+import { deriveKey, sealAt, unseal } from '../src/kit/share/crypt.ts';
+import { sealShortAt, shortLink, unshorten } from '../src/kit/share/short.ts';
 
 const read = (name: string) => JSON.parse(readFileSync(new URL(`vectors/${name}`, import.meta.url), 'utf8'));
 const hex = (b: Uint8Array) => Array.from(b, (x) => x.toString(16).padStart(2, '0')).join('');
@@ -19,7 +19,7 @@ const subtle = globalThis.crypto.subtle;
 const KDF = { name: 'HKDF', hash: 'SHA-256', info: 'tinylittleoffice sealed v1', keyBytes: 32, saltBytes: 16, normalize: 'NFKC' };
 const CIPHER = { name: 'AES-GCM', keyBits: 256, ivBytes: 12, tagBytes: 16, additionalData: null };
 const ABOUT =
-  "Tiny Little Office password sealing (src/kit/crypt.ts, docs/crypto/password.md). The password is one the app made (twenty characters from an alphabet of 56, about 116 bits); key = HKDF-SHA-256(ikm = NFKC(password) as UTF-8, salt, info = 'tinylittleoffice sealed v1' as UTF-8, 32 bytes); plaintext = the codec's flag byte then the document's bytes (flag 'r': UTF-8 as it is); sealed = 'E' + base64url without padding of salt[16] | iv[12] | AES-256-GCM(key, iv, plaintext) with its 16-byte tag last and no additional data. Fixed salts and IVs are for these vectors only: the site draws both from crypto.getRandomValues. Base64url here is RFC 4648's URL alphabet with '~' for 62 where the RFC has '-' (a hyphen is where a pasted link breaks a line), no padding; '-' is read as 62 too.";
+  "Tiny Little Office password sealing (src/kit/share/crypt.ts, docs/crypto/password.md). The password is one the app made (twenty characters from an alphabet of 56, about 116 bits); key = HKDF-SHA-256(ikm = NFKC(password) as UTF-8, salt, info = 'tinylittleoffice sealed v1' as UTF-8, 32 bytes); plaintext = the codec's flag byte then the document's bytes (flag 'r': UTF-8 as it is); sealed = 'E' + base64url without padding of salt[16] | iv[12] | AES-256-GCM(key, iv, plaintext) with its 16-byte tag last and no additional data. Fixed salts and IVs are for these vectors only: the site draws both from crypto.getRandomValues. Base64url here is RFC 4648's URL alphabet with '~' for 62 where the RFC has '-' (a hyphen is where a pasted link breaks a line), no padding; '-' is read as 62 too.";
 const INPUTS = [
   { password: 'Hq7wN-3mXkd-RtP9z-aVb4s', saltHex: '000102030405060708090a0b0c0d0e0f', ivHex: '101112131415161718191a1b', flag: 'r', document: '---\ntitle: Vector\n---\nThe note passed in class.\n' },
   {

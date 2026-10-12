@@ -502,7 +502,7 @@
       inset: -1.0625rem;
     }
     /* A cell being typed in, the keyboard up (Paul, 2026-10-11: "no room to navigate"): the header has stepped aside
-       (kit/chrome.ts), the formula strip is the column's top with the menu button at its end (responsive.css gives
+       (kit/ui/chrome.ts), the formula strip is the column's top with the menu button at its end (responsive.css gives
        the column's top back), the heads are one line, the letter and the name, and the table's box is the rest. Read
        from the chrome's `editing` alone, which comes a frame after the focus: a tap that takes the focus from a cell
        (a row's number) lands before the heads move, never on what moved under it. */

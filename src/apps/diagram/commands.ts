@@ -1,5 +1,5 @@
 /**
- * The Diagram Maker's commands (kit/commands.ts), its editor the context: the bar (the kind ▾, Insert ▾, Join where
+ * The Diagram Maker's commands (kit/core/commands.ts), its editor the context: the bar (the kind ▾, Insert ▾, Join where
  * things join, Print place cards for a seating plan, the zoom), the bar under the thing open (§6's order: Move up,
  * Move down, the kind's own (Add under it, Icon, Add a step, Join, a connection's arrow), a tree's Indent and Bring out,
  * Duplicate | Copy, Cut, Paste | Delete), and the keys (docs/editing.md §8): on a focused thing Enter or Space opens
@@ -9,9 +9,9 @@
  * on is `here` (the editor sets it as the key comes), else the thing open.
  */
 import { ArrowDown, ArrowRight, ArrowUp, ClipboardPaste, CopyPlus, Scissors, Smile, Spline, ZoomIn, ZoomOut } from 'lucide';
-import { register, type Command, commandsOf } from '../../kit/commands.ts';
-import { t } from '../../kit/i18n.ts';
-import { UI } from '../../kit/icons.ts';
+import { register, type Command, commandsOf } from '../../kit/core/commands.ts';
+import { t } from '../../kit/core/i18n.ts';
+import { UI } from '../../kit/draw/icons.ts';
 import { KIND_ICON, kindName, thingName } from './kinds.ts';
 import { KINDS, canDuplicate, childOf, edgesOf, isListed, isTree, joins, moveThing, newThing, nextThing, type Hit } from './model.ts';
 import type { ToDiagramEditor } from './editor.ts';

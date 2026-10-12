@@ -3,7 +3,7 @@
  * The reader is a New Yorker: the Ukrainian of the city's Ukrainian communities (Brighton Beach, Little Ukraine in the East Village, Brooklyn),
  * the plain "you" of consumer software (ви, lowercase), computing words as people say them (файл, пароль, браузер, пристрій).
  */
-import type { Strings } from '../kit/i18n.ts';
+import type { Strings } from '../kit/core/i18n.ts';
 
 export default {
   // ---- the shell: header ----
@@ -61,7 +61,7 @@ export default {
   'Tiny Little Office': 'Tiny Little Office', // same
   'About Tiny Little Office': 'Про Tiny Little Office',
 
-  // ---- links that leave the site (kit/link-guard.ts) ----
+  // ---- links that leave the site (kit/ui/link-guard.ts) ----
   // The menu button's tooltip: the Office mark is the menu.
   'Tiny Little Office menu': 'Меню Tiny Little Office',
   // The question before a link that leaves the site: "You are leaving Tiny Little Office for" over the site's name, large.
@@ -80,7 +80,7 @@ export default {
 
   // ---- the copy kept on the device (status lines under the switch) ----
 
-  // ---- sharing: the Share dialog (kit/shell.ts), where the link fits (kit/limits.ts), the arrival banner ----
+  // ---- sharing: the Share dialog (kit/core/shell.ts), where the link fits (kit/share/limits.ts), the arrival banner ----
   'A copy opened in a new tab': 'Копію відкрито в новій вкладці',
   'Copy display link': 'Скопіювати посилання для показу',
   'Copy into a new document': 'Скопіювати в новий документ',
@@ -133,7 +133,7 @@ export default {
   'Link': 'Посилання',
   'Short link': 'Коротке посилання',
 
-  // ---- privacy (kit/privacy.ts, kit/privacy-dialog.ts): the password, what the device holds ----
+  // ---- privacy (kit/share/privacy.ts, kit/ui/privacy-dialog.ts): the password, what the device holds ----
   // The Share dialog's head line: "Created 9 Oct 2026, 14:03 · by Paul".
   'Anyone with the link will need the password to open it. Nobody can reset it: lose it and the document is gone.': 'Усім, хто має посилання, знадобиться пароль, щоб його відкрити. Скинути пароль ніхто не може: загубите його — документ пропав.',
   'Change password': 'Змінити пароль',
@@ -180,7 +180,7 @@ export default {
   'Copy this and send it another way than the link. It cannot be shown again.': 'Скопіюйте його й передайте інакше, ніж посилання. Показати його знову не можна.',
   'Make another': 'Створити інший',
 
-  // ---- a document locked with a password, placed inside another (kit/locked.ts, kit/locked-doc.ts) ----
+  // ---- a document locked with a password, placed inside another (kit/share/locked.ts, kit/ui/locked-doc.ts) ----
   // The card drawn where it sits; {app} is the app's name: "A Spreadsheet document, locked with a password".
   'Locked with a password': 'Заблоковано паролем',
   'A {app} document, locked with a password': 'Документ {app}, заблокований паролем',
@@ -203,7 +203,7 @@ export default {
   // The group heading the Calendar and the Trip Planner sit under on the home page.
   'Plan': 'План',
   'Chosen tasks': 'Обрані завдання',
-  // A link that opens the document (kit/compare.ts).
+  // A link that opens the document (kit/ui/compare.ts).
   'Open': 'Відкрити',
   'Task': 'Завдання',
   'Tasks': 'Завдання',
@@ -369,7 +369,7 @@ export default {
   'Terms of service': 'Умови користування',
   'A small business\'s terms in plain words: booking, prices, keys, what if, ending.': 'Умови маленького бізнесу простими словами: бронювання, ціни, ключі, що як, завершення.',
 
-  // ---- Insert's dialog (kit/insert-dialogs.ts): Tiny Little Office Doc ----
+  // ---- Insert's dialog (kit/ui/insert-dialogs.ts): Tiny Little Office Doc ----
   'A Tiny Little Office link': 'Посилання Tiny Little Office',
   'Opening the short link…': 'Відкриття короткого посилання…',
   'Paste the link of another Tiny Little Office document, long or short: its first page shows here.': 'Вставте посилання на інший документ Tiny Little Office, довге чи коротке: його перша сторінка з’явиться тут.',
@@ -378,11 +378,11 @@ export default {
   'Tiny Little Office Doc…': 'Документ Tiny Little Office…',
   // Insert ▾'s group of the apps a new document can be made in, inside this one.
   'A new document': 'Новий документ',
-  // ---- another document edited in place (kit/doc-dialog.ts); a table's size is Rows × Columns ----
+  // ---- another document edited in place (kit/ui/doc-dialog.ts); a table's size is Rows × Columns ----
   'Cancel': 'Скасувати',
   'Rows': 'Рядки',
 
-  // ---- charts (kit/chart.ts) ----
+  // ---- charts (kit/draw/chart.ts) ----
   'An empty chart': 'Порожня діаграма',
   'Bars': 'Стовпчики',
   'Flows (Sankey)': 'Потоки (Санкей)',
@@ -531,10 +531,10 @@ export default {
   'Unlock these cells': 'Розблокувати ці клітинки',
   'What it holds; sort; columns': 'Що в ньому; сортування; стовпці',
 
-  // ---- downloads: hand-offs to another app (kit/exports.ts) ----
+  // ---- downloads: hand-offs to another app (kit/file/exports.ts) ----
   'Open in': 'Відкрити в',
 
-  // ---- the icon library (kit/icons-picker.ts) ----
+  // ---- the icon library (kit/ui/icons-picker.ts) ----
   'Icon': 'Значок',
   'Favorites': 'Обране',
   'Search icons': 'Шукати значки',

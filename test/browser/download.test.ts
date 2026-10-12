@@ -1,15 +1,15 @@
 // The Download menu: the drawer's This document row (the header is the title), placed under its row at
-// every size, and a table of formats, each with view, share, download and copy link (kit/exports.ts exportItems,
-// kit/menu.ts's rows of actions).
+// every size, and a table of formats, each with view, share, download and copy link (kit/file/exports.ts exportItems,
+// kit/ui/menu.ts's rows of actions).
 import { test, expect, afterEach, vi } from 'vitest';
 import { cdp, page } from 'vitest/browser';
 import { mount, openDrawerDoc, until } from './helpers.ts';
-import { encodeDoc } from '../../src/kit/codec.ts';
-import { appOf } from '../../src/kit/apps.ts';
-import { parseHash } from '../../src/kit/route.ts';
-import { keepSize, stepSize } from '../../src/kit/zoom.ts';
-import type { ToShell } from '../../src/kit/shell.ts';
-import { keyboard } from '../../src/kit/commands.ts';
+import { encodeDoc } from '../../src/kit/core/codec.ts';
+import { appOf } from '../../src/kit/core/apps.ts';
+import { parseHash } from '../../src/kit/core/route.ts';
+import { keepSize, stepSize } from '../../src/kit/ui/zoom.ts';
+import type { ToShell } from '../../src/kit/core/shell.ts';
+import { keyboard } from '../../src/kit/core/commands.ts';
 
 afterEach(() => {
   vi.restoreAllMocks();

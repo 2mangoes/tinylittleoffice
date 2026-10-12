@@ -1,15 +1,15 @@
 // An animation placed on a slide plays when its slide comes on, from the beginning, and is paused while it is not
-// shown; with reduced motion it rests where it ends (kit/motion.ts). In a real Chromium: the deck's slideshow page,
+// shown; with reduced motion it rests where it ends (kit/draw/motion.ts). In a real Chromium: the deck's slideshow page,
 // the deck editor's show, and motion() itself.
 import { afterEach, expect, test } from 'vitest';
 import '../../src/styles.css';
-import '../../src/kit/apps.ts';
-import { appOf } from '../../src/kit/apps.ts';
+import '../../src/kit/core/apps.ts';
+import { appOf } from '../../src/kit/core/apps.ts';
 import { deckToHtml } from '../../src/apps/deck/view.ts';
 import '../../src/apps/deck/editor.ts';
 import type { ToDeckEditor } from '../../src/apps/deck/editor.ts';
-import { motion, restOf } from '../../src/kit/motion.ts';
-import { pageSvg } from '../../src/kit/draw.ts';
+import { motion, restOf } from '../../src/kit/draw/motion.ts';
+import { pageSvg } from '../../src/kit/draw/draw.ts';
 import { tick, until } from './helpers.ts';
 
 const LIFT =
@@ -128,7 +128,7 @@ test('motion(): off pauses; on starts from 0; with reduced motion it rests where
 });
 
 test('print, a PDF and a PNG ask for the document still; the web page does not', async () => {
-  const { exportAs, printDoc } = await import('../../src/kit/exports.ts');
+  const { exportAs, printDoc } = await import('../../src/kit/file/exports.ts');
   const anim = appOf('anim')!;
   const asked: Record<string, boolean> = {};
   let ext = '';

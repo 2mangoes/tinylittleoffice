@@ -125,9 +125,9 @@ test('measure counts the words a reader hears and the headings they move between
 });
 
 test('link --seal prints the link and, on a second line, the password the app made; --password is refused', async () => {
-  const { unseal } = await import('../src/kit/crypt.ts');
-  const { unpackDoc } = await import('../src/kit/codec.ts');
-  const { parseHash } = await import('../src/kit/route.ts');
+  const { unseal } = await import('../src/kit/share/crypt.ts');
+  const { unpackDoc } = await import('../src/kit/core/codec.ts');
+  const { parseHash } = await import('../src/kit/core/route.ts');
   const [url, password, ...more] = run(['link', 'write', '--seal', '--title', 'Pay'], 'Salaries are up.\n').trimEnd().split('\n');
   expect(more).toEqual([]);
   expect(url).toMatch(/^https:\/\/tinylittleoffice\.com\/write\/#\/v1\/write\/E/);

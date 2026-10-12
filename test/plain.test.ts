@@ -1,6 +1,6 @@
 // Plain-parameter links ("#title=…&doc=…") and .tlo files: a document from words alone, no codec.
 import { test, expect } from 'vitest';
-import { appInHead, plainLink, readFile, readPlain, readZip, tloText } from '../src/kit/plain.ts';
+import { appInHead, plainLink, readFile, readPlain, readZip, tloText } from '../src/kit/core/plain.ts';
 
 const known = (id: string) => ['write', 'sheet', 'outline', 'deck'].includes(id);
 

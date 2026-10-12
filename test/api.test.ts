@@ -82,9 +82,9 @@ test('text(link): the document as what it says, in Markdown, its title first; ma
 });
 
 test('seal: the app makes the password (Paul, 2026-10-11); the link holds ciphertext and the password it returns opens it', async () => {
-  const { unseal } = await import('../src/kit/crypt.ts');
-  const { unpackDoc } = await import('../src/kit/codec.ts');
-  const { parseHash } = await import('../src/kit/route.ts');
+  const { unseal } = await import('../src/kit/share/crypt.ts');
+  const { unpackDoc } = await import('../src/kit/core/codec.ts');
+  const { parseHash } = await import('../src/kit/core/route.ts');
   const sealed = await link('write', 'Salaries are up.\n', { title: 'Pay', seal: true });
   expect(sealed.password).toMatch(/^[^-]{5}-[^-]{5}-[^-]{5}-[^-]{5}$/);
   expect(sealed.url).toMatch(/^https:\/\/tinylittleoffice\.com\/write\/#\/v1\/write\/E[A-Za-z0-9_~]+$/);

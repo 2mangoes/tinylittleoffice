@@ -3,8 +3,8 @@
  * the graph as a page (each curve in a colour of its own, named by its expression), and the tape as text.
  */
 import type { Doc } from '../../doc/index.ts';
-import type { Page } from '../../kit/app.ts';
-import { clip, FAINT, LINE, MUTED, rect, SERIES, text } from '../../kit/draw.ts';
+import type { Page } from '../../kit/core/app.ts';
+import { clip, FAINT, LINE, MUTED, rect, SERIES, text } from '../../kit/draw/draw.ts';
 import { curves, isNote, plot, readCalc, shown, tape } from './model.ts';
 
 const W = 720;

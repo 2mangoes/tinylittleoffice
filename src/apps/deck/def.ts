@@ -6,13 +6,13 @@
  * a film of the deck (a GIF, and a WebM where the browser can make one), and the kit's print (the sheets, for a fold) and text.
  */
 import { Presentation } from 'lucide';
-import { defineApp, isStill } from '../../kit/app.ts';
-import { pageSvg } from '../../kit/draw.ts';
-import { encodeGif, type GifFrame } from '../../kit/gif.ts';
-import { t } from '../../kit/i18n.ts';
-import { canvas, drawn, pixels, raster } from '../../kit/raster.ts';
-import { webmOf, webmReady, type WebmFrame } from '../../kit/webm.ts';
-import { zip } from '../../kit/zip.ts';
+import { defineApp, isStill } from '../../kit/core/app.ts';
+import { pageSvg } from '../../kit/draw/draw.ts';
+import { encodeGif, type GifFrame } from '../../kit/file/gif.ts';
+import { t } from '../../kit/core/i18n.ts';
+import { canvas, drawn, pixels, raster } from '../../kit/draw/raster.ts';
+import { webmOf, webmReady, type WebmFrame } from '../../kit/file/webm.ts';
+import { zip } from '../../kit/file/zip.ts';
 import { retitle, titleOf } from './model.ts';
 import { buildPptx } from './pptx.ts';
 import { deckFrames, deckPages, deckToHtml } from './view.ts';

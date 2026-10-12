@@ -1,16 +1,16 @@
 /**
- * The Outliner's commands (kit/commands.ts), its editor the context: the bar (Insert ▾, the marks and Link and
+ * The Outliner's commands (kit/core/commands.ts), its editor the context: the bar (Insert ▾, the marks and Link and
  * Footnote, which are the words' own with the row's <to-text> as their context, Icon, Indent, Bring out, Move up and
  * down, Numbered, the zoom, Fold all, Connect, View as ▾), and the keys of a row (docs/editing.md §3 and §8): Tab and
  * Shift+Tab, Alt+Up/Down, Mod+Alt+Up/Down fold and unfold, Mod+Shift+. and Mod+Shift+, zoom in and out, Mod+D, and
  * the arrows between rows at the edge of a row's words. A key acts on the row it is typed in; a button on the row
- * that has the caret. Rows chosen whole are the rows controller's (kit/rows-commands.ts).
+ * that has the caret. Rows chosen whole are the rows controller's (kit/text/rows-commands.ts).
  */
 import { ArrowDown, ArrowUp, Eye, FoldVertical, Link2, ListOrdered, Plus, UnfoldVertical, ZoomIn, ZoomOut } from 'lucide';
-import { appOf, apps } from '../../kit/apps.ts';
-import { register, type Command, commandsOf } from '../../kit/commands.ts';
-import { t } from '../../kit/i18n.ts';
-import { UI } from '../../kit/icons.ts';
+import { appOf, apps } from '../../kit/core/apps.ts';
+import { register, type Command, commandsOf } from '../../kit/core/commands.ts';
+import { t } from '../../kit/core/i18n.ts';
+import { UI } from '../../kit/draw/icons.ts';
 import { hasChildren, indexAt, moveItem, shiftItem } from './model.ts';
 import def from './def.ts';
 import type { ToOutlineEditor } from './editor.ts';

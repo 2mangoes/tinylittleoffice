@@ -3,7 +3,7 @@
  * e as palavras em português à direita. As chaves, os {marcadores} e os comentários de seção
  * seguem o en.ts; num plural o português tem três formas, nesta ordem: um, muitos (milhões), outros.
  */
-import type { Strings } from '../kit/i18n.ts';
+import type { Strings } from '../kit/core/i18n.ts';
 
 export default {
   // ---- the shell: header ----
@@ -60,7 +60,7 @@ export default {
   'Tiny Little Office': 'Pequeno Escritoriozinho',
   'About Tiny Little Office': 'Sobre o Pequeno Escritoriozinho',
 
-  // ---- links that leave the site (kit/link-guard.ts) ----
+  // ---- links that leave the site (kit/ui/link-guard.ts) ----
   // The menu button's tooltip: the Office mark is the menu.
   'Tiny Little Office menu': 'Menu do Pequeno Escritoriozinho',
   // The question before a link that leaves the site: "You are leaving Tiny Little Office for" over the site's name, large.
@@ -79,7 +79,7 @@ export default {
 
   // ---- the copy kept on the device (status lines under the switch) ----
 
-  // ---- sharing: the Share dialog (kit/shell.ts), where the link fits (kit/limits.ts), the arrival banner ----
+  // ---- sharing: the Share dialog (kit/core/shell.ts), where the link fits (kit/share/limits.ts), the arrival banner ----
   'A copy opened in a new tab': 'Uma cópia aberta em nova aba',
   'Copy display link': 'Copiar link de exibição',
   'Copy into a new document': 'Copiar para um novo documento',
@@ -132,7 +132,7 @@ export default {
   'Link': 'Link', // same
   'Short link': 'Link curto',
 
-  // ---- privacy (kit/privacy.ts, kit/privacy-dialog.ts): the password, what the device holds ----
+  // ---- privacy (kit/share/privacy.ts, kit/ui/privacy-dialog.ts): the password, what the device holds ----
   // The Share dialog's head line: "Created 9 Oct 2026, 14:03 · by Paul".
   'Anyone with the link will need the password to open it. Nobody can reset it: lose it and the document is gone.': 'Quem tiver o link precisará da senha para abri-lo. Ninguém pode redefini-la: se você a perder, o documento se perde.',
   'Change password': 'Trocar senha',
@@ -179,7 +179,7 @@ export default {
   'Copy this and send it another way than the link. It cannot be shown again.': 'Copie e envie por outro meio, não pelo link. Ela não pode ser mostrada de novo.',
   'Make another': 'Criar outra',
 
-  // ---- a document locked with a password, placed inside another (kit/locked.ts, kit/locked-doc.ts) ----
+  // ---- a document locked with a password, placed inside another (kit/share/locked.ts, kit/ui/locked-doc.ts) ----
   // The card drawn where it sits; {app} is the app's name: "A Spreadsheet document, locked with a password".
   'Locked with a password': 'Bloqueado com senha',
   'A {app} document, locked with a password': 'Um documento de {app}, bloqueado com senha',
@@ -202,7 +202,7 @@ export default {
   // The group heading the Calendar and the Trip Planner sit under on the home page.
   'Plan': 'Planejar',
   'Chosen tasks': 'Tarefas escolhidas',
-  // A link that opens the document (kit/compare.ts).
+  // A link that opens the document (kit/ui/compare.ts).
   'Open': 'Abrir',
   'Task': 'Tarefa',
   'Tasks': 'Tarefas',
@@ -368,7 +368,7 @@ export default {
   'Terms of service': 'Termos de serviço',
   'A small business\'s terms in plain words: booking, prices, keys, what if, ending.': 'Os termos de um pequeno negócio em palavras simples: reservas, preços, chaves, e se, encerramento.',
 
-  // ---- Insert's dialog (kit/insert-dialogs.ts): Tiny Little Office Doc ----
+  // ---- Insert's dialog (kit/ui/insert-dialogs.ts): Tiny Little Office Doc ----
   'A Tiny Little Office link': 'Um link do Pequeno Escritoriozinho',
   'Opening the short link…': 'Abrindo o link curto…',
   'Paste the link of another Tiny Little Office document, long or short: its first page shows here.': 'Cole o link de outro documento do Pequeno Escritoriozinho, longo ou curto: a primeira página aparece aqui.',
@@ -377,11 +377,11 @@ export default {
   'Tiny Little Office Doc…': 'Documento do Pequeno Escritoriozinho…',
   // Insert ▾'s group of the apps a new document can be made in, inside this one.
   'A new document': 'Um novo documento',
-  // ---- another document edited in place (kit/doc-dialog.ts); a table's size is Rows × Columns ----
+  // ---- another document edited in place (kit/ui/doc-dialog.ts); a table's size is Rows × Columns ----
   'Cancel': 'Cancelar',
   'Rows': 'Linhas',
 
-  // ---- charts (kit/chart.ts) ----
+  // ---- charts (kit/draw/chart.ts) ----
   'An empty chart': 'Um gráfico vazio',
   'Bars': 'Barras',
   'Flows (Sankey)': 'Fluxos (Sankey)',
@@ -530,10 +530,10 @@ export default {
   'Unlock these cells': 'Desbloquear estas células',
   'What it holds; sort; columns': 'O que guarda; ordenar; colunas',
 
-  // ---- downloads: hand-offs to another app (kit/exports.ts) ----
+  // ---- downloads: hand-offs to another app (kit/file/exports.ts) ----
   'Open in': 'Abrir em',
 
-  // ---- the icon library (kit/icons-picker.ts) ----
+  // ---- the icon library (kit/ui/icons-picker.ts) ----
   'Icon': 'Ícone',
   'Favorites': 'Favoritos',
   'Search icons': 'Buscar ícones',

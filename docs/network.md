@@ -1,4 +1,4 @@
-<!-- Generated from src/kit/network.ts by scripts/network-doc.ts (npm run docs:network). Do not edit: change the list or the script. -->
+<!-- Generated from src/kit/core/network.ts by scripts/network-doc.ts (npm run docs:network). Do not edit: change the list or the script. -->
 
 # What leaves your browser
 
@@ -15,13 +15,13 @@ not on this list is refused by the browser itself.
 | `tile.openstreetmap.org` | The map’s pictures (tiles) in the Trip Planner, asked directly as OpenStreetMap’s policy asks | while shown | Which squares of the map are on the screen; no referrer | Map, in the Trip Planner’s bar, turned off | apps/trip/editor.ts | `img-src` |
 | `nominatim.openstreetmap.org` | Place search in the Trip Planner | after a tap | The words searched for; no referrer | Not searching: typing a stop’s place by hand asks no one | apps/trip/editor.ts | `connect-src` |
 | `www.openstreetmap.org` | The Trip Planner’s credit to OpenStreetMap under its map, a link | after a tap | Nothing of the document: it opens OpenStreetMap’s copyright page in a new tab | Not following the link | apps/trip/editor.ts | none: it opens in a new tab |
-| `tinier.tinylittleoffice.com` | Short links: made or opened | after a tap | The long link encrypted here, which the service cannot read, and how long to keep it | Not making a short link: the long link needs no one | kit/short.ts | `connect-src` |
-| `github.com` | The site’s source: the repository, “GitHub” at the home page’s foot; the commit this copy was built from and the threat model in full, in About; links | after a tap | Which page of the source; it opens in a new tab, and nothing of the document goes with it | Not following the link: the commit’s name comes from the site’s own /version.json | kit/home.ts, kit/drawer.ts, kit/version.ts | none: it opens in a new tab |
-| `aboard.com` | Aboard, who made the site, named at the home page’s foot, a link | after a tap | Nothing: it opens in a new tab, from the home page, where no document is open | Not following the link | kit/home.ts | none: it opens in a new tab |
-| `bsky.app` | Bluesky’s compose box | on share | The document’s title and its link, which is the whole document (it is in the link) | Not choosing that service in Share; it opens in a new tab, which you then post from or close | kit/share.ts | none: it opens in a new tab |
-| `x.com` | X’s compose box | on share | The document’s title and its link, which is the whole document (it is in the link) | Not choosing that service in Share; it opens in a new tab, which you then post from or close | kit/share.ts | none: it opens in a new tab |
-| `www.linkedin.com` | LinkedIn’s share box | on share | The document’s title and its link, which is the whole document (it is in the link) | Not choosing that service in Share; it opens in a new tab, which you then post from or close | kit/share.ts | none: it opens in a new tab |
-| any https address | A Mastodon server’s compose box: the one you name | on share | The document’s title and its link, which is the whole document (it is in the link) | Not choosing that service in Share; it opens in a new tab, which you then post from or close | kit/share.ts | none: it opens in a new tab |
+| `tinier.tinylittleoffice.com` | Short links: made or opened | after a tap | The long link encrypted here, which the service cannot read, and how long to keep it | Not making a short link: the long link needs no one | kit/share/short.ts | `connect-src` |
+| `github.com` | The site’s source: the repository, “GitHub” at the home page’s foot; the commit this copy was built from and the threat model in full, in About; links | after a tap | Which page of the source; it opens in a new tab, and nothing of the document goes with it | Not following the link: the commit’s name comes from the site’s own /version.json | kit/ui/home.ts, kit/ui/drawer.ts, kit/core/version.ts | none: it opens in a new tab |
+| `aboard.com` | Aboard, who made the site, named at the home page’s foot, a link | after a tap | Nothing: it opens in a new tab, from the home page, where no document is open | Not following the link | kit/ui/home.ts | none: it opens in a new tab |
+| `bsky.app` | Bluesky’s compose box | on share | The document’s title and its link, which is the whole document (it is in the link) | Not choosing that service in Share; it opens in a new tab, which you then post from or close | kit/share/share.ts | none: it opens in a new tab |
+| `x.com` | X’s compose box | on share | The document’s title and its link, which is the whole document (it is in the link) | Not choosing that service in Share; it opens in a new tab, which you then post from or close | kit/share/share.ts | none: it opens in a new tab |
+| `www.linkedin.com` | LinkedIn’s share box | on share | The document’s title and its link, which is the whole document (it is in the link) | Not choosing that service in Share; it opens in a new tab, which you then post from or close | kit/share/share.ts | none: it opens in a new tab |
+| any https address | A Mastodon server’s compose box: the one you name | on share | The document’s title and its link, which is the whole document (it is in the link) | Not choosing that service in Share; it opens in a new tab, which you then post from or close | kit/share/share.ts | none: it opens in a new tab |
 
 A document fetches nothing from any other site. A link in it is words that go somewhere when the reader
 follows them; nothing in a document is drawn from another site's address.
@@ -42,7 +42,7 @@ follows them; nothing in a document is drawn from another site's address.
   fetched when a page's words need it, and the policy's `font-src` is `'self'` alone; the full icon set is a
   chunk of the site's own, loaded when the icon picker opens.
 - **Links.** A link in a document that leaves the site opens only after the reader is shown where it goes
-  and says Go (kit/link-guard.ts), in a new tab with no referrer.
+  and says Go (kit/ui/link-guard.ts), in a new tab with no referrer.
 
 ## Nothing else
 
@@ -53,7 +53,7 @@ anywhere in the site.
 
 ## How this page is kept true
 
-It is written from `src/kit/network.ts`, the one list of every host, by `scripts/network-doc.ts`
+It is written from `src/kit/core/network.ts`, the one list of every host, by `scripts/network-doc.ts`
 (`npm run docs:network`, which `npm run build` runs first); a test fails when the committed page is not
 what the list says. Every module that asks the web takes its host from that list, so a new host cannot be
 reached without appearing here. The policy's `connect-src` and `img-src` are written from the same list

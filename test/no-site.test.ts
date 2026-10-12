@@ -3,7 +3,7 @@
 // none of them draws a web page of its own, and the site serves no frame script for one.
 import { test, expect } from 'vitest';
 import { existsSync, readFileSync } from 'node:fs';
-import { apps, appOf } from '../src/kit/apps.ts';
+import { apps, appOf } from '../src/kit/core/apps.ts';
 
 const file = (path: string) => new URL(`../${path}`, import.meta.url);
 
@@ -16,6 +16,6 @@ test('ten apps, and no website among them', () => {
 
 test('no frame script is built or allowed', () => {
   expect(existsSync(file('scripts/site-frame.ts'))).toBe(false);
-  for (const f of ['vite.config.ts', 'vitest.config.ts', 'public/_headers', 'src/kit/shell.ts'])
+  for (const f of ['vite.config.ts', 'vitest.config.ts', 'public/_headers', 'src/kit/core/shell.ts'])
     expect(readFileSync(file(f), 'utf8'), f).not.toMatch(/site-frame|siteFrame|to-display-site|allow-popups/);
 });

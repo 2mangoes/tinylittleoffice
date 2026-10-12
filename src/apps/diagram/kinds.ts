@@ -4,7 +4,7 @@
  * bar. Kept apart from model.ts so the model stays free of the strings and the icons.
  */
 import { Armchair, Blend, Brain, GitCommitHorizontal, Network, Rows3, Share2, TreeDeciduous, type IconNode } from 'lucide';
-import { t } from '../../kit/i18n.ts';
+import { t } from '../../kit/core/i18n.ts';
 import type { KindId } from './model.ts';
 
 export const KIND_ICON: Record<KindId, IconNode> = { mind: Brain, org: Network, family: TreeDeciduous, lanes: Rows3, timeline: GitCommitHorizontal, venn: Blend, seating: Armchair, net: Share2 };

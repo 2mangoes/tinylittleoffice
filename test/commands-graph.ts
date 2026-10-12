@@ -1,6 +1,6 @@
 // The registry as a graph, for the lints (test/commands.test.ts) and the browser tests that walk it: every command,
 // the keys each binds, and which pairs of commands one key reaches at once (a collision).
-import { keyList, type Command } from '../src/kit/commands.ts';
+import { keyList, type Command } from '../src/kit/core/commands.ts';
 import { allCommands, scopes } from '../scripts/commands.ts';
 
 export { allCommands, scopes };

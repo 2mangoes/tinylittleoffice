@@ -2,7 +2,7 @@
 import { test, expect } from 'vitest';
 import { join } from 'node:path';
 import { gitFacts, versionJson, versionOf } from '../scripts/version.ts';
-import { commitUrl, isVersion, repoUrl } from '../src/kit/version.ts';
+import { commitUrl, isVersion, repoUrl } from '../src/kit/core/version.ts';
 
 const root = join(import.meta.dirname, '..');
 

@@ -4,11 +4,11 @@
 import { test, expect, afterEach, vi } from 'vitest';
 import { page } from 'vitest/browser';
 import { mount, tick, until, openShare, openDrawerDoc, said } from './helpers.ts';
-import { decodeDoc, encodeDoc } from '../../src/kit/codec.ts';
-import { parseHash } from '../../src/kit/route.ts';
-import { store } from '../../src/kit/store.ts';
-import type { ToShell } from '../../src/kit/shell.ts';
-import type { ToDialog } from '../../src/kit/dialog.ts';
+import { decodeDoc, encodeDoc } from '../../src/kit/core/codec.ts';
+import { parseHash } from '../../src/kit/core/route.ts';
+import { store } from '../../src/kit/core/store.ts';
+import type { ToShell } from '../../src/kit/core/shell.ts';
+import type { ToDialog } from '../../src/kit/ui/dialog.ts';
 
 afterEach(() => {
   vi.restoreAllMocks();

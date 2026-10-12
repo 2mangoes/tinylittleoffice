@@ -5,7 +5,7 @@ import fc from 'fast-check';
 import { expect, test } from 'vitest';
 import { applyAll, evaluateTable, invert, invertAll, pages, parse, write, type ColType, type Table } from '../../src/doc/index.ts';
 import { apply } from '../../src/doc/ops.ts';
-import { decodeDoc, encodeDoc, packDoc, toBase64Url } from '../../src/kit/codec.ts';
+import { decodeDoc, encodeDoc, packDoc, toBase64Url } from '../../src/kit/core/codec.ts';
 import { arbitraryDoc, arbitraryEdits, arbitraryOp, arbitraryText, readGrammar, RULES, RUNS, TLO_EBNF, textOf } from './tlo-grammar.ts';
 
 /** Long enough for RUNS cases of the slowest property (deflate at level 9 twice a case). */

@@ -2,8 +2,8 @@
 // can (ViewOpts.still: print, a PDF, a PNG, a thumbnail). Under node: the Animator's view, and each placer
 // passing `still` through to the animation it places.
 import { expect, test } from 'vitest';
-import { appOf } from '../src/kit/apps.ts';
-import { isStill } from '../src/kit/app.ts';
+import { appOf } from '../src/kit/core/apps.ts';
+import { isStill } from '../src/kit/core/app.ts';
 import { parse } from '../src/doc/index.ts';
 import { frameSvg } from '../src/apps/anim/view.ts';
 import { readAnim } from '../src/apps/anim/model.ts';

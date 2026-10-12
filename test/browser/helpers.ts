@@ -2,12 +2,12 @@
 import '../../src/styles.css';
 // The type loaded before any test lays out words: every width is Plex's, never the fallback's of the moment before.
 import './fonts.ts';
-import '../../src/kit/shell.ts';
-import type { ToShell } from '../../src/kit/shell.ts';
-import type { ToPrivacy } from '../../src/kit/privacy-dialog.ts';
-import { applySize } from '../../src/kit/zoom.ts';
+import '../../src/kit/core/shell.ts';
+import type { ToShell } from '../../src/kit/core/shell.ts';
+import type { ToPrivacy } from '../../src/kit/ui/privacy-dialog.ts';
+import { applySize } from '../../src/kit/ui/zoom.ts';
 
-// Every test is at the size of everything the shell draws (kit/zoom.ts: the normal size is BASE, 1.3), an editor
+// Every test is at the size of everything the shell draws (kit/ui/zoom.ts: the normal size is BASE, 1.3), an editor
 // mounted without the shell too: a length measured on the screen is BASE times the stylesheet's.
 applySize();
 
@@ -85,7 +85,7 @@ export async function pinch(at: Element, a: [number, number], b: [number, number
   return () => {};
 }
 
-/** What the last toast said to a screen reader: the one region holding words, in the open dialog or the page (kit/toast.ts). */
+/** What the last toast said to a screen reader: the one region holding words, in the open dialog or the page (kit/ui/toast.ts). */
 export const said = () => [...document.querySelectorAll('.to-said')].map((r) => r.textContent ?? '').find(Boolean) ?? '';
 
 /** The Privacy dialog without a document (what this device holds), drawn alone and opened. */
@@ -96,7 +96,7 @@ export async function privacyAlone(): Promise<ToPrivacy> {
   return privacy;
 }
 
-/** A file dropped on the page, as a person drags one in (kit/open.ts: the menu's Open a file… is gone, Paul, 2026-10-12). */
+/** A file dropped on the page, as a person drags one in (kit/file/open.ts: the menu's Open a file… is gone, Paul, 2026-10-12). */
 export function dropFile(file: File) {
   const dt = new DataTransfer();
   dt.items.add(file);

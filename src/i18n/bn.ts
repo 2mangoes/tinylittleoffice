@@ -1,7 +1,7 @@
 /**
  * Tiny Little Office in Bengali, as the city's Bangladeshi communities say it (আপনি, the Bangladesh usage, computing words as people say them). Keys are the English strings of en.ts.
  */
-import type { Strings } from '../kit/i18n.ts';
+import type { Strings } from '../kit/core/i18n.ts';
 
 export default {
   // ---- the shell: header ----
@@ -52,7 +52,7 @@ export default {
   'Tiny Little Office': 'Tiny Little Office', // same
   'About Tiny Little Office': 'Tiny Little Office সম্পর্কে',
 
-  // ---- links that leave the site (kit/link-guard.ts) ----
+  // ---- links that leave the site (kit/ui/link-guard.ts) ----
   'Tiny Little Office menu': 'Tiny Little Office মেনু',
   'Do you trust this link?': 'আপনি কি এই লিংকটি বিশ্বাস করেন?',
   'You are leaving Tiny Little Office for': 'আপনি Tiny Little Office ছেড়ে যাচ্ছেন',
@@ -68,7 +68,7 @@ export default {
 
   // ---- the copy kept on the device (status lines under the switch) ----
 
-  // ---- sharing: the Share dialog (kit/shell.ts), where the link fits (kit/limits.ts), the arrival banner ----
+  // ---- sharing: the Share dialog (kit/core/shell.ts), where the link fits (kit/share/limits.ts), the arrival banner ----
   'A copy opened in a new tab': 'একটি কপি নতুন ট্যাবে খুলেছে',
   'Copy display link': 'ডিসপ্লে লিংক কপি করুন',
   'Copy into a new document': 'নতুন নথিতে কপি করুন',
@@ -121,7 +121,7 @@ export default {
   'Link': 'লিংক',
   'Short link': 'ছোট লিংক',
 
-  // ---- privacy (kit/privacy.ts, kit/privacy-dialog.ts): the password, what the device holds ----
+  // ---- privacy (kit/share/privacy.ts, kit/ui/privacy-dialog.ts): the password, what the device holds ----
   'Anyone with the link will need the password to open it. Nobody can reset it: lose it and the document is gone.': 'লিংক থাকলেও খুলতে পাসওয়ার্ড লাগবে। কেউ এটি রিসেট করতে পারে না: হারালে নথিটিও হারিয়ে যাবে।',
   'Change password': 'পাসওয়ার্ড বদলান',
   'Created {date}': 'তৈরি হয়েছে {date}',
@@ -167,7 +167,7 @@ export default {
   'Copy this and send it another way than the link. It cannot be shown again.': 'এটি কপি করুন আর লিংক ছাড়া অন্য কোনো উপায়ে পাঠান। এটি আর দেখানো যাবে না।',
   'Make another': 'আরেকটি বানান',
 
-  // ---- a document locked with a password, placed inside another (kit/locked.ts, kit/locked-doc.ts) ----
+  // ---- a document locked with a password, placed inside another (kit/share/locked.ts, kit/ui/locked-doc.ts) ----
   'Locked with a password': 'পাসওয়ার্ডের তালা দেওয়া',
   'A {app} document, locked with a password': 'পাসওয়ার্ডের তালা দেওয়া একটি {app} নথি',
   'Locked with a password. Unlock…': 'পাসওয়ার্ডের তালা দেওয়া। খুলুন…',
@@ -186,7 +186,7 @@ export default {
   // The group heading the Calendar and the Trip Planner sit under on the home page.
   'Plan': 'পরিকল্পনা',
   'Chosen tasks': 'বাছাই করা কাজ',
-  // A link that opens the document (kit/compare.ts).
+  // A link that opens the document (kit/ui/compare.ts).
   'Open': 'খুলুন',
   'Task': 'কাজ',
   'Tasks': 'কাজ',
@@ -343,7 +343,7 @@ export default {
   'Terms of service': 'সেবার শর্তাবলি',
   'A small business\'s terms in plain words: booking, prices, keys, what if, ending.': 'ছোট ব্যবসার শর্ত সহজ ভাষায়: বুকিং, দাম, চাবি, কিছু হলে কী, সমাপ্তি।',
 
-  // ---- Insert's dialog (kit/insert-dialogs.ts): Tiny Little Office Doc ----
+  // ---- Insert's dialog (kit/ui/insert-dialogs.ts): Tiny Little Office Doc ----
   'A Tiny Little Office link': 'Tiny Little Office-এর একটি লিংক',
   'Opening the short link…': 'ছোট লিংক খোলা হচ্ছে…',
   'Paste the link of another Tiny Little Office document, long or short: its first page shows here.': 'Tiny Little Office-এর অন্য কোনো নথির লিংক, লম্বা বা ছোট, পেস্ট করুন: এর প্রথম পাতা এখানে দেখা যাবে।',
@@ -354,7 +354,7 @@ export default {
   'Cancel': 'বাতিল',
   'Rows': 'সারি',
 
-  // ---- charts (kit/chart.ts) ----
+  // ---- charts (kit/draw/chart.ts) ----
   'An empty chart': 'খালি চার্ট',
   'Bars': 'বার',
   'Flows (Sankey)': 'প্রবাহ (সানকি)',
@@ -501,10 +501,10 @@ export default {
   'Unlock these cells': 'এই ঘরগুলোর তালা খুলুন',
   'What it holds; sort; columns': 'কী আছে; সাজান; কলাম',
 
-  // ---- downloads: hand-offs to another app (kit/exports.ts) ----
+  // ---- downloads: hand-offs to another app (kit/file/exports.ts) ----
   'Open in': 'এতে খুলুন',
 
-  // ---- the icon library (kit/icons-picker.ts) ----
+  // ---- the icon library (kit/ui/icons-picker.ts) ----
   'Icon': 'আইকন',
   'Favorites': 'প্রিয়',
   'Search icons': 'আইকন খুঁজুন',

@@ -5,8 +5,8 @@
  * journeys, and the special ones (a pilgrimage, film locations, a wedding's places for its guests). Every way of
  * measuring is here: kilometers, miles, hours of driving, and places that are dots, not a route.
  */
-import type { Template } from '../../kit/app.ts';
-import { t } from '../../kit/i18n.ts';
+import type { Template } from '../../kit/core/app.ts';
+import { t } from '../../kit/core/i18n.ts';
 import { column, write, type Head } from '../../doc/index.ts';
 import { TRIP_HEAD } from './model.ts';
 

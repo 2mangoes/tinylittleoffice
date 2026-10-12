@@ -4,13 +4,13 @@
  * inside a text), the chart it asks for, and the CSV. What `def.ts` builds its pages and files on, and
  * what Write may draw a table block with.
  */
-import { chartData, chartPage, type ChartData } from '../../kit/chart.ts';
-import { csv, csvSeparator } from '../../kit/csv.ts';
-import { INK, LINE, MUTED, SHADE, clip, r as px2, rect, text, textWidth, xml } from '../../kit/draw.ts';
-import { t } from '../../kit/i18n.ts';
-import { sheetHeadings } from '../../kit/xlsx.ts';
+import { chartData, chartPage, type ChartData } from '../../kit/draw/chart.ts';
+import { csv, csvSeparator } from '../../kit/file/csv.ts';
+import { INK, LINE, MUTED, SHADE, clip, r as px2, rect, text, textWidth, xml } from '../../kit/draw/draw.ts';
+import { t } from '../../kit/core/i18n.ts';
+import { sheetHeadings } from '../../kit/file/xlsx.ts';
 import { formatCell, parse, parseInline, plainText, type CellValue, type Doc } from '../../doc/index.ts';
-import type { Page } from '../../kit/app.ts';
+import type { Page } from '../../kit/core/app.ts';
 import { currencyAt, readSheet, type SheetView } from './model.ts';
 
 /** The names over the used columns, or null when every column goes by its letter alone. */

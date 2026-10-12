@@ -1,16 +1,16 @@
 // Every key in docs/editing.md's tables does what its row says, in at least one app: the rows are read from the
 // generated tables themselves (§10, `npm run commands`), each key is pressed where its row says it is heard (in words,
 // on the canvas, in a cell, on the rail, in the show…), from a state where its command is in force, and the command
-// the row names is the one that runs (src/kit/commands.ts `trace`). The browser's own keys (Copy, Cut, Paste: `native`)
+// the row names is the one that runs (src/kit/core/commands.ts `trace`). The browser's own keys (Copy, Cut, Paste: `native`)
 // raise their events, which the clipboard tests follow; they are not pressed here.
 import { afterEach, beforeEach, expect, test, vi } from 'vitest';
 import editing from '../../docs/editing.md?raw';
 import { mount, tick, until } from './helpers.ts';
-import { encodeDoc } from '../../src/kit/codec.ts';
-import { appOf, apps } from '../../src/kit/apps.ts';
-import { keyList, labelOf, register, registered, trace, type Command } from '../../src/kit/commands.ts';
-import type { ToShell } from '../../src/kit/shell.ts';
-import '../../src/kit/rows-commands.ts';
+import { encodeDoc } from '../../src/kit/core/codec.ts';
+import { appOf, apps } from '../../src/kit/core/apps.ts';
+import { keyList, labelOf, register, registered, trace, type Command } from '../../src/kit/core/commands.ts';
+import type { ToShell } from '../../src/kit/core/shell.ts';
+import '../../src/kit/text/rows-commands.ts';
 
 beforeEach(() => {
   vi.spyOn(window, 'open').mockImplementation(() => null);

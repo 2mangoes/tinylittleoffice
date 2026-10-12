@@ -3,8 +3,8 @@
 // says so in the address ("&text"), so the link opens that way.
 import { test, expect } from 'vitest';
 import { mount, tick, until } from './helpers.ts';
-import { apps } from '../../src/kit/apps.ts';
-import { encodeDoc } from '../../src/kit/codec.ts';
+import { apps } from '../../src/kit/core/apps.ts';
+import { encodeDoc } from '../../src/kit/core/codec.ts';
 
 const minutes = (
   await apps()

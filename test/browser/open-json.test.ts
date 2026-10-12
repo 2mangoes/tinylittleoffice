@@ -2,9 +2,9 @@
 // and with its words byte for byte, dropped on the page; a .json that is not a document is said so and opens nothing.
 import { test, expect, afterEach } from 'vitest';
 import { dropFile, mount, said, until } from './helpers.ts';
-import { encodeDoc } from '../../src/kit/codec.ts';
-import { appOf } from '../../src/kit/apps.ts';
-import { formatOf } from '../../src/kit/exports.ts';
+import { encodeDoc } from '../../src/kit/core/codec.ts';
+import { appOf } from '../../src/kit/core/apps.ts';
+import { formatOf } from '../../src/kit/file/exports.ts';
 
 afterEach(() => history.replaceState(null, '', location.pathname));
 

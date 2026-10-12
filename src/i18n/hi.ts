@@ -1,7 +1,7 @@
 /**
  * Tiny Little Office in Hindi, as spoken in Jackson Heights and Richmond Hill (आप, the everyday computing loanwords). Keys are the English strings of en.ts.
  */
-import type { Strings } from '../kit/i18n.ts';
+import type { Strings } from '../kit/core/i18n.ts';
 
 export default {
   // ---- the shell: header ----
@@ -59,7 +59,7 @@ export default {
   'Tiny Little Office': 'Tiny Little Office', // same
   'About Tiny Little Office': 'Tiny Little Office के बारे में',
 
-  // ---- links that leave the site (kit/link-guard.ts) ----
+  // ---- links that leave the site (kit/ui/link-guard.ts) ----
   // The menu button's tooltip: the Office mark is the menu.
   'Tiny Little Office menu': 'Tiny Little Office मेन्यू',
   // The question before a link that leaves the site: "You are leaving Tiny Little Office for" over the site's name, large.
@@ -78,7 +78,7 @@ export default {
 
   // ---- the copy kept on the device (status lines under the switch) ----
 
-  // ---- sharing: the Share dialog (kit/shell.ts), where the link fits (kit/limits.ts), the arrival banner ----
+  // ---- sharing: the Share dialog (kit/core/shell.ts), where the link fits (kit/share/limits.ts), the arrival banner ----
   'A copy opened in a new tab': 'एक कॉपी नए टैब में खुली',
   'Copy display link': 'डिस्प्ले लिंक कॉपी करें',
   'Copy into a new document': 'नए दस्तावेज़ में कॉपी करें',
@@ -131,7 +131,7 @@ export default {
   'Link': 'लिंक',
   'Short link': 'शॉर्ट लिंक',
 
-  // ---- privacy (kit/privacy.ts, kit/privacy-dialog.ts): the password, what the device holds ----
+  // ---- privacy (kit/share/privacy.ts, kit/ui/privacy-dialog.ts): the password, what the device holds ----
   // The Share dialog's head line: "Created 9 Oct 2026, 14:03 · by Paul".
   'Anyone with the link will need the password to open it. Nobody can reset it: lose it and the document is gone.': 'लिंक वाले हर व्यक्ति को इसे खोलने के लिए पासवर्ड चाहिए होगा। इसे कोई रीसेट नहीं कर सकता: खो गया तो दस्तावेज़ भी गया।',
   'Change password': 'पासवर्ड बदलें',
@@ -178,7 +178,7 @@ export default {
   'Copy this and send it another way than the link. It cannot be shown again.': 'इसे कॉपी करें और लिंक से अलग किसी और तरीके से भेजें। इसे दोबारा नहीं दिखाया जा सकता।',
   'Make another': 'दूसरा बनाएँ',
 
-  // ---- a document locked with a password, placed inside another (kit/locked.ts, kit/locked-doc.ts) ----
+  // ---- a document locked with a password, placed inside another (kit/share/locked.ts, kit/ui/locked-doc.ts) ----
   // The card drawn where it sits; {app} is the app's name: "A Spreadsheet document, locked with a password".
   'Locked with a password': 'पासवर्ड से लॉक',
   'A {app} document, locked with a password': '{app} दस्तावेज़, पासवर्ड से लॉक',
@@ -201,7 +201,7 @@ export default {
   // The group heading the Calendar and the Trip Planner sit under on the home page.
   'Plan': 'योजना',
   'Chosen tasks': 'चुने हुए काम',
-  // A link that opens the document (kit/compare.ts).
+  // A link that opens the document (kit/ui/compare.ts).
   'Open': 'खोलें',
   'Task': 'काम',
   'Tasks': 'काम',
@@ -367,7 +367,7 @@ export default {
   'Terms of service': 'सेवा की शर्तें',
   'A small business\'s terms in plain words: booking, prices, keys, what if, ending.': 'छोटे कारोबार की शर्तें सीधी भाषा में: बुकिंग, दाम, चाबियाँ, अगर ऐसा हुआ तो, खत्म करना।',
 
-  // ---- Insert's dialog (kit/insert-dialogs.ts): Tiny Little Office Doc ----
+  // ---- Insert's dialog (kit/ui/insert-dialogs.ts): Tiny Little Office Doc ----
   'A Tiny Little Office link': 'Tiny Little Office का लिंक',
   'Opening the short link…': 'शॉर्ट लिंक खुल रहा है…',
   'Paste the link of another Tiny Little Office document, long or short: its first page shows here.': 'Tiny Little Office के किसी और दस्तावेज़ का लिंक पेस्ट करें, लंबा या छोटा: उसका पहला पेज यहाँ दिखेगा।',
@@ -376,11 +376,11 @@ export default {
   'Tiny Little Office Doc…': 'Tiny Little Office दस्तावेज़…',
   // Insert ▾'s group of the apps a new document can be made in, inside this one.
   'A new document': 'एक नया दस्तावेज़',
-  // ---- another document edited in place (kit/doc-dialog.ts); a table's size is Rows × Columns ----
+  // ---- another document edited in place (kit/ui/doc-dialog.ts); a table's size is Rows × Columns ----
   'Cancel': 'रद्द करें',
   'Rows': 'पंक्तियाँ',
 
-  // ---- charts (kit/chart.ts) ----
+  // ---- charts (kit/draw/chart.ts) ----
   'An empty chart': 'खाली चार्ट',
   'Bars': 'बार',
   'Flows (Sankey)': 'बहाव (Sankey)',
@@ -529,10 +529,10 @@ export default {
   'Unlock these cells': 'इन सेल को अनलॉक करें',
   'What it holds; sort; columns': 'उसमें क्या है; क्रम; कॉलम',
 
-  // ---- downloads: hand-offs to another app (kit/exports.ts) ----
+  // ---- downloads: hand-offs to another app (kit/file/exports.ts) ----
   'Open in': 'इसमें खोलें',
 
-  // ---- the icon library (kit/icons-picker.ts) ----
+  // ---- the icon library (kit/ui/icons-picker.ts) ----
   'Icon': 'आइकन',
   'Favorites': 'पसंदीदा',
   'Search icons': 'आइकन खोजें',

@@ -5,7 +5,7 @@ import { readFileSync } from 'node:fs';
 import { join as joinPath } from 'node:path';
 import { describe, expect, test } from 'vitest';
 import { createHash } from 'node:crypto';
-import { pageSvg, textWidth } from '../../../kit/draw.ts';
+import { pageSvg, textWidth } from '../../../kit/draw/draw.ts';
 import { applyAll, invertAll, parse, write, type Block, type Doc, type Op } from '../../../doc/index.ts';
 import { iconOf, labelLines, readDrawing } from '../../draw/model.ts';
 import def from '../def.ts';

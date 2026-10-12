@@ -5,12 +5,12 @@
  */
 import { Clapperboard } from 'lucide';
 import { apply, parse, write } from '../../doc/index.ts';
-import { defineApp, isStill, type Doc } from '../../kit/app.ts';
-import { pageSvg, utf8 } from '../../kit/draw.ts';
-import { encodeGif, type GifFrame } from '../../kit/gif.ts';
-import { t } from '../../kit/i18n.ts';
-import { canvas, drawn, pixels } from '../../kit/raster.ts';
-import { webmOf, webmReady, type WebmFrame } from '../../kit/webm.ts';
+import { defineApp, isStill, type Doc } from '../../kit/core/app.ts';
+import { pageSvg, utf8 } from '../../kit/draw/draw.ts';
+import { encodeGif, type GifFrame } from '../../kit/file/gif.ts';
+import { t } from '../../kit/core/i18n.ts';
+import { canvas, drawn, pixels } from '../../kit/draw/raster.ts';
+import { webmOf, webmReady, type WebmFrame } from '../../kit/file/webm.ts';
 import { drawingText, H, W } from '../draw/model.ts';
 import { gifLoop, readAnim } from './model.ts';
 import { altOf, animFrames, animPage, animToSvg, frameSvg } from './view.ts';

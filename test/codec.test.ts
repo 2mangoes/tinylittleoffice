@@ -1,7 +1,7 @@
 // The link codec: round trips, the dictionary's gain, and a refusal to unpack a mountain.
 import { test, expect } from 'vitest';
 import { deflateSync, strToU8 } from 'fflate';
-import { encodeDoc, decodeDoc, toBase64Url, fromBase64Url, budgetFor, unpackDoc, DICTIONARY, MAX_DOC_BYTES, URL_LIMIT } from '../src/kit/codec.ts';
+import { encodeDoc, decodeDoc, toBase64Url, fromBase64Url, budgetFor, unpackDoc, DICTIONARY, MAX_DOC_BYTES, URL_LIMIT } from '../src/kit/core/codec.ts';
 
 test('base64url round trip', () => {
   for (const len of [0, 1, 2, 3, 4, 5, 31, 100]) {

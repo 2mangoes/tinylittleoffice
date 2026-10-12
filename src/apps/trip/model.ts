@@ -18,7 +18,7 @@
  * one splice as they arrive (`tabulate`). Nothing here touches the DOM.
  */
 import { column, columnsOf, plainText, type Doc, type Op, type TableBlock } from '../../doc/index.ts';
-import { language } from '../../kit/i18n.ts';
+import { language } from '../../kit/core/i18n.ts';
 
 export interface Stop {
   /** Its row in the table. */

@@ -6,7 +6,7 @@ import { test, expect } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { lint, read, parse, write, example, shapes, tryDraft } from '../src/api.ts';
-import { apps } from '../src/kit/apps.ts';
+import { apps } from '../src/kit/core/apps.ts';
 import { makeLlms, makeShort, makeSkill } from '../scripts/make-skill.ts';
 import { SHAPES } from '../scripts/shapes.ts';
 import { slidesOf } from '../src/apps/deck/model.ts';
@@ -135,7 +135,7 @@ test('the home page points a fetcher to /llms.txt, and the site serves it as tex
 test('/api.js stays small: the apps, the lint and the examples are imported lazily, never by the entry; budgets.json holds it under 25 KB', () => {
   const api = file('src/api.ts');
   const statics = [...api.matchAll(/^import (?!type)[^;]*? from '([^']+)'/gm)].map((m) => m[1]);
-  for (const lazy of ['./kit/apps.ts', './lint.ts', './kit/text-layer.ts', './kit/exports.ts']) expect(statics).not.toContain(lazy);
+  for (const lazy of ['./kit/core/apps.ts', './lint.ts', './kit/text/text-layer.ts', './kit/file/exports.ts']) expect(statics).not.toContain(lazy);
   expect(statics.some((s) => s.startsWith('./apps/') || s.includes('examples'))).toBe(false);
   expect(JSON.parse(file('budgets.json')).api).toBeLessThanOrEqual(25 * 1024);
 });

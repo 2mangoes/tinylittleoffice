@@ -1,15 +1,15 @@
-// Insert ▾'s Tiny Little Office Doc (kit/insert-dialogs.ts) and another document edited in place (kit/doc-dialog.ts),
+// Insert ▾'s Tiny Little Office Doc (kit/ui/insert-dialogs.ts) and another document edited in place (kit/ui/doc-dialog.ts),
 // in a real Chromium: the link and OK are one row with the field taking the room, what the link will be shows under
 // them, OK answers with what is put in; the doc dialog holds the app's own
 // editor, Done answers its text, Cancel nothing, and a table's Rows and Columns set its size.
 import { afterEach, expect, test, vi } from 'vitest';
 import '../../src/styles.css';
-import { appOf } from '../../src/kit/apps.ts';
+import { appOf } from '../../src/kit/core/apps.ts';
 import { write } from '../../src/doc/index.ts';
-import { encodeDoc, toBase64Url } from '../../src/kit/codec.ts';
-import { editDoc, editTable, newTable, resizeTable } from '../../src/kit/doc-dialog.ts';
-import { askDocLink, shortParts } from '../../src/kit/insert-dialogs.ts';
-import { TINIER } from '../../src/kit/short.ts';
+import { encodeDoc, toBase64Url } from '../../src/kit/core/codec.ts';
+import { editDoc, editTable, newTable, resizeTable } from '../../src/kit/ui/doc-dialog.ts';
+import { askDocLink, shortParts } from '../../src/kit/ui/insert-dialogs.ts';
+import { TINIER } from '../../src/kit/share/short.ts';
 import { tick, until } from './helpers.ts';
 
 afterEach(() => {

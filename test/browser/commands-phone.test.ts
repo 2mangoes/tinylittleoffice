@@ -5,12 +5,12 @@
 import { afterEach, expect, test, vi } from 'vitest';
 import { cdp, page, userEvent } from 'vitest/browser';
 import { mount, tick, until } from './helpers.ts';
-import { encodeDoc } from '../../src/kit/codec.ts';
-import { copyData, GENERATOR } from '../../src/kit/clipboard.ts';
+import { encodeDoc } from '../../src/kit/core/codec.ts';
+import { copyData, GENERATOR } from '../../src/kit/text/clipboard.ts';
 import { parse } from '../../src/doc/index.ts';
-import type { ToShell } from '../../src/kit/shell.ts';
-import type { ToText } from '../../src/kit/text.ts';
-import type { ToLinkPop } from '../../src/kit/link-pop.ts';
+import type { ToShell } from '../../src/kit/core/shell.ts';
+import type { ToText } from '../../src/kit/text/text.ts';
+import type { ToLinkPop } from '../../src/kit/ui/link-pop.ts';
 
 const coarse = async (on: boolean) => cdp().send('Emulation.setTouchEmulationEnabled', on ? { enabled: true, maxTouchPoints: 5 } : { enabled: false });
 afterEach(async () => {
@@ -95,7 +95,7 @@ test('Copy in the row puts our words and our HTML on the clipboard; Cut takes th
   await choose(text);
   bubble(text).querySelector<HTMLButtonElement>('button[aria-label="Copy"]')!.click();
   await until(() => wrote.length === 1);
-  // What the keys' copy writes (kit/clipboard.ts copyData): the TLO of the words, and our HTML.
+  // What the keys' copy writes (kit/text/clipboard.ts copyData): the TLO of the words, and our HTML.
   expect(wrote[0]['text/plain'].trim()).toBe('words');
   expect(wrote[0]['text/html']).toContain(GENERATOR);
   expect(wrote[0]['text/html']).toContain('words');
@@ -114,7 +114,7 @@ test('Paste in the row, where the browser allows it, reads our words and our HTM
   await page.viewport(390, 844);
   await coarse(true);
   const { text } = await write();
-  // What another document's Copy wrote (kit/clipboard.ts copyData): the TLO, and our HTML carrying the exact runs.
+  // What another document's Copy wrote (kit/text/clipboard.ts copyData): the TLO, and our HTML carrying the exact runs.
   const held = copyData(parse('Some **pasted** words\n').blocks, { anchor: { block: 0, offset: 0 }, focus: { block: 0, offset: 17 } });
   const read = vi
     .spyOn(navigator.clipboard, 'read')

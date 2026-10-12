@@ -34,7 +34,7 @@ export function usedKeys(source: string): string[] {
 }
 
 /**
- * The keys a command file (kit/commands.ts's declarations: an app's commands.ts, the kit's keys.ts) gives as words
+ * The keys a command file (kit/core/commands.ts's declarations: an app's commands.ts, the kit's keys.ts) gives as words
  * without t(), which the registry puts through t() when it draws them: a `label`, `hint`, `heading` or `letter` given
  * as a string, and, of the other quoted strings there (a maker's argument, a table's name), those en.ts has.
  */
@@ -44,7 +44,7 @@ export function commandKeys(source: string, defined: Set<string>): string[] {
   for (const m of source.matchAll(/(['"])((?:\\.|(?!\1)[^\\\n])*)\1/g)) if (defined.has(unquote(m[2]))) out.push(unquote(m[2]));
   return out;
 }
-const commandFile = (f: string) => /commands\.ts$|kit[\\/]keys\.ts$/.test(f);
+const commandFile = (f: string) => /commands\.ts$|kit[\\/]core[\\/]keys\.ts$/.test(f);
 
 /** Every "'key': 'value'," line of a language file, in order. */
 export function definedKeys(source: string): { key: string; value: string }[] {
@@ -71,7 +71,7 @@ function sameKeys(source: string): Set<string> {
 /** The plural categories a language has, in Intl's order: fr has one, many, other; ja other; ar six. */
 export const pluralCount = (code: string): number => new Intl.PluralRules(code).resolvedOptions().pluralCategories.length;
 
-/** A language's plural categories in the order its forms are written (kit/i18n.ts ORDER): ru one, few, many, other. */
+/** A language's plural categories in the order its forms are written (kit/core/i18n.ts ORDER): ru one, few, many, other. */
 export const pluralCategories = (code: string): string[] => {
   const cats: string[] = new Intl.PluralRules(code).resolvedOptions().pluralCategories;
   return ['zero', 'one', 'two', 'few', 'many', 'other'].filter((c) => cats.includes(c));

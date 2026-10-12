@@ -1,6 +1,6 @@
 # A password on a document
 
-`src/kit/crypt.ts`, about a hundred lines. WebCrypto (`crypto.subtle`) and nothing else: no crypto library.
+`src/kit/share/crypt.ts`, about a hundred lines. WebCrypto (`crypto.subtle`) and nothing else: no crypto library.
 Test vectors: `test/vectors/password.json`, made from their inputs and checked by `test/crypto-vectors.test.ts`
 against the kit and against WebCrypto called by hand.
 
@@ -12,7 +12,7 @@ document with it; the API's `link(app, text, { seal: true })` and `tinyoffice li
 link and refuse a password handed in ("The app makes the password; ask for one with seal."). Typing is left
 only where it must be: the person a sealed link was sent to types the password they were sent, to open it.
 
-A password is `generatePassword()` in `src/kit/passwords.ts`: twenty characters drawn from an alphabet of 56
+A password is `generatePassword()` in `src/kit/share/passwords.ts`: twenty characters drawn from an alphabet of 56
 (letters and digits, with the look-alikes `l`, `I`, `1`, `o`, `O` and `0` left out), each chosen by
 `crypto.getRandomValues` with rejection so every character is equally likely, written in four groups of five
 with dashes (the dashes are part of it). That is 20 × log2(56), about **116 bits** of entropy, the same for every password.
@@ -55,7 +55,7 @@ else.
 ## The sealed payload
 
 The plaintext is one byte, the codec's flag (`r` raw UTF-8, `z` deflated, `y` deflated with the shared
-dictionary; `src/kit/codec.ts`), followed by the document's bytes in that form. The flag is inside the
+dictionary; `src/kit/core/codec.ts`), followed by the document's bytes in that form. The flag is inside the
 encryption, so the tag authenticates it too.
 
 The bytes of a sealed payload, in order:
@@ -71,7 +71,7 @@ and its text form, which is what the link carries as `#/v1/<app>/<payload>`:
 ```
 
 Base64url throughout Tiny Little Office is RFC 4648's URL alphabet with `~` for 62 where the RFC has `-`
-(`src/kit/codec.ts`): a hyphen is a place a line may break, so a long link full of them was cut when pasted.
+(`src/kit/core/codec.ts`): a hyphen is a place a line may break, so a long link full of them was cut when pasted.
 Reading takes `-` as 62 too; a link made before is the same bytes.
 
 So a sealed payload is `E` and at least 60 characters (16 + 12 + 1 + 16 = 45 bytes for an empty document).

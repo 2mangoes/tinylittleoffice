@@ -17,7 +17,7 @@ test('a module is counted to the package it came from, scoped or not, the innerm
   expect(packageOf('/w/node_modules/lit-html/lit-html.js')).toBe('lit-html');
   expect(packageOf('/w/node_modules/@lit/reactive-element/css-tag.js')).toBe('@lit/reactive-element');
   expect(packageOf('/w/node_modules/d3-sankey/node_modules/d3-array/src/max.js')).toBe('d3-array');
-  expect(packageOf('/w/src/kit/chart.ts')).toBeNull();
+  expect(packageOf('/w/src/kit/draw/chart.ts')).toBeNull();
 });
 
 test("a chunk's bytes are shared among its modules by what each rendered", () => {

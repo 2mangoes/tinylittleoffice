@@ -1,10 +1,10 @@
-// The size of everything (src/kit/zoom.ts): clamped to 70%–200%, a pinch kept to the nearest 5%, the stepper moving in
+// The size of everything (src/kit/ui/zoom.ts): clamped to 70%–200%, a pinch kept to the nearest 5%, the stepper moving in
 // tens from wherever a pinch left it, and the nav stopping at 120%. The normal size (100%) draws everything at 1.3,
 // what the stepper called 130% before: the root's --to-doc is BASE × the size (its font size, kit.css), --to-nav the
 // nav's, and nothing drawn outside the page moves.
 import { test, expect, afterEach, vi } from 'vitest';
-import { BASE, NAV_MAX, SIZE_MAX, SIZE_MIN, applySize, clampSize, deviceStart, keepSize, navSize, pinchSize, size, stepFrom, stepSize } from '../src/kit/zoom.ts';
-import { apps } from '../src/kit/apps.ts';
+import { BASE, NAV_MAX, SIZE_MAX, SIZE_MIN, applySize, clampSize, deviceStart, keepSize, navSize, pinchSize, size, stepFrom, stepSize } from '../src/kit/ui/zoom.ts';
+import { apps } from '../src/kit/core/apps.ts';
 
 afterEach(() => void stepSize(0));
 
@@ -118,20 +118,20 @@ test('the size is kept on the device under Private too, like the language: a new
   g.localStorage = device;
   try {
     vi.resetModules();
-    const store = await import('../src/kit/store.ts');
+    const store = await import('../src/kit/core/store.ts');
     expect(store.keeping()).toBe(false);
-    (await import('../src/kit/zoom.ts')).keepSize(2);
+    (await import('../src/kit/ui/zoom.ts')).keepSize(2);
     expect(device.getItem('tinyoffice.size')).toBe('2');
     // A fresh visit: the modules loaded anew, the device as it was left.
     vi.resetModules();
-    expect((await import('../src/kit/zoom.ts')).size()).toBe(2);
+    expect((await import('../src/kit/ui/zoom.ts')).size()).toBe(2);
     // The theme is the same kind of preference.
     vi.resetModules();
-    const theme = await import('../src/kit/theme.ts');
+    const theme = await import('../src/kit/ui/theme.ts');
     expect(device.getItem('to-theme')).toBeNull();
     // Saved, then Private again: the switch turned off takes everything, the size and the theme too (Paul, 2026-10-12);
     // set again under Private, they go back on the device, as the first visit's did.
-    const again = await import('../src/kit/store.ts');
+    const again = await import('../src/kit/core/store.ts');
     again.setKeeping(true);
     again.store.set('tinyoffice.shortTtl', '1');
     again.store.set('to-theme', 'dark');

@@ -1,13 +1,13 @@
-// <to-dialog> (kit/dialog.ts): closed by Escape, the backdrop or its Close, it gives the focus back where it was when
+// <to-dialog> (kit/ui/dialog.ts): closed by Escape, the backdrop or its Close, it gives the focus back where it was when
 // it opened, even where the browser's own restoring finds nothing to give it to (a page in a frame had it).
 import { expect, test } from 'vitest';
 import { userEvent } from 'vitest/browser';
 import { html, render } from 'lit';
 import { until } from './helpers.ts';
 import '../../src/styles.css';
-import '../../src/kit/dialog.ts';
-import '../../src/kit/menu.ts';
-import type { ToDialog } from '../../src/kit/dialog.ts';
+import '../../src/kit/ui/dialog.ts';
+import '../../src/kit/ui/menu.ts';
+import type { ToDialog } from '../../src/kit/ui/dialog.ts';
 
 test('Escape gives the focus back to the frame whose page had it, not to nothing (walks: site at a phone, seed -553790039)', async () => {
   document.body.innerHTML = '';

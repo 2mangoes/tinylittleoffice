@@ -14,7 +14,7 @@
 //   bar        the app's bar, where it is shown, is one row inside the visible window
 //   undo       on a phone, wherever the bar is shown, its Undo is inside the visible window
 //   hidden     nothing faded away (opacity 0, no pointer) or slid out of the visible window can be tabbed or swiped to:
-//              what is away is inert (the phone's bar while reading, kit/chrome.ts); a thing the column has scrolled
+//              what is away is inert (the phone's bar while reading, kit/ui/chrome.ts); a thing the column has scrolled
 //              away (a map's pin above the fold) is not away
 //   overflow   no words run off the screen sideways; the page is no wider than the window
 //   names      everything open has an accessible name
@@ -28,19 +28,19 @@ import { afterAll, afterEach, beforeEach, describe, expect, test, vi } from 'vit
 import { cdp, page, userEvent } from 'vitest/browser';
 import fc from 'fast-check';
 import { mount, tick, until } from './helpers.ts';
-import { decodeDoc, encodeDoc } from '../../src/kit/codec.ts';
-import { appOf } from '../../src/kit/apps.ts';
-import { inScope, live, register, registered, run, type Command } from '../../src/kit/commands.ts';
-import { go, parseHash, routeHash } from '../../src/kit/route.ts';
-import { stepSize } from '../../src/kit/zoom.ts';
-import { ENVELOPE_KEYS } from '../../src/kit/envelope.ts';
+import { decodeDoc, encodeDoc } from '../../src/kit/core/codec.ts';
+import { appOf } from '../../src/kit/core/apps.ts';
+import { inScope, live, register, registered, run, type Command } from '../../src/kit/core/commands.ts';
+import { go, parseHash, routeHash } from '../../src/kit/core/route.ts';
+import { stepSize } from '../../src/kit/ui/zoom.ts';
+import { ENVELOPE_KEYS } from '../../src/kit/core/envelope.ts';
 import { parse, write } from '../../src/doc/index.ts';
 import { takeHead } from '../../src/doc/tlo.ts';
-import type { ToShell } from '../../src/kit/shell.ts';
-import type { ToText } from '../../src/kit/text.ts';
-import '../../src/kit/keys.ts';
-import '../../src/kit/text-commands.ts';
-import '../../src/kit/rows-commands.ts';
+import type { ToShell } from '../../src/kit/core/shell.ts';
+import type { ToText } from '../../src/kit/text/text.ts';
+import '../../src/kit/core/keys.ts';
+import '../../src/kit/text/text-commands.ts';
+import '../../src/kit/text/rows-commands.ts';
 import { KNOWN } from '../walks-known.ts';
 import { allowed, FAMILIES, familyCommands, KEYS, stepName, WORDS, type Model, type Open, type Size, type Step } from '../walks-model.ts';
 
@@ -249,7 +249,7 @@ async function typeWord(word: string) {
   if (median > KEYSTROKE_MS) slowWord = `"${word}" took ${median.toFixed(1)} ms a letter (median of ${sync.length}), over ${KEYSTROKE_MS} ms`;
 }
 
-/** Two fingers on the column, spreading or closing a step (kit/pinch.ts). */
+/** Two fingers on the column, spreading or closing a step (kit/ui/pinch.ts). */
 async function pinch(r: Real, wider: boolean) {
   const col = column(r);
   if (!col) return;
@@ -554,7 +554,7 @@ function check(r: Real, s: Step, before: Layer[]) {
 
   // window
   if (window.scrollX || window.scrollY) broke(r, 'window', `the window scrolled to ${window.scrollX}, ${window.scrollY}`);
-  // Nor the chrome round the column (kit/chrome.ts): only the column's main scrolls.
+  // Nor the chrome round the column (kit/ui/chrome.ts): only the column's main scrolls.
   for (const box of r.shell.querySelectorAll<HTMLElement>('to-chrome, .to-column'))
     if (box.scrollTop || box.scrollLeft) broke(r, 'window', `${describeEl(box)} scrolled to ${box.scrollLeft}, ${box.scrollTop}: only the column scrolls`);
 
@@ -800,7 +800,7 @@ test('on a phone, every app’s Undo is on screen wherever its bar is scrolled',
     const bar = [...editorOf(real).querySelectorAll('to-bar')].find((b) => visible(b as Element) && !(b as Element).closest('dialog, [popover]')) as HTMLElement;
     expect(bar, app).toBeTruthy();
     // The focus in the bar (the document's, so the bar is shown). The bar is shown first: while it is away (reading, or
-    // under a docked context row) it is inert (kit/chrome.ts), and an inert button takes no focus.
+    // under a docked context row) it is inert (kit/ui/chrome.ts), and an inert button takes no focus.
     for (const c of document.querySelectorAll<HTMLElement & { hide(): void }>('to-context')) c.hide();
     chrome.indoc = true;
     await settle(real);

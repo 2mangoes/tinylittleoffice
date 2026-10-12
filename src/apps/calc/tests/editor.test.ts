@@ -11,7 +11,7 @@ import '../editor.ts';
 import type { ToCalcEditor } from '../editor.ts';
 import { hasEngine } from '../model.ts';
 import { tick, until } from '../../../../test/browser/helpers.ts';
-import { remScale } from '../../../kit/zoom.ts';
+import { remScale } from '../../../kit/ui/zoom.ts';
 
 async function editor(value = ''): Promise<{ el: ToCalcEditor; changes: string[]; last: () => string | undefined }> {
   document.body.innerHTML = '';

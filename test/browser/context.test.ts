@@ -1,10 +1,10 @@
 // <to-context>: shown centred under its anchor inside the viewport, moved with it, its buttons keep the focus where it was, hidden on hide().
 import { expect, test } from 'vitest';
 import { Copy, Trash2 } from 'lucide';
-import { SEP, type ToContext } from '../../src/kit/context.ts';
+import { SEP, type ToContext } from '../../src/kit/ui/context.ts';
 import { tick, until } from './helpers.ts';
 import '../../src/styles.css';
-import '../../src/kit/context.ts';
+import '../../src/kit/ui/context.ts';
 
 test('shows under the anchor, centred, follows it, keeps the focus, hides', async () => {
   document.body.innerHTML = '<div id="box" tabindex="0" style="position:absolute;top:100px;left:100px;width:120px;height:40px;background:#ccc"></div>';

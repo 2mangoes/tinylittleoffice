@@ -23,14 +23,14 @@
 import { LitElement, html, nothing } from 'lit';
 import { ArrowDown, ArrowLeft, ArrowRight, ArrowUp, GripVertical, Pencil, Trash2 } from 'lucide';
 import { COL_NAMES, MAX_COLS, clearCells, copyCells, fillCells, formatCell, isLocked, pasteCells, rangeOf, rcToRef, type Cells, type ColType, type Column, type Range } from '../../doc/index.ts';
-import { docToHtml, htmlToBlocks } from '../../kit/clipboard.ts';
-import { choicesOf, kindItems } from '../../kit/columns.ts';
-import { icon, UI } from '../../kit/icons.ts';
-import { t } from '../../kit/i18n.ts';
-import type { MenuItem, ToMenu } from '../../kit/menu.ts';
+import { docToHtml, htmlToBlocks } from '../../kit/text/clipboard.ts';
+import { choicesOf, kindItems } from '../../kit/text/columns.ts';
+import { icon, UI } from '../../kit/draw/icons.ts';
+import { t } from '../../kit/core/i18n.ts';
+import type { MenuItem, ToMenu } from '../../kit/ui/menu.ts';
 import type { SheetView } from '../sheet/model.ts';
 import { currencyAt, isLetterName } from '../sheet/model.ts';
-import '../../kit/menu.ts';
+import '../../kit/ui/menu.ts';
 
 export const TABLE_TAG = 'to-write-table';
 

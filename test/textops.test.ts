@@ -31,7 +31,7 @@ import {
   wholeSel,
   type Edit,
   type Sel,
-} from '../src/kit/textops.ts';
+} from '../src/kit/text/textops.ts';
 import { rng } from './doc/helpers.ts';
 
 const doc = (tlo: string): Doc => parse(tlo);

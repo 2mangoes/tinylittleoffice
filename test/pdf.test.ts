@@ -1,7 +1,7 @@
 // The .pdf file (a JPEG a page) and the Outliner's text PDF: well-formed files, their cross-reference tables true.
 import { test, expect } from 'vitest';
-import { pdf } from '../src/kit/pdf.ts';
-import { measure, textPdf } from '../src/kit/textpdf.ts';
+import { pdf } from '../src/kit/file/pdf.ts';
+import { measure, textPdf } from '../src/kit/file/textpdf.ts';
 import { outlineBlocks, readOutline } from '../src/apps/outline/model.ts';
 import { parse } from '../src/doc/index.ts';
 

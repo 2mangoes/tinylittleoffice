@@ -20,13 +20,13 @@
  */
 import { parse as parseText, plainText, textMarkdown, textOf, write as writeDoc, withHead, type Doc } from './doc/index.ts';
 import { docJson, jsonDoc } from './doc/json.ts';
-import { decodeDoc, encodeDoc, packDoc, URL_LIMIT } from './kit/codec.ts';
-import { newLocker, seal } from './kit/crypt.ts';
-import { generatePassword } from './kit/passwords.ts';
-import { isLang, parseHash, routeHash } from './kit/route.ts';
-import { appInHead, plainLink, readPlain, tloText } from './kit/plain.ts';
-import { diff, tally, type Change } from './kit/diff.ts';
-import { origin } from './kit/network.ts';
+import { decodeDoc, encodeDoc, packDoc, URL_LIMIT } from './kit/core/codec.ts';
+import { newLocker, seal } from './kit/share/crypt.ts';
+import { generatePassword } from './kit/share/passwords.ts';
+import { isLang, parseHash, routeHash } from './kit/core/route.ts';
+import { appInHead, plainLink, readPlain, tloText } from './kit/core/plain.ts';
+import { diff, tally, type Change } from './kit/text/diff.ts';
+import { origin } from './kit/core/network.ts';
 
 export type { Change, Doc };
 export { diff, URL_LIMIT };
@@ -87,7 +87,7 @@ const APP = /^[a-z][a-z0-9-]*$/;
 
 /**
  * The packed link for a document in an app: "<site><app>/#/v1/<app>/<payload>". With `seal: true`, the document
- * sealed under a password the app makes (kit/passwords.ts, kit/crypt.ts), as the Password dialog does: the
+ * sealed under a password the app makes (kit/share/passwords.ts, kit/share/crypt.ts), as the Password dialog does: the
  * link and the password, asynchronously (WebCrypto is). A `password` given is refused.
  */
 export function link(app: string, text: string, opts: SealOptions): Promise<Sealed>;
@@ -162,7 +162,7 @@ export function read(url: string): Read {
  * first, unless its first heading says it already.
  */
 export async function markdown(app: string, text: string): Promise<string> {
-  const [{ appOf }, { textLayer }] = await Promise.all([import('./kit/apps.ts'), import('./kit/text-layer.ts')]);
+  const [{ appOf }, { textLayer }] = await Promise.all([import('./kit/core/apps.ts'), import('./kit/text/text-layer.ts')]);
   const def = appOf(app);
   const nodes = def ? textLayer(def, text) : textOf(parseText(text));
   const title = (def ? def.title(text) : (parseText(text).head.title ?? '')).trim();
@@ -210,13 +210,13 @@ export async function measure(app: string, text: string, opts: LinkOptions = {})
 
 /** Every app: its id, name, what one document is called, its group and a line on what it is for. */
 export async function apps(): Promise<{ id: string; name: string; noun: string; group: string; blurb: string }[]> {
-  const { apps: all } = await import('./kit/apps.ts');
+  const { apps: all } = await import('./kit/core/apps.ts');
   return all().map((a) => ({ id: a.id, name: a.name, noun: a.noun, group: a.group, blurb: a.blurb }));
 }
 
 /** The templates an app starts from: an id, a name, a line, and the document. */
 export async function templates(app: string): Promise<{ id: string; name: string; blurb: string; text: string }[]> {
-  const { appOf } = await import('./kit/apps.ts');
+  const { appOf } = await import('./kit/core/apps.ts');
   const def = appOf(app);
   if (!def) throw new Error(`No app "${app}"`);
   return (await def.templates()).map((t) => ({ id: t.id, name: t.name, blurb: t.blurb, text: t.doc }));
@@ -224,7 +224,7 @@ export async function templates(app: string): Promise<{ id: string; name: string
 
 /** The files an app makes from a document without a browser (its own formats that need no drawing), by extension. */
 export async function formats(app: string): Promise<string[]> {
-  const { appOf } = await import('./kit/apps.ts');
+  const { appOf } = await import('./kit/core/apps.ts');
   return ['md', 'tlo', 'json', ...(appOf(app)?.exports ?? []).map((x) => x.ext).filter((x) => x !== 'md')];
 }
 
@@ -234,10 +234,10 @@ export async function formats(app: string): Promise<string[]> {
  * format the app does not have, or one that needs a browser.
  */
 export async function file(app: string, text: string, ext: string, ctx: { title?: string; link?: string } = {}): Promise<Uint8Array | string> {
-  const [{ appOf }, { formatOf }] = await Promise.all([import('./kit/apps.ts'), import('./kit/exports.ts')]);
+  const [{ appOf }, { formatOf }] = await Promise.all([import('./kit/core/apps.ts'), import('./kit/file/exports.ts')]);
   const def = appOf(app);
   if (!def) throw new Error(`No app "${app}"`);
-  // The site's own formats (kit/exports.ts formatsOf), those it can build here; one this place cannot make (a WebM,
+  // The site's own formats (kit/file/exports.ts formatsOf), those it can build here; one this place cannot make (a WebM,
   // which wants a browser's encoder) is asked to, and says where it is made.
   const format = (await formats(app)).includes(ext) ? (formatOf(def, ext) ?? def.exports?.find((x) => x.ext === ext)) : undefined;
   if (format) return format.build(text, { def, title: ctx.title ?? def.title(text), link: ctx.link ?? link(app, text) });

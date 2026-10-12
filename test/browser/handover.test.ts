@@ -6,8 +6,8 @@
 import { afterEach, beforeEach, expect, test } from 'vitest';
 import { userEvent } from 'vitest/browser';
 import { mount, openDrawerDoc, openShare, tick, until } from './helpers.ts';
-import { encodeDoc } from '../../src/kit/codec.ts';
-import { apps } from '../../src/kit/apps.ts';
+import { encodeDoc } from '../../src/kit/core/codec.ts';
+import { apps } from '../../src/kit/core/apps.ts';
 
 /** Every showModal() made while another modal was open, by what was open and what opened over it. */
 const stacked: string[] = [];

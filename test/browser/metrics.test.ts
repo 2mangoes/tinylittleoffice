@@ -1,11 +1,11 @@
 // The lint's measure is the layouts' own, and the layouts measure words with the fallback metrics the exports use
-// (kit/draw.ts `textWidth`: a character's width as a share of the type's size), so that a page, a PDF and the lint
+// (kit/draw/draw.ts `textWidth`: a character's width as a share of the type's size), so that a page, a PDF and the lint
 // are made without a browser. Here they are held to Chromium's: the words every diagram and deck template draws,
-// set in the pages' font (kit/draw.ts FONT) and measured by the canvas, come within 10% of the fallback's sum,
+// set in the pages' font (kit/draw/draw.ts FONT) and measured by the canvas, come within 10% of the fallback's sum,
 // plain and bold. Past that the lint would say a label fits that a reader sees cut, or the reverse.
 import { expect, test } from 'vitest';
-import { FONT, textWidth } from '../../src/kit/draw.ts';
-import { appOf } from '../../src/kit/apps.ts';
+import { FONT, textWidth } from '../../src/kit/draw/draw.ts';
+import { appOf } from '../../src/kit/core/apps.ts';
 import { parse, plainText } from '../../src/doc/index.ts';
 import { layout } from '../../src/apps/diagram/view.ts';
 import { slidesOf } from '../../src/apps/deck/model.ts';
@@ -69,7 +69,7 @@ for (const lang of ['ru', 'uk', 'pl', 'bn', 'hi', 'ur', 'ko', 'zh-hant', 'zh-han
 
 // Urdu as its readers see it (Paul, 2026-10-11): Nastaliq, the stylesheet's first choice under :lang(ur). The words of
 // the interface, every string of ur.ts, measured in Noto Nastaliq Urdu, come within the same tenth of the fallback's
-// Arabic widths: Nastaliq is taller than Naskh, not wider (kit/draw.ts SCRIPTS).
+// Arabic widths: Nastaliq is taller than Naskh, not wider (kit/draw/draw.ts SCRIPTS).
 test('ur: the interface’s own words in Nastaliq are within a tenth of the Arabic widths', () => {
   const ctx = document.createElement('canvas').getContext('2d')!;
   ctx.font = `400 14px 'Noto Nastaliq Urdu', ${FONT}`;

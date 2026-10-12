@@ -2,12 +2,12 @@
 // hold; and the new blank documents of every other app offered wherever a document can hold one.
 import { test, expect, afterEach } from 'vitest';
 import { mount, tick, until } from './helpers.ts';
-import { encodeDoc, decodeDoc } from '../../src/kit/codec.ts';
-import { apps, appOf } from '../../src/kit/apps.ts';
-import { lookup } from '../../src/kit/app.ts';
-import { qrPage, setSelfLink } from '../../src/kit/qr-picture.ts';
-import type { ToShell } from '../../src/kit/shell.ts';
-import type { ToInsert } from '../../src/kit/insert.ts';
+import { encodeDoc, decodeDoc } from '../../src/kit/core/codec.ts';
+import { apps, appOf } from '../../src/kit/core/apps.ts';
+import { lookup } from '../../src/kit/core/app.ts';
+import { qrPage, setSelfLink } from '../../src/kit/draw/qr-picture.ts';
+import type { ToShell } from '../../src/kit/core/shell.ts';
+import type { ToInsert } from '../../src/kit/ui/insert.ts';
 
 afterEach(() => history.replaceState(null, '', location.pathname));
 

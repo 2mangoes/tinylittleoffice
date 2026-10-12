@@ -1,7 +1,7 @@
 /**
  * Tiny Little Office in Japanese (polite form, です・ます). Keys are the English strings of en.ts.
  */
-import type { Strings } from '../kit/i18n.ts';
+import type { Strings } from '../kit/core/i18n.ts';
 
 export default {
   // ---- the shell: header ----
@@ -58,7 +58,7 @@ export default {
   'Tiny Little Office': 'ちいさなちいさなオフィス',
   'About Tiny Little Office': 'ちいさなちいさなオフィスについて',
 
-  // ---- links that leave the site (kit/link-guard.ts) ----
+  // ---- links that leave the site (kit/ui/link-guard.ts) ----
   // The menu button's tooltip: the Office mark is the menu.
   'Tiny Little Office menu': 'ちいさなちいさなオフィスのメニュー',
   // The question before a link that leaves the site: "You are leaving Tiny Little Office for" over the site's name, large.
@@ -77,7 +77,7 @@ export default {
 
   // ---- the copy kept on the device (status lines under the switch) ----
 
-  // ---- sharing: the Share dialog (kit/shell.ts), where the link fits (kit/limits.ts), the arrival banner ----
+  // ---- sharing: the Share dialog (kit/core/shell.ts), where the link fits (kit/share/limits.ts), the arrival banner ----
   'A copy opened in a new tab': 'コピーを新しいタブで開きました',
   'Copy display link': '表示用リンクをコピー',
   'Copy into a new document': '新しいドキュメントにコピー',
@@ -130,7 +130,7 @@ export default {
   'Link': 'リンク',
   'Short link': '短縮リンク',
 
-  // ---- privacy (kit/privacy.ts, kit/privacy-dialog.ts): the password, what the device holds ----
+  // ---- privacy (kit/share/privacy.ts, kit/ui/privacy-dialog.ts): the password, what the device holds ----
   // The Share dialog's head line: "Created 9 Oct 2026, 14:03 · by Paul".
   'Anyone with the link will need the password to open it. Nobody can reset it: lose it and the document is gone.': 'リンクを知っている人は、開くのにパスワードが必要です。パスワードは誰にもリセットできません。忘れるとドキュメントは開けなくなります。',
   'Change password': 'パスワードを変更',
@@ -177,7 +177,7 @@ export default {
   'Copy this and send it another way than the link. It cannot be shown again.': 'これをコピーして、リンクとは別の方法で送ってください。もう一度表示することはできません。',
   'Make another': '別のものを作る',
 
-  // ---- a document locked with a password, placed inside another (kit/locked.ts, kit/locked-doc.ts) ----
+  // ---- a document locked with a password, placed inside another (kit/share/locked.ts, kit/ui/locked-doc.ts) ----
   // The card drawn where it sits; {app} is the app's name: "A Spreadsheet document, locked with a password".
   'Locked with a password': 'パスワードでロック',
   'A {app} document, locked with a password': 'パスワードでロックされた{app}のドキュメント',
@@ -200,7 +200,7 @@ export default {
   // The group heading the Calendar and the Trip Planner sit under on the home page.
   'Plan': '計画',
   'Chosen tasks': '選択中のタスク',
-  // A link that opens the document (kit/compare.ts).
+  // A link that opens the document (kit/ui/compare.ts).
   'Open': '開く',
   'Task': 'タスク',
   'Tasks': 'タスク',
@@ -366,7 +366,7 @@ export default {
   'Terms of service': '利用規約',
   'A small business\'s terms in plain words: booking, prices, keys, what if, ending.': '小さなお店の規約を平易な言葉で：予約、料金、鍵、もしものとき、終了。',
 
-  // ---- Insert's dialog (kit/insert-dialogs.ts): Tiny Little Office Doc ----
+  // ---- Insert's dialog (kit/ui/insert-dialogs.ts): Tiny Little Office Doc ----
   'A Tiny Little Office link': 'ちいさなちいさなオフィスのリンク',
   'Opening the short link…': '短縮リンクを開いています…',
   'Paste the link of another Tiny Little Office document, long or short: its first page shows here.': 'ほかのちいさなちいさなオフィスドキュメントのリンク（長いものでも短縮でも）を貼り付けてください。最初のページがここに表示されます。',
@@ -375,11 +375,11 @@ export default {
   'Tiny Little Office Doc…': 'ちいさなちいさなオフィスドキュメント…',
   // Insert ▾'s group of the apps a new document can be made in, inside this one.
   'A new document': '新しいドキュメント',
-  // ---- another document edited in place (kit/doc-dialog.ts); a table's size is Rows × Columns ----
+  // ---- another document edited in place (kit/ui/doc-dialog.ts); a table's size is Rows × Columns ----
   'Cancel': 'キャンセル',
   'Rows': '行',
 
-  // ---- charts (kit/chart.ts) ----
+  // ---- charts (kit/draw/chart.ts) ----
   'An empty chart': '空のグラフ',
   'Bars': '棒',
   'Flows (Sankey)': 'フロー（サンキー）',
@@ -528,10 +528,10 @@ export default {
   'Unlock these cells': 'このセルのロックを解除',
   'What it holds; sort; columns': '中身、並べ替え、列',
 
-  // ---- downloads: hand-offs to another app (kit/exports.ts) ----
+  // ---- downloads: hand-offs to another app (kit/file/exports.ts) ----
   'Open in': '開く先',
 
-  // ---- the icon library (kit/icons-picker.ts) ----
+  // ---- the icon library (kit/ui/icons-picker.ts) ----
   'Icon': 'アイコン',
   'Favorites': 'お気に入り',
   'Search icons': 'アイコンを検索',

@@ -4,8 +4,8 @@
  * corpus test holds every one). The order is the dropdown's: the household first, then groups of people,
  * then the year's seasons, then the work, then the events. templates.md says what each is for.
  */
-import type { Template } from '../../kit/app.ts';
-import { t } from '../../kit/i18n.ts';
+import type { Template } from '../../kit/core/app.ts';
+import { t } from '../../kit/core/i18n.ts';
 
 const FAMILY = `---
 title: The Okafor family

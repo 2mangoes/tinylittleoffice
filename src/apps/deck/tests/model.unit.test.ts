@@ -6,7 +6,7 @@ import { expect, test } from 'vitest';
 import { applyAll, parse, plainText, write } from '../../../doc/index.ts';
 import deck from '../def.ts';
 // The registry, so a sheet on a slide is drawn by its own app.
-import '../../../kit/apps.ts';
+import '../../../kit/core/apps.ts';
 import {
   addSlide,
   duplicateSlides,
@@ -27,8 +27,8 @@ import {
   titleOf,
 } from '../model.ts';
 import { deckToPptx } from '../pptx.ts';
-import { decodeDoc } from '../../../kit/codec.ts';
-import { parseHash } from '../../../kit/route.ts';
+import { decodeDoc } from '../../../kit/core/codec.ts';
+import { parseHash } from '../../../kit/core/route.ts';
 import { templates } from '../templates.ts';
 import { contrast, THEMES } from '../theme.ts';
 import { closingPage, deckFrames, takeHomeLink, wantsClosing, deckPages, deckToHtml, layoutSlide, lookOf, pageCount, pagesOf, sheetsOf, slidePage, slideSteps, wrap } from '../view.ts';

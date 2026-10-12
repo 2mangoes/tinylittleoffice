@@ -8,7 +8,7 @@ import { test, expect, beforeAll, afterAll } from 'vitest';
 import { cpSync, existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { apps } from '../src/kit/apps.ts';
+import { apps } from '../src/kit/core/apps.ts';
 import { checkSeo, firstHeader, ldBlocks, listed, sitemapLocs, writePages, type Listed } from '../scripts/seo.ts';
 
 const SITE = 'https://office.example.org/';

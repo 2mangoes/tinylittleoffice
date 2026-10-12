@@ -2,7 +2,7 @@
  * Tiny Little Office 的简体中文文字：每个人看到的字符串，左边是英文的键，右边是中文。
  * 键、{占位符}和各节的注释都与 en.ts 一致；中文没有复数形式，复数只写一种，# 代表数字。
  */
-import type { Strings } from '../kit/i18n.ts';
+import type { Strings } from '../kit/core/i18n.ts';
 
 export default {
   // ---- the shell: header ----
@@ -59,7 +59,7 @@ export default {
   'Tiny Little Office': '小小办公室',
   'About Tiny Little Office': '关于 小小办公室',
 
-  // ---- links that leave the site (kit/link-guard.ts) ----
+  // ---- links that leave the site (kit/ui/link-guard.ts) ----
   // The menu button's tooltip: the Office mark is the menu.
   'Tiny Little Office menu': '小小办公室 菜单',
   // The question before a link that leaves the site: "You are leaving Tiny Little Office for" over the site's name, large.
@@ -78,7 +78,7 @@ export default {
 
   // ---- the copy kept on the device (status lines under the switch) ----
 
-  // ---- sharing: the Share dialog (kit/shell.ts), where the link fits (kit/limits.ts), the arrival banner ----
+  // ---- sharing: the Share dialog (kit/core/shell.ts), where the link fits (kit/share/limits.ts), the arrival banner ----
   'A copy opened in a new tab': '在新标签页中打开的副本',
   'Copy display link': '复制展示链接',
   'Copy into a new document': '复制为新文档',
@@ -131,7 +131,7 @@ export default {
   'Link': '链接',
   'Short link': '短链接',
 
-  // ---- privacy (kit/privacy.ts, kit/privacy-dialog.ts): the password, what the device holds ----
+  // ---- privacy (kit/share/privacy.ts, kit/ui/privacy-dialog.ts): the password, what the device holds ----
   // The Share dialog's head line: "Created 9 Oct 2026, 14:03 · by Paul".
   'Anyone with the link will need the password to open it. Nobody can reset it: lose it and the document is gone.': '任何拿到链接的人都需要密码才能打开。没人能重置密码：丢了，文档就找不回来了。',
   'Change password': '更改密码',
@@ -178,7 +178,7 @@ export default {
   'Copy this and send it another way than the link. It cannot be shown again.': '复制它，并用链接以外的途径发送。它无法再次显示。',
   'Make another': '再生成一个',
 
-  // ---- a document locked with a password, placed inside another (kit/locked.ts, kit/locked-doc.ts) ----
+  // ---- a document locked with a password, placed inside another (kit/share/locked.ts, kit/ui/locked-doc.ts) ----
   // The card drawn where it sits; {app} is the app's name: "A Spreadsheet document, locked with a password".
   'Locked with a password': '已用密码锁定',
   'A {app} document, locked with a password': '一份已用密码锁定的{app}文档',
@@ -201,7 +201,7 @@ export default {
   // The group heading the Calendar and the Trip Planner sit under on the home page.
   'Plan': '计划',
   'Chosen tasks': '选中的任务',
-  // A link that opens the document (kit/compare.ts).
+  // A link that opens the document (kit/ui/compare.ts).
   'Open': '打开',
   'Task': '任务',
   'Tasks': '任务',
@@ -367,7 +367,7 @@ export default {
   'Terms of service': '服务条款',
   'A small business\'s terms in plain words: booking, prices, keys, what if, ending.': '小生意的条款，用平实的话写：预订、价格、钥匙、意外情况、终止。',
 
-  // ---- Insert's dialog (kit/insert-dialogs.ts): Tiny Little Office Doc ----
+  // ---- Insert's dialog (kit/ui/insert-dialogs.ts): Tiny Little Office Doc ----
   'A Tiny Little Office link': '小小办公室 链接',
   'Opening the short link…': '正在打开短链接…',
   'Paste the link of another Tiny Little Office document, long or short: its first page shows here.': '粘贴另一份 小小办公室 文档的链接，长短均可：它的第一页会显示在这里。',
@@ -376,11 +376,11 @@ export default {
   'Tiny Little Office Doc…': '小小办公室 文档…',
   // Insert ▾'s group of the apps a new document can be made in, inside this one.
   'A new document': '新文档',
-  // ---- another document edited in place (kit/doc-dialog.ts); a table's size is Rows × Columns ----
+  // ---- another document edited in place (kit/ui/doc-dialog.ts); a table's size is Rows × Columns ----
   'Cancel': '取消',
   'Rows': '行数',
 
-  // ---- charts (kit/chart.ts) ----
+  // ---- charts (kit/draw/chart.ts) ----
   'An empty chart': '空图表',
   'Bars': '柱状图',
   'Flows (Sankey)': '流向图（桑基图）',
@@ -529,10 +529,10 @@ export default {
   'Unlock these cells': '解锁这些单元格',
   'What it holds; sort; columns': '其中的内容；排序；列',
 
-  // ---- downloads: hand-offs to another app (kit/exports.ts) ----
+  // ---- downloads: hand-offs to another app (kit/file/exports.ts) ----
   'Open in': '打开方式',
 
-  // ---- the icon library (kit/icons-picker.ts) ----
+  // ---- the icon library (kit/ui/icons-picker.ts) ----
   'Icon': '图标',
   'Favorites': '收藏',
   'Search icons': '搜索图标',

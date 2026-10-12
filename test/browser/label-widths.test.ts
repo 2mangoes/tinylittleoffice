@@ -1,5 +1,5 @@
 // Each command's words, in each language, measured against the room its slot gives them: the source of the length rule
-// (src/i18n/en.ts's header points here). The registry says where a command is drawn (kit/commands.ts `where`); the
+// (src/i18n/en.ts's header points here). The registry says where a command is drawn (kit/core/commands.ts `where`); the
 // stylesheet says how wide that place is; the box's own fonts say how wide the words are, measured with the font the
 // slot's words are drawn in (the canvas's measureText, given the slot's computed font: IBM Plex Sans, the site's own),
 // with the family of the language's script first where it is not Latin or Cyrillic (test/browser/fonts.ts: Plex Sans
@@ -26,15 +26,15 @@ import { test, expect, beforeAll, afterAll } from 'vitest';
 import { page } from 'vitest/browser';
 import { html, render } from 'lit';
 import { mount, openShare, settled, until } from './helpers.ts';
-import { encodeDoc } from '../../src/kit/codec.ts';
-import type { ToDialog } from '../../src/kit/dialog.ts';
-import '../../src/kit/bar.ts';
-import { icon, UI } from '../../src/kit/icons.ts';
-import { keysText, registered, type Command } from '../../src/kit/commands.ts';
-import type { Strings } from '../../src/kit/i18n.ts';
-import '../../src/kit/keys.ts';
-import '../../src/kit/text-commands.ts';
-import '../../src/kit/rows-commands.ts';
+import { encodeDoc } from '../../src/kit/core/codec.ts';
+import type { ToDialog } from '../../src/kit/ui/dialog.ts';
+import '../../src/kit/ui/bar.ts';
+import { icon, UI } from '../../src/kit/draw/icons.ts';
+import { keysText, registered, type Command } from '../../src/kit/core/commands.ts';
+import type { Strings } from '../../src/kit/core/i18n.ts';
+import '../../src/kit/core/keys.ts';
+import '../../src/kit/text/text-commands.ts';
+import '../../src/kit/text/rows-commands.ts';
 import en from '../../src/i18n/en.ts';
 import { FAMILIES, firstFamily, fontIn, installed, loadFont } from './fonts.ts';
 

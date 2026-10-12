@@ -1,7 +1,7 @@
 // public/tinyoffice.js: plain links and embed snippets from a page's own JavaScript, read back as the shell reads them.
 import { test, expect } from 'vitest';
 import { embed, link } from '../public/tinyoffice.js';
-import { readPlain } from '../src/kit/plain.ts';
+import { readPlain } from '../src/kit/core/plain.ts';
 
 const known = (id: string) => ['sheet', 'deck', 'write'].includes(id);
 

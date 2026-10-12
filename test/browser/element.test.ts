@@ -3,7 +3,7 @@
 import { expect, test } from 'vitest';
 import { html, render } from 'lit';
 import type { Doc, Op } from '../../src/doc/index.ts';
-import { DocElement, firstAt, type DocChange, type Entry } from '../../src/kit/element.ts';
+import { DocElement, firstAt, type DocChange, type Entry } from '../../src/kit/core/element.ts';
 import '../../src/styles.css';
 
 class Probe extends DocElement<Doc> {

@@ -4,15 +4,15 @@
 import { test, expect, afterEach, onTestFinished, vi } from 'vitest';
 import { page } from 'vitest/browser';
 import { mount, tick, until, openShare, said } from './helpers.ts';
-import { encodeDoc } from '../../src/kit/codec.ts';
-import { SHORT_LINK_MAX } from '../../src/kit/short.ts';
-import { decodeDoc } from '../../src/kit/codec.ts';
-import { keepLink, keptLinks, dropKept } from '../../src/kit/kept-links.ts';
-import { lockWith, pack } from '../../src/kit/privacy.ts';
-import { setKeeping, store } from '../../src/kit/store.ts';
-import type { ToShell } from '../../src/kit/shell.ts';
-import type { ToShare } from '../../src/kit/share-dialog.ts';
-import type { ToDialog } from '../../src/kit/dialog.ts';
+import { encodeDoc } from '../../src/kit/core/codec.ts';
+import { SHORT_LINK_MAX } from '../../src/kit/share/short.ts';
+import { decodeDoc } from '../../src/kit/core/codec.ts';
+import { keepLink, keptLinks, dropKept } from '../../src/kit/share/kept-links.ts';
+import { lockWith, pack } from '../../src/kit/share/privacy.ts';
+import { setKeeping, store } from '../../src/kit/core/store.ts';
+import type { ToShell } from '../../src/kit/core/shell.ts';
+import type { ToShare } from '../../src/kit/ui/share-dialog.ts';
+import type { ToDialog } from '../../src/kit/ui/dialog.ts';
 
 const DAY = 86_400_000;
 afterEach(() => {

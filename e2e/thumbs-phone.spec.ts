@@ -1,7 +1,7 @@
 /**
  * Every preview is the one box, 4:3, whatever the page's shape (Paul, 2026-10-10: "All previews of docs and templates
- * should be the same size"; kit/draw.ts CROPPED), at desktop size and on an iPhone-sized WebKit: in the templates list
- * a wide page is 96 by 72 at the size of 100% (kit/zoom.ts BASE draws it 1.3 times that), and a kept document's
+ * should be the same size"; kit/draw/draw.ts CROPPED), at desktop size and on an iPhone-sized WebKit: in the templates list
+ * a wide page is 96 by 72 at the size of 100% (kit/ui/zoom.ts BASE draws it 1.3 times that), and a kept document's
  * preview under its app 72 by 54; the list is inside the screen, and nothing is wider than it. With SHOTS set, a
  * screenshot of each list and of the home page with the kept documents.
  */
@@ -9,7 +9,7 @@ import { test, expect, type Page } from '@playwright/test';
 
 const SHOTS = process.env.SHOTS;
 const shot = async (page: Page, name: string) => SHOTS && (await page.screenshot({ path: `${SHOTS}/thumbs-${name}-${page.viewportSize()!.width}.png` }));
-/** What 1px at the size of 100% is drawn at: the root's font size over 16 (kit/zoom.ts BASE, 1.3). */
+/** What 1px at the size of 100% is drawn at: the root's font size over 16 (kit/ui/zoom.ts BASE, 1.3). */
 const base = (page: Page) => page.evaluate(() => parseFloat(getComputedStyle(document.documentElement).fontSize) / 16);
 const overflow = (page: Page) => page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
 
@@ -59,7 +59,7 @@ test('the templates list and the kept documents draw a wide document in the one 
   }, kept);
   await page.reload();
   for (const [app] of WIDE) {
-    // A preview is drawn once it scrolls into sight (kit/preview.ts): the box is brought there, then its drawing looked for.
+    // A preview is drawn once it scrolls into sight (kit/ui/preview.ts): the box is brought there, then its drawing looked for.
     const preview = page.locator(`section.to-app[aria-label="${app}"] .to-drive to-preview`).first();
     await preview.scrollIntoViewIfNeeded();
     await expect(preview.locator('svg')).toBeVisible();

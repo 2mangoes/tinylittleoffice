@@ -4,10 +4,10 @@
 // shows changes; and one keystroke's synchronous work stays inside a budget.
 import { afterEach, expect, test, vi } from 'vitest';
 import { mount, tick, until } from './helpers.ts';
-import { decodeDoc, encodeDoc } from '../../src/kit/codec.ts';
-import { parseHash } from '../../src/kit/route.ts';
-import type { ToShell } from '../../src/kit/shell.ts';
-import type { ToText } from '../../src/kit/text.ts';
+import { decodeDoc, encodeDoc } from '../../src/kit/core/codec.ts';
+import { parseHash } from '../../src/kit/core/route.ts';
+import type { ToShell } from '../../src/kit/core/shell.ts';
+import type { ToText } from '../../src/kit/text/text.ts';
 import type { ToWriteEditor } from '../../src/apps/write/editor.ts';
 
 afterEach(() => {

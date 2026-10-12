@@ -4,8 +4,8 @@
  * browser sees.
  *
  *   - dist/_headers has the scripts' hashes in place of {{scripts}}: every script the apps' pages carry
- *     (src/kit/page.ts) and every inline script of a built page, or the browser would refuse to run it.
- *   - dist/version.json has the shape of src/kit/version.ts and the same script hashes as the policy.
+ *     (src/kit/draw/page.ts) and every inline script of a built page, or the browser would refuse to run it.
+ *   - dist/version.json has the shape of src/kit/core/version.ts and the same script hashes as the policy.
  *   - the guides for agents: llms.txt (and the same at .well-known/llms.txt), llms-full.txt, and each app's
  *     examples beside its page (examples/<app>.json for llms/<app>.txt).
  *   - the type: every font a built stylesheet names, and every font a page preloads, is a file of the build, with
@@ -19,7 +19,7 @@ import { createHash } from 'node:crypto';
 import { existsSync, readFileSync, readdirSync, type Dirent } from 'node:fs';
 import { relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { isVersion } from '../src/kit/version.ts';
+import { isVersion } from '../src/kit/core/version.ts';
 
 const hash = (code: string) => `'sha256-${createHash('sha256').update(code).digest('base64')}'`;
 
@@ -91,9 +91,9 @@ export function checkBuild(dist: string, scripts: string[] = []): string[] {
 
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   // The registry first: the apps declare their page scripts as they load.
-  await import('../src/kit/apps.ts');
-  const { pageScripts } = await import('../src/kit/page.ts');
-  const { apps } = await import('../src/kit/apps.ts');
+  await import('../src/kit/core/apps.ts');
+  const { pageScripts } = await import('../src/kit/draw/page.ts');
+  const { apps } = await import('../src/kit/core/apps.ts');
   const { checkSeo, listed } = await import('./seo.ts');
   const dist = resolve(import.meta.dirname, '..', 'dist');
   const problems = checkBuild(dist, pageScripts());

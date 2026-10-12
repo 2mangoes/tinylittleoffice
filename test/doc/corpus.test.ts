@@ -5,7 +5,7 @@ import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { expect, test } from 'vitest';
 import { parse, write } from '../../src/doc/index.ts';
-import { apps } from '../../src/kit/apps.ts';
+import { apps } from '../../src/kit/core/apps.ts';
 
 const dir = join(import.meta.dirname, 'corpus');
 const files = [...readdirSync(dir).filter((f) => f.endsWith('.json')), ...readdirSync(join(dir, 'apps')).map((f) => `apps/${f}`)];

@@ -6,7 +6,7 @@ import { test, expect } from 'vitest';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { FONTS } from '../scripts/dependencies.ts';
 import { fontBytes, readBudgets } from '../scripts/budgets.ts';
-import { FONT, text } from '../src/kit/draw.ts';
+import { FONT, text } from '../src/kit/draw/draw.ts';
 import { STACKS } from '../src/apps/write/look.ts';
 
 const root = new URL('../', import.meta.url);
@@ -59,7 +59,7 @@ test('the stacks put Plex first, the old stack behind it: the interface, the ser
   expect(token('--to-font')).toMatch(/^'IBM Plex Sans', 'IBM Plex Sans Arabic', 'IBM Plex Sans Devanagari', system-ui, /);
   expect(token('--to-font-serif')).toMatch(/^'IBM Plex Serif', /);
   expect(token('--to-font-mono')).toMatch(/^'IBM Plex Mono', ui-monospace, /);
-  // The pages (kit/draw.ts) and the Write looks (look.ts) name the same stacks the stylesheet does.
+  // The pages (kit/draw/draw.ts) and the Write looks (look.ts) name the same stacks the stylesheet does.
   expect(token('--to-font')).toBe(FONT);
   expect(STACKS.sans).toBe(FONT);
   expect(token('--to-font-serif')).toBe(STACKS.serif);

@@ -1,20 +1,20 @@
-// A walk over the command registry (src/kit/commands.ts): in each app, from a document of its own templates and from
+// A walk over the command registry (src/kit/core/commands.ts): in each app, from a document of its own templates and from
 // the states its commands need (a card in hand, rows chosen, a slide presented, a shape chosen, a pen drawing, words
 // typed in a row, a thing open), every command in force is run as its bar, menu, context bar or key would run it. None
 // throws, nothing it starts is left failing, and the document stays one the kernel writes back byte for byte. The walk
 // is also what runs the commands no other test reaches, for the registry's lint that every command is run by a test.
 import { afterEach, beforeEach, expect, test, vi } from 'vitest';
 import { mount, tick, until } from './helpers.ts';
-import { encodeDoc } from '../../src/kit/codec.ts';
-import { appOf } from '../../src/kit/apps.ts';
-import { inScope, live, run, type Command } from '../../src/kit/commands.ts';
-import { KIT_COMMANDS } from '../../src/kit/keys.ts';
-import { TEXT_COMMANDS } from '../../src/kit/text-commands.ts';
-import { ROWS_COMMANDS } from '../../src/kit/rows-commands.ts';
+import { encodeDoc } from '../../src/kit/core/codec.ts';
+import { appOf } from '../../src/kit/core/apps.ts';
+import { inScope, live, run, type Command } from '../../src/kit/core/commands.ts';
+import { KIT_COMMANDS } from '../../src/kit/core/keys.ts';
+import { TEXT_COMMANDS } from '../../src/kit/text/text-commands.ts';
+import { ROWS_COMMANDS } from '../../src/kit/text/rows-commands.ts';
 import { parse, write } from '../../src/doc/index.ts';
-import type { ToShell } from '../../src/kit/shell.ts';
+import type { ToShell } from '../../src/kit/core/shell.ts';
 import { setLoop } from '../../src/apps/anim/model.ts';
-import type { ToText } from '../../src/kit/text.ts';
+import type { ToText } from '../../src/kit/text/text.ts';
 
 // What the walk opens that would leave the page: a new tab, the printer, a question.
 beforeEach(() => {

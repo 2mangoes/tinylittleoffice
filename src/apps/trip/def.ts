@@ -5,9 +5,9 @@
  */
 import { MapPinned } from 'lucide';
 import { apply, parse, textOf, write, type TextNode } from '../../doc/index.ts';
-import { defineApp, type Doc } from '../../kit/app.ts';
-import { utf8 } from '../../kit/draw.ts';
-import { t } from '../../kit/i18n.ts';
+import { defineApp, type Doc } from '../../kit/core/app.ts';
+import { utf8 } from '../../kit/draw/draw.ts';
+import { t } from '../../kit/core/i18n.ts';
 import { tripPage, tripToGeoJson, tripToGpx } from './view.ts';
 import { tripToCal } from './convert.ts';
 import { readTrip } from './model.ts';

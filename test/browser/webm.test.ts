@@ -1,12 +1,12 @@
-// The WebM (kit/webm.ts): the Animator's sample and the Deck's film, encoded by the browser's own VideoEncoder and muxed
+// The WebM (kit/file/webm.ts): the Animator's sample and the Deck's film, encoded by the browser's own VideoEncoder and muxed
 // by ours, play in a <video> at the stage's width for as long as their frames last; the frame a player draws is the
 // frame that was drawn (the bitrate, chosen by comparing two); and a browser with no encoder has no WebM row.
 import { test, expect, afterEach, vi } from 'vitest';
-import { appOf } from '../../src/kit/apps.ts';
-import { encodeDoc } from '../../src/kit/codec.ts';
-import { pageSvg } from '../../src/kit/draw.ts';
-import { canvas } from '../../src/kit/raster.ts';
-import { webmOf, type WebmFrame } from '../../src/kit/webm.ts';
+import { appOf } from '../../src/kit/core/apps.ts';
+import { encodeDoc } from '../../src/kit/core/codec.ts';
+import { pageSvg } from '../../src/kit/draw/draw.ts';
+import { canvas } from '../../src/kit/draw/raster.ts';
+import { webmOf, type WebmFrame } from '../../src/kit/file/webm.ts';
 import { parse } from '../../src/doc/index.ts';
 import { animFrames } from '../../src/apps/anim/view.ts';
 import { animWebm } from '../../src/apps/anim/def.ts';
@@ -98,7 +98,7 @@ test('the bitrate: 1 Mbit/s against 2, the smaller kept where a decoded frame is
     video.remove();
   }
   console.log('webm bitrates', JSON.stringify(tried));
-  // The kept rate (1 Mbit/s, kit/webm.ts BITRATE) is the default, and its frame is within a hair of the larger's.
+  // The kept rate (1 Mbit/s, kit/file/webm.ts BITRATE) is the default, and its frame is within a hair of the larger's.
   expect((await animWebm(doc))!.length).toBe(tried[1_000_000].bytes);
   expect(tried[1_000_000].off).toBeLessThan(3);
   expect(tried[1_000_000].off - tried[2_000_000].off).toBeLessThan(1);

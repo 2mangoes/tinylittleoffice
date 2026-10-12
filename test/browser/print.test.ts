@@ -1,17 +1,17 @@
-// Print, or save as PDF (src/kit/exports.ts): every app's first template, as the page the browser prints,
+// Print, or save as PDF (src/kit/file/exports.ts): every app's first template, as the page the browser prints,
 // parses as HTML and holds one figure per page the app draws, each an SVG at its page's size, the paper
 // the first page's; where a rule is a page break (a text's, a deck's slides), one page per rule and one
 // more. And the Download menu's Print: a hidden frame with that page, gone when the dialog closes.
 import { test, expect, afterEach } from 'vitest';
 import { cdp } from 'vitest/browser';
 import { mount, until } from './helpers.ts';
-import { apps, appOf } from '../../src/kit/apps.ts';
-import { printHtml } from '../../src/kit/exports.ts';
-import { encodeDoc } from '../../src/kit/codec.ts';
-import { routeHash } from '../../src/kit/route.ts';
+import { apps, appOf } from '../../src/kit/core/apps.ts';
+import { printHtml } from '../../src/kit/file/exports.ts';
+import { encodeDoc } from '../../src/kit/core/codec.ts';
+import { routeHash } from '../../src/kit/core/route.ts';
 import { pages as rules, parse } from '../../src/doc/index.ts';
-import type { Page } from '../../src/kit/app.ts';
-import { BASE, remScale } from '../../src/kit/zoom.ts';
+import type { Page } from '../../src/kit/core/app.ts';
+import { BASE, remScale } from '../../src/kit/ui/zoom.ts';
 
 afterEach(() => history.replaceState(null, '', location.pathname));
 

@@ -1,10 +1,10 @@
-// A password on a document (kit/crypt.ts): AES-256-GCM under a key from one HKDF-SHA-256 pass over the password,
-// which the app made (kit/passwords.ts: about 117 bits, nothing to stretch), and a sealed fixture opening.
+// A password on a document (kit/share/crypt.ts): AES-256-GCM under a key from one HKDF-SHA-256 pass over the password,
+// which the app made (kit/share/passwords.ts: about 117 bits, nothing to stretch), and a sealed fixture opening.
 import { test, expect } from 'vitest';
-import * as crypt from '../src/kit/crypt.ts';
-import { newLocker, seal, unseal, unsealWith } from '../src/kit/crypt.ts';
-import { decodeDoc, encodeDoc, isSealed, packDoc, toBase64Url, unpackDoc } from '../src/kit/codec.ts';
-import { generatePassword } from '../src/kit/passwords.ts';
+import * as crypt from '../src/kit/share/crypt.ts';
+import { newLocker, seal, unseal, unsealWith } from '../src/kit/share/crypt.ts';
+import { decodeDoc, encodeDoc, isSealed, packDoc, toBase64Url, unpackDoc } from '../src/kit/core/codec.ts';
+import { generatePassword } from '../src/kit/share/passwords.ts';
 
 const subtle = globalThis.crypto.subtle;
 const utf8 = (s: string) => new TextEncoder().encode(s);

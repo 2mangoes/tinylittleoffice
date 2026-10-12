@@ -6,47 +6,47 @@
  * two columns, either side of the "|"), the speaker notes a <to-text shape=lines> over its quote blocks.
  * Every op from an editor is offset by its span's start and applied through DocElement's edit(), with a mark
  * of the slide and the caret (or the slides chosen) that undone() puts back. The footnotes are at the slide's
- * foot (<to-notes>, kit/notes.ts), their words typed there: a mark tapped, or Footnote, puts the caret in its
+ * foot (<to-notes>, kit/draw/notes.ts), their words typed there: a mark tapped, or Footnote, puts the caret in its
  * note; Enter or Escape come back to the mark. A slide that shows another
  * document (a fence, a table) shows it as a card with a menu.
- * A link in a slide's words, in the show, is followed through the link guard (kit/link-guard.ts) and turns no slide.
+ * A link in a slide's words, in the show, is followed through the link guard (kit/ui/link-guard.ts) and turns no slide.
  *
- * The rail's thumbnails are the slides as rows (kit/rows.ts, docs/editing.md §6): a tap chooses one (Shift
+ * The rail's thumbnails are the slides as rows (kit/text/rows.ts, docs/editing.md §6): a tap chooses one (Shift
  * extends), its grip drags it, and chosen slides have the contextual bar and the keys (Delete, Alt+Up/Down,
  * Mod+D, Shift+arrows, Mod+A, Mod+C/X/V as TLO with our HTML). Escape in a box chooses its slide; Select All
  * with a box whole takes every slide; Enter or a double tap on a thumbnail edits it. The keys of §8: a new
  * slide is Mod+Shift+Enter, Present Mod+Alt+Enter, PageUp/PageDown on the rail only. A printed format shows
  * its sheets on request; presenting takes the focus and shows one slide at a time with the transition the
  * header names, and ends on the QR code of the deck. Two fingers on the slide in the show zoom it in place, as in a
- * spatial canvas (kit/pinch.ts pinchZoom): the show is its frame, scrolled to the rest; a pinch never turns a slide.
+ * spatial canvas (kit/ui/pinch.ts pinchZoom): the show is its frame, scrolled to the rest; a pinch never turns a slide.
  */
 import { html, nothing, type PropertyValues } from 'lit';
 import { keyed } from 'lit/directives/keyed.js';
 import { unsafeSVG } from 'lit/directives/unsafe-svg.js';
-import { motion, reducedMotion } from '../../kit/motion.ts';
-import { pinchZoom } from '../../kit/pinch.ts';
+import { motion, reducedMotion } from '../../kit/draw/motion.ts';
+import { pinchZoom } from '../../kit/ui/pinch.ts';
 import { ChevronDown, ChevronUp, GripVertical, StickyNote } from 'lucide';
 import { applyAll, parse, plainText, write, type Block, type Doc, type Op } from '../../doc/index.ts';
-import { lookup } from '../../kit/app.ts';
-import { cmdMenu, cmdTool, tool } from '../../kit/bar.ts';
-import { coarse, drawnIn, runKey } from '../../kit/commands.ts';
-import { BOLD, FOOTNOTE, HIGHLIGHT, INDENT, ITALIC, LINK, OUTDENT, STRIKE, UNDERLINE } from '../../kit/text-commands.ts';
+import { lookup } from '../../kit/core/app.ts';
+import { cmdMenu, cmdTool, tool } from '../../kit/ui/bar.ts';
+import { coarse, drawnIn, runKey } from '../../kit/core/commands.ts';
+import { BOLD, FOOTNOTE, HIGHLIGHT, INDENT, ITALIC, LINK, OUTDENT, STRIKE, UNDERLINE } from '../../kit/text/text-commands.ts';
 import COMMANDS, { EDIT, SHOW } from './commands.ts';
-import { docToHtml, linkToFence, pasteFrom } from '../../kit/clipboard.ts';
-import { encodeDoc } from '../../kit/codec.ts';
-import { editFence, editTable, makeDoc, newTable } from '../../kit/doc-dialog.ts';
-import { pageSvg } from '../../kit/draw.ts';
-import { DocElement, firstAt, type Entry } from '../../kit/element.ts';
-import { icon, iconNamed, UI } from '../../kit/icons.ts';
-import { t } from '../../kit/i18n.ts';
-import { noteMarks, type NoteMark, type ToNotes } from '../../kit/notes.ts';
-import { askDocLink } from '../../kit/insert-dialogs.ts';
-import type { MenuItem, ToMenu } from '../../kit/menu.ts';
-import { LOCKED_LANG, isOpened, placedLink } from '../../kit/locked.ts';
-import { OPENED_EVENT, openPlaced } from '../../kit/locked-doc.ts';
-import { Rows, type Clip, type RowItem, type RowRange, type RowSpan } from '../../kit/rows.ts';
-import type { Sel } from '../../kit/textops.ts';
-import type { NoteAt, TextOps, ToText } from '../../kit/text.ts';
+import { docToHtml, linkToFence, pasteFrom } from '../../kit/text/clipboard.ts';
+import { encodeDoc } from '../../kit/core/codec.ts';
+import { editFence, editTable, makeDoc, newTable } from '../../kit/ui/doc-dialog.ts';
+import { pageSvg } from '../../kit/draw/draw.ts';
+import { DocElement, firstAt, type Entry } from '../../kit/core/element.ts';
+import { icon, iconNamed, UI } from '../../kit/draw/icons.ts';
+import { t } from '../../kit/core/i18n.ts';
+import { noteMarks, type NoteMark, type ToNotes } from '../../kit/draw/notes.ts';
+import { askDocLink } from '../../kit/ui/insert-dialogs.ts';
+import type { MenuItem, ToMenu } from '../../kit/ui/menu.ts';
+import { LOCKED_LANG, isOpened, placedLink } from '../../kit/share/locked.ts';
+import { OPENED_EVENT, openPlaced } from '../../kit/ui/locked-doc.ts';
+import { Rows, type Clip, type RowItem, type RowRange, type RowSpan } from '../../kit/text/rows.ts';
+import type { Sel } from '../../kit/text/textops.ts';
+import type { NoteAt, TextOps, ToText } from '../../kit/text/text.ts';
 import {
   addSlide,
   duplicateSlides,
@@ -68,14 +68,14 @@ import {
   type Slide,
 } from './model.ts';
 import { closingPage, emptySlide, wantsClosing, geometryOf, layoutSlide, lookOf, pageCount, pageOf, pageSize, sheetsOf, SH, slidePage, slideSteps, subPage, SW, type Look } from './view.ts';
-import '../../kit/bar.ts';
-import '../../kit/doc-dialog.ts';
-import '../../kit/insert.ts';
-import '../../kit/menu.ts';
-import '../../kit/notes.ts';
-import '../../kit/text.ts';
+import '../../kit/ui/bar.ts';
+import '../../kit/ui/doc-dialog.ts';
+import '../../kit/ui/insert.ts';
+import '../../kit/ui/menu.ts';
+import '../../kit/draw/notes.ts';
+import '../../kit/text/text.ts';
 import './style.css';
-import { qrBlock } from '../../kit/qr-picture.ts';
+import { qrBlock } from '../../kit/draw/qr-picture.ts';
 
 export const tag = 'to-deck-editor';
 
@@ -139,7 +139,7 @@ export class ToDeckEditor extends DocElement<Slide[]> {
   /** A document has been read: a value after it is either ours, the head edited, or another document. */
   private loaded = false;
 
-  /** The slides chosen whole on the rail (kit/rows.ts): a tap on a thumbnail, its grip, Shift+arrows, Select All twice. */
+  /** The slides chosen whole on the rail (kit/text/rows.ts): a tap on a thumbnail, its grip, Shift+arrows, Select All twice. */
   readonly rows = new Rows<number>(this, {
     rows: () => this.rowItems(),
     box: () => this.querySelector<HTMLElement>('.deck-rail'),
@@ -469,7 +469,7 @@ export class ToDeckEditor extends DocElement<Slide[]> {
     this.change([...made.ops, ...moveSlide(doc, this.cur, j)]);
     this.cur = j;
   }
-  /* ---------- slides chosen whole (kit/rows.ts) ---------- */
+  /* ---------- slides chosen whole (kit/text/rows.ts) ---------- */
 
   /** The thumbnails of the slides written, as the rows controller takes them: each with the blocks of its slide. */
   private rowItems(): RowItem<number>[] {
@@ -557,8 +557,8 @@ export class ToDeckEditor extends DocElement<Slide[]> {
   /** The slide's icon, from the library, its own words suggesting; the deck's icon colour is in the Look menu. */
   async pickIcon() {
     const s = this.slide;
-    const { chooseIcon } = await import('../../kit/icons-picker.ts');
-    const { suggestIcons } = await import('../../kit/icons-search.ts');
+    const { chooseIcon } = await import('../../kit/ui/icons-picker.ts');
+    const { suggestIcons } = await import('../../kit/draw/icons-search.ts');
     const name = await chooseIcon({
       emoji: false,
       current: s.icon,
@@ -610,7 +610,7 @@ export class ToDeckEditor extends DocElement<Slide[]> {
   /** A locked document opened (here or in another card): the slide draws it. */
   private onOpened = () => this.requestUpdate();
   private openSubMenu = (e: Event) => {
-    // A locked document not yet opened: a tap asks for its password (kit/locked-doc.ts); opened, the menu.
+    // A locked document not yet opened: a tap asks for its password (kit/ui/locked-doc.ts); opened, the menu.
     const b = this.slide.sub >= 0 ? this.doc.blocks[this.slide.sub] : null;
     if (b?.k === 'fence' && b.lang === LOCKED_LANG && !isOpened(b.body)) return void openPlaced(b.body);
     this.subMenu = true;
@@ -691,7 +691,7 @@ export class ToDeckEditor extends DocElement<Slide[]> {
     // Out of the show, the focus comes back to the button that began it.
     if (i < 0 && was >= 0) void this.updateComplete.then(() => this.querySelector<HTMLButtonElement>('button.deck-present')?.focus({ preventScroll: true }));
   }
-  /** Present from the first slide: what a show link ("…?show", kit/route.ts) asks of the deck on arrival. */
+  /** Present from the first slide: what a show link ("…?show", kit/core/route.ts) asks of the deck on arrival. */
   present(fromLink = false) {
     this.fromLink = fromLink;
     if (this.slides.length) this.show(0);
@@ -1033,7 +1033,7 @@ export class ToDeckEditor extends DocElement<Slide[]> {
   protected updated(changed: PropertyValues<this>) {
     if (this.focusNext) void this.updateComplete.then(() => this.placeFocus());
     // A slide that comes on in the show starts its animations from the beginning; the one leaving is paused.
-    // With reduced motion, every animation here rests where it ends (kit/motion.ts).
+    // With reduced motion, every animation here rests where it ends (kit/draw/motion.ts).
     const show = this.querySelector('.deck-show');
     if (show && changed.has('showing')) {
       const was = show.querySelector('.was');

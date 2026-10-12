@@ -25,7 +25,7 @@ test('draw: a shape from a key and a click, then a pixel grid that becomes the b
         wide: document.documentElement.scrollWidth - document.documentElement.clientWidth,
       };
     });
-  // On a phone the bar comes with the focus (kit/chrome.ts indoc): the canvas is touched before the bar is reached for.
+  // On a phone the bar comes with the focus (kit/ui/chrome.ts indoc): the canvas is touched before the bar is reached for.
   await canvas.click({ position: { x: 4, y: 4 } });
   // (The bar glides in: measured once it has settled.)
   await expect.poll(async () => (await measure()).rows).toBe(1);
@@ -43,7 +43,7 @@ test('draw: a shape from a key and a click, then a pixel grid that becomes the b
   expect(after.bar).toBe(first.bar);
   expect(after.pageTop).toBe(0);
   // Pixel mode from the menu: a square painted, then the grid made the background. (On a phone the chosen shape's bar is
-  // the bottom row and the app's bar steps aside under it, kit/context.ts docked: the shape is let go first.)
+  // the bottom row and the app's bar steps aside under it, kit/ui/context.ts docked: the shape is let go first.)
   await canvas.click({ position: { x: box.width - 4, y: box.height - 4 } });
   await page.locator('.draw-mode > button').click();
   await page.getByRole('menuitemcheckbox', { name: 'Pixels 8×8' }).click();
@@ -68,7 +68,7 @@ test("draw: a shape tapped has its contextual bar inside the screen, and the bar
   const touch = !!info.project.use.hasTouch;
   const box = (await canvas.boundingBox())!;
   const at = (x: number, y: number) => ({ position: { x: (x / 640) * box.width, y: (y / 400) * box.height } });
-  // On a phone the bar comes with the focus (kit/chrome.ts indoc): the canvas is touched before the bar is reached for.
+  // On a phone the bar comes with the focus (kit/ui/chrome.ts indoc): the canvas is touched before the bar is reached for.
   if (touch) await canvas.tap(at(600, 380));
   // A rectangle at (192, 120), 96 by 48; a tap on nothing lets it go, a tap on it takes it again.
   await page.getByRole('button', { name: /^Rectangle/ }).click();
@@ -145,7 +145,7 @@ test("draw by finger: two taps on a shape type its words; the fitted canvas and 
   const touch = !!info.project.use.hasTouch;
   const box = (await canvas.boundingBox())!;
   const at = (x: number, y: number) => ({ position: { x: (x / 640) * box.width, y: (y / 400) * box.height } });
-  // On a phone the bar comes with the focus (kit/chrome.ts indoc): the canvas is touched before the bar is reached for.
+  // On a phone the bar comes with the focus (kit/ui/chrome.ts indoc): the canvas is touched before the bar is reached for.
   if (touch) await canvas.tap(at(600, 380));
   const hit = (x: number, y: number) => (touch ? canvas.tap(at(x, y)) : canvas.click(at(x, y)));
   await page.getByRole('button', { name: /^Rectangle/ }).click();
@@ -192,7 +192,7 @@ test("draw: the turn handle is in reach above a chosen shape and turns it; a fin
   const touch = !!info.project.use.hasTouch;
   const box = (await canvas.boundingBox())!;
   const at = (x: number, y: number) => ({ position: { x: (x / 640) * box.width, y: (y / 400) * box.height } });
-  // On a phone the bar comes with the focus (kit/chrome.ts indoc): the canvas is touched before the bar is reached for.
+  // On a phone the bar comes with the focus (kit/ui/chrome.ts indoc): the canvas is touched before the bar is reached for.
   if (touch) await canvas.tap(at(600, 380));
   const hit = (x: number, y: number) => (touch ? canvas.tap(at(x, y)) : canvas.click(at(x, y)));
   // Two rectangles, 96 by 48: at (96, 120) and (320, 120).

@@ -5,12 +5,12 @@
 import { test, expect, afterEach } from 'vitest';
 import { render, html } from 'lit';
 import { mount, tick, until } from './helpers.ts';
-import { appOf } from '../../src/kit/apps.ts';
-import { decodeDoc } from '../../src/kit/codec.ts';
-import { forgetTemplates, templatesOf, type ToTemplates } from '../../src/kit/home.ts';
-import type { Template } from '../../src/kit/app.ts';
-import { UI } from '../../src/kit/icons.ts';
-import { onLanguage, register, setLanguage } from '../../src/kit/i18n.ts';
+import { appOf } from '../../src/kit/core/apps.ts';
+import { decodeDoc } from '../../src/kit/core/codec.ts';
+import { forgetTemplates, templatesOf, type ToTemplates } from '../../src/kit/ui/home.ts';
+import type { Template } from '../../src/kit/core/app.ts';
+import { UI } from '../../src/kit/draw/icons.ts';
+import { onLanguage, register, setLanguage } from '../../src/kit/core/i18n.ts';
 import { templates as sheetTemplates } from '../../src/apps/sheet/templates.ts';
 
 afterEach(async () => {

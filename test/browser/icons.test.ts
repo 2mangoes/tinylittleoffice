@@ -1,12 +1,12 @@
-// An icon in rich text is drawn as the icon (kit/text.ts, kit/icons.ts): a starter icon at once, any other Lucide
+// An icon in rich text is drawn as the icon (kit/text/text.ts, kit/draw/icons.ts): a starter icon at once, any other Lucide
 // icon after the one lazy load, an unknown name as its name in small type, written back unchanged; and the icon
-// picker's second set, Emoji (kit/icons-picker.ts, kit/emoji-data.ts).
+// picker's second set, Emoji (kit/ui/icons-picker.ts, kit/draw/emoji-data.ts).
 import { expect, test } from 'vitest';
 import { parse, write } from '../../src/doc/index.ts';
-import { copyData } from '../../src/kit/clipboard.ts';
-import { encodeDoc } from '../../src/kit/codec.ts';
-import { iconNamed } from '../../src/kit/icons.ts';
-import type { ToText } from '../../src/kit/text.ts';
+import { copyData } from '../../src/kit/text/clipboard.ts';
+import { encodeDoc } from '../../src/kit/core/codec.ts';
+import { iconNamed } from '../../src/kit/draw/icons.ts';
+import type { ToText } from '../../src/kit/text/text.ts';
 import { mount, until } from './helpers.ts';
 
 const DOC = 'A :rocket: and a :car-front: and a :no-such-icon: here.\n';
@@ -45,7 +45,7 @@ test('the Word Processor draws an icon as the icon, never as :name:', async () =
 
 test('the picker searches icons and emoji at once; an emoji picked is its character, put in as words', async () => {
   document.body.innerHTML = '';
-  const { chooseIcon } = await import('../../src/kit/icons-picker.ts');
+  const { chooseIcon } = await import('../../src/kit/ui/icons-picker.ts');
   const chosen = chooseIcon();
   await until(() => !!document.querySelector('.to-icons-search'));
   // The two sets, Icons browsed first.

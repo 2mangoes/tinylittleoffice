@@ -8,10 +8,10 @@ import { page } from 'vitest/browser';
 import '../../../styles.css';
 import '../editor.ts';
 import type { ToAnimEditor } from '../editor.ts';
-import type { ToDialog } from '../../../kit/dialog.ts';
+import type { ToDialog } from '../../../kit/ui/dialog.ts';
 import def from '../def.ts';
 import { until } from '../../../../test/browser/helpers.ts';
-import { remScale } from '../../../kit/zoom.ts';
+import { remScale } from '../../../kit/ui/zoom.ts';
 
 const SHAPES = 'Kind | X | Y | W | H | Style | Label\n--- | --- | --- | --- | --- | --- | ---\nt | 4 | 20 | 20 | 4 | 04 | Lift off\ni | 8 | 36 | 8 | 8 | 0b | rocket\n';
 const LIFT = '---\nframes: 24\nfps: 8\n---\n' + SHAPES + '\nShape | Keys\n--- | ---\n0 | 0,0,0,0,1,0; 23,0,-80,0,1,0,i\n1 | 0,0,0,0,1,0; 23,200,-200,80,1,-30,d\n';
@@ -226,8 +226,8 @@ test("the GIF repeats as the motion says (once: no loop block; bounce: there and
   expect(has(bounce)).toBe(true);
   expect(count(bounce)).toBe(10);
   // A bold label rasterises differently from a plain one: the tspan is drawn.
-  const { pixels } = await import('../../../kit/raster.ts');
-  const { pageSvg } = await import('../../../kit/draw.ts');
+  const { pixels } = await import('../../../kit/draw/raster.ts');
+  const { pageSvg } = await import('../../../kit/draw/draw.ts');
   const { frameSvg } = await import('../view.ts');
   const { readAnim } = await import('../model.ts');
   const { parse } = await import('../../../doc/index.ts');

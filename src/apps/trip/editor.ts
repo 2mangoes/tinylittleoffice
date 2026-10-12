@@ -29,17 +29,17 @@
 import { html, nothing, type PropertyDeclarations, type PropertyValues } from 'lit';
 import type * as Leaflet from 'leaflet';
 import { applyAll, parse, plainText, write, type Block, type Doc, type Op } from '../../doc/index.ts';
-import { cmdMenu, cmdTool } from '../../kit/bar.ts';
-import { drawnIn, runKey } from '../../kit/commands.ts';
+import { cmdMenu, cmdTool } from '../../kit/ui/bar.ts';
+import { drawnIn, runKey } from '../../kit/core/commands.ts';
 import TRIP, { AT } from './commands.ts';
-import { docToHtml, GENERATOR, htmlToBlocks } from '../../kit/clipboard.ts';
-import { DocElement, type Entry } from '../../kit/element.ts';
-import { icon, UI } from '../../kit/icons.ts';
-import { language, t } from '../../kit/i18n.ts';
-import type { ToDialog } from '../../kit/dialog.ts';
-import { lastCopied, Rows, type Clip, type RowItem, type RowRange } from '../../kit/rows.ts';
-import { caret } from '../../kit/textops.ts';
-import type { TextOps, ToText } from '../../kit/text.ts';
+import { docToHtml, GENERATOR, htmlToBlocks } from '../../kit/text/clipboard.ts';
+import { DocElement, type Entry } from '../../kit/core/element.ts';
+import { icon, UI } from '../../kit/draw/icons.ts';
+import { language, t } from '../../kit/core/i18n.ts';
+import type { ToDialog } from '../../kit/ui/dialog.ts';
+import { lastCopied, Rows, type Clip, type RowItem, type RowRange } from '../../kit/text/rows.ts';
+import { caret } from '../../kit/text/textops.ts';
+import type { TextOps, ToText } from '../../kit/text/text.ts';
 import {
   addStop,
   distanceKm,
@@ -60,15 +60,15 @@ import {
   type Stop,
   type TripView,
 } from './model.ts';
-import '../../kit/bar.ts';
-import '../../kit/insert.ts';
-import '../../kit/menu.ts';
-import '../../kit/dialog.ts';
-import '../../kit/text.ts';
+import '../../kit/ui/bar.ts';
+import '../../kit/ui/insert.ts';
+import '../../kit/ui/menu.ts';
+import '../../kit/ui/dialog.ts';
+import '../../kit/text/text.ts';
 import './style.css';
-import { origin } from '../../kit/network.ts';
+import { origin } from '../../kit/core/network.ts';
 import { CITY, homeView } from './home.ts';
-import { reveal } from '../../kit/scroll.ts';
+import { reveal } from '../../kit/ui/scroll.ts';
 
 export const tag = 'to-trip-editor';
 
@@ -662,7 +662,7 @@ export class ToTripEditor extends DocElement<TripView> {
     void this.updateComplete.then(() => this.querySelector<HTMLElement>('to-insert button')?.focus({ preventScroll: true }));
   }
 
-  /* ---------- stops chosen whole (kit/rows.ts) ---------- */
+  /* ---------- stops chosen whole (kit/text/rows.ts) ---------- */
 
   private rowItems(): RowItem<number>[] {
     const host = this;

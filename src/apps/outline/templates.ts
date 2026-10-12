@@ -5,8 +5,8 @@
  * then the shapes another app draws (a novel, a book, a company and a family, each handed off), and last the
  * trees you walk by answering yes or no. What each is for is in templates.md.
  */
-import type { Template } from '../../kit/app.ts';
-import { t } from '../../kit/i18n.ts';
+import type { Template } from '../../kit/core/app.ts';
+import { t } from '../../kit/core/i18n.ts';
 import { column, text, write, type Block, type Dir } from '../../doc/index.ts';
 import { docBlock, itemBlock } from './model.ts';
 

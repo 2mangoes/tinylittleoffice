@@ -1,5 +1,5 @@
 /**
- * The Calculator's commands (kit/commands.ts), its editor the context: the bar (Calculator, Graph, Insert ▾ with the
+ * The Calculator's commands (kit/core/commands.ts), its editor the context: the bar (Calculator, Graph, Insert ▾ with the
  * functions and the units, Clear the tape), the entry line's keys (docs/editing.md §8: Enter works the line out, Up
  * and Down recall the tape with no modifier, Escape clears the line, Mod+A twice takes the tape) and a tape line's
  * (Enter puts it down, Escape puts back what it said or chooses it, Alt+Up/Down move it, Shift+Up/Down choose it,
@@ -7,9 +7,9 @@
  * is typed in (`here`, which the editor sets as the key comes).
  */
 import { Calculator, ChartSpline } from 'lucide';
-import { register, type Command, commandsOf } from '../../kit/commands.ts';
-import { t } from '../../kit/i18n.ts';
-import { UI } from '../../kit/icons.ts';
+import { register, type Command, commandsOf } from '../../kit/core/commands.ts';
+import { t } from '../../kit/core/i18n.ts';
+import { UI } from '../../kit/draw/icons.ts';
 import type { ToCalcEditor } from './editor.ts';
 
 type K = ToCalcEditor;

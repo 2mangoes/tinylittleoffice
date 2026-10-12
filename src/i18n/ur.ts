@@ -2,7 +2,7 @@
  * Tiny Little Office in Urdu, as it is spoken and written in Jackson Heights, Little Pakistan in Brooklyn and the Bronx
  * (آپ, everyday words, computing words as people say them). Right to left. Keys are the English strings of en.ts.
  */
-import type { Strings } from '../kit/i18n.ts';
+import type { Strings } from '../kit/core/i18n.ts';
 
 export default {
   // ---- the shell: header ----
@@ -60,7 +60,7 @@ export default {
     'Tiny Little Office': 'Tiny Little Office', // same
     'About Tiny Little Office': 'Tiny Little Office کا تعارف',
 
-  // ---- links that leave the site (kit/link-guard.ts) ----
+  // ---- links that leave the site (kit/ui/link-guard.ts) ----
   // The menu button's tooltip: the Office mark is the menu.
     'Tiny Little Office menu': 'Tiny Little Office مینو',
   // The question before a link that leaves the site: "You are leaving Tiny Little Office for" over the site's name, large.
@@ -79,7 +79,7 @@ export default {
 
   // ---- the copy kept on the device (status lines under the switch) ----
 
-  // ---- sharing: the Share dialog (kit/shell.ts), where the link fits (kit/limits.ts), the arrival banner ----
+  // ---- sharing: the Share dialog (kit/core/shell.ts), where the link fits (kit/share/limits.ts), the arrival banner ----
     'A copy opened in a new tab': 'نئے ٹیب میں کھلی ایک کاپی',
     'Copy display link': 'ڈسپلے لنک کاپی کریں',
     'Copy into a new document': 'نئی دستاویز میں کاپی کریں',
@@ -132,7 +132,7 @@ export default {
     'Link': 'لنک',
     'Short link': 'مختصر لنک',
 
-  // ---- privacy (kit/privacy.ts, kit/privacy-dialog.ts): the password, what the device holds ----
+  // ---- privacy (kit/share/privacy.ts, kit/ui/privacy-dialog.ts): the password, what the device holds ----
   // The Share dialog's head line: "Created 9 Oct 2026, 14:03 · by Paul".
     'Anyone with the link will need the password to open it. Nobody can reset it: lose it and the document is gone.': 'جس کے پاس بھی لنک ہو اسے کھولنے کے لیے پاس ورڈ چاہیے ہوگا۔ اسے کوئی ری سیٹ نہیں کر سکتا: کھو گیا تو دستاویز گئی۔',
     'Change password': 'پاس ورڈ بدلیں',
@@ -179,7 +179,7 @@ export default {
     'Copy this and send it another way than the link. It cannot be shown again.': 'اسے کاپی کریں اور لنک کے علاوہ کسی اور طریقے سے بھیجیں۔ یہ دوبارہ نہیں دکھایا جا سکتا۔',
     'Make another': 'دوسرا بنائیں',
 
-  // ---- a document locked with a password, placed inside another (kit/locked.ts, kit/locked-doc.ts) ----
+  // ---- a document locked with a password, placed inside another (kit/share/locked.ts, kit/ui/locked-doc.ts) ----
   // The card drawn where it sits; {app} is the app's name: "A Spreadsheet document, locked with a password".
     'Locked with a password': 'پاس ورڈ سے مقفل',
     'A {app} document, locked with a password': '{app} کی ایک دستاویز، پاس ورڈ سے مقفل',
@@ -202,7 +202,7 @@ export default {
   // The group heading the Calendar and the Trip Planner sit under on the home page.
     'Plan': 'منصوبہ',
     'Chosen tasks': 'چنے ہوئے کام',
-  // A link that opens the document (kit/compare.ts).
+  // A link that opens the document (kit/ui/compare.ts).
     'Open': 'کھولیں',
     'Task': 'کام',
     'Tasks': 'کام',
@@ -368,7 +368,7 @@ export default {
     'Terms of service': 'سروس کی شرائط',
     'A small business\'s terms in plain words: booking, prices, keys, what if, ending.': 'ایک چھوٹے کاروبار کی شرائط سادہ الفاظ میں: بکنگ، قیمتیں، چابیاں، اگر ایسا ہو تو، ختم کرنا۔',
 
-  // ---- Insert's dialog (kit/insert-dialogs.ts): Tiny Little Office Doc ----
+  // ---- Insert's dialog (kit/ui/insert-dialogs.ts): Tiny Little Office Doc ----
     'A Tiny Little Office link': 'Tiny Little Office کا لنک',
     'Opening the short link…': 'مختصر لنک کھل رہا ہے…',
     'Paste the link of another Tiny Little Office document, long or short: its first page shows here.': 'Tiny Little Office کی کسی اور دستاویز کا لنک پیسٹ کریں، لمبا یا مختصر: اس کا پہلا صفحہ یہاں دکھائی دے گا۔',
@@ -377,11 +377,11 @@ export default {
     'Tiny Little Office Doc…': 'Tiny Little Office دستاویز…',
   // Insert ▾'s group of the apps a new document can be made in, inside this one.
     'A new document': 'نئی دستاویز',
-  // ---- another document edited in place (kit/doc-dialog.ts); a table's size is Rows × Columns ----
+  // ---- another document edited in place (kit/ui/doc-dialog.ts); a table's size is Rows × Columns ----
     'Cancel': 'منسوخ',
     'Rows': 'قطاریں',
 
-  // ---- charts (kit/chart.ts) ----
+  // ---- charts (kit/draw/chart.ts) ----
     'An empty chart': 'خالی چارٹ',
     'Bars': 'بار',
     'Flows (Sankey)': 'بہاؤ (Sankey)',
@@ -530,10 +530,10 @@ export default {
     'Unlock these cells': 'ان خانوں کو کھولیں',
     'What it holds; sort; columns': 'اس میں کیا ہے؛ ترتیب؛ کالم',
 
-  // ---- downloads: hand-offs to another app (kit/exports.ts) ----
+  // ---- downloads: hand-offs to another app (kit/file/exports.ts) ----
     'Open in': 'میں کھولیں',
 
-  // ---- the icon library (kit/icons-picker.ts) ----
+  // ---- the icon library (kit/ui/icons-picker.ts) ----
     'Icon': 'آئیکن',
     'Favorites': 'پسندیدہ',
     'Search icons': 'آئیکن تلاش کریں',

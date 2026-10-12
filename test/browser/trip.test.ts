@@ -7,7 +7,7 @@ import '../../src/styles.css';
 import '../../src/apps/trip/editor.ts';
 import type { ToTripEditor } from '../../src/apps/trip/editor.ts';
 import { COUNTRIES } from '../../src/apps/trip/countries.ts';
-import { language, setLanguage, t } from '../../src/kit/i18n.ts';
+import { language, setLanguage, t } from '../../src/kit/core/i18n.ts';
 import { cdp, page } from 'vitest/browser';
 import { mount, openDrawerDoc, tick, until, settled } from './helpers.ts';
 
@@ -158,7 +158,7 @@ test('a pin panned out of the map’s box is inert, out of Tab’s reach, and re
   expect(reachable().length).toBeGreaterThan(0);
 });
 
-// The walks found the focus left on the hidden box that holds a phone's keyboard up (kit/chrome.ts startEditing): a
+// The walks found the focus left on the hidden box that holds a phone's keyboard up (kit/ui/chrome.ts startEditing): a
 // tap that makes a new document whose link is the one on view (Blank, on a blank trip) opens nothing, so nothing took
 // the focus from it. The document on view takes it where a person starts (docs/editing.md §1): an empty trip's map.
 test('390×844 with a finger: Blank chosen on a blank trip leaves the focus where a person starts, never on the keyboard’s hold', async () => {

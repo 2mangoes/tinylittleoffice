@@ -4,7 +4,7 @@
 import { test, expect, afterAll } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { t, register, setLanguage, languages, languageName, missed } from '../src/kit/i18n.ts';
+import { t, register, setLanguage, languages, languageName, missed } from '../src/kit/core/i18n.ts';
 import { checkLanguage, gaps, languageFiles, likeness, nearest, pluralCount, placeholders, tokens, withForms } from '../scripts/i18n-extract.ts';
 import { pseudo } from './pseudo.ts';
 import en from '../src/i18n/en.ts';

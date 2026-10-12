@@ -62,7 +62,7 @@ against alteration: anyone who passes it on can change it.
 
 **A scam link inside a document.** Words in a document can say one address and link to another. No link that
 leaves the site opens without first showing, large, the site it goes to and the whole address, with Cancel
-as the default (`src/kit/link-guard.ts`); a link to anything but a web page, an email address or a phone
+as the default (`src/kit/ui/link-guard.ts`); a link to anything but a web page, an email address or a phone
 number never opens. A document never runs code, and nothing in one is drawn as a
 page of its own. The address is drawn left to
 right, set apart from the words around it, in every language, and an email address or a phone number that hides
@@ -77,7 +77,7 @@ link, which asks before it opens (above).
 that say nothing of a document: the size of everything (`tinyoffice.size`) and the theme (`to-theme`), both
 cleared by Forget everything. Nothing is written to the device for the language, in either state: the link
 carries it. With Save in browser on, the
-device keeps the preferences, the documents opened there (`src/kit/library.ts`),
+device keeps the preferences, the documents opened there (`src/kit/share/library.ts`),
 the short links made there. A document under a password is kept as its
 ciphertext with no title and no first words, so the library does not give away even its name. Nothing else
 is encrypted by Tiny Little Office: the rest is as safe as the phone's lock and the operating system's own

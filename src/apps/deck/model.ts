@@ -16,7 +16,7 @@
  * and every command here is a list of the kernel's operations.
  */
 import { apply, isInnerDoc, isText, notesOf, pages, parse, plainText, write, type Attrs, type Block, type Doc, type Op, type Run } from '../../doc/index.ts';
-import { t } from '../../kit/i18n.ts';
+import { t } from '../../kit/core/i18n.ts';
 import { ICON_COLORS, THEMES, themeOf } from './theme.ts';
 
 /** '' bullets (words as written: items dotted, paragraphs plain), 't' title, '2' two columns, 'i' big icon. */

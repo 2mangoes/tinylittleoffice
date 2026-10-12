@@ -1,5 +1,5 @@
 /**
- * The Calendar's commands (kit/commands.ts), its editor the context: the bar (back, Today, on; View ▾ month, year or
+ * The Calendar's commands (kit/core/commands.ts), its editor the context: the bar (back, Today, on; View ▾ month, year or
  * schedule; Insert ▾ an event or a task; the colour for new entries ▾; the time zone), the schedule's own items in the
  * bar under chosen tasks (a day earlier, a day later, Dates…), and the keys (docs/editing.md §6 and §8): in a task's
  * words Tab and Shift+Tab nest it, Alt+Up/Down move it, Up and Down go to the task before or after, Mod+D duplicates
@@ -10,9 +10,9 @@
  * `here` (the task's block, or the day, or the entry), which the editor sets as the key comes.
  */
 import { ArrowLeft, ArrowRight, CalendarDays, ChartGantt, ChevronLeft, ChevronRight, Globe, Grid3x3 } from 'lucide';
-import { register, type Command, commandsOf } from '../../kit/commands.ts';
-import { t } from '../../kit/i18n.ts';
-import { UI } from '../../kit/icons.ts';
+import { register, type Command, commandsOf } from '../../kit/core/commands.ts';
+import { t } from '../../kit/core/i18n.ts';
+import { UI } from '../../kit/draw/icons.ts';
 import { CAL_COLORS } from './model.ts';
 import type { ToCalEditor } from './editor.ts';
 

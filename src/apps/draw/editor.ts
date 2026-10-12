@@ -12,22 +12,22 @@
 import { html, nothing, svg, type PropertyDeclarations } from 'lit';
 import { unsafeSVG } from 'lit/directives/unsafe-svg.js';
 import { Accessibility, Grid2x2, Layers, Shapes } from 'lucide';
-import { cmdBtn, cmdMenu, cmdTool } from '../../kit/bar.ts';
-import { contextOf, drawnIn, labelOf, run, runKey } from '../../kit/commands.ts';
+import { cmdBtn, cmdMenu, cmdTool } from '../../kit/ui/bar.ts';
+import { contextOf, drawnIn, labelOf, run, runKey } from '../../kit/core/commands.ts';
 import COMMANDS, { ALIGN_KEYS, CANVAS_KEYS, PIXEL_INKS, PIXEL_KEYS, TOOLS, TURN_STEP, TYPING, type Tool } from './commands.ts';
-import { DocElement, type Entry } from '../../kit/element.ts';
-import { icon, UI } from '../../kit/icons.ts';
-import { t } from '../../kit/i18n.ts';
-import { type ContextEntry, type ToContext } from '../../kit/context.ts';
-import { docToHtml, htmlToBlocks } from '../../kit/clipboard.ts';
-import { textWidth } from '../../kit/draw.ts';
-import type { ToDialog } from '../../kit/dialog.ts';
-import { toast } from '../../kit/toast.ts';
-import { pinchZoom } from '../../kit/pinch.ts';
-import { TILE_INKS, tileCss, tileFilled, tilePattern, tileRef } from '../../kit/tile.ts';
+import { DocElement, type Entry } from '../../kit/core/element.ts';
+import { icon, UI } from '../../kit/draw/icons.ts';
+import { t } from '../../kit/core/i18n.ts';
+import { type ContextEntry, type ToContext } from '../../kit/ui/context.ts';
+import { docToHtml, htmlToBlocks } from '../../kit/text/clipboard.ts';
+import { textWidth } from '../../kit/draw/draw.ts';
+import type { ToDialog } from '../../kit/ui/dialog.ts';
+import { toast } from '../../kit/ui/toast.ts';
+import { pinchZoom } from '../../kit/ui/pinch.ts';
+import { TILE_INKS, tileCss, tileFilled, tilePattern, tileRef } from '../../kit/draw/tile.ts';
 import { applyAll, runLength, write, type Block, type Doc, type Op, type Run } from '../../doc/index.ts';
-import type { TextOps, ToText } from '../../kit/text.ts';
-import { caret, insertRuns } from '../../kit/textops.ts';
+import type { TextOps, ToText } from '../../kit/text/text.ts';
+import { caret, insertRuns } from '../../kit/text/textops.ts';
 import {
   GRID,
   H,
@@ -75,12 +75,12 @@ import {
   type Shape,
 } from './model.ts';
 import { TILE_SIDE, arrowDefs, shapeSvg, turnOf, type Theme } from './view.ts';
-import '../../kit/bar.ts';
-import '../../kit/insert.ts';
-import '../../kit/menu.ts';
-import '../../kit/dialog.ts';
-import '../../kit/context.ts';
-import '../../kit/text.ts';
+import '../../kit/ui/bar.ts';
+import '../../kit/ui/insert.ts';
+import '../../kit/ui/menu.ts';
+import '../../kit/ui/dialog.ts';
+import '../../kit/ui/context.ts';
+import '../../kit/text/text.ts';
 import './style.css';
 
 export const tag = 'to-draw-editor';
@@ -191,7 +191,7 @@ export class ToDrawEditor extends DocElement<DrawView> {
   private svgEl: SVGSVGElement | null = null;
   /** The last tap on a shape by a finger or a pen, so a second one soon after on the same shape edits its words. */
   private lastTap = { idx: -1, at: 0 };
-  /** Two fingers are on the canvas: the pinch is kit/pinch.ts's, and the pointers are not the tools'. */
+  /** Two fingers are on the canvas: the pinch is kit/ui/pinch.ts's, and the pointers are not the tools'. */
   private pinching = false;
   private unpinch: (() => void) | null = null;
   /** Counts the pixel strokes, so each stroke is one undo step. */
@@ -437,7 +437,7 @@ export class ToDrawEditor extends DocElement<DrawView> {
   }
   /** The Icon button: on a selected shape the icon goes before its label (or is the icon, for an icon shape); with none selected, the next tap places it on its own. */
   async pickIcon() {
-    const { chooseIcon } = await import('../../kit/icons-picker.ts');
+    const { chooseIcon } = await import('../../kit/ui/icons-picker.ts');
     const s = this.selected;
     const name = await chooseIcon({ emoji: false, current: s ? iconOf(s.text)[0] : undefined, none: !!s && !!iconOf(s.text)[0] && s.k !== 'i' });
     this.focusCanvas();

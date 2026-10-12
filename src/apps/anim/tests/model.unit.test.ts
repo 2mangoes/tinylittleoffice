@@ -35,9 +35,9 @@ import { animFrames, animPage, animToSvg, drawOrder, frameSvg, transformOf } fro
 import { templates } from '../templates.ts';
 import def from '../def.ts';
 import draw from '../../draw/def.ts';
-import { appOf } from '../../../kit/apps.ts';
+import { appOf } from '../../../kit/core/apps.ts';
 import { readDrawing } from '../../draw/model.ts';
-import { iconNamed } from '../../../kit/icons.ts';
+import { iconNamed } from '../../../kit/draw/icons.ts';
 
 const LIFT =
   '---\nframes: 24\nfps: 8\n---\nKind | X | Y | W | H | Style | Label\n--- | --- | --- | --- | --- | --- | ---\nt | 4 | 20 | 20 | 4 | 04 | Lift off\ni | 8 | 36 | 8 | 8 | 0b | rocket\n\nShape | Keys\n--- | ---\n0 | 0,0,0,0,1,0; 23,0,-80,0,1,0,i\n1 | 0,0,0,0,1,0; 23,200,-200,80,1,-30,d\n';

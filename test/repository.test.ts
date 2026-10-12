@@ -5,7 +5,7 @@ import { test, expect } from 'vitest';
 import { spawnSync } from 'node:child_process';
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
-import { REPO } from '../src/kit/version.ts';
+import { REPO } from '../src/kit/core/version.ts';
 import { yaml } from './yaml.ts';
 
 const root = join(import.meta.dirname, '..');

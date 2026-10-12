@@ -3,11 +3,11 @@
  * them over its background tile, the pixel grid as a picture. What `def.ts` builds its pages and files on;
  * the editor draws its shapes with the same shapeSvg, in the page's own colours.
  */
-import type { Page } from '../../kit/app.ts';
-import { INK, PAPER, SHADE, clip, pageSvg, r, rect, textWidth, wrapText, xml } from '../../kit/draw.ts';
-import { glyphNamed, iconNamed } from '../../kit/icons.ts';
-import { t } from '../../kit/i18n.ts';
-import { TILE_INKS, tilePattern, type Tile } from '../../kit/tile.ts';
+import type { Page } from '../../kit/core/app.ts';
+import { INK, PAPER, SHADE, clip, pageSvg, r, rect, textWidth, wrapText, xml } from '../../kit/draw/draw.ts';
+import { glyphNamed, iconNamed } from '../../kit/draw/icons.ts';
+import { t } from '../../kit/core/i18n.ts';
+import { TILE_INKS, tilePattern, type Tile } from '../../kit/draw/tile.ts';
 import { sliceRuns, type Doc, type Run } from '../../doc/index.ts';
 import { COLORS, H, W, canTurn, describeDrawing, iconOf, isLine, isLink, labelLines, linkEnds, paint, pairs, readDrawing, turnedBounds, type DrawView, type Shape } from './model.ts';
 

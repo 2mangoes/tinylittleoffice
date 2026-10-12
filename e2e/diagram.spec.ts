@@ -82,7 +82,7 @@ test('diagram: on a phone, a tap on a thing opens its words with the context bar
   await bar.getByRole('button', { name: 'Bring out' }).tap();
   await expect.poll(value).toBe('- Launch\n  - Pricing\n  - Pricing\n  - Launch\n    - Pricing\n  - Pricing\n');
   await expect(line).toBeFocused();
-  // A finger pans the picture and the browser never zooms it (a pinch there is the picture's own zoom, kit/pinch.ts).
+  // A finger pans the picture and the browser never zooms it (a pinch there is the picture's own zoom, kit/ui/pinch.ts).
   expect(await page.evaluate(() => getComputedStyle(document.querySelector('.dg-pic')!).touchAction)).toBe('pan-x pan-y');
   expect(errors).toEqual([]);
 });
@@ -92,8 +92,8 @@ test("diagram: on a phone, the thing's own Join joins the thing open to the next
   const errors: string[] = [];
   page.on('pageerror', (e) => errors.push(String(e)));
   await page.goto('/#/v1/diagram');
-  // On a phone the bar comes with the focus (kit/chrome.ts indoc), and the kind needs nothing in hand: it is a row of the
-  // drawer's This document while reading (kit/drawer.ts).
+  // On a phone the bar comes with the focus (kit/ui/chrome.ts indoc), and the kind needs nothing in hand: it is a row of the
+  // drawer's This document while reading (kit/ui/drawer.ts).
   await page.getByRole('button', { name: 'Menu' }).tap();
   await page.getByRole('region', { name: 'This document' }).getByRole('button', { name: 'Mind map' }).tap();
   await page.locator('[popover]:popover-open [role^=menuitem]').getByText('Network').tap();
@@ -108,7 +108,7 @@ test("diagram: on a phone, the thing's own Join joins the thing open to the next
   await expect(page.locator('to-text.dg-words')).toBeHidden();
   await page.locator('.dg-pic g.dg-thing[aria-label="Web"]').tap();
   // On a phone the thing's own bar is the bottom row while it is open, and the app's bar steps aside under it
-  // (kit/context.ts docked): its Join is the one in reach; armed, the thing closes and the app's Join says so.
+  // (kit/ui/context.ts docked): its Join is the one in reach; armed, the thing closes and the app's Join says so.
   const own = page.locator('to-context.dg-context .to-context').getByRole('button', { name: 'Join' });
   const r = (await own.boundingBox())!;
   expect(r.height).toBeGreaterThanOrEqual(44);

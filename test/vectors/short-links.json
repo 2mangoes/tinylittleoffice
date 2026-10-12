@@ -1,5 +1,5 @@
 {
-  "about": "Tiny Little Office short links (src/kit/short.ts, tinier/, docs/crypto/short-links.md). c = AES-256-GCM(key, iv, UTF-8 of the long link) with its 16-byte tag last and no additional data; key, iv and c travel as base64url without padding. The service stores c and iv; the short link is <service>/<id>#<key>. Fixed keys and IVs are for these vectors only: the site draws them from crypto.getRandomValues. Base64url here is RFC 4648's URL alphabet with '~' for 62 where the RFC has '-' (a hyphen is where a pasted link breaks a line), no padding; '-' is read as 62 too.",
+  "about": "Tiny Little Office short links (src/kit/share/short.ts, tinier/, docs/crypto/short-links.md). c = AES-256-GCM(key, iv, UTF-8 of the long link) with its 16-byte tag last and no additional data; key, iv and c travel as base64url without padding. The service stores c and iv; the short link is <service>/<id>#<key>. Fixed keys and IVs are for these vectors only: the site draws them from crypto.getRandomValues. Base64url here is RFC 4648's URL alphabet with '~' for 62 where the RFC has '-' (a hyphen is where a pasted link breaks a line), no padding; '-' is read as 62 too.",
   "cipher": {
     "name": "AES-GCM",
     "keyBits": 256,

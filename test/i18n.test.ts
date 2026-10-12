@@ -3,7 +3,7 @@ import { test, expect } from 'vitest';
 import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { t, register, setLanguage, browserLanguage, directionOf, languages } from '../src/kit/i18n.ts';
+import { t, register, setLanguage, browserLanguage, directionOf, languages } from '../src/kit/core/i18n.ts';
 import { commandKeys, definedKeys, languageFiles, placeholders, usedKeys, withMissing, MARK } from '../scripts/i18n-extract.ts';
 import { british } from './british.ts';
 import en from '../src/i18n/en.ts';

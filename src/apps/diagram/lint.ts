@@ -2,7 +2,7 @@
  * What the eye would see in a diagram, said in words and numbers, so an agent never opens a page to check one
  * (src/lint.ts runs it, for a diagram and for one fenced in another document). Every measure is the layout's
  * own: `layout()` places the shapes and Draw's `fitLabel` sets their words, as the page draws them, with the
- * fallback metrics the exports use (kit/draw.ts `textWidth`); nothing here draws, and nothing needs a browser.
+ * fallback metrics the exports use (kit/draw/draw.ts `textWidth`); nothing here draws, and nothing needs a browser.
  *
  *   edge-end      a connection naming no thing in the list (a tree draws it not at all)
  *   edge-unused   a connection in a kind that draws none (lanes, timeline, venn, seating)
@@ -14,7 +14,7 @@
 import { parse, type Doc } from '../../doc/index.ts';
 import { isLink, linkEnds, paint, type Shape } from '../draw/model.ts';
 import { fitLabel } from '../draw/view.ts';
-import { INK, PAPER, SHADE, textWidth } from '../../kit/draw.ts';
+import { INK, PAPER, SHADE, textWidth } from '../../kit/draw/draw.ts';
 import { edgesOf, isListed, isTree, kindOf, linesOf, nameOf, who, type KindId } from './model.ts';
 import { layout, type DShape } from './view.ts';
 import type { Found } from '../../lint.ts';

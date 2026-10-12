@@ -1,7 +1,7 @@
-// The Emoji set's table (kit/emoji-data.ts, written by scripts/emoji.ts) and its search (kit/emoji.ts).
+// The Emoji set's table (kit/draw/emoji-data.ts, written by scripts/emoji.ts) and its search (kit/draw/emoji.ts).
 import { expect, test } from 'vitest';
-import { EMOJI, EMOJI_GROUPS } from '../src/kit/emoji-data.ts';
-import { emojiIn, emojiName, searchEmoji } from '../src/kit/emoji.ts';
+import { EMOJI, EMOJI_GROUPS } from '../src/kit/draw/emoji-data.ts';
+import { emojiIn, emojiName, searchEmoji } from '../src/kit/draw/emoji.ts';
 
 test('the table: base emoji only, each once, named, fully qualified, every group non-empty', () => {
   expect(EMOJI_GROUPS).toEqual(['Smileys & Emotion', 'People & Body', 'Animals & Nature', 'Food & Drink', 'Travel & Places', 'Activities', 'Objects', 'Symbols', 'Flags']);

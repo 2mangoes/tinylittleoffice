@@ -3,7 +3,7 @@
 // setting on. The browser's worker API is faked so a registration, if one were asked for, would be counted.
 import { test, expect, afterEach, vi } from 'vitest';
 import { mount, until } from './helpers.ts';
-import { setKeeping } from '../../src/kit/store.ts';
+import { setKeeping } from '../../src/kit/core/store.ts';
 
 const real = Object.getOwnPropertyDescriptor(navigator, 'serviceWorker');
 afterEach(() => {

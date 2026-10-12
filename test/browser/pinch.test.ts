@@ -1,4 +1,4 @@
-// A pinch on a touch screen is the size of everything (kit/pinch.ts, kit/zoom.ts): two fingers spreading over the Word
+// A pinch on a touch screen is the size of everything (kit/ui/pinch.ts, kit/ui/zoom.ts): two fingers spreading over the Word
 // Processor change the size live with a pill showing it, lifting keeps it to the nearest 5%, the nav stops at 120%
 // while the words go on to 200%, a pinch begun on a spatial canvas changes nothing, the paragraph under the fingers
 // stays in view, and at 200% on a 390px screen the home page, Write and Outline all fit. Every size is drawn at
@@ -7,16 +7,16 @@
 import { test, expect, afterEach } from 'vitest';
 import { page } from 'vitest/browser';
 import { mount, tick, until, openShare, pinch, settled } from './helpers.ts';
-import { encodeDoc } from '../../src/kit/codec.ts';
-import { BASE, NAV_MAX, SIZE_MAX, size, stepSize, keepSize } from '../../src/kit/zoom.ts';
-import type { ToShell } from '../../src/kit/shell.ts';
-import type { ToDialog } from '../../src/kit/dialog.ts';
-import type { ToContext } from '../../src/kit/context.ts';
-import type { ToLinkPop } from '../../src/kit/link-pop.ts';
-import type { ToComplete } from '../../src/kit/complete.ts';
-import '../../src/kit/context.ts';
-import '../../src/kit/link-pop.ts';
-import '../../src/kit/complete.ts';
+import { encodeDoc } from '../../src/kit/core/codec.ts';
+import { BASE, NAV_MAX, SIZE_MAX, size, stepSize, keepSize } from '../../src/kit/ui/zoom.ts';
+import type { ToShell } from '../../src/kit/core/shell.ts';
+import type { ToDialog } from '../../src/kit/ui/dialog.ts';
+import type { ToContext } from '../../src/kit/ui/context.ts';
+import type { ToLinkPop } from '../../src/kit/ui/link-pop.ts';
+import type { ToComplete } from '../../src/kit/ui/complete.ts';
+import '../../src/kit/ui/context.ts';
+import '../../src/kit/ui/link-pop.ts';
+import '../../src/kit/ui/complete.ts';
 
 afterEach(async () => {
   stepSize(0);
@@ -154,7 +154,7 @@ function fits(shell: ToShell, where: string, nav = NAV_MAX) {
     }
   }
   const burger = shell.querySelector<HTMLElement>('.to-burger')!.getBoundingClientRect();
-  // At the inline end (kit/chrome.ts: the words begin at the other side).
+  // At the inline end (kit/ui/chrome.ts: the words begin at the other side).
   expect(burger.right, `${where}: the burger at the right`).toBeGreaterThan(innerWidth - 40);
   expect(burger.right, `${where}: the burger inside the screen`).toBeLessThanOrEqual(innerWidth + 0.5);
   expect(burger.top, `${where}: the burger at the top`).toBeLessThan(60);

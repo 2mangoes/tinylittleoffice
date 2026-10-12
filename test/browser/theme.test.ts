@@ -1,7 +1,7 @@
 // The theme: a choice in the menu sets data-theme on <html>; "auto" follows the device. Kept on the device in Private
-// too, as the language and the size are (kit/store.ts).
+// too, as the language and the size are (kit/core/store.ts).
 import { test, expect, afterEach } from 'vitest';
-import { setTheme, theme, applyTheme } from '../../src/kit/theme.ts';
+import { setTheme, theme, applyTheme } from '../../src/kit/ui/theme.ts';
 import { mount, until } from './helpers.ts';
 
 // This origin's localStorage is every browser test file's: the theme chosen here goes with the test.

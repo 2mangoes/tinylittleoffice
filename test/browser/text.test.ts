@@ -1,20 +1,20 @@
 // <to-text> in a real Chromium: typing through beforeinput, Enter and Backspace per shape, marks, chips, cards, the
 // clipboard, the selection round trip for every kind of block, an IME composition, undo and redo through the op log,
 // the selection bubble, footnote marks asking their host for the note (`text-note`: the notes are typed where the
-// host draws them, kit/notes.ts, tested with the hosts), and a 390px run (no page scroll on focus; the bubble inside
+// host draws them, kit/draw/notes.ts, tested with the hosts), and a 390px run (no page scroll on focus; the bubble inside
 // the visual viewport).
 import { expect, test } from 'vitest';
 import { page } from 'vitest/browser';
 import { applyAll, parse, write, type Doc } from '../../src/doc/index.ts';
-import { htmlToBlocks } from '../../src/kit/clipboard.ts';
-import { encodeDoc } from '../../src/kit/codec.ts';
-import { History } from '../../src/kit/history.ts';
-import { caret, type Sel, type Shape } from '../../src/kit/textops.ts';
-import type { NoteAt, TextOps, ToText } from '../../src/kit/text.ts';
+import { htmlToBlocks } from '../../src/kit/text/clipboard.ts';
+import { encodeDoc } from '../../src/kit/core/codec.ts';
+import { History } from '../../src/kit/text/history.ts';
+import { caret, type Sel, type Shape } from '../../src/kit/text/textops.ts';
+import type { NoteAt, TextOps, ToText } from '../../src/kit/text/text.ts';
 import { tick, until } from './helpers.ts';
 import '../../src/styles.css';
-import '../../src/kit/text.ts';
-import { appOf } from '../../src/kit/apps.ts';
+import '../../src/kit/text/text.ts';
+import { appOf } from '../../src/kit/core/apps.ts';
 
 /** The smallest host: applies the ops with the kernel, keeps the op log, hands the blocks back. */
 class Host {
@@ -232,7 +232,7 @@ test('icon and footnote chips are atomic: one character each, skipped by the car
   h.el.sel = caret(0, 4);
   await key(h, 'Delete');
   expect(h.tlo).toBe('a  b c\n');
-  // A footnote put in is its mark, numbered; the host is asked for its note (whose words it draws and takes, kit/notes.ts).
+  // A footnote put in is its mark, numbered; the host is asked for its note (whose words it draws and takes, kit/draw/notes.ts).
   const n = await mount('x\n', 'doc', caret(0, 1), true);
   n.el.exec('fn');
   await n.el.updateComplete;

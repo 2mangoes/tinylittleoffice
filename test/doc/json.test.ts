@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { expect, test } from 'vitest';
 import { fromJson, parse, toJson, write } from '../../src/api.ts';
-import { apps } from '../../src/kit/apps.ts';
+import { apps } from '../../src/kit/core/apps.ts';
 import { schemaOf } from '../../scripts/schema.ts';
 
 const ROOT = join(import.meta.dirname, '../..');

@@ -5,8 +5,8 @@
  * graphs. A line of words ending in a period or a colon is a note on the tape (model.ts, isNote): the dose
  * template says plainly that it is arithmetic, not advice. What each is for: templates.md.
  */
-import type { Template } from '../../kit/app.ts';
-import { t } from '../../kit/i18n.ts';
+import type { Template } from '../../kit/core/app.ts';
+import { t } from '../../kit/core/i18n.ts';
 
 const BILL = `---
 title: Dinner for six

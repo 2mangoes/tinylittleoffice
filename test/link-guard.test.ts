@@ -1,6 +1,6 @@
 // Where a link goes: here (it opens), elsewhere (asked first), or nowhere (refused).
 import { describe, expect, test } from 'vitest';
-import { leaving, where } from '../src/kit/link-guard.ts';
+import { leaving, where } from '../src/kit/ui/link-guard.ts';
 
 const BASE = 'https://tinylittleoffice.com/write/#/v1/write/abc';
 

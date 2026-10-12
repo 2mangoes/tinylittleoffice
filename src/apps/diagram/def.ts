@@ -6,9 +6,9 @@
  */
 import { Workflow } from 'lucide';
 import { apply, parse, write, type Doc as Kernel, type TextNode } from '../../doc/index.ts';
-import { defineApp, lookup, type Doc } from '../../kit/app.ts';
-import { utf8 } from '../../kit/draw.ts';
-import { t } from '../../kit/i18n.ts';
+import { defineApp, lookup, type Doc } from '../../kit/core/app.ts';
+import { utf8 } from '../../kit/draw/draw.ts';
+import { t } from '../../kit/core/i18n.ts';
 import { diagramToOutline, edgesOf, isTree, kindOf, linesOf } from './model.ts';
 import { diagramPage, diagramSvg, layout, toDrawing } from './view.ts';
 

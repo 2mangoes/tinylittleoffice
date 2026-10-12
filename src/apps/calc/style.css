@@ -56,7 +56,7 @@
   .calc-tape:focus {
     outline: none;
   }
-  /* Lines chosen whole (kit/rows.ts), and the one being carried. */
+  /* Lines chosen whole (kit/text/rows.ts), and the one being carried. */
   .calc-row.ranged {
     background: var(--to-accent-soft);
   }

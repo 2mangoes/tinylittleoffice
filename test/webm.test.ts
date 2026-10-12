@@ -1,9 +1,9 @@
-// The kit's WebM writer (src/kit/webm.ts muxWebm), under node: a file muxed from three fake chunks, walked by a tiny
+// The kit's WebM writer (src/kit/file/webm.ts muxWebm), under node: a file muxed from three fake chunks, walked by a tiny
 // EBML reader of the test's own. The header says webm; one video track with its codec and size; the blocks at 0, 100
 // and 250 ms; the Info's duration; Cues pointing at the clusters of the key frames, and a SeekHead pointing at the
 // rest; and every element's declared size is its bytes, so nothing is written with an unknown size.
 import { test, expect } from 'vitest';
-import { muxWebm } from '../src/kit/webm.ts';
+import { muxWebm } from '../src/kit/file/webm.ts';
 
 interface El {
   id: number;

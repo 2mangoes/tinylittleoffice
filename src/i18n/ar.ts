@@ -3,7 +3,7 @@
  * المفاتيح و{العناصر} وتعليقات الأقسام كما في en.ts؛ وفي الجمع للعربية ست صيغ بهذا الترتيب:
  * صفر، واحد، اثنان، قليل (3-10)، كثير (11-99)، غير ذلك.
  */
-import type { Strings } from '../kit/i18n.ts';
+import type { Strings } from '../kit/core/i18n.ts';
 
 export default {
   // ---- the shell: header ----
@@ -60,7 +60,7 @@ export default {
   'Tiny Little Office': 'مكتب صغير جدًا',
   'About Tiny Little Office': 'حول مكتب صغير جدًا',
 
-  // ---- links that leave the site (kit/link-guard.ts) ----
+  // ---- links that leave the site (kit/ui/link-guard.ts) ----
   // The menu button's tooltip: the Office mark is the menu.
   'Tiny Little Office menu': 'قائمة مكتب صغير جدًا',
   // The question before a link that leaves the site: "You are leaving Tiny Little Office for" over the site's name, large.
@@ -79,7 +79,7 @@ export default {
 
   // ---- the copy kept on the device (status lines under the switch) ----
 
-  // ---- sharing: the Share dialog (kit/shell.ts), where the link fits (kit/limits.ts), the arrival banner ----
+  // ---- sharing: the Share dialog (kit/core/shell.ts), where the link fits (kit/share/limits.ts), the arrival banner ----
   'A copy opened in a new tab': 'نسخة فُتحت في تبويب جديد',
   'Copy display link': 'نسخ رابط العرض',
   'Copy into a new document': 'نسخ إلى مستند جديد',
@@ -132,7 +132,7 @@ export default {
   'Link': 'رابط',
   'Short link': 'رابط قصير',
 
-  // ---- privacy (kit/privacy.ts, kit/privacy-dialog.ts): the password, what the device holds ----
+  // ---- privacy (kit/share/privacy.ts, kit/ui/privacy-dialog.ts): the password, what the device holds ----
   // The Share dialog's head line: "Created 9 Oct 2026, 14:03 · by Paul".
   'Anyone with the link will need the password to open it. Nobody can reset it: lose it and the document is gone.': 'سيحتاج كل من لديه الرابط إلى كلمة المرور ليفتحه. لا أحد يستطيع إعادة تعيينها: إن فقدتها ضاع المستند.',
   'Change password': 'تغيير كلمة المرور',
@@ -179,7 +179,7 @@ export default {
   'Copy this and send it another way than the link. It cannot be shown again.': 'انسخ هذه وأرسلها بطريقة غير الرابط. لا يمكن عرضها مرة أخرى.',
   'Make another': 'أنشئ غيرها',
 
-  // ---- a document locked with a password, placed inside another (kit/locked.ts, kit/locked-doc.ts) ----
+  // ---- a document locked with a password, placed inside another (kit/share/locked.ts, kit/ui/locked-doc.ts) ----
   // The card drawn where it sits; {app} is the app's name: "A Spreadsheet document, locked with a password".
   'Locked with a password': 'مقفل بكلمة مرور',
   'A {app} document, locked with a password': 'مستند {app} مقفل بكلمة مرور',
@@ -202,7 +202,7 @@ export default {
   // The group heading the Calendar and the Trip Planner sit under on the home page.
   'Plan': 'تخطيط',
   'Chosen tasks': 'المهام المحددة',
-  // A link that opens the document (kit/compare.ts).
+  // A link that opens the document (kit/ui/compare.ts).
   'Open': 'فتح',
   'Task': 'مهمة',
   'Tasks': 'المهام',
@@ -368,7 +368,7 @@ export default {
   'Terms of service': 'شروط الخدمة',
   'A small business\'s terms in plain words: booking, prices, keys, what if, ending.': 'شروط عمل صغير بكلمات بسيطة: الحجز والأسعار والمفاتيح وماذا لو وكيف ينتهي.',
 
-  // ---- Insert's dialog (kit/insert-dialogs.ts): Tiny Little Office Doc ----
+  // ---- Insert's dialog (kit/ui/insert-dialogs.ts): Tiny Little Office Doc ----
   'A Tiny Little Office link': 'رابط مكتب صغير جدًا',
   'Opening the short link…': 'جارٍ فتح الرابط القصير…',
   'Paste the link of another Tiny Little Office document, long or short: its first page shows here.': 'الصق رابط مستند آخر في مكتب صغير جدًا، طويلًا أو قصيرًا: تظهر صفحته الأولى هنا.',
@@ -377,11 +377,11 @@ export default {
   'Tiny Little Office Doc…': 'مستند مكتب صغير جدًا…',
   // Insert ▾'s group of the apps a new document can be made in, inside this one.
   'A new document': 'مستند جديد',
-  // ---- another document edited in place (kit/doc-dialog.ts); a table's size is Rows × Columns ----
+  // ---- another document edited in place (kit/ui/doc-dialog.ts); a table's size is Rows × Columns ----
   'Cancel': 'إلغاء',
   'Rows': 'الصفوف',
 
-  // ---- charts (kit/chart.ts) ----
+  // ---- charts (kit/draw/chart.ts) ----
   'An empty chart': 'مخطط فارغ',
   'Bars': 'أعمدة',
   'Flows (Sankey)': 'تدفقات (Sankey)',
@@ -530,10 +530,10 @@ export default {
   'Unlock these cells': 'فتح قفل هذه الخلايا',
   'What it holds; sort; columns': 'ما يحتويه؛ فرز؛ أعمدة',
 
-  // ---- downloads: hand-offs to another app (kit/exports.ts) ----
+  // ---- downloads: hand-offs to another app (kit/file/exports.ts) ----
   'Open in': 'فتح في',
 
-  // ---- the icon library (kit/icons-picker.ts) ----
+  // ---- the icon library (kit/ui/icons-picker.ts) ----
   'Icon': 'أيقونة',
   'Favorites': 'المفضلة',
   'Search icons': 'بحث عن أيقونات',

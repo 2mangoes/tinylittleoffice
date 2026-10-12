@@ -5,8 +5,8 @@
  * accent to 3:1 (the contrast test's floors). Decorations are drawn for the 960 by 600 slide and keep to
  * its edges, clear of the words.
  */
-import { ACCENT, INK, MUTED } from '../../kit/draw.ts';
-import { t } from '../../kit/i18n.ts';
+import { ACCENT, INK, MUTED } from '../../kit/draw/draw.ts';
+import { t } from '../../kit/core/i18n.ts';
 
 export interface DeckTheme {
   name: () => string;

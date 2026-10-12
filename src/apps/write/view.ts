@@ -7,12 +7,12 @@
  * and in .docx and .rtf; `---` in Markdown. The look (look.ts) sets the type in each: its faces, justified lines, indented paragraphs,
  * small capitals, two columns on paper.
  */
-import { encodeDoc } from '../../kit/codec.ts';
-import { ACCENT, FAINT, FONT, INK, LINE, MUTED, SHADE, pageSvg, r, rect, text as svgText, textWidth, xml } from '../../kit/draw.ts';
-import { glyphNamed } from '../../kit/icons.ts';
-import { LOCKED_LANG, placedLink } from '../../kit/locked.ts';
-import { XML_HEAD, zip } from '../../kit/zip.ts';
-import { lookup, type ExportContext, type Page } from '../../kit/app.ts';
+import { encodeDoc } from '../../kit/core/codec.ts';
+import { ACCENT, FAINT, FONT, INK, LINE, MUTED, SHADE, pageSvg, r, rect, text as svgText, textWidth, xml } from '../../kit/draw/draw.ts';
+import { glyphNamed } from '../../kit/draw/icons.ts';
+import { LOCKED_LANG, placedLink } from '../../kit/share/locked.ts';
+import { XML_HEAD, zip } from '../../kit/file/zip.ts';
+import { lookup, type ExportContext, type Page } from '../../kit/core/app.ts';
 import { formatCell, listNumbers, markNotes, noteNumbers, noteRuns, notesOf, parse, plainText, referenceNotes, runLinks, write, isText, type Block, type Doc, type Run } from '../../doc/index.ts';
 import { currencyAt } from '../sheet/model.ts';
 import { tablePage } from '../sheet/view.ts';
@@ -142,7 +142,7 @@ export function place(page: Page, x: number, y: number, w: number, h: number): s
 export function fenceLink(lang: string, body: string, site = ''): string {
   return placedLink(lang, body, encodeDoc, site);
 }
-/** A placed document's own name: none for a locked one, whose title is sealed with it (kit/locked.ts). */
+/** A placed document's own name: none for a locked one, whose title is sealed with it (kit/share/locked.ts). */
 const placedTitle = (lang: string, body: string): string => (lang === LOCKED_LANG ? '' : fenceTitle(body));
 /** The site a link is on ("https://tinylittleoffice.com/"), or '' when there is none. */
 const siteOf = (link: string): string => {

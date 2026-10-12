@@ -1,7 +1,7 @@
 // The short-link client against the shortener itself, in one process: fetch is the Worker's handle().
 import { test, expect, vi, afterEach } from 'vitest';
 import { handle } from '../tinier/tinier.ts';
-import { expiresLine, expiresSentence, shorten, shortLink, timeLeft, unshorten } from '../src/kit/short.ts';
+import { expiresLine, expiresSentence, shorten, shortLink, timeLeft, unshorten } from '../src/kit/share/short.ts';
 import { MemStore } from './memstore.ts';
 
 /** What a link costs at the shortener: its ciphertext, in base64url characters (AES-GCM adds a 16-byte tag). */

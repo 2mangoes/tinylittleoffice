@@ -1,11 +1,11 @@
 /**
  * /version.json, written into dist/ by the build (vite.config.ts): which commit this is, its tag, the
- * commit's own date and the CSP's script hashes (the shape is src/kit/version.ts). Everything comes from
+ * commit's own date and the CSP's script hashes (the shape is src/kit/core/version.ts). Everything comes from
  * git and the build's own files, never the clock, so two builds of one commit are the same bytes
  * (scripts/reproducible.ts). Outside a git checkout (a source archive) the commit, tag and date are "".
  */
 import { execFileSync } from 'node:child_process';
-import type { Version } from '../src/kit/version.ts';
+import type { Version } from '../src/kit/core/version.ts';
 
 /** `git <args>` in `root`, trimmed; "" when git cannot say. */
 function git(root: string, args: string[]): string {

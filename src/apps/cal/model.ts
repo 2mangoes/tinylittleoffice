@@ -44,8 +44,8 @@ import {
   type Op,
   type Run,
 } from '../../doc/index.ts';
-import { ACCENT } from '../../kit/draw.ts';
-import { t } from '../../kit/i18n.ts';
+import { ACCENT } from '../../kit/draw/draw.ts';
+import { t } from '../../kit/core/i18n.ts';
 import { clockString, dayString, isValidZone, localZone, partsToUtc, utcToParts } from './tz.ts';
 
 export type Li = Extract<Block, { k: 'li' }>;

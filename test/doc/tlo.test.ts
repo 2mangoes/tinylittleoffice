@@ -356,7 +356,7 @@ test('tlo: a NUL never enters a document: the reader drops it, in the head and t
 });
 
 test('tlo: a link of ours in plain words, its payload holding "~~" or "__", is kept as the words it was through write and read', () => {
-  // Payloads are base64url with "~" for 62 (src/kit/codec.ts). A mark inside a bare address is ambiguous with one
+  // Payloads are base64url with "~" for 62 (src/kit/core/codec.ts). A mark inside a bare address is ambiguous with one
   // opening right after it ("https://x.com/a~~struck~~"), so the writer escapes it and the words come back whole.
   const line = 'see https://tinylittleoffice.com/text/#/v1/text/yA~~bC__d and https://tinylittleoffice.com/sheet/#/v1/sheet/z~~Q now';
   const written = writeInline([{ t: line }]);

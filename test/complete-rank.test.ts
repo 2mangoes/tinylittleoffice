@@ -1,9 +1,9 @@
-// The order a ":word" completion offers icons and emoji in (kit/complete.ts): a name that is what was typed, a
+// The order a ":word" completion offers icons and emoji in (kit/ui/complete.ts): a name that is what was typed, a
 // name with a word that is (for an emoji, a keyword too: CLDR calls 🚗 "automobile", people call it "car"), a
 // name that starts with it, a word that does, a tag that does; ties by the shorter name, then by name.
 import { expect, test } from 'vitest';
-import { completeEmoji, emojiNamed } from '../src/kit/emoji.ts';
-import { completeIcons, rankMatches } from '../src/kit/icons-search.ts';
+import { completeEmoji, emojiNamed } from '../src/kit/draw/emoji.ts';
+import { completeIcons, rankMatches } from '../src/kit/draw/icons-search.ts';
 
 const e = (name: string, keywords = '') => ({ nameWords: name.split(/[ -]/), keywords: keywords.split(' ').filter(Boolean) });
 

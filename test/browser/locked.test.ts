@@ -1,16 +1,16 @@
-// A document locked with a password, placed inside another (kit/locked.ts, kit/locked-doc.ts): the editor
+// A document locked with a password, placed inside another (kit/share/locked.ts, kit/ui/locked-doc.ts): the editor
 // draws the locked card, a tap asks for the password, and opened the card draws the document for this visit
 // while the outer link goes on holding the sealed one; a slide the same; the embed view of a locked link is
 // the locked card with Unlock, and of a broken one says it cannot be read.
 import { test, expect, afterEach } from 'vitest';
 import { mount, until } from './helpers.ts';
-import { decodeDoc, encodeDoc } from '../../src/kit/codec.ts';
-import { lockWith, pack } from '../../src/kit/privacy.ts';
-import { forgetOpened, lockedFence } from '../../src/kit/locked.ts';
-import { parseHash } from '../../src/kit/route.ts';
+import { decodeDoc, encodeDoc } from '../../src/kit/core/codec.ts';
+import { lockWith, pack } from '../../src/kit/share/privacy.ts';
+import { forgetOpened, lockedFence } from '../../src/kit/share/locked.ts';
+import { parseHash } from '../../src/kit/core/route.ts';
 import { write } from '../../src/doc/index.ts';
-import type { ToShell } from '../../src/kit/shell.ts';
-import { setKeeping, store } from '../../src/kit/store.ts';
+import type { ToShell } from '../../src/kit/core/shell.ts';
+import { setKeeping, store } from '../../src/kit/core/store.ts';
 
 afterEach(() => {
   forgetOpened();
@@ -92,8 +92,8 @@ test('the embed view of a link that cannot be read says so, rather than a blank 
 });
 
 test('Edit: opened with its password, edited in its own app, sealed again under the same password', async () => {
-  const { editFence } = await import('../../src/kit/doc-dialog.ts');
-  const { unlock } = await import('../../src/kit/privacy.ts');
+  const { editFence } = await import('../../src/kit/ui/doc-dialog.ts');
+  const { unlock } = await import('../../src/kit/share/privacy.ts');
   const payload = await sealed();
   const fence = lockedFence('write', payload) as { k: 'fence'; lang: string; body: string };
   const done = editFence(fence);

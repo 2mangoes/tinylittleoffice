@@ -274,12 +274,12 @@ export function importsOf(source: string): Import[] {
 }
 
 export interface Module {
-  /** Its path from the root, forward slashes: "src/kit/app.ts". */
+  /** Its path from the root, forward slashes: "src/kit/core/app.ts". */
   path: string;
   source: string;
 }
 
-/** A module's imports of other modules of the tree, resolved to their paths ("../doc/index.ts" from src/kit/x.ts is src/doc/index.ts). */
+/** A module's imports of other modules of the tree, resolved to their paths ("../../doc/index.ts" from src/kit/core/x.ts is src/doc/index.ts). */
 export function edgesOf(m: Module): (Import & { to: string })[] {
   const dir = m.path.split('/').slice(0, -1);
   return importsOf(m.source)
@@ -300,9 +300,9 @@ const appOfPath = (p: string) => /^src\/apps\/([^/]+)\//.exec(p)?.[1];
  * The layers' rules, each a sentence the failure prints with the edge that breaks it:
  *   - no cycle among the modules' static imports (a type import is gone from the code; a lazy one is a chunk's door);
  *   - an app imports no other app (what two apps share lives in the kit or the kernel);
- *   - the kit imports the apps only in kit/apps.ts, the registry;
+ *   - the kit imports the apps only in kit/core/apps.ts, the registry;
  *   - the kernel (src/doc) imports nothing of the kit or the apps;
- *   - a language (src/i18n) is loaded only by kit/i18n.ts, lazily.
+ *   - a language (src/i18n) is loaded only by kit/core/i18n.ts, lazily.
  * `shared` names the app modules another app may still import, each with its reason (see SHARED below).
  */
 export function graphProblems(mods: Module[], shared: Record<string, string> = {}): string[] {
@@ -318,13 +318,34 @@ export function graphProblems(mods: Module[], shared: Record<string, string> = {
       const edge = `${m.path} → ${e.to}`;
       const [from, to] = [appOfPath(m.path), appOfPath(e.to)];
       if (from && to && from !== to && !(e.to in shared)) problems.push(`an app imports another app: ${edge}`);
-      if (m.path.startsWith('src/kit/') && e.to.startsWith('src/apps/') && m.path !== 'src/kit/apps.ts') problems.push(`the kit imports an app outside kit/apps.ts: ${edge}`);
+      if (m.path.startsWith('src/kit/') && e.to.startsWith('src/apps/') && m.path !== 'src/kit/core/apps.ts') problems.push(`the kit imports an app outside kit/core/apps.ts: ${edge}`);
       if (m.path.startsWith('src/doc/') && /^src\/(kit|apps)\//.test(e.to)) problems.push(`the kernel imports the kit or an app: ${edge}`);
-      if (e.to.startsWith('src/i18n/') && !(m.path === 'src/kit/i18n.ts' && e.lazy) && !m.path.startsWith('src/i18n/'))
-        problems.push(`a language is imported outside kit/i18n.ts’s lazy load: ${edge}`);
+      if (e.to.startsWith('src/i18n/') && !(m.path === 'src/kit/core/i18n.ts' && e.lazy) && !m.path.startsWith('src/i18n/'))
+        problems.push(`a language is imported outside kit/core/i18n.ts’s lazy load: ${edge}`);
     }
   }
   for (const cycle of cyclesOf(graph)) problems.push(`an import cycle: ${[...cycle, cycle[0]].join(' → ')}`);
+  return problems;
+}
+
+/** The kit's six folders, docs/kit.md saying what goes in each. */
+export const KIT_FOLDERS = ['core', 'ui', 'text', 'draw', 'file', 'share'];
+
+/**
+ * The kit's place for each file (docs/kit.md), each rule a sentence the failure prints with what breaks it:
+ *   - no file sits at src/kit/ itself: every one is in one of the six folders;
+ *   - no index.ts in the kit: no barrel hides what a file reaches for, and every import names its file;
+ *   - every import of the kit names a module of the tree in one of the six folders.
+ */
+export function kitProblems(mods: Module[]): string[] {
+  const problems: string[] = [];
+  const paths = new Set(mods.map((m) => m.path));
+  const placed = new RegExp(`^src/kit/(${KIT_FOLDERS.join('|')})/[^/]+\\.ts$`);
+  for (const m of mods) {
+    if (/^src\/kit\/[^/]+$/.test(m.path)) problems.push(`a file at the kit's root, in none of its folders: ${m.path}`);
+    if (m.path.startsWith('src/kit/') && m.path.endsWith('/index.ts')) problems.push(`a barrel in the kit: ${m.path}`);
+    for (const e of edgesOf(m)) if (e.to.startsWith('src/kit/') && !(placed.test(e.to) && paths.has(e.to))) problems.push(`an import of the kit names no file in its six folders: ${m.path} → ${e.to}`);
+  }
   return problems;
 }
 

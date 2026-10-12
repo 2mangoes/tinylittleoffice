@@ -2,14 +2,14 @@
  * <to-write-editor>: the Write app. One bar (Insert ▾, the kinds of block, the marks, link, footnote, icon,
  * lists, indent, align, the look (the type it is set in, look.ts), paper, undo and redo) over one <to-text shape=doc> that owns the whole document's
  * blocks and is drawn as paper. The editor's ops are applied here with the kernel, recorded in the op-log
- * history (src/kit/history.ts) and written back to the shell as TLO in "docchange"; the title the shell
+ * history (src/kit/text/history.ts) and written back to the shell as TLO in "docchange"; the title the shell
  * edits is a head field, and comes back as a `head` op in the history like any other.
  *
  * What is not words is a card the editor asks this host to draw: a table block as a grid whose cells are
  * `cells` ops, worked out in place by the formula engine; another document as a picture of its first page;
  * a page break (the kernel's `hr`, from Insert ▾ or
  * Mod+Shift+Enter) as a thin dashed rule with its name in the middle. The document's own head fields (an invoice's
- * from and to) are inputs over the text; the footnotes are listed under it (<to-notes>, kit/notes.ts), each
+ * from and to) are inputs over the text; the footnotes are listed under it (<to-notes>, kit/draw/notes.ts), each
  * note's words typed there, where they are drawn (a mark tapped, or a new footnote, puts the caret in its note;
  * Enter, Escape or ↩ come back to the mark), and the words are counted at the foot.
  *
@@ -25,20 +25,20 @@ import { unsafeSVG } from 'lit/directives/unsafe-svg.js';
 import { guard } from 'lit/directives/guard.js';
 import { SquarePen } from 'lucide';
 import { parse, write, type Block, type Doc, type Op } from '../../doc/index.ts';
-import { lookup } from '../../kit/app.ts';
-import { cmdTool } from '../../kit/bar.ts';
-import { contextOf, drawnIn, labelOf, runKey } from '../../kit/commands.ts';
-import { BOLD, BULLETS, FOOTNOTE, HIGHLIGHT, INDENT, ITALIC, LINK, NUMBERS, OUTDENT, STRIKE, UNDERLINE } from '../../kit/text-commands.ts';
-import { copyData, pasteFrom, writeClip } from '../../kit/clipboard.ts';
-import { SEP, type ContextEntry, type ToContext } from '../../kit/context.ts';
-import { editFence, editTable, makeDoc, newTable } from '../../kit/doc-dialog.ts';
-import { DocElement, firstAt, type Entry } from '../../kit/element.ts';
-import { UI } from '../../kit/icons.ts';
-import { language, t } from '../../kit/i18n.ts';
-import { noteIndex, noteMarks, type ToNotes } from '../../kit/notes.ts';
-import { askDocLink } from '../../kit/insert-dialogs.ts';
-import { blockLength, caret, insertBlocks, isWords, type Sel } from '../../kit/textops.ts';
-import type { NoteAt, TextOps, ToText } from '../../kit/text.ts';
+import { lookup } from '../../kit/core/app.ts';
+import { cmdTool } from '../../kit/ui/bar.ts';
+import { contextOf, drawnIn, labelOf, runKey } from '../../kit/core/commands.ts';
+import { BOLD, BULLETS, FOOTNOTE, HIGHLIGHT, INDENT, ITALIC, LINK, NUMBERS, OUTDENT, STRIKE, UNDERLINE } from '../../kit/text/text-commands.ts';
+import { copyData, pasteFrom, writeClip } from '../../kit/text/clipboard.ts';
+import { SEP, type ContextEntry, type ToContext } from '../../kit/ui/context.ts';
+import { editFence, editTable, makeDoc, newTable } from '../../kit/ui/doc-dialog.ts';
+import { DocElement, firstAt, type Entry } from '../../kit/core/element.ts';
+import { UI } from '../../kit/draw/icons.ts';
+import { language, t } from '../../kit/core/i18n.ts';
+import { noteIndex, noteMarks, type ToNotes } from '../../kit/draw/notes.ts';
+import { askDocLink } from '../../kit/ui/insert-dialogs.ts';
+import { blockLength, caret, insertBlocks, isWords, type Sel } from '../../kit/text/textops.ts';
+import type { NoteAt, TextOps, ToText } from '../../kit/text/text.ts';
 import {
   PAPERS,
   defaultPaper,
@@ -64,19 +64,19 @@ import {
 import COMMANDS, { CARD, alignIcon } from './commands.ts';
 import { lookOf, type LookId } from './look.ts';
 import { fenceLink } from './view.ts';
-import { LOCKED_LANG } from '../../kit/locked.ts';
-import '../../kit/locked-doc.ts';
+import { LOCKED_LANG } from '../../kit/share/locked.ts';
+import '../../kit/ui/locked-doc.ts';
 import type { TableCmd, ToWriteTable } from './table.ts';
-import '../../kit/bar.ts';
-import '../../kit/context.ts';
-import '../../kit/doc-dialog.ts';
-import '../../kit/insert.ts';
-import '../../kit/menu.ts';
-import '../../kit/notes.ts';
-import '../../kit/text.ts';
+import '../../kit/ui/bar.ts';
+import '../../kit/ui/context.ts';
+import '../../kit/ui/doc-dialog.ts';
+import '../../kit/ui/insert.ts';
+import '../../kit/ui/menu.ts';
+import '../../kit/draw/notes.ts';
+import '../../kit/text/text.ts';
 import './table.ts';
 import './style.css';
-import { qrBlock } from '../../kit/qr-picture.ts';
+import { qrBlock } from '../../kit/draw/qr-picture.ts';
 
 export const tag = 'to-write-editor';
 
@@ -253,7 +253,7 @@ export class ToWriteEditor extends DocElement<Doc> {
   /** An icon from the kit's library (a lazy chunk, the whole of Lucide), put in at the caret. */
   async insertIcon() {
     const sel = this.text.sel;
-    const { chooseIcon } = await import('../../kit/icons-picker.ts');
+    const { chooseIcon } = await import('../../kit/ui/icons-picker.ts');
     const name = await chooseIcon();
     if (!name) return;
     if (sel) this.text.sel = sel;
@@ -313,7 +313,7 @@ export class ToWriteEditor extends DocElement<Doc> {
       if (!v) return null;
       return html`<to-write-table commands .view=${v} @wt-cell=${(e: CustomEvent<{ r: number; c: number; raw: string }>) => this.onCell(at, e)} @wt-do=${(e: CustomEvent<TableCmd>) => (e.preventDefault(), void this.onTable(at, e.detail))} @wt-exit=${() => this.afterCard(at)}></to-write-table>`;
     }
-    // A document locked with a password: the locked card, which a tap opens for this visit (kit/locked-doc.ts).
+    // A document locked with a password: the locked card, which a tap opens for this visit (kit/ui/locked-doc.ts).
     if (b.k === 'fence' && b.lang === LOCKED_LANG) return html`<figure class="write-doc"><to-locked-doc caption .ref=${b.body}></to-locked-doc></figure>`;
     if (b.k === 'fence' && b.lang) {
       const def = lookup.appOf(b.lang);
@@ -566,7 +566,7 @@ export class ToWriteEditor extends DocElement<Doc> {
 
   /* ---------- drawing ---------- */
 
-  /** The bar, drawn from what barKey() names: the registry's commands (commands.ts, kit/text-commands.ts), the words' with the text as their context. */
+  /** The bar, drawn from what barKey() names: the registry's commands (commands.ts, kit/text/text-commands.ts), the words' with the text as their context. */
   private renderBar(): TemplateResult {
     const x = this.text ?? null;
     const own = (id: string) => COMMANDS.find((c) => c.id === `write.${id}`)!;

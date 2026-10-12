@@ -1,9 +1,9 @@
-// Every format of every app (kit/exports.ts formatsOf) builds, for the app's blank document, to bytes of the type it
+// Every format of every app (kit/file/exports.ts formatsOf) builds, for the app's blank document, to bytes of the type it
 // says: the drawn ones too (the PDF, the PNG, a GIF, a WebM, a slide's pictures), which need the browser's canvas.
 import { test, expect } from 'vitest';
-import { apps } from '../../src/kit/apps.ts';
-import { fileOf, formatsOf, formatsReady, htmlOf, printHtml } from '../../src/kit/exports.ts';
-import { pageSvg } from '../../src/kit/draw.ts';
+import { apps } from '../../src/kit/core/apps.ts';
+import { fileOf, formatsOf, formatsReady, htmlOf, printHtml } from '../../src/kit/file/exports.ts';
+import { pageSvg } from '../../src/kit/draw/draw.ts';
 import { looksLike } from '../formats-bytes.ts';
 
 test('every format of every app builds its blank document into a file of its type', async () => {

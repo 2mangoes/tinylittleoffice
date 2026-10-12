@@ -52,7 +52,7 @@ both brief); an issue is a blank one.
 
 - [ ] `bug` (`#d73a4a`, "Something is wrong") and `feature` (`#a2eeef`, "Something it could do"), applied by hand.
 - [ ] `dependencies` (`#0366d6`): Dependabot applies it to its pull requests.
-- [ ] One per app in the registry (`src/kit/apps.ts`), color `#c5def5`: `app: <id>` (`app: write`, `app: sheet`…).
+- [ ] One per app in the registry (`src/kit/core/apps.ts`), color `#c5def5`: `app: <id>` (`app: write`, `app: sheet`…).
 - [ ] `kit` (`#fbca04`, "The shell, the bar, the editor and the rest of src/kit"), `kernel` (`#fbca04`,
       "src/doc: the model, TLO, the operations"), `tinier` (`#bfd4f2`, "The short-link service"),
       `docs` (`#0075ca`), `security` (`#b60205`, "Security-relevant, after disclosure").

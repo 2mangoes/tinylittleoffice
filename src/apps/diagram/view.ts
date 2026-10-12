@@ -6,10 +6,10 @@
  * from (`hit`), so the editor can make a tap on it an edit of those words; a lane's band and a Venn's circles
  * are regions (`region`), so a tap or a drop there means "in this lane", "in these sets".
  */
-import type { Page } from '../../kit/app.ts';
-import { MUTED, pageSvg, r, rect, text, textWidth, wrapText } from '../../kit/draw.ts';
-import { glyphNamed } from '../../kit/icons.ts';
-import { t } from '../../kit/i18n.ts';
+import type { Page } from '../../kit/core/app.ts';
+import { MUTED, pageSvg, r, rect, text, textWidth, wrapText } from '../../kit/draw/draw.ts';
+import { glyphNamed } from '../../kit/draw/icons.ts';
+import { t } from '../../kit/core/i18n.ts';
 import { GRID, H, W, describeDrawing, isLink, shapeCells, type Color, type Fill, type Kind, type Shape, type TextSize } from '../draw/model.ts';
 import { cropPage, shapesPage } from '../draw/view.ts';
 import { write, type Dir, type Doc } from '../../doc/index.ts';

@@ -3,7 +3,7 @@
 Every document is a link; these are the files it becomes, from the Download menu, and from a link with the
 extension after the app's name (`#/v1/sheet.xlsx/<payload>` downloads on arrival; `#/v1/write.print/…`
 prints). Every file is built in the browser, from the document, by the app's definition
-(`src/apps/<id>/def.ts`, `exports`) and the kit (`src/kit/exports.ts`); nothing is sent anywhere. Mod+S
+(`src/apps/<id>/def.ts`, `exports`) and the kit (`src/kit/file/exports.ts`); nothing is sent anywhere. Mod+S
 keeps the document on the device (with Save in browser on), it does not download. In the Download menu each format is a
 row: View (in a new tab, where the browser shows the file), Share (the device's share sheet, where it takes the
 file), Download, and Copy link (the link that downloads it on arrival). This page is written from the

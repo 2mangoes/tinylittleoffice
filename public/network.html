@@ -1,5 +1,5 @@
 <!doctype html>
-<!-- Generated from src/kit/network.ts by scripts/network-doc.ts (npm run docs:network). Do not edit. -->
+<!-- Generated from src/kit/core/network.ts by scripts/network-doc.ts (npm run docs:network). Do not edit. -->
 <html lang="en">
 <head>
 <meta charset="utf-8" />
@@ -90,7 +90,7 @@ dd{margin:0}
 <dt>When</dt><dd>after a tap</dd>
 <dt>Carries</dt><dd>The long link encrypted here, which the service cannot read, and how long to keep it</dd>
 <dt>Stopped by</dt><dd>Not making a short link: the long link needs no one</dd>
-<dt>Made by</dt><dd><code>kit/short.ts</code></dd>
+<dt>Made by</dt><dd><code>kit/share/short.ts</code></dd>
 <dt>Allowed by</dt><dd><code>connect-src</code></dd>
 </dl>
 </section>
@@ -101,7 +101,7 @@ dd{margin:0}
 <dt>When</dt><dd>after a tap</dd>
 <dt>Carries</dt><dd>Which page of the source; it opens in a new tab, and nothing of the document goes with it</dd>
 <dt>Stopped by</dt><dd>Not following the link: the commit’s name comes from the site’s own /version.json</dd>
-<dt>Made by</dt><dd><code>kit/home.ts, kit/drawer.ts, kit/version.ts</code></dd>
+<dt>Made by</dt><dd><code>kit/ui/home.ts, kit/ui/drawer.ts, kit/core/version.ts</code></dd>
 <dt>Allowed by</dt><dd>none: it opens in a new tab</dd>
 </dl>
 </section>
@@ -112,7 +112,7 @@ dd{margin:0}
 <dt>When</dt><dd>after a tap</dd>
 <dt>Carries</dt><dd>Nothing: it opens in a new tab, from the home page, where no document is open</dd>
 <dt>Stopped by</dt><dd>Not following the link</dd>
-<dt>Made by</dt><dd><code>kit/home.ts</code></dd>
+<dt>Made by</dt><dd><code>kit/ui/home.ts</code></dd>
 <dt>Allowed by</dt><dd>none: it opens in a new tab</dd>
 </dl>
 </section>
@@ -123,7 +123,7 @@ dd{margin:0}
 <dt>When</dt><dd>on share</dd>
 <dt>Carries</dt><dd>The document’s title and its link, which is the whole document (it is in the link)</dd>
 <dt>Stopped by</dt><dd>Not choosing that service in Share; it opens in a new tab, which you then post from or close</dd>
-<dt>Made by</dt><dd><code>kit/share.ts</code></dd>
+<dt>Made by</dt><dd><code>kit/share/share.ts</code></dd>
 <dt>Allowed by</dt><dd>none: it opens in a new tab</dd>
 </dl>
 </section>
@@ -134,7 +134,7 @@ dd{margin:0}
 <dt>When</dt><dd>on share</dd>
 <dt>Carries</dt><dd>The document’s title and its link, which is the whole document (it is in the link)</dd>
 <dt>Stopped by</dt><dd>Not choosing that service in Share; it opens in a new tab, which you then post from or close</dd>
-<dt>Made by</dt><dd><code>kit/share.ts</code></dd>
+<dt>Made by</dt><dd><code>kit/share/share.ts</code></dd>
 <dt>Allowed by</dt><dd>none: it opens in a new tab</dd>
 </dl>
 </section>
@@ -145,7 +145,7 @@ dd{margin:0}
 <dt>When</dt><dd>on share</dd>
 <dt>Carries</dt><dd>The document’s title and its link, which is the whole document (it is in the link)</dd>
 <dt>Stopped by</dt><dd>Not choosing that service in Share; it opens in a new tab, which you then post from or close</dd>
-<dt>Made by</dt><dd><code>kit/share.ts</code></dd>
+<dt>Made by</dt><dd><code>kit/share/share.ts</code></dd>
 <dt>Allowed by</dt><dd>none: it opens in a new tab</dd>
 </dl>
 </section>
@@ -156,7 +156,7 @@ dd{margin:0}
 <dt>When</dt><dd>on share</dd>
 <dt>Carries</dt><dd>The document’s title and its link, which is the whole document (it is in the link)</dd>
 <dt>Stopped by</dt><dd>Not choosing that service in Share; it opens in a new tab, which you then post from or close</dd>
-<dt>Made by</dt><dd><code>kit/share.ts</code></dd>
+<dt>Made by</dt><dd><code>kit/share/share.ts</code></dd>
 <dt>Allowed by</dt><dd>none: it opens in a new tab</dd>
 </dl>
 </section>
@@ -167,13 +167,13 @@ dd{margin:0}
 <li><strong>Short links.</strong> Only when a short link is made or opened; the service holds ciphertext it cannot read, whose key is in the short link's fragment, which browsers never send (tinier/tinier.ts).</li>
 <li><strong>Sharing to a service.</strong> Share's Bluesky, Mastodon, X and LinkedIn open that service's own compose box in a new tab, with the title and the link in it: no script of theirs runs here. The link is the document, so whoever reads the post can read it. &quot;Any https address&quot; there is the Mastodon server the person names.</li>
 <li><strong>Fonts and icons.</strong> Self-hosted, from the site itself: the type is IBM Plex (<code>public/fonts/</code>), each face fetched when a page's words need it, and the policy's <code>font-src</code> is <code>'self'</code> alone; the full icon set is a chunk of the site's own, loaded when the icon picker opens.</li>
-<li><strong>Links.</strong> A link in a document that leaves the site opens only after the reader is shown where it goes and says Go (kit/link-guard.ts), in a new tab with no referrer.</li>
+<li><strong>Links.</strong> A link in a document that leaves the site opens only after the reader is shown where it goes and says Go (kit/ui/link-guard.ts), in a new tab with no referrer.</li>
 </ul>
 <h2>Nothing else</h2>
 <p>No analytics, no error reporting, no fonts or scripts from a CDN, no tag manager, no fetch the person did not cause. <code>test/network.test.ts</code> reads the source (<code>src/</code> and the shortener in <code>tinier/</code>) and fails on any host that is not on this page, and on any analytics, error-reporting, font-CDN or tag-manager host anywhere in the site.</p>
 <h2>How this page is kept true</h2>
-<p>It is written from <code>src/kit/network.ts</code>, the one list of every host, by <code>scripts/network-doc.ts</code> (<code>npm run docs:network</code>, which <code>npm run build</code> runs first); a test fails when the committed page is not what the list says. Every module that asks the web takes its host from that list, so a new host cannot be reached without appearing here. The policy's <code>connect-src</code> and <code>img-src</code> are written from the same list (scripts/headers.ts), and <code>test/csp.test.ts</code> holds each host to the directive the list names and nothing else; the policy has no <code>frame-src</code> or <code>media-src</code> of its own, so no frame, film or sound comes from another site.</p>
-<p class="note">Written from <code>src/kit/network.ts</code>; the same page is <code>docs/network.md</code> in the repository.</p>
+<p>It is written from <code>src/kit/core/network.ts</code>, the one list of every host, by <code>scripts/network-doc.ts</code> (<code>npm run docs:network</code>, which <code>npm run build</code> runs first); a test fails when the committed page is not what the list says. Every module that asks the web takes its host from that list, so a new host cannot be reached without appearing here. The policy's <code>connect-src</code> and <code>img-src</code> are written from the same list (scripts/headers.ts), and <code>test/csp.test.ts</code> holds each host to the directive the list names and nothing else; the policy has no <code>frame-src</code> or <code>media-src</code> of its own, so no frame, film or sound comes from another site.</p>
+<p class="note">Written from <code>src/kit/core/network.ts</code>; the same page is <code>docs/network.md</code> in the repository.</p>
 </main>
 </body>
 </html>

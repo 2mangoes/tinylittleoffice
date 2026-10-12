@@ -1,19 +1,19 @@
-// Typing ":" and letters in any <to-text> opens a completion of icons and emoji under the caret (kit/complete.ts),
+// Typing ":" and letters in any <to-text> opens a completion of icons and emoji under the caret (kit/ui/complete.ts),
 // with real keys: Up/Down move, Enter or Tab picks, Escape leaves the words as typed, ":name:" typed in full becomes
 // the icon. "10:30" opens nothing; a marks-only editor (a shape's label) is offered emoji alone; at 390px the list
 // sits inside the visual viewport. The Word Processor is tried through the shell.
 import { afterEach, expect, test } from 'vitest';
 import { page, userEvent } from 'vitest/browser';
 import { applyAll, parse, write, type Doc } from '../../src/doc/index.ts';
-import { encodeDoc } from '../../src/kit/codec.ts';
-import { History } from '../../src/kit/history.ts';
-import { caret } from '../../src/kit/textops.ts';
-import type { TextOps, ToText } from '../../src/kit/text.ts';
-import { loadCompletions } from '../../src/kit/complete.ts';
+import { encodeDoc } from '../../src/kit/core/codec.ts';
+import { History } from '../../src/kit/text/history.ts';
+import { caret } from '../../src/kit/text/textops.ts';
+import type { TextOps, ToText } from '../../src/kit/text/text.ts';
+import { loadCompletions } from '../../src/kit/ui/complete.ts';
 import type { ToWriteEditor } from '../../src/apps/write/editor.ts';
 import { mount as mountShell, tick, until } from './helpers.ts';
 import '../../src/styles.css';
-import '../../src/kit/text.ts';
+import '../../src/kit/text/text.ts';
 
 class Host {
   doc: Doc;

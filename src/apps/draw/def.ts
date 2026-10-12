@@ -1,16 +1,16 @@
 /**
  * Draw: boxes, ellipses, diamonds, lines, arrows, icons and labels on a grid, and pixel art as a grid mode.
  * The document is a table, a row per shape, the alt text in the head (model.ts); the drawing is view.ts;
- * the editor editor.ts. A pixel grid can become a repeating background tile (kit/tile.ts) for this drawing
+ * the editor editor.ts. A pixel grid can become a repeating background tile (kit/draw/tile.ts) for this drawing
  * or any page.
  */
 import { PenTool } from 'lucide';
 import { apply, parse, write, type Doc as Kernel } from '../../doc/index.ts';
-import { defineApp, type Doc } from '../../kit/app.ts';
-import { utf8 } from '../../kit/draw.ts';
-import { t } from '../../kit/i18n.ts';
-import { drawn, raster } from '../../kit/raster.ts';
-import { blankTile, tileSvg, type Tile } from '../../kit/tile.ts';
+import { defineApp, type Doc } from '../../kit/core/app.ts';
+import { utf8 } from '../../kit/draw/draw.ts';
+import { t } from '../../kit/core/i18n.ts';
+import { drawn, raster } from '../../kit/draw/raster.ts';
+import { blankTile, tileSvg, type Tile } from '../../kit/draw/tile.ts';
 import { drawingText, readDrawing } from './model.ts';
 import { drawingPage, drawingToSvg } from './view.ts';
 

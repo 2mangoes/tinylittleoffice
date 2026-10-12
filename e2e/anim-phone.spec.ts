@@ -7,7 +7,7 @@
  *   PW_PORT=4317 npx playwright test e2e/anim-phone.spec.ts --project phone --workers=1
  */
 import { test, expect, type Page } from '@playwright/test';
-import { encodeDoc } from '../src/kit/codec.ts';
+import { encodeDoc } from '../src/kit/core/codec.ts';
 import { settled } from './settled.ts';
 
 const SHAPES = 'Kind | X | Y | W | H | Style | Label\n--- | --- | --- | --- | --- | --- | ---\nt | 4 | 20 | 20 | 4 | 04 | Lift off\ni | 8 | 36 | 8 | 8 | 0b | rocket\n';

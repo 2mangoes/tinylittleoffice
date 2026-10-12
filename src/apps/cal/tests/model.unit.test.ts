@@ -3,7 +3,7 @@
 // the pages, the iCalendar and the CSV.
 import { expect, test } from 'vitest';
 import { applyAll, invertAll, parse, write, ymdToDay, type Doc, type Op } from '../../../doc/index.ts';
-import { icsFold } from '../../../kit/ics.ts';
+import { icsFold } from '../../../kit/file/ics.ts';
 import {
   copyTasks,
   duplicateTasks,

@@ -1,17 +1,17 @@
-// Every export format is one object (kit/exports.ts formatsOf): what it is, whether the browser shows it, how it is
+// Every export format is one object (kit/file/exports.ts formatsOf): what it is, whether the browser shows it, how it is
 // built. Under node: the list's shape, nothing switching on an extension, and every format that needs no browser
 // built for every app's blank document (the drawn ones are test/browser/formats.test.ts's).
 import { test, expect } from 'vitest';
 import { readFileSync } from 'node:fs';
-import { apps } from '../src/kit/apps.ts';
-import { formatsOf, formatsReady, htmlOf } from '../src/kit/exports.ts';
-import type { AppDef, Export } from '../src/kit/app.ts';
+import { apps } from '../src/kit/core/apps.ts';
+import { formatsOf, formatsReady, htmlOf } from '../src/kit/file/exports.ts';
+import type { AppDef, Export } from '../src/kit/core/app.ts';
 import { looksLike } from './formats-bytes.ts';
 
 test("nothing in the kit's exports switches on an extension, nor the shell on a kit format's", () => {
   const read = (file: string) => readFileSync(new URL(file, import.meta.url), 'utf8');
-  expect(read('../src/kit/exports.ts')).not.toMatch(/ext\s*[!=]==|[!=]==\s*'(pdf|png|html|md|tlo)'/);
-  expect(read('../src/kit/shell.ts')).not.toMatch(/[!=]==\s*'(pdf|png|html|md|tlo)'|exportAs\('/);
+  expect(read('../src/kit/file/exports.ts')).not.toMatch(/ext\s*[!=]==|[!=]==\s*'(pdf|png|html|md|tlo)'/);
+  expect(read('../src/kit/core/shell.ts')).not.toMatch(/[!=]==\s*'(pdf|png|html|md|tlo)'|exportAs\('/);
 });
 
 test("every app's formats: the kit's less the ones it makes its own way, then its own, each saying what it is", () => {
@@ -35,7 +35,7 @@ test("every app's formats: the kit's less the ones it makes its own way, then it
   expect(Object.fromEntries(write.map((f) => [f.ext, f.shows]))).toEqual({ pdf: 'own', png: 'own', tlo: 'text', json: 'text', docx: null, md: 'text', rtf: null, html: 'own' });
 });
 
-/** Whether a build failed only for want of a browser (a canvas, the page; kit/exports.ts's "not drawn"): left to the browser test. */
+/** Whether a build failed only for want of a browser (a canvas, the page; kit/file/exports.ts's "not drawn"): left to the browser test. */
 const wantsBrowser = (err: unknown) =>
   (err instanceof Error && err.message === 'not drawn') ||
   (err instanceof ReferenceError && /\b(document|window|navigator|OffscreenCanvas|Image|createImageBitmap|HTMLCanvasElement|Blob|FileReader|DOMParser|XMLSerializer|fetch)\b/.test(err.message));

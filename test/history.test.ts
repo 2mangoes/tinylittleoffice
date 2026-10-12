@@ -2,8 +2,8 @@
 // inverse and the selection from before, redo the ops and the selection after; a new change ends the redo list.
 import { expect, test } from 'vitest';
 import { applyAll, parse, write, type Doc, type Op } from '../src/doc/index.ts';
-import { History } from '../src/kit/history.ts';
-import { caret } from '../src/kit/textops.ts';
+import { History } from '../src/kit/text/history.ts';
+import { caret } from '../src/kit/text/textops.ts';
 
 const text = (at: number, from: number, to: number, s: string): Op => ({ op: 'text', at, from, to, runs: s ? [{ t: s }] : [] });
 

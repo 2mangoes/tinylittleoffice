@@ -14,8 +14,8 @@
  *   news     a narrow serif headline over a sans body, set in two columns on paper
  */
 import type { Doc } from '../../doc/index.ts';
-import { FONT } from '../../kit/draw.ts';
-import { t } from '../../kit/i18n.ts';
+import { FONT } from '../../kit/draw/draw.ts';
+import { t } from '../../kit/core/i18n.ts';
 
 export type Face = 'sans' | 'serif' | 'mono' | 'narrow';
 export type LookId = 'sans' | 'serif' | 'mono' | 'mixed' | 'inverse' | 'book' | 'news';
@@ -27,7 +27,7 @@ export const STACKS: Record<Face, string> = {
   mono: "'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, Consolas, 'Liberation Mono', 'Courier New', monospace",
   narrow: "'Bodoni 72', Didot, 'Times New Roman', Times, 'Noto Serif', serif",
 };
-/** How wide each face sets beside the sans the page's widths are estimated in (kit/draw.ts textWidth): Plex Serif and Plex Mono beside Plex Sans, measured. */
+/** How wide each face sets beside the sans the page's widths are estimated in (kit/draw/draw.ts textWidth): Plex Serif and Plex Mono beside Plex Sans, measured. */
 export const WIDTH: Record<Face, number> = { sans: 1, serif: 1.06, mono: 1.23, narrow: 0.9 };
 /** The face a word processor names, for .docx and .rtf: one font each, the one most systems have. */
 export const NAMED: Record<Face, { name: string; rtf: 'fswiss' | 'froman' | 'fmodern' }> = {

@@ -1,4 +1,4 @@
-// The page is the visible window and the document scrolls in a column (kit/chrome.ts, kit/scroll.ts).
+// The page is the visible window and the document scrolls in a column (kit/ui/chrome.ts, kit/ui/scroll.ts).
 // Safari on iOS does not make the page shorter for the keyboard, only the visible window, so the column is the visual
 // viewport's height and the bar has a place of its own in it: under the header on a wide screen, at the column's bottom
 // under a finger, so above the keyboard. On a phone, while a box has the focus, the header steps aside and the menu
@@ -7,14 +7,14 @@
 import { test, expect, afterEach } from 'vitest';
 import { cdp, page, userEvent } from 'vitest/browser';
 import { mount, tick, until } from './helpers.ts';
-import { encodeDoc } from '../../src/kit/codec.ts';
-import { keyboard } from '../../src/kit/commands.ts';
-import type { ToShell } from '../../src/kit/shell.ts';
-import type { ToText } from '../../src/kit/text.ts';
-import type { ToDrawer } from '../../src/kit/drawer.ts';
-import type { ToChrome } from '../../src/kit/chrome.ts';
+import { encodeDoc } from '../../src/kit/core/codec.ts';
+import { keyboard } from '../../src/kit/core/commands.ts';
+import type { ToShell } from '../../src/kit/core/shell.ts';
+import type { ToText } from '../../src/kit/text/text.ts';
+import type { ToDrawer } from '../../src/kit/ui/drawer.ts';
+import type { ToChrome } from '../../src/kit/ui/chrome.ts';
 import { render, html } from 'lit';
-import { trustButton } from '../../src/kit/privacy-dialog.ts';
+import { trustButton } from '../../src/kit/ui/privacy-dialog.ts';
 
 const frame = () => new Promise<void>((r) => requestAnimationFrame(() => requestAnimationFrame(() => r())));
 const BIG = `---\ntitle: Long\n---\n${Array.from({ length: 300 }, (_, i) => `Paragraph ${i + 1}, long enough to take a line or two of the page when it is drawn.`).join('\n\n')}\n`;
@@ -85,7 +85,7 @@ for (const [w, h, finger] of [
     // Typed, the bar comes (on a phone) and the column glides to make its room; the caret is kept in sight once it settles.
     await settled();
     expect(window.scrollY).toBe(0);
-    // keepCaretVisible, through kit/scroll.ts: the caret within the column's box (not under the bar, not under the header).
+    // keepCaretVisible, through kit/ui/scroll.ts: the caret within the column's box (not under the bar, not under the header).
     const caret = document.getSelection()!.getRangeAt(0).getBoundingClientRect();
     const box = main.getBoundingClientRect();
     expect(caret.top).toBeGreaterThanOrEqual(box.top);
@@ -160,7 +160,7 @@ test('390×844 with a finger: a tap in the words hides the header (the focus a d
 });
 
 // A caret brought into the column stops above the bar at its foot, not under it (Paul, 2026-10-10: a new row of the
-// outline appeared under the nav and was unreachable): what the bar covers is not room (kit/scroll.ts inner).
+// outline appeared under the nav and was unreachable): what the bar covers is not room (kit/ui/scroll.ts inner).
 test('390×844 with a finger and a keyboard: Enter on the outline’s last row, at the column’s foot, lands the new row above the bar', async () => {
   await page.viewport(390, 844);
   await coarse(true);
@@ -609,13 +609,13 @@ test('390×844 with a finger: the caret is kept in sight after the column settle
   main.scrollTop = 0;
   await frame();
   expect(main.scrollTop).toBe(0);
-  // In flight: an edit at the end of 300 paragraphs leaves the column where it is (kit/text.ts asks gliding()).
+  // In flight: an edit at the end of 300 paragraphs leaves the column where it is (kit/text/text.ts asks gliding()).
   chrome.setAttribute('gliding', '');
   await userEvent.keyboard('more');
   await until(() => chrome.editing && text.tx.textContent!.includes('Paragmoreraph 300'), 2000);
   await frame();
   expect(main.scrollTop).toBeLessThan(100);
-  // Settled (the column's height transition ends): the caret is brought into what can be seen (kit/chrome.ts settle()).
+  // Settled (the column's height transition ends): the caret is brought into what can be seen (kit/ui/chrome.ts settle()).
   chrome.dispatchEvent(new TransitionEvent('transitionend', { propertyName: 'height' }));
   expect(chrome.hasAttribute('gliding')).toBe(false);
   await until(() => main.scrollTop > 1000);
@@ -667,7 +667,7 @@ test('390×844 with a finger: a dialog opened from the bar (a drawing from Inser
   await tapWords(text);
   const button = shell.querySelector<HTMLElement>('to-write-editor to-bar button')!;
   button.focus();
-  // A modal of the page's own, put on the body as kit/doc-dialog.ts puts its own: a hop out of the column and back.
+  // A modal of the page's own, put on the body as kit/ui/doc-dialog.ts puts its own: a hop out of the column and back.
   const dialog = document.createElement('dialog');
   dialog.innerHTML = '<button type="button">Done</button>';
   document.body.append(dialog);

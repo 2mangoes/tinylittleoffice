@@ -2,8 +2,8 @@
 // the API. textOf over the blocks every text app shares, and the nodes written as Markdown, stably.
 import { expect, test } from 'vitest';
 import { parse, textMarkdown, textOf, textCounts, type TextNode } from '../../src/doc/index.ts';
-import { apps } from '../../src/kit/apps.ts';
-import { textLayer } from '../../src/kit/text-layer.ts';
+import { apps } from '../../src/kit/core/apps.ts';
+import { textLayer } from '../../src/kit/text/text-layer.ts';
 
 const tpl = async (app: string, id: string) =>
   (

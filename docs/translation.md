@@ -8,7 +8,7 @@ plan for this, before it was built, is [history/translation-plan.md](history/tra
 
 ## Strings
 
-- Every string a person sees goes through `t()` (`src/kit/i18n.ts`). English is the key; `src/i18n/en.ts` is the
+- Every string a person sees goes through `t()` (`src/kit/core/i18n.ts`). English is the key; `src/i18n/en.ts` is the
   list of every key, by section, edited by hand, with a comment above any key whose meaning is not plain ("a verb
   on a button", "a noun"). Placeholders are `{name}`; plurals are `{n|one slide|# slides}`, the forms in the
   language's own order (Arabic has six, Russian, Ukrainian and Polish four, Chinese, Japanese and Korean one).
@@ -39,7 +39,7 @@ plan for this, before it was built, is [history/translation-plan.md](history/tra
   390 pixels, a dialog's button). A label that does not fit is shortened in that language.
 - **Every language drawn** (`test/browser/i18n-switch.test.ts`, `test/browser/languages.test.ts`): each opens,
   takes its direction, keeps the bar to one row, and lays the menu out at a phone's width.
-- **Widths for the drawn pages** (`test/browser/metrics.test.ts`): `kit/draw.ts`'s `textWidth`, which wraps
+- **Widths for the drawn pages** (`test/browser/metrics.test.ts`): `kit/draw/draw.ts`'s `textWidth`, which wraps
   words on the SVG pages, has a width per script (Latin, Cyrillic, Arabic, Devanagari, Bengali, Hangul, Han and
   kana), held within a tenth of the browser's own.
 

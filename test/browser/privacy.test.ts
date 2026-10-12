@@ -2,17 +2,17 @@
 // every change, the state beside the title, and what the device holds.
 import { test, expect, afterEach, vi } from 'vitest';
 import { mount, privacyAlone, tick, until, said, openShare as openShareFromDrawer } from './helpers.ts';
-import { decodeDoc, encodeDoc, isSealed } from '../../src/kit/codec.ts';
-import { parseHash } from '../../src/kit/route.ts';
-import { PREFS, forgetPrefs, prefsKept, lockWith, pack, unlock } from '../../src/kit/privacy.ts';
-import { forgetAll, keep, library } from '../../src/kit/library.ts';
-import { keepLink } from '../../src/kit/kept-links.ts';
-import { setKeeping, store } from '../../src/kit/store.ts';
-import { BASE } from '../../src/kit/zoom.ts';
-import { chosenLanguage, language, setLanguage } from '../../src/kit/i18n.ts';
-import type { ToShell } from '../../src/kit/shell.ts';
-import type { ToText } from '../../src/kit/text.ts';
-import type { ToDialog } from '../../src/kit/dialog.ts';
+import { decodeDoc, encodeDoc, isSealed } from '../../src/kit/core/codec.ts';
+import { parseHash } from '../../src/kit/core/route.ts';
+import { PREFS, forgetPrefs, prefsKept, lockWith, pack, unlock } from '../../src/kit/share/privacy.ts';
+import { forgetAll, keep, library } from '../../src/kit/share/library.ts';
+import { keepLink } from '../../src/kit/share/kept-links.ts';
+import { setKeeping, store } from '../../src/kit/core/store.ts';
+import { BASE } from '../../src/kit/ui/zoom.ts';
+import { chosenLanguage, language, setLanguage } from '../../src/kit/core/i18n.ts';
+import type { ToShell } from '../../src/kit/core/shell.ts';
+import type { ToText } from '../../src/kit/text/text.ts';
+import type { ToDialog } from '../../src/kit/ui/dialog.ts';
 
 afterEach(() => {
   vi.restoreAllMocks();
@@ -210,7 +210,7 @@ test('what this device holds, item by item with Forget, and no Download everythi
   await tick();
 });
 
-// Which documents were told they are copies (kit/shell.ts) is something this device holds: counted, and forgotten with the rest.
+// Which documents were told they are copies (kit/core/shell.ts) is something this device holds: counted, and forgotten with the rest.
 test('the copies already told are counted among the preferences and forgotten with them', () => {
   try {
     setKeeping(true);

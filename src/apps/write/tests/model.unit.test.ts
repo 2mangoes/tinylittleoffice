@@ -7,7 +7,7 @@ import { applyAll, evaluate, firstTable, formatCell, parse, write } from '../../
 import write_ from '../def.ts';
 import { lint } from '../../../lint.ts';
 // The registry, so a document held in the text is drawn by its own app.
-import { appOf } from '../../../kit/apps.ts';
+import { appOf } from '../../../kit/core/apps.ts';
 import {
   duplicateBlock,
   fieldsOf,

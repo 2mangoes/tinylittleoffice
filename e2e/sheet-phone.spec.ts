@@ -109,7 +109,7 @@ test('sheet: under a finger, a tap selects a cell whole, heads and row numbers a
   await bar.getByRole('button', { name: 'Clear these cells' }).tap();
   await expect(cell('A1')).toHaveValue('');
   // Undo from the bar brings it back. (On a phone the block's bar is the bottom row while the block is in hand, and the
-  // app's bar, with its Undo, steps aside under it, kit/context.ts docked: a tap on a cell lets the block go.)
+  // app's bar, with its Undo, steps aside under it, kit/ui/context.ts docked: a tap on a cell lets the block go.)
   await cell('A2').tap();
   await expect(bar).toBeHidden();
   await page.locator('to-bar.sheet-bar').getByRole('button', { name: 'Undo' }).tap();
@@ -143,7 +143,7 @@ test('sheet: on a phone, the row numbers are a narrow quiet side, a checkbox is 
       quiet: quiet(th) && quiet(head),
     };
   });
-  // (30px at the size of 100%; kit/zoom.ts BASE draws it 1.3 times that. src/apps/sheet/tests/editor.test.ts measures it to the digit.)
+  // (30px at the size of 100%; kit/ui/zoom.ts BASE draws it 1.3 times that. src/apps/sheet/tests/editor.test.ts measures it to the digit.)
   expect(look.side).toBeLessThanOrEqual(30 * look.base);
   expect(look.head).toBeGreaterThanOrEqual(44);
   expect(look.quiet).toBe(true);

@@ -1,8 +1,8 @@
 // The toast: a live region anything can speak through.
 import { test, expect } from 'vitest';
-import { toast } from '../../src/kit/toast.ts';
-import type { ToDialog } from '../../src/kit/dialog.ts';
-import '../../src/kit/dialog.ts';
+import { toast } from '../../src/kit/ui/toast.ts';
+import type { ToDialog } from '../../src/kit/ui/dialog.ts';
+import '../../src/kit/ui/dialog.ts';
 import { until } from './helpers.ts';
 import '../../src/styles.css';
 

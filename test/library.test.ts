@@ -33,8 +33,8 @@ const ls = new Proxy(mem, {
 });
 Object.defineProperty(globalThis, 'localStorage', { value: ls, configurable: true, writable: true });
 
-const { library, keep, forget, forgetAll, firstWords, ago, MOST } = await import('../src/kit/library.ts');
-const { setKeeping } = await import('../src/kit/store.ts');
+const { library, keep, forget, forgetAll, firstWords, ago, MOST } = await import('../src/kit/share/library.ts');
+const { setKeeping } = await import('../src/kit/core/store.ts');
 
 const entry = (id: string, at: number, hash = `#/v1/write/y${id}`) => ({ id, app: 'write', title: id, hash, at });
 
@@ -108,7 +108,7 @@ test('when, as people say it', () => {
 });
 
 test('a new document is numbered by the first number its name for the day leaves free', async () => {
-  const { firstFree, localDay } = await import('../src/kit/library.ts');
+  const { firstFree, localDay } = await import('../src/kit/share/library.ts');
   expect(localDay(new Date(2026, 9, 9, 23, 59))).toBe('2026-10-09');
   expect(localDay(new Date(2027, 0, 1, 0, 0))).toBe('2027-01-01');
   const name = 'New Spreadsheet 2026-10-09 #{n}';
@@ -122,7 +122,7 @@ test('a new document is numbered by the first number its name for the day leaves
 });
 
 test('a zip of documents kept at once: in its order, the first newest; one already kept with the same link left as it is', async () => {
-  const { keepAll } = await import('../src/kit/library.ts');
+  const { keepAll } = await import('../src/kit/share/library.ts');
   keep(entry('old', 1, '#/v1/write/ysame'));
   const n = keepAll(
     [

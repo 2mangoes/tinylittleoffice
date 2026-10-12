@@ -27,7 +27,7 @@ test('motion: a shape drawn, then moved at the last moment, keys itself there', 
   // An empty stage opens in Draw mode, which is Draw itself.
   const canvas = page.locator('to-anim-editor svg.draw-canvas');
   await expect(canvas).toBeVisible();
-  // On a phone the bar comes with the focus (kit/chrome.ts indoc): the canvas is touched before the bar is reached for.
+  // On a phone the bar comes with the focus (kit/ui/chrome.ts indoc): the canvas is touched before the bar is reached for.
   await canvas.click({ position: { x: 4, y: 4 } });
   await page.getByRole('button', { name: /^Rectangle/ }).click();
   const box = (await canvas.boundingBox())!;
@@ -36,7 +36,7 @@ test('motion: a shape drawn, then moved at the last moment, keys itself there', 
   expect(await value(page)).toMatch(/^Kind \| X \| Y \| W \| H \| Style \| Label\n--- \| --- \| --- \| --- \| --- \| --- \| ---\nr \| \d+ \| \d+ \| 12 \| 6 \| 0 \|\n$/);
 
   // Move mode: the last moment, then the rectangle dragged down and to the right. On a phone the chosen shape's bar is
-  // the bottom row and the app's bar steps aside under it (kit/context.ts docked), so the shape is let go first.
+  // the bottom row and the app's bar steps aside under it (kit/ui/context.ts docked), so the shape is let go first.
   await canvas.click({ position: { x: box.width - 4, y: box.height - 4 } });
   await page.getByRole('button', { name: 'Move', exact: true }).click();
   const stage = page.locator('svg.anim-stage');
@@ -99,7 +99,7 @@ test('motion: a tap chooses a shape and its contextual bar comes up under it, 44
   await page.goto('/#/v1/anim');
   const canvas = page.locator('to-anim-editor svg.draw-canvas');
   await expect(canvas).toBeVisible();
-  // On a phone the bar comes with the focus (kit/chrome.ts indoc): the canvas is touched before the bar is reached for.
+  // On a phone the bar comes with the focus (kit/ui/chrome.ts indoc): the canvas is touched before the bar is reached for.
   await canvas.click({ position: { x: 4, y: 4 } });
   await page.getByRole('button', { name: /^Rectangle/ }).click();
   const box = (await canvas.boundingBox())!;
@@ -109,7 +109,7 @@ test('motion: a tap chooses a shape and its contextual bar comes up under it, 44
   await page.getByRole('button', { name: 'Move', exact: true }).click();
   const stage = page.locator('svg.anim-stage');
   await expect(stage).toBeVisible();
-  // A finger on the empty stage scrolls; the browser never zooms it (a pinch there is the stage's own zoom, kit/pinch.ts).
+  // A finger on the empty stage scrolls; the browser never zooms it (a pinch there is the stage's own zoom, kit/ui/pinch.ts).
   expect(await stage.evaluate((el) => getComputedStyle(el).touchAction)).toBe('pan-x pan-y');
   const hit = stage.locator('g.hit > rect').first();
   await hit.click();

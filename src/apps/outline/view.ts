@@ -5,10 +5,10 @@
  * pages on, and the print and the thumbnail.
  */
 import { listNumbers, markNotes, noteNumbers, noteRuns, notesOf, plainText, type Dir, type Doc, type Run } from '../../doc/index.ts';
-import type { Page } from '../../kit/app.ts';
-import { ACCENT, INK, LINE, MUTED, SHADE, clip, r, rect, textWidth, xml } from '../../kit/draw.ts';
-import { glyphNamed } from '../../kit/icons.ts';
-import { t } from '../../kit/i18n.ts';
+import type { Page } from '../../kit/core/app.ts';
+import { ACCENT, INK, LINE, MUTED, SHADE, clip, r, rect, textWidth, xml } from '../../kit/draw/draw.ts';
+import { glyphNamed } from '../../kit/draw/icons.ts';
+import { t } from '../../kit/core/i18n.ts';
 import { docGist, hasChildren, liveLinks, readOutline } from './model.ts';
 
 export { docGist };

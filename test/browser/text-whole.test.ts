@@ -6,9 +6,9 @@
 import { afterEach, expect, test } from 'vitest';
 import { page, userEvent } from 'vitest/browser';
 import { mount, tick, until } from './helpers.ts';
-import { encodeDoc } from '../../src/kit/codec.ts';
-import { caret } from '../../src/kit/textops.ts';
-import type { ToShell } from '../../src/kit/shell.ts';
+import { encodeDoc } from '../../src/kit/core/codec.ts';
+import { caret } from '../../src/kit/text/textops.ts';
+import type { ToShell } from '../../src/kit/core/shell.ts';
 import type { ToWriteEditor } from '../../src/apps/write/editor.ts';
 
 afterEach(async () => {

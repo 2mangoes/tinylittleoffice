@@ -1,5 +1,5 @@
 /**
- * The Animator's commands (kit/commands.ts), its editor the context: the bar (Play or Pause, Settings), the chosen shape's
+ * The Animator's commands (kit/core/commands.ts), its editor the context: the bar (Play or Pause, Settings), the chosen shape's
  * Effects ▾ (beside its sliders), the mode (Draw or Move, one control in the row above the bar), the repeat ▾ (in Settings), the frame in hand's menu in the
  * filmstrip (duplicate, delete, a frame earlier or later), the bar under the shapes in hand (§5's order, for a motion: add a key here, remove this key
  * | edit the words, duplicate | copy, cut, paste | delete), and the stage's keys in Move mode (docs/editing.md §8:
@@ -8,9 +8,9 @@
  * Mod+A, Mod+D, Enter edits the words, Delete). In Draw mode the keys are the Drawing Tool's.
  */
 import { ArrowLeft, ArrowRight, ClipboardPaste, Copy, CopyPlus, Ellipsis, Key, PenTool, Play, Repeat, Scissors, Settings2, Sparkles, Tag } from 'lucide';
-import { register, type Command, commandsOf } from '../../kit/commands.ts';
-import { t } from '../../kit/i18n.ts';
-import { UI } from '../../kit/icons.ts';
+import { register, type Command, commandsOf } from '../../kit/core/commands.ts';
+import { t } from '../../kit/core/i18n.ts';
+import { UI } from '../../kit/draw/icons.ts';
 import { isLink } from '../draw/model.ts';
 import { EFFECTS, MAX_FRAMES, MIN_FRAMES, hasKey, setLoop, stateAt, type Loop } from './model.ts';
 import type { ToAnimEditor } from './editor.ts';

@@ -2,7 +2,7 @@
  * Tiny Little Office in Polish, as Greenpoint speaks it: the plain second person of consumer software (Ty, the
  * imperative). Keys are the English strings of en.ts.
  */
-import type { Strings } from '../kit/i18n.ts';
+import type { Strings } from '../kit/core/i18n.ts';
 
 export default {
   // ---- the shell: header ----
@@ -60,7 +60,7 @@ export default {
   'Tiny Little Office': 'Tiny Little Office', // same
   'About Tiny Little Office': 'O Tiny Little Office',
 
-  // ---- links that leave the site (kit/link-guard.ts) ----
+  // ---- links that leave the site (kit/ui/link-guard.ts) ----
   // The menu button's tooltip: the Office mark is the menu.
   'Tiny Little Office menu': 'Menu Tiny Little Office',
   // The question before a link that leaves the site: "You are leaving Tiny Little Office for" over the site's name, large.
@@ -79,7 +79,7 @@ export default {
 
   // ---- the copy kept on the device (status lines under the switch) ----
 
-  // ---- sharing: the Share dialog (kit/shell.ts), where the link fits (kit/limits.ts), the arrival banner ----
+  // ---- sharing: the Share dialog (kit/core/shell.ts), where the link fits (kit/share/limits.ts), the arrival banner ----
   'A copy opened in a new tab': 'Kopia otwarta w nowej zakładce',
   'Copy display link': 'Kopiuj link do podglądu',
   'Copy into a new document': 'Kopiuj do nowego dokumentu',
@@ -132,7 +132,7 @@ export default {
   'Link': 'Link', // same
   'Short link': 'Krótki link',
 
-  // ---- privacy (kit/privacy.ts, kit/privacy-dialog.ts): the password, what the device holds ----
+  // ---- privacy (kit/share/privacy.ts, kit/ui/privacy-dialog.ts): the password, what the device holds ----
   // The Share dialog's head line: "Created 9 Oct 2026, 14:03 · by Paul".
   'Anyone with the link will need the password to open it. Nobody can reset it: lose it and the document is gone.': 'Każdy, kto ma link, będzie potrzebował hasła, żeby otworzyć dokument. Nikt nie może go zresetować: jeśli je zgubisz, dokument przepada.',
   'Change password': 'Zmień hasło',
@@ -179,7 +179,7 @@ export default {
   'Copy this and send it another way than the link. It cannot be shown again.': 'Skopiuj je i wyślij inną drogą niż link. Nie da się go pokazać ponownie.',
   'Make another': 'Utwórz inne',
 
-  // ---- a document locked with a password, placed inside another (kit/locked.ts, kit/locked-doc.ts) ----
+  // ---- a document locked with a password, placed inside another (kit/share/locked.ts, kit/ui/locked-doc.ts) ----
   // The card drawn where it sits; {app} is the app's name: "A Spreadsheet document, locked with a password".
   'Locked with a password': 'Zablokowany hasłem',
   'A {app} document, locked with a password': 'Dokument ({app}) zablokowany hasłem',
@@ -202,7 +202,7 @@ export default {
   // The group heading the Calendar and the Trip Planner sit under on the home page.
   'Plan': 'Plan', // same
   'Chosen tasks': 'Wybrane zadania',
-  // A link that opens the document (kit/compare.ts).
+  // A link that opens the document (kit/ui/compare.ts).
   'Open': 'Otwórz',
   'Task': 'Zadanie',
   'Tasks': 'Zadania',
@@ -368,7 +368,7 @@ export default {
   'Terms of service': 'Regulamin',
   'A small business\'s terms in plain words: booking, prices, keys, what if, ending.': 'Regulamin małej firmy prostymi słowami: rezerwacje, ceny, klucze, co jeśli, zakończenie.',
 
-  // ---- Insert's dialog (kit/insert-dialogs.ts): Tiny Little Office Doc ----
+  // ---- Insert's dialog (kit/ui/insert-dialogs.ts): Tiny Little Office Doc ----
   'A Tiny Little Office link': 'Link do Tiny Little Office',
   'Opening the short link…': 'Otwieram krótki link…',
   'Paste the link of another Tiny Little Office document, long or short: its first page shows here.': 'Wklej link do innego dokumentu Tiny Little Office, długi lub krótki: jego pierwsza strona pokaże się tutaj.',
@@ -377,11 +377,11 @@ export default {
   'Tiny Little Office Doc…': 'Dokument TLO…',
   // Insert ▾'s group of the apps a new document can be made in, inside this one.
   'A new document': 'Nowy dokument',
-  // ---- another document edited in place (kit/doc-dialog.ts); a table's size is Rows × Columns ----
+  // ---- another document edited in place (kit/ui/doc-dialog.ts); a table's size is Rows × Columns ----
   'Cancel': 'Anuluj',
   'Rows': 'Wiersze',
 
-  // ---- charts (kit/chart.ts) ----
+  // ---- charts (kit/draw/chart.ts) ----
   'An empty chart': 'Pusty wykres',
   'Bars': 'Słupki',
   'Flows (Sankey)': 'Przepływy (Sankey)',
@@ -530,10 +530,10 @@ export default {
   'Unlock these cells': 'Odblokuj te komórki',
   'What it holds; sort; columns': 'Co zawiera; sortowanie; kolumny',
 
-  // ---- downloads: hand-offs to another app (kit/exports.ts) ----
+  // ---- downloads: hand-offs to another app (kit/file/exports.ts) ----
   'Open in': 'Otwórz w',
 
-  // ---- the icon library (kit/icons-picker.ts) ----
+  // ---- the icon library (kit/ui/icons-picker.ts) ----
   'Icon': 'Ikona',
   'Favorites': 'Ulubione',
   'Search icons': 'Szukaj ikon',

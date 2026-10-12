@@ -7,14 +7,14 @@
  * name it; Connect joins any two items. Every change is operations on the document (model.ts): the kernel's
  * family helpers for the tree, splices for lines, joins and documents, and the row editor's own ops for words.
  * Folds, the zoom, the chosen row and connecting are the editor's state, not the document's. The footnotes are
- * listed under the outline (<to-notes>, kit/notes.ts), each typed there: a mark tapped, or Footnote, puts the caret
+ * listed under the outline (<to-notes>, kit/draw/notes.ts), each typed there: a mark tapped, or Footnote, puts the caret
  * in its note; Enter or Escape come back to the mark.
  *
  * It behaves as a bulleted list does: Enter at the start of words pushes the row down, Backspace at the start joins
  * the row to the item before it and Delete at the end joins the next one in. Rows can be chosen whole, as nodes (a
  * range): Shift+arrows from the caret, Escape in the words, a tap on a row's handle, Select All twice. A range is a span
  * of blocks, every chosen row's family with it; it is copied, cut, pasted, deleted, duplicated, indented and moved as
- * one, from the keys or from a small bar that comes up under it. All of that is the kit's rows controller (kit/rows.ts);
+ * one, from the keys or from a small bar that comes up under it. All of that is the kit's rows controller (kit/text/rows.ts);
  * this editor gives it the rows and the operations. Any list can be numbered ("1. " typed at the start of a row too).
  */
 import { html, nothing, type PropertyDeclarations, type TemplateResult } from 'lit';
@@ -22,29 +22,29 @@ import { repeat } from 'lit/directives/repeat.js';
 import { unsafeSVG } from 'lit/directives/unsafe-svg.js';
 import { ArrowLeft, ArrowLeftRight, ArrowRight, ChevronDown, ChevronRight, GripVertical, ListOrdered, Minus, ZoomIn } from 'lucide';
 import { applyAll, family, fenceRef, isAtomic, isText, listNumbers, plainText, runLength, write, type Block, type Doc, type Op } from '../../doc/index.ts';
-import { cmdBtn, cmdTool, tool } from '../../kit/bar.ts';
-import { drawnIn, labelOf, runKey } from '../../kit/commands.ts';
-import { BOLD, FOOTNOTE, HIGHLIGHT, ITALIC, LINK, STRIKE, UNDERLINE } from '../../kit/text-commands.ts';
-import type { Handoff } from '../../kit/app.ts';
+import { cmdBtn, cmdTool, tool } from '../../kit/ui/bar.ts';
+import { drawnIn, labelOf, runKey } from '../../kit/core/commands.ts';
+import { BOLD, FOOTNOTE, HIGHLIGHT, ITALIC, LINK, STRIKE, UNDERLINE } from '../../kit/text/text-commands.ts';
+import type { Handoff } from '../../kit/core/app.ts';
 import COMMANDS from './commands.ts';
-import { appOf } from '../../kit/apps.ts';
-import { docToHtml, GENERATOR, htmlToBlocks } from '../../kit/clipboard.ts';
-import type { ContextEntry } from '../../kit/context.ts';
-import { lastCopied, Rows, type Clip, type RowItem, type RowRange, type RowSpan } from '../../kit/rows.ts';
-import { decodeDoc, encodeDoc, isSealed } from '../../kit/codec.ts';
-import { LOCKED_LANG, lockedFence, placedLink } from '../../kit/locked.ts';
-import type { ToDialog } from '../../kit/dialog.ts';
-import { editFence, makeDoc } from '../../kit/doc-dialog.ts';
-import { pageSvg } from '../../kit/draw.ts';
-import { DocElement, firstAt, type Entry } from '../../kit/element.ts';
-import { icon, UI } from '../../kit/icons.ts';
-import { t } from '../../kit/i18n.ts';
-import { noteMarks, type NoteMark, type ToNotes } from '../../kit/notes.ts';
-import { askDocLink } from '../../kit/insert-dialogs.ts';
-import type { MenuItem, ToMenu } from '../../kit/menu.ts';
-import { parseHash, routeHash } from '../../kit/route.ts';
-import type { NoteAt, Sel, TextOps, ToText } from '../../kit/text.ts';
-import { caret } from '../../kit/textops.ts';
+import { appOf } from '../../kit/core/apps.ts';
+import { docToHtml, GENERATOR, htmlToBlocks } from '../../kit/text/clipboard.ts';
+import type { ContextEntry } from '../../kit/ui/context.ts';
+import { lastCopied, Rows, type Clip, type RowItem, type RowRange, type RowSpan } from '../../kit/text/rows.ts';
+import { decodeDoc, encodeDoc, isSealed } from '../../kit/core/codec.ts';
+import { LOCKED_LANG, lockedFence, placedLink } from '../../kit/share/locked.ts';
+import type { ToDialog } from '../../kit/ui/dialog.ts';
+import { editFence, makeDoc } from '../../kit/ui/doc-dialog.ts';
+import { pageSvg } from '../../kit/draw/draw.ts';
+import { DocElement, firstAt, type Entry } from '../../kit/core/element.ts';
+import { icon, UI } from '../../kit/draw/icons.ts';
+import { t } from '../../kit/core/i18n.ts';
+import { noteMarks, type NoteMark, type ToNotes } from '../../kit/draw/notes.ts';
+import { askDocLink } from '../../kit/ui/insert-dialogs.ts';
+import type { MenuItem, ToMenu } from '../../kit/ui/menu.ts';
+import { parseHash, routeHash } from '../../kit/core/route.ts';
+import type { NoteAt, Sel, TextOps, ToText } from '../../kit/text/text.ts';
+import { caret } from '../../kit/text/textops.ts';
 import {
   appendItem,
   connect,
@@ -91,14 +91,14 @@ import {
   type OutlineView,
 } from './model.ts';
 import { appName, docGist, outlinePage } from './view.ts';
-import '../../kit/bar.ts';
-import '../../kit/insert.ts';
-import '../../kit/menu.ts';
-import '../../kit/dialog.ts';
-import '../../kit/doc-dialog.ts';
-import '../../kit/notes.ts';
-import '../../kit/text.ts';
-import '../../kit/context.ts';
+import '../../kit/ui/bar.ts';
+import '../../kit/ui/insert.ts';
+import '../../kit/ui/menu.ts';
+import '../../kit/ui/dialog.ts';
+import '../../kit/ui/doc-dialog.ts';
+import '../../kit/draw/notes.ts';
+import '../../kit/text/text.ts';
+import '../../kit/ui/context.ts';
 import './style.css';
 
 export const tag = 'to-outline-editor';
@@ -118,7 +118,7 @@ function refOfLink(words: string): string | null {
   if (!/^https?:\/\/\S+#\/v\d+\//.test(s)) return null;
   const { app, payload } = parseHash(s.slice(s.indexOf('#')));
   if (!app) return null;
-  // A link locked with a password goes in as itself (kit/locked.ts).
+  // A link locked with a password goes in as itself (kit/share/locked.ts).
   if (isSealed(payload)) return fenceRef(lockedFence(app, payload) as { lang: string; body: string });
   const text = decodeDoc(payload);
   return payload && !text ? null : `${app}\n${text}`;
@@ -318,7 +318,7 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
 
   /* ---------- the words ---------- */
 
-  /* ---------- rows chosen whole (kit/rows.ts) ---------- */
+  /* ---------- rows chosen whole (kit/text/rows.ts) ---------- */
 
   /** The rows on screen as the rows controller takes them: each with its element and its family's blocks. */
   private rowItems(): RowItem<number>[] {
@@ -795,7 +795,7 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
     void this.updateComplete.then(() => this.querySelector<ToDialog>('.ol-page-dialog')?.show());
   }
   async pickIcon() {
-    const { chooseIcon } = await import('../../kit/icons-picker.ts');
+    const { chooseIcon } = await import('../../kit/ui/icons-picker.ts');
     const name = await chooseIcon();
     if (name) this.field?.exec('icon', name);
   }

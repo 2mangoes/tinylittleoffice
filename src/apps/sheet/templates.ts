@@ -6,8 +6,8 @@
  * beside them as named cells to play with, the formulas locked so a reader changes the numbers and not the
  * model, and a headline (`{big=…}`) drawn large. What each is for is in templates.md.
  */
-import type { Template } from '../../kit/app.ts';
-import { t } from '../../kit/i18n.ts';
+import type { Template } from '../../kit/core/app.ts';
+import { t } from '../../kit/core/i18n.ts';
 import { column, write, type Block, type Doc } from '../../doc/index.ts';
 
 const table = (head: string[], rows: string[][], big?: string): Block => ({

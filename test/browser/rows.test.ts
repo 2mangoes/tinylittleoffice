@@ -1,17 +1,17 @@
-// The kit's rows controller (src/kit/rows.ts) against a tiny host: a list of words, each at a depth, its family the
+// The kit's rows controller (src/kit/text/rows.ts) against a tiny host: a list of words, each at a depth, its family the
 // deeper rows after it. Every behaviour the standard gives rows chosen whole (docs/editing.md §3, §6): choosing by the
 // handle and by Shift+arrows (both ways, turning at the anchor), Select All, letting go, Delete, Tab, Alt+arrows, Mod+D,
 // the clipboard, a drag by pointer events with its target drawn, a tap outside, the bar under the range and its order,
 // and a finger's second tap extending.
 import { test, expect } from 'vitest';
 import { html, LitElement } from 'lit';
-import { Rows, lastCopied, type RowRange, type RowSpan } from '../../src/kit/rows.ts';
-import type { ToText } from '../../src/kit/text.ts';
-import { caret } from '../../src/kit/textops.ts';
-import '../../src/kit/text.ts';
+import { Rows, lastCopied, type RowRange, type RowSpan } from '../../src/kit/text/rows.ts';
+import type { ToText } from '../../src/kit/text/text.ts';
+import { caret } from '../../src/kit/text/textops.ts';
+import '../../src/kit/text/text.ts';
 import '../../src/styles.css';
 import { tick } from './helpers.ts';
-import { BASE, remScale } from '../../src/kit/zoom.ts';
+import { BASE, remScale } from '../../src/kit/ui/zoom.ts';
 
 type It = { w: string; d: number };
 
@@ -353,7 +353,7 @@ test('a drag by the handle: past 6px it carries the row, the target is drawn aft
   expect(el.rows.drag).toMatchObject({ id: 0, over: 2, how: 'after' });
   const line = document.querySelector<HTMLElement>('.to-rows-target')!;
   expect(line.hidden).toBe(false);
-  // At the normal size (a rem BASE × 16px, kit/zoom.ts): the line on the screen lies along the row's bottom edge,
+  // At the normal size (a rem BASE × 16px, kit/ui/zoom.ts): the line on the screen lies along the row's bottom edge,
   // starting at its left padding, both measured on the screen.
   expect(remScale()).toBe(BASE);
   const rowEl = el.querySelector<HTMLElement>('.row[data-i="2"]')!;

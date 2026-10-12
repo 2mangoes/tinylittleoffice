@@ -7,9 +7,9 @@ import { page } from 'vitest/browser';
 import '../../../styles.css';
 import '../editor.ts';
 import type { ToCalEditor } from '../editor.ts';
-import type { ToText } from '../../../kit/text.ts';
+import type { ToText } from '../../../kit/text/text.ts';
 import { tick, until } from '../../../../test/browser/helpers.ts';
-import { remScale } from '../../../kit/zoom.ts';
+import { remScale } from '../../../kit/ui/zoom.ts';
 
 const DOC = '---\nzone: Europe/London\ngreen: Sam\n---\n- 2027-03-01: Launch\n- 2027-03-01 to 2027-03-03: Offsite {color=green}\n- 2027-03-10 09:00-10:30: Retro {every=week times=3}\n';
 const PLAN = '---\nview: gantt\n---\n- 2027-03-01 to 2027-03-05: Design\n  - 2027-03-01 to 2027-03-02: Sketch {done=50%}\n  - 2027-03-03 to 2027-03-05: Draw\n- 2027-03-08 to 2027-03-10: Build\n';

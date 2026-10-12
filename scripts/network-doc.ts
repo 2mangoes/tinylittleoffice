@@ -1,5 +1,5 @@
 /**
- * docs/network.md and public/network.html (the site's /network), written from src/kit/network.ts: every
+ * docs/network.md and public/network.html (the site's /network), written from src/kit/core/network.ts: every
  * request the site can make, when, what it carries and what stops it. The words around the list are
  * here, as prose the script carries; the list is the registry's, so the page cannot drift from the code.
  * The page is plain HTML: no script, the site's colors inline, dark when the device is.
@@ -9,7 +9,7 @@
  */
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { NETWORK, reaches, type Reach } from '../src/kit/network.ts';
+import { NETWORK, reaches, type Reach } from '../src/kit/core/network.ts';
 import { generate } from './generated.ts';
 
 const CSP: Record<string, string> = { connect: 'connect-src', img: 'img-src' };
@@ -47,7 +47,7 @@ follows them; nothing in a document is drawn from another site's address.
   fetched when a page's words need it, and the policy's \`font-src\` is \`'self'\` alone; the full icon set is a
   chunk of the site's own, loaded when the icon picker opens.
 - **Links.** A link in a document that leaves the site opens only after the reader is shown where it goes
-  and says Go (kit/link-guard.ts), in a new tab with no referrer.
+  and says Go (kit/ui/link-guard.ts), in a new tab with no referrer.
 
 ## Nothing else
 
@@ -58,7 +58,7 @@ anywhere in the site.
 
 ## How this page is kept true
 
-It is written from \`src/kit/network.ts\`, the one list of every host, by \`scripts/network-doc.ts\`
+It is written from \`src/kit/core/network.ts\`, the one list of every host, by \`scripts/network-doc.ts\`
 (\`npm run docs:network\`, which \`npm run build\` runs first); a test fails when the committed page is not
 what the list says. Every module that asks the web takes its host from that list, so a new host cannot be
 reached without appearing here. The policy's \`connect-src\` and \`img-src\` are written from the same list
@@ -77,7 +77,7 @@ function requestsMd(): string {
 }
 
 export function networkDoc(): string {
-  const head = '<!-- Generated from src/kit/network.ts by scripts/network-doc.ts (npm run docs:network). Do not edit: change the list or the script. -->\n\n';
+  const head = '<!-- Generated from src/kit/core/network.ts by scripts/network-doc.ts (npm run docs:network). Do not edit: change the list or the script. -->\n\n';
   return head + PROSE.replace('{{requests}}', requestsMd());
 }
 
@@ -159,7 +159,7 @@ dd{margin:0}
 
 export function networkPage(): string {
   return `<!doctype html>
-<!-- Generated from src/kit/network.ts by scripts/network-doc.ts (npm run docs:network). Do not edit. -->
+<!-- Generated from src/kit/core/network.ts by scripts/network-doc.ts (npm run docs:network). Do not edit. -->
 <html lang="en">
 <head>
 <meta charset="utf-8" />
@@ -175,7 +175,7 @@ ${STYLE}
 <main>
 <p class="home"><a href="./">Tiny Little Office</a></p>
 ${proseHtml()}
-<p class="note">Written from <code>src/kit/network.ts</code>; the same page is <code>docs/network.md</code> in the repository.</p>
+<p class="note">Written from <code>src/kit/core/network.ts</code>; the same page is <code>docs/network.md</code> in the repository.</p>
 </main>
 </body>
 </html>

@@ -1,6 +1,6 @@
 // A language, chosen in the drawer: the shell draws again in it, and <html lang> follows.
 import { test, expect } from 'vitest';
-import { register, setLanguage } from '../../src/kit/i18n.ts';
+import { register, setLanguage } from '../../src/kit/core/i18n.ts';
 import { mount, until } from './helpers.ts';
 
 test('an in-memory Spanish dictionary takes over the shell when chosen', async () => {

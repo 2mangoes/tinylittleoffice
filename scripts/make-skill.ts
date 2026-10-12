@@ -24,10 +24,10 @@
  */
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
-import type { Template } from '../src/kit/app.ts';
-import { apps, appOf } from '../src/kit/apps.ts';
+import type { Template } from '../src/kit/core/app.ts';
+import { apps, appOf } from '../src/kit/core/apps.ts';
 import { FUNCTIONS, hasClass, parse, write, type Doc } from '../src/doc/index.ts';
-import { plainLink, readPlain } from '../src/kit/plain.ts';
+import { plainLink, readPlain } from '../src/kit/core/plain.ts';
 import { skillCommands } from './commands.ts';
 import { cut, examplesOf, type Example } from './shapes.ts';
 import { lint } from '../src/lint.ts';

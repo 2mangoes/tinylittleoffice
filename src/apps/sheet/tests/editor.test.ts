@@ -6,10 +6,10 @@ import { page, userEvent } from 'vitest/browser';
 import '../../../styles.css';
 import '../editor.ts';
 import type { ToSheetEditor } from '../editor.ts';
-import type { ToText } from '../../../kit/text.ts';
+import type { ToText } from '../../../kit/text/text.ts';
 import { until, tick } from '../../../../test/browser/helpers.ts';
-import { BASE, remScale } from '../../../kit/zoom.ts';
-/** A length on the screen in the stylesheet's own pixels (the normal size draws at kit/zoom.ts BASE). */
+import { BASE, remScale } from '../../../kit/ui/zoom.ts';
+/** A length on the screen in the stylesheet's own pixels (the normal size draws at kit/ui/zoom.ts BASE). */
 const css = (px: number) => px / remScale();
 
 const SHEET = 'Item | Cost:money\n--- | ---\nRent | 1200\nFood | 450\nTotal | =SUM(B1:B2)\n';
@@ -758,7 +758,7 @@ test('a column head selects its column; the grip is resized from the keyboard, a
 
 test("a column dragged by its grip grows by the drag in the sheet's own pixels: N on the screen is N / the zoom, not N", async () => {
   const { el } = await editor(SHEET);
-  // The normal size draws a rem at BASE × 16px (kit/zoom.ts): a drag kept in screen pixels would widen the column 30% too much.
+  // The normal size draws a rem at BASE × 16px (kit/ui/zoom.ts): a drag kept in screen pixels would widen the column 30% too much.
   expect(remScale()).toBe(BASE);
   const grip = el.querySelectorAll<HTMLElement>('th .grip')[0];
   const th = grip.closest('th')!;

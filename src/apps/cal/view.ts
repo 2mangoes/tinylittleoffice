@@ -4,11 +4,11 @@
  * a CSV.
  */
 import { dayToYmd, ymdToDay, type Doc } from '../../doc/index.ts';
-import type { Page } from '../../kit/app.ts';
-import { csv } from '../../kit/csv.ts';
-import { ACCENT, FAINT, INK, LINE, MUTED, SHADE, clip, r, rect, text } from '../../kit/draw.ts';
-import { language, t } from '../../kit/i18n.ts';
-import { icsDate, icsStamp, icsText, vcalendar } from '../../kit/ics.ts';
+import type { Page } from '../../kit/core/app.ts';
+import { csv } from '../../kit/file/csv.ts';
+import { ACCENT, FAINT, INK, LINE, MUTED, SHADE, clip, r, rect, text } from '../../kit/draw/draw.ts';
+import { language, t } from '../../kit/core/i18n.ts';
+import { icsDate, icsStamp, icsText, vcalendar } from '../../kit/file/ics.ts';
 import { CAL_COLORS, clockMinutes, ganttBars, ganttRange, occurrences, readCal, repeatText, spanDays, spanEndMs, spanStartMs, type CalView, type Every } from './model.ts';
 import { clockString, dayString, pad2, utcToParts } from './tz.ts';
 

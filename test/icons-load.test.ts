@@ -1,7 +1,7 @@
-// A document may name any Lucide icon (kit/icons.ts): iconNames lists what a document names, ensureIcons loads the
+// A document may name any Lucide icon (kit/draw/icons.ts): iconNames lists what a document names, ensureIcons loads the
 // rest of Lucide once when one of them is outside the starter set, and resolves at once when all are known.
 import { expect, test } from 'vitest';
-import { ensureIcons, iconNamed, iconNames, iconsComplete, loadIcons, onIcons } from '../src/kit/icons.ts';
+import { ensureIcons, iconNamed, iconNames, iconsComplete, loadIcons, onIcons } from '../src/kit/draw/icons.ts';
 
 test('iconNames: ":name:" in words, ":name" at a label\'s start, each once; never a colon after a letter or digit', () => {
   expect(iconNames('A :rocket: and :car-front: and :rocket: again.\n')).toEqual(['rocket', 'car-front']);

@@ -6,17 +6,17 @@
 import { test, expect, afterEach } from 'vitest';
 import { page } from 'vitest/browser';
 import { mount, tick, until, openShare, settled } from './helpers.ts';
-import { parseHash } from '../../src/kit/route.ts';
-import { encodeDoc } from '../../src/kit/codec.ts';
-import { chosenLanguage, directionOf, language, languagePending, languages, missed, register, setLanguage, type Strings } from '../../src/kit/i18n.ts';
+import { parseHash } from '../../src/kit/core/route.ts';
+import { encodeDoc } from '../../src/kit/core/codec.ts';
+import { chosenLanguage, directionOf, language, languagePending, languages, missed, register, setLanguage, type Strings } from '../../src/kit/core/i18n.ts';
 import { takeHomeLink } from '../../src/apps/deck/view.ts';
 import { parse } from '../../src/doc/index.ts';
 import { pseudo } from '../pseudo.ts';
 import en from '../../src/i18n/en.ts';
-import type { ToShell } from '../../src/kit/shell.ts';
-import type { ToShare } from '../../src/kit/share-dialog.ts';
-import type { ToDialog } from '../../src/kit/dialog.ts';
-import { keepSize, SIZE_MAX } from '../../src/kit/zoom.ts';
+import type { ToShell } from '../../src/kit/core/shell.ts';
+import type { ToShare } from '../../src/kit/ui/share-dialog.ts';
+import type { ToDialog } from '../../src/kit/ui/dialog.ts';
+import { keepSize, SIZE_MAX } from '../../src/kit/ui/zoom.ts';
 
 const files = import.meta.glob<{ default: Strings }>(['../../src/i18n/*.ts', '!../../src/i18n/en.ts']);
 const fileCode = (path: string) => path.replace(/^.*\/([^/]+)\.ts$/, '$1');

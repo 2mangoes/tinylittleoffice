@@ -3,11 +3,11 @@
 // cut and paste before trying to copy one sentence multiple times."). The format says them: "\ " at a line's ends.
 import { expect, test } from 'vitest';
 import { parse, plainText, write, type Block } from '../../src/doc/index.ts';
-import { decodeDoc, encodeDoc } from '../../src/kit/codec.ts';
-import { parseHash } from '../../src/kit/route.ts';
-import type { ToShell } from '../../src/kit/shell.ts';
-import type { ToText } from '../../src/kit/text.ts';
-import { caret, type Sel } from '../../src/kit/textops.ts';
+import { decodeDoc, encodeDoc } from '../../src/kit/core/codec.ts';
+import { parseHash } from '../../src/kit/core/route.ts';
+import type { ToShell } from '../../src/kit/core/shell.ts';
+import type { ToText } from '../../src/kit/text/text.ts';
+import { caret, type Sel } from '../../src/kit/text/textops.ts';
 import { mount, tick, until } from './helpers.ts';
 
 /** The Word Processor at a document, its words' editor ready. */

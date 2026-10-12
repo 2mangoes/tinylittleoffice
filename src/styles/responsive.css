@@ -107,7 +107,7 @@
       font-size: var(--to-scale);
     }
     /* The keyboard coming or going: the column glides to the visible window's new height, and the bar fades out while
-       it moves and back when it settles (kit/chrome.ts `gliding`; Paul, 2026-10-10: "it jumps and it's overwhelming"). */
+       it moves and back when it settles (kit/ui/chrome.ts `gliding`; Paul, 2026-10-10: "it jumps and it's overwhelming"). */
     to-chrome[gliding] {
       transition: height 0.2s ease-out;
     }
@@ -119,10 +119,10 @@
     .to-column.barred {
       transition: padding-bottom 0.2s ease-out;
     }
-    /* The bar comes with the focus (kit/chrome.ts: indoc): while nothing in the document has it (reading), the bar
+    /* The bar comes with the focus (kit/ui/chrome.ts: indoc): while nothing in the document has it (reading), the bar
        slides under the column's foot and its room goes with it; an editor whose keys are the
        document (the Calculator: data-bar="always") keeps it. While words are selected the context bar is the row
-       (kit/context.ts: docked), and the bar's own steps aside under it. */
+       (kit/ui/context.ts: docked), and the bar's own steps aside under it. */
     to-chrome:not([indoc]) .to-column.barred:not(:has(> main > .to-editor[data-bar='always'])),
     :root[data-context-row] .to-column.barred {
       padding-bottom: 0;
@@ -133,7 +133,7 @@
       opacity: 0;
       pointer-events: none;
     }
-    /* Undo and Redo are always on a phone's screen (kit/keys.ts `pinned`; the review of 2026-10-11: "Undo is never on
+    /* Undo and Redo are always on a phone's screen (kit/core/keys.ts `pinned`; the review of 2026-10-11: "Undo is never on
        screen in any app's bar"): held at the bar's inline end, however far the bar is
        scrolled, the rest passing under them; on a bar under 360px (bar.ts data-narrow) Undo alone, Redo in the row.
        Opaque, off or not, with a margin of the bar's own ground round them, so what passes under never shows. */
@@ -180,7 +180,7 @@
       opacity: 0;
     }
     /* Under a finger the bar's place is the column's bottom: above the keyboard while one is up, since the column is
-       the visible window's height (kit/chrome.ts), and above the home indicator while none is. */
+       the visible window's height (kit/ui/chrome.ts), and above the home indicator while none is. */
     .to-column.barred {
       padding-top: 0;
       padding-bottom: var(--to-bar-h);

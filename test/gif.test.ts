@@ -2,7 +2,7 @@
 // reads every frame back pixel for pixel, across the 4096-code boundary too.
 import { test } from 'vitest';
 import assert from 'node:assert/strict';
-import { encodeGif, quantize, type GifFrame } from '../src/kit/gif.ts';
+import { encodeGif, quantize, type GifFrame } from '../src/kit/file/gif.ts';
 
 const solid = (w: number, h: number, rgba: number[]): Uint8ClampedArray => {
   const d = new Uint8ClampedArray(w * h * 4);

@@ -149,7 +149,7 @@ test('outline: on a phone, a finger drags a row by its handle (pointer events, n
       rows: getComputedStyle(document.querySelector('.ol')!).touchAction,
     };
   });
-  // (44px at least: 2.75rem, drawn 57.2px at the size of 100%, kit/zoom.ts BASE.)
+  // (44px at least: 2.75rem, drawn 57.2px at the size of 100%, kit/ui/zoom.ts BASE.)
   expect({ ...hit, w: parseFloat(hit.w) >= 44, h: parseFloat(hit.h) >= 44 }).toMatchObject({ coarse: true, w: true, h: true, touch: 'none', rows: 'manipulation' });
   expect(hit.drawn).toBeLessThan(44);
   expect(hit.above).toBe(true);
@@ -176,7 +176,7 @@ test('outline: on a phone, a finger drags a row by its handle (pointer events, n
   await expect.poll(() => page.locator('to-outline-editor').evaluate((el) => (el as HTMLElement & { value: string }).value)).toBe('- B\n- C\n- A\n');
   await expect(page.locator('.to-rows-target')).toHaveCount(0);
   // A finger's tap on a handle chooses; a second tap on another extends (the bar is the bottom row on a phone,
-  // kit/context.ts docked: clear of the rows, inside the screen).
+  // kit/ui/context.ts docked: clear of the rows, inside the screen).
   await page.locator('.ol-row[data-at="1"] .ol-handle').tap();
   await expect(page.locator('.ol-row[data-at="1"]')).toHaveClass(/\branged\b/);
   const bar = (await page.locator('.ol-context .to-context').boundingBox())!;

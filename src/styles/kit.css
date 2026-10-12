@@ -2,7 +2,7 @@
    menus, dialogs, fields, the toast). Plain class names, prefixed to-; light DOM throughout.
 
    Lengths, one rule for every stylesheet: rem for the document, em inside a nav element, px only for hairlines and
-   media queries (test/stylesheets.test.ts holds every sheet to it). The size of everything (kit/zoom.ts) is two plain
+   media queries (test/stylesheets.test.ts holds every sheet to it). The size of everything (kit/ui/zoom.ts) is two plain
    numbers on the root: --to-doc, the root's font size (the browser's default × it), which every rem follows; and --to-nav, the font
    size of each nav element (the list below), which every em inside it follows and which stops at the nav's limit. A
    font size inside the nav is a part of --to-scale (the 16px of the scale it is under: the document's rem, the nav's
@@ -17,7 +17,7 @@
   }
   html {
     -webkit-text-size-adjust: 100%;
-    /* A pinch on a touch screen never zooms the browser: it is the size of everything (kit/pinch.ts), or a spatial
+    /* A pinch on a touch screen never zooms the browser: it is the size of everything (kit/ui/pinch.ts), or a spatial
        canvas's own zoom. One finger pans as ever. */
     touch-action: pan-x pan-y;
     /* The document's scale: what a rem is. The person's own size is the 100%: the browser's default (16px unless they
@@ -29,7 +29,7 @@
     --to-scale: 1rem;
   }
   /* Paper is not the screen: a page printed from here (a Display Link's pages) is drawn at its own size, whatever the
-     size of everything (kit/zoom.ts sets these on the root's style, which an !important rule outranks). */
+     size of everything (kit/ui/zoom.ts sets these on the root's style, which an !important rule outranks). */
   @media print {
     html {
       --to-doc: 1 !important;
@@ -89,7 +89,7 @@
   samp {
     font-family: var(--to-font-mono);
   }
-  /* The page is the visible window and never scrolls: the document's column does (<to-chrome>, kit/chrome.ts). Paper
+  /* The page is the visible window and never scrolls: the document's column does (<to-chrome>, kit/ui/chrome.ts). Paper
      is not the screen, so a page printed from here flows on as long as it is. */
   @media screen {
     html,
@@ -309,7 +309,7 @@
     flex: none;
   }
 
-  /* ---- rows (kit/rows.ts): a row's handle, and where a dragged row would land ---- */
+  /* ---- rows (kit/text/rows.ts): a row's handle, and where a dragged row would land ---- */
   /* The handle alone takes a finger's drag from the page (the rest of the row scrolls as ever). */
   .to-rows-handle {
     position: relative;
@@ -521,7 +521,7 @@
     border: 0;
     background: transparent;
   }
-  /* Every preview the one box, 4:3, the page cropped to it (CROPPED, kit/draw.ts): 96 by 72 in a list of templates. */
+  /* Every preview the one box, 4:3, the page cropped to it (CROPPED, kit/draw/draw.ts): 96 by 72 in a list of templates. */
   .to-thumb {
     flex: none;
     width: 6em;
@@ -1431,12 +1431,12 @@
       pointer-events: auto;
     }
   }
-  /* What a toast says (kit/toast.ts), in the page or a dialog: at the corner of what holds it, never below the page's foot. */
+  /* What a toast says (kit/ui/toast.ts), in the page or a dialog: at the corner of what holds it, never below the page's foot. */
   .to-said {
     top: 0;
     left: 0;
   }
-  /* The size of everything while a pinch is in hand (kit/pinch.ts): top centre, above everything, moving nothing. */
+  /* The size of everything while a pinch is in hand (kit/ui/pinch.ts): top centre, above everything, moving nothing. */
   .to-pinch-pill {
     position: fixed;
     inset: max(0.5333em, env(safe-area-inset-top)) auto auto 50%;
@@ -1459,7 +1459,7 @@
     opacity: 1;
   }
 
-  /* ---- the shell: a column the visible window's height (<to-chrome>, kit/chrome.ts) ---- */
+  /* ---- the shell: a column the visible window's height (<to-chrome>, kit/ui/chrome.ts) ---- */
   to-shell {
     display: block;
   }
@@ -1630,9 +1630,9 @@
     padding-left: var(--to-col-inset-l);
     padding-right: var(--to-col-inset-r);
   }
-  /* An editor's column has half of what can be seen of it (--to-col-h, kit/chrome.ts) as room below its last line, so
+  /* An editor's column has half of what can be seen of it (--to-col-h, kit/ui/chrome.ts) as room below its last line, so
      the caret typed at the end stays at the middle of the screen (Paul, 2026-10-12: "enough padding at the end of a
-     document we are editing that the cursor stays roughly in the middle of the screen unless we scroll"; kit/scroll.ts
+     document we are editing that the cursor stays roughly in the middle of the screen unless we scroll"; kit/ui/scroll.ts
      revealCaret's `middle`). The spatial canvases, which fill the column, keep the gutter (their own stylesheets). */
   .to-main.to-wide {
     padding-left: var(--to-inset-l);
@@ -1829,7 +1829,7 @@
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-  /* The column (kit/chrome.ts): it scrolls the window's width, what it holds kept to the measure in its middle. */
+  /* The column (kit/ui/chrome.ts): it scrolls the window's width, what it holds kept to the measure in its middle. */
   .to-display {
     display: flex;
     flex-direction: column;
@@ -1841,7 +1841,7 @@
     padding-right: max(var(--to-gutter), env(safe-area-inset-right));
   }
   /* A page at its paper's width (a letter page about 816px), smaller only to fit a narrower screen, centred; never stretched. */
-  /* The pages in a box two fingers zoom (kit/shell.ts pinchZoom): --to-view-zoom is their width over the column's, 1 to 4,
+  /* The pages in a box two fingers zoom (kit/core/shell.ts pinchZoom): --to-view-zoom is their width over the column's, 1 to 4,
      and the column scrolls sideways to the rest (Paul, 2026-10-11: pinch zoom in view modes too). */
   .to-display-pages {
     display: flex;
@@ -1866,7 +1866,7 @@
     border-radius: 0.1875rem;
     box-shadow: var(--to-shadow);
   }
-  /* The text layer (kit/text-view.ts): read by a screen reader before the pages; shown by Text in their place, reflowed
+  /* The text layer (kit/text/text-view.ts): read by a screen reader before the pages; shown by Text in their place, reflowed
      at the person's size in the theme's colors. Hidden, it is shown should the keyboard reach a link in it (a11y.css). */
   .to-display-text {
     max-width: 42em;
@@ -2003,7 +2003,7 @@
     background: transparent;
     color: var(--to-ink-2);
   }
-  /* The foot (kit/home.ts): who made it and where its source is, quiet, its words in line with the apps' names, clear of
+  /* The foot (kit/ui/home.ts): who made it and where its source is, quiet, its words in line with the apps' names, clear of
      a phone's home indicator. */
   .to-home-foot {
     padding: 1.5em 0.5em max(1.5em, env(safe-area-inset-bottom));
@@ -2075,7 +2075,7 @@
     color: var(--to-ink-2);
   }
 
-  /* ---- a kept document's first page, small, beside its name (<to-preview>, kit/preview.ts): the one 4:3 box, 72 by 54 ---- */
+  /* ---- a kept document's first page, small, beside its name (<to-preview>, kit/ui/preview.ts): the one 4:3 box, 72 by 54 ---- */
   to-preview {
     flex: none;
     display: block;
@@ -2096,7 +2096,7 @@
     height: 2.25em;
   }
 
-  /* ---- the question before a link leaves the site (kit/link-guard.ts) ---- */
+  /* ---- the question before a link leaves the site (kit/ui/link-guard.ts) ---- */
   .to-link-guard .lg-what {
     margin: 0;
     font-size: calc(1.25 * var(--to-scale));
@@ -2201,7 +2201,7 @@
     gap: 0.75rem;
   }
 
-  /* ---- a document locked with a password, placed in another (kit/locked-doc.ts): the card a tap opens ---- */
+  /* ---- a document locked with a password, placed in another (kit/ui/locked-doc.ts): the card a tap opens ---- */
   to-locked-doc {
     display: contents;
   }
@@ -2512,7 +2512,7 @@
   }
 }
 @layer kit {
-  /* The hidden box that holds a phone's keyboard up between a tap that makes a document and its editor being drawn (kit/chrome.ts startEditing). */
+  /* The hidden box that holds a phone's keyboard up between a tap that makes a document and its editor being drawn (kit/ui/chrome.ts startEditing). */
   .to-keyboard-hold {
     position: fixed;
     inset: auto 0 0 auto;
@@ -2523,7 +2523,7 @@
   }
 }
 @layer a11y {
-  /* The instant of a copy (kit/clipboard.ts installPlainCopy): the words black on white whatever the theme, so a
+  /* The instant of a copy (kit/text/clipboard.ts installPlainCopy): the words black on white whatever the theme, so a
      rendering the browser takes of the selection carries no dark theme's white into a paste. */
   :root[data-copying] {
     color-scheme: light;

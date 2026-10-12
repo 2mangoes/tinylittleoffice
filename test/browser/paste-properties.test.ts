@@ -5,7 +5,7 @@
 import fc from 'fast-check';
 import { expect, test } from 'vitest';
 import { normalRuns, parse, write, type Block, type Doc, type Run } from '../../src/doc/index.ts';
-import { docToHtml, htmlToBlocks } from '../../src/kit/clipboard.ts';
+import { docToHtml, htmlToBlocks } from '../../src/kit/text/clipboard.ts';
 import { arbitraryDoc, RUNS } from '../doc/tlo-grammar.ts';
 
 function holds<T>(name: string, arb: fc.Arbitrary<T>, pred: (x: T) => void): void {

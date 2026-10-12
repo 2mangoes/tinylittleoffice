@@ -8,7 +8,7 @@
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { REPO, isVersion, type Version } from '../src/kit/version.ts';
+import { REPO, isVersion, type Version } from '../src/kit/core/version.ts';
 
 export function releaseNotes(v: Version, archive = 'dist.tar.gz'): string {
   const name = v.tag || v.commit.slice(0, 7);

@@ -12,7 +12,7 @@
  * hundred documents generated from the grammar (test/doc/tlo-grammar.ts).
  *
  * Then it reports, for every template of every app on this tree, the link's
- * payload under today's DICTIONARY (kit/codec.ts) and under the trained one,
+ * payload under today's DICTIONARY (kit/core/codec.ts) and under the trained one,
  * each the shortest of the three encodings as packDoc chooses. The rule for
  * changing it: every template shorter or equal, and
  * the largest template's link 5% shorter or more. A second dictionary would
@@ -24,8 +24,8 @@ import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import fc from 'fast-check';
 import { deflateSync, strToU8 } from 'fflate';
-import { DICTIONARY, toBase64Url } from '../src/kit/codec.ts';
-import { apps } from '../src/kit/apps.ts';
+import { DICTIONARY, toBase64Url } from '../src/kit/core/codec.ts';
+import { apps } from '../src/kit/core/apps.ts';
 import { arbitraryText } from '../test/doc/tlo-grammar.ts';
 
 const args = process.argv.slice(2);

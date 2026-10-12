@@ -1,4 +1,4 @@
-/* The editor (<to-text>, src/kit/text.ts): the box, its blocks, the two chips, the cards that stand for what
+/* The editor (<to-text>, src/kit/text/text.ts): the box, its blocks, the two chips, the cards that stand for what
    is not words, and the two bubbles. Type never under 16px (an iPhone zooms on less); the caret in the
    accent. An app's own look (Write's paper) goes over this in its own sheet. */
 @layer kit {
@@ -268,7 +268,7 @@
     display: none;
   }
 
-  /* ---- the completion under ":word" (kit/complete.ts): a manual popover like the link bubble ---- */
+  /* ---- the completion under ":word" (kit/ui/complete.ts): a manual popover like the link bubble ---- */
   .to-complete {
     position: fixed;
     inset: auto;
@@ -323,7 +323,7 @@
     }
   }
 
-  /* ---- the notes where they are drawn (<to-notes>, kit/notes.ts): each one a line of words typed in place ---- */
+  /* ---- the notes where they are drawn (<to-notes>, kit/draw/notes.ts): each one a line of words typed in place ---- */
   to-notes {
     display: block;
   }

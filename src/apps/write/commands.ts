@@ -1,17 +1,17 @@
 /**
- * The Word Processor's commands (kit/commands.ts), its editor the context: the bar's own (the kinds of block, Icon,
+ * The Word Processor's commands (kit/core/commands.ts), its editor the context: the bar's own (the kinds of block, Icon,
  * the menus Insert ▾, Align, Look and Paper with their items), the keys it adds to the words' (Mod+Shift+L, E, R
  * and J align the block in hand, Docs' and Word's keys; Mod+Shift+Enter is a page break; both only while the words
  * have the focus, so Mod+Shift+R reloads the page from anywhere else), and the bar under a card in hand, in §6's
  * order with its keys (Enter, Alt+Up/Down, Mod+D, Mod+C/X/V, Delete; Escape or an arrow back to the words). The
- * marks, Link, Footnote, the lists and Indent are the words' own (kit/text-commands.ts), drawn in this bar with the
+ * marks, Link, Footnote, the lists and Indent are the words' own (kit/text/text-commands.ts), drawn in this bar with the
  * editor's <to-text> as their context.
  */
 import { ArrowDown, ArrowUp, ClipboardPaste, Copy, CopyPlus, Palette, Pilcrow, Ruler, Scissors, SeparatorHorizontal, CornerDownLeft } from 'lucide';
-import { apps } from '../../kit/apps.ts';
-import { register, type Command, commandsOf } from '../../kit/commands.ts';
-import { t } from '../../kit/i18n.ts';
-import { UI } from '../../kit/icons.ts';
+import { apps } from '../../kit/core/apps.ts';
+import { register, type Command, commandsOf } from '../../kit/core/commands.ts';
+import { t } from '../../kit/core/i18n.ts';
+import { UI } from '../../kit/draw/icons.ts';
 import { lookOf, LOOK_IDS, LOOKS } from './look.ts';
 import { PAPERS, paperOf, type Paper } from './model.ts';
 import type { ToWriteEditor } from './editor.ts';

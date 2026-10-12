@@ -1,6 +1,6 @@
-// The envelope (kit/envelope.ts): created to the minute, and the head's keys that are the document's.
+// The envelope (kit/core/envelope.ts): created to the minute, and the head's keys that are the document's.
 import { test, expect } from 'vitest';
-import { isoMinute, quantizeCreated, readEnvelope } from '../src/kit/envelope.ts';
+import { isoMinute, quantizeCreated, readEnvelope } from '../src/kit/core/envelope.ts';
 
 test('created keeps minute precision, and reads back as it was shown', () => {
   const t = Date.UTC(2026, 9, 5, 14, 32, 45);

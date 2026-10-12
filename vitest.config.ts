@@ -4,7 +4,7 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
 /**
- * The commands the browser tests ran (src/kit/commands.ts `trace`, set by test/browser/setup.ts), added to the map the
+ * The commands the browser tests ran (src/kit/core/commands.ts `trace`, set by test/browser/setup.ts), added to the map the
  * registry's lint reads (test/commands-covered.json): every command is run by at least one test. A browser command runs
  * in this process, so the files' writes never interleave; ids only join, sorted, so a run of some files keeps the rest.
  */

@@ -6,7 +6,7 @@
  *   PW_PORT=4422 npx playwright test e2e/shell-phone.spec.ts --workers=1
  */
 import { test, expect } from '@playwright/test';
-import { encodeDoc } from '../src/kit/codec.ts';
+import { encodeDoc } from '../src/kit/core/codec.ts';
 
 const wide = (page: import('@playwright/test').Page) => page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
 
@@ -37,7 +37,7 @@ test('a tap opens where the link fits; the size steps; Insert narrows; a trip pr
   await expect(page.locator('.to-size-now')).toHaveText('100%');
   await page.keyboard.press('Escape');
 
-  // On a phone the bar comes with the focus (kit/chrome.ts indoc): the words are tapped before Insert.
+  // On a phone the bar comes with the focus (kit/ui/chrome.ts indoc): the words are tapped before Insert.
   await page.locator('to-write-editor to-text .tx').tap();
   await page.locator('to-write-editor to-insert > button').tap();
   await page.keyboard.type('ta');
@@ -47,7 +47,7 @@ test('a tap opens where the link fits; the size steps; Insert narrows; a trip pr
 
   const trip = 'Place | Lat:number | Lon:number | Note\n--- | --- | --- | ---\nLisbon | 38.7223 | -9.1393 | Nata\nPorto | 41.1579 | -8.6291 |\n';
   await page.goto(`/#/v1/trip/${encodeDoc(trip)}`);
-  // Present needs nothing in hand: while reading it is a row of the drawer's This document (kit/drawer.ts).
+  // Present needs nothing in hand: while reading it is a row of the drawer's This document (kit/ui/drawer.ts).
   await page.locator('.to-burger').tap();
   await page.getByRole('region', { name: 'This document' }).getByRole('button', { name: 'Present' }).tap();
   await expect(page.locator('.trip-present b')).toHaveText('1 of 2 · Lisbon');

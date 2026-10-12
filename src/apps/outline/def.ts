@@ -5,13 +5,13 @@
  */
 import { ListTree } from 'lucide';
 import { apply, parse, write, type Doc as Kernel } from '../../doc/index.ts';
-import { defineApp, type Doc } from '../../kit/app.ts';
-import { utf8 } from '../../kit/draw.ts';
-import { textPdf } from '../../kit/textpdf.ts';
-import { t } from '../../kit/i18n.ts';
+import { defineApp, type Doc } from '../../kit/core/app.ts';
+import { utf8 } from '../../kit/draw/draw.ts';
+import { textPdf } from '../../kit/file/textpdf.ts';
+import { t } from '../../kit/core/i18n.ts';
 import { liveItems, notesAsItems, outlineBlocks, outlineText, outlineToDeck, outlineToMind, outlineToFamily, outlineToNet, outlineToOrg, readOutline, toOpml } from './model.ts';
 import { appName, outlinePage } from './view.ts';
-import { partOf } from '../../kit/steps.ts';
+import { partOf } from '../../kit/draw/steps.ts';
 
 const headOf = (doc: Doc): Kernel => parse(doc);
 /** The document's name: its title head field. */
@@ -73,7 +73,7 @@ export default defineApp({
     { ext: 'opml', label: () => t('OPML (for outliners)'), mime: 'text/x-opml;charset=utf-8', shows: null, build: (doc) => utf8(toOpml(readOutline(parse(doc)), nameFor(doc))) },
     // Markdown as other readers know it: an item's notes a numbered list right under it (any other in reference form at the end).
     { ext: 'md', label: () => t('Markdown'), mime: 'text/markdown;charset=utf-8', shows: 'text', build: (doc) => utf8(write(notesAsItems(parse(doc)))) },
-    // The words as words: sections and bullets, selectable, linked, bookmarked (kit/textpdf.ts), in place of the kit's pictures of the page.
+    // The words as words: sections and bullets, selectable, linked, bookmarked (kit/file/textpdf.ts), in place of the kit's pictures of the page.
     {
       ext: 'pdf',
       label: () => t('PDF: sections and bullets'),

@@ -1,6 +1,6 @@
 // The link's shape: "#/v1/<app>[.<view>][/<payload>][?d][&s=&x=]".
 import { test, expect } from 'vitest';
-import { LINK, parseHash, routeHash, withText } from '../src/kit/route.ts';
+import { LINK, parseHash, routeHash, withText } from '../src/kit/core/route.ts';
 
 test('a document link is read and written the same way', () => {
   expect(LINK).toBe('#/v1/');
@@ -64,8 +64,8 @@ test('a payload may hold "~" (what is written now) or "-" (what was written befo
 });
 
 test('a compare fragment and a link to compare take payloads with "~" or "-"', async () => {
-  const { parseCompare, sideOf } = await import('../src/kit/compare.ts');
-  const { toBase64Url, decodeDoc } = await import('../src/kit/codec.ts');
+  const { parseCompare, sideOf } = await import('../src/kit/ui/compare.ts');
+  const { toBase64Url, decodeDoc } = await import('../src/kit/core/codec.ts');
   expect(parseCompare('#/compare/write/yA~b/write/yA-b')).toEqual([
     { app: 'write', payload: 'yA~b' },
     { app: 'write', payload: 'yA-b' },
@@ -79,7 +79,7 @@ test('a compare fragment and a link to compare take payloads with "~" or "-"', a
 });
 
 test('the language rides in the link as "lang", beside every other parameter, and is absent when none was chosen', async () => {
-  const { withLang } = await import('../src/kit/route.ts');
+  const { withLang } = await import('../src/kit/core/route.ts');
   expect(routeHash('write', 'yABC', '', false, null, 'ht')).toBe('#/v1/write/yABC?lang=ht');
   expect(parseHash('#/v1/write/yABC?lang=ht')).toEqual({ app: 'write', payload: 'yABC', version: 1, view: '', display: false, arrived: null, sealed: false, lang: 'ht' });
   expect(parseHash(routeHash('write', 'yABC'))).not.toHaveProperty('lang');

@@ -2,10 +2,10 @@
 import { test, expect } from 'vitest';
 import { render, html } from 'lit';
 import { cdp } from 'vitest/browser';
-import { tool, btn, cmdTool } from '../../src/kit/bar.ts';
-import { REDO, UNDO } from '../../src/kit/keys.ts';
-import { keyboard } from '../../src/kit/commands.ts';
-import { UI } from '../../src/kit/icons.ts';
+import { tool, btn, cmdTool } from '../../src/kit/ui/bar.ts';
+import { REDO, UNDO } from '../../src/kit/core/keys.ts';
+import { keyboard } from '../../src/kit/core/commands.ts';
+import { UI } from '../../src/kit/draw/icons.ts';
 import { until } from './helpers.ts';
 import '../../src/styles.css';
 
@@ -58,7 +58,7 @@ test('a label in the bar is one line, however narrow the bar; a hint is the tool
   expect(buttons[1].hasAttribute('title')).toBe(false);
 });
 
-// The review of 2026-10-11: "Undo is never on screen in any app's bar". Under a finger Undo and Redo (kit/keys.ts,
+// The review of 2026-10-11: "Undo is never on screen in any app's bar". Under a finger Undo and Redo (kit/core/keys.ts,
 // `pinned`) stay at the bar's inline end however far it is scrolled; on a bar under 360px Undo alone; under a mouse the
 // bar is as it was, Undo last in its scroll.
 test('under a finger Undo and Redo stay at the end of a bar however it is scrolled; under a mouse they scroll with it', async () => {

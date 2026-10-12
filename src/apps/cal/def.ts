@@ -5,10 +5,10 @@
  */
 import { CalendarDays } from 'lucide';
 import { apply, parse, write, type Doc as Kernel, type TextNode } from '../../doc/index.ts';
-import { defineApp, type Doc } from '../../kit/app.ts';
-import { csvSeparator } from '../../kit/csv.ts';
-import { utf8 } from '../../kit/draw.ts';
-import { language, t } from '../../kit/i18n.ts';
+import { defineApp, type Doc } from '../../kit/core/app.ts';
+import { csvSeparator } from '../../kit/file/csv.ts';
+import { utf8 } from '../../kit/draw/draw.ts';
+import { language, t } from '../../kit/core/i18n.ts';
 import { calPages, calToCsv, calToIcs } from './view.ts';
 import { readCal, repeatText, spanDays, spanEndMs, spanStartMs } from './model.ts';
 import { clockString, utcToParts } from './tz.ts';

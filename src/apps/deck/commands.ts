@@ -1,5 +1,5 @@
 /**
- * The Presentation Builder's commands (kit/commands.ts), its editor the context: the bar (Insert ▾ with the kinds of
+ * The Presentation Builder's commands (kit/core/commands.ts), its editor the context: the bar (Insert ▾ with the kinds of
  * slide, Present or the sheets to print, the marks, Link and Footnote and the lists' Indent and Bring out, which are
  * the words' own with the box in hand as their context, Icon, the menus Layout, Look, Transition and Format, the
  * closing QR code, Move slide up and down, Delete slide), the keys of the slide being edited (docs/editing.md §8:
@@ -8,10 +8,10 @@
  * the show (Space, Enter and the right arrow on, the left arrow back, End the whole slide, N the notes, Escape out).
  */
 import { ChevronDown, ChevronUp, LayoutTemplate, Palette, Play, Printer, Scroll, Shuffle } from 'lucide';
-import { apps } from '../../kit/apps.ts';
-import { command, register, type Command, commandsOf } from '../../kit/commands.ts';
-import { t } from '../../kit/i18n.ts';
-import { UI } from '../../kit/icons.ts';
+import { apps } from '../../kit/core/apps.ts';
+import { command, register, type Command, commandsOf } from '../../kit/core/commands.ts';
+import { t } from '../../kit/core/i18n.ts';
+import { UI } from '../../kit/draw/icons.ts';
 import { FORMATS, LAYOUTS, setHead, TRANSITIONS, type Layout } from './model.ts';
 import { ICON_COLORS, THEMES } from './theme.ts';
 import { geometryOf } from './view.ts';

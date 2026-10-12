@@ -11,8 +11,8 @@
  * inside the subtotal's reach so a line added there is summed, and the tax rate sits in its own row's Qty cell,
  * where a formula can read it.
  */
-import type { Template } from '../../kit/app.ts';
-import { t } from '../../kit/i18n.ts';
+import type { Template } from '../../kit/core/app.ts';
+import { t } from '../../kit/core/i18n.ts';
 
 const LETTER = `*Your name*
 *Street and number*

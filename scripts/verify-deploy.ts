@@ -18,7 +18,7 @@
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { buildCommit, commitOf, distIs, hashTree, ROOT, sha256, viteEnv, type Made } from './builds.ts';
-import { isVersion, type Version } from '../src/kit/version.ts';
+import { isVersion, type Version } from '../src/kit/core/version.ts';
 
 /** A file of the build and how the site's copy compares. */
 export interface Row {

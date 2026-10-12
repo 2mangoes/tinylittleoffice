@@ -31,7 +31,7 @@
  *
  * Pixel mode (`grid: 8|16|32|64` in the head): the one `p` block is the grid, a line a row, a letter a
  * square (a to h the inks, "." clear), as the old pixel app wrote it. "Use as background" writes the grid
- * into the head as a `tile:` (kit/tile.ts), drawn behind the shapes.
+ * into the head as a `tile:` (kit/draw/tile.ts), drawn behind the shapes.
  *
  * Every command here is pure: given the document and what to do, the `Op[]` that does it. A shape changed
  * is `cells` on its row; one added or taken away is `rows`; the joins that must be renumbered are `cells`;
@@ -42,8 +42,8 @@
  * them numbered within it, so a copy pastes into another drawing, into Motion, or into a sheet as a table.
  */
 import { apply, columnsOf, parse, parseInline, plainText, write, writeInline, type Block, type Column, type Doc, type Op, type Run, type TableBlock, type TextNode } from '../../doc/index.ts';
-import { t } from '../../kit/i18n.ts';
-import { TILE_INKS, TILE_SIDES, parseTile, tileOf, type Tile } from '../../kit/tile.ts';
+import { t } from '../../kit/core/i18n.ts';
+import { TILE_INKS, TILE_SIDES, parseTile, tileOf, type Tile } from '../../kit/draw/tile.ts';
 
 export const W = 640;
 export const H = 400;

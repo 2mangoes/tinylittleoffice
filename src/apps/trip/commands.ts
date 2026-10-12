@@ -1,5 +1,5 @@
 /**
- * The Trip Planner's commands (kit/commands.ts), its editor the context: the bar (Insert ▾ a place by name or a stop
+ * The Trip Planner's commands (kit/core/commands.ts), its editor the context: the bar (Insert ▾ a place by name or a stop
  * at the map's middle, Measure in ▾, Join the stops in order, Show the whole route, Where I am, Map, Present), the stops' own item
  * in the bar under chosen stops (Show on the map), and the keys (docs/editing.md §8): Mod+Alt+Enter presents from
  * anywhere in the editor; in a stop's words Alt+Up/Down move it, Mod+D duplicates it, Up and Down go to the stop before
@@ -8,8 +8,8 @@
  * back to the map. A key acts on what `here` says (the stop and its field, or the pin), set as the key comes.
  */
 import { Crosshair, LocateFixed, Map as MapIcon, Ruler, Scan, Spline } from 'lucide';
-import { register, type Command, commandsOf } from '../../kit/commands.ts';
-import { UI } from '../../kit/icons.ts';
+import { register, type Command, commandsOf } from '../../kit/core/commands.ts';
+import { UI } from '../../kit/draw/icons.ts';
 import { MAX_STOPS, setLinked, setUnits, type Units } from './model.ts';
 import type { ToTripEditor } from './editor.ts';
 

@@ -4,13 +4,13 @@
 // Download everything wrote it, dropped on an empty device, gives the library it was written from.
 import { test, expect, afterEach, vi } from 'vitest';
 import { dropFile, mount, said, tick, until } from './helpers.ts';
-import { encodeDoc } from '../../src/kit/codec.ts';
-import { library, forgetAll } from '../../src/kit/library.ts';
-import { setKeeping } from '../../src/kit/store.ts';
-import { keeping, lockWith, pack } from '../../src/kit/privacy.ts';
-import { zip } from '../../src/kit/zip.ts';
-import { toast as say } from '../../src/kit/toast.ts';
-import type { ToDialog } from '../../src/kit/dialog.ts';
+import { encodeDoc } from '../../src/kit/core/codec.ts';
+import { library, forgetAll } from '../../src/kit/share/library.ts';
+import { setKeeping } from '../../src/kit/core/store.ts';
+import { keeping, lockWith, pack } from '../../src/kit/share/privacy.ts';
+import { zip } from '../../src/kit/file/zip.ts';
+import { toast as say } from '../../src/kit/ui/toast.ts';
+import type { ToDialog } from '../../src/kit/ui/dialog.ts';
 
 afterEach(() => {
   vi.restoreAllMocks();

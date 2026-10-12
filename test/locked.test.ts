@@ -1,15 +1,15 @@
-// A document locked with a password, placed inside another (kit/locked.ts): it goes in as its sealed link, the
+// A document locked with a password, placed inside another (kit/share/locked.ts): it goes in as its sealed link, the
 // text keeps it byte for byte, and every drawing of the outer document draws the locked card, never blank; a
 // link that cannot be read draws "cannot be read".
 import { test, expect, beforeAll } from 'vitest';
-import '../src/kit/apps.ts';
-import { appOf } from '../src/kit/apps.ts';
-import { lookup } from '../src/kit/app.ts';
-import { encodeDoc, packDoc } from '../src/kit/codec.ts';
-import { newLocker, seal, unseal } from '../src/kit/crypt.ts';
-import { linkToFence } from '../src/kit/clipboard.ts';
-import { forgetOpened, LOCKED_LANG, lockedFence, lockedOf, lockedPage, notOpened, setOpened } from '../src/kit/locked.ts';
-import { routeHash } from '../src/kit/route.ts';
+import '../src/kit/core/apps.ts';
+import { appOf } from '../src/kit/core/apps.ts';
+import { lookup } from '../src/kit/core/app.ts';
+import { encodeDoc, packDoc } from '../src/kit/core/codec.ts';
+import { newLocker, seal, unseal } from '../src/kit/share/crypt.ts';
+import { linkToFence } from '../src/kit/text/clipboard.ts';
+import { forgetOpened, LOCKED_LANG, lockedFence, lockedOf, lockedPage, notOpened, setOpened } from '../src/kit/share/locked.ts';
+import { routeHash } from '../src/kit/core/route.ts';
 import { parse, write, type Block } from '../src/doc/index.ts';
 import { fenceLink } from '../src/apps/write/view.ts';
 

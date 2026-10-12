@@ -5,8 +5,8 @@
 import { test, expect } from 'vitest';
 import { cardHtml } from '../scripts/make-cards.ts';
 import { ogHtml } from '../scripts/icons.ts';
-import { appOf } from '../src/kit/apps.ts';
-import { FONT } from '../src/kit/draw.ts';
+import { appOf } from '../src/kit/core/apps.ts';
+import { FONT } from '../src/kit/draw/draw.ts';
 
 const plex = (html: string) => {
   expect(html).toContain(`font-family:${FONT}`);

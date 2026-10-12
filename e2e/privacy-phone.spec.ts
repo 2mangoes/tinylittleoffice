@@ -6,8 +6,8 @@
  *   PW_PORT=4420 npx playwright test e2e/privacy-phone.spec.ts --project=phone --workers=1
  */
 import { test, expect } from '@playwright/test';
-import { newLocker, seal } from '../src/kit/crypt.ts';
-import { encodeDoc, packDoc } from '../src/kit/codec.ts';
+import { newLocker, seal } from '../src/kit/share/crypt.ts';
+import { encodeDoc, packDoc } from '../src/kit/core/codec.ts';
 
 test('a sealed link on a phone: the unlock dialog inside 390px, a wrong password, then the document', async ({ page }, info) => {
   test.skip(info.project.name !== 'phone', 'phone only');

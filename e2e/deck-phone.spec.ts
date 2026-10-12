@@ -7,7 +7,7 @@
  *   PW_PORT=4187 npx playwright test e2e/deck-phone.spec.ts --project=phone --workers=1
  */
 import { test, expect } from '@playwright/test';
-import { encodeDoc } from '../src/kit/codec.ts';
+import { encodeDoc } from '../src/kit/core/codec.ts';
 
 const SHOTS = process.env.SHOTS;
 
@@ -127,7 +127,7 @@ test("deck: on a phone, a drawing from Insert ▾ is made in a dialog that fills
   page.on('pageerror', (e) => errors.push(String(e)));
   await page.goto('/#/v1/deck');
   await expect(page.locator('to-deck-editor to-text.deck-title .tx')).toBeVisible();
-  // On a phone the bar comes with the focus (kit/chrome.ts indoc): the words are tapped before Insert.
+  // On a phone the bar comes with the focus (kit/ui/chrome.ts indoc): the words are tapped before Insert.
   await page.locator('to-deck-editor to-text.deck-title .tx').tap();
   await page.getByRole('button', { name: 'Insert', exact: true }).tap();
   await page.getByRole('menuitem', { name: 'Drawing Tool' }).tap();

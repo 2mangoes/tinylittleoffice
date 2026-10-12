@@ -3,7 +3,7 @@ stops catching is seen. Nothing here is imported by the site.
 
 - `bare-words.ts`: words in a template that are not through t()
 - `graph/src/`: an app importing another, the kit importing an app, the kernel importing the kit and naming the
-  window, a language imported outside kit/i18n.ts, and an import cycle
+  window, a language imported outside kit/core/i18n.ts, and an import cycle
 - `built/`: a build whose entry chunk is over the budget the test gives it
 - `stale.md`: a generated file that is not what its script writes
 - `timed-waits.ts`: a test that waits a time (tick, setTimeout, waitForTimeout) over 50ms, where a condition belongs

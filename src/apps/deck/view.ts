@@ -5,15 +5,15 @@
  * closing slide is a QR code of the deck's own link. The deck as a web page plays itself: one slide at a
  * time, with the transition the header names, by a fixed script the site's policy allows by hash.
  */
-import { lookup, type Page } from '../../kit/app.ts';
-import { encodeDoc } from '../../kit/codec.ts';
-import { FAINT, FONT, INK, MUTED, PAPER, pageSvg, r, rect, textWidth, xml } from '../../kit/draw.ts';
-import { glyphNamed, iconNamed } from '../../kit/icons.ts';
-import { chosenLanguage, t } from '../../kit/i18n.ts';
-import { MOTION_JS } from '../../kit/motion.ts';
-import { pageScript } from '../../kit/page.ts';
-import { QR_MAX_BYTES, qrSvg } from '../../kit/qr.ts';
-import { routeHash } from '../../kit/route.ts';
+import { lookup, type Page } from '../../kit/core/app.ts';
+import { encodeDoc } from '../../kit/core/codec.ts';
+import { FAINT, FONT, INK, MUTED, PAPER, pageSvg, r, rect, textWidth, xml } from '../../kit/draw/draw.ts';
+import { glyphNamed, iconNamed } from '../../kit/draw/icons.ts';
+import { chosenLanguage, t } from '../../kit/core/i18n.ts';
+import { MOTION_JS } from '../../kit/draw/motion.ts';
+import { pageScript } from '../../kit/draw/page.ts';
+import { QR_MAX_BYTES, qrSvg } from '../../kit/draw/qr.ts';
+import { routeHash } from '../../kit/core/route.ts';
 import { attr, markNotes, noteNumbers, noteRuns, parse, plainText, runLinks, write, type Doc, type Run } from '../../doc/index.ts';
 import { iconHex, panelOf, settingsOf, slideNotes, slideText, slidesOf, type Format, type Item, type Settings, type Slide } from './model.ts';
 import { themeOf, type DeckTheme } from './theme.ts';
@@ -883,9 +883,9 @@ export function deckFrames(text: string): Page[] {
 /* ---------- the deck as a web page ---------- */
 
 /**
- * The player's script: fixed, so the site's policy allows it by hash (kit/page.ts). Tap the right of the page to
+ * The player's script: fixed, so the site's policy allows it by hash (kit/draw/page.ts). Tap the right of the page to
  * go on, the left to go back; the keys do the same; a tap on a link follows it and turns no slide. A slide that comes on starts its animations from the
- * beginning and the others are paused (kit/motion.ts).
+ * beginning and the others are paused (kit/draw/motion.ts).
  */
 const PLAYER = pageScript(`${MOTION_JS}
 var pages = [].slice.call(document.querySelectorAll('section')), at = 0, was = -1;

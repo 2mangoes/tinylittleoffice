@@ -9,9 +9,9 @@ import { page } from 'vitest/browser';
 import '../../../styles.css';
 import '../editor.ts';
 import type { ToDiagramEditor } from '../editor.ts';
-import type { ToText } from '../../../kit/text.ts';
+import type { ToText } from '../../../kit/text/text.ts';
 import { tick, until } from '../../../../test/browser/helpers.ts';
-import { BASE, remScale } from '../../../kit/zoom.ts';
+import { BASE, remScale } from '../../../kit/ui/zoom.ts';
 
 const ORG = '---\nkind: org\n---\n- Ada Diaz | Chief executive\n  - Ben Okoro | Engineering\n  - Eve Marsh | Design\n\n~ Ben Okoro -- Eve Marsh: design partner\n';
 const NET = '---\nkind: net\n---\n- Web\n- API\n- Database\n';
@@ -542,7 +542,7 @@ test('§5 Mod+wheel zooms the picture; the wheel alone does not', async () => {
   await settle(el);
   expect(e.defaultPrevented).toBe(true);
   expect(pic.getBoundingClientRect().width).toBeGreaterThan(w);
-  // One finger pans the frame; two are the picture's own zoom (kit/pinch.ts), never the browser's.
+  // One finger pans the frame; two are the picture's own zoom (kit/ui/pinch.ts), never the browser's.
   expect(getComputedStyle(pic).touchAction).toBe('pan-x pan-y');
   expect(wrap.hasAttribute('data-spatial')).toBe(true);
 });
@@ -907,7 +907,7 @@ test("a plus ending a family's name starts the partner's; inside the words it is
   expect(last()).toContain('  - H+elen\n');
 });
 
-test('at the normal size (a rem kit/zoom.ts BASE × 16px) the words sit on the thing on the screen, not a scale away from it', async () => {
+test('at the normal size (a rem kit/ui/zoom.ts BASE × 16px) the words sit on the thing on the screen, not a scale away from it', async () => {
   const { el } = await editor(ORG);
   expect(remScale()).toBe(BASE);
   const g = thing(el, 'Eve Marsh');

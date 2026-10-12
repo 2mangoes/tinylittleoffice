@@ -34,7 +34,7 @@ test('home loads, the Word Processor opens, nothing throws, axe passes', async (
   await expect(page).toHaveURL(/#\/v1\/write\/[ryz]/);
   await expect(area.locator('p')).toHaveText('A line written on the phone.');
   // Done (the keyboard's, on a phone): the words let go, and the header, which steps aside on a phone while they have
-  // the focus (kit/chrome.ts), is back.
+  // the focus (kit/ui/chrome.ts), is back.
   await page.evaluate(() => (document.activeElement as HTMLElement | null)?.blur());
   // A new document has its name from the start: "New Document <today> #1".
   await expect(page.locator('.to-title')).toHaveValue(/^New Document \d{4}-\d{2}-\d{2} #1$/);
@@ -46,7 +46,7 @@ test('home loads, the Word Processor opens, nothing throws, axe passes', async (
   expect((await axe(page)).violations).toEqual([]);
 
   // The Insert menu opens inside the screen and Escape closes it. On a phone the bar comes with the focus
-  // (kit/chrome.ts indoc; responsive.css; while reading it is away, and inert), so the words are tapped first.
+  // (kit/ui/chrome.ts indoc; responsive.css; while reading it is away, and inert), so the words are tapped first.
   await area.click();
   await page.getByRole('button', { name: 'Insert' }).click();
   await expect(page.locator('to-insert [role=menu]')).toBeVisible();
@@ -113,7 +113,7 @@ test('the person’s own size is the 100%: a browser set to 20px type draws a re
       .locator(sel)
       .first()
       .evaluate((el) => parseFloat(getComputedStyle(el).fontSize));
-  // kit/zoom.ts BASE: the normal size draws everything at 1.3 of the browser's default.
+  // kit/ui/zoom.ts BASE: the normal size draws everything at 1.3 of the browser's default.
   expect(await px('html')).toBeCloseTo(26, 1);
   expect(await px('.to-header')).toBeCloseTo(26, 1);
 });

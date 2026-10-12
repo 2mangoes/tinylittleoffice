@@ -3,13 +3,13 @@
 import { test, expect } from 'vitest';
 import { userEvent } from 'vitest/browser';
 import { render, html } from 'lit';
-import '../../src/kit/insert.ts';
-import type { ToInsert } from '../../src/kit/insert.ts';
-import type { ToMenu } from '../../src/kit/menu.ts';
-import '../../src/kit/menu.ts';
-import '../../src/kit/home.ts';
-import type { ToTemplates } from '../../src/kit/home.ts';
-import { UI } from '../../src/kit/icons.ts';
+import '../../src/kit/ui/insert.ts';
+import type { ToInsert } from '../../src/kit/ui/insert.ts';
+import type { ToMenu } from '../../src/kit/ui/menu.ts';
+import '../../src/kit/ui/menu.ts';
+import '../../src/kit/ui/home.ts';
+import type { ToTemplates } from '../../src/kit/ui/home.ts';
+import { UI } from '../../src/kit/draw/icons.ts';
 import { until } from './helpers.ts';
 import '../../src/styles.css';
 

@@ -1,6 +1,6 @@
 // The QR code: the standard's shape at both ends of the range.
 import { test, expect } from 'vitest';
-import { qrCode, qrSvg, QR_MAX_BYTES } from '../src/kit/qr.ts';
+import { qrCode, qrSvg, QR_MAX_BYTES } from '../src/kit/draw/qr.ts';
 
 test('a QR code of a link has the standard shape', () => {
   const small = qrCode(new TextEncoder().encode('https://tinylittleoffice.com/'));

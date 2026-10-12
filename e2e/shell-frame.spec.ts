@@ -1,6 +1,6 @@
 /**
  * The document is the page (Paul, 2026-10-10): on a phone (WebKit, 390 by 844) the Word Processor's paper is as wide
- * as the screen with no border; the page never scrolls, the words scroll in a column (kit/chrome.ts) with
+ * as the screen with no border; the page never scrolls, the words scroll in a column (kit/ui/chrome.ts) with
  * the header and the bar holding still, the bar at the column's bottom; a tap in the words hides the header, the menu
  * button floating at the top right; a tap on the title opens it wide, its automatic name chosen whole. On a desktop the
  * words keep the page's measure, and the editor has the window's width, not a column: a wide sheet is never cut off. Run
@@ -9,7 +9,7 @@
  *   PW_PORT=4436 npx playwright test e2e/shell-frame.spec.ts --workers=1
  */
 import { test, expect } from '@playwright/test';
-import { encodeDoc } from '../src/kit/codec.ts';
+import { encodeDoc } from '../src/kit/core/codec.ts';
 import { settled } from './settled.ts';
 
 const LONG = `---\ntitle: Long\n---\n${Array.from({ length: 60 }, (_, i) => `Paragraph ${i + 1}, long enough to take a line or two of the page.`).join('\n\n')}\n`;
@@ -33,7 +33,7 @@ test('phone: the paper edge to edge, the column scrolls under the header and the
   expect(p.border).toBe('0px');
   expect(p.radius).toBe('0px');
   expect(p.shadow).toBe('none');
-  // The words keep an inset of 16 of the stylesheet's pixels (a rem is the size of everything, kit/zoom.ts, × 16px).
+  // The words keep an inset of 16 of the stylesheet's pixels (a rem is the size of everything, kit/ui/zoom.ts, × 16px).
   const unit = await page.evaluate(() => parseFloat(getComputedStyle(document.documentElement).fontSize) / 16);
   const words = (await page.locator('.write-page .write-text').boundingBox())!;
   expect(Math.round(words.x / unit)).toBe(16);
@@ -44,7 +44,7 @@ test('phone: the paper edge to edge, the column scrolls under the header and the
   expect(await page.evaluate(() => [window.scrollY, document.querySelector('.to-main')!.scrollTop > 1000])).toEqual([0, true]);
   const header = (await page.locator('.to-header').boundingBox())!;
   expect(header.y).toBe(0);
-  // While reading the bar is away under the column's foot (on a phone it comes with the focus, kit/chrome.ts indoc).
+  // While reading the bar is away under the column's foot (on a phone it comes with the focus, kit/ui/chrome.ts indoc).
   expect(await page.locator('to-write-editor to-bar').evaluate((el) => (el as HTMLElement).inert)).toBe(true);
   const burger = page.locator('.to-burger');
   await expect(burger).toBeInViewport();
@@ -72,7 +72,7 @@ test('phone: the paper edge to edge, the column scrolls under the header and the
   await settled(page);
   const field = page.locator('.to-title');
   const f = (await field.boundingBox())!;
-  // In the stylesheet's own pixels: on the screen a rem is the size of everything (kit/zoom.ts) × 16px.
+  // In the stylesheet's own pixels: on the screen a rem is the size of everything (kit/ui/zoom.ts) × 16px.
   const scale = await page.evaluate(() => parseFloat(getComputedStyle(document.documentElement).fontSize) / 16);
   expect(Math.round(f.height / scale)).toBe(44);
   expect(f.width).toBeGreaterThan(340);

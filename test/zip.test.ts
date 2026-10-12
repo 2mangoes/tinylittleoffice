@@ -1,8 +1,8 @@
 // A zip back in: unzip is zip's inverse, and a zip of documents (what Download everything writes, or any folder of
 // .tlo and .md files) is read as documents, each in its app, everything else in it left alone.
 import { test, expect } from 'vitest';
-import { unzip, zip } from '../src/kit/zip.ts';
-import { readZip } from '../src/kit/plain.ts';
+import { unzip, zip } from '../src/kit/file/zip.ts';
+import { readZip } from '../src/kit/core/plain.ts';
 
 const known = (id: string) => ['write', 'sheet', 'outline', 'deck'].includes(id);
 const words = (files: Record<string, Uint8Array>) => Object.fromEntries(Object.entries(files).map(([k, v]) => [k, new TextDecoder().decode(v)]));

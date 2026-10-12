@@ -53,7 +53,7 @@ import {
   type Op,
   type Run,
 } from '../../doc/index.ts';
-import type { TextBlock as PdfBlock } from '../../kit/textpdf.ts';
+import type { TextBlock as PdfBlock } from '../../kit/file/textpdf.ts';
 
 export type { Dir };
 
@@ -542,7 +542,7 @@ export function docGist(ref: string): { app: string; gist: string } {
   const nl = ref.indexOf('\n');
   const app = nl < 0 ? ref : ref.slice(0, nl);
   const body = nl < 0 ? '' : ref.slice(nl + 1);
-  // A document locked with a password: nothing of it can be read but its app (kit/locked.ts).
+  // A document locked with a password: nothing of it can be read but its app (kit/share/locked.ts).
   if (app === 'locked') return { app, gist: '' };
   // A document's title, where it has one; else its first line of words.
   const title = /^---\n(?:(?!---).*\n)*?title: (.+)\n/.exec(body)?.[1];
@@ -716,7 +716,7 @@ export function toOpml(v: OutlineView, title: string): string {
 /* ---------- the text PDF: sections and bullets ---------- */
 
 /**
- * The outline as the text PDF lays it out (kit/textpdf.ts): a lone top item is the title and its children
+ * The outline as the text PDF lays it out (kit/file/textpdf.ts): a lone top item is the title and its children
  * the sections; otherwise the document's title heads it and the top items are the sections. Deeper items are
  * bullets; an item holding a document is that document's app and first line, in brackets; the notes follow,
  * numbered as their marks came.

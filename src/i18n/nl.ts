@@ -3,7 +3,7 @@
  * zoals hij is; de waarde, rechts, is Nederlands. Elke {variabele} blijft één keer staan; een meervoud {n|# dag|# dagen}
  * geeft de twee vormen van het Nederlands (één, overig), met “#” als het getal. Informeel “je”; aanhalingstekens “ ”.
  */
-import type { Strings } from '../kit/i18n.ts';
+import type { Strings } from '../kit/core/i18n.ts';
 
 export default {
   // ---- the shell: header ----
@@ -60,7 +60,7 @@ export default {
   'Tiny Little Office': 'Piepklein Kantoortje',
   'About Tiny Little Office': 'Over Piepklein Kantoortje',
 
-  // ---- links that leave the site (kit/link-guard.ts) ----
+  // ---- links that leave the site (kit/ui/link-guard.ts) ----
   // The menu button's tooltip: the Office mark is the menu.
   'Tiny Little Office menu': 'Piepklein Kantoortje-menu',
   // The question before a link that leaves the site: "You are leaving Tiny Little Office for" over the site's name, large.
@@ -79,7 +79,7 @@ export default {
 
   // ---- the copy kept on the device (status lines under the switch) ----
 
-  // ---- sharing: the Share dialog (kit/shell.ts), where the link fits (kit/limits.ts), the arrival banner ----
+  // ---- sharing: the Share dialog (kit/core/shell.ts), where the link fits (kit/share/limits.ts), the arrival banner ----
   'A copy opened in a new tab': 'Een kopie in een nieuw tabblad',
   'Copy display link': 'Weergavelink kopiëren',
   'Copy into a new document': 'Kopiëren naar een nieuw document',
@@ -132,7 +132,7 @@ export default {
   'Link': 'Link', // same
   'Short link': 'Korte link',
 
-  // ---- privacy (kit/privacy.ts, kit/privacy-dialog.ts): the password, what the device holds ----
+  // ---- privacy (kit/share/privacy.ts, kit/ui/privacy-dialog.ts): the password, what the device holds ----
   // The Share dialog's head line: "Created 9 Oct 2026, 14:03 · by Paul".
   'Anyone with the link will need the password to open it. Nobody can reset it: lose it and the document is gone.': 'Wie de link heeft, heeft het wachtwoord nodig om te openen. Niemand kan het resetten: kwijt is kwijt, en dan is het document weg.',
   'Change password': 'Wachtwoord wijzigen',
@@ -179,7 +179,7 @@ export default {
   'Copy this and send it another way than the link. It cannot be shown again.': 'Kopieer het en stuur het via een andere weg dan de link. Het kan niet nog eens getoond worden.',
   'Make another': 'Maak een ander',
 
-  // ---- a document locked with a password, placed inside another (kit/locked.ts, kit/locked-doc.ts) ----
+  // ---- a document locked with a password, placed inside another (kit/share/locked.ts, kit/ui/locked-doc.ts) ----
   // The card drawn where it sits; {app} is the app's name: "A Spreadsheet document, locked with a password".
   'Locked with a password': 'Met een wachtwoord vergrendeld',
   'A {app} document, locked with a password': 'Een {app}-document, met een wachtwoord vergrendeld',
@@ -202,7 +202,7 @@ export default {
   // The group heading the Calendar and the Trip Planner sit under on the home page.
   'Plan': 'Plannen',
   'Chosen tasks': 'Gekozen taken',
-  // A link that opens the document (kit/compare.ts).
+  // A link that opens the document (kit/ui/compare.ts).
   'Open': 'Openen',
   'Task': 'Taak',
   'Tasks': 'Taken',
@@ -368,7 +368,7 @@ export default {
   'Terms of service': 'Algemene voorwaarden',
   'A small business\'s terms in plain words: booking, prices, keys, what if, ending.': 'De voorwaarden van een klein bedrijf in gewone woorden: boeken, prijzen, sleutels, wat als, beëindigen.',
 
-  // ---- Insert's dialog (kit/insert-dialogs.ts): Tiny Little Office Doc ----
+  // ---- Insert's dialog (kit/ui/insert-dialogs.ts): Tiny Little Office Doc ----
   'A Tiny Little Office link': 'Een Piepklein Kantoortje-link',
   'Opening the short link…': 'De korte link openen…',
   'Paste the link of another Tiny Little Office document, long or short: its first page shows here.': 'Plak de link van een ander Piepklein Kantoortje-document, lang of kort: de eerste pagina verschijnt hier.',
@@ -377,11 +377,11 @@ export default {
   'Tiny Little Office Doc…': 'Piepklein Kantoortje-document…',
   // Insert ▾'s group of the apps a new document can be made in, inside this one.
   'A new document': 'Een nieuw document',
-  // ---- another document edited in place (kit/doc-dialog.ts); a table's size is Rows × Columns ----
+  // ---- another document edited in place (kit/ui/doc-dialog.ts); a table's size is Rows × Columns ----
   'Cancel': 'Annuleren',
   'Rows': 'Rijen',
 
-  // ---- charts (kit/chart.ts) ----
+  // ---- charts (kit/draw/chart.ts) ----
   'An empty chart': 'Een lege grafiek',
   'Bars': 'Staven',
   'Flows (Sankey)': 'Stromen (Sankey)',
@@ -530,10 +530,10 @@ export default {
   'Unlock these cells': 'Deze cellen ontgrendelen',
   'What it holds; sort; columns': 'Wat erin staat; sorteren; kolommen',
 
-  // ---- downloads: hand-offs to another app (kit/exports.ts) ----
+  // ---- downloads: hand-offs to another app (kit/file/exports.ts) ----
   'Open in': 'Openen in',
 
-  // ---- the icon library (kit/icons-picker.ts) ----
+  // ---- the icon library (kit/ui/icons-picker.ts) ----
   'Icon': 'Icoon',
   'Favorites': 'Favorieten',
   'Search icons': 'Iconen zoeken',

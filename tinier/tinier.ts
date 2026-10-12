@@ -66,7 +66,7 @@ export async function brakeHash(key: string, day: number, address: string): Prom
 
 /** The site that may call the API, and the only place a short link may lead (a local copy of the site, under `wrangler dev`, names itself). */
 export const SITE = 'https://tinylittleoffice.com';
-/** The most ciphertext a link may hold, in base64url characters. src/kit/short.ts carries the same number; a test holds them together. */
+/** The most ciphertext a link may hold, in base64url characters. src/kit/share/short.ts carries the same number; a test holds them together. */
 export const MAX_BYTES = 16 * 1024;
 /** The lifetimes on the menu, in seconds: an hour, a day, a week, a month (Paul, 2026-10-11: "Make the max expire a month"). */
 export const TTLS = new Set([3600, 86400, 7 * 86400, 30 * 86400]);
@@ -93,7 +93,7 @@ const html = (page: string, status = 200) =>
     },
   });
 
-// base64url as the site writes it (src/kit/codec.ts): "~" for 62, never "-", where a pasted link would break a line.
+// base64url as the site writes it (src/kit/core/codec.ts): "~" for 62, never "-", where a pasted link would break a line.
 const b64 = (bytes: ArrayBuffer) =>
   btoa(String.fromCharCode(...new Uint8Array(bytes)))
     .replace(/\+/g, '~')

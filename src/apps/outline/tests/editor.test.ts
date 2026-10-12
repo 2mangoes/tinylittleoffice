@@ -8,11 +8,11 @@ import { page } from 'vitest/browser';
 import '../../../styles.css';
 import '../editor.ts';
 import type { ToOutlineEditor } from '../editor.ts';
-import type { ToText } from '../../../kit/text.ts';
-import { caret } from '../../../kit/textops.ts';
+import type { ToText } from '../../../kit/text/text.ts';
+import { caret } from '../../../kit/text/textops.ts';
 import { until, tick } from '../../../../test/browser/helpers.ts';
-import { encodeDoc } from '../../../kit/codec.ts';
-import { remScale } from '../../../kit/zoom.ts';
+import { encodeDoc } from '../../../kit/core/codec.ts';
+import { remScale } from '../../../kit/ui/zoom.ts';
 
 const TREE = '- Launch\n  - Product\n    - Pricing\n  - Marketing\n';
 

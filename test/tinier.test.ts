@@ -6,7 +6,7 @@ import { DatabaseSync } from 'node:sqlite';
 import { D1Store, type SQL } from '../tinier/d1.ts';
 import { brakeHash, brakeKey, DAILY, dayOf, handle, MAX_BYTES, newId, TTLS } from '../tinier/tinier.ts';
 import { MemStore } from './memstore.ts';
-import { EXPIRIES, SHORT_MAX } from '../src/kit/short.ts';
+import { EXPIRIES, SHORT_MAX } from '../src/kit/share/short.ts';
 
 const PAGE = '<p>{{id}}</p>';
 const KEY = 'a-key-for-the-tests';
@@ -257,8 +257,8 @@ test('tinier: the folder logs nothing, and neither does the site', async () => {
 });
 
 test('tinier: the landing page opens a link whose key, IV and ciphertext are written with "~" or "-", and hands on only the id and the expiry', async () => {
-  const { sealShortAt } = await import('../src/kit/short.ts');
-  const { toBase64Url } = await import('../src/kit/codec.ts');
+  const { sealShortAt } = await import('../src/kit/share/short.ts');
+  const { toBase64Url } = await import('../src/kit/core/codec.ts');
   const page = readFileSync(new URL('../tinier/page.html', import.meta.url), 'utf8');
   const script = /<script>([\s\S]*)<\/script>/.exec(page)![1].replace("'{{id}}'", "'abcdefg'").replace("'{{site}}'", "'https://tinylittleoffice.com'");
   const long = 'https://tinylittleoffice.com/text/#/v1/text/yA~b';

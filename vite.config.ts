@@ -6,7 +6,7 @@ import { pathToFileURL } from 'node:url';
 import { fillHeaders } from './scripts/headers.ts';
 import { listed, writePages } from './scripts/seo.ts';
 import { gitFacts, versionJson, versionOf } from './scripts/version.ts';
-import type { AppDef } from './src/kit/app.ts';
+import type { AppDef } from './src/kit/core/app.ts';
 
 /**
  * The registry and the page scripts, read from the source under node at the end of the build (the
@@ -27,8 +27,8 @@ function afterBuild(site: string): Plugin {
     name: 'tinyoffice-after-build',
     apply: 'build',
     async closeBundle() {
-      const { apps } = await fromSource<{ apps(): AppDef[] }>('src/kit/apps.ts');
-      const { pageScripts } = await fromSource<{ pageScripts(): string[] }>('src/kit/page.ts');
+      const { apps } = await fromSource<{ apps(): AppDef[] }>('src/kit/core/apps.ts');
+      const { pageScripts } = await fromSource<{ pageScripts(): string[] }>('src/kit/draw/page.ts');
       const dist = resolve(import.meta.dirname, 'dist');
       const facts = gitFacts(import.meta.dirname);
       writePages(dist, { site, apps: await listed(apps()), built: facts.built });

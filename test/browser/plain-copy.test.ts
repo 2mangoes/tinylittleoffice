@@ -4,7 +4,7 @@
 import { expect, test } from 'vitest';
 import { page } from 'vitest/browser';
 import { mount, until } from './helpers.ts';
-import { encodeDoc } from '../../src/kit/codec.ts';
+import { encodeDoc } from '../../src/kit/core/codec.ts';
 
 test('a copy from a Display Link’s page: the words as text and as paragraphs, nothing of the theme’s colours', async () => {
   await page.viewport(900, 700);

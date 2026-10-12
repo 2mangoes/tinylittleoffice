@@ -8,7 +8,7 @@ import '../../../styles.css';
 import '../editor.ts';
 import type { ToDrawEditor } from '../editor.ts';
 import { until, tick } from '../../../../test/browser/helpers.ts';
-import { BASE, remScale } from '../../../kit/zoom.ts';
+import { BASE, remScale } from '../../../kit/ui/zoom.ts';
 
 const DRAWING = 'Kind | X | Y | W | H | Style | Label\n--- | --- | --- | --- | --- | --- | ---\no | 4 | 6 | 16 | 8 | 1b | Browser\no | 32 | 6 | 16 | 8 | 1b | Server\nk | 0 | 1 | 0 | 0 | 0 | asks\n';
 

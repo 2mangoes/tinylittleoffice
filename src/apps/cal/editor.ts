@@ -21,18 +21,18 @@
 import { html, nothing, svg, type PropertyDeclarations } from 'lit';
 import { CalendarDays, ChartGantt, Check, CopyPlus, GripVertical, Grid3x3, Repeat as RepeatIcon } from 'lucide';
 import { applyAll, dayToYmd, family, parse, placeFamily, runLength, write, ymdString, ymdToDay, type Block, type Doc, type Op, type Run } from '../../doc/index.ts';
-import { btn, cmdBtn, cmdMenu, dateNav } from '../../kit/bar.ts';
-import { drawnIn, labelOf, run, runKey } from '../../kit/commands.ts';
+import { btn, cmdBtn, cmdMenu, dateNav } from '../../kit/ui/bar.ts';
+import { drawnIn, labelOf, run, runKey } from '../../kit/core/commands.ts';
 import COMMANDS, { AT } from './commands.ts';
-import { docToHtml, GENERATOR, htmlToBlocks } from '../../kit/clipboard.ts';
-import type { ContextEntry } from '../../kit/context.ts';
-import type { ToDialog } from '../../kit/dialog.ts';
-import { DocElement, firstAt, type Entry } from '../../kit/element.ts';
-import { Rows, type Clip, type DropHow, type RowItem, type RowRange, type RowSpan } from '../../kit/rows.ts';
-import { icon, UI, type IconNode } from '../../kit/icons.ts';
-import { language, t } from '../../kit/i18n.ts';
-import { caret } from '../../kit/textops.ts';
-import type { TextOps, ToText } from '../../kit/text.ts';
+import { docToHtml, GENERATOR, htmlToBlocks } from '../../kit/text/clipboard.ts';
+import type { ContextEntry } from '../../kit/ui/context.ts';
+import type { ToDialog } from '../../kit/ui/dialog.ts';
+import { DocElement, firstAt, type Entry } from '../../kit/core/element.ts';
+import { Rows, type Clip, type DropHow, type RowItem, type RowRange, type RowSpan } from '../../kit/text/rows.ts';
+import { icon, UI, type IconNode } from '../../kit/draw/icons.ts';
+import { language, t } from '../../kit/core/i18n.ts';
+import { caret } from '../../kit/text/textops.ts';
+import type { TextOps, ToText } from '../../kit/text/text.ts';
 import {
   CAL_COLORS,
   copyTasks,
@@ -73,13 +73,13 @@ import {
   type Li,
 } from './model.ts';
 import { allZones, clockString, dayString, isValidZone, localZone, pad2, partsToUtc, utcToParts, zoneAbbr } from './tz.ts';
-import '../../kit/bar.ts';
-import '../../kit/dialog.ts';
-import '../../kit/insert.ts';
-import '../../kit/menu.ts';
-import '../../kit/text.ts';
-import '../../kit/context.ts';
-import { remScale } from '../../kit/zoom.ts';
+import '../../kit/ui/bar.ts';
+import '../../kit/ui/dialog.ts';
+import '../../kit/ui/insert.ts';
+import '../../kit/ui/menu.ts';
+import '../../kit/text/text.ts';
+import '../../kit/ui/context.ts';
+import { remScale } from '../../kit/ui/zoom.ts';
 import './style.css';
 
 export const tag = 'to-cal-editor';
@@ -501,7 +501,7 @@ export class ToCalEditor extends DocElement<CalView> {
     if (!d.days) return this.open(item);
     this.edit(d.how === 'move' ? moveItem(this.view, item, d.days) : resizeItem(this.view, item, item.dur + d.days));
   };
-  /* ---------- the schedule's tasks as rows (kit/rows.ts) ---------- */
+  /* ---------- the schedule's tasks as rows (kit/text/rows.ts) ---------- */
 
   /** The tasks on screen as the rows controller takes them: each with its row and its family's blocks. */
   private taskRows(): RowItem<number>[] {

@@ -12,11 +12,11 @@ import '../../../styles.css';
 import '../editor.ts';
 import type { ToTripEditor } from '../editor.ts';
 import { parse } from '../../../doc/index.ts';
-import { caret } from '../../../kit/textops.ts';
-import type { ToText } from '../../../kit/text.ts';
+import { caret } from '../../../kit/text/textops.ts';
+import type { ToText } from '../../../kit/text/text.ts';
 import { readTrip } from '../model.ts';
 import { tick, until } from '../../../../test/browser/helpers.ts';
-import { remScale } from '../../../kit/zoom.ts';
+import { remScale } from '../../../kit/ui/zoom.ts';
 
 const ROUTE =
   '---\nunits: km\n---\nPlace | Lat:number | Lon:number | Note\n--- | --- | --- | ---\nLisbon | 38.7223 | -9.1393 | Pastel de nata first\nCoimbra | 40.2033 | -8.4103 |\nPorto | 41.1579 | -8.6291 | Port cellars\n';

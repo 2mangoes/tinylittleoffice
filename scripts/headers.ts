@@ -1,10 +1,10 @@
 /**
  * The site's headers, filled at the end of the build (vite.config.ts): public/_headers holds placeholders
  * the Content-Security-Policy is written from. {{scripts}} is the hash of every script the apps' pages
- * carry (src/kit/page.ts); {{img}} and {{connect}} are the hosts src/kit/network.ts allows by each
+ * carry (src/kit/draw/page.ts); {{img}} and {{connect}} are the hosts src/kit/core/network.ts allows by each
  * directive, so the policy allows what docs/network.md lists and nothing else.
  */
-import { reaches, type Directive } from '../src/kit/network.ts';
+import { reaches, type Directive } from '../src/kit/core/network.ts';
 
 /** The sources the registry allows by one directive: "https://host". */
 export function sources(directive: Directive): string[] {

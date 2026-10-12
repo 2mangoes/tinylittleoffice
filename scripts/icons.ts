@@ -1,5 +1,5 @@
 /**
- * The site's icons, drawn from the Office mark (src/kit/mark.ts): public/favicon.svg (the ink colour, light
+ * The site's icons, drawn from the Office mark (src/kit/draw/mark.ts): public/favicon.svg (the ink colour, light
  * or dark as the browser is), and, through sharp, the PNGs a browser or a phone asks for: favicon-32,
  * apple-touch-icon (180), icon-192, icon-512 and icon-maskable-512 (the accent on paper); and og.png (the
  * share card, 1200 by 630), drawn by Chromium in the site's IBM Plex (scripts/plex.ts). The PNGs are kept in
@@ -11,8 +11,8 @@
 import { writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { FONT } from '../src/kit/draw.ts';
-import { markPaths } from '../src/kit/mark.ts';
+import { FONT } from '../src/kit/draw/draw.ts';
+import { markPaths } from '../src/kit/draw/mark.ts';
 import { plexFaces, shoot } from './plex.ts';
 
 const root = resolve(fileURLToPath(import.meta.url), '../..');

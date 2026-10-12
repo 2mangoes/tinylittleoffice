@@ -1,8 +1,8 @@
 // The agent skill and /llms.txt are written from their template and the registry (npm run skill); test/lints.test.ts holds them current.
 import { test, expect } from 'vitest';
 import { makeLlms, makeSkill } from '../scripts/make-skill.ts';
-import { apps } from '../src/kit/apps.ts';
-import { SHORT_LINK_MAX } from '../src/kit/short.ts';
+import { apps } from '../src/kit/core/apps.ts';
+import { SHORT_LINK_MAX } from '../src/kit/share/short.ts';
 
 test('the skill names every app, teaches the plain link, and leaves no placeholder behind', async () => {
   const skill = await makeSkill();

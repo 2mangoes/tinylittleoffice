@@ -3,8 +3,8 @@
  * Blank of their own, def.ts's blankInTemplates), then two to four real ones. Each is canonical
  * TLO, as the kernel writes it, so it round-trips byte for byte (the corpus test holds every template).
  */
-import type { Template } from '../../kit/app.ts';
-import { t } from '../../kit/i18n.ts';
+import type { Template } from '../../kit/core/app.ts';
+import { t } from '../../kit/core/i18n.ts';
 import type { KindId } from './model.ts';
 import { kindName } from './kinds.ts';
 

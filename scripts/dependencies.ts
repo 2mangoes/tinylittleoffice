@@ -219,7 +219,7 @@ ${FONTS.map((f) => `| ${f.family} | \`${f.from}\` | ${f.version} | OFL-1.1 | ${f
 
 ## Data, not packages
 
-The icon picker's Emoji set (\`src/kit/emoji-data.ts\`: every base emoji's character, name, keywords and
+The icon picker's Emoji set (\`src/kit/draw/emoji-data.ts\`: every base emoji's character, name, keywords and
 group) is data, not code: the browser lists no emoji by name, and the characters themselves are drawn by the
 system's own font. It is written by \`npm run emoji\` (\`scripts/emoji.ts\`) from Unicode's
 [emoji-test.txt](${EMOJI_SOURCES.test}) (which emoji are fully qualified, and their groups) and CLDR's English

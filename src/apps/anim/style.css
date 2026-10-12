@@ -16,7 +16,7 @@
     --anim-row-h: calc(3.75 * var(--to-nav-font));
   }
   /* The stage's frame is the height the stage has when it fits, whatever the zoom: a zoomed stage scrolls inside it,
-     two fingers keep their point of it under them (kit/pinch.ts), and nothing under it moves. The stage's own border is
+     two fingers keep their point of it under them (kit/ui/pinch.ts), and nothing under it moves. The stage's own border is
      its edge: no gray frame round it. */
   .anim-wrap {
     height: max(10rem, min(100cqw * 5 / 8, var(--to-col-h) - 12.75rem));
@@ -36,7 +36,7 @@
     background: var(--to-surface);
     border: 1px solid var(--to-border);
     border-radius: var(--to-radius);
-    /* A finger on the empty stage scrolls its frame and two zoom it (kit/pinch.ts); on a shape, a corner or the handle,
+    /* A finger on the empty stage scrolls its frame and two zoom it (kit/ui/pinch.ts); on a shape, a corner or the handle,
        or while a drag is on, the stage keeps it. */
     touch-action: pan-x pan-y;
     user-select: none;
@@ -146,7 +146,7 @@
   .anim-strip .anim-frame-menu {
     flex: none;
   }
-  /* The row at the column's foot, above the bar (and above the shapes' row on a phone, kit/context.ts docked): held there
+  /* The row at the column's foot, above the bar (and above the shapes' row on a phone, kit/ui/context.ts docked): held there
      while the column scrolls, the hint beside the control in full, wrapping rather than cut. */
   .anim-row {
     position: sticky;
