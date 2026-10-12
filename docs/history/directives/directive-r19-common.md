@@ -9,3 +9,5 @@ The two tasks run one after the other, each alone on main: the sweep first, then
 `docs/directives/` and `docs/history/` are records and are never edited by a sweep: what they describe was true when written. `CHANGELOG.md` likewise.
 
 Tests: one command at a time, never in the background; `npx vitest run` whole at the end; `npm run build` with the chunk sizes in the report.
+
+**Paul, 2026-10-12:** *"We really only want license and README, both as brief as possible."* The root holds LICENSE and a README of at most forty lines and nothing else: no code of conduct, contributing guide, security policy, changelog or issue and pull request templates, ever, and no new document in `docs/` that a directive did not ask for (`test/repository.test.ts` holds it).
