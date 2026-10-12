@@ -37,7 +37,8 @@ export default {
   'Forget {title}': 'Zapomnij: {title}',
   // Under an app's documents, the rest folded away: "3 more"
   '{n} more': 'Jeszcze {n}',
-  'Made with respect by {aboard}': 'Zrobione z szacunkiem przez {aboard}',
+  'Made with respect by {aboard} in New York City': 'Zrobione z szacunkiem przez {aboard} w Nowym Jorku',
+  'Beta version': 'Wersja beta',
   'Email us': 'Napisz do nas',
 
   // ---- the drawer (hamburger menu) ----

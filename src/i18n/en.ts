@@ -53,7 +53,8 @@ export default {
   // Under an app's documents, the rest folded away: "3 more"
   '{n} more': '{n} more',
   // The home page's foot: {aboard} is the name Aboard, a link to aboard.com, said as it is in every language
-  'Made with respect by {aboard}': 'Made with respect by {aboard}',
+  'Made with respect by {aboard} in New York City': 'Made with respect by {aboard} in New York City',
+  'Beta version': 'Beta version',
   // The foot's link to the repository on GitHub
   'Email us': 'Email us',
 

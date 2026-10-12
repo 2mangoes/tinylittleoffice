@@ -37,7 +37,8 @@ export default {
     'Forget {title}': '{title} بھلا دیں',
   // Under an app's documents, the rest folded away: "3 more"
     '{n} more': '{n} اور',
-  'Made with respect by {aboard}': '{aboard} نے احترام کے ساتھ بنایا',
+  'Made with respect by {aboard} in New York City': '{aboard} نے نیویارک شہر میں احترام کے ساتھ بنایا',
+  'Beta version': 'بیٹا ورژن',
   'Email us': 'ہمیں ای میل کریں',
 
   // ---- the drawer (hamburger menu) ----

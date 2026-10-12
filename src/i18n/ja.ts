@@ -36,7 +36,8 @@ export default {
   'Forget {title}': '{title}を消去',
   // Under an app's documents, the rest folded away: "3 more"
   '{n} more': 'ほか{n}件',
-  'Made with respect by {aboard}': '{aboard} が敬意をこめて制作',
+  'Made with respect by {aboard} in New York City': '{aboard} がニューヨークで敬意をこめて制作',
+  'Beta version': 'ベータ版',
   'Email us': 'メールを送る',
 
   // ---- the drawer (hamburger menu) ----

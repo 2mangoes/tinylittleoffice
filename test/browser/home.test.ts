@@ -1,4 +1,4 @@
-// The home page's foot (Paul, 2026-10-11): "Made with respect by Aboard · GitHub · Email us", Aboard a link to aboard.com,
+// The home page's foot (Paul, 2026-10-11 and -12): "Beta version · Made with respect by Aboard in New York City · GitHub · Email us", Aboard a link to aboard.com,
 // GitHub the repository, Email us a mail link; the sites open in a new tab, in the page's language.
 import { afterEach, expect, test } from 'vitest';
 import { page } from 'vitest/browser';
@@ -28,7 +28,7 @@ test('the home page ends with who made it, where its source is and how to write,
   // Below the apps, last in the page.
   expect(f.previousElementSibling!.classList.contains('to-apps')).toBe(true);
   expect(f.nextElementSibling).toBeNull();
-  expect(lines).toEqual(['Made with respect by Aboard · GitHub · Email us']);
+  expect(lines).toEqual(['Beta version · Made with respect by Aboard in New York City · GitHub · Email us']);
   expect(links.map((a) => [a.textContent, a.href, a.target, a.rel])).toEqual([
     ['Aboard', 'https://aboard.com/', '_blank', 'noopener'],
     ['GitHub', 'https://github.com/aboard-io/tinylittleoffice', '_blank', 'noopener'],
@@ -51,9 +51,9 @@ test('the foot is said in the page’s language, the names Aboard and GitHub kep
   const shell = await mount('');
   await setLanguage('fr');
   await until(() => document.documentElement.lang === 'fr');
-  await until(() => foot(shell).lines[0] !== 'Made with respect by Aboard');
+  await until(() => foot(shell).lines[0] !== 'Beta version · Made with respect by Aboard in New York City');
   const { lines, links } = foot(shell);
-  expect(lines).toEqual(['Fait avec respect par Aboard · GitHub · Nous écrire']);
+  expect(lines).toEqual(['Version bêta · Fait avec respect par Aboard à New York · GitHub · Nous écrire']);
   expect(links.map((a) => [a.textContent, a.href])).toEqual([
     ['Aboard', 'https://aboard.com/'],
     ['GitHub', 'https://github.com/aboard-io/tinylittleoffice'],

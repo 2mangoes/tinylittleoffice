@@ -30,7 +30,8 @@ export default {
   'Forget': 'বাদ দিন',
   'Forget {title}': '“{title}” বাদ দিন',
   '{n} more': 'আরও {n}টি',
-  'Made with respect by {aboard}': '{aboard} সম্মানের সঙ্গে তৈরি করেছে',
+  'Made with respect by {aboard} in New York City': '{aboard} নিউ ইয়র্ক শহরে সম্মানের সঙ্গে তৈরি করেছে',
+  'Beta version': 'বিটা সংস্করণ',
   'Email us': 'আমাদের ইমেল করুন',
 
   // ---- the drawer (hamburger menu) ----
