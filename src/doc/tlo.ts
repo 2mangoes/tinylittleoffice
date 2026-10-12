@@ -155,10 +155,28 @@ const trimRaw = (s: string): string => trimEnd(s).trimStart();
 
 /** One line of a block's words as runs: its ends trimmed up to an escaped space (and, `start` false, in a quote, only its end). */
 function readLine(line: string, start: boolean): Run[] {
-  // (An escaped space is read as a NUL, which no trimming takes, and put back after.)
+  // (An escaped space is read as a NUL, which no trimming takes, and put back after; then, a space again, it is
+  // unmarked as any space at a run's end is.)
   const kept: string[] = [];
   const runs = trimLine(parseInline(line, kept), start);
-  return kept.length ? runs.map((r) => (r.t.includes('\0') ? { ...r, t: r.t.replace(/\0/g, () => kept.shift()!) } : r)) : runs;
+  if (!kept.length) return unlinkEnds(runs, start);
+  return unlinkEnds(normalRuns(runs.map((r) => (r.t.includes('\0') ? { ...r, t: r.t.replace(/\0/g, () => kept.shift()!) } : r)).flatMap(unspaced)), start);
+}
+
+/**
+ * A link's spaces at a line's end (and, `start`, at its start) read as the writer writes them: outside the link,
+ * "[a\\ ](url)" as "[a](url)\\ ", and a link of spaces alone as its spaces (writeLine). The space is kept; the link on it is let go.
+ */
+function unlinkEnds(runs: Run[], start: boolean): Run[] {
+  const linked = (r: Run | undefined): r is Run => !!r && !r.ic && r.fn === undefined && !!r.href;
+  let out = runs;
+  const last = out[out.length - 1];
+  const tail = linked(last) ? /\s+$/.exec(last.t) : null;
+  if (tail) out = normalRuns([...out.slice(0, -1), { ...last, t: last.t.slice(0, tail.index) }, { t: tail[0] }]);
+  const first = out[0];
+  const head = start && linked(first) ? /^\s+/.exec(first.t) : null;
+  if (head) out = normalRuns([{ t: head[0] }, { ...first, t: first.t.slice(head[0].length) }, ...out.slice(1)]);
+  return out;
 }
 
 /** A line's runs without the spaces at its end (and, but in a quote, at its start), which no writing of it keeps: "`- `" is "-". */
@@ -725,17 +743,14 @@ export function writeInline(given: Run[]): string {
  * at the line's ends come out of it first (a mark on a space alone may be let go; the space may not).
  */
 function writeLine(given: Run[], start: boolean): string {
-  let runs = sayable(given);
+  const runs = unlinkEnds(sayable(given), start);
   const loose = (r: Run | undefined): r is Run => !!r && !r.ic && r.fn === undefined;
   const last = runs[runs.length - 1];
-  const tail = loose(last) ? /\s+$/.exec(last.t) : null;
-  if (tail && last.href) runs = normalRuns([...runs.slice(0, -1), { ...last, t: last.t.slice(0, tail.index) }, { t: tail[0] }]);
-  const first = runs[0];
-  const head = start && loose(first) ? /^\s+/.exec(first.t) : null;
-  if (head && first.href) runs = normalRuns([{ t: head[0] }, { ...first, t: first.t.slice(head[0].length) }, ...runs.slice(1)]);
+  const tail = loose(last) && /\s$/.test(last.t);
+  const head = start && loose(runs[0]) && /^\s/.test(runs[0].t);
   return inline(
     runs,
-    (s) => edges(s, !!tail, !!head),
+    (s) => edges(s, tail, head),
     (s) => readLine(s, start),
   );
 }

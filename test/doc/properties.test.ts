@@ -12,10 +12,10 @@ import { arbitraryDoc, arbitraryEdits, arbitraryOp, arbitraryText, readGrammar, 
 const LONG = Math.max(5000, RUNS * 30);
 
 /** A property held over RUNS cases; the message carries the shrunk case, so the next builder starts from it. */
-function holds<T>(name: string, arb: fc.Arbitrary<T>, pred: (x: T) => void): void {
+function holds<T>(name: string, arb: fc.Arbitrary<T>, pred: (x: T) => void, examples: T[] = []): void {
   const out = fc.check(
     fc.property(arb, (x) => (pred(x), true)),
-    { numRuns: RUNS },
+    { numRuns: RUNS, examples: examples.map((x): [T] => [x]) },
   );
   if (out.failed)
     throw new Error(
@@ -48,12 +48,43 @@ test(
 test(
   'property: a lenient text and its canonical writing read as the same document',
   () => {
-    holds('parse(write(parse(x))) = parse(x)', textOf(), (x) => {
-      expect(parse(write(parse(x)))).toStrictEqual(parse(x));
-    });
+    holds('parse(write(parse(x))) = parse(x)', textOf(), (x) => expect(parse(write(parse(x)))).toStrictEqual(parse(x)), FOUND);
   },
   LONG,
 );
+
+/**
+ * Texts the search found that once broke the round trip, checked every run and not only when the search happens on
+ * them. CI on main, 2026-10-12 (run 38288524206, seed -1337209422, path 134:0:0:0:0:1:1:1): a link's escaped space at
+ * a line's end was read as linked, though the writer writes a line's end spaces outside a link.
+ */
+const FOUND = [
+  '###### ^[ ]\n\n# [\\ ](https://x.y/)',
+  '# [a\\ ](https://x.y/)',
+  '[\\ a](https://x.y/)',
+  // A mark on an escaped space, which the writer cannot say: found by 5,000 runs (seeds 501539243 and 630737916).
+  '### **word<u>**\\ \n',
+  '### ^[word]<u>a\\ #\n',
+];
+
+test("a space at a line's ends reads as its writing says: outside a link (a link of spaces alone let go), with no mark", () => {
+  const read = (x: string) => parse(x).blocks;
+  expect(read(FOUND[0])).toStrictEqual([
+    { k: 'h', level: 6, runs: [{ t: '', fn: ' ' }] },
+    { k: 'h', level: 1, runs: [{ t: ' ' }] },
+  ]);
+  expect(write(parse(FOUND[0]))).toBe('###### ^[ ]\n\n# \\ \n');
+  expect(read(FOUND[1])).toStrictEqual([{ k: 'h', level: 1, runs: [{ t: 'a', href: 'https://x.y/' }, { t: ' ' }] }]);
+  expect(write(parse(FOUND[1]))).toBe('# [a](https://x.y/)\\ \n');
+  expect(read(FOUND[2])).toStrictEqual([{ k: 'p', runs: [{ t: ' ' }, { t: 'a', href: 'https://x.y/' }] }]);
+  // Inside a line a link keeps its spaces, and a quote's line its start.
+  expect(read('x [\\ ](https://x.y/) y')).toStrictEqual([{ k: 'p', runs: [{ t: 'x ' }, { t: ' ', href: 'https://x.y/' }, { t: ' y' }] }]);
+  expect(read('> [\\ a](https://x.y/)')).toStrictEqual([{ k: 'quote', runs: [{ t: ' a', href: 'https://x.y/' }] }]);
+  // A mark on an escaped space at a run's end is let go, as on any space there.
+  expect(read(FOUND[3])).toStrictEqual([{ k: 'h', level: 3, runs: [{ t: 'word', b: true }, { t: ' ' }] }]);
+  expect(read(FOUND[4])).toStrictEqual([{ k: 'h', level: 3, runs: [{ t: '', fn: 'word' }, { t: 'a', u: true }, { t: ' ' }] }]);
+  for (const x of FOUND) expect(parse(write(parse(x))), x).toStrictEqual(parse(x));
+});
 
 test(
   'property: write(parse(x)) is x for every canonical text',
