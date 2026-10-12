@@ -50,12 +50,12 @@ async function pick(el: ToSheetEditor, opener: HTMLElement, words: string) {
   await tick();
 }
 
-test('a blank sheet is three columns and no document; typing a cell makes the table', async () => {
+test('a blank sheet is three columns (words, numbers, words: Paul, 2026-10-12) and no document; typing a cell makes the table', async () => {
   const { el, last, changes } = await editor();
   expect([...el.querySelectorAll('th .cl')].map((x) => x.textContent)).toEqual(['A', 'B', 'C']);
   expect(changes).toEqual([]);
   await type(el, cell(el, 'B2'), 'hello');
-  expect(last()).toBe('ColA | ColB | ColC\n--- | --- | ---\n| |  |\n| | hello |\n');
+  expect(last()).toBe('ColA | ColB:number | ColC\n--- | --- | ---\n| |  |\n| | hello |\n');
   // The + adds a column that is drawn (the new cell on the selected row is focused), and written once typed into.
   button(el, 'Add a column').click();
   await el.updateComplete;
@@ -63,7 +63,7 @@ test('a blank sheet is three columns and no document; typing a cell makes the ta
   expect(changes).toHaveLength(1);
   await until(() => document.activeElement === cell(el, 'D2'));
   await type(el, cell(el, 'D1'), 'four');
-  expect(last()).toBe('ColA | ColB | ColC | ColD\n--- | --- | --- | ---\n| |  |  | four\n| | hello |  |\n');
+  expect(last()).toBe('ColA | ColB:number | ColC | ColD\n--- | --- | --- | ---\n| |  |  | four\n| | hello |  |\n');
 });
 
 test('values are shown, the formula strip shows the raw formula, Enter moves down, undo takes an edit back', async () => {

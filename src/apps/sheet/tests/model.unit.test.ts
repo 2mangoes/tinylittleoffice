@@ -42,9 +42,9 @@ test('read: three columns at the least, values worked out, the headline by name'
 });
 
 test('a cell typed into a blank document makes the table: three columns named for their letters, nothing more than is needed', () => {
-  expect(after('', (d) => setCell(d, 0, 2, 'four'))).toBe('ColA | ColB | ColC\n--- | --- | ---\n| |  | four\n');
+  expect(after('', (d) => setCell(d, 0, 2, 'four'))).toBe('ColA | ColB:number | ColC\n--- | --- | ---\n| |  | four\n');
   // Past the third column, columns are added out to the one typed into.
-  expect(after('', (d) => setCell(d, 1, 3, 'x'))).toBe('ColA | ColB | ColC | ColD\n--- | --- | --- | ---\n| |  |  |\n| |  |  | x\n');
+  expect(after('', (d) => setCell(d, 1, 3, 'x'))).toBe('ColA | ColB:number | ColC | ColD\n--- | --- | --- | ---\n| |  |  |\n| |  |  | x\n');
   // Clearing the last cell takes the trailing rows with it; clearing a cell past the rows held writes nothing.
   expect(after(SHEET, (d) => setCell(d, 2, 0, ''))).toBe('Item | Cost:money\n--- | ---\nRent | 1200\nFood | 450\n| | =SUM(B1:B2)\n');
   expect(setCell(parse(SHEET), 9, 0, '')).toEqual([]);
@@ -148,7 +148,7 @@ test('sort, fill, clear and paste write rectangles; a sort moves whole rows thro
   expect(after(SHEET, (d) => setLock(d, { r0: 2, c0: 1, r1: 2, c1: 1 }, true))).toBe('---\nlock: B3\n---\n' + SHEET);
   expect(after(MODEL, (d) => setLock(d, { r0: 0, c0: 2, r1: 0, c1: 2 }, false))).not.toContain('lock:');
   // On a blank document a chart makes the table first.
-  expect(after('', (d) => setChart(d, 'pie'))).toBe('---\nchart: pie\nchart-at: top\n---\nColA | ColB | ColC\n--- | --- | ---\n');
+  expect(after('', (d) => setChart(d, 'pie'))).toBe('---\nchart: pie\nchart-at: top\n---\nColA | ColB:number | ColC\n--- | --- | ---\n');
 });
 
 test('every template is a real document that round-trips byte for byte, and the headline is drawn', () => {

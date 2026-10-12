@@ -80,6 +80,7 @@ import {
 } from '../../doc/index.ts';
 import {
   MIN_COLS,
+  defaultType,
   addColumn,
   currencyAt,
   deleteRows,
@@ -226,10 +227,10 @@ export class ToSheetEditor extends DocElement<SheetView> {
   get cols(): number {
     return Math.max(this.view.cols.length, this.colsShown);
   }
-  /** The columns drawn, those past the table's edge going by their letters. */
+  /** The columns drawn, those past the table's edge going by their letters: words in the first, numbers in the second (Paul, 2026-10-12: a sheet's defaults), words after that. */
   columns(): Column[] {
     const cols = [...this.view.cols];
-    while (cols.length < this.cols) cols.push({ name: `Col${COL_NAMES[cols.length]}`, type: 'text' });
+    while (cols.length < this.cols) cols.push({ name: `Col${COL_NAMES[cols.length]}`, type: defaultType(cols.length) });
     return cols;
   }
   private get drawn(): number {
@@ -422,7 +423,7 @@ export class ToSheetEditor extends DocElement<SheetView> {
         .map((line) => line.split('\t').length),
     );
     const cols = this.columns();
-    while (block && cols.length < Math.min(MAX_COLS, g.c0 + widest)) cols.push({ name: `Col${COL_NAMES[cols.length]}`, type: 'text' });
+    while (block && cols.length < Math.min(MAX_COLS, g.c0 + widest)) cols.push({ name: `Col${COL_NAMES[cols.length]}`, type: defaultType(cols.length) });
     const done = pasteCells({ cols }, g.r0, g.c0, text, moved, this.many ? g : undefined);
     this.edit(putRect(this.doc, done), undefined, this.markOf(done.range));
     this.colsShown = Math.max(this.colsShown, done.range.c1 + 1);

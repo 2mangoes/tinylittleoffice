@@ -77,7 +77,9 @@ export function typeName(c: number, cols: Column[], type: ColType = cols[c]?.typ
 }
 /** Whether a column goes by a default name (its letter, or what it holds), which follows its type and place. */
 const isDefaultName = (c: number, cols: Column[]): boolean => isLetterName(cols[c].name) || cols[c].name === typeName(c, cols);
-const col = (c: number, type: ColType = 'text'): Column => ({ name: letterName(c), type });
+/** A column nobody has typed: words in the first, numbers in the second (Paul, 2026-10-12: a sheet's defaults), words after that. */
+export const defaultType = (c: number): ColType => (c === 1 ? 'number' : 'text');
+const col = (c: number, type: ColType = defaultType(c)): Column => ({ name: letterName(c), type });
 
 /** The document's first table as a sheet, with everything the grid draws. */
 export function readSheet(doc: Doc): SheetView {
