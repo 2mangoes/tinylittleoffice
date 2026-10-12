@@ -38,7 +38,7 @@ export default {
   'Forget {title}': '清除「{title}」',
   // Under an app's documents, the rest folded away: "3 more"
   '{n} more': '還有 {n} 個',
-  'Made with respect by {aboard} in New York City': '由 {aboard} 在紐約懷著敬意打造',
+  'An {aboard} Project. Made with Respect in New York City.': '{aboard} 的專案。在紐約懷著敬意打造。',
   'Beta version': '測試版',
   'Email us': '寄信給我們',
 

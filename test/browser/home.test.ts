@@ -1,4 +1,4 @@
-// The home page's foot (Paul, 2026-10-11 and -12): "Beta version · Made with respect by Aboard in New York City · GitHub · Email us", Aboard a link to aboard.com,
+// The home page's foot (Paul, 2026-10-11 and -12): "An Aboard Foundry Project. Made with Respect in New York City." then "Beta version · GitHub · Email us", Aboard Foundry a link to aboard.com,
 // GitHub the repository, Email us a mail link; the sites open in a new tab, in the page's language.
 import { afterEach, expect, test } from 'vitest';
 import { page } from 'vitest/browser';
@@ -21,16 +21,16 @@ const foot = (shell: HTMLElement) => {
   return { f, lines: [...f.querySelectorAll('p')].map((p) => p.textContent!.trim()), links: [...f.querySelectorAll('a')] };
 };
 
-test('the home page ends with who made it, where its source is and how to write, one line of links', async () => {
+test('the home page ends with whose project it is and where it was made, then the beta, its source and how to write', async () => {
   const shell = await mount('');
   await until(() => !!shell.querySelector('to-home footer.to-home-foot'));
   const { f, lines, links } = foot(shell);
   // Below the apps, last in the page.
   expect(f.previousElementSibling!.classList.contains('to-apps')).toBe(true);
   expect(f.nextElementSibling).toBeNull();
-  expect(lines).toEqual(['Beta version · Made with respect by Aboard in New York City · GitHub · Email us']);
+  expect(lines).toEqual(['An Aboard Foundry Project. Made with Respect in New York City.', 'Beta version · GitHub · Email us']);
   expect(links.map((a) => [a.textContent, a.href, a.target, a.rel])).toEqual([
-    ['Aboard', 'https://aboard.com/', '_blank', 'noopener'],
+    ['Aboard Foundry', 'https://aboard.com/', '_blank', 'noopener'],
     ['GitHub', 'https://github.com/aboard-io/tinylittleoffice', '_blank', 'noopener'],
     ['Email us', 'mailto:hello+tlo@aboard.com', '', ''],
   ]);
@@ -51,11 +51,11 @@ test('the foot is said in the page’s language, the names Aboard and GitHub kep
   const shell = await mount('');
   await setLanguage('fr');
   await until(() => document.documentElement.lang === 'fr');
-  await until(() => foot(shell).lines[0] !== 'Beta version · Made with respect by Aboard in New York City');
+  await until(() => foot(shell).lines[0] !== 'An Aboard Foundry Project. Made with Respect in New York City.');
   const { lines, links } = foot(shell);
-  expect(lines).toEqual(['Version bêta · Fait avec respect par Aboard à New York · GitHub · Nous écrire']);
+  expect(lines).toEqual(['Un projet Aboard Foundry. Fait avec respect à New York.', 'Version bêta · GitHub · Nous écrire']);
   expect(links.map((a) => [a.textContent, a.href])).toEqual([
-    ['Aboard', 'https://aboard.com/'],
+    ['Aboard Foundry', 'https://aboard.com/'],
     ['GitHub', 'https://github.com/aboard-io/tinylittleoffice'],
     ['Nous écrire', 'mailto:hello+tlo@aboard.com'],
   ]);

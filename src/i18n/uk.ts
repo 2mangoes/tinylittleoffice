@@ -38,7 +38,7 @@ export default {
   'Forget {title}': 'Забути {title}',
   // Under an app's documents, the rest folded away: "3 more"
   '{n} more': 'Ще {n}',
-  'Made with respect by {aboard} in New York City': 'Зроблено з повагою в {aboard} у Нью-Йорку',
+  'An {aboard} Project. Made with Respect in New York City.': 'Проєкт {aboard}. Зроблено з повагою у Нью-Йорку.',
   'Beta version': 'Бета-версія',
   'Email us': 'Написати нам',
 

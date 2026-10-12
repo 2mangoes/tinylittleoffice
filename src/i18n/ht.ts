@@ -38,7 +38,7 @@ export default {
   'Forget {title}': 'Bliye {title}',
   // Under an app's documents, the rest folded away: "3 more"
   '{n} more': '{n} lòt',
-  'Made with respect by {aboard} in New York City': 'Fèt avèk respè pa {aboard} nan Nouyòk',
+  'An {aboard} Project. Made with Respect in New York City.': 'Yon pwojè {aboard}. Fèt avèk respè nan Nouyòk.',
   'Beta version': 'Vèsyon beta',
   'Email us': 'Ekri nou',
 

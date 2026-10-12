@@ -36,7 +36,7 @@ export default {
   'Forget {title}': '{title}を消去',
   // Under an app's documents, the rest folded away: "3 more"
   '{n} more': 'ほか{n}件',
-  'Made with respect by {aboard} in New York City': '{aboard} がニューヨークで敬意をこめて制作',
+  'An {aboard} Project. Made with Respect in New York City.': '{aboard} のプロジェクト。ニューヨークで敬意をこめて制作。',
   'Beta version': 'ベータ版',
   'Email us': 'メールを送る',
 

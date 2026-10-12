@@ -30,7 +30,7 @@ export default {
   'Forget': 'বাদ দিন',
   'Forget {title}': '“{title}” বাদ দিন',
   '{n} more': 'আরও {n}টি',
-  'Made with respect by {aboard} in New York City': '{aboard} নিউ ইয়র্ক শহরে সম্মানের সঙ্গে তৈরি করেছে',
+  'An {aboard} Project. Made with Respect in New York City.': '{aboard}-এর একটি প্রকল্প। নিউ ইয়র্ক শহরে সম্মানের সঙ্গে তৈরি।',
   'Beta version': 'বিটা সংস্করণ',
   'Email us': 'আমাদের ইমেল করুন',
 

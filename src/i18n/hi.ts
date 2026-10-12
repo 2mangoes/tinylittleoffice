@@ -36,7 +36,7 @@ export default {
   'Forget {title}': '{title} भुला दें',
   // Under an app's documents, the rest folded away: "3 more"
   '{n} more': '{n} और',
-  'Made with respect by {aboard} in New York City': '{aboard} ने न्यूयॉर्क शहर में सम्मान के साथ बनाया',
+  'An {aboard} Project. Made with Respect in New York City.': '{aboard} की एक परियोजना। न्यूयॉर्क शहर में सम्मान के साथ बनाई गई।',
   'Beta version': 'बीटा संस्करण',
   'Email us': 'हमें ईमेल करें',
 
