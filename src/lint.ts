@@ -6,6 +6,10 @@
  * headings a reader meets (the text layer's). Both read the
  * layouts' own results (each app's lint.ts), with the fallback metrics the exports use, and never a browser.
  *
+ * A paragraph or a bullet that links to another Tiny Little Office document is a finding in every app: the
+ * document could be inside this one, as a fence named by its app (round nineteen, Paul 2026-10-12: an agent
+ * shipped four companion links from a deck's bullets, believing a slide could not hold a chart or an animation).
+ *
  * A document fenced inside another (a diagram on a slide, a chart in a text) is linted by its own app, its
  * findings at the fence's block. Every table, wherever it is, has its formulas worked out (apps/sheet/lint.ts):
  * one whose value is an error is a finding. Loaded lazily by src/api.ts (`lint`, `measure`) and the command line.
@@ -42,6 +46,21 @@ const linted = (lang: string) => lang in LINTS || lang === 'sheet';
 /** A document's own findings in an app: its app's, and its tables'. */
 const lintOf = (app: string, text: string): Found[] => [...(LINTS[app]?.(text) ?? []), ...lintSheet(text)];
 
+/**
+ * A link to a Tiny Little Office document: an app's plain link (`/<app>/#doc=`, `#md=`, with or without a title
+ * before it), a packed one (`#/v1/<app>/`), or a short link of the site's own shortener.
+ */
+const DOC_LINK = /https?:\/\/(?:www\.)?tinylittleoffice\.com\/(?:[a-z]+\/)?#(?:\/v1\/|[^\s)>]*?\b(?:doc|md)=)|https?:\/\/tinier\.tinylittleoffice\.com\/[\w~-]+/;
+
+/** Each paragraph or bullet whose words or links hold a link to a document that could be inside this one, as a fence. */
+function docLinks(doc: Doc): Found[] {
+  return doc.blocks.flatMap((b, block) =>
+    (b.k === 'p' || b.k === 'li') && b.runs.some((r) => DOC_LINK.test(r.t) || (!!r.href && DOC_LINK.test(r.href)))
+      ? [{ block, kind: 'doc-link', words: 'a link to a Tiny Little Office document in the words', fix: 'to show the document here, put its text in a fence named by its app' }]
+      : [],
+  );
+}
+
 /** Where block i is, as a person finds it: a deck's slide, else the block's number (from 1). */
 function placeOf(app: string, doc: Doc): (i: number) => string {
   if (app !== 'deck') return (i) => `block ${i + 1}`;
@@ -53,7 +72,7 @@ function placeOf(app: string, doc: Doc): (i: number) => string {
 export function lint(app: string, text: string, url = ''): Finding[] {
   const doc = parse(text);
   const where = placeOf(app, doc);
-  const out: Finding[] = lintOf(app, text).map((f) => ({ app, at: where(f.block), ...f }));
+  const out: Finding[] = [...lintOf(app, text), ...docLinks(doc)].map((f) => ({ app, at: where(f.block), ...f }));
   doc.blocks.forEach((b, i) => {
     if (b.k !== 'fence' || !linted(b.lang)) return;
     for (const f of lintOf(b.lang, b.body)) out.push({ ...f, app: b.lang, at: where(i), block: i });

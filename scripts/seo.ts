@@ -5,8 +5,8 @@
  *   - a page per app, dist/<id>/index.html: the shell with that app's name and line in its tags and its own
  *     canonical address, so a shared link previews as that app; dist/embed/index.html, the shell at the one
  *     address another site may frame (noindex);
- *   - in each page's <header id="to-first">, plain text the shell takes away as it starts (kit/shell.ts): the
- *     apps' names on the home page, each a link to its page; on an app's page its name, its line and its
+ *   - in each page's <header id="to-first">, plain text the shell takes away as it starts (kit/shell.ts): on the
+ *     home page the line for agents first (where /llms.txt is), then the apps' names, each a link to its page; on an app's page its name, its line and its
  *     templates' names. The words the rendered page shows, there before any script runs;
  *   - one JSON-LD block on each page, a schema.org WebApplication with that page's name, line and address
  *     (`type="application/ld+json"` runs nothing, so the Content-Security-Policy is as it was: scripts/check-build.ts);
@@ -70,6 +70,12 @@ export function ldBlocks(page: string): unknown[] {
 export const firstHeader = (page: string) => /<header id="to-first">[\s\S]*?<\/header>/.exec(page)?.[0] ?? '';
 const withHeader = (page: string, inner: string) => page.replace(/<header id="to-first">[\s\S]*?<\/header>/, `<header id="to-first">${inner}</header>`);
 
+/**
+ * The home page's first words, before the site's name: a fetcher that reads only the first few hundred characters
+ * meets the guide for agents first (round nineteen), and that a document goes inside another.
+ */
+export const agents = (site: string) => `Agents: ${site}llms.txt says how to make a document as a link; a document goes inside another as a fence named by its app.`;
+
 /** The sitemap of the home page and each app's page. */
 export function sitemap(site: string, ids: string[], lastmod: string): string {
   const url = (loc: string) => `  <url><loc>${text(loc)}</loc>${lastmod ? `<lastmod>${lastmod}</lastmod>` : ''}</url>\n`;
@@ -92,7 +98,7 @@ export function writePages(dist: string, { site, apps, built }: { site: string; 
   writeFileSync(resolve(dist, 'embed', 'index.html'), shell.replace(/(src|href)="\.\//g, '$1="../').replace('</title>', '</title>\n    <meta name="robots" content="noindex" />'));
 
   const names = apps.map((a) => `<li><a href="${a.id}/">${text(a.name)}</a></li>`).join('');
-  writeFileSync(resolve(dist, 'index.html'), ld(withHeader(shell, `<h1>${SITE_NAME}</h1><ul>${names}</ul>`), { name: SITE_NAME, description, url: site }));
+  writeFileSync(resolve(dist, 'index.html'), ld(withHeader(shell, `<p>${text(agents(site))}</p><h1>${SITE_NAME}</h1><ul>${names}</ul>`), { name: SITE_NAME, description, url: site }));
 
   for (const app of apps) {
     const title = `${app.name} · ${SITE_NAME}`;
@@ -152,7 +158,7 @@ export function checkSeo(dist: string, apps: Listed[]): string[] {
       name: SITE_NAME,
       description: unattr(/<meta name="description" content="([^"]*)"/.exec(home)?.[1] ?? ''),
       url: site,
-      words: apps.map((a) => a.name),
+      words: [agents(site), ...apps.map((a) => a.name)],
       app: null as Listed | null,
     },
     ...apps.map((a) => ({ file: `${a.id}/index.html`, name: a.name, description: a.blurb, url: `${site}${a.id}/`, words: [a.name, a.blurb], app: a })),

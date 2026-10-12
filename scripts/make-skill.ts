@@ -20,15 +20,17 @@
  *   {{exports:<app>}}       the app's own files, beyond the ones every app makes
  *   {{functions}}           the sheet's functions
  *   {{commands}}            the keys each app answers, from the command registry (scripts/commands.ts)
+ *   {{embed}}               a document inside a document: two slides cut from the deck's lesson, the second an animation, as a plain link
  */
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import type { Template } from '../src/kit/app.ts';
 import { apps, appOf } from '../src/kit/apps.ts';
-import { FUNCTIONS, parse, write } from '../src/doc/index.ts';
+import { FUNCTIONS, hasClass, parse, write, type Doc } from '../src/doc/index.ts';
 import { plainLink, readPlain } from '../src/kit/plain.ts';
 import { skillCommands } from './commands.ts';
-import { examplesOf, type Example } from './shapes.ts';
+import { cut, examplesOf, type Example } from './shapes.ts';
+import { lint } from '../src/lint.ts';
 import { generate } from './generated.ts';
 
 const SITE = 'https://tinylittleoffice.com/';
@@ -56,6 +58,21 @@ function example(all: Templates, id: string, tpl: string): string {
   return `${t.name}:\n\n${fence}\n${t.doc}${fence}\n\nAs a link: <${url}>`;
 }
 
+/**
+ * The example of a document inside a document: the deck's lesson cut to two slides, its cover and the slide whose
+ * model moves (an Animator document in an ```anim fence), as a plain link. Cut, never written by hand, and clean.
+ */
+export function embedLink(all: Templates): string {
+  const lesson = all.get('deck')!.find((x) => x.id === 'lesson');
+  if (!lesson) throw new Error('make-skill: the deck has no template "lesson"');
+  // The cover first and an animation after it; the cut takes every other slide away.
+  const covered = (d: Doc) => d.blocks[0]?.k === 'h' && hasClass(d.blocks[0], 'title') && d.blocks.some((b) => b.k === 'fence' && b.lang === 'anim');
+  const text = write(cut('deck', parse(lesson.doc), covered));
+  const url = plainLink(SITE, 'deck', text);
+  if (parse(text).blocks.filter((b) => b.k === 'hr').length !== 1 || lint('deck', text, url).length) throw new Error('make-skill: the lesson does not cut to a clean cover and a slide that moves');
+  return `<${url}>`;
+}
+
 /** The template's placeholders filled: the skill whole, or a piece of it (an app's section, for its own page). */
 function fill(text: string, all: Templates): string {
   const table = ['| App | Name | For |', '| --- | --- | --- |', ...apps().map((a) => `| \`${a.id}\` | ${a.name} | ${a.blurb} |`)].join('\n');
@@ -63,6 +80,7 @@ function fill(text: string, all: Templates): string {
     .replace('{{apps}}', table)
     .replace('{{functions}}', FUNCTIONS.map(([name]) => `\`${name}\``).join(', '))
     .replace('{{commands}}', () => skillCommands())
+    .replace('{{embed}}', () => embedLink(all))
     .replace(/\{\{tpl:([a-z]+):([a-z0-9-]+)\}\}/g, (_, id: string, tpl: string) => example(all, id, tpl))
     .replace(
       /\{\{templates:([a-z]+)\}\}/g,
@@ -107,7 +125,8 @@ export async function makeExamples(all?: Templates): Promise<Map<string, Example
  * /llms.txt: the guide an agent reads first, under 6 KB, the long part a fetch away. Above its first `##`: what
  * Tiny Little Office is (the template's first two sentences), the plain link (a document made with nothing but
  * percent-encoding), the API's line, the three commands that give examples, and where the rest is. Then one
- * example per app as a plain link, and the template's three rules, word for word.
+ * example per app as a plain link, how a document goes inside another (with its example link), and the
+ * template's three rules, word for word.
  */
 export async function makeShort(skill: string, examples?: Map<string, Example[]>): Promise<string> {
   const ex = examples ?? (await makeExamples());
@@ -138,10 +157,14 @@ export async function makeShort(skill: string, examples?: Map<string, Example[]>
     '',
     '## One example per app',
     '',
+    `More on each at ${SITE}llms/<app>.txt.`,
+    '',
     ...apps().map((a) => {
       const e = ex.get(a.id)![0];
-      return `- \`${a.id}\` ${a.name}, ${e.name}: <${e.link}> (more: ${SITE}llms/${a.id}.txt)`;
+      return `- \`${a.id}\` ${a.name}, ${e.name}: <${e.link}>`;
     }),
+    '',
+    section(guide, 'A document inside a document').trim(),
     '',
     section(guide, 'Three rules agents break first').trim(),
     '',

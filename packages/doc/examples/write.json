@@ -369,6 +369,33 @@
           }
         ]
       }
+    },
+    {
+      "id": "figure",
+      "name": "a figure in the text",
+      "for": "a drawing, a diagram, a chart or a map in a fence named by its app",
+      "from": "template memo",
+      "text": "```diagram\n---\ntitle: Who does what\nkind: lanes\n---\n- You: Write the change down\n- Readers: Do their part by the date\n- You: Check that it was done\n```\n\n*What each reader does, and by when.*\n",
+      "link": "https://tinylittleoffice.com/write/#doc=%60%60%60diagram%0A---%0Atitle%3A+Who+does+what%0Akind%3A+lanes%0A---%0A-+You%3A+Write+the+change+down%0A-+Readers%3A+Do+their+part+by+the+date%0A-+You%3A+Check+that+it+was+done%0A%60%60%60%0A%0A%2AWhat+each+reader+does%2C+and+by+when.%2A",
+      "json": {
+        "head": {},
+        "blocks": [
+          {
+            "k": "fence",
+            "lang": "diagram",
+            "body": "---\ntitle: Who does what\nkind: lanes\n---\n- You: Write the change down\n- Readers: Do their part by the date\n- You: Check that it was done"
+          },
+          {
+            "k": "p",
+            "runs": [
+              {
+                "t": "What each reader does, and by when.",
+                "i": true
+              }
+            ]
+          }
+        ]
+      }
     }
   ]
 }

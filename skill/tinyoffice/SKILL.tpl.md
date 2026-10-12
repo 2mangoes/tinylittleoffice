@@ -34,6 +34,12 @@ The packed form: after `#/v1/<app>/` comes one letter and then base64url bytes (
 
 There is no shared document. Whoever opens a link gets their own copy: what they change is in their link, not in the one they were sent, and nobody else sees it unless they send their new link back. Never promise collaboration, live editing or one copy that everyone fills in. For a sign-up sheet, a form to fill in or work to hand in, tell the person that each one who opens it makes their own copy and should send their link back. A short link (below) can be updated by its owner, so later visitors get the owner's new version; it never gathers anyone else's changes.
 
+## A document inside a document
+
+Any app's document goes inside a Word Processor page, a slide or an outline item: a fence named by the app's id (```` ```anim ````, `diagram`, `draw`, `sheet`, `trip`, `cal`…) holding that document's own TLO. Its own app draws it there, and it is edited in place. A slide with one shows it alone under the headline; an animation moves on its slide and plays when presented. A page's or a deck's PDF, and a deck's PowerPoint, carry it drawn. Put a document inside rather than link to it.
+
+Two slides, a cover and then the Moon going around the Earth, an animation on its slide: {{embed}}
+
 ## Three rules agents break first
 
 1. **Every space and line break is kept.** A list nests by two spaces a level, and in a link each space is written (`%20%20` or `++`, a new line `%0A`): a dropped space flattens the tree. A line break inside a paragraph stays a line break, so never wrap a paragraph's lines.
@@ -50,7 +56,7 @@ Write ordinary Markdown: `#` headings, paragraphs, `- ` and `1. ` lists nested b
 | `{#id .class key=value}` at the end of a line | Attributes: a layout (`{.title}`, `{.two}`), a setting for that line (`{due=2027-03-01}`) |
 | `Price:money` in a table's header | A typed column: `text number money percent date time check url rich long icon name option` |
 | `~ A -> B: label` | A connection between two things (`->`, `<-`, `<->`, `--`) |
-| a code fence named for an app: ```` ```sheet ```` | Another document inside this one, written in that app's TLO: a chart on a slide, a table in a text |
+| a code fence named for an app: ```` ```sheet ```` | Another document inside this one, written in that app's TLO: a chart on a slide, an animation, a diagram in a text |
 | `==highlight==`, `++underline++`, `:icon-name:` | A highlight, an underline, an icon in the line (Lucide's names: `rocket`, `calendar`, `coffee`…) |
 
 `---` between blocks starts the next slide, page or card. A table anywhere is a spreadsheet: its formulas work. A link is words: `[words](https://…)` or a web address, alone on a line or among other words, is words that go there when the reader follows them. Nothing in a document is fetched from another site: there are no pictures from the web and no embedded videos or posts, and Markdown's picture line, `![words](https://…)`, reads as a link.
@@ -63,7 +69,7 @@ Write ordinary Markdown: `#` headings, paragraphs, `- ` and `1. ` lists nested b
 
 ### write: a text
 
-Markdown as it stands. `# Words {.title}` is the title, set large; `#` and `##` are headings; `{.center}`, `{.right}` or `{.justify}` at the end of a paragraph aligns it. A table works out its formulas; a fence named for an app holds that document. `paper: a4` or `letter` in the head sets the paper (a reader in North America gets letter otherwise). Notes are listed at the end, in the editor, on paper, in the web page and in Word. an invoice is a text with its lines as a table.
+Markdown as it stands. `# Words {.title}` is the title, set large; `#` and `##` are headings; `{.center}`, `{.right}` or `{.justify}` at the end of a paragraph aligns it. A table works out its formulas. A fence named by any app's id (```` ```anim ````, `draw`, `diagram`, `sheet`, `trip`, `cal`, the lot) puts that document in the page as a figure, drawn by its app. `paper: a4` or `letter` in the head sets the paper (a reader in North America gets letter otherwise). Notes are listed at the end, in the editor, on paper, in the web page and in Word. an invoice is a text with its lines as a table.
 
 {{tpl:write:meeting}}
 
@@ -71,7 +77,7 @@ Markdown as it stands. `# Words {.title}` is the title, set large; `#` and `##` 
 
 ### outline: an outliner
 
-A nested list, two spaces a level. An item's tie to its parent can be an arrow, `{.to}` (towards the parent) or `{.from}`, named with `label="…"`; any two items join with `~ Pricing -> Press: informs`. The same tree opens as slides, a mind map, an org chart or a network.
+A nested list, two spaces a level. An item's tie to its parent can be an arrow, `{.to}` (towards the parent) or `{.from}`, named with `label="…"`; any two items join with `~ Pricing -> Press: informs`. A fence named by any app's id (```` ```anim ````, `cal`, `diagram`, `sheet`, the lot) puts that document under an item, `{depth=2}` after its name saying how deep. The same tree opens as slides, a mind map, an org chart or a network.
 
 {{tpl:outline:launch}}
 
@@ -81,9 +87,9 @@ A nested list, two spaces a level. An item's tie to its parent can be an arrow, 
 
 ### deck: slides
 
-A slide between each `---`. The headline is `## :icon-name: Headline`, its layout an attribute: `{.title}` (a title slide), `{.two}` (two columns, a paragraph `|` between them) or `{.icon}` (bullets beside one big icon). The words are `- ` bullets nested by two spaces; `> ` lines are speaker notes; a `^[footnote]` is shown at the foot of its slide. A sheet's table with `chart: bar` in its head, in a ```` ```sheet ```` fence, is a chart on the slide. The head may hold `theme:` (`boardroom`, `ivory`, `midnight`, `graphite`; for fun `confetti`, `sunset`, `ocean`, `bubblegum`, `arcade`, `chalkboard`; plain otherwise) and `transition:` (`cut`, `slide`, `zoom`; a fade otherwise).
+A slide between each `---`. The headline is `## :icon-name: Headline`, its layout an attribute: `{.title}` (a title slide), `{.two}` (two columns, a paragraph `|` between them) or `{.icon}` (bullets beside one big icon). The words are `- ` bullets nested by two spaces; `> ` lines are speaker notes; a `^[footnote]` is shown at the foot of its slide. A fence named by any app's id (```` ```anim ````, `diagram`, `draw`, `trip`, `cal`, `sheet`, the lot) puts that document on the slide, drawn by its app: an animation moves, a sheet with `chart: bar` in its head is a chart. The head may hold `theme:` (`boardroom`, `ivory`, `midnight`, `graphite`; for fun `confetti`, `sunset`, `ocean`, `bubblegum`, `arcade`, `chalkboard`; plain otherwise) and `transition:` (`cut`, `slide`, `zoom`; a fade otherwise).
 
-The rules, before they are broken: a slide with a fence (a chart, a diagram, a table) is the fence's, drawn alone under the headline: bullets on it are not drawn, so put them in the notes (`> ` lines) or on a slide of their own. A headline is a few words; a long one is set smaller, then cut after two lines. Bullets are set as large as they fit, down to 14px; more than that runs off the slide, so split it. Presenting reveals one bullet, or one item of a fenced document, per step; the notes show with N or the Notes button, and start hidden under a finger. `{.title}` is a cover (the headline large, the bullets beneath it as its subtitle); `{.two}` two columns, `|` alone on a line between them; `{.icon}` the bullets beside the headline's icon, drawn large.
+The rules, before they are broken: a slide with a fence (a chart, a diagram, a table) is the fence's, drawn alone under the headline: bullets on it are not drawn, so put them in the notes (`> ` lines) or on a slide of their own. A headline is a few words; a long one is set smaller, then cut after two lines. Bullets are set as large as they fit, down to 14px; more than that runs off the slide, so split it. Presenting reveals one bullet, or one item of a fenced document, per step; the notes show with N or the Notes button, and start hidden under a finger.
 
 `format:` in the head makes the deck a thing to print and fold, a page between each `---`: `poster` (one page, as big as the page allows), `zine` (8 pages), `booklet` (8 to 20), `brochure` (6 panels), `comic` (a panel per bullet, `- :icon-name: What is said | caption`) or `badges` (a page per person, the name as the headline).
 
@@ -240,6 +246,7 @@ Before you share a link, lint it: `tinyoffice lint <link or file.tlo>` (or `awai
 - `title-cut`, `title-small`: a headline cut after two lines, or set at its smallest size.
 - `body-over`, `body-small`: a slide's words running off its foot, or set at their smallest size.
 - `formula-error`: a table's formula that works out to an error (`#CIRC`, `#REF`, `#DIV/0`, `#NAME`, `#VALUE`, `#NUM`, `#ERR`), in any table, a fenced one too: the cell, the formula, the error and the fix. A total over its own column takes in its own cell when the rows are counted from the header: rows count from the first data row, so the eighth row's total of the seven above is `=SUM(B1:B7)`.
+- `doc-link`: a link to a Tiny Little Office document in the words, where the document could be inside this one as a fence.
 - `length`: a link past 2,000 characters, which some chat apps cut.
 
 A diagram fenced on a slide is linted too, at its slide. `tinyoffice measure <link or file>` (`measure(app, text)`) gives the numbers behind them as JSON: per slide, the headline's and the words' sizes, the lines they wrapped to, what was cut and the bullets a document hides, what it shows (`shows`); per diagram, its things, its connections drawn and dropped, and each label's size, lines and whether it was cut; per table, its formulas and the ones that fail; `short`, whether the link fits in a short link; and for every document `words` and `headings`, what a reader meets. Set your words from these numbers. `read` gives back the text exactly as written, so what you wrote is what the link holds; `read --text` (`text(url)`) gives what it says, as a screen reader is given it on the Display Link (a diagram's things and connections, a calendar's days), to check that it reads. You never need a browser or a screenshot to check a document: the lint and the measures come from the same layout code that draws the pages. If you do open a development copy of the site, short links need its shortener (`npm run tinier:dev`).

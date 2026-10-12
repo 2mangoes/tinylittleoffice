@@ -7,9 +7,9 @@ holds every one).
 
 - **A talk**: a twenty-minute meetup talk: title, agenda, three points with speaker notes, a footnote, a close (Midnight).
 - **Status update**: a week's project status: done and next side by side, risks, asks (Boardroom).
-- **A proposal**: a pitch to one client: what you heard, what you propose, when, what it costs (Ivory).
+- **A proposal**: a pitch to one client: what you heard, what you propose, when as a timeline diagram on its slide, what it costs (Ivory).
 - **A pitch**: a seed round in eight slides: the problem with its source, the product, traction on a line chart, the business, the team, the ask (Graphite, slide transition).
-- **A lesson**: a seventh-grade science lesson: aims, what they know, the model, the phases in two columns, a big-icon slide, a check, homework, the check's answers last; the teacher's notes under each (Chalkboard).
+- **A lesson**: a seventh-grade science lesson: aims, what they know, the model, the model moving (an Animator document on its slide), the phases in two columns, a big-icon slide, a check, homework, the check's answers last; the teacher's notes under each (Chalkboard).
 - **Conference talk**: a talk with speaker notes on every slide, a bar chart of results, a footnote, and the lessons to write down (Ocean).
 - **Quarterly review**: a bike shop's quarter for its partners: revenue by month on a chart, wins and misses, a table of the numbers that matter, next quarter, decisions (green icons).
 - **Workshop agenda**: a Saturday repair workshop: the timetable as a table, an outline of what to bring on the slide, the steps, two columns of fixes (Confetti).

@@ -85,6 +85,8 @@ export const templates = (): Template[] => [
       item(2, 'Onboarding'),
       item(3, 'Three screens, then straight to the first note'),
       item(2, 'Freeze the build on Monday, November 2'),
+      item(1, 'Dates'),
+      docBlock(2, 'cal\n- 2026-11-02: Build frozen\n- 2026-11-05: Review copies out\n- 2026-11-12: Launch day'),
       item(1, 'Marketing'),
       item(2, 'Press'),
       item(3, 'Review copies to six writers on November 5, embargoed to the 12th'),

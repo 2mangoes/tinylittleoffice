@@ -66,6 +66,11 @@ test('the static HTML says what the rendered page shows: the apps’ names on th
   build(SITE);
   const home = firstHeader(read('index.html'));
   for (const a of apps()) expect(home).toContain(`<a href="${a.id}/">${a.name}</a>`);
+  // The agents' line comes first, before the site's name and the apps', naming the guide and the fence.
+  expect(home).toMatch(
+    /^<header id="to-first"><p>Agents: https:\/\/office\.example\.org\/llms\.txt says how to make a document as a link; a document goes inside another as a fence named by its app\.<\/p><h1>/,
+  );
+  expect(home.indexOf('llms.txt')).toBeLessThan(home.indexOf('<a href="write/">'));
   const write = firstHeader(read('write/index.html'));
   expect(write).toContain('<h1>Word Processor</h1>');
   expect(write).toContain(`<p>${apps()[0].blurb}</p>`);

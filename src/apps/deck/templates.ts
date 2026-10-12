@@ -39,7 +39,7 @@ const PROPOSAL = headed(
   '## :building: A new site for Acme Inc. {.title}\n\n- A proposal from Harbor Studio · October 2026',
   '## :target: What you told us\n\n- Customers call to ask what you charge, and whether you deliver\n- The current site was built in 2019 and nobody can change it\n- You would like to list the twelve products you actually sell',
   '## :lightbulb: What we propose\n\n- Six pages, written with you, in plain words\n- A small online store: twelve products in one table, with a cart\n- A site you can edit yourselves, from a link, in any browser',
-  '## :calendar: When\n\n1. October: words and sketches\n2. November: the build, shown to you every Friday\n3. December 1: live, with the old address pointing home',
+  '## :calendar: When\n\n```diagram\n---\nkind: timeline\n---\n- 2026-10-01: Words and sketches\n- 2026-11-02: The build begins\n- 2026-11-06: First showing\n- 2026-12-01: Live\n```\n\n> October for the words, November for the build, shown to you every Friday; December 1 live, with the old address pointing home.',
   '## :dollar: What it costs\n\n- Design and build: $6,400, half at the start and half when it is live\n- Hosting: $12 a month, paid directly to the host\n- Changes after launch: an hour a month is included for a year',
   '## :heart: Thank you\n\n- Mara Quill · mara@harborstudio.example · 14 Quay Street, Portland',
 );
@@ -115,12 +115,17 @@ const PITCH = headed(
   '## :target: The ask\n\n- $900,000 for eighteen months\n- A second plant on the east side, and 60 more buildings\n- priya@loop.example · (614) 555-0182\n\n> Stop here. Let them ask about the plant.',
 );
 
+/** The lesson's model in motion: the Moon around the Earth, the Sun to the left, full when it starts; an Animator document on its slide. */
+const ORBIT =
+  '---\nframes: 16\nfps: 4\nalt: The Moon goes around the Earth, lit from the left by the Sun.\n---\nKind | X | Y | W | H | Style | Label\n--- | --- | --- | --- | --- | --- | ---\ni | 2 | 21 | 8 | 8 | 0o | sun\ne | 37 | 22 | 6 | 6 | 2b |\ne | 57 | 24 | 2 | 2 | 2 |\n\nShape | Keys\n--- | ---\n2 | 0,0,0,0,1,0; 4,-144,-144,0,1,0; 8,-288,0,0,1,0; 12,-144,144,0,1,0; 15,-36,36,0,1,0\n';
+
 const LESSON = headed(
   { theme: 'chalkboard' },
   '## :moon: Why the Moon has phases {.title}\n\n- Seventh-grade science · Ms. Achterberg · Thursday, October 15, 2026',
   "## :target: By the end of today\n\n- You can name the eight phases in order\n- You can explain why we see them\n- You can say why it is not the Earth's shadow\n\n> Read these out. Ask them to copy the first line only.",
   '## :help: What do you already know?\n\n- How long from one full Moon to the next?\n- Is the Moon making its own light?\n- Have you seen the Moon in the daytime?\n\n> Two minutes with a partner, then hands up. Write the answers on the side whiteboard; we come back to them at the end.',
   '## :sun: The model\n\n1. The Sun lights half of the Moon, always\n2. The Moon goes around the Earth once in about 29.5 days\n3. From the Earth we see a different share of the lit half\n4. That share is the phase\n\n> Lamp at the front, a foam ball on a pencil each. Lights off.',
+  '## :moon: The model, moving\n\n```anim\n' + ORBIT + '```\n\n> It starts at full Moon, on the far side of the Earth from the Sun. Ask where it is at new Moon, and at each quarter.',
   '## :moon: The eight phases {.two}\n\n- New Moon\n- Waxing crescent\n- First quarter\n- Waxing gibbous\n\n|\n\n- Full Moon\n- Waning gibbous\n- Last quarter\n- Waning crescent',
   "## :warning: Not the shadow {.icon}\n\n- The Earth's shadow only touches the Moon in an eclipse\n- That happens a couple of times a year, not every month\n- A phase is about where we stand, not what is in the way",
   '## :check: Check\n\n- Draw the Moon at first quarter: which side is lit?\n- Why can you sometimes see the Moon at breakfast?\n- What phase comes after full?\n\n> Exit tickets on the way out.',

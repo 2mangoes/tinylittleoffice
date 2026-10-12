@@ -6,7 +6,7 @@ look fits it, it names one in its head (`look:`, look.ts).
 
 - **A letter**: a business letter from a studio to a client, setting down what was agreed.
 - **Cover letter** (serif and sans): applying for a job, in four short paragraphs.
-- **Memo**: one change at a studio, why (with its figure in a footnote), and what is needed by when.
+- **Memo**: one change at a studio, why (with its figure in a footnote), who does what as a swimlanes diagram in the page, and what is needed by when.
 - **Meeting notes**: agenda, notes, decisions and actions as tasks to check off.
 - **Minutes**: a tenants' association meeting: who came, the treasurer's sums in a table, a motion and its vote.
 - **Résumé**: name, experience, education and skills on a page.

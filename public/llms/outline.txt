@@ -2,7 +2,7 @@
 
 An outliner: ideas under ideas, folded and unfolded, moved around and joined; the same tree a deck or a mind map reads. A document is a link: https://tinylittleoffice.com/outline/#doc=<percent-encoded TLO>
 
-A nested list, two spaces a level. An item's tie to its parent can be an arrow, `{.to}` (towards the parent) or `{.from}`, named with `label="…"`; any two items join with `~ Pricing -> Press: informs`. The same tree opens as slides, a mind map, an org chart or a network.
+A nested list, two spaces a level. An item's tie to its parent can be an arrow, `{.to}` (towards the parent) or `{.from}`, named with `label="…"`; any two items join with `~ Pricing -> Press: informs`. A fence named by any app's id (```` ```anim ````, `cal`, `diagram`, `sheet`, the lot) puts that document under an item, `{depth=2}` after its name saying how deep. The same tree opens as slides, a mind map, an org chart or a network.
 
 Templates: Packing list, A decision, Launch plan, A talk, A speech, An essay plan, A research plan, A syllabus, A novel, A book, A company, A family, A decision tree, Troubleshooting. Its own files: `.opml`, `.md`, `.pdf`, `.txt`. (the `.pdf` is the outline's words as sections and bullets, selectable and bookmarked)
 
@@ -13,6 +13,7 @@ Templates: Packing list, A decision, Launch plan, A talk, A speech, An essay pla
 - `tie` an arrow to the parent, how an item feeds its parent: {.to label="…"}
 - `connection` a connection, two items joined across the tree: ~ A -> B: label
 - `footnote` a footnote, a note on an item: ^[the note]
+- `doc` a document under an item, a fence named by its app, {depth=n} for its place
 
 ## Example: a nested list
 

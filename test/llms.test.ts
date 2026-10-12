@@ -9,6 +9,8 @@ import { lint, read, parse, write, example, shapes, tryDraft } from '../src/api.
 import { apps } from '../src/kit/apps.ts';
 import { makeLlms, makeShort, makeSkill } from '../scripts/make-skill.ts';
 import { SHAPES } from '../scripts/shapes.ts';
+import { slidesOf } from '../src/apps/deck/model.ts';
+import { subPage } from '../src/apps/deck/view.ts';
 
 const at = (p: string) => fileURLToPath(new URL(`../${p}`, import.meta.url));
 const file = (p: string) => readFileSync(at(p), 'utf8');
@@ -57,7 +59,43 @@ test('a page per app, under 4 KB: its shapes, an example and its rules', async (
     expect(new TextEncoder().encode(page).length, a.id).toBeLessThan(4 * 1024);
     for (const s of SHAPES[a.id]) expect(page, `${a.id} ${s.id}`).toContain(`\`${s.id}\``);
     expect(page).toContain(`https://tinylittleoffice.com/examples/${a.id}.json`);
-    expect(file('public/llms.txt')).toContain(`https://tinylittleoffice.com/llms/${a.id}.txt`);
+  }
+  // The pages' address, once, above the examples.
+  expect(file('public/llms.txt')).toContain('More on each at https://tinylittleoffice.com/llms/<app>.txt.');
+});
+
+// Paul, 2026-10-12: an agent wrote that decks are text-only and the Animator's format unpublished, and shipped four
+// companion links. /llms.txt says early, with a link that shows it, that a document goes inside another.
+test('/llms.txt says a document goes inside another, before the three rules, with a deck whose second slide moves', () => {
+  const short = file('public/llms.txt');
+  const at = short.indexOf('\n## A document inside a document\n');
+  expect(at).toBeGreaterThan(short.indexOf('\n## One example per app\n'));
+  expect(at).toBeLessThan(short.indexOf('\n## Three rules agents break first\n'));
+  const section = short.slice(at, short.indexOf('\n## Three rules'));
+  for (const words of ['a fence named by the app', '```` ```anim ````', 'an animation moves on its slide', 'edited in place']) expect(section).toContain(words);
+  const url = /<(https:\/\/tinylittleoffice\.com\/deck\/#doc=[^>]+)>/.exec(section)![1];
+  const r = read(url);
+  expect(r.app).toBe('deck');
+  expect(r.text.length).toBeLessThan(600);
+  const doc = parse(r.text);
+  const slides = slidesOf(doc);
+  expect(slides).toHaveLength(2);
+  const fence = doc.blocks[slides[1].sub];
+  expect(fence).toMatchObject({ k: 'fence', lang: 'anim' });
+  expect(Number(parse((fence as { body: string }).body).head.frames)).toBeGreaterThan(1);
+  // Drawn by the Animator, and moving: the page's shapes are tweened.
+  const page = subPage(doc, slides[1])!;
+  expect(page.svg).toContain('<animateTransform');
+  expect(page.alt).toBe('The Moon goes around the Earth, lit from the left by the Sun.');
+  // And the skill says the same, in its own section.
+  expect(file('skill/tinyoffice/SKILL.md')).toContain(section.trim());
+});
+
+test('the deck’s, the Word Processor’s and the Outliner’s pages each say a fence named by any app puts that document there', () => {
+  for (const id of ['deck', 'write', 'outline']) {
+    const page = file(`public/llms/${id}.txt`);
+    expect(page, id).toContain('```` ```anim ````');
+    expect(page, id).toContain('A fence named by any app');
   }
 });
 
@@ -88,7 +126,7 @@ test('example names a shape it does not know, with the ones it does; tryDraft gi
 test('the home page points a fetcher to /llms.txt, and the site serves it as text', () => {
   const html = file('index.html');
   expect(html).toContain('<link rel="alternate" type="text/plain" href="/llms.txt" title="For agents" />');
-  expect(html).toMatch(/<noscript>[\s\S]*Agents: %VITE_SITE_URL%llms\.txt says how to make a document as a link\.[\s\S]*<\/noscript>/);
+  expect(html).toMatch(/<noscript>[\s\S]*Agents: %VITE_SITE_URL%llms\.txt says how to make a document as a link; a document goes inside another as a fence named by its app\.[\s\S]*<\/noscript>/);
   const headers = file('public/_headers');
   expect(headers).toMatch(/\/llms\.txt\n(?: {2}.*\n)*? {2}Content-Type: text\/plain; charset=utf-8\n/);
   expect(headers).toMatch(/\/llms\.txt\n(?: {2}.*\n)*? {2}Cache-Control: public, max-age=300\n/);

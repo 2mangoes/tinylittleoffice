@@ -38,6 +38,7 @@ describe('each finding: a document that trips it, and one that does not', () => 
     ['title', 'title-cut'],
     ['body', 'body-over'],
     ['sheet-circ', 'formula-error'],
+    ['doc-link', 'doc-link'],
   ])('%s', (name, kind) => {
     expect(kinds(name)).toContain(kind);
     expect(kinds(`${name}.ok`)).toStrictEqual([]);
@@ -50,6 +51,21 @@ describe('each finding: a document that trips it, and one that does not', () => 
 });
 
 describe('what each finding says', () => {
+  test('a slide of companion links, as an agent wrote one on 2026-10-12: each link to a document is named, at its slide, the same from the API', async () => {
+    const { app, text } = fixture('doc-link');
+    const found = lint(app, text);
+    expect(found.map((f) => [f.kind, f.at, f.block])).toStrictEqual([
+      ['doc-link', 'slide 2', 4],
+      ['doc-link', 'slide 2', 5],
+      ['doc-link', 'slide 2', 6],
+    ]);
+    expect(findingLine(found[0])).toBe('deck · slide 2 · a link to a Tiny Little Office document in the words · to show the document here, put its text in a fence named by its app');
+    expect(await apiLint(app, text)).toStrictEqual(found);
+    // Any app: a text's paragraph that links to a drawing; a link elsewhere, or the site's own address, is words.
+    expect(lint('write', 'See [the plan](https://tinylittleoffice.com/draw/#title=Plan&doc=r+%7C+1).\n').map((f) => f.kind)).toStrictEqual(['doc-link']);
+    expect(lint('write', 'Made at https://tinylittleoffice.com and [elsewhere](https://example.com/#doc=x).\n')).toStrictEqual([]);
+  });
+
   test('an org chart’s dotted line to a thing not in the list: named, with the things there are', () => {
     const [f] = lint(fixture('edge-end').app, fixture('edge-end').text);
     expect(f).toMatchObject({ app: 'diagram', block: 4, at: 'block 5', kind: 'edge-end' });

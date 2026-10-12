@@ -8,7 +8,7 @@ named lines to the parent, joins between branches, and a sheet under an item.
 
 - **Packing list**: five days in Lisbon by category, with notes on shoes and plugs, and a numbered list for before leaving.
 - **A decision**: should we move the office; each option with what speaks for and against it, the rent in a footnote.
-- **Launch plan**: a product launch, its product, marketing and support, the dates, and joins where one branch feeds another.
+- **Launch plan**: a product launch, its product, marketing and support, the dates as a calendar under an item, and joins where one branch feeds another.
 - **A talk**: twenty minutes in three timed parts; "Show as slides" makes a slide of each top item.
 - **A speech**: a five-minute retirement toast, its parts timed on their lines and its three stories numbered.
 - **An essay plan**: a thesis, two arguments with their evidence (a citation in a footnote), the objection and the answer, joined.

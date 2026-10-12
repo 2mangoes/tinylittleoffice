@@ -222,6 +222,47 @@
           }
         ]
       }
+    },
+    {
+      "id": "doc",
+      "name": "a document under an item",
+      "for": "a fence named by its app, {depth=n} for its place",
+      "from": "template launch",
+      "text": "- Fieldnote 2.0, out on Thursday, November 12\n  - Product\n\n```cal {depth=2}\n- 2026-11-02: Build frozen\n- 2026-11-05: Review copies out\n- 2026-11-12: Launch day\n```\n",
+      "link": "https://tinylittleoffice.com/outline/#doc=-+Fieldnote+2.0%2C+out+on+Thursday%2C+November+12%0A++-+Product%0A%0A%60%60%60cal+%7Bdepth%3D2%7D%0A-+2026-11-02%3A+Build+frozen%0A-+2026-11-05%3A+Review+copies+out%0A-+2026-11-12%3A+Launch+day%0A%60%60%60",
+      "json": {
+        "head": {},
+        "blocks": [
+          {
+            "k": "li",
+            "depth": 0,
+            "runs": [
+              {
+                "t": "Fieldnote 2.0, out on Thursday, November 12"
+              }
+            ]
+          },
+          {
+            "k": "li",
+            "depth": 1,
+            "runs": [
+              {
+                "t": "Product"
+              }
+            ]
+          },
+          {
+            "k": "fence",
+            "lang": "cal",
+            "body": "- 2026-11-02: Build frozen\n- 2026-11-05: Review copies out\n- 2026-11-12: Launch day",
+            "a": {
+              "kv": {
+                "depth": "2"
+              }
+            }
+          }
+        ]
+      }
     }
   ]
 }

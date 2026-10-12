@@ -132,6 +132,16 @@ const MEMO = `# Memo {.title}
 
 - *Each change on its own line.*
 
+\`\`\`diagram
+---
+title: Who does what
+kind: lanes
+---
+- You: Write the change down
+- Readers: Do their part by the date
+- You: Check that it was done
+\`\`\`
+
 ## What we need from you
 
 *What each reader does, and by when.*

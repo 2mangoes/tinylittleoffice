@@ -54,6 +54,10 @@ const columns = (d: Doc) => {
   return bar > 0 && d.blocks.slice(0, bar).some((b) => b.k === 'li') && d.blocks.slice(bar).some((b) => b.k === 'li');
 };
 const kindIs = (k: string) => (d: Doc) => d.head.kind === k && items(d) >= 2;
+/** A fence holding another app's document, by the apps it may be: a document inside this one, drawn there by its own app. */
+const fenced = (d: Doc, langs: string[]) => any(d, (b) => b.k === 'fence' && langs.includes(b.lang));
+/** The apps whose documents are pictures: drawn, laid out, mapped or set on days. */
+const PICTURES = ['draw', 'diagram', 'trip', 'cal'];
 
 /** Every app's shapes, the one it is most often asked for first. */
 export const SHAPES: Record<string, Shape[]> = {
@@ -76,6 +80,12 @@ export const SHAPES: Record<string, Shape[]> = {
     { id: 'table', name: 'a table that adds up', for: 'an invoice’s lines, a price list: a money column and a total', has: (d) => column(d, 'money') && formula(d) },
     { id: 'look', name: 'a look', for: 'the page’s type and colors: look: in the head', has: (d) => !!d.head.look },
     { id: 'chart', name: 'a chart in a text', for: 'another document inside this one: a ```sheet fence', has: (d) => any(d, (b) => b.k === 'fence' && b.lang === 'sheet') },
+    {
+      id: 'figure',
+      name: 'a figure in the text',
+      for: 'a drawing, a diagram, a chart or a map in a fence named by its app',
+      has: (d) => fenced(d, [...PICTURES, 'anim']) && any(d, (b) => b.k === 'h' || b.k === 'p'),
+    },
   ],
   outline: [
     {
@@ -88,6 +98,7 @@ export const SHAPES: Record<string, Shape[]> = {
     { id: 'tie', name: 'an arrow to the parent', for: 'how an item feeds its parent: {.to label="…"}', has: (d) => any(d, (b) => b.k === 'li' && (hasClass(b, 'to') || hasClass(b, 'from'))) },
     { id: 'connection', name: 'a connection', for: 'two items joined across the tree: ~ A -> B: label', has: (d) => any(d, (b) => b.k === 'edge') },
     { id: 'footnote', name: 'a footnote', for: 'a note on an item: ^[the note]', has: (d) => runs(d, (r) => r.fn !== undefined) },
+    { id: 'doc', name: 'a document under an item', for: 'a fence named by its app, {depth=n} for its place', has: (d) => any(d, (b) => b.k === 'fence' && !!b.lang && attr(b, 'depth') !== undefined) },
   ],
   deck: [
     { id: 'bullets', name: 'a slide of bullets', for: 'the usual slide: ## Headline, then - bullets', has: (d) => any(d, (b) => b.k === 'h' && b.level === 2 && !b.a) && items(d) >= 2 },
@@ -97,6 +108,8 @@ export const SHAPES: Record<string, Shape[]> = {
     { id: 'icon', name: 'an icon slide', for: 'bullets beside one big icon: ## :icon: Headline {.icon}', has: (d) => any(d, (b) => b.k === 'h' && hasClass(b, 'icon')) && items(d) >= 1 },
     { id: 'notes', name: 'speaker notes', for: 'what to say, not shown: > lines', has: (d) => any(d, (b) => b.k === 'quote') && items(d) >= 1 },
     { id: 'chart', name: 'a chart slide', for: 'numbers drawn: a table with {chart=bar} (line, pie)', has: (d) => any(d, (b) => b.k === 'table' && !!attr(b, 'chart')) },
+    { id: 'moves', name: 'a slide that moves', for: 'an Animator document in a ```anim fence', has: (d) => fenced(d, ['anim']) },
+    { id: 'shows', name: 'a slide that shows a document', for: 'a diagram, a drawing, a map or a calendar in a fence named by its app', has: (d) => fenced(d, PICTURES) },
     { id: 'theme', name: 'a theme', for: 'colors and type: theme: midnight in the head', has: (d) => !!d.head.theme && items(d) >= 1 },
     { id: 'poster', name: 'a poster', for: 'one page to print: format: poster', has: (d) => d.head.format === 'poster' && items(d) >= 1 },
     { id: 'zine', name: 'a zine', for: 'eight pages folded from one sheet: format: zine', has: (d) => d.head.format === 'zine' && count(d, (b) => b.k === 'hr') >= 1 },
@@ -233,6 +246,13 @@ function sound(d: Doc, floor: { items: number; rows: number }): boolean {
   for (let i = 1; i < blocks.length; i++) if (blocks[i].k === 'hr' && blocks[i - 1].k === 'hr') return false;
   let prev = -1;
   for (const b of blocks) {
+    // A document under an outline's item stands in the tree at the depth it says, as an item does.
+    const under = b.k === 'fence' ? Number(attr(b, 'depth') ?? NaN) : NaN;
+    if (Number.isInteger(under)) {
+      if (under > prev + 1) return false;
+      prev = under;
+      continue;
+    }
     if (b.k !== 'li') {
       if (b.k !== 'quote' && b.k !== 'edge') prev = -1;
       continue;
@@ -259,7 +279,7 @@ function sound(d: Doc, floor: { items: number; rows: number }): boolean {
 }
 
 /** The smallest document cut from `doc` that still shows the shape and comes back from the kernel as written. */
-function cut(app: string, doc: Doc, has: (d: Doc) => boolean): Doc {
+export function cut(app: string, doc: Doc, has: (d: Doc) => boolean): Doc {
   const floor = LISTS.has(app) ? { items: Math.min(2, items(doc)), rows: Math.min(2, ...tables(doc).map((t) => t.rows.length)) } : { items: 0, rows: 1 };
   const keeps = (d: Doc) => has(d) && sound(d, floor) && write(parse(write(d))) === write(d);
   let cur = doc;
