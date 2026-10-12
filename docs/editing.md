@@ -88,6 +88,8 @@ Rules:
 - Formulas: `=` starts one; a reference is typed or tapped.
 - The row numbers and the column letters are the grid's controls, not cells: drawn quietly (no shading, no lines), the side as narrow as its widest number; a tap opens their menus. A column's menu removes it whatever it holds (references into it become #REF; one undo).
 - What a column holds changes its cells, never what a person types: a checkbox is a 24px box the whole cell taps (Space with the keys); an option cell offers the words its column holds (the browser's list, opened by its caret) and takes new ones; a rich cell is a `<to-text shape=line>` with the selection bubble, the grid's keys caught on their way down to it (Arrows at its edges, Enter, Tab, Escape after its own steps), the formula strip showing its words plain and read-only.
+- **On a phone with the keyboard up** (Paul, 2026-10-11: "no room to navigate"), the Spreadsheet's cell is a box like any other: the header steps aside while it is edited, the formula strip is the column's top with the menu button at its end, the column heads are one line (the letter and the name, the names' row away until the cell is let go), the table's box takes what is left above the bar, and the cell in hand is kept in sight as that box changes its height. The desktop's grid is as it was.
+- **A number column asks for numbers** (Paul: "default to numbers, let me switch to text"): a cell of a number, money or percent column opens the numbers keyboard (`inputmode="decimal"`), a date column's the digits (`numeric`, its placeholder the pattern a date is written in, YYYY-MM-DD), every other column's the letters; a formula asks for the letters from its `=` on. The bar's first button under a finger, **ABC** (Letters keyboard, drawn Aa, `aria-pressed`), asks for the letters in that column for the visit, its other cells following, and asks for the numbers again pressed a second time; the device's own keyboard switch works too.
 
 ## 5. Canvases (the Drawing Tool, the Animator, the Diagram Maker's kinds)
 
@@ -343,6 +345,7 @@ whose rows are the document's own data (the sheet's column kinds, the formula fu
 
 | Keys | Command | Where |
 |---|---|---|
+|  | Letters keyboard | bar |
 | `Mod+Alt+=` | Row above | insert ▾, at: cell |
 |  | Row below | insert ▾ |
 |  | Column after | insert ▾ |

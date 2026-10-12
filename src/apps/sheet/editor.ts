@@ -24,6 +24,13 @@
  * inline form, the grid's keys kept round it and the formula strip showing its plain words, read-only.
  *
  * Find in this document (Mod+F) goes from cell to matching cell: `find()` is the kit's Findable.
+ *
+ * On a phone with the keyboard up (Paul, 2026-10-11: "no room to navigate"): the header steps aside as for any box
+ * (kit/chrome.ts `editing`), the formula strip takes the column's top with the menu button at its end, the column
+ * heads are one line (the letter and the name, style.css), the table's box is what is left above the bar, and the cell
+ * in hand is kept in sight as that box changes its height. A number, money or percent column asks for the numbers
+ * keyboard, a date column for the digits, a formula for the letters from its = on; the bar's ABC (`letters`) asks for
+ * the letters in that column for the visit (the device's own switch works too).
  */
 import { html, nothing, type PropertyDeclarations } from 'lit';
 import { unsafeSVG } from 'lit/directives/unsafe-svg.js';
@@ -100,6 +107,7 @@ import '../../kit/insert.ts';
 import '../../kit/menu.ts';
 import '../../kit/text.ts';
 import { remScale } from '../../kit/zoom.ts';
+import { reveal } from '../../kit/scroll.ts';
 import './style.css';
 
 export const tag = 'to-sheet-editor';
@@ -123,6 +131,8 @@ const tsv = (rows: string[][]) => rows.map((row) => row.map(flat).join('\t')).jo
 const tableCells = (b: Block) => (b.k === 'table' ? tsv([b.cols.map((c) => columnText(c.name, c.type, c.currency)), ...b.rows]) : '');
 
 const typeOf = (id: ColType) => COLUMN_KINDS.find((x) => x.id === id) ?? COLUMN_KINDS[0];
+/** The keyboard a column asks for (a cell's inputmode): numbers for a number, digits for a date, letters for the rest. */
+const KEYBOARD: Partial<Record<ColType, 'decimal' | 'numeric'>> = { number: 'decimal', money: 'decimal', percent: 'decimal', date: 'numeric' };
 /** A rich cell, drawn as a <to-text>: any of a rich column's cells but one worked out by a formula. */
 const isRich = (type: ColType, raw: string) => type === 'rich' && !raw.startsWith('=');
 /** The words of a rich cell's paragraph, all of them selected. */
@@ -153,6 +163,7 @@ export class ToSheetEditor extends DocElement<SheetView> {
     widths: { state: true },
     menuRow: { state: true },
     menuCol: { state: true },
+    letters: { state: true },
   };
   /** The selected cell: where typing goes. */
   declare sel: [number, number];
@@ -170,7 +181,11 @@ export class ToSheetEditor extends DocElement<SheetView> {
   /** The row whose menu is open, the column whose menu is open. */
   declare menuRow: number;
   declare menuCol: number;
+  /** The columns asked for the letters keyboard (the bar's ABC) while this visit lasts. */
+  declare letters: ReadonlySet<number>;
   private dragging = false;
+  /** The table's box the ResizeObserver is watching. */
+  private watched: Element | null = null;
   /** A press on a cell not yet selected: the click that ends it selects the cell's words whole (the browser would put a caret there). */
   private pressed = false;
   /** What we last put on the clipboard, so pasting it back can move formulas' references. */
@@ -198,6 +213,7 @@ export class ToSheetEditor extends DocElement<SheetView> {
     this.widths = null;
     this.menuRow = 0;
     this.menuCol = 0;
+    this.letters = new Set();
   }
 
   protected read(doc: Doc): SheetView {
@@ -283,6 +299,23 @@ export class ToSheetEditor extends DocElement<SheetView> {
   setCell(r: number, c: number, raw: string) {
     if (this.locked(r, c)) return;
     this.edit(setCell(this.doc, r, c, raw), `cell:${r}:${c}`);
+  }
+  /** The keyboard a cell asks a phone for: its column's (KEYBOARD), unless it holds a formula or its column was asked for the letters. */
+  keyboard(r: number, c: number): 'decimal' | 'numeric' | 'text' {
+    const want = KEYBOARD[this.columns()[c]?.type ?? 'text'];
+    return !want || this.letters.has(c) || this.raw(r, c).startsWith('=') ? 'text' : want;
+  }
+  /** The selected cell's column asks for numbers, and the cell holds no formula: the bar's ABC applies. */
+  get numeric(): boolean {
+    const [r, c] = this.sel;
+    return !!KEYBOARD[this.columns()[c]?.type ?? 'text'] && !this.raw(r, c).startsWith('=');
+  }
+  /** The bar's ABC: the letters keyboard for the selected cell's column (again: the numbers), the focus left in the cell. */
+  toggleLetters() {
+    const c = this.sel[1];
+    const next = new Set(this.letters);
+    if (!next.delete(c)) next.add(c);
+    this.letters = next;
   }
   /** The selected cells locked, or let go. */
   toggleLock() {
@@ -440,8 +473,28 @@ export class ToSheetEditor extends DocElement<SheetView> {
     const b = this.querySelector(`td[data-r="${g.r1}"][data-c="${g.c1}"]`)?.getBoundingClientRect();
     return a && b ? new DOMRect(a.left, a.top, b.right - a.left, b.bottom - a.top) : null;
   }
+  /** The table's box changes its height (a phone's keyboard, the bar, the heads made one line): the cell in hand kept in sight. */
+  private boxWatch = new ResizeObserver(() => {
+    if (!matchMedia('(pointer: coarse)').matches) return;
+    const at = document.activeElement;
+    const td = at instanceof HTMLElement && this.contains(at) ? at.closest('td') : null;
+    if (!td) return;
+    this.reveal(at as HTMLElement);
+    // And the table's box itself inside the column, above the bar (kit/scroll.ts).
+    reveal(td);
+  });
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.boxWatch.disconnect();
+  }
   protected updated(changed: Map<PropertyKey, unknown>) {
     super.updated(changed);
+    const box = this.querySelector('.sheet-scroll');
+    if (box && box !== this.watched) {
+      this.boxWatch.disconnect();
+      this.boxWatch.observe(box);
+      this.watched = box;
+    }
     const bar = this.querySelector<ToContext>('.sheet-context');
     if (!bar) return;
     // Up while a block is in hand (above it under a finger, so the cells below stay free for the handle), and gone while it is being filled.
@@ -1039,6 +1092,7 @@ export class ToSheetEditor extends DocElement<SheetView> {
     const own = (id: string) => COMMANDS.find((x) => x.id === `sheet.${id}`)!;
     // The bar holds the same tools whatever is selected (a tool that does not apply is disabled, not gone), so it never changes shape under a finger.
     return html`<to-bar class="sheet-bar">
+        ${cmdTool(own('letters'), this)}
         <to-insert .items=${this.inserts()}></to-insert>
         ${cmdMenu(own('chart'), this, COMMANDS, 'sheet-chartmenu', { words: true, caret: true })}
         ${['filldown', 'fillright', 'fit', 'showall'].map((id) => cmdTool(own(id), this, id === 'filldown' ? { disabled: !this.many } : {}))}
@@ -1089,7 +1143,7 @@ export class ToSheetEditor extends DocElement<SheetView> {
               ${cols.map(
                 (col, c) => html`<th scope="col">
                   <button type="button" class="col-head" aria-label=${t('Column {c}: {type}. What it holds, sort by it, add or remove a column', { c: COL_NAMES[c], type: typeOf(col.type).name() })} title=${t('What it holds; sort; columns')} aria-haspopup="menu" aria-expanded="false" @click=${(e: Event) => void this.openColMenu(c, e.currentTarget as HTMLElement)}>
-                    <span class="cl">${COL_NAMES[c]}</span>${icon(UI.down, 12)}
+                    <span class="cl">${COL_NAMES[c]}</span>${isLetterName(col.name) ? nothing : html`<span class="nm">${col.name}</span>`}${icon(UI.down, 12)}
                   </button>
                   <span class="grip" role="separator" tabindex="0" aria-orientation="vertical" aria-valuenow=${Math.round(w?.[c] ?? NEW_COL)} aria-label=${t('Resize column {c}', { c: COL_NAMES[c] })} title=${t('Drag to resize, double-click to fit')} @pointerdown=${(e: PointerEvent) => this.onGripDown(e, c)} @dblclick=${() => this.fitColumn(c)} @keydown=${(e: KeyboardEvent) => this.onGripKey(e, c)}></span>
                 </th>`,
@@ -1202,6 +1256,7 @@ export class ToSheetEditor extends DocElement<SheetView> {
             list=${option ? `${this.uid}-o${c}` : nothing}
             title=${locked ? t('Locked: part of the model') : raw.startsWith('=') ? raw : nothing}
             placeholder=${isSel && type === 'date' ? 'YYYY-MM-DD' : nothing}
+            inputmode=${this.keyboard(r, c)}
             ?readonly=${locked}
             autocomplete="off"
             @focus=${(e: Event) => {

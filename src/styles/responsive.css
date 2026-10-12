@@ -226,6 +226,10 @@
     to-chrome[editing] .to-column > main {
       padding-top: calc(3.5 * var(--to-nav-font));
     }
+    /* The Spreadsheet keeps the menu button's room at the end of its formula strip, its first row (sheet/style.css). */
+    to-chrome[editing] .to-column > main:has(> to-sheet-editor) {
+      padding-top: 0;
+    }
     to-chrome[editing] .to-arrival {
       padding-top: 0.25rem;
       padding-bottom: 0.25rem;

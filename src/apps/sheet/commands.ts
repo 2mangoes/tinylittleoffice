@@ -5,10 +5,11 @@
  * Shift+Tab between cells; Shift+arrows stretch the block; F2 edits in place; Escape puts back what the cell held (or
  * lets a block go); Space ticks a checkbox; Delete clears a block; Mod+A the cell's words, then the sheet; Mod+D fills
  * down; Mod+Enter is done; Alt+Up/Down move the rows; Mod+Alt+= and Mod+Alt+- put rows in and take them out (Google
- * Sheets' chords). A key acts on the cell it is typed in (`here`, which the editor sets as the key comes); Insert ▾'s
- * functions are the formula language's names, listed by the editor after these.
+ * Sheets' chords); under a finger, ABC asks for the letters keyboard in a number column. A key acts on the cell it is
+ * typed in (`here`, which the editor sets as the key comes); Insert ▾'s functions are the formula language's names,
+ * listed by the editor after these.
  */
-import { ArrowDown, ArrowDownToLine, ArrowRightToLine, ArrowUp, ChartColumn, ClipboardPaste, Columns3, Copy, Eraser, Lock, Maximize2, Rows3, Scaling, Scissors, Trash2 } from 'lucide';
+import { ArrowDown, ArrowDownToLine, ArrowRightToLine, ArrowUp, CaseSensitive, ChartColumn, ClipboardPaste, Columns3, Copy, Eraser, Lock, Maximize2, Rows3, Scaling, Scissors, Trash2 } from 'lucide';
 import { CHART_KINDS, suggestChart } from '../../kit/chart.ts';
 import { register, type Command, commandsOf } from '../../kit/commands.ts';
 import { t } from '../../kit/i18n.ts';
@@ -33,6 +34,15 @@ const rowHead = (s?: S) => {
 const ARROWS: Record<string, [number, number]> = { ArrowUp: [-1, 0], ArrowDown: [1, 0], ArrowLeft: [0, -1], ArrowRight: [0, 1] };
 
 const SHEET: Command<S>[] = [
+  // Under a finger the first of the bar, above the keyboard (style.css hides it elsewhere): a number column's cells ask for the numbers keyboard.
+  cmd('letters', 'Letters keyboard', {
+    icon: CaseSensitive,
+    hint: 'ABC or 123, for this column',
+    where: ['bar'],
+    pressed: (s) => s.keyboard(s.sel[0], s.sel[1]) === 'text',
+    disabled: (s) => !s.numeric,
+    does: (s) => s.toggleLetters(),
+  }),
   cmd('insert', 'Insert', { icon: Rows3, menu: 'insert', where: ['bar'], takesFocus: true, does: () => undefined }),
   cmd('insert.above', 'Row above', { at: 'cell', icon: Rows3, keys: 'Mod+Alt+=', where: ['menu:insert'], does: (s, e) => s.insertRowsAt(false, e instanceof KeyboardEvent ? here(s).r : undefined) }),
   cmd('insert.below', 'Row below', { icon: Rows3, where: ['menu:insert'], does: (s) => s.insertRowsAt(true) }),

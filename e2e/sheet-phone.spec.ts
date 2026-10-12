@@ -199,3 +199,102 @@ test('sheet: on a phone, Money asks its currency in a dialog inside the screen, 
   expect(await page.evaluate(() => window.visualViewport?.scale ?? 1)).toBe(1);
   expect(errors).toEqual([]);
 });
+
+/**
+ * iOS with the keyboard up: the layout viewport stays the screen's (844) and the visual one shrinks to about 508,
+ * with a `resize` on `visualViewport` (which is all <to-chrome> listens to). `kb(true)` raises it, `kb(false)` puts it down.
+ */
+const KEYBOARD = () => {
+  let up = false;
+  const vv = Object.assign(new EventTarget(), { offsetTop: 0, offsetLeft: 0, pageTop: 0, pageLeft: 0, scale: 1 });
+  Object.defineProperties(vv, { width: { get: () => innerWidth }, height: { get: () => (up ? 508 : innerHeight) } });
+  Object.defineProperty(window, 'visualViewport', { configurable: true, value: vv });
+  (window as unknown as { kb: (up: boolean) => void }).kb = (to) => {
+    up = to;
+    vv.dispatchEvent(new Event('resize'));
+  };
+};
+
+test('sheet: with the keyboard up the header steps aside, the column heads are one line and the cell in hand is above the keyboard; a money cell asks for numbers, = and ABC ask for letters', async ({
+  page,
+}, info) => {
+  test.skip(info.project.name !== 'phone', 'phone only');
+  const errors: string[] = [];
+  page.on('pageerror', (e) => errors.push(String(e)));
+  await page.addInitScript(KEYBOARD);
+  await page.goto('/#/v1/sheet');
+  const cell = (ref: string) => page.getByRole('textbox', { name: ref, exact: true });
+  await expect(cell('A1')).toBeVisible();
+  const rows = Array.from({ length: 12 }, (_, i) => `Thing ${i + 1} | ${(i + 1) * 10}`).join('\n');
+  await page.evaluate((t) => ((document.querySelector('to-sheet-editor') as HTMLElement & { value: string }).value = t), `Item | Cost:money\n--- | ---\n${rows}\n`);
+  await expect(cell('B1')).toHaveValue('$10.00');
+  // A cell down the sheet, in the money column: tapped, then the keyboard comes up.
+  await cell('B6').tap();
+  await page.evaluate(() => (window as unknown as { kb: (up: boolean) => void }).kb(true));
+  await expect.poll(() => page.evaluate(() => Math.round(document.querySelector('to-chrome')!.getBoundingClientRect().height))).toBe(508);
+  await expect(page.locator('to-chrome')).not.toHaveAttribute('gliding', '');
+  await page.evaluate(() => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r))));
+  const at = await page.evaluate(() => {
+    const r = (el: Element | null) => el && el.getBoundingClientRect();
+    const head = document.querySelector('.to-header');
+    const bar = r(document.querySelector('to-sheet-editor to-bar.sheet-bar'))!;
+    const letters = r(document.querySelector('table.sheet thead tr:first-child th'))!;
+    const names = r(document.querySelector('table.sheet thead tr.names'));
+    const td = r(document.activeElement!.closest('td'))!;
+    const scroll = r(document.querySelector('.sheet-scroll'))!;
+    return {
+      header: head ? getComputedStyle(head).display : 'none',
+      bar: { top: bar.top, bottom: bar.bottom },
+      letters: { top: letters.top, bottom: letters.bottom, h: letters.height },
+      names: names ? names.height : 0,
+      cell: { top: td.top, bottom: td.bottom },
+      scroll: { top: scroll.top, bottom: scroll.bottom },
+      fx: r(document.querySelector('.sheet-fx .fx'))!.right,
+      burger: r(document.querySelector('.to-burger'))!.left,
+      active: document.activeElement!.getAttribute('aria-label'),
+      vv: window.visualViewport!.height,
+    };
+  });
+  test.info().annotations.push({ type: 'measured', description: JSON.stringify(at) });
+  expect(at.active).toBe('B6');
+  expect(at.header).toBe('none');
+  // The menu button sits at the end of the formula strip, over none of its field.
+  expect(at.fx).toBeLessThanOrEqual(at.burger);
+  // The heads: the letters alone, one line, inside the visible window.
+  expect(at.names).toBe(0);
+  expect(at.letters.top).toBeGreaterThanOrEqual(0);
+  expect(at.letters.bottom).toBeLessThanOrEqual(at.bar.top);
+  // The cell in hand: under the heads, above the bar, which is above the keyboard.
+  expect(at.cell.top).toBeGreaterThanOrEqual(at.letters.bottom - 1);
+  expect(at.cell.bottom).toBeLessThanOrEqual(at.bar.top + 1);
+  expect(at.bar.bottom).toBeLessThanOrEqual(at.vv + 0.5);
+  // Room to move: at least three rows of cells between the heads and the bar.
+  expect(at.bar.top - at.letters.bottom).toBeGreaterThanOrEqual(3 * (at.cell.bottom - at.cell.top));
+  // A money cell asks for numbers; = asks for letters, from the = on.
+  await expect(cell('B6')).toHaveAttribute('inputmode', 'decimal');
+  await expect(cell('A6')).toHaveAttribute('inputmode', 'text');
+  await page.keyboard.type('=');
+  await expect(cell('B6')).toHaveAttribute('inputmode', 'text');
+  await page.keyboard.type('B1*2');
+  await page.keyboard.press('Enter');
+  await expect(cell('B7')).toBeFocused();
+  await expect(cell('B7')).toHaveAttribute('inputmode', 'decimal');
+  // ABC / 123: letters for this cell, and for the next one in the column while this visit lasts.
+  const toggle = page.getByRole('button', { name: 'Letters keyboard' });
+  await expect(toggle).toHaveAttribute('aria-pressed', 'false');
+  await toggle.tap();
+  await expect(toggle).toHaveAttribute('aria-pressed', 'true');
+  await expect(cell('B7')).toHaveAttribute('inputmode', 'text');
+  await expect(cell('B7')).toBeFocused();
+  await cell('B8').tap();
+  await expect(cell('B8')).toHaveAttribute('inputmode', 'text');
+  await toggle.tap();
+  await expect(cell('B8')).toHaveAttribute('inputmode', 'decimal');
+  await expect(cell('B6')).toHaveAttribute('title', '=B1*2');
+  // The keyboard down, the cell let go: the header and the names are back.
+  await page.evaluate(() => (window as unknown as { kb: (up: boolean) => void }).kb(false));
+  await page.locator('.sheet-fx .ref').tap();
+  await expect(page.locator('.to-header')).toBeVisible();
+  await expect(page.locator('table.sheet thead tr.names')).toBeVisible();
+  expect(errors).toEqual([]);
+});

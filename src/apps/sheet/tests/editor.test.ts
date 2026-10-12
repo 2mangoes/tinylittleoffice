@@ -817,3 +817,55 @@ test('§1 opens with the focus in A1, its words selected, the page not scrolled'
   blank.focusFirst();
   await until(() => document.activeElement === cell(blank, 'A1'));
 });
+
+test('a number, money or percent column asks a phone for the numbers keyboard, a date column for the digits, the rest for the letters; a formula asks for the letters from its =', async () => {
+  const { el } = await editor(
+    'Item | Count:number | Cost:money | Share:percent | When:date | At:time | Kind:option\n--- | --- | --- | --- | --- | --- | ---\nRent | 1 | 1200 | 50% | 2027-03-01 | 09:00 | home\n',
+  );
+  const mode = (ref: string) => cell(el, ref).getAttribute('inputmode');
+  expect(['A1', 'B1', 'C1', 'D1', 'E1', 'F1', 'G1'].map(mode)).toEqual(['text', 'decimal', 'decimal', 'decimal', 'numeric', 'text', 'text']);
+  // The = typed: the letters, as the formula's names and signs need them.
+  await type(el, cell(el, 'C2'), '=');
+  expect(mode('C2')).toBe('text');
+  await type(el, cell(el, 'C2'), '=C1*2');
+  expect(mode('C2')).toBe('text');
+  expect(mode('C3')).toBe('decimal');
+});
+
+test("the bar's ABC asks for the letters keyboard in a number column, for the visit, its cells following; a text column has nothing to switch", async () => {
+  const { el } = await editor(SHEET);
+  const abc = el.querySelector<HTMLButtonElement>('to-bar .cmd-sheet-letters')!;
+  expect(abc.getAttribute('aria-label')).toBe('Letters keyboard');
+  // A phone keyboard's button: on a mouse's desktop the bar is as it was (style.css).
+  expect(matchMedia('(pointer: coarse)').matches).toBe(false);
+  expect(getComputedStyle(abc).display).toBe('none');
+  cell(el, 'A1').focus();
+  await el.updateComplete;
+  expect(abc.disabled).toBe(true);
+  cell(el, 'B1').focus();
+  await el.updateComplete;
+  expect(abc.disabled).toBe(false);
+  expect(abc.getAttribute('aria-pressed')).toBe('false');
+  expect(cell(el, 'B1').getAttribute('inputmode')).toBe('decimal');
+  abc.dispatchEvent(new MouseEvent('mousedown', { bubbles: true, cancelable: true }));
+  abc.click();
+  await el.updateComplete;
+  // The focus stays in the cell (the keyboard stays up), and the cell and its column ask for the letters.
+  expect(document.activeElement).toBe(cell(el, 'B1'));
+  expect(abc.getAttribute('aria-pressed')).toBe('true');
+  expect(cell(el, 'B1').getAttribute('inputmode')).toBe('text');
+  expect(cell(el, 'B2').getAttribute('inputmode')).toBe('text');
+  expect(cell(el, 'A2').getAttribute('inputmode')).toBe('text');
+  // A formula's cell asks for the letters whatever is chosen, and the ABC has nothing to do there.
+  cell(el, 'B3').focus();
+  await el.updateComplete;
+  expect(abc.disabled).toBe(true);
+  cell(el, 'B2').focus();
+  await el.updateComplete;
+  abc.click();
+  await el.updateComplete;
+  expect(abc.getAttribute('aria-pressed')).toBe('false');
+  expect(cell(el, 'B1').getAttribute('inputmode')).toBe('decimal');
+  // Not a document's: nothing is written.
+  expect(el.value).toBe(SHEET);
+});
