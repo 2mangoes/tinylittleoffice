@@ -1284,6 +1284,7 @@ export default {
   'Kilometers': 'Kilomètres',
   'Join the stops in order': 'Relier les arrêts dans l’ordre',
   'Show the whole route': 'Voir tout l’itinéraire',
+  'Where I am': 'Où je suis',
   'Map': 'Carte',
   'Map: tap to add a stop': 'Carte : touchez pour ajouter un arrêt',
   'The map’s pictures come from OpenStreetMap while it is shown.': 'Les images de la carte viennent d’OpenStreetMap tant qu’elle est affichée.',

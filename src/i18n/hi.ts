@@ -1282,6 +1282,7 @@ export default {
   'Kilometers': 'किलोमीटर',
   'Join the stops in order': 'पड़ावों को क्रम से जोड़ें',
   'Show the whole route': 'पूरा रास्ता दिखाएँ',
+  'Where I am': 'मैं कहाँ हूँ',
   'Map': 'नक्शा',
   'Map: tap to add a stop': 'नक्शा: पड़ाव जोड़ने के लिए टैप करें',
   'The map’s pictures come from OpenStreetMap while it is shown.': 'नक्शे की तस्वीरें दिखाए जाते समय OpenStreetMap से आती हैं।',

@@ -1283,6 +1283,7 @@ export default {
   'Kilometers': 'Kilometers', // same
   'Join the stops in order': 'De stops op volgorde verbinden',
   'Show the whole route': 'De hele route tonen',
+  'Where I am': 'Waar ik ben',
   'Map': 'Kaart',
   'Map: tap to add a stop': 'Kaart: tik voor een stop',
   'The map’s pictures come from OpenStreetMap while it is shown.': 'De kaartbeelden komen van OpenStreetMap zolang de kaart zichtbaar is.',

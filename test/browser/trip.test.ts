@@ -1,0 +1,186 @@
+// The Trip Planner's map where it opens (src/apps/trip/home.ts) and what it keeps out of reach: a blank trip opens on
+// the country of the site's language (Japan for Japanese with no region), a trip with stops on its stops, and Where I
+// am refused leaves that country; no position is asked for until the button is tapped. A pin the map has panned out of
+// its own box is inert, and comes back when the map brings it back.
+import { afterEach, expect, test } from 'vitest';
+import '../../src/styles.css';
+import '../../src/apps/trip/editor.ts';
+import type { ToTripEditor } from '../../src/apps/trip/editor.ts';
+import { COUNTRIES } from '../../src/apps/trip/countries.ts';
+import { language, setLanguage, t } from '../../src/kit/i18n.ts';
+import { cdp, page } from 'vitest/browser';
+import { mount, openDrawerDoc, tick, until } from './helpers.ts';
+
+type MapLike = {
+  getCenter(): { lat: number; lng: number };
+  getZoom(): number;
+  getSize(): { x: number; y: number };
+  setView(c: [number, number], z: number, o?: object): unknown;
+  latLngToContainerPoint(c: [number, number]): { x: number; y: number };
+};
+const mapOf = (el: ToTripEditor) => (el as unknown as { map: MapLike | null }).map!;
+const mapReady = (el: ToTripEditor) => until(() => !!el.querySelector('.trip-map.leaflet-container') && !!mapOf(el), 8000);
+const LISBON_PORTO = 'Place | Lat:number | Lon:number | Note\n--- | --- | --- | ---\nLisbon | 38.7223 | -9.1393 |\nCoimbra | 40.2033 | -8.4103 |\nPorto | 41.1579 | -8.6291 |\n';
+
+async function editor(value = ''): Promise<ToTripEditor> {
+  document.body.innerHTML = '';
+  const el = document.createElement('to-trip-editor') as ToTripEditor;
+  el.tiles = '';
+  el.value = value;
+  document.body.append(el);
+  await el.updateComplete;
+  await mapReady(el);
+  return el;
+}
+
+/** The browser's languages, as navigator.languages says them, for one test. */
+function browserSays(tags: string[]) {
+  Object.defineProperty(navigator, 'languages', { value: tags, configurable: true });
+}
+/** The browser's geolocation faked: each ask counted, answered by `answer`. */
+function fakeGeo(answer: { lat: number; lon: number } | 'refuse') {
+  const asks: PositionOptions[] = [];
+  const geo = {
+    getCurrentPosition(ok: PositionCallback, fail?: PositionErrorCallback | null, o?: PositionOptions) {
+      asks.push(o ?? {});
+      setTimeout(() => {
+        if (answer === 'refuse') return fail?.({ code: 1, message: 'denied', PERMISSION_DENIED: 1, POSITION_UNAVAILABLE: 2, TIMEOUT: 3 } as GeolocationPositionError);
+        ok({ coords: { latitude: answer.lat, longitude: answer.lon, accuracy: 20 }, timestamp: Date.now() } as GeolocationPosition);
+      }, 10);
+    },
+    watchPosition: () => {
+      throw new Error('never watched');
+    },
+    clearWatch: () => undefined,
+  };
+  Object.defineProperty(navigator, 'geolocation', { value: geo, configurable: true });
+  return asks;
+}
+const near = (el: ToTripEditor, code: string) => {
+  const c = mapOf(el).getCenter();
+  return Math.abs(c.lat - COUNTRIES[code][0]) < 1 && Math.abs(c.lng - COUNTRIES[code][1]) < 1 && mapOf(el).getZoom() === COUNTRIES[code][2];
+};
+const locate = (el: ToTripEditor) => el.querySelector<HTMLButtonElement>(`to-bar button[aria-label="${t('Where I am')}"]`)!;
+
+afterEach(async () => {
+  delete (navigator as { languages?: unknown }).languages;
+  delete (navigator as { geolocation?: unknown }).geolocation;
+  if (language() !== 'en') await setLanguage(null);
+});
+
+test('a blank trip in Japanese with no region opens on Japan, asking nothing of the device; in English, on New York City', async () => {
+  const asks = fakeGeo({ lat: 51.5, lon: -0.12 });
+  browserSays(['ja']);
+  await setLanguage('ja');
+  const el = await editor();
+  expect(near(el, 'JP')).toBe(true);
+  await tick(60);
+  expect(asks).toHaveLength(0);
+  browserSays(['en-US']);
+  await setLanguage(null);
+  const ny = await editor();
+  expect(mapOf(ny).getCenter().lat).toBeCloseTo(40.71, 1);
+  expect(mapOf(ny).getCenter().lng).toBeCloseTo(-74.01, 1);
+  expect(mapOf(ny).getZoom()).toBe(12);
+  // The browser's region wins: Spanish in Argentina.
+  browserSays(['es-AR', 'en']);
+  await setLanguage('es');
+  expect(near(await editor(), 'AR')).toBe(true);
+});
+
+test('a trip with stops opens on its stops, never the country', async () => {
+  browserSays(['ja']);
+  await setLanguage('ja');
+  const el = await editor(LISBON_PORTO);
+  await tick(60);
+  const c = mapOf(el).getCenter();
+  expect(c.lat).toBeGreaterThan(38);
+  expect(c.lat).toBeLessThan(42);
+  expect(c.lng).toBeGreaterThan(-10);
+  expect(c.lng).toBeLessThan(-8);
+});
+
+test('Where I am centers the map on the device at a city’s zoom; refused, the map goes back to the country it opened on', async () => {
+  browserSays(['fr-CA']);
+  await setLanguage('fr');
+  const asks = fakeGeo({ lat: 45.5019, lon: -73.5674 });
+  const el = await editor();
+  expect(near(el, 'CA')).toBe(true);
+  expect(asks).toHaveLength(0);
+  locate(el).click();
+  await until(() => Math.abs(mapOf(el).getCenter().lat - 45.5019) < 0.01);
+  expect(mapOf(el).getZoom()).toBe(12);
+  expect(asks).toHaveLength(1);
+  expect(asks[0].timeout).toBe(5000);
+  fakeGeo('refuse');
+  locate(el).click();
+  await until(() => near(el, 'CA'));
+  // No geolocation at all: the country too.
+  Object.defineProperty(navigator, 'geolocation', { value: undefined, configurable: true });
+  mapOf(el).setView([0, 0], 3, { animate: false });
+  locate(el).click();
+  await until(() => near(el, 'CA'));
+});
+
+test('a pin panned out of the map’s box is inert, out of Tab’s reach, and reachable again once in view', async () => {
+  const el = await editor(LISBON_PORTO);
+  await tick(60);
+  const pins = () => [...el.querySelectorAll<HTMLElement>('.trip-map .trip-pin')];
+  // Walk what Tab reaches in the map: every pin, each inside the map's box.
+  const reachable = () => pins().filter((p) => !p.closest('[inert]') && p.tabIndex >= 0);
+  expect(reachable()).toHaveLength(3);
+  // Far away: every pin is out of the map's box.
+  mapOf(el).setView([-30, 120], 6, { animate: false });
+  await tick(30);
+  expect(reachable()).toHaveLength(0);
+  // Lisbon alone in view, the others off its box at a street's zoom.
+  mapOf(el).setView([38.7223, -9.1393], 14, { animate: false });
+  await tick(30);
+  expect(reachable().map((p) => p.textContent)).toEqual(['1']);
+  for (const p of pins()) {
+    const at = p.getBoundingClientRect();
+    const box = el.querySelector('.trip-map')!.getBoundingClientRect();
+    const inside = at.left + at.width / 2 >= box.left && at.right - at.width / 2 <= box.right && at.top + at.height / 2 >= box.top && at.bottom - at.height / 2 <= box.bottom;
+    expect(p.inert, p.textContent!).toBe(!inside);
+  }
+  el.fit(false);
+  await tick(30);
+  expect(reachable()).toHaveLength(3);
+  // A zoom on its way (the map's own +, animated): the pins it will leave outside are out of reach as it begins.
+  mapOf(el).setView([38.7223, -9.1393], 13, { animate: true });
+  expect(reachable().map((p) => p.textContent)).toEqual(['1']);
+  // Presented, the map is a show: no pin is a stop to Tab to, until the show ends.
+  await el.present();
+  expect(reachable()).toHaveLength(0);
+  el.endPresenting();
+  await el.updateComplete;
+  await tick(30);
+  expect(reachable().length).toBeGreaterThan(0);
+});
+
+// The walks found the focus left on the hidden box that holds a phone's keyboard up (kit/chrome.ts startEditing): a
+// tap that makes a new document whose link is the one on view (Blank, on a blank trip) opens nothing, so nothing took
+// the focus from it. The document on view takes it where a person starts (docs/editing.md §1): an empty trip's map.
+test('390×844 with a finger: Blank chosen on a blank trip leaves the focus where a person starts, never on the keyboard’s hold', async () => {
+  const coarse = (on: boolean) => cdp().send('Emulation.setTouchEmulationEnabled', on ? { enabled: true, maxTouchPoints: 5 } : { enabled: false });
+  await page.viewport(390, 844);
+  await coarse(true);
+  try {
+    const shell = await mount('#/v1/trip');
+    await until(() => !!shell.querySelector('.trip-map.leaflet-container'), 8000);
+    const drawer = await openDrawerDoc(shell);
+    void drawer;
+    const row = [...shell.querySelectorAll<HTMLElement>('.to-app-head')].find((h) => h.querySelector('a')?.getAttribute('href') === '#/v1/trip')!;
+    row.querySelector<HTMLElement>('to-templates > button')!.click();
+    await until(() => !!shell.querySelector('to-templates.to-drawer-templates dialog[open] [role=option]'));
+    const blank = [...shell.querySelectorAll<HTMLElement>('to-templates.to-drawer-templates [role=option]')].find((o) => o.textContent!.includes('Blank'))!;
+    blank.click();
+    await tick(300);
+    expect(location.hash).toBe('#/v1/trip');
+    expect(document.activeElement?.classList.contains('to-keyboard-hold')).toBe(false);
+    expect(document.activeElement).toBe(shell.querySelector('.trip-map'));
+  } finally {
+    await coarse(false);
+    await page.viewport(1100, 800);
+  }
+});

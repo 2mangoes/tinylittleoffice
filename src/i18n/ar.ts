@@ -1283,6 +1283,7 @@ export default {
   'Kilometers': 'كيلومترات',
   'Join the stops in order': 'وصل المحطات بالترتيب',
   'Show the whole route': 'إظهار المسار كله',
+  'Where I am': 'أين أنا',
   'Map': 'خريطة',
   'Map: tap to add a stop': 'الخريطة: انقر لإضافة محطة',
   'The map’s pictures come from OpenStreetMap while it is shown.': 'تأتي صور الخريطة من OpenStreetMap ما دامت معروضة.',

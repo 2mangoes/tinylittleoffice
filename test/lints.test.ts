@@ -95,6 +95,7 @@ describe('generated outputs are fresh: each generating script, run with --check,
     ['dependencies', 'docs/dependencies.md'],
     ['exports-doc', 'docs/exports.md'],
     ['schema', 'packages/doc/schema/tlo.schema.json'],
+    ['countries', 'the Trip Planner’s table of countries, from the boxes'],
   ])(
     'scripts/%s.ts --check (%s)',
     (script) => {

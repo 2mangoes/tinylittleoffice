@@ -19,11 +19,12 @@
  * that holds a trip builds a stop a step: AppDef.steps).
  *
  * This is the one app that talks to the network by itself: while the map is on view its pictures come from
- * tile.openstreetmap.org. The route itself lives only in the link. A trip with no stops, opened with the map on
- * view, asks the browser once where the device is (no watching, 5 s at most) and centres the map there at a
- * city's zoom; refused or unknown, the map stays on the world. The position is used for that and nothing else:
- * it is never written into the document or kept anywhere. Every change is operations on the
- * document's table (model.ts).
+ * tile.openstreetmap.org. The route itself lives only in the link. A trip with no stops opens on the country of the
+ * site's language (home.ts: the browser's own region overriding it, New York City where neither says), never on the
+ * whole world. Where I am, in the bar, asks the browser where the device is (once a tap, no watching, 5 s at most)
+ * and centers the map there at a city's zoom; refused or unknown, the map goes to that country. The position is used
+ * for that and nothing else: it is never written into the document or kept anywhere. Every change is operations on
+ * the document's table (model.ts).
  */
 import { html, nothing, type PropertyDeclarations, type PropertyValues } from 'lit';
 import type * as Leaflet from 'leaflet';
@@ -34,7 +35,7 @@ import TRIP, { AT } from './commands.ts';
 import { docToHtml, GENERATOR, htmlToBlocks } from '../../kit/clipboard.ts';
 import { DocElement, type Entry } from '../../kit/element.ts';
 import { icon, UI } from '../../kit/icons.ts';
-import { t } from '../../kit/i18n.ts';
+import { language, t } from '../../kit/i18n.ts';
 import type { ToDialog } from '../../kit/dialog.ts';
 import { lastCopied, Rows, type Clip, type RowItem, type RowRange } from '../../kit/rows.ts';
 import { caret } from '../../kit/textops.ts';
@@ -66,14 +67,13 @@ import '../../kit/dialog.ts';
 import '../../kit/text.ts';
 import './style.css';
 import { origin } from '../../kit/network.ts';
+import { CITY, homeView } from './home.ts';
 import { reveal } from '../../kit/scroll.ts';
 
 export const tag = 'to-trip-editor';
 
 export const TILES = `${origin('tiles')}/{z}/{x}/{y}.png`;
 const SEARCH = `${origin('placeSearch')}/search`;
-/** The zoom a map opened on the device's position shows: a city. */
-const CITY = 12;
 /** How long a tap on the map waits to be sure it is not the first of a double tap (which zooms). */
 const DOUBLE = 300;
 /** A focused pin's nudge, in screen pixels (Shift: five times). */
@@ -122,8 +122,6 @@ export class ToTripEditor extends DocElement<TripView> {
   /** Presenting (Present in the bar): the stop the map has flown to, by its place in the route; -1 when not presenting. */
   declare presenting: number;
   private map: Leaflet.Map | null = null;
-  /** The browser has been asked where the device is (once per editor, for a trip with no stops). */
-  private located = false;
   private layer: Leaflet.LayerGroup | null = null;
   private mapEl: HTMLElement | null = null;
   private watch: ResizeObserver | null = null;
@@ -202,8 +200,9 @@ export class ToTripEditor extends DocElement<TripView> {
     this.cur = -1;
     if (this.view.loose) this.edit(tabulate(this.doc));
   }
-  protected updated() {
+  protected updated(changed: PropertyValues) {
     void this.syncMap();
+    if (changed.has('presenting')) this.hidePins();
     // A stop chosen whole is shown on the map, when it is off the map's view.
     const f = this.rows.range?.focus ?? -1;
     if (f !== this.panned) {
@@ -260,7 +259,9 @@ export class ToTripEditor extends DocElement<TripView> {
   private async makeMap(el: HTMLElement) {
     const L = await leaflet();
     if (this.mapEl !== el || !el.isConnected) return;
-    const map = L.map(el, { worldCopyJump: true, attributionControl: true }).setView([25, 0], 2);
+    // Where the person likely is, until the stops are fitted (a trip with stops never stays there).
+    const home = homeView(language(), navigator.languages ?? []);
+    const map = L.map(el, { worldCopyJump: true, attributionControl: true }).setView([home.lat, home.lon], home.zoom);
     if (this.tiles) L.tileLayer(this.tiles, { maxZoom: 19, attribution: `&copy; <a href="${origin('osm')}/copyright">OpenStreetMap</a>` }).addTo(map);
     map.attributionControl.setPrefix('');
     this.layer = L.layerGroup().addTo(map);
@@ -271,37 +272,44 @@ export class ToTripEditor extends DocElement<TripView> {
       this.tapping = window.setTimeout(() => this.add(p.lat, p.lng), DOUBLE);
     });
     map.on('dblclick', () => clearTimeout(this.tapping));
-    map.on('zoomanim', () => (this.zooming = true));
+    map.on('zoomanim', (e: Leaflet.ZoomAnimEvent) => {
+      this.zooming = true;
+      // Where the zoom will leave the pins, before it gets there: a pin on its way out of the map is out of reach at once.
+      this.hidePins(e);
+    });
     map.on('zoomend', () => (this.zooming = false));
+    map.on('move zoomend resize', () => this.hidePins());
     this.map = map;
     this.watch = new ResizeObserver(() => map.invalidateSize());
     this.watch.observe(el);
     this.refit = true;
     void this.drawPins();
-    this.locate(map);
     this.dispatchEvent(new Event('trip-map'));
   }
   /**
-   * A trip with no stops opens on where the device is: the browser asked once (the first map this editor makes),
-   * the map centred there at a city's zoom if the trip is still empty and the map still this one. Refused, too slow
-   * or unknown, nothing happens. The position is never written anywhere.
+   * Where I am: the browser asked where the device is, once a tap, and the map centered there at a city's zoom if the map
+   * is still this one. Refused, too slow, unknown, or a browser that will not ask: the map goes to the country it opened
+   * on (home.ts). The position is never written anywhere.
    */
-  private locate(map: Leaflet.Map) {
-    if (this.located || this.view.stops.length) return;
-    this.located = true;
+  locate() {
+    const map = this.map;
+    if (!map) return;
+    const home = () => {
+      if (this.map !== map) return;
+      const h = homeView(language(), navigator.languages ?? []);
+      map.setView([h.lat, h.lon], h.zoom, { animate: false });
+    };
     const geo = navigator.geolocation;
-    if (!geo) return;
+    if (!geo) return home();
     try {
-      geo.getCurrentPosition(
-        (p) => {
-          if (this.map !== map || this.view.stops.length) return;
-          map.setView([p.coords.latitude, p.coords.longitude], CITY, { animate: false });
-        },
-        () => undefined,
-        { timeout: 5000, maximumAge: 600000, enableHighAccuracy: false },
-      );
+      geo.getCurrentPosition((p) => this.map === map && map.setView([p.coords.latitude, p.coords.longitude], CITY, { animate: false }), home, {
+        timeout: 5000,
+        maximumAge: 600000,
+        enableHighAccuracy: false,
+      });
     } catch {
-      // A browser that will not even ask (an insecure page): the map stays on the world.
+      // An insecure page, where the browser will not even ask.
+      home();
     }
   }
   private dropMap() {
@@ -360,6 +368,28 @@ export class ToTripEditor extends DocElement<TripView> {
       this.refit = false;
       this.fit(false);
     }
+    this.hidePins();
+  }
+  /**
+   * A pin the map has panned out of its own box is out of reach, as it is out of sight: inert, so neither Tab nor a
+   * screen reader's swipe finds it (Leaflet gives every pin a tab stop). The pin with the focus keeps it. While the trip
+   * is presented every pin is (the map is a show then, and the keys are the show's). `to`: where a zoom on its way will
+   * leave the map.
+   */
+  private hidePins(to?: { center: Leaflet.LatLng; zoom: number }) {
+    const map = this.map;
+    const box = this.mapEl;
+    if (!map || !box) return;
+    const size = map.getSize();
+    const v = this.view.stops;
+    const middle = to && map.project(to.center, to.zoom);
+    [...box.querySelectorAll<HTMLElement>('.trip-pin')].forEach((pin, i) => {
+      const s = v[i];
+      if (!s) return;
+      const p = to && middle ? map.project([s.lat, s.lon], to.zoom).subtract(middle).add(size.divideBy(2)) : map.latLngToContainerPoint([s.lat, s.lon]);
+      const out = p.x < 0 || p.y < 0 || p.x > size.x || p.y > size.y;
+      pin.inert = this.presenting >= 0 || (out && pin !== document.activeElement);
+    });
   }
   /** The whole route in view. */
   fit(animate = true) {
@@ -515,9 +545,9 @@ export class ToTripEditor extends DocElement<TripView> {
     await this.updateComplete;
     const x = this.view.stops.length ? this.textOf(0, 'name') : null;
     if (!x) {
-      // The map takes the focus once Leaflet has made it (the chunk is lazy).
-      await leaflet();
-      return this.querySelector<HTMLElement>('.trip-map')?.focus({ preventScroll: true });
+      // The map takes the focus once Leaflet has made it (the chunk is lazy); with the map off, Insert (never the page).
+      if (this.showMap) await leaflet();
+      return (this.querySelector<HTMLElement>('.trip-map') ?? this.querySelector<HTMLElement>('to-insert button'))?.focus({ preventScroll: true });
     }
     this.cur = 0;
     await x.updateComplete;
@@ -826,7 +856,7 @@ export class ToTripEditor extends DocElement<TripView> {
     return html`<to-bar class="trip-bar">
         <to-insert .items=${drawnIn(TRIP, 'menu:insert', this)}></to-insert>
         ${cmdMenu(own('units'), this, TRIP, 'trip-units')}
-        ${['linked', 'fit', 'map'].map((id) => cmdTool(own(id), this, { keep: false }))}
+        ${['linked', 'fit', 'locate', 'map'].map((id) => cmdTool(own(id), this, { keep: false }))}
         ${cmdTool(own('present'), this, { cls: 'trip-present-btn' })}
         <span class="to-hint trip-count">${t('{n|one stop|# stops}', { n })}${total ? html` · <b>${total}</b>` : nothing}</span>
         ${this.undoTools()}

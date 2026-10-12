@@ -1282,6 +1282,7 @@ export default {
   'Kilometers': '公里',
   'Join the stops in order': '按顺序连接各站点',
   'Show the whole route': '显示完整路线',
+  'Where I am': '我的位置',
   'Map': '地图',
   'Map: tap to add a stop': '地图：点按添加站点',
   'The map’s pictures come from OpenStreetMap while it is shown.': '地图显示时，图片来自 OpenStreetMap。',

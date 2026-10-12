@@ -534,42 +534,27 @@ function fakeGeo(answer: { lat: number; lon: number } | 'refuse' | 'never') {
 type MapLike = { getCenter(): { lat: number; lng: number }; getZoom(): number };
 const mapOf = (el: ToTripEditor) => (el as unknown as { map: MapLike | null }).map!;
 
-test('a trip with no stops opens on where the device is: asked once, 5 s at most, the map centred there at a city’s zoom; nothing written', async () => {
+test('a trip with no stops asks nothing of the device as it opens; Where I am asks once a tap, 5 s at most, centers the map at a city’s zoom and writes nothing', async () => {
   const geo = fakeGeo({ lat: 51.5072, lon: -0.1276 });
   try {
     const { el, changes } = await editor('');
     await mapReady(el);
+    await tick(50);
+    expect(geo.asks).toHaveLength(0);
+    expect(el.querySelector('.trip-privacy')!.textContent).toContain('Your location is asked for only to center the map, and is never written anywhere.');
+    bar(el, 'Where I am').click();
     await until(() => Math.abs(mapOf(el).getCenter().lat - 51.5072) < 0.01, 3000);
     expect(mapOf(el).getCenter().lng).toBeCloseTo(-0.1276, 2);
     expect(mapOf(el).getZoom()).toBe(12);
     expect(geo.asks).toHaveLength(1);
     expect(geo.asks[0].timeout).toBe(5000);
     expect(changes).toEqual([]);
-    expect(el.querySelector('.trip-privacy')!.textContent).toContain('Your location is asked for only to center the map, and is never written anywhere.');
-    // The map off and on again: not asked a second time.
+    // The map off: nothing to center, the button off with it.
     bar(el, 'Map').click();
     await settle(el);
-    bar(el, 'Map').click();
-    await settle(el);
-    await mapReady(el);
-    await tick(50);
-    expect(geo.asks).toHaveLength(1);
+    expect(bar(el, 'Where I am').disabled).toBe(true);
   } finally {
     geo.restore();
-  }
-});
-
-test('the location refused, or a trip with stops: the map stays where it was (the world, or fitted to the stops)', async () => {
-  const refused = fakeGeo('refuse');
-  try {
-    const { el } = await editor('');
-    await mapReady(el);
-    await tick(80);
-    expect(refused.asks).toHaveLength(1);
-    expect(mapOf(el).getZoom()).toBe(2);
-    expect(mapOf(el).getCenter().lat).toBeCloseTo(25, 0);
-  } finally {
-    refused.restore();
   }
   const withStops = fakeGeo({ lat: 51.5072, lon: -0.1276 });
   try {
@@ -598,4 +583,9 @@ test("§1 opens with the focus in the first stop's name, the caret at its end, e
   await blank.focusFirst();
   expect(document.activeElement).toBe(blank.querySelector('.trip-map'));
   expect(document.scrollingElement!.scrollTop).toBe(0);
+  // The map off, an empty trip starts at Insert: never the page.
+  bar(blank, 'Map').click();
+  await settle(blank);
+  await blank.focusFirst();
+  expect(document.activeElement).toBe(blank.querySelector('to-insert button'));
 });

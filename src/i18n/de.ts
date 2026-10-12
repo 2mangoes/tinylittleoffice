@@ -1281,6 +1281,7 @@ export default {
   'Kilometers': 'Kilometer',
   'Join the stops in order': 'Stopps der Reihe nach verbinden',
   'Show the whole route': 'Ganze Route zeigen',
+  'Where I am': 'Wo ich bin',
   'Map': 'Karte',
   'Map: tap to add a stop': 'Karte: tippen, um einen Stopp hinzuzufügen',
   'The map’s pictures come from OpenStreetMap while it is shown.': 'Die Bilder der Karte kommen von OpenStreetMap, solange sie angezeigt wird.',

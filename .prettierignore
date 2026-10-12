@@ -16,6 +16,8 @@ src/i18n/
 # Data written by a script, one line each, kept as the script writes it.
 src/kit/icons-meta.ts
 src/kit/emoji-data.ts
+src/apps/trip/countries.ts
+scripts/country-boxes.json
 test/commands-covered.json
 test/doc/corpus/*.json
 # The document's JSON Schema, written from the kernel's types by scripts/schema.ts.

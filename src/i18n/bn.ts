@@ -1238,6 +1238,7 @@ export default {
   'Kilometers': 'কিলোমিটার',
   'Join the stops in order': 'বিরতিগুলো ক্রমে জুড়ুন',
   'Show the whole route': 'পুরো পথ দেখান',
+  'Where I am': 'আমি কোথায়',
   'Map': 'ম্যাপ',
   'Map: tap to add a stop': 'ম্যাপ: বিরতি যোগ করতে ট্যাপ করুন',
   'The map’s pictures come from OpenStreetMap while it is shown.': 'ম্যাপ দেখানোর সময় এর ছবি OpenStreetMap থেকে আসে।',

@@ -1282,6 +1282,7 @@ export default {
   'Kilometers': '킬로미터',
   'Join the stops in order': '경유지를 순서대로 잇기',
   'Show the whole route': '전체 경로 보기',
+  'Where I am': '내 위치',
   'Map': '지도',
   'Map: tap to add a stop': '지도: 탭해서 경유지 추가',
   'The map’s pictures come from OpenStreetMap while it is shown.': '지도가 보이는 동안 지도 이미지는 OpenStreetMap에서 가져와요.',

@@ -1281,6 +1281,7 @@ export default {
   'Kilometers': 'キロメートル',
   'Join the stops in order': '立ち寄り先を順につなぐ',
   'Show the whole route': '経路全体を表示',
+  'Where I am': '現在地',
   'Map': '地図',
   'Map: tap to add a stop': '地図：タップして立ち寄り先を追加',
   'The map’s pictures come from OpenStreetMap while it is shown.': '地図の画像は、表示するあいだOpenStreetMapから取得します。',

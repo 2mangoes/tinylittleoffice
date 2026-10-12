@@ -1283,6 +1283,7 @@ export default {
   'Kilometers': 'Kilometrach',
   'Join the stops in order': 'Połącz przystanki po kolei',
   'Show the whole route': 'Pokaż całą trasę',
+  'Where I am': 'Gdzie jestem',
   'Map': 'Mapa',
   'Map: tap to add a stop': 'Mapa: stuknij, by dodać przystanek',
   'The map’s pictures come from OpenStreetMap while it is shown.': 'Kafelki mapy pochodzą z OpenStreetMap, gdy mapa jest widoczna.',

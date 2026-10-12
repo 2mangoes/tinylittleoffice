@@ -1284,6 +1284,7 @@ export default {
   'Kilometers': '公里',
   'Join the stops in order': '依序連接各停靠點',
   'Show the whole route': '顯示整條路線',
+  'Where I am': '我的位置',
   'Map': '地圖',
   'Map: tap to add a stop': '地圖：點選以新增停靠點',
   'The map’s pictures come from OpenStreetMap while it is shown.': '顯示時，地圖的圖片來自 OpenStreetMap。',

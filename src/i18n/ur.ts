@@ -1283,6 +1283,7 @@ export default {
     'Kilometers': 'کلومیٹر',
     'Join the stops in order': 'پڑاؤ ترتیب سے جوڑیں',
     'Show the whole route': 'پورا راستہ دکھائیں',
+    'Where I am': 'میں کہاں ہوں',
     'Map': 'نقشہ',
     'Map: tap to add a stop': 'نقشہ: پڑاؤ شامل کرنے کے لیے ٹیپ کریں',
     'The map’s pictures come from OpenStreetMap while it is shown.': 'نقشے کی تصویریں OpenStreetMap سے آتی ہیں جب تک وہ دکھایا جاتا ہے۔',

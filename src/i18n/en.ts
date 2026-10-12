@@ -1304,6 +1304,7 @@ export default {
   'Kilometers': 'Kilometers',
   'Join the stops in order': 'Join the stops in order',
   'Show the whole route': 'Show the whole route',
+  'Where I am': 'Where I am',
   'Map': 'Map',
   'Map: tap to add a stop': 'Map: tap to add a stop',
   'The map’s pictures come from OpenStreetMap while it is shown.': 'The map’s pictures come from OpenStreetMap while it is shown.',

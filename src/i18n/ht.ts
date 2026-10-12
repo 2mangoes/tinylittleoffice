@@ -1284,6 +1284,7 @@ export default {
   'Kilometers': 'Kilomèt',
   'Join the stops in order': 'Lye arè yo nan lòd',
   'Show the whole route': 'Montre tout wout la',
+  'Where I am': 'Kote mwen ye',
   'Map': 'Kat',
   'Map: tap to add a stop': 'Kat: tape pou ajoute yon arè',
   'The map’s pictures come from OpenStreetMap while it is shown.': 'Foto kat la soti nan OpenStreetMap pandan l ap parèt.',

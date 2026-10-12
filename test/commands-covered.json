@@ -402,6 +402,7 @@
  "trip.insert.find",
  "trip.insert.middle",
  "trip.linked",
+ "trip.locate",
  "trip.map",
  "trip.move",
  "trip.pin.delete",

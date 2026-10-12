@@ -1282,6 +1282,7 @@ export default {
   'Kilometers': 'Километры',
   'Join the stops in order': 'Соединить остановки по порядку',
   'Show the whole route': 'Показать весь маршрут',
+  'Where I am': 'Где я',
   'Map': 'Карта',
   'Map: tap to add a stop': 'Карта: коснитесь, чтобы добавить остановку',
   'The map’s pictures come from OpenStreetMap while it is shown.': 'Картинки для карты приходят из OpenStreetMap, пока она на экране.',

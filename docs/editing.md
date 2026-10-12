@@ -612,6 +612,7 @@ whose rows are the document's own data (the sheet's column kinds, the formula fu
 |  | Kilometers | units ▾ |
 |  | Join the stops in order | bar, drawer on a phone |
 |  | Show the whole route | bar, drawer on a phone |
+|  | Where I am | bar, drawer on a phone |
 |  | Map | bar, drawer on a phone |
 | `Mod+Alt+Enter` | Present | bar, drawer on a phone |
 |  | Show on the map | context, at: rows |

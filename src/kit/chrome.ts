@@ -120,7 +120,8 @@ let madeAt = -Infinity;
  * keyboard up and the bar shown (Paul, 2026-10-11: "When I make a new doc of any kind I should land on it open with
  * focus on the first node"). iOS raises the keyboard only for a focus taken in the gesture itself, and the editor is
  * drawn later: so a hidden box takes the focus now, and the editor's first box takes it from there when it is drawn,
- * the keyboard staying up between the two. The focus a shared link opens with is still not the person's.
+ * the keyboard staying up between the two; where the tap opens nothing new, the document on view takes it. The focus a
+ * shared link opens with is still not the person's.
  */
 export function startEditing(): void {
   madeAt = performance.now();
@@ -136,6 +137,16 @@ export function startEditing(): void {
     document.body.append(hold);
   }
   hold.focus({ preventScroll: true });
+  // A tap whose link is the one on view (Blank, on a blank document of the app) opens nothing, and nothing would take the
+  // focus from the hold: the document on view takes it where a person starts, as a new one would (docs/editing.md §1).
+  // A link that goes has changed the address by now; one the shell asks about first has its dialog holding the focus.
+  const was = location.hash;
+  setTimeout(() => {
+    if (document.activeElement !== hold || location.hash !== was) return;
+    const editor = document.querySelector<HTMLElement & { focusFirst?(): unknown }>('main.to-main .to-editor');
+    if (editor?.focusFirst) void editor.focusFirst();
+    else document.querySelector<HTMLElement>('main.to-main')?.focus({ preventScroll: true });
+  });
 }
 
 export class ToChrome extends LitElement {
