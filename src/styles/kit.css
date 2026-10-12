@@ -1630,9 +1630,14 @@
     padding-left: max(var(--to-inset-l), (100% - var(--to-max-w)) / 2 + var(--to-gutter));
     padding-right: max(var(--to-inset-r), (100% - var(--to-max-w)) / 2 + var(--to-gutter));
   }
+  /* An editor's column has half of what can be seen of it (--to-col-h, kit/chrome.ts) as room below its last line, so
+     the caret typed at the end stays at the middle of the screen (Paul, 2026-10-12: "enough padding at the end of a
+     document we are editing that the cursor stays roughly in the middle of the screen unless we scroll"; kit/scroll.ts
+     revealCaret's `middle`). The spatial canvases, which fill the column, keep the gutter (their own stylesheets). */
   .to-main.to-wide {
     padding-left: var(--to-inset-l);
     padding-right: var(--to-inset-r);
+    padding-bottom: calc(var(--to-col-h) / 2);
   }
   .to-editor {
     display: block;

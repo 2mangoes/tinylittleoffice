@@ -8,8 +8,9 @@
  *
  *   scrollerOf(el)        the nearest box that scrolls the way `el` would be scrolled (the column, a list's own box)
  *   reveal(el, opts)      `el` (or a rect over it, such as the caret's) brought inside what can be seen
- *   revealCaret(box)      the caret in `box` brought inside what can be seen of the column, above the bar: the one rule
- *                         for a caret, after an edit, a focus moved, the column settled or the window put back
+ *   revealCaret(box, o)   the caret in `box` brought inside what can be seen of the column, above the bar: the one rule
+ *                         for a caret, after an edit, a focus moved, the column settled or the window put back; after an
+ *                         edit (`middle`), a caret below the middle is brought to it, as a typewriter keeps its line
  *   seen()                what can be seen: the visible window
  *   room()                where a menu, the context bar, the link box or the completion list may sit: the column's
  *                         box (<to-chrome>) within what can be seen
@@ -83,8 +84,11 @@ function inner(sc: HTMLElement): Box {
 const cut = (a: Box, b: Box): Box => ({ top: Math.max(a.top, b.top), left: Math.max(a.left, b.left), bottom: Math.min(a.bottom, b.bottom), right: Math.min(a.right, b.right) });
 
 export interface Reveal {
-  /** Where in what can be seen: as little as it takes (the default), the middle, or the top. */
-  block?: 'nearest' | 'center' | 'start';
+  /**
+   * Where in what can be seen: as little as it takes (the default), the middle, or the top; or `middle`: at the middle
+   * when it is below it, and as little as it takes otherwise (the caret as you type: kit/text.ts).
+   */
+  block?: 'nearest' | 'center' | 'start' | 'middle';
   /** A part of `el` to bring in rather than all of it (a caret's rect, a range's). */
   rect?: Box;
   /** Room to leave between it and the edge, in CSS pixels. */
@@ -95,7 +99,8 @@ export interface Reveal {
 
 /** How far to move a span [a, b] so it lies in [lo, hi]. */
 function delta(a: number, b: number, lo: number, hi: number, block: Reveal['block']): number {
-  if (block === 'center') return (a + b) / 2 - (lo + hi) / 2;
+  const below = (a + b) / 2 - (lo + hi) / 2;
+  if (block === 'center' || (block === 'middle' && below > 0)) return below;
   if (block === 'start') return a - lo;
   if (b - a > hi - lo) return a - lo;
   return a < lo ? a - lo : b > hi ? b - hi : 0;
@@ -142,17 +147,25 @@ export function reveal(el: Element | null | undefined, opts: Reveal = {}): void 
  * its block stands in for it, the element the caret sits in, never the whole box (a document's box is the document,
  * and revealing it scrolled to the top: Paul, 2026-10-11, "the cursor goes beneath the nav"). Nothing when the
  * selection is not in `box`.
+ *
+ * After an edit (`middle`), a caret below the middle of what can be seen is brought to the middle, and one above it is
+ * only kept in sight (Paul, 2026-10-12: "enough padding at the end of a document we are editing that the cursor stays
+ * roughly in the middle of the screen unless we scroll"); the room below the last line is the column's padding
+ * (kit.css). A click, an arrow key or Find never asks for it, so the person's own scroll is never undone.
  */
-export function revealCaret(box: Element): void {
+export function revealCaret(box: Element, opts: { middle?: boolean } = {}): void {
   const sel = document.getSelection();
   if (!sel?.rangeCount || !box.contains(sel.focusNode)) return;
+  const block = opts.middle ? 'middle' : 'nearest';
   const range = sel.getRangeAt(0);
   const r = range.getBoundingClientRect();
-  if (r.height) return reveal(box, { rect: r, margin: 8 });
+  if (r.height) return reveal(box, { rect: r, margin: 8, block });
   const node = range.startContainer;
   const at = node instanceof Element ? node : node.parentElement;
   const el = at?.closest('[data-block], p, li, h1, h2, h3, h4, h5, h6, blockquote, td, th') ?? at;
-  reveal(el && box.contains(el) ? el : box, { margin: 8 });
+  // The whole box is never brought to the middle: its middle is not the caret's.
+  if (el && box.contains(el)) reveal(el, { margin: 8, block });
+  else reveal(box, { margin: 8 });
 }
 
 /** The window back at its top: the page is the visible window and the column scrolls, so the window never should. True when it had slid. */

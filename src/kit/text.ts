@@ -179,16 +179,22 @@ function inherit(from: Block[] | undefined, to: Block[], fresh: number) {
  * When the person last did something on the page (a key, an input, a paste, a tap or a click) and when they last
  * scrolled it themselves (a wheel, a finger dragging, Page Up or Down): a selection written within a moment of the
  * first, and with no scroll of theirs since, is answering them and may bring the caret into view; any other (a
- * draw, a restore, an autosave) leaves the page where they put it.
+ * draw, a restore, an autosave) leaves the page where they put it. Answering an edit (typing, Enter, a paste: the
+ * last thing done was an input), the caret is brought to the middle from below it (kit/scroll.ts revealCaret's
+ * `middle`); answering a tap or a key that only moves it (an arrow), it is only kept in sight.
  */
 let acted = -Infinity;
 let scrolled = -Infinity;
+let edited = false;
 const ANSWER_MS = 800;
 if (typeof document !== 'undefined') {
-  const act = () => void (acted = performance.now());
+  const act = (e: Event) => {
+    acted = performance.now();
+    edited = e.type !== 'pointerdown' && e.type !== 'keydown';
+  };
   const scroll = () => void (scrolled = performance.now());
   for (const type of ['beforeinput', 'pointerdown', 'paste', 'cut', 'drop']) document.addEventListener(type, act, { capture: true, passive: true });
-  document.addEventListener('keydown', (e) => (e.key === 'PageUp' || e.key === 'PageDown' ? scroll() : act()), { capture: true, passive: true });
+  document.addEventListener('keydown', (e) => (e.key === 'PageUp' || e.key === 'PageDown' ? scroll() : act(e)), { capture: true, passive: true });
   for (const type of ['wheel', 'touchmove']) document.addEventListener(type, scroll, { capture: true, passive: true });
 }
 /** Whether a selection written now answers something the person just did here. */
@@ -575,11 +581,11 @@ export class ToText extends LitElement {
     // Safari drops a selection set in the same task as a DOM swap.
     WEBKIT ? requestAnimationFrame(go) : go();
   }
-  /** The caret kept inside what can be seen of the column (above a phone's keyboard) after an edit the person made moved it (kit/scroll.ts). */
+  /** The caret kept inside what can be seen of the column (above a phone's keyboard) after something the person did moved it, and at the middle from below after an edit (kit/scroll.ts). */
   private keepCaretVisible(dom: Selection) {
     // In flight for the keyboard, the column's box is not yet where it is going: it keeps the caret in sight when it settles.
     // (Paul, 2026-10-10: the outline's new row appeared under the bar, out of reach.)
-    if (dom.rangeCount && !gliding()) revealCaret(this);
+    if (dom.rangeCount && !gliding()) revealCaret(this, { middle: edited });
   }
 
   /* ---------- edits ---------- */
