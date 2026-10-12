@@ -1457,6 +1457,7 @@ export default {
   'Show a preview of the first page': 'Montre yon apèsi premye paj la',
   'A picture of the first page and the title are kept readable on our server for a month so the network can fetch them. The document itself is not.': 'Yon foto premye paj la ak tit la rete lizib sou sèvè nou an pandan yon mwa pou rezo a ka pran yo. Dokiman an li menm, non.',
   'Shared without a preview: {reason}': 'Pataje san apèsi: {reason}',
+  'Making the preview…': 'Ap fè apèsi a…',
   'the page could not be drawn': 'pa t ka desine paj la',
   'the picture is over 400 KB': 'foto a depase 400 KB',
   'the server could not be reached': 'pa t ka jwenn sèvè a',

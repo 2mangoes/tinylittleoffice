@@ -1457,6 +1457,7 @@ export default {
   'Show a preview of the first page': '顯示第一頁的預覽',
   'A picture of the first page and the title are kept readable on our server for a month so the network can fetch them. The document itself is not.': '第一頁的圖片和標題會在我們的伺服器上以可讀形式保存一個月，讓社群網路可以取得。文件本身不會。',
   'Shared without a preview: {reason}': '已分享，但沒有預覽：{reason}',
+  'Making the preview…': '正在製作預覽…',
   'the page could not be drawn': '無法繪製頁面',
   'the picture is over 400 KB': '圖片超過 400 KB',
   'the server could not be reached': '無法連線到伺服器',

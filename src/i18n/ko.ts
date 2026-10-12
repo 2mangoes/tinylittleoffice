@@ -1455,6 +1455,7 @@ export default {
   'Show a preview of the first page': '첫 페이지 미리보기 보여 주기',
   'A picture of the first page and the title are kept readable on our server for a month so the network can fetch them. The document itself is not.': '첫 페이지 그림과 제목은 소셜 네트워크가 가져갈 수 있도록 한 달 동안 서버에서 읽을 수 있게 보관돼요. 문서 자체는 보관되지 않아요.',
   'Shared without a preview: {reason}': '미리보기 없이 공유했어요: {reason}',
+  'Making the preview…': '미리 보기 만드는 중…',
   'the page could not be drawn': '페이지를 그리지 못했어요',
   'the picture is over 400 KB': '그림이 400KB를 넘어요',
   'the server could not be reached': '서버에 연결하지 못했어요',

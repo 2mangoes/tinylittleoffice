@@ -1455,6 +1455,7 @@ export default {
   'Show a preview of the first page': 'पहले पेज का प्रीव्यू दिखाएँ',
   'A picture of the first page and the title are kept readable on our server for a month so the network can fetch them. The document itself is not.': 'पहले पेज की तस्वीर और शीर्षक एक महीने तक हमारे सर्वर पर पढ़े जा सकने लायक रहते हैं, ताकि नेटवर्क उन्हें ले सके। दस्तावेज़ ख़ुद नहीं।',
   'Shared without a preview: {reason}': 'प्रीव्यू के बिना शेयर हुआ: {reason}',
+  'Making the preview…': 'पूर्वावलोकन बन रहा है…',
   'the page could not be drawn': 'पेज बनाया नहीं जा सका',
   'the picture is over 400 KB': 'तस्वीर 400 KB से बड़ी है',
   'the server could not be reached': 'सर्वर तक पहुँचा नहीं जा सका',

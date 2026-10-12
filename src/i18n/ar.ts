@@ -1456,6 +1456,7 @@ export default {
   'Show a preview of the first page': 'إظهار معاينة للصفحة الأولى',
   'A picture of the first page and the title are kept readable on our server for a month so the network can fetch them. The document itself is not.': 'تبقى صورة الصفحة الأولى والعنوان مقروءة على خادمنا لمدة شهر ليتمكن موقع التواصل من جلبها. أما المستند نفسه فلا.',
   'Shared without a preview: {reason}': 'تمت المشاركة دون معاينة: {reason}',
+  'Making the preview…': 'جارٍ إنشاء المعاينة…',
   'the page could not be drawn': 'تعذّر رسم الصفحة',
   'the picture is over 400 KB': 'الصورة أكبر من 400 كيلوبايت',
   'the server could not be reached': 'تعذّر الوصول إلى الخادم',

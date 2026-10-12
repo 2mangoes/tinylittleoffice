@@ -1457,6 +1457,7 @@ export default {
   'Show a preview of the first page': 'Afficher un aperçu de la première page',
   'A picture of the first page and the title are kept readable on our server for a month so the network can fetch them. The document itself is not.': 'Une image de la première page et le titre restent lisibles sur notre serveur pendant un mois pour que le réseau puisse les récupérer. Le document lui-même, non.',
   'Shared without a preview: {reason}': 'Partagé sans aperçu : {reason}',
+  'Making the preview…': 'Création de l’aperçu…',
   'the page could not be drawn': 'la page n’a pas pu être dessinée',
   'the picture is over 400 KB': 'l’image dépasse 400 Ko',
   'the server could not be reached': 'le serveur est injoignable',

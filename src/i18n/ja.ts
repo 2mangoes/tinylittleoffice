@@ -1454,6 +1454,7 @@ export default {
   'Show a preview of the first page': '1ページ目のプレビューを表示',
   'A picture of the first page and the title are kept readable on our server for a month so the network can fetch them. The document itself is not.': '1ページ目の画像とタイトルは、SNSが取得できるよう1か月間サーバー上で読める状態で保管されます。ドキュメントそのものは保管されません。',
   'Shared without a preview: {reason}': 'プレビューなしで共有しました（{reason}）',
+  'Making the preview…': 'プレビューを作成中…',
   'the page could not be drawn': 'ページを描画できませんでした',
   'the picture is over 400 KB': '画像が400 KBを超えています',
   'the server could not be reached': 'サーバーに接続できませんでした',

@@ -1456,6 +1456,7 @@ export default {
   'Show a preview of the first page': 'Een voorbeeld van de eerste pagina tonen',
   'A picture of the first page and the title are kept readable on our server for a month so the network can fetch them. The document itself is not.': 'Een afbeelding van de eerste pagina en de titel blijven een maand leesbaar op onze server, zodat het netwerk ze kan ophalen. Het document zelf niet.',
   'Shared without a preview: {reason}': 'Gedeeld zonder voorbeeld: {reason}',
+  'Making the preview…': 'Voorbeeld maken…',
   'the page could not be drawn': 'de pagina kon niet worden getekend',
   'the picture is over 400 KB': 'de afbeelding is groter dan 400 KB',
   'the server could not be reached': 'de server was niet bereikbaar',

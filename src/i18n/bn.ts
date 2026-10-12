@@ -1400,6 +1400,7 @@ export default {
   'Show a preview of the first page': 'প্রথম পাতার প্রিভিউ দেখান',
   'A picture of the first page and the title are kept readable on our server for a month so the network can fetch them. The document itself is not.': 'প্রথম পাতার একটি ছবি আর শিরোনাম এক মাস আমাদের সার্ভারে পড়ার মতো রাখা থাকে, যাতে নেটওয়ার্ক সেগুলো নিতে পারে। নথিটি নিজে নয়।',
   'Shared without a preview: {reason}': 'প্রিভিউ ছাড়া শেয়ার হয়েছে: {reason}',
+  'Making the preview…': 'প্রিভিউ বানানো হচ্ছে…',
   'the page could not be drawn': 'পাতাটি আঁকা যায়নি',
   'the picture is over 400 KB': 'ছবিটি 400 KB-এর বেশি',
   'the server could not be reached': 'সার্ভারে পৌঁছানো যায়নি',

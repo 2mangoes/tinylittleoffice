@@ -324,6 +324,105 @@ test('an upload that fails shares without a preview and says why: offline, or th
   }
 });
 
+/* ---------- a network's button while its card is drawn and posted ---------- */
+
+/** The site's /card, stubbed and held open until `release`: what was posted, and whether it then answers or fails. */
+function heldCards(answer: 'ok' | 'offline' = 'ok') {
+  const posted: string[] = [];
+  let release = () => {};
+  const held = new Promise<void>((r) => (release = r));
+  vi.stubGlobal('fetch', async (url: string) => {
+    posted.push(String(url));
+    await held;
+    if (answer === 'offline') throw new TypeError('Failed to fetch');
+    return new Response(JSON.stringify({ id: 'k8hwicw', exp: Date.now() + 30 * DAY }), { status: 201, headers: { 'content-type': 'application/json' } });
+  });
+  return { posted, release: () => release() };
+}
+/** Every change a button's words or aria-busy go through, from now on. */
+function watch(btn: HTMLElement) {
+  const seen: string[] = [];
+  const o = new MutationObserver(() => seen.push(`${btn.textContent!.trim()}|${btn.getAttribute('aria-busy')}`));
+  o.observe(btn, { subtree: true, characterData: true, childList: true, attributes: true, attributeFilter: ['aria-busy'] });
+  onTestFinished(() => o.disconnect());
+  return seen;
+}
+const guardOpen = () => !!document.querySelector('to-dialog.to-link-guard dialog[open] .lg-go');
+const postButton = (d: ToDialog, s: string) => d.querySelector<HTMLButtonElement>(`.to-post-${s}`)!;
+
+test('Paul, 2026-10-12: "Make it look like the button is working": Bluesky says Making the preview… while its card is posted, a second press does nothing, and the guard returns the focus to it', async () => {
+  const shell = await written(null!, '---\ntitle: Slow card\n---\nOn a slow line.\n');
+  const { posted, release } = heldCards();
+  const opened = vi.spyOn(window, 'open').mockImplementation(() => null);
+  const d = await open(shell);
+  const bluesky = postButton(d, 'bluesky');
+  const x = postButton(d, 'x');
+  bluesky.focus();
+  bluesky.click();
+  await until(() => posted.length === 1 && bluesky.getAttribute('aria-busy') === 'true', 5000, 'the card was never posted');
+  expect(bluesky.textContent!.trim()).toBe('Making the preview…');
+  // The disabled look, but not disabled: it keeps the focus.
+  expect(bluesky.disabled).toBe(false);
+  expect(getComputedStyle(bluesky).opacity).toBe('0.5');
+  expect(document.activeElement).toBe(bluesky);
+  expect(x.textContent!.trim()).toBe('X');
+  expect(x.hasAttribute('aria-busy')).toBe(false);
+  // A second press, on another network or on Email, opens nothing and posts nothing.
+  x.click();
+  postButton(d, 'email').click();
+  bluesky.click();
+  await tick(50);
+  expect(posted).toHaveLength(1);
+  expect(guardOpen()).toBe(false);
+  release();
+  await until(guardOpen, 5000, 'the link guard never asked');
+  expect(document.querySelector('to-dialog.to-link-guard .lg-host')!.textContent).toBe('bsky.app');
+  expect(document.querySelectorAll('to-dialog.to-link-guard dialog[open]')).toHaveLength(1);
+  expect(bluesky.textContent!.trim()).toBe('Bluesky');
+  expect(bluesky.hasAttribute('aria-busy')).toBe(false);
+  document.querySelector<HTMLButtonElement>('to-dialog.to-link-guard .lg-cancel')!.click();
+  await until(() => !guardOpen());
+  await until(() => document.activeElement === bluesky, 3000, 'the focus did not come back to Bluesky');
+  expect(opened).not.toHaveBeenCalled();
+  expect(posted).toHaveLength(1);
+});
+
+test('Email, and a network with the switch off, open the guard at once and never change their words', async () => {
+  const shell = await written(null!, '---\ntitle: No card\n---\nPlain.\n');
+  const { posted } = heldCards();
+  const opened = vi.spyOn(window, 'open').mockImplementation(() => null);
+  const d = await open(shell);
+  const email = watch(postButton(d, 'email'));
+  await press(d, 'email', opened);
+  expect(email).toEqual([]);
+  d.querySelector<HTMLInputElement>('.to-share-preview input')!.click();
+  await shell.updateComplete;
+  const bluesky = watch(postButton(d, 'bluesky'));
+  const compose = await press(d, 'bluesky', opened);
+  expect(linkIn(compose)).toBe(shell.link);
+  expect(bluesky).toEqual([]);
+  expect(posted).toHaveLength(0);
+});
+
+test('an upload that fails while the button is busy: the toast says so, the words come back, and the guard opens with the plain link', async () => {
+  const shell = await written(null!, '---\ntitle: Offline card\n---\nNo line.\n');
+  const { posted, release } = heldCards('offline');
+  const opened = vi.spyOn(window, 'open').mockImplementation(() => null);
+  const d = await open(shell);
+  const bluesky = postButton(d, 'bluesky');
+  bluesky.click();
+  await until(() => posted.length === 1 && bluesky.getAttribute('aria-busy') === 'true', 5000, 'the card was never posted');
+  expect(bluesky.textContent!.trim()).toBe('Making the preview…');
+  release();
+  await until(guardOpen, 5000, 'the link guard never asked');
+  await until(() => said() === 'Shared without a preview: the server could not be reached');
+  expect(bluesky.textContent!.trim()).toBe('Bluesky');
+  expect(bluesky.hasAttribute('aria-busy')).toBe(false);
+  document.querySelector<HTMLButtonElement>('to-dialog.to-link-guard .lg-go')!.click();
+  await until(() => opened.mock.calls.length === 1);
+  expect(linkIn(String(opened.mock.calls[0][0]))).toBe(shell.link);
+});
+
 test('the share sheet carries the card too; a document with a password shows no switch and makes no card', async () => {
   const shell = await written(null!, '---\ntitle: Sheet share\n---\nTo the phone.\n');
   const posted = cards();

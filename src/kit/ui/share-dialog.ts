@@ -81,6 +81,7 @@ export class ToShare extends LitElement {
     short: { state: true },
     shortTtl: { state: true },
     busy: { state: true },
+    posting: { state: true },
     qrDisplay: { state: true },
     shortDisplay: { state: true },
     sharing: { state: true },
@@ -98,7 +99,13 @@ export class ToShare extends LitElement {
   declare protect: TemplateResult | typeof nothing;
   declare short: Shortened | null;
   declare shortTtl: number;
+  /** A short link is being made. */
   declare busy: boolean;
+  /**
+   * The network whose preview card is being drawn and posted: its button says so, and every post button waits for it.
+   * Apart from `busy`: each is one button's work, and Make and the networks never wait for each other.
+   */
+  declare posting: Service | null;
   /** Which link the QR code holds, and which a short link opens: the Display Link, or the editing one. */
   declare qrDisplay: boolean;
   declare shortDisplay: boolean;
@@ -122,6 +129,7 @@ export class ToShare extends LitElement {
     this.short = null;
     this.shortTtl = savedTtl();
     this.busy = false;
+    this.posting = null;
     this.qrDisplay = false;
     this.shortDisplay = false;
     this.sharing = false;
@@ -260,16 +268,28 @@ export class ToShare extends LitElement {
     this.preview = on;
     setPreview(on);
   }
-  /** The link to a service's compose box: Bluesky, Mastodon (its server asked once), X, LinkedIn, Email; each opened through the link guard. Email never carries a preview. */
-  private post(service: Service) {
+  /**
+   * The link to a service's compose box: Bluesky, Mastodon (its server asked once), X, LinkedIn, Email; each opened through the link guard. Email never carries a preview.
+   * While a network's card is drawn and posted its button says 'Making the preview…' (Paul, 2026-10-12: "Make it look like the
+   * button is working"), and a press on any post button does nothing.
+   */
+  private async post(service: Service) {
+    if (this.posting) return;
     const server = mastodonHost(store.get(MASTODON_KEY) ?? '');
     if (service === 'mastodon' && !server) {
       this.askMastodon = true;
       void this.updateComplete.then(() => this.querySelector<HTMLInputElement>('.to-mastodon-server')?.focus());
       return;
     }
-    if (service === 'email') return openLink(shareUrl(service, this.named, this.link, server));
-    void this.networkLink().then((link) => openLink(shareUrl(service, this.named, link, server)));
+    if (service === 'email' || this.locked || !this.preview) return openLink(shareUrl(service, this.named, this.link, server));
+    let link: string;
+    this.posting = service;
+    try {
+      link = await this.networkLink();
+    } finally {
+      this.posting = null;
+    }
+    openLink(shareUrl(service, this.named, link, server));
   }
   private setMastodon(e: Event) {
     e.preventDefault();
@@ -279,7 +299,7 @@ export class ToShare extends LitElement {
     if (!box.reportValidity()) return;
     store.set(MASTODON_KEY, host);
     this.askMastodon = false;
-    this.post('mastodon');
+    void this.post('mastodon');
   }
   private renderPost() {
     const server = mastodonHost(store.get(MASTODON_KEY) ?? '');
@@ -294,7 +314,8 @@ export class ToShare extends LitElement {
           </label>`
       }
       <div class="to-post">${SERVICES.map(
-        (s) => html`<button type="button" class="to-btn to-post-${s}" @click=${() => this.post(s)}>${icon(s === 'email' ? UI.mail : UI.post, 16)}<span>${SERVICE_NAMES[s]}</span></button>`,
+        (s) =>
+          html`<button type="button" class="to-btn to-post-${s}" aria-busy=${this.posting === s ? 'true' : nothing} @click=${() => void this.post(s)}>${icon(s === 'email' ? UI.mail : UI.post, 16)}<span>${this.posting === s ? t('Making the preview…') : SERVICE_NAMES[s]}</span></button>`,
       )}</div>
       ${
         this.askMastodon || server

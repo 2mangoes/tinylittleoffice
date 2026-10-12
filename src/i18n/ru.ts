@@ -1455,6 +1455,7 @@ export default {
   'Show a preview of the first page': 'Показывать превью первой страницы',
   'A picture of the first page and the title are kept readable on our server for a month so the network can fetch them. The document itself is not.': 'Картинка первой страницы и название месяц хранятся на нашем сервере в открытом виде, чтобы соцсеть могла их забрать. Сам документ — нет.',
   'Shared without a preview: {reason}': 'Отправлено без превью: {reason}',
+  'Making the preview…': 'Делаем превью…',
   'the page could not be drawn': 'не удалось нарисовать страницу',
   'the picture is over 400 KB': 'картинка больше 400 КБ',
   'the server could not be reached': 'сервер недоступен',
