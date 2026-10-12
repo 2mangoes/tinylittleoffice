@@ -157,15 +157,19 @@ const NAMES: Record<string, string> = {
   ht: 'Kreyòl ayisyen',
   ko: '한국어',
   'zh-hant': '繁體中文',
+  // Two more of the city's (2026-10-12), both in the Hebrew script and right to left; the menu's root collation places
+  // them after Cyrillic and before Arabic, Yiddish (י) before Hebrew (ע).
+  he: 'עברית',
+  yi: 'ייִדיש',
 };
 
-test('each language named in itself, not in English, and the menu ordered by those names: Latin, Cyrillic, Arabic, Indic, Hangul, Han', () => {
+test('each language named in itself, not in English, and the menu ordered by those names: Latin, Cyrillic, Hebrew, Arabic, Indic, Hangul, Han', () => {
   for (const [code, name] of Object.entries(NAMES)) expect(languageName(code), code).toBe(name);
   for (const code of Object.keys(NAMES)) if (!languages().includes(code)) register(code, {});
-  expect(languages().filter((c) => c in NAMES || c === 'en')).toEqual(['en', 'de', 'es', 'fr', 'it', 'ht', 'nl', 'pl', 'pt-br', 'ru', 'uk', 'ur', 'ar', 'hi', 'bn', 'ko', 'ja', 'zh-hans', 'zh-hant']);
+  expect(languages().filter((c) => c in NAMES || c === 'en')).toEqual('en de es fr it ht nl pl pt-br ru uk yi he ur ar hi bn ko ja zh-hans zh-hant'.split(' '));
 });
 
-test('the plural forms of the second nine: ru, uk, pl four (21 is one in ru and uk, many in pl), bn, hi, ur, ht two, ko and Chinese one', async () => {
+test('the plural forms of the second nine and the two after: ru, uk, pl four (21 is one in ru and uk, many in pl), he three (2 is two), bn, hi, ur, ht, yi two, ko and Chinese one', async () => {
   const FILES = '{n|one file|# files}';
   const cases: [string, string, Record<number, string>][] = [
     ['ru', '{n|# файл|# файла|# файлов|# файла}', { 1: '1 файл', 2: '2 файла', 5: '5 файлов', 21: '21 файл' }],
@@ -176,6 +180,9 @@ test('the plural forms of the second nine: ru, uk, pl four (21 is one in ru and 
     ['hi', '{n|# फ़ाइल|# फ़ाइलें}', { 1: '1 फ़ाइल', 2: '2 फ़ाइलें', 5: '5 फ़ाइलें', 21: '21 फ़ाइलें' }],
     ['ur', '{n|# فائل|# فائلیں}', { 1: '1 فائل', 2: '2 فائلیں', 5: '5 فائلیں', 21: '21 فائلیں' }],
     ['ht', '{n|# fichye|# fichye yo}', { 1: '1 fichye', 2: '2 fichye yo', 5: '5 fichye yo', 21: '21 fichye yo' }],
+    // Hebrew says one and two in words (קובץ אחד, שני קבצים), as its files do; Yiddish one and other.
+    ['he', '{n|קובץ אחד|שני קבצים|# קבצים}', { 1: 'קובץ אחד', 2: 'שני קבצים', 5: '5 קבצים', 21: '21 קבצים' }],
+    ['yi', '{n|# פייל|# פיילס}', { 1: '1 פייל', 2: '2 פיילס', 5: '5 פיילס', 21: '21 פיילס' }],
     ['ko', '{n|파일 #개}', { 1: '파일 1개', 2: '파일 2개', 5: '파일 5개', 21: '파일 21개' }],
     ['zh-hant', '{n|# 個檔案}', { 1: '1 個檔案', 2: '2 個檔案', 5: '5 個檔案', 21: '21 個檔案' }],
   ];

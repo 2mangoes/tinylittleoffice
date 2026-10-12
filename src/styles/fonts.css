@@ -1,8 +1,8 @@
 /* The type: IBM Plex, from the site's own files (public/fonts/, IBM's release under the SIL Open Font License, its
    licence beside them; Paul, 2026-10-11: "We use Plex everywhere!"). Nothing is fetched from another host: the policy's
    font-src is 'self' alone (public/_headers). Plex Sans is the interface and the Sans look, Plex Serif the Serif look,
-   Plex Mono code and the Typewriter; Arabic and Hindi in Plex Sans Arabic and Plex Sans Devanagari. Two weights, 400
-   and 600, roman and italic for Sans and Serif. Each face waits behind its unicode-range, so a page in a script Plex
+   Plex Mono code and the Typewriter; Arabic, Hebrew and Yiddish, and Hindi in Plex Sans Arabic, Plex Sans Hebrew and Plex
+   Sans Devanagari. Two weights, 400 and 600, roman and italic for Sans and Serif. Each face waits behind its unicode-range, so a page in a script Plex
    does not draw (Bengali, Korean, Japanese, Chinese: the device's) downloads nothing; swap shows the words in the
    device's face standing in for it while a face is on its way. index.html preloads Plex Sans Regular and SemiBold,
    which every page draws. scripts/dependencies.ts FONTS lists the files (docs/dependencies.md); test/fonts.test.ts
@@ -245,6 +245,22 @@
     font-style: normal;
     font-display: swap;
     unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFC;
+  }
+  @font-face {
+    font-family: 'IBM Plex Sans Hebrew';
+    src: url('/fonts/IBMPlexSansHebrew-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+    unicode-range: U+0590-05FF, U+FB1D-FB4F;
+  }
+  @font-face {
+    font-family: 'IBM Plex Sans Hebrew';
+    src: url('/fonts/IBMPlexSansHebrew-SemiBold.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+    unicode-range: U+0590-05FF, U+FB1D-FB4F;
   }
   @font-face {
     font-family: 'IBM Plex Sans Devanagari';

@@ -11,6 +11,7 @@ import { layout } from '../../src/apps/diagram/view.ts';
 import { slidesOf } from '../../src/apps/deck/model.ts';
 import { fontIn } from './fonts.ts';
 import ur from '../../src/i18n/ur.ts';
+import yi from '../../src/i18n/yi.ts';
 
 const words = async (): Promise<string[]> => {
   const out: string[] = [];
@@ -36,7 +37,9 @@ test.each([
 // The scripts of the languages: words each language writes in its own script (its names for the world's countries, its
 // months and its weekdays, from Intl, so no list here is a translation of anyone's), measured in its script's type
 // (test/browser/fonts.ts), within the same tenth of the fallback's sum. Haitian Creole is in the Latin script, which the
-// templates' words above hold, and Intl has no words of its own for it yet.
+// templates' words above hold, and Intl has no words of its own for it yet. Hebrew's letters are measured at the Latin
+// width (kit/draw/draw.ts SCRIPTS has no row for them): Plex Sans Hebrew sets them within that tenth. Chromium's Intl has
+// no Yiddish words (its months and countries come back in English), so Yiddish is measured in its own file's words below.
 const REGIONS =
   'US GB FR DE ES IT NL PT BR JP CN TW HK KR IN BD PK RU UA PL HT SA EG MX CA AU NG KE ZA AR CL CO PE VE CU DO JM TR IR IQ IL GR SE NO DK FI IE BE CH AT CZ HU RO BG RS HR GE AM KZ AF NP LK MM TH VN KH MY ID PH SG NZ'.split(
     ' ',
@@ -52,7 +55,7 @@ const native = (lang: string): string[] => {
   ];
 };
 
-for (const lang of ['ru', 'uk', 'pl', 'bn', 'hi', 'ur', 'ko', 'zh-hant', 'zh-hans', 'ja', 'ar'])
+for (const lang of ['ru', 'uk', 'pl', 'bn', 'hi', 'ur', 'ko', 'zh-hant', 'zh-hans', 'ja', 'ar', 'he'])
   test.each([
     ['plain', false],
     ['bold', true],
@@ -77,6 +80,22 @@ test('ur: the interface’s own words in Nastaliq are within a tenth of the Arab
   expect(all.length).toBeGreaterThan(1000);
   const real = all.reduce((a, w) => a + ctx.measureText(w).width, 0);
   const ours = all.reduce((a, w) => a + textWidth(w, 14), 0);
+  expect(ours / real).toBeGreaterThan(0.9);
+  expect(ours / real).toBeLessThan(1.1);
+});
+
+// Yiddish in Plex Sans Hebrew, the words of the interface (every string of yi.ts, its points among them), within the same
+// tenth of the fallback's sum, plain and bold: Chromium's Intl has none of its own to measure.
+test.each([
+  ['plain', false],
+  ['bold', true],
+])('yi, %s: the interface’s own words in Plex Sans Hebrew are within a tenth of the fallback', (_, bold) => {
+  const ctx = document.createElement('canvas').getContext('2d')!;
+  ctx.font = fontIn('yi', `${bold ? 600 : 400} 14px ${FONT}`);
+  const all = Object.values(yi).filter((w) => /\p{Script=Hebrew}/u.test(w));
+  expect(all.length).toBeGreaterThan(1000);
+  const real = all.reduce((a, w) => a + ctx.measureText(w).width, 0);
+  const ours = all.reduce((a, w) => a + textWidth(w, 14, bold), 0);
   expect(ours / real).toBeGreaterThan(0.9);
   expect(ours / real).toBeLessThan(1.1);
 });

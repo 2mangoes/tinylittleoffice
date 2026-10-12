@@ -10,7 +10,7 @@ Tiny Little Office is; start here for how it is made and why.
 - [kit.md](kit.md): the kit's six folders, what goes in each, and where a new file goes.
 - [tlo.md](tlo.md): the document format, as a person or a language model learns it.
 - [exports.md](exports.md): the files each app's documents become, and the apps they open in (generated).
-- [translation.md](translation.md): the nineteen languages: how a string is written, translated and checked, and the type each is set in.
+- [translation.md](translation.md): the twenty-one languages: how a string is written, translated and checked, and the type each is set in.
 
 Each app's templates are described beside its code, in [src/apps/write/templates.md](../src/apps/write/templates.md) and its
 siblings, one an app; the kit's and the kernel's files each begin by saying what they do.

@@ -43,9 +43,10 @@ const listeners = new Set<() => void>();
 
 /**
  * Names a language's own data in Intl does not have yet: Haitian Creole is named in English by every engine today, and
- * NYC's Haitian community reads Kreyòl ayisyen (the 1979 orthography).
+ * NYC's Haitian community reads Kreyòl ayisyen (the 1979 orthography); Chromium names Yiddish in English (WebKit has
+ * ייִדיש, and so does Node).
  */
-const NATIVE: Record<string, string> = { ht: 'Kreyòl ayisyen' };
+const NATIVE: Record<string, string> = { ht: 'Kreyòl ayisyen', yi: 'ייִדיש' };
 /** A language's name, in itself, as a menu begins it: "Español", "Русский", "Kreyòl ayisyen". */
 export const languageName = (code: string): string => {
   if (NATIVE[code]) return NATIVE[code];

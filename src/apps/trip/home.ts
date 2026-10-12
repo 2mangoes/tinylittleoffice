@@ -20,6 +20,7 @@ export const HOMES: Record<string, string> = {
   de: 'DE',
   es: 'MX',
   fr: 'FR',
+  he: 'IL',
   hi: 'IN',
   ht: 'HT',
   it: 'IT',
@@ -31,6 +32,8 @@ export const HOMES: Record<string, string> = {
   ru: 'RU',
   uk: 'UA',
   ur: 'PK',
+  // Yiddish is the city's own: its readers here are Hasidic New York, so it opens where English does.
+  yi: 'US',
   'zh-hans': 'CN',
   'zh-hant': 'TW',
 };

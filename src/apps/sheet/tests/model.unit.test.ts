@@ -381,8 +381,8 @@ test('a thumbnail of a ten-column sheet is landscape: the first six columns at a
   // Every row number drawn sits inside the page.
   const ys = [...p.svg.matchAll(/<text[^>]*y="([\d.]+)"/g)].map((m) => +m[1]);
   expect(Math.max(...ys)).toBeLessThan(p.h);
-  expect(sha1(def.view(SHEET10))).toBe('f985d40db8ba539c832dbb5f4cf1d0630e0e3e19');
-  expect(sha1(def.view(SHEET10, { small: true }))).toBe('4394e0424d61b55386d26070559ad7766e5a3865');
+  expect(sha1(def.view(SHEET10))).toBe('78dc69955792d8020b4d4ed63d7fdac2d318a981');
+  expect(sha1(def.view(SHEET10, { small: true }))).toBe('06cfaaab79287d051cc9c208ddef8fd30d3815b6');
   // A charted sheet's thumbnail is its chart, landscape already.
   const chart = def.view('---\nchart: bar\n---\n' + SHEET10, { small: true, thumb: true })[0];
   expect(chart.w).toBeGreaterThan(chart.h);

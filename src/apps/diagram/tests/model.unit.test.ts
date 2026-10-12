@@ -518,8 +518,8 @@ test('a thumbnail of a family tree more than twice as wide as tall is its middle
   // A diagram no wider than twice its height is drawn whole.
   const mind = templates().find((x) => x.id === 'mind-launch')!.doc;
   expect(def.view(mind, { small: true, thumb: true })).toEqual(def.view(mind, { small: true }));
-  expect(sha1(def.view(BRONTES))).toBe('911de8141e5dedfd8e032ad6a9e6f9a8ca9c7a0f');
-  expect(sha1(def.view(BRONTES, { small: true }))).toBe('911de8141e5dedfd8e032ad6a9e6f9a8ca9c7a0f');
+  expect(sha1(def.view(BRONTES))).toBe('e39d71aadcedf8365e1a5fc3ab21f445ed072e9f');
+  expect(sha1(def.view(BRONTES, { small: true }))).toBe('e39d71aadcedf8365e1a5fc3ab21f445ed072e9f');
 });
 
 describe("the separators in a thing's words", () => {

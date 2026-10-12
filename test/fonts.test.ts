@@ -65,15 +65,16 @@ test('each Sans, Serif and Mono face has a fallback of the device’s just befor
 
 const fileOf = (src: string) => /url\(['"]?\/fonts\/([^'")]+)['"]?\)/.exec(src)?.[1];
 
-test('the faces: Plex Sans and Serif in four, Mono in two, Arabic and Devanagari in two; 400 and 600 only', () => {
+test('the faces: Plex Sans and Serif in four, Mono in two, Arabic, Hebrew and Devanagari in two; 400 and 600 only', () => {
   const by = (family: string) => faces.filter((f) => f.family === family).map((f) => `${f.weight} ${f.style}`);
   const four = ['400 normal', '400 italic', '600 normal', '600 italic'];
   expect(by('IBM Plex Sans')).toEqual(four);
   expect(by('IBM Plex Serif')).toEqual(four);
   expect(by('IBM Plex Mono')).toEqual(['400 normal', '600 normal']);
   expect(by('IBM Plex Sans Arabic')).toEqual(['400 normal', '600 normal']);
+  expect(by('IBM Plex Sans Hebrew')).toEqual(['400 normal', '600 normal']);
   expect(by('IBM Plex Sans Devanagari')).toEqual(['400 normal', '600 normal']);
-  expect(faces).toHaveLength(14);
+  expect(faces).toHaveLength(16);
   for (const f of faces) {
     expect(f.display, f.family).toBe('swap');
     // A page in a script Plex does not draw downloads nothing: every face waits behind the characters it has.
@@ -83,8 +84,10 @@ test('the faces: Plex Sans and Serif in four, Mono in two, Arabic and Devanagari
   const range = (family: string) => faces.find((f) => f.family === family)!.range;
   expect(range('IBM Plex Sans Arabic')).toContain('U+0600-06FF');
   expect(range('IBM Plex Sans Devanagari')).toContain('U+0900-097F');
-  // Latin, Greek and Cyrillic are the main faces'; no Arabic or Devanagari there, no CJK anywhere.
-  for (const family of ['IBM Plex Sans', 'IBM Plex Serif', 'IBM Plex Mono']) expect(range(family)).not.toMatch(/U\+0[69]|U\+[34]E00/);
+  // Hebrew's block holds Yiddish's points and its ligatures (ײַ, U+05F0-05F2), and the presentation forms its spelling uses (אַ, אָ, ײַ).
+  expect(range('IBM Plex Sans Hebrew')).toBe('U+0590-05FF, U+FB1D-FB4F');
+  // Latin, Greek and Cyrillic are the main faces'; no Arabic, Hebrew or Devanagari there, no CJK anywhere.
+  for (const family of ['IBM Plex Sans', 'IBM Plex Serif', 'IBM Plex Mono']) expect(range(family)).not.toMatch(/U\+0[569]|U\+FB[1-4]|U\+[34]E00/);
 });
 
 test('every file the CSS names is in public/fonts/, every file there is named, and IBM’s licence is beside them', () => {
@@ -103,7 +106,7 @@ test('every file the CSS names is in public/fonts/, every file there is named, a
 test('the stacks put Plex first, the old stack behind it: the interface, the serif, the mono, the pages', () => {
   const tokens = read('src/styles/tokens.css');
   const token = (name: string) => new RegExp(`${name}:\\s*([^;]+);`).exec(tokens)![1];
-  expect(token('--to-font')).toMatch(/^'IBM Plex Sans', 'IBM Plex Sans Arabic', 'IBM Plex Sans Devanagari', system-ui, /);
+  expect(token('--to-font')).toMatch(/^'IBM Plex Sans', 'IBM Plex Sans Arabic', 'IBM Plex Sans Hebrew', 'IBM Plex Sans Devanagari', system-ui, /);
   expect(token('--to-font-serif')).toMatch(/^'IBM Plex Serif', /);
   expect(token('--to-font-mono')).toMatch(/^'IBM Plex Mono', ui-monospace, /);
   // The pages (kit/draw/draw.ts) and the Write looks (look.ts) name the same stacks the stylesheet does.

@@ -54,8 +54,10 @@ The type is IBM Plex, and the site serves it itself: no font comes from another 
 (`public/fonts/LICENSE.txt`, the SIL Open Font License 1.1, OFL-1.1), listed in `scripts/dependencies.ts`
 (`FONTS`) and declared in `src/styles/fonts.css`, each face behind its `unicode-range` so a page loads only the
 faces its words need. The browser has fonts of its own, but each system's differs in width, so the same words would
-fit a slot on one and not on another; Plex is one type everywhere, and the type the box measures in. Bengali, Korean,
-Japanese and Chinese are drawn in the device's own type, and Urdu in its Nastaliq.
+fit a slot on one and not on another; Plex is one type everywhere, and the type the box measures in. Hebrew and
+Yiddish are drawn in Plex Sans Hebrew; the Serif and Mono looks have no Hebrew face from IBM, so their Hebrew is the
+device's, as their Arabic is. Bengali, Korean, Japanese and Chinese are drawn in the device's own type, and Urdu in
+its Nastaliq.
 
 | Family | From | Version | License | For | Files |
 | --- | --- | --- | --- | --- | --- |
@@ -63,6 +65,7 @@ Japanese and Chinese are drawn in the device's own type, and Urdu in its Nastali
 | IBM Plex Serif | `@ibm/plex-serif` | 2.0.0 | OFL-1.1 | The Serif look, and the name on the home page | `IBMPlexSerif-Regular.woff2`, `IBMPlexSerif-Italic.woff2`, `IBMPlexSerif-SemiBold.woff2`, `IBMPlexSerif-SemiBoldItalic.woff2` (288.7 KB) |
 | IBM Plex Mono | `@ibm/plex-mono` | 2.5.0 | OFL-1.1 | Code, keys and the Typewriter look | `IBMPlexMono-Regular.woff2`, `IBMPlexMono-SemiBold.woff2` (97.5 KB) |
 | IBM Plex Sans Arabic | `@ibm/plex-sans-arabic` | 1.1.0 | OFL-1.1 | Arabic | `IBMPlexSansArabic-Regular.woff2`, `IBMPlexSansArabic-SemiBold.woff2` (144.8 KB) |
+| IBM Plex Sans Hebrew | `@ibm/plex-sans-hebrew` | 1.1.0 | OFL-1.1 | Hebrew and Yiddish | `IBMPlexSansHebrew-Regular.woff2`, `IBMPlexSansHebrew-SemiBold.woff2` (66.8 KB) |
 | IBM Plex Sans Devanagari | `@ibm/plex-sans-devanagari` | 1.1.0 | OFL-1.1 | Hindi | `IBMPlexSansDevanagari-Regular.woff2`, `IBMPlexSansDevanagari-SemiBold.woff2` (206.3 KB) |
 
 ## Data, not packages

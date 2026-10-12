@@ -264,7 +264,7 @@ const plex = (html: string) => {
   expect(html).not.toMatch(/font-family="?system-ui/);
   // Every face of src/styles/fonts.css, its file inline.
   const faces = [...html.matchAll(/@font-face\s*\{[^}]*\}/g)].map((m) => m[0]);
-  expect(faces).toHaveLength(14);
+  expect(faces).toHaveLength(16);
   for (const f of faces) expect(f).toMatch(/src:\s*url\('data:font\/woff2;base64,[A-Za-z0-9+/=]{1000,}'\) format\('woff2'\)/);
   expect(html).not.toContain('/fonts/');
 };

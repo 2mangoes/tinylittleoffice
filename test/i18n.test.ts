@@ -52,11 +52,11 @@ test('the browser language is matched to what is present', () => {
   expect(browserLanguage([])).toBe('en');
 });
 
-test('the browser language of the second nine: each code itself, a Chinese tag by its script', () => {
-  for (const code of ['ru', 'uk', 'pl', 'bn', 'hi', 'ur', 'ht', 'ko', 'zh-hant', 'zh-hans']) register(code, {});
-  for (const code of ['ru', 'uk', 'pl', 'bn', 'hi', 'ur', 'ht', 'ko']) {
+test('the browser language of the second nine and Hebrew and Yiddish: each code itself, a Chinese tag by its script', () => {
+  for (const code of ['ru', 'uk', 'pl', 'bn', 'hi', 'ur', 'ht', 'ko', 'he', 'yi', 'zh-hant', 'zh-hans']) register(code, {});
+  for (const code of ['ru', 'uk', 'pl', 'bn', 'hi', 'ur', 'ht', 'ko', 'he', 'yi']) {
     expect(browserLanguage([code]), code).toBe(code);
-    expect(browserLanguage([`${code}-${code === 'ur' ? 'PK' : code === 'ko' ? 'KR' : 'US'}`]), code).toBe(code);
+    expect(browserLanguage([`${code}-${code === 'ur' ? 'PK' : code === 'ko' ? 'KR' : code === 'he' ? 'IL' : 'US'}`]), code).toBe(code);
   }
   for (const tag of ['zh-TW', 'zh-HK', 'zh-MO', 'zh-Hant', 'zh-Hant-TW', 'zh-Hant-HK', 'zh-hant']) expect(browserLanguage([tag, 'en']), tag).toBe('zh-hant');
   for (const tag of ['zh-CN', 'zh-SG', 'zh', 'zh-Hans', 'zh-Hans-CN', 'zh-Hans-SG']) expect(browserLanguage([tag, 'en']), tag).toBe('zh-hans');
@@ -71,6 +71,8 @@ test('which way a language runs', () => {
   expect(directionOf('ur-PK')).toBe('rtl');
   for (const code of ['ru', 'uk', 'pl', 'bn', 'hi', 'ht', 'ko', 'zh-hant']) expect(directionOf(code), code).toBe('ltr');
   expect(directionOf('he-IL')).toBe('rtl');
+  expect(directionOf('he')).toBe('rtl');
+  expect(directionOf('yi')).toBe('rtl');
   expect(directionOf('not a tag at all!!')).toBe('ltr');
 });
 

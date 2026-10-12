@@ -16,7 +16,7 @@ export const PAPER = '#ffffff';
 export const INK = '#18181b';
 export const MUTED = '#52525b';
 /** The pages' type: IBM Plex Sans, the site's own (src/styles/fonts.css), with the system's behind it where a page is read without the site (an exported SVG or web page). */
-export const FONT = "'IBM Plex Sans', 'IBM Plex Sans Arabic', 'IBM Plex Sans Devanagari', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif";
+export const FONT = "'IBM Plex Sans', 'IBM Plex Sans Arabic', 'IBM Plex Sans Hebrew', 'IBM Plex Sans Devanagari', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif";
 
 /** A page as a complete SVG document: a picture named by its alt, unless `attrs` gives it a role and name of its own. */
 export function pageSvg(p: Page, attrs = ''): string {
@@ -85,7 +85,8 @@ export const rect = (x: number, y: number, w: number, h: number, fill: string, e
  * Urdu is measured with Arabic's widths, in Nastaliq as in Naskh: Nastaliq is taller, not wider. Its letters stack on
  * the diagonal, so a word comes out a little narrower than in Noto Sans Arabic (0.95 plain, 0.9 bold over every string
  * of src/i18n/ur.ts on the box), not the 1.15 times wider once supposed; metrics.test.ts holds ur.ts's words within a
- * tenth in Nastaliq.
+ * tenth in Nastaliq. Hebrew and Yiddish need no row: Plex Sans Hebrew sets their letters at the Latin width, within the
+ * same tenth (metrics.test.ts), and their points are marks.
  */
 const SCRIPTS: [RegExp, number, number][] = [
   [/[\p{M}\p{Cf}]/u, 0, 0],

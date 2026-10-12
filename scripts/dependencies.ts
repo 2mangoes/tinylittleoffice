@@ -43,6 +43,7 @@ export const FONTS: { family: string; from: string; version: string; for: string
   },
   { family: 'IBM Plex Mono', from: '@ibm/plex-mono', version: '2.5.0', for: 'Code, keys and the Typewriter look', files: ['IBMPlexMono-Regular.woff2', 'IBMPlexMono-SemiBold.woff2'] },
   { family: 'IBM Plex Sans Arabic', from: '@ibm/plex-sans-arabic', version: '1.1.0', for: 'Arabic', files: ['IBMPlexSansArabic-Regular.woff2', 'IBMPlexSansArabic-SemiBold.woff2'] },
+  { family: 'IBM Plex Sans Hebrew', from: '@ibm/plex-sans-hebrew', version: '1.1.0', for: 'Hebrew and Yiddish', files: ['IBMPlexSansHebrew-Regular.woff2', 'IBMPlexSansHebrew-SemiBold.woff2'] },
   {
     family: 'IBM Plex Sans Devanagari',
     from: '@ibm/plex-sans-devanagari',
@@ -211,8 +212,10 @@ The type is IBM Plex, and the site serves it itself: no font comes from another 
 (\`public/fonts/LICENSE.txt\`, the SIL Open Font License 1.1, OFL-1.1), listed in \`scripts/dependencies.ts\`
 (\`FONTS\`) and declared in \`src/styles/fonts.css\`, each face behind its \`unicode-range\` so a page loads only the
 faces its words need. The browser has fonts of its own, but each system's differs in width, so the same words would
-fit a slot on one and not on another; Plex is one type everywhere, and the type the box measures in. Bengali, Korean,
-Japanese and Chinese are drawn in the device's own type, and Urdu in its Nastaliq.
+fit a slot on one and not on another; Plex is one type everywhere, and the type the box measures in. Hebrew and
+Yiddish are drawn in Plex Sans Hebrew; the Serif and Mono looks have no Hebrew face from IBM, so their Hebrew is the
+device's, as their Arabic is. Bengali, Korean, Japanese and Chinese are drawn in the device's own type, and Urdu in
+its Nastaliq.
 
 | Family | From | Version | License | For | Files |
 | --- | --- | --- | --- | --- | --- |

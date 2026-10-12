@@ -547,8 +547,8 @@ test("a thumbnail of a drawing is the picture's own box, landscape when the pict
   expect(q.h).toBeGreaterThan(q.w);
   // Nothing drawn: the whole canvas.
   expect(def.view('', { small: true, thumb: true })[0]).toMatchObject({ w: W, h: H });
-  expect(sha1(def.view(REQUEST))).toBe('2a00cf5f987fb569f8e3578ea803609b362609b0');
-  expect(sha1(def.view(REQUEST, { small: true }))).toBe('2a00cf5f987fb569f8e3578ea803609b362609b0');
+  expect(sha1(def.view(REQUEST))).toBe('667e007ae20398a27ef3e549ade73c46133bc8aa');
+  expect(sha1(def.view(REQUEST, { small: true }))).toBe('667e007ae20398a27ef3e549ade73c46133bc8aa');
 });
 
 test("a label keeps the spaces a person typed at its lines' ends, through the document and back (no trim)", () => {

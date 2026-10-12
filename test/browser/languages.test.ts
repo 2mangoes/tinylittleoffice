@@ -124,7 +124,7 @@ for (const path of Object.keys(files)) {
     await page.viewport(390, 844);
     expect(languages()).toContain(code);
     await choose(await mount(''), code);
-    expect(document.documentElement.dir).toBe(['ar', 'ur'].includes(code.split('-')[0]) ? 'rtl' : 'ltr');
+    expect(document.documentElement.dir).toBe(['ar', 'he', 'ur', 'yi'].includes(code.split('-')[0]) ? 'rtl' : 'ltr');
     const problems = await check((await files[path]()).default);
     expect(problems, `${code}: shorten or translate these`).toEqual([]);
   });

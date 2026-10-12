@@ -2,7 +2,7 @@
  * The type each language's words are measured in by the measuring tests (label-widths, metrics): IBM Plex, the site's
  * own (src/styles/fonts.css, public/fonts/; Paul, 2026-10-11: "Use IBM Plex to measure. We use Plex everywhere!"). English
  * and every language in the Latin or Cyrillic script are measured in the slot's own font, whose stack begins with IBM
- * Plex Sans; Arabic and Hindi in Plex Sans Arabic and Plex Sans Devanagari, which the site serves behind their
+ * Plex Sans; Arabic, Hebrew and Yiddish, and Hindi in Plex Sans Arabic, Plex Sans Hebrew and Plex Sans Devanagari, which the site serves behind their
  * unicode-range. The scripts Plex is not shipped for are measured in the Noto of the script, as Android and ChromeOS
  * draw them and as the box has them (fonts-noto-core, fonts-noto-cjk, fonts-noto-extra), so a width is a width and never
  * a run of fallback boxes, nor whatever the box's fontconfig reaches for first (FreeSans for Bengali, WenQuanYi for
@@ -12,6 +12,7 @@
  * the fallback the page shows while a face is on its way (font-display: swap).
  */
 import '../../src/styles.css';
+import { languageName } from '../../src/kit/core/i18n.ts';
 
 /** The family a CSS font asks for first ("600 13.6px 'IBM Plex Sans', system-ui" → IBM Plex Sans). */
 export const firstFamily = (font: string): string =>
@@ -56,7 +57,9 @@ export const plex: Promise<unknown> = Promise.all(
     "600 16px 'IBM Plex Mono'",
   ]
     .map((font) => loadFont(font, 'Aa Жж'))
-    .concat(['400', '600'].flatMap((w) => [loadFont(`${w} 16px 'IBM Plex Sans Arabic'`, 'ع'), loadFont(`${w} 16px 'IBM Plex Sans Devanagari'`, 'क')])),
+    .concat(
+      ['400', '600'].flatMap((w) => [loadFont(`${w} 16px 'IBM Plex Sans Arabic'`, 'ع'), loadFont(`${w} 16px 'IBM Plex Sans Hebrew'`, 'א'), loadFont(`${w} 16px 'IBM Plex Sans Devanagari'`, 'क')]),
+    ),
 ).then(() => document.fonts.ready);
 await plex;
 
@@ -67,6 +70,8 @@ export const FAMILY: Record<string, string> = {
   'zh-hant': 'Noto Sans CJK TC',
   ko: 'Noto Sans CJK KR',
   ar: 'IBM Plex Sans Arabic',
+  he: 'IBM Plex Sans Hebrew',
+  yi: 'IBM Plex Sans Hebrew',
   ur: 'Noto Nastaliq Urdu',
   hi: 'IBM Plex Sans Devanagari',
   bn: 'Noto Sans Bengali',
@@ -88,4 +93,4 @@ export function installed(family: string, sample: string): boolean {
 }
 
 /** Every family the measuring tests use, with words to try it on (a language's name in itself, in its script). */
-export const FAMILIES: [string, string][] = Object.entries(FAMILY).map(([lang, family]): [string, string] => [family, new Intl.DisplayNames([lang], { type: 'language' }).of(lang)!]);
+export const FAMILIES: [string, string][] = Object.entries(FAMILY).map(([lang, family]): [string, string] => [family, languageName(lang)]);

@@ -41,7 +41,7 @@ fi
 
 fc-cache -f "$dest" >/dev/null
 families=$(fc-scan --format '%{family[0]}\n' "$dest" | sort -u)
-for family in 'IBM Plex Sans' 'IBM Plex Serif' 'IBM Plex Mono' 'IBM Plex Sans Arabic' 'IBM Plex Sans Devanagari'; do
+for family in 'IBM Plex Sans' 'IBM Plex Serif' 'IBM Plex Mono' 'IBM Plex Sans Arabic' 'IBM Plex Sans Hebrew' 'IBM Plex Sans Devanagari'; do
   grep -qx "$family" <<<"$families" || {
     echo "fontconfig reads no $family in $dest" >&2
     exit 1

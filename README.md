@@ -10,9 +10,10 @@ document, encrypted with a key the server never sees, until the link expires. Sh
 carry a preview, a picture of the first page kept readable for a month; Share has the switch.
 
 Ten apps: Word Processor, Outliner, Presentation Builder, Spreadsheet, Calculator, Drawing Tool, Diagram Maker,
-Animator, Calendar and Trip Planner, each with templates; nineteen languages; a password on any document; files in
-the formats other programs read. An agent starts at [/llms.txt](public/llms.txt); `npx tinylittleoffice` is the
-same from the command line ([packages/doc](packages/doc/README.md)).
+Animator, Calendar and Trip Planner, each with templates; twenty-one languages, Hebrew and Yiddish the latest, with
+Arabic, Hebrew, Urdu and Yiddish right to left; a password on any document; files in the formats other programs
+read. An agent starts at [/llms.txt](public/llms.txt); `npx tinylittleoffice` is the same from the command line
+([packages/doc](packages/doc/README.md)).
 
 ## Developers
 

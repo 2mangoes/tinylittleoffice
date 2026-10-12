@@ -26,6 +26,7 @@ test('every language with no region opens on its home', () => {
     de: 'DE',
     es: 'MX',
     fr: 'FR',
+    he: 'IL',
     hi: 'IN',
     ht: 'HT',
     it: 'IT',
@@ -37,6 +38,7 @@ test('every language with no region opens on its home', () => {
     ru: 'RU',
     uk: 'UA',
     ur: 'PK',
+    yi: 'US',
     'zh-hans': 'CN',
     'zh-hant': 'TW',
   };
@@ -48,7 +50,8 @@ test('every language with no region opens on its home', () => {
     expect(homeCountry(language, []), language).toBe(code);
     // The browser's language with no region, or another language's region, changes nothing.
     expect(homeCountry(language, [language.split('-')[0], 'en-GB']), language).toBe(code);
-    expect(homeView(language, ['en-AU']), language).toEqual(at(code));
+    // The United States is New York City (Yiddish's home), as for English.
+    expect(homeView(language, ['en-AU']), language).toEqual(code === 'US' ? NYC : at(code));
   }
 });
 

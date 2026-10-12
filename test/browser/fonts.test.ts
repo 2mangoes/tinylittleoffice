@@ -38,11 +38,15 @@ test('the Serif look resolves to IBM Plex Serif, code to IBM Plex Mono', async (
   document.body.innerHTML = '';
 });
 
-test('Arabic and Devanagari are drawn by Plex Sans Arabic and Plex Sans Devanagari, behind their unicode-range', async () => {
+test('Arabic, Hebrew and Devanagari are drawn by Plex Sans Arabic, Plex Sans Hebrew and Plex Sans Devanagari, behind their unicode-range', async () => {
   await plex;
   expect(document.fonts.check("16px 'IBM Plex Sans Arabic'", 'العربية')).toBe(true);
+  expect(document.fonts.check("16px 'IBM Plex Sans Hebrew'", 'עברית ייִדיש')).toBe(true);
   expect(document.fonts.check("16px 'IBM Plex Sans Devanagari'", 'हिन्दी')).toBe(true);
   expect(draws('IBM Plex Sans Arabic', 'العربية')).toBe(true);
+  // Hebrew, and Yiddish with its points and its ligature (ײַ, אָ).
+  expect(draws('IBM Plex Sans Hebrew', 'עברית')).toBe(true);
+  expect(draws('IBM Plex Sans Hebrew', 'ייִדיש ײַ אָ')).toBe(true);
   expect(draws('IBM Plex Sans Devanagari', 'हिन्दी')).toBe(true);
   // The Latin face has no Arabic: its range leaves Arabic to the face that has it.
   const latin = [...document.fonts].find((f) => f.family.replace(/["']/g, '') === 'IBM Plex Sans' && f.weight === '400' && f.style === 'normal')!;
