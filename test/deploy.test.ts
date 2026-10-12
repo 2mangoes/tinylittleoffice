@@ -113,7 +113,8 @@ function deploy(files: Record<string, string>, env: Record<string, string> = {},
       mkdirSync(join(dir, path, '..'), { recursive: true });
       writeFileSync(join(dir, path), text);
     }
-    const clean = Object.fromEntries(Object.entries(process.env).filter(([k]) => !SECRETS.includes(k)));
+    // Neither the secrets nor the runner's own identity (ACTIONS_ID_TOKEN_REQUEST_URL on GitHub, which turns provenance on) reach the dry run unless a test passes them.
+    const clean = Object.fromEntries(Object.entries(process.env).filter(([k]) => !SECRETS.includes(k) && !k.startsWith('ACTIONS_')));
     let PATH = clean.PATH ?? '';
     const log = join(dir, '..', `${dir.split('/').at(-1)}.log`);
     if (stub) {

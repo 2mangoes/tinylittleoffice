@@ -41,7 +41,8 @@ test('/llms.txt has one example per app, a plain link each, and each lints clean
   }
 });
 
-test('the three rules agents break first are in both files, from the one template', async () => {
+// The skill is made three times over here, from every template: a slow runner takes longer than vitest's five seconds.
+test('the three rules agents break first are in both files, from the one template', { timeout: 60_000 }, async () => {
   const skill = await makeSkill();
   const rules = /## Three rules agents break first\n\n([\s\S]*?)\n## /.exec(skill)![1];
   expect(rules).toContain('two spaces');
