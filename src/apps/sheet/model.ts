@@ -77,16 +77,18 @@ export function typeName(c: number, cols: Column[], type: ColType = cols[c]?.typ
 }
 /** Whether a column goes by a default name (its letter, or what it holds), which follows its type and place. */
 const isDefaultName = (c: number, cols: Column[]): boolean => isLetterName(cols[c].name) || cols[c].name === typeName(c, cols);
-/** A column nobody has typed: words in the first, numbers in the second (Paul, 2026-10-12: a sheet's defaults), words after that. */
+/** A column a sheet grows on its own (a blank sheet's three, or one typed past the edge): words in the first, numbers in
+ * the second (Paul, 2026-10-12: a sheet's defaults), words after that. A column put in by hand, here or in a page's
+ * table, holds words. */
 export const defaultType = (c: number): ColType => (c === 1 ? 'number' : 'text');
-const col = (c: number, type: ColType = defaultType(c)): Column => ({ name: letterName(c), type });
+const col = (c: number, type: ColType = 'text'): Column => ({ name: letterName(c), type });
 
 /** The document's first table as a sheet, with everything the grid draws. */
 export function readSheet(doc: Doc): SheetView {
   const at = firstTable(doc);
   const table = (at >= 0 && tableAt(doc, at)) || blankTable();
   const cols = [...table.cols];
-  while (cols.length < MIN_COLS) cols.push(col(cols.length));
+  while (cols.length < MIN_COLS) cols.push(col(cols.length, defaultType(cols.length)));
   const ev = evaluateTable(table);
   const values = ev.values.map((row) => cols.map((_, c) => row[c] ?? null));
   const used = usedSize(table);
@@ -143,9 +145,14 @@ class Builder {
 /** The document given a table if it has none (three letter-named text columns), and columns out to `cols` where a command needs them. */
 function ensure(b: Builder, cols = 0): Builder {
   if (b.at < 0)
-    b.push({ op: 'splice', at: b.doc.blocks.length, n: 0, blocks: [{ k: 'table', cols: Array.from({ length: Math.max(MIN_COLS, Math.min(MAX_COLS, cols)) }, (_, c) => col(c)), rows: [] }] });
+    b.push({
+      op: 'splice',
+      at: b.doc.blocks.length,
+      n: 0,
+      blocks: [{ k: 'table', cols: Array.from({ length: Math.max(MIN_COLS, Math.min(MAX_COLS, cols)) }, (_, c) => col(c, defaultType(c))), rows: [] }],
+    });
   const have = b.table.cols.length;
-  if (cols > have) b.push({ op: 'cols', at: b.at, c: have, n: 0, cols: Array.from({ length: Math.min(MAX_COLS, cols) - have }, (_, i) => col(have + i)) });
+  if (cols > have) b.push({ op: 'cols', at: b.at, c: have, n: 0, cols: Array.from({ length: Math.min(MAX_COLS, cols) - have }, (_, i) => col(have + i, defaultType(have + i))) });
   return b;
 }
 

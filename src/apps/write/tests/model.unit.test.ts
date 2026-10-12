@@ -103,7 +103,7 @@ test("a table's rows and columns, by their menus: put in, taken out, named; a ra
   const w = (ops: ReturnType<typeof tableRowsIn>) => write(applyAll(doc, ops));
   expect(w(tableRowsIn(doc, at, 1))).toBe('Before\n\nA | B\n--- | ---\n1 | =A1*2\n| |\n2 | =A3*2\n\nAfter\n');
   expect(w(tableRowsOut(doc, at, 0, 0))).toBe('Before\n\nA | B\n--- | ---\n2 | =A1*2\n\nAfter\n');
-  expect(w(tableColIn(doc, at, 1))).toBe('Before\n\nA | ColB:number | B\n--- | --- | ---\n1 |  | =A1*2\n2 |  | =A2*2\n\nAfter\n');
+  expect(w(tableColIn(doc, at, 1))).toBe('Before\n\nA | ColB | B\n--- | --- | ---\n1 |  | =A1*2\n2 |  | =A2*2\n\nAfter\n');
   // A column taken out with what it holds: a formula that pointed into it says so.
   expect(w(tableColOut(doc, at, 0))).toBe('Before\n\n| B |\n| --- |\n| =#REF*2 |\n| =#REF*2 |\n\nAfter\n');
   expect(w(tableRename(doc, at, 0, 'Qty'))).toBe('Before\n\nQty | B\n--- | ---\n1 | =A1*2\n2 | =A2*2\n\nAfter\n');
