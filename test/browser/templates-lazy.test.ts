@@ -7,7 +7,7 @@ import { render, html } from 'lit';
 import { mount, tick, until } from './helpers.ts';
 import { appOf } from '../../src/kit/apps.ts';
 import { decodeDoc } from '../../src/kit/codec.ts';
-import { templatesOf, type ToTemplates } from '../../src/kit/home.ts';
+import { forgetTemplates, templatesOf, type ToTemplates } from '../../src/kit/home.ts';
 import type { Template } from '../../src/kit/app.ts';
 import { UI } from '../../src/kit/icons.ts';
 import { onLanguage, register, setLanguage } from '../../src/kit/i18n.ts';
@@ -15,6 +15,8 @@ import { templates as sheetTemplates } from '../../src/apps/sheet/templates.ts';
 
 afterEach(async () => {
   await setLanguage(null);
+  // A load still on its way from this test must not land in the next one's cache (it did, on a slow runner).
+  await forgetTemplates();
   history.replaceState(null, '', location.pathname);
 });
 
@@ -98,6 +100,7 @@ test("a pointer over the drawer's app row, inside a document, asks for that app'
   const dialog = shell.querySelector<HTMLDialogElement>('dialog.to-drawer')!;
   await until(() => dialog.open && shell.querySelectorAll('.to-drawer-apps .to-app-head').length > 0);
   const write = appOf('write')!;
+  await forgetTemplates();
   expect(templatesOf(write)).toBeUndefined();
   const row = [...shell.querySelectorAll<HTMLElement>('.to-drawer-apps .to-app-head')].find((r) => r.querySelector('.to-app-open span')!.textContent === 'Word Processor')!;
   row.dispatchEvent(new PointerEvent('pointerenter'));

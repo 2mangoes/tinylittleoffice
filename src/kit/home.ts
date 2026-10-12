@@ -54,14 +54,23 @@ const arrived = new Map<string, Template[]>();
 /** The apps whose templates a pointer has already asked for. */
 const asking = new Map<string, Promise<Template[]>>();
 // Their names are read in the language of the moment: a language chosen, they are asked for again.
-onLanguage(() => (arrived.clear(), asking.clear()));
+let era = 0;
+onLanguage(() => forgetTemplates());
 /** An app's templates if they have arrived, else undefined. */
 export const templatesOf = (app: AppDef): Template[] | undefined => arrived.get(app.id);
 /** An app's templates, asked for: its chunk is fetched the first time (a pointer over its row asks ahead of the tap), and the names are read again in the language of the moment. */
 export async function loadTemplates(app: AppDef): Promise<Template[]> {
+  const at = era;
   const list = await app.templates();
-  arrived.set(app.id, list);
+  // A load that set out before a forgetting (a language chosen, a test's reset) does not land in the cache after it.
+  if (at === era) arrived.set(app.id, list);
   return list;
+}
+/** Everything forgotten, and what is still on its way told not to land (a language chosen; the tests, between two that must not share). */
+export function forgetTemplates(): void {
+  era++;
+  arrived.clear();
+  asking.clear();
 }
 /** Intent: a pointer over an app's row fetches its templates' chunk ahead of the tap, once, so its list is full as it opens (and the drawer's Find, once something is typed, asks for every app's). */
 export function preloadTemplates(app: AppDef): Promise<Template[]> {
