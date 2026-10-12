@@ -132,7 +132,7 @@ export class ToLinkPop extends LitElement {
             ${tool({ label: t('Set link'), icon: UI.check, does: () => this.set() })}`
         : html`<a class="to-link-href" href=${this.href} target="_blank" rel="noopener" title=${this.href} @pointerdown=${keep}>${this.href}</a>
             ${tool({ label: t('Open link'), icon: UI.open, keep: true, does: () => this.open() })}
-            ${tool({ label: t('Edit link'), icon: UI.pen, keys: 'Mod+K', keep: true, does: () => this.ask(this.rect!, this.href) })}
+            ${tool({ label: t('Change link'), icon: UI.pen, keys: 'Mod+K', keep: true, does: () => this.ask(this.rect!, this.href) })}
             ${tool({ label: t('Remove link'), icon: UI.unlink, keep: true, does: () => (this.hide(), this.dispatchEvent(new CustomEvent('link-remove', { bubbles: true }))) })}`;
     return html`<div class="to-link-pop" popover=${POPOVER ? 'manual' : nothing} role="dialog" aria-label=${t('Link')} ?hidden=${!POPOVER && !this.shown}>${inner}</div>`;
   }

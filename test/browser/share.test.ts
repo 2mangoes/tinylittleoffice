@@ -63,11 +63,12 @@ test('the head: the title, and where the link fits in one line', async () => {
   await until(() => d.dialog.open);
 });
 
-test('Copy link and Copy display link copy the two links; each says where it opens', async () => {
+test('Edit link and Present link copy the two links (Paul, 2026-10-12); each says where it opens', async () => {
   const shell = await written(null!);
   const d = await open(shell);
   const [link, display] = [d.querySelector<HTMLButtonElement>('.to-copy-link')!, d.querySelector<HTMLButtonElement>('.to-copy-display')!];
-  expect(link.textContent).toContain('Copy link');
+  expect(link.textContent).toContain('Edit link');
+  expect(display.textContent).toContain('Present link');
   expect(link.querySelector('small')!.textContent).toBe('Opens in the editor');
   expect(display.querySelector('small')!.textContent).toBe('Opens as pages to read');
   // Equal, side by side.
@@ -280,7 +281,7 @@ test('with the switch on (it is, unless turned off), Bluesky uploads one card of
   expect(new URL(x).searchParams.get('url')).toBe(link);
 });
 
-test('with the switch off, nothing is uploaded and the link has no ?c=; the choice is kept; Copy link and Email never upload', async () => {
+test('with the switch off, nothing is uploaded and the link has no ?c=; the choice is kept; Edit link and Email never upload', async () => {
   const shell = await written(null!, '---\ntitle: Quiet\n---\nNot for a feed.\n');
   const posted = cards();
   const opened = vi.spyOn(window, 'open').mockImplementation(() => null);

@@ -81,7 +81,8 @@ export default {
 
   // ---- sharing: the Share dialog (kit/core/shell.ts), where the link fits (kit/share/limits.ts), the arrival banner ----
   'A copy opened in a new tab': '在新标签页中打开的副本',
-  'Copy display link': '复制展示链接',
+  'Edit link': '编辑链接',
+  'Present link': '演示链接',
   'Copy into a new document': '复制为新文档',
   'Copy link': '复制链接',
   'Copy of {title}': '{title}的副本',
@@ -252,7 +253,7 @@ export default {
   'Not an address': '不是地址',
   'Set link': '设置链接',
   'Open link': '打开链接',
-  'Edit link': '编辑链接',
+  'Change link': '编辑链接',
   'Remove link': '移除链接',
   // The selection bubble's name: what can be done to the words selected.
   'Format': '格式',

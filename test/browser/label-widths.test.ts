@@ -247,7 +247,7 @@ test('the slots are found: the bar commands that show their words, the menus’ 
     expect(line, m.cmd).toBeLessThan(374);
   }
   expect(bar[0].font).toMatch(/px/);
-  expect(measures.filter((m) => m.slot === 'dialog').map((m) => m.key)).toEqual(expect.arrayContaining(['Copy link']));
+  expect(measures.filter((m) => m.slot === 'dialog').map((m) => m.key)).toEqual(expect.arrayContaining(['Edit link']));
   // A row's words are its name alone, the instructions on its hint line (Paul, 2026-10-10): the pen's take one line,
   // and a row whose English did take two would give every language two.
   const pen = menu.find((m) => m.cmd === 'draw.insert.pen')!;

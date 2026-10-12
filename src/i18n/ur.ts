@@ -82,7 +82,8 @@ export default {
 
   // ---- sharing: the Share dialog (kit/core/shell.ts), where the link fits (kit/share/limits.ts), the arrival banner ----
     'A copy opened in a new tab': 'نئے ٹیب میں کھلی ایک کاپی',
-    'Copy display link': 'ڈسپلے لنک کاپی کریں',
+    'Edit link': 'ترمیم کا لنک',
+    'Present link': 'پیش کرنے کا لنک',
     'Copy into a new document': 'نئی دستاویز میں کاپی کریں',
     'Copy link': 'لنک کاپی کریں',
     'Copy of {title}': '{title} کی کاپی',
@@ -253,7 +254,7 @@ export default {
     'Not an address': 'پتہ نہیں ہے',
     'Set link': 'لنک لگائیں',
     'Open link': 'لنک کھولیں',
-    'Edit link': 'لنک بدلیں',
+    'Change link': 'لنک بدلیں',
     'Remove link': 'لنک ہٹائیں',
   // The selection bubble's name: what can be done to the words selected.
     'Format': 'فارمیٹ',
@@ -1553,7 +1554,6 @@ export default {
     '{n} of {count}': '{count} میں سے {n}',
     '{n} over': '{n} زیادہ',
     'Password copied': 'پاس ورڈ کاپی ہو گیا',
-    'For you when presenting, never on the slide': 'پیش کرتے وقت آپ کے لیے، سلائیڈ پر کبھی نہیں',
     'Guest': 'مہمان',
     'Name the line': 'لکیر کا نام رکھیں',
     'Name this column': 'اس کالم کا نام رکھیں',

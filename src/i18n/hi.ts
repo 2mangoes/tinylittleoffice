@@ -81,7 +81,8 @@ export default {
 
   // ---- sharing: the Share dialog (kit/core/shell.ts), where the link fits (kit/share/limits.ts), the arrival banner ----
   'A copy opened in a new tab': 'एक कॉपी नए टैब में खुली',
-  'Copy display link': 'डिस्प्ले लिंक कॉपी करें',
+  'Edit link': 'संपादन लिंक',
+  'Present link': 'प्रस्तुति लिंक',
   'Copy into a new document': 'नए दस्तावेज़ में कॉपी करें',
   'Copy link': 'लिंक कॉपी करें',
   'Copy of {title}': '{title} की कॉपी',
@@ -252,7 +253,7 @@ export default {
   'Not an address': 'पता नहीं है',
   'Set link': 'लिंक लगाएँ',
   'Open link': 'लिंक खोलें',
-  'Edit link': 'लिंक बदलें',
+  'Change link': 'लिंक बदलें',
   'Remove link': 'लिंक हटाएँ',
   // The selection bubble's name: what can be done to the words selected.
   'Format': 'फ़ॉर्मैट',

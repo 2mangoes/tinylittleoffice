@@ -79,7 +79,7 @@ test('the keyboard alone: home, an app, typing, a menu, undo, share', async ({ p
 
   // Share, by its key: the dialog with the focus inside it, Tab stays inside, Escape closes it.
   await page.keyboard.press('ControlOrMeta+Shift+s');
-  const dialog = page.locator('dialog[open]').filter({ hasText: 'Copy link' });
+  const dialog = page.locator('dialog[open]').filter({ hasText: 'Edit link' });
   await expect(dialog).toBeVisible();
   expect(await page.evaluate(() => !!document.activeElement?.closest('dialog[open]'))).toBe(true);
   for (let i = 0; i < 8; i++) {

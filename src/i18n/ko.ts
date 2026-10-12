@@ -81,7 +81,8 @@ export default {
 
   // ---- sharing: the Share dialog (kit/core/shell.ts), where the link fits (kit/share/limits.ts), the arrival banner ----
   'A copy opened in a new tab': '사본을 새 탭에서 열었어요',
-  'Copy display link': '보기 링크 복사',
+  'Edit link': '편집 링크',
+  'Present link': '발표 링크',
   'Copy into a new document': '새 문서로 복사',
   'Copy link': '링크 복사',
   'Copy of {title}': '{title} 사본',
@@ -252,7 +253,7 @@ export default {
   'Not an address': '주소가 아니에요',
   'Set link': '링크 설정',
   'Open link': '링크 열기',
-  'Edit link': '링크 편집',
+  'Change link': '링크 편집',
   'Remove link': '링크 제거',
   // The selection bubble's name: what can be done to the words selected.
   'Format': '서식',

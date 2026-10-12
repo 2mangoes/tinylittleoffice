@@ -83,7 +83,8 @@ export default {
 
   // ---- sharing: the Share dialog (kit/core/shell.ts), where the link fits (kit/share/limits.ts), the arrival banner ----
   'A copy opened in a new tab': 'Yon kopi ki louvri nan yon nouvo onglè',
-  'Copy display link': 'Kopye lyen afichaj',
+  'Edit link': 'Lyen pou modifye',
+  'Present link': 'Lyen pou prezante',
   'Copy into a new document': 'Kopye nan yon nouvo dokiman',
   'Copy link': 'Kopye lyen',
   'Copy of {title}': 'Kopi {title}',
@@ -254,7 +255,7 @@ export default {
   'Not an address': 'Se pa yon adrès',
   'Set link': 'Mete lyen',
   'Open link': 'Louvri lyen',
-  'Edit link': 'Modifye lyen',
+  'Change link': 'Modifye lyen',
   'Remove link': 'Retire lyen',
   // The selection bubble's name: what can be done to the words selected.
   'Format': 'Fòma',

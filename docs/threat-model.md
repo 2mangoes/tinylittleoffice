@@ -43,7 +43,7 @@ Mastodon, X, LinkedIn or the device's share sheet) with "Show a preview of the f
 turned off, sends a picture of the document's first page, its title and its first 200 characters to the site's
 `/card`, and the link shared carries the card's id (`?c=<id>`, before the `#`) so the network's fetcher can show
 it. The card is not encrypted, because the network must read it: it is kept readable for a month, to anyone with
-its id, then deleted. The document itself and its link are never sent. Copy link and Email make no card, nor does a
+its id, then deleted. The document itself and its link are never sent. Edit link, Present link and Email make no card, nor does a
 document with a password. A link with no card previews as its app's generic card, whose page is gray shapes.
 
 There is no shared document: every link is a copy. Whoever opens one has their own, and what they change is in

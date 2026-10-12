@@ -83,7 +83,8 @@ export default {
 
   // ---- sharing: the Share dialog (kit/core/shell.ts), where the link fits (kit/share/limits.ts), the arrival banner ----
   'A copy opened in a new tab': 'Копію відкрито в новій вкладці',
-  'Copy display link': 'Скопіювати посилання для показу',
+  'Edit link': 'Посилання для редагування',
+  'Present link': 'Посилання для показу',
   'Copy into a new document': 'Скопіювати в новий документ',
   'Copy link': 'Скопіювати посилання',
   'Copy of {title}': 'Копія: {title}',
@@ -254,7 +255,7 @@ export default {
   'Not an address': 'Це не адреса',
   'Set link': 'Задати посилання',
   'Open link': 'Відкрити посилання',
-  'Edit link': 'Змінити посилання',
+  'Change link': 'Змінити посилання',
   'Remove link': 'Прибрати посилання',
   // The selection bubble's name: what can be done to the words selected.
   'Format': 'Формат',

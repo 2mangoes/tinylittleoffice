@@ -60,7 +60,7 @@ export const NETWORK = {
     what: 'A preview card, at the site’s own /card: posted when you share with a network (Bluesky, Mastodon, X, LinkedIn or the share sheet) with “Show a preview of the first page” on; fetched later by that network',
     when: 'on share',
     carries: 'A picture of the first page, the title and the first words, kept readable for a month so the network can fetch them; never the document, never its link',
-    stops: 'The switch “Show a preview of the first page” in Share, turned off; Copy link and Email never make one, nor does a document with a password',
+    stops: 'The switch “Show a preview of the first page” in Share, turned off; Edit link, Present link and Email never make one, nor does a document with a password',
     by: 'kit/share/card.ts',
   },
   tiles: {

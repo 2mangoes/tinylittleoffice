@@ -1,6 +1,6 @@
 // A keystroke costs what it changed (Paul, 2026-10-10: "it's starting to feel really slow"). In the Word
 // Processor with a 1,500-word document: the link is projected once typing pauses, not per key; it is flushed at once
-// before anything reads it (the window's blur, leaving the page, Copy link); the bar is drawn again only when what it
+// before anything reads it (the window's blur, leaving the page, Edit link); the bar is drawn again only when what it
 // shows changes; and one keystroke's synchronous work stays inside a budget.
 import { afterEach, expect, test, vi } from 'vitest';
 import { link, mount, settled, tick, until } from './helpers.ts';
@@ -74,7 +74,7 @@ test('typing forty letters quickly writes the link at most twice; docchange fire
   expect(linkText().includes(TYPED)).toBe(true);
 });
 
-test('the window losing focus, leaving the page and Copy link each flush the link at once', async () => {
+test('the window losing focus, leaving the page and Edit link each flush the link at once', async () => {
   const { shell, ed, text } = await opened();
   await typeFast(ed, text, ' blur');
   expect(linkText().includes(' blur')).toBe(false);
@@ -88,7 +88,7 @@ test('the window losing focus, leaving the page and Copy link each flush the lin
 
   await typeFast(ed, text, ' copy');
   expect(linkText().includes(' copy')).toBe(false);
-  // Copy link reads the link: it is current before the copy is made.
+  // Edit link reads the link: it is current before the copy is made.
   expect(decodeDoc(parseHash(new URL(shell.link).hash).payload).includes(' copy')).toBe(true);
   expect(linkText().includes(' copy')).toBe(true);
 });

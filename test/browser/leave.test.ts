@@ -120,7 +120,7 @@ test('Copy the link and go: when the clipboard refuses, the dialog stays open an
   }
 });
 
-test('after Share’s Copy link the icon goes home at once; changed again, it asks again', async () => {
+test('after Share’s Edit link the icon goes home at once; changed again, it asks again', async () => {
   const clip = navigator.clipboard.writeText;
   navigator.clipboard.writeText = async () => {};
   try {

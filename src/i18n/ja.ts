@@ -80,7 +80,8 @@ export default {
 
   // ---- sharing: the Share dialog (kit/core/shell.ts), where the link fits (kit/share/limits.ts), the arrival banner ----
   'A copy opened in a new tab': 'コピーを新しいタブで開きました',
-  'Copy display link': '表示用リンクをコピー',
+  'Edit link': '編集用リンク',
+  'Present link': '発表用リンク',
   'Copy into a new document': '新しいドキュメントにコピー',
   'Copy link': 'リンクをコピー',
   'Copy of {title}': '{title}のコピー',
@@ -251,7 +252,7 @@ export default {
   'Not an address': 'アドレスではありません',
   'Set link': 'リンクを設定',
   'Open link': 'リンクを開く',
-  'Edit link': 'リンクを編集',
+  'Change link': 'リンクを編集',
   'Remove link': 'リンクを外す',
   // The selection bubble's name: what can be done to the words selected.
   'Format': '書式',

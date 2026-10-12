@@ -82,7 +82,8 @@ export default {
 
   // ---- sharing: the Share dialog (kit/core/shell.ts), where the link fits (kit/share/limits.ts), the arrival banner ----
   'A copy opened in a new tab': 'نسخة فُتحت في تبويب جديد',
-  'Copy display link': 'نسخ رابط العرض',
+  'Edit link': 'رابط التحرير',
+  'Present link': 'رابط العرض',
   'Copy into a new document': 'نسخ إلى مستند جديد',
   'Copy link': 'نسخ الرابط',
   'Copy of {title}': 'نسخة من {title}',
@@ -253,7 +254,7 @@ export default {
   'Not an address': 'ليس عنوانًا',
   'Set link': 'تعيين الرابط',
   'Open link': 'فتح الرابط',
-  'Edit link': 'تحرير الرابط',
+  'Change link': 'تحرير الرابط',
   'Remove link': 'إزالة الرابط',
   // The selection bubble's name: what can be done to the words selected.
   'Format': 'تنسيق',

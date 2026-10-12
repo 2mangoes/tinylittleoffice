@@ -80,7 +80,8 @@ export default {
 
   // ---- sharing: the Share dialog (kit/core/shell.ts), where the link fits (kit/share/limits.ts), the arrival banner ----
   'A copy opened in a new tab': 'Eine Kopie in einem neuen Tab geöffnet',
-  'Copy display link': 'Anzeigelink kopieren',
+  'Edit link': 'Bearbeitungslink',
+  'Present link': 'Präsentationslink',
   'Copy into a new document': 'In ein neues Dokument kopieren',
   'Copy link': 'Link kopieren',
   'Copy of {title}': 'Kopie von {title}',
@@ -251,7 +252,7 @@ export default {
   'Not an address': 'Keine Adresse',
   'Set link': 'Link setzen',
   'Open link': 'Link öffnen',
-  'Edit link': 'Link ändern',
+  'Change link': 'Link ändern',
   'Remove link': 'Link entfernen',
   // The selection bubble's name: what can be done to the words selected.
   'Format': 'Format', // same

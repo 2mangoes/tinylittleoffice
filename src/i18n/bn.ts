@@ -71,7 +71,8 @@ export default {
 
   // ---- sharing: the Share dialog (kit/core/shell.ts), where the link fits (kit/share/limits.ts), the arrival banner ----
   'A copy opened in a new tab': 'একটি কপি নতুন ট্যাবে খুলেছে',
-  'Copy display link': 'ডিসপ্লে লিংক কপি করুন',
+  'Edit link': 'সম্পাদনার লিংক',
+  'Present link': 'উপস্থাপনার লিংক',
   'Copy into a new document': 'নতুন নথিতে কপি করুন',
   'Copy link': 'লিংক কপি করুন',
   'Copy of {title}': '{title}-এর কপি',
@@ -234,7 +235,7 @@ export default {
   'Not an address': 'ঠিকানা নয়',
   'Set link': 'লিংক দিন',
   'Open link': 'লিংক খুলুন',
-  'Edit link': 'লিংক বদলান',
+  'Change link': 'লিংক বদলান',
   'Remove link': 'লিংক সরান',
   'Format': 'ফরম্যাট',
   'done': 'সম্পন্ন',
