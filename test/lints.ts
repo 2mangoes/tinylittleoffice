@@ -328,11 +328,11 @@ export function graphProblems(mods: Module[], shared: Record<string, string> = {
   return problems;
 }
 
-/** The kit's six folders, docs/kit.md saying what goes in each. */
+/** The kit's six folders, docs/kernel.md §11 saying what goes in each. */
 export const KIT_FOLDERS = ['core', 'ui', 'text', 'draw', 'file', 'share'];
 
 /**
- * The kit's place for each file (docs/kit.md), each rule a sentence the failure prints with what breaks it:
+ * The kit's place for each file (docs/kernel.md §11), each rule a sentence the failure prints with what breaks it:
  *   - no file sits at src/kit/ itself: every one is in one of the six folders;
  *   - no index.ts in the kit: no barrel hides what a file reaches for, and every import names its file;
  *   - every import of the kit names a module of the tree in one of the six folders.

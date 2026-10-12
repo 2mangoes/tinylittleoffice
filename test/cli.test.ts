@@ -187,3 +187,28 @@ test('file --as webm says the video is made in the browser and exits 2, and the 
   }
   expect(run(['help'])).toMatch(/tinyoffice file <link>[^\n]*\n[^\n]*\n[^\n]*--as webm: made in the browser/);
 });
+
+// The skill an agent installs: the repository's skill/tinyoffice/SKILL.md (npm run skill writes it), printed as it is,
+// or written where Claude Code reads a skills folder, <dir>/tinyoffice/SKILL.md, never over a file already there
+// unless asked (Paul, 2026-10-12: "How are people supposed to install the skill or know it's there?").
+test('skill prints the skill; --into writes tinyoffice/SKILL.md, refuses a second time, and replaces it with --force', () => {
+  const skill = readFileSync(fileURLToPath(new URL('../skill/tinyoffice/SKILL.md', import.meta.url)), 'utf8');
+  expect(run(['skill'])).toBe(skill);
+  const dir = join(mkdtempSync(join(tmpdir(), 'tlo-skill-')), 'skills');
+  const to = join(dir, 'tinyoffice', 'SKILL.md');
+  expect(run(['skill', '--into', dir])).toBe(`${to}\n`);
+  expect(readFileSync(to, 'utf8')).toBe(skill);
+  writeFileSync(to, 'a skill of my own\n');
+  const again = spawnSync(process.execPath, [CLI, 'skill', '--into', dir], { encoding: 'utf8' });
+  expect([again.status, again.stdout, again.stderr]).toStrictEqual([1, '', `tinyoffice: ${to} is there already; --force replaces it\n`]);
+  expect(readFileSync(to, 'utf8')).toBe('a skill of my own\n');
+  expect(run(['skill', '--force', '--into', dir])).toBe(`${to}\n`);
+  expect(readFileSync(to, 'utf8')).toBe(skill);
+  const where = spawnSync(process.execPath, [CLI, 'skill', '--into'], { encoding: 'utf8' });
+  expect(where.status).toBe(2);
+  // The help names it beside shapes, example and try, with the line that installs it for Claude Code.
+  const help = run(['help']);
+  for (const cmd of ['shapes', 'example', 'try', 'skill']) expect(help).toContain(`tinyoffice ${cmd} `);
+  expect(help.indexOf('tinyoffice skill ')).toBeGreaterThan(help.indexOf('tinyoffice try '));
+  expect(help).toContain('npx tinylittleoffice skill --into ~/.claude/skills');
+});

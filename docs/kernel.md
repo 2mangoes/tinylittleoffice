@@ -18,6 +18,9 @@ named here by their ids (write, sheet, deck, …); docs/tlo.md is each one's doc
 | `src/doc/notes.ts` | `foldNotes`, `notesOf`, `noteRuns`, `noteNumbers`, `markNotes`, `referenceNotes`, `listNumbers`, `linkify`, `runLinks`, `linkTarget`, `linkable` |
 | `src/doc/table.ts` | `Table`, `tableAt`, `withTable`, A1 addressing, locks, formula reference remaps, `copyCells`/`pasteCells`/`fillCells`/`seriesOf`/`sortRows`/`clearCells` |
 | `src/doc/formula.ts` | the evaluator: `evaluate(doc, at)`, `evaluateTable`, `FUNCTIONS`, `parseLiteral`, `formatCell`, `formatValue` |
+| `src/doc/text.ts` | the text layer (§10): `textOf`, `textMarkdown`, `textCounts`, `textWords` |
+| `src/doc/json.ts` | the document as JSON (docs/tlo.md): `docJson`, `jsonDoc`, checked against the schema |
+| `src/doc/index.ts` | the kernel's public surface: an app imports from here and nowhere deeper |
 
 ### Types
 
@@ -58,10 +61,11 @@ export interface Run {
   fn?: string;               // a footnote: the note's words as inline Markdown
 }
 
-export type ColType = 'text' | 'number' | 'money' | 'percent' | 'date' | 'time' | 'check' | 'url' | 'rich' | 'long' | 'icon' | 'name';
-export interface Column { name: string; type: ColType }
+export type ColType = 'text' | 'number' | 'money' | 'percent' | 'date' | 'time' | 'check' | 'url' | 'rich' | 'long' | 'icon' | 'name' | 'option';
+export interface Column { name: string; type: ColType; currency?: string }   // a money column's symbol or ISO 4217 code
 
 export const plainText = (runs: Run[]) => runs.map((r) => r.t).join('');
+// src/doc/tlo.ts
 export const text = (s: string): Run[] => parseInline(s);                 // the one way a string becomes runs
 ```
 
@@ -96,7 +100,7 @@ Why runs in the model rather than text with runs derived: every view would other
 - Tables: header row, separator of `---`/`:---:` cells, optional outer pipes; `\|` and `\\` escapes; `<br>` is a newline in a cell; rows padded to the header's width; written edged (`| a |`) when one column, when the first heading would read as another block (`# of units`), or when a row's first cell is empty.
 - Fences: ```` ``` ```` or `~~~`, three or more, the closer at least as long; written with one more backtick than the longest run inside the body; `lang` lowercased.
 - Edges: `~ A -> B: label` with `->`, `<-`, `<->`, `--`; consecutive edges written on consecutive lines.
-- Images: `![alt](url)` alone on a line, `<url>` accepted, `\]` in alt.
+- Pictures: none. `![alt](url)` reads as the words `!` and a link whose words are the alt (§1).
 - Quotes: `> ` lines merge into one block, written a line each.
 - Paragraphs: consecutive lines merge; a blank line separates; a line that would read as another block is written with a leading `\` (`guard`); a lone `|` is written as is (the deck's column break); Write's empty paragraph is `<br>`.
 - Inline: `**`, `__` (b), `*`, `_` (i; `_` not inside a word), `++` and `<u>` (u), `~~` (s), `==` (h); no space just inside a mark; backtick spans read as plain words; `[words](https?:|mailto:|tel:|#…)` links with spaces and parentheses percent-encoded on write; `:icon-name:`; `^[note]` with balanced brackets and `\]`; `\` before `` \`*_{}[]()#+-.!|~=:<>^ `` and before a space; a web or mail address read whole, marks inside it untouched, trailing `.,;:!?)` left out; marks close before trailing spaces.
@@ -141,7 +145,7 @@ replaceSpan(doc, from, to, blocks): Op[]          // one splice
 
 ### `focusFirst()` and the link
 
-`focusFirst()` is the editor's half of the open: the shell calls it once a document is first drawn for editing (a new one, a template, a link, after an unlock; not in display mode, an embed, a show link presenting, a locked document, or while a dialog is open), and each editor puts the focus in its own place with its own helper (`focusCell`, `focusBox`, `focusRow`, `focusTask`, `focusCanvas`…), `preventScroll` always: the Word Processor's first words (the caret at their start), the Spreadsheet's A1 (its words selected), the first slide's headline, the first row, the first task, the first card (else the stage's name), the Calculator's entry line, the Drawing Tool's canvas, the Animator's stage, the Diagram Maker's picture, the Calendar's today (else the month's first; a Gantt chart's first task), the Trip Planner's first stop's name (else the map). The shell never puts the focus on the title box or leaves it on the body.
+`focusFirst()` is the editor's half of the open: the shell calls it once a document is first drawn for editing (a new one, a template, a link, after an unlock; not in display mode, an embed, a show link presenting, a locked document, or while a dialog is open), and each editor puts the focus in its own place with its own helper (`focusCell`, `focusBox`, `focusRow`, `focusTask`, `focusCanvas`…), `preventScroll` always: the Word Processor's first words (the caret at their start), the Spreadsheet's A1 (its words selected), the first slide's headline, the Outliner's first row, the Calculator's entry line, the Drawing Tool's canvas, the Animator's stage, the Diagram Maker's picture, the Calendar's today (else the month's first; a Gantt chart's first task), the Trip Planner's first stop's name (else the map). The shell never puts the focus on the title box or leaves it on the body.
 
 A keystroke costs only what it changed (Paul, 2026-10-10: "it's starting to feel really slow"): `docchange` still fires with the text on every edit, but the shell projects it into the link (pack, `replaceState`, the library's keep, the tab's title) only when typing stops for two seconds (a pause in typing, not a gap between keys: the address is what the browser's history and sync record), and flushes that projection at once before anything reads the link as the document (the window's blur, the focus leaving the editor, the page hidden or left, Share and every copy of the link, exports, the password, the title box; `currentHash()` in kit/core/route.ts outside the shell). A host never parses its own echo: `ours(value)` says the shell handed back the text it last wrote. A host draws again for a `text-select` only when `selectionMoved(key)` says its bar would show something else.
 
@@ -155,7 +159,7 @@ What stays in the editor as state (not in the document) is listed last for each.
 
 **Deck** (and its pages of another geometry: zine, booklet, brochure, comic, poster, badges) — `slidesOf(doc)` over `pages(doc.blocks)`; a slide also records its block span `[from, to)`. Commands: `patch(slide)` → `replaceSpan(from, to, slideBlocks(slide))`; `addPage` → `splice` `[hr, …blocks]`; `removePage` → `splice` of the span and its `hr`; `movePage` → `move`; sub-document → the span's fence replaced; theme/transition/color/qr/sides/pages → `head`. With `<to-text>` the slide's words are edited as blocks directly: headline = the `h` block (`line` shape), bullets = the li/p blocks of the span (`lines` shape), notes = the `quote` block (`lines`); `Slide` is a layout type for drawing (view.ts) only. `loosen` stays in `read()`. State: `cur`, `showing`, `shown`, `leaving`, `noting`, `field`.
 
-**Sheet** — `sheet(doc): Sheet` is `tableAt(doc, firstTable)` padded to the drawn rows (`ROWS`, `MIN_COLS` are the view's); `evaluate(doc, at)` for values. Commands: type in a cell → `cells` 1×1; paste/fill/clear/sort → `cells` rectangles (sort writes the used rows); insert/delete rows → `rows`; add/remove column → `cols`; type or name of a column → `col`; chart → `head` (or table attr via `withTable`); lock → `head` (`withLock` result). State: `sel`, `end`, `focused`, `rowsShown`, `fillTo`, `widths`, `rowMenu`, `clip`, `picked`, `caret`, computed values.
+**Sheet** — `sheet(doc): Sheet` is `tableAt(doc, firstTable)` padded to the drawn rows (`ROWS`, `MIN_COLS` are the view's), a column nobody has typed holding words in the first, numbers in the second and words after that (`defaultType`; Paul, 2026-10-12), a column put in by hand words; `evaluate(doc, at)` for values. Commands: type in a cell → `cells` 1×1; paste/fill/clear/sort → `cells` rectangles (sort writes the used rows); insert/delete rows → `rows`; add/remove column → `cols`; type or name of a column → `col`; chart → `head` (or table attr via `withTable`); lock → `head` (`withLock` result). State: `sel`, `end`, `focused`, `rowsShown`, `fillTo`, `widths`, `rowMenu`, `clip`, `picked`, `caret`, computed values.
 
 **Trip** — `stops(doc)` from the table (`tableStops`); add/move/edit/remove stop → `rows`/`cells`/`move` of table rows (a `rows` op with `n` and `rows`); units/linked → `head`. **Draw** — `readDrawing(doc)`; a shape changed → `cells` on its row; added or taken away → `rows` (the joins renumbered by `cells`); a column wanted and missing → `cols`; alt, `grid:` and `tile:` → `head`; the pixel grid's one `p` → `splice`; the table's birth and death → `splice`. **Motion** — `readAnim(doc)`; an edit replaces the keys table (`splice`). **Calendar** — `spans(doc)` from li; edit → replace li; zone/legend → `head`. **Calc** — `readCalc(doc): { mode, lines, at, loose }`: the tape is one `p`, a line each; `mode: graph` in the head. A loose text (a list, results after the sums, `y = …` lines, a heading) is made a tape as it arrives by `tidy`, one undoable edit. Commands: a line put in → `text` at the tape's end (the first line a `splice` of the `p`); a line changed or taken away → a `text` op over that line; clear → `splice`; mode → `head` plus the clearing `splice`. State: `entry`, `recall`, the caret between key taps.
 
@@ -232,7 +236,7 @@ The editable's font-size is never below 16px (prevents the focus zoom); `focus({
 
 ### Rows chosen whole: `src/kit/text/rows.ts`
 
-Every app with rows (Outline's items, Trip's stops, the schedule's tasks) chooses rows whole through one Lit `ReactiveController`, so the keys, the handle, the drag, the clipboard and the bar under a range are the same everywhere (docs/editing.md §3, §6). The host knows its rows and its document; the controller knows nothing of either.
+Every app with rows (Outline's items, Trip's stops, the schedule's tasks, the deck's slides on its rail, the Calculator's lines) chooses rows whole through one Lit `ReactiveController`, so the keys, the handle, the drag, the clipboard and the bar under a range are the same everywhere (docs/editing.md §3, §6). The host knows its rows and its document; the controller knows nothing of either.
 
 ```ts
 const rows = new Rows<Id>(host, {
@@ -313,7 +317,7 @@ The shell is thin. `<to-shell>` (kit/core/shell.ts) keeps the route, the documen
 | `<to-share>` | kit/ui/share-dialog.ts | the Share dialog: the link and where it fits, the short link, posting, the QR code, the embed code | `to-link-copied` |
 | `<to-privacy>` | kit/ui/privacy-dialog.ts | unlock, the password, the lock beside the title (`trustButton`), the Share dialog's Password part (`renderProtect`), the Privacy dialog | `to-unlock`, `to-lock`, `to-share-open` |
 
-and, as before, the editor, `<to-drawer>` (which, with a document open, begins with This document: Share… and Download), `<to-find>`, `<to-toast>` and the shortcuts dialog. The page's keys are kit/core/keys.ts `pageKey`.
+and, as before, the editor, `<to-drawer>` (whose This document, with a document open, holds New, Share… and Download; docs/editing.md §1 gives its order), `<to-find>`, `<to-toast>` and the shortcuts dialog. The page's keys are kit/core/keys.ts `pageKey`.
 
 **The page is the visible window; the column scrolls.** `html` and `body` are `height: 100%; overflow: hidden; overscroll-behavior: none` on the screen (print flows on). `<to-chrome>` is a column exactly the visual viewport's height, set from `visualViewport.height` as it resizes (the layout viewport's while a desktop pinch has zoomed in), and the window is put back at its top whenever it or the visual viewport scrolls (`pinWindow`; iOS slides the window, with no word from the visual viewport, for a caret it finds under the keyboard), the caret then brought into sight the column's way, so the layout viewport never slides. In it: the header, the banners, and `.to-column`, which holds the bar's place and `.to-main`, `overflow-y: auto; overscroll-behavior: contain`, the document. The column's height is `--to-col-h` on the chrome, for what fills it (the Drawing Tool's canvas, the Diagram Maker's picture, the Animator's stage, the Trip Planner's map, the Spreadsheet's box).
 
@@ -330,8 +334,8 @@ and, as before, the editor, `<to-drawer>` (which, with a document open, begins w
 ## 8. The grammar, written once, and the properties fuzzed from it (2026-10-10)
 
 TLO's grammar is written formally once, in `test/doc/tlo-grammar.ts` (`TLO_EBNF`, ISO 14977 EBNF read by a forty-line
-reader, `readGrammar`): the head, the nine blocks, attributes, tables and their typed headings, fences, edges,
-images, and the inline marks, links, icons, notes and escapes, lenient forms and all. It is dev only: nothing in it
+reader, `readGrammar`): the head, the eight blocks, attributes, tables and their typed headings, fences, edges,
+and the inline marks, links, icons, notes and escapes, lenient forms and all. It is dev only: nothing in it
 ships, and the parser in `src/doc/tlo.ts` is not generated from it. The grammar documents the parser; where the two
 disagree, a property below fails naming the text, and §2's "Grammar the kernel must preserve" decides which is wrong.
 
@@ -441,3 +445,23 @@ says in the order it says it, and the pages are a picture of it.
 - **Elsewhere.** The `.html` file carries it the same way before its pages; print is the pages. `textMarkdown(nodes)`
   writes it through the kernel's writer, footnotes in the reference form, stable when read and written again: the API's
   `text(link)` and `markdown(app, text)` and `tinyoffice read --text`; `measure` counts its `words` and `headings`.
+
+---
+
+## 11. The kit's six folders
+
+`src/kit/` is what every app shares: the shell that holds an app, the editor, drawing, files, and sharing. It is six
+folders, and nothing sits beside them. Every file begins by saying what it does; this section says where a file goes.
+
+- [core/](../src/kit/core/): the contract between an app and the shell, and the link: the app definition and the registry, the shell, commands and keys, the strings, the store, the route, the codec, the one voice (`toast()`, which the page's toast shows).
+- [ui/](../src/kit/ui/): the elements round a document and the chrome: the bar, the menus and dialogs, the drawer, find, home, Insert, the toast, the size of everything and the theme.
+- [text/](../src/kit/text/): the editor's model and its commands: `<to-text>`, its operations, the clipboard, history, rows and columns, the diff, and a document's text layer.
+- [draw/](../src/kit/draw/): drawing pages and what is drawn on them: the page, charts, the icons and emoji, QR codes, the mark, a preview card's picture, motion and steps.
+- [file/](../src/kit/file/): a document as a file, in and out: every export, PDF, GIF, WebM, zip, XLSX, CSV, ICS, and opening a file dropped on the page.
+- [share/](../src/kit/share/): sharing, sealing and keeping: short links, preview cards, passwords and sealing, privacy, the library of kept documents and its search, and the site kept for offline (the service worker under Save in browser).
+
+A new file goes in the folder whose line fits it. A file that fits none is a sign the design wants a word first, not a
+seventh folder or a file at the root.
+
+Every import names its file (`'../../kit/draw/draw.ts'`): there is no barrel `index.ts` and no path alias, so a file
+says what it reaches for and the build leaves out what nothing reaches. `test/lints.test.ts` holds all of this.

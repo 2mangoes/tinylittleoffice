@@ -1,5 +1,5 @@
 /**
- * Two builds of one commit are the same bytes (docs/transparency.md §1 item 3): the commit is built twice,
+ * Two builds of one commit are the same bytes (docs/threat-model.md, "Checking it yourself"): the commit is built twice,
  * each in a fresh checkout at a different path and depth (scripts/builds.ts), every file of both dist/ folders is
  * hashed, and the first difference is printed; this checkout's dist/ too, when it is that commit's build. Nothing a build writes may come from the clock, the
  * machine, the path it is built at or the order a folder is read in; a difference here is one of those.

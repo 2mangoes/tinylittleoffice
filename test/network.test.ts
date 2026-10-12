@@ -1,4 +1,4 @@
-// What leaves the browser (docs/transparency.md §1 items 1 and 7): every host the source names is on the
+// What leaves the browser (docs/threat-model.md, "Checking it yourself"): every host the source names is on the
 // one list (src/kit/core/network.ts), src/ names a host only through that list, no analytics, error-reporting,
 // font-CDN or tag-manager host appears anywhere, and docs/network.md and /network are what the list says.
 // Builds are not run in tests, so this reads the source the build is made from.

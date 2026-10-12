@@ -62,8 +62,8 @@ address.
   and icons and the Latin faces when it is installed, and each file a page fetches afterwards (an app's templates,
   a language, a face). It asks only the site, and only for its files; a page is asked of the network first, so a
   visit online is never stale. It never keeps a document (the document is after the "#", which never reaches it)
-  nor a link's \`?c=\` page. Turning Save in browser off unregisters it and deletes everything it kept; under
-  Private nothing registers.
+  nor a link's \`?c=\` page. Turning Save in browser off unregisters it and deletes everything it kept; while
+  it is off nothing registers.
 - **Links.** A link in a document that leaves the site opens only after the reader is shown where it goes
   and says Go (kit/ui/link-guard.ts), in a new tab with no referrer.
 

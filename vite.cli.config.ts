@@ -5,19 +5,34 @@
  *   --mode api   packages/doc/dist/api.js: src/api.ts and everything it imports (the kernel, the apps' definitions,
  *                the layouts the lint reads, the examples) in one file; the package's import, `import { link }
  *                from 'tinylittleoffice'`, the Node twin of the site's /api.js
- *   --mode cli   packages/doc/dist/tinyoffice.js: the command line (packages/doc/tinyoffice.ts), importing ./api.js
+ *   --mode cli   packages/doc/dist/tinyoffice.js: the command line (packages/doc/tinyoffice.ts), importing ./api.js,
+ *                and beside it dist/skill/tinyoffice/SKILL.md, the agent skill as `npm run skill` wrote it, which
+ *                `tinyoffice skill` prints or installs (a package carries only what is in its own folder)
  *
  * `npm run build:cli` makes both; the deploy makes them before it publishes, and test/package.test.ts packs the
  * package and installs it. What only a browser loads (the editors and their styles) is in api.js too, never run.
  */
 import { defineConfig } from 'vite';
+import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 const API = resolve(import.meta.dirname, 'src/api.ts');
+const SKILL = resolve(import.meta.dirname, 'skill/tinyoffice/SKILL.md');
 
 export default defineConfig(({ mode }) => ({
   publicDir: false,
   logLevel: 'warn',
+  plugins:
+    mode === 'api'
+      ? []
+      : [
+          {
+            name: 'skill',
+            generateBundle() {
+              this.emitFile({ type: 'asset', fileName: 'skill/tinyoffice/SKILL.md', source: readFileSync(SKILL, 'utf8') });
+            },
+          },
+        ],
   build: {
     target: 'node24',
     outDir: resolve(import.meta.dirname, 'packages/doc/dist'),

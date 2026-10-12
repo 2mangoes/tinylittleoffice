@@ -27,7 +27,7 @@ Two consequences follow, and the rest of this page is mostly their detail:
   other code (compromised, coerced, or simply changed) could send the fragment anywhere. The answer to that
   is being able to check that the live site is this repository's build: a build is reproducible, the site
   names the commit it was built from in `/version.json`, and `npm run verify-deploy` builds that commit and
-  compares every file (docs/transparency.md §1 item 3). Short of someone checking, this is trust in the operator.
+  compares every file (Checking it yourself, below). Short of someone checking, this is trust in the operator.
 
 What is kept, and where: Save in browser is off by default, and then nothing is kept on the device (but two preferences that say
 nothing of a document, below) and nothing on any server; the link is the document. Turning it on is a choice, and keeps documents and short links on the device, in the browser's own
@@ -35,7 +35,7 @@ storage, never on a server. It also keeps the site itself for offline: a service
 `src/kit/share/offline.ts`) keeps the site's own files in the browser's cache (the pages, the app file and its
 stylesheet, the Latin faces, and each templates file, language or face a page fetches afterwards), never a document,
 which is after the "#" and never reaches it, and never a link's `?c=` page with its card's words. Turning Save in
-browser off unregisters the worker and deletes its caches; under Private none is registered. A short link is the one thing a server holds of a document: the document, encrypted with a key the
+browser off unregisters the worker and deletes its caches; while it is off none is registered. A short link is the one thing a server holds of a document: the document, encrypted with a key the
 server never sees, until it expires.
 
 **A preview card is readable on the server, by the person's choice.** Sharing with a network from Share (Bluesky,
@@ -82,8 +82,8 @@ right, set apart from the words around it, in every language, and an email addre
 reversing or invisible characters is refused rather than drawn. This shows where a link goes; it does not judge
 whether the place is honest.
 
-**A tracking picture inside a document.** A document fetches nothing from any other site: there are no
-pictures from the web and no embeds, so it cannot hold a tracking pixel. Markdown's picture line reads as a
+**A tracking picture inside a document.** A document fetches nothing from any other site but a trip's map tiles
+(by the Map switch; The map's provider, below): there are no pictures from the web and no embeds, so it cannot hold a tracking pixel. Markdown's picture line reads as a
 link, which asks before it opens (above).
 
 **A lost phone with Save in browser on.** Off is the default and writes nothing to the device but two preferences
@@ -201,6 +201,71 @@ whatever reaches any of them, Cloudflare and the account's operator could see.
 What none of them can see: a document's words, a password, who a link was sent to, or that a
 given person opened a given document, beyond the timing and address of requests that a person could try to
 match up.
+
+## Checking it yourself
+
+None of this is meant to be taken on trust. The strongest fact is architectural: no server holds documents, so
+there is nothing to breach, subpoena or leak but the ciphertext of short links not yet expired. Everything here
+makes the rest checkable by a stranger, and a test holds each.
+
+- **What leaves your browser.** A page, `docs/network.md` and `/network` on the site (plain HTML, no script),
+  generated from the code: every request the site can make, when it happens, what it carries, and what stops it.
+  `src/kit/core/network.ts` is the one list of every host the site can reach (what, when, what it carries, what
+  stops it, the module, the CSP directive); every module that asks the web takes its host from it.
+  `scripts/network-doc.ts` (`npm run docs:network`, run first by `npm run build`) writes the two pages, and
+  `scripts/headers.ts` writes `connect-src` and `img-src` from the list (`test/csp.test.ts`: every host in its
+  directive and nothing else). Builds are not run in tests, so `test/network.test.ts` reads the source (`src/`,
+  `tinier/`) instead of the built site: every host must be on the list (or localhost, or an XML namespace), `src/`
+  names hosts only through the list, and the committed page must be what the list says.
+- **No telemetry, asserted.** No analytics, no error reporting, no fonts from a CDN, no fetch the person did not
+  cause: `test/network.test.ts` fails on any analytics, error-reporting, font-CDN, tag-manager or
+  session-recording host (a deny-list of 22) anywhere in `src/`, `tinier/`, `public/`, `index.html`,
+  `vite.config.ts` and `wrangler.jsonc`.
+- **Reproducible, attested builds.** Two builds of one commit are the same bytes: `scripts/reproducible.ts`
+  (`npm run build:verify`) builds it twice in fresh checkouts at different paths and depths (`scripts/builds.ts`),
+  hashes every file and prints the first difference, and compares this checkout's `dist/` too when it is that
+  commit's build; CI runs it after its build. The build writes `dist/version.json` (`scripts/version.ts`: the
+  commit, its tag or "", the commit's own date in UTC, the policy's script hashes; the shape is
+  `src/kit/core/version.ts`), checked by `scripts/check-build.ts`; About reads it when it opens and says "Running
+  commit abc1234", a link to the commit on GitHub, and the home page's foot ends with the tag or the commit.
+  `scripts/verify-deploy.ts` (`npm run verify-deploy -- <url> [commit]`) reads the site's `/version.json`, builds
+  that commit in a fresh checkout (or uses `dist/` when it is that build), fetches every file but `_headers`, and
+  prints a table; exit 1 on any difference. A deploy is a tag `v*`, run on a public GitHub runner with a public
+  log, which checks the live site against the build, builds the tag again, attests `dist/**` and a byte-stable
+  archive of it (`actions/attest-build-provenance`), and makes the release with notes naming the commit and the
+  policy's script hashes (`scripts/release-notes.ts`). Every action is pinned by its commit hash, never a tag
+  (`test/deploy.test.ts`). `docs/self-host.md`, "How tinylittleoffice.com is deployed", is how to check one yourself.
+- **Dependencies you can read in one sitting.** `docs/dependencies.md`, written by `npm run docs:deps`
+  (`scripts/dependencies.ts`) from package.json, the lockfile and `scripts/dependencies.json`: each dependency,
+  its exact version, its license, the native API it beat and why, and the size it adds; `test/dependencies.test.ts`
+  and CI hold the page current. Nothing vendored minified; the lockfile committed; `npm audit` in CI with no
+  ignores. The fonts are IBM's own woff2 files, copied as released into `public/fonts/` with the SIL Open Font
+  License beside them, served under `font-src 'self'` and nothing else (`test/csp.test.ts`).
+- **The crypto in the open.** WebCrypto with no library, one short document each with the byte layouts:
+  `docs/crypto/password.md` and `docs/crypto/short-links.md`. The vectors are `test/vectors/password.json` and
+  `short-links.json`, checked by `test/crypto-vectors.test.ts` against the kit and against WebCrypto called by
+  hand. "Logs nothing" for tinier is held by `test/tinier.test.ts`.
+- **A copy of your own.** `docs/self-host.md` deploys the same code to anyone's Cloudflare account, the shortener
+  included, and About names the commit a copy runs, so a self-hoster's copy is distinguishable.
+
+Later: an independent audit of the crypto and the shortener, published in full; a public test dashboard; a signed
+SBOM with each release.
+
+## How it is described
+
+Never as an absolute (Paul, 2026-10-11: "Saying we never save anything is wrong; we should say that's the
+default"). Save in browser is off by default, and then nothing is kept on the device and nothing on any server;
+turning it on is a choice, and keeps documents and short links on the device, never on a server; a short link is
+the one thing a server holds, the document encrypted with a key the server never sees, until it expires. No
+document ever reaches us otherwise.
+
+The words are the README's first two paragraphs, and in a sentence, for the page's description and the share
+cards: *A tiny office suite where the link is the document. No accounts. Nothing is saved anywhere unless you
+choose to keep it on this device.*
+
+The metaphor still holds: the note passed in class. The note is the thing, not a reference to something kept
+elsewhere. Lead with "the link is the document", not "the URL encodes the document"; the technical readers find
+the second behind the first. This page and the network page use none of these words.
 
 ## If you find a hole
 

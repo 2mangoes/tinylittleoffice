@@ -41,8 +41,8 @@
     <meta name="twitter:description" content="A tiny office suite where the link is the document. No accounts. Nothing is saved anywhere unless you choose to keep it on this device." />
     <meta name="twitter:image" content="%VITE_SITE_URL%og.png" />
     <script>
-      // Light or dark, before the first paint: the choice in the menu if there is one (kept on the device under Private
-      // and Saved alike: kit/core/store.ts), otherwise whatever the device says (kit/ui/theme.ts keeps it afterwards).
+      // Light or dark, before the first paint: the choice in the menu if there is one (kept on the device with Save in browser
+      // on or off alike: kit/core/store.ts), otherwise whatever the device says (kit/ui/theme.ts keeps it afterwards).
       // In the page, so a first visit asks for no file of its own; the build writes its hash into the
       // Content-Security-Policy beside the apps' page scripts (vite.config.ts), and no other inline script runs.
       (function () {

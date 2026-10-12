@@ -52,7 +52,7 @@ export const NETWORK = {
     what: 'The service worker, /sw.js, with Save in browser on: it keeps the pages, the app file, its stylesheet, the Latin faces and each file a page fetches after, so the site opens offline',
     when: 'after a tap',
     carries: 'Which file, as the pages ask; never the document, which is after the "#" and never reaches the worker, and never a page’s "?c=" card',
-    stops: 'Save in browser, turned off: the worker is unregistered and everything it kept is deleted; under Private there is none',
+    stops: 'Save in browser, turned off: the worker is unregistered and everything it kept is deleted; while it is off there is none',
     by: 'kit/share/offline.ts, sw.ts',
   },
   card: {
@@ -100,7 +100,7 @@ export const NETWORK = {
   },
   source: {
     host: 'github.com',
-    what: 'The site’s source: the repository, “GitHub” at the home page’s foot; the commit this copy was built from and the threat model in full, in About; links',
+    what: 'The site’s source: the repository, “GitHub” at the home page’s foot; the commit this copy was built from, in About; links',
     when: 'after a tap',
     carries: 'Which page of the source; it opens in a new tab, and nothing of the document goes with it',
     stops: 'Not following the link: the commit’s name comes from the site’s own /version.json',

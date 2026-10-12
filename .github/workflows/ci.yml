@@ -4,7 +4,7 @@
 # it), the smoke run on the built site in desktop Chromium and a phone-sized WebKit (offline under Save in browser
 # too), and the policy and version the build writes. Then the lints and Prettier, the dependencies' advisories, and the
 # build made twice more to show it is the same bytes. Branch protection on main requires the job `check`
-# (docs/github-setup.md). A deploy is a tag: .github/workflows/deploy.yml.
+# (docs/self-host.md, "From GitHub, on a tag"). A deploy is a tag: .github/workflows/deploy.yml.
 # Every action is pinned by its commit, the version beside it (test/deploy.test.ts).
 name: CI
 

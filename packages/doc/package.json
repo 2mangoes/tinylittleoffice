@@ -33,6 +33,7 @@
   "files": [
     "dist/api.js",
     "dist/tinyoffice.js",
+    "dist/skill",
     "examples",
     "schema",
     "README.md"

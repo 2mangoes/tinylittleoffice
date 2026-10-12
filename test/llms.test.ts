@@ -26,6 +26,8 @@ test('/llms.txt is short: under 6 KB, its first screen under 1,500 tokens, with 
   for (const cmd of ['shapes', 'example', 'try']) expect(first).toContain(`npx tinylittleoffice ${cmd}`);
   expect(first).toContain('/llms/<app>.txt');
   expect(first).toContain('/examples/<app>.json');
+  // The skill, named in the runtime line's clause, with the line that installs it (Paul, 2026-10-12).
+  expect(first).toContain('`npx tinylittleoffice` in Node, where `skill --into ~/.claude/skills` installs this guide for Claude Code.');
   expect(short).toContain('The whole description: https://tinylittleoffice.com/llms-full.txt');
   // The plain form first, the API second.
   expect(short.indexOf('#doc=')).toBeLessThan(short.indexOf(API));

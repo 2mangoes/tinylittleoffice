@@ -147,9 +147,9 @@ export async function makeShort(skill: string, examples?: Map<string, Example[]>
       .map((a) => `\`${a.id}\``)
       .join(
         ', ',
-      )}. \`&title=\` names it, \`&by=\` says who made it, and \`&lang=\` (\`es\`, \`fr\`, \`zh-hant\`…) opens the page in one of the site's languages. The words may be in any language or script, right to left too: write for the reader. Emoji are words, put the character in; \`:name:\` is one of Lucide's icons in the line, and first in a slide's headline it is the slide's icon. Keep a link under 2,000 characters and to the shapes shown: a hand-written link is checked by nothing.`,
+      )}. \`&title=\` names it, \`&by=\` says who made it, and \`&lang=\` (\`es\`, \`zh-hant\`…) opens the page in one of the site's languages. The words may be in any language or script, right to left too: write for the reader. Emoji are words, put the character in; \`:name:\` is one of Lucide's icons in the line, and first in a slide's headline it is the slide's icon. Keep a link under 2,000 characters and to the shapes shown: a hand-written link is checked by nothing.`,
     '',
-    `With a runtime: \`${API_LINE}\` in a browser, Deno or Bun; \`npx tinylittleoffice\` in Node. To learn a shape by example:`,
+    `With a runtime: \`${API_LINE}\` in a browser, Deno or Bun; \`npx tinylittleoffice\` in Node, where \`skill --into ~/.claude/skills\` installs this guide for Claude Code. To learn a shape by example:`,
     '',
     '- `npx tinylittleoffice shapes <app>`: what the app reads, a line a shape',
     '- `npx tinylittleoffice example <app> [shape]`: the smallest document that shows it, its JSON, lint and measures',

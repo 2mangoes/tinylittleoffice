@@ -7,7 +7,7 @@
 #
 # The three secrets are the repository's (CLOUDFLARE_API_TOKEN, an account token for Workers Scripts, D1 and Account
 # Settings, and Workers Routes and Zone Read on the one zone; CLOUDFLARE_ACCOUNT_ID; NPM_TOKEN), given to the deploy
-# step alone. Who may push a tag v* is a tag ruleset (docs/github-setup.md); the environment `production` asks for no
+# step alone. Who may push a tag v* is a tag ruleset (docs/self-host.md, "From GitHub, on a tag"); the environment `production` asks for no
 # reviewer, since the tag is the approval. Every action is pinned by its commit, the version beside it, so a moved tag
 # cannot run in a job that holds a token (test/deploy.test.ts).
 name: Deploy

@@ -9,8 +9,8 @@ any copy reads it). This takes about thirty minutes, most of it waiting for a do
 
 | Worker | Config | What it is | Storage |
 | --- | --- | --- | --- |
-| the site | `wrangler.jsonc` | `dist/` as static assets, with `dist/_headers` (the Content-Security-Policy). No script runs on the server. | none |
-| tinier | `tinier/wrangler.jsonc` | the short-link service: ciphertext in, ciphertext out, a hundred links a day per address (docs/crypto/short-links.md) | D1: two tables, swept hourly by a cron trigger |
+| the site | `wrangler.jsonc` | `dist/` as static assets, with `dist/_headers` (the Content-Security-Policy), and a small Worker (`site/`) that runs first only for the home page, each app's page and `/card`: the preview cards a person sends with a link to a network | D1: the `cards` table, in the shortener's database |
+| tinier | `tinier/wrangler.jsonc` | the short-link service: ciphertext in, ciphertext out, a hundred links a day per address (docs/crypto/short-links.md) | D1: the links and the daily counts, swept hourly by a cron trigger (the cards with them) |
 
 Each has `observability` off and `workers_dev` off: no logs, and no `*.workers.dev` copy. Keep it that way
 unless you mean to change what your copy knows about its readers.
@@ -32,7 +32,7 @@ npx wrangler login
 ## 2. Your names
 
 Choose two addresses, for example `office.example.org` (the site) and `tinier.example.org`. Then change
-ours to yours, in five places:
+ours to yours, in six places:
 
 1. **The routes.** In `wrangler.jsonc` and `tinier/wrangler.jsonc`, set each
    `routes` pattern to its address, keeping `"custom_domain": true`. Cloudflare makes the DNS record and
@@ -48,8 +48,9 @@ ours to yours, in five places:
    VITE_TINIER=https://tinier.example.org/          # your short-link service
    ```
 
-4. **The policy.** In `public/_headers`, the `connect-src` names `https://tinier.tinylittleoffice.com`:
-   change it to your tinier's address, or the browser will refuse every short link.
+4. **The policy.** The build writes the `connect-src` of `dist/_headers` from `src/kit/core/network.ts`, whose
+   `tinier` entry names `tinier.tinylittleoffice.com`: change its `host` to your tinier's, or the browser will
+   refuse every short link.
 5. **The brake.** tinier counts its own, a hundred links a day per address, in D1, under a keyed hash: set the
    Worker secret `BRAKE_KEY` (tinier/wrangler.jsonc says how). The site's own Worker (`site/`, which keeps the
    preview cards a person sends with a link to a network) counts cards the same way under its own `BRAKE_KEY`.
@@ -116,7 +117,25 @@ Open your site, write something, make a short link and open it in another browse
 A fork can deploy the way tinylittleoffice.com does: `.github/workflows/deploy.yml` runs the same script on a
 GitHub runner when a tag `v*` is pushed. Put the three names above in the fork's Settings → Secrets and variables →
 Actions as repository secrets, make an environment `production` (Settings → Environments; no reviewers needed), and
-change `https://tinylittleoffice.com/` in the workflow to your address. Then:
+change `https://tinylittleoffice.com/` in the workflow to your address. The workflows assume these settings, set by
+hand on GitHub as aboard-io/tinylittleoffice has them:
+
+- Settings → Environments → `production`: no required reviewers (the tag is the approval), no wait timer;
+  **Deployment branches and tags**: selected, the tag rule `v*`, so nothing but a tag deploys. Stronger: keep the
+  three secrets in that environment rather than the repository (the workflow reads them the same way), so only a
+  run from a tag `v*` can read them at all, not any workflow someone with write access adds on a branch.
+- A tag ruleset (Settings → Rules → Rulesets → New tag ruleset): enforcement **Active**, target the pattern `v*`;
+  **Restrict creations**, **Restrict updates**, **Restrict deletions**, **Block force pushes**; bypass list: the
+  **Maintain** role (and the organization's admins), so only maintainers can create a tag `v*`, and so only they
+  can deploy. The workflows assume this ruleset: a tag `v*` that exists is a maintainer's decision to ship.
+- Settings → Actions → General → Workflow permissions: leave **Read repository contents** as the default; the
+  deploy workflow asks for its own per job: the deploy `contents: read` and `id-token: write` (npm's provenance),
+  the release `contents: write`, `id-token: write` and `attestations: write`.
+- A branch ruleset on `main` requiring the check `check` (the CI workflow's one job, `.github/workflows/ci.yml`:
+  every check a deploy runs, then the lints, the advisories and the build made twice), chosen once CI has run on
+  main once.
+
+Then:
 
 ```sh
 git tag -s v1.0.0 -m "v1.0.0" && git push origin v1.0.0
@@ -150,7 +169,8 @@ gh attestation verify tinylittleoffice-v1.0.0.tar.gz -R aboard-io/tinylittleoffi
 A copy of your own is not ours, and its readers deserve to know which one they are reading. The About
 dialog (the menu, then About) names the commit the copy was built from, linked to that commit in the
 repository it came from; the site serves the same as `/version.json` (the commit, the tag, the build time
-and the policy's script hashes; docs/transparency.md §1 item 3). Build from a commit you have pushed, so
+and the policy's script hashes; docs/threat-model.md, "Checking it yourself"), and the home page's foot ends
+with its tag or commit. Build from a commit you have pushed, so
 anyone can read the code your copy runs, and anyone can build it again and compare.
 
 ## Keeping up
@@ -161,4 +181,4 @@ migration: the format is read leniently and written the same way on every copy.
 ## Without a short-link service
 
 It is optional. Without tinier, the short link is the one thing that does not work: Share still copies
-the link and the display link, draws the QR code and hands the link to the device's share sheet.
+the Edit link and the Present link, draws the QR code and hands the link to the device's share sheet.

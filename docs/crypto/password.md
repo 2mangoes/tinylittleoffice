@@ -92,9 +92,9 @@ version, outside the encryption. The plain (unsealed) payloads start with their 
   both: that password does not open this link, and if they are sure of it, the link may have been cut short
   when it was copied (a chat that trims a long line), to ask for it again or for a short link.
 - **The rest of the visit.** The key is kept in memory, as a non-extractable `CryptoKey`, so the document
-  (and another link with the same salt) opens again without asking. The password itself is never kept, under
-  Saved or not, and the key is never written anywhere.
-- **The library.** Under Saved, a sealed document is kept as its payload with no title and no first words.
+  (and another link with the same salt) opens again without asking. The password itself is never kept, Save in
+  browser on or off, and the key is never written anywhere.
+- **The library.** With Save in browser on, a sealed document is kept as its payload with no title and no first words.
 
 ## What someone with the link can do
 

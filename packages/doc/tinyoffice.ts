@@ -27,10 +27,16 @@
  *                                                     failing formulas, and whether the link fits in a short
  *                                                     link (short: {fits, over}), as JSON
  *        (read --text, lint and measure also take <app> <file>, or <app> and stdin)
+ *   tinyoffice skill [--into <dir>] [--force]         the agent skill, SKILL.md, on stdout; --into writes it to
+ *                                                     <dir>/tinyoffice/SKILL.md, as Claude Code reads a skills folder
+ * The skill is skill/tinyoffice/SKILL.md, written by `npm run skill` from its template; the package carries it as
+ * dist/skill/tinyoffice/SKILL.md (vite.cli.config.ts copies it there), and this reads whichever sits beside it.
  * In the published package (npm: tinylittleoffice) it is dist/tinyoffice.js, this file bundled with all it
  * imports (vite.cli.config.ts), since Node strips no types under node_modules. What it says to `help` is USAGE.
  */
-import { existsSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { apps, compare, example, file, fromJson, fromTlo, lint, link, markdown, measure, PASSWORD_REFUSED, plain, read, shapes, templates, toJson, tryDraft } from '../../src/api.ts';
 import { slug } from '../../src/kit/draw/draw.ts';
 
@@ -61,6 +67,10 @@ const USAGE = `tinyoffice (or tinylittleoffice, as npx runs it):
                                                     every shape of the app's without one
   tinyoffice try <app> <file|-> [--json]            a draft in one call: its lint, its measures and its JSON
                                                     (exit 1 when the lint finds something)
+  tinyoffice skill [--into <dir>] [--force]         the agent skill (SKILL.md) on stdout; --into <dir> writes
+                                                    <dir>/tinyoffice/SKILL.md, refusing a file already there
+                                                    unless --force. For Claude Code:
+                                                    npx tinylittleoffice skill --into ~/.claude/skills
 `;
 
 // Piped into `head`, the rest is not wanted: stop quietly.
@@ -71,7 +81,7 @@ const flags: Record<string, string | true> = {};
 const args: string[] = [];
 for (let i = 0; i < rest.length; i++) {
   const a = rest[i];
-  if (a.startsWith('--')) flags[a.slice(2)] = i + 1 < rest.length && !rest[i + 1].startsWith('--') && !['display', 'plain', 'json', 'text', 'seal'].includes(a.slice(2)) ? rest[++i] : true;
+  if (a.startsWith('--')) flags[a.slice(2)] = i + 1 < rest.length && !rest[i + 1].startsWith('--') && !['display', 'plain', 'json', 'text', 'seal', 'force'].includes(a.slice(2)) ? rest[++i] : true;
   else args.push(a);
 }
 const str = (k: string) => (typeof flags[k] === 'string' ? (flags[k] as string) : undefined);
@@ -82,6 +92,16 @@ function die(message: string, code = 2): never {
   process.exit(code);
 }
 const words = (path?: string) => (path && path !== '-' ? (existsSync(path) ? readFileSync(path, 'utf8') : die(`no file ${path}`)) : readFileSync(0, 'utf8'));
+
+/**
+ * The skill's text: dist/skill/tinyoffice/SKILL.md beside the built command line in the package, else the
+ * repository's skill/tinyoffice/SKILL.md beside this file's folder in a checkout. Never a copy of its own.
+ */
+function skillText(): string {
+  const here = dirname(fileURLToPath(import.meta.url));
+  const found = [join(here, 'skill', 'tinyoffice', 'SKILL.md'), join(here, '..', '..', 'skill', 'tinyoffice', 'SKILL.md')].find((p) => existsSync(p));
+  return found ? readFileSync(found, 'utf8') : die('the skill is not here: in a checkout, npm run skill writes it');
+}
 
 /** A document from a link, a .tlo file, or an app and a file (or stdin). */
 function documentOf(): { app: string; text: string } {
@@ -203,6 +223,17 @@ async function main() {
         );
       if (t.lint.length) process.exitCode = 1;
       return;
+    }
+    case 'skill': {
+      const text = skillText();
+      const into = str('into');
+      if (flags.into === true) die("--into which folder? (for Claude Code, ~/.claude/skills or a project's .claude/skills)");
+      if (!into) return void process.stdout.write(text);
+      const to = join(into, 'tinyoffice', 'SKILL.md');
+      if (existsSync(to) && !flags.force) die(`${to} is there already; --force replaces it`, 1);
+      mkdirSync(dirname(to), { recursive: true });
+      writeFileSync(to, text);
+      return out(to);
     }
     case '':
     case 'help':

@@ -1,5 +1,5 @@
 /**
- * Is the live site the build of its commit? (docs/transparency.md §1 item 3.) The site's own /version.json
+ * Is the live site the build of its commit? (docs/threat-model.md, "Checking it yourself".) The site's own /version.json
  * says which commit it runs; that commit (or the one named) is built here, in a fresh checkout
  * (scripts/builds.ts), or this checkout's dist/ is used when it is that commit's build already; then every
  * file the build serves is fetched from the site, hashed and compared. A table, a line per file, and exit 1

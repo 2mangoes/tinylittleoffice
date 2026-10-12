@@ -56,7 +56,7 @@ dd{margin:0}
 <dl>
 <dt>When</dt><dd>after a tap</dd>
 <dt>Carries</dt><dd>Which file, as the pages ask; never the document, which is after the &quot;#&quot; and never reaches the worker, and never a page’s &quot;?c=&quot; card</dd>
-<dt>Stopped by</dt><dd>Save in browser, turned off: the worker is unregistered and everything it kept is deleted; under Private there is none</dd>
+<dt>Stopped by</dt><dd>Save in browser, turned off: the worker is unregistered and everything it kept is deleted; while it is off there is none</dd>
 <dt>Made by</dt><dd><code>kit/share/offline.ts, sw.ts</code></dd>
 <dt>Allowed by</dt><dd><code>'self'</code></dd>
 </dl>
@@ -118,7 +118,7 @@ dd{margin:0}
 </section>
 <section class="reach">
 <h3><code>github.com</code></h3>
-<p>The site’s source: the repository, “GitHub” at the home page’s foot; the commit this copy was built from and the threat model in full, in About; links.</p>
+<p>The site’s source: the repository, “GitHub” at the home page’s foot; the commit this copy was built from, in About; links.</p>
 <dl>
 <dt>When</dt><dd>after a tap</dd>
 <dt>Carries</dt><dd>Which page of the source; it opens in a new tab, and nothing of the document goes with it</dd>
@@ -190,7 +190,7 @@ dd{margin:0}
 <li><strong>A preview.</strong> Only when a person shares with a network from Share with &quot;Show a preview of the first page&quot; on: a picture of the first page, the title and the first words go to the site's own <code>/card</code>, and the link shared carries the card's id (<code>?c=</code>) before the &quot;#&quot;, where the network's fetcher reads it. The card is kept readable for a month, then forgotten (tinier/cards.ts); the document and its link are never sent.</li>
 <li><strong>Sharing to a service.</strong> Share's Bluesky, Mastodon, X and LinkedIn open that service's own compose box in a new tab, with the title and the link in it: no script of theirs runs here. The link is the document, so whoever reads the post can read it. &quot;Any https address&quot; there is the Mastodon server the person names.</li>
 <li><strong>Fonts and icons.</strong> Self-hosted, from the site itself: the type is IBM Plex (<code>public/fonts/</code>), each face fetched when a page's words need it, and the policy's <code>font-src</code> is <code>'self'</code> alone; the icons and the emoji are in the site's own app file.</li>
-<li><strong>Offline.</strong> With Save in browser on, the site's service worker (<code>/sw.js</code>, from <code>src/sw.ts</code>) keeps the site's own files on the device: the eleven pages, the app file, its stylesheet, the manifest and icons and the Latin faces when it is installed, and each file a page fetches afterwards (an app's templates, a language, a face). It asks only the site, and only for its files; a page is asked of the network first, so a visit online is never stale. It never keeps a document (the document is after the &quot;#&quot;, which never reaches it) nor a link's <code>?c=</code> page. Turning Save in browser off unregisters it and deletes everything it kept; under Private nothing registers.</li>
+<li><strong>Offline.</strong> With Save in browser on, the site's service worker (<code>/sw.js</code>, from <code>src/sw.ts</code>) keeps the site's own files on the device: the eleven pages, the app file, its stylesheet, the manifest and icons and the Latin faces when it is installed, and each file a page fetches afterwards (an app's templates, a language, a face). It asks only the site, and only for its files; a page is asked of the network first, so a visit online is never stale. It never keeps a document (the document is after the &quot;#&quot;, which never reaches it) nor a link's <code>?c=</code> page. Turning Save in browser off unregisters it and deletes everything it kept; while it is off nothing registers.</li>
 <li><strong>Links.</strong> A link in a document that leaves the site opens only after the reader is shown where it goes and says Go (kit/ui/link-guard.ts), in a new tab with no referrer.</li>
 </ul>
 <h2>Nothing else</h2>

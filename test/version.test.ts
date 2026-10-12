@@ -1,4 +1,4 @@
-// /version.json (docs/transparency.md §1 item 3): its shape, written from git and the policy's hashes, never the clock.
+// /version.json (docs/threat-model.md, "Checking it yourself"): its shape, written from git and the policy's hashes, never the clock.
 import { test, expect } from 'vitest';
 import { join } from 'node:path';
 import { gitFacts, versionJson, versionOf } from '../scripts/version.ts';

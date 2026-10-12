@@ -5,7 +5,7 @@ description: Make almost any small document as a shareable link by writing a Tin
 
 # Tiny Little Office links
 
-Tiny Little Office (https://tinylittleoffice.com) is an office suite whose documents live entirely in their links. You make a document by writing a URL. Nothing is uploaded: opening the link shows the document in an editor, whoever opens it can change it, and the address follows every edit once the typing stops, so the new link is the new document. The document sits after the `#`, which browsers never send to a server. Private is the default and keeps nothing on the device; a person may choose Saved, which keeps their documents in their own browser and never on a server; a short link (below) is the one thing a server holds, encrypted with a key the server never sees, until it expires.
+Tiny Little Office (https://tinylittleoffice.com) is an office suite whose documents live entirely in their links. You make a document by writing a URL. Nothing is uploaded: opening the link shows the document in an editor, whoever opens it can change it, and the address follows every edit once the typing stops, so the new link is the new document. The document sits after the `#`, which browsers never send to a server. Save in browser is off by default, and then nothing is kept on the device; a person may turn it on, which keeps their documents in their own browser and never on a server; a short link (below) is the one thing a server holds, encrypted with a key the server never sees, until it expires.
 
 Every document is one text in one format, TLO: Markdown with a few additions. If you can write Markdown you can write any app below; each section says which shapes that app reads, with one of its own templates as the example.
 
@@ -32,7 +32,7 @@ The packed form: after `#/v1/<app>/` comes one letter and then base64url bytes (
 
 ## Sharing: a link is a copy
 
-There is no shared document. Whoever opens a link gets their own copy: what they change is in their link, not in the one they were sent, and nobody else sees it unless they send their new link back. Never promise collaboration, live editing or one copy that everyone fills in. For a sign-up sheet, a form to fill in or work to hand in, tell the person that each one who opens it makes their own copy and should send their link back. A short link (below) can be updated by its owner, so later visitors get the owner's new version; it never gathers anyone else's changes.
+There is no shared document. Whoever opens a link gets their own copy: what they change is in their link, not in the one they were sent, and nobody else sees it unless they send their new link back. Never promise collaboration, live editing or one copy that everyone fills in. For a sign-up sheet, a form to fill in or work to hand in, tell the person that each one who opens it makes their own copy and should send their link back. A short link (below) cannot be changed once made and never gathers anyone's changes: a new version is a new link.
 
 ## A document inside a document
 
@@ -510,7 +510,7 @@ Templates: A weekend in Copenhagen, Iceland’s Ring Road, A Dublin food crawl, 
 
 ## Every app's files
 
-Every document downloads as a `.pdf` (its pages as pictures; Print in the browser saves one with the words still words), a picture (`.png`), a web page (`.html`), Markdown (`.md`, footnotes in Markdown's reference form) and its own text (`.tlo`: the TLO with `app: <id>` in its head, which opens as its own app when dropped on the site). A `.zip` of `.tlo` and `.md` files, a folder per app, opens the same way when dropped: every document in it is kept on the device (under Private, listed to keep or to open). A link that downloads a file as it opens is `#/v1/<app>.<ext>/<payload>`, or `view=<ext>` in the plain form.
+Every document downloads as a `.pdf` (its pages as pictures; Print in the browser saves one with the words still words), a picture (`.png`), a web page (`.html`), Markdown (`.md`, footnotes in Markdown's reference form) and its own text (`.tlo`: the TLO with `app: <id>` in its head, which opens as its own app when dropped on the site). A `.zip` of `.tlo` and `.md` files, a folder per app, opens the same way when dropped: every document in it is kept on the device (with Save in browser off, listed to keep or to open). A link that downloads a file as it opens is `#/v1/<app>.<ext>/<payload>`, or `view=<ext>` in the plain form.
 
 ## Short links
 
@@ -553,6 +553,10 @@ To learn a shape by example rather than from these pages: `npx tinylittleoffice 
 The words of a document may be in any language or script, right to left too (the kit sets the direction by the words): write for the reader. A link opens in its reader's browser's language; `link(app, text, { lang: 'ht' })` (or `--lang ht`) makes one that opens in Haitian Creole, or any language the site has (`es`, `pt-br`, `zh-hant`, `he`, `yi`, …), whatever the reader's browser says.
 
 A page of your own can import `https://tinylittleoffice.com/tinyoffice.js` instead: `link({ app, doc, title })` writes the plain link and `embed({ app, doc, title })` the `<iframe>` that shows the document's pages. In the API, `encode`/`decode` are the codec, `parse`/`write` the kernel (the document as a head and blocks, and back), `tlo`/`fromTlo` a `.tlo` file's text, `file(app, text, ext)` a file of the app's own formats that needs no browser.
+
+## The skill
+
+This guide is also a skill for Claude Code: the same words, under front matter that says when to use them. The npm package carries it: `npx tinylittleoffice skill` prints it, and `npx tinylittleoffice skill --into ~/.claude/skills` installs it for every project (`--into .claude/skills` for one), as `tinyoffice/SKILL.md`; a file already there is left as it is unless `--force`. Its source is https://github.com/aboard-io/tinylittleoffice/blob/main/skill/tinyoffice/SKILL.md.
 
 ## Check it, do not look at it
 

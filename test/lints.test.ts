@@ -74,7 +74,7 @@ describe('the module graph: no cycle, and each layer imports only what is under 
   });
 });
 
-describe('the kit in its six folders (docs/kit.md): nothing at its root, no barrel, every import naming its file', () => {
+describe('the kit in its six folders (docs/kernel.md §11): nothing at its root, no barrel, every import naming its file', () => {
   test('the fixture’s problems are found', () => {
     const fixture: Module[] = [
       { path: 'src/kit/stray.ts', source: '' },
@@ -300,6 +300,8 @@ export const STALE: { word: RegExp; was: string }[] = [
   { word: /\bthe rebuil(d|t)\b/i, was: 'the same: the tree before it is the tag v0-before-rebuild, named by what it holds' },
   { word: /\bdirective r\d/i, was: 'the brief for a round of work (docs/history/directives): the code says why, not which brief asked' },
   { word: /\b(in|added in|since|from) round [a-z0-9]+\b|\(round [a-z0-9]+[,)]/i, was: 'the same, by the round of work' },
+  { word: /\bcopy display link\b/i, was: 'Share’s second copy: Edit link and Present link since 2026-10-12' },
+  { word: /\bmade with respect by\b/i, was: 'the home page’s foot before Paul’s words of 2026-10-12, "Made with respect in New York City"' },
 ];
 
 /** The files that may say them, each with why. */
@@ -308,7 +310,6 @@ const STALE_OK: Record<string, string> = {
   'test/fixtures/lints/stale-words.md': 'the fixture the lint must catch',
   'src/kit/draw/icons-meta.ts': 'Lucide’s own tags for its icons ("signature", "kanban"), generated from its release',
   'src/i18n/fr.ts': '"une signature" is French for a byline',
-  'docs/github-setup.md': 'a tag signed with git’s signing key: a release’s provenance, not a document’s signature',
   'docs/self-host.md': '`npm audit signatures`, npm’s check of a package’s provenance',
 };
 
@@ -338,6 +339,8 @@ describe('no word for what is gone: a sentence about something removed is rewrit
       'test/fixtures/lints/stale-words.md:5: \\bthe rebuil(d|t)\\b',
       'test/fixtures/lints/stale-words.md:5: \\bdirective r\\d',
       'test/fixtures/lints/stale-words.md:5: \\b(in|added in|since|from) round [a-z0-9]+\\b|\\(round [a-z0-9]+[,)]',
+      'test/fixtures/lints/stale-words.md:9: \\bcopy display link\\b',
+      'test/fixtures/lints/stale-words.md:9: \\bmade with respect by\\b',
     ]);
   });
   test('the tree has none', () => {

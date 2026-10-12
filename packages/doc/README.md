@@ -39,6 +39,7 @@ tinyoffice measure <link>                        # the sizes the layouts chose, 
 tinyoffice shapes <app>                          # the shapes an app reads, a line each
 tinyoffice example <app> [shape]                 # the smallest document that shows a shape (every shape without one)
 tinyoffice try <app> <file|->                    # lint, measure and the JSON of a draft; exit 1 on a finding
+tinyoffice skill --into ~/.claude/skills         # the agent skill, installed for Claude Code (below)
 ```
 
 The examples are cut by `npm run skill` (scripts/make-skill.ts, scripts/shapes.ts) from the apps' own templates:
@@ -77,3 +78,15 @@ await tryDraft('deck', text); // { lint, measure, json }
 
 The guide an agent reads first is `/llms.txt` (short); the guide to every app's format is the skill,
 `skill/tinyoffice/SKILL.md`, served as `/llms-full.txt`, with a page per app at `/llms/<app>.txt`.
+
+## The skill
+
+The package carries the skill, `dist/skill/tinyoffice/SKILL.md`: the guide to every app's format, under front
+matter that tells Claude Code when to use it. `npm run skill` writes it from its template and `npm run build:cli`
+puts it in the package; nothing copies it by hand.
+
+```sh
+npx tinylittleoffice skill                              # SKILL.md on stdout
+npx tinylittleoffice skill --into ~/.claude/skills      # installs ~/.claude/skills/tinyoffice/SKILL.md, for every project
+npx tinylittleoffice skill --into .claude/skills        # for this project alone; --force replaces a file already there
+```
