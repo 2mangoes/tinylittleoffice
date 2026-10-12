@@ -199,12 +199,17 @@ test('Go without goes home; so does a drawer row and a hand-off, asked the same 
   shell.querySelector<HTMLButtonElement>('.to-leave-go')!.click();
   await until(() => location.hash === '#/');
   expect(keeping()).toBe(false);
-  // A drawer row that opens another app asks too.
+  // An app found in the drawer's search asks too (the drawer lists no apps of its own: Paul, 2026-10-12).
   history.replaceState(null, '', location.pathname);
   const again = await mount('#/v1/write');
   await type(again, 'Again');
   const was = location.hash;
-  (await openDrawerDoc(again)).closest('dialog')!.querySelector<HTMLAnchorElement>('.to-app-open[href="#/v1/sheet"]')!.click();
+  const againDrawer = (await openDrawerDoc(again)).closest('dialog')!;
+  const againFind = againDrawer.querySelector<HTMLInputElement>('.to-find')!;
+  againFind.value = 'spread';
+  againFind.dispatchEvent(new Event('input', { bubbles: true }));
+  await until(() => !!againDrawer.querySelector('.to-drawer-apps a.to-found[href="#/v1/sheet"]'), 'the search never found the Spreadsheet');
+  againDrawer.querySelector<HTMLAnchorElement>('.to-drawer-apps a.to-found[href="#/v1/sheet"]')!.click();
   await until(() => !!asked(again)?.open);
   expect(location.hash).toBe(was);
   // And the kit's own way of going elsewhere (a template, a file opened, a hand-off): go().
@@ -265,17 +270,17 @@ test('closing the tab warns exactly while the document is Private and changed', 
   expect(unloadAsks()).toBe(false);
 });
 
-test('a template chosen in the drawer asks with the drawer closed: one modal at a time (walks: grid at a desktop, seed -906952911)', async () => {
+test('a template found in the drawer asks with the drawer closed: one modal at a time (walks: grid at a desktop, seed -906952911)', async () => {
   const shell = await mount('#/v1/write');
   await type(shell, 'Stay');
   const drawer = (await openDrawerDoc(shell)).closest('dialog')!;
-  const head = [...drawer.querySelectorAll('.to-app-head')].find((h) => h.querySelector('a')!.getAttribute('href') === '#/v1/sheet')!;
-  head.querySelector<HTMLButtonElement>('to-templates > button')!.click();
-  await until(() => !!shell.querySelector('to-templates.to-drawer-templates dialog[open]'));
-  const list = shell.querySelector('to-templates.to-drawer-templates')!;
-  // Blank is there at once; the Spreadsheet's own templates as their file arrives.
-  await until(() => list.querySelectorAll('dialog[open] [role=option]').length > 1);
-  list.querySelectorAll<HTMLElement>('[role=option]')[1].click();
+  // The drawer lists no apps and no templates of its own (Paul, 2026-10-12): a template is found by its name or its app's.
+  const find = drawer.querySelector<HTMLInputElement>('.to-find')!;
+  find.value = 'spread';
+  find.dispatchEvent(new Event('input', { bubbles: true }));
+  const templateRows = () => [...drawer.querySelectorAll<HTMLAnchorElement>('.to-drawer-apps a.to-found')].filter((a) => a.getAttribute('href')!.startsWith('#/v1/sheet/'));
+  await until(() => templateRows().length > 0, 'the search never found a Spreadsheet template');
+  templateRows()[0].click();
   await until(() => !!asked(shell)?.open);
   expect([...document.querySelectorAll('dialog')].filter((d) => d.matches(':modal')).length).toBe(1);
   expect(drawer.open).toBe(false);

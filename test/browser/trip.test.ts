@@ -168,13 +168,9 @@ test('390×844 with a finger: Blank chosen on a blank trip leaves the focus wher
   try {
     const shell = await mount('#/v1/trip');
     await until(() => !!shell.querySelector('.trip-map.leaflet-container'), 8000);
+    // The drawer lists no apps or templates (Paul, 2026-10-12): the blank trip from inside the trip is New trip, in This document.
     const drawer = await openDrawerDoc(shell);
-    void drawer;
-    const row = [...shell.querySelectorAll<HTMLElement>('.to-app-head')].find((h) => h.querySelector('a')?.getAttribute('href') === '#/v1/trip')!;
-    row.querySelector<HTMLElement>('to-templates > button')!.click();
-    await until(() => !!shell.querySelector('to-templates.to-drawer-templates dialog[open] [role=option]'));
-    const blank = [...shell.querySelectorAll<HTMLElement>('to-templates.to-drawer-templates [role=option]')].find((o) => o.textContent!.includes('Blank'))!;
-    blank.click();
+    drawer.querySelector<HTMLAnchorElement>('.to-drawer-new')!.click();
     await until(() => document.activeElement === shell.querySelector('.trip-map'), 'Blank never opened the trip with its map in hand');
     expect(location.hash).toBe('#/v1/trip');
     expect(document.activeElement?.classList.contains('to-keyboard-hold')).toBe(false);

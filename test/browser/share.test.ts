@@ -238,7 +238,8 @@ function cards(answer: 'ok' | 'offline' | 429 = 'ok') {
 async function press(d: ToDialog, service: string, opened: { mock: { calls: unknown[][] } }) {
   const before = opened.mock.calls.length;
   d.querySelector<HTMLButtonElement>(`.to-post-${service}`)!.click();
-  await until(() => !!document.querySelector('to-dialog.to-link-guard dialog[open] .lg-go'), 5000, 'the link guard never asked');
+  // The card is drawn and posted first, which GitHub's runner under load takes seconds over (as test/browser/agents.test.ts found).
+  await until(() => !!document.querySelector('to-dialog.to-link-guard dialog[open] .lg-go'), 20_000, 'the link guard never asked: the card is drawn and posted first');
   document.querySelector<HTMLButtonElement>('to-dialog.to-link-guard .lg-go')!.click();
   await until(() => opened.mock.calls.length > before);
   await until(() => !document.querySelector('to-dialog.to-link-guard dialog[open]'));
@@ -359,7 +360,7 @@ test('Paul, 2026-10-12: "Make it look like the button is working": Bluesky says 
   const x = postButton(d, 'x');
   bluesky.focus();
   bluesky.click();
-  await until(() => posted.length === 1 && bluesky.getAttribute('aria-busy') === 'true', 5000, 'the card was never posted');
+  await until(() => posted.length === 1 && bluesky.getAttribute('aria-busy') === 'true', 20_000, 'the card was never posted: it is drawn first, slowly under load');
   expect(bluesky.textContent!.trim()).toBe('Making the preview…');
   // The disabled look, but not disabled: it keeps the focus.
   expect(bluesky.disabled).toBe(false);
@@ -375,7 +376,7 @@ test('Paul, 2026-10-12: "Make it look like the button is working": Bluesky says 
   expect(posted).toHaveLength(1);
   expect(guardOpen()).toBe(false);
   release();
-  await until(guardOpen, 5000, 'the link guard never asked');
+  await until(guardOpen, 20_000, 'the link guard never asked after the upload was released');
   expect(document.querySelector('to-dialog.to-link-guard .lg-host')!.textContent).toBe('bsky.app');
   expect(document.querySelectorAll('to-dialog.to-link-guard dialog[open]')).toHaveLength(1);
   expect(bluesky.textContent!.trim()).toBe('Bluesky');
@@ -411,10 +412,10 @@ test('an upload that fails while the button is busy: the toast says so, the word
   const d = await open(shell);
   const bluesky = postButton(d, 'bluesky');
   bluesky.click();
-  await until(() => posted.length === 1 && bluesky.getAttribute('aria-busy') === 'true', 5000, 'the card was never posted');
+  await until(() => posted.length === 1 && bluesky.getAttribute('aria-busy') === 'true', 20_000, 'the card was never posted: it is drawn first, slowly under load');
   expect(bluesky.textContent!.trim()).toBe('Making the preview…');
   release();
-  await until(guardOpen, 5000, 'the link guard never asked');
+  await until(guardOpen, 20_000, 'the link guard never asked after the upload was released');
   await until(() => said() === 'Shared without a preview: the server could not be reached');
   expect(bluesky.textContent!.trim()).toBe('Bluesky');
   expect(bluesky.hasAttribute('aria-busy')).toBe(false);
