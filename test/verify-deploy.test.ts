@@ -5,7 +5,7 @@ import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { firstDifference, hashTree, sha256 } from '../scripts/builds.ts';
-import { addressOf, compare, served, table } from '../scripts/verify-deploy.ts';
+import { addressOf, compare, served, table, ours } from '../scripts/verify-deploy.ts';
 
 const bytes = (s: string) => new TextEncoder().encode(s);
 
@@ -62,4 +62,19 @@ test('each file is the same, differs, is missing, or could not be fetched; the t
   expect(lines[0]).toMatch(/^file\s+built\s+live/);
   expect(lines[2]).toBe(`index.html  ${sha256(bytes('home')).slice(0, 12)}  ${sha256(bytes('home')).slice(0, 12)}  same`);
   expect(lines[4]).toBe(`gone.js     ${sha256(bytes('gone')).slice(0, 12)}  -             404`);
+});
+
+test('a page the edge wrote its bot-detection bootstrap into is the build’s page: the bootstrap is taken out before hashing, and nothing else', async () => {
+  const page = '<!doctype html><html><head><title>t</title></head><body>words</body></html>';
+  const injected = page.replace(
+    '</body>',
+    `<script>(function(){function c(){var b=a.contentDocument;}window.__CF$cv$params={r:'a49',t:'MTc5'};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';})();</script></body>`,
+  );
+  expect(new TextDecoder().decode(ours(bytes(injected), 'text/html; charset=utf-8'))).toBe(page);
+  // Not HTML, or no bootstrap: the bytes as they came.
+  expect(ours(bytes(injected), 'text/javascript')).toEqual(bytes(injected));
+  expect(ours(bytes(page), 'text/html')).toEqual(bytes(page));
+  const built = new Map([['index.html', sha256(bytes(page))]]);
+  const get = (async () => new Response(injected, { headers: { 'content-type': 'text/html; charset=utf-8' } })) as unknown as typeof fetch;
+  expect((await compare('https://s.test/', built, get)).map((r) => r.status)).toEqual(['same']);
 });

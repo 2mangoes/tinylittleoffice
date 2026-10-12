@@ -44,6 +44,18 @@ export function table(rows: Row[]): string {
   ].join('\n');
 }
 
+/**
+ * Cloudflare's bot-detection bootstrap, which the edge can write into an HTML response on its way out (a `<script>`
+ * that loads /cdn-cgi/challenge-platform/…), is not ours and is taken out before the page is hashed: the site's
+ * policy blocks it, and the build did not write it. Every other byte stays.
+ */
+const INJECTED = /<script>\(function\(\)\{[^<]*challenge-platform[\s\S]*?<\/script>/g;
+export function ours(bytes: Uint8Array, type: string | null): Uint8Array {
+  if (!type?.startsWith('text/html')) return bytes;
+  const text = new TextDecoder().decode(bytes);
+  return INJECTED.test(text) ? new TextEncoder().encode(text.replace(INJECTED, '')) : bytes;
+}
+
 /** Each file fetched from `site` and compared with the build's hash, six at a time. */
 export async function compare(site: string, built: Map<string, string>, get: typeof fetch = fetch): Promise<Row[]> {
   const paths = served(built);
@@ -58,7 +70,7 @@ export async function compare(site: string, built: Map<string, string>, get: typ
         const res = await get(addressOf(site, path), { cache: 'no-store', redirect: 'follow' });
         if (!res.ok) rows[i] = { path, want, got: null, status: String(res.status) };
         else {
-          const got = sha256(new Uint8Array(await res.arrayBuffer()));
+          const got = sha256(ours(new Uint8Array(await res.arrayBuffer()), res.headers.get('content-type')));
           rows[i] = { path, want, got, status: got === want ? 'same' : 'differs' };
         }
       } catch (e) {
