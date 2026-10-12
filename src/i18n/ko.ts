@@ -36,9 +36,9 @@ export default {
   'Forget {title}': '{title} 지우기',
   // Under an app's documents, the rest folded away: "3 more"
   '{n} more': '{n}개 더',
-  'An {aboard} Project. Made with Respect in New York City.': '{aboard}의 프로젝트. 뉴욕에서 존중을 담아 만들었습니다.',
+  'An {aboard} project. Made with respect in New York City.': '{aboard}의 프로젝트. 뉴욕에서 존중을 담아 만들었습니다.',
   'Beta version': '베타 버전',
-  'Email us': '이메일 보내기',
+  'Email': '이메일',
 
   // ---- the drawer (hamburger menu) ----
   'Apps': '앱',

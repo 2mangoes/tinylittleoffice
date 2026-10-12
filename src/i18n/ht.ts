@@ -38,9 +38,9 @@ export default {
   'Forget {title}': 'Bliye {title}',
   // Under an app's documents, the rest folded away: "3 more"
   '{n} more': '{n} lòt',
-  'An {aboard} Project. Made with Respect in New York City.': 'Yon pwojè {aboard}. Fèt avèk respè nan Nouyòk.',
+  'An {aboard} project. Made with respect in New York City.': 'Yon pwojè {aboard}. Fèt avèk respè nan Nouyòk.',
   'Beta version': 'Vèsyon beta',
-  'Email us': 'Ekri nou',
+  'Email': 'Imèl',
 
   // ---- the drawer (hamburger menu) ----
   'Apps': 'Aplikasyon',

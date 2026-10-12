@@ -53,10 +53,10 @@ export default {
   // Under an app's documents, the rest folded away: "3 more"
   '{n} more': '{n} more',
   // The home page's foot: {aboard} is the name Aboard, a link to aboard.com, said as it is in every language
-  'An {aboard} Project. Made with Respect in New York City.': 'An {aboard} Project. Made with Respect in New York City.',
+  'An {aboard} project. Made with respect in New York City.': 'An {aboard} project. Made with respect in New York City.',
   'Beta version': 'Beta version',
   // The foot's link to the repository on GitHub
-  'Email us': 'Email us',
+  'Email': 'Email',
 
   // ---- the drawer (hamburger menu) ----
   'Apps': 'Apps',

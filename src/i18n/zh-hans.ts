@@ -37,9 +37,9 @@ export default {
   'Forget {title}': '忘记{title}',
   // Under an app's documents, the rest folded away: "3 more"
   '{n} more': '还有 {n} 个',
-  'An {aboard} Project. Made with Respect in New York City.': '{aboard} 的项目。在纽约怀着敬意打造。',
+  'An {aboard} project. Made with respect in New York City.': '{aboard} 的项目。在纽约怀着敬意打造。',
   'Beta version': '测试版',
-  'Email us': '给我们发邮件',
+  'Email': '电子邮件',
 
   // ---- the drawer (hamburger menu) ----
   'Apps': '应用',

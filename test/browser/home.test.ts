@@ -1,5 +1,5 @@
-// The home page's foot (Paul, 2026-10-11 and -12): "An Aboard Foundry Project. Made with Respect in New York City." then "Beta version · GitHub · Email us", Aboard Foundry a link to aboard.com,
-// GitHub the repository, Email us a mail link; the sites open in a new tab, in the page's language.
+// The home page's foot (Paul, 2026-10-12): one line, "An Aboard Foundry project. Made with respect in New York City. · Beta version · GitHub · Email",
+// Aboard Foundry a link to aboard.com, GitHub the repository, Email a mail link; the sites open in a new tab, in the page's language.
 import { afterEach, expect, test } from 'vitest';
 import { cdp, page } from 'vitest/browser';
 import { setLanguage } from '../../src/kit/core/i18n.ts';
@@ -28,11 +28,11 @@ test('the home page ends with whose project it is and where it was made, then th
   // Below the apps, last in the page.
   expect(f.previousElementSibling!.classList.contains('to-apps')).toBe(true);
   expect(f.nextElementSibling).toBeNull();
-  expect(lines).toEqual(['An Aboard Foundry Project. Made with Respect in New York City.', 'Beta version · GitHub · Email us']);
+  expect(lines).toEqual(['An Aboard Foundry project. Made with respect in New York City. · Beta version · GitHub · Email']);
   expect(links.map((a) => [a.textContent, a.href, a.target, a.rel])).toEqual([
     ['Aboard Foundry', 'https://aboard.com/', '_blank', 'noopener'],
     ['GitHub', 'https://github.com/aboard-io/tinylittleoffice', '_blank', 'noopener'],
-    ['Email us', 'mailto:hello+tlo@aboard.com', '', ''],
+    ['Email', 'mailto:hello+tlo@aboard.com', '', ''],
   ]);
   // Quiet: the kit's muted ink, smaller than an app's name, its words aligned with the apps' names.
   const style = getComputedStyle(f);
@@ -51,13 +51,13 @@ test('the foot is said in the page’s language, the names Aboard and GitHub kep
   const shell = await mount('');
   await setLanguage('fr');
   await until(() => document.documentElement.lang === 'fr');
-  await until(() => foot(shell).lines[0] !== 'An Aboard Foundry Project. Made with Respect in New York City.');
+  await until(() => !foot(shell).lines[0].startsWith('An Aboard Foundry project.'));
   const { lines, links } = foot(shell);
-  expect(lines).toEqual(['Un projet Aboard Foundry. Fait avec respect à New York.', 'Version bêta · GitHub · Nous écrire']);
+  expect(lines).toEqual(['Un projet Aboard Foundry. Fait avec respect à New York. · Version bêta · GitHub · E-mail']);
   expect(links.map((a) => [a.textContent, a.href])).toEqual([
     ['Aboard Foundry', 'https://aboard.com/'],
     ['GitHub', 'https://github.com/aboard-io/tinylittleoffice'],
-    ['Nous écrire', 'mailto:hello+tlo@aboard.com'],
+    ['E-mail', 'mailto:hello+tlo@aboard.com'],
   ]);
 });
 

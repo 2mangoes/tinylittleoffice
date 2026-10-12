@@ -37,9 +37,9 @@ export default {
     'Forget {title}': '{title} بھلا دیں',
   // Under an app's documents, the rest folded away: "3 more"
     '{n} more': '{n} اور',
-  'An {aboard} Project. Made with Respect in New York City.': '{aboard} کا ایک منصوبہ۔ نیویارک شہر میں احترام کے ساتھ بنایا گیا۔',
+  'An {aboard} project. Made with respect in New York City.': '{aboard} کا ایک منصوبہ۔ نیویارک شہر میں احترام کے ساتھ بنایا گیا۔',
   'Beta version': 'بیٹا ورژن',
-  'Email us': 'ہمیں ای میل کریں',
+  'Email': 'ای میل',
 
   // ---- the drawer (hamburger menu) ----
     'Apps': 'ایپس',

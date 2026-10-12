@@ -42,10 +42,10 @@ export default {
   // Under an app's documents, the rest folded away: "3 more"
   '{n} more': 'עוד {n}',
   // The home page's foot: {aboard} is the name Aboard, a link to aboard.com, said as it is in every language
-  'An {aboard} Project. Made with Respect in New York City.': 'פרויקט של {aboard}. נעשה בכבוד בעיר ניו יורק.',
+  'An {aboard} project. Made with respect in New York City.': 'פרויקט של {aboard}. נעשה בכבוד בעיר ניו יורק.',
   'Beta version': 'גרסת בטא',
   // The foot's link to the repository on GitHub
-  'Email us': 'לכתוב לנו',
+  'Email': 'אימייל',
 
   // ---- the drawer (hamburger menu) ----
   'Apps': 'אפליקציות',

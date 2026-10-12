@@ -13,10 +13,9 @@
  * <to-templates> is the drawer's too: there a row's button (`via`) hands over to the drawer's one dialog
  * (`bare`, drawn outside the drawer's own), the drawer closing first (one modal at a time: kit/ui/drawer.ts).
  *
- * Below the apps, the foot, two lines: whose project it is and where it was made, "An Aboard Foundry Project. Made
- * with Respect in New York City." (Paul, 2026-10-12, verbatim, Aboard Foundry a link to aboard.com), then "Beta
- * version", "GitHub" (the repository) and "Email us" (hello+tlo@aboard.com) with a middle dot between them (Paul,
- * 2026-10-11 and -12); the only words on the page beyond the apps' names. The two sites open in a new tab, unasked,
+ * Below the apps, the foot, one line: "An Aboard Foundry project. Made with respect in New York City. · Beta version ·
+ * GitHub · Email" (Paul, 2026-10-12, verbatim; Aboard Foundry a link to aboard.com, GitHub the repository, Email
+ * hello+tlo@aboard.com); the only words on the page beyond the apps' names. The two sites open in a new tab, unasked,
  * and the mail link opens the mail app: the chrome's own links (kit/ui/link-guard.ts `data-to-chrome`).
  *
  * Above the apps, while Save in browser is on and something is kept, a search box over the library (kit/share/search.ts):
@@ -315,12 +314,11 @@ export class ToHome extends LitElement {
         })}
       </ul>`;
   }
-  /** Whose project it is and where it was made, then the beta, where its source is, and how to write to them. "Aboard Foundry" and "GitHub" are names, said as they are in every language. */
+  /** Whose project it is and where it was made, the beta, where its source is, and how to write: one line. "Aboard Foundry" and "GitHub" are names, said as they are in every language. */
   private foot() {
-    const [before, after = ''] = t('An {aboard} Project. Made with Respect in New York City.').split('{aboard}');
+    const [before, after = ''] = t('An {aboard} project. Made with respect in New York City.').split('{aboard}');
     return html`<footer class="to-home-foot">
-      <p>${before}<a href=${origin('maker')} target="_blank" rel="noopener" data-to-chrome>Aboard Foundry</a>${after}</p>
-      <p>${t('Beta version')} · <a href=${repoUrl()} target="_blank" rel="noopener" data-to-chrome>GitHub</a> · <a href=${MAIL} data-to-chrome>${t('Email us')}</a></p>
+      <p>${before}<a href=${origin('maker')} target="_blank" rel="noopener" data-to-chrome>Aboard Foundry</a>${after} · ${t('Beta version')} · <a href=${repoUrl()} target="_blank" rel="noopener" data-to-chrome>GitHub</a> · <a href=${MAIL} data-to-chrome>${t('Email')}</a></p>
     </footer>`;
   }
   render() {

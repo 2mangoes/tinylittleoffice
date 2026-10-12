@@ -38,9 +38,9 @@ export default {
   'Forget {title}': 'نسيان {title}',
   // Under an app's documents, the rest folded away: "3 more"
   '{n} more': '{n} أخرى',
-  'An {aboard} Project. Made with Respect in New York City.': 'مشروع من {aboard}. صُنع باحترام في مدينة نيويورك.',
+  'An {aboard} project. Made with respect in New York City.': 'مشروع من {aboard}. صُنع باحترام في مدينة نيويورك.',
   'Beta version': 'نسخة تجريبية',
-  'Email us': 'راسلنا',
+  'Email': 'البريد الإلكتروني',
 
   // ---- the drawer (hamburger menu) ----
   'Apps': 'التطبيقات',

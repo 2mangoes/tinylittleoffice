@@ -43,10 +43,10 @@ export default {
   // Under an app's documents, the rest folded away: "3 more"
   '{n} more': 'נאך {n}',
   // The home page's foot: {aboard} is the name Aboard, a link to aboard.com, said as it is in every language
-  'An {aboard} Project. Made with Respect in New York City.': 'א פראיעקט פון {aboard}. געמאכט מיט דרך ארץ אין ניו יארק.',
+  'An {aboard} project. Made with respect in New York City.': 'א פראיעקט פון {aboard}. געמאכט מיט דרך ארץ אין ניו יארק.',
   'Beta version': 'בעטא ווערסיע',
   // The foot's link to the repository on GitHub
-  'Email us': 'שרייבט אונז',
+  'Email': 'אימעיל',
 
   // ---- the drawer (hamburger menu) ----
   'Apps': 'עפס',
