@@ -93,7 +93,13 @@ async function openTemplates(shell: HTMLElement, app: string) {
   await until(() => !!shell.querySelector('.to-app'));
   const tpl = shell.querySelector<HTMLElement>(`.to-app[aria-label="${app}"] to-templates`) as ToTemplates;
   tpl.show();
-  await until(() => !!tpl.querySelector('dialog[open] [role=option] svg'));
+  // Blank is drawn at once, its preview with it; the templates come with their chunk. Waiting on the first preview alone
+  // measured Blank by itself when the chunk was slow (main, 2026-10-12: "no blurb taller than its preview: 0/94"), so
+  // the wait is for the templates themselves, every one with its preview.
+  await until(() => {
+    const options = tpl.querySelectorAll('dialog[open] [role=option]');
+    return options.length > 1 && [...options].every((o) => !!o.querySelector('svg'));
+  });
   // Measured in the site's own type: the self-hosted faces are loaded before a height is read.
   await document.fonts.ready;
   return tpl;
