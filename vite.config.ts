@@ -1,9 +1,10 @@
 import { defineConfig, loadEnv, type Plugin } from 'vite';
 import { createHash } from 'node:crypto';
-import { copyFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { copyFileSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { fillHeaders } from './scripts/headers.ts';
+import { listed, writePages } from './scripts/seo.ts';
 import { gitFacts, versionJson, versionOf } from './scripts/version.ts';
 import type { AppDef } from './src/kit/app.ts';
 
@@ -15,15 +16,13 @@ import type { AppDef } from './src/kit/app.ts';
 const fromSource = <T>(path: string): Promise<T> => import(pathToFileURL(resolve(import.meta.dirname, path)).href) as Promise<T>;
 
 /**
- * After the build: a page per app (dist/<id>/index.html, the shell with that app's name and blurb in its
- * tags, so a shared link previews as that app); the Content-Security-Policy's script hashes and hosts
- * written into _headers (public/_headers has the placeholders, scripts/headers.ts fills them); and which
- * build this is, dist/version.json (the commit, its tag and date, those hashes: scripts/version.ts). Each app's
- * page names its own share card (public/og/<id>.png, drawn by scripts/make-cards.ts) where there is one; dist/embed/index.html is the shell again, at the one address another site may frame (the embed
- * view, public/_headers). For agents, /.well-known/llms.txt is /llms.txt again and /examples/<app>.json each app's examples.
+ * After the build: the pages (scripts/seo.ts: a page per app with its name and line in its tags and its first text,
+ * the embed page, the JSON-LD on each, the sitemap and robots.txt's line naming it); the Content-Security-Policy's
+ * script hashes and hosts written into _headers (public/_headers has the placeholders, scripts/headers.ts fills
+ * them); and which build this is, dist/version.json (the commit, its tag and date, those hashes: scripts/version.ts).
+ * For agents, /.well-known/llms.txt is /llms.txt again and /examples/<app>.json each app's examples.
  */
 function afterBuild(site: string): Plugin {
-  const attr = (s: string) => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;');
   return {
     name: 'tinyoffice-after-build',
     apply: 'build',
@@ -31,24 +30,8 @@ function afterBuild(site: string): Plugin {
       const { apps } = await fromSource<{ apps(): AppDef[] }>('src/kit/apps.ts');
       const { pageScripts } = await fromSource<{ pageScripts(): string[] }>('src/kit/page.ts');
       const dist = resolve(import.meta.dirname, 'dist');
-      const shell = readFileSync(resolve(dist, 'index.html'), 'utf8');
-      mkdirSync(resolve(dist, 'embed'), { recursive: true });
-      writeFileSync(resolve(dist, 'embed', 'index.html'), shell.replace(/(src|href)="\.\//g, '$1="../').replace('</title>', '</title>\n    <meta name="robots" content="noindex" />'));
-      for (const app of apps()) {
-        const title = `${app.name} · Tiny Little Office`;
-        const page = shell
-          .replace(/(src|href)="\.\//g, '$1="../')
-          .replace(/<title>[^<]*<\/title>/, `<title>${attr(title)}</title>`)
-          .replace(/(<meta name="description" content=")[^"]*"/, `$1${attr(app.blurb)}"`)
-          .replace(/(<meta property="og:title" content=")[^"]*"/, `$1${attr(title)}"`)
-          .replace(/(<meta property="og:description" content=")[^"]*"/, `$1${attr(app.blurb)}"`)
-          .replace(/(<meta property="og:url" content=")[^"]*"/, `$1${site}${app.id}/"`)
-          .replace(/(<link rel="canonical" href=")[^"]*"/, `$1${site}${app.id}/"`)
-          .replace(/(<meta property="og:image" content=")[^"]*"/, (m, a) => (existsSync(resolve(dist, 'og', `${app.id}.png`)) ? `${a}${site}og/${app.id}.png"` : m))
-          .replace(/(<meta property="og:image:alt" content=")[^"]*"/, (m, a) => (existsSync(resolve(dist, 'og', `${app.id}.png`)) ? `${a}${attr(`${app.name}: ${app.blurb}`)}"` : m));
-        mkdirSync(resolve(dist, app.id), { recursive: true });
-        writeFileSync(resolve(dist, app.id, 'index.html'), page);
-      }
+      const facts = gitFacts(import.meta.dirname);
+      writePages(dist, { site, apps: await listed(apps()), built: facts.built });
       // For agents: the short guide where some look for it too, and each app's examples (packages/doc/examples, written
       // by scripts/make-skill.ts) as static files, so an agent that can only fetch reads them.
       mkdirSync(resolve(dist, '.well-known'), { recursive: true });
@@ -57,7 +40,7 @@ function afterBuild(site: string): Plugin {
       for (const app of apps()) copyFileSync(resolve(import.meta.dirname, 'packages/doc/examples', `${app.id}.json`), resolve(dist, 'examples', `${app.id}.json`));
       const hashes = pageScripts().map((code) => `'sha256-${createHash('sha256').update(code).digest('base64')}'`);
       writeFileSync(resolve(dist, '_headers'), fillHeaders(readFileSync(resolve(dist, '_headers'), 'utf8'), { scripts: hashes }));
-      writeFileSync(resolve(dist, 'version.json'), versionJson(versionOf(gitFacts(import.meta.dirname), hashes)));
+      writeFileSync(resolve(dist, 'version.json'), versionJson(versionOf(facts, hashes)));
     },
   };
 }

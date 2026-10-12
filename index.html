@@ -37,9 +37,11 @@
     <script type="module" src="./src/main.ts"></script>
   </head>
   <body>
+    <!-- What the page says before any script runs, taken away as the shell starts (kit/shell.ts): the build writes the
+         apps' names here, or on an app's page its name, its line and its templates' names (scripts/seo.ts). -->
+    <header id="to-first"><h1>Tiny Little Office</h1></header>
     <to-shell></to-shell>
     <noscript>
-      <h1>Tiny Little Office</h1>
       <p>A tiny office suite where the link is the document. No accounts. Nothing is saved anywhere unless you choose to keep it on this device. Tiny Little Office needs JavaScript to show a document.</p>
       <p>Agents: %VITE_SITE_URL%llms.txt says how to make a document as a link.</p>
     </noscript>

@@ -83,6 +83,10 @@ npm run build        # the site as it ships, its chunks held to their budgets
 npm run deploy       # the checks, then the site and the short-link service to Cloudflare
 ```
 
+The build writes what a search engine reads: a page per app with its name, its line and its templates' names as
+plain text, a JSON-LD description of the site and of each app, and a sitemap named in `robots.txt`, all at the
+address `VITE_SITE_URL` gives.
+
 Running a copy of your own on your own Cloudflare account is [docs/self-host.md](docs/self-host.md). How it is
 made: the document kernel and the one editor, [docs/kernel.md](docs/kernel.md); the editing standard every app
 keeps, [docs/editing.md](docs/editing.md); the document format, [docs/tlo.md](docs/tlo.md); the languages,

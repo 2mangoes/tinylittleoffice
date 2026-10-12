@@ -217,6 +217,8 @@ export class ToShell extends LitElement {
   }
   connectedCallback() {
     super.connectedCallback();
+    // The page's first text (index.html, written by scripts/seo.ts): what it says, the shell now draws.
+    document.getElementById('to-first')?.remove();
     const on = <K extends string>(target: EventTarget, type: K, fn: EventListener) => {
       target.addEventListener(type, fn);
       this.offs.push(() => target.removeEventListener(type, fn));

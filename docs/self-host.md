@@ -44,7 +44,7 @@ ours to yours, in five places:
 3. **The build's settings,** in a file `.env.production` (not committed; `.env.example` lists them):
 
    ```sh
-   VITE_SITE_URL=https://office.example.org/        # the canonical link and the share cards
+   VITE_SITE_URL=https://office.example.org/        # the canonical link, the share cards, the sitemap and the structured data
    VITE_TINIER=https://tinier.example.org/          # your short-link service
    ```
 

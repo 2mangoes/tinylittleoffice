@@ -255,3 +255,21 @@ test('tinier: the landing page opens a link whose key, IV and ciphertext are wri
     expect(went).toBe(`${long}?s=abcdefg&x=1`);
   }
 });
+
+test('tinier: no page or answer of the shortener is indexed (X-Robots-Tag), and its robots.txt lets every fetcher in, so a shared link’s preview can still be read', async () => {
+  const store = new MemStore();
+  const made = await handle(post(LINK), store, KEY, PAGE, NOW);
+  const { id } = (await made.json()) as { id: string };
+  const asked = [made, ...(await Promise.all(['/', `/${id}`, '/zzzzzzz', `/api/${id}`, '/api/zzzzzzz', '/nothing/here'].map((p) => handle(req('GET', p), store, KEY, PAGE, NOW))))];
+  asked.push(await handle(req('OPTIONS', '/api'), store, KEY, PAGE, NOW));
+  for (const res of asked) expect(res.headers.get('x-robots-tag'), `${res.status} ${res.url}`).toBe('noindex');
+  const robots = await handle(req('GET', '/robots.txt'), store, KEY, PAGE, NOW);
+  expect(robots.status).toBe(200);
+  expect(robots.headers.get('content-type')).toBe('text/plain; charset=utf-8');
+  const text = await robots.text();
+  // Never a Disallow: the link-card fetchers of X and Facebook honor robots.txt, and must read a shared link's preview.
+  expect(text).toMatch(/^User-agent: \*$/m);
+  expect(text).toMatch(/^Allow: \/$/m);
+  expect(text).not.toMatch(/^Disallow:/im);
+  expect(text).toMatch(/^# .*noindex/m);
+});

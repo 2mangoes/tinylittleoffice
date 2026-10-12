@@ -129,6 +129,17 @@ test('the home page has no copy: every app, in order, its icon, its name and its
   }
 });
 
+test('the page’s first text, there before any script (index.html, scripts/seo.ts), goes as the shell starts: the shell draws what it said', async () => {
+  document.body.innerHTML = '<header id="to-first"><h1>Tiny Little Office</h1><ul><li><a href="write/">Word Processor</a></li></ul></header>';
+  history.replaceState(null, '', location.pathname);
+  const shell = document.createElement('to-shell') as ToShell;
+  document.body.append(shell);
+  await shell.updateComplete;
+  expect(document.getElementById('to-first')).toBeNull();
+  expect(document.querySelectorAll('h1')).toHaveLength(1);
+  expect(shell.querySelector('.to-app-name')?.textContent).toBe('Word Processor');
+});
+
 test('under Private an edit keeps nothing, and the home page shows no documents', async () => {
   expect(keeping()).toBe(false);
   const shell = await mount('#/v1/write');

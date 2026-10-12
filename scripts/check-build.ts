@@ -10,6 +10,8 @@
  *     examples beside its page (examples/<app>.json for llms/<app>.txt).
  *   - the type: every font a built stylesheet names, and every font a page preloads, is a file of the build, with
  *     IBM's licence beside them (fonts/LICENSE.txt), so no page asks for a face that is not there.
+ *   - what a crawler gets (scripts/seo.ts): the sitemap of every page, named in robots.txt; each page's JSON-LD;
+ *     each page's first text.
  *
  *   node scripts/check-build.ts      the build in dist/, checked; a line per problem, and exit 1
  */
@@ -91,8 +93,12 @@ if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.ur
   // The registry first: the apps declare their page scripts as they load.
   await import('../src/kit/apps.ts');
   const { pageScripts } = await import('../src/kit/page.ts');
-  const problems = checkBuild(resolve(import.meta.dirname, '..', 'dist'), pageScripts());
+  const { apps } = await import('../src/kit/apps.ts');
+  const { checkSeo, listed } = await import('./seo.ts');
+  const dist = resolve(import.meta.dirname, '..', 'dist');
+  const problems = checkBuild(dist, pageScripts());
+  if (!problems[0]?.startsWith('No build')) problems.push(...checkSeo(dist, await listed(apps())));
   for (const p of problems) console.error(`  ✗ ${p}`);
   if (problems.length) process.exit(1);
-  console.log(`  ✓ the policy's ${pageScripts().length} script hashes and version.json agree with the build`);
+  console.log(`  ✓ the policy's ${pageScripts().length} script hashes and version.json agree with the build; the sitemap, the structured data and the pages' first text are complete`);
 }

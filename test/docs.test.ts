@@ -67,6 +67,15 @@ test('nothing a reader meets says saving never happens', () => {
   expect(hits(STRUCK)).toEqual([]);
 });
 
+/** The built pages a crawler reads, with what the build wrote into them (scripts/seo.ts): there when `npm run build` has run. */
+const dist = join(root, 'dist');
+const builtPages = existsSync(join(dist, 'index.html'))
+  ? (readdirSync(dist, { recursive: true }) as string[]).map((f) => `dist/${String(f).replaceAll('\\', '/')}`).filter((f) => /\.(html|xml|txt)$/.test(f))
+  : [];
+test.skipIf(!builtPages.length)('nor does any page the build writes, its first text and structured data among it', () => {
+  expect(hits(STRUCK, builtPages)).toEqual([]);
+});
+
 test('nothing a reader meets names a feature that is gone', () => {
   expect(hits(GONE)).toEqual([]);
 });

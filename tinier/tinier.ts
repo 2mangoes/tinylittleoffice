@@ -11,6 +11,11 @@
  *   GET    /api/<id>                  -> {c, iv, exp}   (404 once gone)
  *   GET    /<id>       the page that decrypts and redirects
  *   GET    /           what this is
+ *   GET    /robots.txt every fetcher let in
+ *
+ * Nothing it answers is indexed: every response says `X-Robots-Tag: noindex` (the landing page says it in its
+ * <meta> too). Its robots.txt allows everything, and never disallows: the link-card fetchers of X and Facebook
+ * honor robots.txt and must still read a shared link's preview (Paul, 2026-10-11).
  *
  * Every other method or path answers 404, as an unknown link does. The API's only answers are 201, 200, 400,
  * 404, 429 and 503.
@@ -118,8 +123,21 @@ async function body(req: Request): Promise<Record<string, unknown> | null> {
 }
 const cipher = (c: unknown, iv: unknown): c is string => typeof c === 'string' && typeof iv === 'string' && B64.test(c) && B64.test(iv) && c.length <= MAX_BYTES && iv.length <= 32;
 
-/** Answer one request. `key` is the brake's secret (BRAKE_KEY). `page` is the landing page with "{{id}}" where the id goes and "{{site}}" where the site does. */
+/** What the shortener's robots.txt says: come in, every fetcher; the pages keep themselves out of the index by their header. */
+export const ROBOTS = `# Every page and answer here says "X-Robots-Tag: noindex": a short link is a person's, and no search engine's.
+# Nothing is disallowed, so a site that draws a shared link's preview may still read it.
+User-agent: *
+Allow: /
+`;
+
+/** Answer one request. `key` is the brake's secret (BRAKE_KEY). `page` is the landing page with "{{id}}" where the id goes and "{{site}}" where the site does. Every answer is marked noindex. */
 export async function handle(req: Request, store: Store, key: string, page: string, now = Date.now(), site = SITE): Promise<Response> {
+  const res = await answer(req, store, key, page, now, site);
+  res.headers.set('x-robots-tag', 'noindex');
+  return res;
+}
+
+async function answer(req: Request, store: Store, key: string, page: string, now: number, site: string): Promise<Response> {
   const url = new URL(req.url);
   page = page.replaceAll('{{site}}', site);
   if (req.method === 'OPTIONS')
@@ -157,6 +175,7 @@ export async function handle(req: Request, store: Store, key: string, page: stri
     return link ? json({ c: link.c, iv: link.iv, exp: link.exp }, site) : gone(site);
   }
 
+  if (req.method === 'GET' && url.pathname === '/robots.txt') return new Response(ROBOTS, { headers: { 'content-type': 'text/plain; charset=utf-8', 'cache-control': 'public, max-age=86400' } });
   if (req.method === 'GET' && url.pathname === '/') return html(page.replace('{{id}}', ''));
   if (req.method === 'GET' && valid(url.pathname.slice(1))) {
     const id = url.pathname.slice(1);
