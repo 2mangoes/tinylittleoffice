@@ -1,14 +1,11 @@
 // Privacy, restored after the rebuild lost it (Paul, 2026-10-09): the unlock dialog, Password… and the re-seal on
-// every change, the state beside the title, what the device holds, and the zip. Signing is gone (Paul, 2026-10-11:
+// every change, the state beside the title, and what the device holds. Signing is gone (Paul, 2026-10-11:
 // "Get rid of signatures everywhere, including templates"): a signature said more than it proved.
 import { test, expect, afterEach, vi } from 'vitest';
-import { unzipSync, strFromU8, strToU8 } from 'fflate';
 import { mount, privacyAlone, tick, until, said, openShare as openShareFromDrawer } from './helpers.ts';
 import { decodeDoc, encodeDoc, isSealed } from '../../src/kit/codec.ts';
 import { parseHash } from '../../src/kit/route.ts';
-import { readZip } from '../../src/kit/plain.ts';
-import { appOf } from '../../src/kit/apps.ts';
-import { PREFS, everything, forgetPrefs, prefsKept, lockWith, pack, unlock } from '../../src/kit/privacy.ts';
+import { PREFS, forgetPrefs, prefsKept, lockWith, pack, unlock } from '../../src/kit/privacy.ts';
 import { forgetAll, keep, library } from '../../src/kit/library.ts';
 import { keepLink } from '../../src/kit/links.ts';
 import { setKeeping, store } from '../../src/kit/store.ts';
@@ -51,18 +48,6 @@ async function openShare(shell: ToShell) {
 function fill(field: HTMLInputElement | HTMLTextAreaElement, value: string) {
   field.value = value;
   field.dispatchEvent(new Event('input', { bubbles: true }));
-}
-/** What saveFile hands over (through the browser's own save-as), while `body` runs. */
-async function saved(body: (files: () => File[]) => Promise<void>) {
-  const files: File[] = [];
-  const w = window as unknown as { showSaveFilePicker?: unknown };
-  const had = w.showSaveFilePicker;
-  w.showSaveFilePicker = async () => ({ createWritable: async () => ({ write: async (f: File) => void files.push(f), close: async () => {} }) });
-  try {
-    await body(() => files);
-  } finally {
-    w.showSaveFilePicker = had;
-  }
 }
 async function sealedLink(text: string, password: string) {
   return `#/v1/write/${await pack(text, await lockWith(password))}`;
@@ -186,41 +171,9 @@ test('Under Saved, a sealed document is kept as ciphertext, with no name; the ho
   expect(home.querySelector('.to-drive-words span')!.textContent).toBe('Locked document');
 });
 
-test('Download everything names each file by its title and writes the title into a head that has none (Paul, 2026-10-11: "Do both")', async () => {
-  setKeeping(true);
-  forgetAll();
-  const at = Date.now();
-  const words = 'Words that end in a space\\ \n\\\nand go on.\n';
-  keep({ id: 'a', app: 'write', title: 'New Word Processor 2026-10-11 #1', hash: `#/v1/write/${encodeDoc(words)}`, at });
-  keep({ id: 'b', app: 'sheet', title: 'Budget', hash: `#/v1/sheet/${encodeDoc('---\nchart: bar\n---\na | b\n--- | ---\n1 | 2\n')}`, at: at - 1 });
-  keep({ id: 'c', app: 'write', title: 'Launch notes', hash: `#/v1/write/${encodeDoc('---\ntitle: Launch notes\nby: Paul\n---\nGo.\n')}`, at: at - 2 });
-  keep({ id: 'd', app: 'write', title: '', hash: `#/v1/write/${await pack('---\ntitle: Salaries\n---\nsecret\n', await lockWith('pw'))}`, at: at - 3 });
-  // Were a title kept for a locked one, it would go on a line before the link.
-  keep({ id: 'e', app: 'write', title: 'Salaries', hash: `#/v1/write/${await pack('---\ntitle: Salaries\n---\nsecret\n', await lockWith('pw'))}`, at: at - 4 });
-  const files = await everything('https://tinylittleoffice.example/');
-  expect(Object.keys(files).sort()).toEqual(['sheet/budget.tlo', 'write/launch-notes.tlo', 'write/locked.txt', 'write/new-word-processor-2026-10-11-1.tlo', 'write/salaries.txt']);
-  // No title in the text: the library's, in a head before the body, the body as it was to the byte.
-  expect(files['write/new-word-processor-2026-10-11-1.tlo']).toBe(`---\ntitle: New Word Processor 2026-10-11 #1\n---\n${words}`);
-  // A head without a title gains one, first; the rest of the head is kept.
-  expect(files['sheet/budget.tlo']).toBe('---\ntitle: Budget\nchart: bar\n---\na | b\n--- | ---\n1 | 2\n');
-  // A text with its title is written as it is.
-  expect(files['write/launch-notes.tlo']).toBe('---\ntitle: Launch notes\nby: Paul\n---\nGo.\n');
-  // A locked one is its link alone: its title is its secret.
-  expect(files['write/locked.txt']).toMatch(/^https:\/\/tinylittleoffice\.example\/#\/v1\/write\/E[\w~]+\n$/);
-  expect(files['write/salaries.txt']).toBe(`title: Salaries\nhttps://tinylittleoffice.example/${library()[4].hash}\n`);
-  // And back: the zip read gives each the same title and the same text.
-  const back = readZip(Object.fromEntries(Object.entries(files).map(([k, v]) => [k, strToU8(v)])), 'write', (id) => ['write', 'sheet'].includes(id));
-  const titled = back.filter((d) => !d.payload).map((d) => ({ title: appOf(d.app)!.title(d.text), text: d.text }));
-  expect(titled).toEqual([
-    { title: 'New Word Processor 2026-10-11 #1', text: files['write/new-word-processor-2026-10-11-1.tlo'] },
-    { title: 'Budget', text: files['sheet/budget.tlo'] },
-    { title: 'Launch notes', text: files['write/launch-notes.tlo'] },
-  ]);
-  expect(back.filter((d) => d.payload).map((d) => d.payload)).toEqual([3, 4].map((i) => parseHash(library()[i].hash).payload));
-  forgetAll();
-});
+// Download everything is gone (Paul, 2026-10-12: "Get rid of … zip download"), and its test of the zip's names and heads with it.
 
-test('what this device holds, item by item with Forget, and Download everything: every kept document in one zip', async () => {
+test('what this device holds, item by item with Forget, and no Download everything', async () => {
   setKeeping(true);
   // What an earlier test kept, carried in from the visit's memory, is not this test's.
   forgetAll();
@@ -242,16 +195,8 @@ test('what this device holds, item by item with Forget, and Download everything:
   expect(now('to-held-links')).toBe('1 link');
   // The theme, and nothing else.
   expect(now('to-held-prefs')).toBe('1 set');
-  // The zip: each document as its text, the locked one as its link.
-  await saved(async (files) => {
-    privacy.querySelector<HTMLButtonElement>('.to-download-all')!.click();
-    await until(() => files().length === 1);
-    const zip = unzipSync(new Uint8Array(await files()[0].arrayBuffer()));
-    expect(files()[0].name).toBe('tiny-little-office.zip');
-    expect(Object.keys(zip).sort()).toEqual(['sheet/untitled.tlo', 'write/launch-notes.tlo', 'write/locked.txt']);
-    expect(strFromU8(zip['write/launch-notes.tlo'])).toBe('---\ntitle: Launch notes\n---\nGo.\n');
-    expect(strFromU8(zip['write/locked.txt'])).toMatch(/#\/v1\/write\/E[\w~]+\n$/);
-  });
+  // No zip of them: Download everything is gone (Paul, 2026-10-12).
+  expect(privacy.querySelector('.to-download-all, .to-privacy-zip')).toBeNull();
   // Forget, one by one.
   privacy.querySelector<HTMLButtonElement>('.to-held-links .to-held-forget')!.click();
   await until(() => now('to-held-links') === '0 links');

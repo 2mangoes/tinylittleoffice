@@ -10,19 +10,16 @@
  *   - The password: a document sealed (kit/crypt.ts) and opened, here. A password is never kept, under
  *     Saved or not: the key that opened a document stays in memory for the visit, so it opens again
  *     without asking.
- *   - What the device holds, item by item, and everything kept in one zip.
+ *   - What the device holds, item by item.
  *
  * The shell and <to-privacy> (kit/privacy-dialog.ts) only call this.
  */
 import { forgetOpened } from './locked.ts';
 import { keeping, setKeeping, store } from './store.ts';
-import { decodeDoc, encodeDoc, isSealed, packDoc, unpackDoc } from './codec.ts';
+import { encodeDoc, packDoc, unpackDoc } from './codec.ts';
 import { newLocker, seal, unseal, unsealWith, type Locker } from './crypt.ts';
 import { forgetAll, keepAll, library, type Kept } from './library.ts';
 import { keptLinks } from './links.ts';
-import { parseHash } from './route.ts';
-import { titledText } from './plain.ts';
-import { slug } from './draw.ts';
 
 /** The preferences this site may keep, by key; with them which documents have been told they are copies (kit/shell.ts). */
 export const PREFS = ['to-theme', 'tinyoffice.shortTtl', 'tinyoffice.size', 'tinyoffice.copiesSaid'];
@@ -127,28 +124,4 @@ export function forgetLinks() {
 export async function forgetEverything() {
   for (const k of store.keys()) store.remove(k);
   await setPrivate(true);
-}
-
-/**
- * Every document kept here as a file named by its title, in a folder by app: its text as .tlo, the title
- * written into its head when the text names none (kit/plain.ts titledText); one under a password as its link
- * in a .txt (its text is not to be had without the password). `base` is the address a link starts with.
- */
-export async function everything(base: string): Promise<Record<string, string>> {
-  const files: Record<string, string> = {};
-  const name = (dir: string, stem: string, ext: string) => {
-    let path = `${dir}/${stem}.${ext}`;
-    for (let n = 2; path in files; n++) path = `${dir}/${stem}-${n}.${ext}`;
-    return path;
-  };
-  for (const k of library()) {
-    const { payload } = parseHash(k.hash);
-    // A locked document's title is its secret: the library holds none for it, and nothing is written.
-    if (isSealed(payload)) files[name(k.app, slug(k.title) || 'locked', 'txt')] = `${k.title ? `title: ${k.title}\n` : ''}${base}${k.hash}\n`;
-    else {
-      const text = decodeDoc(payload);
-      if (text) files[name(k.app, slug(k.title) || 'untitled', 'tlo')] = titledText(text, k.title);
-    }
-  }
-  return files;
 }

@@ -28,8 +28,7 @@ Ten apps, each with templates to start from:
 Around them: nineteen languages, chosen in the menu and carried in the link; the **Display Link**, which opens a
 document as pages to read or print rather than to edit; a **password** on any document; **short links** that
 expire after an hour, a day, a week or a month; a QR code; files in the formats other programs read (PDF, Word,
-PowerPoint, Excel, iCalendar, Markdown and more); and **Download everything**, every document kept on your device
-in one file.
+PowerPoint, Excel, iCalendar, Markdown and more).
 
 ## What it is not
 

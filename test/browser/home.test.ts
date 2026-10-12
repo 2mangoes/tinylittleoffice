@@ -7,6 +7,7 @@ import { keepSize, SIZE_MAX } from '../../src/kit/zoom.ts';
 import type { ToTemplates } from '../../src/kit/home.ts';
 import { firstLines } from './firstline.ts';
 import { mount, until } from './helpers.ts';
+import { encodeDoc } from '../../src/kit/codec.ts';
 
 afterEach(async () => {
   keepSize(1);
@@ -162,3 +163,93 @@ test('at the largest size on a phone, an app whose name wraps keeps its icon bes
   expect(rows.filter((r) => r.wraps && r.beside).length).toBeGreaterThan(0);
   expect(rows.filter((r) => !r.beside && !r.under)).toEqual([]);
 });
+
+// The search over the documents (Paul, 2026-10-12: "Get rid of 'search your documents' if there are no documents or we
+// are in private mode"): there only when Save in browser is on and something is kept.
+test('no search box under Private, a library in memory or not; none when Saved with nothing kept; the box once one is kept', async () => {
+  const { keep, forgetAll } = await import('../../src/kit/library.ts');
+  const { setKeeping, store } = await import('../../src/kit/store.ts');
+  const doc = { id: 'a', app: 'write', title: 'Plans', hash: `#/v1/write/${encodeDoc('---\ntitle: Plans\n---\nGo.\n')}`, at: Date.now() };
+  try {
+    // Private, a list written to the visit's memory as an old build did.
+    setKeeping(false);
+    store.set('tinyoffice.library', JSON.stringify([doc]));
+    let shell = await mount('');
+    await until(() => !!shell.querySelector('.to-app'));
+    expect(shell.querySelector('.to-search')).toBeNull();
+    expect(shell.querySelector('.to-drive')).toBeNull();
+    // Saved, nothing kept.
+    setKeeping(true);
+    forgetAll();
+    shell = await mount('');
+    await until(() => !!shell.querySelector('.to-app'));
+    expect(shell.querySelector('.to-search')).toBeNull();
+    // Saved, one kept.
+    keep(doc);
+    shell = await mount('');
+    await until(() => !!shell.querySelector('.to-search'));
+    expect(shell.querySelector<HTMLInputElement>('.to-search')!.placeholder).toBe('Search your documents');
+  } finally {
+    forgetAll();
+    setKeeping(false);
+  }
+});
+
+// The kept documents under an app line up with it (Paul, 2026-10-12: "The preview documents are supposed to be aligned
+// with the app names and icons. They're indented very much to the right"): a preview's edge on the icon's, the gap from
+// the preview to the words the gap from the icon to the name, and "n more" with them.
+async function drive(lang: string | null) {
+  const { keep, forgetAll } = await import('../../src/kit/library.ts');
+  const { setKeeping } = await import('../../src/kit/store.ts');
+  setKeeping(true);
+  forgetAll();
+  for (let i = 0; i < 7; i++) keep({ id: `d${i}`, app: 'write', title: `Plan ${i}`, hash: `#/v1/write/${encodeDoc(`---\ntitle: Plan ${i}\n---\nGo.\n`)}`, at: Date.now() - i });
+  const shell = await mount('');
+  if (lang) {
+    await setLanguage(lang);
+    await until(() => document.documentElement.lang === lang);
+  }
+  await until(() => !!shell.querySelector('.to-drive-open to-preview'));
+  await document.fonts.ready;
+  const app = shell.querySelector<HTMLElement>('.to-app:has(.to-drive)')!;
+  const rtl = getComputedStyle(app).direction === 'rtl';
+  const box = (sel: string) => app.querySelector(sel)!.getBoundingClientRect();
+  // The start edge (left, or right in a right-to-left language), and how far past `from`'s far edge `to` begins.
+  const start = (r: DOMRect) => (rtl ? -r.right : r.left);
+  const after = (from: DOMRect, to: DOMRect) => (rtl ? from.left - to.right : to.left - from.right);
+  const ico = box('.to-app-open > .to-icon');
+  const name = box('.to-app-name');
+  const more = app.querySelector<HTMLElement>('.to-drive-more')!;
+  const ms = getComputedStyle(more);
+  const moreWords = start(more.getBoundingClientRect()) + parseFloat(rtl ? ms.paddingRight : ms.paddingLeft);
+  const rows = [...app.querySelectorAll('.to-drive-open')].map((a) => ({
+    preview: a.querySelector('to-preview')!.getBoundingClientRect(),
+    words: a.querySelector('.to-drive-words')!.getBoundingClientRect(),
+  }));
+  return {
+    shell,
+    forget: () => (forgetAll(), setKeeping(false)),
+    rows: rows.map((r) => ({ edge: start(r.preview) - start(ico), gap: after(r.preview, r.words) - after(ico, name) })),
+    more: moreWords - start(ico),
+  };
+}
+
+for (const [w, h, lang] of [
+  [390, 844, null],
+  [1100, 800, null],
+  [390, 844, 'ar'],
+] as const)
+  test(`at ${w}px${lang ? `, in ${lang}` : ''}, a kept document's preview sits on its app's icon's edge, its words as far from it as the name from the icon, "n more" with them`, async () => {
+    await page.viewport(w, h);
+    const d = await drive(lang);
+    try {
+      expect(d.rows.length).toBe(5);
+      for (const r of d.rows) {
+        expect(Math.abs(r.edge), `preview ${r.edge}px off the icon`).toBeLessThan(1);
+        expect(Math.abs(r.gap), `words ${r.gap}px off`).toBeLessThan(1);
+      }
+      expect(Math.abs(d.more), `"n more" ${d.more}px off`).toBeLessThan(1);
+    } finally {
+      d.forget();
+    }
+  });

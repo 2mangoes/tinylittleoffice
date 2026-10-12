@@ -67,10 +67,17 @@ export async function pinch(at: Element, a: [number, number], b: [number, number
 /** What the last toast said to a screen reader: the one region holding words, in the open dialog or the page (kit/toast.ts). */
 export const said = () => [...document.querySelectorAll('.to-said')].map((r) => r.textContent ?? '').find(Boolean) ?? '';
 
-/** The Privacy dialog without a document (what this device holds, Download everything), drawn alone and opened. */
+/** The Privacy dialog without a document (what this device holds), drawn alone and opened. */
 export async function privacyAlone(): Promise<ToPrivacy> {
   const privacy = document.body.appendChild(document.createElement('to-privacy') as ToPrivacy);
   await privacy.updateComplete;
   await privacy.show();
   return privacy;
+}
+
+/** A file dropped on the page, as a person drags one in (kit/open.ts: the menu's Open a file… is gone, Paul, 2026-10-12). */
+export function dropFile(file: File) {
+  const dt = new DataTransfer();
+  dt.items.add(file);
+  window.dispatchEvent(new DragEvent('drop', { dataTransfer: dt, bubbles: true, cancelable: true }));
 }

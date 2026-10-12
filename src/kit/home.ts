@@ -2,7 +2,7 @@
  * <to-home>: the apps, as rows, in the registry's order: each its icon and name (open it blank), a dialog
  * of its templates to the right of its name (Blank first and chosen, or the first template where the app's templates carry its blanks, each drawn small from its own document; choosing one opens the
  * app with that document), and under it the documents of that app kept on this device (kit/library.ts),
- * newest first. No copy. (Paul, 2026-10-09: "Small icon and app name, then templates menu. Then documents
+ * newest first, each preview on the edge of the app's icon (kit.css .to-drive). No copy. (Paul, 2026-10-09: "Small icon and app name, then templates menu. Then documents
  * in that format … Drive is just documents under the icons. No descriptions of apps.") Rows the width of
  * the page, not cards, so it looks on a desktop as it does on a phone (round four: "Don't make apps into cards.
  * Just make them into rows with docs below."). Each document shows its first page small at its left
@@ -17,7 +17,8 @@
  * GitHub · Email us"); the only words on the page beyond the apps' names. The two sites open in a new tab, unasked,
  * and the mail link opens the mail app: the chrome's own links (kit/link-guard.ts `data-to-chrome`).
  *
- * Above the apps, once something is kept, a search box over the library (kit/search.ts): every word of it
+ * Above the apps, while Save in browser is on and something is kept, a search box over the library (kit/search.ts):
+ * under Private there is nothing to search, so nothing says so (Paul, 2026-10-12). Every word of it
  * somewhere in a document's title or text, the best first, each found document with its title and the
  * lines that hold the words, the words marked. Each document's link is decoded once, when first searched.
  */
@@ -35,7 +36,7 @@ import './preview.ts';
 import { startEditing } from './chrome.ts';
 import { go, parseHash, routeHash } from './route.ts';
 import { ago, forget, library, type Kept } from './library.ts';
-import { onPrivacy } from './privacy.ts';
+import { keeping, onPrivacy } from './privacy.ts';
 import { focusBack } from './dialog.ts';
 import { origin } from './network.ts';
 import { repoUrl } from './version.ts';
@@ -290,7 +291,7 @@ export class ToHome extends LitElement {
     return html`<div class="to-home">
       <h1 class="sr-only">${t('Tiny Little Office')}</h1>
       ${
-        kept.length
+        keeping() && kept.length
           ? html`<input class="to-search" type="search" placeholder=${t('Search your documents')} aria-label=${t('Search your documents')} autocomplete="off" .value=${this.query} @input=${(e: Event) => (this.query = (e.target as HTMLInputElement).value)} @keydown=${(e: KeyboardEvent) => e.key === 'Enter' && (e.preventDefault(), this.querySelector<HTMLElement>('.to-found-docs a')?.click())} />`
           : nothing
       }

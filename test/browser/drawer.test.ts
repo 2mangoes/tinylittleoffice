@@ -282,7 +282,7 @@ test('under a finger with no keyboard the drawer, its menus and the commands it 
 
 // Every row of the drawer that is an icon before its words keeps the icon beside the words' first line when they wrap
 // (Paul, 2026-10-11: "Align the icons in the main menu to the top so they stay there when we zoom"): This document's
-// rows, the apps', Open a file, Compare, Theme, About. At the largest size the apps' names wrap on a phone.
+// rows, the apps', Theme, About. At the largest size the apps' names wrap on a phone.
 for (const [w, h] of [
   [390, 844],
   [1100, 800],
@@ -311,11 +311,11 @@ for (const [w, h] of [
 // search over apps, documents, templates and commands, the apps away from home, then the rest; no Privacy, no
 // Keyboard shortcuts, no palette of its own; Theme's first option Match device; About's body the version line alone.
 
-test("the drawer's sections in Paul's order: the language, Save in browser, the size, the search and the apps, This document, the files, the rest", async () => {
+test("the drawer's sections in Paul's order: the language, Save in browser, the size, the search and the apps, This document, the rest", async () => {
   const shell = await mount(`#/v1/write/${encodeDoc('# Plans\n\nWords.\n')}`);
   await until(() => !!shell.querySelector('to-write-editor'));
   const dialog = await openDrawer(shell);
-  const order = ['.to-drawer-lang', '.to-drawer-save', '.to-size', '.to-drawer-apps', '.to-drawer-doc', '.to-drawer-files', '.to-drawer-prefs'].map((s) => dialog.querySelector(s)!);
+  const order = ['.to-drawer-lang', '.to-drawer-save', '.to-size', '.to-drawer-apps', '.to-drawer-doc', '.to-drawer-prefs'].map((s) => dialog.querySelector(s)!);
   for (const el of order) expect(el).not.toBeNull();
   for (let i = 1; i < order.length; i++) expect(order[i - 1].compareDocumentPosition(order[i]) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
   // The apps are rows away from home.
@@ -489,3 +489,18 @@ for (const scale of [1, 2])
       keepSize(1);
     }
   });
+
+// Paul, 2026-10-12: "Get rid of open a file and compare and zip download." A file still opens dropped on the page
+// (kit/open.ts); Compare is still the API's and the CLI's, and a #/compare link still opens it.
+test('the drawer has no Open a file…, no Compare… and no Download everything, at home or in a document', async () => {
+  for (const at of ['', `#/v1/write/${encodeDoc('# Plans\n\nWords.\n')}`]) {
+    const shell = await mount(at);
+    const dialog = await openDrawer(shell);
+    const words = dialog.textContent!;
+    for (const gone of ['Open a file', 'Compare', 'Download everything']) expect(words).not.toContain(gone);
+    expect(dialog.querySelector('.to-drawer-files, .to-drawer-open, .to-drawer-compare, input[type=file], .to-download-all')).toBeNull();
+    expect(document.querySelector('.to-download-all, .to-privacy-zip')).toBeNull();
+    dialog.close();
+  }
+  history.replaceState(null, '', location.pathname);
+});

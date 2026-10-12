@@ -75,8 +75,6 @@ title: The document's name
 ---
 ```
 
-Download everything writes the title here, the one the library gives it (an automatic name, its first words), in
-a text whose head names none, so the file comes back as it was named.
 The shell's keys are `title`, `by` and `created` (and `app` in a `.tlo` file). A table's `lock:` and
 `chart:` ride on the head for a sheet and on the table's attributes anywhere else.
 
@@ -96,7 +94,7 @@ structure than write the text: the same document, a head and a list of blocks, n
 API's `toJson(text)` gives it (and `read(url).json`; `tinyoffice json <link>` on the command line) and
 `fromJson(json)` gives the canonical TLO text back (`tinyoffice link <app> --json doc.json`), so for every
 document `fromJson(toJson(x)) === write(parse(x))`, byte for byte, every space with it. Download → Data (JSON)
-saves it as a `.json` file with `app` in its head, as a `.tlo` has, and Open a file… opens one again.
+saves it as a `.json` file with `app` in its head, as a `.tlo` has, and one dropped on the page opens again.
 
 The contract is the JSON Schema (2020-12) at
 [`packages/doc/schema/tlo.schema.json`](../packages/doc/schema/tlo.schema.json), written from the kernel's

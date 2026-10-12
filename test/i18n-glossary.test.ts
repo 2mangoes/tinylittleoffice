@@ -59,8 +59,6 @@ export const TERMS: Term[] = [
 /** Drift a language has on purpose: the term, the key (none: the term's two words), and why. */
 const ALLOW: { lang: string; term: string; key?: string; why: string }[] = [
   // The translators' glossaries.
-  { lang: 'de', term: 'Download', key: 'Download everything', why: 'glossary: Download as a noun and the button, herunterladen as the verb' },
-  { lang: 'de', term: 'Download', key: 'Download everything (.zip)', why: 'glossary: herunterladen as the verb' },
   { lang: 'de', term: 'Download', key: 'Download the .{ext}', why: 'glossary: herunterladen as the verb' },
   { lang: 'it', term: 'Download', key: 'Download failed', why: 'the noun: Italian says "il download", Scarica is the verb on the button' },
   { lang: 'pt-br', term: 'Download', key: 'Download failed', why: 'the noun: Portuguese says "o download", Baixar is the verb on the button' },

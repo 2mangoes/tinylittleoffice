@@ -12,7 +12,7 @@
  * A .tlo file is the document's text with `app: <id>` in its head, so it opens as its own app: the head's
  * `app` is taken out again on opening (the link never carries it).
  */
-import { splitHead, takeHead, withHead, writeHead } from '../doc/index.ts';
+import { takeHead, withHead } from '../doc/index.ts';
 import { parseHash } from './route.ts';
 
 /** What a plain link or a file holds: the app it opens in, and the document's text. */
@@ -80,18 +80,6 @@ export function plainLink(site: string, app: string, text: string, opts: { title
 export const tloText = (app: string, text: string): string => withHead(text, { app });
 
 /**
- * A document as Download everything writes it (kit/privacy.ts everything): with the title the library gives it
- * (an automatic name, its first words) first in a head that names none, so it comes back from the zip as it was
- * named (Paul, 2026-10-11). A text whose head has its title, or no title to give, is as it was.
- */
-export function titledText(text: string, title: string): string {
-  const [head, body] = splitHead(text);
-  if (head.title || !title) return text;
-  const { title: _, ...rest } = head;
-  return writeHead({ title, ...rest }) + body;
-}
-
-/**
  * A file's words, as a document: a .tlo (or any text whose head names its app) opens in that app; any other
  * text (a .md, a .txt) opens in `fallback`, the app open now, else the Word Processor. Its title is the file's
  * name, for a document that names none. null for a file that is not words.
@@ -113,11 +101,12 @@ export interface InZip {
 }
 
 /**
- * The documents in a zip's files (kit/zip.ts unzip), in the zip's order: what Download everything writes (a folder
- * by app; the folder names the app where the head does not, else `fallback`), or any zip of .tlo and .md files. A
- * .txt that is one link to a document (a locked one, as Download everything writes it) is that document; anything
+ * The documents in a zip's files (kit/zip.ts unzip), in the zip's order: what Download everything wrote before it
+ * went (a folder by app; the folder names the app where the head does not, else `fallback`), or any zip of .tlo and
+ * .md files. A
+ * .txt that is one link to a document (a locked one, as Download everything wrote it) is that document; anything
  * else (a README, a picture, the dot files an archiver adds) is left alone. The name Download
- * everything gives a document with none ("untitled", "locked") is no name.
+ * everything gave a document with none ("untitled", "locked") is no name.
  */
 export function readZip(files: Record<string, Uint8Array>, fallback: string, known: (id: string) => boolean): InZip[] {
   const found: InZip[] = [];

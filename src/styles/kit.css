@@ -1304,6 +1304,12 @@
   .to-drawer-prefs {
     margin-top: auto;
   }
+  /* Room at the drawer's foot while Download's table is open, so its row can go to the top and the table open under it (drawer.ts onToggle). */
+  .to-drawer-room::after {
+    content: '';
+    flex: none;
+    height: 100%;
+  }
   /* Save in browser, straight under the head's own line. */
   .to-drawer-section.to-drawer-save {
     border-top: 0;
@@ -2016,10 +2022,13 @@
   .to-home-foot a {
     color: inherit;
   }
+  /* An app's kept documents line up with it (Paul, 2026-10-12: "The preview documents are supposed to be aligned with
+     the app names and icons"): a row's inset is the app row's, so a preview's edge is the icon's and the words are as
+     far from the preview as the name from the icon; "n more" starts its words there too. */
   .to-drive {
     list-style: none;
     margin: 0 0 0.375em;
-    padding: 0 0 0 2.375em;
+    padding: 0;
   }
   .to-drive li {
     display: flex;
@@ -2032,7 +2041,8 @@
     align-items: center;
     gap: 0.625em;
     min-height: var(--to-touch);
-    padding: 0.25em 0 0.25em 0.5em;
+    padding: 0.25em 0;
+    padding-inline-start: 0.5em;
     color: var(--to-ink);
     text-decoration: none;
     border-radius: var(--to-radius-sm);
@@ -2063,7 +2073,8 @@
   }
   .to-drive-more {
     align-self: flex-start;
-    margin: 0 0 0.375em 2.375em;
+    margin: 0 0 0.375em;
+    padding: 0 0.5em;
     border: 0;
     background: transparent;
     font-weight: 400;
@@ -2217,17 +2228,6 @@
     display: block;
     width: 100%;
     height: auto;
-  }
-
-  /* ---- the drawer's files: Open a file…, Compare… ---- */
-  .to-drawer-files {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5em;
-  }
-  .to-drawer-files .to-btn {
-    flex: 1 1 auto;
-    text-decoration: none;
   }
 
   /* ---- Compare: two documents side by side, a row per block; stacked on a phone ---- */

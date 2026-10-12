@@ -16,8 +16,7 @@
  *    commands that need nothing in hand (the bar being away while reading); each with its keys at the right where
  *    there is a keyboard (kit/bar.ts keysKbd: never under a finger until a key with Ctrl, ⌘ or Alt is typed, and never
  *    part of the row's name).
- * 6. Open a file… (kit/open.ts) and Compare… (kit/compare.ts).
- * 7. Theme, Add to home screen where the browser offers it (install.ts; on an iPhone, the line that says how), About
+ * 6. Theme, Add to home screen where the browser offers it (install.ts; on an iPhone, the line that says how), About
  *    (the commit it runs, from /version.json, kit/version.ts, read when About opens: Paul, "we'll write a few lines later").
  *
  * On a touch screen the dialog itself holds the focus (the search would raise the keyboard) and draws no ring for it.
@@ -40,9 +39,6 @@ import { keeping, onPrivacy, setPrivate } from './privacy.ts';
 import { canInstall, install, installByHand, onInstall } from './install.ts';
 import { size } from './zoom.ts';
 import { toast } from './toast.ts';
-import { openFile, OPENS } from './open.ts';
-import { compareHash } from './compare.ts';
-import { currentHash, parseHash } from './route.ts';
 import { commitUrl, running, type Version } from './version.ts';
 import './preview.ts';
 import { focusBack, handBack, type ToDialog } from './dialog.ts';
@@ -186,6 +182,22 @@ export class ToDrawer extends LitElement {
     toast(keeping() ? t('Saving in this browser') : t('Nothing saved in this browser'));
   }
 
+  /**
+   * Download's table opens under its row (Paul's order puts This document low in the drawer, and below it there may be
+   * too little left to scroll it up: Open a file… and Compare… were that room until they went, 2026-10-12): as the
+   * table opens, the drawer gains a screen of room at its foot and the row goes to its top; closed, the room goes.
+   * Heard in the capture, before the menu places itself beside the row.
+   */
+  private onToggle = (e: Event) => {
+    const pop = e.target as HTMLElement;
+    const row = pop.parentElement;
+    if (!row?.matches('to-menu.to-drawer-download')) return;
+    const inner = this.querySelector<HTMLElement>('.to-drawer-inner')!;
+    const open = (e as ToggleEvent).newState === 'open';
+    inner.classList.toggle('to-drawer-room', open);
+    if (open) inner.scrollTop += row.getBoundingClientRect().top - inner.getBoundingClientRect().top;
+  };
+
   /** A command found: the drawer closes, the focus goes back where it was, then it runs (a command on the words finds them selected as they were). */
   private choose({ cmd, c }: Offer) {
     this.close();
@@ -193,18 +205,6 @@ export class ToDrawer extends LitElement {
     const back = c instanceof HTMLElement && c.localName === 'to-text' ? c : this.from;
     back?.focus({ preventScroll: true });
     void run(cmd, c);
-  }
-
-  /** A file chosen: opened as a document (the drawer closes as the address changes). */
-  private opened(input: HTMLInputElement) {
-    const file = input.files?.[0];
-    input.value = '';
-    if (file) void openFile(file, parseHash(location.hash).app ?? location.pathname.split('/').slice(-2)[0]);
-  }
-  /** Compare, beginning with the document open now (if one is). */
-  private compareHref(): string {
-    const { app, payload } = parseHash(currentHash());
-    return compareHash(app && payload ? { app, payload } : null);
   }
 
   /**
@@ -248,7 +248,7 @@ export class ToDrawer extends LitElement {
     const kept = library();
     const placeholder = kept.length ? t('Find app, doc, template, or command') : t('Find app, template, or command');
     const chosen = chosenLanguage() ?? '';
-    return html`<dialog class="to-drawer" aria-label=${t('Tiny Little Office')} @close=${this.onClose} @click=${(e: Event) => e.target === this.dialog && this.close()}>
+    return html`<dialog class="to-drawer" aria-label=${t('Tiny Little Office')} @close=${this.onClose} @toggle=${{ handleEvent: this.onToggle, capture: true }} @click=${(e: Event) => e.target === this.dialog && this.close()}>
       <div class="to-drawer-inner">
         <!-- The head is the language picker and Close, the name not said again here (Paul, 2026-10-10). -->
         <header class="to-drawer-head">
@@ -300,11 +300,6 @@ export class ToDrawer extends LitElement {
                   </section>`
                   : nothing
               }
-              <section class="to-drawer-section to-drawer-files">
-                <button type="button" class="to-btn to-drawer-open" @click=${() => this.querySelector<HTMLInputElement>('.to-open-input')?.click()}>${icon(UI.openFile, 18)}<span>${t('Open a file…')}</span></button>
-                <input type="file" class="to-open-input" hidden accept=${OPENS} @change=${(e: Event) => this.opened(e.target as HTMLInputElement)} />
-                <a class="to-btn to-drawer-compare" href=${this.compareHref()} @click=${() => this.close()}>${icon(UI.compare, 18)}<span>${t('Compare…')}</span></a>
-              </section>
               <section class="to-drawer-section to-drawer-prefs">
                 <label class="to-field"><span class="to-field-words">${icon(theme() === 'dark' ? UI.moon : theme() === 'light' ? UI.sun : UI.auto, 18)}<span>${t('Theme')}</span></span>
                   <select @change=${(e: Event) => {

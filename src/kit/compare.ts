@@ -1,8 +1,8 @@
 /**
  * <to-compare>: two documents side by side, block by block, with what the second changed marked: a block
  * taken out struck through on the left, a block put in marked on the right, a block changed shown as both on
- * one row. For a person reviewing what an agent (or a colleague) did to a document. Reached at "#/compare"
- * (Compare… in the menu starts it with the document open now), each side a link pasted in; the address
+ * one row. For a person reviewing what an agent (or a colleague) did to a document. Reached at "#/compare" by
+ * its link alone (the menu's Compare… is gone: Paul, 2026-10-12), each side a link pasted in; the address
  * holds both, "#/compare/<app>/<payload>/<app>/<payload>", so a comparison is a link too. Nothing leaves
  * the page. On a phone the rows stack: the old block, then the new one under it. (The old tree's
  * widgets/compare.ts, over the kernel: kit/diff.ts compares the blocks as TLO writes them.)

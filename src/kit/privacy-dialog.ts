@@ -5,8 +5,8 @@
  * again at once); the Password part of the Share dialog (renderProtect, drawn there by <to-share>); the lock beside
  * the title while there is a password (trustButton, drawn in the header); and the Privacy dialog, opened from that
  * lock: this document's password; what this device holds, item by item, each with Forget, the
- * browser's own history last (every document opened here, and not ours to clear), and Forget everything; and
- * Download everything, every document kept here in one zip. (Without `doc`, the Privacy dialog alone.)
+ * browser's own history last (every document opened here, and not ours to clear), and Forget everything. (Without
+ * `doc`, the Privacy dialog alone.)
  *
  * It gets the document's state through properties (`sealed`, `protected`) and does the work through
  * kit/privacy.ts; what changes the document goes back to the shell as events: `to-unlock` (detail: the text and
@@ -18,9 +18,7 @@ import { t } from './i18n.ts';
 import { icon, UI } from './icons.ts';
 import { toast } from './toast.ts';
 import { copyText } from './share.ts';
-import { saveFile } from './exports.ts';
-import { zip } from './zip.ts';
-import { everything, forgetDocuments, forgetEverything, forgetLinks, forgetPrefs, holdings, keeping, lockWith, onPrivacy, remember, unlock, type Holdings } from './privacy.ts';
+import { forgetDocuments, forgetEverything, forgetLinks, forgetPrefs, holdings, keeping, lockWith, onPrivacy, remember, unlock, type Holdings } from './privacy.ts';
 import type { Locker } from './crypt.ts';
 import { generatePassword } from './passwords.ts';
 import { unlockForm } from './locked-doc.ts';
@@ -164,11 +162,6 @@ export class ToPrivacy extends LitElement {
     await forgetEverything();
     toast(t('Nothing saved in this browser'));
   }
-  private async download() {
-    const files = await everything(`${location.origin}${location.pathname}`);
-    if (!Object.keys(files).length) return toast(t('There is nothing here to download.'));
-    await saveFile('tiny-little-office.zip', 'application/zip', zip(files));
-  }
 
   /* ---------- drawn ---------- */
 
@@ -193,11 +186,6 @@ export class ToPrivacy extends LitElement {
         ${row('to-held-history', t('Your browser’s history'), t('Every document opened here, in full, unless it has a password.'), t('Not ours to clear'), null)}
       </ul>
       <button type="button" class="to-btn to-forget-all" @click=${() => void this.forgetAll()}>${icon(UI.trash, 16)}<span>${t('Forget everything')}</span></button>
-    </section>
-    <section class="to-privacy-section to-privacy-zip" aria-labelledby="to-privacy-zip-h">
-      <h3 id="to-privacy-zip-h">${t('Download everything')}</h3>
-      <p class="to-hint">${t('Every document kept here, as its text, in one zip.')}</p>
-      <button type="button" class="to-btn to-download-all" ?disabled=${!held.documents} @click=${() => void this.download()}>${icon(UI.download, 16)}<span>${t('Download everything (.zip)')}</span></button>
     </section>`;
   }
 

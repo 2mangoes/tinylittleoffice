@@ -72,7 +72,6 @@ import {
   Upload,
   GitCompare,
   Code,
-  FolderOpen,
   Play,
   Send,
   // the starter library
@@ -225,7 +224,6 @@ export const UI = {
   upload: Upload,
   compare: GitCompare,
   code: Code,
-  openFile: FolderOpen,
   mail: Mail,
   post: Send,
 } as const;

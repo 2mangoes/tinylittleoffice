@@ -9,7 +9,6 @@ import { parseHash } from '../../src/kit/route.ts';
 import { store } from '../../src/kit/store.ts';
 import type { ToShell } from '../../src/kit/shell.ts';
 import type { ToDialog } from '../../src/kit/dialog.ts';
-import type { ToDrawer } from '../../src/kit/drawer.ts';
 
 afterEach(() => {
   vi.restoreAllMocks();
@@ -93,7 +92,7 @@ test('Download gives every app a .tlo that names its app, Markdown, and the .pdf
   });
 });
 
-test('a .tlo dropped on the page opens as its own app and title; a .md from the menu opens in the app open now', async () => {
+test('a .tlo dropped on the page opens as its own app and title; a .md dropped opens in the app open now', async () => {
   const shell = await mount(`#/v1/write/${encodeDoc('Hello\n')}`);
   await until(() => !!shell.querySelector('to-write-editor'));
   const drop = new DataTransfer();
@@ -105,15 +104,10 @@ test('a .tlo dropped on the page opens as its own app and title; a .md from the 
   await until(() => parseHash(location.hash).app === 'outline' && !!shell.querySelector('to-outline-editor'));
   expect(docNow()).toBe('---\ntitle: Packing\n---\n- [ ] Socks\n');
 
-  // The menu: Open a file… is a file picker; a Markdown file with no title is called by its name.
-  await shell.querySelector<ToDrawer>('to-drawer')!.show();
-  const input = shell.querySelector<HTMLInputElement>('to-drawer .to-open-input')!;
-  expect(shell.querySelector('to-drawer .to-drawer-open')!.textContent).toContain('Open a file…');
-  expect(input.accept).toContain('.tlo');
+  // A Markdown file with no title is called by its name (the menu's Open a file… is gone: Paul, 2026-10-12).
   const pick = new DataTransfer();
   pick.items.add(new File(['- [ ] Tent\n'], 'camping.md', { type: 'text/markdown' }));
-  input.files = pick.files;
-  input.dispatchEvent(new Event('change'));
+  shell.dispatchEvent(new DragEvent('drop', { bubbles: true, cancelable: true, dataTransfer: pick }));
   await until(() => docNow().includes('Tent'));
   expect(parseHash(location.hash).app).toBe('outline');
   expect(docNow()).toBe('---\ntitle: camping\n---\n- [ ] Tent\n');
@@ -126,15 +120,11 @@ test('a .tlo dropped on the page opens as its own app and title; a .md from the 
   expect(location.hash).toBe(before);
 });
 
-test('Compare: two links side by side, what the second changed marked, Swap, a link pasted; from the menu it starts with this document', async () => {
+test('Compare: two links side by side, what the second changed marked, Swap, a link pasted; a link to it with one document starts with that one', async () => {
   const a = encodeDoc('---\ntitle: Plan\n---\n# Goals\n\n- Ship\n- Hire\n');
   const b = encodeDoc('---\ntitle: Plan\n---\n# Goals\n\n- Ship\n- Hire two\n- Rest\n');
-  const shell = await mount(`#/v1/write/${a}`);
-  await until(() => !!shell.querySelector('to-write-editor'));
-  await shell.querySelector<ToDrawer>('to-drawer')!.show();
-  const item = shell.querySelector<HTMLAnchorElement>('to-drawer .to-drawer-compare')!;
-  expect(item.getAttribute('href')).toBe(`#/compare/write/${a}`);
-  item.click();
+  // The menu's Compare… is gone (Paul, 2026-10-12); Compare is still the API's and the CLI's, and its link opens it.
+  const shell = await mount(`#/compare/write/${a}`);
   await until(() => !!shell.querySelector('to-compare'));
   const cmp = shell.querySelector('to-compare')!;
   await until(() => !!cmp.querySelector('.cmp-a'));

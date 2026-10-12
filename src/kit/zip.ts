@@ -1,6 +1,6 @@
 /**
- * A zip of text and binary files: what the Office formats (.xlsx, .docx, .pptx) are, and Download everything; and
- * one read back (a zip of documents opened: kit/open.ts). fflate, where the platform has no zip reader or writer
+ * A zip of text and binary files: what the Office formats (.xlsx, .docx, .pptx) are; and one read back (a zip of
+ * documents dropped on the page: kit/open.ts). fflate, where the platform has no zip reader or writer
  * (CompressionStream makes a gzip stream, not an archive).
  */
 import { strToU8, unzipSync, zipSync, type Zippable } from 'fflate';

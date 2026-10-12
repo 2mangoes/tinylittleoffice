@@ -1,14 +1,14 @@
 /**
  * Opening a file: a .tlo (the text a Download → Text (TLO) gives, its app in its head) opens as its own app
  * and title; a .md or .txt opens in the app open now, else the Word Processor, called by its file name when
- * it names nothing itself. Reached two ways: a file dropped anywhere on the page (the shell), and Open a
- * file… in the menu (the drawer's file picker). A .json (Download → Data (JSON): the kernel's document, src/doc/json.ts)
+ * it names nothing itself. Reached by a file dropped anywhere on the page (the shell); the menu's Open a file… is
+ * gone (Paul, 2026-10-12). A .json (Download → Data (JSON): the kernel's document, src/doc/json.ts)
  * opens as its .tlo would, when it fits the schema; one that does not is said so. The document goes into a link and the link is followed: no
  * file is kept, nothing is sent.
  *
  * A zip goes in too (Paul, 2026-10-11: "Let me download all my docs as a single zip file and upload them too"):
- * its .tlo and .md files are documents (kit/plain.ts readZip: what Download everything writes comes back as it
- * was), the rest of it (a README, a picture) left alone. Under Saved they are kept (kit/library.ts keepAll),
+ * its .tlo and .md files are documents (kit/plain.ts readZip: what Download everything wrote, before it went, comes
+ * back as it was), the rest of it (a README, a picture) left alone. Under Saved they are kept (kit/library.ts keepAll),
  * a document already kept with the same text left as it is; under Private a dialog lists them by app and name and
  * offers to keep them (Saved turned on) or open one. A zip of one document opens it, as that file would.
  */
@@ -25,9 +25,6 @@ import { toast } from './toast.ts';
 import { unzip } from './zip.ts';
 import type { ToDialog } from './dialog.ts';
 import './dialog.ts';
-
-/** What the picker offers. */
-export const OPENS = '.tlo,.md,.markdown,.txt,.json,text/plain,text/markdown,application/json,.zip,application/zip';
 
 const known = (id: string) => !!appOf(id);
 

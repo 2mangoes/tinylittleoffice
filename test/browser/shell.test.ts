@@ -393,9 +393,10 @@ test('home rows at 1100 and at 390: one column of full-width rows, the same shap
       for (const r of rows) expect(Math.round(r.getBoundingClientRect().width)).toBe(Math.round(main.width));
       const css = getComputedStyle(rows[0]);
       shapes.push({ lefts: new Set(rows.map((r) => Math.round(r.getBoundingClientRect().left))).size, widths: [], border: css.borderTopWidth + css.borderLeftWidth, shadow: css.boxShadow });
-      // The documents sit under their app, indented past its icon.
-      const doc = rows[0].querySelector('.to-drive-open')!.getBoundingClientRect();
-      expect(doc.left).toBeGreaterThan(rows[0].querySelector('.to-app-open')!.getBoundingClientRect().left + 20);
+      // The documents sit under their app, a preview's edge on its icon's (Paul, 2026-10-12: "They're indented very much
+      // to the right"; home.test.ts measures the rest).
+      const preview = rows[0].querySelector('.to-drive-open to-preview')!.getBoundingClientRect();
+      expect(Math.abs(preview.left - rows[0].querySelector('.to-app-open > .to-icon')!.getBoundingClientRect().left)).toBeLessThan(1);
       // A thin rule between rows: a pixel, or the one device pixel the browser snaps it to under the size of everything.
       expect(parseFloat(css.borderBottomWidth)).toBeGreaterThan(0.5);
       expect(parseFloat(css.borderBottomWidth)).toBeLessThanOrEqual(1);
