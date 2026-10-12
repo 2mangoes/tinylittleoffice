@@ -177,7 +177,9 @@ test('Post the link: each service’s compose box with the title and the link, t
   const open = vi.spyOn(window, 'open').mockImplementation(() => null);
   const go = async (cls: string, host: string) => {
     d.querySelector<HTMLButtonElement>(`.to-post-${cls}`)!.click();
-    await until(() => guardHost() === host);
+    // A network's button first draws the first page as a card and posts it (kit/share/card.ts), the icon library imported
+    // for it: real work before the guard opens, and slow on GitHub's runner (the v1.2 CI run stopped at 3 s, 2026-10-12).
+    await until(() => guardHost() === host, 20_000, `the guard never opened for ${host}: the card is drawn and posted first`);
     document.querySelector<HTMLButtonElement>('to-dialog.to-link-guard .lg-go')!.click();
     await until(() => open.mock.calls.length > 0);
     const [url, target, features] = open.mock.calls.pop()!;
