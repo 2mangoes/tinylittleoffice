@@ -210,6 +210,10 @@ export class ToCalEditor extends DocElement<CalView> {
   }
   connectedCallback() {
     super.connectedCallback();
+    // The month, the year and the schedule are moved through by the bar, and the words are typed in a dialog: on a phone
+    // the bar is shown whatever has the focus, as the Calculator's is (Paul, 2026-10-12: "Keep the navigation elements
+    // for the calendar open all the time. It has a different editor pattern"; kit/ui/chrome.ts).
+    this.dataset.bar = 'always';
     // Capturing, at the editor itself: before DocElement answers an undo the open dialog's draft would be left behind by.
     this.addEventListener('docundo', this.onHistory, true);
     this.addEventListener('docredo', this.onHistory, true);

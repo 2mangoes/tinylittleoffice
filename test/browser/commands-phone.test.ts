@@ -164,7 +164,7 @@ test('on a phone the Word Processor shows no bar until the words are tapped, and
   expect(shown(bar())).toBe(false);
 });
 
-test('on a phone the Spreadsheet shows its bar with a cell chosen, and the Calculator always', async () => {
+test('on a phone the Spreadsheet shows its bar with a cell chosen, and the Calculator and the Calendar always', async () => {
   await page.viewport(390, 844);
   await coarse(true);
   const sheet = await mount(`#/v1/sheet/${encodeDoc('Item | Cost\n--- | ---\nRent | 1200\n')}`);
@@ -176,6 +176,12 @@ test('on a phone the Spreadsheet shows its bar with a cell chosen, and the Calcu
   expect(shown(bar())).toBe(true);
   const calc = await mount('#/v1/calc');
   await until(() => !!calc.querySelector('.calc-display') && !!calc.querySelector('.to-editor to-bar button'));
+  (document.activeElement as HTMLElement | null)?.blur();
+  await settled();
+  expect(shown(bar())).toBe(true);
+  // The Calendar's bar is its way through the months (Paul, 2026-10-12): shown while reading, nothing in hand.
+  const cal = await mount('#/v1/cal');
+  await until(() => !!cal.querySelector('.cal-grid') && !!cal.querySelector('.to-editor to-bar button'));
   (document.activeElement as HTMLElement | null)?.blur();
   await settled();
   expect(shown(bar())).toBe(true);

@@ -124,7 +124,7 @@
     }
     /* The bar comes with the focus (kit/ui/chrome.ts: indoc): while nothing in the document has it (reading), the bar
        slides under the column's foot and its room goes with it; an editor whose keys are the
-       document (the Calculator: data-bar="always") keeps it. While words are selected the context bar is the row
+       document (the Calculator and the Calendar: data-bar="always") keeps it. While words are selected the context bar is the row
        (kit/ui/context.ts: docked), and the bar's own steps aside under it. */
     to-chrome:not([indoc]) .to-column.barred:not(:has(> main > .to-editor[data-bar='always'])),
     :root[data-context-row] .to-column.barred {
