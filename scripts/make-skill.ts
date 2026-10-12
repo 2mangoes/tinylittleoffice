@@ -137,7 +137,7 @@ export async function makeShort(skill: string, examples?: Map<string, Example[]>
     '',
     intro,
     '',
-    'The document is TLO (Markdown with a few additions), percent-encoded after `#doc=`:',
+    'The document is TLO (Markdown with a few additions), percent-encoded after `#doc=`; the site and the API’s `link` write it packed, `#/v1/<app>/<payload>`; both open:',
     '',
     '```',
     `${SITE}<app>/#doc=<percent-encoded TLO>`,
@@ -156,8 +156,6 @@ export async function makeShort(skill: string, examples?: Map<string, Example[]>
     `Fetch only what you need: ${SITE}llms/<app>.txt is a page on one app; ${SITE}examples/<app>.json every shape of it, as a document, a link and JSON.`,
     '',
     '## One example per app',
-    '',
-    `More on each at ${SITE}llms/<app>.txt.`,
     '',
     ...apps().map((a) => {
       const e = ex.get(a.id)![0];

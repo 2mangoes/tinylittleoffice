@@ -29,6 +29,8 @@ test('/llms.txt is short: under 6 KB, its first screen under 1,500 tokens, with 
   expect(short).toContain('The whole description: https://tinylittleoffice.com/llms-full.txt');
   // The plain form first, the API second.
   expect(short.indexOf('#doc=')).toBeLessThan(short.indexOf(API));
+  // The packed form the site and the API's link write is named beside the plain one, so an agent knows both open.
+  expect(short).toContain('`#/v1/<app>/<payload>`; both open');
 });
 
 test('/llms.txt has one example per app, a plain link each, and each lints clean', async () => {
@@ -61,7 +63,7 @@ test('a page per app, under 4 KB: its shapes, an example and its rules', async (
     expect(page).toContain(`https://tinylittleoffice.com/examples/${a.id}.json`);
   }
   // The pages' address, once, above the examples.
-  expect(file('public/llms.txt')).toContain('More on each at https://tinylittleoffice.com/llms/<app>.txt.');
+  expect(file('public/llms.txt')).toContain('Fetch only what you need: https://tinylittleoffice.com/llms/<app>.txt');
 });
 
 // Paul, 2026-10-12: an agent wrote that decks are text-only and the Animator's format unpublished, and shipped four
@@ -72,7 +74,7 @@ test('/llms.txt says a document goes inside another, before the three rules, wit
   expect(at).toBeGreaterThan(short.indexOf('\n## One example per app\n'));
   expect(at).toBeLessThan(short.indexOf('\n## Three rules agents break first\n'));
   const section = short.slice(at, short.indexOf('\n## Three rules'));
-  for (const words of ['a fence named by the app', '```` ```anim ````', 'an animation moves on its slide', 'edited in place']) expect(section).toContain(words);
+  for (const words of ['a fence named by any of the ten app ids', '```` ```anim ````', 'an animation moves on its slide', 'edited in place']) expect(section).toContain(words);
   const url = /<(https:\/\/tinylittleoffice\.com\/deck\/#doc=[^>]+)>/.exec(section)![1];
   const r = read(url);
   expect(r.app).toBe('deck');
