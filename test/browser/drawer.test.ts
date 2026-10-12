@@ -180,7 +180,8 @@ test('About names the commit the site runs, from /version.json, asked when it op
     return new Response(JSON.stringify({ commit, tag: 'v1.0.0', built: '2026-10-10T00:00:00Z', csp: { scripts: ['sha256-x'] } }), { headers: { 'Content-Type': 'application/json' } });
   }) as typeof fetch;
   try {
-    const shell = await mount('');
+    // A document's page: the home page asks for /version.json as it opens, for its foot's version (home.test.ts).
+    const shell = await mount('#/v1/write');
     shell.querySelector<HTMLButtonElement>('.to-burger')!.click();
     await until(() => !!shell.querySelector<HTMLDialogElement>('dialog.to-drawer')?.open);
     // Nothing is asked until About opens.
