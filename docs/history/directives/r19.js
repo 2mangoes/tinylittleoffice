@@ -1,9 +1,9 @@
 export const meta = {
   name: 'round-nineteen',
-  description: "Round nineteen: housekeeping after the removals. Sonnet classifiers list dead code and stale words by area, one Opus remover acts on the lists and leaves a lint behind, then one Opus builder moves the kit into six folders, then one builds the social cards, then one reshapes the build. Sonnet reviews, Opus fixes, Sonnet squash-merges, one task at a time on main",
+  description: "Round nineteen: housekeeping after the removals. First five flaky tests made deterministic. Sonnet classifiers list dead code and stale words by area, one Opus remover acts on the lists and leaves a lint behind, then one Opus builder moves the kit into six folders, then one builds the social cards, then one reshapes the build. Sonnet reviews, Opus fixes, Sonnet squash-merges, one task at a time on main",
   phases: [
+    { title: 'Build', detail: 'Opus: the flakes first, then the remover, the move, the cards, the build', model: 'opus' },
     { title: 'Classify', detail: 'Sonnet, five areas in parallel, read-only', model: 'sonnet' },
-    { title: 'Build', detail: 'Opus: the remover, then the move', model: 'opus' },
     { title: 'Review', detail: 'Sonnet reads the branch against its directive; Opus acts on the findings', model: 'sonnet' },
     { title: 'Merge', detail: 'one squash commit into main, checks green, push', model: 'sonnet' },
   ],
@@ -62,6 +62,9 @@ const run = async (k, extra) => {
   return { task: k.id, build: r, review, fix: fixed, merge: m }
 }
 
+const flakes = await run({ id: 'r19-flakes', directive: `${S}/directive-r19-flakes.md`, what: "five browser tests that failed under load and passed alone, each made deterministic by waiting on the thing it measures (the icon search's tie-break, the Animator's frames, the Cyrillic face before measuring, the theme attribute, the lazy templates), and a lint against timed waits in tests (the deploy's full suite failed three runs in a row on different files on 2026-10-12)" })
+if (!(flakes.merge && flakes.merge.merged)) log('the flakes task did not merge; the sweep goes on regardless')
+
 phase('Classify')
 const lists = (await parallel(AREAS.map((a) => () => agent(classifyPrompt(a), { label: `classify:${a.key}`, phase: 'Classify', model: 'sonnet', schema: CLASSIFY_SCHEMA })))).filter(Boolean)
 log(`classified: ${lists.map((l) => `${l.area} ${l.candidates} (${l.sure} sure)`).join('; ')}`)
@@ -78,4 +81,4 @@ if (!(folders.merge && folders.merge.merged)) { log('the kit move did not merge;
 
 const cards = await run({ id: 'r19-social-cards', directive: `${S}/directive-r19-social-cards.md`, what: "a document shared with a network previews as itself: pressing Bluesky, Mastodon, X, LinkedIn or the share sheet uploads a 1200 by 630 picture of the first page with the title and text to the site's own card endpoint and shares the link with ?c=<id> before the hash; the site Worker and the shortener's landing page serve that card's Open Graph and Twitter tags; the generic app cards are redrawn greeked, every word a gray bar; a switch in the dialog, on by default, with the sentence about what is kept (Paul: when we explicitly share with a social network from in the app, that's when we do this; otherwise generic per app with gray shapes)" })
 const shape = await run({ id: 'r19-build-shape', directive: `${S}/directive-r19-build-shape.md`, what: "the build as one file fetched once and kept for offline: the kit, every app, the English strings, the icon library, the emoji and the math in one module named in every page's head with one stylesheet; the templates one file per app and the other languages one file each, fetched when needed; everything but the HTML cached a year; a service worker registered by Save in browser and removed with it, keeping the pages, the app file and what was fetched, pages network first; the API build one file without editors; budgets for the file's size, the file count and the requests before first paint (Paul, 2026-10-12: package the whole thing up; download the apps and home language and emoji and icons but leave out the templates and other languages unless needed; then offline is instant)" })
-return { sweep, folders, cards, shape }
+return { flakes, sweep, folders, cards, shape }
