@@ -10,7 +10,7 @@ import '../editor.ts';
 import type { ToAnimEditor } from '../editor.ts';
 import type { ToDialog } from '../../../kit/dialog.ts';
 import def from '../def.ts';
-import { until, tick } from '../../../../test/browser/helpers.ts';
+import { until } from '../../../../test/browser/helpers.ts';
 import { remScale } from '../../../kit/zoom.ts';
 
 const SHAPES = 'Kind | X | Y | W | H | Style | Label\n--- | --- | --- | --- | --- | --- | ---\nt | 4 | 20 | 20 | 4 | 04 | Lift off\ni | 8 | 36 | 8 | 8 | 0b | rocket\n';
@@ -26,10 +26,24 @@ async function editor(value = ''): Promise<{ el: ToAnimEditor; last: () => strin
   const changes: string[] = [];
   main.addEventListener('docchange', (e) => changes.push((e as CustomEvent<string>).detail));
   main.append(el);
-  await el.updateComplete;
+  // Drawn as it opens, waited for rather than assumed after one update (under load a test read an empty filmstrip and
+  // a bar with no Settings): a drawing in Move mode with its bar and every frame on the filmstrip, an empty stage in Draw.
+  await until(
+    () => (el.mode === 'move' ? !!button(el, 'Settings') && el.querySelectorAll('.anim-thumbs .anim-frame').length === el.view.frames : !!el.querySelector('to-draw-editor')),
+    'the motion was never drawn: no bar and filmstrip in Move mode, no Draw in Draw mode',
+  );
+  await quiet(el);
   return { el, changes, last: () => changes.at(-1) };
 }
 const button = (el: HTMLElement, label: string) => el.querySelector<HTMLButtonElement>(`button[aria-label="${label}"]`)!;
+/** Until the editor, and Draw inside it, have no drawing still to do: Lit's updateComplete says true once none was asked for again. */
+async function quiet(el: ToAnimEditor) {
+  for (let i = 0; i < 20; i++) {
+    const draw = el.querySelector<HTMLElement & { updateComplete: Promise<boolean> }>('to-draw-editor');
+    if ((await el.updateComplete) && (!draw || (await draw.updateComplete))) return;
+  }
+  throw new Error('the editor kept asking to be drawn again');
+}
 const byWords = (el: HTMLElement, words: string) => [...el.querySelectorAll<HTMLButtonElement>('button')].find((b) => b.textContent!.trim() === words)!;
 const stage = (el: HTMLElement) => el.querySelector<SVGSVGElement>('svg.anim-stage')!;
 const keysTable = (text: string | undefined) => (text ?? '').slice((text ?? '').indexOf('Shape | Keys'));
@@ -60,6 +74,7 @@ async function setField(el: ToAnimEditor, selector: string, value: string) {
 }
 /** Settings in the bar: the sheet with the length, the speed and the repeat, open. */
 async function settings(el: ToAnimEditor) {
+  await until(() => !!button(el, 'Settings'), 'no Settings in the bar');
   button(el, 'Settings').click();
   await until(() => !!el.querySelector('dialog.to-dialog[open] .anim-length'));
 }
@@ -70,8 +85,7 @@ async function pick(el: HTMLElement, opener: HTMLElement, words: string) {
   const item = items.find((x) => x.textContent!.includes(words));
   if (!item) throw new Error(`no item ${words} among ${items.map((x) => x.textContent!.trim()).join(' | ')}`);
   item.click();
-  await (el as ToAnimEditor).updateComplete;
-  await tick();
+  await quiet(el as ToAnimEditor);
 }
 
 test('a drawing opens in Move mode; a tap selects the rocket, a drag keys it now; later on the scrubber a drag keys it then; undo takes it back', async () => {
@@ -152,9 +166,7 @@ test('Draw mode is Draw itself, given the drawing alone; a shape drawn there com
   draw.querySelector<HTMLButtonElement>('to-insert button')!.click();
   await until(() => !!document.querySelector('[popover]:popover-open'));
   [...document.querySelectorAll<HTMLElement>('[popover]:popover-open [role^=menuitem]')].find((x) => x.textContent!.includes('Ellipse'))!.click();
-  await el.updateComplete;
-  await tick();
-  expect(changes).toHaveLength(1);
+  await until(() => changes.length === 1, 'the ellipse drawn in Draw never came back to the motion');
   expect(last()).toContain('\ni | 8 | 36 | 8 | 8 | 0b | rocket\ne | 38 | 26 | 12 | 6 | 0 |\n');
   expect(keysTable(last())).toBe(keysTable(LIFT));
   // Draw shows what came back, and keeps its own selection (the new ellipse).
@@ -180,7 +192,7 @@ test('an empty motion opens in Draw mode; a list of things is put on the stage a
   button(el, 'Play').click();
   await el.updateComplete;
   expect(button(el, 'Pause').getAttribute('aria-pressed')).toBe('true');
-  await tick(300);
+  await until(() => el.clock > 1, 'the clock never ran');
   expect(el.querySelector('.anim-stage .hit')).toBeNull();
   key(el, ' ');
   await el.updateComplete;
@@ -295,8 +307,7 @@ test('at phone width: the bar is one row, the stage fits, nothing is wider than 
 
 const undo = async (el: ToAnimEditor, which: 'docundo' | 'docredo' = 'docundo') => {
   el.dispatchEvent(new CustomEvent(which, { cancelable: true }));
-  await el.updateComplete;
-  await tick();
+  await quiet(el);
 };
 const chosen = (el: HTMLElement) => [...el.querySelectorAll('.anim-stage .hit.sel')].map((g) => g.getAttribute('data-idx'));
 const press = async (el: ToAnimEditor, k: string, more: KeyboardEventInit = {}) => {
@@ -483,13 +494,11 @@ test("Enter, or two taps, on a shape in hand opens its words in place (Draw's ow
   const box = words.querySelector<HTMLElement>('.tx')!;
   expect(words.hidden).toBe(false);
   expect(document.activeElement).toBe(box);
-  await tick();
-  expect(box.innerText).toBe('Lift off');
+  await until(() => box.innerText === 'Lift off', 'the words never opened on the shape');
   // Typing over the words chosen: one burst in Motion's log, as in Draw's own.
   for (const ch of 'Lift up') {
     box.dispatchEvent(new InputEvent('beforeinput', { inputType: 'insertText', data: ch, bubbles: true, cancelable: true, composed: true }));
-    await el.updateComplete;
-    await tick();
+    await quiet(el);
   }
   expect(last()).toContain('| Lift up\n');
   // (A space at the end is a change to the label too: it keeps every space typed.)
@@ -518,9 +527,8 @@ test("Draw mode: the shapes in hand go in and come out with the mode; Draw's own
   await el.updateComplete;
   type D = HTMLElement & { sel?: number; picked?: number[]; updateComplete: Promise<unknown> };
   const draw = el.querySelector<D>('to-draw-editor')!;
-  await draw.updateComplete;
-  await tick();
   const selOf = (d: D) => (Array.isArray(d.picked) ? d.picked : [d.sel]);
+  await until(() => selOf(draw).join() === '1', 'the rocket in hand never went into Draw');
   expect(selOf(draw)).toEqual([1]);
   // Draw's mode menu (Shapes / Pixels) is not offered here.
   expect(draw.querySelector<HTMLElement>('.draw-mode')!.offsetParent).toBeNull();
@@ -539,16 +547,14 @@ test("Draw mode: the shapes in hand go in and come out with the mode; Draw's own
   now.querySelector<HTMLButtonElement>('to-insert button')!.click();
   await until(() => !!document.querySelector('[popover]:popover-open'));
   [...document.querySelectorAll<HTMLElement>('[popover]:popover-open [role^=menuitem]')].find((x) => x.textContent!.includes('Ellipse'))!.click();
-  await el.updateComplete;
-  await tick();
-  expect(last()).toContain('\ne | ');
+  await until(() => !!last()?.includes('\ne | '), 'the ellipse never came back to the motion');
   const out = new CustomEvent('docundo', { cancelable: true });
   el.querySelector('to-draw-editor')!.dispatchEvent(out);
   await el.updateComplete;
   expect(out.defaultPrevented).toBe(true);
   expect(last()).toBe(LIFT);
   // Out of Draw mode, Draw's choice is Motion's.
-  await tick();
+  await quiet(el);
   const d2 = el.querySelector<D>('to-draw-editor')!;
   if (Array.isArray(d2.picked)) d2.picked = [0];
   else d2.sel = 0;
@@ -600,8 +606,7 @@ test("Draw mode has Draw's Align for a text in hand: a title centred there is ce
   await until(() => !!align());
   expect(align()!.getAttribute('aria-label')).toBe('Align: left');
   align()!.click();
-  await el.updateComplete;
-  await tick();
+  await until(() => !!last()?.includes('\nt | 4 | 20 | 20 | 4 | 04= | Lift off\n'), 'the title was never centred');
   expect(last()).toContain('\nt | 4 | 20 | 20 | 4 | 04= | Lift off\n');
   expect(keysTable(last())).toBe(keysTable(LIFT));
 });

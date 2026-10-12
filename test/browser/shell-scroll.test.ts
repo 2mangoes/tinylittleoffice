@@ -4,7 +4,7 @@
 // the header, at a size that can be read: Enter keeps it, Escape puts back what was there.
 import { test, expect, afterEach, vi } from 'vitest';
 import { page, userEvent } from 'vitest/browser';
-import { mount, tick, until } from './helpers.ts';
+import { mount, until, settled } from './helpers.ts';
 import { encodeDoc } from '../../src/kit/codec.ts';
 import { localDay } from '../../src/kit/library.ts';
 import { remScale } from '../../src/kit/zoom.ts';
@@ -85,7 +85,7 @@ test('the title, focused, opens a wide row: the automatic name chosen whole, Ent
   expect(header.classList.contains('titling')).toBe(false);
   field.focus();
   await until(() => header.classList.contains('titling'));
-  await tick(300);
+  await settled();
   const r = field.getBoundingClientRect();
   expect(css(r.height)).toBeCloseTo(44, 0);
   expect(css(parseFloat(getComputedStyle(field).fontSize))).toBeCloseTo(20, 1);
@@ -124,7 +124,7 @@ test('Escape puts back the title it had and closes the row; a tap elsewhere clos
   await until(() => header.classList.contains('titling'));
   field.blur();
   await until(() => !header.classList.contains('titling'));
-  await tick(300);
+  await settled();
   expect(css(header.getBoundingClientRect().height)).toBeCloseTo(56, 0);
 });
 

@@ -9,7 +9,7 @@ import type { ToTripEditor } from '../../src/apps/trip/editor.ts';
 import { COUNTRIES } from '../../src/apps/trip/countries.ts';
 import { language, setLanguage, t } from '../../src/kit/i18n.ts';
 import { cdp, page } from 'vitest/browser';
-import { mount, openDrawerDoc, tick, until } from './helpers.ts';
+import { mount, openDrawerDoc, tick, until, settled } from './helpers.ts';
 
 type MapLike = {
   getCenter(): { lat: number; lng: number };
@@ -124,7 +124,7 @@ test('Where I am centers the map on the device at a city’s zoom; refused, the 
 
 test('a pin panned out of the map’s box is inert, out of Tab’s reach, and reachable again once in view', async () => {
   const el = await editor(LISBON_PORTO);
-  await tick(60);
+  await settled();
   const pins = () => [...el.querySelectorAll<HTMLElement>('.trip-map .trip-pin')];
   // Walk what Tab reaches in the map: every pin, each inside the map's box.
   const reachable = () => pins().filter((p) => !p.closest('[inert]') && p.tabIndex >= 0);
@@ -175,7 +175,7 @@ test('390×844 with a finger: Blank chosen on a blank trip leaves the focus wher
     await until(() => !!shell.querySelector('to-templates.to-drawer-templates dialog[open] [role=option]'));
     const blank = [...shell.querySelectorAll<HTMLElement>('to-templates.to-drawer-templates [role=option]')].find((o) => o.textContent!.includes('Blank'))!;
     blank.click();
-    await tick(300);
+    await until(() => document.activeElement === shell.querySelector('.trip-map'), 'Blank never opened the trip with its map in hand');
     expect(location.hash).toBe('#/v1/trip');
     expect(document.activeElement?.classList.contains('to-keyboard-hold')).toBe(false);
     expect(document.activeElement).toBe(shell.querySelector('.trip-map'));

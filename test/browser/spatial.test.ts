@@ -6,7 +6,7 @@
 // Planner's map is Leaflet's. At the largest size the bars around the canvases are the nav's, one row, on a 390px screen.
 import { test, expect, afterEach } from 'vitest';
 import { page } from 'vitest/browser';
-import { mount, tick, until } from './helpers.ts';
+import { mount, tick, until, settled } from './helpers.ts';
 import { encodeDoc } from '../../src/kit/codec.ts';
 import { BASE, NAV_MAX, SIZE_MAX, keepSize, size, stepSize } from '../../src/kit/zoom.ts';
 import { outlineToFamily, outlineToMind, readOutline } from '../../src/apps/outline/model.ts';
@@ -111,7 +111,7 @@ async function pinch(a: Pt, b: Pt, a2: Pt, b2: Pt, hold = false) {
 async function open(c: Canvas): Promise<{ shell: ToShell; el: HTMLElement & { zoom: number }; frame: HTMLElement; picture: () => Element }> {
   const shell = await mount(c.hash);
   await until(() => !!shell.querySelector(`${c.editor} ${c.frame} ${c.picture}`) && !!shell.querySelector('.to-editor to-bar button'));
-  await tick(100);
+  await settled();
   const el = shell.querySelector(c.editor) as HTMLElement & { zoom: number };
   return { shell, el, frame: el.querySelector<HTMLElement>(c.frame)!, picture: () => el.querySelector(c.picture)! };
 }
@@ -204,7 +204,7 @@ test('a pinch on the Trip Planner’s map is Leaflet’s, not the size of everyt
   await page.viewport(390, 844);
   const shell = await mount(`#/v1/trip/${encodeDoc('Place | Lat:number | Lon:number | Note\n--- | --- | --- | ---\nLisbon | 38.7223 | -9.1393 |\nPorto | 41.1579 | -8.6291 |\n')}`);
   await until(() => !!shell.querySelector('.trip-map'));
-  await tick(100);
+  await settled();
   const map = shell.querySelector<HTMLElement>('.trip-map')!;
   expect(map.hasAttribute('data-spatial')).toBe(true);
   const r = map.getBoundingClientRect();

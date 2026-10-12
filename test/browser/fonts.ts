@@ -13,7 +13,35 @@
  */
 import '../../src/styles.css';
 
-/** Every IBM Plex face the stylesheet declares, loaded. */
+/** The family a CSS font asks for first ("600 13.6px 'IBM Plex Sans', system-ui" → IBM Plex Sans). */
+export const firstFamily = (font: string): string =>
+  font
+    .replace(/^.*?\d[\d.]*px(?:\s*\/\s*[^\s,]+)?\s+/, '')
+    .split(',')[0]
+    .trim()
+    .replace(/["']/g, '');
+
+/** A frame, for a wait that asks again: no timer. */
+const frame = () => new Promise<void>((r) => requestAnimationFrame(() => r()));
+
+/**
+ * The faces a font draws `sample` in, loaded. A load asked of a set the stylesheet's faces have not joined yet finds
+ * none and resolves at once, and the words would be measured in the fallback (it did, under load: "Эффекты" at 88px in
+ * place of Plex's 82): so the stylesheet's faces are waited for first, and a family of ours that loads no face fails,
+ * naming it.
+ */
+export async function loadFont(font: string, sample: string): Promise<void> {
+  const family = firstFamily(font);
+  const ours = (f: FontFace) => f.family.replace(/["']/g, '') === family;
+  for (let i = 0; family.startsWith('IBM Plex') && ![...document.fonts].some(ours); i++) {
+    if (i > 600) throw new Error(`the stylesheet's ${family} faces never joined the document's fonts`);
+    await frame();
+  }
+  const faces = await document.fonts.load(font, sample);
+  if (family.startsWith('IBM Plex') && !faces.length) throw new Error(`no face of ${family} loaded for "${font}" and "${sample}"`);
+}
+
+/** Every IBM Plex face the stylesheet declares, loaded (and the Cyrillic the Latin faces carry, which Russian and Ukrainian are measured in). */
 export const plex: Promise<unknown> = Promise.all(
   [
     "400 16px 'IBM Plex Sans'",
@@ -27,9 +55,9 @@ export const plex: Promise<unknown> = Promise.all(
     "400 16px 'IBM Plex Mono'",
     "600 16px 'IBM Plex Mono'",
   ]
-    .map((font) => document.fonts.load(font, 'Aa'))
-    .concat(['400', '600'].flatMap((w) => [document.fonts.load(`${w} 16px 'IBM Plex Sans Arabic'`, 'ع'), document.fonts.load(`${w} 16px 'IBM Plex Sans Devanagari'`, 'क')])),
-);
+    .map((font) => loadFont(font, 'Aa Жж'))
+    .concat(['400', '600'].flatMap((w) => [loadFont(`${w} 16px 'IBM Plex Sans Arabic'`, 'ع'), loadFont(`${w} 16px 'IBM Plex Sans Devanagari'`, 'क')])),
+).then(() => document.fonts.ready);
 await plex;
 
 /** The family of each script that is not Latin or Cyrillic. */

@@ -30,6 +30,16 @@ async function drawn(page: Page) {
   await page.evaluate(() => document.fonts.ready.then(() => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)))));
 }
 
+/**
+ * Until the page is the one asked for and its theme is written: public/theme.js before the first paint, kit/theme.ts
+ * after it. Under load a look at <html> came while the page was still on its way (an empty document, no data-theme
+ * for five seconds): the wait is for the page to have read its head, with Playwright's own patience, then the theme.
+ */
+async function themed(page: Page, scheme: 'light' | 'dark') {
+  await page.waitForFunction(() => document.readyState !== 'loading' && !!document.documentElement.dataset.theme && location.protocol !== 'about:');
+  await expect(page.locator('html')).toHaveAttribute('data-theme', scheme);
+}
+
 test('axe finds nothing in any app, at phone size, light and dark', async ({ page }, info) => {
   test.skip(info.project.name !== 'phone', 'at phone size');
   test.setTimeout(300_000);
@@ -38,7 +48,7 @@ test('axe finds nothing in any app, at phone size, light and dark', async ({ pag
   for (const scheme of ['light', 'dark'] as const) {
     await page.emulateMedia({ colorScheme: scheme });
     await page.goto('/');
-    await expect(page.locator('html')).toHaveAttribute('data-theme', scheme);
+    await themed(page, scheme);
     await expect(page.locator('.to-app-open').first()).toBeVisible();
     expect.soft((await axe(page)).violations.map(said), `home, ${scheme}`).toEqual([]);
     for (const app of apps()) {
@@ -46,7 +56,7 @@ test('axe finds nothing in any app, at phone size, light and dark', async ({ pag
       // A fresh load each time, so nothing of the app before is on the page.
       await page.goto('about:blank');
       await page.goto(`/${routeHash(app.id, encodeDoc(tpl.doc))}`);
-      await expect(page.locator('html')).toHaveAttribute('data-theme', scheme);
+      await themed(page, scheme);
       await drawn(page);
       expect.soft((await axe(page)).violations.map(said), `${app.id} (${tpl.name}), ${scheme}`).toEqual([]);
     }

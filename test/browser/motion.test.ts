@@ -76,7 +76,7 @@ test('the slideshow page with reduced motion: a slide that comes on shows its an
   const svg = clockIn(doc.querySelectorAll('section')[1]);
   doc.getElementById('next')!.click();
   // The clock is set as the slide is drawn.
-  await tick(100);
+  await until(() => Math.abs(svg.getCurrentTime() - 23 / 8) < 0.005, 'the clock was never set on the slide');
   expect(svg.animationsPaused()).toBe(true);
   expect(svg.getCurrentTime()).toBeCloseTo(23 / 8, 2);
 });

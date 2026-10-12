@@ -402,3 +402,41 @@ export function domNames(source: string): Bare[] {
     )
     .map((t) => ({ line: lineOf(t.start), words: t.text }));
 }
+
+/* ---------- A wait in a test is a condition ---------- */
+
+/** The longest a timed wait in a test may be: a turn of the event loop or a frame, never a guess at how long something takes. */
+export const WAIT_MS = 50;
+
+/**
+ * The lines of a test that wait a time longer than WAIT_MS: `tick(n)`, `setTimeout(…, n)` and Playwright's
+ * `waitForTimeout(n)` with a number over it. (`test.setTimeout` sets a test's limit and waits for nothing.) Each is
+ * given as its line, trimmed, which is how the allowlist names it.
+ */
+export function timedWaits(source: string): Bare[] {
+  const lineOf = liner(source);
+  const lines = source.split('\n');
+  const toks = tokensOf(source);
+  const out: Bare[] = [];
+  toks.forEach((t, i) => {
+    if (t.k !== K.Identifier || toks[i + 1]?.k !== K.OpenParenToken) return;
+    const dotted = toks[i - 1]?.k === K.DotToken || toks[i - 1]?.k === K.QuestionDotToken;
+    const which = t.text === 'waitForTimeout' ? 0 : t.text === 'tick' && !dotted ? 0 : t.text === 'setTimeout' && !dotted ? 1 : -1;
+    if (which < 0) return;
+    // The call's arguments at its own depth, each as its tokens.
+    const args: Token[][] = [[]];
+    for (let j = i + 2, depth = 0; j < toks.length; j++) {
+      const k = toks[j].k;
+      if (depth === 0 && k === K.CloseParenToken) break;
+      if (k === K.OpenParenToken || k === K.OpenBraceToken || k === K.OpenBracketToken) depth++;
+      else if (k === K.CloseParenToken || k === K.CloseBraceToken || k === K.CloseBracketToken) depth--;
+      if (depth === 0 && k === K.CommaToken) args.push([]);
+      else args.at(-1)!.push(toks[j]);
+    }
+    const arg = args[which];
+    if (arg?.length !== 1 || arg[0].k !== K.NumericLiteral || Number(arg[0].text.replaceAll('_', '')) <= WAIT_MS) return;
+    const line = lineOf(t.start);
+    out.push({ line, words: lines[line - 1].trim() });
+  });
+  return out;
+}

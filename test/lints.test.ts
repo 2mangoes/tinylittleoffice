@@ -9,7 +9,7 @@ import { gzipSync } from 'node:zlib';
 import { describe, expect, test } from 'vitest';
 import { eagerTemplates, firstLoad, measure, overBudget, readBudgets, type Sizes } from '../scripts/budgets.ts';
 import { staleFiles } from '../scripts/generated.ts';
-import { ALLOWED, NOT_WORDS, bareWords, domNames, graphProblems, type Module } from './lints.ts';
+import { ALLOWED, NOT_WORDS, WAIT_MS, bareWords, domNames, graphProblems, timedWaits, type Module } from './lints.ts';
 
 const ROOT = join(import.meta.dirname, '..');
 const FIXTURES = join(import.meta.dirname, 'fixtures/lints');
@@ -80,6 +80,165 @@ describe('no DOM in the model: the kernel (src/doc) never names window, document
   });
   test('src/doc names none', () => {
     expect(found(tree)).toStrictEqual([]);
+  });
+});
+
+/** Every test that runs in a browser: test/browser, the apps' own (src/apps/<id>/tests) and the Playwright specs (e2e). */
+const browserTests: Module[] = ['test/browser', 'src', 'e2e'].flatMap((dir) =>
+  (readdirSync(join(ROOT, dir), { recursive: true }) as string[])
+    .map((f) => `${dir}/${f.replaceAll('\\', '/')}`)
+    .filter((p) => p.endsWith('.ts') && (dir !== 'src' || p.includes('/tests/')))
+    .sort()
+    .map((path) => ({ path, source: readFileSync(join(ROOT, path), 'utf8') })),
+);
+
+/**
+ * The timed waits that model a real delay, each with why it is a time and not a condition: the file, the line as
+ * written (trimmed), how many such lines the file has, and the reason. Most say that nothing must happen: an absence has
+ * no moment to wait for, so the test gives what would come a while to come and sees that it did not. The rest are times
+ * the product keeps (a toast's, the gap that makes two taps one) or a delay a fake device answers after.
+ */
+export const TIMED: { file: string; wait: string; n: number; why: string }[] = [
+  {
+    file: 'test/browser/chrome.test.ts',
+    wait: 'await tick(100);',
+    n: 1,
+    why: 'the header must stay with the focus in the words: nothing must happen: an absence has no moment to wait for, so what would come is given a while to come',
+  },
+  { file: 'test/browser/commands-keys.test.ts', wait: 'await tick(60);', n: 1, why: 'a key pressed may run a command or none: what ran is collected for a while, since none has no moment' },
+  {
+    file: 'test/browser/complete.test.ts',
+    wait: 'await tick(80);',
+    n: 1,
+    why: '"10:30" must open no list: nothing must happen: an absence has no moment to wait for, so what would come is given a while to come',
+  },
+  {
+    file: 'test/browser/download.test.ts',
+    wait: 'await new Promise((r) => setTimeout(r, 300));',
+    n: 1,
+    why: 'a link with no such format must download nothing and say nothing: nothing must happen: an absence has no moment to wait for, so what would come is given a while to come',
+  },
+  {
+    file: 'test/browser/languages.test.ts',
+    wait: 'await tick(100);',
+    n: 1,
+    why: 'a language whose dictionary is on its way must draw nothing: nothing must happen: an absence has no moment to wait for, so what would come is given a while to come',
+  },
+  { file: 'test/browser/motion.test.ts', wait: 'await tick(300);', n: 1, why: 'a paused animation must not move: its clock is read, time passes, and it is read again' },
+  { file: 'test/browser/motion.test.ts', wait: 'await tick(200);', n: 1, why: 'a paused animation must not move: its clock is read, time passes, and it is read again' },
+  {
+    file: 'test/browser/no-service-worker.test.ts',
+    wait: 'await new Promise((r) => setTimeout(r, 200));',
+    n: 1,
+    why: 'no switch may ask for a service worker: nothing must happen: an absence has no moment to wait for, so what would come is given a while to come',
+  },
+  {
+    file: 'test/browser/pinch.test.ts',
+    wait: 'await tick(400);',
+    n: 2,
+    why: 'the slideshow tells a tap from two by the time between them (a real gap), and a swipe must turn no slide: nothing must happen: an absence has no moment to wait for, so what would come is given a while to come',
+  },
+  {
+    file: 'test/browser/shell.test.ts',
+    wait: 'await tick(1000);',
+    n: 2,
+    why: 'under Private, and before anything is typed under Saved, nothing may be kept: nothing must happen: an absence has no moment to wait for, so what would come is given a while to come',
+  },
+  {
+    file: 'test/browser/shell.test.ts',
+    wait: 'await tick(100);',
+    n: 1,
+    why: 'display mode must focus nothing: nothing must happen: an absence has no moment to wait for, so what would come is given a while to come',
+  },
+  {
+    file: 'test/browser/text-whole.test.ts',
+    wait: 'await tick(2000);',
+    n: 1,
+    why: 'two seconds with no key pressed (the link, the keep, the word count and the history run in them) must not scroll the column: a real pause',
+  },
+  {
+    file: 'test/browser/text-whole.test.ts',
+    wait: 'await tick(300);',
+    n: 1,
+    why: 'an arrow key must not scroll the column back: nothing must happen: an absence has no moment to wait for, so what would come is given a while to come',
+  },
+  { file: 'test/browser/toast.test.ts', wait: 'await new Promise((r) => setTimeout(r, 5000));', n: 1, why: 'a long toast stays its own time, longer than a short one: the time is the behaviour' },
+  { file: 'test/browser/toast.test.ts', wait: 'await new Promise((r) => setTimeout(r, 2800));', n: 1, why: 'a pointer on a toast holds it past its time: the time is the behaviour' },
+  {
+    file: 'test/browser/trip.test.ts',
+    wait: 'await tick(60);',
+    n: 2,
+    why: 'the device must not be asked where it is, and a trip with stops must not move to it: the fake device answers in 10ms, given a while',
+  },
+  {
+    file: 'test/browser/walks.test.ts',
+    wait: 'if (out instanceof Promise) await Promise.race([out.catch((e) => r.errors.push(`${s.id}: ${(e as Error)?.message ?? e}`)), tick(60)]);',
+    n: 1,
+    why: 'a cap on a step that may never settle (a dialog left open), raced against it: not a wait for anything',
+  },
+  {
+    file: 'test/browser/webm.test.ts',
+    wait: 'await new Promise((r) => setTimeout(r, 200));',
+    n: 1,
+    why: 'a browser that answers no to WebM must still offer the GIF: nothing must happen: an absence has no moment to wait for, so what would come is given a while to come',
+  },
+  {
+    file: 'src/apps/draw/tests/editor.test.ts',
+    wait: 'await tick(300);',
+    n: 2,
+    why: 'a paste the browser’s event did must not be done again by the hand after its own wait (CLIP_WAIT): nothing must happen: an absence has no moment to wait for, so what would come is given a while to come',
+  },
+  {
+    file: 'src/apps/trip/tests/editor.test.ts',
+    wait: 'await tick(450);',
+    n: 1,
+    why: 'a double tap zooms and adds no stop: past the gap that makes two taps one, nothing must happen: an absence has no moment to wait for, so what would come is given a while to come',
+  },
+  {
+    file: 'src/apps/trip/tests/editor.test.ts',
+    wait: 'await tick(80);',
+    n: 1,
+    why: 'a trip with stops must not ask the device where it is: nothing must happen: an absence has no moment to wait for, so what would come is given a while to come',
+  },
+  { file: 'e2e/anim.spec.ts', wait: 'await page.waitForTimeout(500);', n: 1, why: 'two taps on a shape open its words only when they come within the gap: the tap before is let go past it first' },
+  { file: 'e2e/outline-phone.spec.ts', wait: 'await page.waitForTimeout(100);', n: 1, why: 'the phone keyboard modelled going down late (kbLate): the delay is the device being modelled' },
+  { file: 'e2e/outline-phone.spec.ts', wait: 'await page.waitForTimeout(400);', n: 1, why: 'the phone keyboard modelled arriving late (kbLate = 400): the delay is the device being modelled' },
+  {
+    file: 'e2e/thumbs-phone.spec.ts',
+    wait: 'await page.waitForTimeout(300);',
+    n: 1,
+    why: 'the address holding still: polled until it has not changed for a while, which a stillness has no moment for',
+  },
+];
+
+describe(`a wait in a test is a condition: no tick(), setTimeout or waitForTimeout of more than ${WAIT_MS}ms (directive r19-flakes)`, () => {
+  const key = (file: string, wait: string) => `${file} | ${wait}`;
+  const counts = (mods: Module[]) => {
+    const n = new Map<string, number>();
+    for (const m of mods) for (const w of timedWaits(m.source)) n.set(key(m.path, w.words), (n.get(key(m.path, w.words)) ?? 0) + 1);
+    return n;
+  };
+  test('the fixture’s are found', () => {
+    expect(timedWaits(readFileSync(join(FIXTURES, 'timed-waits.ts'), 'utf8')).map((w) => `${w.line}: ${w.words}`)).toStrictEqual([
+      '10: await tick(300);',
+      '11: await new Promise((r) => setTimeout(r, 1_000));',
+      '12: await page.waitForTimeout(400);',
+      '13: setTimeout(() => {',
+    ]);
+  });
+  test('the browser tests wait for conditions: a time is allowed only where TIMED says why (until(() => …) otherwise, or settled())', () => {
+    const allowed = new Map(TIMED.map((a) => [key(a.file, a.wait), a.n]));
+    const over = [...counts(browserTests)].filter(([k, n]) => n > (allowed.get(k) ?? 0)).map(([k, n]) => `${k} (${n}×)`);
+    expect(over).toStrictEqual([]);
+  });
+  test('the suite’s pre-bundled dependencies are the checkout’s own (.vite/), not node_modules’, which a worktree shares by a link', async () => {
+    const config = (await import('../vitest.config.ts')).default as { cacheDir?: string; test: { projects: { cacheDir?: string; test: { name: string } }[] } };
+    for (const c of [config, ...config.test.projects]) expect(c.cacheDir, 'name' in c.test ? c.test.name : 'the root').toBe(join(ROOT, '.vite'));
+  });
+  test('every allowed time is still there, as many times as it says, so the list only shrinks', () => {
+    const found = counts(browserTests);
+    expect(TIMED.filter((a) => (found.get(key(a.file, a.wait)) ?? 0) !== a.n).map((a) => `${key(a.file, a.wait)}: ${found.get(key(a.file, a.wait)) ?? 0}, not ${a.n}`)).toStrictEqual([]);
+    for (const a of TIMED) expect(a.why.length, key(a.file, a.wait)).toBeGreaterThan(20);
   });
 });
 

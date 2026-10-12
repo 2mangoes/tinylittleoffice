@@ -6,7 +6,7 @@
 // font size or a length is read as it is, on the screen.
 import { test, expect, afterEach } from 'vitest';
 import { page } from 'vitest/browser';
-import { mount, tick, until, openShare, pinch } from './helpers.ts';
+import { mount, tick, until, openShare, pinch, settled } from './helpers.ts';
 import { encodeDoc } from '../../src/kit/codec.ts';
 import { BASE, NAV_MAX, SIZE_MAX, size, stepSize, keepSize } from '../../src/kit/zoom.ts';
 import type { ToShell } from '../../src/kit/shell.ts';
@@ -54,7 +54,7 @@ test('two fingers spreading over the Word Processor change the size live, a pill
   await tick();
   expect(size()).toBe(Math.round(live * 20) / 20);
   expect(localStorage.length >= 0).toBe(true);
-  await tick(700);
+  await until(() => !pill()?.matches('.shown'), 'the size pill never went');
   expect(pill()?.matches('.shown')).toBe(false);
   // The stepper moves in tens from there.
   const was = size();
@@ -165,12 +165,12 @@ function fits(shell: ToShell, where: string, nav = NAV_MAX) {
 async function allFit(nav: number) {
   // The home page and the drawer.
   const home = await mount('');
-  await tick(100);
+  await settled();
   fits(home, 'home', nav);
   home.querySelector<HTMLButtonElement>('.to-burger')!.click();
   const drawer = home.querySelector<HTMLDialogElement>('dialog.to-drawer')!;
   await until(() => drawer.open && !!drawer.querySelector('.to-drawer-prefs'));
-  await tick(300);
+  await settled();
   expect(parseFloat(getComputedStyle(drawer).fontSize)).toBeCloseTo(16 * BASE * nav, 3);
   const edge = drawer.getBoundingClientRect();
   expect(edge.right).toBeLessThanOrEqual(innerWidth + 0.5);
@@ -188,7 +188,7 @@ async function allFit(nav: number) {
   home.querySelector<HTMLButtonElement>('.to-templates-btn')!.click();
   const list = home.querySelector<HTMLElement>('.to-listbox')!;
   await until(() => !!list.closest('dialog')?.open);
-  await tick(100);
+  await settled();
   const lr = list.getBoundingClientRect();
   expect(lr.left).toBeGreaterThanOrEqual(-0.5);
   expect(lr.right).toBeLessThanOrEqual(innerWidth + 0.5);
@@ -227,7 +227,7 @@ async function allFit(nav: number) {
   await openShare(shell);
   const share = shell.querySelector<ToDialog>('to-dialog.to-share-dialog')!;
   await until(() => share.dialog.open && !!share.querySelector('.to-share-links'));
-  await tick(100);
+  await settled();
   const box = share.dialog.getBoundingClientRect();
   expect(box.left).toBeGreaterThanOrEqual(-0.5);
   expect(box.right).toBeLessThanOrEqual(innerWidth + 0.5);
@@ -239,7 +239,7 @@ async function allFit(nav: number) {
   // Outline: the rows reflow.
   const outline = await mount(`#/v1/outline/${encodeDoc('- One long line about the harbour and the ferry that leaves at nine\n  - Two, under it, also long enough to wrap\n- Three\n')}`);
   await until(() => !!outline.querySelector('.to-editor to-bar button'));
-  await tick(100);
+  await settled();
   fits(outline, 'outline', nav);
   for (const row of outline.querySelectorAll<HTMLElement>('to-text')) expect(row.getBoundingClientRect().right, 'outline: a row reflows').toBeLessThanOrEqual(innerWidth + 0.5);
 }
@@ -262,7 +262,7 @@ test('at the normal size on a 1440×900 desktop (1108 wide to the layout): the h
   stepSize(0);
   const css = (px: number) => px / BASE;
   const home = await mount('');
-  await tick(100);
+  await settled();
   expect(document.documentElement.scrollWidth).toBeLessThanOrEqual(innerWidth);
   const column = home.querySelector<HTMLElement>('.to-home')!.getBoundingClientRect();
   expect(css(column.width)).toBeLessThanOrEqual(1080 + 0.5);
@@ -279,7 +279,7 @@ test('at the normal size on a 1440×900 desktop (1108 wide to the layout): the h
   // The Presentation Builder: the rail at the right, level with the slide, beside it and inside the window.
   const deck = await mount(`#/v1/deck/${encodeDoc('## One\n\n- a point\n\n---\n\n## Two\n')}`);
   await until(() => !!deck.querySelector('.deck-rail') && !!deck.querySelector('.deck-canvas'));
-  await tick(100);
+  await settled();
   expect(document.documentElement.scrollWidth).toBeLessThanOrEqual(innerWidth);
   const canvas = deck.querySelector<HTMLElement>('.deck-canvas')!.getBoundingClientRect();
   const rail = deck.querySelector<HTMLElement>('.deck-rail')!.getBoundingClientRect();

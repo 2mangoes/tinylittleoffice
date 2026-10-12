@@ -10,6 +10,7 @@
  */
 import { test, expect } from '@playwright/test';
 import { encodeDoc } from '../src/kit/codec.ts';
+import { settled } from './settled.ts';
 
 const LONG = `---\ntitle: Long\n---\n${Array.from({ length: 60 }, (_, i) => `Paragraph ${i + 1}, long enough to take a line or two of the page.`).join('\n\n')}\n`;
 
@@ -39,7 +40,7 @@ test('phone: the paper edge to edge, the column scrolls under the header and the
 
   // The column scrolls, the window never: the header at the top, the bar at the column's bottom, both holding still.
   await page.locator('.to-main').evaluate((el) => (el.scrollTop = 1500));
-  await page.waitForTimeout(300);
+  await settled(page);
   expect(await page.evaluate(() => [window.scrollY, document.querySelector('.to-main')!.scrollTop > 1000])).toEqual([0, true]);
   const header = (await page.locator('.to-header').boundingBox())!;
   expect(header.y).toBe(0);
@@ -68,7 +69,7 @@ test('phone: the paper edge to edge, the column scrolls under the header and the
   await expect(page.locator('to-write-editor to-text .tx')).toBeVisible();
   await page.locator('.to-title').tap();
   await expect(page.locator('.to-header')).toHaveClass(/titling/);
-  await page.waitForTimeout(300);
+  await settled(page);
   const field = page.locator('.to-title');
   const f = (await field.boundingBox())!;
   // In the stylesheet's own pixels: on the screen a rem is the size of everything (kit/zoom.ts) × 16px.

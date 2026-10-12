@@ -2,7 +2,7 @@
 // fetched), the previews of kept documents, and the Office mark.
 import { test, expect, afterEach, vi } from 'vitest';
 import { userEvent } from 'vitest/browser';
-import { mount, tick, until } from './helpers.ts';
+import { mount, tick, until, settled } from './helpers.ts';
 import { appOf } from '../../src/kit/apps.ts';
 import { encodeDoc } from '../../src/kit/codec.ts';
 import { keep } from '../../src/kit/library.ts';
@@ -157,7 +157,7 @@ test("a picture's line is words with a link, in the editor and the Display Link:
   expect(shown.querySelector('.to-display image, .to-display img, [data-webpic]')).toBeNull();
   // (The reader drawn again as it settles is this test's, not the next one's.)
   await mount('');
-  await tick(100);
+  await settled();
 });
 
 test('the menu has no switch for pictures from the web, saved in the browser or not', async () => {

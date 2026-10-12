@@ -6,6 +6,7 @@
  *   PW_PORT=4186 npx playwright test e2e/outline-phone.spec.ts --project=phone --workers=1
  */
 import { test, expect } from '@playwright/test';
+import { settled } from './settled.ts';
 
 test('outline: on a phone, typing items neither scrolls the page nor moves the bar, which is one row; type is 16px; the line menu opens inside the screen', async ({ page }, info) => {
   test.skip(info.project.name !== 'phone', 'phone only');
@@ -269,7 +270,7 @@ for (const model of ['ios', 'plain'] as const) {
     /** Once the column has settled (a keyboard's glide, a frame for the caret): the caret inside the room, the window at its top. */
     const check = async (what: string) => {
       await page.waitForFunction(() => !document.querySelector('to-chrome[gliding]') && document.getAnimations().every((a) => a.playState !== 'running'));
-      await page.waitForTimeout(80);
+      await settled(page);
       const w = await where();
       const inside = !!w.caret && w.caret[0] >= w.room[0] - 1 && w.caret[1] <= w.room[1] + 1;
       expect({ what, inside, scrollY: w.scrollY, vvTop: w.vvTop }, JSON.stringify(w)).toEqual({ what, inside: true, scrollY: 0, vvTop: 0 });

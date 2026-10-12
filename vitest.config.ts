@@ -1,6 +1,7 @@
 import { defineConfig } from 'vitest/config';
 import { playwright } from '@vitest/browser-playwright';
 import { readFileSync, writeFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
 
 /**
  * The commands the browser tests ran (src/kit/commands.ts `trace`, set by test/browser/setup.ts), added to the map the
@@ -34,15 +35,25 @@ const browser = (name: string) => ({
   screenshotFailures: false,
   commands: { recordCommands },
 });
+/**
+ * Vite's cache, the browser tests' pre-bundled dependencies among it, is the checkout's own (.vite/, ignored by git),
+ * never node_modules/.vite: a worktree's node_modules is a link to the main checkout's, and every run of the browser
+ * tests writes its dependencies afresh as it starts. Two suites at once in two checkouts (the deploy's and a builder's)
+ * rewrote one directory under each other, and a file then loaded a dependency of the other run's writing: an iframe
+ * that never became ready, or a second copy of Lit in one page (2026-10-12, directive r19-flakes).
+ */
+const cacheDir = fileURLToPath(new URL('./.vite', import.meta.url));
 /** The browser files that count what the device holds; they run after the others (see below). */
 const ALONE = ['test/browser/privacy.test.ts'];
 
 export default defineConfig({
+  cacheDir,
   test: {
     projects: [
       // An app's model and view tests are node tests too: src/apps/<id>/tests/*.unit.test.ts.
-      { test: { name: 'unit', include: ['test/*.test.ts', 'test/doc/*.test.ts', 'src/**/tests/*.unit.test.ts'], environment: 'node' } },
+      { cacheDir, test: { name: 'unit', include: ['test/*.test.ts', 'test/doc/*.test.ts', 'src/**/tests/*.unit.test.ts'], environment: 'node' } },
       {
+        cacheDir,
         test: {
           name: 'browser',
           include: ['test/browser/**/*.test.ts', 'src/**/tests/*.test.ts'],
@@ -52,6 +63,7 @@ export default defineConfig({
         },
       },
       {
+        cacheDir,
         // The files that count what the origin holds run after the rest, alone: browser files share one origin's
         // localStorage, so a file that turns Saved on or chooses a language while these count would be counted.
         test: {

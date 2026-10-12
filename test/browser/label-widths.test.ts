@@ -25,7 +25,7 @@
 import { test, expect, beforeAll, afterAll } from 'vitest';
 import { page } from 'vitest/browser';
 import { html, render } from 'lit';
-import { mount, openShare, tick, until } from './helpers.ts';
+import { mount, openShare, settled, until } from './helpers.ts';
 import { encodeDoc } from '../../src/kit/codec.ts';
 import type { ToDialog } from '../../src/kit/dialog.ts';
 import '../../src/kit/bar.ts';
@@ -36,7 +36,7 @@ import '../../src/kit/keys.ts';
 import '../../src/kit/text-commands.ts';
 import '../../src/kit/rows-commands.ts';
 import en from '../../src/i18n/en.ts';
-import { FAMILIES, fontIn, installed } from './fonts.ts';
+import { FAMILIES, firstFamily, fontIn, installed, loadFont } from './fonts.ts';
 
 import.meta.glob('../../src/apps/*/commands.ts', { eager: true });
 const sources = import.meta.glob<string>(['../../src/apps/*/*.ts', '!../../src/apps/*/commands.ts'], { query: '?raw', import: 'default', eager: true });
@@ -189,7 +189,7 @@ async function dialogButtons(): Promise<Measure[]> {
   await openShare(shell);
   const share = shell.querySelector<ToDialog>('to-dialog.to-share-dialog')!;
   await until(() => share.dialog.open && !!share.querySelector('.to-share-links'));
-  await tick(100);
+  await settled();
   const out: Measure[] = [];
   for (const b of share.querySelectorAll<HTMLElement>('.to-btn')) {
     const holder = b.querySelector('span') ?? b;
@@ -219,6 +219,16 @@ beforeAll(async () => {
   await page.viewport(390, 844);
   wordedIds = worded();
   measures = [...slots(registered()), ...(await dialogButtons())];
+  await document.fonts.ready;
+});
+
+test('the words are measured in Plex: every slot draws IBM Plex Sans first, and its face, Cyrillic too, is loaded', async () => {
+  for (const font of new Set(measures.map((m) => m.font))) {
+    const m = measures.find((x) => x.font === font)!;
+    expect(firstFamily(font), `${m.cmd} (${m.slot}) is measured in ${firstFamily(font)}, not IBM Plex Sans: ${font}`).toBe('IBM Plex Sans');
+    await loadFont(font, 'Aa Эффекты');
+    expect(document.fonts.check(font, 'Aa Эффекты'), `${font}: a face still on its way`).toBe(true);
+  }
 });
 afterAll(() => page.viewport(1100, 800));
 
@@ -259,6 +269,10 @@ for (const path of Object.keys(files)) {
   const lang = codeOf(path);
   test(`${lang}: every command's words fit their slot`, async () => {
     const strings = (await files[path]()).default;
+    // The face the language's script needs, loaded before a word is measured: a canvas measures in whatever has
+    // arrived, and under load a face on its way measured as the fallback (Russian's "Эффекты" at 88px against 82.7).
+    const sample = [...new Set(measures.map((m) => strings[m.key] ?? '').join(''))].join('');
+    for (const font of new Set(measures.map((m) => fontIn(lang, m.font)))) await loadFont(font, sample || 'Aa');
     const over: string[] = [];
     const raised = new Set<string>();
     for (const m of measures) {

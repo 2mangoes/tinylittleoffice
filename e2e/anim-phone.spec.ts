@@ -8,6 +8,7 @@
  */
 import { test, expect, type Page } from '@playwright/test';
 import { encodeDoc } from '../src/kit/codec.ts';
+import { settled } from './settled.ts';
 
 const SHAPES = 'Kind | X | Y | W | H | Style | Label\n--- | --- | --- | --- | --- | --- | ---\nt | 4 | 20 | 20 | 4 | 04 | Lift off\ni | 8 | 36 | 8 | 8 | 0b | rocket\n';
 const LIFT = '---\ntitle: Lift off\nframes: 24\nfps: 8\n---\n' + SHAPES + '\nShape | Keys\n--- | ---\n0 | 0,0,0,0,1,0; 23,0,-80,0,1,0,i\n1 | 0,0,0,0,1,0; 23,200,-200,80,1,-30,d\n';
@@ -33,7 +34,7 @@ test('the Animator on a phone: stage, filmstrip and scrubber on the first screen
   await stage.tap({ position: { x: 4, y: 4 } });
   const bar = page.locator('to-anim-editor to-bar');
   await expect(bar).toBeVisible();
-  await page.waitForTimeout(400);
+  await settled(page);
 
   // The stage, the filmstrip and the scrubber, in that order, on the first screen, above the mode's row and the bar.
   const box = async (sel: string) => (await page.locator(sel).first().boundingBox())!;
@@ -69,7 +70,7 @@ test('the Animator on a phone: stage, filmstrip and scrubber on the first screen
   await stage.locator('g.hit[data-idx="1"] > rect').tap();
   await expect(page.locator('to-context.anim-context .to-context')).toBeVisible();
   await expect(page.locator('.anim-row .anim-hint')).toHaveText('Drag it to where it goes at 0.0 s.');
-  await page.waitForTimeout(300);
+  await settled(page);
   const ctx = (await page.locator('to-context.anim-context .to-context').boundingBox())!;
   const row2 = (await page.locator('.anim-row').boundingBox())!;
   expect(row2.y + row2.height).toBeLessThanOrEqual(ctx.y + 1);

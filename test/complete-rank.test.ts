@@ -23,6 +23,21 @@ test('rankMatches: exact name, then a word of it, then a name begun, a word begu
   expect(rankMatches('-', list, 8)).toEqual([]);
 });
 
+test('rankMatches: names that tie come in one order however the library arrived (shuffled), shorter then by name', () => {
+  const names = ['cat', 'can', 'car', 'cable', 'camera', 'cap', 'cab', 'castle', 'calendar', 'cake'];
+  const want = ['cab', 'can', 'cap', 'car', 'cat', 'cake', 'cable', 'camera', 'castle', 'calendar'];
+  let seed = 7;
+  const random = () => ((seed = (seed * 16807) % 2147483647) - 1) / 2147483646;
+  for (let run = 0; run < 20; run++) {
+    const shuffled = [...names].sort(() => random() - 0.5);
+    const list = shuffled.map((n) => e(n));
+    expect(
+      rankMatches('ca', list, 10).map((i) => shuffled[i]),
+      shuffled.join(' '),
+    ).toEqual(want);
+  }
+});
+
 test('completeIcons and completeEmoji: the starter set answers ":ca", the car emoji comes for ":car", a name looked up whole', () => {
   expect(completeIcons('ca').slice(0, 2)).toEqual(['car', 'cat']);
   expect(completeIcons('car')[0]).toBe('car');

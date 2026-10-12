@@ -66,7 +66,7 @@ test('typing forty letters quickly writes the link at most twice; docchange fire
   await typeFast(ed, text, TYPED);
   expect(changes).toBe(40);
   // The link is the document again once typing pauses.
-  await tick(300);
+  await until(() => linkText().includes(TYPED), 'the link never caught up with the typing');
   expect(replace.mock.calls.length).toBeGreaterThan(0);
   expect(replace.mock.calls.length).toBeLessThanOrEqual(2);
   expect(linkText().includes(TYPED)).toBe(true);
@@ -105,12 +105,12 @@ test('a reload after typing shows the typed text; undo after a pause still works
 
   const { ed: ed3, text: text3 } = await opened();
   await typeFast(ed3, text3, ' undone');
-  await tick(300);
+  await until(() => linkText().includes(' undone'), 'the link never caught up with the typing');
   expect(linkText().includes(' undone')).toBe(true);
   ed3.dispatchEvent(new CustomEvent('docundo', { cancelable: true }));
   await ed3.updateComplete;
   expect(ed3.value.includes(' undone')).toBe(false);
-  await tick(300);
+  await until(() => !linkText().includes(' undone'), 'the link never followed the undo');
   expect(linkText().includes(' undone')).toBe(false);
 });
 

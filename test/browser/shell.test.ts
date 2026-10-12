@@ -242,7 +242,7 @@ test('a link opens its app, and every edit goes into the link', async () => {
     await text.updateComplete;
   }
   // The link follows once typing pauses.
-  await tick(200);
+  await until(() => /^#\/v1\/write\/[ryz]/.test(location.hash), 'the link never followed the typing');
   await shell.updateComplete;
   expect(location.hash).toMatch(/^#\/v1\/write\/[ryz]/);
   // The first change carries the name into the head, and the time it was first written (the editor's own document is left as it was typed).
@@ -286,7 +286,7 @@ test("Mod+Z is the editor's only from the editor: typed in a dialog's field, the
     await text.updateComplete;
   }
   // The link follows once typing pauses.
-  await tick(200);
+  await until(() => /^#\/v1\/write\/./.test(location.hash), 'the link never followed the typing');
   await shell.updateComplete;
   const doc = () => decodeDoc(location.hash.split('/')[3] ?? '');
   expect(unstamped(doc())).toBe(`---\ntitle: ${fresh()}\n---\nabc\n`);
@@ -312,7 +312,7 @@ test("Mod+Z is the editor's only from the editor: typed in a dialog's field, the
   // In the words, the document's undo; blank again, it is not named either.
   expect(z(text.tx).defaultPrevented).toBe(true);
   await text.updateComplete;
-  await tick(200);
+  await until(() => doc() === '', 'the link never followed the undo');
   await shell.updateComplete;
   expect(doc()).toBe('');
 });
@@ -449,7 +449,7 @@ test('§1 display mode and a locked document focus nothing; unlocked, the docume
   expect(document.activeElement).toBe(document.body);
   const shell = await mount(`#/v1/write/${await pack('Secret words.\n', await lockWith('pw'))}`);
   await until(() => !!document.querySelector('to-dialog.to-unlock-dialog dialog[open]'));
-  await tick(100);
+  await until(() => document.activeElement === shell.querySelector('.to-unlock-field'), 'the unlock field never took the focus');
   const field = shell.querySelector<HTMLInputElement>('.to-unlock-field')!;
   expect(document.activeElement).toBe(field);
   field.value = 'pw';

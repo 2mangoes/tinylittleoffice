@@ -5,7 +5,7 @@
 // every string a third longer) stand in; a language file in src/i18n/ is tested as it arrives, through its lazy chunk.
 import { test, expect, afterEach } from 'vitest';
 import { page } from 'vitest/browser';
-import { mount, tick, until, openShare } from './helpers.ts';
+import { mount, tick, until, openShare, settled } from './helpers.ts';
 import { parseHash } from '../../src/kit/route.ts';
 import { encodeDoc } from '../../src/kit/codec.ts';
 import { chosenLanguage, directionOf, language, languagePending, languages, missed, register, setLanguage, type Strings } from '../../src/kit/i18n.ts';
@@ -70,7 +70,7 @@ async function check(strings: Strings): Promise<string[]> {
   // The home page.
   missed.clear();
   const home = await mount('');
-  await tick(100);
+  await settled();
   english();
   // The drawer: drawn in the language, every line inside its place.
   home.querySelector<HTMLButtonElement>('.to-burger')!.click();
@@ -96,7 +96,7 @@ async function check(strings: Strings): Promise<string[]> {
   // The Word Processor's bar: one row, each label one line.
   const shell = await mount(`#/v1/write/${encodeDoc('Hello\n')}`);
   await until(() => !!shell.querySelector('to-write-editor') && !!shell.querySelector('.to-editor to-bar button'));
-  await tick(100);
+  await settled();
   english();
   const bar = shell.querySelector<HTMLElement>('.to-editor to-bar')!;
   const buttons = [...bar.querySelectorAll<HTMLElement>(':scope > .to-btn, :scope > * > .to-btn')].filter((b) => b.getClientRects().length);
@@ -111,7 +111,7 @@ async function check(strings: Strings): Promise<string[]> {
   await openShare(shell);
   const share = shell.querySelector<ToDialog>('to-dialog.to-share-dialog')!;
   await until(() => share.dialog.open && !!share.querySelector('.to-share-links'));
-  await tick(100);
+  await settled();
   english();
   share.close();
   expect(document.documentElement.scrollWidth).toBeLessThanOrEqual(390);

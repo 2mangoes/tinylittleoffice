@@ -9,6 +9,7 @@ import { encodeDoc } from '../../src/kit/codec.ts';
 import { History } from '../../src/kit/history.ts';
 import { caret } from '../../src/kit/textops.ts';
 import type { TextOps, ToText } from '../../src/kit/text.ts';
+import { loadCompletions } from '../../src/kit/complete.ts';
 import type { ToWriteEditor } from '../../src/apps/write/editor.ts';
 import { mount as mountShell, tick, until } from './helpers.ts';
 import '../../src/styles.css';
@@ -59,31 +60,34 @@ afterEach(async () => {
   await page.viewport(1100, 800);
 });
 
-test('":ca" opens the list under the caret; Enter puts the car icon in place of ":ca", one undo step', async () => {
+test('":ca" opens the list under the caret, the shortest names first once the library is in; Enter puts the first icon in place of ":ca", one undo step', async () => {
   const h = await mount();
+  // The first ":" sends for the rest of Lucide and the emoji, and the list grows when they land: the list is read once
+  // they have, never while they may be landing (under load the first row read was "can" where "car" was expected: the
+  // starter set's answer and the whole library's, depending on which the read came between).
+  await loadCompletions();
   await userEvent.keyboard(' :ca');
-  await until(() => !!pop());
-  expect(labels()[0]).toBe('car');
+  await until(() => !!pop(), 'the list never opened');
+  // The whole of Lucide: the shortest names lead, ties by name (icons-search.ts rankMatches).
+  expect(labels().slice(0, 3)).toEqual(['can', 'car', 'cat']);
   expect(rows()[0].getAttribute('aria-selected')).toBe('true');
   expect(rows().length).toBeLessThanOrEqual(8);
   // The editor says what it completes with.
   expect(h.el.tx.getAttribute('aria-autocomplete')).toBe('list');
   expect(h.el.tx.getAttribute('aria-activedescendant')).toBe(rows()[0].id);
   expect(pop()!.getAttribute('role')).toBe('listbox');
-  // The full set and the emoji arrive: one more letter and the car emoji is offered too.
+  // One more letter and the car emoji is offered too.
   await userEvent.keyboard('r');
-  await until(() => labels().includes('🚗'), 8000);
+  await until(() => labels().includes('🚗'), 'the car emoji never came');
   expect(labels()).toContain('car');
   await userEvent.keyboard('{Backspace}');
-  // Back to ":ca": the whole of Lucide has joined now, and the shortest names lead ("can", "car", "cat").
-  await until(() => labels().includes('car') && !labels().includes('car-front'));
-  const first = labels()[0];
+  await until(() => labels()[0] === 'can', 'the list never went back to ":ca"');
   expect(rows()[0].dataset.kind).toBe('icon');
   await userEvent.keyboard('{Enter}');
   await until(() => !pop());
-  expect(h.tlo).toBe(`Go :${first}:\n`);
+  expect(h.tlo).toBe('Go :can:\n');
   expect(h.el.sel).toEqual(caret(0, 4));
-  expect(h.el.tx.querySelector(`.ic[data-icon="${first}"] svg`)).not.toBeNull();
+  expect(h.el.tx.querySelector('.ic[data-icon="can"] svg')).not.toBeNull();
   expect(h.el.tx.hasAttribute('aria-autocomplete')).toBe(false);
   // Undo gives the typed words back.
   const s = h.history.undo()!;
