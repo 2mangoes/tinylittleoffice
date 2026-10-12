@@ -183,4 +183,4 @@ match up.
 
 ## If you find a hole
 
-Report it privately, as `SECURITY.md` at the root of the repository says, not in a public issue.
+Report it privately, through the repository's Security tab on GitHub (private vulnerability reporting), not in a public issue.

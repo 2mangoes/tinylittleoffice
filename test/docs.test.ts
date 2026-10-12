@@ -18,18 +18,7 @@ const currentDocs = (readdirSync(join(root, 'docs'), { recursive: true }) as str
   .sort();
 
 /** What a reader meets: the README, the current docs, the strings, the page's head and what agents read. */
-const reader = [
-  'README.md',
-  'CONTRIBUTING.md',
-  'SECURITY.md',
-  ...currentDocs,
-  'src/i18n/en.ts',
-  'public/llms.txt',
-  'skill/tinyoffice/SKILL.md',
-  'index.html',
-  'public/manifest.webmanifest',
-  'package.json',
-];
+const reader = ['README.md', ...currentDocs, 'src/i18n/en.ts', 'public/llms.txt', 'skill/tinyoffice/SKILL.md', 'index.html', 'public/manifest.webmanifest', 'package.json'];
 
 /** Said as absolutes, they are false: Private is the default, Saved keeps documents on the device, a short link is on a server. */
 const STRUCK = ['no saving', 'nothing is stored anywhere', 'never see what you write', 'never saved', 'nothing stored', 'lives entirely in the url'];
@@ -81,11 +70,11 @@ test('nothing a reader meets names a feature that is gone', () => {
 });
 
 test('the README and the current docs name no path or address of this machine', () => {
-  expect(hits(MACHINE, ['README.md', 'CONTRIBUTING.md', 'SECURITY.md', ...currentDocs])).toEqual([]);
+  expect(hits(MACHINE, ['README.md', ...currentDocs])).toEqual([]);
 });
 
 test('the README and the current docs are American', () => {
-  expect(['README.md', 'CONTRIBUTING.md', 'SECURITY.md', ...currentDocs].flatMap((f) => british(read(f), f))).toEqual([]);
+  expect(['README.md', ...currentDocs].flatMap((f) => british(read(f), f))).toEqual([]);
 });
 
 test('the README says the truth about saving, and the page says it too', () => {

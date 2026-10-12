@@ -180,7 +180,7 @@ export function dependenciesDoc(sizes: Record<string, string> = existsSync(DOC) 
   return `# Dependencies
 
 Every package Tiny Little Office depends on, at the exact version the lockfile holds, with its license, the
-native web API it beat and why, and what it adds to the site. The standing rule (CONTRIBUTING.md): the
+native web API it beat and why, and what it adds to the site. The standing rule (Paul, 2026-10-09): the
 browser first; a dependency names what it beat. This page is written by \`npm run docs:deps\`
 (\`scripts/dependencies.ts\`) from package.json, package-lock.json and the reasons in
 \`scripts/dependencies.json\`; a test fails when it is out of date, and the script fails for a dependency

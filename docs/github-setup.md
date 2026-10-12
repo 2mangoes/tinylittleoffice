@@ -47,11 +47,10 @@ with the strings exact, to paste. The files assume every one of them.
 
 ## Issues (Issues → Labels)
 
-The issue chooser (`.github/ISSUE_TEMPLATE/`) offers a bug and a feature, and sends a security problem to the
-private report; there are no blank issues.
+There are no issue templates and no pull request template (Paul, 2026-10-12: only the license and the README,
+both brief); an issue is a blank one.
 
-- [ ] `bug` (`#d73a4a`, "Something is wrong") and `feature` (`#a2eeef`, "Something it could do"): the templates
-      apply these.
+- [ ] `bug` (`#d73a4a`, "Something is wrong") and `feature` (`#a2eeef`, "Something it could do"), applied by hand.
 - [ ] `dependencies` (`#0366d6`): Dependabot applies it to its pull requests.
 - [ ] One per app in the registry (`src/kit/apps.ts`), color `#c5def5`: `app: <id>` (`app: write`, `app: sheet`…).
 - [ ] `kit` (`#fbca04`, "The shell, the bar, the editor and the rest of src/kit"), `kernel` (`#fbca04`,
@@ -62,15 +61,14 @@ private report; there are no blank issues.
 
 ## Security (Settings → Code security)
 
-- [ ] **Private vulnerability reporting** on: it is the only way SECURITY.md and the issue chooser give to report
-      a hole (no email address).
+- [ ] **Private vulnerability reporting** on: it is the only way the README gives to report a hole (no
+      SECURITY.md, no email address).
 - [ ] **Dependency graph** and **Dependabot alerts** on; **Dependabot security updates** on. Version updates are
       `.github/dependabot.yml`: npm, weekly, the site's dependencies in one pull request and the tools' in
       another. Such a pull request also needs `npm run docs:deps` run on its branch (docs/dependencies.md names
       each exact version), or CI fails it.
 - [ ] **Secret scanning** and **push protection** on.
 - [ ] Code scanning: not yet (CI runs `npm audit` with no ignores).
-- [ ] **conduct@tinylittleoffice.com** exists and reaches Paul (CODE_OF_CONDUCT.md names it for reports).
 
 ## Releases and deploys
 

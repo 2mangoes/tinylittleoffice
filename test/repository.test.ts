@@ -25,7 +25,7 @@ test('the reader takes what the files use and refuses what it does not', () => {
 
 test('every YAML file in .github is YAML', () => {
   const files = ymls('.github');
-  expect(files).toEqual(expect.arrayContaining(['.github/workflows/ci.yml', '.github/dependabot.yml', '.github/ISSUE_TEMPLATE/bug.yml', '.github/ISSUE_TEMPLATE/feature.yml']));
+  expect(files).toEqual(expect.arrayContaining(['.github/workflows/ci.yml', '.github/dependabot.yml']));
   for (const f of files) expect(() => yaml(read(f)), f).not.toThrow();
 });
 
@@ -51,22 +51,17 @@ test('the packages say what they are and where they live: the site stays unpubli
   expect(JSON.parse(read('package-lock.json')).name).toBe('tinylittleoffice');
 });
 
-test('a stranger finds the licence, how to contribute, how to report a hole privately, and the code of conduct', () => {
+// The repository's front matter is the license and the README, both brief, and nothing else (Paul, 2026-10-12: "We
+// really only want license and README, both as brief as possible"): no code of conduct, no contributing guide, no
+// security policy (a hole is reported through GitHub's private vulnerability reporting, which the README names), no
+// issue or pull request templates. The README keeps its truth about saving (test/docs.test.ts).
+test('a stranger finds the license and a brief README, and no other front matter', () => {
   expect(read('LICENSE')).toMatch(/^MIT License\n\nCopyright \(c\) 2026 Paul Ford\n/);
-  const contributing = read('CONTRIBUTING.md');
-  for (const cmd of ['npm test', 'npm run lint', 'npm run build', 't()', 'Prettier']) expect(contributing, cmd).toContain(cmd);
-  const security = read('SECURITY.md');
-  expect(security).toContain(`${URL}/security/advisories/new`);
-  expect(security).toContain('docs/threat-model.md');
-  expect(security).not.toMatch(/[\w.-]+@[\w-]+\.[\w.]+/);
-  const conduct = read('CODE_OF_CONDUCT.md');
-  expect(conduct).toContain('# Contributor Covenant Code of Conduct');
-  expect(conduct).toContain('version 2.1');
-  for (const h of ['## Our Pledge', '## Our Standards', '## Enforcement Responsibilities', '## Scope', '## Enforcement', '## Enforcement Guidelines', '## Attribution'])
-    expect(conduct, h).toContain(h);
-  expect(existsSync(join(root, '.github/PULL_REQUEST_TEMPLATE.md'))).toBe(true);
-  expect(read('.github/PULL_REQUEST_TEMPLATE.md').trim().split('\n').length).toBe(3);
-  for (const f of ['.github/ISSUE_TEMPLATE/bug.yml', '.github/ISSUE_TEMPLATE/config.yml', 'README.md']) expect(read(f), f).not.toMatch(/security@/);
+  expect(read('LICENSE').trim().split('\n').length).toBeLessThanOrEqual(21);
+  expect(read('README.md').trim().split('\n').length).toBeLessThanOrEqual(40);
+  expect(read('README.md')).not.toMatch(/security@/);
+  for (const f of ['CODE_OF_CONDUCT.md', 'CONTRIBUTING.md', 'SECURITY.md', '.github/PULL_REQUEST_TEMPLATE.md', '.github/ISSUE_TEMPLATE']) expect(existsSync(join(root, f)), f).toBe(false);
+  expect(readdirSync(join(root, '.github')).sort()).toEqual(['dependabot.yml', 'workflows']);
 });
 
 /** What the deploy runs before it ships (scripts/deploy.mjs's run(what, cmd)), less Wrangler's deploys and the --full e2e run. */

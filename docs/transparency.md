@@ -114,6 +114,10 @@ leak. Everything here makes that checkable by a stranger.
    *Built, 2026-10-10:* `SECURITY.md`, `LICENSE`, `CODE_OF_CONDUCT.md`, `CONTRIBUTING.md`. *2026-10-11:* a hole
    is reported through GitHub's private vulnerability reporting, not to an address; the code of conduct is the
    Contributor Covenant 2.1 as written. *Not yet:* signed tags and the changelog wait for the first release.
+   *2026-10-12:* Paul: "We really only want license and README, both as brief as possible": `SECURITY.md`,
+   `CODE_OF_CONDUCT.md`, `CONTRIBUTING.md` and the issue and pull request templates removed; a hole is still
+   reported through GitHub's private vulnerability reporting, which the README and docs/threat-model.md name;
+   `test/repository.test.ts` holds the root to the license and a README of at most forty lines.
 9. **Later:** an independent audit of the crypto and the shortener, published in full; a public test
    dashboard; a signed SBOM with each release.
 
@@ -151,6 +155,7 @@ Discussions, labels, the ruleset on `main`) are a checklist in `docs/github-setu
 followed (§1 item 3). *2026-10-11:* CONTRIBUTING made short (the suite, the house rules), the feature template
 in the idea's place, the pull request template three lines, CI running every check the deploy runs
 (`test/repository.test.ts` compares them), Dependabot, and the package's metadata naming the repository.
+*2026-10-12:* the front matter cut to the license and a brief README (§1 item 8's note of that date).
 
 ## 3. How to explain it
 

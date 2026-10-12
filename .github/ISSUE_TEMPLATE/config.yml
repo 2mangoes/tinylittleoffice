@@ -1,5 +1,0 @@
-blank_issues_enabled: false
-contact_links:
-  - name: A security problem
-    url: https://github.com/aboard-io/tinylittleoffice/security/advisories/new
-    about: Report it privately, never as an issue. SECURITY.md says what happens next.
