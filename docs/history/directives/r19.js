@@ -1,6 +1,6 @@
 export const meta = {
   name: 'round-nineteen',
-  description: "Round nineteen: housekeeping after the removals. Sonnet classifiers list dead code and stale words by area, one Opus remover acts on the lists and leaves a lint behind, then one Opus builder moves the kit into six folders, then one builds the social cards. Sonnet reviews, Opus fixes, Sonnet squash-merges, one task at a time on main",
+  description: "Round nineteen: housekeeping after the removals. Sonnet classifiers list dead code and stale words by area, one Opus remover acts on the lists and leaves a lint behind, then one Opus builder moves the kit into six folders, then one builds the social cards, then one reshapes the build. Sonnet reviews, Opus fixes, Sonnet squash-merges, one task at a time on main",
   phases: [
     { title: 'Classify', detail: 'Sonnet, five areas in parallel, read-only', model: 'sonnet' },
     { title: 'Build', detail: 'Opus: the remover, then the move', model: 'opus' },
@@ -77,4 +77,5 @@ const folders = await run({ id: 'r19-kit-folders', directive: `${S}/directive-r1
 if (!(folders.merge && folders.merge.merged)) { log('the kit move did not merge; the social cards wait'); return { sweep, folders, cards: null } }
 
 const cards = await run({ id: 'r19-social-cards', directive: `${S}/directive-r19-social-cards.md`, what: "a document shared with a network previews as itself: pressing Bluesky, Mastodon, X, LinkedIn or the share sheet uploads a 1200 by 630 picture of the first page with the title and text to the site's own card endpoint and shares the link with ?c=<id> before the hash; the site Worker and the shortener's landing page serve that card's Open Graph and Twitter tags; the generic app cards are redrawn greeked, every word a gray bar; a switch in the dialog, on by default, with the sentence about what is kept (Paul: when we explicitly share with a social network from in the app, that's when we do this; otherwise generic per app with gray shapes)" })
-return { sweep, folders, cards }
+const shape = await run({ id: 'r19-build-shape', directive: `${S}/directive-r19-build-shape.md`, what: "the build as one file fetched once and kept for offline: the kit, every app, the English strings, the icon library, the emoji and the math in one module named in every page's head with one stylesheet; the templates one file per app and the other languages one file each, fetched when needed; everything but the HTML cached a year; a service worker registered by Save in browser and removed with it, keeping the pages, the app file and what was fetched, pages network first; the API build one file without editors; budgets for the file's size, the file count and the requests before first paint (Paul, 2026-10-12: package the whole thing up; download the apps and home language and emoji and icons but leave out the templates and other languages unless needed; then offline is instant)" })
+return { sweep, folders, cards, shape }
