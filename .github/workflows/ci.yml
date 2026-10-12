@@ -26,6 +26,9 @@ jobs:
     env:
       # The smoke run's preview port (playwright.config.ts).
       PW_PORT: 4179
+      # The address the site is published at, as deploy.yml names it: without one the build writes no sitemap and
+      # check-build says so (the v1.1.3 CI run on main stopped there, 2026-10-12).
+      VITE_SITE_URL: https://tinylittleoffice.com/
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5.1.0
         with:
