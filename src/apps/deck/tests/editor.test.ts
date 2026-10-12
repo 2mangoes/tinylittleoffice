@@ -174,7 +174,7 @@ test('a format changes the page, the rail and the bar; a page past what is writt
   expect(el.querySelectorAll('.deck-sheet')).toHaveLength(0);
 });
 
-test('presenting shows the slide large, reveals a line a click, and Escape comes back to the Present button', async () => {
+test('presenting shows the slide large, reveals a line a click, and Escape comes back to the Present button with the shown slide open for editing', async () => {
   const { el } = await editor(talk());
   button(el, 'Present').click();
   await el.updateComplete;
@@ -193,6 +193,9 @@ test('presenting shows the slide large, reveals a line a click, and Escape comes
   window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
   await el.updateComplete;
   expect(el.querySelector('.deck-show')).toBeNull();
+  // The slide that was being shown, the second, is the one open for editing now (Paul, 2026-10-12).
+  expect(el.cur).toBe(1);
+  expect(el.querySelector('.deck-thumb[aria-current="true"]')!.getAttribute('data-i')).toBe('1');
   await until(() => document.activeElement === button(el, 'Present'));
 });
 

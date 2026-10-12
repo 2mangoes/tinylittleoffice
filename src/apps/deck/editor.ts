@@ -675,6 +675,9 @@ export class ToDeckEditor extends DocElement<Slide[]> {
     if (this.leaving >= 0) this.settle = window.setTimeout(() => (this.leaving = -1), 650);
     const was = this.showing;
     if (i < 0) this.fromLink = false;
+    // Leaving the show lands on the slide that was being shown (Paul, 2026-10-12: "When presenting a deck and I hit
+    // escape, take me to an edit view of that particular slide"); past the last slide, on the last.
+    if (i < 0 && was >= 0) this.go(was);
     this.showing = i;
     this.shown = shown;
     // Each slide arrives whole: a zoom is the slide's it was set on.
