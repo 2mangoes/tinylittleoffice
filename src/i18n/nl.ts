@@ -83,7 +83,7 @@ export default {
   // ---- sharing: the Share dialog (kit/core/shell.ts), where the link fits (kit/share/limits.ts), the arrival banner ----
   'A copy opened in a new tab': 'Een kopie in een nieuw tabblad',
   'Edit link': 'Bewerklink',
-  'Present link': 'Presentatielink',
+  'Present link': 'Link om te presenteren',
   'Copy into a new document': 'Kopiëren naar een nieuw document',
   'Copy link': 'Link kopiëren',
   'Copy of {title}': 'Kopie van {title}',

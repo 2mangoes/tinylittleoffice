@@ -82,7 +82,7 @@ export default {
   // ---- sharing: the Share dialog (kit/core/shell.ts), where the link fits (kit/share/limits.ts), the arrival banner ----
   'A copy opened in a new tab': '在新标签页中打开的副本',
   'Edit link': '编辑链接',
-  'Present link': '演示链接',
+  'Present link': '放映链接',
   'Copy into a new document': '复制为新文档',
   'Copy link': '复制链接',
   'Copy of {title}': '{title}的副本',
