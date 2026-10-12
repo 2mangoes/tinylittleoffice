@@ -7,6 +7,7 @@
  *   PW_PORT=4184 npx playwright test e2e/draw.spec.ts --workers=1
  */
 import { test, expect } from '@playwright/test';
+import { link } from './link.ts';
 
 test('draw: a shape from a key and a click, then a pixel grid that becomes the background', async ({ page }) => {
   const errors: string[] = [];
@@ -37,7 +38,7 @@ test('draw: a shape from a key and a click, then a pixel grid that becomes the b
   await page.getByRole('button', { name: /^Rectangle/ }).click();
   const box = (await canvas.boundingBox())!;
   await canvas.click({ position: { x: box.width * 0.2, y: box.height * 0.3 } });
-  await expect(page).toHaveURL(/#\/v1\/draw\/[ryz]/);
+  await expect.poll(() => link(page)).toMatch(/#\/v1\/draw\/[ryz]/);
   await expect(canvas.locator('.handle:not(.handle-hit)')).toBeVisible();
   const after = await measure();
   expect(after.bar).toBe(first.bar);

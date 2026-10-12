@@ -7,6 +7,7 @@
  *   PW_PORT=4423 npx playwright test e2e/keyboard.spec.ts --project=desktop
  */
 import { test, expect, type Page } from '@playwright/test';
+import { link } from './link.ts';
 
 /** What has the focus: the element itself, or the one inside a shadow root. */
 const focused = (page: Page) =>
@@ -51,7 +52,7 @@ test('the keyboard alone: home, an app, typing, a menu, undo, share', async ({ p
   await tabTo(page, (w) => w.startsWith('div.tx'));
   await page.keyboard.type('Typed without a mouse.');
   await expect(area.locator('p').first()).toHaveText('Typed without a mouse.');
-  await expect(page).toHaveURL(/#\/v1\/write\/[ryz]/);
+  await expect.poll(() => link(page)).toMatch(/#\/v1\/write\/[ryz]/);
   const typed = page.url();
 
   // Download, by its key (the drawer's This document holds it): the drawer opens with the table on its first item,
@@ -72,7 +73,7 @@ test('the keyboard alone: home, an app, typing, a menu, undo, share', async ({ p
   await tabTo(page, (w) => w.startsWith('div.tx'), true);
   await page.keyboard.press('ControlOrMeta+z');
   await expect(area.locator('p').first()).not.toHaveText('Typed without a mouse.');
-  await expect.poll(() => page.url()).not.toBe(typed);
+  await expect.poll(() => link(page)).not.toBe(typed);
   await page.keyboard.press('ControlOrMeta+Shift+z');
   await expect(area.locator('p').first()).toHaveText('Typed without a mouse.');
 

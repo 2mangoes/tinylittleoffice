@@ -4,6 +4,7 @@ import '../../src/styles.css';
 import './fonts.ts';
 import '../../src/kit/core/shell.ts';
 import type { ToShell } from '../../src/kit/core/shell.ts';
+import { currentHash } from '../../src/kit/core/route.ts';
 import type { ToPrivacy } from '../../src/kit/ui/privacy-dialog.ts';
 import { applySize } from '../../src/kit/ui/zoom.ts';
 
@@ -19,6 +20,12 @@ export async function mount(hash = ''): Promise<ToShell> {
   await shell.updateComplete;
   return shell;
 }
+
+/**
+ * The address with the document as it is now: the shell's flush, then location.hash. The shell writes the link only
+ * when typing stops for two seconds (kit/core/shell.ts PAUSE), so a test reads it through the flush, never by waiting.
+ */
+export const link = (): string => currentHash();
 
 export const tick = (ms = 0) => new Promise<void>((r) => setTimeout(r, ms));
 

@@ -1,7 +1,7 @@
 // Insert ▾ narrowed by the letters typed; the QR code of this document as a picture Write and Deck
 // hold; and the new blank documents of every other app offered wherever a document can hold one.
 import { test, expect, afterEach } from 'vitest';
-import { mount, tick, until } from './helpers.ts';
+import { link, mount, tick, until } from './helpers.ts';
 import { encodeDoc, decodeDoc } from '../../src/kit/core/codec.ts';
 import { apps, appOf } from '../../src/kit/core/apps.ts';
 import { lookup } from '../../src/kit/core/app.ts';
@@ -65,7 +65,7 @@ test('the QR code of this document: put in from Insert ▾, a fence that draws t
   const ins = await openInsert(shell, 'write');
   const qr = [...ins.menu.querySelectorAll<HTMLButtonElement>('[role^=menuitem]')].find((b) => b.textContent!.includes('QR code of this document'))!;
   qr.click();
-  await until(() => decodeDoc(location.hash.split('/')[3]).includes('```qr'));
+  await until(() => decodeDoc(link().split('/')[3]).includes('```qr'));
   // With no caret in the words, at the top.
   expect(decodeDoc(location.hash.split('/')[3]).replace(/^---\ncreated: [^\n]*\n---\n/, '')).toBe('```qr\n```\n\nScan me.\n');
   // Drawn from the link as it is now, in the editor and on the page.

@@ -1,8 +1,9 @@
 /**
  * <to-shell>: owns the URL. Routes "#/v1/<app>/<payload>" to an app, hands its editor the document's text, and writes
  * every change back into the link with history.replaceState, so the address bar is the document and nothing is ever
- * sent anywhere. A keystroke costs only what it changed: the link is projected when typing pauses (PAUSE), and flushed
- * at once before anything reads it (flushLink; kit/core/route.ts currentHash outside). It keeps the route, the document and
+ * sent anywhere. A keystroke costs only what it changed: the link is projected when typing stops for two seconds (PAUSE),
+ * and flushed at once before anything reads it or the page is hidden or left (flushLink; kit/core/route.ts currentHash
+ * outside), so a browser whose history records every address holds a state per pause, not per keystroke. It keeps the route, the document and
  * its projection to the link, the library's keep (kit/share/library.ts Keeper), the title and the editor's mounting, and
  * draws round them elements that take their state as properties and speak back by events: <to-chrome> (kit/ui/chrome.ts:
  * the header, the menu button, the banners, the column that scrolls and the bar's place in it), <to-share>
@@ -95,8 +96,13 @@ import '../ui/drawer.ts';
 import '../ui/home.ts';
 import '../ui/compare.ts';
 
-/** How long typing pauses before the document is projected into the link (flushLink). */
-const PAUSE = 150;
+/**
+ * How long typing stops before the document is projected into the link (flushLink): a pause in typing, not a gap
+ * between keys. The address is what the browser's history and its sync record (a browser may keep every replaced
+ * address as a visit), so it is written when the person stops, and at once whenever anything reads it or the page is
+ * hidden or left (the window's blur, the focus leaving the words, visibilitychange, pagehide).
+ */
+const PAUSE = 2000;
 
 /** The links this page has written (a document made or changed here): its own, so its Display Link is not someone else's copy. */
 const madeHere = new Set<string>();
@@ -796,7 +802,7 @@ export class ToShell extends LitElement {
     if (this.wording) return nothing;
     const def = this.def;
     const plain = def && !this.unreadable && (this.embed || (this.display && !this.sealed));
-    const downloads = def && !this.sealed && !plain ? exportItems(this.current) : null;
+    const downloads = def && !this.sealed && !plain ? exportItems(def, this.current) : null;
     const editing = !!def && !this.sealed && !this.unreadable && !!this.tag && !this.comparing;
     const page = plain
       ? this.renderPlain(def)

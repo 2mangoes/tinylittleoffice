@@ -3,7 +3,7 @@
 // before anything reads it (the window's blur, leaving the page, Copy link); the bar is drawn again only when what it
 // shows changes; and one keystroke's synchronous work stays inside a budget.
 import { afterEach, expect, test, vi } from 'vitest';
-import { mount, tick, until } from './helpers.ts';
+import { link, mount, settled, tick, until } from './helpers.ts';
 import { decodeDoc, encodeDoc } from '../../src/kit/core/codec.ts';
 import { parseHash } from '../../src/kit/core/route.ts';
 import type { ToShell } from '../../src/kit/core/shell.ts';
@@ -55,6 +55,8 @@ async function typeFast(ed: ToWriteEditor, text: ToText, words: string) {
   }
 }
 const linkText = () => decodeDoc(parseHash(location.hash).payload);
+/** The link's document once read, which flushes it (the shell writes it when typing stops for two seconds). */
+const readText = () => decodeDoc(parseHash(link()).payload);
 const TYPED = ' and forty more letters typed quickly ok';
 
 test('typing forty letters quickly writes the link at most twice; docchange fires for every letter', async () => {
@@ -65,8 +67,8 @@ test('typing forty letters quickly writes the link at most twice; docchange fire
   expect(TYPED.length).toBe(40);
   await typeFast(ed, text, TYPED);
   expect(changes).toBe(40);
-  // The link is the document again once typing pauses.
-  await until(() => linkText().includes(TYPED), 'the link never caught up with the typing');
+  // The link is the document again once typing pauses, or at once when it is read.
+  await until(() => readText().includes(TYPED), 'the link never caught up with the typing');
   expect(replace.mock.calls.length).toBeGreaterThan(0);
   expect(replace.mock.calls.length).toBeLessThanOrEqual(2);
   expect(linkText().includes(TYPED)).toBe(true);
@@ -105,12 +107,14 @@ test('a reload after typing shows the typed text; undo after a pause still works
 
   const { ed: ed3, text: text3 } = await opened();
   await typeFast(ed3, text3, ' undone');
-  await until(() => linkText().includes(' undone'), 'the link never caught up with the typing');
+  await until(() => readText().includes(' undone'), 'the link never caught up with the typing');
   expect(linkText().includes(' undone')).toBe(true);
+  // The page at rest after the read, as it is before a person's next key (the chrome draws what the shell drew).
+  await settled();
   ed3.dispatchEvent(new CustomEvent('docundo', { cancelable: true }));
   await ed3.updateComplete;
   expect(ed3.value.includes(' undone')).toBe(false);
-  await until(() => !linkText().includes(' undone'), 'the link never followed the undo');
+  await until(() => !readText().includes(' undone'), 'the link never followed the undo');
   expect(linkText().includes(' undone')).toBe(false);
 });
 

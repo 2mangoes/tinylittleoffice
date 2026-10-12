@@ -12,6 +12,7 @@
  */
 import { test, expect, type Page } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
+import { link } from './link.ts';
 
 const SHOTS = process.env.SHOTS;
 async function shot(page: Page, name: string) {
@@ -38,7 +39,7 @@ test('home loads, the Word Processor opens, nothing throws, axe passes', async (
   await expect(area).toBeVisible();
   await area.click();
   await page.keyboard.type('A line written on the phone.');
-  await expect(page).toHaveURL(/#\/v1\/write\/[ryz]/);
+  await expect.poll(() => link(page)).toMatch(/#\/v1\/write\/[ryz]/);
   await expect(area.locator('p')).toHaveText('A line written on the phone.');
   // Done (the keyboard's, on a phone): the words let go, and the header, which steps aside on a phone while they have
   // the focus (kit/ui/chrome.ts), is back.

@@ -8,6 +8,7 @@
  */
 import { test, expect } from '@playwright/test';
 import { encodeDoc } from '../src/kit/core/codec.ts';
+import { link } from './link.ts';
 
 const SHOTS = process.env.SHOTS;
 
@@ -34,7 +35,7 @@ test('deck: on a phone, typing a slide neither scrolls the page nor moves the ba
   const first = await measure();
   await title.tap();
   await page.keyboard.type('Hello from the phone');
-  await expect(page).toHaveURL(/#\/v1\/deck\/[ryz]/);
+  await expect.poll(() => link(page)).toMatch(/#\/v1\/deck\/[ryz]/);
   const afterTitle = await measure();
   await page.keyboard.press('Enter');
   const words = page.locator('to-deck-editor to-text.deck-words .tx');
@@ -144,7 +145,7 @@ test("deck: on a phone, a drawing from Insert ▾ is made in a dialog that fills
   if (SHOTS) await page.screenshot({ path: `${SHOTS}/deck-390-doc-dialog.png` });
   await done.tap();
   await expect(page.locator('to-doc-dialog')).toHaveCount(0);
-  await expect(page).toHaveURL(/#\/v1\/deck\/[ryz]/);
+  await expect.poll(() => link(page)).toMatch(/#\/v1\/deck\/[ryz]/);
   await expect(page.locator('figure.deck-sub')).toBeVisible();
   // Tiny Little Office Doc: the link and OK on one row, both inside the screen, the field 16px.
   await page.getByRole('button', { name: 'Insert', exact: true }).tap();

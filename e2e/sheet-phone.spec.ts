@@ -5,6 +5,7 @@
  *   npx playwright test e2e/sheet-phone.spec.ts --project=phone --workers=1
  */
 import { test, expect } from '@playwright/test';
+import { link } from './link.ts';
 
 test('sheet: on a phone, tapping cells neither scrolls the page nor moves the bar, which is one row; every input is 16px', async ({ page }, info) => {
   test.skip(info.project.name !== 'phone', 'phone only');
@@ -39,7 +40,7 @@ test('sheet: on a phone, tapping cells neither scrolls the page nor moves the ba
   await cell('C3').tap();
   await expect(page.getByLabel('Formula')).toHaveValue('=A1+B2');
   await expect(page.getByLabel('Selected cells')).toHaveText('C3');
-  await expect(page).toHaveURL(/#\/v1\/sheet\/[ryz]/);
+  await expect.poll(() => link(page)).toMatch(/#\/v1\/sheet\/[ryz]/);
   const last = await measure();
   test.info().annotations.push({ type: 'measured', description: JSON.stringify({ first, last, seen }) });
   // The page stays where it was; the bar is one row, as tall as it started, and never over 56px; nothing is wider than the screen.

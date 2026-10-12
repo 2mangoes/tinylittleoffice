@@ -7,6 +7,7 @@
  */
 import { test, expect } from '@playwright/test';
 import { settled } from './settled.ts';
+import { link } from './link.ts';
 
 test('outline: on a phone, typing items neither scrolls the page nor moves the bar, which is one row; type is 16px; the line menu opens inside the screen', async ({ page }, info) => {
   test.skip(info.project.name !== 'phone', 'phone only');
@@ -30,7 +31,7 @@ test('outline: on a phone, typing items neither scrolls the page nor moves the b
   const first = await measure();
   await row(-1).tap();
   await page.keyboard.type('Launch');
-  await expect(page).toHaveURL(/#\/v1\/outline\/[ryz]/);
+  await expect.poll(() => link(page)).toMatch(/#\/v1\/outline\/[ryz]/);
   const seen: { bar: number; rows: number; pageTop: number }[] = [await measure()];
   // Enter for the next item, Tab to put it under, words in each.
   // (The caret lands in the new row a frame later, as Safari wants; a finger is never that quick, so the test waits as one would.)

@@ -3,7 +3,7 @@
 // under their apps on the home page.
 import { test, expect, afterEach, vi } from 'vitest';
 import { page } from 'vitest/browser';
-import { mount, openShare, tick, until } from './helpers.ts';
+import { link, mount, openShare, tick, until } from './helpers.ts';
 import { apps } from '../../src/kit/core/apps.ts';
 import { decodeDoc } from '../../src/kit/core/codec.ts';
 import { forgetAll, keep, library, localDay } from '../../src/kit/share/library.ts';
@@ -11,6 +11,7 @@ import { encodeDoc } from '../../src/kit/core/codec.ts';
 import { keeping, setKeeping, store } from '../../src/kit/core/store.ts';
 import { lockWith, pack } from '../../src/kit/share/privacy.ts';
 import { setLanguage } from '../../src/kit/core/i18n.ts';
+import { currentHash } from '../../src/kit/core/route.ts';
 import type { ToShell } from '../../src/kit/core/shell.ts';
 import type { ToText } from '../../src/kit/text/text.ts';
 
@@ -158,6 +159,8 @@ test('under Saved a document typed in Write is kept, listed under Write, opened 
     await tick(1000);
     expect(library()).toEqual([]);
     await type(shell, 'Launch notes');
+    // The link read (as Share or leaving the page reads it), and the keep follows it.
+    link();
     await until(() => library().length === 1);
     const first = library()[0];
     // A new document is named at once, and kept by that name.
@@ -175,6 +178,7 @@ test('under Saved a document typed in Write is kept, listed under Write, opened 
     rows[0].querySelector<HTMLAnchorElement>('.to-drive-open')!.click();
     await until(() => shell.querySelector('to-text .tx p')?.textContent === 'Launch notes');
     await type(shell, ', again', 'Launch notes'.length);
+    link();
     await until(() => decodeDoc(library()[0].hash.split('/')[3]).includes('Launch notes, again'));
     expect(library()[0].title).toBe(fresh());
     expect(library()).toHaveLength(1);
@@ -241,8 +245,8 @@ test('a link opens its app, and every edit goes into the link', async () => {
     text.tx.dispatchEvent(new InputEvent('beforeinput', { inputType: 'insertText', data: ch, bubbles: true, cancelable: true }));
     await text.updateComplete;
   }
-  // The link follows once typing pauses.
-  await until(() => /^#\/v1\/write\/[ryz]/.test(location.hash), 'the link never followed the typing');
+  // The link follows once typing pauses, and at once when it is read.
+  await until(() => /^#\/v1\/write\/[ryz]/.test(link()), 'the link never followed the typing');
   await shell.updateComplete;
   expect(location.hash).toMatch(/^#\/v1\/write\/[ryz]/);
   // The first change carries the name into the head, and the time it was first written (the editor's own document is left as it was typed).
@@ -260,6 +264,59 @@ test('a link opens its app, and every edit goes into the link', async () => {
   await until(() => !!again.querySelector('to-text .tx p'));
   expect(again.querySelector('to-text .tx p')!.textContent).toBe('Hello, link.');
   expect(again.querySelector<HTMLInputElement>('.to-title')!.value).toBe('A note');
+});
+
+// The address is what the browser's history and its sync record: it is written when typing stops for two seconds,
+// not at every gap between keys, and at once whenever it is read or the page is hidden (kit/core/shell.ts PAUSE).
+test('the link is written two seconds after the typing stops, once; at once on the window’s blur, the page hidden, or a read', async () => {
+  const shell = await mount('#/v1/write');
+  await until(() => !!shell.querySelector('to-write-editor to-text .tx'));
+  const text = shell.querySelector<ToText>('to-text')!;
+  await text.updateComplete;
+  text.focus();
+  text.sel = { anchor: { block: 0, offset: 0 }, focus: { block: 0, offset: 0 } };
+  const key = async (ch: string) => {
+    text.tx.dispatchEvent(new InputEvent('beforeinput', { inputType: 'insertText', data: ch, bubbles: true, cancelable: true }));
+    await text.updateComplete;
+    await shell.updateComplete;
+  };
+  const body = () => unstamped(decodeDoc(location.hash.split('/')[3] ?? '')).replace(/^---\n[^]*?\n---\n/, '');
+  const written = vi.spyOn(history, 'replaceState');
+  vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] });
+  try {
+    // Two keys half a second apart: nothing in the address until two seconds after the second, then once.
+    await key('a');
+    vi.advanceTimersByTime(500);
+    await key('b');
+    vi.advanceTimersByTime(1999);
+    expect(location.hash).toBe('#/v1/write');
+    expect(written).not.toHaveBeenCalled();
+    vi.advanceTimersByTime(1);
+    expect(body()).toBe('ab\n');
+    expect(written).toHaveBeenCalledTimes(1);
+    // A key, then the window's blur: at once.
+    await key('c');
+    expect(body()).toBe('ab\n');
+    window.dispatchEvent(new Event('blur'));
+    expect(body()).toBe('abc\n');
+    // A key, then the page hidden (a phone's Home button): at once.
+    await key('d');
+    Object.defineProperty(document, 'visibilityState', { configurable: true, get: () => 'hidden' });
+    try {
+      document.dispatchEvent(new Event('visibilitychange'));
+    } finally {
+      delete (document as { visibilityState?: string }).visibilityState;
+    }
+    expect(body()).toBe('abcd\n');
+    // A key, then the link read: the typed document, without waiting.
+    await key('e');
+    expect(body()).toBe('abcd\n');
+    expect(decodeDoc(currentHash().split('/')[3])).toMatch(/\nabcde\n$/);
+    expect(written).toHaveBeenCalledTimes(4);
+  } finally {
+    vi.useRealTimers();
+    written.mockRestore();
+  }
 });
 
 // A link shared with a network carries its preview card's id (?c=, kit/share/card.ts) for the network's fetcher alone.
@@ -310,10 +367,10 @@ test("Mod+Z is the editor's only from the editor: typed in a dialog's field, the
     text.tx.dispatchEvent(new InputEvent('beforeinput', { inputType: 'insertText', data: ch, bubbles: true, cancelable: true }));
     await text.updateComplete;
   }
-  // The link follows once typing pauses.
-  await until(() => /^#\/v1\/write\/./.test(location.hash), 'the link never followed the typing');
+  // The link follows once typing pauses, and at once when it is read.
+  await until(() => /^#\/v1\/write\/./.test(link()), 'the link never followed the typing');
   await shell.updateComplete;
-  const doc = () => decodeDoc(location.hash.split('/')[3] ?? '');
+  const doc = () => decodeDoc(link().split('/')[3] ?? '');
   expect(unstamped(doc())).toBe(`---\ntitle: ${fresh()}\n---\nabc\n`);
   const z = (target: EventTarget, init: KeyboardEventInit = {}) => {
     const ev = new KeyboardEvent('keydown', { key: 'z', ctrlKey: true, bubbles: true, cancelable: true, ...init });

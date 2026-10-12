@@ -359,9 +359,10 @@ async function shareFile(format: Export, current: Current) {
  * The Download menu's items: Print first; then a row per format in formatsOf, its words the format's label, each with
  * View (where the format `shows`), Share (where the device's share sheet takes it),
  * Download, and Copy link (the link that downloads it as it opens, "#/v1/<app>.<ext>/<payload>"); then the
- * hand-offs to apps that exist.
+ * hand-offs to apps that exist. `def` is the app's, so drawing the menu reads nothing; `current` (which brings the
+ * link up to the document, kit/core/shell.ts flushLink) is read only when an item is chosen.
  */
-export function exportItems(current: () => Current): MenuItem[] {
+export function exportItems(def: AppDef, current: () => Current): MenuItem[] {
   const run = async (does: () => Promise<string | null | void>) => {
     try {
       const name = await does();
@@ -370,7 +371,6 @@ export function exportItems(current: () => Current): MenuItem[] {
       toast(t('Download failed'));
     }
   };
-  const { def } = current().ctx;
   const linkTo = (ext: string) => {
     const u = new URL(current().ctx.link);
     u.hash = routeHash(def.id, parseHash(u.hash).payload, ext);

@@ -2,7 +2,7 @@
 // recalled once made (Paul, 2026-10-11), so the dialog has no Update, Extend or Forget, the address carries no
 // key, and nothing in it but the document and, for a visitor, the short link's id and expiry.
 import { test, expect, afterEach, vi } from 'vitest';
-import { mount, until, openShare } from './helpers.ts';
+import { link, mount, until, openShare } from './helpers.ts';
 import { encodeDoc } from '../../src/kit/core/codec.ts';
 import { unshorten } from '../../src/kit/share/short.ts';
 import type { ToText } from '../../src/kit/text/text.ts';
@@ -106,7 +106,7 @@ test('opened by a short link: its lifetime shown; an edit leaves the address the
     text.tx.dispatchEvent(new InputEvent('beforeinput', { inputType: 'insertText', data: ch, bubbles: true, cancelable: true }));
     await text.updateComplete;
   }
-  await until(() => /^#\/v1\/write\/[A-Za-z0-9_~-]+$/.test(location.hash), 'the link never followed the edit');
+  await until(() => /^#\/v1\/write\/[A-Za-z0-9_~-]+$/.test(link()), 'the link never followed the edit');
   await shell.updateComplete;
   expect(location.hash).toMatch(/^#\/v1\/write\/[A-Za-z0-9_~-]+$/);
   expect(location.hash).not.toMatch(/[?&][kos]=/);
