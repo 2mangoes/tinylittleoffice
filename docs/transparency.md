@@ -27,7 +27,8 @@ leak. Everything here makes that checkable by a stranger.
    host from it. `scripts/network-doc.ts` (`npm run docs:network`, run first by `npm run build`) writes
    `docs/network.md` and `public/network.html` (`/network`, plain HTML, no script, linked from About and the
    README). `scripts/headers.ts` writes `connect-src` and `img-src` from the list (`test/csp.test.ts`: every
-   host in its directive and nothing else; the map's tiles left `connect-src`, which nothing used). Builds are
+   host in its directive and nothing else; the map's tiles left `connect-src`, which nothing used, and came back
+   to it on 2026-10-12, when a picture of a trip's map began fetching them to write them in). Builds are
    not run in tests, so `test/network.test.ts` reads the source (`src/`, `tinier/`) instead of the built site: every
    host must be on the list (or localhost, or an XML namespace; tests exempt, said why), `src/` names hosts only through the list, and the committed page must be
    what the list says.

@@ -24,7 +24,8 @@ test('a trip builds a stop a step on the map that fits them all; a drawing a sha
   expect(def('trip').steps!(trip)).toBe(3);
   const one = def('trip').view(trip, { small: true, upTo: 1 })[0].svg;
   const all = def('trip').view(trip, { small: true })[0].svg;
-  expect(texts(one)).toEqual(['1', 'Lisbon']);
+  // On the map's tiles, with their credit (apps/trip/view.ts).
+  expect(texts(one)).toEqual(['1', 'Lisbon', '© OpenStreetMap']);
   expect(one).not.toContain('<polyline');
   // The first pin is where it is when all three are drawn.
   expect(/<circle cx="[^"]+" cy="[^"]+"/.exec(one)![0]).toBe(/<circle cx="[^"]+" cy="[^"]+"/.exec(all)![0]);

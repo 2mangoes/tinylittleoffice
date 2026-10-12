@@ -15,6 +15,7 @@ import { parse } from '../../../doc/index.ts';
 import { caret } from '../../../kit/text/textops.ts';
 import type { ToText } from '../../../kit/text/text.ts';
 import { readTrip } from '../model.ts';
+import { mapOn, setMapOn } from '../view.ts';
 import { tick, until } from '../../../../test/browser/helpers.ts';
 import { remScale } from '../../../kit/ui/zoom.ts';
 
@@ -112,6 +113,7 @@ const tapMap = (el: HTMLElement, x: number, y: number, type = 'click') => {
 const realFetch = window.fetch;
 afterEach(() => {
   window.fetch = realFetch;
+  setMapOn(true);
 });
 
 test('stops from the document: number, name, note, the leg before each, the count and the total', async () => {
@@ -427,8 +429,19 @@ test('the bar: units, dots and the map; it ends with Undo and Redo; Insert puts 
   expect(el.querySelector('.trip-map')).toBeNull();
   expect(bar(el, 'Map').getAttribute('aria-pressed')).toBe('false');
   expect(bar(el, 'Show the whole route').disabled).toBe(true);
+  // The switch is kept as a setting: a trip opened next, or drawn on a slide, has no map either (view.ts).
+  expect(mapOn()).toBe(false);
+  const next = document.createElement('to-trip-editor') as ToTripEditor;
+  next.tiles = '';
+  next.value = ROUTE;
+  document.body.append(next);
+  await next.updateComplete;
+  expect(next.querySelector('.trip-map')).toBeNull();
+  expect(bar(next, 'Map').getAttribute('aria-pressed')).toBe('false');
+  next.remove();
   bar(el, 'Map').click();
   await settle(el);
+  expect(mapOn()).toBe(true);
   await mapReady(el);
   await until(() => pins(el).length === 4);
 });
@@ -553,6 +566,8 @@ test('a trip with no stops asks nothing of the device as it opens; Where I am as
     bar(el, 'Map').click();
     await settle(el);
     expect(bar(el, 'Where I am').disabled).toBe(true);
+    // On again: the switch is kept, and the trip next has its map.
+    bar(el, 'Map').click();
   } finally {
     geo.restore();
   }

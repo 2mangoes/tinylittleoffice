@@ -148,7 +148,9 @@ library that has no password, and open the short links made there while they las
 Turning Save in browser off (from the phone) removes all of it.
 
 **The map's provider.** The map's tiles and place search go to OpenStreetMap directly while a map is shown
-(`docs/network.md` says why). Those requests carry the reader's address to OpenStreetMap.
+(`docs/network.md` says why), and a trip drawn anywhere (a slide, a page, a card, an export) is drawn on its
+tiles, by the Trip Planner's Map switch. Those requests carry the reader's address to OpenStreetMap, and which
+squares of the world the map shows.
 
 **The operator and the platform themselves.** See "What the host can see"; and above, the code.
 
@@ -170,7 +172,7 @@ Turning Save in browser off (from the phone) removes all of it.
 | No logs in the site or the shortener (observability off, no console calls, tests hold both) | A record of who asked for what |
 | The link guard before every link that leaves | A scam link disguised by its words |
 | No app draws a document as a web page of its own: a document never runs code | A phishing page served from our own domain |
-| A document fetches nothing from any other site: no pictures from the web, no embeds | Tracking pixels; a picture's or an embed's site learning who reads |
+| A document fetches nothing from any other site but a trip's map tiles (by the Map switch): no pictures from the web, no embeds | Tracking pixels; a picture's or an embed's site learning who reads |
 | Content-Security-Policy listing every host; no third-party scripts or fonts | Telemetry, and code injected through a document running at all |
 | WebCrypto, no crypto library | A dependency's bug or compromise in the part that matters most; and code a reader can check in an hour |
 

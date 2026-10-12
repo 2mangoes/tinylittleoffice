@@ -65,12 +65,12 @@ export const NETWORK = {
   },
   tiles: {
     host: 'tile.openstreetmap.org',
-    what: 'The map’s pictures (tiles) in the Trip Planner, asked directly as OpenStreetMap’s policy asks',
+    what: 'The map’s pictures (tiles), asked directly as OpenStreetMap’s policy asks: in the Trip Planner, and under a trip’s map drawn anywhere (a slide, a page, an item, a card, an export), only the tiles its box needs; a picture made of that map (a card, a PDF, a PNG, a PowerPoint) asks them again to write them into it',
     when: 'while shown',
-    carries: 'Which squares of the map are on the screen; no referrer',
-    stops: 'Map, in the Trip Planner’s bar, turned off',
-    by: 'apps/trip/editor.ts',
-    csp: ['img'],
+    carries: 'Which squares of the map are on the screen or in the picture; no referrer',
+    stops: 'Map, in the Trip Planner’s bar, turned off: no map then asks for them, in the Trip Planner or anywhere a trip is drawn; the home page’s pictures of the templates never do',
+    by: 'apps/trip/editor.ts, apps/trip/view.ts, kit/draw/raster.ts',
+    csp: ['img', 'connect'],
   },
   placeSearch: {
     host: 'nominatim.openstreetmap.org',
@@ -83,11 +83,11 @@ export const NETWORK = {
   },
   osm: {
     host: 'www.openstreetmap.org',
-    what: 'The Trip Planner’s credit to OpenStreetMap under its map, a link',
+    what: 'The credit to OpenStreetMap under the Trip Planner’s map and in the corner of a trip’s map drawn on its tiles, a link',
     when: 'after a tap',
     carries: 'Nothing of the document: it opens OpenStreetMap’s copyright page in a new tab',
     stops: 'Not following the link',
-    by: 'apps/trip/editor.ts',
+    by: 'apps/trip/editor.ts, apps/trip/view.ts',
   },
   tinier: {
     host: 'tinier.tinylittleoffice.com',

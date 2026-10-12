@@ -1,14 +1,14 @@
 /**
  * Trip: a route on a map, stops in order, each with a note; or places as dots. The document is a table of
  * places (model.ts), the editor is editor.ts (a Leaflet map, imported lazily, with OpenStreetMap's
- * pictures while it is on view), the drawing and the files view.ts.
+ * pictures while it is on view), the drawing (on the same pictures, by the same Map switch) and the files view.ts.
  */
 import { MapPinned } from 'lucide';
 import { apply, parse, textOf, write, type TextNode } from '../../doc/index.ts';
 import { defineApp, type Doc } from '../../kit/core/app.ts';
 import { utf8 } from '../../kit/draw/draw.ts';
 import { t } from '../../kit/core/i18n.ts';
-import { tripPage, tripToGeoJson, tripToGpx } from './view.ts';
+import { mapOn, tripPage, tripToGeoJson, tripToGpx } from './view.ts';
 import { tripToCal } from './convert.ts';
 import { readTrip } from './model.ts';
 
@@ -44,7 +44,8 @@ export default defineApp({
   editor: () => import('./editor.ts'),
   title: titleOf,
   retitle,
-  view: (doc, opts) => [tripPage(parse(doc), opts?.small, opts?.upTo)],
+  // On OpenStreetMap's tiles while the Map switch is on, except a thumbnail: a visitor who has not opened a trip tells OpenStreetMap nothing.
+  view: (doc, opts) => [tripPage(parse(doc), opts?.small, opts?.upTo, !opts?.thumb && mapOn())],
   text: tripText,
   // Presented on a slide, a stop a step: the map stays fitted to them all, the route drawn as far as it has come.
   steps: (doc) => readTrip(parse(doc)).stops.length,

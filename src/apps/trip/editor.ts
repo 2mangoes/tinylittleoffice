@@ -19,7 +19,7 @@
  * that holds a trip builds a stop a step: AppDef.steps).
  *
  * This is the one app that talks to the network by itself: while the map is on view its pictures come from
- * tile.openstreetmap.org. The route itself lives only in the link. A trip with no stops opens on the country of the
+ * tile.openstreetmap.org (and, by the same Map switch, under a trip drawn anywhere: view.ts). The route itself lives only in the link. A trip with no stops opens on the country of the
  * site's language (home.ts: the browser's own region overriding it, New York City where neither says), never on the
  * whole world. Where I am, in the bar, asks the browser where the device is (once a tap, no watching, 5 s at most)
  * and centers the map there at a city's zoom; refused or unknown, the map goes to that country. The position is used
@@ -60,6 +60,7 @@ import {
   type Stop,
   type TripView,
 } from './model.ts';
+import { mapOn, setMapOn, TILES } from './view.ts';
 import '../../kit/ui/bar.ts';
 import '../../kit/ui/insert.ts';
 import '../../kit/ui/menu.ts';
@@ -72,7 +73,6 @@ import { reveal } from '../../kit/ui/scroll.ts';
 
 export const tag = 'to-trip-editor';
 
-const TILES = `${origin('tiles')}/{z}/{x}/{y}.png`;
 const SEARCH = `${origin('placeSearch')}/search`;
 /** How long a tap on the map waits to be sure it is not the first of a double tap (which zooms). */
 const DOUBLE = 300;
@@ -166,7 +166,7 @@ export class ToTripEditor extends DocElement<TripView> {
     super();
     this.tiles = TILES;
     this.cur = -1;
-    this.showMap = true;
+    this.showMap = mapOn();
     this.query = '';
     this.found = null;
     this.searching = false;
@@ -246,6 +246,12 @@ export class ToTripEditor extends DocElement<TripView> {
   }
 
   /* ---------- the map ---------- */
+
+  /** The Map switch: the map shown or not, and with it whether a trip drawn anywhere (a slide, a page, a card) is on OpenStreetMap's tiles. */
+  toggleMap() {
+    this.showMap = !this.showMap;
+    setMapOn(this.showMap);
+  }
 
   private async syncMap() {
     const el = this.querySelector<HTMLElement>('.trip-map');

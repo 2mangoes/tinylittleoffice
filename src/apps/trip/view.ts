@@ -1,13 +1,24 @@
 /**
  * Trip drawn and written out, with no DOM: the page for print, PDF, PNG and thumbnails, and the two files a
- * map app or a GPS reads (GPX 1.1, GeoJSON). The page draws the route on a plain map of its own (Web
- * Mercator, fitted to the stops, a graticule for scale) and asks no one for anything: OpenStreetMap's
- * pictures are the editor's, only while its map is on view.
+ * map app or a GPS reads (GPX 1.1, GeoJSON). The page draws the route on OpenStreetMap's tiles at the zoom that
+ * fits the stops (Paul, 2026-10-12: "The map shows the locations but not the map itself"), on a slide, a page, an
+ * item, a card and every export alike, with the credit in the corner; with the Map switch off, and on the home
+ * page's thumbnails, on a plain map of its own (Web Mercator, fitted to the stops, a graticule for scale) that asks
+ * no one for anything. A picture made of it has the tiles written in first (kit/draw/raster.ts).
  */
 import type { Page } from '../../kit/core/app.ts';
-import { ACCENT, clip, FAINT, LINE, MUTED, r, rect, SHADE, text, xml } from '../../kit/draw/draw.ts';
+import { origin } from '../../kit/core/network.ts';
+import { store } from '../../kit/core/store.ts';
+import { ACCENT, clip, FAINT, LINE, MUTED, r, rect, SHADE, text, textWidth, xml } from '../../kit/draw/draw.ts';
 import { distanceKm, formatLeg, readTrip, routeKm, routeName, type TripView } from './model.ts';
 import type { Doc } from '../../doc/index.ts';
+
+/** Where the map's pictures come from: the editor's map and the drawn one alike. */
+export const TILES = `${origin('tiles')}/{z}/{x}/{y}.png`;
+/** The Map switch (the Trip Planner's bar): whether a map anywhere asks OpenStreetMap for its tiles. Kept as the other settings are (under Saved; for the visit under Private): '0' off, on by default. */
+const MAP_KEY = 'tinyoffice.map';
+export const mapOn = () => store.get(MAP_KEY) !== '0';
+export const setMapOn = (on: boolean) => store.set(MAP_KEY, on ? '1' : '0');
 
 /** Web Mercator, in units of the world's width: where a place falls. */
 const mx = (lon: number) => (lon + 180) / 360;
@@ -18,30 +29,73 @@ const my = (lat: number) => {
 /** The least span of a map of several stops, in world widths: about two kilometres across at the equator. */
 const MIN_SPAN = 0.00005;
 const STEPS = [0.005, 0.01, 0.02, 0.05, 0.1, 0.2, 0.5, 1, 2, 5, 10, 15, 30, 45, 90];
+/** A tile's side, in pixels at its own zoom. */
+const TILE = 256;
+/** On the tiles, the share of the box's width and height the stops may span: an eighth of it kept clear each side, for the names. */
+export const FIT = 0.75;
+/** The closest zoom a map is drawn at; one stop alone, a neighbourhood's. */
+const MAX_ZOOM = 18;
+export const ONE_ZOOM = 15;
 
-/** The stops on a map `w` × `h`: lines of latitude and longitude, the route, the numbered pins and their names. Presented, the first `upTo` of them, on the map that fits them all. */
-function mapSvg(v: TripView, w: number, h: number, upTo = Infinity): string {
+/** The greatest zoom at which the stops' extent (in world widths) fits `FIT` of a box w × h; one stop, ONE_ZOOM; 0 when none does. */
+function fitZoom(dx: number, dy: number, w: number, h: number, one: boolean): number {
+  if (one) return ONE_ZOOM;
+  for (let z = MAX_ZOOM; z > 0; z--) if (dx * TILE * 2 ** z <= w * FIT && dy * TILE * 2 ** z <= h * FIT) return z;
+  return 0;
+}
+
+/** The tiles of zoom `z` that cover a box w × h whose top left is (x0, y0) in pixels of that zoom: only those, under its own clip. */
+function tilesSvg(z: number, x0: number, y0: number, w: number, h: number): string {
+  const n = 2 ** z;
+  let out = '';
+  for (let ty = Math.floor(y0 / TILE); ty < Math.ceil((y0 + h) / TILE); ty++) {
+    if (ty < 0 || ty >= n) continue;
+    for (let tx = Math.floor(x0 / TILE); tx < Math.ceil((x0 + w) / TILE); tx++) {
+      const href = TILES.replace('{z}', String(z))
+        .replace('{x}', String(((tx % n) + n) % n))
+        .replace('{y}', String(ty));
+      out += `<image href="${href}" x="${r(tx * TILE - x0)}" y="${r(ty * TILE - y0)}" width="${TILE}" height="${TILE}"/>`;
+    }
+  }
+  return `<svg width="${w}" height="${h}">${out}</svg>`;
+}
+
+/** OpenStreetMap's credit in the box's corner, a link to its copyright page, as under the editor's map. */
+function credit(w: number, h: number): string {
+  const words = '© OpenStreetMap';
+  const tw = textWidth(words, 10) + 8;
+  return `<a href="${origin('osm')}/copyright" target="_blank" rel="noopener noreferrer">${rect(w - tw, h - 15, tw, 15, '#fff', 'opacity="0.8"')}${text(w - 4, h - 4, words, { px: 10, fill: MUTED, anchor: 'end' })}</a>`;
+}
+
+/**
+ * The stops on a map `w` × `h`: the route and the numbered pins with their names, on OpenStreetMap's tiles (`tiles`), or
+ * on lines of latitude and longitude. Presented, the first `upTo` of them, on the map that fits them all.
+ */
+export function mapSvg(v: TripView, w: number, h: number, upTo = Infinity, tiles = false): string {
   const s = v.stops;
   let out = rect(0, 0, w, h, SHADE);
   if (!s.length) return out;
   const xs = s.map((p) => mx(p.lon));
   const ys = s.map((p) => my(p.lat));
   const [x0, x1, y0, y1] = [Math.min(...xs), Math.max(...xs), Math.min(...ys), Math.max(...ys)];
-  // As close as fits every stop with room for its name: one stop alone is a town's width; several, never closer
-  // than a few streets, so a walk or a food crawl fills the map as a road trip does.
-  const span = Math.max(x1 - x0, ((y1 - y0) * w) / h, s.length > 1 ? MIN_SPAN : 0.0004);
-  const scale = (w - 160) / span;
   const [cx, cy] = [(x0 + x1) / 2, (y0 + y1) / 2];
+  // On the tiles, a zoom of theirs; else as close as fits every stop with room for its name: one stop alone is a
+  // town's width; several, never closer than a few streets, so a walk or a food crawl fills the map as a road trip does.
+  const z = tiles ? fitZoom(x1 - x0, y1 - y0, w, h, s.length === 1) : 0;
+  const scale = tiles ? TILE * 2 ** z : (w - 160) / Math.max(x1 - x0, ((y1 - y0) * w) / h, s.length > 1 ? MIN_SPAN : 0.0004);
   const px = (lon: number) => w / 2 + (mx(lon) - cx) * scale;
   const py = (lat: number) => h / 2 + (my(lat) - cy) * scale;
-  // The graticule, at a step that draws a few lines each way.
-  const lonSpan = (w / scale) * 360;
-  const step = STEPS.find((d) => lonSpan / d <= 6) ?? 90;
-  const [west, east] = [cx * 360 - 180 - lonSpan / 2, cx * 360 - 180 + lonSpan / 2];
-  for (let lon = Math.ceil(west / step) * step; lon <= east; lon += step) out += `<path d="M${r(px(lon))} 0V${h}" stroke="${LINE}" stroke-width="1"/>`;
-  const latOf = (y: number) => (Math.atan(Math.sinh(Math.PI * (1 - 2 * (cy + (y - h / 2) / scale)))) * 180) / Math.PI;
-  const [south, north] = [latOf(h), latOf(0)];
-  for (let lat = Math.ceil(south / step) * step; lat <= north; lat += step) out += `<path d="M0 ${r(py(lat))}H${w}" stroke="${LINE}" stroke-width="1"/>`;
+  if (tiles) out += tilesSvg(z, cx * scale - w / 2, cy * scale - h / 2, w, h);
+  else {
+    // The graticule, at a step that draws a few lines each way.
+    const lonSpan = (w / scale) * 360;
+    const step = STEPS.find((d) => lonSpan / d <= 6) ?? 90;
+    const [west, east] = [cx * 360 - 180 - lonSpan / 2, cx * 360 - 180 + lonSpan / 2];
+    for (let lon = Math.ceil(west / step) * step; lon <= east; lon += step) out += `<path d="M${r(px(lon))} 0V${h}" stroke="${LINE}" stroke-width="1"/>`;
+    const latOf = (y: number) => (Math.atan(Math.sinh(Math.PI * (1 - 2 * (cy + (y - h / 2) / scale)))) * 180) / Math.PI;
+    const [south, north] = [latOf(h), latOf(0)];
+    for (let lat = Math.ceil(south / step) * step; lat <= north; lat += step) out += `<path d="M0 ${r(py(lat))}H${w}" stroke="${LINE}" stroke-width="1"/>`;
+  }
   const at = s.map((p) => [px(p.lon), py(p.lat)] as const);
   const shown = Math.min(s.length, upTo);
   if (shown > 1 && v.linked)
@@ -57,18 +111,18 @@ function mapSvg(v: TripView, w: number, h: number, upTo = Infinity): string {
     if (name)
       out += `<text x="${r(x + 18)}" y="${r(y + 4.5)}" font-size="13" font-weight="600" fill="#18181b" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round">${xml(name)}</text>`;
   });
-  return out;
+  return tiles ? out + credit(w, h) : out;
 }
 
-/** The route as a page: the map, then the stops in order with their notes and legs, and the total. Small: the map alone. */
-export function tripPage(doc: Doc, small = false, upTo = Infinity): Page {
+/** The route as a page: the map, then the stops in order with their notes and legs, and the total. Small: the map alone. `tiles`: on OpenStreetMap's tiles. */
+export function tripPage(doc: Doc, small = false, upTo = Infinity, tiles = false): Page {
   const v = readTrip(doc);
   const W = 720;
   const [MW, MH] = [W - 48, small ? 420 : 340];
   const alt = v.stops.length ? v.stops.map((s, i) => `${i + 1}. ${s.name || `${s.lat}, ${s.lon}`}`).join('; ') : undefined;
   if (!v.stops.length)
     return { w: W, h: small ? 468 : 120, svg: small ? `<svg x="24" y="24" width="${MW}" height="${MH}">${mapSvg(v, MW, MH)}</svg>` : text(W / 2, 66, '–', { px: 16, fill: MUTED, anchor: 'middle' }) };
-  let svg = `<svg x="24" y="24" width="${MW}" height="${MH}" viewBox="0 0 ${MW} ${MH}">${mapSvg(v, MW, MH, upTo)}</svg>` + rect(24, 24, MW, MH, 'none', `stroke="${LINE}" rx="2"`);
+  let svg = `<svg x="24" y="24" width="${MW}" height="${MH}" viewBox="0 0 ${MW} ${MH}">${mapSvg(v, MW, MH, upTo, tiles)}</svg>` + rect(24, 24, MW, MH, 'none', `stroke="${LINE}" rx="2"`);
   if (small) return { w: W, h: MH + 48, svg, alt };
   let y = MH + 44;
   v.stops.forEach((s, i) => {

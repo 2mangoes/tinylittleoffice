@@ -28,15 +28,22 @@ not on this list is refused by the browser itself.
 
 {{requests}}
 
-A document fetches nothing from any other site. A link in it is words that go somewhere when the reader
-follows them; nothing in a document is drawn from another site's address.
+A document fetches nothing from any other site but a trip's map tiles, by the Map switch. A link in it is
+words that go somewhere when the reader follows them; nothing else in a document is drawn from another site's
+address.
 
 ## Why each of these is asked directly
 
 - **The map.** Map tiles only while a map is on the screen; place search only when a search is tapped.
-  They are asked directly: OpenStreetMap's usage policies are written for the browser that shows the map
-  asking them directly, and a cache of ours in between would be the heavy, anonymous use they ask people
-  not to make. The site sends no referrer.
+  A trip drawn on a slide, a page, an outline's item, a card or in an export is drawn on the tiles too,
+  at the zoom that fits its places: only the tiles its box needs (a handful, never a whole zoom level),
+  nothing fetched ahead. A picture made of it (a card, a PDF, a PNG, a PowerPoint) fetches those tiles
+  again to write them into the picture. The home page's pictures of the templates are drawn without them,
+  so a visitor who has not opened a trip tells OpenStreetMap nothing, and Map in the Trip Planner's bar,
+  turned off, turns them off everywhere. They are asked directly, by the browser with its own name:
+  OpenStreetMap's usage policies are written for the browser that shows the map asking them directly, and
+  a cache of ours in between would be the heavy, anonymous use they ask people not to make; nothing keeps
+  them but the browser's own cache. The site sends no referrer.
 - **Short links.** Only when a short link is made or opened; the service holds
   ciphertext it cannot read, whose key is in the short link's fragment, which browsers never send
   (tinier/tinier.ts).

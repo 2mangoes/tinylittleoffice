@@ -4,11 +4,43 @@
  */
 import { PAPER } from './draw.ts';
 
-/** SVG markup painted on a canvas of w by h at `scale`, over `paper` (or nothing when null); null where it cannot be drawn. */
+/** A picture from another site as a data: URL (asked as OpenStreetMap's policy allows: the browser's own, no referrer); null when it does not come. */
+async function dataUrl(href: string): Promise<string | null> {
+  try {
+    const res = await fetch(href, { mode: 'cors', credentials: 'omit', referrerPolicy: 'no-referrer' });
+    const blob = res.ok ? await res.blob() : null;
+    if (!blob?.type.startsWith('image/')) return null;
+    return await new Promise((done) => {
+      const read = new FileReader();
+      read.onload = () => done(read.result as string);
+      read.onerror = () => done(null);
+      read.readAsDataURL(blob);
+    });
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Each picture from another site in the markup (a map's tiles, apps/trip/view.ts: the only kind a page draws) written in
+ * as a data: URL, since an SVG drawn as a picture asks no one for anything; one that does not come is taken out, and the
+ * ground under it shows. Each asked once, all at once, and kept by no one but the browser's own cache.
+ */
+async function inlineImages(svg: string): Promise<string> {
+  const hrefs = [...new Set(Array.from(svg.matchAll(/<image href="(https:[^"]+)"/g), (m) => m[1]))];
+  if (!hrefs.length) return svg;
+  const got = new Map(await Promise.all(hrefs.map(async (h) => [h, await dataUrl(h)] as const)));
+  return svg.replace(/<image href="(https:[^"]+)"([^>]*)\/>/g, (_, h: string, rest: string) => {
+    const d = got.get(h);
+    return d ? `<image href="${d}"${rest}/>` : '';
+  });
+}
+
+/** SVG markup painted on a canvas of w by h at `scale`, over `paper` (or nothing when null); null where it cannot be drawn. A map's tiles are written in first. */
 async function paint(svg: string, w: number, h: number, scale: number, paper: string | null): Promise<HTMLCanvasElement | null> {
   try {
     const img = new Image();
-    img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+    img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(await inlineImages(svg));
     await img.decode();
     const canvas = document.createElement('canvas');
     canvas.width = Math.round(w * scale);

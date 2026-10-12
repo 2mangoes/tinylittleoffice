@@ -30,7 +30,7 @@ const TRIP: Command<R>[] = [
   cmd('linked', 'Join the stops in order', { icon: Spline, where: ['bar'], document: true, pressed: (r) => r.view.linked, does: (r) => r.edit(setLinked(r.doc, !r.view.linked)) }),
   cmd('fit', 'Show the whole route', { icon: Scan, where: ['bar'], document: true, disabled: (r) => !r.view.stops.length || !r.showMap, does: (r) => r.fit() }),
   cmd('locate', 'Where I am', { icon: LocateFixed, where: ['bar'], document: true, disabled: (r) => !r.showMap, does: (r) => r.locate() }),
-  cmd('map', 'Map', { icon: MapIcon, where: ['bar'], document: true, pressed: (r) => r.showMap, does: (r) => (r.showMap = !r.showMap) }),
+  cmd('map', 'Map', { icon: MapIcon, where: ['bar'], document: true, pressed: (r) => r.showMap, does: (r) => r.toggleMap() }),
   cmd('present', 'Present', { icon: UI.play, keys: 'Mod+Alt+Enter', where: ['bar'], document: true, takesFocus: true, disabled: (r) => !r.view.stops.length, does: (r) => r.present() }),
   cmd('show', 'Show on the map', { at: 'rows', icon: Crosshair, where: ['context'], disabled: (r) => !r.hasMap, does: (r) => r.showChosen() }),
   cmd('move', 'Move the selected items up or down', {

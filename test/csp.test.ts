@@ -45,7 +45,8 @@ test('every directive that reaches the web is the site and the registry’s host
     const named = reaches().filter((o) => o.host === r.host);
     for (const d of ['img', 'connect'] as Directive[]) expect(sources(d).includes(`https://${r.host}`), `${r.host} ${d}`).toBe(named.some((o) => o.csp?.includes(d)));
   }
-  expect(directive(csp, 'connect-src')).toEqual(["'self'", 'data:', 'https://nominatim.openstreetmap.org', 'https://tinier.tinylittleoffice.com']);
+  // The map's tiles are fetched too, to be written into a picture of a map (kit/draw/raster.ts).
+  expect(directive(csp, 'connect-src')).toEqual(["'self'", 'data:', 'https://tile.openstreetmap.org', 'https://nominatim.openstreetmap.org', 'https://tinier.tinylittleoffice.com']);
 });
 
 test('font-src: the site and nothing else; the type is IBM Plex, served by the site (public/fonts/)', () => {
