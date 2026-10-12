@@ -470,7 +470,7 @@ test('a deck’s Display Link has Present beside Edit, the same link with ?show;
   expect(text.querySelector('.to-display-present')).toBeNull();
 });
 
-// A link is a copy, said once to someone who arrived by one (r17-copies): a quiet line under the Display Link's header,
+// A link is a copy, said once to someone who arrived by one: a quiet line under the Display Link's header,
 // once a document, closed by its ×; a document made here, opened as its pages, has none.
 test('a Display Link that arrived says once that it is a copy; one made here does not', async () => {
   afterEachRemove();

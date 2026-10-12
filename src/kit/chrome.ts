@@ -34,10 +34,10 @@
  * remains. The caret is kept in sight once the column has settled, not in flight (kit/scroll.ts gliding(), which kit/text.ts asks).
  *
  * Why a column: Safari on iOS does not make the page shorter for the keyboard, only the visible window, so a bar
- * stuck to the page's top had to be measured into place after events that came late or never (round seven's
- * --to-vv-top and its frame-by-frame watch). A column the visible window's height puts the bar where it belongs with
+ * stuck to the page's top had to be measured into place after events that came late or never (a
+ * frame-by-frame watch of the visible window's top). A column the visible window's height puts the bar where it belongs with
  * nothing measured but the window. The price: Safari's toolbar no longer collapses as the words scroll, since the
- * page itself never does (docs/kernel.md §9).
+ * page itself never does (docs/kernel.md §7).
  *
  * The app's icon at the header's inline start is the way home, "#/" (Paul, 2026-10-10: "I need a way to get back to the
  * home state. Maybe the top left icon could do that"); a new document of the app is the drawer's first row under This
@@ -472,7 +472,7 @@ export class ToChrome extends LitElement {
     // The menu button is a hamburger (Paul, 2026-10-10: "Make the hamburger a hamburger"); the mark is the drawer's.
     const burger = html`<button type="button" class="to-btn to-tool to-burger" aria-label=${t('Menu')} title=${t('Tiny Little Office menu')} aria-haspopup="dialog" @click=${() => this.say('to-drawer-open')}>${icon(UI.menu, 24)}</button>`;
     const head = html`<header class="to-header ${this.titling ? 'titling' : ''}" aria-label=${t('Tiny Little Office')} @focusin=${this.openTitle} @focusout=${() => (this.titling = false)} @keydown=${this.titleKey}>${this.doc ? this.renderDoc(this.doc) : html`<a class="to-brand" href="#/">${t('Tiny Little Office')}</a>`}</header>`;
-    // The column scrolls (the room below the last line, r18-caret-middle, sees to that even in a short document), so it is in the tab order and the keys scroll it, as the Display Link's column is; a scrollable box no key can reach fails axe's scrollable-region-focusable (the v1.1.1 deploy, 2026-10-12).
+    // The column scrolls (the room below the last line sees to that even in a short document), so it is in the tab order and the keys scroll it, as the Display Link's column is; a scrollable box no key can reach fails axe's scrollable-region-focusable.
     return html`${burger}${head}${this.renderArrival()}${this.renderOther()}<div class="to-column ${this.barred ? 'barred' : ''}">
       <main class=${this.mainClass} tabindex="0" aria-label=${this.label || nothing}>${this.main}</main>
     </div>`;

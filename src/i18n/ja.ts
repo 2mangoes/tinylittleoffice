@@ -1135,7 +1135,7 @@ export default {
   '{every}, {n} times': '{every}、{n}回',
   '{n|one day|# days}': '{n|#日間}',
   '{n}% done': '{n}%完了',
-  // The templates added in round four: each name, then its line on the home page.
+  // The templates: each name, then its line on the home page.
   'A bakery’s posts and newsletters through the winter, an advent story every day.': 'パン屋の冬の投稿とニュースレター。毎日アドベントの物語つき。',
   'A youth soccer season: practice every week, home and away in their colors, the playoffs.': 'ユースサッカーのシーズン：毎週の練習、ホームとアウェイをチームカラーで、プレーオフ。',
   'A small team’s time off, the public holidays and the Christmas closing on one calendar.': '小さなチームの休暇、祝日、年末年始の休業を1つのカレンダーに。',

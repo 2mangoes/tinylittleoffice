@@ -324,8 +324,6 @@ export const LIBRARY: Record<string, IconNode> = {
   bug: Bug,
   flower: Flower2,
 };
-/** The starter set's names, in order: what has keywords and can be suggested. */
-export const LIBRARY_NAMES: readonly string[] = Object.keys(LIBRARY);
 
 /** More icons by name (the full library, once loaded); a name already taken keeps its icon. */
 export function addIcons(more: Record<string, IconNode>): string[] {

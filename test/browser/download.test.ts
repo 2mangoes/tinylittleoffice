@@ -1,4 +1,4 @@
-// The Download menu: the drawer's This document row (round nine: the header is the title), placed under its row at
+// The Download menu: the drawer's This document row (the header is the title), placed under its row at
 // every size, and a table of formats, each with view, share, download and copy link (kit/exports.ts exportItems,
 // kit/menu.ts's rows of actions).
 import { test, expect, afterEach, vi } from 'vitest';

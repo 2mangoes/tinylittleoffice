@@ -59,7 +59,7 @@ export async function openDrawerDoc(shell: HTMLElement): Promise<HTMLElement> {
   return shell.querySelector<HTMLElement>('.to-drawer-doc')!;
 }
 
-/** Share…, from the drawer (the header has no Share: round nine). */
+/** Share…, from the drawer (the header has no Share). */
 export async function openShare(shell: HTMLElement): Promise<void> {
   (await openDrawerDoc(shell)).querySelector<HTMLButtonElement>('.to-drawer-share')!.click();
 }

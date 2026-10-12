@@ -551,7 +551,7 @@ test("a thumbnail of a drawing is the picture's own box, landscape when the pict
   expect(sha1(def.view(REQUEST, { small: true }))).toBe('2a00cf5f987fb569f8e3578ea803609b362609b0');
 });
 
-test("a label keeps the spaces a person typed at its lines' ends, through the document and back (round ten: no trim)", () => {
+test("a label keeps the spaces a person typed at its lines' ends, through the document and back (no trim)", () => {
   for (const label of ['Launch ', ' day one', 'a  | b ', 'two words ']) expect(labelText(labelLines(label))).toBe(label);
   const doc = `Kind | X | Y | W | H | Style | Label\n--- | --- | --- | --- | --- | --- | ---\nr | 4 | 6 | 30 | 8 | 0 | Launch\\ \n`;
   expect(write(parse(doc))).toBe(doc);

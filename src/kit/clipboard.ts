@@ -214,7 +214,7 @@ const SKIP_TAGS = new Set(['SCRIPT', 'STYLE', 'TEMPLATE', 'META', 'LINK', 'TITLE
 type Marks = Partial<Pick<Run, 'b' | 'i' | 'u' | 's' | 'h' | 'href'>>;
 
 /** The glyphs a list item is drawn with where it is written as words (Word, Mail, TextEdit, a bullet typed by hand). */
-export const BULLET = /^[ \t]*[•◦▪▫‣⁃●○■□·–—][ \t ]+/;
+const BULLET = /^[ \t]*[•◦▪▫‣⁃●○■□·–—][ \t ]+/;
 /** What the clipboard carries that is no one's words: a zero-width space, a byte-order mark, a word joiner. */
 const INVISIBLE = /[​﻿⁠]/g;
 /** Backgrounds that are no highlight: none, or white. */
@@ -436,7 +436,7 @@ export function linkToFence(url: string): Block | null {
 }
 
 /** Lines of plain text with a bullet glyph at their start ("• one", "◦ two" under it) as Markdown's items, their indent kept. */
-export const bulletsToItems = (text: string): string => text.replace(/^([ \t]*)[•◦▪▫‣⁃●○■□·–—][ \t ]+/gm, '$1- ');
+const bulletsToItems = (text: string): string => text.replace(/^([ \t]*)[•◦▪▫‣⁃●○■□·–—][ \t ]+/gm, '$1- ');
 
 /** A fence of an app this editor can show (or a locked document): anything else in a fence is words. */
 const appFence = (b: Block) => b.k === 'fence' && (b.lang === LOCKED_LANG || !!lookup.appOf(b.lang));

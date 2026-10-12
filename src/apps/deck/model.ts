@@ -13,7 +13,7 @@
  * "qr: no" (no closing QR slide), and "format: zine" — a printed thing (zine, booklet, brochure, comic,
  * poster, badges) is a deck whose pages have another geometry (view.ts); its header may add "sides: 2"
  * and "pages: 12". A slide records its block span, so the editor puts <to-text> straight over the blocks
- * and every command here is a list of the kernel's operations. (Ported from the old tree's deckmodel.ts.)
+ * and every command here is a list of the kernel's operations.
  */
 import { apply, isInnerDoc, isText, notesOf, pages, parse, plainText, write, type Attrs, type Block, type Doc, type Op, type Run } from '../../doc/index.ts';
 import { t } from '../../kit/i18n.ts';
@@ -107,7 +107,7 @@ const PIPE = (b: Block) => b.k === 'p' && b.runs.length === 1 && b.runs[0].t ===
 const isSub = (b: Block) => b.k === 'table' || isInnerDoc(b);
 
 /** The headline's runs as the icon and the words: ":rocket: Headline" is the icon rocket, the words "Headline". */
-export function splitHeadline(runs: Run[]): { icon: string; title: Run[] } {
+function splitHeadline(runs: Run[]): { icon: string; title: Run[] } {
   const [first, ...rest] = runs;
   if (!first?.ic) return { icon: '', title: runs };
   const title = rest.length && !rest[0].ic && rest[0].fn === undefined ? [{ ...rest[0], t: rest[0].t.replace(/^ /, '') }, ...rest.slice(1)] : rest;
@@ -136,7 +136,7 @@ function itemsOf(blocks: Block[], from: number, to: number): Item[] {
 }
 
 /** One slide from the blocks [from, to) of the document. */
-export function slideOf(blocks: Block[], from: number, to: number): Slide {
+function slideOf(blocks: Block[], from: number, to: number): Slide {
   let head = -1;
   for (let i = from; i < to && head < 0; i++) if (blocks[i].k === 'h') head = i;
   let notesFrom = to;
@@ -232,7 +232,7 @@ export const retitle = (text: string, title: string): string => write(apply(pars
 /* ---------- commands, as operations ---------- */
 
 /** The blocks a new slide is born with: nothing for the default layout; a headline that carries the layout otherwise, and for two columns the "|" between them. */
-export const blankSlideBlocks = (layout: Layout = ''): Block[] =>
+const blankSlideBlocks = (layout: Layout = ''): Block[] =>
   layout ? [{ k: 'h', level: 2, runs: [], a: { cls: [CLASS_OF[layout]] } }, ...(layout === '2' ? [{ k: 'p', runs: [{ t: '|' }] } as Block] : [])] : [];
 
 /** A new slide after slide `after` (-1: before the first), of a layout; the index it will have. */
@@ -338,6 +338,3 @@ export function panelOf(item: Item): Panel {
     .map((p) => p.trim());
   return { glyph: icon, said, caption };
 }
-
-/** The words of a slide's title block, for the home page and the rail: the headline, or the first line of words. */
-export const slideName = (s: Slide): string => plainText(s.title).trim() || plainText(s.items[0]?.runs ?? []).trim();

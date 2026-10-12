@@ -3,7 +3,6 @@
  * character of a link, some charge a flat rate however long it is, and Bluesky's app shortens what it
  * shows. `cost` is what the link uses of `max`; the rest is room for your own words. The Share dialog says it
  * in one line (fitLine): the tightest place the link fits, or the first, from the roomiest down, it does not.
- * (Ported from the old tree's src/lib/limits.ts.)
  */
 import { t } from './i18n.ts';
 import { SHORT_LINK_MAX } from './short.ts';

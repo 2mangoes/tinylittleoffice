@@ -1,8 +1,8 @@
 /**
  * What the second of two documents changed, block by block: the longest common subsequence of their
  * blocks (each written as TLO, so a block is the same block when it reads the same), then a walk back
- * through it. The head's fields count as blocks of their own ("title: Budget"). Ported from the old tree's
- * lib/diff.ts, which did it line by line; pure, for the compare view, the API and the command line.
+ * through it. The head's fields count as blocks of their own ("title: Budget"). Pure, for the compare view,
+ * the API and the command line.
  */
 import { parse, writeBlock } from '../doc/index.ts';
 

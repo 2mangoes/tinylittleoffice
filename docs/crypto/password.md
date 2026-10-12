@@ -15,7 +15,7 @@ only where it must be: the person a sealed link was sent to types the password t
 A password is `generatePassword()` in `src/kit/passwords.ts`: twenty characters drawn from an alphabet of 56
 (letters and digits, with the look-alikes `l`, `I`, `1`, `o`, `O` and `0` left out), each chosen by
 `crypto.getRandomValues` with rejection so every character is equally likely, written in four groups of five
-with dashes (the dashes are part of it). That is 20 × log2(56), about **116 bits** of entropy. Nothing measures a password's strength any more: every password has the same.
+with dashes (the dashes are part of it). That is 20 × log2(56), about **116 bits** of entropy, the same for every password.
 
 ## The parameters
 
@@ -36,7 +36,7 @@ changed a character's form, gives the same key. The second vector shows it.
 
 ## Why one HKDF pass is sound
 
-A key derivation function does one of two jobs. A password hash (PBKDF2, scrypt, Argon2) makes each guess
+A key derivation function does one of two jobs. A password hash (scrypt, Argon2) makes each guess
 expensive, because a password a person chose has little entropy and an attacker holding the ciphertext can
 try the likely ones offline: stretching buys back some of what the person did not choose. HKDF does the other
 job: it turns keying material that already has enough entropy, but may not be uniform or the right length, into
@@ -45,9 +45,8 @@ keyed by that over the info), and its security rests on the input being hard to 
 
 Every password here is 116 random bits, so the password is the entropy and there is nothing to buy back.
 Guessing it offline means searching 2^116 passwords; at a trillion trillion (10^24) guesses a second, half of
-them takes over a thousand years, and no stretching would change the answer in a way that matters. What 600,000 rounds
-of PBKDF2 did before this date (when people typed passwords) was cost every reader a second or more on a phone
-at every open; with the passwords made by the app the rounds defended nothing, so they are gone.
+them takes over a thousand years, and no stretching would change the answer in a way that matters, while it would cost
+every reader a second or more on a phone at every open.
 
 The salt still matters: two documents sealed under the same password get different keys, and nothing computed
 for one link helps with another. The info string names the format, so a key made here is for this and nothing
@@ -80,8 +79,7 @@ Anything shorter, or not base64url, is not a sealed payload.
 
 **There is no separate version byte.** `E` says "sealed this way"; the `v1` in the route is the link format's
 version, outside the encryption. The plain (unsealed) payloads start with their flag letter, which is never
-`E`. Before launch, the change from PBKDF2 to HKDF kept the letter: a link sealed before 2026-10-11 does not
-open, and nothing is kept for it.
+`E`.
 
 ## What happens when
 

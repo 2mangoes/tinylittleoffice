@@ -53,8 +53,6 @@ test('a .tlo file carries its app in its head; opened, the app comes out of it',
   expect(readFile('x.tlo', '---\napp: nope\n---\nHi\n', 'sheet', known)).toEqual({ app: 'sheet', text: 'Hi\n', view: '', title: 'x' });
 });
 
-// Download everything is gone (Paul, 2026-10-12), and titledText, which wrote the library's title into its files, with it.
-
 test('a locked document in a zip is its link, whatever line comes before it', () => {
   const link = 'https://tinylittleoffice.example/#/v1/write/Eabc';
   const read = (words: string) => readZip({ 'write/x.txt': new TextEncoder().encode(words) }, 'write', known);

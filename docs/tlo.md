@@ -3,7 +3,7 @@
 Every Tiny Little Office document is one text, written in TLO: Markdown, with a few additions. The link holds
 this text, compressed (`#/v1/<app>/<payload>`); a `.tlo` file is this text. A language model writes it the way it
 writes any Markdown, and this page is its reference. A person never types it: every label, link, card and field
-is a form or direct manipulation, and the code writes the text (round four's standing rule).
+is a form or direct manipulation, and the code writes the text (Paul, 2026-10-09: "I should never, ever, ever edit Markdown as a human. Only as an LLM agent.").
 
 There is one reader and one writer for every app, the kernel's (`src/doc/tlo.ts`, `parse` and `write`; the model
 is `src/doc/model.ts`, described in `src/doc/README.md` and `docs/kernel.md`). An app is a view of the kernel's

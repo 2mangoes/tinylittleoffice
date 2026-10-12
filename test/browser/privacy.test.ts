@@ -1,13 +1,12 @@
-// Privacy, restored after the rebuild lost it (Paul, 2026-10-09): the unlock dialog, Password… and the re-seal on
-// every change, the state beside the title, and what the device holds. Signing is gone (Paul, 2026-10-11:
-// "Get rid of signatures everywhere, including templates"): a signature said more than it proved.
+// Privacy (Paul, 2026-10-09): the unlock dialog, Password… and the re-seal on
+// every change, the state beside the title, and what the device holds.
 import { test, expect, afterEach, vi } from 'vitest';
 import { mount, privacyAlone, tick, until, said, openShare as openShareFromDrawer } from './helpers.ts';
 import { decodeDoc, encodeDoc, isSealed } from '../../src/kit/codec.ts';
 import { parseHash } from '../../src/kit/route.ts';
 import { PREFS, forgetPrefs, prefsKept, lockWith, pack, unlock } from '../../src/kit/privacy.ts';
 import { forgetAll, keep, library } from '../../src/kit/library.ts';
-import { keepLink } from '../../src/kit/links.ts';
+import { keepLink } from '../../src/kit/kept-links.ts';
 import { setKeeping, store } from '../../src/kit/store.ts';
 import { BASE } from '../../src/kit/zoom.ts';
 import { chosenLanguage, language, setLanguage } from '../../src/kit/i18n.ts';
@@ -303,7 +302,7 @@ test('a sealed link cut short in a chat, with the right password, is not called 
   await until(() => shell.querySelector('.to-unlock-wrong')!.textContent === NOT_OPENED);
 });
 
-test('signing is gone (Paul, 2026-10-11): the state beside the title is a password alone; Share holds the password and no Sign; the Privacy dialog no key', async () => {
+test('the state beside the title is a password alone; Share holds the password and nothing else of the kind; the Privacy dialog no key', async () => {
   const shell = await mount(`#/v1/write/${encodeDoc('---\ntitle: Terms\n---\nWe agree.\n')}`);
   await until(() => !!shell.querySelector('to-write-editor to-text .tx p'));
   // No password: nothing to say beside the title.

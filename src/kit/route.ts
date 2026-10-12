@@ -21,7 +21,10 @@
 
 import { isSealed } from './codec.ts';
 
-/** The version of the link format. 1 is the rebuilt format; nothing older is read. */
+/**
+ * The version of the link format: 1 is a document's TLO text (docs/tlo.md), packed by kit/codec.ts and written in
+ * base64url. Nothing older is read.
+ */
 export const LINK_VERSION = 1;
 /** What every document's link starts with, after the "#". */
 export const LINK = `#/v${LINK_VERSION}/`;

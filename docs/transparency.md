@@ -4,10 +4,8 @@ Paul, 2026-10-09: the platform will be open-sourced; people concerned about secu
 themselves. This is the pre-launch list for that, and the words we use for everyone else. Each item below is a
 piece of work with a check; the launch waits for the checks marked **gate**.
 
-**Reread on 2026-10-11, the day the repository opened** at https://github.com/aboard-io/tinylittleoffice: every
-gate below (items 1, 2, 3 and 5) is built, and so is everything §2 asked for before the repository went public,
-but for what §2 now strikes. What is left is marked *Not yet*. Reread again at the end of round seventeen: the
-words of §3 are struck, and the README's first two paragraphs say what this is.
+The repository is open at https://github.com/aboard-io/tinylittleoffice (since 2026-10-11): every gate below
+(items 1, 2, 3 and 5) is built, and so is everything §2 asks for. What is left is marked *Not yet* or *Later*.
 
 ## 1. Verifiable, not claimed
 
@@ -20,7 +18,7 @@ leak. Everything here makes that checkable by a stranger.
    it carries, and what stops it. A test in `test/network.test.ts` greps the site for every host it can reach
    and fails if one is not on the page. The `connect-src` and `img-src` of the CSP are generated from the same
    list.
-   *Pictures and embeds removed, 2026-10-11 (round seventeen).* A document fetches nothing from any other
+   *Pictures and embeds removed, 2026-10-11.* A document fetches nothing from any other
    site: there are no pictures from the web, no proxy for them and no embeds (the code is kept on the branch
    `web-pictures-and-embeds`). The CSP's `img-src` is the site, `data:`, `blob:` and the map's tiles (no
    `https:` at large), and it has no `frame-src` or `media-src` of another site's, held by `test/csp.test.ts`.
@@ -42,7 +40,7 @@ leak. Everything here makes that checkable by a stranger.
    Saved on, the browser's history and sync, a screenshot and everything the link passes through added to
    the list), a table of each design choice and its threat, what the Cloudflare host can see (the static
    files' requests, the shortener's ciphertext rows and D1's own history), and "If you
-   find a hole" pointing at `SECURITY.md` (item 8). It says plainly that whoever serves the code could read
+   find a hole", which names GitHub's private vulnerability reporting (item 8). It says plainly that whoever serves the code could read
    the fragment, and that item 3 is the answer (built the same day). About links it. *2026-10-11:* About says the
    list in the page's language itself, and links the whole document in the public repository, said to be in English.
 3. **Reproducible, attested builds** (gate). `npm run build` from a tag gives byte-identical `dist/`;
@@ -62,7 +60,7 @@ leak. Everything here makes that checkable by a stranger.
    checkout (or uses `dist/` when it is that build), fetches every file but `_headers`, and prints a table;
    exit 1 on any difference. The release is the `release` job of `.github/workflows/deploy.yml`. Signed
    tags: `docs/github-setup.md`. CI (`.github/workflows/ci.yml`) runs `npm run build:verify` after its build.
-   *The deploy, from a tag, 2026-10-11 (r18-deploy-actions; Paul: "GitHub Actions can handle the deploy to
+   *The deploy, from a tag, 2026-10-11 (Paul: "GitHub Actions can handle the deploy to
    Cloudflare").* A deploy is a tag `v*`, and runs on a public GitHub runner with a public log (the repository's
    Actions tab, the workflow Deploy): `.github/workflows/deploy.yml` runs `scripts/deploy.mjs`, the same script a
    maintainer's machine runs, with the three credentials as repository secrets given to that step alone (and taken
@@ -81,7 +79,7 @@ leak. Everything here makes that checkable by a stranger.
    lockfile and `scripts/dependencies.json`, the one-line reasons it refuses to run without; the sizes come
    from a build (`-- --sizes`), shared among each chunk's modules; `test/dependencies.test.ts` and CI hold
    the page current; CI runs `npm audit` with no ignores.
-   *The type, 2026-10-11 (r17-plex).* The fonts are IBM Plex (Sans, Serif and Mono; Sans Arabic and Sans
+   *The type, 2026-10-11.* The fonts are IBM Plex (Sans, Serif and Mono; Sans Arabic and Sans
    Devanagari behind their `unicode-range`), self-hosted: IBM's own woff2 files, copied as released into
    `public/fonts/` with the SIL Open Font License beside them, named with their versions in docs/dependencies.md's
    Type (`scripts/dependencies.ts` `FONTS`), served by the site under `font-src 'self'` and nothing else
@@ -89,8 +87,8 @@ leak. Everything here makes that checkable by a stranger.
    fails a build that names a face it does not hold.
 5. **The crypto in the open** (gate). One short document each, with test vectors in the repo and the fact
    that it is WebCrypto with no library: `docs/crypto/password.md` (a password the app makes, HKDF → AES-GCM: parameters, the sealed
-   payload form), `docs/crypto/short-links.md` (AES-256-GCM, the key in the fragment, ~~the owner
-   capability~~ (struck 2026-10-11: a short link cannot be changed or recalled), what tinier stores and for how long, what its logs hold: nothing).
+   payload form), `docs/crypto/short-links.md` (AES-256-GCM, the key in the fragment, that a short link cannot be
+   changed or recalled, what tinier stores and for how long, what its logs hold: nothing).
    *Built, 2026-10-10.* The two documents, with the byte layouts; the vectors in `test/vectors/password.json`
    and `short-links.json`, checked by
    `test/crypto-vectors.test.ts` against the kit and against WebCrypto called by hand. `sealAt` (crypt.ts)
@@ -107,17 +105,10 @@ leak. Everything here makes that checkable by a stranger.
    analytics, error-reporting, font-CDN, tag-manager or session-recording host (a deny-list of 22) anywhere in
    `src/`, `tinier/`, `public/`, `index.html`, `vite.config.ts` and `wrangler.jsonc`; About says,
    in one sentence, that the site asks the web for nothing you did not cause, and links /network.
-8. **Hygiene.** `SECURITY.md` (a disclosure address, a 72-hour acknowledgement, coordinated disclosure, no
-   bounty yet, a thanks list); signed release tags; a changelog naming security-relevant changes;
-   `LICENSE` (MIT); `CODE_OF_CONDUCT.md`; `CONTRIBUTING.md` that points at the standards (docs/editing.md,
-   the kit's rules) so contributions keep them.
-   *Built, 2026-10-10:* `SECURITY.md`, `LICENSE`, `CODE_OF_CONDUCT.md`, `CONTRIBUTING.md`. *2026-10-11:* a hole
-   is reported through GitHub's private vulnerability reporting, not to an address; the code of conduct is the
-   Contributor Covenant 2.1 as written. *Not yet:* signed tags and the changelog wait for the first release.
-   *2026-10-12:* Paul: "We really only want license and README, both as brief as possible": `SECURITY.md`,
-   `CODE_OF_CONDUCT.md`, `CONTRIBUTING.md` and the issue and pull request templates removed; a hole is still
-   reported through GitHub's private vulnerability reporting, which the README and docs/threat-model.md name;
-   `test/repository.test.ts` holds the root to the license and a README of at most forty lines.
+8. **Hygiene.** `LICENSE` (MIT) and a brief README, and nothing else at the root (Paul, 2026-10-12: "We really
+   only want license and README, both as brief as possible"); `test/repository.test.ts` holds the root to the
+   license and a README of at most forty lines. A hole is reported through GitHub's private vulnerability
+   reporting, which the README and docs/threat-model.md name. *Not yet:* release tags signed (docs/github-setup.md).
 9. **Later:** an independent audit of the crypto and the shortener, published in full; a public test
    dashboard; a signed SBOM with each release.
 
@@ -130,38 +121,29 @@ Done once, before the repo went public; Paul renamed it, moved it to the aboard-
   (2026-10-11: the earlier description said nothing was kept as an absolute); the website
   field; topics: `office-suite`, `privacy`, `local-first`, `no-backend`, `pwa`, `web-components`, `lit`,
   `cloudflare-workers`, `typescript`, `url-as-document`, `markdown`.
-- ~~README that opens with the one-sentence and the paragraph of §3~~ (*superseded*, 2026-10-11: the README
-  was rewritten whole for a stranger, and says the truth about saving; §3).
+- A README for a stranger that says the truth about saving (§3).
 - Social preview image from the Office mark; the per-app share cards in `public/og/`.
-- ~~Discussions on~~ (*struck*, 2026-10-11: Discussions are off; issues are the one place). Issues with two
-  templates (a bug, with the link that shows it, redacted of anything private; a feature) and the chooser's
-  security link to the private vulnerability report; labels for the apps and the kit.
+- Discussions off; issues are the one place, with labels for the apps and the kit. A hole goes to the private
+  vulnerability report.
 - Branch protection on `main`: CI green required (every check a deploy runs: types, strings, unit, browser,
   build with its budgets, the smoke run in Chromium and WebKit; then the lints, `npm audit` and the build made
   twice), signed commits recommended, no force-push; releases from tags with the attestation and the CSP hashes.
   Dependabot asks for npm updates weekly, grouped (`.github/dependabot.yml`).
-- `SECURITY.md`, `LICENSE`, `CODE_OF_CONDUCT.md`, `CONTRIBUTING.md`, `.github/` with the CI workflow, the
-  deploy workflow (on a tag: deploy, verify the live site, build, attest, publish `dist/` as the release's
-  artifact), and the issue templates.
-- The old tree's history is in the same repo (tagged `v0-before-rebuild`): keep it; docs/history/README.md says what
-  it is.
+- `LICENSE`, the README, and `.github/` with the CI workflow, the deploy workflow (on a tag: deploy, verify the
+  live site, build, attest, publish `dist/` as the release's artifact) and Dependabot's settings.
+- The tree's earlier history is in the same repo (tagged `v0-before-rebuild`, the tree before the kernel and editor of
+  docs/kernel.md): keep it; docs/history/README.md says what it is.
 - A `docs/` index page listing every document in the folder, so a reader starts from one place.
 
-*Built, 2026-10-10:* the README (the sentence and the paragraph, then the rest in this order), `docs/README.md`
-(the index, held to the folder by `test/docs.test.ts`), `SECURITY.md`, `LICENSE`, `CODE_OF_CONDUCT.md`,
-`CONTRIBUTING.md`, and `.github/`: the CI workflow, the bug and idea templates, the chooser's Security link to
-SECURITY.md (no security template), the pull request template. The settings (description, topics,
-Discussions, labels, the ruleset on `main`) are a checklist in `docs/github-setup.md`. The release workflow
-followed (§1 item 3). *2026-10-11:* CONTRIBUTING made short (the suite, the house rules), the feature template
-in the idea's place, the pull request template three lines, CI running every check the deploy runs
-(`test/repository.test.ts` compares them), Dependabot, and the package's metadata naming the repository.
-*2026-10-12:* the front matter cut to the license and a brief README (§1 item 8's note of that date).
+*Built:* the README, `docs/README.md` (the index, held to the folder by `test/docs.test.ts`), `LICENSE`, and
+`.github/`: the CI workflow, running every check the deploy runs (`test/repository.test.ts` compares them), the
+release workflow (§1 item 3) and Dependabot; the package's metadata names the repository. The settings
+(description, topics, Discussions, labels, the ruleset on `main`) are a checklist in `docs/github-setup.md`.
 
 ## 3. How to explain it
 
-*Struck, 2026-10-11.* The sentence and the paragraph that stood here, the README's first draft, said as absolutes
-that nothing was kept and that we never saw a word anyone wrote. Neither is true as said (Paul: "Saying we never
-save anything is wrong; we should say that's the default"). Save in browser is off by default, and then nothing is
+Never as an absolute (Paul, 2026-10-11: "Saying we never save anything is wrong; we should say that's the
+default"). Save in browser is off by default, and then nothing is
 kept on the device and nothing on any server; turning it on is a choice, and keeps documents and short links on the device, never on
 a server; a short link is the one thing a server holds, the document encrypted with a key the server never sees,
 until it expires. No document ever reaches us otherwise.

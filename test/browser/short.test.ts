@@ -84,7 +84,7 @@ test('a short link made here: the lifetime from the row, the link big with Copy 
 
 test('opened by a short link: its lifetime shown; an edit leaves the address the document alone; a key or o in the address is not read', async () => {
   const exp = Date.now() + 12 * DAY + 60_000;
-  // The query the living link of before handed its owner: k and o are ignored.
+  // A k and an o in the query are ignored.
   const shell = await mount(`#/v1/write/${encodeDoc('Hello')}?s=abcdefg&k=${'K'.repeat(43)}&o=${'O'.repeat(43)}&x=${exp}`);
   await until(() => !!shell.querySelector('to-write-editor to-text .tx'));
   expect(shell.querySelector('.to-arrival-words')!.textContent).toBe('This link expires in 12 days');

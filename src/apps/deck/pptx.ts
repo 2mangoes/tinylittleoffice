@@ -3,7 +3,7 @@
  * colours, the icons, the theme's decoration and any document on a slide as pictures drawn in the browser
  * first (raster), each placed where the layout puts it. Keynote is stricter than PowerPoint about what a
  * presentation holds, so the parts PowerPoint always writes are written too. No DOM but the pictures,
- * which are asked for and may be none (under node they are). (Ported from the old tree's deck.def.ts.)
+ * which are asked for and may be none (under node they are).
  */
 import type { ExportContext } from '../../kit/app.ts';
 import { pageSvg, xml } from '../../kit/draw.ts';
@@ -80,7 +80,7 @@ export function pictures(doc: Doc, slides: Slide[], look: Look): Record<string, 
 }
 
 /** Every picture drawn as a PNG in the browser; none where there is no browser (the file is still a presentation). */
-export async function drawPictures(doc: Doc, slides: Slide[], look: Look): Promise<Record<string, Uint8Array>> {
+async function drawPictures(doc: Doc, slides: Slide[], look: Look): Promise<Record<string, Uint8Array>> {
   const out: Record<string, Uint8Array> = {};
   if (typeof document === 'undefined') return out;
   for (const [key, p] of Object.entries(pictures(doc, slides, look))) {

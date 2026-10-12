@@ -31,7 +31,7 @@ const TABLE = 'src/apps/trip/countries.ts';
 /** The map a country is fitted to: a phone's, under the bar. */
 export const FIT = { width: 390, height: 500 };
 /** Never closer than a city (the editor's CITY): a city-state is shown with what is round it. */
-export const CLOSEST = 12;
+const CLOSEST = 12;
 /** Web Mercator's edge: a box past it (Antarctica) is cut there. */
 const EDGE = 85;
 
@@ -41,14 +41,14 @@ type Ring = [number, number][];
 type Feature = { properties: Record<string, string>; geometry: { type: string; coordinates: unknown } };
 
 /** A latitude as Web Mercator's y, 0 at the top of the world and 1 at the bottom. */
-export const mercY = (lat: number) => {
+const mercY = (lat: number) => {
   const r = (Math.max(-EDGE, Math.min(EDGE, lat)) * Math.PI) / 180;
   return (1 - Math.log(Math.tan(r) + 1 / Math.cos(r)) / Math.PI) / 2;
 };
 /** How wide a box is in degrees of longitude, the short way it was taken. */
 export const spanOf = (b: Box) => (b[2] >= b[0] ? b[2] - b[0] : b[2] + 360 - b[0]);
 /** The closest whole zoom at which the box fits a map `FIT` big (a tile 256 pixels; the world 256·2^z wide). */
-export function zoomFor(b: Box): number {
+function zoomFor(b: Box): number {
   const wide = Math.max(spanOf(b) / 360, 1e-9);
   const tall = Math.max(mercY(b[1]) - mercY(b[3]), 1e-9);
   const z = Math.floor(Math.min(Math.log2(FIT.width / (256 * wide)), Math.log2(FIT.height / (256 * tall))));
@@ -101,7 +101,7 @@ function around(spans: [number, number][]): [number, number] {
   return [wrap(west), wrap(east)];
 }
 /** A country's box, from its pieces of land: the largest until they hold 95% of its area. */
-export function boxOf(rings: Ring[]): Box {
+function boxOf(rings: Ring[]): Box {
   const sized = rings.map((r) => ({ r, a: areaOf(r) })).sort((x, y) => y.a - x.a);
   const total = sized.reduce((n, x) => n + x.a, 0);
   const kept: Ring[] = [];

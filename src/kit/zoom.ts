@@ -16,9 +16,8 @@
  * document's scale, which is the root's font size (the browser's default × it), so every length in rem follows it; and `--to-nav`, the
  * nav's, which is the font size of each nav element, so every length in em inside one follows that. A length measured
  * on the screen is then a length set in CSS, and whatever is placed from the page's coordinates (a menu, the context
- * bar, the link box) is placed by them as they are. Until round eight the size was the root's CSS `zoom`: every
- * length a pixel, so nothing but a zoom could move them, and each thing placed by hand divided by it, and the nav
- * needed a second zoom of its own to stop at its limit.
+ * bar, the link box) is placed by them as they are. Not the root's CSS `zoom`: under it every length is a pixel that
+ * only the zoom moves, each thing placed by hand must divide by it, and the nav needs a second zoom to stop at its limit.
  *
  * The normal size, 100%, draws everything at BASE (1.3): the lengths in the stylesheet were too small to start from
  * (Paul, 2026-10-10, on his iPhone: "Start at what we now call 130%"). The stepper and the pill say the size alone, so
@@ -35,7 +34,6 @@ const KEY = 'tinyoffice.size';
 export const BASE = 1.3;
 export const SIZE_MIN = 0.7;
 export const SIZE_MAX = 2;
-export const SIZE_STEP = 0.1;
 /** The most the nav grows to: past it a larger size enlarges the document alone. */
 export const NAV_MAX = 1.2;
 

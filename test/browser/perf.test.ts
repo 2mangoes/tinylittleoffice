@@ -1,4 +1,4 @@
-// A keystroke costs what it changed (round six, Paul 2026-10-10: "it's starting to feel really slow"). In the Word
+// A keystroke costs what it changed (Paul, 2026-10-10: "it's starting to feel really slow"). In the Word
 // Processor with a 1,500-word document: the link is projected once typing pauses, not per key; it is flushed at once
 // before anything reads it (the window's blur, leaving the page, Copy link); the bar is drawn again only when what it
 // shows changes; and one keystroke's synchronous work stays inside a budget.

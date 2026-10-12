@@ -47,7 +47,7 @@ test('motion: a shape drawn, then moved at the last moment, keys itself there', 
   expect(first.wide).toBeLessThanOrEqual(0);
   await page.getByRole('slider', { name: 'Time' }).fill('23');
   const hit = stage.locator('g.hit rect').first();
-  // In the column, which scrolls (round eight): the shape brought into view before the finger goes to it.
+  // In the column, which scrolls: the shape brought into view before the finger goes to it.
   await hit.scrollIntoViewIfNeeded();
   const h = (await hit.boundingBox())!;
   const [x, y] = [h.x + h.width / 2, h.y + h.height / 2];

@@ -2,7 +2,7 @@
 import { test, expect } from 'vitest';
 import { join } from 'node:path';
 import { gitFacts, versionJson, versionOf } from '../scripts/version.ts';
-import { commitUrl, isVersion, repoUrl, sourceFile } from '../src/kit/version.ts';
+import { commitUrl, isVersion, repoUrl } from '../src/kit/version.ts';
 
 const root = join(import.meta.dirname, '..');
 
@@ -32,9 +32,8 @@ test('outside a checkout there are no facts, and no error', () => {
   expect(gitFacts('/')).toEqual({ commit: '', tag: '', built: '' });
 });
 
-test('a commit, a file and the repository itself link to their pages in the published source', () => {
+test('a commit and the repository itself link to their pages in the published source', () => {
   expect(commitUrl('abc')).toBe('https://github.com/aboard-io/tinylittleoffice/commit/abc');
-  expect(sourceFile('docs/threat-model.md')).toBe('https://github.com/aboard-io/tinylittleoffice/blob/main/docs/threat-model.md');
   expect(repoUrl()).toBe('https://github.com/aboard-io/tinylittleoffice');
 });
 

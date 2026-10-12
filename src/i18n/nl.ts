@@ -1137,7 +1137,7 @@ export default {
   '{every}, {n} times': '{every}, {n} keer',
   '{n|one day|# days}': '{n|één dag|# dagen}',
   '{n}% done': '{n}% klaar',
-  // The templates added in round four: each name, then its line on the home page.
+  // The templates: each name, then its line on the home page.
   'A bakery’s posts and newsletters through the winter, an advent story every day.': 'De berichten en nieuwsbrieven van een bakkerij door de winter, elke dag een adventsverhaal.',
   'A youth soccer season: practice every week, home and away in their colors, the playoffs.': 'Een jeugdvoetbalseizoen: elke week training, thuis en uit in hun kleuren, de play-offs.',
   'A small team’s time off, the public holidays and the Christmas closing on one calendar.': 'De vrije dagen van een klein team, de feestdagen en de kerstsluiting in één kalender.',

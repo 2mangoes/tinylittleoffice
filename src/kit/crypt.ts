@@ -5,12 +5,10 @@
  * where the plaintext is the codec's flag byte followed by the packed bytes, so the tag authenticates the
  * flag too. Every password is one the app made (kit/passwords.ts: about 116 random bits), so the password is
  * the entropy and the KDF only turns it into a key: there is nothing to stretch, and opening costs a phone
- * nothing (until 2026-10-11, 600,000 rounds of PBKDF2 defended typed passwords). Each edit runs AES-GCM with
+ * nothing. Each edit runs AES-GCM with
  * a fresh IV. WebCrypto alone. docs/crypto/password.md gives the layout and why it is sound.
  */
 import { fromBase64Url, isSealed, toBase64Url } from './codec.ts';
-
-export { isSealed };
 
 /** HKDF's info: names the format, so this key is for nothing else. */
 const INFO = new TextEncoder().encode('tinylittleoffice sealed v1');

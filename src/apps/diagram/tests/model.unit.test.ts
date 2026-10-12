@@ -1,5 +1,5 @@
-// Diagram's model and view under node: each kind read from its lines and drawn (the old tree's examples give the
-// same shapes they gave there), what a tap on each shape edits, and every command as the kernel's ops: each applies,
+// Diagram's model and view under node: each kind read from its lines and drawn (each kind's example in the corpus
+// gives the same shapes every time), what a tap on each shape edits, and every command as the kernel's ops: each applies,
 // writes canonical text, and is undone exactly by its inverse.
 import { readFileSync } from 'node:fs';
 import { join as joinPath } from 'node:path';
@@ -82,7 +82,7 @@ describe('reading', () => {
 });
 
 describe('the eight kinds drawn', () => {
-  test("the old tree's examples, named by kind, draw what they drew there", () => {
+  test('each kind’s example in the corpus (test/doc/corpus/apps), named by kind, draws these shapes', () => {
     expect(count(doc('org', old('org')))).toEqual({ things: 6, joins: 6, hits: 7 });
     expect(count(doc('mind', old('mind')))).toEqual({ things: 9, joins: 8, hits: 9 });
     expect(count(doc('family', old('family')))).toEqual({ things: 6, joins: 5, hits: 6 });

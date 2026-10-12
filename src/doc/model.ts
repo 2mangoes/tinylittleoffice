@@ -79,7 +79,7 @@ export const isText = (b: Block): b is TextBlock => b.k === 'h' || b.k === 'p' |
 export const isAtomic = (r: Run): boolean => !!r.ic || r.fn !== undefined;
 
 /** Whether two runs carry the same marks, so their words may sit in one run. Atomic runs never merge. */
-export const sameMarks = (a: Run, b: Run): boolean => !isAtomic(a) && !isAtomic(b) && a.b === b.b && a.i === b.i && a.u === b.u && a.s === b.s && a.h === b.h && a.href === b.href;
+const sameMarks = (a: Run, b: Run): boolean => !isAtomic(a) && !isAtomic(b) && a.b === b.b && a.i === b.i && a.u === b.u && a.s === b.s && a.h === b.h && a.href === b.href;
 
 /** Runs as the parser would give them: no empty run of words, and no two neighbours with the same marks. */
 export function normalRuns(runs: Run[]): Run[] {
@@ -92,9 +92,6 @@ export function normalRuns(runs: Run[]): Run[] {
   }
   return out;
 }
-
-/** A document with nothing in it. */
-export const blankDoc = (): Doc => ({ head: {}, blocks: [] });
 
 /** Whether a block carries a class in its attributes. */
 export const hasClass = (b: { a?: Attrs }, c: string): boolean => !!b.a?.cls?.includes(c);

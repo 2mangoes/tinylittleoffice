@@ -5,7 +5,7 @@
  *     but the size of everything and the theme (kit/store.ts): no cookies. The language is in the link, never on the
  *     device (kit/i18n.ts). The browser's own history still
  *     holds every link opened, and a link is the document; that is not ours to clear. Saved keeps the preferences, the documents
- *     opened here (kit/library.ts) and the short links made here (kit/links.ts). Turned back to
+ *     opened here (kit/library.ts) and the short links made here (kit/kept-links.ts). Turned back to
  *     Private, all of it goes from the device.
  *   - The password: a document sealed (kit/crypt.ts) and opened, here. A password is never kept, under
  *     Saved or not: the key that opened a document stays in memory for the visit, so it opens again
@@ -19,7 +19,7 @@ import { keeping, setKeeping, store } from './store.ts';
 import { encodeDoc, packDoc, unpackDoc } from './codec.ts';
 import { newLocker, seal, unseal, unsealWith, type Locker } from './crypt.ts';
 import { forgetAll, keepAll, library, type Kept } from './library.ts';
-import { keptLinks } from './links.ts';
+import { keptLinks } from './kept-links.ts';
 
 /** The preferences this site may keep, by key; with them which documents have been told they are copies (kit/shell.ts). */
 export const PREFS = ['to-theme', 'tinyoffice.shortTtl', 'tinyoffice.size', 'tinyoffice.copiesSaid'];

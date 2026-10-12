@@ -1,5 +1,5 @@
-// TLO, the one format: Markdown read into blocks and written back, the same blocks every time (the old tree's
-// tlo.test, its literals as runs and columns).
+// TLO, the one format: Markdown read into blocks and written back, the same blocks every time, its
+// literals as runs and columns.
 import { expect, test } from 'vitest';
 import { rng } from './helpers.ts';
 import { column, isInnerDoc, noteRuns, pages, parse, parseInline, parseLines, plainText, sections, splitAttrs, write, writeInline, type Block, type Doc, type Run } from '../../src/doc/index.ts';

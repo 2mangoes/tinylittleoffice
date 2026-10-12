@@ -120,7 +120,7 @@ const kb = (n: number) => (n < 1 ? 'none' : n < 1024 ? `${Math.round(n)} B` : `$
 const cell = (s: string) => s.replace(/\|/g, '\\|');
 
 /** The page, from package.json, the lockfile, the reasons and the sizes. Throws when a dependency has no reason, or a reason no dependency. */
-export function dependenciesDoc(sizes: Record<string, string> = existsSync(DOC) ? sizesIn(readFileSync(DOC, 'utf8')) : {}, unmeasured = 'not measured'): string {
+function dependenciesDoc(sizes: Record<string, string> = existsSync(DOC) ? sizesIn(readFileSync(DOC, 'utf8')) : {}, unmeasured = 'not measured'): string {
   const pkg = json<Pkg>('package.json');
   const lock = json<Lock>('package-lock.json');
   const why = json<Record<string, string>>('scripts/dependencies.json');

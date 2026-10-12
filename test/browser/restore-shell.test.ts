@@ -1,4 +1,4 @@
-// What the rebuild had lost round the document, restored: search on the home page, Find in this document,
+// What the shell holds round the document: search on the home page, Find in this document,
 // the shortcuts dialog, Mod+S, the skip link, the size of everything, another version kept here, the
 // Share dialog's head line with the rooms, the install line, and the Display Link's pages at paper width.
 import { test, expect, afterEach } from 'vitest';

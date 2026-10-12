@@ -2,10 +2,10 @@
  * <to-compare>: two documents side by side, block by block, with what the second changed marked: a block
  * taken out struck through on the left, a block put in marked on the right, a block changed shown as both on
  * one row. For a person reviewing what an agent (or a colleague) did to a document. Reached at "#/compare" by
- * its link alone (the menu's Compare… is gone: Paul, 2026-10-12), each side a link pasted in; the address
+ * its link alone (not the menu: Paul, 2026-10-12), each side a link pasted in; the address
  * holds both, "#/compare/<app>/<payload>/<app>/<payload>", so a comparison is a link too. Nothing leaves
- * the page. On a phone the rows stack: the old block, then the new one under it. (The old tree's
- * widgets/compare.ts, over the kernel: kit/diff.ts compares the blocks as TLO writes them.)
+ * the page. On a phone the rows stack: the old block, then the new one under it. kit/diff.ts compares the
+ * blocks as TLO writes them.
  */
 import { LitElement, html, nothing } from 'lit';
 import { appOf } from './apps.ts';
@@ -29,7 +29,7 @@ export function sideOf(link: string): Side | null {
 }
 
 /** "#/compare/<app>/<payload>[/<app>/<payload>]". */
-export const compareHash = (a: Side | null, b: Side | null = null): string => `#/compare${[a, b].map((s) => (s ? `/${s.app}/${s.payload}` : '')).join('')}`;
+const compareHash = (a: Side | null, b: Side | null = null): string => `#/compare${[a, b].map((s) => (s ? `/${s.app}/${s.payload}` : '')).join('')}`;
 
 /** The two sides a compare fragment names; null when the fragment is not one. */
 export function parseCompare(hash: string): [Side | null, Side | null] | null {
@@ -39,7 +39,7 @@ export function parseCompare(hash: string): [Side | null, Side | null] | null {
 }
 
 /** Changes as rows of two cells: kept on both sides; a run taken out paired with the run put in after it; the rest alone. */
-export function rowsOf(changes: Change[]): [Change | null, Change | null][] {
+function rowsOf(changes: Change[]): [Change | null, Change | null][] {
   const rows: [Change | null, Change | null][] = [];
   for (let i = 0; i < changes.length;) {
     if (changes[i].kind === ' ') {

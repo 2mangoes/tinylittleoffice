@@ -1,7 +1,7 @@
 // Two faults Paul saw in the Word Processor (2026-10-10), with real keys through the shell: Mod+A did not select
 // the document ("that seems symptomatic"), and a long document would not stay scrolled up ("it just keeps pushing
 // me back down"). Select All in a doc is the editor's own model selection, cards and all; the page scrolls to the
-// caret only after an edit the person made, never after a draw, a restore or an autosave. (Since round eight the words
+// caret only after an edit the person made, never after a draw, a restore or an autosave. (The words
 // scroll in the shell's column, .to-main, and the window never does.)
 import { afterEach, expect, test } from 'vitest';
 import { page, userEvent } from 'vitest/browser';

@@ -104,7 +104,7 @@ import './style.css';
 export const tag = 'to-outline-editor';
 
 /** How each kind of line is said. */
-export const DIR_NAME: Record<Dir, () => string> = {
+const DIR_NAME: Record<Dir, () => string> = {
   '--': () => t('a plain line'),
   '->': () => t('an arrow from the parent'),
   '<-': () => t('an arrow to the parent'),
@@ -113,7 +113,7 @@ export const DIR_NAME: Record<Dir, () => string> = {
 const DIR_ICON: Record<Dir, typeof ArrowRight | null> = { '--': null, '->': ArrowRight, '<-': ArrowLeft, '<->': ArrowLeftRight };
 
 /** A Tiny Little Office link as a ref ("<app>\n<text>"), or null when the words are not one. */
-export function refOfLink(words: string): string | null {
+function refOfLink(words: string): string | null {
   const s = words.trim();
   if (!/^https?:\/\/\S+#\/v\d+\//.test(s)) return null;
   const { app, payload } = parseHash(s.slice(s.indexOf('#')));

@@ -12,8 +12,6 @@ import { icon, type IconNode } from './icons.ts';
 import { t } from './i18n.ts';
 import { ariaKeys, chords, drawnIn, keysText, labelOf, run, say, type Command } from './commands.ts';
 
-export { keysText };
-
 /** Said by a bar as it is put in the page: the chrome makes a bar slid away inert (kit/chrome.ts). */
 export const BAR_HERE = 'to-bar-here';
 

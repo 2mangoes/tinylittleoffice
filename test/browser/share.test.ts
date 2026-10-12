@@ -7,7 +7,7 @@ import { mount, tick, until, openShare, said } from './helpers.ts';
 import { encodeDoc } from '../../src/kit/codec.ts';
 import { SHORT_LINK_MAX } from '../../src/kit/short.ts';
 import { decodeDoc } from '../../src/kit/codec.ts';
-import { keepLink, keptLinks, dropKept } from '../../src/kit/links.ts';
+import { keepLink, keptLinks, dropKept } from '../../src/kit/kept-links.ts';
 import { lockWith, pack } from '../../src/kit/privacy.ts';
 import { setKeeping, store } from '../../src/kit/store.ts';
 import type { ToShell } from '../../src/kit/shell.ts';

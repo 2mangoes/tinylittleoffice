@@ -64,7 +64,7 @@ test("at size 2 the drawer's Download row opens its table under it, every target
   await page.addInitScript(() => (localStorage.setItem('tinyoffice.keep', '1'), localStorage.setItem('tinyoffice.size', '2')));
   await page.goto(`/#/v1/write/${encodeDoc('# Notes\n\nWords.\n')}`);
   await expect(page.locator('to-write-editor to-text .tx')).toBeVisible();
-  // The header is the title (round nine): Download is the drawer's.
+  // The header is the title: Download is the drawer's.
   await expect(page.locator('.to-header .to-download')).toHaveCount(0);
   await page.locator('.to-burger').tap();
   const button = page.locator('.to-drawer-download > button');

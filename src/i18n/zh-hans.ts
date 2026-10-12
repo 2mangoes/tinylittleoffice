@@ -1136,7 +1136,7 @@ export default {
   '{every}, {n} times': '{every}，共 {n} 次',
   '{n|one day|# days}': '{n|# 天}',
   '{n}% done': '已完成 {n}%',
-  // The templates added in round four: each name, then its line on the home page.
+  // The templates: each name, then its line on the home page.
   'A bakery’s posts and newsletters through the winter, an advent story every day.': '面包店整个冬天的帖子和通讯，每天一个降临节故事。',
   'A youth soccer season: practice every week, home and away in their colors, the playoffs.': '一个青少年足球赛季：每周训练，主客场穿各自的队服，还有季后赛。',
   'A small team’s time off, the public holidays and the Christmas closing on one calendar.': '一个小团队的休假、公共假日和圣诞停工，都在一个日历上。',

@@ -1,6 +1,6 @@
 /**
  * The document is the page (Paul, 2026-10-10): on a phone (WebKit, 390 by 844) the Word Processor's paper is as wide
- * as the screen with no border; the page never scrolls, the words scroll in a column (round eight, kit/chrome.ts) with
+ * as the screen with no border; the page never scrolls, the words scroll in a column (kit/chrome.ts) with
  * the header and the bar holding still, the bar at the column's bottom; a tap in the words hides the header, the menu
  * button floating at the top right; a tap on the title opens it wide, its automatic name chosen whole. On a desktop the
  * words keep the page's measure, and the editor has the window's width, not a column: a wide sheet is never cut off. Run

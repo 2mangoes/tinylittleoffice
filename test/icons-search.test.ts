@@ -1,7 +1,10 @@
 // The icon library: the starter set's keywords, the stemmer, suggestions and search (kit/icons-search.ts), and the whole of Lucide joining it.
 import { expect, test } from 'vitest';
 import { KEYWORDS, iconCategories, iconCount, searchIcons, stem, suggestIcons } from '../src/kit/icons-search.ts';
-import { LIBRARY_NAMES, iconNamed } from '../src/kit/icons.ts';
+import { LIBRARY, iconNamed } from '../src/kit/icons.ts';
+
+/** The starter set's names, taken before the full library joins it. */
+const LIBRARY_NAMES = Object.keys(LIBRARY);
 
 test('every starter icon has keywords, and nothing else does', () => {
   expect(Object.keys(KEYWORDS).sort()).toEqual([...LIBRARY_NAMES].sort());

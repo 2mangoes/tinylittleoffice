@@ -109,8 +109,6 @@ export function register(cmds: readonly Command[]): readonly Command[] {
 export const registered = (): Command[] => [...all.values()];
 /** The commands of one scope, in the order they were declared. */
 export const inScope = (scope: string): Command[] => registered().filter((c) => c.scope === scope);
-/** The command with this id. */
-export const commandOf = (id: string): Command | undefined => all.get(id);
 
 /* ---------- running ---------- */
 
@@ -161,7 +159,7 @@ export function keyOf(e: Pick<KeyboardEvent, 'key' | 'code' | 'metaKey' | 'ctrlK
   return [...mods, key].join('+');
 }
 /** Whether a key pressed is one of a command's. */
-export const pressedIs = (cmd: Command, key: string): boolean => keyList(cmd.keys).includes(key);
+const pressedIs = (cmd: Command, key: string): boolean => keyList(cmd.keys).includes(key);
 
 /**
  * A key answered by a scope: the first command among `cmds` in force here whose keys it is runs, and the key stops

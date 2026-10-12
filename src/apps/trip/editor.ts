@@ -72,7 +72,7 @@ import { reveal } from '../../kit/scroll.ts';
 
 export const tag = 'to-trip-editor';
 
-export const TILES = `${origin('tiles')}/{z}/{x}/{y}.png`;
+const TILES = `${origin('tiles')}/{z}/{x}/{y}.png`;
 const SEARCH = `${origin('placeSearch')}/search`;
 /** How long a tap on the map waits to be sure it is not the first of a double tap (which zooms). */
 const DOUBLE = 300;

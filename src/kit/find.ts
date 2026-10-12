@@ -28,13 +28,13 @@ export interface Found {
 export interface Findable {
   find(terms: string[]): Found;
 }
-export const isFindable = (el: unknown): el is Findable => !!el && typeof (el as Findable).find === 'function';
+const isFindable = (el: unknown): el is Findable => !!el && typeof (el as Findable).find === 'function';
 
 /** Whose words these are not: the app's bar, menus, dialogs, the find bar itself. */
 const NOT_WORDS = 'to-bar, to-context, [popover], dialog, to-dialog, script, style, template, .to-find, .sr-only';
 
 /** Where the terms are among the words shown under `root`, in the order they are read. */
-export function rangesIn(root: Element, terms: string[]): Range[] {
+function rangesIn(root: Element, terms: string[]): Range[] {
   if (!terms.length) return [];
   const out: Range[] = [];
   const walk = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
@@ -63,7 +63,7 @@ export function rangesIn(root: Element, terms: string[]): Range[] {
 const highlights = () => (typeof CSS !== 'undefined' && 'highlights' in CSS ? CSS.highlights : null);
 
 /** The words on the page under `root`: marked, and each in turn shown. */
-export function findInPage(root: Element, terms: string[]): Found {
+function findInPage(root: Element, terms: string[]): Found {
   const ranges = rangesIn(root, terms);
   const hl = highlights();
   let now = -1;

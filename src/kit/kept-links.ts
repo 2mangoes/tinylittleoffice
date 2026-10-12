@@ -2,7 +2,7 @@
  * The short links made on this device, each kept as it is made: the link, what the document was called (nothing
  * for a locked one), and when it expires. Kept through kit/store.ts, so under Private they live for the visit
  * alone and under Saved they stay; turned Private again, they go with everything else. Expired ones drop out as
- * the list is read. A short link holds no secret but its key, which is the link itself: there is no owner.
+ * the list is read. A short link holds no secret but its key, which is the link itself.
  */
 import { store } from './store.ts';
 

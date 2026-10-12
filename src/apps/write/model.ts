@@ -11,7 +11,6 @@ import {
   evaluateTable,
   hasClass,
   isText,
-  MAX_COLS,
   notesOf,
   noteRuns,
   parse,
@@ -145,10 +144,8 @@ export function tableColOut(doc: Doc, at: number, c: number): Op[] {
     });
   return ops;
 }
-/** Whether the table at `at` can take another column. */
-export const roomForColumn = (doc: Doc, at: number): boolean => (tableAt(doc, at)?.cols.length ?? MAX_COLS) < MAX_COLS;
 
-/* ---------- a card in hand: a table, a picture, another document, a thing from the web ---------- */
+/* ---------- a card in hand: a table or another document ---------- */
 
 /** The block at `at` moved past its neighbour (up by -1, down by 1); null at either end. */
 export function moveBlock(doc: Doc, at: number, by: 1 | -1): Op[] | null {

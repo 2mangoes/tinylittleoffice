@@ -1,6 +1,6 @@
 /**
  * The site's pages as the build writes them (vite.config.ts, after the bundler), and what a crawler gets of them
- * (round eighteen, Paul 2026-10-11: "everything but the templates"; no template pages, no copy, nothing hidden):
+ * (Paul, 2026-10-11: "everything but the templates"; no template pages, no copy, nothing hidden):
  *
  *   - a page per app, dist/<id>/index.html: the shell with that app's name and line in its tags and its own
  *     canonical address, so a shared link previews as that app; dist/embed/index.html, the shell at the one
@@ -38,7 +38,7 @@ const attr = (s: string) => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;');
 const unattr = (s: string) => s.replace(/&quot;/g, '"').replace(/&amp;/g, '&');
 
 /** The structured data of one page: the site, or one of its apps, as a schema.org WebApplication. */
-export function webApplication(page: { name: string; description: string; url: string }): Record<string, unknown> {
+function webApplication(page: { name: string; description: string; url: string }): Record<string, unknown> {
   return {
     '@context': 'https://schema.org',
     '@type': 'WebApplication',
@@ -72,7 +72,7 @@ const withHeader = (page: string, inner: string) => page.replace(/<header id="to
 
 /**
  * The home page's first words, before the site's name: a fetcher that reads only the first few hundred characters
- * meets the guide for agents first (round nineteen), and that a document goes inside another.
+ * meets the guide for agents first, and that a document goes inside another.
  */
 export const agents = (site: string) => `Agents: ${site}llms.txt says how to make a document as a link; a document goes inside another as a fence named by its app.`;
 

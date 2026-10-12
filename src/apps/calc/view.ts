@@ -1,7 +1,6 @@
 /**
  * The calculator drawn and written out, with no DOM: the tape as a page (each line and what it comes to),
  * the graph as a page (each curve in a colour of its own, named by its expression), and the tape as text.
- * Ported from the old tree's calc.def.ts (its calc and graph pages).
  */
 import type { Doc } from '../../doc/index.ts';
 import type { Page } from '../../kit/app.ts';

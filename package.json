@@ -24,7 +24,7 @@
     "verify-deploy": "node scripts/verify-deploy.ts",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit && npm run -s tinier:types && tsc -p tinier",
-    "lint": "tsc --noEmit && prettier --check . && vitest run --project unit test/lints.test.ts test/stylesheets.test.ts test/scroll.test.ts",
+    "lint": "tsc --noEmit && prettier --check . && node scripts/dead.ts && vitest run --project unit test/lints.test.ts test/stylesheets.test.ts test/scroll.test.ts",
     "format": "prettier --write .",
     "budgets": "node scripts/budgets.ts --sizes",
     "test": "vitest run",

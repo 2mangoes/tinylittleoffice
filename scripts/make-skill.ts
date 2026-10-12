@@ -35,7 +35,7 @@ import { generate } from './generated.ts';
 
 const SITE = 'https://tinylittleoffice.com/';
 /** The API's line, as the short guide gives it. */
-export const API_LINE = `import { link, read, lint } from '${SITE}api.js'`;
+const API_LINE = `import { link, read, lint } from '${SITE}api.js'`;
 const at = (p: string) => fileURLToPath(new URL(`../${p}`, import.meta.url));
 
 function app(id: string) {
@@ -116,7 +116,7 @@ function section(guide: string, heading: string): string {
 }
 
 /** Every app's examples, a shape each (scripts/shapes.ts), cut from its templates. */
-export async function makeExamples(all?: Templates): Promise<Map<string, Example[]>> {
+async function makeExamples(all?: Templates): Promise<Map<string, Example[]>> {
   const t = all ?? (await templatesOf());
   return new Map(apps().map((a) => [a.id, examplesOf(a.id, t.get(a.id)!)] as const));
 }
@@ -192,7 +192,7 @@ function appSection(id: string): string {
 }
 
 /** /llms/<app>.txt: one app, under 4 KB: what it reads (the template's words on it, its rules), its shapes, and an example. */
-export function makeAppPage(id: string, all: Templates, ex: Example[]): string {
+function makeAppPage(id: string, all: Templates, ex: Example[]): string {
   const a = app(id);
   const e = ex[0];
   const fence = e.text.includes('```') ? '````' : '```';
@@ -220,10 +220,10 @@ export function makeAppPage(id: string, all: Templates, ex: Example[]): string {
 }
 
 /** packages/doc/examples/<app>.json: the app's shapes and their examples, for the API, the command line and the site. */
-export const examplesJson = (id: string, ex: Example[]): string => `${JSON.stringify({ app: id, name: app(id).name, shapes: ex }, null, 2)}\n`;
+const examplesJson = (id: string, ex: Example[]): string => `${JSON.stringify({ app: id, name: app(id).name, shapes: ex }, null, 2)}\n`;
 
 /** Every file `npm run skill` writes, by its path from the root. */
-export async function skillFiles(): Promise<Record<string, string>> {
+async function skillFiles(): Promise<Record<string, string>> {
   const all = await templatesOf();
   const skill = fill(TEMPLATE(), all);
   const ex = await makeExamples(all);

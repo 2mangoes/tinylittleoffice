@@ -4,7 +4,7 @@
  * app with that document), and under it the documents of that app kept on this device (kit/library.ts),
  * newest first, each preview on the edge of the app's icon (kit.css .to-drive). No copy. (Paul, 2026-10-09: "Small icon and app name, then templates menu. Then documents
  * in that format … Drive is just documents under the icons. No descriptions of apps.") Rows the width of
- * the page, not cards, so it looks on a desktop as it does on a phone (round four: "Don't make apps into cards.
+ * the page, not cards, so it looks on a desktop as it does on a phone (Paul, 2026-10-09: "Don't make apps into cards.
  * Just make them into rows with docs below."). Each document shows its first page small at its left
  * (<to-preview>, drawn as it scrolls into sight: "When you list documents under apps, show them with
  * previews"). An app's templates are a chunk of their own, asked for when its list opens (Blank shown at once, the
@@ -59,7 +59,7 @@ onLanguage(() => forgetTemplates());
 /** An app's templates if they have arrived, else undefined. */
 export const templatesOf = (app: AppDef): Template[] | undefined => arrived.get(app.id);
 /** An app's templates, asked for: its chunk is fetched the first time (a pointer over its row asks ahead of the tap), and the names are read again in the language of the moment. */
-export async function loadTemplates(app: AppDef): Promise<Template[]> {
+async function loadTemplates(app: AppDef): Promise<Template[]> {
   const at = era;
   const list = await app.templates();
   // A load that set out before a forgetting (a language chosen, a test's reset) does not land in the cache after it.

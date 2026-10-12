@@ -1,7 +1,10 @@
 // Where a link fits: the costs the services charge, and the one line the Share dialog says it in.
 import { test, expect } from 'vitest';
 import { blueskyCost, fitLine, roomFor, TARGETS } from '../src/kit/limits.ts';
-import { SHORT_LINK_MAX, SHORT_MAX, sealShortAt, shortCost } from '../src/kit/short.ts';
+import { SHORT_LINK_MAX, SHORT_MAX, sealShortAt } from '../src/kit/short.ts';
+
+/** What a link costs at the shortener: its ciphertext, in base64url characters (AES-GCM adds a 16-byte tag). */
+const shortCost = (link: string): number => Math.ceil(((new TextEncoder().encode(link).length + 16) * 4) / 3);
 
 test('Bluesky counts the host and sixteen characters of the rest', () => {
   expect(blueskyCost('https://tinylittleoffice.com/')).toBe('tinylittleoffice.com'.length);

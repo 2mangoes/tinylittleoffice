@@ -8,13 +8,11 @@ import {
   duplicateStops,
   formatLeg,
   MAX_STOPS,
-  moveStop,
   moveStops,
   pasteStops,
   placesIn,
   putAfter,
   readTrip,
-  removeStop,
   removeStops,
   routeKm,
   routeName,
@@ -91,17 +89,17 @@ test('name, note and place are cells; a note with no column makes one', () => {
 });
 
 test('move is the row out and in again where its neighbour was; remove is rows; the ends stay', () => {
-  const down = run(ROUTE, (d, v) => moveStop(d, v, 0, 1));
+  const down = run(ROUTE, (d, v) => moveStops(d, v, 0, 1, 1));
   expect(down.ops.map((o) => o.op)).toEqual(['rows', 'rows']);
   expect(readTrip(parse(down.text)).stops.map((s) => s.name)).toEqual(['London', 'New York, NY', '']);
-  const up = run(ROUTE, (d, v) => moveStop(d, v, 2, -1));
+  const up = run(ROUTE, (d, v) => moveStops(d, v, 2, 3, -1));
   expect(readTrip(parse(up.text)).stops.map((s) => s.note)).toEqual(['Start here', 'far | away', '']);
-  expect(run(ROUTE, (d, v) => moveStop(d, v, 0, -1)).ops).toEqual([]);
-  expect(run(ROUTE, (d, v) => moveStop(d, v, 2, 1)).ops).toEqual([]);
+  expect(run(ROUTE, (d, v) => moveStops(d, v, 0, 1, -1)).ops).toEqual([]);
+  expect(run(ROUTE, (d, v) => moveStops(d, v, 2, 3, 1)).ops).toEqual([]);
   // Past a row that is no place: the neighbour is the next stop, wherever its row is.
   const gap = 'Place | Lat | Lon\n--- | --- | ---\nA | 1 | 1\nnot here | x | y\nB | 2 | 2\n';
-  expect(run(gap, (d, v) => moveStop(d, v, 0, 1)).text).toBe('Place | Lat | Lon\n--- | --- | ---\nnot here | x | y\nB | 2 | 2\nA | 1 | 1\n');
-  const gone = run(ROUTE, (_, v) => removeStop(v, v.stops[1]));
+  expect(run(gap, (d, v) => moveStops(d, v, 0, 1, 1)).text).toBe('Place | Lat | Lon\n--- | --- | ---\nnot here | x | y\nB | 2 | 2\nA | 1 | 1\n');
+  const gone = run(ROUTE, (_, v) => removeStops(v, [1]));
   expect(gone.ops).toEqual([{ op: 'rows', at: 0, r: 1, n: 1 }]);
   expect(readTrip(parse(gone.text)).stops).toHaveLength(2);
 });
@@ -119,8 +117,6 @@ test('several stops: moved past their neighbour as a block, removed from the las
   expect(names(run(ROUTE, (d, v) => moveStops(d, v, 1, 3, -1)).text)).toEqual(['London', '-', 'New York, NY']);
   expect(run(ROUTE, (d, v) => moveStops(d, v, 0, 2, -1)).ops).toEqual([]);
   expect(run(ROUTE, (d, v) => moveStops(d, v, 1, 3, 1)).ops).toEqual([]);
-  // The one-stop move is the same thing.
-  expect(run(ROUTE, (d, v) => moveStop(d, v, 0, 1)).ops).toEqual(run(ROUTE, (d, v) => moveStops(d, v, 0, 1, 1)).ops);
   const gone = run(ROUTE, (_, v) => removeStops(v, [0, 2]));
   expect(gone.ops).toEqual([
     { op: 'rows', at: 0, r: 2, n: 1 },

@@ -23,16 +23,10 @@ const reader = ['README.md', ...currentDocs, 'src/i18n/en.ts', 'public/llms.txt'
 /** Said as absolutes, they are false: Private is the default, Saved keeps documents on the device, a short link is on a server. */
 const STRUCK = ['no saving', 'nothing is stored anywhere', 'never see what you write', 'never saved', 'nothing stored', 'lives entirely in the url'];
 
-/** Features that are gone from the tree (round seventeen), by the names a reader would know them by. */
+/** Features that are gone from the tree, by the names a reader would know them by (and test/lints.test.ts's STALE, in every file). */
 const GONE = [
-  'Website Builder',
-  'Kanban',
-  'To-do List',
-  'picture proxy',
   'Show pictures from the web',
   'pictures from the web are asked',
-  'owner key',
-  'living short link',
   'Web Embed',
   'Signed by',
   'kit/sign.ts',

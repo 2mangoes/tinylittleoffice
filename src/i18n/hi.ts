@@ -1136,7 +1136,7 @@ export default {
   '{every}, {n} times': '{every}, {n} बार',
   '{n|one day|# days}': '{n|एक दिन|# दिन}',
   '{n}% done': '{n}% पूरा',
-  // The templates added in round four: each name, then its line on the home page.
+  // The templates: each name, then its line on the home page.
   'A bakery’s posts and newsletters through the winter, an advent story every day.': 'सर्दियों भर एक बेकरी के पोस्ट और न्यूज़लेटर, हर दिन एक आगमन कहानी।',
   'A youth soccer season: practice every week, home and away in their colors, the playoffs.': 'युवा फ़ुटबॉल का एक सीज़न: हर हफ़्ते प्रैक्टिस, अपने रंगों में घर और बाहर, प्लेऑफ़।',
   'A small team’s time off, the public holidays and the Christmas closing on one calendar.': 'एक छोटी टीम की छुट्टियाँ, सरकारी छुट्टियाँ और क्रिसमस की बंदी एक कैलेंडर पर।',

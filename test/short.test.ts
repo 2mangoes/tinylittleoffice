@@ -1,8 +1,11 @@
 // The short-link client against the shortener itself, in one process: fetch is the Worker's handle().
 import { test, expect, vi, afterEach } from 'vitest';
 import { handle } from '../tinier/tinier.ts';
-import { expiresLine, expiresSentence, shortCost, shorten, shortLink, timeLeft, unshorten } from '../src/kit/short.ts';
+import { expiresLine, expiresSentence, shorten, shortLink, timeLeft, unshorten } from '../src/kit/short.ts';
 import { MemStore } from './memstore.ts';
+
+/** What a link costs at the shortener: its ciphertext, in base64url characters (AES-GCM adds a 16-byte tag). */
+const shortCost = (link: string): number => Math.ceil(((new TextEncoder().encode(link).length + 16) * 4) / 3);
 
 const AT = 'https://tinier.test/';
 const PAGE = '<p>{{id}}</p>';

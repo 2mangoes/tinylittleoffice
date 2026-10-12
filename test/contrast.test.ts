@@ -1,6 +1,5 @@
 // The colour tokens, in the light and in the dark, read against each other: text at 4.5:1 or better, edges at
 // 3:1 in the dark (hairlines in the light). Read from src/styles/tokens.css as it is, var() chains followed.
-// (Ported from the old tree's test/contrast.test.ts, without Shoelace's scales under it.)
 import { test, expect } from 'vitest';
 import { readFileSync } from 'node:fs';
 

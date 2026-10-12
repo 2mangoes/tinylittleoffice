@@ -18,7 +18,7 @@ export const QR_LANG = 'qr';
 let self = '';
 /** The link of the document on the page now: the shell's, after every change. */
 export const setSelfLink = (link: string) => void (self = link);
-export const selfLink = () => self;
+const selfLink = () => self;
 
 /** A QR fence: this document's own code. */
 export const qrBlock = (): Block => ({ k: 'fence', lang: QR_LANG, body: '' });

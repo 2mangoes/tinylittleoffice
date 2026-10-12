@@ -1,5 +1,4 @@
-// Nothing drawn outside the page follows the screen's lengths (round eight: the stylesheet in rem and em, the root's
-// zoom gone): the pages of three documents, as pageSvg writes them and as their thumbnails are drawn, are the bytes
+// Nothing drawn outside the page follows the screen's lengths (the stylesheet in rem and em, no zoom on the root): the pages of three documents, as pageSvg writes them and as their thumbnails are drawn, are the bytes
 // they were before. The hashes were taken from the tree before the change and are kept here; a change to how a page
 // is drawn changes them on purpose, in its own commit.
 import { test, expect } from 'vitest';
@@ -28,7 +27,7 @@ test('the pages of three documents, and their thumbnails, are the same bytes as 
   expect(drawn()).toEqual(EXPECTED);
 });
 
-// Taken again when the type became IBM Plex (r17-plex): the pages name Plex first, a bold word is 600, and the widths
+// Taken again when the type became IBM Plex: the pages name Plex first, a bold word is 600, and the widths
 // they are laid out by are Plex's (kit/draw.ts textWidth). The deck's page again when the codec's dictionary primed America/New_York
-// (r17-finish): the page's QR code carries the deck's link, and the link's bytes moved.
+// the page's QR code carries the deck's link, and the link's bytes moved.
 const EXPECTED = ['write: 14652a4b18137bcc 14652a4b18137bcc', 'deck: 2d9654cfbd24e547 bd6ffaa363d2de69', 'draw: 9191bafafdf3e32c 9191bafafdf3e32c'];

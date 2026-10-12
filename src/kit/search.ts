@@ -1,5 +1,5 @@
 /**
- * Finding documents by what is in them (ported from the old tree's src/lib/search.ts): every word of the search must be
+ * Finding documents by what is in them: every word of the search must be
  * somewhere in the document (in any order; "words in quotes" together),
  * matched without regard to case or accents. The best come first: a word
  * in the title counts most, then the app or the folder, then the text, and

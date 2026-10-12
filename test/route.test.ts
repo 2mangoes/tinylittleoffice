@@ -44,7 +44,7 @@ test('arriving by a short link: "?s=<id>&x=<expires>", from tinier for everyone,
   const both = routeHash('text', 'yABC', '', true, arrived);
   expect(both).toBe('#/v1/text/yABC?d&s=abcdefg&x=1791000000000');
   expect(parseHash(both)).toEqual({ app: 'text', payload: 'yABC', version: 1, view: '', display: true, arrived, sealed: false });
-  // An owner's query from the living link of before is not read: no key, no o, nothing but what it always was.
+  // Other keys in the query (k, o) are not read: nothing but what it always was.
   const old = parseHash(`#/v1/text/yABC?s=abcdefg&k=${'K'.repeat(43)}&o=${'O'.repeat(43)}&x=1791000000000`);
   expect(old).toEqual({ app: 'text', payload: 'yABC', version: 1, view: '', display: false, arrived, sealed: false });
   expect(Object.keys(old)).not.toContain('owned');

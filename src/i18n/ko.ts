@@ -1136,7 +1136,7 @@ export default {
   '{every}, {n} times': '{every}, {n}번',
   '{n|one day|# days}': '{n|#일}',
   '{n}% done': '{n}% 완료',
-  // The templates added in round four: each name, then its line on the home page.
+  // The templates: each name, then its line on the home page.
   'A bakery’s posts and newsletters through the winter, an advent story every day.': '빵집의 겨울 게시물과 소식지예요. 대림절 이야기가 날마다 올라와요.',
   'A youth soccer season: practice every week, home and away in their colors, the playoffs.': '유소년 축구 시즌이에요. 매주 훈련, 팀 색깔로 치르는 홈 경기와 원정 경기, 플레이오프.',
   'A small team’s time off, the public holidays and the Christmas closing on one calendar.': '작은 팀의 휴가, 공휴일, 연말 휴무를 한 캘린더에 모았어요.',

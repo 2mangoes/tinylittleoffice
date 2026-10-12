@@ -1,5 +1,5 @@
 /**
- * Motion drawn, with no DOM (ported from the old tree's anim.def.ts): a shape with its effects, the stage at
+ * Motion drawn, with no DOM: a shape with its effects, the stage at
  * any frame, the whole as an SVG that plays itself, and every frame as a page for the GIF. Shapes are drawn
  * by Draw's own shapeSvg, so a drawing looks the same moving as still.
  */
@@ -43,7 +43,7 @@ const shout = (s: Shape): Shape => {
 };
 
 /** One shape, drawn with its effects, about the origin of the drawing (no transform yet). `defs` collects what the picture must define once. */
-export function effectsSvg(s: Shape, i: number, all: Shape[], fx: string, theme?: Theme, defs?: Set<string>): string {
+function effectsSvg(s: Shape, i: number, all: Shape[], fx: string, theme?: Theme, defs?: Set<string>): string {
   const has = (l: string) => fx.includes(l);
   let body = shapeSvg(has('i') ? shout(s) : s, all, theme);
   if (!body) return '';

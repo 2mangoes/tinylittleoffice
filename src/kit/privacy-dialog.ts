@@ -11,7 +11,6 @@
  * It gets the document's state through properties (`sealed`, `protected`) and does the work through
  * kit/privacy.ts; what changes the document goes back to the shell as events: `to-unlock` (detail: the text and
  * its locker, the password given), `to-lock` (detail: the new locker, or null for none) and `to-share-open`.
- * (Until round eight all of this was the shell's own.)
  */
 import { LitElement, html, nothing, type TemplateResult } from 'lit';
 import { t } from './i18n.ts';

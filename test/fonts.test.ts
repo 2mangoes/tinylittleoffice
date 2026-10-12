@@ -1,4 +1,4 @@
-// The type is IBM Plex, served by the site itself (directive r17-plex; Paul, 2026-10-11: "We use Plex everywhere"): every
+// The type is IBM Plex, served by the site itself (Paul, 2026-10-11: "We use Plex everywhere"): every
 // file src/styles/fonts.css names is in public/fonts/ with IBM's licence beside it, every file there is one the CSS names
 // and docs/dependencies.md lists (scripts/dependencies.ts FONTS), each face waits behind its unicode-range, and the
 // stacks put Plex first: the interface, the pages' SVG, the Serif look and code.

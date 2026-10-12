@@ -132,7 +132,7 @@ const KEY_MS = 2000;
 const config = (codec: string, w: number, h: number, bitrate = BITRATE): VideoEncoderConfig => ({ codec, width: w, height: h, bitrate, latencyMode: 'quality' });
 
 /** The codec this browser encodes at this size, VP9 before VP8, or null (no WebCodecs, or only H.264). */
-export async function codecOf(w: number, h: number): Promise<{ codec: string; id: WebmTrack['codec'] } | null> {
+async function codecOf(w: number, h: number): Promise<{ codec: string; id: WebmTrack['codec'] } | null> {
   if (typeof VideoEncoder === 'undefined' || !VideoEncoder) return null;
   for (const [codec, id] of [
     ['vp09.00.10.08', 'V_VP9'],

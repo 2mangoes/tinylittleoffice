@@ -1,6 +1,6 @@
 /**
  * A drawing as a view of the document, and its commands as operations. The document is the kernel's: a
- * table, a row per shape, and the alt text in the head (ported from the old tree's lib/drawmodel.ts):
+ * table, a row per shape, and the alt text in the head:
  *
  *   ---
  *   alt: A browser asks a server.
@@ -199,12 +199,12 @@ export type Cols = Record<Field, number>;
 const colsOf = (table: { cols: Column[] }): Cols => Object.fromEntries(FIELDS.map((f, i) => [f, columnsOf(table, ...FIELDS.map((g) => PATTERNS[g]))[i]])) as Cols;
 
 /** The index of the table of shapes: the first table with a Kind column; -1 for none. */
-export const shapesAt = (doc: Doc): number => doc.blocks.findIndex((b) => b.k === 'table' && b.cols.some((c) => /^kind$/i.test(c.name.trim())));
+const shapesAt = (doc: Doc): number => doc.blocks.findIndex((b) => b.k === 'table' && b.cols.some((c) => /^kind$/i.test(c.name.trim())));
 /** The index of the pixel grid's paragraph: the first `p`; -1 for none. */
 export const pixelsAt = (doc: Doc): number => doc.blocks.findIndex((b) => b.k === 'p');
 
 /** A row as a shape; null for a row that is none. */
-export function rowShape(row: string[], cols: Cols): Shape | null {
+function rowShape(row: string[], cols: Cols): Shape | null {
   const get = (f: Field) => (cols[f] >= 0 ? (row[cols[f]] ?? '').trim() : '');
   const word = get('kind').toLowerCase();
   const k = ((KINDS as readonly string[]).includes(word) ? word : NAMED[word]) as Kind | undefined;
@@ -235,7 +235,7 @@ export function rowShape(row: string[], cols: Cols): Shape | null {
 }
 
 /** A table's rows as shapes, rows that are no shape left out; `rows` says which row each came from. */
-export function tableShapes(b: TableBlock): { shapes: Shape[]; rows: number[] } {
+function tableShapes(b: TableBlock): { shapes: Shape[]; rows: number[] } {
   const cols = colsOf(b);
   const shapes: Shape[] = [];
   const rows: number[] = [];
@@ -285,7 +285,7 @@ export interface DrawView {
 const EMPTY: Cols = { kind: -1, x: -1, y: -1, w: -1, h: -1, style: -1, label: -1, points: -1, rot: -1 };
 
 /** The grid's side from "grid: 16"; 0 for anything else. */
-export const gridOf = (value: string | undefined): number => {
+const gridOf = (value: string | undefined): number => {
   const n = parseInt(value ?? '', 10);
   return (TILE_SIDES as readonly number[]).includes(n) ? n : 0;
 };
@@ -307,7 +307,7 @@ export function readDrawing(doc: Doc): DrawView {
 }
 
 /** The grid as its paragraph is written: a row a line, trailing clear squares left off, an empty row a lone ".", trailing empty rows gone. */
-export function pixelText(p: Tile): string {
+function pixelText(p: Tile): string {
   const rows = p.rows.map((row) => row.replace(/\.+$/, ''));
   while (rows.length && !rows[rows.length - 1]) rows.pop();
   return rows.map((row) => row || '.').join('\n');

@@ -17,7 +17,7 @@ export const titleOf = (doc: Doc): string => parse(doc).head.title ?? '';
 export const retitle = (doc: Doc, title: string): Doc => write(apply(parse(doc), { op: 'head', key: 'title', value: title.replace(/\n/g, ' ').trim() || undefined }));
 
 /** A trip as text: its stops in order, each its name and its note (where the times are written); loose words as they are. */
-export function tripText(doc: Doc): TextNode[] {
+function tripText(doc: Doc): TextNode[] {
   const k = parse(doc);
   const v = readTrip(k);
   if (v.at < 0) return textOf(k);

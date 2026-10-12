@@ -44,7 +44,7 @@ export function parseTile(ref: string): Tile | null {
 }
 
 /** The rows as the field keeps them: trailing clear squares and empty rows left off. */
-export function tileRows(t: Tile): string[] {
+function tileRows(t: Tile): string[] {
   const rows = t.rows.map((r) => r.replace(/\.+$/, ''));
   while (rows.length && !rows[rows.length - 1]) rows.pop();
   return rows;
@@ -53,11 +53,9 @@ export function tileRows(t: Tile): string[] {
 export const tileRef = (t: Tile): string => `${t.n}:${tileRows(t).join('/')}`;
 /** Whether any square is inked. */
 export const tileFilled = (t: Tile): boolean => t.rows.some((r) => /[a-h]/.test(r));
-/** How many squares are inked. */
-export const tileCount = (t: Tile): number => t.rows.reduce((n, r) => n + (r.match(/[a-h]/g)?.length ?? 0), 0);
 
 /** One tile's squares as SVG rects, `side` px square in all. A square is drawn a hair wide so no seams show. */
-export function tileRects(t: Tile, side: number): string {
+function tileRects(t: Tile, side: number): string {
   const c = side / t.n;
   let out = '';
   t.rows.forEach((row, y) => {

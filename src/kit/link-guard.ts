@@ -12,7 +12,7 @@
  * and a file this page made (blob:), and the chrome's own links (`data-to-chrome`: the home page's foot), which the code
  * draws to the site's maker and its source and which pass only to those (kit/network.ts `maker`, `source`).
  * openLink(href) is the same question for a link followed from code (the link bubble's Open).
- * (Ported from the old tree's src/widgets/link-guard.ts; the dialog is the kit's <to-dialog>.)
+ * The dialog is the kit's <to-dialog>.
  */
 import { html, nothing } from 'lit';
 import { icon, UI } from './icons.ts';

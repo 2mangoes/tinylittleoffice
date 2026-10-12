@@ -1,5 +1,5 @@
 /**
- * The chunk budgets (directive r9-lints): what the built site's chunks weigh, in bytes gzipped at level 9, held
+ * The chunk budgets: what the built site's chunks weigh, in bytes gzipped at level 9, held
  * to budgets.json. The budget is a tripwire against growth nobody meant, never a reason to make code terse: growth
  * that buys simplicity is raised into budgets.json, in a commit of its own whose message says why (Paul, 2026-10-10).
  *

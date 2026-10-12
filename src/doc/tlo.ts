@@ -60,7 +60,7 @@ function unescapeTail(line: string): string {
 }
 
 /** Attributes as they are written: " {#id .cls key=value}", or nothing. */
-export function attrsText(a?: Attrs): string {
+function attrsText(a?: Attrs): string {
   if (!a) return '';
   const parts = [
     ...(a.id ? ['#' + a.id] : []),
@@ -329,14 +329,6 @@ export function parse(text: string): Doc {
   return { head, blocks: foldNotes(blocks).map(finish) };
 }
 
-/** A text's header and the text after it. */
-export function splitHead(text: string): [Head, string] {
-  text = text.replace(NUL, '');
-  const lines = text.split('\n');
-  const [head, start] = readHead(lines);
-  return start ? [head, lines.slice(start).join('\n')] : [{}, text];
-}
-
 /** Some keys taken out of a text's header: [those keys, the text without them]. The rest of the header stays. */
 export function takeHead(text: string, keys: string[]): [Head, string] {
   text = text.replace(NUL, '');
@@ -373,7 +365,7 @@ const unTable = (lines: string[]): string[] =>
 const guardEnd = (s: string) => (ATTRS.test(s) ? s.replace(/\{(?=[^{]*$)/, '\\{') : s);
 
 /** The header as its lines, or nothing when it holds nothing. */
-export function writeHead(head: Head): string {
+function writeHead(head: Head): string {
   const keys = Object.keys(head).filter((k) => head[k] !== undefined && head[k] !== '');
   if (!keys.length) return '';
   return ['---', ...keys.map((k) => `${k}: ${String(head[k]).replace(/\n/g, ' ')}`), '---', ''].join('\n');
@@ -393,7 +385,7 @@ const edges = (s: string, tail: boolean, head: boolean): string => {
  * a space at its ends escaped ("\\ ") and an empty one "\\", so every space and break typed is read back.
  * A quote's lines keep their starts as they are, and an empty line between two is ">" alone.
  */
-export function writeLines(runs: Run[], quote = false): string {
+function writeLines(runs: Run[], quote = false): string {
   const lines: Run[][] = [[]];
   for (const r of runs) {
     if (r.ic || r.fn !== undefined || !r.t.includes('\n')) {
@@ -850,7 +842,7 @@ export const fenceRef = (b: { lang: string; body: string }): string => `${b.lang
 /* ---------- typed columns ---------- */
 
 /** Every type a column heading may name. */
-export const COL_TYPES: ColType[] = ['text', 'number', 'money', 'percent', 'date', 'time', 'check', 'url', 'rich', 'long', 'icon', 'name', 'option'];
+const COL_TYPES: ColType[] = ['text', 'number', 'money', 'percent', 'date', 'time', 'check', 'url', 'rich', 'long', 'icon', 'name', 'option'];
 
 /**
  * A currency as a column head names it, written canonically: an ISO 4217 code ("gbp" is GBP), or a symbol of one
@@ -880,5 +872,3 @@ export function columnsOf(table: { cols: Column[] }, ...want: RegExp[]): number[
 }
 /** A column heading as it is written: the name, and ":type" when it is not text, a money column's currency after it. */
 export const columnText = (name: string, type: ColType = 'text', currency?: string): string => (type === 'text' ? name : `${name}:${type}${type === 'money' && currency ? `(${currency})` : ''}`);
-/** An amount as a person types it ("$1,200.50", "12"), as a number; NaN where there is none. */
-export const amountOf = (s: string): number => parseFloat(s.replace(/[^0-9.-]/g, ''));

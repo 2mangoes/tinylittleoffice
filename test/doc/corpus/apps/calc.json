@@ -1,5 +1,5 @@
 {
-  "source": "src/apps/calc/templates.ts (the rebuilt tree), and the old tree's example",
+  "source": "src/apps/calc/templates.ts, and the example at the tag v0-before-rebuild",
   "docs": [
     {
       "name": "calc/bill",
@@ -82,7 +82,7 @@
       "text": "---\ntitle: Waves adding up\nmode: graph\n---\nx from -6.3 to 6.3\nsin(x)\nsin(3x)/3\nsin(x) + sin(3x)/3 + sin(5x)/5\n"
     },
     {
-      "name": "calc/example (old tree, src/api.ts)",
+      "name": "calc/example (v0-before-rebuild, src/api.ts)",
       "text": "---\nmode: mortgage\n---\n- price = 400000\n- deposit = 80000\n- rate = 6.5\n- years = 30\n"
     },
     {

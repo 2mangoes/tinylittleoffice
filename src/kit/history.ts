@@ -1,5 +1,5 @@
 /**
- * Undo as an op log (docs/kernel.md §8, decision 2). Every change is a list
+ * Undo as an op log (docs/kernel.md §6, decision 2). Every change is a list
  * of operations; recorded with the document it was made on, its inverse is
  * worked out by the kernel's `invertAll` and kept beside it, with the
  * selection before and after, so an undo puts the caret back where the

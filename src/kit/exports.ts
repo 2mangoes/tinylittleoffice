@@ -10,7 +10,7 @@
  *
  * Print is not a format: the browser's dialog, through a hidden srcdoc frame with @page at the page's size, which
  * saves a PDF too. A file is handed over by showSaveFilePicker where there is one, the share sheet on a phone, and
- * <a download> everywhere else. (The ideas of the old tree's kit/core.ts printHtml and kit/browser.ts.)
+ * <a download> everywhere else.
  */
 import type { AppDef, Doc, Export, ExportContext, Page } from './app.ts';
 import { INK, MUTED, FONT, pageSvg, stack, fileName, slug, xml } from './draw.ts';
@@ -29,7 +29,7 @@ import { toast } from './toast.ts';
 import { textLayer } from './text-layer.ts';
 import { textHtml } from './text-view.ts';
 
-export { xml, PAPER, INK, MUTED, FONT, pageSvg, stack, slug, fileName, utf8 } from './draw.ts';
+export { slug, utf8 } from './draw.ts';
 export { raster } from './raster.ts';
 import { drawn, jpeg, raster } from './raster.ts';
 
@@ -87,7 +87,7 @@ export function picture(pages: Page[]): Promise<Uint8Array | null> {
 }
 
 /** The pages as a .pdf file: each drawn as a JPEG, as sharp as the page size allows (kit/pdf.ts says why raster). */
-export async function pdfOf(pages: Page[], title: string): Promise<Uint8Array | null> {
+async function pdfOf(pages: Page[], title: string): Promise<Uint8Array | null> {
   const drawn = [];
   for (const p of pages) {
     const k = sharp(p);
@@ -309,10 +309,10 @@ export async function printDoc({ doc, ctx }: Current): Promise<void> {
 /* ---------- a file shown, or shared ---------- */
 
 /** The type a file of this format is shown in the browser as: its own, plain text, or null where the browser shows nothing. */
-export const shownAs = (format: Export): string | null => (format.shows === 'own' ? format.mime.split(';')[0] : format.shows === 'text' ? 'text/plain;charset=utf-8' : null);
+const shownAs = (format: Export): string | null => (format.shows === 'own' ? format.mime.split(';')[0] : format.shows === 'text' ? 'text/plain;charset=utf-8' : null);
 
 /** Whether this device's share sheet takes a file of this format (asked of an empty one, before any is made). */
-export function sharesFile(format: Export): boolean {
+function sharesFile(format: Export): boolean {
   try {
     return typeof navigator.share === 'function' && !!navigator.canShare?.({ files: [new File([''], `file.${format.ext}`, { type: format.mime.split(';')[0] })] });
   } catch {
@@ -325,7 +325,7 @@ export function sharesFile(format: Export): boolean {
  * browser's reason to allow it, and sent to the file once the file is made. (A blob's page is this site's, under
  * this site's Content-Security-Policy: no script the site did not write runs in it.)
  */
-export async function viewFile(format: Export, current: Current) {
+async function viewFile(format: Export, current: Current) {
   const tab = window.open('', '_blank');
   if (tab) tab.opener = null;
   try {
@@ -343,7 +343,7 @@ export async function viewFile(format: Export, current: Current) {
 }
 
 /** The file to the device's share sheet. */
-export async function shareFile(format: Export, current: Current) {
+async function shareFile(format: Export, current: Current) {
   try {
     const made = await fileOf(format, current);
     const file = new File([typeof made.data === 'string' ? made.data : (made.data as BlobPart)], made.name, { type: made.mime.split(';')[0] });

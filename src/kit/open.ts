@@ -7,8 +7,7 @@
  * file is kept, nothing is sent.
  *
  * A zip goes in too (Paul, 2026-10-11: "Let me download all my docs as a single zip file and upload them too"):
- * its .tlo and .md files are documents (kit/plain.ts readZip: what Download everything wrote, before it went, comes
- * back as it was), the rest of it (a README, a picture) left alone. Under Saved they are kept (kit/library.ts keepAll),
+ * its .tlo and .md files are documents (kit/plain.ts readZip), the rest of it (a README, a picture) left alone. Under Saved they are kept (kit/library.ts keepAll),
  * a document already kept with the same text left as it is; under Private a dialog lists them by app and name and
  * offers to keep them (Saved turned on) or open one. A zip of one document opens it, as that file would.
  */
@@ -36,7 +35,7 @@ function linkOf(plain: Pick<Plain, 'app' | 'text' | 'title'>): string {
 }
 
 /** A file's words as a link's hash; '' when it is not words. */
-export function hashFor(name: string, text: string, fallback: string): string {
+function hashFor(name: string, text: string, fallback: string): string {
   const plain = readFile(name, text, fallback, known);
   return plain ? linkOf(plain) : '';
 }

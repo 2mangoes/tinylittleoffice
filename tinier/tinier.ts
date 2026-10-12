@@ -124,7 +124,7 @@ async function body(req: Request): Promise<Record<string, unknown> | null> {
 const cipher = (c: unknown, iv: unknown): c is string => typeof c === 'string' && typeof iv === 'string' && B64.test(c) && B64.test(iv) && c.length <= MAX_BYTES && iv.length <= 32;
 
 /** What the shortener's robots.txt says: come in, every fetcher; the pages keep themselves out of the index by their header. */
-export const ROBOTS = `# Every page and answer here says "X-Robots-Tag: noindex": a short link is a person's, and no search engine's.
+const ROBOTS = `# Every page and answer here says "X-Robots-Tag: noindex": a short link is a person's, and no search engine's.
 # Nothing is disallowed, so a site that draws a shared link's preview may still read it.
 User-agent: *
 Allow: /

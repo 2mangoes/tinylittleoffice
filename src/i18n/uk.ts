@@ -1138,7 +1138,7 @@ export default {
   '{every}, {n} times': '{every}, разів: {n}',
   '{n|one day|# days}': '{n|# день|# дні|# днів|# дня}',
   '{n}% done': 'Готово: {n}%',
-  // The templates added in round four: each name, then its line on the home page.
+  // The templates: each name, then its line on the home page.
   'A bakery’s posts and newsletters through the winter, an advent story every day.': 'Дописи й розсилки пекарні всю зиму, щодня історія з адвенту.',
   'A youth soccer season: practice every week, home and away in their colors, the playoffs.': 'Сезон дитячого футболу: тренування щотижня, вдома й у гостях у своїх кольорах, плей-оф.',
   'A small team’s time off, the public holidays and the Christmas closing on one calendar.': 'Відпустки маленької команди, державні свята й різдвяне закриття в одному календарі.',

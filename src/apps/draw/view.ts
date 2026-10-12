@@ -1,5 +1,5 @@
 /**
- * A drawing drawn, with no DOM: each shape as SVG (ported from the old tree's draw.def.ts), the page of
+ * A drawing drawn, with no DOM: each shape as SVG, the page of
  * them over its background tile, the pixel grid as a picture. What `def.ts` builds its pages and files on;
  * the editor draws its shapes with the same shapeSvg, in the page's own colours.
  */
@@ -16,13 +16,13 @@ export interface Theme {
   paper: string;
   shade: string;
 }
-export const PRINT: Theme = { ink: INK, paper: PAPER, shade: SHADE };
+const PRINT: Theme = { ink: INK, paper: PAPER, shade: SHADE };
 
 /** The highlighter's colour under marked words (a stroke behind the letters, so it shows in the dark too). */
 const MARKER = '#facc15';
 
 /** Runs as tspans: bold, italic, underline, struck and marked words drawn as such; a run with no marks is plain words. */
-export function runsSvg(runs: Run[], px: number): string {
+function runsSvg(runs: Run[], px: number): string {
   return runs
     .map((run) => {
       const deco = [run.u ? 'underline' : '', run.s ? 'line-through' : ''].filter(Boolean).join(' ');
@@ -205,7 +205,7 @@ export function shapesPage(shapes: Shape[], w = W, h = H, upTo = Infinity, tile:
 }
 
 /** The pixel grid as a picture, 480 px square; a square a hair wide so no seams show. */
-export function pixelPage(v: DrawView): Page {
+function pixelPage(v: DrawView): Page {
   const n = v.pixels.n;
   const c = 480 / n;
   let svg = '';
@@ -221,7 +221,7 @@ export const cropPage = (p: Page, x: number, y: number, w: number, h: number): P
   x || y || w !== p.w || h !== p.h ? { ...p, w, h, svg: `<g transform="translate(${r(-x)} ${r(-y)})">${p.svg}</g>` } : p;
 
 /** The box round the shapes as they show, `pad` on every side, inside the canvas; the whole canvas when there are none. */
-export function shapesBox(shapes: Shape[], pad = 24): [number, number, number, number] {
+function shapesBox(shapes: Shape[], pad = 24): [number, number, number, number] {
   if (!shapes.length) return [0, 0, W, H];
   const boxes = shapes.map((s) => turnedBounds(s, shapes));
   const [x0, y0] = [Math.max(0, Math.min(...boxes.map((b) => b[0])) - pad), Math.max(0, Math.min(...boxes.map((b) => b[1])) - pad)];

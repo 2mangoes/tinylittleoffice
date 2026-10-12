@@ -1,5 +1,5 @@
 /**
- * Time zones on Intl, so no zone database ships with the app (ported from the old tree's lib/tz.ts). An
+ * Time zones on Intl, so no zone database ships with the app. An
  * instant is milliseconds UTC; "parts" are the civil date and clock in a named zone. Days are counted from
  * 1970-01-01, as the kernel counts them (ymdToDay, dayToYmd).
  */

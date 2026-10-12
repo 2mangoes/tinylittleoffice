@@ -1,5 +1,5 @@
 {
-  "source": "src/apps/outline/templates.ts (the rebuilt tree)",
+  "source": "src/apps/outline/templates.ts",
   "docs": [
     {
       "name": "outline/packing",

@@ -57,12 +57,12 @@ export function definedKeys(source: string): { key: string; value: string }[] {
 export const placeholders = (s: string): string[] => [...s.matchAll(/\{(\w+)(?:\|[^}]*)?\}/g)].map((m) => m[1]).sort();
 
 /** A line a translator has decided may stay as the English: `'Apps': 'Apps', // same`. */
-export const SAME_MARK = '// same';
+const SAME_MARK = '// same';
 /** A line the translation memory offered and nobody has read yet: `'Copy this link': 'Copier le lien', // draft from "Copy the link"`. */
-export const DRAFT_MARK = '// draft from';
+const DRAFT_MARK = '// draft from';
 
 /** The keys of a language file whose lines say `// same`. */
-export function sameKeys(source: string): Set<string> {
+function sameKeys(source: string): Set<string> {
   const out = new Set<string>();
   for (const m of source.matchAll(/^\s*'((?:\\.|[^'\\])*)'\s*:\s*'(?:\\.|[^'\\])*'\s*,?\s*\/\/ same\s*$/gm)) out.add(unquote(m[1]));
   return out;
@@ -156,7 +156,7 @@ export function likeness(a: string, b: string): number {
 }
 
 /** Two keys this alike are one key changed by a few words: the old one's translation is a draft for the new one. */
-export const LIKE = 0.6;
+const LIKE = 0.6;
 
 /** The old key most like a new one, among those given (none at least LIKE alike: undefined). */
 export function nearest(key: string, olds: string[], at = LIKE): string | undefined {

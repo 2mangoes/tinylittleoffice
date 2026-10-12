@@ -1138,7 +1138,7 @@ export default {
   '{every}, {n} times': '{every}, {n} fois',
   '{n|one day|# days}': '{n|# jour|# de jours|# jours}',
   '{n}% done': '{n} % fait',
-  // The templates added in round four: each name, then its line on the home page.
+  // The templates: each name, then its line on the home page.
   'A bakery’s posts and newsletters through the winter, an advent story every day.': 'Les publications et lettres d’information d’une boulangerie tout l’hiver, une histoire de l’Avent chaque jour.',
   'A youth soccer season: practice every week, home and away in their colors, the playoffs.': 'Une saison de foot des jeunes : entraînement chaque semaine, matchs à domicile et à l’extérieur dans leurs couleurs, les phases finales.',
   'A small team’s time off, the public holidays and the Christmas closing on one calendar.': 'Les congés d’une petite équipe, les jours fériés et la fermeture de Noël sur un seul calendrier.',

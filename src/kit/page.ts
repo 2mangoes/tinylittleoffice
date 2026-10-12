@@ -11,6 +11,3 @@ export function pageScript(code: string): string {
   return `<script>${code}</script>`;
 }
 export const pageScripts = (): string[] => [...SCRIPTS];
-
-/** A page's data, as JSON its script reads by id. */
-export const pageData = (id: string, value: unknown) => `<script type="application/json" id="${id}">${JSON.stringify(value).replace(/</g, '\\u003c')}</script>`;

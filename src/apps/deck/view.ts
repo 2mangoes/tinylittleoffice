@@ -4,7 +4,6 @@
  * panels, and the pages laid on letter sheets so that folding puts them in order (the imposition). The
  * closing slide is a QR code of the deck's own link. The deck as a web page plays itself: one slide at a
  * time, with the transition the header names, by a fixed script the site's policy allows by hash.
- * (Ported from the old tree's slide.ts, fold.ts, the fold apps' definitions and deck.def.ts.)
  */
 import { lookup, type Page } from '../../kit/app.ts';
 import { encodeDoc } from '../../kit/codec.ts';
@@ -16,7 +15,7 @@ import { pageScript } from '../../kit/page.ts';
 import { QR_MAX_BYTES, qrSvg } from '../../kit/qr.ts';
 import { routeHash } from '../../kit/route.ts';
 import { attr, markNotes, noteNumbers, noteRuns, parse, plainText, runLinks, write, type Doc, type Run } from '../../doc/index.ts';
-import { iconHex, isBlank, panelOf, settingsOf, slideNotes, slideText, slidesOf, type Format, type Item, type Settings, type Slide } from './model.ts';
+import { iconHex, panelOf, settingsOf, slideNotes, slideText, slidesOf, type Format, type Item, type Settings, type Slide } from './model.ts';
 import { themeOf, type DeckTheme } from './theme.ts';
 
 export const SW = 960;
@@ -545,7 +544,7 @@ export const MAX_PANELS = 6;
 const ZINE_PAGE = { w: 264, h: 408 };
 
 /** A page of panels: one to three in a column, more in two columns. A headline runs along the top. */
-export function panelsPage(s: Slide, look: Look): Page {
+function panelsPage(s: Slide, look: Look): Page {
   const { w, h } = ZINE_PAGE;
   const items = s.items.filter((it) => plainText(it.runs).trim() || it.runs.some((r) => r.ic)).slice(0, MAX_PANELS);
   const n = items.length;
@@ -764,7 +763,7 @@ export const BADGES: Geometry = {
   how: () => t('Print it on letter paper, at actual size. Cut along the dashes: six badges a sheet.'),
 };
 
-export const GEOMETRY: Record<Exclude<Format, ''>, Geometry> = { zine: ZINE, booklet: BOOKLET, brochure: BROCHURE, comic: COMIC, poster: POSTER, badges: BADGES };
+const GEOMETRY: Record<Exclude<Format, ''>, Geometry> = { zine: ZINE, booklet: BOOKLET, brochure: BROCHURE, comic: COMIC, poster: POSTER, badges: BADGES };
 export const geometryOf = (format: Format): Geometry | null => (format ? GEOMETRY[format] : null);
 
 /** How many pages a printed thing has: the format's count, grown by sheets (or cards) to hold what is written or what the header asks. */
@@ -964,6 +963,3 @@ ${PLAYER}
 </html>
 `;
 }
-
-/** What the view says about an untouched page, for alt text and names: the slide's words, or that it is blank. */
-export const pageAlt = (s: Slide, i: number, g: Geometry | null, n: number): string => (g ? g.name(i, n) : t('Slide {n}', { n: i + 1 })) + (isBlank(s) ? '' : `: ${slideText(s)[0] ?? ''}`);

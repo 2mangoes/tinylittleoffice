@@ -23,7 +23,7 @@ const ARROWS = { '->': '→', '<-': '←', '<->': '↔', '--': '—' } as const;
  * "Top table", "1990") and what follows it, or a person's name and the role or years on their second line. Then
  * the connections, "A → B: label", as a list under Connections. A mind map, an org chart and the rest are all this.
  */
-export function diagramText(doc: Kernel): TextNode[] {
+function diagramText(doc: Kernel): TextNode[] {
   const tree = isTree(kindOf(doc));
   const out: TextNode[] = [];
   for (const l of linesOf(doc)) {

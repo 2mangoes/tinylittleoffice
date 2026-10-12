@@ -3,7 +3,7 @@
  * in the short link's fragment, which browsers never send; the server holds only the ciphertext, and only until
  * the time chosen. The one thing it learns is that a link was made. A short link cannot be changed or recalled
  * once made (Paul, 2026-10-11): it expires on its own, an hour to a month after it was made, and one address may
- * make a hundred a day. (Ported from the old tree's src/lib/short.ts.)
+ * make a hundred a day.
  */
 import { toBase64Url, fromBase64Url } from './codec.ts';
 import { t } from './i18n.ts';
@@ -73,11 +73,9 @@ export interface Shortened {
 const buf = (s: string) => Uint8Array.from(fromBase64Url(s)) as Uint8Array<ArrayBuffer>;
 const utf8 = (s: string) => new TextEncoder().encode(s);
 
-/** What a link costs at the shortener: its ciphertext, in base64url characters (AES-GCM adds a 16-byte tag). */
-export const shortCost = (link: string): number => Math.ceil(((utf8(link).length + 16) * 4) / 3);
 /** A short link: the service, its id, and the key after "#". */
 export const shortLink = (id: string, key: string, at = TINIER) => `${at}${id}#${key}`;
-/** The longest link a short link holds, in characters (bytes, past ASCII): the inverse of shortCost at SHORT_MAX. */
+/** The longest link a short link holds, in characters (bytes, past ASCII): what fits in SHORT_MAX base64url characters of ciphertext, less AES-GCM's 16-byte tag. */
 export const SHORT_LINK_MAX = Math.floor((SHORT_MAX * 3) / 4) - 16;
 
 const seal = (link: string, rawKey: Uint8Array<ArrayBuffer>) => sealShortAt(link, rawKey, crypto.getRandomValues(new Uint8Array(12)));

@@ -4,7 +4,7 @@
 
 /**
  * Each such row under `root`: its words, whether they wrap, whether they sit under the icon (a word too wide to sit beside
- * it takes the line under: r16-reflow), and whether the icon's middle is the first line's (within a quarter of a line:
+ * it takes the line under), and whether the icon's middle is the first line's (within a quarter of a line:
  * not on the line between two). A row is right when its words are under the icon or beside it at the first line.
  */
 export function firstLines(root: Element) {

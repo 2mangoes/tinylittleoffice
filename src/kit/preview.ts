@@ -20,7 +20,7 @@ const drawn = new Map<string, string>();
 const waiting = new Set<string>();
 
 /** The preview of the document at this link, drawn once (again once the rest of Lucide has joined, when it names an icon from there). */
-export function previewOf(hash: string): string {
+function previewOf(hash: string): string {
   const had = drawn.get(hash);
   if (had !== undefined) return had;
   let svg = BLANK;

@@ -40,7 +40,6 @@ import {
   shiftSpan,
   siblingsOf,
   spanOf,
-  toggleOrdered,
   toOpml,
   topsOf,
   unlink,
@@ -323,18 +322,17 @@ test('copy: the span as blocks with the shallowest at the margin; paste: items r
   expect(pastesAsItems('-5 degrees')).toBe(false);
 });
 
-test('numbered: the list a row belongs to, toggled; the numbers round-trip and count as write counts them', () => {
+test('numbered: the list a row belongs to, numbered and not; the numbers round-trip and count as write counts them', () => {
   const T = '- A\n  - a1\n    - x\n  - a2\n- B\n';
   const d = parse(T);
   const v = readOutline(d);
   expect(siblingsOf(v, 3)).toEqual([1, 3]);
   expect(siblingsOf(v, 0)).toEqual([0, 4]);
-  expect(itemsAt(toggleOrdered(d, siblingsOf(v, 1)), T)).toBe('- A\n  1. a1\n    - x\n  2. a2\n- B\n');
+  expect(itemsAt(setOrdered(d, siblingsOf(v, 1), true), T)).toBe('- A\n  1. a1\n    - x\n  2. a2\n- B\n');
   const o = parse('- A\n  1. a1\n    - x\n  2. a2\n- B\n');
   expect(readOutline(o).items.map((it) => !!it.ord)).toEqual([false, true, false, true, false]);
-  expect(itemsAt(toggleOrdered(o, [1, 3]), '- A\n  1. a1\n    - x\n  2. a2\n- B\n')).toBe(T);
-  // Mixed: numbered unless every one already is.
-  expect(itemsAt(toggleOrdered(parse('1. A\n- B\n'), [0, 1]), '1. A\n- B\n')).toBe('1. A\n2. B\n');
+  expect(itemsAt(setOrdered(o, [1, 3], false), '- A\n  1. a1\n    - x\n  2. a2\n- B\n')).toBe(T);
+  expect(itemsAt(setOrdered(parse('1. A\n- B\n'), [0, 1], true), '1. A\n- B\n')).toBe('1. A\n2. B\n');
   expect(setOrdered(d, [0], false)).toEqual([]);
   // Round trips, the line attributes kept; shifted and moved, a numbered item stays numbered.
   for (const text of ['1. A\n2. B\n  1. b {.from}\n3. C\n', '- A\n  1. one {label=first}\n  2. two\n']) expect(write(parse(text))).toBe(text);

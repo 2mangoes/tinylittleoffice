@@ -40,7 +40,7 @@ const browser = (name: string) => ({
  * never node_modules/.vite: a worktree's node_modules is a link to the main checkout's, and every run of the browser
  * tests writes its dependencies afresh as it starts. Two suites at once in two checkouts (the deploy's and a builder's)
  * rewrote one directory under each other, and a file then loaded a dependency of the other run's writing: an iframe
- * that never became ready, or a second copy of Lit in one page (2026-10-12, directive r19-flakes).
+ * that never became ready, or a second copy of Lit in one page (2026-10-12).
  */
 const cacheDir = fileURLToPath(new URL('./.vite', import.meta.url));
 /** The browser files that count what the device holds; they run after the others (see below). */

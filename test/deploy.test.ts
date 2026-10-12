@@ -1,4 +1,4 @@
-// A tag deploys, from GitHub Actions (directive r18-deploy-actions; Paul, 2026-10-11: "GitHub Actions can handle the
+// A tag deploys, from GitHub Actions (Paul, 2026-10-11: "GitHub Actions can handle the
 // deploy to Cloudflare"): .github/workflows/deploy.yml runs scripts/deploy.mjs with the three secrets on a tag v*,
 // checks the live site against the build, and makes the release; every action any workflow uses is pinned by its
 // commit; and the deploy script refuses, with a sentence naming it, when a secret it needs is missing.

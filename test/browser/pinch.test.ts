@@ -154,7 +154,7 @@ function fits(shell: ToShell, where: string, nav = NAV_MAX) {
     }
   }
   const burger = shell.querySelector<HTMLElement>('.to-burger')!.getBoundingClientRect();
-  // At the inline end since round eight (kit/chrome.ts: the words begin at the other side).
+  // At the inline end (kit/chrome.ts: the words begin at the other side).
   expect(burger.right, `${where}: the burger at the right`).toBeGreaterThan(innerWidth - 40);
   expect(burger.right, `${where}: the burger inside the screen`).toBeLessThanOrEqual(innerWidth + 0.5);
   expect(burger.top, `${where}: the burger at the top`).toBeLessThan(60);

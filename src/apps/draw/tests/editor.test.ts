@@ -671,7 +671,7 @@ test("§1 the canvas's keys never act from a bar button: Enter presses the butto
   pencil.focus();
   expect(await press(el, ' ', {}, pencil)).toBe(false);
   expect(await press(el, 'Enter', {}, pencil)).toBe(false);
-  // The arrows are the bar's own (a toolbar: round nine): the next button, never a square.
+  // The arrows are the bar's own (a toolbar): the next button, never a square.
   expect(await press(el, 'ArrowRight', {}, pencil)).toBe(true);
   expect(document.activeElement).toBe(button(el, 'Fill'));
   expect(last()).toBe(n);

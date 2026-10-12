@@ -30,4 +30,4 @@ siblings, one an app; the kit's and the kernel's files each begin by saying what
 
 ## History
 
-- [history/README.md](history/README.md): the record of how the tree was built (the rebuild's plan, the gap analysis, the directives, the reviews); not maintained.
+- [history/README.md](history/README.md): the record of how the tree was built (the plan of its phases, the gap analysis, the directives, the reviews); not maintained.

@@ -1,5 +1,5 @@
 /**
- * Generated is generated (directive r9-common): a file a script writes from the code is never edited by hand, and a
+ * Generated is generated: a file a script writes from the code is never edited by hand, and a
  * test fails when the committed copy is not what the script would write. Every generating script ends in `generate`,
  * so each has the same two modes and the same words when a file is stale:
  *

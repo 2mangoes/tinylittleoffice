@@ -1,12 +1,8 @@
-<!-- Designed 2026-10-09 against the old tree at commit 15f0acb, before the greenfield decision, and kept as the
-design as it was built. Read with docs/history/rebuild.md. The apps are named here by their working names (Write,
-Sheet, Deck, …). -->
+# The document kernel, the one editor, and the shell
 
-# The document kernel, the one editor, and sheets as the data model
-
-**Reading this now.** §1 to §7 are the design as it was written, phases 1, 2 and 3 of the rebuild's plan (docs/history/rebuild.md), against the old tree at commit 15f0acb (tagged `v0-before-rebuild`): where they say "today" they mean that tree, and the apps they name (Gantt, Invoice, the fold apps, the page sections, the small tools) are the old tree's, most of them since folded into the ten apps as templates or modes, or gone. §8 says what changed when the rebuild went greenfield, and §9 to §12 describe the tree as it is. The code is the last word: `src/doc/` and `src/kit/`, each file headed by what it does.
-
-The short version. Today `src/lib/tlo.ts` already holds the kernel in embryo: `Tlo = { head, blocks }` with nine block kinds, a lenient reader and a canonical writer that every app reads its document through. What is missing is (a) runs: text sits in blocks as raw inline Markdown strings and is parsed again by every drawing (`parseInline` is called in outline rows, slide layout, write's `parseDoc`), and `src/lib/richtext.ts` keeps a second `Block` type for Write alone; (b) an operation set: every app edits its own model type and re-serializes the whole text; (c) the table block is strings with no notion of columns, so `formula.ts` builds its own padded `Grid` and `Sheet`. The kernel is those three things added to what tlo.ts already is, moved to `src/doc/`, with nothing left behind in `src/lib/`.
+The document kernel (`src/doc/`), the one editor (`<to-text>`, `src/kit/text.ts`) and the shell around them, as they
+are. The code is the last word: each file of `src/doc/` and `src/kit/` begins by saying what it does. The apps are
+named here by their ids (write, sheet, deck, …); docs/tlo.md is each one's document as a person or a model writes it.
 
 ---
 
@@ -16,12 +12,12 @@ The short version. Today `src/lib/tlo.ts` already holds the kernel in embryo: `T
 
 | file | holds |
 |---|---|
-| `src/doc/model.ts` | the types below; `plainText`, `hasClass`, `attr`, `pages`, `sections`, `isInnerDoc`, `blankDoc` |
-| `src/doc/tlo.ts` | `parse`, `write`, `writeBlock`, `splitHead`, `takeHead`, `withHead`; the inline codec `parseInline`, `writeInline`, `escapeInline`, `balanceNote`; `refFence`, `fenceRef`; `column`, `columnText`, `columnsOf`, `amountOf` |
+| `src/doc/model.ts` | the types below; `plainText`, `hasClass`, `attr`, `pages`, `sections`, `isInnerDoc` |
+| `src/doc/tlo.ts` | `parse`, `write`, `writeBlock`, `takeHead`, `withHead`; the inline codec `parseInline`, `writeInline`, `escapeInline`, `balanceNote`; `refFence`, `fenceRef`; `column`, `columnText`, `columnsOf` |
 | `src/doc/ops.ts` | `Op`, `apply`, `invert`, and the composed edits (`splitBlock`, `joinBlocks`, `family`, `shiftFamily`, `moveFamily`, `placeFamily`, `removeItem`) |
 | `src/doc/notes.ts` | `foldNotes`, `notesOf`, `noteRuns`, `noteNumbers`, `markNotes`, `referenceNotes`, `listNumbers`, `linkify`, `runLinks`, `linkTarget`, `linkable` |
-| `src/doc/table.ts` | `Table`, `tableAt`, `withTable`, A1 addressing, locks, formula reference remaps, `copyCells`/`pasteCells`/`fillCells`/`seriesOf`/`sortRows`/`clearCells` (phase 3, from formula.ts) |
-| `src/doc/formula.ts` | the evaluator: `evaluate(doc, at)`, `evaluateTable`, `FUNCTIONS`, `parseLiteral`, `formatCell`, `formatValue` (phase 3) |
+| `src/doc/table.ts` | `Table`, `tableAt`, `withTable`, A1 addressing, locks, formula reference remaps, `copyCells`/`pasteCells`/`fillCells`/`seriesOf`/`sortRows`/`clearCells` |
+| `src/doc/formula.ts` | the evaluator: `evaluate(doc, at)`, `evaluateTable`, `FUNCTIONS`, `parseLiteral`, `formatCell`, `formatValue` |
 
 ### Types
 
@@ -75,48 +71,20 @@ drops them. `created` is stamped at the first change, to the minute, as `2026-10
 the maker's own word. A document under a password is not a head field: its whole payload is sealed (`E…`,
 `src/kit/crypt.ts`), so nothing of it, the title included, is readable without the password.
 
-Eight block kinds; the two changes are `runs` in place of `text` on the four text kinds and `cols: Column[]` in place of `head: string[]` on tables. There is no `embed` kind: an embedded document is a `fence` whose `lang` is an app id (as now, `refFence`/`fenceRef`), and `isInnerDoc(b)` in model.ts names that rule once. There is no picture kind and no thing from the web (round seventeen, Paul, 2026-10-11: pictures and embeds are gone): a web address alone is a `p` of words, a link alone on a line is a `p` with a link, and `![alt](address)` reads as the words `!` and a link whose words are the alt. A lock and a chart are not fields of the table block: they ride on the head for a sheet document and on the table's attrs anywhere else (see `tableAt` in §5), which is exactly what the format does today and keeps every sheet example byte-identical.
+Eight block kinds. An embedded document is a `fence` whose `lang` is an app id (`refFence`/`fenceRef`), and `isInnerDoc(b)` in model.ts names that rule once. There is no picture kind and nothing from the web (Paul, 2026-10-11): a web address alone is a `p` of words, a link alone on a line is a `p` with a link, and `![alt](address)` reads as the words `!` and a link whose words are the alt. A lock and a chart are not fields of the table block: they ride on the head for a sheet document and on the table's attrs anywhere else (see `tableAt` in §5), as the format writes them, so every sheet example is byte-identical.
 
-Why runs in the model rather than text with runs derived: every view already parses inline on each draw; the editor's selection must be a run position; and footnotes/icons are run-level things the kernel must know. Why cells stay strings: the one inline construct that a canonical writer would alter (`*` and `_` in `=passers_by*buy_rate/100`) lives in cells, and the formula engine needs the raw formula. A `rich` column is parsed by its view.
-
-### Each app's document, in these blocks
-
-| app | blocks | head | cannot be expressed today (decide: drop, or add) |
-|---|---|---|---|
-| write | `h` (level 1 `.title`; 1, 2), `p` (`<br>` for an empty one; `.center/.right/.justify`), `li` (ul/ol, depth ≤ 3), `fence` (another document), `table` (an embedded sheet) | `paper` | `li.done` is folded into the words as a `☐`/`☑` glyph by `richtext.parseDoc` (lossy: `- [x] a` is written back as `- ☑ a`); `quote` and `edge` are flattened to `p`; `h3+` becomes `h2`; a fence with no app (` ```js `) becomes an embed of an unknown app. The kernel keeps all four; Write's view decides what to draw. |
-| outline, mind, family, org | `li` (depth; `.to/.from/.both`, `label=`), `fence` (`{depth=N}`), `edge` | — | an item is one line (`\n` → space); a fence under an item needs `depth=` because a list restarts after it (no nesting of blocks); org's `Name \| Role` is a convention in the run text |
-| deck, zine, booklet, brochure, poster, badges, comic | `hr` between pages; `h` level 2 (`.title/.two/.icon`; the icon a leading `ic` run), `li` (bullets, `ord` steps), `p` (prose on print pages; `\|` alone is the column break), `quote` (speaker notes), `fence`/`table`(+`{chart=}`) as the sub-document | `theme transition color qr`; `sides pages` | words and a sub-document cannot show together (the sub takes the slide); comic panel `said \| caption` is a convention |
-| sheet | one `table` | `chart lock` | rows past 1000 and columns past Z are dropped (a limit, not a format) |
-| draw, pixel mode | one `p`, a line a row | `grid` (8, 16, 32, 64); `tile` (kit/tile.ts) on any page | — |
-| gantt | `table` Task\|Start:date\|Days:number\|Done:percent | — | nesting is `- ` prefixes inside the Task cell: a tree in a table by convention |
-| trip | `table` Place\|Lat:number\|Lon:number\|Note | `units route` | — |
-| cal | `li` `when: label` with `color= every= times= until=` | `zone`, color names | *when* is text inside the run, not a field |
-| invoice | `table` What\|Qty:number\|Units\|Price:money, `p` notes | `from to number date due tax currency terms` | the sums are not in the document (see §5) |
-| site, links | `h` 1 (pages), `h` 2 (sections), `li` (`:icon: Head \| detail` cards; links' small links), `quote` (`Label \| url` buttons), `p` `:icon:` (big icon), `table` Name\|Price:money\|About (shop), `fence` | `theme currency orders` | card and button fields are `\|` conventions in a run |
-| lanes, timeline, seating, venn, net, spinner, santa, wordsearch, split | `h` 1 title, `li` `Key: words` (or `Set: a, b`), `edge`, `table` (split's payments) | `between` | the `Key:` and comma-list conventions are text, read by `lines.ts` patterns |
-| draw, anim | `table` Kind\|X\|Y\|W\|H\|Style\|Label[\|Points]; anim adds `table` Shape\|Keys | `alt`; `frames fps` | — |
-| calc | `p` (tape, a line each) or `li` (`- key = value`) | `mode` | money modes are a sheet in disguise (§5) |
-| qr, web | one `p` | `alt` (web) | — |
-
-Everything in the table is representable without loss in the nine kinds; the right-hand column is what the *format* cannot say, not what the kernel loses. None of it needs a new block kind now; the two worth deciding later are block nesting (an item holding a paragraph or a table) and a cell-level `when`/record type for cal and the `Key: words` apps.
+Why runs in the model rather than text with runs derived: every view would otherwise parse inline on each draw; the editor's selection must be a run position; and footnotes/icons are run-level things the kernel must know. Why cells stay strings: the one inline construct that a canonical writer would alter (`*` and `_` in `=passers_by*buy_rate/100`) lives in cells, and the formula engine needs the raw formula. A `rich` column is parsed by its view.
 
 ---
 
 ## 2. Serialization: TLO, one parser
 
-### Moves to `src/doc/tlo.ts` unchanged
+### The reader and the writer
 
-From `src/lib/tlo.ts`: `ATTRS`, `splitAttrs`, `unescapeTail`, `attrsText`, `hasClass`, `attr`; `FENCE`, `HEADING`, `ITEM`, `RULE`, `SEP`, `EDGE`, `IMAGE`; `cells`, `readHead`, `unblock`; the block loop of `parse` (list-indent stack, paragraph/quote flush, li continuation lines, table attrs on the line after); `splitHead`, `takeHead`, `withHead`; `guard`, `guardEnd`, `writeHead`, `cell`, `writeBlock`, `write` (tight li–li and edge–edge, ordered numbering across deeper items); the whole inline codec (`MARKS`, `LINK`, `ICON`, `URL`, `parseInline`, `noteEnd`, `balanceNote`, `escapeInline`, `escapePlain`, `FLAGS`, `writeInline`, `marked`); `refFence`, `fenceRef`; `COL_TYPES`, `column`, `columnsOf`, `columnText`, `amountOf`; `pages`, `sections` (to model.ts).
-
-From `src/lib/richtext.ts` to `src/doc/notes.ts` unchanged: `Run`, `foldNotes`, `notesOf`, `notesIn` (becomes `notesOf` over runs), `noteRuns`, `noteNumbers`, `markNotes`, `referenceNotes`, `listNumbers`, `runLinks`, `linkify`, `linkTarget`, `linkable`, `ALIGN_NAMES`/`ALIGN_OF`.
-
-### Changes
-
-1. **Runs at parse time.** In `parse`, where a text block is pushed (`flush`, the heading, the list item), `text` becomes `runs: lines(text)` where `lines(s) = s.split('\n').map(parseInline)` joined by `{ t: '\n' }` runs (merged into a neighbor when the marks agree). Inline marks therefore do not cross a line, exactly as today, where every consumer splits lines before `parseInline`. `writeBlock` writes `writeLines(runs)`: split at `\n`, `writeInline` each line.
-2. **The writer is byte-stable on canonical text.** `writeInline` writes a candidate with *minimal* escaping (only `\`, `^[`, `:name:`, `[x](y)`, `<u>`, a backtick, and a mark at a position where `parseInline` would open or close one), parses it back, and if the runs differ falls back to today's full `escapePlain`. This makes `writeInline(parseInline(s)) === s` for every canonical `s` the examples hold (today `5 * 3 * 2` on the calculator's tape or `snake_case` in an outline item would come back `5 \* 3 \* 2`, `snake\_case` once a block passes through runs — a change in bytes the kernel must not make). A property test over every template body and every skill example asserts `write(parse(x)) === x`.
-3. **Columns at parse time.** `head: string[]` becomes `cols: Column[]` via `column(h)`; `writeBlock` writes `columnText(c.name, c.type)`. Canonical headings (`Price:money`, `Time: 10am`) are byte-stable; `Price: money` is read leniently and written canonically.
-4. **Reference footnotes fold in `parse`.** `foldNotes` runs in the kernel for every app (today only Write and Deck fold `[^id]: note` paragraphs). Canonical documents hold the inline form only, so no example changes.
-5. **Deleted:** `richtext.ts`'s `Block`/`BlockKind`, `parseDoc`, `serializeDoc`, `docText`, `serializeInline`, `plainInline`, `MAX_DEPTH`; `tlo.ts`'s `plain(s)` (becomes `plainText(runs)`); `Tlo` is renamed `Doc`.
+1. **Runs at parse time.** Where `parse` makes a text block (a paragraph, a heading, a list item), its words become `runs`: each line through `parseInline`, joined by `{ t: '\n' }` runs. Inline marks therefore do not cross a line. `writeBlock` writes the runs back a line at a time.
+2. **The writer is byte-stable on canonical text.** `writeInline` writes a candidate with *minimal* escaping (only `\`, `^[`, `:name:`, `[x](y)`, `<u>`, a backtick, and a mark at a position where `parseInline` would open or close one), parses it back, and if the runs differ falls back to full escaping. So `writeInline(parseInline(s)) === s` for every canonical `s` (`5 * 3 * 2` on the calculator's tape and `snake_case` in an outline item stay as written). The corpus test asserts `write(parse(x)) === x` over every template and example.
+3. **Columns at parse time.** A table's heading row becomes `cols: Column[]` via `column(h)`; `writeBlock` writes `columnText(c.name, c.type)`. Canonical headings (`Price:money`, `Time: 10am`) are byte-stable; `Price: money` is read leniently and written canonically.
+4. **Reference footnotes fold in `parse`.** `foldNotes` runs in the kernel for every app (`[^id]: note` paragraphs become inline notes). Canonical documents hold the inline form only.
 
 ### Grammar the kernel must preserve (every example in docs/tlo.md and the skill parses and writes byte-for-byte)
 
@@ -132,7 +100,7 @@ From `src/lib/richtext.ts` to `src/doc/notes.ts` unchanged: `Run`, `foldNotes`, 
 - Quotes: `> ` lines merge into one block, written a line each.
 - Paragraphs: consecutive lines merge; a blank line separates; a line that would read as another block is written with a leading `\` (`guard`); a lone `|` is written as is (the deck's column break); Write's empty paragraph is `<br>`.
 - Inline: `**`, `__` (b), `*`, `_` (i; `_` not inside a word), `++` and `<u>` (u), `~~` (s), `==` (h); no space just inside a mark; backtick spans read as plain words; `[words](https?:|mailto:|tel:|#…)` links with spaces and parentheses percent-encoded on write; `:icon-name:`; `^[note]` with balanced brackets and `\]`; `\` before `` \`*_{}[]()#+-.!|~=:<>^ `` and before a space; a web or mail address read whole, marks inside it untouched, trailing `.,;:!?)` left out; marks close before trailing spaces.
-- Spaces and breaks (round ten, 2026-10-10): every space a person typed is in the link, because "we cannot ever lose spaces if they're there" (Paul). A space at a line's end is written `\ ` on the last trailing one, and at a line's start on the first leading one (not in a quote, whose starts are kept as they are), wherever a plain space would be trimmed: a paragraph's, a heading's and an item's lines, a quote's ends, a table cell's ends. A line of a block with nothing on it is a line of one `\` (Shift+Enter at a paragraph's end, two in a row; a quote's empty line between two stays `>`). The reader trims a line's ends up to an escaped space, never past it, and keeps every `\` line, the last too; before attributes, the one space before `{` is theirs (`a\  {.x}` is "a " with attributes, `\ {.x}` an empty line with them). Lenient: `\ ` written by hand is a space anywhere, as `\*` is a star. A mark or a link on spaces alone at a line's end may still be let go; the spaces stay. The writer's candidate-then-check (point 2 above) reads each line back with its ends trimmed.
+- Spaces and breaks (2026-10-10): every space a person typed is in the link, because "we cannot ever lose spaces if they're there" (Paul). A space at a line's end is written `\ ` on the last trailing one, and at a line's start on the first leading one (not in a quote, whose starts are kept as they are), wherever a plain space would be trimmed: a paragraph's, a heading's and an item's lines, a quote's ends, a table cell's ends. A line of a block with nothing on it is a line of one `\` (Shift+Enter at a paragraph's end, two in a row; a quote's empty line between two stays `>`). The reader trims a line's ends up to an escaped space, never past it, and keeps every `\` line, the last too; before attributes, the one space before `{` is theirs (`a\  {.x}` is "a " with attributes, `\ {.x}` an empty line with them). Lenient: `\ ` written by hand is a space anywhere, as `\*` is a star. A mark or a link on spaces alone at a line's end may still be let go; the spaces stay. The writer's candidate-then-check (point 2 above) reads each line back with its ends trimmed.
 
 ---
 
@@ -156,66 +124,48 @@ export function invert(doc: Doc, op: Op): Op;          // the op that undoes `op
 export const applyAll = (doc: Doc, ops: Op[]) => ops.reduce(apply, doc);
 ```
 
-`rows`/`cols`/`cells` are table-aware: `apply` remaps `=` formulas (`shiftFormula`/`remapRefs`, today in formula.ts) and the table's lock (`remapLock`) when rows or columns move, and `cells` leaves locked cells as they were unless the op carries `force: true` (today's `save(change, moved)` in sheet.ts). These are the only places the kernel knows about A1 references; they live in `table.ts`.
+`rows`/`cols`/`cells` are table-aware: `apply` remaps `=` formulas (`shiftFormula`/`remapRefs`) and the table's lock (`remapLock`) when rows or columns move, and `cells` leaves locked cells as they were unless the op carries `force: true`. These are the only places the kernel knows about A1 references; they live in `table.ts`.
 
 Composed edits, each returning `Op[]` (so undo and tests see primitives only):
 
 ```ts
 splitBlock(doc, at, offset): Op[]                 // Enter: block `at` becomes two; a li keeps depth/ord; a heading's second half is a p
 joinBlocks(doc, at): Op[]                         // Backspace at the start of `at`: joined to the text block before it
-family(doc, i): number                            // the end of item i's family (li blocks deeper than it) — outlinemodel.blockEnd, lines.blockEnd
-shiftFamily(doc, i, by: 1 | -1): Op[] | null      // outlinemodel.shift, lines.shiftBlock
-moveFamily(doc, i, by: 1 | -1): Op[] | null       // outlinemodel.move, lines.moveBlock → one `move`
-placeFamily(doc, i, to, how: 'under' | 'after'): Op[] | null   // outlinemodel.place, lines.placeBlock
-removeItem(doc, i): Op[]                          // outlinemodel.remove, lines.removeRow: the family comes out a level
+family(doc, i): number                            // the end of item i's family (li blocks deeper than it)
+shiftFamily(doc, i, by: 1 | -1): Op[] | null      // Tab, Shift+Tab: the family a level in or out
+moveFamily(doc, i, by: 1 | -1): Op[] | null       // past its neighbor: one `move`
+placeFamily(doc, i, to, how: 'under' | 'after'): Op[] | null   // a drop
+removeItem(doc, i): Op[]                          // the family comes out a level
 replaceSpan(doc, from, to, blocks): Op[]          // one splice
 ```
 
-### `DocElement` after the kernel
-
-```ts
-abstract class DocElement<V> extends LitElement {
-  declare value: string;                 // set by the shell, as now
-  protected doc!: Doc;                   // parse(value), kept
-  protected view!: V;                    // this.read(this.doc), recomputed when doc changes
-  protected abstract read(doc: Doc): V;  // the pure function from Doc to what the app draws
-  protected edit(ops: Op[]): void {      // apply, re-read, emit 'docchange' with write(doc)
-    this.doc = applyAll(this.doc, ops); this.view = this.read(this.doc); this.emit(write(this.doc));
-  }
-  protected load(doc: Doc): void { this.edit([{ op: 'splice', at: 0, n: this.doc.blocks.length, blocks: doc.blocks }, ...headOps(doc.head)]); }  // templates
-  focusFirst(): void | Promise<void> {}  // where a person starts (docs/editing.md §1); each app overrides it
-}
-```
+### `focusFirst()` and the link
 
 `focusFirst()` is the editor's half of the open: the shell calls it once a document is first drawn for editing (a new one, a template, a link, after an unlock; not in display mode, an embed, a show link presenting, a locked document, or while a dialog is open), and each editor puts the focus in its own place with its own helper (`focusCell`, `focusBox`, `focusRow`, `focusTask`, `focusCanvas`…), `preventScroll` always: the Word Processor's first words (the caret at their start), the Spreadsheet's A1 (its words selected), the first slide's headline, the first row, the first task, the first card (else the stage's name), the Calculator's entry line, the Drawing Tool's canvas, the Animator's stage, the Diagram Maker's picture, the Calendar's today (else the month's first; a Gantt chart's first task), the Trip Planner's first stop's name (else the map). The shell never puts the focus on the title box or leaves it on the body.
 
-`commit(T)`/`serialize` go. The `docchange` contract with the shell (text in `value`, text out in the event; the shell's `History` of texts) is unchanged, so `test/dom/helpers.ts#mount` and every shell test keep passing.
-
-A keystroke costs only what it changed (round six): `docchange` still fires with the text on every edit, but the shell projects it into the link (pack, `replaceState`, the library's keep, the tab's title) only when typing pauses (150 ms), and flushes that projection at once before anything reads the link as the document (the window's blur, the focus leaving the editor, leaving the page, Share and every copy of the link, exports, the password, the title box; `currentHash()` in kit/route.ts outside the shell). A host never parses its own echo: `ours(value)` says the shell handed back the text it last wrote. A host draws again for a `text-select` only when `selectionMoved(key)` says its bar would show something else.
+A keystroke costs only what it changed (Paul, 2026-10-10: "it's starting to feel really slow"): `docchange` still fires with the text on every edit, but the shell projects it into the link (pack, `replaceState`, the library's keep, the tab's title) only when typing pauses (150 ms), and flushes that projection at once before anything reads the link as the document (the window's blur, the focus leaving the editor, leaving the page, Share and every copy of the link, exports, the password, the title box; `currentHash()` in kit/route.ts outside the shell). A host never parses its own echo: `ours(value)` says the shell handed back the text it last wrote. A host draws again for a `text-select` only when `selectionMoved(key)` says its bar would show something else.
 
 ### Each app: the view, and its commands as ops
 
 What stays in the editor as state (not in the document) is listed last for each.
 
-**Write** — view is the Doc itself (`read = (d) => d`; no model type; `richtext.Block` gone). Commands: marks → `text` ops over the selection (per block in a multi-block selection); heading/title/paragraph → `splice` replace of the block with a new `k`/`level`/`cls`; list on/off and indent/outdent → replace with `k: 'li'` and `depth ± 1` (≤ 3); align → replace attrs; Enter → `splitBlock`; Backspace at start → `joinBlocks`, or at a li's start the unlist rule (depth−1, else to `p`); insert icon/date → `text` op inserting `{ ic }` or words (an emoji from the picker is words); footnote → `text` op inserting `{ t: '', fn }`, its words typed in the endnotes (`<to-notes>`: a `line`-shaped `<to-text>` over `noteRuns(fn)` each) and written back as `text` ops replacing that one run; insert embed → `splice` a `fence` (and an empty `p` after); edit embed → replace the fence; remove embed → `splice`; paper → `head`. Word count, caret, link bubble: state.
+**Write** — view is the Doc itself. Commands: marks → `text` ops over the selection (per block in a multi-block selection); heading/title/paragraph → `splice` replace of the block with a new `k`/`level`/`cls`; list on/off and indent/outdent → replace with `k: 'li'` and `depth ± 1` (≤ 3); align → replace attrs; Enter → `splitBlock`; Backspace at start → `joinBlocks`, or at a li's start the unlist rule (depth−1, else to `p`); insert icon/date → `text` op inserting `{ ic }` or words (an emoji from the picker is words); footnote → `text` op inserting `{ t: '', fn }`, its words typed in the endnotes (`<to-notes>`: a `line`-shaped `<to-text>` over `noteRuns(fn)` each) and written back as `text` ops replacing that one run; insert a document → `splice` a `fence` (and an empty `p` after); edit it → replace the fence; remove it → `splice`; paper → `head`. Word count, caret, link bubble: state.
 
-**Outline** (src/apps/outline; built 2026-10-09) — `readOutline(doc): { items, links, depths, loose }` (li → `{ at, depth, runs, dir, label }`, fence with `depth=` → `{ doc }`, an item that is one web address → `{ doc: 'web\n<url>' }`, edges → links with `live`). Loose words (headings, paragraphs) read as a tree too, and `listify(doc)` is the one splice that makes them an outline, applied as the document arrives (undoable). Commands: a row's `<to-text shape=line>` emits `text` ops, offset to the item's block, plus `splice` replaces of the edges that named the item (`renameIn`); the line's kind and name → `splice` of the li with its attrs (`setLine`); Enter → `splitBlock` on a leaf, else a `splice` of an empty li (first child of an open parent, or after the family); Backspace on an empty item → `removeItem`; Tab/Shift+Tab → `shiftFamily`; Alt+arrows → `moveFamily`; a drop → `placeFamily` (a fence with no `depth=` is given one first); a document → `splice` of a fence with `depth=` after the family; a web address → `splice` of a li that is the address; connect/unlink/setLink → `splice` of edge blocks. A Tiny Little Office link typed or pasted as an item becomes that document (a fence). `outlineToDeck`/`outlineToMind`/`outlineToOrg`/`outlineToNet` are hand-offs (to Deck and Diagram, with `kind:` in the head), `toOpml` an export. State: `folded`, `zoom`, `sel`, `menuFor`, `connecting`, `drag`; footnotes number across items (`noteStart`).
+**Outline** — `readOutline(doc): { items, links, depths, loose }` (li → `{ at, depth, runs, dir, label }`, fence with `depth=` → `{ doc }`, edges → links with `live`). Loose words (headings, paragraphs) read as a tree too, and `listify(doc)` is the one splice that makes them an outline, applied as the document arrives (undoable). Commands: a row's `<to-text shape=line>` emits `text` ops, offset to the item's block, plus `splice` replaces of the edges that named the item (`renameIn`); the line's kind and name → `splice` of the li with its attrs (`setLine`); Enter → `splitBlock` on a leaf, else a `splice` of an empty li (first child of an open parent, or after the family); Backspace on an empty item → `removeItem`; Tab/Shift+Tab → `shiftFamily`; Alt+arrows → `moveFamily`; a drop → `placeFamily` (a fence with no `depth=` is given one first); a document → `splice` of a fence with `depth=` after the family; connect/unlink/setLink → `splice` of edge blocks. A Tiny Little Office link typed or pasted as an item becomes that document (a fence). `outlineToDeck`/`outlineToMind`/`outlineToOrg`/`outlineToNet` are hand-offs (to Deck and Diagram, with `kind:` in the head), `toOpml` an export. State: `folded`, `zoom`, `sel`, `menuFor`, `connecting`, `drag`; footnotes number across items (`noteStart`).
 
-**Deck and the fold apps** — `slides(doc): Slide[]` is `deckmodel.slidesOf` over `pages(doc.blocks)`; a slide also records its block span `[from, to)`. Commands: `patch(slide)` → `replaceSpan(from, to, slideBlocks(slide))`; `addPage` → `splice` `[hr, …blocks]`; `removePage` → `splice` of the span and its `hr`; `movePage` → `move`; sub-document → the span's fence replaced; theme/transition/color/qr/sides/pages → `head`. With `<to-text>` (phase 2) the slide's words are edited as blocks directly: headline = the `h` block (`line` shape), bullets = the li/p blocks of the span (`lines` shape), notes = the `quote` block (`lines`); `Slide` then is a layout type for drawing (`slide.ts`) only. `loosen` stays in `read()`. State: `cur`, `showing`, `shown`, `leaving`, `noting`, `field`.
+**Deck** (and its pages of another geometry: zine, booklet, brochure, comic, poster, badges) — `slidesOf(doc)` over `pages(doc.blocks)`; a slide also records its block span `[from, to)`. Commands: `patch(slide)` → `replaceSpan(from, to, slideBlocks(slide))`; `addPage` → `splice` `[hr, …blocks]`; `removePage` → `splice` of the span and its `hr`; `movePage` → `move`; sub-document → the span's fence replaced; theme/transition/color/qr/sides/pages → `head`. With `<to-text>` the slide's words are edited as blocks directly: headline = the `h` block (`line` shape), bullets = the li/p blocks of the span (`lines` shape), notes = the `quote` block (`lines`); `Slide` is a layout type for drawing (view.ts) only. `loosen` stays in `read()`. State: `cur`, `showing`, `shown`, `leaving`, `noting`, `field`.
 
-**Sheet** — `sheet(doc): Sheet` is `tableAt(doc, firstTable)` padded to the drawn rows (`ROWS`, `MIN_COLS` are the view's); `evaluate(doc, at)` (phase 3) for values. Commands: type in a cell → `cells` 1×1; paste/fill/clear/sort → `cells` rectangles (sort writes the used rows); insert/delete rows → `rows`; add/remove column → `cols`; type or name of a column → `col`; chart → `head` (or table attr via `withTable`); lock → `head` (`withLock` result). State: `sel`, `end`, `focused`, `rowsShown`, `fillTo`, `widths`, `rowMenu`, `clip`, `picked`, `caret`, computed values.
+**Sheet** — `sheet(doc): Sheet` is `tableAt(doc, firstTable)` padded to the drawn rows (`ROWS`, `MIN_COLS` are the view's); `evaluate(doc, at)` for values. Commands: type in a cell → `cells` 1×1; paste/fill/clear/sort → `cells` rectangles (sort writes the used rows); insert/delete rows → `rows`; add/remove column → `cols`; type or name of a column → `col`; chart → `head` (or table attr via `withTable`); lock → `head` (`withLock` result). State: `sel`, `end`, `focused`, `rowsShown`, `fillTo`, `widths`, `rowMenu`, `clip`, `picked`, `caret`, computed values.
 
-**Trip** — `stops(doc)` from the table (`tableStops`); add/move/edit/remove stop → `rows`/`cells`/`move` of table rows (a `rows` op with `n` and `rows`); units/linked → `head`. **Gantt** — `tasks(doc)`; edit → `cells`; add/remove → `rows`; indent → `cells` on the Task cell. **Draw** — `readDrawing(doc)`; a shape changed → `cells` on its row; added or taken away → `rows` (the joins renumbered by `cells`); a column wanted and missing → `cols`; alt, `grid:` and `tile:` → `head`; the pixel grid's one `p` → `splice`; the table's birth and death → `splice`. **Motion** — `anim(doc)`; an edit replaces the table block (`splice`), the granularity it has today. **Calendar** — `spans(doc)` from li; edit → replace li; zone/legend → `head`. **Calc** (src/apps/calc; built 2026-10-09) — `readCalc(doc): { mode, lines, at, loose }`: the tape is one `p`, a line each; `mode: graph` in the head. A loose text (a list, results after the sums, `y = …` lines, an old money mode's inputs, a heading) is made a tape as it arrives by `tidy`, one undoable edit. Commands: a line put in → `text` at the tape's end (the first line a `splice` of the `p`); a line changed or taken away → a `text` op over that line; clear → `splice`; mode → `head` plus the clearing `splice`. State: `entry`, `recall`, the caret between key taps. **Pixel** — the one `p` replaced. **Web, QR** — one `p` replaced; alt → `head`. **Invoice** — fields → `head`; items → `cells`/`rows`; notes → `p` blocks spliced.
+**Trip** — `stops(doc)` from the table (`tableStops`); add/move/edit/remove stop → `rows`/`cells`/`move` of table rows (a `rows` op with `n` and `rows`); units/linked → `head`. **Draw** — `readDrawing(doc)`; a shape changed → `cells` on its row; added or taken away → `rows` (the joins renumbered by `cells`); a column wanted and missing → `cols`; alt, `grid:` and `tile:` → `head`; the pixel grid's one `p` → `splice`; the table's birth and death → `splice`. **Motion** — `readAnim(doc)`; an edit replaces the keys table (`splice`). **Calendar** — `spans(doc)` from li; edit → replace li; zone/legend → `head`. **Calc** — `readCalc(doc): { mode, lines, at, loose }`: the tape is one `p`, a line each; `mode: graph` in the head. A loose text (a list, results after the sums, `y = …` lines, a heading) is made a tape as it arrives by `tidy`, one undoable edit. Commands: a line put in → `text` at the tape's end (the first line a `splice` of the `p`); a line changed or taken away → a `text` op over that line; clear → `splice`; mode → `head` plus the clearing `splice`. State: `entry`, `recall`, the caret between key taps.
 
-**The `lines` apps (site, links, lanes, timeline, seating, venn, net, spinner, santa, split, wordsearch, qr) and the diagram editor** — `rowsOf(doc, form): Row[]` is `lines.readLines` with `seen()` walking `doc.blocks` instead of re-parsing text; `blocksOf(rows, form): Block[]` is `writeLines` returning blocks. `DiagramElement.putRows(rows)` becomes `edit(replaceSpan(0, n, blocksOf(rows)))` — the same whole-document granularity as today's `type(text)`; `moveBlock`/`shiftBlock`/`placeBlock`/`removeRow`/`moveItem` in lines.ts become the `family` helpers of ops.ts where they coincide (they do: `depths` adds heading levels, which `family` takes as an option). `pageedit.ts`'s messages map to the same ops (`set` → `text` or `cells`; `add` → `splice`; `remove` → `splice`; `part` → `move`). State: `editing`, `draft`, `joining`, `mode`, `held`, `focusRow`.
-
-**Diagram** (src/apps/diagram; built 2026-10-09) — one app for org, mind, family, lanes, timeline, venn, seating and net, the kind a `head` field. There is no `rowsOf`/`blocksOf` form layer: `linesOf(doc)` reads each `li` as a line (its key before the first ": ", its words, the comma-separated things after the key, at the line editor's offsets) and `edgesOf(doc)` the edges; each kind's layout draws them through Draw's renderer, every shape carrying the `hit` it was drawn from. Commands: a tap on a thing lays a `<to-text shape=line>` exactly over its words (Draw's `wordsOver`), holding the part of the `li` the thing draws, and each change to it is one `text` op replacing that part (its line breaks written as " | "; plus `follow`: the edges naming a renamed person, the overlaps naming a renamed set); a new thing is one `splice` at once (or, one thing more in a list, a `splice` replacing its line), its words offered and chosen; remove → `removeItem` (trees, with their dotted lines), a `text` op (one thing of a list), `splice`s (a line, a lane, a thing and its connections); a drag → `placeFamily` (trees), `move` (+ a `text` op on the key, lanes), `text` ops out of one list and into another (seating, venn); join → `splice` of an edge; a lane, an edge-only node or an edge's words → `text`/`splice` wherever the name is (`rename`); kind → `head`. State: `target`, `joining`, `zoom`, `drag`.
+**Diagram** — one app for org, mind, family, lanes, timeline, venn, seating and net, the kind a `head` field. `linesOf(doc)` reads each `li` as a line (its key before the first ": ", its words, the comma-separated things after the key, at the line editor's offsets) and `edgesOf(doc)` the edges; each kind's layout draws them through Draw's renderer, every shape carrying the `hit` it was drawn from. Commands: a tap on a thing lays a `<to-text shape=line>` exactly over its words (Draw's `wordsOver`), holding the part of the `li` the thing draws, and each change to it is one `text` op replacing that part (its line breaks written as " | "; plus `follow`: the edges naming a renamed person, the overlaps naming a renamed set); a new thing is one `splice` at once (or, one thing more in a list, a `splice` replacing its line), its words offered and chosen; remove → `removeItem` (trees, with their dotted lines), a `text` op (one thing of a list), `splice`s (a line, a lane, a thing and its connections); a drag → `placeFamily` (trees), `move` (+ a `text` op on the key, lanes), `text` ops out of one list and into another (seating, venn); join → `splice` of an edge; a lane, an edge-only node or an edge's words → `text`/`splice` wherever the name is (`rename`); kind → `head`. State: `target`, `joining`, `zoom`, `drag`.
 
 ---
 
-## 4. The editor: `<to-text>` (phase 2)
+## 4. The editor: `<to-text>`
 
-`src/kit/text.ts` (one element, one file ~900 lines, replacing the 1,096 of `src/apps/write.ts` plus the `to-rich` hosts' glue). It edits a span of text blocks, model-driven; it never reads the DOM back except at `compositionend`.
+`src/kit/text.ts`, one element. It edits a span of text blocks, model-driven; it never reads the DOM back except at `compositionend`.
 
 ```ts
 export class ToText extends LitElement {
@@ -228,7 +178,7 @@ export class ToText extends LitElement {
   // 'text-enter' CustomEvent<{ shift: boolean }> (shape line; shift for Shift+Enter), 'text-exit' CustomEvent<{ dir: 'back' | 'forward' }>
   // (Backspace at the very start when shape !== 'doc'; Delete at a line's end), 'text-select' CustomEvent<Sel | null>,
   // 'text-selectall' (Mod+A with a line or lines box already whole), 'text-escape' (cancelable: Escape with no box open and no range: the host steps out)
-  exec(cmd: Command): void;      // 'b'|'i'|'u'|'s'|'h'|'link'|'unlink'|'fn'|'icon'|'date'|'title'|'h1'|'h2'|'p'|'quote'|'ul'|'ol'|'indent'|'outdent'|'left'|'center'|'right'|'justify'|'embed'
+  exec(cmd: Command): void;      // 'b'|'i'|'u'|'s'|'h'|'link'|'unlink'|'fn'|'icon'|'date'|'title'|'h1'|'h2'|'p'|'quote'|'ul'|'ol'|'indent'|'outdent'|'left'|'center'|'right'|'justify'
   get sel(): Sel | null; set sel(s: Sel | null);
 }
 export interface Pos { block: number; offset: number }   // offset in plain characters of the block; an icon, a footnote mark or a '\n' counts 1
@@ -251,13 +201,13 @@ Every `beforeinput` is `preventDefault()`ed and turned into ops, except while co
 | `insertFromPaste`, `insertFromDrop` | the paste pipeline |
 | `formatBold/Italic/Underline/StrikeThrough` (Safari's Mod+B…) | `exec('b'…)` |
 | `insertCompositionText`, `deleteCompositionText`, `insertFromComposition` | not prevented; see IME |
-| `historyUndo`, `historyRedo` | prevented; nothing — Mod+Z reaches the shell as today |
+| `historyUndo`, `historyRedo` | prevented; nothing — Mod+Z reaches the shell |
 | `insertOrderedList`, `insertUnorderedList`, `formatIndent`, `formatOutdent`, `formatJustify*` | `exec` of the matching command |
 | `insertHorizontalRule`, `insertLink`, `formatSetBlockTextDirection`, `formatFontColor`… | prevented, ignored |
 
 ### Rendering and reconciliation
 
-Lit `repeat` keyed by block object identity (a `WeakMap<Block, number>` hands out keys). A block renders as one element: `h1.title`/`h1`/`h2`/`p`/`li` (lists are `li`s side by side, their depth in `style="--d"`; the `ul`/`ol` wrappers of today's `blocksHtml` are not needed in the editor, which draws its own bullets and numbers via `listNumbers`), `blockquote`, a card (fence, table, rule, edge). Inside, runs render to `<b>/<i>/<u>/<s>/<mark>/<a>` nesting as `markedHtml`, atomic runs to `<span class=ic data-icon contenteditable=false role=img>` (the icon's SVG inside; a name outside the starter set after the one lazy load, a name nothing has as its name in small type), `<sup class=fn data-fn tabindex=0 contenteditable=false>`, `'\n'` to `<br>`. Only blocks whose identity changed re-render (the ops say which: a `text` op touches one block), and a changed block is re-rendered whole — no run-level diffing. After render, the model `sel` is written to the DOM selection (`Pos → Range`: walk the block's text nodes, counting atomic elements as 1). `selectionchange` maps back (`Range → Pos`) and fires `text-select`, from which the host's toolbar sets its pressed states (today's `queryCommandState` goes).
+Lit `repeat` keyed by block object identity (a `WeakMap<Block, number>` hands out keys). A block renders as one element: `h1.title`/`h1`/`h2`/`p`/`li` (lists are `li`s side by side, their depth in `style="--d"`; the editor draws its own bullets and numbers via `listNumbers`), `blockquote`, a card (fence, table, rule, edge). Inside, runs render to `<b>/<i>/<u>/<s>/<mark>/<a>` nesting as `markedHtml`, atomic runs to `<span class=ic data-icon contenteditable=false role=img>` (the icon's SVG inside; a name outside the starter set after the one lazy load, a name nothing has as its name in small type), `<sup class=fn data-fn tabindex=0 contenteditable=false>`, `'\n'` to `<br>`. Only blocks whose identity changed re-render (the ops say which: a `text` op touches one block), and a changed block is re-rendered whole — no run-level diffing. After render, the model `sel` is written to the DOM selection (`Pos → Range`: walk the block's text nodes, counting atomic elements as 1). `selectionchange` maps back (`Range → Pos`) and fires `text-select`, from which the host's toolbar sets its pressed states.
 
 ### IME and composition
 
@@ -265,32 +215,24 @@ Lit `repeat` keyed by block object identity (a `WeakMap<Block, number>` hands ou
 
 ### Paste, copy, cut
 
-Copy/cut write `text/plain` = TLO of the selected blocks (`write` of the sliced blocks, runs cut at offsets) and `text/html` = `docToHtml` of the same with a `<meta name="generator" content="TinyLittleOffice">` marker. Paste, in order: (1) our own HTML (marker present) → parse the `text/plain` TLO → blocks; (2) a Tiny Little Office link alone → `splice` a fence (`linkToRef`); (3) a web address alone, doc shape → a `p` of that address (card); (4) `text/html` → `htmlToBlocks(body)` (`src/kit/clipboard.ts`, the surviving part of today's `domToBlocks`: tags and styles to marks, `<ul>/<ol>/<li>` to li depth, Google Docs' `<b style="font-weight:normal">`, white-space collapse) → fitted to the shape; (5) plain text with a newline, doc shape → `parse` as TLO (lenient: pasted Markdown becomes headings, lists, tables); (6) plain text → `text` op. Fitting: `lines` keeps li/p only; `line` joins runs with spaces.
+Copy/cut write `text/plain` = TLO of the selected blocks (`write` of the sliced blocks, runs cut at offsets) and `text/html` = `docToHtml` of the same with a `<meta name="generator" content="TinyLittleOffice">` marker. Paste, in order: (1) our own HTML (marker present) → parse the `text/plain` TLO → blocks; (2) a Tiny Little Office link alone → `splice` a fence (`linkToRef`); (3) a web address alone, doc shape → a `p` of that address (card); (4) `text/html` → `htmlToBlocks(body)` (`src/kit/clipboard.ts`: tags and styles to marks, `<ul>/<ol>/<li>` to li depth, Google Docs' `<b style="font-weight:normal">`, white-space collapse) → fitted to the shape; (5) plain text with a newline, doc shape → `parse` as TLO (lenient: pasted Markdown becomes headings, lists, tables); (6) plain text → `text` op. Fitting: `lines` keeps li/p only; `line` joins runs with spaces.
 
 ### Undo/redo
 
-The kernel supplies `invert`. The shell's `History` keeps the document as text (it works for every app and is tested in `apps.test` and `shell-undo`); it gains the selection: `record(before: string, sel?: Sel)` and `undo()` returns `{ text, sel }`, which the shell passes to the editor (`to-text`'s `sel` setter) so the caret lands where the change was. Typing bursts coalesce as now (700 ms). `invert` is used by the editor to roll back a composition the browser abandoned and by tests (`apply(apply(d, op), invert(d, op)) deepEquals d` over random ops). See decision 2.
+Undo is an op log (kit/history.ts; decision 2, §6): every change is a list of ops, recorded with the document it was made on, its inverse worked out by `invertAll` and kept beside it, with the selection before and after, so an undo puts the caret back where the change was. Letters typed within 700 ms fold into one entry, and a composition lands as one op. The title and the head's other fields are `head` ops like any other.
 
 ### Atomic runs and blocks
 
-Footnote marks, icons and cards are `contenteditable=false`; a mark is `tabindex=0` and, on click, Enter or Space, says `text-note` ({block, nth}) for the host to open its note; Backspace/Delete beside or on one removes it (one `text` or `splice` op). A note's words are typed where the host draws them, at the foot (Write's endnotes, a slide's foot, under an outline): `<to-notes>` (kit/notes.ts) draws each note as a `line`-shaped `<to-text>` over `noteRuns(fn)` and tells the host `note-change` (one `text` op replacing that mark's run), `note-back` and `note-remove`; only a host with `notes` is offered the Footnote command. (2026-10-10: the note popover is gone, docs/editing.md §2.)
+Footnote marks, icons and cards are `contenteditable=false`; a mark is `tabindex=0` and, on click, Enter or Space, says `text-note` ({block, nth}) for the host to open its note; Backspace/Delete beside or on one removes it (one `text` or `splice` op). A note's words are typed where the host draws them, at the foot (Write's endnotes, a slide's foot, under an outline): `<to-notes>` (kit/notes.ts) draws each note as a `line`-shaped `<to-text>` over `noteRuns(fn)` and tells the host `note-change` (one `text` op replacing that mark's run), `note-back` and `note-remove`; only a host with `notes` is offered the Footnote command.
 
 ### Phones (iOS Safari)
 
-The editable's font-size is never below 16px (prevents the focus zoom); `focus({ preventScroll: true })` everywhere, and the page is the visible window with the document in a column that scrolls by itself (§9), so focusing never scrolls the page and the caret is kept inside the column through kit/scroll.ts; the formatting bar and popovers are placed inside the column's box (`room()`, kit/scroll.ts), which is the visual viewport's, so they sit above the keyboard; `autocapitalize="sentences"`, `enterkeyhint="enter"` (`"done"` for `line`); no `execCommand` anywhere; `-webkit-user-modify` not used; selection restore is deferred to `requestAnimationFrame` after render (Safari drops a selection set synchronously during a DOM swap); a `pointerdown` on a toolbar button `preventDefault()`s so the keyboard stays up (today's `keepFocus`).
+The editable's font-size is never below 16px (prevents the focus zoom); `focus({ preventScroll: true })` everywhere, and the page is the visible window with the document in a column that scrolls by itself (§7), so focusing never scrolls the page and the caret is kept inside the column through kit/scroll.ts; the formatting bar and popovers are placed inside the column's box (`room()`, kit/scroll.ts), which is the visual viewport's, so they sit above the keyboard; `autocapitalize="sentences"`, `enterkeyhint="enter"` (`"done"` for `line`); no `execCommand` anywhere; `-webkit-user-modify` not used; selection restore is deferred to `requestAnimationFrame` after render (Safari drops a selection set synchronously during a DOM swap); a `pointerdown` on a toolbar button `preventDefault()`s so the keyboard stays up.
 
-### Adoption order and what each deletes
-
-1. **Write** (`src/apps/write.ts` → `src/apps/write/editor.ts`, ~350 lines of toolbar, notes list, bubble and popover around one `<to-text shape=doc>`). Deleted: `domToBlocks`, `embedBeside`, `noteBeside`, `blockOf`, `isBlockTag`, `caretAfter`, `renumber`, `chips`, `insertAsked`, `insertHtmlByHand`, the DOM-surgery `link()`, `makeTitle`, `exec` with `execCommand`/`styleWithCSS`, `onPaste`, `insertEmbed`, `removeEmbed`, `onBlur` re-linkify, `itemAtStart`, `unlist`, `onBeforeInput` (its two rules move into the editor), `onKey`'s Tab/Backspace handling, `onSelection` with `queryCommandState`, `loadHtml`/`blocksToHtml`/`runsToHtml` (the editor renders), `shift()`, `mode`, the `to-rich` element. Kept: `blocksHtml`/`markedHtml`/`docToHtml` in write.def.ts (exports), `footnotes.css`.
-2. **Outline** — each row's `<to-rich mode=line>` becomes `<to-text shape=line .blocks=${[item block]}>`; `rich-change` → `text-ops` offset by the row's block index; `rich-enter` → `text-enter`; the toolbar's `this.field?.exec` stays (same name). Deleted: `focusItem`'s range dance (set `sel`), `notesIn` counting (the editor numbers from `noteStart`).
-3. **Deck, zine, booklet, brochure, poster, badges, comic** (`pages.ts`, `deck.ts`, `fold.ts`): headline `<to-text shape=line>` over the `h`; bullets `<to-text shape=lines>` over the span's li/p blocks (Tab = indent op, so `shift()` by two spaces goes); notes `<to-text shape=lines>` over the `quote` (replacing the `<textarea>`). Deleted: `headline()`/`words()`/`textTools()`'s to-rich glue, `patch({ bullets })` string lists, `depthOf` on leading spaces.
-4. **Page sections** (site, links): gone, with the app that drew them (Paul, 2026-10-11); a document never runs code.
-
-Tests: `test/dom/text.test.ts`, `deck-write.test.ts`, `footnotes.test.ts`, `lists.test.ts`, `outline.test.ts` type by setting `innerHTML` and firing `input` — that is the contentEditable contract and it goes. They are rewritten against a helper `typeIn(el, text)` that dispatches `beforeinput` (`inputType: 'insertText'`, `data`) and `key(el, 'Enter')` that dispatches `beforeinput insertParagraph`; selection is set through the element's `sel` setter. Whether happy-dom's `InputEvent`/`Selection` suffice is the first risk below; if not, the editor's tests land in Vitest browser mode (phase 6 pulled forward for this one file).
 
 ### Rows chosen whole: `src/kit/rows.ts`
 
-Every app with rows (Outline's items now; Trip's stops and the schedule's tasks as they adopt it) chooses rows whole through one Lit `ReactiveController`, so the keys, the handle, the drag, the clipboard and the bar under a range are the same everywhere (docs/editing.md §3, §6). The host knows its rows and its document; the controller knows nothing of either.
+Every app with rows (Outline's items, Trip's stops, the schedule's tasks) chooses rows whole through one Lit `ReactiveController`, so the keys, the handle, the drag, the clipboard and the bar under a range are the same everywhere (docs/editing.md §3, §6). The host knows its rows and its document; the controller knows nothing of either.
 
 ```ts
 const rows = new Rows<Id>(host, {
@@ -311,7 +253,7 @@ rows.release(id?, offset?); rows.select(range); rows.renderContext(); lastCopied
 
 ---
 
-## 5. The formula engine over a table block (phase 3)
+## 5. The formula engine over a table block
 
 ```ts
 // src/doc/table.ts
@@ -327,113 +269,48 @@ export function tableAt(doc: Doc, at: number): Table | null;
 /** The doc with block `at` written from `t`: cells and columns into the block; lock and chart where they were read from. */
 export function withTable(doc: Doc, at: number, t: Table): Op[];
 export const firstTable = (doc: Doc) => doc.blocks.findIndex((b) => b.k === 'table');
-// moved from formula.ts, now over Table/rows instead of a 1,000-row Grid:
-refToRC, rcToRef, rangeOf, rangeRef, lockedRanges, isLocked, withLock, remapLock, shiftFormula, remapRefs, movedIn, movedOut,
+// and over a table's cells:
+refToRC, rcToRef, rangeOf, rangeRef, lockedRanges, isLocked, withLock, remapLock, shiftFormula, movedIn, movedOut,
 usedSize, copyCells, pasteCells, clearCells, fillCells, seriesOf, sortRows, nameKey, namedCells, ROWS (= 1000, the most a reference may name), MAX_COLS (26)
 
 // src/doc/formula.ts
 export type CellValue = number | string | null;
 export interface Evaluated { values: CellValue[][]; named: Map<string, [number, number]> }   // values for every used row, `cols.length` wide
-export function evaluateTable(t: Table, today = todaySerial()): Evaluated;   // tokenize/parse/evalNode, FUNCTIONS, parseLiteral, unchanged
+export function evaluateTable(t: Table, today = todaySerial()): Evaluated;   // tokenize, parse, evaluate
 export function evaluate(doc: Doc, at = firstTable(doc)): Evaluated | null; // evaluateTable(tableAt(doc, at))
 export { FUNCTIONS, COLUMN_TYPES, parseLiteral, formatValue, formatCell, dateToSerial, serialToIso, todaySerial }
 ```
 
-`Grid` (1,000 padded rows) and `Sheet { grid, types, names, chart, lock }` are deleted; the sheet editor's `read(doc)` is `tableAt(doc, firstTable(doc))` plus the view's padding (`drawn` rows, `MIN_COLS` columns) — `grid[r]?.[c] ?? ''` already tolerates a short table, and `evaluateTable` returns `null` for a cell past the used rows. `columnName`/`defaultColumnName` stay (view). `sheet.def.ts`'s `measured`, `chartOfSheet`, `sheetToCsv`, `sheetToXlsx`, `toExcelFormula` take `Table` + `Evaluated`. `insertRows/deleteRows/insertColumns/deleteColumns` become the `rows`/`cols` ops' `apply`.
+The sheet editor's view is `tableAt(doc, firstTable(doc))` plus its padding (`drawn` rows, `MIN_COLS` columns); `evaluateTable` returns `null` for a cell past the used rows. The Spreadsheet's exports (CSV, .xlsx with `toExcelFormula`) take `Table` + `Evaluated`.
 
-Because `evaluate` takes any `Doc` and block index, a table block inside a Write document or on a slide is evaluated in place: Write's view draws a `table` block through the sheet's `measured` renderer rather than wrapping it as a `sheet` fence (the text is unchanged: it was a table before and after; `richtext.serializeDoc`'s "a sheet that is a table and nothing more is written as that table" rule is simply the kernel keeping the block).
-
-### Costumes become templates or views
-
-- **Budget, expense log, invoice table, project tracker, loans, models (subscription, café, freelancer, fund), training log, months**: already Sheet templates in `src/lib/templates.ts` (`SHEET`), built with `write()` of table blocks with `chart`/`lock` heads; they move to `src/apps/sheet/templates.ts` unchanged.
-- **Invoice** (kept as an app under Page in the phase-4 table): its lines table gains an `Amount:money` column of formulas (`=B1*D1`, written by the template and by the editor when a line is added) and the page view (`invoice.def.ts`) calls `evaluate(doc, firstTable(doc))` for the amounts and sums the column for subtotal; tax and currency stay in the head. `parseInvoice`'s own arithmetic (`amountOf`-based) is deleted. The invoice editor's `patchItem` becomes `cells` ops.
-- **Calculator money modes** (`mode: mortgage | invest | cashflow | interest`): each is a Sheet template with an `Assumption:name | Value:number` pair of columns and a results column of formulas (`=PMT(rate/12, years*12, -price*(1-down/100))`, `=FV(...)`, `=NPV(rate/100, B1:B10)`, `=IRR(...)`, `=principal*(1+rate/100/times)^(times*years)`), the year-by-year tables as filled-down rows, `chart: line` where the calc drew one, `lock` on the formulas. `calc.ts`/`calc.def.ts` keep `calc` and `graph` (a tape is not a table); the money branches of `calc.def.ts` (the card/table/chart page), `FIELDS`, `withDefaults`, `mortgage`, `invest`, `cashflow`, `interest`, `inputs`, and `readCalc`'s money detection are deleted; `readCalc` of a money-shaped text hands over to the matching sheet template. What is lost is the four-figure headline card; the sheet shows the table and the chart. Flagged in §7.
+Because `evaluate` takes any `Doc` and block index, a table block inside a Write document or on a slide is evaluated in place, and Write draws it with the sheet's own page.
 
 ---
 
-## 6. Migration order and cut lines
+## 6. The decisions (2026-10-09)
 
-Each step is one merge; main stays green (typecheck, unit, DOM, build); the path it replaces goes in the same change. Sizes are files touched.
-
-| # | merge | content | deletes | tests | size |
-|---|---|---|---|---|---|
-| 1 | **`src/doc/` with today's semantics** | `lib/tlo.ts` → `doc/tlo.ts` + `doc/model.ts` (`Tlo`→`Doc`); `lib/richtext.ts` minus `parseDoc`/`serializeDoc` → `doc/notes.ts`; `richtext.parseDoc`/`serializeDoc`/`Block` stay in `apps/write.def.ts` for now (they are Write's view). Import paths updated everywhere. | `src/lib/tlo.ts`, `src/lib/richtext.ts` | `tlo.test`, `richtext.test`, `footnotes.test`: import paths only | ~75 (mechanical) |
-| 2 | **Runs and columns in blocks; the byte-stable writer; `foldNotes` in `parse`** | `runs: Run[]` on h/p/li/quote; `cols: Column[]`; `writeInline` with the parse-back check; `plainText`; the property test over templates and skill examples | `tlo.plain`, `richtext.plainInline/serializeInline`; every `b.text.split('\n')` and `parseInline(b.text)` in the models and drawings | `tlo.test` block literals rewritten to runs (same cases); `richtext.test` folded into `doc.test`; `footnotes.test` adapted; `skill.test` must pass unchanged | ~40: `deckmodel`, `outlinemodel`, `calmodel`, `sitemodel`, `lines`, `diagram` (`wordsOf`, `asItems`), `drawmodel` (`looseDrawing`), `animmodel`, `calc`, `pixel.def`, `contract.def`, `markdown`, `write.def`, `outline.def`, `slide`, `deck.def`, `api`, `templates`, tests |
-| 3a | **`ops.ts`; `DocElement.read/edit`; the tree apps** | `Op`/`apply`/`invert` + `family` helpers (from `outlinemodel` and `lines`); Outline on `read(doc)` + ops | `outlinemodel.shift/move/place/remove/blockEnd`, `lines.moveBlock/shiftBlock/placeBlock/removeRow/blockEnd`; `commit`/`serialize` in those editors | `outline-lines.test` → ops tests; `apps.test` round trips keep (strings in, strings out); `dom/outline`, `dom/lists` keep | ~14 |
-| 3b | **Deck and fold on spans** | `slidesOf` returns spans; `PagesElement.patch` → `replaceSpan`; settings → `head` ops | `PagesElement.savePages`, `serializeDeck`/`writeSlides` as editor paths (kept for `read()` and `outlineToDeck`) | `dom/deck-write`, `footnotes` keep; `apps.test` deck keep | ~8 |
-| 3c | **Tables: `table.ts`; Sheet, Trip, Gantt, Draw, Motion, Invoice, Split on ops** | `tableAt`/`withTable`; `rows`/`cols`/`cells` apply with remaps; `Grid` gone | `formula.Sheet/Grid/readSheet/serializeGrid/parseGrid/typesOf/namesOf/chartOf/tableSheet/insertRows/deleteRows/insertColumns/deleteColumns` (become ops), `sheet.ts#save` locked-cell loop | `formula.test`, `sheet-rows.test`, `dom/sheet-rows`, `dom/sheet-cal`: Table API in place of Grid; same assertions | ~16 |
-| 3d | **Lines apps and pages on `rowsOf(doc)`/`blocksOf(rows)`** | `lines.seen` over blocks; `DiagramElement.putRows` → ops; `pageedit` messages → ops | `readLines(text)`/`writeLines(rows): string` signatures | `site.test`, `pages.test`, `apps.test` lines cases: signature change | ~30 (every `*.def.ts` with a form) |
-| 3e | **The rest**: Cal, Calc, Pixel, Contract, Web, QR, Anim keys | `read(doc)` + replace ops | their `parse`/`serialize` pairs as editor paths | `calendar.test`, `calc.test` keep | ~10 |
-| 4 | **`<to-text>` and every rich-text host** | `src/kit/text.ts`, `src/kit/clipboard.ts`; Write, Outline, Deck/fold adopt; `History` records selection | `apps/write.ts` contentEditable code (listed in §4), `to-rich`, `pageedit`-free; `richtext.parseDoc/serializeDoc` (Write's view is the Doc) | `dom/text`, `deck-write`, `footnotes`, `outline`: rewritten on `beforeinput`; new `text.test` for Pos↔Range, inputType table, paste pipeline, `invert` property | ~20 |
-| 5 | **Page sections on `<to-text>`** | site/links/invoice sections edited beside the frame | `pageedit.ts` `EDIT_SCRIPT`, `editData`, `diagram-page.ts` held/born/stamp logic, `data-lf*` in page HTML | `site.test` pageedit cases, `dom/pages`, `dom/page-frames` rewritten | ~12 |
-| 6 | **Formula engine over the table block** | `doc/formula.ts` `evaluate(doc, at)`; Sheet view evaluates; Write and slides draw table blocks evaluated in place | `formula.ts` under `src/lib`; the "a table in a text is a sheet fence" rewrite in Write's read | `formula.test` (evaluate over Table), `exports.test` (xlsx/csv), `apps.test` embed cases | ~10 |
-| 7 | **Costumes** | invoice `Amount` column + `evaluate`; four money templates; calc money modes removed; sheet templates to `apps/sheet/templates.ts` | `calc.ts` money functions, `calc.def.ts` money page, `invoice.def.ts` arithmetic | `calc.test`, `apps.test` calc/invoice cases, `templates.test`, `skill.test` (the calc example is `mode: mortgage`? — regenerate the skill) | ~10 |
-
-Steps 1–2 are the kernel (phase 1 lands at 3e); 4–5 are phase 2; 6–7 phase 3. 3a–3e can be merged in any order after 2; 4 needs 3a–3b; 6 needs 3c. If phase 0's folder move is in flight on the same box, do step 1 after it lands (both move files).
-
-Tests that must be rewritten: `tlo.test` (literals), `richtext.test` (folded), the five DOM editor tests named in step 4, `site.test`/`dom/pages` for pageedit, `formula.test`/`sheet-rows` for the Table API. Tests that keep passing with import changes only: `apps.test` (string round trips through `read`), `outline-lines`, `calendar`, `calc` (until 7), `exports`, `markdown-agents`, `templates`, `embeds`, `envelope`, `codec`, `tinier`, every shell DOM test, `skill.test` (the hard gate for byte-stability).
-
----
-
-## 7. Risks, and three decisions
-
-### Risks
-
-1. **Byte-stability of the inline writer.** Making runs the model means every block the kernel writes passes through `writeInline`. The parse-back check keeps canonical text identical; the gate is `skill.test` plus the new property test over all templates. Non-canonical inputs (`__bold__`, `<u>`, backtick spans, `[^1]` notes) will be rewritten canonically in any app, where today only Write and Deck did so — intended ("read leniently, write canonically"), but it will surface in `apps.test` cases that compare strings after a model round trip.
-2. **happy-dom and `beforeinput`.** The editor's tests need `InputEvent` with `inputType`/`data`/`getTargetRanges` and a faithful `Selection`. happy-dom has `Selection` but `getTargetRanges` is uncertain; if it fails, `test/dom/text.test.ts` becomes the first Vitest-browser-mode file (phase 6 brought forward for one file), and the unit-level `Pos↔offset`, ops and paste-fitting logic are tested in node without a DOM.
-3. **IME.** Compositions interleaved with `deleteContentBackward` (Android), `insertReplacementText` (iOS autocorrect) and dead keys; the design reads the composing block back once at `compositionend`, which is the pattern that works, but it needs a device pass at 390px before step 4 merges.
-4. **Churn against the other agent.** Steps 1 and 3d touch ~75 and ~30 files; coordinate with the phase-0 folder move so the two do not both rename the same files in one week.
-5. **Undo granularity.** Snapshot history coalesces by time (700 ms); a `cells` paste or a `rows` op is one step as today. Fine, but if decision 2 goes to an op log, every editor must emit ops for every change (3a–3e make that true).
-6. **The calculator's money modes** lose their headline card when they become sheet templates (§5); `readCalc`'s loose reading ("Price: $350,000 is a mortgage") must redirect to a template or be dropped.
-7. **In-frame page editing** is a feature the README leads with; step 5 changes how it feels (decision 3).
-8. **`evaluate` on every render** of a Write document with tables — small documents, but cache by block identity (the `Evaluated` for an unchanged table block object is reused).
-
-### Three decisions for a human
-
-1. **Runs are the stored model (recommended), or text is stored and runs are a derived view.** Runs-in-model is what rebuild.md names and what the editor and views need; its cost is the byte-stable writer (the parse-back check, ~30 lines) and the acceptance that *any* app now writes canonical inline Markdown for blocks it touches. The alternative keeps `text: string` in blocks and parses to runs on demand; smaller step 2, but rich text then lives in two forms and the editor converts at every edge.
-2. **Undo stays the shell's text-snapshot `History` with the selection added (recommended), or becomes an op log in the kernel using `invert`.** Snapshots work for every app today and across the title; `invert` exists either way (tests, IME rollback). An op log would give per-op granularity and selection by construction, but every app's change must then be ops (true after 3e) and the shell's `state()`/`step()` and `shell-undo` tests are rewritten.
-3. **Page sections**: none (decision 3 below).
-
-### Critical files for implementation
-
-In the old tree (tagged `v0-before-rebuild`):
-
-- `src/lib/tlo.ts` — becomes `src/doc/tlo.ts` + `src/doc/model.ts`; the parser and writer, and where runs and columns are added
-- `src/lib/richtext.ts` — its helpers become `src/doc/notes.ts`; its `Block`/`parseDoc`/`serializeDoc` are what the kernel replaces
-- `src/lib/formula.ts` — `Grid`/`Sheet`, remaps and locks become `src/doc/table.ts`; the evaluator becomes `src/doc/formula.ts#evaluate(doc, at)`
-- `src/apps/write.ts` — the contentEditable editor `<to-text>` replaces, and the one `to-rich` element its hosts (`outline.ts`, `pages.ts`) depend on
-- `src/lib/lines.ts` — `readLines`/`writeLines` and the family-moving helpers that become `rowsOf(doc)`/`blocksOf(rows)` and `src/doc/ops.ts`
-
-
----
-
-## 8. Greenfield adjustments and the decisions (2026-10-09)
-
-The rebuild went greenfield, on a branch of its own that became main (docs/history/rebuild.md). So:
-
-- §6 is not a migration; it is the **order of building** `src/doc/` and the apps on it: model + tlo + notes (steps 1–2 as one: port `src/lib/tlo.ts` and the helpers of `richtext.ts` from the old tree with runs and columns in the blocks from the start, byte-stable writer, `foldNotes` in parse), then `ops.ts`, `table.ts`, `formula.ts`; then `<to-text>`; then the apps in the order of docs/history/rebuild.md.
-- The byte-stability gate is a property test over every template and every example in the old tree's docs/tlo.md and skill/tinyoffice/SKILL.md: `write(parse(x)) === x`.
-- The editor's tests run in **Vitest browser mode** from the first commit (risk 2 is gone); `Pos↔offset`, ops, paste fitting are node tests.
-- There is no `to-rich`, no `pageedit.ts`, no `execCommand`, no contenteditable outside `<to-text>`, ever.
+- The byte-stability gate is the corpus (test/doc/corpus.test.ts): every template, every example in docs/tlo.md and skill/tinyoffice/SKILL.md, and the apps' examples at the tag `v0-before-rebuild`: `write(parse(x)) === x`.
+- The editor's tests run in **Vitest browser mode**; `Pos↔offset`, ops and paste fitting are node tests.
+- There is no `execCommand` and no contenteditable outside `<to-text>`, ever.
 - Invoice is a **Write template**: a table block with an `Amount:money` column of formulas, evaluated in place by `evaluate(doc, at)`, drawn as paper by Write's print view; its fields (`from`, `to`, `number`, `date`, `due`, `tax`, `currency`, `terms`) are head fields (decided with Paul, 2026-10-09).
-- The calculator's money modes are Sheet templates (§5); the headline figure is an attribute on the table (`{big=Payment}`) the sheet view draws large above the table, so nothing is lost.
+- Money (a mortgage, savings, cash flow, interest) is Sheet templates, not modes of the calculator; the headline figure is an attribute on the table (`{big=Payment}`) the sheet view draws large above the table, so nothing is lost.
 
 **Decision 1 — runs are the stored model.** Yes. Every app writes canonical inline Markdown for the blocks it touches; the parse-back check keeps canonical text byte-identical.
 
-**Decision 2 — undo is an op log in the kernel**, not text snapshots. Greenfield removes the reason for snapshots (the old shell tests). Every editor emits ops; `History` holds `{ ops, inverse, sel }` entries, coalescing typing bursts (700 ms) and composition; the title and head fields are `head` ops like any other. `invert` is therefore load-bearing and property-tested.
+**Decision 2 — undo is an op log in the kernel**, not text snapshots. Every editor emits ops; `History` holds `{ ops, inverse, sel }` entries, coalescing typing bursts (700 ms) and composition; the title and head fields are `head` ops like any other. `invert` is therefore load-bearing and property-tested.
 
 **Decision 3 — there are no page sections.** Paul, 2026-10-11, removed the app that drew them. It rendered arbitrary HTML, CSS and script from a link inside a page served from tinylittleoffice.com, a phishing kit with our domain on it, which no sandbox makes safe. A document never runs code; the Display Link shows every app's pages as pictures.
 
 ---
 
-## 9. The shell, the chrome and the column (round eight, 2026-10-10)
+## 7. The shell, the chrome and the column (2026-10-10)
 
 The shell is thin. `<to-shell>` (kit/shell.ts) keeps the route, the document, its projection to the link (`writeLink`, `flushLink`, the 150 ms pause), the library's keep (kit/library.ts `Keeper`), the title and the editor's mounting. Around it are elements that take their state as properties and speak back by events, each under 500 lines:
 
 | element | file | what it is | says back |
 |---|---|---|---|
 | `<to-chrome>` | kit/chrome.ts | where things sit: the header and its words, the menu button, the banners (a short link's time left, another version kept here), the column and the bar's place in it | `to-drawer-open`, `to-share-open`, `to-retitle`, `to-copy-new`, `to-arrival-close`, `to-other-close` |
-| `<to-share>` | kit/share-dialog.ts | the Share dialog: the link and where it fits, the short link, posting, the QR code, the embed code | `to-owned` |
+| `<to-share>` | kit/share-dialog.ts | the Share dialog: the link and where it fits, the short link, posting, the QR code, the embed code | `to-link-copied` |
 | `<to-privacy>` | kit/privacy-dialog.ts | unlock, the password, the lock beside the title (`trustButton`), the Share dialog's Password part (`renderProtect`), the Privacy dialog | `to-unlock`, `to-lock`, `to-share-open` |
 
 and, as before, the editor, `<to-drawer>` (which, with a document open, begins with This document: Share… and Download), `<to-find>`, `<to-toast>` and the shortcuts dialog. The page's keys are kit/keys.ts `pageKey`.
@@ -448,10 +325,9 @@ and, as before, the editor, `<to-drawer>` (which, with a document open, begins w
 
 **Why, and the price.** Safari on iOS does not make the page shorter for the keyboard, only the visible window; a bar stuck to the page's top had to be measured into place (`--to-vv-top`, `--to-stuck-h`, a frame-by-frame watch after every resize, focus and touch) after events that came late or never, and was found parked a third of the way down. A column the visible window's height puts the bar where it belongs with nothing measured but the window. **The price is Safari's toolbar: it no longer collapses as the words scroll**, since the page itself never scrolls, so a phone shows a little less of the document than a page that scrolled the window would.
 
-
 ---
 
-## 10. The grammar, written once, and the properties fuzzed from it (round nine, 2026-10-10)
+## 8. The grammar, written once, and the properties fuzzed from it (2026-10-10)
 
 TLO's grammar is written formally once, in `test/doc/tlo-grammar.ts` (`TLO_EBNF`, ISO 14977 EBNF read by a forty-line
 reader, `readGrammar`): the head, the nine blocks, attributes, tables and their typed headings, fences, edges,
@@ -463,8 +339,7 @@ Two generators come from it, both with fast-check, both biased to the hard cases
 attributes that look like words, `\{`, `~~` beside a link, empty cells, items nested deep, icons and emoji in names,
 right-to-left words): `textOf(rule)` makes texts from the EBNF; `arbitraryDoc()` makes models of the kernel as far as
 the format can say them, and `sayableLine`/`sayableDoc` list, one rule a line, what it cannot (a mark never begins or
-ends with a space; an item is at most one deeper than the item before it; "a line's words never begin or end with
-spaces" was taken out in round ten, when the format learned to say them).
+ends with a space; an item is at most one deeper than the item before it).
 `arbitraryOp(doc)` and `arbitraryEdits()` make operations that apply.
 
 The properties, each a `fc.assert`-style check whose failure names the shrunk counterexample (200 cases each;
@@ -493,11 +368,11 @@ and escapes every mark where it does not); our HTML put an ordered item after a 
 list could start deeper than the text can say.
 
 **The dictionary, measured.** `npm run dictionary` (scripts/dictionary.ts) trains a deflate dictionary of the same
-size on the corpus (test/doc/corpus and generated documents) and reports every template's link under today's and the
+size on the corpus (test/doc/corpus and generated documents) and reports every template's link under the current and the
 trained one. It changes only if every template is shorter or equal and the largest template's link is 5% shorter or
 more; a second dictionary would be read under a new flag letter beside `y`, so links made with the first still open.
 
-## 11. Random walks over the chrome (round nine, 2026-10-10)
+## 9. Random walks over the chrome (2026-10-10)
 
 The bugs found by hand on a phone (the bar parked mid-screen, a dialog cut by the edge, the keyboard taking the focus)
 were each an invariant broken after some sequence of actions. `test/browser/walks.test.ts` walks such sequences with
@@ -533,13 +408,13 @@ What they found on their first runs, each fixed with a test: Escape or Enter in 
 body (it goes back where it was, or to the column); Escape in a sheet's column name kept what was typed, and dropped
 the focus (it puts the name back, and either key goes to the column's first cell); the way home followed from the keys
 left the focus on nothing (the home page's column has it); the palette opened by the tap that closed a menu gave the
-focus back to nothing (to the menu's button); the site's page, ready late, took the focus from a menu opened meanwhile;
+focus back to nothing (to the menu's button);
 a template chosen in the drawer asked to leave over the open drawer, two modals; printing left the focus on nothing;
 a dialog closed over a frame whose page had the focus, or over a menu it had closed, gave it to nothing (kit/dialog.ts
 `focusBack`, the drawer's too); Find closed with nothing found gave it to nothing; and on a phone the bar's button
 focused while the bar was away scrolled the whole chrome up by the header's height (the chrome now holds still).
 
-## 12. The text layer (round seventeen, 2026-10-11)
+## 10. The text layer (2026-10-11)
 
 Paul: "Deal with the Display Link." A Display Link was pages of SVG text in `role=group` boxes, each with one
 label: an outline read as its title, a deck's table as its slide's. Now every document has one text layer, what it
@@ -566,4 +441,3 @@ says in the order it says it, and the pages are a picture of it.
 - **Elsewhere.** The `.html` file carries it the same way before its pages; print is the pages. `textMarkdown(nodes)`
   writes it through the kernel's writer, footnotes in the reference form, stable when read and written again: the API's
   `text(link)` and `markdown(app, text)` and `tinyoffice read --text`; `measure` counts its `words` and `headings`.
-

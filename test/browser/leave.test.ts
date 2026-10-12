@@ -1,4 +1,4 @@
-// The way home (round nine): the header's app icon goes to the home page, New is the drawer's first document row,
+// The way home: the header's app icon goes to the home page, New is the drawer's first document row,
 // and a document that lives nowhere but its link (Private, changed) asks once before it is left; closing the tab then
 // gets the browser's own warning.
 import { test, expect, afterEach } from 'vitest';

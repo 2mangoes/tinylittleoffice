@@ -1,4 +1,4 @@
-// Nothing of the round's dev tools ships (directive r9-common): the grammar and its generators (test/doc/tlo-grammar.ts),
+// Nothing of the dev tools ships: the grammar and its generators (test/doc/tlo-grammar.ts),
 // fast-check, the command registry's lints and its tables' writer (test/commands.test.ts, scripts/commands.ts), the dictionary's training (scripts/dictionary.ts), and the lints of the code, the budgets and the generated files' check (test/lints.ts, scripts/budgets.ts, scripts/generated.ts) never reach the built site. Runs on the build in
 // dist/ when there is one (after `npm run build`); with none it has nothing to look at.
 import { existsSync, readdirSync, readFileSync } from 'node:fs';

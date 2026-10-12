@@ -1,4 +1,4 @@
-// The page is the visible window and the document scrolls in a column (round eight, kit/chrome.ts, kit/scroll.ts).
+// The page is the visible window and the document scrolls in a column (kit/chrome.ts, kit/scroll.ts).
 // Safari on iOS does not make the page shorter for the keyboard, only the visible window, so the column is the visual
 // viewport's height and the bar has a place of its own in it: under the header on a wide screen, at the column's bottom
 // under a finger, so above the keyboard. On a phone, while a box has the focus, the header steps aside and the menu
@@ -51,7 +51,7 @@ async function write(hash = `#/v1/write/${encodeDoc(BIG)}`): Promise<{ shell: To
   await settled();
   return { shell, text, main: shell.querySelector<HTMLElement>('.to-main')!, chrome: shell.querySelector<ToChrome>('to-chrome')! };
 }
-/** The bar where it is going: on a phone it comes with the focus (round nine), gliding in or out; measured once it is there. */
+/** The bar where it is going: on a phone it comes with the focus, gliding in or out; measured once it is there. */
 async function settled() {
   await frame();
   await until(() => !document.querySelector('to-chrome[gliding]') && document.getAnimations().every((a) => a.playState !== 'running'));
@@ -82,7 +82,7 @@ for (const [w, h, finger] of [
     await userEvent.keyboard('more');
     await until(() => main.scrollTop > 1000);
     await frame();
-    // Typed, the bar comes (on a phone, round nine) and the column glides to make its room; the caret is kept in sight once it settles.
+    // Typed, the bar comes (on a phone) and the column glides to make its room; the caret is kept in sight once it settles.
     await settled();
     expect(window.scrollY).toBe(0);
     // keepCaretVisible, through kit/scroll.ts: the caret within the column's box (not under the bar, not under the header).
@@ -368,7 +368,7 @@ test('presenting a deck covers the chrome: the header, the burger and the bar ar
   await until(() => !shell.querySelector('.deck-show'));
 });
 
-/* ---- round nine (Paul, 2026-10-10, from his iPhone): the bar glides, the header is the title, the burger keeps out of the way, the drawer is tidy ---- */
+/* ---- Paul, 2026-10-10, from his iPhone: the bar glides, the header is the title, the burger keeps out of the way, the drawer is tidy ---- */
 
 const barOf = () => document.querySelector<HTMLElement>('.to-editor to-bar')!;
 

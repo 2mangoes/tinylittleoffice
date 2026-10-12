@@ -13,7 +13,7 @@ export interface Kept {
   id: string;
   app: string;
   title: string;
-  /** The link's "#/v1/<app>/<payload>" part: the whole document (never a short link's owner query). */
+  /** The link's "#/v1/<app>/<payload>" part: the whole document, and nothing else of the address. */
   hash: string;
   /** When it was last kept, ms since the epoch. */
   at: number;

@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
-# The box measures in the type the site ships (directive r17-plex; Paul, 2026-10-11: "Use IBM Plex to measure"). The
+# The box measures in the type the site ships (Paul, 2026-10-11: "Use IBM Plex to measure"). The
 # browser tests load the site's stylesheet, so Chromium draws in the self-hosted files anyway; this is for what falls
 # through to the system: the fonts in public/fonts/ copied to ~/.fonts/plex/ (always the files the site serves, never
-# a copy of its own) and fontconfig told to prefer IBM Plex Sans for sans-serif and system-ui, where the languages
-# round had pinned DejaVu Sans. Run it again whenever public/fonts/ changes.
+# a copy of its own) and fontconfig told to prefer IBM Plex Sans for sans-serif and system-ui, not DejaVu Sans. Run it again whenever public/fonts/ changes.
 #
 #   scripts/fonts-box.sh        install the fonts and /etc/fonts/local.conf (sudo where the file needs it)
 #
@@ -23,7 +22,7 @@ trap 'rm -f "$tmp"' EXIT
 cat >"$tmp" <<'EOF'
 <?xml version="1.0"?>
 <!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
-<!-- Tiny Little Office's measuring tests (r17-plex, 2026-10-11): the type is IBM Plex, the site's own, copied to
+<!-- Tiny Little Office's measuring tests (2026-10-11): the type is IBM Plex, the site's own, copied to
      ~/.fonts/plex/ from public/fonts/ by scripts/fonts-box.sh, which writes this file. Plex Sans is the box's sans-serif
      and system-ui, so what falls through the site's stack is measured in Plex too. The Noto fonts (fonts-noto-core,
      fonts-noto-cjk, fonts-noto-extra) draw the scripts Plex is not shipped for: Bengali, Urdu, Korean, Chinese, Japanese. -->

@@ -3,8 +3,8 @@
  * column, `.to-main`, that scrolls by itself, and nothing scrolls the window. So every scroll-to in the kit and the
  * apps (the caret kept above a phone's keyboard, a match found, a note, a completion, a card or a stop brought into
  * view, a row dragged to the column's edge, a pinch keeping the words under the fingers) goes through here and moves
- * the boxes that scroll, from the nearest out, by just what it takes. (Until round eight the window scrolled, with the
- * bar stuck to its top and measured into place under Safari's keyboard after events that came late or never.)
+ * the boxes that scroll, from the nearest out, by just what it takes. (Were the window to scroll, the bar stuck to its
+ * top would have to be measured into place under Safari's keyboard after events that come late or never.)
  *
  *   scrollerOf(el)        the nearest box that scrolls the way `el` would be scrolled (the column, a list's own box)
  *   reveal(el, opts)      `el` (or a rect over it, such as the caret's) brought inside what can be seen

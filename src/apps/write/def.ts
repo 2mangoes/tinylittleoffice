@@ -1,7 +1,6 @@
 /**
  * Write: words on a page. Rich text (headings, marks, lists, links, footnotes, icons), a table block the
- * formula engine works out in place, other documents and things from the web held in the text, printed
- * on letter or A4. The view is the document itself (docs/kernel.md §3); the editor is editor.ts around
+ * formula engine works out in place, other documents held in the text, printed on letter or A4. The view is the document itself (docs/kernel.md §3); the editor is editor.ts around
  * one <to-text shape=doc>, the drawing and the files view.ts, the reading model.ts.
  */
 import { PenLine } from 'lucide';

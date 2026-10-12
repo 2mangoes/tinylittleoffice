@@ -78,7 +78,7 @@
  */
 import { LitElement, html, nothing, type TemplateResult } from 'lit';
 import { repeat } from 'lit/directives/repeat.js';
-import { applyAll, hasClass, isAtomic, listNumbers, normalRuns, refFence, runLength, type Block, type Op, type Run } from '../doc/index.ts';
+import { applyAll, hasClass, isAtomic, listNumbers, normalRuns, runLength, type Block, type Op, type Run } from '../doc/index.ts';
 import { copyData, pasteFrom, readClip, writeClip } from './clipboard.ts';
 import { contextOf, runKey } from './commands.ts';
 import { TEXT_COMMANDS } from './text-commands.ts';
@@ -130,7 +130,7 @@ import './context.ts';
 import './link-pop.ts';
 import './complete.ts';
 
-export type { Command, Fmt, Pos, Sel, Shape } from './textops.ts';
+export type { Sel, Shape } from './textops.ts';
 
 /** What `text-ops` carries: the ops, the selection after them, the one before, and 'type' when the edit is a letter typed or taken out (undo folds those). */
 export interface TextOps {
@@ -236,7 +236,7 @@ const SAID = 'data-said';
  * elements around them, the two atomic chips, a marked <br> as a line
  * break. Used once, at compositionend.
  */
-export function domToRuns(el: HTMLElement): Run[] {
+function domToRuns(el: HTMLElement): Run[] {
   const out: Run[] = [];
   const walk = (n: Node, m: Fmt) => {
     if (n.nodeType === Node.TEXT_NODE) {
@@ -268,7 +268,7 @@ export function domToRuns(el: HTMLElement): Run[] {
  * parent, and how many there are. A run of items is a list; a block that is not an item ends it, an item less deep
  * ends the deeper ones under it.
  */
-export function listPlaces(model: Block[]): ({ pos: number; size: number } | undefined)[] {
+function listPlaces(model: Block[]): ({ pos: number; size: number } | undefined)[] {
   const out: ({ pos: number; size: number } | undefined)[] = [];
   let open: { pos: number; size: number }[][] = [];
   model.forEach((b, i) => {
@@ -942,7 +942,7 @@ export class ToText extends LitElement {
     return { sel: { anchor: { block: pos.block, offset: hit.start }, focus: { block: pos.block, offset: hit.start + hit.run.t.length } }, href: hit.run.href };
   }
 
-  /** Do a thing: a mark, a kind of block, an insertion. Some take a word: the address for 'link', the name for 'icon' (or an emoji, put in as words), the ref for 'embed'. */
+  /** Do a thing: a mark, a kind of block, an insertion. Some take a word: the address for 'link', the name for 'icon' (or an emoji, put in as words). */
   exec(cmd: Command, arg?: string) {
     const model = this.model;
     const sel = this.current();
@@ -1005,8 +1005,6 @@ export class ToText extends LitElement {
       case 'right':
       case 'justify':
         return go(align(model, sel, cmd));
-      case 'embed':
-        return arg ? go(insertBlocks(model, sel, [refFence(arg)])) : undefined;
     }
   }
 
@@ -1047,7 +1045,7 @@ export class ToText extends LitElement {
     const sel = this._sel && clampSel(this.model, this._sel);
     const a = document.activeElement;
     const focused = this.hasFocus() || (!!a && bub.contains(a));
-    // A DOM selection inside a card is the card's own (a grid's cell, a web thing's words), not words of ours.
+    // A DOM selection inside a card is the card's own (a grid's cell, a document's words), not words of ours.
     const dom = !this.writing && !this.pendingSel ? document.getSelection() : null;
     const inCard = (n: Node | null | undefined) => !!(n && (n instanceof Element ? n : n.parentElement)?.closest('.tx-card'));
     if (this.noBubble || this.composing || !sel || collapsed(sel) || !focused || this.linkPop?.shown || inCard(dom?.anchorNode) || inCard(dom?.focusNode)) return bub.hide();

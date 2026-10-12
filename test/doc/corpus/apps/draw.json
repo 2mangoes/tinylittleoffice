@@ -1,5 +1,5 @@
 {
-  "source": "src/apps/draw/templates.ts (the rebuilt tree)",
+  "source": "src/apps/draw/templates.ts",
   "docs": [
     {
       "name": "draw/flowchart",

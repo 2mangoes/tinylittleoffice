@@ -178,6 +178,8 @@ test('a kept document’s row holds its first page, small, once it is in sight; 
   keep({ id: 'p2', app: 'write', title: 'Unreadable', hash: '#/v1/write/!!!', at: Date.now() - 1000 });
   const write = appOf('write')!;
   const view = vi.spyOn(write, 'view');
+  // The previews' draws alone (thumb: true): a shell of an earlier test may still draw its own pages meanwhile.
+  const previews = () => view.mock.calls.filter(([, o]) => o?.thumb).length;
   try {
     const shell = await mount('');
     const rows = [...shell.querySelectorAll('.to-drive li')];
@@ -187,12 +189,12 @@ test('a kept document’s row holds its first page, small, once it is in sight; 
     expect(Math.round(svg.getBoundingClientRect().height / remScale())).toBe(52);
     // The unreadable one is a blank page.
     expect(rows[1].querySelector('to-preview svg text')).toBeNull();
-    const drawn = view.mock.calls.length;
+    const drawn = previews();
     expect(drawn).toBe(1);
     // Drawn again (the home page again): from the cache.
     const again = await mount('');
     await until(() => !!again.querySelector('.to-drive li to-preview svg'));
-    expect(view.mock.calls.length).toBe(drawn);
+    expect(previews()).toBe(drawn);
   } finally {
     view.mockRestore();
   }

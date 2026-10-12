@@ -1,4 +1,4 @@
-// A .json back in (r18: the document as JSON): what Download → Data (JSON) gives opens as its .tlo would, in its app
+// A .json back in (the document as JSON): what Download → Data (JSON) gives opens as its .tlo would, in its app
 // and with its words byte for byte, dropped on the page; a .json that is not a document is said so and opens nothing.
 import { test, expect, afterEach } from 'vitest';
 import { dropFile, mount, said, until } from './helpers.ts';

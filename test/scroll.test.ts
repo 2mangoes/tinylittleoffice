@@ -1,4 +1,4 @@
-// The page never scrolls (round eight, kit/scroll.ts): the document is in a column that scrolls by itself, and every
+// The page never scrolls (kit/scroll.ts): the document is in a column that scrolls by itself, and every
 // scroll-to goes through kit/scroll.ts. A module that reads the window's scroll or scrolls the window (or reveals an
 // element with the browser's scrollIntoView, which scrolls every box round it, the window too) brings back the page
 // that slid under a phone's keyboard; this fails on one.

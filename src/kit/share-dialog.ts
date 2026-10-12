@@ -10,7 +10,7 @@
  *
  * It gets the document through properties (`app`, `doc`, `heading`, `locked`, `payloadLength`, and
  * `linkTo`, the link the shell projects, made current first) and says back `to-link-copied` when the link (or the Display Link) is on the clipboard, so the document lives somewhere now. It is
- * drawn only while open. (Until round eight all of this was the shell's own.)
+ * drawn only while open.
  */
 import { LitElement, html, nothing, type TemplateResult } from 'lit';
 import { unsafeSVG } from 'lit/directives/unsafe-svg.js';
@@ -26,7 +26,7 @@ import { picture, raster, saveFile, slug, utf8 } from './exports.ts';
 import { parseHash, routeHash } from './route.ts';
 import { fitLine, roomFor } from './limits.ts';
 import { DEFAULT_TTL, EXPIRIES, expiresLine, SHORT_LINK_MAX, shorten, type Shortened } from './short.ts';
-import { dropKept, keepLink, keptLinks } from './links.ts';
+import { dropKept, keepLink, keptLinks } from './kept-links.ts';
 import { pack } from './privacy.ts';
 import { store } from './store.ts';
 import { QR_MAX_BYTES, qrSvg } from './qr.ts';

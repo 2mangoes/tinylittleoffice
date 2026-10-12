@@ -1,4 +1,4 @@
-// The QR code: the standard's shape at both ends of the range. (Ported from the old tree's test/apps.test.ts.)
+// The QR code: the standard's shape at both ends of the range.
 import { test, expect } from 'vitest';
 import { qrCode, qrSvg, QR_MAX_BYTES } from '../src/kit/qr.ts';
 

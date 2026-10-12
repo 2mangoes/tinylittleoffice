@@ -104,7 +104,7 @@ type Drag =
 const CLIP_WAIT = 120;
 
 /** A label's lines of runs as the one block the words editor holds: a line break between lines. */
-export function wordsBlock(words: string): Block {
+function wordsBlock(words: string): Block {
   const lines = labelLines(words);
   return { k: 'p', runs: lines.flatMap((runs, i) => (i ? [{ t: '\n' }, ...runs] : runs)).filter((r) => r.t || r.ic) };
 }

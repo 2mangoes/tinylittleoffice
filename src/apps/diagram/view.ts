@@ -1,6 +1,6 @@
 /**
- * A diagram drawn, with no DOM: each kind's layout (ported from the old tree's org, mind, family, lanes,
- * timeline, venn, seating and net definitions and lib/diagram.ts) turns the document's lines into Draw's
+ * A diagram drawn, with no DOM: each kind's layout (org, mind, family, lanes, timeline, venn, seating and
+ * net) turns the document's lines into Draw's
  * shapes and joins, and Draw's renderer draws them (src/apps/draw/view.ts), so a diagram is a picture, a
  * page, a thumbnail and, opened in Draw, shapes to move about by hand. Each shape remembers what it was drawn
  * from (`hit`), so the editor can make a tap on it an edit of those words; a lane's band and a Venn's circles
@@ -36,7 +36,7 @@ export const shape = (k: Kind, x: number, y: number, w: number, h: number, text 
 export const join = (from: number, to: number, arrow = true, text = '', c?: Color, f: Fill = 0, hit?: Hit): DShape => shape(arrow ? 'k' : 'j', from, to, 0, 0, text, f, c, undefined, hit);
 
 /** The colours a diagram gives its parts, in turn. */
-export const COLOR_CYCLE: Color[] = ['b', 'g', 'o', 'p', 'r'];
+const COLOR_CYCLE: Color[] = ['b', 'g', 'o', 'p', 'r'];
 
 /** Each join straight after the later of the two shapes it joins: a thing, the next thing, the line between them… */
 function weave(shapes: DShape[]): DShape[] {
@@ -533,7 +533,7 @@ export const LETTER = { w: 816, h: 1056 };
 /** A place card, 4 by 2.5 inches. */
 export const CARD = { w: 384, h: 240 };
 
-/** Cards laid out on sheets, `cols` × `rows` to a sheet, centred, each with a dashed line round it to cut along. (The old tree's lib/print.ts `tile`.) */
+/** Cards laid out on sheets, `cols` × `rows` to a sheet, centred, each with a dashed line round it to cut along. */
 export function tile(cards: Page[], cols: number, rows: number, sheet = LETTER): Page[] {
   if (!cards.length) return [{ ...sheet, svg: '' }];
   const { w, h } = cards[0];

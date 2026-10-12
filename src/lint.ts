@@ -7,7 +7,7 @@
  * layouts' own results (each app's lint.ts), with the fallback metrics the exports use, and never a browser.
  *
  * A paragraph or a bullet that links to another Tiny Little Office document is a finding in every app: the
- * document could be inside this one, as a fence named by its app (round nineteen, Paul 2026-10-12: an agent
+ * document could be inside this one, as a fence named by its app (Paul 2026-10-12: an agent
  * shipped four companion links from a deck's bullets, believing a slide could not hold a chart or an animation).
  *
  * A document fenced inside another (a diagram on a slide, a chart in a text) is linted by its own app, its

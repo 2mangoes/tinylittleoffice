@@ -1,4 +1,4 @@
-// What a crawler gets (round eighteen, Paul 2026-10-11: "everything but the templates"): a sitemap of the home page
+// What a crawler gets (Paul, 2026-10-11: "everything but the templates"): a sitemap of the home page
 // and every app's page, named in robots.txt; one JSON-LD WebApplication block on each page; and in each page's
 // static HTML, before any script runs, the words the rendered page shows: the apps' names on the home page, an
 // app's name, its line and its templates' names on its own page. Written by scripts/seo.ts at the end of the build

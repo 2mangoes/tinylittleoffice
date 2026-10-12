@@ -5,7 +5,7 @@
  * and the footnotes small at the end; and the same text as a web page, as
  * Word (.docx), as RTF and as Markdown. A rule (`hr`) is a page break: the next page on paper, in print
  * and in .docx and .rtf; `---` in Markdown. The look (look.ts) sets the type in each: its faces, justified lines, indented paragraphs,
- * small capitals, two columns on paper. (Ported from the old tree's write.def.ts onto runs.)
+ * small capitals, two columns on paper.
  */
 import { encodeDoc } from '../../kit/codec.ts';
 import { ACCENT, FAINT, FONT, INK, LINE, MUTED, SHADE, pageSvg, r, rect, text as svgText, textWidth, xml } from '../../kit/draw.ts';
@@ -65,7 +65,7 @@ function spansOf(runs: Run[], next: () => number): Span[] {
 }
 
 /** Spans wrapped to a width: words kept whole, a line break in the words a new line, marks kept on every piece. */
-export function wrapSpans(spans: Span[], max: number, px: number, bold = false): Span[][] {
+function wrapSpans(spans: Span[], max: number, px: number, bold = false): Span[][] {
   const lines: Span[][] = [[]];
   let w = 0;
   const line = () => lines[lines.length - 1];
@@ -145,7 +145,7 @@ export function fenceLink(lang: string, body: string, site = ''): string {
 /** A placed document's own name: none for a locked one, whose title is sealed with it (kit/locked.ts). */
 const placedTitle = (lang: string, body: string): string => (lang === LOCKED_LANG ? '' : fenceTitle(body));
 /** The site a link is on ("https://tinylittleoffice.com/"), or '' when there is none. */
-export const siteOf = (link: string): string => {
+const siteOf = (link: string): string => {
   try {
     return link ? new URL(link).origin + '/' : '';
   } catch {
@@ -405,7 +405,7 @@ const appOfLazy = (id: string) => lookup.appOf(id);
 /* ---------- HTML ---------- */
 
 /** A run's words as HTML, with their marks and links; a web address in plain words is a link too. */
-export function markedHtml(run: Run, bold = 'strong', italic = 'em'): string {
+function markedHtml(run: Run, bold = 'strong', italic = 'em'): string {
   let s = runLinks(run)
     .map((p) => (p.url ? `<a href="${xml(p.url)}">${xml(p.t)}</a>` : xml(p.t).replace(/\n/g, '<br>')))
     .join('');
@@ -419,15 +419,15 @@ export function markedHtml(run: Run, bold = 'strong', italic = 'em'): string {
 const htmlRun = (run: Run): string => (run.ic ? `<span class="ic" data-icon="${xml(run.ic)}" role="img" aria-label="${xml(run.ic)}"></span>` : markedHtml(run));
 
 /** A footnote's mark in HTML: its number, raised, a link to the note. `stem` names the ids and keeps two documents on one page apart. */
-export const noteMarkHtml = (n: number, stem = 'fn') => `<sup class="fn" role="doc-noteref"><a href="#${stem}-${n}" id="${stem}ref-${n}">${n}</a></sup>`;
+const noteMarkHtml = (n: number, stem = 'fn') => `<sup class="fn" role="doc-noteref"><a href="#${stem}-${n}" id="${stem}ref-${n}">${n}</a></sup>`;
 /** The notes themselves, at the end: a thin rule, small type, each with a way back to its mark. Nothing when there are none. */
-export function endnotesHtml(notes: string[], stem = 'fn'): string {
+function endnotesHtml(notes: string[], stem = 'fn'): string {
   if (!notes.length) return '';
   return `<section class="fn-notes" role="doc-endnotes" aria-label="Footnotes"><hr><ol>${notes.map((fn, i) => `<li id="${stem}-${i + 1}">${noteRuns(fn).map(htmlRun).join('')} <a href="#${stem}ref-${i + 1}" role="doc-backlink" aria-label="Back to the text">↩</a></li>`).join('')}</ol></section>`;
 }
 
 /** Blocks as pieces of HTML, the list items properly nested: item(b) is what a list item holds, other(b) the whole of any other block. */
-export function blocksHtml(blocks: Block[], item: (b: Extract<Block, { k: 'li' }>) => string, other: (b: Block) => string): string[] {
+function blocksHtml(blocks: Block[], item: (b: Extract<Block, { k: 'li' }>) => string, other: (b: Block) => string): string[] {
   const out: string[] = [];
   const open: string[] = [];
   const closeTo = (depth: number) => {
@@ -475,7 +475,7 @@ function tableHtml(doc: Doc, at: number): string {
 }
 
 /** The body of the text as HTML: headings, paragraphs, nested lists, tables, documents held in it as figures, the footnotes at the end. */
-export function bodyHtml(doc: Doc, site = '', stem = 'fn'): string {
+function bodyHtml(doc: Doc, site = '', stem = 'fn'): string {
   const next = noteNumbers();
   const inner = (b: { runs: Run[] }) => b.runs.map((run) => (run.fn === undefined ? htmlRun(run) : noteMarkHtml(next(), stem))).join('');
   const title = titleBlock(doc);
@@ -526,7 +526,7 @@ export function bodyHtml(doc: Doc, site = '', stem = 'fn'): string {
 }
 
 /** The look as CSS over the page's own: its faces, and a book's or a newspaper's setting (look.ts). */
-export function lookCss(look: Look): string {
+function lookCss(look: Look): string {
   const css: string[] = [];
   if (look.body !== 'sans') css.push(`body{font-family:${STACKS[look.body]}}`);
   if (look.head !== 'sans') css.push(`h1,h2,h3,h4,h5,h6{font-family:${STACKS[look.head]}}`);

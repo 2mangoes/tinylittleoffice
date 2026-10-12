@@ -1,4 +1,4 @@
-// One modal at a time (directive r10-handover; the walks' first finding, `dialog-from-dialog`): a dialog opened from
+// One modal at a time (the walks' first finding, `dialog-from-dialog`): a dialog opened from
 // inside another never stacks on it. The drawer hands over and does not come back: a row of it that opens a dialog
 // closes the drawer first, and when that dialog closes the focus is on the hamburger. Share hands over and comes
 // back: Password… closes Share, and when the password dialog closes (Cancel or done) Share is open again as it was,

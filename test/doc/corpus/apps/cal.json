@@ -1,5 +1,5 @@
 {
-  "source": "src/api.ts (cal), docs/tlo.md (cal) and src/apps/cal/templates.ts (the rebuilt tree)",
+  "source": "src/api.ts (cal), docs/tlo.md (cal) and src/apps/cal/templates.ts",
   "docs": [
     {
       "name": "example 1",

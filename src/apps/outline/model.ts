@@ -1,7 +1,6 @@
 /**
  * An outline as a view of the document, and its commands as operations. The document is the kernel's: a
- * nested list, the first level its roots, with two more kinds of block (ported from the old tree's
- * lib/outlinemodel.ts):
+ * nested list, the first level its roots, with two more kinds of block:
  *
  *   - Launch
  *     - Product {.from label="sets"}
@@ -98,7 +97,7 @@ const JOIN: Record<string, Dir> = { from: '->', to: '<-', both: '<->' };
 const CLASS: Partial<Record<Dir, string>> = { '->': 'from', '<-': 'to', '<->': 'both' };
 
 /** A name as an edge can hold it: no arrow or colon inside to end it early. */
-export const edgeName = (s: string): string =>
+const edgeName = (s: string): string =>
   s
     .replace(/\s+(?:<->|->|<-|--)\s+/g, ' ')
     .replace(/:\s/g, ' ')
@@ -342,7 +341,7 @@ export function spanOf(doc: Doc, v: OutlineView, rows: number[]): Span | null {
   return { from, to };
 }
 /** The items inside a span. */
-export const itemsIn = (v: OutlineView, s: Span): Item[] => v.items.filter((it) => it.at >= s.from && it.at < s.to);
+const itemsIn = (v: OutlineView, s: Span): Item[] => v.items.filter((it) => it.at >= s.from && it.at < s.to);
 /** The items of a span whose parent is outside it: the span's top rows. */
 export function topsOf(v: OutlineView, s: Span): Item[] {
   return v.items.filter((it, i) => {
@@ -465,8 +464,6 @@ export function setOrdered(doc: Doc, ats: number[], on: boolean): Op[] {
   }
   return ops;
 }
-/** Numbered or not, the list these items make: numbered unless every one of them already is. */
-export const toggleOrdered = (doc: Doc, ats: number[]): Op[] => setOrdered(doc, ats, !ats.every((at) => isOrd(doc.blocks[at])));
 
 /** An empty item at the end of the outline, at this depth. */
 export function appendItem(doc: Doc, v: OutlineView, depth = 0): { ops: Op[]; at: number } {
@@ -612,7 +609,7 @@ export function outlineText(v: OutlineView, appName: (id: string) => string = (i
 }
 
 /** The plain nested list a mind map or a family tree is: no kinds of line, no joins, no documents. */
-export const plainTree = (v: OutlineView): Block[] => v.items.filter((it) => !it.doc).map((it) => itemBlock(it.depth, it.runs, undefined, undefined, undefined, it.ord));
+const plainTree = (v: OutlineView): Block[] => v.items.filter((it) => !it.doc).map((it) => itemBlock(it.depth, it.runs, undefined, undefined, undefined, it.ord));
 
 /**
  * The outline as a deck: every item with something under it is a slide, its
@@ -722,7 +719,7 @@ export function toOpml(v: OutlineView, title: string): string {
  * The outline as the text PDF lays it out (kit/textpdf.ts): a lone top item is the title and its children
  * the sections; otherwise the document's title heads it and the top items are the sections. Deeper items are
  * bullets; an item holding a document is that document's app and first line, in brackets; the notes follow,
- * numbered as their marks came. (The old tree's outlineBlocks.)
+ * numbered as their marks came.
  */
 export function outlineBlocks(v: OutlineView, docTitle = '', notesHeading = 'Notes'): PdfBlock[] {
   const all = liveItems(v);

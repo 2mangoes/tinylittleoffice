@@ -58,14 +58,8 @@ test('every template is canonical and parses as the kernel wrote it', () => {
   }
 });
 
-test('signatures are gone (Paul, 2026-10-11): no template holds a signatures fence, and the contract lints clean', () => {
-  for (const t of templates())
-    expect(
-      parse(t.doc).blocks.some((b) => b.k === 'fence' && b.lang === 'signatures'),
-      t.id,
-    ).toBe(false);
+test('the contract lints clean', () => {
   const contract = templates().find((t) => t.id === 'contract')!.doc;
-  expect(contract).not.toMatch(/sign/i);
   expect(lint('write', contract)).toEqual([]);
 });
 

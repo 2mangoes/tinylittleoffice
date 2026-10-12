@@ -22,30 +22,7 @@ export interface Sel {
 }
 /** What the editor can be told to do; some take a word (a link's address, an icon's name, another document's ref). */
 export type Command =
-  | 'b'
-  | 'i'
-  | 'u'
-  | 's'
-  | 'h'
-  | 'link'
-  | 'unlink'
-  | 'fn'
-  | 'icon'
-  | 'date'
-  | 'title'
-  | 'h1'
-  | 'h2'
-  | 'p'
-  | 'quote'
-  | 'ul'
-  | 'ol'
-  | 'indent'
-  | 'outdent'
-  | 'left'
-  | 'center'
-  | 'right'
-  | 'justify'
-  | 'embed';
+  'b' | 'i' | 'u' | 's' | 'h' | 'link' | 'unlink' | 'fn' | 'icon' | 'date' | 'title' | 'h1' | 'h2' | 'p' | 'quote' | 'ul' | 'ol' | 'indent' | 'outdent' | 'left' | 'center' | 'right' | 'justify';
 export type Mark = 'b' | 'i' | 'u' | 's' | 'h';
 /** The marks in force where the caret is: what the next letter typed will carry. */
 export type Fmt = Partial<Pick<Run, Mark | 'href'>>;
@@ -63,7 +40,7 @@ const ALIGNS = ['center', 'right', 'justify'];
 /* ---------- positions ---------- */
 
 export const cmp = (a: Pos, b: Pos): number => a.block - b.block || a.offset - b.offset;
-export const samePos = (a: Pos, b: Pos): boolean => cmp(a, b) === 0;
+const samePos = (a: Pos, b: Pos): boolean => cmp(a, b) === 0;
 export const collapsed = (s: Sel): boolean => samePos(s.anchor, s.focus);
 /** The selection's two ends, first the one nearer the start. */
 export const ordered = (s: Sel): [Pos, Pos] => (cmp(s.anchor, s.focus) <= 0 ? [s.anchor, s.focus] : [s.focus, s.anchor]);
@@ -82,7 +59,7 @@ export function clampPos(blocks: Block[], p: Pos): Pos {
 export const clampSel = (blocks: Block[], s: Sel): Sel => ({ anchor: skipCard(blocks, s.anchor), focus: skipCard(blocks, s.focus) });
 
 /** The nearest text block at or after `i` (dir 1) or at or before it (dir -1), or -1. */
-export function textBlock(blocks: Block[], i: number, dir: 1 | -1): number {
+function textBlock(blocks: Block[], i: number, dir: 1 | -1): number {
   for (let j = i; j >= 0 && j < blocks.length; j += dir) if (isText(blocks[j])) return j;
   return -1;
 }
@@ -306,12 +283,6 @@ function join(at: number, first: TextBlock, second: TextBlock, sel: Sel): Edit {
   return { ops: [{ op: 'splice', at, n: 2, blocks: [{ ...first, runs: normalRuns([...first.runs, ...second.runs]) }] }], sel };
 }
 
-/** The runs between two offsets with a mark set or taken off; runs outside, and atomic runs, as they were. */
-function remark(runs: Run[], from: number, to: number, change: (r: Run) => Run): Run[] {
-  const mid = sliceRuns(runs, from, to).map((r) => (isAtomic(r) ? r : change(r)));
-  return normalRuns([...sliceRuns(runs, 0, from), ...mid, ...sliceRuns(runs, to, runLength(runs))]);
-}
-
 /** Every selected run of words, with the block it is in. */
 function selectedRuns(blocks: Block[], sel: Sel): Run[] {
   return sliceBlocks(blocks, sel)
@@ -347,9 +318,6 @@ export function setMark(blocks: Block[], sel: Sel, m: Mark | 'href', value: bool
   }
   return { ops, sel };
 }
-
-/** The block with the marks of `fmt` (and nothing else) in place of its runs' marks between two offsets. */
-export const applyFmt = (runs: Run[], from: number, to: number, fmt: Fmt): Run[] => remark(runs, from, to, (r) => ({ t: r.t, ...fmt }));
 
 /** The blocks the selection touches, as a span. */
 const spanOf = (sel: Sel): [number, number] => {

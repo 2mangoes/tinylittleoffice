@@ -101,12 +101,10 @@ export interface InZip {
 }
 
 /**
- * The documents in a zip's files (kit/zip.ts unzip), in the zip's order: what Download everything wrote before it
- * went (a folder by app; the folder names the app where the head does not, else `fallback`), or any zip of .tlo and
- * .md files. A
- * .txt that is one link to a document (a locked one, as Download everything wrote it) is that document; anything
- * else (a README, a picture, the dot files an archiver adds) is left alone. The name Download
- * everything gave a document with none ("untitled", "locked") is no name.
+ * The documents in a zip's files (kit/zip.ts unzip), in the zip's order: a folder an app (the folder names the app
+ * where the head does not, else `fallback`), or any zip of .tlo and .md files. A .txt that is one link to a document
+ * (a locked one) is that document; anything else (a README, a picture, the dot files an archiver adds) is left alone.
+ * A file called "untitled" or "locked" has no name.
  */
 export function readZip(files: Record<string, Uint8Array>, fallback: string, known: (id: string) => boolean): InZip[] {
   const found: InZip[] = [];

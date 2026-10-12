@@ -3,7 +3,7 @@
  * transparency for see-through pixels, and the Netscape loop so it plays forever. Hand-rolled on purpose:
  * the browser has no GIF encoder of its own (WebCodecs and ImageEncoder stop at stills and video), and the
  * whole of it is shorter than a dependency's README. The Deck's film of itself and Motion's export both
- * come through here. (Ported from the old tree's lib/gif.ts.) No DOM.
+ * come through here. No DOM.
  */
 export interface GifFrame {
   /** RGBA, width*height*4 bytes. */

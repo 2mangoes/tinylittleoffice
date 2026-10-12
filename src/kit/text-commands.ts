@@ -24,7 +24,7 @@ const lists = (x: ToText) => !x.marksOnly && x.shape !== 'line';
 const mark = (m: Mark, name: string, label: string, icon: IconNode, keys: string): Command<ToText> =>
   cmd(name, label, { icon, keys, where: ['bar', 'context'], group: 'marks', pressed: (x) => !!x.sel && !!x.marks[m], does: (x) => x.exec(m) });
 
-export const CUT = cmd('cut', 'Cut', {
+const CUT = cmd('cut', 'Cut', {
   icon: Scissors,
   keys: 'Mod+X',
   native: true,
@@ -34,7 +34,7 @@ export const CUT = cmd('cut', 'Cut', {
   disabled: (x) => !ranged(x),
   does: (x) => x.copyOut(true),
 });
-export const COPY = cmd('copy', 'Copy', {
+const COPY = cmd('copy', 'Copy', {
   icon: Copy,
   keys: 'Mod+C',
   native: true,
@@ -44,7 +44,7 @@ export const COPY = cmd('copy', 'Copy', {
   disabled: (x) => !ranged(x),
   does: (x) => x.copyOut(false),
 });
-export const PASTE = cmd('paste', 'Paste', { icon: ClipboardPaste, keys: 'Mod+V', native: true, where: ['context'], group: 'clip', context: () => coarse(), does: (x) => x.pasteIn() });
+const PASTE = cmd('paste', 'Paste', { icon: ClipboardPaste, keys: 'Mod+V', native: true, where: ['context'], group: 'clip', context: () => coarse(), does: (x) => x.pasteIn() });
 export const BOLD = mark('b', 'bold', 'Bold', UI.bold, 'Mod+B');
 export const ITALIC = mark('i', 'italic', 'Italic', UI.italic, 'Mod+I');
 export const UNDERLINE = mark('u', 'underline', 'Underline', UI.underline, 'Mod+U');

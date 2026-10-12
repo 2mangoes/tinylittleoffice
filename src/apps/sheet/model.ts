@@ -76,7 +76,7 @@ export function typeName(c: number, cols: Column[], type: ColType = cols[c]?.typ
   return cols.slice(0, c).some((x) => x.type === type) ? `${name} ${COL_NAMES[c]}` : name;
 }
 /** Whether a column goes by a default name (its letter, or what it holds), which follows its type and place. */
-export const isDefaultName = (c: number, cols: Column[]): boolean => isLetterName(cols[c].name) || cols[c].name === typeName(c, cols);
+const isDefaultName = (c: number, cols: Column[]): boolean => isLetterName(cols[c].name) || cols[c].name === typeName(c, cols);
 const col = (c: number, type: ColType = 'text'): Column => ({ name: letterName(c), type });
 
 /** The document's first table as a sheet, with everything the grid draws. */

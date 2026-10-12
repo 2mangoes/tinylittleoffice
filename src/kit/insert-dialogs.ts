@@ -1,6 +1,6 @@
 /**
- * What Insert ▾ asks a link for, as one dialog each app shares (Write, Deck, the Outliner, the Website
- * Builder): Tiny Little Office Doc. It is a <to-dialog> with one layout: one wide address field with OK at
+ * What Insert ▾ asks a link for, as one dialog each app shares (Write, Deck, the Outliner): Tiny
+ * Little Office Doc. It is a <to-dialog> with one layout: one wide address field with OK at
  * its right (one row; the field takes the room), and under it what that link will be, drawn as soon as it is
  * typed or pasted. The content sits at the top of the dialog, so nothing moves as the preview arrives or the
  * window grows. A person never types a marker: the link is all, and the code writes the block.
@@ -68,7 +68,7 @@ const form = (cls: string, submit: () => void, inner: TemplateResult) => html`<f
 /** The fence as a document holds one: its body without the new line its text ends with. */
 const asFence = (b: Block | null): Block | null => (b?.k === 'fence' ? { ...b, body: b.body.replace(/\n$/, '') } : b);
 
-/** A short link from the shortener, …/<id>#<key> (an owner's ".<o>" after the key too): where it is, its id and key. */
+/** A short link from the shortener, …/<id>#<key> (a ".…" after the key is let be): where it is, its id and key. */
 export function shortParts(link: string): { at: string; id: string; key: string } | null {
   const m = /^(https?:\/\/\S+\/)([A-Za-z0-9_~-]{4,})#([A-Za-z0-9_~-]{16,})(?:\.[A-Za-z0-9_~-]+)?$/.exec(link.trim());
   if (!m) return null;
@@ -78,7 +78,7 @@ export function shortParts(link: string): { at: string; id: string; key: string 
 }
 
 /** A short link opened: the long link it holds, as the fence of its document; null when it is gone or is not a document. */
-export async function openShort(link: string): Promise<Block | null> {
+async function openShort(link: string): Promise<Block | null> {
   const p = shortParts(link);
   if (!p) return null;
   try {

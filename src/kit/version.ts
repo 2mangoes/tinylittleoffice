@@ -27,9 +27,6 @@ export const repoUrl = () => `${origin('source')}/${REPO}`;
 /** The page for a commit (or a tag) in the published source. */
 export const commitUrl = (commit: string) => `${repoUrl()}/commit/${commit}`;
 
-/** A file of the source as main holds it ("docs/threat-model.md"). */
-export const sourceFile = (path: string) => `${repoUrl()}/blob/main/${path}`;
-
 /** Whether a value has the shape of /version.json. */
 export function isVersion(v: unknown): v is Version {
   const o = v as Version;

@@ -14,7 +14,7 @@ import { generate } from './generated.ts';
 
 const cell = (s: string) => s.replace(/\|/g, '\\|');
 
-export function exportsDoc(): string {
+function exportsDoc(): string {
   const all = apps();
   const own = all.flatMap((a) => (a.exports ?? []).map((x) => `| ${a.name} | \`.${x.ext}\` | ${cell(x.label())} |`));
   const opens = all.flatMap((a) => (a.handoffs ?? []).filter((h) => appOf(h.to)).map((h) => `| ${a.name} | ${appOf(h.to)!.name} | ${cell(h.label())} |`));

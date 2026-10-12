@@ -1138,7 +1138,7 @@ export default {
   '{every}, {n} times': '{every}, {n} fwa',
   '{n|one day|# days}': '{n|yon jou|# jou}',
   '{n}% done': '{n}% fini',
-  // The templates added in round four: each name, then its line on the home page.
+  // The templates: each name, then its line on the home page.
   'A bakery’s posts and newsletters through the winter, an advent story every day.': 'Pòs ak bilten yon boulanjri pandan ivè a, yon istwa avan nwèl chak jou.',
   'A youth soccer season: practice every week, home and away in their colors, the playoffs.': 'Yon sezon foutbòl jèn: antrènman chak semèn, lakay ak deyò nan koulè yo, eliminatwa yo.',
   'A small team’s time off, the public holidays and the Christmas closing on one calendar.': 'Konje yon ti ekip, jou ferye ak fèmti nwèl sou yon sèl kalandriye.',

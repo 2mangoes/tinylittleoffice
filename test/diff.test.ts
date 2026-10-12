@@ -1,4 +1,4 @@
-// What the second of two documents changed, block by block (kit/diff.ts, ported from the old lib/diff.ts).
+// What the second of two documents changed, block by block (kit/diff.ts).
 import { test, expect } from 'vitest';
 import { blocksOf, diff, diffLines, tally } from '../src/kit/diff.ts';
 

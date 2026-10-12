@@ -80,7 +80,7 @@ export const charsOf = (runs: Run[]): string => runs.map((r) => (isAtomic(r) ? O
 /** The characters a backslash escapes in a thing's words: the separators, and itself. */
 const ESCAPED = /\\([\\,:|&])/g;
 /** Words as they are drawn: every escape taken off. */
-export const unescapeWords = (s: string): string => s.replace(ESCAPED, '$1');
+const unescapeWords = (s: string): string => s.replace(ESCAPED, '$1');
 /** Whether the character at i follows an odd run of backslashes, and so is a plain character. */
 const escapedAt = (chars: string, i: number) => {
   let n = 0;
@@ -96,7 +96,7 @@ export interface Seps {
 }
 
 /** Plain words as a part of a line writes them: whatever would be read as a separator there escaped, and a backslash before one. */
-export function escapeWords(s: string, seps: Seps = {}): string {
+function escapeWords(s: string, seps: Seps = {}): string {
   let out = s.replace(/\\(?=[\\,:|&]|$)/g, '\\\\').replace(/\|/g, '\\|');
   if (seps.colon) out = out.replace(/:(?=\s|$)/g, '\\:');
   if (seps.comma) out = out.replace(/,/g, '\\,');
@@ -104,15 +104,15 @@ export function escapeWords(s: string, seps: Seps = {}): string {
   return out;
 }
 /** Runs' words escaped (an icon as it is). */
-export const escapeRuns = (runs: Run[], seps: Seps = {}): Run[] => runs.map((r) => (isAtomic(r) ? r : { ...r, t: escapeWords(r.t, seps) }));
+const escapeRuns = (runs: Run[], seps: Seps = {}): Run[] => runs.map((r) => (isAtomic(r) ? r : { ...r, t: escapeWords(r.t, seps) }));
 /** Runs' words with their escapes taken off. */
-export const unescapeRuns = (runs: Run[]): Run[] => runs.map((r) => (isAtomic(r) ? r : { ...r, t: unescapeWords(r.t) }));
+const unescapeRuns = (runs: Run[]): Run[] => runs.map((r) => (isAtomic(r) ? r : { ...r, t: unescapeWords(r.t) }));
 
 /**
  * What a part of a line escapes, by its kind: a thing of a list its commas; a key (a lane's, a date, a table's or a
  * set's name, a set's its ampersands too) and the words of a line with no key their colons; any part its bars.
  */
-export function sepsFor(kind: KindId, l: Line, which: Which): Seps {
+function sepsFor(kind: KindId, l: Line, which: Which): Seps {
   if (typeof which === 'number') return { comma: true };
   if (isTree(kind) || kind === 'net') return {};
   if (which === 'key') return { colon: true, amp: kind === 'venn' };
@@ -634,7 +634,7 @@ export const setKind = (doc: Doc, kind: KindId): Op[] => (kindOf(doc) === kind &
 /* ---------- a thing whole: copied, pasted, duplicated, moved ---------- */
 
 /** The part of a line a kind draws as the line's own shape: a lane's step its words, a set or a table its key, anything else all of it. */
-export const lineHit = (kind: KindId, at: number): Hit => ({ k: 'line', at, part: kind === 'lanes' ? 'words' : isListed(kind) ? 'key' : 'all' });
+const lineHit = (kind: KindId, at: number): Hit => ({ k: 'line', at, part: kind === 'lanes' ? 'words' : isListed(kind) ? 'key' : 'all' });
 
 /** A thing as blocks, for the clipboard: a line (a tree's with its family, brought to the margin), one thing of a list as a line of its own, a lane's steps, a thing only connections name, a connection. */
 export function thingBlocks(doc: Doc, hit: Hit): Block[] {

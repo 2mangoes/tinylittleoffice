@@ -1,4 +1,4 @@
-// The link codec: round trips, the dictionary's gain, and a refusal to unpack a mountain. (Ported from the old tree's test/codec.test.ts.)
+// The link codec: round trips, the dictionary's gain, and a refusal to unpack a mountain.
 import { test, expect } from 'vitest';
 import { deflateSync, strToU8 } from 'fflate';
 import { encodeDoc, decodeDoc, toBase64Url, fromBase64Url, budgetFor, unpackDoc, DICTIONARY, MAX_DOC_BYTES, URL_LIMIT } from '../src/kit/codec.ts';

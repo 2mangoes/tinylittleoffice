@@ -1159,7 +1159,7 @@ export default {
   '{every}, {n} times': '{every}, {n} times',
   '{n|one day|# days}': '{n|one day|# days}',
   '{n}% done': '{n}% done',
-  // The templates added in round four: each name, then its line on the home page.
+  // The templates: each name, then its line on the home page.
   'A bakery’s posts and newsletters through the winter, an advent story every day.': 'A bakery’s posts and newsletters through the winter, an advent story every day.',
   'A youth soccer season: practice every week, home and away in their colors, the playoffs.': 'A youth soccer season: practice every week, home and away in their colors, the playoffs.',
   'A small team’s time off, the public holidays and the Christmas closing on one calendar.': 'A small team’s time off, the public holidays and the Christmas closing on one calendar.',

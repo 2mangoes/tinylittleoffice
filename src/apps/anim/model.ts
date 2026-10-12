@@ -1,6 +1,5 @@
 /**
- * Motion as a view of the document, and its commands as operations (ported from the old tree's
- * lib/animmodel.ts). A motion document is a drawing whose shapes move: Draw's table of shapes as Draw
+ * Motion as a view of the document, and its commands as operations. A motion document is a drawing whose shapes move: Draw's table of shapes as Draw
  * writes it (src/apps/draw/model.ts), the length, the speed and how it repeats in the head, and a table of
  * the shapes that move:
  *
@@ -132,11 +131,11 @@ const letters = (fx: string) => [...new Set(fx.replace(/[^3dnogmwbi]/g, ''))].jo
 export const keysAt = (doc: Doc): number => doc.blocks.findIndex((b) => b.k === 'table' && b.cols.some((c) => /^keys$/i.test(c.name.trim())));
 
 /** The length from "frames: 24": 2 to 120. */
-export const framesOf = (v: string | undefined) => {
+const framesOf = (v: string | undefined) => {
   const n = parseInt(v ?? '', 10);
   return Number.isFinite(n) ? clamp(n, 2, MAX_FRAMES) : DEFAULT_FRAMES;
 };
-export const fpsOf = (v: string | undefined) => {
+const fpsOf = (v: string | undefined) => {
   const n = parseInt(v ?? '', 10);
   return Number.isFinite(n) ? clamp(n, MIN_FPS, MAX_FPS) : DEFAULT_FPS;
 };
@@ -149,7 +148,7 @@ export function loopOf(v: string | undefined): Loop {
   return /^\d+$/.test(w) && n >= 2 ? Math.min(n, 99) : 'forever';
 }
 /** How the head writes a loop: nothing for ever. */
-export const loopText = (l: Loop): string | undefined => (l === 'forever' ? undefined : String(l));
+const loopText = (l: Loop): string | undefined => (l === 'forever' ? undefined : String(l));
 
 /**
  * Where a playback is after `f` frames' time (fractional): the frame to show and whether it has stopped. For
@@ -225,7 +224,7 @@ export function readAnim(doc: Doc): AnimView {
 }
 
 /** The keys table as it is written: a row for each shape with a key; null when none has. */
-export function keysBlock(keys: Key[][]): TableBlock | null {
+function keysBlock(keys: Key[][]): TableBlock | null {
   const rows = keys.flatMap((ks, i) => (ks.length ? [[String(i), sortKeys(ks.slice()).map(keyText).join('; ')]] : []));
   return rows.length ? { k: 'table', cols: [column('Shape'), column('Keys')], rows } : null;
 }
@@ -234,7 +233,7 @@ const sameTable = (a: Block | undefined, b: TableBlock | null) =>
   (!a && !b) || (!!a && !!b && a.k === 'table' && JSON.stringify(a.rows) === JSON.stringify(b.rows) && a.cols.map((c) => c.name).join('|') === b.cols.map((c) => c.name).join('|'));
 
 /** The keys table written from these keys: put in, replaced, or taken out (a `splice`); [] when it is so already. */
-export function setKeys(doc: Doc, keys: Key[][]): Op[] {
+function setKeys(doc: Doc, keys: Key[][]): Op[] {
   const at = keysAt(doc);
   const next = keysBlock(keys);
   if (sameTable(at >= 0 ? doc.blocks[at] : undefined, next)) return [];
@@ -289,20 +288,12 @@ const tidyKey = (key: Key): Key => {
 };
 
 /** The keys with shape i's key at its frame set (or replaced). */
-export function keysWith(anim: AnimView, i: number, key: Key): Key[][] {
+function keysWith(anim: AnimView, i: number, key: Key): Key[][] {
   const k = tidyKey(key);
   return anim.shapes.map((_, j) => (j === i ? sortKeys([...(anim.keys[j] ?? []).filter((q) => q.t !== k.t), k]) : (anim.keys[j] ?? [])));
 }
 
 /* ---------- commands: each the ops that do it ---------- */
-
-/** Shape i's key at its frame set: the keys table replaced, and the head given its length and speed. */
-export function withKey(doc: Doc, i: number, key: Key): Op[] {
-  const v = readAnim(doc);
-  if (!v.shapes[i]) return [];
-  const keys = setKeys(doc, keysWith(v, i, key));
-  return keys.length ? [...headOps(doc, v.frames, v.fps), ...keys] : [];
-}
 
 /**
  * Several shapes keyed at once, each at its own key's frame, as one splice of the keys table: what a drag, a

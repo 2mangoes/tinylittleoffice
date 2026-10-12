@@ -8,7 +8,7 @@
  * Expressions are parsed by hand, never run as code: numbers, + - × ÷ ^ %, parentheses, the functions a
  * scientific calculator has, π and e, and x for graphing. What the hand parser does not read (units and
  * conversions, numbers past a double, a little algebra) goes to a second engine, math.ts, a chunk the editor
- * fetches: `setEngine`. Ported from the old tree's lib/calc.ts (the money modes are Sheet templates now).
+ * fetches: `setEngine`. Money (a loan, savings, a budget) is the Spreadsheet's templates, not a mode here.
  */
 import { isAtomic, writeInline, type Block, type Doc, type Op, type Run } from '../../doc/index.ts';
 
@@ -214,7 +214,7 @@ export function plot(expr: string, from = -10, to = 10, n = 240): (readonly [num
 }
 
 /** A graph's first line may set the range: "x from -10 to 10". */
-export const RANGE = /^x\s+from\s+(-?[\d.]+)\s+to\s+(-?[\d.]+)\s*$/i;
+const RANGE = /^x\s+from\s+(-?[\d.]+)\s+to\s+(-?[\d.]+)\s*$/i;
 /** The curves of a graph, and the range they are drawn across. */
 export function curves(lines: string[]): { from: number; to: number; exprs: string[] } {
   const m = RANGE.exec(lines[0] ?? '');

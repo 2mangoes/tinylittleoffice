@@ -33,7 +33,8 @@ every app. An empty paragraph is written `<br>` and read back as a paragraph wit
 not survive the read), so a blank line typed between two others keeps its place in the link. Column headings `Price:money` carry the type; `Price: money` reads too and is written `Price:money`.
 
 **The invariants.** For every canonical text `x`, `write(parse(x)) === x` byte for byte — the gate is
-`test/doc/corpus.test.ts` over every template and example of the old tree (84 documents). For any runs,
+`test/doc/corpus.test.ts` over the corpus in test/doc/corpus (every template, the guide's and the skill's examples, and
+the examples of the apps at the tag `v0-before-rebuild`). For any runs,
 `parseInline(writeInline(runs))` keeps every letter and every mark on it, and `writeInline` is idempotent on its own
 output. The inline writer keeps canonical text stable by escaping as little as reads back right: it writes the words
 with only a backslash escaped, reads them back, and falls to full escaping only when they would read as other runs
@@ -77,5 +78,5 @@ the view's padding, and `evaluate(doc, at)` (`formula.ts`) works out any table b
 text as much as in a sheet. Footnotes, numbered lists and links in plain words are drawn with `notes.ts`
 (`notesOf`, `markNotes`, `noteNumbers`, `listNumbers`, `runLinks`), the same way everywhere.
 
-Tests: `test/doc/*.test.ts`, node only (`npm run test:unit`). The corpus is regenerated from the old tree with
-`node test/doc/corpus/make.ts [path]`.
+Tests: `test/doc/*.test.ts`, node only (`npm run test:unit`). The corpus is fixed: a document is added to it by hand,
+and never rewritten to match the code.

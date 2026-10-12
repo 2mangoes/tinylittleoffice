@@ -7,8 +7,7 @@
  * draws round them elements that take their state as properties and speak back by events: <to-chrome> (kit/chrome.ts:
  * the header, the menu button, the banners, the column that scrolls and the bar's place in it), <to-share>
  * (kit/share-dialog.ts), <to-privacy> (kit/privacy-dialog.ts: unlock, the password), and the editor,
- * <to-drawer>, <to-find>, <to-toast> and the shortcuts dialog. (Until round eight all of it was this one element,
- * 1,400 lines, the window scrolled and the bar measured into place over a phone's keyboard: kit/chrome.ts says why.)
+ * <to-drawer>, <to-find>, <to-toast> and the shortcuts dialog. Nothing scrolls the window: kit/chrome.ts says why.
  *
  * A sealed link ("E…", kit/crypt.ts) shows nothing of the document, its title included, until the password is given;
  * while a password is set every change is sealed again before it reaches the address bar, so the link, the library
@@ -38,7 +37,7 @@
  * Link of a document that is not their own (not in the library, not made or changed in this page) is told it once a
  * document, in a quiet line under the header that its × closes (`copies`). Which documents have been told is kept
  * as short digests under `tinyoffice.copiesSaid` (in memory under Private), never the document. A digest names a
- * document by its app and its `created` stamp (and signer), so every link of one document is one digest; a document
+ * document by its app and its `created` stamp (and its `by`), so every link of one document is one digest; a document
  * changed here is stamped at its first change and its digest counted as told then, so after a reload (which forgets
  * which links this page wrote) its Display Link stays quiet under Saved. One with no `created` (never changed by
  * anyone) is named by its link, so each of its links is told once.

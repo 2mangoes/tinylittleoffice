@@ -1,4 +1,4 @@
-// Round nine on a phone (directive r9-commands, points 4 and 5): the context bar is a row of the bottom bar, beginning
+// The commands on a phone: the context bar is a row of the bottom bar, beginning
 // with Cut, Copy and Paste, and nothing floats over the words; on a fine pointer it floats as before. The bar comes with
 // a person's focus in the document and goes with it (the Calculator's always shows); what of it needs nothing in hand is
 // a row of the drawer's This document. And the command palette (point 6): Mod+K, filtered as typed, Enter runs.

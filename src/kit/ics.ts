@@ -1,7 +1,7 @@
 /**
  * iCalendar (RFC 5545) as text, for any app with dates: one writer, so every file folds its lines the same
  * way (at most 75 octets of UTF-8 a line, a continuation starting with a space, never splitting a character),
- * escapes the same characters and ends its lines with CRLF. Ported from the old tree's lib/ics.ts; no DOM.
+ * escapes the same characters and ends its lines with CRLF. No DOM.
  */
 
 /** TEXT values: a backslash, a semicolon and a comma escaped, a newline as \n. */

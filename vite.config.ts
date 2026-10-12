@@ -78,7 +78,7 @@ export default defineConfig(({ mode }) => ({
       input: { main: resolve(import.meta.dirname, 'index.html') },
       // The layout scripts/budgets.ts weighs (main, apps, each editor and its commands) is the bundler's by default, and
       // its pass that avoids "redundant" chunk loads folded the apps chunk into main once no lazy chunk imported a
-      // module of main's own (round seventeen, signing gone): off, so the chunks stay what they were drawn to be.
+      // module of main's own: off, so the chunks stay what they were drawn to be.
       experimental: { chunkOptimization: { avoidRedundantChunkLoads: false } },
       // An app's editor and its commands are named for the app (write-editor-<hash>.js), its templates too
       // (templates-write-<hash>.js), a language for its code

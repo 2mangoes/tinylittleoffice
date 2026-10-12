@@ -4,7 +4,7 @@
  * than one. Raster, not vector: a page's SVG holds web fonts, icons and pictures a PDF cannot carry as they
  * are, and a picture of it is the page exactly as drawn; the words stay words in Print's PDF and in the
  * apps' own text formats (and the Outliner's text PDF, kit/textpdf.ts). Pictures in, bytes out: the
- * browser draws the JPEGs (exports.ts). Ported from the old tree's kit/pdf.ts; pure.
+ * browser draws the JPEGs (exports.ts). Pure.
  */
 import { measure } from './textpdf.ts';
 

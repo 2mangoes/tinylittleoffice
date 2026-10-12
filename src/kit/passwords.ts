@@ -27,4 +27,3 @@ function draw(n: number): string {
 export function generatePassword(groups = 4, each = 5): string {
   return Array.from({ length: groups }, () => draw(each)).join('-');
 }
-export const PASSWORD_ALPHABET = ALPHABET;

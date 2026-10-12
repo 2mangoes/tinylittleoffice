@@ -1,6 +1,6 @@
 /**
  * Calendar's document, read and edited (docs/kernel.md §3). A span of time is a list item: when it is, then
- * what, the words rich text (ported from the old tree's lib/calmodel.ts and lib/ganttmodel.ts):
+ * what, the words rich text:
  *
  *   ---
  *   zone: America/New_York
@@ -178,7 +178,7 @@ export function readWhen(text: string, zone: string): { kind: 'd' | 't'; start: 
 }
 
 /** When a span is, as its item starts: dates as they are, times as the clock reads in `zone`. */
-export function whenText(s: Span, zone: string): string {
+function whenText(s: Span, zone: string): string {
   if (s.kind === 'd') return dayString(s.start) + (s.dur > 1 ? ` to ${dayString(s.start + s.dur - 1)}` : '');
   const a = utcToParts(spanStartMs(s), zone);
   const b = utcToParts(spanEndMs(s), zone);
@@ -338,14 +338,14 @@ export function putItem(doc: Doc, v: CalView, item: Item | null, d: Draft, viewe
 }
 
 /** A span moved by whole days; a timed one keeps its clock in the zone it is written in. */
-export function shiftDraft(i: Draft, days: number, zone: string): Draft {
+function shiftDraft(i: Draft, days: number, zone: string): Draft {
   if (!days) return i;
   if (i.kind === 'd') return { ...i, start: i.start + days };
   const p = utcToParts(spanStartMs(i), zone);
   return { ...i, start: clockMinutes(ymdToDay(p.y, p.m, p.d) + days, p.h, p.min, zone) };
 }
 /** A span of days made so many days long. */
-export const resizeDraft = (i: Draft, days: number): Draft => (i.kind === 'd' ? { ...i, dur: Math.max(1, Math.round(days)) } : i);
+const resizeDraft = (i: Draft, days: number): Draft => (i.kind === 'd' ? { ...i, dur: Math.max(1, Math.round(days)) } : i);
 
 /** An item moved by days (dragged on the schedule), or made a number of days long. */
 export function moveItem(v: CalView, i: Item, days: number): Op[] {

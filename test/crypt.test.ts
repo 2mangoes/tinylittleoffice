@@ -2,8 +2,8 @@
 // which the app made (kit/passwords.ts: about 117 bits, nothing to stretch), and a sealed fixture opening.
 import { test, expect } from 'vitest';
 import * as crypt from '../src/kit/crypt.ts';
-import { isSealed, newLocker, seal, unseal, unsealWith } from '../src/kit/crypt.ts';
-import { decodeDoc, encodeDoc, packDoc, toBase64Url, unpackDoc } from '../src/kit/codec.ts';
+import { newLocker, seal, unseal, unsealWith } from '../src/kit/crypt.ts';
+import { decodeDoc, encodeDoc, isSealed, packDoc, toBase64Url, unpackDoc } from '../src/kit/codec.ts';
 import { generatePassword } from '../src/kit/passwords.ts';
 
 const subtle = globalThis.crypto.subtle;
@@ -25,7 +25,6 @@ async function fixture(password: string, text: string): Promise<string> {
 }
 
 test('the parameters: a 16-byte salt, a 12-byte IV, "E" first; no iterations anywhere', async () => {
-  expect(Object.keys(crypt)).not.toContain('PBKDF2_ITERATIONS');
   // deriveKey(password, salt), newLocker(password), unseal(password, payload): nothing to say how slow.
   expect([crypt.deriveKey.length, crypt.newLocker.length, crypt.unseal.length]).toEqual([2, 1, 2]);
   const { flag, bytes } = packDoc('x');

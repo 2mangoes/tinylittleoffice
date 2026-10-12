@@ -1,6 +1,5 @@
 /**
- * A trip as a view of the document, and its commands as operations (docs/kernel.md §3; ported from the old
- * tree's lib/tripmodel.ts). The route is a table, a stop a row, its place in decimal degrees; the head says
+ * A trip as a view of the document, and its commands as operations (docs/kernel.md §3). The route is a table, a stop a row, its place in decimal degrees; the head says
  * how the legs are measured (`units: km` or `units: miles`; without it, hours of driving) and whether the
  * stops are a route at all (`route: dots`: places that stand alone, no line between them, no legs):
  *
@@ -59,11 +58,11 @@ export const valid = (lat: number, lon: number) => Number.isFinite(lat) && Numbe
 const flat = (s: string) => s.replace(/\n/g, ' ').trim();
 
 const UNIT_WORD: Record<Units, string | undefined> = { h: undefined, m: 'miles', k: 'km' };
-export const unitsOf = (word: string | undefined): Units => (/^(miles|mi)$/i.test(word ?? '') ? 'm' : /^(km|kilometres|kilometers)$/i.test(word ?? '') ? 'k' : 'h');
-export const linkedOf = (word: string | undefined): boolean => !/^(dots|no|none|off)$/i.test(word ?? '');
+const unitsOf = (word: string | undefined): Units => (/^(miles|mi)$/i.test(word ?? '') ? 'm' : /^(km|kilometres|kilometers)$/i.test(word ?? '') ? 'k' : 'h');
+const linkedOf = (word: string | undefined): boolean => !/^(dots|no|none|off)$/i.test(word ?? '');
 
 /** The trip's table: the first whose columns say where. */
-export function tripAt(doc: Doc): number {
+function tripAt(doc: Doc): number {
   return doc.blocks.findIndex((b) => b.k === 'table' && colsOf(b).lat >= 0 && colsOf(b).lon >= 0);
 }
 export function colsOf(b: TableBlock): Cols {
@@ -109,7 +108,7 @@ function looseStops(doc: Doc): { stops: Omit<Stop, 'row'>[]; units?: Units } {
   }
   return { stops, units };
 }
-export const stopRow = (s: Pick<Stop, 'lat' | 'lon' | 'name' | 'note'>): string[] => [flat(s.name), deg(s.lat), deg(s.lon), flat(s.note)];
+const stopRow = (s: Pick<Stop, 'lat' | 'lon' | 'name' | 'note'>): string[] => [flat(s.name), deg(s.lat), deg(s.lon), flat(s.note)];
 const tripTable = (rows: string[][]): TableBlock => ({ k: 'table', cols: TRIP_HEAD.map(column), rows });
 
 /** Loose words that say where, as the one table they mean: one splice of every block, and the units said. */
@@ -182,9 +181,6 @@ export function setPlace(v: TripView, s: Stop, lat: number, lon: number): Op[] {
   return ops;
 }
 
-/** Stop `i` moved one place earlier or later: its row out, and in again where its neighbour's is. */
-export const moveStop = (doc: Doc, v: TripView, i: number, by: -1 | 1): Op[] => moveStops(doc, v, i, i + 1, by);
-
 /** Stops [from, to) moved one place earlier or later, past their neighbour: their rows out, and in again beside it. */
 export function moveStops(doc: Doc, v: TripView, from: number, to: number, by: -1 | 1): Op[] {
   const chosen = v.stops.slice(from, to);
@@ -224,7 +220,6 @@ export function removeStops(v: TripView, idx: number[]): Op[] {
   const rows = [...new Set(idx)].flatMap((i) => (v.stops[i] ? [v.stops[i].row] : [])).sort((a, b) => b - a);
   return rows.map((r): Op => ({ op: 'rows', at: v.at, r, n: 1 }));
 }
-export const removeStop = (v: TripView, s: Stop): Op[] => [{ op: 'rows', at: v.at, r: s.row, n: 1 }];
 
 /** Stops [from, to) again, right after the last of them (never past the most a route holds). */
 export function duplicateStops(doc: Doc, v: TripView, from: number, to: number): Op[] {

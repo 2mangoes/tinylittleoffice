@@ -103,7 +103,7 @@ export interface Handoff {
 /**
  * The editor element an app's `editor()` names: given the document as `value`, it fires "docchange" with
  * the new text in `detail` on every edit. The shell writes it into the link. Undo and redo are the
- * kernel's (docs/kernel.md §8): the shell only forwards Mod+Z and Mod+Shift+Z as "docundo"/"docredo"
+ * kernel's (docs/kernel.md §6): the shell only forwards Mod+Z and Mod+Shift+Z as "docundo"/"docredo"
  * events on this element. Once a document is first drawn (not in display mode, not locked) the shell calls
  * `focusFirst()`: the focus goes where a person starts (docs/editing.md §1), without scrolling the page.
  */
@@ -154,8 +154,8 @@ export interface AppDef {
   commands?: () => Promise<{ default: readonly Command[] }>;
   /**
    * The document as what it says, for a screen reader, the Display Link's Text, a web page and the API
-   * (src/doc/text.ts): given by an app whose model is spatial (a diagram's things and connections, a board's
-   * columns and cards); absent, the kernel's from the document's blocks (kit/text-layer.ts).
+   * (src/doc/text.ts): given by an app whose model is spatial (a diagram's things and
+   * connections); absent, the kernel's from the document's blocks (kit/text-layer.ts).
    */
   text?(doc: Doc): TextNode[];
   /** How many steps the document builds up in when presented (a list an item a step, a trip a stop a step); `view(doc, { upTo })` draws a part of it. Absent or 0: shown whole. */

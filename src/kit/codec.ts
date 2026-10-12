@@ -13,7 +13,7 @@
  *
  * fflate rather than the browser's CompressionStream: the native API has no dictionary, is asynchronous,
  * and is absent under node for the tests; the dictionary is what makes short documents 20 to 35 percent
- * smaller. (Ported from the old tree's src/lib/codec.ts; the dictionary bytes are kept as they were.)
+ * smaller. The dictionary's bytes never change: a link made under them opens only under them.
  */
 import { Inflate, deflateSync, strToU8, strFromU8 } from 'fflate';
 

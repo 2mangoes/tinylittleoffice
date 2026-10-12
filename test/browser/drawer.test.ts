@@ -307,7 +307,7 @@ for (const [w, h] of [
     }
   });
 
-// Paul's hamburger notes of 2026-10-11 (round eighteen): the language, Save in browser, the size with no words, one
+// Paul's hamburger notes of 2026-10-11: the language, Save in browser, the size with no words, one
 // search over apps, documents, templates and commands, the apps away from home, then the rest; no Privacy, no
 // Keyboard shortcuts, no palette of its own; Theme's first option Match device; About's body the version line alone.
 

@@ -1,5 +1,5 @@
-// There is no Website Builder (Paul, 2026-10-11): a page of arbitrary HTML, style and script from a link, served
-// from our own domain, is a phishing kit, and no sandbox makes it safe. A document never runs code: twelve apps,
+// No app makes a web page (Paul, 2026-10-11): a page of arbitrary HTML, style and script from a link, served
+// from our own domain, is a phishing kit, and no sandbox makes it safe. A document never runs code: ten apps,
 // none of them draws a web page of its own, and the site serves no frame script for one.
 import { test, expect } from 'vitest';
 import { existsSync, readFileSync } from 'node:fs';

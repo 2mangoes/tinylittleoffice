@@ -237,7 +237,7 @@ test('the slots are found: the bar commands that show their words, the menus’ 
   for (const id of ['outline.connect', 'draw.mode', 'draw.background', 'diagram.kind', 'sheet.chart', 'anim.draw', 'anim.move', 'anim.fx', 'cal.zone']) expect(wordedIds, id).toContain(id);
   const bar = measures.filter((m) => m.slot === 'bar');
   const menu = measures.filter((m) => m.slot === 'menu');
-  // (Six since the Animator's Effects left its bar for the chosen shape's sliders, round eighteen.)
+  // (Six: the Animator's Effects are the chosen shape's sliders, not its bar.)
   expect(bar.length).toBeGreaterThanOrEqual(6);
   expect(menu.length).toBeGreaterThan(50);
   for (const m of menu) {

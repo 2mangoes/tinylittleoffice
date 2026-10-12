@@ -1,5 +1,4 @@
 /**
- * (Ported from the old tree's kit/textpdf.ts, over the kernel's runs; pure.)
  * A PDF of words rather than of pictures: a title, sections, and bullets
  * under them, set in Helvetica (one of the fonts every PDF reader has, so
  * nothing is embedded), wrapped to the page, broken across Letter pages,

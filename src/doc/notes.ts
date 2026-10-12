@@ -8,7 +8,7 @@
  * the inline form; referenceNotes writes it back out, for other readers.
  */
 import type { Block, Doc, Run } from './model.ts';
-import { parseInline, writeInline } from './tlo.ts';
+import { parseInline } from './tlo.ts';
 
 /** The notes some blocks hold, in order of appearance: each note's words, as inline Markdown. */
 export const notesOf = (blocks: readonly (Block | { runs: Run[] })[]): string[] => blocks.flatMap((b) => ('runs' in b ? b.runs : []).filter((r) => r.fn !== undefined).map((r) => r.fn!));
@@ -88,11 +88,3 @@ export function linkify(text: string): { t: string; url?: string }[] {
   if (last < text.length) out.push({ t: text.slice(last) });
   return out;
 }
-
-/** The alignment classes a text block may carry, and their short names. */
-export type Align = 'c' | 'r' | 'j';
-export const ALIGN_NAMES: Record<Align, string> = { c: 'center', r: 'right', j: 'justify' };
-export const ALIGN_OF: Record<string, Align> = { center: 'c', right: 'r', justify: 'j' };
-
-/** Runs as one line of inline Markdown (writeInline, named for what it is used as). */
-export { writeInline };

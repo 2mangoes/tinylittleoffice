@@ -11,7 +11,7 @@ import { LitElement, html } from 'lit';
 
 export const TOAST = 'to-toast';
 /** How long a message is shown, in ms: four seconds at least, and a second and a half more than 60ms a character. */
-export const toastTime = (message: string): number => Math.max(4000, 1500 + 60 * message.length);
+const toastTime = (message: string): number => Math.max(4000, 1500 + 60 * message.length);
 export function toast(message: string) {
   window.dispatchEvent(new CustomEvent(TOAST, { detail: message }));
 }

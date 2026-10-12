@@ -1,4 +1,4 @@
-// Random walks over the chrome's state machine (directive r9-walks). The bugs found by hand on a phone (the bar parked
+// Random walks over the chrome's state machine. The bugs found by hand on a phone (the bar parked
 // mid-screen, a dialog cut by the edge, the keyboard taking focus) are invariants broken after some sequence of
 // actions; fast-check's model-based testing walks thousands of sequences. The model and its steps are
 // test/walks-model.ts; here each step is done to the real page (a registry command in force, a key, a word, a tap, a
@@ -30,7 +30,7 @@ import fc from 'fast-check';
 import { mount, tick, until } from './helpers.ts';
 import { decodeDoc, encodeDoc } from '../../src/kit/codec.ts';
 import { appOf } from '../../src/kit/apps.ts';
-import { commandOf, inScope, live, register, registered, run, type Command } from '../../src/kit/commands.ts';
+import { inScope, live, register, registered, run, type Command } from '../../src/kit/commands.ts';
 import { go, parseHash, routeHash } from '../../src/kit/route.ts';
 import { stepSize } from '../../src/kit/zoom.ts';
 import { ENVELOPE_KEYS } from '../../src/kit/envelope.ts';
@@ -290,7 +290,7 @@ const templateLink = async (app: string) => {
 async function act(s: Step, r: Real): Promise<string> {
   switch (s.kind) {
     case 'command': {
-      const cmd = commandOf(s.id);
+      const cmd = registered().find((c) => c.id === s.id);
       const ctx = cmd && contextOf(cmd, r);
       if (!cmd || !ctx) return '(nothing in hand for it)';
       let ok = false;
@@ -596,7 +596,7 @@ function check(r: Real, s: Step, before: Layer[]) {
         if (Math.max(...tops) - Math.min(...tops) >= least / 2)
           broke(r, 'bar', `the bar is more than one row: its buttons' tops run from ${Math.round(Math.min(...tops))} to ${Math.round(Math.max(...tops))}`);
       }
-      // undo: on a phone Undo is pinned at the bar's end, outside its scroll, so it is always on screen (round sixteen).
+      // undo: on a phone Undo is pinned at the bar's end, outside its scroll, so it is always on screen.
       if (r.size === 'phone') undoOnScreen(r, bar, h);
     }
   }
@@ -639,7 +639,8 @@ class Walk implements fc.AsyncCommand<Model, Real> {
   check(m: Readonly<Model>) {
     // A walk is STEPS steps taken: more are drawn (a step not allowed where the walk is is passed over), the rest left.
     if ((current?.log.length ?? 0) >= STEPS) return false;
-    return allowed(this.step, m as Model, this.step.kind === 'command' ? commandOf(this.step.id) : undefined);
+    const step = this.step;
+    return allowed(step, m as Model, step.kind === 'command' ? registered().find((c) => c.id === step.id) : undefined);
   }
   async run(m: Model, r: Real) {
     const before = r.layers;

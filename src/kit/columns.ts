@@ -50,12 +50,12 @@ export function kindItems(col: Column | undefined, group: string, set: (type: Co
 export const choicesOf = (rows: string[][], c: number): string[] => [...new Set(rows.map((row) => (row[c] ?? '').trim()).filter((x) => x && !x.startsWith('=')))];
 
 /** The currencies offered as the field is typed in. */
-export const CURRENCIES = ['$', '£', '€', '¥', '₹', 'USD', 'EUR', 'GBP', 'JPY', 'INR', 'CNY', 'BRL', 'CAD', 'AUD', 'CHF'];
+const CURRENCIES = ['$', '£', '€', '¥', '₹', 'USD', 'EUR', 'GBP', 'JPY', 'INR', 'CNY', 'BRL', 'CAD', 'AUD', 'CHF'];
 
 let n = 0;
 
 /** The currency a money column names: resolves it ('' for none), or null when closed without OK. */
-export function askCurrency(now = ''): Promise<string | null> {
+function askCurrency(now = ''): Promise<string | null> {
   return new Promise((done) => {
     const dialog = document.createElement('to-dialog') as ToDialog;
     const list = `to-currencies-${++n}`;

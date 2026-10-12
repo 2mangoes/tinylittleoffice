@@ -7,14 +7,14 @@
  * substrings most documents share, chosen greedily by how many documents
  * hold each of their 8-byte pieces not yet covered, the most valuable put
  * last (deflate reaches back from the document, so the nearest bytes cost
- * the least to name). The corpus is the old tree's templates, the guide's
- * and the skill's examples, the apps' examples (test/doc/corpus) and two
+ * the least to name). The corpus is the templates, the guide's and the
+ * skill's examples, the apps' examples (test/doc/corpus) and two
  * hundred documents generated from the grammar (test/doc/tlo-grammar.ts).
  *
  * Then it reports, for every template of every app on this tree, the link's
  * payload under today's DICTIONARY (kit/codec.ts) and under the trained one,
  * each the shortest of the three encodings as packDoc chooses. The rule for
- * changing it (directive r9-grammar): every template shorter or equal, and
+ * changing it: every template shorter or equal, and
  * the largest template's link 5% shorter or more. A second dictionary would
  * be told apart by a new flag letter beside "y" (the codec reads each flag
  * with the dictionary it was written with); none is added unless the rule
@@ -36,7 +36,7 @@ const SEGMENT = 48;
 const GENERATED = args.includes('--generated') ? Number(args[args.indexOf('--generated') + 1]) : 200;
 
 /** A payload's length with a dictionary: the shortest of raw, deflated, and deflated against the dictionary, as packDoc picks. */
-export function linkLength(text: string, dictionary: Uint8Array): number {
+function linkLength(text: string, dictionary: Uint8Array): number {
   const raw = strToU8(text);
   const best = Math.min(raw.length, deflateSync(raw, { level: 9, mem: 12 }).length, deflateSync(raw, { level: 9, mem: 12, dictionary }).length);
   // base64url of n bytes, and the flag.

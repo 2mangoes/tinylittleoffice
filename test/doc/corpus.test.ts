@@ -1,6 +1,6 @@
-// The byte-stability gate: every canonical document the old tree held (templates, the guide's examples, the apps'
-// examples) is written back by the kernel exactly as it was. The corpus is in corpus/, one file a source;
-// `node test/doc/corpus/make.ts` writes it again from the old tree.
+// The byte-stability gate: every canonical document in corpus/ (the templates, the guide's and the skill's examples,
+// and the apps' examples at the tag v0-before-rebuild) is written back by the kernel exactly as it was.
+// One file a source; the corpus is fixed, added to by hand and never rewritten to match the code.
 import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { expect, test } from 'vitest';

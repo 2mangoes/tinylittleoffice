@@ -20,7 +20,7 @@ const DAY_MS = 86_400_000;
  * under it the day's events: a timed one with its times in the calendar's zone, one of several days with the days
  * it spans, and how either repeats.
  */
-export function calText(doc: Kernel): TextNode[] {
+function calText(doc: Kernel): TextNode[] {
   const v = readCal(doc);
   const zone = v.zone || 'UTC';
   const date = new Intl.DateTimeFormat(language(), { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });

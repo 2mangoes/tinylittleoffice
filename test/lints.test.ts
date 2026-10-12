@@ -1,13 +1,14 @@
-// The rules of the code, held by code (directive r9-lints). Each lint reads the tree, and the tiny bad file of
+// The rules of the code, held by code. Each lint reads the tree, and the tiny bad file of
 // test/fixtures/lints that it must catch, so a lint that stops working is seen. A failure names the file, the line
 // and what broke the rule, so the next builder can act on it without reading the lint. `npm run lint` runs these
 // (with the stylesheet and window-scrolling lints), and `npm run build` runs that first.
 import { execFileSync } from 'node:child_process';
-import { readFileSync, readdirSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { gzipSync } from 'node:zlib';
 import { describe, expect, test } from 'vitest';
 import { eagerTemplates, firstLoad, measure, overBudget, readBudgets, type Sizes } from '../scripts/budgets.ts';
+import { deadExports } from '../scripts/dead.ts';
 import { staleFiles } from '../scripts/generated.ts';
 import { ALLOWED, NOT_WORDS, WAIT_MS, bareWords, domNames, graphProblems, timedWaits, type Module } from './lints.ts';
 
@@ -211,7 +212,7 @@ export const TIMED: { file: string; wait: string; n: number; why: string }[] = [
   },
 ];
 
-describe(`a wait in a test is a condition: no tick(), setTimeout or waitForTimeout of more than ${WAIT_MS}ms (directive r19-flakes)`, () => {
+describe(`a wait in a test is a condition: no tick(), setTimeout or waitForTimeout of more than ${WAIT_MS}ms`, () => {
   const key = (file: string, wait: string) => `${file} | ${wait}`;
   const counts = (mods: Module[]) => {
     const n = new Map<string, number>();
@@ -239,6 +240,85 @@ describe(`a wait in a test is a condition: no tick(), setTimeout or waitForTimeo
     const found = counts(browserTests);
     expect(TIMED.filter((a) => (found.get(key(a.file, a.wait)) ?? 0) !== a.n).map((a) => `${key(a.file, a.wait)}: ${found.get(key(a.file, a.wait)) ?? 0}, not ${a.n}`)).toStrictEqual([]);
     for (const a of TIMED) expect(a.why.length, key(a.file, a.wait)).toBeGreaterThan(20);
+  });
+});
+
+describe('nothing exported that nothing uses (scripts/dead.ts, which npm run lint runs too)', () => {
+  test('the fixture’s unused and test-only exports are found, and the used and the tested pass', () => {
+    const found = (tested: boolean) => deadExports(join(FIXTURES, 'dead'), tested).map((d) => `${d.path}:${d.line}: ${d.name} (${d.kind})`);
+    expect(found(false)).toStrictEqual(['src/made.ts:4: fixtureUnused (unused)', 'src/made.ts:5: fixtureTestOnly (test-only)']);
+    expect(found(true)).toContain('src/made.ts:6: fixtureTested (tested)');
+  });
+  test('the tree has none', () => {
+    expect(deadExports().map((d) => `${d.path}:${d.line}: ${d.name} (${d.kind})`)).toStrictEqual([]);
+  }, 30_000);
+});
+
+/**
+ * Words for what is gone (Paul, 2026-10-11: "My guess is a lot of your docs and comments are out of date"): no file
+ * names them but the records (docs/history), each with what it was. A sentence that needs one describes something
+ * removed, or explains the code by where it came from rather than by what it does.
+ */
+export const STALE: { word: RegExp; was: string }[] = [
+  { word: /\bsignatures?\b/i, was: 'signing a document, and the signatures under it: removed 2026-10-11' },
+  { word: /\bsigning\b/i, was: 'the same' },
+  { word: /\bkanban\b/i, was: 'the Kanban app: removed 2026-10-11' },
+  { word: /\bto-do list\b/i, was: 'the To-do List app: removed 2026-10-11' },
+  { word: /\bwebsite builder\b/i, was: 'the Website Builder: removed 2026-10-11' },
+  { word: /\bowner key\b/i, was: 'the key that let a short link’s maker change it: removed with the living link' },
+  { word: /\bliving (short )?link\b/i, was: 'a short link its maker could change or delete (PUT and DELETE): removed 2026-10-11' },
+  { word: /\bpicture proxy\b/i, was: 'the Worker that fetched pictures from the web for a document: removed 2026-10-11' },
+  { word: /\bwhitelist\b/i, was: 'the proxy’s list of hosts it would fetch from' },
+  { word: /\bpbkdf2\b/i, was: 'the password hash before HKDF, when a person typed passwords: replaced 2026-10-11' },
+  { word: /\bthe old tree\b/i, was: 'the code before the rebuild: a comment says what the code does, not where it came from' },
+  { word: /\bthe rebuil(d|t)\b/i, was: 'the same: the tree before it is the tag v0-before-rebuild, named by what it holds' },
+  { word: /\bdirective r\d/i, was: 'the brief for a round of work (docs/history/directives): the code says why, not which brief asked' },
+  { word: /\b(in|added in|since|from) round [a-z0-9]+\b|\(round [a-z0-9]+[,)]/i, was: 'the same, by the round of work' },
+];
+
+/** The files that may say them, each with why. */
+const STALE_OK: Record<string, string> = {
+  'test/lints.test.ts': 'the list itself',
+  'test/fixtures/lints/stale-words.md': 'the fixture the lint must catch',
+  'src/kit/icons-meta.ts': 'Lucide’s own tags for its icons ("signature", "kanban"), generated from its release',
+  'src/i18n/fr.ts': '"une signature" is French for a byline',
+  'docs/github-setup.md': 'a tag signed with git’s signing key: a release’s provenance, not a document’s signature',
+  'docs/self-host.md': '`npm audit signatures`, npm’s check of a package’s provenance',
+};
+
+/**
+ * Every text file of the tree but the records: what git holds or would add (`--exclude-standard`), so nothing
+ * .gitignore keeps out is read, such as dependencies, builds and the Worker's types that `wrangler types` writes.
+ */
+const RECORDS = /^(docs\/history|docs\/directives)\/|^CHANGELOG\.md$/;
+const textFiles = execFileSync('git', ['ls-files', '--cached', '--others', '--exclude-standard', '-z'], { cwd: ROOT, encoding: 'utf8' })
+  .split('\0')
+  .filter((f) => f && !RECORDS.test(f) && existsSync(join(ROOT, f)))
+  .filter((f) => /\.(ts|js|mjs|json|jsonc|md|html|css|txt|tlo|sh|yml|yaml|svg|webmanifest)$|(^|\/)_headers$/.test(f))
+  .sort();
+
+describe('no word for what is gone: a sentence about something removed is rewritten or deleted', () => {
+  const found = (files: string[]) =>
+    files.flatMap((f) =>
+      readFileSync(join(ROOT, f), 'utf8')
+        .split('\n')
+        .flatMap((line, i) => STALE.filter((s) => s.word.test(line)).map((s) => `${f}:${i + 1}: ${s.word.source}`)),
+    );
+  test('the fixture’s are found, and a word that only holds one is not', () => {
+    expect(found(['test/fixtures/lints/stale-words.md'])).toStrictEqual([
+      'test/fixtures/lints/stale-words.md:1: \\bkanban\\b',
+      'test/fixtures/lints/stale-words.md:1: \\bpicture proxy\\b',
+      'test/fixtures/lints/stale-words.md:1: \\bwhitelist\\b',
+      'test/fixtures/lints/stale-words.md:5: \\bthe rebuil(d|t)\\b',
+      'test/fixtures/lints/stale-words.md:5: \\bdirective r\\d',
+      'test/fixtures/lints/stale-words.md:5: \\b(in|added in|since|from) round [a-z0-9]+\\b|\\(round [a-z0-9]+[,)]',
+    ]);
+  });
+  test('the tree has none', () => {
+    expect(found(textFiles.filter((f) => !(f in STALE_OK)))).toStrictEqual([]);
+  }, 30_000);
+  test('every file allowed still says one, so the list only shrinks', () => {
+    expect(Object.keys(STALE_OK).filter((f) => !found([f]).length)).toStrictEqual([]);
   });
 });
 

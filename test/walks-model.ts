@@ -1,4 +1,4 @@
-// The walks' model of the chrome (directive r9-walks): what a random walk over the shell can do, and when. Pure: the
+// The walks' model of the chrome: what a random walk over the shell can do, and when. Pure: the
 // node test (test/walks.test.ts) reads it to prove every registry command joins the walk by being registered, and the
 // browser walk (test/browser/walks.test.ts) runs it against the real page with fast-check's model-based testing.
 //

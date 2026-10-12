@@ -1,7 +1,7 @@
 /**
  * Calendar drawn and written out, with no DOM: the month pages (or, for a schedule, the chart) for print,
  * PDF, PNG and thumbnails; the file a calendar app reads (iCalendar, RFC 5545, through the kit's writer) and
- * a CSV. Ported from the old tree's cal.def.ts and gantt.def.ts.
+ * a CSV.
  */
 import { dayToYmd, ymdToDay, type Doc } from '../../doc/index.ts';
 import type { Page } from '../../kit/app.ts';
@@ -21,7 +21,7 @@ const weekday = (wd: number) => new Intl.DateTimeFormat(language(), { weekday: '
  * The calendar as months: a page for each month that has something in it (`max` at most), every span on the
  * days it covers, a repeating span on every day it comes round to; what the colours stand for at the foot.
  */
-export function monthPages(v: CalView, max = 3, now = new Date()): Page[] {
+function monthPages(v: CalView, max = 3, now = new Date()): Page[] {
   const zone = v.tz;
   // The months with something in them: a repeat counts for its first hundred days, so the ones shown stay near its start.
   const days = v.items.flatMap((s) => {
@@ -85,7 +85,7 @@ export function monthPages(v: CalView, max = 3, now = new Date()): Page[] {
 }
 
 /** The schedule as a page: a task a row, a bar over its days, how far along it is filled in; a task with parts a bracket over them. */
-export function ganttPage(v: CalView, max = Infinity): Page {
+function ganttPage(v: CalView, max = Infinity): Page {
   const bars = ganttBars(v).slice(0, max);
   const range = ganttRange(bars);
   if (!range) return { w: 480, h: 120, svg: text(240, 66, t('No tasks yet'), { px: 16, fill: MUTED, anchor: 'middle' }) };

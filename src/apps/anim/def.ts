@@ -19,7 +19,7 @@ export const titleOf = (doc: Doc): string => parse(doc).head.title ?? '';
 export const retitle = (doc: Doc, title: string): Doc => write(apply(parse(doc), { op: 'head', key: 'title', value: title.replace(/\n/g, ' ').trim() || undefined }));
 
 /** The animated GIF: every frame of a round drawn in the browser, each held 1/fps of a second, repeating as the motion says. */
-export async function animGif(doc: Doc): Promise<Uint8Array> {
+async function animGif(doc: Doc): Promise<Uint8Array> {
   const { pages, delayMs, loop } = animFrames(parse(doc));
   const frames: GifFrame[] = [];
   for (const p of pages) {

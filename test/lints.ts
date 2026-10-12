@@ -1,5 +1,5 @@
 /**
- * The rules of the code, read from the code (directive r9-lints): the pure readers test/lints.test.ts holds
+ * The rules of the code, read from the code: the pure readers test/lints.test.ts holds
  * the tree to, each run over a tiny bad file in test/fixtures/lints too, so a lint that stops catching is seen.
  *
  *   bareWords(source)    the words a person would read in an html`` or svg`` template that are not through t()

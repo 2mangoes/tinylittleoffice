@@ -98,7 +98,7 @@ export function skillCommands(): string {
 const BEGIN = '<!-- commands:begin';
 const END = '<!-- commands:end -->';
 /** docs/editing.md with its generated part as the registry says it. */
-export function editingDoc(text = readFileSync(at('docs/editing.md'), 'utf8')): string {
+function editingDoc(text = readFileSync(at('docs/editing.md'), 'utf8')): string {
   const i = text.indexOf(BEGIN);
   const j = text.indexOf(END);
   if (i < 0 || j < i) throw new Error('docs/editing.md: no commands markers');

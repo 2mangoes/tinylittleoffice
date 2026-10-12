@@ -1,9 +1,8 @@
 /**
  * Charts from a table, with no setup: the first column is the labels, every other column of numbers is a
  * series, named by its column's name. A table of From | To | Amount is also a set of flows, drawn as a
- * Sankey. Drawn as SVG so a chart works wherever a picture does, under node as in a browser. (Ported from
- * the old tree's lib/chart.ts; d3-sankey is pinned exactly and is the one dependency: the Sugiyama-style
- * layering it does has no native counterpart.)
+ * Sankey. Drawn as SVG so a chart works wherever a picture does, under node as in a browser. d3-sankey is
+ * pinned exactly and is the one dependency: the Sugiyama-style layering it does has no native counterpart.
  */
 import { sankey, sankeyLinkHorizontal } from 'd3-sankey';
 import type { Page } from './app.ts';
@@ -42,7 +41,7 @@ function flowColumns(names: string[]): [number, number, number] {
 }
 
 /** The rows whose From and To are words and whose Amount is a number: each a flow from one thing to another. */
-export function flowsOf(rows: Cell[][], names: string[] = []): Flow[] {
+function flowsOf(rows: Cell[][], names: string[] = []): Flow[] {
   const [f, to, a] = flowColumns(names);
   const word = (c: Cell): c is string => typeof c === 'string' && c.trim() !== '' && !c.startsWith('#');
   return rows.flatMap((row) => (word(row[f]) && word(row[to]) && typeof row[a] === 'number' && isFinite(row[a]) && row[a] > 0 ? [{ from: row[f].trim(), to: row[to].trim(), value: row[a] }] : []));
@@ -130,7 +129,7 @@ interface SLink {
  * many are, so a slide builds it without a jump. A flow that would turn back on itself (A to A, or closing
  * a loop) has no place in a flow diagram and is left out.
  */
-export function sankeyPage(flows: Flow[], title = '', w = 720, h = 440, upTo = Infinity): Page {
+function sankeyPage(flows: Flow[], title = '', w = 720, h = 440, upTo = Infinity): Page {
   let svg = title ? text(w / 2, 34, clip(title, w - 80, 20, true), { px: 20, bold: true, anchor: 'middle' }) : '';
   const top = title ? 56 : 12;
   if (!flows.length) return { w, h, svg: svg + text(w / 2, h / 2, t('Nothing to chart yet: rows of From | To | Amount'), { px: 16, fill: FAINT, anchor: 'middle' }), alt: t('An empty chart') };

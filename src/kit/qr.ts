@@ -1,7 +1,7 @@
 /**
  * A QR code from bytes: the standard construction (byte mode, error correction level L, the smallest
  * version that fits, the best mask), after Project Nayuki's reference. Returns the modules, row by row.
- * (Ported unchanged from the old tree's src/lib/qr.ts; there is no native API for this.)
+ * There is no native API for this.
  */
 export const QR_MAX_BYTES = 2953;
 

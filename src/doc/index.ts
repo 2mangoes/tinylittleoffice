@@ -4,18 +4,14 @@
  * links over runs, tables and the formula engine. README.md in this folder
  * says how the pieces fit.
  */
-export type { Attrs, Block, ColType, Column, Dir, Doc, FenceBlock, Head, Run, TableBlock, TextBlock } from './model.ts';
-export { attr, blankDoc, hasClass, isAtomic, isInnerDoc, isText, normalRuns, pages, plainText, sameMarks, sections } from './model.ts';
+export type { Attrs, Block, ColType, Column, Dir, Doc, Head, Run, TableBlock, TextBlock } from './model.ts';
+export { attr, hasClass, isAtomic, isInnerDoc, isText, normalRuns, pages, plainText, sections } from './model.ts';
 
 export {
-  amountOf,
-  attrsText,
   balanceNote,
-  cells,
   column,
   columnsOf,
   columnText,
-  COL_TYPES,
   currencyOf,
   escapeInline,
   fenceRef,
@@ -24,24 +20,20 @@ export {
   parseLines,
   refFence,
   splitAttrs,
-  splitHead,
   takeHead,
   text,
   withHead,
   write,
   writeBlock,
-  writeHead,
   writeInline,
-  writeLines,
 } from './tlo.ts';
 
 export type { Op } from './ops.ts';
 export { apply, applyAll, depthOf, family, invert, invertAll, joinBlocks, moveFamily, placeFamily, putCells, removeItem, replaceSpan, runLength, shiftFamily, sliceRuns, splitBlock } from './ops.ts';
 
-export type { Align } from './notes.ts';
-export { ALIGN_NAMES, ALIGN_OF, linkable, linkify, linkTarget, listNumbers, markNotes, noteNumbers, noteRuns, notesOf, referenceNotes, runLinks } from './notes.ts';
+export { linkable, linkify, linkTarget, listNumbers, markNotes, noteNumbers, noteRuns, notesOf, referenceNotes, runLinks } from './notes.ts';
 
-export type { Cells, Chart, Moved, Range, Table } from './table.ts';
+export type { Cells, Chart, Range, Table } from './table.ts';
 export {
   clearCells,
   COL_NAMES,
@@ -64,12 +56,10 @@ export {
   rcToRef,
   refToRC,
   remapLock,
-  remapRefs,
   ROWS,
   seriesOf,
   shiftFormula,
   sortRows,
-  stays,
   tableAt,
   usedSize,
   withLock,
@@ -81,5 +71,5 @@ export {
 export type { CellValue, Evaluated } from './formula.ts';
 export { COLUMN_TYPES, dateToSerial, evaluate, evaluateTable, formatCell, formatMoney, formatValue, FUNCTIONS, parseLiteral, serialToIso, todaySerial } from './formula.ts';
 
-export type { TextItem, TextList, TextNode, TextOptions, TextRun } from './text.ts';
+export type { TextList, TextNode, TextRun } from './text.ts';
 export { textCounts, textMarkdown, textOf } from './text.ts';

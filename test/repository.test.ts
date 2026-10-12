@@ -1,5 +1,5 @@
-// The repository as a stranger finds it at github.com/aboard-io/tinylittleoffice (directive r17-public): no old name
-// and no path of the machine it was built on, the package's metadata, the community files, and a CI that runs every
+// The repository as a stranger finds it at github.com/aboard-io/tinylittleoffice: no old name
+// and no path of the machine it was built on, the package's metadata, the license and a brief README and nothing else beside them, and a CI that runs every
 // check the deploy runs (scripts/deploy.mjs), in workflow files that are YAML.
 import { test, expect } from 'vitest';
 import { spawnSync } from 'node:child_process';

@@ -50,7 +50,6 @@ export const TERMS: Term[] = [
   { term: 'Paste' },
   // The page's theme (light, dark); "the theme" of a document's colours is its look.
   { term: 'Theme', not: [/theme's color|as the theme is/i] },
-  { term: 'signature' },
   { term: 'footnote' },
   // An org chart and a seating chart are diagrams of their own; "to chart" is to draw.
   { term: 'chart', not: [/org chart|seating chart|nothing to chart/i] },

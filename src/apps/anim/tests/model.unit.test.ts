@@ -29,7 +29,6 @@ import {
   setLoop,
   stateAt,
   turnScale,
-  withKey,
   withKeys,
 } from '../model.ts';
 import { animFrames, animPage, animToSvg, drawOrder, frameSvg, transformOf } from '../view.ts';
@@ -87,9 +86,9 @@ test('stateAt: straight lines between keys, held before the first and after the 
   expect(stateAt(readAnim(parse(DRAWING)), 0, 4)).toEqual(restKey(4));
 });
 
-test('withKey: the keys table replaced by one splice (put in with the first key), with the length and speed in the head; removeKey takes it out with the last', () => {
+test('withKeys, one shape: the keys table replaced by one splice (put in with the first key, which starts where the shape was drawn), with the length and speed in the head; removeKey takes it out with the last', () => {
   const doc = parse(DRAWING);
-  const ops = withKey(doc, 1, { ...restKey(12), dx: 40.4, s: 1.26, fx: 'nn' });
+  const ops = withKeys(doc, [{ i: 1, key: { ...restKey(12), dx: 40.4, s: 1.26, fx: 'nn' } }]);
   expect(ops).toEqual([
     { op: 'head', key: 'frames', value: '24' },
     { op: 'head', key: 'fps', value: '8' },
@@ -104,21 +103,26 @@ test('withKey: the keys table replaced by one splice (put in with the first key)
             { name: 'Shape', type: 'text' },
             { name: 'Keys', type: 'text' },
           ],
-          rows: [['1', '12,40,0,0,1.3,0,n']],
+          rows: [['1', '0,0,0,0,1,0; 12,40,0,0,1.3,0,n']],
         },
       ],
     },
   ]);
   const one = after(DRAWING, () => ops);
-  expect(one).toBe('---\nframes: 24\nfps: 8\n---\n' + DRAWING + '\nShape | Keys\n--- | ---\n1 | 12,40,0,0,1.3,0,n\n');
+  expect(one).toBe('---\nframes: 24\nfps: 8\n---\n' + DRAWING + '\nShape | Keys\n--- | ---\n1 | 0,0,0,0,1,0; 12,40,0,0,1.3,0,n\n');
   // A second key on the same shape: the row grows, sorted by frame; a key at a frame that has one replaces it.
-  const two = after(one, (d) => withKey(d, 1, { ...restKey(3), dy: -8 }));
-  expect(keysTable(two)).toBe('Shape | Keys\n--- | ---\n1 | 3,0,-8,0,1,0; 12,40,0,0,1.3,0,n\n');
-  expect(withKey(parse(two), 1, readAnim(parse(two)).keys[1][0]).filter((o) => o.op === 'splice')).toEqual([]);
+  const two = after(one, (d) => withKeys(d, [{ i: 1, key: { ...restKey(3), dy: -8 } }]));
+  expect(keysTable(two)).toBe('Shape | Keys\n--- | ---\n1 | 0,0,0,0,1,0; 3,0,-8,0,1,0; 12,40,0,0,1.3,0,n\n');
+  expect(withKeys(parse(two), [{ i: 1, key: readAnim(parse(two)).keys[1][0] }]).filter((o) => o.op === 'splice')).toEqual([]);
   expect(after(two, (d) => removeKey(d, 1, 3))).toBe(one);
   // The last key out: the table goes; the head stays.
-  expect(after(one, (d) => removeKey(d, 1, 12))).toBe('---\nframes: 24\nfps: 8\n---\n' + DRAWING);
-  expect(withKey(doc, 9, restKey(0))).toEqual([]);
+  expect(
+    after(
+      after(one, (d) => removeKey(d, 1, 12)),
+      (d) => removeKey(d, 1, 0),
+    ),
+  ).toBe('---\nframes: 24\nfps: 8\n---\n' + DRAWING);
+  expect(withKeys(doc, [{ i: 9, key: restKey(0) }])).toEqual([]);
 });
 
 test('setLength: head ops, and the keys past the new end gone', () => {
@@ -375,7 +379,7 @@ test('depth is the order, not the size: the stage sorts by depth at the moment, 
 test('turn: a keyed turn about the upright axis, written as u<deg> and read back; drawn as a squeeze across of cos(turn), mirrored past 90°', () => {
   expect(keysOf('3,0,0,0,1,0,,u120', 24)).toEqual([{ t: 3, dx: 0, dy: 0, z: 0, s: 1, r: 0, fx: '', u: 120 }]);
   expect(keysOf('3,0,0,0,1,0,d,p0:0/100:50,u-45', 24)[0]).toMatchObject({ fx: 'd', pts: [0, 0, 100, 50], u: -45 });
-  const doc = after(LIFT, (d) => withKey(d, 1, { ...restKey(12), u: 180 }));
+  const doc = after(LIFT, (d) => withKeys(d, [{ i: 1, key: { ...restKey(12), u: 180 } }]));
   expect(keysTable(doc)).toContain('12,0,0,0,1,0,,u180');
   expect(write(parse(doc))).toBe(doc);
   const v = readAnim(parse(doc));

@@ -8,8 +8,7 @@
    font size inside the nav is a part of --to-scale (the 16px of the scale it is under: the document's rem, the nav's
    font size), never of its parent's, so a small label in a small box is not smaller again. A length measured on the
    screen is a length set here: nothing is zoomed, so nothing placed from the page's coordinates is divided by
-   anything. (Until round eight the root's CSS zoom did this, and each popover, the nav's second zoom and every
-   viewport length had to undo it.) */
+   anything. */
 @layer kit {
   *,
   *::before,
@@ -102,24 +101,6 @@
   }
   a {
     color: var(--to-accent);
-  }
-  /* About's link to its own section (kit/drawer.ts): a button that reads as a link. */
-  .to-about-threats {
-    padding: 0;
-    font: inherit;
-    color: var(--to-accent);
-    text-decoration: underline;
-    background: none;
-    border: 0;
-    cursor: pointer;
-  }
-  .to-about-limits h3 {
-    margin: 1em 0 0.25em;
-    font-size: 1em;
-  }
-  .to-about-limits ul {
-    margin: 0;
-    padding-inline-start: 1.25em;
   }
   [hidden] {
     display: none !important;
@@ -225,7 +206,7 @@
   to-bar > * {
     flex: none;
   }
-  /* A label in the bar is one line, always (round four: "The menu bars often wrap individual lines"). */
+  /* A label in the bar is one line, always (Paul, 2026-10-09: "The menu bars often wrap individual lines"). */
   to-bar .to-btn,
   to-bar .to-btn > span {
     white-space: nowrap;

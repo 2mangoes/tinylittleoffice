@@ -1,4 +1,4 @@
-// The shell round a long document (round eight: the page is the visible window, the document scrolls in a column,
+// The shell round a long document (the page is the visible window, the document scrolls in a column,
 // kit/chrome.ts). The header and the app's bar hold still while the column scrolls under them, the menu button at the
 // top inline end; a short link's banner sits under the header. And the title, tapped, opens a row of its own across
 // the header, at a size that can be read: Enter keeps it, Escape puts back what was there.

@@ -1,5 +1,5 @@
 // The kit's GIF encoder: the header, the loop block, the frames' control blocks, and a decoder of our own that
-// reads every frame back pixel for pixel, across the 4096-code boundary too. (Ported from the old tree.)
+// reads every frame back pixel for pixel, across the 4096-code boundary too.
 import { test } from 'vitest';
 import assert from 'node:assert/strict';
 import { encodeGif, quantize, type GifFrame } from '../src/kit/gif.ts';

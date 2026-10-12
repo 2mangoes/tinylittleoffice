@@ -18,8 +18,7 @@
  * fingers: the point of the picture under them when the second finger came down is kept under their midpoint, by
  * scrolling the frame, so two fingers moving together pan it. Lifted, the canvas rounds the zoom to its step. The
  * browser is told not to pan under two fingers there (a touchmove with two touches is prevented), so the frame moves
- * by the fingers once, not twice. One reading for every canvas: until round eight the Drawing Tool counted its own
- * fingers and the others had no pinch at all.
+ * by the fingers once, not twice. One reading for every canvas.
  */
 import { keepSize, pinchSize, size } from './zoom.ts';
 import { scrollerOf } from './scroll.ts';
@@ -43,7 +42,7 @@ export interface PinchHandlers {
 type Gesture = Event & { scale: number; clientX?: number; clientY?: number };
 
 /** Reads pinches begun on `el` (the document for all of them). Returns what stops it. */
-export function onPinch(el: Document | HTMLElement, h: PinchHandlers): () => void {
+function onPinch(el: Document | HTMLElement, h: PinchHandlers): () => void {
   const fingers = new Map<number, { x: number; y: number; at: Element }>();
   let now: (Pinch & { from: 'pointer' | 'gesture' | 'touch'; d0: number; base: number }) | null = null;
   /** WebKit's gesture in progress, and its scale. */

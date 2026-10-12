@@ -1,5 +1,5 @@
 {
-  "source": "src/apps/trip/templates.ts (the rebuilt tree), the guide's trip example, the old tree's test route as dots",
+  "source": "src/apps/trip/templates.ts, the guide's trip example, the test route at the tag v0-before-rebuild, as dots",
   "docs": [
     {
       "name": "trip/portugal",

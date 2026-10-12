@@ -97,7 +97,7 @@ export function lockedCard(def: AppDef): Page {
 }
 
 /** A placed document that cannot be read: said so, on a card of its own. */
-export function unreadableCard(): Page {
+function unreadableCard(): Page {
   const w = 480;
   const h = 200;
   const words = t('This document cannot be read.');
