@@ -167,9 +167,9 @@ test('Password… shows a password the app made, with no field to type one; Set 
 
 test('Under Saved, a sealed document is kept as ciphertext, with no name; the home page calls it locked', async () => {
   setKeeping(true);
-  const shell = await mount(await sealedLink('---\ntitle: Salaries\n---\nWords.\n', 'pw'));
+  const shell = await mount(await sealedLink('---\ntitle: Salaries\n---\nWords.\n', 'Zq7-never-in-base64-Vx'));
   await until(() => dialog(shell, 'to-unlock-dialog').dialog.open);
-  fill(shell.querySelector<HTMLInputElement>('.to-unlock-field')!, 'pw');
+  fill(shell.querySelector<HTMLInputElement>('.to-unlock-field')!, 'Zq7-never-in-base64-Vx');
   shell.querySelector<HTMLButtonElement>('.to-unlock-go')!.click();
   await until(() => !!shell.querySelector('to-write-editor to-text .tx p'));
   await type(shell, 'x');
@@ -178,7 +178,9 @@ test('Under Saved, a sealed document is kept as ciphertext, with no name; the ho
   expect(kept.title).toBe('');
   expect(isSealed(parseHash(kept.hash).payload)).toBe(true);
   expect(JSON.stringify(localStorage)).not.toContain('Salaries');
-  expect(JSON.stringify(localStorage)).not.toContain('pw');
+  // A password random ciphertext cannot spell by chance ('pw' turned up inside base64 once in a while, and the test flaked).
+  expect(JSON.stringify(localStorage)).not.toContain('never-in-base64');
+  expect(JSON.stringify(localStorage)).not.toContain('Words.');
   const home = await mount('');
   await until(() => !!home.querySelector('.to-drive-words span'));
   expect(home.querySelector('.to-drive-words span')!.textContent).toBe('Locked document');
