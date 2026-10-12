@@ -150,7 +150,8 @@ log is public: the repository's **Actions** tab, the workflow **Deploy**, one ru
 2. runs `npm run deploy` with the three secrets, which only that step is given: the checks, the shortener's
    migrations, the site, the shortener, and the command line on npm, published with **provenance** (npm's record
    of the repository, the commit and the workflow run that built the package, vouched for by the runner's identity:
-   the package's page on npmjs.com shows it, and `npm audit signatures` checks it);
+   the package's page on npmjs.com shows it, and `npm audit signatures` checks it); a prerelease (1.1.0-next) is
+   published under its own tag, `next`, and `latest` is moved to it, so `npx tinylittleoffice` is always the newest;
 3. fetches every file of the live site and compares it with the build (`npm run verify-deploy`), and fails the
    run if one differs;
 4. builds the tag again, shows it is the same bytes, attests it, checks once more that it is what the site

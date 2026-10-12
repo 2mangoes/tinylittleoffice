@@ -158,8 +158,9 @@ console.log(`\nDeployed ${head.slice(0, 7)}.`);
 /**
  * The command line, packages/doc, on npm when it is not private and npm has not its version. NPM_TOKEN reaches npm
  * as NODE_AUTH_TOKEN through a .npmrc in a folder of its own, removed after: never the home directory's, never in a
- * log. A version with a part after "-" (1.0.0-next) goes under that dist-tag, as npm asks of a prerelease. A failure
- * here comes after the site is deployed, and says so.
+ * log. A version with a part after "-" (1.0.0-next) goes under that dist-tag, as npm asks of a prerelease, and then
+ * latest is moved to it as well: while every version is a prerelease the newest is the one to install (Paul,
+ * 2026-10-12: "Latest is better"). A failure here comes after the site is deployed, and says so.
  */
 function publishCli() {
   const what = 'the command line, on npm';
@@ -177,11 +178,9 @@ function publishCli() {
     writeFileSync(join(dir, '.npmrc'), '//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}\n');
     execSync('npm run -s build:cli', { stdio: 'inherit' });
     const tag = cli.version.includes('-') ? ` --tag ${cli.version.split('-')[1].split('.')[0]}` : '';
-    execSync(`npm publish --access public --provenance=${provenance}${tag}`, {
-      cwd: 'packages/doc',
-      stdio: 'inherit',
-      env: { ...process.env, NODE_AUTH_TOKEN: secret.NPM_TOKEN, NPM_CONFIG_USERCONFIG: join(dir, '.npmrc') },
-    });
+    const env = { ...process.env, NODE_AUTH_TOKEN: secret.NPM_TOKEN, NPM_CONFIG_USERCONFIG: join(dir, '.npmrc') };
+    execSync(`npm publish --access public --provenance=${provenance}${tag}`, { cwd: 'packages/doc', stdio: 'inherit', env });
+    if (tag) execSync(`npm dist-tag add ${cli.name}@${cli.version} latest`, { stdio: 'inherit', env });
     console.log(`  ✓ ${what}: ${cli.version} published (npm had ${published || 'none'})`);
   } catch {
     console.error(`  ✗ ${what}: npm publish failed (above); the site and the shortener are deployed`);
