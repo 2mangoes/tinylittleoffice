@@ -71,10 +71,26 @@ test('Edit link and Present link copy the two links (Paul, 2026-10-12); each say
   expect(display.textContent).toContain('Present link');
   expect(link.querySelector('small')!.textContent).toBe('Opens in the editor');
   expect(display.querySelector('small')!.textContent).toBe('Opens as pages to read');
-  // Equal, side by side.
+  // Equal, and at this phone's width (414) one under the other, each name on one line (Paul, 2026-10-12: the pair was
+  // uneven when a name wrapped beside the other); side by side at a desktop's width, below.
   const [a, b] = [link.getBoundingClientRect(), display.getBoundingClientRect()];
   expect(Math.round(a.width)).toBe(Math.round(b.width));
-  expect(Math.round(a.top)).toBe(Math.round(b.top));
+  expect(a.bottom).toBeLessThanOrEqual(b.top);
+  expect(Math.round(a.width)).toBe(Math.round(d.querySelector('.to-share-links')!.getBoundingClientRect().width));
+  for (const btn of [link, display]) {
+    const range = document.createRange();
+    range.selectNodeContents(btn.querySelector('span')!.lastChild!);
+    expect(range.getClientRects().length, btn.textContent!.trim()).toBe(1);
+  }
+  // The icon sits beside the name's first line, not centred on a name that wraps.
+  for (const b of [link, display]) {
+    const words = b.querySelector('span')!.lastChild!;
+    const range = document.createRange();
+    range.selectNodeContents(words);
+    const first = range.getClientRects()[0];
+    const i = b.querySelector('svg')!.getBoundingClientRect();
+    expect(Math.abs((i.top + i.bottom) / 2 - (first.top + first.bottom) / 2), b.textContent!.trim()).toBeLessThan(first.height / 4);
+  }
   await clipboard(async (copied) => {
     display.click();
     await until(() => copied() === shell.displayLink);
@@ -279,6 +295,26 @@ test('with the switch on (it is, unless turned off), Bluesky uploads one card of
   const x = await press(d, 'x', opened);
   expect(posted).toHaveLength(1);
   expect(new URL(x).searchParams.get('url')).toBe(link);
+});
+
+test('at 1100 wide the two copies are side by side, equal, each name on one line', async () => {
+  await page.viewport(1100, 800);
+  try {
+    const shell = await written(null!);
+    const d = await open(shell);
+    const [link, display] = [d.querySelector<HTMLButtonElement>('.to-copy-link')!, d.querySelector<HTMLButtonElement>('.to-copy-display')!];
+    const [a, b] = [link.getBoundingClientRect(), display.getBoundingClientRect()];
+    expect(Math.round(a.top)).toBe(Math.round(b.top));
+    expect(Math.round(a.width)).toBe(Math.round(b.width));
+    expect(a.right).toBeLessThanOrEqual(b.left);
+    for (const btn of [link, display]) {
+      const range = document.createRange();
+      range.selectNodeContents(btn.querySelector('span')!.lastChild!);
+      expect(range.getClientRects().length, btn.textContent!.trim()).toBe(1);
+    }
+  } finally {
+    await page.viewport(414, 896);
+  }
 });
 
 test('with the switch off, nothing is uploaded and the link has no ?c=; the choice is kept; Edit link and Email never upload', async () => {

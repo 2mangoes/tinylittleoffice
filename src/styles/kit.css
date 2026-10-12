@@ -908,14 +908,18 @@
   .to-rooms tr.over th {
     color: var(--to-danger);
   }
+  /* Edit link and Present link side by side where a column holds a name on one line, and one under the other where it
+     cannot (a phone, a large size): the pair was uneven when one name wrapped and the other sat centred against it
+     (Paul, 2026-10-12). Each copy's words start at its top, the icon beside the first line as an app's row has it. */
   .to-share-links {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 10em), 1fr));
     gap: 0.5em;
   }
   .to-share-copy {
     flex-direction: column;
     align-items: flex-start;
+    justify-content: flex-start;
     gap: 0.125em;
     padding: 0.625em 0.75em;
     white-space: normal;
@@ -923,7 +927,7 @@
   }
   .to-share-copy > span {
     display: inline-flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 0.375em;
     font-weight: 600;
   }
@@ -1978,7 +1982,7 @@
      of the first line, moved down by half of what the line has over it and taking no more room for it, so a row of one
      line is as tall as it was and drawn where it was (its line in the middle of the row: align-content). A button's
      words never wrap (.to-btn). */
-  :is(.to-app-open, .to-field-words) > .to-icon:first-child {
+  :is(.to-app-open, .to-field-words, .to-share-copy > span) > .to-icon:first-child {
     --to-drop: max(0em, (1lh - var(--i, 1.25) * var(--to-scale)) / 2);
     margin-block: var(--to-drop) calc(-1 * var(--to-drop));
   }
