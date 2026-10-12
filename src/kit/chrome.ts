@@ -472,8 +472,9 @@ export class ToChrome extends LitElement {
     // The menu button is a hamburger (Paul, 2026-10-10: "Make the hamburger a hamburger"); the mark is the drawer's.
     const burger = html`<button type="button" class="to-btn to-tool to-burger" aria-label=${t('Menu')} title=${t('Tiny Little Office menu')} aria-haspopup="dialog" @click=${() => this.say('to-drawer-open')}>${icon(UI.menu, 24)}</button>`;
     const head = html`<header class="to-header ${this.titling ? 'titling' : ''}" aria-label=${t('Tiny Little Office')} @focusin=${this.openTitle} @focusout=${() => (this.titling = false)} @keydown=${this.titleKey}>${this.doc ? this.renderDoc(this.doc) : html`<a class="to-brand" href="#/">${t('Tiny Little Office')}</a>`}</header>`;
+    // The column scrolls (the room below the last line, r18-caret-middle, sees to that even in a short document), so it is in the tab order and the keys scroll it, as the Display Link's column is; a scrollable box no key can reach fails axe's scrollable-region-focusable (the v1.1.1 deploy, 2026-10-12).
     return html`${burger}${head}${this.renderArrival()}${this.renderOther()}<div class="to-column ${this.barred ? 'barred' : ''}">
-      <main class=${this.mainClass} tabindex="-1" aria-label=${this.label || nothing}>${this.main}</main>
+      <main class=${this.mainClass} tabindex="0" aria-label=${this.label || nothing}>${this.main}</main>
     </div>`;
   }
 }
