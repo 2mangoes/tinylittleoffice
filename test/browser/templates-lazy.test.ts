@@ -1,4 +1,4 @@
-// An app's templates are a chunk of their own, loaded when asked for (Paul, 2026-10-11: "Lazy templates is right"):
+// An app's templates are a file of their own, loaded when asked for (Paul, 2026-10-11: "Lazy templates is right"):
 // the list shows Blank at once and grows when the rest arrive, with no spinner; a pointer over an app's row asks
 // ahead of the tap; a template chosen opens its own document; and a language chosen asks for them again, since the
 // names follow it.

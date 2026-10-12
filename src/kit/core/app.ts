@@ -2,7 +2,8 @@
  * The kit's contract with an app: a definition (this file's AppDef) and an editor element, in
  * src/apps/<id>/. Everything the shell offers is driven by the definitions: the home page, the routes, the
  * templates, the downloads, the pictures. A definition touches no DOM, so the build and the tests read it
- * under node; the editor is a lazy import, a chunk of its own, fetched when the app opens.
+ * under node; the editor is a lazy import, which the site's build resolves inside its one app file (vite.config.ts)
+ * and the API's leaves out (vite.api.config.ts).
  *
  * The document is the kernel's (docs/kernel.md). Until src/doc lands it passes through the kit as its TLO
  * text, and `Doc` here is that string: the shell hands an editor the text and takes the text back.
@@ -128,7 +129,7 @@ export interface AppDef {
   /** A new document. */
   blank(): Doc;
   /**
-   * The app's templates, when asked for: a chunk of their own (`() => import('./templates.ts').then((m) => m.templates())`),
+   * The app's templates, when asked for: a file of their own in the build (`() => import('./templates.ts').then((m) => m.templates())`),
    * so the registry the home page imports carries none of their words. Blank needs none: it is `blank()`. Asked again
    * after a language is chosen, the names follow it.
    */

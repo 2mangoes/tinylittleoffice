@@ -44,7 +44,7 @@ function app(id: string) {
   return def;
 }
 
-/** Each app's templates, by its id: a chunk of their own, asked for once before the guide is written. */
+/** Each app's templates, by its id: a module of their own, asked for once before the guide is written. */
 type Templates = Map<string, Template[]>;
 
 function example(all: Templates, id: string, tpl: string): string {

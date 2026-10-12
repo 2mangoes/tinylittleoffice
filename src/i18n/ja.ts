@@ -1410,6 +1410,7 @@ export default {
   'Templates for {app}': '{app}のテンプレート',
   '{app} Templates': '{app}のテンプレート',
   'Templates for {app}: {name}': '{app}のテンプレート：{name}',
+  'The templates are not saved in this browser yet. Connect to the internet to see them.': 'テンプレートはまだこのブラウザに保存されていません。インターネットに接続すると表示されます。',
   // The grip on a line of the tape; the bar under lines chosen whole.
   'Choose line {n}: drag it to move it': '{n}行目を選ぶ：ドラッグで移動',
   'Chosen lines': '選択中の行',

@@ -187,7 +187,8 @@ browser first; a dependency names what it beat. This page is written by \`npm ru
 with no reason.
 
 "Adds" is the minified JavaScript the build carries for that package and what it brings, in all its chunks
-(its own share in brackets where the two differ); most of it loads only with the app that uses it (the map with the Trip Planner, mathjs with the Calculator). It is measured by
+(its own share in brackets where the two differ); all of it is in the one app file a visit fetches once (the map
+runs only in the Trip Planner, mathjs only in the Calculator). It is measured by
 \`npm run docs:deps -- --sizes\`, which builds the site, and moves a little with every build. Nothing is
 vendored: every byte of code comes from npm through the committed lockfile; the type's files are IBM's, below.
 

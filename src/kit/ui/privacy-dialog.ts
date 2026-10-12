@@ -16,7 +16,7 @@
 import { LitElement, html, nothing, type TemplateResult } from 'lit';
 import { t } from '../core/i18n.ts';
 import { icon, UI } from '../draw/icons.ts';
-import { toast } from './toast.ts';
+import { toast } from '../core/say.ts';
 import { copyText } from '../share/share.ts';
 import { forgetDocuments, forgetEverything, forgetLinks, forgetPrefs, holdings, keeping, lockWith, onPrivacy, remember, unlock, type Holdings } from '../share/privacy.ts';
 import type { Locker } from '../share/crypt.ts';

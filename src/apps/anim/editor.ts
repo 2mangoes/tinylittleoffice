@@ -28,7 +28,7 @@ import { t } from '../../kit/core/i18n.ts';
 import { type ContextEntry, type ToContext } from '../../kit/ui/context.ts';
 import type { ToDialog } from '../../kit/ui/dialog.ts';
 import { GENERATOR, docToHtml, htmlToBlocks } from '../../kit/text/clipboard.ts';
-import { toast } from '../../kit/ui/toast.ts';
+import { toast } from '../../kit/core/say.ts';
 import { pinchZoom } from '../../kit/ui/pinch.ts';
 import { applyAll, parse, write, type Doc, type Op } from '../../doc/index.ts';
 import { GRID, H, W, bounds, isDrawn, isLink, shapesTable, type Shape } from '../draw/model.ts';

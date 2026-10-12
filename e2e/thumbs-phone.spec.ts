@@ -40,8 +40,9 @@ test('the templates list and the kept documents draw a wide document in the one 
     await shot(page, app.split(' ')[0].toLowerCase());
     await option.click();
     await expect(page).toHaveURL(/#\/v1\/\w+\//);
-    // The editor settles the link (its name, its place in the library) before the page goes home.
-    await expect(page.locator('.to-title')).toBeVisible();
+    // The editor settles the link (its name, its place in the library) before the page goes home. (On a phone the new
+    // document has the focus in its first box, and the header has stepped aside for the keyboard: the title is there, unseen.)
+    await expect(page.locator('.to-title')).toBeAttached();
     await expect
       .poll(async () => {
         const was = page.url();

@@ -4,7 +4,7 @@
  * (kit/share/short.ts) with the ciphertext alone on the server.
  */
 import { t } from '../core/i18n.ts';
-import { toast } from '../ui/toast.ts';
+import { toast } from '../core/say.ts';
 import { origin } from '../core/network.ts';
 
 export async function copyText(text: string, said = t('Link copied')): Promise<boolean> {

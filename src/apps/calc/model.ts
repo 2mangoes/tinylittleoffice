@@ -7,8 +7,8 @@
  *
  * Expressions are parsed by hand, never run as code: numbers, + - × ÷ ^ %, parentheses, the functions a
  * scientific calculator has, π and e, and x for graphing. What the hand parser does not read (units and
- * conversions, numbers past a double, a little algebra) goes to a second engine, math.ts, a chunk the editor
- * fetches: `setEngine`. Money (a loan, savings, a budget) is the Spreadsheet's templates, not a mode here.
+ * conversions, numbers past a double, a little algebra) goes to a second engine, math.ts, which the editor
+ * imports and hands over: `setEngine`. Money (a loan, savings, a budget) is the Spreadsheet's templates, not a mode here.
  */
 import { isAtomic, writeInline, type Block, type Doc, type Op, type Run } from '../../doc/index.ts';
 

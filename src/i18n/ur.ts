@@ -1412,6 +1412,7 @@ export default {
     'Templates for {app}': '{app} کے ٹیمپلیٹ',
     '{app} Templates': '{app} ٹیمپلیٹ',
     'Templates for {app}: {name}': '{app} کے ٹیمپلیٹ: {name}',
+    'The templates are not saved in this browser yet. Connect to the internet to see them.': 'ٹیمپلیٹ ابھی اس براؤزر میں محفوظ نہیں ہیں۔ انہیں دیکھنے کے لیے انٹرنیٹ سے جڑیں۔',
   // The grip on a line of the tape; the bar under lines chosen whole.
     'Choose line {n}: drag it to move it': 'سطر {n} چنیں: اسے ہلانے کے لیے کھینچیں',
     'Chosen lines': 'چنی ہوئی سطریں',

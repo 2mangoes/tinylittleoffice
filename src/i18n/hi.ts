@@ -1411,6 +1411,7 @@ export default {
   'Templates for {app}': '{app} के टेम्पलेट',
   '{app} Templates': '{app} टेम्पलेट',
   'Templates for {app}: {name}': '{app} के टेम्पलेट: {name}',
+  'The templates are not saved in this browser yet. Connect to the internet to see them.': 'टेम्पलेट अभी इस ब्राउज़र में सेव नहीं हैं। उन्हें देखने के लिए इंटरनेट से जुड़ें।',
   // The grip on a line of the tape; the bar under lines chosen whole.
   'Choose line {n}: drag it to move it': 'लाइन {n} चुनें: हिलाने के लिए खींचें',
   'Chosen lines': 'चुनी हुई लाइनें',

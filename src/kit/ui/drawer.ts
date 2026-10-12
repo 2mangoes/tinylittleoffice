@@ -38,7 +38,7 @@ import { THEMES, setTheme, theme, themeName, type Theme } from './theme.ts';
 import { keeping, onPrivacy, setPrivate } from '../share/privacy.ts';
 import { canInstall, install, installByHand, onInstall } from '../core/install.ts';
 import { size } from './zoom.ts';
-import { toast } from './toast.ts';
+import { toast } from '../core/say.ts';
 import { commitUrl, running, type Version } from '../core/version.ts';
 import './preview.ts';
 import { focusBack, handBack, type ToDialog } from './dialog.ts';
@@ -217,7 +217,7 @@ export class ToDrawer extends LitElement {
     const has = (...words: string[]) => startsAWord(q, ...words);
     const all = apps();
     const found = all.filter((a) => has(a.name, a.blurb));
-    // The templates that have arrived; asked for here (a chunk an app), the list grows as the rest come.
+    // The templates that have arrived; asked for here (a file an app), the list grows as the rest come.
     for (const a of all) if (!arrivedTemplates(a)) void preloadTemplates(a).then(() => this.requestUpdate());
     const templates = all.flatMap((a) => (arrivedTemplates(a) ?? []).filter((tpl) => has(tpl.name, tpl.blurb, a.name)).map((tpl) => ({ a, tpl })));
     const docs = kept.filter((k) => has(k.title)).flatMap((k) => all.filter((a) => a.id === k.app).map((a) => ({ a, k })));

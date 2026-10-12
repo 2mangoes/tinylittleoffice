@@ -1,7 +1,7 @@
 /**
  * The registry: every app's definition, in the order the home page shows them. A definition is light (no
- * editor, no DOM, no templates: those are a chunk of their own, asked for with `templates()`), so this list
- * costs the home page little; the build reads it too (vite.config.ts).
+ * DOM, no templates: those are a file of their own, asked for with `templates()`), so the API reads it without the
+ * editors (vite.api.config.ts); the build reads it too (vite.config.ts).
  */
 import { lookup, type AppDef } from './app.ts';
 import write from '../../apps/write/def.ts';

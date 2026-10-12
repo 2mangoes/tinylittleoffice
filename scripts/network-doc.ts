@@ -48,8 +48,15 @@ follows them; nothing in a document is drawn from another site's address.
   a new tab, with the title and the link in it: no script of theirs runs here. The link is the document, so
   whoever reads the post can read it. "Any https address" there is the Mastodon server the person names.
 - **Fonts and icons.** Self-hosted, from the site itself: the type is IBM Plex (\`public/fonts/\`), each face
-  fetched when a page's words need it, and the policy's \`font-src\` is \`'self'\` alone; the full icon set is a
-  chunk of the site's own, loaded when the icon picker opens.
+  fetched when a page's words need it, and the policy's \`font-src\` is \`'self'\` alone; the icons and the emoji
+  are in the site's own app file.
+- **Offline.** With Save in browser on, the site's service worker (\`/sw.js\`, from \`src/sw.ts\`) keeps the
+  site's own files on the device: the eleven pages, the app file, its stylesheet, the theme script, the manifest
+  and icons and the Latin faces when it is installed, and each file a page fetches afterwards (an app's templates,
+  a language, a face). It asks only the site, and only for its files; a page is asked of the network first, so a
+  visit online is never stale. It never keeps a document (the document is after the "#", which never reaches it)
+  nor a link's \`?c=\` page. Turning Save in browser off unregisters it and deletes everything it kept; under
+  Private nothing registers.
 - **Links.** A link in a document that leaves the site opens only after the reader is shown where it goes
   and says Go (kit/ui/link-guard.ts), in a new tab with no referrer.
 

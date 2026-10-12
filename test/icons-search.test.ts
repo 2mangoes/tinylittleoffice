@@ -45,8 +45,9 @@ test('search by name, prefix and keyword', () => {
   expect(iconCategories()).toEqual([]);
 });
 
-test('the lazy chunk brings all of Lucide, found by name and tag, in categories', async () => {
-  // (Under node the chunk's dialog is never opened; its import alone joins the icons.)
+test('the whole library brings all of Lucide, found by name and tag, in categories', async () => {
+  // (Under node the picker's dialog is never opened; its import alone joins the icons, as the app file holding it does
+  // in the built site.)
   await import('../src/kit/ui/icons-picker.ts');
   const { allIcons } = await import('../src/kit/draw/icons-full.ts');
   expect(allIcons.length).toBeGreaterThan(1500);

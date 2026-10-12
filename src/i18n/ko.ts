@@ -1411,6 +1411,7 @@ export default {
   'Templates for {app}': '{app} 템플릿',
   '{app} Templates': '{app} 템플릿',
   'Templates for {app}: {name}': '{app} 템플릿: {name}',
+  'The templates are not saved in this browser yet. Connect to the internet to see them.': '템플릿이 아직 이 브라우저에 저장되지 않았어요. 인터넷에 연결하면 볼 수 있어요.',
   // The grip on a line of the tape; the bar under lines chosen whole.
   'Choose line {n}: drag it to move it': '{n}번째 줄 선택: 끌어서 이동해요',
   'Chosen lines': '선택한 줄',

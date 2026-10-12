@@ -33,7 +33,7 @@ test('no template draws an attribute mark as words', async () => {
   expect(shown).toEqual([]);
 });
 
-// A definition is light (Paul, 2026-10-11: "Lazy templates is right"): an app's templates are a chunk of their own,
+// A definition is light (Paul, 2026-10-11: "Lazy templates is right"): an app's templates are a file of their own,
 // loaded when the home page's list, a script or a test asks for them, so the registry the home page imports carries
 // none of their words.
 test('a definition is light: its templates are imported when asked for, never with it', async () => {

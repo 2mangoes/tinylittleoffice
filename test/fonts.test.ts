@@ -66,10 +66,13 @@ test('the stacks put Plex first, the old stack behind it: the interface, the ser
   expect(token('--to-font-mono')).toBe(STACKS.mono);
   // A bold word on a page is the 600 the site ships.
   expect(text(0, 0, 'x', { bold: true })).toContain('font-weight="600"');
-  // The fonts load with the site's stylesheet, and only Plex Sans Regular is preloaded (the one every page draws).
+  // The fonts load with the site's stylesheet, and only Plex Sans Regular and SemiBold are preloaded (the words and the headings every page draws first).
   expect(read('src/styles.css')).toMatch(/@import '\.\/styles\/fonts\.css';/);
   const preloads = [...read('index.html').matchAll(/<link rel="preload"[^>]*>/g)].map((m) => m[0]);
-  expect(preloads).toEqual(['<link rel="preload" href="./fonts/IBMPlexSans-Regular.woff2" as="font" type="font/woff2" crossorigin />']);
+  expect(preloads).toEqual([
+    '<link rel="preload" href="./fonts/IBMPlexSans-Regular.woff2" as="font" type="font/woff2" crossorigin />',
+    '<link rel="preload" href="./fonts/IBMPlexSans-SemiBold.woff2" as="font" type="font/woff2" crossorigin />',
+  ]);
 });
 
 test('the stylesheets ask for no weight Plex is not shipped in: 400 and 600', () => {

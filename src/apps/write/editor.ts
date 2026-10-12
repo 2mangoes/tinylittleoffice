@@ -250,7 +250,7 @@ export class ToWriteEditor extends DocElement<Doc> {
     if (next && this.doc.blocks[at] === b) this.change([{ op: 'splice', at, n: 1, blocks: [next] }], { before: null, after: null, card: at, cardAfter: at });
     this.holdCard(at);
   }
-  /** An icon from the kit's library (a lazy chunk, the whole of Lucide), put in at the caret. */
+  /** An icon from the kit's library (the whole of Lucide, imported lazily with the picker), put in at the caret. */
   async insertIcon() {
     const sel = this.text.sel;
     const { chooseIcon } = await import('../../kit/ui/icons-picker.ts');

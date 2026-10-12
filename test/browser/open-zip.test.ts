@@ -9,7 +9,7 @@ import { library, forgetAll } from '../../src/kit/share/library.ts';
 import { setKeeping } from '../../src/kit/core/store.ts';
 import { keeping, lockWith, pack } from '../../src/kit/share/privacy.ts';
 import { zip } from '../../src/kit/file/zip.ts';
-import { toast as say } from '../../src/kit/ui/toast.ts';
+import { toast as say } from '../../src/kit/core/say.ts';
 import type { ToDialog } from '../../src/kit/ui/dialog.ts';
 
 afterEach(() => {

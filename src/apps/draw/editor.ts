@@ -22,7 +22,7 @@ import { type ContextEntry, type ToContext } from '../../kit/ui/context.ts';
 import { docToHtml, htmlToBlocks } from '../../kit/text/clipboard.ts';
 import { textWidth } from '../../kit/draw/draw.ts';
 import type { ToDialog } from '../../kit/ui/dialog.ts';
-import { toast } from '../../kit/ui/toast.ts';
+import { toast } from '../../kit/core/say.ts';
 import { pinchZoom } from '../../kit/ui/pinch.ts';
 import { TILE_INKS, tileCss, tileFilled, tilePattern, tileRef } from '../../kit/draw/tile.ts';
 import { applyAll, runLength, write, type Block, type Doc, type Op, type Run } from '../../doc/index.ts';

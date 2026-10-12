@@ -5,7 +5,7 @@
  * while nothing has changed) hands back nothing; the host writes Done's text as one op, so one undo there
  * takes the whole visit back. Inside, Mod+Z and Mod+Shift+Z are the inner editor's own history.
  *
- *   editDoc({ app, text })  the app's editor (its chunk loaded lazily) over `text`; resolves the text, or null.
+ *   editDoc({ app, text })  the app's editor (its definition's editor(), in the app file) over `text`; resolves the text, or null.
  *   makeDoc(app)            a new document of the app, made there: the fence that holds it, or null.
  *   editFence(fence)        the document a fence holds, edited: the fence as it now is, or null when unchanged
  *                           (a locked one opened first, by kit/ui/locked-doc.ts, and sealed again under the same password).

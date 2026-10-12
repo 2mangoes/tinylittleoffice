@@ -25,7 +25,7 @@ import { tloText } from '../core/plain.ts';
 import { copyText } from '../share/share.ts';
 import { ensureIcons, iconNames, UI } from '../draw/icons.ts';
 import { t } from '../core/i18n.ts';
-import { toast } from '../ui/toast.ts';
+import { toast } from '../core/say.ts';
 import { textLayer } from '../text/text-layer.ts';
 import { textHtml } from '../text/text-view.ts';
 

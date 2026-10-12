@@ -20,7 +20,7 @@ import { icon, UI } from '../draw/icons.ts';
 import { readFile, readPlain, readZip, type InZip, type Plain } from '../core/plain.ts';
 import { keepDocuments, keeping, setPrivate } from '../share/privacy.ts';
 import { go, routeHash } from '../core/route.ts';
-import { toast } from '../ui/toast.ts';
+import { toast } from '../core/say.ts';
 import { unzip } from './zip.ts';
 import type { ToDialog } from '../ui/dialog.ts';
 import '../ui/dialog.ts';

@@ -273,7 +273,7 @@ test('a template chosen in the drawer asks with the drawer closed: one modal at 
   head.querySelector<HTMLButtonElement>('to-templates > button')!.click();
   await until(() => !!shell.querySelector('to-templates.to-drawer-templates dialog[open]'));
   const list = shell.querySelector('to-templates.to-drawer-templates')!;
-  // Blank is there at once; the Spreadsheet's own templates as their chunk arrives.
+  // Blank is there at once; the Spreadsheet's own templates as their file arrives.
   await until(() => list.querySelectorAll('dialog[open] [role=option]').length > 1);
   list.querySelectorAll<HTMLElement>('[role=option]')[1].click();
   await until(() => !!asked(shell)?.open);

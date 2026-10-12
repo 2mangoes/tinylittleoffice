@@ -4,12 +4,12 @@
  * "2 cups + 3 tbsp"), numbers past what a double holds, and a little
  * algebra (derivative, simplify). A custom mathjs with only what that
  * takes; mathjs compiles an expression to closures, never to code, so it
- * runs under a policy with no eval. Loaded only when the calculator opens
- * (a chunk of its own: editor.ts imports it).
+ * runs under a policy with no eval. Imported lazily by editor.ts when the
+ * calculator opens (in the built site, part of the one app file).
  *
  * Native first: the browser has no expression reader but eval and the
  * Function constructor, which the page's policy forbids, and Intl formats
- * units without converting them; so mathjs, pinned, in this one chunk.
+ * units without converting them; so mathjs, pinned, here alone.
  */
 import {
   absDependencies,

@@ -72,7 +72,7 @@ test('Find finds kept documents by title and templates by name or app, each unde
     expect(find.placeholder).toBe('Find app, doc, template, or command');
     find.value = 'meeting';
     find.dispatchEvent(new Event('input', { bubbles: true }));
-    // Find asks for every app's templates (a chunk an app, lazily) and the list grows as they arrive.
+    // Find asks for every app's templates (a file an app, lazily) and the list grows as they arrive.
     await until(() => apps().every((a) => !!templatesOf(a)));
     await until(() => shell.querySelectorAll('.to-drawer-apps h3').length === 2);
     expect([...shell.querySelectorAll('.to-drawer-apps h3')].map((h) => h.textContent)).toEqual(['Documents', 'Templates']);
@@ -124,7 +124,7 @@ test("a template from inside an app: each of the drawer's rows has its templates
   // The drawer hands over: closed, and the templates open alone (one modal at a time).
   await until(() => !!shell.querySelector('to-templates.to-drawer-templates dialog[open]'));
   const list = shell.querySelector('to-templates.to-drawer-templates')!;
-  // Blank is there at once; the Word Processor's own templates as their chunk arrives.
+  // Blank is there at once; the Word Processor's own templates as their file arrives.
   await until(() => !dialog.open && list.querySelectorAll('dialog[open] [role=option] svg').length > 1);
   const options = [...list.querySelectorAll<HTMLElement>('[role=option]')];
   options[1].click();

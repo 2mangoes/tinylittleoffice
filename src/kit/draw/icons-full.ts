@@ -1,7 +1,7 @@
 /**
  * The whole of Lucide (some 1,800 icons) joined to kit/draw/icons.ts LIBRARY under Lucide's own kebab-case
- * names: a lazy chunk, loaded once by loadIcons() (a document naming an icon the starter set lacks) or with
- * the picker (icons-picker.ts), never in the first chunk.
+ * names: a lazy import, made once by loadIcons() (a document naming an icon the starter set lacks) or with
+ * the picker (icons-picker.ts). In the built site it is part of the app file, so the import is at once.
  */
 import { icons } from 'lucide';
 import { addIcons, fullJoined } from './icons.ts';

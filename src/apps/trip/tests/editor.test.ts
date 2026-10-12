@@ -1,5 +1,5 @@
 // The Trip editor in a real browser: the stops from the document, legs and the total; names and notes typed into
-// cells through one-line <to-text>s (a burst one undo, the caret back with it); the map (Leaflet, its own chunk; no
+// cells through one-line <to-text>s (a burst one undo, the caret back with it); the map (Leaflet, imported lazily; no
 // pictures here) with a pin a stop, a tap adding one after the stop in hand and a double tap adding none; a focused
 // pin nudged and deleted by keys; the words' keys (Enter, Backspace, Up/Down, Alt+Up/Down, Mod+D); stops chosen whole
 // by the kit's rows (Escape, Shift+arrows, a tap on the number, Select All twice) with the bar under them, the

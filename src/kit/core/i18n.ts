@@ -9,7 +9,7 @@
  *                                               (zero, one, two, few, many, other: of those the language has;
  *                                               English has one and other), "#" the number as the language writes it
  *
- * English ships alone; another language is a lazy chunk, fetched when chosen. Nothing here is a framework:
+ * English ships in the app file; another language is a file of its own, fetched when chosen. Nothing here is a framework:
  * Intl.PluralRules picks the form, Intl.NumberFormat writes the number, Intl.DisplayNames names the language,
  * and Intl.Locale says which way it runs.
  */
@@ -74,7 +74,7 @@ export function onLanguage(cb: () => void): () => void {
   return () => listeners.delete(cb);
 }
 
-/** A dictionary given by hand (a test's in-memory Spanish), or a loader for one (a test's slow chunk). */
+/** A dictionary given by hand (a test's in-memory Spanish), or a loader for one (a test's slow file). */
 export function register(code: string, strings: Strings | Loader) {
   if (typeof strings === 'function') loaders.set(code, strings);
   else dicts.set(code, strings);
@@ -152,7 +152,12 @@ async function use(code: string) {
   if (code !== 'en' && !dicts.has(code)) {
     const load = loaders.get(code);
     if (!load) return;
-    dicts.set(code, (await load()).default);
+    try {
+      dicts.set(code, (await load()).default);
+    } catch {
+      // Not fetched (offline, its file never kept): the page stays in the language it was in.
+      return;
+    }
     if (wanted !== code) return;
   }
   current = code;

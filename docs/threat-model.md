@@ -31,7 +31,11 @@ Two consequences follow, and the rest of this page is mostly their detail:
 
 What is kept, and where: Save in browser is off by default, and then nothing is kept on the device (but two preferences that say
 nothing of a document, below) and nothing on any server; the link is the document. Turning it on is a choice, and keeps documents and short links on the device, in the browser's own
-storage, never on a server. A short link is the one thing a server holds of a document: the document, encrypted with a key the
+storage, never on a server. It also keeps the site itself for offline: a service worker (`src/sw.ts`, registered by
+`src/kit/share/offline.ts`) keeps the site's own files in the browser's cache (the pages, the app file and its
+stylesheet, the Latin faces, and each templates file, language or face a page fetches afterwards), never a document,
+which is after the "#" and never reaches it, and never a link's `?c=` page with its card's words. Turning Save in
+browser off unregisters the worker and deletes its caches; under Private none is registered. A short link is the one thing a server holds of a document: the document, encrypted with a key the
 server never sees, until it expires.
 
 **A preview card is readable on the server, by the person's choice.** Sharing with a network from Share (Bluesky,
@@ -87,7 +91,7 @@ that say nothing of a document: the size of everything (`tinyoffice.size`) and t
 cleared by Forget everything. Nothing is written to the device for the language, in either state: the link
 carries it. With Save in browser on, the
 device keeps the preferences, the documents opened there (`src/kit/share/library.ts`),
-the short links made there. A document under a password is kept as its
+the short links made there, and the site's own files for offline (which say nothing of any document). A document under a password is kept as its
 ciphertext with no title and no first words, so the library does not give away even its name. Nothing else
 is encrypted by Tiny Little Office: the rest is as safe as the phone's lock and the operating system's own
 storage encryption. See the next section for what that leaves open.

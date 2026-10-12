@@ -1359,6 +1359,7 @@ export default {
   'Templates for {app}': '{app}-এর টেমপ্লেট',
   '{app} Templates': '{app} টেমপ্লেট',
   'Templates for {app}: {name}': '{app}-এর টেমপ্লেট: {name}',
+  'The templates are not saved in this browser yet. Connect to the internet to see them.': 'টেমপ্লেটগুলো এখনো এই ব্রাউজারে সংরক্ষিত নেই। দেখতে ইন্টারনেটে সংযোগ করুন।',
   'Choose line {n}: drag it to move it': 'লাইন {n} বাছুন: সরাতে টানুন',
   'Chosen lines': 'বাছাই করা লাইন',
   'A sheet keeps one column': 'শিটে অন্তত একটি কলাম থাকে',

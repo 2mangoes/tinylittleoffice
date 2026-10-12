@@ -1412,6 +1412,7 @@ export default {
   'Templates for {app}': 'Plantillas para {app}',
   '{app} Templates': 'Plantillas para {app}',
   'Templates for {app}: {name}': 'Plantillas para {app}: {name}',
+  'The templates are not saved in this browser yet. Connect to the internet to see them.': 'Las plantillas aún no están guardadas en este navegador. Conéctate a internet para verlas.',
   // The grip on a line of the tape; the bar under lines chosen whole.
   'Choose line {n}: drag it to move it': 'Elegir la línea {n}: arrástrala para moverla',
   'Chosen lines': 'Líneas elegidas',

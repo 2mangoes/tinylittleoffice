@@ -16,7 +16,8 @@
  * Every address is the site's (VITE_SITE_URL), so a copy published elsewhere names its own. A build without one
  * writes no sitemap; `checkSeo` says so, and a deploy refuses (scripts/check-build.ts).
  */
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+import { existsSync, mkdirSync, readFileSync, renameSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import type { AppDef } from '../src/kit/core/app.ts';
 import { origin } from '../src/kit/core/network.ts';
@@ -86,12 +87,25 @@ export function sitemap(site: string, ids: string[], lastmod: string): string {
 export const sitemapLocs = (xml: string) => [...xml.matchAll(/<loc>([^<]*)<\/loc>/g)].map((m) => m[1].replace(/&amp;/g, '&'));
 
 /**
- * Every page of the build from the shell in dist/index.html: the home page's first text and structured data, a
- * page per app, the embed page, the sitemap and robots.txt's line naming it. `site` is the address the site is
+ * The theme script (public/theme.js, light or dark before the first paint) moved to assets/theme-<hash>.js, and the
+ * shell naming it there: hashed like the app file, it is fetched once and kept a year (public/_headers), so a second
+ * page asks for nothing but itself. The shell, naming it.
+ */
+function hashTheme(dist: string, shell: string): string {
+  const code = readFileSync(resolve(dist, 'theme.js'));
+  const name = `assets/theme-${createHash('sha256').update(code).digest('base64url').slice(0, 8)}.js`;
+  renameSync(resolve(dist, 'theme.js'), resolve(dist, name));
+  if (!shell.includes('src="./theme.js"')) throw new Error('index.html does not name ./theme.js');
+  return shell.replace('src="./theme.js"', `src="./${name}"`);
+}
+
+/**
+ * Every page of the build from the shell in dist/index.html: the theme script hashed (`hashTheme`), the home page's
+ * first text and structured data, a page per app, the embed page, the sitemap and robots.txt's line naming it. `site` is the address the site is
  * published at, with its trailing slash ('' when the build was given none); `built` the commit's date.
  */
 export function writePages(dist: string, { site, apps, built }: { site: string; apps: Listed[]; built: string }) {
-  const shell = readFileSync(resolve(dist, 'index.html'), 'utf8');
+  const shell = hashTheme(dist, readFileSync(resolve(dist, 'index.html'), 'utf8'));
   const description = unattr(/<meta name="description" content="([^"]*)"/.exec(shell)?.[1] ?? '');
   const ld = (page: string, data: Parameters<typeof webApplication>[0]) => page.replace('</head>', `  ${ldScript(webApplication(data))}\n  </head>`);
 

@@ -2,7 +2,7 @@
 // page, the drawer, the Word Processor's bar and the Share dialog draw with no English showing through, the bar
 // stays one row and nothing in the drawer is wider than its place. A string that does not fit is named by its key,
 // so the translator can shorten it. Until the translations land, two pseudo-languages from en.ts (test/pseudo.ts,
-// every string a third longer) stand in; a language file in src/i18n/ is tested as it arrives, through its lazy chunk.
+// every string a third longer) stand in; a language file in src/i18n/ is tested as it arrives, through its own file, fetched when asked for.
 import { test, expect, afterEach } from 'vitest';
 import { page } from 'vitest/browser';
 import { mount, tick, until, openShare, settled } from './helpers.ts';

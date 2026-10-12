@@ -1435,6 +1435,8 @@ export default {
   'Templates for {app}': 'Templates for {app}',
   '{app} Templates': '{app} Templates',
   'Templates for {app}: {name}': 'Templates for {app}: {name}',
+  // Offline, where the templates' file was never kept by the service worker (kit/ui/home.ts).
+  'The templates are not saved in this browser yet. Connect to the internet to see them.': 'The templates are not saved in this browser yet. Connect to the internet to see them.',
   // The grip on a line of the tape; the bar under lines chosen whole.
   'Choose line {n}: drag it to move it': 'Choose line {n}: drag it to move it',
   'Chosen lines': 'Chosen lines',

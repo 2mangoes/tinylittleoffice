@@ -18,3 +18,31 @@ export function sources(directive: Directive): string[] {
 export function fillHeaders(text: string, { scripts }: { scripts: string[] }): string {
   return text.replaceAll('{{scripts}}', scripts.join(' ')).replaceAll('{{img}}', sources('img').join(' ')).replaceAll('{{connect}}', sources('connect').join(' '));
 }
+
+/**
+ * The headers _headers gives a path, as Cloudflare reads the file: every rule whose pattern matches ("*" any rest of
+ * the path, ":name" one segment), in order; "Name: value" sets a header (a second rule's value joins the first's
+ * with ", "), and "! Name" drops what the rules before set. `npm run preview` serves the build with these, so the
+ * smoke run sees what the site's cache sees (vite.config.ts).
+ */
+export function headersFor(text: string, path: string): Record<string, string> {
+  const out: Record<string, string> = {};
+  let on = false;
+  for (const line of text.split('\n')) {
+    if (!line.trim() || line.trimStart().startsWith('#')) continue;
+    if (!/^\s/.test(line)) {
+      const pattern = line
+        .trim()
+        .replace(/[.+?^${}()|[\]\\]/g, '\\$&')
+        .replace(/\*/g, '.*')
+        .replace(/:\w+/g, '[^/]+');
+      on = new RegExp(`^${pattern}$`).test(path);
+    } else if (on) {
+      const drop = /^\s*!\s*(.+)$/.exec(line);
+      const set = /^\s*([^:]+):\s*(.*)$/.exec(line);
+      if (drop) delete out[drop[1].trim()];
+      else if (set) out[set[1]] = out[set[1]] ? `${out[set[1]]}, ${set[2]}` : set[2];
+    }
+  }
+  return out;
+}

@@ -1,6 +1,6 @@
 /**
- * Trip on the built site, at desktop size in Chromium and at iPhone size in WebKit: Leaflet arrives in its own
- * chunk, taps on the map add stops that land in the link with a pin each, a name typed is the stop's; the bar
+ * Trip on the built site, at desktop size in Chromium and at iPhone size in WebKit: Leaflet arrives with the
+ * app file, taps on the map add stops that land in the link with a pin each, a name typed is the stop's; the bar
  * is one row and nothing is wider than the screen. On the phone, by finger (docs/editing.md §6, §7): a tap on a
  * stop's number chooses it with its bar on screen and the bar's Duplicate and Delete work; the number and the pins
  * are 44px, the number alone takes a drag, and a double tap on the words never zooms the page. The map's pictures

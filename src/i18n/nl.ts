@@ -1412,6 +1412,7 @@ export default {
   'Templates for {app}': 'Sjablonen voor {app}',
   '{app} Templates': 'Sjablonen voor {app}',
   'Templates for {app}: {name}': 'Sjablonen voor {app}: {name}',
+  'The templates are not saved in this browser yet. Connect to the internet to see them.': 'De sjablonen staan nog niet in deze browser. Maak verbinding met internet om ze te zien.',
   // The grip on a line of the tape; the bar under lines chosen whole.
   'Choose line {n}: drag it to move it': 'Kies regel {n}: sleep om te verplaatsen',
   'Chosen lines': 'Gekozen regels',

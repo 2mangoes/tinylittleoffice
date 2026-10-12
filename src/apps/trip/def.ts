@@ -1,6 +1,6 @@
 /**
  * Trip: a route on a map, stops in order, each with a note; or places as dots. The document is a table of
- * places (model.ts), the editor is editor.ts (a Leaflet map, a lazy chunk of its own, with OpenStreetMap's
+ * places (model.ts), the editor is editor.ts (a Leaflet map, imported lazily, with OpenStreetMap's
  * pictures while it is on view), the drawing and the files view.ts.
  */
 import { MapPinned } from 'lucide';

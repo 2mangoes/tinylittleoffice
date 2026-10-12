@@ -1,9 +1,10 @@
 # Every check a deploy runs (scripts/deploy.mjs, held to it by test/repository.test.ts), on every push to main and
 # every pull request, with no secret: the types, the strings, the unit tests under node, the browser tests in
-# Chromium, the build (whose budgets are a tripwire: a chunk over budgets.json fails it), the smoke run on the built
-# site in desktop Chromium and a phone-sized WebKit, and the policy and version the build writes. Then the lints and
-# Prettier, the dependencies' advisories, and the build made twice more to show it is the same bytes. Branch
-# protection on main requires the job `check` (docs/github-setup.md). A deploy is a tag: .github/workflows/deploy.yml.
+# Chromium, the build (whose budgets are a tripwire: a file over budgets.json, or a build of another shape, fails
+# it), the smoke run on the built site in desktop Chromium and a phone-sized WebKit (offline under Save in browser
+# too), and the policy and version the build writes. Then the lints and Prettier, the dependencies' advisories, and the
+# build made twice more to show it is the same bytes. Branch protection on main requires the job `check`
+# (docs/github-setup.md). A deploy is a tag: .github/workflows/deploy.yml.
 # Every action is pinned by its commit, the version beside it (test/deploy.test.ts).
 name: CI
 
@@ -60,10 +61,10 @@ jobs:
         run: npm run test:unit
       - name: Browser tests (the kit and every editor, in Chromium)
         run: npm run test:browser
-      - name: Build, and the chunks against budgets.json
+      - name: Build, and the build against budgets.json
         run: npm run build
       - name: The smoke run on the built site (desktop Chromium, phone WebKit)
-        run: npx playwright test e2e/smoke.spec.ts e2e/keyboard.spec.ts e2e/a11y.spec.ts
+        run: npx playwright test e2e/smoke.spec.ts e2e/keyboard.spec.ts e2e/a11y.spec.ts e2e/offline.spec.ts
       - name: The policy and the version
         run: node scripts/check-build.ts
       - name: The lints, Prettier and the generated pages

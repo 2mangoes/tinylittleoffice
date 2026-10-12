@@ -2,6 +2,13 @@
  * The smoke run on the built site, at desktop size in Chromium and at iPhone size (390 by 844) in WebKit:
  * the home page loads, the Word Processor opens from it (named at once), its Display Link reads, nothing throws, nothing is wider than the screen, and
  * axe finds nothing. With SHOTS set, a screenshot of each goes there (the phone's are the report's).
+ *
+ * And the build's shape as a browser meets it (Paul, 2026-10-12: "as few network round trips as possible"): the home
+ * page and every app's page, visited cold, ask for at most six files before their first paint (the page, the theme
+ * script, the app file, the stylesheet and the two Latin faces), each named by the page itself; a second page of the
+ * site in the same visit asks the network for nothing the first had (every hashed file is kept a year: public/_headers,
+ * which `npm run preview` serves with); a page in French asks for the French file and nothing else the home page had.
+ * Read from the page's own timing of what it fetched, in Chromium, which reports when it first painted.
  */
 import { test, expect, type Page } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
@@ -116,4 +123,63 @@ test('the person’s own size is the 100%: a browser set to 20px type draws a re
   // kit/ui/zoom.ts BASE: the normal size draws everything at 1.3 of the browser's default.
   expect(await px('html')).toBeCloseTo(26, 1);
   expect(await px('.to-header')).toBeCloseTo(26, 1);
+});
+
+interface Fetched {
+  /** Each file asked for before the first paint, by its path, and what in the page asked for it. */
+  beforePaint: { path: string; by: string }[];
+  /** Every file the page has asked for so far, by its path, and whether it came over the network (not from a cache). */
+  all: { path: string; network: boolean }[];
+}
+const fetched = (page: Page): Promise<Fetched> =>
+  page.evaluate(() => {
+    const paint = performance.getEntriesByName('first-paint')[0]?.startTime ?? Infinity;
+    const files = performance.getEntriesByType('resource') as PerformanceResourceTiming[];
+    const path = (r: PerformanceResourceTiming) => new URL(r.name).pathname;
+    return {
+      beforePaint: files.filter((r) => r.startTime < paint).map((r) => ({ path: path(r), by: r.initiatorType })),
+      all: files.map((r) => ({ path: path(r), network: r.transferSize > 0 })),
+    };
+  });
+
+/** A page opened and drawn: the shell has taken the static words away. */
+async function open(page: Page, url: string) {
+  await page.goto(url);
+  await expect(page.locator('#to-first')).toHaveCount(0);
+  await page.evaluate(() => document.fonts.ready.then(() => undefined));
+}
+
+test('every page, visited cold, asks for at most six files before its first paint, each named by the page; a second page asks for nothing the first had', async ({ browser, browserName }) => {
+  test.skip(browserName !== 'chromium', 'paint timing is read in Chromium');
+  const pages = ['/', '/write/', '/outline/', '/deck/', '/sheet/', '/calc/', '/draw/', '/diagram/', '/anim/', '/cal/', '/trip/'];
+  for (const url of pages) {
+    const context = await browser.newContext();
+    const page = await context.newPage();
+    await open(page, url);
+    const f = await fetched(page);
+    // The page's own head names each: a script or a link (the stylesheet, a preloaded face), never a stylesheet's or a script's import.
+    expect(f.beforePaint.length, `${url}: ${JSON.stringify(f.beforePaint)}`).toBeLessThanOrEqual(5);
+    for (const r of f.beforePaint) expect(['script', 'link'], `${url}: ${r.path}`).toContain(r.by);
+    expect(f.beforePaint.map((r) => r.path)).toEqual(
+      expect.arrayContaining([expect.stringMatching(/^\/assets\/app-[\w-]{8}\.js$/), expect.stringMatching(/^\/assets\/app-[\w-]{8}\.css$/), expect.stringMatching(/^\/assets\/theme-[\w-]{8}\.js$/)]),
+    );
+    // A second page of the site in the same visit: nothing the first fetched is asked of the network again.
+    const had = new Set(f.all.map((r) => r.path));
+    await open(page, url === '/' ? '/write/' : '/');
+    expect(
+      (await fetched(page)).all.filter((r) => r.network && had.has(r.path)).map((r) => r.path),
+      url,
+    ).toEqual([]);
+    await context.close();
+  }
+});
+
+test('a page in French asks for its page and the French file, and nothing else the home page had', async ({ page, browserName }) => {
+  test.skip(browserName !== 'chromium', 'read in Chromium, as above');
+  await open(page, '/');
+  const had = new Set((await fetched(page)).all.map((r) => r.path));
+  await open(page, '/write/#/v1/write?lang=fr');
+  await expect(page.locator('html')).toHaveAttribute('lang', 'fr');
+  const f = await fetched(page);
+  expect(f.all.filter((r) => r.network && (had.has(r.path) || /^\/assets\//.test(r.path))).map((r) => r.path)).toEqual([expect.stringMatching(/^\/assets\/lang-fr-[\w-]{8}\.js$/)]);
 });

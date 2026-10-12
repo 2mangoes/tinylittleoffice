@@ -1413,6 +1413,7 @@ export default {
   'Templates for {app}': 'Шаблони: {app}',
   '{app} Templates': '{app}: шаблони',
   'Templates for {app}: {name}': '{app}: шаблон «{name}»',
+  'The templates are not saved in this browser yet. Connect to the internet to see them.': 'Шаблони ще не збережено в цьому браузері. Підключіться до інтернету, щоб їх побачити.',
   // The grip on a line of the tape; the bar under lines chosen whole.
   'Choose line {n}: drag it to move it': 'Вибрати рядок {n}: перетягніть, щоб перемістити',
   'Chosen lines': 'Обрані рядки',

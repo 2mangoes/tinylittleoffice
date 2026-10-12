@@ -1413,6 +1413,7 @@ export default {
   'Templates for {app}': 'Modèl pou {app}',
   '{app} Templates': 'Modèl {app}',
   'Templates for {app}: {name}': 'Modèl pou {app}: {name}',
+  'The templates are not saved in this browser yet. Connect to the internet to see them.': 'Modèl yo poko anrejistre nan navigatè sa a. Konekte sou entènèt pou w ka wè yo.',
   // The grip on a line of the tape; the bar under lines chosen whole.
   'Choose line {n}: drag it to move it': 'Chwazi liy {n}: rale l pou deplase l',
   'Chosen lines': 'Liy chwazi yo',

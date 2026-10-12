@@ -17,7 +17,7 @@
 import { html, nothing } from 'lit';
 import { icon, UI } from '../draw/icons.ts';
 import { t } from '../core/i18n.ts';
-import { toast } from './toast.ts';
+import { toast } from '../core/say.ts';
 import type { ToDialog } from './dialog.ts';
 import './dialog.ts';
 import { origin } from '../core/network.ts';

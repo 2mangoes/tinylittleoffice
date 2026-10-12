@@ -1,6 +1,6 @@
 /**
  * Calculator on the built site, under the site's own Content-Security-Policy (read from dist/_headers, so no
- * eval and no Function constructor may run): the keys and the line work out a sum, the mathjs chunk arrives and
+ * eval and no Function constructor may run): the keys and the line work out a sum, the mathjs engine arrives and
  * converts units, the graph draws; the bar is one row and nothing is wider than the screen. Run on its own:
  *
  *   PW_PORT=4196 npx playwright test e2e/calc.spec.ts --workers=1
@@ -28,7 +28,7 @@ test('calc: keys and the line, units from the engine under the policy, a graph',
   await page.locator('.calc-key[aria-label="="]').click();
   await expect(page.locator('.calc-ans')).toHaveText(['= 42']);
   await expect(page).toHaveURL(/#\/v1\/calc\/./);
-  // The engine: its own chunk, run under a policy with no eval.
+  // The engine: mathjs, in the app file, run under a policy with no eval.
   await display.fill('3 inch to cm');
   await expect(page.locator('.calc-live')).toHaveText('= 7.62 cm');
   await display.press('Enter');

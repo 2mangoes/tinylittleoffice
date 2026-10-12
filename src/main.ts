@@ -1,21 +1,15 @@
 /**
- * The page: the stylesheet with its layers, the shell, and what runs at load: the language and the theme.
+ * The page: the stylesheet with its layers, the shell, and what runs at load: the language, the theme, and the
+ * service worker under Save in browser (kit/share/offline.ts), registered once the page has loaded.
  * (The size of everything is drawn by the shell.)
  */
 import './styles.css';
 import { initLanguage } from './kit/core/i18n.ts';
 import { initTheme } from './kit/ui/theme.ts';
+import { offlineAtLoad } from './kit/share/offline.ts';
 import './kit/core/shell.ts';
-
-// After a new version is published, a page opened before it may ask for a piece of the old one that is
-// gone. Reloading (once) gets the new version.
-window.addEventListener('vite:preloadError', (e) => {
-  if (sessionStorage.getItem('to-reloaded')) return;
-  sessionStorage.setItem('to-reloaded', '1');
-  e.preventDefault();
-  location.reload();
-});
-window.addEventListener('load', () => setTimeout(() => sessionStorage.removeItem('to-reloaded'), 5000));
 
 initTheme();
 void initLanguage();
+if (document.readyState === 'complete') void offlineAtLoad();
+else window.addEventListener('load', () => void offlineAtLoad(), { once: true });

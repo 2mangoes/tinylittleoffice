@@ -5,8 +5,9 @@
  *     but the size of everything and the theme (kit/core/store.ts): no cookies. The language is in the link, never on the
  *     device (kit/core/i18n.ts). The browser's own history still
  *     holds every link opened, and a link is the document; that is not ours to clear. Saved keeps the preferences, the documents
- *     opened here (kit/share/library.ts) and the short links made here (kit/share/kept-links.ts). Turned back to
- *     Private, all of it goes from the device.
+ *     opened here (kit/share/library.ts) and the short links made here (kit/share/kept-links.ts), and the site itself
+ *     is kept for offline by its service worker (kit/share/offline.ts). Turned back to Private, all of it goes from the
+ *     device, the worker and its caches with it.
  *   - The password: a document sealed (kit/share/crypt.ts) and opened, here. A password is never kept, under
  *     Saved or not: the key that opened a document stays in memory for the visit, so it opens again
  *     without asking.
@@ -20,6 +21,7 @@ import { encodeDoc, packDoc, unpackDoc } from '../core/codec.ts';
 import { newLocker, seal, unseal, unsealWith, type Locker } from './crypt.ts';
 import { forgetAll, keepAll, library, type Kept } from './library.ts';
 import { keptLinks } from './kept-links.ts';
+import { keepOffline } from './offline.ts';
 
 /** The preferences this site may keep, by key; with them which documents have been told they are copies (kit/core/shell.ts). */
 export const PREFS = ['to-theme', 'tinyoffice.shortTtl', 'tinyoffice.size', 'tinyoffice.copiesSaid'];
@@ -49,6 +51,7 @@ export async function setPrivate(privately: boolean) {
     forgetOpened();
   }
   changed();
+  await keepOffline(!privately);
 }
 
 export const prefsKept = (): number => PREFS.filter((k) => store.get(k) !== null).length;

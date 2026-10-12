@@ -1,47 +1,48 @@
 /**
- * The chunk budgets: what the built site's chunks weigh, in bytes gzipped at level 9, held
- * to budgets.json. The budget is a tripwire against growth nobody meant, never a reason to make code terse: growth
- * that buys simplicity is raised into budgets.json, in a commit of its own whose message says why (Paul, 2026-10-10).
+ * The build's budgets and its shape (Paul, 2026-10-12: "package the whole thing up … then offline is instant"):
+ * what the built site weighs, in bytes gzipped at level 9, how many files it is, and how many requests a page makes
+ * before its first paint, held to budgets.json. The budget is a tripwire against growth nobody meant, never a reason
+ * to make code terse: growth that buys simplicity is raised into budgets.json, in a commit of its own whose message
+ * says why (Paul, 2026-10-10).
  *
- *   main       the entry chunk the home page runs
- *   apps       the apps' definitions, which the home page imports: light, their templates not in it
- *   home       everything the home page loads before anything is tapped: the entry, its preloads, its stylesheet
- *   icons      the kit's icons, on the home page; iconsFull the whole set, loaded when the icon picker opens
- *   templates  each app's templates, a chunk of their own (`templates-<app>`), loaded when its list opens or a
- *              pointer comes over its row; the home page's first load holds none (`eagerTemplates`, which fails the build)
- *   languages  each language's strings, loaded when chosen (English is the keys themselves and ships in the code)
- *   editors    each app's editor chunk and its commands chunk, loaded when it opens, and `open`: all that opening
- *              it adds to the home page's load (the chunks and stylesheets the two imports preload, less home's)
- *   api        /api.js, the API for programs and agents (vite.api.config.ts), its entry alone: what an import of it
- *              fetches first; the apps' definitions, the lint and the examples are chunks of their own under /api/,
- *              loaded when asked for, so an agent's import is one small fetch (under 25 KB, Paul's "speed is so important")
- *   fonts      the type, IBM Plex (dist/fonts/, from public/fonts/): every woff2 file's bytes together, as served (a
- *              woff2 is compressed already). Not a chunk and never all loaded at once: a page loads the faces its
- *              words need. A tripwire against a face added without meaning it.
+ *   app         the one app file, dist/assets/app-<hash>.js: the kit, every app's editor, commands and view, the English
+ *               strings, the icon library, the emoji and the math (vite.config.ts)
+ *   stylesheet  the one stylesheet beside it, dist/assets/app-<hash>.css
+ *   templates   each app's templates, a file of its own (`templates-<app>-<hash>.js`), fetched when its list opens
+ *   languages   each language but English, a file of its own (`lang-<code>-<hash>.js`), fetched when a page is in it
+ *   api         /api.js, the API for programs and agents (vite.api.config.ts): what an import of it fetches before its
+ *               first call, one file; apiParts the one file under /api/ it fetches for apps(), templates(), the lint
+ *               and the examples
+ *   fonts       the type, IBM Plex (dist/fonts/, from public/fonts/): every woff2 file's bytes together, as served (a
+ *               woff2 is compressed already). Never all loaded at once: a page loads the faces its words need
+ *   files       how many files dist/ holds, every one
+ *   requests    the requests a page makes before its first paint, at most, over every page: the page itself and each
+ *               file its head names to fetch at once (a script, the stylesheet, a preload)
  *
- * The chunks are found by name: vite.config.ts names an app's editor `<app>-editor-<hash>.js`, its commands
- * `<app>-commands-<hash>.js`, its templates `templates-<app>-<hash>.js` and a language `lang-<code>-<hash>.js`, and what an import preloads is the list Vite
- * writes beside it (`__vite__mapDeps`).
+ * The shape is held too (`shapeOf`): dist/assets holds the app file, the stylesheet, the theme script (scripts/seo.ts
+ * hashes it), a templates file per app and a file per language and nothing else; the app file imports nothing lazily but a templates file or a language; dist/api/
+ * is one file, and no editor (no custom element, no Lit element) is in the API; every page names the app file and the
+ * stylesheet in its head; the service worker's list is filled in.
  *
- *   node scripts/budgets.ts            dist/ against budgets.json: a line per chunk over, and exit 1 (`npm run build` runs it last)
+ *   node scripts/budgets.ts            dist/ against budgets.json and the shape: a line per fault, and exit 1 (`npm run build` runs it last)
  *   node scripts/budgets.ts --sizes    print what dist/ weighs, as budgets.json's numbers (to read, or to raise a budget by hand)
  */
 import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
-import { join, resolve } from 'node:path';
+import { join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { gzipSync } from 'node:zlib';
+import { UNFILLED } from './sw-manifest.ts';
 
 export interface Sizes {
-  main: number;
-  apps: number;
-  home: number;
-  icons: number;
-  iconsFull: number;
+  app: number;
+  stylesheet: number;
   templates: Record<string, number>;
   languages: Record<string, number>;
-  editors: Record<string, { editor: number; commands: number; open: number }>;
   api: number;
+  apiParts: number;
   fonts: number;
+  files: number;
+  requests: number;
 }
 
 const ROOT = resolve(import.meta.dirname, '..');
@@ -49,34 +50,19 @@ const ROOT = resolve(import.meta.dirname, '..');
 /** A file's bytes gzipped at level 9. */
 const gz = (bytes: Uint8Array) => gzipSync(bytes, { level: 9 }).length;
 
-/** The chunk of `assets/` named `name` and a hash, or undefined. */
-const named = (files: string[], name: string) => files.find((f) => new RegExp(`^${name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}-[\\w-]{8}\\.js$`).test(f));
-
-/** What each lazy import in a chunk preloads, the imported chunk first: `import("./x.js"),__vite__mapDeps([0,3])` read against the chunk's list of files. */
-export function preloads(code: string): Map<string, string[]> {
-  const list = /m\.f=\[([^\]]*)\]/.exec(code)?.[1];
-  const files = list ? [...list.matchAll(/["'`]\.\/([^"'`]+)["'`]/g)].map((m) => m[1]) : [];
-  const out = new Map<string, string[]>();
-  for (const m of code.matchAll(/import\(\s*["'`]\.\/([^"'`]+)["'`]\s*\)(?:\s*,\s*__vite__mapDeps\(\[([\d,\s]*)\]\))?/g)) {
-    const deps = m[2]
-      ? m[2]
-          .split(',')
-          .filter((s) => s.trim())
-          .map((i) => files[Number(i)])
-      : [m[1]];
-    out.set(m[1], [...new Set([m[1], ...deps])]);
-  }
-  return out;
+/** Every file under a folder, as paths relative to it, sorted. */
+function filesIn(dir: string): string[] {
+  const out: string[] = [];
+  const walk = (d: string) => {
+    for (const f of readdirSync(d)) {
+      const p = join(d, f);
+      if (statSync(p).isDirectory()) walk(p);
+      else out.push(relative(dir, p).replaceAll('\\', '/'));
+    }
+  };
+  if (existsSync(dir)) walk(dir);
+  return out.sort();
 }
-
-/** The files of the home page's first load: what its page names (the entry, its preloads, its stylesheet). */
-export function firstLoad(dist: string): Set<string> {
-  const html = readFileSync(join(dist, 'index.html'), 'utf8');
-  return new Set([...html.matchAll(/(?:src|href)="\.\/assets\/([^"]+)"/g)].map((m) => m[1]));
-}
-
-/** The templates chunks among these files: none may be in the home page's first load. */
-export const eagerTemplates = (files: Iterable<string>): string[] => [...files].filter((f) => /^templates-[a-z]+-[\w-]{8}\.js$/.test(f));
 
 /** The bytes of every woff2 file in a folder (dist/fonts/, public/fonts/): the type, as served. */
 export const fontBytes = (dir: string): number =>
@@ -86,49 +72,105 @@ export const fontBytes = (dir: string): number =>
         .reduce((n, f) => n + statSync(join(dir, f)).size, 0)
     : 0;
 
-/** What a build in `dist` weighs. */
+/** What a page's head names to fetch at once: each script's source, the stylesheet, each preload; in order, once each. */
+export function fetchedAtOnce(html: string): string[] {
+  const head = (/<head>([\s\S]*?)<\/head>/.exec(html)?.[1] ?? '').replace(/<!--[\s\S]*?-->/g, '');
+  const out: string[] = [];
+  for (const m of head.matchAll(/<script\b[^>]*\bsrc="([^"]+)"[^>]*>|<link\b(?=[^>]*\brel="(?:stylesheet|preload|modulepreload)")[^>]*\bhref="([^"]+)"[^>]*>/g)) out.push(m[1] ?? m[2]);
+  return [...new Set(out)];
+}
+
+/** The pages of a build: the home page, each app's and the embed page (every index.html). */
+export const pagesOf = (dist: string): string[] => filesIn(dist).filter((f) => /(^|\/)index\.html$/.test(f));
+
+/**
+ * The lazy imports in a chunk: the file each `import("./…")` names, and "?" for any other `import(` (a method of that
+ * name, as mathjs's `.import(`, is not one).
+ */
+export function lazyImports(code: string): string[] {
+  const all = [...code.matchAll(/(?<![\w$.])import\(/g)].length;
+  const named = [...code.matchAll(/(?<![\w$.])import\(\s*["'`]\.\/([^"'`]+)["'`]\s*\)/g)].map((m) => m[1]);
+  return [...named, ...Array<string>(all - named.length).fill('?')];
+}
+
+/** What a build in `dist` weighs and counts. */
 export function measure(dist: string): Sizes {
-  const assets = join(dist, 'assets');
-  const files = readdirSync(assets).sort();
-  const size = new Map<string, number>();
-  const weigh = (f: string) => size.get(f) ?? size.set(f, gz(readFileSync(join(assets, f)))).get(f)!;
-  const must = (name: string) => {
-    const f = named(files, name);
-    if (!f) throw new Error(`${dist}: no chunk named ${name} in assets/`);
-    return f;
+  const assets = filesIn(join(dist, 'assets'));
+  const weigh = (f: string) => gz(readFileSync(join(dist, f)));
+  const one = (re: RegExp, what: string) => {
+    const f = assets.find((x) => re.test(x));
+    if (!f) throw new Error(`${dist}: no ${what} in assets/`);
+    return weigh(`assets/${f}`);
   };
-  const home = firstLoad(dist);
-  const lazy = new Map<string, string[]>();
-  for (const f of files.filter((x) => x.endsWith('.js'))) for (const [k, v] of preloads(readFileSync(join(assets, f), 'utf8'))) lazy.set(k, [...new Set([...(lazy.get(k) ?? []), ...v])]);
-  const sum = (fs: Iterable<string>) => [...fs].reduce((n, f) => n + weigh(f), 0);
-  const ids = [...new Set(files.map((f) => /^([a-z]+)-editor-[\w-]{8}\.js$/.exec(f)?.[1]).filter((x): x is string => !!x))];
+  const byName = (re: RegExp) => Object.fromEntries(assets.flatMap((f) => (re.test(f) ? [[re.exec(f)![1], weigh(`assets/${f}`)]] : [])));
   return {
-    main: weigh(must('main')),
-    apps: weigh(must('apps')),
-    home: sum(home),
-    icons: weigh(must('icons')),
-    iconsFull: weigh(must('icons-full')),
-    templates: Object.fromEntries(files.flatMap((f) => (/^templates-([a-z]+)-[\w-]{8}\.js$/.exec(f) ? [[/^templates-([a-z]+)-[\w-]{8}\.js$/.exec(f)![1], weigh(f)]] : []))),
-    languages: Object.fromEntries(files.flatMap((f) => (/^lang-(.+)-[\w-]{8}\.js$/.exec(f) ? [[/^lang-(.+)-[\w-]{8}\.js$/.exec(f)![1], weigh(f)]] : []))),
-    editors: Object.fromEntries(
-      ids.map((id) => {
-        const [editor, commands] = [must(`${id}-editor`), must(`${id}-commands`)];
-        const opened = new Set([...(lazy.get(editor) ?? [editor]), ...(lazy.get(commands) ?? [commands])].filter((f) => !home.has(f)));
-        return [id, { editor: weigh(editor), commands: weigh(commands), open: sum(opened) }];
-      }),
-    ),
-    api: existsSync(join(dist, 'api.js')) ? gz(readFileSync(join(dist, 'api.js'))) : 0,
+    app: one(/^app-[\w-]{8}\.js$/, 'app file'),
+    stylesheet: one(/^app-[\w-]{8}\.css$/, 'stylesheet'),
+    templates: byName(/^templates-([a-z]+)-[\w-]{8}\.js$/),
+    languages: byName(/^lang-(.+)-[\w-]{8}\.js$/),
+    api: existsSync(join(dist, 'api.js')) ? weigh('api.js') : 0,
+    apiParts: filesIn(join(dist, 'api')).reduce((n, f) => n + weigh(`api/${f}`), 0),
     fonts: fontBytes(join(dist, 'fonts')),
+    files: filesIn(dist).length,
+    requests: Math.max(0, ...pagesOf(dist).map((p) => 1 + fetchedAtOnce(readFileSync(join(dist, p), 'utf8')).length)),
   };
 }
 
-/** Every number of `sizes` over its budget, or with no budget, in words: "editors.write.open: 45 123 bytes, over its budget of 44 000 by 1 123". */
+/** The apps with templates and the languages but English, as the source in `root` has them: the files a build must hold. */
+function sourceFiles(root = ROOT): { apps: string[]; langs: string[] } {
+  return {
+    apps: readdirSync(join(root, 'src/apps')).filter((a) => existsSync(join(root, 'src/apps', a, 'templates.ts'))),
+    langs: readdirSync(join(root, 'src/i18n'))
+      .filter((f) => f.endsWith('.ts') && f !== 'en.ts')
+      .map((f) => f.replace(/\.ts$/, '')),
+  };
+}
+
+/** Where the build's shape is not the one the design says, in words; [] when it is. `source` is what the build was made from. */
+export function shapeOf(dist: string, { apps, langs } = sourceFiles()): string[] {
+  const out: string[] = [];
+  const assets = filesIn(join(dist, 'assets'));
+  const wanted: [RegExp, string][] = [
+    [/^app-[\w-]{8}\.js$/, 'the app file'],
+    [/^app-[\w-]{8}\.css$/, 'the stylesheet'],
+    [/^theme-[\w-]{8}\.js$/, 'the theme script'],
+    ...apps.map((a): [RegExp, string] => [new RegExp(`^templates-${a}-[\\w-]{8}\\.js$`), `${a}’s templates`]),
+    ...langs.map((l): [RegExp, string] => [new RegExp(`^lang-${l}-[\\w-]{8}\\.js$`), `the language ${l}`]),
+  ];
+  for (const [re, what] of wanted) {
+    const n = assets.filter((f) => re.test(f)).length;
+    if (n !== 1) out.push(`assets/ holds ${n} files for ${what}, not one`);
+  }
+  for (const f of assets)
+    if (!wanted.some(([re]) => re.test(f))) out.push(`assets/${f}: a file the design does not have (one app file, one stylesheet, the theme script, the templates and the languages)`);
+  const app = assets.find((f) => /^app-[\w-]{8}\.js$/.test(f));
+  const css = assets.find((f) => /^app-[\w-]{8}\.css$/.test(f));
+  if (app)
+    for (const f of lazyImports(readFileSync(join(dist, 'assets', app), 'utf8')))
+      if (!/^(templates-[a-z]+|lang-[\w-]+)-[\w-]{8}\.js$/.test(f)) out.push(`assets/${app} imports ${f} lazily: only a templates file or a language may be`);
+  const api = filesIn(join(dist, 'api'));
+  if (api.length > 1) out.push(`api/ holds ${api.length} files, not one`);
+  for (const f of ['api.js', ...api.map((x) => `api/${x}`)].filter((x) => existsSync(join(dist, x))))
+    if (/customElements\.define|LitElement/.test(readFileSync(join(dist, f), 'utf8')))
+      out.push(`${f} holds an element of the page (customElements.define or LitElement): the API carries no editor and no chrome`);
+  for (const page of pagesOf(dist)) {
+    const named = fetchedAtOnce(readFileSync(join(dist, page), 'utf8')).map((u) => u.replace(/^(\.\.?\/)+/, ''));
+    for (const f of [app, css]) if (f && !named.includes(`assets/${f}`)) out.push(`${page} does not name assets/${f} in its head`);
+  }
+  const sw = join(dist, 'sw.js');
+  if (!existsSync(sw)) out.push('sw.js is missing: the service worker (src/sw.ts)');
+  else if (readFileSync(sw, 'utf8').includes(UNFILLED)) out.push('sw.js still has its unfilled list (scripts/sw-manifest.ts)');
+  return out;
+}
+
+/** Every number of `sizes` over its budget, or with no budget, in words: "app: 723123 bytes, over its budget of 716800 by 6323". */
 export function overBudget(sizes: Sizes, budgets: Partial<Sizes>): string[] {
   const out: string[] = [];
   const walk = (have: unknown, want: unknown, at: string) => {
+    const unit = at === 'files' || at === 'requests' ? at : 'bytes';
     if (typeof have === 'number') {
-      if (typeof want !== 'number') out.push(`${at}: ${have} bytes, and no budget for it in budgets.json`);
-      else if (have > want) out.push(`${at}: ${have} bytes, over its budget of ${want} by ${have - want}`);
+      if (typeof want !== 'number') out.push(`${at}: ${have} ${unit}, and no budget for it in budgets.json`);
+      else if (have > want) out.push(`${at}: ${have} ${unit}, over its budget of ${want} by ${have - want}`);
     } else if (have && typeof have === 'object') for (const [k, v] of Object.entries(have)) walk(v, (want as Record<string, unknown> | undefined)?.[k], at ? `${at}.${k}` : k);
   };
   walk(sizes, budgets, '');
@@ -148,12 +190,12 @@ if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.ur
   if (process.argv.includes('--sizes')) console.log(JSON.stringify(sizes, null, 2));
   else {
     const over = overBudget(sizes, readBudgets());
-    for (const f of eagerTemplates(firstLoad(dist))) over.push(`${f}: an app's templates in the home page's first load (they are a chunk loaded when asked for)`);
-    for (const line of over) console.error(line);
-    if (over.length) {
-      console.error('A chunk grew past its budget (budgets.json). If the growth buys simplicity, raise the budget in a commit of its own that says why.');
-      process.exit(1);
-    }
-    console.log(`The chunks are within their budgets: main ${sizes.main}, apps ${sizes.apps}, home ${sizes.home} bytes gzipped; the fonts ${sizes.fonts} bytes.`);
+    const shape = shapeOf(dist);
+    for (const line of [...over, ...shape]) console.error(line);
+    if (over.length) console.error('The build grew past its budget (budgets.json). If the growth buys simplicity, raise the budget in a commit of its own that says why.');
+    if (over.length || shape.length) process.exit(1);
+    console.log(
+      `The build is within its budgets and of its shape: the app file ${sizes.app} and the stylesheet ${sizes.stylesheet} bytes gzipped, ${sizes.files} files, at most ${sizes.requests} requests before a page's first paint.`,
+    );
   }
 }

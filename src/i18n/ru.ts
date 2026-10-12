@@ -1411,6 +1411,7 @@ export default {
   'Templates for {app}': 'Шаблоны: {app}',
   '{app} Templates': 'Шаблоны: {app}',
   'Templates for {app}: {name}': 'Шаблоны для «{app}»: {name}',
+  'The templates are not saved in this browser yet. Connect to the internet to see them.': 'Шаблоны ещё не сохранены в этом браузере. Подключитесь к интернету, чтобы их увидеть.',
   // The grip on a line of the tape; the bar under lines chosen whole.
   'Choose line {n}: drag it to move it': 'Выбрать строку {n}: потяните, чтобы переместить',
   'Chosen lines': 'Выбранные строки',

@@ -1413,6 +1413,7 @@ export default {
   'Templates for {app}': '{app}的範本',
   '{app} Templates': '{app}範本',
   'Templates for {app}: {name}': '{app}的範本：{name}',
+  'The templates are not saved in this browser yet. Connect to the internet to see them.': '範本還沒有儲存在此瀏覽器中。連上網路即可查看。',
   // The grip on a line of the tape; the bar under lines chosen whole.
   'Choose line {n}: drag it to move it': '選取第 {n} 行：拖曳可移動',
   'Chosen lines': '已選取的行',

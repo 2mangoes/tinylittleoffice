@@ -19,8 +19,10 @@
     <link rel="manifest" href="./manifest.webmanifest" />
     <!-- For a program that fetches the page: the guide to making a document as a link (scripts/make-skill.ts). -->
     <link rel="alternate" type="text/plain" href="/llms.txt" title="For agents" />
-    <!-- The type, IBM Plex, is the site's own (src/styles/fonts.css): the face every page draws first, fetched at once. -->
+    <!-- The type, IBM Plex, is the site's own (src/styles/fonts.css): the two faces every page draws first (the words
+         and the headings), fetched at once beside the app file and the stylesheet. -->
     <link rel="preload" href="./fonts/IBMPlexSans-Regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="./fonts/IBMPlexSans-SemiBold.woff2" as="font" type="font/woff2" crossorigin />
     <!-- Link previews. A document lives in the part of the address after "#", which is never sent to a server, so a
          link previews as its app's card (public/og/, greeked: scripts/make-cards.ts). A link shared with a network from
          the app, with its preview on, carries "?c=<id>": the site's Worker writes that card into these tags, each

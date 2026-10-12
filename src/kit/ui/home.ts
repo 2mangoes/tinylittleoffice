@@ -7,8 +7,9 @@
  * the page, not cards, so it looks on a desktop as it does on a phone (Paul, 2026-10-09: "Don't make apps into cards.
  * Just make them into rows with docs below."). Each document shows its first page small at its left
  * (<to-preview>, drawn as it scrolls into sight: "When you list documents under apps, show them with
- * previews"). An app's templates are a chunk of their own, asked for when its list opens (Blank shown at once, the
- * rest added as they arrive, no spinner) or ahead of the tap, as a pointer comes over its row (`loadTemplates`).
+ * previews"). An app's templates are a file of their own, asked for when its list opens (Blank shown at once, the
+ * rest added as they arrive, no spinner) or ahead of the tap, as a pointer comes over its row (`loadTemplates`);
+ * offline, a file the service worker never kept is not there, and the list says so under Blank.
  * <to-templates> is the drawer's too: there a row's button (`via`) hands over to the drawer's one dialog
  * (`bare`, drawn outside the drawer's own), the drawer closing first (one modal at a time: kit/ui/drawer.ts).
  *
@@ -56,12 +57,24 @@ const asking = new Map<string, Promise<Template[]>>();
 // Their names are read in the language of the moment: a language chosen, they are asked for again.
 let era = 0;
 onLanguage(() => forgetTemplates());
+/** The apps whose templates' file could not be fetched (offline, and never kept by the service worker). */
+const unreached = new Set<string>();
 /** An app's templates if they have arrived, else undefined. */
 export const templatesOf = (app: AppDef): Template[] | undefined => arrived.get(app.id);
-/** An app's templates, asked for: its chunk is fetched the first time (a pointer over its row asks ahead of the tap), and the names are read again in the language of the moment. */
+/** Whether an app's templates were asked for and could not be fetched: the list says so, and the next asking tries again. */
+const templatesUnreached = (app: AppDef): boolean => unreached.has(app.id);
+/** An app's templates, asked for: its file is fetched the first time (a pointer over its row asks ahead of the tap), and the names are read again in the language of the moment. Not fetched, none. */
 async function loadTemplates(app: AppDef): Promise<Template[]> {
   const at = era;
-  const list = await app.templates();
+  let list: Template[];
+  try {
+    list = await app.templates();
+  } catch {
+    asking.delete(app.id);
+    if (at === era) unreached.add(app.id);
+    return [];
+  }
+  unreached.delete(app.id);
   // A load that set out before a forgetting (a language chosen, a test's reset) does not land in the cache after it.
   if (at === era) arrived.set(app.id, list);
   return list;
@@ -71,8 +84,9 @@ export function forgetTemplates(): void {
   era++;
   arrived.clear();
   asking.clear();
+  unreached.clear();
 }
-/** Intent: a pointer over an app's row fetches its templates' chunk ahead of the tap, once, so its list is full as it opens (and the drawer's Find, once something is typed, asks for every app's). */
+/** Intent: a pointer over an app's row fetches its templates' file ahead of the tap, once, so its list is full as it opens (and the drawer's Find, once something is typed, asks for every app's). */
 export function preloadTemplates(app: AppDef): Promise<Template[]> {
   let asked = asking.get(app.id);
   if (!asked) asking.set(app.id, (asked = loadTemplates(app)));
@@ -138,6 +152,7 @@ export class ToTemplates extends LitElement {
     this.list = templatesOf(app);
     void loadTemplates(app).then((list) => {
       if (this.app === app) this.list = list;
+      this.requestUpdate();
     });
   }
   /** The list, over the whole screen (Paul, 2026-10-10: "a large modal that takes over the screen, don't cut them off based on where the invoking icon is"). */
@@ -198,6 +213,7 @@ export class ToTemplates extends LitElement {
           <div class="to-listbox" role="listbox" tabindex="-1" aria-label=${t('Templates')} @keydown=${this.onKey}>
             ${this.drawn ? html`${this.app.blankInTemplates ? nothing : this.option(null)}${(this.list ?? []).map((tpl) => this.option(tpl))}` : nothing}
           </div>
+          ${this.drawn && templatesUnreached(this.app) ? html`<p class="to-hint" role="status">${t('The templates are not saved in this browser yet. Connect to the internet to see them.')}</p>` : nothing}
         </div>
       </dialog>`;
   }

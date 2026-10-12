@@ -6,8 +6,8 @@
  * the visual viewport, so it sits above a phone's keyboard and no card or scrolling host clips it; a tap
  * outside it and outside its editor says `complete-cancel`.
  *
- * The starter icons answer at once; the first ":" loads the rest of Lucide with its tags (the icon picker's
- * own chunk) and the emoji table, and the list grows when they arrive. Where the editor holds no icon runs
+ * The starter icons answer at once; the first ":" imports the rest of Lucide with its tags (the icon picker's
+ * module) and the emoji table, and the list grows when they arrive. Where the editor holds no icon runs
  * (a shape's label, plain words) only emoji are offered.
  */
 import { LitElement, html, nothing } from 'lit';
@@ -28,7 +28,7 @@ export interface Completion {
 
 let emoji: typeof import('../draw/emoji.ts') | null = null;
 let loading: Promise<void> | null = null;
-/** The rest of Lucide with its tags (the picker's chunk joins them to the search) and the emoji table, loaded once; never rejects. */
+/** The rest of Lucide with its tags (the picker's module joins them to the search) and the emoji table, imported once; never rejects. */
 export function loadCompletions(): Promise<void> {
   return (loading ??= Promise.all([import('./icons-picker.ts'), import('../draw/emoji.ts')]).then(
     ([, e]) => void (emoji = e),

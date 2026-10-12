@@ -1,5 +1,5 @@
 /**
- * <to-trip-editor>: the Trip app. A map (Leaflet, a lazy chunk of its own) above the stops, beside them when
+ * <to-trip-editor>: the Trip app. A map (Leaflet, imported lazily) above the stops, beside them when
  * there is room. A tap on the map adds a stop there (after the stop in hand); a pin dragged moves its stop, and a
  * focused pin is nudged by the arrows; Insert ▾ finds a place by name (OpenStreetMap's Nominatim, asked only when
  * Search is tapped) or puts a stop at the map's middle. Each stop is a row: its number (the handle: a tap chooses
@@ -80,7 +80,8 @@ const DOUBLE = 300;
 const NUDGE = 10;
 
 type L = typeof Leaflet;
-// The map library is the one large thing only this app needs: it arrives with the first map, in a chunk of its own.
+// The map library is the one large thing only this app needs: imported with the first map (in the built site it is
+// part of the app file and its sheet of the stylesheet, so the import is at once).
 let loading: Promise<L> | null = null;
 const leaflet = (): Promise<L> => (loading ??= Promise.all([import('leaflet'), import('./leaflet.css')]).then(([m]) => m));
 
@@ -411,7 +412,7 @@ export class ToTripEditor extends DocElement<TripView> {
     this.showMap = true;
     this.presenting = 0;
     await this.updateComplete;
-    // The map may still be on its way (Leaflet is a chunk of its own).
+    // The map may still be on its way (Leaflet is imported lazily, and made after the next frame).
     for (let n = 0; !this.map && this.mapEl && n < 100; n++) await new Promise((r) => setTimeout(r, 20));
     this.map?.invalidateSize();
     this.goStop(0);
@@ -545,7 +546,7 @@ export class ToTripEditor extends DocElement<TripView> {
     await this.updateComplete;
     const x = this.view.stops.length ? this.textOf(0, 'name') : null;
     if (!x) {
-      // The map takes the focus once Leaflet has made it (the chunk is lazy); with the map off, Insert (never the page).
+      // The map takes the focus once Leaflet has made it (its import is lazy); with the map off, Insert (never the page).
       if (this.showMap) await leaflet();
       return (this.querySelector<HTMLElement>('.trip-map') ?? this.querySelector<HTMLElement>('to-insert button'))?.focus({ preventScroll: true });
     }

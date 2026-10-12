@@ -5,7 +5,7 @@
 // (vite.config.ts) and checked by it before a deploy (scripts/check-build.ts); here on a build made of the real
 // shell, and on the build in dist/ when there is one.
 import { test, expect, beforeAll, afterAll } from 'vitest';
-import { cpSync, existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { cpSync, existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { apps } from '../src/kit/core/apps.ts';
@@ -24,6 +24,8 @@ function build(site: string) {
   dist = mkdtempSync(join(tmpdir(), 'tlo-seo-'));
   writeFileSync(join(dist, 'index.html'), readFileSync(join(root, 'index.html'), 'utf8').replaceAll('%VITE_SITE_URL%', site));
   cpSync(join(root, 'public/robots.txt'), join(dist, 'robots.txt'));
+  cpSync(join(root, 'public/theme.js'), join(dist, 'theme.js'));
+  mkdirSync(join(dist, 'assets'));
   writePages(dist, { site, apps: list, built: BUILT });
 }
 const read = (p: string) => readFileSync(join(dist, p), 'utf8');
@@ -32,6 +34,16 @@ beforeAll(async () => {
   list = await listed(apps());
 });
 afterAll(() => rmSync(dist, { recursive: true, force: true }));
+
+test('the theme script is hashed into assets/, kept a year like the app file, and every page names it there', () => {
+  build(SITE);
+  const [theme] = readdirSync(join(dist, 'assets'));
+  expect(theme).toMatch(/^theme-[\w-]{8}\.js$/);
+  expect(read(`assets/${theme}`)).toBe(readFileSync(join(root, 'public/theme.js'), 'utf8'));
+  expect(existsSync(join(dist, 'theme.js'))).toBe(false);
+  expect(read('index.html')).toContain(`<script src="./assets/${theme}"></script>`);
+  for (const id of [...apps().map((a) => a.id), 'embed']) expect(read(`${id}/index.html`)).toContain(`<script src="../assets/${theme}"></script>`);
+});
 
 test('the sitemap lists the home page and every app’s page, at the site’s address, dated by the commit; robots.txt names it', () => {
   build(SITE);

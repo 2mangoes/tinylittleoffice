@@ -46,7 +46,7 @@ import { DocElement, type Entry } from '../../kit/core/element.ts';
 import { icon, UI } from '../../kit/draw/icons.ts';
 import { t } from '../../kit/core/i18n.ts';
 import type { MenuItem, ToMenu } from '../../kit/ui/menu.ts';
-import { toast } from '../../kit/ui/toast.ts';
+import { toast } from '../../kit/core/say.ts';
 import type { Found } from '../../kit/ui/find.ts';
 import { fold } from '../../kit/share/search.ts';
 import {

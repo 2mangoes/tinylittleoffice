@@ -1,10 +1,11 @@
 import { defineConfig, loadEnv, type Plugin } from 'vite';
 import { createHash } from 'node:crypto';
-import { copyFileSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { copyFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { fillHeaders } from './scripts/headers.ts';
+import { fillHeaders, headersFor } from './scripts/headers.ts';
 import { listed, writePages } from './scripts/seo.ts';
+import { writeWorker } from './scripts/sw-manifest.ts';
 import { gitFacts, versionJson, versionOf } from './scripts/version.ts';
 import type { AppDef } from './src/kit/core/app.ts';
 
@@ -19,7 +20,8 @@ const fromSource = <T>(path: string): Promise<T> => import(pathToFileURL(resolve
  * After the build: the pages (scripts/seo.ts: a page per app with its name and line in its tags and its first text,
  * the embed page, the JSON-LD on each, the sitemap and robots.txt's line naming it); the Content-Security-Policy's
  * script hashes and hosts written into _headers (public/_headers has the placeholders, scripts/headers.ts fills
- * them); and which build this is, dist/version.json (the commit, its tag and date, those hashes: scripts/version.ts).
+ * them); the service worker's list of files and its cache's name, written into dist/sw.js (scripts/sw-manifest.ts);
+ * and which build this is, dist/version.json (the commit, its tag and date, those hashes: scripts/version.ts).
  * For agents, /.well-known/llms.txt is /llms.txt again and /examples/<app>.json each app's examples.
  */
 function afterBuild(site: string): Plugin {
@@ -32,6 +34,10 @@ function afterBuild(site: string): Plugin {
       const dist = resolve(import.meta.dirname, 'dist');
       const facts = gitFacts(import.meta.dirname);
       writePages(dist, { site, apps: await listed(apps()), built: facts.built });
+      writeWorker(
+        dist,
+        apps().map((a) => a.id),
+      );
       // For agents: the short guide where some look for it too, and each app's examples (packages/doc/examples, written
       // by scripts/make-skill.ts) as static files, so an agent that can only fetch reads them.
       mkdirSync(resolve(dist, '.well-known'), { recursive: true });
@@ -45,14 +51,47 @@ function afterBuild(site: string): Plugin {
   };
 }
 
-/** A chunk's name: `<app>-editor`, `<app>-commands`, `templates-<app>` or `lang-<code>` for the modules they hold, else the bundler's own. */
-function chunkName(chunk: { name: string; facadeModuleId: string | null; moduleIds: readonly string[] }): string {
-  for (const id of chunk.facadeModuleId ? [chunk.facadeModuleId] : chunk.moduleIds) {
-    const m = /\/src\/apps\/([^/]+)\/(editor|commands|templates)\.ts$/.exec(id.replaceAll('\\', '/')) ?? /\/src\/(i18n)\/([^/]+)\.ts$/.exec(id.replaceAll('\\', '/'));
-    if (m) return m[1] === 'i18n' ? `lang-${m[2]}` : m[2] === 'templates' ? `templates-${m[1]}` : `${m[1]}-${m[2]}`;
-  }
-  return chunk.name;
+/**
+ * Which file a module goes in: an app's templates are `templates-<app>` and a language other than English
+ * `lang-<code>`, each fetched when asked for; every other module (the kit, every app's editor, commands and view, the
+ * English strings, the icon library, the emoji and the math) is `app`, the one file the pages name. A dynamic import
+ * of a module in `app` is a static one in the build: the module is already there. The service worker (src/sw.ts) is
+ * an entry of its own, dist/sw.js.
+ */
+export function fileOf(id: string): string {
+  const path = id.replaceAll('\\', '/');
+  const tpl = /\/src\/apps\/([^/]+)\/templates\.ts$/.exec(path);
+  if (tpl) return `templates-${tpl[1]}`;
+  const lang = /\/src\/i18n\/([^/]+)\.ts$/.exec(path);
+  if (lang && lang[1] !== 'en') return `lang-${lang[1]}`;
+  return /\/src\/sw\.ts$/.test(path) ? 'sw' : 'app';
 }
+
+/**
+ * `npm run preview` serves the build with the cache's headers dist/_headers gives each file (scripts/headers.ts), so the
+ * smoke run sees what a browser keeps on the site: the hashed files a year, the pages asked for each time.
+ */
+const previewCache = (): Plugin => ({
+  name: 'tinyoffice-preview-cache',
+  configurePreviewServer(server) {
+    const file = resolve(import.meta.dirname, 'dist', '_headers');
+    const rules = existsSync(file) ? readFileSync(file, 'utf8') : '';
+    server.middlewares.use((req, res, next) => {
+      const cache = headersFor(rules, new URL(req.url ?? '/', 'http://x').pathname)['Cache-Control'];
+      if (cache) {
+        // The static server writes its own Cache-Control with the head: the build's goes in last.
+        const writeHead = res.writeHead.bind(res) as (...a: unknown[]) => typeof res;
+        res.writeHead = ((code: number, ...rest: unknown[]) => {
+          const headers = rest.find((r): r is Record<string, unknown> => !!r && typeof r === 'object');
+          if (headers) headers['Cache-Control'] = cache;
+          else res.setHeader('Cache-Control', cache);
+          return writeHead(code, ...rest);
+        }) as typeof res.writeHead;
+      }
+      next();
+    });
+  },
+});
 
 export default defineConfig(({ mode }) => ({
   base: './',
@@ -71,21 +110,29 @@ export default defineConfig(({ mode }) => ({
       '/card': { target: 'http://127.0.0.1:8789' },
     },
   },
-  plugins: [afterBuild(loadEnv(mode, import.meta.dirname).VITE_SITE_URL ?? '')],
+  plugins: [afterBuild(loadEnv(mode, import.meta.dirname).VITE_SITE_URL ?? ''), previewCache()],
   build: {
     target: 'es2022',
     outDir: 'dist',
+    // One stylesheet beside the one app file (the editors' styles and the map's are in it).
+    cssCodeSplit: false,
+    // No preload helper: the only lazy files, the templates and the languages, need nothing the app file does not hold.
+    modulePreload: false,
+    // The app file is one file on purpose (its size is held by budgets.json, not by this warning).
+    chunkSizeWarningLimit: 4096,
     // (The API for programs, /api.js, is a build of its own after this one: vite.api.config.ts.)
     rollupOptions: {
-      input: { main: resolve(import.meta.dirname, 'index.html') },
-      // The layout scripts/budgets.ts weighs (main, apps, each editor and its commands) is the bundler's by default, and
-      // its pass that avoids "redundant" chunk loads folded the apps chunk into main once no lazy chunk imported a
-      // module of main's own: off, so the chunks stay what they were drawn to be.
-      experimental: { chunkOptimization: { avoidRedundantChunkLoads: false } },
-      // An app's editor and its commands are named for the app (write-editor-<hash>.js), its templates too
-      // (templates-write-<hash>.js), a language for its code
-      // (lang-fr-<hash>.js), so the built chunks say what they hold and scripts/budgets.ts can weigh each.
-      output: { entryFileNames: 'assets/[name]-[hash].js', chunkFileNames: (chunk) => `assets/${chunkName(chunk)}-[hash].js` },
+      input: { app: resolve(import.meta.dirname, 'index.html'), sw: resolve(import.meta.dirname, 'src/sw.ts') },
+      // A dynamic import of a module the app file holds anyway is not a split, and is meant: no warning for each.
+      checks: { ineffectiveDynamicImport: false },
+      output: {
+        // The worker at the site's root, under a name that never changes: its scope is the whole site, and a new build is a new sw.js.
+        entryFileNames: (chunk) => (chunk.name === 'sw' ? 'sw.js' : 'assets/[name]-[hash].js'),
+        chunkFileNames: (chunk) => `assets/${chunk.facadeModuleId ? fileOf(chunk.facadeModuleId) : chunk.name}-[hash].js`,
+        assetFileNames: (asset) => (asset.names.some((n) => n.endsWith('.css')) ? 'assets/app-[hash][extname]' : 'assets/[name]-[hash][extname]'),
+        // Every module fileOf puts in the app file is one group, so the bundler splits off only the templates and the languages.
+        codeSplitting: { groups: [{ name: 'app', test: (id: string) => fileOf(id) === 'app' }] },
+      },
     },
   },
 }));

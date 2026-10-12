@@ -7,7 +7,7 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { gzipSync } from 'node:zlib';
 import { describe, expect, test } from 'vitest';
-import { eagerTemplates, firstLoad, measure, overBudget, readBudgets, type Sizes } from '../scripts/budgets.ts';
+import { fetchedAtOnce, lazyImports, measure, overBudget, readBudgets, shapeOf, type Sizes } from '../scripts/budgets.ts';
 import { deadExports } from '../scripts/dead.ts';
 import { staleFiles } from '../scripts/generated.ts';
 import { ALLOWED, KIT_FOLDERS, NOT_WORDS, WAIT_MS, bareWords, domNames, graphProblems, kitProblems, timedWaits, type Module } from './lints.ts';
@@ -153,12 +153,6 @@ export const TIMED: { file: string; wait: string; n: number; why: string }[] = [
   },
   { file: 'test/browser/motion.test.ts', wait: 'await tick(300);', n: 1, why: 'a paused animation must not move: its clock is read, time passes, and it is read again' },
   { file: 'test/browser/motion.test.ts', wait: 'await tick(200);', n: 1, why: 'a paused animation must not move: its clock is read, time passes, and it is read again' },
-  {
-    file: 'test/browser/no-service-worker.test.ts',
-    wait: 'await new Promise((r) => setTimeout(r, 200));',
-    n: 1,
-    why: 'no switch may ask for a service worker: nothing must happen: an absence has no moment to wait for, so what would come is given a while to come',
-  },
   {
     file: 'test/browser/pinch.test.ts',
     wait: 'await tick(400);',
@@ -377,35 +371,47 @@ describe('generated outputs are fresh: each generating script, run with --check,
   );
 });
 
-// The build in dist/ is held to them by scripts/budgets.ts, the build's last step, and by test/budgets.test.ts.
-describe('chunk budgets: the built chunks within budgets.json', () => {
-  test('the fixture’s entry chunk is over the budget it is given', () => {
-    const sizes = measure(join(FIXTURES, 'built'));
-    // Opening Write adds its editor, its commands and the chunk they share; the icons are the home page's already.
-    const gz = (f: string) => gzipSync(readFileSync(join(FIXTURES, 'built/assets', f)), { level: 9 }).length;
-    expect(sizes.editors.write).toStrictEqual({
-      editor: gz('write-editor-AAAAAAAA.js'),
-      commands: gz('write-commands-AAAAAAAA.js'),
-      open: gz('write-editor-AAAAAAAA.js') + gz('write-commands-AAAAAAAA.js') + gz('shared-AAAAAAAA.js'),
-    });
-    expect(sizes.languages).toStrictEqual({ fr: gz('lang-fr-AAAAAAAA.js') });
-    // An app's templates are a chunk of their own, and the home page's first load holds none of them.
-    expect(sizes.templates).toStrictEqual({ write: gz('templates-write-AAAAAAAA.js') });
-    expect(eagerTemplates(firstLoad(join(FIXTURES, 'built')))).toStrictEqual([]);
-    expect(eagerTemplates(['main-AAAAAAAA.js', 'templates-write-AAAAAAAA.js'])).toStrictEqual(['templates-write-AAAAAAAA.js']);
+// The build in dist/ is held to them by scripts/budgets.ts, the build's last step, and by test/build.test.ts.
+describe('the build’s budgets and shape: the built site within budgets.json, in the shape the design says', () => {
+  const built = join(FIXTURES, 'built');
+  const gz = (f: string) => gzipSync(readFileSync(join(built, f)), { level: 9 }).length;
+  test('the fixture is weighed and counted: the app file, the stylesheet, the templates and the languages; the API in two; the files; the requests before a page’s first paint', () => {
+    const sizes = measure(built);
+    expect(sizes.app).toBe(gz('assets/app-AAAAAAAA.js'));
+    expect(sizes.stylesheet).toBe(gz('assets/app-AAAAAAAA.css'));
+    expect(sizes.templates).toStrictEqual({ write: gz('assets/templates-write-AAAAAAAA.js') });
+    expect(sizes.languages).toStrictEqual({ fr: gz('assets/lang-fr-AAAAAAAA.js') });
+    expect(sizes.api).toBe(gz('api.js'));
+    expect(sizes.apiParts).toBe(gz('api/editor-AAAAAAAA.js') + gz('api/parts-AAAAAAAA.js'));
+    expect(sizes.files).toBe(12);
+    // The home page: itself, a face, the theme script, the app file and the stylesheet; not the icon, nor what a comment names.
+    expect(fetchedAtOnce(readFileSync(join(built, 'index.html'), 'utf8'))).toStrictEqual([
+      './fonts/IBMPlexSans-Regular.woff2',
+      './assets/theme-AAAAAAAA.js',
+      './assets/app-AAAAAAAA.js',
+      './assets/app-AAAAAAAA.css',
+    ]);
+    expect(sizes.requests).toBe(5);
     const budgets: Sizes = JSON.parse(JSON.stringify(sizes));
-    budgets.main = 10;
-    expect(overBudget(sizes, budgets)).toStrictEqual([`main: ${sizes.main} bytes, over its budget of 10 by ${sizes.main - 10}`]);
+    budgets.app = 10;
+    budgets.requests = 4;
+    expect(overBudget(sizes, budgets)).toStrictEqual([`app: ${sizes.app} bytes, over its budget of 10 by ${sizes.app - 10}`, 'requests: 5 requests, over its budget of 4 by 1']);
   });
-  test('budgets.json has a budget for every chunk it weighs', () => {
+  test('the fixture’s shape is wrong in every way the check knows, each said', () => {
+    expect(lazyImports('a.import({ ln }); import(`./lang-fr-AAAAAAAA.js`); import(name)')).toStrictEqual(['lang-fr-AAAAAAAA.js', '?']);
+    expect(shapeOf(built, { apps: ['write', 'sheet'], langs: ['fr'] })).toStrictEqual([
+      'assets/ holds 0 files for sheet’s templates, not one',
+      'assets/write-editor-AAAAAAAA.js: a file the design does not have (one app file, one stylesheet, the theme script, the templates and the languages)',
+      'assets/app-AAAAAAAA.js imports write-editor-AAAAAAAA.js lazily: only a templates file or a language may be',
+      'api/ holds 2 files, not one',
+      'api/editor-AAAAAAAA.js holds an element of the page (customElements.define or LitElement): the API carries no editor and no chrome',
+      'write/index.html does not name assets/app-AAAAAAAA.css in its head',
+      'sw.js still has its unfilled list (scripts/sw-manifest.ts)',
+    ]);
+  });
+  test('budgets.json has a budget for everything it weighs and counts', () => {
     const budgets = readBudgets();
-    for (const k of ['main', 'apps', 'home', 'icons', 'iconsFull', 'api', 'fonts'] as const) expect(typeof budgets[k], k).toBe('number');
-    expect(Object.keys(budgets.editors ?? {}).sort()).toStrictEqual(
-      tree
-        .filter((m) => /^src\/apps\/[^/]+\/editor\.ts$/.test(m.path))
-        .map((m) => m.path.split('/')[2])
-        .sort(),
-    );
+    for (const k of ['app', 'stylesheet', 'api', 'apiParts', 'fonts', 'files', 'requests'] as const) expect(typeof budgets[k], k).toBe('number');
     expect(Object.keys(budgets.templates ?? {}).sort()).toStrictEqual(
       tree
         .filter((m) => /^src\/apps\/[^/]+\/templates\.ts$/.test(m.path))

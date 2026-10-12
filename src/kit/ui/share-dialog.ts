@@ -34,7 +34,7 @@ import { store } from '../core/store.ts';
 import { QR_MAX_BYTES, qrSvg } from '../draw/qr.ts';
 import { canShareNative, copyText, embedCode, mastodonHost, SERVICE_NAMES, SERVICES, shareNative, shareUrl, type Service } from '../share/share.ts';
 import { openLink } from './link-guard.ts';
-import { toast } from './toast.ts';
+import { toast } from '../core/say.ts';
 import { place } from './menu.ts';
 import type { ToDialog } from './dialog.ts';
 import './dialog.ts';

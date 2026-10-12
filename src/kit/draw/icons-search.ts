@@ -2,7 +2,7 @@
  * Search and suggestion over the icon library, with no DOM and no Lucide (it runs under node). Each
  * starter icon (kit/draw/icons.ts LIBRARY) carries a few keywords; a slide's own words are matched against them
  * to suggest icons, and the picker's search box does the same with what is typed. The rest of Lucide joins
- * through addIconNames once the lazy chunk (icons-picker.ts) has it: searched by name and tag, grouped by
+ * through addIconNames once the picker (icons-picker.ts, imported lazily) has it: searched by name and tag, grouped by
  * Lucide's categories.
  */
 export const KEYWORDS: Record<string, string> = {

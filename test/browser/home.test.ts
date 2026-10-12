@@ -93,8 +93,8 @@ async function openTemplates(shell: HTMLElement, app: string) {
   await until(() => !!shell.querySelector('.to-app'));
   const tpl = shell.querySelector<HTMLElement>(`.to-app[aria-label="${app}"] to-templates`) as ToTemplates;
   tpl.show();
-  // Blank is drawn at once, its preview with it; the templates come with their chunk. Waiting on the first preview alone
-  // measured Blank by itself when the chunk was slow (main, 2026-10-12: "no blurb taller than its preview: 0/94"), so
+  // Blank is drawn at once, its preview with it; the templates come with their file. Waiting on the first preview alone
+  // measured Blank by itself when the file was slow (main, 2026-10-12: "no blurb taller than its preview: 0/94"), so
   // the wait is for the templates themselves, every one with its preview.
   await until(() => {
     const options = tpl.querySelectorAll('dialog[open] [role=option]');

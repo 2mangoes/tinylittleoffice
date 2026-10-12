@@ -4,13 +4,14 @@
  *
  * A document may name any Lucide icon; the starter set draws at once, the rest after one lazy load.
  * LIBRARY is the starter set (":rocket Launch" in a drawing, ":rocket:" in words), by short name, drawn
- * under node as well as in a browser; the rest of Lucide joins it from one lazy chunk (icons-full.ts, which
- * the picker brings too) under Lucide's own kebab-case names. loadIcons() fetches that chunk once;
+ * under node as well as in a browser; the rest of Lucide joins it from one lazy import (icons-full.ts, which
+ * the picker brings too; in the built site, part of the app file) under Lucide's own kebab-case names. loadIcons()
+ * imports it once;
  * onIcons() tells whoever drew a name it did not know yet (<to-text> draws again); ensureIcons(names) is
  * what a caller awaits before drawing a view or an export that names an icon the starter set lacks
  * (iconNames(doc) lists what a document names). A view itself stays synchronous.
  */
-import { svg, type TemplateResult } from 'lit';
+import { svg, type TemplateResult } from 'lit/html.js';
 import { unsafeSVG } from 'lit/directives/unsafe-svg.js';
 import {
   AlignCenter,
@@ -350,7 +351,7 @@ export function fullJoined() {
 }
 /** Whether the whole of Lucide has joined (a name unknown now is unknown for good). */
 export const iconsComplete = () => joined;
-/** The whole of Lucide, loaded once (a lazy chunk); resolves when it has joined, never rejects (offline, the names stay names). */
+/** The whole of Lucide, imported once (lazily); resolves when it has joined, never rejects (where it cannot come, the names stay names). */
 export function loadIcons(): Promise<void> {
   if (joined) return Promise.resolve();
   return (full ??= import('./icons-full.ts').then(

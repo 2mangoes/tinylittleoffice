@@ -129,7 +129,7 @@ run('unit tests', 'npm run -s test:unit');
 run('the kit and the editors, in Chromium', 'npm run -s test:browser');
 // Playwright builds the site itself (playwright.config.ts) and previews it; dist/ is that build afterwards.
 if (args.has('--full')) run('every e2e spec on the built site', 'npx playwright test');
-else if (smoke) run('the smoke run on the built site', 'npx playwright test e2e/smoke.spec.ts e2e/keyboard.spec.ts e2e/a11y.spec.ts');
+else if (smoke) run('the smoke run on the built site', 'npx playwright test e2e/smoke.spec.ts e2e/keyboard.spec.ts e2e/a11y.spec.ts e2e/offline.spec.ts');
 else run('build', 'npm run -s build');
 run('the policy and the version', 'node scripts/check-build.ts');
 

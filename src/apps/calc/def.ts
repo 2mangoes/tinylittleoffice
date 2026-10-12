@@ -1,8 +1,8 @@
 /**
  * Calculator: a tape. Every line worked out as it is typed, a line "a = 12" keeping its answer by name for
  * the lines after, units and conversions and a little algebra beside the plain sums; or curves y = f(x)
- * drawn. The document is the tape (model.ts), the editor is editor.ts (the mathjs engine a chunk of its own,
- * math.ts), the drawing and the text view.ts.
+ * drawn. The document is the tape (model.ts), the editor is editor.ts (the mathjs engine, math.ts, a lazy import
+ * in the app file), the drawing and the text view.ts.
  */
 import { Calculator } from 'lucide';
 import { apply, parse, write } from '../../doc/index.ts';

@@ -1,11 +1,8 @@
 {
-  "$comment": "The chunk budgets (scripts/budgets.ts says what each number weighs): bytes of each built chunk gzipped at level 9. The first budgets were the sizes of 2026-10-10 plus 5%. npm run build fails when a chunk is over; the budget is a tripwire against growth nobody meant, not a ceiling on clarity: growth that buys simplicity is raised here, in a commit of its own whose message says why.",
+  "$comment": "The build's budgets (scripts/budgets.ts says what each number weighs and counts): bytes gzipped at level 9, files in dist/, and requests before a page's first paint. The app file's budget is Paul's 700 KB (2026-10-12, the app in one file measured at 669 KB); the rest are the sizes of 2026-10-12 plus about 5%. Files: 108 measured, where the design's list comes to 80 (78 by its items: eleven pages, the app file, the stylesheet, ten templates files, eighteen languages, the worker, the API, fourteen faces, ten cards, the manifest and six icons, robots.txt, llms.txt and llms-full.txt, version.json). The other 30 were in dist/ before and are served still: the embed page and network.html; the theme script; the API's second file, api/parts-<hash>.js; the fonts' licence (fonts/LICENSE.txt, which the OFL asks to travel with the faces); the site's own card, og.png; ten examples/<app>.json and ten llms/<app>.txt for agents, and .well-known/llms.txt; tinyoffice.js and its types, tinyoffice.d.ts, for a page that writes links; _headers, which the edge reads and never serves. The request budget is the page, the app file, the stylesheet, the two Latin faces and the theme script (public/theme.js, which sets light or dark before the first paint): six where the design says five, a decision put to Paul. npm run build fails when anything is over; the budget is a tripwire against growth nobody meant, not a ceiling on clarity: growth that buys simplicity is raised here, in a commit of its own whose message says why.",
   "gzipLevel": 9,
-  "main": 44000,
-  "apps": 60545,
-  "home": 254337,
-  "icons": 18527,
-  "iconsFull": 89844,
+  "app": 716800,
+  "stylesheet": 30400,
   "templates": {
     "anim": 3836,
     "cal": 5511,
@@ -38,58 +35,9 @@
     "zh-hans": 51450,
     "zh-hant": 52000
   },
-  "editors": {
-    "anim": {
-      "editor": 7845,
-      "commands": 1935,
-      "open": 55050
-    },
-    "cal": {
-      "editor": 11565,
-      "commands": 1595,
-      "open": 45094
-    },
-    "calc": {
-      "editor": 4902,
-      "commands": 1193,
-      "open": 19074
-    },
-    "deck": {
-      "editor": 11400,
-      "commands": 2203,
-      "open": 51707
-    },
-    "diagram": {
-      "editor": 8689,
-      "commands": 1800,
-      "open": 36295
-    },
-    "draw": {
-      "editor": 12207,
-      "commands": 3873,
-      "open": 43465
-    },
-    "outline": {
-      "editor": 10825,
-      "commands": 1331,
-      "open": 50156
-    },
-    "sheet": {
-      "editor": 10400,
-      "commands": 2028,
-      "open": 40916
-    },
-    "trip": {
-      "editor": 11107,
-      "commands": 1290,
-      "open": 40113
-    },
-    "write": {
-      "editor": 12689,
-      "commands": 1833,
-      "open": 50636
-    }
-  },
-  "api": 25600,
-  "fonts": 1074000
+  "api": 28500,
+  "apiParts": 272000,
+  "fonts": 1074000,
+  "files": 112,
+  "requests": 6
 }

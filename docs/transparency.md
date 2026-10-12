@@ -13,8 +13,8 @@ The strongest fact is architectural: no server holds documents, so there is noth
 leak. Everything here makes that checkable by a stranger.
 
 1. **What leaves your browser** (gate). A page, `docs/network.md` and `/network` on the site, generated from
-   the code: every request the site can make (map tiles and place search, the short-link service, the icon
-   set's lazy chunk, a share to a service), when it happens (only after a tap, or while a map is shown), what
+   the code: every request the site can make (map tiles and place search, the short-link service, the service
+   worker under Save in browser, a share to a service), when it happens (only after a tap, or while a map is shown), what
    it carries, and what stops it. A test in `test/network.test.ts` greps the site for every host it can reach
    and fails if one is not on the page. The `connect-src` and `img-src` of the CSP are generated from the same
    list.

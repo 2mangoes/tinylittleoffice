@@ -4,7 +4,8 @@
  * follow); the keys below. On a graph the lines are curves y = f(x), drawn above the tape. A key never takes
  * the focus, so a phone's keyboard stays where it was. Every change is operations on the tape's paragraph
  * (model.ts): a line put in, changed or taken away is a `text` op, the tape's birth and end a `splice`, the
- * mode a `head` op. Units, conversions and algebra come from math.ts, a chunk fetched when the editor opens.
+ * mode a `head` op. Units, conversions and algebra come from math.ts, imported lazily when the editor opens (in the
+ * built site it is part of the app file, so the import is at once).
  *
  * The tape's lines are rows (kit/text/rows.ts): a tap on a line's grip, or Shift+Up/Down or Escape in it, chooses it
  * whole, with the bar under it (Edit, Move up, Move down, Duplicate | Copy, Cut, Paste | Delete) and the keys a

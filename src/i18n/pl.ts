@@ -1412,6 +1412,7 @@ export default {
   'Templates for {app}': 'Szablony: {app}',
   '{app} Templates': '{app}: szablony',
   'Templates for {app}: {name}': 'Szablony ({app}): {name}',
+  'The templates are not saved in this browser yet. Connect to the internet to see them.': 'Szablony nie są jeszcze zapisane w tej przeglądarce. Połącz się z internetem, żeby je zobaczyć.',
   // The grip on a line of the tape; the bar under lines chosen whole.
   'Choose line {n}: drag it to move it': 'Wybierz wiersz {n}: przeciągnij, by go przenieść',
   'Chosen lines': 'Wybrane wiersze',

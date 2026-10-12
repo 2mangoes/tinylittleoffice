@@ -1,6 +1,6 @@
 /**
  * chooseIcon(): the icon library in a dialog, searchable, for any app that wants an icon (Draw, Write, Deck,
- * Diagram). A lazy chunk: importing it brings the rest of Lucide (some 1,800 icons) and their tags and
+ * Diagram). Imported lazily (in the built site, part of the app file): importing it brings the rest of Lucide (some 1,800 icons) and their tags and
  * categories (icons-meta.ts) with it, which join kit/draw/icons.ts LIBRARY under Lucide's own names, so a
  * document may name any of them, and the Emoji set (emoji.ts). Resolves with the icon's name, or an
  * emoji's character; '' for "No icon" when that is offered; null if nothing was picked. Suggestions (from the words on a slide, say) sit above the library.
@@ -15,7 +15,7 @@ import { t } from '../core/i18n.ts';
 import type { ToDialog } from './dialog.ts';
 import './dialog.ts';
 
-/** The whole of Lucide's tags and categories, joined to the search once, as this chunk loads. */
+/** The whole of Lucide's tags and categories, joined to the search once, as this module loads. */
 addIconNames(allIcons, META, CATEGORIES);
 
 export interface IconChoice {

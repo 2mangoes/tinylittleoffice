@@ -20,7 +20,10 @@
 /:app/
   ! Cache-Control
   Cache-Control: no-cache, no-transform
-# Built files carry a hash in their name: once fetched, they are never asked for again.
+# Built files carry a hash in their name: once fetched, they are never asked for again. They are the app file and
+# its stylesheet, the theme script, an app's templates and a language (scripts/budgets.ts holds the folder to those).
+# The service worker, /sw.js, is not among them: it is asked for each time (no-cache, above), so a deploy's new one
+# is found on the next online visit.
 /assets/*
   ! Cache-Control
   Cache-Control: public, max-age=31536000, immutable
@@ -35,7 +38,7 @@
   ! Cache-Control
   Cache-Control: no-cache, no-transform
 # For programs: the guides (/llms.txt, short; /llms-full.txt, whole; /llms/<app>.txt, an app each; the same at
-# /.well-known/llms.txt), the examples (/examples/<app>.json), the API (/api.js, and the pieces of it under /api/)
+# /.well-known/llms.txt), the examples (/examples/<app>.json), the API (/api.js, and the one part of it under /api/)
 # and the helper for pages (/tinyoffice.js) from any origin. The guides are plain text in UTF-8 and kept five
 # minutes, so an agent's second fetch is quick and a new guide is read within minutes of a deploy.
 /tinyoffice.js

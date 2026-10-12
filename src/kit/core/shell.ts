@@ -65,7 +65,7 @@ import { firstWords, Keeper, library, newName, type Kept } from '../share/librar
 import { pageSvg } from '../draw/draw.ts';
 import { opensDropped, unplain } from '../file/open.ts';
 import { parseCompare, type Side } from '../ui/compare.ts';
-import { toast } from '../ui/toast.ts';
+import { toast } from './say.ts';
 import { installLinkGuard } from '../ui/link-guard.ts';
 import { motion, reducedMotion } from '../draw/motion.ts';
 import { setSelfLink } from '../draw/qr-picture.ts';
@@ -146,7 +146,7 @@ export class ToShell extends LitElement {
   };
   declare app: string | null;
   declare doc: Doc;
-  declare tag: string; // the editor element's tag, once its chunk has arrived
+  declare tag: string; // the editor element's tag, once its module has arrived
   declare unreadable: boolean; // the link holds something that cannot be read (cut short when copied, most often)
   declare display: boolean; // shown as its pages (the Display Link), not in the editor
   declare reading: boolean; // the Display Link shown as its words, reflowed, not its pages ("&text")

@@ -1412,6 +1412,7 @@ export default {
   'Templates for {app}': 'قوالب {app}',
   '{app} Templates': 'قوالب {app}',
   'Templates for {app}: {name}': 'قوالب {app}: {name}',
+  'The templates are not saved in this browser yet. Connect to the internet to see them.': 'القوالب غير محفوظة في هذا المتصفح بعد. اتصل بالإنترنت لرؤيتها.',
   // The grip on a line of the tape; the bar under lines chosen whole.
   'Choose line {n}: drag it to move it': 'اختر السطر {n}: اسحبه لتحريكه',
   'Chosen lines': 'الأسطر المحددة',

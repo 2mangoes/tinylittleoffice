@@ -1411,6 +1411,7 @@ export default {
   'Templates for {app}': '{app}的模板',
   '{app} Templates': '{app}的模板',
   'Templates for {app}: {name}': '{app}的模板：{name}',
+  'The templates are not saved in this browser yet. Connect to the internet to see them.': '模板还没有保存在此浏览器中。连接互联网即可查看。',
   // The grip on a line of the tape; the bar under lines chosen whole.
   'Choose line {n}: drag it to move it': '选中第 {n} 行：拖动即可移动',
   'Chosen lines': '选中的行',

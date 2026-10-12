@@ -1,5 +1,5 @@
 /**
- * <to-toast>: the one voice. Anything on the page says something with toast('Link copied'); it is shown long enough to
+ * <to-toast>: the one voice. Anything on the page says something with toast('Link copied') (kit/core/say.ts); it is shown long enough to
  * read (`toastTime`: four seconds, more for more words) and held while a pointer is on it. What is shown and what is said
  * are two elements: the toast seen (aria-hidden) and a status region heard. While a modal dialog is open the page outside
  * it is inert, and a region there is never heard, so the words are said by an sr-only region inside the topmost modal
@@ -8,13 +8,10 @@
  * twice.
  */
 import { LitElement, html } from 'lit';
+import { TOAST } from '../core/say.ts';
 
-export const TOAST = 'to-toast';
 /** How long a message is shown, in ms: four seconds at least, and a second and a half more than 60ms a character. */
 const toastTime = (message: string): number => Math.max(4000, 1500 + 60 * message.length);
-export function toast(message: string) {
-  window.dispatchEvent(new CustomEvent(TOAST, { detail: message }));
-}
 
 /** The region a dialog's words are said in: made the first time it is wanted, kept with the dialog. */
 function regionIn(d: HTMLDialogElement): HTMLElement {

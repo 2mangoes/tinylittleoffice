@@ -41,12 +41,23 @@ dd{margin:0}
 <h2>Every request the site can make</h2>
 <section class="reach">
 <h3><code>tinylittleoffice.com</code></h3>
-<p>The site’s own files: the apps, the type (IBM Plex, a face when a page’s words need it), the icon set’s chunk (loaded when the icon picker opens).</p>
+<p>The site’s own files: the page, the app file (every app, the English words, the icons, the emoji and the math), its stylesheet, an app’s templates when its list opens, a language when a page is in it, and the type (IBM Plex, a face when a page’s words need it), each fetched once and kept a year.</p>
 <dl>
 <dt>When</dt><dd>while shown</dd>
 <dt>Carries</dt><dd>Which file; never the document, which is after the &quot;#&quot; and stays in the browser</dd>
 <dt>Stopped by</dt><dd>Nothing to stop but not opening the site: these files are the app itself</dd>
 <dt>Made by</dt><dd><code>the whole site</code></dd>
+<dt>Allowed by</dt><dd><code>'self'</code></dd>
+</dl>
+</section>
+<section class="reach">
+<h3><code>tinylittleoffice.com</code></h3>
+<p>The service worker, /sw.js, with Save in browser on: it keeps the pages, the app file, its stylesheet, the Latin faces and each file a page fetches after, so the site opens offline.</p>
+<dl>
+<dt>When</dt><dd>after a tap</dd>
+<dt>Carries</dt><dd>Which file, as the pages ask; never the document, which is after the &quot;#&quot; and never reaches the worker, and never a page’s &quot;?c=&quot; card</dd>
+<dt>Stopped by</dt><dd>Save in browser, turned off: the worker is unregistered and everything it kept is deleted; under Private there is none</dd>
+<dt>Made by</dt><dd><code>kit/share/offline.ts, sw.ts</code></dd>
 <dt>Allowed by</dt><dd><code>'self'</code></dd>
 </dl>
 </section>
@@ -178,7 +189,8 @@ dd{margin:0}
 <li><strong>Short links.</strong> Only when a short link is made or opened; the service holds ciphertext it cannot read, whose key is in the short link's fragment, which browsers never send (tinier/tinier.ts).</li>
 <li><strong>A preview.</strong> Only when a person shares with a network from Share with &quot;Show a preview of the first page&quot; on: a picture of the first page, the title and the first words go to the site's own <code>/card</code>, and the link shared carries the card's id (<code>?c=</code>) before the &quot;#&quot;, where the network's fetcher reads it. The card is kept readable for a month, then forgotten (tinier/cards.ts); the document and its link are never sent.</li>
 <li><strong>Sharing to a service.</strong> Share's Bluesky, Mastodon, X and LinkedIn open that service's own compose box in a new tab, with the title and the link in it: no script of theirs runs here. The link is the document, so whoever reads the post can read it. &quot;Any https address&quot; there is the Mastodon server the person names.</li>
-<li><strong>Fonts and icons.</strong> Self-hosted, from the site itself: the type is IBM Plex (<code>public/fonts/</code>), each face fetched when a page's words need it, and the policy's <code>font-src</code> is <code>'self'</code> alone; the full icon set is a chunk of the site's own, loaded when the icon picker opens.</li>
+<li><strong>Fonts and icons.</strong> Self-hosted, from the site itself: the type is IBM Plex (<code>public/fonts/</code>), each face fetched when a page's words need it, and the policy's <code>font-src</code> is <code>'self'</code> alone; the icons and the emoji are in the site's own app file.</li>
+<li><strong>Offline.</strong> With Save in browser on, the site's service worker (<code>/sw.js</code>, from <code>src/sw.ts</code>) keeps the site's own files on the device: the eleven pages, the app file, its stylesheet, the theme script, the manifest and icons and the Latin faces when it is installed, and each file a page fetches afterwards (an app's templates, a language, a face). It asks only the site, and only for its files; a page is asked of the network first, so a visit online is never stale. It never keeps a document (the document is after the &quot;#&quot;, which never reaches it) nor a link's <code>?c=</code> page. Turning Save in browser off unregisters it and deletes everything it kept; under Private nothing registers.</li>
 <li><strong>Links.</strong> A link in a document that leaves the site opens only after the reader is shown where it goes and says Go (kit/ui/link-guard.ts), in a new tab with no referrer.</li>
 </ul>
 <h2>Nothing else</h2>

@@ -43,8 +43,8 @@ const browser = (name: string) => ({
  * that never became ready, or a second copy of Lit in one page (2026-10-12).
  */
 const cacheDir = fileURLToPath(new URL('./.vite', import.meta.url));
-/** The browser files that count what the device holds; they run after the others (see below). */
-const ALONE = ['test/browser/privacy.test.ts'];
+/** The browser files that count what the device holds, or register a service worker; they run after the others (see below). */
+const ALONE = ['test/browser/privacy.test.ts', 'test/browser/sw.test.ts'];
 
 export default defineConfig({
   cacheDir,
