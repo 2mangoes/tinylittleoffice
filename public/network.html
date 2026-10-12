@@ -51,6 +51,17 @@ dd{margin:0}
 </dl>
 </section>
 <section class="reach">
+<h3><code>tinylittleoffice.com</code></h3>
+<p>A preview card, at the site’s own /card: posted when you share with a network (Bluesky, Mastodon, X, LinkedIn or the share sheet) with “Show a preview of the first page” on; fetched later by that network.</p>
+<dl>
+<dt>When</dt><dd>on share</dd>
+<dt>Carries</dt><dd>A picture of the first page, the title and the first words, kept readable for a month so the network can fetch them; never the document, never its link</dd>
+<dt>Stopped by</dt><dd>The switch “Show a preview of the first page” in Share, turned off; Copy link and Email never make one, nor does a document with a password</dd>
+<dt>Made by</dt><dd><code>kit/share/card.ts</code></dd>
+<dt>Allowed by</dt><dd><code>'self'</code></dd>
+</dl>
+</section>
+<section class="reach">
 <h3><code>tile.openstreetmap.org</code></h3>
 <p>The map’s pictures (tiles) in the Trip Planner, asked directly as OpenStreetMap’s policy asks.</p>
 <dl>
@@ -165,6 +176,7 @@ dd{margin:0}
 <ul>
 <li><strong>The map.</strong> Map tiles only while a map is on the screen; place search only when a search is tapped. They are asked directly: OpenStreetMap's usage policies are written for the browser that shows the map asking them directly, and a cache of ours in between would be the heavy, anonymous use they ask people not to make. The site sends no referrer.</li>
 <li><strong>Short links.</strong> Only when a short link is made or opened; the service holds ciphertext it cannot read, whose key is in the short link's fragment, which browsers never send (tinier/tinier.ts).</li>
+<li><strong>A preview.</strong> Only when a person shares with a network from Share with &quot;Show a preview of the first page&quot; on: a picture of the first page, the title and the first words go to the site's own <code>/card</code>, and the link shared carries the card's id (<code>?c=</code>) before the &quot;#&quot;, where the network's fetcher reads it. The card is kept readable for a month, then forgotten (tinier/cards.ts); the document and its link are never sent.</li>
 <li><strong>Sharing to a service.</strong> Share's Bluesky, Mastodon, X and LinkedIn open that service's own compose box in a new tab, with the title and the link in it: no script of theirs runs here. The link is the document, so whoever reads the post can read it. &quot;Any https address&quot; there is the Mastodon server the person names.</li>
 <li><strong>Fonts and icons.</strong> Self-hosted, from the site itself: the type is IBM Plex (<code>public/fonts/</code>), each face fetched when a page's words need it, and the policy's <code>font-src</code> is <code>'self'</code> alone; the full icon set is a chunk of the site's own, loaded when the icon picker opens.</li>
 <li><strong>Links.</strong> A link in a document that leaves the site opens only after the reader is shown where it goes and says Go (kit/ui/link-guard.ts), in a new tab with no referrer.</li>

@@ -177,14 +177,14 @@ test('the secrets are out of the environment of every check, and reach Wrangler 
   expect(checks.map((c) => c.cmd)).toEqual(['npm run -s typecheck', 'npm run -s i18n:check', 'npm run -s test:unit', 'npm run -s test:browser', 'node scripts/check-build.ts']);
   expect(r.calls.some((c) => c.cmd.startsWith('npx playwright test'))).toBe(true);
   for (const c of r.calls.filter((c) => !c.cmd.startsWith('npx wrangler '))) for (const k of SECRETS) expect(c.env, `${c.cmd}: ${k}`).not.toMatch(new RegExp(`^${k}=`, 'm'));
-  expect(wrangler.map((c) => c.cmd)).toEqual(['npx wrangler secret list -c tinier/wrangler.jsonc --format json']);
+  expect(wrangler.map((c) => c.cmd)).toEqual(['npx wrangler secret list -c tinier/wrangler.jsonc --format json', 'npx wrangler secret list -c wrangler.jsonc --format json']);
   expect(wrangler[0].env).toMatch(/^CLOUDFLARE_API_TOKEN=stub-cf-token$/m);
   expect(wrangler[0].env).toMatch(/^CLOUDFLARE_ACCOUNT_ID=stub-cf-account$/m);
   expect(wrangler[0].env).not.toMatch(/^NPM_TOKEN=/m);
   expect(r.stdout + r.stderr).not.toMatch(/stub-cf-token|stub-cf-account|stub-npm-token/);
 });
 
-test('the deploy stops before any check when the shortener has no BRAKE_KEY, or its secrets cannot be listed', () => {
+test('the deploy stops before any check when a Worker has no BRAKE_KEY, or its secrets cannot be listed', () => {
   const none = deploy({}, STUB, { list: '[]' });
   expect(none.status).toBe(1);
   expect(none.stderr).toMatch(/^Not deployed: the shortener has no BRAKE_KEY\. /);

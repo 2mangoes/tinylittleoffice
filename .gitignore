@@ -10,3 +10,4 @@ playwright-report/
 .vite/
 *.local
 tinier/worker-configuration.d.ts
+site/worker-configuration.d.ts

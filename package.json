@@ -23,7 +23,7 @@
     "build:cli": "vite build -c vite.cli.config.ts --mode api && vite build -c vite.cli.config.ts --mode cli",
     "verify-deploy": "node scripts/verify-deploy.ts",
     "preview": "vite preview",
-    "typecheck": "tsc --noEmit && npm run -s tinier:types && tsc -p tinier",
+    "typecheck": "tsc --noEmit && npm run -s tinier:types && tsc -p tinier && npm run -s site:types && tsc -p site",
     "lint": "tsc --noEmit && prettier --check . && node scripts/dead.ts && vitest run --project unit test/lints.test.ts test/stylesheets.test.ts test/scroll.test.ts",
     "format": "prettier --write .",
     "budgets": "node scripts/budgets.ts --sizes",
@@ -50,6 +50,8 @@
     "tinyoffice": "node packages/doc/tinyoffice.ts",
     "tinier:types": "wrangler types -c tinier/wrangler.jsonc tinier/worker-configuration.d.ts",
     "tinier:dev": "wrangler d1 migrations apply tinier -c tinier/wrangler.jsonc --local && wrangler dev -c tinier/wrangler.jsonc --port 8787 --var SITE:${SITE:-http://localhost:4178}",
+    "site:types": "wrangler types -c wrangler.jsonc site/worker-configuration.d.ts",
+    "site:dev": "wrangler d1 migrations apply tinier --local && wrangler dev --port 8789 --ip 0.0.0.0",
     "dictionary": "node scripts/dictionary.ts"
   },
   "dependencies": {

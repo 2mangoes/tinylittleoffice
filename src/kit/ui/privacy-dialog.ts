@@ -5,7 +5,8 @@
  * again at once); the Password part of the Share dialog (renderProtect, drawn there by <to-share>); the lock beside
  * the title while there is a password (trustButton, drawn in the header); and the Privacy dialog, opened from that
  * lock: this document's password; what this device holds, item by item, each with Forget, the
- * browser's own history last (every document opened here, and not ours to clear), and Forget everything. (Without
+ * browser's own history last (every document opened here, and not ours to clear), and Forget everything; and what our
+ * server holds by a person's choice, a preview sent with a link to a network (kit/share/card.ts). (Without
  * `doc`, the Privacy dialog alone.)
  *
  * It gets the document's state through properties (`sealed`, `protected`) and does the work through
@@ -185,6 +186,7 @@ export class ToPrivacy extends LitElement {
         ${row('to-held-history', t('Your browser’s history'), t('Every document opened here, in full, unless it has a password.'), t('Not ours to clear'), null)}
       </ul>
       <button type="button" class="to-btn to-forget-all" @click=${() => void this.forgetAll()}>${icon(UI.trash, 16)}<span>${t('Forget everything')}</span></button>
+      <p class="to-hint to-privacy-cards">${t('A preview sent with a link to a network is a picture of the first page, the title and the first words, readable on our server for a month. The document itself never goes there.')}</p>
     </section>`;
   }
 

@@ -72,4 +72,4 @@ export type { CellValue, Evaluated } from './formula.ts';
 export { COLUMN_TYPES, dateToSerial, evaluate, evaluateTable, formatCell, formatMoney, formatValue, FUNCTIONS, parseLiteral, serialToIso, todaySerial } from './formula.ts';
 
 export type { TextList, TextNode, TextRun } from './text.ts';
-export { textCounts, textMarkdown, textOf } from './text.ts';
+export { textCounts, textMarkdown, textOf, textWords } from './text.ts';

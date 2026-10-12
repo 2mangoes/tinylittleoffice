@@ -12,6 +12,7 @@ not on this list is refused by the browser itself.
 | Host | What | When | What it carries | What stops it | Made by | Allowed by |
 | --- | --- | --- | --- | --- | --- | --- |
 | `tinylittleoffice.com` | The site’s own files: the apps, the type (IBM Plex, a face when a page’s words need it), the icon set’s chunk (loaded when the icon picker opens) | while shown | Which file; never the document, which is after the "#" and stays in the browser | Nothing to stop but not opening the site: these files are the app itself | the whole site | `'self'` |
+| `tinylittleoffice.com` | A preview card, at the site’s own /card: posted when you share with a network (Bluesky, Mastodon, X, LinkedIn or the share sheet) with “Show a preview of the first page” on; fetched later by that network | on share | A picture of the first page, the title and the first words, kept readable for a month so the network can fetch them; never the document, never its link | The switch “Show a preview of the first page” in Share, turned off; Copy link and Email never make one, nor does a document with a password | kit/share/card.ts | `'self'` |
 | `tile.openstreetmap.org` | The map’s pictures (tiles) in the Trip Planner, asked directly as OpenStreetMap’s policy asks | while shown | Which squares of the map are on the screen; no referrer | Map, in the Trip Planner’s bar, turned off | apps/trip/editor.ts | `img-src` |
 | `nominatim.openstreetmap.org` | Place search in the Trip Planner | after a tap | The words searched for; no referrer | Not searching: typing a stop’s place by hand asks no one | apps/trip/editor.ts | `connect-src` |
 | `www.openstreetmap.org` | The Trip Planner’s credit to OpenStreetMap under its map, a link | after a tap | Nothing of the document: it opens OpenStreetMap’s copyright page in a new tab | Not following the link | apps/trip/editor.ts | none: it opens in a new tab |
@@ -35,6 +36,10 @@ follows them; nothing in a document is drawn from another site's address.
 - **Short links.** Only when a short link is made or opened; the service holds
   ciphertext it cannot read, whose key is in the short link's fragment, which browsers never send
   (tinier/tinier.ts).
+- **A preview.** Only when a person shares with a network from Share with "Show a preview of the first page" on:
+  a picture of the first page, the title and the first words go to the site's own `/card`, and the link
+  shared carries the card's id (`?c=`) before the "#", where the network's fetcher reads it. The card is kept
+  readable for a month, then forgotten (tinier/cards.ts); the document and its link are never sent.
 - **Sharing to a service.** Share's Bluesky, Mastodon, X and LinkedIn open that service's own compose box in
   a new tab, with the title and the link in it: no script of theirs runs here. The link is the document, so
   whoever reads the post can read it. "Any https address" there is the Mastodon server the person names.

@@ -266,6 +266,13 @@ export class ToShell extends LitElement {
     // Every link that leaves the site asks first.
     installLinkGuard();
     installPlainCopy();
+    // A link shared with a network carries its preview card's id (?c=, kit/share/card.ts) for the network's fetcher
+    // alone; the document is the hash's. Gone from the address at once, so a link copied from here carries no stale card.
+    const here = new URL(location.href);
+    if (here.searchParams.has('c')) {
+      here.searchParams.delete('c');
+      history.replaceState(history.state, '', here.href);
+    }
     this.onHash();
   }
   disconnectedCallback() {

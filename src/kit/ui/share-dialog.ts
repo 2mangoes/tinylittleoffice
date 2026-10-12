@@ -5,7 +5,8 @@
  * (whoever opens it gets their own; their changes stay in their link); Copy link and Copy display link, and
  * the device's share sheet; Password (drawn by <to-privacy>, renderProtect, handed in as `protect`);
  * a short link that expires (the lifetimes as one row, Make, then the link with Copy; it cannot be changed or recalled
- * once made, so there is nothing more to do with it); posting the link to a service's compose box (through the link guard), a deck's show link; the QR code;
+ * once made, so there is nothing more to do with it); posting the link to a service's compose box (through the link guard), under the
+ * switch that sends a preview of the first page with it (kit/share/card.ts: the link then carries "?c=<id>"), a deck's show link; the QR code;
  * the embed code; the short links kept here.
  *
  * It gets the document through properties (`app`, `doc`, `heading`, `locked`, `payloadLength`, and
@@ -27,6 +28,7 @@ import { parseHash, routeHash } from '../core/route.ts';
 import { fitLine, roomFor } from '../share/limits.ts';
 import { DEFAULT_TTL, EXPIRIES, expiresLine, SHORT_LINK_MAX, shorten, type Shortened } from '../share/short.ts';
 import { dropKept, keepLink, keptLinks } from '../share/kept-links.ts';
+import { cardFor, previewOn, setPreview, withCardId } from '../share/card.ts';
 import { pack } from '../share/privacy.ts';
 import { store } from '../core/store.ts';
 import { QR_MAX_BYTES, qrSvg } from '../draw/qr.ts';
@@ -83,6 +85,7 @@ export class ToShare extends LitElement {
     shortDisplay: { state: true },
     sharing: { state: true },
     askMastodon: { state: true },
+    preview: { state: true },
   };
   declare app: string;
   declare doc: string;
@@ -103,6 +106,8 @@ export class ToShare extends LitElement {
   declare sharing: boolean;
   /** Mastodon asked for with no server known: the field for one shows. */
   declare askMastodon: boolean;
+  /** A network gets a preview of the first page with the link (the switch; on unless the person turned it off). */
+  declare preview: boolean;
   /** The link, made current first: the editing one, or the Display Link. */
   linkTo: (display: boolean) => string = () => location.href;
 
@@ -121,6 +126,7 @@ export class ToShare extends LitElement {
     this.shortDisplay = false;
     this.sharing = false;
     this.askMastodon = false;
+    this.preview = previewOn();
   }
   createRenderRoot() {
     return this;
@@ -203,7 +209,8 @@ export class ToShare extends LitElement {
     const share = async () => {
       await ensureIcons(iconNames(this.doc));
       if (this.locked) return shareNative(this.named, this.link);
-      return shareNative(this.heading, this.link, await picture(def.view(this.doc, { still: true })));
+      const link = await this.networkLink();
+      return shareNative(this.heading, link, await picture(def.view(this.doc, { still: true })));
     };
     const made = this.madeLine();
     // A link is a copy, never a shared document (Paul, 2026-10-11: "docs are not collaborative like Google Docs: that's
@@ -233,7 +240,27 @@ export class ToShare extends LitElement {
     return u.href;
   }
 
-  /** The link to a service's compose box: Bluesky, Mastodon (its server asked once), X, LinkedIn, Email; each opened through the link guard. */
+  /**
+   * The link a network gets: with the switch on, the link carrying its preview card's id (drawn and posted once per
+   * link: kit/share/card.ts); with it off, or for a document with a password, the link alone. A card that could not be
+   * made is said in a toast, and the link goes without it.
+   */
+  private async networkLink(): Promise<string> {
+    const link = this.link;
+    if (this.locked || !this.preview) return link;
+    try {
+      await ensureIcons(iconNames(this.doc));
+      return withCardId(link, await cardFor(`${location.origin}${siteDir()}card`, link, appOf(this.app)!, this.doc, this.heading));
+    } catch (err) {
+      toast(t('Shared without a preview: {reason}', { reason: err instanceof Error ? err.message : '' }));
+      return link;
+    }
+  }
+  private setPreview(on: boolean) {
+    this.preview = on;
+    setPreview(on);
+  }
+  /** The link to a service's compose box: Bluesky, Mastodon (its server asked once), X, LinkedIn, Email; each opened through the link guard. Email never carries a preview. */
   private post(service: Service) {
     const server = mastodonHost(store.get(MASTODON_KEY) ?? '');
     if (service === 'mastodon' && !server) {
@@ -241,7 +268,8 @@ export class ToShare extends LitElement {
       void this.updateComplete.then(() => this.querySelector<HTMLInputElement>('.to-mastodon-server')?.focus());
       return;
     }
-    openLink(shareUrl(service, this.named, this.link, server));
+    if (service === 'email') return openLink(shareUrl(service, this.named, this.link, server));
+    void this.networkLink().then((link) => openLink(shareUrl(service, this.named, link, server)));
   }
   private setMastodon(e: Event) {
     e.preventDefault();
@@ -257,6 +285,14 @@ export class ToShare extends LitElement {
     const server = mastodonHost(store.get(MASTODON_KEY) ?? '');
     return html`<section class="to-share-section to-share-post" aria-labelledby="to-share-post-h">
       <h3 id="to-share-post-h">${t('Post the link')}</h3>
+      ${
+        this.locked
+          ? nothing
+          : html`<label class="to-switch to-share-preview">
+            <input type="checkbox" role="switch" .checked=${this.preview} @change=${(e: Event) => this.setPreview((e.target as HTMLInputElement).checked)} />
+            <span class="to-switch-words"><b>${t('Show a preview of the first page')}</b><small>${t('A picture of the first page and the title are kept readable on our server for a month so the network can fetch them. The document itself is not.')}</small></span>
+          </label>`
+      }
       <div class="to-post">${SERVICES.map(
         (s) => html`<button type="button" class="to-btn to-post-${s}" @click=${() => this.post(s)}>${icon(s === 'email' ? UI.mail : UI.post, 16)}<span>${SERVICE_NAMES[s]}</span></button>`,
       )}</div>

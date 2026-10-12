@@ -51,7 +51,10 @@ ours to yours, in five places:
 4. **The policy.** In `public/_headers`, the `connect-src` names `https://tinier.tinylittleoffice.com`:
    change it to your tinier's address, or the browser will refuse every short link.
 5. **The brake.** tinier counts its own, a hundred links a day per address, in D1, under a keyed hash: set the
-   Worker secret `BRAKE_KEY` (tinier/wrangler.jsonc says how).
+   Worker secret `BRAKE_KEY` (tinier/wrangler.jsonc says how). The site's own Worker (`site/`, which keeps the
+   preview cards a person sends with a link to a network) counts cards the same way under its own `BRAKE_KEY`.
+6. **The cards' database.** `wrangler.jsonc` binds the shortener's database too (the `cards` table): put the same
+   `database_id` there as in `tinier/wrangler.jsonc`.
 
 ## 3. The short links' database
 
@@ -70,10 +73,13 @@ the one thing set by hand, once; the deploy checks it is there and stops, saying
 
 ```sh
 openssl rand -base64 32 | npx wrangler secret put BRAKE_KEY -c tinier/wrangler.jsonc
+openssl rand -base64 32 | npx wrangler secret put BRAKE_KEY
 ```
 
-Without it tinier answers nothing and says why. On a development machine, put `BRAKE_KEY=<any string>` in
-`tinier/.dev.vars` (ignored by git) for `npm run tinier:dev`, which applies the migrations to its local database.
+The second is the site's Worker's own, for the preview cards. Without its key either Worker answers nothing and says
+why. On a development machine, put `BRAKE_KEY=<any string>` in `tinier/.dev.vars` for `npm run tinier:dev` and in
+`.dev.vars` for `npm run site:dev` (both ignored by git); each applies the migrations to its local database, and
+`site:dev` serves the build in `dist/` with the Worker in front, where the dev server sends `/card`.
 
 ## 4. Deploy
 
@@ -90,7 +96,7 @@ The deploy reads three credentials from the environment, or else from the checko
 npm run deploy
 ```
 
-That checks tinier's `BRAKE_KEY` is set, runs the checks we run before shipping (the types, the strings, the unit
+That checks both Workers' `BRAKE_KEY` is set, runs the checks we run before shipping (the types, the strings, the unit
 and browser tests, the build, what the build wrote, and the smoke run on the built site when something on screen
 changed), then applies the shortener's migrations, deploys the two Workers in turn, and publishes the command line
 to npm when its version is new. `npm run deploy -- --dry-run` makes every check and prints the steps it would

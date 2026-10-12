@@ -15,7 +15,7 @@ import { generate } from './generated.ts';
 const CSP: Record<string, string> = { connect: 'connect-src', img: 'img-src' };
 
 const hostWords = (r: Reach) => (r.host === '*' ? 'any https address' : `\`${r.host}\``);
-const allowedBy = (r: Reach) => (r.csp ? r.csp.map((d) => `\`${CSP[d]}\``).join(', ') : r === NETWORK.site ? "`'self'`" : 'none: it opens in a new tab');
+const allowedBy = (r: Reach) => (r.csp ? r.csp.map((d) => `\`${CSP[d]}\``).join(', ') : r.host === NETWORK.site.host ? "`'self'`" : 'none: it opens in a new tab');
 
 const PROSE = `# What leaves your browser
 
@@ -40,6 +40,10 @@ follows them; nothing in a document is drawn from another site's address.
 - **Short links.** Only when a short link is made or opened; the service holds
   ciphertext it cannot read, whose key is in the short link's fragment, which browsers never send
   (tinier/tinier.ts).
+- **A preview.** Only when a person shares with a network from Share with "Show a preview of the first page" on:
+  a picture of the first page, the title and the first words go to the site's own \`/card\`, and the link
+  shared carries the card's id (\`?c=\`) before the "#", where the network's fetcher reads it. The card is kept
+  readable for a month, then forgotten (tinier/cards.ts); the document and its link are never sent.
 - **Sharing to a service.** Share's Bluesky, Mastodon, X and LinkedIn open that service's own compose box in
   a new tab, with the title and the link in it: no script of theirs runs here. The link is the document, so
   whoever reads the post can read it. "Any https address" there is the Mastodon server the person names.

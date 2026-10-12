@@ -12,7 +12,8 @@ A document is its link. The whole of it, compressed, sits after the `#` of
 any server. The site is static files on Cloudflare; there is no account, no database of documents in the
 clear and no server code that receives one. One service exists besides the files: the short-link service
 (`tinier/`), and nothing else of ours; it holds a document only when someone makes a short link, encrypted
-under a key it never receives, until the link expires. Everything else the site can reach belongs to someone else and is reached only
+under a key it never receives, until the link expires. The site's own small Worker (`site/`) keeps one thing more,
+only when a person asks: a preview card, below. Everything else the site can reach belongs to someone else and is reached only
 while a person uses it or after they ask (the map, a share), as `docs/network.md` lists.
 
 Two consequences follow, and the rest of this page is mostly their detail:
@@ -30,8 +31,16 @@ Two consequences follow, and the rest of this page is mostly their detail:
 
 What is kept, and where: Save in browser is off by default, and then nothing is kept on the device (but two preferences that say
 nothing of a document, below) and nothing on any server; the link is the document. Turning it on is a choice, and keeps documents and short links on the device, in the browser's own
-storage, never on a server. A short link is the one thing a server holds: the document, encrypted with a key the
+storage, never on a server. A short link is the one thing a server holds of a document: the document, encrypted with a key the
 server never sees, until it expires.
+
+**A preview card is readable on the server, by the person's choice.** Sharing with a network from Share (Bluesky,
+Mastodon, X, LinkedIn or the device's share sheet) with "Show a preview of the first page" on, which it is unless
+turned off, sends a picture of the document's first page, its title and its first 200 characters to the site's
+`/card`, and the link shared carries the card's id (`?c=<id>`, before the `#`) so the network's fetcher can show
+it. The card is not encrypted, because the network must read it: it is kept readable for a month, to anyone with
+its id, then deleted. The document itself and its link are never sent. Copy link and Email make no card, nor does a
+document with a password. A link with no card previews as its app's generic card, whose page is gray shapes.
 
 There is no shared document: every link is a copy. Whoever opens one has their own, and what they change is in
 their link, never in the sender's; Share says so under the link, in every language.
@@ -167,6 +176,9 @@ whatever reaches any of them, Cloudflare and the account's operator could see.
   path (which names the app: `/sheet/`), and the files the page then loads. Not the fragment, so never the document, its title or its password.
   Cloudflare keeps its own aggregate traffic counts for the account, as for any site it serves; per-request
   Worker logs are off (`wrangler.jsonc`, held by `test/tinier.test.ts`).
+- **The cards.** For each preview a person chose to send: the picture, the title, the first words and the app, in
+  the shortener's D1 database for a month, readable at `/card/<id>.png` and in the tags of a page asked for with
+  `?c=<id>`; counted against the same hundred a day from one address, under the site Worker's own `BRAKE_KEY`.
 - **The shortener.** For each short link: the ciphertext, its IV and its expiry, kept in Cloudflare D1
   until it expires. For two days, for each address that made a link: a count, under
   `sha256(BRAKE_KEY ‖ day ‖ address)`, where `BRAKE_KEY` is a secret of the deployment (a Worker secret,

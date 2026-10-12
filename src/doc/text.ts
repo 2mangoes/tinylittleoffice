@@ -215,3 +215,21 @@ export function textCounts(nodes: TextNode[]): { words: number; headings: number
   walk(nodes);
   return { words, headings };
 }
+
+/** The words a reader hears, in order, one space between them: a footnote's mark and the notes left out (a preview's text: kit/share/card.ts). */
+export function textWords(nodes: TextNode[]): string {
+  const out: string[] = [];
+  const said = (runs: TextRun[]) => out.push(runs.map((r) => (r.note === undefined ? r.t : '')).join(''));
+  const list = (l: TextList) => l.items.forEach((it) => (said(it.runs), it.list && list(it.list)));
+  const walk = (ns: TextNode[]) => {
+    for (const n of ns) {
+      if (n.k === 'h' || n.k === 'p' || n.k === 'quote') said(n.runs);
+      else if (n.k === 'list') list(n);
+      else if (n.k === 'table') out.push([...n.head, ...n.rows.flat()].join(' '));
+      else if (n.k === 'pre') out.push(n.body);
+      else if (n.k === 'doc') walk(n.nodes);
+    }
+  };
+  walk(nodes);
+  return out.join(' ').replace(/\s+/g, ' ').trim();
+}

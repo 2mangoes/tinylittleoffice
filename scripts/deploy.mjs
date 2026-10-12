@@ -24,7 +24,8 @@
  * repository's secrets, on a runner) or else from this checkout's .env (never committed). They are taken out of the
  * environment before any check runs, so no test, build or dependency's script sees one, and handed to Wrangler and
  * npm alone; none is printed. A missing one stops everything, before the checks, in a sentence naming it. Before the
- * checks too: tinier's secret BRAKE_KEY must exist (it is set once, by hand), or the shortener would answer nothing.
+ * checks too: each Worker's secret BRAKE_KEY must exist (the shortener's and the site's, each set once, by hand), or
+ * that Worker would answer nothing.
  */
 import { execSync } from 'node:child_process';
 import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
@@ -67,22 +68,25 @@ const run = (what, cmd, env = process.env) => {
   console.log(`  ✓ ${what} (${((Date.now() - t) / 1000).toFixed(0)} s)`);
 };
 
-// tinier's BRAKE_KEY, which only a person sets (`wrangler secret put`); asking also proves the token works.
-{
-  process.stdout.write('\n▸ the shortener has its BRAKE_KEY\n');
+// Each Worker's BRAKE_KEY, which only a person sets (`wrangler secret put`); asking also proves the token works.
+for (const [who, config] of [
+  ['the shortener', 'tinier/wrangler.jsonc'],
+  ['the site', 'wrangler.jsonc'],
+]) {
+  process.stdout.write(`\n▸ ${who} has its BRAKE_KEY\n`);
   let names;
   try {
-    names = JSON.parse(execSync('npx wrangler secret list -c tinier/wrangler.jsonc --format json', { encoding: 'utf8', env: cloudflare, stdio: ['ignore', 'pipe', 'pipe'] })).map((s) => s.name);
+    names = JSON.parse(execSync(`npx wrangler secret list -c ${config} --format json`, { encoding: 'utf8', env: cloudflare, stdio: ['ignore', 'pipe', 'pipe'] })).map((s) => s.name);
   } catch (e) {
     stop(
-      `Not deployed: Wrangler could not list the shortener's secrets with this token and account (${String(e.stderr || e.message)
+      `Not deployed: Wrangler could not list ${who}'s secrets with this token and account (${String(e.stderr || e.message)
         .trim()
         .split('\n')
         .find((l) => /\S/.test(l))}).`,
     );
   }
-  if (!names.includes('BRAKE_KEY')) stop('Not deployed: the shortener has no BRAKE_KEY. Set it once, by hand: openssl rand -base64 32 | npx wrangler secret put BRAKE_KEY -c tinier/wrangler.jsonc');
-  console.log('  ✓ the shortener has its BRAKE_KEY');
+  if (!names.includes('BRAKE_KEY')) stop(`Not deployed: ${who} has no BRAKE_KEY. Set it once, by hand: openssl rand -base64 32 | npx wrangler secret put BRAKE_KEY -c ${config}`);
+  console.log(`  ✓ ${who} has its BRAKE_KEY`);
 }
 const git = (cmd) => execSync(`git ${cmd}`, { encoding: 'utf8' }).trim();
 

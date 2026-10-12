@@ -22,6 +22,7 @@ afterEach(() => {
   setKeeping(false);
   store.remove('tinyoffice.shortTtl');
   store.remove('tinyoffice.links');
+  store.remove('tinyoffice.preview');
   history.replaceState(null, '', location.pathname);
 });
 
@@ -217,6 +218,131 @@ test('the QR code: drawn inline when the link fits, with PNG and SVG; else one s
   d = await open(shell);
   expect(qr().querySelector('.to-qr-code')).toBeNull();
   expect(qr().querySelector('.to-qr-why')!.textContent).toMatch(/^This document is [\d,]+ bytes; the largest QR code holds/);
+});
+
+/* ---------- a preview with a link shared with a network ---------- */
+
+/** The site's /card, stubbed: what was posted to it, and the id it hands back (or a failure). */
+function cards(answer: 'ok' | 'offline' | 429 = 'ok') {
+  const posted: { url: string; body: { png: string; title: string; text: string; app: string } }[] = [];
+  vi.stubGlobal('fetch', async (url: string, init?: RequestInit) => {
+    if (!String(url).endsWith('/card')) throw new Error(`unexpected fetch ${url}`);
+    posted.push({ url: String(url), body: JSON.parse(String(init?.body)) });
+    if (answer === 'offline') throw new TypeError('Failed to fetch');
+    if (answer === 429) return new Response(JSON.stringify({ error: 'A hundred previews a day from one address; try tomorrow.' }), { status: 429 });
+    return new Response(JSON.stringify({ id: 'k8hwicw', exp: Date.now() + 30 * DAY }), { status: 201, headers: { 'content-type': 'application/json' } });
+  });
+  return posted;
+}
+/** Press a network's button, say Go to the link guard, and return the address the compose box opened at. */
+async function press(d: ToDialog, service: string, opened: { mock: { calls: unknown[][] } }) {
+  const before = opened.mock.calls.length;
+  d.querySelector<HTMLButtonElement>(`.to-post-${service}`)!.click();
+  await until(() => !!document.querySelector('to-dialog.to-link-guard dialog[open] .lg-go'), 5000, 'the link guard never asked');
+  document.querySelector<HTMLButtonElement>('to-dialog.to-link-guard .lg-go')!.click();
+  await until(() => opened.mock.calls.length > before);
+  await until(() => !document.querySelector('to-dialog.to-link-guard dialog[open]'));
+  return String(opened.mock.calls.at(-1)![0]);
+}
+/** The link inside a compose box's address. */
+const linkIn = (compose: string) => /https?:\/\/\S+/.exec(new URL(compose).searchParams.get('text') ?? new URL(compose).searchParams.get('url') ?? '')![0];
+
+test('with the switch on (it is, unless turned off), Bluesky uploads one card of the first page and posts the link with ?c= before the #; X then uploads nothing more', async () => {
+  const shell = await written(null!, '---\ntitle: Garden plan\n---\n# Garden plan\n\nTomatoes by the fence, beans on the trellis.\n');
+  const posted = cards();
+  const opened = vi.spyOn(window, 'open').mockImplementation(() => null);
+  const d = await open(shell);
+  const toggle = d.querySelector<HTMLInputElement>('.to-share-post .to-share-preview input[role=switch]')!;
+  expect(toggle.checked).toBe(true);
+  expect(d.querySelector('.to-share-preview')!.textContent).toContain('Show a preview of the first page');
+  expect(d.querySelector('.to-share-preview small')!.textContent).toBe(
+    'A picture of the first page and the title are kept readable on our server for a month so the network can fetch them. The document itself is not.',
+  );
+  // At the top of the networks: before their buttons.
+  expect(d.querySelector('.to-share-preview')!.compareDocumentPosition(d.querySelector('.to-post')!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+  const bluesky = await press(d, 'bluesky', opened);
+  expect(new URL(bluesky).host).toBe('bsky.app');
+  expect(posted).toHaveLength(1);
+  expect(posted[0].url).toBe(`${location.origin}${location.pathname.replace(/[^/]*$/, '')}card`);
+  expect(posted[0].body).toMatchObject({ title: 'Garden plan', text: 'Tomatoes by the fence, beans on the trellis.', app: 'write' });
+  // A PNG of 1200 by 630, as the server will take it.
+  const png = Uint8Array.from(atob(posted[0].body.png), (c) => c.charCodeAt(0));
+  expect([...png.slice(1, 4)].map((c) => String.fromCharCode(c)).join('')).toBe('PNG');
+  const bitmap = await createImageBitmap(new Blob([png], { type: 'image/png' }));
+  expect([bitmap.width, bitmap.height]).toEqual([1200, 630]);
+  expect(png.length).toBeLessThanOrEqual(400 * 1024);
+  const link = linkIn(bluesky);
+  expect(link).toBe(shell.link.replace('#', '?c=k8hwicw#'));
+  // The same document to another network: the same card, nothing uploaded again.
+  const x = await press(d, 'x', opened);
+  expect(posted).toHaveLength(1);
+  expect(new URL(x).searchParams.get('url')).toBe(link);
+});
+
+test('with the switch off, nothing is uploaded and the link has no ?c=; the choice is kept; Copy link and Email never upload', async () => {
+  const shell = await written(null!, '---\ntitle: Quiet\n---\nNot for a feed.\n');
+  const posted = cards();
+  const opened = vi.spyOn(window, 'open').mockImplementation(() => null);
+  let d = await open(shell);
+  await clipboard(async (copied) => {
+    d.querySelector<HTMLButtonElement>('.to-copy-link')!.click();
+    await until(() => copied() === shell.link);
+  });
+  const mail = await press(d, 'email', opened);
+  expect(mail).not.toContain('c%3D');
+  expect(posted).toHaveLength(0);
+  const toggle = d.querySelector<HTMLInputElement>('.to-share-preview input')!;
+  toggle.click();
+  await shell.updateComplete;
+  expect(store.get('tinyoffice.preview')).toBe('0');
+  const bluesky = await press(d, 'bluesky', opened);
+  expect(posted).toHaveLength(0);
+  expect(linkIn(bluesky)).toBe(shell.link);
+  // The next Share opens with it off.
+  d.close();
+  const again = await written(null!, '---\ntitle: Quieter\n---\nStill not.\n');
+  d = await open(again);
+  expect(d.querySelector<HTMLInputElement>('.to-share-preview input')!.checked).toBe(false);
+  store.remove('tinyoffice.preview');
+});
+
+test('an upload that fails shares without a preview and says why: offline, or the day’s hundred', async () => {
+  for (const [answer, why] of [
+    ['offline', 'the server could not be reached'],
+    [429, 'a hundred previews a day from one address'],
+  ] as const) {
+    const shell = await written(null!, `---\ntitle: Failing ${answer}\n---\nWords.\n`);
+    const posted = cards(answer);
+    const opened = vi.spyOn(window, 'open').mockImplementation(() => null);
+    const d = await open(shell);
+    const bluesky = await press(d, 'bluesky', opened);
+    expect(posted).toHaveLength(1);
+    expect(linkIn(bluesky)).toBe(shell.link);
+    await until(() => said() === `Shared without a preview: ${why}`);
+    vi.restoreAllMocks();
+    vi.unstubAllGlobals();
+  }
+});
+
+test('the share sheet carries the card too; a document with a password shows no switch and makes no card', async () => {
+  const shell = await written(null!, '---\ntitle: Sheet share\n---\nTo the phone.\n');
+  const posted = cards();
+  const sent: ShareData[] = [];
+  Object.defineProperty(navigator, 'share', { configurable: true, value: async (data: ShareData) => void sent.push(data) });
+  onTestFinished(() => void delete (navigator as { share?: unknown }).share);
+  const d = await open(shell);
+  d.querySelector<HTMLButtonElement>('.to-share-native')!.click();
+  await until(() => sent.length === 1);
+  expect(posted).toHaveLength(1);
+  expect(sent[0].url).toBe(shell.link.replace('#', '?c=k8hwicw#'));
+  d.close();
+  const locked = await sealedSheet('Private sums');
+  const opened = vi.spyOn(window, 'open').mockImplementation(() => null);
+  const l = await open(locked);
+  expect(l.querySelector('.to-share-preview')).toBeNull();
+  const bluesky = await press(l, 'bluesky', opened);
+  expect(posted).toHaveLength(1);
+  expect(linkIn(bluesky)).toBe(locked.link);
 });
 
 /* ---------- a document with a password ---------- */

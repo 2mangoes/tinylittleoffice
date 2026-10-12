@@ -1,20 +1,37 @@
-// The site on Cloudflare: the build in dist/, served as static assets, with public/_headers.
-// There is no script; a static site needs none. The link shortener is its own Worker (tinier/).
+// The site on Cloudflare: the build in dist/, served as static assets, with public/_headers. A small Worker
+// (site/worker.ts) runs first only where a static file cannot answer: the preview cards ("/card", "/card/*") and the
+// pages a link shared with a network opens ("/" and each app's page, which with ?c=<id> carry that card's tags). Every
+// other path is the assets alone. The link shortener is its own Worker (tinier/).
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "tinylittleoffice",
+  "main": "site/worker.ts",
   "compatibility_date": "2026-10-08",
   "assets": {
     "directory": "./dist",
+    "binding": "ASSETS",
     "html_handling": "auto-trailing-slash",
     "not_found_handling": "404-page",
+    // The home page, each app's page (src/kit/core/apps.ts; test/cards.test.ts holds the list to it) and the cards.
+    "run_worker_first": ["/", "/write/", "/outline/", "/deck/", "/sheet/", "/calc/", "/draw/", "/diagram/", "/anim/", "/cal/", "/trip/", "/card", "/card/*"],
   },
+  // The cards are kept in the shortener's database (tinier/wrangler.jsonc, tinier/migrations/), whose sweep forgets them.
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "tinier",
+      "database_id": "6ede155f-083c-4ab9-a33e-64eea0704bb5",
+      "migrations_dir": "tinier/migrations",
+    },
+  ],
+  // A hundred cards a day from one address, counted under a keyed hash (tinier/brake.ts); the key is this Worker's own
+  // secret BRAKE_KEY (`wrangler secret put BRAKE_KEY`), set once by hand, never here.
   // Only on its own domain: no workers.dev copy once this is live.
   "workers_dev": false,
   "routes": [
     { "pattern": "tinylittleoffice.com", "custom_domain": true },
     { "pattern": "www.tinylittleoffice.com", "custom_domain": true },
   ],
-  // A static site keeps no record of who asked for what; see "What it is not" in the README.
+  // The site keeps no record of who asked for what; see "What it is not" in the README.
   "observability": { "enabled": false },
 }

@@ -9,7 +9,7 @@
  *
  *   POST   /api        {c, iv, ttl}   -> 201 {id, exp}
  *   GET    /api/<id>                  -> {c, iv, exp}   (404 once gone)
- *   GET    /<id>       the page that decrypts and redirects
+ *   GET    /<id>       the page that decrypts and redirects; with ?c=<card>, its tags say that preview card (cards.ts)
  *   GET    /           what this is
  *   GET    /robots.txt every fetcher let in
  *
@@ -21,14 +21,16 @@
  * 404, 429 and 503.
  *
  * What the server knows: ciphertext, an IV, an expiry, and that a request came. It cannot read a link. One
- * address may make a hundred links a UTC day (DAILY): the count is kept under base64url(sha256(key ‖ day ‖
- * address)), where the key is a secret of the deployment (BRAKE_KEY), so the row says nothing of the address
- * to anyone without the key, and with it only that the address made a link that day. The sweep forgets the
- * counts of every day but today and yesterday.
+ * address may make a hundred links a UTC day (DAILY), counted under a keyed hash that says nothing of the address
+ * (brake.ts, the site's Worker counting preview cards the same way). A preview card (cards.ts) is not a link: it
+ * is a picture and a few words the person chose to make readable, kept in the same database for a month, and the
+ * hourly sweep forgets it with the links.
  *
- * This file is the whole of it apart from where the rows live (a Store): d1.ts keeps them in D1, worker.ts runs
- * it on Cloudflare; the tests give it Maps, and d1.ts node's SQLite.
+ * This file is the whole of it apart from the brake, the cards and where the rows live (a Store): d1.ts keeps them
+ * in D1, worker.ts runs it on Cloudflare; the tests give it Maps, and d1.ts node's SQLite.
  */
+import { braked, type Counter } from './brake.ts';
+import { cardId, newId, noEdge, withCard, type CardStore, type Edge } from './cards.ts';
 
 export interface Link {
   c: string;
@@ -37,31 +39,13 @@ export interface Link {
   exp: number;
 }
 
-export interface Store {
+export interface Store extends Counter, CardStore {
   get(id: string): Promise<Link | null>;
   /** Keep a link under a new id; false if the id is taken. */
   put(id: string, link: Link): Promise<boolean>;
   drop(id: string): Promise<void>;
-  /** One more link counted under `h` on `day`; the count now, this one included. */
-  count(h: string, day: number): Promise<number>;
-  /** Forget every link past its time, and the counts of every day but `now`'s and the one before. */
+  /** Forget every link and card past its time, and the counts of every day but `now`'s and the one before. */
   sweep(now: number): Promise<void>;
-}
-
-/** The brake's secret, as the deployment gives it; without one the Worker serves nothing, and says why. */
-export function brakeKey(key: string | undefined): string {
-  if (!key) throw new Error('tinier: BRAKE_KEY is not set. Run `npx wrangler secret put BRAKE_KEY -c tinier/wrangler.jsonc`, or put BRAKE_KEY=… in tinier/.dev.vars for `npm run tinier:dev`.');
-  return key;
-}
-
-/** The most links one address may make in a UTC day. */
-export const DAILY = 100;
-const DAY_MS = 86_400_000;
-/** The UTC day number of a time: days since 1970-01-01. */
-export const dayOf = (now: number) => Math.floor(now / DAY_MS);
-/** What an address is counted under on a day: base64url(sha256(key ‖ day ‖ address)), which says nothing without the key. */
-export async function brakeHash(key: string, day: number, address: string): Promise<string> {
-  return b64(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(`${key}\n${day}\n${address}`)));
 }
 
 /** The site that may call the API, and the only place a short link may lead (a local copy of the site, under `wrangler dev`, names itself). */
@@ -70,11 +54,8 @@ export const SITE = 'https://tinylittleoffice.com';
 export const MAX_BYTES = 16 * 1024;
 /** The lifetimes on the menu, in seconds: an hour, a day, a week, a month (Paul, 2026-10-11: "Make the max expire a month"). */
 export const TTLS = new Set([3600, 86400, 7 * 86400, 30 * 86400]);
-/** 32 letters and digits that are hard to misread: no l, 1, o or 0. */
-const ALPHABET = 'abcdefghijkmnpqrstuvwxyz23456789';
 const B64 = /^[A-Za-z0-9_~-]+$/;
 
-export const newId = () => Array.from(crypto.getRandomValues(new Uint8Array(7)), (b) => ALPHABET[b % 32]).join('');
 const valid = (s: string) => /^[a-z0-9]{7}$/.test(s);
 
 const json = (body: unknown, site: string, status = 200) =>
@@ -93,12 +74,6 @@ const html = (page: string, status = 200) =>
     },
   });
 
-// base64url as the site writes it (src/kit/core/codec.ts): "~" for 62, never "-", where a pasted link would break a line.
-const b64 = (bytes: ArrayBuffer) =>
-  btoa(String.fromCharCode(...new Uint8Array(bytes)))
-    .replace(/\+/g, '~')
-    .replace(/\//g, '_')
-    .replace(/=+$/, '');
 /** A link that is still good, or null; one past its time goes as it is asked for. */
 async function read(store: Store, id: string, now: number): Promise<Link | null> {
   const link = await store.get(id);
@@ -130,14 +105,18 @@ User-agent: *
 Allow: /
 `;
 
-/** Answer one request. `key` is the brake's secret (BRAKE_KEY). `page` is the landing page with "{{id}}" where the id goes and "{{site}}" where the site does. Every answer is marked noindex. */
-export async function handle(req: Request, store: Store, key: string, page: string, now = Date.now(), site = SITE): Promise<Response> {
-  const res = await answer(req, store, key, page, now, site);
+/**
+ * Answer one request. `key` is the brake's secret (BRAKE_KEY). `page` is the landing page with "{{id}}" where the id
+ * goes and "{{site}}" where the site does. `edge` keeps a landing page with a card (caches.default on Cloudflare).
+ * Every answer is marked noindex.
+ */
+export async function handle(req: Request, store: Store, key: string, page: string, now = Date.now(), site = SITE, edge: Edge = noEdge): Promise<Response> {
+  const res = await answer(req, store, key, page, now, site, edge);
   res.headers.set('x-robots-tag', 'noindex');
   return res;
 }
 
-async function answer(req: Request, store: Store, key: string, page: string, now: number, site: string): Promise<Response> {
+async function answer(req: Request, store: Store, key: string, page: string, now: number, site: string, edge: Edge): Promise<Response> {
   const url = new URL(req.url);
   page = page.replaceAll('{{site}}', site);
   if (req.method === 'OPTIONS')
@@ -151,11 +130,11 @@ async function answer(req: Request, store: Store, key: string, page: string, now
     if (!b) return bad(site);
     const { c, iv, ttl } = b;
     if (!cipher(c, iv) || typeof ttl !== 'number' || !TTLS.has(ttl)) return bad(site);
-    // Counted only once the request would make a link; one statement, so two at once cannot both be the hundredth.
-    const day = dayOf(now);
-    if ((await store.count(await brakeHash(key, day, req.headers.get('cf-connecting-ip') ?? ''), day)) > DAILY) {
+    // Counted only once the request would make a link.
+    const wait = await braked(store, key, req, now);
+    if (wait !== null) {
       const res = json({ error: 'A hundred links a day from one address; try tomorrow.' }, site, 429);
-      res.headers.set('retry-after', String(Math.ceil(((day + 1) * DAY_MS - now) / 1000)));
+      res.headers.set('retry-after', String(wait));
       return res;
     }
     const exp = now + ttl * 1000;
@@ -179,8 +158,13 @@ async function answer(req: Request, store: Store, key: string, page: string, now
   if (req.method === 'GET' && url.pathname === '/') return html(page.replace('{{id}}', ''));
   if (req.method === 'GET' && valid(url.pathname.slice(1))) {
     const id = url.pathname.slice(1);
-    const link = await read(store, id, now);
-    return html(page.replace('{{id}}', link ? id : ''), link ? 200 : 404);
+    const landing = async () => {
+      const link = await read(store, id, now);
+      return html(page.replace('{{id}}', link ? id : ''), link ? 200 : 404);
+    };
+    // Shared with a network with its preview: the page's tags say the card, whose picture the site serves.
+    const card = cardId(url.searchParams.get('c'));
+    return card ? withCard(req, card, store, edge, now, `${site}/card/${card}.png`, landing) : landing();
   }
   return html(page.replace('{{id}}', ''), 404);
 }

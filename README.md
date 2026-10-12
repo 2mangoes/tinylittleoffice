@@ -6,7 +6,8 @@ document. There is no account.
 
 Save in browser is off by default: nothing is kept, on your device or anywhere else. Turned on, in the menu, it
 keeps your documents on your own device, never on a server. A short link is the one thing a server holds: the
-document, encrypted with a key the server never sees, until the link expires.
+document, encrypted with a key the server never sees, until the link expires. Shared with a network, a link can
+carry a preview, a picture of the first page kept readable for a month; Share has the switch.
 
 Ten apps: Word Processor, Outliner, Presentation Builder, Spreadsheet, Calculator, Drawing Tool, Diagram Maker,
 Animator, Calendar and Trip Planner, each with templates; nineteen languages; a password on any document; files in

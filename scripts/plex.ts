@@ -18,16 +18,26 @@ export function plexFaces(): string {
     .join('\n');
 }
 
-/** Draw each page (1200 by 630) to its file through Chromium, once its faces are in; nothing from the web. */
-export async function shoot(pages: [html: string, file: string][]): Promise<void> {
+/**
+ * Draw each page (1200 by 630) through Chromium, once its faces are in; nothing from the web. `prepare` changes the
+ * page first (the cards' greeking: scripts/make-cards.ts); a file of '' draws nothing. The pages as drawn come back.
+ */
+export async function shoot(pages: [html: string, file: string][], prepare?: (tab: import('playwright').Page) => Promise<void>): Promise<string[]> {
   const { chromium } = await import('playwright');
   const browser = await chromium.launch();
   const tab = await browser.newPage({ viewport: { width: 1200, height: 630 }, deviceScaleFactor: 1 });
   await tab.route('**/*', (r) => (r.request().url().startsWith('data:') ? r.continue() : r.abort()));
-  for (const [html, file] of pages) {
-    await tab.setContent(html, { waitUntil: 'load' });
-    await tab.evaluate(() => document.fonts.ready.then(() => undefined));
-    await tab.screenshot({ path: file, type: 'png' });
+  const drawn: string[] = [];
+  try {
+    for (const [html, file] of pages) {
+      await tab.setContent(html, { waitUntil: 'load' });
+      await tab.evaluate(() => document.fonts.ready.then(() => undefined));
+      if (prepare) await prepare(tab);
+      if (file) await tab.screenshot({ path: file, type: 'png' });
+      drawn.push(await tab.content());
+    }
+  } finally {
+    await browser.close();
   }
-  await browser.close();
+  return drawn;
 }

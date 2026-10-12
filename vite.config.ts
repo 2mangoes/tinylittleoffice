@@ -67,6 +67,8 @@ export default defineConfig(({ mode }) => ({
     // The shortener on this machine (npm run tinier:dev), under the dev server's own address.
     proxy: {
       '/tinier/': { target: 'http://127.0.0.1:8787', rewrite: (p) => p.slice('/tinier'.length) },
+      // The site's Worker on this machine (npm run site:dev): the preview cards (site/site.ts).
+      '/card': { target: 'http://127.0.0.1:8789' },
     },
   },
   plugins: [afterBuild(loadEnv(mode, import.meta.dirname).VITE_SITE_URL ?? '')],

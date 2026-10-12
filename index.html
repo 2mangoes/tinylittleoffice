@@ -21,8 +21,10 @@
     <link rel="alternate" type="text/plain" href="/llms.txt" title="For agents" />
     <!-- The type, IBM Plex, is the site's own (src/styles/fonts.css): the face every page draws first, fetched at once. -->
     <link rel="preload" href="./fonts/IBMPlexSans-Regular.woff2" as="font" type="font/woff2" crossorigin />
-    <!-- Link previews. A document lives in the part of the address after "#", which is never sent to a server,
-         so every Tiny Little Office link previews as this same card. -->
+    <!-- Link previews. A document lives in the part of the address after "#", which is never sent to a server, so a
+         link previews as its app's card (public/og/, greeked: scripts/make-cards.ts). A link shared with a network from
+         the app, with its preview on, carries "?c=<id>": the site's Worker writes that card into these tags, each
+         written once here (site/site.ts, tinier/cards.ts). -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Tiny Little Office" />
     <meta property="og:title" content="Tiny Little Office: the link is the document" />
@@ -33,6 +35,9 @@
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="Tiny Little Office: a tiny office suite where the link is the document." />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Tiny Little Office: the link is the document" />
+    <meta name="twitter:description" content="A tiny office suite where the link is the document. No accounts. Nothing is saved anywhere unless you choose to keep it on this device." />
+    <meta name="twitter:image" content="%VITE_SITE_URL%og.png" />
     <script src="./theme.js"></script>
     <script type="module" src="./src/main.ts"></script>
   </head>

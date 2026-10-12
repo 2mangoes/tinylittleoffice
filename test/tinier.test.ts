@@ -4,7 +4,9 @@ import { test, expect } from 'vitest';
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { DatabaseSync } from 'node:sqlite';
 import { D1Store, type SQL } from '../tinier/d1.ts';
-import { brakeHash, brakeKey, DAILY, dayOf, handle, MAX_BYTES, newId, TTLS } from '../tinier/tinier.ts';
+import { brakeHash, brakeKey, DAILY, dayOf } from '../tinier/brake.ts';
+import { newId } from '../tinier/cards.ts';
+import { handle, MAX_BYTES, TTLS } from '../tinier/tinier.ts';
 import { MemStore } from './memstore.ts';
 import { EXPIRIES, SHORT_MAX } from '../src/kit/share/short.ts';
 
@@ -148,9 +150,9 @@ test('tinier: the sweep forgets expired links and the counts of any day but toda
 /** Cloudflare D1's few calls the Worker makes, over node's SQLite: enough to run the D1Store's own SQL. */
 function d1(db: DatabaseSync) {
   const prepare = (sql: string) => {
-    let args: (string | number)[] = [];
+    let args: (string | number | Uint8Array)[] = [];
     const stmt = {
-      bind: (...a: (string | number)[]) => ((args = a), stmt),
+      bind: (...a: (string | number | Uint8Array)[]) => ((args = a), stmt),
       first: async <T>() => (db.prepare(sql).get(...args) as T) ?? null,
       run: async () => {
         const r = db.prepare(sql).run(...args);
@@ -173,7 +175,7 @@ const columns = (db: DatabaseSync, table: string) => (db.prepare(`PRAGMA table_i
 
 test("tinier's migrations: wrangler's NNNN_name.sql form, numbered from one, the directory wrangler.jsonc names, and the deploy applies them", () => {
   const files = migrations();
-  expect(files.length).toBeGreaterThanOrEqual(2);
+  expect(files.length).toBeGreaterThanOrEqual(3);
   files.forEach((f, i) => expect(f).toMatch(new RegExp(`^${String(i + 1).padStart(4, '0')}_[a-z0-9_]+\\.sql$`)));
   expect(readFileSync(new URL('../tinier/wrangler.jsonc', import.meta.url), 'utf8')).toMatch(/"migrations_dir": "migrations"/);
   // One way to make the tables: the migrations. No schema file of its own beside them.
@@ -184,6 +186,7 @@ test("tinier's migrations apply in order on a fresh database, and on production'
   const fresh = schema();
   expect(columns(fresh, 'links')).toEqual(['id', 'c', 'iv', 'exp']);
   expect(columns(fresh, 'brakes')).toEqual(['h', 'n', 'day']);
+  expect(columns(fresh, 'cards')).toEqual(['id', 'app', 'title', 'text', 'png', 'exp']);
   // Production was made by hand before wrangler kept a record of migrations, so it applies every one: each must take a
   // database that has the links table, and keep its rows.
   const live = new DatabaseSync(':memory:');
@@ -219,6 +222,19 @@ test("tinier on D1: production's four columns and the brakes table, and the Work
   expect(db.prepare('SELECT count(*) AS n FROM brakes').get()).toEqual({ n: 0 });
 });
 
+test('cards on D1: kept as they came, the picture a BLOB handed back byte for byte, and swept a month on', async () => {
+  const db = schema();
+  const store = new D1Store(d1(db));
+  const png = Uint8Array.from({ length: 3000 }, (_, i) => (i * 7) % 256);
+  expect(await store.putCard('abcdefg', { app: 'deck', title: 'Talk', text: 'Slides.', png, exp: NOW + 30 * DAY })).toBe(true);
+  expect(await store.putCard('abcdefg', { app: 'deck', title: 'Other', text: '', png, exp: NOW })).toBe(false);
+  expect(await store.card('abcdefg')).toEqual({ app: 'deck', title: 'Talk', text: 'Slides.', exp: NOW + 30 * DAY });
+  expect(await store.cardPng('abcdefg')).toEqual({ png, exp: NOW + 30 * DAY });
+  expect(await store.card('zzzzzzz')).toBeNull();
+  await store.sweep(NOW + 30 * DAY + 1);
+  expect(await store.card('abcdefg')).toBeNull();
+});
+
 test('tinier: without BRAKE_KEY the Worker refuses, and says what is missing', () => {
   expect(() => brakeKey(undefined)).toThrow(/BRAKE_KEY is not set.*wrangler secret put BRAKE_KEY.*\.dev\.vars/);
   expect(() => brakeKey('')).toThrow(/BRAKE_KEY/);
@@ -232,6 +248,7 @@ test('tinier: no per-minute limiter and no brake in memory; the key is a secret,
   expect(read('wrangler.jsonc')).not.toMatch(/ratelimits|LIMITER/);
   expect(read('worker.ts')).not.toMatch(/LIMITER|brake\(/);
   expect(read('tinier.ts')).not.toMatch(/Limiter|function brake\(/);
+  expect(read('brake.ts')).not.toMatch(/Limiter|new Map/);
   expect(read('wrangler.jsonc')).not.toMatch(/BRAKE_KEY"\s*:/);
   expect(readFileSync(new URL('../.gitignore', import.meta.url), 'utf8')).toMatch(/^\.dev\.vars$/m);
 });

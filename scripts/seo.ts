@@ -20,6 +20,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import type { AppDef } from '../src/kit/core/app.ts';
 import { origin } from '../src/kit/core/network.ts';
+import { CARD_TAGS, tagCount } from '../tinier/cards.ts';
 
 /** An app as the pages name it: its route, name, line and templates' names. */
 export interface Listed {
@@ -107,11 +108,11 @@ export function writePages(dist: string, { site, apps, built }: { site: string; 
       .replace(/(src|href)="\.\//g, '$1="../')
       .replace(/<title>[^<]*<\/title>/, `<title>${text(title)}</title>`)
       .replace(/(<meta name="description" content=")[^"]*"/, `$1${attr(app.blurb)}"`)
-      .replace(/(<meta property="og:title" content=")[^"]*"/, `$1${attr(title)}"`)
-      .replace(/(<meta property="og:description" content=")[^"]*"/, `$1${attr(app.blurb)}"`)
+      .replace(/(<meta (?:property="og|name="twitter):title" content=")[^"]*"/g, `$1${attr(title)}"`)
+      .replace(/(<meta (?:property="og|name="twitter):description" content=")[^"]*"/g, `$1${attr(app.blurb)}"`)
       .replace(/(<meta property="og:url" content=")[^"]*"/, `$1${site}${app.id}/"`)
       .replace(/(<link rel="canonical" href=")[^"]*"/, `$1${site}${app.id}/"`)
-      .replace(/(<meta property="og:image" content=")[^"]*"/, (m, a) => (card ? `${a}${site}og/${app.id}.png"` : m))
+      .replace(/(<meta (?:property="og|name="twitter):image" content=")[^"]*"/g, (m, a) => (card ? `${a}${site}og/${app.id}.png"` : m))
       .replace(/(<meta property="og:image:alt" content=")[^"]*"/, (m, a) => (card ? `${a}${attr(`${app.name}: ${app.blurb}`)}"` : m));
     const first = `<h1>${text(app.name)}</h1><p>${text(app.blurb)}</p><ul>${app.templates.map((n) => `<li>${text(n)}</li>`).join('')}</ul>`;
     mkdirSync(resolve(dist, app.id), { recursive: true });
@@ -178,6 +179,8 @@ export function checkSeo(dist: string, apps: Listed[]): string[] {
       const wrong = Object.keys(want).filter((k) => JSON.stringify(got[k]) !== JSON.stringify(want[k]));
       if (wrong.length) problems.push(`${p.file}: the JSON-LD is not the page’s WebApplication (${wrong.join(', ')})`);
     }
+    // A link shared with a network writes its preview card into these tags (tinier/cards.ts), by substitution: each once.
+    for (const tag of CARD_TAGS) if (tagCount(page, tag) !== 1) problems.push(`${p.file}: the tag ${tag} is there ${tagCount(page, tag)} times, not once`);
     const first = firstHeader(page);
     for (const w of p.words) if (!first.includes(text(w))) problems.push(`${p.file}: the first text does not say "${w}"`);
     for (const n of p.app?.templates ?? []) if (!first.includes(`<li>${text(n)}</li>`)) problems.push(`${p.file}: the first text does not name the template "${n}"`);

@@ -262,6 +262,31 @@ test('a link opens its app, and every edit goes into the link', async () => {
   expect(again.querySelector<HTMLInputElement>('.to-title')!.value).toBe('A note');
 });
 
+// A link shared with a network carries its preview card's id (?c=, kit/share/card.ts) for the network's fetcher alone.
+test('a link with ?c= opens its document, routed by the hash alone, and the address loses the card at once', async () => {
+  /** The shell started at an address with a query, as a network's reader arrives. */
+  const arrive = async (address: string) => {
+    document.body.innerHTML = '';
+    history.replaceState(null, '', `${location.pathname}${address}`);
+    const shell = document.createElement('to-shell') as ToShell;
+    document.body.append(shell);
+    await shell.updateComplete;
+    return shell;
+  };
+  const doc = '---\ntitle: Shared\n---\nFrom a post.\n';
+  const shell = await arrive(`?c=k8hwicw#/v1/write/${encodeDoc(doc)}`);
+  await until(() => !!shell.querySelector('to-write-editor to-text .tx p'));
+  expect(shell.querySelector('to-text .tx p')!.textContent).toBe('From a post.');
+  expect(location.search).toBe('');
+  expect(location.hash).toBe(`#/v1/write/${encodeDoc(doc)}`);
+  // A link copied afterwards carries no stale card.
+  expect(new URL(shell.link).search).toBe('');
+  // The routing never reads the query: a card's id with no document is the home page; another query is left alone.
+  const home = await arrive('?c=k8hwicw&keep=1');
+  expect(home.querySelector('to-home')).not.toBeNull();
+  expect(location.search).toBe('?keep=1');
+});
+
 test('an unreadable link is said so, not thrown', async () => {
   const shell = await mount('#/v1/write/yNOTREALLY');
   await shell.updateComplete;
