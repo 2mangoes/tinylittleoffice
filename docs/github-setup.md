@@ -14,8 +14,8 @@ with the strings exact, to paste. The files assume every one of them.
 - [ ] Settings → Collaborators and teams: the maintainers' team with **Maintain**; nobody with **Admin** but
       the organization's owners.
 - [ ] The organization's Settings → Actions: allow GitHub's own actions and those of verified creators
-      (`actions/checkout`, `actions/setup-node`, `actions/attest-build-provenance`); require approval for
-      workflows from first-time contributors' forks.
+      (`actions/checkout`, `actions/setup-node`, `actions/attest-build-provenance`), each pinned in the workflows
+      by its full commit hash; require approval for workflows from first-time contributors' forks.
 
 ## The branch rule (Settings → Rules → Rulesets → New branch ruleset)
 
@@ -27,7 +27,7 @@ with the strings exact, to paste. The files assume every one of them.
       every check a deploy runs, then the lints, the advisories and the build made twice); check **Require
       branches to be up to date before merging**.
 - [ ] **Require signed commits**: recommended, not required, until every contributor signs; revisit at launch.
-- [ ] Bypass list: the organization's admins, for the deploy commits made from Paul's machine.
+- [ ] Bypass list: none. A deploy is a tag (Releases, below), not a commit made from anyone's machine.
 
 ## The About box (the repository's front page, the gear beside About)
 
@@ -35,8 +35,8 @@ with the strings exact, to paste. The files assume every one of them.
 - [ ] Website: `https://tinylittleoffice.com`
 - [ ] Topics: `office-suite` `privacy` `local-first` `no-backend` `pwa` `web-components` `lit` `cloudflare-workers`
       `typescript` `url-as-document` `markdown`
-- [ ] Include in the home page: **Releases** on, **Packages** off, **Deployments** off (the site deploys from
-      Paul's machine, not from GitHub).
+- [ ] Include in the home page: **Releases** on, **Packages** off, **Deployments** on (each tag's deploy to the
+      environment `production`).
 
 ## General (Settings → General)
 
@@ -72,21 +72,38 @@ private report; there are no blank issues.
 - [ ] Code scanning: not yet (CI runs `npm audit` with no ignores).
 - [ ] **conduct@tinylittleoffice.com** exists and reaches Paul (CODE_OF_CONDUCT.md names it for reports).
 
-## Releases
+## Releases and deploys
 
-A release is a tag `v*`: `.github/workflows/release.yml` builds it, builds it twice more to show the bytes are
-the same, attests `dist/` and an archive of it, and publishes the archive with notes naming the commit and the
-CSP's script hashes (docs/transparency.md §1 item 3).
+A release is a tag `v*`, and the tag is the deploy: `.github/workflows/deploy.yml` runs `scripts/deploy.mjs` on
+the runner (every check, the shortener's migrations, the two Workers, the command line on npm with provenance),
+checks the live site against the build, then builds the tag again, builds it twice more to show the bytes are the
+same, attests `dist/` and an archive of it, and publishes the archive with notes naming the commit and the CSP's
+script hashes (docs/transparency.md §1 item 3). A deploy that failed part way is run again from the Actions tab
+(Deploy → Run workflow, "Use workflow from" the tag, and the tag again as the input); the release is made once.
+
+- [ ] Settings → Secrets and variables → Actions → **Repository secrets**: `CLOUDFLARE_API_TOKEN` (an account-owned
+      token: Workers Scripts Edit, D1 Edit and Account Settings Read on the account; Workers Routes Edit and Zone
+      Read on tinylittleoffice.com), `CLOUDFLARE_ACCOUNT_ID`, `NPM_TOKEN` (a granular token that may publish the
+      command line's package). Only the deploy step of the Deploy workflow names them; CI has none.
+- [ ] Settings → Environments → New environment `production`: no required reviewers (the tag is the approval), no
+      wait timer; **Deployment branches and tags**: selected, the tag rule `v*`, so nothing but a tag deploys.
+- [ ] Stronger, when convenient: move the three secrets from the repository to the environment `production`
+      (the workflow reads them the same way), so only a run from a tag `v*` can read them at all, not any workflow
+      someone with write access adds on a branch.
+- [ ] The `main` ruleset's required check `check` (above) can be chosen once CI has run on main once.
 
 - [ ] Tags are signed, so anyone can see who made a release as well as what it is:
       `git tag -s v1.0.0 -m "Tiny Little Office v1.0.0" && git push origin v1.0.0`. `-s` signs with a GPG key,
       or with an SSH key under `git config gpg.format ssh` and `user.signingkey`; add the same key to the
       GitHub account as a **signing key**, so the tag shows as Verified. Anyone checks one with `git tag -v`.
-- [ ] A tag ruleset (Settings → Rules → Rulesets → New tag ruleset): target `refs/tags/v*`; **Restrict creations**,
-      **Restrict updates**, **Restrict deletions**, **Block force pushes**; bypass list: Paul, so only he makes
-      a release.
+- [ ] A tag ruleset (Settings → Rules → Rulesets → New tag ruleset): name `releases`, enforcement **Active**,
+      target the pattern `v*`; **Restrict creations**, **Restrict updates**, **Restrict deletions**, **Block force
+      pushes**; bypass list: the **Maintain** role (and the organization's admins), so only maintainers can create
+      a tag `v*`, and so only they can deploy. The workflows assume this ruleset: a tag `v*` that exists is a
+      maintainer's decision to ship.
 - [ ] Settings → Actions → General → Workflow permissions: leave **Read repository contents** as the default;
-      the release workflow asks for its own (`contents: write`, `id-token: write`, `attestations: write`).
+      the deploy workflow asks for its own per job: the deploy `contents: read` and `id-token: write` (npm's
+      provenance), the release `contents: write`, `id-token: write` and `attestations: write`.
 
 A release is checked with `gh attestation verify tinylittleoffice-v1.0.0.tar.gz -R aboard-io/tinylittleoffice`
 (built by that workflow, from that commit), and the live site against it with

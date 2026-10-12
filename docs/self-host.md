@@ -60,36 +60,42 @@ npx wrangler d1 create tinier
 ```
 
 Put the `database_id` it prints into `tinier/wrangler.jsonc` (it is not a secret, but it is your account's,
-so a fork that is public will show it), then make the tables:
+so a fork that is public will show it). The tables are `tinier/migrations/` (wrangler's numbered
+`NNNN_name.sql` files, the directory `migrations_dir` names); the deploy applies the ones the database has not had,
+before the shortener ships, so there is nothing to run by hand. Each is safe on a database that has its tables
+already, as one made before wrangler kept its record does.
 
-```sh
-npm run tinier:schema      # tinier/schema.sql and tinier/migrations/, on the remote database; safe to run again
-```
-
-A copy made before the daily count was added has the links table already; apply the migration alone:
-
-```sh
-npx wrangler d1 execute tinier -c tinier/wrangler.jsonc --remote --file=tinier/migrations/0001-brakes.sql
-```
-
-Then give tinier the secret its daily counts are kept under: any long random string, kept nowhere else.
+Then give tinier the secret its daily counts are kept under: any long random string, kept nowhere else. This is
+the one thing set by hand, once; the deploy checks it is there and stops, saying so, if it is not.
 
 ```sh
 openssl rand -base64 32 | npx wrangler secret put BRAKE_KEY -c tinier/wrangler.jsonc
 ```
 
 Without it tinier answers nothing and says why. On a development machine, put `BRAKE_KEY=<any string>` in
-`tinier/.dev.vars` (ignored by git) for `npm run tinier:dev`.
+`tinier/.dev.vars` (ignored by git) for `npm run tinier:dev`, which applies the migrations to its local database.
 
 ## 4. Deploy
+
+The deploy reads three credentials from the environment, or else from the checkout's `.env` (ignored by git;
+`.env.example` lists them), and stops before it does anything, naming the one that is missing:
+
+| Name | What |
+| --- | --- |
+| `CLOUDFLARE_API_TOKEN` | an account API token (My Profile, or the account's Manage Account → Account API Tokens): **Workers Scripts: Edit**, **D1: Edit** and **Account Settings: Read** on the account; **Workers Routes: Edit** and **Zone: Read** on your zone |
+| `CLOUDFLARE_ACCOUNT_ID` | the account's id (the dashboard's Workers & Pages overview shows it) |
+| `NPM_TOKEN` | a granular npm token that may publish the command line's package; asked for only when `packages/doc` is not private |
 
 ```sh
 npm run deploy
 ```
 
-That runs the checks we run before shipping (the types, the strings, the unit and browser tests, the build,
-what the build wrote, and the smoke run on the built site when something on screen changed), then deploys
-the two Workers in turn. `npm run deploy -- --dry-run` checks and deploys nothing.
+That checks tinier's `BRAKE_KEY` is set, runs the checks we run before shipping (the types, the strings, the unit
+and browser tests, the build, what the build wrote, and the smoke run on the built site when something on screen
+changed), then applies the shortener's migrations, deploys the two Workers in turn, and publishes the command line
+to npm when its version is new. `npm run deploy -- --dry-run` makes every check and prints the steps it would
+take, and ships nothing. No credential is printed, and none is seen by the tests or the build: the script takes
+them out of the environment first and hands them to Wrangler and npm alone.
 
 Last, the deploy publishes the command line to npm, as `tinylittleoffice` (`npx tinylittleoffice lint …`), when
 `packages/doc/package.json` has a version npm does not and the checkout's `.env` holds `NPM_TOKEN` (a granular
@@ -98,6 +104,40 @@ wait for npm. A copy of your own needs no package of its own: `npx tinylittleoff
 makes links to your copy.
 
 Open your site, write something, make a short link and open it in another browser.
+
+### From GitHub, on a tag
+
+A fork can deploy the way tinylittleoffice.com does: `.github/workflows/deploy.yml` runs the same script on a
+GitHub runner when a tag `v*` is pushed. Put the three names above in the fork's Settings → Secrets and variables →
+Actions as repository secrets, make an environment `production` (Settings → Environments; no reviewers needed), and
+change `https://tinylittleoffice.com/` in the workflow to your address. Then:
+
+```sh
+git tag -s v1.0.0 -m "v1.0.0" && git push origin v1.0.0
+```
+
+### How tinylittleoffice.com is deployed
+
+Every deploy of tinylittleoffice.com is a tag `v*` on https://github.com/aboard-io/tinylittleoffice, and its whole
+log is public: the repository's **Actions** tab, the workflow **Deploy**, one run per tag. A run:
+
+1. checks the tag out and installs what the lockfile names (`npm ci`), the browsers and the fonts the tests measure in;
+2. runs `npm run deploy` with the three secrets, which only that step is given: the checks, the shortener's
+   migrations, the site, the shortener, and the command line on npm, published with **provenance** (npm's record
+   of the repository, the commit and the workflow run that built the package, vouched for by the runner's identity:
+   the package's page on npmjs.com shows it, and `npm audit signatures` checks it);
+3. fetches every file of the live site and compares it with the build (`npm run verify-deploy`), and fails the
+   run if one differs;
+4. builds the tag again, shows it is the same bytes, attests it, checks once more that it is what the site
+   serves, and makes the GitHub release with the archive and its notes (`scripts/release-notes.ts`: the commit,
+   the policy's script hashes, how to check them).
+
+To check it yourself, from any clone:
+
+```sh
+npm run verify-deploy -- https://tinylittleoffice.com/        # the commit the site says it runs, built here and compared file by file
+gh attestation verify tinylittleoffice-v1.0.0.tar.gz -R aboard-io/tinylittleoffice   # the release's archive, built by that workflow
+```
 
 ## 5. Telling copies apart
 

@@ -60,11 +60,20 @@ leak. Everything here makes that checkable by a stranger.
    commit on GitHub (`github.com` is on the list, `src/kit/network.ts` `source`). `scripts/verify-deploy.ts`
    (`npm run verify-deploy -- <url> [commit]`) reads the site's `/version.json`, builds that commit in a fresh
    checkout (or uses `dist/` when it is that build), fetches every file but `_headers`, and prints a table;
-   exit 1 on any difference. `.github/workflows/release.yml`, on a tag `v*`: `npm ci`, build,
-   `build:verify`, `check-build`, a byte-stable archive, `actions/attest-build-provenance` over `dist/**` and
-   the archive, and a release with the archive and notes (`scripts/release-notes.ts`: the commit, the tag,
-   the script hashes, how to check). Signed tags: `docs/github-setup.md`. CI (`.github/workflows/ci.yml`) runs
-   `npm run build:verify` after its build.
+   exit 1 on any difference. The release is the `release` job of `.github/workflows/deploy.yml`. Signed
+   tags: `docs/github-setup.md`. CI (`.github/workflows/ci.yml`) runs `npm run build:verify` after its build.
+   *The deploy, from a tag, 2026-10-11 (r18-deploy-actions; Paul: "GitHub Actions can handle the deploy to
+   Cloudflare").* A deploy is a tag `v*`, and runs on a public GitHub runner with a public log (the repository's
+   Actions tab, the workflow Deploy): `.github/workflows/deploy.yml` runs `scripts/deploy.mjs`, the same script a
+   maintainer's machine runs, with the three credentials as repository secrets given to that step alone (and taken
+   out of the environment by the script before any check, so no test or dependency sees them): every check CI runs,
+   the shortener's migrations, the two Workers, the command line on npm with provenance. The same job then runs
+   `npm run verify-deploy -- https://tinylittleoffice.com/` and fails if a live file is not the build. A second job,
+   with no Cloudflare or npm credential, builds the tag again, `build:verify`, `check-build`, checks that build is
+   what the site serves, makes a byte-stable archive, attests `dist/**` and the archive
+   (`actions/attest-build-provenance`), and makes the release with the notes (`scripts/release-notes.ts`: the commit,
+   the tag, the script hashes, how to check). Every action is pinned by its commit hash, never a tag
+   (`test/deploy.test.ts`). docs/self-host.md, "How tinylittleoffice.com is deployed", is how to check one yourself.
 4. **Dependencies you can read in one sitting.** `docs/dependencies.md` generated from package.json: each
    dependency, its exact version, its license, the native API it beat and why (the standing rule), and the
    size it adds. Nothing vendored minified; the lockfile committed; `npm audit` in CI with no ignores.
@@ -128,7 +137,8 @@ Done once, before the repo went public; Paul renamed it, moved it to the aboard-
   twice), signed commits recommended, no force-push; releases from tags with the attestation and the CSP hashes.
   Dependabot asks for npm updates weekly, grouped (`.github/dependabot.yml`).
 - `SECURITY.md`, `LICENSE`, `CODE_OF_CONDUCT.md`, `CONTRIBUTING.md`, `.github/` with the CI workflow, the
-  release workflow (build, attest, publish `dist/` as the release's artifact), and the issue templates.
+  deploy workflow (on a tag: deploy, verify the live site, build, attest, publish `dist/` as the release's
+  artifact), and the issue templates.
 - The old tree's history is in the same repo (tagged `v0-before-rebuild`): keep it; docs/history/README.md says what
   it is.
 - A `docs/` index page listing every document in the folder, so a reader starts from one place.

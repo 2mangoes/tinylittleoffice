@@ -3,7 +3,7 @@
  * each in a fresh checkout at a different path and depth (scripts/builds.ts), every file of both dist/ folders is
  * hashed, and the first difference is printed; this checkout's dist/ too, when it is that commit's build. Nothing a build writes may come from the clock, the
  * machine, the path it is built at or the order a folder is read in; a difference here is one of those.
- * CI runs it (.github/workflows/ci.yml when there is one, and the release, .github/workflows/release.yml).
+ * CI runs it (.github/workflows/ci.yml), and so does the release after each deploy (.github/workflows/deploy.yml).
  *
  *   npm run build:verify               HEAD, built twice
  *   node scripts/reproducible.ts v1.0  that commit or tag

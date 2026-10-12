@@ -80,7 +80,7 @@ npm run lint         # the types, Prettier and the lints of the code
 npm run test:browser # the browser tests alone, in Vitest's browser mode
 npm run test:e2e     # the built site in Chromium and an iPhone-sized WebKit, axe in light and dark
 npm run build        # the site as it ships, its chunks held to their budgets
-npm run deploy       # the checks, then the site and the short-link service to Cloudflare
+npm run deploy       # the checks, then the site and the short-link service to Cloudflare (a tag v* does it on GitHub)
 ```
 
 The build writes what a search engine reads: a page per app with its name, its line and its templates' names as

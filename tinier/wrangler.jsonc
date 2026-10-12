@@ -13,6 +13,8 @@
       "database_name": "tinier",
       // Filled in by `npx wrangler d1 create tinier` on the account the site deploys from.
       "database_id": "6ede155f-083c-4ab9-a33e-64eea0704bb5",
+      // The tables, as wrangler's numbered migrations (NNNN_name.sql), applied by the deploy before this Worker ships.
+      "migrations_dir": "migrations",
     },
   ],
   // A hundred links a day from one address, counted in D1 under a keyed hash (tinier.ts); the key is the secret

@@ -1,0 +1,127 @@
+# A deploy is a tag v* (docs/self-host.md, "How tinylittleoffice.com is deployed"): on its push, or by hand for a tag
+# already pushed, the runner checks the tag out and runs scripts/deploy.mjs, the same script a maintainer's machine
+# runs: every check CI runs, then the shortener's migrations, the two Workers and the command line on npm (signed
+# with provenance from here). Then the live site is fetched file by file and compared with the build
+# (scripts/verify-deploy.ts), and the release is made: the tag built again (the same bytes), attested by GitHub, with
+# notes naming the commit and the policy's script hashes (scripts/release-notes.ts).
+#
+# The three secrets are the repository's (CLOUDFLARE_API_TOKEN, an account token for Workers Scripts, D1 and Account
+# Settings, and Workers Routes and Zone Read on the one zone; CLOUDFLARE_ACCOUNT_ID; NPM_TOKEN), given to the deploy
+# step alone. Who may push a tag v* is a tag ruleset (docs/github-setup.md); the environment `production` asks for no
+# reviewer, since the tag is the approval. Every action is pinned by its commit, the version beside it, so a moved tag
+# cannot run in a job that holds a token (test/deploy.test.ts).
+name: Deploy
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: The tag to deploy again, as v1.0.0
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+# One deploy at a time, and the next waits for the one under way rather than cancelling it.
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+env:
+  TAG: ${{ inputs.tag || github.ref_name }}
+  # The address the site is published at (the canonical link and the link-preview tags).
+  VITE_SITE_URL: https://tinylittleoffice.com/
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    environment: production
+    permissions:
+      contents: read
+      # For npm's provenance: the runner's identity, signed into the package's record.
+      id-token: write
+    env:
+      # The smoke run's preview port (playwright.config.ts).
+      PW_PORT: 4179
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5.1.0
+        with:
+          ref: ${{ inputs.tag || github.ref }}
+          # The whole history and the tags: version.json names the tag, and verify-deploy finds its commit.
+          fetch-depth: 0
+      - name: The ref is a tag v*
+        run: |
+          [[ "$TAG" == v* ]] && git rev-parse -q --verify "refs/tags/$TAG" > /dev/null || { echo "$TAG is not a tag v* of this repository." >&2; exit 1; }
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Chromium and WebKit, with what they need
+        run: npx playwright install --with-deps chromium webkit
+      - name: The fonts the measuring tests draw each script in (test/browser/fonts.ts), as CI has them
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y fonts-dejavu-core fonts-noto-core fonts-noto-cjk fonts-noto-extra
+          bash scripts/fonts-box.sh
+          fc-cache -f > /dev/null
+      - name: Deploy (the checks, the migrations, the Workers, npm)
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm run deploy
+      - name: The live site is the build, file by file
+        # A minute for the new files to reach every edge, then once more if any still differ.
+        run: |
+          npm run verify-deploy -- https://tinylittleoffice.com/ || { sleep 60; npm run verify-deploy -- https://tinylittleoffice.com/; }
+
+  release:
+    needs: deploy
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write
+      id-token: write
+      attestations: write
+    env:
+      ARCHIVE: tinylittleoffice-${{ inputs.tag || github.ref_name }}.tar.gz
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5.1.0
+        with:
+          ref: ${{ inputs.tag || github.ref }}
+          # build:verify checks the commit out twice, and version.json names the tag.
+          fetch-depth: 0
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Build
+        run: npm run build
+      - name: The same bytes, built twice more
+        run: npm run build:verify
+      - name: The offline list, the worker and the policy
+        run: node scripts/check-build.ts
+      - name: This build is what the site serves
+        run: npm run verify-deploy -- https://tinylittleoffice.com/
+      - name: The archive (sorted, no times, no owners, so it is the same bytes too)
+        run: tar --sort=name --mtime=@0 --owner=0 --group=0 --numeric-owner -C dist -cf - . | gzip -n > "$ARCHIVE"
+      - name: Attest the build
+        uses: actions/attest-build-provenance@e8998f949152b193b063cb0ec769d69d929409be # v2.4.0
+        with:
+          subject-path: |
+            dist/**
+            ${{ env.ARCHIVE }}
+      - name: The notes
+        run: node scripts/release-notes.ts "$ARCHIVE" > notes.md
+      - name: The release, with the notes (once; a deploy run again leaves the first release as it is)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view "$TAG" > /dev/null 2>&1; then echo "The release $TAG exists already."; exit 0; fi
+          gh release create "$TAG" "$ARCHIVE" --verify-tag --title "Tiny Little Office $TAG" --notes-file notes.md

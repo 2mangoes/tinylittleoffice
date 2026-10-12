@@ -1,5 +1,5 @@
 /**
- * A release's notes, from the build's own /version.json (.github/workflows/release.yml): the tag and the
+ * A release's notes, from the build's own /version.json (.github/workflows/deploy.yml, its release job): the tag and the
  * commit, the commit's date, the Content-Security-Policy's script hashes (the only inline code the site
  * will run), and how to check the release and a running site against it.
  *

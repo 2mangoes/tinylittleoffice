@@ -1,7 +1,7 @@
 // tinier: links kept for their time and handed back, never changed; a hundred a day from one address, counted
 // under a keyed hash kept for a day; what it refuses; the D1 rows and their schema, on SQLite.
 import { test, expect } from 'vitest';
-import { readFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { DatabaseSync } from 'node:sqlite';
 import { D1Store, type SQL } from '../tinier/d1.ts';
 import { brakeHash, brakeKey, DAILY, dayOf, handle, MAX_BYTES, newId, TTLS } from '../tinier/tinier.ts';
@@ -161,14 +161,41 @@ function d1(db: DatabaseSync) {
   };
   return { prepare } as SQL;
 }
-const schema = () => {
-  const db = new DatabaseSync(':memory:');
-  db.exec(readFileSync(new URL('../tinier/schema.sql', import.meta.url), 'utf8'));
-  // The migration is safe to apply again.
-  for (let i = 0; i < 2; i++) db.exec(readFileSync(new URL('../tinier/migrations/0001-brakes.sql', import.meta.url), 'utf8'));
+/** tinier/migrations/, in the order `wrangler d1 migrations apply` takes them (by name: NNNN_name.sql). */
+const MIGRATIONS = new URL('../tinier/migrations/', import.meta.url);
+const migrations = () => readdirSync(MIGRATIONS).sort();
+const migrate = (db: DatabaseSync) => {
+  for (const f of migrations()) db.exec(readFileSync(new URL(f, MIGRATIONS), 'utf8'));
   return db;
 };
+const schema = () => migrate(new DatabaseSync(':memory:'));
 const columns = (db: DatabaseSync, table: string) => (db.prepare(`PRAGMA table_info(${table})`).all() as { name: string }[]).map((c) => c.name);
+
+test("tinier's migrations: wrangler's NNNN_name.sql form, numbered from one, the directory wrangler.jsonc names, and the deploy applies them", () => {
+  const files = migrations();
+  expect(files.length).toBeGreaterThanOrEqual(2);
+  files.forEach((f, i) => expect(f).toMatch(new RegExp(`^${String(i + 1).padStart(4, '0')}_[a-z0-9_]+\\.sql$`)));
+  expect(readFileSync(new URL('../tinier/wrangler.jsonc', import.meta.url), 'utf8')).toMatch(/"migrations_dir": "migrations"/);
+  // One way to make the tables: the migrations. No schema file of its own beside them.
+  expect(existsSync(new URL('../tinier/schema.sql', import.meta.url))).toBe(false);
+});
+
+test("tinier's migrations apply in order on a fresh database, and on production's, which has the four columns and its links already", () => {
+  const fresh = schema();
+  expect(columns(fresh, 'links')).toEqual(['id', 'c', 'iv', 'exp']);
+  expect(columns(fresh, 'brakes')).toEqual(['h', 'n', 'day']);
+  // Production was made by hand before wrangler kept a record of migrations, so it applies every one: each must take a
+  // database that has the links table, and keep its rows.
+  const live = new DatabaseSync(':memory:');
+  live.exec('CREATE TABLE links (id TEXT PRIMARY KEY, c TEXT NOT NULL, iv TEXT NOT NULL, exp INTEGER NOT NULL)');
+  live.prepare('INSERT INTO links VALUES (?, ?, ?, ?)').run('abcdefg', 'c', 'iv', 1);
+  migrate(live);
+  expect(columns(live, 'links')).toEqual(['id', 'c', 'iv', 'exp']);
+  expect(columns(live, 'brakes')).toEqual(['h', 'n', 'day']);
+  expect(live.prepare('SELECT * FROM links').all()).toEqual([{ id: 'abcdefg', c: 'c', iv: 'iv', exp: 1 }]);
+  // And again, as a database that has them all would take them.
+  expect(() => migrate(live)).not.toThrow();
+});
 
 test("tinier on D1: production's four columns and the brakes table, and the Worker's SQL run against them", async () => {
   const db = schema();

@@ -1,13 +1,15 @@
-# Every check a deploy runs (scripts/deploy.mjs, held to it by test/repository.test.ts), on every push and pull
-# request: the types, the strings, the unit tests under node, the browser tests in Chromium, the build (whose
-# budgets are a tripwire: a chunk over budgets.json fails it), the smoke run on the built site in desktop Chromium
-# and a phone-sized WebKit, and the policy and version the build writes. Then the lints and Prettier, the
-# dependencies' advisories, and the build made twice more to show it is the same bytes. Branch protection on main
-# requires the job `check` (docs/github-setup.md).
+# Every check a deploy runs (scripts/deploy.mjs, held to it by test/repository.test.ts), on every push to main and
+# every pull request, with no secret: the types, the strings, the unit tests under node, the browser tests in
+# Chromium, the build (whose budgets are a tripwire: a chunk over budgets.json fails it), the smoke run on the built
+# site in desktop Chromium and a phone-sized WebKit, and the policy and version the build writes. Then the lints and
+# Prettier, the dependencies' advisories, and the build made twice more to show it is the same bytes. Branch
+# protection on main requires the job `check` (docs/github-setup.md). A deploy is a tag: .github/workflows/deploy.yml.
+# Every action is pinned by its commit, the version beside it (test/deploy.test.ts).
 name: CI
 
 on:
   push:
+    branches: [main]
   pull_request:
 
 permissions:
@@ -25,11 +27,11 @@ jobs:
       # The smoke run's preview port (playwright.config.ts).
       PW_PORT: 4179
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5.1.0
         with:
           # build:verify checks the commit out again, by its history.
           fetch-depth: 0
-      - uses: actions/setup-node@v5
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
         with:
           node-version: 24
           cache: npm

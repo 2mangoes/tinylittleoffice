@@ -1,4 +1,4 @@
-/** The shortener's rows in Cloudflare D1 (tinier/schema.sql, tinier/migrations/): the Store tinier.ts asks for. */
+/** The shortener's rows in Cloudflare D1 (tinier/migrations/): the Store tinier.ts asks for. */
 import { dayOf, type Link, type Store } from './tinier.ts';
 
 /** The few calls of D1's the store makes (a D1Database has them all; the tests give it node's SQLite). */
