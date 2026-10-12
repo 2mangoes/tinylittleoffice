@@ -3,6 +3,11 @@
    down the side and their bars on days that scroll sideways. A span's colour (--c) is its own; everything
    else is the theme's tokens. Every control is 44px to the finger; inputs are 16px so a phone does not zoom. */
 @layer apps {
+  /* Its words are typed in the dialog and the schedule's rows, not at the column's end: no room below it for a caret
+     at the middle (kit.css .to-main.to-wide). */
+  .to-main:has(> to-cal-editor) {
+    padding-bottom: var(--to-gutter);
+  }
   to-cal-editor {
     display: block;
   }
@@ -58,7 +63,8 @@
     flex-direction: column;
     gap: 0.125rem;
     min-width: 0;
-    min-height: 5.75rem;
+    /* At most as tall as a day is wide (a seventh of the grid) until its events need more: a month, not a column. */
+    min-height: min(5.75rem, 100cqw / 7);
     padding: 0.125rem 0.1875rem 0.25rem;
     border-top: 1px solid var(--to-border);
     cursor: pointer;
@@ -460,7 +466,6 @@
 
   @media (max-width: 599px) {
     .cal-cell {
-      min-height: 4rem;
       padding: 1px 1px 0.1875rem;
     }
     .cal-chip {

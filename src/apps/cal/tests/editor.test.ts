@@ -335,6 +335,36 @@ test("at phone width: the bar is one row, nothing is wider than the screen, the 
   }
 });
 
+// Paul, 2026-10-12: "The calendar is oddly vertically stretched". A day is at most as tall as it is wide (a seventh of
+// the grid, a container width), 5.75rem where there is room, and taller only when its events need it.
+const BUSY = '- 2027-03-10: One\n- 2027-03-10: Two\n- 2027-03-10: Three\n';
+test('a day is no taller than it is wide at a phone, 5.75rem at a desktop, and a day with three chips is taller than a quiet one', async () => {
+  const rows = (el: HTMLElement, iso: string) => {
+    const busy = cell(el, iso).getBoundingClientRect().height;
+    const quiet = cell(el, '2027-03-24').getBoundingClientRect().height;
+    return { busy, quiet };
+  };
+  await page.viewport(390, 844);
+  try {
+    const { el } = await editor(BUSY);
+    for (const c of el.querySelectorAll<HTMLElement>('.cal-cell')) {
+      if (c === cell(el, '2027-03-10') || c.parentElement === cell(el, '2027-03-10').parentElement) continue;
+      const r = c.getBoundingClientRect();
+      expect(r.height).toBeLessThanOrEqual(r.width + 1);
+    }
+    const phone = rows(el, '2027-03-10');
+    expect(phone.busy).toBeGreaterThan(phone.quiet);
+    await page.viewport(1100, 800);
+    await settle(el);
+    const rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
+    expect(cell(el, '2027-03-24').getBoundingClientRect().height).toBeCloseTo(5.75 * rem, 0);
+    const desk = rows(el, '2027-03-10');
+    expect(desk.busy).toBeGreaterThan(desk.quiet);
+  } finally {
+    await page.viewport(1100, 800);
+  }
+});
+
 /* ---------- the editing standard (docs/editing.md) ---------- */
 
 const G = '---\nview: gantt\n---\n';

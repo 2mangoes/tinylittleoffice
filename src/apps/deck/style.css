@@ -281,7 +281,6 @@
     display: none;
   }
   .lay-t .deck-words .tx.blank::before {
-    right: 0;
     text-align: center;
   }
   /* The speaker notes are labelled as such (Paul, 2026-10-10) and have room round them, as the slide's words do; the hint sits where the words will. */
@@ -301,9 +300,6 @@
     background: var(--to-surface);
     border: 1px dashed var(--to-border);
     border-radius: var(--to-radius);
-  }
-  .deck-notes .tx.blank::before {
-    inset: 0.75rem 0.75rem auto 0.75rem;
   }
   .deck-notes .tx blockquote {
     margin: 0;

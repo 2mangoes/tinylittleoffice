@@ -677,7 +677,8 @@ test('the speaker notes have room round them, as the words do: 12 of the stylesh
   const empty = await editor('## Hello\n');
   await until(() => !!box(empty.el, 'notes')?.classList.contains('blank'));
   const hint = getComputedStyle(box(empty.el, 'notes'), '::before');
-  expect(twelve(hint.top, hint.left)).toEqual([12, 12]);
+  // The hint fills the box and pads as it does (the kit's text.css): its words start 12 in.
+  expect(twelve(`${parseFloat(hint.top) + parseFloat(hint.paddingTop)}`, `${parseFloat(hint.left) + parseFloat(hint.paddingLeft)}`)).toEqual([12, 12]);
   const { el: shown } = await editor('## Hello\n\n> Say hi\n');
   button(shown, 'Present').click();
   await until(() => !!shown.querySelector('.deck-show .notes'));

@@ -27,8 +27,10 @@
     /* Drawn, not read: a screen reader has it as the box's aria-placeholder (text.ts). */
     content: attr(data-placeholder);
     content: attr(data-placeholder) / '';
+    /* It fills the box and pads as the box does, so its first letter is where the caret's first letter will be. */
     position: absolute;
-    inset: 0 auto auto 0;
+    inset: 0;
+    padding: inherit;
     color: var(--to-placeholder);
     pointer-events: none;
   }

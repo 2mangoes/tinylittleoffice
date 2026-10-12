@@ -979,6 +979,29 @@ test('an empty box with a placeholder: the placeholder is aria-placeholder, and 
   expect(getComputedStyle(el.tx, '::before').content).toBe('"Say something" / ""');
 });
 
+// Paul, 2026-10-12: "there's no padding in the 'what' box". The placeholder is drawn where the words will be: inside the
+// box's padding, not at its border's corner, so its first letter is where the first typed letter lands.
+test('a padded box: the placeholder starts at the box’s content edge, where the first typed letter goes', async () => {
+  document.body.innerHTML = '';
+  const el = document.createElement('to-text');
+  el.placeholder = 'Event';
+  document.body.append(el);
+  await el.updateComplete;
+  el.tx.style.cssText = 'padding: 13px; border: 1px solid';
+  const box = el.tx.getBoundingClientRect();
+  const before = getComputedStyle(el.tx, '::before');
+  // The pseudo-element's content box, from the box's padding edge (where an absolute child's inset is measured).
+  const left = box.left + el.tx.clientLeft + parseFloat(before.left) + parseFloat(before.paddingLeft);
+  const top = box.top + el.tx.clientTop + parseFloat(before.top) + parseFloat(before.paddingTop);
+  expect(left).toBeCloseTo(box.left + 1 + 13, 0);
+  expect(top).toBeCloseTo(box.top + 1 + 13, 0);
+  el.blocks = parse('E\n').blocks;
+  await el.updateComplete;
+  const r = document.createRange();
+  r.selectNodeContents(el.tx.querySelector('p')!);
+  expect(r.getClientRects()[0].left).toBeCloseTo(left, 0);
+});
+
 // A walk's finding (lists at a desktop: Mod+K in words, then Enter): the link box set empty where there was no
 // link changed nothing, and left the focus on the body. It comes back to the words, as Escape brings it.
 test('Mod+K in words, then Enter with the box empty: no link, and the focus back in the words', async () => {

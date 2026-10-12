@@ -133,7 +133,7 @@ test('a click never recenters', async () => {
   expect(m.scrollTop).toBe(before);
 });
 
-test('the column’s room below is half what can be seen of it in an edited text, and not in a Drawing or a Display Link', async () => {
+test('the column’s room below is half what can be seen of it in an edited text, and not in a Drawing, a Calendar, a Trip or a Display Link', async () => {
   await page.viewport(390, 600);
   await write(SOME);
   const pad = (el: Element) => parseFloat(getComputedStyle(el).paddingBottom);
@@ -144,6 +144,14 @@ test('the column’s room below is half what can be seen of it in an edited text
   await frame();
   expect(pad(main())).toBe(parseFloat(getComputedStyle(main()).paddingTop));
   expect(pad(main())).toBeLessThan(main().clientHeight / 4);
+  // The Calendar and the Trip Planner are typed in their dialog and their rows, not at the column's end (Paul,
+  // 2026-10-12: "The calendar is oddly vertically stretched"): the gutter below them, as below a canvas.
+  for (const app of ['cal', 'trip']) {
+    const shell = await mount(`#/v1/${app}`);
+    await until(() => !!shell.querySelector(`to-${app}-editor`));
+    await frame();
+    expect(pad(main()), app).toBe(parseFloat(getComputedStyle(main()).paddingTop));
+  }
   const shown = await mount(`#/v1/write/${encodeDoc(SOME)}?d`);
   await until(() => !!shown.querySelector('main.to-display'));
   await frame();
