@@ -63,7 +63,7 @@ test('a page per app, under 4 KB: its shapes, an example and its rules', async (
     expect(page).toContain(`https://tinylittleoffice.com/examples/${a.id}.json`);
   }
   // The pages' address, once, above the examples.
-  expect(file('public/llms.txt')).toContain('Fetch only what you need: https://tinylittleoffice.com/llms/<app>.txt');
+  expect(file('public/llms.txt')).toContain('https://tinylittleoffice.com/llms/<app>.txt is a page on one app');
 });
 
 // Paul, 2026-10-12: an agent wrote that decks are text-only and the Animator's format unpublished, and shipped four

@@ -145,20 +145,25 @@ export async function makeShort(skill: string, examples?: Map<string, Example[]>
     '',
     `\`<app>\` is one of ${apps()
       .map((a) => `\`${a.id}\``)
-      .join(', ')}. \`&title=\` names it and \`&by=\` says who made it. Keep the link under 2,000 characters and keep to the shapes shown here: a link written by hand is checked by nothing.`,
+      .join(
+        ', ',
+      )}. \`&title=\` names it, \`&by=\` says who made it, and \`&lang=\` (\`es\`, \`fr\`, \`zh-hant\`…) opens the page in one of the site's languages. The words may be in any language or script, right to left too: write for the reader. Emoji are words, put the character in; \`:name:\` is one of Lucide's icons in the line, and first in a slide's headline it is the slide's icon. Keep a link under 2,000 characters and to the shapes shown: a hand-written link is checked by nothing.`,
     '',
     `With a runtime: \`${API_LINE}\` in a browser, Deno or Bun; \`npx tinylittleoffice\` in Node. To learn a shape by example:`,
     '',
     '- `npx tinylittleoffice shapes <app>`: what the app reads, a line a shape',
-    '- `npx tinylittleoffice example <app> [shape]`: the smallest document that shows it, its JSON, its lint and measures',
-    '- `npx tinylittleoffice try <app> <file|->`: a draft’s lint, measures and JSON in one call',
+    '- `npx tinylittleoffice example <app> [shape]`: the smallest document that shows it, its JSON, lint and measures',
+    '- `npx tinylittleoffice try <app> <file|->`: a draft’s lint, measures and JSON',
     '',
-    `Fetch only what you need: ${SITE}llms/<app>.txt is a page on one app; ${SITE}examples/<app>.json every shape of it, as a document, a link and JSON.`,
+    `${SITE}llms/<app>.txt is a page on one app; ${SITE}examples/<app>.json every shape of it as a document, a link and JSON.`,
     '',
     '## One example per app',
     '',
+    // Each app's first example, unless its link runs past 400 characters (the Drawing Tool's and the Animator's tables),
+    // then its shortest: the guide stays under 6 KB, and the app's own page has the rest.
     ...apps().map((a) => {
-      const e = ex.get(a.id)![0];
+      const all = ex.get(a.id)!;
+      const e = all.find((x) => x.link.length <= 400) ?? [...all].sort((x, y) => x.link.length - y.link.length)[0];
       return `- \`${a.id}\` ${a.name}, ${e.name}: <${e.link}>`;
     }),
     '',
