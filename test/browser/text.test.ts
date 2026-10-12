@@ -978,3 +978,17 @@ test('an empty box with a placeholder: the placeholder is aria-placeholder, and 
   expect(el.tx.textContent).toBe('');
   expect(getComputedStyle(el.tx, '::before').content).toBe('"Say something" / ""');
 });
+
+// Walks, round eighteen (lists at a desktop: Mod+K in words, then Enter): the link box set empty where there was no
+// link changed nothing, and left the focus on the body. It comes back to the words, as Escape brings it.
+test('Mod+K in words, then Enter with the box empty: no link, and the focus back in the words', async () => {
+  const h = await mount('Some words here\n', 'doc', caret(0, 2));
+  h.el.tx.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', ctrlKey: true, bubbles: true, cancelable: true }));
+  const box = () => h.el.querySelector<HTMLInputElement>('to-link-pop .to-link-input');
+  await until(() => !!box() && document.activeElement === box());
+  box()!.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true, cancelable: true }));
+  await h.el.updateComplete;
+  await tick();
+  expect(h.tlo).toBe('Some words here\n');
+  expect(h.el.hasFocus()).toBe(true);
+});

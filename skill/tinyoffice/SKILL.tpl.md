@@ -246,7 +246,7 @@ A diagram fenced on a slide is linted too, at its slide. `tinyoffice measure <li
 
 ## Driving the editors
 
-For an agent working in the editors in a browser: the keys each app answers, written from the apps' command registry (`Mod` is ⌘ on a Mac and Ctrl elsewhere; `at:` places are inside the app). Every command in force is also in the command palette, Mod+K (outside words) or the button at the end of the bar.
+For an agent working in the editors in a browser: the keys each app answers, written from the apps' command registry (`Mod` is ⌘ on a Mac and Ctrl elsewhere; `at:` places are inside the app). Every command in force is also found by the menu's search (the hamburger), which Mod+K opens focused outside words.
 
 {{commands}}
 

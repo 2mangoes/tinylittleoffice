@@ -4,9 +4,9 @@
  * title included, until the password is given); the Password dialog (set, change, take off: the document sealed
  * again at once); the Password part of the Share dialog (renderProtect, drawn there by <to-share>); the lock beside
  * the title while there is a password (trustButton, drawn in the header); and the Privacy dialog, opened from that
- * lock and from the menu: this document's password; what this device holds, item by item, each with Forget, the
+ * lock: this document's password; what this device holds, item by item, each with Forget, the
  * browser's own history last (every document opened here, and not ours to clear), and Forget everything; and
- * Download everything, every document kept here in one zip. The drawer's (no `doc`) is the Privacy dialog alone.
+ * Download everything, every document kept here in one zip. (Without `doc`, the Privacy dialog alone.)
  *
  * It gets the document's state through properties (`sealed`, `protected`) and does the work through
  * kit/privacy.ts; what changes the document goes back to the shell as events: `to-unlock` (detail: the text and
@@ -34,7 +34,7 @@ import './dialog.ts';
 export function trustButton(sealed: boolean, locked: boolean, open: () => void): TemplateResult | typeof nothing {
   if (!sealed && !locked) return nothing;
   const words = sealed ? t('Locked') : t('Protected by a password');
-  const tip = `${words} · ${keeping() ? t('Saved on this device') : t('Private')}`;
+  const tip = `${words} · ${keeping() ? t('Saving in this browser') : t('Nothing saved in this browser')}`;
   return html`<button type="button" class="to-btn to-trust ${sealed ? 'locked' : 'quiet'}" aria-haspopup="dialog" aria-label=${tip} title=${tip} @click=${open}>
     ${icon(UI.lock, 18)}<span class="to-trust-words">${words}</span>
   </button>`;
@@ -162,7 +162,7 @@ export class ToPrivacy extends LitElement {
   private async forgetAll() {
     if (!confirm(t('Forget everything this site keeps here, and keep nothing from now on? The documents themselves live in their links.'))) return;
     await forgetEverything();
-    toast(t('Private: nothing saved'));
+    toast(t('Nothing saved in this browser'));
   }
   private async download() {
     const files = await everything(`${location.origin}${location.pathname}`);
@@ -185,7 +185,7 @@ export class ToPrivacy extends LitElement {
       html`<li class=${cls}><span class="to-held-words"><b>${what}</b><small>${about}</small></span><span class="to-held-now">${now}</span>${forget ? html`<button type="button" class="to-btn to-held-forget" @click=${forget}>${t('Forget')}</button>` : nothing}</li>`;
     return html`<section class="to-privacy-section to-privacy-device" aria-labelledby="to-privacy-device-h">
       <h3 id="to-privacy-device-h">${t('What this device holds')}</h3>
-      <p class="to-trust-line quiet">${icon(keeping() ? UI.device : UI.private, 18)}<span>${keeping() ? t('Saved on this device') : t('Private: nothing is written to this device. What is listed lasts for this visit.')}</span></p>
+      <p class="to-trust-line quiet">${icon(keeping() ? UI.device : UI.private, 18)}<span>${keeping() ? t('Saving in this browser') : t('Nothing saved in this browser. What is listed lasts for this visit.')}</span></p>
       <ul class="to-held">
         ${row('to-held-prefs', t('Preferences'), t('Theme, the lifetime of short links.'), held.prefs ? t('{n} set', { n: held.prefs }) : t('None'), held.prefs ? () => forgetPrefs() : null)}
         ${row('to-held-docs', t('Your documents'), t('Their names and links, for the home page.'), t('{n|# document|# documents}', { n: held.documents }), held.documents ? () => forgetDocuments() : null)}

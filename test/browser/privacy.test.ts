@@ -3,7 +3,7 @@
 // "Get rid of signatures everywhere, including templates"): a signature said more than it proved.
 import { test, expect, afterEach, vi } from 'vitest';
 import { unzipSync, strFromU8, strToU8 } from 'fflate';
-import { mount, tick, until, said, openShare as openShareFromDrawer } from './helpers.ts';
+import { mount, privacyAlone, tick, until, said, openShare as openShareFromDrawer } from './helpers.ts';
 import { decodeDoc, encodeDoc, isSealed } from '../../src/kit/codec.ts';
 import { parseHash } from '../../src/kit/route.ts';
 import { readZip } from '../../src/kit/plain.ts';
@@ -17,7 +17,6 @@ import { chosenLanguage, language, setLanguage } from '../../src/kit/i18n.ts';
 import type { ToShell } from '../../src/kit/shell.ts';
 import type { ToText } from '../../src/kit/text.ts';
 import type { ToDialog } from '../../src/kit/dialog.ts';
-import type { ToPrivacy } from '../../src/kit/privacy-dialog.ts';
 
 afterEach(() => {
   vi.restoreAllMocks();
@@ -230,11 +229,9 @@ test('what this device holds, item by item with Forget, and Download everything:
   // The preferences other test files on this origin left on the device are not this test's: gone, then the one it sets.
   for (const k of PREFS) (store.remove(k), localStorage.removeItem(k));
   store.set('to-theme', 'dark');
-  const shell = await mount('');
-  shell.querySelector<HTMLButtonElement>('.to-burger')!.click();
-  await until(() => !!shell.querySelector('.to-drawer-privacy'));
-  shell.querySelector<HTMLButtonElement>('.to-drawer-privacy')!.click();
-  const privacy = shell.querySelector<ToPrivacy>('to-drawer to-privacy')!;
+  await mount('');
+  // The Privacy dialog alone (the menu no longer opens it: Paul, 2026-10-11), as a page without a document draws it.
+  const privacy = await privacyAlone();
   await until(() => !!privacy.querySelector('.to-held'));
   // No document here: the document's own section is not shown.
   expect(privacy.querySelector('.to-privacy-doc')).toBeNull();
@@ -290,11 +287,9 @@ test('the language is never among what the device holds: chosen, it counts no pr
     store.set('to-theme', 'dark');
     await setLanguage('de');
     vi.spyOn(window, 'confirm').mockReturnValue(true);
-    const shell = await mount('');
-    shell.querySelector<HTMLButtonElement>('.to-burger')!.click();
-    await until(() => !!shell.querySelector('.to-drawer-privacy'));
-    shell.querySelector<HTMLButtonElement>('.to-drawer-privacy')!.click();
-    const privacy = shell.querySelector<ToPrivacy>('to-drawer to-privacy')!;
+    await mount('');
+    // The Privacy dialog alone (the menu no longer opens it: Paul, 2026-10-11), as a page without a document draws it.
+    const privacy = await privacyAlone();
     await until(() => !!privacy.querySelector('.to-held'));
     const now = (cls: string) => privacy.querySelector(`.${cls} .to-held-now`)!.textContent;
     // The theme alone: the language is in the link, not on the device.
@@ -312,11 +307,9 @@ test('the language is never among what the device holds: chosen, it counts no pr
 });
 
 test("What this device holds names the browser's history: not ours to clear, every document opened here", async () => {
-  const shell = await mount('');
-  shell.querySelector<HTMLButtonElement>('.to-burger')!.click();
-  await until(() => !!shell.querySelector('.to-drawer-privacy'));
-  shell.querySelector<HTMLButtonElement>('.to-drawer-privacy')!.click();
-  const privacy = shell.querySelector<ToPrivacy>('to-drawer to-privacy')!;
+  await mount('');
+  // The Privacy dialog alone (the menu no longer opens it: Paul, 2026-10-11), as a page without a document draws it.
+  const privacy = await privacyAlone();
   await until(() => !!privacy.querySelector('.to-held'));
   const row = privacy.querySelector('.to-held-history')!;
   expect(row.querySelector('b')!.textContent).toBe('Your browser’s history');
@@ -374,11 +367,9 @@ test('signing is gone (Paul, 2026-10-11): the state beside the title is a passwo
   expect(protect.querySelector('.to-sign, .to-sign-name, .to-unsign')).toBeNull();
   expect(protect.textContent).not.toMatch(/sign/i);
   // The menu's Privacy dialog: what the device holds, and no key among it.
-  const home = await mount('');
-  home.querySelector<HTMLButtonElement>('.to-burger')!.click();
-  await until(() => !!home.querySelector('.to-drawer-privacy'));
-  home.querySelector<HTMLButtonElement>('.to-drawer-privacy')!.click();
-  const privacy = home.querySelector<ToPrivacy>('to-drawer to-privacy')!;
+  await mount('');
+  // The Privacy dialog alone (the menu no longer opens it: Paul, 2026-10-11), as a page without a document draws it.
+  const privacy = await privacyAlone();
   await until(() => !!privacy.querySelector('.to-held'));
   expect(privacy.querySelector('.to-privacy-key, .to-held-key, .to-held-known, .to-zip-key')).toBeNull();
   expect(privacy.textContent).not.toMatch(/sign/i);

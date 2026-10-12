@@ -29,7 +29,7 @@ plan for this, before it was built, is [history/translation-plan.md](history/tra
 ## Checks
 
 - **The glossary** (`test/i18n-glossary.test.ts`, `test/glossary.ts`): each product term (the app names, Share,
-  Saved and Private, link, short link, Display Link, template, slide…) is said one way in each language. A term
+  Save in browser, link, short link, Display Link, template, slide…) is said one way in each language. A term
   with two words for it, or a short label that says it another way, fails, naming the term and the keys. Words
   are matched by stem in Latin and Cyrillic, Hindi and Bengali (counted in letters as a reader sees them), by the
   first syllable block or two in Korean (a particle comes off), by a pair of characters in Chinese and Japanese,
@@ -54,7 +54,7 @@ theirs among their own.
 A language chosen in the menu goes into the link, as `?lang=ht` after the document (`#/?lang=ht` on the home
 page), so every link the page makes from then on opens in it: the editing link, the Display Link, a deck's show
 link, the QR code. Choosing the browser's language takes it out. Nothing is written to the device for the
-language, under Private or Saved (Paul, 2026-10-11: "Why are we writing language at all instead of encoding the
+language, Save in browser on or off (Paul, 2026-10-11: "Why are we writing language at all instead of encoding the
 parameter in the link?"). The API's `link(app, text, { lang })` and the command line's `--lang` make a link that
 opens in a language.
 

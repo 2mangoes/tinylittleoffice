@@ -9,7 +9,7 @@
  * - the bars (bar.ts `cmdTool`), the menus (`menuOf`), the context bars and the selection bubble (`entryOf`);
  * - the keys: each scope's element answers its own keydown with `runKey(e, its commands, its context)`, inner first
  *   (the words inside an app inside the page), and a key an inner scope took is not an outer one's;
- * - the shortcuts dialog and the command palette (kit/palette.ts), which read the registry as the page runs;
+ * - the shortcuts dialog and the drawer's search for anything (kit/drawer.ts), which read the registry as the page runs;
  * - docs/editing.md's tables and the skill's list of commands (scripts/commands.ts, `npm run commands`);
  * - the graph lints (test/commands.test.ts): no key bound twice in one chain of scopes unless allowed, every bar
  *   command reachable by its keys or the bar's arrows, every label a string of en.ts, every command run by a test.
@@ -17,9 +17,9 @@
  * A command's words are a key of en.ts, put through t() when drawn (a function of the context only where they say what
  * is in hand), and a scope declares its commands through its maker (`commandsOf`), terse, since an app's load with it.
  * Rows that are data rather than commands (themes, inks, a new document of each app) are `data: true`: drawn and found
- * by the palette, left out of the generated tables. Menus whose rows are the document's data and not commands stay
- * hand-built and are not to be moved here: the sheet's column kinds and formula functions, the deck's slide-document
- * menu, the outline's line menu, the calendar's date and time-zone dialogs, and themes and inks wherever they are
+ * by the drawer's search, left out of the generated tables. Menus whose rows are the document's data and not commands
+ * stay hand-built and are not to be moved here: the sheet's column kinds and formula functions, the deck's
+ * slide-document menu, the outline's line menu, the calendar's date and time-zone dialogs, and themes and inks wherever they are
  * not rows of a menu here already.
  *
  * Keys are written "Mod+Alt+Shift+Key" (Mod is ⌘ on Apple devices, Ctrl elsewhere), alternatives joined by " / ";
@@ -57,7 +57,7 @@ export interface Command<C = any> {
    */
   at?: string;
   where: Where[];
-  /** In force: drawn, offered by the palette, answered by its keys. Absent: always. */
+  /** In force: drawn, offered by the drawer's search, answered by its keys. Absent: always. */
   when?: (c: C) => boolean;
   /** Drawn but not to be done now (dimmed; its keys go on to whatever else answers them). */
   disabled?: (c: C) => boolean;
@@ -75,7 +75,7 @@ export interface Command<C = any> {
   swatch?: (c?: C) => string;
   /** The heading a menu item sits under (Insert ▾'s "A new document"), through t(). */
   heading?: Words<C>;
-  /** A row of data (a theme, an ink, a new document of each app), not a command a person learns: drawn and offered by the palette, but left out of the generated tables. */
+  /** A row of data (a theme, an ink, a new document of each app), not a command a person learns: drawn and offered by the drawer's search, but left out of the generated tables. */
   data?: boolean;
   /** Needs nothing in hand: shown in the drawer's This document too, so a phone reaches it while the bar is away (reading). */
   document?: boolean;

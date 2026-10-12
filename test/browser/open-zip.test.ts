@@ -3,7 +3,7 @@
 // them or open one; one document opens; and Download everything, then the zip opened on an empty device, gives the
 // same library.
 import { test, expect, afterEach, vi } from 'vitest';
-import { mount, said, tick, until } from './helpers.ts';
+import { mount, privacyAlone, said, tick, until } from './helpers.ts';
 import { encodeDoc } from '../../src/kit/codec.ts';
 import { keep, library, forgetAll } from '../../src/kit/library.ts';
 import { setKeeping } from '../../src/kit/store.ts';
@@ -60,10 +60,8 @@ test('Download everything, then the zip opened on an empty device: the same libr
   keep({ id: 'd', app: 'outline', title: 'Errands', hash: `#/v1/outline/${encodeDoc('---\ntitle: Errands\n---\n- [ ] Milk\n')}`, at: now - 3 });
   const before = shape();
   let shell = await mount('');
-  shell.querySelector<HTMLButtonElement>('.to-burger')!.click();
-  await until(() => !!shell.querySelector('.to-drawer-privacy'));
-  shell.querySelector<HTMLButtonElement>('.to-drawer-privacy')!.click();
-  const privacy = shell.querySelector('to-drawer to-privacy')!;
+  // The Privacy dialog alone (the menu no longer opens it: Paul, 2026-10-11), as a page without a document draws it.
+  const privacy = await privacyAlone();
   await until(() => !!privacy.querySelector('.to-download-all'));
   let file: File | null = null;
   await saved(async (files) => {
@@ -121,7 +119,7 @@ test('under Private a zip lists its documents by app and name: Open the first, a
   await openFromDrawer(document.querySelector<ToShell>('to-shell')!, zipFile(docs));
   await until(() => !!dialog()?.dialog?.open);
   dialog().querySelector<HTMLButtonElement>('.to-zip-keep')!.click();
-  await until(() => toast() === 'Saved on this device from now on: 3 documents kept');
+  await until(() => toast() === 'Saving in this browser: 3 documents kept');
   expect(keeping()).toBe(true);
   expect(library().map((k) => [k.app, k.title])).toEqual([
     ['write', 'Plan'],

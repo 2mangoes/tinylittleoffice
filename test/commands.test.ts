@@ -40,7 +40,7 @@ describe('the registry is whole', () => {
     const orphans = all.flatMap((c) => c.where.filter((w) => w.startsWith('menu:') && !menus.has(`${c.scope}:${w.slice(5)}`)).map((w) => `${c.id} in ${w}`));
     expect(orphans).toStrictEqual([]);
   });
-  test('the size of everything is three commands of the page, found by the palette, and none takes a key: Ctrl+=, Ctrl+- and Ctrl+0 are the browser’s own zoom', () => {
+  test('the size of everything is three commands of the page, found by the drawer’s search, and none takes a key: Ctrl+=, Ctrl+- and Ctrl+0 are the browser’s own zoom', () => {
     const size = all.filter((c) => ['kit.larger', 'kit.smaller', 'kit.normal-size'].includes(c.id));
     expect(size.map((c) => labelOf(c))).toStrictEqual(['Everything larger', 'Everything smaller', 'Normal size']);
     expect(size.filter((c) => c.keys).map((c) => c.id)).toStrictEqual([]);

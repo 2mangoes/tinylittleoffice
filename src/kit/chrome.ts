@@ -15,7 +15,7 @@
  * editing"): `indoc` says something in the document has the focus from the person's own tap or key (words, a cell, a
  * canvas, a chosen row, the bar itself; not the focus a document opens with), and kit.css slides the bar under the column's foot while it is not set (reading), with the glide; an editor whose keys
  * are the document says `data-bar="always"` (the Calculator). What of the bar needs nothing in hand is a row of the
- * drawer's This document too (kit/drawer.ts). At the bar's end is the command palette's button (kit/palette.ts).
+ * drawer's This document too (kit/drawer.ts).
  *
  * Paul, 2026-10-10: "when editing, the top nav vanishes except for the hamburger. The secondary nav is now aligned
  * bottom." Under a coarse pointer, while a box has the focus (a `<to-text>`, a field in an app, a page in a frame)
@@ -48,7 +48,7 @@
  * 2026-10-10, "Now the title has room to breathe"); `main` (the column's content) with its
  * `mainClass`, and `barred` when it holds an editor with a bar; or `plain`, the Display Link's line (the title and
  * Edit) or the embed's (the title and Open in Tiny Little Office), with no menu button and no bar. It speaks back by
- * events: `to-display-text` (the Display Link's Text or Pages), `to-drawer-open` (the menu button), `to-palette-open` (the command palette's button, at the bar's end), `to-share-open` (the meter),
+ * events: `to-display-text` (the Display Link's Text or Pages), `to-drawer-open` (the menu button), `to-share-open` (the meter),
  * `to-retitle` (detail: the name typed), `to-copy-new`, `to-arrival-close`, `to-other-close`, `to-copies-close` (the
  * Display Link's line that says a link is a copy, `plain.copies`).
  */
@@ -61,8 +61,7 @@ import { t } from './i18n.ts';
 import { ago, type Kept } from './library.ts';
 import { expiresSentence, SHORT_LINK_MAX, timeLeft } from './short.ts';
 import { pinWindow, revealCaret } from './scroll.ts';
-import { BAR_HERE, cmdTool } from './bar.ts';
-import { PALETTE } from './keys.ts';
+import { BAR_HERE } from './bar.ts';
 
 /** The document the header names. */
 export interface DocHead {
@@ -101,15 +100,13 @@ const GLIDE_MS = 260;
 const ASIDE = 'to-bar, to-context, [popover], dialog, to-dialog, to-link-pop, to-complete';
 
 /**
- * What responsive.css slides away under a finger, by its own selectors: the app's bar and the palette's button while the
+ * What responsive.css slides away under a finger, by its own selectors: the app's bar while the
  * person reads (no `indoc`), and under a docked context row. What is away is inert as well, out of Tab's order and a
  * screen reader's swipes, set wherever those flags change (stow), so the look and the flag change together.
  */
 const AWAY = [
   "to-chrome:not([indoc]) .to-column.barred > main > .to-editor:not([data-bar='always']) to-bar:not(:is(dialog, [popover], .to-dialog, .deck-show) *)",
-  "to-chrome:not([indoc]) .to-column.barred:not(:has(> main > .to-editor[data-bar='always'])) > .to-palette-btn",
   ':root[data-context-row] .to-column.barred > main > .to-editor to-bar:not(:is(dialog, [popover], .to-dialog, .deck-show) *)',
-  ':root[data-context-row] .to-column.barred > .to-palette-btn',
 ].join(', ');
 const COARSE = '(pointer: coarse)';
 
@@ -348,7 +345,7 @@ export class ToChrome extends LitElement {
   /** What is slid away (AWAY) is inert; what is back is not. */
   private stow = () => {
     const finger = matchMedia(COARSE).matches;
-    for (const el of document.querySelectorAll<HTMLElement>('to-bar, .to-palette-btn')) {
+    for (const el of document.querySelectorAll<HTMLElement>('to-bar')) {
       const away = finger && el.matches(AWAY);
       if (el.inert !== away) el.inert = away;
     }
@@ -475,10 +472,8 @@ export class ToChrome extends LitElement {
     // The menu button is a hamburger (Paul, 2026-10-10: "Make the hamburger a hamburger"); the mark is the drawer's.
     const burger = html`<button type="button" class="to-btn to-tool to-burger" aria-label=${t('Menu')} title=${t('Tiny Little Office menu')} aria-haspopup="dialog" @click=${() => this.say('to-drawer-open')}>${icon(UI.menu, 24)}</button>`;
     const head = html`<header class="to-header ${this.titling ? 'titling' : ''}" aria-label=${t('Tiny Little Office')} @focusin=${this.openTitle} @focusout=${() => (this.titling = false)} @keydown=${this.titleKey}>${this.doc ? this.renderDoc(this.doc) : html`<a class="to-brand" href="#/">${t('Tiny Little Office')}</a>`}</header>`;
-    // The command palette's button at the bar's end (kit/palette.ts): the kit's, in the bar's row, after whatever the app's bar holds.
-    const palette = this.barred ? cmdTool(PALETTE, { palette: () => this.say('to-palette-open') }, { cls: 'to-palette-btn' }) : nothing;
     return html`${burger}${head}${this.renderArrival()}${this.renderOther()}<div class="to-column ${this.barred ? 'barred' : ''}">
-      <main class=${this.mainClass} tabindex="-1" aria-label=${this.label || nothing}>${this.main}</main>${palette}
+      <main class=${this.mainClass} tabindex="-1" aria-label=${this.label || nothing}>${this.main}</main>
     </div>`;
   }
 }

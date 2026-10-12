@@ -156,8 +156,8 @@ in the idea's place, the pull request template three lines, CI running every che
 
 *Struck, 2026-10-11.* The sentence and the paragraph that stood here, the README's first draft, said as absolutes
 that nothing was kept and that we never saw a word anyone wrote. Neither is true as said (Paul: "Saying we never
-save anything is wrong; we should say that's the default"). Private is the default, and keeps nothing on the
-device and nothing on any server; Saved is a choice, and keeps documents and short links on the device, never on
+save anything is wrong; we should say that's the default"). Save in browser is off by default, and then nothing is
+kept on the device and nothing on any server; turning it on is a choice, and keeps documents and short links on the device, never on
 a server; a short link is the one thing a server holds, the document encrypted with a key the server never sees,
 until it expires. No document ever reaches us otherwise.
 

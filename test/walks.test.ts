@@ -13,7 +13,7 @@ const all = allCommands();
 function states(family: string): Model[] {
   const out: Model[] = [];
   for (const app of FAMILIES[family])
-    for (const open of [null, 'drawer', 'dialog', 'menu', 'context', 'palette'] as Open[])
+    for (const open of [null, 'drawer', 'dialog', 'menu', 'context'] as Open[])
       for (const mode of ['editing', 'presenting'] as const)
         for (const size of ['phone', 'desktop'] as const) out.push({ app, home: app, mode, open, focusWas: null, scrolled: false, size, keyboard: false });
   return out;

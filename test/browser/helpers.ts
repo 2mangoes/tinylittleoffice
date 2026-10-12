@@ -4,6 +4,7 @@ import '../../src/styles.css';
 import './fonts.ts';
 import '../../src/kit/shell.ts';
 import type { ToShell } from '../../src/kit/shell.ts';
+import type { ToPrivacy } from '../../src/kit/privacy-dialog.ts';
 import { applySize } from '../../src/kit/zoom.ts';
 
 // Every test is at the size of everything the shell draws (kit/zoom.ts: the normal size is BASE, 1.3), an editor
@@ -65,3 +66,11 @@ export async function pinch(at: Element, a: [number, number], b: [number, number
 
 /** What the last toast said to a screen reader: the one region holding words, in the open dialog or the page (kit/toast.ts). */
 export const said = () => [...document.querySelectorAll('.to-said')].map((r) => r.textContent ?? '').find(Boolean) ?? '';
+
+/** The Privacy dialog without a document (what this device holds, Download everything), drawn alone and opened. */
+export async function privacyAlone(): Promise<ToPrivacy> {
+  const privacy = document.body.appendChild(document.createElement('to-privacy') as ToPrivacy);
+  await privacy.updateComplete;
+  await privacy.show();
+  return privacy;
+}

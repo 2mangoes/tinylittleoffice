@@ -177,9 +177,7 @@ test('Mod+/ and the menu open the keyboard shortcuts, read from the command regi
   // The Word Processor's four.
   const write = await mount(`#/v1/write`);
   await until(() => !!write.querySelector('to-write-editor'));
-  write.querySelector<HTMLButtonElement>('.to-burger')!.click();
-  await until(() => !!write.querySelector('.to-drawer-keys'));
-  write.querySelector<HTMLButtonElement>('.to-drawer-keys')!.click();
+  await shortcutsFound(write);
   const writeDialog = () => write.querySelector<HTMLDialogElement>('to-dialog.to-keys-dialog dialog')!;
   await until(() => writeDialog().open);
   expect(writeDialog().querySelector('.to-keys caption')!.textContent).toBe('Word Processor');
@@ -192,20 +190,29 @@ test('Mod+/ and the menu open the keyboard shortcuts, read from the command regi
     expect(rows(writeDialog())).toContainEqual(row);
   writeDialog().close();
   await until(() => !writeDialog().open);
-  // On the home page, from the menu.
+  // On the home page, found by the menu's search.
   const home = await mount('');
-  home.querySelector<HTMLButtonElement>('.to-burger')!.click();
-  await until(() => !!home.querySelector('.to-drawer-keys'));
-  home.querySelector<HTMLButtonElement>('.to-drawer-keys')!.click();
+  await shortcutsFound(home);
   await until(() => home.querySelector<HTMLDialogElement>('to-dialog.to-keys-dialog dialog')!.open);
   expect([...home.querySelectorAll('.to-keys-dialog .to-keys caption')].map((c) => c.textContent)).toEqual(['Words', 'This page']);
 });
 
-test('Mod+S keeps the document under Saved, and says why not under Private', async () => {
+/** The shortcuts dialog, as the menu's search finds it: the drawer opened, 'shortcuts' typed, its row chosen. */
+async function shortcutsFound(shell: HTMLElement) {
+  shell.querySelector<HTMLButtonElement>('.to-burger')!.click();
+  await until(() => !!shell.querySelector('dialog.to-drawer[open] .to-find'));
+  const find = shell.querySelector<HTMLInputElement>('dialog.to-drawer .to-find')!;
+  find.value = 'shortcuts';
+  find.dispatchEvent(new Event('input', { bubbles: true }));
+  await until(() => !!shell.querySelector('.to-found-cmd'));
+  shell.querySelector<HTMLButtonElement>('.to-found-cmd')!.click();
+}
+
+test('Mod+S keeps the document under Save in browser, and says why not while it is off', async () => {
   const shell = await mount(`#/v1/write/${NOTES}`);
   await until(() => !!shell.querySelector('to-write-editor'));
   expect(key('s')).toBe(false);
-  await until(() => toastSays(shell).startsWith('Private: this site keeps no documents'));
+  await until(() => toastSays(shell).startsWith('Save in browser is off'));
   await saved(async () => {
     const again = await mount(`#/v1/write/${NOTES}`);
     await until(() => !!again.querySelector('to-write-editor'));
@@ -237,25 +244,26 @@ test('the skip link is the first thing a Tab reaches, hidden until then, and tak
   expect(shell.querySelector('to-write-editor to-text')!.contains(document.activeElement) || document.activeElement?.localName === 'to-text').toBe(true);
 });
 
-test('the size of everything is first under the menu’s head on the home page, and the palette finds it by “larger” and “size”, with no key of its own; a new visit keeps it, Private or not', async () => {
+test('the size of everything is under the menu’s Save in browser on the home page, and the search finds it by “larger” and “size”, with no key of its own; a new visit keeps it, saved or not', async () => {
   const shell = await mount('');
   shell.querySelector<HTMLButtonElement>('.to-burger')!.click();
-  await until(() => shell.querySelector<HTMLDialogElement>('dialog.to-drawer')!.open);
-  // On the home page straight under the head, before anything else in the menu.
-  expect(shell.querySelector('.to-drawer-head')!.nextElementSibling!.classList.contains('to-size')).toBe(true);
+  const drawer = () => shell.querySelector<HTMLDialogElement>('dialog.to-drawer')!;
+  await until(() => drawer().open);
+  // On the home page under the language and Save in browser, before anything else in the menu.
+  expect(shell.querySelector('.to-drawer-head')!.nextElementSibling!.classList.contains('to-drawer-save')).toBe(true);
+  expect(shell.querySelector('.to-drawer-save')!.nextElementSibling!.classList.contains('to-size')).toBe(true);
   expect(shell.querySelector('.to-size-more')!.getAttribute('aria-label')).toBe('Everything larger');
-  shell.querySelector<HTMLDialogElement>('dialog.to-drawer')!.close();
-  const pal = () => shell.querySelector('to-palette')!;
-  const items = () => [...pal().querySelectorAll('.to-palette-item')].map((i) => i.querySelector('.to-palette-words')!.textContent!.trim());
+  drawer().close();
+  const items = () => [...drawer().querySelectorAll('.to-found-cmd')].map((i) => i.querySelector('.to-found-words')!.textContent!.trim());
   const chosen = async (words: string, label: string) => {
-    void shell.showPalette();
-    await until(() => !!pal().querySelector('dialog[open]'));
-    await userEvent.type(pal().querySelector<HTMLInputElement>('.to-palette-find')!, words);
+    void shell.findAnything();
+    await until(() => drawer().open);
+    await userEvent.type(drawer().querySelector<HTMLInputElement>('.to-find')!, words);
     await until(() => items().includes(label));
-    const row = [...pal().querySelectorAll('.to-palette-item')].find((i) => i.textContent!.includes(label))!;
+    const row = [...drawer().querySelectorAll('.to-found-cmd')].find((i) => i.textContent!.includes(label))!;
     expect(row.querySelector('kbd')).toBeNull();
     (row as HTMLElement).click();
-    await until(() => !pal().querySelector('dialog[open]'));
+    await until(() => !drawer().open);
     // The dialog's close event comes a task later; the next opening waits for it.
     await tick(50);
   };

@@ -23,7 +23,7 @@ test('on a phone Undo is on screen at the bar’s end, and a tap on it undoes wh
   expect(box.x).toBeGreaterThanOrEqual(0);
   expect(box.x + box.width).toBeLessThanOrEqual(390);
   expect(box.y).toBeGreaterThanOrEqual(bar.y - 1);
-  // It is the thing under its own middle: not covered by the palette's button or the tools passing under it.
+  // It is the thing under its own middle: not covered by the tools passing under it.
   expect(await page.evaluate(([x, y]) => !!document.elementFromPoint(x, y)?.closest('.cmd-kit-undo'), [box.x + box.width / 2, box.y + box.height / 2])).toBe(true);
   await undo.tap();
   await expect.poll(value).not.toContain('Pinned');

@@ -101,9 +101,9 @@ const tip = (o: BtnOpts) => (o.keys && chords() ? `${o.hint ?? o.label} (${keysT
 const cls = (o: BtnOpts) => `${o.cls ?? ''}${o.pinned ? ' to-pin' : ''}`;
 
 /**
- * The keys written at a row's end (a menu's item, the drawer's, the palette's), where there is a keyboard to press them
- * on (commands.ts chords); hidden from a screen reader, which hears them from the control's aria-keyshortcuts instead,
- * so they are never part of its name.
+ * The keys written at a row's end (a menu's item, the drawer's, a command its search finds), where there is a keyboard
+ * to press them on (commands.ts chords); hidden from a screen reader, which hears them from the control's
+ * aria-keyshortcuts instead, so they are never part of its name.
  */
 export const keysKbd = (keys: string | undefined): TemplateResult | typeof nothing => (keys && chords() ? html`<kbd class="to-menu-keys" aria-hidden="true">${keysText(keys)}</kbd>` : nothing);
 /** The keys as the control's aria-keyshortcuts (none: no attribute). */

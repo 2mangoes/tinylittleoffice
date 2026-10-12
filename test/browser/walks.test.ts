@@ -2,7 +2,7 @@
 // mid-screen, a dialog cut by the edge, the keyboard taking focus) are invariants broken after some sequence of
 // actions; fast-check's model-based testing walks thousands of sequences. The model and its steps are
 // test/walks-model.ts; here each step is done to the real page (a registry command in force, a key, a word, a tap, a
-// scroll, the drawer, a menu, Share, the templates, the palette, a pinch, a phone's keyboard, another app and back),
+// scroll, the drawer, a menu, Share, the templates, the drawer's search, a pinch, a phone's keyboard, another app and back),
 // and after every one the invariants are asserted, each failure naming the steps that led to it:
 //
 //   focus      the focus is inside whatever is open, else inside the document or the chrome; never under aria-hidden
@@ -12,7 +12,7 @@
 //   window     the window never scrolls, nor the chrome round the column (the column does)
 //   link       the address, flushed, is the document the shell holds, which the kernel writes back as it reads it
 //   bar        the app's bar, where it is shown, is one row inside the visible window
-//   undo       on a phone, wherever the bar is shown, its Undo is inside the visible window, beside the palette's button
+//   undo       on a phone, wherever the bar is shown, its Undo is inside the visible window
 //   hidden     nothing faded away (opacity 0, no pointer) or slid out of the visible window can be tabbed or swiped to:
 //              what is away is inert (the phone's bar while reading, kit/chrome.ts); a thing the column has scrolled
 //              away (a map's pin above the fold) is not away
@@ -140,8 +140,7 @@ function describeEl(el: Element | null): string {
 /** The open things, in the order they opened (the new ones after the old). */
 function openNow(prev: Layer[]): Layer[] {
   const open = [...document.querySelectorAll('dialog[open]'), ...[...document.querySelectorAll('[popover]')].filter((p) => p.matches(':popover-open') && !p.matches('.to-pinch-pill'))];
-  const kind = (el: Element): Layer['kind'] =>
-    el.matches('dialog.to-drawer') ? 'drawer' : el.matches('dialog.to-palette') ? 'palette' : el.matches('dialog') ? 'dialog' : el.matches('.to-context') ? 'context' : 'menu';
+  const kind = (el: Element): Layer['kind'] => (el.matches('dialog.to-drawer') ? 'drawer' : el.matches('dialog') ? 'dialog' : el.matches('.to-context') ? 'context' : 'menu');
   const kept = prev.filter((l) => open.includes(l.el));
   return [...kept, ...open.filter((el) => !kept.some((l) => l.el === el)).map((el) => ({ el, kind: kind(el) }))];
 }
@@ -378,11 +377,10 @@ async function act(s: Step, r: Real): Promise<string> {
       await userEvent.click(b, { force: true } as never);
       return '';
     }
-    case 'palette': {
-      const b = r.shell.querySelector<HTMLElement>('.to-palette-btn');
-      if (tappable(b)) await userEvent.click(b, { force: true } as never);
-      else if (r.size === 'desktop') await userEvent.keyboard('{Control>}k{/Control}');
-      else return '(its button is away)';
+    case 'search': {
+      // The drawer's search by its key (a phone's way to it is the menu button: the drawer step).
+      if (r.size !== 'desktop') return '(a key: no keyboard)';
+      await userEvent.keyboard('{Control>}k{/Control}');
       return '';
     }
     case 'pinch':
@@ -446,14 +444,13 @@ function clipped(el: Element, rect: DOMRect, cache: Map<Element, string>): { lef
   return { left, right };
 }
 
-/** Undo, in a phone's bar that is shown: inside the visible window, whatever the bar is scrolled to, and not under the palette's button. */
+/** Undo, in a phone's bar that is shown: inside the visible window, whatever the bar is scrolled to. */
 function undoOnScreen(r: Real, bar: HTMLElement, h: number) {
   const undo = bar.querySelector<HTMLElement>('button.cmd-kit-undo');
   if (!undo) return broke(r, 'undo', `the bar has no Undo`);
   const u = undo.getBoundingClientRect();
   const view = bar.getBoundingClientRect();
-  const palette = r.shell.querySelector<HTMLElement>('.to-column.barred > .to-palette-btn')?.getBoundingClientRect();
-  const end = Math.min(innerWidth, view.right, palette && palette.width ? palette.left : Infinity);
+  const end = Math.min(innerWidth, view.right);
   if (u.left < Math.max(0, view.left) - 1 || u.right > end + 1 || u.top < -1 || u.bottom > h + 1)
     broke(
       r,
@@ -548,7 +545,7 @@ function check(r: Real, s: Step, before: Layer[]) {
       const onTapped = !!hit && !!at && (hit.contains(at) || at.contains(hit) || hit.closest('td, th, li, [role=gridcell], [role=option]')?.contains(at) === true);
       // Or it never held the focus (a popover beside the focused button) and the focus stayed where it was.
       const stayed = !!focusBefore && !last.el.contains(focusBefore) && at === focusBefore;
-      // Or a command's dialog, opened from a button (the bar's, a menu's, the palette's), gives the focus to the words it acts on.
+      // Or a command's dialog, opened from a button (the bar's, a menu's, the drawer's), gives the focus to the words it acts on.
       const onWords = !!was?.matches('button, [role^=menuitem]') && !!at?.closest('to-text') && !!editorOf(r)?.contains(at);
       if (was && was !== document.body && was.isConnected && (was as HTMLElement).offsetParent !== null && at !== was && !onTapped && !onWords && !stayed)
         broke(r, 'back', `${describeEl(last.el)} closed and the focus is on ${describeEl(at)}, not back on ${describeEl(was)} where it was when it opened`);
@@ -692,7 +689,7 @@ function stepsOf(family: string): fc.Arbitrary<Walk>[] {
     fc.nat(20).map((nth) => new Walk({ kind: 'menu', nth })),
     fc.constant(new Walk({ kind: 'share' })),
     fc.constant(new Walk({ kind: 'templates' })),
-    fc.constant(new Walk({ kind: 'palette' })),
+    fc.constant(new Walk({ kind: 'search' })),
     fc.boolean().map((wider) => new Walk({ kind: 'pinch', wider })),
     fc.boolean().map((up) => new Walk({ kind: 'keyboard', up })),
     fc.constantFrom(...others).map((to) => new Walk({ kind: 'route', to })),

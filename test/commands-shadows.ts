@@ -1,11 +1,11 @@
 // The keys one press reaches two commands with, allowed, each with why (test/commands.test.ts fails on any other):
-// the words' commands inside an app's, an app's own at one place in turn, and the page's palette under Link.
+// the words' commands inside an app's, an app's own at one place in turn, and the page's search (Mod+K) under Link.
 
 /** In a one-line box (an outline's row, a task, a stop, a headline) the words' Tab, Alt+Up/Down and Mod+Enter are off (they act on the items of a list in a document or a slide's words), so the row's own have the key; in a box of several lines the words' have it, and the row's let it go by. */
 const LINE = 'in a one-line box the words leave Tab, Alt+Up/Down and Mod+Enter to the row they are in';
 
 export const SHADOWS: Record<string, string> = {
-  'kit.palette ~ text.link': 'in words Mod+K is Link (Docs’ key, and every editor’s); the palette is Mod+K everywhere else, and the button at the bar’s end',
+  'kit.search ~ text.link': 'in words Mod+K is Link (Docs’ key, and every editor’s); the drawer’s search for anything is Mod+K everywhere else, and the menu button opens it',
   'outline.indent ~ text.indent': LINE,
   'outline.outdent ~ text.outdent': LINE,
   'cal.task.nest ~ text.indent': LINE,

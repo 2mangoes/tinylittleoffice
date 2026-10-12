@@ -153,7 +153,7 @@ async function offer(docs: InZip[]) {
     await setPrivate(false);
     keepDocuments(docs.map(kept));
     d.close();
-    toast(t('Saved on this device from now on: {n|# document kept|# documents kept}', { n: docs.length }));
+    toast(t('Saving in this browser: {n|# document kept|# documents kept}', { n: docs.length }));
   };
   const open = (hash: string) => {
     d.close();

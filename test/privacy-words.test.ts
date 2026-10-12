@@ -19,11 +19,11 @@ test("no string promises what the browser's history makes untrue", () => {
 
 test('the words that say what is true are there', () => {
   const keys = Object.keys(en);
-  expect(keys).toContain('This site keeps nothing on this device. Your browser’s history still holds every link opened here, and a link is the document: use a private window, or give it a password.');
   expect(keys).toContain('Your browser’s history');
   expect(keys).toContain('Every document opened here, in full, unless it has a password.');
   // A short link is not promised to be recallable: it cannot be (round seventeen), and the Share dialog says so.
   expect(keys).toContain('A short link cannot be changed or recalled once made; it expires on its own.');
-  expect(keys).toContain('Nothing you write leaves your browser unless you share the link. One thing asks the web by itself: a trip’s map, whose pictures come from OpenStreetMap while it is shown.');
-  expect(keys).toContain('Turn on Saved and keep it here');
+  // The menu's switch says what it does both ways (Paul, 2026-10-11), and About's paragraphs are cut until he writes them.
+  expect(keys).toContain('Turn off to remove all files and settings.');
+  expect(keys).toContain('Turn on Save in browser and keep it here');
 });

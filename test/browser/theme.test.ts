@@ -13,7 +13,7 @@ test('the Theme select in the drawer switches data-theme', async () => {
   shell.querySelector<HTMLButtonElement>('.to-burger')!.click();
   await until(() => shell.querySelector<HTMLDialogElement>('dialog.to-drawer')!.open);
   const select = [...shell.querySelectorAll<HTMLSelectElement>('.to-drawer select')].find((s) => [...s.options].some((o) => o.value === 'dark'))!;
-  expect([...select.options].map((o) => o.textContent)).toEqual(['Match the device', 'Light', 'Dark']);
+  expect([...select.options].map((o) => o.textContent)).toEqual(['Match device', 'Light', 'Dark']);
   select.value = 'dark';
   select.dispatchEvent(new Event('change', { bubbles: true }));
   expect(document.documentElement.dataset.theme).toBe('dark');

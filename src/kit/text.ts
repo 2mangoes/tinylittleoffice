@@ -1076,6 +1076,8 @@ export class ToText extends LitElement {
   private onLinkSet = (e: CustomEvent<string>) => {
     e.stopPropagation();
     this.exec('link', e.detail);
+    // An empty box set where there was no link changes nothing: the focus comes back to the words all the same (walks: Mod+K, Enter).
+    if (!this.hasFocus()) this.onLinkCancel(e);
   };
   private onLinkRemove = (e: Event) => {
     e.stopPropagation();

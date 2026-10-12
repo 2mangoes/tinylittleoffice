@@ -28,8 +28,8 @@ Two consequences follow, and the rest of this page is mostly their detail:
   names the commit it was built from in `/version.json`, and `npm run verify-deploy` builds that commit and
   compares every file (docs/transparency.md §1 item 3). Short of someone checking, this is trust in the operator.
 
-What is kept, and where: Private is the default, and keeps nothing on the device (but two preferences that say
-nothing of a document, below) and nothing on any server; the link is the document. Saved is a choice, and keeps documents and short links on the device, in the browser's own
+What is kept, and where: Save in browser is off by default, and then nothing is kept on the device (but two preferences that say
+nothing of a document, below) and nothing on any server; the link is the document. Turning it on is a choice, and keeps documents and short links on the device, in the browser's own
 storage, never on a server. A short link is the one thing a server holds: the document, encrypted with a key the
 server never sees, until it expires.
 
@@ -73,10 +73,10 @@ whether the place is honest.
 pictures from the web and no embeds, so it cannot hold a tracking pixel. Markdown's picture line reads as a
 link, which asks before it opens (above).
 
-**A lost phone with Saved on.** Private is the default and writes nothing to the device but two preferences
+**A lost phone with Save in browser on.** Off is the default and writes nothing to the device but two preferences
 that say nothing of a document: the size of everything (`tinyoffice.size`) and the theme (`to-theme`), both
 cleared by Forget everything. Nothing is written to the device for the language, in either state: the link
-carries it. With Saved on, the
+carries it. With Save in browser on, the
 device keeps the preferences, the documents opened there (`src/kit/library.ts`),
 the short links made there. A document under a password is kept as its
 ciphertext with no title and no first words, so the library does not give away even its name. Nothing else
@@ -100,7 +100,7 @@ clipboard manager, a note-taking app: each holds the document if it holds the li
 answer, and only if the password is not sent the same way.
 
 **The browser's own history and sync.** The address bar holds the document, so the browser's history does,
-and so does its sync service if that is on. Private does not change what the browser itself records.
+and so does its sync service if that is on. Save in browser, on or off, does not change what the browser itself records.
 
 **A compromised device, browser or extension.** An extension allowed to read the site's pages reads the
 document as it is shown, and the password as it is typed. So does malware on
@@ -127,9 +127,9 @@ its page decrypts only a link to Tiny Little Office and goes nowhere else. It ca
 other ciphertext, so someone could keep other bytes there; the limits are what bound it, and many addresses
 make many hundreds.
 
-**A lost phone, in full.** With Saved on, a person holding the unlocked phone can read every document in the
+**A lost phone, in full.** With Save in browser on, a person holding the unlocked phone can read every document in the
 library that has no password, and open the short links made there while they last. There is no remote wipe.
-Turning Saved off (from the phone) removes all of it.
+Turning Save in browser off (from the phone) removes all of it.
 
 **The map's provider.** The map's tiles and place search go to OpenStreetMap directly while a map is shown
 (`docs/network.md` says why). Those requests carry the reader's address to OpenStreetMap.
@@ -142,7 +142,7 @@ Turning Saved off (from the phone) removes all of it.
 |---|---|
 | The document in the fragment, not the path or a query | The host, its logs and every proxy on the way learning the document |
 | No accounts, no server storage of documents, except a short link's encrypted document, which the server cannot read and forgets when the link expires | A breach, a subpoena or a leak of stored documents: there are none to give but the ciphertext of short links not yet expired, without their keys |
-| Private by default; Saved only when switched on, and switched off erases | A shared or lost device holding what was done on it |
+| Save in browser off by default; on only when switched on, and switched off erases | A shared or lost device holding what was done on it |
 | Password: made by the app (about 116 random bits; none typed to set one), its key one HKDF-SHA-256 pass with a random salt; AES-256-GCM with a fresh IV per edit | The link's holders, and anything it passes through, reading a document they were not told the password of; alteration of a sealed document; a weak password chosen by a person |
 | A password never stored; the key held in memory for the visit, non-extractable | A device or a backup giving the password away |
 | A sealed document kept in the library with no title or first words | The library telling what a sealed document is |

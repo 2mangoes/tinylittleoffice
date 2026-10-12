@@ -6,12 +6,12 @@ import { mount, until } from './helpers.ts';
 test('an in-memory Spanish dictionary takes over the shell when chosen', async () => {
   register('es', {
     'Tiny Little Office': 'Oficinita Diminuta',
-    'Find app, template': 'Buscar app, plantilla',
+    'Find app, template, or command': 'Buscar app, plantilla o comando',
     Menu: 'Menú',
     'Word Processor': 'Procesador de textos',
     'Templates for {app}': 'Plantillas de {app}',
     Language: 'Idioma',
-    'Match the device': 'Como el dispositivo',
+    'Match device': 'Como el dispositivo',
   });
   const shell = await mount('');
   shell.querySelector<HTMLButtonElement>('.to-burger')!.click();
@@ -23,7 +23,7 @@ test('an in-memory Spanish dictionary takes over the shell when chosen', async (
   select.dispatchEvent(new Event('change', { bubbles: true }));
   await until(() => document.documentElement.lang === 'es');
   expect(document.documentElement.dir).toBe('ltr');
-  await until(() => shell.querySelector<HTMLInputElement>('.to-find')!.placeholder === 'Buscar app, plantilla');
+  await until(() => shell.querySelector<HTMLInputElement>('.to-find')!.placeholder === 'Buscar app, plantilla o comando');
   expect(shell.querySelector('.to-burger')!.getAttribute('aria-label')).toBe('Menú');
   // The name itself is said in the language (Paul, 2026-10-10).
   await until(() => shell.querySelector('.to-header .to-brand')!.textContent!.trim() === 'Oficinita Diminuta');

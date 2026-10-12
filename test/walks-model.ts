@@ -4,13 +4,13 @@
 //
 // A step is a thing a person does: a registry command in force (kit/commands.ts, through its `when`), a key, a word
 // typed, a tap outside whatever is open, the column scrolled, the drawer, a menu of the bar, Share, the templates, the
-// palette, a pinch, a phone's keyboard coming up or going, another app and back. The model says when a step may be
+// drawer's search by its key (Mod+K), a pinch, a phone's keyboard coming up or going, another app and back. The model says when a step may be
 // taken (`allowed`); the walk does it to the page and reads back what is open.
 import type { Command } from '../src/kit/commands.ts';
 
 export type Size = 'phone' | 'desktop';
-/** What is open over the document, the topmost: the menu's drawer, a modal dialog, a menu (a popover), the context bar, the palette. */
-export type Open = null | 'drawer' | 'dialog' | 'menu' | 'context' | 'palette';
+/** What is open over the document, the topmost: the menu's drawer, a modal dialog, a menu (a popover), the context bar. */
+export type Open = null | 'drawer' | 'dialog' | 'menu' | 'context';
 
 export interface Model {
   app: string;
@@ -53,7 +53,7 @@ export type Step =
   | { kind: 'menu'; nth: number }
   | { kind: 'share' }
   | { kind: 'templates' }
-  | { kind: 'palette' }
+  | { kind: 'search' }
   | { kind: 'pinch'; wider: boolean }
   | { kind: 'keyboard'; up: boolean }
   | { kind: 'route'; to: string }
@@ -97,7 +97,7 @@ export function familyCommands(all: readonly Command[], family: string): Command
  * document while presenting but its keys, and a route back only after a route away.
  */
 export function allowed(s: Step, m: Model, cmd?: Command): boolean {
-  const modal = m.open === 'drawer' || m.open === 'dialog' || m.open === 'palette';
+  const modal = m.open === 'drawer' || m.open === 'dialog';
   switch (s.kind) {
     case 'command':
       // A command of an app is the open app's; one of the page, the words or the rows is anyone's. Over a modal, none.
@@ -113,7 +113,7 @@ export function allowed(s: Step, m: Model, cmd?: Command): boolean {
     case 'drawer':
     case 'share':
     case 'templates':
-    case 'palette':
+    case 'search':
     case 'menu':
       return !modal && m.mode === 'editing';
     case 'pinch':

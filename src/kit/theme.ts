@@ -22,7 +22,7 @@ export function theme(): Theme {
   return chosen;
 }
 
-export const themeName = (th: Theme): string => (th === 'auto' ? t('Match the device') : th === 'light' ? t('Light') : t('Dark'));
+export const themeName = (th: Theme): string => (th === 'auto' ? t('Match device') : th === 'light' ? t('Light') : t('Dark'));
 
 /** The theme as it stands, on the page. */
 export function applyTheme() {

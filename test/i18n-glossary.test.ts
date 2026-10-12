@@ -34,8 +34,7 @@ export const TERMS: Term[] = [
   { term: 'Keep' },
   { term: 'Kept' },
   { term: 'Forget' },
-  { term: 'Private' },
-  { term: 'Saved' },
+  { term: 'Save in browser' },
   { term: 'password' },
   // The Calculator's keys are keys of a keyboard; an animation's key is a keyframe.
   { term: 'key', not: ['Keys', /arrow keys|add a key here|key at \{s\}|remove this key/i] },

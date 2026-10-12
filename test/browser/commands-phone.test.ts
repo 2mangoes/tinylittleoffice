@@ -10,7 +10,6 @@ import { copyData, GENERATOR } from '../../src/kit/clipboard.ts';
 import { parse } from '../../src/doc/index.ts';
 import type { ToShell } from '../../src/kit/shell.ts';
 import type { ToText } from '../../src/kit/text.ts';
-import type { ToPalette } from '../../src/kit/palette.ts';
 import type { ToLinkPop } from '../../src/kit/link-pop.ts';
 
 const coarse = async (on: boolean) => cdp().send('Emulation.setTouchEmulationEnabled', on ? { enabled: true, maxTouchPoints: 5 } : { enabled: false });
@@ -157,7 +156,6 @@ test('on a phone the Word Processor shows no bar until the words are tapped, and
   await userEvent.click(text.tx.querySelector('p')!);
   await settled();
   expect(shown(bar())).toBe(true);
-  expect(shown(shell.querySelector<HTMLElement>('.to-palette-btn')!)).toBe(true);
   // The focus gone from the document: the bar goes with it.
   text.tx.blur();
   (document.activeElement as HTMLElement | null)?.blur();
@@ -208,63 +206,73 @@ test('on a phone the drawer’s This document has the app’s own rows that need
   expect(names.some((n) => n.startsWith('Paper:'))).toBe(true);
 });
 
-const palette = () => document.querySelector<ToPalette>('to-palette')!;
-test('the command palette: Mod+K opens every command in force, typing narrows it, Enter runs the one in hand; in words Mod+K is Link, and the bar’s button opens it with the words’ commands', async () => {
+const drawer = () => document.querySelector<HTMLDialogElement>('dialog.to-drawer')!;
+test('the search for anything: Mod+K opens the drawer over every command in force, typing narrows it, Enter runs the first; in words Mod+K is Link, and the menu button finds the words’ commands', async () => {
   await page.viewport(1200, 800);
   const { shell, text } = await write();
   // From the bar (not words): Mod+K.
   const heading = shell.querySelector<HTMLButtonElement>('to-bar button[aria-label="Heading"]')!;
   heading.focus();
   heading.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', code: 'KeyK', ctrlKey: true, bubbles: true, cancelable: true }));
-  await until(() => palette().isOpen);
-  const items = () => [...palette().querySelectorAll('.to-palette-item')].map((i) => i.querySelector('.to-palette-words')!.textContent!.trim());
-  expect(items()).toContain('Undo');
-  expect(items()).toContain('Share…');
-  expect(items()).toContain('Paragraph');
-  expect(items()).not.toContain('All commands…');
+  await until(() => drawer().open);
+  const find = drawer().querySelector<HTMLInputElement>('.to-find')!;
+  await until(() => document.activeElement === find);
+  const items = () => [...drawer().querySelectorAll('.to-found-cmd')].map((i) => i.querySelector('.to-found-words')!.textContent!.trim());
+  for (const w of ['und', 'sha', 'para']) {
+    find.value = w;
+    find.dispatchEvent(new Event('input', { bubbles: true }));
+    await until(() => items().length > 0);
+  }
+  find.value = 's';
+  find.dispatchEvent(new Event('input', { bubbles: true }));
+  await until(() => items().includes('Share…'));
+  expect(items()).not.toContain('Find app, doc, template, or command');
   // Each with its keys beside it.
-  const share = [...palette().querySelectorAll('.to-palette-item')].find((i) => i.textContent!.includes('Share…'))!;
+  const share = [...drawer().querySelectorAll('.to-found-cmd')].find((i) => i.textContent!.includes('Share…'))!;
   expect(share.querySelector('kbd')!.textContent).toMatch(/S$/);
-  // Typing narrows it to the commands with a word that starts so.
-  const find = palette().querySelector<HTMLInputElement>('.to-palette-find')!;
-  expect(document.activeElement).toBe(find);
+  // Typing narrows it to the commands with a word that starts so; Enter runs the first.
+  find.value = '';
+  find.dispatchEvent(new Event('input', { bubbles: true }));
   await userEvent.type(find, 'subh');
   await until(() => items().length === 1);
   expect(items()).toStrictEqual(['Subheading']);
   await userEvent.keyboard('{Enter}');
-  await until(() => !palette().isOpen);
+  await until(() => !drawer().open);
   await until(() => !!text.tx.querySelector('h2'));
-  // In words Mod+K is Link: the link box, not the palette.
+  // In words Mod+K is Link: the link box, not the drawer.
   text.tx.focus();
   text.sel = { anchor: { block: 1, offset: 4 }, focus: { block: 1, offset: 9 } };
   await text.updateComplete;
   text.tx.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', code: 'KeyK', ctrlKey: true, bubbles: true, cancelable: true }));
   await tick(50);
-  expect(palette().isOpen).toBe(false);
+  expect(drawer().open).toBe(false);
   expect(text.querySelector<ToLinkPop>('to-link-pop')!.shown).toBe(true);
   for (const d of document.querySelectorAll<HTMLElement>('[popover]:popover-open')) d.hidePopover();
-  // The bar's end button: the palette, the words' commands in it, and one runs on the words chosen.
+  // The menu button, pressed from the words: the words' commands are found, and one runs on the words chosen.
+  text.tx.focus();
   text.sel = { anchor: { block: 1, offset: 4 }, focus: { block: 1, offset: 9 } };
   await text.updateComplete;
-  shell.querySelector<HTMLButtonElement>('.to-palette-btn')!.click();
-  await until(() => palette().isOpen);
-  expect(items()).toContain('Bold');
-  await userEvent.type(palette().querySelector<HTMLInputElement>('.to-palette-find')!, 'bold');
+  await userEvent.click(shell.querySelector<HTMLButtonElement>('.to-burger')!);
+  await until(() => drawer().open);
+  await userEvent.type(drawer().querySelector<HTMLInputElement>('.to-find')!, 'bold');
   await until(() => items()[0] === 'Bold');
-  await userEvent.keyboard('{ArrowDown}{ArrowUp}{Enter}');
-  await until(() => !palette().isOpen);
-  await until(() => !!text.tx.querySelectorAll('p')[0]?.querySelector('b') || !!text.tx.querySelector('b'));
+  await userEvent.keyboard('{Enter}');
+  await until(() => !drawer().open);
+  await until(() => !!text.tx.querySelector('b'));
   expect(text.tx.querySelector('b')!.textContent).toBe('words');
   // Escape closes it, and a word nothing starts says so.
-  shell.querySelector<HTMLButtonElement>('.to-palette-btn')!.click();
-  await until(() => palette().isOpen);
-  await userEvent.type(palette().querySelector<HTMLInputElement>('.to-palette-find')!, 'zzq');
-  await until(() => palette().querySelector('[role=status]')?.textContent === 'Nothing starts “zzq”');
+  await userEvent.click(shell.querySelector<HTMLButtonElement>('.to-burger')!);
+  await until(() => drawer().open);
+  await userEvent.type(drawer().querySelector<HTMLInputElement>('.to-find')!, 'zzq');
+  await until(() => drawer().querySelector('.to-drawer-apps .to-hint')?.textContent === 'Nothing by that name');
+  // A search box's first Escape empties it (the browser's own), the next closes the menu.
   await userEvent.keyboard('{Escape}');
-  await until(() => !palette().isOpen);
+  await until(() => drawer().querySelector<HTMLInputElement>('.to-find')!.value === '');
+  await userEvent.keyboard('{Escape}');
+  await until(() => !drawer().open);
 });
 
-test('the palette opened over a bar’s menu (the tap closes the menu) gives the focus back to the menu’s button on Escape, never to nothing (walks: grid at a desktop, seed -909624643)', async () => {
+test('Mod+K over a bar’s open menu (the menu closes) gives the focus back to the menu’s button on Escape, never to nothing (walks: grid at a desktop, seed -909624643)', async () => {
   await page.viewport(1440, 900);
   const shell = await mount(`#/v1/sheet/${encodeDoc('Item | Cost:money\n--- | ---\nRent | 1200\n')}`);
   await until(() => !!shell.querySelector('.to-editor to-bar to-menu:not([keep]) > button'));
@@ -272,10 +280,10 @@ test('the palette opened over a bar’s menu (the tap closes the menu) gives the
   const button = menu.querySelector<HTMLElement>(':scope > button')!;
   await userEvent.click(button);
   await until(() => menu.querySelector('[popover]')!.matches(':popover-open'));
-  await userEvent.click(shell.querySelector<HTMLElement>('.to-palette-btn')!);
-  await until(() => !!shell.querySelector<ToPalette>('to-palette')!.isOpen);
+  await userEvent.keyboard('{Control>}k{/Control}');
+  await until(() => drawer().open);
   await userEvent.keyboard('{Escape}');
-  await until(() => !shell.querySelector<ToPalette>('to-palette')!.isOpen);
+  await until(() => !drawer().open);
   await tick(20);
   expect(document.activeElement).toBe(button);
   await page.viewport(414, 896);

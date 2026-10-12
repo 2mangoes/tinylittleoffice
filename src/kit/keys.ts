@@ -1,17 +1,16 @@
 /**
  * The page's own commands (the registry's 'kit' scope, kit/commands.ts): undo and redo passed to the editor, find,
- * keep, share, download, print, the shortcuts, the size of everything and the command palette. The shell answers their
+ * keep, share, download, print, the shortcuts, the size of everything and the search for anything (the drawer's). The shell answers their
  * keys (pageKey, which it listens with on the window, so every scope inside has answered first); the drawer draws
- * Share, Download and Find in this document from them; every bar ends with Undo, Redo and the palette
+ * Share, Download and Find in this document from them; every bar ends with Undo and Redo
  * (DocElement.undoTools), and under a finger Undo and Redo are pinned there, outside the bar's scroll, so a phone always
  * has Undo on screen (the review of 2026-10-11).
  *
- * The keyboard shortcuts dialog (Mod+/, and Keyboard shortcuts in the menu) is the registry as it stands: the open
+ * The keyboard shortcuts dialog (Mod+/, and found by the drawer's search) is the registry as it stands: the open
  * app's commands that have keys, then the words' (kit/text-commands.ts), then the page's, each key written the way
  * this device writes it (keysText: ⌘ on a Mac, Ctrl elsewhere).
  */
 import { html, nothing, type TemplateResult } from 'lit';
-import { Command as CommandIcon } from 'lucide';
 import type { AppDef } from './app.ts';
 import { command, inScope, keyboard, keysText, labelOf, register, runKey, type Command } from './commands.ts';
 import { t } from './i18n.ts';
@@ -34,7 +33,8 @@ export interface Page extends HasEditor {
   /** The Share dialog; the drawer with its Download table open. */
   share(): void;
   download(): void;
-  palette(): void;
+  /** The drawer, its search focused (Mod+K). */
+  search(): void;
   /** A document is open (Mod+P), and for editing, not as its pages (Mod+F, Mod+S). */
   doc: boolean;
   editing: boolean;
@@ -85,7 +85,7 @@ export const DOWNLOAD = command<Page>({
   does: (p) => p.download(),
 });
 /**
- * The size of everything (kit/zoom.ts), from the palette and the drawer's head, with no keys: Ctrl+=, Ctrl+- and Ctrl+0
+ * The size of everything (kit/zoom.ts), from the drawer's stepper and its search, with no keys: Ctrl+=, Ctrl+- and Ctrl+0
  * are the browser's own zoom, and a keyboard keeps them.
  */
 export const LARGER = command<unknown>({ id: 'kit.larger', scope: 'kit', label: 'Everything larger', icon: UI.plus, where: ['drawer'], disabled: () => size() >= SIZE_MAX, does: () => stepSize(1) });
@@ -99,7 +99,17 @@ export const SMALLER = command<unknown>({
   does: () => stepSize(-1),
 });
 export const NORMAL_SIZE = command<unknown>({ id: 'kit.normal-size', scope: 'kit', label: 'Normal size', icon: UI.view, where: ['drawer'], does: () => stepSize(0) });
-export const PALETTE = command<Pick<Page, 'palette'>>({ id: 'kit.palette', scope: 'kit', label: 'All commands…', icon: CommandIcon, keys: 'Mod+K', where: ['bar'], does: (p) => p.palette() });
+/** Mod+K: the drawer with its search focused, which finds an app, a document, a template or a command (kit/drawer.ts). */
+export const SEARCH = command<Pick<Page, 'search'>>({
+  id: 'kit.search',
+  scope: 'kit',
+  label: 'Find app, doc, template, or command',
+  icon: UI.search,
+  keys: 'Mod+K',
+  where: ['keys-only'],
+  takesFocus: true,
+  does: (p) => p.search(),
+});
 
 /** The page's commands, in the order the dialog lists them. */
 export const KIT_COMMANDS = register([
@@ -124,7 +134,7 @@ export const KIT_COMMANDS = register([
   LARGER,
   SMALLER,
   NORMAL_SIZE,
-  PALETTE as Command<Page>,
+  SEARCH as Command<Page>,
 ]) as Command<Page>[];
 
 /** The groups the dialog shows: the app's own first when there is an app, then the words', then the page's. */

@@ -73,7 +73,7 @@ test('Private and changed: the icon asks first, and the hash stays; Escape stays
   expect(location.hash).toBe(was);
   const d = shell.querySelector('to-dialog.to-leave-dialog')!;
   expect(d.querySelector('h2')!.textContent).toBe('This document lives in its link');
-  expect([...d.querySelectorAll('.to-dialog-body button')].map((b) => b.textContent!.trim())).toEqual(['Copy the link and go', 'Turn on Saved and keep it here', 'Go without']);
+  expect([...d.querySelectorAll('.to-dialog-body button')].map((b) => b.textContent!.trim())).toEqual(['Copy the link and go', 'Turn on Save in browser and keep it here', 'Go without']);
   asked(shell)!.close();
   await until(() => !asked(shell)!.open);
   expect(location.hash).toBe(was);
@@ -174,21 +174,21 @@ test('a Download hand-off and a file opened ask the same way, and the hash holds
   await until(() => location.hash !== was && location.hash.startsWith('#/v1/write/'));
 });
 
-test('Turn on Saved and keep it here: Saved turned on, the document kept, then home, and the toast says Saved is on and where it is turned off', async () => {
+test('Turn on Save in browser and keep it here: saving turned on, the document kept, then home, and the toast says Save in browser is on and where it is turned off', async () => {
   const shell = await mount('#/v1/write');
   await type(shell, 'Keep me');
   const hash = location.hash;
   icon(shell).click();
   await until(() => !!asked(shell)?.open);
   const keepIt = shell.querySelector<HTMLButtonElement>('.to-leave-keep')!;
-  expect(keepIt.textContent!.trim()).toBe('Turn on Saved and keep it here');
+  expect(keepIt.textContent!.trim()).toBe('Turn on Save in browser and keep it here');
   keepIt.click();
   await until(() => location.hash === '#/');
   expect(keeping()).toBe(true);
   expect(library().map((k) => k.hash)).toContain(hash);
   await until(() => !!shell.querySelector('.to-toast.shown'));
   // Said on the next frame (kit/toast.ts), so a repeat is said again.
-  await until(() => said() === 'Saved is on: this device keeps the documents you open. Turn it off in the menu.');
+  await until(() => said() === 'Save in browser is on: this browser keeps the documents you open. Turn it off in the menu.');
 });
 
 test('Go without goes home; so does a drawer row and a hand-off, asked the same way', async () => {

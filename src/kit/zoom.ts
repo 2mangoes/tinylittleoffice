@@ -3,8 +3,9 @@
  * spatial canvas (kit/pinch.ts), which sets it continuously and keeps it to the nearest 5%. Kept on the device under
  * Private and Saved alike, as the language is (kit/store.ts): a link opened from a message or a QR code is at the size
  * the person reads at, not at 100% again. Read once, when first asked, so a page is at one size whatever another tab
- * does. Reached from the drawer's head and from the palette ('Everything larger', 'Everything smaller', 'Normal size':
- * kit/keys.ts), with no key of its own: Ctrl+=, Ctrl+- and Ctrl+0 are the browser's zoom, and a keyboard keeps them.
+ * does. Reached from the drawer's size row and from its search for anything (kit/drawer.ts: 'Everything larger',
+ * 'Everything smaller', 'Normal size', kit/keys.ts), with no key of its own: Ctrl+=, Ctrl+- and Ctrl+0 are the
+ * browser's zoom, and a keyboard keeps them.
  *
  * The person's own size is the 100%: the root's font size is the browser's default (100%) × the size × BASE, so a
  * browser set to larger type draws everything larger. An iPhone's browser keeps 16px whatever the device's text size

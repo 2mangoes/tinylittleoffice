@@ -142,3 +142,13 @@ export function linesOf(text: string): string[] {
   }
   return out.filter((l) => l.trim());
 }
+
+/**
+ * Whether what is typed starts any of these texts, or a word in one (case and accents aside): the drawer's one search
+ * (kit/drawer.ts), the same for an app, a document, a template and a command. `q` is folded and trimmed already.
+ */
+export const startsAWord = (q: string, ...texts: string[]): boolean =>
+  texts.some((text) => {
+    const words = fold(text);
+    return words.startsWith(q) || words.split(/[\s\-–—/(),.…:]+/).some((w) => w.startsWith(q));
+  });

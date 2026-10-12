@@ -160,7 +160,7 @@ test("a picture's line is words with a link, in the editor and the Display Link:
   await tick(100);
 });
 
-test('the menu has no switch for pictures from the web, Private or Saved', async () => {
+test('the menu has no switch for pictures from the web, saved in the browser or not', async () => {
   const shell = await mount('');
   const drawer = shell.querySelector<ToDrawer>('to-drawer')!;
   setKeeping(true);

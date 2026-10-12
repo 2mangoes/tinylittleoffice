@@ -1,7 +1,7 @@
 // The drawer: opens as a modal dialog, finds apps, closes on Escape with focus back on the menu button.
 import { test, expect } from 'vitest';
 import { cdp } from 'vitest/browser';
-import { mount, openDrawerDoc, until } from './helpers.ts';
+import { mount, openDrawerDoc, said, tick, until } from './helpers.ts';
 import { encodeDoc } from '../../src/kit/codec.ts';
 import { apps } from '../../src/kit/apps.ts';
 import { templatesOf } from '../../src/kit/home.ts';
@@ -10,6 +10,21 @@ import { siteRoot } from '../../src/kit/apps.ts';
 import { page } from 'vitest/browser';
 import { keepSize, SIZE_MAX } from '../../src/kit/zoom.ts';
 import { firstLines } from './firstline.ts';
+
+/** The drawer, opened by the menu button, drawn whole. */
+const openDrawer = async (shell: HTMLElement) => {
+  shell.querySelector<HTMLButtonElement>('.to-burger')!.click();
+  const dialog = shell.querySelector<HTMLDialogElement>('dialog.to-drawer')!;
+  await until(() => dialog.open && !!dialog.querySelector('.to-drawer-prefs'));
+  return dialog;
+};
+const type = async (dialog: HTMLElement, words: string) => {
+  const find = dialog.querySelector<HTMLInputElement>('.to-find')!;
+  find.value = words;
+  find.dispatchEvent(new Event('input', { bubbles: true }));
+  await tick(30);
+};
+const headings = (dialog: HTMLElement) => [...dialog.querySelectorAll('.to-drawer-apps h3')].map((h) => h.textContent);
 
 test("the hamburger opens the drawer, the home page's drawer has no app rows, Find narrows what there is, Escape closes it", async () => {
   const shell = await mount('');
@@ -20,8 +35,8 @@ test("the hamburger opens the drawer, the home page's drawer has no app rows, Fi
   await until(() => dialog.open);
   expect(document.activeElement).toBe(shell.querySelector('.to-find'));
   const find = shell.querySelector<HTMLInputElement>('.to-find')!;
-  // Nothing kept (Private): apps and templates are what there is to find.
-  expect(find.placeholder).toBe('Find app, template');
+  // Nothing kept (Save in browser off): apps, templates and commands are what there is to find.
+  expect(find.placeholder).toBe('Find app, template, or command');
   // On the home page the apps are the page, so the drawer has no rows of them (Paul, 2026-10-10); Find still finds.
   expect(shell.querySelectorAll('.to-drawer-apps .to-app-head').length).toBe(0);
   find.value = 'zzz';
@@ -43,7 +58,7 @@ test("the hamburger opens the drawer, the home page's drawer has no app rows, Fi
   await until(() => document.activeElement === burger);
 });
 
-test('Find finds apps, templates by name or app, and kept documents by title, each under its heading; Enter opens the first', async () => {
+test('Find finds kept documents by title and templates by name or app, each under its heading; Enter opens the first', async () => {
   const { setPrivate } = await import('../../src/kit/privacy.ts');
   const { keep } = await import('../../src/kit/library.ts');
   await setPrivate(false);
@@ -54,20 +69,20 @@ test('Find finds apps, templates by name or app, and kept documents by title, ea
     const dialog = shell.querySelector<HTMLDialogElement>('dialog.to-drawer')!;
     await until(() => dialog.open);
     const find = shell.querySelector<HTMLInputElement>('.to-find')!;
-    expect(find.placeholder).toBe('Find app, template, or doc');
+    expect(find.placeholder).toBe('Find app, doc, template, or command');
     find.value = 'meeting';
     find.dispatchEvent(new Event('input', { bubbles: true }));
     // Find asks for every app's templates (a chunk an app, lazily) and the list grows as they arrive.
     await until(() => apps().every((a) => !!templatesOf(a)));
     await until(() => shell.querySelectorAll('.to-drawer-apps h3').length === 2);
-    expect([...shell.querySelectorAll('.to-drawer-apps h3')].map((h) => h.textContent)).toEqual(['Templates', 'Documents']);
+    expect([...shell.querySelectorAll('.to-drawer-apps h3')].map((h) => h.textContent)).toEqual(['Documents', 'Templates']);
     const found = [...shell.querySelectorAll<HTMLAnchorElement>('.to-drawer-apps a.to-found')];
     const names = found.map((a) => a.querySelector('.to-found-words span')!.textContent);
     expect(names).toContain('Meeting notes');
     expect(found[names.indexOf('Meeting notes')].querySelector('small')!.textContent).toBe('Word Processor');
-    // The documents come last, under their heading, each with its app.
-    expect(names.at(-1)).toBe('Meeting with the printers');
-    expect(found.at(-1)!.getAttribute('href')).toBe('#/v1/write/ymeet');
+    // The documents come before the templates, under their heading, each with its app.
+    expect(names[0]).toBe('Meeting with the printers');
+    expect(found[0].getAttribute('href')).toBe('#/v1/write/ymeet');
     // A template by its app's name: every Word Processor template.
     find.value = 'word processor';
     find.dispatchEvent(new Event('input', { bubbles: true }));
@@ -80,9 +95,9 @@ test('Find finds apps, templates by name or app, and kept documents by title, ea
       ).length;
     await until(() => shell.querySelectorAll('.to-drawer-apps a.to-found').length === writes);
     // Enter opens the first, and the drawer closes as the document opens.
-    find.value = 'meeting';
+    find.value = 'meeting notes';
     find.dispatchEvent(new Event('input', { bubbles: true }));
-    await until(() => shell.querySelectorAll('.to-drawer-apps a.to-found').length === found.length);
+    await until(() => headings(dialog).join() === 'Templates');
     const first = shell.querySelector<HTMLAnchorElement>('.to-drawer-apps a.to-found')!.getAttribute('href')!;
     find.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true, cancelable: true }));
     await until(() => location.hash === first);
@@ -117,15 +132,21 @@ test("a template from inside an app: each of the drawer's rows has its templates
   history.replaceState(null, '', location.pathname);
 });
 
-test('Cancel on "Save nothing on this device" leaves things kept and puts the switch back on', async () => {
+test('Save in browser turned on says so; Cancel on "Remove all files and settings from this browser?" leaves things kept and puts the switch back on', async () => {
   const { setPrivate } = await import('../../src/kit/privacy.ts');
   const { keeping } = await import('../../src/kit/store.ts');
-  await setPrivate(false);
-  expect(keeping()).toBe(true);
+  await setPrivate(true);
+  expect(keeping()).toBe(false);
   const shell = await mount('');
   shell.querySelector<HTMLButtonElement>('.to-burger')!.click();
   await until(() => !!shell.querySelector<HTMLDialogElement>('dialog.to-drawer')?.open);
   const box = shell.querySelector<HTMLInputElement>('dialog.to-drawer input[role=switch]')!;
+  expect(box.checked).toBe(false);
+  // Turned on: nothing asked, kept from now on, and said.
+  box.checked = true;
+  box.dispatchEvent(new Event('change', { bubbles: true }));
+  await until(() => keeping());
+  await until(() => said() === 'Saving in this browser');
   expect(box.checked).toBe(true);
   const ask = window.confirm;
   window.confirm = () => false;
@@ -140,64 +161,12 @@ test('Cancel on "Save nothing on this device" leaves things kept and puts the sw
     box.checked = false;
     box.dispatchEvent(new Event('change', { bubbles: true }));
     await until(() => !keeping());
+    await until(() => said() === 'Nothing saved in this browser');
     expect(box.checked).toBe(false);
   } finally {
     window.confirm = ask;
     await setPrivate(true);
   }
-});
-
-test('About says nothing is asked that you did not cause, and links the page of what leaves your browser', async () => {
-  const shell = await mount('');
-  shell.querySelector<HTMLButtonElement>('.to-burger')!.click();
-  await until(() => !!shell.querySelector<HTMLDialogElement>('dialog.to-drawer')?.open);
-  shell.querySelector<HTMLButtonElement>('.to-drawer-about')!.click();
-  await until(() => !!shell.querySelector('.to-about-dialog a.to-about-network'));
-  const a = shell.querySelector<HTMLAnchorElement>('.to-about-dialog a.to-about-network')!;
-  expect(a.textContent).toBe('What leaves your browser');
-  expect(new URL(a.href).pathname).toMatch(/\/network$/);
-  expect(a.closest('p')!.textContent).toContain('No analytics, no error reports');
-});
-
-test('About says what it does not protect against in its own section, in the language of the page, and its link goes there', async () => {
-  const shell = await mount('');
-  shell.querySelector<HTMLButtonElement>('.to-burger')!.click();
-  await until(() => shell.querySelector<HTMLDialogElement>('dialog.to-drawer')!.open);
-  shell.querySelector<HTMLButtonElement>('.to-drawer-about')!.click();
-  await until(() => !!shell.querySelector('.to-about-dialog .to-about-threats'));
-  const go = shell.querySelector<HTMLButtonElement>('.to-about-dialog .to-about-threats')!;
-  expect(go.textContent).toBe('What this protects against, and what it does not');
-  // Not a link off the site (the threat model on GitHub, private and in English): a section of About itself.
-  expect(go.tagName).toBe('BUTTON');
-  const limits = shell.querySelector<HTMLElement>('.to-about-dialog .to-about-limits')!;
-  expect(limits.querySelector('h3')!.textContent).toBe('What it does not protect against');
-  const said = limits.textContent!;
-  for (const w of ['history', 'screenshot', 'weak password', 'serves the code']) expect(said).toContain(w);
-  // Under the list, the whole document in the public repository, said to be in English, in a new tab.
-  const whole = limits.querySelector<HTMLAnchorElement>('a.to-about-threat-model')!;
-  expect([whole.textContent, whole.href, whole.target, whole.rel]).toEqual([
-    'The whole threat model, in English',
-    'https://github.com/aboard-io/tinylittleoffice/blob/main/docs/threat-model.md',
-    '_blank',
-    'noopener',
-  ]);
-  go.click();
-  await until(() => document.activeElement === limits.querySelector('h3'));
-  // About's words are true: the browser's history is named, nothing promises "no trace".
-  const about = shell.querySelector('.to-about-dialog')!.textContent!;
-  expect(about).toContain('Your browser’s history still holds every link opened here');
-  expect(about).not.toMatch(/nothing is kept|no trace/i);
-  // There is no shared document: every link is a copy (r17-copies).
-  expect(shell.querySelector('.to-about-dialog .to-about-copies')!.textContent).toBe('There is no shared document: every link is a copy, and what is changed in one never reaches another.');
-});
-
-test("the Private switch says what is true: this site keeps nothing, the browser's history holds every link", async () => {
-  const shell = await mount('');
-  shell.querySelector<HTMLButtonElement>('.to-burger')!.click();
-  await until(() => !!shell.querySelector('.to-switch small'));
-  expect(shell.querySelector('.to-switch small')!.textContent).toBe(
-    'This site keeps nothing on this device. Your browser’s history still holds every link opened here, and a link is the document: use a private window, or give it a password.',
-  );
 });
 
 test('About names the commit the site runs, from /version.json, asked when it opens, with a link to its source', async () => {
@@ -260,9 +229,9 @@ test('a device with no pointer at all (neither fine nor coarse: keys alone) has 
 
 // The review of 2026-10-11: "The drawer's buttons are named 'Share… Ctrl+Shift+S' … which VoiceOver speaks in full on a
 // phone with no keyboard", and Find in this document was reached on a phone only through a ⌘. Under a finger, until a
-// key with Ctrl, ⌘ or Alt is typed, no keys are written in the drawer, its menus or the palette; the keys are each
-// control's aria-keyshortcuts, never its name; Find in this document is a row of This document.
-test('under a finger with no keyboard the drawer, its menus and the palette write no keys and name none; Find is a row', async () => {
+// key with Ctrl, ⌘ or Alt is typed, no keys are written in the drawer, its menus or the commands its search finds; the
+// keys are each control's aria-keyshortcuts, never its name; Find in this document is a row of This document.
+test('under a finger with no keyboard the drawer, its menus and the commands it finds write no keys and name none; Find is a row', async () => {
   const { keyboard } = await import('../../src/kit/commands.ts');
   const named = (el: Element): string =>
     el.getAttribute('aria-label') ??
@@ -290,14 +259,15 @@ test('under a finger with no keyboard the drawer, its menus and the palette writ
     expect(find.getAttribute('aria-keyshortcuts')).toMatch(/^(Control|Meta)\+F$/);
     find.click();
     await until(() => !(drawer as HTMLDialogElement).open && !!shell.querySelector('to-find input:focus, to-find :focus'));
-    // The palette: its options are named by their words alone, no keys written.
-    await shell.showPalette();
-    const pal = shell.querySelector('to-palette')!;
-    await until(() => pal.querySelectorAll('.to-palette-item').length > 0);
-    expect(pal.querySelectorAll('kbd').length).toBe(0);
-    for (const o of pal.querySelectorAll('[role=option]')) expect(named(o)).not.toMatch(/Ctrl|⌘/);
-    expect([...pal.querySelectorAll('[role=option]')].find((o) => named(o) === 'Share…')!.getAttribute('aria-keyshortcuts')).toMatch(/Shift\+S$/);
-    (pal.querySelector('dialog') as HTMLDialogElement).close();
+    // The commands the search finds: named by their words alone, no keys written.
+    await shell.findAnything();
+    await type(drawer as HTMLElement, 's');
+    await until(() => drawer.querySelectorAll('.to-found-cmd').length > 0);
+    expect(drawer.querySelectorAll('kbd').length).toBe(0);
+    for (const o of drawer.querySelectorAll('.to-found-cmd')) expect(named(o)).not.toMatch(/Ctrl|⌘/);
+    expect([...drawer.querySelectorAll('.to-found-cmd')].find((o) => named(o) === 'Share…')!.getAttribute('aria-keyshortcuts')).toMatch(/Shift\+S$/);
+    await type(drawer as HTMLElement, '');
+    (drawer as HTMLDialogElement).close();
     // A key with Ctrl is a keyboard: from then on the keys are written again (and still not part of a name).
     window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Control', ctrlKey: true }));
     expect(keyboard.seen).toBe(true);
@@ -312,8 +282,7 @@ test('under a finger with no keyboard the drawer, its menus and the palette writ
 
 // Every row of the drawer that is an icon before its words keeps the icon beside the words' first line when they wrap
 // (Paul, 2026-10-11: "Align the icons in the main menu to the top so they stay there when we zoom"): This document's
-// rows, the apps', Open a file, Compare, Theme, Privacy, the size of everything. At the largest size the apps' names
-// wrap on a phone, and the size's label beside its stepper on a wide screen.
+// rows, the apps', Open a file, Compare, Theme, About. At the largest size the apps' names wrap on a phone.
 for (const [w, h] of [
   [390, 844],
   [1100, 800],
@@ -328,12 +297,195 @@ for (const [w, h] of [
       const dialog = doc.closest('dialog')!;
       await until(() => !!dialog.querySelector('.to-drawer-apps .to-app-head'));
       const rows = firstLines(dialog);
-      expect(rows.filter((r) => r.wraps && r.beside).length).toBeGreaterThan(0);
+      expect(rows.length).toBeGreaterThan(0);
       expect(rows.filter((r) => !r.beside && !r.under)).toEqual([]);
       dialog.close();
     } finally {
       keepSize(1);
       await page.viewport(1100, 800);
       history.replaceState(null, '', location.pathname);
+    }
+  });
+
+// Paul's hamburger notes of 2026-10-11 (round eighteen): the language, Save in browser, the size with no words, one
+// search over apps, documents, templates and commands, the apps away from home, then the rest; no Privacy, no
+// Keyboard shortcuts, no palette of its own; Theme's first option Match device; About's body the version line alone.
+
+test("the drawer's sections in Paul's order: the language, Save in browser, the size, the search and the apps, This document, the files, the rest", async () => {
+  const shell = await mount(`#/v1/write/${encodeDoc('# Plans\n\nWords.\n')}`);
+  await until(() => !!shell.querySelector('to-write-editor'));
+  const dialog = await openDrawer(shell);
+  const order = ['.to-drawer-lang', '.to-drawer-save', '.to-size', '.to-drawer-apps', '.to-drawer-doc', '.to-drawer-files', '.to-drawer-prefs'].map((s) => dialog.querySelector(s)!);
+  for (const el of order) expect(el).not.toBeNull();
+  for (let i = 1; i < order.length; i++) expect(order[i - 1].compareDocumentPosition(order[i]) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+  // The apps are rows away from home.
+  expect(dialog.querySelectorAll('.to-drawer-apps .to-app-head').length).toBe(apps().length);
+  // The size: the eye, then the stepper, no words; its name for a screen reader alone.
+  const sz = dialog.querySelector<HTMLElement>('.to-size')!;
+  expect(sz.getAttribute('aria-label')).toBe('Size of everything');
+  expect(sz.querySelector('.to-field-words')).toBeNull();
+  expect(sz.firstElementChild!.matches('svg, .to-icon')).toBe(true);
+  expect([...sz.childNodes].filter((n) => n.nodeType === Node.TEXT_NODE && n.textContent!.trim()).length).toBe(0);
+  expect(sz.querySelector('.to-size-step')!.textContent!.trim()).toBe('100%');
+  // Gone: Privacy, Keyboard shortcuts, the palette.
+  expect(dialog.querySelector('.to-drawer-privacy')).toBeNull();
+  expect(dialog.querySelector('.to-drawer-keys')).toBeNull();
+  expect(document.querySelector('to-palette')).toBeNull();
+  expect(shell.querySelector('.to-palette-btn')).toBeNull();
+  // Theme's first option.
+  const theme = dialog.querySelector<HTMLSelectElement>('.to-drawer-prefs select')!;
+  expect(theme.options[0].textContent).toBe('Match device');
+  dialog.close();
+  history.replaceState(null, '', location.pathname);
+});
+
+test('one search, four kinds: Apps, Documents, Templates, Commands, each heading only with rows; a command runs and the drawer closes', async () => {
+  const { keep } = await import('../../src/kit/library.ts');
+  const { setPrivate } = await import('../../src/kit/privacy.ts');
+  await setPrivate(false);
+  try {
+    keep({ id: 'p', app: 'write', title: 'Processor parts', hash: '#/v1/write/yparts', at: Date.now() });
+    const shell = await mount(`#/v1/write/${encodeDoc('# Plans\n\nWords.\n')}`);
+    await until(() => !!shell.querySelector('to-write-editor'));
+    const dialog = await openDrawer(shell);
+    expect(dialog.querySelector<HTMLInputElement>('.to-find')!.placeholder).toBe('Find app, doc, template, or command');
+    await type(dialog, 'processor');
+    await until(() => headings(dialog).includes('Templates'));
+    expect(headings(dialog)).toEqual(['Apps', 'Documents', 'Templates']);
+    expect(dialog.querySelector('.to-drawer-apps .to-found .to-found-words span')!.textContent).toBe('Word Processor');
+    // 'und': Undo, under Commands (the last heading), with its keys.
+    await type(dialog, 'und');
+    expect(headings(dialog).at(-1)).toBe('Commands');
+    const undo = [...dialog.querySelectorAll<HTMLButtonElement>('.to-drawer-apps .to-found-cmd')].find((b) => b.querySelector('.to-found-words span')!.textContent === 'Undo')!;
+    expect(undo).toBeTruthy();
+    expect(undo.getAttribute('aria-keyshortcuts')).toMatch(/^(Control|Meta)\+Z$/);
+    dialog.close();
+    // Chosen, Undo is asked of the editor (the kernel's history takes it from there), the drawer closed first.
+    const editor = shell.querySelector<HTMLElement>('to-write-editor')!;
+    let undone = 0;
+    editor.addEventListener('docundo', () => undone++);
+    const again = await openDrawer(shell);
+    await type(again, 'und');
+    const row = [...again.querySelectorAll<HTMLButtonElement>('.to-found-cmd')].find((b) => b.querySelector('.to-found-words span')!.textContent === 'Undo')!;
+    row.click();
+    await until(() => !again.open && undone === 1);
+    // Nothing by that name: no headings at all.
+    const third = await openDrawer(shell);
+    await type(third, 'zzqx');
+    expect(headings(third)).toEqual([]);
+    third.close();
+  } finally {
+    await setPrivate(true);
+    history.replaceState(null, '', location.pathname);
+  }
+});
+
+test('the search begins afresh each time the drawer opens: what was typed is gone, and what it found', async () => {
+  const shell = await mount(`#/v1/write/${encodeDoc('# Plans\n\nWords.\n')}`);
+  await until(() => !!shell.querySelector('to-write-editor'));
+  const dialog = await openDrawer(shell);
+  await type(dialog, 'und');
+  await until(() => dialog.querySelectorAll('.to-found').length > 0);
+  dialog.close();
+  await until(() => !dialog.open);
+  const again = await openDrawer(shell);
+  await tick(30);
+  expect(again.querySelector<HTMLInputElement>('.to-find')!.value).toBe('');
+  expect(again.querySelectorAll('.to-found').length).toBe(0);
+  again.close();
+  history.replaceState(null, '', location.pathname);
+});
+
+test('Mod+K opens the drawer with its search focused; the shortcuts list it by its new name', async () => {
+  const shell = await mount(`#/v1/write/${encodeDoc('# Plans\n\nWords.\n')}`);
+  await until(() => !!shell.querySelector('to-write-editor'));
+  const mac = /Mac|iPhone|iPad/.test(navigator.platform);
+  window.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', code: 'KeyK', ctrlKey: !mac, metaKey: mac, bubbles: true, cancelable: true }));
+  const dialog = shell.querySelector<HTMLDialogElement>('dialog.to-drawer')!;
+  await until(() => dialog.open && document.activeElement === dialog.querySelector('.to-find'));
+  dialog.close();
+  const { shortcutGroups } = await import('../../src/kit/keys.ts');
+  const page = shortcutGroups().find((g) => g.heading === 'This page')!;
+  expect(page.keys.find((c) => c.keys === 'Mod+K')!.label).toBe('Find app, doc, template, or command');
+  history.replaceState(null, '', location.pathname);
+});
+
+test("the language select begins 'Default: ' and the device's language named in itself, Default in the page's language", async () => {
+  const { setLanguage } = await import('../../src/kit/i18n.ts');
+  const real = Object.getOwnPropertyDescriptor(Navigator.prototype, 'languages')!;
+  Object.defineProperty(navigator, 'languages', { configurable: true, get: () => ['fr-CA', 'en'] });
+  try {
+    await setLanguage('en');
+    const shell = await mount('');
+    let dialog = await openDrawer(shell);
+    const first = () => dialog.querySelector<HTMLSelectElement>('.to-drawer-lang select')!.options[0].textContent;
+    expect(first()).toBe('Default: Français');
+    dialog.close();
+    await setLanguage('fr');
+    await shell.updateComplete;
+    dialog = await openDrawer(shell);
+    await until(() => first() === 'Par défaut : Français');
+    dialog.close();
+  } finally {
+    delete (navigator as unknown as Record<string, unknown>).languages;
+    Object.defineProperty(Navigator.prototype, 'languages', real);
+    await setLanguage(null);
+    history.replaceState(null, '', location.pathname);
+  }
+});
+
+test('Save in browser: off by default, its line says what turning it on does; on, what turning it off does; off forgets', async () => {
+  const { keeping } = await import('../../src/kit/store.ts');
+  const { setPrivate } = await import('../../src/kit/privacy.ts');
+  const { keep, library } = await import('../../src/kit/library.ts');
+  expect(keeping()).toBe(false);
+  const shell = await mount('');
+  const dialog = await openDrawer(shell);
+  const save = dialog.querySelector<HTMLElement>('.to-drawer-save')!;
+  const box = save.querySelector<HTMLInputElement>('input[role=switch]')!;
+  expect(save.querySelector('b')!.textContent).toBe('Save in browser');
+  expect(box.checked).toBe(false);
+  expect(save.querySelector('small')!.textContent).toBe('Turn on to save files in your browser.');
+  box.checked = true;
+  box.dispatchEvent(new Event('change', { bubbles: true }));
+  await until(() => keeping());
+  await until(() => save.querySelector('small')!.textContent === 'Turn off to remove all files and settings.');
+  keep({ id: 'q', app: 'write', title: 'Kept', hash: '#/v1/write/ykept', at: Date.now() });
+  const ask = window.confirm;
+  let asked = '';
+  window.confirm = (q?: string) => ((asked = q ?? ''), true);
+  try {
+    box.checked = false;
+    box.dispatchEvent(new Event('change', { bubbles: true }));
+    await until(() => !keeping());
+    expect(asked).toBe('Remove all files and settings from this browser?');
+    expect(library()).toEqual([]);
+  } finally {
+    window.confirm = ask;
+    await setPrivate(true);
+  }
+});
+
+test("About's body is the running commit line alone", async () => {
+  const shell = await mount('');
+  const dialog = await openDrawer(shell);
+  shell.querySelector<HTMLButtonElement>('.to-drawer-about')!.click();
+  await until(() => !dialog.open);
+  const body = shell.querySelector<HTMLElement>('.to-about-dialog .to-dialog-body')!;
+  expect([...body.children].every((c) => c.matches('.to-about-version'))).toBe(true);
+  expect(body.textContent!.replace(/Running commit \w+( \([^)]*\))?/, '').trim()).toBe('');
+});
+
+for (const scale of [1, 2])
+  test(`a select in the drawer is a button's height, at ${scale * 100}%`, async () => {
+    keepSize(scale);
+    try {
+      const shell = await mount('');
+      const dialog = await openDrawer(shell);
+      const btn = dialog.querySelector<HTMLElement>('.to-drawer-about')!.getBoundingClientRect().height;
+      for (const s of dialog.querySelectorAll('select')) expect(s.getBoundingClientRect().height).toBe(btn);
+      dialog.close();
+    } finally {
+      keepSize(1);
     }
   });

@@ -17,7 +17,7 @@ let n = 0;
 
 /**
  * The focus given back to `from` when a dialog over it closes: to the button of the menu `from` was in if that menu has
- * closed meanwhile, and to the document's column where nothing it names can take it. (The palette's too: kit/palette.ts.)
+ * closed meanwhile, and to the document's column where nothing it names can take it. (The drawer's too: kit/drawer.ts.)
  */
 export function focusBack(from: HTMLElement | null) {
   const menu = from?.closest('[popover]:not(:popover-open)')?.closest('to-menu')?.querySelector<HTMLElement>(':scope > button');

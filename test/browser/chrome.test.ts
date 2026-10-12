@@ -296,8 +296,8 @@ test('the drawer lists Share… and Download with a document open, and not on th
   expect(doc.textContent).toContain('This document');
   expect(doc.querySelector('.to-drawer-share')!.textContent).toContain('Share…');
   expect(doc.querySelector('to-menu.to-drawer-download')!.textContent).toContain('Download');
-  // At its top: before the apps.
-  expect(doc.compareDocumentPosition(drawer.querySelector('.to-drawer-apps')!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+  // After the search and the apps (Paul's order, 2026-10-11).
+  expect(drawer.querySelector('.to-drawer-apps')!.compareDocumentPosition(doc) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
   // The drawer slides in from the burger's side.
   expect(drawer.dialog.getBoundingClientRect().right).toBeCloseTo(390, 0);
   doc.querySelector<HTMLButtonElement>('.to-drawer-share')!.click();
@@ -467,7 +467,7 @@ test('390×844 with a finger: a tap in the words slides the burger to the very c
   expect(burger.getBoundingClientRect().right).toBeCloseTo(home.right, 0);
 });
 
-test('390×844 with a finger: the drawer’s This document is a heading over full-width rows (New, Share…, Download, Find in this document), above the search; the dialog draws no ring and sits flush', async () => {
+test('390×844 with a finger: the drawer’s This document is a heading over full-width rows (New, Share…, Download, Find in this document), under the search and the apps; the dialog draws no ring and sits flush', async () => {
   await page.viewport(390, 844);
   await coarse(true);
   keyboard.seen = false;
@@ -502,8 +502,8 @@ test('390×844 with a finger: the drawer’s This document is a heading over ful
   }
   // The heading's words begin where the rows' do: no empty column beside it.
   expect(head.left).toBeLessThan(share.left + d.width / 4);
-  // The order: the head, This document, the search, the apps.
-  expect(doc.compareDocumentPosition(drawer.querySelector('.to-find')!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+  // The order: the head, the search and the apps, then This document.
+  expect(drawer.querySelector('.to-find')!.compareDocumentPosition(doc) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
   expect(drawer.querySelector('.to-drawer-head')!.compareDocumentPosition(doc) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
   // A finger with no keyboard seen: no keys written at the rows' right (the review of 2026-10-11), each row's keys its aria-keyshortcuts.
   expect(doc.querySelector('.to-drawer-share kbd')).toBeNull();
@@ -638,22 +638,21 @@ test('390×844 with a finger: the bar’s button focused while the bar is away (
   expect(header.getBoundingClientRect().top).toBe(top);
 });
 
-test('390×844 with a finger: the bar and the palette’s button slid away are inert (out of Tab and a screen reader’s swipes), back with the bar; under a docked context row too', async () => {
+test('390×844 with a finger: the bar slid away is inert (out of Tab and a screen reader’s swipes), back with the bar; under a docked context row too', async () => {
   await page.viewport(390, 844);
   await coarse(true);
   const { shell, text, chrome } = await write();
   const bar = shell.querySelector<HTMLElement>('to-write-editor to-bar')!;
-  const palette = shell.querySelector<HTMLElement>('.to-palette-btn')!;
   // Reading: away, and inert.
   expect(chrome.hasAttribute('indoc')).toBe(false);
-  expect([bar.inert, palette.inert]).toEqual([true, true]);
+  expect(bar.inert).toBe(true);
   await tapWords(text);
-  expect([bar.inert, palette.inert]).toEqual([false, false]);
+  expect(bar.inert).toBe(false);
   // The context row docked over it: the bar away again, inert; undocked, back.
   document.documentElement.setAttribute('data-context-row', '');
-  await until(() => bar.inert && palette.inert);
+  await until(() => bar.inert);
   document.documentElement.removeAttribute('data-context-row');
-  await until(() => !bar.inert && !palette.inert);
+  await until(() => !bar.inert);
   // At a desktop's size with a mouse the bar is never away.
   await coarse(false);
   await page.viewport(1440, 900);

@@ -22,6 +22,10 @@ const menu = (shell: HTMLElement) => shell.querySelector<HTMLElement>('.to-drawe
 /** Download, from the drawer (opened first, unless it is). */
 async function openDownload(shell: ToShell) {
   if (!shell.querySelector('dialog.to-drawer[open]')) await openDrawerDoc(shell);
+  // This document is under the search and the apps: scrolled to the drawer's top, as a person scrolls down to it.
+  const row = shell.querySelector<HTMLElement>('.to-drawer-download')!;
+  const inner = shell.querySelector<HTMLElement>('.to-drawer-inner')!;
+  inner.scrollTop += row.getBoundingClientRect().top - inner.getBoundingClientRect().top;
   shell.querySelector<HTMLButtonElement>('.to-drawer-download > button')!.click();
   await until(() => menu(shell).matches(':popover-open'));
   await until(() => !!menu(shell).style.top).catch(() => {});
@@ -390,3 +394,23 @@ test("where the browser makes a WebM, the Animator's Download table has the vide
   expect(labels(deck).slice(-2)).toEqual(['An animation of the deck (GIF)', 'A film of the deck (WebM)']);
   menu(deck).hidePopover();
 }, 30_000);
+
+test('Mod+Shift+D on a phone opens the drawer with This document’s Download row brought to its top and the table under it', async () => {
+  await page.viewport(390, 844);
+  try {
+    const shell = await mount(`#/v1/write/${encodeDoc('# Notes\n\nWords.\n')}`);
+    await until(() => !!shell.querySelector('to-write-editor'));
+    const mac = /Mac|iPhone|iPad/.test(navigator.platform);
+    window.dispatchEvent(new KeyboardEvent('keydown', { key: 'D', code: 'KeyD', shiftKey: true, ctrlKey: !mac, metaKey: mac, bubbles: true, cancelable: true }));
+    await until(() => !!shell.querySelector('.to-drawer-download [popover]:popover-open'));
+    await until(() => !!menu(shell).style.top).catch(() => {});
+    const b = shell.querySelector('.to-drawer-download > button')!.getBoundingClientRect();
+    const m = menu(shell).getBoundingClientRect();
+    expect(b.bottom).toBeLessThan(844);
+    expect(m.top).toBeGreaterThanOrEqual(b.bottom - 1);
+    menu(shell).hidePopover();
+    shell.querySelector<HTMLDialogElement>('dialog.to-drawer')!.close();
+  } finally {
+    await page.viewport(1100, 800);
+  }
+});

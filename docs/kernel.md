@@ -505,7 +505,7 @@ fast-check's model-based testing (`fc.commands`, `fc.asyncModelRun`): the model 
 (pure, read by a node test that every registry command is a step of some walk, so a command joins the walks by being
 registered); each step is done to the real page (a registry command in force, through its `when`, with the focus where
 a person's way to it leaves it; Escape, Tab, Shift+Tab, Enter, the arrows, Mod+A; a word typed; a tap outside what is
-open, or in the document; the column scrolled; the drawer, a menu of the bar, Share, the templates, the palette; a pinch;
+open, or in the document; the column scrolled; the drawer, a menu of the bar, Share, the templates, the drawer's search; a pinch;
 a phone's keyboard up and down; another app and back), and after every step the rules are asserted:
 
 | rule | what holds |
@@ -536,7 +536,7 @@ left the focus on nothing (the home page's column has it); the palette opened by
 focus back to nothing (to the menu's button); the site's page, ready late, took the focus from a menu opened meanwhile;
 a template chosen in the drawer asked to leave over the open drawer, two modals; printing left the focus on nothing;
 a dialog closed over a frame whose page had the focus, or over a menu it had closed, gave it to nothing (kit/dialog.ts
-`focusBack`, the palette's too); Find closed with nothing found gave it to nothing; and on a phone the bar's button
+`focusBack`, the drawer's too); Find closed with nothing found gave it to nothing; and on a phone the bar's button
 focused while the bar was away scrolled the whole chrome up by the header's height (the chrome now holds still).
 
 ## 12. The text layer (round seventeen, 2026-10-11)

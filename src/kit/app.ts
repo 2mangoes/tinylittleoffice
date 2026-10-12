@@ -147,8 +147,9 @@ export interface AppDef {
   handoffs?: Handoff[];
   /**
    * The app's commands (kit/commands.ts), lazily: its bar, its menus, its context bars and its keys are drawn and
-   * answered from them, and the shortcuts dialog, the palette and docs/editing.md's tables list them. A module of its
-   * own beside the editor (commands.ts), which the editor imports too, so the home page carries none of it.
+   * answered from them, and the shortcuts dialog, the drawer's search (kit/drawer.ts) and docs/editing.md's tables
+   * list them. A module of its own beside the editor (commands.ts), which the editor imports too, so the home page
+   * carries none of it.
    */
   commands?: () => Promise<{ default: readonly Command[] }>;
   /**

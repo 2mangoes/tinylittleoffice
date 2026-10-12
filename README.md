@@ -5,8 +5,8 @@ presentation or a calendar, and the whole of it is in the address of the page: c
 the document. Open it on another phone or computer and it is there; send it to someone and they have it, to read
 and to change. Whoever has the link has the document. There is no account and nothing to sign up for.
 
-Private is the default: nothing is kept on your device and nothing on any server; the link is the document.
-Saved is a choice, a switch in the menu: it keeps your documents and your short links on your own device, in the
+Save in browser is off by default: nothing is kept on your device and nothing on any server; the link is the
+document. Turned on, a switch in the menu, it keeps your documents and your short links on your own device, in the
 browser's own storage, never on a server. A short link is the one thing a server holds: the document, encrypted
 with a key the server never sees, until the link expires. Apart from that, no document ever reaches us.
 
@@ -37,7 +37,7 @@ in one file.
   they change is in their link, not in yours, and nothing changed in one copy ever reaches another.
 - **Not a cloud.** No server keeps your documents, apart from a short link you make, encrypted with a key the server
   never sees, until it expires. There is no account to sign in to.
-- **Not a place where anything of yours is kept,** unless you choose Saved, and then only on your own device.
+- **Not a place where anything of yours is kept,** unless you turn on Save in browser, and then only on your own device.
 
 ## Privacy and security
 

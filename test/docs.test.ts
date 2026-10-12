@@ -88,15 +88,12 @@ test('the README and the current docs are American', () => {
   expect(['README.md', 'CONTRIBUTING.md', 'SECURITY.md', ...currentDocs].flatMap((f) => british(read(f), f))).toEqual([]);
 });
 
-test('the README says the truth about saving, and the About and the page say it too', () => {
+test('the README says the truth about saving, and the page says it too', () => {
   const readme = read('README.md');
-  for (const s of ['Private is the default', 'Saved is a choice', 'on your own device', 'never on a server', 'A short link is the one thing a server holds']) expect(readme, s).toContain(s);
+  for (const s of ['Save in browser is off by default', 'on your own device', 'never on a server', 'A short link is the one thing a server holds']) expect(readme, s).toContain(s);
+  // The page's description; About's body is cut to its version line until Paul writes a few lines (2026-10-11).
   const tagline = 'A tiny office suite where the link is the document. No accounts. Nothing is saved anywhere unless you choose to keep it on this device.';
-  expect(read('src/i18n/en.ts')).toContain(`'${tagline}': '${tagline}'`);
   expect(read('index.html')).toContain(tagline);
-  const about = read('src/kit/drawer.ts');
-  expect(about).toContain(`t('${tagline}')`);
-  expect(about).toContain("t('A short link is the one thing a server holds: the document, encrypted with a key the server never sees, until the link expires.')");
 });
 
 test('nothing a reader meets points at the record as if it were current', () => {
