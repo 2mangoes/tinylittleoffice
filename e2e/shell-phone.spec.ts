@@ -68,10 +68,12 @@ test("at size 2 the drawer's Download row opens its table under it, every target
   await expect(page.locator('.to-header .to-download')).toHaveCount(0);
   await page.locator('.to-burger').tap();
   const button = page.locator('.to-drawer-download > button');
-  const b = (await button.boundingBox())!;
   await button.tap();
   const menu = page.locator('.to-drawer-download [popover]');
   await expect(menu).toBeVisible();
+  // The row's box after the tap: opening the table scrolls the drawer so the row sits at the top with the room under it
+  // (since the drawer lists no apps, 2026-10-12, the row starts low in the first screen and moves).
+  const b = (await button.boundingBox())!;
   const m = (await menu.boundingBox())!;
   expect(m.y).toBeGreaterThanOrEqual(b.y + b.height - 1);
   expect(m.y).toBeLessThan(b.y + b.height + 20);
