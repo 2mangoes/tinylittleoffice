@@ -7,7 +7,6 @@ import { afterEach, beforeEach, expect, test } from 'vitest';
 import { userEvent } from 'vitest/browser';
 import { mount, openDrawerDoc, openShare, tick, until } from './helpers.ts';
 import { encodeDoc } from '../../src/kit/core/codec.ts';
-import { apps } from '../../src/kit/core/apps.ts';
 
 /** Every showModal() made while another modal was open, by what was open and what opened over it. */
 const stacked: string[] = [];
@@ -34,12 +33,6 @@ async function only(selector: string): Promise<HTMLDialogElement> {
 const doc = () => `#/v1/write/${encodeDoc('# Letter\n\nDear Ada,\n')}`;
 
 for (const row of [
-  {
-    name: 'an app’s templates',
-    press: (d: HTMLElement) => d.querySelector<HTMLElement>('.to-drawer-apps .to-app-head to-templates > button')!,
-    opens: 'dialog.to-templates-dialog',
-    close: (m: HTMLDialogElement) => m.querySelector<HTMLElement>('.to-listbox-close')!.click(),
-  },
   { name: 'About', press: (d: HTMLElement) => d.querySelector<HTMLElement>('.to-drawer-about')!, opens: 'to-dialog.to-about-dialog dialog', close: (m: HTMLDialogElement) => m.close() },
 ])
   test(`${row.name} from the drawer: the drawer closes first, one modal at a time, and the focus comes back to the hamburger`, async () => {
@@ -162,8 +155,8 @@ test('no dialog opens another while it is open: every drawer row and every Share
     await until(() => modals().length === 0);
     await tick(20);
   };
-  // The drawer's rows that open a dialog: Share…, About, and every app's templates.
-  const rows = ['.to-drawer-share', '.to-drawer-about', ...apps().map((_, i) => `.to-drawer-apps .to-app-head:nth-of-type(${i + 1}) to-templates > button`)];
+  // The drawer's rows that open a dialog: Share… and About (the apps and their templates are found by search or on the home page; Paul, 2026-10-12).
+  const rows = ['.to-drawer-share', '.to-drawer-about'];
   for (const sel of rows) {
     const drawer = (await openDrawerDoc(shell)).closest('dialog')!;
     const b = drawer.parentElement!.querySelector<HTMLElement>(sel) ?? drawer.querySelector<HTMLElement>(sel);

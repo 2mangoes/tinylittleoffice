@@ -37,7 +37,7 @@ test("the hamburger opens the drawer, the home page's drawer has no app rows, Fi
   const find = shell.querySelector<HTMLInputElement>('.to-find')!;
   // Nothing kept (Save in browser off): apps, templates and commands are what there is to find.
   expect(find.placeholder).toBe('Find app, template, or command');
-  // On the home page the apps are the page, so the drawer has no rows of them (Paul, 2026-10-10); Find still finds.
+  // The drawer lists no apps anywhere (Paul, 2026-10-12: search finds them, and the home page is the list); Find still finds.
   expect(shell.querySelectorAll('.to-drawer-apps .to-app-head').length).toBe(0);
   find.value = 'zzz';
   find.dispatchEvent(new Event('input', { bubbles: true }));
@@ -110,25 +110,21 @@ test('Find finds kept documents by title and templates by name or app, each unde
   }
 });
 
-test("a template from inside an app: each of the drawer's rows has its templates button, which closes the drawer and opens the templates listbox; choosing one opens it", async () => {
+test('inside an app the drawer lists no apps (Paul, 2026-10-12: search finds them, and the home page is the list); Find finds an app and its templates', async () => {
   const shell = await mount('#/v1/sheet');
   shell.querySelector<HTMLButtonElement>('.to-burger')!.click();
   const dialog = shell.querySelector<HTMLDialogElement>('dialog.to-drawer')!;
   await until(() => dialog.open);
-  // In a document the apps are rows, each with its templates button.
-  const rows = [...shell.querySelectorAll('.to-drawer-apps .to-app-head')];
-  expect(rows.map((r) => r.querySelector('.to-app-open span')!.textContent)).toEqual(apps().map((a) => a.name));
-  for (const r of rows) expect(r.querySelector('to-templates .to-templates-btn')).not.toBeNull();
-  const row = rows[0];
-  row.querySelector<HTMLButtonElement>('.to-templates-btn')!.click();
-  // The drawer hands over: closed, and the templates open alone (one modal at a time).
-  await until(() => !!shell.querySelector('to-templates.to-drawer-templates dialog[open]'));
-  const list = shell.querySelector('to-templates.to-drawer-templates')!;
-  // Blank is there at once; the Word Processor's own templates as their file arrives.
-  await until(() => !dialog.open && list.querySelectorAll('dialog[open] [role=option] svg').length > 1);
-  const options = [...list.querySelectorAll<HTMLElement>('[role=option]')];
-  options[1].click();
-  await until(() => location.hash.startsWith('#/v1/write/'));
+  expect(shell.querySelectorAll('.to-drawer-apps .to-app-head').length).toBe(0);
+  expect(shell.querySelector('to-templates')).toBeNull();
+  const find = shell.querySelector<HTMLInputElement>('.to-find')!;
+  find.value = 'word';
+  find.dispatchEvent(new Event('input', { bubbles: true }));
+  await until(() => headings(dialog).includes('Templates'), 'the Word Processor’s templates never came');
+  expect(headings(dialog)[0]).toBe('Apps');
+  expect(shell.querySelector('.to-drawer-apps a span')!.textContent).toBe('Word Processor');
+  dialog.close();
+  await until(() => !dialog.open);
   history.replaceState(null, '', location.pathname);
 });
 
@@ -295,7 +291,7 @@ for (const [w, h] of [
       await until(() => !!shell.querySelector('to-write-editor'));
       const doc = await openDrawerDoc(shell);
       const dialog = doc.closest('dialog')!;
-      await until(() => !!dialog.querySelector('.to-drawer-apps .to-app-head'));
+      await until(() => !!dialog.querySelector('.to-drawer-doc .to-btn'));
       const rows = firstLines(dialog);
       expect(rows.length).toBeGreaterThan(0);
       expect(rows.filter((r) => !r.beside && !r.under)).toEqual([]);
@@ -308,18 +304,18 @@ for (const [w, h] of [
   });
 
 // Paul's hamburger notes of 2026-10-11: the language, Save in browser, the size with no words, one
-// search over apps, documents, templates and commands, the apps away from home, then the rest; no Privacy, no
+// search over apps, documents, templates and commands, then the rest (no rows of apps anywhere: Paul, 2026-10-12); no Privacy, no
 // Keyboard shortcuts, no palette of its own; Theme's first option Match device; About's body the version line alone.
 
-test("the drawer's sections in Paul's order: the language, Save in browser, the size, the search and the apps, This document, the rest", async () => {
+test("the drawer's sections in Paul's order: the language, Save in browser, the size, the search, This document, the rest", async () => {
   const shell = await mount(`#/v1/write/${encodeDoc('# Plans\n\nWords.\n')}`);
   await until(() => !!shell.querySelector('to-write-editor'));
   const dialog = await openDrawer(shell);
   const order = ['.to-drawer-lang', '.to-drawer-save', '.to-size', '.to-drawer-apps', '.to-drawer-doc', '.to-drawer-prefs'].map((s) => dialog.querySelector(s)!);
   for (const el of order) expect(el).not.toBeNull();
   for (let i = 1; i < order.length; i++) expect(order[i - 1].compareDocumentPosition(order[i]) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
-  // The apps are rows away from home.
-  expect(dialog.querySelectorAll('.to-drawer-apps .to-app-head').length).toBe(apps().length);
+  // No rows of apps, at home or away (Paul, 2026-10-12).
+  expect(dialog.querySelectorAll('.to-drawer-apps .to-app-head').length).toBe(0);
   // The size: the eye, then the stepper, no words; its name for a screen reader alone.
   const sz = dialog.querySelector<HTMLElement>('.to-size')!;
   expect(sz.getAttribute('aria-label')).toBe('Size of everything');

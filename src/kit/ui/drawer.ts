@@ -9,8 +9,8 @@
  * 4. One search for anything (Mod+K opens the drawer with it focused): apps, documents kept here, templates and the
  *    commands in force where the person was (the words', the app's, the page's, each with its keys at the row's end),
  *    each kind under its heading, by one matching (search.ts startsAWord). A command chosen closes the drawer, gives
- *    the focus back where it was, and runs. Away from the home page, with nothing typed, the apps as rows, each with
- *    its templates (<to-templates>, the home page's), so a template is reachable from inside any app.
+ *    the focus back where it was, and runs. No rows of apps with nothing typed (Paul, 2026-10-12: "If people want apps
+ *    they can search or go to home page"): a template is found by search, or on the home page.
  * 5. This document, with a document open: New {noun}, Share…, Download (the table of formats, `downloads`, its
  *    menu), the page's other commands drawn in the drawer (Find in this document) and, under a finger, the app's
  *    commands that need nothing in hand (the bar being away while reading); each with its keys at the right where
@@ -23,7 +23,7 @@
  * Anything that opens a document closes the drawer (it follows the hash). The drawer is a menu: a row that opens a
  * dialog closes the drawer first and opens it, one modal at a time, and when that dialog closes the focus is on the
  * hamburger (handOver; Paul, 2026-10-10: "the outer one hands over"). The dialogs it opens are drawn beside its own
- * <dialog>, not in it: an app's templates in one <to-templates bare>.
+ * <dialog>, not in it.
  */
 import { LitElement, html, nothing, type TemplateResult } from 'lit';
 import type { AppDef } from '../core/app.ts';
@@ -42,7 +42,6 @@ import { toast } from '../core/say.ts';
 import { commitUrl, running, type Version } from '../core/version.ts';
 import './preview.ts';
 import { focusBack, handBack, type ToDialog } from './dialog.ts';
-import type { ToTemplates } from './home.ts';
 import type { MenuItem } from './menu.ts';
 import './menu.ts';
 import { coarse, drawnIn, inScope, labelOf, live, run, type Command } from '../core/commands.ts';
@@ -65,7 +64,6 @@ export class ToDrawer extends LitElement {
     find: { state: true },
     open: { state: true },
     version: { state: true },
-    templatesOf: { state: true },
     downloads: { attribute: false },
     def: { attribute: false },
     page: { attribute: false },
@@ -90,8 +88,6 @@ export class ToDrawer extends LitElement {
   declare open: boolean;
   /** The build this is, once About has asked (null: there is no /version.json, as on the dev server). */
   declare version: Version | null;
-  /** The app whose templates were asked for from its row: the one <to-templates bare> shows them. */
-  declare templatesOf: AppDef | null;
   private offs: (() => void)[] = [];
 
   constructor() {
@@ -99,7 +95,6 @@ export class ToDrawer extends LitElement {
     this.find = '';
     this.open = false;
     this.version = null;
-    this.templatesOf = null;
     this.downloads = null;
     this.def = null;
     this.page = null;
@@ -162,12 +157,6 @@ export class ToDrawer extends LitElement {
   /** A row that opens a dialog: the drawer closes, the focus goes to the hamburger, and the dialog opens; its way back is the hamburger. */
   private handOver(open: () => unknown) {
     return handBack(() => this.close(), document.querySelector<HTMLElement>('.to-burger'), open);
-  }
-  /** An app's templates, from its row: the drawer's one templates dialog, the drawer closed first. */
-  private async templates(app: AppDef) {
-    this.templatesOf = app;
-    await this.updateComplete;
-    this.querySelector<ToTemplates>('to-templates.to-drawer-templates')?.show();
   }
 
   private async togglePrivate(e: Event) {
@@ -275,18 +264,7 @@ export class ToDrawer extends LitElement {
           this.open
             ? html`<nav class="to-drawer-apps" aria-label=${t('Apps')}>
                 <input class="to-find" type="search" placeholder=${placeholder} aria-label=${placeholder} autocomplete="off" .value=${this.find} @input=${(e: Event) => (this.find = (e.target as HTMLInputElement).value)} @keydown=${(e: KeyboardEvent) => e.key === 'Enter' && !e.isComposing && (e.preventDefault(), this.querySelector<HTMLElement>('.to-drawer-apps .to-found')?.click())} />
-                ${
-                  want
-                    ? this.renderFound(want, kept)
-                    : !this.downloads
-                      ? nothing
-                      : apps().map(
-                          (a) => html`<div class="to-app-head" @pointerenter=${() => void preloadTemplates(a)}>
-                        <a class="to-app-open" href=${routeHash(a.id)} @click=${() => this.close()}>${icon(a.icon, 20)}<span class="to-app-name">${a.name}</span></a>
-                        <to-templates .app=${a} .via=${(app: AppDef) => this.handOver(() => this.templates(app))}></to-templates>
-                      </div>`,
-                        )
-                }
+                ${want ? this.renderFound(want, kept) : nothing}
               </nav>
               ${
                 this.downloads
@@ -322,7 +300,6 @@ export class ToDrawer extends LitElement {
         }
       </div>
     </dialog>
-    ${this.templatesOf ? html`<to-templates class="to-drawer-templates" bare .app=${this.templatesOf}></to-templates>` : nothing}
     <to-dialog class="to-about-dialog" heading=${t('About Tiny Little Office')} .body=${
       this.version
         ? html`<p class="to-hint to-about-version"><a href=${commitUrl(this.version.commit)} target="_blank" rel="noopener">${t('Running commit {commit}', { commit: this.version.commit.slice(0, 7) })}</a>${this.version.tag ? ` (${this.version.tag})` : ''}</p>`

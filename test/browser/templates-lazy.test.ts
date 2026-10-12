@@ -93,19 +93,3 @@ test('a language chosen while a list is open: the templates are forgotten, asked
   expect(names(row).length).toBe(1 + want.length);
   row.querySelector<ToTemplates>('to-templates')!.hide();
 });
-
-test("a pointer over the drawer's app row, inside a document, asks for that app's templates ahead of the tap", async () => {
-  const shell = await mount('#/v1/sheet');
-  shell.querySelector<HTMLButtonElement>('.to-burger')!.click();
-  const dialog = shell.querySelector<HTMLDialogElement>('dialog.to-drawer')!;
-  await until(() => dialog.open && shell.querySelectorAll('.to-drawer-apps .to-app-head').length > 0);
-  const write = appOf('write')!;
-  await forgetTemplates();
-  expect(templatesOf(write)).toBeUndefined();
-  const row = [...shell.querySelectorAll<HTMLElement>('.to-drawer-apps .to-app-head')].find((r) => r.querySelector('.to-app-open span')!.textContent === 'Word Processor')!;
-  row.dispatchEvent(new PointerEvent('pointerenter'));
-  await until(() => !!templatesOf(write));
-  expect(templatesOf(write)!.length).toBe((await write.templates()).length);
-  dialog.close();
-  await until(() => !dialog.open);
-});
