@@ -1222,6 +1222,8 @@
     font: 400 min(calc(1.875 * var(--to-scale)), 7vw) / 1 var(--to-font-serif);
     letter-spacing: -0.01em;
     white-space: nowrap;
+    /* In by a row's inset from the column's edge, where the header starts: on the apps' icons below (tokens.css). */
+    margin-inline-start: var(--to-row-inset);
   }
   .to-brand .to-mark {
     flex: none;
@@ -1268,7 +1270,9 @@
   .to-find {
     margin-bottom: 0.5em;
   }
+  /* The drawer's app rows are nav: their inset in its ems, not the home page's (tokens.css --to-row-inset). */
   .to-drawer-apps .to-app-open {
+    padding: 0 0.5em;
     flex: 1;
     align-items: flex-start;
   }
@@ -1530,6 +1534,14 @@
     border-bottom: 1px solid var(--to-border);
     transition: height 0.2s ease;
   }
+  /* The home page's header starts where its column does, so the wordmark stands over the apps at every width; a
+     document's header keeps the gutter, where an editor's column (.to-wide) starts. */
+  .to-header:has(> .to-brand) {
+    padding-inline-start: var(--to-col-inset-l);
+  }
+  .to-header:has(> .to-brand):dir(rtl) {
+    padding-inline-start: var(--to-col-inset-r);
+  }
   /* The menu, at the top inline end of the column on every screen (where the words are not: they begin at the other
      side, and an iPhone's left edge is Safari's back swipe); on a card of its own once the header has stepped aside. */
   .to-burger {
@@ -1632,9 +1644,10 @@
     --to-bleed-l: 0rem;
     --to-bleed-r: 0rem;
     padding: var(--to-gutter);
-    /* The column scrolls the window's width (its scrollbar at the window's edge); what it holds is kept to the measure. */
-    padding-left: max(var(--to-inset-l), (100% - var(--to-max-w)) / 2 + var(--to-gutter));
-    padding-right: max(var(--to-inset-r), (100% - var(--to-max-w)) / 2 + var(--to-gutter));
+    /* The column scrolls the window's width (its scrollbar at the window's edge); what it holds is kept to the measure
+       (tokens.css, --to-col-inset-l and -r, which the home page's header reads too). */
+    padding-left: var(--to-col-inset-l);
+    padding-right: var(--to-col-inset-r);
   }
   /* An editor's column has half of what can be seen of it (--to-col-h, kit/chrome.ts) as room below its last line, so
      the caret typed at the end stays at the middle of the screen (Paul, 2026-10-12: "enough padding at the end of a
@@ -1965,7 +1978,7 @@
     align-content: center;
     gap: 0.625em;
     min-height: var(--to-touch);
-    padding: 0 0.5em;
+    padding: 0 var(--to-row-inset);
     color: var(--to-ink);
     text-decoration: none;
     border-radius: var(--to-radius-sm);

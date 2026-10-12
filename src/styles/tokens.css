@@ -65,6 +65,15 @@
        row's grip, tick and menu leave its words the room (the review of 2026-10-11: 114px each had left a task 25px). */
     --to-touch: min(2.75rem, calc(2.75 * var(--to-nav-font)));
     --to-max-w: 67.5rem;
+    /* The column's side insets: the gutter (or the notch), or half of what the window has over the measure and the
+       gutter, whichever is more. Worked out here, where both readers inherit it: the column's padding (kit.css .to-main)
+       and the home page's header, whose wordmark starts where the column does (Paul, 2026-10-12: "keep the logo aligned
+       with the list of apps below"). The 100% is the reader's own: the window's width, for both. */
+    --to-col-inset-l: max(var(--to-gutter), env(safe-area-inset-left), (100% - var(--to-max-w)) / 2 + var(--to-gutter));
+    --to-col-inset-r: max(var(--to-gutter), env(safe-area-inset-right), (100% - var(--to-max-w)) / 2 + var(--to-gutter));
+    /* A row's inset inside the column, from its hover box to its icon (kit.css .to-app-open), in the document's scale;
+       the home page's wordmark is set in by as much, so its first letter stands on the icons' edge. */
+    --to-row-inset: calc(0.5 * var(--to-scale));
     /* The line: body text's, and the tighter one of headings and labels. */
     --to-line: 1.5;
     --to-line-label: 1.25;

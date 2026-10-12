@@ -253,3 +253,46 @@ for (const [w, h, lang] of [
       d.forget();
     }
   });
+
+// The wordmark stands on the apps' edge (Paul, 2026-10-12: "On desktop, keep the logo aligned with the list of apps
+// below"): its first letter on the first app's icon's edge at every width, the header's start the column's start and the
+// wordmark's margin the row's inset; at 390 the header is still one row, the wordmark beside the menu button.
+for (const [w, h, lang] of [
+  [1440, 900, null],
+  [1100, 800, null],
+  [900, 800, null],
+  [390, 844, null],
+  [1440, 900, 'ar'],
+] as const)
+  test(`at ${w}px${lang ? `, in ${lang}` : ''}, the wordmark's first letter stands on the first app's icon's edge, the header one row`, async () => {
+    await page.viewport(w, h);
+    const shell = await mount('');
+    if (lang) {
+      await setLanguage(lang);
+      await until(() => document.documentElement.lang === lang);
+    }
+    await until(() => !!shell.querySelector('.to-app-open > .to-icon') && !!shell.querySelector('.to-header > .to-brand'));
+    await document.fonts.ready;
+    const brand = shell.querySelector<HTMLElement>('.to-header > .to-brand')!;
+    const rtl = getComputedStyle(brand).direction === 'rtl';
+    const text = document.createTreeWalker(brand, NodeFilter.SHOW_TEXT, (n) => (n.textContent!.trim() ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP)).nextNode()!;
+    const range = document.createRange();
+    range.selectNodeContents(text);
+    const words = range.getBoundingClientRect();
+    const ico = shell.querySelector('.to-app-open > .to-icon')!.getBoundingClientRect();
+    const off = rtl ? ico.right - words.right : words.left - ico.left;
+    expect(Math.abs(off), `the wordmark ${off}px off the icon's edge`).toBeLessThan(1);
+    // One row: the header its token's height, the words inside it and clear of the menu button.
+    const header = shell.querySelector<HTMLElement>('.to-header')!;
+    const probe = document.createElement('i');
+    probe.style.cssText = 'position:absolute;display:block;height:var(--to-header-h)';
+    header.append(probe);
+    const rowH = probe.getBoundingClientRect().height;
+    probe.remove();
+    const hr = header.getBoundingClientRect();
+    const burger = shell.querySelector('.to-burger')!.getBoundingClientRect();
+    expect(Math.abs(hr.height - rowH), `header ${hr.height}px, a row ${rowH}px`).toBeLessThan(1);
+    expect(words.top).toBeGreaterThanOrEqual(hr.top);
+    expect(words.bottom).toBeLessThanOrEqual(hr.bottom);
+    expect(rtl ? burger.right - words.left : words.right - burger.left, 'the wordmark runs under the menu button').toBeLessThanOrEqual(0);
+  });
