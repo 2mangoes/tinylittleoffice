@@ -39,6 +39,9 @@ export async function raster(svg: string, w: number, h: number, scale = 1, paper
   return blob ? new Uint8Array(await blob.arrayBuffer()) : null;
 }
 
+/** Draw SVG markup on a canvas of w by h, over the paper: a frame for the video encoder (kit/webm.ts). */
+export const canvas = (svg: string, w: number, h: number, paper: string | null = PAPER): Promise<HTMLCanvasElement | null> => paint(svg, w, h, 1, paper);
+
 /** Draw SVG markup as RGBA pixels (w by h, four bytes each): a frame for the GIF encoder. */
 export async function pixels(svg: string, w: number, h: number, paper: string | null = PAPER): Promise<Uint8ClampedArray | null> {
   const canvas = await paint(svg, w, h, 1, paper);

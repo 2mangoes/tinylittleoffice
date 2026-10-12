@@ -56,7 +56,7 @@ import type { Locker } from './crypt.ts';
 import { ENVELOPE_KEYS, isoMinute } from './envelope.ts';
 import { ensureIcons, icon, iconNames, onIcons, UI } from './icons.ts';
 import { chosenLanguage, languagePending, languages, onLanguage, setLanguage, t } from './i18n.ts';
-import { exportItems, printDoc, viewAs } from './exports.ts';
+import { exportItems, formatsReady, printDoc, viewAs } from './exports.ts';
 import { LINK_VERSION, onFlush, parseHash, routeHash, withLang, withText } from './route.ts';
 import { keeping, onPrivacy, pack, reopen, setPrivate } from './privacy.ts';
 import { copyText } from './share.ts';
@@ -354,6 +354,8 @@ export class ToShell extends LitElement {
         if (cmds) register(cmds.default);
         if (this.app === def.id) this.tag = tag;
       });
+      // The formats this browser may not make (a WebM wants its encoder): asked once, the Download table drawn again.
+      void formatsReady(def).then(() => this.requestUpdate());
     }
     if (this.sealed) void this.reopen(this.sealed);
     else if (def && view) void this.updateComplete.then(() => this.doView());

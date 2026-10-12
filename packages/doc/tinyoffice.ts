@@ -19,6 +19,7 @@
  *   tinyoffice read --text <link|file.tlo>            what it says, as Markdown: what a screen reader reads
  *   tinyoffice file <link> [--as tlo|md|json|csv|…] [--out path|-]
  *                                                     the document as a file, named after its title (.tlo by default)
+ *                                                     (--as webm: made in the browser; open the link, Download)
  *   tinyoffice diff <link> <link>                     what the second changed, block by block (exit 1 when they differ)
  *   tinyoffice lint <link|file.tlo> [--json]          what the eye would have seen, a line a finding:
  *                                                     app · slide or block · the finding · what to do (exit 1 on one)
@@ -45,6 +46,7 @@ const USAGE = `tinyoffice (or tinylittleoffice, as npx runs it):
   tinyoffice read --text <link|file.tlo>            what it says, as Markdown: what a screen reader reads
   tinyoffice file <link> [--as tlo|md|csv|…] [--out path|-]
                                                     the document as a file, named after its title (.tlo by default)
+                                                    (--as webm: made in the browser; open the link, Download)
   tinyoffice diff <link> <link>                     what the second changed, block by block (exit 1 when they differ)
   tinyoffice lint <link|file.tlo> [--json]          what the eye would have seen, a line a finding:
                                                     app · slide or block · the finding · what to do (exit 1 on one)

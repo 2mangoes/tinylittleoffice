@@ -227,9 +227,32 @@ export const KIT_FORMATS: readonly Export[] = [
  * exportAs and the share sheet all read it; nothing anywhere asks which extension it is holding.
  */
 export function formatsOf(def: AppDef): Export[] {
-  const own = def.exports ?? [];
+  const own = (def.exports ?? []).filter((f) => !f.available || can.get(f) === true);
   const theirs = new Set(own.map((f) => f.ext));
   return [...KIT_FORMATS.filter((f) => !theirs.has(f.ext)), ...own];
+}
+
+/** What each format with an `available` check said, once a session; until it has said, the format is not listed. */
+const can = new Map<Export, boolean>();
+const asking = new Map<Export, Promise<void>>();
+
+/**
+ * The app's formats that ask whether this browser can make them (a WebM wants its encoder), asked: once a session
+ * each, so formatsOf lists those that can. The shell asks as an app opens and draws the Download table again after.
+ */
+export function formatsReady(def: AppDef): Promise<void> {
+  const ask = (f: Export) => {
+    if (!asking.has(f))
+      asking.set(
+        f,
+        f.available!().then(
+          (ok) => void can.set(f, ok),
+          () => void can.set(f, false),
+        ),
+      );
+    return asking.get(f)!;
+  };
+  return Promise.all((def.exports ?? []).filter((f) => f.available).map(ask)).then(() => {});
 }
 
 /** The app's format with this extension, if it has one. */
@@ -265,6 +288,7 @@ export async function exportAs(ext: string, current: Current, share = true): Pro
  * prints. Any other extension does nothing (the document opens plainly).
  */
 export async function viewAs(view: string, current: () => Current): Promise<void> {
+  await formatsReady(current().ctx.def);
   const format = formatOf(current().ctx.def, view);
   if (!format && view !== 'print') return;
   try {

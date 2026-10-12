@@ -3,14 +3,15 @@
  * poster, name badges), chosen by the head's "format:". The document is TLO, a slide between rules
  * (model.ts); the drawing, the layout, the folds and the player page are view.ts; PowerPoint is pptx.ts;
  * the editor editor.ts. Exports: .pptx, the deck as a web page that plays itself, a picture of every slide,
- * a film of the deck (GIF), and the kit's print (the sheets, for a fold) and text.
+ * a film of the deck (a GIF, and a WebM where the browser can make one), and the kit's print (the sheets, for a fold) and text.
  */
 import { Presentation } from 'lucide';
 import { defineApp, isStill } from '../../kit/app.ts';
 import { pageSvg } from '../../kit/draw.ts';
 import { encodeGif, type GifFrame } from '../../kit/gif.ts';
 import { t } from '../../kit/i18n.ts';
-import { pixels, raster } from '../../kit/raster.ts';
+import { canvas, drawn, pixels, raster } from '../../kit/raster.ts';
+import { webmOf, webmReady, type WebmFrame } from '../../kit/webm.ts';
 import { zip } from '../../kit/zip.ts';
 import { retitle, titleOf } from './model.ts';
 import { buildPptx } from './pptx.ts';
@@ -18,6 +19,22 @@ import { deckFrames, deckPages, deckToHtml } from './view.ts';
 
 /** How long each frame of the film stays: a slide, then each line as it is revealed. */
 const FRAME_MS = 1400;
+
+/** The film's width; its height is the slides' shape (an even number for the video, as its encoder wants). */
+const FILM_W = 960;
+
+/** The film of the deck as a video: the GIF's frames, each drawn on a canvas and held as long. */
+async function deckWebm(doc: string): Promise<Uint8Array | null> {
+  const pages = deckFrames(doc);
+  const h = 2 * Math.round((FILM_W * pages[0].h) / pages[0].w / 2);
+  async function* frames(): AsyncIterable<WebmFrame> {
+    for (const p of pages) {
+      const c = await canvas(pageSvg(p), FILM_W, h);
+      if (c) yield { canvas: c, ms: FRAME_MS };
+    }
+  }
+  return webmOf(frames(), FILM_W, h);
+}
 
 export default defineApp({
   id: 'deck',
@@ -73,7 +90,7 @@ export default defineApp({
       build: async (doc) => {
         const frames: GifFrame[] = [];
         const pages = deckFrames(doc);
-        const w = 960;
+        const w = FILM_W;
         const h = Math.round((w * pages[0].h) / pages[0].w);
         for (const p of pages) {
           const px = await pixels(pageSvg(p), w, h);
@@ -81,6 +98,14 @@ export default defineApp({
         }
         return encodeGif(w, h, frames);
       },
+    },
+    {
+      ext: 'webm',
+      label: () => t('A film of the deck (WebM)'),
+      mime: 'video/webm',
+      shows: 'own',
+      available: () => webmReady(FILM_W, 540),
+      build: async (doc) => drawn(await deckWebm(doc)),
     },
   ],
   commands: () => import('./commands.ts'),

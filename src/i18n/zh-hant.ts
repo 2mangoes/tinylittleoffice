@@ -751,6 +751,7 @@ export default {
   'The sun comes up from behind the hills and the morning slides in: depth, size and a pen-drawn skyline.': '太陽從山丘後升起，早晨緩緩滑入：有景深、大小變化，和手繪的天際線。',
   // A key is a moment a shape is set at; between keys it travels. The effects (Impact … Blur) are meme looks.
   'Animated GIF': '動態 GIF',
+  'Video (WebM)': '影片（WebM）',
   'Animated SVG': '動態 SVG',
   'An empty stage': '空舞台',
   '3D': '3D', // same
@@ -1067,6 +1068,7 @@ export default {
   'PowerPoint (PPTX)': 'PowerPoint（PPTX）',
   'A picture of every slide (ZIP of PNGs)': '每張投影片的圖片（PNG 的 ZIP）',
   'An animation of the deck (GIF)': '簡報的動畫影片（GIF）',
+  'A film of the deck (WebM)': '簡報的影片（WebM）',
 
   // The templates
   'Title, agenda, three points with notes for the speaker, and a close.': '標題、議程、三個附講者備忘稿的重點，以及結尾。',

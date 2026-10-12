@@ -173,3 +173,17 @@ test('example, run for every app and every shape, is clean every time', { timeou
     for (const x of all) expect(x.lint, `${a} ${x.id}`).toStrictEqual([]);
   }
 });
+
+test('file --as webm says the video is made in the browser and exits 2, and the help says so beside the format', () => {
+  for (const [app, text] of [
+    ['anim', ''],
+    ['deck', '## One\n'],
+  ]) {
+    const url = run(['link', app], text).trim();
+    const r = spawnSync(process.execPath, [CLI, 'file', url, '--as', 'webm', '--out', '-'], { encoding: 'utf8' });
+    expect(r.status, app).toBe(2);
+    expect(r.stdout, app).toBe('');
+    expect(r.stderr, app).toBe('tinyoffice: WebM is made in the browser: open the link and save it from Download.\n');
+  }
+  expect(run(['help'])).toMatch(/tinyoffice file <link>[^\n]*\n[^\n]*\n[^\n]*--as webm: made in the browser/);
+});

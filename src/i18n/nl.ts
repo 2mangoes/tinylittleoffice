@@ -750,6 +750,7 @@ export default {
   'The sun comes up from behind the hills and the morning slides in: depth, size and a pen-drawn skyline.': 'De zon komt op achter de heuvels en de ochtend schuift binnen: diepte, formaat en een met pen getekende skyline.',
   // A key is a moment a shape is set at; between keys it travels. The effects (Impact … Blur) are meme looks.
   'Animated GIF': 'Geanimeerde GIF',
+  'Video (WebM)': 'Video (WebM)', // same
   'Animated SVG': 'Geanimeerde SVG',
   'An empty stage': 'Een leeg podium',
   '3D': '3D', // same
@@ -1066,6 +1067,7 @@ export default {
   'PowerPoint (PPTX)': 'PowerPoint (PPTX)', // same
   'A picture of every slide (ZIP of PNGs)': 'Een afbeelding van elke dia (ZIP met PNG’s)',
   'An animation of the deck (GIF)': 'Film van de presentatie (GIF)',
+  'A film of the deck (WebM)': 'Film van de presentatie (WebM)',
 
   // The templates
   'Title, agenda, three points with notes for the speaker, and a close.': 'Titel, agenda, drie punten met notities voor de spreker, en een afsluiting.',

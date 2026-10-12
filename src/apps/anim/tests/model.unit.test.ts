@@ -220,7 +220,7 @@ test('the definition: Draw hands its drawing over, and the hand-off is live now 
   expect(readAnim(parse(handoff.convert(DRAWING))).shapes).toHaveLength(3);
   expect(def.title('---\ntitle: Up\n---\n')).toBe('Up');
   expect(def.retitle('', 'Up')).toBe('---\ntitle: Up\n---\n');
-  expect(def.exports!.map((e) => e.ext)).toEqual(['gif', 'svg']);
+  expect(def.exports!.map((e) => e.ext)).toEqual(['gif', 'webm', 'svg']);
   expect(templates().map((x) => x.id)).toEqual(['liftoff', 'bounce', 'spinner', 'curtain', 'birthday', 'standup', 'green', 'flip', 'weather', 'countdown', 'flight', 'neon', 'sunrise']);
   expect(templates()[0].doc).toBe(
     LIFT.replace('---\n', '---\ntitle: Lift off\n').replace('fps: 8\n', 'fps: 8\nalt: A rocket lifts off and flies up and away to the right, under the words Lift off.\n'),

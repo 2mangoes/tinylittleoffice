@@ -716,6 +716,7 @@ export default {
   'Sunrise': 'সূর্যোদয়',
   'The sun comes up from behind the hills and the morning slides in: depth, size and a pen-drawn skyline.': 'পাহাড়ের পেছন থেকে সূর্য ওঠে আর সকাল নেমে আসে: গভীরতা, আকার, আর কলমে আঁকা দিগন্তরেখা।',
   'Animated GIF': 'অ্যানিমেটেড GIF',
+  'Video (WebM)': 'ভিডিও (WebM)',
   'Animated SVG': 'অ্যানিমেটেড SVG',
   'An empty stage': 'খালি মঞ্চ',
   '3D': '3D', // same
@@ -1029,6 +1030,7 @@ export default {
   'PowerPoint (PPTX)': 'PowerPoint (PPTX)', // same
   'A picture of every slide (ZIP of PNGs)': 'প্রতিটি স্লাইডের ছবি (PNG-এর ZIP)',
   'An animation of the deck (GIF)': 'ডেকের ভিডিও (GIF)',
+  'A film of the deck (WebM)': 'ডেকের ভিডিও (WebM)',
 
   // The templates
   'Title, agenda, three points with notes for the speaker, and a close.': 'শিরোনাম, আলোচ্যসূচি, বক্তার নোটসহ তিনটি পয়েন্ট, আর সমাপ্তি।',

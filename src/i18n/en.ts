@@ -770,6 +770,7 @@ export default {
   'The sun comes up from behind the hills and the morning slides in: depth, size and a pen-drawn skyline.': 'The sun comes up from behind the hills and the morning slides in: depth, size and a pen-drawn skyline.',
   // A key is a moment a shape is set at; between keys it travels. The effects (Impact … Blur) are meme looks.
   'Animated GIF': 'Animated GIF',
+  'Video (WebM)': 'Video (WebM)',
   'Animated SVG': 'Animated SVG',
   'An empty stage': 'An empty stage',
   '3D': '3D',
@@ -1087,6 +1088,7 @@ export default {
   'PowerPoint (PPTX)': 'PowerPoint (PPTX)',
   'A picture of every slide (ZIP of PNGs)': 'A picture of every slide (ZIP of PNGs)',
   'An animation of the deck (GIF)': 'An animation of the deck (GIF)',
+  'A film of the deck (WebM)': 'A film of the deck (WebM)',
 
   // The templates
   'Title, agenda, three points with notes for the speaker, and a close.': 'Title, agenda, three points with notes for the speaker, and a close.',

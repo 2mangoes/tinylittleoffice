@@ -78,6 +78,11 @@ export interface Export {
   shows: 'own' | 'text' | null;
   /** Drawn where nothing can move (ViewOpts.still): a PDF, a PNG. */
   still?: boolean;
+  /**
+   * Whether this browser can make the file (a video needs its encoder): asked once a session (kit/exports.ts
+   * formatsReady), and a format that says no is not listed. Absent: always.
+   */
+  available?: () => Promise<boolean>;
   /** The file's bytes or text, built from the document alone; a promise where drawing in the browser is needed (a picture). */
   build(doc: Doc, ctx: ExportContext): Uint8Array | string | Promise<Uint8Array | string>;
 }

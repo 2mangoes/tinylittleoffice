@@ -209,7 +209,7 @@ format: poster
 
 As a link: <https://tinylittleoffice.com/deck/#doc=---%0Aformat%3A+poster%0A---%0A%23%23+%3Amusic%3A+Open+mic+night+%7B.title%7D%0A%0A-+Friday%2C+November+13%2C+8+pm%0A-+The+Anchor%2C+14+Quay+Street%0A-+Free.+Bring+a+song%2C+a+poem%2C+or+just+your+ears.>
 
-Templates: A talk, Status update, A proposal, A pitch, A lesson, Conference talk, Quarterly review, Workshop agenda, Product launch, Town-hall notice, Trivia night, Wedding slideshow, Zine, Recipe zine, Booklet, Concert program, Brochure, Farm brochure, Comic, Comic: the umbrella, Poster, Lost cat poster, Name badges, Conference badges. Its own files: `.pptx`, `.html`, `.zip`, `.gif`.
+Templates: A talk, Status update, A proposal, A pitch, A lesson, Conference talk, Quarterly review, Workshop agenda, Product launch, Town-hall notice, Trivia night, Wedding slideshow, Zine, Recipe zine, Booklet, Concert program, Brochure, Farm brochure, Comic, Comic: the umbrella, Poster, Lost cat poster, Name badges, Conference badges. Its own files: `.pptx`, `.html`, `.zip`, `.gif`, `.webm`.
 
 ## Numbers
 
@@ -414,7 +414,7 @@ Shape | Keys
 
 As a link: <https://tinylittleoffice.com/anim/#doc=---%0Atitle%3A+Lift+off%0Aframes%3A+24%0Afps%3A+8%0Aalt%3A+A+rocket+lifts+off+and+flies+up+and+away+to+the+right%2C+under+the+words+Lift+off.%0A---%0AKind+%7C+X+%7C+Y+%7C+W+%7C+H+%7C+Style+%7C+Label%0A---+%7C+---+%7C+---+%7C+---+%7C+---+%7C+---+%7C+---%0At+%7C+4+%7C+20+%7C+20+%7C+4+%7C+04+%7C+Lift+off%0Ai+%7C+8+%7C+36+%7C+8+%7C+8+%7C+0b+%7C+rocket%0A%0AShape+%7C+Keys%0A---+%7C+---%0A0+%7C+0%2C0%2C0%2C0%2C1%2C0%3B+23%2C0%2C-80%2C0%2C1%2C0%2Ci%0A1+%7C+0%2C0%2C0%2C0%2C1%2C0%3B+23%2C200%2C-200%2C80%2C1%2C-30%2Cd>
 
-Templates: Lift off, Bouncing ball, Loading spinner, Title card, Birthday card, Quick standup, Build is green, Flash card, Weather this week, New Year countdown, Flight path, Neon sign, Sunrise. Its own files: `.gif`, `.svg`.
+Templates: Lift off, Bouncing ball, Loading spinner, Title card, Birthday card, Quick standup, Build is green, Flash card, Weather this week, New Year countdown, Flight path, Neon sign, Sunrise. Its own files: `.gif`, `.webm`, `.svg`.
 
 ## Plans
 

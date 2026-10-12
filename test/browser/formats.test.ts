@@ -1,14 +1,16 @@
 // Every format of every app (kit/exports.ts formatsOf) builds, for the app's blank document, to bytes of the type it
-// says: the drawn ones too (the PDF, the PNG, a GIF, a slide's pictures), which need the browser's canvas.
+// says: the drawn ones too (the PDF, the PNG, a GIF, a WebM, a slide's pictures), which need the browser's canvas.
 import { test, expect } from 'vitest';
 import { apps } from '../../src/kit/apps.ts';
-import { fileOf, formatsOf, htmlOf, printHtml } from '../../src/kit/exports.ts';
+import { fileOf, formatsOf, formatsReady, htmlOf, printHtml } from '../../src/kit/exports.ts';
 import { pageSvg } from '../../src/kit/draw.ts';
 import { looksLike } from '../formats-bytes.ts';
 
 test('every format of every app builds its blank document into a file of its type', async () => {
   const seen: string[] = [];
   for (const def of apps()) {
+    // The formats that ask whether this browser makes them (a WebM), asked: Chromium here does.
+    await formatsReady(def);
     for (const f of formatsOf(def)) {
       const made = await fileOf(f, { doc: def.blank(), ctx: { def, title: '', link: `${location.origin}/#/v1/${def.id}` } });
       expect(made.mime, `${def.id}.${f.ext}`).toBe(f.mime);
@@ -17,7 +19,7 @@ test('every format of every app builds its blank document into a file of its typ
       seen.push(`${def.id}.${f.ext}`);
     }
   }
-  expect(seen).toEqual(expect.arrayContaining(['write.pdf', 'write.png', 'write.docx', 'anim.gif', 'deck.pptx', 'deck.zip', 'sheet.chart.png', 'draw.tile.png']));
+  expect(seen).toEqual(expect.arrayContaining(['write.pdf', 'write.png', 'write.docx', 'anim.gif', 'anim.webm', 'deck.pptx', 'deck.webm', 'deck.zip', 'sheet.chart.png', 'draw.tile.png']));
 }, 120_000);
 
 test('the web page and the printed page say each page’s own alt, and no picture is given two roles', () => {

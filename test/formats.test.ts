@@ -4,7 +4,8 @@
 import { test, expect } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { apps } from '../src/kit/apps.ts';
-import { formatsOf, htmlOf } from '../src/kit/exports.ts';
+import { formatsOf, formatsReady, htmlOf } from '../src/kit/exports.ts';
+import type { AppDef, Export } from '../src/kit/app.ts';
 import { looksLike } from './formats-bytes.ts';
 
 test("nothing in the kit's exports switches on an extension, nor the shell on a kit format's", () => {
@@ -24,8 +25,9 @@ test("every app's formats: the kit's less the ones it makes its own way, then it
       expect(f.mime, `${def.id}.${f.ext}`).toMatch(/^[a-z]+\/[\w.+-]+(;charset=utf-8)?$/);
       expect(['own', 'text', null], `${def.id}.${f.ext}`).toContain(f.shows);
     }
-    // An app's own comes after the kit's, and its version of a kit format is the one listed.
-    for (const own of def.exports ?? []) expect(list.find((f) => f.ext === own.ext)).toBe(own);
+    // An app's own comes after the kit's, and its version of a kit format is the one listed; one this place cannot
+    // make (a WebM: no video encoder under node) is not listed.
+    for (const own of def.exports ?? []) expect(list.find((f) => f.ext === own.ext)).toBe(own.available ? undefined : own);
   }
   const write = formatsOf(apps().find((a) => a.id === 'write')!);
   expect(write.map((f) => f.ext)).toEqual(['pdf', 'png', 'tlo', 'json', 'docx', 'md', 'rtf', 'html']);
@@ -70,4 +72,31 @@ test('a web page made of a document begins with its text layer, the pages after 
   expect(main).toMatch(/<div class="pages" aria-hidden="true">\s*<figure>/);
   // Its own words, not a function of the pages.
   expect(htmlOf([], 'T', '', '<p>Hello</p>')).toContain('<article class="to-text sr-only"><p>Hello</p></article>');
+});
+
+test('the Animator and the Deck have a WebM after the GIF; a format is listed once its check says this browser can make it, and asked once', async () => {
+  const exts = (id: string) => (apps().find((a) => a.id === id)!.exports ?? []).map((f) => [f.ext, f.label(), !!f.available]);
+  expect(exts('anim')).toEqual([
+    ['gif', 'Animated GIF', false],
+    ['webm', 'Video (WebM)', true],
+    ['svg', 'Animated SVG', false],
+  ]);
+  expect(exts('deck').slice(-2)).toEqual([
+    ['gif', 'An animation of the deck (GIF)', false],
+    ['webm', 'A film of the deck (WebM)', true],
+  ]);
+  let asked = 0;
+  const format = (ext: string, ok: boolean): Export => ({ ext, mime: 'video/webm', label: () => ext, shows: 'own', available: async () => (asked++, ok), build: () => '' });
+  const def = { ...apps()[0], exports: [format('yes', true), format('no', false)] } as AppDef;
+  expect(formatsOf(def).map((f) => f.ext)).not.toContain('yes');
+  await Promise.all([formatsReady(def), formatsReady(def)]);
+  await formatsReady(def);
+  expect(asked).toBe(2);
+  const listed = formatsOf(def).map((f) => f.ext);
+  expect(listed).toContain('yes');
+  expect(listed).not.toContain('no');
+  // Under node there is no video encoder: no WebM, however long one waits.
+  const anim = apps().find((a) => a.id === 'anim')!;
+  await formatsReady(anim);
+  expect(formatsOf(anim).map((f) => f.ext)).not.toContain('webm');
 });

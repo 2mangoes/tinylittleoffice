@@ -749,6 +749,7 @@ export default {
   'The sun comes up from behind the hills and the morning slides in: depth, size and a pen-drawn skyline.': 'सूरज पहाड़ियों के पीछे से निकलता है और सुबह खिसककर आती है: गहराई, साइज़ और कलम से खिंचा क्षितिज।',
   // A key is a moment a shape is set at; between keys it travels. The effects (Impact … Blur) are meme looks.
   'Animated GIF': 'एनिमेटेड GIF',
+  'Video (WebM)': 'वीडियो (WebM)',
   'Animated SVG': 'एनिमेटेड SVG',
   'An empty stage': 'खाली मंच',
   '3D': '3D', // same
@@ -1065,6 +1066,7 @@ export default {
   'PowerPoint (PPTX)': 'PowerPoint (PPTX)', // same
   'A picture of every slide (ZIP of PNGs)': 'हर स्लाइड की तस्वीर (PNG की ZIP)',
   'An animation of the deck (GIF)': 'डेक की फ़िल्म (GIF)',
+  'A film of the deck (WebM)': 'डेक की फ़िल्म (WebM)',
 
   // The templates
   'Title, agenda, three points with notes for the speaker, and a close.': 'शीर्षक, एजेंडा, वक्ता के नोट्स के साथ तीन बातें, और समापन।',

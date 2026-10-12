@@ -9,7 +9,8 @@ import { defineApp, isStill, type Doc } from '../../kit/app.ts';
 import { pageSvg, utf8 } from '../../kit/draw.ts';
 import { encodeGif, type GifFrame } from '../../kit/gif.ts';
 import { t } from '../../kit/i18n.ts';
-import { pixels } from '../../kit/raster.ts';
+import { canvas, drawn, pixels } from '../../kit/raster.ts';
+import { webmOf, webmReady, type WebmFrame } from '../../kit/webm.ts';
 import { drawingText, H, W } from '../draw/model.ts';
 import { gifLoop, readAnim } from './model.ts';
 import { altOf, animFrames, animPage, animToSvg, frameSvg } from './view.ts';
@@ -26,6 +27,18 @@ export async function animGif(doc: Doc): Promise<Uint8Array> {
     if (px) frames.push({ data: px, delayMs });
   }
   return encodeGif(W, H, frames, { loop: gifLoop(loop) });
+}
+
+/** The video: the GIF's frames, each drawn on a canvas at the stage's size and held 1/fps of a second; one round of the motion. */
+export async function animWebm(doc: Doc): Promise<Uint8Array | null> {
+  const { pages, delayMs } = animFrames(parse(doc));
+  async function* frames(): AsyncIterable<WebmFrame> {
+    for (const p of pages) {
+      const c = await canvas(pageSvg(p), W, H);
+      if (c) yield { canvas: c, ms: delayMs };
+    }
+  }
+  return webmOf(frames(), W, H);
 }
 
 export default defineApp({
@@ -60,6 +73,7 @@ export default defineApp({
   },
   exports: [
     { ext: 'gif', label: () => t('Animated GIF'), mime: 'image/gif', shows: 'own', build: (doc) => animGif(doc) },
+    { ext: 'webm', label: () => t('Video (WebM)'), mime: 'video/webm', shows: 'own', available: () => webmReady(W, H), build: async (doc) => drawn(await animWebm(doc)) },
     { ext: 'svg', label: () => t('Animated SVG'), mime: 'image/svg+xml', shows: 'own', build: (doc) => utf8(animToSvg(parse(doc))) },
   ],
   commands: () => import('./commands.ts'),

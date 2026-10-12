@@ -751,6 +751,7 @@ export default {
   'The sun comes up from behind the hills and the morning slides in: depth, size and a pen-drawn skyline.': 'Solèy la leve dèyè ti mòn yo epi maten an glise antre: pwofondè, gwosè ak yon orizon trase ak plim.',
   // A key is a moment a shape is set at; between keys it travels. The effects (Impact … Blur) are meme looks.
   'Animated GIF': 'GIF anime',
+  'Video (WebM)': 'Videyo (WebM)',
   'Animated SVG': 'SVG anime',
   'An empty stage': 'Yon sèn vid',
   '3D': '3D', // same
@@ -1067,6 +1068,7 @@ export default {
   'PowerPoint (PPTX)': 'PowerPoint (PPTX)', // same
   'A picture of every slide (ZIP of PNGs)': 'Yon foto chak dyapozitiv (ZIP PNG)',
   'An animation of the deck (GIF)': 'Yon fim prezantasyon an (GIF)',
+  'A film of the deck (WebM)': 'Yon fim prezantasyon an (WebM)',
 
   // The templates
   'Title, agenda, three points with notes for the speaker, and a close.': 'Tit, lòd jou, twa pwen ak nòt pou oratè a, ak yon fen.',

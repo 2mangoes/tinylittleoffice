@@ -10,6 +10,7 @@ export function looksLike(mime: string, out: Uint8Array | string): boolean {
   const text = new TextDecoder().decode(bytes).replace(/^﻿/, '');
   if (base === 'application/pdf') return head(bytes, 5) === '%PDF-';
   if (base === 'image/png') return head(bytes, 4) === '\x89PNG';
+  if (base === 'video/webm') return head(bytes, 4) === '\x1a\x45\xdf\xa3';
   if (base === 'image/gif') return head(bytes, 4) === 'GIF8';
   if (base === 'application/zip' || base.startsWith('application/vnd.openxmlformats')) return head(bytes, 2) === 'PK';
   if (base === 'image/svg+xml') return /<svg[\s>]/.test(text);

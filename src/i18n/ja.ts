@@ -748,6 +748,7 @@ export default {
   'The sun comes up from behind the hills and the morning slides in: depth, size and a pen-drawn skyline.': '丘の向こうから太陽が昇り、朝がすべり込みます：奥行き、大きさ、ペンで描いた稜線。',
   // A key is a moment a shape is set at; between keys it travels. The effects (Impact … Blur) are meme looks.
   'Animated GIF': 'アニメーションGIF',
+  'Video (WebM)': '動画（WebM）',
   'Animated SVG': 'アニメーションSVG',
   'An empty stage': '空のステージ',
   '3D': '3D', // same
@@ -1064,6 +1065,7 @@ export default {
   'PowerPoint (PPTX)': 'PowerPoint（PPTX）',
   'A picture of every slide (ZIP of PNGs)': '全スライドの画像（PNGのZIP）',
   'An animation of the deck (GIF)': 'デッキの動画（GIF）',
+  'A film of the deck (WebM)': 'デッキの動画（WebM）',
 
   // The templates
   'Title, agenda, three points with notes for the speaker, and a close.': 'タイトル、議題、スピーカー用ノート付きの3つのポイント、結び。',

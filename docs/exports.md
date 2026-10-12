@@ -44,6 +44,7 @@ there it is drawn still, at its resting moment (`ViewOpts.still`).
 | Presentation Builder | `.html` | Web page (HTML) |
 | Presentation Builder | `.zip` | A picture of every slide (ZIP of PNGs) |
 | Presentation Builder | `.gif` | An animation of the deck (GIF) |
+| Presentation Builder | `.webm` | A film of the deck (WebM) |
 | Spreadsheet | `.xlsx` | Excel (XLSX) |
 | Spreadsheet | `.csv` | CSV |
 | Spreadsheet | `.chart.svg` | Chart (SVG) |
@@ -54,6 +55,7 @@ there it is drawn still, at its resting moment (`ViewOpts.still`).
 | Drawing Tool | `.tile.png` | Background tile (PNG) |
 | Diagram Maker | `.svg` | Picture (SVG) |
 | Animator | `.gif` | Animated GIF |
+| Animator | `.webm` | Video (WebM) |
 | Animator | `.svg` | Animated SVG |
 | Calendar | `.ics` | iCalendar (ICS) |
 | Calendar | `.csv` | CSV |

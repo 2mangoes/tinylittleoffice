@@ -749,6 +749,7 @@ export default {
   'The sun comes up from behind the hills and the morning slides in: depth, size and a pen-drawn skyline.': '언덕 뒤에서 해가 떠오르고 아침이 밀려와요. 깊이, 크기, 펜으로 그린 스카이라인이 있어요.',
   // A key is a moment a shape is set at; between keys it travels. The effects (Impact … Blur) are meme looks.
   'Animated GIF': '움직이는 GIF',
+  'Video (WebM)': '동영상 (WebM)',
   'Animated SVG': '움직이는 SVG',
   'An empty stage': '빈 무대',
   '3D': '3D', // same
@@ -1065,6 +1066,7 @@ export default {
   'PowerPoint (PPTX)': 'PowerPoint (PPTX)', // same
   'A picture of every slide (ZIP of PNGs)': '슬라이드별 그림 (PNG를 묶은 ZIP)',
   'An animation of the deck (GIF)': '프레젠테이션 영상 (GIF)',
+  'A film of the deck (WebM)': '프레젠테이션 영상 (WebM)',
 
   // The templates
   'Title, agenda, three points with notes for the speaker, and a close.': '제목, 안건, 발표자 노트가 달린 핵심 세 가지, 마무리.',

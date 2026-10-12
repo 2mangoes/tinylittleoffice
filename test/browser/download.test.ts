@@ -297,7 +297,17 @@ test('the table reads each format: View where the browser shows the file, Share 
     shell = await mount(`#/v1/anim/${encodeDoc(appOf('anim')!.blank())}`);
     await until(() => !!shell.querySelector('to-anim-editor'));
     await openDownload(shell);
-    expect(rows(shell).map((r) => r.getAttribute('aria-label'))).toEqual(['PDF file', 'Picture (PNG)', 'Web page (HTML)', 'Markdown', 'Text (TLO)', 'Data (JSON)', 'Animated GIF', 'Animated SVG']);
+    expect(rows(shell).map((r) => r.getAttribute('aria-label'))).toEqual([
+      'PDF file',
+      'Picture (PNG)',
+      'Web page (HTML)',
+      'Markdown',
+      'Text (TLO)',
+      'Data (JSON)',
+      'Animated GIF',
+      'Video (WebM)',
+      'Animated SVG',
+    ]);
     expect(kinds(row(shell, 'Animated GIF'))).toEqual(['view', 'share', 'download', 'copy']);
     expect(acts(row(shell, 'Animated GIF')).map((b) => b.getAttribute('aria-label'))).toEqual(['View the .gif', 'Share the .gif…', 'Download the .gif', 'Copy a link that downloads the .gif']);
     menu(shell).hidePopover();
@@ -318,6 +328,10 @@ test('a ".<ext>" link downloads any of the app\'s formats, a kit\'s or its own, 
   const anim = await mount(`#/v1/anim.gif/${encodeDoc(appOf('anim')!.blank())}`);
   await until(() => [...got.keys()].some((n) => n.endsWith('.gif')), 15000);
   await until(() => !!anim.querySelector('to-anim-editor'));
+  // Its video, by its own link: the link waits for the browser to say it can make one.
+  await mount(`#/v1/anim.webm/${encodeDoc(appOf('anim')!.blank())}`);
+  await until(() => [...got.keys()].some((n) => n.endsWith('.webm')), 15000);
+  expect([...got.values()].find((f) => f.name.endsWith('.webm'))!.type).toBe('video/webm');
   // No such format: the document, and nothing else (no file, no word about it).
   got.clear();
   const shell = await mount(`#/v1/write.nope/${payload}`);
@@ -358,3 +372,21 @@ test("the Print row's keys are a kbd beside its name under a mouse, and are not 
     await cdp().send('Emulation.setTouchEmulationEnabled', { enabled: false });
   }
 });
+
+test("where the browser makes a WebM, the Animator's Download table has the video after the GIF and the Deck's its film after the GIF film", async () => {
+  await page.viewport(390, 844);
+  const anim = await mount(`#/v1/anim/${encodeDoc((await appOf('anim')!.templates())[0].doc)}`);
+  await until(() => !!anim.querySelector('to-anim-editor'), 10_000);
+  await openDownload(anim);
+  await until(() => rows(anim).some((r) => r.getAttribute('aria-label') === 'Video (WebM)'));
+  const labels = (shell: HTMLElement) => rows(shell).map((r) => r.getAttribute('aria-label'));
+  expect(labels(anim).slice(-3)).toEqual(['Animated GIF', 'Video (WebM)', 'Animated SVG']);
+  expect(acts(row(anim, 'Video (WebM)')).map((b) => b.getAttribute('aria-label'))).toEqual(['View the .webm', 'Download the .webm', 'Copy a link that downloads the .webm']);
+  menu(anim).hidePopover();
+  const deck = await mount(`#/v1/deck/${encodeDoc('## One\n\n- A\n- B\n')}`);
+  await until(() => !!deck.querySelector('to-deck-editor'), 10_000);
+  await openDownload(deck);
+  await until(() => rows(deck).some((r) => r.getAttribute('aria-label') === 'A film of the deck (WebM)'));
+  expect(labels(deck).slice(-2)).toEqual(['An animation of the deck (GIF)', 'A film of the deck (WebM)']);
+  menu(deck).hidePopover();
+}, 30_000);
