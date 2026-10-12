@@ -1,8 +1,8 @@
 /**
  * Light or dark: the choice in the menu, or the device's. Said as data-theme on <html>, so the tokens in
- * src/styles/tokens.css follow; public/theme.js sets it before the first paint, this keeps it afterwards. Kept on the
- * device under Private and Saved alike, as the language and the size are (kit/core/store.ts), and read once, when first
- * asked, so a page keeps its theme whatever another tab does.
+ * src/styles/tokens.css follow; the theme script in the page (index.html) sets it before the first paint, this keeps
+ * it afterwards. Kept on the device under Private and Saved alike, as the language and the size are
+ * (kit/core/store.ts), and read once, when first asked, so a page keeps its theme whatever another tab does.
  */
 import { store } from '../core/store.ts';
 import { t } from '../core/i18n.ts';

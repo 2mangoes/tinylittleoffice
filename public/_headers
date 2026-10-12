@@ -1,5 +1,6 @@
 # Headers for the site on Cloudflare (Workers static assets). The build fills {{scripts}} with the hash of every
-# script the apps' pages carry (pageScript in src/kit/draw/page.ts), so no other inline script can run, even in a frame.
+# script the apps' pages carry (pageScript in src/kit/draw/page.ts) and of the theme script in every page (index.html),
+# so no other inline script can run, even in a frame.
 # The site is its own only source of code, style and type (font-src 'self': IBM Plex, public/fonts/); nothing may embed the editor (frame-ancestors 'none') but the
 # embed page, /embed/ (the embed view: the pages alone, for another site's frame), below. Where the site may reach is
 # filled in by scripts/headers.ts from src/kit/core/network.ts, the one list of every host (docs/network.md, /network):
@@ -21,7 +22,7 @@
   ! Cache-Control
   Cache-Control: no-cache, no-transform
 # Built files carry a hash in their name: once fetched, they are never asked for again. They are the app file and
-# its stylesheet, the theme script, an app's templates and a language (scripts/budgets.ts holds the folder to those).
+# its stylesheet, an app's templates and a language (scripts/budgets.ts holds the folder to those).
 # The service worker, /sw.js, is not among them: it is asked for each time (no-cache, above), so a deploy's new one
 # is found on the next online visit.
 /assets/*

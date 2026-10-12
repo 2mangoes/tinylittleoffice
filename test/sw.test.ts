@@ -84,19 +84,10 @@ test('the build fills the worker’s list where the source leaves it, and says s
 let dir = '';
 afterEach(() => dir && rmSync(dir, { recursive: true, force: true }));
 
-test('the list: the pages, the app file, the stylesheet and the theme script, the manifest and icons, the Latin faces; the cache named by their bytes', () => {
+test('the list: the pages, the app file and the stylesheet, the manifest and icons, the Latin faces; the cache named by their bytes', () => {
   dir = mkdtempSync(join(tmpdir(), 'tlo-sw-'));
   const put = (p: string, s = p) => (mkdirSync(join(dir, p, '..'), { recursive: true }), writeFileSync(join(dir, p), s));
-  for (const p of [
-    'index.html',
-    'write/index.html',
-    'assets/app-AAAAAAAA.js',
-    'assets/app-AAAAAAAA.css',
-    'assets/templates-write-AAAAAAAA.js',
-    'assets/lang-fr-AAAAAAAA.js',
-    'assets/theme-AAAAAAAA.js',
-    'manifest.webmanifest',
-  ])
+  for (const p of ['index.html', 'write/index.html', 'assets/app-AAAAAAAA.js', 'assets/app-AAAAAAAA.css', 'assets/templates-write-AAAAAAAA.js', 'assets/lang-fr-AAAAAAAA.js', 'manifest.webmanifest'])
     put(p);
   for (const p of ['favicon.svg', 'favicon-32.png', 'apple-touch-icon.png', 'icon-192.png', 'icon-512.png', 'icon-maskable-512.png']) put(p);
   for (const f of ['IBMPlexSans-Regular', 'IBMPlexSans-SemiBold', 'IBMPlexSerif-Regular', 'IBMPlexSerif-SemiBold', 'IBMPlexMono-Regular', 'IBMPlexSansArabic-Regular']) put(`fonts/${f}.woff2`);
@@ -107,7 +98,6 @@ test('the list: the pages, the app file, the stylesheet and the theme script, th
     'write/',
     'assets/app-AAAAAAAA.css',
     'assets/app-AAAAAAAA.js',
-    'assets/theme-AAAAAAAA.js',
     'manifest.webmanifest',
     'favicon.svg',
     'favicon-32.png',

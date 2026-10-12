@@ -383,25 +383,20 @@ describe('the build’s budgets and shape: the built site within budgets.json, i
     expect(sizes.languages).toStrictEqual({ fr: gz('assets/lang-fr-AAAAAAAA.js') });
     expect(sizes.api).toBe(gz('api.js'));
     expect(sizes.apiParts).toBe(gz('api/editor-AAAAAAAA.js') + gz('api/parts-AAAAAAAA.js'));
-    expect(sizes.files).toBe(12);
-    // The home page: itself, a face, the theme script, the app file and the stylesheet; not the icon, nor what a comment names.
-    expect(fetchedAtOnce(readFileSync(join(built, 'index.html'), 'utf8'))).toStrictEqual([
-      './fonts/IBMPlexSans-Regular.woff2',
-      './assets/theme-AAAAAAAA.js',
-      './assets/app-AAAAAAAA.js',
-      './assets/app-AAAAAAAA.css',
-    ]);
-    expect(sizes.requests).toBe(5);
+    expect(sizes.files).toBe(11);
+    // The home page: itself, a face, the app file and the stylesheet; not the inline script, the icon, nor what a comment names.
+    expect(fetchedAtOnce(readFileSync(join(built, 'index.html'), 'utf8'))).toStrictEqual(['./fonts/IBMPlexSans-Regular.woff2', './assets/app-AAAAAAAA.js', './assets/app-AAAAAAAA.css']);
+    expect(sizes.requests).toBe(4);
     const budgets: Sizes = JSON.parse(JSON.stringify(sizes));
     budgets.app = 10;
-    budgets.requests = 4;
-    expect(overBudget(sizes, budgets)).toStrictEqual([`app: ${sizes.app} bytes, over its budget of 10 by ${sizes.app - 10}`, 'requests: 5 requests, over its budget of 4 by 1']);
+    budgets.requests = 3;
+    expect(overBudget(sizes, budgets)).toStrictEqual([`app: ${sizes.app} bytes, over its budget of 10 by ${sizes.app - 10}`, 'requests: 4 requests, over its budget of 3 by 1']);
   });
   test('the fixture’s shape is wrong in every way the check knows, each said', () => {
     expect(lazyImports('a.import({ ln }); import(`./lang-fr-AAAAAAAA.js`); import(name)')).toStrictEqual(['lang-fr-AAAAAAAA.js', '?']);
     expect(shapeOf(built, { apps: ['write', 'sheet'], langs: ['fr'] })).toStrictEqual([
       'assets/ holds 0 files for sheet’s templates, not one',
-      'assets/write-editor-AAAAAAAA.js: a file the design does not have (one app file, one stylesheet, the theme script, the templates and the languages)',
+      'assets/write-editor-AAAAAAAA.js: a file the design does not have (one app file, one stylesheet, the templates and the languages)',
       'assets/app-AAAAAAAA.js imports write-editor-AAAAAAAA.js lazily: only a templates file or a language may be',
       'api/ holds 2 files, not one',
       'api/editor-AAAAAAAA.js holds an element of the page (customElements.define or LitElement): the API carries no editor and no chrome',

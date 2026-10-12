@@ -52,10 +52,9 @@ test('font-src: the site and nothing else; the type is IBM Plex, served by the s
   expect(directive(csp, 'font-src')).toEqual(["'self'"]);
 });
 
-test('the cache: every hashed file (the app file, the stylesheet, the theme script, a templates file, a language) a year, the pages and the service worker asked for each time, the type a month', () => {
+test('the cache: every hashed file (the app file, the stylesheet, a templates file, a language) a year, the pages and the service worker asked for each time, the type a month', () => {
   const cache = (path: string) => headersFor(raw, path)['Cache-Control'];
-  for (const f of ['app-AbCd12_-.js', 'app-AbCd12_-.css', 'theme-AbCd12_-.js', 'templates-write-AbCd12_-.js', 'lang-pt-br-AbCd12_-.js'])
-    expect(cache(`/assets/${f}`), f).toBe('public, max-age=31536000, immutable');
+  for (const f of ['app-AbCd12_-.js', 'app-AbCd12_-.css', 'templates-write-AbCd12_-.js', 'lang-pt-br-AbCd12_-.js']) expect(cache(`/assets/${f}`), f).toBe('public, max-age=31536000, immutable');
   for (const page of ['/', '/write/', '/embed/']) expect(cache(page), page).toBe('no-cache, no-transform');
   // The worker is asked for each time, so a deploy's new list is found on the next online visit.
   expect(cache('/sw.js')).toBe('no-cache');

@@ -19,8 +19,8 @@
  *   requests    the requests a page makes before its first paint, at most, over every page: the page itself and each
  *               file its head names to fetch at once (a script, the stylesheet, a preload)
  *
- * The shape is held too (`shapeOf`): dist/assets holds the app file, the stylesheet, the theme script (scripts/seo.ts
- * hashes it), a templates file per app and a file per language and nothing else; the app file imports nothing lazily but a templates file or a language; dist/api/
+ * The shape is held too (`shapeOf`): dist/assets holds the app file, the stylesheet, a templates file per app and a
+ * file per language and nothing else (the theme script is in the page: index.html); the app file imports nothing lazily but a templates file or a language; dist/api/
  * is one file, and no editor (no custom element, no Lit element) is in the API; every page names the app file and the
  * stylesheet in its head; the service worker's list is filled in.
  *
@@ -133,7 +133,6 @@ export function shapeOf(dist: string, { apps, langs } = sourceFiles()): string[]
   const wanted: [RegExp, string][] = [
     [/^app-[\w-]{8}\.js$/, 'the app file'],
     [/^app-[\w-]{8}\.css$/, 'the stylesheet'],
-    [/^theme-[\w-]{8}\.js$/, 'the theme script'],
     ...apps.map((a): [RegExp, string] => [new RegExp(`^templates-${a}-[\\w-]{8}\\.js$`), `${a}’s templates`]),
     ...langs.map((l): [RegExp, string] => [new RegExp(`^lang-${l}-[\\w-]{8}\\.js$`), `the language ${l}`]),
   ];
@@ -141,8 +140,7 @@ export function shapeOf(dist: string, { apps, langs } = sourceFiles()): string[]
     const n = assets.filter((f) => re.test(f)).length;
     if (n !== 1) out.push(`assets/ holds ${n} files for ${what}, not one`);
   }
-  for (const f of assets)
-    if (!wanted.some(([re]) => re.test(f))) out.push(`assets/${f}: a file the design does not have (one app file, one stylesheet, the theme script, the templates and the languages)`);
+  for (const f of assets) if (!wanted.some(([re]) => re.test(f))) out.push(`assets/${f}: a file the design does not have (one app file, one stylesheet, the templates and the languages)`);
   const app = assets.find((f) => /^app-[\w-]{8}\.js$/.test(f));
   const css = assets.find((f) => /^app-[\w-]{8}\.css$/.test(f));
   if (app)

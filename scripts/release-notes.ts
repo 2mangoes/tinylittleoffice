@@ -17,7 +17,7 @@ export function releaseNotes(v: Version, archive = 'dist.tar.gz'): string {
     '',
     '## The script hashes',
     '',
-    'The Content-Security-Policy runs no inline script but these (`script-src`, in `_headers`):',
+    'The Content-Security-Policy runs no inline script but these, the apps’ page scripts and the theme script in the page (`script-src`, in `_headers`):',
     '',
     ...v.csp.scripts.map((h) => `- \`${h}\``),
     '',

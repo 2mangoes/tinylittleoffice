@@ -40,7 +40,30 @@
     <meta name="twitter:title" content="Tiny Little Office: the link is the document" />
     <meta name="twitter:description" content="A tiny office suite where the link is the document. No accounts. Nothing is saved anywhere unless you choose to keep it on this device." />
     <meta name="twitter:image" content="%VITE_SITE_URL%og.png" />
-    <script src="./theme.js"></script>
+    <script>
+      // Light or dark, before the first paint: the choice in the menu if there is one (kept on the device under Private
+      // and Saved alike: kit/core/store.ts), otherwise whatever the device says (kit/ui/theme.ts keeps it afterwards).
+      // In the page, so a first visit asks for no file of its own; the build writes its hash into the
+      // Content-Security-Policy beside the apps' page scripts (vite.config.ts), and no other inline script runs.
+      (function () {
+        var mq = window.matchMedia('(prefers-color-scheme: dark)');
+        var apply = function () {
+          var t = null;
+          try { t = localStorage.getItem('to-theme'); } catch (e) {}
+          document.documentElement.dataset.theme = t === 'light' || t === 'dark' ? t : mq.matches ? 'dark' : 'light';
+        };
+        apply();
+      })();
+
+      // iPhones and iPads zoom in on a box whose type is under 16px when it is tapped, and stay zoomed. Told the
+      // page may not zoom, iOS no longer does that, but still lets a person pinch to zoom; elsewhere the setting
+      // would stop the pinch, so it is said to iOS alone.
+      (function () {
+        var ios = /iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+        var vp = document.querySelector('meta[name="viewport"]');
+        if (ios && vp) vp.content += ', maximum-scale=1';
+      })();
+    </script>
     <script type="module" src="./src/main.ts"></script>
   </head>
   <body>

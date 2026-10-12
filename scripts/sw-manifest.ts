@@ -5,8 +5,7 @@
  * next online visit and which then deletes the old cache. The list:
  *
  *   - the pages: the home page and each app's ("", "write/", …), as the worker asks for them by address;
- *   - the app file and the stylesheet (dist/assets/app-<hash>.js and .css), and the theme script the pages run first
- *     (dist/assets/theme-<hash>.js);
+ *   - the app file and the stylesheet (dist/assets/app-<hash>.js and .css) (the theme script is in each page);
  *   - the manifest and the icons it and the pages name;
  *   - the Latin faces: Plex Sans and Serif, regular and semibold, and Plex Mono.
  *
@@ -26,7 +25,7 @@ const LATIN_FACES = ['IBMPlexSans-Regular', 'IBMPlexSans-SemiBold', 'IBMPlexSeri
 /** The files kept at install, relative to the site's root: the pages first, in the order the build wrote them. */
 function workerFiles(dist: string, appIds: string[]): string[] {
   const assets = readdirSync(join(dist, 'assets'))
-    .filter((f) => /^(?:app|theme)-[\w-]{8}\.(?:js|css)$/.test(f))
+    .filter((f) => /^app-[\w-]{8}\.(?:js|css)$/.test(f))
     .sort()
     .map((f) => `assets/${f}`);
   const icons = ['favicon.svg', 'favicon-32.png', 'apple-touch-icon.png', 'icon-192.png', 'icon-512.png', 'icon-maskable-512.png'];

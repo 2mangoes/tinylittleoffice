@@ -9,6 +9,7 @@ import { cpSync, existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, 
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { apps } from '../src/kit/core/apps.ts';
+import { inlineScripts } from '../scripts/headers.ts';
 import { checkSeo, firstHeader, ldBlocks, listed, sitemapLocs, writePages, type Listed } from '../scripts/seo.ts';
 import { CARD_TAGS, tagCount } from '../tinier/cards.ts';
 
@@ -24,7 +25,6 @@ function build(site: string) {
   dist = mkdtempSync(join(tmpdir(), 'tlo-seo-'));
   writeFileSync(join(dist, 'index.html'), readFileSync(join(root, 'index.html'), 'utf8').replaceAll('%VITE_SITE_URL%', site));
   cpSync(join(root, 'public/robots.txt'), join(dist, 'robots.txt'));
-  cpSync(join(root, 'public/theme.js'), join(dist, 'theme.js'));
   mkdirSync(join(dist, 'assets'));
   writePages(dist, { site, apps: list, built: BUILT });
 }
@@ -35,14 +35,17 @@ beforeAll(async () => {
 });
 afterAll(() => rmSync(dist, { recursive: true, force: true }));
 
-test('the theme script is hashed into assets/, kept a year like the app file, and every page names it there', () => {
+test('the theme script is in every page, byte for byte the shell’s, and is no file of its own', () => {
   build(SITE);
-  const [theme] = readdirSync(join(dist, 'assets'));
-  expect(theme).toMatch(/^theme-[\w-]{8}\.js$/);
-  expect(read(`assets/${theme}`)).toBe(readFileSync(join(root, 'public/theme.js'), 'utf8'));
+  const [theme, ...more] = inlineScripts(readFileSync(join(root, 'index.html'), 'utf8'));
+  expect(more).toEqual([]);
+  expect(theme).toContain("localStorage.getItem('to-theme')");
+  for (const p of ['index.html', ...apps().map((a) => `${a.id}/index.html`), 'embed/index.html']) {
+    expect(inlineScripts(read(p)), p).toEqual([theme]);
+    expect(read(p), p).not.toMatch(/theme\.js|assets\/theme-/);
+  }
   expect(existsSync(join(dist, 'theme.js'))).toBe(false);
-  expect(read('index.html')).toContain(`<script src="./assets/${theme}"></script>`);
-  for (const id of [...apps().map((a) => a.id), 'embed']) expect(read(`${id}/index.html`)).toContain(`<script src="../assets/${theme}"></script>`);
+  expect(readdirSync(join(dist, 'assets'))).toEqual([]);
 });
 
 test('the sitemap lists the home page and every app’s page, at the site’s address, dated by the commit; robots.txt names it', () => {

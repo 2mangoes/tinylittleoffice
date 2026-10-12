@@ -1,9 +1,8 @@
 import { defineConfig, loadEnv, type Plugin } from 'vite';
-import { createHash } from 'node:crypto';
 import { copyFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { fillHeaders, headersFor } from './scripts/headers.ts';
+import { fillHeaders, headersFor, inlineScripts, scriptHash } from './scripts/headers.ts';
 import { listed, writePages } from './scripts/seo.ts';
 import { writeWorker } from './scripts/sw-manifest.ts';
 import { gitFacts, versionJson, versionOf } from './scripts/version.ts';
@@ -19,9 +18,10 @@ const fromSource = <T>(path: string): Promise<T> => import(pathToFileURL(resolve
 /**
  * After the build: the pages (scripts/seo.ts: a page per app with its name and line in its tags and its first text,
  * the embed page, the JSON-LD on each, the sitemap and robots.txt's line naming it); the Content-Security-Policy's
- * script hashes and hosts written into _headers (public/_headers has the placeholders, scripts/headers.ts fills
- * them); the service worker's list of files and its cache's name, written into dist/sw.js (scripts/sw-manifest.ts);
- * and which build this is, dist/version.json (the commit, its tag and date, those hashes: scripts/version.ts).
+ * script hashes (the apps' page scripts and the theme script in the page) and hosts written into _headers
+ * (public/_headers has the placeholders, scripts/headers.ts fills them); the service worker's list of files and its
+ * cache's name, written into dist/sw.js (scripts/sw-manifest.ts); and which build this is, dist/version.json (the
+ * commit, its tag and date, those hashes: scripts/version.ts).
  * For agents, /.well-known/llms.txt is /llms.txt again and /examples/<app>.json each app's examples.
  */
 function afterBuild(site: string): Plugin {
@@ -44,7 +44,10 @@ function afterBuild(site: string): Plugin {
       copyFileSync(resolve(dist, 'llms.txt'), resolve(dist, '.well-known', 'llms.txt'));
       mkdirSync(resolve(dist, 'examples'), { recursive: true });
       for (const app of apps()) copyFileSync(resolve(import.meta.dirname, 'packages/doc/examples', `${app.id}.json`), resolve(dist, 'examples', `${app.id}.json`));
-      const hashes = pageScripts().map((code) => `'sha256-${createHash('sha256').update(code).digest('base64')}'`);
+      // The policy's script hashes: the apps' page scripts and the built pages' own inline scripts (the theme script in
+      // the shell, the same on every page), read as scripts/check-build.ts reads them (scripts/headers.ts).
+      const inline = inlineScripts(readFileSync(resolve(dist, 'index.html'), 'utf8'));
+      const hashes = [...new Set([...pageScripts(), ...inline].map(scriptHash))];
       writeFileSync(resolve(dist, '_headers'), fillHeaders(readFileSync(resolve(dist, '_headers'), 'utf8'), { scripts: hashes }));
       writeFileSync(resolve(dist, 'version.json'), versionJson(versionOf(facts, hashes)));
     },

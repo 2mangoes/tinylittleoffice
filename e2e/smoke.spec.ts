@@ -4,8 +4,8 @@
  * axe finds nothing. With SHOTS set, a screenshot of each goes there (the phone's are the report's).
  *
  * And the build's shape as a browser meets it (Paul, 2026-10-12: "as few network round trips as possible"): the home
- * page and every app's page, visited cold, ask for at most six files before their first paint (the page, the theme
- * script, the app file, the stylesheet and the two Latin faces), each named by the page itself; a second page of the
+ * page and every app's page, visited cold, ask for at most five files before their first paint (the page, the app
+ * file, the stylesheet and the two Latin faces; the theme script is in the page), each named by the page itself; a second page of the
  * site in the same visit asks the network for nothing the first had (every hashed file is kept a year: public/_headers,
  * which `npm run preview` serves with); a page in French asks for the French file and nothing else the home page had.
  * Read from the page's own timing of what it fetched, in Chromium, which reports when it first painted.
@@ -17,8 +17,8 @@ const SHOTS = process.env.SHOTS;
 async function shot(page: Page, name: string) {
   if (SHOTS) await page.screenshot({ path: `${SHOTS}/${name}-${page.viewportSize()!.width}.png`, fullPage: false });
 }
-// theme.js tells iOS alone that the page may not zoom, so a tap in a box no longer zooms and sticks (iOS still
-// lets a person pinch); axe's meta-viewport rule cannot know that, so it is left out of the phone's run.
+// The theme script in the page tells iOS alone that the page may not zoom, so a tap in a box no longer zooms and
+// sticks (iOS still lets a person pinch); axe's meta-viewport rule cannot know that, so it is left out of the phone's run.
 const axe = (page: Page) => new AxeBuilder({ page }).disableRules(['meta-viewport']).analyze();
 const overflow = (page: Page) => page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
 
@@ -149,7 +149,7 @@ async function open(page: Page, url: string) {
   await page.evaluate(() => document.fonts.ready.then(() => undefined));
 }
 
-test('every page, visited cold, asks for at most six files before its first paint, each named by the page; a second page asks for nothing the first had', async ({ browser, browserName }) => {
+test('every page, visited cold, asks for at most five files before its first paint, each named by the page; a second page asks for nothing the first had', async ({ browser, browserName }) => {
   test.skip(browserName !== 'chromium', 'paint timing is read in Chromium');
   const pages = ['/', '/write/', '/outline/', '/deck/', '/sheet/', '/calc/', '/draw/', '/diagram/', '/anim/', '/cal/', '/trip/'];
   for (const url of pages) {
@@ -157,12 +157,11 @@ test('every page, visited cold, asks for at most six files before its first pain
     const page = await context.newPage();
     await open(page, url);
     const f = await fetched(page);
-    // The page's own head names each: a script or a link (the stylesheet, a preloaded face), never a stylesheet's or a script's import.
-    expect(f.beforePaint.length, `${url}: ${JSON.stringify(f.beforePaint)}`).toBeLessThanOrEqual(5);
+    // The page itself and at most four more, which the page's own head names: a script or a link (the stylesheet, a
+    // preloaded face), never a stylesheet's or a script's import.
+    expect(f.beforePaint.length, `${url}: ${JSON.stringify(f.beforePaint)}`).toBeLessThanOrEqual(4);
     for (const r of f.beforePaint) expect(['script', 'link'], `${url}: ${r.path}`).toContain(r.by);
-    expect(f.beforePaint.map((r) => r.path)).toEqual(
-      expect.arrayContaining([expect.stringMatching(/^\/assets\/app-[\w-]{8}\.js$/), expect.stringMatching(/^\/assets\/app-[\w-]{8}\.css$/), expect.stringMatching(/^\/assets\/theme-[\w-]{8}\.js$/)]),
-    );
+    expect(f.beforePaint.map((r) => r.path)).toEqual(expect.arrayContaining([expect.stringMatching(/^\/assets\/app-[\w-]{8}\.js$/), expect.stringMatching(/^\/assets\/app-[\w-]{8}\.css$/)]));
     // A second page of the site in the same visit: nothing the first fetched is asked of the network again.
     const had = new Set(f.all.map((r) => r.path));
     await open(page, url === '/' ? '/write/' : '/');

@@ -4,7 +4,8 @@
  * browser sees.
  *
  *   - dist/_headers has the scripts' hashes in place of {{scripts}}: every script the apps' pages carry
- *     (src/kit/draw/page.ts) and every inline script of a built page, or the browser would refuse to run it.
+ *     (src/kit/draw/page.ts) and every inline script of a built page (the theme script in the shell, index.html), or
+ *     the browser would refuse to run it.
  *   - dist/version.json has the shape of src/kit/core/version.ts and the same script hashes as the policy.
  *   - the guides for agents: llms.txt (and the same at .well-known/llms.txt), llms-full.txt, and each app's
  *     examples beside its page (examples/<app>.json for llms/<app>.txt).
@@ -15,13 +16,11 @@
  *
  *   node scripts/check-build.ts      the build in dist/, checked; a line per problem, and exit 1
  */
-import { createHash } from 'node:crypto';
 import { existsSync, readFileSync, readdirSync, type Dirent } from 'node:fs';
 import { relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { isVersion } from '../src/kit/core/version.ts';
-
-const hash = (code: string) => `'sha256-${createHash('sha256').update(code).digest('base64')}'`;
+import { inlineScripts, scriptHash } from './headers.ts';
 
 /** Every file of the build, relative to dist with forward slashes. */
 function builtFiles(dist: string): string[] {
@@ -43,7 +42,7 @@ export function checkBuild(dist: string, scripts: string[] = []): string[] {
     const policies = [...headers.matchAll(/script-src ([^;]*);/g)].map((m) => m[1]);
     if (!policies.length) problems.push('_headers has no script-src');
     const allowed = (h: string) => policies.every((p) => p.split(/\s+/).includes(h));
-    for (const code of scripts) if (!allowed(hash(code))) problems.push(`a page script is not in the policy: ${code.slice(0, 40).replace(/\s+/g, ' ')}…`);
+    for (const code of scripts) if (!allowed(scriptHash(code))) problems.push(`a page script is not in the policy: ${code.slice(0, 40).replace(/\s+/g, ' ')}…`);
     // /version.json names the same hashes, for anyone checking the site against its source.
     let version: unknown = null;
     try {
@@ -65,8 +64,7 @@ export function checkBuild(dist: string, scripts: string[] = []): string[] {
     }
     for (const f of built.filter((b) => b.endsWith('.html'))) {
       const page = readFileSync(at(f), 'utf8');
-      for (const m of page.matchAll(/<script(?![^>]*\bsrc=)(?![^>]*type="application\/(?:ld\+)?json")[^>]*>([\s\S]*?)<\/script>/g))
-        if (m[1].trim() && !allowed(hash(m[1]))) problems.push(`${f} has an inline script the policy does not allow`);
+      for (const code of inlineScripts(page)) if (!allowed(scriptHash(code))) problems.push(`${f} has an inline script the policy does not allow`);
     }
   }
   // The guides for agents (scripts/make-skill.ts): the short one, also at /.well-known/llms.txt, the whole one, and for
@@ -100,5 +98,8 @@ if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.ur
   if (!problems[0]?.startsWith('No build')) problems.push(...checkSeo(dist, await listed(apps())));
   for (const p of problems) console.error(`  ✗ ${p}`);
   if (problems.length) process.exit(1);
-  console.log(`  ✓ the policy's ${pageScripts().length} script hashes and version.json agree with the build; the sitemap, the structured data and the pages' first text are complete`);
+  const inline = inlineScripts(readFileSync(resolve(dist, 'index.html'), 'utf8')).length;
+  console.log(
+    `  ✓ the policy's script hashes (${pageScripts().length} page scripts, ${inline} inline in the pages) and version.json agree with the build; the sitemap, the structured data and the pages' first text are complete`,
+  );
 }

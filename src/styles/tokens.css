@@ -1,5 +1,5 @@
 /* Tokens: the colours, type, radii and shadows everything is built from. Light at :root, dark under
-   [data-theme=dark] (set by public/theme.js before the first paint and kit/ui/theme.ts after). The dark
+   [data-theme=dark] (set by the theme script in the page before the first paint and kit/ui/theme.ts after). The dark
    theme keeps the separation Paul asked for: the page darker than the panels, text a step lighter, edges
    that can be seen (3:1), the accent lighter with dark words on it. test/contrast.test.ts reads every pair. */
 @layer tokens {

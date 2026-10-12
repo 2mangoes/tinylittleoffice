@@ -1,10 +1,23 @@
 /**
  * The site's headers, filled at the end of the build (vite.config.ts): public/_headers holds placeholders
  * the Content-Security-Policy is written from. {{scripts}} is the hash of every script the apps' pages
- * carry (src/kit/draw/page.ts); {{img}} and {{connect}} are the hosts src/kit/core/network.ts allows by each
- * directive, so the policy allows what docs/network.md lists and nothing else.
+ * carry (src/kit/draw/page.ts) and of every inline script of the built pages (the theme script in index.html);
+ * {{img}} and {{connect}} are the hosts src/kit/core/network.ts allows by each directive, so the policy allows what
+ * docs/network.md lists and nothing else.
  */
+import { createHash } from 'node:crypto';
 import { reaches, type Directive } from '../src/kit/core/network.ts';
+
+/** A script's hash as the policy names it: 'sha256-…'. */
+export const scriptHash = (code: string) => `'sha256-${createHash('sha256').update(code).digest('base64')}'`;
+
+/**
+ * The inline scripts of a page that run: every <script> without a src and not data (JSON-LD), with something in it. The
+ * build hashes these into the policy (vite.config.ts) and scripts/check-build.ts holds every page to it, by this one
+ * reading.
+ */
+export const inlineScripts = (page: string): string[] =>
+  [...page.matchAll(/<script(?![^>]*\bsrc=)(?![^>]*type="application\/(?:ld\+)?json")[^>]*>([\s\S]*?)<\/script>/g)].map((m) => m[1]).filter((code) => code.trim());
 
 /** The sources the registry allows by one directive: "https://host". */
 export function sources(directive: Directive): string[] {

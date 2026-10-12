@@ -2,7 +2,7 @@
  * The service worker: Tiny Little Office kept on the device, so it opens offline. Registered only while Save in
  * browser is on, and removed with its caches when it is turned off (kit/share/offline.ts); a private visit has none.
  *
- *   - Installed, it keeps this build's files: the pages, the app file, the stylesheet, the theme script, the manifest
+ *   - Installed, it keeps this build's files: the pages, the app file, the stylesheet, the manifest
  *     and the icons, and the Latin faces (scripts/sw-manifest.ts writes the list and the cache's name into dist/sw.js).
  *   - A file with a hash in its name (the app file, a templates file, a language) and a face of the type are kept the
  *     first time the page asks for one and served from the cache after: a hash never changes meaning.
