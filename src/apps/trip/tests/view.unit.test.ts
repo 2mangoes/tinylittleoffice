@@ -5,7 +5,7 @@ import { afterEach, expect, test } from 'vitest';
 import { parse } from '../../../doc/index.ts';
 import def from '../def.ts';
 import { readTrip } from '../model.ts';
-import { FIT, mapOn, mapSvg, ONE_ZOOM, setMapOn } from '../view.ts';
+import { FIT, mapOn, mapSvg, MIN_ZOOM, ONE_ZOOM, setMapOn } from '../view.ts';
 
 const BROOKLYN = 'Place | Lat:number | Lon:number\n--- | --- | ---\nProspect Park | 40.6602 | -73.969\nBrooklyn Bridge Park | 40.7003 | -73.9967\nConey Island | 40.5749 | -73.9859\n';
 const ONE = 'Place | Lat:number | Lon:number\n--- | --- | ---\nHere | 53.3446 | -6.2764\n';
@@ -74,6 +74,14 @@ test('three places in Brooklyn: the greatest zoom at which they fit, the tiles t
   expect(svg.indexOf('<image ')).toBeLessThan(svg.indexOf('<circle'));
   expect(svg).toContain(`<svg width="${W}" height="${H}"><image `);
   expect(svg).toMatch(/<a href="https:\/\/www\.openstreetmap\.org\/copyright"[^>]*>.*© OpenStreetMap<\/text><\/a>$/);
+});
+
+test('stops across the world are drawn at the continents’ zoom, never on one tile of the globe', () => {
+  const WORLD = 'Place | Lat:number | Lon:number\n--- | --- | ---\nSydney | -33.8688 | 151.2093\nReykjavík | 64.1466 | -21.9426\nSantiago | -33.4489 | -70.6693\n';
+  const svg = mapSvg(readTrip(parse(WORLD)), W, H, Infinity, true);
+  expect(MIN_ZOOM).toBe(2);
+  expect(new Set(tilesOf(svg).map((t) => t.z))).toEqual(new Set([MIN_ZOOM]));
+  expect(pinsOf(svg)).toHaveLength(3);
 });
 
 test('one place alone is centred at a neighbourhood’s zoom', () => {

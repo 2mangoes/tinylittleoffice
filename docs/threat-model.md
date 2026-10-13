@@ -114,7 +114,7 @@ answer, and only if the password is not sent the same way.
 
 **The browser's own history and sync.** The address bar holds the document, so the browser's history does,
 and so does its sync service if that is on. Save in browser, on or off, does not change what the browser itself records.
-The address is written when typing stops for two seconds and whenever the page is hidden or the link is read, so a
+The address is written when typing stops for fifteen seconds and whenever the page is hidden or the link is read, so a
 browser that records each address holds a state of the document per pause and not per keystroke; a password is still
 the only thing that keeps the content from history.
 

@@ -1,7 +1,7 @@
 /**
  * <to-shell>: owns the URL. Routes "#/v1/<app>/<payload>" to an app, hands its editor the document's text, and writes
  * every change back into the link with history.replaceState, so the address bar is the document and nothing is ever
- * sent anywhere. A keystroke costs only what it changed: the link is projected when typing stops for two seconds (PAUSE),
+ * sent anywhere. A keystroke costs only what it changed: the link is projected when typing stops for fifteen seconds (PAUSE),
  * and flushed at once before anything reads it or the page is hidden or left (flushLink; kit/core/route.ts currentHash
  * outside), so a browser whose history records every address holds a state per pause, not per keystroke. It keeps the route, the document and
  * its projection to the link, the library's keep (kit/share/library.ts Keeper), the title and the editor's mounting, and
@@ -102,7 +102,7 @@ import '../ui/compare.ts';
  * address as a visit), so it is written when the person stops, and at once whenever anything reads it or the page is
  * hidden or left (the window's blur, the focus leaving the words, visibilitychange, pagehide).
  */
-const PAUSE = 2000;
+const PAUSE = 15000;
 
 /** The links this page has written (a document made or changed here): its own, so its Display Link is not someone else's copy. */
 const madeHere = new Set<string>();

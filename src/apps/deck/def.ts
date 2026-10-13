@@ -56,7 +56,7 @@ export default defineApp({
   editor: () => import('./editor.ts'),
   title: titleOf,
   retitle,
-  view: (doc, opts) => deckPages(doc, opts?.small, isStill(opts)),
+  view: (doc, opts) => deckPages(doc, opts?.small, isStill(opts), !!opts?.thumb),
   exports: [
     { ext: 'pptx', label: () => t('PowerPoint (PPTX)'), mime: 'application/vnd.openxmlformats-officedocument.presentationml.presentation', shows: null, build: (doc, ctx) => buildPptx(doc, ctx) },
     // In place of the kit's pictures of the pages: a page that plays the deck, a slide at a time, with its transition.

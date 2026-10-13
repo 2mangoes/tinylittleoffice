@@ -173,12 +173,6 @@ export const TIMED: { file: string; wait: string; n: number; why: string }[] = [
   },
   {
     file: 'test/browser/text-whole.test.ts',
-    wait: 'await tick(2000);',
-    n: 1,
-    why: 'two seconds with no key pressed (the link, the keep, the word count and the history run in them) must not scroll the column: a real pause',
-  },
-  {
-    file: 'test/browser/text-whole.test.ts',
     wait: 'await tick(300);',
     n: 1,
     why: 'an arrow key must not scroll the column back: nothing must happen: an absence has no moment to wait for, so what would come is given a while to come',

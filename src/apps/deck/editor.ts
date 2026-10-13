@@ -905,7 +905,8 @@ export class ToDeckEditor extends DocElement<Slide[]> {
             : t('One bullet a line. Tab steps it in.');
     const foot = g ? g.name(this.cur, n) : t('{n} / {total}', { n: this.cur + 1, total: n });
     const pickLabel = s.icon ? t('Change the icon') : t('Add an icon');
-    const pick = html`<button type="button" class="deck-pick ${s.icon ? '' : 'empty'}" aria-label=${pickLabel} title=${pickLabel} @click=${() => void this.pickIcon()}>${s.icon && iconNamed(s.icon) ? icon(iconNamed(s.icon)!, 32) : icon(UI.icon, 20)}</button>`;
+    // An empty slot shows a plus in a dashed box, never a stand-in icon that reads as the slide's (Paul, 2026-10-13: "Add icon").
+    const pick = html`<button type="button" class="deck-pick ${s.icon ? '' : 'empty'}" aria-label=${pickLabel} title=${pickLabel} @click=${() => void this.pickIcon()}>${s.icon && iconNamed(s.icon) ? icon(iconNamed(s.icon)!, 32) : icon(UI.plus, 20)}</button>`;
     return html`<div class="deck-canvas lay-${s.layout || 'b'} ${look.themed ? 'themed' : ''} ${look.theme.dark ? 'dark' : ''} ${sub ? 'has-sub' : ''} ${prose ? 'prose' : ''}" style=${this.canvasStyle(s, look, size)} data-format=${st.format || 'deck'}>
         <div class="deck-head">
           ${s.layout === 'i' ? nothing : pick}
@@ -922,7 +923,7 @@ export class ToDeckEditor extends DocElement<Slide[]> {
                 s.layout === '2'
                   ? html`<to-text class="deck-right" shape="lines" notes .blocks=${rightBlocks} note-start=${titleNotes + leftNotes} label=${t('Right column')} placeholder=${t('One bullet a line.')} @text-ops=${(e: CustomEvent<TextOps>) => this.onOps('right', e)} @focusin=${() => (this.field = 'right')} @text-select=${(e: CustomEvent<Sel | null>) => this.onSelect('right', e)} @text-exit=${() => this.focusBox('words')} @text-note=${(e: CustomEvent<NoteAt>) => this.onNote('right', e)}></to-text>`
                   : s.layout === 'i'
-                    ? html`<button type="button" class="deck-big ${s.icon ? '' : 'empty'}" aria-label=${pickLabel} @click=${() => void this.pickIcon()}>${s.icon && iconNamed(s.icon) ? icon(iconNamed(s.icon)!, 120) : html`${icon(UI.icon, 40)}<span>${t('Pick an icon')}</span>`}</button>`
+                    ? html`<button type="button" class="deck-big ${s.icon ? '' : 'empty'}" aria-label=${pickLabel} @click=${() => void this.pickIcon()}>${s.icon && iconNamed(s.icon) ? icon(iconNamed(s.icon)!, 120) : html`${icon(UI.plus, 40)}<span>${t('Pick an icon')}</span>`}</button>`
                     : nothing
               }
             </div>`
@@ -944,8 +945,8 @@ export class ToDeckEditor extends DocElement<Slide[]> {
     const slides = this.slides;
     const end = g ? null : this.end;
     const d = this.rows.drag;
-    // The rail's thumbnails stand still: a deck of ten animations runs no clocks on the side.
-    const still: Look = { ...look, still: true };
+    // The rail's thumbnails stand still (a deck of ten animations runs no clocks on the side) and are thumbnails: a trip on one asks OpenStreetMap for nothing.
+    const still: Look = { ...look, still: true, thumb: true };
     return html`<nav class="deck-rail" tabindex="-1" aria-label=${g ? t('Pages') : t('Slides')} @keydown=${this.onRailKey}>
       ${Array.from({ length: n }, (_, i) => {
         const s = slides[i];

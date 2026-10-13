@@ -180,13 +180,13 @@ export function place(p: Page, x: number, y: number, w: number, h: number): stri
 /* ---------- the document a slide shows ---------- */
 
 /** The page another document makes on a slide: its own app draws it small; a table is a sheet. `open`: in the editor (a locked document opened this visit drawn open). `still`: drawn where nothing can move (an animation a frame). */
-export function subPage(doc: Doc, s: Slide, upTo?: number, open = false, still = false): Page | null {
+export function subPage(doc: Doc, s: Slide, upTo?: number, open = false, still = false, thumb = false): Page | null {
   const b = s.sub >= 0 ? doc.blocks[s.sub] : null;
   if (!b) return null;
   if (b.k === 'fence' && b.lang) {
     const def = lookup.appOf(b.lang);
     // Presented, the document as far as it has built (its app's steps); else whole.
-    if (def) return def.view(b.body, { small: true, ...(still ? { still } : {}), ...(upTo !== undefined && def.steps ? { upTo } : {}), ...(open ? { open } : {}) })[0];
+    if (def) return def.view(b.body, { small: true, ...(still ? { still } : {}), ...(thumb ? { thumb } : {}), ...(upTo !== undefined && def.steps ? { upTo } : {}), ...(open ? { open } : {}) })[0];
     const lines = b.body
       .split('\n')
       .filter((l) => l.trim() && !/^---/.test(l))
@@ -372,14 +372,15 @@ export const slideSteps = (s: Slide, doc?: Doc): number => (s.sub >= 0 ? (doc ? 
 
 const iconAt = (name: string, b: Box, color: string) => glyphNamed(name, b.x, b.y, b.w, color);
 
-/** The look a slide is drawn in: the theme, the colour of its icons, and whether it is drawn where nothing can move (print, a picture, a thumbnail: a document on it is drawn still). */
+/** The look a slide is drawn in: the theme, the colour of its icons, whether it is drawn where nothing can move (print, a picture, a thumbnail: a document on it is drawn still), and whether as a thumbnail (the rail, a kept deck's preview: a trip on it asks OpenStreetMap for nothing, as kit/core/app.ts ViewOpts says of `thumb`). */
 export interface Look {
   theme: DeckTheme;
   themed: boolean;
   icon: string;
   still?: boolean;
+  thumb?: boolean;
 }
-export const lookOf = (s: Settings, still = false): Look => ({ theme: themeOf(s.theme), themed: !!s.theme, icon: iconHex(s), ...(still ? { still } : {}) });
+export const lookOf = (s: Settings, still = false, thumb = false): Look => ({ theme: themeOf(s.theme), themed: !!s.theme, icon: iconHex(s), ...(still ? { still } : {}), ...(thumb ? { thumb } : {}) });
 
 /**
  * A slide as a page. `shown` says how many lines have been revealed (absent: everything); unrevealed
@@ -436,7 +437,7 @@ export function slidePage(doc: Doc, s: Slide, look: Look, shown = Infinity, o: S
   }
   if (L.sub) {
     // Presented, the document as far as the clicks have built it.
-    const sub = subPage(doc, s, Number.isFinite(shown) ? shown : undefined, false, look.still);
+    const sub = subPage(doc, s, Number.isFinite(shown) ? shown : undefined, false, look.still, look.thumb);
     if (sub) {
       // A document is drawn for white paper: on a dark slide it sits on a white card.
       if (T.dark) svg += rect(L.sub.x, L.sub.y, L.sub.w, L.sub.h, '#ffffff', 'rx="12"');
@@ -856,10 +857,10 @@ export function closingPage(text: string, doc: Doc = parse(text), s: Settings = 
 }
 
 /** The deck as shown and printed: every page in its format, then (for slides) the closing code. `still`: drawn where nothing can move (print, a picture, a thumbnail), so a document on a slide is too. */
-export function deckPages(text: string, small = false, still = false): Page[] {
+export function deckPages(text: string, small = false, still = false, thumb = false): Page[] {
   const doc = parse(text);
   const s = settingsOf(doc);
-  if (small) return [pageOf(doc, 0, s, slidesOf(doc), lookOf(s, still))];
+  if (small) return [pageOf(doc, 0, s, slidesOf(doc), lookOf(s, still, thumb))];
   const end = closingPage(text, doc, s);
   const pages = sheetsOf(doc, s, still);
   return end ? [...pages, end] : pages;

@@ -5,7 +5,7 @@
 // scroll in the shell's column, .to-main, and the window never does.)
 import { afterEach, expect, test } from 'vitest';
 import { page, userEvent } from 'vitest/browser';
-import { mount, tick, until } from './helpers.ts';
+import { link, mount, tick, until } from './helpers.ts';
 import { encodeDoc } from '../../src/kit/core/codec.ts';
 import { caret } from '../../src/kit/text/textops.ts';
 import type { ToShell } from '../../src/kit/core/shell.ts';
@@ -127,8 +127,8 @@ test('a long document stays where the reader scrolled it: no draw, restore or au
   await text.updateComplete;
   await frame();
   expect(scrolled()).toBe(0);
-  // Two seconds with no key pressed: the link's projection, the library's keep, the word count, the history.
-  await tick(2000);
+  // The pause's work (the link's projection, the library's keep, the title), brought on by a read of the link: no scroll.
+  link();
   await frame();
   expect(scrolled()).toBe(0);
   // A selection put back by the host with nothing done (an undo point restored, a note left): still there.

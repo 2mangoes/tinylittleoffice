@@ -35,13 +35,15 @@ const TILE = 256;
 export const FIT = 0.75;
 /** The closest zoom a map is drawn at; one stop alone, a neighbourhood's. */
 const MAX_ZOOM = 18;
+/** The farthest: stops across the world are drawn on a map of continents, never on one tile of the globe (Paul, 2026-10-13: "Zoom 2"). */
+export const MIN_ZOOM = 2;
 export const ONE_ZOOM = 15;
 
-/** The greatest zoom at which the stops' extent (in world widths) fits `FIT` of a box w × h; one stop, ONE_ZOOM; 0 when none does. */
+/** The greatest zoom at which the stops' extent (in world widths) fits `FIT` of a box w × h; one stop, ONE_ZOOM; MIN_ZOOM when none does. */
 function fitZoom(dx: number, dy: number, w: number, h: number, one: boolean): number {
   if (one) return ONE_ZOOM;
-  for (let z = MAX_ZOOM; z > 0; z--) if (dx * TILE * 2 ** z <= w * FIT && dy * TILE * 2 ** z <= h * FIT) return z;
-  return 0;
+  for (let z = MAX_ZOOM; z > MIN_ZOOM; z--) if (dx * TILE * 2 ** z <= w * FIT && dy * TILE * 2 ** z <= h * FIT) return z;
+  return MIN_ZOOM;
 }
 
 /** The tiles of zoom `z` that cover a box w × h whose top left is (x0, y0) in pixels of that zoom: only those, under its own clip. */

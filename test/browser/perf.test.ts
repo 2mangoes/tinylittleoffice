@@ -55,7 +55,7 @@ async function typeFast(ed: ToWriteEditor, text: ToText, words: string) {
   }
 }
 const linkText = () => decodeDoc(parseHash(location.hash).payload);
-/** The link's document once read, which flushes it (the shell writes it when typing stops for two seconds). */
+/** The link's document once read, which flushes it (the shell writes it when typing stops for fifteen seconds). */
 const readText = () => decodeDoc(parseHash(link()).payload);
 const TYPED = ' and forty more letters typed quickly ok';
 

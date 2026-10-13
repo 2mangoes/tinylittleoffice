@@ -381,3 +381,14 @@ test('the web page plays the deck: a section a slide, the transition on the body
   expect(zine).toContain('aria-label="Front cover"');
   expect(zine).toContain('aria-label="Back cover"');
 });
+
+// A thumbnail of a deck (the rail, a kept deck's preview) draws a trip on a slide plain, as the trip's own thumbnail is:
+// a visitor who has not opened the trip tells OpenStreetMap nothing. A slide, a print or a picture has the tiles.
+test('a deck drawn as a thumbnail puts no map tiles under a trip on its slide; drawn still, it does', () => {
+  const text = '# A walk\n\n```trip\nPlace | Lat:number | Lon:number\n--- | --- | ---\nProspect Park | 40.6602 | -73.969\nConey Island | 40.5749 | -73.9859\n```\n';
+  const tiles = (pages: ReturnType<typeof deckPages>) => pages[0].svg.includes('<image href="https://tile.openstreetmap.org/');
+  expect(tiles(deckPages(text, true, true))).toBe(true);
+  expect(tiles(deckPages(text, true, true, true))).toBe(false);
+  expect(tiles(deck.view(text, { small: true, thumb: true }))).toBe(false);
+  expect(tiles(deck.view(text, { small: true, still: true }))).toBe(true);
+});

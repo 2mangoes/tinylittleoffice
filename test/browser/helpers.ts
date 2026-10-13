@@ -23,7 +23,7 @@ export async function mount(hash = ''): Promise<ToShell> {
 
 /**
  * The address with the document as it is now: the shell's flush, then location.hash. The shell writes the link only
- * when typing stops for two seconds (kit/core/shell.ts PAUSE), so a test reads it through the flush, never by waiting.
+ * when typing stops for fifteen seconds (kit/core/shell.ts PAUSE), so a test reads it through the flush, never by waiting.
  */
 export const link = (): string => currentHash();
 

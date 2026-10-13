@@ -266,9 +266,9 @@ test('a link opens its app, and every edit goes into the link', async () => {
   expect(again.querySelector<HTMLInputElement>('.to-title')!.value).toBe('A note');
 });
 
-// The address is what the browser's history and its sync record: it is written when typing stops for two seconds,
+// The address is what the browser's history and its sync record: it is written when typing stops for fifteen seconds,
 // not at every gap between keys, and at once whenever it is read or the page is hidden (kit/core/shell.ts PAUSE).
-test('the link is written two seconds after the typing stops, once; at once on the window’s blur, the page hidden, or a read', async () => {
+test('the link is written fifteen seconds after the typing stops, once; at once on the window’s blur, the page hidden, or a read', async () => {
   const shell = await mount('#/v1/write');
   await until(() => !!shell.querySelector('to-write-editor to-text .tx'));
   const text = shell.querySelector<ToText>('to-text')!;
@@ -284,11 +284,11 @@ test('the link is written two seconds after the typing stops, once; at once on t
   const written = vi.spyOn(history, 'replaceState');
   vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] });
   try {
-    // Two keys half a second apart: nothing in the address until two seconds after the second, then once.
+    // Two keys ten seconds apart: nothing in the address until fifteen seconds after the second, then once.
     await key('a');
-    vi.advanceTimersByTime(500);
+    vi.advanceTimersByTime(10000);
     await key('b');
-    vi.advanceTimersByTime(1999);
+    vi.advanceTimersByTime(14999);
     expect(location.hash).toBe('#/v1/write');
     expect(written).not.toHaveBeenCalled();
     vi.advanceTimersByTime(1);
