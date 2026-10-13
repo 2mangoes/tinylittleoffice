@@ -60,7 +60,7 @@ import { icon, UI } from '../draw/icons.ts';
 import { t } from '../core/i18n.ts';
 import { ago, type Kept } from '../share/library.ts';
 import { expiresSentence, SHORT_LINK_MAX, timeLeft } from '../share/short.ts';
-import { pinWindow, revealCaret } from './scroll.ts';
+import { pinWindow, redrawCaret, revealCaret } from './scroll.ts';
 import { BAR_HERE, keysAria } from './bar.ts';
 import { SHARE } from '../core/keys.ts';
 
@@ -285,10 +285,12 @@ export class ToChrome extends LitElement {
     this.removeAttribute('gliding');
     this.keepCaret();
   };
-  /** The caret, where a box being edited has it, inside what can be seen of the column (kit/ui/scroll.ts revealCaret, the one rule). */
+  /** The caret, where a box being edited has it, inside what can be seen of the column (kit/ui/scroll.ts revealCaret, the one rule), and drawn afresh there (redrawCaret: iOS leaves its own where it first drew it). */
   private keepCaret() {
     const at = document.activeElement;
-    if (this.editing && at && this.contains(at)) revealCaret(at);
+    if (!(this.editing && at && this.contains(at))) return;
+    revealCaret(at);
+    redrawCaret(at);
   }
   /**
    * The window slid (iOS slides it to bring a box it focused, or a caret it finds under the keyboard, into sight: a
@@ -341,7 +343,15 @@ export class ToChrome extends LitElement {
       if (at && at !== document.body && at.closest(ASIDE)) return;
       const box = !!at && this.contains(at) && !at.closest('.to-header') && !!at.closest(BOX);
       const editing = box && (this.editing || typed || performance.now() - this.touched < 1000);
-      if (editing !== this.editing) this.editing = editing;
+      if (editing !== this.editing) {
+        this.editing = editing;
+        // The header stepping aside moves the words under a caret iOS has already drawn: drawn again once the page is laid out (while the column glides, settle() does it; nothing is kept in flight).
+        if (editing)
+          requestAnimationFrame(() => {
+            const at = document.activeElement;
+            if (this.editing && at && this.contains(at) && !this.hasAttribute('gliding')) redrawCaret(at);
+          });
+      }
     });
   };
 

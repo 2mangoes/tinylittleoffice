@@ -168,6 +168,24 @@ export function revealCaret(box: Element, opts: { middle?: boolean } = {}): void
   else reveal(box, { margin: 8 });
 }
 
+/**
+ * The caret drawn again where the words are. iOS draws the caret of a box it has focused itself, where the box's
+ * selection was when the keyboard rose, and leaves it there after the page puts the window back (pinWindow) or the
+ * header steps aside under the words (chrome.ts editing): a caret standing in the dark above the first line, until
+ * the next key (Paul, 2026-10-13: "There's a big black area the cursor is in it. Then it focuses"). The same selection
+ * written again makes it draw the caret afresh, where the words now are. True when it was written.
+ */
+export function redrawCaret(box: Element): boolean {
+  const sel = document.getSelection();
+  if (!sel?.rangeCount || !box.contains(sel.focusNode)) return false;
+  const at = sel.focusNode instanceof Element ? sel.focusNode : sel.focusNode?.parentElement;
+  if (!at?.closest('[contenteditable]')) return false;
+  const range = sel.getRangeAt(0).cloneRange();
+  sel.removeAllRanges();
+  sel.addRange(range);
+  return true;
+}
+
 /** The window back at its top: the page is the visible window and the column scrolls, so the window never should. True when it had slid. */
 export function pinWindow(): boolean {
   if (window.scrollX || window.scrollY) window.scrollTo(0, 0);

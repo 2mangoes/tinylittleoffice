@@ -4,7 +4,7 @@
 // under a finger, so above the keyboard. On a phone, while a box has the focus, the header steps aside and the menu
 // button floats at the column's top inline end; the drawer offers Share and Download. Phone tests run at 390×844 with
 // touch emulated (a coarse pointer), the others at 1440×900.
-import { test, expect, afterEach } from 'vitest';
+import { test, expect, afterEach, vi } from 'vitest';
 import { cdp, page, userEvent } from 'vitest/browser';
 import { mount, tick, until } from './helpers.ts';
 import { encodeDoc } from '../../src/kit/core/codec.ts';
@@ -15,6 +15,7 @@ import type { ToDrawer } from '../../src/kit/ui/drawer.ts';
 import type { ToChrome } from '../../src/kit/ui/chrome.ts';
 import { render, html } from 'lit';
 import { trustButton } from '../../src/kit/ui/privacy-dialog.ts';
+import { redrawCaret } from '../../src/kit/ui/scroll.ts';
 
 const frame = () => new Promise<void>((r) => requestAnimationFrame(() => requestAnimationFrame(() => r())));
 const BIG = `---\ntitle: Long\n---\n${Array.from({ length: 300 }, (_, i) => `Paragraph ${i + 1}, long enough to take a line or two of the page when it is drawn.`).join('\n\n')}\n`;
@@ -720,4 +721,35 @@ test('Share sits one touch width before the menu button on a document, opens the
   location.hash = '#/';
   await until(() => !!shell.querySelector('.to-header > .to-brand'));
   expect(shell.querySelector('.to-share-btn')).toBeNull();
+});
+
+// iOS draws the caret of a box it has focused itself and leaves it where it first drew it after the window is put back or
+// the header steps aside (Paul, 2026-10-13: "There's a big black area the cursor is in it. Then it focuses"): the same
+// selection written again makes it draw the caret where the words are (kit/ui/scroll.ts redrawCaret).
+test('the caret is drawn again where the words are: the same selection written once more, and nothing outside a box', async () => {
+  const shell = await mount('#/v1/write');
+  await until(() => !!shell.querySelector('to-write-editor to-text .tx p'));
+  const text = shell.querySelector<ToText>('to-text')!;
+  text.focus();
+  text.sel = { anchor: { block: 0, offset: 0 }, focus: { block: 0, offset: 0 } };
+  await text.updateComplete;
+  await until(() => !!document.getSelection()?.rangeCount && text.contains(document.getSelection()!.focusNode));
+  const before = document.getSelection()!;
+  const [node, offset] = [before.focusNode, before.focusOffset];
+  const added = vi.spyOn(Selection.prototype, 'addRange');
+  try {
+    expect(redrawCaret(text)).toBe(true);
+    expect(added).toHaveBeenCalledTimes(1);
+    const after = document.getSelection()!;
+    expect(after.focusNode).toBe(node);
+    expect(after.focusOffset).toBe(offset);
+    expect(after.isCollapsed).toBe(true);
+    // The title box is not a box of words: nothing to write again.
+    const title = shell.querySelector<HTMLInputElement>('input.to-title')!;
+    title.focus();
+    expect(redrawCaret(title)).toBe(false);
+    expect(added).toHaveBeenCalledTimes(1);
+  } finally {
+    added.mockRestore();
+  }
 });
