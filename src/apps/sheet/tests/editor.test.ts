@@ -869,3 +869,31 @@ test("the bar's ABC asks for the letters keyboard in a number column, for the vi
   // Not a document's: nothing is written.
   expect(el.value).toBe(SHEET);
 });
+
+test('pointing a formula at a cell with the arrow keys highlights that cell, gently, until the caret moves on (Paul, 2026-10-13)', async () => {
+  const { el } = await editor(SHEET);
+  await type(el, cell(el, 'B3'), '=');
+  key(cell(el, 'B3'), 'ArrowUp');
+  await until(() => cell(el, 'B3').value === '=B2');
+  const pointed = () => el.querySelector('td.pointed input')?.getAttribute('aria-label') ?? null;
+  await until(() => pointed() === 'B2');
+  // Softer than the selected cell: a dashed accent edge and a tint, not the selected cell's solid inset.
+  const td = el.querySelector<HTMLElement>('td.pointed')!;
+  expect(getComputedStyle(td).outlineStyle).toBe('dashed');
+  expect(td.classList.contains('sel')).toBe(false);
+  // Up again replaces the reference, and the highlight goes with it.
+  key(cell(el, 'B3'), 'ArrowUp');
+  await until(() => cell(el, 'B3').value === '=B1');
+  await until(() => pointed() === 'B1');
+  expect(el.querySelectorAll('td.pointed')).toHaveLength(1);
+  // The caret moved back into the formula: the highlight is gone, the formula untouched.
+  cell(el, 'B3').setSelectionRange(1, 1);
+  await until(() => pointed() === null);
+  expect(cell(el, 'B3').value).toBe('=B1');
+  // Pointing again from the end, then leaving the cell: nothing stays lit.
+  cell(el, 'B3').setSelectionRange(3, 3);
+  key(cell(el, 'B3'), 'ArrowDown');
+  await until(() => pointed() === 'B2');
+  cell(el, 'A1').focus();
+  await until(() => pointed() === null);
+});

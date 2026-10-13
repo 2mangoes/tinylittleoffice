@@ -158,6 +158,7 @@ export class ToSheetEditor extends DocElement<SheetView> {
     sel: { state: true },
     end: { state: true },
     focused: { state: true },
+    pointed: { state: true },
     rowsShown: { state: true },
     colsShown: { state: true },
     fillTo: { state: true },
@@ -195,6 +196,8 @@ export class ToSheetEditor extends DocElement<SheetView> {
   entered: { r: number; c: number; raw: string } | null = null;
   /** The reference most recently inserted by tapping, so the next tap can replace it. */
   private picked: { r: number; c: number; start: number; end: number; to: [number, number] } | null = null;
+  /** The cell the formula was last pointed at, while the caret still sits after its reference: drawn with a soft tint and a dashed edge, so the eye sees which cell the arrow keys reached (Paul, 2026-10-13: "gently highlight the targeted cell as you enter it in the formula"). Null the moment the caret moves on. */
+  declare pointed: [number, number] | null;
   /** Where the caret was when the selected cell last lost focus. */
   private caret: { r: number; c: number; pos: number } | null = null;
   /** Names this sheet's option lists apart from another's on the page. */
@@ -208,6 +211,7 @@ export class ToSheetEditor extends DocElement<SheetView> {
     this.sel = [0, 0];
     this.end = null;
     this.focused = false;
+    this.pointed = null;
     this.rowsShown = 30;
     this.colsShown = MIN_COLS;
     this.fillTo = null;
@@ -484,10 +488,21 @@ export class ToSheetEditor extends DocElement<SheetView> {
     // And the table's box itself inside the column, above the bar (kit/ui/scroll.ts).
     reveal(td);
   });
+  connectedCallback() {
+    super.connectedCallback();
+    document.addEventListener('selectionchange', this.onSelectionChange);
+  }
   disconnectedCallback() {
     super.disconnectedCallback();
     this.boxWatch.disconnect();
+    document.removeEventListener('selectionchange', this.onSelectionChange);
   }
+  /** The pointed cell's highlight goes the moment the caret is no longer right after its reference: a letter typed, the caret moved, the cell left. */
+  private onSelectionChange = () => {
+    if (!this.pointed) return;
+    const ed = this.editor();
+    if (!ed || !this.pointing(ed)) this.pointed = null;
+  };
   protected updated(changed: Map<PropertyKey, unknown>) {
     super.updated(changed);
     const box = this.querySelector('.sheet-scroll');
@@ -838,7 +853,9 @@ export class ToSheetEditor extends DocElement<SheetView> {
     const ref = rcToRef(r, c);
     this.setCell(sr, sc, val.slice(0, start) + ref + val.slice(end));
     this.picked = { r: sr, c: sc, start, end: start + ref.length, to: [r, c] };
-    void this.caretTo(start + ref.length, ed);
+    this.pointed = null;
+    // Lit only once the caret sits after the reference: until then a selectionchange would read it as moved on.
+    void this.caretTo(start + ref.length, ed).then(() => (this.pointed = this.pointing(ed) ? [r, c] : null));
     return true;
   }
 
@@ -1209,8 +1226,9 @@ export class ToSheetEditor extends DocElement<SheetView> {
           r === g.r1 && c === g.c1
             ? html`<span class="fill" role="button" aria-label=${t('Fill: drag to carry these cells on')} title=${t('Drag to fill')} @pointerdown=${this.onFillDown}></span>`
             : nothing;
+        const pointed = !!this.pointed && this.focused && r === this.pointed[0] && c === this.pointed[1];
         const td = (inner: unknown) =>
-          html`<td data-r=${r} data-c=${c} class="${r === sr && c === sc ? 'sel' : ''} ${inBlock ? 'in' : ''} ${inFill ? 'filling' : ''}" @mousedown=${(e: MouseEvent) => this.onCellDown(e, r, c)} @mouseover=${(e: MouseEvent) => this.onCellOver(e, r, c)}>${inner}${fillHandle}</td>`;
+          html`<td data-r=${r} data-c=${c} class="${r === sr && c === sc ? 'sel' : ''} ${inBlock ? 'in' : ''} ${inFill ? 'filling' : ''} ${pointed ? 'pointed' : ''}" @mousedown=${(e: MouseEvent) => this.onCellDown(e, r, c)} @mouseover=${(e: MouseEvent) => this.onCellOver(e, r, c)}>${inner}${fillHandle}</td>`;
         if (isRich(type, raw)) {
           // A rich cell is its words' editor; the grid's keys are caught on their way down to it.
           return td(html`<to-text

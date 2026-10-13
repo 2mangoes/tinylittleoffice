@@ -387,6 +387,12 @@
     box-shadow: inset 0 0 0 1px var(--to-accent);
     background: color-mix(in srgb, var(--to-accent) 8%, transparent);
   }
+  /* The cell a formula was just pointed at, by the arrow keys or a tap: a soft tint and a dashed edge in the accent, gentler than the selected cell's solid one, gone when the caret moves on (editor.ts pointed). */
+  table.sheet td.pointed {
+    outline: 0.125rem dashed var(--to-accent);
+    outline-offset: -0.125rem;
+    background: color-mix(in srgb, var(--to-accent) 10%, transparent);
+  }
   table.sheet td.sel input {
     background: transparent;
   }
