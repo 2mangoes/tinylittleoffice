@@ -986,10 +986,10 @@ test('a label is rich: words chosen and Bold from the bubble write **…** and t
   await tap(el, 96, 80);
   await press(el, 'Enter');
   await tick();
-  // All the words are chosen: the bubble comes up with the five marks, no link, no footnote.
+  // All the words are chosen: the bubble comes up with the six marks, no link, no footnote.
   const bubble = () => el.querySelector<HTMLElement>('.draw-words .tx-bubble .to-context')!;
   await until(() => bubble().matches(':popover-open'));
-  expect([...bubble().querySelectorAll('button')].map((b) => b.getAttribute('aria-label'))).toEqual(['Bold', 'Italic', 'Underline', 'Strikethrough', 'Highlight']);
+  expect([...bubble().querySelectorAll('button')].map((b) => b.getAttribute('aria-label'))).toEqual(['Bold', 'Italic', 'Underline', 'Strikethrough', 'Highlight', 'Code']);
   bubble().querySelector<HTMLButtonElement>('button[aria-label="Bold"]')!.click();
   await el.updateComplete;
   await tick();

@@ -13,12 +13,13 @@ import { linkable, type TextList, type TextNode, type TextRun } from '../../doc/
 import { xml } from '../draw/draw.ts';
 import { t } from '../core/i18n.ts';
 
-/** Words with their marks, a line break a <br>, a footnote's mark its number raised. */
+/** Words with their marks (code a <code>), a line break a <br>, a footnote's mark its number raised. */
 function runs(rs: TextRun[]): string {
   return rs
     .map((r) => {
       if (r.note !== undefined) return `<sup>${xml(r.t)}</sup>`;
       let s = xml(r.t).replace(/\n/g, '<br>');
+      if (r.c) s = `<code>${s}</code>`;
       if (r.b) s = `<strong>${s}</strong>`;
       if (r.i) s = `<em>${s}</em>`;
       if (r.u) s = `<u>${s}</u>`;

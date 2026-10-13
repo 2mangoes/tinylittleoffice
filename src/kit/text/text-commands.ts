@@ -50,6 +50,7 @@ export const ITALIC = mark('i', 'italic', 'Italic', UI.italic, 'Mod+I');
 export const UNDERLINE = mark('u', 'underline', 'Underline', UI.underline, 'Mod+U');
 export const STRIKE = mark('s', 'strike', 'Strikethrough', UI.strike, 'Mod+Shift+X');
 export const HIGHLIGHT = mark('h', 'highlight', 'Highlight', UI.highlight, 'Mod+Shift+H');
+export const CODE = mark('c', 'code', 'Code', UI.code, 'Mod+E');
 export const LINK = cmd('link', 'Link', { icon: UI.link, keys: 'Mod+K', where: ['bar', 'context'], group: 'link', when: rich, pressed: (x) => !!x.sel && !!x.marks.href, does: (x) => x.exec('link') });
 export const FOOTNOTE = cmd('footnote', 'Footnote', { icon: UI.footnote, where: ['bar', 'context'], group: 'link', when: (x) => x.notes && !x.marksOnly, does: (x) => x.exec('fn') });
 export const BULLETS = cmd('bullets', 'Bulleted list', {
@@ -98,6 +99,7 @@ export const TEXT_COMMANDS = register([
   UNDERLINE,
   STRIKE,
   HIGHLIGHT,
+  CODE,
   LINK,
   FOOTNOTE,
   BULLETS,

@@ -236,6 +236,19 @@ test('a page break: the next page on paper (never a blank one), break-after in p
   expect(docToMarkdown(parse(text))).toBe(text);
 });
 
+test('code: Plex Mono on the page, <code> in the web page, Courier New in Word and RTF, backticks in Markdown', () => {
+  const text = 'Run **`npx tlo`** now.\n';
+  const page = pages(text)[0].svg;
+  expect(page).toMatch(/<tspan font-weight="600" font-family="'IBM Plex Mono'[^"]*">npx tlo<\/tspan>/);
+  expect(docToHtml(parse(text), ctx)).toContain('<strong><code>npx tlo</code></strong>');
+  const docXml = strFromU8(unzipSync(docToDocx(parse(text), ctx))['word/document.xml']);
+  expect(docXml).toContain('<w:rPr><w:rFonts w:ascii="Courier New" w:hAnsi="Courier New" w:cs="Courier New"/><w:b/></w:rPr><w:t xml:space="preserve">npx tlo</w:t>');
+  const rtf = docToRtf(parse(text), ctx);
+  expect(rtf).toContain('{\\f2\\fmodern\\fcharset0 Courier New;}');
+  expect(rtf).toContain('{\\b\\f2 npx tlo}');
+  expect(docToMarkdown(parse(text))).toBe(text);
+});
+
 test('every template is a whole document: a name and a blurb, no placeholder words, and a look only where one is known', () => {
   for (const t of templates()) {
     expect(t.name, t.id).toBeTruthy();

@@ -525,7 +525,7 @@ export function parseInline(s: string, kept?: string[]): Run[] {
     if (href && extra.fn === undefined) r.href = href;
     Object.assign(r, extra);
     const last = runs[runs.length - 1];
-    if (last && !r.ic && !last.ic && r.fn === undefined && last.fn === undefined && (['b', 'i', 'u', 's', 'h', 'href'] as const).every((k) => last[k] === r[k])) last.t += r.t;
+    if (last && !r.ic && !last.ic && r.fn === undefined && last.fn === undefined && (['b', 'i', 'u', 's', 'h', 'c', 'href'] as const).every((k) => last[k] === r[k])) last.t += r.t;
     else runs.push(r);
   };
   const flush = () => {
@@ -560,10 +560,13 @@ export function parseInline(s: string, kept?: string[]): Run[] {
       i += 2;
       continue;
     }
+    // Code: the words between two backticks, verbatim (no mark is read inside, no escape but the span's end); a
+    // backtick that nothing closes (inside a link's words, before they end) stays a backtick.
     if (c === '`') {
       const end = s.indexOf('`', i + 1);
-      if (end > i) {
-        buf += s.slice(i + 1, end);
+      if (end > i + 1 && (linkEnd < 0 || end < linkEnd)) {
+        flush();
+        push(s.slice(i + 1, end), { c: true });
         i = end + 1;
         continue;
       }
@@ -650,7 +653,7 @@ export function parseInline(s: string, kept?: string[]): Run[] {
 
 /** A run's marks kept off the spaces at its ends, as the writer keeps them ("** a**" opened its bold before a space); a link keeps its spaces. */
 function unspaced(r: Run): Run[] {
-  if (r.ic || r.fn !== undefined || !(r.b || r.i || r.u || r.s || r.h)) return [r];
+  if (r.ic || r.fn !== undefined || !(r.b || r.i || r.u || r.s || r.h || r.c)) return [r];
   const m = /^(\s*)([\s\S]*?)(\s*)$/.exec(r.t)!;
   if (!m[1] && !m[3]) return [r];
   const plain: Run = { t: '', ...(r.href ? { href: r.href } : {}) };
@@ -773,11 +776,28 @@ function inline(runs: Run[], ends: (s: string) => string, read: (s: string) => R
   return same(read(least), back) ? least : full;
 }
 
-const same = (a: Run[], b: Run[]) => a.length === b.length && a.every((r, i) => (['t', 'b', 'i', 'u', 's', 'h', 'href', 'ic', 'fn'] as const).every((k) => r[k] === b[i][k]));
+const same = (a: Run[], b: Run[]) => a.length === b.length && a.every((r, i) => (['t', 'b', 'i', 'u', 's', 'h', 'c', 'href', 'ic', 'fn'] as const).every((k) => r[k] === b[i][k]));
 
-/** Runs as reading their writing gives them at best: an icon unmarked, a note's words balanced, no mark on a space at a run's end. */
+/**
+ * Runs as reading their writing gives them at best: an icon unmarked, a note's words balanced, no mark on a space at
+ * a run's end, and out of code what a backtick span cannot hold (a backtick, a line's end; in a link's words a "]" or
+ * a backslash), written beside it as plain words.
+ */
 const sayable = (runs: Run[]): Run[] =>
-  normalRuns(runs.map((r): Run => (r.ic ? { t: '', ic: r.ic, ...(r.href ? { href: r.href } : {}) } : r.fn !== undefined ? { t: '', fn: balanceNote(r.fn) } : r)).flatMap(unspaced));
+  normalRuns(
+    runs
+      .flatMap((r): Run[] => (r.ic ? [{ t: '', ic: r.ic, ...(r.href ? { href: r.href } : {}) }] : r.fn !== undefined ? [{ t: '', fn: balanceNote(r.fn) }] : r.c ? uncoded(r) : [r]))
+      .flatMap(unspaced),
+  );
+
+/** A code run split where its words hold what a backtick span cannot: those characters are plain words. */
+function uncoded(r: Run): Run[] {
+  const parts = r.t.split(r.href ? /([`\n\]\\])/ : /([`\n])/);
+  if (parts.length === 1) return [r];
+  const plain: Run = { ...r };
+  delete plain.c;
+  return parts.map((t, n) => (n % 2 ? { ...plain, t } : { ...r, t }));
+}
 
 /** Every character a backslash can escape, escaped: the last resort. */
 const escapeAll = (t: string) => t.replace(/[\\`*_{}[\]()#+\-.!|~=:<>^]/g, '\\$&');
@@ -830,7 +850,7 @@ function markedPlain(runs: Run[], esc: (t: string) => string): string {
     close(want);
     out += m[1];
     for (const [f, d] of FLAGS) if (want.has(f) && !open.includes(f)) ((out += d), open.push(f));
-    out += esc(m[2]);
+    out += r.c ? `\`${m[2]}\`` : esc(m[2]);
     if (m[3]) {
       close(new Set());
       out += m[3];

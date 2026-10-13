@@ -235,7 +235,7 @@ export interface CalcView {
 }
 
 /** A run's words as typed: marks a loose text read as Markdown ("2*3*4" read as italics) are the signs they were. */
-const typed = (r: Run): string => (isAtomic(r) ? '' : r.b || r.i || r.u || r.s || r.h || r.href ? writeInline([r]) : r.t);
+const typed = (r: Run): string => (isAtomic(r) ? '' : r.b || r.i || r.u || r.s || r.h || r.c || r.href ? writeInline([r]) : r.t);
 const linesOf = (runs: Run[]): string[] =>
   runs
     .map(typed)

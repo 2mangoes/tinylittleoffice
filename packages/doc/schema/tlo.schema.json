@@ -339,6 +339,10 @@
           "description": "Highlighted.",
           "const": true
         },
+        "c": {
+          "description": "Code: set in a monospace face, its words verbatim (a backtick span).",
+          "const": true
+        },
         "href": {
           "description": "Where these words link.",
           "type": "string"

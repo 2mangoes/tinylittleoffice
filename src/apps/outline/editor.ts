@@ -24,7 +24,7 @@ import { ArrowLeft, ArrowLeftRight, ArrowRight, ChevronDown, ChevronRight, GripV
 import { applyAll, family, fenceRef, isAtomic, isText, listNumbers, plainText, runLength, write, type Block, type Doc, type Op } from '../../doc/index.ts';
 import { cmdBtn, cmdTool, tool } from '../../kit/ui/bar.ts';
 import { drawnIn, labelOf, runKey } from '../../kit/core/commands.ts';
-import { BOLD, FOOTNOTE, HIGHLIGHT, ITALIC, LINK, STRIKE, UNDERLINE } from '../../kit/text/text-commands.ts';
+import { BOLD, CODE, FOOTNOTE, HIGHLIGHT, ITALIC, LINK, STRIKE, UNDERLINE } from '../../kit/text/text-commands.ts';
 import type { Handoff } from '../../kit/core/app.ts';
 import COMMANDS from './commands.ts';
 import { appOf } from '../../kit/core/apps.ts';
@@ -808,7 +808,7 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
     const view = own('view');
     return html`<to-bar class="ol-bar">
       <to-insert .items=${drawnIn(COMMANDS, 'menu:insert', this)}></to-insert>
-      ${[BOLD, ITALIC, UNDERLINE, STRIKE, HIGHLIGHT, LINK].map((c) => cmdTool(c, x))}
+      ${[BOLD, ITALIC, UNDERLINE, STRIKE, HIGHLIGHT, CODE, LINK].map((c) => cmdTool(c, x))}
       ${cmdTool(own('icon'), this)}
       ${cmdTool(FOOTNOTE, x)}
       ${['indent', 'outdent', 'up', 'down', 'numbered', 'zoomout', 'zoomin', 'foldall', 'unfoldall'].map((id) => cmdTool(own(id), this))}

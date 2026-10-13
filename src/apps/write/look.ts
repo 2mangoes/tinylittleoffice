@@ -14,7 +14,7 @@
  *   news     a narrow serif headline over a sans body, set in two columns on paper
  */
 import type { Doc } from '../../doc/index.ts';
-import { FONT } from '../../kit/draw/draw.ts';
+import { FONT, MONO } from '../../kit/draw/draw.ts';
 import { t } from '../../kit/core/i18n.ts';
 
 export type Face = 'sans' | 'serif' | 'mono' | 'narrow';
@@ -24,7 +24,7 @@ export type LookId = 'sans' | 'serif' | 'mono' | 'mixed' | 'inverse' | 'book' | 
 export const STACKS: Record<Face, string> = {
   sans: FONT,
   serif: "'IBM Plex Serif', Charter, 'Bitstream Charter', 'Iowan Old Style', 'Palatino Linotype', Georgia, 'Noto Serif', serif",
-  mono: "'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, Consolas, 'Liberation Mono', 'Courier New', monospace",
+  mono: MONO,
   narrow: "'Bodoni 72', Didot, 'Times New Roman', Times, 'Noto Serif', serif",
 };
 /** How wide each face sets beside the sans the page's widths are estimated in (kit/draw/draw.ts textWidth): Plex Serif and Plex Mono beside Plex Sans, measured. */

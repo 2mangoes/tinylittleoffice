@@ -59,3 +59,11 @@ test('the Outliner as a text PDF: the lone top item the title, its children sect
   xrefHolds(s);
   expect(measure('ab', 10)).toBeCloseTo(11.12);
 });
+
+test('code in a text PDF is set in Courier, one of the faces every reader has, and measured at its 600 a character', () => {
+  const s = latin1(textPdf([{ kind: 'p', runs: [{ t: 'run ' }, { t: 'npx tlo', c: true }] }]));
+  expect(s).toContain('/BaseFont /Courier ');
+  expect(s).toMatch(/BT \/F5 11 Tf 0 g 1 0 0 1 [\d.]+ [\d.]+ Tm \(npx \) Tj ET/);
+  expect(s).toMatch(/BT \/F1 11 Tf 0 g 1 0 0 1 [\d.]+ [\d.]+ Tm \(run \) Tj ET/);
+  expect(measure('npx tlo', 10, false, true)).toBe(42);
+});

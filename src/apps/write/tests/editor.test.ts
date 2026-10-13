@@ -75,6 +75,14 @@ test('typing is the document; the bar makes the block a title and marks the word
   await tick();
   button(el, 'Bold').click();
   await until(() => last() === '# **Hello** there {.title}\n');
+  // Code from the bar, after Highlight, and again to take it off.
+  el.text.sel = { anchor: { block: 0, offset: 6 }, focus: { block: 0, offset: 11 } };
+  await tick();
+  button(el.querySelector('.write-bar')!, 'Code').click();
+  await until(() => last() === '# **Hello** `there` {.title}\n');
+  await until(() => el.querySelector('.write-page .tx h1.title code')?.textContent === 'there');
+  button(el.querySelector('.write-bar')!, 'Code').click();
+  await until(() => last() === '# **Hello** there {.title}\n');
   expect(el.querySelector('.write-foot')!.textContent).toContain('2 words');
   // The title the shell sets is a head op in the history, undone like any other.
   el.value = '---\ntitle: Named\n---\n# **Hello** there {.title}\n';

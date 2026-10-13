@@ -140,17 +140,18 @@ test("paragraphs: consecutive lines merge, a blank separates, a line that reads 
   expect(parse('<br>\n').blocks).toStrictEqual([{ k: 'p', runs: [] }]);
 });
 
-test('inline: the marks, no space just inside, backticks as plain words, links, icons, notes, escapes, a web address whole, marks close before trailing spaces', () => {
+test('inline: the marks, no space just inside, a backtick span as code, links, icons, notes, escapes, a web address whole, marks close before trailing spaces', () => {
   same('a **b** *i* ++u++ ~~s~~ ==h== :rocket: [w *x*](https://x.y)\n');
   const doc = parse('__bold__ _it_ <u>under</u> `code` ** not** [x](y) 5 * 3 snake_case\n');
   expect(doc.blocks[0]).toStrictEqual({
     k: 'p',
-    runs: [{ t: 'bold', b: true }, { t: ' ' }, { t: 'it', i: true }, { t: ' ' }, { t: 'under', u: true }, { t: ' code ** not** [x](y) 5 * 3 snake_case' }],
+    runs: [{ t: 'bold', b: true }, { t: ' ' }, { t: 'it', i: true }, { t: ' ' }, { t: 'under', u: true }, { t: ' ' }, { t: 'code', c: true }, { t: ' ** not** [x](y) 5 * 3 snake_case' }],
   });
   // Written back with the least escaping that reads the same: "** not**" and "5 * 3" are words as they stand.
-  expect(write(doc)).toBe('**bold** *it* ++under++ code ** not** [x](y) 5 * 3 snake_case\n');
+  expect(write(doc)).toBe('**bold** *it* ++under++ `code` ** not** [x](y) 5 * 3 snake_case\n');
   expect(write({ head: {}, blocks: [{ k: 'p', runs: [{ t: 'a *b* c' }] }] })).toBe('a \\*b\\* c\n');
-  expect(write({ head: {}, blocks: [{ k: 'p', runs: [{ t: '```' }] }] })).toBe('\\`\\`\\`\n');
+  // (A fence's opening is guarded; two backticks together close no code, so the rest stand as they are.)
+  expect(write({ head: {}, blocks: [{ k: 'p', runs: [{ t: '```' }] }] })).toBe('\\```\n');
   same('5 * 3 * 2 and snake_case and 2*3\n');
   same('[a link with spaces](https://x.y/a%20b) and [mail](mailto:a@b.c) and [tel](tel:+1) and [here](#top)\n');
   expect(parse('[sp ace](https://x.y/a b)\n').blocks[0]).toStrictEqual({ k: 'p', runs: [{ t: '[sp ace](https://x.y/a b)' }] });
@@ -197,8 +198,8 @@ test('found by the fuzz: a table whose last heading is empty keeps its edges; a 
 });
 
 test("found by the fuzz: spaces at a line's end and inside a mark's ends, empty lines, marks on an icon", () => {
-  // A code span's spaces at a line's end, a link of a space: no writing keeps them.
-  expect(parse('`- `\n').blocks[0]).toStrictEqual({ k: 'p', runs: [{ t: '-' }] });
+  // A code span's spaces at a line's end, a link of a space: no writing keeps them (the code keeps its words).
+  expect(parse('`- `\n').blocks[0]).toStrictEqual({ k: 'p', runs: [{ t: '-', c: true }] });
   expect(parse('## [ ](https://x.y/) word\n').blocks[0]).toStrictEqual({ k: 'h', level: 2, runs: [{ t: 'word' }] });
   // A mark opened before a space keeps its mark off the space.
   expect(parse('a *b*** **word****\n').blocks[0]).toStrictEqual({ k: 'p', runs: [{ t: 'a ' }, { t: 'b', i: true }, { t: ' ' }, { t: '**word', b: true }, { t: '**' }] });

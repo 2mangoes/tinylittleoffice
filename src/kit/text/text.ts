@@ -60,7 +60,7 @@
  * tap or Enter on a chip, and the Footnote command once it has put a new
  * mark in, say `text-note` ({block, nth}: the block, and which of its marks)
  * for the host to open that note. Only a host with `notes` is offered the
- * Footnote command. `marks-only` keeps the five marks alone (words
+ * Footnote command. `marks-only` keeps the six marks alone (words
  * that are drawn, not read: a shape's label): no Link, no Footnote, no
  * lists, Mod+K does nothing, and a paste brings its words without links or notes.
  *
@@ -256,6 +256,7 @@ function domToRuns(el: HTMLElement): Run[] {
     if (e.tagName === 'U') next.u = true;
     if (e.tagName === 'S' || e.tagName === 'DEL') next.s = true;
     if (e.tagName === 'MARK') next.h = true;
+    if (e.tagName === 'CODE') next.c = true;
     if (e.tagName === 'A' && e.getAttribute('href')) next.href = e.getAttribute('href')!;
     for (const c of e.childNodes) walk(c, next);
   };
@@ -953,6 +954,7 @@ export class ToText extends LitElement {
       case 'u':
       case 's':
       case 'h':
+      case 'c':
         if (collapsed(sel)) {
           const fmt = { ...this.fmt };
           fmt[cmd as Mark] ? delete fmt[cmd as Mark] : (fmt[cmd as Mark] = true);
@@ -1240,6 +1242,7 @@ export class ToText extends LitElement {
         return html`<sup class="fn" data-fn=${r.fn} data-atomic contenteditable="false" tabindex="0" role="button" aria-label=${t('Footnote {n}', { n })}>${n}</sup>`;
       }
       let node: unknown = this.words(r.t);
+      if (r.c) node = html`<code>${node}</code>`;
       if (r.h) node = html`<mark>${node}</mark>`;
       if (r.s) node = html`<s>${node}</s>`;
       if (r.u) node = html`<u>${node}</u>`;

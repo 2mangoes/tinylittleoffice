@@ -6,7 +6,7 @@
  */
 import { listNumbers, markNotes, noteNumbers, noteRuns, notesOf, plainText, type Dir, type Doc, type Run } from '../../doc/index.ts';
 import type { Page } from '../../kit/core/app.ts';
-import { ACCENT, INK, LINE, MUTED, SHADE, clip, r, rect, textWidth, xml } from '../../kit/draw/draw.ts';
+import { ACCENT, INK, LINE, MONO, MUTED, SHADE, clip, monoWidth, r, rect, textWidth, xml } from '../../kit/draw/draw.ts';
 import { glyphNamed } from '../../kit/draw/icons.ts';
 import { t } from '../../kit/core/i18n.ts';
 import { docGist, hasChildren, liveLinks, readOutline } from './model.ts';
@@ -19,7 +19,7 @@ export const ARROW: Record<Dir, string> = { '--': '—', '->': '→', '<-': '←
 /** A run as drawn: a note's mark is its number, raised. */
 export type Piece = Run & { sup?: boolean };
 
-const pieceWidth = (p: Piece, px: number, bold: boolean) => (p.ic ? px : textWidth(p.t, p.sup ? px * 0.65 : px, bold || !!p.b));
+const pieceWidth = (p: Piece, px: number, bold: boolean) => (p.ic ? px : p.c ? monoWidth(p.t, px) : textWidth(p.t, p.sup ? px * 0.65 : px, bold || !!p.b));
 
 /** Rich words wrapped to a width: lines of pieces, broken between words, every mark kept on its piece. */
 export function wrapRuns(runs: Piece[], max: number, px: number, bold = false): Piece[][] {
@@ -51,7 +51,7 @@ export function richText(x: number, y: number, pieces: Piece[], px: number, bold
   };
   let left = x;
   // Neighbouring words with the same marks share one tspan.
-  const same = (a: Piece, b: Piece) => !a.ic && !b.ic && a.b === b.b && a.i === b.i && a.u === b.u && a.s === b.s && a.href === b.href && a.sup === b.sup;
+  const same = (a: Piece, b: Piece) => !a.ic && !b.ic && a.b === b.b && a.i === b.i && a.u === b.u && a.s === b.s && a.c === b.c && a.href === b.href && a.sup === b.sup;
   const joined: Piece[] = [];
   for (const p of pieces) {
     const last = joined[joined.length - 1];
@@ -69,6 +69,7 @@ export function richText(x: number, y: number, pieces: Piece[], px: number, bold
     const attrs = [
       p.b || bold ? 'font-weight="600"' : '',
       p.i ? 'font-style="italic"' : '',
+      p.c ? `font-family="${xml(MONO)}"` : '',
       p.u ? 'text-decoration="underline"' : p.s ? 'text-decoration="line-through"' : '',
       p.href ? `fill="${ACCENT}"` : '',
       p.sup ? `baseline-shift="super" font-size="${r(px * 0.65)}"` : '',

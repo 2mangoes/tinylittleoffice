@@ -35,12 +35,12 @@ function placeholder(id: number, kind: 'title' | 'body', paragraphs: string, fra
   const ph = kind === 'title' ? '<p:ph type="title"/>' : '<p:ph type="body" idx="1"/>';
   return `<p:sp><p:nvSpPr><p:cNvPr id="${id}" name="${kind === 'title' ? 'Title' : 'Content'}"/><p:cNvSpPr><a:spLocks noGrp="1"/></p:cNvSpPr><p:nvPr>${ph}</p:nvPr></p:nvSpPr><p:spPr>${frame ? frame + RECT : ''}</p:spPr><p:txBody><a:bodyPr${kind === 'title' ? ' anchor="ctr"' : ''}><a:normAutofit/></a:bodyPr><a:lstStyle/>${paragraphs}</p:txBody></p:sp>`;
 }
-/** A paragraph of runs: their marks as PowerPoint's, a footnote's mark raised. */
+/** A paragraph of runs: their marks as PowerPoint's, a footnote's mark raised, code in Courier New (the monospace every PowerPoint has). */
 const para = (runs: Run[], pPr = '', size = 0, next = noteNumbers()) => {
   const rPr = `lang="en-US"${size ? ` sz="${size}"` : ''} dirty="0"`;
   const marked = markNotes(runs, next).filter((ru) => ru.t || ru.ic);
   return marked.length
-    ? `<a:p>${pPr}${marked.map((ru) => `<a:r><a:rPr ${rPr}${ru.b ? ' b="1"' : ''}${ru.i ? ' i="1"' : ''}${ru.u ? ' u="sng"' : ''}${ru.s ? ' strike="sngStrike"' : ''}${ru.sup ? ' baseline="30000"' : ''}/><a:t>${x(ru.ic ? ' ' : ru.t.replace(/\n/g, ' '))}</a:t></a:r>`).join('')}</a:p>`
+    ? `<a:p>${pPr}${marked.map((ru) => `<a:r><a:rPr ${rPr}${ru.b ? ' b="1"' : ''}${ru.i ? ' i="1"' : ''}${ru.u ? ' u="sng"' : ''}${ru.s ? ' strike="sngStrike"' : ''}${ru.sup ? ' baseline="30000"' : ''}${ru.c ? '><a:latin typeface="Courier New"/></a:rPr>' : '/>'}<a:t>${x(ru.ic ? ' ' : ru.t.replace(/\n/g, ' '))}</a:t></a:r>`).join('')}</a:p>`
     : `<a:p>${pPr}<a:endParaRPr ${rPr}/></a:p>`;
 };
 const words = (s: string) => [{ t: s }];

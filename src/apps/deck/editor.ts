@@ -31,7 +31,7 @@ import { applyAll, parse, plainText, write, type Block, type Doc, type Op } from
 import { lookup } from '../../kit/core/app.ts';
 import { cmdMenu, cmdTool, tool } from '../../kit/ui/bar.ts';
 import { coarse, drawnIn, runKey } from '../../kit/core/commands.ts';
-import { BOLD, FOOTNOTE, HIGHLIGHT, INDENT, ITALIC, LINK, OUTDENT, STRIKE, UNDERLINE } from '../../kit/text/text-commands.ts';
+import { BOLD, CODE, FOOTNOTE, HIGHLIGHT, INDENT, ITALIC, LINK, OUTDENT, STRIKE, UNDERLINE } from '../../kit/text/text-commands.ts';
 import COMMANDS, { EDIT, SHOW } from './commands.ts';
 import { docToHtml, linkToFence, pasteFrom } from '../../kit/text/clipboard.ts';
 import { encodeDoc } from '../../kit/core/codec.ts';
@@ -1074,7 +1074,7 @@ export class ToDeckEditor extends DocElement<Slide[]> {
     return html`<to-bar class="deck-bar">
         <to-insert .items=${drawnIn(COMMANDS, 'menu:insert', this)}></to-insert>
         ${g ? cmdTool(own('sheets'), this, { cls: 'deck-present' }) : cmdTool(own('present'), this, { cls: 'deck-present' })}
-        ${[BOLD, ITALIC, UNDERLINE, STRIKE, HIGHLIGHT, LINK].map((c) => cmdTool(c, x))}
+        ${[BOLD, ITALIC, UNDERLINE, STRIKE, HIGHLIGHT, CODE, LINK].map((c) => cmdTool(c, x))}
         ${cmdTool(FOOTNOTE, x, { disabled: !x })}
         ${cmdTool(own('icon'), this)}
         ${cmdTool(OUTDENT, x, { disabled: !canIndent })} ${cmdTool(INDENT, x, { disabled: !canIndent })}

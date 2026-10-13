@@ -28,7 +28,7 @@ import { parse, write, type Block, type Doc, type Op } from '../../doc/index.ts'
 import { lookup } from '../../kit/core/app.ts';
 import { cmdTool } from '../../kit/ui/bar.ts';
 import { contextOf, drawnIn, labelOf, runKey } from '../../kit/core/commands.ts';
-import { BOLD, BULLETS, FOOTNOTE, HIGHLIGHT, INDENT, ITALIC, LINK, NUMBERS, OUTDENT, STRIKE, UNDERLINE } from '../../kit/text/text-commands.ts';
+import { BOLD, BULLETS, CODE, FOOTNOTE, HIGHLIGHT, INDENT, ITALIC, LINK, NUMBERS, OUTDENT, STRIKE, UNDERLINE } from '../../kit/text/text-commands.ts';
 import { copyData, pasteFrom, writeClip } from '../../kit/text/clipboard.ts';
 import { SEP, type ContextEntry, type ToContext } from '../../kit/ui/context.ts';
 import { editFence, editTable, makeDoc, newTable } from '../../kit/ui/doc-dialog.ts';
@@ -204,7 +204,7 @@ export class ToWriteEditor extends DocElement<Doc> {
   private barKey(): string {
     const x = this.sel ? this.text : null;
     const m = x?.marks ?? {};
-    return [this.text ? 1 : 0, x?.kind ?? '', x?.alignment ?? 'left', m.b, m.i, m.u, m.s, m.h, !!m.href, lookOf(this.doc).id, paperOf(this.doc), this.canUndo, this.canRedo, language()].join('|');
+    return [this.text ? 1 : 0, x?.kind ?? '', x?.alignment ?? 'left', m.b, m.i, m.u, m.s, m.h, m.c, !!m.href, lookOf(this.doc).id, paperOf(this.doc), this.canUndo, this.canRedo, language()].join('|');
   }
   private barDrawn = '';
 
@@ -575,7 +575,7 @@ export class ToWriteEditor extends DocElement<Doc> {
     return html`<to-bar class="write-bar">
         <to-insert .items=${drawnIn(COMMANDS, 'menu:insert', this)}></to-insert>
         ${cmdTool(own('title'), this)} ${cmdTool(own('heading'), this)} ${cmdTool(own('subheading'), this)} ${cmdTool(own('paragraph'), this)}
-        ${[BOLD, ITALIC, UNDERLINE, STRIKE, HIGHLIGHT, LINK, FOOTNOTE].map((c) => cmdTool(c, x))}
+        ${[BOLD, ITALIC, UNDERLINE, STRIKE, HIGHLIGHT, CODE, LINK, FOOTNOTE].map((c) => cmdTool(c, x))}
         ${cmdTool(own('icon'), this)}
         ${[BULLETS, NUMBERS, OUTDENT, INDENT].map((c) => cmdTool(c, x))}
         ${menu('align', 'write-align', alignIcon(this))} ${menu('look', 'write-look')} ${menu('paper', 'write-paper')}

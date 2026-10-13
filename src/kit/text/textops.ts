@@ -22,8 +22,8 @@ export interface Sel {
 }
 /** What the editor can be told to do; some take a word (a link's address, an icon's name, another document's ref). */
 export type Command =
-  'b' | 'i' | 'u' | 's' | 'h' | 'link' | 'unlink' | 'fn' | 'icon' | 'date' | 'title' | 'h1' | 'h2' | 'p' | 'quote' | 'ul' | 'ol' | 'indent' | 'outdent' | 'left' | 'center' | 'right' | 'justify';
-export type Mark = 'b' | 'i' | 'u' | 's' | 'h';
+  'b' | 'i' | 'u' | 's' | 'h' | 'c' | 'link' | 'unlink' | 'fn' | 'icon' | 'date' | 'title' | 'h1' | 'h2' | 'p' | 'quote' | 'ul' | 'ol' | 'indent' | 'outdent' | 'left' | 'center' | 'right' | 'justify';
+export type Mark = 'b' | 'i' | 'u' | 's' | 'h' | 'c';
 /** The marks in force where the caret is: what the next letter typed will carry. */
 export type Fmt = Partial<Pick<Run, Mark | 'href'>>;
 export type Shape = 'doc' | 'lines' | 'line';
@@ -33,7 +33,7 @@ export interface Edit {
   sel: Sel;
 }
 
-export const MARKS: Mark[] = ['b', 'i', 'u', 's', 'h'];
+export const MARKS: Mark[] = ['b', 'i', 'u', 's', 'h', 'c'];
 const MAX_DEPTH = 3;
 const ALIGNS = ['center', 'right', 'justify'];
 

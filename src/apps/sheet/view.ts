@@ -6,7 +6,7 @@
  */
 import { chartData, chartPage, type ChartData } from '../../kit/draw/chart.ts';
 import { csv, csvSeparator } from '../../kit/file/csv.ts';
-import { INK, LINE, MUTED, SHADE, clip, r as px2, rect, text, textWidth, xml } from '../../kit/draw/draw.ts';
+import { INK, LINE, MONO, MUTED, SHADE, clip, monoWidth, r as px2, rect, text, textWidth, xml } from '../../kit/draw/draw.ts';
 import { t } from '../../kit/core/i18n.ts';
 import { sheetHeadings } from '../../kit/file/xlsx.ts';
 import { formatCell, parse, parseInline, plainText, type CellValue, type Doc } from '../../doc/index.ts';
@@ -24,14 +24,14 @@ export function shown(v: SheetView): string[][] {
   return Array.from({ length: v.used.rows }, (_, r) => Array.from({ length: v.used.cols }, (_, c) => cellText(v.values[r]?.[c] ?? null, v.cols[c]?.type, currencyAt(v, c))));
 }
 
-/** A rich cell drawn as one line with its marks (bold, italic, underline, strike), or its words alone, cut, when they do not fit. */
+/** A rich cell drawn as one line with its marks (bold, italic, underline, strike, code), or its words alone, cut, when they do not fit. */
 function richText(x: number, y: number, raw: string, max: number, size: number): string {
   const runs = parseInline(raw);
   const words = plainText(runs);
-  if (textWidth(words, size) > max) return text(x, y, clip(words, max, size), { px: size });
+  if (runs.reduce((w, run) => w + (run.c ? monoWidth(run.t, size) : textWidth(run.t, size)), 0) > max) return text(x, y, clip(words, max, size), { px: size });
   const spans = runs.map((run) => {
     const deco = [run.u || run.href ? 'underline' : '', run.s ? 'line-through' : ''].filter(Boolean).join(' ');
-    const attrs = `${run.b ? ' font-weight="600"' : ''}${run.i ? ' font-style="italic"' : ''}${deco ? ` text-decoration="${deco}"` : ''}`;
+    const attrs = `${run.b ? ' font-weight="600"' : ''}${run.i ? ' font-style="italic"' : ''}${run.c ? ` font-family="${xml(MONO)}"` : ''}${deco ? ` text-decoration="${deco}"` : ''}`;
     return attrs ? `<tspan${attrs}>${xml(run.t)}</tspan>` : xml(run.t);
   });
   return `<text x="${px2(x)}" y="${px2(y)}" font-size="${size}" fill="${INK}" xml:space="preserve">${spans.join('')}</text>`;

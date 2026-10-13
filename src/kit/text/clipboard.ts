@@ -20,7 +20,7 @@ import { lookup } from '../core/app.ts';
 import { decodeDoc } from '../core/codec.ts';
 import { parseHash, routeHash } from '../core/route.ts';
 import { LOCKED_LANG, lockedFence, lockedOf } from '../share/locked.ts';
-import { sliceBlocks, type Sel, type Shape } from './textops.ts';
+import { MARKS, sliceBlocks, type Sel, type Shape } from './textops.ts';
 
 /** The mark our own HTML carries. */
 export const GENERATOR = 'TinyLittleOffice';
@@ -35,6 +35,7 @@ export function runsToHtml(runs: Run[]): string {
       if (r.ic) return `<span data-icon="${esc(r.ic)}">:${esc(r.ic)}:</span>`;
       if (r.fn !== undefined) return `<sup data-fn="${esc(r.fn)}">*</sup>`;
       let s = esc(r.t).replace(/\n/g, '<br>');
+      if (r.c) s = `<code>${s}</code>`;
       if (r.h) s = `<mark>${s}</mark>`;
       if (r.s) s = `<s>${s}</s>`;
       if (r.u) s = `<u>${s}</u>`;
@@ -151,7 +152,6 @@ export async function readClip(): Promise<Clip | null> {
 
 /** The meta our HTML carries the exact runs of a fragment in. */
 const RUNS = 'tlo-runs';
-const RUN_KEYS = ['b', 'i', 'u', 's', 'h'] as const;
 
 /** The exact runs our HTML carries for words from within one block, or null: only words and marks are taken from it. */
 function carriedRuns(html: string): Run[] | null {
@@ -164,7 +164,7 @@ function carriedRuns(html: string): Run[] | null {
     for (const r of got as Record<string, unknown>[]) {
       if (!r || typeof r.t !== 'string') return null;
       const run: Run = { t: r.t };
-      for (const k of RUN_KEYS) if (r[k] === true) run[k] = true;
+      for (const k of MARKS) if (r[k] === true) run[k] = true;
       if (typeof r.href === 'string' && r.href) run.href = r.href;
       if (typeof r.ic === 'string' && r.ic) run.ic = r.ic;
       if (typeof r.fn === 'string') run.fn = r.fn;
@@ -211,7 +211,7 @@ const BLOCK_TAGS = new Set([
 ]);
 const SKIP_TAGS = new Set(['SCRIPT', 'STYLE', 'TEMPLATE', 'META', 'LINK', 'TITLE', 'NOSCRIPT', 'IFRAME', 'OBJECT', 'SVG', 'svg', 'BUTTON', 'SELECT', 'INPUT', 'TEXTAREA', 'HEAD']);
 
-type Marks = Partial<Pick<Run, 'b' | 'i' | 'u' | 's' | 'h' | 'href'>>;
+type Marks = Partial<Pick<Run, 'b' | 'i' | 'u' | 's' | 'h' | 'c' | 'href'>>;
 
 /** The glyphs a list item is drawn with where it is written as words (Word, Mail, TextEdit, a bullet typed by hand). */
 const BULLET = /^[ \t]*[•◦▪▫‣⁃●○■□·–—][ \t ]+/;
@@ -363,6 +363,8 @@ export function htmlToBlocks(html: string): Block[] {
     if (tag === 'S' || tag === 'STRIKE' || tag === 'DEL' || st.textDecoration.includes('line-through')) next.s = true;
     // A background on words is a highlight; on a block it is the page's.
     if (tag === 'MARK' || (inline && !NO_BACKGROUND.test(st.backgroundColor))) next.h = true;
+    // Code in the words; a block of it (<pre>) is not a mark (there are no code blocks).
+    if (tag === 'CODE' && !el.closest('pre')) next.c = true;
     if (tag === 'A') {
       // Words linked somewhere are a link; an address showing itself is only the address.
       const href = (el.getAttribute('href') ?? '').trim();

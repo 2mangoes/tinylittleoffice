@@ -48,7 +48,7 @@ Two slides, a cover and then the Moon going around the Earth, an animation on it
 
 ## TLO: Markdown, and what it adds
 
-Write ordinary Markdown: `#` headings, paragraphs, `- ` and `1. ` lists nested by two spaces, `- [ ]` and `- [x]` tasks, `> ` quotes, `---` rules, tables with a `--- | ---` line under their header row, and inline `**bold**`, `*italic*`, `~~strike~~`, `[words](https://…)`. A footnote sits where it belongs: `^[the note's words]` (Markdown's `[^1]` with a `[^1]: the note` paragraph reads too). TLO adds:
+Write ordinary Markdown: `#` headings, paragraphs, `- ` and `1. ` lists nested by two spaces, `- [ ]` and `- [x]` tasks, `> ` quotes, `---` rules, tables with a `--- | ---` line under their header row, and inline `**bold**`, `*italic*`, `~~strike~~`, `` `code` `` (set in a monospace face), `[words](https://…)`. A footnote sits where it belongs: `^[the note's words]` (Markdown's `[^1]` with a `[^1]: the note` paragraph reads too). TLO adds:
 
 | Write | Means |
 | --- | --- |
@@ -87,7 +87,7 @@ A nested list, two spaces a level. An item's tie to its parent can be an arrow, 
 
 ### deck: slides
 
-A slide between each `---`. The headline is `## :icon-name: Headline`, its layout an attribute: `{.title}` (a title slide), `{.two}` (two columns, a paragraph `|` between them) or `{.icon}` (bullets beside one big icon). The words are `- ` bullets nested by two spaces; `> ` lines are speaker notes; a `^[footnote]` is shown at the foot of its slide. A fence named by any app's id (```` ```anim ````, `diagram`, `draw`, `trip`, `cal`, `sheet`, the lot) puts that document on the slide, drawn by its app: an animation moves, a sheet with `chart: bar` in its head is a chart. The head may hold `theme:` (`boardroom`, `ivory`, `midnight`, `graphite`; for fun `confetti`, `sunset`, `ocean`, `bubblegum`, `arcade`, `chalkboard`; plain otherwise) and `transition:` (`cut`, `slide`, `zoom`; a fade otherwise).
+A slide between each `---`. The headline is `## :icon-name: Headline`, its layout an attribute: `{.title}` (a title slide), `{.two}` (two columns, a paragraph `|` between them) or `{.icon}` (bullets beside one big icon). The words are `- ` bullets nested by two spaces; `> ` lines are speaker notes; a `^[footnote]` is shown at the foot of its slide; `` `code` `` between backticks is set in a monospace face (a command, a file's name). A fence named by any app's id (```` ```anim ````, `diagram`, `draw`, `trip`, `cal`, `sheet`, the lot) puts that document on the slide, drawn by its app: an animation moves, a sheet with `chart: bar` in its head is a chart. The head may hold `theme:` (`boardroom`, `ivory`, `midnight`, `graphite`; for fun `confetti`, `sunset`, `ocean`, `bubblegum`, `arcade`, `chalkboard`; plain otherwise) and `transition:` (`cut`, `slide`, `zoom`; a fade otherwise).
 
 The rules, before they are broken: a slide with a fence (a chart, a diagram, a table) is the fence's, drawn alone under the headline: bullets on it are not drawn, so put them in the notes (`> ` lines) or on a slide of their own. A headline is a few words; a long one is set smaller, then cut after two lines. Bullets are set as large as they fit, down to 14px; more than that runs off the slide, so split it. Presenting reveals one bullet, or one item of a fenced document, per step; the notes show with N or the Notes button, and start hidden under a finger.
 

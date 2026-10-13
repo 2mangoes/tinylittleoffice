@@ -51,6 +51,8 @@ export interface Run {
   s?: true;
   /** Highlighted. */
   h?: true;
+  /** Code: set in a monospace face, its words verbatim (a backtick span). */
+  c?: true;
   /** Where these words link. */
   href?: string;
   /** An icon in the line, by name. */
@@ -79,7 +81,7 @@ export const isText = (b: Block): b is TextBlock => b.k === 'h' || b.k === 'p' |
 export const isAtomic = (r: Run): boolean => !!r.ic || r.fn !== undefined;
 
 /** Whether two runs carry the same marks, so their words may sit in one run. Atomic runs never merge. */
-const sameMarks = (a: Run, b: Run): boolean => !isAtomic(a) && !isAtomic(b) && a.b === b.b && a.i === b.i && a.u === b.u && a.s === b.s && a.h === b.h && a.href === b.href;
+const sameMarks = (a: Run, b: Run): boolean => !isAtomic(a) && !isAtomic(b) && a.b === b.b && a.i === b.i && a.u === b.u && a.s === b.s && a.h === b.h && a.c === b.c && a.href === b.href;
 
 /** Runs as the parser would give them: no empty run of words, and no two neighbours with the same marks. */
 export function normalRuns(runs: Run[]): Run[] {

@@ -7,7 +7,7 @@
  */
 import { lookup, type Page } from '../../kit/core/app.ts';
 import { encodeDoc } from '../../kit/core/codec.ts';
-import { FAINT, FONT, INK, MUTED, PAPER, pageSvg, r, rect, textWidth, xml } from '../../kit/draw/draw.ts';
+import { FAINT, FONT, INK, MONO, MUTED, PAPER, monoWidth, pageSvg, r, rect, textWidth, xml } from '../../kit/draw/draw.ts';
 import { glyphNamed, iconNamed } from '../../kit/draw/icons.ts';
 import { chosenLanguage, t } from '../../kit/core/i18n.ts';
 import { MOTION_JS } from '../../kit/draw/motion.ts';
@@ -24,7 +24,7 @@ export const LETTER = { w: 816, h: 1056 };
 
 /* ---------- words with their marks, wrapped and drawn ---------- */
 
-/** A piece of a line: words with their marks, a link, a raised number (a footnote's mark), or an icon by name. */
+/** A piece of a line: words with their marks, code, a link, a raised number (a footnote's mark), or an icon by name. */
 export interface Span {
   t: string;
   b?: true;
@@ -32,6 +32,8 @@ export interface Span {
   u?: true;
   s?: true;
   h?: true;
+  /** Code, in the monospace face. */
+  c?: true;
   /** Where these words link. */
   link?: string;
   sup?: boolean;
@@ -40,8 +42,10 @@ export interface Span {
 const HIGHLIGHT = '#fef08a';
 const SUP = 0.62;
 const iconWidth = (px: number) => px * 1.25;
-const spanWidth = (sp: Span, px: number, bold: boolean) => (sp.ic ? iconWidth(px) : textWidth(sp.t, sp.sup ? px * SUP : px, bold || !!sp.b));
-const same = (a: Span, b: Span) => !a.ic && !b.ic && !a.sup && !b.sup && a.b === b.b && a.i === b.i && a.u === b.u && a.s === b.s && a.h === b.h && a.link === b.link;
+/** How wide a span's words are set: code in the monospace face, the rest in the sans. */
+const wordsWidth = (sp: Span, t: string, px: number, bold: boolean) => (sp.c ? monoWidth(t, px) : textWidth(t, px, bold || !!sp.b));
+const spanWidth = (sp: Span, px: number, bold: boolean) => (sp.ic ? iconWidth(px) : wordsWidth(sp, sp.t, sp.sup ? px * SUP : px, bold));
+const same = (a: Span, b: Span) => !a.ic && !b.ic && !a.sup && !b.sup && a.b === b.b && a.i === b.i && a.u === b.u && a.s === b.s && a.h === b.h && a.c === b.c && a.link === b.link;
 
 /** Runs as spans: footnote marks as raised numbers, links (and web addresses in plain words) marked, icons by name. */
 export function spansOf(runs: Run[], next: () => number = noteNumbers()): Span[] {
@@ -61,6 +65,7 @@ export function spansOf(runs: Run[], next: () => number = noteNumbers()): Span[]
       ...(run.u ? { u: true as const } : {}),
       ...(run.s ? { s: true as const } : {}),
       ...(run.h ? { h: true as const } : {}),
+      ...(run.c ? { c: true as const } : {}),
     };
     for (const p of runLinks(run)) out.push({ t: p.t.replace(/\n/g, ' '), ...marks, ...(p.url ? { link: p.url } : {}) });
   }
@@ -68,13 +73,13 @@ export function spansOf(runs: Run[], next: () => number = noteNumbers()): Span[]
 }
 
 /** A word too long for a line (a web address) in pieces that fit: broken after a "/", ".", "-", "?", "&", "=" or "_" near the end of a piece, else where the line runs out. */
-function breakWord(word: string, max: number, px: number, bold: boolean): string[] {
-  if (max <= 0 || textWidth(word.trimEnd(), px, bold) <= max) return [word];
+function breakWord(word: string, max: number, width: (t: string) => number): string[] {
+  if (max <= 0 || width(word.trimEnd()) <= max) return [word];
   const out: string[] = [];
   let rest = word;
-  while (rest && textWidth(rest.trimEnd(), px, bold) > max) {
+  while (rest && width(rest.trimEnd()) > max) {
     let n = 1;
-    while (n < rest.length && textWidth(rest.slice(0, n + 1), px, bold) <= max) n++;
+    while (n < rest.length && width(rest.slice(0, n + 1)) <= max) n++;
     const soft = Math.max(...['/', '.', '-', '?', '&', '=', '_'].map((c) => rest.lastIndexOf(c, n - 1)));
     const at = soft >= Math.ceil(n * 0.66) ? soft + 1 : n;
     out.push(rest.slice(0, at));
@@ -104,9 +109,10 @@ export function wrap(spans: Span[], max: number, px: number, bold = false): Span
       width += spanWidth(span, px, bold);
       continue;
     }
-    for (const word of span.t.split(/(?<= )/).flatMap((wd) => breakWord(wd, max, px, bold || !!span.b))) {
-      const w = textWidth(word, px, bold || !!span.b);
-      if (width + textWidth(word.trimEnd(), px, bold || !!span.b) > max && width > 0) {
+    const measure = (t: string) => wordsWidth(span, t, px, bold);
+    for (const word of span.t.split(/(?<= )/).flatMap((wd) => breakWord(wd, max, measure))) {
+      const w = measure(word);
+      if (width + measure(word.trimEnd()) > max && width > 0) {
         lines.push([]);
         width = 0;
       }
@@ -158,6 +164,7 @@ export function line(x: number, y: number, content: string | Span[], style: Line
       const a =
         (s.b && !bold ? ' font-weight="600"' : '') +
         (s.i ? ' font-style="italic"' : '') +
+        (s.c ? ` font-family="${xml(MONO)}"` : '') +
         (s.link ? ` fill="${linkFill}"` : s.h ? ` fill="${INK}"` : '') +
         (s.u || s.s || s.link ? ` text-decoration="${[(s.u || s.link) && 'underline', s.s && 'line-through'].filter(Boolean).join(' ')}"` : '');
       const words = a ? `<tspan${a}>${xml(s.t)}</tspan>` : xml(s.t);

@@ -4,7 +4,7 @@
  * the editor draws its shapes with the same shapeSvg, in the page's own colours.
  */
 import type { Page } from '../../kit/core/app.ts';
-import { INK, PAPER, SHADE, clip, pageSvg, r, rect, textWidth, wrapText, xml } from '../../kit/draw/draw.ts';
+import { INK, MONO, PAPER, SHADE, clip, pageSvg, r, rect, textWidth, wrapText, xml } from '../../kit/draw/draw.ts';
 import { glyphNamed, iconNamed } from '../../kit/draw/icons.ts';
 import { t } from '../../kit/core/i18n.ts';
 import { TILE_INKS, tilePattern, type Tile } from '../../kit/draw/tile.ts';
@@ -21,12 +21,12 @@ const PRINT: Theme = { ink: INK, paper: PAPER, shade: SHADE };
 /** The highlighter's colour under marked words (a stroke behind the letters, so it shows in the dark too). */
 const MARKER = '#facc15';
 
-/** Runs as tspans: bold, italic, underline, struck and marked words drawn as such; a run with no marks is plain words. */
+/** Runs as tspans: bold, italic, underline, struck, marked words and code drawn as such; a run with no marks is plain words. */
 function runsSvg(runs: Run[], px: number): string {
   return runs
     .map((run) => {
       const deco = [run.u ? 'underline' : '', run.s ? 'line-through' : ''].filter(Boolean).join(' ');
-      const attrs = `${run.b ? ' font-weight="600"' : ''}${run.i ? ' font-style="italic"' : ''}${deco ? ` text-decoration="${deco}"` : ''}${run.h ? ` stroke="${MARKER}" stroke-opacity="0.55" stroke-width="${r(px * 0.9)}" stroke-linejoin="round" paint-order="stroke"` : ''}`;
+      const attrs = `${run.b ? ' font-weight="600"' : ''}${run.i ? ' font-style="italic"' : ''}${run.c ? ` font-family="${xml(MONO)}"` : ''}${deco ? ` text-decoration="${deco}"` : ''}${run.h ? ` stroke="${MARKER}" stroke-opacity="0.55" stroke-width="${r(px * 0.9)}" stroke-linejoin="round" paint-order="stroke"` : ''}`;
       return attrs ? `<tspan${attrs}>${xml(run.t)}</tspan>` : xml(run.t);
     })
     .join('');

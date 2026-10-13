@@ -26,6 +26,12 @@ test('spaces are never lost: a space at a line’s end, a line break, an empty p
     expect(fromJson(toJson(text))).toBe(write(parse(text)));
 });
 
+test('code goes out as a run with c and comes back as backticks', () => {
+  const text = 'Run **`npx tlo`** now\n';
+  expect(JSON.parse(toJson(text)).blocks[0].runs).toStrictEqual([{ t: 'Run ' }, { t: 'npx tlo', b: true, c: true }, { t: ' now' }]);
+  expect(fromJson(toJson(text))).toBe(text);
+});
+
 test('the JSON is stable: keys in the order the types name them, the head’s and attributes’ in the document’s, two-space indent', () => {
   const json = toJson('---\ntitle: T\nby: B\n---\n# Hi {#top .big z=1 a=2}\n\n- [x] **Done**\n');
   expect(json).toBe(

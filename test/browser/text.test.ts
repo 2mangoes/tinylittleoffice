@@ -501,7 +501,7 @@ test('the selection bubble: up under words selected, Bold pressed from it stays 
   await until(() => !bubbleOpen());
 });
 
-test('marks-only: the bubble has the five marks and nothing else, Mod+K is no link, and a paste brings words without their link', async () => {
+test('marks-only: the bubble has the six marks and nothing else, Mod+K is no link, and a paste brings words without their link', async () => {
   document.body.innerHTML = '';
   const h = new Host('A label here\n', 'line');
   h.el.marksOnly = true;
@@ -510,7 +510,7 @@ test('marks-only: the bubble has the five marks and nothing else, Mod+K is no li
   h.el.focus();
   h.el.sel = range(0, 2, 7);
   await until(bubbleOpen);
-  expect([...bubble().querySelectorAll('button')].map((b) => b.getAttribute('aria-label'))).toEqual(['Bold', 'Italic', 'Underline', 'Strikethrough', 'Highlight']);
+  expect([...bubble().querySelectorAll('button')].map((b) => b.getAttribute('aria-label'))).toEqual(['Bold', 'Italic', 'Underline', 'Strikethrough', 'Highlight', 'Code']);
   inBubble('Underline')!.click();
   await h.el.updateComplete;
   expect(h.tlo).toBe('A ++label++ here\n');
@@ -878,6 +878,49 @@ test('Mod+Shift+X strikes through and Mod+Shift+H highlights the words selected'
   press(h.el.tx, { key: 'H', ctrlKey: true, shiftKey: true });
   await h.el.updateComplete;
   expect(h.doc.blocks[0]).toMatchObject({ runs: [{ t: 'make ' }, { t: 'this', s: true, h: true }] });
+});
+
+test('Mod+E marks the words selected as code, drawn in Plex Mono the size of its words, and again unmarks them; collapsed, the next words typed are code', async () => {
+  const h = await mount('run npx tlo now\n', 'doc', range(0, 4, 11));
+  press(h.el.tx, { key: 'e', ctrlKey: true });
+  await h.el.updateComplete;
+  expect(h.tlo).toBe('run `npx tlo` now\n');
+  const code = h.el.tx.querySelector('code')!;
+  expect(code.textContent).toBe('npx tlo');
+  expect(getComputedStyle(code).fontFamily).toContain('Mono');
+  expect(getComputedStyle(code).fontSize).toBe(getComputedStyle(code.parentElement!).fontSize);
+  // The model is read back from the DOM with its code (a <code> is c).
+  expect(h.el.marks.c).toBe(true);
+  press(h.el.tx, { key: 'e', ctrlKey: true });
+  await h.el.updateComplete;
+  expect(h.tlo).toBe('run npx tlo now\n');
+  expect(h.el.tx.querySelector('code')).toBeNull();
+  // At a caret, Mod+E is for what is typed next, as Mod+B is.
+  h.el.sel = caret(0, 15);
+  await h.el.updateComplete;
+  press(h.el.tx, { key: 'e', ctrlKey: true });
+  await typeIn(h, ' ok');
+  expect(h.doc.blocks[0]).toMatchObject({ runs: [{ t: 'run npx tlo now' }, { t: ' ok', c: true }] });
+  expect(h.tlo).toBe('run npx tlo now `ok`\n');
+});
+
+test('Code is in the selection bubble after Highlight, and pressed shows pressed', async () => {
+  const h = await mount('A word or two\n', 'doc', range(0, 2, 6));
+  await until(bubbleOpen);
+  const labels = [...bubble().querySelectorAll('button')].map((b) => b.getAttribute('aria-label'));
+  expect(labels.indexOf('Code')).toBe(labels.indexOf('Highlight') + 1);
+  inBubble('Code')!.click();
+  await h.el.updateComplete;
+  expect(h.tlo).toBe('A `word` or two\n');
+  await until(() => inBubble('Code')?.getAttribute('aria-pressed') === 'true');
+});
+
+test('a paste of HTML keeps <code> in the words as code, and a copy writes it', async () => {
+  expect(htmlToBlocks('<p>run <code>npx tlo</code> now</p>')).toStrictEqual([{ k: 'p', runs: [{ t: 'run ' }, { t: 'npx tlo', c: true }, { t: ' now' }] }]);
+  const h = await mount('run `npx tlo` now\n', 'doc', range(0, 0, 11));
+  const dt = new DataTransfer();
+  h.el.tx.dispatchEvent(new ClipboardEvent('copy', { clipboardData: dt, bubbles: true, cancelable: true }));
+  expect(dt.getData('text/html')).toContain('<code>npx tlo</code>');
 });
 
 test("no selection is written during an IME composition: a host's caret waits for compositionend", async () => {

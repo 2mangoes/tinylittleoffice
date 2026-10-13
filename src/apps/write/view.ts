@@ -8,7 +8,7 @@
  * small capitals, two columns on paper.
  */
 import { encodeDoc } from '../../kit/core/codec.ts';
-import { ACCENT, FAINT, FONT, INK, LINE, MUTED, SHADE, pageSvg, r, rect, text as svgText, textWidth, xml } from '../../kit/draw/draw.ts';
+import { ACCENT, FAINT, FONT, INK, LINE, MUTED, SHADE, monoWidth, pageSvg, r, rect, text as svgText, textWidth, xml } from '../../kit/draw/draw.ts';
 import { glyphNamed } from '../../kit/draw/icons.ts';
 import { LOCKED_LANG, placedLink } from '../../kit/share/locked.ts';
 import { XML_HEAD, zip } from '../../kit/file/zip.ts';
@@ -36,7 +36,12 @@ interface Span {
 }
 
 const same = (a: Span, b: Span) => !a.ic && !b.ic && a.b === b.b && a.i === b.i && a.u === b.u && a.s === b.s && a.h === b.h && a.link === b.link && a.sup === b.sup && a.mono === b.mono;
-const spanWidth = (sp: Span, px: number, bold: boolean) => textWidth(sp.t, sp.sup ? px * 0.65 : px, bold || !!sp.b);
+/**
+ * How wide a span's words are set, in the sans's measure: monospace (code, a fence's lines) at Plex Mono's advance,
+ * over `scale`, how wide the line's face sets beside the sans (look.ts WIDTH), which the measure it is wrapped to is over too.
+ */
+const wordsWidth = (sp: Span, t: string, px: number, bold: boolean, scale = 1) => (sp.mono ? monoWidth(t, px) / scale : textWidth(t, px, bold || !!sp.b));
+const spanWidth = (sp: Span, px: number, bold: boolean, scale = 1) => wordsWidth(sp, sp.t, sp.sup ? px * 0.65 : px, bold, scale);
 
 /** Runs as spans: footnote marks as raised numbers, links (and web addresses in plain words) marked; an icon has no words on paper. */
 function spansOf(runs: Run[], next: () => number): Span[] {
@@ -58,6 +63,7 @@ function spansOf(runs: Run[], next: () => number): Span[] {
         ...(run.u ? { u: true } : {}),
         ...(run.s ? { s: true } : {}),
         ...(run.h ? { h: true } : {}),
+        ...(run.c ? { mono: true } : {}),
         ...(p.url ? { link: true } : {}),
       });
   }
@@ -65,7 +71,7 @@ function spansOf(runs: Run[], next: () => number): Span[] {
 }
 
 /** Spans wrapped to a width: words kept whole, a line break in the words a new line, marks kept on every piece. */
-function wrapSpans(spans: Span[], max: number, px: number, bold = false): Span[][] {
+function wrapSpans(spans: Span[], max: number, px: number, bold = false, scale = 1): Span[][] {
   const lines: Span[][] = [[]];
   let w = 0;
   const line = () => lines[lines.length - 1];
@@ -74,11 +80,11 @@ function wrapSpans(spans: Span[], max: number, px: number, bold = false): Span[]
     const last = l[l.length - 1];
     if (last && !last.sup && !sp.sup && same(last, sp)) last.t += sp.t;
     else l.push({ ...sp });
-    w += spanWidth(sp, px, bold);
+    w += spanWidth(sp, px, bold, scale);
   };
   for (const sp of spans) {
     if (sp.sup || sp.ic) {
-      if (sp.ic && w > 0 && w + spanWidth(sp, px, bold) > max) {
+      if (sp.ic && w > 0 && w + spanWidth(sp, px, bold, scale) > max) {
         lines.push([]);
         w = 0;
       }
@@ -92,7 +98,7 @@ function wrapSpans(spans: Span[], max: number, px: number, bold = false): Span[]
       }
       for (const word of part.split(/(?<=\s)/)) {
         if (!word) continue;
-        if (w > 0 && w + textWidth(word.trimEnd(), px, bold || !!sp.b) > max) {
+        if (w > 0 && w + wordsWidth(sp, word.trimEnd(), px, bold, scale) > max) {
           lines.push([]);
           w = 0;
         }
@@ -303,7 +309,8 @@ export function pages(textOrDoc: string | Doc, small = false, still = false): Pa
     const justify = !centred && !cls.includes('right') && (cls.includes('justify') || (look.justify && (b.k === 'p' || b.k === 'quote')));
     // Wrapped as the sans is estimated, the measure narrowed by how much wider the look's face sets; a justified
     // line is filled a little fuller, as it is fitted to its measure (squeezed a little rather than spaced out).
-    const lines = wrapSpans([...lead, ...(spans.length ? spans : [{ t: '' }])], (M + cw - left) / (justify ? 0.92 : WIDTH[face]), px, bold);
+    const scale = justify ? 0.92 : WIDTH[face];
+    const lines = wrapSpans([...lead, ...(spans.length ? spans : [{ t: '' }])], (M + cw - left) / scale, px, bold, scale);
     const lh = px * 1.45;
     const mark = b.k === 'li' ? (b.done !== undefined ? (b.done ? '☑' : '☐') : b.ord ? `${n}.` : '•') : '';
     const [tx, anchor] = centred ? [(left + M + cw) / 2, 'middle' as const] : cls.includes('right') ? [M + cw, 'end' as const] : [left, 'start' as const];
@@ -344,7 +351,7 @@ export function pages(textOrDoc: string | Doc, small = false, still = false): Pa
     const f = font('body');
     bits.push({ h: 20, first: 20, keep: true, svg: (y) => `<line x1="${M}" y1="${y + 10}" x2="${M + 72}" y2="${y + 10}" stroke="${LINE}"/>` });
     notes.forEach((fn, i) => {
-      const lines = wrapSpans([{ t: `${i + 1}`, sup: true }, { t: ' ' }, ...spansOf(noteRuns(fn), noteNumbers())], colW / WIDTH[look.body], px);
+      const lines = wrapSpans([{ t: `${i + 1}`, sup: true }, { t: ' ' }, ...spansOf(noteRuns(fn), noteNumbers())], colW / WIDTH[look.body], px, false, WIDTH[look.body]);
       bits.push({ h: lines.length * lh + 4, first: lh + 4, svg: (y) => lines.map((l, k) => lineSvg(M, y + px + k * lh, l, px, { font: f })).join('') });
     });
   }
@@ -409,6 +416,7 @@ function markedHtml(run: Run, bold = 'strong', italic = 'em'): string {
   let s = runLinks(run)
     .map((p) => (p.url ? `<a href="${xml(p.url)}">${xml(p.t)}</a>` : xml(p.t).replace(/\n/g, '<br>')))
     .join('');
+  if (run.c) s = `<code>${s}</code>`;
   if (run.h) s = `<mark>${s}</mark>`;
   if (run.s) s = `<s>${s}</s>`;
   if (run.u) s = `<u>${s}</u>`;
@@ -605,7 +613,7 @@ function rtfText(s: string): string {
 function rtfRun(run: Run, next: () => number = noteNumbers()): string {
   if (run.ic) return '';
   if (run.fn !== undefined) return `{\\super ${next()}}`;
-  const on = (run.b ? '\\b' : '') + (run.i ? '\\i' : '') + (run.u ? '\\ul' : '') + (run.s ? '\\strike' : '') + (run.h ? '\\highlight3' : '');
+  const on = (run.b ? '\\b' : '') + (run.i ? '\\i' : '') + (run.u ? '\\ul' : '') + (run.s ? '\\strike' : '') + (run.h ? '\\highlight3' : '') + (run.c ? '\\f2' : '');
   const inner = runLinks(run)
     .map((p) => (p.url ? `{\\field{\\*\\fldinst HYPERLINK "${rtfText(p.url)}"}{\\fldrslt {\\ul\\cf1 ${rtfText(p.t)}}}}` : rtfText(p.t)))
     .join('');
@@ -617,7 +625,8 @@ export function docToRtf(doc: Doc, ctx: ExportContext): string {
   const look = lookOf(doc);
   // The look's faces: f0 the body, f1 the headings (Helvetica for the sans, as RTF readers have it).
   const named = (f: Look['body']) => (f === 'sans' ? { name: 'Helvetica', rtf: 'fswiss' } : NAMED[f]);
-  const fonts = [named(look.body), named(look.head)].map((f, i) => `{\\f${i}\\${f.rtf}\\fcharset0 ${f.name};}`).join('');
+  // f2 is code's, the monospace.
+  const fonts = [named(look.body), named(look.head), NAMED.mono].map((f, i) => `{\\f${i}\\${f.rtf}\\fcharset0 ${f.name};}`).join('');
   const out: string[] = [`{\\rtf1\\ansi\\ansicpg1252\\deff0\\uc1{\\fonttbl${fonts}}{\\colortbl;\\red79\\green70\\blue229;\\red82\\green82\\blue91;\\red253\\green230\\blue138;}`, '\\f0\\fs24'];
   const number = listNumbers();
   const next = noteNumbers();
@@ -710,7 +719,9 @@ function docxRun(run: Run, rel: (url: string) => string, next: () => number = no
   if (run.ic) return '';
   const size = small ? '<w:sz w:val="18"/>' : '';
   if (run.fn !== undefined) return `<w:r><w:rPr><w:vertAlign w:val="superscript"/>${size}</w:rPr><w:t>${next()}</w:t></w:r>`;
-  const props = size + (run.b ? '<w:b/>' : '') + (run.i ? '<w:i/>' : '') + (run.u ? '<w:u w:val="single"/>' : '') + (run.s ? '<w:strike/>' : '') + (run.h ? '<w:highlight w:val="yellow"/>' : '');
+  const face = run.c ? `<w:rFonts w:ascii="${NAMED.mono.name}" w:hAnsi="${NAMED.mono.name}" w:cs="${NAMED.mono.name}"/>` : '';
+  const props =
+    face + size + (run.b ? '<w:b/>' : '') + (run.i ? '<w:i/>' : '') + (run.u ? '<w:u w:val="single"/>' : '') + (run.s ? '<w:strike/>' : '') + (run.h ? '<w:highlight w:val="yellow"/>' : '');
   const piece = (t: string, extra = '') =>
     `<w:r>${props || extra ? `<w:rPr>${extra}${props}</w:rPr>` : ''}${t
       .split('\n')

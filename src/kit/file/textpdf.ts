@@ -1,6 +1,6 @@
 /**
  * A PDF of words rather than of pictures: a title, sections, and bullets
- * under them, set in Helvetica (one of the fonts every PDF reader has, so
+ * under them, set in Helvetica, code in Courier (two of the fonts every PDF reader has, so
  * nothing is embedded), wrapped to the page, broken across Letter pages,
  * the words selectable, linked words clickable, each section a bookmark in
  * the reader's outline, the pages numbered. Helvetica's own widths are below, so lines break
@@ -66,8 +66,9 @@ function byte(ch: string): number {
   return SPECIAL[ch] ?? 63;
 }
 const encode = (s: string) => [...s].map(byte);
-/** Width in points of text at a size, bold or not. */
-export function measure(s: string, size: number, bold = false): number {
+/** Width in points of text at a size, bold or not; code (`mono`) in Courier, 600 thousandths a character. */
+export function measure(s: string, size: number, bold = false, mono = false): number {
+  if (mono) return (encode(s).length * 600 * size) / 1000;
   const t = bold ? BOLD : REG;
   return (encode(s).reduce((a, b) => a + (b >= 32 && b < 127 ? t[b - 32] : (WIDE[b] ?? 556)), 0) * size) / 1000;
 }
@@ -88,6 +89,8 @@ interface Piece {
   t: string;
   b: boolean;
   i: boolean;
+  /** Code, in Courier. */
+  c?: boolean;
   href?: string;
   /** A footnote's number: small and raised. */
   sup?: boolean;
@@ -113,7 +116,7 @@ function piecesOf(runs: (Run & { sup?: boolean })[], bold: boolean): Piece[] {
         : r.t
             .split(/(?<= )/)
             .filter(Boolean)
-            .map((t) => ({ t, b: bold || !!r.b, i: !!r.i, href: r.href })),
+            .map((t) => ({ t, b: bold || !!r.b, i: !!r.i, ...(r.c ? { c: true } : {}), href: r.href })),
   );
 }
 
@@ -143,11 +146,11 @@ export function textPdf(blocks: TextBlock[], title = ''): Uint8Array {
       let rest = p.t;
       const sz = p.sup ? size * 0.65 : size;
       while (rest) {
-        const w = measure(rest.trimEnd(), sz, p.b);
+        const w = measure(rest.trimEnd(), sz, p.b, p.c);
         // (A note's mark stays with the word before it.)
         if (at + w <= room || (at === 0 && w <= room) || p.sup) {
-          cur.pieces.push({ p: { ...p, t: rest }, x: at, w: measure(rest, sz, p.b) });
-          at += measure(rest, sz, p.b);
+          cur.pieces.push({ p: { ...p, t: rest }, x: at, w: measure(rest, sz, p.b, p.c) });
+          at += measure(rest, sz, p.b, p.c);
           rest = '';
         } else if (at > 0) {
           lines.push(cur);
@@ -155,8 +158,8 @@ export function textPdf(blocks: TextBlock[], title = ''): Uint8Array {
           at = 0;
         } else {
           let n = rest.length;
-          while (n > 1 && measure(rest.slice(0, n), size, p.b) > room) n--;
-          cur.pieces.push({ p: { ...p, t: rest.slice(0, n) }, x: 0, w: measure(rest.slice(0, n), size, p.b) });
+          while (n > 1 && measure(rest.slice(0, n), size, p.b, p.c) > room) n--;
+          cur.pieces.push({ p: { ...p, t: rest.slice(0, n) }, x: 0, w: measure(rest.slice(0, n), size, p.b, p.c) });
           lines.push(cur);
           cur = { pieces: [], x, size, lead, before: 0 };
           rest = rest.slice(n);
@@ -182,7 +185,7 @@ export function textPdf(blocks: TextBlock[], title = ''): Uint8Array {
   });
 
   // Draw: each page a stream of text and lines, its links as annotations.
-  const font = (b: boolean, i: boolean) => (b ? (i ? '/F4' : '/F2') : i ? '/F3' : '/F1');
+  const font = (p: Piece) => (p.c ? '/F5' : p.b ? (p.i ? '/F4' : '/F2') : p.i ? '/F3' : '/F1');
   const drawn = pages.map((page, pi) => {
     let s = '';
     const links: { href: string; rect: number[] }[] = [];
@@ -191,11 +194,11 @@ export function textPdf(blocks: TextBlock[], title = ''): Uint8Array {
       if (line.bullet) s += `BT /F1 ${line.size} Tf 0 g 1 0 0 1 ${(line.x - 12).toFixed(2)} ${base.toFixed(2)} Tm ${str(line.bullet)} Tj ET\n`;
       line.pieces.forEach(({ p, x, w }, k) => {
         const px = line.x + x;
-        s += `BT ${font(p.b, p.i)} ${p.sup ? (line.size * 0.65).toFixed(2) : line.size} Tf ${p.href ? LINK + ' rg' : '0 g'} 1 0 0 1 ${px.toFixed(2)} ${(p.sup ? base + line.size * 0.35 : base).toFixed(2)} Tm ${str(p.t)} Tj ET\n`;
+        s += `BT ${font(p)} ${p.sup ? (line.size * 0.65).toFixed(2) : line.size} Tf ${p.href ? LINK + ' rg' : '0 g'} 1 0 0 1 ${px.toFixed(2)} ${(p.sup ? base + line.size * 0.35 : base).toFixed(2)} Tm ${str(p.t)} Tj ET\n`;
         if (!p.href) return;
         // A link of several words is one underline and one place to click, as far as the line goes.
         const goesOn = line.pieces[k + 1]?.p.href === p.href;
-        const tw = goesOn ? w : measure(p.t.trimEnd(), line.size, p.b);
+        const tw = goesOn ? w : measure(p.t.trimEnd(), line.size, p.b, p.c);
         s += `${LINK} RG 0.6 w ${px.toFixed(2)} ${(base - 1.5).toFixed(2)} m ${(px + tw).toFixed(2)} ${(base - 1.5).toFixed(2)} l S\n`;
         const last = links[links.length - 1];
         if (k > 0 && line.pieces[k - 1].p.href === p.href && last) last.rect[2] = px + tw;
@@ -211,12 +214,13 @@ export function textPdf(blocks: TextBlock[], title = ''): Uint8Array {
     return { s, links };
   });
 
-  // The file. Objects: 1 catalog, 2 pages, 3 info, 4-7 fonts, 8 outlines, then a page, its contents and its links for each page, then a bookmark for each section.
+  // The file. Objects: 1 catalog, 2 pages, 3 info, 4-7 fonts, 8 outlines, 9 code's font, then a page, its contents and its links for each page, then a bookmark for each section.
   const objs: string[] = [];
   const set = (n: number, body: string) => (objs[n] = body);
   const fonts = ['Helvetica', 'Helvetica-Bold', 'Helvetica-Oblique', 'Helvetica-BoldOblique'];
   fonts.forEach((f, i) => set(4 + i, `<< /Type /Font /Subtype /Type1 /BaseFont /${f} /Encoding /WinAnsiEncoding >>`));
-  let n = 9;
+  set(9, '<< /Type /Font /Subtype /Type1 /BaseFont /Courier /Encoding /WinAnsiEncoding >>');
+  let n = 10;
   const pageIds: number[] = [];
   drawn.forEach((d) => {
     const page = n++;
@@ -228,7 +232,7 @@ export function textPdf(blocks: TextBlock[], title = ''): Uint8Array {
     });
     set(
       page,
-      `<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${W} ${H}] /Resources << /Font << /F1 4 0 R /F2 5 0 R /F3 6 0 R /F4 7 0 R >> >> /Contents ${content} 0 R${annots.length ? ` /Annots [${annots.join(' ')}]` : ''} >>`,
+      `<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${W} ${H}] /Resources << /Font << /F1 4 0 R /F2 5 0 R /F3 6 0 R /F4 7 0 R /F5 9 0 R >> >> /Contents ${content} 0 R${annots.length ? ` /Annots [${annots.join(' ')}]` : ''} >>`,
     );
     set(content, `<< /Length ${d.s.length} >>\nstream\n${d.s}endstream`);
     pageIds.push(page);

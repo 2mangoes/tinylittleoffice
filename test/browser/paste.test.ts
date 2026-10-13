@@ -70,7 +70,7 @@ test('Apple Notes and Mail: lists, the blank <div><br></div>, the glyph paragrap
 });
 
 test("Notion, Slack and a web page: nested lists, Slack's indent, links (http, mailto, tel only), headings by role, no script", () => {
-  expect(tlo(paste(NOTION.html, NOTION.text))).toBe('## Notes\n\n- Alpha\n  - Beta\n- **Gamma** and code\n\nLoose *words*\n\n1. first\n');
+  expect(tlo(paste(NOTION.html, NOTION.text))).toBe('## Notes\n\n- Alpha\n  - Beta\n- **Gamma** and `code`\n\nLoose *words*\n\n1. first\n');
   expect(tlo(paste(SLACK.html, SLACK.text))).toBe('Hi **team**, see [the doc](https://x.com/a)\n\n- one\n  - two\n');
   // A page's grey background is the page's, not a highlight: only words marked inline are highlighted.
   expect(tlo(paste(PAGE.html, PAGE.text))).toBe('Words with [a link](https://example.org/page) and **weight**.\n\nbad [call](tel:+15551234) top\n\n### Section\n');

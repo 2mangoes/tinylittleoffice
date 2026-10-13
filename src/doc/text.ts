@@ -72,7 +72,7 @@ function readable(runs: Run[], notes: string[]): TextRun[] {
   if (end && end.note === undefined) out[out.length - 1] = { ...out[out.length - 1], t: out[out.length - 1].t.trimEnd() };
   return out.filter((r) => r.t);
 }
-const same = (a: TextRun, b: TextRun) => a.b === b.b && a.i === b.i && a.u === b.u && a.s === b.s && a.h === b.h && a.href === b.href;
+const same = (a: TextRun, b: TextRun) => a.b === b.b && a.i === b.i && a.u === b.u && a.s === b.s && a.h === b.h && a.c === b.c && a.href === b.href;
 
 /** A table as a reader sees it: each column's name, each cell worked out and formatted, empty rows and nameless empty columns left out. */
 function tableNode(doc: Doc, at: number): TextNode {

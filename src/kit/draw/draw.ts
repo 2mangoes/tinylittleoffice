@@ -17,6 +17,8 @@ export const INK = '#18181b';
 export const MUTED = '#52525b';
 /** The pages' type: IBM Plex Sans, the site's own (src/styles/fonts.css), with the system's behind it where a page is read without the site (an exported SVG or web page). */
 export const FONT = "'IBM Plex Sans', 'IBM Plex Sans Arabic', 'IBM Plex Sans Hebrew', 'IBM Plex Sans Devanagari', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif";
+/** Code's type: IBM Plex Mono, the site's (tokens.css --to-font-mono), the system's monospace behind it. */
+export const MONO = "'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, Consolas, 'Liberation Mono', 'Courier New', monospace";
 
 /** A page as a complete SVG document: a picture named by its alt, unless `attrs` gives it a role and name of its own. */
 export function pageSvg(p: Page, attrs = ''): string {
@@ -109,6 +111,9 @@ export const textWidth = (text: string, px: number, bold = false) => {
   }
   return em * px;
 };
+
+/** Width of code in px: every character of a monospace face is as wide, 0.6em in Plex Mono. */
+export const monoWidth = (text: string, px: number) => [...text].length * px * 0.6;
 
 /** Cut text to fit a width, with an ellipsis. */
 export function clip(text: string, max: number, px: number, bold = false): string {

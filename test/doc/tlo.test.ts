@@ -189,7 +189,46 @@ test('tlo: inline marks both ways', () => {
   ]);
   // What a model writes loosely stays words.
   expect(parseInline('5 * 3 * 2 and snake_case_name and 2*3')).toStrictEqual([{ t: '5 * 3 * 2 and snake_case_name and 2*3' }]);
-  expect(parseInline('__bold__ _it_ <u>under</u> `code`')).toStrictEqual([{ t: 'bold', b: true }, { t: ' ' }, { t: 'it', i: true }, { t: ' ' }, { t: 'under', u: true }, { t: ' code' }]);
+  expect(parseInline('__bold__ _it_ <u>under</u> `code`')).toStrictEqual([
+    { t: 'bold', b: true },
+    { t: ' ' },
+    { t: 'it', i: true },
+    { t: ' ' },
+    { t: 'under', u: true },
+    { t: ' ' },
+    { t: 'code', c: true },
+  ]);
+});
+
+test('tlo: a backtick span is code, its words verbatim, and writes back to the same bytes', () => {
+  const round = (s: string) => expect(writeInline(parseInline(s))).toBe(s);
+  expect(parseInline('run `npx tlo` now')).toStrictEqual([{ t: 'run ' }, { t: 'npx tlo', c: true }, { t: ' now' }]);
+  round('run `npx tlo` now');
+  // Nothing is read inside: no mark, no escape, no link, no icon.
+  expect(parseInline('`**a** \\ [x](https://x.y) :star: _b_`')).toStrictEqual([{ t: '**a** \\ [x](https://x.y) :star: _b_', c: true }]);
+  round('`**a** \\ [x](https://x.y) :star: _b_`');
+  // A backtick alone stays a backtick, and an escaped one is words.
+  expect(parseInline('a ` alone')).toStrictEqual([{ t: 'a ` alone' }]);
+  round('a ` alone');
+  expect(parseInline('\\`not code\\`')).toStrictEqual([{ t: '`not code`' }]);
+  expect(writeInline([{ t: 'a `b` c' }])).toBe('a \\`b\\` c');
+  // The marks compose: bold code, highlighted code, linked code.
+  expect(parseInline('**`x`**')).toStrictEqual([{ t: 'x', b: true, c: true }]);
+  round('**`x`**');
+  round('*a* `b` ==`c`== [`d`](https://x.y)');
+  expect(parseInline('[`d`](https://x.y)')).toStrictEqual([{ t: 'd', c: true, href: 'https://x.y' }]);
+  // Code beside code with other marks stays apart; what a span cannot hold is written beside it as words.
+  round('**`a`**`b`');
+  expect(parseInline(writeInline([{ t: 'a`b', c: true }]))).toStrictEqual([{ t: 'a', c: true }, { t: '`' }, { t: 'b', c: true }]);
+  expect(parseInline(writeInline([{ t: 'x]y', c: true, href: 'https://x.y' }]))).toStrictEqual([
+    { t: 'x', c: true, href: 'https://x.y' },
+    { t: ']', href: 'https://x.y' },
+    { t: 'y', c: true, href: 'https://x.y' },
+  ]);
+  // In a document: an item, a heading, a rich cell.
+  const doc = '## The `tlo` command\n\n- run `npx tinylittleoffice link`\n\n| Say:rich |\n| --- |\n| `a\\|b` |\n';
+  expect(write(parse(doc))).toBe(doc);
+  expect(parse(doc).blocks[1]).toStrictEqual({ k: 'li', depth: 0, runs: [{ t: 'run ' }, { t: 'npx tinylittleoffice link', c: true }] });
 });
 
 test('tlo: any runs survive being written and read', () => {
