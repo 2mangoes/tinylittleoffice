@@ -378,8 +378,12 @@ export class ToSheetEditor extends DocElement<SheetView> {
     if (cut) this.clear();
   }
 
-  /** Heard on the way down (capture), before a rich cell's editor: a block is the sheet's to copy; a rich cell's words alone are its editor's. */
+  /** Whether a clipboard event is a column name's (the header's input): the browser's own, never the block's (Paul, 2026-10-13: "I cannot cut and paste from the bolded top row of a spreadsheet"). */
+  private inName = (e: ClipboardEvent) => (e.target as HTMLElement | null)?.closest?.('thead input.cn') != null;
+
+  /** Heard on the way down (capture), before a rich cell's editor: a block is the sheet's to copy; a rich cell's words alone are its editor's; a column's name is its own input's. */
   private onCopy = (e: ClipboardEvent) => {
+    if (this.inName(e)) return;
     const input = e.target as HTMLInputElement;
     const some = !(input instanceof HTMLInputElement) || (input.selectionStart !== input.selectionEnd && !(input.selectionStart === 0 && input.selectionEnd === input.value.length));
     // Some of a cell's text, picked out, is ordinary text; otherwise it is the cell (or the block) that is copied.
@@ -436,6 +440,7 @@ export class ToSheetEditor extends DocElement<SheetView> {
   }
 
   private onPaste = (e: ClipboardEvent) => {
+    if (this.inName(e)) return;
     const { text, ours } = this.asCells({ text: e.clipboardData?.getData('text/plain') ?? '', html: e.clipboardData?.getData('text/html') ?? '' });
     const block = /[\t\n]/.test(text.replace(/\n$/, ''));
     // One value into one cell that is being typed in: let the browser (or a rich cell's editor) paste it.

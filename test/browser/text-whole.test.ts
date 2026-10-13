@@ -8,6 +8,7 @@ import { page, userEvent } from 'vitest/browser';
 import { link, mount, tick, until } from './helpers.ts';
 import { encodeDoc } from '../../src/kit/core/codec.ts';
 import { caret } from '../../src/kit/text/textops.ts';
+import { clipText } from '../../src/kit/text/clipboard.ts';
 import type { ToShell } from '../../src/kit/core/shell.ts';
 import type { ToWriteEditor } from '../../src/apps/write/editor.ts';
 
@@ -98,11 +99,15 @@ test('Mod+A then Mod+C copies the whole document, cards and all', async () => {
   const got: Record<string, string> = {};
   const ev = new ClipboardEvent('copy', { clipboardData: new DataTransfer(), bubbles: true, cancelable: true });
   text.tx.dispatchEvent(ev);
+  // The words alone as text (a table's cells by tabs, a fence's body); the exact TLO inside our HTML.
   got.text = ev.clipboardData!.getData('text/plain');
   expect(got.text).toContain('A heading');
-  expect(got.text).toContain('Col | Two');
+  expect(got.text).toContain('Col\tTwo');
   expect(got.text).toContain('\n\n---\n\n');
-  expect(got.text).toContain('```sheet\nA | B');
+  expect(got.text).not.toContain('```');
+  const tlo = clipText({ text: got.text, html: ev.clipboardData!.getData('text/html') });
+  expect(tlo).toContain('Col | Two');
+  expect(tlo).toContain('```sheet\nA | B');
 });
 
 const BIG = `${Array.from({ length: 300 }, (_, i) => `Paragraph ${i + 1}, long enough to take a line or two of the page when it is drawn.`).join('\n\n')}\n`;

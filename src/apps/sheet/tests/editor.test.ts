@@ -897,3 +897,29 @@ test('pointing a formula at a cell with the arrow keys highlights that cell, gen
   cell(el, 'A1').focus();
   await until(() => pointed() === null);
 });
+
+test("a column's name copies, cuts and pastes as the browser's own input does: never the block under it (Paul, 2026-10-13: the bolded top row)", async () => {
+  const { el, last } = await editor(SHEET);
+  const name = el.querySelector<HTMLInputElement>('thead tr.names input.cn')!;
+  expect(name.value).toBe('Item');
+  name.focus();
+  name.select();
+  await el.updateComplete;
+  const copy = new ClipboardEvent('copy', { clipboardData: new DataTransfer(), bubbles: true, cancelable: true });
+  name.dispatchEvent(copy);
+  // Not taken by the sheet: the browser copies the name itself, and the grid's own block is not what goes out.
+  expect(copy.defaultPrevented).toBe(false);
+  expect(copy.clipboardData!.getData('text/plain')).toBe('');
+  const cut = new ClipboardEvent('cut', { clipboardData: new DataTransfer(), bubbles: true, cancelable: true });
+  name.dispatchEvent(cut);
+  expect(cut.defaultPrevented).toBe(false);
+  const paste = new DataTransfer();
+  paste.setData('text/plain', 'Thing');
+  const pasted = new ClipboardEvent('paste', { clipboardData: paste, bubbles: true, cancelable: true });
+  name.dispatchEvent(pasted);
+  await el.updateComplete;
+  expect(pasted.defaultPrevented).toBe(false);
+  // The grid is untouched by any of it.
+  expect(last()).toBeUndefined();
+  expect(cell(el, 'A1').value).toBe('Rent');
+});
