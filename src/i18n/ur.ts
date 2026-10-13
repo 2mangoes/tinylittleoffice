@@ -60,6 +60,11 @@ export default {
   // The name itself is translated too (Paul, 2026-10-10): each language says it in its own words.
     'Tiny Little Office': 'Tiny Little Office', // same
     'About Tiny Little Office': 'Tiny Little Office کا تعارف',
+    'Tiny Little Office is an experiment by {aboard}, a digital and AI strategy and software development firm in New York City.': 'Tiny Little Office نیویارک شہر کی ڈیجیٹل اور AI حکمتِ عملی اور سافٹ ویئر بنانے والی کمپنی {aboard} کا ایک تجربہ ہے۔',
+    'To reach out with questions, {email}.': 'سوالات کے لیے {email}۔',
+    'email us': 'ہمیں ای میل کریں',
+    'If you find bugs, please file them in our {github}.': 'اگر آپ کو خرابیاں ملیں تو براہِ کرم انہیں ہمارے {github} میں درج کریں۔',
+    'GitHub repository': 'GitHub ریپوزٹری',
 
   // ---- links that leave the site (kit/ui/link-guard.ts) ----
   // The menu button's tooltip: the Office mark is the menu.

@@ -58,6 +58,11 @@ export default {
   'About': 'Info',
   'Tiny Little Office': 'Winzig Kleines Büro',
   'About Tiny Little Office': 'Über Winzig Kleines Büro',
+  'Tiny Little Office is an experiment by {aboard}, a digital and AI strategy and software development firm in New York City.': 'Winzig Kleines Büro ist ein Experiment von {aboard}, einer Firma für digitale und KI-Strategie und Softwareentwicklung in New York City.',
+  'To reach out with questions, {email}.': 'Bei Fragen {email}.',
+  'email us': 'schreib uns eine E-Mail',
+  'If you find bugs, please file them in our {github}.': 'Wenn du Fehler findest, melde sie bitte in unserem {github}.',
+  'GitHub repository': 'GitHub-Repository',
 
   // ---- links that leave the site (kit/ui/link-guard.ts) ----
   // The menu button's tooltip: the Office mark is the menu.

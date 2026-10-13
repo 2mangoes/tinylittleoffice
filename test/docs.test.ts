@@ -37,7 +37,6 @@ const GONE = [
   'tinyoffice.name',
   // The foot's words are Paul's of 2026-10-12 (its earlier ones, and Share's old second copy, are in STALE); the theme
   // script is in the page, not a file of its own.
-  'Email us',
   'theme.js',
   // Save in browser is the setting's name, on or off: Private and Saved were its two states' names.
   'Turn on Saved',
@@ -46,7 +45,13 @@ const GONE = [
 ];
 
 /** The same, where the words alone would say too much: the drawer lists no apps (Paul, 2026-10-12: "If people want apps they can search or go to home page"). */
-const GONE_SAID = [/\bdrawer\b[^.\n]*\blists? (the|every|all the) apps\b/i, /\baway from the home page, the apps\b/i, /\bthe apps in the drawer\b/i];
+const GONE_SAID = [
+  /\bdrawer\b[^.\n]*\blists? (the|every|all the) apps\b/i,
+  /\baway from the home page, the apps\b/i,
+  /\bthe apps in the drawer\b/i,
+  // The old foot's last link was "Email us", capitalised; About's "email us" (Paul's words of 2026-10-13) is a sentence's.
+  /\bEmail us\b/,
+];
 
 /** This machine, its addresses and the sessions that built the tree. */
 const MACHINE = ['exe.xyz', 'exe.dev', 'claude.ai/code', ['', 'home', 'exedev'].join('/')];

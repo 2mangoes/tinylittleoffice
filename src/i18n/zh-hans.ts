@@ -59,6 +59,11 @@ export default {
   'About': '关于',
   'Tiny Little Office': '小小办公室',
   'About Tiny Little Office': '关于 小小办公室',
+  'Tiny Little Office is an experiment by {aboard}, a digital and AI strategy and software development firm in New York City.': '小小办公室是纽约的数字与 AI 战略及软件开发公司 {aboard} 的一项实验。',
+  'To reach out with questions, {email}.': '如有疑问，请{email}。',
+  'email us': '给我们发邮件',
+  'If you find bugs, please file them in our {github}.': '如果发现问题，请到我们的 {github} 提交。',
+  'GitHub repository': 'GitHub 仓库',
 
   // ---- links that leave the site (kit/ui/link-guard.ts) ----
   // The menu button's tooltip: the Office mark is the menu.

@@ -17,7 +17,8 @@
  *    there is a keyboard (kit/ui/bar.ts keysKbd: never under a finger until a key with Ctrl, ⌘ or Alt is typed, and never
  *    part of the row's name).
  * 6. Theme, Add to home screen where the browser offers it (install.ts; on an iPhone, the line that says how), About
- *    (the commit it runs, from /version.json, kit/core/version.ts, read when About opens: Paul, "we'll write a few lines later").
+ *    (Paul's three sentences of 2026-10-13, Aboard, "email us" and the repository's issues as links, then the commit it
+ *    runs, from /version.json, kit/core/version.ts, read when About opens).
  *
  * On a touch screen the dialog itself holds the focus (the search would raise the keyboard) and draws no ring for it.
  * Anything that opens a document closes the drawer (it follows the hash). The drawer is a menu: a row that opens a
@@ -30,7 +31,7 @@ import type { AppDef } from '../core/app.ts';
 import { apps, siteRoot } from '../core/apps.ts';
 import { mark } from '../draw/mark.ts';
 import { unsafeSVG } from 'lit/directives/unsafe-svg.js';
-import { preloadTemplates, templateHash, templatesOf as arrivedTemplates } from './home.ts';
+import { MAIL, preloadTemplates, templateHash, templatesOf as arrivedTemplates } from './home.ts';
 import { library } from '../share/library.ts';
 import { icon, UI } from '../draw/icons.ts';
 import { startEditing } from './chrome.ts';
@@ -41,7 +42,8 @@ import { keeping, onPrivacy, setPrivate } from '../share/privacy.ts';
 import { canInstall, install, installByHand, onInstall } from '../core/install.ts';
 import { size } from './zoom.ts';
 import { toast } from '../core/say.ts';
-import { commitUrl, running, type Version } from '../core/version.ts';
+import { commitUrl, repoUrl, running, type Version } from '../core/version.ts';
+import { origin } from '../core/network.ts';
 import './preview.ts';
 import { focusBack, handBack, type ToDialog } from './dialog.ts';
 import type { MenuItem } from './menu.ts';
@@ -60,6 +62,9 @@ export interface Offer {
 
 /** The size of everything's commands, drawn as the stepper rather than as rows of This document. */
 const STEPPER: readonly Command<never>[] = [SMALLER, NORMAL_SIZE, LARGER];
+
+/** A translated sentence with links in it: each {name} the template given for it, the words around it as the language puts them (t() leaves a placeholder it is given no value for). */
+const linked = (sentence: string, links: Record<string, TemplateResult>) => sentence.split(/\{(\w+)\}/).map((part, i) => (i % 2 ? (links[part] ?? `{${part}}`) : part));
 
 export class ToDrawer extends LitElement {
   static properties = {
@@ -303,11 +308,16 @@ export class ToDrawer extends LitElement {
         }
       </div>
     </dialog>
-    <to-dialog class="to-about-dialog" heading=${t('About Tiny Little Office')} .body=${
-      this.version
-        ? html`<p class="to-hint to-about-version"><a href=${commitUrl(this.version.commit)} target="_blank" rel="noopener">${t('Running commit {commit}', { commit: this.version.commit.slice(0, 7) })}</a>${this.version.tag ? ` (${this.version.tag})` : ''}</p>`
-        : nothing
-    }></to-dialog>`;
+    <to-dialog class="to-about-dialog" heading=${t('About Tiny Little Office')} .body=${html`<p>
+        ${linked(t('Tiny Little Office is an experiment by {aboard}, a digital and AI strategy and software development firm in New York City.'), { aboard: html`<a href=${origin('maker')} target="_blank" rel="noopener" data-to-chrome>Aboard</a>` })}
+        ${linked(t('To reach out with questions, {email}.'), { email: html`<a href=${MAIL} data-to-chrome>${t('email us')}</a>` })}
+        ${linked(t('If you find bugs, please file them in our {github}.'), { github: html`<a href=${`${repoUrl()}/issues`} target="_blank" rel="noopener" data-to-chrome>${t('GitHub repository')}</a>` })}
+      </p>
+      ${
+        this.version
+          ? html`<p class="to-hint to-about-version"><a href=${commitUrl(this.version.commit)} target="_blank" rel="noopener">${t('Running commit {commit}', { commit: this.version.commit.slice(0, 7) })}</a>${this.version.tag ? ` (${this.version.tag})` : ''}</p>`
+          : nothing
+      }`}></to-dialog>`;
   }
 
   /** A button of the size stepper: the page's command (kit/core/keys.ts), its words its name. */

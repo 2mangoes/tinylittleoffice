@@ -479,14 +479,25 @@ test('Save in browser: off by default, its line says what turning it on does; on
   }
 });
 
-test("About's body is the running commit line alone", async () => {
+test("About's body is Paul's three sentences, Aboard, email us and the repository's issues their links, then the running commit line alone", async () => {
   const shell = await mount('');
   const dialog = await openDrawer(shell);
   shell.querySelector<HTMLButtonElement>('.to-drawer-about')!.click();
   await until(() => !dialog.open);
   const body = shell.querySelector<HTMLElement>('.to-about-dialog .to-dialog-body')!;
-  expect([...body.children].every((c) => c.matches('.to-about-version'))).toBe(true);
-  expect(body.textContent!.replace(/Running commit \w+( \([^)]*\))?/, '').trim()).toBe('');
+  const [words, ...rest] = body.children;
+  expect(words.tagName).toBe('P');
+  expect(words.textContent!.replace(/\s+/g, ' ').trim()).toBe(
+    'Tiny Little Office is an experiment by Aboard, a digital and AI strategy and software development firm in New York City. To reach out with questions, email us. If you find bugs, please file them in our GitHub repository.',
+  );
+  const links = [...words.querySelectorAll('a')].map((a) => [a.textContent, a.getAttribute('href')]);
+  expect(links).toEqual([
+    ['Aboard', 'https://aboard.com'],
+    ['email us', 'mailto:hello+tlo@aboard.com'],
+    ['GitHub repository', 'https://github.com/aboard-io/tinylittleoffice/issues'],
+  ]);
+  expect(rest.every((c) => c.matches('.to-about-version'))).toBe(true);
+  expect(rest.map((c) => c.textContent!.replace(/Running commit \w+( \([^)]*\))?/, '').trim())).toEqual(rest.map(() => ''));
 });
 
 for (const scale of [1, 2])

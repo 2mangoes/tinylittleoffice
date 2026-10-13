@@ -69,6 +69,11 @@ export default {
   // The name itself is translated too (Paul, 2026-10-10): each language says it in its own words.
   'Tiny Little Office': 'Tiny Little Office', // same
   'About Tiny Little Office': 'וועגן Tiny Little Office',
+  'Tiny Little Office is an experiment by {aboard}, a digital and AI strategy and software development firm in New York City.': 'Tiny Little Office איז אן עקספערימענט פון {aboard}, א פירמע פאר דיגיטאלער און AI סטראטעגיע און סאפטוועיר אנטוויקלונג אין ניו יארק.',
+  'To reach out with questions, {email}.': 'מיט פראגן, {email}.',
+  'email us': 'שרייבט אונז אן אימעיל',
+  'If you find bugs, please file them in our {github}.': 'אויב איר געפינט פעלערן, ביטע מעלדט זיי אין אונזער {github}.',
+  'GitHub repository': 'GitHub רעפאזיטארי',
 
   // ---- links that leave the site (kit/ui/link-guard.ts) ----
   // The menu button's tooltip: the Office mark is the menu.

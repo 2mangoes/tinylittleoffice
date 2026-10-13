@@ -60,6 +60,11 @@ export default {
   'About': 'Info',
   'Tiny Little Office': 'Piepklein Kantoortje',
   'About Tiny Little Office': 'Over Piepklein Kantoortje',
+  'Tiny Little Office is an experiment by {aboard}, a digital and AI strategy and software development firm in New York City.': 'Piepklein Kantoortje is een experiment van {aboard}, een bureau voor digitale en AI-strategie en softwareontwikkeling in New York City.',
+  'To reach out with questions, {email}.': 'Heb je vragen? {email}.',
+  'email us': 'Mail ons',
+  'If you find bugs, please file them in our {github}.': 'Vind je fouten, meld ze dan in onze {github}.',
+  'GitHub repository': 'GitHub-repository',
 
   // ---- links that leave the site (kit/ui/link-guard.ts) ----
   // The menu button's tooltip: the Office mark is the menu.

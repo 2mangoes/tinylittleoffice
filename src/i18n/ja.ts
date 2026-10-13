@@ -58,6 +58,11 @@ export default {
   'About': '概要',
   'Tiny Little Office': 'ちいさなちいさなオフィス',
   'About Tiny Little Office': 'ちいさなちいさなオフィスについて',
+  'Tiny Little Office is an experiment by {aboard}, a digital and AI strategy and software development firm in New York City.': 'ちいさなちいさなオフィスは、ニューヨークのデジタル・AI戦略とソフトウェア開発の会社 {aboard} による実験です。',
+  'To reach out with questions, {email}.': 'ご質問は{email}。',
+  'email us': 'メールでお寄せください',
+  'If you find bugs, please file them in our {github}.': 'バグを見つけたら、{github}に報告してください。',
+  'GitHub repository': 'GitHub リポジトリ',
 
   // ---- links that leave the site (kit/ui/link-guard.ts) ----
   // The menu button's tooltip: the Office mark is the menu.

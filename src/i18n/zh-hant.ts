@@ -61,6 +61,11 @@ export default {
   // The name itself is translated too (Paul, 2026-10-10): each language says it in its own words.
   'Tiny Little Office': '小小辦公室',
   'About Tiny Little Office': '關於小小辦公室',
+  'Tiny Little Office is an experiment by {aboard}, a digital and AI strategy and software development firm in New York City.': '小小辦公室是紐約的數位與 AI 策略及軟體開發公司 {aboard} 的一項實驗。',
+  'To reach out with questions, {email}.': '如有疑問，請{email}。',
+  'email us': '寄信給我們',
+  'If you find bugs, please file them in our {github}.': '如果發現問題，請到我們的 {github} 回報。',
+  'GitHub repository': 'GitHub 儲存庫',
 
   // ---- links that leave the site (kit/ui/link-guard.ts) ----
   // The menu button's tooltip: the Office mark is the menu.

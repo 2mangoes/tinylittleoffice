@@ -60,6 +60,11 @@ export default {
   'About': 'Acerca de',
   'Tiny Little Office': 'Oficinita Diminuta',
   'About Tiny Little Office': 'Acerca de Oficinita Diminuta',
+  'Tiny Little Office is an experiment by {aboard}, a digital and AI strategy and software development firm in New York City.': 'Oficinita Diminuta es un experimento de {aboard}, una firma de estrategia digital y de IA y desarrollo de software en Nueva York.',
+  'To reach out with questions, {email}.': 'Si tienes preguntas, {email}.',
+  'email us': 'escríbenos un correo',
+  'If you find bugs, please file them in our {github}.': 'Si encuentras errores, por favor repórtalos en nuestro {github}.',
+  'GitHub repository': 'repositorio de GitHub',
 
   // ---- links that leave the site (kit/ui/link-guard.ts) ----
   // The menu button's tooltip: the Office mark is the menu.

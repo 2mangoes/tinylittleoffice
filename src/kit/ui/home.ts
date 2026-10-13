@@ -44,7 +44,8 @@ import { origin } from '../core/network.ts';
 import { repoUrl, running, type Version } from '../core/version.ts';
 
 /** Where a note to the makers goes. */
-const MAIL = 'mailto:hello+tlo@aboard.com';
+/** Where to write: the foot's Email and About's "email us" (kit/ui/drawer.ts). */
+export const MAIL = 'mailto:hello+tlo@aboard.com';
 
 /** The documents shown under an app before "n more". */
 const SHOWN = 5;

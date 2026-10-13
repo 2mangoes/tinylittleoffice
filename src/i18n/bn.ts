@@ -52,6 +52,11 @@ export default {
   'About': 'পরিচিতি',
   'Tiny Little Office': 'Tiny Little Office', // same
   'About Tiny Little Office': 'Tiny Little Office সম্পর্কে',
+  'Tiny Little Office is an experiment by {aboard}, a digital and AI strategy and software development firm in New York City.': 'Tiny Little Office হলো {aboard}-এর একটি পরীক্ষা, নিউ ইয়র্ক শহরের একটি ডিজিটাল ও AI কৌশল এবং সফটওয়্যার নির্মাণ প্রতিষ্ঠান।',
+  'To reach out with questions, {email}.': 'প্রশ্ন থাকলে {email}।',
+  'email us': 'আমাদের ইমেইল করুন',
+  'If you find bugs, please file them in our {github}.': 'কোনো ত্রুটি পেলে অনুগ্রহ করে আমাদের {github}-এ নথিভুক্ত করুন।',
+  'GitHub repository': 'GitHub রিপোজিটরি',
 
   // ---- links that leave the site (kit/ui/link-guard.ts) ----
   'Tiny Little Office menu': 'Tiny Little Office মেনু',

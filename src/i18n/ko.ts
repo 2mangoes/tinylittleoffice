@@ -59,6 +59,11 @@ export default {
   // The name itself is translated too (Paul, 2026-10-10): each language says it in its own words.
   'Tiny Little Office': 'Tiny Little Office', // same
   'About Tiny Little Office': 'Tiny Little Office 정보',
+  'Tiny Little Office is an experiment by {aboard}, a digital and AI strategy and software development firm in New York City.': 'Tiny Little Office는 뉴욕의 디지털·AI 전략 및 소프트웨어 개발 회사 {aboard}의 실험입니다.',
+  'To reach out with questions, {email}.': '궁금한 점이 있으면 {email}.',
+  'email us': '이메일을 보내 주세요',
+  'If you find bugs, please file them in our {github}.': '버그를 발견하면 {github}에 올려 주세요.',
+  'GitHub repository': 'GitHub 저장소',
 
   // ---- links that leave the site (kit/ui/link-guard.ts) ----
   // The menu button's tooltip: the Office mark is the menu.

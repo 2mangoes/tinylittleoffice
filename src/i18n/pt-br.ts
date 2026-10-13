@@ -60,6 +60,11 @@ export default {
   'About': 'Sobre',
   'Tiny Little Office': 'Pequeno Escritoriozinho',
   'About Tiny Little Office': 'Sobre o Pequeno Escritoriozinho',
+  'Tiny Little Office is an experiment by {aboard}, a digital and AI strategy and software development firm in New York City.': 'Pequeno Escritoriozinho é um experimento da {aboard}, uma empresa de estratégia digital e de IA e desenvolvimento de software em Nova York.',
+  'To reach out with questions, {email}.': 'Para tirar dúvidas, {email}.',
+  'email us': 'mande um e-mail para nós',
+  'If you find bugs, please file them in our {github}.': 'Se encontrar bugs, por favor registre-os no nosso {github}.',
+  'GitHub repository': 'repositório no GitHub',
 
   // ---- links that leave the site (kit/ui/link-guard.ts) ----
   // The menu button's tooltip: the Office mark is the menu.
