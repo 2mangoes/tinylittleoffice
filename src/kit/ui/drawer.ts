@@ -313,6 +313,10 @@ export class ToDrawer extends LitElement {
         ${linked(t('To reach out with questions, {email}.'), { email: html`<a href=${MAIL} data-to-chrome>${t('email us')}</a>` })}
         ${linked(t('If you find bugs, please file them in our {github}.'), { github: html`<a href=${`${repoUrl()}/issues`} target="_blank" rel="noopener" data-to-chrome>${t('GitHub repository')}</a>` })}
       </p>
+      <blockquote class="to-about-quote">
+        <p>${t('All of these notes, these drawings, and these sentences written with a marker fade over time. Only the ephemeral lasts.')}</p>
+        <footer>${linked(t('Eugène Ionesco, {book}'), { book: html`<cite>${t('Discoveries')}</cite>` })}</footer>
+      </blockquote>
       ${
         this.version
           ? html`<p class="to-hint to-about-version"><a href=${commitUrl(this.version.commit)} target="_blank" rel="noopener">${t('Running commit {commit}', { commit: this.version.commit.slice(0, 7) })}</a>${this.version.tag ? ` (${this.version.tag})` : ''}</p>`

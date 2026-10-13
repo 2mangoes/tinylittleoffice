@@ -66,6 +66,9 @@ export default {
   'email us': '寄信給我們',
   'If you find bugs, please file them in our {github}.': '如果發現問題，請到我們的 {github} 回報。',
   'GitHub repository': 'GitHub 儲存庫',
+  'All of these notes, these drawings, and these sentences written with a marker fade over time. Only the ephemeral lasts.': '這些筆記、這些圖畫、這些用麥克筆寫下的句子，都會隨時間褪去。唯有短暫的才長存。',
+  'Eugène Ionesco, {book}': '尤金·尤涅斯柯，{book}',
+  'Discoveries': '《發現》',
 
   // ---- links that leave the site (kit/ui/link-guard.ts) ----
   // The menu button's tooltip: the Office mark is the menu.

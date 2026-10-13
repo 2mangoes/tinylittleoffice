@@ -64,6 +64,9 @@ export default {
   'email us': 'हमें ईमेल करें',
   'If you find bugs, please file them in our {github}.': 'अगर आपको बग मिलें, तो कृपया उन्हें हमारे {github} में दर्ज करें।',
   'GitHub repository': 'GitHub रिपॉज़िटरी',
+  'All of these notes, these drawings, and these sentences written with a marker fade over time. Only the ephemeral lasts.': 'ये सारे नोट, ये चित्र और मार्कर से लिखे ये वाक्य समय के साथ मिट जाते हैं। केवल क्षणभंगुर ही टिकता है।',
+  'Eugène Ionesco, {book}': 'यूजीन इयोनेस्को, {book}',
+  'Discoveries': 'खोजें',
 
   // ---- links that leave the site (kit/ui/link-guard.ts) ----
   // The menu button's tooltip: the Office mark is the menu.

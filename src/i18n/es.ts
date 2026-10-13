@@ -65,6 +65,9 @@ export default {
   'email us': 'escríbenos un correo',
   'If you find bugs, please file them in our {github}.': 'Si encuentras errores, por favor repórtalos en nuestro {github}.',
   'GitHub repository': 'repositorio de GitHub',
+  'All of these notes, these drawings, and these sentences written with a marker fade over time. Only the ephemeral lasts.': 'Todas estas notas, estos dibujos y estas frases escritas con rotulador se borran con el tiempo. Solo lo efímero perdura.',
+  'Eugène Ionesco, {book}': 'Eugène Ionesco, {book}', // same
+  'Discoveries': 'Descubrimientos',
 
   // ---- links that leave the site (kit/ui/link-guard.ts) ----
   // The menu button's tooltip: the Office mark is the menu.

@@ -85,6 +85,10 @@ export default {
   'email us': 'email us',
   'If you find bugs, please file them in our {github}.': 'If you find bugs, please file them in our {github}.',
   'GitHub repository': 'GitHub repository',
+  // About's closing words (Paul, 2026-10-13): Ionesco's, from his Découvertes of 1969, and the line beneath naming him and the book ({book}, in italics).
+  'All of these notes, these drawings, and these sentences written with a marker fade over time. Only the ephemeral lasts.': 'All of these notes, these drawings, and these sentences written with a marker fade over time. Only the ephemeral lasts.',
+  'Eugène Ionesco, {book}': 'Eugène Ionesco, {book}',
+  'Discoveries': 'Discoveries',
 
   // ---- links that leave the site (kit/ui/link-guard.ts) ----
   // The menu button's tooltip: the Office mark is the menu.

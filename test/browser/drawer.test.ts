@@ -479,14 +479,18 @@ test('Save in browser: off by default, its line says what turning it on does; on
   }
 });
 
-test("About's body is Paul's three sentences, Aboard, email us and the repository's issues their links, then the running commit line alone", async () => {
+test("About's body is Paul's three sentences, Aboard, email us and the repository's issues their links, Ionesco's quotation, then the running commit line alone", async () => {
   const shell = await mount('');
   const dialog = await openDrawer(shell);
   shell.querySelector<HTMLButtonElement>('.to-drawer-about')!.click();
   await until(() => !dialog.open);
   const body = shell.querySelector<HTMLElement>('.to-about-dialog .to-dialog-body')!;
-  const [words, ...rest] = body.children;
+  const [words, quote, ...rest] = body.children;
   expect(words.tagName).toBe('P');
+  expect(quote.matches('blockquote.to-about-quote')).toBe(true);
+  expect(quote.querySelector('p')!.textContent).toBe('All of these notes, these drawings, and these sentences written with a marker fade over time. Only the ephemeral lasts.');
+  expect(quote.querySelector('footer')!.textContent!.replace(/\s+/g, ' ').trim()).toBe('Eugène Ionesco, Discoveries');
+  expect(quote.querySelector('footer cite')!.textContent).toBe('Discoveries');
   expect(words.textContent!.replace(/\s+/g, ' ').trim()).toBe(
     'Tiny Little Office is an experiment by Aboard, a digital and AI strategy and software development firm in New York City. To reach out with questions, email us. If you find bugs, please file them in our GitHub repository.',
   );

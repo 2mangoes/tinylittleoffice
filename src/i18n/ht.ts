@@ -66,6 +66,9 @@ export default {
   'email us': 'voye yon imel ban nou',
   'If you find bugs, please file them in our {github}.': 'Si ou jwenn bug, tanpri siyale yo nan {github} nou an.',
   'GitHub repository': 'depo GitHub',
+  'All of these notes, these drawings, and these sentences written with a marker fade over time. Only the ephemeral lasts.': 'Tout nòt sa yo, desen sa yo, ak fraz sa yo ki ekri ak makè efase ak tan. Se sèlman sa ki pase ki rete.',
+  'Eugène Ionesco, {book}': 'Eugène Ionesco, {book}', // same
+  'Discoveries': 'Dekouvèt',
 
   // ---- links that leave the site (kit/ui/link-guard.ts) ----
   // The menu button's tooltip: the Office mark is the menu.

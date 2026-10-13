@@ -63,6 +63,9 @@ export default {
   'email us': 'メールでお寄せください',
   'If you find bugs, please file them in our {github}.': 'バグを見つけたら、{github}に報告してください。',
   'GitHub repository': 'GitHub リポジトリ',
+  'All of these notes, these drawings, and these sentences written with a marker fade over time. Only the ephemeral lasts.': 'これらのメモも、絵も、マーカーで書いた文も、時とともに薄れていく。残るのは、はかないものだけだ。',
+  'Eugène Ionesco, {book}': 'ウジェーヌ・イヨネスコ『{book}』',
+  'Discoveries': '発見',
 
   // ---- links that leave the site (kit/ui/link-guard.ts) ----
   // The menu button's tooltip: the Office mark is the menu.

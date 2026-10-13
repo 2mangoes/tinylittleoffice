@@ -73,6 +73,9 @@ export default {
   'email us': 'כתבו לנו במייל',
   'If you find bugs, please file them in our {github}.': 'אם מצאתם באגים, אנא דווחו עליהם ב{github} שלנו.',
   'GitHub repository': 'מאגר ה‑GitHub',
+  'All of these notes, these drawings, and these sentences written with a marker fade over time. Only the ephemeral lasts.': 'כל הרשימות האלה, הציורים האלה והמשפטים האלה שנכתבו בטוש דוהים עם הזמן. רק החולף נשאר.',
+  'Eugène Ionesco, {book}': 'אז׳ן יונסקו, {book}',
+  'Discoveries': 'תגליות',
 
   // ---- links that leave the site (kit/ui/link-guard.ts) ----
   // The menu button's tooltip: the Office mark is the menu.

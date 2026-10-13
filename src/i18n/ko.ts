@@ -64,6 +64,9 @@ export default {
   'email us': '이메일을 보내 주세요',
   'If you find bugs, please file them in our {github}.': '버그를 발견하면 {github}에 올려 주세요.',
   'GitHub repository': 'GitHub 저장소',
+  'All of these notes, these drawings, and these sentences written with a marker fade over time. Only the ephemeral lasts.': '이 모든 메모와 그림, 마커로 쓴 이 문장들은 시간이 지나면 바랜다. 덧없는 것만이 남는다.',
+  'Eugène Ionesco, {book}': '외젠 이오네스코, {book}',
+  'Discoveries': '발견',
 
   // ---- links that leave the site (kit/ui/link-guard.ts) ----
   // The menu button's tooltip: the Office mark is the menu.

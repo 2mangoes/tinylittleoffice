@@ -609,6 +609,20 @@
   .to-dialog-body > :first-child {
     margin-top: 0;
   }
+  /* About's quotation (drawer.ts): Ionesco on the ephemeral, set as a quotation above the running commit's line. */
+  .to-about-quote {
+    margin: 1em 0;
+    padding-inline-start: 1em;
+    border-inline-start: 0.1875em solid var(--to-border);
+    color: var(--to-ink-2);
+  }
+  .to-about-quote p {
+    margin: 0 0 0.25em;
+  }
+  .to-about-quote footer {
+    font-size: 0.9em;
+    color: var(--to-ink-3);
+  }
   /* ---- Leaving a document that lives only in its link (shell.ts): one line, three answers stacked, narrow ---- */
   .to-leave-dialog .to-dialog {
     width: min(26.25em, calc(100vw - 2em));

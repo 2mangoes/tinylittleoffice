@@ -57,6 +57,9 @@ export default {
   'email us': 'আমাদের ইমেইল করুন',
   'If you find bugs, please file them in our {github}.': 'কোনো ত্রুটি পেলে অনুগ্রহ করে আমাদের {github}-এ নথিভুক্ত করুন।',
   'GitHub repository': 'GitHub রিপোজিটরি',
+  'All of these notes, these drawings, and these sentences written with a marker fade over time. Only the ephemeral lasts.': 'এই সব নোট, এই আঁকাগুলো, মার্কার দিয়ে লেখা এই বাক্যগুলো সময়ের সঙ্গে মিলিয়ে যায়। কেবল ক্ষণস্থায়ীই টিকে থাকে।',
+  'Eugène Ionesco, {book}': 'ওজেন ইয়োনেস্কো, {book}',
+  'Discoveries': 'আবিষ্কার',
 
   // ---- links that leave the site (kit/ui/link-guard.ts) ----
   'Tiny Little Office menu': 'Tiny Little Office মেনু',
