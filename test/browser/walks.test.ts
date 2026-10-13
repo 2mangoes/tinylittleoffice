@@ -157,7 +157,7 @@ async function settle(r: Real) {
         (a) =>
           a.playState === 'running' &&
           (a.effect as KeyframeEffect | null)?.target instanceof Element &&
-          !!((a.effect as KeyframeEffect).target as Element).closest('to-bar, .to-header, .to-burger, .to-context, dialog, [popover]'),
+          !!((a.effect as KeyframeEffect).target as Element).closest('to-bar, .to-header, .to-burger, .to-share-btn, .to-context, dialog, [popover]'),
       );
   await until(() => !moving(), 1500).catch(() => undefined);
   if (r.shell.app && appOf(r.shell.app)) await until(() => !!r.shell.editor || !!r.shell.querySelector('.to-empty:not(.to-loading)'), 5000).catch(() => undefined);

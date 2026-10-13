@@ -61,7 +61,8 @@ import { t } from '../core/i18n.ts';
 import { ago, type Kept } from '../share/library.ts';
 import { expiresSentence, SHORT_LINK_MAX, timeLeft } from '../share/short.ts';
 import { pinWindow, revealCaret } from './scroll.ts';
-import { BAR_HERE } from './bar.ts';
+import { BAR_HERE, keysAria } from './bar.ts';
+import { SHARE } from '../core/keys.ts';
 
 /** The document the header names. */
 export interface DocHead {
@@ -130,6 +131,8 @@ export function startEditing(): void {
     hold.contentEditable = 'true';
     hold.tabIndex = -1;
     hold.setAttribute('aria-hidden', 'true');
+    // iOS draws a focused box's caret itself, whatever the box's opacity (Paul, 2026-10-13: "There's a big black area the cursor is in it. Then it focuses"): the hold's is transparent (kit.css).
+
     hold.addEventListener('focusout', () => hold!.remove());
     document.body.append(hold);
   }
@@ -471,9 +474,14 @@ export class ToChrome extends LitElement {
     if (this.plain) return this.renderPlain(this.plain);
     // The menu button is a hamburger (Paul, 2026-10-10: "Make the hamburger a hamburger"); the mark is the drawer's.
     const burger = html`<button type="button" class="to-btn to-tool to-burger" aria-label=${t('Menu')} title=${t('Tiny Little Office menu')} aria-haspopup="dialog" @click=${() => this.say('to-drawer-open')}>${icon(UI.menu, 24)}</button>`;
+    // Share, at the menu button's inline start on every document, floating with it while the header has stepped aside (Paul, 2026-10-13: "Put the share menu to the left of the hamburger on every document — sharing is very important"); a locked document has no Share until it is opened.
+    const share =
+      this.doc && !this.doc.locked
+        ? html`<button type="button" class="to-btn to-tool to-share-btn" aria-label=${t('Share…')} title=${t('Share…')} aria-keyshortcuts=${keysAria(SHARE.keys)} aria-haspopup="dialog" @click=${() => this.say('to-share-open')}>${icon(UI.share, 24)}</button>`
+        : nothing;
     const head = html`<header class="to-header ${this.titling ? 'titling' : ''}" aria-label=${t('Tiny Little Office')} @focusin=${this.openTitle} @focusout=${() => (this.titling = false)} @keydown=${this.titleKey}>${this.doc ? this.renderDoc(this.doc) : html`<a class="to-brand" href="#/">${t('Tiny Little Office')}</a>`}</header>`;
     // The column scrolls (the room below the last line sees to that even in a short document), so it is in the tab order and the keys scroll it, as the Display Link's column is; a scrollable box no key can reach fails axe's scrollable-region-focusable.
-    return html`${burger}${head}${this.renderArrival()}${this.renderOther()}<div class="to-column ${this.barred ? 'barred' : ''}">
+    return html`${share}${burger}${head}${this.renderArrival()}${this.renderOther()}<div class="to-column ${this.barred ? 'barred' : ''}">
       <main class=${this.mainClass} tabindex="0" aria-label=${this.label || nothing}>${this.main}</main>
     </div>`;
   }

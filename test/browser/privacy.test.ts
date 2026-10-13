@@ -1,7 +1,7 @@
 // Privacy (Paul, 2026-10-09): the unlock dialog, Password… and the re-seal on
 // every change, the state beside the title, and what the device holds.
 import { test, expect, afterEach, vi } from 'vitest';
-import { mount, privacyAlone, tick, until, said, openShare as openShareFromDrawer } from './helpers.ts';
+import { link, mount, privacyAlone, tick, until, said, openShare as openShareFromDrawer } from './helpers.ts';
 import { decodeDoc, encodeDoc, isSealed } from '../../src/kit/core/codec.ts';
 import { parseHash } from '../../src/kit/core/route.ts';
 import { PREFS, forgetPrefs, prefsKept, lockWith, pack, unlock } from '../../src/kit/share/privacy.ts';
@@ -134,6 +134,8 @@ test('Password… shows a password the app made, with no field to type one; Set 
   expect((await unlock(password, first))!.text).toContain('Plain words.');
   // An edit is sealed again: a new ciphertext, the new words inside it.
   await type(shell, 'More. ');
+  // The address is written when typing stops: a read of the link brings it on, and the sealing follows.
+  link();
   await until(() => payload() !== first);
   expect(isSealed(payload())).toBe(true);
   expect((await unlock(password, payload()))!.text).toContain('More. Plain words.');
@@ -157,6 +159,7 @@ test('Under Saved, a sealed document is kept as ciphertext, with no name; the ho
   shell.querySelector<HTMLButtonElement>('.to-unlock-go')!.click();
   await until(() => !!shell.querySelector('to-write-editor to-text .tx p'));
   await type(shell, 'x');
+  link();
   await until(() => library().length === 1, 3000);
   const [kept] = library();
   expect(kept.title).toBe('');

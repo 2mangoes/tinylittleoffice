@@ -695,3 +695,29 @@ test('a header too narrow for all of it keeps a password’s lock beside the tit
   expect(all[0].offsetWidth).toBeGreaterThan(0);
   header.remove();
 });
+
+// Share at the menu button's inline start on every document (Paul, 2026-10-13: "Put the share menu to the left of the
+// hamburger on every document — sharing is very important"): one touch width before it, the header's words ending
+// before both; a tap opens the share dialog; the home page has none, nor has a locked document until it is opened.
+test('Share sits one touch width before the menu button on a document, opens the share dialog, and is not on the home page', async () => {
+  const shell = await mount('#/v1/write');
+  await until(() => !!shell.querySelector('.to-share-btn') && !!shell.querySelector('.to-burger'));
+  const share = shell.querySelector<HTMLButtonElement>('.to-share-btn')!;
+  const burger = shell.querySelector<HTMLElement>('.to-burger')!;
+  const [s, b] = [share.getBoundingClientRect(), burger.getBoundingClientRect()];
+  expect(s.width).toBeCloseTo(b.width, 0);
+  expect(s.top).toBeCloseTo(b.top, 0);
+  expect(s.right).toBeLessThanOrEqual(b.left);
+  expect(b.left - s.right).toBeLessThan(12);
+  expect(share.getAttribute('aria-label')).toBe('Share…');
+  // The header's words end before Share.
+  const title = shell.querySelector<HTMLElement>('.to-header input.to-title')!;
+  expect(title.getBoundingClientRect().right).toBeLessThanOrEqual(s.left);
+  share.click();
+  await until(() => !!shell.querySelector('to-dialog.to-share-dialog dialog[open]'));
+  shell.querySelector<HTMLElement>('to-dialog.to-share-dialog')!.querySelector<HTMLButtonElement>('.to-dialog-head button')!.click();
+  await until(() => !shell.querySelector('to-dialog.to-share-dialog dialog[open]'));
+  location.hash = '#/';
+  await until(() => !!shell.querySelector('.to-header > .to-brand'));
+  expect(shell.querySelector('.to-share-btn')).toBeNull();
+});

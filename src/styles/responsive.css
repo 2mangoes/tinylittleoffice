@@ -215,7 +215,8 @@
     to-chrome[editing] .to-header {
       display: none;
     }
-    to-chrome[editing] .to-burger {
+    to-chrome[editing] .to-burger,
+    to-chrome[editing] .to-share-btn {
       top: max(0.25em, env(safe-area-inset-top));
       inset-inline-end: max(0.25em, env(safe-area-inset-right));
       opacity: 0.55;
@@ -223,9 +224,12 @@
       border-radius: 0.5em;
       box-shadow: 0 1px 0.375em rgb(0 0 0 / 16%);
     }
-    to-chrome[editing] .to-burger:is(:hover, :focus-visible),
-    :root[data-large] to-chrome[editing] .to-burger,
-    to-shell:has(dialog.to-drawer[open]) to-chrome[editing] .to-burger {
+    to-chrome[editing] .to-share-btn {
+      inset-inline-end: calc(max(0.25em, env(safe-area-inset-right)) + var(--to-touch) + 0.25em);
+    }
+    to-chrome[editing] :is(.to-burger, .to-share-btn):is(:hover, :focus-visible),
+    :root[data-large] to-chrome[editing] :is(.to-burger, .to-share-btn),
+    to-shell:has(dialog.to-drawer[open]) to-chrome[editing] :is(.to-burger, .to-share-btn) {
       opacity: 1;
     }
     /* The column's top keeps the menu button's room, so what is first in it (a row's menu, a stage's) is never under the
@@ -244,6 +248,9 @@
     to-chrome[editing] :is(.to-arrival, .to-other) {
       padding-inline-end: calc(3.5 * var(--to-nav-font));
     }
+    to-chrome[editing]:has(> .to-share-btn) :is(.to-arrival, .to-other) {
+      padding-inline-end: calc(3.5 * var(--to-nav-font) + var(--to-touch) + 0.25em);
+    }
     to-chrome[editing] .to-arrival-words {
       font-size: 0.9375rem;
     }
@@ -254,6 +261,7 @@
   @media print {
     .to-header,
     .to-burger,
+    .to-share-btn,
     to-bar,
     to-drawer,
     to-toast {

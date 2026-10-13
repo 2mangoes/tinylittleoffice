@@ -44,6 +44,7 @@
     to-bar,
     .to-header,
     .to-burger,
+    .to-share-btn,
     .to-drawer,
     .to-dialog,
     .to-doc-dialog,
@@ -1541,7 +1542,8 @@
   }
   /* The menu, at the top inline end of the column on every screen (where the words are not: they begin at the other
      side, and an iPhone's left edge is Safari's back swipe); on a card of its own once the header has stepped aside. */
-  .to-burger {
+  .to-burger,
+  .to-share-btn {
     position: absolute;
     top: calc((var(--to-header-h) - var(--to-touch)) / 2);
     inset-inline-end: var(--to-edge-e);
@@ -1575,8 +1577,16 @@
     border-color: transparent;
     background: transparent;
   }
+  /* Share, a document's, one touch width before the menu button; the header keeps room for both (Paul, 2026-10-13: "sharing is very important"). */
+  .to-share-btn {
+    inset-inline-end: calc(var(--to-edge-e) + var(--to-touch) + 0.375em);
+  }
+  to-chrome:has(> .to-share-btn) .to-header {
+    --to-burger-w: calc(var(--to-edge-e) + 2 * var(--to-touch) + 0.375em);
+  }
   /* The hamburger: no border (Paul, 2026-10-10), opaque so what slides under it is behind it. */
-  .to-burger {
+  .to-burger,
+  .to-share-btn {
     width: var(--to-touch);
     height: var(--to-touch);
     border-color: transparent;
@@ -2589,11 +2599,15 @@
   /* The hidden box that holds a phone's keyboard up between a tap that makes a document and its editor being drawn (kit/ui/chrome.ts startEditing). */
   .to-keyboard-hold {
     position: fixed;
-    inset: auto 0 0 auto;
+    inset: 0 auto auto 0;
     width: 1px;
     height: 1px;
     opacity: 0;
     overflow: hidden;
+    /* iOS draws the caret of a focused box itself, whatever its opacity: none to draw, and nothing under the keyboard for it to scroll into view (at the top start, never the bottom end). */
+    caret-color: transparent;
+    color: transparent;
+    pointer-events: none;
   }
 }
 @layer a11y {
