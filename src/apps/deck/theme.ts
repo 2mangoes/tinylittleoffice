@@ -2,8 +2,9 @@
  * How a deck looks: the paper, the ink, the accent (bullets, icons, links) and something drawn behind every
  * slide. A deck says which in its header ("theme: midnight"); the plain white one is the default. Every
  * colour is a hex, so tests/theme.unit.test.ts can hold each theme's ink to 4.5:1 on its paper and its
- * accent to 3:1 (the contrast test's floors). Decorations are drawn for the 960 by 600 slide and keep to
- * its edges, clear of the words.
+ * accent to 3:1 (the contrast test's floors). A decoration is drawn for the page it is on (a slide's 960 by 600,
+ * the taller page the editor lays a slide out on where a phone's type floor needs one, a poster, a booklet's page):
+ * it keeps to that page's edges, clear of the words, and is never stretched.
  */
 import { ACCENT, INK, MUTED } from '../../kit/draw/draw.ts';
 import { t } from '../../kit/core/i18n.ts';
@@ -22,8 +23,8 @@ export interface DeckTheme {
   accent: string;
   /** Links, where the accent is too faint to read as words. */
   link?: string;
-  /** SVG drawn behind everything, on a 960 by 600 slide. */
-  deco?: string;
+  /** SVG drawn behind everything, for a page w by h (a slide is 960 by 600). */
+  deco?: (w: number, h: number) => string;
 }
 
 /** Pieces of confetti: x, y, colour, shape (o circle, s square, t triangle), turn. */
@@ -45,12 +46,20 @@ const CONFETTI: [number, number, string, string, number][] = [
   [932, 520, '#38bdf8', 'o', 0],
   [938, 330, '#facc15', 't', 40],
 ];
-const piece = ([x, y, c, k, turn]: (typeof CONFETTI)[number]) =>
-  k === 'o'
-    ? `<circle cx="${x}" cy="${y}" r="7" fill="${c}"/>`
-    : `<g transform="translate(${x} ${y}) rotate(${turn})" fill="${c}">${k === 's' ? '<rect x="-6" y="-6" width="12" height="12" rx="2"/>' : '<path d="M0 -8 L7 6 L-7 6 Z"/>'}</g>`;
+/** Where a piece lands on a page w by h: near an edge, as far from that edge as on the slide; elsewhere, as far across. */
+const scatter = (v: number, size: number, full: number) => (v < 200 ? v : v > full - 200 ? size - (full - v) : Math.round((v * size) / full));
+const piece =
+  (w: number, h: number) =>
+  ([cx, cy, c, k, turn]: (typeof CONFETTI)[number]) => {
+    const [x, y] = [scatter(cx, w, 960), scatter(cy, h, 600)];
+    return k === 'o'
+      ? `<circle cx="${x}" cy="${y}" r="7" fill="${c}"/>`
+      : `<g transform="translate(${x} ${y}) rotate(${turn})" fill="${c}">${k === 's' ? '<rect x="-6" y="-6" width="12" height="12" rx="2"/>' : '<path d="M0 -8 L7 6 L-7 6 Z"/>'}</g>`;
+  };
 
-const wave = (y: number, fill: string, shift = 0) => `<path d="M${-shift} ${y} q60 -18 120 0 t120 0 t120 0 t120 0 t120 0 t120 0 t120 0 t120 0 t120 0 V600 H${-shift} Z" fill="${fill}"/>`;
+/** A band of waves across a page w wide, its crest at y, down to the foot h. */
+const wave = (w: number, h: number, y: number, fill: string, shift = 0) =>
+  `<path d="M${-shift} ${y} q60 -18 120 0${' t120 0'.repeat(Math.max(9, Math.ceil((w + shift) / 120)) - 1)} V${h} H${-shift} Z" fill="${fill}"/>`;
 
 /** The eleven themes, the plain one first; the key is what the header says. */
 export const THEMES: Record<string, DeckTheme> = {
@@ -61,7 +70,7 @@ export const THEMES: Record<string, DeckTheme> = {
     ink: '#0f172a',
     muted: '#475569',
     accent: '#1d4ed8',
-    deco: '<rect width="18" height="600" fill="#1e3a8a"/><rect x="18" width="5" height="600" fill="#60a5fa"/>',
+    deco: (_w, h) => `<rect width="18" height="${h}" fill="#1e3a8a"/><rect x="18" width="5" height="${h}" fill="#60a5fa"/>`,
   },
   ivory: {
     name: () => t('Ivory'),
@@ -69,7 +78,7 @@ export const THEMES: Record<string, DeckTheme> = {
     ink: '#1c1917',
     muted: '#57534e',
     accent: '#9a3412',
-    deco: '<rect x="64" y="30" width="832" height="2" fill="#1c1917"/><rect x="64" y="568" width="832" height="1" fill="#1c1917"/>',
+    deco: (w, h) => `<rect x="64" y="30" width="${w - 128}" height="2" fill="#1c1917"/><rect x="64" y="${h - 32}" width="${w - 128}" height="1" fill="#1c1917"/>`,
   },
   midnight: {
     name: () => t('Midnight'),
@@ -78,7 +87,7 @@ export const THEMES: Record<string, DeckTheme> = {
     ink: '#f1f5f9',
     muted: '#cbd5e1',
     accent: '#38bdf8',
-    deco: '<rect x="64" y="564" width="120" height="4" rx="2" fill="#38bdf8"/>',
+    deco: (_w, h) => `<rect x="64" y="${h - 36}" width="120" height="4" rx="2" fill="#38bdf8"/>`,
   },
   graphite: {
     name: () => t('Graphite'),
@@ -87,9 +96,9 @@ export const THEMES: Record<string, DeckTheme> = {
     ink: '#fafafa',
     muted: '#d4d4d8',
     accent: '#a3e635',
-    deco: '<rect x="900" y="28" width="32" height="32" rx="4" fill="#a3e635"/>',
+    deco: (w) => `<rect x="${w - 60}" y="28" width="32" height="32" rx="4" fill="#a3e635"/>`,
   },
-  confetti: { name: () => t('Confetti'), fun: true, paper: '#fffdf7', ink: '#1f2937', muted: '#4b5563', accent: '#db2777', link: '#be185d', deco: CONFETTI.map(piece).join('') },
+  confetti: { name: () => t('Confetti'), fun: true, paper: '#fffdf7', ink: '#1f2937', muted: '#4b5563', accent: '#db2777', link: '#be185d', deco: (w, h) => CONFETTI.map(piece(w, h)).join('') },
   sunset: {
     name: () => t('Sunset'),
     fun: true,
@@ -98,9 +107,19 @@ export const THEMES: Record<string, DeckTheme> = {
     muted: '#7c2d12',
     accent: '#ea580c',
     link: '#c2410c',
-    deco: '<circle cx="930" cy="650" r="200" fill="#fdba74" opacity=".55"/><circle cx="975" cy="610" r="120" fill="#fb7185" opacity=".5"/><circle cx="-20" cy="-30" r="90" fill="#fde68a" opacity=".7"/>',
+    deco: (w, h) =>
+      `<circle cx="${w - 30}" cy="${h + 50}" r="200" fill="#fdba74" opacity=".55"/><circle cx="${w + 15}" cy="${h + 10}" r="120" fill="#fb7185" opacity=".5"/><circle cx="-20" cy="-30" r="90" fill="#fde68a" opacity=".7"/>`,
   },
-  ocean: { name: () => t('Ocean'), fun: true, paper: '#f0f9ff', ink: '#0c4a6e', muted: '#075985', accent: '#0284c7', link: '#0369a1', deco: wave(566, '#bae6fd') + wave(582, '#7dd3fc', 60) },
+  ocean: {
+    name: () => t('Ocean'),
+    fun: true,
+    paper: '#f0f9ff',
+    ink: '#0c4a6e',
+    muted: '#075985',
+    accent: '#0284c7',
+    link: '#0369a1',
+    deco: (w, h) => wave(w, h, h - 34, '#bae6fd') + wave(w, h, h - 18, '#7dd3fc', 60),
+  },
   bubblegum: {
     name: () => t('Bubblegum'),
     fun: true,
@@ -109,7 +128,8 @@ export const THEMES: Record<string, DeckTheme> = {
     muted: '#831843',
     accent: '#c026d3',
     link: '#a21caf',
-    deco: '<circle cx="-30" cy="-30" r="115" fill="#f9a8d4" opacity=".55"/><circle cx="995" cy="635" r="160" fill="#d8b4fe" opacity=".55"/><circle cx="920" cy="70" r="22" fill="#f9a8d4" opacity=".7"/>',
+    deco: (w, h) =>
+      `<circle cx="-30" cy="-30" r="115" fill="#f9a8d4" opacity=".55"/><circle cx="${w + 35}" cy="${h + 35}" r="160" fill="#d8b4fe" opacity=".55"/><circle cx="${w - 40}" cy="70" r="22" fill="#f9a8d4" opacity=".7"/>`,
   },
   arcade: {
     name: () => t('Arcade'),
@@ -119,7 +139,8 @@ export const THEMES: Record<string, DeckTheme> = {
     ink: '#faf5ff',
     muted: '#e9d5ff',
     accent: '#f472b6',
-    deco: '<rect y="562" width="960" height="7" fill="#f472b6"/><rect y="574" width="960" height="7" fill="#22d3ee"/><rect y="586" width="960" height="7" fill="#facc15"/>',
+    deco: (w, h) =>
+      `<rect y="${h - 38}" width="${w}" height="7" fill="#f472b6"/><rect y="${h - 26}" width="${w}" height="7" fill="#22d3ee"/><rect y="${h - 14}" width="${w}" height="7" fill="#facc15"/>`,
   },
   chalkboard: {
     name: () => t('Chalkboard'),
@@ -129,7 +150,8 @@ export const THEMES: Record<string, DeckTheme> = {
     ink: '#f5f5f4',
     muted: '#d6d3d1',
     accent: '#fde047',
-    deco: '<rect x="6" y="6" width="948" height="588" fill="none" stroke="#92400e" stroke-width="12"/><rect x="12" y="12" width="936" height="576" fill="none" stroke="#78350f" stroke-width="2"/>',
+    deco: (w, h) =>
+      `<rect x="6" y="6" width="${w - 12}" height="${h - 12}" fill="none" stroke="#92400e" stroke-width="12"/><rect x="12" y="12" width="${w - 24}" height="${h - 24}" fill="none" stroke="#78350f" stroke-width="2"/>`,
   },
 };
 

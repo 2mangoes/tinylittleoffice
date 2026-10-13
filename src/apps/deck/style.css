@@ -25,7 +25,8 @@
     width: 100%;
     max-width: max(20rem, (var(--to-col-h) - 4.25rem) * var(--deck-w) / var(--deck-h));
     margin-inline: auto;
-    /* The canvas's margin (--deck-m, cqw) is a part of the slide's width: the stage is as wide as the canvas. */
+    /* Every length on the canvas in cqw (its margin --deck-m, the layout's type) is a part of the slide's width: the
+       stage is the container, as wide as the canvas, so 1cqw is a hundredth of the slide as the layout counts it. */
     container-type: inline-size;
   }
   .deck-stage[data-format='zine'],
@@ -47,7 +48,6 @@
     --deck-accent: var(--to-paper-accent);
     --deck-m: 6.67cqw;
     position: relative;
-    container-type: inline-size;
     width: 100%;
     aspect-ratio: var(--deck-w) / var(--deck-h);
     display: flex;
@@ -100,8 +100,9 @@
   .deck-title .tx li::before {
     content: none;
   }
-  /* The words take the room under the headline; more words than the shape holds make the canvas taller
-     rather than hide them (the rail shows the slide as it will really fit). */
+  /* The words take the room under the headline. Where the screen's floor (1rem) is above the layout's size, the
+     editor lays the slide out on a taller page that holds them at that size and --deck-h is its height: the canvas
+     is as tall as its words, and nothing is hidden (the rail shows the slide as it will be presented). */
   .deck-words-row {
     display: grid;
     grid-template-columns: minmax(0, 1fr);

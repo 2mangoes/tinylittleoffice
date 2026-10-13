@@ -244,6 +244,13 @@ export interface SlideSize {
   w?: number;
   h?: number;
   loud?: number;
+  /**
+   * The smallest type the screen allows, in the page's own units (the editor's canvas: a rem, which iOS needs
+   * so as not to zoom on focus, at the canvas's width); 0, the default, for the slide as it is shown and printed.
+   * No size is tried below it, a headline is never cut to two lines at it, and `fit.body.over` says how much
+   * taller the page must be to hold the words (tallEnough).
+   */
+  floor?: number;
 }
 
 /** Where everything on a slide goes, and how big the type is. */
@@ -254,7 +261,10 @@ export function layoutSlide(s: Slide, o: SlideSize = {}): SlideLayout {
   const k = (W / SW) * (o.loud ?? 1);
   const M = 64 * k;
   const PAD = 20 * k;
-  const sz = (list: number[]) => list.map((n) => n * k);
+  const floor = o.floor ?? 0;
+  const sz = (list: number[]) => [...new Set(list.map((n) => Math.max(n * k, floor)))];
+  // At a floor a headline takes the lines it needs: the page grows rather than cut it.
+  const most = (n: number) => (floor ? Infinity : n);
   const hasTitle = plainText(s.title).trim().length > 0 || s.title.some((r) => r.ic || r.fn !== undefined);
   const titleSpans = () => spansOf(s.title, noteNumbers());
   const titleNotes = s.title.filter((r) => r.fn !== undefined).length;
@@ -262,7 +272,7 @@ export function layoutSlide(s: Slide, o: SlideSize = {}): SlideLayout {
     if (!hasTitle) return { px: sizes[0], lines: [] as Span[][], smallest: false, cut: 0 };
     for (const px of sizes) {
       const lines = wrap(titleSpans(), w, px, true);
-      if (lines.length <= maxLines) return { px, lines, smallest: px === sizes[sizes.length - 1] && sizes.length > 1, cut: 0 };
+      if (lines.length <= most(maxLines)) return { px, lines, smallest: px === sizes[sizes.length - 1] && sizes.length > 1, cut: 0 };
     }
     const px = sizes[sizes.length - 1];
     const lines = wrap(titleSpans(), w, px, true);
@@ -292,7 +302,7 @@ export function layoutSlide(s: Slide, o: SlideSize = {}): SlideLayout {
   };
   // The notes themselves, at the foot, in small type; the words above make room for them.
   const notes = slideNotes(s);
-  const notePx = 15 * k;
+  const notePx = Math.max(15 * k, floor);
   const noteLines = notes.map((fn, i) => wrap([{ t: `${i + 1}`, sup: true }, { t: ' ' }, ...spansOf(noteRuns(fn))], W - 2 * M, notePx));
   const notesH = notes.length ? noteLines.reduce((a, l) => a + l.length * notePx * 1.3, 0) + 14 * k : 0;
   const foot = notes.length ? { x: M, y: H - 40 * k - notesH + 14 * k, w: W - 2 * M, h: notesH - 14 * k, lines: noteLines, px: notePx } : undefined;
@@ -308,7 +318,8 @@ export function layoutSlide(s: Slide, o: SlideSize = {}): SlideLayout {
         })),
       );
       const tall = (items: { lines: Span[][] }[]) => items.reduce((a, l) => a + l.lines.length * px * 1.3 + px * 0.45, 0);
-      const over = Math.max(0, ...laid.map((items, i) => tall(items) - cols[i].h));
+      // (What a sum of fractions leaves over is nothing.)
+      const over = Math.max(0, ...laid.map((items, i) => tall(items) - cols[i].h).map((n) => (n > 1e-6 ? n : 0)));
       if (!over || px === sizes[sizes.length - 1])
         return { px, smallest: px === sizes[sizes.length - 1] && laid.some((items) => items.length), over, cols: cols.map((c, i) => ({ x: c.x, y: c.y, w: c.w, h: c.h, items: laid[i] })) };
     }
@@ -360,6 +371,29 @@ export function layoutSlide(s: Slide, o: SlideSize = {}): SlideLayout {
   };
 }
 
+/**
+ * The page a slide is laid out on in the editor, where the screen's type floor is above the layout's sizes: the
+ * slide's own page while its words fit there, else as much taller as they need (a tall page gets more rows, not
+ * bigger type), in whole units. On a slide of words (one column, two, footnotes under them) the words' box grows with
+ * the page, so the second layout fits; on a title slide only a quarter of the growth reaches the subtitle, so the
+ * page grows again by what is still over, in proportion to what reached it.
+ */
+export function tallEnough(s: Slide, o: SlideSize = {}): { h: number; layout: SlideLayout } {
+  let h = o.h ?? SH;
+  let L = layoutSlide(s, { ...o, h });
+  let grew = 1;
+  for (let i = 0; i < 6 && L.fit.body.over > 0; i++) {
+    const over = L.fit.body.over;
+    const by = Math.ceil(over / grew);
+    const next = layoutSlide(s, { ...o, h: h + by });
+    // How much of the page's growth reached the words' box: the next step is in proportion to it.
+    grew = Math.min(1, Math.max(0.1, (over - next.fit.body.over) / by));
+    h += by;
+    L = next;
+  }
+  return { h, layout: L };
+}
+
 /** The steps a document on a slide builds up in, as its app counts them (AppDef.steps: a list an item, a trip a stop, a drawing a shape); 0 for one shown whole. */
 function subSteps(doc: Doc, s: Slide): number {
   const b = s.sub >= 0 ? doc.blocks[s.sub] : null;
@@ -394,9 +428,7 @@ export function slidePage(doc: Doc, s: Slide, look: Look, shown = Infinity, o: S
   const T = look.theme;
   const link = T.link ?? T.accent;
   // The plain theme is the page's own white; any other brings its paper and what is drawn on it.
-  let svg = look.themed
-    ? rect(0, 0, W, H, T.paper) + (T.deco && W === SW && H === SH ? T.deco : T.deco ? `<svg viewBox="0 0 ${SW} ${SH}" width="${W}" height="${H}" preserveAspectRatio="none">${T.deco}</svg>` : '')
-    : '';
+  let svg = look.themed ? rect(0, 0, W, H, T.paper) + (T.deco?.(W, H) ?? '') : '';
   if (L.icon) svg += iconAt(s.icon, L.icon, look.icon);
   L.title.lines.forEach(
     (ln, i) =>
@@ -848,7 +880,7 @@ export function closingPage(text: string, doc: Doc = parse(text), s: Settings = 
   const n = Number(/viewBox="0 0 (\d+)/.exec(code)?.[1] ?? 0);
   const size = 400;
   const title = doc.head.title || plainText(slidesOf(doc)[0]?.title ?? []).trim();
-  let svg = look.themed ? rect(0, 0, SW, SH, T.paper) + (T.deco ?? '') : '';
+  let svg = look.themed ? rect(0, 0, SW, SH, T.paper) + (T.deco?.(SW, SH) ?? '') : '';
   svg += rect((SW - size) / 2 - 16, 40, size + 32, size + 32, '#ffffff', 'rx="16"');
   svg += `<svg x="${(SW - size) / 2}" y="56" width="${size}" height="${size}" viewBox="0 0 ${n} ${n}" shape-rendering="crispEdges">${code.replace(/^<svg[^>]*>|<\/svg>$/g, '')}</svg>`;
   svg += line(SW / 2, 530, title ? t('Take this deck home: {title}', { title }) : t('Take this deck home'), { px: 24, bold: true, fill: T.ink, anchor: 'middle' });

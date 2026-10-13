@@ -63,7 +63,7 @@ const pic = (id: number, rel: string, name: string, frame: string) =>
 /** The pictures PowerPoint needs drawn: the theme's decoration, each icon used, and each document shown on a slide. */
 export function pictures(doc: Doc, slides: Slide[], look: Look): Record<string, { svg: string; w: number; h: number }> {
   const out: Record<string, { svg: string; w: number; h: number }> = {};
-  const deco = look.themed ? look.theme.deco : '';
+  const deco = look.themed ? look.theme.deco?.(SW, SH) : '';
   if (deco)
     out.theme = {
       w: SW * 2,

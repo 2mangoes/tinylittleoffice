@@ -10,6 +10,7 @@ import '../../../styles.css';
 import '../editor.ts';
 import type { ToDeckEditor } from '../editor.ts';
 import { templates } from '../templates.ts';
+import { tallEnough } from '../view.ts';
 import { tick, until } from '../../../../test/browser/helpers.ts';
 import { remScale } from '../../../kit/ui/zoom.ts';
 import { encodeDoc } from '../../../kit/core/codec.ts';
@@ -281,6 +282,106 @@ test('at phone width the bar is one row, nothing is wider than the screen, and t
   // Every box is 16px or more.
   for (const tx of el.querySelectorAll<HTMLElement>('.tx')) expect(parseFloat(getComputedStyle(tx).fontSize)).toBeGreaterThanOrEqual(16);
   await page.viewport(1100, 800);
+});
+
+/** Five long bullets in Ivory: at 26px they fit the slide; at a phone's floor of a rem they need a taller one. */
+const FIVE = `---
+theme: ivory
+---
+## What the pilot taught us
+
+- Teachers used the planner every week, most of them on a phone between classes
+- The weekly summary was opened far more often than the daily one
+- Families asked for the grades in their own language, not only in English
+- Setup took under ten minutes in every school that tried it this spring
+- What they missed most was a way to share one lesson plan with a colleague
+`;
+
+/**
+ * The canvas's cqw lengths are hundredths of the slide as the layout counts it: the stage is their container and is
+ * exactly as wide as the canvas (were the canvas the container, a cqw would be a hundredth of its content box, inside
+ * the margin, and the type 87% of the layout's). The headline at the layout's size, the icon's place 72 of 960, the
+ * margin (--deck-m) its share of the width; each no smaller than the floor the stylesheet sets.
+ */
+function cqwAsLaidOut(el: ToDeckEditor, margin: number) {
+  const canvas = el.querySelector<HTMLElement>('.deck-canvas')!;
+  const w = canvas.getBoundingClientRect().width;
+  const rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
+  const L = tallEnough(el.slides[el.cur], { floor: el.floor }).layout;
+  expect(Math.abs(parseFloat(getComputedStyle(box(el, 'title')).fontSize) - Math.max(rem, (L.titlePx / 960) * w))).toBeLessThan(0.5);
+  expect(Math.abs(parseFloat(getComputedStyle(box(el, 'words')).fontSize) - Math.max(rem, (L.bodyPx / 960) * w))).toBeLessThan(0.5);
+  expect(Math.abs(el.querySelector<HTMLElement>('.deck-pick')!.getBoundingClientRect().width - Math.max(2 * rem, (72 / 960) * w))).toBeLessThan(0.5);
+  expect(Math.abs(parseFloat(getComputedStyle(canvas).paddingLeft) - (margin / 100) * w)).toBeLessThan(0.5);
+}
+
+test('on a phone a slide holds its words: the canvas is as tall as they need at a rem, and the theme is drawn for that page (Paul, 2026-10-13)', async () => {
+  await page.viewport(390, 844);
+  try {
+    const { el } = await editor(FIVE);
+    await until(() => el.floor > 0);
+    await el.updateComplete;
+    await tick();
+    const rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
+    const canvas = el.querySelector<HTMLElement>('.deck-canvas')!;
+    const words = box(el, 'words');
+    expect(parseFloat(getComputedStyle(words).fontSize)).toBeGreaterThanOrEqual(rem - 0.01);
+    const c = canvas.getBoundingClientRect();
+    expect(c.height / c.width).toBeGreaterThan(600 / 960 + 0.05);
+    // The last bullet ends inside the padding's edge: nothing is cut.
+    const pad = parseFloat(getComputedStyle(canvas).paddingBottom);
+    const items = words.querySelectorAll('li');
+    const lastBottom = items[items.length - 1].getBoundingClientRect().bottom;
+    expect(lastBottom).toBeLessThanOrEqual(c.bottom - pad + 0.5);
+    // The decoration names the taller page, and its bottom rule sits under the words, inside the padding.
+    const h = Number(canvas.style.getPropertyValue('--deck-h'));
+    expect(h).toBeGreaterThan(600);
+    const deco = decodeURIComponent(canvas.style.getPropertyValue('--deck-deco'));
+    expect(deco).toContain(`viewBox="0 0 960 ${h}"`);
+    expect(deco).toContain(`y="${h - 32}"`);
+    const rule = c.top + ((h - 32) / h) * c.height;
+    expect(rule).toBeGreaterThan(lastBottom);
+    expect(rule).toBeGreaterThan(c.bottom - pad);
+    // Every box is still 16px or more.
+    for (const tx of el.querySelectorAll<HTMLElement>('.tx')) expect(parseFloat(getComputedStyle(tx).fontSize)).toBeGreaterThanOrEqual(16);
+    // The rail draws the slide as it is presented: 960 by 600.
+    expect(el.querySelector('.deck-thumb svg')!.getAttribute('viewBox')).toBe('0 0 960 600');
+    cqwAsLaidOut(el, 5);
+  } finally {
+    await page.viewport(1100, 800);
+  }
+  // A wide window: the slide's own shape, the words at the layout's 26px scaled to the canvas's width (a cqw is a hundredth of the slide).
+  const { el } = await editor(FIVE);
+  await until(() => el.floor > 0);
+  await el.updateComplete;
+  await tick();
+  const canvas = el.querySelector<HTMLElement>('.deck-canvas')!;
+  const c = canvas.getBoundingClientRect();
+  expect(Math.abs(c.height / c.width - 600 / 960)).toBeLessThan(0.01);
+  expect(canvas.style.getPropertyValue('--deck-h')).toBe('600');
+  expect(Math.abs(parseFloat(getComputedStyle(box(el, 'words')).fontSize) - (26 / 960) * c.width)).toBeLessThan(0.5);
+  cqwAsLaidOut(el, 6.67);
+});
+
+test("on a phone every slide of every template holds its words: two columns one above the other, footnotes at the foot, nothing past the canvas's edge", async () => {
+  await page.viewport(390, 844);
+  try {
+    const cut: string[] = [];
+    for (const tp of templates()) {
+      const { el } = await editor(tp.doc);
+      for (let i = 0; i < el.slides.length; i++) {
+        el.go(i);
+        await el.updateComplete;
+        // A few frames: what the observer saw change is measured on the next.
+        for (let f = 0; f < 3; f++) await new Promise(requestAnimationFrame);
+        await el.updateComplete;
+        const c = el.querySelector<HTMLElement>('.deck-canvas')!;
+        if (c.scrollHeight > c.clientHeight + 1) cut.push(`${tp.id} ${i + 1}: ${c.scrollHeight - c.clientHeight}px`);
+      }
+    }
+    expect(cut).toEqual([]);
+  } finally {
+    await page.viewport(1100, 800);
+  }
 });
 
 test("at a wide window the speaker notes take the slide's width under it, and the rail stays at the right edge, its top level with the slide", async () => {
