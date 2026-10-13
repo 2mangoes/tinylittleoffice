@@ -32,7 +32,7 @@ import { applyAll, parse, plainText, write, type Block, type Doc, type Op } from
 import { cmdMenu, cmdTool } from '../../kit/ui/bar.ts';
 import { drawnIn, runKey } from '../../kit/core/commands.ts';
 import TRIP, { AT } from './commands.ts';
-import { docToHtml, GENERATOR, htmlToBlocks } from '../../kit/text/clipboard.ts';
+import { clipText, docToHtml, GENERATOR, htmlToBlocks } from '../../kit/text/clipboard.ts';
 import { DocElement, type Entry } from '../../kit/core/element.ts';
 import { icon, UI } from '../../kit/draw/icons.ts';
 import { language, t } from '../../kit/core/i18n.ts';
@@ -725,7 +725,7 @@ export class ToTripEditor extends DocElement<TripView> {
   private placesOf(data: Clip) {
     const ours = data.html.includes(`content="${GENERATOR}"`);
     const fromHtml = !ours && data.html.trim() ? placesIn({ head: {}, blocks: htmlToBlocks(data.html) }) : [];
-    return fromHtml.length ? fromHtml : placesIn(parse(data.text));
+    return fromHtml.length ? fromHtml : placesIn(parse(clipText(data)));
   }
   /** A paste into a stop's words (chosen stops are the rows controller's): places are stops after it; words alone are its own. */
   private onPaste = (e: ClipboardEvent) => {

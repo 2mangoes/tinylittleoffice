@@ -32,7 +32,7 @@ import { cmdMenu, cmdTool, tool } from '../../kit/ui/bar.ts';
 import { coarse, drawnIn, runKey } from '../../kit/core/commands.ts';
 import { BOLD, CODE, FOOTNOTE, HIGHLIGHT, INDENT, ITALIC, LINK, OUTDENT, STRIKE, UNDERLINE } from '../../kit/text/text-commands.ts';
 import COMMANDS, { EDIT, SHOW } from './commands.ts';
-import { docToHtml, linkToFence, pasteFrom } from '../../kit/text/clipboard.ts';
+import { docToHtml, linkToFence, pasteFrom, plainOf } from '../../kit/text/clipboard.ts';
 import { encodeDoc } from '../../kit/core/codec.ts';
 import { editFence, editTable, makeDoc, newTable } from '../../kit/ui/doc-dialog.ts';
 import { pageSvg } from '../../kit/draw/draw.ts';
@@ -526,11 +526,11 @@ export class ToDeckEditor extends DocElement<Slide[]> {
     this.cur = d.at;
     this.focusBox('title');
   }
-  /** What chosen slides put on the clipboard: their blocks as TLO, the rules between them kept, and as HTML with our marker. */
+  /** What chosen slides put on the clipboard: their words, a rule between slides, and our HTML with the exact TLO in it. */
   private copyRange(span: RowSpan): Clip {
     const [lo, hi] = this.idsOf(span);
     const blocks = slideBlocks(this.doc, lo, hi);
-    return { text: write({ head: {}, blocks }), html: docToHtml(blocks) };
+    return { text: plainOf(blocks), html: docToHtml(blocks) };
   }
   /** Slides pasted after slide `after`: our own copy comes back as the slides it was; anything else is read as a slide's blocks (a line of words, its headline). */
   private pasteSlides(data: Clip, after: number) {

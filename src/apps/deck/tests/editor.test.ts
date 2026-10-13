@@ -575,15 +575,16 @@ test('chosen slides: Delete takes them out, Alt+arrows move them, Mod+D duplicat
   expect(el.cur).toBe(4);
 });
 
-test('copy, cut and paste of chosen slides: TLO with the rules between, and our HTML; paste puts them after the range', async () => {
+test('copy, cut and paste of chosen slides: the words with the rules between, and our HTML with the TLO; paste puts them after the range', async () => {
   const { el, last } = await editor(FOUR);
   thumbs(el)[0].click();
   await settle(el);
   key(rail(el), 'ArrowDown', { shiftKey: true });
   await settle(el);
   const dt = await clip(rail(el), 'copy');
-  expect(dt.getData('text/plain')).toBe('## A\n\n- a\n\n---\n\n## B\n');
+  expect(dt.getData('text/plain')).toBe('A\n\n- a\n\n---\n\nB\n');
   expect(dt.getData('text/html')).toContain('content="TinyLittleOffice"');
+  expect(dt.getData('text/html')).toContain('<meta name="tlo" content="## A\n\n- a\n\n---\n\n## B\n">');
   expect(dt.getData('text/html')).toContain('<hr>');
   thumbs(el)[3].click();
   await settle(el);
@@ -595,7 +596,7 @@ test('copy, cut and paste of chosen slides: TLO with the rules between, and our 
   await settle(el);
   const cut = await clip(rail(el), 'cut');
   await settle(el);
-  expect(cut.getData('text/plain')).toBe('## C\n');
+  expect(cut.getData('text/plain')).toBe('C\n');
   expect(titles(last())).toEqual(['A', 'B', 'D', 'A', 'B']);
 });
 

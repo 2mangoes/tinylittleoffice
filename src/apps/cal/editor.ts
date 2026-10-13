@@ -24,7 +24,7 @@ import { applyAll, dayToYmd, family, parse, placeFamily, runLength, write, ymdSt
 import { btn, cmdBtn, cmdMenu, dateNav } from '../../kit/ui/bar.ts';
 import { drawnIn, labelOf, run, runKey } from '../../kit/core/commands.ts';
 import COMMANDS, { AT } from './commands.ts';
-import { docToHtml, GENERATOR, htmlToBlocks } from '../../kit/text/clipboard.ts';
+import { clipText, docToHtml, GENERATOR, htmlToBlocks } from '../../kit/text/clipboard.ts';
 import type { ContextEntry } from '../../kit/ui/context.ts';
 import type { ToDialog } from '../../kit/ui/dialog.ts';
 import { DocElement, firstAt, type Entry } from '../../kit/core/element.ts';
@@ -766,7 +766,7 @@ export class ToCalEditor extends DocElement<CalView> {
   private blocksOf(data: Clip): Block[] {
     const theirs = data.html.trim() && !data.html.includes(`content="${GENERATOR}"`);
     const fromHtml = theirs ? htmlToBlocks(data.html) : [];
-    return fromHtml.length ? fromHtml : parse(data.text.replace(/\r\n?/g, '\n')).blocks;
+    return fromHtml.length ? fromHtml : parse(clipText(data).replace(/\r\n?/g, '\n')).blocks;
   }
   /** Pasted onto chosen tasks (in their place), after a task (`at`), or onto the month (on `day`, or on their own dates). */
   private pasteData(data: Clip, s: RowSpan | null, day?: number, after?: number) {

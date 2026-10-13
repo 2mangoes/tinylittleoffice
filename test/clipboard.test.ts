@@ -1,21 +1,47 @@
-// The clipboard without a browser: copy writes TLO and marked HTML; paste picks its route (our own HTML, a
-// Tiny Little Office link, a web address, pasted Markdown, plain words) and fits what it finds to the editor's shape.
+// The clipboard without a browser: copy writes the words alone and our marked HTML with the TLO inside it; paste picks
+// its route (our own HTML, a Tiny Little Office link, a web address, pasted Markdown, plain words) and fits what it
+// finds to the editor's shape.
 // (htmlToBlocks needs a DOM parser; it is tested in test/browser/text.test.ts.)
 import { expect, test } from 'vitest';
 import { parse, write } from '../src/doc/index.ts';
-import { copyData, docToHtml, fitBlocks, linkToFence, pasteFrom, runsToHtml, type Pasted } from '../src/kit/text/clipboard.ts';
+import { clipText, copyData, docToHtml, fitBlocks, linkToFence, pasteFrom, plainOf, runsToHtml, type Pasted } from '../src/kit/text/clipboard.ts';
 import { lookup } from '../src/kit/core/app.ts';
 import { encodeDoc } from '../src/kit/core/codec.ts';
 import { caret } from '../src/kit/text/textops.ts';
 
 const B = parse('# Head\n\nSome **bold** [words](https://x.y) :star: and^[a note] more.\n\n- a\n  1. b\n\n---\n\n![pic](https://p.q/r.png)\n').blocks;
 
-test('copy: the selected blocks as TLO, the first and last cut at the selection, and as HTML with our marker', () => {
+test('copy: the selected blocks as words, the first and last cut at the selection, and as HTML with our marker and the exact TLO', () => {
   const { text, html } = copyData(B, { anchor: { block: 0, offset: 2 }, focus: { block: 1, offset: 9 } });
-  expect(text).toBe('# ad\n\nSome **bold**\n');
+  expect(text).toBe('ad\n\nSome bold\n');
   expect(html.startsWith('<meta name="generator" content="TinyLittleOffice">')).toBe(true);
   expect(html).toContain('<h1>ad</h1>');
   expect(html).toContain('<p>Some <b>bold</b></p>');
+  expect(clipText({ text, html })).toBe('# ad\n\nSome **bold**\n');
+  // Our own paste reads that TLO, never the words.
+  expect(pasteFrom({ text, html }, 'doc')).toEqual({ blocks: parse('# ad\n\nSome **bold**\n').blocks });
+  // Words from within one block: exactly those, their spaces and no line break; the marks only in the HTML.
+  const code = parse('- See [`https://x.y/llms.txt`](https://x.y/llms.txt) first\n').blocks;
+  const part = copyData(code, { anchor: { block: 0, offset: 4 }, focus: { block: 0, offset: 24 } });
+  expect(part.text).toBe('https://x.y/llms.txt');
+  expect(part.html).toContain('<a href="https://x.y/llms.txt"><code>https://x.y/llms.txt</code></a>');
+  const whole = copyData(code, { anchor: { block: 0, offset: 0 }, focus: { block: 0, offset: 30 } });
+  expect(whole.text).toBe('See https://x.y/llms.txt first');
+  expect(clipText(whole)).toBe('- See [`https://x.y/llms.txt`](https://x.y/llms.txt) first\n');
+  // Across blocks, the item keeps its marker.
+  const two = copyData([...code, ...parse('Then.\n').blocks], { anchor: { block: 0, offset: 0 }, focus: { block: 1, offset: 5 } });
+  expect(two.text).toBe('- See https://x.y/llms.txt first\n\nThen.\n');
+  expect(clipText(two)).toBe('- See [`https://x.y/llms.txt`](https://x.y/llms.txt) first\n\nThen.\n');
+});
+
+test('plainOf: the words a person reads, items with their markers, numbers and boxes, cells by tabs, a connection with an arrow, a rule', () => {
+  const blocks = parse(
+    '# Head :star:\n\nSome **bold** [words](https://x.y) and^[a note] more.\n\n- [ ] a\n  1. b\n  2. c\n- [x] d\n\n---\n\nA | N:number\n--- | ---\na | 1\n\n~ A -> B: likes\n\n```sheet\nX | Y\n```\n',
+  ).blocks;
+  expect(plainOf(blocks)).toBe('Head \n\nSome bold words and (a note) more.\n\n- [ ] a\n  1. b\n  2. c\n- [x] d\n\n---\n\nA\tN\na\t1\n\nA → B: likes\n\nX | Y\n');
+  // HTML that is not ours, or ours from before the TLO rode in it, reads its text.
+  expect(clipText({ text: 'plain', html: '<p>plain</p>' })).toBe('plain');
+  expect(clipText({ text: '# T\n', html: '<meta name="generator" content="TinyLittleOffice"><h1>T</h1>' })).toBe('# T\n');
 });
 
 test('docToHtml: lists nest by depth, chips and links come through; a picture is words with a link', () => {

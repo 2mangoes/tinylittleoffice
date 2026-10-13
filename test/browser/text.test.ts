@@ -347,18 +347,19 @@ test('htmlToBlocks reads tags, styles, lists, headings, pictures (as words with 
   ]);
 });
 
-test('copy writes the selection as TLO and as HTML with the marker; cut takes it out too', async () => {
+test('copy writes the selection as words and as HTML with the marker and the TLO; cut takes it out too', async () => {
   const h = await mount('# Head\n\nSome **bold** words\n', 'doc', { anchor: { block: 0, offset: 2 }, focus: { block: 1, offset: 9 } });
   const dt = new DataTransfer();
   h.el.tx.dispatchEvent(new ClipboardEvent('copy', { clipboardData: dt, bubbles: true, cancelable: true }));
-  expect(dt.getData('text/plain')).toBe('# ad\n\nSome **bold**\n');
+  expect(dt.getData('text/plain')).toBe('ad\n\nSome bold\n');
+  expect(dt.getData('text/html')).toContain('<meta name="tlo" content="# ad\n\nSome **bold**\n">');
   expect(dt.getData('text/html')).toContain('<meta name="generator" content="TinyLittleOffice">');
   expect(dt.getData('text/html')).toContain('<p>Some <b>bold</b></p>');
   expect(h.tlo).toBe('# Head\n\nSome **bold** words\n');
   const cut = new DataTransfer();
   h.el.tx.dispatchEvent(new ClipboardEvent('cut', { clipboardData: cut, bubbles: true, cancelable: true }));
   await h.el.updateComplete;
-  expect(cut.getData('text/plain')).toBe('# ad\n\nSome **bold**\n');
+  expect(cut.getData('text/plain')).toBe('ad\n\nSome bold\n');
   expect(h.tlo).toBe('# He words\n');
   expect(h.el.sel).toEqual(caret(0, 2));
 });

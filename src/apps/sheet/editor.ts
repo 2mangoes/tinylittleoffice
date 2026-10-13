@@ -40,7 +40,7 @@ import { contextOf, drawnIn, runKey } from '../../kit/core/commands.ts';
 import COMMANDS from './commands.ts';
 import type { TextOps, ToText, Sel } from '../../kit/text/text.ts';
 import { type ChartKind } from '../../kit/draw/chart.ts';
-import { docToHtml, GENERATOR, htmlToBlocks } from '../../kit/text/clipboard.ts';
+import { clipText, docToHtml, GENERATOR, htmlToBlocks } from '../../kit/text/clipboard.ts';
 import { type ContextEntry, type ToContext } from '../../kit/ui/context.ts';
 import { DocElement, type Entry } from '../../kit/core/element.ts';
 import { icon, UI } from '../../kit/draw/icons.ts';
@@ -401,7 +401,7 @@ export class ToSheetEditor extends DocElement<SheetView> {
     const html = data.html ?? '';
     const table = /<table[\s>]/i.test(html);
     if (html.includes(`content="${GENERATOR}"`)) {
-      const blocks = parse(text).blocks;
+      const blocks = parse(clipText({ text, html })).blocks;
       const t = blocks.find((b) => b.k === 'table');
       if (t) return { text: tableCells(t), ours: null };
       // Another sheet's copy: its text is the cells already.

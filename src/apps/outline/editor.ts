@@ -28,7 +28,7 @@ import { BOLD, CODE, FOOTNOTE, HIGHLIGHT, ITALIC, LINK, STRIKE, UNDERLINE } from
 import type { Handoff } from '../../kit/core/app.ts';
 import COMMANDS from './commands.ts';
 import { appOf } from '../../kit/core/apps.ts';
-import { docToHtml, GENERATOR, htmlToBlocks } from '../../kit/text/clipboard.ts';
+import { clipText, docToHtml, GENERATOR, htmlToBlocks, plainOf } from '../../kit/text/clipboard.ts';
 import type { ContextEntry } from '../../kit/ui/context.ts';
 import { lastCopied, Rows, type Clip, type RowItem, type RowRange, type RowSpan } from '../../kit/text/rows.ts';
 import { decodeDoc, encodeDoc, isSealed } from '../../kit/core/codec.ts';
@@ -399,10 +399,10 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
 
   /* ---------- the clipboard ---------- */
 
-  /** What chosen rows put on the clipboard: their blocks as TLO, the shallowest at the margin, and as HTML. */
+  /** What chosen rows put on the clipboard: their words as items, the shallowest at the margin, and our HTML with the TLO in it. */
   private clip(s: RowSpan): Clip {
     const blocks = copySpan(this.doc, this.view, s);
-    return { text: write({ head: {}, blocks }), html: docToHtml(blocks) };
+    return { text: plainOf(blocks), html: docToHtml(blocks) };
   }
   /**
    * A paste into a row (chosen rows are the rows controller's): lines or list items go in as items after the row's
@@ -427,7 +427,7 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
   private pasteData(data: Clip, target: RowSpan | number | null) {
     const html = !data.html.includes(`content="${GENERATOR}"`) && data.html.trim() ? htmlToBlocks(data.html) : [];
     const t0 = target ?? (this.itemAt(this.sel) ? this.sel : null);
-    const r = pasteBlocks(this.doc, this.view, html.length ? html : pasteText(data.text), t0);
+    const r = pasteBlocks(this.doc, this.view, html.length ? html : pasteText(clipText(data)), t0);
     if (!r) return;
     this.edit(r.ops);
     this.rows.release();

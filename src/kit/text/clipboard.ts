@@ -1,9 +1,13 @@
 /**
- * The editor's clipboard. Copy and cut write the selected blocks as TLO
- * (text/plain) and as HTML with a generator marker (text/html), so a paste
- * into another Tiny Little Office document comes back whole and a paste into
- * anything else arrives with its marks. Paste reads, in order: our own HTML
- * (the marker) → the TLO, or for words from within one block their exact
+ * The editor's clipboard. Copy and cut write the selected blocks as the words
+ * a person reads (text/plain: no mark in them, an item with its marker, a
+ * table's cells by tabs) and as HTML with a generator marker (text/html) that
+ * carries the exact TLO in a meta, so a paste into another Tiny Little Office
+ * document comes back whole, a paste into a rich editor arrives with its marks,
+ * and a paste into a text field, a chat or a search box gets the words alone
+ * (Paul, 2026-10-13: an address marked as code came over with its backticks,
+ * and a linked item as "- [`words`](address)"). Paste reads, in order: our own HTML
+ * (the marker) → the TLO it carries, or for words from within one block their exact
  * runs; a Tiny Little Office link alone → a fence holding that document;
  * any other web address is words, as typed; HTML from elsewhere → blocks (tags and styles to marks, lists to items from
  * Google Docs, Word, Apple Notes, Notion and Slack, Docs'
@@ -25,8 +29,76 @@ import { MARKS, sliceBlocks, type Sel, type Shape } from './textops.ts';
 /** The mark our own HTML carries. */
 export const GENERATOR = 'TinyLittleOffice';
 const MARKER = `<meta name="generator" content="${GENERATOR}">`;
+/** The meta our HTML carries the exact TLO of what was copied in, for our own paste: text/plain holds the words alone. */
+const TLO = 'tlo';
 
 const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+const unesc = (s: string) =>
+  s
+    .replace(/&quot;/g, '"')
+    .replace(/&gt;/g, '>')
+    .replace(/&lt;/g, '<')
+    .replace(/&amp;/g, '&');
+
+/** A run's words as a person reads them: the marks dropped, a footnote's note in parentheses, an icon left out. */
+const plainRun = (r: Run): string => (r.ic ? '' : r.fn !== undefined ? ` (${r.fn})` : r.t);
+/** Runs as the words alone. */
+const plainRuns = (runs: Run[]): string => runs.map(plainRun).join('');
+const ARROW: Record<string, string> = { '->': '→', '<-': '←', '<->': '↔', '--': '–' };
+
+/**
+ * Blocks as text/plain holds them: what a person pasting into a text field, a chat or a search box expects. A
+ * heading's, a paragraph's and a note's words alone; an item with its depth, its marker (numbered as it is) and its
+ * box; a table's cells by tabs, a line a row; a fence's body; a connection as words with an arrow; a rule as "---".
+ * Items follow one another a line each; anything else has a blank line before it; the last line ends, as lines
+ * do. The exact document rides in our HTML (docToHtml), so none of this is read back by our own paste.
+ */
+export function plainOf(blocks: Block[]): string {
+  const out: string[] = [];
+  const counts: number[] = [];
+  let prevItem = false;
+  for (const b of blocks) {
+    const item = b.k === 'li';
+    if (out.length) out.push(item && prevItem ? '\n' : '\n\n');
+    if (!item) counts.length = 0;
+    switch (b.k) {
+      case 'h':
+      case 'p':
+      case 'quote':
+        out.push(plainRuns(b.runs));
+        break;
+      case 'li': {
+        counts.length = b.depth + 1;
+        counts[b.depth] = b.ord && prevItem ? (counts[b.depth] ?? 0) + 1 : 1;
+        out.push(`${'  '.repeat(b.depth)}${b.ord ? `${counts[b.depth]}. ` : '- '}${b.done === undefined ? '' : b.done ? '[x] ' : '[ ] '}${plainRuns(b.runs)}`);
+        break;
+      }
+      case 'hr':
+        out.push('---');
+        break;
+      case 'table':
+        out.push([b.cols.map((c) => c.name), ...b.rows].map((r) => r.join('\t')).join('\n'));
+        break;
+      case 'fence':
+        out.push(b.body.replace(/\n$/, ''));
+        break;
+      case 'edge':
+        out.push(`${b.from} ${ARROW[b.dir] ?? '→'} ${b.to}${b.label ? `: ${b.label}` : ''}`);
+        break;
+    }
+    prevItem = item;
+  }
+  return out.length ? out.join('') + '\n' : '';
+}
+
+/** The exact TLO our HTML carries, or null for HTML that is not ours or is from before it carried one. */
+function ownTlo(html: string): string | null {
+  const m = html.includes(MARKER) ? html.match(new RegExp(`<meta name="${TLO}" content="([^"]*)">`)) : null;
+  return m ? unesc(m[1]) : null;
+}
+
+/** What a paste reads as TLO: our own copy exactly as it was, else the text as it came. */
+export const clipText = (data: { text: string; html: string }): string => ownTlo(data.html) ?? data.text;
 
 /** Runs as HTML: marks nested, an icon and a footnote as their own elements, a line break as <br>. */
 export function runsToHtml(runs: Run[]): string {
@@ -47,9 +119,9 @@ export function runsToHtml(runs: Run[]): string {
     .join('');
 }
 
-/** Blocks as HTML, our marker first: what the clipboard's text/html holds. */
+/** Blocks as HTML, our marker first and the exact TLO in a meta after it: what the clipboard's text/html holds. */
 export function docToHtml(blocks: Block[]): string {
-  const out: string[] = [MARKER];
+  const out: string[] = [MARKER, `<meta name="${TLO}" content="${esc(write({ head: {}, blocks }))}">`];
   let list: { ord: boolean; depth: number }[] = [];
   const closeLists = (to: number) => {
     while (list.length > to) out.push(list.pop()!.ord ? '</ol>' : '</ul>');
@@ -95,17 +167,15 @@ export function docToHtml(blocks: Block[]): string {
 }
 
 /**
- * What copy puts on the clipboard for a selection: the TLO, and the HTML.
- * Words from within one block carry their runs exactly as well, in a meta
- * of our HTML, marks and all. (The TLO says the spaces at a line's ends
- * too, "a sentence\ ", docs/kernel.md §2, so a paste of the text alone
- * keeps them.)
+ * What copy puts on the clipboard for a selection: the words alone (plainOf; words from within one block exactly,
+ * the spaces at their ends and all, with no line break after), and our HTML, which carries the exact TLO. Words
+ * from within one block carry their runs exactly as well, in a meta of our HTML, marks and all.
  */
 export function copyData(blocks: Block[], sel: Sel): { text: string; html: string } {
   const picked = sliceBlocks(blocks, sel);
   const one = picked.length === 1 && isText(picked[0]) ? picked[0] : null;
   const html = docToHtml(picked);
-  return { text: write({ head: {}, blocks: picked }), html: one ? html.replace(MARKER, `${MARKER}\n<meta name="${RUNS}" content="${esc(JSON.stringify(one.runs))}">`) : html };
+  return { text: one ? plainRuns(one.runs) : plainOf(picked), html: one ? html.replace(MARKER, `${MARKER}\n<meta name="${RUNS}" content="${esc(JSON.stringify(one.runs))}">`) : html };
 }
 
 /** What the clipboard holds or is to hold: the words (our TLO), and the HTML (ours carries the marker). */
@@ -500,7 +570,7 @@ export function pasteFrom(data: { text: string; html: string }, shape: Shape): P
   const text = data.text.replace(/\r\n?/g, '\n');
   const html = data.html;
   if (html.includes(MARKER)) {
-    const blocks = parse(text).blocks;
+    const blocks = parse(clipText({ text, html })).blocks;
     // Words from within one block: their own runs, spaces at the ends and all.
     const runs = blocks.length <= 1 ? carriedRuns(html) : null;
     if (runs) return fitBlocks([{ ...(blocks[0] && isText(blocks[0]) ? blocks[0] : { k: 'p' as const }), runs }], shape);

@@ -425,18 +425,18 @@ test("§1/§6 a card in hand: a tap takes it, the bar under it is in the standar
   docDialog()!.querySelector<HTMLButtonElement>('.to-doc-dialog-cancel')!.click();
 });
 
-test('§1 Mod+C, Mod+X, Mod+V on a card in hand: TLO and our HTML; a cut takes it out, a paste puts it in after the card in hand', async () => {
+test('§1 Mod+C, Mod+X, Mod+V on a card in hand: its document’s text and our HTML with the TLO; a cut takes it out, a paste puts it in after the card in hand', async () => {
   const { el, last } = await editor(`One\n\n${PIC}\n\nTwo\n`);
   await until(() => !!card(el, 1));
   card(el, 1).focus();
   await until(() => el.cardAt === 1);
   const { ev, dt } = clip(card(el, 1), 'copy');
   expect(ev.defaultPrevented).toBe(true);
-  expect(dt.getData('text/plain')).toBe(`${PIC}\n`);
+  expect(dt.getData('text/plain')).toBe('A | B\n--- | ---\n1 | 2\n');
   expect(dt.getData('text/html')).toContain('<meta name="generator" content="TinyLittleOffice">');
   expect(dt.getData('text/html')).toContain('<pre data-lang="sheet">');
   const cut = clip(card(el, 1), 'cut');
-  expect(cut.dt.getData('text/plain')).toBe(`${PIC}\n`);
+  expect(cut.dt.getData('text/plain')).toBe('A | B\n--- | ---\n1 | 2\n');
   await until(() => last() === 'One\n\nTwo\n');
   // Into the words, an ordinary paste; onto a card in hand, after it.
   const { el: el2, last: last2 } = await editor(`One\n\n${PIC}\n\nTwo\n`);

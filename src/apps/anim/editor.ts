@@ -27,7 +27,7 @@ import { DocElement, type DocChange, type Entry } from '../../kit/core/element.t
 import { t } from '../../kit/core/i18n.ts';
 import { type ContextEntry, type ToContext } from '../../kit/ui/context.ts';
 import type { ToDialog } from '../../kit/ui/dialog.ts';
-import { GENERATOR, docToHtml, htmlToBlocks } from '../../kit/text/clipboard.ts';
+import { clipText, GENERATOR, docToHtml, htmlToBlocks } from '../../kit/text/clipboard.ts';
 import { toast } from '../../kit/core/say.ts';
 import { pinchZoom } from '../../kit/ui/pinch.ts';
 import { applyAll, parse, write, type Doc, type Op } from '../../doc/index.ts';
@@ -428,7 +428,8 @@ export class ToAnimEditor extends DocElement<AnimView> {
   }
   /** Pasted: shapes (a motion's or a drawing's) beside where they were, moving as they did; or words as a text in the middle. */
   private pasteData(text: string, html = '') {
-    let doc = text.trim() ? parse(text.replace(/\r\n?/g, '\n')) : null;
+    const tlo = clipText({ text, html });
+    let doc = tlo.trim() ? parse(tlo.replace(/\r\n?/g, '\n')) : null;
     if (!doc && html.includes(GENERATOR)) doc = { head: {}, blocks: htmlToBlocks(html) };
     if (!doc) return;
     let { ops, sel } = pasteMotion(this.doc, doc);
