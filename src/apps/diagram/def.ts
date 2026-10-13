@@ -68,7 +68,10 @@ export default defineApp({
   view: (doc, opts) => [diagramPage(parse(doc), opts?.upTo, opts?.thumb)],
   text: (doc) => diagramText(parse(doc)),
   // Presented on a slide, a shape a step: the picture builds as its kind lays it out.
-  steps: (doc) => layout(parse(doc)).shapes.length,
+  steps: (doc) => {
+    const d = layout(parse(doc));
+    return d.steps?.length ?? d.shapes.length;
+  },
   exports: [{ ext: 'svg', label: () => t('Picture (SVG)'), mime: 'image/svg+xml', shows: 'own', build: (doc) => utf8(diagramSvg(parse(doc))) }],
   // Its picture as shapes to move about by hand.
   handoffs: [

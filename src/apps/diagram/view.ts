@@ -22,6 +22,8 @@ export interface Diagram {
   shapes: DShape[];
   w: number;
   h: number;
+  /** Presented a step at a time: how many shapes are drawn once step n has come (a lane with its first step, a step with the arrow that reaches it). Absent, a shape a step. */
+  steps?: number[];
 }
 
 /** A shape, briefly. */
@@ -280,7 +282,6 @@ function lanesLayout(doc: Doc): Diagram {
     band.region = lane;
     return [band, shape('t', 8, i * ROW + (ROW - 8) / 2 - 12, LABEL - 12, 24, lane ? asLabel(lane) : '—', 0, c, undefined, { k: 'lane', name: lane })];
   });
-  const first = bands.length;
   // A step that asks a question is a decision.
   const boxes = steps.map((s, i) => {
     const w = s.line.words;
@@ -290,7 +291,30 @@ function lanesLayout(doc: Doc): Diagram {
       part: 'words',
     });
   });
-  return frame([...bands, ...boxes, ...steps.slice(1).map((_, i) => join(first + i, first + i + 1))]);
+  // In the order they come when presented (Paul, 2026-10-13: "It should be lane, graphic, lane, graphic"): each step
+  // brings its lane's band and name the first time that lane is reached, then the arrow that reaches the step, then
+  // the step itself; a lane with no step is drawn first. A band is always before any box in its row, so it lies behind.
+  const shapes: DShape[] = [];
+  const ends: number[] = [];
+  const shown = new Set<number>();
+  const band = (lane: string) => {
+    const i = lanes.indexOf(lane);
+    if (shown.has(i)) return;
+    shown.add(i);
+    shapes.push(bands[2 * i], bands[2 * i + 1]);
+  };
+  lanes.forEach((lane) => {
+    if (!steps.some((s) => s.lane === lane)) band(lane);
+  });
+  let prev = -1;
+  steps.forEach((s, i) => {
+    band(s.lane);
+    if (prev >= 0) shapes.push(join(prev, shapes.length + 1));
+    prev = shapes.length;
+    shapes.push(boxes[i]);
+    ends.push(shapes.length);
+  });
+  return { ...frame(shapes), steps: ends };
 }
 
 /* ---------- timeline ---------- */
@@ -643,7 +667,9 @@ export function regionAt(d: Diagram, x: number, y: number): string | undefined {
  */
 export function diagramPage(doc: Doc, upTo = Infinity, thumb = false): Page {
   const d = layout(doc);
-  const page = { ...shapesPage(d.shapes, d.w, d.h, upTo), alt: doc.head.alt || describeDrawing(d.shapes) || t('An empty diagram') };
+  // Presented: the first `upTo` steps, which the layout may group (a lane with its first step); else a shape a step.
+  const shown = d.steps ? (upTo >= d.steps.length ? Infinity : (d.steps[Math.floor(upTo) - 1] ?? 0)) : upTo;
+  const page = { ...shapesPage(d.shapes, d.w, d.h, shown), alt: doc.head.alt || describeDrawing(d.shapes) || t('An empty diagram') };
   return thumb && d.w > 2 * d.h ? cropPage(page, Math.round((d.w - 2 * d.h) / 2), 0, 2 * d.h, d.h) : page;
 }
 

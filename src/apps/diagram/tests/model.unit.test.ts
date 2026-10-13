@@ -88,6 +88,29 @@ describe('the eight kinds drawn', () => {
     expect(count(doc('family', old('family')))).toEqual({ things: 6, joins: 5, hits: 6 });
     // Four lanes (a band and a name each), six steps, five arrows between them.
     expect(count(doc('lanes', old('lanes')))).toEqual({ things: 14, joins: 5, hits: 10 });
+    // Presented, a lane comes with its first step and an arrow with the step it reaches, one click a step (Paul,
+    // 2026-10-13: "lane, graphic, lane, graphic"): order to doorstep is Customer, Store, Store, Warehouse, Carrier,
+    // Carrier, Customer, so the shapes shown after each step are 3 (band, name, box), 7 (a new lane, an arrow, a box),
+    // 9 (an arrow and a box), 13, 17, 19, 21: every shape.
+    const order = doc(
+      'lanes',
+      '- Customer: Places an order\n- Store: Checks the stock\n- Store: In stock?\n- Warehouse: Picks and packs it\n- Carrier: Picks up the package\n- Carrier: Delivers it\n- Customer: Signs for it\n',
+    );
+    expect(layout(order).steps).toEqual([3, 7, 9, 13, 17, 19, 21]);
+    expect(layout(order).shapes).toHaveLength(21);
+    expect(def.steps!(write(order))).toBe(7);
+    // The page at step n draws the first so many shapes and no more: the words of the first two lanes come with steps one and two, the third lane's not before step four.
+    const at = (n: number) => diagramPage(order, n).svg;
+    expect(at(0)).not.toContain('Customer');
+    expect(at(1)).toContain('Customer');
+    expect(at(1)).not.toContain('Store');
+    expect(at(2)).toContain('Store');
+    expect(at(2)).toContain('Checks the stock');
+    expect(at(2)).not.toContain('In stock');
+    expect(at(3)).toContain('In stock');
+    expect(at(3)).not.toContain('Warehouse');
+    expect(at(4)).toContain('Warehouse');
+    expect(at(7)).toBe(at(Infinity));
     // An axis, eight dots and their boxes, one era.
     expect(count(doc('timeline', old('timeline')))).toEqual({ things: 18, joins: 8, hits: 9 });
     // Three circles, three names, eight things.
