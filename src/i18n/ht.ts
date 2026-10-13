@@ -229,6 +229,8 @@ export default {
   'Downloaded {name}': '{name} telechaje',
   'Download failed': 'Telechajman an echwe',
   'Open in Tiny Little Office': 'Louvri nan Tiny Little Office',
+  // Under a document cut off at a slide's foot: a link that opens it whole, in its own app.
+  'See more': 'Wè plis',
 
   // ---- the bar, shared by every app ----
   'Insert': 'Ajoute',

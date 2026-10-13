@@ -228,6 +228,8 @@ export default {
   'Downloaded {name}': 'Pobrano {name}',
   'Download failed': 'Pobieranie nie powiodło się',
   'Open in Tiny Little Office': 'Otwórz w Tiny Little Office',
+  // Under a document cut off at a slide's foot: a link that opens it whole, in its own app.
+  'See more': 'Zobacz więcej',
 
   // ---- the bar, shared by every app ----
   'Insert': 'Wstaw',

@@ -227,6 +227,8 @@ export default {
   'Downloaded {name}': '{name}을(를) 다운로드했어요',
   'Download failed': '다운로드하지 못했어요',
   'Open in Tiny Little Office': 'Tiny Little Office에서 열기',
+  // Under a document cut off at a slide's foot: a link that opens it whole, in its own app.
+  'See more': '더 보기',
 
   // ---- the bar, shared by every app ----
   'Insert': '삽입',

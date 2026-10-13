@@ -228,6 +228,8 @@ export default {
   'Downloaded {name}': 'تم تنزيل {name}',
   'Download failed': 'فشل التنزيل',
   'Open in Tiny Little Office': 'فتح في مكتب صغير جدًا',
+  // Under a document cut off at a slide's foot: a link that opens it whole, in its own app.
+  'See more': 'عرض المزيد',
 
   // ---- the bar, shared by every app ----
   'Insert': 'إدراج',

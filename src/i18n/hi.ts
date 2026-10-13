@@ -227,6 +227,8 @@ export default {
   'Downloaded {name}': '{name} डाउनलोड हुआ',
   'Download failed': 'डाउनलोड नहीं हुआ',
   'Open in Tiny Little Office': 'Tiny Little Office में खोलें',
+  // Under a document cut off at a slide's foot: a link that opens it whole, in its own app.
+  'See more': 'और देखें',
 
   // ---- the bar, shared by every app ----
   'Insert': 'जोड़ें',

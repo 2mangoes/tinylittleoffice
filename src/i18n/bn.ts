@@ -212,6 +212,8 @@ export default {
   'Downloaded {name}': '{name} ডাউনলোড হয়েছে',
   'Download failed': 'ডাউনলোড হয়নি',
   'Open in Tiny Little Office': 'Tiny Little Office-এ খুলুন',
+  // Under a document cut off at a slide's foot: a link that opens it whole, in its own app.
+  'See more': 'আরও দেখুন',
 
   // ---- the bar, shared by every app ----
   'Insert': 'যোগ করুন',

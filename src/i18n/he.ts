@@ -237,6 +237,8 @@ export default {
   'Downloaded {name}': 'הורד: {name}',
   'Download failed': 'ההורדה נכשלה',
   'Open in Tiny Little Office': 'פתיחה ב־Tiny Little Office',
+  // Under a document cut off at a slide's foot: a link that opens it whole, in its own app.
+  'See more': 'ראו עוד',
 
   // ---- the bar, shared by every app ----
   'Insert': 'הוספה',

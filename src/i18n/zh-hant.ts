@@ -229,6 +229,8 @@ export default {
   'Downloaded {name}': '已下載 {name}',
   'Download failed': '下載失敗',
   'Open in Tiny Little Office': '在小小辦公室開啟',
+  // Under a document cut off at a slide's foot: a link that opens it whole, in its own app.
+  'See more': '查看更多',
 
   // ---- the bar, shared by every app ----
   'Insert': '插入',

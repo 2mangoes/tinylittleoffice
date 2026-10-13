@@ -5,6 +5,7 @@ import { parse } from '../../../doc/index.ts';
 import { settingsOf, slidesOf } from '../model.ts';
 import { THEMES } from '../theme.ts';
 import { slidePage, lookOf } from '../view.ts';
+import '../../../kit/core/apps.ts';
 
 /** Five long bullets: they fit a slide at 26px. */
 const FIVE = `---
@@ -75,4 +76,18 @@ test("on a taller page every theme drawn at the foot or the corners moves to tha
   expect(ys).toEqual(ys600.map((y) => (y < 200 ? y : y > 400 ? 900 - (600 - y) : Math.round((y * 900) / 600))));
   expect(Math.max(...ys)).toBeLessThan(900);
   expect(ys).toContain(882);
+});
+
+test('a document taller than its box is cut at the foot with "See more" to open it whole; one that fits, or nearly, is shown whole (Paul, 2026-10-13: "embed what fits and then add a see more link")', () => {
+  const tall = `## A letter\n\n\`\`\`write\n${Array.from({ length: 40 }, (_, i) => `Paragraph ${i + 1} of the letter, long enough to take a line.`).join('\n\n')}\n\`\`\`\n`;
+  const page = slidePage(parse(tall), slidesOf(parse(tall))[0], lookOf(settingsOf(parse(tall))));
+  expect(page.svg).toContain('See more →');
+  expect(page.svg).toMatch(/<a href="#\/v1\/write\/[^"]+" target="_blank" rel="noopener noreferrer" class="see-more">/);
+  // The page is drawn at the box's width, its foot cut: the inner svg's viewBox is shorter than the page.
+  expect(page.svg).toMatch(/viewBox="0 0 816 \d+(\.\d+)?" preserveAspectRatio="xMinYMin meet"/);
+  expect(page.svg).not.toMatch(/viewBox="0 0 816 1056"/);
+  const short = '## A note\n\n```write\nOne line.\n```\n';
+  const whole = slidePage(parse(short), slidesOf(parse(short))[0], lookOf(settingsOf(parse(short))));
+  expect(whole.svg).not.toContain('See more');
+  expect(whole.svg).toContain('viewBox="0 0 816 352"');
 });

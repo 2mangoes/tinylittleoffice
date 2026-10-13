@@ -227,6 +227,8 @@ export default {
   'Downloaded {name}': 'Скачано: {name}',
   'Download failed': 'Не удалось скачать',
   'Open in Tiny Little Office': 'Открыть в Tiny Little Office',
+  // Under a document cut off at a slide's foot: a link that opens it whole, in its own app.
+  'See more': 'Показать ещё',
 
   // ---- the bar, shared by every app ----
   'Insert': 'Добавить',

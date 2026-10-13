@@ -228,6 +228,8 @@ export default {
     'Downloaded {name}': '{name} ڈاؤن لوڈ ہو گئی',
     'Download failed': 'ڈاؤن لوڈ نہیں ہو سکا',
     'Open in Tiny Little Office': 'Tiny Little Office میں کھولیں',
+    // Under a document cut off at a slide's foot: a link that opens it whole, in its own app.
+    'See more': 'مزید دیکھیں',
 
   // ---- the bar, shared by every app ----
     'Insert': 'شامل کریں',

@@ -238,6 +238,8 @@ export default {
   'Downloaded {name}': 'געדאונלאודט: {name}',
   'Download failed': 'דאונלאוד נישט געלונגען',
   'Open in Tiny Little Office': 'עפענען אין Tiny Little Office',
+  // Under a document cut off at a slide's foot: a link that opens it whole, in its own app.
+  'See more': 'זעט מער',
 
   // ---- the bar, shared by every app ----
   'Insert': 'אריינלייגן',

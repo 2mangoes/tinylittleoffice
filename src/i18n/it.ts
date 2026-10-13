@@ -228,6 +228,8 @@ export default {
   'Downloaded {name}': 'Scaricato {name}',
   'Download failed': 'Download non riuscito',
   'Open in Tiny Little Office': 'Apri in Ufficio Piccolo Piccolo',
+  // Under a document cut off at a slide's foot: a link that opens it whole, in its own app.
+  'See more': 'Vedi altro',
 
   // ---- the bar, shared by every app ----
   'Insert': 'Inserisci',

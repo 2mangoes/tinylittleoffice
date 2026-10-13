@@ -14,6 +14,7 @@ import { MOTION_JS } from '../../kit/draw/motion.ts';
 import { pageScript } from '../../kit/draw/page.ts';
 import { QR_MAX_BYTES, qrSvg } from '../../kit/draw/qr.ts';
 import { routeHash } from '../../kit/core/route.ts';
+import { placedLink } from '../../kit/share/locked.ts';
 import { attr, markNotes, noteNumbers, noteRuns, parse, plainText, runLinks, write, type Doc, type Run } from '../../doc/index.ts';
 import { iconHex, panelOf, settingsOf, slideNotes, slideText, slidesOf, type Format, type Item, type Settings, type Slide } from './model.ts';
 import { themeOf, type DeckTheme } from './theme.ts';
@@ -214,6 +215,18 @@ export function subPage(doc: Doc, s: Slide, upTo?: number, open = false, still =
     return { w: 480, h: 24 + rows.length * 26, svg: rows.map((row, i) => line(24, 20 + i * 26, row.join('   '), { px: 14, bold: i === 0 })).join(''), alt: t('Table') };
   }
   return null;
+}
+
+/** The address the slide's document opens at in its own app, for "See more": on this site when there is one, else the route alone. A slide with no document has none. */
+function moreLink(doc: Doc, s: Slide): string {
+  const b = s.sub >= 0 ? doc.blocks[s.sub] : null;
+  const site = typeof location !== 'undefined' && location.origin !== 'null' ? `${location.origin}/` : '';
+  if (b?.k === 'fence' && b.lang) return placedLink(b.lang, b.body, encodeDoc, site);
+  if (b?.k === 'table') {
+    const chart = attr(b, 'chart');
+    return placedLink('sheet', write({ head: chart ? { chart } : {}, blocks: [{ k: 'table', cols: b.cols, rows: b.rows }] }), encodeDoc, site);
+  }
+  return '';
 }
 
 /* ---------- the layout ---------- */
@@ -447,7 +460,19 @@ export function slidePage(doc: Doc, s: Slide, look: Look, shown = Infinity, o: S
     if (sub) {
       // A document is drawn for white paper: on a dark slide it sits on a white card.
       if (T.dark) svg += rect(L.sub.x, L.sub.y, L.sub.w, L.sub.h, '#ffffff', 'rx="12"');
-      svg += place(sub, L.sub.x, L.sub.y, L.sub.w, L.sub.h);
+      // What fits, at a size the eye can read (Paul, 2026-10-13: "For decks, I think we should just embed what fits and
+      // then add a 'see more' link"): the page takes the box's width, and is shrunk to its height only where that costs
+      // under a fifth; a taller one is cut at the foot, and "See more" under it opens the document itself, in its own app.
+      const wide = L.sub.w / sub.w;
+      const tall = L.sub.h / sub.h;
+      const more = moreLink(doc, s);
+      if (tall >= wide * 0.8 || !more) svg += place(sub, L.sub.x, L.sub.y, L.sub.w, L.sub.h);
+      else {
+        const px = 15 * (W / SW);
+        const h = L.sub.h - px * 1.8;
+        svg += `<svg x="${r(L.sub.x)}" y="${r(L.sub.y)}" width="${r(L.sub.w)}" height="${r(h)}" viewBox="0 0 ${sub.w} ${r(h / wide)}" preserveAspectRatio="xMinYMin meet"><rect width="${sub.w}" height="${r(h / wide)}" fill="#fff"/>${sub.svg}</svg>`;
+        svg += `${linkOpen(more, ' class="see-more"')}${line(L.sub.x + L.sub.w, L.sub.y + L.sub.h - px * 0.3, `${t('See more')} →`, { px, fill: link, anchor: 'end' })}</a>`;
+      }
     }
   }
   return { w: W, h: H, svg, alt: slideText(s).join('. ') };

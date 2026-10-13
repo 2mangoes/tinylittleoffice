@@ -154,6 +154,14 @@ test('pages: letter by default, A4 when the head says so, one page drawn small, 
   expect(many.length).toBeGreaterThan(1);
   expect(many[1].svg).toContain('>2</text>');
   expect(pages(long, true)).toHaveLength(1);
+  // Drawn small, a full page stays a page; a short letter is cut to what is on it, never under a third of a page (Paul, 2026-10-13: the tiny letter on a slide).
+  expect(pages(long, true)[0].h).toBe(1056);
+  const letter = pages('# A letter {.title}\n\nDear neighbors,\n\nThe sale is **Saturday**.^[Ten to four.]\n\n- [ ] Tables\n', true)[0];
+  expect(letter.w).toBe(816);
+  expect(letter.h).toBeLessThan(1056 / 2);
+  expect(letter.h).toBeGreaterThanOrEqual(352);
+  expect(letter.svg).toContain('Ten to four');
+  expect(pages('', true)[0].h).toBe(352);
   // An icon in the words is drawn as a glyph over the space it leaves.
   expect(pages('A :star: day\n')[0].svg).toMatch(/<g transform="translate\([\d.]+ [\d.]+\) scale\([\d.]+\)"/);
 });

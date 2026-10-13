@@ -228,6 +228,8 @@ export default {
   'Downloaded {name}': '{name} gedownload',
   'Download failed': 'Downloaden mislukt',
   'Open in Tiny Little Office': 'Openen in Piepklein Kantoortje',
+  // Under a document cut off at a slide's foot: a link that opens it whole, in its own app.
+  'See more': 'Meer zien',
 
   // ---- the bar, shared by every app ----
   'Insert': 'Invoegen',

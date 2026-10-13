@@ -423,7 +423,11 @@ export function pages(textOrDoc: string | Doc, small = false, still = false): Pa
     low = Math.max(low, y);
   });
   out.push({ w: W, h: PAGE_H, svg, alt });
-  if (small) return [out[0]];
+  // Drawn small (on a slide, a page, an item, a thumbnail): the first page, cut to what is on it, with the margin
+  // under it, so a short letter is a wide card whose words are read at the size the slide allows rather than a
+  // whole portrait page shrunk to the slide's height (Paul, 2026-10-13: "the inserted word processor diagram is
+  // incredibly tiny"). A page that is full stays a page; never less than a third of one.
+  if (small) return [out.length > 1 ? out[0] : { ...out[0], h: Math.min(PAGE_H, Math.max(PAGE_H / 3, Math.max(y, low) + M)) }];
   // More than one page: each numbered at its foot, in the margin.
   return out.length > 1 ? out.map((p, i) => ({ ...p, svg: p.svg + svgText(W / 2, PAGE_H - M / 2 + 4, String(i + 1), { px: 11, fill: MUTED, anchor: 'middle' }) })) : out;
 }

@@ -226,6 +226,8 @@ export default {
   'Downloaded {name}': '{name}をダウンロードしました',
   'Download failed': 'ダウンロードできませんでした',
   'Open in Tiny Little Office': 'ちいさなちいさなオフィスで開く',
+  // Under a document cut off at a slide's foot: a link that opens it whole, in its own app.
+  'See more': 'もっと見る',
 
   // ---- the bar, shared by every app ----
   'Insert': '挿入',
