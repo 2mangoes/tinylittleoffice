@@ -69,9 +69,12 @@ function inner(sc: HTMLElement): Box {
   const box = { top, left, bottom: top + sc.clientHeight, right: left + sc.clientWidth };
   // The column's foot under a phone's bar is covered, not room (and so is its head under a desktop's): a caret brought
   // in stops above the bar, or below it, and above the context row docked at the foot, never under either (Paul,
-  // 2026-10-10: a new row of the outline appeared under the nav and was unreachable).
+  // 2026-10-10: a new row of the outline appeared under the nav and was unreachable). An app's own box placed over the
+  // column says so with `data-covers` (the Presentation Builder's rail, pinned above the bar while a slide is typed on
+  // a phone): it covers while it is out of the flow, and is content like any other while it is in it.
   if (sc.classList.contains('to-main') || sc.classList.contains('to-column')) {
-    for (const el of [sc.querySelector('to-bar'), document.querySelector('.to-context[data-docked]:popover-open')]) {
+    const placed = (el: Element) => /^(absolute|fixed|sticky)$/.test(getComputedStyle(el).position);
+    for (const el of [sc.querySelector('to-bar'), document.querySelector('.to-context[data-docked]:popover-open'), ...[...sc.querySelectorAll('[data-covers]')].filter(placed)]) {
       const b = el?.getBoundingClientRect();
       if (!b || !b.height || b.bottom <= box.top || b.top >= box.bottom) continue;
       if (b.top - box.top < b.height) box.top = Math.min(box.bottom, b.bottom);

@@ -83,6 +83,30 @@ test('reveal with block "middle" brings a target below the middle to the middle,
   box.remove();
 });
 
+test('a box placed over a column’s foot that says data-covers is not room: reveal stops above it while it is out of the flow, and counts it as content while it is in it', async () => {
+  document.body.innerHTML = '';
+  const column = document.body.appendChild(document.createElement('div'));
+  column.style.cssText = 'position:fixed;top:0;left:0;width:200px;height:400px';
+  column.innerHTML =
+    '<div class="to-main" style="height:400px;overflow-y:auto"><div style="height:2000px;position:relative"><i style="position:absolute;top:1500px;height:20px;width:10px"></i></div><nav data-covers style="position:absolute;left:0;right:0;bottom:0;height:100px"></nav></div>';
+  const main = column.querySelector<HTMLElement>('.to-main')!;
+  const target = column.querySelector('i')!;
+  const cover = column.querySelector('nav')!;
+  reveal(target);
+  // The target's foot stands just above the cover's top, not at the scroller's foot a hundred lower.
+  const coverTop = cover.getBoundingClientRect().top;
+  expect(target.getBoundingClientRect().bottom).toBeLessThanOrEqual(coverTop);
+  expect(target.getBoundingClientRect().bottom).toBeGreaterThan(coverTop - 20);
+  // In the flow (a short page, a desktop), the same box is content: the target is brought to the scroller's own foot.
+  cover.style.position = 'static';
+  main.scrollTop = 0;
+  reveal(target);
+  const foot = main.getBoundingClientRect().bottom;
+  expect(target.getBoundingClientRect().bottom).toBeLessThanOrEqual(foot);
+  expect(target.getBoundingClientRect().bottom).toBeGreaterThan(foot - 20);
+  column.remove();
+});
+
 test('390×600: typed to the end, the caret stays within a line of the column’s middle; the person’s scroll and an arrow key never recenter; typing does only from below', async () => {
   await page.viewport(390, 600);
   const text = await write(SOME);

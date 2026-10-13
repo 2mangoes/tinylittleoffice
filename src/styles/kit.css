@@ -1662,14 +1662,11 @@
      the caret typed at the end stays at the middle of the screen (Paul, 2026-10-12: "enough padding at the end of a
      document we are editing that the cursor stays roughly in the middle of the screen unless we scroll"; kit/ui/scroll.ts
      revealCaret's `middle`). The spatial canvases, which fill the column, and the Calendar and the Trip Planner, typed in
-     dialogs and rows, keep the gutter (their own stylesheets). The room is named (--to-room) for what sticks to the
-     column's visible foot: a sticky box measures from inside the padding, so its bottom is the room's negative
-     (the Presentation Builder's rail on a phone, deck/style.css). */
+     dialogs and rows, keep the gutter (their own stylesheets). */
   .to-main.to-wide {
-    --to-room: calc(var(--to-col-h) / 2);
     padding-left: var(--to-inset-l);
     padding-right: var(--to-inset-r);
-    padding-bottom: var(--to-room);
+    padding-bottom: calc(var(--to-col-h) / 2);
   }
   .to-editor {
     display: block;

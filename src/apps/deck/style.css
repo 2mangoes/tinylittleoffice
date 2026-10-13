@@ -611,31 +611,31 @@
     }
   }
 
-  /* ---- phones: the rail runs under the slide, a row that scrolls sideways, and keeps to the screen's foot ---- */
+  /* ---- phones: the rail runs under the slide, a row that scrolls sideways; while typing, it is the bar's upper row ---- */
   @media (max-width: 760px) {
-    /* A column, not a grid: the rail sticks within the body, not within a grid row of its own. */
     .deck-body {
-      display: flex;
-      flex-direction: column;
-      align-items: stretch;
+      grid-template-columns: minmax(0, 1fr);
     }
-    /* The rail stays in sight at the column's visible foot, above the bar, however the column is scrolled, so with the
-       keyboard up and a slide's words being typed, every other slide is a tap away (Paul, 2026-10-13: "a quick way to
-       jump to other slides without leaving edit mode… put the deck preview above the edit bar"). The column's main
-       keeps half a screen of room under its last line (kit.css --to-room), and a sticky box measures from inside that
-       room: its bottom is the room's negative, which is the main's own foot (the bar sits under the main). In flow
-       where the page is short, as it was. */
     .deck-rail {
-      position: sticky;
-      bottom: calc(-1 * var(--to-room, 0rem));
-      z-index: 1;
-      background: var(--to-bg);
-      border-top: 1px solid var(--to-border);
       flex-direction: row;
       max-height: none;
       overflow-x: auto;
       overflow-y: hidden;
       padding-bottom: 0.25rem;
+    }
+    /* While a box is typed in (to-chrome[editing]) the rail leaves the flow for the column's foot, right above the bar
+       and placed as the bar is (kit.css: by the column, over the scrolling main), so with the keyboard up the whole
+       slide stands above it and every other slide is a tap away, with no room wasted under the slide (Paul, 2026-10-13:
+       "a quick way to jump to other slides without leaving edit mode… put the deck preview above the edit bar"; "get rid
+       of all the space below the slides and make sure we can see the whole slide above when we switch into edit"). */
+    to-chrome[editing] .to-column > main > to-deck-editor .deck-rail {
+      position: absolute;
+      inset-inline: 0;
+      bottom: var(--to-bar-h);
+      z-index: 2;
+      padding: 0.25rem var(--to-gutter) 0.125rem;
+      background: var(--to-bg);
+      border-top: 1px solid var(--to-border);
     }
     .deck-slot {
       width: 6rem;

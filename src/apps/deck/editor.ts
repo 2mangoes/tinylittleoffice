@@ -992,7 +992,7 @@ export class ToDeckEditor extends DocElement<Slide[]> {
     const d = this.rows.drag;
     // The rail's thumbnails stand still (a deck of ten animations runs no clocks on the side) and are thumbnails: a trip on one asks OpenStreetMap for nothing.
     const still: Look = { ...look, still: true, thumb: true };
-    return html`<nav class="deck-rail" tabindex="-1" aria-label=${g ? t('Pages') : t('Slides')} @keydown=${this.onRailKey}>
+    return html`<nav class="deck-rail" tabindex="-1" aria-label=${g ? t('Pages') : t('Slides')} data-covers @keydown=${this.onRailKey}>
       ${Array.from({ length: n }, (_, i) => {
         const s = slides[i];
         const p = pageOf(this.doc, i, st, slides, still);

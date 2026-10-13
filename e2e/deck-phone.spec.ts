@@ -64,18 +64,19 @@ test('deck: on a phone, typing a slide neither scrolls the page nor moves the ba
   await page.getByRole('menuitem', { name: 'Title slide' }).tap();
   await expect(page.locator('.deck-thumb')).toHaveCount(2);
   await expect(page.locator('.deck-thumb[aria-current="true"]')).toHaveAttribute('aria-label', 'Slide 2');
-  // A screen a keyboard's worth shorter: the rail keeps to its foot above the bar, whole, while the notes under the
-  // slide are what scrolls away; a tap on the first slide while its headline is typed goes to it, the caret in its
-  // headline, nothing chosen (Paul, 2026-10-13: "a quick way to jump to other slides without leaving edit mode").
+  // A screen a keyboard's worth shorter: while the headline is typed the rail is pinned to the column's foot right
+  // above the bar, whole, with the whole slide standing above it and no room wasted under the slide; a tap on the first
+  // slide goes to it, the caret in its headline, nothing chosen (Paul, 2026-10-13: "a quick way to jump to other slides
+  // without leaving edit mode"; "get rid of all the space below the slides and make sure we can see the whole slide").
   await expect(title).toBeFocused();
   await page.setViewportSize({ width: 390, height: 520 });
   // The column glides to its new height (kit/ui/chrome.ts fit): the bar and the rail are measured once it has settled.
   await expect.poll(() => page.evaluate(() => document.querySelector('.to-column')!.clientHeight)).toBeLessThanOrEqual(520);
   await expect(page.locator('to-chrome')).not.toHaveAttribute('gliding', '');
-  const [bar, railShort] = [await page.locator('to-deck-editor to-bar').boundingBox(), await rail.boundingBox()];
-  expect(railShort!.y + railShort!.height).toBeLessThanOrEqual(bar!.y + 1);
-  expect(railShort!.y).toBeGreaterThanOrEqual(0);
-  expect(railShort!.y + railShort!.height).toBeLessThanOrEqual(520);
+  const [bar, railShort, slide] = [await page.locator('to-deck-editor to-bar').boundingBox(), await rail.boundingBox(), await canvas.boundingBox()];
+  expect(Math.abs(railShort!.y + railShort!.height - bar!.y)).toBeLessThanOrEqual(1);
+  expect(railShort!.y).toBeGreaterThanOrEqual(slide!.y + slide!.height - 1);
+  expect(slide!.y).toBeGreaterThanOrEqual(0);
   await page.locator('.deck-thumb').first().tap();
   await expect(page.locator('.deck-thumb[aria-current="true"]')).toHaveAttribute('aria-label', 'Slide 1: Hello from the phone');
   await expect(title).toBeFocused();
