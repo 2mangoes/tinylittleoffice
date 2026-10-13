@@ -5,7 +5,7 @@
  * says how the pieces fit.
  */
 export type { Attrs, Block, ColType, Column, Dir, Doc, Head, Run, TableBlock, TextBlock } from './model.ts';
-export { attr, hasClass, isAtomic, isInnerDoc, isText, normalRuns, pages, plainText, sections } from './model.ts';
+export { attr, hasClass, isAtomic, isInnerDoc, isRule, isText, normalRuns, pages, plainText, rule, sections } from './model.ts';
 
 export {
   balanceNote,

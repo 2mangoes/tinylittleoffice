@@ -304,6 +304,7 @@ export default {
   'Justified, indented, small caps': 'Justificado, com recuo e versaletes',
   'Newspaper': 'Jornal',
   'A narrow headline, two columns': 'Uma manchete estreita, duas colunas',
+  'Horizontal rule': 'Linha horizontal',
   // Insert ▾'s rule in a document: what follows starts the next page.
   'Page break': 'Quebra de página',
   'OK': 'OK', // same

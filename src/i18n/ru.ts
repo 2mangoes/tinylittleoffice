@@ -303,6 +303,7 @@ export default {
   'Justified, indented, small caps': 'По ширине, с отступами, капителью',
   'Newspaper': 'Газета',
   'A narrow headline, two columns': 'Узкий заголовок, две колонки',
+  'Horizontal rule': 'Горизонтальная линия',
   // Insert ▾'s rule in a document: what follows starts the next page.
   'Page break': 'Разрыв страницы',
   'OK': 'OK', // same

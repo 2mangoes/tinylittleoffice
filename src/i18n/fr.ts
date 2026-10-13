@@ -305,6 +305,7 @@ export default {
   'Justified, indented, small caps': 'Justifié, alinéas, petites capitales',
   'Newspaper': 'Journal',
   'A narrow headline, two columns': 'Un titre étroit, deux colonnes',
+  'Horizontal rule': 'Ligne horizontale',
   // Insert ▾'s rule in a document: what follows starts the next page.
   'Page break': 'Saut de page',
   'OK': 'OK', // same

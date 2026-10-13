@@ -314,6 +314,7 @@ export default {
   'Justified, indented, small caps': 'מיושר, עם כניסות, אותיות רישיות קטנות',
   'Newspaper': 'עיתון',
   'A narrow headline, two columns': 'כותרת צרה, שני טורים',
+  'Horizontal rule': 'קו אופקי',
   // Insert ▾'s rule in a document: what follows starts the next page.
   'Page break': 'מעבר עמוד',
   'OK': 'אישור',

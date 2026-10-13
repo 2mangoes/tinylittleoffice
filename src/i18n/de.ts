@@ -302,6 +302,7 @@ export default {
   'Justified, indented, small caps': 'Blocksatz, eingerückt, Kapitälchen',
   'Newspaper': 'Zeitung',
   'A narrow headline, two columns': 'Eine schmale Schlagzeile, zwei Spalten',
+  'Horizontal rule': 'Horizontale Linie',
   // Insert ▾'s rule in a document: what follows starts the next page.
   'Page break': 'Seitenumbruch',
   'OK': 'OK', // same

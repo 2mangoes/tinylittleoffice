@@ -46,7 +46,7 @@ A document is a head and a list of blocks. Eight kinds of block:
 | `p` | a paragraph | A line break inside it is a line of its own in the text. An empty paragraph is `<br>`. |
 | `li` | `- words`, `1. words`, `- [ ] words`, `- [x] words` | Nested by two spaces. |
 | `quote` | `> words` | A note: a speaker's note, a page's aside. |
-| `hr` | `---` | A break: the next slide, page or card. |
+| `hr` | `---` | A break: the next slide, page or card. `--- {.rule}` is a horizontal rule, a line that breaks nothing (the Word Processor's). |
 | `table` | `Name | Price:money` / `--- | ---` / rows | Cells are raw strings (formulas start with `=`). Written without outer pipes. |
 | `fence` | ```` ```<lang> ```` … ```` ``` ```` | `lang` names an app: another document, its whole TLO text. Else text kept as written. |
 | `edge` | `~ A -> B: label` | A connection by the things' words (or `#id`): `->`, `<-`, `<->`, `--`. |
@@ -137,7 +137,9 @@ title: Chores
 The examples are canonical: what the code writes.
 
 **write** (Word Processor): rich text. `# Words {.title}` is the title heading; `#`, `##`, `###` headings; lists
-nest by two spaces; `{.center}`, `{.right}`, `{.justify}` align a block; `---` is a page break; `paper: a4` in the
+nest by two spaces; `{.center}`, `{.right}`, `{.justify}` align a block; `---` is a page break and `--- {.rule}` a
+horizontal rule. The Markdown download writes a rule as `---`, which opened again is a page break; the `.tlo` file
+keeps the difference. `paper: a4` in the
 head (letter where absent and the reader is in North America); `look: serif|mono|mixed|inverse|book|news` in the
 head sets the type (sans where absent). A table is a table block worked out in place by
 the formula engine. An invoice is a text whose fields are head keys (`from`, `to`, `number`, `date`, `due`,

@@ -305,6 +305,7 @@ export default {
   'Justified, indented, small caps': 'По ширині, з відступами, капітель',
   'Newspaper': 'Газета',
   'A narrow headline, two columns': 'Вузький заголовок, два стовпці',
+  'Horizontal rule': 'Горизонтальна лінія',
   // Insert ▾'s rule in a document: what follows starts the next page.
   'Page break': 'Розрив сторінки',
   'OK': 'Гаразд',

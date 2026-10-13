@@ -55,14 +55,14 @@ Rules:
 - Backspace at the start of a block joins it to the one before (the block before keeps its kind; when either of the two is empty, the empty one simply goes, so words pulled up into an empty line keep their heading, as in Docs); on an item in a document (the Word Processor, the Presentation Builder) it first makes the item a paragraph (unlists), then joins, as Docs does; an empty item with children is removed and its children come out a level; at the very start of a one-line box the host decides (an outliner joins: §3).
 - Delete at the end joins the next block in, by the same rule; in a one-line box the host decides.
 - Copy and paste keep the words exactly: the spaces at either end of words copied from within a block come back with them.
-- Markdown shortcuts on Space: `- `, `* `, `1. `, `# `, `## `, `> ` turn the block (undo gives the typed marker back); straight quotes curl. Alt+Up/Down moves an item past its neighbor.
+- Markdown shortcuts on Space: `- `, `* `, `1. `, `# `, `## `, `> ` turn the block, and `---` alone on a line in a document is a horizontal rule (undo gives the typed marker back); straight quotes curl. Alt+Up/Down moves an item past its neighbor.
 - Tab/Shift+Tab on an item indents/outdents it; elsewhere Tab moves focus.
 - Mod+B/I/U/K; Mod+Shift+X strikethrough, Mod+Shift+H highlight and Mod+E code (Plex Mono, Google Docs' and Notion's inline code key; Markdown's backticks) are optional; the bar has them all.
 - **Two spaces end a link**: typing after a link stays in it (Mod+K or the bubble made it; the words typed next are its too); a second space in a row at its end steps out, the one space before the caret made plain and the second not written, so what comes next is normal text (Paul, 2026-10-11).
 - Selecting words shows the **selection bubble** (B, I, U, S, highlight, code | link, footnote | list) centered under the selection; it hides when the selection collapses or leaves. Hosts may turn it off (`no-bubble`).
 - The caret in a link shows the link bubble (open, edit, remove).
 - **Footnotes are typed at the foot**, where they are drawn (the Word Processor's endnotes at the end of the page, a slide's foot, the notes under an outline), never in a box beside the mark: each note is a one-line `<to-text>` (its marks and links; no blocks, no note in a note). A tap or Enter on a mark brings the foot into view with the caret at the end of that note; the Footnote command puts the mark at the caret and the caret in its new, empty note; Enter or Escape in a note returns to the words after its mark (the Word Processor's ↩ too); a note emptied and left takes its mark with it, and Backspace at the start of an empty note removes it and returns to where its mark was. The note's words are the document's like any others: Mod+Z undoes them, the caret back in the note.
-- Cards (tables, documents, page breaks) are one character to the caret: skipped by arrows, removed by one Backspace/Delete, tapped to open.
+- Cards (tables, documents, page breaks, horizontal rules) are one character to the caret: skipped by arrows, removed by one Backspace/Delete, tapped to open.
 - Paste: our HTML → blocks; other HTML → blocks (`htmlToBlocks`); Markdown/TLO text → blocks; a lone address → a card; words → words. A paste never brings styles the document cannot keep.
 - A paste keeps lists (with their depth and numbers), headings, the six marks (code from a `<code>` in the words) and links from wherever they were copied (Google Docs, Word, Apple Notes, Notion, Slack, a web page, bullets typed as `•`, `-` or `1.`, even on one line), and is fitted to what the box can hold (a label takes words, a slide's words items and paragraphs, a table elsewhere its rows). Nothing else arrives: no HTML remnant, and no marker, since words that look like syntax are kept as the words they are.
 - IME: a composition is left to the browser and read back at `compositionend` as one op; no selection is written during a composition.
@@ -151,7 +151,7 @@ Paul, 2026-10-10: a low-vision reader wants big, scrollable nav, a useful menu, 
 - Lists inside a document (the Word Processor, the Presentation Builder): items are words in one box, so Shift+arrows extend the selection by characters as Docs does, and there are no handles; Alt+Up/Down, Tab, cut and paste move items. The §3 node selection belongs to the Outliner and to rows.
 - The Drawing Tool: Alt+Up/Down move the chosen shapes one place in the stack (there is no "past a neighbor" on a canvas). The Diagram Maker drags the thing itself (a 6px threshold, `touch-action: none` on the thing alone) since a tap on it edits; it has no grip.
 - The Calendar's month: entries are drawn small (about 16px) so a cell can hold several; the finger's way to every entry is the month's list below, whose rows are 44px.
-- The Word Processor: Mod+Shift+Enter (or Insert ▾ Page break) puts a page break at the caret, the kernel's rule (`---`): a card drawn as a dashed rule, the next page on paper, in print, in .docx and in .rtf. It is the one Mod+Shift+Enter outside the Presentation Builder, where the same rule is the next slide.
+- The Word Processor: Mod+Shift+Enter (or Insert ▾ Page break) puts a page break at the caret, the kernel's rule (`---`): a card drawn as a dashed rule, the next page on paper, in print, in .docx and in .rtf. It is the one Mod+Shift+Enter outside the Presentation Builder, where the same rule is the next slide. A horizontal rule (Insert ▾ Horizontal rule, or `---` and Space alone on a line) is that rule marked `{.rule}`: a light line with a little room above and below, a card like the page break, never a new page; in slides it is dropped.
 
 ## 9. The audit
 
@@ -244,6 +244,7 @@ whose rows are the document's own data (the sheet's column kinds, the formula fu
 |  | Tiny Little Office Doc… | insert ▾ |
 |  | QR code of this document | insert ▾ |
 |  | Date | insert ▾ |
+|  | Horizontal rule | insert ▾ |
 | `Mod+Shift+Enter` | Page break | insert ▾, at: words |
 |  | Title | bar |
 |  | Heading | bar |

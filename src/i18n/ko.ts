@@ -303,6 +303,7 @@ export default {
   'Justified, indented, small caps': '양쪽 정렬, 들여쓰기, 작은 대문자',
   'Newspaper': '신문',
   'A narrow headline, two columns': '좁은 표제, 두 단',
+  'Horizontal rule': '가로줄',
   // Insert ▾'s rule in a document: what follows starts the next page.
   'Page break': '페이지 나누기',
   'OK': '확인',

@@ -6,7 +6,7 @@
  * (docs/kernel.md §3) and the selection after. text.ts maps events onto
  * these; the node tests work them without a browser.
  */
-import { hasClass, isAtomic, isText as holdsRuns, normalRuns, runLength, sliceRuns, splitBlock, type Attrs, type Block, type Op, type Run, type TextBlock } from '../../doc/index.ts';
+import { hasClass, isAtomic, isText as holdsRuns, normalRuns, rule, runLength, sliceRuns, splitBlock, type Attrs, type Block, type Op, type Run, type TextBlock } from '../../doc/index.ts';
 
 /** Whether a block is words the caret can sit in: a heading, a paragraph, an item, a note. Anything else is a card. */
 export const isWords = holdsRuns;
@@ -503,6 +503,8 @@ export function shortcut(blocks: Block[], sel: Sel, shape: Shape): Edit | null {
   const words = head[0].t;
   const rest = sliceRuns(b.runs, offset, runLength(b.runs));
   const a = b.a;
+  // Three hyphens alone on a line in a document are a horizontal rule, with an empty paragraph after it for the caret.
+  if (shape === 'doc' && words === '---' && !rest.length) return { ops: [{ op: 'splice', at: block, n: 1, blocks: [rule(), { k: 'p', runs: [], ...(a ? { a } : {}) }] }], sel: caret(block + 1, 0) };
   let made: Block | null = null;
   if (/^[-*+]$/.test(words)) made = { k: 'li', depth: 0, runs: rest, ...(a ? { a } : {}) };
   else if (/^1[.)]$/.test(words)) made = { k: 'li', depth: 0, ord: true, runs: rest, ...(a ? { a } : {}) };

@@ -304,6 +304,7 @@ export default {
     'Justified, indented, small caps': 'دونوں طرف برابر، انڈینٹ، چھوٹے کیپیٹل',
     'Newspaper': 'اخبار',
     'A narrow headline, two columns': 'ایک تنگ سرخی، دو کالم',
+    'Horizontal rule': 'افقی لکیر',
   // Insert ▾'s rule in a document: what follows starts the next page.
     'Page break': 'صفحے کا وقفہ',
     'OK': 'ٹھیک ہے',

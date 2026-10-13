@@ -3,7 +3,7 @@
 // template round-trips byte for byte and the invoice adds up.
 import { unzipSync, strFromU8 } from 'fflate';
 import { expect, test } from 'vitest';
-import { applyAll, evaluate, firstTable, formatCell, parse, write } from '../../../doc/index.ts';
+import { applyAll, evaluate, firstTable, formatCell, isRule, parse, write } from '../../../doc/index.ts';
 import write_ from '../def.ts';
 import { lint } from '../../../lint.ts';
 // The registry, so a document held in the text is drawn by its own app.
@@ -26,6 +26,7 @@ import {
   titleOf,
   wordCount,
 } from '../model.ts';
+import { writeToDeck, writeToOutline } from '../convert.ts';
 import { templates } from '../templates.ts';
 import { LOOK_IDS, lookOf } from '../look.ts';
 import { docToDocx, docToHtml, docToMarkdown, docToRtf, pages } from '../view.ts';
@@ -234,6 +235,52 @@ test('a page break: the next page on paper (never a blank one), break-after in p
   expect(docXml).toContain('<w:p><w:r><w:br w:type="page"/></w:r></w:p>');
   expect(docToRtf(parse(text), ctx)).toMatch(/One\.\\par\}\n\\page\n\{\\pard[^\n]* Two\./);
   expect(docToMarkdown(parse(text))).toBe(text);
+});
+
+test('a horizontal rule: a light line on the same page, <hr class="rule"> in a web page, a bottom border in .docx and .rtf, --- in Markdown', () => {
+  const text = 'One.\n\n--- {.rule}\n\nTwo.\n';
+  expect(write(parse(text))).toBe(text);
+  const all = pages(text);
+  expect(all).toHaveLength(1);
+  expect(all[0].svg).toContain('Two.');
+  expect(all[0].svg).toMatch(/<line x1="\d+" y1="[\d.]+" x2="\d+" y2="[\d.]+" stroke="#d4d4d8"\/>/);
+  const html = docToHtml(parse(text), ctx);
+  expect(html).toContain('<p>One.</p>\n<hr class="rule">\n<p>Two.</p>');
+  expect(html).toContain('hr.rule{margin:1.25em 0;border:0;border-top:1px solid #d4d4d8}');
+  const docXml = strFromU8(unzipSync(docToDocx(parse(text), ctx))['word/document.xml']);
+  expect(docXml).toContain('<w:pBdr><w:bottom w:val="single" w:sz="6" w:space="1" w:color="D4D4D8"/></w:pBdr>');
+  expect(docXml).not.toContain('w:type="page"');
+  const rtf = docToRtf(parse(text), ctx);
+  expect(rtf).toContain('\\red212\\green212\\blue216;}');
+  expect(rtf).toContain('{\\pard\\sb120\\sa240\\brdrb\\brdrs\\brdrw10\\brdrcf4\\brsp20\\fs4\\par}');
+  expect(rtf).not.toContain('\\page');
+  expect(docToMarkdown(parse(text))).toBe('One.\n\n---\n\nTwo.\n');
+  // Shown as slides a rule starts nothing; in an outline it is gone, as a page break is.
+  expect(writeToDeck(text)).toBe(writeToDeck('One.\n\nTwo.\n'));
+  expect(writeToDeck(text)).not.toContain('---');
+  expect(writeToOutline(text)).not.toContain('---');
+});
+
+test('a page break and a horizontal rule together: two pages, the line on the first, each its own <hr> in a web page', () => {
+  const text = 'One.\n\n--- {.rule}\n\nTwo.\n\n---\n\nThree.\n';
+  const all = pages(text);
+  expect(all).toHaveLength(2);
+  const line = /<line x1="\d+" y1="[\d.]+" x2="\d+" y2="[\d.]+" stroke="#d4d4d8"\/>/;
+  expect(all[0].svg).toMatch(line);
+  expect(all[0].svg).toContain('Two.');
+  expect(all[1].svg).not.toMatch(line);
+  expect(all[1].svg).toContain('Three.');
+  const html = docToHtml(parse(text), ctx);
+  expect(html.match(/<hr class="rule">/g)).toHaveLength(1);
+  expect(html).toContain('<p>One.</p>\n<hr class="rule">\n<p>Two.</p>\n<hr class="page-break">\n<p>Three.</p>');
+});
+
+test('a horizontal rule with another class too is still a rule, and comes back with both', () => {
+  const text = 'One.\n\n--- {.rule .center}\n\nTwo.\n';
+  const doc = parse(text);
+  expect(isRule(doc.blocks[1])).toBe(true);
+  expect(write(doc)).toBe(text);
+  expect(pages(text)).toHaveLength(1);
 });
 
 test('code: Plex Mono on the page, <code> in the web page, Courier New in Word and RTF, backticks in Markdown', () => {

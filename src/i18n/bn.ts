@@ -281,6 +281,7 @@ export default {
   'Justified, indented, small caps': 'দুই পাশে সমান, ভেতরে সরানো, ছোট ক্যাপিটাল',
   'Newspaper': 'সংবাদপত্র',
   'A narrow headline, two columns': 'সরু শিরোনাম, দুই কলাম',
+  'Horizontal rule': 'অনুভূমিক রেখা',
   'Page break': 'পাতা ভাঙা',
   'OK': 'ঠিক আছে',
   'This card': 'এই কার্ড',

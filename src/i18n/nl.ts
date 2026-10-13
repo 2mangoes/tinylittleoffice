@@ -304,6 +304,7 @@ export default {
   'Justified, indented, small caps': 'Uitgevuld, ingesprongen, kleine kapitalen',
   'Newspaper': 'Krant',
   'A narrow headline, two columns': 'Een smalle kop, twee kolommen',
+  'Horizontal rule': 'Horizontale lijn',
   // Insert ▾'s rule in a document: what follows starts the next page.
   'Page break': 'Pagina-einde',
   'OK': 'OK', // same

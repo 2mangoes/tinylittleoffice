@@ -7,11 +7,12 @@
  *
  * What is not words is a card the editor asks this host to draw: a table block as a grid whose cells are
  * `cells` ops, worked out in place by the formula engine; another document as a picture of its first page;
- * a page break (the kernel's `hr`, from Insert ▾ or
- * Mod+Shift+Enter) as a thin dashed rule with its name in the middle. The document's own head fields (an invoice's
- * from and to) are inputs over the text; the footnotes are listed under it (<to-notes>, kit/draw/notes.ts), each
- * note's words typed there, where they are drawn (a mark tapped, or a new footnote, puts the caret in its note;
- * Enter, Escape or ↩ come back to the mark), and the words are counted at the foot.
+ * a page break (the kernel's `hr`, from Insert ▾ or Mod+Shift+Enter) as a thin dashed rule with its name in
+ * the middle; a horizontal rule (that `hr` marked `{.rule}`, from Insert ▾ or `---` and Space) as a light
+ * line with a little room above and below. The document's own head fields (an invoice's from and to) are
+ * inputs over the text; the footnotes are listed under it (<to-notes>, kit/draw/notes.ts), each note's words
+ * typed there, where they are drawn (a mark tapped, or a new footnote, puts the caret in its note; Enter,
+ * Escape or ↩ come back to the mark), and the words are counted at the foot.
  *
  * A card is a thing in hand when it has the focus (a tap, Tab, the table's corner handle, Escape from a
  * cell): the bar under it is Edit, Move up, Move down, Duplicate | Copy, Cut, Paste | Delete (§6's order),
@@ -24,7 +25,7 @@ import { html, nothing, type PropertyDeclarations, type PropertyValues, type Tem
 import { unsafeSVG } from 'lit/directives/unsafe-svg.js';
 import { guard } from 'lit/directives/guard.js';
 import { SquarePen } from 'lucide';
-import { parse, write, type Block, type Doc, type Op } from '../../doc/index.ts';
+import { isRule, parse, write, type Block, type Doc, type Op } from '../../doc/index.ts';
 import { lookup } from '../../kit/core/app.ts';
 import { cmdTool } from '../../kit/ui/bar.ts';
 import { contextOf, drawnIn, labelOf, runKey } from '../../kit/core/commands.ts';
@@ -324,6 +325,7 @@ export class ToWriteEditor extends DocElement<Doc> {
         <figcaption><b>${name}</b><small>${def?.name ?? b.lang}</small></figcaption>
       </figure>`;
     }
+    if (isRule(b)) return html`<div class="write-rule"><hr aria-label=${t('Horizontal rule')} /></div>`;
     if (b.k === 'hr') return html`<div class="write-break" role="separator" aria-label=${t('Page break')}><span>${t('Page break')}</span></div>`;
     return null;
   };

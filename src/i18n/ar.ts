@@ -304,6 +304,7 @@ export default {
   'Justified, indented, small caps': 'مضبوط ومُزاح، بأحرف كبيرة صغيرة',
   'Newspaper': 'صحيفة',
   'A narrow headline, two columns': 'عنوان ضيق في عمودين',
+  'Horizontal rule': 'خط أفقي',
   // Insert ▾'s rule in a document: what follows starts the next page.
   'Page break': 'فاصل صفحة',
   'OK': 'حسنًا',

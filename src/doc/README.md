@@ -11,7 +11,8 @@ Doc = { head: Record<string, string>; blocks: Block[] }
 
 Eight block kinds: `h` (level 1–6), `p`, `li` (depth, `ord`, `done`), `quote`, `hr`, `table` (typed `cols`, raw
 `rows`), `fence` (`lang` names an app: another document; else text kept as written), `edge` (`~ A -> B: label`). Any
-block may carry `a: { id, cls, kv }`. The four text kinds hold **runs**: `{ t, b, i, u, s, h, href, ic, fn }`, words
+block may carry `a: { id, cls, kv }`; the class tells blocks of a kind apart (`isRule`: an `hr` with the class
+`rule` is a horizontal rule, where a plain one is a break). The four text kinds hold **runs**: `{ t, b, i, u, s, h, href, ic, fn }`, words
 with their marks; an icon (`ic`) or a footnote (`fn`, the note's words as inline Markdown) is a run of its own with
 no words, and counts as one character. A line break inside a paragraph or an item is `'\n'` among the words; marks
 never cross it. Table cells stay strings (formulas, numbers, words); a `rich` column's cells are the inline form,

@@ -327,6 +327,8 @@ export default {
   'Justified, indented, small caps': 'Justified, indented, small caps',
   'Newspaper': 'Newspaper',
   'A narrow headline, two columns': 'A narrow headline, two columns',
+  // Insert ▾'s horizontal rule in a document: a light line across the page, nothing more.
+  'Horizontal rule': 'Horizontal rule',
   // Insert ▾'s rule in a document: what follows starts the next page.
   'Page break': 'Page break',
   'OK': 'OK',

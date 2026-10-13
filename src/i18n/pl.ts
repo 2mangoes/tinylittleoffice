@@ -304,6 +304,7 @@ export default {
   'Justified, indented, small caps': 'Wyjustowany, z wcięciami, kapitaliki',
   'Newspaper': 'Gazeta',
   'A narrow headline, two columns': 'Wąski nagłówek, dwie kolumny',
+  'Horizontal rule': 'Linia pozioma',
   // Insert ▾'s rule in a document: what follows starts the next page.
   'Page break': 'Podział strony',
   'OK': 'OK', // same

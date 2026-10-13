@@ -257,6 +257,20 @@
     border-top: 1px dashed color-mix(in srgb, var(--to-paper-muted) 60%, transparent);
   }
 
+  /* A horizontal rule: a light line, the card a finger tall (the kit pads an hr card above and below), in rem so it grows with the size. */
+  .write-rule {
+    display: flex;
+    align-items: center;
+    min-height: 1.75rem;
+    cursor: pointer;
+  }
+  .write-rule hr {
+    flex: 1;
+    margin: 0;
+    border: 0;
+    border-top: 1px solid var(--to-paper-line);
+  }
+
   /* A card in hand (it has the focus): outlined, whichever way it was taken. */
   .write-page .tx .tx-card:focus {
     outline: 0.125rem solid var(--to-paper-accent);

@@ -303,6 +303,7 @@ export default {
   'Justified, indented, small caps': '两端对齐，首行缩进，小型大写',
   'Newspaper': '报纸',
   'A narrow headline, two columns': '窄幅大标题，分两栏',
+  'Horizontal rule': '水平线',
   // Insert ▾'s rule in a document: what follows starts the next page.
   'Page break': '分页符',
   'OK': '确定',

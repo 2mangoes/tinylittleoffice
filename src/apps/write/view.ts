@@ -3,9 +3,10 @@
  * title large, the document's own head fields under it, headings, paragraphs, lists, quotes, a table block
  * drawn by the sheet's renderer and worked out in place, another document as a picture of its first page,
  * and the footnotes small at the end; and the same text as a web page, as
- * Word (.docx), as RTF and as Markdown. A rule (`hr`) is a page break: the next page on paper, in print
- * and in .docx and .rtf; `---` in Markdown. The look (look.ts) sets the type in each: its faces, justified lines, indented paragraphs,
- * small capitals, two columns on paper.
+ * Word (.docx), as RTF and as Markdown. A rule (`hr`) is a page break: the next page on paper, in print and
+ * in .docx and .rtf; `---` in Markdown. A rule marked `{.rule}` is a horizontal rule: a light line with a
+ * little room above and below in every one of them, never a new page. The look (look.ts) sets the type in
+ * each: its faces, justified lines, indented paragraphs, small capitals, two columns on paper.
  */
 import { encodeDoc } from '../../kit/core/codec.ts';
 import { ACCENT, FAINT, FONT, INK, LINE, MUTED, SHADE, monoWidth, pageSvg, r, rect, text as svgText, textWidth, xml } from '../../kit/draw/draw.ts';
@@ -13,7 +14,24 @@ import { glyphNamed } from '../../kit/draw/icons.ts';
 import { LOCKED_LANG, placedLink } from '../../kit/share/locked.ts';
 import { XML_HEAD, zip } from '../../kit/file/zip.ts';
 import { lookup, type ExportContext, type Page } from '../../kit/core/app.ts';
-import { formatCell, listNumbers, markNotes, noteNumbers, noteRuns, notesOf, parse, plainText, referenceNotes, runLinks, write, isText, type Block, type Doc, type Run } from '../../doc/index.ts';
+import {
+  formatCell,
+  isRule,
+  listNumbers,
+  markNotes,
+  noteNumbers,
+  noteRuns,
+  notesOf,
+  parse,
+  plainText,
+  referenceNotes,
+  runLinks,
+  write,
+  isText,
+  type Block,
+  type Doc,
+  type Run,
+} from '../../doc/index.ts';
 import { currencyAt } from '../sheet/model.ts';
 import { tablePage } from '../sheet/view.ts';
 import { PAPERS, fenceTitle, fieldsOf, paperOf, tableView, titleBlock } from './model.ts';
@@ -281,6 +299,10 @@ export function pages(textOrDoc: string | Doc, small = false, still = false): Pa
       bits.push({ h: h + 12, first: h + 12, svg: (y) => rect(M, y, cw, h, SHADE, 'rx="6"') + lines.map((l, i) => lineSvg(M + 12, y + 23 + i * 18, [{ t: l, mono: true }], 13)).join('') });
       continue;
     }
+    if (isRule(b)) {
+      bits.push({ h: 28, first: 28, svg: (y) => `<line x1="${M}" y1="${y + 14}" x2="${M + cw}" y2="${y + 14}" stroke="${LINE}"/>` });
+      continue;
+    }
     if (b.k === 'hr') {
       bits.push({ h: 0, first: 0, brk: true, svg: () => '' });
       continue;
@@ -511,7 +533,7 @@ function bodyHtml(doc: Doc, site = '', stem = 'fn'): string {
         case 'quote':
           return `<blockquote${alignStyle(b)}>${inner(b) || '<br>'}</blockquote>`;
         case 'hr':
-          return '<hr class="page-break">';
+          return isRule(b) ? '<hr class="rule">' : '<hr class="page-break">';
         case 'table':
           return tableHtml(doc, doc.blocks.indexOf(b));
         case 'edge':
@@ -573,6 +595,7 @@ table{border-collapse:collapse;margin:0 0 1em;font-size:.95em}th{background:${SH
 figure{margin:1em 0}figure.doc svg{display:block;max-width:100%;height:auto;border:1px solid ${LINE};border-radius:8px}figcaption,figure.doc{color:${MUTED};font-size:.9em}
 mark{background:#fde68a}pre{padding:.8em 1em;background:${SHADE};border-radius:8px;overflow:auto;font-size:.85em}
 a{color:${ACCENT}}.fn a{text-decoration:none}.fn-notes{margin-top:2em;font-size:.8em;color:${MUTED}}.fn-notes hr{width:72px;margin:0 0 .6em;border:0;border-top:1px solid ${LINE}}.fn-notes ol{padding-left:1.6em}
+hr.rule{margin:1.25em 0;border:0;border-top:1px solid ${LINE}}
 hr.page-break{margin:2em 0;border:0;border-top:1px dashed ${LINE}}@media print{hr.page-break{break-after:page;margin:0;border:0}}
 footer{margin-top:3em;color:${MUTED};font-size:.85em}
 ${lookCss(look)}
@@ -590,7 +613,11 @@ ${bodyHtml(doc, siteOf(ctx.link))}
 /* ---------- Markdown ---------- */
 
 /** The text as Markdown anyone reads: its footnotes in the reference form, [^1] with "[^1]: the note" at the end. */
-export const docToMarkdown = (doc: Doc): string => write(referenceNotes(doc));
+export const docToMarkdown = (doc: Doc): string => {
+  const md = referenceNotes(doc);
+  // A horizontal rule is Markdown's own rule, written plain: the class is ours, and the `---` reads as a rule anywhere.
+  return write({ ...md, blocks: md.blocks.map((b) => (isRule(b) ? { k: 'hr' } : b)) });
+};
 
 /* ---------- RTF ---------- */
 
@@ -627,7 +654,10 @@ export function docToRtf(doc: Doc, ctx: ExportContext): string {
   const named = (f: Look['body']) => (f === 'sans' ? { name: 'Helvetica', rtf: 'fswiss' } : NAMED[f]);
   // f2 is code's, the monospace.
   const fonts = [named(look.body), named(look.head), NAMED.mono].map((f, i) => `{\\f${i}\\${f.rtf}\\fcharset0 ${f.name};}`).join('');
-  const out: string[] = [`{\\rtf1\\ansi\\ansicpg1252\\deff0\\uc1{\\fonttbl${fonts}}{\\colortbl;\\red79\\green70\\blue229;\\red82\\green82\\blue91;\\red253\\green230\\blue138;}`, '\\f0\\fs24'];
+  const out: string[] = [
+    `{\\rtf1\\ansi\\ansicpg1252\\deff0\\uc1{\\fonttbl${fonts}}{\\colortbl;\\red79\\green70\\blue229;\\red82\\green82\\blue91;\\red253\\green230\\blue138;\\red212\\green212\\blue216;}`,
+    '\\f0\\fs24',
+  ];
   const number = listNumbers();
   const next = noteNumbers();
   const site = siteOf(ctx.link);
@@ -673,6 +703,10 @@ export function docToRtf(doc: Doc, ctx: ExportContext): string {
       out.push(
         `{\\pard\\sb120\\sa60\\li360 {\\field{\\*\\fldinst HYPERLINK "${rtfText(fenceLink(b.lang, b.body, site))}"}{\\fldrslt {\\ul\\cf1\\b ${rtfText(name)}}}} {\\i (${rtfText(def?.name ?? b.lang)})}\\par}`,
       );
+      continue;
+    }
+    if (isRule(b)) {
+      out.push('{\\pard\\sb120\\sa240\\brdrb\\brdrs\\brdrw10\\brdrcf4\\brsp20\\fs4\\par}');
       continue;
     }
     if (b.k === 'hr') {
@@ -812,6 +846,10 @@ export function docToDocx(doc: Doc, ctx: ExportContext): Uint8Array {
       paras.push(
         `<w:p><w:hyperlink r:id="${rel(fenceLink(b.lang, b.body, site))}"><w:r><w:rPr><w:rStyle w:val="Hyperlink"/><w:b/></w:rPr><w:t xml:space="preserve">${xml(name)}</w:t></w:r></w:hyperlink>${plain(` (${def?.name ?? b.lang})`, '<w:i/>')}</w:p>`,
       );
+      continue;
+    }
+    if (isRule(b)) {
+      paras.push('<w:p><w:pPr><w:pBdr><w:bottom w:val="single" w:sz="6" w:space="1" w:color="D4D4D8"/></w:pBdr><w:spacing w:before="120" w:after="240"/></w:pPr></w:p>');
       continue;
     }
     if (b.k === 'hr') {

@@ -304,6 +304,7 @@ export default {
   'Justified, indented, small caps': 'Justificado, con sangría y versalitas',
   'Newspaper': 'Periódico',
   'A narrow headline, two columns': 'Un titular estrecho, dos columnas',
+  'Horizontal rule': 'Línea horizontal',
   // Insert ▾'s rule in a document: what follows starts the next page.
   'Page break': 'Salto de página',
   'OK': 'Aceptar',

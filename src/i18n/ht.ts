@@ -305,6 +305,7 @@ export default {
   'Justified, indented, small caps': 'Jistifye, retrè, ti majiskil',
   'Newspaper': 'Jounal',
   'A narrow headline, two columns': 'Yon tit etwat, de kolòn',
+  'Horizontal rule': 'Liy orizontal',
   // Insert ▾'s rule in a document: what follows starts the next page.
   'Page break': 'Chanjman paj',
   'OK': 'OK', // same

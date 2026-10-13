@@ -7,7 +7,8 @@
  * marks, Link, Footnote, the lists and Indent are the words' own (kit/text/text-commands.ts), drawn in this bar with the
  * editor's <to-text> as their context.
  */
-import { ArrowDown, ArrowUp, ClipboardPaste, Copy, CopyPlus, Palette, Pilcrow, Ruler, Scissors, SeparatorHorizontal, CornerDownLeft } from 'lucide';
+import { ArrowDown, ArrowUp, ClipboardPaste, Copy, CopyPlus, Palette, Pilcrow, Ruler, Scissors, SeparatorHorizontal, CornerDownLeft, Minus } from 'lucide';
+import { rule } from '../../doc/index.ts';
 import { apps } from '../../kit/core/apps.ts';
 import { register, type Command, commandsOf } from '../../kit/core/commands.ts';
 import { t } from '../../kit/core/i18n.ts';
@@ -44,6 +45,7 @@ const INSERTS: Command<W>[] = [
   cmd('insert.doc', 'Tiny Little Office Doc…', { icon: UI.insert, where: ['menu:insert'], does: (w) => w.insertDocument() }),
   cmd('insert.qr', 'QR code of this document', { icon: UI.qr, where: ['menu:insert'], does: (w) => w.insertQr() }),
   cmd('insert.date', 'Date', { icon: UI.calendar, where: ['menu:insert'], does: (w) => w.text.exec('date') }),
+  cmd('insert.rule', 'Horizontal rule', { icon: Minus, where: ['menu:insert'], does: (w) => w.insertBlock(rule()) }),
   cmd('insert.break', 'Page break', { at: 'words', icon: SeparatorHorizontal, keys: 'Mod+Shift+Enter', where: ['menu:insert'], does: (w, e) => (inWords(w, e) ? w.insertBlock({ k: 'hr' }) : false) }),
   ...apps()
     .filter((a) => a.id !== 'write')

@@ -100,6 +100,11 @@ export const hasClass = (b: { a?: Attrs }, c: string): boolean => !!b.a?.cls?.in
 /** A key's value among a block's attributes, or undefined. */
 export const attr = (b: { a?: Attrs }, k: string): string | undefined => b.a?.kv?.[k];
 
+/** Whether a block is a horizontal rule: a break with the class rule, drawn as a line and never starting a page or slide. */
+export const isRule = (b: Block): boolean => b.k === 'hr' && hasClass(b, 'rule');
+/** A horizontal rule: the kernel's break marked rule, so the plain break keeps its meaning. */
+export const rule = (): Block => ({ k: 'hr', a: { cls: ['rule'] } });
+
 /** Whether a block is another document held in this one: a fence named for its app. */
 export const isInnerDoc = (b: Block): boolean => b.k === 'fence' && !!b.lang;
 

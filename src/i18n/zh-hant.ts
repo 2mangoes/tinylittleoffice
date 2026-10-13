@@ -305,6 +305,7 @@ export default {
   'Justified, indented, small caps': '左右對齊、首行縮排、小型大寫',
   'Newspaper': '報紙',
   'A narrow headline, two columns': '窄版大標題，雙欄',
+  'Horizontal rule': '水平線',
   // Insert ▾'s rule in a document: what follows starts the next page.
   'Page break': '分頁符號',
   'OK': '確定',

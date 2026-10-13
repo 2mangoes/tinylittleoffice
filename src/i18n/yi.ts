@@ -315,6 +315,7 @@ export default {
   'Justified, indented, small caps': 'אויסגעגליכן, אריינגערוקט, קליינע קאפיטאלן',
   'Newspaper': 'צייטונג',
   'A narrow headline, two columns': 'א שמאלער קעפל, צוויי שפאלטן',
+  'Horizontal rule': 'האָריזאָנטאַלע ליניע',
   // Insert ▾'s rule in a document: what follows starts the next page.
   'Page break': 'זייט־ברעך',
   'OK': 'גוט',

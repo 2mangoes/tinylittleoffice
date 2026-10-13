@@ -303,6 +303,7 @@ export default {
   'Justified, indented, small caps': 'दोनों ओर बराबर, इंडेंट, स्मॉल कैप्स',
   'Newspaper': 'अख़बार',
   'A narrow headline, two columns': 'एक तंग हेडलाइन, दो कॉलम',
+  'Horizontal rule': 'क्षैतिज रेखा',
   // Insert ▾'s rule in a document: what follows starts the next page.
   'Page break': 'पेज ब्रेक',
   'OK': 'ठीक है',

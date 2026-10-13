@@ -302,6 +302,7 @@ export default {
   'Justified, indented, small caps': '両端揃え、字下げ、スモールキャップ',
   'Newspaper': '新聞',
   'A narrow headline, two columns': '細い見出しと2段組み',
+  'Horizontal rule': '横線',
   // Insert ▾'s rule in a document: what follows starts the next page.
   'Page break': '改ページ',
   'OK': 'OK', // same

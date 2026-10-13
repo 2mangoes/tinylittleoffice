@@ -4,7 +4,7 @@
 // click-to-load card, a task is ticked by a tap, the paper is a head field, and at phone width the bar is one row and
 // the page never scrolls.
 import { expect, test } from 'vitest';
-import { page } from 'vitest/browser';
+import { page, userEvent } from 'vitest/browser';
 // The page's styles first, as the app has them: they name the layers' order (an app's own rules over the kit's).
 import '../../../styles.css';
 import { parse } from '../../../doc/index.ts';
@@ -780,6 +780,101 @@ test('a page break: from Insert ▾ or Mod+Shift+Enter at the caret, drawn as a 
   expect(barItems()).toEqual(['Move up', 'Move down', 'Duplicate', 'Copy', 'Cut', 'Paste', 'Delete']);
   key(card(el, 1), 'Delete');
   await until(() => last() === 'One\n\n\\ two\n\n---\n\n<br>\n');
+});
+
+/** After an undo: the editor, then its words, then a tick, or the undo's caret restore overwrites the next selection. */
+async function settled(el: ToWriteEditor) {
+  await el.updateComplete;
+  await el.text.updateComplete;
+  await tick();
+}
+const at = (el: ToWriteEditor) => [el.text.sel?.focus.block, el.text.sel?.focus.offset];
+
+test('a horizontal rule from Insert ▾: a light 1px line, centred in a card a finger tall, the caret in the paragraph after it; one undo takes it out', async () => {
+  const { el, last } = await editor('One\n');
+  el.text.focus();
+  el.text.sel = { anchor: { block: 0, offset: 3 }, focus: { block: 0, offset: 3 } };
+  await tick();
+  await pick(el, el.querySelector<HTMLElement>('to-insert button')!, 'Horizontal rule');
+  await until(() => last() === 'One\n\n--- {.rule}\n\n<br>\n');
+  const rule = card(el, 1);
+  expect(rule.classList.contains('tx-card')).toBe(true);
+  const hr = rule.querySelector('hr')!;
+  expect(hr.getAttribute('aria-label')).toBe('Horizontal rule');
+  const line = getComputedStyle(hr);
+  expect(line.borderTopStyle).toBe('solid');
+  expect(line.borderTopWidth).toBe('1px');
+  const probe = document.createElement('div');
+  probe.style.color = 'var(--to-paper-line)';
+  rule.append(probe);
+  expect(line.borderTopColor).toBe(getComputedStyle(probe).color);
+  probe.remove();
+  const box = rule.getBoundingClientRect();
+  expect(Math.abs(box.height - 2.75 * 16 * remScale())).toBeLessThanOrEqual(1);
+  const mid = hr.getBoundingClientRect().top - box.top;
+  expect(Math.abs(mid - box.height / 2)).toBeLessThanOrEqual(1.5);
+  expect(at(el)).toEqual([2, 0]);
+  undo(el);
+  await until(() => last() === 'One\n');
+  await settled(el);
+  expect(el.querySelector('.write-rule')).toBeNull();
+});
+
+test('"---" and Space alone on a line is a horizontal rule; one undo gives back the typed "--- "', async () => {
+  const { el, last } = await editor('');
+  el.text.focus();
+  el.text.sel = { anchor: { block: 0, offset: 0 }, focus: { block: 0, offset: 0 } };
+  await tick();
+  await type(el, '--- ');
+  await until(() => last() === '--- {.rule}\n\n<br>\n');
+  expect(at(el)).toEqual([1, 0]);
+  undo(el);
+  await until(() => el.text.blocks.length === 1 && el.querySelector('.write-rule') === null);
+  await settled(el);
+  expect(el.text.tx.textContent).toBe('--- ');
+});
+
+test('a horizontal rule is a card: the arrows step over it, Backspace after it and Delete before it take it out joining nothing, a selection across it deletes it, a tap takes it in hand', async () => {
+  const text = 'One\n\n--- {.rule}\n\nTwo\n';
+  const { el, last } = await editor(text);
+  await until(() => !!el.querySelector('.write-rule'));
+  const put = async (block: number, offset: number, fb = block, fo = offset) => {
+    el.text.focus();
+    el.text.sel = { anchor: { block, offset }, focus: { block: fb, offset: fo } };
+    await tick();
+  };
+  await put(0, 3);
+  await userEvent.keyboard('{ArrowRight}');
+  await until(() => at(el)[0] === 2 && at(el)[1] === 0);
+  await userEvent.keyboard('{ArrowLeft}');
+  await until(() => at(el)[0] === 0 && at(el)[1] === 3);
+  await userEvent.keyboard('{ArrowDown}');
+  await until(() => at(el)[0] === 2);
+  await userEvent.keyboard('{ArrowUp}');
+  await until(() => at(el)[0] === 0);
+  await put(2, 0);
+  await userEvent.keyboard('{Backspace}');
+  await until(() => last() === 'One\n\nTwo\n');
+  undo(el);
+  await until(() => last() === text);
+  await settled(el);
+  await put(0, 3);
+  await userEvent.keyboard('{Delete}');
+  await until(() => last() === 'One\n\nTwo\n');
+  undo(el);
+  await until(() => last() === text);
+  await settled(el);
+  await put(0, 1, 2, 1);
+  await userEvent.keyboard('{Delete}');
+  await until(() => last() === 'Owo\n');
+  undo(el);
+  await until(() => last() === text);
+  await settled(el);
+  card(el, 1).dispatchEvent(new MouseEvent('click', { bubbles: true }));
+  await until(() => document.activeElement === card(el, 1));
+  expect(getComputedStyle(card(el, 1)).outlineStyle).toBe('solid');
+  await until(() => barItems().length > 0);
+  expect(barItems()).toEqual(['Move up', 'Move down', 'Duplicate', 'Copy', 'Cut', 'Paste', 'Delete']);
 });
 
 test('Mod+Shift+L, E, R and J align the block in hand left, centred, right and justified, each written on the menu; never taken outside the words', async () => {

@@ -283,6 +283,30 @@ test('moveItems: an item with its family past the neighbouring family at its lev
   expect(applyAll(applyAll({ head: {}, blocks: b }, two.ops), invertAll({ head: {}, blocks: b }, two.ops)).blocks).toEqual(b);
 });
 
+test('"---" and Space alone on a line in a document is a horizontal rule, the caret in an empty paragraph after it', () => {
+  const p: Block[] = [{ k: 'p', runs: [{ t: '---' }] }];
+  const e = shortcut(p, caret(0, 3), 'doc')!;
+  expect(tlo(after(p, e))).toBe('--- {.rule}\n\n<br>\n');
+  expect(after(p, e)).toEqual([
+    { k: 'hr', a: { cls: ['rule'] } },
+    { k: 'p', runs: [] },
+  ]);
+  expect(e.sel).toEqual(caret(1, 0));
+  // Only in a document, and only when nothing follows the hyphens.
+  expect(shortcut(p, caret(0, 3), 'lines')).toBeNull();
+  const more: Block[] = [{ k: 'p', runs: [{ t: '---more' }] }];
+  expect(shortcut(more, caret(0, 3), 'doc')).toBeNull();
+  expect(shortcut([{ k: 'p', runs: [{ t: '--' }] }], caret(0, 2), 'doc')).toBeNull();
+  // The paragraph after the rule keeps the line's attributes, as the other shortcuts keep them.
+  const centred: Block[] = [{ k: 'p', runs: [{ t: '---' }], a: { cls: ['center'] } }];
+  const c = shortcut(centred, caret(0, 3), 'doc')!;
+  expect(after(centred, c)).toEqual([
+    { k: 'hr', a: { cls: ['rule'] } },
+    { k: 'p', runs: [], a: { cls: ['center'] } },
+  ]);
+  expect(tlo(after(centred, c))).toBe('--- {.rule}\n\n<br> {.center}\n');
+});
+
 test('the "> " shortcut makes a quote in a doc (not in lines); setKind takes quote and gives it back as a paragraph', () => {
   const b = blocks('>rest\n');
   const q = shortcut(b, sel([0, 1]), 'doc')!;
