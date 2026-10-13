@@ -20,19 +20,31 @@ export function plexFaces(): string {
 }
 
 /**
- * Draw each page (1200 by 630) through Chromium, once its faces are in; nothing from the web. `prepare` changes the
- * page first (the cards' greeking: scripts/make-cards.ts); a file of '' draws nothing. The pages as drawn come back.
+ * Draw each page (1200 by 630) through Chromium, once its faces are in; nothing from the web but what `from` names
+ * (origins let through: the map's tiles, scripts/sample-cards.ts), and the page waits for those. `prepare` changes
+ * the page first (the cards' greeking: scripts/make-cards.ts); a file of '' draws nothing. The pages as drawn come back.
  */
-export async function shoot(pages: [html: string, file: string][], prepare?: (tab: import('playwright').Page) => Promise<void>): Promise<string[]> {
+export async function shoot(pages: [html: string, file: string][], prepare?: (tab: import('playwright').Page) => Promise<void>, from: string[] = []): Promise<string[]> {
   const { chromium } = await import('playwright');
   const browser = await chromium.launch();
   const tab = await browser.newPage({ viewport: { width: 1200, height: 630 }, deviceScaleFactor: 1 });
-  await tab.route('**/*', (r) => (r.request().url().startsWith('data:') ? r.continue() : r.abort()));
+  await tab.route('**/*', (r) =>
+    r.request().url().startsWith('data:') ||
+    from.some((o) =>
+      r
+        .request()
+        .url()
+        .startsWith(o + '/'),
+    )
+      ? r.continue()
+      : r.abort(),
+  );
   const drawn: string[] = [];
   try {
     for (const [html, file] of pages) {
       await tab.setContent(html, { waitUntil: 'load' });
       await tab.evaluate(() => document.fonts.ready.then(() => undefined));
+      if (from.length) await tab.waitForLoadState('networkidle');
       if (prepare) await prepare(tab);
       if (file) await tab.screenshot({ path: file, type: 'png' });
       drawn.push(await tab.content());

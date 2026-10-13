@@ -2,8 +2,8 @@
  * A preview card: what a link shared with a network previews with, made only when the person shares with one from the
  * Share dialog (Bluesky, Mastodon, X, LinkedIn or the device's share sheet) with 'Show a preview of the first page'
  * on (Paul, 2026-10-11: "When we explicitly share with a social network from in the app, that's when we do this"). The
- * document's first page is drawn by its app's own view() on the card's ground (kit/draw/card.ts) as a PNG of 1200 by
- * 630, and posted with the title and the first words to the site's own /card (tinier/cards.ts, the site's Worker),
+ * document's first page (or the page its app puts on a card: a sheet's chart, by ViewOpts.card) is drawn by its
+ * app's own view() on the card's ground (kit/draw/card.ts) as a PNG of 1200 by 630, and posted with the title and the first words to the site's own /card (tinier/cards.ts, the site's Worker),
  * which keeps them readable for a month so the network can fetch them; the document itself is not sent. The link
  * shared then carries the card's id as `?c=<id>` before the "#". Copy link and Email make none, nor does a document
  * with a password, which says nothing of itself.
@@ -46,9 +46,9 @@ export function cardWords(def: AppDef, doc: Doc, title: string): { title: string
   return { title: clipped(title.trim(), CARD_TITLE_MAX), text: words ? clipped(words, CARD_TEXT) : def.blurb };
 }
 
-/** The card as a PNG: the first page, letterboxed on the ground; null where the browser could not draw it. */
+/** The card as a PNG: the first page (a sheet's chart), letterboxed on the ground; null where the browser could not draw it. */
 function drawCard(def: AppDef, doc: Doc): Promise<Uint8Array | null> {
-  const page = def.view(doc, { still: true })[0];
+  const page = def.view(doc, { still: true, card: true })[0];
   return page ? raster(cardSvg(page), CARD_W, CARD_H, 1, GROUND) : Promise.resolve(null);
 }
 

@@ -229,6 +229,13 @@ test('every template is a real document that round-trips byte for byte, and the 
   expect(readSheet(parse(all.find((x) => x.id === 'fundraising')!.doc)).big).toEqual({ label: 'Raised so far, Oct 26', value: '$21,730.00' });
   expect(readSheet(parse(all.find((x) => x.id === 'savings')!.doc)).big).toEqual({ label: 'Still to go', value: '$2,300.00' });
   for (const id of ['poll', 'fundraising']) expect(sheetPages(all.find((x) => x.id === id)!.doc)[0].svg, id).toBe(chartOf(readSheet(parse(all.find((x) => x.id === id)!.doc)))!.svg);
+  // On a card the chart comes first whether it is drawn above or below the table (Paul, 2026-10-13: "Put charts on the card"); a sheet with none shows its table.
+  const below = '---\nchart: bar\n---\nMonth | Sales:number\n--- | ---\nJan | 10\nFeb | 20\n';
+  expect(sheetPages(below)[0].svg).toBe(tablePage(readSheet(parse(below))).svg);
+  expect(sheetPages(below, false, false, true)).toHaveLength(1);
+  expect(sheetPages(below, false, false, true)[0].svg).toBe(chartOf(readSheet(parse(below)))!.svg);
+  expect(def.view(below, { still: true, card: true })[0].svg).toBe(chartOf(readSheet(parse(below)))!.svg);
+  expect(def.view(SHEET, { still: true, card: true })[0].svg).toBe(tablePage(readSheet(parse(SHEET))).svg);
   expect(def.blank()).toBe('');
   expect(def.title('---\ntitle: Rent\n---\n' + SHEET)).toBe('Rent');
   expect(def.retitle(SHEET, 'Rent')).toBe('---\ntitle: Rent\n---\n' + SHEET);

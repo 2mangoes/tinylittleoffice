@@ -20,7 +20,7 @@ Take a look at some sample docs:
 - [The week of the stoop sale](https://tinylittleoffice.com/cal/#/v1/cal/ydZXLCsIwEEX3fsV8QIXEWq2BrkRw4UJw4bpirQWpkvpAxX_3TCqii25CC5070~Tek59Gmq~AMVKk2YLr2KvByV2KpSfFbWH4bMMWOZldC3~noNVvB7amb2OxqYt5mDibOFlWGJJgaavWw3LxtcZ2ChIAD~kjg08id_RZaPX6lRs6me7zAxDV9tW2uOmLJqvpLkrEpM6YPmtsnFqw3jLDk2vS37OAbJDcZMlf1UiYmaqBZWVy9bSEEqhWl5Gcqscj_9wxnb3HYoIKP68qq~_2RuJz2ACkwAHp71RInSyK3Rn~Qh9wNz_qrVzKmsNoIrnCOMJ5hqwfCT2QV~8N), in the Calendar
 - [A Saturday across Brooklyn](https://tinylittleoffice.com/trip/#/v1/trip/yjZXNioMwFIX3PkUeQCTjaFKXnVnNYqCvkDZSpT~RpD8U~vA950pooZtuRMT7eYP3fuflQ8unLtwmBgzaTwxht78dc~kB_ktS8uE_eRs0XouMBX~E09XKQYV31ejK6rrhS_a76jrzxR_n9tAkNn0auXKi3TJLnc_R6dWn4hcagaywsdhbYZmFAGaWYCmQeVvUOYom1v3AqREO1LkZihUOPjHXnk0Zo~sMMp2eD7pV_73z4VqyGDkJwjo4Rg6yA7ZNaOMF0SysIJpK65q37EUiLxsS~poorCS1JcXl_KWPpzH1HsfjAv0lJAeHHMjWtm3uymoil2qAPn3YiiWJlHg6RQfxDAyOBw), in the Trip Planner
 
-Each link is the whole document: open it, change it, and the link in the address bar is your copy.
+Each link is the whole document: open it, change it, and the link in the address bar is your copy. Twenty-five more are in [samples/](samples/), as files.
 
 Private by default.
 - By default nothing is kept, on your device or anywhere else.

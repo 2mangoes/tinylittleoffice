@@ -43,6 +43,12 @@ export interface ViewOpts {
   upTo?: number;
   /** Drawn in an editor: a document locked with a password and opened this visit is drawn open (kit/share/locked.ts); a page, a print or a file never passes it. */
   open?: boolean;
+  /**
+   * Drawn as the picture a shared link previews with (kit/share/card.ts), with `still`: the one page that says
+   * the most about the document, where that is not its first (a sheet's chart over its table: Paul, 2026-10-13,
+   * "Put charts on the card"). Only the card passes it; the first page of view() stays what a print begins with.
+   */
+  card?: boolean;
 }
 
 /** Whether a page is drawn where nothing can move: `still`, or a thumbnail (which always is). */

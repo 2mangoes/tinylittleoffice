@@ -156,11 +156,12 @@ export function gridPage(v: SheetView, thumb = false): Page {
   return { w, h, svg, alt: rowsShown.length ? rowsShown.map((row) => row.filter(Boolean).join(', ')).join('; ') : t('Empty sheet') };
 }
 
-/** A sheet document's pages: the table (its headline above it) and its chart, the chart first when it is drawn above the table; drawn small, the grid alone (or the chart), as a thumbnail the grid's corner. */
-export function sheetPages(text: string, small = false, thumb = false): Page[] {
+/** A sheet document's pages: the table (its headline above it) and its chart, the chart first when it is drawn above the table; drawn small, the grid alone (or the chart), as a thumbnail the grid's corner; as a card, the chart where there is one, else the table. */
+export function sheetPages(text: string, small = false, thumb = false, card = false): Page[] {
   const v = readSheet(parse(text));
   const chart = chartOf(v);
   if (small) return [chart ?? gridPage(v, thumb)];
+  if (card) return [chart ?? tablePage(v)];
   if (!chart) return [tablePage(v)];
   return v.table.above ? [chart, tablePage(v)] : [tablePage(v), chart];
 }
