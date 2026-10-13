@@ -498,7 +498,10 @@ export class ToText extends LitElement {
       if (e.hasAttribute(SAID)) return null;
       if (e.dataset.atomic !== undefined || e.tagName === 'BR') {
         const w = e.tagName === 'BR' ? (e.dataset.nl !== undefined ? 1 : 0) : 1;
-        if (left === 0 && w) return [e.parentNode!, index(e)];
+        // Before a chip or a line break the position reaches; and before the placeholder <br> of a block with no words
+        // (renderRuns), never after it: Safari draws no caret after a block's last <br>, so a new slide's empty boxes took
+        // the typing with nothing to show for it (Paul, 2026-10-13: "no cursor appears. I can type but it doesn't look like I can").
+        if (left === 0) return [e.parentNode!, index(e)];
         left -= w;
         last = [e.parentNode!, index(e) + 1];
         return null;

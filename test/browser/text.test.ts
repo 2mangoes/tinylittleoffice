@@ -1059,3 +1059,19 @@ test('Mod+K in words, then Enter with the box empty: no link, and the focus back
   expect(h.tlo).toBe('Some words here\n');
   expect(h.el.hasFocus()).toBe(true);
 });
+
+test("an empty box's caret sits before its placeholder <br>, never after it: Safari draws none after a block's last <br> (Paul, 2026-10-13: a new slide's boxes took typing with no caret)", async () => {
+  const h = await mount('', 'line', caret(0, 0));
+  h.el.focus();
+  await h.el.updateComplete;
+  await until(() => document.activeElement === h.el.tx);
+  await tick();
+  const p = h.el.tx.querySelector('p')!;
+  const br = p.querySelector('br')!;
+  const [node, offset] = h.el.domPoint({ block: 0, offset: 0 })!;
+  expect(node).toBe(p);
+  expect(offset).toBeLessThanOrEqual(Array.prototype.indexOf.call(p.childNodes, br));
+  const sel = document.getSelection()!;
+  expect(sel.anchorNode).toBe(p);
+  expect(sel.anchorOffset).toBeLessThanOrEqual(Array.prototype.indexOf.call(p.childNodes, br));
+});
