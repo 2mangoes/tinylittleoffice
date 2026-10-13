@@ -2,8 +2,8 @@
 // deeper rows after it. Every behaviour the standard gives rows chosen whole (docs/editing.md §3, §6): choosing by the
 // handle and by Shift+arrows (both ways, turning at the anchor), Select All, letting go, Delete, Tab, Alt+arrows, Mod+D,
 // the clipboard, a drag by pointer events with its target drawn, a tap outside, the bar under the range and its order,
-// and a finger's second tap extending.
-import { test, expect } from 'vitest';
+// and a finger's hold on a handle extending.
+import { test, expect, vi } from 'vitest';
 import { html, LitElement } from 'lit';
 import { Rows, lastCopied, type RowRange, type RowSpan } from '../../src/kit/text/rows.ts';
 import type { ToText } from '../../src/kit/text/text.ts';
@@ -314,26 +314,64 @@ test('a tap outside the host lets the range go; a tap in the bar does not', asyn
   expect(barOpen(el)).toBe(false);
 });
 
-test('a finger: a second tap on another handle extends the range; a tap without movement is a choose, not a drag', async () => {
-  const el = await host(['a', 'b', 'c']);
-  const tap = (i: number) => {
+test('a finger: a second tap on another handle chooses afresh; a handle pressed and held extends the range to it; a tap without movement is a choose, not a drag', async () => {
+  const el = await host(['a', 'b', 'c', 'd']);
+  const at = (i: number) => {
     const r = handle(el, i).getBoundingClientRect();
-    pointer(handle(el, i), 'pointerdown', r.left + 4, r.top + 4, { pointerType: 'touch' });
-    pointer(handle(el, i), 'pointerup', r.left + 4, r.top + 4, { pointerType: 'touch' });
+    return [r.left + 4, r.top + 4] as const;
+  };
+  const tap = (i: number) => {
+    const [x, y] = at(i);
+    pointer(handle(el, i), 'pointerdown', x, y, { pointerType: 'touch' });
+    pointer(handle(el, i), 'pointerup', x, y, { pointerType: 'touch' });
     handle(el, i).click();
   };
   tap(0);
   await settle(el);
   expect(el.rows.range).toEqual({ anchor: 0, focus: 0 });
+  // A second tap is not a Shift: the first row is let go (Paul, 2026-10-13: a slide tapped stayed chosen when the next was tapped).
   tap(2);
   await settle(el);
-  expect(ranged(el)).toEqual([0, 1, 2]);
-  // With a mouse, a second tap chooses afresh.
-  const r = handle(el, 1).getBoundingClientRect();
-  pointer(handle(el, 1), 'pointerdown', r.left + 4, r.top + 4);
-  pointer(handle(el, 1), 'pointerup', r.left + 4, r.top + 4);
+  expect(ranged(el)).toEqual([2]);
+  // Held still for half a second, a handle extends the range to its row while the finger is still down; the lift and the click after add nothing.
+  vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] });
+  try {
+    const [x, y] = at(0);
+    pointer(handle(el, 0), 'pointerdown', x, y, { pointerType: 'touch' });
+    vi.advanceTimersByTime(499);
+    expect(el.rows.range).toEqual({ anchor: 2, focus: 2 });
+    vi.advanceTimersByTime(1);
+    expect(el.rows.range).toEqual({ anchor: 2, focus: 0 });
+    pointer(handle(el, 0), 'pointerup', x, y, { pointerType: 'touch' });
+    handle(el, 0).click();
+    expect(el.rows.range).toEqual({ anchor: 2, focus: 0 });
+    // A hold that moves on is neither a drag nor a second choose.
+    const [x3, y3] = at(3);
+    pointer(handle(el, 3), 'pointerdown', x3, y3, { pointerType: 'touch' });
+    vi.advanceTimersByTime(500);
+    expect(el.rows.range).toEqual({ anchor: 2, focus: 3 });
+    pointer(handle(el, 3), 'pointermove', x3 + 20, y3 + 20, { pointerType: 'touch' });
+    expect(el.rows.drag).toBeNull();
+    pointer(handle(el, 3), 'pointerup', x3 + 20, y3 + 20, { pointerType: 'touch' });
+    expect(el.rows.range).toEqual({ anchor: 2, focus: 3 });
+    // A tap lifted before the hold is a tap: the timer is cleared with it.
+    const [x1, y1] = at(1);
+    pointer(handle(el, 1), 'pointerdown', x1, y1, { pointerType: 'touch' });
+    vi.advanceTimersByTime(100);
+    pointer(handle(el, 1), 'pointerup', x1, y1, { pointerType: 'touch' });
+    vi.advanceTimersByTime(1000);
+    expect(el.rows.range).toEqual({ anchor: 1, focus: 1 });
+  } finally {
+    vi.useRealTimers();
+  }
   await settle(el);
   expect(ranged(el)).toEqual([1]);
+  // With a mouse, a second tap chooses afresh too.
+  const [x, y] = at(0);
+  pointer(handle(el, 0), 'pointerdown', x, y);
+  pointer(handle(el, 0), 'pointerup', x, y);
+  await settle(el);
+  expect(ranged(el)).toEqual([0]);
 });
 
 test('a drag by the handle: past 6px it carries the row, the target is drawn after a row (under it on its right half), never inside its own family; the drop goes to the host', async () => {

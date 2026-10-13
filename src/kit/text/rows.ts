@@ -17,7 +17,7 @@
  * The host draws `rows.has(id)` (a chosen row: `.ranged`, and aria-pressed on its handle, a list item having no aria-selected) and puts `rows.renderContext()` in its template;
  * it calls `rows.choose(id, extend?)`, `rows.selectAll()`, `rows.release(id?)` from its own paths (Shift+Up/Down in words,
  * a second Select All). The controller owns: the range {anchor, focus}; a tap on a handle (choose; Shift+tap and, on a
- * touch screen, a second tap on another handle extend); Shift+Up/Down (from the words too, unless `fromWords` is false),
+ * touch screen, a handle pressed and held extend); Shift+Up/Down (from the words too, unless `fromWords` is false),
  * flipping past the anchor; Escape (in words, `text-escape` once <to-text> has closed its boxes and collapsed its words: the
  * row chosen, the step out of edit; on a range: the caret back), plain arrows
  * and Enter letting go to a caret; Mod+A; Delete/Backspace; Tab/Shift+Tab; Alt+Up/Down; Mod+D; Mod+C/X/V through
@@ -106,9 +106,11 @@ export const lastCopied = (): Clip | null => copied;
 
 const EDGE = 48;
 const SLOP = 6;
+/** How long a finger holds a handle still before the hold extends the range to its row (Shift's work on a touch screen). */
+const HOLD = 500;
 
 type Host = ReactiveControllerHost & HTMLElement;
-type Press<Id> = { id: Id; pointer: number; x: number; y: number; moved: boolean; touch: boolean; shift: boolean; el: HTMLElement };
+type Press<Id> = { id: Id; pointer: number; x: number; y: number; moved: boolean; shift: boolean; el: HTMLElement; hold: number; held: boolean };
 
 export class Rows<Id = number> implements ReactiveController {
   /** The rows chosen whole; null when the caret is in words (or nowhere). */
@@ -143,6 +145,8 @@ export class Rows<Id = number> implements ReactiveController {
     document.addEventListener('pointerdown', this.onOutside, true);
   }
   hostDisconnected() {
+    if (this.press) clearTimeout(this.press.hold);
+    this.press = null;
     const h = this.host;
     h.removeEventListener('keydown', this.onKey);
     h.removeEventListener('text-escape', this.onTextEscape);
@@ -430,17 +434,16 @@ export class Rows<Id = number> implements ReactiveController {
     const el = (e.target as HTMLElement | null)?.closest?.<HTMLElement>(this.o.handle);
     return el && this.host.contains(el) ? el : null;
   }
-  /** A tap on a handle: choose the row; Shift, or on a touch screen a second handle, extends. */
-  private tap(id: Id, shift: boolean, touch: boolean) {
-    const extend = shift || (touch && !!this.range && this.range.anchor !== id);
-    this.choose(id, extend);
+  /** A tap on a handle: choose the row; Shift extends. */
+  private tap(id: Id, shift: boolean) {
+    this.choose(id, shift);
   }
   private onClick = (e: MouseEvent) => {
     const h = this.handleOf(e);
     if (!h) return;
     if (this.tapped) return void (this.tapped = false);
     const row = this.rowOf(h);
-    if (row) this.tap(row.id, e.shiftKey, false);
+    if (row) this.tap(row.id, e.shiftKey);
   };
   private onDown = (e: PointerEvent) => {
     const h = this.handleOf(e);
@@ -448,7 +451,18 @@ export class Rows<Id = number> implements ReactiveController {
     const row = this.rowOf(h);
     if (!row) return;
     this.tapped = false;
-    this.press = { id: row.id, pointer: e.pointerId, x: e.clientX, y: e.clientY, moved: false, touch: e.pointerType === 'touch' || e.pointerType === 'pen', shift: e.shiftKey, el: h };
+    const touch = e.pointerType === 'touch' || e.pointerType === 'pen';
+    const press: Press<Id> = { id: row.id, pointer: e.pointerId, x: e.clientX, y: e.clientY, moved: false, shift: e.shiftKey, el: h, hold: 0, held: false };
+    // A finger that holds the handle still extends the range to its row (a second tap chooses afresh, as a mouse's does:
+    // Paul, 2026-10-13, on the slide rail: a slide tapped stayed chosen when the next was tapped). The hold shows at once.
+    if (touch)
+      press.hold = window.setTimeout(() => {
+        if (this.press !== press || press.moved) return;
+        press.held = true;
+        this.tapped = true;
+        this.choose(press.id, true);
+      }, HOLD);
+    this.press = press;
     this.point = { x: e.clientX, y: e.clientY };
     try {
       h.setPointerCapture(e.pointerId);
@@ -463,6 +477,8 @@ export class Rows<Id = number> implements ReactiveController {
     if (!p.moved && Math.hypot(e.clientX - p.x, e.clientY - p.y) < SLOP) return;
     e.preventDefault();
     if (!p.moved) {
+      clearTimeout(p.hold);
+      if (p.held) return;
       if (!this.o.drop) return;
       p.moved = true;
       this.drag = { id: p.id, over: null, how: 'after' };
@@ -476,15 +492,18 @@ export class Rows<Id = number> implements ReactiveController {
     const p = this.press;
     if (!p || e.pointerId !== p.pointer) return;
     this.press = null;
+    clearTimeout(p.hold);
     const d = this.drag;
     this.endDrag();
-    // A tap that did not move is the choose; the click that follows is swallowed.
+    // A tap that did not move is the choose (a held one chose already); the click that follows is swallowed.
     this.tapped = true;
     setTimeout(() => (this.tapped = false), 400);
-    if (!p.moved) return this.tap(p.id, p.shift || e.shiftKey, p.touch);
+    if (p.held) return;
+    if (!p.moved) return this.tap(p.id, p.shift || e.shiftKey);
     if (d && d.over !== null) this.o.drop?.(d.id, d.over, d.how);
   };
   private onCancel = () => {
+    if (this.press) clearTimeout(this.press.hold);
     this.press = null;
     this.endDrag();
   };

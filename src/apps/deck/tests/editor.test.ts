@@ -3,7 +3,7 @@
 // footnote is listed at the slide's foot, a format changes the page and the rail, a page past what is
 // written is born on its first letter, presenting shows a slide and Escape comes back, and at phone width
 // the bar is one row and nothing is wider than the screen.
-import { expect, test } from 'vitest';
+import { expect, test, vi } from 'vitest';
 import { page } from 'vitest/browser';
 // The page's styles first, as the app has them: they name the layers' order (an app's own rules over the kit's).
 import '../../../styles.css';
@@ -363,6 +363,40 @@ test('a tap on a thumbnail chooses the slide, with the contextual bar in the sta
   await until(() => document.activeElement === box(el, 'title') && el.cur === 0);
   const tools = [...el.querySelectorAll('to-bar > button')].map((b) => b.getAttribute('aria-label'));
   expect(tools.slice(-2)).toEqual(['Undo', 'Redo']);
+});
+
+test('a finger on the rail: a tap on a slide’s grip shows and chooses that slide alone, the one before let go; a grip held extends', async () => {
+  const { el } = await editor(FOUR);
+  const grip = (i: number) => el.querySelectorAll<HTMLElement>('.deck-grip')[i];
+  const press = (i: number, type: string) => {
+    const r = grip(i).getBoundingClientRect();
+    grip(i).dispatchEvent(new PointerEvent(type, { bubbles: true, composed: true, clientX: r.left + 4, clientY: r.top + 4, pointerId: 1, pointerType: 'touch', isPrimary: true, button: 0 }));
+  };
+  const tap = (i: number) => {
+    press(i, 'pointerdown');
+    press(i, 'pointerup');
+    grip(i).click();
+  };
+  tap(1);
+  await settle(el);
+  expect(ranged(el)).toEqual([1]);
+  expect(el.cur).toBe(1);
+  tap(2);
+  await settle(el);
+  expect(ranged(el)).toEqual([2]);
+  expect(el.cur).toBe(2);
+  vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] });
+  try {
+    press(3, 'pointerdown');
+    vi.advanceTimersByTime(500);
+    press(3, 'pointerup');
+    grip(3).click();
+  } finally {
+    vi.useRealTimers();
+  }
+  await settle(el);
+  expect(ranged(el)).toEqual([2, 3]);
+  expect(el.cur).toBe(3);
 });
 
 test('Escape in the words chooses the slide on the rail (never the body); Escape again puts the caret back; Mod+A twice takes every slide', async () => {
