@@ -260,6 +260,15 @@ test('390×844 with a finger: an app tapped on the home page opens editing, the 
   await until(() => chrome.hasAttribute('indoc'));
   expect(chrome.hasAttribute('editing')).toBe(true);
   expect(document.querySelector('.to-keyboard-hold')).toBeNull();
+  // The menu button's room at the column's top is a box of its own, never the column's padding: iOS draws the caret of
+  // a box inside a scrolling column as if the column's top padding were not there (Paul, 2026-10-13, a new document's
+  // caret standing in the dark above its first line until the first key).
+  const main = shell.querySelector<HTMLElement>('.to-column > main')!;
+  expect(getComputedStyle(main).paddingTop).toBe('0px');
+  const room = parseFloat(getComputedStyle(main, '::before').height);
+  expect(room).toBeGreaterThan(40);
+  const words = shell.querySelector<HTMLElement>('to-write-editor to-text .tx')!.getBoundingClientRect();
+  expect(words.top).toBeGreaterThanOrEqual(main.getBoundingClientRect().top + room - 1);
   const opened = await mount(`#/v1/write/${encodeDoc('Words\n')}`);
   await until(() => document.activeElement?.classList.contains('tx') === true);
   await tick();

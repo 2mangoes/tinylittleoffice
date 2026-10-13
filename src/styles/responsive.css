@@ -233,13 +233,19 @@
       opacity: 1;
     }
     /* The column's top keeps the menu button's room, so what is first in it (a row's menu, a stage's) is never under the
-       button until the words are scrolled; the words then go on under it, the header's height theirs. */
-    to-chrome[editing] .to-column > main {
-      padding-top: calc(3.5 * var(--to-nav-font));
+       button until the words are scrolled; the words then go on under it, the header's height theirs. The room is a
+       box of its own at the column's top, never the column's padding: iOS draws the caret of a box inside a scrolling
+       column as if the column's top padding were not there, a caret standing in the dark above the first line of a
+       new document until the first key (Paul, 2026-10-13, read from the device: the words never moved). */
+    to-chrome[editing] .to-column > main::before {
+      content: '';
+      display: block;
+      flex: none;
+      height: calc(3.5 * var(--to-nav-font));
     }
     /* The Spreadsheet keeps the menu button's room at the end of its formula strip, its first row (sheet/style.css). */
-    to-chrome[editing] .to-column > main:has(> to-sheet-editor) {
-      padding-top: 0;
+    to-chrome[editing] .to-column > main:has(> to-sheet-editor)::before {
+      display: none;
     }
     to-chrome[editing] .to-arrival {
       padding-top: 0.25rem;
