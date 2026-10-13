@@ -251,13 +251,6 @@ export interface SlideSize {
   w?: number;
   h?: number;
   loud?: number;
-  /**
-   * The smallest type the screen allows, in the page's own units (the editor's canvas: a rem, which iOS needs
-   * so as not to zoom on focus, at the canvas's width); 0, the default, for the slide as it is shown and printed.
-   * No size is tried below it, a headline is never cut to two lines at it, and `fit.body.over` says how much
-   * taller the page must be to hold the words (tallEnough).
-   */
-  floor?: number;
 }
 
 /** Where everything on a slide goes, and how big the type is. */
@@ -268,10 +261,7 @@ export function layoutSlide(s: Slide, o: SlideSize = {}): SlideLayout {
   const k = (W / SW) * (o.loud ?? 1);
   const M = 64 * k;
   const PAD = 20 * k;
-  const floor = o.floor ?? 0;
-  const sz = (list: number[]) => [...new Set(list.map((n) => Math.max(n * k, floor)))];
-  // At a floor a headline takes the lines it needs: the page grows rather than cut it.
-  const most = (n: number) => (floor ? Infinity : n);
+  const sz = (list: number[]) => list.map((n) => n * k);
   const hasTitle = plainText(s.title).trim().length > 0 || s.title.some((r) => r.ic || r.fn !== undefined);
   const titleSpans = () => spansOf(s.title, noteNumbers());
   const titleNotes = s.title.filter((r) => r.fn !== undefined).length;
@@ -279,7 +269,7 @@ export function layoutSlide(s: Slide, o: SlideSize = {}): SlideLayout {
     if (!hasTitle) return { px: sizes[0], lines: [] as Span[][], smallest: false, cut: 0 };
     for (const px of sizes) {
       const lines = wrap(titleSpans(), w, px, true);
-      if (lines.length <= most(maxLines)) return { px, lines, smallest: px === sizes[sizes.length - 1] && sizes.length > 1, cut: 0 };
+      if (lines.length <= maxLines) return { px, lines, smallest: px === sizes[sizes.length - 1] && sizes.length > 1, cut: 0 };
     }
     const px = sizes[sizes.length - 1];
     const lines = wrap(titleSpans(), w, px, true);
@@ -309,7 +299,7 @@ export function layoutSlide(s: Slide, o: SlideSize = {}): SlideLayout {
   };
   // The notes themselves, at the foot, in small type; the words above make room for them.
   const notes = slideNotes(s);
-  const notePx = Math.max(15 * k, floor);
+  const notePx = 15 * k;
   const noteLines = notes.map((fn, i) => wrap([{ t: `${i + 1}`, sup: true }, { t: ' ' }, ...spansOf(noteRuns(fn))], W - 2 * M, notePx));
   const notesH = notes.length ? noteLines.reduce((a, l) => a + l.length * notePx * 1.3, 0) + 14 * k : 0;
   const foot = notes.length ? { x: M, y: H - 40 * k - notesH + 14 * k, w: W - 2 * M, h: notesH - 14 * k, lines: noteLines, px: notePx } : undefined;
@@ -376,29 +366,6 @@ export function layoutSlide(s: Slide, o: SlideSize = {}): SlideLayout {
     notes: foot,
     fit: { title: { smallest: tt.smallest, cut: tt.cut }, body: { smallest: body.smallest, over: body.over } },
   };
-}
-
-/**
- * The page a slide is laid out on in the editor, where the screen's type floor is above the layout's sizes: the
- * slide's own page while its words fit there, else as much taller as they need (a tall page gets more rows, not
- * bigger type), in whole units. On a slide of words (one column, two, footnotes under them) the words' box grows with
- * the page, so the second layout fits; on a title slide only a quarter of the growth reaches the subtitle, so the
- * page grows again by what is still over, in proportion to what reached it.
- */
-export function tallEnough(s: Slide, o: SlideSize = {}): { h: number; layout: SlideLayout } {
-  let h = o.h ?? SH;
-  let L = layoutSlide(s, { ...o, h });
-  let grew = 1;
-  for (let i = 0; i < 6 && L.fit.body.over > 0; i++) {
-    const over = L.fit.body.over;
-    const by = Math.ceil(over / grew);
-    const next = layoutSlide(s, { ...o, h: h + by });
-    // How much of the page's growth reached the words' box: the next step is in proportion to it.
-    grew = Math.min(1, Math.max(0.1, (over - next.fit.body.over) / by));
-    h += by;
-    L = next;
-  }
-  return { h, layout: L };
 }
 
 /** The steps a document on a slide builds up in, as its app counts them (AppDef.steps: a list an item, a trip a stop, a drawing a shape); 0 for one shown whole. */

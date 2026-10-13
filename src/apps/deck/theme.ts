@@ -3,8 +3,7 @@
  * slide. A deck says which in its header ("theme: midnight"); the plain white one is the default. Every
  * colour is a hex, so tests/theme.unit.test.ts can hold each theme's ink to 4.5:1 on its paper and its
  * accent to 3:1 (the contrast test's floors). A decoration is drawn for the page it is on (a slide's 960 by 600,
- * the taller page the editor lays a slide out on where a phone's type floor needs one, a poster, a booklet's page):
- * it keeps to that page's edges, clear of the words, and is never stretched.
+ * a poster, a booklet's page): it keeps to that page's edges, clear of the words, and is never stretched.
  */
 import { ACCENT, INK, MUTED } from '../../kit/draw/draw.ts';
 import { t } from '../../kit/core/i18n.ts';

@@ -1,8 +1,9 @@
 /**
  * The Deck on a phone: a slide typed on in WebKit at 390 by 844 with a finger for a pointer. The bar stays
- * one row and as tall as it started, the page never scrolls under a tap, every box is 16px, nothing is
- * wider than the screen, the rail runs under the slide, Insert ▾ opens inside the screen and makes a slide,
- * and the Look menu writes the theme. Run on its own:
+ * one row and as tall as it started, the page never scrolls under a tap, nothing is wider than the screen,
+ * the rail runs under the slide and keeps to the screen's foot above the bar on a short screen (a keyboard's
+ * worth), a tap on a thumbnail while typing goes to that slide, Insert ▾ opens inside the screen and makes a
+ * slide, and the Look menu writes the theme. Run on its own:
  *
  *   PW_PORT=4187 npx playwright test e2e/deck-phone.spec.ts --project=phone --workers=1
  */
@@ -12,7 +13,9 @@ import { link } from './link.ts';
 
 const SHOTS = process.env.SHOTS;
 
-test('deck: on a phone, typing a slide neither scrolls the page nor moves the bar; the rail is under the slide; the menus fit', async ({ page }, info) => {
+test('deck: on a phone, typing a slide neither scrolls the page nor moves the bar; the rail is under the slide and stays above the bar on a short screen; a tap on it while typing goes to the slide; the menus fit', async ({
+  page,
+}, info) => {
   test.skip(info.project.name !== 'phone', 'phone only');
   const errors: string[] = [];
   page.on('pageerror', (e) => errors.push(String(e)));
@@ -61,6 +64,23 @@ test('deck: on a phone, typing a slide neither scrolls the page nor moves the ba
   await page.getByRole('menuitem', { name: 'Title slide' }).tap();
   await expect(page.locator('.deck-thumb')).toHaveCount(2);
   await expect(page.locator('.deck-thumb[aria-current="true"]')).toHaveAttribute('aria-label', 'Slide 2');
+  // A screen a keyboard's worth shorter: the rail keeps to its foot above the bar, whole, while the notes under the
+  // slide are what scrolls away; a tap on the first slide while its headline is typed goes to it, the caret in its
+  // headline, nothing chosen (Paul, 2026-10-13: "a quick way to jump to other slides without leaving edit mode").
+  await expect(title).toBeFocused();
+  await page.setViewportSize({ width: 390, height: 520 });
+  // The column glides to its new height (kit/ui/chrome.ts fit): the bar and the rail are measured once it has settled.
+  await expect.poll(() => page.evaluate(() => document.querySelector('.to-column')!.clientHeight)).toBeLessThanOrEqual(520);
+  await expect(page.locator('to-chrome')).not.toHaveAttribute('gliding', '');
+  const [bar, railShort] = [await page.locator('to-deck-editor to-bar').boundingBox(), await rail.boundingBox()];
+  expect(railShort!.y + railShort!.height).toBeLessThanOrEqual(bar!.y + 1);
+  expect(railShort!.y).toBeGreaterThanOrEqual(0);
+  expect(railShort!.y + railShort!.height).toBeLessThanOrEqual(520);
+  await page.locator('.deck-thumb').first().tap();
+  await expect(page.locator('.deck-thumb[aria-current="true"]')).toHaveAttribute('aria-label', 'Slide 1: Hello from the phone');
+  await expect(title).toBeFocused();
+  await expect(page.locator('.deck-slot.ranged')).toHaveCount(0);
+  await page.setViewportSize({ width: 390, height: 844 });
   // The Look menu writes the theme into the header; the canvas wears it.
   await page.getByRole('button', { name: /^Look:/ }).tap();
   await page.getByRole('menuitemcheckbox', { name: 'Midnight' }).tap();
@@ -75,10 +95,12 @@ test('deck: on a phone, typing a slide neither scrolls the page nor moves the ba
   expect([first.rows, afterTitle.rows, afterWords.rows, last.rows]).toEqual([1, 1, 1, 1]);
   expect(last.zoom).toBe(1);
   expect(last.wide).toBeLessThanOrEqual(0);
-  // Every box a finger may land in is 16px or more, so Safari has no reason to zoom in.
+  // The slide's boxes are the layout's sizes scaled to the canvas, small on a phone (Paul, 2026-10-13: "the same aspect
+  // ratio forever and shrink the text when in edit mode"); iOS zooms on no focus, the viewport says so (index.html).
+  // The speaker notes and every field a finger may land in off the canvas are 16px or more.
   const small = await page.evaluate(() =>
     [...document.querySelectorAll<HTMLElement>('to-deck-editor .tx, to-deck-editor input')]
-      .filter((el) => parseFloat(getComputedStyle(el).fontSize) < 16)
+      .filter((el) => !el.closest('.deck-canvas') && parseFloat(getComputedStyle(el).fontSize) < 16)
       .map((el) => `${el.getAttribute('aria-label') ?? el.className}: ${getComputedStyle(el).fontSize}`),
   );
   expect(small).toEqual([]);
@@ -94,6 +116,8 @@ test('deck: on a phone, a tap on a thumbnail chooses the slide with its bar insi
   await title.tap();
   await page.keyboard.type('First');
   await expect(page.locator('.deck-thumb')).toHaveCount(1);
+  // With a box focused a tap would go to the slide and keep typing; a slide is chosen with no box focused.
+  await title.evaluate((el) => (el as HTMLElement).blur());
   await page.locator('.deck-thumb').first().tap();
   await expect(page.locator('.deck-slot.ranged')).toHaveCount(1);
   const bar = page.locator('to-context.deck-context .to-context');
@@ -161,9 +185,7 @@ test("deck: on a phone, a drawing from Insert ▾ is made in a dialog that fills
   expect(errors).toEqual([]);
 });
 
-test("deck: on a phone, a footnote is typed at the slide's foot: Footnote puts the mark in and the caret in its note, 16px, nothing zoomed; a tap on the mark goes back to it", async ({
-  page,
-}, info) => {
+test("deck: on a phone, a footnote is typed at the slide's foot: Footnote puts the mark in and the caret in its note, nothing zoomed; a tap on the mark goes back to it", async ({ page }, info) => {
   test.skip(info.project.name !== 'phone', 'phone only');
   const errors: string[] = [];
   page.on('pageerror', (e) => errors.push(String(e)));
@@ -178,7 +200,6 @@ test("deck: on a phone, a footnote is typed at the slide's foot: Footnote puts t
   await page.getByRole('button', { name: 'Footnote', exact: true }).tap();
   const note = page.locator('to-deck-editor .deck-fn to-text .tx');
   await expect(note).toBeFocused();
-  expect(await note.evaluate((el) => parseFloat(getComputedStyle(el).fontSize))).toBeGreaterThanOrEqual(16);
   await page.keyboard.type('Where it comes from');
   await expect(page.locator('.deck-thumb').first()).toHaveAttribute('aria-label', 'Slide 1: Sources');
   await expect(note).toHaveText('Where it comes from');

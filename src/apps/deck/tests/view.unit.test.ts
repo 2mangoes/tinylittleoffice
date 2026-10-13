@@ -1,11 +1,10 @@
-// The deck's layout with a floor (the smallest type a screen allows) and the themes' decorations drawn for the page
-// they are on: the editor's canvas on a phone lays a slide out on a taller page rather than cut its words (Paul,
-// 2026-10-13: "the bullets in that deck are too big and run into the bottom border").
+// The themes' decorations drawn for the page they are on (a slide, a poster, a booklet's page): at 960 by 600 what
+// they always were, byte for byte; on another page, kept to its edges and never stretched.
 import { expect, test } from 'vitest';
 import { parse } from '../../../doc/index.ts';
 import { settingsOf, slidesOf } from '../model.ts';
 import { THEMES } from '../theme.ts';
-import { layoutSlide, slidePage, lookOf, tallEnough } from '../view.ts';
+import { slidePage, lookOf } from '../view.ts';
 
 /** Five long bullets: they fit a slide at 26px. */
 const FIVE = `---
@@ -19,34 +18,6 @@ theme: ivory
 - Setup took under ten minutes in every school that tried it this spring
 - What they missed most was a way to share one lesson plan with a colleague
 `;
-
-test('with no floor the five bullets fit at 26; at a floor of 51 they are set at 51, run over at 600 tall, and fit at 600 + over', () => {
-  const s = slidesOf(parse(FIVE))[0];
-  const plain = layoutSlide(s);
-  expect(plain.bodyPx).toBe(26);
-  expect(plain.fit.body.over).toBe(0);
-  const floored = layoutSlide(s, { floor: 51 });
-  expect(floored.bodyPx).toBe(51);
-  expect(floored.titlePx).toBeGreaterThanOrEqual(51);
-  expect(floored.fit.body.over).toBeGreaterThan(0);
-  const tall = layoutSlide(s, { floor: 51, h: 600 + floored.fit.body.over });
-  expect(tall.bodyPx).toBe(51);
-  expect(tall.fit.body.over).toBe(0);
-  // The editor's page: as tall as that, and no taller.
-  expect(tallEnough(s, { floor: 51 }).h).toBe(Math.ceil(600 + floored.fit.body.over));
-  expect(tallEnough(s).h).toBe(600);
-});
-
-test('at a floor a headline takes the lines it needs, and a title slide grows to hold its subtitle', () => {
-  const long = slidesOf(parse('## A headline long enough to need three lines at the floor of a phone, and then some more words\n\n- One\n'))[0];
-  const L = layoutSlide(long, { floor: 60 });
-  expect(L.fit.title.cut).toBe(0);
-  expect(L.title.lines.length).toBeGreaterThan(2);
-  const cover = slidesOf(parse('## Hello\n\n- A subtitle long enough to run to several lines at the floor of a narrow phone screen, held whole\n'))[0];
-  const T = tallEnough({ ...cover, layout: 't' }, { floor: 60 });
-  expect(T.h).toBeGreaterThan(600);
-  expect(T.layout.fit.body.over).toBe(0);
-});
 
 /** Each theme's decoration as it was written, for the 960 by 600 slide, before it was drawn for its page. */
 const FORMER: Record<string, string> = {
@@ -80,57 +51,6 @@ test("every theme's decoration on a 960 by 600 slide is what it was, byte for by
   const p = slidePage(doc, slidesOf(doc)[0], lookOf(settingsOf(doc)), Infinity, { h: 900 });
   expect(p.svg).toContain('y="868"');
   expect(p.svg).not.toContain('preserveAspectRatio');
-});
-
-/** Two columns of bullets, and a slide whose words carry footnotes: the page grows with their box, all of it. */
-const TWO = `## Before and after {.two}
-
-- Planning took an evening every week, on paper, at the kitchen table
-- Grades lived in three places and none of them agreed with the others
-
-|
-
-- One planner, opened on a phone between classes, shared with a colleague
-- Grades in one place, in the family's own language
-`;
-const NOTED = `## What the numbers say
-
-- Teachers used the planner every week^[Counted from the planner's own weekly log, spring term.]
-- The weekly summary was opened far more often than the daily one^[Opens per family, both summaries, same twelve weeks.]
-- Setup took under ten minutes in every school that tried it
-`;
-
-test('tallEnough fits two columns and a slide with footnotes on the least page that holds them, in whole units', () => {
-  const two = slidesOf(parse(TWO)).find((s) => s.layout === '2')!;
-  const noted = slidesOf(parse(NOTED))[0];
-  expect(two.right.length).toBeGreaterThan(0);
-  for (const [name, s] of [
-    ['two columns', two],
-    ['footnotes', noted],
-  ] as const)
-    for (const floor of [41.37, 51, 64.5, 80]) {
-      const T = tallEnough(s, { floor });
-      expect(T.h, `${name} at ${floor}`).toBeGreaterThan(600);
-      expect(Number.isInteger(T.h)).toBe(true);
-      expect(T.layout.fit.body.over, `${name} at ${floor}`).toBe(0);
-      expect(layoutSlide(s, { floor, h: T.h }).fit.body.over).toBe(0);
-      expect(layoutSlide(s, { floor, h: T.h - 1 }).fit.body.over, `${name} at ${floor}: one less is too short`).toBeGreaterThan(0);
-    }
-});
-
-test("a slide's footnotes are set at the floor or above it", () => {
-  const noted = slidesOf(parse(NOTED))[0];
-  expect(layoutSlide(noted).notes!.px).toBe(15);
-  for (const floor of [16, 30, 51]) expect(layoutSlide(noted, { floor }).notes!.px).toBeGreaterThanOrEqual(floor);
-});
-
-test('a floored layout on exactly the height its words need reports nothing over (a sum of fractions leaves no crumb)', () => {
-  const slides = [slidesOf(parse(FIVE))[0], slidesOf(parse(TWO)).find((s) => s.layout === '2')!, slidesOf(parse(NOTED))[0]];
-  for (const s of slides)
-    for (let floor = 20; floor < 70; floor += 0.37) {
-      const over = layoutSlide(s, { floor }).fit.body.over;
-      if (over) expect(layoutSlide(s, { floor, h: 600 + over }).fit.body.over, `at ${floor}`).toBe(0);
-    }
 });
 
 test("on a taller page every theme drawn at the foot or the corners moves to that page's edges; Graphite's square stays at the top", () => {

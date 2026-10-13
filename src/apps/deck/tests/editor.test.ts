@@ -10,7 +10,7 @@ import '../../../styles.css';
 import '../editor.ts';
 import type { ToDeckEditor } from '../editor.ts';
 import { templates } from '../templates.ts';
-import { tallEnough } from '../view.ts';
+import { layoutSlide } from '../view.ts';
 import { tick, until } from '../../../../test/browser/helpers.ts';
 import { remScale } from '../../../kit/ui/zoom.ts';
 import { encodeDoc } from '../../../kit/core/codec.ts';
@@ -279,12 +279,10 @@ test('at phone width the bar is one row, nothing is wider than the screen, and t
   const canvas = el.querySelector<HTMLElement>('.deck-canvas')!;
   const rail = el.querySelector<HTMLElement>('.deck-rail')!;
   expect(rail.getBoundingClientRect().top).toBeGreaterThanOrEqual(canvas.getBoundingClientRect().bottom);
-  // Every box is 16px or more.
-  for (const tx of el.querySelectorAll<HTMLElement>('.tx')) expect(parseFloat(getComputedStyle(tx).fontSize)).toBeGreaterThanOrEqual(16);
   await page.viewport(1100, 800);
 });
 
-/** Five long bullets in Ivory: at 26px they fit the slide; at a phone's floor of a rem they need a taller one. */
+/** Five long bullets in Ivory: at 26px they fill the slide. */
 const FIVE = `---
 theme: ivory
 ---
@@ -298,71 +296,49 @@ theme: ivory
 `;
 
 /**
- * The canvas's cqw lengths are hundredths of the slide as the layout counts it: the stage is their container and is
- * exactly as wide as the canvas (were the canvas the container, a cqw would be a hundredth of its content box, inside
- * the margin, and the type 87% of the layout's). The headline at the layout's size, the icon's place 72 of 960, the
- * margin (--deck-m) its share of the width; each no smaller than the floor the stylesheet sets.
+ * The canvas is the slide scaled to its width, at every width: its cqw lengths are hundredths of the slide as the
+ * layout counts it (the stage is their container and is exactly as wide as the canvas; were the canvas the container,
+ * a cqw would be a hundredth of its content box, inside the margin, and the type 87% of the layout's). The headline and
+ * the words at the layout's sizes, the margin (--deck-m) 64 of 960, the icon's place 72 of 960.
  */
-function cqwAsLaidOut(el: ToDeckEditor, margin: number) {
+function canvasIsTheSlide(el: ToDeckEditor) {
   const canvas = el.querySelector<HTMLElement>('.deck-canvas')!;
-  const w = canvas.getBoundingClientRect().width;
-  const rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
-  const L = tallEnough(el.slides[el.cur], { floor: el.floor }).layout;
-  expect(Math.abs(parseFloat(getComputedStyle(box(el, 'title')).fontSize) - Math.max(rem, (L.titlePx / 960) * w))).toBeLessThan(0.5);
-  expect(Math.abs(parseFloat(getComputedStyle(box(el, 'words')).fontSize) - Math.max(rem, (L.bodyPx / 960) * w))).toBeLessThan(0.5);
-  expect(Math.abs(el.querySelector<HTMLElement>('.deck-pick')!.getBoundingClientRect().width - Math.max(2 * rem, (72 / 960) * w))).toBeLessThan(0.5);
-  expect(Math.abs(parseFloat(getComputedStyle(canvas).paddingLeft) - (margin / 100) * w)).toBeLessThan(0.5);
+  const c = canvas.getBoundingClientRect();
+  const w = c.width;
+  const L = layoutSlide(el.slides[el.cur]);
+  expect(Math.abs(c.height / w - 600 / 960)).toBeLessThan(0.01);
+  expect(canvas.style.getPropertyValue('--deck-h')).toBe('600');
+  expect(Math.abs(parseFloat(getComputedStyle(box(el, 'title')).fontSize) - (L.titlePx / 960) * w)).toBeLessThan(0.5);
+  expect(Math.abs(parseFloat(getComputedStyle(box(el, 'words')).fontSize) - (L.bodyPx / 960) * w)).toBeLessThan(0.5);
+  expect(Math.abs(el.querySelector<HTMLElement>('.deck-pick')!.getBoundingClientRect().width - (72 / 960) * w)).toBeLessThan(0.5);
+  expect(Math.abs(parseFloat(getComputedStyle(canvas).paddingLeft) - (64 / 960) * w)).toBeLessThan(0.5);
+  // The words end inside the padding's edge: nothing is cut.
+  const items = box(el, 'words').querySelectorAll('li');
+  expect(items[items.length - 1].getBoundingClientRect().bottom).toBeLessThanOrEqual(c.bottom - parseFloat(getComputedStyle(canvas).paddingBottom) + 0.5);
+  // The decoration is the slide's own, 960 by 600; the rail draws the slide as it is presented.
+  expect(decodeURIComponent(canvas.style.getPropertyValue('--deck-deco'))).toContain('viewBox="0 0 960 600"');
+  expect(el.querySelector('.deck-thumb svg')!.getAttribute('viewBox')).toBe('0 0 960 600');
 }
 
-test('on a phone a slide holds its words: the canvas is as tall as they need at a rem, and the theme is drawn for that page (Paul, 2026-10-13)', async () => {
+test('the canvas keeps the slide\'s shape at every width and its type shrinks with it: on a phone five bullets are small, whole and 16:10 (Paul, 2026-10-13: "the same aspect ratio forever and shrink the text")', async () => {
   await page.viewport(390, 844);
   try {
     const { el } = await editor(FIVE);
-    await until(() => el.floor > 0);
-    await el.updateComplete;
     await tick();
     const rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
-    const canvas = el.querySelector<HTMLElement>('.deck-canvas')!;
-    const words = box(el, 'words');
-    expect(parseFloat(getComputedStyle(words).fontSize)).toBeGreaterThanOrEqual(rem - 0.01);
-    const c = canvas.getBoundingClientRect();
-    expect(c.height / c.width).toBeGreaterThan(600 / 960 + 0.05);
-    // The last bullet ends inside the padding's edge: nothing is cut.
-    const pad = parseFloat(getComputedStyle(canvas).paddingBottom);
-    const items = words.querySelectorAll('li');
-    const lastBottom = items[items.length - 1].getBoundingClientRect().bottom;
-    expect(lastBottom).toBeLessThanOrEqual(c.bottom - pad + 0.5);
-    // The decoration names the taller page, and its bottom rule sits under the words, inside the padding.
-    const h = Number(canvas.style.getPropertyValue('--deck-h'));
-    expect(h).toBeGreaterThan(600);
-    const deco = decodeURIComponent(canvas.style.getPropertyValue('--deck-deco'));
-    expect(deco).toContain(`viewBox="0 0 960 ${h}"`);
-    expect(deco).toContain(`y="${h - 32}"`);
-    const rule = c.top + ((h - 32) / h) * c.height;
-    expect(rule).toBeGreaterThan(lastBottom);
-    expect(rule).toBeGreaterThan(c.bottom - pad);
-    // Every box is still 16px or more.
-    for (const tx of el.querySelectorAll<HTMLElement>('.tx')) expect(parseFloat(getComputedStyle(tx).fontSize)).toBeGreaterThanOrEqual(16);
-    // The rail draws the slide as it is presented: 960 by 600.
-    expect(el.querySelector('.deck-thumb svg')!.getAttribute('viewBox')).toBe('0 0 960 600');
-    cqwAsLaidOut(el, 5);
+    expect(parseFloat(getComputedStyle(box(el, 'words')).fontSize)).toBeLessThan(rem);
+    canvasIsTheSlide(el);
   } finally {
     await page.viewport(1100, 800);
   }
-  // A wide window: the slide's own shape, the words at the layout's 26px scaled to the canvas's width (a cqw is a hundredth of the slide).
+  // A wide window: the words at the layout's 26px scaled to the canvas's width.
   const { el } = await editor(FIVE);
-  await until(() => el.floor > 0);
-  await el.updateComplete;
   await tick();
-  const canvas = el.querySelector<HTMLElement>('.deck-canvas')!;
-  const c = canvas.getBoundingClientRect();
-  expect(Math.abs(c.height / c.width - 600 / 960)).toBeLessThan(0.01);
-  expect(canvas.style.getPropertyValue('--deck-h')).toBe('600');
-  expect(Math.abs(parseFloat(getComputedStyle(box(el, 'words')).fontSize) - (26 / 960) * c.width)).toBeLessThan(0.5);
-  cqwAsLaidOut(el, 6.67);
+  expect(Math.abs(parseFloat(getComputedStyle(box(el, 'words')).fontSize) - (26 / 960) * el.querySelector('.deck-canvas')!.getBoundingClientRect().width)).toBeLessThan(0.5);
+  canvasIsTheSlide(el);
 });
 
-test("on a phone every slide of every template holds its words: two columns one above the other, footnotes at the foot, nothing past the canvas's edge", async () => {
+test("on a phone every slide of every template is whole: the two columns side by side as on the slide, nothing past the canvas's edge", async () => {
   await page.viewport(390, 844);
   try {
     const cut: string[] = [];
@@ -371,10 +347,10 @@ test("on a phone every slide of every template holds its words: two columns one 
       for (let i = 0; i < el.slides.length; i++) {
         el.go(i);
         await el.updateComplete;
-        // A few frames: what the observer saw change is measured on the next.
-        for (let f = 0; f < 3; f++) await new Promise(requestAnimationFrame);
-        await el.updateComplete;
+        await tick();
         const c = el.querySelector<HTMLElement>('.deck-canvas')!;
+        const shape = Number(c.style.getPropertyValue('--deck-w')) / Number(c.style.getPropertyValue('--deck-h'));
+        expect(Math.abs(c.getBoundingClientRect().width / c.getBoundingClientRect().height - shape), `${tp.id} ${i + 1}`).toBeLessThan(0.01);
         if (c.scrollHeight > c.clientHeight + 1) cut.push(`${tp.id} ${i + 1}: ${c.scrollHeight - c.clientHeight}px`);
       }
     }
@@ -464,6 +440,53 @@ test('a tap on a thumbnail chooses the slide, with the contextual bar in the sta
   await until(() => document.activeElement === box(el, 'title') && el.cur === 0);
   const tools = [...el.querySelectorAll('to-bar > button')].map((b) => b.getAttribute('aria-label'));
   expect(tools.slice(-2)).toEqual(['Undo', 'Redo']);
+});
+
+test('a finger on a thumbnail while a box has the focus goes to that slide with the caret in the same box, nothing chosen and the box never blurred; with no box focused it chooses the slide (Paul, 2026-10-13)', async () => {
+  const { el } = await editor(FOUR);
+  const thumb = (i: number) => el.querySelectorAll<HTMLElement>('.deck-thumb')[i];
+  const tap = (i: number, pointerType = 'touch', click = true) => {
+    const at = { bubbles: true, composed: true, cancelable: true, pointerId: 2, pointerType, isPrimary: true, button: 0, clientX: 20, clientY: 20 };
+    const down = new PointerEvent('pointerdown', at);
+    thumb(i).dispatchEvent(down);
+    thumb(i).dispatchEvent(new PointerEvent('pointerup', at));
+    // WebKit sends no click after a press whose default was refused; Chromium does: both end the same.
+    if (click) thumb(i).click();
+    return down.defaultPrevented;
+  };
+  await caretIn(el, 'words');
+  expect(document.activeElement).toBe(box(el, 'words'));
+  // Slide B has no words yet: the caret lands in its words box all the same, and the press's blur was refused.
+  expect(tap(1)).toBe(true);
+  await settle(el);
+  expect(el.cur).toBe(1);
+  expect(document.activeElement).toBe(box(el, 'words'));
+  expect(ranged(el)).toEqual([]);
+  // From the headline, to the headline; a tap whose click never comes (WebKit) all the same.
+  await caretIn(el, 'title');
+  expect(tap(2, 'touch', false)).toBe(true);
+  await settle(el);
+  expect(el.cur).toBe(2);
+  expect(document.activeElement).toBe(box(el, 'title'));
+  expect(ranged(el)).toEqual([]);
+  // A finger that moves on is scrolling the rail: no jump.
+  const down = new PointerEvent('pointerdown', { bubbles: true, composed: true, cancelable: true, pointerId: 2, pointerType: 'touch', isPrimary: true, button: 0, clientX: 20, clientY: 20 });
+  thumb(1).dispatchEvent(down);
+  thumb(1).dispatchEvent(new PointerEvent('pointerup', { bubbles: true, composed: true, pointerId: 2, pointerType: 'touch', isPrimary: true, button: 0, clientX: 60, clientY: 20 }));
+  await settle(el);
+  expect(el.cur).toBe(2);
+  // No box focused: a tap chooses, as everywhere.
+  (document.activeElement as HTMLElement).blur();
+  expect(tap(3)).toBe(false);
+  await settle(el);
+  expect(el.cur).toBe(3);
+  expect(ranged(el)).toEqual([3]);
+  // A mouse while a box has the focus: the click chooses, as it always has.
+  await caretIn(el, 'title');
+  expect(tap(0, 'mouse')).toBe(false);
+  await settle(el);
+  expect(el.cur).toBe(0);
+  expect(ranged(el)).toEqual([0]);
 });
 
 test('a finger on the rail: a tap on a slide’s grip shows and chooses that slide alone, the one before let go; a grip held extends', async () => {
@@ -831,7 +854,8 @@ test("a footnote is typed at the slide's foot, in the foot's own words (not the 
   // The headline's note comes first at the foot: the caret is in it, the words' note second.
   await until(() => el.querySelectorAll('.deck-fn to-text').length === 2 && document.activeElement === footNote(el, 0));
   const words = footNote(el, 0);
-  expect(parseFloat(getComputedStyle(words).fontSize)).toBeGreaterThanOrEqual(16);
+  // At the layout's 15 of 960, scaled to the canvas as every length on it is.
+  expect(Math.abs(parseFloat(getComputedStyle(words).fontSize) - (15 / 960) * el.querySelector('.deck-canvas')!.getBoundingClientRect().width)).toBeLessThan(0.5);
   expect(getComputedStyle(words).fontWeight).toBe('400');
   expect(words.getBoundingClientRect().height).toBeLessThan(60);
   await type(el, words, 'Big');

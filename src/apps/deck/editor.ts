@@ -25,7 +25,6 @@ import { keyed } from 'lit/directives/keyed.js';
 import { unsafeSVG } from 'lit/directives/unsafe-svg.js';
 import { motion, reducedMotion } from '../../kit/draw/motion.ts';
 import { pinchZoom } from '../../kit/ui/pinch.ts';
-import { remScale } from '../../kit/ui/zoom.ts';
 import { ChevronDown, ChevronUp, GripVertical, StickyNote } from 'lucide';
 import { applyAll, parse, plainText, write, type Block, type Doc, type Op } from '../../doc/index.ts';
 import { lookup } from '../../kit/core/app.ts';
@@ -68,7 +67,7 @@ import {
   type Settings,
   type Slide,
 } from './model.ts';
-import { closingPage, emptySlide, wantsClosing, geometryOf, tallEnough, lookOf, pageCount, pageOf, pageSize, sheetsOf, SH, slidePage, slideSteps, subPage, SW, type Look } from './view.ts';
+import { closingPage, emptySlide, wantsClosing, geometryOf, layoutSlide, lookOf, pageCount, pageOf, pageSize, sheetsOf, SH, slidePage, slideSteps, subPage, SW, type Look } from './view.ts';
 import '../../kit/ui/bar.ts';
 import '../../kit/ui/doc-dialog.ts';
 import '../../kit/ui/insert.ts';
@@ -112,7 +111,6 @@ export class ToDeckEditor extends DocElement<Slide[]> {
     noting: { state: true },
     sheets: { state: true },
     subMenu: { state: true },
-    floor: { state: true },
   };
   /** The slide open for editing. */
   declare cur: number;
@@ -128,21 +126,6 @@ export class ToDeckEditor extends DocElement<Slide[]> {
   declare sheets: boolean;
   /** The sub-document's menu is open. */
   declare subMenu: boolean;
-  /**
-   * The smallest type the canvas may show, in the page's units: a rem (under which iOS zooms the page on focus) at the
-   * canvas's width. Where the layout's sizes are below it, the slide is laid out on a taller page that holds its words.
-   */
-  declare floor: number;
-  /** Watches the canvas and what is on it: the floor follows its width (a phone turned) and the size of everything (`to-size`); its words, how tall they are. */
-  private sized: ResizeObserver | null = null;
-  private watched = new Set<Element>();
-  private refit = 0;
-  /**
-   * What the screen's own type runs past the layout's page, in the page's units (a phone puts two columns one above the
-   * other; a footnote's spacing is the stylesheet's): added to the page's height so that nothing is cut. It belongs to
-   * one document, slide and floor, and is measured afresh after any change.
-   */
-  private more: { doc: Doc | null; cur: number; floor: number; by: number } = { doc: null, cur: -1, floor: 0, by: 0 };
   /** Presenting began with the deck's show link ("?show"): the way out says "Edit this deck". */
   private fromLink = false;
   /** The selection the editor last reported, and which box it was in. */
@@ -201,7 +184,6 @@ export class ToDeckEditor extends DocElement<Slide[]> {
     this.noting = !coarse();
     this.sheets = false;
     this.subMenu = false;
-    this.floor = 0;
   }
   createRenderRoot() {
     return this;
@@ -214,7 +196,6 @@ export class ToDeckEditor extends DocElement<Slide[]> {
     this.addEventListener('text-selectall', this.onSelectAll);
     window.addEventListener('keydown', this.onShowKey);
     window.addEventListener(OPENED_EVENT, this.onOpened);
-    window.addEventListener('to-size', this.fit);
     // The show is a picture to two fingers (Paul, 2026-10-11: "I should be able to pinch zoom where appropriate in view
     // modes too"): the slide zooms in place about the fingers, kept in quarters when they lift, and the show scrolls.
     const zoomTo = (z: number) => {
@@ -243,11 +224,6 @@ export class ToDeckEditor extends DocElement<Slide[]> {
     this.removeEventListener('text-selectall', this.onSelectAll);
     window.removeEventListener('keydown', this.onShowKey);
     window.removeEventListener(OPENED_EVENT, this.onOpened);
-    window.removeEventListener('to-size', this.fit);
-    this.sized?.disconnect();
-    this.sized = null;
-    this.watched.clear();
-    cancelAnimationFrame(this.refit);
     this.unpinch?.();
     this.unpinch = null;
     clearTimeout(this.settle);
@@ -832,7 +808,40 @@ export class ToDeckEditor extends DocElement<Slide[]> {
     this.rows.selectAll();
   };
   /** A thumbnail tapped: its slide on show, and chosen (Shift extends). */
+  /**
+   * A finger pressed on a thumbnail while a box on the stage has the focus: the box keeps it (the press's default, a
+   * blur, is not taken, so the keyboard stays up), and when the finger lifts where it pressed the tap goes to that
+   * slide with the caret in the same box (Paul, 2026-10-13: "When I'm editing a slide I need a quick way to jump to
+   * other slides without leaving edit mode"). It is answered at the lift: WebKit sends no click after a press whose
+   * default was refused, and the click Chromium still sends is let go. A finger that moves on is scrolling the rail.
+   * With no box focused, a tap chooses the slide, as a tap on any handle does (docs/editing.md).
+   */
+  private jumping: { field: Field; x: number; y: number } | null = null;
+  private jumped = false;
+  private onThumbDown = (e: PointerEvent) => {
+    this.jumping = null;
+    this.jumped = false;
+    if (e.pointerType !== 'touch' && e.pointerType !== 'pen') return;
+    const at = document.activeElement;
+    if (!at || !this.querySelector('.deck-stage')?.contains(at)) return;
+    this.jumping = { field: this.field, x: e.clientX, y: e.clientY };
+    e.preventDefault();
+  };
+  private onThumbUp(i: number, e: PointerEvent) {
+    const j = this.jumping;
+    this.jumping = null;
+    if (!j || Math.hypot(e.clientX - j.x, e.clientY - j.y) > 6 || i >= this.slides.length) return;
+    this.jumped = true;
+    this.rows.release();
+    this.go(i);
+    const s = this.slides[i];
+    this.focusBox(j.field === 'right' && s.layout !== '2' ? 'words' : j.field === 'words' && s.sub >= 0 ? 'title' : j.field);
+  }
   private onThumb(i: number, e: MouseEvent) {
+    if (this.jumped) {
+      this.jumped = false;
+      return;
+    }
     this.go(i);
     if (i < this.slides.length) this.rows.choose(i, e.shiftKey);
   }
@@ -902,48 +911,22 @@ export class ToDeckEditor extends DocElement<Slide[]> {
 
   /* ---------- drawing ---------- */
 
-  /** The extra height the canvas has now, if it is this document's, slide's and floor's. */
-  private get moreBy(): number {
-    const m = this.more;
-    return m.doc === this.doc && m.cur === this.cur && m.floor === this.floor ? m.by : 0;
-  }
   /**
-   * The canvas measured: the floor from its width and the root's size (a rem in the page's units); then, at that floor,
-   * how far its words run past it, which the page grows by.
-   */
-  private fit = () => {
-    const canvas = this.querySelector<HTMLElement>('.deck-canvas');
-    const w = canvas?.getBoundingClientRect().width ?? 0;
-    if (!canvas || !w) return;
-    const page = pageSize(this.settings).w;
-    const floor = Math.round(((remScale() * 16 * page) / w) * 100) / 100;
-    if (floor !== this.floor) {
-      this.floor = floor;
-      return;
-    }
-    const over = canvas.scrollHeight - canvas.clientHeight;
-    if (over > 1) {
-      this.more = { doc: this.doc, cur: this.cur, floor, by: this.moreBy + Math.ceil((over * page) / w) };
-      this.requestUpdate();
-    }
-  };
-
-  /**
-   * The theme as the canvas wears it: its colours, the sizes the layout chose (in the canvas's own width), and its decoration
-   * as the background. Laid out at the floor, on as tall a page as its words need there: --deck-h is that page's height, so
-   * the canvas is exactly tall enough, and the decoration is drawn for that page.
+   * The theme as the canvas wears it: its colours, the sizes the layout chose (in the canvas's own width, so the canvas
+   * is the slide scaled, its shape kept at every width: on a phone the type is small, never cut; Paul, 2026-10-13:
+   * "the same aspect ratio forever and shrink the text when in edit mode"), and its decoration as the background.
    */
   private canvasStyle(s: Slide, look: Look, size: { w: number; h: number }): string {
     const loud = this.settings.format === 'poster' ? 2 : this.settings.format && s.layout === 't' ? 1.6 : 1;
-    const fitted = tallEnough(s, { w: size.w, h: size.h, loud, floor: this.floor });
-    const L = fitted.layout;
-    const h = fitted.h + this.moreBy;
+    const L = layoutSlide(s, { w: size.w, h: size.h, loud });
     const T = look.theme;
     const deco =
-      look.themed && T.deco ? `--deck-deco:url("data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${size.w} ${h}">${T.deco(size.w, h)}</svg>`)}");` : '';
+      look.themed && T.deco
+        ? `--deck-deco:url("data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${size.w} ${size.h}">${T.deco(size.w, size.h)}</svg>`)}");`
+        : '';
     const colours = look.themed ? `--deck-paper:${T.paper};--deck-ink:${T.ink};--deck-muted:${T.muted};--deck-accent:${T.accent};` : '';
     const px = (n: number) => `${Math.round((n / size.w) * 10000) / 100}cqw`;
-    return `--deck-w:${size.w};--deck-h:${h};--deck-title:${px(L.titlePx || 40)};--deck-body:${px(L.bodyPx || 20)};--deck-icon:${look.icon};${colours}${deco}`;
+    return `--deck-w:${size.w};--deck-h:${size.h};--deck-title:${px(L.titlePx || 40)};--deck-body:${px(L.bodyPx || 20)};--deck-icon:${look.icon};${colours}${deco}`;
   }
   private renderCanvas(s: Slide, look: Look) {
     const st = this.settings;
@@ -1017,7 +1000,7 @@ export class ToDeckEditor extends DocElement<Slide[]> {
         const name = (g ? g.name(i, n) : t('Slide {n}', { n: i + 1 })) + (words ? `: ${words}` : '');
         const ranged = !!s && this.rows.has(i);
         return html`<div class="deck-slot ${ranged ? 'ranged' : ''} ${d?.id === i ? 'dragging' : ''}">
-          <button type="button" class="deck-thumb" data-i=${i} aria-label=${name} aria-current=${i === this.cur ? 'true' : 'false'} aria-pressed=${s ? String(ranged) : nothing} @click=${(e: MouseEvent) => this.onThumb(i, e)} @dblclick=${() => (this.rows.release(), this.go(i), this.focusBox('title'))}><span class="n">${i + 1}</span><svg viewBox="0 0 ${p.w} ${p.h}" aria-hidden="true">${unsafeSVG(p.svg)}</svg></button>
+          <button type="button" class="deck-thumb" data-i=${i} aria-label=${name} aria-current=${i === this.cur ? 'true' : 'false'} aria-pressed=${s ? String(ranged) : nothing} @pointerdown=${this.onThumbDown} @pointerup=${(e: PointerEvent) => this.onThumbUp(i, e)} @pointercancel=${() => (this.jumping = null)} @click=${(e: MouseEvent) => this.onThumb(i, e)} @dblclick=${() => (this.rows.release(), this.go(i), this.focusBox('title'))}><span class="n">${i + 1}</span><svg viewBox="0 0 ${p.w} ${p.h}" aria-hidden="true">${unsafeSVG(p.svg)}</svg></button>
           ${s ? html`<button type="button" class="deck-grip to-rows-handle" tabindex="-1" aria-label=${t('Move this slide: drag it onto another')} title=${t('Drag to move')}>${icon(GripVertical, 14)}</button>` : nothing}
         </div>`;
       })}
@@ -1097,18 +1080,6 @@ export class ToDeckEditor extends DocElement<Slide[]> {
       <to-menu class="deck-submenu" .label=${t('This document')} .items=${this.subMenu ? this.subItems() : []}></to-menu>`;
   }
   protected updated(changed: PropertyValues<this>) {
-    // The canvas drawn now, and what is on it, are what the floor and the page's height are measured from.
-    const canvas = this.querySelector('.deck-canvas');
-    const now = new Set(canvas ? [canvas, ...canvas.children] : []);
-    // A size seen changing is measured on the next frame: a canvas redrawn within the observer's own delivery is a loop to it.
-    this.sized ??= new ResizeObserver(() => {
-      cancelAnimationFrame(this.refit);
-      this.refit = requestAnimationFrame(this.fit);
-    });
-    for (const e of this.watched) if (!now.has(e)) this.sized.unobserve(e);
-    for (const e of now) if (!this.watched.has(e)) this.sized.observe(e);
-    this.watched = now;
-    this.fit();
     if (this.focusNext) void this.updateComplete.then(() => this.placeFocus());
     // A slide that comes on in the show starts its animations from the beginning; the one leaving is paused.
     // With reduced motion, every animation here rests where it ends (kit/draw/motion.ts).

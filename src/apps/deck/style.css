@@ -53,7 +53,8 @@
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
-    padding: var(--deck-m);
+    /* The layout's margins: 64 of 960 round the words, 40 of 960 under them (the foot's room, footnotes and all). */
+    padding: var(--deck-m) var(--deck-m) 4.17cqw;
     color: var(--deck-ink);
     background: var(--deck-paper) var(--deck-deco, none) center / 100% 100% no-repeat;
     border: 1px solid var(--to-border);
@@ -65,7 +66,7 @@
     touch-action: manipulation;
   }
   .deck-canvas .tx {
-    font-size: max(1rem, var(--deck-body));
+    font-size: var(--deck-body);
     line-height: 1.3;
     color: inherit;
     caret-color: var(--deck-accent);
@@ -92,7 +93,7 @@
   .deck-title .tx h4,
   .deck-title .tx p,
   .deck-title .tx li {
-    font-size: max(1rem, var(--deck-title));
+    font-size: var(--deck-title);
     font-weight: 600;
     line-height: 1.15;
     margin: 0;
@@ -100,9 +101,9 @@
   .deck-title .tx li::before {
     content: none;
   }
-  /* The words take the room under the headline. Where the screen's floor (1rem) is above the layout's size, the
-     editor lays the slide out on a taller page that holds them at that size and --deck-h is its height: the canvas
-     is as tall as its words, and nothing is hidden (the rail shows the slide as it will be presented). */
+  /* The words take the room under the headline. The canvas keeps the slide's shape at every width and its type is the
+     layout's, scaled with it: on a phone the words are small, as a slide held at arm's length is, never cut and never
+     a taller page (Paul, 2026-10-13: "the same aspect ratio forever and shrink the text when in edit mode"). */
   .deck-words-row {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
@@ -117,6 +118,11 @@
   .deck-canvas .tx > *,
   .deck-canvas .tx-list > * {
     margin: 0 0 0.45em;
+  }
+  /* Nothing under the last line: the words end where the layout's do (the app's rules outrank the kit's last-child reset). */
+  .deck-canvas .tx > :last-child,
+  .deck-canvas .tx-list > :last-child {
+    margin-bottom: 0;
   }
   .deck-canvas .tx li {
     padding-left: calc(1.1em + var(--d, 0) * 1.4em);
@@ -166,8 +172,6 @@
     justify-content: center;
     width: 7.5cqw;
     height: 7.5cqw;
-    min-width: 2rem;
-    min-height: 2rem;
     padding: 0;
     color: var(--deck-icon);
     background: transparent;
@@ -253,11 +257,12 @@
     max-width: 100%;
     max-height: 100%;
   }
-  /* Footnotes at the slide's foot, numbered as their marks are, each typed where it is drawn (kit/draw/notes.ts). */
+  /* Footnotes at the slide's foot, numbered as their marks are, each typed where it is drawn (kit/draw/notes.ts), at the
+     layout's 15 of 960: every length on the canvas scales with it, so a phone's small slide keeps its shape. */
   .deck-fn {
     margin: auto 0 0;
     padding: 0.6em 0 0;
-    font-size: max(0.75rem, 1.56cqw);
+    font-size: 1.56cqw;
     color: var(--deck-muted);
     border-top: 1px solid color-mix(in srgb, var(--deck-muted) 40%, transparent);
   }
@@ -265,7 +270,7 @@
     margin: 0.15em 0;
   }
   .deck-canvas .deck-fn .tx {
-    font-size: max(1rem, 1em);
+    font-size: 1em;
     line-height: 1.3;
     caret-color: var(--deck-accent);
   }
@@ -273,7 +278,7 @@
     position: absolute;
     right: 2cqw;
     bottom: 1.4cqw;
-    font-size: 0.75rem;
+    font-size: 1.56cqw;
     color: var(--deck-muted);
     pointer-events: none;
   }
@@ -606,12 +611,26 @@
     }
   }
 
-  /* ---- phones: the rail runs under the slide, a row that scrolls sideways ---- */
+  /* ---- phones: the rail runs under the slide, a row that scrolls sideways, and keeps to the screen's foot ---- */
   @media (max-width: 760px) {
+    /* A column, not a grid: the rail sticks within the body, not within a grid row of its own. */
     .deck-body {
-      grid-template-columns: minmax(0, 1fr);
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
     }
+    /* The rail stays in sight at the column's visible foot, above the bar, however the column is scrolled, so with the
+       keyboard up and a slide's words being typed, every other slide is a tap away (Paul, 2026-10-13: "a quick way to
+       jump to other slides without leaving edit mode… put the deck preview above the edit bar"). The column's main
+       keeps half a screen of room under its last line (kit.css --to-room), and a sticky box measures from inside that
+       room: its bottom is the room's negative, which is the main's own foot (the bar sits under the main). In flow
+       where the page is short, as it was. */
     .deck-rail {
+      position: sticky;
+      bottom: calc(-1 * var(--to-room, 0rem));
+      z-index: 1;
+      background: var(--to-bg);
+      border-top: 1px solid var(--to-border);
       flex-direction: row;
       max-height: none;
       overflow-x: auto;
@@ -625,13 +644,6 @@
       flex: none;
       width: 6rem;
       box-sizing: border-box;
-    }
-    .deck-canvas {
-      --deck-m: 5cqw;
-    }
-    .lay-2 .deck-words-row,
-    .lay-i .deck-words-row {
-      grid-template-columns: minmax(0, 1fr);
     }
   }
 }
