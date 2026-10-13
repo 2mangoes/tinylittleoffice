@@ -95,8 +95,10 @@ test('the README and the current docs are American', () => {
 
 test('the README says the truth about saving, and the page says it too', () => {
   const readme = read('README.md');
-  for (const s of ['Save in browser is off by default', 'on your own device', 'never on a server', 'A short link is the one thing a server holds']) expect(readme, s).toContain(s);
-  // The page's description; About's body is cut to its version line until Paul writes a few lines (2026-10-11).
+  // Paul's README of 2026-10-13: nothing kept by default, saving keeps it on the device, a short link is encrypted.
+  for (const s of ['By default nothing is kept, on your device or anywhere else', 'on your own device, never on a server', 'encrypted with a key the server never sees'])
+    expect(readme, s).toContain(s);
+  // The page's description.
   const tagline = 'A tiny office suite where the link is the document. No accounts. Nothing is saved anywhere unless you choose to keep it on this device.';
   expect(read('index.html')).toContain(tagline);
 });
