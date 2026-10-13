@@ -61,6 +61,7 @@ import { t } from '../core/i18n.ts';
 import { ago, type Kept } from '../share/library.ts';
 import { expiresSentence, SHORT_LINK_MAX, timeLeft } from '../share/short.ts';
 import { pinWindow, redrawCaret, revealCaret } from './scroll.ts';
+import { caretLogWanted, startCaretLog } from './caretlog.ts';
 import { BAR_HERE, keysAria } from './bar.ts';
 import { SHARE } from '../core/keys.ts';
 
@@ -229,6 +230,8 @@ export class ToChrome extends LitElement {
     this.rowWatch.observe(document.documentElement, { attributes: true, attributeFilter: ['data-context-row'] });
     matchMedia(COARSE).addEventListener('change', this.stow);
     this.fit();
+    // A diagnostic for a caret seen standing where the words are not (caretlog.ts): on with ?caretlog in the address.
+    if (caretLogWanted()) startCaretLog(this);
   }
   disconnectedCallback() {
     super.disconnectedCallback();
@@ -269,7 +272,12 @@ export class ToChrome extends LitElement {
    */
   private pinSelf = (e: Event) => {
     const box = e.target as HTMLElement;
-    if ((box === this || box.classList?.contains('to-column')) && (box.scrollTop || box.scrollLeft)) box.scrollTo(0, 0);
+    if ((box === this || box.classList?.contains('to-column')) && (box.scrollTop || box.scrollLeft)) {
+      box.scrollTo(0, 0);
+      // Put back under a caret iOS has drawn where the box had slid: drawn again where the words are.
+      const at = document.activeElement;
+      if (this.editing && at && this.contains(at)) redrawCaret(at);
+    }
   };
   private settleTimer = 0;
   private glide() {
