@@ -44,4 +44,17 @@ test('a release’s notes name the tag, the commit and every script hash, and ho
   expect(notes).toContain('- `sha256-abc=`\n- `sha256-def=`');
   expect(notes).toContain('gh attestation verify tinylittleoffice-v1.0.0.tar.gz -R aboard-io/tinylittleoffice');
   expect(notes).toContain('npm run verify-deploy -- https://tinylittleoffice.com/ v1.0.0');
+  // The tag's own message first, when there is one: what the release carries and who it thanks.
+  const told = releaseNotes(
+    { commit: 'b'.repeat(40), tag: 'v1.0.0', built: '2026-10-10T09:00:00Z', csp: { scripts: [] } },
+    'x.tar.gz',
+    'v1.0.0: links survive Messages (thanks to a contributor, #2)\n',
+  );
+  expect(told.split('\n').slice(0, 4)).toEqual([
+    `Tiny Little Office v1.0.0: the site's files as built from commit ${'b'.repeat(40)} (committed 2026-10-10T09:00:00Z).`,
+    '',
+    'v1.0.0: links survive Messages (thanks to a contributor, #2)',
+    '',
+  ]);
+  expect(notes).not.toContain('\n\n\n');
 });

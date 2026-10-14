@@ -3,18 +3,23 @@
  * commit, the commit's date, the Content-Security-Policy's script hashes (the only inline code the site
  * will run), and how to check the release and a running site against it.
  *
+ * The tag's own message (an annotated tag: what the release carries, and who it thanks; Paul, 2026-10-14, after
+ * Patrick Weaver's #2: "add him to release notes") comes first, when the tag has one.
+ *
  *   node scripts/release-notes.ts [archive name]   the notes for dist/, on stdout
  */
+import { execFileSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { REPO, isVersion, type Version } from '../src/kit/core/version.ts';
 
-export function releaseNotes(v: Version, archive = 'dist.tar.gz'): string {
+export function releaseNotes(v: Version, archive = 'dist.tar.gz', note = ''): string {
   const name = v.tag || v.commit.slice(0, 7);
   return [
     `Tiny Little Office ${name}: the site's files as built from commit ${v.commit} (committed ${v.built}).`,
     '',
+    ...(note.trim() ? [note.trim(), ''] : []),
     '## The script hashes',
     '',
     'The Content-Security-Policy runs no inline script but these, the apps’ page scripts and the theme script in the page (`script-src`, in `_headers`):',
@@ -30,11 +35,21 @@ export function releaseNotes(v: Version, archive = 'dist.tar.gz'): string {
   ].join('\n');
 }
 
+/** An annotated tag's message, as git holds it; '' for a lightweight tag, no tag, or no git. */
+function tagMessage(tag: string): string {
+  if (!tag) return '';
+  try {
+    return execFileSync('git', ['tag', '-l', '--format=%(contents)', tag], { cwd: resolve(import.meta.dirname, '..'), encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim();
+  } catch {
+    return '';
+  }
+}
+
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const v: unknown = JSON.parse(readFileSync(resolve(import.meta.dirname, '..', 'dist', 'version.json'), 'utf8'));
   if (!isVersion(v) || !v.commit) {
     console.error('dist/version.json is missing its commit: build from a git checkout.');
     process.exit(1);
   }
-  process.stdout.write(releaseNotes(v, process.argv[2]));
+  process.stdout.write(releaseNotes(v, process.argv[2], tagMessage(v.tag)));
 }
