@@ -144,6 +144,8 @@ function sankeyPage(flows: Flow[], title = '', w = 720, h = 440, upTo = Infinity
     if (!reaches(f.to, f.from, links)) links.push({ source: f.from, target: f.to, value: f.value, i });
   });
   const nw = 14;
+  /** A bar's label, two lines of 12 px: how far apart two labels in a column must be. */
+  const LABEL = 30;
   const graph = sankey<SNode, SLink>()
     .nodeId((n) => n.name)
     .nodeWidth(nw)
@@ -158,10 +160,25 @@ function sankeyPage(flows: Flow[], title = '', w = 720, h = 440, upTo = Infinity
     if (l.i >= upTo) continue;
     svg += `<path d="${path(l)!.replace(/-?\d+\.\d+/g, (v) => String(r(+v)))}" fill="none" stroke="${color(l.source as SNode)}" stroke-opacity="0.35" stroke-width="${r(Math.max(1, l.width ?? 1))}"/>`;
   }
+  // A label is two lines, the name over the amount, beside its bar's top (its middle, where the bar is thin). Thin
+  // bars stand closer than two lines are tall, so in each column the labels are spread apart in the bars' order, down
+  // from the top and, where the column is full, back up from the foot: no label over another, each by its own bar.
+  type Laid = (typeof graph.nodes)[number];
+  const columns = new Map<number, Laid[]>();
+  for (const n of graph.nodes) columns.set(n.x0!, [...(columns.get(n.x0!) ?? []), n]);
+  const labelY = new Map<Laid, number>();
+  for (const column of columns.values()) {
+    column.sort((a, b) => a.y0! - b.y0!);
+    const ys = column.map((n) => n.y0! + Math.min(Math.max(2, n.y1! - n.y0!) / 2, 60));
+    for (let i = 1; i < ys.length; i++) ys[i] = Math.max(ys[i], ys[i - 1] + LABEL);
+    ys[ys.length - 1] = Math.min(ys[ys.length - 1], h - 17);
+    for (let i = ys.length - 2; i >= 0; i--) ys[i] = Math.min(ys[i], ys[i + 1] - LABEL);
+    column.forEach((n, i) => labelY.set(n, Math.max(top + 10, ys[i])));
+  }
   for (const n of graph.nodes) {
     const nh = Math.max(2, n.y1! - n.y0!);
     svg += rect(n.x0!, n.y0!, nw, nh, color(n), 'rx="3"');
-    const ly = n.y0! + Math.min(nh / 2, 60);
+    const ly = labelY.get(n)!;
     svg += text(n.x0! + nw + 6, ly + 1, clip(n.name, 150, 12, true), { px: 12, bold: true, fill: INK }) + text(n.x0! + nw + 6, ly + 15, fmt(n.value ?? 0), { px: 12, fill: MUTED });
   }
   const shown = flows.slice(0, upTo);
