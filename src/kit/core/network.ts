@@ -76,7 +76,7 @@ export const NETWORK = {
     host: 'nominatim.openstreetmap.org',
     what: 'Place search in the Trip Planner',
     when: 'after a tap',
-    carries: 'The words searched for; no referrer',
+    carries: 'The words searched for, and the site’s name as the referrer (the origin alone, as Nominatim’s usage policy asks of an application; never the page’s path or anything of the document)',
     stops: 'Not searching: typing a stop’s place by hand asks no one',
     by: 'apps/trip/editor.ts',
     csp: ['connect'],

@@ -765,7 +765,9 @@ export class ToTripEditor extends DocElement<TripView> {
     if (!q || this.searching) return;
     this.searching = true;
     try {
-      const res = await fetch(`${SEARCH}?format=jsonv2&limit=6&q=${encodeURIComponent(q)}`, { headers: { Accept: 'application/json' } });
+      // Nominatim's usage policy asks that a request say which application makes it: the site's own name goes as the
+      // referrer, the origin alone (never the page's path or anything after its "#"), where the page sends none elsewhere.
+      const res = await fetch(`${SEARCH}?format=jsonv2&limit=6&q=${encodeURIComponent(q)}`, { headers: { Accept: 'application/json' }, referrerPolicy: 'strict-origin' });
       const rows = (await res.json()) as { name?: string; display_name: string; lat: string; lon: string }[];
       this.found = rows.map((r) => ({ name: r.name || r.display_name.split(',')[0], detail: r.display_name, lat: parseFloat(r.lat), lon: parseFloat(r.lon) }));
     } catch {

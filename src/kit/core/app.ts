@@ -5,8 +5,8 @@
  * under node; the editor is a lazy import, which the site's build resolves inside its one app file (vite.config.ts)
  * and the API's leaves out (vite.api.config.ts).
  *
- * The document is the kernel's (docs/kernel.md). Until src/doc lands it passes through the kit as its TLO
- * text, and `Doc` here is that string: the shell hands an editor the text and takes the text back.
+ * The document is the kernel's (docs/kernel.md), and passes through the kit as its TLO text: `Doc` here is that
+ * string; the shell hands an editor the text and takes the text back, and an app parses it with src/doc.
  */
 import type { IconNode } from 'lucide';
 import type { Command } from './commands.ts';

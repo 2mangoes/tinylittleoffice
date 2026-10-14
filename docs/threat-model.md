@@ -147,7 +147,7 @@ make many hundreds.
 library that has no password, and open the short links made there while they last. There is no remote wipe.
 Turning Save in browser off (from the phone) removes all of it.
 
-**The map's provider.** The map's tiles and place search go to OpenStreetMap directly while a map is shown
+**The map's provider.** The map's tiles and place search go to OpenStreetMap directly while a map is shown (a search names the site as its referrer, the origin alone, as Nominatim's usage policy asks; a tile request names nothing)
 (`docs/network.md` says why), and a trip drawn anywhere (a slide, a page, a card, an export) is drawn on its
 tiles, by the Trip Planner's Map switch. Those requests carry the reader's address to OpenStreetMap, and which
 squares of the world the map shows.
