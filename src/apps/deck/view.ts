@@ -916,6 +916,8 @@ export const frameMs = (words: number): number => Math.min(10000, Math.max(3000,
 
 /** How long the film's last frame holds, the closing code or the last slide: time to scan it, or to get a phone out (Paul, 2026-10-14: "Hold the last QR code slide or last slide if no QR for 30 full seconds"). */
 const LAST_MS = 30_000;
+/** How long a step of a document on a slide holds in the film: a shape, a stop, an item in a blink, three a second, the whole thing resting for its words once built (Paul, 2026-10-14: "you assemble the drawing at an excruciatingly slow speed"). */
+const BUILD_MS = 300;
 
 /**
  * The slides as they play, for a film: every slide, every reveal, the closing code last; each a still picture, held
@@ -930,14 +932,16 @@ export function deckFrames(text: string): (Page & { ms: number })[] {
   const out: (Page & { ms: number })[] = [];
   for (const sl of slidesOf(doc)) {
     const steps = slideSteps(sl, doc);
-    // A slide's words, shared out over its reveals: each frame holds for the lines it brings.
-    const words = slideText(sl).join(' ').split(/\s+/).filter(Boolean).length;
-    const ms = frameMs(words / (steps + 1));
-    for (let shown = 0; shown < steps; shown++) out.push({ ...slidePage(doc, sl, look, shown), ms });
     const b = sl.sub >= 0 ? doc.blocks[sl.sub] : null;
+    const words = slideText(sl).join(' ').split(/\s+/).filter(Boolean).length;
+    // A slide of lines shares its words out over its reveals, each frame holding for the lines it brings; a slide
+    // that shows a document builds it a step a blink, and rests for its words once it is whole.
+    const stepMs = b ? BUILD_MS : frameMs(words / (steps + 1));
+    const restMs = b ? frameMs(words) : stepMs;
+    for (let shown = 0; shown < steps; shown++) out.push({ ...slidePage(doc, sl, look, shown), ms: stepMs });
     const motion = b?.k === 'fence' && b.lang ? lookup.appOf(b.lang)?.motion?.(b.body) : undefined;
     if (motion) for (const frame of motion.frames) out.push({ ...slidePage(doc, sl, look, steps, { frame }), ms: motion.delayMs });
-    out.push({ ...slidePage(doc, sl, look, steps), ms });
+    out.push({ ...slidePage(doc, sl, look, steps), ms: restMs });
   }
   const end = closingPage(text, doc, s, look);
   if (end) out.push({ ...end, ms: frameMs(0) });

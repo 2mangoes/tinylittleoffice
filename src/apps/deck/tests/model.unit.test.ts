@@ -305,6 +305,11 @@ test('the deck ends with a QR code of itself, unless told not to, unless printed
   // The frames differ as the ball moves; the resting frame is the last one's picture.
   expect(moving[0].svg).not.toBe(moving[5].svg);
   expect(moving[6].svg).toBe(moving[5].svg);
+  // A drawing on a slide builds a shape a blink, three a second, and rests for its words once whole; a slide of lines still holds for each line.
+  const built = deckFrames(
+    '---\nqr: no\n---\n## Three shapes\n\n```draw\nKind | X | Y | W | H | Style | Label\n--- | --- | --- | --- | --- | --- | ---\nr | 2 | 2 | 8 | 8 | 1 |\ne | 12 | 2 | 8 | 8 | 1 |\nd | 22 | 2 | 8 | 8 | 1 |\n```\n\n---\n\n## Lines\n\n- one\n- two\n',
+  );
+  expect(built.map((f) => f.ms)).toEqual([300, 300, 300, 3000, 3000, 3000, 30000]);
 });
 
 test('every template is canonical, has a name, and draws', () => {
