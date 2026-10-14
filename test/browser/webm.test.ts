@@ -74,7 +74,10 @@ test("the Deck's film, saved as WebM, plays 960 wide for as long as its frames",
   const video = await play(bytes);
   expect(video.videoWidth).toBe(960);
   expect(video.videoHeight).toBe(2 * Math.round((960 * pages[0].h) / pages[0].w / 2));
-  expect(Math.abs(video.duration * 1000 - pages.length * 1400)).toBeLessThanOrEqual(1400);
+  // As long as its frames' holds together: each holds for its words (deckFrames), three seconds at the least.
+  const held = pages.reduce((n, p) => n + p.ms, 0);
+  expect(pages.every((p) => p.ms >= 3000)).toBe(true);
+  expect(Math.abs(video.duration * 1000 - held)).toBeLessThanOrEqual(1500);
   // A player can seek: the last frame is there to be shown.
   expect((await frameAt(video, video.duration - 0.7)).length).toBe(video.videoWidth * video.videoHeight * 4);
   video.remove();
