@@ -225,15 +225,16 @@ export function subPage(doc: Doc, s: Slide, upTo?: number, open = false, still =
   return null;
 }
 
-/** The address the slide's document opens at in its own app, for "See more": on this site when there is one, else the route alone. A slide with no document has none. */
+/**
+ * The address the slide's document opens at in its own app, for "See more": on this site when there is one, else the
+ * route alone. Only a document whose page is words that may run long (AppDef.long, the Word Processor's) has one: a
+ * code, a map, a diagram, a month or a table is a picture, drawn whole however small (Paul, 2026-10-14: on a phone
+ * "nearly all of the content cuts off at page bottom", a QR code cut in half).
+ */
 function moreLink(doc: Doc, s: Slide): string {
   const b = s.sub >= 0 ? doc.blocks[s.sub] : null;
   const site = typeof location !== 'undefined' && location.origin !== 'null' ? `${location.origin}/` : '';
-  if (b?.k === 'fence' && b.lang) return placedLink(b.lang, b.body, encodeDoc, site);
-  if (b?.k === 'table') {
-    const chart = attr(b, 'chart');
-    return placedLink('sheet', write({ head: chart ? { chart } : {}, blocks: [{ k: 'table', cols: b.cols, rows: b.rows }] }), encodeDoc, site);
-  }
+  if (b?.k === 'fence' && b.lang && lookup.appOf(b.lang)?.long) return placedLink(b.lang, b.body, encodeDoc, site);
   return '';
 }
 

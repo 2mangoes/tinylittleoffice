@@ -171,6 +171,8 @@ export interface AppDef {
   steps?(doc: Doc): number;
   /** The frames the document moves through (the Animator): their numbers in the order one round plays, and how long each stays, so a film of a slide holding it plays it (`view(doc, { still, frame })` draws one). Absent: it does not move. */
   motion?(doc: Doc): { frames: number[]; delayMs: number };
+  /** Its page is words that may run longer than a slide can show (the Word Processor's): on a slide it is cut at the foot with "See more" rather than shrunk past reading. Absent, the document is a picture, drawn whole however small (a code, a map, a diagram, a month). */
+  long?: boolean;
 }
 
 /**

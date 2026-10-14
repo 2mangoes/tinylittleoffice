@@ -86,6 +86,13 @@ test('a document taller than its box is cut at the foot with "See more" to open 
   // The page is drawn at the box's width, its foot cut: the inner svg's viewBox is shorter than the page.
   expect(page.svg).toMatch(/viewBox="0 0 816 \d+(\.\d+)?" preserveAspectRatio="xMinYMin meet"/);
   expect(page.svg).not.toMatch(/viewBox="0 0 816 1056"/);
+  // A picture is never cut: a square code on a wide slide is shrunk to fit, whole.
+  const code = '## Scan\n\n```qr\nhttps://example.com\n```\n';
+  const codePage = slidePage(parse(code), slidesOf(parse(code))[0], lookOf(settingsOf(parse(code))));
+  expect(codePage.svg).not.toContain('See more');
+  const map = '## Map\n\n```diagram\n---\nkind: mind\n---\n- A\n  - B\n  - C\n  - D\n  - E\n  - F\n  - G\n  - H\n  - I\n  - J\n  - K\n```\n';
+  const mapPage = slidePage(parse(map), slidesOf(parse(map))[0], lookOf(settingsOf(parse(map))));
+  expect(mapPage.svg).not.toContain('See more');
   const short = '## A note\n\n```write\nOne line.\n```\n';
   const whole = slidePage(parse(short), slidesOf(parse(short))[0], lookOf(settingsOf(parse(short))));
   expect(whole.svg).not.toContain('See more');

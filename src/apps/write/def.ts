@@ -31,6 +31,8 @@ export default defineApp({
   templates: () => import('./templates.ts').then((m) => m.templates()),
   editor: () => import('./editor.ts'),
   title: titleOf,
+  // A page of words: on a slide, what fits and "See more", never shrunk past reading (deck/view.ts).
+  long: true,
   retitle,
   view: (doc, opts) => pages(doc, opts?.small, isStill(opts)),
   exports: [
