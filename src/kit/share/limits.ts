@@ -40,6 +40,8 @@ export const TARGETS: Target[] = [
   { id: 'x', max: 280, cost: () => 23, where: () => 'X', flat: true },
   { id: 'sms', max: 160, cost: full, where: () => t('a text message') },
   { id: 'discord', max: 2000, cost: full, where: () => t('a Discord message') },
+  // Google Docs keeps the first 4,096 characters of a link put on words (Insert, Link); Paul, 2026-10-14: "Google Docs inline link cut my link."
+  { id: 'gdocs', max: 4096, cost: full, where: () => t('a link in Google Docs') },
   { id: 'telegram', max: 4096, cost: full, where: () => t('a Telegram message') },
   { id: 'qr', max: 2953, cost: bytes, where: () => t('a QR code') },
   // NFC tags hold a link as an NDEF record: 7 bytes of framing, and "https://" packed into one.

@@ -4,19 +4,21 @@
  *
  * 1. The head: the language (its first option "Default: Français", the device's language named in itself, the word
  *    Default the page's) and Close.
- * 2. Save in browser: the switch (off by default), and under it what turning it over does.
- * 3. The size of everything (zoom.ts, the page's commands of kit/core/keys.ts): the eye and the stepper, no words.
- * 4. One search for anything (Mod+K opens the drawer with it focused): apps, documents kept here, templates and the
+ * 2. What is this?: the manual, a deck kept in the tree (manual.ts, manual.tlo) and compiled into its link, above
+ *    Save in browser (Paul, 2026-10-14).
+ * 3. Save in browser: the switch (off by default), and under it what turning it over does.
+ * 4. The size of everything (zoom.ts, the page's commands of kit/core/keys.ts): the eye and the stepper, no words.
+ * 5. One search for anything (Mod+K opens the drawer with it focused): apps, documents kept here, templates and the
  *    commands in force where the person was (the words', the app's, the page's, each with its keys at the row's end),
  *    each kind under its heading, by one matching (search.ts startsAWord). A command chosen closes the drawer, gives
  *    the focus back where it was, and runs. No rows of apps with nothing typed (Paul, 2026-10-12: "If people want apps
  *    they can search or go to home page"): a template is found by search, or on the home page.
- * 5. This document, with a document open: New {noun}, Share…, Download (the table of formats, `downloads`, its
+ * 6. This document, with a document open: New {noun}, Share…, Download (the table of formats, `downloads`, its
  *    menu), the page's other commands drawn in the drawer (Find in this document) and, under a finger, the app's
  *    commands that need nothing in hand (the bar being away while reading); each with its keys at the right where
  *    there is a keyboard (kit/ui/bar.ts keysKbd: never under a finger until a key with Ctrl, ⌘ or Alt is typed, and never
  *    part of the row's name).
- * 6. Theme, Add to home screen where the browser offers it (install.ts; on an iPhone, the line that says how), About
+ * 7. Theme, Add to home screen where the browser offers it (install.ts; on an iPhone, the line that says how), About
  *    (Paul's three sentences of 2026-10-13, Aboard, "email us" and the repository's issues as links, then the commit it
  *    runs, from /version.json, kit/core/version.ts, read when About opens).
  *
@@ -45,6 +47,7 @@ import { toast } from '../core/say.ts';
 import { commitUrl, repoUrl, running, type Version } from '../core/version.ts';
 import { origin } from '../core/network.ts';
 import './preview.ts';
+import { manualHash } from './manual.ts';
 import { focusBack, handBack, type ToDialog } from './dialog.ts';
 import type { MenuItem } from './menu.ts';
 import './menu.ts';
@@ -257,6 +260,9 @@ export class ToDrawer extends LitElement {
           ${this.def ? html`<a class="to-btn to-tool to-drawer-home" href="#/" aria-label=${t('Home')} title=${t('Home')} @click=${() => this.close()}>${unsafeSVG(mark(20))}</a>` : nothing}
           <button type="button" class="to-btn to-tool" aria-label=${t('Close')} title=${t('Close')} @click=${() => this.close()}>${icon(UI.close)}</button>
         </header>
+        <section class="to-drawer-section to-drawer-manual">
+          <a class="to-btn to-drawer-whatis" href=${manualHash()} @click=${() => this.close()}>${icon(UI.help, 18)}<span>${t('What is this?')}</span></a>
+        </section>
         <section class="to-drawer-section to-drawer-save">
           <label class="to-switch">
             <input type="checkbox" role="switch" .checked=${keeping()} @change=${(e: Event) => void this.togglePrivate(e)} />

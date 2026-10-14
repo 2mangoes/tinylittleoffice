@@ -464,4 +464,6 @@ A new file goes in the folder whose line fits it. A file that fits none is a sig
 seventh folder or a file at the root.
 
 Every import names its file (`'../../kit/draw/draw.ts'`): there is no barrel `index.ts` and no path alias, so a file
-says what it reaches for and the build leaves out what nothing reaches. `test/lints.test.ts` holds all of this.
+says what it reaches for and the build leaves out what nothing reaches. A document the kit carries is kept beside the
+file that uses it and imported as text (`kit/ui/manual.tlo`, the manual, `'./manual.tlo?raw'` in `kit/ui/manual.ts`,
+compiled into the drawer's What is this? link at build; Paul, 2026-10-14). `test/lints.test.ts` holds all of this.

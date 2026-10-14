@@ -10,6 +10,8 @@ import { siteRoot } from '../../src/kit/core/apps.ts';
 import { page } from 'vitest/browser';
 import { keepSize, SIZE_MAX } from '../../src/kit/ui/zoom.ts';
 import { firstLines } from './firstline.ts';
+import { manualHash } from '../../src/kit/ui/manual.ts';
+import { parseHash } from '../../src/kit/core/route.ts';
 
 /** The drawer, opened by the menu button, drawn whole. */
 const openDrawer = async (shell: HTMLElement) => {
@@ -310,11 +312,11 @@ for (const [w, h] of [
 // search over apps, documents, templates and commands, then the rest (no rows of apps anywhere: Paul, 2026-10-12); no Privacy, no
 // Keyboard shortcuts, no palette of its own; Theme's first option Match device; About's body the version line alone.
 
-test("the drawer's sections in Paul's order: the language, Save in browser, the size, the search, This document, the rest", async () => {
+test("the drawer's sections in Paul's order: the language, What is this?, Save in browser, the size, the search, This document, the rest", async () => {
   const shell = await mount(`#/v1/write/${encodeDoc('# Plans\n\nWords.\n')}`);
   await until(() => !!shell.querySelector('to-write-editor'));
   const dialog = await openDrawer(shell);
-  const order = ['.to-drawer-lang', '.to-drawer-save', '.to-size', '.to-drawer-apps', '.to-drawer-doc', '.to-drawer-prefs'].map((s) => dialog.querySelector(s)!);
+  const order = ['.to-drawer-lang', '.to-drawer-manual', '.to-drawer-save', '.to-size', '.to-drawer-apps', '.to-drawer-doc', '.to-drawer-prefs'].map((s) => dialog.querySelector(s)!);
   for (const el of order) expect(el).not.toBeNull();
   for (let i = 1; i < order.length; i++) expect(order[i - 1].compareDocumentPosition(order[i]) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
   // No rows of apps, at home or away (Paul, 2026-10-12).
@@ -530,5 +532,26 @@ test('the drawer has no Open a file…, no Compare… and no Download everything
     expect(document.querySelector('.to-download-all, .to-privacy-zip')).toBeNull();
     dialog.close();
   }
+  history.replaceState(null, '', location.pathname);
+});
+
+test("What is this? is the drawer's first row, above Save in browser, and opens the manual: the deck kept in the tree (Paul, 2026-10-14)", async () => {
+  const shell = await mount('');
+  const dialog = await openDrawer(shell);
+  const row = dialog.querySelector<HTMLAnchorElement>('.to-drawer-manual a.to-drawer-whatis')!;
+  expect(row).not.toBeNull();
+  expect(row.textContent!.trim()).toBe('What is this?');
+  expect(row.querySelector('svg, .to-icon')).not.toBeNull();
+  expect(row.getAttribute('href')).toBe(manualHash());
+  expect(parseHash(manualHash()).app).toBe('deck');
+  // Under the head's line, above the switch.
+  expect(dialog.querySelector('.to-drawer-head')!.compareDocumentPosition(row) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+  expect(row.compareDocumentPosition(dialog.querySelector('.to-drawer-save')!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+  // A tap closes the drawer and opens the deck, "Introducing Tiny Little Office".
+  row.click();
+  await until(() => !dialog.open);
+  await until(() => !!shell.querySelector('to-deck-editor'));
+  expect(location.hash).toBe(manualHash());
+  await until(() => shell.querySelector<HTMLInputElement>('.to-title')?.value === 'Introducing Tiny Little Office');
   history.replaceState(null, '', location.pathname);
 });

@@ -55,6 +55,7 @@ export default {
   'Default: {name}': 'סטאנדארט: {name}',
   // The switch that keeps files and settings in this browser (off by default), and the line under it, on or off.
   'Save in browser': 'היטן אין בראוזער',
+  'What is this?': 'וואָס איז דאָס?',
   'Turn on to save files in your browser.': 'צינדט אן כדי צו היטן פיילס אין אייער בראוזער.',
   'Turn off to remove all files and settings.': 'לעשט אויס כדי אראפצונעמען אלע פיילס און סעטינגס.',
   'Nothing saved in this browser': 'גארנישט געהיט אין דעם בראוזער',
@@ -119,6 +120,7 @@ export default {
   'This link: {n} characters, too long for {where}': 'דער לינק: {n} אותיות, צו לאנג פאר {where}',
   'a Discord message': 'א Discord מעסעדזש',
   'a QR code': 'א QR קאוד',
+  'a link in Google Docs': 'א לינק אין Google Docs',
   'a Telegram message': 'א Telegram מעסעדזש',
   'a short link': 'א קורצער לינק',
   'a small NFC sticker': 'א קליינער NFC סטיקער',

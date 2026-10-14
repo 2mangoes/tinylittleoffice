@@ -191,6 +191,7 @@ export const UI = {
   outdent: IndentDecrease,
   indent: IndentIncrease,
   info: Info,
+  help: HelpCircle,
   italic: Italic,
   language: Languages,
   home: LayoutGrid,

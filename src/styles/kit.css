@@ -1325,7 +1325,14 @@
     flex: none;
     height: 100%;
   }
-  /* Save in browser, straight under the head's own line. */
+  /* What is this?, the manual's row, straight under the head's own line, and Save in browser under it (Paul, 2026-10-14). */
+  .to-drawer-section.to-drawer-manual {
+    border-top: 0;
+    padding-bottom: 0;
+  }
+  .to-drawer-whatis {
+    justify-content: flex-start;
+  }
   .to-drawer-section.to-drawer-save {
     border-top: 0;
   }

@@ -336,16 +336,19 @@ export const KIT_FOLDERS = ['core', 'ui', 'text', 'draw', 'file', 'share'];
  * The kit's place for each file (docs/kernel.md §11), each rule a sentence the failure prints with what breaks it:
  *   - no file sits at src/kit/ itself: every one is in one of the six folders;
  *   - no index.ts in the kit: no barrel hides what a file reaches for, and every import names its file;
- *   - every import of the kit names a module of the tree in one of the six folders.
+ *   - every import of the kit names a module of the tree in one of the six folders, or a document kept there and
+ *     imported as text (`./manual.tlo?raw`: the manual, kit/ui/manual.ts, compiled into its link at build).
  */
 export function kitProblems(mods: Module[]): string[] {
   const problems: string[] = [];
   const paths = new Set(mods.map((m) => m.path));
   const placed = new RegExp(`^src/kit/(${KIT_FOLDERS.join('|')})/[^/]+\\.ts$`);
+  const asText = new RegExp(`^src/kit/(${KIT_FOLDERS.join('|')})/[^/]+\\.tlo\\?raw$`);
   for (const m of mods) {
     if (/^src\/kit\/[^/]+$/.test(m.path)) problems.push(`a file at the kit's root, in none of its folders: ${m.path}`);
     if (m.path.startsWith('src/kit/') && m.path.endsWith('/index.ts')) problems.push(`a barrel in the kit: ${m.path}`);
-    for (const e of edgesOf(m)) if (e.to.startsWith('src/kit/') && !(placed.test(e.to) && paths.has(e.to))) problems.push(`an import of the kit names no file in its six folders: ${m.path} → ${e.to}`);
+    for (const e of edgesOf(m))
+      if (e.to.startsWith('src/kit/') && !((placed.test(e.to) && paths.has(e.to)) || asText.test(e.to))) problems.push(`an import of the kit names no file in its six folders: ${m.path} → ${e.to}`);
   }
   return problems;
 }

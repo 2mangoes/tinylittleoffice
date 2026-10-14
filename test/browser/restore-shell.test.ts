@@ -249,8 +249,9 @@ test('the size of everything is under the menu’s Save in browser on the home p
   shell.querySelector<HTMLButtonElement>('.to-burger')!.click();
   const drawer = () => shell.querySelector<HTMLDialogElement>('dialog.to-drawer')!;
   await until(() => drawer().open);
-  // On the home page under the language and Save in browser, before anything else in the menu.
-  expect(shell.querySelector('.to-drawer-head')!.nextElementSibling!.classList.contains('to-drawer-save')).toBe(true);
+  // On the home page under the language, What is this? and Save in browser, before anything else in the menu.
+  expect(shell.querySelector('.to-drawer-head')!.nextElementSibling!.classList.contains('to-drawer-manual')).toBe(true);
+  expect(shell.querySelector('.to-drawer-manual')!.nextElementSibling!.classList.contains('to-drawer-save')).toBe(true);
   expect(shell.querySelector('.to-drawer-save')!.nextElementSibling!.classList.contains('to-size')).toBe(true);
   expect(shell.querySelector('.to-size-more')!.getAttribute('aria-label')).toBe('Everything larger');
   drawer().close();
@@ -361,8 +362,9 @@ test('the Share dialog’s head line: where the link fits with Copy, the rooms i
   fit.querySelector<HTMLButtonElement>('.to-fit-words')!.click();
   await until(() => rooms.matches(':popover-open'));
   const rows = [...rooms.querySelectorAll('tbody tr')];
-  expect(rows.length).toBe(11);
+  expect(rows.length).toBe(12);
   expect(rows.map((r) => r.querySelector('th')!.textContent)).toContain('a QR code');
+  expect(rows.map((r) => r.querySelector('th')!.textContent)).toContain('a link in Google Docs');
   expect(rooms.textContent).toContain('any length');
   rooms.hidePopover();
   // A document past the link's limit: the line in red, said in characters over.

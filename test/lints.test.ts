@@ -84,6 +84,8 @@ describe('the kit in its six folders (docs/kernel.md §11): nothing at its root,
         path: 'src/apps/a/editor.ts',
         source: "import { a } from '../../kit/core/app.ts';\nimport { b } from '../../kit/draw.ts';\nimport { c } from '../../kit/misc/c.ts';\nimport { d } from '../../kit/core';",
       },
+      // A document kept in a kit folder and imported as text is named by its file too; one at the kit's root is not.
+      { path: 'src/kit/ui/manual.ts', source: "import raw from './manual.tlo?raw';\nimport stray from '../stray.tlo?raw';" },
     ];
     expect(kitProblems(fixture)).toStrictEqual([
       "a file at the kit's root, in none of its folders: src/kit/stray.ts",
@@ -91,6 +93,7 @@ describe('the kit in its six folders (docs/kernel.md §11): nothing at its root,
       'an import of the kit names no file in its six folders: src/apps/a/editor.ts → src/kit/draw.ts',
       'an import of the kit names no file in its six folders: src/apps/a/editor.ts → src/kit/misc/c.ts',
       'an import of the kit names no file in its six folders: src/apps/a/editor.ts → src/kit/core',
+      'an import of the kit names no file in its six folders: src/kit/ui/manual.ts → src/kit/stray.tlo?raw',
     ]);
   });
   test('src/ and what reads it (test, scripts, packages, e2e, dev) have none, and the kit holds the six folders and nothing beside them', () => {

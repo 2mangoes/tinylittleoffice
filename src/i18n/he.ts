@@ -54,6 +54,7 @@ export default {
   'Default: {name}': 'ברירת מחדל: {name}',
   // The switch that keeps files and settings in this browser (off by default), and the line under it, on or off.
   'Save in browser': 'שמירה בדפדפן',
+  'What is this?': 'מה זה?',
   'Turn on to save files in your browser.': 'יש להפעיל כדי לשמור קבצים בדפדפן.',
   'Turn off to remove all files and settings.': 'כיבוי מסיר את כל הקבצים וההגדרות.',
   'Nothing saved in this browser': 'שום דבר לא נשמר בדפדפן הזה',
@@ -118,6 +119,7 @@ export default {
   'This link: {n} characters, too long for {where}': 'הקישור הזה: {n} תווים, ארוך מדי בשביל {where}',
   'a Discord message': 'הודעת Discord',
   'a QR code': 'קוד QR',
+  'a link in Google Docs': 'קישור ב-Google Docs',
   'a Telegram message': 'הודעת Telegram',
   'a short link': 'קישור מקוצר',
   'a small NFC sticker': 'מדבקת NFC קטנה',

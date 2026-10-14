@@ -49,9 +49,15 @@ test('one line: fits in a text message, or too long for the first place, from th
   expect(fitLine(at(2010))).toBe('This link: 2,010 characters, too long for a Discord message');
   expect(fitLine(at(2500))).toBe('This link: 2,500 characters, too long for some browsers');
   expect(fitLine(at(3500))).toBe('This link: 3,500 characters, too long for a QR code');
-  expect(fitLine(at(5000))).toBe('This link: 5,000 characters, too long for a Telegram message');
+  expect(fitLine(at(5000))).toBe('This link: 5,000 characters, too long for a link in Google Docs');
   // What the shortener holds is the ciphertext, a third longer than the link: 12,273 characters is past it.
   expect(SHORT_LINK_MAX).toBe(12_272);
-  expect(fitLine(at(12_272))).toMatch(/too long for a Telegram message$/);
+  expect(fitLine(at(12_272))).toMatch(/too long for a link in Google Docs$/);
+  // Telegram's 4,096 is the same room; Google Docs, the one that cut Paul's link, is the one named.
+  expect(
+    roomFor(at(5000))
+      .filter((r) => r.left === 4096 - 5000)
+      .map((r) => r.target.id),
+  ).toEqual(['gdocs', 'telegram']);
   expect(fitLine(at(12_273))).toBe('This link: 12,273 characters, too long for a short link');
 });

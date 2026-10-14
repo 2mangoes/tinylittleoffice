@@ -65,6 +65,8 @@ export default {
   'Default: {name}': 'Default: {name}',
   // The switch that keeps files and settings in this browser (off by default), and the line under it, on or off.
   'Save in browser': 'Save in browser',
+  // The manual's row above the switch: a deck kept in the tree (kit/ui/manual.tlo), compiled into its link.
+  'What is this?': 'What is this?',
   'Turn on to save files in your browser.': 'Turn on to save files in your browser.',
   'Turn off to remove all files and settings.': 'Turn off to remove all files and settings.',
   'Nothing saved in this browser': 'Nothing saved in this browser',
@@ -131,6 +133,7 @@ export default {
   'This link: {n} characters, too long for {where}': 'This link: {n} characters, too long for {where}',
   'a Discord message': 'a Discord message',
   'a QR code': 'a QR code',
+  'a link in Google Docs': 'a link in Google Docs',
   'a Telegram message': 'a Telegram message',
   'a short link': 'a short link',
   'a small NFC sticker': 'a small NFC sticker',
