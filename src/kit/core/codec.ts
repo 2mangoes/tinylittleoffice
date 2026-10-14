@@ -11,6 +11,13 @@
  * may break (UAX #14), so a long link full of them was cut wherever a mail client or a chat wrapped it, and "~"
  * is unreserved in a URL and breaks nowhere. Reading is lenient: "-" is 62 too, so every link made before opens.
  *
+ * A payload also carries a period every SPACED characters (Paul, 2026-10-14, from Patrick Weaver's "iMessage mystery":
+ * Messages and Signal hand over a link whose fragment runs more than 301 base64 characters without a break as broken
+ * text, an empty page and then the characters). A period is unreserved, in no base64 alphabet, not a word character,
+ * and no place a line may break between letters (UAX #14 class IS); it sits only between two chunks, never at the end,
+ * where a link detector would strip it. Reading ignores every period, so a link made before them opens, and a link
+ * made with them opens only under code that knows them (the site, the command line and the API from v1.2.32).
+ *
  * fflate rather than the browser's CompressionStream: the native API has no dictionary, is asynchronous,
  * and is absent under node for the tests; the dictionary is what makes short documents 20 to 35 percent
  * smaller. The dictionary's bytes never change: a link made under them opens only under them.
@@ -21,6 +28,10 @@ import { Inflate, deflateSync, strToU8, strFromU8 } from 'fflate';
 export const URL_LIMIT = 2048;
 
 const B64 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789~_';
+/** How many characters of a payload run between periods: under the 301 Messages and Signal allow, with room for a stricter carrier. */
+export const SPACED = 200;
+/** A payload with a period after every SPACED characters, never at its end; the inverse is fromBase64Url's reading past them. */
+export const spaced = (payload: string): string => payload.replace(new RegExp(`.{${SPACED}}(?=.)`, 'g'), '$&.');
 const B64_REV: Record<string, number> = { '-': 62 };
 for (let i = 0; i < B64.length; i++) B64_REV[B64[i]] = i;
 
@@ -44,6 +55,7 @@ export function fromBase64Url(s: string): Uint8Array {
   let buf = 0;
   let bits = 0;
   for (const ch of s) {
+    if (ch === '.') continue;
     const v = B64_REV[ch];
     if (v === undefined) throw new Error('bad base64url');
     buf = (buf << 6) | v;
@@ -133,7 +145,7 @@ export const isSealed = (payload: string): boolean => payload.startsWith('E');
 export function encodeDoc(doc: string): string {
   if (!doc) return '';
   const { flag, bytes } = packDoc(doc);
-  return flag + toBase64Url(bytes);
+  return spaced(flag + toBase64Url(bytes));
 }
 
 /** The text a payload holds; '' for anything unreadable. */

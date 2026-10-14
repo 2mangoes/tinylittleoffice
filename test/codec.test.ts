@@ -1,7 +1,7 @@
 // The link codec: round trips, the dictionary's gain, and a refusal to unpack a mountain.
 import { test, expect } from 'vitest';
 import { deflateSync, strToU8 } from 'fflate';
-import { encodeDoc, decodeDoc, toBase64Url, fromBase64Url, budgetFor, unpackDoc, DICTIONARY, MAX_DOC_BYTES, URL_LIMIT } from '../src/kit/core/codec.ts';
+import { encodeDoc, decodeDoc, toBase64Url, fromBase64Url, budgetFor, unpackDoc, DICTIONARY, MAX_DOC_BYTES, URL_LIMIT, SPACED, spaced } from '../src/kit/core/codec.ts';
 
 test('base64url round trip', () => {
   for (const len of [0, 1, 2, 3, 4, 5, 31, 100]) {
@@ -83,7 +83,7 @@ test('a link made before "~" (with "-") reads to the same bytes', () => {
   expect(Array.from(fromBase64Url(now.replace(/~/g, '-')))).toEqual(Array.from(bytes));
   const doc = 'A document from before. '.repeat(30) + 'é✓';
   expect(decodeDoc(encodeDoc(doc).replace(/~/g, '-'))).toBe(doc);
-  expect(() => fromBase64Url('ab.c')).toThrow();
+  expect(() => fromBase64Url('ab c')).toThrow();
 });
 
 test('a link written by encodeDoc holds no hyphen, even for a document of noise', () => {
@@ -95,4 +95,27 @@ test('a link written by encodeDoc holds no hyphen, even for a document of noise'
     expect(link).not.toContain('-');
     expect(decodeDoc(link)).toBe(doc);
   }
+});
+
+// Messages and Signal hand over a link whose fragment runs more than 301 base64 characters without a break as broken
+// text (Patrick Weaver, "iMessage mystery"; Paul, 2026-10-14, with a document of the alphabet over and over, whose
+// link ran 495 characters of letters and digits). A period every SPACED characters, which reading ignores.
+test('a payload carries a period every 200 characters, never at its end, and reads with or without them', () => {
+  const alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  const doc = `---\ntitle: ${alphabet}\n---\n${alphabet.repeat(2000)}\n`;
+  const link = encodeDoc(doc);
+  expect(link.length).toBeGreaterThan(600);
+  const runs = link.match(/[A-Za-z0-9_~-]+/g)!;
+  expect(Math.max(...runs.map((r) => r.length))).toBeLessThanOrEqual(SPACED);
+  expect(link.slice(0, SPACED + 1)).toMatch(/^[^.]{200}\.$/);
+  expect(link.endsWith('.')).toBe(false);
+  expect(link).not.toContain('..');
+  expect(decodeDoc(link)).toBe(doc);
+  // A link made before periods, and one with periods anywhere a carrier might leave them.
+  expect(decodeDoc(link.replace(/\./g, ''))).toBe(doc);
+  expect(decodeDoc(link.replace(/(.{7})/g, '$1.'))).toBe(doc);
+  // A short payload has none.
+  expect(encodeDoc('Hi')).not.toContain('.');
+  expect(spaced('a'.repeat(SPACED))).toBe('a'.repeat(SPACED));
+  expect(spaced('a'.repeat(SPACED + 1))).toBe('a'.repeat(SPACED) + '.a');
 });

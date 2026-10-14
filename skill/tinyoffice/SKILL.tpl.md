@@ -28,7 +28,7 @@ Put the parameters after `#`, exactly as shown, never after `?`. On opening, the
 
 Length: a QR code holds at most 2,953 characters and some chat apps cut a link past about 2,000. Keep the whole URL under 2,000 where you can; a short link (below) holds up to 12,272.
 
-The packed form: after `#/v1/<app>/` comes one letter and then base64url bytes (with `~` for 62 where RFC 4648 has `-`, so a pasted link never breaks at a hyphen; `-` is read too): the document's TLO text deflated against a dictionary of TLO's own words (`y`), deflated (`z`), or raw (`r`). `?d` after it opens the pages to read rather than the editor; `?show` opens a deck presenting; `#/v1/<app>.<ext>/…` downloads the file as it opens. You never need to make these by hand: the plain form becomes the shortest of them when opened, and the API below makes them directly.
+The packed form: after `#/v1/<app>/` comes one letter and then base64url bytes (with `~` for 62 where RFC 4648 has `-`, so a pasted link never breaks at a hyphen; `-` is read too; and a period after every 200 characters, which reading ignores, so Messages and Signal, which break a link at a run of more than 301 base64 characters, deliver it whole): the document's TLO text deflated against a dictionary of TLO's own words (`y`), deflated (`z`), or raw (`r`). `?d` after it opens the pages to read rather than the editor; `?show` opens a deck presenting; `#/v1/<app>.<ext>/…` downloads the file as it opens. You never need to make these by hand: the plain form becomes the shortest of them when opened, and the API below makes them directly.
 
 ## Sharing: a link is a copy
 
