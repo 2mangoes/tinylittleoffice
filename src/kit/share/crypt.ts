@@ -8,7 +8,7 @@
  * nothing. Each edit runs AES-GCM with
  * a fresh IV. WebCrypto alone. docs/crypto/password.md gives the layout and why it is sound.
  */
-import { fromBase64Url, isSealed, spaced, toBase64Url } from '../core/codec.ts';
+import { fromBase64Url, isSealed, toBase64Url } from '../core/codec.ts';
 
 /** HKDF's info: names the format, so this key is for nothing else. */
 const INFO = new TextEncoder().encode('tinylittleoffice sealed v1');
@@ -56,7 +56,7 @@ export async function sealAt(locker: Locker, flag: string, bytes: Uint8Array, iv
   out.set(locker.salt, 0);
   out.set(iv, SALT_LEN);
   out.set(ct, SALT_LEN + IV_LEN);
-  return spaced('E' + toBase64Url(out));
+  return 'E' + toBase64Url(out);
 }
 
 /** A sealed payload's parts, or null for one too short or not base64url. */
