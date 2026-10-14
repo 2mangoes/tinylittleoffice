@@ -83,7 +83,7 @@ test("the Deck's film, saved as WebM, plays 960 wide for as long as its frames",
   video.remove();
 }, 120_000);
 
-test('the bitrate: 1 Mbit/s against 2, the smaller kept where a decoded frame is as close to the drawing', async () => {
+test('the bitrate: six Mbit/s is the default (crisp words on a slide, Paul, 2026-10-14: "too jpeggy" at one), its frame at least as close to the drawing as one Mbit/s gives', async () => {
   const doc = await sample('anim');
   const { pages, delayMs } = animFrames(parse(doc));
   const drawn: HTMLCanvasElement[] = [];
@@ -94,17 +94,17 @@ test('the bitrate: 1 Mbit/s against 2, the smaller kept where a decoded frame is
   const at = Math.floor(pages.length / 2);
   const want = drawn[at].getContext('2d')!.getImageData(0, 0, W, H).data;
   const tried: Record<number, { bytes: number; off: number }> = {};
-  for (const rate of [1_000_000, 2_000_000]) {
+  for (const rate of [1_000_000, 6_000_000]) {
     const bytes = (await webmOf(frames(), W, H, rate))!;
     const video = await play(bytes);
     tried[rate] = { bytes: bytes.length, off: diff(await frameAt(video, (at * delayMs + delayMs / 2) / 1000), want) };
     video.remove();
   }
   console.log('webm bitrates', JSON.stringify(tried));
-  // The kept rate (1 Mbit/s, kit/file/webm.ts BITRATE) is the default, and its frame is within a hair of the larger's.
-  expect((await animWebm(doc))!.length).toBe(tried[1_000_000].bytes);
-  expect(tried[1_000_000].off).toBeLessThan(3);
-  expect(tried[1_000_000].off - tried[2_000_000].off).toBeLessThan(1);
+  // The kept rate (6 Mbit/s, kit/file/webm.ts BITRATE) is the default; its frame is within a hair of the drawing and no further from it than the lean rate's.
+  expect((await animWebm(doc))!.length).toBe(tried[6_000_000].bytes);
+  expect(tried[6_000_000].off).toBeLessThan(3);
+  expect(tried[6_000_000].off).toBeLessThanOrEqual(tried[1_000_000].off + 0.5);
 }, 120_000);
 
 test('a browser with no video encoder has no WebM row in the Download table, and the GIF stays', async () => {

@@ -125,7 +125,8 @@ export function muxWebm(track: WebmTrack, chunks: WebmChunk[], durationMs: numbe
 /* ---------- the encoder ---------- */
 
 /** Bits a second: flat drawings need few (test/browser/webm.test.ts compared two). */
-const BITRATE = 1_000_000;
+/** Bits a second: generous for 960 wide, since a slide is mostly still and its words must stay crisp (Paul, 2026-10-14: "make the webm exporter less compressed, it's too jpeggy"; it was one million). */
+const BITRATE = 6_000_000;
 /** A key frame at the start and one every two seconds after, so a player can seek. */
 const KEY_MS = 2000;
 

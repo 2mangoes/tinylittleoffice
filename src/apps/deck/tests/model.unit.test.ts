@@ -286,7 +286,7 @@ test('the deck ends with a QR code of itself, unless told not to, unless printed
   const frames = deckFrames('## One\n\n- a\n- b\n');
   expect(frames).toHaveLength(4);
   // Each frame holds for as long as its words take to read: three seconds at the least, more for a wordy slide, ten at the most (Paul, 2026-10-14: "a readable speed").
-  expect(frames.map((f) => f.ms)).toEqual([3000, 3000, 3000, 3000]);
+  expect(frames.map((f) => f.ms)).toEqual([3000, 3000, 3000, 30000]);
   const wordy = deckFrames(`## A long one\n\n${Array.from({ length: 4 }, (_, i) => `- Line ${i + 1} ${'word '.repeat(12)}`).join('\n')}\n`);
   // Fifty-six words over five frames, eleven and a bit each: a breath and then four words a second.
   expect(wordy[0].ms).toBeGreaterThan(3000);
@@ -295,6 +295,16 @@ test('the deck ends with a QR code of itself, unless told not to, unless printed
   const plain = deckFrames(`## A speech\n\n${'word '.repeat(200)}\n`);
   expect(plain[0].ms).toBe(10000);
   expect(frameMs(0)).toBe(3000);
+  // The last frame holds thirty seconds: the code, or the last slide where there is none.
+  expect(deckFrames('---\nqr: no\n---\n## Only\n\n- a\n').map((f) => f.ms)).toEqual([3000, 30000]);
+  // A slide holding an animation plays it through, a frame a frame at its own rate, then rests for its words.
+  const moving = deckFrames(
+    '## Go\n\n```anim\n---\nframes: 6\nfps: 12\n---\nKind | X | Y | W | H | Style | Label\n--- | --- | --- | --- | --- | --- | ---\ne | 4 | 4 | 8 | 8 | 2r |\n\nShape | Keys\n--- | ---\n0 | 0,0,0,0,1,0; 5,80,0,0,1,0\n```\n',
+  );
+  expect(moving.map((f) => f.ms)).toEqual([83, 83, 83, 83, 83, 83, 3000, 30000]);
+  // The frames differ as the ball moves; the resting frame is the last one's picture.
+  expect(moving[0].svg).not.toBe(moving[5].svg);
+  expect(moving[6].svg).toBe(moving[5].svg);
 });
 
 test('every template is canonical, has a name, and draws', () => {

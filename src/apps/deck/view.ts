@@ -188,13 +188,21 @@ export function place(p: Page, x: number, y: number, w: number, h: number): stri
 /* ---------- the document a slide shows ---------- */
 
 /** The page another document makes on a slide: its own app draws it small; a table is a sheet. `open`: in the editor (a locked document opened this visit drawn open). `still`: drawn where nothing can move (an animation a frame). */
-export function subPage(doc: Doc, s: Slide, upTo?: number, open = false, still = false, thumb = false): Page | null {
+export function subPage(doc: Doc, s: Slide, upTo?: number, open = false, still = false, thumb = false, frame?: number): Page | null {
   const b = s.sub >= 0 ? doc.blocks[s.sub] : null;
   if (!b) return null;
   if (b.k === 'fence' && b.lang) {
     const def = lookup.appOf(b.lang);
-    // Presented, the document as far as it has built (its app's steps); else whole.
-    if (def) return def.view(b.body, { small: true, ...(still ? { still } : {}), ...(thumb ? { thumb } : {}), ...(upTo !== undefined && def.steps ? { upTo } : {}), ...(open ? { open } : {}) })[0];
+    // Presented, the document as far as it has built (its app's steps); else whole. A film's frame of its motion, where it asks for one.
+    if (def)
+      return def.view(b.body, {
+        small: true,
+        ...(still ? { still } : {}),
+        ...(thumb ? { thumb } : {}),
+        ...(upTo !== undefined && def.steps ? { upTo } : {}),
+        ...(open ? { open } : {}),
+        ...(frame !== undefined ? { frame } : {}),
+      })[0];
     const lines = b.body
       .split('\n')
       .filter((l) => l.trim() && !/^---/.test(l))
@@ -264,6 +272,8 @@ export interface SlideSize {
   w?: number;
   h?: number;
   loud?: number;
+  /** A film's frame of the motion the slide holds (deckFrames). */
+  frame?: number;
 }
 
 /** Where everything on a slide goes, and how big the type is. */
@@ -456,7 +466,7 @@ export function slidePage(doc: Doc, s: Slide, look: Look, shown = Infinity, o: S
   }
   if (L.sub) {
     // Presented, the document as far as the clicks have built it.
-    const sub = subPage(doc, s, Number.isFinite(shown) ? shown : undefined, false, look.still, look.thumb);
+    const sub = subPage(doc, s, Number.isFinite(shown) ? shown : undefined, false, look.still, look.thumb, o.frame);
     if (sub) {
       // A document is drawn for white paper: on a dark slide it sits on a white card.
       if (T.dark) svg += rect(L.sub.x, L.sub.y, L.sub.w, L.sub.h, '#ffffff', 'rx="12"');
@@ -904,7 +914,15 @@ export function deckPages(text: string, small = false, still = false, thumb = fa
  */
 export const frameMs = (words: number): number => Math.min(10000, Math.max(3000, 800 + Math.round(words * 250)));
 
-/** The slides as they play, for a film: every slide, every reveal, the closing code last; each a still picture, held for as long as its words take to read. */
+/** How long the film's last frame holds, the closing code or the last slide: time to scan it, or to get a phone out (Paul, 2026-10-14: "Hold the last QR code slide or last slide if no QR for 30 full seconds"). */
+const LAST_MS = 30_000;
+
+/**
+ * The slides as they play, for a film: every slide, every reveal, the closing code last; each a still picture, held
+ * for as long as its words take to read. A slide that holds an animation plays it once through, a frame a frame of
+ * the film at the motion's own rate, before resting (Paul, 2026-10-14: "export animations as part of deck export").
+ * The last frame holds LAST_MS.
+ */
 export function deckFrames(text: string): (Page & { ms: number })[] {
   const doc = parse(text);
   const s = settingsOf(doc);
@@ -915,10 +933,15 @@ export function deckFrames(text: string): (Page & { ms: number })[] {
     // A slide's words, shared out over its reveals: each frame holds for the lines it brings.
     const words = slideText(sl).join(' ').split(/\s+/).filter(Boolean).length;
     const ms = frameMs(words / (steps + 1));
-    for (let shown = 0; shown <= steps; shown++) out.push({ ...slidePage(doc, sl, look, shown), ms });
+    for (let shown = 0; shown < steps; shown++) out.push({ ...slidePage(doc, sl, look, shown), ms });
+    const b = sl.sub >= 0 ? doc.blocks[sl.sub] : null;
+    const motion = b?.k === 'fence' && b.lang ? lookup.appOf(b.lang)?.motion?.(b.body) : undefined;
+    if (motion) for (const frame of motion.frames) out.push({ ...slidePage(doc, sl, look, steps, { frame }), ms: motion.delayMs });
+    out.push({ ...slidePage(doc, sl, look, steps), ms });
   }
   const end = closingPage(text, doc, s, look);
   if (end) out.push({ ...end, ms: frameMs(0) });
+  if (out.length) out[out.length - 1].ms = LAST_MS;
   return out;
 }
 

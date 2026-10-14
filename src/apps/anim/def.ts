@@ -12,7 +12,7 @@ import { t } from '../../kit/core/i18n.ts';
 import { canvas, drawn, pixels } from '../../kit/draw/raster.ts';
 import { webmOf, webmReady, type WebmFrame } from '../../kit/file/webm.ts';
 import { drawingText, H, W } from '../draw/model.ts';
-import { gifLoop, readAnim } from './model.ts';
+import { frameOrder, gifLoop, readAnim } from './model.ts';
 import { altOf, animFrames, animPage, animToSvg, frameSvg } from './view.ts';
 
 export const titleOf = (doc: Doc): string => parse(doc).head.title ?? '';
@@ -69,7 +69,14 @@ export default defineApp({
   view: (doc, opts) => {
     const anim = readAnim(parse(doc));
     if (!isStill(opts)) return [animPage(anim)];
-    return [{ w: W, h: H, svg: frameSvg(anim, opts?.thumb ? 0 : Math.max(0, anim.frames - 1)), alt: altOf(anim) }];
+    // A film asks for a frame of its own; else the first for a thumbnail, the resting one for a print.
+    const frame = opts?.frame !== undefined ? Math.max(0, Math.min(anim.frames - 1, Math.floor(opts.frame))) : opts?.thumb ? 0 : Math.max(0, anim.frames - 1);
+    return [{ w: W, h: H, svg: frameSvg(anim, frame), alt: altOf(anim) }];
+  },
+  // One round of the motion, frame by frame, for a film of a slide that holds it (deck/view.ts deckFrames).
+  motion: (doc) => {
+    const anim = readAnim(parse(doc));
+    return { frames: frameOrder(anim.frames, anim.loop), delayMs: Math.round(1000 / anim.fps) };
   },
   exports: [
     { ext: 'gif', label: () => t('Animated GIF'), mime: 'image/gif', shows: 'own', build: (doc) => animGif(doc) },

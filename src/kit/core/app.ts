@@ -41,6 +41,8 @@ export interface ViewOpts {
   thumb?: boolean;
   /** Presented a step at a time (a slide that holds this document): draw only the first `upTo` of its `steps`, the rest keeping their places. */
   upTo?: number;
+  /** Drawn still at this frame of its motion (a film's frame of a slide that holds an animation, deck/view.ts deckFrames), with `still`; a document that does not move ignores it. */
+  frame?: number;
   /** Drawn in an editor: a document locked with a password and opened this visit is drawn open (kit/share/locked.ts); a page, a print or a file never passes it. */
   open?: boolean;
   /**
@@ -167,6 +169,8 @@ export interface AppDef {
   text?(doc: Doc): TextNode[];
   /** How many steps the document builds up in when presented (a list an item a step, a trip a stop a step); `view(doc, { upTo })` draws a part of it. Absent or 0: shown whole. */
   steps?(doc: Doc): number;
+  /** The frames the document moves through (the Animator): their numbers in the order one round plays, and how long each stays, so a film of a slide holding it plays it (`view(doc, { still, frame })` draws one). Absent: it does not move. */
+  motion?(doc: Doc): { frames: number[]; delayMs: number };
 }
 
 /**
