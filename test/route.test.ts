@@ -127,3 +127,17 @@ test('a long payload is written with a "+" every 300 characters, for iMessage, a
   expect(parseHash(routeHash('write', sealed))).toMatchObject({ payload: sealed, sealed: true });
   expect(routeHash('write', 'yABC')).toBe('#/v1/write/yABC');
 });
+
+// The document the bug was found with (Patrick Weaver, #2; Paul, 2026-10-14): the alphabet over and over, whose link
+// ran 495 letters and digits without a "~" or a "_".
+test('the alphabet document’s link runs no more than 300 letters and digits, and reads back whole', async () => {
+  const { encodeDoc, decodeDoc } = await import('../src/kit/core/codec.ts');
+  const alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  const doc = `---\ntitle: ${alphabet}\n---\n${alphabet.repeat(2000)}\n`;
+  const hash = routeHash('write', encodeDoc(doc));
+  expect(hash.length).toBeGreaterThan(600);
+  const runs = hash.slice('#/v1/write/'.length).split('+');
+  expect(Math.max(...runs.map((p) => p.length))).toBeLessThanOrEqual(300);
+  expect(hash.endsWith('+')).toBe(false);
+  expect(decodeDoc(parseHash(hash).payload)).toBe(doc);
+});

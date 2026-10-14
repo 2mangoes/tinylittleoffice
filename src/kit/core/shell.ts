@@ -49,7 +49,7 @@ import { unsafeSVG } from 'lit/directives/unsafe-svg.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import type { AppDef, Doc, DocChange, Editor } from './app.ts';
 import { appOf } from './apps.ts';
-import { decodeDoc, encodeDoc } from './codec.ts';
+import { decodeDoc, encodeDoc, withBreaks } from './codec.ts';
 import { withHead, takeHead } from '../../doc/tlo.ts';
 import type { Head } from '../../doc/model.ts';
 import type { Locker } from '../share/crypt.ts';
@@ -179,6 +179,7 @@ export class ToShell extends LitElement {
   private edited: Doc = ''; // what the editor was last given or gave: without the new name the link carries for it
   private offs: (() => void)[] = [];
   private pendingView = ''; // a view asked for in the link ("text.png/…"): done once the editor is up
+  /** The payload as the link carries it, its breaks counted (kit/core/codec.ts withBreaks): what the meter and Share measure against the limit. */
   private payloadLength = 0;
   private kept = new Keeper(); // this document's entry in the library
   private staged: Doc | null = null; // what the editor last gave, not yet in the link (null: the link is the document)
@@ -333,7 +334,7 @@ export class ToShell extends LitElement {
     this.pendingView = view;
     this.changed = false;
     this.copied = false;
-    this.payloadLength = payload.length;
+    this.payloadLength = withBreaks(payload).length;
     this.sealed = def && sealed ? payload : '';
     this.locker = null;
     this.unreadable = !!payload && !sealed && !decodeDoc(payload);
@@ -468,7 +469,7 @@ export class ToShell extends LitElement {
     madeHere.add(routeHash(app, payload));
     // Told already, by its name rather than its link: a reload forgets madeHere, but this digest is kept under Saved.
     firstTold(docDigest(app, this.envelope, routeHash(app, payload)));
-    this.payloadLength = payload.length;
+    this.payloadLength = withBreaks(payload).length;
     this.keepSoon(payload);
     history.replaceState(this.state(), '', routeHash(app, payload, '', false, null, chosenLanguage()));
     this.setTitle();
