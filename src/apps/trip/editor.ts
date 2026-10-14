@@ -269,7 +269,9 @@ export class ToTripEditor extends DocElement<TripView> {
     // Where the person likely is, until the stops are fitted (a trip with stops never stays there).
     const home = homeView(language(), navigator.languages ?? []);
     const map = L.map(el, { worldCopyJump: true, attributionControl: true }).setView([home.lat, home.lon], home.zoom);
-    if (this.tiles) L.tileLayer(this.tiles, { maxZoom: 19, attribution: `&copy; <a href="${origin('osm')}/copyright">OpenStreetMap</a>` }).addTo(map);
+    // OpenStreetMap's tile policy asks that a web page's tiles carry a referrer, and may refuse referrer-stripped traffic: each
+    // tile names the site, the origin alone (never the page's path or anything after its "#"), as the place search does.
+    if (this.tiles) L.tileLayer(this.tiles, { maxZoom: 19, referrerPolicy: 'strict-origin', attribution: `&copy; <a href="${origin('osm')}/copyright">OpenStreetMap</a>` }).addTo(map);
     map.attributionControl.setPrefix('');
     this.layer = L.layerGroup().addTo(map);
     // A tap adds a stop once it is sure not to be the first of a double tap, which zooms (§8): never two stops.

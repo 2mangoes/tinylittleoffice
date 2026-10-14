@@ -61,7 +61,7 @@ function stub(tile: Blob | null) {
     const u = String(url);
     if (TILE.test(u)) {
       asked.push(u);
-      expect(init).toMatchObject({ mode: 'cors', referrerPolicy: 'no-referrer' });
+      expect(init).toMatchObject({ mode: 'cors', referrerPolicy: 'strict-origin' });
       if (!tile) throw new TypeError('Failed to fetch');
       return new Response(tile, { headers: { 'content-type': 'image/png', 'access-control-allow-origin': '*' } });
     }

@@ -67,7 +67,8 @@ export const NETWORK = {
     host: 'tile.openstreetmap.org',
     what: 'The map’s pictures (tiles), asked directly as OpenStreetMap’s policy asks: in the Trip Planner, and under a trip’s map drawn anywhere (a slide, a page, an item, a card, an export), only the tiles its box needs; a picture made of that map (a card, a PDF, a PNG, a PowerPoint) asks them again to write them into it',
     when: 'while shown',
-    carries: 'Which squares of the map are on the screen or in the picture; no referrer',
+    carries:
+      'Which squares of the map are on the screen or in the picture, and the site’s name as the referrer (the origin alone, as OpenStreetMap’s tile policy asks of a web page; never the page’s path or anything of the document)',
     stops: 'Map, in the Trip Planner’s bar, turned off: no map then asks for them, in the Trip Planner or anywhere a trip is drawn; the home page’s pictures of the templates never do',
     by: 'apps/trip/editor.ts, apps/trip/view.ts, kit/draw/raster.ts',
     csp: ['img', 'connect'],
