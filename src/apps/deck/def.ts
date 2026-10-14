@@ -17,9 +17,6 @@ import { retitle, titleOf } from './model.ts';
 import { buildPptx } from './pptx.ts';
 import { deckFrames, deckPages, deckToHtml } from './view.ts';
 
-/** How long each frame of the film stays: a slide, then each line as it is revealed. */
-const FRAME_MS = 1400;
-
 /** The film's width; its height is the slides' shape (an even number for the video, as its encoder wants). */
 const FILM_W = 960;
 
@@ -30,7 +27,7 @@ async function deckWebm(doc: string): Promise<Uint8Array | null> {
   async function* frames(): AsyncIterable<WebmFrame> {
     for (const p of pages) {
       const c = await canvas(pageSvg(p), FILM_W, h);
-      if (c) yield { canvas: c, ms: FRAME_MS };
+      if (c) yield { canvas: c, ms: p.ms };
     }
   }
   return webmOf(frames(), FILM_W, h);
@@ -94,7 +91,7 @@ export default defineApp({
         const h = Math.round((w * pages[0].h) / pages[0].w);
         for (const p of pages) {
           const px = await pixels(pageSvg(p), w, h);
-          if (px) frames.push({ data: px, delayMs: FRAME_MS });
+          if (px) frames.push({ data: px, delayMs: p.ms });
         }
         return encodeGif(w, h, frames);
       },

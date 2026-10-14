@@ -31,7 +31,7 @@ import { decodeDoc } from '../../../kit/core/codec.ts';
 import { parseHash } from '../../../kit/core/route.ts';
 import { templates } from '../templates.ts';
 import { contrast, THEMES } from '../theme.ts';
-import { closingPage, deckFrames, takeHomeLink, wantsClosing, deckPages, deckToHtml, layoutSlide, lookOf, pageCount, pagesOf, sheetsOf, slidePage, slideSteps, wrap } from '../view.ts';
+import { closingPage, deckFrames, frameMs, takeHomeLink, wantsClosing, deckPages, deckToHtml, layoutSlide, lookOf, pageCount, pagesOf, sheetsOf, slidePage, slideSteps, wrap } from '../view.ts';
 
 const TALK = templates().find((x) => x.id === 'talk')!.doc;
 const tpl = (id: string) => templates().find((x) => x.id === id)!.doc;
@@ -285,6 +285,16 @@ test('the deck ends with a QR code of itself, unless told not to, unless printed
   // The film: a frame per reveal, the code last.
   const frames = deckFrames('## One\n\n- a\n- b\n');
   expect(frames).toHaveLength(4);
+  // Each frame holds for as long as its words take to read: three seconds at the least, more for a wordy slide, ten at the most (Paul, 2026-10-14: "a readable speed").
+  expect(frames.map((f) => f.ms)).toEqual([3000, 3000, 3000, 3000]);
+  const wordy = deckFrames(`## A long one\n\n${Array.from({ length: 4 }, (_, i) => `- Line ${i + 1} ${'word '.repeat(12)}`).join('\n')}\n`);
+  // Fifty-six words over five frames, eleven and a bit each: a breath and then four words a second.
+  expect(wordy[0].ms).toBeGreaterThan(3000);
+  expect(wordy[0].ms).toBeLessThan(5000);
+  expect(wordy[4].ms).toBe(wordy[0].ms);
+  const plain = deckFrames(`## A speech\n\n${'word '.repeat(200)}\n`);
+  expect(plain[0].ms).toBe(10000);
+  expect(frameMs(0)).toBe(3000);
 });
 
 test('every template is canonical, has a name, and draws', () => {

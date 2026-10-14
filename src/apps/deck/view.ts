@@ -897,18 +897,28 @@ export function deckPages(text: string, small = false, still = false, thumb = fa
   return end ? [...pages, end] : pages;
 }
 
-/** The slides as they play, for a film: every slide, every reveal, the closing code last; each a still picture. */
-export function deckFrames(text: string): Page[] {
+/**
+ * How long a frame of the film holds, in milliseconds: a breath, then the words it brings at four a second, three
+ * seconds at the least (a picture, a chart, a code take looking at) and ten at the most (Paul, 2026-10-14: "The GIF
+ * export should be at a readable speed, it's very fast now"; it was a second and a half a frame).
+ */
+export const frameMs = (words: number): number => Math.min(10000, Math.max(3000, 800 + Math.round(words * 250)));
+
+/** The slides as they play, for a film: every slide, every reveal, the closing code last; each a still picture, held for as long as its words take to read. */
+export function deckFrames(text: string): (Page & { ms: number })[] {
   const doc = parse(text);
   const s = settingsOf(doc);
   const look = lookOf(s, true);
-  const out: Page[] = [];
+  const out: (Page & { ms: number })[] = [];
   for (const sl of slidesOf(doc)) {
     const steps = slideSteps(sl, doc);
-    for (let shown = 0; shown <= steps; shown++) out.push(slidePage(doc, sl, look, shown));
+    // A slide's words, shared out over its reveals: each frame holds for the lines it brings.
+    const words = slideText(sl).join(' ').split(/\s+/).filter(Boolean).length;
+    const ms = frameMs(words / (steps + 1));
+    for (let shown = 0; shown <= steps; shown++) out.push({ ...slidePage(doc, sl, look, shown), ms });
   }
   const end = closingPage(text, doc, s, look);
-  if (end) out.push(end);
+  if (end) out.push({ ...end, ms: frameMs(0) });
   return out;
 }
 
