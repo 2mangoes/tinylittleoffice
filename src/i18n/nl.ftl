@@ -21,7 +21,7 @@ shell-loading = Laden…
 # en: 22456f903bcbdedb06221ade9b87febb47722e40
 shell-this-link-holds-something-that = Deze link is niet te lezen. Misschien is hij bij het kopiëren afgekapt.
 # en: 7dfd19fef00f41e899fb6e2753b71ae40ba59e6d
-shell-n-of-max-link-characters = nog { $n } van { $max } tekens voor de link
+shell-n-of-max-link-characters = Nog { $n } van { $max } tekens voor de link
 # en: 134d73b30c18c4662e6a42e4a42fbb712bbbb10a
 shell-n-characters-over-link-limit = { $n } tekens boven de limiet van de link
 # en: 1cfbe154225ecb3a01f463f1adde07279f1a454a
@@ -34,11 +34,11 @@ shell-this-document-lives-in-its = Dit document is niet opgeslagen
 # en: 43454bfced276b8a1b83dea8a0bef1794a9bde60
 shell-nothing-is-saved-on-this = Het bestaat alleen in zijn link. Kopieer de link om het te bewaren, of sla het op in deze browser. Met Terug kom je er ook weer.
 # en: e0ef0b02c240e569b52e799771dbb4fb07b35818
-shell-copy-link-and-go = Link kopiëren en gaan
+shell-copy-link-and-go = Link kopiëren en weggaan
 # en: fdb4eeef33355eb9aed9f11d6ddcdfe0c08a29ea
-shell-turn-on-save-in-browser = Opslaan in browser en gaan
+shell-turn-on-save-in-browser = Opslaan in browser en weggaan
 # en: 634bae7c8177155bc24961f3493f425b66e88c16
-shell-go-without = Gaan zonder opslaan
+shell-go-without = Weggaan zonder opslaan
 # en: ee7a39c93b7018b92bcff5511a92081df68dd3db
 shell-save-in-browser-is-on = Opslaan in browser staat aan. Documenten die je opent, worden hier opgeslagen. Zet het uit in het menu.
 # en: 97c669558589e3b0cf0917cb9caece8844ba65d9
@@ -54,9 +54,9 @@ shell-open-it = Openen
 # en: ef6e207cc7cea57220ad9a73fc6040b0085bf63e
 shell-save-in-browser-is-off = Opslaan in browser staat uit, dus er wordt niets opgeslagen. Zet het aan in het menu.
 # en: 3939d97295147954c5488340b1f427ebbfa51e69
-shell-skip-to-apps = Naar de apps springen
+shell-skip-to-apps = Direct naar de apps
 # en: 286b3810e407b3cef40b582c8ca4b373a58445bf
-shell-skip-to-document = Naar het document springen
+shell-skip-to-document = Direct naar het document
 # en: 03d9aea1885137ab8ab4d9c24250515cb44161f0
 shell-this-device-keeps-another-version = Er staat een andere versie van “{ $title }” ({ $when }) op dit apparaat opgeslagen.
 # en: 25c53c58cba7054a3a2ae9e9b575c7888716ae94
@@ -79,7 +79,7 @@ common-forget = Wissen
 home-forget-title = { $title } wissen
 # Under an app's documents, the rest folded away: "3 more"
 # en: 84ab0eecfadb6332ee8b1ee5c67852b7df54e66f
-home-n-more = nog { $n }
+home-n-more = Nog { $n }
 # en: 7f2352058be05faa9a191d7ac6eb2cf0a15b228f
 home-aboard-project-made-with-respect = Een project van { $aboard }. Met respect gemaakt in New York City.
 # en: a26ce4e876668bb8cdbd6db05cc668d436b73ba6
@@ -134,7 +134,7 @@ drawer-language = Taal
 # en: a797e30923ac1be590300ce6b08e63b4e6dc6688
 common-theme = Thema
 # en: 15360c25a66578ad69e81e4c2fc3f0001e8a2258
-drawer-match-device = Zoals het apparaat
+drawer-match-device = Zelfde als apparaat
 # en: a36ef8aba22905e2d2efbf1ac1d6230d5761859d
 drawer-light = Licht
 # en: ae1ef01432946b8976b9b58575b3390ab7644db2
@@ -199,7 +199,7 @@ leave-whole-address = Het hele adres:
 # en: fdb31cf3fb383190c6864d4effd5fd6041b330cb
 leave-someone-wrote-this-link-into = Deze link is toegevoegd door wie het document schreef. De tekst van een link kan verschillen van het adres. Ga alleen verder als je hem vertrouwt.
 # en: 2e0b45f2a456e8db55f08d7b65e87593a3e9a140
-leave-go = Ga
+leave-go = Doorgaan
 # en: c0f31f8a18b087fc577cbc50e9d37c68cb16c9ae
 leave-links-of-this-kind-do = Dit soort link kan hier niet worden geopend.
 # About's last line, a link to the source of the build the site runs: "Running commit abc1234".
@@ -213,7 +213,7 @@ leave-this-link-hides-characters-in = Het adres van deze link bevat verborgen te
 ## sharing: the Share dialog (kit/core/shell.ts), where the link fits (kit/share/limits.ts), the arrival banner
 
 # en: 21697833514286cb120912c109ed55e870e44b01
-share-copy-opened-in-new-tab = Een kopie in een nieuw tabblad
+share-copy-opened-in-new-tab = Kopie geopend in een nieuw tabblad
 # en: ae7b279c96200b853008a352fa110ac2565f3dc5
 share-edit-link = Bewerklink
 # en: 12355fc4c6eeb80306a7fe5199240b694bf2b85e
@@ -334,7 +334,7 @@ share-this-document-is-too-long = Dit document is te lang voor een korte link.
 # en: a4d0b704a911979249dd2629e81a0205fab0aa44
 share-up-to-hundred-links-day = Tot 100 korte links per dag per adres.
 # en: e963907dac5cd5c017869b4c96c18021c9bd058b
-share-remove = Weghalen
+share-remove = Verwijderen
 # same
 # en: d0517071aa376e797705058bbad4b658954b9930
 common-link = Link
@@ -350,19 +350,19 @@ share-change = Wijzigen
 # en: 2a07ce9a22d8e5dc1031e531518f04e50855319f
 share-copy-embed-code = Insluitcode kopiëren
 # en: c3e1c83e5b4172d3c738e37cb69b76d93ce49b8b
-share-copy-show-link = Toonlink kopiëren
+share-copy-show-link = Presentatielink kopiëren
 # en: ad02e14e2841dfbd22ab2caa12b5541c5b01a53a
 share-embed = Insluiten
 # en: 4eeede7134d362f371fd18b2d63d3199bb24f01a
 share-embed-code-copied = Insluitcode gekopieerd
 # en: 682cbb0f328f16ee213c6b44d7012512b55506b7
-share-opens-deck-already-presenting = Opent de presentatie al presenterend.
+share-opens-deck-already-presenting = Opent de presentatie meteen in presentatiemodus.
 # en: 7858ac3ff63354f37161bd349efe11edd13b89cb
 share-post = Plaatsen
 # en: c68fca11627c0ac342583c1782892518730cc40b
-share-post-link = De link plaatsen
+share-post-link = Link plaatsen
 # en: 82584c3ce64f57a310db6846c65628266a88c44d
-share-show-preview-of-first-page = Een voorbeeld van de eerste pagina tonen
+share-show-preview-of-first-page = Voorbeeld van de eerste pagina tonen
 # en: ac1624e1fa626a4ba8b8ee419f0cf118d53fa480
 share-picture-of-first-page-and = Een afbeelding van de eerste pagina en de titel blijven een maand leesbaar op onze server, zodat het netwerk ze kan ophalen. Het document zelf niet.
 # en: 6a46f4b4b3f001e64ef9652412aa1ddbdeabc489
@@ -384,9 +384,9 @@ share-pages-in-frame-on-another = De pagina’s, in een frame op een andere site
 # en: 9377de06278eacbdf4a297a82b8eb9aa3d4220c0
 share-your-mastodon-server = Je Mastodon-server
 # en: 8ae1c34bd37fad49cc5f8e02da648a78e89c3ed8
-share-left = Links
+share-left = Over
 # en: 62be4731dedfbbc70aa7fa30d6649d816af8ca4b
-share-uses = Gebruik
+share-uses = Gebruikt
 # en: 525f61b6729229b1a8854a9e50bcaa52ea96b131
 share-where = Waar
 # en: cdbfed741d905515df704d9585fc74781801a24d
@@ -400,7 +400,7 @@ share-n-over = { $n } te veel
 
 # The Share dialog's head line: "Created 9 Oct 2026, 14:03 · by Paul".
 # en: 07fd5d289286fa4714b3f407db7875fac90b9952
-privacy-anyone-with-link-will-need = Iedereen met de link heeft het wachtwoord nodig om hem te openen. Het kan niet worden hersteld. Raak je het kwijt, dan is het document weg.
+privacy-anyone-with-link-will-need = Iedereen met de link heeft het wachtwoord nodig om het document te openen. Het wachtwoord kan niet worden hersteld. Raak je het kwijt, dan is het document weg.
 # en: 8c684290ce0b8a8e6cee79a145e17554064a4760
 privacy-change-password = Wachtwoord wijzigen
 # en: 5be0d11b94b1ba25b2579314f6af69649a900cde
@@ -443,7 +443,7 @@ privacy-nothing-saved-in-this-browser = Er is niets opgeslagen in deze browser. 
 # en: 626a605da9dbcd888eadcad13deebd3a64011c0a
 privacy-protected-by-password = Beveiligd met een wachtwoord
 # en: acef17d00b9a1b6e1e15e76d27ae53635928a7a6
-privacy-remove-password = Wachtwoord weghalen
+privacy-remove-password = Wachtwoord verwijderen
 # en: 788f55b0957b15918c6aba279f4f0377a5a1db90
 privacy-sealing = Bezig met versleutelen…
 # en: 94408e41c12e924b82da7ea6e79e5cb69ac9e042
@@ -495,7 +495,7 @@ privacy-n-set = { $n } ingesteld
 # en: a97ce1edde4ad396d1cff34063087d0bf5d0e1a8
 privacy-copy-this-and-send-it = Kopieer dit wachtwoord en stuur het los van de link. Het wordt niet opnieuw getoond.
 # en: 7640428ae16fc2b673d689ddf6b1ea15eed407d3
-privacy-make-another = Maak een ander
+privacy-make-another = Nog een maken
 # en: 9a0081f0b2bff82fac1961a403734134b9a3b170
 privacy-password-copied = Wachtwoord gekopieerd
 
@@ -503,13 +503,13 @@ privacy-password-copied = Wachtwoord gekopieerd
 
 # The card drawn where it sits; { $app } is the app's name: "A Spreadsheet document, locked with a password".
 # en: db4307e70c2d2722c2af2f79643b28e73325e9be
-common-with-password = Met een wachtwoord vergrendeld
+common-with-password = Vergrendeld met een wachtwoord
 # en: fa27fac915c0c87aec9006392ae6422f59857f5d
-locked-app-document-locked-with-password = Een { $app }-document, met een wachtwoord vergrendeld
+locked-app-document-locked-with-password = Een { $app }-document, vergrendeld met een wachtwoord
 # en: 49db1d83c8636baba474ad11626b5a7c5260976f
-locked-with-password-unlock = Met een wachtwoord vergrendeld. Ontgrendelen…
+locked-with-password-unlock = Vergrendeld met een wachtwoord. Ontgrendelen…
 # en: 507e778ae244911abcb05b73967febd0edb425a5
-locked-document-locked-with-password = Een document met een wachtwoord vergrendeld
+locked-document-locked-with-password = Een document, vergrendeld met een wachtwoord
 # What one of them is called in running text, as an app's noun is.
 # en: 78ed9fb58f4437d5d29cf78ba699a560017abe47
 locked-document = vergrendeld document
@@ -535,7 +535,7 @@ common-move-left = Naar links
 common-move-right = Naar rechts
 # The group heading the Calendar and the Trip Planner sit under on the home page.
 # en: ae2f98a099fe5855c31126233e9c13641ee7fdba
-common-plan = Plannen
+common-plan = Planning
 # en: 9985434cd07212b8dac01f8e015a1fa8adac9a99
 common-chosen-tasks = Geselecteerde taken
 # A link that opens the document (kit/ui/compare.ts).
@@ -594,7 +594,7 @@ download-failed = Downloaden mislukt
 common-open-in-tiny-little-office = Openen in Piepklein Kantoortje
 # Under a document cut off at a slide's foot: a link that opens it whole, in its own app.
 # en: c510d6c04c0951500c8e43f623e9f8886c378aec
-download-see-more = Meer zien
+download-see-more = Meer bekijken
 
 ## the bar, shared by every app
 
@@ -605,9 +605,9 @@ bar-bold = Vet
 # en: 1616e2e5405e69c4e3914c67c644a9bd3ac00956
 bar-italic = Cursief
 # en: 39773aa3efa19090c918baedac1fe737dea25b92
-bar-underline = Onderstreept
+bar-underline = Onderstrepen
 # en: a93b9a6808a95ca93515164188159659017155cb
-bar-strikethrough = Doorgehaald
+bar-strikethrough = Doorhalen
 # en: e1da9275bc5b420601738531d5e4445b44e0e6e9
 bar-highlight = Markeren
 # en: a3089b7fae27bca3309070e0487079a25b8f1ede
@@ -663,20 +663,20 @@ editor-set-link = Link instellen
 # en: d2de1a2831e7fee28d6c8d214b66da0d1bed30c8
 editor-open-link = Link openen
 # en: f377ac75602950b2c36449de5bceb3c12333ac77
-editor-change-link = Link bewerken
+editor-change-link = Link wijzigen
 # en: 8d48d1f9e74c4fecd89a67645ca3593ef0964710
-editor-remove-link = Link weghalen
+editor-remove-link = Link verwijderen
 # The selection bubble's name: what can be done to the words selected.
 # en: 041a5dec481d6bf0724caeaa84bc135d7d9062d4
 common-format = Opmaak
 # en: e5fd9cfe0e8039111d54b588e77b2bb0cad41c3a
-editor-done-lowercase = gedaan
+editor-done-lowercase = afgerond
 # en: 4ed7199b77561b7a7c013f7a8504b6686496302d
-editor-not-done = niet gedaan
+editor-not-done = niet afgerond
 # en: 984cfca8d70e0b1e37a9e70c98a219bb12a05f23
 editor-bold-italic-and-links = Vet, cursief en links
 # en: a983f10d71bb808f58795f6ae728a6e76f08ce78
-editor-one-of-words-column-holds = Een van de woorden die de kolom bevat, of een nieuw
+editor-one-of-words-column-holds = Een van de woorden uit de kolom, of een nieuw woord
 # en: e31d972229de381b461860014dd710856361917a
 editor-option = Keuze
 # en: eb883fb88ed57f39b760fee6ee8f5a04a8cdc7ba
@@ -702,7 +702,7 @@ write-document-lowercase = document
 # en: d26d55c7f815c82cf430c3915b3bb833d3f02e5e
 common-words = Tekst
 # en: 703864836e29b00a7c7490f714fd2d18474de840
-write-words-on-page-headings-lists = Woorden op een pagina: koppen, lijsten, links en noten, een tabel die optelt, te printen op letter of A4.
+write-words-on-page-headings-lists = Woorden op een pagina: koppen, lijsten, links en noten, een tabel die optelt, af te drukken op Letter of A4.
 # same
 # en: e214b8a29923056887b7edf6635d90dcbb2abe88
 write-document = Document
@@ -735,9 +735,9 @@ write-sans = Sans
 # en: 2fa97b3a9a6621a3a887ef5686bf4604fa6804e6
 write-clean-and-plain-throughout = Helder en eenvoudig
 # en: 56632c1841ab67cf1e7c7179b9c5ea0e32ea81c1
-write-bookish-serif-throughout = Een boekachtige serif overal
+write-bookish-serif-throughout = Overal een boekachtige serif
 # en: 7daed9b46fb34186159d19a2dca5208daf510f54
-write-monospace-ragged-right = Monospace, rafelrechts
+write-monospace-ragged-right = Monospace, links uitgelijnd
 # en: 9ec6ab25de9a050b550600a98c5a63e5b2c00bf8
 write-serif-and-sans = Serif en sans
 # en: b3ca8ebc46d597ea38c5f4877cf7ae7bfb4e3d68
@@ -816,7 +816,7 @@ write-plain-words-agreement-what-each = Een afspraak in gewone woorden: wat iede
 # en: f9f38818c406d0878defb17a2356e1a2c658861a
 write-invoice = Factuur
 # en: 4e056cf73efd0995ce1e7c5fd88900894935896c
-write-who-what-and-how-much = Wie, wat en hoeveel, de sommen in de tabel; afgedrukt als papier om te versturen.
+write-who-what-and-how-much = Wie, wat en hoeveel, uitgerekend in de tabel; afgedrukt om op te sturen.
 # en: 80c40a5c8be53118fd8a9fc487b43f20c3014fbc
 write-cover-letter = Sollicitatiebrief
 # en: fe727759e1b85df4a1d71348a1a6dfd6ef8e135d
@@ -841,7 +841,7 @@ write-block-associations-month-dates-in = De maand van een buurtvereniging: data
 # en: 1dcda804c96da3cc7e73e8a1672d4379a741f11a
 write-recipe = Recept
 # en: 72490fa559ee9ce5ed498b58b3e2cad900af7155
-write-what-you-need-in-table = Wat je nodig hebt, in een tabel die van vier naar zes schaalt, en hoe, stap voor stap.
+write-what-you-need-in-table = Wat je nodig hebt, in een tabel die van vier naar zes personen meeschaalt, en hoe, stap voor stap.
 # en: aa3ddab4d749b73414ddd65201f9c6553b98a49b
 write-questions-and-answers = Vragen en antwoorden
 # en: 1854b96dd11603bed03cce723369ef661a6f34f8
@@ -890,7 +890,7 @@ write-ask-your-representative-for-vote = Vraag je volksvertegenwoordiger om een 
 # en: de21096f37522d15740e7a4acd69efc811f9b5ce
 write-love-letter = Liefdesbrief
 # en: a6977a11c96b06575fd8359e1bb9e3dea5a21fcf
-write-ordinary-things-missed-letter-across = Gewone dingen, gemist: een brief over de afstand, in een schreeflettertype.
+write-ordinary-things-missed-letter-across = Gewone dingen, gemist: een brief over de afstand heen, in een schreefletter.
 # en: 1af339528a1814a5f1dc409f2d108e0308035b87
 write-wedding-speech = Huwelijkstoespraak
 # en: b040a94a7bd386ebaee15aa4c4535da004fadc4c
@@ -920,7 +920,7 @@ write-a4 = A4
 # en: ee14050617b7b58e17aabccd61c241ccdafc6379
 write-letter = Letter
 # en: c036e85b63c6818f6732a2898cf85f30f8074bfb
-write-name-this-column = Noem deze kolom
+write-name-this-column = Deze kolom een naam geven
 
 ## Insert's dialog (kit/ui/insert-dialogs.ts): Tiny Little Office Doc
 
@@ -960,11 +960,11 @@ chart-flows-list = Stromen: { $list }.
 # en: c6fd3870c86e7422a0146e1e2a052437fb8e51e2
 common-lines = Lijnen
 # en: 5a2f5ac996eef952d239a22e8d68296faf975994
-chart-nothing-to-chart-yet = Nog niets om te tekenen
+chart-nothing-to-chart-yet = Nog geen gegevens voor een grafiek
 # en: 7631740b7c7b5a09ad168ae28580b5c9ca4b8c06
-chart-nothing-to-chart-yet-rows = Nog niets om te tekenen: rijen met Van | Naar | Bedrag
+chart-nothing-to-chart-yet-rows = Nog geen gegevens voor een grafiek: rijen met Van | Naar | Bedrag
 # en: 9318d4f63aeffddc47d4520c722ad70f0ec6c63a
-chart-pie = Taart
+chart-pie = Cirkel
 # en: 40c20d94e78fa142819df8cc9440d30e65329975
 chart-series = Reeksen
 # en: 79b2c4ce6295c191bf1031160055f59fb8174174
@@ -988,13 +988,13 @@ common-spreadsheet = Rekenblad
 # en: 469342764c059045df7b47882a77d96ceb261898
 sheet-spreadsheet-lowercase = rekenblad
 # en: 7e53821f70ae16079c4a6a64c52a91fae645bc5f
-common-numbers = Cijfers
+common-numbers = Getallen
 # en: 05634091c29d83162cee95ca003dc222a3bab8ea
 sheet-spreadsheet-with-formulas-named-cells = Een rekenblad met formules, benoemde cellen en grafieken; drie kolommen om mee te beginnen, meer als je ze nodig hebt.
 # en: 7aeba4cd15b1afc5015285c0854f0edae2380d36
 sheet-budget = Begroting
 # en: d99860b75cc866415325dd845f03e65f1b9fc648
-sheet-planned-against-actual-line-each = Gepland tegenover werkelijk, een regel elk, met het verschil en totalen.
+sheet-planned-against-actual-line-each = Gepland tegenover werkelijk, per post een regel, met het verschil en totalen.
 # en: 0a0a7c3be7656f55cd259d558c2d0eb59b893b88
 sheet-expense-log = Uitgavenlogboek
 # en: c2effbb05c6382e67befb796de9be3ad264a1cbb
@@ -1004,9 +1004,9 @@ sheet-training-log = Trainingslogboek
 # en: d5b29b7fbac7da4d79a420a8108f0c98bb1ab61a
 sheet-what-you-did-and-how = Wat je deed en hoeveel, een regel per keer; een totaal per soort.
 # en: 4d89a20e90ff128c4329c067414e272156b4b196
-sheet-project-tracker = Projectvolgsysteem
+sheet-project-tracker = Projectoverzicht
 # en: a9f287fb1ede11b35e739a207cac5eddcfd2116d
-sheet-tasks-with-owners-start-and = Taken met eigenaren, start- en einddata geteld vanaf vandaag, dagen per taak, hoe het gaat, en een vinkje als het klaar is.
+sheet-tasks-with-owners-start-and = Taken met verantwoordelijken, start- en einddata geteld vanaf vandaag, dagen per taak, hoe het gaat, en een vinkje als het klaar is.
 # en: 83c8cb0557f1a8ab76094b2801ae0b4cd23e4741
 sheet-loans-compared = Leningen vergeleken
 # en: 8ae3fb1476eab673ec96c9e2614cad18cbd6f497
@@ -1026,7 +1026,7 @@ sheet-hours-rate-and-weeks-make = Uren, tarief en weken vormen de facturen van h
 # en: 53ca3d56131df7985cdd58b24a369278bce0d723
 sheet-mutual-aid-fund = Een noodfonds van de buurt
 # en: 4df80f44a8c21f77f84393546555c9ab3224fe85
-sheet-monthly-donors-and-one-off = Maandelijkse donateurs en eenmalige giften vullen het fonds; subsidies, wat beheer en een reserve gaan eruit.
+sheet-monthly-donors-and-one-off = Maandelijkse donateurs en eenmalige giften vullen het fonds; uitkeringen, wat beheerkosten en een reserve gaan eruit.
 # en: 992dbb972d7850082f91f3f43d7b68391091a32e
 sheet-month-by-month-with-chart = Maand voor maand, met een grafiek
 # en: 876c69fa93189c4e89f57aeec964d0573e61be81
@@ -1048,7 +1048,7 @@ sheet-reading-list = Leeslijst
 # en: c809293d68f1061cf7062072d2efc8fe95fe9262
 sheet-books-read-being-read-and = Gelezen boeken, boeken die je leest en wat volgt, met de dagen die elk kostte en de pagina’s van dit jaar.
 # en: 6e14850d9abea09c879f881a4773537f91cf2ac2
-sheet-workout-log = Trainingsschema
+sheet-workout-log = Fitnesslogboek
 # en: b2a1db48bce10aa5ac4b8eb894555098ecbaac30
 sheet-sets-reps-and-weight-for = Sets, herhalingen en gewicht per oefening, het volume uitgerekend, en hoe elke oefening voelde.
 # en: 5be9810c81e208adc153f7aa0cc70f64c988d737
@@ -1058,7 +1058,7 @@ sheet-weeks-hours-by-client-and = De uren van een week per klant en taak; de fac
 # en: da7a3e11a9c1686127720177adfd2bbfed7224e0
 sheet-trip-costs-split = Reiskosten delen
 # en: bcc455f94ab37c41dad441a4152ac7961c3118ad
-sheet-who-paid-for-what-on = Wie wat betaalde op een reis met vier; ieders eerlijke deel, en wat ieder schuldig is (een min is geld terug).
+sheet-who-paid-for-what-on = Wie wat betaalde op een reis met z’n vieren; ieders eerlijke deel, en wat ieder schuldig is (een min is geld terug).
 # en: 3fcd3bd6c3c0517dc23b7c9c8a424a6ba7c30c9a
 sheet-schedule-with-dates = Planning met data
 # en: 9cfdf52e38ee970ebd6feac438c7d2cb6abd25c5
@@ -1070,15 +1070,15 @@ sheet-classs-grades-for-essays-quizzes = De cijfers van een klas voor opstellen,
 # en: 7d9ac107a69e997e571bd6906b535f6802bc5569
 sheet-membership-roll = Ledenlijst
 # en: 3bc0a32ca3d296ee9217f44adf3cf4d3c3dbd080
-sheet-who-belongs-their-plot-and = Wie erbij hoort, hun tuintje en taak, wanneer ze betaalden en wanneer ze verlengen, wie een sleutel heeft, en de contributie binnen.
+sheet-who-belongs-their-plot-and = Wie erbij hoort, hun tuintje en taak, wanneer ze betaalden en wanneer ze verlengen, wie een sleutel heeft, en de binnengekomen contributie.
 # en: b884fda377a19ce445f8ec49bd90f2784834978c
 sheet-seating-count = Plaatsentelling
 # en: 4e00db4efd970061e8ff6cd63f723c7385ad1637
 sheet-tables-for-wedding-seats-guests = Tafels voor een bruiloft: stoelen, gasten, vrije plaatsen en de gekozen maaltijden, met een controle of de maaltijden optellen.
 # en: 8a535a1def73648a0a55a9bfa21c9d370e434ce5
-sheet-poll-results = Peilingresultaten
+sheet-poll-results = Pollresultaten
 # en: df60ac32ce5b04bf11e53f97d296db53c2a2cda2
-sheet-answers-and-votes-for-each = De antwoorden en de stemmen op elk, als taart erboven getekend.
+sheet-answers-and-votes-for-each = De antwoorden en de stemmen op elk, erboven als cirkeldiagram getekend.
 # en: bfee938677dd9bf5dab2de4f9558c07a06d616fd
 sheet-fundraising-thermometer = Inzamelingsthermometer
 # en: f6873b16e788104f3e409c1c06243db77d2a6e04
@@ -1090,11 +1090,11 @@ sheet-every-invoice-sent-when-to = Elke verstuurde factuur: wanneer, aan wie, vo
 # en: 300d29fd5f327e8c7a0f4614d4125d93570eeeff
 sheet-inventory = Voorraad
 # en: cca3ceb6d79e8c2e922aa21c8675223c1b96c275
-sheet-stock-on-hand-against-point = Voorraad in huis tegenover het bestelpunt; wat te bestellen, wat het waard is, en een vlag als het weinig is.
+sheet-stock-on-hand-against-point = Voorraad in huis tegenover het bestelpunt; wat te bestellen, wat het waard is, en een markering als de voorraad laag is.
 # en: ba8d2875e56e1ee2a745057f4de807182be4bb9b
 sheet-petty-cash = Kleine kas
 # en: 8c7a0a9d0703152466c522d2d8bbd55cfcea218d
-sheet-money-in-and-out-of = Geld in en uit het blik, wie het uitgaf en waaraan, het saldo na elke post, en een vinkje voor een bon.
+sheet-money-in-and-out-of = Geld in en uit de geldkist, wie het uitgaf en waaraan, het saldo na elke post, en een vinkje voor een bon.
 # en: dca1686c53daf52f46495f2a961a3346006e41ac
 sheet-rate-card = Tarievenkaart
 # en: 1a3c8694038b9c6d56a26e131d62c3616e165a77
@@ -1102,15 +1102,15 @@ sheet-freelancers-services-with-hours-each = De diensten van een freelancer met 
 # en: b9d1a465f75615e0b55ff620ec057c608971b8ed
 sheet-mortgages-compared = Hypotheken vergeleken
 # en: 43ecdf4a244c2e1c022c6c08a3ba1c07f107ece3
-sheet-four-offers-on-one-house = Vier aanbiedingen voor één huis: de lening na de aanbetaling, de maandlast, alles inclusief belasting, en de rente.
+sheet-four-offers-on-one-house = Vier hypotheekaanbiedingen voor één huis: de lening na de eigen inbreng, de maandlast, alles inclusief belasting, en de rente.
 # en: 54695e5df6ef00663252186d998a600f9bac4c58
-sheet-unit-converter = Eenhedenrekenmachine
+sheet-unit-converter = Eenhedenomrekener
 # en: d2e0c086c77046805d1cc8934044bb315bf00aec
-sheet-miles-and-kilometers-pounds-and = Mijlen en kilometers, ponden en kilogrammen, ovens, bekers en gallons: typ een hoeveelheid, lees de andere eenheid.
+sheet-miles-and-kilometers-pounds-and = Mijlen en kilometers, ponden en kilogrammen, oventemperaturen, cups en gallons: typ een hoeveelheid, lees de andere eenheid.
 # en: 9d2911edf283fc08872808d554a1017460fbe86f
 sheet-tournament-bracket = Toernooischema
 # en: ad907a82b59f9d64761c80d6b2fe13c2a3b04fc2
-sheet-eight-teams-single-elimination-each = Acht teams in een knock-outronde: de score van elke wedstrijd, de winnaar uitgerekend, en de winnaars doorgezet naar de finale.
+sheet-eight-teams-single-elimination-each = Acht teams met knock-outsysteem: de score van elke wedstrijd, de winnaar uitgerekend, en de winnaars door naar de finale.
 # same
 # en: 0e2d6a433d926deb1903e03f166c76cd50bd542d
 sheet-excel-xlsx = Excel (XLSX)
@@ -1126,7 +1126,7 @@ sheet-empty-sheet = Leeg blad
 # en: 2decd02b722b692c9d30d7de5e0c1191d1968de7
 sheet-n-of-max-shown = ({ $n } van { $max } getoond)
 # en: 9e85be5a97dd107512bd06368b695b4265a662c9
-sheet-50-more-rows = 50 rijen meer
+sheet-50-more-rows = Nog 50 rijen
 # en: 46dd847f36799647b69659ed71327486c70728ea
 common-add-column = Kolom toevoegen
 # en: dff758e7f1104295adde7af1bb92396f6c7c88a7
@@ -1154,7 +1154,7 @@ common-drag-to-fill = Sleep om te vullen
 # en: 87b8f44339c3a345782b1fa838bfa3b0406567b3
 sheet-abc-or-123-for-this = Kolomtype
 # en: 69ff8ba19299f697ed3f5401bb7c03f0abbc4c67
-sheet-drag-to-resize-double-click = Sleep om te vergroten, dubbelklik om aan te passen
+sheet-drag-to-resize-double-click = Sleep om de breedte te wijzigen, dubbelklik om passend te maken
 # en: 363a9922cf56c76397d7b72ae8425d30d0438b33
 sheet-fill-down-from-top-row = Omlaag vullen vanaf de bovenste rij
 # en: 549a401f55bc461388a4f5f8554db5e0749d0a28
@@ -1271,7 +1271,7 @@ export-open-in = Openen in
 # en: 7f7b61c3d0574fa0bae27972834652c8b6f222e6
 export-pdf-file = Pdf-bestand
 # en: 20ab05206208a4e9bea088d36c6640c781c6bf65
-export-copy-link-that-downloads-ext = Een link kopiëren die de .{ $ext } downloadt
+export-copy-link-that-downloads-ext = Link kopiëren die de .{ $ext } downloadt
 # en: 389a8e30f70f547f507d418d67a8048c7eb2eda4
 export-could-not-share-ext = Kon de .{ $ext } niet delen
 # en: 5869a7d435c371c52a7c02fe623f625c5062ba1c
@@ -1358,7 +1358,7 @@ draw-phone-and-laptop-api-database = Telefoon en laptop, een API, een database e
 # en: d5786d3d397a91b189e23529401c4f8d35cd09b0
 draw-floor-plan = Plattegrond
 # en: fddd68346c75bb66ad003c667e573feb965f7ca4
-draw-one-bedroom-apartment-from-above = Een tweekamerflat van bovenaf: kamers als rechthoeken, met labels, de deuren als openingen.
+draw-one-bedroom-apartment-from-above = Een tweekamerappartement van bovenaf: kamers als rechthoeken, met labels, de deuren als openingen.
 # en: 38a0d171dc9e21d8e32aacfbb8a170dad9977d9c
 draw-pixel-heart = Pixelhart
 # en: 7f51a7b112b9965b1cf5d78f9b43f76de5ad8f0d
@@ -1368,20 +1368,20 @@ draw-background-tile = Achtergrondtegel
 # en: e78fb3ca7b230e0df30391c85eec105bf55656bd
 draw-8-by-8-pattern-that = Een patroon van 8 bij 8 dat zich herhaalt: gebruik het als achtergrond van een tekening, of van elke pagina.
 # en: 99cb45a6f4e975a5a7be78811422b5933dd6598b
-draw-card-for-ninetieth-tilted-on = Een kaart voor een negentigste verjaardag, schuin op een achtergrond van confetti: grote woorden, bloemen, liefs van iedereen.
+draw-card-for-ninetieth-tilted-on = Een kaart voor een negentigste verjaardag, schuin op een achtergrond van confetti: grote letters, bloemen, liefs van iedereen.
 # en: 2020c98a00da0ecd8574350e226b7d4c448a451f
 draw-phone-screen-sketched-in-boxes = Een telefoonscherm geschetst in vakken voordat iemand het bouwt, met notities over waarom elk deel er is.
 # en: 106c289912d69f2f02f64b1c195daa945a29c19f
 draw-rosette-with-ribbons-for-volunteer = Een rozet met linten voor de vrijwilliger van het jaar, om af te drukken, uit te knippen en op te spelden.
 # en: c9c7469b74c0a43646cb4a46279d9930b271ca19
-draw-block-party-from-above-stage = Een straatfeest van bovenaf: het podium, de kraampjes, EHBO en waar je afspreekt als je kwijt bent.
+draw-block-party-from-above-stage = Een straatfeest van bovenaf: het podium, de kraampjes, EHBO en waar je elkaar treft als je elkaar kwijt bent.
 # same
 # en: 6d12c8adbefeaeacac0d48274df3a195ca9a1d17
 draw-badge = Badge
 # en: 32787c0201e95e7dd6ca00aa5dd63210e278e3db
 common-birthday-card = Verjaardagskaart
 # en: be3883124104a86065f65c46fcf4edff20e0842f
-draw-can-we-refund-it-stores = Kunnen we het terugbetalen? De retourregel van een winkel als vragen, antwoorden en wat te doen.
+draw-can-we-refund-it-stores = Kunnen we het terugbetalen? Het retourbeleid van een winkel als vragen, antwoorden en wat te doen.
 # en: 619a6e052e5343b8fbad2bfbc5a35d0aa4ec763f
 draw-event-map = Evenementenkaart
 # en: 6349ac251c1b86c4744c7e0361a5e72ea5e38402
@@ -1399,7 +1399,7 @@ draw-room-plan = Kamerindeling
 # en: fcba7b3fe14a456c5dd428b4e0b28552efa25751
 draw-living-room-rearranged-sofa-rug = De voorkamer anders ingericht: bank, kleed, boekenkast en bureau op schaal, de draairichting van de deur ingetekend.
 # en: 8640aa92343372c68f5d72660821c342598d8b38
-draw-three-ideas-for-coffee-roasters = Drie ideeën voor het merk van een koffiebranderij naast elkaar, de naam groot gezet, en een datum om te kiezen.
+draw-three-ideas-for-coffee-roasters = Drie ideeën voor het logo van een koffiebranderij naast elkaar, de naam groot gezet, en de datum waarop de keuze moet vallen.
 # en: 68224d905ee1bc5c63082121b1e80cf6fe7d08c1
 draw-weather-icons = Weericonen
 # en: 0d07d8bcde49fe88082ab75f75e2fd49bbcef253
@@ -1419,13 +1419,13 @@ draw-animate-this-drawing = Deze tekening animeren
 draw-drawing-of-things = Een tekening van { $things }.
 # en: 2759692cb0d64c0c370b6516074bb1de744a31a2
 draw-drawing-of-n-unlabeled-shapes = Een tekening van { $n ->
-        [one] één shape zonder label
-       *[other] { $n } shapes zonder label
+        [one] één vorm zonder label
+       *[other] { $n } vormen zonder label
     }.
 # en: f33cdbb01b5b65fe3fe8928669d13ca09b3b5403
 draw-leads-to-b = { $a } leidt naar { $b }
 # en: b9e37b62382792094f5463a54183d523118a25a0
-draw-joins-b = { $a } verbindt met { $b }
+draw-joins-b = { $a } is verbonden met { $b }
 # en: e0883468badf6a5f9c1cfe0ce209a16939a64683
 draw-empty-drawing = Een lege tekening
 # en: 1f9c4a5ed21a39ed45db86eb13cbff389eede2cf
@@ -1490,7 +1490,7 @@ draw-sky = Lucht
 # en: 54076359fdc7f1f0e000b9ae15b96f8b09866acb
 draw-pink = Roze
 # en: 168cbb2ea52b9e34d271accecfa7d7951e948a99
-draw-clear = geen
+draw-clear = transparant
 # en: b1985e387405e4d4afb40d5dac9b2656f5d6f770
 draw-shapes = Vormen
 # en: 4bab2d8fe13fa6ab57f80098b414f0f734c5dd25
@@ -1545,7 +1545,7 @@ draw-read-aloud-to-people-who = Wordt voorgelezen aan mensen die het niet kunnen
 # en: 988c63b77eade4f718f9d469cb36e35bff976839
 draw-describe-from-shapes = Genereren uit de vormen
 # en: ac302ae45938c985822f097507602d624128f1d0
-draw-tap-or-drag-to-paint = Tik of sleep om te verven; de pijltoetsen bewegen, Enter verft.
+draw-tap-or-drag-to-paint = Tik of sleep om te kleuren; de pijltoetsen verplaatsen, Enter kleurt.
 # en: ea263dc45b04f2755ac61a51deecc96ade3fb6a9
 draw-tap-each-corner-tap-first = Tik op elke hoek; tik opnieuw op de eerste, of druk op Enter, om af te sluiten.
 # en: ccdc55c46a79ea604962ddda9cc010311bdca4fe
@@ -1580,7 +1580,7 @@ draw-row-y-column-x-ink = Rij { $y }, kolom { $x }: { $ink }
 draw-as-repeating-background = Als herhalende achtergrond
 # The contextual bar under a shape, and its words typed on it.
 # en: 27bb3dadbebca64cec249a9811a07cd3ea25a520
-draw-dashed-line = Gestreepte lijn
+draw-dashed-line = Streepjeslijn
 # en: 8953b1fb5c8eeda2158dfd09bde1a766d4b9079d
 draw-dotted-line = Stippellijn
 # en: 6597b9e38708468a6ada223bbd324b34dd9b8d23
@@ -1623,7 +1623,7 @@ draw-drag-to-move-corner-handle = Sleep om te verplaatsen. De hoekgreep verander
 # en: 9cacab39109399036915a6b67336853e622472cd
 draw-drawing-canvas-v-selects-r = Tekenvlak. V selecteert; R, E, D, L, A, T tekenen; pijlen verschuiven; [ en ] draaien; Enter bewerkt de tekst; Delete verwijdert.
 # en: 4421c5912fa5d727f23883b0a69028e195e3717b
-draw-tap-shape-to-select-it = Tik op een vorm om hem te selecteren, of sleep rond meerdere. Kies een gereedschap om te tekenen.
+draw-tap-shape-to-select-it = Tik op een vorm om hem te selecteren, of sleep om meerdere heen. Kies een gereedschap om te tekenen.
 # en: 6f72f3cd1255e9bb344a1f9adb5fc64770f07cd5
 draw-rotate-left = Naar links draaien
 # en: b75f23d1d0e44603289911e22ad5efd66157913a
@@ -1646,7 +1646,7 @@ anim-animation = animatie
 # en: ec026663a7e4c23dd850c7f5a96deef71bf8bb81
 anim-lift-off = Lancering
 # en: 5d15aaf0784e98385ffc925f574edbf1a0657292
-anim-rocket-climbs-away-with-its = Een raket stijgt op met zijn schaduw terwijl de woorden omhoog gaan: twee vormen, elk twee sleutels.
+anim-rocket-climbs-away-with-its = Een raket stijgt op met zijn schaduw terwijl de woorden omhoog gaan: twee vormen, elk twee sleutelbeelden.
 # en: 1cc22feeb4a82e33a9fd435fbf7c4a927a0408e1
 anim-bouncing-ball = Stuiterende bal
 # en: 567b2c86aa06b4d0133474a39dc6545196754a25
@@ -1654,13 +1654,13 @@ anim-ball-falls-faster-and-faster = Een bal valt steeds sneller naar de grond te
 # en: 7296aa4a483797a1a82ec05a4598688ca056cd36
 anim-loading-spinner = Laadcirkel
 # en: ccf7f6eb9188fe228da413a1aaf39c5ee4994346
-anim-eight-dots-in-ring-each = Acht stippen in een ring, elk om de beurt zwellend, zodat een heldere vlek rondgaat terwijl een pagina opslaat.
+anim-eight-dots-in-ring-each = Acht stippen in een ring, elk om de beurt zwellend, zodat een heldere vlek rondgaat terwijl een pagina wordt opgeslagen.
 # en: 691f884e182237907640c6964bda657a5ffec1c0
 anim-title-card = Titelkaart
 # en: 56d07df6f27b468d9e3456707110962e1da029c6
 anim-red-curtains-part-on-opening = Rode gordijnen gaan open op de openingsavond en de naam van het festival komt naar voren: eenmaal afgespeeld blijft het op de titel staan.
 # en: 1383ce3b8f642f2c5946975ca61e868e4a504819
-anim-present-hops-stars-and-hearts = Een cadeau huppelt, sterren en hartjes zwaaien eromheen, en de groet schittert in regenboogletters.
+anim-present-hops-stars-and-hearts = Een cadeau huppelt, sterren en hartjes wiegen eromheen, en de groet schittert in regenboogletters.
 # en: fad7f01d931894b10da998319cdc82f1a7d7e4dc
 anim-quick-standup = Snelle stand-up
 # en: 79d688c0e9e1f3c402c3d6bedae252cfdd0b27aa
@@ -1668,9 +1668,9 @@ anim-meme-with-caption-above-and = Een meme met een bijschrift erboven en eronde
 # en: 7e9b34abf6e91127f94374508015ad795c91268b
 anim-build-is-green = Build is groen
 # en: 2015347d0927e36755702bf7ae8677fa8d565545
-anim-meme-in-two-lines-of = Een meme in twee regels impact-letters, en een trofee die binnendraait, landt en gloeit.
+anim-meme-in-two-lines-of = Een meme in twee regels Impact-letters, en een trofee die binnendraait, landt en gloeit.
 # en: 98eb193445404588fd801a26b8383def925748ab
-anim-flash-card = Flitskaart
+anim-flash-card = Flashcard
 # en: 864aea3fc448ba5b87612d5e8c4c6dafde49b09a
 anim-card-shows-spanish-word-turns = Een kaart toont een Spaans woord, draait om voor het Engels, en draait terug: een draai om zijn verticale as.
 # en: 23015d1cbacca964e41f5cbb0021ed050964a9ed
@@ -1688,7 +1688,7 @@ anim-plane-crosses-dotted-route-from = Een vliegtuig volgt een stippellijn van N
 # en: 7de4868fea7340b1b7e0779ba2e81218c703ab57
 anim-neon-sign = Neonbord
 # en: c0cba8072586f9c04d65da0f16b714c865f261e1
-anim-cafes-sign-at-night-name = Het bord van een café ’s nachts: de naam flikkert, de openingstijden steken eronder af, en de kop gloeit en zwelt.
+anim-cafes-sign-at-night-name = Het bord van een café ’s nachts: de naam flikkert, de openingstijden springen eronder in het oog, en het kopje gloeit en zwelt.
 # en: fadf71c7ea92e6416fd6d89969f8e78a115cd3c1
 anim-sunrise = Zonsopgang
 # en: 672c99d7a4f36fb3de226944eb862e3c9faa5663
@@ -1741,7 +1741,7 @@ anim-pixel-art-is-made-in = Pixelart maak je in de Tekentool; de Animator beweeg
 # en: b4a9395d25398654fd5d000e4b82a1d8273339bd
 anim-rainbow = Regenboog
 # en: 3d5096b70833fdae355f1ffcf32faf2066123467
-anim-remove-this-key = Sleutelbeeld weghalen
+anim-remove-this-key = Sleutelbeeld verwijderen
 # en: aa0e7e86b7aa21e9851b9db8b752998918d2b608
 anim-shadow = Schaduw
 # en: b7152342a267362add3c0d7f69f720f7a9c76c9e
@@ -1775,9 +1775,9 @@ anim-draw-shapes-move-sets-them = Teken vormen en gebruik dan Verplaatsen om ze 
 # en: b4d477d39704ecbf21ca422aeebffbad5a519fbb
 anim-nothing-here-yet-draw-something = Hier staat nog niets: teken eerst iets.
 # en: 00f1eed948284854e29d59b2de928756b7f69388
-anim-tap-shape-then-drag-it = Tik op een vorm en sleep hem naar waar hij hoort.
+anim-tap-shape-then-drag-it = Tik op een vorm en sleep hem naar zijn plek.
 # en: e4cabeb67c10b273fc4a1cfba538ac893c850f68
-anim-drag-it-to-where-it = Sleep hem naar waar hij op { $s } s hoort.
+anim-drag-it-to-where-it = Sleep hem naar zijn plek op { $s } s.
 
 # en: b0d1915925616cc03de525611bfe58839cf5fdff
 anim-anything-from-drawing-tool-moving = Alles uit de Tekentool, in beweging: positie, diepte, formaat, draaiing en omdraaiing in de tijd, met effecten voor memes.
@@ -1930,9 +1930,9 @@ common-show-as-slides = Tonen als dia’s
 # en: 59df6d7de818cdbeb08aa7f083aff96c1bccd1f5
 outline-show-as-outline = Tonen als overzicht
 # en: b306a7c32ba84dd4adea8612dccc99c15065eb53
-outline-take-away-connection-from-from = De verbinding van { $from } naar { $to } weghalen
+outline-take-away-connection-from-from = De verbinding van { $from } naar { $to } verwijderen
 # en: e963907dac5cd5c017869b4c96c18021c9bd058b
-outline-take-it-away = Weghalen
+outline-take-it-away = Verwijderen
 # The compound bullet (Paul, 2026-10-15): the statuses a document sets in its head, a status's pill, a due day's chip.
 # en: e92aab82fce62899699581b5597abdda8175f2dd
 outline-statuses = Statussen
@@ -1955,7 +1955,7 @@ outline-remove-due-date = Vervaldatum verwijderen
 # en: 891e9d6d47f1bacfcba2dca1b282afcbcd25d94d
 outline-agenda = Agenda
 # en: aa73cdd3260a16a41d572c06ee0da42cb4b85286
-outline-by-status = Op status
+outline-by-status = Per status
 # en: 0e719dcbe720c315d66c977072f10251b56bd994
 outline-nothing-to-do-yet = Nog niets te doen. Items met een taak, een status of een vervaldatum verschijnen hier.
 # en: 064c87e25e9cca38db987bafd98c9fc9b3003456
@@ -1973,11 +1973,11 @@ outline-gray = Grijs
 # en: 23376bab580fd3f3d521c66a65a03e7753da54cc
 outline-last-status-means-done = De laatste status betekent klaar. Taken met die status worden afgevinkt.
 # en: 7312a31a2c880f2d456663b6f91ad6da980b3a5e
-outline-take-connection-away = Verbinding weghalen
+outline-take-connection-away = Verbinding verwijderen
 # en: 656e5c87ae5cd391807e13c85fb32635c2d441c2
-outline-tap-item-to-connect-from = Tik op het item om vanaf te verbinden.
+outline-tap-item-to-connect-from = Tik op het item waar de verbinding begint.
 # en: 7a717eefe223e502e86655b5bf8eb999b867a9dc
-outline-tap-item-to-connect-words = Tik op het item om “{ $words }” mee te verbinden.
+outline-tap-item-to-connect-words = Tik op het item waarmee je “{ $words }” wilt verbinden.
 # en: 6ca2aebe7601f4f49f7f7df1ac23a0ac4a39abbc
 outline-question-options-under-it-and = De vraag, de opties eronder, en bij elke wat ervoor pleit en wat ertegen.
 # en: da74cb6baba7a464fd8881af861a8c8d7952aff9
@@ -2000,9 +2000,9 @@ outline-zoomed-in-on = Gefocust op
 # en: 38eca6735f66d186c0bd9c549873e774551dc35f
 outline-a-plain-line = een gewone lijn
 # en: 884abd948f43aba4e5851b71a20e97aed7a6c96e
-outline-arrow-from-parent = een pijl van de bovenliggende
+outline-arrow-from-parent = een pijl vanaf het bovenliggende item
 # en: b1efb9ef91ffdf7d42595fb81fb8b74184a5efbc
-outline-arrow-to-parent = een pijl naar de bovenliggende
+outline-arrow-to-parent = een pijl naar het bovenliggende item
 # en: 54406ea0a263efcf4d3204fff2200f7f4d982c90
 outline-arrows-both-ways-lowercase = pijlen naar beide kanten
 # en: 0048342aeabb8b2918689354650579bb2108a957
@@ -2039,7 +2039,7 @@ outline-essay-plan = Een essayplan
 # en: d926d538e1be8112e81292507985514feac5e4c4
 outline-draw-as-family-tree = Tekenen als stamboom
 # en: bfef6f97dfb8178f726a96b8861bc2536e8c6fb4
-outline-five-days-in-lisbon-packed = Vijf dagen in Lissabon, ingepakt per categorie, met wat te doen voordat de deur dichtgaat.
+outline-five-days-in-lisbon-packed = Vijf dagen in Lissabon, de bagage per categorie, met wat je moet doen voordat je de deur dichttrekt.
 # en: 987acdf86bb6a373c995aa374c004bb21bf2e576
 outline-indoors-or-out-for-saturday = Binnen of buiten voor een zaterdagmarkt: de antwoorden op elke vraag op zijn regels, ja en nee.
 # en: 61390a6b5d7d9268827d91b4a818c6a5fbe2011c
@@ -2049,7 +2049,7 @@ outline-packing-list = Paklijst
 # en: 013532bb7e7d08afa22a3149f8e74b5ee4d9eaf5
 outline-parts-and-chapters-of-book = Delen en hoofdstukken van een boek vol ideeën, met onder elk hoofdstuk een regel over wat het betoogt.
 # en: 5f646cfc8f40ae2515c9d774ae5ad523f524b998
-outline-people-and-three-acts-of = De personen en drie bedrijven van hoofdstukken, elk met wat er gebeurt, verbonden waar een persoon van hoofdstuk wisselt.
+outline-people-and-three-acts-of = De personages en drie akten met hoofdstukken, elk met wat er gebeurt, verbonden waar een personage een hoofdstuk verandert.
 # en: dbb00953c7a1565bffce71190cfb90220362c471
 outline-question-method-budget-that-adds = De vraag, de methode, een begroting die zichzelf optelt, een tijdlijn, de risico’s en de literatuur.
 # en: 57b065618d9af543d6fcc5085edd94aa723f8403
@@ -2074,7 +2074,7 @@ deck-choirs-winter-concert-welcome-both = Het winterconcert van een koor: het we
 # en: a816093d69f08b81c457d818e6d1bd72e0915b10
 deck-lesson = Een les
 # en: e2d04797e440ee0933d032a29cfbfad5edbc99c7
-deck-lost-pet-poster-in-red = Een poster voor een vermist huisdier in rood: de naam, hoe ze eruitziet, waar ze gezien is, een nummer om te bellen.
+deck-lost-pet-poster-in-red = Een rode poster voor een vermist huisdier: de naam, hoe ze eruitziet, waar ze gezien is, een nummer om te bellen.
 # en: 4d44cafa1d032ca3ceda90fa9830717ea5cf8491
 deck-morning-workshop-schedule-checklist-of = Een ochtendworkshop: het rooster, een checklist van wat je meeneemt, de stappen, en waar je daarna heen gaat.
 # en: 7dc13283809d7ed9c506873aee1486fd988cfe5c
@@ -2086,19 +2086,19 @@ deck-product-in-sentence-what-it = Een product in één zin, wat het doet, prijz
 # en: a46e6eb74ae783d7eb35ae76afc5ab984683886f
 deck-trivia-night-in-four-rounds = Een quizavond in vier rondes, een scoretabel en de antwoorden op de laatste dia.
 # en: efebc637859160a6f694e66576eebb294de14712
-deck-residents-meeting-about-new-playground = Een bewonersavond over een nieuwe speeltuin: waarom, wat er voorgesteld wordt, de begroting als taart, wanneer, hoe je kunt meepraten.
+deck-residents-meeting-about-new-playground = Een bewonersavond over een nieuwe speeltuin: waarom, wat er voorgesteld wordt, de begroting als cirkeldiagram, wanneer, hoe je kunt meepraten.
 # en: 02e7a62fc65ed26cb0751706a5ea8f5783414eda
 deck-science-lesson-on-chalkboard-aims = Een natuurkundeles op het schoolbord: doelen, wat ze weten, het model, een controle, huiswerk; de notities van de leraar onder elk.
 # en: f3a66c7b2a6ebda85ea74938fce4c397eae2a131
-deck-seed-pitch-in-eight-slides = Een seed-pitch in acht dia’s: het probleem, het product, tractie op een grafiek, het bedrijf, het team, de vraag.
+deck-seed-pitch-in-eight-slides = Een seed-pitch in acht dia’s: het probleem, het product, tractie op een grafiek, het bedrijf, het team, wat je vraagt.
 # en: aab8da6eadee157bba3937e9dc00741cfe48b13f
-deck-bike-shops-quarter-for-its = Het kwartaal van een winkel voor zijn partners: omzet op een grafiek, winst en missers, de cijfers die tellen, het volgende kwartaal.
+deck-bike-shops-quarter-for-its = Het kwartaal van een fietsenwinkel voor zijn partners: omzet op een grafiek, successen en missers, de cijfers die tellen, het volgende kwartaal.
 # en: d0fa5e5696edaf949dfe9e739a7a2eef0d433ae2
-deck-small-story-in-panels-about = Een klein verhaal in vakjes over iets uitlenen aan een buur.
+deck-small-story-in-panels-about = Een klein verhaal in stripvakjes over iets uitlenen aan een buur.
 # en: 6c1ff81a2445a9eab1616588060b483cd5b6cde8
 deck-twenty-minute-talk-with-speaker = Een lezing van twintig minuten met sprekersnotities op elke dia, een grafiek van de resultaten, een voetnoot en de lessen.
 # en: 1a2fac58a0b80e771b6d2e526e7d3fee2cf6ef85
-deck-badges-for-conference-each-with = Badges voor een conferentie, elk met een rol en waar ze vandaan komen, in de look Oceaan.
+deck-badges-for-conference-each-with = Badges voor een conferentie, elk met een rol en waar ze vandaan komen, in de stijl Oceaan.
 # en: 7aa6a43fffd387b34fc7d06c7845de3f5bef745a
 deck-comic-umbrella = Strip: de paraplu
 # en: 1796880ad702715de60aad7227c9bdca655f0fff
@@ -2263,7 +2263,7 @@ deck-two-column-page = Tweekolomspagina
 # en: cfdc49e689f75ddfc0372d83f7c9a396b6616dd8
 deck-big-icon-page = Groot-icoonpagina
 # en: 17a4bbb4cefcb0a1fccf38f1c561b2a18fe44456
-deck-four-more-pages = Vier pagina’s meer
+deck-four-more-pages = Nog vier pagina’s
 # en: a59879f8796236335931a0b95f1cb1a1db39e210
 deck-on-slide = Op de dia
 # en: 9bab04556dc2a912d86a00f7b4dcd7c540468b8b
@@ -2275,9 +2275,9 @@ common-pages = Pagina’s
 # en: 028137d1d6f1cf21777ce8a83b467b80e04a6168
 deck-add-icon = Icoon toevoegen
 # en: f68895d5ec9c6f1865e9ee69f1d423cbfd251599
-common-change-icon = Het icoon wijzigen
+common-change-icon = Icoon wijzigen
 # en: fd8de0a92eedac5ccdf6c587b3ae177b97da0ae0
-deck-pick-icon = Kies een icoon
+deck-pick-icon = Icoon kiezen
 # en: 3805391efb1ea53cff43e62a0dc134be9b14bd8d
 deck-left-column = Linkerkolom
 # en: e8965b7c19d1ad62de75e624088e40b37d16f206
@@ -2289,7 +2289,7 @@ deck-one-bullet-line-tab-steps = Eén opsommingspunt per regel. Tab springt in.
 # en: f8948a4a523b4312c5567f9cff1f6788c757998f
 deck-line-or-two-under-title = Een regel of twee onder de titel
 # en: 236bcf1c6a83d3b0f85a065c777d7948b22a0c22
-deck-what-this-page-says-type = Tekst van de pagina. Die krimpt om op de pagina te passen.
+deck-what-this-page-says-type = Tekst van de pagina. Die wordt kleiner tot hij op de pagina past.
 # en: e80e281dac24d9c4c3f60dcdbf8700e9603b825e
 deck-panel-line-what-is-said = Een vakje per regel: wat er gezegd wordt | het bijschrift. Icoon geeft het een plaatje.
 # en: 3d6e76c9325034deb76b92c8cc47a2d3c22fcdf3
@@ -2383,9 +2383,9 @@ deck-powerpoint-pptx = PowerPoint (PPTX)
 # en: 7660a22bdc9507edd353dd61198b9aa86488d936
 deck-picture-of-every-slide-zip = Een afbeelding van elke dia (ZIP met PNG’s)
 # en: 98a41f54e049532b6032b88d7656348adc178c2a
-deck-animation-of-deck-gif = Film van de presentatie (GIF)
+deck-animation-of-deck-gif = Animatie van de presentatie (GIF)
 # en: 3bab526d831e1024e6f8e7d197f9c3d72cc4f0e4
-deck-film-of-deck-webm = Film van de presentatie (WebM)
+deck-film-of-deck-webm = Video van de presentatie (WebM)
 
 # The templates
 # en: e5604bc465a212ad3d7f4e13ed282f030d9d3a6b
@@ -2393,7 +2393,7 @@ deck-title-agenda-three-points-with = Titel, agenda, drie punten met notities vo
 # en: 60c974074604818e661eff7940285669d1496647
 deck-status-update = Statusupdate
 # en: 34714be3698c31c72afb1d4d4b8a7b0c69f30fc5
-deck-done-and-next-side-by = Klaar en volgende naast elkaar, dan risico’s, dan vragen.
+deck-done-and-next-side-by = Gedaan en wat volgt naast elkaar, dan risico’s, dan verzoeken.
 # en: e946db45d2689df95cbac9f8137664409c51f5d8
 deck-proposal = Een voorstel
 # en: 52ab7599cc26432ef9b492b401d04eee1ca5e699
@@ -2401,9 +2401,9 @@ deck-what-you-heard-what-you = Wat je hoorde, wat je voorstelt, wanneer, wat het
 # en: b8e1f28fed63f996c8915470a7ee9ce8aef9b75f
 deck-eight-small-pages-from-one = Acht kleine pagina’s van één vel papier: afdrukken, vouwen en knippen, of lezen door te tikken op een telefoon.
 # en: 31b11edde49cd1bd80a198f240426c5b2d8cd65f
-deck-booklet-of-half-letter-pages = Een boekje met pagina’s van een half letter, acht tot twintig, opgemaakt om af te drukken, te nesten en te vouwen.
+deck-booklet-of-half-letter-pages = Een boekje met pagina’s van een half Letter-vel, acht tot twintig, opgemaakt om af te drukken, in elkaar te leggen en te vouwen.
 # en: ae07389f7b537dbd7eb3007d3f2b36ca3c35c404
-deck-trifold-brochure-six-panels-on = Een driebladige brochure: zes panelen op twee zijden van een vel, elk waar de vouw het nodig heeft.
+deck-trifold-brochure-six-panels-on = Een driedelige folder: zes vlakken op twee zijden van een vel, elk waar de vouw het nodig heeft.
 # en: 88c71dbca35b2e7c498adce21174cb1102af384e
 deck-mini-comic-panels-with-picture = Een minicomic: vakjes met een plaatje, een tekstballon en een bijschrift, gevouwen uit één vel.
 # en: e610bb7f6eac1dd5622723ccc779e31e9d9ed190
@@ -2528,7 +2528,7 @@ cal-previous-year = Vorig jaar
 # en: 580110a84277d369b216be5a01a5ba50868d4d3f
 cal-project-plan = Projectplan
 # en: 6ae5ee3e66205a8b1a41c80c4db0dcc982e50f44
-cal-repeats = Herhaalt
+cal-repeats = Herhaling
 # en: 0a8adac9d6d5f4d14ee887d196cd8618f0f3391a
 cal-schedule = Planning
 # en: e7fe53f0503eb82f8c80f9b233fa566339a9f9e8
@@ -2544,9 +2544,9 @@ cal-starts = Begint
 # en: 0e648419ea806b0cc4db81617f95870a094f3639
 common-stops = Stopt
 # en: 480b9be2834a2278919632171f788a9a80d5d743
-cal-same-dates-as-gantt-chart = Dezelfde data als Gantt-diagram
+cal-same-dates-as-gantt-chart = Dezelfde data als een Gantt-diagram
 # en: 7ea6dec71584012ab4044cc464dc601741ff2c50
-cal-this-calendar-is-written-in = Deze kalender is geschreven in tijd van { $zone }.
+cal-this-calendar-is-written-in = Deze kalender gebruikt de tijd van { $zone }.
 # en: e10c10f818ac8e510b74062cde201eae4e8d8c66
 cal-this-calendar-names-no-time = Deze kalender heeft geen tijdzone, dus de tijden staan in de jouwe ({ $zone }).
 # en: 1b4785331db3b08cd8e3cfa4bd36216731a79e54
@@ -2596,7 +2596,7 @@ cal-content-schedule = Contentplanning
 # en: 072b8e4f3e23cdd58cf0a4b3f5c47437127f131b
 cal-editorial-calendar = Redactiekalender
 # en: 26f861d8db0e97575e814ce9799eaf1bcddec28b
-cal-every-autopay-on-its-day = Elke incasso op zijn dag elke maand, de jaarlijkse verlengingen en de belastingdeadline.
+cal-every-autopay-on-its-day = Elke automatische incasso op zijn dag van de maand, de jaarlijkse verlengingen en de belastingdeadlines.
 # en: 2185215436152ae5c1d9429385551e46587c7af8
 cal-garden-calendar = Tuinkalender
 # en: 624b49bb82a8487f3ff77d2098b88b1e1ceb6695
@@ -2662,7 +2662,7 @@ diagram-thing = Item
 # en: c2e45b49b02d2ac7e1baf25d9d0a2f5c257281ad
 diagram-tap-empty-space-for-thing = Tik op een lege plek om een item toe te voegen. Om er twee te verbinden, druk op Verbinden en tik op beide, of sleep er een op de ander.
 # en: d4b16450c157188d2cf2e3968faee3709ebeca28
-diagram-tap-here-to-add-first = Tik hier om de eerste { $thing } toe te voegen.
+diagram-tap-here-to-add-first = Tik hier om je eerste { $thing } toe te voegen.
 # en: ccdb7bfa4c6b71a69f1931253fe6f892a2baf89b
 diagram-tap-in-lane-to-add = Tik in een baan om een stap toe te voegen. Tik op een stap om die te bewerken. Sleep hem naar een andere baan, of op een stap om erna te komen.
 # en: 639d02ad26e5be80f5baf69835b953dfc015178b
@@ -2678,7 +2678,7 @@ diagram-add-one-more = Nog een toevoegen
 # en: be34070c33b5c14155fe70a18891828387dd399d
 diagram-add-after-it = Erna toevoegen
 # en: 90d24ab49426f19e75a2b6c3fd9196603c2e0852
-diagram-add-step = Stap erbij
+diagram-add-step = Stap toevoegen
 # en: e0d73143de80d17e82de2e017ac156ca3b9c4e01
 diagram-join = Verbinden
 # en: e45795fb6033ae4ecc1e2e3610273fce71a317d7
@@ -2695,9 +2695,9 @@ diagram-connection = een verbinding
 diagram-empty = leeg
 # The templates
 # en: 8b0bc4ee7e0e6e592c5e8812fef8883b9cbc66de
-diagram-empty-kind-to-start-from = Een lege { $kind } om mee te beginnen.
+diagram-empty-kind-to-start-from = Een leeg vel voor je { $kind }.
 # en: cc9cfe196eaec8bbe041a0f648039cf31df71bc7
-diagram-browser-api-database-cache-and = Een browser, een API, een database, een cache en een worker, en hoe ze praten.
+diagram-browser-api-database-cache-and = Een browser, een API, een database, een cache en een worker, en hoe ze met elkaar praten.
 # en: 87796704431b42da8083f869f5ed707dae8cf8fe
 diagram-building-project = Een bouwproject
 # en: 5accd00ffa799aafee66a6e2e7a77c3e89abdd38
@@ -2709,17 +2709,17 @@ diagram-small-company = Een klein bedrijf
 # en: 6dea73ecffb81e3db543a664a3ba6e602d58683b
 diagram-wedding-dinner = Een bruiloftsdiner
 # en: 1086ae322f0484af87b4a35b9537b35ad53ec68b
-diagram-year-of-dates-from-plans = Een jaar aan data, van goedgekeurde plannen tot opening.
+diagram-year-of-dates-from-plans = Een jaar aan data, van goedgekeurde plannen tot de opening.
 # en: c75834baf2bd8482dbb5a822f4466908244e65fa
 diagram-cats-and-dogs = Katten en honden
 # en: 9e4600a93df1d0ffd290278244beed2111ac5cff
-diagram-computing-briefly = Computers, kort
+diagram-computing-briefly = Computergeschiedenis in het kort
 # en: 4944a571da52f0920a54f002e637dfc6e179603f
 diagram-fast-cheap-good = Snel, goedkoop, goed
 # en: 77373004b00a68bf2cad476daa1ef0af2a7e26f0
-diagram-four-tables-and-who-sits = Vier tafels en wie er rond elk zit.
+diagram-four-tables-and-who-sits = Vier tafels en wie er aan elke tafel zit.
 # en: 1db47899ccb6eda1f1c46cee3c73acb1394c00ca
-diagram-from-lovelace-to-now-spaced = Van Lovelace tot nu, verdeeld zoals de jaren vielen, met een tijdperk onderaan.
+diagram-from-lovelace-to-now-spaced = Van Lovelace tot nu, op schaal van de jaren, met de tijdperken onderaan.
 # en: c973a2e43350a1c09697af1bd39a17f3cfba2c36
 diagram-from-order-to-doorstep = Van bestelling tot voordeur
 # en: 91519d37fd9fe6f0c40b0429e0ed9f8eb8206006
@@ -2741,9 +2741,9 @@ diagram-three-sets-and-every-overlap = Drie verzamelingen en elke overlap, met w
 # en: 762ecdafab9b2868da1121459828ec245b03ac5e
 diagram-two-sets-and-what-they = Twee verzamelingen en wat ze delen.
 # en: f02e532d172e25cb200306e2edda8e4331418dcd
-diagram-what-to-grow-and-jobs = Wat te telen en de klussen om te doen, als mindmap.
+diagram-what-to-grow-and-jobs = Wat je kweekt en wat er te doen is, als mindmap.
 # en: a6847567865dbe1e5266bbcd7f1f4e0049ee9eb1
-diagram-biology-final-in-december-topic = Een eindexamen biologie in december, onderwerp voor onderwerp, en hoe het leren gedaan wordt.
+diagram-biology-final-in-december-topic = Een eindexamen biologie in december, onderwerp voor onderwerp, en hoe je het leert.
 # en: e32c422ee266430ea9dd0cd2cc78750a1342302a
 diagram-classroom = Een klaslokaal
 # en: e491ee6c30111d9c51d83d4a19aba47a3c39c769
@@ -2772,9 +2772,9 @@ diagram-class-4b-at-four-tables = Groep 4B aan vier tafels naar kleur, en de lee
 # en: d8d0862686b742040e32f8f3235084ad61fcef28
 diagram-eight-days-in-july-1969 = Acht dagen in juli 1969, dag voor dag, van lancering tot landing in zee.
 # en: ce31ba59543ea424a6019bc67976ace141d62d09
-diagram-four-games-table-each-and = Vier spellen, een tafel elk, en wie wat speelt.
+diagram-four-games-table-each-and = Vier spellen, elk aan een eigen tafel, en wie wat speelt.
 # en: 9d35a9836a6bb4c6180f6c2880c8c19c22ed4ea0
-diagram-from-photo-of-receipt-to = Van een foto van de bon tot de loonstrook, langs een manager en financiën.
+diagram-from-photo-of-receipt-to = Van een foto van de bon tot de loonstrook, via een manager en de financiële afdeling.
 # en: 1f1489585228c4bf2d9599bdff9fef70f59b4a60
 diagram-moving-abroad = Naar het buitenland verhuizen
 # en: a04755781fd967ec44d2f47f1ebf6ff83b2fe909
@@ -2828,7 +2828,7 @@ diagram-tap-inside-circles-to-add = Tik in een cirkel om een item toe te voegen.
 trip-trip = reis
 # A stop is a place on the route; { $n } is its number, { $time } a drive such as "1 hr 38 min". 'Trip Planner' and 'Plan' are above.
 # en: 46644fef83a4f92870b2bda5079d97dae8b05b1f
-trip-route-on-map-stops-in = Een route op een kaart: stops op volgorde, elk met een notitie, en hoe ver ertussen.
+trip-route-on-map-stops-in = Een route op een kaart: stops op volgorde, elk met een notitie, en de afstand ertussen.
 # en: 199cd6e4be673dbec0dfaaa645071e949f5480cc
 trip-gpx-route = GPX-route
 # same
@@ -2836,13 +2836,13 @@ trip-gpx-route = GPX-route
 trip-geojson = GeoJSON
 # The bar and the map
 # en: 63746c80a9900aa0b9df832d6fe50b7318a88aab
-trip-a-place-by-name = Een plaats op naam…
+trip-a-place-by-name = Plaats op naam…
 # en: c86d6e7640906afe6a57236c004f0b1af53b6ee8
-trip-stop-at-middle-of-map = Stop midden op de kaart
+trip-stop-at-middle-of-map = Stop toevoegen in het midden
 # en: a52fccf0e1e5beca9d5885f1638d5e9a6a2684f9
 trip-measure-in = Meten in
 # en: 2458f1444290ced8aefad04d5c947b17bf9a81fb
-trip-hours-of-driving = Uren rijden
+trip-hours-of-driving = Rijtijd
 # en: 5fa6c4032be31076212eb57f2fe6ba44d445d501
 trip-miles = Mijlen
 # same
@@ -2916,7 +2916,7 @@ trip-san-francisco-to-los-angeles = Van San Francisco naar Los Angeles over High
 # en: 8396776ccda695ac7d6e5f12a1eaa4dd3edecfac
 trip-scottish-highlands = De Schotse Hooglanden
 # en: 7a3f06a64060636652afe5912e0a00016bc3d17f
-trip-loop-from-edinburgh-each-leg = Een rondrit vanuit Edinburgh, elk traject in uren rijden.
+trip-loop-from-edinburgh-each-leg = Een rondrit vanuit Edinburgh, elk traject in rijtijd.
 # en: 9660e47a7aad398fbc88947cd22e8628b2a92115
 trip-rome-places-to-see = Rome, de bezienswaardigheden
 # en: f01c658cc1c5b1dbfba8045b885174d2f5a3d154
@@ -2924,11 +2924,11 @@ trip-places-as-dots-not-route = Plaatsen als stippen, geen route: wat te zien en
 # en: e50e4931f42687faef4a226f93981bb38a937ce9
 trip-weekend-in-copenhagen = Een weekend in Kopenhagen
 # en: 402e0be1180f76470536e904cec4f7242211bb15
-trip-friday-night-to-sundays-train = Vrijdagavond tot de trein van zondag, te voet, in kilometers.
+trip-friday-night-to-sundays-train = Van vrijdagavond tot de trein op zondag, te voet, in kilometers.
 # en: a5594e90d42f49b6ce9e2842193b64f380d1a10c
 trip-icelands-ring-road = De Ringweg van IJsland
 # en: b237aa87bc63dccebef93e19a8ef785d96ba69ce
-trip-ten-days-around-island-by = Tien dagen rond het eiland met de auto, elk traject in uren rijden.
+trip-ten-days-around-island-by = Tien dagen rond het eiland met de auto, elk traject in rijtijd.
 # en: 89059cee91b704cf1c0e42de4225df2968a207e7
 trip-dublin-food-crawl = Een eettocht door Dublin
 # en: b934fa6dfc063b38e47ce12ed4622e1cc0d55b75
@@ -2942,13 +2942,13 @@ trip-loire-by-bike = De Loire per fiets
 # en: e0fc4a0bf8e42cf48f5f6825bc3b8420df625254
 trip-orleans-to-saumur-in-six = Van Orléans naar Saumur in zes dagen, van kasteel naar kasteel, in kilometers.
 # en: e68d998a80765bfa302dd2b477f31c97db0d51d2
-trip-college-tour = Een rondreis langs colleges
+trip-college-tour = Een rondreis langs universiteiten
 # en: 02b9d4cf509b27e9011826d208a7831782bb08a6
 trip-six-campuses-in-new-england = Zes campussen in New England in een week, bij elk een rondleiding geboekt.
 # en: 651b0f889a962febf3a80370511cbc08abac73da
 trip-japan-by-rail = Japan per trein
 # en: f687060ca9b759a7ed4bca61f7a2bf96764f2f8e
-trip-tokyo-to-miyajima-in-cherry = Van Tokio naar Miyajima in de kersenbloesem, met de sneltrein.
+trip-tokyo-to-miyajima-in-cherry = Van Tokio naar Miyajima tijdens de kersenbloesem, met de hogesnelheidstrein.
 # en: afea6c128d27238aad4e11871dfff6f692334301
 trip-last-100-km-of-camino = De laatste 100 km van de Camino
 # en: 33d01f381424bbc8bbd1b6a9487b3a53c38d07e9
@@ -2968,7 +2968,7 @@ trip-presenting-next-stop = Volgende stop (presenteren)
 # en: a802f6e93c981ee6dd02df366f0141ca3aa085e0
 trip-presenting-stop-before = Vorige stop (presenteren)
 # en: 3b14d20764a1fdef5ee74f4defab4ff20b0e7cce
-trip-put-stops-on-calendar-day = De stops op een kalender zetten, een dag elk
+trip-put-stops-on-calendar-day = De stops op een kalender zetten, één dag per stop
 # en: 16fa5ad4958332a6bbb1eae6d1a8c6ee6f2c7752
 trip-first-last = Eerste of laatste
 # en: 0aa341109cff3c75e204930fdeac94f52278bb67
@@ -2994,7 +2994,7 @@ looks-currency = Valuta
 calc-calculation = berekening
 # The tape is the list of lines worked out, as on a printing calculator. 'Calculator' and 'Numbers' are above.
 # en: ab4ea6f8fe06812a128297560bee7aff1be0c040
-calc-calculator-that-shows-its-work = Een rekenmachine die zijn werk bewaart: namen, eenheden en omrekeningen, en grafieken van y = f(x).
+calc-calculator-that-shows-its-work = Een rekenmachine die laat zien hoe hij rekent: namen, eenheden en omrekeningen, en grafieken van y = f(x).
 # en: f146f8e93fc9312f6b8003b048cd24d1574469af
 calc-tape-text = Strook als tekst
 # The bar
@@ -3014,11 +3014,11 @@ calc-cosine = Cosinus
 # en: 7ef1446b5f4ac08a82f28ef66bf019af3ed9c3c5
 calc-tangent = Tangens
 # en: f90781f1beba7ea766ef6fddf4672221c99da01f
-calc-natural-log = Natuurlijke log
+calc-natural-log = Natuurlijke logaritme
 # en: c4607860d3bb073b2fe96de25c2566b33f6e5610
-calc-log-base-ten = Tiendelige log
+calc-log-base-ten = Logaritme, grondtal 10
 # en: 47a3278f023594b94c900b5d792366be2e8b3d39
-calc-square-root = Wortel
+calc-square-root = Vierkantswortel
 # en: 35e4a1a9ace5e53c1521b13130f3b1fce0bb312b
 calc-absolute-value = Absolute waarde
 # en: 8e4e872b30d442c4d7f1edf2cabdff971300b607
@@ -3075,7 +3075,7 @@ calc-type-curve-in-x-such = Typ een kromme in x, zoals x^2 of sin(x), en druk op
 # en: bcb584ffecef3a17141a771a3ceedbbe6d474ca1
 calc-splitting-bill = De rekening splitsen
 # en: 0a45fc60c975ea141733f982179ead17af8767b6
-calc-food-drinks-and-18-tip = Eten, drinken en 18% fooi, door zes gedeeld, elke stap onder een naam bewaard.
+calc-food-drinks-and-18-tip = Eten, drinken en 18% fooi, gedeeld door zes, elke stap onder een naam bewaard.
 # en: 2c9e678b58314997051ff2c13d56c92ea6bce7d7
 calc-shopping-total = Een boodschappentotaal
 # en: d8719443b912bfaadd4f5d8fb2f1fc095f58ff52
@@ -3091,7 +3091,7 @@ calc-rent-up-from-1-450 = De huur van $1.450 naar $1.595: met hoeveel, met welk 
 # en: 9ff9fc7e0344944578d50820e0326f7bf34f1c8e
 calc-kitchen-conversions = Keukenomrekeningen
 # en: c7ccdb52f144fcec56adb8ecb5264f35d03600c0
-calc-cups-ovens-spoons-and-weights = Bekers, ovens, lepels en gewichten, van de ene maat naar de andere.
+calc-cups-ovens-spoons-and-weights = Cups, oventemperaturen, lepels en gewichten, van de ene maat naar de andere.
 # en: 267b3d4696b05cc65039fcf4afb8cd9548ed5a29
 calc-scaling-recipe = Een recept opschalen
 # en: a0e9dcbc29ed1364a4891c3671dd43675af64d11
@@ -3101,13 +3101,13 @@ calc-unit-conversions = Eenhedenomrekening
 # en: 2aef2060ccb74d32576f5b1f936372bdd97252f3
 calc-feet-to-centimeters-miles-to = Voet naar centimeters, mijlen naar kilometers, ponden naar kilogrammen, Fahrenheit naar Celsius.
 # en: 7b31203b4780df1cd410c84049ed4d031dacc8e3
-calc-currency-at-rate-you-type = Valuta tegen een koers die je typt
+calc-currency-at-rate-you-type = Valuta tegen een koers die je zelf invult
 # en: 5f4e47693383fd619db1b39871b821a7fccf86df
 calc-trip-priced-in-euros-and = Een reis in euro’s gerekend en omgezet in dollars, met de kaartkosten erbovenop.
 # en: 6645ae7e46c209b7ba6f5fb3b6aa707395a2c3d2
 calc-fuel-for-trip = Brandstof voor een reis
 # en: e2d3235c5cfd9ceffb4e54f0635e4f3841b0c0e1
-calc-boston-to-montreal-and-back = Boston naar Montreal en terug: mijlen, mijlen per gallon, de prijs, op vier manieren.
+calc-boston-to-montreal-and-back = Van Boston naar Montreal en terug: mijlen, mijlen per gallon, de prijs, gedeeld door vier.
 # en: bb294d581aa3512dfdaf06cb5705338f026425ff
 calc-paint-for-room = Verf voor een kamer
 # en: 8899142eaeb03e3a2cfc17f5e68f1977478e2ce5
@@ -3115,7 +3115,7 @@ calc-walls-less-door-and-windows = Muren min de deur en ramen, twee lagen, in bl
 # en: fa9aac4028931969e4e43d5926f21c1c02b03737
 calc-time-zones = Tijdzones
 # en: daa6b831387e404e18a932466e1b26486e942c1b
-calc-one-call-at-9-in = Eén gesprek om 9 uur in New York, en het uur in Londen, Berlijn, Mumbai, Tokio en Sydney.
+calc-one-call-at-9-in = Eén gesprek om 9 uur in New York, en hoe laat het dan is in Londen, Berlijn, Mumbai, Tokio en Sydney.
 # en: 4126383a0888802d508caf9f1e9a973554c6eb7e
 calc-running-pace = Looptempo
 # en: 73e59d9404aa7a32f2e7e9ae9ff609c2a74d14cb
@@ -3133,7 +3133,7 @@ calc-electricity-for-appliance = Stroom voor een apparaat
 # en: d1b1126c73c13b523ce30bd2f563ad1a7b1c0210
 calc-watts-hours-day-and-price = Watt, uren per dag en de prijs van een kilowattuur: wat een kachel per maand kost.
 # en: 96aeea666f6bd696d83ef3dee80fff1fcc3ff896
-calc-loan-payment = Aflossing van een lening
+calc-loan-payment = Maandlast van een lening
 # en: 9c2f158098b8fc30f79ae0d1db9391a68d8aea9a
 calc-24-000-at-6-9 = $24.000 tegen 6,9% over zestig maanden: de maandlast en de rente in totaal.
 # en: 3c48bd272b7ad823e277ca649218ae107832bca4
@@ -3144,7 +3144,7 @@ calc-5-000-and-200-month = $5.000 en $200 per maand tegen 5% gedurende tien jaar
 # en: 813161b07c2ed5cab82b09f8c31b3810800bcd26
 calc-break-even = Break-even
 # en: bee9b48a097d165fe0d11f7c3a7175019c158c5e
-calc-costs-against-sales-for-coffee = Kosten tegenover opbrengst voor een koffiekarretje: waar de lijnen elkaar kruisen zijn de kopjes per dag die het nodig heeft.
+calc-costs-against-sales-for-coffee = Kosten tegenover opbrengst voor een koffiekarretje: waar de lijnen elkaar kruisen, zie je hoeveel kopjes per dag het moet verkopen.
 # en: a9047269b4f64dbbb2df8503315406b2b33fc4e9
 calc-curve-and-its-slope = Een kromme en zijn helling
 # en: b5f43817a99082555a1fc4891fd2eb5bfaba6e10
@@ -3155,7 +3155,7 @@ calc-waves-adding-up = Golven die optellen
 calc-sine-waves-summed-on-their = Sinusgolven bij elkaar opgeteld, op weg naar een blokgolf.
 # The grip on a line of the tape; the bar under lines chosen whole.
 # en: fd71cff4626f555a0e69c5b6801a591cabd1d173
-calc-choose-line-n-drag-it = Regel { $n } selecteren, sleep om te verplaatsen
+calc-choose-line-n-drag-it = Tik om regel { $n } te selecteren, sleep om te verplaatsen
 # en: dab2e3d9cf8c3bfccd20fa34fac6fc738ce9aba7
 calc-chosen-lines = Geselecteerde regels
 
@@ -3258,6 +3258,6 @@ find-not-found = Niet gevonden
 ## a menu narrowed by typing (kit/ui/menu.ts)
 
 # en: a9c25fead588babdd6b90b343a47f716f722312e
-menu-nothing-starts-q = Geen overeenkomsten voor “{ $q }”
+menu-nothing-starts-q = Geen resultaten voor “{ $q }”
 # en: ddf17f8747a6b36489443d6b09c25b429a1ea675
-menu-starting-q = Overeenkomsten voor “{ $q }”
+menu-starting-q = Resultaten voor “{ $q }”
