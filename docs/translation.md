@@ -8,21 +8,43 @@ plan for this, before it was built, is [history/translation-plan.md](history/tra
 
 ## Strings
 
-- Every string a person sees goes through `t()` (`src/kit/core/i18n.ts`). English is the key; `src/i18n/en.ts` is the
-  list of every key, by section, edited by hand, with a comment above any key whose meaning is not plain ("a verb
-  on a button", "a noun"). Placeholders are `{name}`; plurals are `{n|one slide|# slides}`, the forms in the
-  language's own order (Arabic has six, Russian, Ukrainian and Polish four, Hebrew three, Chinese, Japanese and
-  Korean one).
-- A language is one file, `src/i18n/<code>.ts`, the same shape as en.ts, loaded only when it is used. Its head
-  says, in that language, the voice it keeps: the form of address (French `vous`, Spanish `tú`, Russian `вы`,
-  Hindi `आप`, Urdu `آپ`, Yiddish `איר`, Hebrew addressing nobody as a man or a woman), its quotation marks and spacing, and how buttons are worded.
-- A string added or changed in en.ts is translated into all twenty other files in the same change.
-  `npm run i18n:gaps -- <code>` prints, ready to paste, every line a language lacks, with the plural forms that
-  language needs, and offers an old translation as a draft where a key changed a little. `npm run i18n:check`
-  fails on a key the code uses that en.ts lacks, a key en.ts has that nothing uses, a placeholder that does not
-  match, or a language file missing a key.
+- Every string a person sees goes through `t('id')` (`src/kit/core/i18n.ts`), read from [Fluent](https://projectfluent.org)
+  files by `@fluent/bundle` (Paul, 2026-10-15: "Use Fluent"). A message has a stable id, kebab-case, the group it
+  began in and its first words (`share-copy-link-and-go`, `sheet-insert-n-rows-above`): a change of wording keeps
+  the id, and a new meaning is a new id. `src/i18n/en.ftl` is the source of every message, in groups
+  (`## the Spreadsheet`), edited by hand, with a comment above any message whose meaning is not plain ("a verb on a
+  button", "a noun"). A command's words in a command file (`label: 'bar-bold'`) are ids too, put through `t()` when
+  drawn.
+- A placeable is `{ $name }`. A plural is a select on its number, with a variant for each of the language's plural
+  categories and `*[other]` the default; `{ $n }` writes the number as the language does:
+
+  ```ftl
+  example-n-slides = { $n ->
+          [one] one slide
+         *[other] { $n } slides
+      }
+  ```
+
+  Arabic has six categories (zero, one, two, few, many, other), Russian, Ukrainian and Polish four, Hebrew three,
+  Chinese, Japanese and Korean one; a variant for an exact number (`[0]`) may stand beside them.
+- A language is one file, `src/i18n/<code>.ftl`, the same ids and groups as en.ftl, loaded only when it is used.
+  English is a language like the others, and ships in the app file. A message a language lacks is said in English.
+  A file's head (`###`) says, in that language, the voice it keeps: the form of address (French `vous`, Spanish `tú`,
+  Russian `вы`, Hindi `आप`, Urdu `آپ`, Yiddish `איר`, Hebrew addressing nobody as a man or a woman), its quotation
+  marks and spacing, and how buttons are worded.
+- A message left the same as its English (a name, a loanword: "Apps", "CSV") says so with the comment line `# same`
+  above it: a decision per language and per message.
+- A message added to en.ftl is translated into all twenty other files in the same change, and so is one whose English
+  changes. `npm run i18n:extract` lands an id the code uses and en.ftl lacks at the end of en.ftl, under a
+  `## New — sort me into a section` group, marked `# draft from the code` until its English is written and it is
+  placed. `npm run i18n:gaps -- <code>` prints, ready to paste, every message a language lacks, in English, with a
+  variant for each of that language's plural categories, and offers an old translation as a draft
+  (`# draft from <old id>`) where an id was replaced by a new one whose English is alike. `npm run i18n:check` fails
+  on an id the code uses that en.ftl lacks, a file Fluent cannot read, a placeable that does not match, a plural
+  without the language's categories, a draft or a sort-me group left in, a message the same as its English and not
+  marked `# same`, or a language missing a message; it warns of an id nothing uses.
 - The English is American (Paul, 2026-10-11): color, center, organize, favorite, gray, license, ZIP code, cell
-  phone, and the Letter paper that is the default. `test/american.test.ts` holds en.ts and every template to a
+  phone, and the Letter paper that is the default. `test/american.test.ts` holds en.ftl and every template to a
   list of British spellings and words (`test/british.ts`); the README and the docs are held to the same list.
 - Templates and their sample content are English, written in each app's `templates.ts`, set in New York where
   they are set anywhere, and not under `t()`.
@@ -31,7 +53,7 @@ plan for this, before it was built, is [history/translation-plan.md](history/tra
 
 - **The glossary** (`test/i18n-glossary.test.ts`, `test/glossary.ts`): each product term (the app names, Share,
   Save in browser, link, short link, Display Link, template, slide…) is said one way in each language. A term
-  with two words for it, or a short label that says it another way, fails, naming the term and the keys. Words
+  with two words for it, or a short label that says it another way, fails, naming the term and the ids. Words
   are matched by stem in Latin and Cyrillic, Hindi and Bengali (counted in letters as a reader sees them), by the
   first syllable block or two in Korean (a particle comes off), by a pair of characters in Chinese and Japanese,
   and by root in Arabic; Urdu by root or by stem; Hebrew and Yiddish by stem, which a prefix (ה, ל, ב) does

@@ -167,7 +167,7 @@ drawn from it as the page runs, and the tables below are written from it by `npm
 standard's source, and these tables are never edited by hand (a node test fails when they are stale). Its lints are node
 tests (test/commands.test.ts): no key is bound twice where the same keys reach (the page, then the app, then the
 words, each at its place), and a key an inner scope takes from an outer one is listed with its reason; every command in a
-bar or a menu has keys or is reached by the bar's arrows; every label is a string of en.ts; every command is run by a
+bar or a menu has keys or is reached by the bar's arrows; every label is a message of en.ftl; every command is run by a
 test; every key is spelled by one function, a Mac's way or Windows'; no two commands of a scope share a label unless
 one of them is in force only sometimes. Keys are written `Mod+Alt+Shift+Key`; `at:` is where in the app the key is
 answered (the canvas, a cell, the rail, the show). Rows of data rather than commands (a theme, an ink, a
