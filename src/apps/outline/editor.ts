@@ -919,7 +919,12 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
     this.performUpdate();
     const box = this.querySelector<HTMLInputElement>('input.ol-due-in');
     box?.focus({ preventScroll: true });
-    box?.showPicker?.();
+    // The browser's own picker, opened at once where the browser allows it (a tap; not a key's command, which throws).
+    try {
+      box?.showPicker?.();
+    } catch {
+      /* the field is there to type in */
+    }
   }
   private saveDue(keep: boolean, value: string) {
     const at = this.dating;

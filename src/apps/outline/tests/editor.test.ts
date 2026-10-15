@@ -1038,3 +1038,29 @@ test('statuses: a pill before the words, tapped to the next; a due chip after th
   expect(row(el, 2).querySelector('.ol-status, .ol-due')).toBeNull();
   expect(write(docOf(el))).toContain('  - Quotes\n');
 });
+
+// Insert ▾'s three: Statuses writes the set once (the item in hand gets the first), Task makes the item a task (again:
+// checks it), Due date starts a day from today or the nearest day to come above, typed where it shows.
+test('Insert ▾: Statuses, Task and Due date on the item in hand; a document from before has none of it until asked', async () => {
+  const { el, last } = await editor('- Plan {due=2027-03-01}\n- Press list\n');
+  const docOf = (x: ToOutlineEditor) => (x as unknown as { doc: Doc }).doc;
+  expect(el.querySelector('.ol-status')).toBeNull();
+  await choose(el, 1);
+  await pick(el, el.querySelector<HTMLButtonElement>('to-insert button')!, 'Statuses');
+  await until(() => !!el.querySelector('.ol-status'));
+  expect(write(docOf(el))).toBe('---\nstatuses: TODO=red, DOING=yellow, DONE=green\n---\n- Plan {due=2027-03-01}\n- Press list {status=TODO}\n');
+  await pick(el, el.querySelector<HTMLButtonElement>('to-insert button')!, 'Task');
+  await until(() => (last() ?? '').includes('- [ ] Press list'));
+  await pick(el, el.querySelector<HTMLButtonElement>('to-insert button')!, 'Task');
+  await until(() => (last() ?? '').includes('- [x] Press list {status=DONE}'));
+  await pick(el, el.querySelector<HTMLButtonElement>('to-insert button')!, 'Due date');
+  // The day to start from: the nearest day still to come above, Plan's; the field shows it, Enter keeps it.
+  await until(() => !!el.querySelector<HTMLInputElement>('input.ol-due-in'));
+  const field = el.querySelector<HTMLInputElement>('input.ol-due-in')!;
+  expect(field.value).toBe('2027-03-01');
+  field.value = '2027-03-04';
+  field.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true, cancelable: true }));
+  await until(() => (last() ?? '').includes('due=2027-03-04'));
+  expect(write(docOf(el))).toBe('---\nstatuses: TODO=red, DOING=yellow, DONE=green\n---\n- Plan {due=2027-03-01}\n- [x] Press list {status=DONE due=2027-03-04}\n');
+  expect(el.querySelector('input.ol-due-in')).toBeNull();
+});
