@@ -140,13 +140,12 @@ drawer-dark = Fonse
 # en: 6b21fb791ac05170893860c248401cd24a59b732
 drawer-about = Apwopo
 # The name itself is translated too (Paul, 2026-10-10): each language says it in its own words.
-# same
 # en: 515e0d24040d094379cfdc94e3c6c2f63a26f1f6
-common-tiny-little-office = Tiny Little Office
+common-tiny-little-office = Ti Biwo Tou Piti
 # en: 399d4aacd52f76ac8090ce08a31e550e2123645d
-drawer-about-tiny-little-office = Apwopo Tiny Little Office
+drawer-about-tiny-little-office = Apwopo Ti Biwo Tou Piti
 # en: 6218d1c0ab69084ed45fb0f022b95f382310184a
-drawer-tiny-little-office-is-experiment = Tiny Little Office se yon eksperyans { $aboard }, yon konpayi estrateji dijital ak AI ak devlopman lojisyèl nan Nouyòk.
+drawer-tiny-little-office-is-experiment = Ti Biwo Tou Piti se yon eksperyans { $aboard }, yon konpayi estrateji dijital ak AI ak devlopman lojisyèl nan Nouyòk.
 # en: 04a1291dcc6e5d304f04516685710a331963f630
 drawer-to-reach-out-with-questions = Si ou gen kesyon, { $email }.
 # en: 522edc71559293b5713cff3f13c2dbafd37a56a3
@@ -175,18 +174,18 @@ drawer-add-to-home-screen = Mete sou ekran dakèy
 # en: 9b3cbed5c490c07473546a88768ba29b787e9e52
 drawer-size-of-everything = Zoum
 # en: 943c5ac9fa7766d7c1ebecbc95c4e0d27b4ef9d4
-drawer-to-add-tiny-little-office = Pou mete Tiny Little Office sou ekran dakèy: Pataje, answit Add to Home Screen.
+drawer-to-add-tiny-little-office = Pou mete Ti Biwo Tou Piti sou ekran dakèy: Pataje, answit Add to Home Screen.
 
 ## links that leave the site (kit/ui/link-guard.ts)
 
 # The menu button's tooltip: the Office mark is the menu.
 # en: 4a48e81d0d023913c2155eb30954f58853a5591d
-leave-tiny-little-office-menu = Meni Tiny Little Office
+leave-tiny-little-office-menu = Meni Ti Biwo Tou Piti
 # The question before a link that leaves the site: "You are leaving Tiny Little Office for" over the site's name, large.
 # en: 92ad7c004fe14dea34666631ff31b016eb39ee40
 leave-do-you-trust-this-link = Èske ou fè lyen sa a konfyans?
 # en: 8d85feca3f164857fc84014a8f2ed5cc4846d4c9
-leave-you-are-leaving-tiny-little = Ou ap kite Tiny Little Office pou
+leave-you-are-leaving-tiny-little = Ou ap kite Ti Biwo Tou Piti pou
 # en: 50ef68d5c205237951dae42aa775a66480171c46
 leave-this-link-writes-email-to = Lyen sa a ekri yon imèl bay
 # en: 102dce223fdc2f3bbdda71f28108e2a6fdf21710
@@ -588,7 +587,7 @@ download-downloaded-name = { $name } telechaje
 # en: 01125e1be1f56cdaa47c6314a158e1219af819b3
 download-failed = Telechajman an echwe
 # en: e7f6a6728b280414756d238ae70084720018ba47
-common-open-in-tiny-little-office = Louvri nan Tiny Little Office
+common-open-in-tiny-little-office = Louvri nan Ti Biwo Tou Piti
 # Under a document cut off at a slide's foot: a link that opens it whole, in its own app.
 # en: c510d6c04c0951500c8e43f623e9f8886c378aec
 download-see-more = Wè plis
@@ -916,17 +915,17 @@ write-name-this-column = Bay kolòn sa a yon non
 ## Insert's dialog (kit/ui/insert-dialogs.ts): Tiny Little Office Doc
 
 # en: d5674bb4dcb8c5fe378eb9cd0bb9d1849ed37581
-insert-tiny-little-office-link = Yon lyen Tiny Little Office
+insert-tiny-little-office-link = Yon lyen Ti Biwo Tou Piti
 # en: cdea71ff947c2b49dd7d7ea146fd3efeb9fa5677
 insert-opening-short-link = Ap louvri lyen kout la…
 # en: 9d2d34c4b04d8410e0025beb7899a31d1bc57c04
-insert-paste-link-of-another-tiny = Kole lyen yon lòt dokiman Tiny Little Office, long oswa kout: premye paj li parèt isit la.
+insert-paste-link-of-another-tiny = Kole lyen yon lòt dokiman Ti Biwo Tou Piti, long oswa kout: premye paj li parèt isit la.
 # en: 7e4861cdc8de2c0c4cf87ca37c9130a92051b5b0
-insert-this-is-not-tiny-little = Sa a pa yon lyen Tiny Little Office, oswa li ekspire.
+insert-this-is-not-tiny-little = Sa a pa yon lyen Ti Biwo Tou Piti, oswa li ekspire.
 # en: 1eb05dc15f4e90a6a61c46b111812e974555cd81
-insert-tiny-little-office-doc = Dokiman Tiny Little Office
+insert-tiny-little-office-doc = Dokiman Ti Biwo Tou Piti
 # en: 7bb236efe4e244196e506d65542626cfe368bb09
-common-tiny-little-office-doc-ellipsis = Dokiman Tiny Little Office…
+common-tiny-little-office-doc-ellipsis = Dokiman Ti Biwo Tou Piti…
 # Insert ▾'s group of the apps a new document can be made in, inside this one.
 # en: f9f93f3f14cfa3eea1bfcfee97ae22cd15b25e0d
 common-new-document = Yon nouvo dokiman
@@ -3131,7 +3130,7 @@ compare-compare = Konpare
 # en: 24512a18bc6d2c27213ad28b26ce9271d94175af
 compare-no-difference = Pa gen diferans
 # en: 8f0fb2d2ece91d9de4ed64f23a12b475c3e18970
-compare-not-link-to-tiny-little = Se pa yon lyen yon dokiman Tiny Little Office
+compare-not-link-to-tiny-little = Se pa yon lyen yon dokiman Ti Biwo Tou Piti
 # en: e82be1221a13b593fd3fd58ffe24f3c3ba58f783
 compare-paste-second-link-to-see = Kole yon dezyèm lyen pou wè sa ki chanje.
 # en: 442aef6fc360061295985657c4489b3c4d360cc3
@@ -3168,7 +3167,7 @@ compare-n-put-in = { $n ->
 # en: c99db7abba3f7227854d93a163ad3494de4e1571
 open-opened-name = { $name } louvri
 # en: f917dee4211bd4af58db8efec79e354e1ffb4912
-open-that-file-is-not-words = Tiny Little Office pa ka li fichye sa a.
+open-that-file-is-not-words = Ti Biwo Tou Piti pa ka li fichye sa a.
 # en: 1d08903947cc83b648f8ad96b1e23466a2dbed11
 open-that-file-is-too-large = Fichye sa a twò gwo.
 # en: 8f432852569edbf7610713a6554e7a61396327d5

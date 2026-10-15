@@ -137,13 +137,12 @@ drawer-dark = 어둡게
 # en: 6b21fb791ac05170893860c248401cd24a59b732
 drawer-about = 정보
 # The name itself is translated too (Paul, 2026-10-10): each language says it in its own words.
-# same
 # en: 515e0d24040d094379cfdc94e3c6c2f63a26f1f6
-common-tiny-little-office = Tiny Little Office
+common-tiny-little-office = 아주 작은 사무실
 # en: 399d4aacd52f76ac8090ce08a31e550e2123645d
-drawer-about-tiny-little-office = Tiny Little Office 정보
+drawer-about-tiny-little-office = 아주 작은 사무실 정보
 # en: 6218d1c0ab69084ed45fb0f022b95f382310184a
-drawer-tiny-little-office-is-experiment = Tiny Little Office는 뉴욕의 디지털·AI 전략 및 소프트웨어 개발 회사 { $aboard }의 실험입니다.
+drawer-tiny-little-office-is-experiment = 아주 작은 사무실은 뉴욕의 디지털·AI 전략 및 소프트웨어 개발 회사 { $aboard }의 실험입니다.
 # en: 04a1291dcc6e5d304f04516685710a331963f630
 drawer-to-reach-out-with-questions = 궁금한 점이 있으면 { $email }.
 # en: 522edc71559293b5713cff3f13c2dbafd37a56a3
@@ -171,18 +170,18 @@ drawer-add-to-home-screen = 홈 화면에 추가
 # en: 9b3cbed5c490c07473546a88768ba29b787e9e52
 drawer-size-of-everything = 확대/축소
 # en: 943c5ac9fa7766d7c1ebecbc95c4e0d27b4ef9d4
-drawer-to-add-tiny-little-office = Tiny Little Office를 홈 화면에 추가하려면 공유를 누른 다음 홈 화면에 추가를 누르세요.
+drawer-to-add-tiny-little-office = 아주 작은 사무실을 홈 화면에 추가하려면 공유를 누른 다음 홈 화면에 추가를 누르세요.
 
 ## links that leave the site (kit/ui/link-guard.ts)
 
 # The menu button's tooltip: the Office mark is the menu.
 # en: 4a48e81d0d023913c2155eb30954f58853a5591d
-leave-tiny-little-office-menu = Tiny Little Office 메뉴
+leave-tiny-little-office-menu = 아주 작은 사무실 메뉴
 # The question before a link that leaves the site: "You are leaving Tiny Little Office for" over the site's name, large.
 # en: 92ad7c004fe14dea34666631ff31b016eb39ee40
 leave-do-you-trust-this-link = 믿을 수 있는 링크인가요?
 # en: 8d85feca3f164857fc84014a8f2ed5cc4846d4c9
-leave-you-are-leaving-tiny-little = Tiny Little Office를 떠나 이동할 곳
+leave-you-are-leaving-tiny-little = 아주 작은 사무실을 떠나 이동할 곳
 # en: 50ef68d5c205237951dae42aa775a66480171c46
 leave-this-link-writes-email-to = 이 링크는 이메일을 써요. 받는 사람
 # en: 102dce223fdc2f3bbdda71f28108e2a6fdf21710
@@ -557,7 +556,7 @@ download-downloaded-name = { $name }을(를) 다운로드했어요
 # en: 01125e1be1f56cdaa47c6314a158e1219af819b3
 download-failed = 다운로드하지 못했어요
 # en: e7f6a6728b280414756d238ae70084720018ba47
-common-open-in-tiny-little-office = Tiny Little Office에서 열기
+common-open-in-tiny-little-office = 아주 작은 사무실에서 열기
 # Under a document cut off at a slide's foot: a link that opens it whole, in its own app.
 # en: c510d6c04c0951500c8e43f623e9f8886c378aec
 download-see-more = 더 보기
@@ -872,17 +871,17 @@ write-name-this-column = 이 열 이름 짓기
 ## Insert's dialog (kit/ui/insert-dialogs.ts): Tiny Little Office Doc
 
 # en: d5674bb4dcb8c5fe378eb9cd0bb9d1849ed37581
-insert-tiny-little-office-link = Tiny Little Office 링크
+insert-tiny-little-office-link = 아주 작은 사무실 링크
 # en: cdea71ff947c2b49dd7d7ea146fd3efeb9fa5677
 insert-opening-short-link = 짧은 링크를 여는 중…
 # en: 9d2d34c4b04d8410e0025beb7899a31d1bc57c04
-insert-paste-link-of-another-tiny = 다른 Tiny Little Office 문서의 링크를 긴 것이든 짧은 것이든 붙여넣으세요. 첫 페이지가 여기에 나와요.
+insert-paste-link-of-another-tiny = 다른 아주 작은 사무실 문서의 링크를 긴 것이든 짧은 것이든 붙여넣으세요. 첫 페이지가 여기에 나와요.
 # en: 7e4861cdc8de2c0c4cf87ca37c9130a92051b5b0
-insert-this-is-not-tiny-little = Tiny Little Office 링크가 아니거나 만료됐어요.
+insert-this-is-not-tiny-little = 아주 작은 사무실 링크가 아니거나 만료됐어요.
 # en: 1eb05dc15f4e90a6a61c46b111812e974555cd81
-insert-tiny-little-office-doc = Tiny Little Office 문서
+insert-tiny-little-office-doc = 아주 작은 사무실 문서
 # en: 7bb236efe4e244196e506d65542626cfe368bb09
-common-tiny-little-office-doc-ellipsis = Tiny Little Office 문서…
+common-tiny-little-office-doc-ellipsis = 아주 작은 사무실 문서…
 # Insert ▾'s group of the apps a new document can be made in, inside this one.
 # en: f9f93f3f14cfa3eea1bfcfee97ae22cd15b25e0d
 common-new-document = 새 문서
@@ -3065,7 +3064,7 @@ compare-compare = 비교
 # en: 24512a18bc6d2c27213ad28b26ce9271d94175af
 compare-no-difference = 차이 없음
 # en: 8f0fb2d2ece91d9de4ed64f23a12b475c3e18970
-compare-not-link-to-tiny-little = Tiny Little Office 문서 링크가 아니에요
+compare-not-link-to-tiny-little = 아주 작은 사무실 문서 링크가 아니에요
 # en: e82be1221a13b593fd3fd58ffe24f3c3ba58f783
 compare-paste-second-link-to-see = 두 번째 링크를 붙여넣으면 바뀐 점을 볼 수 있어요.
 # en: 442aef6fc360061295985657c4489b3c4d360cc3
@@ -3100,7 +3099,7 @@ compare-n-put-in = { $n ->
 # en: c99db7abba3f7227854d93a163ad3494de4e1571
 open-opened-name = { $name }을(를) 열었어요
 # en: f917dee4211bd4af58db8efec79e354e1ffb4912
-open-that-file-is-not-words = Tiny Little Office에서 그 파일을 읽을 수 없어요.
+open-that-file-is-not-words = 아주 작은 사무실에서 그 파일을 읽을 수 없어요.
 # en: 1d08903947cc83b648f8ad96b1e23466a2dbed11
 open-that-file-is-too-large = 그 파일은 너무 커요.
 # en: 8f432852569edbf7610713a6554e7a61396327d5

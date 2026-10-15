@@ -3132,7 +3132,7 @@ compare-n-put-in = { $n ->
 # en: c99db7abba3f7227854d93a163ad3494de4e1571
 open-opened-name = 已開啟 { $name }
 # en: f917dee4211bd4af58db8efec79e354e1ffb4912
-open-that-file-is-not-words = Tiny Little Office 無法讀取那個檔案。
+open-that-file-is-not-words = 小小辦公室 無法讀取那個檔案。
 # en: 1d08903947cc83b648f8ad96b1e23466a2dbed11
 open-that-file-is-too-large = 那個檔案太大了。
 # en: 8f432852569edbf7610713a6554e7a61396327d5

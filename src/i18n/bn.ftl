@@ -100,13 +100,12 @@ drawer-light = হালকা
 drawer-dark = গাঢ়
 # en: 6b21fb791ac05170893860c248401cd24a59b732
 drawer-about = পরিচিতি
-# same
 # en: 515e0d24040d094379cfdc94e3c6c2f63a26f1f6
-common-tiny-little-office = Tiny Little Office
+common-tiny-little-office = ছোট্ট ছোট্ট অফিস
 # en: 399d4aacd52f76ac8090ce08a31e550e2123645d
-drawer-about-tiny-little-office = Tiny Little Office সম্পর্কে
+drawer-about-tiny-little-office = ছোট্ট ছোট্ট অফিস সম্পর্কে
 # en: 6218d1c0ab69084ed45fb0f022b95f382310184a
-drawer-tiny-little-office-is-experiment = Tiny Little Office হলো { $aboard }-এর একটি পরীক্ষা, নিউ ইয়র্ক শহরের একটি ডিজিটাল ও AI কৌশল এবং সফটওয়্যার নির্মাণ প্রতিষ্ঠান।
+drawer-tiny-little-office-is-experiment = ছোট্ট ছোট্ট অফিস হলো { $aboard }-এর একটি পরীক্ষা, নিউ ইয়র্ক শহরের একটি ডিজিটাল ও AI কৌশল এবং সফটওয়্যার নির্মাণ প্রতিষ্ঠান।
 # en: 04a1291dcc6e5d304f04516685710a331963f630
 drawer-to-reach-out-with-questions = প্রশ্ন থাকলে { $email }।
 # en: 522edc71559293b5713cff3f13c2dbafd37a56a3
@@ -133,11 +132,11 @@ drawer-nothing-by-that-name = কোনো ফল নেই
 ## links that leave the site (kit/ui/link-guard.ts)
 
 # en: 4a48e81d0d023913c2155eb30954f58853a5591d
-leave-tiny-little-office-menu = Tiny Little Office মেনু
+leave-tiny-little-office-menu = ছোট্ট ছোট্ট অফিস মেনু
 # en: 92ad7c004fe14dea34666631ff31b016eb39ee40
 leave-do-you-trust-this-link = আপনি কি এই লিংকটি বিশ্বাস করেন?
 # en: 8d85feca3f164857fc84014a8f2ed5cc4846d4c9
-leave-you-are-leaving-tiny-little = আপনি Tiny Little Office ছেড়ে যাচ্ছেন
+leave-you-are-leaving-tiny-little = আপনি ছোট্ট ছোট্ট অফিস ছেড়ে যাচ্ছেন
 # en: 50ef68d5c205237951dae42aa775a66480171c46
 leave-this-link-writes-email-to = এই লিংক ইমেইল লিখবে এই ঠিকানায়
 # en: 102dce223fdc2f3bbdda71f28108e2a6fdf21710
@@ -494,7 +493,7 @@ download-downloaded-name = { $name } ডাউনলোড হয়েছে
 # en: 01125e1be1f56cdaa47c6314a158e1219af819b3
 download-failed = ডাউনলোড হয়নি
 # en: e7f6a6728b280414756d238ae70084720018ba47
-common-open-in-tiny-little-office = Tiny Little Office-এ খুলুন
+common-open-in-tiny-little-office = ছোট্ট ছোট্ট অফিসে খুলুন
 # Under a document cut off at a slide's foot: a link that opens it whole, in its own app.
 # en: c510d6c04c0951500c8e43f623e9f8886c378aec
 download-see-more = আরও দেখুন
@@ -799,17 +798,17 @@ write-small-businesss-terms-in-plain = ছোট ব্যবসার শর্
 ## Insert's dialog (kit/ui/insert-dialogs.ts): Tiny Little Office Doc
 
 # en: d5674bb4dcb8c5fe378eb9cd0bb9d1849ed37581
-insert-tiny-little-office-link = Tiny Little Office-এর একটি লিংক
+insert-tiny-little-office-link = ছোট্ট ছোট্ট অফিসের একটি লিংক
 # en: cdea71ff947c2b49dd7d7ea146fd3efeb9fa5677
 insert-opening-short-link = ছোট লিংক খোলা হচ্ছে…
 # en: 9d2d34c4b04d8410e0025beb7899a31d1bc57c04
-insert-paste-link-of-another-tiny = Tiny Little Office-এর অন্য কোনো নথির লিংক, লম্বা বা ছোট, পেস্ট করুন: এর প্রথম পাতা এখানে দেখা যাবে।
+insert-paste-link-of-another-tiny = ছোট্ট ছোট্ট অফিসের অন্য কোনো নথির লিংক, লম্বা বা ছোট, পেস্ট করুন: এর প্রথম পাতা এখানে দেখা যাবে।
 # en: 7e4861cdc8de2c0c4cf87ca37c9130a92051b5b0
-insert-this-is-not-tiny-little = এটি Tiny Little Office-এর লিংক নয়, অথবা এর মেয়াদ শেষ।
+insert-this-is-not-tiny-little = এটি ছোট্ট ছোট্ট অফিসের লিংক নয়, অথবা এর মেয়াদ শেষ।
 # en: 1eb05dc15f4e90a6a61c46b111812e974555cd81
-insert-tiny-little-office-doc = Tiny Little Office নথি
+insert-tiny-little-office-doc = ছোট্ট ছোট্ট অফিস নথি
 # en: 7bb236efe4e244196e506d65542626cfe368bb09
-common-tiny-little-office-doc-ellipsis = Tiny Little Office নথি…
+common-tiny-little-office-doc-ellipsis = ছোট্ট ছোট্ট অফিস নথি…
 # en: f9f93f3f14cfa3eea1bfcfee97ae22cd15b25e0d
 common-new-document = নতুন নথি
 # en: 77dfd2135f4db726c47299bb55be26f7f4525a46
@@ -3012,7 +3011,7 @@ keys-this-page = এই পাতা
 # en: fb2997642419cda8393061543f140d40a9323957
 common-check-or-uncheck-task = কাজে টিক দিন বা তুলে নিন
 # en: 943c5ac9fa7766d7c1ebecbc95c4e0d27b4ef9d4
-drawer-to-add-tiny-little-office = Tiny Little Office হোম স্ক্রিনে যোগ করতে: শেয়ার, তারপর “Add to Home Screen”।
+drawer-to-add-tiny-little-office = ছোট্ট ছোট্ট অফিস হোম স্ক্রিনে যোগ করতে: শেয়ার, তারপর “Add to Home Screen”।
 # en: 0a4adf12f01d48ecdb89f5eddf5f19fd89d94522
 common-too-long-for-qr-code = QR কোডের জন্য অনেক বড়: নথি ছোট করুন, বা ছোট লিংক শেয়ার করুন।
 # en: 62be4731dedfbbc70aa7fa30d6649d816af8ca4b
@@ -3102,7 +3101,7 @@ compare-compare = তুলনা
 # en: 24512a18bc6d2c27213ad28b26ce9271d94175af
 compare-no-difference = কোনো পার্থক্য নেই
 # en: 8f0fb2d2ece91d9de4ed64f23a12b475c3e18970
-compare-not-link-to-tiny-little = এটি Tiny Little Office নথির লিংক নয়
+compare-not-link-to-tiny-little = এটি ছোট্ট ছোট্ট অফিস নথির লিংক নয়
 # en: e82be1221a13b593fd3fd58ffe24f3c3ba58f783
 compare-paste-second-link-to-see = কী বদলেছে দেখতে দ্বিতীয় লিংক পেস্ট করুন।
 # en: 442aef6fc360061295985657c4489b3c4d360cc3
@@ -3139,6 +3138,6 @@ compare-n-put-in = { $n ->
 # en: c99db7abba3f7227854d93a163ad3494de4e1571
 open-opened-name = { $name } খোলা হয়েছে
 # en: f917dee4211bd4af58db8efec79e354e1ffb4912
-open-that-file-is-not-words = Tiny Little Office ওই ফাইলটি পড়তে পারে না।
+open-that-file-is-not-words = ছোট্ট ছোট্ট অফিস ওই ফাইলটি পড়তে পারে না।
 # en: 1d08903947cc83b648f8ad96b1e23466a2dbed11
 open-that-file-is-too-large = ফাইলটি খুব বড়।

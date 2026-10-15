@@ -14,7 +14,7 @@
  * its locker, the password given), `to-lock` (detail: the new locker, or null for none) and `to-share-open`.
  */
 import { LitElement, html, nothing, type TemplateResult } from 'lit';
-import { t } from '../core/i18n.ts';
+import { onLanguage, t } from '../core/i18n.ts';
 import { icon, UI } from '../draw/icons.ts';
 import { toast } from '../core/say.ts';
 import { copyText } from '../share/share.ts';
@@ -62,6 +62,7 @@ export class ToPrivacy extends LitElement {
   /** The password the Password dialog shows: made here, a new one each time it opens and at Make another. */
   declare made: string;
   private off = () => {};
+  private offLang: () => void = () => {};
 
   constructor() {
     super();
@@ -79,10 +80,13 @@ export class ToPrivacy extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     this.off = onPrivacy(() => void this.refresh());
+    // The dialogs are drawn before a language other than English has loaded; drawn again when it has (their headings read in English otherwise).
+    this.offLang = onLanguage(() => this.requestUpdate());
   }
   disconnectedCallback() {
     super.disconnectedCallback();
     this.off();
+    this.offLang();
   }
   private get dialog(): ToDialog {
     return this.querySelector<ToDialog>('to-dialog.to-privacy-dialog')!;

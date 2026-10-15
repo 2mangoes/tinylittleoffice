@@ -3223,7 +3223,7 @@ compare-n-put-in = { $n ->
 # en: c99db7abba3f7227854d93a163ad3494de4e1571
 open-opened-name = { $name } ouvert
 # en: f917dee4211bd4af58db8efec79e354e1ffb4912
-open-that-file-is-not-words = Tiny Little Office ne peut pas lire ce fichier.
+open-that-file-is-not-words = Tout Petit Bureau ne peut pas lire ce fichier.
 # en: 1d08903947cc83b648f8ad96b1e23466a2dbed11
 open-that-file-is-too-large = Ce fichier est trop volumineux.
 # en: 8f432852569edbf7610713a6554e7a61396327d5

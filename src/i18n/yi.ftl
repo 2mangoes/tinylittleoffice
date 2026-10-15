@@ -149,13 +149,12 @@ drawer-dark = טונקל
 # en: 6b21fb791ac05170893860c248401cd24a59b732
 drawer-about = וועגן
 # The name itself is translated too (Paul, 2026-10-10): each language says it in its own words.
-# same
 # en: 515e0d24040d094379cfdc94e3c6c2f63a26f1f6
-common-tiny-little-office = Tiny Little Office
+common-tiny-little-office = קליין אפיסל
 # en: 399d4aacd52f76ac8090ce08a31e550e2123645d
-drawer-about-tiny-little-office = וועגן Tiny Little Office
+drawer-about-tiny-little-office = וועגן קליין אפיסל
 # en: 6218d1c0ab69084ed45fb0f022b95f382310184a
-drawer-tiny-little-office-is-experiment = Tiny Little Office איז אן עקספערימענט פון { $aboard }, א פירמע פאר דיגיטאלער און AI סטראטעגיע און סאפטוועיר אנטוויקלונג אין ניו יארק.
+drawer-tiny-little-office-is-experiment = קליין אפיסל איז אן עקספערימענט פון { $aboard }, א פירמע פאר דיגיטאלער און AI סטראטעגיע און סאפטוועיר אנטוויקלונג אין ניו יארק.
 # en: 04a1291dcc6e5d304f04516685710a331963f630
 drawer-to-reach-out-with-questions = מיט פראגן, { $email }.
 # en: 522edc71559293b5713cff3f13c2dbafd37a56a3
@@ -183,18 +182,18 @@ drawer-add-to-home-screen = צולייגן צום היים־סקרין
 # en: 9b3cbed5c490c07473546a88768ba29b787e9e52
 drawer-size-of-everything = זום
 # en: 943c5ac9fa7766d7c1ebecbc95c4e0d27b4ef9d4
-drawer-to-add-tiny-little-office = צוצולייגן Tiny Little Office צום היים־סקרין: Share, דערנאך Add to Home Screen.
+drawer-to-add-tiny-little-office = צוצולייגן קליין אפיסל צום היים־סקרין: Share, דערנאך Add to Home Screen.
 
 ## links that leave the site (kit/ui/link-guard.ts)
 
 # The menu button's tooltip: the Office mark is the menu.
 # en: 4a48e81d0d023913c2155eb30954f58853a5591d
-leave-tiny-little-office-menu = Tiny Little Office מעניו
+leave-tiny-little-office-menu = קליין אפיסל מעניו
 # The question before a link that leaves the site: "You are leaving Tiny Little Office for" over the site's name, large.
 # en: 92ad7c004fe14dea34666631ff31b016eb39ee40
 leave-do-you-trust-this-link = גלייבט איר דעם לינק?
 # en: 8d85feca3f164857fc84014a8f2ed5cc4846d4c9
-leave-you-are-leaving-tiny-little = איר פארלאזט Tiny Little Office און גייט צו
+leave-you-are-leaving-tiny-little = איר פארלאזט קליין אפיסל און גייט צו
 # en: 50ef68d5c205237951dae42aa775a66480171c46
 leave-this-link-writes-email-to = דער לינק שרייבט אן אימעיל צו
 # en: 102dce223fdc2f3bbdda71f28108e2a6fdf21710
@@ -597,7 +596,7 @@ download-downloaded-name = געדאונלאודט: { $name }
 # en: 01125e1be1f56cdaa47c6314a158e1219af819b3
 download-failed = דאונלאוד נישט געלונגען
 # en: e7f6a6728b280414756d238ae70084720018ba47
-common-open-in-tiny-little-office = עפענען אין Tiny Little Office
+common-open-in-tiny-little-office = עפענען אין קליין אפיסל
 # Under a document cut off at a slide's foot: a link that opens it whole, in its own app.
 # en: c510d6c04c0951500c8e43f623e9f8886c378aec
 download-see-more = זעט מער
@@ -924,17 +923,17 @@ write-name-this-column = געבן א נאמען דעם קאלום
 ## Insert's dialog (kit/ui/insert-dialogs.ts): Tiny Little Office Doc
 
 # en: d5674bb4dcb8c5fe378eb9cd0bb9d1849ed37581
-insert-tiny-little-office-link = א Tiny Little Office לינק
+insert-tiny-little-office-link = א קליין אפיסל לינק
 # en: cdea71ff947c2b49dd7d7ea146fd3efeb9fa5677
 insert-opening-short-link = מען עפנט דעם קורצן לינק…
 # en: 9d2d34c4b04d8410e0025beb7899a31d1bc57c04
-insert-paste-link-of-another-tiny = קלעבט אריין דעם לינק פון אן אנדער Tiny Little Office דאקומענט, לאנג אדער קורץ: זיין ערשטע זייט וועט זיך ווייזן דא.
+insert-paste-link-of-another-tiny = קלעבט אריין דעם לינק פון אן אנדער קליין אפיסל דאקומענט, לאנג אדער קורץ: זיין ערשטע זייט וועט זיך ווייזן דא.
 # en: 7e4861cdc8de2c0c4cf87ca37c9130a92051b5b0
-insert-this-is-not-tiny-little = דאס איז נישט קיין Tiny Little Office לינק, אדער ער איז שוין אויסגעגאנגען.
+insert-this-is-not-tiny-little = דאס איז נישט קיין קליין אפיסל לינק, אדער ער איז שוין אויסגעגאנגען.
 # en: 1eb05dc15f4e90a6a61c46b111812e974555cd81
-insert-tiny-little-office-doc = Tiny Little Office דאקומענט
+insert-tiny-little-office-doc = קליין אפיסל דאקומענט
 # en: 7bb236efe4e244196e506d65542626cfe368bb09
-common-tiny-little-office-doc-ellipsis = Tiny Little Office דאקומענט…
+common-tiny-little-office-doc-ellipsis = קליין אפיסל דאקומענט…
 # Insert ▾'s group of the apps a new document can be made in, inside this one.
 # en: f9f93f3f14cfa3eea1bfcfee97ae22cd15b25e0d
 common-new-document = א נייער דאקומענט
@@ -3137,7 +3136,7 @@ compare-compare = פארגלייכן
 # en: 24512a18bc6d2c27213ad28b26ce9271d94175af
 compare-no-difference = קיין אונטערשייד
 # en: 8f0fb2d2ece91d9de4ed64f23a12b475c3e18970
-compare-not-link-to-tiny-little = נישט קיין לינק צו א Tiny Little Office דאקומענט
+compare-not-link-to-tiny-little = נישט קיין לינק צו א קליין אפיסל דאקומענט
 # en: e82be1221a13b593fd3fd58ffe24f3c3ba58f783
 compare-paste-second-link-to-see = קלעבט אריין א צווייטן לינק צו זען וואס האט זיך געטוישט.
 # en: 442aef6fc360061295985657c4489b3c4d360cc3
@@ -3174,7 +3173,7 @@ compare-n-put-in = { $n ->
 # en: c99db7abba3f7227854d93a163ad3494de4e1571
 open-opened-name = געעפנט { $name }
 # en: f917dee4211bd4af58db8efec79e354e1ffb4912
-open-that-file-is-not-words = Tiny Little Office קען נישט לייענען די פייל.
+open-that-file-is-not-words = קליין אפיסל קען נישט לייענען די פייל.
 # en: 1d08903947cc83b648f8ad96b1e23466a2dbed11
 open-that-file-is-too-large = די פייל איז צו גרויס.
 # en: 8f432852569edbf7610713a6554e7a61396327d5
