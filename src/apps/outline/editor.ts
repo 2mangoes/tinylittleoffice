@@ -922,7 +922,7 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
   private statusChip(at: number, it: Item) {
     if (!it.status) return nothing;
     const s = this.statuses.find((x) => x.name === it.status) ?? { name: it.status, color: STATUS_COLORS.gray };
-    return html`<button type="button" class="ol-status to-chip solid" style="--chip:${s.color}" aria-label=${t('Status {status}: tap for the next', { status: s.name })} title=${t('Status')} @mousedown=${(e: Event) => e.preventDefault()} @click=${() => this.cycleStatus(at)}>${s.name}</button>`;
+    return html`<button type="button" class="ol-status to-chip tint" style="--chip:${s.color}" aria-label=${t('Status {status}: tap for the next', { status: s.name })} title=${t('Status')} @mousedown=${(e: Event) => e.preventDefault()} @click=${() => this.cycleStatus(at)}>${s.name}</button>`;
   }
   /**
    * A task's box, drawn in the row (the words' own marker is hidden in a row, style.css, so without this a task showed
@@ -1044,8 +1044,8 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
         ${draft.map(
           (s, i) => html`<div class="ol-statuses-row" role="listitem">
             <input type="text" .value=${s.name} aria-label=${t('Name')} autocomplete="off" spellcheck="false" @input=${(e: Event) => set(i, { name: (e.target as HTMLInputElement).value })} />
-            <to-menu class="ol-color-menu" .label=${COLOR_NAMES[s.word]()} caret .items=${colors.map((w) => ({ label: COLOR_NAMES[w](), swatch: STATUS_COLORS[w], checked: w === s.word, does: () => set(i, { word: w }) }))}></to-menu>
-            <span class="ol-status to-chip solid" style="--chip:${STATUS_COLORS[s.word] ?? STATUS_COLORS.gray}" aria-hidden="true">${s.name || '…'}</span>
+            <to-menu class="ol-color-menu" icon-only caret .swatch=${STATUS_COLORS[s.word]} .label=${COLOR_NAMES[s.word]()} .items=${colors.map((w) => ({ label: COLOR_NAMES[w](), swatch: STATUS_COLORS[w], checked: w === s.word, does: () => set(i, { word: w }) }))}></to-menu>
+            <span class="ol-status to-chip tint" style="--chip:${STATUS_COLORS[s.word] ?? STATUS_COLORS.gray}" aria-hidden="true">${s.name || '…'}</span>
             ${tool({ label: t('Remove'), icon: UI.close, does: () => (this.statusDraft = draft.filter((_, k) => k !== i)) })}
           </div>`,
         )}
@@ -1247,7 +1247,7 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
         const s = st.find((x) => x.name === it.status);
         return html`<tr>
           <td><button type="button" class="ol-agenda-item" @click=${() => this.goTo(it.at)}>${b.done !== undefined ? html`<span class="ol-task" role="checkbox" aria-checked=${String(!!b.done)} aria-hidden="true">${b.done ? icon(UI.check, 12) : nothing}</span>` : nothing}${plainText(it.runs).trim() || t('Untitled')}</button></td>
-          <td>${it.status ? html`<span class="ol-status to-chip solid" style="--chip:${s?.color ?? STATUS_COLORS.gray}">${it.status}</span>` : nothing}</td>
+          <td>${it.status ? html`<span class="ol-status to-chip tint" style="--chip:${s?.color ?? STATUS_COLORS.gray}">${it.status}</span>` : nothing}</td>
           <td>${it.due ? this.dayWords(it.due) : nothing}</td>
         </tr>`;
       })}</tbody>
@@ -1265,7 +1265,7 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
       .filter((g) => g.items.length)
       .map(
         (g) => html`<section class="ol-by-status-group">
-          <h3><span class="ol-status to-chip solid" style="--chip:${g.color}">${g.name}</span> <small>${g.items.length}</small></h3>
+          <h3><span class="ol-status to-chip tint" style="--chip:${g.color}">${g.name}</span> <small>${g.items.length}</small></h3>
           <ul>${g.items.map((it) => html`<li><button type="button" class="ol-agenda-item" @click=${() => this.goTo(it.at)}>${plainText(it.runs).trim() || t('Untitled')}</button>${it.due ? html`<small class="ol-by-status-due">${this.dayWords(it.due)}</small>` : nothing}</li>`)}</ul>
         </section>`,
       )}</div>`;

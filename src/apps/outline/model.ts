@@ -94,7 +94,7 @@ export interface Status {
   word: string;
 }
 /** The colors a status may name (the Calendar's words, with yellow and gray); an unknown word is gray. */
-export const STATUS_COLORS: Record<string, string> = { red: '#b3261e', orange: '#d55e00', yellow: '#a16207', green: '#009e73', blue: '#0072b2', purple: '#a05ca8', indigo: '#4f46e5', gray: '#6b7280' };
+export const STATUS_COLORS: Record<string, string> = { red: '#b3261e', orange: '#d55e00', yellow: '#eab308', green: '#009e73', blue: '#0072b2', purple: '#a05ca8', indigo: '#4f46e5', gray: '#6b7280' };
 /** What Insert ▾'s Statuses writes when the document has none. */
 export const DEFAULT_STATUSES = 'TODO=red, DOING=yellow, DONE=green';
 export function statusesOf(doc: Doc): Status[] {

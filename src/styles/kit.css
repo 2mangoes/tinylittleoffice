@@ -230,7 +230,8 @@
   }
 
   /* ---- a chip: a few words in a pill beside a thing's words (an outline's line name, its status, its due day). A button
-     where a tap does something. accent: the site's; quiet: the surface's; solid: its own colour (--chip), white words. ---- */
+     where a tap does something. accent: the site's; quiet: the surface's; tint: its own colour (--chip) as a wash, the
+     words in a dark mix of it, so a light colour (a yellow) reads as itself and stays legible. ---- */
   .to-chip {
     flex-shrink: 0;
     align-self: center;
@@ -255,12 +256,12 @@
     background: var(--to-surface-2);
     color: var(--to-ink-2);
   }
-  .to-chip.solid {
+  .to-chip.tint {
     font-size: 0.6875rem;
     font-weight: 600;
     letter-spacing: 0.02em;
-    background: var(--chip, var(--to-accent));
-    color: var(--to-on-accent);
+    background: color-mix(in oklab, var(--chip, var(--to-accent)) 20%, var(--to-surface));
+    color: color-mix(in oklab, var(--chip, var(--to-accent)) 70%, var(--to-ink));
   }
   button.to-chip {
     cursor: pointer;

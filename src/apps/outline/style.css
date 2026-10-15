@@ -25,6 +25,7 @@
   .ol-row {
     position: relative;
     display: flex;
+    flex-wrap: wrap;
     align-items: flex-start;
     min-height: var(--ol-row);
     padding-left: calc(var(--d, 0) * var(--ol-step));
@@ -161,8 +162,10 @@
   .ol-status {
     margin: 0 0.25rem 0 0.125rem;
   }
+  /* The due day sits at the row's end; where the words would be left less than eight ems (a phone), it goes to a second
+     line, still at the end, and the words keep their line. */
   .ol-due {
-    margin: 0 0.125rem 0 0.25rem;
+    margin: 0 0.125rem 0 auto;
   }
   .ol-due-in {
     align-self: center;
@@ -280,9 +283,10 @@
   }
 
   /* The words: the row's editor, its item drawn bare (the bullet is the row's). */
+  /* The words take what the chips leave, six ems at the least: on a narrow row the due day wraps to a second line (above), the words keep theirs. */
   .ol-row to-text {
-    flex: 1 1 auto;
-    min-width: 0;
+    flex: 1 1 0;
+    min-width: 6em;
     align-self: center;
   }
   .ol-row to-text .tx {
@@ -297,6 +301,12 @@
   }
   .ol-row to-text .tx li::before {
     content: none;
+  }
+  /* A task's words: the row draws the box (.ol-task) and is its target, so the words keep neither the marker's room nor
+     its touch padding (text.css gives a task item both under a finger). */
+  .ol-row to-text .tx li[data-done] {
+    padding-left: 0;
+    min-height: 0;
   }
   .ol-row to-text .tx h1,
   .ol-row to-text .tx h2,
@@ -348,7 +358,10 @@
     margin-right: 0.375rem;
     color: var(--to-ink-3);
   }
-  .ol-kind:focus-visible,
+  .ol-kind:focus-visible {
+    outline: 0.125rem solid var(--to-accent);
+    outline-offset: 1px;
+  }
   /* The space under the last item: a tap there starts the next one. */
   .ol-below {
     height: 2.75rem;
