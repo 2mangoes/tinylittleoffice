@@ -669,7 +669,7 @@ export function diagramPage(doc: Doc, upTo = Infinity, thumb = false): Page {
   const d = layout(doc);
   // Presented: the first `upTo` steps, which the layout may group (a lane with its first step); else a shape a step.
   const shown = d.steps ? (upTo >= d.steps.length ? Infinity : (d.steps[Math.floor(upTo) - 1] ?? 0)) : upTo;
-  const page = { ...shapesPage(d.shapes, d.w, d.h, shown), alt: doc.head.alt || describeDrawing(d.shapes) || t('An empty diagram') };
+  const page = { ...shapesPage(d.shapes, d.w, d.h, shown), alt: doc.head.alt || describeDrawing(d.shapes) || t('diagram-empty-diagram') };
   return thumb && d.w > 2 * d.h ? cropPage(page, Math.round((d.w - 2 * d.h) / 2), 0, 2 * d.h, d.h) : page;
 }
 

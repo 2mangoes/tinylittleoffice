@@ -171,14 +171,14 @@ export class ToDrawer extends LitElement {
 
   private async togglePrivate(e: Event) {
     const box = e.target as HTMLInputElement;
-    if (keeping() && !confirm(t('Remove all files and settings from this browser?'))) {
+    if (keeping() && !confirm(t('drawer-remove-all-files-and-settings'))) {
       // The browser flipped the switch before the question was asked: Cancel puts it back.
       box.checked = true;
       this.requestUpdate();
       return;
     }
     await setPrivate(keeping());
-    toast(keeping() ? t('Saving in this browser') : t('Nothing saved in this browser'));
+    toast(keeping() ? t('drawer-saving-in-this-browser') : t('drawer-nothing-saved-in-this-browser'));
   }
 
   /**
@@ -221,70 +221,70 @@ export class ToDrawer extends LitElement {
     const templates = all.flatMap((a) => (arrivedTemplates(a) ?? []).filter((tpl) => has(tpl.name, tpl.blurb, a.name)).map((tpl) => ({ a, tpl })));
     const docs = kept.filter((k) => has(k.title)).flatMap((k) => all.filter((a) => a.id === k.app).map((a) => ({ a, k })));
     const cmds = this.offered.filter((o) => has(labelOf(o.cmd, o.c)));
-    if (!found.length && !templates.length && !docs.length && !cmds.length) return html`<p class="to-hint">${t('Nothing by that name')}</p>`;
+    if (!found.length && !templates.length && !docs.length && !cmds.length) return html`<p class="to-hint">${t('drawer-nothing-by-that-name')}</p>`;
     const group = (heading: string, rows: TemplateResult[]) => (rows.length ? html`<h3 class="to-drawer-head3">${heading}</h3>${rows}` : nothing);
     const row = (href: string, ico: Parameters<typeof icon>[0], name: string, sub = '', preview = false) =>
       html`<a class="to-found" href=${href} @click=${() => this.close()}>${preview ? html`<to-preview hash=${href}></to-preview>` : icon(ico, 20)}<span class="to-found-words"><span>${name}</span>${sub ? html`<small>${sub}</small>` : nothing}</span></a>`;
     const command = (o: Offer) =>
       html`<button type="button" class="to-found to-found-cmd" ?disabled=${!!o.cmd.disabled?.(o.c as never)} aria-keyshortcuts=${keysAria(o.cmd.keys)} @click=${() => this.choose(o)}>${o.cmd.icon ? icon(o.cmd.icon, 20) : html`<span class="to-found-noicon"></span>`}<span class="to-found-words"><span>${labelOf(o.cmd, o.c)}</span></span>${keysKbd(o.cmd.keys)}</button>`;
     return html`${group(
-      t('Apps'),
+      t('drawer-apps'),
       found.map((a) => row(routeHash(a.id), a.icon, a.name)),
     )}
       ${group(
-        t('Documents'),
-        docs.map(({ a, k }) => row(k.hash, a.icon, k.title || t('Untitled'), a.name, true)),
+        t('drawer-documents'),
+        docs.map(({ a, k }) => row(k.hash, a.icon, k.title || t('outline-untitled'), a.name, true)),
       )}
       ${group(
-        t('Templates'),
+        t('home-templates'),
         templates.map(({ a, tpl }) => row(templateHash(a, tpl), a.icon, tpl.name, a.name)),
       )}
-      ${group(t('Commands'), cmds.map(command))}`;
+      ${group(t('drawer-commands'), cmds.map(command))}`;
   }
 
   render() {
     const want = this.find.trim().toLowerCase();
     const kept = library();
-    const placeholder = kept.length ? t('Find app, doc, template, or command') : t('Find app, template, or command');
+    const placeholder = kept.length ? t('drawer-find-app-doc-template-or') : t('drawer-find-app-template-or-command');
     const chosen = chosenLanguage() ?? '';
-    return html`<dialog class="to-drawer" aria-label=${t('Tiny Little Office')} @close=${this.onClose} @toggle=${{ handleEvent: this.onToggle, capture: true }} @click=${(e: Event) => e.target === this.dialog && this.close()}>
+    return html`<dialog class="to-drawer" aria-label=${t('drawer-tiny-little-office')} @close=${this.onClose} @toggle=${{ handleEvent: this.onToggle, capture: true }} @click=${(e: Event) => e.target === this.dialog && this.close()}>
       <div class="to-drawer-inner">
         <!-- The head is the language picker, then (away from home) the mark as the way home beside Close (Paul, 2026-10-12); the name is not said again here (2026-10-10). -->
         <header class="to-drawer-head">
-          <label class="to-field to-drawer-lang" title=${t('Language')}>
-            <select aria-label=${t('Language')} @change=${(e: Event) => void setLanguage((e.target as HTMLSelectElement).value || null)}>
-              <option value="" ?selected=${!chosen}>${t('Default: {name}', { name: languageName(browserLanguage()) })}</option>
+          <label class="to-field to-drawer-lang" title=${t('drawer-language')}>
+            <select aria-label=${t('drawer-language')} @change=${(e: Event) => void setLanguage((e.target as HTMLSelectElement).value || null)}>
+              <option value="" ?selected=${!chosen}>${t('drawer-default-name', { name: languageName(browserLanguage()) })}</option>
               ${languages().map((c) => html`<option value=${c} ?selected=${c === chosen}>${languageName(c)}</option>`)}
             </select>
           </label>
-          ${this.def ? html`<a class="to-btn to-tool to-drawer-home" href="#/" aria-label=${t('Home')} title=${t('Home')} @click=${() => this.close()}>${unsafeSVG(mark(20))}</a>` : nothing}
-          <button type="button" class="to-btn to-tool" aria-label=${t('Close')} title=${t('Close')} @click=${() => this.close()}>${icon(UI.close)}</button>
+          ${this.def ? html`<a class="to-btn to-tool to-drawer-home" href="#/" aria-label=${t('looks-home')} title=${t('looks-home')} @click=${() => this.close()}>${unsafeSVG(mark(20))}</a>` : nothing}
+          <button type="button" class="to-btn to-tool" aria-label=${t('drawer-close')} title=${t('drawer-close')} @click=${() => this.close()}>${icon(UI.close)}</button>
         </header>
         <section class="to-drawer-section to-drawer-manual">
-          <a class="to-btn to-drawer-whatis" href=${manualHash()} @click=${() => this.close()}>${icon(UI.help, 18)}<span>${t('What is this?')}</span></a>
+          <a class="to-btn to-drawer-whatis" href=${manualHash()} @click=${() => this.close()}>${icon(UI.help, 18)}<span>${t('drawer-what-is-this')}</span></a>
         </section>
         <section class="to-drawer-section to-drawer-save">
           <label class="to-switch">
             <input type="checkbox" role="switch" .checked=${keeping()} @change=${(e: Event) => void this.togglePrivate(e)} />
-            <span class="to-switch-words"><b>${t('Save in browser')}</b><small>${keeping() ? t('Turn off to remove all files and settings.') : t('Turn on to save files in your browser.')}</small></span>
+            <span class="to-switch-words"><b>${t('drawer-save-in-browser')}</b><small>${keeping() ? t('drawer-turn-off-to-remove-all') : t('drawer-turn-on-to-save-files')}</small></span>
           </label>
         </section>
         <!-- The size of everything: the eye and the stepper, no words (Paul, 2026-10-12); its name is the screen reader's. -->
-        <div class="to-field to-size" role="group" aria-label=${t('Size of everything')}>${icon(UI.view, 18)}<div class="to-size-step">
+        <div class="to-field to-size" role="group" aria-label=${t('drawer-size-of-everything')}>${icon(UI.view, 18)}<div class="to-size-step">
             ${this.sizeButton(SMALLER, 'to-size-less', icon(UI.minus, 16))}${this.sizeButton(NORMAL_SIZE, 'to-size-now', `${Math.round(size() * 100)}%`)}${this.sizeButton(LARGER, 'to-size-more', icon(UI.plus, 16))}
           </div>
         </div>
         ${
           this.open
-            ? html`<nav class="to-drawer-apps" aria-label=${t('Apps')}>
+            ? html`<nav class="to-drawer-apps" aria-label=${t('drawer-apps')}>
                 <input class="to-find" type="search" placeholder=${placeholder} aria-label=${placeholder} autocomplete="off" .value=${this.find} @input=${(e: Event) => (this.find = (e.target as HTMLInputElement).value)} @keydown=${(e: KeyboardEvent) => e.key === 'Enter' && !e.isComposing && (e.preventDefault(), this.querySelector<HTMLElement>('.to-drawer-apps .to-found')?.click())} />
                 ${want ? this.renderFound(want, kept) : nothing}
               </nav>
               ${
                 this.downloads
-                  ? html`<section class="to-drawer-section to-drawer-doc" aria-label=${t('This document')}>
-                    <h3 class="to-drawer-head3">${t('This document')}</h3>
-                    ${this.def ? html`<a class="to-btn to-drawer-new" href=${routeHash(this.def.id)} @click=${() => (startEditing(), this.close())}>${icon(this.def.icon, 18)}<span>${t('New {noun}', { noun: this.def.noun })}</span></a>` : nothing}
+                  ? html`<section class="to-drawer-section to-drawer-doc" aria-label=${t('common-this-document')}>
+                    <h3 class="to-drawer-head3">${t('common-this-document')}</h3>
+                    ${this.def ? html`<a class="to-btn to-drawer-new" href=${routeHash(this.def.id)} @click=${() => (startEditing(), this.close())}>${icon(this.def.icon, 18)}<span>${t('shell-new-noun', { noun: this.def.noun })}</span></a>` : nothing}
                     <button type="button" class="to-btn to-drawer-share" aria-keyshortcuts=${keysAria(SHARE.keys)} @click=${() => this.handOver(() => this.dispatchEvent(new CustomEvent('to-share-open', { bubbles: true })))}>${icon(SHARE.icon!, 18)}<span>${labelOf(SHARE)}</span>${keysKbd(SHARE.keys)}</button>
                     <to-menu class="to-drawer-download" .label=${labelOf(DOWNLOAD)} .icon=${DOWNLOAD.icon} .keys=${DOWNLOAD.keys} .items=${this.downloads}></to-menu>
                     ${this.renderPage()}
@@ -293,7 +293,7 @@ export class ToDrawer extends LitElement {
                   : nothing
               }
               <section class="to-drawer-section to-drawer-prefs">
-                <label class="to-field"><span class="to-field-words">${icon(theme() === 'dark' ? UI.moon : theme() === 'light' ? UI.sun : UI.auto, 18)}<span>${t('Theme')}</span></span>
+                <label class="to-field"><span class="to-field-words">${icon(theme() === 'dark' ? UI.moon : theme() === 'light' ? UI.sun : UI.auto, 18)}<span>${t('drawer-theme')}</span></span>
                   <select @change=${(e: Event) => {
                     setTheme((e.target as HTMLSelectElement).value as Theme);
                     this.requestUpdate();
@@ -303,29 +303,29 @@ export class ToDrawer extends LitElement {
                 </label>
                 ${
                   canInstall()
-                    ? html`<button type="button" class="to-btn to-install" @click=${() => void install()}>${icon(UI.download, 18)}<span>${t('Add to home screen')}</span></button>`
+                    ? html`<button type="button" class="to-btn to-install" @click=${() => void install()}>${icon(UI.download, 18)}<span>${t('drawer-add-to-home-screen')}</span></button>`
                     : installByHand()
-                      ? html`<p class="to-hint to-install-how">${t('To add Tiny Little Office to the home screen: Share, then Add to Home Screen.')}</p>`
+                      ? html`<p class="to-hint to-install-how">${t('drawer-to-add-tiny-little-office')}</p>`
                       : nothing
                 }
-                <button type="button" class="to-btn to-drawer-about" @click=${() => this.handOver(() => this.about())}>${icon(UI.info, 18)}<span>${t('About')}</span></button>
+                <button type="button" class="to-btn to-drawer-about" @click=${() => this.handOver(() => this.about())}>${icon(UI.info, 18)}<span>${t('drawer-about')}</span></button>
               </section>`
             : nothing
         }
       </div>
     </dialog>
-    <to-dialog class="to-about-dialog" heading=${t('About Tiny Little Office')} .body=${html`<p>
-        ${linked(t('Tiny Little Office is an experiment by {aboard}, a digital and AI strategy and software development firm in New York City.'), { aboard: html`<a href=${origin('maker')} target="_blank" rel="noopener" data-to-chrome>Aboard</a>` })}
-        ${linked(t('To reach out with questions, {email}.'), { email: html`<a href=${MAIL} data-to-chrome>${t('email us')}</a>` })}
-        ${linked(t('If you find bugs, please file them in our {github}.'), { github: html`<a href=${`${repoUrl()}/issues`} target="_blank" rel="noopener" data-to-chrome>${t('GitHub repository')}</a>` })}
+    <to-dialog class="to-about-dialog" heading=${t('drawer-about-tiny-little-office')} .body=${html`<p>
+        ${linked(t('drawer-tiny-little-office-is-experiment'), { aboard: html`<a href=${origin('maker')} target="_blank" rel="noopener" data-to-chrome>Aboard</a>` })}
+        ${linked(t('drawer-to-reach-out-with-questions'), { email: html`<a href=${MAIL} data-to-chrome>${t('drawer-email-us')}</a>` })}
+        ${linked(t('drawer-if-you-find-bugs-please'), { github: html`<a href=${`${repoUrl()}/issues`} target="_blank" rel="noopener" data-to-chrome>${t('drawer-github-repository')}</a>` })}
       </p>
       <blockquote class="to-about-quote">
-        <p>${t('All of these notes, these drawings, and these sentences written with a marker fade over time. Only the ephemeral lasts.')}</p>
-        <footer>${linked(t('Eugène Ionesco, {book}'), { book: html`<cite>${t('Discoveries')}</cite>` })}</footer>
+        <p>${t('drawer-all-of-these-notes-these')}</p>
+        <footer>${linked(t('drawer-eugene-ionesco-book'), { book: html`<cite>${t('drawer-discoveries')}</cite>` })}</footer>
       </blockquote>
       ${
         this.version
-          ? html`<p class="to-hint to-about-version"><a href=${commitUrl(this.version.commit)} target="_blank" rel="noopener">${t('Running commit {commit}', { commit: this.version.commit.slice(0, 7) })}</a>${this.version.tag ? ` (${this.version.tag})` : ''}</p>`
+          ? html`<p class="to-hint to-about-version"><a href=${commitUrl(this.version.commit)} target="_blank" rel="noopener">${t('leave-running-commit-commit', { commit: this.version.commit.slice(0, 7) })}</a>${this.version.tag ? ` (${this.version.tag})` : ''}</p>`
           : nothing
       }`}></to-dialog>`;
   }

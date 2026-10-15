@@ -71,7 +71,7 @@ export function tablePage(v: SheetView, upTo = Infinity): Page {
   const rows = lines(v);
   const big = v.big;
   const top = big ? 96 : 24;
-  if (!rows.length) return { w: 480, h: 120, svg: text(240, 66, t('Empty sheet'), { px: 16, fill: MUTED, anchor: 'middle' }), alt: t('Empty sheet') };
+  if (!rows.length) return { w: 480, h: 120, svg: text(240, 66, t('sheet-empty-sheet'), { px: 16, fill: MUTED, anchor: 'middle' }), alt: t('sheet-empty-sheet') };
   const PX = 15;
   const H = 30;
   const widths = Array.from({ length: rows[0].length }, (_, c) => Math.min(240, Math.max(64, ...rows.map((row) => textWidth(row[c], PX) + 24))));
@@ -153,7 +153,7 @@ export function gridPage(v: SheetView, thumb = false): Page {
   grid += `M${NUM} 0V${h}`;
   for (const cw of widths) grid += `M${(x += cw)} 0V${h}`;
   svg += `<path d="${grid}" stroke="${LINE}" stroke-width="1" fill="none"/><rect x="0.5" y="0.5" width="${w - 1}" height="${h - 1}" fill="none" stroke="${LINE}"/>`;
-  return { w, h, svg, alt: rowsShown.length ? rowsShown.map((row) => row.filter(Boolean).join(', ')).join('; ') : t('Empty sheet') };
+  return { w, h, svg, alt: rowsShown.length ? rowsShown.map((row) => row.filter(Boolean).join(', ')).join('; ') : t('sheet-empty-sheet') };
 }
 
 /** A sheet document's pages: the table (its headline above it) and its chart, the chart first when it is drawn above the table; drawn small, the grid alone (or the chart), as a thumbnail the grid's corner; as a card, the chart where there is one, else the table. */

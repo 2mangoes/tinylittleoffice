@@ -27,17 +27,17 @@ function tripText(doc: Doc): TextNode[] {
 export default defineApp({
   id: 'trip',
   get name() {
-    return t('Trip Planner');
+    return t('outline-trip-planner');
   },
   get noun() {
-    return t('trip');
+    return t('trip-trip');
   },
   get group() {
-    return t('Plan');
+    return t('common-plan');
   },
   icon: MapPinned,
   get blurb() {
-    return t('A route on a map: stops in order, each with a note, and how far between them.');
+    return t('trip-route-on-map-stops-in');
   },
   blank: () => '',
   templates: () => import('./templates.ts').then((m) => m.templates()),
@@ -50,9 +50,9 @@ export default defineApp({
   // Presented on a slide, a stop a step: the map stays fitted to them all, the route drawn as far as it has come.
   steps: (doc) => readTrip(parse(doc)).stops.length,
   exports: [
-    { ext: 'gpx', label: () => t('GPX route'), mime: 'application/gpx+xml', shows: null, build: (doc) => utf8(tripToGpx(parse(doc))) },
-    { ext: 'geojson', label: () => t('GeoJSON'), mime: 'application/geo+json', shows: null, build: (doc) => utf8(tripToGeoJson(parse(doc))) },
+    { ext: 'gpx', label: () => t('trip-gpx-route'), mime: 'application/gpx+xml', shows: null, build: (doc) => utf8(tripToGpx(parse(doc))) },
+    { ext: 'geojson', label: () => t('trip-geojson'), mime: 'application/geo+json', shows: null, build: (doc) => utf8(tripToGeoJson(parse(doc))) },
   ],
   commands: () => import('./commands.ts'),
-  handoffs: [{ to: 'cal', label: () => t('Put the stops on a calendar, a day each'), convert: (doc) => tripToCal(doc) }],
+  handoffs: [{ to: 'cal', label: () => t('trip-put-stops-on-calendar-day'), convert: (doc) => tripToCal(doc) }],
 });

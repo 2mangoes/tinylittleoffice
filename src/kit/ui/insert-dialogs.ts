@@ -58,7 +58,7 @@ function ask<T>(heading: string, cls: string, body: (f: Frame<T>) => TemplateRes
 function urlRow(o: { label: string; placeholder: string; value: string; ok: boolean; input: (v: string) => void }): TemplateResult {
   return html`<div class="to-ask-row">
     <input class="to-ask-url" type="url" inputmode="url" aria-label=${o.label} placeholder=${o.placeholder} .value=${o.value} autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="done" @input=${(e: Event) => o.input((e.target as HTMLInputElement).value)} />
-    <button type="submit" class="to-btn primary to-ask-ok" ?disabled=${!o.ok}>${t('OK')}</button>
+    <button type="submit" class="to-btn primary to-ask-ok" ?disabled=${!o.ok}>${t('write-ok')}</button>
   </div>`;
 }
 const form = (cls: string, submit: () => void, inner: TemplateResult) => html`<form class="to-ask ${cls}" novalidate @submit=${(e: Event) => (e.preventDefault(), submit())}>${inner}</form>`;
@@ -97,7 +97,7 @@ export function askDocLink(): Promise<Block | null> {
   let fence: Block | null = null;
   let state: 'none' | 'opening' | 'ok' | 'bad' = 'none';
   let asked = 0;
-  return ask<Block>(t('Tiny Little Office Doc'), 'to-ask-doc', (f) => {
+  return ask<Block>(t('insert-tiny-little-office-doc'), 'to-ask-doc', (f) => {
     const typed = (v: string) => {
       url = v;
       const n = ++asked;
@@ -119,11 +119,11 @@ export function askDocLink(): Promise<Block | null> {
     const b = fence as Block | null;
     const def = b?.k === 'fence' ? lookup.appOf(b.lang) : undefined;
     const page = b?.k === 'fence' && def ? def.view(b.body, { small: true, still: true })[0] : null;
-    const name = b?.k === 'fence' ? def?.title(b.body) || (b.lang === LOCKED_LANG ? def!.name : t('Untitled {noun}', { noun: def?.noun ?? b.lang })) : '';
+    const name = b?.k === 'fence' ? def?.title(b.body) || (b.lang === LOCKED_LANG ? def!.name : t('shell-untitled-noun', { noun: def?.noun ?? b.lang })) : '';
     return form(
       'to-ask-doc-form',
       () => b && f.finish(b),
-      html`${urlRow({ label: t('A Tiny Little Office link'), placeholder: `${origin('site')}/#/v1/…`, value: url, ok: state === 'ok', input: typed })}
+      html`${urlRow({ label: t('insert-tiny-little-office-link'), placeholder: `${origin('site')}/#/v1/…`, value: url, ok: state === 'ok', input: typed })}
         <div class="to-ask-preview" aria-live="polite">
           ${
             state === 'ok' && b?.k === 'fence'
@@ -132,10 +132,10 @@ export function askDocLink(): Promise<Block | null> {
                 <figcaption><b>${name}</b><small>${def?.name ?? b.lang}</small></figcaption>
               </figure>`
               : state === 'opening'
-                ? html`<p class="to-hint">${t('Opening the short link…')}</p>`
+                ? html`<p class="to-hint">${t('insert-opening-short-link')}</p>`
                 : state === 'bad'
-                  ? html`<p class="to-hint to-ask-broken">${t('This is not a Tiny Little Office link, or it has expired.')}</p>`
-                  : html`<p class="to-hint">${t('Paste the link of another Tiny Little Office document, long or short: its first page shows here.')}</p>`
+                  ? html`<p class="to-hint to-ask-broken">${t('insert-this-is-not-tiny-little')}</p>`
+                  : html`<p class="to-hint">${t('insert-paste-link-of-another-tiny')}</p>`
           }
         </div>`,
     );

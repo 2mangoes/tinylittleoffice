@@ -210,8 +210,8 @@ export function subPage(doc: Doc, s: Slide, upTo?: number, open = false, still =
     return {
       w: 480,
       h: 40 + lines.length * 22,
-      svg: line(24, 28, t('{app} document', { app: b.lang }), { px: 13, fill: MUTED }) + lines.map((l, i) => line(24, 56 + i * 22, l, { px: 14 })).join(''),
-      alt: t('{app} document', { app: b.lang }),
+      svg: line(24, 28, t('editor-app-document', { app: b.lang }), { px: 13, fill: MUTED }) + lines.map((l, i) => line(24, 56 + i * 22, l, { px: 14 })).join(''),
+      alt: t('editor-app-document', { app: b.lang }),
     };
   }
   if (b.k === 'table') {
@@ -220,7 +220,7 @@ export function subPage(doc: Doc, s: Slide, upTo?: number, open = false, still =
     const body = write({ head: chart ? { chart } : {}, blocks: [{ k: 'table', cols: b.cols, rows: b.rows }] });
     if (sheet) return sheet.view(body, { small: true, ...(still ? { still } : {}) })[0];
     const rows = [b.cols.map((c) => c.name), ...b.rows];
-    return { w: 480, h: 24 + rows.length * 26, svg: rows.map((row, i) => line(24, 20 + i * 26, row.join('   '), { px: 14, bold: i === 0 })).join(''), alt: t('Table') };
+    return { w: 480, h: 24 + rows.length * 26, svg: rows.map((row, i) => line(24, 20 + i * 26, row.join('   '), { px: 14, bold: i === 0 })).join(''), alt: t('bar-table') };
   }
   return null;
 }
@@ -482,7 +482,7 @@ export function slidePage(doc: Doc, s: Slide, look: Look, shown = Infinity, o: S
         const px = 15 * (W / SW);
         const h = L.sub.h - px * 1.8;
         svg += `<svg x="${r(L.sub.x)}" y="${r(L.sub.y)}" width="${r(L.sub.w)}" height="${r(h)}" viewBox="0 0 ${sub.w} ${r(h / wide)}" preserveAspectRatio="xMinYMin meet"><rect width="${sub.w}" height="${r(h / wide)}" fill="#fff"/>${sub.svg}</svg>`;
-        svg += `${linkOpen(more, ' class="see-more"')}${line(L.sub.x + L.sub.w, L.sub.y + L.sub.h - px * 0.3, `${t('See more')} →`, { px, fill: link, anchor: 'end' })}</a>`;
+        svg += `${linkOpen(more, ' class="see-more"')}${line(L.sub.x + L.sub.w, L.sub.y + L.sub.h - px * 0.3, `${t('download-see-more')} →`, { px, fill: link, anchor: 'end' })}</a>`;
       }
     }
   }
@@ -715,7 +715,7 @@ export interface Geometry {
   how(two: boolean): string;
 }
 
-const pageName = (i: number, n: number) => (i === 0 ? t('Front cover') : i === n - 1 ? t('Back cover') : t('Page {n}', { n: i + 1 }));
+const pageName = (i: number, n: number) => (i === 0 ? t('deck-front-cover') : i === n - 1 ? t('deck-back-cover') : t('deck-page-n', { n: i + 1 }));
 
 export const ZINE: Geometry = {
   count: 8,
@@ -732,7 +732,7 @@ export const ZINE: Geometry = {
               [8, 1],
               [6, 3],
             ],
-            { cut: [1, 0, 2], note: t('cut along the dashes · this half goes outside') },
+            { cut: [1, 0, 2], note: t('deck-cut-along-dashes-this-half') },
           ),
           side(
             p,
@@ -740,7 +740,7 @@ export const ZINE: Geometry = {
               [2, 7],
               [4, 5],
             ],
-            { cut: [1, 0, 2], note: t('print on the back, flipped on the long edge') },
+            { cut: [1, 0, 2], note: t('deck-print-on-back-flipped-on') },
           ),
         ]
       : [
@@ -750,13 +750,10 @@ export const ZINE: Geometry = {
               [5, 4, 3, 2],
               [6, 7, 8, 1],
             ],
-            { flip: [0], cut: [1, 1, 3], note: t('cut along the dashes · fold along the dots') },
+            { flip: [0], cut: [1, 1, 3], note: t('deck-cut-along-dashes-fold-along') },
           ),
         ],
-  how: (two) =>
-    two
-      ? t('Print it double-sided on letter paper, flipping on the long edge, at actual size. Cut along the dashes, lay the top half over the bottom half, and fold them together down the middle.')
-      : t('Print it on one side of letter paper, at actual size. Fold it in half the long way, then into quarters; cut the dashes in the middle; push the ends together and fold it into a book.'),
+  how: (two) => (two ? t('deck-print-it-double-sided-on') : t('deck-print-it-on-one-side')),
 };
 
 export const BOOKLET: Geometry = {
@@ -765,16 +762,16 @@ export const BOOKLET: Geometry = {
   size: () => ({ w: 528, h: 816 }),
   name: pageName,
   sheets: saddle,
-  how: () => t('Print it double-sided on letter paper, flipping on the short edge, at actual size. Stack the sheets in order, first on the outside, and fold them together down the middle.'),
+  how: () => t('deck-print-it-double-sided-on-letter-paper-flipping-on-short-edge-at-actual-size-stack-sheets-in-order-first-on-outside-and-fold-them-together-down-middle'),
 };
 
 export const BROCHURE: Geometry = {
   count: 6,
   size: () => ({ w: 352, h: 816 }),
-  name: (i) => [t('Front'), t('Inside left'), t('Inside middle'), t('Inside right'), t('Inside flap'), t('Back')][i] ?? t('Page {n}', { n: i + 1 }),
+  name: (i) => [t('deck-front'), t('deck-inside-left'), t('deck-inside-middle'), t('deck-inside-right'), t('deck-inside-flap'), t('deck-back')][i] ?? t('deck-page-n', { n: i + 1 }),
   // Outside: the flap that folds in, the back, the front. Inside: the three panels, left to right.
   sheets: (p) => [side(p, [[5, 6, 1]]), side(p, [[2, 3, 4]])],
-  how: () => t('Print it double-sided on letter paper, flipping on the short edge, at actual size. Fold the right third in, then the left third over it: the front is on top.'),
+  how: () => t('deck-print-it-double-sided-on-letter-paper-flipping-on-short-edge-at-actual-size-fold-right-third-in-then-left-third-over-it-front-is-on-top'),
 };
 
 export const COMIC: Geometry = {
@@ -789,10 +786,10 @@ export const COMIC: Geometry = {
 export const POSTER: Geometry = {
   count: 1,
   size: () => LETTER,
-  name: () => t('Poster'),
+  name: () => t('deck-poster'),
   page: (doc, s, look) => fitted(doc, { ...s, layout: s.layout || 't' }, look, LETTER.w, LETTER.h, { cover: true, loud: 2, max: 150, m: 64 }),
   sheets: (p) => p,
-  how: () => t('Print it on letter paper, at actual size.'),
+  how: () => t('deck-print-it-on-letter-paper'),
 };
 
 export const BADGES: Geometry = {
@@ -800,10 +797,10 @@ export const BADGES: Geometry = {
   grow: 48,
   by: 1,
   size: () => ({ w: 384, h: 288 }),
-  name: (i) => t('Badge {n}', { n: i + 1 }),
+  name: (i) => t('deck-badge-n', { n: i + 1 }),
   page: (doc, s, look) => fitted(doc, { ...s, layout: s.layout || 't' }, look, 384, 288, { cover: true, loud: 1.1, max: 22 }),
   sheets: (p) => tile(p, 2, 3),
-  how: () => t('Print it on letter paper, at actual size. Cut along the dashes: six badges a sheet.'),
+  how: () => t('deck-print-it-on-letter-paper-at-actual-size-cut-along-dashes-six-badges-sheet'),
 };
 
 const GEOMETRY: Record<Exclude<Format, ''>, Geometry> = { zine: ZINE, booklet: BOOKLET, brochure: BROCHURE, comic: COMIC, poster: POSTER, badges: BADGES };
@@ -893,9 +890,9 @@ export function closingPage(text: string, doc: Doc = parse(text), s: Settings = 
   let svg = look.themed ? rect(0, 0, SW, SH, T.paper) + (T.deco?.(SW, SH) ?? '') : '';
   svg += rect((SW - size) / 2 - 16, 40, size + 32, size + 32, '#ffffff', 'rx="16"');
   svg += `<svg x="${(SW - size) / 2}" y="56" width="${size}" height="${size}" viewBox="0 0 ${n} ${n}" shape-rendering="crispEdges">${code.replace(/^<svg[^>]*>|<\/svg>$/g, '')}</svg>`;
-  svg += line(SW / 2, 530, title ? t('Take this deck home: {title}', { title }) : t('Take this deck home'), { px: 24, bold: true, fill: T.ink, anchor: 'middle' });
-  svg += line(SW / 2, 566, t('Scan the code: the whole deck is in the link.'), { px: 16, fill: T.muted, anchor: 'middle' });
-  return { w: SW, h: SH, svg, alt: t('A QR code of this deck') };
+  svg += line(SW / 2, 530, title ? t('deck-take-this-deck-home-title', { title }) : t('deck-take-this-deck-home'), { px: 24, bold: true, fill: T.ink, anchor: 'middle' });
+  svg += line(SW / 2, 566, t('deck-scan-code-whole-deck-is'), { px: 16, fill: T.muted, anchor: 'middle' });
+  return { w: SW, h: SH, svg, alt: t('deck-a-qr-code-of-this-deck') };
 }
 
 /** The deck as shown and printed: every page in its format, then (for slides) the closing code. `still`: drawn where nothing can move (print, a picture, a thumbnail), so a document on a slide is too. */
@@ -991,7 +988,7 @@ export function deckToHtml(text: string, title: string, link = ''): string {
   const end = closingPage(text, doc, s);
   if (end) pages.push(end);
   const n = pages.length;
-  const name = (i: number) => (g ? g.name(i, n) : i === n - 1 && end ? t('A QR code of this deck') : t('Slide {n}', { n: i + 1 }));
+  const name = (i: number) => (g ? g.name(i, n) : i === n - 1 && end ? t('deck-a-qr-code-of-this-deck') : t('deck-slide-n', { n: i + 1 }));
   const tr = s.transition || 'fade';
   const lang = typeof document !== 'undefined' ? document.documentElement.lang || 'en' : 'en';
   return `<!doctype html>
@@ -1027,7 +1024,7 @@ footer{text-align:center;padding:0 12px 10px;font-size:13px}footer a{color:#a5b4
 <main id="pages" aria-live="polite">
 ${pages.map((p, i) => `<section${i ? '' : ' class="on"'} aria-label="${xml(name(i))}">${pageSvg(p, `role="img" aria-label="${xml(p.alt || name(i))}"`)}</section>`).join('\n')}
 </main>
-<nav aria-label="${xml(t('Pages'))}"><button id="back">${xml(t('Back'))}</button><span id="where"></span><button id="next">${xml(t('Next'))}</button></nav>${link ? `\n<footer><a href="${xml(link)}">${xml(t('Open in Tiny Little Office'))}</a></footer>` : ''}
+<nav aria-label="${xml(t('deck-pages'))}"><button id="back">${xml(t('deck-back'))}</button><span id="where"></span><button id="next">${xml(t('deck-next'))}</button></nav>${link ? `\n<footer><a href="${xml(link)}">${xml(t('download-open-in-tiny-little-office'))}</a></footer>` : ''}
 ${PLAYER}
 </body>
 </html>

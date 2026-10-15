@@ -60,59 +60,59 @@ type Icon = Command['icon'];
 export const TURN_STEP = 15;
 /** The tools in the bar, a key each. */
 export const TOOLS: { id: Tool; name: string; hint?: string; icon: Icon; key: string }[] = [
-  { id: 'select', name: 'Select', icon: MousePointer2, key: 'V' },
-  { id: 'r', name: 'Rectangle', icon: Square, key: 'R' },
-  { id: 'e', name: 'Ellipse', icon: Circle, key: 'E' },
-  { id: 'd', name: 'Diamond', icon: Diamond, key: 'D' },
-  { id: 'l', name: 'Line', icon: Minus, key: 'L' },
-  { id: 'a', name: 'Arrow', icon: MoveRight, key: 'A' },
-  { id: 't', name: 'Text', icon: Type, key: 'T' },
-  { id: 'k', name: 'Join two shapes', icon: Spline, key: 'K' },
-  { id: 'v', name: 'Pen', hint: 'Any shape, a tap for each corner', icon: PenTool, key: 'P' },
-  { id: 'f', name: 'Freehand', hint: 'Drag to draw a line or a shape', icon: Brush, key: 'F' },
+  { id: 'select', name: 'draw-select', icon: MousePointer2, key: 'V' },
+  { id: 'r', name: 'draw-rectangle', icon: Square, key: 'R' },
+  { id: 'e', name: 'draw-ellipse', icon: Circle, key: 'E' },
+  { id: 'd', name: 'draw-diamond', icon: Diamond, key: 'D' },
+  { id: 'l', name: 'draw-line', icon: Minus, key: 'L' },
+  { id: 'a', name: 'draw-arrow', icon: MoveRight, key: 'A' },
+  { id: 't', name: 'sheet-text', icon: Type, key: 'T' },
+  { id: 'k', name: 'draw-join-two-shapes', icon: Spline, key: 'K' },
+  { id: 'v', name: 'draw-pen', hint: 'draw-any-shape-tap-for-each', icon: PenTool, key: 'P' },
+  { id: 'f', name: 'draw-freehand', hint: 'draw-drag-to-draw-line-or', icon: Brush, key: 'F' },
 ];
 /** Every shape Insert ▾ can place, the bar's and the rest. */
 const SHAPES: { id: Kind; name: string }[] = [
-  { id: 'r', name: 'Rectangle' },
-  { id: 'o', name: 'Rounded box' },
-  { id: 'e', name: 'Ellipse' },
-  { id: 'd', name: 'Diamond' },
-  { id: 'h', name: 'Hexagon' },
-  { id: 'p', name: 'Parallelogram' },
-  { id: 'c', name: 'Cylinder' },
-  { id: 'n', name: 'Note' },
-  { id: 't', name: 'Text' },
+  { id: 'r', name: 'draw-rectangle' },
+  { id: 'o', name: 'draw-rounded-box' },
+  { id: 'e', name: 'draw-ellipse' },
+  { id: 'd', name: 'draw-diamond' },
+  { id: 'h', name: 'draw-hexagon' },
+  { id: 'p', name: 'draw-parallelogram' },
+  { id: 'c', name: 'draw-cylinder' },
+  { id: 'n', name: 'draw-note' },
+  { id: 't', name: 'sheet-text' },
 ];
 const INKS: { c: Color | ''; name: string; hex: string }[] = [
-  { c: '', name: 'Black', hex: '#18181b' },
-  { c: 'r', name: 'Red', hex: COLORS.r },
-  { c: 'o', name: 'Orange', hex: COLORS.o },
-  { c: 'g', name: 'Green', hex: COLORS.g },
-  { c: 'b', name: 'Blue', hex: COLORS.b },
-  { c: 'p', name: 'Purple', hex: COLORS.p },
+  { c: '', name: 'draw-black', hex: '#18181b' },
+  { c: 'r', name: 'draw-red', hex: COLORS.r },
+  { c: 'o', name: 'draw-orange', hex: COLORS.o },
+  { c: 'g', name: 'draw-green', hex: COLORS.g },
+  { c: 'b', name: 'draw-blue', hex: COLORS.b },
+  { c: 'p', name: 'draw-purple', hex: COLORS.p },
 ];
 const SIZES: { z: TextSize; name: string; letter: string }[] = [
-  { z: 1, name: 'Small text', letter: 'S' },
-  { z: 2, name: 'Medium text', letter: 'M' },
-  { z: 3, name: 'Large text', letter: 'L' },
-  { z: 4, name: 'Extra large text', letter: 'XL' },
+  { z: 1, name: 'draw-small-text', letter: 'draw-s' },
+  { z: 2, name: 'draw-medium-text', letter: 'draw-m' },
+  { z: 3, name: 'draw-large-text', letter: 'draw-l' },
+  { z: 4, name: 'draw-extra-large-text', letter: 'draw-xl' },
 ];
 /** A text's three alignments: the bar's one button shows the one it has and goes on to the next; Mod+Shift+L, E and R set each (the Word Processor's keys, and every word processor's). */
 export const ALIGNS: { al: Align | ''; name: string; icon: Icon; key: string }[] = [
-  { al: '', name: 'Align: left', icon: UI.alignLeft, key: 'L' },
-  { al: 'c', name: 'Align: center', icon: UI.alignCenter, key: 'E' },
-  { al: 'r', name: 'Align: right', icon: UI.alignRight, key: 'R' },
+  { al: '', name: 'draw-align-left', icon: UI.alignLeft, key: 'L' },
+  { al: 'c', name: 'draw-align-center', icon: UI.alignCenter, key: 'E' },
+  { al: 'r', name: 'draw-align-right', icon: UI.alignRight, key: 'R' },
 ];
 /** The pixel inks, by letter, named. */
 export const PIXEL_INKS: { k: string; name: string }[] = [
-  { k: 'a', name: 'Black' },
-  { k: 'b', name: 'Indigo' },
-  { k: 'c', name: 'Red' },
-  { k: 'd', name: 'Orange' },
-  { k: 'e', name: 'Yellow' },
-  { k: 'f', name: 'Green' },
-  { k: 'g', name: 'Sky' },
-  { k: 'h', name: 'Pink' },
+  { k: 'a', name: 'draw-black' },
+  { k: 'b', name: 'draw-indigo' },
+  { k: 'c', name: 'draw-red' },
+  { k: 'd', name: 'draw-orange' },
+  { k: 'e', name: 'draw-yellow' },
+  { k: 'f', name: 'draw-green' },
+  { k: 'g', name: 'draw-sky' },
+  { k: 'h', name: 'draw-pink' },
 ];
 
 /** The shape the context bar is for: the one whose words are typed, else the one in hand. */
@@ -138,14 +138,14 @@ const canvas = (d: Dr) => !d.view.grid;
 
 const STYLES: Command<Dr>[] = [
   ...[
-    { f: 0 as Fill, label: 'Solid line', icon: Minus },
-    { f: 1 as Fill, label: 'Dashed line', icon: GripHorizontal },
-    { f: 2 as Fill, label: 'Dotted line', icon: Ellipsis },
+    { f: 0 as Fill, label: 'draw-solid-line', icon: Minus },
+    { f: 1 as Fill, label: 'draw-dashed-line', icon: GripHorizontal },
+    { f: 2 as Fill, label: 'draw-dotted-line', icon: Ellipsis },
   ].map((x) => cmd(`line.${x.f}`, x.label, { icon: x.icon, where: ['context'], group: 'style', when: styleShown(true), pressed: (d) => sameFill(d, x.f), does: (d) => d.patchSel({ f: x.f }) })),
   ...[
-    { f: 0 as Fill, label: 'No fill', icon: Square },
-    { f: 1 as Fill, label: 'Gray fill', icon: Blend },
-    { f: 2 as Fill, label: 'Solid fill', icon: PaintBucket },
+    { f: 0 as Fill, label: 'draw-no-fill', icon: Square },
+    { f: 1 as Fill, label: 'draw-gray-fill', icon: Blend },
+    { f: 2 as Fill, label: 'draw-solid-fill', icon: PaintBucket },
   ].map((x) => cmd(`fill.${x.f}`, x.label, { icon: x.icon, where: ['context'], group: 'style', when: styleShown(false), pressed: (d) => sameFill(d, x.f), does: (d) => d.patchSel({ f: x.f }) })),
 ];
 const INK: Command<Dr>[] = INKS.map((ink) =>
@@ -190,9 +190,9 @@ export const ALIGN_KEYS: Command<Dr>[] = ALIGNS.map((x) =>
   }),
 );
 const ACT: Command<Dr>[] = [
-  cmd('left', 'Rotate left', { at: 'canvas', icon: RotateCcw, keys: '[', where: ['context'], group: 'act', when: (d) => shapeAct(d) && d.turnable, does: (d) => d.turnBy(-TURN_STEP) }),
-  cmd('right', 'Rotate right', { at: 'canvas', icon: RotateCw, keys: ']', where: ['context'], group: 'act', when: (d) => shapeAct(d) && d.turnable, does: (d) => d.turnBy(TURN_STEP) }),
-  cmd('words', (d) => (d && held(d)?.k === 'i' ? t('Change the icon') : t('Edit the words')), {
+  cmd('left', 'draw-rotate-left', { at: 'canvas', icon: RotateCcw, keys: '[', where: ['context'], group: 'act', when: (d) => shapeAct(d) && d.turnable, does: (d) => d.turnBy(-TURN_STEP) }),
+  cmd('right', 'draw-rotate-right', { at: 'canvas', icon: RotateCw, keys: ']', where: ['context'], group: 'act', when: (d) => shapeAct(d) && d.turnable, does: (d) => d.turnBy(TURN_STEP) }),
+  cmd('words', (d) => (d && held(d)?.k === 'i' ? t('deck-change-icon') : t('draw-edit-words')), {
     at: 'canvas',
     icon: Tag,
     keys: 'Enter',
@@ -201,8 +201,8 @@ const ACT: Command<Dr>[] = [
     when: (d) => shapeAct(d) && !many(d),
     does: (d) => d.openWords(),
   }),
-  cmd('join', 'Join two shapes', { icon: Spline, where: ['context'], group: 'act', when: (d) => shapeAct(d) && !!d.pair, does: (d) => d.join(d.pair![0], d.pair![1]) }),
-  cmd('duplicate', 'Duplicate', {
+  cmd('join', 'draw-join-two-shapes', { icon: Spline, where: ['context'], group: 'act', when: (d) => shapeAct(d) && !!d.pair, does: (d) => d.join(d.pair![0], d.pair![1]) }),
+  cmd('duplicate', 'draw-duplicate', {
     at: 'canvas',
     icon: Copy,
     keys: 'Mod+D',
@@ -212,9 +212,9 @@ const ACT: Command<Dr>[] = [
     disabled: (d) => !!d.selected && !many(d) && isLink(d.selected.k),
     does: (d) => d.duplicateSel(),
   }),
-  cmd('front', 'Bring to front', { icon: ArrowUpToLine, where: ['context', 'menu:arrange'], group: 'act', when: canvas, disabled: (d) => !d.selected, does: (d) => d.reorder(true) }),
-  cmd('back', 'Send to back', { icon: ArrowDownToLine, where: ['context', 'menu:arrange'], group: 'act', when: canvas, disabled: (d) => !d.selected, does: (d) => d.reorder(false) }),
-  cmd('copy', 'Copy', {
+  cmd('front', 'draw-bring-to-front', { icon: ArrowUpToLine, where: ['context', 'menu:arrange'], group: 'act', when: canvas, disabled: (d) => !d.selected, does: (d) => d.reorder(true) }),
+  cmd('back', 'draw-send-to-back', { icon: ArrowDownToLine, where: ['context', 'menu:arrange'], group: 'act', when: canvas, disabled: (d) => !d.selected, does: (d) => d.reorder(false) }),
+  cmd('copy', 'outline-copy', {
     at: 'canvas',
     icon: UI.copy,
     keys: 'Mod+C',
@@ -225,7 +225,7 @@ const ACT: Command<Dr>[] = [
     disabled: (d) => isLink(held(d).k) && d.chosen.length < 2,
     does: (d) => d.copyOut(false),
   }),
-  cmd('cut', 'Cut', {
+  cmd('cut', 'deck-cut', {
     at: 'canvas',
     icon: Scissors,
     keys: 'Mod+X',
@@ -236,18 +236,18 @@ const ACT: Command<Dr>[] = [
     disabled: (d) => isLink(held(d).k) && d.chosen.length < 2,
     does: (d) => d.copyOut(true),
   }),
-  cmd('paste', 'Paste', {
+  cmd('paste', 'outline-paste', {
     at: 'canvas',
     icon: ClipboardPaste,
     keys: 'Mod+V',
     native: true,
     where: ['context', 'menu:insert'],
-    heading: 'More',
+    heading: 'draw-more',
     group: 'clip',
     when: (d) => canvas(d) && !typing(d),
     does: (d) => d.pasteIn(),
   }),
-  cmd('delete', 'Delete', {
+  cmd('delete', 'draw-delete', {
     at: 'canvas',
     icon: Trash2,
     keys: 'Delete / Backspace',
@@ -260,38 +260,38 @@ const ACT: Command<Dr>[] = [
 ];
 
 const INSERTS: Command<Dr>[] = [
-  ...SHAPES.map((s) => cmd(`insert.${s.id}`, s.name, { heading: 'Shapes', where: ['menu:insert'], does: (d) => d.insert(s.id) })),
-  cmd('insert.l', 'Line', { icon: Minus, heading: 'Lines', where: ['menu:insert'], does: (d) => d.insert('l') }),
-  cmd('insert.a', 'Arrow', { icon: MoveRight, heading: 'Lines', where: ['menu:insert'], does: (d) => d.insert('a') }),
-  cmd('insert.k', 'Join two shapes', { icon: Spline, hint: 'Press on one shape and let go on another', heading: 'Lines', where: ['menu:insert'], does: (d) => (d.tool = 'k') }),
-  cmd('insert.icon', 'Icon…', { icon: Smile, heading: 'More', where: ['menu:insert'], does: (d) => d.pickIcon() }),
-  cmd('insert.pen', 'Pen', { icon: PenTool, hint: 'Any shape, a tap for each corner', heading: 'More', where: ['menu:insert'], does: (d) => (d.tool = 'v') }),
-  cmd('insert.free', 'Freehand', { icon: Brush, hint: 'Drag to draw a line or a shape', heading: 'More', where: ['menu:insert'], does: (d) => (d.tool = 'f') }),
+  ...SHAPES.map((s) => cmd(`insert.${s.id}`, s.name, { heading: 'draw-shapes', where: ['menu:insert'], does: (d) => d.insert(s.id) })),
+  cmd('insert.l', 'draw-line', { icon: Minus, heading: 'chart-lines', where: ['menu:insert'], does: (d) => d.insert('l') }),
+  cmd('insert.a', 'draw-arrow', { icon: MoveRight, heading: 'chart-lines', where: ['menu:insert'], does: (d) => d.insert('a') }),
+  cmd('insert.k', 'draw-join-two-shapes', { icon: Spline, hint: 'draw-press-on-one-shape-and', heading: 'chart-lines', where: ['menu:insert'], does: (d) => (d.tool = 'k') }),
+  cmd('insert.icon', 'draw-icon', { icon: Smile, heading: 'draw-more', where: ['menu:insert'], does: (d) => d.pickIcon() }),
+  cmd('insert.pen', 'draw-pen', { icon: PenTool, hint: 'draw-any-shape-tap-for-each', heading: 'draw-more', where: ['menu:insert'], does: (d) => (d.tool = 'v') }),
+  cmd('insert.free', 'draw-freehand', { icon: Brush, hint: 'draw-drag-to-draw-line-or', heading: 'draw-more', where: ['menu:insert'], does: (d) => (d.tool = 'f') }),
 ];
 
 /** The canvas's own keys: a pen's, the Join tool's, a step out, the letters, and what acts on the shapes in hand. */
 const KEYS: Command<Dr>[] = [
-  cmd('pen.close', 'Done', { at: 'canvas', keys: 'Enter', where: ['keys-only'], when: (d) => d.pen.length > 0, does: (d) => d.closePen() }),
-  cmd('pen.cancel', 'Step out: close, collapse, let go', { at: 'canvas', keys: 'Escape', where: ['keys-only'], when: (d) => d.pen.length > 0, does: (d) => void (d.pen = []) }),
-  cmd('pen.back', 'Delete', { at: 'canvas', keys: 'Backspace', where: ['keys-only'], when: (d) => d.pen.length > 0, does: (d) => void (d.pen = d.pen.slice(0, -1)) }),
-  cmd('out', 'Step out: close, collapse, let go', { at: 'canvas', keys: 'Escape', where: ['keys-only'], does: (d) => d.stepOut() }),
-  cmd('joinkeys', 'Join two shapes', {
+  cmd('pen.close', 'editor-done', { at: 'canvas', keys: 'Enter', where: ['keys-only'], when: (d) => d.pen.length > 0, does: (d) => d.closePen() }),
+  cmd('pen.cancel', 'common-step-out-close-collapse-let', { at: 'canvas', keys: 'Escape', where: ['keys-only'], when: (d) => d.pen.length > 0, does: (d) => void (d.pen = []) }),
+  cmd('pen.back', 'draw-delete', { at: 'canvas', keys: 'Backspace', where: ['keys-only'], when: (d) => d.pen.length > 0, does: (d) => void (d.pen = d.pen.slice(0, -1)) }),
+  cmd('out', 'common-step-out-close-collapse-let', { at: 'canvas', keys: 'Escape', where: ['keys-only'], does: (d) => d.stepOut() }),
+  cmd('joinkeys', 'draw-join-two-shapes', {
     at: 'canvas',
     keys: 'ArrowLeft / ArrowRight / ArrowUp / ArrowDown / Enter',
     where: ['keys-only'],
     when: (d) => d.tool === 'k',
     does: (d, e) => e instanceof KeyboardEvent && d.joinKey(e),
   }),
-  cmd('all', 'Select all: the words of the box, then everything', { at: 'canvas', keys: 'Mod+A', where: ['keys-only'], does: (d) => d.chooseAll() }),
+  cmd('all', 'common-select-all-words-of-box', { at: 'canvas', keys: 'Mod+A', where: ['keys-only'], does: (d) => d.chooseAll() }),
   ...ALIGN_KEYS,
-  cmd('restack', 'Move the selected items up or down', {
+  cmd('restack', 'common-move-selected-items-up-or', {
     at: 'canvas',
     keys: 'Alt+ArrowUp / Alt+ArrowDown',
     where: ['keys-only'],
     when: (d) => d.chosen.length > 0,
     does: (d, e) => d.reorder(!(e instanceof KeyboardEvent) || e.key === 'ArrowUp' ? 1 : -1),
   }),
-  cmd('nudge', 'Nudge the shapes in hand', {
+  cmd('nudge', 'common-nudge-shapes-in-hand', {
     at: 'canvas',
     keys: ['', 'Shift+', 'Mod+'].map((m) => ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].map((k) => m + k).join(' / ')).join(' / '),
     where: ['keys-only'],
@@ -304,26 +304,26 @@ const PIXELS: Command<Dr>[] = [
   ...PIXEL_INKS.map((ink) =>
     cmd(`pixel.${ink.k}`, ink.name, { data: true, swatch: () => TILE_INKS[ink.k], where: ['bar'], when: (d) => !!d.view.grid, pressed: (d) => d.ink === ink.k, does: (d) => (d.ink = ink.k) }),
   ),
-  cmd('eraser', 'Eraser', { icon: Eraser, where: ['bar'], when: (d) => !!d.view.grid, pressed: (d) => d.ink === '.', does: (d) => (d.ink = '.') }),
-  cmd('pencil', 'Pencil', { icon: Pencil, where: ['bar'], when: (d) => !!d.view.grid, pressed: (d) => d.pmode === 'pen', does: (d) => d.paintWith('pen') }),
-  cmd('bucket', 'Fill', { icon: PaintBucket, where: ['bar'], when: (d) => !!d.view.grid, pressed: (d) => d.pmode === 'fill', does: (d) => d.paintWith('fill') }),
-  cmd('clear', 'Clear the grid', { icon: Trash2, where: ['bar'], when: (d) => !!d.view.grid, disabled: (d) => !tileFilled(d.view.pixels), does: (d) => d.clearPixels() }),
-  cmd('background', 'Background', {
-    hint: 'Use as background',
+  cmd('eraser', 'draw-eraser', { icon: Eraser, where: ['bar'], when: (d) => !!d.view.grid, pressed: (d) => d.ink === '.', does: (d) => (d.ink = '.') }),
+  cmd('pencil', 'draw-pencil', { icon: Pencil, where: ['bar'], when: (d) => !!d.view.grid, pressed: (d) => d.pmode === 'pen', does: (d) => d.paintWith('pen') }),
+  cmd('bucket', 'draw-fill', { icon: PaintBucket, where: ['bar'], when: (d) => !!d.view.grid, pressed: (d) => d.pmode === 'fill', does: (d) => d.paintWith('fill') }),
+  cmd('clear', 'draw-clear-grid', { icon: Trash2, where: ['bar'], when: (d) => !!d.view.grid, disabled: (d) => !tileFilled(d.view.pixels), does: (d) => d.clearPixels() }),
+  cmd('background', 'draw-background', {
+    hint: 'draw-use-as-background',
     icon: Wallpaper,
     where: ['bar'],
     when: (d) => !!d.view.grid,
     disabled: (d) => !tileFilled(d.view.pixels),
     does: (d) => d.useAsBackground(),
   }),
-  cmd('pixel.move', 'Tap or drag to paint; the arrow keys move, Enter paints.', {
+  cmd('pixel.move', 'draw-tap-or-drag-to-paint', {
     at: 'pixels',
     keys: 'ArrowLeft / ArrowRight / ArrowUp / ArrowDown',
     where: ['keys-only'],
     when: (d) => !!d.view.grid,
     does: (d, e) => e instanceof KeyboardEvent && d.moveCursor(e.key),
   }),
-  cmd('pixel.paint', 'Tap or drag to paint; the arrow keys move, Enter paints.', { at: 'pixels', keys: 'Enter / Space', where: ['keys-only'], when: (d) => !!d.view.grid, does: (d) => d.paintHere() }),
+  cmd('pixel.paint', 'draw-tap-or-drag-to-paint', { at: 'pixels', keys: 'Enter / Space', where: ['keys-only'], when: (d) => !!d.view.grid, does: (d) => d.paintHere() }),
 ];
 
 /** The tools, a letter each: the bar's, and the first keys the shortcuts dialog lists (Shift+K too: two shapes chosen with Shift+tap are joined with Shift still held). */
@@ -343,29 +343,36 @@ const TOOL_CMDS: Command<Dr>[] = [
 
 const DRAW: Command<Dr>[] = [
   ...TOOL_CMDS,
-  cmd('insert', 'Insert', { icon: UI.insert, menu: 'insert', where: ['bar'], takesFocus: true, when: canvas, does: () => undefined }),
+  cmd('insert', 'bar-insert', { icon: UI.insert, menu: 'insert', where: ['bar'], takesFocus: true, when: canvas, does: () => undefined }),
   ...INSERTS,
-  cmd('mode', (d) => (d?.view.grid ? t('Pixels {n}×{n}', { n: d.view.grid }) : t('Shapes')), { icon: Shapes, menu: 'mode', where: ['bar'], document: true, takesFocus: true, does: () => undefined }),
-  cmd('mode.shapes', 'Shapes', { icon: Shapes, where: ['menu:mode'], pressed: (d) => !d.view.grid, does: (d) => d.setMode(0) }),
-  ...TILE_SIDES.map((n) => cmd(`mode.${n}`, () => t('Pixels {n}×{n}', { n }), { icon: Grid2x2, where: ['menu:mode'], pressed: (d) => d.view.grid === n, does: (d) => d.setMode(n) })),
-  cmd('mode.untile', 'Remove the background tile', { icon: Trash2, heading: 'Background', where: ['menu:mode'], when: (d) => !!d.view.tile && !d.view.grid, does: (d) => d.removeTile() }),
-  cmd('icon', (d) => (d?.selected && !isLink(d.selected.k) ? t('Put an icon on this shape') : t('Place an icon')), {
+  cmd('mode', (d) => (d?.view.grid ? t('draw-pixels-n-n', { n: d.view.grid }) : t('draw-shapes')), {
+    icon: Shapes,
+    menu: 'mode',
+    where: ['bar'],
+    document: true,
+    takesFocus: true,
+    does: () => undefined,
+  }),
+  cmd('mode.shapes', 'draw-shapes', { icon: Shapes, where: ['menu:mode'], pressed: (d) => !d.view.grid, does: (d) => d.setMode(0) }),
+  ...TILE_SIDES.map((n) => cmd(`mode.${n}`, () => t('draw-pixels-n-n', { n }), { icon: Grid2x2, where: ['menu:mode'], pressed: (d) => d.view.grid === n, does: (d) => d.setMode(n) })),
+  cmd('mode.untile', 'draw-remove-background-tile', { icon: Trash2, heading: 'draw-background', where: ['menu:mode'], when: (d) => !!d.view.tile && !d.view.grid, does: (d) => d.removeTile() }),
+  cmd('icon', (d) => (d?.selected && !isLink(d.selected.k) ? t('draw-put-icon-on-this-shape') : t('draw-place-icon')), {
     icon: Smile,
     where: ['bar'],
     when: canvas,
     pressed: (d) => d.tool === 'i',
     does: (d) => d.pickIcon(),
   }),
-  cmd('arrange', 'Arrange', { icon: Layers, menu: 'arrange', where: ['bar'], takesFocus: true, when: canvas, does: () => undefined }),
-  cmd('alt', (d) => (d?.view.alt ? t('Alt text: {alt}', { alt: d.view.alt }) : t('Add alt text: describe this drawing for people who cannot see it')), {
+  cmd('arrange', 'draw-arrange', { icon: Layers, menu: 'arrange', where: ['bar'], takesFocus: true, when: canvas, does: () => undefined }),
+  cmd('alt', (d) => (d?.view.alt ? t('draw-alt-text-alt', { alt: d.view.alt }) : t('draw-add-alt-text-describe-this')), {
     where: ['bar'],
     document: true,
     takesFocus: true,
     when: canvas,
     does: (d) => d.openAlt(),
   }),
-  cmd('zoomout', 'Zoom out', { icon: ZoomOut, where: ['bar'], document: true, takesFocus: true, when: canvas, disabled: (d) => d.zoom <= 0.5, does: (d) => d.zoomBy(-0.25) }),
-  cmd('zoomin', 'Zoom in', { icon: ZoomIn, where: ['bar'], document: true, takesFocus: true, when: canvas, disabled: (d) => d.zoom >= 4, does: (d) => d.zoomBy(0.25) }),
+  cmd('zoomout', 'draw-zoom-out', { icon: ZoomOut, where: ['bar'], document: true, takesFocus: true, when: canvas, disabled: (d) => d.zoom <= 0.5, does: (d) => d.zoomBy(-0.25) }),
+  cmd('zoomin', 'draw-zoom-in', { icon: ZoomIn, where: ['bar'], document: true, takesFocus: true, when: canvas, disabled: (d) => d.zoom >= 4, does: (d) => d.zoomBy(0.25) }),
   ...INK,
   ...STYLES,
   ...SIZE,

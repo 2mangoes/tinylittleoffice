@@ -17,6 +17,7 @@
  *   node scripts/i18n-migrate.ts --ftl     write src/i18n/*.ftl from src/i18n/*.ts
  *   node scripts/i18n-migrate.ts --code    rewrite t('English') and the command files' words to ids in src/ and test/
  */
+import { execFileSync } from 'node:child_process';
 import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -26,7 +27,7 @@ const root = resolve(import.meta.dirname, '..');
 const i18n = join(root, 'src', 'i18n');
 
 /** Each section of en.ts, by its heading, and the short name its ids begin with. */
-export const PREFIX: Record<string, string> = {
+const PREFIX: Record<string, string> = {
   'the shell: header': 'shell',
   'the home page': 'home',
   'the drawer (hamburger menu)': 'drawer',
@@ -58,12 +59,56 @@ export const PREFIX: Record<string, string> = {
   'the Calculator app': 'calc',
 };
 
+/**
+ * The keys en.ts held after its last section, under "New — sort me into a section", never sorted: an id there begins
+ * with where the key is used (the code of BASE, the commit before the move), an app's id or the kit's part, and
+ * "common" where several use it. In the files they stay where they were, under a group of their own (UNSORTED).
+ */
+const SORT_ME = 'New — sort me into a section';
+const UNSORTED = 'unsorted: added after the sections, each id named for where it is used';
+const BASE = '5b2da049';
+const KIT: [RegExp, string][] = [
+  [/^src\/kit\/ui\/home\.ts$/, 'home'],
+  [/^src\/kit\/ui\/drawer\.ts$|^src\/kit\/core\/install\.ts$/, 'drawer'],
+  [/^src\/kit\/ui\/share-dialog\.ts$|^src\/kit\/share\//, 'share'],
+  [/^src\/kit\/ui\/privacy-dialog\.ts$/, 'privacy'],
+  [/^src\/kit\/ui\/compare\.ts$/, 'compare'],
+  [/^src\/kit\/file\/open\.ts$/, 'open'],
+  [/^src\/kit\/file\/exports\.ts$/, 'export'],
+  [/^src\/kit\/core\/shell\.ts$|^src\/kit\/ui\/chrome\.ts$/, 'shell'],
+  [/^src\/kit\/core\/keys\.ts$|^src\/kit\/ui\/zoom\.ts$/, 'keys'],
+  [/^src\/kit\/ui\/find\.ts$/, 'find'],
+  [/^src\/kit\/ui\/menu\.ts$/, 'menu'],
+  [/^src\/kit\/text\//, 'editor'],
+  [/^src\/kit\/draw\/qr-picture\.ts$/, 'qr'],
+];
+let baseSources: [string, string][] | undefined;
+/** Where a key is used in BASE's code, as a prefix. */
+function usedAt(key: string): string {
+  const git = (...args: string[]) => execFileSync('git', ['-C', root, ...args], { encoding: 'utf8', maxBuffer: 1 << 28 });
+  baseSources ??= git('ls-files', 'src')
+    .split('\n')
+    .filter((f) => f.endsWith('.ts') && !f.startsWith('src/i18n/') && !/\.test\.ts$|\/tests\//.test(f))
+    .map((f) => [f, git('show', `${BASE}:${f}`)]);
+  const quoted = [`'${key.replace(/\\/g, '\\\\').replace(/'/g, "\\'")}'`, `"${key}"`];
+  const areas = new Set<string>();
+  for (const [f, text] of baseSources) {
+    if (!quoted.some((q) => text.includes(q))) continue;
+    const app = /^src\/apps\/([^/]+)\//.exec(f)?.[1];
+    const kit = KIT.find(([re]) => re.test(f))?.[1];
+    if (app ?? kit) areas.add((app ?? kit)!);
+  }
+  // The shortcuts list names what the rest does: a key used there and elsewhere is the elsewhere's.
+  if (areas.size > 1) areas.delete('keys');
+  return areas.size === 1 ? [...areas][0] : 'common';
+}
+
 type Line = { kind: 'section'; name: string } | { kind: 'comment'; text: string } | { kind: 'blank' } | { kind: 'entry'; key: string; value: string; same: boolean };
 
 const string = (quoted: string): string => new Function(`return ${quoted}`)() as string;
 
 /** A dictionary file's lines between its braces, and its head (the doc comment above, its lines). */
-export function lines(source: string): { head: string[]; body: Line[] } {
+function lines(source: string): { head: string[]; body: Line[] } {
   const open = source.indexOf('export default {');
   const head = source
     .slice(0, open)
@@ -97,7 +142,7 @@ const SIGNS: [RegExp, string][] = [
   [/\./g, ' dot '],
 ];
 /** An English key's words for an id: lower case, accents off, a placeholder its name, a plural its last form; the little words and the signs only when asked. */
-export function words(key: string, { little = false, signs = false } = {}): string[] {
+function words(key: string, { little = false, signs = false } = {}): string[] {
   let s = key.replace(/\{(\w+)\|([^}]*)\}/g, (_, n: string, f: string) => ` ${n} ${f.split('|').pop()!.replace(/#/g, ' ')} `).replace(/\{(\w+)\}/g, ' $1 ');
   if (signs) for (const [re, w] of SIGNS) s = s.replace(re, w);
   return s
@@ -114,15 +159,17 @@ export function words(key: string, { little = false, signs = false } = {}): stri
  * no "a", no signs, a capital) keeps the id; each other takes its next words, then its little words, then its signs,
  * then "-lowercase" where it begins in lower case, then a number.
  */
-export function ids(enSource = readFileSync(join(i18n, 'en.ts'), 'utf8')): Map<string, string> {
+function ids(enSource = readFileSync(join(i18n, 'en.ts'), 'utf8')): Map<string, string> {
   const keys: { key: string; prefix: string }[] = [];
   let prefix = '';
+  let unsorted = false;
   for (const l of lines(enSource).body) {
     if (l.kind === 'section') {
       prefix = PREFIX[l.name];
       if (!prefix) throw new Error(`a section with no prefix: ${l.name}`);
     }
-    if (l.kind === 'entry') keys.push({ key: l.key, prefix });
+    if (l.kind === 'comment' && l.text === SORT_ME) unsorted = true;
+    if (l.kind === 'entry') keys.push({ key: l.key, prefix: unsorted ? usedAt(l.key) : prefix });
   }
   const make = (prefix: string, w: string[], n = w.length) => {
     const own = w[0] === prefix && w.length > 1 ? w.slice(1) : w;
@@ -229,7 +276,7 @@ const headOf = (code: string, head: string[]) =>
   code === 'en' ? EN_HEAD : (HEADS[code] ?? head.map((l) => l.replace(/ ?Keys are the English strings of en\.ts\./, ' Its ids and groups are en.ftl’s.').trimEnd()));
 
 /** A dictionary as a .ftl file: the head, the groups, the comments, each message under its id. */
-export function ftl(code: string, source: string, map: Map<string, string>): string {
+function ftl(code: string, source: string, map: Map<string, string>, first = firstUnsorted()): string {
   const { head, body } = lines(source);
   const out: string[] = [...headOf(code, head).map((l) => (l ? `### ${l}` : '###')), ''];
   let pending: string[] = [];
@@ -245,10 +292,20 @@ export function ftl(code: string, source: string, map: Map<string, string>): str
       flush();
       if (out.at(-1) !== '') out.push('');
       out.push(`## ${l.name}`, '');
+    } else if (l.kind === 'comment' && l.text === SORT_ME) {
+      flush();
     } else if (l.kind === 'comment') pending.push(l.text.replace(/\{(\w+)\}/g, '{ $$$1 }'));
     else {
       const id = map.get(l.key);
       if (!id) throw new Error(`${code}: "${l.key}" is not a key of en.ts`);
+      if (l.key === first) {
+        const own = pending;
+        pending = [];
+        flush();
+        if (out.at(-1) !== '') out.push('');
+        out.push(`## ${UNSORTED}`, '');
+        pending = own;
+      }
       out.push(message(id, l.value, code, [...pending, ...(l.same ? ['same'] : [])]));
       pending = [];
     }
@@ -260,6 +317,14 @@ export function ftl(code: string, source: string, map: Map<string, string>): str
     .trim()}\n`;
 }
 
+/** The first key under en.ts's "sort me". */
+function firstUnsorted(): string {
+  const body = lines(readFileSync(join(i18n, 'en.ts'), 'utf8')).body;
+  const at = body.findIndex((l) => l.kind === 'comment' && l.text === SORT_ME);
+  const l = body.slice(at).find((x) => x.kind === 'entry');
+  return l && l.kind === 'entry' ? l.key : '';
+}
+
 const unquote = (s: string) => s.replace(/\\(['"`\\])/g, '$1');
 const commandFile = (f: string) => /commands\.ts$|kit[\\/]core[\\/]keys\.ts$/.test(f);
 
@@ -267,7 +332,7 @@ const commandFile = (f: string) => /commands\.ts$|kit[\\/]core[\\/]keys\.ts$/.te
  * A source file with its keys as ids: every t('English'), and in a command file every string that is a key (a label,
  * a hint, a heading, a letter, a table's name), each said in `report` where it was not a t() or a label's.
  */
-export function rewrite(path: string, source: string, map: Map<string, string>, report: string[]): string {
+function rewrite(path: string, source: string, map: Map<string, string>, report: string[]): string {
   let out = source.replace(/\bt\(\s*(['"`])((?:\\.|(?!\1)[^\\])*)\1/g, (whole, q: string, key: string) => {
     const id = map.get(unquote(key));
     if (!id) {
@@ -277,13 +342,27 @@ export function rewrite(path: string, source: string, map: Map<string, string>, 
     return whole.replace(`${q}${key}${q}`, `'${id}'`);
   });
   if (commandFile(path))
-    out = out.replace(/(\b(?:label|hint|heading|letter): )?(['"])((?:\\.|(?!\2)[^\\\n])*)\2/g, (whole, field: string | undefined, _q: string, key: string) => {
+    out = out.replace(/(\b(?:label|hint|heading|letter): )?(['"])((?:\\.|(?!\2)[^\\\n])*)\2/g, (whole, field: string | undefined, _q: string, key: string, at: number, all: string) => {
       const id = map.get(unquote(key));
       if (!id) {
         if (field) report.push(`${path}: ${field}${whole.slice(field.length)} is not a key of en.ts`);
         return whole;
       }
-      if (!field) report.push(`${path}: ${whole} → '${id}' (not a label's)`);
+      if (!field) {
+        // Code that happens to spell a key: a call's first argument (a command's id, a scope), a key's name, an id or a
+        // place, a comparison, a list a key is looked up in, a comment.
+        const before = all.slice(Math.max(0, at - 30), at);
+        const line = all.slice(all.lastIndexOf('\n', at) + 1, all.indexOf('\n', at));
+        if (
+          /\(\s*$|\b(?:keys|key|id|at|scope|menu|al|k|kind|group):\s*$|[=!]==?\s*$|\bcase\s+$/.test(before) ||
+          /^\s*(?:\/\/|\*|\/\*)/.test(line) ||
+          /\.includes\(|\bMODS\b|\bARIA\b|\bNAMES\b/.test(line)
+        ) {
+          report.push(`${path}: ${whole} kept (code)`);
+          return whole;
+        }
+        report.push(`${path}: ${whole} → '${id}' (not a label's)`);
+      }
       return `${field ?? ''}'${id}'`;
     });
   return out;

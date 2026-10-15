@@ -100,23 +100,23 @@ export interface CalView {
 
 /** The colours a span may take: the key a span carries in the view, the word the document writes. */
 export const CAL_COLORS: Record<string, { word: string; name: () => string; hex: string }> = {
-  '': { word: 'indigo', name: () => t('Indigo'), hex: ACCENT },
-  r: { word: 'red', name: () => t('Red'), hex: '#b3261e' },
-  o: { word: 'orange', name: () => t('Orange'), hex: '#d55e00' },
-  g: { word: 'green', name: () => t('Green'), hex: '#009e73' },
-  b: { word: 'blue', name: () => t('Blue'), hex: '#0072b2' },
-  p: { word: 'purple', name: () => t('Purple'), hex: '#a05ca8' },
+  '': { word: 'indigo', name: () => t('draw-indigo'), hex: ACCENT },
+  r: { word: 'red', name: () => t('draw-red'), hex: '#b3261e' },
+  o: { word: 'orange', name: () => t('draw-orange'), hex: '#d55e00' },
+  g: { word: 'green', name: () => t('draw-green'), hex: '#009e73' },
+  b: { word: 'blue', name: () => t('draw-blue'), hex: '#0072b2' },
+  p: { word: 'purple', name: () => t('draw-purple'), hex: '#a05ca8' },
 };
 
 /** Each repeat as the document writes it. */
 export const EVERY: Record<Every, string> = { d: 'day', w: 'week', m: 'month', y: 'year' };
-const EVERY_WORDS: Record<Every, () => string> = { d: () => t('Every day'), w: () => t('Every week'), m: () => t('Every month'), y: () => t('Every year') };
+const EVERY_WORDS: Record<Every, () => string> = { d: () => t('cal-every-day'), w: () => t('cal-every-week'), m: () => t('cal-every-month'), y: () => t('cal-every-year') };
 export const everyText = (e: Every) => EVERY_WORDS[e]();
 
 /** A repeat in words: "Every week", "Every week, 9 times", "Every week until 2027-06-01". */
 export function repeatText(r: Repeat): string {
   const every = everyText(r.every);
-  return r.count ? t('{every}, {n} times', { every, n: r.count }) : r.until !== undefined ? t('{every} until {date}', { every, date: dayString(r.until) }) : every;
+  return r.count ? t('cal-every-n-times', { every, n: r.count }) : r.until !== undefined ? t('cal-every-until-date', { every, date: dayString(r.until) }) : every;
 }
 
 /** The deepest a task nests in a schedule. */

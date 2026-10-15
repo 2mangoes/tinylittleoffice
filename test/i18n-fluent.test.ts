@@ -1,20 +1,33 @@
 // The move to Fluent changes no word anyone sees (Paul, 2026-10-15: "Use Fluent"; a pure refactor, the English rewritten
 // later): for every language and every key of the old dictionaries (src/i18n/<code>.ts, English keys), the old runtime's
-// t() and Fluent's, given the message the migration wrote under the key's id (src/i18n/<code>.ftl), say the same thing,
-// byte for byte, with every placeholder filled as a number, as words, missing, and every plural in each of the
+// t(key) and today's t(id), the message the migration wrote under the key's id (src/i18n/<code>.ftl, read by
+// @fluent/bundle as kit/core/i18n.ts reads it), say the same thing, byte for byte, with every placeholder filled as a number, as words, missing, and every plural in each of the
 // language's categories. Kept until the old dictionaries are deleted, then deleted with them.
-import { test, expect } from 'vitest';
+import { test, expect, afterAll } from 'vitest';
 import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { FluentBundle, FluentResource, type FluentVariable } from '@fluent/bundle';
-import { ids } from '../scripts/i18n-migrate.ts';
+import { FluentBundle, FluentResource } from '@fluent/bundle';
+import { setLanguage, t, language } from '../src/kit/core/i18n.ts';
+import { flatMessages } from '../scripts/ftl.ts';
 
 const dir = join(import.meta.dirname, '..', 'src', 'i18n');
 const codes = readdirSync(dir)
   .filter((f) => f.endsWith('.ts'))
   .map((f) => f.replace(/\.ts$/, ''));
-const map = ids();
+const old = async (code: string) => (await import(pathToFileURL(join(dir, `${code}.ts`)).href)).default as Record<string, string>;
+const ftl = (code: string) => readFileSync(join(dir, `${code}.ftl`), 'utf8');
+/** Each English key, its id: en.ts's keys and en.ftl's messages, in the same order (the next test holds the order). */
+const enKeys = Object.keys(await old('en'));
+const map = new Map(enKeys.map((k, i) => [k, Object.keys(flatMessages(ftl('en'), 'en'))[i]]));
+afterAll(() => setLanguage(null));
+
+test('each .ftl file, read back to the old flat words, is its dictionary: the same keys in the same order, the same words', async () => {
+  for (const code of codes) {
+    const dict = await old(code);
+    expect(Object.entries(flatMessages(ftl(code), code)), code).toEqual(Object.entries(dict).map(([k, v]) => [map.get(k), v]));
+  }
+});
 
 /** The old runtime (kit/core/i18n.ts before 2026-10-15), whole: a dictionary of English keys, its forms in ORDER's order. */
 const ORDER = ['zero', 'one', 'two', 'few', 'many', 'other'];
@@ -36,26 +49,10 @@ function oldT(code: string, dict: Record<string, string>, text: string, vars: Re
   });
 }
 
-/** Fluent as kit/core/i18n.ts uses it: the language's bundle, English's under it, a plural's number a number, a gap shown as {name}. */
-function newT(bundles: FluentBundle[], id: string, vars: Record<string, string | number>): string {
-  const b = bundles.find((x) => x.hasMessage(id));
-  const value = b?.getMessage(id)?.value;
-  if (!b || !value) return id;
-  const args: Record<string, FluentVariable> = { ...vars };
-  const counted = (p: unknown): string[] =>
-    Array.isArray(p) ? p.flatMap((e) => (e?.type === 'select' ? [e.selector?.name, ...e.variants.flatMap((v: { value: unknown }) => counted(v.value))] : [])) : [];
-  for (const name of counted(value)) if (typeof args[name] === 'string') args[name] = Number(args[name]);
-  const errors: Error[] = [];
-  const out = b.formatPattern(value, args, errors);
-  return errors.length ? out.replace(/\{\$(\w+)\}/g, '{$1}') : out;
-}
-
-const bundleOf = (code: string) => {
-  const b = new FluentBundle(code, { useIsolating: false });
-  const errors = b.addResource(new FluentResource(readFileSync(join(dir, `${code}.ftl`), 'utf8')));
-  expect(errors, code).toEqual([]);
-  return b;
-};
+/** Each file as Fluent reads it: nothing it cannot. */
+test('Fluent reads every file whole', () => {
+  for (const code of codes) expect(new FluentBundle(code).addResource(new FluentResource(ftl(code))), code).toEqual([]);
+});
 
 /** Numbers that between them reach every plural category of every language here, and the formatting of each. */
 const NUMBERS = [0, 1, 2, 3, 4, 5, 6, 7, 10, 11, 12, 14, 19, 20, 21, 22, 25, 100, 101, 102, 111, 1000, 1001, 1_000_000, 0.5, 1.5, 2.5, 1234.5, -1];
@@ -68,23 +65,22 @@ test('the numbers reach every plural category of every language', () => {
 });
 
 test('every key of en.ts has an id, each id one key', () => {
-  const en = readFileSync(join(dir, 'en.ts'), 'utf8');
   expect(map.size).toBeGreaterThan(1400);
   expect(new Set(map.values()).size).toBe(map.size);
-  for (const id of map.values()) expect(id).toMatch(/^[a-z][a-z0-9]*(-[a-z0-9]+)+$|^[a-z]+$/);
-  expect(en.match(/^\s*'(?:\\.|[^'\\])*'\s*:/gm)!.length).toBe(map.size);
+  for (const id of map.values()) expect(id).toMatch(/^[a-z][a-z0-9]*(-[a-z0-9]+)+$/);
 });
 
 for (const code of codes) {
-  test(`${code}: Fluent says what the old runtime said, every key, every placeholder, every plural form`, async () => {
-    const dict = (await import(pathToFileURL(join(dir, `${code}.ts`)).href)).default as Record<string, string>;
-    const bundles = code === 'en' ? [bundleOf('en')] : [bundleOf(code), bundleOf('en')];
+  test(`${code}: t() says what the old runtime said, every key, every placeholder, every plural form`, async () => {
+    const dict = await old(code);
+    await setLanguage(code);
+    expect(language()).toBe(code);
     let compared = 0;
     const differ: string[] = [];
     const same = (key: string, vars: Record<string, string | number>) => {
       const id = map.get(key)!;
       const want = oldT(code, dict, key, vars);
-      const got = newT(bundles, id, vars);
+      const got = t(id, vars);
       compared++;
       if (got !== want && differ.length < 20) differ.push(`${id} ${JSON.stringify(vars)}: ${JSON.stringify(want)} → ${JSON.stringify(got)}`);
     };

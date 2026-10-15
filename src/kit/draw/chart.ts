@@ -11,10 +11,10 @@ import { t } from '../core/i18n.ts';
 
 export type ChartKind = 'bar' | 'line' | 'pie' | 'sankey';
 export const CHART_KINDS: { id: ChartKind; name: () => string }[] = [
-  { id: 'bar', name: () => t('Bars') },
-  { id: 'line', name: () => t('Lines') },
-  { id: 'pie', name: () => t('Pie') },
-  { id: 'sankey', name: () => t('Flows (Sankey)') },
+  { id: 'bar', name: () => t('chart-bars') },
+  { id: 'line', name: () => t('chart-lines') },
+  { id: 'pie', name: () => t('chart-pie') },
+  { id: 'sankey', name: () => t('chart-flows-sankey') },
 ];
 
 export interface Flow {
@@ -132,7 +132,7 @@ interface SLink {
 function sankeyPage(flows: Flow[], title = '', w = 720, h = 440, upTo = Infinity): Page {
   let svg = title ? text(w / 2, 34, clip(title, w - 80, 20, true), { px: 20, bold: true, anchor: 'middle' }) : '';
   const top = title ? 56 : 12;
-  if (!flows.length) return { w, h, svg: svg + text(w / 2, h / 2, t('Nothing to chart yet: rows of From | To | Amount'), { px: 16, fill: FAINT, anchor: 'middle' }), alt: t('An empty chart') };
+  if (!flows.length) return { w, h, svg: svg + text(w / 2, h / 2, t('chart-nothing-to-chart-yet-rows'), { px: 16, fill: FAINT, anchor: 'middle' }), alt: t('chart-empty-chart') };
   // The things, in the order they are first named; the flows that keep moving forward.
   const names: string[] = [];
   const name = (n: string) => (names.includes(n) || names.push(n), n);
@@ -182,7 +182,7 @@ function sankeyPage(flows: Flow[], title = '', w = 720, h = 440, upTo = Infinity
     svg += text(n.x0! + nw + 6, ly + 1, clip(n.name, 150, 12, true), { px: 12, bold: true, fill: INK }) + text(n.x0! + nw + 6, ly + 15, fmt(n.value ?? 0), { px: 12, fill: MUTED });
   }
   const shown = flows.slice(0, upTo);
-  return { w, h, svg, alt: t('Flows: {list}.', { list: shown.map((f) => `${f.from} → ${f.to} ${fmt(f.value)}`).join('; ') }) };
+  return { w, h, svg, alt: t('chart-flows-list', { list: shown.map((f) => `${f.from} → ${f.to} ${fmt(f.value)}`).join('; ') }) };
 }
 
 /** A chart of the data, `w` by `h`. `upTo`: how many labels' worth (bars, points or slices) to draw, for building it up. */
@@ -192,7 +192,7 @@ export function chartPage(d: ChartData, kind: ChartKind, title = '', w = 720, h 
   const top = title ? 56 : 24;
   const legend = d.series.length > 1 || kind === 'pie';
   const bottom = h - (legend ? 64 : 40);
-  if (!d.series.length) return { w, h, svg: svg + text(w / 2, h / 2, t('Nothing to chart yet'), { px: 16, fill: FAINT, anchor: 'middle' }), alt: t('An empty chart') };
+  if (!d.series.length) return { w, h, svg: svg + text(w / 2, h / 2, t('chart-nothing-to-chart-yet'), { px: 16, fill: FAINT, anchor: 'middle' }), alt: t('chart-empty-chart') };
 
   // Besides its colour, each series after the first wears a pattern, so they can be told apart in black and white.
   svg += `<defs>${patternDefs()}</defs>`;
@@ -255,6 +255,6 @@ export function chartPage(d: ChartData, kind: ChartKind, title = '', w = 720, h 
       x += each;
     }
   }
-  const alt = d.series.map((s) => `${s.name || t('Series')}: ${s.values.map((v, i) => `${d.labels[i]} ${short(v)}`).join(', ')}`).join('; ');
-  return { w, h, svg, alt: t('{kind} chart. {data}', { kind: CHART_KINDS.find((k) => k.id === kind)?.name() ?? kind, data: alt }) };
+  const alt = d.series.map((s) => `${s.name || t('chart-series')}: ${s.values.map((v, i) => `${d.labels[i]} ${short(v)}`).join(', ')}`).join('; ');
+  return { w, h, svg, alt: t('chart-kind-chart-data', { kind: CHART_KINDS.find((k) => k.id === kind)?.name() ?? kind, data: alt }) };
 }

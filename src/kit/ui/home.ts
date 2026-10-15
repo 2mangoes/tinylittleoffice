@@ -199,7 +199,7 @@ export class ToTemplates extends LitElement {
   }
   private option(tpl: Template | null) {
     const id = tpl?.id ?? '';
-    const name = tpl?.name ?? t('Blank');
+    const name = tpl?.name ?? t('home-blank');
     const page = this.drawn ? this.app.view(tpl?.doc ?? this.app.blank(), { small: true, thumb: true })[0] : null;
     return html`<div role="option" class="to-option" tabindex="-1" aria-selected=${String(this.current === id)} @pointermove=${hoverFocus} @click=${() => this.choose(tpl)}>
       <span class="to-thumb" aria-hidden="true">${page ? unsafeSVG(pageSvg(page, CROPPED)) : nothing}</span>
@@ -209,24 +209,24 @@ export class ToTemplates extends LitElement {
   render() {
     const chosen = this.list?.find((x) => x.id === this.chosen);
     // The button is the small arrow alone, no icon and no words (Paul, 2026-10-09: "don't use the word Blank over and over"; 2026-10-10: "just the small arrow to the right"); its name says what it holds.
-    const button = html`<button type="button" class="to-btn to-tool to-templates-btn" aria-haspopup="dialog" aria-expanded="false" aria-label=${chosen ? t('Templates for {app}: {name}', { app: this.app.name, name: chosen.name }) : t('Templates for {app}', { app: this.app.name })} title=${t('Templates')} @click=${() => (this.via ? this.via(this.app) : this.show())}>
+    const button = html`<button type="button" class="to-btn to-tool to-templates-btn" aria-haspopup="dialog" aria-expanded="false" aria-label=${chosen ? t('home-templates-for-app-name', { app: this.app.name, name: chosen.name }) : t('home-templates-for-app', { app: this.app.name })} title=${t('home-templates')} @click=${() => (this.via ? this.via(this.app) : this.show())}>
         ${icon(UI.down, 18, 'to-caret')}
       </button>`;
     if (this.via) return button;
     return html`${this.bare ? nothing : button}
       <dialog
         class="to-dialog to-templates-dialog"
-        aria-label=${t('Templates for {app}', { app: this.app.name })}
+        aria-label=${t('home-templates-for-app', { app: this.app.name })}
         @close=${this.onClose}
         @pointerdown=${this.press.down}
         @click=${this.onClick}
       >
         <div class="to-dialog-inner">
-          <header class="to-dialog-head to-listbox-head"><h2 id=${this.uid}>${t('{app} Templates', { app: this.app.name })}</h2><button type="button" class="to-btn to-tool to-listbox-close" aria-label=${t('Close')} title=${t('Close')} @click=${() => this.hide()}>${icon(UI.close, 18)}</button></header>
-          <div class="to-listbox" role="listbox" tabindex="-1" aria-label=${t('Templates')} @keydown=${this.onKey}>
+          <header class="to-dialog-head to-listbox-head"><h2 id=${this.uid}>${t('home-app-templates', { app: this.app.name })}</h2><button type="button" class="to-btn to-tool to-listbox-close" aria-label=${t('drawer-close')} title=${t('drawer-close')} @click=${() => this.hide()}>${icon(UI.close, 18)}</button></header>
+          <div class="to-listbox" role="listbox" tabindex="-1" aria-label=${t('home-templates')} @keydown=${this.onKey}>
             ${this.drawn ? html`${this.app.blankInTemplates ? nothing : this.option(null)}${(this.list ?? []).map((tpl) => this.option(tpl))}` : nothing}
           </div>
-          ${this.drawn && templatesUnreached(this.app) ? html`<p class="to-hint" role="status">${t('The templates are not saved in this browser yet. Connect to the internet to see them.')}</p>` : nothing}
+          ${this.drawn && templatesUnreached(this.app) ? html`<p class="to-hint" role="status">${t('home-templates-are-not-saved-in')}</p>` : nothing}
         </div>
       </dialog>`;
   }
@@ -293,26 +293,26 @@ export class ToHome extends LitElement {
     const all = this.unfolded.has(app.id);
     const shown = all ? kept : kept.slice(0, SHOWN);
     const lang = document.documentElement.lang;
-    return html`<ul class="to-drive" aria-label=${t('{app} documents', { app: app.name })}>
+    return html`<ul class="to-drive" aria-label=${t('home-app-documents', { app: app.name })}>
         ${shown.map((k) => {
-          const title = k.title || (isSealed(parseHash(k.hash).payload) ? t('Locked document') : t('Untitled'));
+          const title = k.title || (isSealed(parseHash(k.hash).payload) ? t('privacy-locked-document') : t('outline-untitled'));
           return html`<li>
             <a class="to-drive-open" href=${k.hash}><to-preview hash=${k.hash}></to-preview><span class="to-drive-words"><span>${title}</span><small>${ago(k.at, lang)}</small></span></a>
-            <button type="button" class="to-btn to-tool" aria-label=${t('Forget {title}', { title })} title=${t('Forget')} @click=${() => this.forget(k)}>${icon(UI.close, 16)}</button>
+            <button type="button" class="to-btn to-tool" aria-label=${t('home-forget-title', { title })} title=${t('home-forget')} @click=${() => this.forget(k)}>${icon(UI.close, 16)}</button>
           </li>`;
         })}
       </ul>
-      ${kept.length > SHOWN && !all ? html`<button type="button" class="to-btn to-drive-more" @click=${() => (this.unfolded = new Set([...this.unfolded, app.id]))}>${t('{n} more', { n: kept.length - SHOWN })}</button>` : nothing}`;
+      ${kept.length > SHOWN && !all ? html`<button type="button" class="to-btn to-drive-more" @click=${() => (this.unfolded = new Set([...this.unfolded, app.id]))}>${t('home-n-more', { n: kept.length - SHOWN })}</button>` : nothing}`;
   }
   /** The kept documents the search finds, the best first: the title and up to two lines, the words marked. */
   private renderFound(kept: Kept[]) {
     const names = new Map(apps().map((a) => [a.id, a]));
-    const docs = kept.filter((k) => names.has(k.app)).map((k) => ({ id: k.id, title: k.title || t('Untitled'), app: names.get(k.app)!.name, folder: '', lines: keptLines(k), at: k.at }));
+    const docs = kept.filter((k) => names.has(k.app)).map((k) => ({ id: k.id, title: k.title || t('outline-untitled'), app: names.get(k.app)!.name, folder: '', lines: keptLines(k), at: k.at }));
     const found = search(docs, this.query);
     const byId = new Map(kept.map((k) => [k.id, k]));
-    if (!found.length) return html`<p class="to-hint" role="status">${t('No document here has those words')}</p>`;
-    return html`<p class="sr-only" role="status">${t('{n|One document found|# documents found}', { n: found.length })}</p>
-      <ul class="to-found-docs" aria-label=${t('Documents found')}>
+    if (!found.length) return html`<p class="to-hint" role="status">${t('home-no-document-here-has-those')}</p>`;
+    return html`<p class="sr-only" role="status">${t('home-n-documents-found', { n: found.length })}</p>
+      <ul class="to-found-docs" aria-label=${t('home-documents-found')}>
         ${found.map((f) => {
           const k = byId.get(f.id)!;
           const a = names.get(k.app)!;
@@ -322,19 +322,19 @@ export class ToHome extends LitElement {
   }
   /** Whose project it is and where it was made, the beta, where its source is, and how to write: one line. "Aboard Foundry" and "GitHub" are names, said as they are in every language. */
   private foot() {
-    const [before, after = ''] = t('An {aboard} project. Made with respect in New York City.').split('{aboard}');
+    const [before, after = ''] = t('home-aboard-project-made-with-respect').split('{aboard}');
     return html`<footer class="to-home-foot">
-      <p>${before}<a href=${origin('maker')} target="_blank" rel="noopener" data-to-chrome>Aboard Foundry</a>${after} · ${t('Beta version')} · <a href=${repoUrl()} target="_blank" rel="noopener" data-to-chrome>GitHub</a> · <a href=${MAIL} data-to-chrome>${t('Email')}</a>${this.version ? html` · ${this.version.tag || this.version.commit.slice(0, 7)}` : nothing}</p>
+      <p>${before}<a href=${origin('maker')} target="_blank" rel="noopener" data-to-chrome>Aboard Foundry</a>${after} · ${t('home-beta-version')} · <a href=${repoUrl()} target="_blank" rel="noopener" data-to-chrome>GitHub</a> · <a href=${MAIL} data-to-chrome>${t('home-email')}</a>${this.version ? html` · ${this.version.tag || this.version.commit.slice(0, 7)}` : nothing}</p>
     </footer>`;
   }
   render() {
     const kept = library();
     const want = this.query.trim();
     return html`<div class="to-home">
-      <h1 class="sr-only">${t('Tiny Little Office')}</h1>
+      <h1 class="sr-only">${t('drawer-tiny-little-office')}</h1>
       ${
         keeping() && kept.length
-          ? html`<input class="to-search" type="search" placeholder=${t('Search your documents')} aria-label=${t('Search your documents')} autocomplete="off" .value=${this.query} @input=${(e: Event) => (this.query = (e.target as HTMLInputElement).value)} @keydown=${(e: KeyboardEvent) => e.key === 'Enter' && (e.preventDefault(), this.querySelector<HTMLElement>('.to-found-docs a')?.click())} />`
+          ? html`<input class="to-search" type="search" placeholder=${t('home-search-your-documents')} aria-label=${t('home-search-your-documents')} autocomplete="off" .value=${this.query} @input=${(e: Event) => (this.query = (e.target as HTMLInputElement).value)} @keydown=${(e: KeyboardEvent) => e.key === 'Enter' && (e.preventDefault(), this.querySelector<HTMLElement>('.to-found-docs a')?.click())} />`
           : nothing
       }
       ${want ? this.renderFound(kept) : nothing}

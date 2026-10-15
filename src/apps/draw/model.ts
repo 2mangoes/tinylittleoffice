@@ -157,8 +157,8 @@ export function describeDrawing(shapes: Shape[]): string {
   const things = shapes.map((s, i) => (isLink(s.k) ? '' : named(i))).filter(Boolean);
   const joins = shapes
     .filter((s) => isLink(s.k) && named(s.x) && named(s.y))
-    .map((s) => (s.k === 'k' ? t('{a} leads to {b}', { a: named(s.x), b: named(s.y) }) : t('{a} joins {b}', { a: named(s.x), b: named(s.y) })) + (words(s) ? ` (${words(s)})` : ''));
-  const head = things.length ? t('A drawing of {things}.', { things: things.join(', ') }) : t('A drawing of {n|one unlabeled shape|# unlabeled shapes}.', { n: shapes.length });
+    .map((s) => (s.k === 'k' ? t('draw-leads-to-b', { a: named(s.x), b: named(s.y) }) : t('draw-joins-b', { a: named(s.x), b: named(s.y) })) + (words(s) ? ` (${words(s)})` : ''));
+  const head = things.length ? t('draw-drawing-of-things', { things: things.join(', ') }) : t('draw-drawing-of-n-unlabeled-shapes', { n: shapes.length });
   return joins.length ? `${head} ${joins.join('; ')}.` : head;
 }
 

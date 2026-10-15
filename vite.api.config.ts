@@ -16,7 +16,7 @@ import { resolve } from 'node:path';
  * What only a page uses: an app's editor and its commands, the chrome (kit/ui/, the icon picker among it), and the
  * languages other than English (a program reads English).
  */
-const PAGE_ONLY = /\/src\/(apps\/[^/]+\/(editor|commands)\.ts|kit\/ui\/[^/]+\.ts|i18n\/(?!en\.ts)[^/]+\.ts)$/;
+const PAGE_ONLY = /\/src\/(apps\/[^/]+\/(editor|commands)\.ts|kit\/ui\/[^/]+\.ts|i18n\/(?!en\.)[^/]+\.(ts|ftl)(\?raw)?)$/;
 
 export default defineConfig({
   base: './',

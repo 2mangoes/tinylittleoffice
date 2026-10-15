@@ -33,7 +33,10 @@ function runs(rs: TextRun[]): string {
 function list(l: TextList): string {
   const tag = l.ord ? 'ol' : 'ul';
   const item = (it: TextList['items'][number]) => {
-    const task = it.done === undefined ? '' : `<span class="to-text-box" aria-hidden="true">${it.done ? '☑' : '☐'}</span> <span class="sr-only">${xml(it.done ? t('done') : t('not done'))} </span>`;
+    const task =
+      it.done === undefined
+        ? ''
+        : `<span class="to-text-box" aria-hidden="true">${it.done ? '☑' : '☐'}</span> <span class="sr-only">${xml(it.done ? t('editor-done-lowercase') : t('editor-not-done'))} </span>`;
     return `<li${it.done === undefined ? '' : ' class="to-text-task"'}>${task}${runs(it.runs)}${it.list ? list(it.list) : ''}</li>`;
   };
   return `<${tag}>${l.items.map(item).join('')}</${tag}>`;
@@ -56,7 +59,7 @@ function node(n: TextNode): string {
     case 'doc':
       return `<section class="to-text-doc" aria-label="${xml(n.title || n.app)}">${textHtml(n.nodes)}</section>`;
     case 'notes':
-      return `<section class="to-text-notes" aria-label="${xml(t('Footnotes'))}"><ol>${n.notes.map((r) => `<li>${runs(r)}</li>`).join('')}</ol></section>`;
+      return `<section class="to-text-notes" aria-label="${xml(t('write-footnotes'))}"><ol>${n.notes.map((r) => `<li>${runs(r)}</li>`).join('')}</ol></section>`;
     case 'break':
       return '<hr>';
   }

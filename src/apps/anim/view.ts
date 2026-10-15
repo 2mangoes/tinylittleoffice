@@ -86,7 +86,7 @@ export function frameSvg(anim: AnimView, frame: number, theme?: Theme): string {
 }
 
 /** What the motion shows, in words. */
-export const altOf = (anim: AnimView) => anim.alt || describeDrawing(anim.shapes) || t('An empty stage');
+export const altOf = (anim: AnimView) => anim.alt || describeDrawing(anim.shapes) || t('anim-empty-stage');
 
 /** How a self-playing SVG repeats: SMIL's repeatCount, and whether it rests where it ends. */
 const repeatOf = (loop: Loop): string => (loop === 'forever' || loop === 'bounce' ? 'repeatCount="indefinite"' : `repeatCount="${loop === 'once' ? 1 : loop}" fill="freeze"`);

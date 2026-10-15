@@ -4,7 +4,7 @@ import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, test } from 'vitest';
 import { keyList, keyOf, keysText, labelOf, normalKey, runKey, command } from '../src/kit/core/commands.ts';
-import { definedKeys } from '../scripts/i18n-extract.ts';
+import { flatMessages } from '../scripts/ftl.ts';
 import { editingTables } from '../scripts/commands.ts';
 import { makeSkill } from '../scripts/make-skill.ts';
 import { apps } from '../src/kit/core/apps.ts';
@@ -77,14 +77,16 @@ describe('the graph lints', () => {
     expect(all.filter((c) => c.where.some((w) => w === 'bar' || w.startsWith('menu:')) && !reached(c)).map((c) => c.id)).toStrictEqual([]);
   });
 
-  test('every label is a string of en.ts, through t()', () => {
-    const en = new Set(definedKeys(read('src/i18n/en.ts')).map((x) => x.key));
+  test('every label is a message of en.ftl, through t()', () => {
+    const messages = flatMessages(read('src/i18n/en.ftl'), 'en');
+    const en = new Set(Object.keys(messages));
+    const english = new Set(Object.values(messages));
     // The keys a label's function passes to t(), as written (the test's transform calls t as `(0, import.t)(…)`).
     const literals = (fn: unknown) => [...String(fn).matchAll(/(?:\bt|\.t\))\(\s*(['"`])((?:\\.|(?!\1)[^\\])*)\1/g)].map((m) => m[2].replace(/\\(['"`\\])/g, '$1'));
     const bad = all.filter((c) => {
       if (typeof c.label === 'string') return !en.has(c.label);
       const literals_ = literals(c.label);
-      return literals_.length ? !literals_.every((k) => en.has(k)) : !en.has(labelOf(c));
+      return literals_.length ? !literals_.every((k) => en.has(k)) : !english.has(labelOf(c));
     });
     expect(bad.map((c) => `${c.id}: "${labelOf(c)}"`)).toStrictEqual([]);
   });

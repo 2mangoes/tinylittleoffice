@@ -34,21 +34,21 @@ export function blueskyCost(url: string): number {
 }
 
 export const TARGETS: Target[] = [
-  { id: 'link', max: 2048, cost: full, where: () => t('some browsers') },
+  { id: 'link', max: 2048, cost: full, where: () => t('share-some-browsers') },
   { id: 'bluesky', max: 300, cost: blueskyCost, where: () => 'Bluesky', flat: true },
   { id: 'mastodon', max: 500, cost: () => 23, where: () => 'Mastodon', flat: true },
   { id: 'x', max: 280, cost: () => 23, where: () => 'X', flat: true },
-  { id: 'sms', max: 160, cost: full, where: () => t('a text message') },
-  { id: 'discord', max: 2000, cost: full, where: () => t('a Discord message') },
+  { id: 'sms', max: 160, cost: full, where: () => t('share-text-message') },
+  { id: 'discord', max: 2000, cost: full, where: () => t('share-discord-message') },
   // Google Docs keeps the first 4,096 characters of a link put on words (Insert, Link); Paul, 2026-10-14: "Google Docs inline link cut my link."
-  { id: 'gdocs', max: 4096, cost: full, where: () => t('a link in Google Docs') },
-  { id: 'telegram', max: 4096, cost: full, where: () => t('a Telegram message') },
-  { id: 'qr', max: 2953, cost: bytes, where: () => t('a QR code') },
+  { id: 'gdocs', max: 4096, cost: full, where: () => t('share-link-in-google-docs') },
+  { id: 'telegram', max: 4096, cost: full, where: () => t('share-telegram-message') },
+  { id: 'qr', max: 2953, cost: bytes, where: () => t('share-a-qr-code') },
   // NFC tags hold a link as an NDEF record: 7 bytes of framing, and "https://" packed into one.
-  { id: 'ntag215', max: 504, cost: (u) => bytes(u) - 7 + 7, where: () => t('a small NFC sticker') },
-  { id: 'ntag216', max: 888, cost: (u) => bytes(u) - 7 + 7, where: () => t('an NFC sticker') },
+  { id: 'ntag215', max: 504, cost: (u) => bytes(u) - 7 + 7, where: () => t('share-small-nfc-sticker') },
+  { id: 'ntag216', max: 888, cost: (u) => bytes(u) - 7 + 7, where: () => t('share-nfc-sticker') },
   // The shortener keeps the link encrypted and holds 16 KiB of ciphertext: said as the longest link that encrypts to that.
-  { id: 'short', max: SHORT_LINK_MAX, cost: bytes, where: () => t('a short link') },
+  { id: 'short', max: SHORT_LINK_MAX, cost: bytes, where: () => t('share-a-short-link') },
 ];
 
 export interface Room {
@@ -75,5 +75,5 @@ export function fitLine(url: string): string {
     .filter((r) => !r.target.flat)
     .sort((a, b) => b.target.max - a.target.max)
     .find((r) => r.left < 0);
-  return over ? t('This link: {n} characters, too long for {where}', { n, where: over.target.where() }) : t('This link: {n} characters, fits in a text message', { n });
+  return over ? t('share-this-link-n-characters-too', { n, where: over.target.where() }) : t('share-this-link-n-characters-fits', { n });
 }

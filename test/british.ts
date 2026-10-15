@@ -1,6 +1,6 @@
 /**
  * British spellings and British sample words, each with what to say instead: the product's English is American
- * (Paul, 2026-10-11). test/american.test.ts holds en.ts and every template to it, test/i18n.test.ts every English string.
+ * (Paul, 2026-10-11). test/american.test.ts holds en.ftl and every template to it, test/i18n.test.ts every English string.
  */
 export const BRITISH: [RegExp, string][] = [
   [/colour/i, 'color'],

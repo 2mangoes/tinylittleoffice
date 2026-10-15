@@ -15,16 +15,16 @@ import '../ui/dialog.ts';
 
 /** What a column may hold, in the person's language. */
 export const COLUMN_KINDS: { id: ColType; name: () => string; hint: () => string }[] = [
-  { id: 'text', name: () => t('Text'), hint: () => t('Shown as typed') },
-  { id: 'number', name: () => t('Number'), hint: () => '1,234.5' },
-  { id: 'money', name: () => t('Money'), hint: () => '$1,234.50' },
-  { id: 'percent', name: () => t('Percent'), hint: () => '12.5%' },
-  { id: 'date', name: () => t('Date'), hint: () => '2027-03-01' },
-  { id: 'url', name: () => t('Link'), hint: () => t('Opens when clicked') },
-  { id: 'check', name: () => t('Checkbox'), hint: () => '☑ ☐' },
-  { id: 'option', name: () => t('Option'), hint: () => t('One of the words the column holds, or a new one') },
-  { id: 'rich', name: () => t('Rich text'), hint: () => t('Bold, italic and links') },
-  { id: 'name', name: () => t('Name'), hint: () => t('Names the cell to its right') },
+  { id: 'text', name: () => t('sheet-text'), hint: () => t('sheet-shown-as-typed') },
+  { id: 'number', name: () => t('sheet-number'), hint: () => '1,234.5' },
+  { id: 'money', name: () => t('sheet-money'), hint: () => '$1,234.50' },
+  { id: 'percent', name: () => t('sheet-percent'), hint: () => '12.5%' },
+  { id: 'date', name: () => t('bar-date'), hint: () => '2027-03-01' },
+  { id: 'url', name: () => t('share-link'), hint: () => t('sheet-opens-when-clicked') },
+  { id: 'check', name: () => t('sheet-checkbox'), hint: () => '☑ ☐' },
+  { id: 'option', name: () => t('editor-option'), hint: () => t('editor-one-of-words-column-holds') },
+  { id: 'rich', name: () => t('sheet-rich-text'), hint: () => t('editor-bold-italic-and-links') },
+  { id: 'name', name: () => t('sheet-name'), hint: () => t('sheet-names-cell-to-its-right') },
 ];
 
 /**
@@ -59,7 +59,7 @@ function askCurrency(now = ''): Promise<string | null> {
   return new Promise((done) => {
     const dialog = document.createElement('to-dialog') as ToDialog;
     const list = `to-currencies-${++n}`;
-    dialog.heading = t('Money');
+    dialog.heading = t('sheet-money');
     dialog.className = 'to-ask-dialog to-currency-dialog';
     let value = now;
     let answer: string | null = null;
@@ -75,13 +75,13 @@ function askCurrency(now = ''): Promise<string | null> {
           dialog.close();
         }}
       >
-        <label class="to-currency-label" for=${`${list}-field`}>${t('Currency')}</label>
+        <label class="to-currency-label" for=${`${list}-field`}>${t('looks-currency')}</label>
         <div class="to-ask-row">
           <input id=${`${list}-field`} class="to-ask-url to-currency-field" type="text" list=${list} .value=${value} placeholder="$" aria-invalid=${ok() ? 'false' : 'true'} autocomplete="off" autocapitalize="characters" spellcheck="false" enterkeyhint="done" @input=${(e: Event) => ((value = (e.target as HTMLInputElement).value), draw())} />
-          <button type="submit" class="to-btn primary to-ask-ok" ?disabled=${!ok()}>${t('OK')}</button>
+          <button type="submit" class="to-btn primary to-ask-ok" ?disabled=${!ok()}>${t('write-ok')}</button>
         </div>
         <datalist id=${list}>${CURRENCIES.map((c) => html`<option value=${c}></option>`)}</datalist>
-        ${ok() ? html`<p class="to-hint">${t('A symbol, like $, or a code, like USD. Empty is the document’s own.')}</p>` : html`<p class="to-hint" role="alert">${t('A symbol of up to three characters, or a code of three letters.')}</p>`}
+        ${ok() ? html`<p class="to-hint">${t('sheet-symbol-like-or-code-like')}</p>` : html`<p class="to-hint" role="alert">${t('sheet-symbol-of-up-to-three')}</p>`}
       </form>`);
     draw();
     dialog.addEventListener('to-close', () => {

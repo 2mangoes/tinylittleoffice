@@ -72,7 +72,7 @@ export class ToCompare extends LitElement {
 
   private set(which: 'a' | 'b', link: string, box: HTMLInputElement) {
     const side = link.trim() ? sideOf(link) : null;
-    box.setCustomValidity(link.trim() && !side ? t('Not a link to a Tiny Little Office document') : '');
+    box.setCustomValidity(link.trim() && !side ? t('compare-not-link-to-tiny-little') : '');
     box.reportValidity();
     if (link.trim() && !side) return;
     location.hash = which === 'a' ? compareHash(side, this.b) : compareHash(this.a, side);
@@ -84,13 +84,13 @@ export class ToCompare extends LitElement {
   private renderSide(which: 'a' | 'b', s: Side | null) {
     const def = s ? appOf(s.app) : undefined;
     const text = s ? decodeDoc(s.payload) : '';
-    const label = which === 'a' ? t('The first link') : t('The second link');
+    const label = which === 'a' ? t('compare-first-link') : t('compare-second-link');
     const href = s ? `${location.origin}${location.pathname}${routeHash(s.app, s.payload)}` : '';
     return html`<div class="cmp-side">
       <label class="to-field cmp-field"><span>${label}</span>
-        <input type="url" class="cmp-${which}" placeholder=${which === 'a' ? t('Paste the link to the document as it was') : t('Paste the link to the document as it is now')} .value=${href} @change=${(e: Event) => this.set(which, (e.target as HTMLInputElement).value, e.target as HTMLInputElement)} />
+        <input type="url" class="cmp-${which}" placeholder=${which === 'a' ? t('compare-paste-link-to-document-as-it-was') : t('compare-paste-link-to-document-as')} .value=${href} @change=${(e: Event) => this.set(which, (e.target as HTMLInputElement).value, e.target as HTMLInputElement)} />
       </label>
-      ${def ? html`<p class="cmp-meta">${icon(def.icon, 16)}<b>${def.title(text) || t('Untitled {noun}', { noun: def.noun })}</b><span>· ${def.name}</span><a href=${routeHash(s!.app, s!.payload)}>${t('Open')}</a></p>` : nothing}
+      ${def ? html`<p class="cmp-meta">${icon(def.icon, 16)}<b>${def.title(text) || t('shell-untitled-noun', { noun: def.noun })}</b><span>· ${def.name}</span><a href=${routeHash(s!.app, s!.payload)}>${t('common-open')}</a></p>` : nothing}
     </div>`;
   }
 
@@ -105,20 +105,20 @@ export class ToCompare extends LitElement {
         : c.kind === ' '
           ? html`<div class="cmp-cell">${c.line}</div>`
           : c.kind === '-'
-            ? html`<del class="cmp-cell cmp-del"><span class="sr-only">${t('Taken out:')} </span>${c.line}</del>`
-            : html`<ins class="cmp-cell cmp-add ${side}"><span class="sr-only">${t('Put in:')} </span>${c.line}</ins>`;
+            ? html`<del class="cmp-cell cmp-del"><span class="sr-only">${t('compare-taken-out')} </span>${c.line}</del>`
+            : html`<ins class="cmp-cell cmp-add ${side}"><span class="sr-only">${t('compare-put-in')} </span>${c.line}</ins>`;
     return html`<section class="to-compare" aria-labelledby="cmp-h">
-      <h1 id="cmp-h">${icon(UI.compare, 22)}<span>${t('Compare')}</span></h1>
-      <p class="to-hint">${t('Two links to documents, side by side: what the second changed is marked. Nothing leaves this page.')}</p>
+      <h1 id="cmp-h">${icon(UI.compare, 22)}<span>${t('compare-compare')}</span></h1>
+      <p class="to-hint">${t('compare-two-links-to-documents-side')}</p>
       <div class="cmp-sides">${this.renderSide('a', this.a)}${this.renderSide('b', this.b)}</div>
       ${
         both
           ? html`<div class="cmp-bar">
-              <p class="cmp-sum" role="status">${removed || added ? `${t('{n|# block taken out|# blocks taken out}', { n: removed })}, ${t('{n|# put in|# put in}', { n: added })}` : t('No difference')}${this.a!.app !== this.b!.app ? ` · ${t('different apps')}` : ''}</p>
-              <button type="button" class="to-btn cmp-swap" @click=${this.swap}>${icon(UI.compare, 16)}<span>${t('Swap')}</span></button>
+              <p class="cmp-sum" role="status">${removed || added ? `${t('compare-n-blocks-taken-out', { n: removed })}, ${t('compare-n-put-in', { n: added })}` : t('compare-no-difference')}${this.a!.app !== this.b!.app ? ` · ${t('compare-different-apps')}` : ''}</p>
+              <button type="button" class="to-btn cmp-swap" @click=${this.swap}>${icon(UI.compare, 16)}<span>${t('compare-swap')}</span></button>
             </div>
-            <div class="cmp-rows" role="list" aria-label=${t('Changes')}>${rowsOf(changes).map(([o, n]) => html`<div class="cmp-row ${o?.kind === ' ' ? '' : 'changed'}" role="listitem">${cell(o, 'old')}${o?.kind === ' ' ? html`<div class="cmp-cell cmp-same" aria-hidden="true">${o.line}</div>` : cell(n, 'new')}</div>`)}</div>`
-          : html`<p class="to-empty">${t('Paste a second link to see what changed.')}</p>`
+            <div class="cmp-rows" role="list" aria-label=${t('compare-changes')}>${rowsOf(changes).map(([o, n]) => html`<div class="cmp-row ${o?.kind === ' ' ? '' : 'changed'}" role="listitem">${cell(o, 'old')}${o?.kind === ' ' ? html`<div class="cmp-cell cmp-same" aria-hidden="true">${o.line}</div>` : cell(n, 'new')}</div>`)}</div>`
+          : html`<p class="to-empty">${t('compare-paste-second-link-to-see')}</p>`
       }
     </section>`;
   }

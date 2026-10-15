@@ -68,7 +68,7 @@ test('the Spreadsheet’s templates: asked for as a pointer comes over its row, 
 });
 
 test('a language chosen while a list is open: the templates are forgotten, asked for again, and the open list says them in it', async () => {
-  register('es-tpl', { Budget: 'Presupuesto' });
+  register('es-tpl', 'sheet-budget = Presupuesto\n');
   const shell = await mount('');
   const sheet = appOf('sheet')!;
   const row = [...shell.querySelectorAll<HTMLElement>('.to-app')].find((x) => x.querySelector('.to-app-name')!.textContent === 'Spreadsheet')!;

@@ -145,10 +145,10 @@ export class ToDocDialog extends LitElement {
     return html`<dialog class="to-doc-dialog" aria-labelledby=${this.uid} @cancel=${(e: Event) => e.preventDefault()} @keydown=${this.onKey}>
       <header class="to-doc-dialog-head">
         <h2 id=${this.uid}>${this.heading}</h2>
-        ${this.sizing ? html`<div class="to-doc-dialog-sizes" role="group" aria-label=${t('Size')}>${num(t('Rows'), this.rows, ROWS, (v) => this.resize(v, this.cols))}<span aria-hidden="true">×</span>${num(t('Columns'), this.cols, MAX_COLS, (v) => this.resize(this.rows, v))}</div>` : nothing}
+        ${this.sizing ? html`<div class="to-doc-dialog-sizes" role="group" aria-label=${t('anim-size')}>${num(t('doc-rows'), this.rows, ROWS, (v) => this.resize(v, this.cols))}<span aria-hidden="true">×</span>${num(t('sheet-columns'), this.cols, MAX_COLS, (v) => this.resize(this.rows, v))}</div>` : nothing}
         <span class="to-doc-dialog-gap"></span>
-        <button type="button" class="to-btn to-doc-dialog-cancel" @click=${() => this.finish(false)}>${t('Cancel')}</button>
-        <button type="button" class="to-btn primary to-doc-dialog-done" @click=${() => this.finish(true)}>${icon(UI.check, 16)}<span>${t('Done')}</span></button>
+        <button type="button" class="to-btn to-doc-dialog-cancel" @click=${() => this.finish(false)}>${t('doc-cancel')}</button>
+        <button type="button" class="to-btn primary to-doc-dialog-done" @click=${() => this.finish(true)}>${icon(UI.check, 16)}<span>${t('editor-done')}</span></button>
       </header>
       <div class="to-doc-dialog-body" tabindex="-1"></div>
     </dialog>`;
@@ -180,7 +180,7 @@ export async function editDoc(o: { app: string; text: string; heading?: string; 
 
 /** A table block, edited in the Spreadsheet in the dialog, with its size: the block on Done, null on Cancel. */
 export async function editTable(table: TableBlock): Promise<TableBlock | null> {
-  const out = await editDoc({ app: 'sheet', text: write({ head: {}, blocks: [table] }), heading: t('Table'), sizing: true });
+  const out = await editDoc({ app: 'sheet', text: write({ head: {}, blocks: [table] }), heading: t('bar-table'), sizing: true });
   return out === null ? null : (tableIn(out) ?? table);
 }
 

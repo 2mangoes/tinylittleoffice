@@ -72,16 +72,16 @@ export function where(u: URL): { what: string; name: string } | null {
       // Not a whole encoding: drawn as written.
     }
     if (HIDDEN.test(name)) return null;
-    return { what: u.protocol === 'mailto:' ? t('This link writes an email to') : t('This link calls'), name };
+    return { what: u.protocol === 'mailto:' ? t('leave-this-link-writes-email-to') : t('leave-this-link-calls'), name };
   }
   // The host as the browser will reach it: a look-alike letter shows as its xn-- spelling.
-  return { what: t('You are leaving Tiny Little Office for'), name: u.hostname };
+  return { what: t('leave-you-are-leaving-tiny-little'), name: u.hostname };
 }
 
 /** Ask before going to this address. */
 export async function ask(url: URL): Promise<void> {
   const said = where(url);
-  if (!said) return toast(t('This link hides characters in its address.'));
+  if (!said) return toast(t('leave-this-link-hides-characters-in'));
   const { what, name } = said;
   const d = theGuard();
   const go = () => {
@@ -91,24 +91,24 @@ export async function ask(url: URL): Promise<void> {
   // Said as it opens, after the question: what the link does and where (Cancel, which has the focus, says nothing of it).
   const id = (part: string) => `${d.uid}-${part}`;
   const plain = url.protocol === 'http:';
-  d.heading = t('Do you trust this link?');
+  d.heading = t('leave-do-you-trust-this-link');
   d.describedby = [id('what'), id('host'), ...(plain ? [id('warn')] : [])].join(' ');
   d.body = html`<p class="lg-what" id=${id('what')}>${what}</p>
     <p class="lg-host" id=${id('host')} dir="ltr">${name}</p>
-    ${plain ? html`<p class="lg-warn" id=${id('warn')}>${icon(UI.shield, 16)} ${t('Not a secure address: what you send there can be read on the way.')}</p>` : nothing}
-    <p class="lg-label">${t('The whole address:')}</p>
+    ${plain ? html`<p class="lg-warn" id=${id('warn')}>${icon(UI.shield, 16)} ${t('leave-not-secure-address-what-you')}</p>` : nothing}
+    <p class="lg-label">${t('leave-whole-address')}</p>
     <code class="lg-url" dir="ltr">${url.href}</code>
-    <p class="lg-note">${t('Someone wrote this link into the document. The words shown for a link need not match where it goes. Only go if you trust where it leads.')}</p>
+    <p class="lg-note">${t('leave-someone-wrote-this-link-into')}</p>
     <div class="lg-buttons">
-      <button type="button" class="to-btn lg-cancel" autofocus @click=${() => d.close()}>${icon(UI.close, 18)}<span>${t('Cancel')}</span></button>
-      <button type="button" class="to-btn lg-go" @click=${go}><span>${t('Go')}</span>${icon(UI.open, 18)}</button>
+      <button type="button" class="to-btn lg-cancel" autofocus @click=${() => d.close()}>${icon(UI.close, 18)}<span>${t('doc-cancel')}</span></button>
+      <button type="button" class="to-btn lg-go" @click=${go}><span>${t('leave-go')}</span>${icon(UI.open, 18)}</button>
     </div>`;
   await d.show();
   d.querySelector<HTMLButtonElement>('.lg-cancel')?.focus();
 }
 
 /** A link that does not open here, said so. */
-const refuse = () => toast(t('Links of this kind do not open here.'));
+const refuse = () => toast(t('leave-links-of-this-kind-do'));
 
 /** Follow a link from code the way every link is followed: by asking first. */
 export function openLink(href: string) {

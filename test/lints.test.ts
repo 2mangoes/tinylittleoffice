@@ -306,7 +306,8 @@ const STALE_OK: Record<string, string> = {
   'test/lints.test.ts': 'the list itself',
   'test/fixtures/lints/stale-words.md': 'the fixture the lint must catch',
   'src/kit/draw/icons-meta.ts': 'Lucide’s own tags for its icons ("signature", "kanban"), generated from its release',
-  'src/i18n/fr.ts': '"une signature" is French for a byline',
+  'src/i18n/fr.ftl': '"une signature" is French for a byline',
+  'src/i18n/fr.ts': '"une signature" is French for a byline (the old dictionary, until it goes)',
   'docs/self-host.md': '`npm audit signatures`, npm’s check of a package’s provenance',
 };
 
@@ -318,7 +319,7 @@ const RECORDS = /^(docs\/history|docs\/directives)\/|^CHANGELOG\.md$/;
 const textFiles = execFileSync('git', ['ls-files', '--cached', '--others', '--exclude-standard', '-z'], { cwd: ROOT, encoding: 'utf8' })
   .split('\0')
   .filter((f) => f && !RECORDS.test(f) && existsSync(join(ROOT, f)))
-  .filter((f) => /\.(ts|js|mjs|json|jsonc|md|html|css|txt|tlo|sh|yml|yaml|svg|webmanifest)$|(^|\/)_headers$/.test(f))
+  .filter((f) => /\.(ts|js|mjs|json|jsonc|md|html|css|txt|tlo|ftl|sh|yml|yaml|svg|webmanifest)$|(^|\/)_headers$/.test(f))
   .sort();
 
 describe('no word for what is gone: a sentence about something removed is rewritten or deleted', () => {
@@ -420,9 +421,9 @@ describe('the build’s budgets and shape: the built site within budgets.json, i
         .sort(),
     );
     expect(Object.keys(budgets.languages ?? {}).sort()).toStrictEqual(
-      tree
-        .filter((m) => /^src\/i18n\/[^/]+\.ts$/.test(m.path) && !m.path.endsWith('/en.ts'))
-        .map((m) => m.path.split('/')[2].replace(/\.ts$/, ''))
+      readdirSync(join(ROOT, 'src/i18n'))
+        .filter((f) => f.endsWith('.ftl') && f !== 'en.ftl')
+        .map((f) => f.replace(/\.ftl$/, ''))
         .sort(),
     );
   });

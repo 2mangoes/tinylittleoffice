@@ -1,5 +1,5 @@
 // Each command's words, in each language, measured against the room its slot gives them: the source of the length rule
-// (src/i18n/en.ts's header points here). The registry says where a command is drawn (kit/core/commands.ts `where`); the
+// (src/i18n/en.ftl's head points here). The registry says where a command is drawn (kit/core/commands.ts `where`); the
 // stylesheet says how wide that place is; the box's own fonts say how wide the words are, measured with the font the
 // slot's words are drawn in (the canvas's measureText, given the slot's computed font: IBM Plex Sans, the site's own),
 // with the family of the language's script first where it is not Latin or Cyrillic (test/browser/fonts.ts: Plex Sans
@@ -19,9 +19,9 @@
 // A bar button that is an icon (cmdTool) and a context bar's are not measured: their words are a tooltip and a name
 // for a screen reader, never drawn in the bar. The drawer's rows are laid out at 390px by test/browser/languages.test.ts.
 //
-// A label too wide fails, naming the language, the key, the command and slot, the measured and the allowed widths. A
-// translator shortens it where a shorter word with the meaning exists; where none does, RAISED below says so with the
-// reason, for that slot and key.
+// A label too wide fails, naming the language, the message's id, the command and slot, the measured and the allowed
+// widths. A translator shortens it where a shorter word with the meaning exists; where none does, RAISED below says so
+// with the reason, for that slot and id.
 import { test, expect, beforeAll, afterAll } from 'vitest';
 import { page } from 'vitest/browser';
 import { html, render } from 'lit';
@@ -31,17 +31,24 @@ import type { ToDialog } from '../../src/kit/ui/dialog.ts';
 import '../../src/kit/ui/bar.ts';
 import { icon, UI } from '../../src/kit/draw/icons.ts';
 import { keysText, registered, type Command } from '../../src/kit/core/commands.ts';
-import type { Strings } from '../../src/kit/core/i18n.ts';
 import '../../src/kit/core/keys.ts';
 import '../../src/kit/text/text-commands.ts';
 import '../../src/kit/text/rows-commands.ts';
-import en from '../../src/i18n/en.ts';
+import enSource from '../../src/i18n/en.ftl?raw';
+import { flatMessages } from '../../scripts/ftl.ts';
 import { FAMILIES, firstFamily, fontIn, installed, loadFont } from './fonts.ts';
 
 import.meta.glob('../../src/apps/*/commands.ts', { eager: true });
 const sources = import.meta.glob<string>(['../../src/apps/*/*.ts', '!../../src/apps/*/commands.ts'], { query: '?raw', import: 'default', eager: true });
-const files = import.meta.glob<{ default: Strings }>(['../../src/i18n/*.ts', '!../../src/i18n/en.ts']);
-const codeOf = (path: string) => path.replace(/^.*\/([^/]+)\.ts$/, '$1');
+const files = import.meta.glob<string>(['../../src/i18n/*.ftl', '!../../src/i18n/en.ftl'], { query: '?raw', import: 'default' });
+const codeOf = (path: string) => path.replace(/^.*\/([^/]+)\.ftl$/, '$1');
+/** English's messages, id → words, and the id of each English (the first, where two say the same). */
+const en = flatMessages(enSource, 'en');
+const idOf = new Map(
+  Object.entries(en)
+    .reverse()
+    .map(([id, words]) => [words, id]),
+);
 
 /**
  * The bar commands drawn with their words, read from the apps' code: cmdBtn(own('x')), cmdMenu(own('x'), …, { words:
@@ -69,48 +76,49 @@ function worded(): Set<string> {
   return out;
 }
 
-/** Labels too long for their slot in languages that have no shorter words with the meaning: the key, the slot, the languages, why. */
+/** Labels too long for their slot in languages that have no shorter words with the meaning: the message's id, the slot, the languages, why. */
 const RAISED: { key: string; slot: Slot; langs: string[]; why: string }[] = [
   // The menus' rows: a second line where the words cannot be fewer.
   {
-    key: 'Tiny Little Office Doc…',
+    key: 'insert-tiny-little-office-doc-ellipsis',
     slot: 'menu',
     langs: ['de', 'es', 'it', 'ja', 'nl', 'pt-br'],
     why: 'the name said in the language’s own words (Paul, 2026-10-10) and the word for a document: no shorter words keep both',
   },
-  { key: 'Page break', slot: 'menu', langs: ['it', 'pt-br'], why: 'the word processors’ own term in each language; the row’s keys (Ctrl+Enter) take a third of it' },
+  { key: 'write-page-break', slot: 'menu', langs: ['it', 'pt-br'], why: 'the word processors’ own term in each language; the row’s keys (Ctrl+Enter) take a third of it' },
   {
-    key: 'Draw as a family tree',
+    key: 'outline-draw-as-family-tree',
     slot: 'menu',
     langs: ['es', 'fr', 'it', 'pt-br'],
     why: 'the verb and the diagram’s name, both needed: the outline’s view menu offers the outline itself beside these',
   },
   // The bar's buttons with words: the one-third rule is cruel to a word of four or five letters.
-  { key: 'Chart', slot: 'bar', langs: ['de', 'fr', 'nl', 'pl'], why: 'Diagramm, Graphique, Grafiek, Wykres: the glossary’s word for a chart, beside an English word Plex sets narrow' },
-  { key: 'Time zone', slot: 'bar', langs: ['fr'], why: 'fuseau horaire is the only term' },
+  { key: 'sheet-chart', slot: 'bar', langs: ['de', 'fr', 'nl', 'pl'], why: 'Diagramm, Graphique, Grafiek, Wykres: the glossary’s word for a chart, beside an English word Plex sets narrow' },
+  { key: 'cal-time-zone', slot: 'bar', langs: ['fr'], why: 'fuseau horaire is the only term' },
   // Russian: its words run a third longer than English.
-  { key: 'Time zone', slot: 'bar', langs: ['ru'], why: 'Russian words are about a third longer than English; the glossary’s term has no shorter form with the meaning' },
-  { key: 'Connect', slot: 'bar', langs: ['ru'], why: 'Russian words are about a third longer than English; the glossary’s term has no shorter form with the meaning' },
-  { key: 'Draw as a family tree', slot: 'menu', langs: ['ru'], why: 'Russian words are about a third longer than English; the glossary’s term has no shorter form with the meaning' },
-  { key: 'Chart', slot: 'bar', langs: ['ru'], why: 'Russian words are about a third longer than English; the glossary’s term has no shorter form with the meaning' },
-  { key: 'Page break', slot: 'menu', langs: ['ru'], why: 'Russian words are about a third longer than English; the glossary’s term has no shorter form with the meaning' },
-  { key: 'Time zone', slot: 'bar', langs: ['uk'], why: 'Ukrainian words run a third longer than English, as Russian’s do; the glossary’s term has no shorter form with the meaning' },
-  { key: 'Mind map', slot: 'bar', langs: ['uk'], why: 'Ukrainian words run a third longer than English, as Russian’s do; the glossary’s term has no shorter form with the meaning' },
-  { key: 'Chart', slot: 'bar', langs: ['uk'], why: 'Ukrainian words run a third longer than English, as Russian’s do; the glossary’s term has no shorter form with the meaning' },
-  { key: 'Page break', slot: 'menu', langs: ['uk'], why: 'Ukrainian words run a third longer than English, as Russian’s do; the glossary’s term has no shorter form with the meaning' },
-  { key: 'Align right', slot: 'menu', langs: ['uk'], why: 'Ukrainian words run a third longer than English, as Russian’s do; the glossary’s term has no shorter form with the meaning' },
-  { key: 'Link', slot: 'dialog', langs: ['uk'], why: 'Ukrainian words run a third longer than English, as Russian’s do; the glossary’s term has no shorter form with the meaning' },
-  { key: 'Display Link', slot: 'dialog', langs: ['uk'], why: 'Ukrainian words run a third longer than English, as Russian’s do; the glossary’s term has no shorter form with the meaning' },
-  { key: 'Align left', slot: 'menu', langs: ['ru'], why: 'Russian words are about a third longer than English; the glossary’s term has no shorter form with the meaning' },
-  { key: 'Align right', slot: 'menu', langs: ['ru'], why: 'Russian words are about a third longer than English; the glossary’s term has no shorter form with the meaning' },
-  { key: 'Display Link', slot: 'dialog', langs: ['ru'], why: 'Russian words are about a third longer than English; the glossary’s term has no shorter form with the meaning' },
+  { key: 'cal-time-zone', slot: 'bar', langs: ['ru'], why: 'Russian words are about a third longer than English; the glossary’s term has no shorter form with the meaning' },
+  { key: 'outline-connect', slot: 'bar', langs: ['ru'], why: 'Russian words are about a third longer than English; the glossary’s term has no shorter form with the meaning' },
+  { key: 'outline-draw-as-family-tree', slot: 'menu', langs: ['ru'], why: 'Russian words are about a third longer than English; the glossary’s term has no shorter form with the meaning' },
+  { key: 'sheet-chart', slot: 'bar', langs: ['ru'], why: 'Russian words are about a third longer than English; the glossary’s term has no shorter form with the meaning' },
+  { key: 'write-page-break', slot: 'menu', langs: ['ru'], why: 'Russian words are about a third longer than English; the glossary’s term has no shorter form with the meaning' },
+  { key: 'cal-time-zone', slot: 'bar', langs: ['uk'], why: 'Ukrainian words run a third longer than English, as Russian’s do; the glossary’s term has no shorter form with the meaning' },
+  { key: 'diagram-mind-map', slot: 'bar', langs: ['uk'], why: 'Ukrainian words run a third longer than English, as Russian’s do; the glossary’s term has no shorter form with the meaning' },
+  { key: 'sheet-chart', slot: 'bar', langs: ['uk'], why: 'Ukrainian words run a third longer than English, as Russian’s do; the glossary’s term has no shorter form with the meaning' },
+  { key: 'write-page-break', slot: 'menu', langs: ['uk'], why: 'Ukrainian words run a third longer than English, as Russian’s do; the glossary’s term has no shorter form with the meaning' },
+  { key: 'write-align-right', slot: 'menu', langs: ['uk'], why: 'Ukrainian words run a third longer than English, as Russian’s do; the glossary’s term has no shorter form with the meaning' },
+  { key: 'share-link', slot: 'dialog', langs: ['uk'], why: 'Ukrainian words run a third longer than English, as Russian’s do; the glossary’s term has no shorter form with the meaning' },
+  { key: 'share-display-link', slot: 'dialog', langs: ['uk'], why: 'Ukrainian words run a third longer than English, as Russian’s do; the glossary’s term has no shorter form with the meaning' },
+  { key: 'write-align-left', slot: 'menu', langs: ['ru'], why: 'Russian words are about a third longer than English; the glossary’s term has no shorter form with the meaning' },
+  { key: 'write-align-right', slot: 'menu', langs: ['ru'], why: 'Russian words are about a third longer than English; the glossary’s term has no shorter form with the meaning' },
+  { key: 'share-display-link', slot: 'dialog', langs: ['ru'], why: 'Russian words are about a third longer than English; the glossary’s term has no shorter form with the meaning' },
   // The Share dialog.
-  { key: 'Mind map', slot: 'bar', langs: ['fr', 'it', 'ja'], why: 'carte mentale, mappa mentale, マインドマップ: the diagram’s name in each' },
+  { key: 'diagram-mind-map', slot: 'bar', langs: ['fr', 'it', 'ja'], why: 'carte mentale, mappa mentale, マインドマップ: the diagram’s name in each' },
 ];
 
 type Slot = 'bar' | 'menu' | 'dialog';
 interface Measure {
   cmd: string;
+  /** The message's id. */
   key: string;
   slot: Slot;
   /** The font the slot's words are drawn in. */
@@ -128,15 +136,16 @@ function width(text: string, font: string): number {
 }
 const round = (n: number) => Math.round(n * 10) / 10;
 
-/** A command's words as a key of en.ts: its label, or what a function of the context says with nothing in hand. */
+/** A command's words as a message's id: its label, or the id of what a function of the context says with nothing in hand. */
 function keyOf(cmd: Command): string | undefined {
-  const words = typeof cmd.label === 'string' ? cmd.label : cmd.label(undefined);
-  return typeof words === 'string' && words in en ? words : undefined;
+  if (typeof cmd.label === 'string') return cmd.label in en ? cmd.label : undefined;
+  const words = cmd.label(undefined);
+  return typeof words === 'string' ? idOf.get(words) : undefined;
 }
 
-/** The room a slot gives this key's words in any language. */
-function allowedFor(m: Measure): number {
-  const english = width(m.key, m.font);
+/** The room a slot gives this message's words in any language. */
+function allowedFor(m: Measure, words = en[m.key]): number {
+  const english = width(words, m.font);
   if ('px' in m.room) return m.room.px;
   return 'times' in m.room ? english * m.room.times : m.room.line * Math.max(1, Math.ceil(english / m.room.line));
 }
@@ -193,8 +202,8 @@ async function dialogButtons(): Promise<Measure[]> {
   const out: Measure[] = [];
   for (const b of share.querySelectorAll<HTMLElement>('.to-btn')) {
     const holder = b.querySelector('span') ?? b;
-    const key = holder.textContent!.replace(/\s+/g, ' ').trim();
-    if (!b.getClientRects().length || !(key in en)) continue;
+    const key = idOf.get(holder.textContent!.replace(/\s+/g, ' ').trim());
+    if (!b.getClientRects().length || !key) continue;
     const font = getComputedStyle(holder).font;
     // The run of things on the button's line: its row, where that is a flex row that does not wrap; else itself. The
     // run may grow to the width of what holds it, its buttons sharing that, and a field in it gives way to 8em.
@@ -208,7 +217,7 @@ async function dialogButtons(): Promise<Measure[]> {
     const giving = fields.reduce((n, f) => n + Math.max(0, f.getBoundingClientRect().width - 8 * parseFloat(getComputedStyle(f).fontSize)), 0);
     const sharing = run === b ? 1 : [...run.children].filter((k) => k.classList.contains('to-btn') && k.getClientRects().length).length;
     const own = slack(b) + (holder !== b ? slack(holder as HTMLElement) : 0);
-    out.push({ cmd: 'Share dialog', key, slot: 'dialog', font, room: { px: width(key, font) + own + (Math.max(0, room) + giving) / sharing } });
+    out.push({ cmd: 'Share dialog', key, slot: 'dialog', font, room: { px: width(en[key], font) + own + (Math.max(0, room) + giving) / sharing } });
   }
   share.close();
   document.body.innerHTML = '';
@@ -247,13 +256,13 @@ test('the slots are found: the bar commands that show their words, the menus’ 
     expect(line, m.cmd).toBeLessThan(374);
   }
   expect(bar[0].font).toMatch(/px/);
-  expect(measures.filter((m) => m.slot === 'dialog').map((m) => m.key)).toEqual(expect.arrayContaining(['Edit link']));
+  expect(measures.filter((m) => m.slot === 'dialog').map((m) => m.key)).toEqual(expect.arrayContaining(['share-edit-link']));
   // A row's words are its name alone, the instructions on its hint line (Paul, 2026-10-10): the pen's take one line,
   // and a row whose English did take two would give every language two.
   const pen = menu.find((m) => m.cmd === 'draw.insert.pen')!;
   const line = (pen.room as { line: number }).line;
   expect(allowedFor(pen)).toBe(line);
-  const long = allowedFor({ ...pen, key: Array(12).fill(pen.key).join(' ') });
+  const long = allowedFor({ ...pen, key: 'x-long' }, Array(12).fill(en[pen.key]).join(' '));
   expect(long).toBeGreaterThan(line);
   expect(long % line).toBe(0);
 });
@@ -268,7 +277,7 @@ test('the box has the type of every script it measures, so a width is a width an
 for (const path of Object.keys(files)) {
   const lang = codeOf(path);
   test(`${lang}: every command's words fit their slot`, async () => {
-    const strings = (await files[path]()).default;
+    const strings = flatMessages(await files[path](), lang);
     // The face the language's script needs, loaded before a word is measured: a canvas measures in whatever has
     // arrived, and under load a face on its way measured as the fallback (Russian's "Эффекты" at 88px against 82.7).
     const sample = [...new Set(measures.map((m) => strings[m.key] ?? '').join(''))].join('');
@@ -285,7 +294,7 @@ for (const path of Object.keys(files)) {
         raised.add(`${m.slot}|${m.key}`);
         continue;
       }
-      over.push(`"${m.key}" → "${words}" (${m.cmd}, ${m.slot}): ${round(measured)}px, allowed ${round(allowed)}px`);
+      over.push(`${m.key} "${en[m.key]}" → "${words}" (${m.cmd}, ${m.slot}): ${round(measured)}px, allowed ${round(allowed)}px`);
     }
     expect([...new Set(over)], `${lang}: shorten these, or raise the rule for the slot with the reason in RAISED`).toEqual([]);
     const stale = RAISED.filter((r) => r.langs.includes(lang) && !raised.has(`${r.slot}|${r.key}`)).map((r) => `${r.key} (${r.slot})`);

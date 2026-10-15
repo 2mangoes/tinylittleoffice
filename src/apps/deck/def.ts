@@ -36,17 +36,17 @@ async function deckWebm(doc: string): Promise<Uint8Array | null> {
 export default defineApp({
   id: 'deck',
   get name() {
-    return t('Presentation Builder');
+    return t('outline-presentation-builder');
   },
   get noun() {
-    return t('presentation');
+    return t('deck-presentation-lowercase');
   },
   get group() {
-    return t('Slides');
+    return t('deck-slides');
   },
   icon: Presentation,
   get blurb() {
-    return t('Slides: titles, bullets, two columns, big icons, other documents on a slide; or a zine, booklet, brochure, comic, poster or name badges to print and fold.');
+    return t('deck-slides-titles-bullets-two-columns');
   },
   blank: () => '',
   templates: () => import('./templates.ts').then((m) => m.templates()),
@@ -55,18 +55,18 @@ export default defineApp({
   retitle,
   view: (doc, opts) => deckPages(doc, opts?.small, isStill(opts), !!opts?.thumb),
   exports: [
-    { ext: 'pptx', label: () => t('PowerPoint (PPTX)'), mime: 'application/vnd.openxmlformats-officedocument.presentationml.presentation', shows: null, build: (doc, ctx) => buildPptx(doc, ctx) },
+    { ext: 'pptx', label: () => t('deck-powerpoint-pptx'), mime: 'application/vnd.openxmlformats-officedocument.presentationml.presentation', shows: null, build: (doc, ctx) => buildPptx(doc, ctx) },
     // In place of the kit's pictures of the pages: a page that plays the deck, a slide at a time, with its transition.
     {
       ext: 'html',
-      label: () => t('Web page (HTML)'),
+      label: () => t('download-web-page-html'),
       mime: 'text/html',
       shows: 'own',
-      build: (doc, ctx) => deckToHtml(doc, ctx.title || titleOf(doc) || t('Untitled {noun}', { noun: t('presentation') }), ctx.link),
+      build: (doc, ctx) => deckToHtml(doc, ctx.title || titleOf(doc) || t('shell-untitled-noun', { noun: t('deck-presentation-lowercase') }), ctx.link),
     },
     {
       ext: 'zip',
-      label: () => t('A picture of every slide (ZIP of PNGs)'),
+      label: () => t('deck-picture-of-every-slide-zip'),
       mime: 'application/zip',
       shows: null,
       build: async (doc) => {
@@ -81,7 +81,7 @@ export default defineApp({
     },
     {
       ext: 'gif',
-      label: () => t('An animation of the deck (GIF)'),
+      label: () => t('deck-animation-of-deck-gif'),
       mime: 'image/gif',
       shows: 'own',
       build: async (doc) => {
@@ -98,7 +98,7 @@ export default defineApp({
     },
     {
       ext: 'webm',
-      label: () => t('A film of the deck (WebM)'),
+      label: () => t('deck-film-of-deck-webm'),
       mime: 'video/webm',
       shows: 'own',
       available: () => webmReady(FILM_W, 540),

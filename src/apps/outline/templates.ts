@@ -27,8 +27,8 @@ const sheet = (depth: number, title: string, head: string[], rows: string[][]): 
 export const templates = (): Template[] => [
   {
     id: 'packing',
-    name: t('Packing list'),
-    blurb: t('Five days in Lisbon, packed by category, with what to do before the door shuts.'),
+    name: t('outline-packing-list'),
+    blurb: t('outline-five-days-in-lisbon-packed'),
     doc: outline(
       'Packing for Lisbon',
       item(0, 'Lisbon, Wednesday, October 14, to Monday, October 19, 2026'),
@@ -55,8 +55,8 @@ export const templates = (): Template[] => [
   },
   {
     id: 'decision',
-    name: t('A decision'),
-    blurb: t('The question, the options under it, and for each what speaks for it and against it.'),
+    name: t('outline-decision'),
+    blurb: t('outline-question-options-under-it-and'),
     doc: outline(
       'Should we move the office?',
       item(0, 'Should we move the office?'),
@@ -74,8 +74,8 @@ export const templates = (): Template[] => [
   },
   {
     id: 'launch',
-    name: t('Launch plan'),
-    blurb: t('A product launch: the product, the marketing and the support under it, with joins between the branches.'),
+    name: t('outline-launch-plan'),
+    blurb: t('outline-product-launch-product-marketing-and'),
     doc: outline(
       'Fieldnote 2.0 launch',
       item(0, 'Fieldnote 2.0, out on Thursday, November 12'),
@@ -103,8 +103,8 @@ export const templates = (): Template[] => [
   },
   {
     id: 'talk',
-    name: t('A talk'),
-    blurb: t('Twenty minutes in three parts: the problem, the idea, what it means; a slide a top item when shown as a deck.'),
+    name: t('outline-talk'),
+    blurb: t('outline-twenty-minutes-in-three-parts'),
     doc: outline(
       'The link is the document',
       item(0, 'The link is the document'),
@@ -123,8 +123,8 @@ export const templates = (): Template[] => [
   },
   {
     id: 'speech',
-    name: t('A speech'),
-    blurb: t('A five-minute retirement toast: an opening, three stories, the toast, each part timed on its line.'),
+    name: t('outline-speech'),
+    blurb: t('outline-five-minute-retirement-toast-opening'),
     doc: outline(
       'A toast for Margaret',
       item(0, 'Margaret Osei: thirty years at the Hillside Library'),
@@ -142,8 +142,8 @@ export const templates = (): Template[] => [
   },
   {
     id: 'essay',
-    name: t('An essay plan'),
-    blurb: t('A thesis, two arguments with their evidence, the objection and the answer to it, and the way out.'),
+    name: t('outline-essay-plan'),
+    blurb: t('outline-thesis-two-arguments-with-their'),
     doc: outline(
       'Is a four-day week good for a small business?',
       item(0, 'Is a four-day week good for a small business?'),
@@ -167,8 +167,8 @@ export const templates = (): Template[] => [
   },
   {
     id: 'research',
-    name: t('A research plan'),
-    blurb: t('The question, the method, a budget that adds itself up, a timeline, the risks and the reading.'),
+    name: t('outline-research-plan'),
+    blurb: t('outline-question-method-budget-that-adds'),
     doc: outline(
       'Shade at bus stops: a research plan',
       item(0, 'Do street trees cool a bus stop?'),
@@ -206,8 +206,8 @@ export const templates = (): Template[] => [
   },
   {
     id: 'syllabus',
-    name: t('A syllabus'),
-    blurb: t('A ten-week course: when and where, a numbered topic a week, how it is graded, and what to read.'),
+    name: t('outline-syllabus'),
+    blurb: t('outline-ten-week-course-when-and'),
     doc: outline(
       'Urban Ecology, fall 2026',
       item(0, 'Urban Ecology (ENV 214), fall semester 2026'),
@@ -235,8 +235,8 @@ export const templates = (): Template[] => [
   },
   {
     id: 'novel',
-    name: t('A novel'),
-    blurb: t('The people and three acts of chapters, each with what happens in it, joined where a person changes a chapter.'),
+    name: t('outline-novel'),
+    blurb: t('outline-people-and-three-acts-of'),
     doc: outline(
       'The Lighthouse Keeper',
       item(0, 'The Lighthouse Keeper'),
@@ -267,8 +267,8 @@ export const templates = (): Template[] => [
   },
   {
     id: 'book',
-    name: t('A book'),
-    blurb: t('Parts and chapters of a book of ideas, with a line under each chapter for what it argues.'),
+    name: t('outline-book'),
+    blurb: t('outline-parts-and-chapters-of-book'),
     doc: outline(
       'Small Rooms',
       item(0, 'Small Rooms: living well in less space'),
@@ -291,8 +291,8 @@ export const templates = (): Template[] => [
   },
   {
     id: 'org',
-    name: t('A company'),
-    blurb: t('Who works for whom at a bakery of nine, each with their role, drawn as an org chart from the menu.'),
+    name: t('outline-company'),
+    blurb: t('outline-who-works-for-whom-at'),
     doc: outline(
       'Juniper Bakery, October 2026',
       item(0, 'Hana Kowalski (owner)'),
@@ -309,8 +309,8 @@ export const templates = (): Template[] => [
   },
   {
     id: 'family',
-    name: t('A family'),
-    blurb: t('Three generations and the next, each with their years, drawn as a family tree from the menu.'),
+    name: t('outline-family'),
+    blurb: t('outline-three-generations-and-next-each'),
     doc: outline(
       'The Morenos',
       item(0, 'Luis and Carmen Moreno (married 1951)'),
@@ -327,8 +327,8 @@ export const templates = (): Template[] => [
   },
   {
     id: 'choice',
-    name: t('A decision tree'),
-    blurb: t('Indoors or out for a Saturday market: each question’s answers on its lines, yes and no.'),
+    name: t('outline-decision-tree'),
+    blurb: t('outline-indoors-or-out-for-saturday'),
     doc: outline(
       'The Saturday market: indoors or out?',
       item(0, 'The Saturday market: indoors or out?'),
@@ -344,8 +344,8 @@ export const templates = (): Template[] => [
   },
   {
     id: 'troubleshoot',
-    name: t('Troubleshooting'),
-    blurb: t('No internet at home: a question at each step, yes or no, down to the call to make.'),
+    name: t('outline-troubleshooting'),
+    blurb: t('outline-no-internet-at-home-question'),
     doc: outline(
       'No internet at home',
       item(0, 'No internet at home'),

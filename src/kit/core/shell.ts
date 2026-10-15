@@ -553,18 +553,18 @@ export class ToShell extends LitElement {
     if (how === 'copy' && !(await copyText(this.link))) return;
     if (how === 'keep') {
       await setPrivate(false);
-      this.keepNow(t('Save in browser is on: this browser keeps the documents you open. Turn it off in the menu.'));
+      this.keepNow(t('shell-save-in-browser-is-on'));
     }
     this.leaveDialog?.close();
     this.leaving = '';
     location.hash = to;
   }
   private renderLeave() {
-    return html`<p>${t('Nothing is saved on this device. Copy the link to keep it, or keep it on this device; Back brings it too.')}</p>
+    return html`<p>${t('shell-nothing-is-saved-on-this')}</p>
       <div class="to-leave-acts">
-        <button type="button" class="to-btn primary to-leave-copy" @click=${() => void this.leave('copy')}>${icon(UI.copy, 16)}<span>${t('Copy the link and go')}</span></button>
-        <button type="button" class="to-btn to-leave-keep" @click=${() => void this.leave('keep')}>${icon(UI.device, 16)}<span>${t('Turn on Save in browser and keep it here')}</span></button>
-        <button type="button" class="to-btn to-leave-go" @click=${() => void this.leave('go')}><span>${t('Go without')}</span></button>
+        <button type="button" class="to-btn primary to-leave-copy" @click=${() => void this.leave('copy')}>${icon(UI.copy, 16)}<span>${t('shell-copy-link-and-go')}</span></button>
+        <button type="button" class="to-btn to-leave-keep" @click=${() => void this.leave('keep')}>${icon(UI.device, 16)}<span>${t('shell-turn-on-save-in-browser')}</span></button>
+        <button type="button" class="to-btn to-leave-go" @click=${() => void this.leave('go')}><span>${t('shell-go-without')}</span></button>
       </div>`;
   }
 
@@ -580,12 +580,12 @@ export class ToShell extends LitElement {
     this.kept.soon({ app: def.id, title: this.locker ? '' : def.title(this.doc) || firstWords(this.doc), hash: routeHash(def.id, payload) });
   }
   /** Mod+S: kept on the device now, under Saved; else said why not. `said`: what the toast says once it is kept. */
-  keepNow(said = t('Kept on this device')) {
+  keepNow(said = t('shell-kept-on-this-device')) {
     const def = this.def;
     if (!def) return;
     this.flushLink();
-    if (!keeping()) return void toast(t('Save in browser is off: this browser keeps no documents. Turn it on in the menu to keep them here.'));
-    if (!this.doc.trim() || this.doc === def.blank()) return void toast(t('Nothing to keep yet'));
+    if (!keeping()) return void toast(t('shell-save-in-browser-is-off'));
+    if (!this.doc.trim() || this.doc === def.blank()) return void toast(t('shell-nothing-to-keep-yet'));
     const payload = parseHash(location.hash).payload || encodeDoc(this.doc);
     this.kept.soon({ app: def.id, title: this.locker ? '' : def.title(this.doc) || this.fresh || firstWords(this.doc), hash: routeHash(def.id, payload) });
     this.kept.flush();
@@ -605,17 +605,17 @@ export class ToShell extends LitElement {
     const def = this.def;
     // A QR code the document holds of itself is drawn from its link as it now is.
     setSelfLink(def ? this.link : '');
-    document.title = def ? `${this.outerTitle} · ${t('Tiny Little Office')}` : t('Tiny Little Office');
+    document.title = def ? `${this.outerTitle} · ${t('drawer-tiny-little-office')}` : t('drawer-tiny-little-office');
   }
   /** What the document is called: the name it was given, a new one's name, or "Untitled presentation" (a link that came with none). */
   private get docTitle(): string {
     const def = this.def;
-    if (def && this.sealed) return t('Locked document');
-    return def ? def.title(this.doc) || this.fresh || t('Untitled {noun}', { noun: def.noun }) : t('Tiny Little Office');
+    if (def && this.sealed) return t('privacy-locked-document');
+    return def ? def.title(this.doc) || this.fresh || t('shell-untitled-noun', { noun: def.noun }) : t('drawer-tiny-little-office');
   }
   /** What the world outside the page is told the document is called (the tab, history, the share sheet): nothing of a locked one. */
   private get outerTitle(): string {
-    return this.def && (this.locker || this.sealed) ? t('Locked document') : this.docTitle;
+    return this.def && (this.locker || this.sealed) ? t('privacy-locked-document') : this.docTitle;
   }
   /** The link to share, the editing one: the address without the short link's query or the display flag; with the language chosen. */
   get link(): string {
@@ -750,7 +750,7 @@ export class ToShell extends LitElement {
   private pages = (def: AppDef, behind = false) =>
     html`<div class="to-display-pages" aria-hidden=${behind ? 'true' : nothing} ?hidden=${behind && this.reading}>${def
       .view(this.doc)
-      .map((p, i) => html`<div class="to-display-page" style="--page-w:${p.w / 16}rem" aria-label=${t('Page {n}', { n: i + 1 })} role="group">${unsafeSVG(pageSvg(p))}</div>`)}</div>`;
+      .map((p, i) => html`<div class="to-display-page" style="--page-w:${p.w / 16}rem" aria-label=${t('deck-page-n', { n: i + 1 })} role="group">${unsafeSVG(pageSvg(p))}</div>`)}</div>`;
 
   /**
    * The Display Link: the pages, to read or print, with Edit. The
@@ -763,7 +763,7 @@ export class ToShell extends LitElement {
       u.pathname = siteDir();
       u.hash = routeHash(def.id, payload, '', false, null, chosenLanguage());
       const main = this.sealed
-        ? html`<div class="to-display-page" role="group" aria-label=${t('Locked document')}>${unsafeSVG(pageSvg(lockedCard(def)))}</div><button type="button" class="to-btn primary to-unlock-open" @click=${this.askPassword}>${icon(UI.unlock, 16)}<span>${t('Unlock…')}</span></button>`
+        ? html`<div class="to-display-page" role="group" aria-label=${t('privacy-locked-document')}>${unsafeSVG(pageSvg(lockedCard(def)))}</div><button type="button" class="to-btn primary to-unlock-open" @click=${this.askPassword}>${icon(UI.unlock, 16)}<span>${t('privacy-unlock-ellipsis')}</span></button>`
         : this.pages(def);
       return html`<to-chrome .plain=${{ kind: 'embed', title: this.docTitle, href: u.href, locked: !!this.sealed }} .main=${main}></to-chrome>`;
     }
@@ -788,10 +788,10 @@ export class ToShell extends LitElement {
     if (this.comparing) return html`<to-compare .a=${this.comparing[0]} .b=${this.comparing[1]}></to-compare>`;
     if (!def) return html`<to-home></to-home>`;
     if (this.sealed)
-      return html`<div class="to-empty to-locked">${icon(UI.lock, 32)}<p>${t('This document is locked with a password.')}</p><button type="button" class="to-btn primary to-unlock-open" @click=${this.askPassword}>${icon(UI.unlock, 16)}<span>${t('Unlock…')}</span></button></div>`;
+      return html`<div class="to-empty to-locked">${icon(UI.lock, 32)}<p>${t('privacy-this-document-is-locked-with')}</p><button type="button" class="to-btn primary to-unlock-open" @click=${this.askPassword}>${icon(UI.unlock, 16)}<span>${t('privacy-unlock-ellipsis')}</span></button></div>`;
     if (this.unreadable)
-      return html`<div class="to-empty"><p>${this.newer ? t('This link was made by a newer Tiny Little Office. Reload the page to get it.') : t('This link holds something that cannot be read. It may have been cut short when it was copied.')}</p><a class="to-btn primary" href=${routeHash(def.id)}>${t('New {noun}', { noun: def.noun })}</a></div>`;
-    if (!this.tag) return html`<div class="to-empty to-loading" aria-busy="true">${t('Loading…')}</div>`;
+      return html`<div class="to-empty"><p>${this.newer ? t('shell-this-link-was-made-by') : t('shell-this-link-holds-something-that')}</p><a class="to-btn primary" href=${routeHash(def.id)}>${t('shell-new-noun', { noun: def.noun })}</a></div>`;
+    if (!this.tag) return html`<div class="to-empty to-loading" aria-busy="true">${t('shell-loading')}</div>`;
     const tag = unsafeStatic(this.tag);
     return staticHtml`<${tag} class="to-editor" .value=${this.edited} @docchange=${this.onDocChange}></${tag}>`;
   }
@@ -812,7 +812,7 @@ export class ToShell extends LitElement {
     const editing = !!def && !this.sealed && !this.unreadable && !!this.tag && !this.comparing;
     const page = plain
       ? this.renderPlain(def)
-      : html`<button type="button" class="to-btn to-skip" @click=${this.skip}>${def ? t('Skip to the document') : t('Skip to the apps')}</button>
+      : html`<button type="button" class="to-btn to-skip" @click=${this.skip}>${def ? t('shell-skip-to-document') : t('shell-skip-to-apps')}</button>
           <to-chrome .doc=${def ? { def, title: this.docTitle, value: def.title(this.doc) || this.fresh, locked: !!this.sealed, trust: this.trust(), used: this.payloadLength } : null} .main=${this.renderMain(def)} .mainClass=${`to-main ${editing ? 'to-wide' : ''}`} .label=${def?.name ?? ''} ?barred=${editing} .fresh=${this.fresh && !def?.title(this.doc) ? this.fresh : ''}
             .expires=${this.arrived ? this.expires : 0} .other=${this.other} ?newer=${this.newer && !this.unreadable}
             @to-drawer-open=${() => void this.querySelector<ToDrawer>('to-drawer')?.show()} @to-retitle=${(e: CustomEvent<string>) => this.retitle(def!, e.detail)} @to-copy-new=${this.copyIntoNew} @to-arrival-close=${() => (this.arrived = false)} @to-other-close=${() => (this.other = null)}></to-chrome>`;
@@ -823,8 +823,8 @@ export class ToShell extends LitElement {
             <to-privacy doc .sealed=${this.sealed} ?protected=${!!this.locker} @to-unlock=${this.onUnlock} @to-lock=${this.onLock}></to-privacy>`
           : nothing
       }
-      <to-dialog class="to-keys-dialog" heading=${t('Keyboard shortcuts')} .body=${renderShortcuts(def)}></to-dialog>
-      ${def && !plain ? html`<to-dialog class="to-leave-dialog" heading=${t('This document lives in its link')} .body=${this.renderLeave()}></to-dialog>` : nothing}`;
+      <to-dialog class="to-keys-dialog" heading=${t('shell-keyboard-shortcuts')} .body=${renderShortcuts(def)}></to-dialog>
+      ${def && !plain ? html`<to-dialog class="to-leave-dialog" heading=${t('shell-this-document-lives-in-its')} .body=${this.renderLeave()}></to-dialog>` : nothing}`;
   }
 }
 customElements.define('to-shell', ToShell);

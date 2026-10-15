@@ -62,9 +62,9 @@ const wave = (w: number, h: number, y: number, fill: string, shift = 0) =>
 
 /** The eleven themes, the plain one first; the key is what the header says. */
 export const THEMES: Record<string, DeckTheme> = {
-  '': { name: () => t('Plain'), paper: '#ffffff', ink: INK, muted: MUTED, accent: ACCENT },
+  '': { name: () => t('deck-plain'), paper: '#ffffff', ink: INK, muted: MUTED, accent: ACCENT },
   boardroom: {
-    name: () => t('Boardroom'),
+    name: () => t('deck-boardroom'),
     paper: '#ffffff',
     ink: '#0f172a',
     muted: '#475569',
@@ -72,7 +72,7 @@ export const THEMES: Record<string, DeckTheme> = {
     deco: (_w, h) => `<rect width="18" height="${h}" fill="#1e3a8a"/><rect x="18" width="5" height="${h}" fill="#60a5fa"/>`,
   },
   ivory: {
-    name: () => t('Ivory'),
+    name: () => t('deck-ivory'),
     paper: '#fbf8f1',
     ink: '#1c1917',
     muted: '#57534e',
@@ -80,7 +80,7 @@ export const THEMES: Record<string, DeckTheme> = {
     deco: (w, h) => `<rect x="64" y="30" width="${w - 128}" height="2" fill="#1c1917"/><rect x="64" y="${h - 32}" width="${w - 128}" height="1" fill="#1c1917"/>`,
   },
   midnight: {
-    name: () => t('Midnight'),
+    name: () => t('deck-midnight'),
     dark: true,
     paper: '#0b1220',
     ink: '#f1f5f9',
@@ -89,7 +89,7 @@ export const THEMES: Record<string, DeckTheme> = {
     deco: (_w, h) => `<rect x="64" y="${h - 36}" width="120" height="4" rx="2" fill="#38bdf8"/>`,
   },
   graphite: {
-    name: () => t('Graphite'),
+    name: () => t('deck-graphite'),
     dark: true,
     paper: '#1c1c1e',
     ink: '#fafafa',
@@ -97,9 +97,9 @@ export const THEMES: Record<string, DeckTheme> = {
     accent: '#a3e635',
     deco: (w) => `<rect x="${w - 60}" y="28" width="32" height="32" rx="4" fill="#a3e635"/>`,
   },
-  confetti: { name: () => t('Confetti'), fun: true, paper: '#fffdf7', ink: '#1f2937', muted: '#4b5563', accent: '#db2777', link: '#be185d', deco: (w, h) => CONFETTI.map(piece(w, h)).join('') },
+  confetti: { name: () => t('deck-confetti'), fun: true, paper: '#fffdf7', ink: '#1f2937', muted: '#4b5563', accent: '#db2777', link: '#be185d', deco: (w, h) => CONFETTI.map(piece(w, h)).join('') },
   sunset: {
-    name: () => t('Sunset'),
+    name: () => t('deck-sunset'),
     fun: true,
     paper: '#fff7ed',
     ink: '#431407',
@@ -110,7 +110,7 @@ export const THEMES: Record<string, DeckTheme> = {
       `<circle cx="${w - 30}" cy="${h + 50}" r="200" fill="#fdba74" opacity=".55"/><circle cx="${w + 15}" cy="${h + 10}" r="120" fill="#fb7185" opacity=".5"/><circle cx="-20" cy="-30" r="90" fill="#fde68a" opacity=".7"/>`,
   },
   ocean: {
-    name: () => t('Ocean'),
+    name: () => t('deck-ocean'),
     fun: true,
     paper: '#f0f9ff',
     ink: '#0c4a6e',
@@ -120,7 +120,7 @@ export const THEMES: Record<string, DeckTheme> = {
     deco: (w, h) => wave(w, h, h - 34, '#bae6fd') + wave(w, h, h - 18, '#7dd3fc', 60),
   },
   bubblegum: {
-    name: () => t('Bubblegum'),
+    name: () => t('deck-bubblegum'),
     fun: true,
     paper: '#fdf2f8',
     ink: '#500724',
@@ -131,7 +131,7 @@ export const THEMES: Record<string, DeckTheme> = {
       `<circle cx="-30" cy="-30" r="115" fill="#f9a8d4" opacity=".55"/><circle cx="${w + 35}" cy="${h + 35}" r="160" fill="#d8b4fe" opacity=".55"/><circle cx="${w - 40}" cy="70" r="22" fill="#f9a8d4" opacity=".7"/>`,
   },
   arcade: {
-    name: () => t('Arcade'),
+    name: () => t('deck-arcade'),
     fun: true,
     dark: true,
     paper: '#1e1b4b',
@@ -142,7 +142,7 @@ export const THEMES: Record<string, DeckTheme> = {
       `<rect y="${h - 38}" width="${w}" height="7" fill="#f472b6"/><rect y="${h - 26}" width="${w}" height="7" fill="#22d3ee"/><rect y="${h - 14}" width="${w}" height="7" fill="#facc15"/>`,
   },
   chalkboard: {
-    name: () => t('Chalkboard'),
+    name: () => t('deck-chalkboard'),
     fun: true,
     dark: true,
     paper: '#1f3b2d',
@@ -158,12 +158,12 @@ export const themeOf = (id = ''): DeckTheme => THEMES[id] ?? THEMES[''];
 
 /** The colours a deck's icons can be, besides the theme's accent: the header says the name ("color: red"). */
 export const ICON_COLORS: Record<string, { name: () => string; hex: string }> = {
-  black: { name: () => t('Black'), hex: '#18181b' },
-  red: { name: () => t('Red'), hex: '#dc2626' },
-  orange: { name: () => t('Orange'), hex: '#ea580c' },
-  green: { name: () => t('Green'), hex: '#16a34a' },
-  blue: { name: () => t('Blue'), hex: '#2563eb' },
-  purple: { name: () => t('Purple'), hex: '#9333ea' },
+  black: { name: () => t('draw-black'), hex: '#18181b' },
+  red: { name: () => t('draw-red'), hex: '#dc2626' },
+  orange: { name: () => t('draw-orange'), hex: '#ea580c' },
+  green: { name: () => t('draw-green'), hex: '#16a34a' },
+  blue: { name: () => t('draw-blue'), hex: '#2563eb' },
+  purple: { name: () => t('draw-purple'), hex: '#9333ea' },
 };
 
 /* ---------- contrast, for the tests ---------- */

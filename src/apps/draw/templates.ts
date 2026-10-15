@@ -109,8 +109,8 @@ const WEATHER = [
 export const templates = (): Template[] => [
   {
     id: 'flowchart',
-    name: t('Flowchart'),
-    blurb: t('Can we refund it? A store’s return policy as questions, answers and what to do.'),
+    name: t('draw-flowchart'),
+    blurb: t('draw-can-we-refund-it-stores'),
     doc: shapes(
       {
         title: 'Can we refund it?',
@@ -135,8 +135,8 @@ export const templates = (): Template[] => [
   },
   {
     id: 'card',
-    name: t('Birthday card'),
-    blurb: t('A card for a ninetieth, tilted on a background of confetti: big words, flowers, love from everyone.'),
+    name: t('draw-birthday-card'),
+    blurb: t('draw-card-for-ninetieth-tilted-on'),
     doc: shapes(
       {
         title: 'Happy 90th, Nana',
@@ -155,8 +155,8 @@ export const templates = (): Template[] => [
   },
   {
     id: 'event',
-    name: t('Event map'),
-    blurb: t('A block party from above: the stage, the booths, first aid and where to meet if you are lost.'),
+    name: t('draw-event-map'),
+    blurb: t('draw-block-party-from-above-stage'),
     doc: shapes(
       {
         title: 'Elm Street block party',
@@ -180,8 +180,8 @@ export const templates = (): Template[] => [
   },
   {
     id: 'floorplan',
-    name: t('Floor plan'),
-    blurb: t('A one-bedroom apartment from above: rooms as rectangles, labeled, with the doors as gaps.'),
+    name: t('draw-floor-plan'),
+    blurb: t('draw-one-bedroom-apartment-from-above'),
     doc: shapes(
       { title: 'Apartment 4, 18 Albion Street', alt: 'The floor plan of a one-bedroom apartment: a living room and kitchen on the left, a hall in the middle, a bedroom and bathroom on the right.' },
       ['r', 2, 2, 36, 26, '1', 'Living room | 17 × 13 ft'],
@@ -198,8 +198,8 @@ export const templates = (): Template[] => [
   },
   {
     id: 'room',
-    name: t('Room plan'),
-    blurb: t('The living room rearranged: sofa, rug, bookcase and desk to scale, the door’s swing drawn in.'),
+    name: t('draw-room-plan'),
+    blurb: t('draw-living-room-rearranged-sofa-rug'),
     doc: shapes(
       {
         title: 'The living room, rearranged',
@@ -223,8 +223,8 @@ export const templates = (): Template[] => [
   },
   {
     id: 'wireframe',
-    name: t('Wireframe'),
-    blurb: t('A phone screen sketched in boxes before anyone builds it, with notes on why each part is there.'),
+    name: t('draw-wireframe'),
+    blurb: t('draw-phone-screen-sketched-in-boxes'),
     doc: shapes(
       {
         title: 'Library app: a book’s page',
@@ -249,8 +249,8 @@ export const templates = (): Template[] => [
   },
   {
     id: 'logo',
-    name: t('Logo sketch'),
-    blurb: t('Three ideas for a coffee roaster’s mark side by side, the name set large, and a date to choose by.'),
+    name: t('draw-logo-sketch'),
+    blurb: t('draw-three-ideas-for-coffee-roasters'),
     doc: shapes(
       {
         title: 'Hollow Pine Coffee: logo ideas',
@@ -272,8 +272,8 @@ export const templates = (): Template[] => [
   },
   {
     id: 'badge',
-    name: t('Badge'),
-    blurb: t('A rosette with ribbons for the volunteer of the year, to print, cut out and pin on.'),
+    name: t('draw-badge'),
+    blurb: t('draw-rosette-with-ribbons-for-volunteer'),
     doc: shapes(
       { title: 'Volunteer of the year', alt: 'A rosette badge with two ribbons: a star, Volunteer of the year, Hartley Food Bank 2026.' },
       ['r', 29, 30, 8, 18, '2r', '', 15],
@@ -288,8 +288,8 @@ export const templates = (): Template[] => [
   },
   {
     id: 'order',
-    name: t('Order to doorstep'),
-    blurb: t('What happens to a package from the moment it is bought: a process in steps, with icons and joins.'),
+    name: t('draw-order-to-doorstep'),
+    blurb: t('draw-what-happens-to-package-from'),
     doc: shapes(
       { title: 'From order to doorstep', alt: 'How an order at Fernhill Tea travels: ordered, paid, packed in Newark, out for delivery, delivered; the payment is written to the orders table.' },
       ['o', 2, 4, 23, 9, '1b', ':cart **Ordered** | Tuesday, 9:14 am'],
@@ -308,8 +308,8 @@ export const templates = (): Template[] => [
   },
   {
     id: 'request',
-    name: t('Request flow'),
-    blurb: t('A browser asks a server, which reads the data: boxes joined by arrows.'),
+    name: t('draw-request-flow'),
+    blurb: t('draw-browser-asks-server-which-reads'),
     doc: shapes(
       { title: 'How a page loads', alt: 'A browser asks a server, which reads the data.' },
       ['o', 4, 6, 16, 8, '1b', 'Browser'],
@@ -321,8 +321,8 @@ export const templates = (): Template[] => [
   },
   {
     id: 'tiers',
-    name: t('Three tiers'),
-    blurb: t('Phone and laptop, an API, a database and a cache: a system drawn with icons and joins.'),
+    name: t('draw-three-tiers'),
+    blurb: t('draw-phone-and-laptop-api-database'),
     doc: shapes(
       { title: 'Three tiers', alt: 'A phone and a laptop talk to an API, which reads a database and a cache.' },
       ['i', 6, 4, 8, 8, '0', 'phone2'],
@@ -339,8 +339,8 @@ export const templates = (): Template[] => [
   },
   {
     id: 'heart',
-    name: t('Pixel heart'),
-    blurb: t('A 16 by 16 heart in pixels, to color in or start over from.'),
+    name: t('draw-pixel-heart'),
+    blurb: t('draw-16-by-16-heart-in'),
     doc: pixels(
       { title: 'A heart', grid: '16' },
       '....cc....cc....',
@@ -358,20 +358,20 @@ export const templates = (): Template[] => [
   },
   {
     id: 'icons',
-    name: t('Weather icons'),
-    blurb: t('Four 16 by 16 icons on one grid, sun, cloud, rain and storm, to copy for a forecast or a button.'),
+    name: t('draw-weather-icons'),
+    blurb: t('draw-four-16-by-16-icons'),
     doc: pixels({ title: 'Weather icons', grid: '32' }, ...WEATHER),
   },
   {
     id: 'sprite',
-    name: t('Game sprite'),
-    blurb: t('Pip the frog, a 32 by 32 hero in a red scarf, outlined and ready to animate.'),
+    name: t('draw-game-sprite'),
+    blurb: t('draw-pip-frog-32-by-32'),
     doc: pixels({ title: 'Pip the frog', grid: '32' }, ...FROG),
   },
   {
     id: 'tile',
-    name: t('Background tile'),
-    blurb: t('An 8 by 8 pattern that repeats: use it as the background of a drawing, or any page.'),
+    name: t('draw-background-tile'),
+    blurb: t('draw-8-by-8-pattern-that'),
     doc: pixels({ title: 'Diamonds', grid: '8' }, 'b...b', '.b.b.b', '..b', '.b.b.b', 'b...b', '.....b.b', '......b', '.....b.b'),
   },
 ];

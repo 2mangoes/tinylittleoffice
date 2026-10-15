@@ -573,7 +573,7 @@ export class ToSheetEditor extends DocElement<SheetView> {
   insertRowsAt(below: boolean, r?: number) {
     const [r0, r1] = this.rowsFor(r);
     const n = r1 - r0 + 1;
-    if (this.view.used.rows + n > ROWS) return void toast(t('The sheet is full: its last rows hold something.'));
+    if (this.view.used.rows + n > ROWS) return void toast(t('sheet-is-full-its-last-rows'));
     const at = below ? r1 + 1 : r0;
     this.edit(insertRows(this.doc, at, n));
     // The new rows are selected, ready to type into.
@@ -613,7 +613,7 @@ export class ToSheetEditor extends DocElement<SheetView> {
 
   /** A column put in before column `at`: after the last, from the + at the end of the header; after any, from its menu. */
   addColumn(at: number) {
-    if (this.cols >= MAX_COLS) return void toast(t('The sheet is as wide as it goes: twenty-six columns.'));
+    if (this.cols >= MAX_COLS) return void toast(t('sheet-is-as-wide-as-it'));
     if (at >= this.view.table.cols.length) {
       // Past the table's edge nothing is written yet: the column is drawn, and becomes real when typed into.
       this.colsShown = Math.max(this.colsShown, at + 1);
@@ -653,17 +653,17 @@ export class ToSheetEditor extends DocElement<SheetView> {
     const letter = COL_NAMES[c];
     const may = removable(this.view, c);
     return [
-      ...kindItems(cols[c], t('Column {c} holds', { c: letter }), (type, currency) => this.edit(setType(this.doc, c, type, currency))),
-      { group: t('Sort the rows by it'), label: t('Low to high'), icon: ArrowDown, does: () => this.edit(sortBy(this.doc, c, false)) },
-      { group: t('Sort the rows by it'), label: t('High to low'), icon: ArrowUp, does: () => this.edit(sortBy(this.doc, c, true)) },
-      { group: t('Columns'), label: t('Fit this column to its text'), icon: MoveHorizontal, does: () => this.fitColumn(c) },
-      { group: t('Columns'), label: t('Add a column after'), icon: UI.plus, disabled: this.cols >= MAX_COLS, does: () => this.addColumn(c + 1) },
+      ...kindItems(cols[c], t('sheet-column-c-holds', { c: letter }), (type, currency) => this.edit(setType(this.doc, c, type, currency))),
+      { group: t('sheet-sort-rows-by-it'), label: t('sheet-low-to-high'), icon: ArrowDown, does: () => this.edit(sortBy(this.doc, c, false)) },
+      { group: t('sheet-sort-rows-by-it'), label: t('sheet-high-to-low'), icon: ArrowUp, does: () => this.edit(sortBy(this.doc, c, true)) },
+      { group: t('sheet-columns'), label: t('sheet-fit-this-column-to-its'), icon: MoveHorizontal, does: () => this.fitColumn(c) },
+      { group: t('sheet-columns'), label: t('sheet-add-column-after'), icon: UI.plus, disabled: this.cols >= MAX_COLS, does: () => this.addColumn(c + 1) },
       {
-        group: t('Columns'),
-        label: t('Remove this column'),
+        group: t('sheet-columns'),
+        label: t('sheet-remove-this-column'),
         icon: Trash2,
         disabled: !may,
-        hint: may ? undefined : c < this.view.table.cols.length ? t('A sheet keeps one column') : t('Three at the least'),
+        hint: may ? undefined : c < this.view.table.cols.length ? t('sheet-keeps-one-column') : t('sheet-three-at-least'),
         does: () => this.removeColumn(c),
       },
     ];
@@ -675,7 +675,7 @@ export class ToSheetEditor extends DocElement<SheetView> {
   private inserts(): MenuItem[] {
     return [
       ...drawnIn(COMMANDS, 'menu:insert', this),
-      ...FUNCTIONS.map(([name, args, what]) => ({ group: t('Function'), label: `${name}(${args})`, hint: what, does: () => this.insertFunction(name) })),
+      ...FUNCTIONS.map(([name, args, what]) => ({ group: t('sheet-function'), label: `${name}(${args})`, hint: what, does: () => this.insertFunction(name) })),
     ];
   }
   /** Show all the text: every column as wide as its words. */
@@ -1108,7 +1108,7 @@ export class ToSheetEditor extends DocElement<SheetView> {
     const richSel = isRich(cols[sc]?.type ?? 'text', this.raw(sr, sc));
     const chart = chartOf(v);
     const figure = chart
-      ? html`<figure class="sheet-chart ${v.table.above ? 'above' : ''}"><svg viewBox="0 0 ${chart.w} ${chart.h}" role="img" aria-label=${chart.alt ?? t('Chart of the table')}>${unsafeSVG(chart.svg)}</svg></figure>`
+      ? html`<figure class="sheet-chart ${v.table.above ? 'above' : ''}"><svg viewBox="0 0 ${chart.w} ${chart.h}" role="img" aria-label=${chart.alt ?? t('sheet-chart-of-table')}>${unsafeSVG(chart.svg)}</svg></figure>`
       : nothing;
     // The row numbers' side is as wide as the widest number drawn, and no wider.
     const gutter = `--sheet-row-w: calc(${String(this.drawn).length}ch + 0.5rem);`;
@@ -1125,10 +1125,10 @@ export class ToSheetEditor extends DocElement<SheetView> {
       ${v.big ? html`<div class="sheet-big"><b>${v.big.value}</b><span>${v.big.label}</span></div>` : nothing}
       ${v.table.above ? figure : nothing}
       <div class="sheet-fx">
-        <span class="ref" aria-label=${t('Selected cells')}>${rangeRef(g)}</span>
+        <span class="ref" aria-label=${t('sheet-selected-cells')}>${rangeRef(g)}</span>
         <input
           class="fx"
-          aria-label=${t('Formula')}
+          aria-label=${t('sheet-formula')}
           .value=${richSel ? cellText(this.raw(sr, sc), 'rich') : this.raw(sr, sc)}
           placeholder="="
           autocomplete="off"
@@ -1165,21 +1165,21 @@ export class ToSheetEditor extends DocElement<SheetView> {
               <td class="corner"></td>
               ${cols.map(
                 (col, c) => html`<th scope="col">
-                  <button type="button" class="col-head" aria-label=${t('Column {c}: {type}. What it holds, sort by it, add or remove a column', { c: COL_NAMES[c], type: typeOf(col.type).name() })} title=${t('What it holds; sort; columns')} aria-haspopup="menu" aria-expanded="false" @click=${(e: Event) => void this.openColMenu(c, e.currentTarget as HTMLElement)}>
+                  <button type="button" class="col-head" aria-label=${t('sheet-column-c-type-what-it', { c: COL_NAMES[c], type: typeOf(col.type).name() })} title=${t('sheet-what-it-holds-sort-columns')} aria-haspopup="menu" aria-expanded="false" @click=${(e: Event) => void this.openColMenu(c, e.currentTarget as HTMLElement)}>
                     <span class="cl">${COL_NAMES[c]}</span>${isLetterName(col.name) ? nothing : html`<span class="nm">${col.name}</span>`}${icon(UI.down, 12)}
                   </button>
-                  <span class="grip" role="separator" tabindex="0" aria-orientation="vertical" aria-valuenow=${Math.round(w?.[c] ?? NEW_COL)} aria-label=${t('Resize column {c}', { c: COL_NAMES[c] })} title=${t('Drag to resize, double-click to fit')} @pointerdown=${(e: PointerEvent) => this.onGripDown(e, c)} @dblclick=${() => this.fitColumn(c)} @keydown=${(e: KeyboardEvent) => this.onGripKey(e, c)}></span>
+                  <span class="grip" role="separator" tabindex="0" aria-orientation="vertical" aria-valuenow=${Math.round(w?.[c] ?? NEW_COL)} aria-label=${t('sheet-resize-column-c', { c: COL_NAMES[c] })} title=${t('sheet-drag-to-resize-double-click')} @pointerdown=${(e: PointerEvent) => this.onGripDown(e, c)} @dblclick=${() => this.fitColumn(c)} @keydown=${(e: KeyboardEvent) => this.onGripKey(e, c)}></span>
                 </th>`,
               )}
               <td class="add-col" rowspan="2">
-                <button type="button" class="add-col-btn" aria-label=${t('Add a column')} title=${t('Add a column')} ?disabled=${n >= MAX_COLS} @click=${() => this.addColumn(n)}>${icon(UI.plus, 16)}</button>
+                <button type="button" class="add-col-btn" aria-label=${t('sheet-add-column')} title=${t('sheet-add-column')} ?disabled=${n >= MAX_COLS} @click=${() => this.addColumn(n)}>${icon(UI.plus, 16)}</button>
               </td>
             </tr>
             <tr class="names">
               <td class="corner"></td>
               ${cols.map(
                 (col, c) => html`<th scope="col">
-                  <input class="cn" aria-label=${t('Name of column {c}', { c: COL_NAMES[c] })} placeholder=${typeName(c, cols)} .value=${isLetterName(col.name) ? '' : col.name} autocomplete="off" spellcheck="false"
+                  <input class="cn" aria-label=${t('sheet-name-of-column-c', { c: COL_NAMES[c] })} placeholder=${typeName(c, cols)} .value=${isLetterName(col.name) ? '' : col.name} autocomplete="off" spellcheck="false"
                     @change=${(e: Event) => this.rename(c, (e.target as HTMLInputElement).value)}
                     @keydown=${(e: KeyboardEvent) => this.nameKey(e, c, isLetterName(col.name) ? '' : col.name)} />
                 </th>`,
@@ -1190,13 +1190,13 @@ export class ToSheetEditor extends DocElement<SheetView> {
             ${Array.from({ length: this.drawn }, (_, r) => this.renderRow(r, cols, g, fill))}
           </tbody>
         </table>
-        ${this.drawn < ROWS ? html`<button type="button" class="sheet-more" @click=${() => (this.rowsShown = Math.min(ROWS, this.drawn + 50))}>${icon(UI.plus, 14)} ${t('50 more rows')} <span class="to-hint">${t('({n} of {max} shown)', { n: this.drawn, max: ROWS })}</span></button>` : nothing}
+        ${this.drawn < ROWS ? html`<button type="button" class="sheet-more" @click=${() => (this.rowsShown = Math.min(ROWS, this.drawn + 50))}>${icon(UI.plus, 14)} ${t('sheet-50-more-rows')} <span class="to-hint">${t('sheet-n-of-max-shown', { n: this.drawn, max: ROWS })}</span></button>` : nothing}
       </div>
       ${v.table.above ? nothing : figure}
       ${cols.map((col, c) => (col.type === 'option' ? html`<datalist id="${this.uid}-o${c}">${this.choices(c).map((x) => html`<option value=${x}></option>`)}</datalist>` : nothing))}
-      <to-context class="sheet-context" .label=${t('The cells in hand')} .items=${this.contextItems()}></to-context>
-      <to-menu class="sheet-rowmenu" .label=${t('Row {n}', { n: this.menuRow + 1 })} .items=${drawnIn(COMMANDS, 'menu:row', this)}></to-menu>
-      <to-menu class="sheet-colmenu" .label=${t('Column {c}', { c: COL_NAMES[this.menuCol] })} .items=${this.colItems()}></to-menu>`;
+      <to-context class="sheet-context" .label=${t('sheet-cells-in-hand')} .items=${this.contextItems()}></to-context>
+      <to-menu class="sheet-rowmenu" .label=${t('sheet-row-n', { n: this.menuRow + 1 })} .items=${drawnIn(COMMANDS, 'menu:row', this)}></to-menu>
+      <to-menu class="sheet-colmenu" .label=${t('sheet-column-c', { c: COL_NAMES[this.menuCol] })} .items=${this.colItems()}></to-menu>`;
   }
 
   /** The words an option column offers: those its cells already hold, each once, in the order they first come (a formula's are its own). */
@@ -1218,7 +1218,7 @@ export class ToSheetEditor extends DocElement<SheetView> {
   private renderRow(r: number, cols: Column[], g: Range, fill: Range | null) {
     const [sr, sc] = this.sel;
     return html`<tr>
-      <th class="row" scope="row"><button type="button" class="row-num" aria-label=${t('Row {n}: insert or delete rows', { n: r + 1 })} aria-haspopup="menu" aria-expanded="false" @click=${(e: Event) => void this.openRowMenu(r, e.currentTarget as HTMLElement)}>${r + 1}</button></th>
+      <th class="row" scope="row"><button type="button" class="row-num" aria-label=${t('sheet-row-n-insert-or-delete', { n: r + 1 })} aria-haspopup="menu" aria-expanded="false" @click=${(e: Event) => void this.openRowMenu(r, e.currentTarget as HTMLElement)}>${r + 1}</button></th>
       ${cols.map((col, c) => {
         const raw = this.raw(r, c);
         const isSel = this.focused && r === sr && c === sc;
@@ -1229,7 +1229,7 @@ export class ToSheetEditor extends DocElement<SheetView> {
         const inFill = !!fill && r >= fill.r0 && r <= fill.r1 && c >= fill.c0 && c <= fill.c1;
         const fillHandle =
           r === g.r1 && c === g.c1
-            ? html`<span class="fill" role="button" aria-label=${t('Fill: drag to carry these cells on')} title=${t('Drag to fill')} @pointerdown=${this.onFillDown}></span>`
+            ? html`<span class="fill" role="button" aria-label=${t('sheet-fill-drag-to-carry-these')} title=${t('sheet-drag-to-fill')} @pointerdown=${this.onFillDown}></span>`
             : nothing;
         const pointed = !!this.pointed && this.focused && r === this.pointed[0] && c === this.pointed[1];
         const td = (inner: unknown) =>
@@ -1242,7 +1242,7 @@ export class ToSheetEditor extends DocElement<SheetView> {
             shape="line"
             .blocks=${this.richBlocks(r, c)}
             label=${rcToRef(r, c)}
-            title=${locked ? t('Locked: part of the model') : nothing}
+            title=${locked ? t('sheet-locked-part-of-model') : nothing}
             @keydown=${{ handleEvent: (e: KeyboardEvent) => this.onKey(e, r, c, this.richCaret(e.currentTarget as ToText)), capture: true }}
             @focusin=${(e: FocusEvent) => this.entering(r, c, e.currentTarget as HTMLElement)}
             @focusout=${(e: FocusEvent) => this.leaving(e, r, c)}
@@ -1278,7 +1278,7 @@ export class ToSheetEditor extends DocElement<SheetView> {
             aria-label=${rcToRef(r, c)}
             .value=${shown}
             list=${option ? `${this.uid}-o${c}` : nothing}
-            title=${locked ? t('Locked: part of the model') : raw.startsWith('=') ? raw : nothing}
+            title=${locked ? t('sheet-locked-part-of-model') : raw.startsWith('=') ? raw : nothing}
             placeholder=${isSel && type === 'date' ? 'YYYY-MM-DD' : nothing}
             inputmode=${this.keyboard(r, c)}
             ?readonly=${locked}
@@ -1306,13 +1306,13 @@ export class ToSheetEditor extends DocElement<SheetView> {
           />
           ${
             tick
-              ? html`<button type="button" class="tick-btn" tabindex="-1" aria-label=${t('Check {ref}', { ref: rcToRef(r, c) })} aria-pressed=${String(!!v)} @mousedown=${(e: Event) => e.preventDefault()} @click=${() => this.toggleTick(r, c)}>
+              ? html`<button type="button" class="tick-btn" tabindex="-1" aria-label=${t('sheet-check-ref', { ref: rcToRef(r, c) })} aria-pressed=${String(!!v)} @mousedown=${(e: Event) => e.preventDefault()} @click=${() => this.toggleTick(r, c)}>
                 <span class="box" aria-hidden="true">${v ? icon(UI.check, 18) : nothing}</span>
               </button>`
               : nothing
           }
-          ${option ? html`<button type="button" class="opt-btn" tabindex="-1" aria-label=${t('Choices for {ref}', { ref: rcToRef(r, c) })} title=${t('Choices')} @mousedown=${(e: Event) => e.preventDefault()} @click=${() => void this.openChoices(r, c)}>${icon(UI.down, 14)}</button>` : nothing}
-          ${link ? html`<a class="go" href=${link} target="_blank" rel="noopener" aria-label=${t('Open {link}', { link })} tabindex="-1">${icon(UI.link, 12)}</a>` : nothing}`);
+          ${option ? html`<button type="button" class="opt-btn" tabindex="-1" aria-label=${t('sheet-choices-for-ref', { ref: rcToRef(r, c) })} title=${t('sheet-choices')} @mousedown=${(e: Event) => e.preventDefault()} @click=${() => void this.openChoices(r, c)}>${icon(UI.down, 14)}</button>` : nothing}
+          ${link ? html`<a class="go" href=${link} target="_blank" rel="noopener" aria-label=${t('sheet-open-link', { link })} tabindex="-1">${icon(UI.link, 12)}</a>` : nothing}`);
       })}
     </tr>`;
   }

@@ -105,10 +105,10 @@ export const tag = 'to-outline-editor';
 
 /** How each kind of line is said. */
 const DIR_NAME: Record<Dir, () => string> = {
-  '--': () => t('a plain line'),
-  '->': () => t('an arrow from the parent'),
-  '<-': () => t('an arrow to the parent'),
-  '<->': () => t('arrows both ways'),
+  '--': () => t('outline-a-plain-line'),
+  '->': () => t('outline-arrow-from-parent'),
+  '<-': () => t('outline-arrow-to-parent'),
+  '<->': () => t('outline-arrows-both-ways-lowercase'),
 };
 const DIR_ICON: Record<Dir, typeof ArrowRight | null> = { '--': null, '->': ArrowRight, '<-': ArrowLeft, '<->': ArrowLeftRight };
 
@@ -168,7 +168,7 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
     handle: '.ol-handle',
     nests: true,
     contextClass: 'ol-context',
-    label: t('Chosen items'),
+    label: t('outline-chosen-items'),
     current: () => (this.visible().some((x) => x.at === this.sel) ? this.sel : null),
     span: (rows) =>
       spanOf(
@@ -394,7 +394,7 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
   /** The outline's own item in the bar under chosen rows: Numbered, after Move down. */
   private extraItems(s: RowSpan): ContextEntry[] {
     const tops = topsOf(this.view, s);
-    return [{ label: t('Numbered'), icon: ListOrdered, pressed: tops.length > 0 && tops.every((it) => this.isOrd(it.at)), disabled: !tops.some((it) => !it.doc), does: () => this.number() }];
+    return [{ label: t('outline-numbered'), icon: ListOrdered, pressed: tops.length > 0 && tops.every((it) => this.isOrd(it.at)), disabled: !tops.some((it) => !it.doc), does: () => this.number() }];
   }
 
   /* ---------- the clipboard ---------- */
@@ -588,7 +588,7 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
     const it = this.items[i];
     const p = parentOf(this.items, i);
     if (p < 0) return null;
-    return { from: plainText(this.items[p].runs).trim() || t('the item above'), to: plainText(it.runs).trim() || t('this item'), dir: it.dir ?? '--', label: it.label, edge: false };
+    return { from: plainText(this.items[p].runs).trim() || t('outline-item-above'), to: plainText(it.runs).trim() || t('outline-this-item'), dir: it.dir ?? '--', label: it.label, edge: false };
   }
   private setDir(at: number, dir: Dir) {
     const b = this.doc.blocks[at];
@@ -598,19 +598,19 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
     const at = this.menuFor;
     const ends = at >= 0 ? this.endsOf(at) : null;
     if (!ends) return [];
-    const said = ends.edge ? t('Connection from {from} to {to}', ft(ends)) : t('Line from {from} to {to}', ft(ends));
+    const said = ends.edge ? t('outline-connection-from-from-to-to', ft(ends)) : t('outline-line-from-from-to-to', ft(ends));
     const kinds: [Dir, string][] = [
-      ['--', t('Plain line')],
-      ['->', t('Arrow from {from} to {to}', { from: ends.from, to: ends.to })],
-      ['<-', t('Arrow from {from} to {to}', { from: ends.to, to: ends.from })],
-      ['<->', t('Arrows both ways')],
+      ['--', t('outline-plain-line')],
+      ['->', t('outline-arrow-from-from-to-to', { from: ends.from, to: ends.to })],
+      ['<-', t('outline-arrow-from-from-to-to', { from: ends.to, to: ends.from })],
+      ['<->', t('outline-arrows-both-ways')],
     ];
     const i = indexAt(this.view, at);
     return [
       ...kinds.map(([dir, label]) => ({ group: said, label, icon: DIR_ICON[dir] ?? Minus, checked: ends.dir === dir, does: () => this.setDir(at, dir) })),
-      { label: t('Name the line'), icon: UI.pen, hint: ends.label, does: () => this.openNaming(at) },
-      ...(i >= 0 && hasChildren(this.items, i) ? [{ label: t('Zoom in'), icon: ZoomIn, does: () => this.zoomTo(at) }] : []),
-      ...(ends.edge ? [{ label: t('Take the connection away'), icon: UI.trash, does: () => this.edit(unlink(this.doc, at)) }] : []),
+      { label: t('outline-name-line'), icon: UI.pen, hint: ends.label, does: () => this.openNaming(at) },
+      ...(i >= 0 && hasChildren(this.items, i) ? [{ label: t('draw-zoom-in'), icon: ZoomIn, does: () => this.zoomTo(at) }] : []),
+      ...(ends.edge ? [{ label: t('outline-take-connection-away'), icon: UI.trash, does: () => this.edit(unlink(this.doc, at)) }] : []),
     ];
   }
   /**
@@ -823,13 +823,13 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
   /** The bullet that is a line to the parent: a dot, or an arrow which way it points; tapped, it opens the line's menu. */
   private bullet(at: number, ends: Ends, n?: number): TemplateResult {
     const glyph = DIR_ICON[ends.dir];
-    const label = `${ends.edge ? t('Connection from {from} to {to}', ft(ends)) : t('Line from {from} to {to}', ft(ends))}: ${DIR_NAME[ends.dir]()}${ends.label ? t(', named “{label}”', { label: ends.label }) : ''}. ${t('Change it')}`;
+    const label = `${ends.edge ? t('outline-connection-from-from-to-to', ft(ends)) : t('outline-line-from-from-to-to', ft(ends))}: ${DIR_NAME[ends.dir]()}${ends.label ? t('outline-named-label', { label: ends.label }) : ''}. ${t('outline-change-it')}`;
     return html`<button type="button" class="ol-kind" data-dir=${ends.dir} aria-label=${label} title=${label} aria-haspopup="menu" aria-expanded=${this.menuFor === at ? 'true' : 'false'} @mousedown=${(e: Event) => e.preventDefault()} @click=${(e: MouseEvent) => (e.shiftKey && this.itemAt(at) ? this.rows.choose(at, true) : void this.openLineMenu(at, e.currentTarget as HTMLElement))}>${n ? html`<b class="ol-n">${n}.</b>` : glyph ? icon(glyph, 14) : html`<span></span>`}</button>`;
   }
   /** A line's name, as a chip before the words; tapped, its name is typed there. */
   private chip(at: number, label?: string) {
     if (this.naming === at)
-      return html`<input class="ol-label ol-label-in" aria-label=${t('Name of the line')} placeholder=${t('e.g. owns, feeds, reports to')} .value=${label ?? ''} autocomplete="off" spellcheck="false"
+      return html`<input class="ol-label ol-label-in" aria-label=${t('outline-name-of-line')} placeholder=${t('outline-e-g-owns-feeds-reports')} .value=${label ?? ''} autocomplete="off" spellcheck="false"
         @keydown=${(e: KeyboardEvent) => {
           e.stopPropagation();
           if (e.isComposing || (e.key !== 'Enter' && e.key !== 'Escape')) return;
@@ -837,7 +837,7 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
           this.saveName(e.key === 'Enter', (e.target as HTMLInputElement).value);
         }}
         @blur=${(e: FocusEvent) => this.saveName(true, (e.target as HTMLInputElement).value)} />`;
-    return label ? html`<button type="button" class="ol-label" aria-label=${t('Line named “{label}”: change it', { label })} @click=${() => this.openNaming(at)}>${label}</button>` : nothing;
+    return label ? html`<button type="button" class="ol-label" aria-label=${t('outline-line-named-label-change-it', { label })} @click=${() => this.openNaming(at)}>${label}</button>` : nothing;
   }
   /** Another document under an item: its app and first line, a way to open it in its own app, and the way back (its link pasted over the card). */
   private renderDoc(it: Item) {
@@ -845,12 +845,12 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
     const body = it.doc!.slice(it.doc!.indexOf('\n') + 1);
     const locked = app === LOCKED_LANG;
     const href = placedLink(app, body, encodeDoc, location.pathname);
-    return html`<div class="ol-doc" tabindex="0" role="group" aria-label=${appOf(app) ? t('A {noun}', { noun: appOf(app)!.noun }) : t('{app} document', { app: appName(app) })} @paste=${(e: ClipboardEvent) => this.onDocPaste(it.at, e)}>
+    return html`<div class="ol-doc" tabindex="0" role="group" aria-label=${appOf(app) ? t('editor-noun', { noun: appOf(app)!.noun }) : t('editor-app-document', { app: appName(app) })} @paste=${(e: ClipboardEvent) => this.onDocPaste(it.at, e)}>
       <span class="ol-doc-kind">${locked ? icon(UI.lock, 16) : appOf(app) ? icon(appOf(app)!.icon, 16) : nothing}<b>${appName(app)}</b></span>
-      <span class="ol-doc-gist">${locked ? t('Locked with a password') : gist || t('Empty')}</span>
-      ${locked || appOf(app) ? tool({ label: t('Edit'), icon: UI.pen, cls: 'ol-doc-edit', does: () => void this.editRow(it.at) }) : nothing}
-      <a class="to-btn to-tool" href=${href} target="_blank" rel="noopener" aria-label=${t('Open in a new tab')} title=${t('Open in a new tab')}>${icon(UI.open, 16)}</a>
-      ${tool({ label: t('Take it away'), icon: UI.close, does: () => this.removeRow(it.at) })}
+      <span class="ol-doc-gist">${locked ? t('locked-with-password') : gist || t('outline-empty')}</span>
+      ${locked || appOf(app) ? tool({ label: t('draw-edit'), icon: UI.pen, cls: 'ol-doc-edit', does: () => void this.editRow(it.at) }) : nothing}
+      <a class="to-btn to-tool" href=${href} target="_blank" rel="noopener" aria-label=${t('outline-open-in-new-tab')} title=${t('outline-open-in-new-tab')}>${icon(UI.open, 16)}</a>
+      ${tool({ label: t('outline-take-it-away'), icon: UI.close, does: () => this.removeRow(it.at) })}
     </div>`;
   }
   private renderRow(it: Item, noteStart: number, placeholder: string, n: number | undefined, ranged: boolean): TemplateResult {
@@ -877,17 +877,17 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
       @focusin=${() => (this.sel = at)}
     >
       <span class="ol-gutter">
-        <button type="button" class="ol-handle to-rows-handle" aria-label=${t('Move this item: drag it onto another')} title=${t('Drag to move')} tabindex="-1">${icon(GripVertical, 14)}</button>
-        ${kids ? html`<button type="button" class="ol-fold" aria-label=${shut ? t('Unfold, {n|one inside|# inside}', { n: inside }) : t('Fold')} aria-expanded=${shut ? 'false' : 'true'} @mousedown=${(e: Event) => e.preventDefault()} @click=${() => this.fold(at)}>${icon(shut ? ChevronRight : ChevronDown, 14)}</button>` : nothing}
+        <button type="button" class="ol-handle to-rows-handle" aria-label=${t('outline-move-this-item-drag-it')} title=${t('outline-drag-to-move')} tabindex="-1">${icon(GripVertical, 14)}</button>
+        ${kids ? html`<button type="button" class="ol-fold" aria-label=${shut ? t('outline-unfold-n-inside', { n: inside }) : t('outline-fold')} aria-expanded=${shut ? 'false' : 'true'} @mousedown=${(e: Event) => e.preventDefault()} @click=${() => this.fold(at)}>${icon(shut ? ChevronRight : ChevronDown, 14)}</button>` : nothing}
       </span>
       ${ends ? html`<span class="ol-bullet">${this.bullet(at, ends, n)}</span>${this.chip(at, it.label)}` : html`<span class="ol-bullet" @click=${(e: MouseEvent) => e.shiftKey && this.rows.choose(at, true)}><span class="ol-kind root" aria-hidden="true">${n ? html`<b class="ol-n">${n}.</b>` : html`<span></span>`}</span></span>`}
       ${
         asDoc
           ? this.renderDoc(it)
-          : html`<to-text shape="line" notes .blocks=${this.blocksFor(block)} .noteStart=${noteStart} label=${t('Item {n}', { n: i + 1 })} placeholder=${placeholder} @text-ops=${(e: CustomEvent<TextOps>) => this.onOps(at, e)} @text-enter=${(e: Event) => (e.stopPropagation(), this.onEnter(at))} @text-exit=${(e: CustomEvent<{ dir: 'back' | 'forward' }>) => (e.stopPropagation(), this.onExit(at, e.detail.dir))} @text-selectall=${(e: Event) => (e.stopPropagation(), this.rows.selectAll())} @text-select=${(e: CustomEvent<Sel | null>) => this.onSelect(at, e)} @text-note=${(e: CustomEvent<NoteAt>) => this.onNote(at, e)} @focusin=${(e: FocusEvent) => (this.field = e.currentTarget as ToText)}></to-text>`
+          : html`<to-text shape="line" notes .blocks=${this.blocksFor(block)} .noteStart=${noteStart} label=${t('outline-item-n', { n: i + 1 })} placeholder=${placeholder} @text-ops=${(e: CustomEvent<TextOps>) => this.onOps(at, e)} @text-enter=${(e: Event) => (e.stopPropagation(), this.onEnter(at))} @text-exit=${(e: CustomEvent<{ dir: 'back' | 'forward' }>) => (e.stopPropagation(), this.onExit(at, e.detail.dir))} @text-selectall=${(e: Event) => (e.stopPropagation(), this.rows.selectAll())} @text-select=${(e: CustomEvent<Sel | null>) => this.onSelect(at, e)} @text-note=${(e: CustomEvent<NoteAt>) => this.onNote(at, e)} @focusin=${(e: FocusEvent) => (this.field = e.currentTarget as ToText)}></to-text>`
       }
       ${kids && shut ? html`<span class="ol-count" aria-hidden="true">${inside}</span>` : nothing}
-      ${c && words && !it.doc && at !== c.from ? html`<button type="button" class="ol-pick" aria-label=${c.from < 0 ? t('Connect from “{words}”', { words }) : t('Connect “{from}” to “{to}”', { from: plainText(this.itemAt(c.from)?.runs ?? []).trim(), to: words })} @click=${() => this.pick(at)}></button>` : nothing}
+      ${c && words && !it.doc && at !== c.from ? html`<button type="button" class="ol-pick" aria-label=${c.from < 0 ? t('outline-connect-from-words', { words }) : t('outline-connect-from-to-to', { from: plainText(this.itemAt(c.from)?.runs ?? []).trim(), to: words })} @click=${() => this.pick(at)}></button>` : nothing}
     </div>`;
   }
   private onSelect(at: number, e: CustomEvent<Sel | null>) {
@@ -904,24 +904,24 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
     if (z < 0) return nothing;
     const trail: number[] = [];
     for (let p = z; p >= 0; p = parentOf(this.items, p)) trail.unshift(p);
-    return html`<nav class="ol-crumbs" aria-label=${t('Zoomed in on')}>
-      <button type="button" @click=${() => this.zoomTo(-1)}>${icon(UI.home, 14)} ${t('Everything')}</button>
-      ${trail.map((p) => html`<span aria-hidden="true">›</span><button type="button" @click=${() => this.zoomTo(this.items[p].at)} aria-current=${p === z ? 'true' : 'false'}>${plainText(this.items[p].runs).trim() || t('Untitled')}</button>`)}
+    return html`<nav class="ol-crumbs" aria-label=${t('outline-zoomed-in-on')}>
+      <button type="button" @click=${() => this.zoomTo(-1)}>${icon(UI.home, 14)} ${t('outline-everything')}</button>
+      ${trail.map((p) => html`<span aria-hidden="true">›</span><button type="button" @click=${() => this.zoomTo(this.items[p].at)} aria-current=${p === z ? 'true' : 'false'}>${plainText(this.items[p].runs).trim() || t('outline-untitled')}</button>`)}
     </nav>`;
   }
 
   /** The joins, under the outline: each with its kind of line, its name, and a way to take it away. */
   private renderLinks(links: Link[]) {
     if (!links.length) return nothing;
-    return html`<section class="ol-links" aria-label=${t('Connections')}>
-      <h2>${t('Connections')}</h2>
+    return html`<section class="ol-links" aria-label=${t('outline-connections')}>
+      <h2>${t('outline-connections')}</h2>
       ${links.map((l) => {
         const ends = this.endsOf(l.at)!;
         return html`<div class="ol-link" data-at=${l.at}>
           <span class="ol-end">${l.from}</span>
           <span class="ol-bullet">${this.bullet(l.at, ends)}</span>${this.chip(l.at, l.label)}
           <span class="ol-end">${l.to}</span>
-          ${tool({ label: t('Take away the connection from {from} to {to}', { from: l.from, to: l.to }), icon: UI.close, does: () => this.edit(unlink(this.doc, l.at)) })}
+          ${tool({ label: t('outline-take-away-connection-from-from', { from: l.from, to: l.to }), icon: UI.close, does: () => this.edit(unlink(this.doc, l.at)) })}
         </div>`;
       })}
     </section>`;
@@ -944,9 +944,9 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
     const s = this.rows.range ? this.rows.span() : null;
     const rows = items.length ? vis : [{ at: -1, depth: this.base, runs: [] } as Item];
     return html`${this.renderBar()}
-      ${c ? html`<p class="ol-hint to-hint" role="status">${c.from < 0 ? t('Tap the item to connect from.') : t('Tap the item to connect “{words}” to.', { words: plainText(this.itemAt(c.from)?.runs ?? []).trim() })}</p>` : nothing}
+      ${c ? html`<p class="ol-hint to-hint" role="status">${c.from < 0 ? t('outline-tap-item-to-connect-from') : t('outline-tap-item-to-connect-words', { words: plainText(this.itemAt(c.from)?.runs ?? []).trim() })}</p>` : nothing}
       ${this.crumbs()}
-      <div class="ol ${c ? 'connecting' : ''}" role="tree" tabindex="-1" aria-multiselectable="true" aria-label=${t('Outline')}>
+      <div class="ol ${c ? 'connecting' : ''}" role="tree" tabindex="-1" aria-multiselectable="true" aria-label=${t('outline-outline')}>
         ${repeat(
           rows,
           (it) => it.at,
@@ -956,7 +956,7 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
       </div>
       ${this.renderLinks(liveLinks(this.view))}
       ${this.rows.renderContext()}
-      <to-menu class="ol-line-menu" .label=${t('Kind of line')} .items=${this.lineItems()}></to-menu>
+      <to-menu class="ol-line-menu" .label=${t('outline-kind-of-line')} .items=${this.lineItems()}></to-menu>
       ${this.renderNotes()}
       ${this.renderPageDialog()}`;
   }
@@ -997,10 +997,10 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
   private renderNotes() {
     const notes = this.marks().map((m) => m.fn);
     if (!notes.length) return nothing;
-    return html`<to-notes class="ol-fn" role="group" aria-label=${t('Footnotes')} .notes=${notes} @note-change=${this.onNoteChange} @note-back=${this.onNoteBack} @note-remove=${this.onNoteRemove}></to-notes>`;
+    return html`<to-notes class="ol-fn" role="group" aria-label=${t('write-footnotes')} .notes=${notes} @note-change=${this.onNoteChange} @note-back=${this.onNoteBack} @note-remove=${this.onNoteRemove}></to-notes>`;
   }
   private renderPageDialog() {
-    return html`<to-dialog class="ol-page-dialog" heading=${t('As a page')} @to-close=${() => (this.showing = false)} .body=${this.showing ? html`<div class="ol-page">${unsafeSVG(pageSvg(outlinePage(this.doc)))}</div>` : nothing}></to-dialog>`;
+    return html`<to-dialog class="ol-page-dialog" heading=${t('outline-as-page')} @to-close=${() => (this.showing = false)} .body=${this.showing ? html`<div class="ol-page">${unsafeSVG(pageSvg(outlinePage(this.doc)))}</div>` : nothing}></to-dialog>`;
   }
 }
 if (!customElements.get(tag)) customElements.define(tag, ToOutlineEditor);

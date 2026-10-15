@@ -100,7 +100,7 @@ export class ToLinkPop extends LitElement {
   private set() {
     const raw = (this.input?.value ?? '').trim();
     const href = raw && !/^(https?:|mailto:|tel:|#)/.test(raw) ? (raw.includes('@') ? `mailto:${raw}` : `https://${raw}`) : raw;
-    if (href && !linkable(href)) return this.input?.setCustomValidity(t('Not an address')) ?? undefined;
+    if (href && !linkable(href)) return this.input?.setCustomValidity(t('editor-not-address')) ?? undefined;
     this.hide();
     this.dispatchEvent(new CustomEvent<string>('link-set', { detail: href ? linkTarget(href) : '', bubbles: true }));
   }
@@ -128,13 +128,13 @@ export class ToLinkPop extends LitElement {
     const inner = !this.shown
       ? nothing
       : this.editing
-        ? html`<input type="url" class="to-link-input" .value=${this.href} placeholder="https://" aria-label=${t('Address')} autocomplete="off" autocapitalize="off" spellcheck="false" inputmode="url" enterkeyhint="done" @keydown=${this.onKey} @input=${() => this.input?.setCustomValidity('')} />
-            ${tool({ label: t('Set link'), icon: UI.check, does: () => this.set() })}`
+        ? html`<input type="url" class="to-link-input" .value=${this.href} placeholder="https://" aria-label=${t('editor-address')} autocomplete="off" autocapitalize="off" spellcheck="false" inputmode="url" enterkeyhint="done" @keydown=${this.onKey} @input=${() => this.input?.setCustomValidity('')} />
+            ${tool({ label: t('editor-set-link'), icon: UI.check, does: () => this.set() })}`
         : html`<a class="to-link-href" href=${this.href} target="_blank" rel="noopener" title=${this.href} @pointerdown=${keep}>${this.href}</a>
-            ${tool({ label: t('Open link'), icon: UI.open, keep: true, does: () => this.open() })}
-            ${tool({ label: t('Change link'), icon: UI.pen, keys: 'Mod+K', keep: true, does: () => this.ask(this.rect!, this.href) })}
-            ${tool({ label: t('Remove link'), icon: UI.unlink, keep: true, does: () => (this.hide(), this.dispatchEvent(new CustomEvent('link-remove', { bubbles: true }))) })}`;
-    return html`<div class="to-link-pop" popover=${POPOVER ? 'manual' : nothing} role="dialog" aria-label=${t('Link')} ?hidden=${!POPOVER && !this.shown}>${inner}</div>`;
+            ${tool({ label: t('editor-open-link'), icon: UI.open, keep: true, does: () => this.open() })}
+            ${tool({ label: t('editor-change-link'), icon: UI.pen, keys: 'Mod+K', keep: true, does: () => this.ask(this.rect!, this.href) })}
+            ${tool({ label: t('editor-remove-link'), icon: UI.unlink, keep: true, does: () => (this.hide(), this.dispatchEvent(new CustomEvent('link-remove', { bubbles: true }))) })}`;
+    return html`<div class="to-link-pop" popover=${POPOVER ? 'manual' : nothing} role="dialog" aria-label=${t('share-link')} ?hidden=${!POPOVER && !this.shown}>${inner}</div>`;
   }
 }
 if (!customElements.get('to-link-pop')) customElements.define('to-link-pop', ToLinkPop);

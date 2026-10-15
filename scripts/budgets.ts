@@ -121,8 +121,8 @@ function sourceFiles(root = ROOT): { apps: string[]; langs: string[] } {
   return {
     apps: readdirSync(join(root, 'src/apps')).filter((a) => existsSync(join(root, 'src/apps', a, 'templates.ts'))),
     langs: readdirSync(join(root, 'src/i18n'))
-      .filter((f) => f.endsWith('.ts') && f !== 'en.ts')
-      .map((f) => f.replace(/\.ts$/, '')),
+      .filter((f) => f.endsWith('.ftl') && f !== 'en.ftl')
+      .map((f) => f.replace(/\.ftl$/, '')),
   };
 }
 

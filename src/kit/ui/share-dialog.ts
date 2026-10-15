@@ -58,12 +58,12 @@ export function siteDir(): string {
 
 /** A document as a fresh plain link in a new tab: "Copy of …", not yet written; sealed with the same password if it has one. */
 export function openCopy(def: AppDef, doc: string, title: string, locker: Locker | null) {
-  const copy = withHead(def.retitle(doc, t('Copy of {title}', { title })), { by: '', created: '' });
+  const copy = withHead(def.retitle(doc, t('share-copy-of-title', { title })), { by: '', created: '' });
   const open = (payload: string) => {
     const u = new URL(location.href);
     u.hash = routeHash(def.id, payload, '', false, null, chosenLanguage());
     window.open(u.href, '_blank', 'noopener');
-    toast(t('A copy opened in a new tab'));
+    toast(t('share-copy-opened-in-new-tab'));
   };
   // A plain one opens at once, inside the tap.
   if (locker) void pack(copy, locker).then(open);
@@ -147,7 +147,7 @@ export class ToShare extends LitElement {
   }
   /** What the document is called where the link goes (a post, the embed's frame): "Locked document" for a locked one. */
   private get named(): string {
-    return this.locked ? t('Locked document') : this.heading;
+    return this.locked ? t('privacy-locked-document') : this.heading;
   }
   /** The link (or the Display Link) copied: said to the shell, which then no longer warns before the tab closes. */
   private copyLink = async (link: string) => void ((await copyText(link)) && this.say('to-link-copied', null));
@@ -180,7 +180,7 @@ export class ToShare extends LitElement {
     try {
       await work();
     } catch (err) {
-      toast(err instanceof Error ? err.message : t('Could not shorten the link.'));
+      toast(err instanceof Error ? err.message : t('share-could-not-shorten-link'));
     } finally {
       this.busy = false;
     }
@@ -206,8 +206,8 @@ export class ToShare extends LitElement {
     const when =
       env.created === null
         ? ''
-        : t('Created {date}', { date: new Intl.DateTimeFormat(lang, { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }).format(env.created) });
-    const by = env.by ? t('by {name}', { name: env.by }) : '';
+        : t('privacy-created-date', { date: new Intl.DateTimeFormat(lang, { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }).format(env.created) });
+    const by = env.by ? t('privacy-by-name', { name: env.by }) : '';
     return [when, by].filter(Boolean).join(' · ');
   }
 
@@ -224,15 +224,15 @@ export class ToShare extends LitElement {
     // A link is a copy, never a shared document (Paul, 2026-10-11: "docs are not collaborative like Google Docs: that's
     // fine. Communicate it in all the languages"): said under the link, before the ways of sending it.
     return html`${made ? html`<p class="to-share-made">${made}</p>` : nothing}${this.renderFit()}
-      <p class="to-hint to-share-copies">${t('Whoever opens this link gets their own copy. Changes they make are in their link, not in yours: ask them to send theirs back.')}</p>
+      <p class="to-hint to-share-copies">${t('share-whoever-opens-this-link-gets')}</p>
       <div class="to-share-links">
-        <button type="button" class="to-btn to-share-copy to-copy-link" @click=${() => void this.copyLink(this.link)}><span>${icon(UI.link, 18)}${t('Edit link')}</span><small>${t('Opens in the editor')}</small></button>
-        <button type="button" class="to-btn to-share-copy to-copy-display" @click=${() => void this.copyLink(this.displayLink)}><span>${icon(UI.view, 18)}${t('Present link')}</span><small>${t('Opens as pages to read')}</small></button>
-        ${canShareNative() ? html`<button type="button" class="to-btn to-share-native" @click=${() => void share()}>${icon(UI.share, 18)}<span>${t('Share…')}</span></button>` : nothing}
+        <button type="button" class="to-btn to-share-copy to-copy-link" @click=${() => void this.copyLink(this.link)}><span>${icon(UI.link, 18)}${t('share-edit-link')}</span><small>${t('share-opens-in-editor')}</small></button>
+        <button type="button" class="to-btn to-share-copy to-copy-display" @click=${() => void this.copyLink(this.displayLink)}><span>${icon(UI.view, 18)}${t('share-present-link')}</span><small>${t('share-opens-as-pages-to-read')}</small></button>
+        ${canShareNative() ? html`<button type="button" class="to-btn to-share-native" @click=${() => void share()}>${icon(UI.share, 18)}<span>${t('share-share')}</span></button>` : nothing}
       </div>
       ${this.protect}
       <section class="to-share-section to-share-short" aria-labelledby="to-share-short-h">
-        <h3 id="to-share-short-h">${t('Short link that expires')}</h3>
+        <h3 id="to-share-short-h">${t('share-short-link-that-expires')}</h3>
         ${this.short ? this.renderMade(this.short) : this.renderMaker()}
       </section>
       ${this.renderPost()}
@@ -261,7 +261,7 @@ export class ToShare extends LitElement {
       const site = `${location.origin}${siteDir()}`;
       return withCardId(link, await cardFor(`${site}card`, link, appOf(this.app)!, this.doc, this.heading), site);
     } catch (err) {
-      toast(t('Shared without a preview: {reason}', { reason: err instanceof Error ? err.message : '' }));
+      toast(t('share-shared-without-preview-reason', { reason: err instanceof Error ? err.message : '' }));
       return link;
     }
   }
@@ -296,7 +296,7 @@ export class ToShare extends LitElement {
     e.preventDefault();
     const box = this.querySelector<HTMLInputElement>('.to-mastodon-server')!;
     const host = mastodonHost(box.value);
-    box.setCustomValidity(host ? '' : t('A Mastodon server, like mastodon.social'));
+    box.setCustomValidity(host ? '' : t('share-mastodon-server-like-mastodon-social'));
     if (!box.reportValidity()) return;
     store.set(MASTODON_KEY, host);
     this.askMastodon = false;
@@ -305,28 +305,28 @@ export class ToShare extends LitElement {
   private renderPost() {
     const server = mastodonHost(store.get(MASTODON_KEY) ?? '');
     return html`<section class="to-share-section to-share-post" aria-labelledby="to-share-post-h">
-      <h3 id="to-share-post-h">${t('Post the link')}</h3>
+      <h3 id="to-share-post-h">${t('share-post-link')}</h3>
       ${
         this.locked
           ? nothing
           : html`<label class="to-switch to-share-preview">
             <input type="checkbox" role="switch" .checked=${this.preview} @change=${(e: Event) => this.setPreview((e.target as HTMLInputElement).checked)} />
-            <span class="to-switch-words"><b>${t('Show a preview of the first page')}</b><small>${t('A picture of the first page and the title are kept readable on our server for a month so the network can fetch them. The document itself is not.')}</small></span>
+            <span class="to-switch-words"><b>${t('share-show-preview-of-first-page')}</b><small>${t('share-picture-of-first-page-and')}</small></span>
           </label>`
       }
       <div class="to-post">${SERVICES.map(
         (s) =>
-          html`<button type="button" class="to-btn to-post-${s}" aria-busy=${this.posting === s ? 'true' : nothing} @click=${() => void this.post(s)}>${icon(s === 'email' ? UI.mail : UI.post, 16)}<span>${this.posting === s ? t('Making the preview…') : SERVICE_NAMES[s]}</span></button>`,
+          html`<button type="button" class="to-btn to-post-${s}" aria-busy=${this.posting === s ? 'true' : nothing} @click=${() => void this.post(s)}>${icon(s === 'email' ? UI.mail : UI.post, 16)}<span>${this.posting === s ? t('share-making-preview') : SERVICE_NAMES[s]}</span></button>`,
       )}</div>
       ${
         this.askMastodon || server
           ? html`<form class="to-share-field to-mastodon" @submit=${(e: Event) => this.setMastodon(e)}>
-            <input type="text" class="to-mastodon-server" inputmode="url" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label=${t('Your Mastodon server')} placeholder="mastodon.social" .value=${server} />
-            <button type="submit" class="to-btn">${server ? t('Change') : t('Post')}</button>
+            <input type="text" class="to-mastodon-server" inputmode="url" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label=${t('share-your-mastodon-server')} placeholder="mastodon.social" .value=${server} />
+            <button type="submit" class="to-btn">${server ? t('share-change') : t('share-post')}</button>
           </form>`
           : nothing
       }
-      ${this.app === 'deck' ? html`<button type="button" class="to-btn to-copy-show" @click=${() => void copyText(this.showLink)}>${icon(UI.play, 16)}<span>${t('Copy show link')}</span></button><p class="to-hint">${t('Opens the deck already presenting.')}</p>` : nothing}
+      ${this.app === 'deck' ? html`<button type="button" class="to-btn to-copy-show" @click=${() => void copyText(this.showLink)}>${icon(UI.play, 16)}<span>${t('share-copy-show-link')}</span></button><p class="to-hint">${t('share-opens-deck-already-presenting')}</p>` : nothing}
     </section>`;
   }
   /** The embed code: the document's pages in another site's page, in a frame. */
@@ -340,9 +340,9 @@ export class ToShare extends LitElement {
   }
   private renderEmbedCode() {
     return html`<section class="to-share-section to-share-embed" aria-labelledby="to-share-embed-h">
-      <h3 id="to-share-embed-h">${t('Embed')}</h3>
-      <p class="to-hint">${t('The pages, in a frame on another site, with a link to open them here.')}</p>
-      <button type="button" class="to-btn to-copy-embed" @click=${() => void copyText(embedCode(this.embedLink, this.named), t('Embed code copied'))}>${icon(UI.code, 16)}<span>${t('Copy embed code')}</span></button>
+      <h3 id="to-share-embed-h">${t('share-embed')}</h3>
+      <p class="to-hint">${t('share-pages-in-frame-on-another')}</p>
+      <button type="button" class="to-btn to-copy-embed" @click=${() => void copyText(embedCode(this.embedLink, this.named), t('share-embed-code-copied'))}>${icon(UI.code, 16)}<span>${t('share-copy-embed-code')}</span></button>
     </section>`;
   }
 
@@ -366,14 +366,14 @@ export class ToShare extends LitElement {
       <button type="button" class="to-btn to-fit-words" popovertarget="to-rooms" aria-haspopup="dialog" @pointerenter=${hover(true)} @pointerleave=${hover(false)} @click=${(e: Event) => {
         const btn = e.currentTarget as HTMLElement;
         requestAnimationFrame(() => this.querySelector<HTMLElement>('.to-rooms:popover-open') && place(this.querySelector<HTMLElement>('.to-rooms')!, btn));
-      }}>${over > 0 ? t('{n} characters over the link limit', { n: n(over) }) : fitLine(this.link)}</button>
-      <button type="button" class="to-btn to-tool to-fit-copy" aria-label=${t('Copy link')} title=${t('Copy link')} @click=${() => void this.copyLink(this.link)}>${icon(UI.copy, 18)}</button>
-      <div id="to-rooms" class="to-rooms to-menu" popover="auto" role="dialog" aria-label=${t('Where the link fits')} @pointerleave=${(e: PointerEvent) => e.pointerType === 'mouse' && (e.currentTarget as HTMLElement).hidePopover()}>
+      }}>${over > 0 ? t('shell-n-characters-over-link-limit', { n: n(over) }) : fitLine(this.link)}</button>
+      <button type="button" class="to-btn to-tool to-fit-copy" aria-label=${t('share-copy-link')} title=${t('share-copy-link')} @click=${() => void this.copyLink(this.link)}>${icon(UI.copy, 18)}</button>
+      <div id="to-rooms" class="to-rooms to-menu" popover="auto" role="dialog" aria-label=${t('share-where-link-fits')} @pointerleave=${(e: PointerEvent) => e.pointerType === 'mouse' && (e.currentTarget as HTMLElement).hidePopover()}>
         <table>
-          <thead><tr><th scope="col">${t('Where')}</th><th scope="col">${t('Uses')}</th><th scope="col">${t('Left')}</th></tr></thead>
+          <thead><tr><th scope="col">${t('share-where')}</th><th scope="col">${t('share-uses')}</th><th scope="col">${t('share-left')}</th></tr></thead>
           <tbody>${roomFor(this.link).map(
             (r) =>
-              html`<tr class=${r.left < 0 ? 'over' : ''}><th scope="row">${r.target.where()}</th><td>${n(r.used)} / ${n(r.target.max)}</td><td>${r.target.flat ? t('any length') : r.left < 0 ? t('{n} over', { n: n(-r.left) }) : n(r.left)}</td></tr>`,
+              html`<tr class=${r.left < 0 ? 'over' : ''}><th scope="row">${r.target.where()}</th><td>${n(r.used)} / ${n(r.target.max)}</td><td>${r.target.flat ? t('share-any-length') : r.left < 0 ? t('share-n-over', { n: n(-r.left) }) : n(r.left)}</td></tr>`,
           )}</tbody>
         </table>
       </div>
@@ -382,14 +382,14 @@ export class ToShare extends LitElement {
 
   /** Link or Display Link: a pair of buttons, the one chosen pressed. */
   private renderWhich(display: boolean, choose: (display: boolean) => void) {
-    return html`<div class="to-seg to-which" role="group" aria-label=${t('Opens')}>
-      <button type="button" class="to-btn" aria-pressed=${String(!display)} @click=${() => choose(false)}>${icon(UI.link, 16)}<span>${t('Link')}</span></button>
-      <button type="button" class="to-btn" aria-pressed=${String(display)} @click=${() => choose(true)}>${icon(UI.view, 16)}<span>${t('Display Link')}</span></button>
+    return html`<div class="to-seg to-which" role="group" aria-label=${t('share-opens')}>
+      <button type="button" class="to-btn" aria-pressed=${String(!display)} @click=${() => choose(false)}>${icon(UI.link, 16)}<span>${t('share-link')}</span></button>
+      <button type="button" class="to-btn" aria-pressed=${String(display)} @click=${() => choose(true)}>${icon(UI.view, 16)}<span>${t('share-display-link')}</span></button>
     </div>`;
   }
   /** The lifetimes, one row of segments (a radio group) writing shortTtl. */
   private renderTtl() {
-    return html`<fieldset class="to-seg to-ttl"><legend class="sr-only">${t('Expires after')}</legend>${EXPIRIES.map(
+    return html`<fieldset class="to-seg to-ttl"><legend class="sr-only">${t('share-expires-after')}</legend>${EXPIRIES.map(
       (x) => html`<label><input type="radio" name="to-ttl" value=${x.seconds} .checked=${x.seconds === this.shortTtl} @change=${() => this.setTtl(x.seconds)} /><span>${x.name()}</span></label>`,
     )}</fieldset>`;
   }
@@ -397,7 +397,7 @@ export class ToShare extends LitElement {
   private renderField(link: string, cls: string, label: string) {
     return html`<div class="to-share-field">
       <input type="text" class=${cls} readonly .value=${link} aria-label=${label} @focus=${(e: Event) => (e.target as HTMLInputElement).select()} />
-      <button type="button" class="to-btn primary" @click=${() => void copyText(link)}>${icon(UI.copy, 16)}<span>${t('Copy')}</span></button>
+      <button type="button" class="to-btn primary" @click=${() => void copyText(link)}>${icon(UI.copy, 16)}<span>${t('outline-copy')}</span></button>
     </div>`;
   }
   /**
@@ -409,14 +409,14 @@ export class ToShare extends LitElement {
     const over = n - SHORT_LINK_MAX;
     return html`${this.renderTtl()}
       ${this.renderWhich(this.shortDisplay, (d) => (this.shortDisplay = d))}
-      <p class="to-hint to-short-fixed">${t('A short link cannot be changed or recalled once made; it expires on its own.')}</p>
-      <p class="to-hint">${t('Encrypted here: the service holds only ciphertext, and only until then.')} ${t('Up to a hundred links a day from one address.')}</p>
-      <button type="button" class="to-btn primary to-make" ?disabled=${this.busy || over > 0} @click=${() => void this.makeShort()}>${icon(UI.link, 16)}<span>${this.busy ? t('Making…') : t('Make a short link')}</span></button>
-      ${over > 0 ? html`<p class="to-hint to-short-why">${t('This document is {n} characters; a short link holds {max}. Shorten it by {over} and it will fit.', { n, max: SHORT_LINK_MAX, over })}</p>` : nothing}`;
+      <p class="to-hint to-short-fixed">${t('share-short-link-cannot-be-changed')}</p>
+      <p class="to-hint">${t('share-encrypted-here-service-holds-only')} ${t('share-up-to-hundred-links-day')}</p>
+      <button type="button" class="to-btn primary to-make" ?disabled=${this.busy || over > 0} @click=${() => void this.makeShort()}>${icon(UI.link, 16)}<span>${this.busy ? t('share-making') : t('share-make-short-link')}</span></button>
+      ${over > 0 ? html`<p class="to-hint to-short-why">${t('share-this-document-is-n-characters', { n, max: SHORT_LINK_MAX, over })}</p>` : nothing}`;
   }
   /** Just made: the link to share, big, with Copy, and when it expires. */
   private renderMade(short: Shortened) {
-    return html`${this.renderField(short.short, 'to-short-field', t('Short link'))}
+    return html`${this.renderField(short.short, 'to-short-field', t('share-short-link'))}
       <p class="to-hint to-short-expires">${expiresLine(short.expires, Date.now(), document.documentElement.lang)}</p>`;
   }
   /** The QR code, drawn here when the link fits in one; else why not, in a sentence. */
@@ -425,16 +425,16 @@ export class ToShare extends LitElement {
     const fits = bytes.length <= QR_MAX_BYTES;
     const qr = fits ? qrSvg(bytes, 4) : '';
     return html`<section class="to-share-section to-share-qr" aria-labelledby="to-share-qr-h">
-      <h3 id="to-share-qr-h">${t('QR code')}</h3>
+      <h3 id="to-share-qr-h">${t('share-qr-code')}</h3>
       ${
         fits
           ? html`${this.renderWhich(this.qrDisplay, (d) => (this.qrDisplay = d))}
-            <div class="to-qr-code" role="img" aria-label=${t('QR code of this document')}>${unsafeSVG(qr)}</div>
+            <div class="to-qr-code" role="img" aria-label=${t('share-qr-code-of-this-document')}>${unsafeSVG(qr)}</div>
             <div class="to-row">
               <button type="button" class="to-btn" @click=${() => void this.saveQr(qr, 'png')}>${icon(UI.download, 16)}<span>PNG</span></button>
               <button type="button" class="to-btn" @click=${() => void this.saveQr(qr, 'svg')}>${icon(UI.download, 16)}<span>SVG</span></button>
             </div>`
-          : html`<p class="to-hint to-qr-why">${t('This document is {n} bytes; the largest QR code holds {max}. Shorten it by {over} bytes and it will fit.', { n: bytes.length, max: QR_MAX_BYTES, over: bytes.length - QR_MAX_BYTES })}</p>`
+          : html`<p class="to-hint to-qr-why">${t('share-this-document-is-n-bytes', { n: bytes.length, max: QR_MAX_BYTES, over: bytes.length - QR_MAX_BYTES })}</p>`
       }
     </section>`;
   }
@@ -444,10 +444,10 @@ export class ToShare extends LitElement {
     if (!kept.length) return nothing;
     const lang = document.documentElement.lang;
     return html`<details class="to-share-section to-kept-list">
-      <summary>${t('{n|# short link kept here|# short links kept here}', { n: kept.length })}</summary>
+      <summary>${t('share-n-short-links-kept-here', { n: kept.length })}</summary>
       <ul class="to-kept">${kept.map(
         (l) =>
-          html`<li><a href=${l.link} class="to-short-link">${l.title || l.link}</a><small>${expiresLine(l.expires, Date.now(), lang)}</small><button type="button" class="to-btn to-tool" aria-label=${t('Remove')} title=${t('Remove')} @click=${() => (dropKept(l.link), this.requestUpdate())}>${icon(UI.close, 16)}</button></li>`,
+          html`<li><a href=${l.link} class="to-short-link">${l.title || l.link}</a><small>${expiresLine(l.expires, Date.now(), lang)}</small><button type="button" class="to-btn to-tool" aria-label=${t('share-remove')} title=${t('share-remove')} @click=${() => (dropKept(l.link), this.requestUpdate())}>${icon(UI.close, 16)}</button></li>`,
       )}</ul>
     </details>`;
   }

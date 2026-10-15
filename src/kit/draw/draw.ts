@@ -86,7 +86,7 @@ export const rect = (x: number, y: number, w: number, h: number, fill: string, e
  * and adds nothing; anything else, emoji included, is counted as before, by its UTF-16 length at the Latin width.
  * Urdu is measured with Arabic's widths, in Nastaliq as in Naskh: Nastaliq is taller, not wider. Its letters stack on
  * the diagonal, so a word comes out a little narrower than in Noto Sans Arabic (0.95 plain, 0.9 bold over every string
- * of src/i18n/ur.ts on the box), not the 1.15 times wider once supposed; metrics.test.ts holds ur.ts's words within a
+ * of src/i18n/ur.ftl on the box), not the 1.15 times wider once supposed; metrics.test.ts holds ur.ftl's words within a
  * tenth in Nastaliq. Hebrew and Yiddish need no row: Plex Sans Hebrew sets their letters at the Latin width, within the
  * same tenth (metrics.test.ts), and their points are marks.
  */

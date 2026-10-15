@@ -1,4 +1,4 @@
-// The product's English is American (Paul, 2026-10-11): every string in en.ts and every template's sample
+// The product's English is American (Paul, 2026-10-11): every string in en.ftl and every template's sample
 // content, placed in New York where a template is placed anywhere, a calendar's times in the reader's zone.
 import { test, expect } from 'vitest';
 import { readFileSync, readdirSync } from 'node:fs';
@@ -27,8 +27,8 @@ test('the list catches what it is for, and lets American words by', () => {
   expect(british('A color, the center, organized, a ZIP code, diapers, (212) 555-0123, $5, a flat tangent, ticket, shopping', 'x')).toEqual([]);
 });
 
-test('en.ts says nothing British', () => {
-  expect(british(readFileSync(join(root, 'src', 'i18n', 'en.ts'), 'utf8'), 'en.ts')).toEqual([]);
+test('en.ftl says nothing British', () => {
+  expect(british(readFileSync(join(root, 'src', 'i18n', 'en.ftl'), 'utf8'), 'en.ftl')).toEqual([]);
 });
 
 test('no template says anything British, and no calendar or trip template carries a zone', () => {

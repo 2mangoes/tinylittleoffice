@@ -55,13 +55,13 @@ export interface Look {
 }
 
 export const LOOKS: Record<LookId, Look> = {
-  sans: { id: 'sans', name: () => t('Sans'), sample: () => t('Clean and plain throughout'), head: 'sans', body: 'sans' },
-  serif: { id: 'serif', name: () => t('Serif'), sample: () => t('A bookish serif throughout'), head: 'serif', body: 'serif' },
-  mono: { id: 'mono', name: () => t('Typewriter'), sample: () => t('Monospace, ragged right'), head: 'mono', body: 'mono' },
-  mixed: { id: 'mixed', name: () => t('Serif and sans'), sample: () => t('Serif headings, sans text'), head: 'serif', body: 'sans' },
-  inverse: { id: 'inverse', name: () => t('Sans and serif'), sample: () => t('Sans headings, serif text'), head: 'sans', body: 'serif' },
-  book: { id: 'book', name: () => t('Book'), sample: () => t('Justified, indented, small caps'), head: 'serif', body: 'serif', justify: true, indent: true, caps: true },
-  news: { id: 'news', name: () => t('Newspaper'), sample: () => t('A narrow headline, two columns'), head: 'narrow', body: 'sans', columns: 2 },
+  sans: { id: 'sans', name: () => t('write-sans'), sample: () => t('write-clean-and-plain-throughout'), head: 'sans', body: 'sans' },
+  serif: { id: 'serif', name: () => t('looks-serif'), sample: () => t('write-bookish-serif-throughout'), head: 'serif', body: 'serif' },
+  mono: { id: 'mono', name: () => t('looks-typewriter'), sample: () => t('write-monospace-ragged-right'), head: 'mono', body: 'mono' },
+  mixed: { id: 'mixed', name: () => t('write-serif-and-sans'), sample: () => t('write-serif-headings-sans-text'), head: 'serif', body: 'sans' },
+  inverse: { id: 'inverse', name: () => t('write-sans-and-serif'), sample: () => t('write-sans-headings-serif-text'), head: 'sans', body: 'serif' },
+  book: { id: 'book', name: () => t('write-book'), sample: () => t('write-justified-indented-small-caps'), head: 'serif', body: 'serif', justify: true, indent: true, caps: true },
+  news: { id: 'news', name: () => t('write-newspaper'), sample: () => t('write-narrow-headline-two-columns'), head: 'narrow', body: 'sans', columns: 2 },
 };
 export const LOOK_IDS = Object.keys(LOOKS) as LookId[];
 

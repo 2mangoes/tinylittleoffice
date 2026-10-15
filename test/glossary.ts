@@ -1,8 +1,8 @@
 // The glossary lint's parts (test/i18n-glossary.test.ts runs them): each product term of the English, the words a
 // language uses for it, and where a language says it another way.
 //
-// How a term's words are found: the keys that are the term alone ("Share", "Share…", "Slides", "Key:") give the
-// language's word for it (alignment on one-term keys). Two words for one term there is drift. Then every short key
+// How a term's words are found: the messages whose English is the term alone ("Share", "Share…", "Slides", "Key:") give
+// the language's word for it (alignment on one-term messages). Two words for one term there is drift. Then every short one
 // that holds the term as a word (a label, a button, a menu row: at most SHORT words) is looked at: its translation
 // should hold one of those words, matched by its stem (the word less its last few letters, so a plural, a gender or a
 // verb's ending still matches; any substring for a script without spaces, so a compound or an Arabic article still
@@ -117,36 +117,39 @@ const same = (a: string, b: string) => says(a, b) || says(b, a);
 
 export interface Drift {
   term: string;
-  /** The words used for the term alone, each with the keys it was found on. */
+  /** The words used for the term alone, each with the ids it was found on. */
   words: Map<string, string[]>;
-  /** Short keys that hold the term but whose translation says none of its words. */
-  elsewhere: { key: string; value: string }[];
+  /** Short messages that hold the term but whose translation says none of its words: the id, the English, the translation. */
+  elsewhere: { id: string; key: string; value: string }[];
 }
 
-/** One language's drift: for each term, its words (more than one is drift) and the short keys that say it otherwise. */
+/**
+ * One language's drift: for each term, its words (more than one is drift) and the short messages that say it otherwise.
+ * `en` and `strings` are id → words, flat (scripts/ftl.ts); a term is looked for in the English.
+ */
 export function drift(en: Record<string, string>, strings: Record<string, string>, terms: Term[]): Drift[] {
   const out: Drift[] = [];
   for (const t of terms) {
     const found = new Map<string, string[]>();
-    for (const key of Object.keys(en)) {
-      if (!alone(key, t.term) || excluded(key, t) || !strings[key]) continue;
-      const value = bare(strings[key])
+    for (const [id, key] of Object.entries(en)) {
+      if (!alone(key, t.term) || excluded(key, t) || !strings[id]) continue;
+      const value = bare(strings[id])
         .replace(/[…:：]+\s*$/u, '')
         .trim();
       const like = [...found.keys()].find((w) => same(w, value));
-      if (!like) found.set(value, [key]);
+      if (!like) found.set(value, [id]);
       else if (core(value).length < core(like).length) {
         // The shorter of two forms of one word stands for it (页 for 页面, 第 {n} 页): it is found in more.
-        const keys = found.get(like)!;
+        const ids = found.get(like)!;
         found.delete(like);
-        found.set(value, [...keys, key]);
-      } else found.get(like)!.push(key);
+        found.set(value, [...ids, id]);
+      } else found.get(like)!.push(id);
     }
     if (!found.size) continue;
-    const elsewhere: { key: string; value: string }[] = [];
-    for (const key of Object.keys(en)) {
-      if (alone(key, t.term) || !holds(key, t.term) || excluded(key, t) || length(key) > SHORT || !strings[key]) continue;
-      if (![...found.keys()].some((w) => says(strings[key], w))) elsewhere.push({ key, value: strings[key] });
+    const elsewhere: { id: string; key: string; value: string }[] = [];
+    for (const [id, key] of Object.entries(en)) {
+      if (alone(key, t.term) || !holds(key, t.term) || excluded(key, t) || length(key) > SHORT || !strings[id]) continue;
+      if (![...found.keys()].some((w) => says(strings[id], w))) elsewhere.push({ id, key, value: strings[id] });
     }
     out.push({ term: t.term, words: found, elsewhere });
   }

@@ -31,7 +31,7 @@ function nameFor(doc: Doc): string {
           .join('')
           .trim()
       : '') ||
-    t('Untitled {noun}', { noun: t('outline') })
+    t('shell-untitled-noun', { noun: t('outline-outline-lowercase') })
   );
 }
 
@@ -43,17 +43,17 @@ const convert = (how: (v: ReturnType<typeof readOutline>, head: Kernel['head']) 
 export default defineApp({
   id: 'outline',
   get name() {
-    return t('Outliner');
+    return t('outline-outliner');
   },
   get noun() {
-    return t('outline');
+    return t('outline-outline-lowercase');
   },
   get group() {
-    return t('Words');
+    return t('write-words');
   },
   icon: ListTree,
   get blurb() {
-    return t('An outliner: ideas under ideas, folded and unfolded, moved around and joined; the same tree a deck or a mind map reads.');
+    return t('outline-outliner-ideas-under-ideas-folded');
   },
   blank: () => '',
   templates: () => import('./templates.ts').then((m) => m.templates()),
@@ -70,25 +70,25 @@ export default defineApp({
   // On a slide (drawn small, the first twelve), an item a step.
   steps: (doc) => Math.min(12, readOutline(parse(doc)).items.length),
   exports: [
-    { ext: 'opml', label: () => t('OPML (for outliners)'), mime: 'text/x-opml;charset=utf-8', shows: null, build: (doc) => utf8(toOpml(readOutline(parse(doc)), nameFor(doc))) },
+    { ext: 'opml', label: () => t('outline-opml-for-outliners'), mime: 'text/x-opml;charset=utf-8', shows: null, build: (doc) => utf8(toOpml(readOutline(parse(doc)), nameFor(doc))) },
     // Markdown as other readers know it: an item's notes a numbered list right under it (any other in reference form at the end).
-    { ext: 'md', label: () => t('Markdown'), mime: 'text/markdown;charset=utf-8', shows: 'text', build: (doc) => utf8(write(notesAsItems(parse(doc)))) },
+    { ext: 'md', label: () => t('write-markdown'), mime: 'text/markdown;charset=utf-8', shows: 'text', build: (doc) => utf8(write(notesAsItems(parse(doc)))) },
     // The words as words: sections and bullets, selectable, linked, bookmarked (kit/file/textpdf.ts), in place of the kit's pictures of the page.
     {
       ext: 'pdf',
-      label: () => t('PDF: sections and bullets'),
+      label: () => t('outline-pdf-sections-and-bullets'),
       mime: 'application/pdf',
       shows: 'own',
-      build: (doc, ctx) => textPdf(outlineBlocks(readOutline(parse(doc)), ctx.title || titleOf(doc), t('Notes')), ctx.title || nameFor(doc)),
+      build: (doc, ctx) => textPdf(outlineBlocks(readOutline(parse(doc)), ctx.title || titleOf(doc), t('deck-notes')), ctx.title || nameFor(doc)),
     },
-    { ext: 'txt', label: () => t('Plain text'), mime: 'text/plain;charset=utf-8', shows: 'text', build: (doc) => utf8(outlineText(readOutline(parse(doc)), appName)) },
+    { ext: 'txt', label: () => t('outline-plain-text'), mime: 'text/plain;charset=utf-8', shows: 'text', build: (doc) => utf8(outlineText(readOutline(parse(doc)), appName)) },
   ],
   handoffs: [
-    { to: 'deck', label: () => t('Show as slides'), convert: convert(outlineToDeck) },
-    { to: 'diagram', label: () => t('Draw as a mind map'), convert: convert(outlineToMind) },
-    { to: 'diagram', label: () => t('Draw as an org chart'), convert: convert(outlineToOrg) },
-    { to: 'diagram', label: () => t('Draw as a family tree'), convert: convert(outlineToFamily) },
-    { to: 'diagram', label: () => t('Draw as a network'), convert: convert(outlineToNet) },
+    { to: 'deck', label: () => t('outline-show-as-slides'), convert: convert(outlineToDeck) },
+    { to: 'diagram', label: () => t('outline-draw-as-mind-map'), convert: convert(outlineToMind) },
+    { to: 'diagram', label: () => t('outline-draw-as-org-chart'), convert: convert(outlineToOrg) },
+    { to: 'diagram', label: () => t('outline-draw-as-family-tree'), convert: convert(outlineToFamily) },
+    { to: 'diagram', label: () => t('outline-draw-as-network'), convert: convert(outlineToNet) },
   ],
   commands: () => import('./commands.ts'),
 });

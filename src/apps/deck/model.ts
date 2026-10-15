@@ -22,10 +22,10 @@ import { ICON_COLORS, THEMES, themeOf } from './theme.ts';
 /** '' bullets (words as written: items dotted, paragraphs plain), 't' title, '2' two columns, 'i' big icon. */
 export type Layout = '' | 't' | '2' | 'i';
 export const LAYOUTS: { id: Layout; name: () => string }[] = [
-  { id: '', name: () => t('Bullets') },
-  { id: 't', name: () => t('Title') },
-  { id: '2', name: () => t('Two columns') },
-  { id: 'i', name: () => t('Big icon') },
+  { id: '', name: () => t('deck-bullets') },
+  { id: 't', name: () => t('shell-title') },
+  { id: '2', name: () => t('deck-two-columns') },
+  { id: 'i', name: () => t('deck-big-icon') },
 ];
 /** A layout as the class on the headline that says it. */
 const CLASS_OF: Record<Layout, string> = { '': '', t: 'title', '2': 'two', i: 'icon' };
@@ -34,22 +34,22 @@ const LAYOUT_OF: Record<string, Layout> = { title: 't', two: '2', icon: 'i' };
 /** How one slide gives way to the next. '' is the default, a fade. */
 export type Transition = '' | 'cut' | 'slide' | 'zoom';
 export const TRANSITIONS: { id: Transition; name: () => string }[] = [
-  { id: '', name: () => t('Fade') },
-  { id: 'cut', name: () => t('Cut') },
-  { id: 'slide', name: () => t('Slide') },
-  { id: 'zoom', name: () => t('Zoom') },
+  { id: '', name: () => t('deck-fade') },
+  { id: 'cut', name: () => t('deck-cut') },
+  { id: 'slide', name: () => t('deck-slide') },
+  { id: 'zoom', name: () => t('deck-zoom') },
 ];
 
 /** The printed things a deck can be: the head's "format:"; '' is a deck of slides. */
 export type Format = '' | 'zine' | 'booklet' | 'brochure' | 'comic' | 'poster' | 'badges';
 export const FORMATS: { id: Format; name: () => string }[] = [
-  { id: '', name: () => t('Slides') },
-  { id: 'zine', name: () => t('Zine') },
-  { id: 'booklet', name: () => t('Booklet') },
-  { id: 'brochure', name: () => t('Brochure') },
-  { id: 'comic', name: () => t('Comic') },
-  { id: 'poster', name: () => t('Poster') },
-  { id: 'badges', name: () => t('Name badges') },
+  { id: '', name: () => t('deck-slides') },
+  { id: 'zine', name: () => t('deck-zine') },
+  { id: 'booklet', name: () => t('deck-booklet') },
+  { id: 'brochure', name: () => t('deck-brochure') },
+  { id: 'comic', name: () => t('deck-comic') },
+  { id: 'poster', name: () => t('deck-poster') },
+  { id: 'badges', name: () => t('deck-name-badges') },
 ];
 
 /** One line of words on a slide: a bullet at a depth (numbered when its list is), or a paragraph. */

@@ -1,10 +1,12 @@
 /**
- * A pseudo-language made from en.ts, for testing a translation before one exists: every letter accented and
+ * A pseudo-language made from en.ftl, for testing a translation before one exists: every letter accented and
  * every word a third longer (as German and French run), each plural given the forms the language has. en-xa
- * runs left to right; ar-xb, with Arabic's six plural forms, right to left. Not shipped: tests register it.
- * (No node imports here: the browser tests use it too.)
+ * runs left to right; ar-xb, with Arabic's six plural forms, right to left. Not shipped: tests register it, as a
+ * Fluent file (pseudoFtl). (No node imports here: the browser tests use it too.)
  */
-import type { Strings } from '../src/kit/core/i18n.ts';
+import { message } from '../scripts/ftl.ts';
+
+type Strings = Record<string, string>;
 
 const FROM = 'abcdeghiklnorstuyzABCDEGHIKLNORSTUYZ';
 const TO = 'àƀçđéĝĥîķļñöŕšţûýžÀƁÇĐÉĜĤÎĶĻÑÖŔŠŢÛÝŽ';
@@ -30,5 +32,12 @@ export function pseudoString(code: string, s: string): string {
     .join('');
 }
 
-/** The whole dictionary. */
+/** Every message, flat (scripts/ftl.ts), id → its pseudo-words. */
 export const pseudo = (code: string, en: Strings): Strings => Object.fromEntries(Object.entries(en).map(([k, v]) => [k, pseudoString(code, v)]));
+/** Messages given as id → flat words (scripts/ftl.ts), written as a Fluent file: a pseudo-language, a test's dictionary. */
+export const ftlOf = (messages: Strings, code: string): string =>
+  Object.entries(messages)
+    .map(([id, flat]) => message(id, flat, code))
+    .join('\n') + '\n';
+/** The pseudo-language as a Fluent file, to register. */
+export const pseudoFtl = (code: string, en: Strings): string => ftlOf(pseudo(code, en), code);

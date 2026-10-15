@@ -29,17 +29,17 @@ const tileSide = (tile: Tile) => tile.n * 16;
 export default defineApp({
   id: 'draw',
   get name() {
-    return t('Drawing Tool');
+    return t('draw-drawing-tool');
   },
   get noun() {
-    return t('drawing');
+    return t('draw-drawing');
   },
   get group() {
-    return t('Design');
+    return t('draw-design');
   },
   icon: PenTool,
   get blurb() {
-    return t('Boxes, arrows, icons and labels on a grid; or pixel art, which can become a background tile.');
+    return t('draw-boxes-arrows-icons-and-labels');
   },
   blank: () => '',
   templates: () => import('./templates.ts').then((m) => m.templates()),
@@ -54,11 +54,11 @@ export default defineApp({
     return v.grid ? 0 : v.shapes.length;
   },
   exports: [
-    { ext: 'svg', label: () => t('Picture (SVG)'), mime: 'image/svg+xml', shows: 'own', build: (doc) => utf8(drawingToSvg(parse(doc))) },
-    { ext: 'tile.svg', label: () => t('Background tile (SVG)'), mime: 'image/svg+xml', shows: 'own', build: (doc) => utf8(tileSvg(tileOfDoc(doc), tileSide(tileOfDoc(doc)))) },
+    { ext: 'svg', label: () => t('draw-picture-svg'), mime: 'image/svg+xml', shows: 'own', build: (doc) => utf8(drawingToSvg(parse(doc))) },
+    { ext: 'tile.svg', label: () => t('draw-background-tile-svg'), mime: 'image/svg+xml', shows: 'own', build: (doc) => utf8(tileSvg(tileOfDoc(doc), tileSide(tileOfDoc(doc)))) },
     {
       ext: 'tile.png',
-      label: () => t('Background tile (PNG)'),
+      label: () => t('draw-background-tile-png'),
       mime: 'image/png',
       shows: 'own',
       build: async (doc) => {
@@ -69,6 +69,6 @@ export default defineApp({
     },
   ],
   // Motion reads a drawing's table as it is; the entry shows once the Motion app is in the registry.
-  handoffs: [{ to: 'anim', label: () => t('Animate this drawing'), convert: (doc) => doc }],
+  handoffs: [{ to: 'anim', label: () => t('draw-animate-this-drawing'), convert: (doc) => doc }],
   commands: () => import('./commands.ts'),
 });

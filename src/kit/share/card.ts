@@ -83,15 +83,15 @@ export function cardFor(at: string, link: string, def: AppDef, doc: Doc, title: 
 
 async function upload(at: string, def: AppDef, doc: Doc, title: string): Promise<string> {
   const png = await drawCard(def, doc);
-  if (!png) throw new Error(t('the page could not be drawn'));
-  if (png.length > CARD_PNG_MAX) throw new Error(t('the picture is over 400 KB'));
+  if (!png) throw new Error(t('share-page-could-not-be-drawn'));
+  if (png.length > CARD_PNG_MAX) throw new Error(t('share-picture-is-over-400-kb'));
   let res: Response;
   try {
     res = await fetch(at, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ png: base64(png), ...cardWords(def, doc, title), app: def.id }) });
   } catch {
-    throw new Error(t('the server could not be reached'));
+    throw new Error(t('share-server-could-not-be-reached'));
   }
-  if (res.status === 429) throw new Error(t('a hundred previews a day from one address'));
-  if (!res.ok) throw new Error(res.status === 400 ? t('the server refused the picture') : t('the server could not be reached'));
+  if (res.status === 429) throw new Error(t('share-hundred-previews-day-from-one'));
+  if (!res.ok) throw new Error(res.status === 400 ? t('share-server-refused-picture') : t('share-server-could-not-be-reached'));
   return ((await res.json()) as { id: string }).id;
 }

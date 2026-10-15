@@ -44,7 +44,7 @@ test('every language with no region opens on its home', () => {
   };
   expect(HOMES).toEqual(homes);
   // Every language of the site but English has a home.
-  const files = Object.keys(import.meta.glob('../src/i18n/*.ts')).map((f) => f.replace(/^.*\/([^/]+)\.ts$/, '$1'));
+  const files = Object.keys(import.meta.glob('../src/i18n/*.ftl')).map((f) => f.replace(/^.*\/([^/]+)\.ftl$/, '$1'));
   expect(files.filter((c) => c !== 'en').sort()).toEqual(Object.keys(homes).sort());
   for (const [language, code] of Object.entries(homes)) {
     expect(homeCountry(language, []), language).toBe(code);

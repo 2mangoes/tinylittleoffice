@@ -1,13 +1,16 @@
 // Glossary drift: a product term said two ways in one language. For each language, each term of TERMS is aligned on
-// the keys that are the term alone (its word in that language), and then looked for in every short key that holds it
-// (test/glossary.ts says how). A term with two words, or a label that says it another way, fails, naming the term,
-// the words and the keys, unless ALLOW lists it with a reason. ALLOW began as the nine translators' glossaries (round
+// the messages whose English is the term alone (its word in that language), and then looked for in every short message
+// that holds it (test/glossary.ts says how). A term with two words, or a label that says it another way, fails, naming
+// the term, the words and the ids, unless ALLOW lists it, by id, with a reason. ALLOW began as the nine translators' glossaries (round
 // "languages", 2026-10-09: where a translator gave a term two words on purpose) and the senses they noted as other.
 import { test, expect } from 'vitest';
+import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import en from '../src/i18n/en.ts';
 import { languageFiles } from '../scripts/i18n-extract.ts';
+import { flatMessages } from '../scripts/ftl.ts';
 import { alone, drift, holds, says, stem, type Term } from './glossary.ts';
+
+const en = flatMessages(readFileSync(join(import.meta.dirname, '../src/i18n/en.ftl'), 'utf8'), 'en');
 
 /** The product's terms, and the senses of their English words that are something else. */
 export const TERMS: Term[] = [
@@ -55,22 +58,22 @@ export const TERMS: Term[] = [
   { term: 'chart', not: [/org chart|seating chart|nothing to chart/i] },
 ];
 
-/** Drift a language has on purpose: the term, the key (none: the term's two words), and why. */
+/** Drift a language has on purpose: the term, the message's id (none: the term's two words), and why. */
 const ALLOW: { lang: string; term: string; key?: string; why: string }[] = [
   // The translators' glossaries.
-  { lang: 'de', term: 'Download', key: 'Download the .{ext}', why: 'glossary: herunterladen as the verb' },
-  { lang: 'it', term: 'Download', key: 'Download failed', why: 'the noun: Italian says "il download", Scarica is the verb on the button' },
-  { lang: 'pt-br', term: 'Download', key: 'Download failed', why: 'the noun: Portuguese says "o download", Baixar is the verb on the button' },
-  { lang: 'hi', term: 'Present', key: 'Present link', why: 'the verb bends: प्रेज़ेंट करें is the command, प्रेज़ेंट करने का लिंक the link for presenting' },
-  { lang: 'ur', term: 'Present', key: 'Present link', why: 'the verb bends: پیش کریں is the command, پیش کرنے کا لنک the link for presenting' },
+  { lang: 'de', term: 'Download', key: 'export-download-ext', why: 'glossary: herunterladen as the verb' },
+  { lang: 'it', term: 'Download', key: 'download-failed', why: 'the noun: Italian says "il download", Scarica is the verb on the button' },
+  { lang: 'pt-br', term: 'Download', key: 'download-failed', why: 'the noun: Portuguese says "o download", Baixar is the verb on the button' },
+  { lang: 'hi', term: 'Present', key: 'share-present-link', why: 'the verb bends: प्रेज़ेंट करें is the command, प्रेज़ेंट करने का लिंक the link for presenting' },
+  { lang: 'ur', term: 'Present', key: 'share-present-link', why: 'the verb bends: پیش کریں is the command, پیش کرنے کا لنک the link for presenting' },
   // A verb that splits or bends round its object.
-  { lang: 'de', term: 'Insert', key: 'Insert a place by name.', why: 'einfügen is a separable verb: "Füge … ein"' },
-  { lang: 'nl', term: 'Insert', key: 'Insert a place by name.', why: 'invoegen is a separable verb: "Voeg … in"' },
-  { lang: 'pt-br', term: 'Insert', key: 'Insert a place by name.', why: 'the imperative of inserir is insira' },
-  { lang: 'nl', term: 'Print', key: 'See the sheets to print', why: 'afdrukken is a separable verb: "af te drukken"' },
-  { lang: 'fr', term: 'chart', key: 'Chart, scrolls sideways', why: 'a Gantt chart: in French a diagramme de Gantt' },
+  { lang: 'de', term: 'Insert', key: 'trip-insert-place-by-name', why: 'einfügen is a separable verb: "Füge … ein"' },
+  { lang: 'nl', term: 'Insert', key: 'trip-insert-place-by-name', why: 'invoegen is a separable verb: "Voeg … in"' },
+  { lang: 'pt-br', term: 'Insert', key: 'trip-insert-place-by-name', why: 'the imperative of inserir is insira' },
+  { lang: 'nl', term: 'Print', key: 'deck-see-sheets-to-print', why: 'afdrukken is a separable verb: "af te drukken"' },
+  { lang: 'fr', term: 'chart', key: 'cal-chart-scrolls-sideways', why: 'a Gantt chart: in French a diagramme de Gantt' },
   // Counted things: Japanese counts cards with 枚 and does not say the word.
-  { lang: 'zh-hans', term: 'slide', key: 'Slide {n} of {total}', why: 'counted with the counter 张 (第 {n} 张，共 {total} 张), the word left out' },
+  { lang: 'zh-hans', term: 'slide', key: 'deck-slide-n-of-total', why: 'counted with the counter 张 (第 {n} 张，共 {total} 张), the word left out' },
 ];
 
 const allowed = (lang: string, term: string, key?: string) => ALLOW.some((a) => a.lang === lang && a.term === term && a.key === key);
@@ -129,15 +132,15 @@ test('the matcher in the scripts of the second nine: two words that match and on
 });
 
 test('the lint finds a term said two ways, and a label that says it otherwise', () => {
-  const base = { Share: 'Share', 'Share this': 'Share this', 'Share the link': 'Share the link', 'Share it with everyone you know today': '' };
-  const es = { Share: 'Compartir', 'Share this': 'Comparte esto', 'Share the link': 'Enviar el enlace', 'Share it with everyone you know today': 'Mándalo a todos' };
+  const base = { 'x-share': 'Share', 'x-share-this': 'Share this', 'x-share-link': 'Share the link', 'x-share-everyone': 'Share it with everyone you know today' };
+  const es = { 'x-share': 'Compartir', 'x-share-this': 'Comparte esto', 'x-share-link': 'Enviar el enlace', 'x-share-everyone': 'Mándalo a todos' };
   const [d] = drift(base, es, [{ term: 'Share' }]);
   expect([...d.words.keys()]).toEqual(['Compartir']);
-  expect(d.elsewhere).toEqual([{ key: 'Share the link', value: 'Enviar el enlace' }]);
-  const two = drift({ Share: '', 'Share…': '' }, { Share: 'Compartir', 'Share…': 'Enviar…' }, [{ term: 'Share' }])[0];
+  expect(d.elsewhere).toEqual([{ id: 'x-share-link', key: 'Share the link', value: 'Enviar el enlace' }]);
+  const two = drift({ 'x-share': 'Share', 'x-share-more': 'Share…' }, { 'x-share': 'Compartir', 'x-share-more': 'Enviar…' }, [{ term: 'Share' }])[0];
   expect([...two.words]).toEqual([
-    ['Compartir', ['Share']],
-    ['Enviar', ['Share…']],
+    ['Compartir', ['x-share']],
+    ['Enviar', ['x-share-more']],
   ]);
 });
 
@@ -145,18 +148,18 @@ const files = languageFiles(join(import.meta.dirname, '..')).filter(([code]) => 
 
 for (const [lang, path] of files) {
   test(`${lang}: each product term said one way`, async () => {
-    const strings = (await import(/* @vite-ignore */ path)).default as Record<string, string>;
+    const strings = flatMessages(readFileSync(path, 'utf8'), lang);
     const problems: string[] = [];
     const used = new Set<string>();
     for (const d of drift(en, strings, TERMS)) {
       if (d.words.size > 1) {
         if (allowed(lang, d.term)) used.add(`${d.term}|`);
-        else problems.push(`"${d.term}" is said two ways: ${[...d.words].map(([w, keys]) => `"${w}" (${keys.join(', ')})`).join(' and ')}`);
+        else problems.push(`"${d.term}" is said two ways: ${[...d.words].map(([w, ids]) => `"${w}" (${ids.join(', ')})`).join(' and ')}`);
       }
       const word = [...d.words.keys()].map((w) => `"${w}"`).join(' or ');
       for (const e of d.elsewhere) {
-        if (allowed(lang, d.term, e.key)) used.add(`${d.term}|${e.key}`);
-        else problems.push(`"${d.term}" is ${word}, but "${e.key}" → "${e.value}" says neither`);
+        if (allowed(lang, d.term, e.id)) used.add(`${d.term}|${e.id}`);
+        else problems.push(`"${d.term}" is ${word}, but ${e.id} "${e.key}" → "${e.value}" says neither`);
       }
     }
     expect(problems, `${lang}: say each term one way, or list it in ALLOW with the reason`).toEqual([]);

@@ -47,8 +47,8 @@ const ringKeys = Object.fromEntries(
 export const templates = (): Template[] => [
   {
     id: 'liftoff',
-    name: t('Lift off'),
-    blurb: t('A rocket climbs away with its shadow as the words rise: two shapes, two keys each.'),
+    name: t('anim-lift-off'),
+    blurb: t('anim-rocket-climbs-away-with-its'),
     doc: motion(
       { title: 'Lift off', frames: '24', fps: '8', alt: 'A rocket lifts off and flies up and away to the right, under the words Lift off.' },
       [
@@ -60,8 +60,8 @@ export const templates = (): Template[] => [
   },
   {
     id: 'bounce',
-    name: t('Bouncing ball'),
-    blurb: t('A ball falls faster and faster to the floor as its shadow grows under it; played forward and back, it bounces forever.'),
+    name: t('anim-bouncing-ball'),
+    blurb: t('anim-ball-falls-faster-and-faster'),
     doc: motion(
       { title: 'Bouncing ball', frames: '12', fps: '12', loop: 'bounce', alt: 'A red ball falls to the floor, gathering speed, and bounces back up, its shadow growing as it nears the ground.' },
       [
@@ -77,8 +77,8 @@ export const templates = (): Template[] => [
   },
   {
     id: 'spinner',
-    name: t('Loading spinner'),
-    blurb: t('Eight dots in a ring, each swelling in turn, so a bright spot runs around while a page saves.'),
+    name: t('anim-loading-spinner'),
+    blurb: t('anim-eight-dots-in-ring-each'),
     doc: motion(
       { title: 'Saving', frames: '16', fps: '16', alt: 'A ring of eight blue dots, each growing and shrinking in turn so the largest runs around clockwise, over the words Saving your changes.' },
       [...ringDots, ['t', '16', '36', '48', '4', '03=', 'Saving your changes']],
@@ -87,8 +87,8 @@ export const templates = (): Template[] => [
   },
   {
     id: 'curtain',
-    name: t('Title card'),
-    blurb: t('Red curtains part on opening night and the festival’s name comes forward: played once, it rests on the title.'),
+    name: t('anim-title-card'),
+    blurb: t('anim-red-curtains-part-on-opening'),
     doc: motion(
       {
         title: 'Hudson Lights opening night',
@@ -111,8 +111,8 @@ export const templates = (): Template[] => [
   },
   {
     id: 'birthday',
-    name: t('Birthday card'),
-    blurb: t('A present hops, stars and hearts sway around it, and the greeting shines in rainbow letters.'),
+    name: t('draw-birthday-card'),
+    blurb: t('anim-present-hops-stars-and-hearts'),
     doc: motion(
       {
         title: 'Happy birthday, Maya',
@@ -141,8 +141,8 @@ export const templates = (): Template[] => [
   },
   {
     id: 'standup',
-    name: t('Quick standup'),
-    blurb: t('A meme with a caption above and one below, and a clock that spins and wobbles in between.'),
+    name: t('anim-quick-standup'),
+    blurb: t('anim-meme-with-caption-above-and'),
     doc: motion(
       { title: 'Just a quick standup', frames: '16', fps: '12', alt: 'A meme: the words Just a quick standup above a clock that spins wildly, and 47 minutes later below it.' },
       [
@@ -155,8 +155,8 @@ export const templates = (): Template[] => [
   },
   {
     id: 'green',
-    name: t('Build is green'),
-    blurb: t('A meme in two lines of impact type, and a trophy that spins in, lands and glows.'),
+    name: t('anim-build-is-green'),
+    blurb: t('anim-meme-in-two-lines-of'),
     doc: motion(
       { title: 'When the build is green', frames: '24', fps: '8', alt: 'A meme: the words When the build is green, and a trophy that spins in, grows, and glows.' },
       [
@@ -173,8 +173,8 @@ export const templates = (): Template[] => [
   },
   {
     id: 'flip',
-    name: t('Flash card'),
-    blurb: t('A card shows a Spanish word, turns over to give the English, and turns back: a turn about its upright axis.'),
+    name: t('anim-flash-card'),
+    blurb: t('anim-card-shows-spanish-word-turns'),
     doc: motion(
       { title: 'Spanish, week 6: la biblioteca', frames: '24', fps: '8', alt: 'A flash card reading la biblioteca turns over to show the library, then turns back.' },
       [
@@ -190,8 +190,8 @@ export const templates = (): Template[] => [
   },
   {
     id: 'weather',
-    name: t('Weather this week'),
-    blurb: t('Four days of weather in Lisbon, each icon alive: the sun turns, the cloud drifts, the lightning jolts.'),
+    name: t('anim-weather-this-week'),
+    blurb: t('anim-four-days-of-weather-in'),
     doc: motion(
       {
         title: 'Lisbon this week',
@@ -221,8 +221,8 @@ export const templates = (): Template[] => [
   },
   {
     id: 'countdown',
-    name: t('New Year countdown'),
-    blurb: t('Three, two, one, a second each, then the new year arrives in rainbow letters: played once, it rests on the greeting.'),
+    name: t('anim-new-year-countdown'),
+    blurb: t('anim-three-two-one-second-each'),
     doc: motion(
       {
         title: 'New Year’s Eve at the Boathouse',
@@ -253,8 +253,8 @@ export const templates = (): Template[] => [
   },
   {
     id: 'flight',
-    name: t('Flight path'),
-    blurb: t('A plane crosses a dotted route from New York to Lisbon, climbing as it goes, with the flight’s times above.'),
+    name: t('anim-flight-path'),
+    blurb: t('anim-plane-crosses-dotted-route-from'),
     doc: motion(
       {
         title: 'New York to Lisbon, October 24',
@@ -276,8 +276,8 @@ export const templates = (): Template[] => [
   },
   {
     id: 'neon',
-    name: t('Neon sign'),
-    blurb: t('A café’s sign at night: the name flickers, the hours stand out below, and the cup glows and swells.'),
+    name: t('anim-neon-sign'),
+    blurb: t('anim-cafes-sign-at-night-name'),
     doc: motion(
       { title: 'Kafé Lindqvist sign', frames: '16', fps: '8', alt: 'A sign for Kafé Lindqvist whose name flickers, with the words open till midnight below and a glowing coffee cup that swells.' },
       [
@@ -295,8 +295,8 @@ export const templates = (): Template[] => [
   },
   {
     id: 'sunrise',
-    name: t('Sunrise'),
-    blurb: t('The sun comes up from behind the hills and the morning slides in: depth, size and a pen-drawn skyline.'),
+    name: t('anim-sunrise'),
+    blurb: t('anim-sun-comes-up-from-behind'),
     doc: motion(
       { title: 'Good morning', frames: '36', fps: '12', alt: 'The sun rises from behind green hills and grows larger, and the words Good morning slide in from the left.' },
       [

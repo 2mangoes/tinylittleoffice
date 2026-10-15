@@ -331,7 +331,7 @@ export class ToAnimEditor extends DocElement<AnimView> {
       this.drawGen++;
       this.handOver = [...this.sels];
       this.requestUpdate();
-      toast(t('Pixel art is made in the Drawing Tool; the Animator moves shapes.'));
+      toast(t('anim-pixel-art-is-made-in'));
       return;
     }
     const before = [...this.sels];
@@ -714,17 +714,17 @@ export class ToAnimEditor extends DocElement<AnimView> {
       this.mode === 'draw'
         ? keyed(this.drawGen, html`<to-draw-editor class="anim-draw" ?data-tile=${tile} .value=${write(drawingOf(this.doc))} @docchange=${this.onDrawChange}></to-draw-editor>`)
         : html`${this.renderBar()} ${this.renderStage()}${this.renderTime()}${this.renderProps()}
-            <to-context class="anim-context" .label=${t('The shapes in hand')} .items=${this.contextItems()}></to-context>
+            <to-context class="anim-context" .label=${t('anim-shapes-in-hand')} .items=${this.contextItems()}></to-context>
             ${this.renderSettings()}`
     }
       ${this.renderRow()}`;
   }
 
   private hint(): string {
-    if (this.mode === 'draw') return t('Draw the shapes; Move sets them going.');
-    if (!this.view.shapes.length) return t('Nothing here yet: draw something first.');
-    if (this.sel < 0) return t('Tap a shape, then drag it to where it goes.');
-    return t('Drag it to where it goes at {s} s.', { s: this.secs(this.frame) });
+    if (this.mode === 'draw') return t('anim-draw-shapes-move-sets-them');
+    if (!this.view.shapes.length) return t('anim-nothing-here-yet-draw-something');
+    if (this.sel < 0) return t('anim-tap-shape-then-drag-it');
+    return t('anim-drag-it-to-where-it', { s: this.secs(this.frame) });
   }
 
   private renderBar() {
@@ -736,7 +736,7 @@ export class ToAnimEditor extends DocElement<AnimView> {
   /** The row at the column's foot, above the bar, in either mode: Draw and Move as one control, and what to do now, in full. */
   private renderRow() {
     return html`<div class="anim-row">
-      <span class="anim-modes" role="group" aria-label=${t('Mode')}>${cmdBtn(own('draw'), this, { keep: false })}${cmdBtn(own('move'), this, { keep: false })}</span>
+      <span class="anim-modes" role="group" aria-label=${t('anim-mode')}>${cmdBtn(own('draw'), this, { keep: false })}${cmdBtn(own('move'), this, { keep: false })}</span>
       <p class="anim-hint" aria-live="polite">${this.hint()}</p>
     </div>`;
   }
@@ -748,7 +748,7 @@ export class ToAnimEditor extends DocElement<AnimView> {
     const coarse = typeof matchMedia === 'function' && matchMedia('(pointer: coarse)').matches;
     const reach = (drawn: number) => (coarse ? Math.max(drawn, FINGER / 2 / this.scale()) : drawn);
     return html`<div class="anim-wrap" data-spatial @wheel=${this.onWheel}>
-      <svg class="anim-stage ${this.held ? 'held' : ''}" style=${this.zoom === 1 ? '' : `width:${this.zoom * 100}%;max-height:none;max-width:none`} viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" role="application" aria-label=${t('Stage: {alt}. Arrow keys move the shape in hand (or the time), comma and period step a frame, Space plays, K keeps a key.', { alt: altOf(a) })} tabindex="0"
+      <svg class="anim-stage ${this.held ? 'held' : ''}" style=${this.zoom === 1 ? '' : `width:${this.zoom * 100}%;max-height:none;max-width:none`} viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" role="application" aria-label=${t('anim-stage-alt-arrow-keys-move', { alt: altOf(a) })} tabindex="0"
         @pointerdown=${this.onDown} @pointermove=${this.onMove} @pointerup=${this.onUp} @pointercancel=${this.onUp}>
         ${unsafeSVG(frameSvg(a, now, THEME))}
         ${
@@ -780,10 +780,10 @@ export class ToAnimEditor extends DocElement<AnimView> {
       html`<label class="anim-slider anim-${field}" title=${tip}><span>${label} <b>${shown}</b></span>
         <input type="range" min=${min} max=${max} step=${step} aria-description=${tip} .value=${String(at[field] ?? 0)} @input=${(e: Event) => this.key({ [field]: parseFloat((e.target as HTMLInputElement).value) }, `${field}:${this.sels.join(',')}:${this.frame}`)} /></label>`;
     return html`<div class="anim-props">
-      ${slider(t('Depth'), t('Which shape is in front: a nearer shape is drawn over a farther one, and a far one a little dimmer. Depth never changes the size.'), 'z', -MAX_Z, MAX_Z, 1, `${Math.round(at.z)}`)}
-      ${slider(t('Size'), t('How large the shape is drawn: 1× is as drawn.'), 's', 0.2, 4, 0.1, `${at.s.toFixed(1)}×`)}
-      ${slider(t('Spin'), t('Turns the shape around in the plane of the stage, like a wheel.'), 'r', -360, 360, 1, `${Math.round(at.r)}°`)}
-      ${slider(t('Turn'), t('Turns the shape about its upright axis, like a card: edge on at 90°, mirrored past it.'), 'u', -360, 360, 1, `${Math.round(at.u ?? 0)}°`)}
+      ${slider(t('anim-depth'), t('anim-which-shape-is-in-front'), 'z', -MAX_Z, MAX_Z, 1, `${Math.round(at.z)}`)}
+      ${slider(t('anim-size'), t('anim-how-large-shape-is-drawn'), 's', 0.2, 4, 0.1, `${at.s.toFixed(1)}×`)}
+      ${slider(t('anim-spin'), t('anim-turns-shape-around-in-plane'), 'r', -360, 360, 1, `${Math.round(at.r)}°`)}
+      ${slider(t('anim-turn'), t('anim-turns-shape-about-its-upright'), 'u', -360, 360, 1, `${Math.round(at.u ?? 0)}°`)}
       <to-menu class="anim-fx" keep .label=${labelOf(own('fx'), this)} .icon=${Sparkles} caret .items=${drawnIn(COMMANDS, 'menu:fx', this)}></to-menu>
     </div>`;
   }
@@ -795,10 +795,10 @@ export class ToAnimEditor extends DocElement<AnimView> {
       html`<label class="anim-field anim-${which}"><span>${label}</span><input type="number" inputmode="numeric" min=${min} max=${max} step="1" .value=${live(String(value))}
         @change=${(e: Event) => this.setNumber(which, e.target as HTMLInputElement)}
         @keydown=${(e: KeyboardEvent) => e.key === 'Enter' && !e.isComposing && (e.preventDefault(), this.setNumber(which, e.target as HTMLInputElement))} /></label>`;
-    return html`<to-dialog class="anim-settings" heading=${t('Length, speed and repeat')} .body=${html`<div class="anim-length">
-      ${field('frames', t('Frames'), frames, MIN_FRAMES, MAX_FRAMES)} ${field('fps', t('Frames a second'), fps, MIN_FPS, MAX_FPS)}
+    return html`<to-dialog class="anim-settings" heading=${t('anim-length-speed-and-repeat')} .body=${html`<div class="anim-length">
+      ${field('frames', t('anim-frames'), frames, MIN_FRAMES, MAX_FRAMES)} ${field('fps', t('anim-frames-second'), fps, MIN_FPS, MAX_FPS)}
       <to-menu class="anim-loop" .label=${loopName(loop)} .icon=${Repeat} caret .items=${drawnIn(COMMANDS, 'menu:loop', this)}></to-menu>
-      <p class="anim-secs to-hint" aria-live="polite">${t('{s} s', { s: (frames / fps).toFixed(1) })}</p>
+      <p class="anim-secs to-hint" aria-live="polite">${t('anim-s-s', { s: (frames / fps).toFixed(1) })}</p>
     </div>`}></to-dialog>`;
   }
 
@@ -818,11 +818,11 @@ export class ToAnimEditor extends DocElement<AnimView> {
     const keep = (e: Event) => e.preventDefault();
     return html`<div class="anim-time">
       <div class="anim-strip">
-        <div class="anim-thumbs" role="group" aria-label=${t('Moments')}>
+        <div class="anim-thumbs" role="group" aria-label=${t('anim-moments')}>
           ${this.thumbnails().map(
             (
               m,
-            ) => html`<button type="button" class="anim-frame ${m.at === shown ? 'on' : ''}" aria-label=${t('Frame {n}, {s} s', { n: m.at + 1, s: this.secs(m.at) })} aria-pressed=${String(m.at === shown)} @mousedown=${keep} @click=${() => this.seek(m.at)}>
+            ) => html`<button type="button" class="anim-frame ${m.at === shown ? 'on' : ''}" aria-label=${t('anim-frame-n-s-s', { n: m.at + 1, s: this.secs(m.at) })} aria-pressed=${String(m.at === shown)} @mousedown=${keep} @click=${() => this.seek(m.at)}>
               <svg viewBox="0 0 ${W} ${H}" aria-hidden="true">${unsafeSVG(m.svg)}</svg><span class="anim-n" aria-hidden="true">${m.at + 1}</span>
             </button>`,
           )}
@@ -831,12 +831,12 @@ export class ToAnimEditor extends DocElement<AnimView> {
       </div>
       <div class="anim-scrub">
         <div class="anim-track">
-          <input type="range" aria-label=${t('Time')} min="0" max=${frames - 1} step="1" .value=${String(shown)} @input=${(e: Event) => this.seek(parseInt((e.target as HTMLInputElement).value, 10))} />
+          <input type="range" aria-label=${t('anim-time')} min="0" max=${frames - 1} step="1" .value=${String(shown)} @input=${(e: Event) => this.seek(parseInt((e.target as HTMLInputElement).value, 10))} />
           <div class="anim-keys">
-            ${keys.map((k) => html`<button type="button" class=${k.t === this.frame && !this.playing ? 'key on' : 'key'} style="left:${(k.t / Math.max(1, frames - 1)) * 100}%" aria-label=${t('Key at {s} s', { s: this.secs(k.t) })} @mousedown=${keep} @click=${() => this.seek(k.t)}></button>`)}
+            ${keys.map((k) => html`<button type="button" class=${k.t === this.frame && !this.playing ? 'key on' : 'key'} style="left:${(k.t / Math.max(1, frames - 1)) * 100}%" aria-label=${t('anim-key-at-s-s', { s: this.secs(k.t) })} @mousedown=${keep} @click=${() => this.seek(k.t)}></button>`)}
           </div>
         </div>
-        <span class="anim-clock">${t('{now} s of {all} s', { now: this.secs(shown), all: (frames / fps).toFixed(1) })}</span>
+        <span class="anim-clock">${t('anim-now-s-of-all-s', { now: this.secs(shown), all: (frames / fps).toFixed(1) })}</span>
       </div>
     </div>`;
   }

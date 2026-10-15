@@ -41,20 +41,26 @@ const ALIGN_ICON = { left: UI.alignLeft, center: UI.alignCenter, right: UI.align
 
 /** Insert ▾: what goes in at the caret. */
 const INSERTS: Command<W>[] = [
-  cmd('insert.table', 'Table', { icon: UI.table, where: ['menu:insert'], does: (w) => w.insertTable() }),
-  cmd('insert.doc', 'Tiny Little Office Doc…', { icon: UI.insert, where: ['menu:insert'], does: (w) => w.insertDocument() }),
-  cmd('insert.qr', 'QR code of this document', { icon: UI.qr, where: ['menu:insert'], does: (w) => w.insertQr() }),
-  cmd('insert.date', 'Date', { icon: UI.calendar, where: ['menu:insert'], does: (w) => w.text.exec('date') }),
-  cmd('insert.rule', 'Horizontal rule', { icon: Minus, where: ['menu:insert'], does: (w) => w.insertBlock(rule()) }),
-  cmd('insert.break', 'Page break', { at: 'words', icon: SeparatorHorizontal, keys: 'Mod+Shift+Enter', where: ['menu:insert'], does: (w, e) => (inWords(w, e) ? w.insertBlock({ k: 'hr' }) : false) }),
+  cmd('insert.table', 'bar-table', { icon: UI.table, where: ['menu:insert'], does: (w) => w.insertTable() }),
+  cmd('insert.doc', 'insert-tiny-little-office-doc-ellipsis', { icon: UI.insert, where: ['menu:insert'], does: (w) => w.insertDocument() }),
+  cmd('insert.qr', 'share-qr-code-of-this-document', { icon: UI.qr, where: ['menu:insert'], does: (w) => w.insertQr() }),
+  cmd('insert.date', 'bar-date', { icon: UI.calendar, where: ['menu:insert'], does: (w) => w.text.exec('date') }),
+  cmd('insert.rule', 'write-horizontal-rule', { icon: Minus, where: ['menu:insert'], does: (w) => w.insertBlock(rule()) }),
+  cmd('insert.break', 'write-page-break', {
+    at: 'words',
+    icon: SeparatorHorizontal,
+    keys: 'Mod+Shift+Enter',
+    where: ['menu:insert'],
+    does: (w, e) => (inWords(w, e) ? w.insertBlock({ k: 'hr' }) : false),
+  }),
   ...apps()
     .filter((a) => a.id !== 'write')
-    .map((a) => cmd(`insert.app.${a.id}`, () => a.name, { icon: a.icon, data: true, heading: 'A new document', where: ['menu:insert'], does: (w) => w.insertApp(a.id) })),
+    .map((a) => cmd(`insert.app.${a.id}`, () => a.name, { icon: a.icon, data: true, heading: 'insert-new-document', where: ['menu:insert'], does: (w) => w.insertApp(a.id) })),
 ];
 
 /** The bar under a card in hand (§6's order), and its keys. */
 export const CARD: Command<W>[] = [
-  cmd('card.edit', (w) => (w ? w.editLabel(w.cardAt) : t('Edit')), {
+  cmd('card.edit', (w) => (w ? w.editLabel(w.cardAt) : t('draw-edit')), {
     at: 'card',
     icon: UI.pen,
     keys: 'Enter',
@@ -63,8 +69,8 @@ export const CARD: Command<W>[] = [
     when: (w) => heldCard(w) && !!w.editLabel(w.cardAt),
     does: (w) => w.editHeld(),
   }),
-  cmd('card.open', 'Open in a new tab', { icon: UI.open, where: ['context'], group: 'edit', when: (w) => heldCard(w) && w.opensIn(w.cardAt), does: (w) => w.openHeld() }),
-  cmd('card.up', 'Move up', {
+  cmd('card.open', 'outline-open-in-new-tab', { icon: UI.open, where: ['context'], group: 'edit', when: (w) => heldCard(w) && w.opensIn(w.cardAt), does: (w) => w.openHeld() }),
+  cmd('card.up', 'outline-move-up', {
     at: 'card',
     icon: ArrowUp,
     keys: 'Alt+ArrowUp',
@@ -74,7 +80,7 @@ export const CARD: Command<W>[] = [
     disabled: (w) => w.cardAt === 0,
     does: (w) => w.moveCard(w.cardAt, -1),
   }),
-  cmd('card.down', 'Move down', {
+  cmd('card.down', 'outline-move-down', {
     at: 'card',
     icon: ArrowDown,
     keys: 'Alt+ArrowDown',
@@ -84,33 +90,35 @@ export const CARD: Command<W>[] = [
     disabled: (w) => w.cardAt >= w.blockCount - 1,
     does: (w) => w.moveCard(w.cardAt, 1),
   }),
-  cmd('card.duplicate', 'Duplicate', { at: 'card', icon: CopyPlus, keys: 'Mod+D', where: ['context'], group: 'edit', when: heldCard, does: (w) => w.duplicateCard(w.cardAt) }),
-  cmd('card.copy', 'Copy', { at: 'card', icon: Copy, keys: 'Mod+C', native: true, where: ['context'], group: 'clip', when: heldCard, does: (w) => w.copyOut(w.cardAt, false) }),
-  cmd('card.cut', 'Cut', { at: 'card', icon: Scissors, keys: 'Mod+X', native: true, where: ['context'], group: 'clip', when: heldCard, does: (w) => w.copyOut(w.cardAt, true) }),
-  cmd('card.paste', 'Paste', { at: 'card', icon: ClipboardPaste, keys: 'Mod+V', native: true, where: ['context'], group: 'clip', when: heldCard, does: (w) => w.pasteIn(w.cardAt) }),
-  cmd('card.delete', 'Delete', { at: 'card', icon: UI.trash, keys: 'Delete / Backspace', where: ['context'], group: 'delete', when: heldCard, does: (w) => w.removeCard(w.cardAt) }),
-  cmd('card.back', 'Back to the words', { at: 'card', icon: CornerDownLeft, keys: 'Escape / ArrowDown / ArrowRight', where: ['keys-only'], when: heldCard, does: (w) => w.afterCard(w.cardAt, 1) }),
-  cmd('card.before', 'Back to the words', { at: 'card', keys: 'ArrowUp / ArrowLeft', where: ['keys-only'], when: heldCard, does: (w) => w.afterCard(w.cardAt, -1) }),
+  cmd('card.duplicate', 'draw-duplicate', { at: 'card', icon: CopyPlus, keys: 'Mod+D', where: ['context'], group: 'edit', when: heldCard, does: (w) => w.duplicateCard(w.cardAt) }),
+  cmd('card.copy', 'outline-copy', { at: 'card', icon: Copy, keys: 'Mod+C', native: true, where: ['context'], group: 'clip', when: heldCard, does: (w) => w.copyOut(w.cardAt, false) }),
+  cmd('card.cut', 'deck-cut', { at: 'card', icon: Scissors, keys: 'Mod+X', native: true, where: ['context'], group: 'clip', when: heldCard, does: (w) => w.copyOut(w.cardAt, true) }),
+  cmd('card.paste', 'outline-paste', { at: 'card', icon: ClipboardPaste, keys: 'Mod+V', native: true, where: ['context'], group: 'clip', when: heldCard, does: (w) => w.pasteIn(w.cardAt) }),
+  cmd('card.delete', 'draw-delete', { at: 'card', icon: UI.trash, keys: 'Delete / Backspace', where: ['context'], group: 'delete', when: heldCard, does: (w) => w.removeCard(w.cardAt) }),
+  cmd('card.back', 'common-back-to-words', { at: 'card', icon: CornerDownLeft, keys: 'Escape / ArrowDown / ArrowRight', where: ['keys-only'], when: heldCard, does: (w) => w.afterCard(w.cardAt, 1) }),
+  cmd('card.before', 'common-back-to-words', { at: 'card', keys: 'ArrowUp / ArrowLeft', where: ['keys-only'], when: heldCard, does: (w) => w.afterCard(w.cardAt, -1) }),
 ];
 
 /** Every command of the Word Processor, the bar's in its order. */
 const WRITE: Command<W>[] = [
-  cmd('insert', 'Insert', { icon: UI.insert, menu: 'insert', where: ['bar'], takesFocus: true, does: () => undefined }),
+  cmd('insert', 'bar-insert', { icon: UI.insert, menu: 'insert', where: ['bar'], takesFocus: true, does: () => undefined }),
   ...INSERTS,
-  block('title', 'title', 'Title', UI.text),
-  block('heading', 'h1', 'Heading', UI.heading1),
-  block('subheading', 'h2', 'Subheading', UI.heading),
-  block('paragraph', 'p', 'Paragraph', Pilcrow),
-  cmd('icon', 'Icon', { icon: UI.icon, where: ['bar'], does: (w) => w.insertIcon() }),
-  cmd('align', 'Align', { icon: UI.alignLeft, menu: 'align', where: ['bar'], does: () => undefined }),
-  align('left', 'Align left', UI.alignLeft, 'L'),
-  align('center', 'Center', UI.alignCenter, 'E'),
-  align('right', 'Align right', UI.alignRight, 'R'),
-  align('justify', 'Justify', UI.alignJustify, 'J'),
-  cmd('look', (w) => t('Look: {theme}', { theme: (w ? lookOf(w.doc) : LOOKS.sans).name() }), { icon: Palette, menu: 'look', where: ['bar'], document: true, does: () => undefined }),
+  block('title', 'title', 'shell-title', UI.text),
+  block('heading', 'h1', 'bar-heading', UI.heading1),
+  block('subheading', 'h2', 'write-subheading', UI.heading),
+  block('paragraph', 'p', 'write-paragraph', Pilcrow),
+  cmd('icon', 'icons-icon', { icon: UI.icon, where: ['bar'], does: (w) => w.insertIcon() }),
+  cmd('align', 'write-align', { icon: UI.alignLeft, menu: 'align', where: ['bar'], does: () => undefined }),
+  align('left', 'write-align-left', UI.alignLeft, 'L'),
+  align('center', 'write-center', UI.alignCenter, 'E'),
+  align('right', 'write-align-right', UI.alignRight, 'R'),
+  align('justify', 'write-justify', UI.alignJustify, 'J'),
+  cmd('look', (w) => t('deck-look-theme', { theme: (w ? lookOf(w.doc) : LOOKS.sans).name() }), { icon: Palette, menu: 'look', where: ['bar'], document: true, does: () => undefined }),
   ...LOOK_IDS.map((id) => cmd(`look.${id}`, LOOKS[id].name, { data: true, hint: () => LOOKS[id].sample(), where: ['menu:look'], pressed: (w) => lookOf(w.doc).id === id, does: (w) => w.setLook(id) })),
-  cmd('paper', (w) => t('Paper: {paper}', { paper: PAPERS[w ? paperOf(w.doc) : 'letter'].name }), { icon: Ruler, menu: 'paper', where: ['bar'], document: true, does: () => undefined }),
-  ...(Object.keys(PAPERS) as Paper[]).map((p) => cmd(`paper.${p}`, p === 'a4' ? 'A4' : 'Letter', { where: ['menu:paper'], pressed: (w) => paperOf(w.doc) === p, does: (w) => w.setPaper(p) })),
+  cmd('paper', (w) => t('write-paper-paper', { paper: PAPERS[w ? paperOf(w.doc) : 'letter'].name }), { icon: Ruler, menu: 'paper', where: ['bar'], document: true, does: () => undefined }),
+  ...(Object.keys(PAPERS) as Paper[]).map((p) =>
+    cmd(`paper.${p}`, p === 'a4' ? 'write-a4' : 'write-letter', { where: ['menu:paper'], pressed: (w) => paperOf(w.doc) === p, does: (w) => w.setPaper(p) }),
+  ),
   ...CARD,
 ];
 

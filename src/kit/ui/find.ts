@@ -185,13 +185,13 @@ export class ToFind extends LitElement {
   };
   render() {
     if (!this.open) return html``;
-    const status = !this.query.trim() ? '' : this.count ? t('{n} of {count}', { n: this.at + 1, count: this.count }) : t('Not found');
-    return html`<div class="to-find" role="search" aria-label=${t('Find in this document')}>
-      <input type="search" class="to-find-input" placeholder=${t('Find in this document')} aria-label=${t('Find in this document')} autocomplete="off" .value=${this.query} @input=${(e: Event) => ((this.query = (e.target as HTMLInputElement).value), this.run(0))} @keydown=${this.onKey} />
+    const status = !this.query.trim() ? '' : this.count ? t('common-n-of-count', { n: this.at + 1, count: this.count }) : t('find-not-found');
+    return html`<div class="to-find" role="search" aria-label=${t('find-in-this-document')}>
+      <input type="search" class="to-find-input" placeholder=${t('find-in-this-document')} aria-label=${t('find-in-this-document')} autocomplete="off" .value=${this.query} @input=${(e: Event) => ((this.query = (e.target as HTMLInputElement).value), this.run(0))} @keydown=${this.onKey} />
       <span class="to-find-count" role="status" aria-live="polite">${status}</span>
-      <button type="button" class="to-btn to-tool" aria-label=${t('Previous')} title=${t('Previous')} ?disabled=${!this.count} @click=${this.prev}>${icon(UI.up, 18)}</button>
-      <button type="button" class="to-btn to-tool" aria-label=${t('Next')} title=${t('Next')} ?disabled=${!this.count} @click=${this.next}>${icon(UI.down, 18)}</button>
-      <button type="button" class="to-btn to-tool" aria-label=${t('Close')} title=${t('Close')} @click=${() => this.close()}>${icon(UI.close, 18)}</button>
+      <button type="button" class="to-btn to-tool" aria-label=${t('deck-previous')} title=${t('deck-previous')} ?disabled=${!this.count} @click=${this.prev}>${icon(UI.up, 18)}</button>
+      <button type="button" class="to-btn to-tool" aria-label=${t('deck-next')} title=${t('deck-next')} ?disabled=${!this.count} @click=${this.next}>${icon(UI.down, 18)}</button>
+      <button type="button" class="to-btn to-tool" aria-label=${t('drawer-close')} title=${t('drawer-close')} @click=${() => this.close()}>${icon(UI.close, 18)}</button>
     </div>`;
   }
 }

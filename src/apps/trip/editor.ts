@@ -148,7 +148,7 @@ export class ToTripEditor extends DocElement<TripView> {
     rows: () => this.rowItems(),
     box: () => this.querySelector<HTMLElement>('.trip-stops'),
     handle: '.trip-n',
-    label: t('Chosen stops'),
+    label: t('trip-chosen-stops'),
     contextClass: 'trip-context',
     current: () => (this.view.stops[this.cur] ? this.cur : null),
     edit: (i, offset) => void this.focusField(i, 'name', offset),
@@ -358,7 +358,7 @@ export class ToTripEditor extends DocElement<TripView> {
       const pin = L.marker(pts[i], {
         draggable: true,
         keyboard: true,
-        title: s.name || t('Stop {n}', { n: i + 1 }),
+        title: s.name || t('trip-stop-n', { n: i + 1 }),
         icon: L.divIcon({ className: `trip-pin${this.isSel(i) ? ' sel' : ''}`, html: `<span>${i + 1}</span>`, iconSize: [44, 44], iconAnchor: [22, 22] }),
       });
       pin.on('click', () => this.pick(i, false));
@@ -455,16 +455,16 @@ export class ToTripEditor extends DocElement<TripView> {
     if (!s) return nothing;
     const n = stops.length;
     const leg = this.presenting > 0 && this.view.linked ? formatLeg(distanceKm(stops[this.presenting - 1], s), this.view.units) : '';
-    return html`<div class="trip-present" role="dialog" aria-modal="true" tabindex="-1" aria-label=${t('Presenting the trip')} @keydown=${this.onPresentKey}>
+    return html`<div class="trip-present" role="dialog" aria-modal="true" tabindex="-1" aria-label=${t('trip-presenting-trip')} @keydown=${this.onPresentKey}>
       <div class="trip-present-words" aria-live="polite">
-        <b>${t('{n} of {count}', { n: this.presenting + 1, count: n })} · ${s.name || `${s.lat}, ${s.lon}`}</b>
+        <b>${t('common-n-of-count', { n: this.presenting + 1, count: n })} · ${s.name || `${s.lat}, ${s.lon}`}</b>
         ${s.note ? html`<span>${s.note}</span>` : nothing}
         ${leg ? html`<small>${leg}</small>` : nothing}
       </div>
       <div class="trip-present-ctl">
-        <button type="button" class="to-btn to-tool" aria-label=${t('The stop before')} title=${t('The stop before')} ?disabled=${this.presenting === 0} @click=${() => this.goStop(this.presenting - 1)}>${icon(UI.up, 20)}</button>
-        <button type="button" class="to-btn to-tool" aria-label=${t('The next stop')} title=${t('The next stop')} ?disabled=${this.presenting >= n - 1} @click=${() => this.goStop(this.presenting + 1)}>${icon(UI.down, 20)}</button>
-        <button type="button" class="to-btn to-tool" aria-label=${t('Stop presenting')} title=${t('Stop presenting')} @click=${() => this.endPresenting()}>${icon(UI.close, 20)}</button>
+        <button type="button" class="to-btn to-tool" aria-label=${t('trip-stop-before')} title=${t('trip-stop-before')} ?disabled=${this.presenting === 0} @click=${() => this.goStop(this.presenting - 1)}>${icon(UI.up, 20)}</button>
+        <button type="button" class="to-btn to-tool" aria-label=${t('trip-next-stop')} title=${t('trip-next-stop')} ?disabled=${this.presenting >= n - 1} @click=${() => this.goStop(this.presenting + 1)}>${icon(UI.down, 20)}</button>
+        <button type="button" class="to-btn to-tool" aria-label=${t('deck-stop-presenting')} title=${t('deck-stop-presenting')} @click=${() => this.endPresenting()}>${icon(UI.close, 20)}</button>
       </div>
     </div>`;
   }
@@ -815,7 +815,7 @@ export class ToTripEditor extends DocElement<TripView> {
     const v = this.view;
     if (!i || !v.linked) return nothing;
     const d = formatLeg(distanceKm(v.stops[i - 1], v.stops[i]), v.units);
-    return html`<span class="trip-leg">${v.units === 'h' ? t('about {time} by car', { time: d }) : d}</span>`;
+    return html`<span class="trip-leg">${v.units === 'h' ? t('trip-about-time-by-car', { time: d }) : d}</span>`;
   }
   private wordsBox(s: Stop, i: number, field: Field) {
     const n = i + 1;
@@ -824,8 +824,8 @@ export class ToTripEditor extends DocElement<TripView> {
       shape="line"
       no-bubble
       .blocks=${this.blocksFor(s, field)}
-      label=${field === 'name' ? t('Name of stop {n}', { n }) : t('Note for stop {n}', { n })}
-      placeholder=${field === 'name' ? t('Name') : t('Note')}
+      label=${field === 'name' ? t('trip-name-of-stop-n', { n }) : t('trip-note-for-stop-n', { n })}
+      placeholder=${field === 'name' ? t('sheet-name') : t('draw-note')}
       @text-ops=${(e: CustomEvent<TextOps>) => this.onOps(e, i, field)}
       @text-enter=${(e: Event) => (e.stopPropagation(), this.onEnter(i, field))}
       @text-exit=${(e: CustomEvent<{ dir: 'back' | 'forward' }>) => (e.stopPropagation(), this.onExit(i, field, e.detail.dir))}
@@ -835,7 +835,7 @@ export class ToTripEditor extends DocElement<TripView> {
   private row(s: Stop, i: number) {
     const n = i + 1;
     const ranged = this.rows.has(i);
-    const label = t('Stop {n}: a tap chooses it, a drag moves it', { n });
+    const label = t('trip-stop-n-tap-chooses-it', { n });
     return html`<li class="trip-stop ${i === this.cur ? 'sel' : ''} ${ranged ? 'ranged' : ''} ${this.rows.drag?.id === i ? 'dragging' : ''}" data-i=${i} @focusin=${() => (this.cur = i)}>
       ${this.leg(i)}
       <button type="button" class="trip-n to-rows-handle" aria-pressed=${String(ranged)} aria-label=${label} title=${label}>${n}</button>
@@ -844,18 +844,18 @@ export class ToTripEditor extends DocElement<TripView> {
   }
   private findBody() {
     return html`<form class="trip-find-form" role="search" @submit=${(e: Event) => this.search(e)}>
-        <input type="search" enterkeyhint="search" autocomplete="off" aria-label=${t('Find a place')} placeholder=${t('A town, an address, a museum')} .value=${this.query} @input=${(e: Event) => (this.query = (e.target as HTMLInputElement).value)} />
-        <button type="submit" class="to-btn" ?disabled=${!this.query.trim() || this.searching}>${icon(UI.search)}<span>${t('Search')}</span></button>
+        <input type="search" enterkeyhint="search" autocomplete="off" aria-label=${t('trip-find-place')} placeholder=${t('trip-town-address-museum')} .value=${this.query} @input=${(e: Event) => (this.query = (e.target as HTMLInputElement).value)} />
+        <button type="submit" class="to-btn" ?disabled=${!this.query.trim() || this.searching}>${icon(UI.search)}<span>${t('trip-search')}</span></button>
       </form>
-      <p class="to-hint">${t('Searching sends the words you type to OpenStreetMap’s Nominatim, and nothing else.')}</p>
-      ${this.searching ? html`<p class="to-hint" role="status">${t('Searching…')}</p>` : nothing}
+      <p class="to-hint">${t('trip-searching-sends-words-you-type')}</p>
+      ${this.searching ? html`<p class="to-hint" role="status">${t('trip-searching')}</p>` : nothing}
       ${
         this.found
           ? this.found.length
-            ? html`<ul class="trip-found" aria-label=${t('Places found')}>
+            ? html`<ul class="trip-found" aria-label=${t('trip-places-found')}>
               ${this.found.map((p) => html`<li><button type="button" @click=${() => this.choose(p)}><b>${p.name}</b><span>${p.detail}</span></button></li>`)}
             </ul>`
-            : html`<p class="to-hint" role="status">${t('Nothing found.')}</p>`
+            : html`<p class="to-hint" role="status">${t('trip-nothing-found')}</p>`
           : nothing
       }`;
   }
@@ -869,27 +869,27 @@ export class ToTripEditor extends DocElement<TripView> {
         ${cmdMenu(own('units'), this, TRIP, 'trip-units')}
         ${['linked', 'fit', 'locate', 'map'].map((id) => cmdTool(own(id), this, { keep: false }))}
         ${cmdTool(own('present'), this, { cls: 'trip-present-btn' })}
-        <span class="to-hint trip-count">${t('{n|one stop|# stops}', { n })}${total ? html` · <b>${total}</b>` : nothing}</span>
+        <span class="to-hint trip-count">${t('trip-n-stops', { n })}${total ? html` · <b>${total}</b>` : nothing}</span>
         ${this.undoTools()}
       </to-bar>
       <div class="trip ${this.showMap ? '' : 'no-map'} ${this.presenting >= 0 ? 'presenting' : ''}">
         ${
           this.showMap
             ? html`<div class="trip-side">
-              <div class="trip-map" data-spatial role="region" aria-label=${t('Map: tap to add a stop')}></div>
-              <p class="to-hint trip-privacy">${t('The map’s pictures come from OpenStreetMap while it is shown.')} ${n ? nothing : t('Your location is asked for only to center the map, and is never written anywhere.')}</p>
+              <div class="trip-map" data-spatial role="region" aria-label=${t('trip-map-tap-to-add-stop')}></div>
+              <p class="to-hint trip-privacy">${t('trip-maps-pictures-come-from-openstreetmap')} ${n ? nothing : t('trip-your-location-is-asked-for')}</p>
             </div>`
             : nothing
         }
         ${
           n
-            ? html`<ol class="trip-stops" tabindex="-1" aria-label=${t('Stops')}>${v.stops.map((s, i) => this.row(s, i))}</ol>`
-            : html`<p class="to-hint trip-empty">${this.showMap ? t('Tap the map to add the first stop, or Insert a place by name.') : t('Insert a place by name.')}</p>`
+            ? html`<ol class="trip-stops" tabindex="-1" aria-label=${t('cal-stops')}>${v.stops.map((s, i) => this.row(s, i))}</ol>`
+            : html`<p class="to-hint trip-empty">${this.showMap ? t('trip-tap-map-to-add-first') : t('trip-insert-place-by-name')}</p>`
         }
       </div>
       ${this.presenting >= 0 ? this.renderPresent() : nothing}
       ${this.rows.renderContext()}
-      <to-dialog class="trip-find" heading=${t('A place by name')} .body=${this.findBody()}></to-dialog>`;
+      <to-dialog class="trip-find" heading=${t('trip-place-by-name')} .body=${this.findBody()}></to-dialog>`;
   }
 }
 if (!customElements.get(tag)) customElements.define(tag, ToTripEditor);

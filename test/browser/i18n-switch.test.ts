@@ -3,16 +3,18 @@ import { test, expect } from 'vitest';
 import { register, setLanguage } from '../../src/kit/core/i18n.ts';
 import { mount, until } from './helpers.ts';
 
-test('an in-memory Spanish dictionary takes over the shell when chosen', async () => {
-  register('es', {
-    'Tiny Little Office': 'Oficinita Diminuta',
-    'Find app, template, or command': 'Buscar app, plantilla o comando',
-    Menu: 'Menú',
-    'Word Processor': 'Procesador de textos',
-    'Templates for {app}': 'Plantillas de {app}',
-    Language: 'Idioma',
-    'Match device': 'Como el dispositivo',
-  });
+test('an in-memory Spanish file takes over the shell when chosen', async () => {
+  register(
+    'es',
+    `drawer-tiny-little-office = Oficinita Diminuta
+drawer-find-app-template-or-command = Buscar app, plantilla o comando
+shell-menu = Menú
+write-word-processor = Procesador de textos
+home-templates-for-app = Plantillas de { $app }
+drawer-language = Idioma
+drawer-match-device = Como el dispositivo
+`,
+  );
   const shell = await mount('');
   shell.querySelector<HTMLButtonElement>('.to-burger')!.click();
   await until(() => shell.querySelector<HTMLDialogElement>('dialog.to-drawer')!.open);

@@ -44,17 +44,17 @@ export const retitle = (doc: Doc, title: string): Doc => write(apply(parse(doc),
 export default defineApp({
   id: 'cal',
   get name() {
-    return t('Calendar');
+    return t('outline-calendar');
   },
   get noun() {
-    return t('calendar');
+    return t('cal-calendar');
   },
   get group() {
-    return t('Plan');
+    return t('common-plan');
   },
   icon: CalendarDays,
   get blurb() {
-    return t('Days and times on a month, a year or a schedule, in any time zone.');
+    return t('cal-days-and-times-on-month');
   },
   // Nothing yet: the editor opens on this month.
   blank: () => '',
@@ -66,7 +66,7 @@ export default defineApp({
   view: (doc, opts) => calPages(parse(doc), !!opts?.small),
   text: (doc) => calText(parse(doc)),
   exports: [
-    { ext: 'ics', label: () => t('iCalendar (ICS)'), mime: 'text/calendar;charset=utf-8', shows: null, build: (doc) => utf8(calToIcs(parse(doc), Date.now())) },
-    { ext: 'csv', label: () => t('CSV'), mime: 'text/csv;charset=utf-8', shows: 'text', build: (doc) => utf8('﻿' + calToCsv(parse(doc), csvSeparator())) },
+    { ext: 'ics', label: () => t('cal-icalendar-ics'), mime: 'text/calendar;charset=utf-8', shows: null, build: (doc) => utf8(calToIcs(parse(doc), Date.now())) },
+    { ext: 'csv', label: () => t('sheet-csv'), mime: 'text/csv;charset=utf-8', shows: 'text', build: (doc) => utf8('﻿' + calToCsv(parse(doc), csvSeparator())) },
   ],
 });

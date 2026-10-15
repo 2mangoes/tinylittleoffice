@@ -388,12 +388,12 @@ export class ToWriteTable extends LitElement {
     const [r0, r1] = this.rowsFor(this.menuRow);
     const n = r1 - r0 + 1;
     const held = this.view?.table.rows.length ?? 0;
-    const which = n === 1 ? t('row {n}', { n: r0 + 1 }) : t('rows {a}–{b}', { a: r0 + 1, b: r1 + 1 });
+    const which = n === 1 ? t('sheet-row-n-lowercase', { n: r0 + 1 }) : t('sheet-rows-b', { a: r0 + 1, b: r1 + 1 });
     const c = this.anchor[1];
     return [
-      { label: t('Insert {n|a row|# rows} above', { n }), icon: ArrowUp, disabled: r0 >= held, does: () => this.do({ cmd: 'rowsIn', r: r0, n, focus: [r0, c] }) },
-      { label: t('Insert {n|a row|# rows} below', { n }), icon: ArrowDown, disabled: r1 >= held - 1, does: () => this.do({ cmd: 'rowsIn', r: r1 + 1, n, focus: [r1 + 1, c] }) },
-      { label: t('Delete {which}', { which }), icon: Trash2, disabled: r0 >= held, does: () => this.do({ cmd: 'rowsOut', r0, r1, focus: [r0, c] }) },
+      { label: t('sheet-insert-n-rows-above', { n }), icon: ArrowUp, disabled: r0 >= held, does: () => this.do({ cmd: 'rowsIn', r: r0, n, focus: [r0, c] }) },
+      { label: t('sheet-insert-n-rows-below', { n }), icon: ArrowDown, disabled: r1 >= held - 1, does: () => this.do({ cmd: 'rowsIn', r: r1 + 1, n, focus: [r1 + 1, c] }) },
+      { label: t('sheet-delete-which', { which }), icon: Trash2, disabled: r0 >= held, does: () => this.do({ cmd: 'rowsOut', r0, r1, focus: [r0, c] }) },
     ];
   }
   private async openColMenu(c: number, from: HTMLElement) {
@@ -409,13 +409,13 @@ export class ToWriteTable extends LitElement {
     const c = this.menuCol;
     const n = this.cols.length;
     const r = this.anchor[0];
-    const cols = t('Columns');
+    const cols = t('sheet-columns');
     return [
-      ...kindItems(this.cols[c], t('Column {c} holds', { c: COL_NAMES[c] ?? '' }), (type, currency) => this.do({ cmd: 'type', c, type, currency, focus: [r, c] })),
-      { group: cols, label: t('Name this column'), icon: Pencil, does: () => this.nameColumn(c) },
-      { group: cols, label: t('Add a column before'), icon: ArrowLeft, disabled: n >= MAX_COLS, does: () => this.do({ cmd: 'colIn', c, focus: [r, c] }) },
-      { group: cols, label: t('Add a column after'), icon: ArrowRight, disabled: n >= MAX_COLS, does: () => this.do({ cmd: 'colIn', c: c + 1, focus: [r, c + 1] }) },
-      { group: cols, label: t('Remove this column'), icon: Trash2, disabled: n < 2, does: () => this.do({ cmd: 'colOut', c, focus: [r, Math.max(0, c - 1)] }) },
+      ...kindItems(this.cols[c], t('sheet-column-c-holds', { c: COL_NAMES[c] ?? '' }), (type, currency) => this.do({ cmd: 'type', c, type, currency, focus: [r, c] })),
+      { group: cols, label: t('write-name-this-column'), icon: Pencil, does: () => this.nameColumn(c) },
+      { group: cols, label: t('write-add-column-before'), icon: ArrowLeft, disabled: n >= MAX_COLS, does: () => this.do({ cmd: 'colIn', c, focus: [r, c] }) },
+      { group: cols, label: t('sheet-add-column-after'), icon: ArrowRight, disabled: n >= MAX_COLS, does: () => this.do({ cmd: 'colIn', c: c + 1, focus: [r, c + 1] }) },
+      { group: cols, label: t('sheet-remove-this-column'), icon: Trash2, disabled: n < 2, does: () => this.do({ cmd: 'colOut', c, focus: [r, Math.max(0, c - 1)] }) },
     ];
   }
 
@@ -451,7 +451,7 @@ export class ToWriteTable extends LitElement {
     const many = this.many;
     const fill = this.fillTo;
     const name = (col: Column, c: number) => (isLetterName(col.name) ? COL_NAMES[c] : col.name);
-    return html`<table class="wt ${many ? 'selecting' : ''}" aria-label=${t('Table')} @copy=${this.onCopy} @cut=${this.onCopy} @paste=${this.onPaste}>
+    return html`<table class="wt ${many ? 'selecting' : ''}" aria-label=${t('bar-table')} @copy=${this.onCopy} @cut=${this.onCopy} @paste=${this.onPaste}>
         <thead>
           <tr>
             ${this.commands ? this.renderHeads(cols) : cols.map((col, c) => html`<th scope="col" class=${isLetterName(col.name) ? 'letter' : ''}>${name(col, c)}</th>`)}
@@ -460,7 +460,7 @@ export class ToWriteTable extends LitElement {
         <tbody>
           ${Array.from({ length: rows }, (_, r) => {
             return html`<tr>
-              ${this.commands ? html`<th scope="row" class="wt-row"><button type="button" class="wt-num" aria-haspopup="menu" aria-expanded="false" aria-label=${t('Row {n}: insert or delete rows', { n: r + 1 })} @click=${(e: Event) => void this.openRowMenu(r, e.currentTarget as HTMLElement)}>${r + 1}</button></th>` : nothing}
+              ${this.commands ? html`<th scope="row" class="wt-row"><button type="button" class="wt-num" aria-haspopup="menu" aria-expanded="false" aria-label=${t('sheet-row-n-insert-or-delete', { n: r + 1 })} @click=${(e: Event) => void this.openRowMenu(r, e.currentTarget as HTMLElement)}>${r + 1}</button></th>` : nothing}
               ${cols.map((col, c) => {
                 const raw = v.table.rows[r]?.[c] ?? '';
                 const val = v.values[r]?.[c] ?? null;
@@ -471,7 +471,7 @@ export class ToWriteTable extends LitElement {
                 const inFill = !!fill && r >= fill.r0 && r <= fill.r1 && c >= fill.c0 && c <= fill.c1;
                 const cls = `${num ? 'num' : ''} ${locked ? 'locked' : ''} ${typeof val === 'string' && val.startsWith('#') ? 'err' : ''}`;
                 const shown = here ? raw : formatCell(val, col.type, currencyAt(v, c));
-                const title = locked ? t('Locked: worked out for you') : raw.startsWith('=') ? raw : nothing;
+                const title = locked ? t('write-locked-worked-out-for-you') : raw.startsWith('=') ? raw : nothing;
                 const focus = () => this.onFocus(r, c);
                 const blur = () => (this.focused = null);
                 const typed = (e: Event) => this.setCell(r, c, (e.target as Field).value);
@@ -510,7 +510,7 @@ export class ToWriteTable extends LitElement {
                           @keydown=${key}
                         ></textarea>`
                   }
-                  ${f && r === g.r1 && c === g.c1 ? html`<span class="wt-fill" role="button" aria-label=${t('Fill: drag to carry these cells on')} title=${t('Drag to fill')} @pointerdown=${this.onFillDown}></span>` : nothing}
+                  ${f && r === g.r1 && c === g.c1 ? html`<span class="wt-fill" role="button" aria-label=${t('sheet-fill-drag-to-carry-these')} title=${t('sheet-drag-to-fill')} @pointerdown=${this.onFillDown}></span>` : nothing}
                 </td>`;
               })}
               ${this.commands ? html`<td class="wt-pad"></td>` : nothing}
@@ -521,8 +521,8 @@ export class ToWriteTable extends LitElement {
       ${cols.map((col, c) => (col.type === 'option' ? html`<datalist id="${this.uid}-o${c}">${choicesOf(v.table.rows, c).map((x) => html`<option value=${x}></option>`)}</datalist>` : nothing))}
       ${
         this.commands
-          ? html`<to-menu class="wt-rowmenu" .label=${t('Row {n}', { n: this.menuRow + 1 })} .items=${this.rowItems()}></to-menu>
-            <to-menu class="wt-colmenu" .label=${t('Column {c}', { c: COL_NAMES[this.menuCol] ?? '' })} .items=${this.colItems()}></to-menu>`
+          ? html`<to-menu class="wt-rowmenu" .label=${t('sheet-row-n', { n: this.menuRow + 1 })} .items=${this.rowItems()}></to-menu>
+            <to-menu class="wt-colmenu" .label=${t('sheet-column-c', { c: COL_NAMES[this.menuCol] ?? '' })} .items=${this.colItems()}></to-menu>`
           : nothing
       }`;
   }
@@ -530,13 +530,13 @@ export class ToWriteTable extends LitElement {
   private renderHeads(cols: Column[]) {
     const name = (col: Column, c: number) => (isLetterName(col.name) ? COL_NAMES[c] : col.name);
     return html`<td class="wt-corner">
-        <button type="button" class="wt-hand" aria-label=${t('The table: move, copy or take it out')} title=${t('The table: move, copy or take it out')} @click=${() => this.hand()}>${icon(GripVertical, 14)}</button>
+        <button type="button" class="wt-hand" aria-label=${t('write-table-move-copy-or-take')} title=${t('write-table-move-copy-or-take')} @click=${() => this.hand()}>${icon(GripVertical, 14)}</button>
       </td>
       ${cols.map(
         (col, c) => html`<th scope="col" class=${isLetterName(col.name) ? 'letter' : ''}>
           ${
             this.naming === c
-              ? html`<input class="wt-cn" aria-label=${t('Name of column {c}', { c: COL_NAMES[c] })} placeholder=${COL_NAMES[c]} .value=${isLetterName(col.name) ? '' : col.name} autocomplete="off" spellcheck="false"
+              ? html`<input class="wt-cn" aria-label=${t('sheet-name-of-column-c', { c: COL_NAMES[c] })} placeholder=${COL_NAMES[c]} .value=${isLetterName(col.name) ? '' : col.name} autocomplete="off" spellcheck="false"
                 @keydown=${(e: KeyboardEvent) => {
                   e.stopPropagation();
                   if (e.isComposing || (e.key !== 'Enter' && e.key !== 'Escape')) return;
@@ -544,12 +544,12 @@ export class ToWriteTable extends LitElement {
                   this.named(e.key === 'Enter', (e.target as HTMLInputElement).value);
                 }}
                 @blur=${(e: FocusEvent) => this.named(true, (e.target as HTMLInputElement).value)} />`
-              : html`<button type="button" class="wt-col" aria-haspopup="menu" aria-expanded="false" aria-label=${t('Column {c}: what it holds, name it, add or remove a column', { c: name(col, c) })} @click=${(e: Event) => void this.openColMenu(c, e.currentTarget as HTMLElement)}>${name(col, c)}</button>`
+              : html`<button type="button" class="wt-col" aria-haspopup="menu" aria-expanded="false" aria-label=${t('write-column-c-what-it-holds', { c: name(col, c) })} @click=${(e: Event) => void this.openColMenu(c, e.currentTarget as HTMLElement)}>${name(col, c)}</button>`
           }
         </th>`,
       )}
       <td class="wt-add">
-        <button type="button" class="wt-add-col" aria-label=${t('Add a column')} title=${t('Add a column')} ?disabled=${cols.length >= MAX_COLS} @click=${() => this.do({ cmd: 'colIn', c: cols.length, focus: [this.anchor[0], cols.length] })}>${icon(UI.plus, 14)}</button>
+        <button type="button" class="wt-add-col" aria-label=${t('sheet-add-column')} title=${t('sheet-add-column')} ?disabled=${cols.length >= MAX_COLS} @click=${() => this.do({ cmd: 'colIn', c: cols.length, focus: [this.anchor[0], cols.length] })}>${icon(UI.plus, 14)}</button>
       </td>`;
   }
 }

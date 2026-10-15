@@ -91,7 +91,7 @@ export class ToCalcEditor extends DocElement<CalcView> {
     },
     box: () => this.querySelector<HTMLElement>('.calc-tape'),
     handle: '.calc-grip',
-    label: t('Chosen lines'),
+    label: t('calc-chosen-lines'),
     current: () => this.lineIndex(document.activeElement),
     edit: (i, offset) => this.focusLine(i, offset),
     remove: (s) => this.removeSpan(s),
@@ -458,8 +458,8 @@ export class ToCalcEditor extends DocElement<CalcView> {
 
   private keys() {
     const graph = this.view.mode === 'graph';
-    const name = (k: string) => ({ '⌫': t('Backspace'), C: t('Clear the line'), '√': t('Square root'), ans: graph ? 'x' : t('The answer before') })[k] ?? k;
-    return html`<div class="calc-keys" role="group" aria-label=${t('Keys')}>
+    const name = (k: string) => ({ '⌫': t('calc-backspace'), C: t('calc-clear-line'), '√': t('calc-square-root'), ans: graph ? 'x' : t('calc-answer-before') })[k] ?? k;
+    return html`<div class="calc-keys" role="group" aria-label=${t('calc-keys')}>
       ${KEYS.map((k) => {
         const shownKey = k === 'ans' && graph ? 'x' : k;
         return html`<button type="button" class="calc-key ${k === '=' ? 'eq' : /^[\d.]$/.test(k) ? 'digit' : 'op'}" aria-label=${name(k)} @mousedown=${keep} @click=${() => this.press(k)}>${shownKey}</button>`;
@@ -467,24 +467,23 @@ export class ToCalcEditor extends DocElement<CalcView> {
     </div>`;
   }
   private tapeRows(v: CalcView) {
-    if (!v.lines.length)
-      return html`<p class="to-hint calc-empty">${v.mode === 'graph' ? t('Type a curve in x, such as x^2 or sin(x), and press Enter to draw it.') : t('Type a sum, or 3 inch to cm, and press Enter. a = 12 keeps an answer by name.')}</p>`;
+    if (!v.lines.length) return html`<p class="to-hint calc-empty">${v.mode === 'graph' ? t('calc-type-curve-in-x-such') : t('calc-type-sum-or-3-inch')}</p>`;
     const graph = v.mode === 'graph';
     const texts = graph ? [] : tape(v.lines).texts;
     const exprs = graph ? curves(v.lines).exprs : [];
-    return html`<ol class="calc-tape" tabindex="-1" aria-label=${t('Tape')}>
+    return html`<ol class="calc-tape" tabindex="-1" aria-label=${t('calc-tape')}>
       ${v.lines.map((l, i) => {
         const n = i + 1;
         const colour = graph ? exprs.indexOf(l) : -1;
         const ranged = this.rows.has(i);
         const note = !graph && isNote(l, texts[i]);
         return html`<li class="calc-row ${note ? 'calc-note' : ''} ${ranged ? 'ranged' : ''} ${this.rows.drag?.id === i ? 'dragging' : ''}">
-          <button type="button" class="calc-grip to-rows-handle" aria-pressed=${String(ranged)} aria-label=${t('Choose line {n}: drag it to move it', { n })} title=${t('Drag to move; tap to choose')}>${icon(GripVertical, 16)}</button>
+          <button type="button" class="calc-grip to-rows-handle" aria-pressed=${String(ranged)} aria-label=${t('calc-choose-line-n-drag-it', { n })} title=${t('common-drag-to-move-tap-to')}>${icon(GripVertical, 16)}</button>
           ${graph && colour >= 0 ? html`<span class="calc-swatch" style=${`--c:${SERIES[colour % SERIES.length]}`} aria-hidden="true"></span>` : nothing}
-          <input class="calc-line" aria-label=${t('Line {n}', { n })} .value=${l} autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="done"
+          <input class="calc-line" aria-label=${t('calc-line-n', { n })} .value=${l} autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="done"
             @focus=${(e: Event) => this.settled.delete(e.target as HTMLInputElement)} @change=${(e: Event) => this.onLineChange(e, i)} @keydown=${(e: KeyboardEvent) => this.onLineKey(e, i)} @paste=${(e: ClipboardEvent) => this.onBoxPaste(e, i)} />
-          ${graph || note ? nothing : html`<button type="button" class="calc-ans" aria-label=${texts[i] ? t('Put {answer} in the line', { answer: texts[i] }) : t('No answer')} ?disabled=${!texts[i]} @mousedown=${keep} @click=${() => this.put(texts[i].replace(/−/g, '-'))}>= ${texts[i] || '?'}</button>`}
-          ${tool({ label: t('Take away line {n}', { n }), icon: UI.close, cls: 'calc-drop', does: () => this.run((w) => removeLine(w, i)) })}
+          ${graph || note ? nothing : html`<button type="button" class="calc-ans" aria-label=${texts[i] ? t('calc-put-answer-in-line', { answer: texts[i] }) : t('calc-no-answer')} ?disabled=${!texts[i]} @mousedown=${keep} @click=${() => this.put(texts[i].replace(/−/g, '-'))}>= ${texts[i] || '?'}</button>`}
+          ${tool({ label: t('calc-take-away-line-n', { n }), icon: UI.close, cls: 'calc-drop', does: () => this.run((w) => removeLine(w, i)) })}
         </li>`;
       })}
     </ol>`;
@@ -506,9 +505,9 @@ export class ToCalcEditor extends DocElement<CalcView> {
         <div class="calc-paper">${this.tapeRows(v)}</div>
         <div class="calc-pad">
           <div class="calc-entry">
-            <input class="calc-display" aria-label=${graph ? t('y =') : t('Sum')} placeholder=${graph ? t('y = …') : t('Type or tap')} autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="done"
+            <input class="calc-display" aria-label=${graph ? t('calc-y') : t('calc-sum')} placeholder=${graph ? t('calc-y-equals-ellipsis') : t('calc-type-or-tap')} autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="done"
               .value=${this.entry} @input=${(e: Event) => this.setEntry((e.target as HTMLInputElement).value)} @keydown=${this.onKey} @paste=${(e: ClipboardEvent) => this.onBoxPaste(e, null)} />
-            <output class="calc-live" aria-live="polite">${answer ? (graph ? t('at x = 1: {answer}', { answer }) : `= ${answer}`) : ''}</output>
+            <output class="calc-live" aria-live="polite">${answer ? (graph ? t('calc-at-x-1-answer', { answer }) : `= ${answer}`) : ''}</output>
           </div>
           ${this.keys()}
         </div>

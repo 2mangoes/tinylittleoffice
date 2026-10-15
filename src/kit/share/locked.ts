@@ -31,7 +31,7 @@ export const LOCKED_LANG = 'locked';
  * Said when a password does not open a sealed link. AES-GCM cannot tell a wrong password from a link cut short in a
  * chat, so it says both, the cut first-hand: a person sure of their password asks for the link again.
  */
-export const notOpened = () => t('That password does not open this link. If you are sure of it, the link may have been cut short when it was copied: ask for it again, or for a short link.');
+export const notOpened = () => t('locked-that-password-does-not-open');
 
 /** The fence that holds a sealed document by its link. */
 export const lockedFence = (app: string, payload: string): Block => ({ k: 'fence', lang: LOCKED_LANG, body: routeHash(app, payload) });
@@ -79,7 +79,7 @@ function sizeOf(def: AppDef): { w: number; h: number } {
 export function lockedCard(def: AppDef): Page {
   const { w, h } = sizeOf(def);
   const u = Math.max(0.5, Math.min(w, h) / 320);
-  const words = t('Locked with a password');
+  const words = t('locked-with-password');
   const cy = h / 2;
   const lock = 40 * u;
   const appSize = 18 * u;
@@ -93,14 +93,14 @@ export function lockedCard(def: AppDef): Page {
     text(w / 2, cy + 8 * u, words, { px: 18 * u, bold: true, anchor: 'middle' }) +
     iconGlyph(def.icon, w / 2 - rowW / 2, cy + 26 * u, appSize, MUTED) +
     text(w / 2 - rowW / 2 + appSize + 8 * u, cy + 26 * u + appSize * 0.75, name, { px: 14 * u, fill: MUTED });
-  return { w, h, svg, alt: t('A {app} document, locked with a password', { app: name }) };
+  return { w, h, svg, alt: t('locked-app-document-locked-with-password', { app: name }) };
 }
 
 /** A placed document that cannot be read: said so, on a card of its own. */
 function unreadableCard(): Page {
   const w = 480;
   const h = 200;
-  const words = t('This document cannot be read.');
+  const words = t('locked-this-document-cannot-be-read');
   return {
     w,
     h,
@@ -123,15 +123,15 @@ export function lockedPage(body: string, opts: ViewOpts = {}): Page {
 export const lockedDoc: AppDef = {
   id: LOCKED_LANG,
   get name() {
-    return t('Locked document');
+    return t('privacy-locked-document');
   },
   get noun() {
-    return t('locked document');
+    return t('locked-document');
   },
   group: '',
   icon: Lock,
   get blurb() {
-    return t('A document locked with a password');
+    return t('locked-document-locked-with-password');
   },
   blank: () => '',
   templates: async () => [],
@@ -140,5 +140,5 @@ export const lockedDoc: AppDef = {
   retitle: (doc) => doc,
   view: (body, opts) => [lockedPage(body, opts)],
   // Nothing of what it holds: that it is locked.
-  text: () => [{ k: 'p', runs: [{ t: t('Locked document') }] }],
+  text: () => [{ k: 'p', runs: [{ t: t('privacy-locked-document') }] }],
 };

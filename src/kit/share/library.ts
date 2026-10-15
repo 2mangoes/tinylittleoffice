@@ -164,7 +164,7 @@ export class Keeper {
 export function newName(def: AppDef): string {
   const lang = document.documentElement.lang || undefined;
   const noun = def.noun.charAt(0).toLocaleUpperCase(lang) + def.noun.slice(1);
-  const name = t('New {noun} {date} #{n}', { noun, date: localDay() });
+  const name = t('share-new-noun-date-n', { noun, date: localDay() });
   const n = firstFree(
     library()
       .filter((k) => k.app === def.id)

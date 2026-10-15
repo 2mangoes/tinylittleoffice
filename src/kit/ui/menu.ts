@@ -449,7 +449,7 @@ export class ToMenu extends LitElement {
     return html`<button type="button" class="to-btn ${this.iconOnly ? 'to-tool' : ''}" popovertarget=${this.uid} aria-haspopup="menu" aria-expanded="false" aria-keyshortcuts=${keysAria(this.keys || undefined)} aria-label=${this.iconOnly ? label : nothing} title=${this.iconOnly ? label : nothing} @mousedown=${this.hold}>
         ${this.icon ? icon(this.icon) : nothing}${this.iconOnly ? nothing : html`<span>${label}</span>`}${keysKbd(this.keys)}${this.caret ? icon(UI.down, 14, 'to-caret') : nothing}
       </button>
-      <div id=${this.uid} popover="auto" class="to-menu" role="menu" tabindex="-1" aria-label=${label} @toggle=${this.onToggle} @keydown=${this.onKey}>${this.query ? html`<div class="to-menu-filter" role="status">${parts.length ? t('Starting “{q}”', { q: this.query }) : t('Nothing starts “{q}”', { q: this.query })}</div>` : nothing}${parts}</div>`;
+      <div id=${this.uid} popover="auto" class="to-menu" role="menu" tabindex="-1" aria-label=${label} @toggle=${this.onToggle} @keydown=${this.onKey}>${this.query ? html`<div class="to-menu-filter" role="status">${parts.length ? t('menu-starting-q', { q: this.query }) : t('menu-nothing-starts-q', { q: this.query })}</div>` : nothing}${parts}</div>`;
   }
 }
 customElements.define('to-menu', ToMenu);

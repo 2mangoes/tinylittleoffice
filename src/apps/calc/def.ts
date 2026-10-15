@@ -16,17 +16,17 @@ export const retitle = (doc: Doc, title: string): Doc => write(apply(parse(doc),
 export default defineApp({
   id: 'calc',
   get name() {
-    return t('Calculator');
+    return t('outline-calculator');
   },
   get noun() {
-    return t('calculation');
+    return t('calc-calculation');
   },
   get group() {
-    return t('Numbers');
+    return t('sheet-numbers');
   },
   icon: Calculator,
   get blurb() {
-    return t('A calculator that shows its work: names, units and conversions, and graphs of y = f(x).');
+    return t('calc-calculator-that-shows-its-work');
   },
   blank: () => '',
   templates: () => import('./templates.ts').then((m) => m.templates()),
@@ -35,5 +35,5 @@ export default defineApp({
   title: titleOf,
   retitle,
   view: (doc, opts) => [calcPage(parse(doc), opts?.small)],
-  exports: [{ ext: 'txt', label: () => t('The tape (text)'), mime: 'text/plain;charset=utf-8', shows: 'text', build: (doc) => tapeText(parse(doc)) }],
+  exports: [{ ext: 'txt', label: () => t('calc-tape-text'), mime: 'text/plain;charset=utf-8', shows: 'text', build: (doc) => tapeText(parse(doc)) }],
 });

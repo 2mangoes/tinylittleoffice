@@ -7,13 +7,13 @@ import { t } from '../core/i18n.ts';
 import { toast } from '../core/say.ts';
 import { origin } from '../core/network.ts';
 
-export async function copyText(text: string, said = t('Link copied')): Promise<boolean> {
+export async function copyText(text: string, said = t('share-link-copied')): Promise<boolean> {
   try {
     await navigator.clipboard.writeText(text);
     toast(said);
     return true;
   } catch {
-    toast(t('Could not copy'));
+    toast(t('share-could-not-copy'));
     return false;
   }
 }

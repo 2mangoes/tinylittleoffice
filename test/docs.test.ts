@@ -19,7 +19,7 @@ const currentDocs = (readdirSync(join(root, 'docs'), { recursive: true }) as str
 
 /** What a reader meets: the README, the current docs, the strings, the page's head and what agents read. */
 const skillFiles = ['skill/tinyoffice/SKILL.md', ...readdirSync(join(root, 'skill/tinyoffice/references')).map((f) => `skill/tinyoffice/references/${f}`)];
-const reader = ['README.md', ...currentDocs, 'src/i18n/en.ts', 'public/llms.txt', ...skillFiles, 'index.html', 'public/manifest.webmanifest', 'package.json'];
+const reader = ['README.md', ...currentDocs, 'src/i18n/en.ftl', 'public/llms.txt', ...skillFiles, 'index.html', 'public/manifest.webmanifest', 'package.json'];
 
 /** Said as absolutes, they are false: Private is the default, Saved keeps documents on the device, a short link is on a server. */
 const STRUCK = ['no saving', 'nothing is stored anywhere', 'never see what you write', 'never saved', 'nothing stored', 'lives entirely in the url'];

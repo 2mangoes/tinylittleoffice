@@ -114,7 +114,7 @@ export function htmlOf(pages: Page[], title: string, link = '', text = ''): stri
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${xml(title)}</title>
 <meta name="generator" content="TinyLittleOffice">
-<meta property="og:title" content="${xml(title)}">${link ? `\n<link rel="alternate" href="${xml(link)}" title="${xml(t('Open in Tiny Little Office'))}">` : ''}
+<meta property="og:title" content="${xml(title)}">${link ? `\n<link rel="alternate" href="${xml(link)}" title="${xml(t('download-open-in-tiny-little-office'))}">` : ''}
 <style>body{font:17px/1.6 ${FONT};color:${INK};max-width:46em;margin:2em auto;padding:0 1em}figure{margin:1em 0}figure svg{display:block;max-width:100%;height:auto;border:1px solid #d4d4d8;border-radius:8px}footer{color:${MUTED};font-size:.85em}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}</style>
 </head>
 <body>
@@ -124,7 +124,7 @@ export function htmlOf(pages: Page[], title: string, link = '', text = ''): stri
 <div class="pages" aria-hidden="true">
 ${pages.map((p) => `<figure>${pageSvg(p.alt ? p : { ...p, alt: title })}</figure>`).join('\n')}
 </div>
-</main>${link ? `\n<footer><p><a href="${xml(link)}">${xml(t('Open in Tiny Little Office'))}</a></p></footer>` : ''}
+</main>${link ? `\n<footer><p><a href="${xml(link)}">${xml(t('download-open-in-tiny-little-office'))}</a></p></footer>` : ''}
 </body>
 </html>
 `;
@@ -155,7 +155,7 @@ export async function printPages(pages: Page[], title: string): Promise<void> {
   document.querySelector('.to-print')?.remove();
   const frame = document.createElement('iframe');
   frame.className = 'to-print';
-  frame.title = t('Print');
+  frame.title = t('download-print');
   frame.setAttribute('aria-hidden', 'true');
   frame.style.cssText = 'position:fixed;right:0;bottom:0;width:0;height:0;border:0;visibility:hidden';
   frame.srcdoc = printHtml(pages, title);
@@ -189,7 +189,7 @@ export interface Current {
 const STILL = { still: true } as const;
 
 /** The document's name, or what one of the app's documents is called when untitled: a file's title. */
-const titleOf = (doc: Doc, { def, title }: ExportContext) => title || def.title(doc) || t('Untitled {noun}', { noun: def.noun });
+const titleOf = (doc: Doc, { def, title }: ExportContext) => title || def.title(doc) || t('shell-untitled-noun', { noun: def.noun });
 
 /** The pages, drawn still where the format says so. */
 const pagesOf = (doc: Doc, ctx: ExportContext, still?: boolean) => ctx.def.view(doc, still ? STILL : undefined);
@@ -201,20 +201,20 @@ const pagesOf = (doc: Doc, ctx: ExportContext, still?: boolean) => ctx.def.view(
  * document as JSON (src/doc/json.ts; its schema is packages/doc/schema/tlo.schema.json).
  */
 export const KIT_FORMATS: readonly Export[] = [
-  { ext: 'pdf', label: () => t('PDF file'), mime: 'application/pdf', shows: 'own', still: true, build: async (doc, ctx) => drawn(await pdfOf(pagesOf(doc, ctx, true), titleOf(doc, ctx))) },
-  { ext: 'png', label: () => t('Picture (PNG)'), mime: 'image/png', shows: 'own', still: true, build: async (doc, ctx) => drawn(await picture(pagesOf(doc, ctx, true))) },
+  { ext: 'pdf', label: () => t('export-pdf-file'), mime: 'application/pdf', shows: 'own', still: true, build: async (doc, ctx) => drawn(await pdfOf(pagesOf(doc, ctx, true), titleOf(doc, ctx))) },
+  { ext: 'png', label: () => t('download-picture-png'), mime: 'image/png', shows: 'own', still: true, build: async (doc, ctx) => drawn(await picture(pagesOf(doc, ctx, true))) },
   {
     ext: 'html',
-    label: () => t('Web page (HTML)'),
+    label: () => t('download-web-page-html'),
     mime: 'text/html',
     shows: 'own',
     build: async (doc, ctx) => htmlOf(pagesOf(doc, ctx), titleOf(doc, ctx), ctx.link, textHtml(textLayer(ctx.def, doc))),
   },
-  { ext: 'md', label: () => t('Markdown'), mime: 'text/markdown;charset=utf-8', shows: 'text', build: (doc) => write(referenceNotes(parse(doc))) },
-  { ext: 'tlo', label: () => t('Text (TLO)'), mime: 'text/plain;charset=utf-8', shows: 'text', build: (doc, { def }) => tloText(def.id, doc) },
+  { ext: 'md', label: () => t('write-markdown'), mime: 'text/markdown;charset=utf-8', shows: 'text', build: (doc) => write(referenceNotes(parse(doc))) },
+  { ext: 'tlo', label: () => t('download-text-tlo'), mime: 'text/plain;charset=utf-8', shows: 'text', build: (doc, { def }) => tloText(def.id, doc) },
   {
     ext: 'json',
-    label: () => t('Data (JSON)'),
+    label: () => t('download-data-json'),
     mime: 'application/json',
     shows: 'text',
     build: async (doc, { def }) => (await import('../../doc/json.ts')).docJson(parse(tloText(def.id, doc))),
@@ -294,9 +294,9 @@ export async function viewAs(view: string, current: () => Current): Promise<void
   try {
     if (!format) return void (await printDoc(current()));
     const name = await exportAs(format.ext, current());
-    if (name) toast(t('Downloaded {name}', { name }));
+    if (name) toast(t('download-downloaded-name', { name }));
   } catch {
-    toast(t('Download failed'));
+    toast(t('download-failed'));
   }
 }
 
@@ -335,10 +335,10 @@ async function viewFile(format: Export, current: Current) {
     const url = URL.createObjectURL(new Blob([typeof made.data === 'string' ? made.data : (made.data as BlobPart)], { type: shown }));
     setTimeout(() => URL.revokeObjectURL(url), 300_000);
     if (tab) tab.location.href = url;
-    else if (!window.open(url, '_blank', 'noopener')) toast(t('Could not show the .{ext}', { ext: format.ext }));
+    else if (!window.open(url, '_blank', 'noopener')) toast(t('export-could-not-show-ext', { ext: format.ext }));
   } catch {
     tab?.close();
-    toast(t('Could not show the .{ext}', { ext: format.ext }));
+    toast(t('export-could-not-show-ext', { ext: format.ext }));
   }
 }
 
@@ -349,7 +349,7 @@ async function shareFile(format: Export, current: Current) {
     const file = new File([typeof made.data === 'string' ? made.data : (made.data as BlobPart)], made.name, { type: made.mime.split(';')[0] });
     await navigator.share({ files: [file], title: made.name });
   } catch (err) {
-    if (!(err instanceof DOMException && err.name === 'AbortError')) toast(t('Could not share the .{ext}', { ext: format.ext }));
+    if (!(err instanceof DOMException && err.name === 'AbortError')) toast(t('export-could-not-share-ext', { ext: format.ext }));
   }
 }
 
@@ -366,9 +366,9 @@ export function exportItems(def: AppDef, current: () => Current): MenuItem[] {
   const run = async (does: () => Promise<string | null | void>) => {
     try {
       const name = await does();
-      if (name) toast(t('Downloaded {name}', { name }));
+      if (name) toast(t('download-downloaded-name', { name }));
     } catch {
-      toast(t('Download failed'));
+      toast(t('download-failed'));
     }
   };
   const linkTo = (ext: string) => {
@@ -379,18 +379,18 @@ export function exportItems(def: AppDef, current: () => Current): MenuItem[] {
   const row = (f: Export): MenuItem => ({
     label: f.label(),
     actions: [
-      ...(f.shows ? [{ icon: UI.view, label: t('View the .{ext}', { ext: f.ext }), does: () => void viewFile(f, current()) }] : []),
-      ...(sharesFile(f) ? [{ icon: UI.share, label: t('Share the .{ext}…', { ext: f.ext }), does: () => void shareFile(f, current()) }] : []),
-      { icon: UI.download, label: t('Download the .{ext}', { ext: f.ext }), does: () => void run(() => exportAs(f.ext, current(), false)) },
-      { icon: UI.link, label: t('Copy a link that downloads the .{ext}', { ext: f.ext }), does: () => void copyText(linkTo(f.ext)) },
+      ...(f.shows ? [{ icon: UI.view, label: t('export-view-ext', { ext: f.ext }), does: () => void viewFile(f, current()) }] : []),
+      ...(sharesFile(f) ? [{ icon: UI.share, label: t('export-share-ext', { ext: f.ext }), does: () => void shareFile(f, current()) }] : []),
+      { icon: UI.download, label: t('export-download-ext', { ext: f.ext }), does: () => void run(() => exportAs(f.ext, current(), false)) },
+      { icon: UI.link, label: t('export-copy-link-that-downloads-ext', { ext: f.ext }), does: () => void copyText(linkTo(f.ext)) },
     ],
     does: () => {},
   });
   return [
-    { label: t('Print, or save as PDF'), icon: UI.print, keys: 'Mod+P', does: () => void run(() => printDoc(current())) },
+    { label: t('download-print-or-save-as-pdf'), icon: UI.print, keys: 'Mod+P', does: () => void run(() => printDoc(current())) },
     ...formatsOf(def).map(row),
     ...(def.handoffs ?? [])
       .filter((h) => appOf(h.to))
-      .map((h) => ({ label: h.label(), icon: appOf(h.to)!.icon, group: t('Open in'), does: () => go(routeHash(h.to, encodeDoc(h.convert(current().doc)))) })),
+      .map((h) => ({ label: h.label(), icon: appOf(h.to)!.icon, group: t('export-open-in'), does: () => go(routeHash(h.to, encodeDoc(h.convert(current().doc)))) })),
   ];
 }

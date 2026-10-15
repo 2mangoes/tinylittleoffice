@@ -1,27 +1,30 @@
 // Each language, chosen from the drawer at 390px: <html lang> and dir follow it (ar runs right to left), the home
 // page, the drawer, the Word Processor's bar and the Share dialog draw with no English showing through, the bar
-// stays one row and nothing in the drawer is wider than its place. A string that does not fit is named by its key,
-// so the translator can shorten it. Until the translations land, two pseudo-languages from en.ts (test/pseudo.ts,
-// every string a third longer) stand in; a language file in src/i18n/ is tested as it arrives, through its own file, fetched when asked for.
+// stays one row and nothing in the drawer is wider than its place. A string that does not fit is named by its id,
+// so the translator can shorten it. Two pseudo-languages from en.ftl (test/pseudo.ts, every string a third longer)
+// stand in for a language to come; a language's file in src/i18n/ is tested through its own file, fetched when asked for.
 import { test, expect, afterEach } from 'vitest';
 import { page } from 'vitest/browser';
 import { mount, tick, until, openShare, settled } from './helpers.ts';
 import { parseHash } from '../../src/kit/core/route.ts';
 import { encodeDoc } from '../../src/kit/core/codec.ts';
-import { chosenLanguage, directionOf, language, languagePending, languages, missed, register, setLanguage, type Strings } from '../../src/kit/core/i18n.ts';
+import { chosenLanguage, directionOf, language, languagePending, languages, missed, register, setLanguage } from '../../src/kit/core/i18n.ts';
 import { takeHomeLink } from '../../src/apps/deck/view.ts';
 import { parse } from '../../src/doc/index.ts';
-import { pseudo } from '../pseudo.ts';
-import en from '../../src/i18n/en.ts';
+import { pseudo, pseudoFtl } from '../pseudo.ts';
+import { flatMessages } from '../../scripts/ftl.ts';
+import enSource from '../../src/i18n/en.ftl?raw';
 import type { ToShell } from '../../src/kit/core/shell.ts';
 import type { ToShare } from '../../src/kit/ui/share-dialog.ts';
 import type { ToDialog } from '../../src/kit/ui/dialog.ts';
 import { keepSize, SIZE_MAX } from '../../src/kit/ui/zoom.ts';
 
-const files = import.meta.glob<{ default: Strings }>(['../../src/i18n/*.ts', '!../../src/i18n/en.ts']);
-const fileCode = (path: string) => path.replace(/^.*\/([^/]+)\.ts$/, '$1');
+type Strings = Record<string, string>;
+const en = flatMessages(enSource, 'en');
+const files = import.meta.glob<string>(['../../src/i18n/*.ftl', '!../../src/i18n/en.ftl'], { query: '?raw', import: 'default' });
+const fileCode = (path: string) => path.replace(/^.*\/([^/]+)\.ftl$/, '$1');
 const PSEUDO = ['en-xa', 'ar-xb'];
-for (const code of PSEUDO) register(code, pseudo(code, en));
+for (const code of PSEUDO) register(code, pseudoFtl(code, en));
 
 afterEach(async () => {
   keepSize(1);
@@ -30,14 +33,14 @@ afterEach(async () => {
   history.replaceState(null, '', location.pathname);
 });
 
-/** The key a drawn string came from, in this language: its words, back to en.ts. */
+/** The id a drawn string came from, in this language: its words, back to its message. */
 function keyOf(strings: Strings, text: string): string {
   const words = text.replace(/\s+/g, ' ').trim();
   const hit = Object.entries(strings).find(([, v]) => v.trim() === words);
   return hit ? hit[0] : words;
 }
 
-/** The translated words in the row an element sits in, by key: what to shorten when the row does not fit. */
+/** The translated words in the row an element sits in, by id: what to shorten when the row does not fit. */
 function named(strings: Strings, el: HTMLElement): string[] {
   const row = el.closest<HTMLElement>('.to-field, .to-switch, .to-app-head, .to-btn, a') ?? el;
   const words = new Set(Object.values(strings).map((v) => v.trim()));
@@ -60,7 +63,7 @@ async function choose(shell: ToShell, code: string) {
   await until(() => document.documentElement.lang === code, 10_000);
 }
 
-/** Where a language falls short at 390px, each problem naming the key. */
+/** Where a language falls short at 390px, each problem naming the id. */
 async function check(strings: Strings): Promise<string[]> {
   const problems: string[] = [];
   const english = () => {
@@ -125,7 +128,7 @@ for (const path of Object.keys(files)) {
     expect(languages()).toContain(code);
     await choose(await mount(''), code);
     expect(document.documentElement.dir).toBe(['ar', 'he', 'ur', 'yi'].includes(code.split('-')[0]) ? 'rtl' : 'ltr');
-    const problems = await check((await files[path]()).default);
+    const problems = await check(flatMessages(await files[path](), code));
     expect(problems, `${code}: shorten or translate these`).toEqual([]);
   });
 }
@@ -230,8 +233,8 @@ test('the embed code, the deck’s show link and its take-home QR carry the lang
   expect(parseHash(new URL(takeHomeLink(parse(deck))).hash)).toMatchObject({ app: 'deck', display: true, lang: 'ht' });
 });
 
-test('a link in a language whose dictionary is on its way draws nothing until it is here, so no English flashes; a slower dictionary arriving after a newer choice is dropped', async () => {
-  let arrive!: (m: { default: Strings }) => void;
+test('a link in a language whose file is on its way draws nothing until it is here, so no English flashes; a slower file arriving after a newer choice is dropped', async () => {
+  let arrive!: (m: string) => void;
   register('xx', () => new Promise((r) => (arrive = r)));
   const shell = await mount('#/?lang=xx');
   expect(languagePending()).not.toBeNull();
@@ -239,18 +242,18 @@ test('a link in a language whose dictionary is on its way draws nothing until it
   expect(shell.textContent!.trim()).toBe('');
   expect(shell.querySelector('.to-burger')).toBeNull();
   expect(language()).toBe('en');
-  arrive({ default: pseudo('xx', en) });
+  arrive(pseudoFtl('xx', en));
   await until(() => document.documentElement.lang === 'xx' && !!shell.querySelector('.to-burger'));
   expect(shell.querySelector('.to-burger')!.getAttribute('aria-label')).not.toBe('Menu');
   expect(location.hash).toBe('#/?lang=xx');
-  // A slow choice overtaken by a quick one: the slow dictionary, when it comes, is not put in force.
-  let late!: (m: { default: Strings }) => void;
+  // A slow choice overtaken by a quick one: the slow file, when it comes, is not put in force.
+  let late!: (m: string) => void;
   register('xy', () => new Promise((r) => (late = r)));
-  register('xz', pseudo('xz', en));
+  register('xz', pseudoFtl('xz', en));
   const slow = setLanguage('xy');
   await setLanguage('xz');
   expect(language()).toBe('xz');
-  late({ default: pseudo('xy', en) });
+  late(pseudoFtl('xy', en));
   await slow;
   await tick(50);
   expect(language()).toBe('xz');

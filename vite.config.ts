@@ -56,8 +56,8 @@ function afterBuild(site: string): Plugin {
 
 /**
  * Which file a module goes in: an app's templates are `templates-<app>` and a language other than English
- * `lang-<code>`, each fetched when asked for; every other module (the kit, every app's editor, commands and view, the
- * English strings, the icon library, the emoji and the math) is `app`, the one file the pages name. A dynamic import
+ * `lang-<code>` (its .ftl file, as text), each fetched when asked for; every other module (the kit, every app's editor,
+ * commands and view, English's en.ftl, the icon library, the emoji and the math) is `app`, the one file the pages name. A dynamic import
  * of a module in `app` is a static one in the build: the module is already there. The service worker (src/sw.ts) is
  * an entry of its own, dist/sw.js.
  */
@@ -65,7 +65,7 @@ export function fileOf(id: string): string {
   const path = id.replaceAll('\\', '/');
   const tpl = /\/src\/apps\/([^/]+)\/templates\.ts$/.exec(path);
   if (tpl) return `templates-${tpl[1]}`;
-  const lang = /\/src\/i18n\/([^/]+)\.ts$/.exec(path);
+  const lang = /\/src\/i18n\/([^/]+)\.ftl(\?raw)?$/.exec(path);
   if (lang && lang[1] !== 'en') return `lang-${lang[1]}`;
   return /\/src\/sw\.ts$/.test(path) ? 'sw' : 'app';
 }

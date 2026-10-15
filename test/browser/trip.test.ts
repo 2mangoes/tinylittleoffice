@@ -60,7 +60,7 @@ const near = (el: ToTripEditor, code: string) => {
   const c = mapOf(el).getCenter();
   return Math.abs(c.lat - COUNTRIES[code][0]) < 1 && Math.abs(c.lng - COUNTRIES[code][1]) < 1 && mapOf(el).getZoom() === COUNTRIES[code][2];
 };
-const locate = (el: ToTripEditor) => el.querySelector<HTMLButtonElement>(`to-bar button[aria-label="${t('Where I am')}"]`)!;
+const locate = (el: ToTripEditor) => el.querySelector<HTMLButtonElement>(`to-bar button[aria-label="${t('trip-where-i-am')}"]`)!;
 
 afterEach(async () => {
   delete (navigator as { languages?: unknown }).languages;

@@ -24,17 +24,17 @@ export const retitle = (doc: Doc, title: string): Doc => write(apply(headOf(doc)
 export default defineApp({
   id: 'sheet',
   get name() {
-    return t('Spreadsheet');
+    return t('sheet-spreadsheet');
   },
   get noun() {
-    return t('spreadsheet');
+    return t('sheet-spreadsheet-lowercase');
   },
   get group() {
-    return t('Numbers');
+    return t('sheet-numbers');
   },
   icon: Table2,
   get blurb() {
-    return t('A spreadsheet with formulas, named cells and charts; three columns to start, more as you need them.');
+    return t('sheet-spreadsheet-with-formulas-named-cells');
   },
   blank: () => '',
   templates: () => import('./templates.ts').then((m) => m.templates()),
@@ -43,13 +43,13 @@ export default defineApp({
   retitle,
   view: (doc, opts) => sheetPages(doc, opts?.small, opts?.thumb, opts?.card),
   exports: [
-    { ext: 'xlsx', label: () => t('Excel (XLSX)'), mime: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', shows: null, build: (doc) => xlsx(doc) },
+    { ext: 'xlsx', label: () => t('sheet-excel-xlsx'), mime: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', shows: null, build: (doc) => xlsx(doc) },
     // The byte order mark is how Excel knows a CSV is UTF-8.
-    { ext: 'csv', label: () => t('CSV'), mime: 'text/csv;charset=utf-8', shows: 'text', build: (doc) => utf8('\ufeff' + sheetToCsv(parse(doc))) },
-    { ext: 'chart.svg', label: () => t('Chart (SVG)'), mime: 'image/svg+xml', shows: 'own', build: (doc) => chartSvg(doc) },
+    { ext: 'csv', label: () => t('sheet-csv'), mime: 'text/csv;charset=utf-8', shows: 'text', build: (doc) => utf8('\ufeff' + sheetToCsv(parse(doc))) },
+    { ext: 'chart.svg', label: () => t('sheet-chart-svg'), mime: 'image/svg+xml', shows: 'own', build: (doc) => chartSvg(doc) },
     {
       ext: 'chart.png',
-      label: () => t('Chart (PNG)'),
+      label: () => t('sheet-chart-png'),
       mime: 'image/png',
       shows: 'own',
       build: async (doc) => {
@@ -59,7 +59,7 @@ export default defineApp({
     },
   ],
   commands: () => import('./commands.ts'),
-  handoffs: [{ to: 'cal', label: () => t('Put the dated rows on a calendar'), convert: sheetToCal }],
+  handoffs: [{ to: 'cal', label: () => t('sheet-put-dated-rows-on-calendar'), convert: sheetToCal }],
 });
 
 /** The sheet as a workbook: the table and its values (a rich cell's words, without their marks). */

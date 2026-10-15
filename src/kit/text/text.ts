@@ -817,7 +817,7 @@ export class ToText extends LitElement {
     const got = await readClip();
     if (!got) {
       const bub = this.bubble;
-      if (bub) bub.hint = t('This browser lets a page paste only from the keyboard: use its Paste.');
+      if (bub) bub.hint = t('editor-this-browser-lets-page-paste');
       return;
     }
     this.paste(got, sel);
@@ -1241,7 +1241,7 @@ export class ToText extends LitElement {
       }
       if (r.fn !== undefined) {
         const n = notes();
-        return html`<sup class="fn" data-fn=${r.fn} data-atomic contenteditable="false" tabindex="0" role="button" aria-label=${t('Footnote {n}', { n })}>${n}</sup>`;
+        return html`<sup class="fn" data-fn=${r.fn} data-atomic contenteditable="false" tabindex="0" role="button" aria-label=${t('editor-footnote-n', { n })}>${n}</sup>`;
       }
       let node: unknown = this.words(r.t);
       if (r.c) node = html`<code>${node}</code>`;
@@ -1264,16 +1264,16 @@ export class ToText extends LitElement {
       case 'hr':
         return html`<div class="tx-card" data-k="hr" contenteditable="false" tabindex="0" role="separator"><hr /></div>`;
       case 'table':
-        return html`<div class="tx-card" data-k="table" contenteditable="false" tabindex="0" role="group" aria-label=${t('Table')}><span class="tx-card-kind">${t('Table')}</span><span class="tx-card-gist">${b.cols.map((c) => c.name).join(' · ')} — ${t('{n|one row|# rows}', { n: b.rows.length })}</span></div>`;
+        return html`<div class="tx-card" data-k="table" contenteditable="false" tabindex="0" role="group" aria-label=${t('bar-table')}><span class="tx-card-kind">${t('bar-table')}</span><span class="tx-card-gist">${b.cols.map((c) => c.name).join(' · ')} — ${t('editor-n-rows', { n: b.rows.length })}</span></div>`;
       case 'fence': {
         const def = b.lang ? lookup.appOf(b.lang) : undefined;
-        const kind = def ? t('A {noun}', { noun: def.noun }) : b.lang ? t('{app} document', { app: b.lang }) : t('Code');
+        const kind = def ? t('editor-noun', { noun: def.noun }) : b.lang ? t('editor-app-document', { app: b.lang }) : t('editor-code');
         // A locked document's body is its sealed link: nothing to read (kit/share/locked.ts).
         const gist = b.lang === 'locked' ? '' : (b.body.split('\n').find((l) => l.trim() && !/^---/.test(l)) ?? '');
         return html`<div class="tx-card" data-k="fence" contenteditable="false" tabindex="0" role="group" aria-label=${kind}><span class="tx-card-kind">${kind}</span><span class="tx-card-gist">${gist.slice(0, 80)}</span></div>`;
       }
       case 'edge':
-        return html`<div class="tx-card" data-k="edge" contenteditable="false" tabindex="0" role="group" aria-label=${t('Connection')}><span class="tx-card-gist">${b.from} ${b.dir} ${b.to}${b.label ? `: ${b.label}` : ''}</span></div>`;
+        return html`<div class="tx-card" data-k="edge" contenteditable="false" tabindex="0" role="group" aria-label=${t('editor-connection')}><span class="tx-card-gist">${b.from} ${b.dir} ${b.to}${b.label ? `: ${b.label}` : ''}</span></div>`;
       default:
         return html`<div class="tx-card" contenteditable="false"></div>`;
     }
@@ -1298,7 +1298,7 @@ export class ToText extends LitElement {
           style=${`--d:${b.depth}`}
           data-n=${n ?? nothing}
           data-done=${b.done === undefined ? nothing : String(b.done)}
-        >${b.done === undefined || !place ? nothing : html`<span class="sr-only" data-said contenteditable="false">${b.done ? t('done') : t('not done')} </span>`}${inner}</li>`;
+        >${b.done === undefined || !place ? nothing : html`<span class="sr-only" data-said contenteditable="false">${b.done ? t('editor-done-lowercase') : t('editor-not-done')} </span>`}${inner}</li>`;
       case 'quote':
         return html`<blockquote class=${cls}>${inner}</blockquote>`;
       default:
@@ -1349,7 +1349,7 @@ export class ToText extends LitElement {
       >${repeat(parts, (p) => (places[p[0]] ? `list${keyAt(model[p[0]], p[0])}` : keyAt(model[p[0]], p[0])), part)}</div>
       <to-link-pop @link-set=${this.onLinkSet} @link-remove=${this.onLinkRemove} @link-cancel=${this.onLinkCancel}></to-link-pop>
       <to-complete @complete-pick=${this.onCompletePick} @complete-cancel=${this.onCompleteCancel}></to-complete>
-      <to-context class="tx-bubble" .label=${t('Format')}></to-context>`;
+      <to-context class="tx-bubble" .label=${t('editor-format')}></to-context>`;
   }
 }
 if (!customElements.get('to-text')) customElements.define('to-text', ToText);

@@ -44,17 +44,17 @@ export async function animWebm(doc: Doc): Promise<Uint8Array | null> {
 export default defineApp({
   id: 'anim',
   get name() {
-    return t('Animator');
+    return t('outline-animator');
   },
   get noun() {
-    return t('animation');
+    return t('anim-animation');
   },
   get group() {
-    return t('Design');
+    return t('draw-design');
   },
   icon: Clapperboard,
   get blurb() {
-    return t('Anything from the Drawing Tool, moving: position, depth, size, spin and turn over time, with effects for memes.');
+    return t('anim-anything-from-drawing-tool-moving');
   },
   blank: () => '',
   templates: () => import('./templates.ts').then((m) => m.templates()),
@@ -79,9 +79,9 @@ export default defineApp({
     return { frames: frameOrder(anim.frames, anim.loop), delayMs: Math.round(1000 / anim.fps) };
   },
   exports: [
-    { ext: 'gif', label: () => t('Animated GIF'), mime: 'image/gif', shows: 'own', build: (doc) => animGif(doc) },
-    { ext: 'webm', label: () => t('Video (WebM)'), mime: 'video/webm', shows: 'own', available: () => webmReady(W, H), build: async (doc) => drawn(await animWebm(doc)) },
-    { ext: 'svg', label: () => t('Animated SVG'), mime: 'image/svg+xml', shows: 'own', build: (doc) => utf8(animToSvg(parse(doc))) },
+    { ext: 'gif', label: () => t('anim-animated-gif'), mime: 'image/gif', shows: 'own', build: (doc) => animGif(doc) },
+    { ext: 'webm', label: () => t('anim-video-webm'), mime: 'video/webm', shows: 'own', available: () => webmReady(W, H), build: async (doc) => drawn(await animWebm(doc)) },
+    { ext: 'svg', label: () => t('anim-animated-svg'), mime: 'image/svg+xml', shows: 'own', build: (doc) => utf8(animToSvg(parse(doc))) },
   ],
   commands: () => import('./commands.ts'),
 });

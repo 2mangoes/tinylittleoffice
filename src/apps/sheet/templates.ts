@@ -58,8 +58,8 @@ function household(): string {
 export const templates = (): Template[] => [
   {
     id: 'budget',
-    name: t('Budget'),
-    blurb: t('Planned against actual, a line each, with the difference and totals.'),
+    name: t('sheet-budget'),
+    blurb: t('sheet-planned-against-actual-line-each'),
     doc: sheet(
       { title: 'Budget, October 2026' },
       ['Item', 'Planned:money', 'Actual:money', 'Difference:money'],
@@ -76,14 +76,14 @@ export const templates = (): Template[] => [
   },
   {
     id: 'household',
-    name: t('Household budget by month'),
-    blurb: t('Six months of a home’s bills and spending, a column a month, totalled both ways against the pay.'),
+    name: t('sheet-household-budget-by-month'),
+    blurb: t('sheet-six-months-of-homes-bills'),
     doc: household(),
   },
   {
     id: 'expenses',
-    name: t('Expense log'),
-    blurb: t('Date, what, how much, which kind; a running total at the foot.'),
+    name: t('sheet-expense-log'),
+    blurb: t('sheet-date-what-how-much-which'),
     doc: sheet(
       { title: 'Expenses, October 2026' },
       ['Date:date', 'What', 'Amount:money', 'Category:option'],
@@ -101,8 +101,8 @@ export const templates = (): Template[] => [
   },
   {
     id: 'savings',
-    name: t('Savings goal'),
-    blurb: t('What went in each month, what is saved so far and what is still to go, the goal beside it to change.'),
+    name: t('sheet-savings-goal'),
+    blurb: t('sheet-what-went-in-each-month'),
     doc: sheet(
       { title: 'Saving for Lisbon, May 2027', lock: 'C1:D9, F2:F3' },
       ['Month:date', 'Put in:money', 'Saved:money', 'Still to go:money', 'Plan:name', 'Value:money'],
@@ -122,8 +122,8 @@ export const templates = (): Template[] => [
   },
   {
     id: 'habits',
-    name: t('Habit tracker'),
-    blurb: t('Four habits checked off day by day for two weeks; how much of each day was kept, and how many days each.'),
+    name: t('sheet-habit-tracker'),
+    blurb: t('sheet-four-habits-checked-off-day'),
     doc: sheet(
       { title: 'Habits, September 21 to October 4', lock: 'F1:F14, H1:H4' },
       ['Day:date', 'Walk 30 minutes:check', 'Read 20 pages:check', 'Stretch:check', 'In bed by 11:check', 'Kept:percent', 'Habit:name', 'Days kept:number'],
@@ -157,8 +157,8 @@ export const templates = (): Template[] => [
   },
   {
     id: 'reading',
-    name: t('Reading list'),
-    blurb: t('Books read, being read and next, with the days each took and the pages read this year.'),
+    name: t('sheet-reading-list'),
+    blurb: t('sheet-books-read-being-read-and'),
     doc: sheet(
       { title: 'Reading, 2026' },
       ['Title:rich', 'Author', 'Pages:number', 'Status:option', 'Started:date', 'Finished:date', 'Days:number', 'Notes'],
@@ -177,8 +177,8 @@ export const templates = (): Template[] => [
   },
   {
     id: 'workout',
-    name: t('Workout log'),
-    blurb: t('Sets, reps and weight for each lift, the volume worked out, and how each felt.'),
+    name: t('sheet-workout-log'),
+    blurb: t('sheet-sets-reps-and-weight-for'),
     doc: sheet(
       { title: 'Lifting, three days a week' },
       ['Date:date', 'Exercise', 'Sets:number', 'Reps:number', 'Pounds:number', 'Volume:number', 'Felt:option'],
@@ -202,8 +202,8 @@ export const templates = (): Template[] => [
   },
   {
     id: 'training',
-    name: t('Training log'),
-    blurb: t('What you did and how much, a line a time; a total for each kind of thing.'),
+    name: t('sheet-training-log'),
+    blurb: t('sheet-what-you-did-and-how'),
     doc: sheet(
       { title: 'Training, the first week of October', lock: 'F1:F3' },
       ['Date:date', 'What', 'How much:number', 'Unit', 'Kind', 'Total:number'],
@@ -219,8 +219,8 @@ export const templates = (): Template[] => [
   },
   {
     id: 'timesheet',
-    name: t('Time sheet'),
-    blurb: t('A week’s hours by client and task; the billable ones priced at their rate, and the totals.'),
+    name: t('sheet-time-sheet'),
+    blurb: t('sheet-weeks-hours-by-client-and'),
     doc: sheet(
       { title: 'Time sheet, week of October 5, 2026', lock: 'G1:G8' },
       ['Date:date', 'Client', 'Task', 'Hours:number', 'Billable:check', 'Rate:money', 'Amount:money'],
@@ -240,8 +240,8 @@ export const templates = (): Template[] => [
   },
   {
     id: 'split',
-    name: t('Trip costs split'),
-    blurb: t('Who paid for what on a trip for four; each one’s fair share, and what each owes (a minus is money back).'),
+    name: t('sheet-trip-costs-split'),
+    blurb: t('sheet-who-paid-for-what-on'),
     doc: sheet(
       { title: 'Outer Banks weekend, split four ways', lock: 'F1:G5' },
       ['Date:date', 'What', 'Paid by:option', 'Amount:money', 'Who:name', 'Paid:money', 'Owes:money'],
@@ -260,8 +260,8 @@ export const templates = (): Template[] => [
   },
   {
     id: 'tracker',
-    name: t('Project tracker'),
-    blurb: t('Tasks with owners, start and due dates counted from today, days each, how each is going, and a check when done.'),
+    name: t('sheet-project-tracker'),
+    blurb: t('sheet-tasks-with-owners-start-and'),
     doc: sheet(
       { title: 'Website relaunch' },
       ['Task', 'Owner', 'Start:date', 'Due:date', 'Days:number', 'Status:option', 'Done:check'],
@@ -275,8 +275,8 @@ export const templates = (): Template[] => [
   },
   {
     id: 'schedule',
-    name: t('Schedule with dates'),
-    blurb: t('A job in steps, each starting when the last one ends: who, how many days, the end date and the working days.'),
+    name: t('sheet-schedule-with-dates'),
+    blurb: t('sheet-job-in-steps-each-starting'),
     doc: sheet(
       { title: 'Kitchen redo, fall 2026', lock: 'C2:C9, E1:F9' },
       ['Step', 'Who', 'Starts:date', 'Days:number', 'Ends:date', 'Workdays:number', 'Done:check'],
@@ -297,8 +297,8 @@ export const templates = (): Template[] => [
   },
   {
     id: 'grades',
-    name: t('Grade book'),
-    blurb: t('A class’s grades for essays, quizzes and a project; each student’s average and letter, and the class average.'),
+    name: t('sheet-grade-book'),
+    blurb: t('sheet-classs-grades-for-essays-quizzes'),
     doc: sheet(
       { title: 'English 9, fall 2026', lock: 'G1:H10, B11:G11' },
       ['Student', 'Essay 1:number', 'Quiz 1:number', 'Quiz 2:number', 'Essay 2:number', 'Project:number', 'Average:number', 'Grade'],
@@ -320,8 +320,8 @@ export const templates = (): Template[] => [
   },
   {
     id: 'members',
-    name: t('Membership roll'),
-    blurb: t('Who belongs, their plot and job, when they paid and when they renew, who holds a key, and the dues in.'),
+    name: t('sheet-membership-roll'),
+    blurb: t('sheet-who-belongs-their-plot-and'),
     doc: sheet(
       { title: 'Linden Street Community Garden' },
       ['Name', 'Plot', 'Email', 'Paid on:date', 'Renews:date', 'Dues:money', 'Gate key:check', 'Role:option'],
@@ -343,8 +343,8 @@ export const templates = (): Template[] => [
   },
   {
     id: 'seating',
-    name: t('Seating count'),
-    blurb: t('Tables for a wedding: seats, guests, places free and the meals chosen, with a check that the meals add up.'),
+    name: t('sheet-seating-count'),
+    blurb: t('sheet-tables-for-wedding-seats-guests'),
     doc: sheet(
       { title: 'Ada and Sam’s wedding, December 19, 2026', lock: 'E1:E9, I1:I9, C9:H9' },
       ['Table', 'Who sits there', 'Seats:number', 'Guests:number', 'Free:number', 'Chicken:number', 'Fish:number', 'Vegetarian:number', 'Meals add up'],
@@ -365,8 +365,8 @@ export const templates = (): Template[] => [
   },
   {
     id: 'poll',
-    name: t('Poll results'),
-    blurb: t('The answers and the votes for each, drawn as a pie above them.'),
+    name: t('sheet-poll-results'),
+    blurb: t('sheet-answers-and-votes-for-each'),
     doc: sheet(
       { title: 'Holiday party: which evening?', chart: 'pie', 'chart-at': 'top' },
       ['Evening', 'Votes:number'],
@@ -380,8 +380,8 @@ export const templates = (): Template[] => [
   },
   {
     id: 'fundraising',
-    name: t('Fundraising thermometer'),
-    blurb: t('What has come in, week by week, against the goal: a chart above, the total so far drawn large.'),
+    name: t('sheet-fundraising-thermometer'),
+    blurb: t('sheet-what-has-come-in-week'),
     doc: sheet(
       { title: 'A new roof for the Eastside Youth Center', chart: 'bar', 'chart-at': 'top' },
       ['Week', 'Raised so far:money', 'Goal:money'],
@@ -400,8 +400,8 @@ export const templates = (): Template[] => [
   },
   {
     id: 'invoices',
-    name: t('Invoice ledger'),
-    blurb: t('Every invoice sent: when, to whom, for how much, when it was paid, what is still owed and how late.'),
+    name: t('sheet-invoice-ledger'),
+    blurb: t('sheet-every-invoice-sent-when-to'),
     doc: sheet(
       { title: 'Invoices, 2026', lock: 'D1:D7, G1:H7' },
       ['Invoice', 'Client', 'Sent:date', 'Due:date', 'Amount:money', 'Paid on:date', 'Owed:money', 'Days late:number'],
@@ -420,8 +420,8 @@ export const templates = (): Template[] => [
   },
   {
     id: 'inventory',
-    name: t('Inventory'),
-    blurb: t('Stock on hand against the point to reorder at; what to order, what it is worth, and a flag when it is low.'),
+    name: t('sheet-inventory'),
+    blurb: t('sheet-stock-on-hand-against-point'),
     doc: sheet(
       { title: 'Stock at Two Leaves Tea', lock: 'G1:H8' },
       ['Item', 'Code', 'On hand:number', 'Reorder at:number', 'Order:number', 'Unit cost:money', 'Value:money', 'Status'],
@@ -441,8 +441,8 @@ export const templates = (): Template[] => [
   },
   {
     id: 'pettycash',
-    name: t('Petty cash'),
-    blurb: t('Money in and out of the cash box, who spent it and on what, the balance after each, and a check for a receipt.'),
+    name: t('sheet-petty-cash'),
+    blurb: t('sheet-money-in-and-out-of'),
     doc: sheet(
       { title: 'Petty cash, Maple Street Clinic, October 2026', lock: 'F1:F8' },
       ['Date:date', 'What', 'Who', 'In:money', 'Out:money', 'Balance:money', 'Receipt:check'],
@@ -462,8 +462,8 @@ export const templates = (): Template[] => [
   },
   {
     id: 'rates',
-    name: t('Rate card'),
-    blurb: t('A freelancer’s services with the hours each takes; prices and rush prices worked out from one hourly rate.'),
+    name: t('sheet-rate-card'),
+    blurb: t('sheet-freelancers-services-with-hours-each'),
     doc: sheet(
       { title: 'Ines Duarte, illustration and design: rates', lock: 'D1:E7' },
       ['Service', 'What you get', 'Hours:number', 'Price:money', 'Rush:money', 'Setting:name', 'Value:number'],
@@ -482,8 +482,8 @@ export const templates = (): Template[] => [
   },
   {
     id: 'mortgage',
-    name: t('Mortgages compared'),
-    blurb: t('Four offers on one house: the loan after the down payment, the monthly payment, all in with tax, and the interest.'),
+    name: t('sheet-mortgages-compared'),
+    blurb: t('sheet-four-offers-on-one-house'),
     doc: sheet(
       { title: 'Mortgages for a $420,000 house', lock: 'D1:D4, G1:G4, I1:J4' },
       ['Offer', 'Price:money', 'Down:percent', 'Loan:money', 'Rate:percent', 'Years:number', 'Monthly:money', 'Tax and insurance:money', 'All in:money', 'Interest:money'],
@@ -510,8 +510,8 @@ export const templates = (): Template[] => [
   },
   {
     id: 'loan',
-    name: t('Loans compared'),
-    blurb: t('Amount, rate and years for each loan; the monthly payment (PMT), what it costs in all, and the interest.'),
+    name: t('sheet-loans-compared'),
+    blurb: t('sheet-amount-rate-and-years-for'),
     doc: sheet(
       { title: 'Loans compared', lock: 'E1:G4' },
       ['Loan', 'Amount:money', 'Rate:percent', 'Years:number', 'Monthly:money', 'Total paid:money', 'Interest:money'],
@@ -527,8 +527,8 @@ export const templates = (): Template[] => [
   },
   {
     id: 'converter',
-    name: t('Unit converter'),
-    blurb: t('Miles and kilometers, pounds and kilograms, ovens, cups and gallons: type an amount, read the other unit.'),
+    name: t('sheet-unit-converter'),
+    blurb: t('sheet-miles-and-kilometers-pounds-and'),
     doc: sheet(
       { title: 'Unit converter', lock: 'C1:D12' },
       ['Unit:name', 'Amount:number', 'Comes to:number', 'In'],
@@ -550,8 +550,8 @@ export const templates = (): Template[] => [
   },
   {
     id: 'bracket',
-    name: t('Tournament bracket'),
-    blurb: t('Eight teams, single elimination: each match’s score, the winner worked out, and the winners carried on to the final.'),
+    name: t('sheet-tournament-bracket'),
+    blurb: t('sheet-eight-teams-single-elimination-each'),
     doc: sheet(
       { title: 'Riverside Rec League cup, fall 2026', lock: 'C5:C7, E5:E7, G1:G7' },
       ['Round', 'Date:date', 'Home', 'Home goals:number', 'Away', 'Away goals:number', 'Winner'],
@@ -570,8 +570,8 @@ export const templates = (): Template[] => [
   },
   {
     id: 'months',
-    name: t('Month by month, with a chart'),
-    blurb: t('This year against last, a line a month, drawn as lines.'),
+    name: t('sheet-month-by-month-with-chart'),
+    blurb: t('sheet-this-year-against-last-line'),
     doc: sheet(
       { title: 'Sales at the bike shop, 2026 against 2025', chart: 'line' },
       ['Month', 'This year:money', 'Last year:money'],
@@ -590,8 +590,8 @@ export const templates = (): Template[] => [
   },
   {
     id: 'subscription',
-    name: t('A subscription business'),
-    blurb: t('Visitors who sign up, pay and stay: a model as flows, with the assumptions beside it to change.'),
+    name: t('sheet-subscription-business'),
+    blurb: t('sheet-visitors-who-sign-up-pay'),
     doc: model(
       'A subscription business, a month',
       'C1:C6, E6:E9',
@@ -609,8 +609,8 @@ export const templates = (): Template[] => [
   },
   {
     id: 'cafe',
-    name: t('A café'),
-    blurb: t('Customers a day, what they spend, and where the month’s revenue goes: supplies, rent, wages, profit.'),
+    name: t('sheet-cafe'),
+    blurb: t('sheet-customers-day-what-they-spend'),
     doc: model(
       'A café, a month',
       'C1:C5, E8:E10',
@@ -629,8 +629,8 @@ export const templates = (): Template[] => [
   },
   {
     id: 'freelancer',
-    name: t('A freelancer'),
-    blurb: t('Hours, rate and weeks make the year’s invoices; expenses and tax come off; what is left is take-home.'),
+    name: t('sheet-freelancer'),
+    blurb: t('sheet-hours-rate-and-weeks-make'),
     doc: model(
       'A freelancer, a year',
       'C1:C4, E7:E9',
@@ -648,8 +648,8 @@ export const templates = (): Template[] => [
   },
   {
     id: 'fund',
-    name: t('A mutual aid fund'),
-    blurb: t('Monthly donors and one-off gifts fill the fund; grants, a little admin and a reserve come out of it.'),
+    name: t('sheet-mutual-aid-fund'),
+    blurb: t('sheet-monthly-donors-and-one-off'),
     doc: model(
       'A mutual aid fund, a month',
       'C1:C5, E7:E9',

@@ -67,8 +67,8 @@ function monthPages(v: CalView, max = 3, now = new Date()): Page[] {
         const yy = top + 24 + line++ * 19;
         // A span over several days is one bar across them, named where it starts (and at each new week).
         svg += rect(x + (starts ? 4 : 0), yy, CW - (starts ? 4 : 0) - (day === b ? 4 : 0), 16, hex, `rx="${starts && day === b ? 4 : 0}" fill-opacity="${s.kind === 'd' ? 1 : 0.18}"`);
-        if (starts || i % 7 === 0) svg += text(x + 8, yy + 12, clip(time + (s.words || t('Untitled')), CW - 12, 11), { px: 11, fill: s.kind === 'd' ? '#fff' : INK });
-        if (starts && p.m === m) alt.push(`${p.d}: ${time}${s.words || t('Untitled')}`);
+        if (starts || i % 7 === 0) svg += text(x + 8, yy + 12, clip(time + (s.words || t('outline-untitled')), CW - 12, 11), { px: 11, fill: s.kind === 'd' ? '#fff' : INK });
+        if (starts && p.m === m) alt.push(`${p.d}: ${time}${s.words || t('outline-untitled')}`);
       }
     }
     let bottom = 84 + rows * CH;
@@ -88,7 +88,7 @@ function monthPages(v: CalView, max = 3, now = new Date()): Page[] {
 function ganttPage(v: CalView, max = Infinity): Page {
   const bars = ganttBars(v).slice(0, max);
   const range = ganttRange(bars);
-  if (!range) return { w: 480, h: 120, svg: text(240, 66, t('No tasks yet'), { px: 16, fill: MUTED, anchor: 'middle' }) };
+  if (!range) return { w: 480, h: 120, svg: text(240, 66, t('cal-no-tasks-yet'), { px: 16, fill: MUTED, anchor: 'middle' }) };
   const NAMES = 220;
   const ROW = 32;
   const days = range.to - range.from;
@@ -104,11 +104,11 @@ function ganttPage(v: CalView, max = Infinity): Page {
     const left = 24 + NAMES + (s.start - range.from) * z;
     const depth = s.item.depth;
     const hex = CAL_COLORS[s.item.color]?.hex ?? ACCENT;
-    svg += text(24 + depth * 16, y + 21, clip(s.item.words || t('Task'), NAMES - 12 - depth * 16, 14, s.parent), { px: 14, bold: s.parent });
+    svg += text(24 + depth * 16, y + 21, clip(s.item.words || t('common-task'), NAMES - 12 - depth * 16, 14, s.parent), { px: 14, bold: s.parent });
     if (s.parent) svg += rect(left, y + 10, s.days * z, 6, INK) + `<path d="M${r(left)} ${y + 10}v12l6-6zM${r(left + s.days * z)} ${y + 10}v12l-6-6z" fill="${INK}"/>`;
     else svg += rect(left, y + 6, s.days * z, ROW - 12, hex, `rx="4" fill-opacity="0.18" stroke="${hex}"`) + (s.done ? rect(left, y + 6, (s.days * z * s.done) / 100, ROW - 12, hex, 'rx="4"') : '');
   });
-  const alt = bars.map((s) => `${s.item.words || t('Task')}: ${dayString(s.start)}, ${t('{n|one day|# days}', { n: s.days })}${s.done ? `, ${s.done}%` : ''}`).join('; ');
+  const alt = bars.map((s) => `${s.item.words || t('common-task')}: ${dayString(s.start)}, ${t('cal-n-days', { n: s.days })}${s.done ? `, ${s.done}%` : ''}`).join('; ');
   return { w, h: 76 + bars.length * ROW, svg, alt };
 }
 
@@ -138,8 +138,8 @@ export function calToIcs(doc: Doc, stampMs: number): string {
       const until = rp.until === undefined ? '' : s.kind === 'd' ? icsDate(dayString(rp.until)) : icsStamp(clockMinutes(rp.until, 23, 59, zone) * 60000);
       lines.push(`RRULE:FREQ=${FREQ[rp.every]}${rp.count ? `;COUNT=${rp.count}` : until ? `;UNTIL=${until}` : ''}`);
     }
-    lines.push(`SUMMARY:${icsText(s.words || t('Untitled'))}`);
-    if (s.done) lines.push(`DESCRIPTION:${icsText(t('{n}% done', { n: s.done }))}`);
+    lines.push(`SUMMARY:${icsText(s.words || t('outline-untitled'))}`);
+    if (s.done) lines.push(`DESCRIPTION:${icsText(t('cal-n-done', { n: s.done }))}`);
     lines.push('END:VEVENT');
     return lines;
   });
@@ -154,7 +154,7 @@ export function calToCsv(doc: Doc, sep = ','): string {
     const bars = ganttBars(v);
     return csv(
       [
-        [t('Task'), t('Level'), t('Start'), t('End'), t('Days'), t('Done %')],
+        [t('common-task'), t('cal-level'), t('cal-start'), t('cal-end'), t('cal-days'), t('cal-done')],
         ...bars.map((b) => [b.item.words, b.item.depth + 1, dayString(b.start), dayString(b.start + b.days - 1), b.days, b.done]),
       ],
       sep,
@@ -166,7 +166,7 @@ export function calToCsv(doc: Doc, sep = ','): string {
   };
   return csv(
     [
-      [t('What'), t('Start'), t('End'), t('Repeats'), t('Color')],
+      [t('cal-what'), t('cal-start'), t('cal-end'), t('cal-repeats'), t('draw-color')],
       ...v.items.map((s) => [
         s.words,
         s.kind === 'd' ? dayString(s.start) : at(spanStartMs(s)),

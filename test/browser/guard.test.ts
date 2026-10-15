@@ -135,7 +135,7 @@ test('in Arabic the address is drawn left to right, set apart; a mailbox that hi
     // Drawn, this read 'nhcr.info@speak-mail.ru' (the review of 2026-10-11).
     openLink('mailto:%E2%80%AEur.liam-kaeps@ofni.rchnu');
     await until(() => !!shell.querySelector('.to-toast.shown'));
-    expect(shell.querySelector('.to-toast')!.textContent).toBe(t('This link hides characters in its address.'));
+    expect(shell.querySelector('.to-toast')!.textContent).toBe(t('leave-this-link-hides-characters-in'));
     await tick(50);
     expect(guardShut()).toBe(true);
   } finally {

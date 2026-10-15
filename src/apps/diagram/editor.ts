@@ -267,8 +267,8 @@ export class ToDiagramEditor extends DocElement<DiagramView> {
   private wording(tg: Target | null): { label: string; placeholder: string } {
     const kind = this.view.kind;
     const h = tg?.hit;
-    if (h?.k === 'edge') return { label: t('What the connection says'), placeholder: t('What the connection says') };
-    if (h?.k === 'lane') return { label: t("The lane's name"), placeholder: t('Who') };
+    if (h?.k === 'edge') return { label: t('diagram-what-connection-says'), placeholder: t('diagram-what-connection-says') };
+    if (h?.k === 'lane') return { label: t('diagram-lanes-name'), placeholder: t('diagram-who') };
     return { label: thingName(kind), placeholder: newWords(kind, h?.k === 'line' && typeof h.part === 'number') };
   }
   /**
@@ -682,7 +682,7 @@ export class ToDiagramEditor extends DocElement<DiagramView> {
     if (hit.k === 'edge') this.change(setEdge(this.doc, hit.at, { dir: arrow ? '--' : '->' }), hit);
   }
   printCards() {
-    void printPages(placeCards(this.doc), this.doc.head.title || t('Place cards'));
+    void printPages(placeCards(this.doc), this.doc.head.title || t('diagram-place-cards'));
   }
   /** A thing's name, for whether it can be joined from. */
   nameOfHit(hit: Hit): string {
@@ -894,7 +894,7 @@ export class ToDiagramEditor extends DocElement<DiagramView> {
     // The thing whose words are being typed is drawn without them: the words over it hold them, nothing doubles.
     const body = unsafeSVG(shapeSvg(i === on ? { ...s, text: '' } : s, all, THEME, !!hit));
     if (!hit) return svg`<g>${body}</g>`;
-    const words = s.text.replace(/^:[a-z0-9-]+\s*/, '') || (isLink(s.k) || hit.k === 'edge' ? t('a connection') : t('empty'));
+    const words = s.text.replace(/^:[a-z0-9-]+\s*/, '') || (isLink(s.k) || hit.k === 'edge' ? t('diagram-connection') : t('diagram-empty'));
     // A mind map's cross-link is a curve and its words beside it: one stop for the keys, the curve.
     const stop = hit.k === 'edge' && s.k === 't' ? '-1' : '0';
     return svg`<g class="dg-thing ${hit.k === 'edge' ? 'edge' : ''} ${i === on ? 'on' : ''}" data-i=${i} tabindex=${stop} role="button" aria-label=${words}>${body}</g>`;
@@ -905,12 +905,7 @@ export class ToDiagramEditor extends DocElement<DiagramView> {
     const on = tg ? this.indexOf(tg) : -1;
     const words = this.wording(tg);
     const width = this.zoom ? `width:${Math.round(d.w * this.zoom) / 16}rem;max-width:none` : `width:100%;max-width:${d.w / 16}rem`;
-    const hint =
-      this.joining === ''
-        ? t('Tap the first thing to join, then the other; tap empty space to stop.')
-        : this.joining !== null
-          ? t('Tap the thing to join {name} to; tap empty space to stop.', { name: this.joining })
-          : kindHint(kind);
+    const hint = this.joining === '' ? t('diagram-tap-first-thing-to-join') : this.joining !== null ? t('diagram-tap-thing-to-join-name', { name: this.joining }) : kindHint(kind);
     const own = (id: string) => COMMANDS.find((c) => c.id === `diagram.${id}`)!;
     return html`<to-bar class="dg-bar">
         ${cmdMenu(own('kind'), this, COMMANDS, 'dg-kind', { words: true, caret: true, icon: KIND_ICON[kind] })}
@@ -927,12 +922,12 @@ export class ToDiagramEditor extends DocElement<DiagramView> {
           <defs>${unsafeSVG(arrowDefs('var(--to-ink)'))}</defs>
           ${d.shapes.map((s, i) => this.thing(s, i, d.shapes, on))}
         </svg>
-        ${d.shapes.length ? nothing : html`<p class="dg-empty to-hint">${t('Tap here to add the first {thing}.', { thing: thingName(kind).toLowerCase() })}</p>`}
+        ${d.shapes.length ? nothing : html`<p class="dg-empty to-hint">${t('diagram-tap-here-to-add-first', { thing: thingName(kind).toLowerCase() })}</p>`}
         <to-text class="dg-words" hidden shape="line" no-bubble .blocks=${this.wordsBlocks} .label=${words.label} .placeholder=${words.placeholder}
           @keydown=${{ handleEvent: this.onWordsKey, capture: true }} @focusout=${this.onWordsBlur}
           @text-ops=${this.onOps} @text-enter=${this.onEnter} @text-exit=${this.onExit} @text-escape=${this.onEscape} @text-selectall=${this.onSelectAll}></to-text>
       </div>
-      <to-context class="dg-context" .label=${t('This thing')} .items=${this.contextItems(tg)}></to-context>`;
+      <to-context class="dg-context" .label=${t('diagram-this-thing')} .items=${this.contextItems(tg)}></to-context>`;
   }
 }
 if (!customElements.get(tag)) customElements.define(tag, ToDiagramEditor);

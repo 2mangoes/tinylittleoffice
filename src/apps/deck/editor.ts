@@ -170,7 +170,7 @@ export class ToDeckEditor extends DocElement<Slide[]> {
     copy: (span) => this.copyRange(span),
     paste: (data, span) => this.pasteSlides(data, span ? this.idsOf(span)[1] : this.cur),
     drop: (id, to) => this.dropSlide(id, to),
-    label: t('Chosen slides'),
+    label: t('deck-chosen-slides'),
     contextClass: 'deck-context',
   });
 
@@ -593,16 +593,16 @@ export class ToDeckEditor extends DocElement<Slide[]> {
     const b = s.sub >= 0 ? this.doc.blocks[s.sub] : null;
     if (!b) return [];
     const here = `${location.origin}${location.pathname}`;
-    const remove = { label: t('Remove from the slide'), icon: UI.trash, does: () => this.change(setSub(s, null)) };
+    const remove = { label: t('deck-remove-from-slide'), icon: UI.trash, does: () => this.change(setSub(s, null)) };
     if (b.k === 'fence' && b.lang) {
       const known = !!lookup.appOf(b.lang);
       return [
-        ...(known ? [{ label: t('Edit'), icon: UI.pen, does: () => void this.editSub() }] : []),
-        { label: t('Open in a new tab'), icon: UI.open, does: () => void window.open(placedLink(b.lang, b.body, encodeDoc, here), '_blank', 'noopener') },
+        ...(known ? [{ label: t('draw-edit'), icon: UI.pen, does: () => void this.editSub() }] : []),
+        { label: t('outline-open-in-new-tab'), icon: UI.open, does: () => void window.open(placedLink(b.lang, b.body, encodeDoc, here), '_blank', 'noopener') },
         remove,
       ];
     }
-    if (b.k === 'table') return [{ label: t('Edit'), icon: UI.pen, does: () => void this.editSub() }, remove];
+    if (b.k === 'table') return [{ label: t('draw-edit'), icon: UI.pen, does: () => void this.editSub() }, remove];
     return [remove];
   }
   /** The document or table on the slide, edited in its app in the dialog: Done writes it back as one step. */
@@ -942,46 +942,46 @@ export class ToDeckEditor extends DocElement<Slide[]> {
     const prose = !!st.format && st.format !== 'comic' && !s.layout;
     const wordsHint =
       st.format === 'comic'
-        ? t('A panel a line: what is said | the caption. Icon gives it a picture.')
+        ? t('deck-panel-line-what-is-said')
         : prose
-          ? t('What this page says. The type shrinks to fit the page.')
+          ? t('deck-what-this-page-says-type')
           : s.layout === 't'
-            ? t('A line or two under the title')
-            : t('One bullet a line. Tab steps it in.');
-    const foot = g ? g.name(this.cur, n) : t('{n} / {total}', { n: this.cur + 1, total: n });
-    const pickLabel = s.icon ? t('Change the icon') : t('Add an icon');
+            ? t('deck-line-or-two-under-title')
+            : t('deck-one-bullet-line-tab-steps');
+    const foot = g ? g.name(this.cur, n) : t('deck-n-total', { n: this.cur + 1, total: n });
+    const pickLabel = s.icon ? t('deck-change-icon') : t('deck-add-icon');
     // An empty slot shows a plus in a dashed box, never a stand-in icon that reads as the slide's (Paul, 2026-10-13: "Add icon").
     const pick = html`<button type="button" class="deck-pick ${s.icon ? '' : 'empty'}" aria-label=${pickLabel} title=${pickLabel} @click=${() => void this.pickIcon()}>${s.icon && iconNamed(s.icon) ? icon(iconNamed(s.icon)!, 32) : icon(UI.plus, 20)}</button>`;
     return html`<div class="deck-canvas lay-${s.layout || 'b'} ${look.themed ? 'themed' : ''} ${look.theme.dark ? 'dark' : ''} ${sub ? 'has-sub' : ''} ${prose ? 'prose' : ''}" style=${this.canvasStyle(s, look, size)} data-format=${st.format || 'deck'}>
         <div class="deck-head">
           ${s.layout === 'i' ? nothing : pick}
-          <to-text class="deck-title" shape="line" notes .blocks=${titleBlocks} label=${t('Headline')} placeholder=${s.layout === 't' || (g && this.cur === 0) ? t('Title') : t('Headline')} @text-ops=${(e: CustomEvent<TextOps>) => this.onOps('title', e)} @focusin=${() => (this.field = 'title')} @text-select=${(e: CustomEvent<Sel | null>) => this.onSelect('title', e)} @text-enter=${() => this.focusBox(sub ? 'notes' : 'words', 'start')} @text-exit=${(e: CustomEvent<{ dir: 'back' | 'forward' }>) => this.onTitleExit(e)} @text-note=${(e: CustomEvent<NoteAt>) => this.onNote('title', e)}></to-text>
+          <to-text class="deck-title" shape="line" notes .blocks=${titleBlocks} label=${t('deck-headline')} placeholder=${s.layout === 't' || (g && this.cur === 0) ? t('shell-title') : t('deck-headline')} @text-ops=${(e: CustomEvent<TextOps>) => this.onOps('title', e)} @focusin=${() => (this.field = 'title')} @text-select=${(e: CustomEvent<Sel | null>) => this.onSelect('title', e)} @text-enter=${() => this.focusBox(sub ? 'notes' : 'words', 'start')} @text-exit=${(e: CustomEvent<{ dir: 'back' | 'forward' }>) => this.onTitleExit(e)} @text-note=${(e: CustomEvent<NoteAt>) => this.onNote('title', e)}></to-text>
         </div>
         ${
           sub
-            ? html`<figure class="deck-sub" tabindex="0" role="group" aria-label=${sub.alt || t('A document on the slide')} @click=${this.openSubMenu} @keydown=${this.onSubKey}>
+            ? html`<figure class="deck-sub" tabindex="0" role="group" aria-label=${sub.alt || t('deck-document-on-slide')} @click=${this.openSubMenu} @keydown=${this.onSubKey}>
               <svg viewBox="0 0 ${sub.w} ${sub.h}" aria-hidden="true">${unsafeSVG(sub.svg)}</svg>
             </figure>`
             : html`<div class="deck-words-row">
-              <to-text class="deck-words" shape="lines" notes @paste=${this.onWordsPaste} .blocks=${wordsBlocks} note-start=${titleNotes} label=${s.layout === '2' ? t('Left column') : t('Words')} placeholder=${wordsHint} @text-ops=${(e: CustomEvent<TextOps>) => this.onOps('words', e)} @focusin=${() => (this.field = 'words')} @text-select=${(e: CustomEvent<Sel | null>) => this.onSelect('words', e)} @text-exit=${() => this.focusBox('title')} @text-note=${(e: CustomEvent<NoteAt>) => this.onNote('words', e)}></to-text>
+              <to-text class="deck-words" shape="lines" notes @paste=${this.onWordsPaste} .blocks=${wordsBlocks} note-start=${titleNotes} label=${s.layout === '2' ? t('deck-left-column') : t('write-words')} placeholder=${wordsHint} @text-ops=${(e: CustomEvent<TextOps>) => this.onOps('words', e)} @focusin=${() => (this.field = 'words')} @text-select=${(e: CustomEvent<Sel | null>) => this.onSelect('words', e)} @text-exit=${() => this.focusBox('title')} @text-note=${(e: CustomEvent<NoteAt>) => this.onNote('words', e)}></to-text>
               ${
                 s.layout === '2'
-                  ? html`<to-text class="deck-right" shape="lines" notes .blocks=${rightBlocks} note-start=${titleNotes + leftNotes} label=${t('Right column')} placeholder=${t('One bullet a line.')} @text-ops=${(e: CustomEvent<TextOps>) => this.onOps('right', e)} @focusin=${() => (this.field = 'right')} @text-select=${(e: CustomEvent<Sel | null>) => this.onSelect('right', e)} @text-exit=${() => this.focusBox('words')} @text-note=${(e: CustomEvent<NoteAt>) => this.onNote('right', e)}></to-text>`
+                  ? html`<to-text class="deck-right" shape="lines" notes .blocks=${rightBlocks} note-start=${titleNotes + leftNotes} label=${t('deck-right-column')} placeholder=${t('deck-one-bullet-line')} @text-ops=${(e: CustomEvent<TextOps>) => this.onOps('right', e)} @focusin=${() => (this.field = 'right')} @text-select=${(e: CustomEvent<Sel | null>) => this.onSelect('right', e)} @text-exit=${() => this.focusBox('words')} @text-note=${(e: CustomEvent<NoteAt>) => this.onNote('right', e)}></to-text>`
                   : s.layout === 'i'
-                    ? html`<button type="button" class="deck-big ${s.icon ? '' : 'empty'}" aria-label=${pickLabel} @click=${() => void this.pickIcon()}>${s.icon && iconNamed(s.icon) ? icon(iconNamed(s.icon)!, 120) : html`${icon(UI.plus, 40)}<span>${t('Pick an icon')}</span>`}</button>`
+                    ? html`<button type="button" class="deck-big ${s.icon ? '' : 'empty'}" aria-label=${pickLabel} @click=${() => void this.pickIcon()}>${s.icon && iconNamed(s.icon) ? icon(iconNamed(s.icon)!, 120) : html`${icon(UI.plus, 40)}<span>${t('deck-pick-icon')}</span>`}</button>`
                     : nothing
               }
             </div>`
         }
         ${
           notes.length
-            ? html`<to-notes class="deck-fn" role="group" aria-label=${t('Footnotes')} .notes=${notes} @note-change=${this.onNoteChange} @note-back=${this.onNoteBack} @note-remove=${this.onNoteRemove}></to-notes>`
+            ? html`<to-notes class="deck-fn" role="group" aria-label=${t('write-footnotes')} .notes=${notes} @note-change=${this.onNoteChange} @note-back=${this.onNoteBack} @note-remove=${this.onNoteRemove}></to-notes>`
             : nothing
         }
         <span class="deck-num">${foot}</span>
       </div>
-      <h3 class="deck-notes-head" id="deck-notes-head">${t('Speaker notes')}</h3>
-      <to-text class="deck-notes" shape="lines" .blocks=${noteBlocks} label=${t('Speaker notes')} @text-ops=${(e: CustomEvent<TextOps>) => this.onOps('notes', e)} @focusin=${() => (this.field = 'notes')} @text-select=${(e: CustomEvent<Sel | null>) => this.onSelect('notes', e)} @text-exit=${() => this.focusBox(sub ? 'title' : 'words')}></to-text>`;
+      <h3 class="deck-notes-head" id="deck-notes-head">${t('deck-speaker-notes')}</h3>
+      <to-text class="deck-notes" shape="lines" .blocks=${noteBlocks} label=${t('deck-speaker-notes')} @text-ops=${(e: CustomEvent<TextOps>) => this.onOps('notes', e)} @focusin=${() => (this.field = 'notes')} @text-select=${(e: CustomEvent<Sel | null>) => this.onSelect('notes', e)} @text-exit=${() => this.focusBox(sub ? 'title' : 'words')}></to-text>`;
   }
   private renderRail(look: Look) {
     const st = this.settings;
@@ -992,23 +992,23 @@ export class ToDeckEditor extends DocElement<Slide[]> {
     const d = this.rows.drag;
     // The rail's thumbnails stand still (a deck of ten animations runs no clocks on the side) and are thumbnails: a trip on one asks OpenStreetMap for nothing.
     const still: Look = { ...look, still: true, thumb: true };
-    return html`<nav class="deck-rail" tabindex="-1" aria-label=${g ? t('Pages') : t('Slides')} data-covers @keydown=${this.onRailKey}>
+    return html`<nav class="deck-rail" tabindex="-1" aria-label=${g ? t('deck-pages') : t('deck-slides')} data-covers @keydown=${this.onRailKey}>
       ${Array.from({ length: n }, (_, i) => {
         const s = slides[i];
         const p = pageOf(this.doc, i, st, slides, still);
         const words = s ? plainText(s.title).trim() || plainText(s.items[0]?.runs ?? []).trim() : '';
-        const name = (g ? g.name(i, n) : t('Slide {n}', { n: i + 1 })) + (words ? `: ${words}` : '');
+        const name = (g ? g.name(i, n) : t('deck-slide-n', { n: i + 1 })) + (words ? `: ${words}` : '');
         const ranged = !!s && this.rows.has(i);
         return html`<div class="deck-slot ${ranged ? 'ranged' : ''} ${d?.id === i ? 'dragging' : ''}">
           <button type="button" class="deck-thumb" data-i=${i} aria-label=${name} aria-current=${i === this.cur ? 'true' : 'false'} aria-pressed=${s ? String(ranged) : nothing} @pointerdown=${this.onThumbDown} @pointerup=${(e: PointerEvent) => this.onThumbUp(i, e)} @pointercancel=${() => (this.jumping = null)} @click=${(e: MouseEvent) => this.onThumb(i, e)} @dblclick=${() => (this.rows.release(), this.go(i), this.focusBox('title'))}><span class="n">${i + 1}</span><svg viewBox="0 0 ${p.w} ${p.h}" aria-hidden="true">${unsafeSVG(p.svg)}</svg></button>
-          ${s ? html`<button type="button" class="deck-grip to-rows-handle" tabindex="-1" aria-label=${t('Move this slide: drag it onto another')} title=${t('Drag to move')}>${icon(GripVertical, 14)}</button>` : nothing}
+          ${s ? html`<button type="button" class="deck-grip to-rows-handle" tabindex="-1" aria-label=${t('deck-move-this-slide-drag-it')} title=${t('outline-drag-to-move')}>${icon(GripVertical, 14)}</button>` : nothing}
         </div>`;
       })}
       ${
         end
-          ? html`<div class="deck-end" role="img" aria-label=${t('Last slide, added for you: a QR code of this whole deck')} title=${t('Ends with a QR code of this deck, so the room can take it home. The QR button turns it off.')}>${icon(UI.qr, 28)}<span>${t('QR code of this deck')}</span></div>`
+          ? html`<div class="deck-end" role="img" aria-label=${t('deck-last-slide-added-for-you')} title=${t('deck-ends-with-qr-code-of')}>${icon(UI.qr, 28)}<span>${t('deck-qr-code-of-this-deck')}</span></div>`
           : !g && wantsClosing(this.doc, st)
-            ? html`<div class="deck-end deck-end-long">${icon(UI.qr, 28)}<span>${t('Too long for a QR code: shorten the document, or share a short link.')}</span></div>`
+            ? html`<div class="deck-end deck-end-long">${icon(UI.qr, 28)}<span>${t('common-too-long-for-qr-code')}</span></div>`
             : nothing
       }
     </nav>`;
@@ -1018,7 +1018,7 @@ export class ToDeckEditor extends DocElement<Slide[]> {
     const g = geometryOf(st.format)!;
     return html`<div class="deck-sheets">
       <p class="to-hint">${g.how(st.two)}</p>
-      ${sheetsOf(this.doc, st).map((p, i) => html`<div class="deck-sheet">${unsafeSVG(pageSvg(p, `role="img" aria-label="${t('Sheet, side {n}', { n: i + 1 })}"`))}</div>`)}
+      ${sheetsOf(this.doc, st).map((p, i) => html`<div class="deck-sheet">${unsafeSVG(pageSvg(p, `role="img" aria-label="${t('deck-sheet-side-n', { n: i + 1 })}"`))}</div>`)}
     </div>`;
   }
   private renderShow(look: Look) {
@@ -1029,18 +1029,18 @@ export class ToDeckEditor extends DocElement<Slide[]> {
     const p = page(this.showing, this.shown);
     const s = slides[this.showing];
     const motion = `tr-${this.settings.transition || 'fade'} ${this.forwards ? '' : 'back'}`;
-    return html`<div class="deck-show" data-spatial role="dialog" aria-modal="true" tabindex="-1" aria-label=${t('Presentation')} @click=${this.onShowClick} @pointerdown=${this.onShowDown} @pointerup=${this.onShowUp} @pointercancel=${() => (this.swipe = null)}>
+    return html`<div class="deck-show" data-spatial role="dialog" aria-modal="true" tabindex="-1" aria-label=${t('deck-presentation')} @click=${this.onShowClick} @pointerdown=${this.onShowDown} @pointerup=${this.onShowUp} @pointercancel=${() => (this.swipe = null)}>
       ${this.leaving >= 0 && this.leaving < total ? keyed(this.leaving, html`<div class="was ${motion}" aria-hidden="true"><svg viewBox="0 0 ${SW} ${SH}">${unsafeSVG(page(this.leaving).svg)}</svg></div>`) : nothing}
       ${keyed(this.showing, html`<div class="frame ${motion}"><svg viewBox="0 0 ${SW} ${SH}" role="img" aria-label=${p.alt || ''}>${unsafeSVG(p.svg)}</svg></div>`)}
-      <p class="sr-only" aria-live="polite">${t('Slide {n} of {total}', { n: this.showing + 1, total })}: ${p.alt ?? ''}</p>
-      <div class="ctl" role="group" aria-label=${t('Presentation')} @click=${(e: Event) => e.stopPropagation()}>
-        ${tool({ label: t('Previous'), icon: ChevronUp, disabled: this.showing === 0 && this.shown === 0, does: () => this.back() })}
-        ${tool({ label: t('Next'), icon: ChevronDown, does: () => this.forward() })}
-        ${s?.noteLines.length ? tool({ label: t('Notes'), icon: StickyNote, keys: 'N', pressed: this.noting, does: () => (this.noting = !this.noting) }) : nothing}
-        ${tool({ label: this.fromLink ? t('Edit this deck') : t('Stop presenting'), icon: UI.close, keys: 'Esc', does: () => this.show(-1) })}
+      <p class="sr-only" aria-live="polite">${t('deck-slide-n-of-total', { n: this.showing + 1, total })}: ${p.alt ?? ''}</p>
+      <div class="ctl" role="group" aria-label=${t('deck-presentation')} @click=${(e: Event) => e.stopPropagation()}>
+        ${tool({ label: t('deck-previous'), icon: ChevronUp, disabled: this.showing === 0 && this.shown === 0, does: () => this.back() })}
+        ${tool({ label: t('deck-next'), icon: ChevronDown, does: () => this.forward() })}
+        ${s?.noteLines.length ? tool({ label: t('deck-notes'), icon: StickyNote, keys: 'N', pressed: this.noting, does: () => (this.noting = !this.noting) }) : nothing}
+        ${tool({ label: this.fromLink ? t('deck-edit-this-deck') : t('deck-stop-presenting'), icon: UI.close, keys: 'Esc', does: () => this.show(-1) })}
       </div>
       <span class="pos">${this.showing + 1} / ${total}</span>
-      ${s?.noteLines.length && this.noting ? html`<div class="notes" @click=${(e: Event) => e.stopPropagation()}><b>${t('Notes')}</b> ${s.noteLines.map((ln) => html`<p>${ln}</p>`)}${coarse() ? nothing : html`<small>${t('N hides them')}</small>`}</div>` : nothing}
+      ${s?.noteLines.length && this.noting ? html`<div class="notes" @click=${(e: Event) => e.stopPropagation()}><b>${t('deck-notes')}</b> ${s.noteLines.map((ln) => html`<p>${ln}</p>`)}${coarse() ? nothing : html`<small>${t('deck-n-hides-them')}</small>`}</div>` : nothing}
     </div>`;
   }
 
@@ -1077,7 +1077,7 @@ export class ToDeckEditor extends DocElement<Slide[]> {
       }
       ${this.showing >= 0 ? this.renderShow(look) : nothing}
       ${this.rows.renderContext()}
-      <to-menu class="deck-submenu" .label=${t('This document')} .items=${this.subMenu ? this.subItems() : []}></to-menu>`;
+      <to-menu class="deck-submenu" .label=${t('common-this-document')} .items=${this.subMenu ? this.subItems() : []}></to-menu>`;
   }
   protected updated(changed: PropertyValues<this>) {
     if (this.focusNext) void this.updateComplete.then(() => this.placeFocus());

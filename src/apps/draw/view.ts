@@ -213,7 +213,7 @@ function pixelPage(v: DrawView): Page {
     for (let x = 0; x < n; x++) if (TILE_INKS[row[x]]) svg += rect(x * c, y * c, c + 0.5, c + 0.5, TILE_INKS[row[x]]);
   });
   const filled = v.pixels.rows.join('').replace(/\./g, '').length;
-  return { w: 480, h: 480, svg, alt: v.alt || t('Pixel art, {n} by {n}: {filled|one square filled|# squares filled}.', { n, filled }) };
+  return { w: 480, h: 480, svg, alt: v.alt || t('draw-pixel-art-n-by-n-filled-squares-filled', { n, filled }) };
 }
 
 /** A page cut to the box at (x, y), w by h: what lies outside it is out of the picture. */
@@ -237,7 +237,7 @@ function shapesBox(shapes: Shape[], pad = 24): [number, number, number, number] 
 export function drawingPage(doc: Doc, upTo = Infinity, thumb = false): Page {
   const v = readDrawing(doc);
   if (v.grid) return pixelPage(v);
-  const page = { ...shapesPage(v.shapes, W, H, upTo, v.tile), alt: v.alt || describeDrawing(v.shapes) || t('An empty drawing') };
+  const page = { ...shapesPage(v.shapes, W, H, upTo, v.tile), alt: v.alt || describeDrawing(v.shapes) || t('draw-empty-drawing') };
   return thumb && !v.tile ? cropPage(page, ...shapesBox(v.shapes)) : page;
 }
 

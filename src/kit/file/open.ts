@@ -58,16 +58,16 @@ const isZip = (file: File) => /\.zip$/i.test(file.name) || /^application\/(?:x-)
 export async function openFile(file: File, fallback: string): Promise<boolean> {
   if (isZip(file)) return openZip(file, fallback);
   if (file.size > 2_000_000) {
-    toast(t('That file is too large to be a document here.'));
+    toast(t('open-that-file-is-too-large'));
     return false;
   }
   const words = await file.text();
   const hash = isJson(file) ? await jsonHash(file.name, words, fallback) : hashFor(file.name, words, fallback);
   if (!hash) {
-    toast(t('That file is not words Tiny Little Office can read.'));
+    toast(t('open-that-file-is-not-words'));
     return false;
   }
-  if (go(hash)) toast(t('Opened {name}', { name: file.name }));
+  if (go(hash)) toast(t('open-opened-name', { name: file.name }));
   return true;
 }
 
@@ -119,16 +119,16 @@ async function openZip(file: File, fallback: string): Promise<boolean> {
     // Not a zip after all: the same as one with nothing in it.
   }
   if (!docs.length) {
-    toast(t('That zip holds no documents Tiny Little Office can read.'));
+    toast(t('open-that-zip-holds-no-documents'));
     return false;
   }
   if (docs.length === 1) {
-    if (go(opens(docs[0]))) toast(t('Opened {name}', { name: docs[0].title || file.name }));
+    if (go(opens(docs[0]))) toast(t('open-opened-name', { name: docs[0].title || file.name }));
     return true;
   }
   if (keeping()) {
     keepDocuments(docs.map(kept));
-    toast(t('{n|# document kept|# documents kept}', { n: docs.length }));
+    toast(t('open-n-documents-kept', { n: docs.length }));
     return true;
   }
   void offer(docs);
@@ -149,28 +149,28 @@ async function offer(docs: InZip[]) {
     await setPrivate(false);
     keepDocuments(docs.map(kept));
     d.close();
-    toast(t('Saving in this browser: {n|# document kept|# documents kept}', { n: docs.length }));
+    toast(t('open-saving-in-this-browser-n', { n: docs.length }));
   };
   const open = (hash: string) => {
     d.close();
     go(hash);
   };
   const byApp = [...new Set(docs.map((x) => x.app))].map((app) => ({ def: appOf(app)!, docs: docs.filter((x) => x.app === app) }));
-  d.heading = t('{n|# document|# documents}', { n: docs.length });
-  d.body = html`<p class="to-hint">${t('Nothing is saved on this device now. Keep them here, or open one.')}</p>
+  d.heading = t('privacy-n-documents', { n: docs.length });
+  d.body = html`<p class="to-hint">${t('open-nothing-is-saved-on-this')}</p>
     ${byApp.map(
       ({ def, docs }) => html`<h3 class="to-zip-app">${def.name}</h3>
         <ul class="to-zip-docs">
           ${docs.map((x) => {
             const href = opens(x);
-            return html`<li><a href=${href} @click=${(e: Event) => (e.preventDefault(), open(href))}>${icon(def.icon, 16)}<span>${appOf(x.app)!.title(x.text) || x.title || t('Untitled')}</span></a></li>`;
+            return html`<li><a href=${href} @click=${(e: Event) => (e.preventDefault(), open(href))}>${icon(def.icon, 16)}<span>${appOf(x.app)!.title(x.text) || x.title || t('outline-untitled')}</span></a></li>`;
           })}
         </ul>`,
     )}
     <div class="to-zip-acts">
-      <button type="button" class="to-btn primary to-zip-keep" @click=${() => void keepThem()}>${icon(UI.device, 16)}<span>${t('Keep them on this device')}</span></button>
-      <button type="button" class="to-btn to-zip-first" @click=${() => open(opens(docs[0]))}><span>${t('Open the first')}</span></button>
-      <button type="button" class="to-btn to-zip-cancel" @click=${() => d.close()}><span>${t('Cancel')}</span></button>
+      <button type="button" class="to-btn primary to-zip-keep" @click=${() => void keepThem()}>${icon(UI.device, 16)}<span>${t('open-keep-them-on-this-device')}</span></button>
+      <button type="button" class="to-btn to-zip-first" @click=${() => open(opens(docs[0]))}><span>${t('open-first')}</span></button>
+      <button type="button" class="to-btn to-zip-cancel" @click=${() => d.close()}><span>${t('doc-cancel')}</span></button>
     </div>`;
   await d.show();
 }

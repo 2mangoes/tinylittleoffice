@@ -20,33 +20,33 @@ const cmd = commandsOf<A>('anim');
 /** The numbers of times the repeat menu offers (the motion's own, if another, is offered too). */
 const TIMES = [2, 3, 5, 10];
 /** A repeat, named. */
-export const loopName = (l: Loop): string => (l === 'forever' ? t('Loop forever') : l === 'once' ? t('Play once') : l === 'bounce' ? t('Back and forth') : t('{n} times', { n: l }));
+export const loopName = (l: Loop): string => (l === 'forever' ? t('anim-loop-forever') : l === 'once' ? t('anim-play-once') : l === 'bounce' ? t('anim-back-and-forth') : t('anim-n-times', { n: l }));
 /** The effects' names, by letter. */
 const FX_NAMES: Record<string, string> = {
-  i: 'Impact',
-  '3': '3D',
-  d: 'Shadow',
-  n: 'Neon',
-  o: 'Outline',
-  g: 'Rainbow',
-  m: 'Mirror',
-  w: 'Wobble',
-  b: 'Blur',
+  i: 'anim-impact',
+  '3': 'anim-3d',
+  d: 'anim-shadow',
+  n: 'anim-neon',
+  o: 'outline-outline',
+  g: 'anim-rainbow',
+  m: 'anim-mirror',
+  w: 'anim-wobble',
+  b: 'anim-blur',
 };
 const any = (a: A) => a.sels.length > 0;
 const joins = (a: A) => a.sels.every((i) => isLink(a.view.shapes[i]?.k));
 const moving = (a: A) => a.mode === 'move';
 const loop = (l: Loop) =>
-  cmd(`loop.${l}`, () => (typeof l === 'number' ? t('{n} times', { n: l }) : loopName(l)), {
-    hint: () => (l === 'bounce' ? t('Forward, then back') : undefined),
+  cmd(`loop.${l}`, () => (typeof l === 'number' ? t('anim-n-times', { n: l }) : loopName(l)), {
+    hint: () => (l === 'bounce' ? t('anim-forward-then-back') : undefined),
     where: ['menu:loop'],
     pressed: (a) => a.view.loop === l,
     does: (a) => a.act(setLoop(a.doc, l)),
   });
 
 const ANIM: Command<A>[] = [
-  cmd('play', (a) => (a?.playing ? t('Pause') : t('Play')), {
-    hint: 'Play or pause',
+  cmd('play', (a) => (a?.playing ? t('anim-pause') : t('anim-play')), {
+    hint: 'anim-play-or-pause',
     icon: Play,
     keys: 'Space',
     at: 'stage',
@@ -56,7 +56,7 @@ const ANIM: Command<A>[] = [
     pressed: (a) => a.playing,
     does: (a) => a.toggle(),
   }),
-  cmd('fx', 'Effects', { icon: Sparkles, menu: 'fx', where: ['in-doc'], when: moving, does: () => undefined }),
+  cmd('fx', 'anim-effects', { icon: Sparkles, menu: 'fx', where: ['in-doc'], when: moving, does: () => undefined }),
   ...EFFECTS.map((f) =>
     cmd(`fx.${f.letter}`, FX_NAMES[f.letter], {
       where: ['menu:fx'],
@@ -65,14 +65,14 @@ const ANIM: Command<A>[] = [
       does: (a) => a.toggleFx(f.letter),
     }),
   ),
-  cmd('settings', 'Settings', { icon: Settings2, hint: 'Length, speed and repeat', where: ['bar'], takesFocus: true, when: moving, does: (a) => a.openSettings() }),
-  cmd('frame', 'This frame', { icon: Ellipsis, menu: 'frame', where: ['in-doc'], when: moving, does: () => undefined }),
-  cmd('frame.duplicate', 'Duplicate this frame', { icon: CopyPlus, where: ['menu:frame'], disabled: (a) => a.view.frames >= MAX_FRAMES, does: (a) => a.duplicateFrame() }),
-  cmd('frame.earlier', 'A frame earlier', { icon: ArrowLeft, where: ['menu:frame'], disabled: (a) => a.frame <= 0, does: (a) => a.moveFrame(-1) }),
-  cmd('frame.later', 'A frame later', { icon: ArrowRight, where: ['menu:frame'], disabled: (a) => a.frame >= a.view.frames - 1, does: (a) => a.moveFrame(1) }),
-  cmd('frame.delete', 'Delete this frame', { icon: UI.trash, where: ['menu:frame'], disabled: (a) => a.view.frames <= MIN_FRAMES, does: (a) => a.removeFrame() }),
-  cmd('draw', 'Draw', { icon: PenTool, where: ['drawer'], document: true, pressed: (a) => !moving(a), does: (a) => a.setMode('draw') }),
-  cmd('move', 'Move', { icon: Play, where: ['drawer'], document: true, pressed: moving, does: (a) => a.setMode('move') }),
+  cmd('settings', 'anim-settings', { icon: Settings2, hint: 'anim-length-speed-and-repeat', where: ['bar'], takesFocus: true, when: moving, does: (a) => a.openSettings() }),
+  cmd('frame', 'anim-this-frame', { icon: Ellipsis, menu: 'frame', where: ['in-doc'], when: moving, does: () => undefined }),
+  cmd('frame.duplicate', 'anim-duplicate-this-frame', { icon: CopyPlus, where: ['menu:frame'], disabled: (a) => a.view.frames >= MAX_FRAMES, does: (a) => a.duplicateFrame() }),
+  cmd('frame.earlier', 'anim-frame-earlier', { icon: ArrowLeft, where: ['menu:frame'], disabled: (a) => a.frame <= 0, does: (a) => a.moveFrame(-1) }),
+  cmd('frame.later', 'anim-frame-later', { icon: ArrowRight, where: ['menu:frame'], disabled: (a) => a.frame >= a.view.frames - 1, does: (a) => a.moveFrame(1) }),
+  cmd('frame.delete', 'anim-delete-this-frame', { icon: UI.trash, where: ['menu:frame'], disabled: (a) => a.view.frames <= MIN_FRAMES, does: (a) => a.removeFrame() }),
+  cmd('draw', 'draw-draw', { icon: PenTool, where: ['drawer'], document: true, pressed: (a) => !moving(a), does: (a) => a.setMode('draw') }),
+  cmd('move', 'anim-move', { icon: Play, where: ['drawer'], document: true, pressed: moving, does: (a) => a.setMode('move') }),
   cmd('loop', (a) => loopName(a?.view.loop ?? 'forever'), { icon: Repeat, menu: 'loop', where: ['drawer'], document: true, when: moving, does: () => undefined }),
   loop('forever'),
   loop('once'),
@@ -84,7 +84,7 @@ const ANIM: Command<A>[] = [
     pressed: () => true,
     does: () => undefined,
   }),
-  cmd('key', 'Add a key here', {
+  cmd('key', 'anim-add-key-here', {
     icon: Key,
     keys: 'K',
     at: 'stage',
@@ -94,8 +94,15 @@ const ANIM: Command<A>[] = [
     disabled: (a) => a.sels.every((i) => hasKey(a.view, i, a.frame)),
     does: (a) => a.key(),
   }),
-  cmd('unkey', 'Remove this key', { icon: UI.close, where: ['context'], group: 'keys', when: any, disabled: (a) => !a.sels.some((i) => hasKey(a.view, i, a.frame)), does: (a) => a.removeKeyHere() }),
-  cmd('words', 'Edit the words', {
+  cmd('unkey', 'anim-remove-this-key', {
+    icon: UI.close,
+    where: ['context'],
+    group: 'keys',
+    when: any,
+    disabled: (a) => !a.sels.some((i) => hasKey(a.view, i, a.frame)),
+    does: (a) => a.removeKeyHere(),
+  }),
+  cmd('words', 'draw-edit-words', {
     icon: Tag,
     keys: 'Enter',
     at: 'stage',
@@ -105,26 +112,26 @@ const ANIM: Command<A>[] = [
     disabled: (a) => a.sels.length !== 1 || isLink(a.view.shapes[a.sel]?.k),
     does: (a) => a.editWords(),
   }),
-  cmd('duplicate', 'Duplicate', { icon: Copy, keys: 'Mod+D', at: 'stage', where: ['context'], group: 'edit', when: any, disabled: joins, does: (a) => a.duplicateSel() }),
-  cmd('copy', 'Copy', { at: 'stage', icon: UI.copy, keys: 'Mod+C', native: true, where: ['context'], group: 'clip', when: any, disabled: joins, does: (a) => a.copyOut(false) }),
-  cmd('cut', 'Cut', { at: 'stage', icon: Scissors, keys: 'Mod+X', native: true, where: ['context'], group: 'clip', when: any, disabled: joins, does: (a) => a.copyOut(true) }),
-  cmd('paste', 'Paste', { at: 'stage', icon: ClipboardPaste, keys: 'Mod+V', native: true, where: ['context'], group: 'clip', when: any, does: (a) => a.pasteIn() }),
-  cmd('delete', 'Delete', { icon: UI.trash, keys: 'Delete / Backspace', at: 'stage', where: ['context'], group: 'delete', when: any, does: (a) => a.removeSel() }),
-  cmd('step', 'A frame back, a frame on', {
+  cmd('duplicate', 'draw-duplicate', { icon: Copy, keys: 'Mod+D', at: 'stage', where: ['context'], group: 'edit', when: any, disabled: joins, does: (a) => a.duplicateSel() }),
+  cmd('copy', 'outline-copy', { at: 'stage', icon: UI.copy, keys: 'Mod+C', native: true, where: ['context'], group: 'clip', when: any, disabled: joins, does: (a) => a.copyOut(false) }),
+  cmd('cut', 'deck-cut', { at: 'stage', icon: Scissors, keys: 'Mod+X', native: true, where: ['context'], group: 'clip', when: any, disabled: joins, does: (a) => a.copyOut(true) }),
+  cmd('paste', 'outline-paste', { at: 'stage', icon: ClipboardPaste, keys: 'Mod+V', native: true, where: ['context'], group: 'clip', when: any, does: (a) => a.pasteIn() }),
+  cmd('delete', 'draw-delete', { icon: UI.trash, keys: 'Delete / Backspace', at: 'stage', where: ['context'], group: 'delete', when: any, does: (a) => a.removeSel() }),
+  cmd('step', 'anim-frame-back-frame-on', {
     keys: ', / .',
     at: 'stage',
     where: ['keys-only'],
     does: (a, e) => a.seek(a.frame + (e instanceof KeyboardEvent && (e.key === ',' || e.key === '<') ? -1 : 1)),
   }),
-  cmd('ends', 'The first frame, the last', { keys: 'Home / End', at: 'stage', where: ['keys-only'], does: (a, e) => a.seek(e instanceof KeyboardEvent && e.key === 'Home' ? 0 : a.view.frames - 1) }),
-  cmd('nudge', 'Nudge the shapes in hand; with none, step a frame', {
+  cmd('ends', 'anim-first-frame-last', { keys: 'Home / End', at: 'stage', where: ['keys-only'], does: (a, e) => a.seek(e instanceof KeyboardEvent && e.key === 'Home' ? 0 : a.view.frames - 1) }),
+  cmd('nudge', 'anim-nudge-shapes-in-hand-with', {
     keys: ['', 'Shift+', 'Mod+'].map((m) => ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].map((k) => m + k).join(' / ')).join(' / '),
     at: 'stage',
     where: ['keys-only'],
     does: (a, e) => e instanceof KeyboardEvent && a.arrowKey(e),
   }),
-  cmd('all', 'Select all: the words of the box, then everything', { keys: 'Mod+A', at: 'stage', where: ['keys-only'], does: (a) => a.selectAll() }),
-  cmd('out', 'Step out: close, collapse, let go', { keys: 'Escape', at: 'stage', where: ['keys-only'], does: (a) => a.stepOut() }),
+  cmd('all', 'common-select-all-words-of-box', { keys: 'Mod+A', at: 'stage', where: ['keys-only'], does: (a) => a.selectAll() }),
+  cmd('out', 'common-step-out-close-collapse-let', { keys: 'Escape', at: 'stage', where: ['keys-only'], does: (a) => a.stepOut() }),
 ];
 
 export default register(ANIM) as Command<A>[];

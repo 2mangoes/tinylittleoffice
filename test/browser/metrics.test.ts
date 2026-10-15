@@ -10,8 +10,12 @@ import { parse, plainText } from '../../src/doc/index.ts';
 import { layout } from '../../src/apps/diagram/view.ts';
 import { slidesOf } from '../../src/apps/deck/model.ts';
 import { fontIn } from './fonts.ts';
-import ur from '../../src/i18n/ur.ts';
-import yi from '../../src/i18n/yi.ts';
+import { flatMessages } from '../../scripts/ftl.ts';
+import urSource from '../../src/i18n/ur.ftl?raw';
+import yiSource from '../../src/i18n/yi.ftl?raw';
+
+const ur = flatMessages(urSource, 'ur');
+const yi = flatMessages(yiSource, 'yi');
 
 const words = async (): Promise<string[]> => {
   const out: string[] = [];
@@ -71,7 +75,7 @@ for (const lang of ['ru', 'uk', 'pl', 'bn', 'hi', 'ur', 'ko', 'zh-hant', 'zh-han
   });
 
 // Urdu as its readers see it (Paul, 2026-10-11): Nastaliq, the stylesheet's first choice under :lang(ur). The words of
-// the interface, every string of ur.ts, measured in Noto Nastaliq Urdu, come within the same tenth of the fallback's
+// the interface, every string of ur.ftl, measured in Noto Nastaliq Urdu, come within the same tenth of the fallback's
 // Arabic widths: Nastaliq is taller than Naskh, not wider (kit/draw/draw.ts SCRIPTS).
 test('ur: the interface’s own words in Nastaliq are within a tenth of the Arabic widths', () => {
   const ctx = document.createElement('canvas').getContext('2d')!;
@@ -84,7 +88,7 @@ test('ur: the interface’s own words in Nastaliq are within a tenth of the Arab
   expect(ours / real).toBeLessThan(1.1);
 });
 
-// Yiddish in Plex Sans Hebrew, the words of the interface (every string of yi.ts, its points among them), within the same
+// Yiddish in Plex Sans Hebrew, the words of the interface (every string of yi.ftl, its points among them), within the same
 // tenth of the fallback's sum, plain and bold: Chromium's Intl has none of its own to measure.
 test.each([
   ['plain', false],

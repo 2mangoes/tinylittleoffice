@@ -15,17 +15,17 @@ import { writeToDeck, writeToOutline } from './convert.ts';
 export default defineApp({
   id: 'write',
   get name() {
-    return t('Word Processor');
+    return t('write-word-processor');
   },
   get noun() {
-    return t('document');
+    return t('write-document-lowercase');
   },
   get group() {
-    return t('Words');
+    return t('write-words');
   },
   icon: PenLine,
   get blurb() {
-    return t('Words on a page: headings, lists, links and notes, a table that adds up, printed on letter or A4.');
+    return t('write-words-on-page-headings-lists');
   },
   blank: () => '',
   templates: () => import('./templates.ts').then((m) => m.templates()),
@@ -38,19 +38,19 @@ export default defineApp({
   exports: [
     {
       ext: 'docx',
-      label: () => t('Word (DOCX)'),
+      label: () => t('write-word-docx'),
       mime: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
       shows: null,
       build: async (doc, ctx) => docToDocx(parse(doc), ctx),
     },
-    { ext: 'md', label: () => t('Markdown'), mime: 'text/markdown;charset=utf-8', shows: 'text', build: (doc) => docToMarkdown(parse(doc)) },
-    { ext: 'rtf', label: () => t('Rich Text (RTF)'), mime: 'application/rtf', shows: null, build: async (doc, ctx) => utf8(docToRtf(parse(doc), ctx)) },
+    { ext: 'md', label: () => t('write-markdown'), mime: 'text/markdown;charset=utf-8', shows: 'text', build: (doc) => docToMarkdown(parse(doc)) },
+    { ext: 'rtf', label: () => t('write-rich-text-rtf'), mime: 'application/rtf', shows: null, build: async (doc, ctx) => utf8(docToRtf(parse(doc), ctx)) },
     // In place of the kit's pictures of the pages: the words still words, in a page anyone can read.
-    { ext: 'html', label: () => t('Web page (HTML)'), mime: 'text/html', shows: 'own', build: async (doc, ctx) => docToHtml(parse(doc), ctx) },
+    { ext: 'html', label: () => t('download-web-page-html'), mime: 'text/html', shows: 'own', build: async (doc, ctx) => docToHtml(parse(doc), ctx) },
   ],
   handoffs: [
-    { to: 'deck', label: () => t('Show as slides'), convert: writeToDeck },
-    { to: 'outline', label: () => t('Open as an outline'), convert: writeToOutline },
+    { to: 'deck', label: () => t('outline-show-as-slides'), convert: writeToDeck },
+    { to: 'outline', label: () => t('write-open-as-outline'), convert: writeToOutline },
   ],
   commands: () => import('./commands.ts'),
 });

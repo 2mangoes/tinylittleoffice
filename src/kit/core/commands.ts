@@ -12,9 +12,9 @@
  * - the shortcuts dialog and the drawer's search for anything (kit/ui/drawer.ts), which read the registry as the page runs;
  * - docs/editing.md's tables and the skill's list of commands (scripts/commands.ts, `npm run commands`);
  * - the graph lints (test/commands.test.ts): no key bound twice in one chain of scopes unless allowed, every bar
- *   command reachable by its keys or the bar's arrows, every label a string of en.ts, every command run by a test.
+ *   command reachable by its keys or the bar's arrows, every label a message of en.ftl, every command run by a test.
  *
- * A command's words are a key of en.ts, put through t() when drawn (a function of the context only where they say what
+ * A command's words are a message's id (src/i18n/en.ftl), put through t() when drawn (a function of the context only where they say what
  * is in hand), and a scope declares its commands through its maker (`commandsOf`), terse, since an app's load with it.
  * Rows that are data rather than commands (themes, inks, a new document of each app) are `data: true`: drawn and found
  * by the drawer's search, left out of the generated tables. Menus whose rows are the document's data and not commands
@@ -30,7 +30,7 @@
 import type { IconNode } from 'lucide';
 import { t } from './i18n.ts';
 
-/** Words a command shows: a key of en.ts, put through t() when drawn, or, where they say what is in hand, a function of the context. */
+/** Words a command shows: a message's id, put through t() when drawn, or, where they say what is in hand, a function of the context. */
 export type Words<C, R = string> = string | ((c?: C) => R);
 /** Words drawn in this context (none in hand: undefined). */
 export const say = <C, R extends string | undefined>(w: Words<C, R> | undefined, c?: C): R | string | undefined => (typeof w === 'string' ? t(w) : w?.(c));
@@ -42,7 +42,7 @@ export type Where = 'bar' | `menu:${string}` | 'context' | 'drawer' | 'in-doc' |
 export interface Command<C = any> {
   /** "write.title", "text.bold", "kit.undo": the scope, a dot, a name. */
   id: string;
-  /** Its words: a key of en.ts, or a function of the context where they say what is in hand ("Move slide up", "Pause"). */
+  /** Its words: a message's id ('bar-bold'), or a function of the context where they say what is in hand ("Move slide up", "Pause"). */
   label: Words<C>;
   icon?: IconNode;
   /** A second line or a tooltip's longer words, through t() (none, given the context, where there is nothing to add). */

@@ -169,7 +169,7 @@ export class ToCalEditor extends DocElement<CalView> {
     handle: '.cal-grip',
     nests: true,
     contextClass: 'cal-context',
-    label: t('Chosen tasks'),
+    label: t('common-chosen-tasks'),
     current: () => (this.view.gantt && this.view.items.some((i) => i.at === this.cur) ? this.cur : null),
     edit: (at, offset) => this.focusWords(at, offset),
     remove: (s) => this.removeTasks(s),
@@ -913,20 +913,20 @@ export class ToCalEditor extends DocElement<CalView> {
       ${v.gantt ? this.renderGantt() : this.mode === 'year' ? this.renderYear() : this.renderMonth()}
       ${this.rows.renderContext()}
       ${this.renderDialog()}
-      <to-dialog class="cal-zones" heading=${t('Time zone')} .body=${html`
-        <label class="cal-field"><span>${t('Show times in')}</span>
-          <select aria-label=${t('Time zone')} @change=${(e: Event) => {
+      <to-dialog class="cal-zones" heading=${t('cal-time-zone')} .body=${html`
+        <label class="cal-field"><span>${t('cal-show-times-in')}</span>
+          <select aria-label=${t('cal-time-zone')} @change=${(e: Event) => {
             const z = (e.target as HTMLSelectElement).value;
             if (isValidZone(z)) this.zone = z;
           }}>${(this.zones ?? []).map((z) => html`<option value=${z} ?selected=${z === this.zone}>${z.replace(/_/g, ' ')}</option>`)}</select>
         </label>
         <p class="to-hint">
-          ${docZone ? t('This calendar is written in {zone} time.', { zone: docZone.replace(/_/g, ' ') }) : t('This calendar names no time zone: its times are read in yours, {zone}.', { zone: v.tz.replace(/_/g, ' ') })}
+          ${docZone ? t('cal-this-calendar-is-written-in', { zone: docZone.replace(/_/g, ' ') }) : t('cal-this-calendar-names-no-time', { zone: v.tz.replace(/_/g, ' ') })}
         </p>
         <div class="to-row">
-          ${docZone && docZone !== this.zone ? btn({ label: t('Its own zone'), does: () => (this.zone = docZone) }) : nothing}
-          ${this.zone !== localZone() ? btn({ label: t('My zone'), does: () => (this.zone = localZone()) }) : nothing}
-          ${btn({ label: t('Done'), icon: UI.check, cls: 'primary', does: () => this.querySelector<ToDialog>('to-dialog.cal-zones')?.close() })}
+          ${docZone && docZone !== this.zone ? btn({ label: t('cal-its-own-zone'), does: () => (this.zone = docZone) }) : nothing}
+          ${this.zone !== localZone() ? btn({ label: t('cal-my-zone'), does: () => (this.zone = localZone()) }) : nothing}
+          ${btn({ label: t('editor-done'), icon: UI.check, cls: 'primary', does: () => this.querySelector<ToDialog>('to-dialog.cal-zones')?.close() })}
         </div>`}></to-dialog>`;
   }
 
@@ -968,11 +968,11 @@ export class ToCalEditor extends DocElement<CalView> {
               const chips = times.filter((s) => (s.kind === 'd' ? s.start <= day && day < s.start + s.dur : spanStartMs(s) < dayEnd && Math.max(spanEndMs(s), spanStartMs(s) + 1) > dayStart));
               const cls = ['cal-cell', p.m !== m ? 'out' : '', day === today ? 'today' : '', day === this.picked ? 'picked' : '', range && day >= range[0] && day <= range[1] ? 'range' : ''].join(' ');
               return html`<div class=${cls} role="gridcell" data-day=${day} @pointerdown=${(e: PointerEvent) => this.onCellDown(e, day)} @click=${(e: Event) => this.onCellClick(e, day)}>
-            <button type="button" class="cal-n" tabindex=${day === roving ? 0 : -1} aria-label=${t('New event on {day}', { day: dayFmt.format(day * 86400000) })} aria-current=${day === today ? 'date' : nothing}>${p.d}</button>
+            <button type="button" class="cal-n" tabindex=${day === roving ? 0 : -1} aria-label=${t('cal-new-event-on-day', { day: dayFmt.format(day * 86400000) })} aria-current=${day === today ? 'date' : nothing}>${p.d}</button>
             ${chips.map((s) => {
               const starts = s.kind === 'd' ? s.start === day : spanStartMs(s) >= dayStart;
               const ends = s.kind === 'd' ? s.start + s.dur - 1 === day : Math.max(spanEndMs(s), spanStartMs(s) + 1) <= dayEnd;
-              return html`<button type="button" class="cal-chip ${s.kind === 'd' ? 'day' : ''} ${starts ? '' : 'cont'} ${ends ? '' : 'more'}" data-at=${s.at} style="--c:${CAL_COLORS[s.color]?.hex ?? CAL_COLORS[''].hex}" title=${this.whenWords(s) + (s.repeat ? `, ${repeatText(s.repeat)}` : '')} @click=${() => this.open(s)}>${starts && s.kind === 't' ? html`<b>${this.chipTime(s)}</b> ` : nothing}${s.repeat && starts ? icon(RepeatIcon, 10, 'cal-rep') : nothing}${s.words || t('Untitled')}</button>`;
+              return html`<button type="button" class="cal-chip ${s.kind === 'd' ? 'day' : ''} ${starts ? '' : 'cont'} ${ends ? '' : 'more'}" data-at=${s.at} style="--c:${CAL_COLORS[s.color]?.hex ?? CAL_COLORS[''].hex}" title=${this.whenWords(s) + (s.repeat ? `, ${repeatText(s.repeat)}` : '')} @click=${() => this.open(s)}>${starts && s.kind === 't' ? html`<b>${this.chipTime(s)}</b> ` : nothing}${s.repeat && starts ? icon(RepeatIcon, 10, 'cal-rep') : nothing}${s.words || t('outline-untitled')}</button>`;
             })}
           </div>`;
             })}</div>`,
@@ -1005,15 +1005,15 @@ export class ToCalEditor extends DocElement<CalView> {
   /** The month as a list: each time of each span in it, in order; a tap opens it. */
   private renderAgenda(first: number, last: number) {
     const all = this.view.items.flatMap((s) => occurrences(s, first, last, this.repeatZone)).sort((a, b) => spanStartMs(a) - spanStartMs(b));
-    if (!this.view.items.length) return html`<p class="to-hint cal-empty">${t('Nothing on the calendar yet. Tap a day, or drag across several.')}</p>`;
-    return html`<ul class="cal-agenda" aria-label=${t('This month')}>
+    if (!this.view.items.length) return html`<p class="to-hint cal-empty">${t('cal-nothing-on-calendar-yet-tap')}</p>`;
+    return html`<ul class="cal-agenda" aria-label=${t('cal-this-month')}>
       ${
         all.length
           ? all.map(
               (s) =>
-                html`<li><button type="button" class="cal-agenda-item" data-at=${s.at} style="--c:${CAL_COLORS[s.color]?.hex ?? CAL_COLORS[''].hex}" @click=${() => this.open(s, `.cal-agenda-item[data-at="${s.at}"]`)}><span class="when">${this.whenWords(s)}</span><span class="what">${s.words || t('Untitled')}${s.repeat ? html` <small>${repeatText(s.repeat)}</small>` : nothing}</span></button></li>`,
+                html`<li><button type="button" class="cal-agenda-item" data-at=${s.at} style="--c:${CAL_COLORS[s.color]?.hex ?? CAL_COLORS[''].hex}" @click=${() => this.open(s, `.cal-agenda-item[data-at="${s.at}"]`)}><span class="when">${this.whenWords(s)}</span><span class="what">${s.words || t('outline-untitled')}${s.repeat ? html` <small>${repeatText(s.repeat)}</small>` : nothing}</span></button></li>`,
             )
-          : html`<li class="to-hint">${t('Nothing this month.')}</li>`
+          : html`<li class="to-hint">${t('cal-nothing-this-month')}</li>`
       }
     </ul>`;
   }
@@ -1064,7 +1064,7 @@ export class ToCalEditor extends DocElement<CalView> {
   private renderGantt() {
     const v = this.view;
     const bars = ganttBars(v);
-    if (!bars.length) return html`<p class="to-hint cal-empty">${t('No tasks yet. Insert a task.')}</p>`;
+    if (!bars.length) return html`<p class="to-hint cal-empty">${t('cal-no-tasks-yet-insert-task')}</p>`;
     const range = ganttRange(bars)!;
     const from = this.ganttFrom();
     const to = Math.max(range.to + 7, from + 28);
@@ -1075,10 +1075,10 @@ export class ToCalEditor extends DocElement<CalView> {
     const months = new Intl.DateTimeFormat(language(), { month: 'short', year: 'numeric', timeZone: 'UTC' });
     const drag = this.bar;
     return html`<div class="cal-gantt">
-      <ol class="cal-tasks" tabindex="-1" aria-label=${t('Tasks')} style="--head:${HEAD / 16}rem">
+      <ol class="cal-tasks" tabindex="-1" aria-label=${t('common-tasks')} style="--head:${HEAD / 16}rem">
         ${bars.map((b) => this.renderTask(b.item, b.parent, b.done))}
       </ol>
-      <div class="cal-gantt-scroll" tabindex="0" role="group" aria-label=${t('Chart, scrolls sideways')} @scroll=${(e: Event) => (this.scrolled = Math.floor((e.target as HTMLElement).scrollLeft / (z * remScale())))}>
+      <div class="cal-gantt-scroll" tabindex="0" role="group" aria-label=${t('cal-chart-scrolls-sideways')} @scroll=${(e: Event) => (this.scrolled = Math.floor((e.target as HTMLElement).scrollLeft / (z * remScale())))}>
         <svg class="cal-chart" width=${`${width / 16}rem`} height=${`${height / 16}rem`} font-size="11" viewBox="0 0 ${width} ${height}" aria-hidden="true" @pointermove=${this.onBarMove} @pointerup=${this.onBarUp} @pointercancel=${() => (this.bar = null)}>
           ${Array.from({ length: to - from }, (_, k) => {
             const day = from + k;
@@ -1117,13 +1117,13 @@ export class ToCalEditor extends DocElement<CalView> {
   private renderTask(i: Item, parent: boolean, done: number) {
     const at = i.at;
     const ranged = this.rows.has(at);
-    const name = i.words || t('Task');
+    const name = i.words || t('common-task');
     const ticked = i.done >= 100;
     return html`<li class="cal-trow ${parent ? 'parent' : ''} ${at === this.cur ? 'cur' : ''} ${ranged ? 'ranged' : ''} ${this.rows.drag?.id === at ? 'dragging' : ''}" data-at=${at} style="--d:${i.depth}" aria-describedby=${`cal-when-${at}`}>
-      <button type="button" class="cal-grip to-rows-handle" aria-pressed=${String(ranged)} aria-label=${t('Choose {task}', { task: name })} title=${t('Choose {task}', { task: name })}>${icon(GripVertical, 16)}</button>
-      <to-text class="cal-words" shape="line" .blocks=${this.blocksFor(i)} label=${name} placeholder=${t('Task')} @focusin=${() => (this.cur = at)} @text-ops=${(e: CustomEvent<TextOps>) => this.onWordsOps(i, e)} @text-enter=${(e: Event) => this.onWordsEnter(i, e)} @text-exit=${(e: CustomEvent<{ dir: 'back' | 'forward' }>) => this.onWordsExit(i, e)} @text-selectall=${(e: Event) => (e.stopPropagation(), this.rows.selectAll())}></to-text>
-      ${parent ? nothing : html`<button type="button" class="cal-tick" role="checkbox" aria-checked=${ticked ? 'true' : 'false'} aria-label=${t('Done: {task}', { task: name })} title=${t('Done')} @click=${() => this.edit(toggleDone(this.view, i))}>${ticked ? icon(Check, 16) : nothing}</button>`}
-      <span id=${`cal-when-${at}`} hidden>${this.whenWords(i)}${done ? `, ${t('{n}% done', { n: done })}` : ''}</span>
+      <button type="button" class="cal-grip to-rows-handle" aria-pressed=${String(ranged)} aria-label=${t('cal-choose-task', { task: name })} title=${t('cal-choose-task', { task: name })}>${icon(GripVertical, 16)}</button>
+      <to-text class="cal-words" shape="line" .blocks=${this.blocksFor(i)} label=${name} placeholder=${t('common-task')} @focusin=${() => (this.cur = at)} @text-ops=${(e: CustomEvent<TextOps>) => this.onWordsOps(i, e)} @text-enter=${(e: Event) => this.onWordsEnter(i, e)} @text-exit=${(e: CustomEvent<{ dir: 'back' | 'forward' }>) => this.onWordsExit(i, e)} @text-selectall=${(e: Event) => (e.stopPropagation(), this.rows.selectAll())}></to-text>
+      ${parent ? nothing : html`<button type="button" class="cal-tick" role="checkbox" aria-checked=${ticked ? 'true' : 'false'} aria-label=${t('common-done-task', { task: name })} title=${t('editor-done')} @click=${() => this.edit(toggleDone(this.view, i))}>${ticked ? icon(Check, 16) : nothing}</button>`}
+      <span id=${`cal-when-${at}`} hidden>${this.whenWords(i)}${done ? `, ${t('cal-n-done', { n: done })}` : ''}</span>
     </li>`;
   }
 
@@ -1131,7 +1131,7 @@ export class ToCalEditor extends DocElement<CalView> {
   private renderDialog() {
     const e = this.editing;
     const task = this.view.gantt;
-    const heading = e?.item ? (task ? t('Edit task') : t('Edit event')) : task ? t('New task') : t('New event');
+    const heading = e?.item ? (task ? t('cal-edit-task') : t('cal-edit-event')) : task ? t('cal-new-task') : t('cal-new-event');
     return html`<to-dialog class="cal-dialog" heading=${heading} @to-close=${this.onDialogClose} .body=${e ? this.renderFields(e) : nothing}></to-dialog>`;
   }
   private renderFields(e: Editing) {
@@ -1150,54 +1150,54 @@ export class ToCalEditor extends DocElement<CalView> {
       }
     };
     return html`<div class="cal-form" @keydown=${onKey}>
-      <div class="cal-field cal-what"><span>${t('What')}</span>
-        <to-text class="cal-label" shape="line" .blocks=${[e.block]} label=${t('What')} placeholder=${task ? t('Task') : t('Event')} @text-ops=${this.onLabelOps} @text-enter=${(ev: Event) => (ev.stopPropagation(), this.done())}></to-text>
+      <div class="cal-field cal-what"><span>${t('cal-what')}</span>
+        <to-text class="cal-label" shape="line" .blocks=${[e.block]} label=${t('cal-what')} placeholder=${task ? t('common-task') : t('cal-event')} @text-ops=${this.onLabelOps} @text-enter=${(ev: Event) => (ev.stopPropagation(), this.done())}></to-text>
       </div>
-      <label class="to-switch cal-allday"><input type="checkbox" .checked=${!timed} @change=${(ev: Event) => this.setAllDay((ev.target as HTMLInputElement).checked)} /><span class="to-switch-words">${t('All day')}</span></label>
-      <div class="cal-field"><span>${t('Starts')}</span>
+      <label class="to-switch cal-allday"><input type="checkbox" .checked=${!timed} @change=${(ev: Event) => this.setAllDay((ev.target as HTMLInputElement).checked)} /><span class="to-switch-words">${t('cal-all-day')}</span></label>
+      <div class="cal-field"><span>${t('cal-starts')}</span>
         <span class="cal-inputs">
-          <input type="date" aria-label=${t('Start date')} .value=${f.sd} @change=${(ev: Event) => this.setStart((ev.target as HTMLInputElement).value, f.st)} />
-          ${timed ? html`<input type="time" aria-label=${t('Start time')} .value=${f.st} @change=${(ev: Event) => this.setStart(f.sd, (ev.target as HTMLInputElement).value)} />` : nothing}
+          <input type="date" aria-label=${t('cal-start-date')} .value=${f.sd} @change=${(ev: Event) => this.setStart((ev.target as HTMLInputElement).value, f.st)} />
+          ${timed ? html`<input type="time" aria-label=${t('cal-start-time')} .value=${f.st} @change=${(ev: Event) => this.setStart(f.sd, (ev.target as HTMLInputElement).value)} />` : nothing}
         </span>
       </div>
-      <div class="cal-field"><span>${t('Ends')}</span>
+      <div class="cal-field"><span>${t('cal-ends')}</span>
         <span class="cal-inputs">
-          <input type="date" aria-label=${t('End date')} .value=${f.ed} min=${f.sd} @change=${(ev: Event) => this.setEnd((ev.target as HTMLInputElement).value, f.et)} />
-          ${timed ? html`<input type="time" aria-label=${t('End time')} .value=${f.et} @change=${(ev: Event) => this.setEnd(f.ed, (ev.target as HTMLInputElement).value)} />` : nothing}
+          <input type="date" aria-label=${t('cal-end-date')} .value=${f.ed} min=${f.sd} @change=${(ev: Event) => this.setEnd((ev.target as HTMLInputElement).value, f.et)} />
+          ${timed ? html`<input type="time" aria-label=${t('cal-end-time')} .value=${f.et} @change=${(ev: Event) => this.setEnd(f.ed, (ev.target as HTMLInputElement).value)} />` : nothing}
         </span>
       </div>
-      ${timed ? html`<p class="to-hint">${t('Times in {zone}', { zone: `${this.zone.replace(/_/g, ' ')} (${zoneAbbr(spanStartMs(s), this.zone)})` })}</p>` : nothing}
-      <div class="cal-field"><span>${t('Color')}</span>
-        <span class="cal-swatches" role="group" aria-label=${t('Color')}>${Object.entries(CAL_COLORS).map(([k, c]) => html`<button type="button" class="to-btn to-tool cal-swatch" aria-pressed=${String(s.color === k)} aria-label=${this.view.legend[k] ? `${c.name()}: ${this.view.legend[k]}` : c.name()} title=${this.view.legend[k] ?? c.name()} @click=${() => ((this.ink = k), this.patch({ color: k }))}><span class="to-swatch" style="--swatch:${c.hex}"></span></button>`)}</span>
+      ${timed ? html`<p class="to-hint">${t('cal-times-in-zone', { zone: `${this.zone.replace(/_/g, ' ')} (${zoneAbbr(spanStartMs(s), this.zone)})` })}</p>` : nothing}
+      <div class="cal-field"><span>${t('draw-color')}</span>
+        <span class="cal-swatches" role="group" aria-label=${t('draw-color')}>${Object.entries(CAL_COLORS).map(([k, c]) => html`<button type="button" class="to-btn to-tool cal-swatch" aria-pressed=${String(s.color === k)} aria-label=${this.view.legend[k] ? `${c.name()}: ${this.view.legend[k]}` : c.name()} title=${this.view.legend[k] ?? c.name()} @click=${() => ((this.ink = k), this.patch({ color: k }))}><span class="to-swatch" style="--swatch:${c.hex}"></span></button>`)}</span>
       </div>
-      <label class="cal-field"><span>${t('{color} stands for', { color: colour.name() })}</span><input type="text" class="cal-legend-name" maxlength="24" placeholder=${t('A name (yours, say)')} .value=${e.legend} @input=${(ev: Event) => this.editing && (this.editing = { ...this.editing, legend: (ev.target as HTMLInputElement).value })} /></label>
-      <label class="cal-field"><span>${t('Repeats')}</span>
+      <label class="cal-field"><span>${t('cal-color-stands-for', { color: colour.name() })}</span><input type="text" class="cal-legend-name" maxlength="24" placeholder=${t('cal-name-yours-say')} .value=${e.legend} @input=${(ev: Event) => this.editing && (this.editing = { ...this.editing, legend: (ev.target as HTMLInputElement).value })} /></label>
+      <label class="cal-field"><span>${t('cal-repeats')}</span>
         <select @change=${(ev: Event) => {
           const val = (ev.target as HTMLSelectElement).value;
           this.setRepeat(val === 'never' ? '' : (val as Every));
         }}>
-          <option value="never" ?selected=${!r}>${t('Never')}</option>
+          <option value="never" ?selected=${!r}>${t('cal-never')}</option>
           ${(Object.keys(EVERY) as Every[]).map((k) => html`<option value=${k} ?selected=${r?.every === k}>${everyText(k)}</option>`)}
         </select>
       </label>
       ${
         r
-          ? html`<div class="cal-field"><span>${t('Stops')}</span><span class="cal-inputs">
-            <input type="number" class="cal-times" min="1" max="999" inputmode="numeric" aria-label=${t('How many times')} placeholder="∞" .value=${r.count ? String(r.count) : ''} @change=${(ev: Event) => this.setRepeat(r.every, { count: +(ev.target as HTMLInputElement).value })} />
-            <span class="to-hint">${t('times, or on')}</span>
-            <input type="date" aria-label=${t('Last day')} .value=${r.until !== undefined ? dayString(r.until) : ''} @change=${(ev: Event) => this.setRepeat(r.every, { until: (ev.target as HTMLInputElement).value })} />
+          ? html`<div class="cal-field"><span>${t('cal-stops')}</span><span class="cal-inputs">
+            <input type="number" class="cal-times" min="1" max="999" inputmode="numeric" aria-label=${t('cal-how-many-times')} placeholder="∞" .value=${r.count ? String(r.count) : ''} @change=${(ev: Event) => this.setRepeat(r.every, { count: +(ev.target as HTMLInputElement).value })} />
+            <span class="to-hint">${t('cal-times-or-on')}</span>
+            <input type="date" aria-label=${t('cal-last-day')} .value=${r.until !== undefined ? dayString(r.until) : ''} @change=${(ev: Event) => this.setRepeat(r.every, { until: (ev.target as HTMLInputElement).value })} />
           </span></div>`
           : nothing
       }
       ${
         task || s.done
-          ? html`<label class="cal-field"><span>${t('Done %')}</span><input type="number" class="cal-done" min="0" max="100" step="10" inputmode="numeric" .value=${String(s.done)} @change=${(ev: Event) => this.patch({ done: Math.max(0, Math.min(100, Math.round(+(ev.target as HTMLInputElement).value) || 0)) })} /></label>`
+          ? html`<label class="cal-field"><span>${t('cal-done')}</span><input type="number" class="cal-done" min="0" max="100" step="10" inputmode="numeric" .value=${String(s.done)} @change=${(ev: Event) => this.patch({ done: Math.max(0, Math.min(100, Math.round(+(ev.target as HTMLInputElement).value) || 0)) })} /></label>`
           : nothing
       }
       <div class="to-row cal-actions">
-        ${e.item ? btn({ label: t('Delete'), icon: UI.trash, cls: 'cal-delete', does: this.removeDraft }) : nothing}
-        ${e.item ? btn({ label: t('Duplicate'), icon: CopyPlus, cls: 'cal-dup', does: this.duplicateDraft }) : nothing}
-        ${btn({ label: t('Done'), icon: UI.check, cls: 'primary cal-done-btn', does: this.done })}
+        ${e.item ? btn({ label: t('draw-delete'), icon: UI.trash, cls: 'cal-delete', does: this.removeDraft }) : nothing}
+        ${e.item ? btn({ label: t('draw-duplicate'), icon: CopyPlus, cls: 'cal-dup', does: this.duplicateDraft }) : nothing}
+        ${btn({ label: t('editor-done'), icon: UI.check, cls: 'primary cal-done-btn', does: this.done })}
       </div>
     </div>`;
   }

@@ -420,8 +420,9 @@ test('Mod+K opens the drawer with its search focused; the shortcuts list it by i
   await until(() => dialog.open && document.activeElement === dialog.querySelector('.to-find'));
   dialog.close();
   const { shortcutGroups } = await import('../../src/kit/core/keys.ts');
+  const { labelOf } = await import('../../src/kit/core/commands.ts');
   const page = shortcutGroups().find((g) => g.heading === 'This page')!;
-  expect(page.keys.find((c) => c.keys === 'Mod+K')!.label).toBe('Find app, doc, template, or command');
+  expect(labelOf(page.keys.find((c) => c.keys === 'Mod+K')!)).toBe('Find app, doc, template, or command');
   history.replaceState(null, '', location.pathname);
 });
 

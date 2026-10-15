@@ -1,22 +1,32 @@
 /**
- * Every string a person sees goes through t(). English is the key: t('Find app, template'). A language is a file
- * in src/i18n/ (en.ts is the list of every key, hand-edited; es.ts would map each key to Spanish), and the
- * browser chooses the one nearest navigator.languages, unless the link names one ("?lang=ht", kit/core/route.ts) or a choice
- * was made in the menu, which puts it in the link.
+ * Every string a person sees goes through t(), by its message's id: t('shell-menu'). A language is a Fluent file in
+ * src/i18n/ (en.ftl is the source of every message, in groups, with a comment where the English is ambiguous; es.ftl
+ * gives each id its Spanish), read by @fluent/bundle (Paul, 2026-10-15: "Use Fluent"), and the browser chooses the one
+ * nearest navigator.languages, unless the link names one ("?lang=ht", kit/core/route.ts) or a choice was made in the
+ * menu, which puts it in the link.
  *
- *   t('Downloaded {name}', { name })            a placeholder: {name}
- *   t('{n|one slide|# slides}', { n: 3 })       a plural: the forms of the word in the language's own order
- *                                               (zero, one, two, few, many, other: of those the language has;
- *                                               English has one and other), "#" the number as the language writes it
+ *   t('download-downloaded-name', { name })  a placeable: download-downloaded-name = Downloaded { $name }
+ *   t('example-n-slides', { n: 3 })          a plural, a select on the number in the language's own categories
+ *                                            (zero, one, two, few, many, other: those it has; English one and other),
+ *                                            { $n } the number as the language writes it:
+ *                                              example-n-slides = { $n ->
+ *                                                      [one] one slide
+ *                                                     *[other] { $n } slides
+ *                                                  }
  *
- * English ships in the app file; another language is a file of its own, fetched when chosen. Nothing here is a framework:
- * Intl.PluralRules picks the form, Intl.NumberFormat writes the number, Intl.DisplayNames names the language,
- * and Intl.Locale says which way it runs.
+ * English ships in the app file; another language is a file of its own, fetched when chosen. A message the language
+ * lacks is said in English, and an id English lacks is said as itself. Fluent picks a plural with Intl.PluralRules and
+ * writes a number with Intl.NumberFormat; Intl.DisplayNames names the language and Intl.Locale says which way it runs.
+ * Fluent's bidi isolation (U+2068 and U+2069 round each placeable) is off: the page's root takes the language's
+ * direction (`dir`), the placeables are the document's own words and numbers, and the marks would be characters in
+ * every string copied, measured and compared, where none were before.
  */
+import { FluentBundle, FluentResource, type FluentVariable } from '@fluent/bundle';
 
+/** The old dictionaries' shape (src/i18n/<code>.ts, English keys), kept only until test/i18n-fluent.test.ts has compared them and they go. */
 export type Strings = Record<string, string>;
-type Loader = () => Promise<{ default: Strings }>;
-
+/** A language's Fluent file, or a loader of one (Vite's ?raw import: the file's text as its default). */
+type Loader = () => Promise<string | { default: string }>;
 /**
  * The language chosen is a parameter of the link and is never written to the device, in any state (Paul, 2026-10-11:
  * "Why are we writing language at all instead of encoding the parameter in the link?"): no storage, no cookie. A link
@@ -24,20 +34,22 @@ type Loader = () => Promise<{ default: Strings }>;
  * the page makes; the visit holds it in memory as the person goes from page to page. A link without one follows the
  * browser's language.
  */
-const ORDER = ['zero', 'one', 'two', 'few', 'many', 'other'];
 // Languages written right to left, for a browser whose Intl.Locale cannot say.
 const RTL = ['ar', 'he', 'fa', 'ur', 'ps', 'sd', 'ug', 'yi', 'dv', 'ckb'];
 
-// Vite rewrites the glob call itself, not a typeof test of it; outside Vite the call throws and there are no files.
-const files: Record<string, Loader> = (() => {
+// Vite rewrites the glob calls themselves, not a typeof test of them; outside Vite (node running the code as it is: a
+// script, the command line from a checkout) the call throws and there are no files, and English is read from its file.
+const glob = <T>(get: () => Record<string, T>): Record<string, T> => {
   try {
-    return import.meta.glob(['../../i18n/*.ts', '!../../i18n/en.ts']) as Record<string, Loader>;
+    return get();
   } catch {
     return {};
   }
-})();
-const loaders = new Map<string, Loader>(Object.entries(files).map(([path, load]) => [path.replace(/^.*\/([^/]+)\.ts$/, '$1'), load]));
-const dicts = new Map<string, Strings>();
+};
+const files = glob(() => import.meta.glob<string>(['../../i18n/*.ftl', '!../../i18n/en.ftl'], { query: '?raw', import: 'default' }));
+const english = glob(() => import.meta.glob<string>('../../i18n/en.ftl', { query: '?raw', import: 'default', eager: true }));
+const loaders = new Map<string, Loader>(Object.entries(files).map(([path, load]) => [path.replace(/^.*\/([^/]+)\.ftl$/, '$1'), load]));
+const bundles = new Map<string, FluentBundle>();
 let current = 'en';
 const listeners = new Set<() => void>();
 
@@ -62,7 +74,7 @@ export const languageName = (code: string): string => {
  * the Latin names A to Z, then Cyrillic, Arabic, Devanagari, Bengali, Hangul and Han, as a reader of each finds theirs.
  */
 export const languages = (): string[] => {
-  const others = [...loaders.keys(), ...dicts.keys()].filter((c, i, all) => c !== 'en' && all.indexOf(c) === i);
+  const others = [...loaders.keys(), ...bundles.keys()].filter((c, i, all) => c !== 'en' && all.indexOf(c) === i);
   const name = new Map(others.map((c) => [c, languageName(c)]));
   const order = new Intl.Collator('und');
   return ['en', ...others.sort((a, b) => order.compare(name.get(a)!, name.get(b)!) || (a < b ? -1 : 1))];
@@ -75,61 +87,65 @@ export function onLanguage(cb: () => void): () => void {
   return () => listeners.delete(cb);
 }
 
-/** A dictionary given by hand (a test's in-memory Spanish), or a loader for one (a test's slow file). */
-export function register(code: string, strings: Strings | Loader) {
-  if (typeof strings === 'function') loaders.set(code, strings);
-  else dicts.set(code, strings);
+/** A language's messages, as a bundle: the file read, the bidi marks off (above). */
+function bundleOf(code: string, source: string): FluentBundle {
+  const b = new FluentBundle(code, { useIsolating: false });
+  b.addResource(new FluentResource(source));
+  return b;
 }
-
-/** A language's plural rules, the categories it has in ORDER's order, and its numbers: made once per language (each is costly to make, and a word count is plural on every keystroke). */
-const counting = new Map<string, { rules: Intl.PluralRules; have: string[]; format: (n: number) => string }>();
-function countingIn(code: string) {
-  let c = counting.get(code);
-  if (!c) {
-    let rules: Intl.PluralRules;
-    try {
-      rules = new Intl.PluralRules(code);
-    } catch {
-      rules = new Intl.PluralRules('en');
-    }
-    const cats = rules.resolvedOptions().pluralCategories;
-    let format: (n: number) => string;
-    try {
-      const nf = new Intl.NumberFormat(code);
-      format = (n) => nf.format(n);
-    } catch {
-      format = String;
-    }
-    c = { rules, have: ORDER.filter((x) => cats.includes(x as Intl.LDMLPluralRule)), format };
-    counting.set(code, c);
+/** en.ftl from the disk, where node runs this file as it is and no glob brought it (never in a page, which has the glob's). */
+function englishOnDisk(): string | undefined {
+  try {
+    const fs = (globalThis as { process?: { getBuiltinModule?(id: string): { readFileSync(path: string, enc: string): string } } }).process?.getBuiltinModule?.('node:fs');
+    const dir = (import.meta as { dirname?: string }).dirname;
+    return dir ? fs?.readFileSync(`${dir}/../../i18n/en.ftl`, 'utf8') : undefined;
+  } catch {
+    return undefined;
   }
-  return c;
 }
+const englishSource = Object.values(english)[0] ?? englishOnDisk();
+if (englishSource !== undefined) bundles.set('en', bundleOf('en', englishSource));
 
-const plural = (code: string, n: number, forms: string[]): string => {
-  const { rules, have, format } = countingIn(code);
-  const at = have.indexOf(rules.select(n));
-  const form = forms[at] ?? forms[forms.length - 1];
-  return form.replaceAll('#', format(n));
-};
+/** A language's file given by hand (a test's in-memory Spanish), or a loader of one (a test's slow file). */
+export function register(code: string, source: string | Loader) {
+  if (typeof source === 'function') loaders.set(code, source);
+  else bundles.set(code, bundleOf(code, source));
+}
 
 /**
- * In development only: the keys asked for in the language in use and not found there, so English showed
+ * In development only: the ids asked for in the language in use and not found there, so English showed
  * through. A test clears it, draws, and reads it; a build drops the recording.
  */
 export const missed = new Set<string>();
 
-/** The string in the language in use, its placeholders filled. */
-export function t(text: string, vars: Record<string, string | number> = {}): string {
-  const found = current === 'en' ? undefined : dicts.get(current)?.[text];
-  if (found === undefined && current !== 'en' && import.meta.env?.DEV) missed.add(text);
-  const s = found ?? text;
-  return s.replace(/\{(\w+)(?:\|([^}]*))?\}/g, (whole, name: string, forms?: string) => {
-    const v = vars[name];
-    if (v === undefined) return whole;
-    if (forms !== undefined) return plural(current, Number(v), forms.split('|'));
-    return typeof v === 'number' ? plural(current, v, ['#']) : v;
-  });
+/** The variables a message's plurals count: given as words, each is read as its number, as a count is. */
+const counted = new WeakMap<object, string[]>();
+function countedIn(value: object): string[] {
+  let names = counted.get(value);
+  if (!names) {
+    const walk = (p: unknown): string[] =>
+      Array.isArray(p)
+        ? p.flatMap((e) => (e?.type === 'select' ? [...(e.selector?.type === 'var' ? [e.selector.name as string] : []), ...e.variants.flatMap((v: { value: unknown }) => walk(v.value))] : []))
+        : [];
+    counted.set(value, (names = walk(value)));
+  }
+  return names;
+}
+
+/** The message in the language in use, its placeables filled; a variable not given shows as {name}, so the gap can be seen. */
+export function t(id: string, vars: Record<string, string | number> = {}): string {
+  const here = current === 'en' ? undefined : bundles.get(current);
+  const found = here?.hasMessage(id) ? here : undefined;
+  if (!found && current !== 'en' && import.meta.env?.DEV) missed.add(id);
+  const b = found ?? bundles.get('en');
+  const value = b?.getMessage(id)?.value;
+  if (!b || !value) return id;
+  if (typeof value === 'string') return value;
+  let args: Record<string, FluentVariable> = vars;
+  for (const name of countedIn(value)) if (typeof vars[name] === 'string') args = { ...args, [name]: Number(vars[name]) };
+  const errors: Error[] = [];
+  const out = b.formatPattern(value, args, errors);
+  return errors.length ? out.replace(/\{\$(\w+)\}/g, '{$1}') : out;
 }
 
 /** Which way a language runs. */
@@ -144,17 +160,18 @@ export function directionOf(code: string): 'ltr' | 'rtl' {
   }
 }
 
-/** The newest language asked for: a slower dictionary arriving after a newer choice is not put in force. */
+/** The newest language asked for: a slower file arriving after a newer choice is not put in force. */
 let wanted = '';
-/** A dictionary on its way: the shell draws once it is here, so a link in Kreyòl never flashes English first. */
+/** A language's file on its way: the shell draws once it is here, so a link in Kreyòl never flashes English first. */
 let loading: Promise<void> | null = null;
 async function use(code: string) {
   wanted = code;
-  if (code !== 'en' && !dicts.has(code)) {
+  if (code !== 'en' && !bundles.has(code)) {
     const load = loaders.get(code);
     if (!load) return;
     try {
-      dicts.set(code, (await load()).default);
+      const got = await load();
+      bundles.set(code, bundleOf(code, typeof got === 'string' ? got : got.default));
     } catch {
       // Not fetched (offline, its file never kept): the page stays in the language it was in.
       return;

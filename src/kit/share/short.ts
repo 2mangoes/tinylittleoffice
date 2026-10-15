@@ -15,10 +15,10 @@ export const TINIER = local && typeof location !== 'undefined' ? new URL(local, 
 /** The most ciphertext a short link may hold, in base64url characters: tinier's MAX_BYTES (tinier/tinier.ts), which a test holds equal to this. */
 export const SHORT_MAX = 16 * 1024;
 export const EXPIRIES: { seconds: number; name: () => string }[] = [
-  { seconds: 3600, name: () => t('An hour') },
-  { seconds: 86400, name: () => t('A day') },
-  { seconds: 7 * 86400, name: () => t('A week') },
-  { seconds: 30 * 86400, name: () => t('A month') },
+  { seconds: 3600, name: () => t('share-hour') },
+  { seconds: 86400, name: () => t('share-day') },
+  { seconds: 7 * 86400, name: () => t('share-week') },
+  { seconds: 30 * 86400, name: () => t('share-month') },
 ];
 
 /** What a short link lives for unless the person chose otherwise (and Saved remembers): a week. */
@@ -45,21 +45,13 @@ export function timeLeft(expires: number, now = Date.now()): Left {
 /** "This link expires in 12 days": the arrival banner's words. */
 export function expiresSentence(expires: number, now = Date.now()): string {
   const { n, unit } = timeLeft(expires, now);
-  return unit === 'day'
-    ? t('This link expires in {n|# day|# days}', { n })
-    : unit === 'hour'
-      ? t('This link expires in {n|# hour|# hours}', { n })
-      : t('This link expires in {n|# minute|# minutes}', { n });
+  return unit === 'day' ? t('share-this-link-expires-in-n', { n }) : unit === 'hour' ? t('share-this-link-expires-in-n-hours', { n }) : t('share-this-link-expires-in-n-minutes', { n });
 }
 /** "Expires in 7 days (16 October)": the Share dialog's words under a short link. */
 export function expiresLine(expires: number, now = Date.now(), lang?: string): string {
   const { n, unit } = timeLeft(expires, now);
   const date = new Date(expires).toLocaleDateString(lang || undefined, { day: 'numeric', month: 'long' });
-  return unit === 'day'
-    ? t('Expires in {n|# day|# days} ({date})', { n, date })
-    : unit === 'hour'
-      ? t('Expires in {n|# hour|# hours} ({date})', { n, date })
-      : t('Expires in {n|# minute|# minutes} ({date})', { n, date });
+  return unit === 'day' ? t('share-expires-in-n-days-date', { n, date }) : unit === 'hour' ? t('share-expires-in-n-hours-date', { n, date }) : t('share-expires-in-n-minutes-date', { n, date });
 }
 
 export interface Shortened {
@@ -91,12 +83,12 @@ export async function sealShortAt(link: string, rawKey: Uint8Array<ArrayBuffer>,
   const key = await crypto.subtle.importKey('raw', rawKey, 'AES-GCM', false, ['encrypt']);
   const c = new Uint8Array(await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, utf8(link)));
   const out = { c: toBase64Url(c), iv: toBase64Url(iv) };
-  if (out.c.length > SHORT_MAX) throw new Error(t('This document is too long for a short link.'));
+  if (out.c.length > SHORT_MAX) throw new Error(t('share-this-document-is-too-long'));
   return out;
 }
 function failed(res: Response): Error {
-  if (res.status === 429) return new Error(t('A hundred links a day from one address; try tomorrow.'));
-  return new Error(t('Could not shorten the link.'));
+  if (res.status === 429) return new Error(t('share-hundred-links-day-from-one'));
+  return new Error(t('share-could-not-shorten-link'));
 }
 
 /** A new short link for `link`, good for `seconds`. */

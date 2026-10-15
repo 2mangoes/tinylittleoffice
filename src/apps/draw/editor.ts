@@ -527,7 +527,7 @@ export class ToDrawEditor extends DocElement<DrawView> {
       }
       return;
     }
-    const shape: Shape = { k: this.tool, x: snap(x), y: snap(y), w: 0, h: 0, f: 0, text: this.tool === 't' ? t('Text') : this.tool === 'i' ? this.stamp : '' };
+    const shape: Shape = { k: this.tool, x: snap(x), y: snap(y), w: 0, h: 0, f: 0, text: this.tool === 't' ? t('sheet-text') : this.tool === 'i' ? this.stamp : '' };
     this.drag = { mode: 'draw', start: [snap(x), snap(y)], shape };
   }
 
@@ -994,7 +994,7 @@ export class ToDrawEditor extends DocElement<DrawView> {
     const p = this.view.pixels;
     if (!tileFilled(p)) return;
     this.edit([...setTile(this.doc, tileRef(p)), ...setGrid(this.doc, 0)]);
-    toast(t('The grid is now the background. Download gives it as a tile; any page can carry it as tile:.'));
+    toast(t('draw-grid-is-now-background-download'));
   }
 
   /* ---------- menus ---------- */
@@ -1010,16 +1010,16 @@ export class ToDrawEditor extends DocElement<DrawView> {
 
   /** One line under the bar saying what the hand in play does; always there, so nothing jumps. */
   private hint(): string {
-    if (this.view.grid) return t('Tap or drag to paint; the arrow keys move, Enter paints.');
-    if (this.tool === 'v' || this.pen.length) return t('Tap each corner; tap the first again, or press Enter, to close it.');
-    if (this.tool === 'f') return t('Drag to draw; end where you began to close it into a shape.');
-    if (this.tool === 'k') return this.joinFrom >= 0 ? t('Now the other shape: tap it, or choose it with the arrows and press Enter.') : t('Press on one shape and let go on another.');
-    if (this.tool === 'i') return t('Tap where the icon goes.');
-    if (this.tool !== 'select') return t('Drag on the canvas to draw it, or tap to place one.');
-    if (this.editing >= 0) return t('Type the words; Enter is done, Shift+Enter starts a new line, Escape puts them back.');
-    if (this.chosen.length > 1) return t('Drag to move them together; Shift and a tap adds a shape or takes it away.');
-    if (this.selected) return t('Drag to move; the corner handle resizes, the round one rotates; Enter or a double tap edits the words.');
-    return t('Tap a shape to select it, or drag around shapes to choose them; choose a tool to draw.');
+    if (this.view.grid) return t('draw-tap-or-drag-to-paint');
+    if (this.tool === 'v' || this.pen.length) return t('draw-tap-each-corner-tap-first');
+    if (this.tool === 'f') return t('draw-drag-to-draw-end-where');
+    if (this.tool === 'k') return this.joinFrom >= 0 ? t('draw-now-other-shape-tap-it') : t('draw-press-on-one-shape-and-let-go-on-another');
+    if (this.tool === 'i') return t('draw-tap-where-icon-goes');
+    if (this.tool !== 'select') return t('draw-drag-on-canvas-to-draw');
+    if (this.editing >= 0) return t('draw-type-words-enter-is-done');
+    if (this.chosen.length > 1) return t('draw-drag-to-move-them-together');
+    if (this.selected) return t('draw-drag-to-move-corner-handle');
+    return t('draw-tap-shape-to-select-it');
   }
 
   render() {
@@ -1027,7 +1027,7 @@ export class ToDrawEditor extends DocElement<DrawView> {
     return html`${v.grid ? this.renderPixelBar() : this.renderBar()}
       <p class="draw-hint to-hint">${this.hint()}</p>
       ${v.grid ? this.renderPixels() : this.renderCanvas()}
-      <to-context class="draw-context" .label=${t('The shape in hand')} .items=${this.contextItems()}></to-context>
+      <to-context class="draw-context" .label=${t('draw-shape-in-hand')} .items=${this.contextItems()}></to-context>
       ${this.renderAlt()}`;
   }
 
@@ -1042,7 +1042,7 @@ export class ToDrawEditor extends DocElement<DrawView> {
       ${TOOLS.map((x) => cmdTool(own(`tool.${x.id}`), this, { keep: false }))}
       ${cmdTool(own('icon'), this)}
       <to-menu class="draw-arrange" icon-only .label=${labelOf(own('arrange'), this)} .icon=${Layers} .items=${drawnIn(arrange, 'menu:arrange', this).map((it) => ({ ...it, disabled: it.disabled || !this.selected }))}></to-menu>
-      <button type="button" class="to-btn draw-alt ${v.alt ? 'has' : ''}" aria-label=${labelOf(alt, this)} title=${labelOf(alt, this)} @click=${() => run(alt, this)}>${v.alt ? icon(UI.check, 16) : icon(Accessibility, 18)}<span>${t('Alt')}</span></button>
+      <button type="button" class="to-btn draw-alt ${v.alt ? 'has' : ''}" aria-label=${labelOf(alt, this)} title=${labelOf(alt, this)} @click=${() => run(alt, this)}>${v.alt ? icon(UI.check, 16) : icon(Accessibility, 18)}<span>${t('draw-alt')}</span></button>
       ${cmdTool(own('zoomout'), this, { keep: false })} ${cmdTool(own('zoomin'), this, { keep: false })}
       ${this.undoTools()}
     </to-bar>`;
@@ -1106,16 +1106,14 @@ export class ToDrawEditor extends DocElement<DrawView> {
     const d = this.drag;
     const from = d?.mode === 'link' ? this.shapes[d.from] : null;
     const tile = v.tile;
-    return html`<div class="draw-wrap" data-spatial tabindex="0" role="application" aria-label=${t('Drawing canvas. V selects; R, E, D, L, A, T draw; arrows nudge; [ and ] rotate; Enter edits the words; Delete removes.')} @wheel=${(
-      e: WheelEvent,
-    ) => {
+    return html`<div class="draw-wrap" data-spatial tabindex="0" role="application" aria-label=${t('draw-drawing-canvas-v-selects-r')} @wheel=${(e: WheelEvent) => {
       // Ctrl (or a pinch on a trackpad) and the wheel zoom; the wheel alone scrolls as usual.
       if (!e.ctrlKey && !e.metaKey) return;
       e.preventDefault();
       this.zoomBy(-Math.sign(e.deltaY) * 0.25);
     }}>
       <div class="draw-stage" style="width:${this.zoom * 100}%">
-      <svg class="draw-canvas ${this.tool === 'select' ? '' : 'tool'} ${d ? 'held' : ''} ${this.zoom <= 1 ? 'fit' : ''}" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label=${v.alt || describeDrawing(v.shapes) || t('An empty drawing')}
+      <svg class="draw-canvas ${this.tool === 'select' ? '' : 'tool'} ${d ? 'held' : ''} ${this.zoom <= 1 ? 'fit' : ''}" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label=${v.alt || describeDrawing(v.shapes) || t('draw-empty-drawing')}
         @pointerdown=${this.onDown} @pointermove=${this.onMove} @pointerup=${this.onUp} @pointercancel=${this.onUp}
         @dblclick=${() => (this.pen.length ? this.closePen() : this.editing < 0 && this.chosen.length === 1 && this.openWords())}>
         <defs>
@@ -1142,7 +1140,7 @@ export class ToDrawEditor extends DocElement<DrawView> {
             : nothing
         }
       </svg>
-      <to-text class="draw-words" hidden shape="line" marks-only label=${t('The words of the shape')} .blocks=${this.wordsBlocks}
+      <to-text class="draw-words" hidden shape="line" marks-only label=${t('draw-words-of-shape')} .blocks=${this.wordsBlocks}
         @text-ops=${this.onWordsOps} @text-enter=${this.onWordsEnter} @text-selectall=${(e: Event) => e.stopPropagation()} @text-exit=${(e: Event) => e.stopPropagation()} @keydown=${this.onWordsKey} @focusout=${this.onWordsBlur}></to-text>
       </div>
     </div>`;
@@ -1156,8 +1154,8 @@ export class ToDrawEditor extends DocElement<DrawView> {
     p.rows.forEach((row, y) => {
       for (let x = 0; x < n; x++) if (TILE_INKS[row[x]]) cells.push(svg`<rect x=${x} y=${y} width="1.02" height="1.02" fill=${TILE_INKS[row[x]]} />`);
     });
-    return html`<div class="draw-wrap draw-pixel-wrap" tabindex="0" role="application" aria-label=${t('Pixel grid, {n} by {n}. The arrow keys move; Enter paints the square with the ink in hand.', { n })} aria-describedby="draw-cursor">
-      <svg class="draw-pixels ${this.pmode}" viewBox="0 0 ${n} ${n}" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" role="img" aria-label=${this.view.alt || t('Pixel art, {n} by {n}', { n })}
+    return html`<div class="draw-wrap draw-pixel-wrap" tabindex="0" role="application" aria-label=${t('draw-pixel-grid-n-by-n', { n })} aria-describedby="draw-cursor">
+      <svg class="draw-pixels ${this.pmode}" viewBox="0 0 ${n} ${n}" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" role="img" aria-label=${this.view.alt || t('draw-pixel-art-n-by-n', { n })}
         @pointerdown=${this.onPixelPointer} @pointermove=${this.onPixelPointer} @pointerup=${this.onPixelPointer} @pointercancel=${this.onPixelPointer}>
         <defs><pattern id="draw-cells" width="1" height="1" patternUnits="userSpaceOnUse"><path d="M1 0V1H0" fill="none" stroke="var(--to-border)" stroke-width=${0.6 / (640 / n)} /></pattern></defs>
         <rect width=${n} height=${n} fill="var(--to-surface)" />
@@ -1165,8 +1163,8 @@ export class ToDrawEditor extends DocElement<DrawView> {
         <rect width=${n} height=${n} fill="url(#draw-cells)" />
         <rect class="draw-cursor" x=${cx} y=${cy} width="1" height="1" fill="none" stroke="var(--to-accent)" stroke-width=${2 / (640 / n)} />
       </svg>
-      <span id="draw-cursor" class="sr-only">${t('Row {y}, column {x}: {ink}', { y: cy + 1, x: cx + 1, ink: t(PIXEL_INKS.find((i) => i.k === p.rows[cy]?.[cx])?.name ?? 'clear') })}</span>
-      <div class="draw-tile-preview" style="background-image:${tileCss(p, 64)}" role="img" aria-label=${t('As a repeating background')}></div>
+      <span id="draw-cursor" class="sr-only">${t('draw-row-y-column-x-ink', { y: cy + 1, x: cx + 1, ink: ((ink) => (ink ? t(ink.name) : t('draw-clear')))(PIXEL_INKS.find((i) => i.k === p.rows[cy]?.[cx])) })}</span>
+      <div class="draw-tile-preview" style="background-image:${tileCss(p, 64)}" role="img" aria-label=${t('draw-as-repeating-background')}></div>
     </div>`;
   }
 
@@ -1185,9 +1183,9 @@ export class ToDrawEditor extends DocElement<DrawView> {
   private renderAlt() {
     const draft = this.altDraft ?? '';
     const suggestion = describeDrawing(this.view.shapes);
-    return html`<to-dialog class="draw-alt-dialog" heading=${t('Alt text')} @to-close=${() => (this.altDraft = null)} .body=${html`
-      <label class="draw-alt-field"><span>${t('What does this drawing show?')}</span>
-        <textarea rows="3" .value=${draft} placeholder=${suggestion || t('A diagram of…')} @input=${(e: Event) => (this.altDraft = (e.target as HTMLTextAreaElement).value)} @keydown=${(
+    return html`<to-dialog class="draw-alt-dialog" heading=${t('draw-alt-text')} @to-close=${() => (this.altDraft = null)} .body=${html`
+      <label class="draw-alt-field"><span>${t('draw-what-does-this-drawing-show')}</span>
+        <textarea rows="3" .value=${draft} placeholder=${suggestion || t('draw-diagram-of')} @input=${(e: Event) => (this.altDraft = (e.target as HTMLTextAreaElement).value)} @keydown=${(
           e: KeyboardEvent,
         ) => {
           // Enter is Done (the alt text is one paragraph); Shift+Enter is left to the field.
@@ -1196,10 +1194,10 @@ export class ToDrawEditor extends DocElement<DrawView> {
           this.saveAlt();
         }}></textarea>
       </label>
-      <p class="to-hint">${t('Read aloud to people who cannot see it, and kept with the drawing wherever it is embedded or downloaded.')}</p>
+      <p class="to-hint">${t('draw-read-aloud-to-people-who')}</p>
       <div class="to-row">
-        ${suggestion ? html`<button type="button" class="to-btn" @click=${() => (this.altDraft = suggestion)}>${t('Describe from the shapes')}</button>` : nothing}
-        <button type="button" class="to-btn primary draw-alt-done" @click=${() => this.saveAlt()}>${icon(UI.check, 16)}<span>${t('Done')}</span></button>
+        ${suggestion ? html`<button type="button" class="to-btn" @click=${() => (this.altDraft = suggestion)}>${t('draw-describe-from-shapes')}</button>` : nothing}
+        <button type="button" class="to-btn primary draw-alt-done" @click=${() => this.saveAlt()}>${icon(UI.check, 16)}<span>${t('editor-done')}</span></button>
       </div>`}></to-dialog>`;
   }
 }

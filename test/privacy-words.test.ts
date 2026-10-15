@@ -4,9 +4,9 @@
 import { test, expect } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import en from '../src/i18n/en.ts';
+import { flatMessages } from '../scripts/ftl.ts';
 
-const source = readFileSync(join(import.meta.dirname, '..', 'src', 'i18n', 'en.ts'), 'utf8');
+const source = readFileSync(join(import.meta.dirname, '..', 'src', 'i18n', 'en.ftl'), 'utf8');
 
 test("no string promises what the browser's history makes untrue", () => {
   expect(source).not.toMatch(/no trace/i);
@@ -18,7 +18,7 @@ test("no string promises what the browser's history makes untrue", () => {
 });
 
 test('the words that say what is true are there', () => {
-  const keys = Object.keys(en);
+  const keys = Object.values(flatMessages(source, 'en'));
   expect(keys).toContain('Your browser’s history');
   expect(keys).toContain('Every document opened here, in full, unless it has a password.');
   // A short link is not promised to be recallable: it cannot be, and the Share dialog says so.

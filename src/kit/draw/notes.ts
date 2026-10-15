@@ -130,8 +130,8 @@ export class ToNotes extends LitElement {
             class="to-note-words"
             shape="line"
             .blocks=${h.blocks}
-            label=${t('Footnote {n}', { n: nth + 1 })}
-            placeholder=${t("The note's words")}
+            label=${t('editor-footnote-n', { n: nth + 1 })}
+            placeholder=${t('editor-notes-words')}
             @text-ops=${(e: CustomEvent<TextOps>) => this.onOps(nth, e)}
             @text-enter=${(e: Event) => (stop(e), this.back(nth))}
             @text-escape=${(e: Event) => (stop(e), e.preventDefault(), this.back(nth))}
@@ -144,7 +144,7 @@ export class ToNotes extends LitElement {
           ></to-text>
           ${
             this.backs
-              ? html`<button type="button" class="to-note-back" role="doc-backlink" aria-label=${t('Back to footnote {n} in the text', { n: nth + 1 })} title=${t('Back to the text')} @click=${() => this.back(nth)}>↩</button>`
+              ? html`<button type="button" class="to-note-back" role="doc-backlink" aria-label=${t('write-back-to-footnote-n-in', { n: nth + 1 })} title=${t('write-back-to-text')} @click=${() => this.back(nth)}>↩</button>`
               : nothing
           }
         </li>`,

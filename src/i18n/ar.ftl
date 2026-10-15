@@ -423,7 +423,7 @@ write-add-column-before = إضافة عمود قبله
 write-column-c-what-it-holds = العمود { $c }: ما يحتويه، سمِّه، أضف عمودًا أو أزله
 write-table-move-copy-or-take = الجدول: انقله أو انسخه أو أزله
 # The templates
-write-letter = رسالة
+write-a-letter = رسالة
 write-your-address-date-greeting-point = عنوانك والتاريخ والتحية والمقصد والخاتمة.
 write-meeting-notes = محضر اجتماع
 write-agenda-what-was-said-what = جدول الأعمال وما قيل وما تقرر ومن يفعل ماذا.
@@ -1602,71 +1602,73 @@ calc-x3-3x-its-derivative-and = x³ − 3x ومشتقتها، والمماس ا�
 calc-waves-adding-up = موجات تتراكم
 calc-sine-waves-summed-on-their = موجات جيبية تُجمع في طريقها إلى موجة مربعة.
 
-calc-templates-for-app = قوالب { $app }
-calc-app-templates = قوالب { $app }
-calc-templates-for-app-name = قوالب { $app }: { $name }
-calc-templates-are-not-saved-in = القوالب غير محفوظة في هذا المتصفح بعد. اتصل بالإنترنت لرؤيتها.
+## unsorted: added after the sections, each id named for where it is used
+
+home-templates-for-app = قوالب { $app }
+home-app-templates = قوالب { $app }
+home-templates-for-app-name = قوالب { $app }: { $name }
+home-templates-are-not-saved-in = القوالب غير محفوظة في هذا المتصفح بعد. اتصل بالإنترنت لرؤيتها.
 # The grip on a line of the tape; the bar under lines chosen whole.
 calc-choose-line-n-drag-it = اختر السطر { $n }: اسحبه لتحريكه
 calc-chosen-lines = الأسطر المحددة
 # The Spreadsheet: any column removed, the Option column, rich cells, a chart put in from Insert.
-calc-sheet-keeps-one-column = الورقة تحتفظ بعمود واحد
-calc-bold-italic-and-links = غامق ومائل وروابط
-calc-choices = خيارات
-calc-choices-for-ref = خيارات { $ref }
-calc-one-of-words-column-holds = إحدى الكلمات التي يحتويها العمود، أو كلمة جديدة
-calc-option = خيار
-calc-sheet-has-one = في الورقة واحد
-calc-documents = المستندات
-calc-find-app-template = ابحث عن تطبيق أو قالب
-calc-find-app-doc-template-or = ابحث عن تطبيق أو مستند أو قالب أو أمر
-calc-find-app-template-or-command = ابحث عن تطبيق أو قالب أو أمر
-calc-commands = الأوامر
-calc-new-noun-date-n = { $noun } جديد { $date } #{ $n }
-calc-nothing-by-that-name = لا شيء بهذا الاسم
-calc-pixels-n-n = بكسل { $n }×{ $n }
+sheet-keeps-one-column = الورقة تحتفظ بعمود واحد
+editor-bold-italic-and-links = غامق ومائل وروابط
+sheet-choices = خيارات
+sheet-choices-for-ref = خيارات { $ref }
+editor-one-of-words-column-holds = إحدى الكلمات التي يحتويها العمود، أو كلمة جديدة
+editor-option = خيار
+sheet-has-one = في الورقة واحد
+drawer-documents = المستندات
+common-find-app-template = ابحث عن تطبيق أو قالب
+drawer-find-app-doc-template-or = ابحث عن تطبيق أو مستند أو قالب أو أمر
+drawer-find-app-template-or-command = ابحث عن تطبيق أو قالب أو أمر
+drawer-commands = الأوامر
+share-new-noun-date-n = { $noun } جديد { $date } #{ $n }
+drawer-nothing-by-that-name = لا شيء بهذا الاسم
+draw-pixels-n-n = بكسل { $n }×{ $n }
 # Files, compare, posting and embedding: the agent and sharing surface.
-calc-mastodon-server-like-mastodon-social = خادم Mastodon، مثل mastodon.social
-calc-change = تغيير
-calc-changes = التغييرات
-calc-compare = مقارنة
-calc-copy-embed-code = نسخ شفرة التضمين
-calc-copy-show-link = نسخ رابط العرض
-calc-edit-this-deck = تحرير هذا العرض
-calc-embed = تضمين
-calc-embed-code-copied = تم نسخ شفرة التضمين
-calc-no-difference = لا فرق
-calc-not-link-to-tiny-little = ليس رابطًا إلى مستند في مكتب صغير جدًا
-calc-opened-name = تم فتح { $name }
-calc-opens-deck-already-presenting = يفتح العرض وهو يعرض بالفعل.
-calc-pdf-file = ملف PDF
-calc-pdf-sections-and-bullets = PDF: أقسام ونقاط
-calc-paste-second-link-to-see = الصق رابطًا ثانيًا لترى ما تغيّر.
-calc-paste-link-to-document-as = الصق رابط المستند كما هو الآن
-calc-paste-link-to-document-as-it-was = الصق رابط المستند كما كان
-calc-post = نشر
-calc-post-link = نشر الرابط
-calc-show-preview-of-first-page = إظهار معاينة للصفحة الأولى
-calc-picture-of-first-page-and = تبقى صورة الصفحة الأولى والعنوان مقروءة على خادمنا لمدة شهر ليتمكن موقع التواصل من جلبها. أما المستند نفسه فلا.
-calc-shared-without-preview-reason = تمت المشاركة دون معاينة: { $reason }
-calc-making-preview = جارٍ إنشاء المعاينة…
-calc-page-could-not-be-drawn = تعذّر رسم الصفحة
-calc-picture-is-over-400-kb = الصورة أكبر من 400 كيلوبايت
-calc-server-could-not-be-reached = تعذّر الوصول إلى الخادم
-calc-hundred-previews-day-from-one = مئة معاينة في اليوم من العنوان الواحد
-calc-server-refused-picture = رفض الخادم الصورة
-calc-put-in = المضاف:
-calc-swap = تبديل
-calc-taken-out = المحذوف:
-calc-that-file-is-not-words = هذا الملف ليس كلمات يستطيع مكتب صغير جدًا قراءتها.
-calc-that-file-is-too-large = هذا الملف أكبر من أن يكون مستندًا هنا.
-calc-first-link = الرابط الأول
-calc-pages-in-frame-on-another = الصفحات، في إطار على موقع آخر، مع رابط لفتحها هنا.
-calc-second-link = الرابط الثاني
-calc-two-links-to-documents-side = رابطان لمستندين جنبًا إلى جنب: ما غيّره الثاني معلَّم. لا شيء يغادر هذه الصفحة.
-calc-your-mastodon-server = خادم Mastodon الخاص بك
-calc-different-apps = تطبيقات مختلفة
-calc-n-blocks-taken-out = { $n ->
+share-mastodon-server-like-mastodon-social = خادم Mastodon، مثل mastodon.social
+share-change = تغيير
+compare-changes = التغييرات
+compare-compare = مقارنة
+share-copy-embed-code = نسخ شفرة التضمين
+share-copy-show-link = نسخ رابط العرض
+deck-edit-this-deck = تحرير هذا العرض
+share-embed = تضمين
+share-embed-code-copied = تم نسخ شفرة التضمين
+compare-no-difference = لا فرق
+compare-not-link-to-tiny-little = ليس رابطًا إلى مستند في مكتب صغير جدًا
+open-opened-name = تم فتح { $name }
+share-opens-deck-already-presenting = يفتح العرض وهو يعرض بالفعل.
+export-pdf-file = ملف PDF
+outline-pdf-sections-and-bullets = PDF: أقسام ونقاط
+compare-paste-second-link-to-see = الصق رابطًا ثانيًا لترى ما تغيّر.
+compare-paste-link-to-document-as = الصق رابط المستند كما هو الآن
+compare-paste-link-to-document-as-it-was = الصق رابط المستند كما كان
+share-post = نشر
+share-post-link = نشر الرابط
+share-show-preview-of-first-page = إظهار معاينة للصفحة الأولى
+share-picture-of-first-page-and = تبقى صورة الصفحة الأولى والعنوان مقروءة على خادمنا لمدة شهر ليتمكن موقع التواصل من جلبها. أما المستند نفسه فلا.
+share-shared-without-preview-reason = تمت المشاركة دون معاينة: { $reason }
+share-making-preview = جارٍ إنشاء المعاينة…
+share-page-could-not-be-drawn = تعذّر رسم الصفحة
+share-picture-is-over-400-kb = الصورة أكبر من 400 كيلوبايت
+share-server-could-not-be-reached = تعذّر الوصول إلى الخادم
+share-hundred-previews-day-from-one = مئة معاينة في اليوم من العنوان الواحد
+share-server-refused-picture = رفض الخادم الصورة
+compare-put-in = المضاف:
+compare-swap = تبديل
+compare-taken-out = المحذوف:
+open-that-file-is-not-words = هذا الملف ليس كلمات يستطيع مكتب صغير جدًا قراءتها.
+open-that-file-is-too-large = هذا الملف أكبر من أن يكون مستندًا هنا.
+compare-first-link = الرابط الأول
+share-pages-in-frame-on-another = الصفحات، في إطار على موقع آخر، مع رابط لفتحها هنا.
+compare-second-link = الرابط الثاني
+compare-two-links-to-documents-side = رابطان لمستندين جنبًا إلى جنب: ما غيّره الثاني معلَّم. لا شيء يغادر هذه الصفحة.
+share-your-mastodon-server = خادم Mastodon الخاص بك
+compare-different-apps = تطبيقات مختلفة
+compare-n-blocks-taken-out = { $n ->
         [zero] لا كتل محذوفة
         [one] كتلة واحدة محذوفة
         [two] كتلتان محذوفتان
@@ -1674,7 +1676,7 @@ calc-n-blocks-taken-out = { $n ->
         [many] { $n } كتلة محذوفة
        *[other] { $n } كتلة محذوفة
     }
-calc-n-put-in = { $n ->
+compare-n-put-in = { $n ->
         [zero] لا إضافات
         [one] إضافة واحدة
         [two] إضافتان
@@ -1682,81 +1684,81 @@ calc-n-put-in = { $n ->
         [many] { $n } إضافة
        *[other] { $n } إضافة
     }
-calc-tap-empty-space-for-branch = انقر مساحة فارغة لفرع؛ انقر فكرة للكتابة عليها، وEnter للتالية؛ اسحب واحدة على أخرى لوضعها تحتها؛ «وصل» يصل بين اثنتين عبر الخريطة.
+diagram-tap-empty-space-for-branch = انقر مساحة فارغة لفرع؛ انقر فكرة للكتابة عليها، وEnter للتالية؛ اسحب واحدة على أخرى لوضعها تحتها؛ «وصل» يصل بين اثنتين عبر الخريطة.
 # Restored around the document: search, Find in this document, the shortcuts and the apps' keys, Mod+S, the size of
 # everything, Add to home screen, another version kept here, where the link fits, Open in another app, the QR code
 # of this document, Insert narrowed by typing, Trip presenting, a seating chart's place cards
-calc-qr-code-of-this-document = رمز QR لهذا المستند
-calc-frame-back-frame-on = إطار للخلف، إطار للأمام
-calc-new-slide = شريحة جديدة
-calc-add-to-home-screen = إضافة إلى الشاشة الرئيسية
-calc-another-version = نسخة أخرى
-calc-normal-size = الحجم العادي
-calc-documents-found = المستندات التي وُجدت
-calc-edit-cell-caret-at-its = تحرير الخلية، والمؤشر في آخرها
-calc-everything-larger = كل شيء أكبر
-calc-everything-smaller = كل شيء أصغر
-calc-find-in-this-document = بحث في هذا المستند
-calc-fold-unfold = طي، بسط
-calc-indent-or-bring-out-in = إزاحة أو إبراز في قائمة؛ الخلية التالية في شبكة
-calc-keep-this-document-on-device = إبقاء هذا المستند على الجهاز
-calc-kept-on-this-device = محفوظ على هذا الجهاز
-calc-keyboard-shortcuts = اختصارات لوحة المفاتيح
-calc-left = اليسار
-calc-move-selected-items-up-or = نقل العناصر المحددة لأعلى أو لأسفل
-calc-no-document-here-has-those = لا مستند هنا فيه هذه الكلمات
-calc-not-found = لم يُعثر عليه
-calc-nothing-starts-q = لا شيء يبدأ بـ«{ $q }»
-calc-nothing-to-keep-yet = لا شيء للحفظ بعد
-calc-nudge-shapes-in-hand = دفع الأشكال الحالية
-calc-nudge-shapes-in-hand-with = دفع الأشكال الحالية؛ وإن لم يكن شيء فانتقل إطارًا
-calc-open-as-outline = فتح كمخطط تفصيلي
-calc-open-it = افتحه
-calc-place-cards = بطاقات الأماكن
-calc-play-or-pause = تشغيل أو إيقاف مؤقت
-calc-presenting-trip = عرض الرحلة
-calc-presenting-back = العرض: رجوع
-calc-presenting-next-line-or-slide = العرض: السطر أو الشريحة التالية
-calc-presenting-next-stop = العرض: المحطة التالية
-calc-presenting-stop-before = العرض: المحطة السابقة
-calc-print-place-cards = طباعة بطاقات الأماكن
-calc-print-place-cards-card-guest = طباعة بطاقات الأماكن: بطاقة لكل ضيف، ثماني في ورقة letter، للقص
-calc-save-in-browser-is-off = «الحفظ في المتصفح» متوقف: هذا المتصفح لا يحفظ أي مستندات. شغّله من القائمة لتحفظها هنا.
-calc-put-back-what-cell-held = إعادة ما كانت تحتويه الخلية
-calc-put-dated-rows-on-calendar = ضع الصفوف المؤرخة في تقويم
-calc-put-stops-on-calendar-day = ضع المحطات في تقويم، يومًا لكل محطة
-calc-search-your-documents = ابحث في مستنداتك
-calc-select-all-words-of-box = تحديد الكل: كلمات الصندوق ثم كل شيء
-calc-show-these-shortcuts = عرض هذه الاختصارات
+qr-code-of-this-document = رمز QR لهذا المستند
+anim-frame-back-frame-on = إطار للخلف، إطار للأمام
+deck-new-slide = شريحة جديدة
+drawer-add-to-home-screen = إضافة إلى الشاشة الرئيسية
+shell-another-version = نسخة أخرى
+keys-normal-size = الحجم العادي
+home-documents-found = المستندات التي وُجدت
+sheet-edit-cell-caret-at-its = تحرير الخلية، والمؤشر في آخرها
+keys-everything-larger = كل شيء أكبر
+keys-everything-smaller = كل شيء أصغر
+find-in-this-document = بحث في هذا المستند
+outline-fold-unfold = طي، بسط
+common-indent-or-bring-out-in = إزاحة أو إبراز في قائمة؛ الخلية التالية في شبكة
+keys-keep-this-document-on-device = إبقاء هذا المستند على الجهاز
+shell-kept-on-this-device = محفوظ على هذا الجهاز
+shell-keyboard-shortcuts = اختصارات لوحة المفاتيح
+share-left = اليسار
+common-move-selected-items-up-or = نقل العناصر المحددة لأعلى أو لأسفل
+home-no-document-here-has-those = لا مستند هنا فيه هذه الكلمات
+find-not-found = لم يُعثر عليه
+menu-nothing-starts-q = لا شيء يبدأ بـ«{ $q }»
+shell-nothing-to-keep-yet = لا شيء للحفظ بعد
+common-nudge-shapes-in-hand = دفع الأشكال الحالية
+anim-nudge-shapes-in-hand-with = دفع الأشكال الحالية؛ وإن لم يكن شيء فانتقل إطارًا
+write-open-as-outline = فتح كمخطط تفصيلي
+shell-open-it = افتحه
+diagram-place-cards = بطاقات الأماكن
+anim-play-or-pause = تشغيل أو إيقاف مؤقت
+trip-presenting-trip = عرض الرحلة
+deck-presenting-back = العرض: رجوع
+deck-presenting-next-line-or-slide = العرض: السطر أو الشريحة التالية
+trip-presenting-next-stop = العرض: المحطة التالية
+trip-presenting-stop-before = العرض: المحطة السابقة
+diagram-print-place-cards = طباعة بطاقات الأماكن
+diagram-print-place-cards-card-guest = طباعة بطاقات الأماكن: بطاقة لكل ضيف، ثماني في ورقة letter، للقص
+shell-save-in-browser-is-off = «الحفظ في المتصفح» متوقف: هذا المتصفح لا يحفظ أي مستندات. شغّله من القائمة لتحفظها هنا.
+sheet-put-back-what-cell-held = إعادة ما كانت تحتويه الخلية
+sheet-put-dated-rows-on-calendar = ضع الصفوف المؤرخة في تقويم
+trip-put-stops-on-calendar-day = ضع المحطات في تقويم، يومًا لكل محطة
+home-search-your-documents = ابحث في مستنداتك
+common-select-all-words-of-box = تحديد الكل: كلمات الصندوق ثم كل شيء
+keys-show-these-shortcuts = عرض هذه الاختصارات
 # same
-calc-a4 = A4
-calc-letter = ورق رسائل
-calc-back-to-words = العودة إلى النص
-calc-extend-selection = توسيع التحديد
-calc-presenting-whole-slide = العرض: الشريحة كاملة
-calc-first-last = الأول، الأخير
-calc-next-or-one-before = التالي أو السابق
-calc-this-browser-lets-page-paste = هذا المتصفح لا يسمح للصفحة باللصق إلا من لوحة المفاتيح: استخدم «لصق» فيها.
-calc-size-of-everything = حجم كل شيء
-calc-skip-to-apps = تخطّ إلى التطبيقات
-calc-skip-to-document = تخطّ إلى المستند
-calc-starting-q = يبدأ بـ«{ $q }»
-calc-step-out-close-collapse-let = الخروج: إغلاق، طي، ترك
-calc-first-frame-last = الإطار الأول، الأخير
-calc-next-stop = المحطة التالية
-calc-slide-before-slide-after-on = الشريحة السابقة، الشريحة التالية (على الشريط الجانبي)
-calc-stop-before = المحطة السابقة
-calc-this-device-keeps-another-version = يحتفظ هذا الجهاز بنسخة أخرى من «{ $title }»، من { $when }.
-calc-this-link-was-made-by = صُنع هذا الرابط في إصدار أحدث من مكتب صغير جدًا. أعد تحميل الصفحة للحصول عليه.
-calc-this-page = هذه الصفحة
-calc-check-or-uncheck-task = تعليم مهمة أو إلغاء تعليمها
-calc-to-add-tiny-little-office = لإضافة مكتب صغير جدًا إلى الشاشة الرئيسية: مشاركة، ثم إضافة إلى الشاشة الرئيسية.
-calc-too-long-for-qr-code = أطول من أن يناسب رمز QR: اختصر المستند، أو شارك رابطًا قصيرًا.
-calc-uses = يستخدم
-calc-where = أين
-calc-where-link-fits = أين يناسب الرابط
-calc-any-length = أي طول
-calc-n-documents-found = { $n ->
+write-a4 = A4
+write-letter = ورق رسائل
+common-back-to-words = العودة إلى النص
+common-extend-selection = توسيع التحديد
+deck-presenting-whole-slide = العرض: الشريحة كاملة
+trip-first-last = الأول، الأخير
+common-next-or-one-before = التالي أو السابق
+editor-this-browser-lets-page-paste = هذا المتصفح لا يسمح للصفحة باللصق إلا من لوحة المفاتيح: استخدم «لصق» فيها.
+drawer-size-of-everything = حجم كل شيء
+shell-skip-to-apps = تخطّ إلى التطبيقات
+shell-skip-to-document = تخطّ إلى المستند
+menu-starting-q = يبدأ بـ«{ $q }»
+common-step-out-close-collapse-let = الخروج: إغلاق، طي، ترك
+anim-first-frame-last = الإطار الأول، الأخير
+trip-next-stop = المحطة التالية
+deck-slide-before-slide-after-on = الشريحة السابقة، الشريحة التالية (على الشريط الجانبي)
+trip-stop-before = المحطة السابقة
+shell-this-device-keeps-another-version = يحتفظ هذا الجهاز بنسخة أخرى من «{ $title }»، من { $when }.
+shell-this-link-was-made-by = صُنع هذا الرابط في إصدار أحدث من مكتب صغير جدًا. أعد تحميل الصفحة للحصول عليه.
+keys-this-page = هذه الصفحة
+common-check-or-uncheck-task = تعليم مهمة أو إلغاء تعليمها
+drawer-to-add-tiny-little-office = لإضافة مكتب صغير جدًا إلى الشاشة الرئيسية: مشاركة، ثم إضافة إلى الشاشة الرئيسية.
+common-too-long-for-qr-code = أطول من أن يناسب رمز QR: اختصر المستند، أو شارك رابطًا قصيرًا.
+share-uses = يستخدم
+share-where = أين
+share-where-link-fits = أين يناسب الرابط
+share-any-length = أي طول
+home-n-documents-found = { $n ->
         [zero] لا مستندات وُجدت
         [one] وُجد مستند واحد
         [two] وُجد مستندان
@@ -1764,33 +1766,33 @@ calc-n-documents-found = { $n ->
         [many] وُجد { $n } مستندًا
        *[other] وُجد { $n } مستند
     }
-calc-n-of-count = { $n } من { $count }
-calc-n-over = زيادة { $n }
-calc-password-copied = تم نسخ كلمة المرور
-calc-guest = ضيف
-calc-name-line = سمِّ الخط
-calc-name-this-column = سمِّ هذا العمود
-calc-new-idea = فكرة جديدة
-calc-tap-empty-space-for-person = انقر مساحة فارغة لشخص؛ انقر واحدًا للكتابة عليه، وShift+Enter لدوره تحت الاسم، وEnter للتالي؛ اسحب واحدًا على آخر لوضعه تحته.
-calc-tap-empty-space-for-event = انقر مساحة فارغة لحدث: اكتب متى، ثم Shift+Enter، ثم ما جرى؛ السنوات والتواريخ تتباعد كما وقعت؛ والمدة شريط.
-calc-lanes-name = اسم المسار
-calc-when = متى
-calc-align-center = المحاذاة: توسيط
-calc-align-left = المحاذاة: يسار
-calc-align-right = المحاذاة: يمين
-calc-tap-person-to-type-on = انقر شخصًا للكتابة عليه، و+ بعد الاسم لشريكه، وShift+Enter لسنواته تحت الاسم؛ Enter للتالي؛ اسحب واحدًا على آخر لوضعه تحته؛ «وصل» يرسم خطًا منقطًا بين اثنين.
-calc-tap-empty-space-for-table = انقر مساحة فارغة لطاولة؛ انقر طاولة أو شخصًا للكتابة، وفاصلة بعد الاسم للضيف التالي؛ اسحب شخصًا إلى طاولة أخرى.
-calc-tap-inside-circles-to-add = انقر داخل الدوائر لإضافة شيء فيها، وفاصلة بعده للتالي؛ انقر اسم مجموعة لتغيير اسمها؛ اسحب شيئًا إلى دوائر أخرى.
-calc-copy-link-that-downloads-ext = نسخ رابط ينزّل ملف .{ $ext }
-calc-could-not-share-ext = تعذّرت مشاركة ملف .{ $ext }
-calc-could-not-show-ext = تعذّر عرض ملف .{ $ext }
-calc-download-ext = تنزيل ملف .{ $ext }
-calc-share-ext = مشاركة ملف .{ $ext }…
-calc-view-ext = عرض ملف .{ $ext }
-calc-keep-them-on-this-device = الحفظ على هذا الجهاز
-calc-nothing-is-saved-on-this = لا شيء يُحفظ على هذا الجهاز الآن. احفظها هنا أو افتح واحدًا منها.
-calc-open-first = فتح الأول
-calc-saving-in-this-browser-n = الحفظ في هذا المتصفح مفعّل: { $n ->
+common-n-of-count = { $n } من { $count }
+share-n-over = زيادة { $n }
+privacy-password-copied = تم نسخ كلمة المرور
+diagram-guest = ضيف
+outline-name-line = سمِّ الخط
+write-name-this-column = سمِّ هذا العمود
+diagram-new-idea = فكرة جديدة
+diagram-tap-empty-space-for-person = انقر مساحة فارغة لشخص؛ انقر واحدًا للكتابة عليه، وShift+Enter لدوره تحت الاسم، وEnter للتالي؛ اسحب واحدًا على آخر لوضعه تحته.
+diagram-tap-empty-space-for-event = انقر مساحة فارغة لحدث: اكتب متى، ثم Shift+Enter، ثم ما جرى؛ السنوات والتواريخ تتباعد كما وقعت؛ والمدة شريط.
+diagram-lanes-name = اسم المسار
+diagram-when = متى
+draw-align-center = المحاذاة: توسيط
+draw-align-left = المحاذاة: يسار
+draw-align-right = المحاذاة: يمين
+diagram-tap-person-to-type-on = انقر شخصًا للكتابة عليه، و+ بعد الاسم لشريكه، وShift+Enter لسنواته تحت الاسم؛ Enter للتالي؛ اسحب واحدًا على آخر لوضعه تحته؛ «وصل» يرسم خطًا منقطًا بين اثنين.
+diagram-tap-empty-space-for-table = انقر مساحة فارغة لطاولة؛ انقر طاولة أو شخصًا للكتابة، وفاصلة بعد الاسم للضيف التالي؛ اسحب شخصًا إلى طاولة أخرى.
+diagram-tap-inside-circles-to-add = انقر داخل الدوائر لإضافة شيء فيها، وفاصلة بعده للتالي؛ انقر اسم مجموعة لتغيير اسمها؛ اسحب شيئًا إلى دوائر أخرى.
+export-copy-link-that-downloads-ext = نسخ رابط ينزّل ملف .{ $ext }
+export-could-not-share-ext = تعذّرت مشاركة ملف .{ $ext }
+export-could-not-show-ext = تعذّر عرض ملف .{ $ext }
+export-download-ext = تنزيل ملف .{ $ext }
+export-share-ext = مشاركة ملف .{ $ext }…
+export-view-ext = عرض ملف .{ $ext }
+open-keep-them-on-this-device = الحفظ على هذا الجهاز
+open-nothing-is-saved-on-this = لا شيء يُحفظ على هذا الجهاز الآن. احفظها هنا أو افتح واحدًا منها.
+open-first = فتح الأول
+open-saving-in-this-browser-n = الحفظ في هذا المتصفح مفعّل: { $n ->
         [zero] لا مستندات محفوظة
         [one] مستند واحد محفوظ
         [two] مستندان محفوظان
@@ -1798,8 +1800,8 @@ calc-saving-in-this-browser-n = الحفظ في هذا المتصفح مفعّل
         [many] { $n } مستندًا محفوظًا
        *[other] { $n } مستند محفوظ
     }
-calc-that-zip-holds-no-documents = لا يحتوي ملف zip هذا على مستندات يستطيع مكتب صغير جدًا قراءتها.
-calc-n-documents-kept = { $n ->
+open-that-zip-holds-no-documents = لا يحتوي ملف zip هذا على مستندات يستطيع مكتب صغير جدًا قراءتها.
+open-n-documents-kept = { $n ->
         [zero] لا مستندات محفوظة
         [one] مستند واحد محفوظ
         [two] مستندان محفوظان

@@ -100,7 +100,7 @@ export class ToDialog extends LitElement {
   render() {
     return html`<dialog class="to-dialog" aria-labelledby=${this.uid} aria-describedby=${this.describedby || nothing} @close=${this.onClose} @click=${(e: Event) => e.target === this.dialog && this.close()}>
       <div class="to-dialog-inner">
-        <header class="to-dialog-head"><h2 id=${this.uid}>${this.heading}</h2><button type="button" class="to-btn to-tool" aria-label=${t('Close')} title=${t('Close')} @click=${() => this.close()}>${icon(UI.close)}</button></header>
+        <header class="to-dialog-head"><h2 id=${this.uid}>${this.heading}</h2><button type="button" class="to-btn to-tool" aria-label=${t('drawer-close')} title=${t('drawer-close')} @click=${() => this.close()}>${icon(UI.close)}</button></header>
         <div class="to-dialog-body">${this.open ? this.body : nothing}</div>
       </div>
     </dialog>`;

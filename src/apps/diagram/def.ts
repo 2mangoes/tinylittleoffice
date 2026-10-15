@@ -36,7 +36,7 @@ function diagramText(doc: Kernel): TextNode[] {
   const edges = edgesOf(doc);
   if (edges.length)
     out.push(
-      { k: 'h', level: 2, runs: [{ t: t('Connections') }] },
+      { k: 'h', level: 2, runs: [{ t: t('outline-connections') }] },
       { k: 'list', ord: false, items: edges.map((e) => ({ runs: [{ t: `${e.from} ${ARROWS[e.dir]} ${e.to}${e.label ? `: ${e.label}` : ''}` }] })) },
     );
   return out;
@@ -45,17 +45,17 @@ function diagramText(doc: Kernel): TextNode[] {
 export default defineApp({
   id: 'diagram',
   get name() {
-    return t('Diagram Maker');
+    return t('outline-diagram-maker');
   },
   get noun() {
-    return t('diagram');
+    return t('diagram-diagram');
   },
   get group() {
-    return t('Design');
+    return t('draw-design');
   },
   icon: Workflow,
   get blurb() {
-    return t('Mind maps, org charts, family trees, swimlanes, timelines, Venns, seating charts and networks, drawn from a few lines.');
+    return t('diagram-mind-maps-org-charts-family');
   },
   blank: () => '',
   templates: () => import('./templates.ts').then((m) => m.templates()),
@@ -72,10 +72,10 @@ export default defineApp({
     const d = layout(parse(doc));
     return d.steps?.length ?? d.shapes.length;
   },
-  exports: [{ ext: 'svg', label: () => t('Picture (SVG)'), mime: 'image/svg+xml', shows: 'own', build: (doc) => utf8(diagramSvg(parse(doc))) }],
+  exports: [{ ext: 'svg', label: () => t('draw-picture-svg'), mime: 'image/svg+xml', shows: 'own', build: (doc) => utf8(diagramSvg(parse(doc))) }],
   // Its picture as shapes to move about by hand.
   handoffs: [
-    { to: 'outline', label: () => t('Show as outline'), convert: (doc) => diagramToOutline(parse(doc)) },
-    { to: 'draw', label: () => t('Open in {app}', { app: lookup.appOf('draw')?.name ?? t('Drawing Tool') }), convert: (doc) => toDrawing(parse(doc)) },
+    { to: 'outline', label: () => t('outline-show-as-outline'), convert: (doc) => diagramToOutline(parse(doc)) },
+    { to: 'draw', label: () => t('write-open-in-app', { app: lookup.appOf('draw')?.name ?? t('draw-drawing-tool') }), convert: (doc) => toDrawing(parse(doc)) },
   ],
 });
