@@ -1043,9 +1043,8 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
       <div class="ol-statuses-list" role="list">
         ${draft.map(
           (s, i) => html`<div class="ol-statuses-row" role="listitem">
-            <input type="text" .value=${s.name} aria-label=${t('Name')} autocomplete="off" spellcheck="false" @input=${(e: Event) => set(i, { name: (e.target as HTMLInputElement).value })} />
+            <input type="text" class="ol-status-in" style="--chip:${STATUS_COLORS[s.word] ?? STATUS_COLORS.gray}" .value=${s.name} aria-label=${t('Name')} autocomplete="off" spellcheck="false" @input=${(e: Event) => set(i, { name: (e.target as HTMLInputElement).value })} />
             <to-menu class="ol-color-menu" icon-only caret .swatch=${STATUS_COLORS[s.word]} .label=${COLOR_NAMES[s.word]()} .items=${colors.map((w) => ({ label: COLOR_NAMES[w](), swatch: STATUS_COLORS[w], checked: w === s.word, does: () => set(i, { word: w }) }))}></to-menu>
-            <span class="ol-status to-chip tint" style="--chip:${STATUS_COLORS[s.word] ?? STATUS_COLORS.gray}" aria-hidden="true">${s.name || '…'}</span>
             ${tool({ label: t('Remove'), icon: UI.close, does: () => (this.statusDraft = draft.filter((_, k) => k !== i)) })}
           </div>`,
         )}
