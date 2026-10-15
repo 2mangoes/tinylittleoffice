@@ -43,7 +43,7 @@ shell-turn-on-save-in-browser = היטן אין בראוזער און גיין
 # en: 634bae7c8177155bc24961f3493f425b66e88c16
 shell-go-without = גיין אן אפהיטן
 # en: ee7a39c93b7018b92bcff5511a92081df68dd3db
-shell-save-in-browser-is-on = היטן אין בראוזער איז אנגעצונדן. דאקומענטן וואס איר עפנט ווערן דא געהיט. לעשט עס אויס אינעם מעניו.
+shell-save-in-browser-is-on = היטן אין בראוזער איז אנגעשטעלט. דאקומענטן וואס איר עפנט ווערן דא געהיט. שטעלט עס אפ אינעם מעניו.
 # en: 97c669558589e3b0cf0917cb9caece8844ba65d9
 shell-another-version = אן אנדער געהיטע ווערסיע
 # en: 87222e82bf5d208052c68fa66c93d131fa18fc67
@@ -55,7 +55,7 @@ shell-nothing-to-keep-yet = נאך גארנישט אפצוהיטן
 # en: 8c00f9130260156b1612126a7cf9a23bb3c553d6
 shell-open-it = עפענען
 # en: ef6e207cc7cea57220ad9a73fc6040b0085bf63e
-shell-save-in-browser-is-off = היטן אין בראוזער איז אויסגעלאשן, איז גארנישט נישט געהיט. צינדט עס אן אינעם מעניו.
+shell-save-in-browser-is-off = היטן אין בראוזער איז אפגעשטעלט, דעריבער ווערט גארנישט געהיט. שטעלט עס אן אינעם מעניו.
 # en: 3939d97295147954c5488340b1f427ebbfa51e69
 shell-skip-to-apps = שפרינגען צו די עפס
 # en: 286b3810e407b3cef40b582c8ca4b373a58445bf
@@ -125,11 +125,11 @@ drawer-default-name = סטאנדארט: { $name }
 # en: 1660227e6037ceaaaacebea7ba86a1f92071bd39
 drawer-save-in-browser = היטן אין בראוזער
 # en: dd8082be77e9211f033a55131c1a6360f12b0e1d
-drawer-what-is-this = וואָס איז דאָס?
+drawer-what-is-this = וואס איז דאס?
 # en: fa7684f5e02290b9144d9d981add78ff873eb052
-drawer-turn-on-to-save-files = צינדט אן כדי צו היטן פיילס אין אייער בראוזער.
+drawer-turn-on-to-save-files = שטעלט אן כדי צו היטן פיילס אין אייער בראוזער.
 # en: af191ab94c0b2f93d5e90820805b9c7f419ce80d
-drawer-turn-off-to-remove-all = לעשט אויס כדי אראפצונעמען אלע פיילס און סעטינגס.
+drawer-turn-off-to-remove-all = שטעלט אפ כדי אראפצונעמען אלע פיילס און סעטינגס.
 # en: db5f691e51583d80782a9c51e78f01c49ccefd02
 common-nothing-saved-in-this-browser = גארנישט געהיט אין דעם בראוזער
 # en: 15f47f2fab9454be9fab70ba4bd89293fdc40c0a
@@ -164,7 +164,7 @@ drawer-if-you-find-bugs-please = אויב איר געפינט פעלערן, בי
 # en: c6651994b242228b647fbbd2a83eccefd957abca
 drawer-github-repository = GitHub רעפאזיטארי
 # en: 0fe421942f09b119f9019d2de286f5a43eefd4f3
-drawer-all-of-these-notes-these = אלע די נאטיצן, די צייכענונגען און די זאצן געשריבן מיט א מארקער פארבלאסן מיט דער צייט. נאר דאס פארגייענדיקע בלייבט.
+drawer-all-of-these-notes-these = אלע די נאטיצן, די צייכענונגען און די זאצן געשריבן מיט א מארקער ווערן בלאס מיט דער צייט. נאר דאס פארגייענדיגע בלייבט.
 # en: 45efc495ed63ce777a86a3f8a9f4475269fb7542
 drawer-eugene-ionesco-book = אזשען יאנעסקא, { $book }
 # en: be1c21d6fe0ae49ef2cea2d317a4967da26d015c
@@ -203,7 +203,7 @@ leave-not-secure-address-what-you = נישט קיין זיכערער (HTTPS) א�
 # en: 003e4888e77a22c782047c7d26d028c5eca46f1c
 leave-whole-address = די גאנצע אדרעס:
 # en: fdb31cf3fb383190c6864d4effd5fd6041b330cb
-leave-someone-wrote-this-link-into = דעם לינק האט צוגעלייגט ווער עס האט געשריבן דעם דאקומענט. דער טעקסט פון א לינק קען זיך אונטערשיידן פון זיין אדרעס. גייט ווייטער נאר אויב איר טרויט אים.
+leave-someone-wrote-this-link-into = דעם לינק האט צוגעלייגט ווער עס האט געשריבן דעם דאקומענט. דער טעקסט פון א לינק קען זיך אונטערשיידן פון זיין אדרעס. גייט ווייטער נאר אויב איר גלייבט אים.
 # en: 2e0b45f2a456e8db55f08d7b65e87593a3e9a140
 leave-go = גיין
 # en: c0f31f8a18b087fc577cbc50e9d37c68cb16c9ae
@@ -248,7 +248,7 @@ share-expires-in-n-minutes-date = גייט אויס אין { $n ->
        *[other] { $n } מינוט
     } ({ $date })
 # en: 0ef0475467d903f5adb0297bbc7979b7b0792d0c
-share-opens-as-pages-to-read = עפנט זיך ווי זייטן צו ליינען
+share-opens-as-pages-to-read = עפנט זיך ווי זייטן צו לייענען
 # en: 8744400a02796b44742f8f5e5b66216821eab90d
 share-opens-in-editor = עפנט זיך אינעם רעדאקטאר
 # en: 7fbbb75c4e853ef0e42da5fe316344fdf1a6143c
@@ -328,7 +328,7 @@ share-month = א חודש
 # en: 38c22f9dbdb41d2131b4324b7722c45a1f543420
 share-make-short-link = מאכן א קורצן לינק
 # en: 94d7d8ee473f817fa4b57737e7a01ec3cd13d4d4
-share-making = מען שאפט…
+share-making = מען מאכט…
 # en: 1c6c031b40782efe6b28678fc42d5569cc11e029
 share-hundred-links-day-from-one = די גרענעץ איז דערגרייכט: 100 קורצע לינקס א טאג פון איין אדרעס. פרובירט מארגן נאכאמאל.
 # en: 0b5140c5b10a2b84301b5ef43056b7d89bd2187c
@@ -351,7 +351,7 @@ share-new-noun-date-n = { $noun } { $date } #{ $n }
 # en: 1c2edb3104c7f2adce9ad2a77f3622d1beb0059a
 share-mastodon-server-like-mastodon-social = א Mastodon סערווער, ווי mastodon.social
 # en: 64fbd995d3b6b156ee26ae3c03e6516434c34c12
-share-change = ענדערונג
+share-change = טוישן
 # en: 2a07ce9a22d8e5dc1031e531518f04e50855319f
 share-copy-embed-code = קאפירן איינשטעל־קאוד
 # en: c3e1c83e5b4172d3c738e37cb69b76d93ce49b8b
@@ -369,7 +369,7 @@ share-post-link = פאוסטן דעם לינק
 # en: 82584c3ce64f57a310db6846c65628266a88c44d
 share-show-preview-of-first-page = ווייזן א פרעוויו פון דער ערשטער זייט
 # en: ac1624e1fa626a4ba8b8ee419f0cf118d53fa480
-share-picture-of-first-page-and = א בילד פון דער ערשטער זייט און דער טיטל ווערן געהאלטן ליינבאר אויף אונזער סערווער א חודש לאנג כדי די נעטווערק זאל זיי קענען נעמען. דער דאקומענט אליין נישט.
+share-picture-of-first-page-and = א בילד פון דער ערשטער זייט און דער טיטל ווערן געהאלטן לייענבאר אויף אונזער סערווער א חודש לאנג כדי די נעטווערק זאל זיי קענען נעמען. דער דאקומענט אליין נישט.
 # en: 6a46f4b4b3f001e64ef9652412aa1ddbdeabc489
 share-shared-without-preview-reason = געשעירט אן א פרעוויו: { $reason }
 # en: 4def5924266f682e91bcdff1e5ba510a20a36902
@@ -389,7 +389,7 @@ share-pages-in-frame-on-another = די זייטן, אין א ראם אויף א�
 # en: 9377de06278eacbdf4a297a82b8eb9aa3d4220c0
 share-your-mastodon-server = אייער Mastodon סערווער
 # en: 8ae1c34bd37fad49cc5f8e02da648a78e89c3ed8
-share-left = לינקס
+share-left = בלייבט
 # en: 62be4731dedfbbc70aa7fa30d6649d816af8ca4b
 share-uses = נוצט
 # en: 525f61b6729229b1a8854a9e50bcaa52ea96b131
@@ -415,7 +415,7 @@ privacy-enter-password-to-open-this = שרייבט אריין דעם פאסוו�
 # en: 554393a215e479d023a30091a1394f7ca57690e1
 privacy-forget-everything = אויסמעקן אלעס
 # en: 715727cdd46f1bd0703c9e846fcdd4f369ef8313
-privacy-preview-sent-with-link-to = א פרעוויו וואס מען שיקט מיט א לינק צו א נעטווערק איז א בילד פון דער ערשטער זייט, דער טיטל און די ערשטע ווערטער, וואס מען קען ליינען אויף אונזער סערווער א חודש לאנג. דער דאקומענט אליין גייט קיינמאל נישט אהין.
+privacy-preview-sent-with-link-to = א פרעוויו וואס מען שיקט מיט א לינק צו א נעטווערק איז א בילד פון דער ערשטער זייט, דער טיטל און די ערשטע ווערטער, וואס מען קען לייענען אויף אונזער סערווער א חודש לאנג. דער דאקומענט אליין גייט קיינמאל נישט אהין.
 # en: a584ece11551d9b1a79856743236c51aba50c44f
 privacy-forget-everything-this-site-keeps = אויסמעקן אלעס וואס איז געהיט אין דעם בראוזער און אויפהערן אפהיטן? אייערע דאקומענטן זענען נאך אלץ דא אין זייערע לינקס.
 # en: a798882f1c31099bb9500e2da62c0874d8dbed78
@@ -461,7 +461,7 @@ privacy-short-links-made-here-until = די קורצע לינקס וואס זענ
 # en: b556bf027f9123d39581babef7e15564c24866da
 privacy-their-names-and-links-for = נעמען און לינקס, וואס ווערן געוויזן אויפן היים־בלאט.
 # en: 5300fdca86b5b32fd463f73704e318a2b8fa9961
-privacy-theme-lifetime-of-short-links = טעמע און די איינשטעלונגען פון קורצע לינקס.
+privacy-theme-lifetime-of-short-links = טעמע און די סעטינגס פון קורצע לינקס.
 # en: 0c6a2cfe53459957b6899930a2e5cd46b6541cec
 privacy-this-document-has-password-link = דער דאקומענט האט א פאסווארד. דער לינק, און יעדער קורצער לינק פון אים, איז פארשליסלט.
 # en: 0d21e52aba49ee4331213463b46c2ece33ad3cf4
@@ -519,7 +519,7 @@ locked-document-locked-with-password = א דאקומענט פארשלאסן מי
 locked-document = פארשלאסענער דאקומענט
 # A placed document whose link cannot be read (cut short when it was copied).
 # en: 0c45986cb6755e463398a592a861baaf44018954
-locked-this-document-cannot-be-read = דעם דאקומענט קען מען נישט ליינען.
+locked-this-document-cannot-be-read = דעם דאקומענט קען מען נישט לייענען.
 # A password that does not open a sealed link: wrong, or the link cut short in a chat (the two cannot be told apart).
 # en: a2a127edeb3eed5dc264fc299b034db6493e1636
 locked-that-password-does-not-open = דער פאסווארד עפנט נישט דעם לינק. אויב איר זענט זיכער אז ער איז ריכטיג, איז דער לינק אפשר אפגעשניטן געווארן ביים קאפירן. בעט אים נאכאמאל, אדער בעט א קורצן לינק.
@@ -565,11 +565,11 @@ common-select-all-words-of-box = אויסקלייבן אלעס (ערשט דאס 
 # en: be76d0b25853b431767ca5b5d57ef569bbc6ff2a
 common-back-to-words = צוריק צום טעקסט
 # en: 0c0b01d469faff60dc3b2d1c035ee0a7caa03852
-common-extend-selection = פארברייטערן די אויסקלייב
+common-extend-selection = אויסקלייבן מער
 # en: 11a8a25332234992a14424d8aad6fb9ce3d3b287
 common-next-or-one-before = דער קומענדיגער אדער דער פריערדיגער
 # en: b4365b2ed2016713788d08335e5157985010ac28
-common-step-out-close-collapse-let = פארמאכן אדער אנולירן די אויסקלייב
+common-step-out-close-collapse-let = צומאכן אדער אויפהערן אויסקלייבן
 # en: fb2997642419cda8393061543f140d40a9323957
 common-check-or-uncheck-task = אפצייכענען אדער אראפנעמען דעם צייכן פון א טאסק
 # en: 0a4adf12f01d48ecdb89f5eddf5f19fd89d94522
@@ -599,7 +599,7 @@ download-failed = דאונלאוד נישט געלונגען
 common-open-in-tiny-little-office = עפענען אין קליין אפיסל
 # Under a document cut off at a slide's foot: a link that opens it whole, in its own app.
 # en: c510d6c04c0951500c8e43f623e9f8886c378aec
-download-see-more = זעט מער
+download-see-more = זען מער
 
 ## the bar, shared by every app
 
@@ -608,13 +608,13 @@ common-insert = אריינלייגן
 # en: 19e07430eed6d97d6d73cb4a2967b1f316520f54
 bar-bold = דיק
 # en: 1616e2e5405e69c4e3914c67c644a9bd3ac00956
-bar-italic = שיף
+bar-italic = שרעג
 # en: 39773aa3efa19090c918baedac1fe737dea25b92
 bar-underline = אונטערשטרייכן
 # en: a93b9a6808a95ca93515164188159659017155cb
 bar-strikethrough = דורכשטרייכן
 # en: e1da9275bc5b420601738531d5e4445b44e0e6e9
-bar-highlight = צייכענען
+bar-highlight = הייליטן
 # en: a3089b7fae27bca3309070e0487079a25b8f1ede
 bar-heading = קעפל
 # en: dd870cfcae5fa76d524491679a57b27d41ffb462
@@ -679,13 +679,13 @@ editor-done-lowercase = פארטיג
 # en: 4ed7199b77561b7a7c013f7a8504b6686496302d
 editor-not-done = נישט פארטיג
 # en: 984cfca8d70e0b1e37a9e70c98a219bb12a05f23
-editor-bold-italic-and-links = דיק, שיף און לינקס
+editor-bold-italic-and-links = דיק, שרעג און לינקס
 # en: a983f10d71bb808f58795f6ae728a6e76f08ce78
 editor-one-of-words-column-holds = איינס פון די ווערטער וואס דער קאלום האלט, אדער א נייעס
 # en: e31d972229de381b461860014dd710856361917a
 editor-option = ברירה
 # en: eb883fb88ed57f39b760fee6ee8f5a04a8cdc7ba
-editor-this-browser-lets-page-paste = דער בראוזער לאזט אריינקלעבן נאר פון דער קלאוויאטור אדער פונעם "אריינקלעבן" מעניו.
+editor-this-browser-lets-page-paste = דער בראוזער לאזט אריינקלעבן נאר פונעם קיבאורד אדער פונעם "אריינקלעבן" מעניו.
 
 ## the example in the kit's own documentation
 
@@ -757,14 +757,14 @@ write-newspaper = צייטונג
 # en: ed0ae2181b2137e6b9f63fdbaeed415ac7e73502
 write-narrow-headline-two-columns = א שמאלער קעפל, צוויי שפאלטן
 # en: 62fb6cfda0506f0ed73ad066151086d3eed2296d
-write-horizontal-rule = האָריזאָנטאַלע ליניע
+write-horizontal-rule = האריזאנטאלע ליניע
 # Insert ▾'s rule in a document: what follows starts the next page.
 # en: 830b8871f026d13b7b94d6723471f2b4e152e360
 write-page-break = זייט־ברעך
 # en: 9ce3bd4224c8c1780db56b4125ecf3f24bf748b7
 common-ok = גוט
 # en: f2dc2c1e1465864ffbc4e8100c86cfeeafc4fffe
-write-this-card = דער קארטל
+write-this-card = דאס קארטל
 # en: 1e06557fc0660e50a99fa6eef90bff822411e3ae
 write-open-in-app = עפענען אין { $app }
 # en: 108add9c9b3eed03ee5eb57783d780a485840218
@@ -791,7 +791,7 @@ common-markdown = Markdown
 write-rich-text-rtf = Rich Text (RTF)
 # A table in the text: its heads, its handle, its column menu.
 # en: f4344253d823d09db13bc3877d37c9618588506a
-write-add-column-before = צולייגן א קאלום פאריס
+write-add-column-before = צולייגן א קאלום פריער
 # en: 9b3acfc74a5d37d699868ade0ed3d142024174cf
 write-column-c-what-it-holds = קאלום { $c }: סארט, נאמען, צולייגן אדער אוועקנעמען
 # en: 1f01479a40aa348fc273d4d09636403f89eff717
@@ -800,7 +800,7 @@ write-table-move-copy-or-take = טאבעלע: רוקן, קאפירן אדער א
 # en: cfd76febbb671e54b2f280128fb5c317389758a7
 write-a-letter = א בריוו
 # en: 7456f1ce5f81c497b66302751f617f60612306f6
-write-your-address-date-greeting-point = אייער אדרעס, דער דאטום, דער גרוס, דער עיקר, דער חתימה.
+write-your-address-date-greeting-point = אייער אדרעס, דער דאטום, דער גרוס, דער עיקר, די חתימה.
 # en: ae3cd6584a49de52c70c1e00ae0a02c8abab166b
 write-meeting-notes = נאטיצן פון א מיטינג
 # en: 7bbe470d4a5d9510c0fcb6844b519d118681beb7
@@ -858,9 +858,9 @@ write-interview = אינטערוויו
 # en: a8d0cc9ab05d2f4925e897a47c9c9554e289fb4e
 write-introduction-then-questions-and-answers = אן איינפירונג, דערנאך פראגעס און תשובות, יעדער רעדנער מיטן נאמען.
 # en: 94a18e60341a34b6feec02442ec2d70ee1244900
-write-book-review = ספר רעצענזיע
+write-book-review = בוך רעצענזיע
 # en: a8ccbb45148f664a9800e533e32902524ce8217a
-write-book-stars-what-it-is = דאס ספר, די שטערן, וועגן וואס עס גייט, וואס איז געלונגען און וואס נישט.
+write-book-stars-what-it-is = דאס בוך, די שטערן, וועגן וואס עס גייט, וואס איז געלונגען און וואס נישט.
 # en: 1eb36cb79b31a29c161965efdbb310289b4e5814
 write-music-review = מוזיק רעצענזיע
 # en: 75857043416829c78af6afbfcd886ea90847e06c
@@ -896,7 +896,7 @@ write-how-they-met-what-you = ווי זיי האבן זיך באקענט, ווא
 # en: c88c994e6c6c50db17576753df90aac55138155f
 write-eulogy = הספד
 # en: cdc87e623e95678f786543dd272ba279df15e8ee
-write-life-in-few-minutes-where = א לעבן אין עטליכע מינוט: וואו עס האט זיך אנגעהויבן, ווער זיי זענען געווען, וואס איר וועט פעלן.
+write-life-in-few-minutes-where = א לעבן אין עטליכע מינוט: וואו עס האט זיך אנגעהויבן, ווער זיי זענען געווען, וואס וועט אייך פעלן.
 # en: 6c63ce6d4727a3fb46c16a62ac8d536b0b61fd08
 write-zine-essay = זין עסיי
 # en: ecce024c73aadb2150552b3419d5aa1c3cb72c17
@@ -904,11 +904,11 @@ write-personal-essay-for-small-magazine = אן אייגענער עסיי פאר 
 # en: 563a631aba8690962836c99d15886672eb96ef62
 write-petition = פעטיציע
 # en: 6d3ace089783eb6cf5e5fe47a7d74a3ee5c21f39
-write-what-you-ask-why-and = וואס איר בעט, פארוואס, און די נעמען פון די וואס שטימען מסכים.
+write-what-you-ask-why-and = וואס איר בעט, פארוואס, און די נעמען פון די וואס זענען מסכים.
 # en: a6a1d25b018c9318540556e3fe374fdf8b23aff8
 write-terms-of-service = תנאים פון באנוץ
 # en: 79b220d914e24eb7ac79428e72639e8547d8ab9a
-write-small-businesss-terms-in-plain = א קליינע ביזנעס'ס תנאים אין פשוטע ווערטער: באשטעלן, פרייזן, שליסלען, וואס אויב, ענדיגן.
+write-small-businesss-terms-in-plain = די תנאים פון א קליינעם ביזנעס אין פשוטע ווערטער: באשטעלן, פרייזן, שליסלען, וואס אויב, ענדיגן.
 # en: fe3b114dccf2739f949d65ac4101037eb8f92543
 write-open-as-outline = עפענען ווי ראשי פרקים
 # same
@@ -918,7 +918,7 @@ write-a4 = A4
 # en: ee14050617b7b58e17aabccd61c241ccdafc6379
 write-letter = Letter
 # en: c036e85b63c6818f6732a2898cf85f30f8074bfb
-write-name-this-column = געבן א נאמען דעם קאלום
+write-name-this-column = געבן דעם קאלום א נאמען
 
 ## Insert's dialog (kit/ui/insert-dialogs.ts): Tiny Little Office Doc
 
@@ -962,7 +962,7 @@ chart-nothing-to-chart-yet = נאך גארנישט צו ווייזן אין א �
 # en: 7631740b7c7b5a09ad168ae28580b5c9ca4b8c06
 chart-nothing-to-chart-yet-rows = נאך גארנישט צו ווייזן אין א טשארט: שורות פון פון | צו | סכום
 # en: 9318d4f63aeffddc47d4520c722ad70f0ec6c63a
-chart-pie = קוגל
+chart-pie = פאי
 # en: 40c20d94e78fa142819df8cc9440d30e65329975
 chart-series = סעריעס
 # en: 79b2c4ce6295c191bf1031160055f59fb8174174
@@ -998,13 +998,13 @@ sheet-expense-log = הוצאות בוך
 # en: c2effbb05c6382e67befb796de9be3ad264a1cbb
 sheet-date-what-how-much-which = דאטום, וואס, וויפיל, וועלכער סארט; א לויפנדיגער סך הכל אונטן.
 # en: a2d841e763d975477b0e1a51d15e6f25c9023d4a
-sheet-training-log = טרענירונג בוך
+sheet-training-log = טריינינג בוך
 # en: d5b29b7fbac7da4d79a420a8108f0c98bb1ab61a
 sheet-what-you-did-and-how = וואס איר האט געטון און וויפיל, א שורה יעדעס מאל; א סך הכל פאר יעדן סארט.
 # en: 4d89a20e90ff128c4329c067414e272156b4b196
 sheet-project-tracker = פראיעקט טרעקער
 # en: a9f287fb1ede11b35e739a207cac5eddcfd2116d
-sheet-tasks-with-owners-start-and = טאסקס מיט באזיצער, אנהייב און ענד דאטומס גערעכנט פון היינט, טעג פאר יעדן, ווי יעדער גייט, און א צייכן ווען פארטיג.
+sheet-tasks-with-owners-start-and = טאסקס מיט ווער עס איז אחראי, אנהייב און ענד דאטומס גערעכנט פון היינט, טעג פאר יעדן, ווי יעדער גייט, און א צייכן ווען פארטיג.
 # en: 83c8cb0557f1a8ab76094b2801ae0b4cd23e4741
 sheet-loans-compared = הלוואות פארגליכן
 # en: 8ae3fb1476eab673ec96c9e2614cad18cbd6f497
@@ -1016,7 +1016,7 @@ sheet-visitors-who-sign-up-pay = באזוכער וואס שרייבן זיך א�
 # en: 2f6636a8892aa5d7f9781b630c2131dc8652a7f1
 sheet-cafe = א קאפע
 # en: ce157b2ac144f603ec936234eb69d9d524c3354f
-sheet-customers-day-what-they-spend = קונים א טאג, וויפיל זיי גיבן אויס, און וואוהין דעם חודש'ס הכנסה גייט: סחורה, רענט, געהאלט, פראפיט.
+sheet-customers-day-what-they-spend = קונים א טאג, וויפיל זיי גיבן אויס, און וואוהין די הכנסה פונעם חודש גייט: סחורה, רענט, געהאלט, פראפיט.
 # en: 27f8244e11467491805da5dcaace666e1176df07
 sheet-freelancer = א פרילענסער
 # en: c7da5aec39e9bdd23c061f2f34a9ecb65f9f20a2
@@ -1038,13 +1038,13 @@ sheet-savings-goal = שפארן ציל
 # en: 49ff61e9d2d6e99106df2e02e7a626aa5186c112
 sheet-what-went-in-each-month = וואס איז אריין יעדן חודש, וויפיל איז שוין געשפארט און וויפיל בלייבט נאך, דער ציל דערביי צו טוישן.
 # en: ca1ec97c50f7647ef3588d5de58af33939c01646
-sheet-habit-tracker = מנהגים טרעקער
+sheet-habit-tracker = געוואוינהייטן טרעקער
 # en: 7a2638dee7c38146953a64566dbd8fc8ea77d8d4
 sheet-four-habits-checked-off-day = פיר געוואוינהייטן אפגעצייכנט טאג נאך טאג פאר צוויי וואכן; וויפיל פון יעדן טאג איז געהאלטן געווארן, און וויפיל טעג יעדע.
 # en: d80f6ec7eac0c80248e2c7b452e21f89673449f2
-sheet-reading-list = ליינען ליסטע
+sheet-reading-list = לייען ליסטע
 # en: c809293d68f1061cf7062072d2efc8fe95fe9262
-sheet-books-read-being-read-and = ספרים געליינט, וואס מען ליינט יעצט און וואס קומט, מיט די טעג וואס יעדעס האט גענומען און די זייטן געליינט דאס יאר.
+sheet-books-read-being-read-and = ביכער געלייענט, וואס מען לייענט יעצט און וואס קומט, מיט די טעג וואס יעדעס האט גענומען און די זייטן געלייענט דאס יאר.
 # en: 6e14850d9abea09c879f881a4773537f91cf2ac2
 sheet-workout-log = עקסערסייז בוך
 # en: b2a1db48bce10aa5ac4b8eb894555098ecbaac30
@@ -1076,7 +1076,7 @@ sheet-tables-for-wedding-seats-guests = טישן פאר א חתונה: זיצן,
 # en: 8a535a1def73648a0a55a9bfa21c9d370e434ce5
 sheet-poll-results = שטימען רעזולטאטן
 # en: df60ac32ce5b04bf11e53f97d296db53c2a2cda2
-sheet-answers-and-votes-for-each = די תשובות און די שטימען פאר יעדע, געצייכנט ווי א קוגל איבער זיי.
+sheet-answers-and-votes-for-each = די תשובות און די שטימען פאר יעדע, געצייכנט ווי א פאי טשארט איבער זיי.
 # en: bfee938677dd9bf5dab2de4f9558c07a06d616fd
 sheet-fundraising-thermometer = געלט זאמלען טערמאמעטער
 # en: f6873b16e788104f3e409c1c06243db77d2a6e04
@@ -1104,7 +1104,7 @@ sheet-four-offers-on-one-house = פיר אפערס אויף איין הויז: �
 # en: 54695e5df6ef00663252186d998a600f9bac4c58
 sheet-unit-converter = מאס איבערטוישער
 # en: d2e0c086c77046805d1cc8934044bb315bf00aec
-sheet-miles-and-kilometers-pounds-and = מיילן און קילאמעטער, פונט און קילא, אויוון, טעפלעך און גאלאנען: שרייבט א סכום, ליינט די אנדערע מאס.
+sheet-miles-and-kilometers-pounds-and = מיילן און קילאמעטער, פונט און קילא, אויוון, טעפלעך און גאלאנען: שרייבט א סכום, לייענט די אנדערע מאס.
 # en: 9d2911edf283fc08872808d554a1017460fbe86f
 sheet-tournament-bracket = טורניר טאבעלע
 # en: ad907a82b59f9d64761c80d6b2fe13c2a3b04fc2
@@ -1152,7 +1152,7 @@ common-drag-to-fill = שלעפט צו אנפילן
 # en: 87b8f44339c3a345782b1fa838bfa3b0406567b3
 sheet-abc-or-123-for-this = סארט קאלום
 # en: 69ff8ba19299f697ed3f5401bb7c03f0abbc4c67
-sheet-drag-to-resize-double-click = שלעפט צו טוישן די גרייס, צוויי מאל דריקן צו פאסן
+sheet-drag-to-resize-double-click = שלעפט צו טוישן די גרייס, דריקט צוויי מאל צו פאסן
 # en: 363a9922cf56c76397d7b72ae8425d30d0438b33
 sheet-fill-down-from-top-row = אנפילן אראפ פון דער אויבערשטער שורה
 # en: 549a401f55bc461388a4f5f8554db5e0749d0a28
@@ -1213,7 +1213,7 @@ common-remove-this-column = אראפנעמען דעם קאלום
 # en: 12ee6fe44798c4fe94090bef612f25e903d9cd15
 sheet-resize-column-c = טוישן די גרייס פון קאלום { $c }
 # en: fa84cb8f7793313625378f4a9caa43b1abbf650b
-sheet-rich-text = רייכער טעקסט
+sheet-rich-text = פארמאטירטער טעקסט
 # en: 45c89f220501dfd15e267bf7d636dc7a76526971
 sheet-row-above = שורה אויבן
 # en: 9be9bf4f94705d404df5c715fda96ae93fda7494
@@ -1237,7 +1237,7 @@ sheet-sort-rows-by-it = סארטירן לויט
 # en: ff87bd67a9f3709f0a4247baa8ba4de4a5bd5fd2
 sheet-suggested = פארגעשלאגן
 # en: eda0b8f3c389658a7369166fd4c36099e380adff
-sheet-is-as-wide-as-it = דער בלאט האט שוין דאס מאקסימום פון 26 קאלומען.
+sheet-is-as-wide-as-it = דער בלאט האט שוין דאס מאקסימום פון 26 קאלומס.
 # en: 0f54b98f336606a21f0bcbdc77afa4474b2b1966
 sheet-is-full-its-last-rows = מען קען נישט צולייגן שורות: די לעצטע שורות זענען נישט ליידיג.
 # en: 7a74dff615ee3bcbc90d8c31886f01082413c776
@@ -1245,7 +1245,7 @@ sheet-three-at-least = מינימום 3
 # en: c97ecbf8fed8c8a3a0d51412e2e9bd4c8539ba26
 sheet-unlock-these-cells = אויפשליסן די קעסטלעך
 # en: 7e592be640ccac5b2bdf24df5b74d19326b5094a
-sheet-what-it-holds-sort-columns = סארט, סארטירן, קאלומען
+sheet-what-it-holds-sort-columns = סארט, סארטירן, קאלומס
 # The Spreadsheet: any column removed, the Option column, rich cells, a chart put in from Insert.
 # en: 63362bbc585e9e03cbf63abe945bcf99aa4d8cc5
 sheet-keeps-one-column = א בלאט דארף האבן כאטש איין קאלום
@@ -1345,7 +1345,7 @@ draw-boxes-arrows-icons-and-labels = קעסטלעך, פיילן, אייקאנס 
 # en: b807ee7758852c19e577610f2c56bf3ee0fb29bb
 draw-request-flow = בקשה שטראם
 # en: 00cbc89498c2f280038a754777730896717e8071
-draw-browser-asks-server-which-reads = א בראוזער פרעגט א סערווער, וואס ליינט די דאטא: קעסטלעך פארבונדן מיט פיילן.
+draw-browser-asks-server-which-reads = א בראוזער פרעגט א סערווער, וואס לייענט די דאטא: קעסטלעך פארבונדן מיט פיילן.
 # en: 0b2cbbcb4742328b0a7288f1b69223de737b2d15
 draw-flowchart = פלאוטשארט
 # en: f7a7e4b122a1c6db709d59b923a8e915ae67c9b3
@@ -1365,11 +1365,11 @@ draw-background-tile = הינטערגרונט קאכל
 # en: e78fb3ca7b230e0df30391c85eec105bf55656bd
 draw-8-by-8-pattern-that = א מוסטער פון 8 אויף 8 וואס חזר'ט זיך איבער: נוצט עס ווי דער הינטערגרונט פון א צייכענונג, אדער פון סיי וועלכע זייט.
 # en: 99cb45a6f4e975a5a7be78811422b5933dd6598b
-draw-card-for-ninetieth-tilted-on = א קארטל פאר א נייציגסטן געבורטסטאג, געבויגן אויף א הינטערגרונט פון קאנפעטי: גרויסע ווערטער, בלומען, ליבשאפט פון אלעמען.
+draw-card-for-ninetieth-tilted-on = א קארטל פאר א נייציגסטן געבורטסטאג, שרעג געשטעלט אויף א הינטערגרונט פון קאנפעטי: גרויסע ווערטער, בלומען, ליבשאפט פון אלעמען.
 # en: 2020c98a00da0ecd8574350e226b7d4c448a451f
 draw-phone-screen-sketched-in-boxes = א טעלעפאן סקרין געסקיצירט אין קעסטלעך איידער עמיצער בויט עס, מיט נאטיצן פארוואס יעדער טייל איז דארט.
 # en: 106c289912d69f2f02f64b1c195daa945a29c19f
-draw-rosette-with-ribbons-for-volunteer = א ראזעט מיט בענדער פארן פרייוויליגן פון יאר, צו דרוקן, אויסשניידן און צושפילען.
+draw-rosette-with-ribbons-for-volunteer = א ראזעט מיט בענדער פארן פרייוויליגן פון יאר, צו דרוקן, אויסשניידן און צושפיליען.
 # en: c9c7469b74c0a43646cb4a46279d9930b271ca19
 draw-block-party-from-above-stage = א גאס־שמחה פון אויבן: די בינע, די בודקעס, ערשטע הילף און וואו זיך צו טרעפן אויב מען פארבלאנדזשעט.
 # en: 6d12c8adbefeaeacac0d48274df3a195ca9a1d17
@@ -1377,9 +1377,9 @@ draw-badge = באדזש
 # en: 32787c0201e95e7dd6ca00aa5dd63210e278e3db
 common-birthday-card = געבורטסטאג קארטל
 # en: be3883124104a86065f65c46fcf4edff20e0842f
-draw-can-we-refund-it-stores = קענען מיר עס צוריקגעבן? א געשעפט'ס ריטערן פאליסי ווי פראגעס, תשובות און וואס צו טון.
+draw-can-we-refund-it-stores = קענען מיר עס צוריקצאלן? א געשעפט'ס ריטערן פאליסי ווי פראגעס, תשובות און וואס צו טון.
 # en: 619a6e052e5343b8fbad2bfbc5a35d0aa4ec763f
-draw-event-map = אונטערנעמונג מאפע
+draw-event-map = איווענט מאפע
 # en: 6349ac251c1b86c4744c7e0361a5e72ea5e38402
 draw-four-16-by-16-icons = פיר אייקאנס פון 16 אויף 16 אויף איין נעץ, זון, וואלקן, רעגן און שטורעם, צו קאפירן פאר א וועטער פארויסזאג אדער א קנעפל.
 # en: 9c6396f6f0d3ea9cb4720d61fecd3ede243d72c8
@@ -1393,7 +1393,7 @@ draw-pip-frog-32-by-32 = פיפ די זשאבע, א העלד פון 32 אויף 
 # en: d8cca3dd62ad1e4c37a8b10c054464bbcb13e3c9
 draw-room-plan = צימער פלאן
 # en: fcba7b3fe14a456c5dd428b4e0b28552efa25751
-draw-living-room-rearranged-sofa-rug = די סאלאן איבערגעשטעלט: סאפע, טעפעך, ספרים־שאנק און טיש לויטן מאס, די טיר'ס עפענונג אריינגעצייכנט.
+draw-living-room-rearranged-sofa-rug = דער סאלאן איבערגעשטעלט: סאפע, טעפעך, ספרים־שאנק און טיש לויטן מאס, די טיר'ס עפענונג אריינגעצייכנט.
 # en: 8640aa92343372c68f5d72660821c342598d8b38
 draw-three-ideas-for-coffee-roasters = דריי אידעען פאר א קאווע רעסטער'ס צייכן זייט ביי זייט, דער נאמען גרויס, און א דאטום ביז ווען אויסצוקלייבן.
 # en: 68224d905ee1bc5c63082121b1e80cf6fe7d08c1
@@ -1453,7 +1453,7 @@ draw-freehand = פרייע האנט
 # en: 8a48ec1f6c073fad0326a0e9251a18e4c88660b5
 draw-drag-to-draw-line-or = שלעפט צו צייכענען א ליניע אדער א פארעם
 # en: dcd096d38fc0be24bd96ac76246e98341b853208
-draw-rounded-box = קיילעכדיגער קעסטל
+draw-rounded-box = קיילעכדיג קעסטל
 # en: 08596d60c57fd87e530cbdd2a06052b06d8c4137
 draw-hexagon = זעקסעק
 # en: b116d77a368034d3de6ca1dc0414de7dfd49400b
@@ -1503,9 +1503,9 @@ draw-no-fill = אן פילונג
 # en: 7adb6736cf2c9ae017b128f98738ffbae0e58655
 draw-fill = פילונג
 # en: 1f65ed95fba62cd5b74b58c2ca9ba63448117160
-draw-bring-to-front = ברענגען צו פארנט
+draw-bring-to-front = ברענגען אויף פאראויס
 # en: e259d4e19e695a41e2f10680f2e3f5693711382a
-draw-send-to-back = שיקן צו הינטן
+draw-send-to-back = שיקן אויף הינטן
 # en: 972d57379db3e5be76d4ead709fef1ad71ff03d6
 common-duplicate = דופליקירן
 # en: 5301648dcf6b53cefc9ed52999aaa92d4603cae0
@@ -1517,9 +1517,9 @@ draw-put-icon-on-this-shape = לייגן אן אייקאן אויף דער פא�
 # en: 33bde816f0f7a53b8de67b8f8d6981f47e28159b
 draw-place-icon = אוועקשטעלן אן אייקאן
 # en: 4fc05f2763ba31e2d3be5f08e7d0bab5d5dcbf78
-common-zoom-in = נענטער
+common-zoom-in = פארגרעסערן
 # en: a4ae4b24a1f5369c2bff61abdbc221170e4b27d8
-common-zoom-out = ווייטער
+common-zoom-out = פארקלענערן
 # same
 # en: e30eff925100b7c3e119ed678e39009e962455b0
 draw-alt = Alt
@@ -1534,9 +1534,9 @@ draw-what-does-this-drawing-show = וואס ווייזט די צייכענונג
 # en: c8636572fb4b9e79bae4c9fef82fc8109961c471
 draw-diagram-of = א דיאגראם פון…
 # en: 5a33f2e7e84274a5291191ca3105e62d897eee0e
-draw-read-aloud-to-people-who = מען ליינט עס הויך פאר מענטשן וואס קענען נישט זען, און עס בלייבט מיט דער צייכענונג וואו זי ווערט אריינגעשטעלט אדער געדאונלאודט.
+draw-read-aloud-to-people-who = מען לייענט עס הויך פאר מענטשן וואס קענען נישט זען, און עס בלייבט מיט דער צייכענונג וואו זי ווערט אריינגעשטעלט אדער געדאונלאודט.
 # en: 988c63b77eade4f718f9d469cb36e35bff976839
-draw-describe-from-shapes = שאפן פון די פארמען
+draw-describe-from-shapes = מאכן פון די פארמען
 # en: ac302ae45938c985822f097507602d624128f1d0
 draw-tap-or-drag-to-paint = דריקט אדער שלעפט צו מאלן; די פייל־קנעפלעך רוקן, Enter מאלט.
 # en: ea263dc45b04f2755ac61a51deecc96ade3fb6a9
@@ -1566,7 +1566,7 @@ draw-use-as-background = נוצן ווי הינטערגרונט
 # en: 507f52dfd67fb731677bb9ae6971f9b5e891bc84
 draw-grid-is-now-background-download = דער נעץ איז יעצט דער הינטערגרונט. דאונלאודט אים ווי א קאכל, אדער באנוצט אים אויף יעדן בלאט מיט tile:.
 # en: 209a1a74ee8eec09b861bc34e5ddb08a1357a364
-draw-pixel-grid-n-by-n = פיקסל־נעץ, { $n } אויף { $n }. פייל־קנעפלעך רוקן; Enter מאלט מיט דער יעצטיגער פארב.
+draw-pixel-grid-n-by-n = פיקסל־נעץ, { $n } אויף { $n }. פייל־קנעפלעך רוקן; Enter מאלט מיטן יעצטיגן קאליר.
 # en: a9deda2292f9b3c9a827e2aa71e0da6b4db9f16e
 draw-row-y-column-x-ink = שורה { $y }, קאלום { $x }: { $ink }
 # en: d316afce8845f59e541c981d07d81bab22858d00
@@ -1638,7 +1638,7 @@ anim-animation = אנימאציע
 # en: ec026663a7e4c23dd850c7f5a96deef71bf8bb81
 anim-lift-off = אויפפליען
 # en: 5d15aaf0784e98385ffc925f574edbf1a0657292
-anim-rocket-climbs-away-with-its = א ראקעט הייבט זיך אויף מיט זיין שאטן ווען די ווערטער גייען ארויף: צוויי פארמען, צוויי שליסלען יעדע.
+anim-rocket-climbs-away-with-its = א ראקעט הייבט זיך אויף מיט זיין שאטן ווען די ווערטער גייען ארויף: צוויי פארמען, צוויי שליסל־פריימס יעדע.
 # en: 1cc22feeb4a82e33a9fd435fbf7c4a927a0408e1
 anim-bouncing-ball = שפרינגענדיגער באל
 # en: 567b2c86aa06b4d0133474a39dc6545196754a25
@@ -1646,11 +1646,11 @@ anim-ball-falls-faster-and-faster = א באל פאלט אלץ שנעלער צו 
 # en: 7296aa4a483797a1a82ec05a4598688ca056cd36
 anim-loading-spinner = לאדן קרייזל
 # en: ccf7f6eb9188fe228da413a1aaf39c5ee4994346
-anim-eight-dots-in-ring-each = אכט פינטלעך אין א רינג, יעדעס געשוואלן נאך דער ריי, אזוי לויפט א העלער פלעק ארום בשעת א זייט ווערט געהיט.
+anim-eight-dots-in-ring-each = אכט פינטלעך אין א רינג, יעדעס ווערט גרעסער נאך דער ריי, אזוי לויפט א העלער פלעק ארום בשעת א זייט ווערט געהיט.
 # en: 691f884e182237907640c6964bda657a5ffec1c0
 anim-title-card = טיטל קארטל
 # en: 56d07df6f27b468d9e3456707110962e1da029c6
-anim-red-curtains-part-on-opening = רויטע פארהאנגען עפענען זיך ביי דער ערשטער פארשטעלונג און דעם פעסטיוואל'ס נאמען קומט פארויס: איינמאל געשפילט, בלייבט עס אויפן טיטל.
+anim-red-curtains-part-on-opening = רויטע פארהאנגען עפענען זיך ביי דער ערשטער פארשטעלונג און דער פעסטיוואל'ס נאמען קומט פארויס: איינמאל געשפילט, בלייבט עס אויפן טיטל.
 # en: 1383ce3b8f642f2c5946975ca61e868e4a504819
 anim-present-hops-stars-and-hearts = א מתנה הופקעט, שטערן און הערצער שאקלען זיך ארום איר, און דער גרוס שיינט אין רעגן־בויגן אותיות.
 # en: fad7f01d931894b10da998319cdc82f1a7d7e4dc
@@ -1676,11 +1676,11 @@ anim-three-two-one-second-each = דריי, צוויי, איינס, א סעקונ
 # en: e004a532912502de514d6c1801dcc60517d6007a
 anim-flight-path = פלי וועג
 # en: 69049056a83981f31dea9f7350b7356570e735b3
-anim-plane-crosses-dotted-route-from = אן עראפלאן פארט איבער א פינטלדיגן וועג פון ניו יארק קיין ליסבאן, ער הייבט זיך אויף אינעם וועג, מיט די פלי'ס צייטן אויבן.
+anim-plane-crosses-dotted-route-from = אן עראפלאן פליט איבער א פינטלדיגן וועג פון ניו יארק קיין ליסבאן, ער הייבט זיך אויף אינעם וועג, מיט די צייטן פונעם פלי אויבן.
 # en: 7de4868fea7340b1b7e0779ba2e81218c703ab57
 anim-neon-sign = נעאן שילד
 # en: c0cba8072586f9c04d65da0f16b714c865f261e1
-anim-cafes-sign-at-night-name = א קאפע'ס שילד ביי נאכט: דער נאמען צאנקט, די שעות שטייען ארויס אונטן, און דער טעפל גלאנצט און וואקסט.
+anim-cafes-sign-at-night-name = א קאפע'ס שילד ביי נאכט: דער נאמען צאנקט, די שעות שטייען ארויס אונטן, און דאס טעפל גלאנצט און וואקסט.
 # en: fadf71c7ea92e6416fd6d89969f8e78a115cd3c1
 anim-sunrise = זונען אויפגאנג
 # en: 672c99d7a4f36fb3de226944eb862e3c9faa5663
@@ -1711,7 +1711,7 @@ anim-frame-n-s-s = פריים { $n }, { $s } סעק.
 # en: 62036a7016ec20273ff717698fbad321c4ff002b
 anim-impact = Impact
 # en: 4c0a5de85ac9512b6a503ba785c3f369b5cfbda2
-anim-key-at-s-s = שליסל־פריים ביי { $s } סעק
+anim-key-at-s-s = שליסל־פריים ביי { $s } סעק.
 # en: 74adc5789ce92de7bbb5e3d84a287a1ce6d3e7f5
 anim-mirror = שפיגל
 # en: a7b93d2128e820f861fc8dfccd9f5521e89ad21f
@@ -1762,7 +1762,7 @@ anim-frame-later = א פריים שפעטער
 # en: bb4f3c806dbc9e6d5247da5b492939d83c90cf2b
 anim-delete-this-frame = אויסמעקן דעם פריים
 # en: 406ce96669c44a0f4b79e02af1464b6aa7fbf232
-anim-draw-shapes-move-sets-them = צייכנט פארמען, און דערנאך באנוצט "באוועגן" זיי צו באלעבן.
+anim-draw-shapes-move-sets-them = צייכנט פארמען, און דערנאך באנוצט "באוועגן" זיי צו אנימירן.
 # en: b4d477d39704ecbf21ca422aeebffbad5a519fbb
 anim-nothing-here-yet-draw-something = נאך גארנישט דא: צייכנט קודם עפעס.
 # en: 00f1eed948284854e29d59b2de928756b7f69388
@@ -1823,7 +1823,7 @@ common-talk = א רעדע
 # en: 69d33e95f4f69c18d9591a8529f59a6703fc1f85
 outline-empty-outline = ליידיגע ראשי פרקים
 # en: b972f73739624a697a0aa9bdde4289bafc5b6e4b
-outline-outliner-ideas-under-ideas-folded = א ראשי־פרקים־מאכער: אידעען אונטער אידעען, צוזאמגעלייגט און אויפגעלייגט, ארומגערוקט און פארבונדן; דער זעלבער בוים וואס א פרעזענטאציע אדער א מיינד־מעפ ליינט.
+outline-outliner-ideas-under-ideas-folded = א ראשי־פרקים־מאכער: אידעען אונטער אידעען, צוזאמגעלייגט און אויפגעלייגט, ארומגערוקט און פארבונדן; דער זעלבער בוים וואס א פרעזענטאציע אדער א מיינד־מעפ לייענט.
 # en: 3d47762769e98192ca611ea7fce028e70e16f174
 outline-arrow-from-from-to-to = פייל פון { $from } צו { $to }
 # en: 081c7d75d7a6b1052f5643338773de8ea68de0dd
@@ -1960,9 +1960,9 @@ outline-last-status-means-done = דער לעצטער סטאטוס מיינט פ�
 # en: 7312a31a2c880f2d456663b6f91ad6da980b3a5e
 outline-take-connection-away = אוועקנעמען די פארבינדונג
 # en: 656e5c87ae5cd391807e13c85fb32635c2d441c2
-outline-tap-item-to-connect-from = דריקט אויף דער זאך פון וואו צו פארבינדן.
+outline-tap-item-to-connect-from = דריקט אויף דער זאך פון וועלכער צו פארבינדן.
 # en: 7a717eefe223e502e86655b5bf8eb999b867a9dc
-outline-tap-item-to-connect-words = דריקט אויף דער זאך וואו צו פארבינדן "{ $words }".
+outline-tap-item-to-connect-words = דריקט אויף דער זאך צו וועלכער צו פארבינדן "{ $words }".
 # en: 6ca2aebe7601f4f49f7f7df1ac23a0ac4a39abbc
 outline-question-options-under-it-and = די פראגע, די ברירות אונטער איר, און ביי יעדע וואס רעדט פאר איר און קעגן איר.
 # en: da74cb6baba7a464fd8881af861a8c8d7952aff9
@@ -2004,7 +2004,7 @@ outline-decision-tree = א באשלוס בוים
 # en: c59b4e8c614eaaf02a0ac81499bc50947192118e
 outline-family = א פאמיליע
 # en: 3ac1f9e665cb59f3a08ee0fba150dbbf4aab85a8
-outline-five-minute-retirement-toast-opening = א לחיים פון פינף מינוט צו א פענסיע: אן עפענונג, דריי מעשיות, דער לחיים, יעדער טייל געצייטמעסט אויף זיין שורה.
+outline-five-minute-retirement-toast-opening = א לחיים פון פינף מינוט לכבוד א פענסיע: אן עפענונג, דריי מעשיות, דער לחיים, יעדער טייל מיט זיין צייט אויף זיין שורה.
 # en: 9ed550a11b44d369413c1b004a5008d3c127a6c1
 outline-novel = א ראמאן
 # en: 35c9710d58daeb1aebb2143cfaeda278f0f67311
@@ -2016,7 +2016,7 @@ outline-speech = א רעדע
 # en: f081caaa6b5cd7b0858a4a87cc6f81bdb215fd30
 outline-syllabus = א קורס פלאן
 # en: 5b163ae0d9a3fd9b5ab6a8b6c27374091ceb25de
-outline-ten-week-course-when-and = א קורס פון צען וואכן: ווען און וואו, א נומערירטע טעמע א וואך, ווי מען גיט מארקס, און וואס צו ליינען.
+outline-ten-week-course-when-and = א קורס פון צען וואכן: ווען און וואו, א נומערירטע טעמע א וואך, ווי מען גיט מארקס, און וואס צו לייענען.
 # en: 9cea5f42a5742d9eef722836a7a7b59c6a5c0c5a
 outline-thesis-two-arguments-with-their = א טענה, צוויי ראיות מיט זייערע באווייזן, די קשיא און דער תירוץ, און דער אויסוועג.
 # en: e5f2a2c3f76b55d5786f1c311773def62d6920f3
@@ -2032,11 +2032,11 @@ outline-no-internet-at-home-question = קיין אינטערנעט אינדער�
 # en: b431e4b41d5021ff680bdee33aebda8738cec5b0
 outline-packing-list = פאקן ליסטע
 # en: 013532bb7e7d08afa22a3149f8e74b5ee4d9eaf5
-outline-parts-and-chapters-of-book = טיילן און קאפיטלען פון א ספר מיט אידעען, מיט א שורה אונטער יעדן קאפיטל וואס ער טענה'ט.
+outline-parts-and-chapters-of-book = טיילן און קאפיטלען פון א בוך פון אידעען, מיט א שורה אונטער יעדן קאפיטל וואס ער טענה'ט.
 # en: 5f646cfc8f40ae2515c9d774ae5ad523f524b998
 outline-people-and-three-acts-of = די מענטשן און דריי אקטן פון קאפיטלען, יעדער מיט וואס עס געשעט אין אים, פארבונדן וואו א מענטש טוישט א קאפיטל.
 # en: dbb00953c7a1565bffce71190cfb90220362c471
-outline-question-method-budget-that-adds = די פראגע, דער מעטאד, א בודזשעט וואס רעכנט זיך אליין אויס, א צייט ליניע, די ריזיקעס און דאס ליינען.
+outline-question-method-budget-that-adds = די פראגע, דער מעטאד, א בודזשעט וואס רעכנט זיך אליין אויס, א צייט ליניע, די ריזיקעס און דאס לייענען.
 # en: 57b065618d9af543d6fcc5085edd94aa723f8403
 outline-three-generations-and-next-each = דריי דורות און דער קומענדיגער, יעדער מיט זיינע יארן, געצייכנט ווי א פאמיליע בוים פונעם מעניו.
 # en: 285ec850c11d78bac10f6bfa31b69a37f1b257c9
@@ -2070,7 +2070,7 @@ deck-product-in-sentence-what-it = א פראדוקט אין איין זאץ, ו�
 # en: a46e6eb74ae783d7eb35ae76afc5ab984683886f
 deck-trivia-night-in-four-rounds = א טריוויע נאכט אין פיר ראונדס, א פונקטן טאבעלע, און די תשובות אויפן לעצטן סלייד.
 # en: efebc637859160a6f694e66576eebb294de14712
-deck-residents-meeting-about-new-playground = א מיטינג פון איינוואוינער וועגן א נייעם שפילפלאץ: פארוואס, וואס מען שלאגט פאר, דער בודזשעט ווי א קוגל, ווען, ווי צו זאגן א ווארט.
+deck-residents-meeting-about-new-playground = א מיטינג פון איינוואוינער וועגן א נייעם שפילפלאץ: פארוואס, וואס מען שלאגט פאר, דער בודזשעט ווי א פאי טשארט, ווען, ווי צו זאגן א ווארט.
 # en: 02e7a62fc65ed26cb0751706a5ea8f5783414eda
 deck-science-lesson-on-chalkboard-aims = א וויסנשאפט לעקציע אויפן טאוול: צילן, וואס זיי ווייסן, דער מאדעל, א קאנטראל, היימארבעט; דעם לערער'ס נאטיצן אונטער יעדן.
 # en: f3a66c7b2a6ebda85ea74938fce4c397eae2a131
@@ -2078,7 +2078,7 @@ deck-seed-pitch-in-eight-slides = א סיד פיטש אין אכט סליידס:
 # en: aab8da6eadee157bba3937e9dc00741cfe48b13f
 deck-bike-shops-quarter-for-its = א ביציקל געשעפט'ס קווארטאל פאר אירע שותפים: הכנסה אויף א טשארט, הצלחות און פעלערן, די נומערן וואס זענען וויכטיג, דער קומענדיגער קווארטאל.
 # en: d0fa5e5696edaf949dfe9e739a7a2eef0d433ae2
-deck-small-story-in-panels-about = א קליינע מעשה אין בילדלעך וועגן לייען עפעס א שכן.
+deck-small-story-in-panels-about = א קליינע מעשה אין בילדלעך וועגן אויסלייען עפעס פאר א שכן.
 # en: 6c1ff81a2445a9eab1616588060b483cd5b6cde8
 deck-twenty-minute-talk-with-speaker = א רעדע פון צוואנציג מינוט מיט נאטיצן פארן רעדנער אויף יעדן סלייד, א טשארט פון די רעזולטאטן, א הערה און די לעקציעס.
 # en: 1a2fac58a0b80e771b6d2e526e7d3fee2cf6ef85
@@ -2283,9 +2283,9 @@ deck-remove-from-slide = אראפנעמען פונעם סלייד
 # en: 7e4475e68efd3a93e2aa3ad794afd9388b4c89d1
 deck-slide-n = סלייד { $n }
 # en: 5f78f871f6b48ae876a1dbe89a5b8bff6f6b9849
-deck-front-cover = פארנטיגער טאוול
+deck-front-cover = פארנטיגער דעקל
 # en: 95842f717432a63230077bc5ea48addf5bc52947
-deck-back-cover = הינטערשטער טאוול
+deck-back-cover = הינטערשטער דעקל
 # en: 10e4725d5544e065501162abcf8a53b94451df0c
 common-page-n = זייט { $n }
 # en: dd19f9887573a9f06294de48329bfb1b3a5ad273
@@ -2305,7 +2305,7 @@ deck-badge-n = באדזש { $n }
 # en: 9cc25309d07de0adfb989faaaaa74f7cb5a06e38
 deck-last-slide-added-for-you = לעצטער סלייד: א QR קאוד פון דער פרעזענטאציע
 # en: 03c90c8e6a7e028c2e9caeadc1961fb5c0ad4e57
-deck-ends-with-qr-code-of = די פרעזענטאציע ענדיגט זיך מיט א QR קאוד, אז דער עולם זאל זי קענען מיטנעמען. דער QR קנעפל לעשט דאס אויס.
+deck-ends-with-qr-code-of = די פרעזענטאציע ענדיגט זיך מיט א QR קאוד, אז דער עולם זאל זי קענען מיטנעמען. דער QR קנעפל שטעלט דאס אפ.
 # en: 13c7cb226b093919972f5e423aeb0abae93960cf
 deck-qr-code-of-this-deck = QR קאוד פון דער פרעזענטאציע
 # en: 5d5bc5601280c776405941347bbf7e9c63dc3954
@@ -2376,7 +2376,7 @@ deck-proposal = א פארשלאג
 # en: 52ab7599cc26432ef9b492b401d04eee1ca5e699
 deck-what-you-heard-what-you = וואס איר האט געהערט, וואס איר שלאגט פאר, ווען, וויפיל עס קאסט.
 # en: b8e1f28fed63f996c8915470a7ee9ce8aef9b75f
-deck-eight-small-pages-from-one = אכט קליינע זייטן פון איין בויגן פאפיר: דרוקט, לייגט צוזאם און שניידט, אדער ליינט עס מיט דריקן אויפן טעלעפאן.
+deck-eight-small-pages-from-one = אכט קליינע זייטן פון איין בויגן פאפיר: דרוקט, לייגט צוזאם און שניידט, אדער לייענט עס מיט דריקן אויפן טעלעפאן.
 # en: 31b11edde49cd1bd80a198f240426c5b2d8cd65f
 deck-booklet-of-half-letter-pages = א ביכל פון האלב־Letter זייטן, אכט ביז צוואנציג, אויסגעשטעלט צו דרוקן, אריינלייגן און צוזאמלייגן.
 # en: ae07389f7b537dbd7eb3007d3f2b36ca3c35c404
@@ -2428,7 +2428,7 @@ cal-days-and-times-on-month = טעג און צייטן אויף א חודש, א 
 # en: 9ccd3e7bb11493f1e93950f7db9148a4794037b7
 cal-done = % פארטיג
 # en: a7028454f240815938eaf701823b7d55dbaf98a9
-cal-edit-event = רעדאקטירן אונטערנעמונג
+cal-edit-event = רעדאקטירן איווענט
 # en: 8a4d4e6eb9a367d616b8a4cbfa2792068482e884
 cal-edit-task = רעדאקטירן טאסק
 # en: 99570f85bb2bae0dbe3e8f2f3d6d6f765ee7c47e
@@ -2448,7 +2448,7 @@ cal-end-time = ענד צייט
 # en: 91856dcb7d93f9c6725649160ab6abe379d8e5c9
 cal-ends = ענדיגט זיך
 # en: ad8919ace091b14011c6439cfd5e1707b58f5abd
-common-event = אונטערנעמונג
+common-event = איווענט
 # en: 3b2eb5131055ad07ac1d08de2f11f900286a51b5
 cal-every-day = יעדן טאג
 # en: 7f3932f9cb96cb99072771c992c0ce3c0b342bfb
@@ -2481,15 +2481,15 @@ cal-my-zone = מיין צייט זאנע
 # en: 80c3052d33ccdee15ffaaa110c5c39072495fe63
 cal-never = קיינמאל
 # en: 2ef3795c979293106a6ccf13359d732165fb660a
-cal-new-event = נייע אונטערנעמונג
+cal-new-event = נייער איווענט
 # en: 25d3553217b2058be97b5339fbe6a576cfeb6856
-cal-new-event-on-day = נייע אונטערנעמונג אום { $day }
+cal-new-event-on-day = נייער איווענט אום { $day }
 # en: 17b2b838c5ce22c961a36736534a5029d6ba0087
 cal-new-task = נייער טאסק
 # en: 8abf7cf1d0b36ff16ebbe26b8285a65d9d1582f6
 cal-next-month = קומענדיגער חודש
 # en: 22c6f667e4103029954aa28d43a1d4888122b35f
-cal-next-year = קומענדיג יאר
+cal-next-year = קומענדיגע יאר
 # en: 1562a21cadb04e59b670cb3e32fb54f1777db699
 cal-no-tasks-yet = נאך קיין טאסקס
 # en: 3b2069a4f745374e50f8992752888822ce851db4
@@ -2501,7 +2501,7 @@ cal-nothing-this-month = גארנישט דעם חודש.
 # en: 46a299215300b3a0de6931f926bc6b0f2283eb99
 cal-previous-month = פריערדיגער חודש
 # en: 2f866c70871d37f90c24fefa28d87cc19d8850c3
-cal-previous-year = פריערדיג יאר
+cal-previous-year = פריערדיגע יאר
 # en: 580110a84277d369b216be5a01a5ba50868d4d3f
 cal-project-plan = פראיעקט פלאן
 # en: 6ae5ee3e66205a8b1a41c80c4db0dcc982e50f44
@@ -2561,7 +2561,7 @@ cal-youth-soccer-season-practice-every = א סעזאן פון יוגנט סאק�
 # en: d7bad656f3b06c3ee989a1f2960214ee15b2f788
 cal-small-teams-time-off-public = א קליינע טים'ס פריי־טעג, די אפיציעלע יום טובים און די ניטל פארמאכונג אויף איין קאלענדאר.
 # en: cd6036648af6d0d5614f0ec65eb732300281e059
-cal-community-garden-plots-year-when = א יאר פון א געמיינדע גארטן פלאץ: ווען צו זייען, פלאנצן, שניידן און אפשערן, יעדעס יאר פון ס'ניי.
+cal-community-garden-plots-year-when = א יאר פון א געמיינדע גארטן פלאץ: ווען צו זייען, פלאנצן, איינזאמלען און אפשניידן, יעדעס יאר פון ס'ניי.
 # en: 1b04e3c7d585a3d6297852d158919c9833538a01
 cal-fall-term-from-first-day = א הארבסט זמן פונעם ערשטן טאג ביז ניטל: פארמאכטע טעג, קלובן, דער אויספלוג, עלטערן־לערער מיטינגס.
 # en: f80b28faa22109c4d14cf7eb7994768abca09ca8
@@ -2583,7 +2583,7 @@ cal-league-schedule = ליגע סדר
 # en: 5a94fcfb3e67abfdd4e3bab4c3d9a2683801245a
 cal-school-term = שול זמן
 # en: 2f88af7308e60cbfbe5482a13acec0983b020e09
-cal-training-plan = טרענירונג פלאן
+cal-training-plan = טריינינג פלאן
 # en: 5ef83b6b17b42f15d49c31f33e46ca8d4427e6ae
 cal-twelve-weeks-to-half-marathon = צוועלף וואכן צו א האלבן מאראטאן ווי א סדר: באזע, בויען, שפיץ, נאכלאזן, לויף.
 # en: fdab2603fde2488e117cca6335baee3c481231b9
@@ -2637,7 +2637,7 @@ diagram-tap-empty-space-for-thing = דריקט אויף א ליידיגן ארט
 # en: d4b16450c157188d2cf2e3968faee3709ebeca28
 diagram-tap-here-to-add-first = דריקט דא צוצולייגן דאס ערשטע: { $thing }.
 # en: ccdb7bfa4c6b71a69f1931253fe6f892a2baf89b
-diagram-tap-in-lane-to-add = דריקט אין א שטרעקע צו צולייגן א טריט. דריקט אויף א טריט אים צו רעדאקטירן. שלעפט אים צו אן אנדער שטרעקע, אדער אויף א טריט אז ער זאל קומען נאך אים.
+diagram-tap-in-lane-to-add = דריקט אין א באן צו צולייגן א שריט. דריקט אויף א שריט אים צו רעדאקטירן. שלעפט אים צו אן אנדער באן, אדער אויף א שריט אז ער זאל קומען נאך אים.
 # en: 639d02ad26e5be80f5baf69835b953dfc015178b
 diagram-tap-thing-to-join-name = דריקט אויף דער זאך צו וועלכער צו פארבינדן { $name }. דריקט אויף א ליידיגן ארט צו אנולירן.
 # en: 5d36f27a0649ac9ae67fb2e66f5be89ebc4719c8
@@ -2668,7 +2668,7 @@ diagram-connection = א פארבינדונג
 diagram-empty = ליידיג
 # The templates
 # en: 8b0bc4ee7e0e6e592c5e8812fef8883b9cbc66de
-diagram-empty-kind-to-start-from = { $kind }, ליידיג, פון וואו אנצוהייבן.
+diagram-empty-kind-to-start-from = { $kind }: ליידיג, צום אנהייבן.
 # en: cc9cfe196eaec8bbe041a0f648039cf31df71bc7
 diagram-browser-api-database-cache-and = א בראוזער, אן API, א דאטאבעיס, א קעש און א ווארקער, און ווי זיי רעדן.
 # en: 87796704431b42da8083f869f5ed707dae8cf8fe
@@ -2724,7 +2724,7 @@ diagram-family-with-godmother = א פאמיליע מיט א קוואטערין
 # en: c164cf0f878062c2b43b69bf4c1de2c3d6a1f94d
 diagram-principal-her-assistant-principals-classroom = א פרינציפאלין, אירע אסיסטענטן, די קלאס לערערס און דער שומר.
 # en: f25d2f240d3a52d5361d9b6dd4d8561290566159
-diagram-move-to-lisbon-by-march = א מוטשען קיין ליסבאן ביז מערץ: פאפירן, א דירה, ארבעט און לעבן, און וואס מוז קומען ערשט.
+diagram-move-to-lisbon-by-march = אריבערציען קיין ליסבאן ביז מערץ: פאפירן, א דירה, ארבעט און לעבן, און וואס מוז קומען ערשט.
 # en: d2586903dd907f55b8076edbe00b87f4e45ab92f
 diagram-elementary-school = אן עלעמענטארע שולע
 # en: 3eff234615aa3d538d44f11142e266d62b44ef43
@@ -2740,7 +2740,7 @@ diagram-apollo-11 = אפאלא 11
 # en: b5723994f111884ca2f9a82ecb525fb6992e44c8
 diagram-board-game-night = ברעט שפיל נאכט
 # en: d69e423520fc900afc06f3d31ab286694fb7d67b
-diagram-class-4b-at-four-tables = קלאס 4B ביי פיר טישן לויט קאליר, און דער ליינען ווינקל.
+diagram-class-4b-at-four-tables = קלאס 4B ביי פיר טישן לויט קאליר, און דער לייען־ווינקל.
 # en: d8d0862686b742040e32f8f3235084ad61fcef28
 diagram-eight-days-in-july-1969 = אכט טעג אין יולי 1969, טאג נאך טאג, פון לאנטש ביז לאנדן אין ים.
 # en: ce31ba59543ea424a6019bc67976ace141d62d09
@@ -2748,7 +2748,7 @@ diagram-four-games-table-each-and = פיר שפילן, א טיש פאר יעדן
 # en: 9d35a9836a6bb4c6180f6c2880c8c19c22ed4ea0
 diagram-from-photo-of-receipt-to = פון א פאטא פון דער קבלה ביז דעם פיי־סטאב, דורך א מענעדזשער און פינאנצן.
 # en: 1f1489585228c4bf2d9599bdff9fef70f59b4a60
-diagram-moving-abroad = אריבערפארן אין אויסלאנד
+diagram-moving-abroad = אריבערציען קיין אויסלאנד
 # en: a04755781fd967ec44d2f47f1ebf6ff83b2fe909
 diagram-patrick-and-maria-their-six = פאטריק און מאריע, זייערע זעקס קינדער מיט די יארן וואס זיי האבן געלעבט, און די מומע וואס האט זיי אויסגעהאדעוועט.
 # en: 56aa5ec3b6a5e62a57ce1e1223c5f1f8148a7e02
@@ -2758,7 +2758,7 @@ diagram-sea-clouds-mountains-rivers-groundwater = ים, וואלקנס, בערג
 # en: a1da7a04adf4a0189219b39bddb2518c44ba382f
 diagram-brontes = די בראנטע שוועסטער
 # en: 0c2311a818005e4508a11aa6a888f61a45bd9a3b
-diagram-brigade-under-head-chef-front = די קיך מאנשאפט אונטערן הויפט שעף, די עס־זאל דערביי.
+diagram-brigade-under-head-chef-front = די קיך מאנשאפט אונטערן הויפט שעף, דער עס־זאל דערביי.
 # en: 0c62114de8628cfe00011bba9cc35f003279ac83
 diagram-house-network = די שטוב נעטווערק
 # en: 1fcf7cc436a073faa316df56cf1a4d3ec2b87d6e
@@ -2782,13 +2782,13 @@ diagram-new-idea = נייע אידעע
 # en: 32c6bde8aa4d539c3b773b1f4cf66e15aa427faa
 diagram-tap-empty-space-for-person = דריקט אויף א ליידיגן ארט צו צולייגן א מענטש. דריקט אויף איינעם אים צו רעדאקטירן, Shift+Enter פאר זיין ראלע, Enter פארן קומענדיגן. שלעפט איינעם אויף אן אנדערן אים צו שטעלן דערונטער.
 # en: 5f7463cc9e2e8a2e25990127091710a286d9765a
-diagram-tap-empty-space-for-event = דריקט אויף א ליידיגן ארט צו צולייגן א געשעעניש. שרייבט די דאטום, Shift+Enter, דערנאך וואס איז געשען. די דאטומס זענען אויסגעשטעלט לויט דער מאס, און א תקופה ווייזט זיך ווי א פאס.
+diagram-tap-empty-space-for-event = דריקט אויף א ליידיגן ארט צו צולייגן א פאסירונג. שרייבט דעם דאטום, Shift+Enter, דערנאך וואס איז געשען. די דאטומס זענען אויסגעשטעלט לויט דער מאס, און א תקופה ווייזט זיך ווי א פאס.
 # en: b6395077670d276b6a207a6eadb6f5a17c1fa854
 diagram-lanes-name = דעם באן'ס נאמען
 # en: 769bb19e615b7f8e2809e5882e2d05a18f57a531
 diagram-when = ווען
 # en: b23ea75ecf303b9756682c84abecebc7a010f2b1
-diagram-tap-person-to-type-on = דריקט אויף א מענטש אים צו רעדאקטירן. לייגט צו + און א נאמען פאר א שותף, Shift+Enter פאר יארן, Enter פארן קומענדיגן. שלעפט איינעם אויף אן אנדערן אים צו שטעלן דערונטער. "פארבינדן" צייכנט א פונקטירטע ליניע.
+diagram-tap-person-to-type-on = דריקט אויף א מענטש אים צו רעדאקטירן. לייגט צו + און א נאמען פאר א שותף, Shift+Enter פאר יארן, Enter פארן קומענדיגן. שלעפט איינעם אויף אן אנדערן אים צו שטעלן דערונטער. "פארבינדן" צייכנט א פינטלדיגע ליניע.
 # en: 14e56ce6d5f3d8d56d2ce979bf2eb20aaa9dd93d
 diagram-tap-empty-space-for-table = דריקט אויף א ליידיגן ארט צו צולייגן א טיש. דריקט אויף א טיש אדער א מענטש צו רעדאקטירן. א קאמע הייבט אן דעם קומענדיגן גאסט. שלעפט א מענטש צו אן אנדער טיש.
 # en: 7049f105f3a76be9cb8c6d7b74eb3edf60d9a7da
@@ -2810,7 +2810,7 @@ trip-geojson = GeoJSON
 # en: 63746c80a9900aa0b9df832d6fe50b7318a88aab
 trip-a-place-by-name = אן ארט לויטן נאמען…
 # en: c86d6e7640906afe6a57236c004f0b1af53b6ee8
-trip-stop-at-middle-of-map = א סטאפ אינמיטן דער מאפע
+trip-stop-at-middle-of-map = צולייגן סטאפ אינמיטן דער מאפע
 # en: a52fccf0e1e5beca9d5885f1638d5e9a6a2684f9
 trip-measure-in = מעסטן אין
 # en: 2458f1444290ced8aefad04d5c947b17bf9a81fb
@@ -2918,7 +2918,7 @@ trip-six-campuses-in-new-england = זעקס קאמפוסן אין ניו אינ�
 # en: 651b0f889a962febf3a80370511cbc08abac73da
 trip-japan-by-rail = יאפאן מיט דער באן
 # en: f687060ca9b759a7ed4bca61f7a2bf96764f2f8e
-trip-tokyo-to-miyajima-in-cherry = טאקיא ביז מיאדזשימא אין דער קאשטשאנעס בליען, מיט דער שנעל־באן.
+trip-tokyo-to-miyajima-in-cherry = טאקיא ביז מיאדזשימא ווען די קארשן בליען, מיט דער שנעל־באן.
 # en: afea6c128d27238aad4e11871dfff6f692334301
 trip-last-100-km-of-camino = די לעצטע 100 ק"מ פון דעם קאמינא
 # en: 33d01f381424bbc8bbd1b6a9487b3a53c38d07e9
@@ -2970,7 +2970,7 @@ calc-tape-text = דער סטריפ ווי טעקסט
 # en: 9a7405ebcedde5be8d095a986ea8794e19ee84e2
 calc-graph = גראף
 # en: a3310f1f9bbb12cd753850392faec8453a10c709
-calc-clear-tape = אויסמעקן די סטריפ
+calc-clear-tape = אויסמעקן דעם סטריפ
 # en: 14a09e767bb648a339ba82fb609c02f3d9aa4228
 calc-clear-graph = אויסמעקן דעם גראף
 # Insert: functions, and what the second engine reads
@@ -2993,7 +2993,7 @@ calc-absolute-value = אבסאלוטע ווערט
 # en: 8e4e872b30d442c4d7f1edf2cabdff971300b607
 calc-factorial = פאקטאריאל
 # en: c584662e0778e58334ec2e9f7fc7f58a98d4dca8
-calc-e-number = e, די נומער
+calc-e-number = e, דער נומער
 # en: f3afae23c74a7d1a42a52c0c47bfeb1191b6b6e9
 calc-x-for-graph = x, פאר א גראף
 # en: 1cfd7bfc7d3d79d7ea28a91bdc6e032559103831
@@ -3035,9 +3035,9 @@ calc-backspace = Backspace
 # en: d1149c36a0edcfbeae98bf270da3f543b6c6a866
 calc-clear-line = אויסמעקן די שורה
 # en: 097a41c8c7e58b9b655d7b3e31a3673466595450
-calc-answer-before = דער פריערדיגער ענטפער
+calc-answer-before = די פריערדיגע תשובה
 # en: 2ee9e26d39d7113bd8fea80639d6257ab1bdf8cc
-calc-type-sum-or-3-inch = שרייבט א חשבון, אדער 3 inch to cm, און דריקט Enter. a = 12 היט אפ אן ענטפער מיט א נאמען.
+calc-type-sum-or-3-inch = שרייבט א חשבון, אדער 3 inch to cm, און דריקט Enter. a = 12 היט אפ א תשובה מיט א נאמען.
 # en: 0bef86b24e006bd994db1509b268156522c7dc2c
 calc-type-curve-in-x-such = שרייבט א קרומע ליניע אין x, ווי x^2 אדער sin(x), און דריקט Enter זי צו צייכענען.
 # The templates
@@ -3098,7 +3098,7 @@ calc-dose-by-weight = דאזע לויט וואג
 # en: a2cdd7739e2ff2b4f1ee78074c5c7981d1b877f9
 calc-milligrams-kilogram-turned-into-milliliters = מיליגראם א קילא, איבערגעטוישט אויף מיליליטער פון א סיראפ; קאנטראלירט יעדע דאזע מיט א פארמאסיסט.
 # en: 4699da98e2d343e04aa2465082aedd4d5053aa11
-calc-electricity-for-appliance = עלעקטרי פאר א מאשין
+calc-electricity-for-appliance = עלעקטריק פאר א מאשין
 # en: d1b1126c73c13b523ce30bd2f563ad1a7b1c0210
 calc-watts-hours-day-and-price = וואטס, שעות א טאג און דער פרייז פון א קילאוואט־שעה: וויפיל א הייצער קאסט א חודש.
 # en: 96aeea666f6bd696d83ef3dee80fff1fcc3ff896
@@ -3179,7 +3179,7 @@ open-that-file-is-too-large = די פייל איז צו גרויס.
 # en: 8f432852569edbf7610713a6554e7a61396327d5
 open-keep-them-on-this-device = אפהיטן זיי אויף דעם מכשיר
 # en: c4fe6d8b035f6108e8a7e0037667dacf3d6cca25
-open-nothing-is-saved-on-this = גארנישט איז נישט געהיט אויף דעם מכשיר. היט זיי דא אפ, אדער עפנט איינעם.
+open-nothing-is-saved-on-this = גארנישט איז נישט געהיט אויף דעם מכשיר. היט זיי דא אפ, אדער עפנט איינס.
 # en: 0826daee1d616f7de3a2b205eb2360fcaccc77ef
 open-first = עפענען דעם ערשטן
 # en: 59d36bf6c42ab3ae1481fe62abbc67ffef7a8b22
@@ -3208,9 +3208,9 @@ qr-code-of-this-document = א QR קאוד פון דעם דאקומענט
 # en: e5737972ceac5c184d5009e9ee1746c4b3292f26
 keys-normal-size = צוריקשטעלן דעם זום
 # en: 4fc05f2763ba31e2d3be5f08e7d0bab5d5dcbf78
-keys-everything-larger = נענטער
+keys-everything-larger = פארגרעסערן
 # en: a4ae4b24a1f5369c2bff61abdbc221170e4b27d8
-keys-everything-smaller = ווייטער
+keys-everything-smaller = פארקלענערן
 # en: 67312061f24800b7dc75b07101329959c5c1af88
 keys-keep-this-document-on-device = אפהיטן אויף דעם מכשיר
 # en: 4d5e11a737e63d755f4127a0139f235f3794b6c6
@@ -3226,6 +3226,6 @@ find-not-found = נישט געפונען
 ## a menu narrowed by typing (kit/ui/menu.ts)
 
 # en: a9c25fead588babdd6b90b343a47f716f722312e
-menu-nothing-starts-q = קיין צופאסונגען פאר "{ $q }"
+menu-nothing-starts-q = קיין רעזולטאטן פאר "{ $q }"
 # en: ddf17f8747a6b36489443d6b09c25b429a1ea675
-menu-starting-q = צופאסונגען פאר "{ $q }"
+menu-starting-q = רעזולטאטן פאר "{ $q }"
