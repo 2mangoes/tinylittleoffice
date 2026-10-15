@@ -17,6 +17,7 @@ vendored: every byte of code comes from npm through the committed lockfile; the 
 
 | Package | Version | License | The native API it beat, and why | Adds |
 | --- | --- | --- | --- | --- |
+| `@fluent/bundle` | 0.19.1 | Apache-2.0 | Every string a person sees (src/kit/core/i18n.ts reads src/i18n/<code>.ftl; Paul, 2026-10-15: "Use Fluent"). Intl picks a plural form (PluralRules), writes a number (NumberFormat) and names a language (DisplayNames), and Fluent uses each of them for that; what the browser does not have is a message format: stable ids, a translator's file with comments, and a plural or any other choice written by the translator in the language's own categories, which a hand-rolled syntax had done until then. Part of the one app file. | none (its own: not measured) |
 | `d3-sankey` | 0.12.3 | BSD-3-Clause | Sankey charts (src/kit/draw/chart.ts). SVG draws the picture, but no browser API lays out a flow: placing the nodes in columns and relaxing the links so they cross least is the library's whole job. | 10.0 KB (its own: 6.2 KB) |
 | `fflate` | 0.8.3 | MIT | The link codec and every zip (src/kit/core/codec.ts, src/kit/file/zip.ts). CompressionStream has no preset dictionary, which makes short documents 20 to 35 percent smaller, is asynchronous, and writes a gzip stream, not a zip archive (.docx, .xlsx, .pptx). | 14.6 KB |
 | `leaflet` | 1.9.4 | BSD-2-Clause | The Trip Planner's map (src/apps/trip/editor.ts). The browser has no map: panning and pinch-zooming a grid of OpenStreetMap tiles, with markers and a route, would be a library written here instead. Part of the one app file, run only by the Trip Planner. | 150.0 KB |
@@ -81,11 +82,12 @@ the picker; neither source is a dependency.
 ## For building and testing
 
 None of these reaches the site; they build it, check it and deploy it. With what they bring, the lockfile
-holds 198 packages for development.
+holds 199 packages for development.
 
 | Package | Version | License | The native API it beat, and why | Adds |
 | --- | --- | --- | --- | --- |
 | `@axe-core/playwright` | 4.13.0 | MPL-2.0 | The accessibility checks in e2e/a11y.spec.ts. Chromium exposes its accessibility tree but no rules to judge it by; axe is the rule set. Tests only. | not shipped |
+| `@fluent/syntax` | 0.19.0 | Apache-2.0 | Reads and writes the .ftl files with their comments for the checks and the scripts (scripts/ftl.ts, scripts/i18n-extract.ts): the group a message is in, `# same`, `# draft from`. @fluent/bundle's own parser drops comments, and the browser has none for Fluent. Not built into the site. | not shipped |
 | `@playwright/test` | 1.64.0 | Apache-2.0 | The end-to-end runner (e2e/). node:test has no browser; WebDriver BiDi is a protocol, not a runner, and WebKit at phone size is what an iPhone gets. Tests only. | not shipped |
 | `@types/d3-sankey` | 0.12.5 | MIT | Types for d3-sankey, which ships none. Not built into the site. | not shipped |
 | `@types/leaflet` | 1.9.22 | MIT | Types for leaflet, which ships none. Not built into the site. | not shipped |

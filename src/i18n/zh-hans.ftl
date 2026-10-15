@@ -1,0 +1,1681 @@
+### Tiny Little Office 的简体中文文字：每个人看到的字符串，“=”左边是标识符，右边是中文。
+### 标识符、{ $占位符 }和各组的注释都与 en.ftl 一致；中文没有复数形式，复数只写一种（*[other]），{ $n } 代表数字。
+
+## the shell: header
+
+shell-menu = 菜单
+shell-title = 标题
+# A new document of the app, and one not yet named; { $noun } is the app's noun: "New presentation".
+shell-new-noun = 新建{ $noun }
+shell-untitled-noun = 未命名{ $noun }
+shell-download = 下载
+shell-loading = 加载中…
+shell-this-link-holds-something-that = 此链接的内容无法读取，可能是复制时被截断了。
+shell-n-of-max-link-characters = 链接还剩 { $n } / { $max } 个字符
+shell-n-characters-over-link-limit = 超出链接上限 { $n } 个字符
+shell-n-characters-over-link-limit-short-link-holds-max = 超出链接上限 { $n } 个字符；短链接最多容纳 { $max }
+shell-n-characters-over-what-short = 超出短链接容量 { $n } 个字符
+# Before a document that lives nowhere but its link (Private, changed) is left for another place: the question and its three answers.
+shell-this-document-lives-in-its = 这份文档只存在于它的链接中
+shell-nothing-is-saved-on-this = 此设备上没有保存任何内容。复制链接即可留住它，或把它保存在此设备上；按“返回”也能回到它。
+shell-copy-link-and-go = 复制链接并离开
+shell-turn-on-save-in-browser = 打开“在浏览器中保存”并保留在这里
+shell-go-without = 直接离开
+shell-save-in-browser-is-on = “在浏览器中保存”已打开：此浏览器会保留你打开的文档。可在菜单中关闭。
+
+## the home page
+
+home-blank = 空白
+home-templates = 模板
+# The button under an app's tile, naming the template list: "Start Text from"
+# The list of an app's documents kept on this device, under its tile: "Write documents"
+home-app-documents = { $app }文档
+home-forget = 忘记
+# The button that forgets one kept document: "Forget Launch notes"
+home-forget-title = 忘记{ $title }
+# Under an app's documents, the rest folded away: "3 more"
+home-n-more = 还有 { $n } 个
+home-aboard-project-made-with-respect = { $aboard } 的项目。在纽约怀着敬意打造。
+home-beta-version = 测试版
+home-email = 电子邮件
+
+## the drawer (hamburger menu)
+
+drawer-apps = 应用
+drawer-close = 关闭
+drawer-default-name = 默认：{ $name }
+drawer-save-in-browser = 在浏览器中保存
+drawer-what-is-this = 这是什么？
+drawer-turn-on-to-save-files = 打开后会在浏览器中保存文件。
+drawer-turn-off-to-remove-all = 关闭后会移除所有文件和设置。
+drawer-nothing-saved-in-this-browser = 此浏览器中不保存任何内容
+drawer-saving-in-this-browser = 正在此浏览器中保存
+drawer-remove-all-files-and-settings = 要从此浏览器中移除所有文件和设置吗？
+drawer-language = 语言
+drawer-theme = 主题
+drawer-match-device = 跟随设备
+drawer-light = 浅色
+drawer-dark = 深色
+drawer-about = 关于
+drawer-tiny-little-office = 小小办公室
+drawer-about-tiny-little-office = 关于 小小办公室
+drawer-tiny-little-office-is-experiment = 小小办公室是纽约的数字与 AI 战略及软件开发公司 { $aboard } 的一项实验。
+drawer-to-reach-out-with-questions = 如有疑问，请{ $email }。
+drawer-email-us = 给我们发邮件
+drawer-if-you-find-bugs-please = 如果发现问题，请到我们的 { $github } 提交。
+drawer-github-repository = GitHub 仓库
+drawer-all-of-these-notes-these = 这些笔记、这些图画、这些用马克笔写下的句子，都会随时间褪去。唯有短暂的才长存。
+drawer-eugene-ionesco-book = 欧仁·尤内斯库，{ $book }
+drawer-discoveries = 《发现》
+
+## links that leave the site (kit/ui/link-guard.ts)
+
+# The menu button's tooltip: the Office mark is the menu.
+leave-tiny-little-office-menu = 小小办公室 菜单
+# The question before a link that leaves the site: "You are leaving Tiny Little Office for" over the site's name, large.
+leave-do-you-trust-this-link = 你信任这个链接吗？
+leave-you-are-leaving-tiny-little = 你即将离开 小小办公室，前往
+leave-this-link-writes-email-to = 此链接会向以下地址写一封邮件
+leave-this-link-calls = 此链接会拨打
+leave-not-secure-address-what-you = 不是安全地址：你发送到那里的内容可能在传输中被读取。
+leave-whole-address = 完整地址：
+leave-someone-wrote-this-link-into = 这个链接是别人写进文档的。链接上显示的文字不一定与它的去向相符。只有信任目的地时才继续。
+leave-go = 前往
+leave-links-of-this-kind-do = 这类链接无法在此打开。
+# About's last line, a link to the source of the build the site runs: "Running commit abc1234".
+leave-running-commit-commit = 运行版本 { $commit }
+leave-this-link-hides-characters-in = 这个链接在地址里藏了字符。
+
+## the copy kept on the device (status lines under the switch)
+
+## sharing: the Share dialog (kit/core/shell.ts), where the link fits (kit/share/limits.ts), the arrival banner
+
+share-copy-opened-in-new-tab = 在新标签页中打开的副本
+share-edit-link = 编辑链接
+share-present-link = 放映链接
+share-copy-into-new-document = 复制为新文档
+share-copy-link = 复制链接
+share-copy-of-title = { $title }的副本
+share-encrypted-here-service-holds-only = 已在本地加密：服务只保存密文，而且只保存到到期为止。
+share-expires-in-n-days-date = { $n ->
+       *[other] { $n } 天
+    }后到期（{ $date }）
+share-expires-in-n-hours-date = { $n ->
+       *[other] { $n } 小时
+    }后到期（{ $date }）
+share-expires-in-n-minutes-date = { $n ->
+       *[other] { $n } 分钟
+    }后到期（{ $date }）
+share-opens-as-pages-to-read = 以页面形式打开阅读
+share-opens-in-editor = 在编辑器中打开
+share-whoever-opens-this-link-gets = 打开这个链接的每个人都会得到自己的一份副本。他们的修改留在他们自己的链接里，不在你的链接里：请他们把自己的链接发回给你。
+share-short-link-that-expires = 会过期的短链接
+share-this-link-expires-in-n = 此链接将在 { $n ->
+       *[other] { $n } 天
+    }后过期
+share-this-link-expires-in-n-hours = 此链接将在 { $n ->
+       *[other] { $n } 小时
+    }后过期
+share-this-link-expires-in-n-minutes = 此链接将在 { $n ->
+       *[other] { $n } 分钟
+    }后过期
+share-this-link-n-characters-fits = 此链接：{ $n } 个字符，适合放进短信
+share-this-link-n-characters-too = 此链接：{ $n } 个字符，对{ $where }来说太长
+share-discord-message = Discord 消息
+share-a-qr-code = 二维码
+share-link-in-google-docs = Google 文档中的链接
+share-telegram-message = Telegram 消息
+share-a-short-link = 短链接
+share-small-nfc-sticker = 小型 NFC 贴纸
+share-text-message = 短信
+share-nfc-sticker = NFC 贴纸
+share-some-browsers = 某些浏览器
+share-n-short-links-kept-here = { $n ->
+       *[other] 此处保留了 { $n } 个短链接
+    }
+share-display-link = 展示链接
+share-opens = 打开方式
+share-link-copied = 链接已复制
+share-could-not-copy = 无法复制
+share-share = 分享…
+share-qr-code = 二维码
+share-qr-code-of-this-document = 此文档的二维码
+share-this-document-is-n-bytes = 此文档有 { $n } 字节，最大的二维码只能容纳 { $max }。缩短 { $over } 字节就能放下。
+share-this-document-is-n-characters = 此文档有 { $n } 个字符，短链接最多容纳 { $max }。缩短 { $over } 个字符就能放下。
+share-expires-after = 到期时间
+share-hour = 一小时
+share-day = 一天
+share-week = 一周
+share-month = 一个月
+share-make-short-link = 生成短链接
+share-making = 生成中…
+share-hundred-links-day-from-one = 同一个地址每天最多生成一百个链接；请明天再试。
+share-short-link-cannot-be-changed = 短链接一经生成，就不能修改，也不能撤回；到期后会自动失效。
+share-could-not-shorten-link = 无法缩短链接。
+share-this-document-is-too-long = 此文档太长，无法生成短链接。
+share-up-to-hundred-links-day = 同一个地址每天最多可生成一百个链接。
+share-remove = 移除
+share-link = 链接
+share-short-link = 短链接
+
+## privacy (kit/share/privacy.ts, kit/ui/privacy-dialog.ts): the password, what the device holds
+
+# The Share dialog's head line: "Created 9 Oct 2026, 14:03 · by Paul".
+privacy-anyone-with-link-will-need = 任何拿到链接的人都需要密码才能打开。没人能重置密码：丢了，文档就找不回来了。
+privacy-change-password = 更改密码
+privacy-created-date = 创建于 { $date }
+privacy-enter-password-to-open-this = 输入密码以打开此文档。
+privacy-forget-everything = 忘记全部
+privacy-preview-sent-with-link-to = 随链接发到社交网络的预览是第一页的图片、标题和开头的文字，在我们的服务器上以可读形式保存一个月。文档本身从不会传到那里。
+privacy-forget-everything-this-site-keeps = 忘记本站在此保存的一切，并且从现在起不再保留任何内容？文档本身存在各自的链接里。
+privacy-locked = 已锁定
+privacy-locked-document = 已锁定的文档
+privacy-new-password = 新密码
+privacy-no-password = 没有密码
+privacy-none = 无
+privacy-opening = 打开中…
+privacy-password = 密码
+privacy-password-removed = 密码已移除
+privacy-password-set-link-holds-only = 密码已设置：链接里只有密文
+privacy-password-ellipsis = 密码…
+privacy-preferences = 偏好设置
+privacy-privacy = 隐私
+privacy-nothing-saved-in-this-browser = 此浏览器中不保存任何内容。列出的内容只在这次访问中有效。
+privacy-protected-by-password = 受密码保护
+privacy-remove-password = 移除密码
+privacy-sealing = 加密中…
+privacy-set-password = 设置密码
+privacy-short-links = 短链接
+privacy-set-password-in-share = 设置密码，请在“分享”中操作
+privacy-short-links-made-here-until = 在这里生成的短链接，保留到过期为止。
+privacy-their-names-and-links-for = 它们的名称和链接，用于主页。
+privacy-theme-lifetime-of-short-links = 主题、短链接的有效期。
+privacy-this-document-has-password-link = 此文档设有密码。链接以及由它生成的任何短链接里都只有密文。
+privacy-this-document-is-locked = 此文档已锁定
+privacy-this-document-is-locked-with = 此文档已用密码锁定。
+privacy-unlock = 解锁
+privacy-unlock-ellipsis = 解锁…
+privacy-what-this-device-holds = 此设备保存了什么
+privacy-your-documents = 你的文档
+privacy-your-browsers-history = 浏览器的历史记录
+privacy-every-document-opened-here-in = 在这里打开过的每个文档，内容完整，除非它设有密码。
+privacy-not-ours-to-clear = 我们无法清除
+privacy-by-name = 由{ $name }
+privacy-n-documents = { $n ->
+       *[other] { $n } 份文档
+    }
+privacy-n-links = { $n ->
+       *[other] { $n } 个链接
+    }
+privacy-n-set = 已设置 { $n } 项
+privacy-copy-this-and-send-it = 复制它，并用链接以外的途径发送。它无法再次显示。
+privacy-make-another = 再生成一个
+
+## a document locked with a password, placed inside another (kit/share/locked.ts, kit/ui/locked-doc.ts)
+
+# The card drawn where it sits; { $app } is the app's name: "A Spreadsheet document, locked with a password".
+locked-with-password = 已用密码锁定
+locked-app-document-locked-with-password = 一份已用密码锁定的{ $app }文档
+locked-with-password-unlock = 已用密码锁定。解锁…
+locked-document-locked-with-password = 一份已用密码锁定的文档
+# What one of them is called in running text, as an app's noun is.
+locked-document = 已锁定的文档
+# A placed document whose link cannot be read (cut short when it was copied).
+locked-this-document-cannot-be-read = 无法读取此文档。
+locked-that-password-does-not-open = 这个密码打不开此链接。如果你确定密码没错，链接可能在复制时被截断了：请对方重新发送，或要一个短链接。
+
+## words several apps share
+
+# A menu of what can be done to the document as a whole (the Presentation Builder's submenu).
+common-this-document = 此文档
+# { $task } is the task's words.
+common-done-task = 已完成：{ $task }
+common-drag-to-move-tap-to = 拖动移动；点按选中
+common-move-left = 左移
+common-move-right = 右移
+# The group heading the Calendar and the Trip Planner sit under on the home page.
+common-plan = 计划
+common-chosen-tasks = 选中的任务
+# A link that opens the document (kit/ui/compare.ts).
+common-open = 打开
+common-task = 任务
+common-tasks = 任务
+
+## downloads
+
+download-print = 打印
+download-print-or-save-as-pdf = 打印或存为 PDF
+download-picture-png = 图片（PNG）
+download-web-page-html = 网页（HTML）
+download-text-tlo = 文本（TLO）
+download-data-json = 数据（JSON）
+download-downloaded-name = 已下载{ $name }
+download-failed = 下载失败
+download-open-in-tiny-little-office = 在 小小办公室 中打开
+# Under a document cut off at a slide's foot: a link that opens it whole, in its own app.
+download-see-more = 查看更多
+
+## the bar, shared by every app
+
+bar-insert = 插入
+bar-bold = 加粗
+bar-italic = 斜体
+bar-underline = 下划线
+bar-strikethrough = 删除线
+bar-highlight = 高亮
+bar-heading = 标题
+bar-bulleted-list = 项目符号列表
+bar-numbered-list = 编号列表
+bar-table = 表格
+bar-footnote = 脚注
+bar-date = 日期
+bar-undo = 撤销
+bar-redo = 重做
+bar-today = 今天
+
+## the editor (<to-text>): chips, cards and the bubbles
+
+# A footnote's mark, and its words where the notes are drawn, by its number: spoken.
+editor-footnote-n = 脚注 { $n }
+# A card standing for another document held in this one, of a kind no app here reads: "abc document".
+editor-app-document = { $app }文档
+# The same card when its app is known; { $noun } is the app's noun: "A spreadsheet".
+editor-noun = 一个{ $noun }
+editor-code = 代码
+editor-connection = 连接
+editor-n-rows = { $n ->
+       *[other] { $n } 行
+    }
+editor-notes-words = 注释内容
+editor-done = 完成
+editor-address = 地址
+editor-not-address = 不是地址
+editor-set-link = 设置链接
+editor-open-link = 打开链接
+editor-change-link = 编辑链接
+editor-remove-link = 移除链接
+# The selection bubble's name: what can be done to the words selected.
+editor-format = 格式
+editor-done-lowercase = 已完成
+editor-not-done = 未完成
+
+## the example in the kit's own documentation
+
+example-n-slides = { $n ->
+       *[other] { $n } 张幻灯片
+    }
+
+## the Word Processor
+
+write-word-processor = 文字处理
+# What one of its documents is called, in running text: "Untitled document"; each app's noun is in its section.
+write-document-lowercase = 文档
+# The group heading the Word Processor sits under on the home page.
+write-words = 文字
+write-words-on-page-headings-lists = 页面上的文字：标题、列表、链接和注释，会自动计算的表格，可按 Letter 或 A4 打印。
+write-document = 文档
+write-here = 在这里写。
+write-subheading = 副标题
+write-paragraph = 正文
+write-bring-out = 突出
+write-indent = 缩进
+write-align = 对齐
+write-align-left = 左对齐
+write-center = 居中
+write-align-right = 右对齐
+write-justify = 两端对齐
+write-paper-paper = 纸张：{ $paper }
+# The Look menu: each look's name, then a line about it drawn in its own type.
+write-sans = 无衬线
+write-clean-and-plain-throughout = 通篇简洁朴素
+write-bookish-serif-throughout = 通篇书卷气的衬线体
+write-monospace-ragged-right = 等宽字体，右侧不齐
+write-serif-and-sans = 衬线与无衬线
+write-serif-headings-sans-text = 标题用衬线，正文用无衬线
+write-sans-and-serif = 无衬线与衬线
+write-sans-headings-serif-text = 标题用无衬线，正文用衬线
+write-book = 图书
+write-justified-indented-small-caps = 两端对齐，首行缩进，小型大写
+write-newspaper = 报纸
+write-narrow-headline-two-columns = 窄幅大标题，分两栏
+write-horizontal-rule = 水平线
+# Insert ▾'s rule in a document: what follows starts the next page.
+write-page-break = 分页符
+write-ok = 确定
+write-this-card = 这张卡片
+write-open-in-app = 在{ $app }中打开
+write-locked-worked-out-for-you = 已锁定：由系统为你算出
+write-footnotes = 脚注
+write-back-to-footnote-n-in = 返回正文中的脚注 { $n }
+write-back-to-text = 返回正文
+write-n-words = { $n ->
+       *[other] { $n } 个字
+    }
+write-word-docx = Word（DOCX）
+# same
+write-markdown = Markdown
+write-rich-text-rtf = 富文本（RTF）
+# A table in the text: its heads, its handle, its column menu.
+write-add-column-before = 在前面添加一列
+write-column-c-what-it-holds = 第 { $c } 列：其中的内容、命名、添加或删除列
+write-table-move-copy-or-take = 表格：移动、复制或删除
+# The templates
+write-letter = 信函
+write-your-address-date-greeting-point = 你的地址、日期、称呼、正文要点和落款。
+write-meeting-notes = 会议记录
+write-agenda-what-was-said-what = 议程、发言内容、决定的事项，以及谁负责什么。
+write-resume = 简历
+write-name-and-contact-experience-education = 姓名与联系方式、经历、教育、技能：一页纸的简历。
+write-contract = 合同
+write-plain-words-agreement-what-each = 用平实的话写成的协议：各方做什么，以及如何终止。
+write-invoice = 发票
+write-who-what-and-how-much = 谁、什么、多少钱，金额在表格里算好；印成纸质件寄出。
+write-cover-letter = 求职信
+write-applying-for-job-position-what = 应聘一份工作：职位、你做过什么、为什么选这家，分四小段写。
+write-memo = 备忘录
+write-to-from-date-and-subject = 收件人、发件人、日期和主题；一句话说明变动、原因，以及需要你回复的事。
+write-minutes = 会议纪要
+write-formal-meeting-who-came-treasurers = 一场正式会议：谁出席、司库的账目、一项动议及其表决、行动事项。
+write-one-page-cv = 一页简历
+write-typewriter-set-cv-now-before = 打字机风格的简历：现在、过去、教育、语言和工具。
+write-newsletter = 通讯
+write-block-associations-month-dates-in = 一个街区协会的一个月：表格里的日期、欢迎、新闻和感谢。
+write-recipe = 食谱
+write-what-you-need-in-table = 所需食材放在表格里，可从四人份调到六人份，再一步步写做法。
+write-questions-and-answers = 问答
+write-questions-people-ask-each-heading = 大家常问的问题，每个问题是一个标题，答案在下面。
+write-press-release = 新闻稿
+write-news-in-first-line-detail = 第一句讲新闻，接着是细节、一段引语、时间安排，以及联系谁。
+write-news-article = 新闻报道
+write-headline-byline-story-in-two = 标题、署名，印在纸上分两栏的报道，以及一张数据图表。
+write-interview = 访谈
+write-introduction-then-questions-and-answers = 先是引言，再是问答，每位发言人都标明姓名。
+write-book-review = 书评
+write-book-stars-what-it-is = 这本书、星级评分、讲了什么、哪些好、哪些不好。
+write-music-review = 乐评
+write-album-label-and-length-stars = 一张专辑：厂牌和时长、星级评分、曲目、最佳曲目。
+write-thesis = 论文
+write-title-page-abstract-chapters-with = 扉页、摘要、带脚注和表格的各章，以及参考文献，排版像一本书。
+write-grant-proposal = 资助申请
+write-ask-need-plan-budget-that = 要什么、为何需要、计划、算得拢的预算，以及如何知道它奏效了。
+write-syllabus = 课程大纲
+write-course-when-and-where-what = 一门课：时间和地点、内容、每周安排，以及加起来是 100% 的成绩构成。
+write-formal-complaint = 正式投诉
+write-what-happened-in-order-what = 按顺序写发生了什么、你想要什么，以及在采取进一步行动前的期限。
+write-letter-to-politician = 致政界人士的信
+write-ask-your-representative-for-vote = 请你的代表投一票：你是谁、为何对本地重要，以及一个问题。
+write-love-letter = 情书
+write-ordinary-things-missed-letter-across = 平凡的小事，因思念而珍贵：隔着距离写下的信，用衬线体。
+write-wedding-speech = 婚礼致辞
+write-how-they-met-what-you = 他们怎么认识，此后你看到了什么，对两人各说一句，最后是祝酒词。
+write-eulogy = 悼词
+write-life-in-few-minutes-where = 用几分钟讲一个人的一生：从哪里开始，他们是怎样的人，你会想念什么。
+write-zine-essay = 杂志散文
+write-personal-essay-for-small-magazine = 给小型杂志写的个人散文，打字机风格。
+write-petition = 请愿书
+write-what-you-ask-why-and = 你要求什么、为什么，以及赞同者的姓名。
+write-terms-of-service = 服务条款
+write-small-businesss-terms-in-plain = 小生意的条款，用平实的话写：预订、价格、钥匙、意外情况、终止。
+
+## Insert's dialog (kit/ui/insert-dialogs.ts): Tiny Little Office Doc
+
+insert-tiny-little-office-link = 小小办公室 链接
+insert-opening-short-link = 正在打开短链接…
+insert-paste-link-of-another-tiny = 粘贴另一份 小小办公室 文档的链接，长短均可：它的第一页会显示在这里。
+insert-this-is-not-tiny-little = 这不是 小小办公室 链接，或者已过期。
+insert-tiny-little-office-doc = 小小办公室 文档
+insert-tiny-little-office-doc-ellipsis = 小小办公室 文档…
+# Insert ▾'s group of the apps a new document can be made in, inside this one.
+insert-new-document = 新文档
+
+## another document edited in place (kit/ui/doc-dialog.ts); a table's size is Rows × Columns
+
+doc-cancel = 取消
+doc-rows = 行数
+
+## charts (kit/draw/chart.ts)
+
+chart-empty-chart = 空图表
+chart-bars = 柱状图
+chart-flows-sankey = 流向图（桑基图）
+chart-flows-list = 流向：{ $list }。
+chart-lines = 折线图
+chart-nothing-to-chart-yet = 还没有可画的数据
+chart-nothing-to-chart-yet-rows = 还没有可画的数据：每行写 来源 | 去向 | 数量
+chart-pie = 饼图
+chart-series = 数据系列
+chart-kind-chart-data = { $kind }图表。{ $data }
+
+## the Spreadsheet
+
+sheet-clear-these-cells = 清除这些单元格
+sheet-fit-this-column-to-its = 按文字调整列宽
+sheet-cells-in-hand = 手头的单元格
+sheet-check-ref = 勾选 { $ref }
+# The column type that holds words as typed.
+sheet-text = 文本
+sheet-spreadsheet = 电子表格
+sheet-spreadsheet-lowercase = 电子表格
+sheet-numbers = 数字
+sheet-spreadsheet-with-formulas-named-cells = 带公式、命名单元格和图表的电子表格；先给三列，需要时再加。
+sheet-budget = 预算
+sheet-planned-against-actual-line-each = 计划与实际逐项对照，附差额和合计。
+sheet-expense-log = 支出记录
+sheet-date-what-how-much-which = 日期、事项、金额、类别；底部有累计总额。
+sheet-training-log = 训练记录
+sheet-what-you-did-and-how = 每次做了什么、做了多少；每类事项各有合计。
+sheet-project-tracker = 项目跟踪
+sheet-tasks-with-owners-start-and = 任务及负责人、从今天起算的开始和截止日期、各需几天、进展如何，完成后打勾。
+sheet-loans-compared = 贷款比较
+sheet-amount-rate-and-years-for = 每笔贷款的金额、利率和年限；月供（PMT）、总成本和利息。
+sheet-subscription-business = 订阅制生意
+sheet-visitors-who-sign-up-pay = 访客注册、付费、留存：用流向表示的模型，旁边是可调整的假设。
+sheet-cafe = 咖啡馆
+sheet-customers-day-what-they-spend = 每天的顾客数、人均消费，以及当月收入的去向：进货、房租、工资、利润。
+sheet-freelancer = 自由职业者
+sheet-hours-rate-and-weeks-make = 工时、费率和周数得出全年发票；扣除开支和税后，剩下的就是到手收入。
+sheet-mutual-aid-fund = 互助基金
+sheet-monthly-donors-and-one-off = 每月捐款和一次性捐赠充实基金；资助、少量管理费和储备金从中支出。
+sheet-month-by-month-with-chart = 按月统计，附图表
+sheet-this-year-against-last-line = 今年与去年对比，每月一行，画成折线。
+sheet-household-budget-by-month = 家庭月度预算
+sheet-six-months-of-homes-bills = 一个家六个月的账单和开销，每月一列，横竖合计并与收入对比。
+sheet-savings-goal = 储蓄目标
+sheet-what-went-in-each-month = 每月存入多少、目前存了多少、还差多少，目标放在旁边可修改。
+sheet-habit-tracker = 习惯打卡
+sheet-four-habits-checked-off-day = 四个习惯两周内逐日打卡；每天坚持了多少，每个习惯坚持了几天。
+sheet-reading-list = 阅读清单
+sheet-books-read-being-read-and = 读完的、在读的和接下来要读的书，各花了几天，以及今年读了多少页。
+sheet-workout-log = 健身记录
+sheet-sets-reps-and-weight-for = 每个动作的组数、次数和重量，算出训练量，以及每次的感受。
+sheet-time-sheet = 工时表
+sheet-weeks-hours-by-client-and = 一周的工时，按客户和任务分列；计费的按费率计价，并有合计。
+sheet-trip-costs-split = 旅行费用分摊
+sheet-who-paid-for-what-on = 四个人的旅行里谁为什么付了钱；每人应摊多少，各自欠多少（负数表示应退）。
+sheet-schedule-with-dates = 带日期的日程
+sheet-job-in-steps-each-starting = 一项工作分成几步，每一步在上一步结束时开始：谁做、几天、结束日期和工作日。
+sheet-grade-book = 成绩册
+sheet-classs-grades-for-essays-quizzes = 一个班的论文、测验和项目分数；每位学生的平均分和等级，以及全班平均分。
+sheet-membership-roll = 会员名册
+sheet-who-belongs-their-plot-and = 谁是会员、他们的地块和职务、何时缴费、何时续费、谁有钥匙，以及已收会费。
+sheet-seating-count = 座位统计
+sheet-tables-for-wedding-seats-guests = 婚礼的各张桌子：座位、宾客、空位和所选菜品，并核对菜品数量是否对得上。
+sheet-poll-results = 投票结果
+sheet-answers-and-votes-for-each = 各个答案及其票数，上方画成饼图。
+sheet-fundraising-thermometer = 募捐温度计
+sheet-what-has-come-in-week = 每周收到的款项对照目标：上方是图表，到目前为止的总额用大字显示。
+sheet-invoice-ledger = 发票台账
+sheet-every-invoice-sent-when-to = 每张已开的发票：何时、给谁、多少钱、何时付款、还欠多少、逾期多久。
+sheet-inventory = 库存
+sheet-stock-on-hand-against-point = 现有库存对照补货线；该订多少、价值多少，库存低时有标记。
+sheet-petty-cash = 零用金
+sheet-money-in-and-out-of = 钱盒里的收支，谁花的、花在什么上，每笔之后的余额，以及收据打勾。
+sheet-rate-card = 价目表
+sheet-freelancers-services-with-hours-each = 自由职业者的服务项目及各自所需工时；价格和加急价格由一个小时费率算出。
+sheet-mortgages-compared = 房贷比较
+sheet-four-offers-on-one-house = 同一套房的四种方案：首付后的贷款额、月供、含税总月供，以及利息。
+sheet-unit-converter = 单位换算
+sheet-miles-and-kilometers-pounds-and = 英里和公里、磅和千克、烤箱温度、杯和加仑：输入一个数量，读出另一个单位。
+sheet-tournament-bracket = 淘汰赛对阵表
+sheet-eight-teams-single-elimination-each = 八支球队的淘汰赛：每场比分、算出的胜者，以及晋级决赛的胜者。
+sheet-excel-xlsx = Excel（XLSX）
+# same
+sheet-csv = CSV
+sheet-chart-svg = 图表（SVG）
+sheet-chart-png = 图表（PNG）
+sheet-empty-sheet = 空工作表
+sheet-n-of-max-shown = （显示 { $n } / { $max }）
+sheet-50-more-rows = 再来 50 行
+sheet-add-column = 添加一列
+sheet-add-column-after = 在后面添加一列
+sheet-chart = 图表
+sheet-chart-of-table = 表格的图表
+sheet-checkbox = 复选框
+sheet-column-after = 后面一列
+sheet-column-c = 第 { $c } 列
+sheet-column-c-holds = 第 { $c } 列的内容
+sheet-column-c-type-what-it = 第 { $c } 列：{ $type }。其中的内容、按它排序、添加或删除列
+sheet-columns = 列
+sheet-delete-which = 删除{ $which }
+sheet-drag-to-fill = 拖动填充
+sheet-abc-or-123-for-this = 此列用 ABC 或 123
+sheet-drag-to-resize-double-click = 拖动调整宽度，双击自动适应
+sheet-fill-down-from-top-row = 从首行向下填充
+sheet-fill-right-from-first-column = 从第一列向右填充
+sheet-fill-drag-to-carry-these = 填充：拖动以延续这些单元格
+sheet-fit-columns-to-page = 按页面宽度调整列宽
+sheet-formula = 公式
+sheet-function = 函数
+sheet-high-to-low = 从高到低
+sheet-insert-n-rows-above = 在上方插入{ $n ->
+       *[other] { $n } 行
+    }
+sheet-insert-n-rows-below = 在下方插入{ $n ->
+       *[other] { $n } 行
+    }
+sheet-letters-keyboard = 字母键盘
+sheet-lock-these-cells-so-reader = 锁定这些单元格，读者就不会改动它们
+sheet-locked-part-of-model = 已锁定：属于模型的一部分
+sheet-low-to-high = 从低到高
+sheet-money = 金额
+sheet-name = 名称
+sheet-name-of-column-c = 第 { $c } 列的名称
+sheet-names-cell-to-its-right = 为右侧的单元格命名
+# A money column's currency (Money picked in a column's menu): the field's hint, and what it says of words it cannot read.
+sheet-symbol-like-or-code-like = 符号如 ¥，或代码如 CNY。留空则用文档自己的。
+sheet-symbol-of-up-to-three = 最多三个字符的符号，或三个字母的代码。
+sheet-no-chart = 没有图表
+sheet-number = 数值
+sheet-open-link = 打开{ $link }
+sheet-opens-when-clicked = 点击时打开
+sheet-percent = 百分比
+sheet-remove-this-column = 移除此列
+sheet-resize-column-c = 调整第 { $c } 列的宽度
+sheet-rich-text = 富文本
+sheet-row-above = 上面一行
+sheet-row-below = 下面一行
+sheet-row-n = 第 { $n } 行
+sheet-row-n-lowercase = 第 { $n } 行
+sheet-row-n-insert-or-delete = 第 { $n } 行：插入或删除行
+sheet-rows-b = 第 { $a }–{ $b } 行
+sheet-selected-cells = 选中的单元格
+sheet-show-all-text = 显示全部文字
+sheet-shown-as-typed = 按输入显示
+sheet-sort-rows-by-it = 按它给行排序
+sheet-suggested = 建议
+sheet-is-as-wide-as-it = 工作表已达最宽：二十六列。
+sheet-is-full-its-last-rows = 工作表已满：最后几行有内容。
+sheet-three-at-least = 至少三个
+sheet-unlock-these-cells = 解锁这些单元格
+sheet-what-it-holds-sort-columns = 其中的内容；排序；列
+
+## downloads: hand-offs to another app (kit/file/exports.ts)
+
+export-open-in = 打开方式
+
+## the icon library (kit/ui/icons-picker.ts)
+
+icons-icon = 图标
+icons-favorites = 收藏
+icons-search-icons = 搜索图标
+icons-suggested = 建议
+icons-icons = 图标
+icons-no-icons-match-q = 没有与“{ $q }”匹配的图标。
+icons-search-by-name-or-by = 按名称或含义搜索（“钱”“天气”“ai”），在 { $n } 个图标中查找。
+icons-no-icon = 无图标
+icons-icon-or-emoji = 图标或表情符号
+icons-search-icons-and-emoji = 搜索图标和表情符号
+icons-or-emoji = 图标或表情符号
+icons-emoji = 表情符号
+icons-no-icons-or-emoji-match = 没有与“{ $q }”匹配的图标或表情符号。
+# Unicode's emoji groups, as the picker's Emoji set names them.
+icons-smileys-emotion = 表情与情感
+icons-people-body = 人物与身体
+icons-animals-nature = 动物与自然
+icons-food-drink = 食物与饮料
+icons-travel-places = 旅行与地点
+icons-activities = 活动
+icons-objects = 物品
+icons-symbols = 符号
+icons-flags = 旗帜
+
+## the Drawing Tool
+
+# The group heading the Drawing Tool sits under on the home page: Design. 'Draw' is the Animator's mode for drawing.
+draw-draw = 绘制
+draw-drawing-tool = 绘图工具
+draw-drawing = 绘图
+draw-design = 设计
+draw-boxes-arrows-icons-and-labels = 网格上的方框、箭头、图标和标签；或像素画，还可以变成背景图案。
+draw-request-flow = 请求流程
+draw-browser-asks-server-which-reads = 浏览器向服务器发出请求，服务器读取数据：用箭头连起来的方框。
+draw-flowchart = 流程图
+draw-three-tiers = 三层架构
+draw-phone-and-laptop-api-database = 手机和笔记本、API、数据库和缓存：用图标和连线画出的系统。
+draw-floor-plan = 平面图
+draw-one-bedroom-apartment-from-above = 从上往下看的一居室：房间是带标注的矩形，门是缺口。
+draw-pixel-heart = 像素爱心
+draw-16-by-16-heart-in = 16×16 像素的爱心，可以上色或重新开始。
+draw-background-tile = 背景图案
+draw-8-by-8-pattern-that = 8×8 的重复图案：可用作绘图或任何页面的背景。
+draw-card-for-ninetieth-tilted-on = 九十大寿的贺卡，斜放在彩纸屑背景上：大字、鲜花、大家的爱。
+draw-phone-screen-sketched-in-boxes = 在动工之前用方框勾勒出的手机界面，并注明每个部分为何在那里。
+draw-rosette-with-ribbons-for-volunteer = 为年度志愿者准备的缎带徽章，可打印、剪下并别上。
+draw-block-party-from-above-stage = 从上往下看的街头派对：舞台、摊位、急救点，以及走散时的集合处。
+draw-badge = 徽章
+draw-birthday-card = 生日贺卡
+draw-can-we-refund-it-stores = 能退款吗？商店的退货规则，以问题、答案和该怎么做来呈现。
+draw-event-map = 活动地图
+draw-four-16-by-16-icons = 同一网格上的四个 16×16 图标：太阳、云、雨和风暴，可复制到天气预报或按钮里。
+draw-game-sprite = 游戏角色
+draw-logo-sketch = 标志草图
+draw-order-to-doorstep = 从下单到送到家门口
+draw-pip-frog-32-by-32 = 青蛙 Pip，系红围巾的 32×32 小英雄，已描好边，可以做动画。
+draw-room-plan = 房间布置图
+draw-living-room-rearranged-sofa-rug = 重新布置的客厅：沙发、地毯、书柜和书桌按比例绘制，并画出门的开合范围。
+draw-three-ideas-for-coffee-roasters = 并排的三个咖啡烘焙坊标志创意，名称用大字，并有选定的日期。
+draw-weather-icons = 天气图标
+draw-what-happens-to-package-from = 包裹从买下那一刻起会怎样：用图标和连线表示的分步流程。
+draw-wireframe = 线框图
+draw-picture-svg = 图片（SVG）
+draw-background-tile-svg = 背景图案（SVG）
+draw-background-tile-png = 背景图案（PNG）
+draw-animate-this-drawing = 让这幅绘图动起来
+draw-drawing-of-things = 一幅绘图：{ $things }。
+draw-drawing-of-n-unlabeled-shapes = 一幅绘图，含 { $n ->
+       *[other] { $n } 个未标注的形状
+    }。
+draw-leads-to-b = { $a }指向{ $b }
+draw-joins-b = { $a }连着{ $b }
+draw-empty-drawing = 空白绘图
+draw-pixel-art-n-by-n-filled-squares-filled = 像素画，{ $n }×{ $n }：{ $filled ->
+       *[other] 已填 { $filled } 格
+    }。
+draw-pixel-art-n-by-n = 像素画，{ $n }×{ $n }
+draw-select = 选择
+draw-rectangle = 矩形
+draw-ellipse = 椭圆
+draw-diamond = 菱形
+draw-line = 线条
+draw-arrow = 箭头
+draw-join-two-shapes = 连接两个形状
+draw-pen = 钢笔
+draw-any-shape-tap-for-each = 画任意形状，每个角点一下
+draw-freehand = 手绘
+draw-drag-to-draw-line-or = 拖动画线或形状
+draw-rounded-box = 圆角框
+draw-hexagon = 六边形
+draw-parallelogram = 平行四边形
+draw-cylinder = 圆柱体
+draw-note = 便签
+draw-black = 黑色
+draw-red = 红色
+draw-orange = 橙色
+draw-green = 绿色
+draw-blue = 蓝色
+draw-purple = 紫色
+draw-indigo = 靛蓝
+draw-yellow = 黄色
+draw-sky = 天蓝
+draw-pink = 粉色
+draw-clear = 清除
+draw-shapes = 形状
+draw-more = 更多
+draw-icon = 图标…
+draw-background = 背景
+draw-remove-background-tile = 移除背景图案
+draw-color = 颜色
+draw-arrange = 排列
+draw-no-fill = 无填充
+draw-fill = 填充
+draw-bring-to-front = 置于顶层
+draw-send-to-back = 置于底层
+draw-duplicate = 复制一份
+draw-edit = 编辑
+draw-delete = 删除
+draw-put-icon-on-this-shape = 给这个形状加个图标
+draw-place-icon = 放置图标
+draw-zoom-in = 放大
+draw-zoom-out = 缩小
+# same
+draw-alt = Alt
+draw-alt-text = 替代文字
+draw-alt-text-alt = 替代文字：{ $alt }
+draw-add-alt-text-describe-this = 添加替代文字：为看不到的人描述这幅绘图
+draw-what-does-this-drawing-show = 这幅绘图展示了什么？
+draw-diagram-of = 一张图示，内容是…
+draw-read-aloud-to-people-who = 会读给看不到的人听，并且不论绘图被嵌入还是下载，都随它一起保存。
+draw-describe-from-shapes = 根据形状生成描述
+draw-tap-or-drag-to-paint = 点按或拖动来涂色；方向键移动，Enter 涂色。
+draw-tap-each-corner-tap-first = 依次点按每个角点；再点第一个点或按 Enter，即可闭合。
+draw-drag-to-draw-end-where = 拖动来画；在起点处结束即可闭合成形状。
+draw-press-on-one-shape-and-let-go-on-another = 在一个形状上按下，在另一个形状上松开。
+draw-now-other-shape-tap-it = 现在选另一个形状：点按它，或用方向键选中后按 Enter。
+draw-drag-to-move-them-together = 拖动可一起移动；Shift 加点按可增加或取消一个形状。
+draw-press-on-one-shape-and = 在一个形状上按下，在另一个形状上松开
+draw-tap-where-icon-goes = 点按图标要放的位置。
+draw-drag-on-canvas-to-draw = 在画布上拖动来绘制，或点按放置一个。
+draw-eraser = 橡皮擦
+draw-pencil = 铅笔
+draw-clear-grid = 清空网格
+draw-use-as-background = 用作背景
+draw-grid-is-now-background-download = 网格现在是背景了。“下载”会把它存成图案；任何页面都可以用 tile: 引用它。
+draw-pixel-grid-n-by-n = 像素网格，{ $n }×{ $n }。方向键移动；Enter 用当前颜色涂满这一格。
+draw-row-y-column-x-ink = 第 { $y } 行，第 { $x } 列：{ $ink }
+draw-as-repeating-background = 作为重复背景
+# The contextual bar under a shape, and its words typed on it.
+draw-dashed-line = 虚线
+draw-dotted-line = 点线
+draw-edit-words = 编辑文字
+draw-extra-large-text = 特大字
+draw-gray-fill = 灰色填充
+# same
+draw-l = L
+draw-large-text = 大字
+# same
+draw-m = M
+draw-medium-text = 中字
+# same
+draw-s = S
+draw-small-text = 小字
+draw-solid-fill = 实心填充
+draw-solid-line = 实线
+draw-shape-in-hand = 选中的形状
+draw-words-of-shape = 形状里的文字
+draw-type-words-enter-is-done = 输入文字；Enter 完成，Shift+Enter 换行，Escape 恢复原样。
+# same
+draw-xl = XL
+
+draw-drag-to-move-corner-handle = 拖动移动；角上的手柄调整大小，圆形的手柄旋转；按 Enter 或双击可编辑文字。
+draw-drawing-canvas-v-selects-r = 绘图画布。V 选择；R、E、D、L、A、T 绘制；方向键微调；[ 和 ] 旋转；Enter 编辑文字；Delete 删除。
+draw-tap-shape-to-select-it = 点按形状来选中，或围着形状拖动来框选；选一个工具来绘制。
+draw-rotate-left = 向左旋转
+draw-rotate-right = 向右旋转
+
+## the Animator
+
+anim-animation = 动画
+# The templates: what each motion is, in a line.
+anim-lift-off = 升空
+anim-rocket-climbs-away-with-its = 一枚火箭带着影子飞走，文字随之上升：两个形状，各两个关键帧。
+anim-bouncing-ball = 弹跳的球
+anim-ball-falls-faster-and-faster = 球越落越快，砸向地面，影子在它下面变大；来回播放，就会永远弹下去。
+anim-loading-spinner = 加载转圈
+anim-eight-dots-in-ring-each = 一圈八个点，依次放大，于是页面保存时有一个亮点绕着转。
+anim-title-card = 片头字幕
+anim-red-curtains-part-on-opening = 开幕夜红色幕布拉开，电影节的名字浮现：只播一次，停在片头上。
+anim-present-hops-stars-and-hearts = 一份礼物蹦跳，星星和爱心绕着它摇摆，祝福语闪着彩虹般的字。
+anim-quick-standup = 快速站会
+anim-meme-with-caption-above-and = 一张表情包，上下各有一行说明，中间有个又转又晃的时钟。
+anim-build-is-green = 构建通过
+anim-meme-in-two-lines-of = 一张两行大字的表情包，一座奖杯旋转着飞入、落下并发光。
+anim-flash-card = 单词卡
+anim-card-shows-spanish-word-turns = 卡片显示一个西班牙语单词，翻过来给出英语，再翻回去：绕竖轴转动。
+anim-weather-this-week = 本周天气
+anim-four-days-of-weather-in = 里斯本四天的天气，每个图标都在动：太阳转动，云朵飘移，闪电抖动。
+anim-new-year-countdown = 新年倒计时
+anim-three-two-one-second-each = 三、二、一，每秒一个，然后新年以彩虹般的字到来：只播一次，停在祝福语上。
+anim-flight-path = 航线
+anim-plane-crosses-dotted-route-from = 一架飞机沿虚线航线从纽约飞往里斯本，边飞边爬升，上方是航班时间。
+anim-neon-sign = 霓虹招牌
+anim-cafes-sign-at-night-name = 夜里咖啡馆的招牌：名字闪烁，下方凸显营业时间，咖啡杯发光并膨胀。
+anim-sunrise = 日出
+anim-sun-comes-up-from-behind = 太阳从山后升起，清晨滑入画面：有景深、大小变化，还有钢笔画出的天际线。
+# A key is a moment a shape is set at; between keys it travels. The effects (Impact … Blur) are meme looks.
+anim-animated-gif = 动画 GIF
+anim-video-webm = 视频（WebM）
+anim-animated-svg = 动画 SVG
+anim-empty-stage = 空舞台
+# same
+anim-3d = 3D
+anim-add-key-here = 在此添加关键帧
+anim-blur = 模糊
+anim-depth = 景深
+anim-effects = 效果
+anim-frame-n-s-s = 第 { $n } 帧，{ $s } 秒
+anim-impact = 冲击
+anim-key-at-s-s = { $s } 秒处的关键帧
+anim-mirror = 镜像
+anim-mode = 模式
+anim-moments = 时刻
+anim-move = 移动
+anim-neon = 霓虹
+anim-pause = 暂停
+anim-play = 播放
+anim-pixel-art-is-made-in = 像素画在绘图工具里制作；动画制作让形状动起来。
+anim-rainbow = 彩虹
+anim-remove-this-key = 移除这个关键帧
+anim-shadow = 阴影
+anim-size = 大小
+anim-spin = 旋转
+anim-stage-alt-arrow-keys-move = 舞台：{ $alt }。方向键移动选中的形状（或时间），逗号和句号逐帧步进，空格播放，K 保存关键帧。
+anim-shapes-in-hand = 选中的形状
+anim-time = 时间
+anim-wobble = 摇晃
+anim-now-s-of-all-s = { $now } 秒 / 共 { $all } 秒
+anim-settings = 设置
+anim-this-frame = 这一帧
+anim-duplicate-this-frame = 复制这一帧
+anim-frame-earlier = 前移一帧
+anim-frame-later = 后移一帧
+anim-delete-this-frame = 删除这一帧
+anim-draw-shapes-move-sets-them = 画出形状；“移动”让它们动起来。
+anim-nothing-here-yet-draw-something = 这里还没有内容：先画点什么。
+anim-tap-shape-then-drag-it = 点按一个形状，再把它拖到它该去的位置。
+anim-drag-it-to-where-it = 把它拖到 { $s } 秒时该在的位置。
+
+anim-anything-from-drawing-tool-moving = 绘图工具里的任何东西都能动起来：位置、景深、大小、旋转和翻转随时间变化，还有表情包效果。
+anim-back-and-forth = 来回播放
+anim-forward-then-back = 先正放，再倒放
+anim-frames = 帧
+anim-frames-second = 每秒帧数
+anim-how-large-shape-is-drawn = 形状画得多大：1× 即原样。
+anim-length-speed-and-repeat = 时长、速度和重复
+anim-loop-forever = 循环播放
+anim-play-once = 只播一次
+anim-turn = 翻转
+anim-turns-shape-about-its-upright = 让形状绕竖轴转动，像一张卡片：转到 90° 时只剩侧边，再往后就是镜像。
+anim-turns-shape-around-in-plane = 让形状在舞台平面内旋转，像车轮。
+anim-which-shape-is-in-front = 哪个形状在前面：近的盖住远的，远的稍暗一点。景深不会改变大小。
+anim-n-times = { $n } 次
+anim-s-s = { $s } 秒
+
+## the Outliner
+
+# The bullet is the line to the parent; a join between any two items is a connection. { $from } and { $to } are items' words.
+outline-named-label = ，名为“{ $label }”
+outline-book = 一本书
+outline-decision = 一个决定
+outline-talk = 一场演讲
+outline-empty-outline = 空白大纲
+outline-outliner-ideas-under-ideas-folded = 大纲工具：想法下面套想法，可折叠展开、移动和连接；演示文稿或思维导图读的也是同一棵树。
+outline-arrow-from-from-to-to = 从{ $from }到{ $to }的箭头
+outline-arrows-both-ways = 双向箭头
+outline-as-page = 作为页面
+outline-calculator = 计算器
+outline-calendar = 日历
+outline-cancel-connecting = 取消连接
+outline-change-it = 更改
+outline-chosen-items = 选中的条目
+outline-connect = 连接
+outline-connect-from-words = 从“{ $words }”开始连接
+outline-connect-from-to-to = 把“{ $from }”连接到“{ $to }”
+outline-connection-from-from-to-to = 从{ $from }到{ $to }的连接
+outline-connections = 连接
+outline-copy = 复制
+outline-presentation-builder = 演示文稿
+outline-diagram-maker = 图示制作
+outline-drag-to-move = 拖动移动
+outline-draw-as-mind-map = 画成思维导图
+outline-draw-as-network = 画成网络图
+outline-draw-as-org-chart = 画成组织架构图
+outline-empty = 空
+outline-everything = 全部
+outline-fold = 折叠
+outline-fold-all = 全部折叠
+outline-item = 条目
+outline-item-n = 条目 { $n }
+outline-kind-of-line = 线型
+outline-launch-plan = 发布计划
+outline-line-from-from-to-to = 从{ $from }到{ $to }的线
+outline-line-named-label-change-it = 名为“{ $label }”的线：点此更改
+outline-animator = 动画制作
+outline-move-down = 下移
+outline-move-this-item-drag-it = 移动此条目：把它拖到另一个条目上
+outline-move-up = 上移
+outline-name-of-line = 线的名称
+outline-numbered = 编号
+outline-opml-for-outliners = OPML（用于大纲工具）
+outline-open-in-new-tab = 在新标签页中打开
+outline-outline = 大纲
+outline-outliner = 大纲
+outline-outline-lowercase = 大纲
+outline-paste = 粘贴
+outline-plain-line = 普通线
+outline-plain-text = 纯文本
+outline-show-as-slides = 显示为幻灯片
+outline-show-as-outline = 显示为大纲
+outline-take-away-connection-from-from = 去掉从{ $from }到{ $to }的连接
+outline-take-it-away = 去掉
+outline-take-connection-away = 去掉连接
+outline-tap-item-to-connect-from = 点按要从它出发连接的条目。
+outline-tap-item-to-connect-words = 点按要把“{ $words }”连接到的条目。
+outline-question-options-under-it-and = 问题，下面是选项，每个选项都列出支持和反对的理由。
+outline-trip-planner = 行程规划
+outline-twenty-minutes-in-three-parts = 三部分共二十分钟：问题、想法、意义；显示为幻灯片时，每个顶层条目一张。
+outline-unfold-all = 全部展开
+outline-unfold-n-inside = 展开，里面有 { $n ->
+       *[other] { $n } 项
+    }
+outline-untitled = 未命名
+outline-view-as = 查看方式
+outline-zoomed-in-on = 已放大到
+outline-a-plain-line = 普通线
+outline-arrow-from-parent = 来自上级的箭头
+outline-arrow-to-parent = 指向上级的箭头
+outline-arrows-both-ways-lowercase = 双向箭头
+outline-e-g-owns-feeds-reports = 例如：拥有、提供给、汇报给
+outline-item-above = 上面的条目
+outline-this-item = 此条目
+# The templates: their names and blurbs (templates.md says what each is for).
+outline-company = 一家公司
+outline-decision-tree = 决策树
+outline-family = 一个家庭
+outline-five-minute-retirement-toast-opening = 五分钟的退休祝酒词：开场、三个故事、祝酒，每一段的时间都写在它那一行。
+outline-novel = 一部小说
+outline-product-launch-product-marketing-and = 一次产品发布：产品、营销和下面的支持，各分支之间有连线。
+outline-research-plan = 研究计划
+outline-speech = 一篇演讲
+outline-syllabus = 课程大纲
+outline-ten-week-course-when-and = 十周的课程：时间和地点、每周一个带编号的主题、如何评分，以及读什么。
+outline-thesis-two-arguments-with-their = 一篇论文：两个论点及其证据、反对意见与回应，以及出路。
+outline-essay-plan = 论说文提纲
+outline-draw-as-family-tree = 画成家谱
+outline-five-days-in-lisbon-packed = 里斯本五日游，按类别打包，附出门前要做的事。
+outline-indoors-or-out-for-saturday = 周六集市在室内还是室外：每个问题的答案各占一行，是或否。
+outline-no-internet-at-home-question = 家里没有网络：每一步一个是非问题，一直问到该打的那通电话。
+outline-packing-list = 行李清单
+outline-parts-and-chapters-of-book = 一本思想之书的各部分和各章，每章下面一行写它的论点。
+outline-people-and-three-acts-of = 人物和三幕各章，每章写发生了什么，人物改变章节处用连线连起来。
+outline-question-method-budget-that-adds = 问题、方法、自动合计的预算、时间表、风险和阅读材料。
+outline-three-generations-and-next-each = 三代人再加下一代，各有生卒年份，可从菜单画成家谱。
+outline-troubleshooting = 故障排查
+outline-who-works-for-whom-at = 九个人的面包店里谁为谁工作，各有职务，可从菜单画成组织架构图。
+
+## the Presentation Builder
+
+# Its templates: the occasions and a second of each printed format.
+deck-choirs-winter-concert-welcome-both = 合唱团的冬季音乐会：欢迎词、上下半场、乐曲说明、歌手，以及可以跟唱的歌词。
+deck-lesson = 一堂课
+deck-lost-pet-poster-in-red = 红色的寻宠海报：名字、样子、在哪里见过、联系电话。
+deck-morning-workshop-schedule-checklist-of = 上午的工作坊：时间表、要带什么的清单、步骤，以及下一步去哪里。
+deck-pick-your-own-farm-what = 一座自助采摘农场：什么时候长什么、怎么玩、价格、谷仓和怎么找到。
+deck-pitch = 一次推介
+deck-product-in-sentence-what-it = 一句话讲产品、它能做什么、表格里的价格、发布日期和媒体联系人。
+deck-trivia-night-in-four-rounds = 分四轮的知识问答之夜，还有一张得分表，答案在最后一张幻灯片上。
+deck-residents-meeting-about-new-playground = 关于新游乐场的居民会议：为什么、提议什么、饼图里的预算、何时、怎样发表意见。
+deck-science-lesson-on-chalkboard-aims = 黑板上的一堂科学课：目标、已知内容、模型、检查、作业；每一页下面有教师备注。
+deck-seed-pitch-in-eight-slides = 八张幻灯片的种子轮推介：问题、产品、图表里的增长、商业模式、团队、诉求。
+deck-bike-shops-quarter-for-its = 一家店向合伙人汇报本季度：图表里的营收、成绩与失误、关键数字、下季度。
+deck-small-story-in-panels-about = 一个格子漫画小故事，讲向邻居借东西。
+deck-twenty-minute-talk-with-speaker = 二十分钟的演讲，每张幻灯片都有演讲者备注，附结果图表、一条脚注和心得。
+deck-badges-for-conference-each-with = 会议用的胸牌，每个都写明角色和来自哪里，用“海洋”风格。
+deck-comic-umbrella = 漫画：雨伞
+deck-concert-program = 音乐会节目单
+deck-conference-badges = 会议胸牌
+deck-conference-talk = 会议演讲
+deck-farm-brochure = 农场宣传册
+deck-lost-cat-poster = 寻猫海报
+deck-product-launch = 产品发布
+deck-quarterly-review = 季度回顾
+deck-recipe-zine = 食谱小册子
+deck-seven-soups-for-cold-week = 寒冷一周的七道汤，一页一道，用一张纸折成小册子。
+deck-their-story-for-reception-from = 他们的故事，用于婚宴：从怎么认识到那一问，附时间线和一段感谢。
+deck-town-hall-notice = 社区公告
+deck-trivia-night = 问答之夜
+deck-wedding-slideshow = 婚礼幻灯片
+deck-workshop-agenda = 工作坊议程
+deck-presentation-lowercase = 演示文稿
+deck-slides = 演示
+deck-chosen-slides = 选中的幻灯片
+deck-move-this-slide-drag-it = 移动此幻灯片：把它拖到另一张上
+deck-slides-titles-bullets-two-columns = 幻灯片：标题、要点、两栏、大图标，以及放在幻灯片上的其他文档；或者可打印折叠的小册子、手册、宣传册、漫画、海报或胸牌。
+
+# The layouts, the transitions, the formats
+deck-bullets = 要点
+deck-two-columns = 两栏
+deck-big-icon = 大图标
+deck-fade = 淡入淡出
+deck-cut = 切换
+deck-slide = 滑动
+deck-zoom = 缩放
+deck-zine = 杂志
+deck-booklet = 小册子
+deck-brochure = 宣传册
+deck-comic = 漫画
+deck-poster = 海报
+deck-name-badges = 胸牌
+
+# The themes (the Look menu) and the icon colors
+deck-plain = 朴素
+deck-boardroom = 会议室
+deck-ivory = 象牙白
+deck-midnight = 午夜
+deck-graphite = 石墨
+deck-confetti = 彩纸屑
+deck-sunset = 日落
+deck-ocean = 海洋
+deck-bubblegum = 泡泡糖
+deck-arcade = 街机
+deck-chalkboard = 黑板
+deck-fun = 趣味
+deck-themes-color = 主题色
+
+# The bar
+deck-present = 放映
+deck-see-sheets-to-print = 查看要打印的页面
+deck-back-to-pages = 返回页面
+deck-headline = 大标题
+deck-layout-layout = 版式：{ $layout }
+deck-look-theme = 风格：{ $theme }
+deck-transition-transition = 转场：{ $transition }
+deck-format-format = 格式：{ $format }
+deck-printing = 打印
+deck-one-sided = 单面
+deck-fold-and-cut = 折叠后剪开
+deck-two-sided = 双面
+deck-cut-and-nest = 剪开后嵌套
+deck-end-with-qr-code-of = 以本演示文稿的二维码结尾
+deck-move-slide-up = 幻灯片上移
+deck-move-slide-down = 幻灯片下移
+deck-delete-slide = 删除幻灯片
+deck-move-page-up = 页面上移
+deck-move-page-down = 页面下移
+deck-delete-page = 删除页面
+
+# Insert
+deck-bullets-slide = 要点幻灯片
+deck-title-slide = 标题幻灯片
+deck-two-column-slide = 两栏幻灯片
+deck-big-icon-slide = 大图标幻灯片
+deck-page = 页面
+deck-title-page = 标题页
+deck-two-column-page = 两栏页
+deck-big-icon-page = 大图标页
+deck-four-more-pages = 再来四页
+deck-on-slide = 幻灯片上
+deck-on-page = 页面上
+deck-pages = 页面
+
+# The canvas
+deck-add-icon = 添加图标
+deck-change-icon = 更换图标
+deck-pick-icon = 选择图标
+deck-left-column = 左栏
+deck-right-column = 右栏
+deck-one-bullet-line = 每行一个要点。
+deck-one-bullet-line-tab-steps = 每行一个要点。按 Tab 缩进。
+deck-line-or-two-under-title = 标题下的一两行
+deck-what-this-page-says-type = 这一页要说的话。字号会缩小以适应页面。
+deck-panel-line-what-is-said = 每行一个画面：说的话 | 图注。用“图标”给它配图。
+deck-speaker-notes = 演讲者备注
+deck-n-total = { $n } / { $total }
+deck-document-on-slide = 幻灯片上的文档
+deck-remove-from-slide = 从幻灯片中移除
+
+# The rail and the sheets
+deck-slide-n = 第 { $n } 张幻灯片
+deck-front-cover = 封面
+deck-back-cover = 封底
+deck-page-n = 第 { $n } 页
+deck-front = 正面
+deck-inside-left = 内页左
+deck-inside-middle = 内页中
+deck-inside-right = 内页右
+deck-inside-flap = 内折页
+deck-back = 背面
+deck-badge-n = 胸牌 { $n }
+deck-last-slide-added-for-you = 最后一张幻灯片，为你加上：整份演示文稿的二维码
+deck-ends-with-qr-code-of = 以本演示文稿的二维码结尾，让现场的人带回家。点“二维码”按钮可关掉它。
+deck-qr-code-of-this-deck = 本演示文稿的二维码
+deck-sheet-side-n = 纸张第 { $n } 面
+deck-cut-along-dashes-this-half = 沿虚线剪开 · 这一半朝外
+deck-print-on-back-flipped-on = 打印在背面，沿长边翻转
+deck-cut-along-dashes-fold-along = 沿虚线剪开 · 沿点线折叠
+deck-print-it-double-sided-on = 用 Letter 纸双面打印，沿长边翻转，按实际大小。沿虚线剪开，把上半部分盖在下半部分上，然后一起从中间对折。
+deck-print-it-on-one-side = 用 Letter 纸单面打印，按实际大小。先沿长边对折，再折成四份；沿中间的虚线剪开；把两端推到一起，折成一本小书。
+deck-print-it-double-sided-on-letter-paper-flipping-on-short-edge-at-actual-size-stack-sheets-in-order-first-on-outside-and-fold-them-together-down-middle = 用 Letter 纸双面打印，沿短边翻转，按实际大小。按顺序叠好，第一张在最外面，然后一起从中间对折。
+deck-print-it-double-sided-on-letter-paper-flipping-on-short-edge-at-actual-size-fold-right-third-in-then-left-third-over-it-front-is-on-top = 用 Letter 纸双面打印，沿短边翻转，按实际大小。先把右边三分之一折进去，再把左边三分之一盖上去：封面在最上面。
+deck-print-it-on-letter-paper = 用 Letter 纸打印，按实际大小。
+deck-print-it-on-letter-paper-at-actual-size-cut-along-dashes-six-badges-sheet = 用 Letter 纸打印，按实际大小。沿虚线剪开：每张六个胸牌。
+
+# Presenting, and the closing slide
+deck-presentation = 演示
+deck-previous = 上一张
+deck-next = 下一张
+deck-stop-presenting = 停止放映
+deck-slide-n-of-total = 第 { $n } 张，共 { $total } 张
+deck-notes = 备注
+deck-n-hides-them = 按 N 隐藏
+deck-take-this-deck-home = 把这份演示文稿带回家
+deck-take-this-deck-home-title = 把这份演示文稿带回家：{ $title }
+deck-scan-code-whole-deck-is = 扫描二维码：整份演示文稿都在链接里。
+deck-a-qr-code-of-this-deck = 本演示文稿的二维码
+
+# Downloads
+deck-powerpoint-pptx = PowerPoint（PPTX）
+deck-picture-of-every-slide-zip = 每张幻灯片的图片（PNG 的 ZIP）
+deck-animation-of-deck-gif = 演示文稿的动画（GIF）
+deck-film-of-deck-webm = 演示文稿的视频（WebM）
+
+# The templates
+deck-title-agenda-three-points-with = 标题、议程、三个带演讲者备注的要点，以及结尾。
+deck-status-update = 进展汇报
+deck-done-and-next-side-by = 已完成和下一步并排，然后是风险，再然后是请求。
+deck-proposal = 提案
+deck-what-you-heard-what-you = 你听到了什么、你提议什么、何时、花多少钱。
+deck-eight-small-pages-from-one = 一张纸做成八个小页：打印、折叠、剪开，或在手机上点按阅读。
+deck-booklet-of-half-letter-pages = 半张 Letter 大小的页面组成的小册子，八到二十页，排好版供打印、嵌套和折叠。
+deck-trifold-brochure-six-panels-on = 三折宣传册：一张纸两面共六个版面，每个都放在折痕需要的位置。
+deck-mini-comic-panels-with-picture = 迷你漫画：带画面、对话气泡和图注的格子，用一张纸折成。
+deck-poster-or-flyer-headline-and = 海报或传单：一个大标题加几行字，尽可能占满一页。
+deck-name-badges-for-meetup-one = 聚会的胸牌，每人一页，一张六个，可直接剪下。
+
+## the Calendar app
+
+cal-calendar = 日历
+# A span is an event on the calendar or a task on the schedule (the Gantt view); { $every } is "Every week" and the like.
+cal-name-yours-say = 一个名字（比如你的）
+cal-schedule-phases-with-their-tasks = 一份日程：各阶段及其下的任务、每项进展到哪里、末尾是发布。
+cal-week-earlier = 提前一周
+cal-week-later = 推迟一周
+cal-weekend-of-sessions-at-set = 一个周末的演出场次，各有固定时间，最后一场过了午夜。
+cal-all-day = 全天
+cal-chart-scrolls-sideways = 图表，可横向滚动
+cal-color-for-new-color = 新建项的颜色：{ $color }
+cal-days = 天数
+cal-days-and-times-on-month = 按月、按年或按日程排的日期和时间，可用任何时区。
+cal-done = 完成 %
+cal-edit-event = 编辑日程
+cal-edit-task = 编辑任务
+cal-choose-task = 选择{ $task }
+cal-day-earlier = 提前一天
+cal-day-later = 推迟一天
+cal-dates = 日期…
+cal-end = 结束
+cal-end-date = 结束日期
+cal-end-time = 结束时间
+cal-ends = 结束于
+cal-event = 日程
+cal-every-day = 每天
+cal-every-month = 每月
+cal-every-week = 每周
+cal-every-year = 每年
+cal-family-calendar = 家庭日历
+cal-festival-weekend = 音乐节周末
+cal-how-many-times = 重复几次
+cal-icalendar-ics = iCalendar（ICS）
+cal-its-own-zone = 自己的时区
+cal-last-day = 最后一天
+cal-lessons-birthdays-and-holidays-color = 课程、生日和假日，每人一种颜色，每周重复的事。
+cal-level = 层级
+cal-month = 月
+cal-my-zone = 我的时区
+cal-never = 从不
+cal-new-event = 新建日程
+cal-new-event-on-day = { $day }的新日程
+cal-new-task = 新建任务
+cal-next-month = 下个月
+cal-next-year = 明年
+cal-no-tasks-yet = 还没有任务
+cal-no-tasks-yet-insert-task = 还没有任务。请插入一个任务。
+cal-nothing-on-calendar-yet-tap = 日历上还没有内容。点按某一天，或拖过几天。
+cal-nothing-this-month = 本月没有内容。
+cal-previous-month = 上个月
+cal-previous-year = 去年
+cal-project-plan = 项目计划
+cal-repeats = 重复
+cal-schedule = 日程表
+cal-show-times-in = 时间显示于
+cal-start = 开始
+cal-start-date = 开始日期
+cal-start-time = 开始时间
+cal-starts = 开始于
+cal-stops = 停止于
+cal-same-dates-as-gantt-chart = 同样的日期，画成甘特图
+cal-this-calendar-is-written-in = 此日历以{ $zone }时间书写。
+cal-this-calendar-names-no-time = 此日历未指定时区：其中的时间按你的时区（{ $zone }）显示。
+cal-this-month = 本月
+cal-time-zone = 时区
+cal-times-in-zone = { $zone }时间
+cal-times-or-on = 次，或到
+cal-view = 视图
+cal-what = 事项
+cal-year = 年
+cal-color-stands-for = { $color }代表
+cal-every-until-date = { $every }，直到{ $date }
+cal-every-n-times = { $every }，共 { $n } 次
+cal-n-days = { $n ->
+       *[other] { $n } 天
+    }
+cal-n-done = 已完成 { $n }%
+# The templates: each name, then its line on the home page.
+cal-bakerys-posts-and-newsletters-through = 面包店整个冬天的帖子和通讯，每天一个降临节故事。
+cal-youth-soccer-season-practice-every = 一个青少年足球赛季：每周训练，主客场穿各自的队服，还有季后赛。
+cal-small-teams-time-off-public = 一个小团队的休假、公共假日和圣诞停工，都在一个日历上。
+cal-community-garden-plots-year-when = 一块分配地的一年：何时播种、栽种、收获和修剪，年年轮回。
+cal-fall-term-from-first-day = 秋季学期从第一天到圣诞：停课、社团、郊游、家长之夜。
+cal-bills-and-renewals = 账单与续费
+cal-conference-agenda = 会议议程
+cal-content-schedule = 内容排期
+cal-editorial-calendar = 编辑日历
+cal-every-autopay-on-its-day = 每笔自动扣款在每月的哪一天，年度续费和报税截止日。
+cal-garden-calendar = 花园日历
+cal-vacation-planner = 假期规划
+cal-league-schedule = 联赛赛程
+cal-school-term = 学期
+cal-training-plan = 训练计划
+cal-twelve-weeks-to-half-marathon = 十二周备战半程马拉松的日程：打基础、加量、冲刺、减量、比赛。
+cal-two-days-of-talks-and = 两天的演讲和工作坊，按小时排，每个会议室一种颜色。
+cal-two-issues-of-quarterly-from = 一份季刊的两期，从稿件到发售，另有月会和发布。
+cal-volunteer-schedule = 志愿者轮班表
+cal-who-does-which-shift-color = 谁值哪个班，每人一种颜色，在圣诞前的食物银行。
+
+## the Diagram Maker
+
+diagram-diagram = 图示
+# One app, eight kinds (mind map, org chart…); a 'thing' is whatever the kind is made of: an idea, a person, a step.
+diagram-mind-maps-org-charts-family = 思维导图、组织架构图、家谱、泳道图、时间线、韦恩图、座位表和网络图，几行字就能画出来。
+diagram-empty-diagram = 空白图示
+# The kinds, one of each kind's things (Insert's item), and how a line of each is written
+diagram-mind-map = 思维导图
+diagram-org-chart = 组织架构图
+diagram-family-tree = 家谱
+diagram-swimlanes = 泳道图
+diagram-timeline = 时间线
+diagram-venn = 韦恩图
+diagram-seating-chart = 座位表
+diagram-network = 网络图
+diagram-idea = 想法
+diagram-person = 人物
+diagram-step = 步骤
+diagram-set = 集合
+diagram-thing = 项目
+# The picture, and the line editor over a thing
+diagram-tap-empty-space-for-thing = 点按空白处添加一个项目；在工具栏点“连线”再依次点两个项目即可连起来；也可以把一个拖到另一个上。
+diagram-tap-here-to-add-first = 点这里添加第一个{ $thing }。
+diagram-tap-in-lane-to-add = 在泳道里点按可添加步骤；点按步骤可输入文字；拖到另一条泳道，或拖到某个步骤上就排在它后面。
+diagram-tap-thing-to-join-name = 点按要与{ $name }连接的项目；点按空白处停止。
+diagram-tap-first-thing-to-join = 先点按第一个要连接的项目，再点另一个；点按空白处停止。
+diagram-this-thing = 这个项目
+diagram-add-under-it = 在它下面添加
+diagram-add-one-more = 再添加一个
+diagram-add-after-it = 在它后面添加
+diagram-add-step = 添加步骤
+diagram-join = 连线
+diagram-make-it-plain-line = 改成普通线
+diagram-make-it-arrow = 改成箭头
+diagram-what-connection-says = 这条连接表示什么
+diagram-who = 谁
+diagram-connection = 一条连接
+diagram-empty = 空
+# The templates
+diagram-empty-kind-to-start-from = 一个空白的{ $kind }，从这里开始。
+diagram-browser-api-database-cache-and = 浏览器、API、数据库、缓存和后台任务，以及它们怎样交流。
+diagram-building-project = 一个建筑项目
+diagram-launch-and-everything-that-branches = 一次发布及由它延伸出的一切：产品、营销、支持。
+diagram-package-through-store-warehouse-and = 一个包裹经过商店、仓库和快递员，中间有一个判断。
+diagram-small-company = 一家小公司
+diagram-wedding-dinner = 婚宴
+diagram-year-of-dates-from-plans = 一年的日期，从方案获批到开门营业。
+diagram-cats-and-dogs = 猫和狗
+diagram-computing-briefly = 计算机简史
+diagram-fast-cheap-good = 快、便宜、好
+diagram-four-tables-and-who-sits = 四张桌子，以及每张桌子旁坐着谁。
+diagram-from-lovelace-to-now-spaced = 从洛芙莱斯到今天，按年份的实际间隔排布，底部标出时代。
+diagram-from-order-to-doorstep = 从下单到送到家门口
+diagram-from-job-description-to-yes = 从职位描述到一声“好”，一条泳道一条泳道地走。
+diagram-grandparents-their-children-and-grandchildren = 祖父母、他们的子女和孙辈，附年份。
+diagram-hiring-someone = 招一个人
+diagram-how-app-hangs-together = 应用是怎样组合在一起的
+diagram-seven-people-who-reports-to = 七个人，谁向谁汇报，以及一条虚线。
+diagram-garden-this-year = 今年的花园
+diagram-three-generations = 三代人
+diagram-three-sets-and-every-overlap = 三个集合和每处重叠，写明什么属于哪里。
+diagram-two-sets-and-what-they = 两个集合，以及它们的共同点。
+diagram-what-to-grow-and-jobs = 种什么、做什么，画成思维导图。
+diagram-biology-final-in-december-topic = 十二月的生物期末考，一个主题一个主题地复习，以及怎样把复习做完。
+diagram-classroom = 一间教室
+diagram-family-with-godmother = 有一位教母的家庭
+diagram-principal-her-assistant-principals-classroom = 一位校长、她的副手们、各班教师和后勤主管。
+diagram-move-to-lisbon-by-march = 三月前搬到里斯本：证件、住处、工作和生活，以及什么必须先办。
+diagram-elementary-school = 一所小学
+diagram-restaurant-kitchen = 一间餐厅厨房
+diagram-router-and-everything-on-it = 一台路由器和上面的一切：笔记本、手机、打印机、电视和门铃。
+diagram-team-by-its-skills-design = 按技能划分的团队：设计、写作和代码，以及谁身兼数职。
+diagram-expense-report = 一份报销申请
+diagram-apollo-11 = 阿波罗 11 号
+diagram-board-game-night = 桌游之夜
+diagram-class-4b-at-four-tables = 4B 班按颜色分坐四张桌子，外加阅读角。
+diagram-eight-days-in-july-1969 = 1969 年 7 月的八天，逐日记录，从发射到溅落。
+diagram-four-games-table-each-and = 四种游戏，每种一张桌子，以及谁在玩什么。
+diagram-from-photo-of-receipt-to = 从收据照片到工资单，经过经理和财务。
+diagram-moving-abroad = 移居国外
+diagram-patrick-and-maria-their-six = 帕特里克和玛丽亚，他们的六个孩子及其生卒年份，以及抚养孩子们的姑姑。
+diagram-studying-for-exam = 备考复习
+diagram-sea-clouds-mountains-rivers-groundwater = 海洋、云、山、河、地下水和植物，以及水在它们之间如何流动。
+diagram-brontes = 勃朗特一家
+diagram-brigade-under-head-chef-front = 主厨领导的厨房团队，旁边是前厅。
+diagram-house-network = 家庭网络
+diagram-water-cycle = 水循环
+diagram-three-generations-of-morenos-and = 莫雷诺家的三代人，以及通向一位教子的虚线。
+diagram-who-can-do-what = 谁能做什么
+
+## the Trip Planner
+
+trip-trip = 行程
+# A stop is a place on the route; { $n } is its number, { $time } a drive such as "1 hr 38 min". 'Trip Planner' and 'Plan' are above.
+trip-route-on-map-stops-in = 地图上的路线：按顺序的各个站点，每站一条备注，以及站与站之间的距离。
+trip-gpx-route = GPX 路线
+# same
+trip-geojson = GeoJSON
+# The bar and the map
+trip-a-place-by-name = 按名称找地点…
+trip-stop-at-middle-of-map = 地图中央的一个站点
+trip-measure-in = 距离单位
+trip-hours-of-driving = 驾车时长
+trip-miles = 英里
+trip-kilometers = 公里
+trip-join-stops-in-order = 按顺序连接各站点
+trip-show-whole-route = 显示完整路线
+trip-where-i-am = 我的位置
+trip-map = 地图
+trip-map-tap-to-add-stop = 地图：点按添加站点
+trip-maps-pictures-come-from-openstreetmap = 地图显示时，图片来自 OpenStreetMap。
+trip-your-location-is-asked-for = 只为了让地图居中才会请求你的位置，而且不会写到任何地方。
+trip-n-stops = { $n ->
+       *[other] { $n } 个站点
+    }
+trip-stop-n = 第 { $n } 站
+# A stop's number is its handle; the bar under stops chosen whole.
+trip-stop-n-tap-chooses-it = 第 { $n } 站：点按选中，拖动移动
+trip-chosen-stops = 选中的站点
+trip-show-on-map = 在地图上显示
+trip-name-of-stop-n = 第 { $n } 站的名称
+trip-note-for-stop-n = 第 { $n } 站的备注
+trip-about-time-by-car = 驾车约 { $time }
+trip-tap-map-to-add-first = 点按地图添加第一个站点，或按名称插入一个地点。
+trip-insert-place-by-name = 按名称插入一个地点。
+# Finding a place by name
+trip-place-by-name = 按名称找地点
+trip-find-place = 查找地点
+trip-town-address-museum = 城镇、地址、博物馆
+trip-search = 搜索
+trip-searching = 搜索中…
+trip-searching-sends-words-you-type = 搜索只会把你输入的文字发送给 OpenStreetMap 的 Nominatim，不会发送别的。
+trip-places-found = 找到的地点
+trip-nothing-found = 什么也没找到。
+# The templates
+trip-week-in-portugal = 葡萄牙一周
+trip-lisbon-to-porto-by-car = 驾车从里斯本到波尔图，单位公里，每站一条小贴士。
+trip-down-pacific-coast = 沿太平洋海岸而下
+trip-san-francisco-to-los-angeles = 沿 1 号公路从旧金山到洛杉矶，单位英里。
+trip-scottish-highlands = 苏格兰高地
+trip-loop-from-edinburgh-each-leg = 从爱丁堡出发的环线，每段按驾车小时计。
+trip-rome-places-to-see = 罗马，值得一看的地方
+trip-places-as-dots-not-route = 地点只是点，不是路线：看什么、何时去。
+trip-weekend-in-copenhagen = 哥本哈根周末游
+trip-friday-night-to-sundays-train = 从周五晚上到周日的火车，步行，单位公里。
+trip-icelands-ring-road = 冰岛环岛公路
+trip-ten-days-around-island-by = 驾车环岛十天，每段按驾车小时计。
+trip-dublin-food-crawl = 都柏林美食漫步
+trip-seven-places-to-eat-in = 一个下午吃七个地方，自西向东，每两家之间步行不远。
+trip-yosemites-mist-trail-loop = 优胜美地薄雾步道环线
+trip-two-waterfalls-on-day-hike = 从快乐岛出发往返的一日徒步，经过两道瀑布，单位英里。
+trip-loire-by-bike = 骑行卢瓦尔河
+trip-orleans-to-saumur-in-six = 六天从奥尔良到索米尔，一座城堡接一座城堡，单位公里。
+trip-college-tour = 大学参观之旅
+trip-six-campuses-in-new-england = 一周内参观新英格兰的六个校园，每处都预约了导览。
+trip-japan-by-rail = 乘火车游日本
+trip-tokyo-to-miyajima-in-cherry = 樱花季里乘子弹头列车，从东京到宫岛。
+trip-last-100-km-of-camino = 朝圣之路最后 100 公里
+trip-sarria-to-santiago-on-foot = 从萨里亚步行到圣地亚哥，一天一段。
+trip-new-york-in-movies = 电影里的纽约
+trip-seven-film-and-tv-locations = 七个电影和电视取景地，一天内从上城到下城。
+trip-wedding-on-lake-como = 科莫湖的婚礼
+trip-for-guests-where-wedding-is = 给宾客看的：婚礼在哪里、住哪里、怎么去。
+
+## shared: the Word Processor's looks, the header's Home, a money column's currency
+
+looks-typewriter = 打字机
+looks-serif = 衬线体
+looks-home = 首页
+looks-currency = 货币
+
+## the Calculator app
+
+calc-calculation = 计算
+# The tape is the list of lines worked out, as on a printing calculator. 'Calculator' and 'Numbers' are above.
+calc-calculator-that-shows-its-work = 会保留运算过程的计算器：名称、单位和换算，以及 y = f(x) 的图像。
+calc-tape-text = 计算纸带（文本）
+# The bar
+calc-graph = 图像
+calc-clear-tape = 清除纸带
+calc-clear-graph = 清除图像
+# Insert: functions, and what the second engine reads
+calc-functions = 函数
+calc-sine = 正弦
+calc-cosine = 余弦
+calc-tangent = 正切
+calc-natural-log = 自然对数
+calc-log-base-ten = 以十为底的对数
+calc-square-root = 平方根
+calc-absolute-value = 绝对值
+calc-factorial = 阶乘
+calc-e-number = e，自然常数
+calc-x-for-graph = x，用于画图
+calc-units-and-algebra = 单位与代数
+calc-convert-to = 换算为
+calc-derivative = 导数
+calc-simplify = 化简
+# The tape, the line being typed, the keys; { $answer } is a result such as 42 or 7.62 cm
+calc-tape = 纸带
+calc-line-n = 第 { $n } 行
+calc-put-answer-in-line = 把{ $answer }放进这一行
+calc-no-answer = 没有结果
+calc-take-away-line-n = 去掉第 { $n } 行
+calc-sum = 求和
+calc-type-or-tap = 输入或点按
+# same
+calc-y = y =
+# same
+calc-y-equals-ellipsis = y = …
+calc-at-x-1-answer = x = 1 时：{ $answer }
+calc-keys = 按键
+calc-backspace = 退格
+calc-clear-line = 清空这一行
+calc-answer-before = 上一个结果
+calc-type-sum-or-3-inch = 输入算式，或 3 inch to cm，然后按 Enter。a = 12 会按名称保存一个结果。
+calc-type-curve-in-x-such = 输入关于 x 的曲线，如 x^2 或 sin(x)，按 Enter 画出来。
+# The templates
+calc-splitting-bill = 分摊账单
+calc-food-drinks-and-18-tip = 餐食、饮料和 18% 的小费，六人均摊，每一步都按名称保存。
+calc-shopping-total = 购物合计
+calc-tape-of-market-apples-and = 市场的计算纸带：按重量买苹果和奶酪，合计，以及 60 美元找回的零钱。
+calc-tax-on-price = 商品税
+calc-new-york-city-sales-tax = 把纽约市的销售税加到价格上，再从收据里扣回来。
+calc-percentage-change = 涨幅百分比
+calc-rent-up-from-1-450 = 房租从 $1,450 涨到 $1,595：涨了多少、百分之几，以及与加薪相比。
+calc-kitchen-conversions = 厨房换算
+calc-cups-ovens-spoons-and-weights = 杯、烤箱温度、勺和重量，从一种计量换成另一种。
+calc-scaling-recipe = 食谱放量
+calc-banana-bread-for-eight-made = 八人份的香蕉面包做成十二人份：每种用量乘以一点五。
+calc-unit-conversions = 单位换算
+calc-feet-to-centimeters-miles-to = 英尺换厘米、英里换公里、磅换千克、华氏度换摄氏度。
+calc-currency-at-rate-you-type = 按你输入的汇率换算货币
+calc-trip-priced-in-euros-and = 用欧元核算的一次旅行，换成美元，再加上刷卡手续费。
+calc-fuel-for-trip = 旅行用油
+calc-boston-to-montreal-and-back = 波士顿到蒙特利尔往返：英里数、每加仑英里数、油价，四种算法。
+calc-paint-for-room = 给房间刷漆
+calc-walls-less-door-and-windows = 墙面减去门窗，刷两遍，用一加仑一桶的漆。
+calc-time-zones = 时区
+calc-one-call-at-9-in = 一场定在纽约上午 9 点的通话，以及伦敦、柏林、孟买、东京和悉尼那时是几点。
+calc-running-pace = 跑步配速
+calc-10k-in-52-30-minutes = 52:30 跑完 10 公里：每公里和每英里用时，以及按此配速的半程和全程马拉松。
+calc-body-mass-index = 体重指数
+calc-weight-over-height-squared-in = 体重除以身高的平方，用千克和米，或磅和英寸。
+calc-dose-by-weight = 按体重算剂量
+calc-milligrams-kilogram-turned-into-milliliters = 每千克多少毫克，换算成糖浆的毫升数；每个剂量都请药剂师核对。
+calc-electricity-for-appliance = 电器用电
+calc-watts-hours-day-and-price = 瓦数、每天用几小时和每千瓦时的价格：一台取暖器每月花多少钱。
+calc-loan-payment = 贷款还款
+calc-24-000-at-6-9 = $24,000，利率 6.9%，六十个月：月供和总利息。
+calc-compound-interest = 复利
+calc-5-000-and-200-month = $5,000 起步，每月再存 $200，年利率 5%，十年，与投入的本金相比。
+calc-break-even = 盈亏平衡
+calc-costs-against-sales-for-coffee = 咖啡车的成本与收入：两条线相交处，就是每天需要卖出的杯数。
+calc-curve-and-its-slope = 曲线与斜率
+calc-x3-3x-its-derivative-and = x³ − 3x、它的导数，以及低谷处水平的切线。
+calc-waves-adding-up = 波的叠加
+calc-sine-waves-summed-on-their = 正弦波相加，一步步逼近方波。
+
+calc-templates-for-app = { $app }的模板
+calc-app-templates = { $app }的模板
+calc-templates-for-app-name = { $app }的模板：{ $name }
+calc-templates-are-not-saved-in = 模板还没有保存在此浏览器中。连接互联网即可查看。
+# The grip on a line of the tape; the bar under lines chosen whole.
+calc-choose-line-n-drag-it = 选中第 { $n } 行：拖动即可移动
+calc-chosen-lines = 选中的行
+# The Spreadsheet: any column removed, the Option column, rich cells, a chart put in from Insert.
+calc-sheet-keeps-one-column = 工作表至少保留一列
+calc-bold-italic-and-links = 粗体、斜体和链接
+calc-choices = 选项
+calc-choices-for-ref = { $ref }的选项
+calc-one-of-words-column-holds = 此列已有的词之一，或一个新词
+calc-option = 选项
+calc-sheet-has-one = 工作表里已有一个
+calc-documents = 文档
+calc-find-app-template = 查找应用、模板
+calc-find-app-doc-template-or = 查找应用、文档、模板或命令
+calc-find-app-template-or-command = 查找应用、模板或命令
+calc-commands = 命令
+calc-new-noun-date-n = 新建{ $noun } { $date } #{ $n }
+calc-nothing-by-that-name = 没有这个名字的内容
+calc-pixels-n-n = 像素 { $n }×{ $n }
+# Files, compare, posting and embedding: the agent and sharing surface.
+calc-mastodon-server-like-mastodon-social = Mastodon 服务器，如 mastodon.social
+calc-change = 更改
+calc-changes = 更改
+calc-compare = 比较
+calc-copy-embed-code = 复制嵌入代码
+calc-copy-show-link = 复制放映链接
+calc-edit-this-deck = 编辑这份演示文稿
+calc-embed = 嵌入
+calc-embed-code-copied = 嵌入代码已复制
+calc-no-difference = 没有差别
+calc-not-link-to-tiny-little = 不是 小小办公室 文档的链接
+calc-opened-name = 已打开{ $name }
+calc-opens-deck-already-presenting = 打开后直接进入放映状态。
+calc-pdf-file = PDF 文件
+calc-pdf-sections-and-bullets = PDF：章节和要点
+calc-paste-second-link-to-see = 粘贴第二个链接，查看改了什么。
+calc-paste-link-to-document-as = 粘贴文档现在的链接
+calc-paste-link-to-document-as-it-was = 粘贴文档之前的链接
+calc-post = 发布
+calc-post-link = 发布链接
+calc-show-preview-of-first-page = 显示第一页的预览
+calc-picture-of-first-page-and = 第一页的图片和标题会在我们的服务器上以可读形式保存一个月，以便社交网络获取。文档本身不会。
+calc-shared-without-preview-reason = 已分享，但没有预览：{ $reason }
+calc-making-preview = 正在生成预览…
+calc-page-could-not-be-drawn = 无法绘制页面
+calc-picture-is-over-400-kb = 图片超过 400 KB
+calc-server-could-not-be-reached = 无法连接服务器
+calc-hundred-previews-day-from-one = 同一个地址每天最多一百个预览
+calc-server-refused-picture = 服务器拒绝了这张图片
+calc-put-in = 加入：
+calc-swap = 对调
+calc-taken-out = 删去：
+calc-that-file-is-not-words = 这个文件里的文字 小小办公室 读不了。
+calc-that-file-is-too-large = 这个文件太大，不能作为文档。
+calc-first-link = 第一个链接
+calc-pages-in-frame-on-another = 这些页面，放在另一个网站的框架里，并附链接可在这里打开。
+calc-second-link = 第二个链接
+calc-two-links-to-documents-side = 两份文档的链接并排比较：第二份改动的地方会标出来。不会有任何内容离开此页。
+calc-your-mastodon-server = 你的 Mastodon 服务器
+calc-different-apps = 不同的应用
+calc-n-blocks-taken-out = { $n ->
+       *[other] 删去 { $n } 段
+    }
+calc-n-put-in = { $n ->
+       *[other] 加入 { $n } 段
+    }
+calc-tap-empty-space-for-branch = 点按空白处添加一个分支；点按某个想法来输入，按 Enter 写下一个；把一个拖到另一个上就放在它下面；“连线”可把地图上的两个连起来。
+# Restored around the document: search, Find in this document, the shortcuts and the apps' keys, Mod+S, the size of
+# everything, Add to home screen, another version kept here, where the link fits, Open in another app, the QR code
+# of this document, Insert narrowed by typing, Trip presenting, a seating chart's place cards
+calc-qr-code-of-this-document = 本文档的二维码
+calc-frame-back-frame-on = 退一帧，进一帧
+calc-new-slide = 新幻灯片
+calc-add-to-home-screen = 添加到主屏幕
+calc-another-version = 另一个版本
+calc-normal-size = 正常大小
+calc-documents-found = 找到的文档
+calc-edit-cell-caret-at-its = 编辑单元格，光标在末尾
+calc-everything-larger = 整体放大
+calc-everything-smaller = 整体缩小
+calc-find-in-this-document = 在本文档中查找
+calc-fold-unfold = 折叠，展开
+calc-indent-or-bring-out-in = 在列表中缩进或取消缩进；在表格中到下一个单元格
+calc-keep-this-document-on-device = 把这份文档保留在设备上
+calc-kept-on-this-device = 已保留在此设备上
+calc-keyboard-shortcuts = 键盘快捷键
+calc-left = 左
+calc-move-selected-items-up-or = 把所选条目上移或下移
+calc-no-document-here-has-those = 这里没有文档含这些词
+calc-not-found = 没找到
+calc-nothing-starts-q = 没有以“{ $q }”开头的内容
+calc-nothing-to-keep-yet = 还没有可保留的内容
+calc-nudge-shapes-in-hand = 微调选中的形状
+calc-nudge-shapes-in-hand-with = 微调选中的形状；没有选中时，逐帧步进
+calc-open-as-outline = 以大纲形式打开
+calc-open-it = 打开它
+calc-place-cards = 座位卡
+calc-play-or-pause = 播放或暂停
+calc-presenting-trip = 放映行程
+calc-presenting-back = 放映：返回
+calc-presenting-next-line-or-slide = 放映：下一行或下一张幻灯片
+calc-presenting-next-stop = 放映：下一站
+calc-presenting-stop-before = 放映：上一站
+calc-print-place-cards = 打印座位卡
+calc-print-place-cards-card-guest = 打印座位卡：每位宾客一张，每张 Letter 纸八张，可剪下
+calc-save-in-browser-is-off = “在浏览器中保存”已关闭：此浏览器不保留任何文档。在菜单中打开它，即可把文档保留在这里。
+calc-put-back-what-cell-held = 恢复单元格原来的内容
+calc-put-dated-rows-on-calendar = 把带日期的行放到日历上
+calc-put-stops-on-calendar-day = 把各站点放到日历上，每天一站
+calc-search-your-documents = 搜索你的文档
+calc-select-all-words-of-box = 全选：先选框内文字，再选全部
+calc-show-these-shortcuts = 显示这些快捷键
+# same
+calc-a4 = A4
+calc-letter = 美式信纸
+calc-back-to-words = 回到文字
+calc-extend-selection = 扩大选择
+calc-presenting-whole-slide = 放映：整张幻灯片
+calc-first-last = 第一个，最后一个
+calc-next-or-one-before = 下一个或上一个
+calc-this-browser-lets-page-paste = 此浏览器只允许页面通过键盘粘贴：请使用键盘上的“粘贴”。
+calc-size-of-everything = 整体大小
+calc-skip-to-apps = 跳到应用
+calc-skip-to-document = 跳到文档
+calc-starting-q = 以“{ $q }”开头
+calc-step-out-close-collapse-let = 退出：关闭、收起、松开
+calc-first-frame-last = 第一帧，最后一帧
+calc-next-stop = 下一站
+calc-slide-before-slide-after-on = 上一张幻灯片，下一张幻灯片（在侧栏中）
+calc-stop-before = 上一站
+calc-this-device-keeps-another-version = 此设备上保留着“{ $title }”的另一个版本，来自{ $when }。
+calc-this-link-was-made-by = 这个链接由更新版本的 小小办公室 生成。请重新加载页面。
+calc-this-page = 此页面
+calc-check-or-uncheck-task = 勾选或取消勾选任务
+calc-to-add-tiny-little-office = 要把 小小办公室 添加到主屏幕：点“分享”，再点“添加到主屏幕”。
+calc-too-long-for-qr-code = 二维码装不下：请缩短文档，或分享短链接。
+calc-uses = 用途
+calc-where = 位置
+calc-where-link-fits = 链接放得下的地方
+calc-any-length = 任意长度
+calc-n-documents-found = { $n ->
+       *[other] 找到 { $n } 份文档
+    }
+calc-n-of-count = { $n } / { $count }
+calc-n-over = 超出 { $n }
+calc-password-copied = 密码已复制
+calc-guest = 宾客
+calc-name-line = 给这条线命名
+calc-name-this-column = 给这一列命名
+calc-new-idea = 新想法
+calc-tap-empty-space-for-person = 点按空白处添加一个人；点按某人来输入，Shift+Enter 在姓名下写职务，Enter 写下一个；把一个拖到另一个上就放在其下。
+calc-tap-empty-space-for-event = 点按空白处添加一个事件：输入时间，Shift+Enter，再写发生了什么；年份和日期按实际间隔排布；一段时间显示为一条带。
+calc-lanes-name = 泳道名称
+calc-when = 时间
+calc-align-center = 对齐：居中
+calc-align-left = 对齐：左
+calc-align-right = 对齐：右
+calc-tap-person-to-type-on = 点按某人来输入，姓名后加 + 添加其伴侣，Shift+Enter 在姓名下写生卒年份；Enter 写下一个；把一个拖到另一个上就放在其下；“连线”在两人之间画一条虚线。
+calc-tap-empty-space-for-table = 点按空白处添加一张桌子；点按桌子或某人来输入，姓名后加逗号写下一位宾客；把人拖到另一张桌子。
+calc-tap-inside-circles-to-add = 点按圆圈里面添加一个项目，后面加逗号写下一个；点按集合的名称可改名；把项目拖到其他圆圈里。
+calc-copy-link-that-downloads-ext = 复制可下载 .{ $ext } 的链接
+calc-could-not-share-ext = 无法分享 .{ $ext }
+calc-could-not-show-ext = 无法显示 .{ $ext }
+calc-download-ext = 下载 .{ $ext }
+calc-share-ext = 分享 .{ $ext }…
+calc-view-ext = 查看 .{ $ext }
+calc-keep-them-on-this-device = 保存在此设备上
+calc-nothing-is-saved-on-this = 此设备现在不保存任何内容。将它们保存在这里，或打开其中一份。
+calc-open-first = 打开第一份
+calc-saving-in-this-browser-n = 正在此浏览器中保存：已保存 { $n ->
+       *[other] { $n } 份文档
+    }
+calc-that-zip-holds-no-documents = 这个 zip 里没有 小小办公室 能读的文档。
+calc-n-documents-kept = 已保存 { $n ->
+       *[other] { $n } 份文档
+    }
