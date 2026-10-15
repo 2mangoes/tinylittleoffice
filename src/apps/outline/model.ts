@@ -111,7 +111,7 @@ export function statusesOf(doc: Doc): Status[] {
 /** A status color's word as the Calendar names it ('' where the Calendar has no such color: its default). */
 const CAL_WORD: Record<string, string> = { red: 'red', orange: 'orange', yellow: 'orange', green: 'green', blue: 'blue', purple: 'purple' };
 /**
- * The outline as a Calendar (View as ▾ As a calendar; Paul, 2026-10-15): every item with a due day is a day's event in
+ * The outline as a Calendar (View as ▾ Calendar; Paul, 2026-10-15): every item with a due day is a day's event in
  * its words, colored by its status, the statuses the legend; the rest of the outline is not a date and stays behind.
  */
 export function outlineToCal(v: OutlineView, head: Doc['head'] = {}): string {

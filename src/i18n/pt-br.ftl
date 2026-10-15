@@ -1240,8 +1240,8 @@ sheet-selected-cells = Células selecionadas
 sheet-show-all-text = Mostrar todo o texto
 # en: 9580fcbce0c31ceaa47eb583e5f7ce637fdc8a0a
 sheet-shown-as-typed = Texto simples
-# en: c12db2695e9c15f7715a069ba77a45dd33c4683e
-sheet-sort-rows-by-it = Ordenar as linhas por ela
+# en: a2a5bdeca9391be1e0cdff1c19895bae7fadc2c2
+sheet-sort-rows-by-it = Ordenar por
 # en: ff87bd67a9f3709f0a4247baa8ba4de4a5bd5fd2
 sheet-suggested = sugerido
 # en: eda0b8f3c389658a7369166fd4c36099e380adff
@@ -1940,16 +1940,37 @@ outline-statuses = Situações
 outline-status = Situação
 # en: c206561903295f2cf5944906fdfc55f1e8a5d45b
 outline-no-status = Sem situação
-# en: 80f90adb4a5a3c907accd858ce3c33bc69421246
-outline-status-status-tap-for-next = Situação { $status }: toque para a próxima
+# en: 1bcdd54c54c2bbd162c6353f5157804ce2270af5
+outline-status-status-tap-for-next = { $status }. Toque para mudar a situação
 # en: 4c1aeebc433bcb8eb4b05434619ea3136b785ea8
 outline-due-date = Prazo
 # en: bfe11361dd8dc7cc66f5cd6f33d394a95c71c96c
 outline-due-date-ellipsis = Prazo…
-# en: ba24beb3bf28ae2b3e850c25e42aa7b075185d17
-outline-due-date-change-it = Prazo { $date }: alterar
+# en: 1cfca97d4ac1000c67f7b345992a5b58b3dac4b0
+outline-due-date-change-it = Prazo { $date }. Toque para alterar
 # en: 6cf55f3558276e2eefff5dd41ec206dc9780bebf
 outline-remove-due-date = Remover o prazo
+# same
+# en: 891e9d6d47f1bacfcba2dca1b282afcbcd25d94d
+outline-agenda = Agenda
+# en: aa73cdd3260a16a41d572c06ee0da42cb4b85286
+outline-by-status = Por situação
+# en: 0e719dcbe720c315d66c977072f10251b56bd994
+outline-nothing-to-do-yet = Nada a fazer ainda. Itens com uma tarefa, uma situação ou um prazo aparecem aqui.
+# en: 064c87e25e9cca38db987bafd98c9fc9b3003456
+outline-line-to-parent = Linha para “{ $parent }”
+# en: 99fec066e5bc2f5acc70261b4b5dd4b171fb491a
+outline-arrow-to-parent-item = Seta para “{ $parent }”
+# en: e37f9b066587aa06d9d2f6df504727599d9f5e4a
+outline-arrow-from-parent-item = Seta de “{ $parent }”
+# en: 27228d1a3266064e49da7e3949d339b08473e294
+outline-edit-statuses = Editar situações…
+# en: 70dfe3298343e43d0c29f07274084a4ce961dd7a
+outline-add-status = Adicionar uma situação
+# en: 4f9beff18cc6852b012093ba97421788466bb3bf
+outline-gray = Cinza
+# en: 23376bab580fd3f3d521c66a65a03e7753da54cc
+outline-last-status-means-done = A última situação significa concluído. Tarefas com essa situação ficam marcadas.
 # en: 7312a31a2c880f2d456663b6f91ad6da980b3a5e
 outline-take-connection-away = Remover conexão
 # en: 656e5c87ae5cd391807e13c85fb32635c2d441c2
@@ -2830,8 +2851,8 @@ trip-where-i-am = Onde estou
 trip-map = Mapa
 # en: 4fa4643900d7a129558f6c34b681a8d419a9ef9d
 trip-map-tap-to-add-stop = Mapa: toque para adicionar uma parada
-# en: 98cb31d07de0f880bc288c98784e8cb01ff17080
-trip-map-comes-from-openfreemap = O mapa vem do OpenFreeMap enquanto está sendo exibido.
+# en: a481372d94c5d404a0bd0a597cda747c83e952a4
+trip-map-comes-from-openfreemap = Os blocos do mapa são carregados do OpenFreeMap enquanto o mapa está aberto.
 # en: dd1ac7c6150bf40973c618ac841d01f2281dea20
 trip-your-location-is-asked-for = Sua localização é usada só para centralizar o mapa e nunca é guardada.
 # en: 6c4827a34debc3c12e8a905f5e8025f0d22802cb

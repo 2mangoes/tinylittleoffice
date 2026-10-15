@@ -290,14 +290,14 @@ whose rows are the document's own data (the sheet's column kinds, the formula fu
 |  | Expand all | bar, drawer on a phone |
 |  | Connect | bar |
 |  | As a page | view ▾ |
-|  | As an agenda | view ▾, drawer on a phone |
+|  | Agenda | view ▾, drawer on a phone |
 |  | By status | view ▾, drawer on a phone |
 |  | Show as slides | view ▾ |
 |  | Draw as a mind map | view ▾ |
 |  | Draw as an org chart | view ▾ |
 |  | Draw as a family tree | view ▾ |
 |  | Draw as a network | view ▾ |
-|  | As a calendar | view ▾ |
+|  | Calendar | view ▾ |
 | `Mod+Enter` | Check or uncheck a task | keys only, at: words |
 | `Mod+Alt+ArrowUp`, `Mod+Alt+ArrowDown` | Collapse or expand | keys only, at: words |
 | `Mod+D` | Duplicate | keys only, at: words |

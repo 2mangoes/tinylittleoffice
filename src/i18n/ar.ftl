@@ -1279,8 +1279,8 @@ sheet-selected-cells = الخلايا المحددة
 sheet-show-all-text = إظهار النص كله
 # en: 9580fcbce0c31ceaa47eb583e5f7ce637fdc8a0a
 sheet-shown-as-typed = نص عادي
-# en: c12db2695e9c15f7715a069ba77a45dd33c4683e
-sheet-sort-rows-by-it = افرز الصفوف به
+# en: a2a5bdeca9391be1e0cdff1c19895bae7fadc2c2
+sheet-sort-rows-by-it = فرز حسب
 # en: ff87bd67a9f3709f0a4247baa8ba4de4a5bd5fd2
 sheet-suggested = مقترح
 # en: eda0b8f3c389658a7369166fd4c36099e380adff
@@ -1980,16 +1980,36 @@ outline-statuses = الحالات
 outline-status = الحالة
 # en: c206561903295f2cf5944906fdfc55f1e8a5d45b
 outline-no-status = بلا حالة
-# en: 80f90adb4a5a3c907accd858ce3c33bc69421246
-outline-status-status-tap-for-next = الحالة { $status }: انقر للتالية
+# en: 1bcdd54c54c2bbd162c6353f5157804ce2270af5
+outline-status-status-tap-for-next = { $status }. انقر لتغيير الحالة
 # en: 4c1aeebc433bcb8eb4b05434619ea3136b785ea8
 outline-due-date = تاريخ الاستحقاق
 # en: bfe11361dd8dc7cc66f5cd6f33d394a95c71c96c
 outline-due-date-ellipsis = تاريخ الاستحقاق…
-# en: ba24beb3bf28ae2b3e850c25e42aa7b075185d17
-outline-due-date-change-it = يستحق { $date }: غيّره
+# en: 1cfca97d4ac1000c67f7b345992a5b58b3dac4b0
+outline-due-date-change-it = يستحق { $date }. انقر للتغيير
 # en: 6cf55f3558276e2eefff5dd41ec206dc9780bebf
 outline-remove-due-date = إزالة تاريخ الاستحقاق
+# en: 891e9d6d47f1bacfcba2dca1b282afcbcd25d94d
+outline-agenda = جدول الأعمال
+# en: aa73cdd3260a16a41d572c06ee0da42cb4b85286
+outline-by-status = حسب الحالة
+# en: 0e719dcbe720c315d66c977072f10251b56bd994
+outline-nothing-to-do-yet = لا شيء لتنفيذه بعد. تظهر هنا العناصر التي لها مهمة أو حالة أو تاريخ استحقاق.
+# en: 064c87e25e9cca38db987bafd98c9fc9b3003456
+outline-line-to-parent = خط إلى «{ $parent }»
+# en: 99fec066e5bc2f5acc70261b4b5dd4b171fb491a
+outline-arrow-to-parent-item = سهم إلى «{ $parent }»
+# en: e37f9b066587aa06d9d2f6df504727599d9f5e4a
+outline-arrow-from-parent-item = سهم من «{ $parent }»
+# en: 27228d1a3266064e49da7e3949d339b08473e294
+outline-edit-statuses = تحرير الحالات…
+# en: 70dfe3298343e43d0c29f07274084a4ce961dd7a
+outline-add-status = إضافة حالة
+# en: 4f9beff18cc6852b012093ba97421788466bb3bf
+outline-gray = رمادي
+# en: 23376bab580fd3f3d521c66a65a03e7753da54cc
+outline-last-status-means-done = الحالة الأخيرة تعني الإنجاز. تُعلَّم المهام ذات هذه الحالة كمنجزة.
 # en: 7312a31a2c880f2d456663b6f91ad6da980b3a5e
 outline-take-connection-away = إزالة الوصلة
 # en: 656e5c87ae5cd391807e13c85fb32635c2d441c2
@@ -2870,8 +2890,8 @@ trip-where-i-am = أين أنا
 trip-map = خريطة
 # en: 4fa4643900d7a129558f6c34b681a8d419a9ef9d
 trip-map-tap-to-add-stop = الخريطة: انقر لإضافة محطة
-# en: 98cb31d07de0f880bc288c98784e8cb01ff17080
-trip-map-comes-from-openfreemap = تأتي الخريطة من OpenFreeMap أثناء عرضها.
+# en: a481372d94c5d404a0bd0a597cda747c83e952a4
+trip-map-comes-from-openfreemap = تُحمَّل مربعات الخريطة من OpenFreeMap ما دامت الخريطة مفتوحة.
 # en: dd1ac7c6150bf40973c618ac841d01f2281dea20
 trip-your-location-is-asked-for = يُستخدم موقعك فقط لتوسيط الخريطة ولا يُخزَّن أبدًا.
 # en: 6c4827a34debc3c12e8a905f5e8025f0d22802cb

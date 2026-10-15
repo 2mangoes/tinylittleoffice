@@ -1247,8 +1247,8 @@ sheet-selected-cells = תאים שנבחרו
 sheet-show-all-text = הצגת כל הטקסט
 # en: 9580fcbce0c31ceaa47eb583e5f7ce637fdc8a0a
 sheet-shown-as-typed = טקסט פשוט
-# en: c12db2695e9c15f7715a069ba77a45dd33c4683e
-sheet-sort-rows-by-it = מיון השורות לפיה
+# en: a2a5bdeca9391be1e0cdff1c19895bae7fadc2c2
+sheet-sort-rows-by-it = מיון לפי
 # en: ff87bd67a9f3709f0a4247baa8ba4de4a5bd5fd2
 sheet-suggested = מוצע
 # en: eda0b8f3c389658a7369166fd4c36099e380adff
@@ -1944,16 +1944,36 @@ outline-statuses = סטטוסים
 outline-status = סטטוס
 # en: c206561903295f2cf5944906fdfc55f1e8a5d45b
 outline-no-status = ללא סטטוס
-# en: 80f90adb4a5a3c907accd858ce3c33bc69421246
-outline-status-status-tap-for-next = סטטוס { $status }: הקישו לבא
+# en: 1bcdd54c54c2bbd162c6353f5157804ce2270af5
+outline-status-status-tap-for-next = { $status }. הקשה משנה את הסטטוס
 # en: 4c1aeebc433bcb8eb4b05434619ea3136b785ea8
 outline-due-date = תאריך יעד
 # en: bfe11361dd8dc7cc66f5cd6f33d394a95c71c96c
 outline-due-date-ellipsis = תאריך יעד…
-# en: ba24beb3bf28ae2b3e850c25e42aa7b075185d17
-outline-due-date-change-it = יעד { $date }: לשנות
+# en: 1cfca97d4ac1000c67f7b345992a5b58b3dac4b0
+outline-due-date-change-it = יעד { $date }. הקשה לשינוי
 # en: 6cf55f3558276e2eefff5dd41ec206dc9780bebf
 outline-remove-due-date = להסיר את תאריך היעד
+# en: 891e9d6d47f1bacfcba2dca1b282afcbcd25d94d
+outline-agenda = סדר יום
+# en: aa73cdd3260a16a41d572c06ee0da42cb4b85286
+outline-by-status = לפי סטטוס
+# en: 0e719dcbe720c315d66c977072f10251b56bd994
+outline-nothing-to-do-yet = אין עדיין מה לעשות. פריטים עם משימה, סטטוס או תאריך יעד יופיעו כאן.
+# en: 064c87e25e9cca38db987bafd98c9fc9b3003456
+outline-line-to-parent = קו אל "{ $parent }"
+# en: 99fec066e5bc2f5acc70261b4b5dd4b171fb491a
+outline-arrow-to-parent-item = חץ אל "{ $parent }"
+# en: e37f9b066587aa06d9d2f6df504727599d9f5e4a
+outline-arrow-from-parent-item = חץ מ־"{ $parent }"
+# en: 27228d1a3266064e49da7e3949d339b08473e294
+outline-edit-statuses = עריכת סטטוסים…
+# en: 70dfe3298343e43d0c29f07274084a4ce961dd7a
+outline-add-status = הוספת סטטוס
+# en: 4f9beff18cc6852b012093ba97421788466bb3bf
+outline-gray = אפור
+# en: 23376bab580fd3f3d521c66a65a03e7753da54cc
+outline-last-status-means-done = הסטטוס האחרון פירושו בוצע. משימות עם הסטטוס הזה מסומנות כבוצעו.
 # en: 7312a31a2c880f2d456663b6f91ad6da980b3a5e
 outline-take-connection-away = הסרת החיבור
 # en: 656e5c87ae5cd391807e13c85fb32635c2d441c2
@@ -2828,8 +2848,8 @@ trip-where-i-am = איפה אני
 trip-map = מפה
 # en: 4fa4643900d7a129558f6c34b681a8d419a9ef9d
 trip-map-tap-to-add-stop = מפה: הקשה מוסיפה עצירה
-# en: 98cb31d07de0f880bc288c98784e8cb01ff17080
-trip-map-comes-from-openfreemap = המפה מגיעה מ-OpenFreeMap כל עוד היא מוצגת.
+# en: a481372d94c5d404a0bd0a597cda747c83e952a4
+trip-map-comes-from-openfreemap = אריחי המפה נטענים מ-OpenFreeMap כל עוד המפה פתוחה.
 # en: dd1ac7c6150bf40973c618ac841d01f2281dea20
 trip-your-location-is-asked-for = המיקום שלך משמש רק למרכוז המפה ולעולם לא נשמר.
 # en: 6c4827a34debc3c12e8a905f5e8025f0d22802cb

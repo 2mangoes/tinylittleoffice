@@ -1217,8 +1217,8 @@ sheet-selected-cells = منتخب خانے
 sheet-show-all-text = سارا متن دکھائیں
 # en: 9580fcbce0c31ceaa47eb583e5f7ce637fdc8a0a
 sheet-shown-as-typed = سادہ متن
-# en: c12db2695e9c15f7715a069ba77a45dd33c4683e
-sheet-sort-rows-by-it = قطاروں کو اس کے مطابق ترتیب دیں
+# en: a2a5bdeca9391be1e0cdff1c19895bae7fadc2c2
+sheet-sort-rows-by-it = ترتیب بلحاظ
 # en: ff87bd67a9f3709f0a4247baa8ba4de4a5bd5fd2
 sheet-suggested = تجویز کردہ
 # en: eda0b8f3c389658a7369166fd4c36099e380adff
@@ -1910,16 +1910,36 @@ outline-statuses = حالتیں
 outline-status = حالت
 # en: c206561903295f2cf5944906fdfc55f1e8a5d45b
 outline-no-status = کوئی حالت نہیں
-# en: 80f90adb4a5a3c907accd858ce3c33bc69421246
-outline-status-status-tap-for-next = حالت { $status }: اگلی کے لیے دبائیں
+# en: 1bcdd54c54c2bbd162c6353f5157804ce2270af5
+outline-status-status-tap-for-next = { $status }۔ حالت بدلنے کے لیے ٹیپ کریں
 # en: 4c1aeebc433bcb8eb4b05434619ea3136b785ea8
 outline-due-date = آخری تاریخ
 # en: bfe11361dd8dc7cc66f5cd6f33d394a95c71c96c
 outline-due-date-ellipsis = آخری تاریخ…
-# en: ba24beb3bf28ae2b3e850c25e42aa7b075185d17
-outline-due-date-change-it = آخری تاریخ { $date }: بدلیں
+# en: 1cfca97d4ac1000c67f7b345992a5b58b3dac4b0
+outline-due-date-change-it = آخری تاریخ { $date }۔ بدلنے کے لیے ٹیپ کریں
 # en: 6cf55f3558276e2eefff5dd41ec206dc9780bebf
 outline-remove-due-date = آخری تاریخ ہٹائیں
+# en: 891e9d6d47f1bacfcba2dca1b282afcbcd25d94d
+outline-agenda = ایجنڈا
+# en: aa73cdd3260a16a41d572c06ee0da42cb4b85286
+outline-by-status = حالت کے مطابق
+# en: 0e719dcbe720c315d66c977072f10251b56bd994
+outline-nothing-to-do-yet = ابھی کرنے کو کچھ نہیں۔ جن چیزوں میں کام، حالت یا آخری تاریخ ہو، وہ یہاں نظر آتی ہیں۔
+# en: 064c87e25e9cca38db987bafd98c9fc9b3003456
+outline-line-to-parent = “{ $parent }” تک لکیر
+# en: 99fec066e5bc2f5acc70261b4b5dd4b171fb491a
+outline-arrow-to-parent-item = “{ $parent }” کی طرف تیر
+# en: e37f9b066587aa06d9d2f6df504727599d9f5e4a
+outline-arrow-from-parent-item = “{ $parent }” سے تیر
+# en: 27228d1a3266064e49da7e3949d339b08473e294
+outline-edit-statuses = حالتوں میں ترمیم…
+# en: 70dfe3298343e43d0c29f07274084a4ce961dd7a
+outline-add-status = حالت شامل کریں
+# en: 4f9beff18cc6852b012093ba97421788466bb3bf
+outline-gray = سرمئی
+# en: 23376bab580fd3f3d521c66a65a03e7753da54cc
+outline-last-status-means-done = آخری حالت کا مطلب ہے مکمل۔ اس حالت والے کاموں پر نشان لگ جاتا ہے۔
 # en: 7312a31a2c880f2d456663b6f91ad6da980b3a5e
 outline-take-connection-away = جوڑ ہٹائیں
 # en: 656e5c87ae5cd391807e13c85fb32635c2d441c2
@@ -2791,8 +2811,8 @@ trip-where-i-am = میں کہاں ہوں
 trip-map = نقشہ
 # en: 4fa4643900d7a129558f6c34b681a8d419a9ef9d
 trip-map-tap-to-add-stop = نقشہ: پڑاؤ شامل کرنے کے لیے ٹیپ کریں
-# en: 98cb31d07de0f880bc288c98784e8cb01ff17080
-trip-map-comes-from-openfreemap = نقشہ دکھائے جانے کے دوران OpenFreeMap سے آتا ہے۔
+# en: a481372d94c5d404a0bd0a597cda747c83e952a4
+trip-map-comes-from-openfreemap = نقشہ کھلا رہنے تک اس کی ٹائلیں OpenFreeMap سے لوڈ ہوتی ہیں۔
 # en: dd1ac7c6150bf40973c618ac841d01f2281dea20
 trip-your-location-is-asked-for = آپ کا مقام صرف نقشے کو بیچ میں لانے کے لیے استعمال ہوتا ہے اور کبھی محفوظ نہیں ہوتا۔
 # en: 6c4827a34debc3c12e8a905f5e8025f0d22802cb

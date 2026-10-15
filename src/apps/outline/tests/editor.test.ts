@@ -1022,7 +1022,7 @@ test('statuses: a pill before the words, tapped to the next; a due chip after th
   expect(el.querySelector<HTMLElement>('.ol-status')!.style.getPropertyValue('--chip')).toBe('#b3261e');
   const due = el.querySelector<HTMLButtonElement>('.ol-due')!;
   expect(due.textContent!.replace(/\s+/g, ' ').trim()).toMatch(/Mar 1/);
-  expect(due.getAttribute('aria-label')).toMatch(/^Due Mar 1, 2027: change it$/);
+  expect(due.getAttribute('aria-label')).toMatch(/^Due Mar 1, 2027\. Tap to change$/);
   // A tap on the pill: the next status, round the end.
   el.querySelector<HTMLButtonElement>('.ol-status')!.click();
   await el.updateComplete;
@@ -1138,11 +1138,11 @@ test('Statuses opens the set to edit: renamed, one taken away, Done writes the h
 
 // View as ▾'s agenda and by-status (Paul, 2026-10-15): the things to do as a table sorted by status or day, and grouped by
 // status; a tap lands on the item with the caret. Find shows only the matching rows and a tap on one lands there too.
-test('As an agenda lists the things to do, sorted by status or by day; By status groups them; a tap lands on the item', async () => {
+test('Agenda lists the things to do, sorted by status or by day; By status groups them; a tap lands on the item', async () => {
   const { el } = await editor(
     '---\nstatuses: TODO=red, DOING=yellow, DONE=green\n---\n- Plan {status=DONE due=2027-03-09}\n  - [ ] Draft {status=TODO due=2027-03-01}\n  - Quotes {status=DOING}\n- Nothing here\n',
   );
-  await pick(el, el.querySelector<HTMLButtonElement>('.ol-view-as button')!, 'As an agenda');
+  await pick(el, el.querySelector<HTMLButtonElement>('.ol-view-as button')!, 'Agenda');
   await until(() => !!el.querySelector('to-dialog.ol-agenda dialog[open] .ol-agenda-list'));
   const names = () => [...el.querySelectorAll<HTMLElement>('.ol-agenda-list .ol-agenda-item')].map((b) => b.textContent!.trim());
   expect(names()).toEqual(['Plan', 'Draft', 'Quotes']);
@@ -1169,12 +1169,12 @@ test('As an agenda lists the things to do, sorted by status or by day; By status
   expect([...el.querySelectorAll<HTMLElement>('.ol-by-status-group h3')].map((h) => h.textContent!.replace(/\s+/g, ' ').trim())).toEqual(['TODO 1', 'DOING 1', 'DONE 1']);
   el.querySelector<HTMLButtonElement>('.ol-by-status-group .ol-agenda-item')!.click();
   await until(() => !el.querySelector('to-dialog.ol-by-status dialog[open]'));
-  // As a calendar: the dated items handed to the Calendar in a new tab, the statuses its legend.
+  // Calendar: the dated items handed to the Calendar in a new tab, the statuses its legend.
   const opened: string[] = [];
   const open = window.open;
   window.open = ((url?: string | URL) => (opened.push(String(url)), null)) as typeof window.open;
   try {
-    await pick(el, el.querySelector<HTMLButtonElement>('.ol-view-as button')!, 'As a calendar');
+    await pick(el, el.querySelector<HTMLButtonElement>('.ol-view-as button')!, 'Calendar');
     await until(() => opened.length === 1);
     expect(opened[0]).toMatch(/#\/v1\/cal\//);
     expect(decodeDoc(opened[0].slice(opened[0].indexOf('#/v1/cal/') + '#/v1/cal/'.length))).toBe(
