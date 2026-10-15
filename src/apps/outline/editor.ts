@@ -1001,7 +1001,7 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
     this.agendaSort = null;
     this.byStatus = false;
     if (keep) this.edit(setDue(this.doc, at, value || undefined));
-    void this.updateComplete.then(() => this.focusRow(at));
+    if (!this.agenda && !this.byStatus) void this.updateComplete.then(() => this.focusRow(at));
   }
   /** Insert ▾: the item in hand a task (a box before its words), or, a task already, its box checked or unchecked. */
   addTask() {
@@ -1229,6 +1229,20 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
     this.unhide(indexAt(this.view, at));
     void this.updateComplete.then(() => this.focusRow(at));
   }
+  /**
+   * A row of a view (the agenda, by status): the item's box, its status, its words and its due day, each the row's own
+   * (the box ticks, the status goes to the next, the day is picked, as in the outline: Paul, 2026-10-15, "If I click on a
+   * TODO in a view or a status or a checkbox I should be able to change that in the data"); the words tapped close the
+   * view and give the item the caret ("If I click on a line close the window and let me edit").
+   */
+  private viewRow(it: Item) {
+    const block = this.doc.blocks[it.at];
+    return html`<li class="ol-view-row">
+      ${this.taskBox(it.at, block)}${this.statusChip(it.at, it)}
+      <button type="button" class="ol-agenda-item" @click=${() => this.goTo(it.at)}>${plainText(it.runs).trim() || t('Untitled')}</button>
+      ${this.dueChip(it.at, it)}
+    </li>`;
+  }
   private agendaBody() {
     const st = this.statuses;
     const rank = new Map(st.map((s, i) => [s.name, i]));
@@ -1237,20 +1251,12 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
     if (sort === 'status') items.sort((a, b) => (rank.get(a.status ?? '') ?? st.length) - (rank.get(b.status ?? '') ?? st.length));
     else if (sort === 'due') items.sort((a, b) => (a.due ?? '9999').localeCompare(b.due ?? '9999'));
     if (!items.length) return html`<p class="to-hint">${t('Nothing to do yet: a task, a status or a due date on an item puts it here.')}</p>`;
-    const head = (key: 'status' | 'due', label: string) =>
-      html`<th scope="col" aria-sort=${sort === key ? 'ascending' : 'none'}><button type="button" class="ol-agenda-sort" aria-pressed=${String(sort === key)} @click=${() => (this.agendaSort = sort === key ? null : key)}>${label}</button></th>`;
-    return html`<table class="to-table ol-agenda-table">
-      <thead><tr><th scope="col">${t('Item')}</th>${head('status', t('Status'))}${head('due', t('Due date'))}</tr></thead>
-      <tbody>${items.map((it) => {
-        const b = this.doc.blocks[it.at] as { done?: boolean };
-        const s = st.find((x) => x.name === it.status);
-        return html`<tr>
-          <td><button type="button" class="ol-agenda-item" @click=${() => this.goTo(it.at)}>${b.done !== undefined ? html`<span class="ol-task" role="checkbox" aria-checked=${String(!!b.done)} aria-hidden="true">${b.done ? icon(UI.check, 12) : nothing}</span>` : nothing}${plainText(it.runs).trim() || t('Untitled')}</button></td>
-          <td>${it.status ? html`<span class="ol-status to-chip tint" style="--chip:${s?.color ?? STATUS_COLORS.gray}">${it.status}</span>` : nothing}</td>
-          <td>${it.due ? this.dayWords(it.due) : nothing}</td>
-        </tr>`;
-      })}</tbody>
-    </table>`;
+    const sorter = (key: 'status' | 'due', label: string) =>
+      html`<button type="button" class="to-btn ol-agenda-sort" aria-pressed=${String(sort === key)} @click=${() => (this.agendaSort = sort === key ? null : key)}>${label}</button>`;
+    return html`<div class="ol-agenda-sorts" role="group" aria-label=${t('Sort the rows by it')}>${sorter('status', t('Status'))}${sorter('due', t('Due date'))}</div>
+      <ul class="ol-agenda-list">
+        ${items.map((it) => this.viewRow(it))}
+      </ul>`;
   }
   private byStatusBody() {
     const st = this.statuses;
@@ -1265,7 +1271,9 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
       .map(
         (g) => html`<section class="ol-by-status-group">
           <h3><span class="ol-status to-chip tint" style="--chip:${g.color}">${g.name}</span> <small>${g.items.length}</small></h3>
-          <ul>${g.items.map((it) => html`<li><button type="button" class="ol-agenda-item" @click=${() => this.goTo(it.at)}>${plainText(it.runs).trim() || t('Untitled')}</button>${it.due ? html`<small class="ol-by-status-due">${this.dayWords(it.due)}</small>` : nothing}</li>`)}</ul>
+          <ul class="ol-agenda-list bulleted">
+            ${g.items.map((it) => this.viewRow(it))}
+          </ul>
         </section>`,
       )}</div>`;
   }

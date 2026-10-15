@@ -1143,16 +1143,25 @@ test('As an agenda lists the things to do, sorted by status or by day; By status
     '---\nstatuses: TODO=red, DOING=yellow, DONE=green\n---\n- Plan {status=DONE due=2027-03-09}\n  - [ ] Draft {status=TODO due=2027-03-01}\n  - Quotes {status=DOING}\n- Nothing here\n',
   );
   await pick(el, el.querySelector<HTMLButtonElement>('.ol-view-as button')!, 'As an agenda');
-  await until(() => !!el.querySelector('to-dialog.ol-agenda dialog[open] .ol-agenda-table'));
-  const names = () => [...el.querySelectorAll<HTMLElement>('.ol-agenda-table tbody .ol-agenda-item')].map((b) => b.textContent!.trim());
+  await until(() => !!el.querySelector('to-dialog.ol-agenda dialog[open] .ol-agenda-list'));
+  const names = () => [...el.querySelectorAll<HTMLElement>('.ol-agenda-list .ol-agenda-item')].map((b) => b.textContent!.trim());
   expect(names()).toEqual(['Plan', 'Draft', 'Quotes']);
-  el.querySelector<HTMLButtonElement>('.ol-agenda-table th[aria-sort] button')!.click();
+  el.querySelector<HTMLButtonElement>('.ol-agenda-sorts button')!.click();
   await el.updateComplete;
   expect(names()).toEqual(['Draft', 'Quotes', 'Plan']);
-  [...el.querySelectorAll<HTMLButtonElement>('.ol-agenda-table th button')].at(-1)!.click();
+  [...el.querySelectorAll<HTMLButtonElement>('.ol-agenda-sorts button')].at(-1)!.click();
   await el.updateComplete;
   expect(names()).toEqual(['Draft', 'Plan', 'Quotes']);
-  el.querySelectorAll<HTMLButtonElement>('.ol-agenda-table tbody .ol-agenda-item')[1].click();
+  // The row's own box and status act on the data: the box checks Draft (its status following to DONE), the pill moves
+  // Plan's status on (round the end, DONE to TODO); the view stays open.
+  const docOf = (x: ToOutlineEditor) => (x as unknown as { doc: Doc }).doc;
+  const rowOf = (words: string) => [...el.querySelectorAll<HTMLElement>('.ol-view-row')].find((r) => r.querySelector('.ol-agenda-item')!.textContent!.trim() === words)!;
+  rowOf('Draft').querySelector<HTMLButtonElement>('.ol-task')!.click();
+  await until(() => write(docOf(el)).includes('- [x] Draft {status=DONE due=2027-03-01}'));
+  rowOf('Plan').querySelector<HTMLButtonElement>('.ol-status')!.click();
+  await until(() => write(docOf(el)).includes('Plan {status=TODO due=2027-03-09}'));
+  expect(el.querySelector('to-dialog.ol-agenda dialog[open]')).not.toBeNull();
+  el.querySelectorAll<HTMLButtonElement>('.ol-agenda-list .ol-agenda-item')[1].click();
   await until(() => !el.querySelector('to-dialog.ol-agenda dialog[open]'));
   await until(() => textOf(el, 0)?.hasFocus() === true);
   await pick(el, el.querySelector<HTMLButtonElement>('.ol-view-as button')!, 'By status');
@@ -1169,7 +1178,7 @@ test('As an agenda lists the things to do, sorted by status or by day; By status
     await until(() => opened.length === 1);
     expect(opened[0]).toMatch(/#\/v1\/cal\//);
     expect(decodeDoc(opened[0].slice(opened[0].indexOf('#/v1/cal/') + '#/v1/cal/'.length))).toBe(
-      '---\nred: TODO\norange: DOING\ngreen: DONE\n---\n- 2027-03-09: Plan {color=green}\n- 2027-03-01: Draft {color=red}\n',
+      '---\nred: TODO\norange: DOING\ngreen: DONE\n---\n- 2027-03-09: Plan {color=red}\n- 2027-03-01: Draft {color=green}\n',
     );
   } finally {
     window.open = open;
