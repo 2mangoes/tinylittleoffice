@@ -52,6 +52,7 @@ import {
   type Doc,
   type Op,
   type Run,
+  hasClass,
 } from '../../doc/index.ts';
 import type { TextBlock as PdfBlock } from '../../kit/file/textpdf.ts';
 
@@ -71,6 +72,8 @@ export interface Item {
   label?: string;
   /** Numbered: the item counts in a numbered list with its siblings. */
   ord?: true;
+  /** Folded shut, its family hidden: `{.shut}` (Paul, 2026-10-15: "the data model should track which nodes are open or shut, default is open"). */
+  shut?: true;
   /** One of the document's statuses (statusesOf), `{status=DOING}`. */
   status?: string;
   /** When it is due, `{due=2026-10-20}`, a day as the Calendar writes one. */
@@ -112,6 +115,20 @@ export function defaultDue(v: OutlineView, i: number, today = todayString()): st
   }
   return today;
 }
+/** The class that folds an item shut in the document: `{.shut}`; without it an item is open. */
+export const SHUT = 'shut';
+/** The item folded shut or open, written as its class, so the link, an undo and a reader all have it. */
+export function setShut(doc: Doc, at: number, shut: boolean): Op[] {
+  const b = doc.blocks[at];
+  if (b?.k !== 'li') return [];
+  const cls = (b.a?.cls ?? []).filter((c) => c !== SHUT);
+  if (shut) cls.push(SHUT);
+  const a: Attrs = { ...(b.a?.id ? { id: b.a.id } : {}), ...(cls.length ? { cls } : {}), ...(b.a?.kv && Object.keys(b.a.kv).length ? { kv: b.a.kv } : {}) };
+  const { a: _a, ...rest } = b;
+  return replaced(doc, at, { ...rest, ...(Object.keys(a).length ? { a } : {}) });
+}
+/** Every item with a family folded shut, or every one opened. */
+export const setShutAll = (doc: Doc, v: OutlineView, shut: boolean): Op[] => v.items.flatMap((it, i) => (hasChildren(v.items, i) || !shut ? setShut(doc, it.at, shut) : []));
 /** An item's block with attributes set (undefined takes one away) and, given, its task box set or taken away (null). */
 function withItem(b: Block & { k: 'li' }, kv: Record<string, string | undefined>, done?: boolean | null): Block {
   const next = { ...b.a?.kv };
@@ -222,6 +239,7 @@ export function readOutline(doc: Doc): OutlineView {
           ...(dir ? { dir } : {}),
           ...(label ? { label } : {}),
           ...(b.ord ? { ord: true as const } : {}),
+          ...(hasClass(b, SHUT) ? { shut: true as const } : {}),
           ...(status ? { status } : {}),
           ...(due ? { due } : {}),
         });

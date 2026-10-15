@@ -269,9 +269,12 @@ test('folding hides the family and counts it; Fold all and Unfold all; the zoom 
   expect(rows(el)).toEqual([0]);
   expect(fold().getAttribute('aria-label')).toBe('Unfold, 3 inside');
   expect(row(el, 0).querySelector('.ol-count')!.textContent).toBe('3');
+  // The fold is the document's (Paul, 2026-10-15: the model tracks open and shut; open is the default): written as the item's class.
+  expect(changes.at(-1)).toBe('- Launch {.shut}\n  - Product\n    - Pricing\n  - Marketing\n');
   fold().click();
   await el.updateComplete;
   expect(rows(el)).toEqual([0, 1, 2, 3]);
+  expect(changes.at(-1)).toBe(TREE);
   button(el, 'Fold all').click();
   await el.updateComplete;
   expect(rows(el)).toEqual([0]);
@@ -303,7 +306,8 @@ test('folding hides the family and counts it; Fold all and Unfold all; the zoom 
   expect(el.querySelector('.ol-crumbs')).toBeNull();
   expect(button(el, 'Zoom out')).toBeNull();
   // None of this touched the document.
-  expect(changes).toEqual([]);
+  // Every change was a fold or an unfold: the words were never touched.
+  expect(changes.every((c) => c.replace(/ \{\.shut\}/g, '') === TREE)).toBe(true);
 });
 
 test('Insert puts a document under the chosen item; a tap below the last row starts an item; View as shows the page', async () => {
@@ -473,17 +477,17 @@ test('Shift+Down chooses rows whole, a folded family with them; Backspace takes 
   // B is folded: its child is chosen with it, though not shown.
   expect(ranged(el)).toEqual([0, 1]);
   expect(row(el, 1).getAttribute('aria-selected')).toBe('true');
-  // Typing does nothing to chosen rows.
+  // Typing does nothing to chosen rows (the last change is the fold itself, the item's class).
   await treeKey(el, 'x');
-  expect(last()).toBeUndefined();
+  expect(last()).toBe('- A\n- B {.shut}\n  - b1\n- C\n- D\n');
   await treeKey(el, 'Backspace');
   expect(last()).toBe('- C\n- D\n');
   expect(focusedRow()).toBe(0);
   expect(contextOpen(el)).toBe(false);
   await undo(el);
-  expect(last()).toBe('- A\n- B\n  - b1\n- C\n- D\n');
-  // (A fold is the view's: B came back open.) Up past the anchor, the range turns.
-  expect(rows(el)).toEqual([0, 1, 2, 3, 4]);
+  expect(last()).toBe('- A\n- B {.shut}\n  - b1\n- C\n- D\n');
+  // (A fold is the document's: B came back shut, as it went.) Up past the anchor, the range turns.
+  expect(rows(el)).toEqual([0, 1, 3, 4]);
   await choose(el, 3);
   await keyOn(el, 3, 'ArrowDown', { shiftKey: true });
   for (let i = 0; i < 3; i++) await treeKey(el, 'ArrowUp', { shiftKey: true });
@@ -1063,4 +1067,19 @@ test('Insert ▾: Statuses, Task and Due date on the item in hand; a document fr
   await until(() => (last() ?? '').includes('due=2027-03-04'));
   expect(write(docOf(el))).toBe('---\nstatuses: TODO=red, DOING=yellow, DONE=green\n---\n- Plan {due=2027-03-01}\n- [x] Press list {status=DONE due=2027-03-04}\n');
   expect(el.querySelector('input.ol-due-in')).toBeNull();
+});
+
+test('a document opened with an item shut starts folded there, and one from before, with no such class, starts open', async () => {
+  const { el, last } = await editor('- A {.shut}\n  - a1\n- B\n  - b1\n');
+  expect(rows(el)).toEqual([0, 2, 3]);
+  expect(row(el, 0).querySelector<HTMLButtonElement>('.ol-fold')!.getAttribute('aria-label')).toBe('Unfold, one inside');
+  row(el, 0).querySelector<HTMLButtonElement>('.ol-fold')!.click();
+  await el.updateComplete;
+  expect(rows(el)).toEqual([0, 1, 2, 3]);
+  expect(last()).toBe('- A\n  - a1\n- B\n  - b1\n');
+  // Undo brings the fold back: it is an edit like any other.
+  el.dispatchEvent(new CustomEvent('docundo', { cancelable: true }));
+  await el.updateComplete;
+  await tick();
+  expect(rows(el)).toEqual([0, 2, 3]);
 });

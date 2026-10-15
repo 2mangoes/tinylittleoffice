@@ -94,6 +94,8 @@ import {
   followTick,
   makeTask,
   setDue,
+  setShut,
+  setShutAll,
   setStatus,
   STATUS_COLORS,
   statusesOf,
@@ -143,7 +145,6 @@ const ft = (e: Ends) => ({ from: e.from, to: e.to });
 
 export class ToOutlineEditor extends DocElement<OutlineView> {
   static properties: PropertyDeclarations = {
-    folded: { state: true },
     zoom: { state: true },
     sel: { state: true },
     connecting: { state: true },
@@ -152,8 +153,10 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
     dating: { state: true },
     showing: { state: true },
   };
-  /** Items folded shut, by block index. */
-  declare folded: Set<number>;
+  /** Items folded shut, by block index: the document's own (`{.shut}`, model.ts SHUT), so the link carries the folds and an undo brings them back. */
+  get folded(): Set<number> {
+    return new Set(this.items.flatMap((it) => (it.shut ? [it.at] : [])));
+  }
   /** The item zoomed in on, by block index; -1 for the whole outline. */
   declare zoom: number;
   /** The chosen row, by block index; -1 for none. */
@@ -204,7 +207,6 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
 
   constructor() {
     super();
-    this.folded = new Set();
     this.zoom = -1;
     this.sel = -1;
     this.connecting = null;
@@ -249,9 +251,8 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
     const near = [...this.items].reverse().find((it) => it.at <= first) ?? this.items[0];
     this.focusRow(near.at);
   }
-  /** Folds and the zoom are block indices: moved with their blocks, dropped with them. */
+  /** The zoom is a block index: moved with its block, dropped with it (the folds are the blocks' own). */
   private remap(ops: Op[]) {
-    if (this.folded.size) this.folded = new Set([...this.folded].map((at) => mapAt(ops, at)).filter((at) => at >= 0));
     if (this.zoom >= 0) this.zoom = mapAt(ops, this.zoom);
   }
   connectedCallback() {
@@ -519,9 +520,9 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
   }
   /** The folds that hide item i opened. */
   private unhide(i: number) {
-    const f = new Set(this.folded);
-    for (let p = parentOf(this.items, i); p >= 0; p = parentOf(this.items, p)) f.delete(this.items[p].at);
-    if (f.size !== this.folded.size) this.folded = f;
+    const ops: Op[] = [];
+    for (let p = parentOf(this.items, i); p >= 0; p = parentOf(this.items, p)) if (this.items[p].shut) ops.push(...setShut(this.doc, this.items[p].at, false));
+    if (ops.length) this.edit(ops);
   }
   removeRow(at: number, forward = false) {
     const vis = this.visible();
@@ -554,12 +555,10 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
     return move && move.op === 'move' ? move.to : at;
   }
   fold(at: number, shut = !this.folded.has(at)) {
-    const f = new Set(this.folded);
-    shut ? f.add(at) : f.delete(at);
-    this.folded = f;
+    this.edit(setShut(this.doc, at, shut));
   }
   foldAll(shut: boolean) {
-    this.folded = new Set(shut ? this.items.filter((_, i) => hasChildren(this.items, i)).map((it) => it.at) : []);
+    this.edit(setShutAll(this.doc, this.view, shut));
   }
   zoomTo(at: number) {
     this.zoom = at;

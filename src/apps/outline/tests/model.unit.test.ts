@@ -674,3 +674,23 @@ test('a status and a due day are the itemâ€™s attributes, kept beside the lineâ€
   expect(defaultDue(dated, 0, '2026-10-15')).toBe('2026-10-15');
   expect(defaultDue(dated, 4, '2026-12-01')).toBe('2026-12-01');
 });
+
+test('an item folded shut is its class, {.shut}, beside its other attributes; Fold all folds every parent and Unfold all opens everything', async () => {
+  const { setShut, setShutAll, SHUT } = await import('../model.ts');
+  expect(SHUT).toBe('shut');
+  const doc = parse('- A {.from label=x}\n  - a1\n- B\n- C\n  - c1\n');
+  let d = applyAll(doc, setShut(doc, 0, true));
+  expect(write(d)).toBe('- A {.from .shut label=x}\n  - a1\n- B\n- C\n  - c1\n');
+  expect(readOutline(d).items[0].shut).toBe(true);
+  expect(readOutline(d).items[2].shut).toBeUndefined();
+  expect(setShut(d, 0, true)).toEqual([]);
+  d = applyAll(d, setShut(d, 0, false));
+  expect(write(d)).toBe(write(doc));
+  d = applyAll(doc, setShutAll(doc, readOutline(doc), true));
+  expect(write(d)).toBe('- A {.from .shut label=x}\n  - a1\n- B\n- C {.shut}\n  - c1\n');
+  d = applyAll(d, setShutAll(d, readOutline(d), false));
+  expect(write(d)).toBe(write(doc));
+  // The line's kind set afterwards keeps the fold (a root has no line: the class alone).
+  const shut = applyAll(doc, setShut(doc, 4, true));
+  expect(write(applyAll(shut, setLine(shut, readOutline(shut), 4, { dir: '->' })))).toBe('- A {.from label=x}\n  - a1\n- B\n- C\n  - c1 {.shut .from}\n');
+});
