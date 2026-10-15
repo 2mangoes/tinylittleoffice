@@ -127,7 +127,7 @@ test('K keeps a key; the effects menu, the sliders and Remove this key write the
   key(el, 'k');
   await el.updateComplete;
   expect(keysTable(last())).toContain('\n1 | 0,0,0,0,1,0; 2,17,-17,7,1,-3; 23,');
-  expect(button(el, 'Add a key here').disabled).toBe(true);
+  expect(button(el, 'Add keyframe').disabled).toBe(true);
   await pick(el, el.querySelector<HTMLButtonElement>('.anim-fx button')!, 'Neon');
   expect(keysTable(last())).toContain('; 2,17,-17,7,1,-3,n; ');
   const size = el.querySelectorAll<HTMLInputElement>('.anim-props input[type=range]')[1];
@@ -135,7 +135,7 @@ test('K keeps a key; the effects menu, the sliders and Remove this key write the
   size.dispatchEvent(new Event('input', { bubbles: true }));
   await el.updateComplete;
   expect(keysTable(last())).toContain('; 2,17,-17,7,2,-3,n; ');
-  button(el, 'Remove this key').click();
+  button(el, 'Remove keyframe').click();
   await el.updateComplete;
   expect(keysTable(last())).toContain('\n1 | 0,0,0,0,1,0; 23,200');
   await settings(el);
@@ -427,7 +427,7 @@ test("a shape in hand has the contextual bar under it, in the standard's order, 
   await tap(el, 96, 320);
   await until(() => ctx.querySelector('.to-context')!.matches(':popover-open'));
   const names = [...ctx.querySelectorAll('.to-context > *')].map((b) => (b.matches('[role=separator]') ? '|' : b.getAttribute('aria-label')));
-  expect(names).toEqual(['Add a key here', 'Remove this key', '|', 'Edit text', 'Duplicate', '|', 'Copy', 'Cut', 'Paste', '|', 'Delete']);
+  expect(names).toEqual(['Add keyframe', 'Remove keyframe', '|', 'Edit text', 'Duplicate', '|', 'Copy', 'Cut', 'Paste', '|', 'Delete']);
   // Under the shape.
   const box = el.querySelector('.anim-stage .hit.sel > rect')!.getBoundingClientRect();
   expect(ctx.querySelector('.to-context')!.getBoundingClientRect().top).toBeGreaterThanOrEqual(box.bottom - 1);

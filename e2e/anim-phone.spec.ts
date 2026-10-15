@@ -98,7 +98,7 @@ test('the Animator on a phone: stage, filmstrip and scrubber on the first screen
   await page.locator('to-anim-editor to-bar button[aria-label="Settings"]').tap();
   const sheet = page.locator('dialog.to-dialog[open]');
   await expect(sheet).toBeVisible();
-  const fps = sheet.getByRole('spinbutton', { name: 'Frames a second' });
+  const fps = sheet.getByRole('spinbutton', { name: 'Frames per second' });
   await expect(fps).toHaveValue('8');
   await fps.fill('12');
   await page.keyboard.press('Enter');

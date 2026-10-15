@@ -161,7 +161,7 @@ test('Enter makes the next one, its words offered and chosen; a tap on empty spa
 test('the buttons under the words: one under it, a picture, take it away', async () => {
   const { el, last } = await editor(ORG);
   await tap(el, thing(el, 'Eve Marsh'));
-  action(el, 'Add under it').click();
+  action(el, 'Add below').click();
   await settle(el);
   expect(isOpen(el)).toBe(true);
   await type(el, 'Gus');
@@ -181,7 +181,7 @@ test('a network: Join, then a tap on another thing, makes the connection; its wo
   await tap(el, thing(el, 'Web'));
   action(el, 'Join').click();
   await settle(el);
-  expect(el.querySelector('.dg-hint')!.textContent).toContain('join Web to');
+  expect(el.querySelector('.dg-hint')!.textContent).toContain('connect Web to');
   await tap(el, thing(el, 'API'));
   expect(last()).toContain('~ Web -> API');
   const edge = el.querySelector<SVGGElement>('.dg-pic g.dg-thing.edge')!;
@@ -270,8 +270,8 @@ test('a Venn: a tap where two circles cross adds to what they share; a seat drag
   const r = pic.getBoundingClientRect();
   // Between the two names, halfway down the circles: inside both.
   await tap(el, pic, { clientX: (fast.right + cheap.left) / 2, clientY: r.top + r.height / 2 });
-  expect(held(el)).toBe('Thing');
-  expect(last()).toContain('- Fast & Cheap: Thing\n');
+  expect(held(el)).toBe('Item');
+  expect(last()).toContain('- Fast & Cheap: Item\n');
   await type(el, 'toast');
   expect(last()).toContain('- Fast & Cheap: toast\n');
   await key(el, 'Escape');
@@ -322,7 +322,7 @@ test('§1 Mod+C/X/V by finger, §5 the context bar: in the standard order under 
   const { el, last } = await editor('---\nkind: seating\n---\n- Top table: Jo, Sam\n');
   await tap(el, thing(el, 'Jo'));
   const labels = [...ctx(el).querySelectorAll('button, .to-context-sep')].map((b) => (b.classList.contains('to-context-sep') ? '|' : b.getAttribute('aria-label')));
-  expect(labels).toEqual(['Move up', 'Move down', 'Add one more', 'Icon', 'Duplicate', '|', 'Copy', 'Cut', 'Paste', '|', 'Delete']);
+  expect(labels).toEqual(['Move up', 'Move down', 'Add another', 'Icon', 'Duplicate', '|', 'Copy', 'Cut', 'Paste', '|', 'Delete']);
   expect(action(el, 'Move up').disabled).toBe(true);
   action(el, 'Duplicate').click();
   await settle(el);
@@ -468,7 +468,7 @@ test("§5 a tree thing's bar has Indent and Bring out after its own items, disab
   const { el, last } = await editor('---\nkind: org\n---\n- Ada\n  - Ben\n    - Cy\n  - Eve\n');
   const labels = () => [...ctx(el).querySelectorAll('button, .to-context-sep')].map((b) => (b.classList.contains('to-context-sep') ? '|' : b.getAttribute('aria-label')));
   await tap(el, thing(el, 'Ben'));
-  expect(labels()).toEqual(['Move up', 'Move down', 'Add under it', 'Icon', 'Join', 'Indent', 'Outdent', 'Duplicate', '|', 'Copy', 'Cut', 'Paste', '|', 'Delete']);
+  expect(labels()).toEqual(['Move up', 'Move down', 'Add below', 'Icon', 'Join', 'Indent', 'Outdent', 'Duplicate', '|', 'Copy', 'Cut', 'Paste', '|', 'Delete']);
   expect(action(el, 'Indent').disabled).toBe(true);
   expect(action(el, 'Outdent').disabled).toBe(true);
   await tap(el, thing(el, 'Cy')); // the first tap closes Ben's words
@@ -629,7 +629,7 @@ test('Enter and the Add items open the next thing focused, its words offered and
   await key(el, 'Escape');
   tapNow(thing(el, 'Ada Diaz'));
   await settle(el);
-  action(el, 'Add under it').click();
+  action(el, 'Add below').click();
   expect(focusedNow(el)).toBe(true);
   await settle(el);
   expect(line(el).placeholder).toBe('Name');
@@ -662,7 +662,7 @@ test('Join in the bar: with a thing open or focused it arms joining from it, the
   expect(isOpen(el)).toBe(false);
   expect(join().getAttribute('aria-pressed')).toBe('true');
   expect(el.querySelector('.dg-wrap')!.classList.contains('joining')).toBe(true);
-  expect(el.querySelector('.dg-hint')!.textContent).toContain('join Web to');
+  expect(el.querySelector('.dg-hint')!.textContent).toContain('connect Web to');
   await tap(el, thing(el, 'API'));
   expect(last()).toContain('~ Web -> API');
   expect(join().getAttribute('aria-pressed')).toBe('false');
@@ -670,7 +670,7 @@ test('Join in the bar: with a thing open or focused it arms joining from it, the
   thing(el, 'Database').focus();
   join().click();
   await settle(el);
-  expect(el.querySelector('.dg-hint')!.textContent).toContain('join Database to');
+  expect(el.querySelector('.dg-hint')!.textContent).toContain('connect Database to');
   const n = last();
   document.activeElement!.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true, cancelable: true }));
   await settle(el);
@@ -688,9 +688,9 @@ test('Join in the bar: with a thing open or focused it arms joining from it, the
   (document.activeElement as HTMLElement | null)?.blur();
   join().click();
   await settle(el);
-  expect(el.querySelector('.dg-hint')!.textContent).toContain('Tap the first thing to join');
+  expect(el.querySelector('.dg-hint')!.textContent).toContain('Tap the first item, then the other');
   await tap(el, thing(el, 'Database'));
-  expect(el.querySelector('.dg-hint')!.textContent).toContain('join Database to');
+  expect(el.querySelector('.dg-hint')!.textContent).toContain('connect Database to');
   await tap(el, thing(el, 'Web'));
   expect(last()).toContain('~ Database -> Web');
   // The old way stays: the thing's own Join, then a tap.
@@ -712,7 +712,7 @@ test('a mind map joins: Join from an idea, a tap on another across the tree make
   action(el, 'Join').click();
   await settle(el);
   expect(join().getAttribute('aria-pressed')).toBe('true');
-  expect(el.querySelector('.dg-hint')!.textContent).toContain('join Pricing to');
+  expect(el.querySelector('.dg-hint')!.textContent).toContain('connect Pricing to');
   const before = last();
   document.activeElement!.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true, cancelable: true }));
   await settle(el);
@@ -740,7 +740,7 @@ test('a mind map joins: Join from an idea, a tap on another across the tree make
   expect(isOpen(el)).toBe(true);
   await type(el, 'feeds');
   expect(last()).toContain('~ Pricing -- Press: feeds');
-  action(el, 'Make it an arrow').click();
+  action(el, 'Arrow').click();
   await settle(el);
   expect(last()).toContain('~ Pricing -> Press: feeds');
   expect(el.querySelectorAll('.dg-pic polygon').length).toBe(1);

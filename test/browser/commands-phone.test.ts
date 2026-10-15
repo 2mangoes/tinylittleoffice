@@ -270,7 +270,7 @@ test('the search for anything: Mod+K opens the drawer over every command in forc
   await userEvent.click(shell.querySelector<HTMLButtonElement>('.to-burger')!);
   await until(() => drawer().open);
   await userEvent.type(drawer().querySelector<HTMLInputElement>('.to-find')!, 'zzq');
-  await until(() => drawer().querySelector('.to-drawer-apps .to-hint')?.textContent === 'Nothing by that name');
+  await until(() => drawer().querySelector('.to-drawer-apps .to-hint')?.textContent === 'No results');
   // A search box's first Escape empties it (the browser's own), the next closes the menu.
   await userEvent.keyboard('{Escape}');
   await until(() => drawer().querySelector<HTMLInputElement>('.to-find')!.value === '');

@@ -49,7 +49,7 @@ there it is drawn still, at its resting moment (`ViewOpts.still`).
 | Spreadsheet | `.csv` | CSV |
 | Spreadsheet | `.chart.svg` | Chart (SVG) |
 | Spreadsheet | `.chart.png` | Chart (PNG) |
-| Calculator | `.txt` | The tape (text) |
+| Calculator | `.txt` | Tape as text |
 | Drawing Tool | `.svg` | Picture (SVG) |
 | Drawing Tool | `.tile.svg` | Background tile (SVG) |
 | Drawing Tool | `.tile.png` | Background tile (PNG) |

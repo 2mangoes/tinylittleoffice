@@ -914,7 +914,7 @@ test("a column's name copies, cuts and pastes as the browser's own input does: n
   name.dispatchEvent(cut);
   expect(cut.defaultPrevented).toBe(false);
   const paste = new DataTransfer();
-  paste.setData('text/plain', 'Thing');
+  paste.setData('text/plain', 'Item');
   const pasted = new ClipboardEvent('paste', { clipboardData: paste, bubbles: true, cancelable: true });
   name.dispatchEvent(pasted);
   await el.updateComplete;

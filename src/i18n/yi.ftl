@@ -102,8 +102,8 @@ home-templates-for-app-name = מוסטערן פאר { $app }: { $name }
 home-templates-are-not-saved-in = די מוסטערן זענען נאך נישט געהיט אין דעם בראוזער. פארבינדט זיך צום אינטערנעט זיי צו זען.
 # en: 25d37d0580af5bc389b9332f3640f6d73ef93e48
 home-documents-found = דאקומענטן געפונען
-# en: 7a5c1e9838dbef7c3cefc91f1dcc9c9410cea118
-home-no-document-here-has-those = קיין דאקומענט דא האט נישט די ווערטער
+# en: 5e46670f6fe68987a7e5c94f03e192aff635df77
+home-no-document-here-has-those = קיין דאקומענטן פאסן נישט
 # en: 1dfc2a61eb2345a48a2a91b7922b83f580553732
 home-search-your-documents = זוכן אין אייערע דאקומענטן
 # en: 4f5fbd7fb6a16b16ebe3c347bf43c9a2455a1560
@@ -176,12 +176,12 @@ drawer-documents = דאקומענטן
 drawer-find-app-template-or-command = געפינען עפ, מוסטער, אדער באפעל
 # en: 45e5f3f72e961cb70134ba35f7a27a9620e515f7
 drawer-commands = באפעלן
-# en: 2cb8ae8266ed4a20c9dee5151f1a5232e3de77a4
-drawer-nothing-by-that-name = גארנישט מיט דעם נאמען
+# en: b993b0c537190bfc94b21360ac5abe51e56be36f
+drawer-nothing-by-that-name = קיין רעזולטאטן
 # en: 85773bc941e47b21f6cc345b225265e3144489be
 drawer-add-to-home-screen = צולייגן צום היים־סקרין
-# en: dde10ff34344fa5b1c16c03d39a9cda035469fdd
-drawer-size-of-everything = גרייס פון אלעס
+# en: 9b3cbed5c490c07473546a88768ba29b787e9e52
+drawer-size-of-everything = זום
 # en: 943c5ac9fa7766d7c1ebecbc95c4e0d27b4ef9d4
 drawer-to-add-tiny-little-office = צוצולייגן Tiny Little Office צום היים־סקרין: Share, דערנאך Add to Home Screen.
 
@@ -567,7 +567,7 @@ common-select-all-words-of-box = אויסקלייבן אלעס (ערשט דאס 
 common-back-to-words = צוריק צום טעקסט
 # en: 0c0b01d469faff60dc3b2d1c035ee0a7caa03852
 common-extend-selection = פארברייטערן די אויסקלייב
-# en: 6510e9982155a27498f4332337675f22d4592291
+# en: 11a8a25332234992a14424d8aad6fb9ce3d3b287
 common-next-or-one-before = דער קומענדיגער אדער דער פריערדיגער
 # en: b4365b2ed2016713788d08335e5157985010ac28
 common-step-out-close-collapse-let = פארמאכן אדער אנולירן די אויסקלייב
@@ -1205,8 +1205,8 @@ sheet-no-chart = קיין טשארט
 sheet-number = נומער
 # en: 80838be5576c4b333f764e352ef9e6c5292b2b78
 sheet-open-link = עפענען { $link }
-# en: 348c4977d8bb453ba33998d5e64538c444c54c6e
-sheet-opens-when-clicked = עפנט זיך ווען מען דריקט
+# en: 1d6f3ce763f138e0025747a9d3ae7f30efc75531
+sheet-opens-when-clicked = עפנט זיך ביים דריקן
 # en: ac556cf5938d2104533c38103305f6cf60ba245d
 sheet-percent = פראצענט
 # en: 4f9fa8ea1af8cde7cca877c50ca723eeadee35dc
@@ -1256,10 +1256,10 @@ sheet-choices = ברירות
 sheet-choices-for-ref = ברירות פאר { $ref }
 # en: a871e2c9206cb4854cc06c30bc6de95cb82f9700
 sheet-has-one = דער בלאט האט שוין א טשארט
-# en: 5cc509a6f6fbd1ca18401f39e39b705757af20da
-sheet-edit-cell-caret-at-its = רעדאקטירן דאס קעסטל, דער קורסאר אינעם סוף
-# en: a029b0313f2c7a4c819051865f98357f813460b3
-sheet-put-back-what-cell-held = צוריקשטעלן וואס דאס קעסטל האט געהאלטן
+# en: f0dfb92a1f16391ab3bd5478ce9d8c0f2d74bf95
+sheet-edit-cell-caret-at-its = רעדאקטירן דאס קעסטל מיטן קורסאר אינעם סוף
+# en: 28d1a54d2e35ad87c0d19942f68d70ddbf67bcee
+sheet-put-back-what-cell-held = צוריקשטעלן דעם ווערט פונעם קעסטל
 # en: 2b69414b3787eaa8a38f2f1a9c4a48aff7dd78a5
 sheet-put-dated-rows-on-calendar = שטעלן די שורות מיט דאטומס אויף א קאלענדאר
 
@@ -1447,8 +1447,8 @@ draw-arrow = פייל
 draw-join-two-shapes = פארבינדן צוויי פארמען
 # en: cf6c07e7054fad4d6a8affaf62f285e16525c46e
 draw-pen = פען
-# en: d979b2d654019a5591521248c86ac6d7a294694a
-draw-any-shape-tap-for-each = סיי וועלכע פארעם, א דריק פאר יעדן ווינקל
+# en: c72e323a57434ede3b6eb0cc235109eb76833c55
+draw-any-shape-tap-for-each = פיל־ווינקל: דריקט אויף יעדן ווינקל
 # en: 016a5405a0b425e7d1ac65317df59b45ce5fb1f5
 draw-freehand = פרייע האנט
 # en: 8a48ec1f6c073fad0326a0e9251a18e4c88660b5
@@ -1536,8 +1536,8 @@ draw-what-does-this-drawing-show = וואס ווייזט די צייכענונג
 draw-diagram-of = א דיאגראם פון…
 # en: 5a33f2e7e84274a5291191ca3105e62d897eee0e
 draw-read-aloud-to-people-who = מען ליינט עס הויך פאר מענטשן וואס קענען נישט זען, און עס בלייבט מיט דער צייכענונג וואו זי ווערט אריינגעשטעלט אדער געדאונלאודט.
-# en: b97935a5b0e75f3b48c6e256e537e5c7f718a222
-draw-describe-from-shapes = באשרייבן פון די פארמען
+# en: 988c63b77eade4f718f9d469cb36e35bff976839
+draw-describe-from-shapes = שאפן פון די פארמען
 # en: ac302ae45938c985822f097507602d624128f1d0
 draw-tap-or-drag-to-paint = דריקט אדער שלעפט צו מאלן; די פייל־קנעפלעך רוקן, Enter מאלט.
 # en: ea263dc45b04f2755ac61a51deecc96ade3fb6a9
@@ -1548,8 +1548,8 @@ draw-drag-to-draw-end-where = שלעפט צו צייכענען; ענדיגט ו�
 draw-press-on-one-shape-and-let-go-on-another = דריקט אויף איין פארעם און לאזט אפ אויף אן אנדערע.
 # en: 1005cc8c1dafc1f9eb422bf2ac68290b492fdfd1
 draw-now-other-shape-tap-it = יעצט די אנדערע פארעם: דריקט אויף איר, אדער קלייבט זי אויס מיט די פיילן און דריקט Enter.
-# en: 0a8818d4eb574b7edd32bbc8e27db44e556d1220
-draw-drag-to-move-them-together = שלעפט צו רוקן זיי צוזאמען; Shift מיט א דריק לייגט צו א פארעם אדער נעמט זי אוועק.
+# en: e3686f1c55ec91e31825e1d9510abf592d80b08a
+draw-drag-to-move-them-together = שלעפט זיי צו רוקן צוזאמען. Shift+דריקן לייגט צו אדער נעמט אוועק א פארעם.
 # en: eb36764c60ec7a17dd6ac3ec7dbbd22ee401778e
 draw-press-on-one-shape-and = דריקט אויף איין פארעם און לאזט אפ אויף אן אנדערע
 # en: 199f4e86afea4f2d42eb40b63ce8599168575e06
@@ -1564,8 +1564,8 @@ draw-pencil = בלייער
 draw-clear-grid = אויסמעקן די נעץ
 # en: 45ecea7c16e725c14cfec68f5b12d1545f222a73
 draw-use-as-background = נוצן ווי הינטערגרונט
-# en: 037ae898000037d344a43cf8052a8c7843cbc599
-draw-grid-is-now-background-download = די נעץ איז יעצט דער הינטערגרונט. דאונלאודן גיט עס ווי א קאכל; סיי וועלכע זייט קען עס טראגן ווי tile:.
+# en: 507f52dfd67fb731677bb9ae6971f9b5e891bc84
+draw-grid-is-now-background-download = דער נעץ איז יעצט דער הינטערגרונט. דאונלאודט אים ווי א קאכל, אדער באנוצט אים אויף יעדן בלאט מיט tile:.
 # en: 209a1a74ee8eec09b861bc34e5ddb08a1357a364
 draw-pixel-grid-n-by-n = פיקסל־נעץ, { $n } אויף { $n }. פייל־קנעפלעך רוקן; Enter מאלט מיט דער יעצטיגער פארב.
 # en: a9deda2292f9b3c9a827e2aa71e0da6b4db9f16e
@@ -1698,8 +1698,8 @@ anim-empty-stage = א ליידיגע בינע
 # same
 # en: 64fe85d796d8c2eda594dbc0b7b3452a4a2c444b
 anim-3d = 3D
-# en: 798c40b3e9a56d7b4b393568ef6ca18ae4d0456b
-anim-add-key-here = צולייגן א שליסל דא
+# en: fe12532bd63a2e75713ec69be11e92d48e9db3c8
+anim-add-key-here = צולייגן א שליסל־פריים
 # en: 900aa998d3550d438fc20a414d3938fc3a1630ab
 anim-blur = פארשווימען
 # en: df0e298e356261439795d0d435ce0ce576604c65
@@ -1711,14 +1711,14 @@ anim-frame-n-s-s = פריים { $n }, { $s } סעק.
 # same
 # en: 62036a7016ec20273ff717698fbad321c4ff002b
 anim-impact = Impact
-# en: 4dde45e7f399fed3c04d3c8a5db7f69923d48380
-anim-key-at-s-s = שליסל ביי { $s } סעק.
+# en: 4c0a5de85ac9512b6a503ba785c3f369b5cfbda2
+anim-key-at-s-s = שליסל־פריים ביי { $s } סעק
 # en: 74adc5789ce92de7bbb5e3d84a287a1ce6d3e7f5
 anim-mirror = שפיגל
 # en: a7b93d2128e820f861fc8dfccd9f5521e89ad21f
 anim-mode = מאוד
-# en: ed0cbe45b8abfebed8b8486dc9ceafe28d9e3bc5
-anim-moments = מאמענטן
+# en: 987e5e1f455e03766d3ef3740947f4db46336d53
+anim-moments = שליסל־פריימס
 # en: 76cdb950721642b6b8596d36d5a39f7705028b99
 anim-move = באוועגן
 # en: 00706b5e9ede7f2fb6145370efd20ef72969df11
@@ -1731,8 +1731,8 @@ anim-play = שפילן
 anim-pixel-art-is-made-in = פיקסל־קונסט מאכט מען אינעם צייכן־געצייג; דער אנימאציע־מאכער רוקט פארמען.
 # en: b4a9395d25398654fd5d000e4b82a1d8273339bd
 anim-rainbow = רעגן־בויגן
-# en: 1344ac9ec86b807fe3e8f3e3a058c3be1aada95c
-anim-remove-this-key = אראפנעמען דעם שליסל
+# en: 3d5096b70833fdae355f1ffcf32faf2066123467
+anim-remove-this-key = אראפנעמען דעם שליסל־פריים
 # en: aa0e7e86b7aa21e9851b9db8b752998918d2b608
 anim-shadow = שאטן
 # en: b7152342a267362add3c0d7f69f720f7a9c76c9e
@@ -1762,8 +1762,8 @@ anim-frame-earlier = א פריים פריער
 anim-frame-later = א פריים שפעטער
 # en: bb4f3c806dbc9e6d5247da5b492939d83c90cf2b
 anim-delete-this-frame = אויסמעקן דעם פריים
-# en: d143b32e3626fd7a764a25937fcb176ba003e34a
-anim-draw-shapes-move-sets-them = צייכנט די פארמען; באוועגן שטעלט זיי אין גאנג.
+# en: 406ce96669c44a0f4b79e02af1464b6aa7fbf232
+anim-draw-shapes-move-sets-them = צייכנט פארמען, און דערנאך באנוצט "באוועגן" זיי צו באלעבן.
 # en: b4d477d39704ecbf21ca422aeebffbad5a519fbb
 anim-nothing-here-yet-draw-something = נאך גארנישט דא: צייכנט קודם עפעס.
 # en: 00f1eed948284854e29d59b2de928756b7f69388
@@ -1779,7 +1779,7 @@ anim-back-and-forth = אהין און צוריק
 anim-forward-then-back = פארויס, דערנאך צוריק
 # en: e3e7a3833d19706ebf33b2c3baf8e05deeed7bca
 anim-frames = פריימס
-# en: b77ec601d62ce5f2db407a7e827811b75ad9e12b
+# en: 0d0b09dfb5d45add0e2f90ec8b193d96ace76d0c
 anim-frames-second = פריימס א סעקונדע
 # en: 3570d228949889218e4c7fdb4ad8c942753530a1
 anim-how-large-shape-is-drawn = ווי גרויס די פארעם ווערט געצייכנט: 1× איז ווי געצייכנט.
@@ -1801,14 +1801,14 @@ anim-which-shape-is-in-front = וועלכע פארעם איז פארנט: א נ�
 anim-n-times = { $n } מאל
 # en: 4a84fdfdafe66c2c85e3e7d7c434de987984470f
 anim-s-s = { $s } סעק.
-# en: 4403c08ebdf8c80a653ed6d343be64570f75f8ce
-anim-frame-back-frame-on = א פריים צוריק, א פריים פארויס
+# en: b78baea4121d1dfde75020adb28737da7ea84e59
+anim-frame-back-frame-on = דער פריערדיגער אדער דער קומענדיגער פריים
 # en: ad3441e7c85b25bc4c7f46fd051345a6ba241e58
 anim-nudge-shapes-in-hand-with = רוקן די אויסגעקליבענע פארמען, אדער שפרינגען איין פריים
 # en: fe13ca0956192777b5060b354cf8e5dc5553c328
 anim-play-or-pause = שפילן אדער פויזע
-# en: 293cec535f254be8be69d7877fc790f95b4b7e07
-anim-first-frame-last = דער ערשטער פריים, דער לעצטער
+# en: d3b310dc90b3cc480984236a80101888836acfe9
+anim-first-frame-last = דער ערשטער אדער דער לעצטער פריים
 
 ## the Outliner
 
@@ -1837,8 +1837,8 @@ common-calculator = קאלקולאטאר
 common-calendar = קאלענדאר
 # en: ab732cac31bba434b0b59309a30ce46956dc3d54
 outline-cancel-connecting = קענסלען פארבינדן
-# en: 0b2cad8a7f348bc05529baaac65726b720eb10e1
-outline-change-it = טוישן
+# en: 5301648dcf6b53cefc9ed52999aaa92d4603cae0
+outline-change-it = רעדאקטירן
 # en: 1ed0b58d18ef647be5de11840bb929ecc8e36446
 common-chosen-items = אויסגעקליבענע זאכן
 # en: b65463cb6a42a17de514acc4659f7fd331e0876a
@@ -1869,16 +1869,16 @@ outline-draw-as-org-chart = צייכענען ווי אן ארג טשארט
 outline-empty = ליידיג
 # en: 4a66d1480779180159cc25c1c5aa9d760467c6a7
 outline-everything = אלעס
-# en: b6ba0db1f814179114ec82fbf188b2eb5be2596e
+# en: 9cf188d3a6779d63b36b10275b0228ae22ec97d6
 outline-fold = צוזאמלייגן
-# en: bc63322115af1769edf28f7dad3bb9e5653ce367
+# en: ec898362fe9593764e822dd17c78f1f972c20d90
 outline-fold-all = צוזאמלייגן אלעס
 # en: ecdda59aea5ee67d7d854c969ccf7f4f4b4a4c54
 outline-item = זאך
 # en: 6f8c7dbc09548197b5d210f514dda19a015102b2
 outline-item-n = זאך { $n }
-# en: 5a9bee4040efb910e5da699252a0dadd1201196a
-outline-kind-of-line = סארט ליניע
+# en: 120ee44bec923665b04dc825b0307fe159232ce9
+outline-kind-of-line = סטיל פון דער ליניע
 # en: 789062517bc27b8cb5c78b1e88041e5bef69b507
 common-launch-plan = לאנטש פלאן
 # en: 72eee0aaa10010ae7d362761115dfd7e064dd4d4
@@ -1933,19 +1933,19 @@ outline-question-options-under-it-and = די פראגע, די ברירות או�
 common-trip-planner = רייזע־פלאנער
 # en: 09ae5dce4d22019190e52d1611d1544becf36489
 outline-twenty-minutes-in-three-parts = צוואנציג מינוט אין דריי טיילן: די פראבלעם, די אידעע, וואס עס מיינט; א סלייד פאר יעדע אויבערשטע זאך ווען מען ווייזט עס ווי א פרעזענטאציע.
-# en: 895cc98efe76cab7188f62630904fbbfbfd0b496
+# en: 2af9d498f852995329b0033573277dce32d09ba0
 outline-unfold-all = אויפלייגן אלעס
-# en: 23f1aba9b0732d2f8c80a5130a2b8ef3d2d7a37a
-outline-unfold-n-inside = אויפלייגן, { $n ->
-        [one] איינס אינעווייניג
-       *[other] { $n } אינעווייניג
-    }
+# en: f5857a77d395db75bc57c2c76b92dc8fa4773053
+outline-unfold-n-inside = אויפלייגן ({ $n ->
+        [one] { $n } זאך
+       *[other] { $n } זאכן
+    })
 # en: 621521f9a8788695ec292cbec54d2792cfdf0a7d
 common-untitled = אן א נאמען
 # en: 1e65f823e3600c2c4cec7aff6db37af296fca073
 outline-view-as = ווייזן ווי
-# en: 4e6dde9299814981f3441740558666659d66e6e0
-outline-zoomed-in-on = נענטער אויף
+# en: 828c360c884f9246750461eea43fee4e42c6b52c
+outline-zoomed-in-on = פאקוסירט אויף
 # en: 38eca6735f66d186c0bd9c549873e774551dc35f
 outline-a-plain-line = א פשוטע ליניע
 # en: 884abd948f43aba4e5851b71a20e97aed7a6c96e
@@ -2009,8 +2009,8 @@ outline-troubleshooting = פראבלעמען לייזן
 outline-who-works-for-whom-at = ווער ארבעט פאר וועמען אין א בעקעריי פון ניין, יעדער מיט זיין ראלע, געצייכנט ווי אן ארג טשארט פונעם מעניו.
 # en: 0c6266451117f0382231513e4c30d38fb976086e
 outline-pdf-sections-and-bullets = PDF: אפטיילונגען און פינטלעך
-# en: 3c71fd388bfd921496968bc15422a0937a264ebc
-outline-fold-unfold = צוזאמלייגן, אויפלייגן
+# en: 32897da2f696f1ddc73da9ef0575827530a80b1a
+outline-fold-unfold = צוזאמלייגן אדער אויפלייגן
 # en: 74341e3c271df3c784e595b804b1f90be0f80429
 outline-name-line = לעיבל
 
@@ -2147,9 +2147,9 @@ deck-themes-color = די טעמע'ס קאליר
 # The bar
 # en: 4e9f7a31eef4c69e0aacb643f6856372cd6e3247
 common-present = פרעזענטירן
-# en: 643c5e94af837cf718906c77e7324d1b5b8cc4ed
-deck-see-sheets-to-print = זען די בויגנס צום דרוקן
-# en: 078bb433191da44555f4554b976669f8f188abf9
+# en: 3c47e73f6a8bcb018bdbe91d9312e8e1777050f7
+deck-see-sheets-to-print = דרוק־אויסשטעל
+# en: ca742a9ecf2f35a59704398ead009f1d8e554a0c
 deck-back-to-pages = צוריק צו די זייטן
 # en: 442250df38e5e516ff1c2ce97d051b8997c7d976
 deck-headline = הויפט קעפל
@@ -2266,10 +2266,10 @@ deck-inside-flap = אינעווייניגער לאפ
 deck-back = הינטן
 # en: 3369aa225b34e01144a4c49dd350db04732a2720
 deck-badge-n = באדזש { $n }
-# en: f5e3e387f05bd310e07849881a33ade59c373ba0
-deck-last-slide-added-for-you = לעצטער סלייד, צוגעלייגט פאר אייך: א QR קאוד פון דער גאנצער פרעזענטאציע
-# en: 4dc0f35f913f19ae2c1fc6bc2ee54835cf3e2b87
-deck-ends-with-qr-code-of = ענדיגט זיך מיט א QR קאוד פון דער פרעזענטאציע, אז דער עולם זאל זי קענען נעמען אהיים. דער QR קנעפל לעשט עס אויס.
+# en: 9cc25309d07de0adfb989faaaaa74f7cb5a06e38
+deck-last-slide-added-for-you = לעצטער סלייד: א QR קאוד פון דער פרעזענטאציע
+# en: 03c90c8e6a7e028c2e9caeadc1961fb5c0ad4e57
+deck-ends-with-qr-code-of = די פרעזענטאציע ענדיגט זיך מיט א QR קאוד, אז דער עולם זאל זי קענען מיטנעמען. דער QR קנעפל לעשט דאס אויס.
 # en: 13c7cb226b093919972f5e423aeb0abae93960cf
 deck-qr-code-of-this-deck = QR קאוד פון דער פרעזענטאציע
 # en: 5d5bc5601280c776405941347bbf7e9c63dc3954
@@ -2308,10 +2308,10 @@ deck-slide-n-of-total = סלייד { $n } פון { $total }
 common-notes = נאטיצן
 # en: bd0dad7cbf71b13b2e545d8ce477027ffc106b45
 deck-n-hides-them = N באהאלט זיי
-# en: 60eb1cc0c3e7bf9c9b2f070626da64fb304980a4
-deck-take-this-deck-home = נעמט די פרעזענטאציע אהיים
-# en: 627ec6260e317ce6d5af92ac3d6e31061b9befa1
-deck-take-this-deck-home-title = נעמט די פרעזענטאציע אהיים: { $title }
+# en: 45c44dc2566819f835fd788e2b7a6c5bee5177c4
+deck-take-this-deck-home = נעמט מיט די פרעזענטאציע
+# en: acc1edc431e346786fab17d4f10e195ca72257d6
+deck-take-this-deck-home-title = נעמט מיט די פרעזענטאציע: { $title }
 # en: 7fc2d8c7fd4164039149b5a9f2063ddf7ab9d76a
 deck-scan-code-whole-deck-is = סקענט דעם קאוד: די גאנצע פרעזענטאציע איז אינעם לינק.
 # en: a0f82f698bc01f5dc90c760db684589e2d8277eb
@@ -2355,14 +2355,14 @@ deck-name-badges-for-meetup-one = נאמען באדזשעס פאר א צוזאמ
 deck-edit-this-deck = רעדאקטירן די פרעזענטאציע
 # en: d5947c525ed0d53dce794385a2cc1cd6e2459dbd
 deck-new-slide = א נייער סלייד
-# en: 8b9576079143791f608e9188bd3af3109b059712
-deck-presenting-back = פרעזענטירן: צוריק
-# en: 4a6566c770849cfc7968fc4c508d36a865241a96
-deck-presenting-next-line-or-slide = פרעזענטירן: די קומענדיגע שורה אדער סלייד
-# en: 28030fd585f8780188c944b5c309021930e5de0a
-deck-presenting-whole-slide = פרעזענטירן: דער גאנצער סלייד
-# en: b97fb9456555822fb18ce45f920b4aad8ac6bfeb
-deck-slide-before-slide-after-on = דער סלייד פריער, דער סלייד נאכדעם (אויף דער זייט־לייסטע)
+# en: 720856fcb53d62f79a364c36d8cd2314121430a6
+deck-presenting-back = צוריק (פרעזענטירן)
+# en: a212c73bb85a53b57609d239c50f170773e07d77
+deck-presenting-next-line-or-slide = די קומענדיגע שורה אדער סלייד (פרעזענטירן)
+# en: e53a09169fa399b79b5b814de5e65669714f9165
+deck-presenting-whole-slide = דער גאנצער סלייד (פרעזענטירן)
+# en: 7722768d8b861ddedb1f6400352985ca0cfd4a08
+deck-slide-before-slide-after-on = דער פריערדיגער אדער דער קומענדיגער סלייד
 
 ## the Calendar app
 
@@ -2381,8 +2381,8 @@ cal-week-later = א וואך שפעטער
 cal-weekend-of-sessions-at-set = א סוף־וואך פון אויפטריטן אין באשטימטע צייטן, א שפעטער אויפטריט נאך האלבע נאכט.
 # en: 114574336ac7883aebd0653b3fc5e82f9262dc86
 cal-all-day = גאנצן טאג
-# en: 6e151d3d8e88589b346af242f26ca028607edcaa
-cal-chart-scrolls-sideways = טשארט, סקראלט אויף די זייט
+# en: cbf28df446643f9968f7fe68968bca51be5cf792
+cal-chart-scrolls-sideways = טשארט (סקראלט אויף די זייט)
 # en: a13d5b9d3da48c8bade3d645e0de9a9bb812c648
 cal-color-for-new-color = קאליר פאר נייע: { $color }
 # en: f6bb0f468a8569c67b3d6826e57e62c5500c3681
@@ -2401,8 +2401,8 @@ cal-choose-task = אויסקלייבן { $task }
 cal-day-earlier = א טאג פריער
 # en: 8d6915ee723c8b3c01f29002cfed7d597d56c2c7
 cal-day-later = א טאג שפעטער
-# en: bb5227c5a97e3815cef2b5de296c6f4ff6d4eaef
-cal-dates = דאטומס…
+# en: 66a755ea0d935aeac763da63deebb69b0eb54ba9
+cal-dates = רעדאקטירן דאטומס…
 # en: a2bb9d34b8a1a79665858d354585cf147e0dee4e
 cal-end = סוף
 # en: 89d10cd6c1e1437d6318d6fbb25a40e0aaaddd34
@@ -2430,8 +2430,8 @@ cal-how-many-times = וויפיל מאל
 # same
 # en: 834c5ef85d6fd469b8be75d8685faf6f9e84eaa7
 cal-icalendar-ics = iCalendar (ICS)
-# en: ccdaa19305a493c44b407953b3d5dcf196bcf042
-cal-its-own-zone = זיין אייגענע זאנע
+# en: 4bcc328bf3b5b886738db678a175936615491289
+cal-its-own-zone = די צייט זאנע פונעם קאלענדאר
 # en: 2a177256a408fa4fc557b301041589b798826d70
 cal-last-day = לעצטער טאג
 # en: 58ef633830b461aa76bf4ee90e3b2831ff588508
@@ -2440,8 +2440,8 @@ cal-lessons-birthdays-and-holidays-color = לעקציעס, געבורטסטאג�
 cal-level = שטאפל
 # en: 082bc378cd60e17a38d99898b21955299c5b60c8
 cal-month = חודש
-# en: f0b847840b1f79dc5663ee39966f60655c368614
-cal-my-zone = מיין זאנע
+# en: 770d509550265dba792aa81868b856eb67225e41
+cal-my-zone = מיין צייט זאנע
 # en: 80c3052d33ccdee15ffaaa110c5c39072495fe63
 cal-never = קיינמאל
 # en: 2ef3795c979293106a6ccf13359d732165fb660a
@@ -2488,24 +2488,24 @@ common-stops = הערט אויף
 cal-same-dates-as-gantt-chart = די זעלבע דאטומס ווי א גאנט טשארט
 # en: 7ea6dec71584012ab4044cc464dc601741ff2c50
 cal-this-calendar-is-written-in = דער קאלענדאר איז געשריבן אין { $zone } צייט.
-# en: 2138f0d946421979b807c4d1fe5bcdbc1374c3fd
-cal-this-calendar-names-no-time = דער קאלענדאר נעמט נישט אן קיין צייט זאנע: זיינע צייטן ווערן געליינט אין אייערע, { $zone }.
+# en: e10c10f818ac8e510b74062cde201eae4e8d8c66
+cal-this-calendar-names-no-time = דער קאלענדאר האט נישט קיין צייט זאנע, ווערן די צייטן געוויזן אין אייערע ({ $zone }).
 # en: 1b4785331db3b08cd8e3cfa4bd36216731a79e54
 cal-this-month = דעם חודש
 # en: eea79afd832854a3b24153b928ee9c62c7457dbe
 cal-time-zone = צייט זאנע
 # en: bf5efde33adface92f37d1888e904ab70c9ce272
 cal-times-in-zone = צייטן אין { $zone }
-# en: 3edde97331606aabe45ce5b8939e0018ced9087e
-cal-times-or-on = מאל, אדער אום
+# en: 650642b1d6b4b1ecc4ad7d38bbdf110d582c4baf
+cal-times-or-on = מאל, אדער ביז
 # en: 69bd4ef9fbd0894a22759c3766b859defbdedbc8
 cal-view = ווייזן
 # en: 97211a8888128314d9ca34d1005f08cb83ed5d9c
 cal-what = וואס
 # en: 879e32326c5217968ac8e3a14e4a8a5214957264
 cal-year = יאר
-# en: e620a387db0ec96358342b64750b0580249d3943
-cal-color-stands-for = { $color } שטייט פאר
+# en: 6189fbfe149a418e2f6d1af4dd71b04f6aa0c50e
+cal-color-stands-for = { $color } מיינט
 # en: 63e5df0eb2fcd351c1d31f23cdf3bf4816e3def5
 cal-every-until-date = { $every } ביז { $date }
 # en: 519c383aaa892cfff62e992bb947ec79ed5dd57d
@@ -2593,35 +2593,35 @@ diagram-person = מענטש
 diagram-step = שריט
 # en: 448ab73ba1c21e671e218fb91f2644c834f0c16f
 diagram-set = גרופע
-# en: e0681542c880148c2dde0e8fe84d3a5aa9c21296
+# en: ecdda59aea5ee67d7d854c969ccf7f4f4b4a4c54
 diagram-thing = זאך
 # The picture, and the line editor over a thing
-# en: 47c7bb9dd540e2e06c7b404596702b3778aa1798
-diagram-tap-empty-space-for-thing = דריקט אויף א ליידיג ארט פאר א זאך; פארבינדן אויף דער לייסטע, דערנאך די צוויי זאכן, פארבינדט זיי; אדער שלעפט איינס אויף דער אנדערער.
+# en: c2e45b49b02d2ac7e1baf25d9d0a2f5c257281ad
+diagram-tap-empty-space-for-thing = דריקט אויף א ליידיגן ארט צו צולייגן א זאך. צו פארבינדן צוויי, דריקט "פארבינדן" און דריקט אויף ביידע, אדער שלעפט איינס אויף דעם אנדערן.
 # en: d4b16450c157188d2cf2e3968faee3709ebeca28
 diagram-tap-here-to-add-first = דריקט דא צוצולייגן דאס ערשטע: { $thing }.
-# en: 15dd4a157f74190eb319f5623d0df46c173f661c
-diagram-tap-in-lane-to-add = דריקט אין א באן צוצולייגן א שריט דארט; דריקט אויף א שריט צו שרייבן אויף אים; שלעפט אים צו אן אנדער באן, אדער אויף א שריט צו קומען נאך אים.
-# en: 09871908140008f25fcd1870035a392e225c44aa
-diagram-tap-thing-to-join-name = דריקט אויף דער זאך מיט וועלכער צו פארבינדן { $name }; דריקט אויף א ליידיג ארט אויפצוהערן.
-# en: b0449f9fd2bc63ae3f7f9cd6ae8434659ab5ffa0
-diagram-tap-first-thing-to-join = דריקט אויף דער ערשטער זאך צו פארבינדן, דערנאך אויף דער אנדערער; דריקט אויף א ליידיג ארט אויפצוהערן.
-# en: 2725e3e2092e4296202f5cd57bdfdceabf48844c
+# en: ccdb7bfa4c6b71a69f1931253fe6f892a2baf89b
+diagram-tap-in-lane-to-add = דריקט אין א שטרעקע צו צולייגן א טריט. דריקט אויף א טריט אים צו רעדאקטירן. שלעפט אים צו אן אנדער שטרעקע, אדער אויף א טריט אז ער זאל קומען נאך אים.
+# en: 639d02ad26e5be80f5baf69835b953dfc015178b
+diagram-tap-thing-to-join-name = דריקט אויף דער זאך צו וועלכער צו פארבינדן { $name }. דריקט אויף א ליידיגן ארט צו אנולירן.
+# en: 5d36f27a0649ac9ae67fb2e66f5be89ebc4719c8
+diagram-tap-first-thing-to-join = דריקט אויף דער ערשטער זאך, דערנאך אויף דער אנדערער. דריקט אויף א ליידיגן ארט צו אנולירן.
+# en: 8953058d46b225514231aca0b8643f4e72547676
 diagram-this-thing = די זאך
-# en: 2e14e11ce84b1892bcdec7356603f3a4377e464a
-diagram-add-under-it = צולייגן אונטער איר
-# en: 87302651ba9b963dd8e390b315590274bc9f54dc
+# en: 53ea183a6bb5ad2942edd6884230b8f425c0eea6
+diagram-add-under-it = צולייגן אונטן
+# en: e9e7205b6f0bd7d9c8f1a1dfe85ef9d54979662f
 diagram-add-one-more = צולייגן נאך איינס
-# en: 09e488b3a88425c020211d29a2dbb60a0d4fba79
-diagram-add-after-it = צולייגן נאך איר
+# en: be34070c33b5c14155fe70a18891828387dd399d
+diagram-add-after-it = צולייגן נאכדעם
 # en: 90d24ab49426f19e75a2b6c3fd9196603c2e0852
 diagram-add-step = צולייגן א שריט
 # en: e0d73143de80d17e82de2e017ac156ca3b9c4e01
 diagram-join = פארבינדן
-# en: 6d38d1eb6fb326d6aaccf362ba404ed024b81102
-diagram-make-it-plain-line = מאכן א פשוטע ליניע
-# en: d7c2f8db0073a31e8e0ded4d2a13d8076ba44fd6
-diagram-make-it-arrow = מאכן א פייל
+# en: e45795fb6033ae4ecc1e2e3610273fce71a317d7
+diagram-make-it-plain-line = פשוטע ליניע
+# en: 3a4758c3cc8dac2d76026d0733816741f9b21d43
+diagram-make-it-arrow = פייל
 # en: a07496767ed7e5caf20bb803434a1aa088aaa97b
 diagram-what-connection-says = דער לעיבל פון דער פארבינדונג
 # en: 7d531617dd394cef59d3cf58fc32b3bc458f6744
@@ -2731,8 +2731,8 @@ diagram-water-cycle = דער וואסער קרייז
 diagram-three-generations-of-morenos-and = דריי דורות פון די מארענאס, און א פינטלדיגע ליניע צו א קוואטער־קינד.
 # en: 0e60bdf5cc3dbaa6c2018bd31c760c1e46e79ab1
 diagram-who-can-do-what = ווער קען טון וואס
-# en: 77612b6030acd5929dba4733671ebce9b6967f72
-diagram-tap-empty-space-for-branch = דריקט אויף א ליידיג ארט פאר א צווייג; דריקט אויף אן אידעע צו שרייבן אויף איר, Enter פאר דער קומענדיגער; שלעפט איינס אויף דער אנדערער עס אונטערצולייגן; פארבינדן פארבינדט צוויי איבער דער מעפ.
+# en: b27a04f87f9d4657107a8dbd89d32eb1dedb41b7
+diagram-tap-empty-space-for-branch = דריקט אויף א ליידיגן ארט צו צולייגן א צווייג. דריקט אויף א געדאנק אים צו רעדאקטירן, Enter פארן קומענדיגן. שלעפט איינס אויף אן אנדערן עס אריינצולייגן דערונטער. "פארבינדן" פארבינדט צוויי איבער דער מאפע.
 # en: fd23500d007e121f9530bb8b530f367ed9e00825
 diagram-place-cards = פלאץ קארטלעך
 # en: dd9ef7db14a8bdb18f7a266d6e91711443e71a29
@@ -2743,20 +2743,20 @@ diagram-print-place-cards-card-guest = דרוקן פלאץ קארטלעך: א ק
 diagram-guest = גאסט
 # en: 5734dbf560e03e0dea1a1bd85af5088238d5d0e4
 diagram-new-idea = נייע אידעע
-# en: 5c01f4e98ebcc45730b787667c26e3d0c189d7f6
-diagram-tap-empty-space-for-person = דריקט אויף א ליידיג ארט פאר א מענטש; דריקט אויף איינעם צו שרייבן אויף אים, Shift+Enter פאר זיין ראלע אונטערן נאמען, Enter פארן קומענדיגן; שלעפט איינעם אויף אן אנדערן אים אונטערצולייגן.
-# en: 16d186d3c0b3d834fa9944fb99e4df830d8d604b
-diagram-tap-empty-space-for-event = דריקט אויף א ליידיג ארט פאר א געשעעניש: שרייבט ווען, Shift+Enter, דערנאך וואס איז געשען; יארן און דאטומס זענען אויסגעשטעלט ווי זיי זענען געפאלן; א צייט־שפאן איז א בענדל.
+# en: 32c6bde8aa4d539c3b773b1f4cf66e15aa427faa
+diagram-tap-empty-space-for-person = דריקט אויף א ליידיגן ארט צו צולייגן א מענטש. דריקט אויף איינעם אים צו רעדאקטירן, Shift+Enter פאר זיין ראלע, Enter פארן קומענדיגן. שלעפט איינעם אויף אן אנדערן אים צו שטעלן דערונטער.
+# en: 5f7463cc9e2e8a2e25990127091710a286d9765a
+diagram-tap-empty-space-for-event = דריקט אויף א ליידיגן ארט צו צולייגן א געשעעניש. שרייבט די דאטום, Shift+Enter, דערנאך וואס איז געשען. די דאטומס זענען אויסגעשטעלט לויט דער מאס, און א תקופה ווייזט זיך ווי א פאס.
 # en: b6395077670d276b6a207a6eadb6f5a17c1fa854
 diagram-lanes-name = דעם באן'ס נאמען
 # en: 769bb19e615b7f8e2809e5882e2d05a18f57a531
 diagram-when = ווען
-# en: 3df3b95b06bd3d9fba1d2c013d542de8ad0e434a
-diagram-tap-person-to-type-on = דריקט אויף א מענטש צו שרייבן אויף אים, + נאכן נאמען פאר זיין פארטנער, Shift+Enter פאר זיינע יארן אונטערן נאמען; Enter פארן קומענדיגן; שלעפט איינעם אויף אן אנדערן אים אונטערצולייגן; פארבינדן צייכנט א פינטלדיגע ליניע צווישן צוויי.
-# en: c216a378071fd890d4e2a20f3922cd20970280ff
-diagram-tap-empty-space-for-table = דריקט אויף א ליידיג ארט פאר א טיש; דריקט אויף א טיש אדער א מענטש צו שרייבן, א קאמע נאך א נאמען פארן קומענדיגן גאסט; שלעפט א מענטש צו אן אנדער טיש.
-# en: 1a75ac2a6ce93723b5db1af25c849dbaefb29d06
-diagram-tap-inside-circles-to-add = דריקט אינעווייניג אין די קרייזן צוצולייגן א זאך דארט, א קאמע נאך איר פאר דער קומענדיגער; דריקט אויף א גרופע'ס נאמען אים צו טוישן; שלעפט א זאך אין אנדערע קרייזן.
+# en: b23ea75ecf303b9756682c84abecebc7a010f2b1
+diagram-tap-person-to-type-on = דריקט אויף א מענטש אים צו רעדאקטירן. לייגט צו + און א נאמען פאר א שותף, Shift+Enter פאר יארן, Enter פארן קומענדיגן. שלעפט איינעם אויף אן אנדערן אים צו שטעלן דערונטער. "פארבינדן" צייכנט א פונקטירטע ליניע.
+# en: 14e56ce6d5f3d8d56d2ce979bf2eb20aaa9dd93d
+diagram-tap-empty-space-for-table = דריקט אויף א ליידיגן ארט צו צולייגן א טיש. דריקט אויף א טיש אדער א מענטש צו רעדאקטירן. א קאמע הייבט אן דעם קומענדיגן גאסט. שלעפט א מענטש צו אן אנדער טיש.
+# en: 7049f105f3a76be9cb8c6d7b74eb3edf60d9a7da
+diagram-tap-inside-circles-to-add = דריקט אינעווייניג אין א קרייז צו צולייגן א זאך. א קאמע הייבט אן די קומענדיגע. דריקט אויפן נאמען פון א גרופע אים צו טוישן. שלעפט א זאך צווישן די קרייזן.
 
 ## the Trip Planner
 
@@ -2773,8 +2773,8 @@ trip-geojson = GeoJSON
 # The bar and the map
 # en: 63746c80a9900aa0b9df832d6fe50b7318a88aab
 trip-a-place-by-name = אן ארט לויטן נאמען…
-# en: 8779e1ba12906b75111edf21cd1ea027e656470c
-trip-stop-at-middle-of-map = א סטאפ אין מיטן פון דער מאפע
+# en: c86d6e7640906afe6a57236c004f0b1af53b6ee8
+trip-stop-at-middle-of-map = א סטאפ אינמיטן דער מאפע
 # en: a52fccf0e1e5beca9d5885f1638d5e9a6a2684f9
 trip-measure-in = מעסטן אין
 # en: 2458f1444290ced8aefad04d5c947b17bf9a81fb
@@ -2783,8 +2783,8 @@ trip-hours-of-driving = שעות פארן
 trip-miles = מיילן
 # en: 87bafdbb82c61625882d74515ef2c7e566177ea5
 trip-kilometers = קילאמעטער
-# en: c2912ae51710dd393bab94a15f5691d0034f7e62
-trip-join-stops-in-order = פארבינדן די סטאפס לויטן סדר
+# en: 8e49f86b47ba8e4ac259af7b5428623e7332489c
+trip-join-stops-in-order = פארבינדן די סטאפס לויט דער ריי
 # en: 7bdcf970899e9519b75f2dc24d1909f670b283cb
 trip-show-whole-route = ווייזן דעם גאנצן וועג
 # en: fa157c9ab413b3c415d7ada7457694a35c7869a1
@@ -2795,8 +2795,8 @@ trip-map = מאפע
 trip-map-tap-to-add-stop = מאפע: דריקט צוצולייגן א סטאפ
 # en: 81920dbaea13a635abdf8e473b6a5f7c37a415e7
 trip-maps-pictures-come-from-openstreetmap = די מאפע'ס בילדער קומען פון OpenStreetMap בשעת זי ווערט געוויזן.
-# en: 2cbbc3df3b8f862050dc915530000d4709906b6f
-trip-your-location-is-asked-for = מען פרעגט אייער לאקאציע נאר כדי צו צענטרירן די מאפע, און מען שרייבט זי קיינמאל נישט אן ערגעץ.
+# en: dd1ac7c6150bf40973c618ac841d01f2281dea20
+trip-your-location-is-asked-for = אייער ארט ווערט באנוצט נאר צו צענטרירן די מאפע, און ווערט קיינמאל נישט אפגעהאלטן.
 # en: 6c4827a34debc3c12e8a905f5e8025f0d22802cb
 trip-n-stops = { $n ->
         [one] איין סטאפ
@@ -2832,8 +2832,8 @@ trip-town-address-museum = א שטאט, אן אדרעס, א מוזעאום
 trip-search = זוכן
 # en: 1a6a5ba8c23ddb672874a2996abaee1fe933abcd
 trip-searching = מען זוכט…
-# en: 3a721e0216039aa707b02b551860b5397374adc2
-trip-searching-sends-words-you-type = זוכן שיקט די ווערטער וואס איר שרייבט צו OpenStreetMap'ס Nominatim, און גארנישט מער.
+# en: 07a4d61733e108a8ffa6e5753e09227b6a1a0f80
+trip-searching-sends-words-you-type = זוכן שיקט נאר וואס איר שרייבט צו OpenStreetMap׳ס Nominatim.
 # en: 2b36ec5f26fb5c35fccb5edd05776349d238b677
 trip-places-found = ערטער געפונען
 # en: 6c70807e19d1f88aae7d66770719debbaf4ae89b
@@ -2897,18 +2897,18 @@ trip-wedding-on-lake-como = א חתונה ביים קאמא אזערע
 trip-for-guests-where-wedding-is = פאר די געסט: וואו די חתונה איז, וואו צו שלאפן, ווי אהינצוקומען.
 # en: 0fbbb28a6e64acfee9300ecf05016dcf149a5a19
 trip-presenting-trip = מען פרעזענטירט די רייזע
-# en: defe00756135bd21e0d5e6f3da726b28d353e1a2
-trip-presenting-next-stop = פרעזענטירן: דער קומענדיגער סטאפ
-# en: 6c0c4c64c4cb03ee1c9ef8106668d7d2f3b97727
-trip-presenting-stop-before = פרעזענטירן: דער סטאפ פריער
+# en: 24848d1e92a4b831f8fdae547c2fbfdc0d1e441b
+trip-presenting-next-stop = דער קומענדיגער סטאפ (פרעזענטירן)
+# en: a802f6e93c981ee6dd02df366f0141ca3aa085e0
+trip-presenting-stop-before = דער פריערדיגער סטאפ (פרעזענטירן)
 # en: 3b14d20764a1fdef5ee74f4defab4ff20b0e7cce
 trip-put-stops-on-calendar-day = שטעלן די סטאפס אויף א קאלענדאר, א טאג יעדן
-# en: e4f1afa8488566015d041fb325f7e0897148ccd1
-trip-first-last = דער ערשטער, דער לעצטער
-# en: 054cc02718f75dc29ae702c1d5e635fb93d3f5b2
+# en: 16fa5ad4958332a6bbb1eae6d1a8c6ee6f2c7752
+trip-first-last = דער ערשטער אדער דער לעצטער
+# en: 0aa341109cff3c75e204930fdeac94f52278bb67
 trip-next-stop = דער קומענדיגער סטאפ
-# en: 0b315b14904297b902188306eb30d496ca34c7e2
-trip-stop-before = דער סטאפ פריער
+# en: 35bc0362a4899961a0e878990611c13021c1e549
+trip-stop-before = דער פריערדיגער סטאפ
 
 ## shared: the Word Processor's looks, the header's Home, a money column's currency
 
@@ -2928,8 +2928,8 @@ calc-calculation = חשבון
 # The tape is the list of lines worked out, as on a printing calculator. 'Calculator' and 'Numbers' are above.
 # en: ab4ea6f8fe06812a128297560bee7aff1be0c040
 calc-calculator-that-shows-its-work = א קאלקולאטאר וואס ווייזט זיין ארבעט: נעמען, מאסן און איבערטוישן, און גראפן פון y = f(x).
-# en: 2e1fea55cc9352b6b3de8581a14318b0739a3a6c
-calc-tape-text = די סטריפ (טעקסט)
+# en: f146f8e93fc9312f6b8003b048cd24d1574469af
+calc-tape-text = דער סטריפ ווי טעקסט
 # The bar
 # en: 9a7405ebcedde5be8d095a986ea8794e19ee84e2
 calc-graph = גראף
@@ -2973,8 +2973,8 @@ calc-simplify = פארפשוטן
 calc-tape = סטריפ
 # en: 1acb1c0448ace57b632dc2d56121f45a18e646be
 calc-line-n = שורה { $n }
-# en: 35f7cd1164328099cf99c40ab3bc42984fa25cd5
-calc-put-answer-in-line = אריינשטעלן { $answer } אין דער שורה
+# en: 43885eadc7bc789d89e6e81db680818d2dd1b223
+calc-put-answer-in-line = אריינלייגן { $answer }
 # en: a9c16dd084ce3781568419133b0fa0c0f57aa727
 calc-no-answer = קיין תשובה
 # en: cf23123f857abeda1d28fc9b85cc7eba8d20f3b1
@@ -2998,10 +2998,10 @@ calc-keys = קנעפלעך
 calc-backspace = Backspace
 # en: d1149c36a0edcfbeae98bf270da3f543b6c6a866
 calc-clear-line = אויסמעקן די שורה
-# en: 4716ff8f558cadc13c582104a818ee5abde9853c
-calc-answer-before = די פריערדיגע תשובה
-# en: ff4e4dbf3bb595e38f14ac19214f322e782f121b
-calc-type-sum-or-3-inch = שרייבט א חשבון, אדער 3 inch to cm, און דריקט Enter. a = 12 האלט א תשובה מיט א נאמען.
+# en: 097a41c8c7e58b9b655d7b3e31a3673466595450
+calc-answer-before = דער פריערדיגער ענטפער
+# en: 2ee9e26d39d7113bd8fea80639d6257ab1bdf8cc
+calc-type-sum-or-3-inch = שרייבט א חשבון, אדער 3 inch to cm, און דריקט Enter. a = 12 היט אפ אן ענטפער מיט א נאמען.
 # en: 0bef86b24e006bd994db1509b268156522c7dc2c
 calc-type-curve-in-x-such = שרייבט א קרומע ליניע אין x, ווי x^2 אדער sin(x), און דריקט Enter זי צו צייכענען.
 # The templates
@@ -3169,12 +3169,12 @@ qr-code-of-this-document = א QR קאוד פון דעם דאקומענט
 
 ## the keys, the shortcuts and the size of everything (kit/core/keys.ts, kit/ui/zoom.ts)
 
-# en: 3f3b2c1515692707509166286b837928fcc6486d
-keys-normal-size = נארמאלע גרייס
-# en: 1229caff41e35faa0a828560a25ea095ce975672
-keys-everything-larger = אלעס גרעסער
-# en: d1a6c5490cb95093a9fb9116f092d142b8a73ff6
-keys-everything-smaller = אלעס קלענער
+# en: e5737972ceac5c184d5009e9ee1746c4b3292f26
+keys-normal-size = צוריקשטעלן דעם זום
+# en: 4fc05f2763ba31e2d3be5f08e7d0bab5d5dcbf78
+keys-everything-larger = נענטער
+# en: a4ae4b24a1f5369c2bff61abdbc221170e4b27d8
+keys-everything-smaller = ווייטער
 # en: 67312061f24800b7dc75b07101329959c5c1af88
 keys-keep-this-document-on-device = אפהיטן אויף דעם מכשיר
 # en: 4d5e11a737e63d755f4127a0139f235f3794b6c6
@@ -3189,7 +3189,7 @@ find-not-found = נישט געפונען
 
 ## a menu narrowed by typing (kit/ui/menu.ts)
 
-# en: 6b402540edfb9bf7f30575ed784274bc3b5afed4
-menu-nothing-starts-q = גארנישט הייבט זיך אן מיט "{ $q }"
-# en: 44b790d6bf11cdcff6a339e5f61f3fdabcc14bb3
-menu-starting-q = הייבט זיך אן מיט "{ $q }"
+# en: a9c25fead588babdd6b90b343a47f716f722312e
+menu-nothing-starts-q = קיין צופאסונגען פאר "{ $q }"
+# en: ddf17f8747a6b36489443d6b09c25b429a1ea675
+menu-starting-q = צופאסונגען פאר "{ $q }"

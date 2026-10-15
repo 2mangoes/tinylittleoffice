@@ -593,7 +593,7 @@ test("a tap on a task's grip chooses it with its parts; the bar under it in the 
   expect(trow(el, 0).querySelector('.cal-grip')!.getAttribute('aria-pressed')).toBe('true');
   await until(() => contextOpen(el));
   const labels = [...el.querySelectorAll('.cal-context button')].map((b) => b.getAttribute('aria-label'));
-  expect(labels).toEqual(['Edit', 'Move up', 'Move down', 'A day earlier', 'A day later', 'Dates…', 'Indent', 'Outdent', 'Duplicate', 'Copy', 'Cut', 'Paste', 'Delete']);
+  expect(labels).toEqual(['Edit', 'Move up', 'Move down', 'A day earlier', 'A day later', 'Edit dates…', 'Indent', 'Outdent', 'Duplicate', 'Copy', 'Cut', 'Paste', 'Delete']);
   expect(contextButton(el, 'Move up').disabled).toBe(true);
   contextButton(el, 'Move down').click();
   await settle(el);
@@ -721,7 +721,7 @@ test("the zone dialog says whose zone a calendar's times are in: its own, or, wi
   await settle(el);
   const hint = () => document.querySelector('to-dialog.cal-zones .to-hint')!.textContent!.replace(/\s+/g, ' ').trim();
   const reader = Intl.DateTimeFormat().resolvedOptions().timeZone.replace(/_/g, ' ');
-  expect(hint()).toBe(`This calendar names no time zone: its times are read in yours, ${reader}.`);
+  expect(hint()).toBe(`This calendar has no time zone, so times are shown in yours (${reader}).`);
   // Read in the reader's zone, the 17:30 is 17:30 on the clock this device keeps.
   expect(el.view.tz).toBe(Intl.DateTimeFormat().resolvedOptions().timeZone);
   el.value = DOC;

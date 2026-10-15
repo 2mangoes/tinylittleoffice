@@ -188,9 +188,9 @@ whose rows are the document's own data (the sheet's column kinds, the formula fu
 | `Mod+Shift+D` | Download | drawer |
 | `Mod+P` | Print, or save as PDF | keys only |
 | `Mod+/` | Show these shortcuts | keys only |
-|  | Everything larger | drawer |
-|  | Everything smaller | drawer |
-|  | Normal size | drawer |
+|  | Zoom in | drawer |
+|  | Zoom out | drawer |
+|  | Reset zoom | drawer |
 | `Mod+K` | Find app, doc, template, or command | keys only |
 
 ### Words (wherever words are typed) (`text`)
@@ -283,8 +283,8 @@ whose rows are the document's own data (the sheet's column kinds, the formula fu
 |  | Numbered | bar |
 | `Mod+Shift+,` | Zoom out | bar, at: words, drawer on a phone |
 | `Mod+Shift+.` | Zoom in | bar, at: words |
-|  | Fold all | bar, drawer on a phone |
-|  | Unfold all | bar, drawer on a phone |
+|  | Collapse all | bar, drawer on a phone |
+|  | Expand all | bar, drawer on a phone |
 |  | Connect | bar |
 |  | As a page | view ▾ |
 |  | Show as slides | view ▾ |
@@ -292,10 +292,10 @@ whose rows are the document's own data (the sheet's column kinds, the formula fu
 |  | Draw as an org chart | view ▾ |
 |  | Draw as a family tree | view ▾ |
 |  | Draw as a network | view ▾ |
-| `Mod+Alt+ArrowUp`, `Mod+Alt+ArrowDown` | Fold, unfold | keys only, at: words |
+| `Mod+Alt+ArrowUp`, `Mod+Alt+ArrowDown` | Collapse or expand | keys only, at: words |
 | `Mod+D` | Duplicate | keys only, at: words |
 | `Delete`, `Backspace` | Delete | keys only, at: words |
-| `ArrowUp`, `ArrowDown`, `ArrowLeft`, `ArrowRight` | The next or the one before | keys only, at: words |
+| `ArrowUp`, `ArrowDown`, `ArrowLeft`, `ArrowRight` | Next or previous | keys only, at: words |
 
 ### Presentation Builder (`deck`)
 
@@ -310,7 +310,7 @@ whose rows are the document's own data (the sheet's column kinds, the formula fu
 |  | Tiny Little Office Doc… | insert ▾ |
 |  | QR code of this document | insert ▾ |
 | `Mod+Alt+Enter` | Present | bar, at: slide, drawer on a phone |
-|  | See the sheets to print | bar, drawer on a phone |
+|  | Print layout | bar, drawer on a phone |
 |  | Icon | bar |
 |  | Bullets | layout ▾ |
 |  | Title | layout ▾ |
@@ -337,10 +337,10 @@ whose rows are the document's own data (the sheet's column kinds, the formula fu
 | `Mod+Shift+Enter` | A new slide | keys only, at: slide |
 | `Mod+Enter` | Done | keys only, at: words |
 | `Mod+D` | Duplicate | keys only, at: slide |
-| `PageUp`, `PageDown` | The slide before, the slide after (on the rail) | keys only, at: rail |
-| `ArrowRight`, `Space`, `PageDown`, `Enter` | Presenting: the next line or slide | keys only, at: show |
-| `ArrowLeft`, `PageUp`, `Backspace` | Presenting: back | keys only, at: show |
-| `End` | Presenting: the whole slide | keys only, at: show |
+| `PageUp`, `PageDown` | Previous or next slide | keys only, at: rail |
+| `ArrowRight`, `Space`, `PageDown`, `Enter` | Next line or slide (presenting) | keys only, at: show |
+| `ArrowLeft`, `PageUp`, `Backspace` | Back (presenting) | keys only, at: show |
+| `End` | Whole slide (presenting) | keys only, at: show |
 | `N`, `Shift+N` | Notes | keys only, at: show |
 | `Escape` | Stop presenting | keys only, at: show |
 
@@ -375,12 +375,12 @@ whose rows are the document's own data (the sheet's column kinds, the formula fu
 | `Mod+A` | Select all (this field first, then the whole document) | keys only, at: cell |
 | `Mod+Enter` | Done | keys only, at: cell |
 | `Tab`, `Shift+Tab` | Indent or outdent a list item; next cell in a table | keys only, at: cell |
-| `F2` | Edit the cell, the caret at its end | keys only, at: cell |
+| `F2` | Edit cell with cursor at end | keys only, at: cell |
 | `Shift+ArrowUp`, `Shift+ArrowDown`, `Shift+ArrowLeft`, `Shift+ArrowRight` | Extend selection | keys only, at: cell |
 | `Space` | Check or uncheck a task | keys only, at: cell |
 | `Escape` | Close or deselect | keys only, at: cell |
-| `Escape` | Put back what the cell held | keys only, at: cell |
-| `Enter`, `Shift+Enter`, `ArrowDown`, `ArrowUp`, `ArrowLeft`, `ArrowRight` | The next or the one before | keys only, at: cell |
+| `Escape` | Restore cell value | keys only, at: cell |
+| `Enter`, `Shift+Enter`, `ArrowDown`, `ArrowUp`, `ArrowLeft`, `ArrowRight` | Next or previous | keys only, at: cell |
 
 ### Calculator (`calc`)
 
@@ -403,14 +403,14 @@ whose rows are the document's own data (the sheet's column kinds, the formula fu
 |  | Simplify | insert ▾ |
 |  | Clear the tape | bar, drawer on a phone |
 | `Enter` | Done | keys only, at: entry |
-| `ArrowUp`, `ArrowDown` | The next or the one before | keys only, at: entry |
+| `ArrowUp`, `ArrowDown` | Next or previous | keys only, at: entry |
 | `Escape` | Clear the line | keys only, at: entry |
 | `Mod+A` | Select all (this field first, then the whole document) | keys only, at: entry |
 | `Enter` | Done | keys only, at: line |
 | `Escape` | Close or deselect | keys only, at: line |
 | `Alt+ArrowUp`, `Alt+ArrowDown` | Move the selected items up or down | keys only, at: line |
 | `Shift+ArrowUp`, `Shift+ArrowDown` | Extend selection | keys only, at: line |
-| `ArrowUp`, `ArrowDown` | The next or the one before | keys only, at: line |
+| `ArrowUp`, `ArrowDown` | Next or previous | keys only, at: line |
 | `Mod+D` | Duplicate | keys only, at: line |
 | `Mod+A` | Select all (this field first, then the whole document) | keys only, at: line |
 | `Backspace` | Delete | keys only, at: line |
@@ -514,11 +514,11 @@ whose rows are the document's own data (the sheet's column kinds, the formula fu
 |  | Zoom in | bar, drawer on a phone |
 | `Alt+ArrowUp` | Move up | context, at: thing |
 | `Alt+ArrowDown` | Move down | context, at: thing |
-|  | Add after it | context |
+|  | Add after | context |
 |  | Icon | context |
 |  | Add a step | context |
 |  | Join | context |
-|  | Make it an arrow | context |
+|  | Arrow | context |
 | `Tab` | Indent | context, at: thing |
 | `Shift+Tab` | Outdent | context, at: thing |
 | `Mod+D` | Duplicate | context, at: thing |
@@ -529,8 +529,8 @@ whose rows are the document's own data (the sheet's column kinds, the formula fu
 | `Enter`, `Space` | Edit | keys only, at: thing |
 | `Mod+Alt+ArrowLeft` | Move left | keys only, at: thing |
 | `Mod+Alt+ArrowRight` | Move right | keys only, at: thing |
-| `ArrowUp`, `ArrowDown`, `ArrowLeft`, `ArrowRight` | The next or the one before | keys only, at: thing |
-| `ArrowDown`, `ArrowRight` | The next or the one before | keys only, at: picture |
+| `ArrowUp`, `ArrowDown`, `ArrowLeft`, `ArrowRight` | Next or previous | keys only, at: thing |
+| `ArrowDown`, `ArrowRight` | Next or previous | keys only, at: picture |
 | `Escape` | Close or deselect | keys only, at: picture |
 | `Mod+Enter` | Done | keys only, at: words |
 
@@ -563,16 +563,16 @@ whose rows are the document's own data (the sheet's column kinds, the formula fu
 |  | 5 times | loop ▾ |
 |  | 10 times | loop ▾ |
 |  | Loop forever | loop ▾ |
-| `K` | Add a key here | context, at: stage |
-|  | Remove this key | context |
+| `K` | Add keyframe | context, at: stage |
+|  | Remove keyframe | context |
 | `Enter` | Edit text | context, at: stage |
 | `Mod+D` | Duplicate | context, at: stage |
 | `Mod+C` | Copy | context, at: stage |
 | `Mod+X` | Cut | context, at: stage |
 | `Mod+V` | Paste | context, at: stage |
 | `Delete`, `Backspace` | Delete | context, at: stage |
-| `,`, `.` | A frame back, a frame on | keys only, at: stage |
-| `Home`, `End` | The first frame, the last | keys only, at: stage |
+| `,`, `.` | Previous or next frame | keys only, at: stage |
+| `Home`, `End` | First or last frame | keys only, at: stage |
 | `ArrowLeft`, `ArrowRight`, `ArrowUp`, `ArrowDown`, `Shift+ArrowLeft`, `Shift+ArrowRight`, `Shift+ArrowUp`, `Shift+ArrowDown`, `Mod+ArrowLeft`, `Mod+ArrowRight`, `Mod+ArrowUp`, `Mod+ArrowDown` | Nudge selected shapes, or step one frame | keys only, at: stage |
 | `Mod+A` | Select all (this field first, then the whole document) | keys only, at: stage |
 | `Escape` | Close or deselect | keys only, at: stage |
@@ -592,18 +592,18 @@ whose rows are the document's own data (the sheet's column kinds, the formula fu
 |  | Time zone | bar, drawer on a phone |
 | `Mod+Alt+ArrowLeft` | A day earlier | context, at: rows |
 | `Mod+Alt+ArrowRight` | A day later | context, at: rows |
-| `Alt+Enter` | Dates… | context, at: rows |
+| `Alt+Enter` | Edit dates… | context, at: rows |
 | `Tab`, `Shift+Tab` | Indent or outdent a list item; next cell in a table | keys only, at: words |
 | `Alt+ArrowUp`, `Alt+ArrowDown` | Move the selected items up or down | keys only, at: words |
-| `ArrowUp`, `ArrowDown` | The next or the one before | keys only, at: words |
+| `ArrowUp`, `ArrowDown` | Next or previous | keys only, at: words |
 | `Mod+D` | Duplicate | keys only, at: words |
 | `Mod+Enter` | Check or uncheck a task | keys only, at: words |
 | `Mod+Alt+ArrowLeft` | A day earlier | keys only, at: words |
 | `Mod+Alt+ArrowRight` | A day later | keys only, at: words |
-| `Alt+Enter` | Dates… | keys only, at: words |
+| `Alt+Enter` | Edit dates… | keys only, at: words |
 | `Enter` | Event | keys only, at: day |
 | `Escape` | Close or deselect | keys only, at: day |
-| `ArrowLeft`, `ArrowRight`, `ArrowUp`, `ArrowDown`, `Shift+ArrowLeft`, `Shift+ArrowRight`, `Shift+ArrowUp`, `Shift+ArrowDown`, `Home`, `End`, `PageUp`, `PageDown` | The next or the one before | keys only, at: day |
+| `ArrowLeft`, `ArrowRight`, `ArrowUp`, `ArrowDown`, `Shift+ArrowLeft`, `Shift+ArrowRight`, `Shift+ArrowUp`, `Shift+ArrowDown`, `Home`, `End`, `PageUp`, `PageDown` | Next or previous | keys only, at: day |
 | `Delete`, `Backspace` | Delete | keys only, at: entry |
 | `Mod+D` | Duplicate | keys only, at: entry |
 
@@ -612,11 +612,11 @@ whose rows are the document's own data (the sheet's column kinds, the formula fu
 | Keys | Command | Where |
 |---|---|---|
 |  | A place by name… | insert ▾ |
-|  | A stop at the middle of the map | insert ▾ |
+|  | Add a stop at the map’s center | insert ▾ |
 |  | Hours of driving | units ▾ |
 |  | Miles | units ▾ |
 |  | Kilometers | units ▾ |
-|  | Join the stops in order | bar, drawer on a phone |
+|  | Connect stops in order | bar, drawer on a phone |
 |  | Show the whole route | bar, drawer on a phone |
 |  | Where I am | bar, drawer on a phone |
 |  | Map | bar, drawer on a phone |
@@ -624,10 +624,10 @@ whose rows are the document's own data (the sheet's column kinds, the formula fu
 |  | Show on the map | context, at: rows |
 | `Alt+ArrowUp`, `Alt+ArrowDown` | Move the selected items up or down | keys only, at: words |
 | `Mod+D` | Duplicate | keys only, at: words |
-| `ArrowUp`, `ArrowDown` | The next or the one before | keys only, at: words |
-| `ArrowRight`, `Space`, `PageDown`, `Enter` | Presenting: the next stop | keys only, at: show |
-| `ArrowLeft`, `PageUp`, `Backspace` | Presenting: the stop before | keys only, at: show |
-| `Home`, `End` | The first, the last | keys only, at: show |
+| `ArrowUp`, `ArrowDown` | Next or previous | keys only, at: words |
+| `ArrowRight`, `Space`, `PageDown`, `Enter` | Next stop (presenting) | keys only, at: show |
+| `ArrowLeft`, `PageUp`, `Backspace` | Previous stop (presenting) | keys only, at: show |
+| `Home`, `End` | First or last | keys only, at: show |
 | `Escape` | Stop presenting | keys only, at: show |
 | `ArrowLeft`, `ArrowRight`, `ArrowUp`, `ArrowDown`, `Shift+ArrowLeft`, `Shift+ArrowRight`, `Shift+ArrowUp`, `Shift+ArrowDown` | Nudge selected shapes | keys only, at: pin |
 | `Delete`, `Backspace` | Delete | keys only, at: pin |

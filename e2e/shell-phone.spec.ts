@@ -51,7 +51,7 @@ test('a tap opens where the link fits; the size steps; Insert narrows; a trip pr
   await page.locator('.to-burger').tap();
   await page.getByRole('region', { name: 'This document' }).getByRole('button', { name: 'Present' }).tap();
   await expect(page.locator('.trip-present b')).toHaveText('1 of 2 · Lisbon');
-  await page.locator('.trip-present button[aria-label="The next stop"]').tap();
+  await page.locator('.trip-present button[aria-label="Next stop"]').tap();
   await expect(page.locator('.trip-present b')).toHaveText('2 of 2 · Porto');
   await page.locator('.trip-present button[aria-label="Stop presenting"]').tap();
   await expect(page.locator('.trip-present')).toHaveCount(0);

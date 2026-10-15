@@ -155,7 +155,7 @@ test('invert: every primitive is taken back exactly; invertAll takes back a list
         { name: '', type: 'text' },
       ],
     },
-    { op: 'col', at: 4, c: 0, col: { name: 'Thing', type: 'rich' } },
+    { op: 'col', at: 4, c: 0, col: { name: 'Item', type: 'rich' } },
   ];
   for (const op of ops) expect(applyAll(apply(DOC, op), invert(DOC, op)), op.op).toStrictEqual(DOC);
   expect(applyAll(applyAll(DOC, ops.slice(0, 3)), invertAll(DOC, ops.slice(0, 3)))).toStrictEqual(DOC);

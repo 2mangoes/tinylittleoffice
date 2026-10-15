@@ -136,7 +136,7 @@ test('the keys type where the caret is and never take the focus; ⌫, C and = do
   expect(last()).toBe('6×7\n');
   expect(answers(el)).toEqual(['= 42']);
   // ans: the answer before.
-  for (const k of ['The answer before', '+', '1', '=']) key(el, k).click();
+  for (const k of ['Previous answer', '+', '1', '=']) key(el, k).click();
   await settle(el);
   expect(last()).toBe('6×7\nans+1\n');
   expect(answers(el)).toEqual(['= 42', '= 43']);

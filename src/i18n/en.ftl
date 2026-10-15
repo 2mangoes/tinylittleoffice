@@ -73,7 +73,7 @@ home-templates-for-app-name = Templates for { $app }: { $name }
 # Offline, where the templates' file was never kept by the service worker (kit/ui/home.ts).
 home-templates-are-not-saved-in = The templates are not saved in this browser yet. Connect to the internet to see them.
 home-documents-found = Documents found
-home-no-document-here-has-those = No document here has those words
+home-no-document-here-has-those = No documents match
 home-search-your-documents = Search your documents
 home-n-documents-found = { $n ->
         [one] One document found
@@ -117,9 +117,9 @@ drawer-discoveries = Discoveries
 drawer-documents = Documents
 drawer-find-app-template-or-command = Find app, template, or command
 drawer-commands = Commands
-drawer-nothing-by-that-name = Nothing by that name
+drawer-nothing-by-that-name = No results
 drawer-add-to-home-screen = Add to home screen
-drawer-size-of-everything = Size of everything
+drawer-size-of-everything = Zoom
 drawer-to-add-tiny-little-office = To add Tiny Little Office to the home screen: Share, then Add to Home Screen.
 
 ## links that leave the site (kit/ui/link-guard.ts)
@@ -341,7 +341,7 @@ common-nudge-shapes-in-hand = Nudge selected shapes
 common-select-all-words-of-box = Select all (this field first, then the whole document)
 common-back-to-words = Back to text
 common-extend-selection = Extend selection
-common-next-or-one-before = The next or the one before
+common-next-or-one-before = Next or previous
 common-step-out-close-collapse-let = Close or deselect
 common-check-or-uncheck-task = Check or uncheck a task
 common-too-long-for-qr-code = Too long for a QR code: shorten the document, or share a short link.
@@ -686,7 +686,7 @@ sheet-symbol-of-up-to-three = A symbol of up to three characters, or a code of t
 sheet-no-chart = No chart
 sheet-number = Number
 sheet-open-link = Open { $link }
-sheet-opens-when-clicked = Opens when clicked
+sheet-opens-when-clicked = Opens on click
 sheet-percent = Percent
 common-remove-this-column = Remove this column
 sheet-resize-column-c = Resize column { $c }
@@ -712,8 +712,8 @@ sheet-keeps-one-column = A sheet needs at least one column
 sheet-choices = Choices
 sheet-choices-for-ref = Choices for { $ref }
 sheet-has-one = The sheet already has a chart
-sheet-edit-cell-caret-at-its = Edit the cell, the caret at its end
-sheet-put-back-what-cell-held = Put back what the cell held
+sheet-edit-cell-caret-at-its = Edit cell with cursor at end
+sheet-put-back-what-cell-held = Restore cell value
 sheet-put-dated-rows-on-calendar = Put the dated rows on a calendar
 
 ## downloads: hand-offs to another app (kit/file/exports.ts)
@@ -816,7 +816,7 @@ draw-line = Line
 draw-arrow = Arrow
 draw-join-two-shapes = Join two shapes
 draw-pen = Pen
-draw-any-shape-tap-for-each = Any shape, a tap for each corner
+draw-any-shape-tap-for-each = Polygon: tap each corner
 draw-freehand = Freehand
 draw-drag-to-draw-line-or = Drag to draw a line or a shape
 draw-rounded-box = Rounded box
@@ -860,13 +860,13 @@ draw-add-alt-text-describe-this = Add alt text: describe this drawing for people
 draw-what-does-this-drawing-show = What does this drawing show?
 draw-diagram-of = A diagram of…
 draw-read-aloud-to-people-who = Read aloud to people who cannot see it, and kept with the drawing wherever it is embedded or downloaded.
-draw-describe-from-shapes = Describe from the shapes
+draw-describe-from-shapes = Generate from shapes
 draw-tap-or-drag-to-paint = Tap or drag to paint; the arrow keys move, Enter paints.
 draw-tap-each-corner-tap-first = Tap each corner; tap the first again, or press Enter, to close it.
 draw-drag-to-draw-end-where = Drag to draw; end where you began to close it into a shape.
 draw-press-on-one-shape-and-let-go-on-another = Press on one shape and let go on another.
 draw-now-other-shape-tap-it = Now the other shape: tap it, or choose it with the arrows and press Enter.
-draw-drag-to-move-them-together = Drag to move them together; Shift and a tap adds a shape or takes it away.
+draw-drag-to-move-them-together = Drag to move them together. Shift+tap adds or removes a shape.
 draw-press-on-one-shape-and = Press on one shape and let go on another
 draw-tap-where-icon-goes = Tap where the icon goes.
 draw-drag-on-canvas-to-draw = Drag on the canvas to draw it, or tap to place one.
@@ -874,7 +874,7 @@ draw-eraser = Eraser
 draw-pencil = Pencil
 draw-clear-grid = Clear the grid
 draw-use-as-background = Use as background
-draw-grid-is-now-background-download = The grid is now the background. Download gives it as a tile; any page can carry it as tile:.
+draw-grid-is-now-background-download = The grid is now the background. Download it as a tile, or use it on any page with tile:.
 draw-pixel-grid-n-by-n = Pixel grid, { $n } by { $n }. Arrow keys move; Enter paints with the current color.
 draw-row-y-column-x-ink = Row { $y }, column { $x }: { $ink }
 draw-as-repeating-background = As a repeating background
@@ -942,23 +942,23 @@ anim-video-webm = Video (WebM)
 anim-animated-svg = Animated SVG
 anim-empty-stage = An empty stage
 anim-3d = 3D
-anim-add-key-here = Add a key here
+anim-add-key-here = Add keyframe
 anim-blur = Blur
 anim-depth = Depth
 anim-effects = Effects
 anim-frame-n-s-s = Frame { $n }, { $s } s
 anim-impact = Impact
-anim-key-at-s-s = Key at { $s } s
+anim-key-at-s-s = Keyframe at { $s } s
 anim-mirror = Mirror
 anim-mode = Mode
-anim-moments = Moments
+anim-moments = Keyframes
 anim-move = Move
 anim-neon = Neon
 anim-pause = Pause
 anim-play = Play
 anim-pixel-art-is-made-in = Pixel art is made in the Drawing Tool; the Animator moves shapes.
 anim-rainbow = Rainbow
-anim-remove-this-key = Remove this key
+anim-remove-this-key = Remove keyframe
 anim-shadow = Shadow
 common-size = Size
 anim-spin = Spin
@@ -974,7 +974,7 @@ anim-duplicate-this-frame = Duplicate this frame
 anim-frame-earlier = A frame earlier
 anim-frame-later = A frame later
 anim-delete-this-frame = Delete this frame
-anim-draw-shapes-move-sets-them = Draw the shapes; Move sets them going.
+anim-draw-shapes-move-sets-them = Draw shapes, then use Move to animate them.
 anim-nothing-here-yet-draw-something = Nothing here yet: draw something first.
 anim-tap-shape-then-drag-it = Tap a shape, then drag it to where it goes.
 anim-drag-it-to-where-it = Drag it to where it goes at { $s } s.
@@ -983,7 +983,7 @@ anim-anything-from-drawing-tool-moving = Anything from the Drawing Tool, moving:
 anim-back-and-forth = Back and forth
 anim-forward-then-back = Forward, then back
 anim-frames = Frames
-anim-frames-second = Frames a second
+anim-frames-second = Frames per second
 anim-how-large-shape-is-drawn = How large the shape is drawn: 1× is as drawn.
 anim-length-speed-and-repeat = Length, speed and repeat
 anim-loop-forever = Loop forever
@@ -994,10 +994,10 @@ anim-turns-shape-around-in-plane = Turns the shape around in the plane of the st
 anim-which-shape-is-in-front = Which shape is in front: a nearer shape is drawn over a farther one, and a far one a little dimmer. Depth never changes the size.
 anim-n-times = { $n } times
 anim-s-s = { $s } s
-anim-frame-back-frame-on = A frame back, a frame on
+anim-frame-back-frame-on = Previous or next frame
 anim-nudge-shapes-in-hand-with = Nudge selected shapes, or step one frame
 anim-play-or-pause = Play or pause
-anim-first-frame-last = The first frame, the last
+anim-first-frame-last = First or last frame
 
 ## the Outliner
 
@@ -1014,7 +1014,7 @@ outline-as-page = As a page
 common-calculator = Calculator
 common-calendar = Calendar
 outline-cancel-connecting = Cancel connecting
-outline-change-it = Change it
+outline-change-it = Edit
 common-chosen-items = Selected items
 outline-connect = Connect
 outline-connect-from-words = Connect from “{ $words }”
@@ -1030,11 +1030,11 @@ outline-draw-as-network = Draw as a network
 outline-draw-as-org-chart = Draw as an org chart
 outline-empty = Empty
 outline-everything = Everything
-outline-fold = Fold
-outline-fold-all = Fold all
+outline-fold = Collapse
+outline-fold-all = Collapse all
 outline-item = Item
 outline-item-n = Item { $n }
-outline-kind-of-line = Kind of line
+outline-kind-of-line = Line style
 common-launch-plan = Launch plan
 outline-line-from-from-to-to = Line from { $from } to { $to }
 outline-line-named-label-change-it = Line labeled “{ $label }”: edit
@@ -1062,14 +1062,14 @@ outline-tap-item-to-connect-words = Tap the item to connect “{ $words }” to.
 outline-question-options-under-it-and = The question, the options under it, and for each what speaks for it and against it.
 common-trip-planner = Trip Planner
 outline-twenty-minutes-in-three-parts = Twenty minutes in three parts: the problem, the idea, what it means; a slide a top item when shown as a deck.
-outline-unfold-all = Unfold all
-outline-unfold-n-inside = Unfold, { $n ->
-        [one] one inside
-       *[other] { $n } inside
-    }
+outline-unfold-all = Expand all
+outline-unfold-n-inside = Expand ({ $n ->
+        [one] { $n } item
+       *[other] { $n } items
+    })
 common-untitled = Untitled
 outline-view-as = View as
-outline-zoomed-in-on = Zoomed in on
+outline-zoomed-in-on = Focused on
 outline-a-plain-line = a plain line
 outline-arrow-from-parent = an arrow from the parent
 outline-arrow-to-parent = an arrow to the parent
@@ -1102,7 +1102,7 @@ outline-three-generations-and-next-each = Three generations and the next, each w
 outline-troubleshooting = Troubleshooting
 outline-who-works-for-whom-at = Who works for whom at a bakery of nine, each with their role, drawn as an org chart from the menu.
 outline-pdf-sections-and-bullets = PDF: sections and bullets
-outline-fold-unfold = Fold, unfold
+outline-fold-unfold = Collapse or expand
 outline-name-line = Label
 
 ## the Presentation Builder
@@ -1176,8 +1176,8 @@ deck-themes-color = The theme's color
 
 # The bar
 common-present = Present
-deck-see-sheets-to-print = See the sheets to print
-deck-back-to-pages = Back to the pages
+deck-see-sheets-to-print = Print layout
+deck-back-to-pages = Back to pages
 deck-headline = Headline
 deck-layout-layout = Layout: { $layout }
 common-look-theme = Look: { $theme }
@@ -1238,8 +1238,8 @@ deck-inside-right = Inside right
 deck-inside-flap = Inside flap
 deck-back = Back
 deck-badge-n = Badge { $n }
-deck-last-slide-added-for-you = Last slide, added for you: a QR code of this whole deck
-deck-ends-with-qr-code-of = Ends with a QR code of this deck, so the room can take it home. The QR button turns it off.
+deck-last-slide-added-for-you = Final slide: a QR code of this deck
+deck-ends-with-qr-code-of = The deck ends with a QR code so the audience can take it with them. The QR button turns this off.
 deck-qr-code-of-this-deck = QR code of this deck
 deck-sheet-side-n = Sheet, side { $n }
 deck-cut-along-dashes-this-half = cut along the dashes · this half goes outside
@@ -1260,8 +1260,8 @@ common-stop-presenting = Stop presenting
 deck-slide-n-of-total = Slide { $n } of { $total }
 common-notes = Notes
 deck-n-hides-them = N hides them
-deck-take-this-deck-home = Take this deck home
-deck-take-this-deck-home-title = Take this deck home: { $title }
+deck-take-this-deck-home = Take this deck with you
+deck-take-this-deck-home-title = Take this deck with you: { $title }
 deck-scan-code-whole-deck-is = Scan the code: the whole deck is in the link.
 deck-a-qr-code-of-this-deck = A QR code of this deck
 
@@ -1285,10 +1285,10 @@ deck-poster-or-flyer-headline-and = A poster or flyer: a headline and a few line
 deck-name-badges-for-meetup-one = Name badges for a meetup, one page per person, six to a sheet, ready to cut.
 deck-edit-this-deck = Edit this deck
 deck-new-slide = A new slide
-deck-presenting-back = Presenting: back
-deck-presenting-next-line-or-slide = Presenting: the next line or slide
-deck-presenting-whole-slide = Presenting: the whole slide
-deck-slide-before-slide-after-on = The slide before, the slide after (on the rail)
+deck-presenting-back = Back (presenting)
+deck-presenting-next-line-or-slide = Next line or slide (presenting)
+deck-presenting-whole-slide = Whole slide (presenting)
+deck-slide-before-slide-after-on = Previous or next slide
 
 ## the Calendar app
 
@@ -1300,7 +1300,7 @@ cal-week-earlier = A week earlier
 cal-week-later = A week later
 cal-weekend-of-sessions-at-set = A weekend of sessions at set times, a late set past midnight.
 cal-all-day = All day
-cal-chart-scrolls-sideways = Chart, scrolls sideways
+cal-chart-scrolls-sideways = Chart (scrolls sideways)
 cal-color-for-new-color = Color for new: { $color }
 cal-days = Days
 cal-days-and-times-on-month = Days and times on a month, a year or a schedule, in any time zone.
@@ -1310,7 +1310,7 @@ cal-edit-task = Edit task
 cal-choose-task = Select { $task }
 cal-day-earlier = A day earlier
 cal-day-later = A day later
-cal-dates = Dates…
+cal-dates = Edit dates…
 cal-end = End
 cal-end-date = End date
 cal-end-time = End time
@@ -1324,12 +1324,12 @@ cal-family-calendar = Family calendar
 cal-festival-weekend = Festival weekend
 cal-how-many-times = How many times
 cal-icalendar-ics = iCalendar (ICS)
-cal-its-own-zone = Its own zone
+cal-its-own-zone = Calendar’s time zone
 cal-last-day = Last day
 cal-lessons-birthdays-and-holidays-color = Lessons, birthdays and holidays, a color for each person, the weekly things repeating.
 cal-level = Level
 cal-month = Month
-cal-my-zone = My zone
+cal-my-zone = My time zone
 cal-never = Never
 cal-new-event = New event
 cal-new-event-on-day = New event on { $day }
@@ -1353,15 +1353,15 @@ cal-starts = Starts
 common-stops = Stops
 cal-same-dates-as-gantt-chart = The same dates as a Gantt chart
 cal-this-calendar-is-written-in = This calendar is written in { $zone } time.
-cal-this-calendar-names-no-time = This calendar names no time zone: its times are read in yours, { $zone }.
+cal-this-calendar-names-no-time = This calendar has no time zone, so times are shown in yours ({ $zone }).
 cal-this-month = This month
 cal-time-zone = Time zone
 cal-times-in-zone = Times in { $zone }
-cal-times-or-on = times, or on
+cal-times-or-on = times, or until
 cal-view = View
 cal-what = What
 cal-year = Year
-cal-color-stands-for = { $color } stands for
+cal-color-stands-for = { $color } means
 cal-every-until-date = { $every } until { $date }
 cal-every-n-times = { $every }, { $n } times
 cal-n-days = { $n ->
@@ -1410,21 +1410,21 @@ diagram-idea = Idea
 diagram-person = Person
 diagram-step = Step
 diagram-set = Set
-diagram-thing = Thing
+diagram-thing = Item
 # The picture, and the line editor over a thing
-diagram-tap-empty-space-for-thing = Tap empty space for a thing; Join in the bar, then the two things, connects them; or drag one onto another.
+diagram-tap-empty-space-for-thing = Tap empty space to add an item. To connect two, press Join and tap both, or drag one onto the other.
 diagram-tap-here-to-add-first = Tap here to add the first { $thing }.
-diagram-tap-in-lane-to-add = Tap in a lane to add a step there; tap a step to type on it; drag it to another lane, or onto a step to go after it.
-diagram-tap-thing-to-join-name = Tap the thing to join { $name } to; tap empty space to stop.
-diagram-tap-first-thing-to-join = Tap the first thing to join, then the other; tap empty space to stop.
-diagram-this-thing = This thing
-diagram-add-under-it = Add under it
-diagram-add-one-more = Add one more
-diagram-add-after-it = Add after it
+diagram-tap-in-lane-to-add = Tap in a lane to add a step. Tap a step to edit it. Drag it to another lane, or onto a step to follow it.
+diagram-tap-thing-to-join-name = Tap the item to connect { $name } to. Tap empty space to cancel.
+diagram-tap-first-thing-to-join = Tap the first item, then the other. Tap empty space to cancel.
+diagram-this-thing = This item
+diagram-add-under-it = Add below
+diagram-add-one-more = Add another
+diagram-add-after-it = Add after
 diagram-add-step = Add a step
 diagram-join = Join
-diagram-make-it-plain-line = Make it a plain line
-diagram-make-it-arrow = Make it an arrow
+diagram-make-it-plain-line = Plain line
+diagram-make-it-arrow = Arrow
 diagram-what-connection-says = Connection label
 diagram-who = Who
 diagram-connection = a connection
@@ -1480,19 +1480,19 @@ diagram-house-network = The house network
 diagram-water-cycle = The water cycle
 diagram-three-generations-of-morenos-and = Three generations of the Morenos, and a dotted line to a godchild.
 diagram-who-can-do-what = Who can do what
-diagram-tap-empty-space-for-branch = Tap empty space for a branch; tap an idea to type on it, Enter for the next; drag one onto another to put it under; Join links two across the map.
+diagram-tap-empty-space-for-branch = Tap empty space to add a branch. Tap an idea to edit it, Enter for the next. Drag one onto another to nest it. Join connects two across the map.
 diagram-place-cards = Place cards
 diagram-print-place-cards = Print place cards
 diagram-print-place-cards-card-guest = Print place cards: a card a guest, eight to a letter sheet, to cut out
 diagram-guest = Guest
 diagram-new-idea = New idea
-diagram-tap-empty-space-for-person = Tap empty space for a person; tap one to type on it, Shift+Enter for their role under the name, Enter for the next; drag one onto another to put them under.
-diagram-tap-empty-space-for-event = Tap empty space for an event: type when, Shift+Enter, then what happened; years and dates are spaced as they fell; a span is a band.
+diagram-tap-empty-space-for-person = Tap empty space to add a person. Tap one to edit, Shift+Enter for their role, Enter for the next. Drag one onto another to put them under.
+diagram-tap-empty-space-for-event = Tap empty space to add an event. Type the date, Shift+Enter, then what happened. Dates are spaced to scale, and a range shows as a band.
 diagram-lanes-name = The lane's name
 diagram-when = When
-diagram-tap-person-to-type-on = Tap a person to type on them, + after the name for their partner, Shift+Enter for their years under the name; Enter for the next; drag one onto another to put them under; Join draws a dotted line between two.
-diagram-tap-empty-space-for-table = Tap empty space for a table; tap a table or a person to type, a comma after a name for the next guest; drag a person to another table.
-diagram-tap-inside-circles-to-add = Tap inside the circles to add a thing there, a comma after it for the next; tap a set's name to rename it; drag a thing into other circles.
+diagram-tap-person-to-type-on = Tap a person to edit. Add + and a name for a partner, Shift+Enter for years, Enter for the next. Drag one onto another to put them under. Join draws a dotted line.
+diagram-tap-empty-space-for-table = Tap empty space to add a table. Tap a table or a person to edit. A comma starts the next guest. Drag a person to another table.
+diagram-tap-inside-circles-to-add = Tap inside a circle to add an item. A comma starts the next. Tap a set’s name to rename it. Drag an item between circles.
 
 ## the Trip Planner
 
@@ -1503,18 +1503,18 @@ trip-gpx-route = GPX route
 trip-geojson = GeoJSON
 # The bar and the map
 trip-a-place-by-name = A place by name…
-trip-stop-at-middle-of-map = A stop at the middle of the map
+trip-stop-at-middle-of-map = Add a stop at the map’s center
 trip-measure-in = Measure in
 trip-hours-of-driving = Hours of driving
 trip-miles = Miles
 trip-kilometers = Kilometers
-trip-join-stops-in-order = Join the stops in order
+trip-join-stops-in-order = Connect stops in order
 trip-show-whole-route = Show the whole route
 trip-where-i-am = Where I am
 trip-map = Map
 trip-map-tap-to-add-stop = Map: tap to add a stop
 trip-maps-pictures-come-from-openstreetmap = The map’s pictures come from OpenStreetMap while it is shown.
-trip-your-location-is-asked-for = Your location is asked for only to center the map, and is never written anywhere.
+trip-your-location-is-asked-for = Your location is used only to center the map and is never stored.
 trip-n-stops = { $n ->
         [one] one stop
        *[other] { $n } stops
@@ -1535,7 +1535,7 @@ trip-find-place = Find a place
 trip-town-address-museum = A town, an address, a museum
 trip-search = Search
 trip-searching = Searching…
-trip-searching-sends-words-you-type = Searching sends the words you type to OpenStreetMap’s Nominatim, and nothing else.
+trip-searching-sends-words-you-type = Searching sends only what you type to OpenStreetMap’s Nominatim.
 trip-places-found = Places found
 trip-nothing-found = Nothing found.
 # The templates
@@ -1568,12 +1568,12 @@ trip-seven-film-and-tv-locations = Seven film and TV locations, uptown to downto
 trip-wedding-on-lake-como = A wedding on Lake Como
 trip-for-guests-where-wedding-is = For the guests: where the wedding is, where to sleep, how to get there.
 trip-presenting-trip = Presenting the trip
-trip-presenting-next-stop = Presenting: the next stop
-trip-presenting-stop-before = Presenting: the stop before
+trip-presenting-next-stop = Next stop (presenting)
+trip-presenting-stop-before = Previous stop (presenting)
 trip-put-stops-on-calendar-day = Put the stops on a calendar, a day each
-trip-first-last = The first, the last
-trip-next-stop = The next stop
-trip-stop-before = The stop before
+trip-first-last = First or last
+trip-next-stop = Next stop
+trip-stop-before = Previous stop
 
 ## shared: the Word Processor's looks, the header's Home, a money column's currency
 
@@ -1587,7 +1587,7 @@ looks-currency = Currency
 calc-calculation = calculation
 # The tape is the list of lines worked out, as on a printing calculator. 'Calculator' and 'Numbers' are above.
 calc-calculator-that-shows-its-work = A calculator that shows its work: names, units and conversions, and graphs of y = f(x).
-calc-tape-text = The tape (text)
+calc-tape-text = Tape as text
 # The bar
 calc-graph = Graph
 calc-clear-tape = Clear the tape
@@ -1611,7 +1611,7 @@ calc-simplify = Simplify
 # The tape, the line being typed, the keys; { $answer } is a result such as 42 or 7.62 cm
 calc-tape = Tape
 calc-line-n = Line { $n }
-calc-put-answer-in-line = Put { $answer } in the line
+calc-put-answer-in-line = Insert { $answer }
 calc-no-answer = No answer
 calc-take-away-line-n = Delete line { $n }
 calc-sum = Sum
@@ -1622,8 +1622,8 @@ calc-at-x-1-answer = at x = 1: { $answer }
 calc-keys = Keys
 calc-backspace = Backspace
 calc-clear-line = Clear the line
-calc-answer-before = The answer before
-calc-type-sum-or-3-inch = Type a sum, or 3 inch to cm, and press Enter. a = 12 keeps an answer by name.
+calc-answer-before = Previous answer
+calc-type-sum-or-3-inch = Type a calculation, or 3 inch to cm, and press Enter. a = 12 saves an answer by name.
 calc-type-curve-in-x-such = Type a curve in x, such as x^2 or sin(x), and press Enter to draw it.
 # The templates
 calc-splitting-bill = Splitting the bill
@@ -1722,9 +1722,9 @@ qr-code-of-this-document = A QR code of this document
 
 ## the keys, the shortcuts and the size of everything (kit/core/keys.ts, kit/ui/zoom.ts)
 
-keys-normal-size = Normal size
-keys-everything-larger = Everything larger
-keys-everything-smaller = Everything smaller
+keys-normal-size = Reset zoom
+keys-everything-larger = Zoom in
+keys-everything-smaller = Zoom out
 keys-keep-this-document-on-device = Save to this device
 keys-show-these-shortcuts = Show these shortcuts
 keys-this-page = This page
@@ -1735,5 +1735,5 @@ find-not-found = Not found
 
 ## a menu narrowed by typing (kit/ui/menu.ts)
 
-menu-nothing-starts-q = Nothing starts “{ $q }”
-menu-starting-q = Starting “{ $q }”
+menu-nothing-starts-q = No matches for “{ $q }”
+menu-starting-q = Matches for “{ $q }”

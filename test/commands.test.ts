@@ -42,7 +42,7 @@ describe('the registry is whole', () => {
   });
   test('the size of everything is three commands of the page, found by the drawer’s search, and none takes a key: Ctrl+=, Ctrl+- and Ctrl+0 are the browser’s own zoom', () => {
     const size = all.filter((c) => ['kit.larger', 'kit.smaller', 'kit.normal-size'].includes(c.id));
-    expect(size.map((c) => labelOf(c))).toStrictEqual(['Everything larger', 'Everything smaller', 'Normal size']);
+    expect(size.map((c) => labelOf(c))).toStrictEqual(['Zoom in', 'Zoom out', 'Reset zoom']);
     expect(size.filter((c) => c.keys).map((c) => c.id)).toStrictEqual([]);
     for (const k of ['Mod+=', 'Mod+-', 'Mod+0'])
       expect(

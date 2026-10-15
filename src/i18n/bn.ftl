@@ -127,8 +127,8 @@ drawer-documents = নথি
 drawer-find-app-template-or-command = অ্যাপ, টেমপ্লেট বা কমান্ড খুঁজুন
 # en: 45e5f3f72e961cb70134ba35f7a27a9620e515f7
 drawer-commands = কমান্ড
-# en: 2cb8ae8266ed4a20c9dee5151f1a5232e3de77a4
-drawer-nothing-by-that-name = এই নামে কিছু নেই
+# en: b993b0c537190bfc94b21360ac5abe51e56be36f
+drawer-nothing-by-that-name = কোনো ফল নেই
 
 ## links that leave the site (kit/ui/link-guard.ts)
 
@@ -1074,8 +1074,8 @@ sheet-no-chart = চার্ট নেই
 sheet-number = সংখ্যা
 # en: 80838be5576c4b333f764e352ef9e6c5292b2b78
 sheet-open-link = { $link } খুলুন
-# en: 348c4977d8bb453ba33998d5e64538c444c54c6e
-sheet-opens-when-clicked = ক্লিক করলে খোলে
+# en: 1d6f3ce763f138e0025747a9d3ae7f30efc75531
+sheet-opens-when-clicked = ক্লিকে খোলে
 # en: ac556cf5938d2104533c38103305f6cf60ba245d
 sheet-percent = শতাংশ
 # en: 4f9fa8ea1af8cde7cca877c50ca723eeadee35dc
@@ -1295,8 +1295,8 @@ draw-arrow = তীর
 draw-join-two-shapes = দুটি আকার জুড়ুন
 # en: cf6c07e7054fad4d6a8affaf62f285e16525c46e
 draw-pen = কলম
-# en: d979b2d654019a5591521248c86ac6d7a294694a
-draw-any-shape-tap-for-each = যেকোনো আকার, প্রতি কোণে একটি ট্যাপ
+# en: c72e323a57434ede3b6eb0cc235109eb76833c55
+draw-any-shape-tap-for-each = বহুভুজ: প্রতিটি কোণে ট্যাপ করুন
 # en: 016a5405a0b425e7d1ac65317df59b45ce5fb1f5
 draw-freehand = হাতে আঁকা
 # en: 8a48ec1f6c073fad0326a0e9251a18e4c88660b5
@@ -1383,8 +1383,8 @@ draw-what-does-this-drawing-show = এই ড্রয়িংয়ে কী 
 draw-diagram-of = একটি ডায়াগ্রাম…
 # en: 5a33f2e7e84274a5291191ca3105e62d897eee0e
 draw-read-aloud-to-people-who = যাঁরা দেখতে পান না তাঁদের জন্য পড়ে শোনানো হয়, আর ড্রয়িং যেখানেই এমবেড বা ডাউনলোড হোক সঙ্গে থাকে।
-# en: b97935a5b0e75f3b48c6e256e537e5c7f718a222
-draw-describe-from-shapes = আকার দেখে বর্ণনা করুন
+# en: 988c63b77eade4f718f9d469cb36e35bff976839
+draw-describe-from-shapes = আকার থেকে তৈরি করুন
 # en: ac302ae45938c985822f097507602d624128f1d0
 draw-tap-or-drag-to-paint = ট্যাপ বা টেনে রং করুন; অ্যারো কী সরায়, Enter রং করে।
 # en: ea263dc45b04f2755ac61a51deecc96ade3fb6a9
@@ -1395,8 +1395,8 @@ draw-drag-to-draw-end-where = টেনে আঁকুন; আকার বন�
 draw-press-on-one-shape-and-let-go-on-another = একটি আকারে চেপে ধরে অন্যটিতে ছেড়ে দিন।
 # en: 1005cc8c1dafc1f9eb422bf2ac68290b492fdfd1
 draw-now-other-shape-tap-it = এবার অন্য আকারটি: ট্যাপ করুন, বা অ্যারো দিয়ে বেছে Enter চাপুন।
-# en: 0a8818d4eb574b7edd32bbc8e27db44e556d1220
-draw-drag-to-move-them-together = একসঙ্গে সরাতে টানুন; Shift চেপে ট্যাপ করলে আকার যোগ বা বাদ হয়।
+# en: e3686f1c55ec91e31825e1d9510abf592d80b08a
+draw-drag-to-move-them-together = একসঙ্গে সরাতে টানুন। Shift+ট্যাপে একটি আকার যোগ হয় বা সরে যায়।
 # en: eb36764c60ec7a17dd6ac3ec7dbbd22ee401778e
 draw-press-on-one-shape-and = একটি আকারে চেপে ধরে অন্যটিতে ছেড়ে দিন
 # en: 199f4e86afea4f2d42eb40b63ce8599168575e06
@@ -1411,8 +1411,8 @@ draw-pencil = পেনসিল
 draw-clear-grid = গ্রিড খালি করুন
 # en: 45ecea7c16e725c14cfec68f5b12d1545f222a73
 draw-use-as-background = ব্যাকগ্রাউন্ড হিসেবে নিন
-# en: 037ae898000037d344a43cf8052a8c7843cbc599
-draw-grid-is-now-background-download = গ্রিডটি এখন ব্যাকগ্রাউন্ড। ডাউনলোডে টাইল হিসেবে পাবেন; যেকোনো পাতা tile: দিয়ে এটি নিতে পারে।
+# en: 507f52dfd67fb731677bb9ae6971f9b5e891bc84
+draw-grid-is-now-background-download = গ্রিডটি এখন ব্যাকগ্রাউন্ড। এটি টাইল হিসেবে ডাউনলোড করুন, অথবা tile: দিয়ে যেকোনো পাতায় ব্যবহার করুন।
 # en: 209a1a74ee8eec09b861bc34e5ddb08a1357a364
 draw-pixel-grid-n-by-n = পিক্সেল গ্রিড, { $n } বাই { $n }। অ্যারো কী দিয়ে সরান; Enter বর্তমান রঙে রং করে।
 # en: a9deda2292f9b3c9a827e2aa71e0da6b4db9f16e
@@ -1536,8 +1536,8 @@ anim-empty-stage = খালি মঞ্চ
 # same
 # en: 64fe85d796d8c2eda594dbc0b7b3452a4a2c444b
 anim-3d = 3D
-# en: 798c40b3e9a56d7b4b393568ef6ca18ae4d0456b
-anim-add-key-here = এখানে একটি কী যোগ করুন
+# en: fe12532bd63a2e75713ec69be11e92d48e9db3c8
+anim-add-key-here = কী-ফ্রেম যোগ করুন
 # en: 900aa998d3550d438fc20a414d3938fc3a1630ab
 anim-blur = ঝাপসা
 # en: df0e298e356261439795d0d435ce0ce576604c65
@@ -1548,14 +1548,14 @@ anim-effects = ইফেক্ট
 anim-frame-n-s-s = ফ্রেম { $n }, { $s } সে.
 # en: 62036a7016ec20273ff717698fbad321c4ff002b
 anim-impact = ইমপ্যাক্ট
-# en: 4dde45e7f399fed3c04d3c8a5db7f69923d48380
-anim-key-at-s-s = { $s } সে.-এ কী
+# en: 4c0a5de85ac9512b6a503ba785c3f369b5cfbda2
+anim-key-at-s-s = { $s } সেকেন্ডে কী-ফ্রেম
 # en: 74adc5789ce92de7bbb5e3d84a287a1ce6d3e7f5
 anim-mirror = আয়না
 # en: a7b93d2128e820f861fc8dfccd9f5521e89ad21f
 anim-mode = মোড
-# en: ed0cbe45b8abfebed8b8486dc9ceafe28d9e3bc5
-anim-moments = মুহূর্ত
+# en: 987e5e1f455e03766d3ef3740947f4db46336d53
+anim-moments = কী-ফ্রেম
 # en: 76cdb950721642b6b8596d36d5a39f7705028b99
 anim-move = সরান
 # en: 00706b5e9ede7f2fb6145370efd20ef72969df11
@@ -1568,8 +1568,8 @@ anim-play = চালান
 anim-pixel-art-is-made-in = পিক্সেল আর্ট ড্রয়িং টুলে বানানো হয়; অ্যানিমেটর আকারগুলো নড়ায়।
 # en: b4a9395d25398654fd5d000e4b82a1d8273339bd
 anim-rainbow = রংধনু
-# en: 1344ac9ec86b807fe3e8f3e3a058c3be1aada95c
-anim-remove-this-key = এই কী সরান
+# en: 3d5096b70833fdae355f1ffcf32faf2066123467
+anim-remove-this-key = কী-ফ্রেম সরান
 # en: aa0e7e86b7aa21e9851b9db8b752998918d2b608
 anim-shadow = ছায়া
 # en: b7152342a267362add3c0d7f69f720f7a9c76c9e
@@ -1598,8 +1598,8 @@ anim-frame-earlier = এক ফ্রেম আগে
 anim-frame-later = এক ফ্রেম পরে
 # en: bb4f3c806dbc9e6d5247da5b492939d83c90cf2b
 anim-delete-this-frame = এই ফ্রেম মুছুন
-# en: d143b32e3626fd7a764a25937fcb176ba003e34a
-anim-draw-shapes-move-sets-them = আকারগুলো আঁকুন; “সরান” সেগুলো চালু করে।
+# en: 406ce96669c44a0f4b79e02af1464b6aa7fbf232
+anim-draw-shapes-move-sets-them = আকার আঁকুন, তারপর “সরান” দিয়ে সেগুলোকে চালান।
 # en: b4d477d39704ecbf21ca422aeebffbad5a519fbb
 anim-nothing-here-yet-draw-something = এখানে এখনও কিছু নেই: আগে কিছু আঁকুন।
 # en: 00f1eed948284854e29d59b2de928756b7f69388
@@ -1615,7 +1615,7 @@ anim-back-and-forth = সামনে-পেছনে
 anim-forward-then-back = সামনে, তারপর পেছনে
 # en: e3e7a3833d19706ebf33b2c3baf8e05deeed7bca
 anim-frames = ফ্রেম
-# en: b77ec601d62ce5f2db407a7e827811b75ad9e12b
+# en: 0d0b09dfb5d45add0e2f90ec8b193d96ace76d0c
 anim-frames-second = প্রতি সেকেন্ডে ফ্রেম
 # en: 3570d228949889218e4c7fdb4ad8c942753530a1
 anim-how-large-shape-is-drawn = আকারটি কত বড় আঁকা হবে: 1× মানে যেমন আঁকা।
@@ -1664,7 +1664,7 @@ common-calculator = ক্যালকুলেটর
 common-calendar = ক্যালেন্ডার
 # en: ab732cac31bba434b0b59309a30ce46956dc3d54
 outline-cancel-connecting = জোড়া বাতিল করুন
-# en: 0b2cad8a7f348bc05529baaac65726b720eb10e1
+# en: 5301648dcf6b53cefc9ed52999aaa92d4603cae0
 outline-change-it = বদলান
 # en: 1ed0b58d18ef647be5de11840bb929ecc8e36446
 common-chosen-items = বাছাই করা আইটেম
@@ -1696,16 +1696,16 @@ outline-draw-as-org-chart = সাংগঠনিক চার্ট হিস�
 outline-empty = খালি
 # en: 4a66d1480779180159cc25c1c5aa9d760467c6a7
 outline-everything = সব
-# en: b6ba0db1f814179114ec82fbf188b2eb5be2596e
-outline-fold = ভাঁজ করুন
-# en: bc63322115af1769edf28f7dad3bb9e5653ce367
-outline-fold-all = সব ভাঁজ করুন
+# en: 9cf188d3a6779d63b36b10275b0228ae22ec97d6
+outline-fold = গুটিয়ে নিন
+# en: ec898362fe9593764e822dd17c78f1f972c20d90
+outline-fold-all = সব গুটিয়ে নিন
 # en: ecdda59aea5ee67d7d854c969ccf7f4f4b4a4c54
 outline-item = আইটেম
 # en: 6f8c7dbc09548197b5d210f514dda19a015102b2
 outline-item-n = আইটেম { $n }
-# en: 5a9bee4040efb910e5da699252a0dadd1201196a
-outline-kind-of-line = রেখার ধরন
+# en: 120ee44bec923665b04dc825b0307fe159232ce9
+outline-kind-of-line = লাইনের ধরন
 # en: 789062517bc27b8cb5c78b1e88041e5bef69b507
 common-launch-plan = চালুর পরিকল্পনা
 # en: 72eee0aaa10010ae7d362761115dfd7e064dd4d4
@@ -1760,19 +1760,19 @@ outline-question-options-under-it-and = প্রশ্ন, তার নিচ�
 common-trip-planner = ভ্রমণ পরিকল্পনা
 # en: 09ae5dce4d22019190e52d1611d1544becf36489
 outline-twenty-minutes-in-three-parts = তিন ভাগে বিশ মিনিট: সমস্যা, ধারণা, এর অর্থ; প্রেজেন্টেশন হিসেবে দেখালে প্রতিটি ওপরের আইটেম একটি স্লাইড।
-# en: 895cc98efe76cab7188f62630904fbbfbfd0b496
+# en: 2af9d498f852995329b0033573277dce32d09ba0
 outline-unfold-all = সব খুলুন
-# en: 23f1aba9b0732d2f8c80a5130a2b8ef3d2d7a37a
-outline-unfold-n-inside = খুলুন, ভেতরে { $n ->
+# en: f5857a77d395db75bc57c2c76b92dc8fa4773053
+outline-unfold-n-inside = খুলুন ({ $n ->
         [one] { $n }
        *[other] { $n }
-    }টি
+    }টি আইটেম)
 # en: 621521f9a8788695ec292cbec54d2792cfdf0a7d
 common-untitled = নামহীন
 # en: 1e65f823e3600c2c4cec7aff6db37af296fca073
 outline-view-as = এভাবে দেখুন
-# en: 4e6dde9299814981f3441740558666659d66e6e0
-outline-zoomed-in-on = বড় করে দেখা হচ্ছে
+# en: 828c360c884f9246750461eea43fee4e42c6b52c
+outline-zoomed-in-on = যেখানে মনোযোগ
 # en: 38eca6735f66d186c0bd9c549873e774551dc35f
 outline-a-plain-line = সাধারণ রেখা
 # en: 884abd948f43aba4e5851b71a20e97aed7a6c96e
@@ -1968,9 +1968,9 @@ deck-themes-color = থিমের রং
 # The bar
 # en: 4e9f7a31eef4c69e0aacb643f6856372cd6e3247
 common-present = প্রেজেন্ট
-# en: 643c5e94af837cf718906c77e7324d1b5b8cc4ed
-deck-see-sheets-to-print = প্রিন্টের শিট দেখুন
-# en: 078bb433191da44555f4554b976669f8f188abf9
+# en: 3c47e73f6a8bcb018bdbe91d9312e8e1777050f7
+deck-see-sheets-to-print = প্রিন্ট লেআউট
+# en: ca742a9ecf2f35a59704398ead009f1d8e554a0c
 deck-back-to-pages = পাতায় ফিরুন
 # en: 442250df38e5e516ff1c2ce97d051b8997c7d976
 deck-headline = শিরোনাম
@@ -2086,10 +2086,10 @@ deck-inside-flap = ভেতরের ভাঁজ
 deck-back = পেছনে
 # en: 3369aa225b34e01144a4c49dd350db04732a2720
 deck-badge-n = ব্যাজ { $n }
-# en: f5e3e387f05bd310e07849881a33ade59c373ba0
-deck-last-slide-added-for-you = শেষ স্লাইড, আপনার জন্য যোগ করা: পুরো ডেকের QR কোড
-# en: 4dc0f35f913f19ae2c1fc6bc2ee54835cf3e2b87
-deck-ends-with-qr-code-of = ডেকের QR কোড দিয়ে শেষ হয়, যাতে উপস্থিত সবাই এটি বাড়ি নিয়ে যেতে পারেন। QR বোতামে এটি বন্ধ হয়।
+# en: 9cc25309d07de0adfb989faaaaa74f7cb5a06e38
+deck-last-slide-added-for-you = শেষ স্লাইড: এই ডেকের QR কোড
+# en: 03c90c8e6a7e028c2e9caeadc1961fb5c0ad4e57
+deck-ends-with-qr-code-of = ডেকটি একটি QR কোড দিয়ে শেষ হয়, যাতে দর্শকেরা সেটি সঙ্গে নিয়ে যেতে পারেন। QR বোতাম এটি বন্ধ করে।
 # en: 13c7cb226b093919972f5e423aeb0abae93960cf
 deck-qr-code-of-this-deck = এই ডেকের QR কোড
 # en: 5d5bc5601280c776405941347bbf7e9c63dc3954
@@ -2128,10 +2128,10 @@ deck-slide-n-of-total = { $total }টির মধ্যে স্লাইড {
 common-notes = নোট
 # en: bd0dad7cbf71b13b2e545d8ce477027ffc106b45
 deck-n-hides-them = N চাপলে লুকায়
-# en: 60eb1cc0c3e7bf9c9b2f070626da64fb304980a4
-deck-take-this-deck-home = এই ডেক বাড়ি নিয়ে যান
-# en: 627ec6260e317ce6d5af92ac3d6e31061b9befa1
-deck-take-this-deck-home-title = এই ডেক বাড়ি নিয়ে যান: { $title }
+# en: 45c44dc2566819f835fd788e2b7a6c5bee5177c4
+deck-take-this-deck-home = এই ডেক সঙ্গে নিয়ে যান
+# en: acc1edc431e346786fab17d4f10e195ca72257d6
+deck-take-this-deck-home-title = এই ডেক সঙ্গে নিয়ে যান: { $title }
 # en: 7fc2d8c7fd4164039149b5a9f2063ddf7ab9d76a
 deck-scan-code-whole-deck-is = কোডটি স্ক্যান করুন: পুরো ডেক লিংকের মধ্যেই।
 # en: a0f82f698bc01f5dc90c760db684589e2d8277eb
@@ -2190,8 +2190,8 @@ cal-week-later = এক সপ্তাহ পরে
 cal-weekend-of-sessions-at-set = সপ্তাহান্তের সেশন নির্দিষ্ট সময়ে, একটি দেরির সেট মধ্যরাত পেরিয়ে।
 # en: 114574336ac7883aebd0653b3fc5e82f9262dc86
 cal-all-day = সারা দিন
-# en: 6e151d3d8e88589b346af242f26ca028607edcaa
-cal-chart-scrolls-sideways = চার্ট, পাশে স্ক্রল করে
+# en: cbf28df446643f9968f7fe68968bca51be5cf792
+cal-chart-scrolls-sideways = চার্ট (পাশে স্ক্রল করে)
 # en: a13d5b9d3da48c8bade3d645e0de9a9bb812c648
 cal-color-for-new-color = নতুনের রং: { $color }
 # en: f6bb0f468a8569c67b3d6826e57e62c5500c3681
@@ -2210,8 +2210,8 @@ cal-choose-task = { $task } বাছাই করুন
 cal-day-earlier = এক দিন আগে
 # en: 8d6915ee723c8b3c01f29002cfed7d597d56c2c7
 cal-day-later = এক দিন পরে
-# en: bb5227c5a97e3815cef2b5de296c6f4ff6d4eaef
-cal-dates = তারিখ…
+# en: 66a755ea0d935aeac763da63deebb69b0eb54ba9
+cal-dates = তারিখ বদলান…
 # en: a2bb9d34b8a1a79665858d354585cf147e0dee4e
 cal-end = শেষ
 # en: 89d10cd6c1e1437d6318d6fbb25a40e0aaaddd34
@@ -2239,8 +2239,8 @@ cal-how-many-times = কতবার
 # same
 # en: 834c5ef85d6fd469b8be75d8685faf6f9e84eaa7
 cal-icalendar-ics = iCalendar (ICS)
-# en: ccdaa19305a493c44b407953b3d5dcf196bcf042
-cal-its-own-zone = নিজের জোন
+# en: 4bcc328bf3b5b886738db678a175936615491289
+cal-its-own-zone = ক্যালেন্ডারের টাইম জোন
 # en: 2a177256a408fa4fc557b301041589b798826d70
 cal-last-day = শেষ দিন
 # en: 58ef633830b461aa76bf4ee90e3b2831ff588508
@@ -2249,8 +2249,8 @@ cal-lessons-birthdays-and-holidays-color = ক্লাস, জন্মদি�
 cal-level = স্তর
 # en: 082bc378cd60e17a38d99898b21955299c5b60c8
 cal-month = মাস
-# en: f0b847840b1f79dc5663ee39966f60655c368614
-cal-my-zone = আমার জোন
+# en: 770d509550265dba792aa81868b856eb67225e41
+cal-my-zone = আমার টাইম জোন
 # en: 80c3052d33ccdee15ffaaa110c5c39072495fe63
 cal-never = কখনও না
 # en: 2ef3795c979293106a6ccf13359d732165fb660a
@@ -2297,23 +2297,23 @@ common-stops = থামে
 cal-same-dates-as-gantt-chart = একই তারিখ গ্যান্ট চার্ট হিসেবে
 # en: 7ea6dec71584012ab4044cc464dc601741ff2c50
 cal-this-calendar-is-written-in = এই ক্যালেন্ডার { $zone } সময়ে লেখা।
-# en: 2138f0d946421979b807c4d1fe5bcdbc1374c3fd
-cal-this-calendar-names-no-time = এই ক্যালেন্ডারে কোনো টাইম জোন নেই: এর সময় আপনার জোনে পড়া হয়, { $zone }।
+# en: e10c10f818ac8e510b74062cde201eae4e8d8c66
+cal-this-calendar-names-no-time = এই ক্যালেন্ডারের কোনো টাইম জোন নেই, তাই সময় আপনার জোনে দেখানো হয় ({ $zone })।
 # en: 1b4785331db3b08cd8e3cfa4bd36216731a79e54
 cal-this-month = এ মাস
 # en: eea79afd832854a3b24153b928ee9c62c7457dbe
 cal-time-zone = টাইম জোন
 # en: bf5efde33adface92f37d1888e904ab70c9ce272
 cal-times-in-zone = { $zone } সময়ে
-# en: 3edde97331606aabe45ce5b8939e0018ced9087e
-cal-times-or-on = বার, অথবা
+# en: 650642b1d6b4b1ecc4ad7d38bbdf110d582c4baf
+cal-times-or-on = বার, অথবা যতদিন না
 # en: 69bd4ef9fbd0894a22759c3766b859defbdedbc8
 cal-view = দেখুন
 # en: 97211a8888128314d9ca34d1005f08cb83ed5d9c
 cal-what = কী
 # en: 879e32326c5217968ac8e3a14e4a8a5214957264
 cal-year = বছর
-# en: e620a387db0ec96358342b64750b0580249d3943
+# en: 6189fbfe149a418e2f6d1af4dd71b04f6aa0c50e
 cal-color-stands-for = { $color } মানে
 # en: 63e5df0eb2fcd351c1d31f23cdf3bf4816e3def5
 cal-every-until-date = { $every }, { $date } পর্যন্ত
@@ -2399,34 +2399,34 @@ diagram-person = ব্যক্তি
 diagram-step = ধাপ
 # en: 448ab73ba1c21e671e218fb91f2644c834f0c16f
 diagram-set = সেট
-# en: e0681542c880148c2dde0e8fe84d3a5aa9c21296
-diagram-thing = জিনিস
-# en: 47c7bb9dd540e2e06c7b404596702b3778aa1798
-diagram-tap-empty-space-for-thing = জিনিস যোগ করতে ফাঁকা জায়গায় ট্যাপ করুন; বারে “জুড়ুন” চেপে দুটি জিনিস বাছলে জোড়া লাগে; অথবা একটিকে অন্যটির ওপর টেনে নিন।
+# en: ecdda59aea5ee67d7d854c969ccf7f4f4b4a4c54
+diagram-thing = আইটেম
+# en: c2e45b49b02d2ac7e1baf25d9d0a2f5c257281ad
+diagram-tap-empty-space-for-thing = আইটেম যোগ করতে ফাঁকা জায়গায় ট্যাপ করুন। দুটি জুড়তে “জুড়ুন” চেপে দুটিতেই ট্যাপ করুন, বা একটিকে অন্যটির ওপর টেনে আনুন।
 # en: d4b16450c157188d2cf2e3968faee3709ebeca28
 diagram-tap-here-to-add-first = প্রথম { $thing } যোগ করতে এখানে ট্যাপ করুন।
-# en: 15dd4a157f74190eb319f5623d0df46c173f661c
-diagram-tap-in-lane-to-add = লেনে ট্যাপ করে সেখানে ধাপ যোগ করুন; লিখতে ধাপে ট্যাপ করুন; অন্য লেনে বা কোনো ধাপের পরে বসাতে টেনে নিন।
-# en: 09871908140008f25fcd1870035a392e225c44aa
-diagram-tap-thing-to-join-name = { $name } যার সঙ্গে জুড়বেন সেই জিনিসে ট্যাপ করুন; থামতে ফাঁকা জায়গায় ট্যাপ করুন।
-# en: b0449f9fd2bc63ae3f7f9cd6ae8434659ab5ffa0
-diagram-tap-first-thing-to-join = প্রথমে যেটি জুড়বেন সেটিতে, তারপর অন্যটিতে ট্যাপ করুন; থামতে ফাঁকা জায়গায় ট্যাপ করুন।
-# en: 2725e3e2092e4296202f5cd57bdfdceabf48844c
-diagram-this-thing = এই জিনিস
-# en: 2e14e11ce84b1892bcdec7356603f3a4377e464a
-diagram-add-under-it = এর নিচে যোগ করুন
-# en: 87302651ba9b963dd8e390b315590274bc9f54dc
-diagram-add-one-more = আরও একটি যোগ করুন
-# en: 09e488b3a88425c020211d29a2dbb60a0d4fba79
-diagram-add-after-it = এর পরে যোগ করুন
+# en: ccdb7bfa4c6b71a69f1931253fe6f892a2baf89b
+diagram-tap-in-lane-to-add = ধাপ যোগ করতে একটি লেনে ট্যাপ করুন। বদলাতে কোনো ধাপে ট্যাপ করুন। এটি অন্য লেনে টেনে নিন, বা কোনো ধাপের পরে বসাতে তার ওপর টেনে আনুন।
+# en: 639d02ad26e5be80f5baf69835b953dfc015178b
+diagram-tap-thing-to-join-name = যে আইটেমের সঙ্গে { $name } জুড়বেন তাতে ট্যাপ করুন। বাতিল করতে ফাঁকা জায়গায় ট্যাপ করুন।
+# en: 5d36f27a0649ac9ae67fb2e66f5be89ebc4719c8
+diagram-tap-first-thing-to-join = প্রথম আইটেমে, তারপর অন্যটিতে ট্যাপ করুন। বাতিল করতে ফাঁকা জায়গায় ট্যাপ করুন।
+# en: 8953058d46b225514231aca0b8643f4e72547676
+diagram-this-thing = এই আইটেম
+# en: 53ea183a6bb5ad2942edd6884230b8f425c0eea6
+diagram-add-under-it = নিচে যোগ করুন
+# en: e9e7205b6f0bd7d9c8f1a1dfe85ef9d54979662f
+diagram-add-one-more = আরেকটি যোগ করুন
+# en: be34070c33b5c14155fe70a18891828387dd399d
+diagram-add-after-it = পরে যোগ করুন
 # en: 90d24ab49426f19e75a2b6c3fd9196603c2e0852
 diagram-add-step = ধাপ যোগ করুন
 # en: e0d73143de80d17e82de2e017ac156ca3b9c4e01
 diagram-join = জুড়ুন
-# en: 6d38d1eb6fb326d6aaccf362ba404ed024b81102
-diagram-make-it-plain-line = সাধারণ রেখা করুন
-# en: d7c2f8db0073a31e8e0ded4d2a13d8076ba44fd6
-diagram-make-it-arrow = তীর করুন
+# en: e45795fb6033ae4ecc1e2e3610273fce71a317d7
+diagram-make-it-plain-line = সাধারণ লাইন
+# en: 3a4758c3cc8dac2d76026d0733816741f9b21d43
+diagram-make-it-arrow = তীর
 # en: a07496767ed7e5caf20bb803434a1aa088aaa97b
 diagram-what-connection-says = সংযোগের লেবেল
 # en: 7d531617dd394cef59d3cf58fc32b3bc458f6744
@@ -2535,8 +2535,8 @@ diagram-water-cycle = পানিচক্র
 diagram-three-generations-of-morenos-and = মোরেনো পরিবারের তিন প্রজন্ম, আর একজন ধর্মসন্তানের দিকে বিন্দু রেখা।
 # en: 0e60bdf5cc3dbaa6c2018bd31c760c1e46e79ab1
 diagram-who-can-do-what = কে কী করতে পারেন
-# en: 77612b6030acd5929dba4733671ebce9b6967f72
-diagram-tap-empty-space-for-branch = শাখার জন্য ফাঁকা জায়গায় ট্যাপ করুন; লিখতে ধারণায় ট্যাপ করুন, পরেরটির জন্য Enter; নিচে বসাতে একটিকে অন্যটির ওপর টেনে নিন; “জুড়ুন” ম্যাপের দুই প্রান্ত জোড়ে।
+# en: b27a04f87f9d4657107a8dbd89d32eb1dedb41b7
+diagram-tap-empty-space-for-branch = শাখা যোগ করতে ফাঁকা জায়গায় ট্যাপ করুন। কোনো ভাবনা বদলাতে তাতে ট্যাপ করুন, পরেরটির জন্য Enter। একটিকে অন্যটির ওপর টেনে তার নিচে রাখুন। “জুড়ুন” মানচিত্রের দুই দিকের দুটিকে জোড়ে।
 
 ## the Trip Planner
 
@@ -2551,8 +2551,8 @@ trip-gpx-route = GPX পথ
 trip-geojson = GeoJSON
 # en: 63746c80a9900aa0b9df832d6fe50b7318a88aab
 trip-a-place-by-name = নাম দিয়ে একটি জায়গা…
-# en: 8779e1ba12906b75111edf21cd1ea027e656470c
-trip-stop-at-middle-of-map = ম্যাপের মাঝখানে একটি বিরতি
+# en: c86d6e7640906afe6a57236c004f0b1af53b6ee8
+trip-stop-at-middle-of-map = মানচিত্রের মাঝখানে বিরতি
 # en: a52fccf0e1e5beca9d5885f1638d5e9a6a2684f9
 trip-measure-in = মাপুন
 # en: 2458f1444290ced8aefad04d5c947b17bf9a81fb
@@ -2561,7 +2561,7 @@ trip-hours-of-driving = গাড়ি চালানোর ঘণ্টা
 trip-miles = মাইল
 # en: 87bafdbb82c61625882d74515ef2c7e566177ea5
 trip-kilometers = কিলোমিটার
-# en: c2912ae51710dd393bab94a15f5691d0034f7e62
+# en: 8e49f86b47ba8e4ac259af7b5428623e7332489c
 trip-join-stops-in-order = বিরতিগুলো ক্রমে জুড়ুন
 # en: 7bdcf970899e9519b75f2dc24d1909f670b283cb
 trip-show-whole-route = পুরো পথ দেখান
@@ -2573,8 +2573,8 @@ trip-map = ম্যাপ
 trip-map-tap-to-add-stop = ম্যাপ: বিরতি যোগ করতে ট্যাপ করুন
 # en: 81920dbaea13a635abdf8e473b6a5f7c37a415e7
 trip-maps-pictures-come-from-openstreetmap = ম্যাপ দেখানোর সময় এর ছবি OpenStreetMap থেকে আসে।
-# en: 2cbbc3df3b8f862050dc915530000d4709906b6f
-trip-your-location-is-asked-for = আপনার অবস্থান শুধু ম্যাপ মাঝে আনতে চাওয়া হয়, কোথাও লেখা হয় না।
+# en: dd1ac7c6150bf40973c618ac841d01f2281dea20
+trip-your-location-is-asked-for = আপনার অবস্থান শুধু মানচিত্রকে মাঝখানে আনতে ব্যবহার হয়, কখনো সংরক্ষিত হয় না।
 # en: 6c4827a34debc3c12e8a905f5e8025f0d22802cb
 trip-n-stops = { $n ->
         [one] { $n }
@@ -2608,8 +2608,8 @@ trip-town-address-museum = একটি শহর, ঠিকানা, জাদ
 trip-search = খুঁজুন
 # en: 1a6a5ba8c23ddb672874a2996abaee1fe933abcd
 trip-searching = খোঁজা হচ্ছে…
-# en: 3a721e0216039aa707b02b551860b5397374adc2
-trip-searching-sends-words-you-type = খুঁজলে আপনার লেখা শব্দ OpenStreetMap-এর Nominatim-এ যায়, আর কিছুই নয়।
+# en: 07a4d61733e108a8ffa6e5753e09227b6a1a0f80
+trip-searching-sends-words-you-type = খুঁজলে শুধু আপনার টাইপ করা লেখাই OpenStreetMap-এর Nominatim-এ যায়।
 # en: 2b36ec5f26fb5c35fccb5edd05776349d238b677
 trip-places-found = পাওয়া জায়গা
 # en: 6c70807e19d1f88aae7d66770719debbaf4ae89b
@@ -2688,8 +2688,8 @@ looks-currency = মুদ্রা
 calc-calculation = হিসাব
 # en: ab4ea6f8fe06812a128297560bee7aff1be0c040
 calc-calculator-that-shows-its-work = যে ক্যালকুলেটর হিসাবের ধাপ রেখে দেয়: নাম, একক ও রূপান্তর, আর y = f(x)-এর গ্রাফ।
-# en: 2e1fea55cc9352b6b3de8581a14318b0739a3a6c
-calc-tape-text = টেপ (লেখা)
+# en: f146f8e93fc9312f6b8003b048cd24d1574469af
+calc-tape-text = টেপ লেখা হিসেবে
 # en: 9a7405ebcedde5be8d095a986ea8794e19ee84e2
 calc-graph = গ্রাফ
 # en: a3310f1f9bbb12cd753850392faec8453a10c709
@@ -2730,8 +2730,8 @@ calc-simplify = সরল করুন
 calc-tape = টেপ
 # en: 1acb1c0448ace57b632dc2d56121f45a18e646be
 calc-line-n = লাইন { $n }
-# en: 35f7cd1164328099cf99c40ab3bc42984fa25cd5
-calc-put-answer-in-line = লাইনে { $answer } বসান
+# en: 43885eadc7bc789d89e6e81db680818d2dd1b223
+calc-put-answer-in-line = { $answer } যোগ করুন
 # en: a9c16dd084ce3781568419133b0fa0c0f57aa727
 calc-no-answer = উত্তর নেই
 # en: cf23123f857abeda1d28fc9b85cc7eba8d20f3b1
@@ -2754,10 +2754,10 @@ calc-keys = কী
 calc-backspace = ব্যাকস্পেস
 # en: d1149c36a0edcfbeae98bf270da3f543b6c6a866
 calc-clear-line = লাইন মুছুন
-# en: 4716ff8f558cadc13c582104a818ee5abde9853c
+# en: 097a41c8c7e58b9b655d7b3e31a3673466595450
 calc-answer-before = আগের উত্তর
-# en: ff4e4dbf3bb595e38f14ac19214f322e782f121b
-calc-type-sum-or-3-inch = একটি হিসাব লিখুন, বা 3 inch to cm, তারপর Enter চাপুন। a = 12 লিখলে উত্তরটি নামসহ রাখা হয়।
+# en: 2ee9e26d39d7113bd8fea80639d6257ab1bdf8cc
+calc-type-sum-or-3-inch = একটি হিসাব লিখুন, বা 3 inch to cm, তারপর Enter চাপুন। a = 12 একটি উত্তর নাম দিয়ে সংরক্ষণ করে।
 # en: 0bef86b24e006bd994db1509b268156522c7dc2c
 calc-type-curve-in-x-such = x-এ একটি বক্ররেখা লিখুন, যেমন x^2 বা sin(x), তারপর আঁকতে Enter চাপুন।
 # en: bcb584ffecef3a17141a771a3ceedbbe6d474ca1
@@ -2849,28 +2849,28 @@ calc-chosen-lines = বাছাই করা লাইন
 
 # en: 775db36d459744f2dc73dcb147ab032f4b6f4a09
 qr-code-of-this-document = এই নথির একটি QR কোড
-# en: 4403c08ebdf8c80a653ed6d343be64570f75f8ce
-anim-frame-back-frame-on = এক ফ্রেম পেছনে, এক ফ্রেম সামনে
+# en: b78baea4121d1dfde75020adb28737da7ea84e59
+anim-frame-back-frame-on = আগের বা পরের ফ্রেম
 # en: d5947c525ed0d53dce794385a2cc1cd6e2459dbd
 deck-new-slide = নতুন স্লাইড
 # en: 85773bc941e47b21f6cc345b225265e3144489be
 drawer-add-to-home-screen = হোম স্ক্রিনে যোগ করুন
 # en: 97c669558589e3b0cf0917cb9caece8844ba65d9
 shell-another-version = আরেকটি সংরক্ষিত সংস্করণ
-# en: 3f3b2c1515692707509166286b837928fcc6486d
-keys-normal-size = স্বাভাবিক মাপ
+# en: e5737972ceac5c184d5009e9ee1746c4b3292f26
+keys-normal-size = জুম রিসেট করুন
 # en: 25d37d0580af5bc389b9332f3640f6d73ef93e48
 home-documents-found = পাওয়া নথি
-# en: 5cc509a6f6fbd1ca18401f39e39b705757af20da
-sheet-edit-cell-caret-at-its = ঘর বদলান, কার্সর শেষে
-# en: 1229caff41e35faa0a828560a25ea095ce975672
-keys-everything-larger = সবকিছু বড়
-# en: d1a6c5490cb95093a9fb9116f092d142b8a73ff6
-keys-everything-smaller = সবকিছু ছোট
+# en: f0dfb92a1f16391ab3bd5478ce9d8c0f2d74bf95
+sheet-edit-cell-caret-at-its = কার্সর শেষে রেখে ঘর বদলান
+# en: 4fc05f2763ba31e2d3be5f08e7d0bab5d5dcbf78
+keys-everything-larger = বড় করুন
+# en: a4ae4b24a1f5369c2bff61abdbc221170e4b27d8
+keys-everything-smaller = ছোট করুন
 # en: 0d47323c5ee8dde30a5ca28f6ed6103d42081b97
 common-in-this-document = এই নথিতে খুঁজুন
-# en: 3c71fd388bfd921496968bc15422a0937a264ebc
-outline-fold-unfold = ভাঁজ করুন, খুলুন
+# en: 32897da2f696f1ddc73da9ef0575827530a80b1a
+outline-fold-unfold = গুটিয়ে নিন বা খুলুন
 # en: 733a5f2fb910bb704c7993cae3d8224558d405de
 common-indent-or-bring-out-in = তালিকার আইটেম ভেতরে বা বাইরে সরান; টেবিলে পরের ঘর
 # en: 67312061f24800b7dc75b07101329959c5c1af88
@@ -2883,12 +2883,12 @@ shell-keyboard-shortcuts = কীবোর্ড শর্টকাট
 share-left = বাঁ
 # en: bf6e36633c2362cb7fa31a0e8f833388a49ba28c
 common-move-selected-items-up-or = বাছাই করা আইটেম ওপরে বা নিচে সরান
-# en: 7a5c1e9838dbef7c3cefc91f1dcc9c9410cea118
-home-no-document-here-has-those = এখানে কোনো নথিতে এই শব্দগুলো নেই
+# en: 5e46670f6fe68987a7e5c94f03e192aff635df77
+home-no-document-here-has-those = কোনো নথি মেলেনি
 # en: 475c848673a3f79fa778f01c2bd5a721d4c41707
 find-not-found = পাওয়া যায়নি
-# en: 6b402540edfb9bf7f30575ed784274bc3b5afed4
-menu-nothing-starts-q = “{ $q }” দিয়ে শুরু কিছু নেই
+# en: a9c25fead588babdd6b90b343a47f716f722312e
+menu-nothing-starts-q = “{ $q }”-এর কোনো মিল নেই
 # en: bc447a3151935ceff76e781c90fb02c45d25f004
 shell-nothing-to-keep-yet = সংরক্ষণ করার মতো কিছু এখনও নেই
 # en: 989fe994e413c509c03d3dd229b775a3ddc4707b
@@ -2905,22 +2905,22 @@ diagram-place-cards = নামের কার্ড
 anim-play-or-pause = চালান বা থামান
 # en: 0fbbb28a6e64acfee9300ecf05016dcf149a5a19
 trip-presenting-trip = ভ্রমণ প্রেজেন্ট হচ্ছে
-# en: 8b9576079143791f608e9188bd3af3109b059712
-deck-presenting-back = প্রেজেন্ট: পেছনে
-# en: 4a6566c770849cfc7968fc4c508d36a865241a96
-deck-presenting-next-line-or-slide = প্রেজেন্ট: পরের লাইন বা স্লাইড
-# en: defe00756135bd21e0d5e6f3da726b28d353e1a2
-trip-presenting-next-stop = প্রেজেন্ট: পরের বিরতি
-# en: 6c0c4c64c4cb03ee1c9ef8106668d7d2f3b97727
-trip-presenting-stop-before = প্রেজেন্ট: আগের বিরতি
+# en: 720856fcb53d62f79a364c36d8cd2314121430a6
+deck-presenting-back = পেছনে (প্রেজেন্ট)
+# en: a212c73bb85a53b57609d239c50f170773e07d77
+deck-presenting-next-line-or-slide = পরের লাইন বা স্লাইড (প্রেজেন্ট)
+# en: 24848d1e92a4b831f8fdae547c2fbfdc0d1e441b
+trip-presenting-next-stop = পরের বিরতি (প্রেজেন্ট)
+# en: a802f6e93c981ee6dd02df366f0141ca3aa085e0
+trip-presenting-stop-before = আগের বিরতি (প্রেজেন্ট)
 # en: dd9ef7db14a8bdb18f7a266d6e91711443e71a29
 diagram-print-place-cards = নামের কার্ড প্রিন্ট করুন
 # en: 030e26916d4c1d1ca0c41b3b447dde54ed891dbd
 diagram-print-place-cards-card-guest = নামের কার্ড প্রিন্ট করুন: অতিথি প্রতি একটি, লেটার শিটে আটটি, কেটে নেওয়ার জন্য
 # en: ef6e207cc7cea57220ad9a73fc6040b0085bf63e
 shell-save-in-browser-is-off = “ব্রাউজারে সংরক্ষণ” বন্ধ, তাই কিছুই সংরক্ষিত হয় না। মেনু থেকে চালু করুন।
-# en: a029b0313f2c7a4c819051865f98357f813460b3
-sheet-put-back-what-cell-held = ঘরে যা ছিল তা ফিরিয়ে দিন
+# en: 28d1a54d2e35ad87c0d19942f68d70ddbf67bcee
+sheet-put-back-what-cell-held = ঘরের আগের মান ফেরান
 # en: 2b69414b3787eaa8a38f2f1a9c4a48aff7dd78a5
 sheet-put-dated-rows-on-calendar = তারিখওয়ালা সারিগুলো ক্যালেন্ডারে বসান
 # en: 3b14d20764a1fdef5ee74f4defab4ff20b0e7cce
@@ -2940,31 +2940,31 @@ write-letter = লেটার
 common-back-to-words = লেখায় ফিরুন
 # en: 0c0b01d469faff60dc3b2d1c035ee0a7caa03852
 common-extend-selection = বাছাই বাড়ান
-# en: 28030fd585f8780188c944b5c309021930e5de0a
-deck-presenting-whole-slide = প্রেজেন্ট: পুরো স্লাইড
-# en: e4f1afa8488566015d041fb325f7e0897148ccd1
-trip-first-last = প্রথমটি, শেষটি
-# en: 6510e9982155a27498f4332337675f22d4592291
+# en: e53a09169fa399b79b5b814de5e65669714f9165
+deck-presenting-whole-slide = পুরো স্লাইড (প্রেজেন্ট)
+# en: 16fa5ad4958332a6bbb1eae6d1a8c6ee6f2c7752
+trip-first-last = প্রথমটি বা শেষটি
+# en: 11a8a25332234992a14424d8aad6fb9ce3d3b287
 common-next-or-one-before = পরেরটি বা আগেরটি
 # en: eb883fb88ed57f39b760fee6ee8f5a04a8cdc7ba
 editor-this-browser-lets-page-paste = এই ব্রাউজারে শুধু কিবোর্ড বা “পেস্ট” মেনু থেকে পেস্ট করা যায়।
-# en: dde10ff34344fa5b1c16c03d39a9cda035469fdd
-drawer-size-of-everything = সবকিছুর মাপ
+# en: 9b3cbed5c490c07473546a88768ba29b787e9e52
+drawer-size-of-everything = জুম
 # en: 3939d97295147954c5488340b1f427ebbfa51e69
 shell-skip-to-apps = অ্যাপে যান
 # en: 286b3810e407b3cef40b582c8ca4b373a58445bf
 shell-skip-to-document = নথিতে যান
-# en: 44b790d6bf11cdcff6a339e5f61f3fdabcc14bb3
-menu-starting-q = “{ $q }” দিয়ে শুরু
+# en: ddf17f8747a6b36489443d6b09c25b429a1ea675
+menu-starting-q = “{ $q }”-এর মিল
 # en: b4365b2ed2016713788d08335e5157985010ac28
 common-step-out-close-collapse-let = বন্ধ করুন বা বাছাই বাতিল করুন
-# en: 293cec535f254be8be69d7877fc790f95b4b7e07
-anim-first-frame-last = প্রথম ফ্রেম, শেষ ফ্রেম
-# en: 054cc02718f75dc29ae702c1d5e635fb93d3f5b2
+# en: d3b310dc90b3cc480984236a80101888836acfe9
+anim-first-frame-last = প্রথম বা শেষ ফ্রেম
+# en: 0aa341109cff3c75e204930fdeac94f52278bb67
 trip-next-stop = পরের বিরতি
-# en: b97fb9456555822fb18ce45f920b4aad8ac6bfeb
-deck-slide-before-slide-after-on = আগের স্লাইড, পরের স্লাইড (পাশের সারিতে)
-# en: 0b315b14904297b902188306eb30d496ca34c7e2
+# en: 7722768d8b861ddedb1f6400352985ca0cfd4a08
+deck-slide-before-slide-after-on = আগের বা পরের স্লাইড
+# en: 35bc0362a4899961a0e878990611c13021c1e549
 trip-stop-before = আগের বিরতি
 # en: 03d9aea1885137ab8ab4d9c24250515cb44161f0
 shell-this-device-keeps-another-version = “{ $title }”-এর একটি ভিন্ন সংস্করণ ({ $when }) এই ডিভাইসে সংরক্ষিত আছে।
@@ -3005,10 +3005,10 @@ outline-name-line = লেবেল
 write-name-this-column = এই কলামের নাম দিন
 # en: 5734dbf560e03e0dea1a1bd85af5088238d5d0e4
 diagram-new-idea = নতুন ধারণা
-# en: 5c01f4e98ebcc45730b787667c26e3d0c189d7f6
-diagram-tap-empty-space-for-person = ব্যক্তির জন্য ফাঁকা জায়গায় ট্যাপ করুন; লিখতে একজনে ট্যাপ করুন, নামের নিচে ভূমিকার জন্য Shift+Enter, পরেরজনের জন্য Enter; নিচে বসাতে একজনকে অন্যজনের ওপর টেনে নিন।
-# en: 16d186d3c0b3d834fa9944fb99e4df830d8d604b
-diagram-tap-empty-space-for-event = ঘটনার জন্য ফাঁকা জায়গায় ট্যাপ করুন: কবে লিখুন, Shift+Enter, তারপর কী ঘটেছিল; সাল ও তারিখ যেমন পড়েছে তেমন ব্যবধানে বসে; একটি সময়কাল একটি পটি।
+# en: 32c6bde8aa4d539c3b773b1f4cf66e15aa427faa
+diagram-tap-empty-space-for-person = কাউকে যোগ করতে ফাঁকা জায়গায় ট্যাপ করুন। বদলাতে কারও ওপর ট্যাপ করুন, তাঁর পদের জন্য Shift+Enter, পরেরজনের জন্য Enter। একজনকে আরেকজনের ওপর টেনে তাঁর নিচে রাখুন।
+# en: 5f7463cc9e2e8a2e25990127091710a286d9765a
+diagram-tap-empty-space-for-event = ঘটনা যোগ করতে ফাঁকা জায়গায় ট্যাপ করুন। তারিখ লিখুন, Shift+Enter, তারপর কী ঘটেছিল। তারিখগুলো মাপ অনুযায়ী দূরে বসে, আর একটি সময়সীমা পট্টি হয়ে দেখায়।
 # en: b6395077670d276b6a207a6eadb6f5a17c1fa854
 diagram-lanes-name = লেনের নাম
 # en: 769bb19e615b7f8e2809e5882e2d05a18f57a531
@@ -3019,12 +3019,12 @@ draw-align-center = সারি: মাঝে
 draw-align-left = সারি: বাঁয়ে
 # en: e65f83bdf0bfbca6e0efd3f75baa155ab6652113
 draw-align-right = সারি: ডানে
-# en: 3df3b95b06bd3d9fba1d2c013d542de8ad0e434a
-diagram-tap-person-to-type-on = লিখতে একজনে ট্যাপ করুন, সঙ্গীর জন্য নামের পরে +, নামের নিচে সালের জন্য Shift+Enter; পরেরজনের জন্য Enter; নিচে বসাতে একজনকে অন্যজনের ওপর টেনে নিন; “জুড়ুন” দুজনের মধ্যে বিন্দু রেখা আঁকে।
-# en: c216a378071fd890d4e2a20f3922cd20970280ff
-diagram-tap-empty-space-for-table = টেবিলের জন্য ফাঁকা জায়গায় ট্যাপ করুন; লিখতে টেবিল বা ব্যক্তিতে ট্যাপ করুন, পরের অতিথির জন্য নামের পরে কমা; কাউকে অন্য টেবিলে টেনে নিন।
-# en: 1a75ac2a6ce93723b5db1af25c849dbaefb29d06
-diagram-tap-inside-circles-to-add = বৃত্তের ভেতরে ট্যাপ করে জিনিস যোগ করুন, পরেরটির জন্য কমা; নাম বদলাতে সেটের নামে ট্যাপ করুন; কোনো জিনিস অন্য বৃত্তে টেনে নিন।
+# en: b23ea75ecf303b9756682c84abecebc7a010f2b1
+diagram-tap-person-to-type-on = বদলাতে কারও ওপর ট্যাপ করুন। সঙ্গীর জন্য + আর একটি নাম দিন, বছরের জন্য Shift+Enter, পরেরজনের জন্য Enter। একজনকে আরেকজনের ওপর টেনে তাঁর নিচে রাখুন। “জুড়ুন” একটি ডটেড লাইন আঁকে।
+# en: 14e56ce6d5f3d8d56d2ce979bf2eb20aaa9dd93d
+diagram-tap-empty-space-for-table = টেবিল যোগ করতে ফাঁকা জায়গায় ট্যাপ করুন। বদলাতে কোনো টেবিল বা মানুষের ওপর ট্যাপ করুন। কমা দিলে পরের অতিথি শুরু হয়। কাউকে অন্য টেবিলে টেনে নিন।
+# en: 7049f105f3a76be9cb8c6d7b74eb3edf60d9a7da
+diagram-tap-inside-circles-to-add = আইটেম যোগ করতে একটি বৃত্তের ভেতরে ট্যাপ করুন। কমা দিলে পরেরটি শুরু হয়। নাম বদলাতে কোনো সেটের নামে ট্যাপ করুন। আইটেম এক বৃত্ত থেকে আরেক বৃত্তে টেনে নিন।
 # en: 20ab05206208a4e9bea088d36c6640c781c6bf65
 export-copy-link-that-downloads-ext = .{ $ext } ডাউনলোড হয় এমন লিংক কপি করুন
 # en: 389a8e30f70f547f507d418d67a8048c7eb2eda4

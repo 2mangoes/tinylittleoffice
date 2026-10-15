@@ -165,7 +165,7 @@ test('the bullet opens the kinds of line, each named for the items it joins; the
   // A top item has no line to a parent: its bullet is only a dot. Every other row has one.
   expect(row(el, 0).querySelector('button.ol-kind')).toBeNull();
   const bullet = () => row(el, 2).querySelector<HTMLButtonElement>('button.ol-kind')!;
-  expect(bullet().getAttribute('aria-label')).toBe('Line from Product to Pricing: a plain line. Change it');
+  expect(bullet().getAttribute('aria-label')).toBe('Line from Product to Pricing: a plain line. Edit');
   bullet().click();
   await until(() => !!document.querySelector('[popover]:popover-open'));
   const items = [...document.querySelectorAll<HTMLElement>('[popover]:popover-open [role^=menuitem]')];
@@ -174,7 +174,7 @@ test('the bullet opens the kinds of line, each named for the items it joins; the
   items[1].click();
   await el.updateComplete;
   expect(last()!.split('\n')[2]).toBe('    - Pricing {.from}');
-  expect(bullet().getAttribute('aria-label')).toBe('Line from Product to Pricing: an arrow from the parent. Change it');
+  expect(bullet().getAttribute('aria-label')).toBe('Line from Product to Pricing: an arrow from the parent. Edit');
   await pick(el, bullet(), 'Arrows both');
   expect(last()!.split('\n')[2]).toBe('    - Pricing {.both}');
   // Named: typed where the name is shown, no dialog; Enter keeps it; the chip shows the name and, tapped, is typed on again; emptied, the chip goes.
@@ -224,7 +224,7 @@ test('Connect greys the outline until the other end is tapped; the join is turne
   expect(el.querySelector('.ol')!.classList.contains('connecting')).toBe(false);
   expect(last()).toBe(TREE + '\n~ Pricing -- Marketing\n');
   const link = () => el.querySelector<HTMLElement>('.ol-links .ol-link')!;
-  expect(link().querySelector('button.ol-kind')!.getAttribute('aria-label')).toBe('Connection from Pricing to Marketing: a plain line. Change it');
+  expect(link().querySelector('button.ol-kind')!.getAttribute('aria-label')).toBe('Connection from Pricing to Marketing: a plain line. Edit');
   await pick(el, link().querySelector<HTMLButtonElement>('button.ol-kind')!, 'Arrow from Pricing to Marketing');
   expect(last()!.split('\n').at(-2)).toBe('~ Pricing -> Marketing');
   await pick(el, link().querySelector<HTMLButtonElement>('button.ol-kind')!, 'Label');
@@ -261,20 +261,20 @@ test('Connect greys the outline until the other end is tapped; the join is turne
 test('folding hides the family and counts it; Fold all and Unfold all; the zoom shows one family with a trail back out', async () => {
   const { el, changes } = await editor(TREE);
   const fold = () => row(el, 0).querySelector<HTMLButtonElement>('.ol-fold')!;
-  expect(fold().getAttribute('aria-label')).toBe('Fold');
+  expect(fold().getAttribute('aria-label')).toBe('Collapse');
   expect(row(el, 2).querySelector('.ol-fold')).toBeNull();
   fold().click();
   await el.updateComplete;
   expect(rows(el)).toEqual([0]);
-  expect(fold().getAttribute('aria-label')).toBe('Unfold, 3 inside');
+  expect(fold().getAttribute('aria-label')).toBe('Expand (3 items)');
   expect(row(el, 0).querySelector('.ol-count')!.textContent).toBe('3');
   fold().click();
   await el.updateComplete;
   expect(rows(el)).toEqual([0, 1, 2, 3]);
-  button(el, 'Fold all').click();
+  button(el, 'Collapse all').click();
   await el.updateComplete;
   expect(rows(el)).toEqual([0]);
-  button(el, 'Unfold all').click();
+  button(el, 'Expand all').click();
   await el.updateComplete;
   expect(rows(el)).toEqual([0, 1, 2, 3]);
   // Mod+Alt+Up folds the row the caret is in; Mod+Alt+Down unfolds it. Alt+Left/Right are the Mac's word jumps: left alone.

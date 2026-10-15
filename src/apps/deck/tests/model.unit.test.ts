@@ -276,7 +276,7 @@ test("the take-home QR is the slides: the Display Link, every speaker note cut; 
 test('the deck ends with a QR code of itself, unless told not to, unless printed, unless empty', () => {
   const end = closingPage(TALK);
   expect(end).not.toBeNull();
-  expect(end!.svg).toContain('Take this deck home');
+  expect(end!.svg).toContain('Take this deck with you');
   expect(closingPage('---\nqr: no\n---\n## Hi\n')).toBeNull();
   expect(closingPage(tpl('zine'))).toBeNull();
   expect(closingPage('')).toBeNull();

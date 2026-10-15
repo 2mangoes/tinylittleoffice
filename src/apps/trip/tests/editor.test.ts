@@ -123,7 +123,7 @@ test('stops from the document: number, name, note, the leg before each, the coun
   expect(stops(el).map((r) => r.querySelector('.trip-leg')?.textContent ?? '')).toEqual(['', '176 km', '108 km']);
   expect(el.querySelector('.trip-count')!.textContent!.replace(/\s+/g, ' ').trim()).toBe('3 stops · 284 km');
   expect(box(el, 1).tx.getAttribute('aria-label')).toBe('Name of stop 2');
-  expect(bar(el, 'Join the stops in order').getAttribute('aria-pressed')).toBe('true');
+  expect(bar(el, 'Connect stops in order').getAttribute('aria-pressed')).toBe('true');
 });
 
 test('typing a name writes its cell, a burst one undo, and the undo puts the caret back where the typing began', async () => {
@@ -415,13 +415,13 @@ test('the bar: units, dots and the map; it ends with Undo and Redo; Insert puts 
   await pick(el, el.querySelector<HTMLButtonElement>('to-menu.trip-units > button')!, 'Hours of driving');
   expect(last()!.startsWith('Place |')).toBe(true);
   expect(stops(el)[1].querySelector('.trip-leg')!.textContent).toBe('about 2 hr 52 min by car');
-  bar(el, 'Join the stops in order').click();
+  bar(el, 'Connect stops in order').click();
   await settle(el);
   expect(last()!.startsWith('---\nroute: dots\n---\n')).toBe(true);
   expect(el.querySelector('.trip-leg')).toBeNull();
   await mapReady(el);
   await caretIn(el, 0, 'note');
-  await pick(el, el.querySelector<HTMLButtonElement>('to-insert > button')!, 'A stop at the middle of the map');
+  await pick(el, el.querySelector<HTMLButtonElement>('to-insert > button')!, 'Add a stop at the map’s center');
   expect(names(el)).toEqual(['Lisbon', '', 'Coimbra', 'Porto']);
   expect(document.activeElement).toBe(box(el, 1).tx);
   bar(el, 'Map').click();
@@ -554,7 +554,7 @@ test('a trip with no stops asks nothing of the device as it opens; Where I am as
     await mapReady(el);
     await tick(50);
     expect(geo.asks).toHaveLength(0);
-    expect(el.querySelector('.trip-privacy')!.textContent).toContain('Your location is asked for only to center the map, and is never written anywhere.');
+    expect(el.querySelector('.trip-privacy')!.textContent).toContain('Your location is used only to center the map and is never stored.');
     bar(el, 'Where I am').click();
     await until(() => Math.abs(mapOf(el).getCenter().lat - 51.5072) < 0.01, 3000);
     expect(mapOf(el).getCenter().lng).toBeCloseTo(-0.1276, 2);

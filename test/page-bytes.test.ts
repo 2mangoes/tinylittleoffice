@@ -31,5 +31,7 @@ test('the pages of three documents, and their thumbnails, are the same bytes as 
 // they are laid out by are Plex's (kit/draw/draw.ts textWidth). The deck's page again when the codec's dictionary primed America/New_York
 // the page's QR code carries the deck's link, and the link's bytes moved. Again when Plex Sans Hebrew joined the stack
 // the pages name (2026-10-12: Hebrew and Yiddish). The Word Processor's thumbnail again when a page drawn small was
-// cut to what is on it (2026-10-13, Paul: the letter on a slide "incredibly tiny"); its pages are the same bytes.
-const EXPECTED = ['write: 7fa7e906573f1eb5 191769917eca34cf', 'deck: a7b9b0f8517ee15a 4591013f70b3b48d', 'draw: ae66f4e757ef97b9 ae66f4e757ef97b9'];
+// cut to what is on it (2026-10-13, Paul: the letter on a slide "incredibly tiny"); its pages are the same bytes. The
+// deck's pages again when its closing slide's words became plain English (2026-10-15: "Final slide: a QR code of this
+// deck"); its thumbnail is the same bytes.
+const EXPECTED = ['write: 7fa7e906573f1eb5 191769917eca34cf', 'deck: 9453962b7354650f 4591013f70b3b48d', 'draw: ae66f4e757ef97b9 ae66f4e757ef97b9'];

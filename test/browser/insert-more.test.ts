@@ -38,11 +38,11 @@ test('typing in Insert ▾ narrows it to the items with a word starting so; Back
   expect(names(ins).length).toBeLessThan(all);
   await typeIn(ins, 'a');
   expect(names(ins)).toEqual(['Table']);
-  expect(ins.menu.querySelector('.to-menu-filter')!.textContent).toBe('Starting “ta”');
+  expect(ins.menu.querySelector('.to-menu-filter')!.textContent).toBe('Matches for “ta”');
   expect(document.activeElement!.textContent).toContain('Table');
   await typeIn(ins, 'z');
   expect(names(ins)).toEqual([]);
-  expect(ins.menu.querySelector('.to-menu-filter')!.textContent).toBe('Nothing starts “taz”');
+  expect(ins.menu.querySelector('.to-menu-filter')!.textContent).toBe('No matches for “taz”');
   await typeIn(ins, 'Backspace');
   expect(names(ins)).toEqual(['Table']);
   await typeIn(ins, 'Escape');

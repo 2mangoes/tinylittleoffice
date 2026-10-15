@@ -46,7 +46,7 @@ test("the hamburger opens the drawer, the home page's drawer has no app rows, Fi
   find.value = 'zzz';
   find.dispatchEvent(new Event('input', { bubbles: true }));
   await until(() => shell.querySelectorAll('.to-drawer-apps a').length === 0);
-  expect(shell.querySelector('.to-drawer-apps .to-hint')!.textContent).toBe('Nothing by that name');
+  expect(shell.querySelector('.to-drawer-apps .to-hint')!.textContent).toBe('No results');
   find.value = 'processor';
   find.dispatchEvent(new Event('input', { bubbles: true }));
   await until(() => shell.querySelectorAll('.to-drawer-apps h3').length > 0);
@@ -337,7 +337,7 @@ test("the drawer's sections in Paul's order: the language, What is this?, Save i
   expect(Math.round(home.getBoundingClientRect().height)).toBe(Math.round(close.getBoundingClientRect().height));
   // The size: the eye, then the stepper, no words; its name for a screen reader alone.
   const sz = dialog.querySelector<HTMLElement>('.to-size')!;
-  expect(sz.getAttribute('aria-label')).toBe('Size of everything');
+  expect(sz.getAttribute('aria-label')).toBe('Zoom');
   expect(sz.querySelector('.to-field-words')).toBeNull();
   expect(sz.firstElementChild!.matches('svg, .to-icon')).toBe(true);
   expect([...sz.childNodes].filter((n) => n.nodeType === Node.TEXT_NODE && n.textContent!.trim()).length).toBe(0);

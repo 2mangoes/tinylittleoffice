@@ -53,7 +53,7 @@ test('the home page searches the library: every word somewhere, the title and th
     await until(() => shell.querySelectorAll('.to-found-docs li').length === 1);
     box.value = 'nowhere';
     box.dispatchEvent(new Event('input'));
-    await until(() => shell.textContent!.includes('No document here has those words'));
+    await until(() => shell.textContent!.includes('No documents match'));
     // Enter opens the first found.
     box.value = 'ferry';
     box.dispatchEvent(new Event('input'));
@@ -244,7 +244,7 @@ test('the skip link is the first thing a Tab reaches, hidden until then, and tak
   expect(shell.querySelector('to-write-editor to-text')!.contains(document.activeElement) || document.activeElement?.localName === 'to-text').toBe(true);
 });
 
-test('the size of everything is under the menu’s Save in browser on the home page, and the search finds it by “larger” and “size”, with no key of its own; a new visit keeps it, saved or not', async () => {
+test('the size of everything is under the menu’s Save in browser on the home page, and the search finds it by “zoom” and “reset”, with no key of its own; a new visit keeps it, saved or not', async () => {
   const shell = await mount('');
   shell.querySelector<HTMLButtonElement>('.to-burger')!.click();
   const drawer = () => shell.querySelector<HTMLDialogElement>('dialog.to-drawer')!;
@@ -253,7 +253,7 @@ test('the size of everything is under the menu’s Save in browser on the home p
   expect(shell.querySelector('.to-drawer-head')!.nextElementSibling!.classList.contains('to-drawer-manual')).toBe(true);
   expect(shell.querySelector('.to-drawer-manual')!.nextElementSibling!.classList.contains('to-drawer-save')).toBe(true);
   expect(shell.querySelector('.to-drawer-save')!.nextElementSibling!.classList.contains('to-size')).toBe(true);
-  expect(shell.querySelector('.to-size-more')!.getAttribute('aria-label')).toBe('Everything larger');
+  expect(shell.querySelector('.to-size-more')!.getAttribute('aria-label')).toBe('Zoom in');
   drawer().close();
   const items = () => [...drawer().querySelectorAll('.to-found-cmd')].map((i) => i.querySelector('.to-found-words')!.textContent!.trim());
   const chosen = async (words: string, label: string) => {
@@ -268,15 +268,15 @@ test('the size of everything is under the menu’s Save in browser on the home p
     // The dialog's close event comes a task later; the next opening waits for it.
     await tick(50);
   };
-  await chosen('larger', 'Everything larger');
+  await chosen('zoom in', 'Zoom in');
   await until(() => size() === 1.1);
-  await chosen('larger', 'Everything larger');
+  await chosen('zoom in', 'Zoom in');
   await until(() => size() === 1.2);
   // Kept on the device though the visit is private, as the language is.
   expect(localStorage.getItem('tinyoffice.size')).toBe('1.2');
-  await chosen('smaller', 'Everything smaller');
+  await chosen('zoom out', 'Zoom out');
   await until(() => size() === 1.1);
-  await chosen('size', 'Normal size');
+  await chosen('reset', 'Reset zoom');
   await until(() => size() === 1);
   expect(localStorage.getItem('tinyoffice.size')).toBeNull();
 });

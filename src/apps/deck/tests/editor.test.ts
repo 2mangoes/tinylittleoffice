@@ -151,7 +151,7 @@ test('a format changes the page, the rail and the bar; a page past what is writt
   expect(thumbs(el)[2].getAttribute('aria-label')).toBe('Page 3');
   expect(el.querySelector('.deck-canvas')!.getAttribute('style')).toContain('--deck-w:264');
   expect(button(el, 'Present')).toBeNull();
-  expect(button(el, 'See the sheets to print')).toBeTruthy();
+  expect(button(el, 'Print layout')).toBeTruthy();
   thumbs(el)[2].click();
   await el.updateComplete;
   await until(() => !!box(el, 'title'));
@@ -163,14 +163,14 @@ test('a format changes the page, the rail and the bar; a page past what is writt
   await until(() => document.activeElement === box(el, 'words'));
   await type(el, box(el, 'words'), 'The first cup.');
   expect(last()).toContain('## Coffee\n\nThe first cup.\n');
-  button(el, 'See the sheets to print').click();
+  button(el, 'Print layout').click();
   await el.updateComplete;
   expect(el.querySelectorAll('.deck-sheet')).toHaveLength(1);
   expect(el.querySelector('.deck-sheets .to-hint')!.textContent).toContain('Fold it in half');
   await pick(el, el.querySelector<HTMLElement>('to-menu.deck-format button')!, 'Two-sided');
   expect(last()).toMatch(/^---\nformat: zine\nsides: 2\n---\n/);
   await until(() => el.querySelectorAll('.deck-sheet').length === 2);
-  button(el, 'Back to the pages').click();
+  button(el, 'Back to pages').click();
   await el.updateComplete;
   expect(el.querySelectorAll('.deck-sheet')).toHaveLength(0);
 });

@@ -93,8 +93,8 @@ home-templates-for-app-name = { $app } 템플릿: { $name }
 home-templates-are-not-saved-in = 템플릿이 아직 이 브라우저에 저장되지 않았어요. 인터넷에 연결하면 볼 수 있어요.
 # en: 25d37d0580af5bc389b9332f3640f6d73ef93e48
 home-documents-found = 찾은 문서
-# en: 7a5c1e9838dbef7c3cefc91f1dcc9c9410cea118
-home-no-document-here-has-those = 그 글이 들어 있는 문서가 없어요
+# en: 5e46670f6fe68987a7e5c94f03e192aff635df77
+home-no-document-here-has-those = 맞는 문서가 없어요
 # en: 1dfc2a61eb2345a48a2a91b7922b83f580553732
 home-search-your-documents = 내 문서 검색
 # en: 4f5fbd7fb6a16b16ebe3c347bf43c9a2455a1560
@@ -164,12 +164,12 @@ drawer-documents = 문서
 drawer-find-app-template-or-command = 앱, 템플릿, 명령 찾기
 # en: 45e5f3f72e961cb70134ba35f7a27a9620e515f7
 drawer-commands = 명령
-# en: 2cb8ae8266ed4a20c9dee5151f1a5232e3de77a4
-drawer-nothing-by-that-name = 그 이름은 없어요
+# en: b993b0c537190bfc94b21360ac5abe51e56be36f
+drawer-nothing-by-that-name = 결과 없음
 # en: 85773bc941e47b21f6cc345b225265e3144489be
 drawer-add-to-home-screen = 홈 화면에 추가
-# en: dde10ff34344fa5b1c16c03d39a9cda035469fdd
-drawer-size-of-everything = 전체 크기
+# en: 9b3cbed5c490c07473546a88768ba29b787e9e52
+drawer-size-of-everything = 확대/축소
 # en: 943c5ac9fa7766d7c1ebecbc95c4e0d27b4ef9d4
 drawer-to-add-tiny-little-office = Tiny Little Office를 홈 화면에 추가하려면 공유를 누른 다음 홈 화면에 추가를 누르세요.
 
@@ -527,7 +527,7 @@ common-select-all-words-of-box = 모두 선택(먼저 이 칸, 그다음 문서 
 common-back-to-words = 텍스트로 돌아가기
 # en: 0c0b01d469faff60dc3b2d1c035ee0a7caa03852
 common-extend-selection = 선택 범위 넓히기
-# en: 6510e9982155a27498f4332337675f22d4592291
+# en: 11a8a25332234992a14424d8aad6fb9ce3d3b287
 common-next-or-one-before = 다음 또는 이전
 # en: b4365b2ed2016713788d08335e5157985010ac28
 common-step-out-close-collapse-let = 닫기 또는 선택 해제
@@ -1147,7 +1147,7 @@ sheet-no-chart = 차트 없음
 sheet-number = 숫자
 # en: 80838be5576c4b333f764e352ef9e6c5292b2b78
 sheet-open-link = { $link } 열기
-# en: 348c4977d8bb453ba33998d5e64538c444c54c6e
+# en: 1d6f3ce763f138e0025747a9d3ae7f30efc75531
 sheet-opens-when-clicked = 클릭하면 열려요
 # en: ac556cf5938d2104533c38103305f6cf60ba245d
 sheet-percent = 퍼센트
@@ -1198,10 +1198,10 @@ sheet-choices = 선택지
 sheet-choices-for-ref = { $ref }의 선택지
 # en: a871e2c9206cb4854cc06c30bc6de95cb82f9700
 sheet-has-one = 시트에 이미 차트가 있어요
-# en: 5cc509a6f6fbd1ca18401f39e39b705757af20da
-sheet-edit-cell-caret-at-its = 셀 편집, 커서는 끝에
-# en: a029b0313f2c7a4c819051865f98357f813460b3
-sheet-put-back-what-cell-held = 셀에 있던 내용 되돌리기
+# en: f0dfb92a1f16391ab3bd5478ce9d8c0f2d74bf95
+sheet-edit-cell-caret-at-its = 커서를 끝에 두고 셀 편집
+# en: 28d1a54d2e35ad87c0d19942f68d70ddbf67bcee
+sheet-put-back-what-cell-held = 셀 값 되돌리기
 # en: 2b69414b3787eaa8a38f2f1a9c4a48aff7dd78a5
 sheet-put-dated-rows-on-calendar = 날짜가 있는 행을 캘린더에 넣기
 
@@ -1383,8 +1383,8 @@ draw-arrow = 화살표
 draw-join-two-shapes = 도형 두 개 연결
 # en: cf6c07e7054fad4d6a8affaf62f285e16525c46e
 draw-pen = 펜
-# en: d979b2d654019a5591521248c86ac6d7a294694a
-draw-any-shape-tap-for-each = 어떤 도형이든, 모서리마다 한 번씩 탭
+# en: c72e323a57434ede3b6eb0cc235109eb76833c55
+draw-any-shape-tap-for-each = 다각형: 꼭짓점마다 탭
 # en: 016a5405a0b425e7d1ac65317df59b45ce5fb1f5
 draw-freehand = 자유롭게 그리기
 # en: 8a48ec1f6c073fad0326a0e9251a18e4c88660b5
@@ -1471,8 +1471,8 @@ draw-what-does-this-drawing-show = 이 그림은 무엇을 보여 주나요?
 draw-diagram-of = …의 다이어그램
 # en: 5a33f2e7e84274a5291191ca3105e62d897eee0e
 draw-read-aloud-to-people-who = 볼 수 없는 사람에게 소리 내어 읽어 주고, 그림을 삽입하거나 다운로드해도 함께 따라가요.
-# en: b97935a5b0e75f3b48c6e256e537e5c7f718a222
-draw-describe-from-shapes = 도형으로 설명 만들기
+# en: 988c63b77eade4f718f9d469cb36e35bff976839
+draw-describe-from-shapes = 도형으로 만들기
 # en: ac302ae45938c985822f097507602d624128f1d0
 draw-tap-or-drag-to-paint = 탭하거나 끌어서 칠해요. 화살표 키로 움직이고 Enter로 칠해요.
 # en: ea263dc45b04f2755ac61a51deecc96ade3fb6a9
@@ -1483,8 +1483,8 @@ draw-drag-to-draw-end-where = 끌어서 그리세요. 시작한 곳에서 끝내
 draw-press-on-one-shape-and-let-go-on-another = 한 도형을 누른 채 다른 도형에서 놓으세요.
 # en: 1005cc8c1dafc1f9eb422bf2ac68290b492fdfd1
 draw-now-other-shape-tap-it = 이제 다른 도형이에요. 탭하거나 화살표로 고르고 Enter를 누르세요.
-# en: 0a8818d4eb574b7edd32bbc8e27db44e556d1220
-draw-drag-to-move-them-together = 끌면 함께 움직여요. Shift를 누르고 탭하면 도형을 더하거나 빼요.
+# en: e3686f1c55ec91e31825e1d9510abf592d80b08a
+draw-drag-to-move-them-together = 끌면 함께 이동해요. Shift+탭으로 도형을 더하거나 빼요.
 # en: eb36764c60ec7a17dd6ac3ec7dbbd22ee401778e
 draw-press-on-one-shape-and = 한 도형을 누른 채 다른 도형에서 놓으세요
 # en: 199f4e86afea4f2d42eb40b63ce8599168575e06
@@ -1499,8 +1499,8 @@ draw-pencil = 연필
 draw-clear-grid = 격자 비우기
 # en: 45ecea7c16e725c14cfec68f5b12d1545f222a73
 draw-use-as-background = 배경으로 쓰기
-# en: 037ae898000037d344a43cf8052a8c7843cbc599
-draw-grid-is-now-background-download = 격자가 이제 배경이에요. 다운로드하면 타일로 받고, 어떤 페이지든 tile:로 쓸 수 있어요.
+# en: 507f52dfd67fb731677bb9ae6971f9b5e891bc84
+draw-grid-is-now-background-download = 이제 격자가 배경이에요. 타일로 다운로드하거나 tile:로 어느 페이지에서든 쓸 수 있어요.
 # en: 209a1a74ee8eec09b861bc34e5ddb08a1357a364
 draw-pixel-grid-n-by-n = 픽셀 격자, { $n } × { $n }. 화살표 키로 이동하고 Enter로 현재 색을 칠해요.
 # en: a9deda2292f9b3c9a827e2aa71e0da6b4db9f16e
@@ -1633,8 +1633,8 @@ anim-empty-stage = 빈 무대
 # same
 # en: 64fe85d796d8c2eda594dbc0b7b3452a4a2c444b
 anim-3d = 3D
-# en: 798c40b3e9a56d7b4b393568ef6ca18ae4d0456b
-anim-add-key-here = 여기에 키 추가
+# en: fe12532bd63a2e75713ec69be11e92d48e9db3c8
+anim-add-key-here = 키프레임 추가
 # en: 900aa998d3550d438fc20a414d3938fc3a1630ab
 anim-blur = 흐림
 # en: df0e298e356261439795d0d435ce0ce576604c65
@@ -1645,14 +1645,14 @@ anim-effects = 효과
 anim-frame-n-s-s = 프레임 { $n }, { $s }초
 # en: 62036a7016ec20273ff717698fbad321c4ff002b
 anim-impact = 임팩트
-# en: 4dde45e7f399fed3c04d3c8a5db7f69923d48380
-anim-key-at-s-s = { $s }초의 키
+# en: 4c0a5de85ac9512b6a503ba785c3f369b5cfbda2
+anim-key-at-s-s = { $s }초의 키프레임
 # en: 74adc5789ce92de7bbb5e3d84a287a1ce6d3e7f5
 anim-mirror = 대칭
 # en: a7b93d2128e820f861fc8dfccd9f5521e89ad21f
 anim-mode = 모드
-# en: ed0cbe45b8abfebed8b8486dc9ceafe28d9e3bc5
-anim-moments = 시점
+# en: 987e5e1f455e03766d3ef3740947f4db46336d53
+anim-moments = 키프레임
 # en: 76cdb950721642b6b8596d36d5a39f7705028b99
 anim-move = 이동
 # en: 00706b5e9ede7f2fb6145370efd20ef72969df11
@@ -1665,8 +1665,8 @@ anim-play = 재생
 anim-pixel-art-is-made-in = 픽셀 아트는 드로잉 도구에서 만들어요. 애니메이터는 도형을 움직여요.
 # en: b4a9395d25398654fd5d000e4b82a1d8273339bd
 anim-rainbow = 무지개
-# en: 1344ac9ec86b807fe3e8f3e3a058c3be1aada95c
-anim-remove-this-key = 이 키 삭제
+# en: 3d5096b70833fdae355f1ffcf32faf2066123467
+anim-remove-this-key = 키프레임 빼기
 # en: aa0e7e86b7aa21e9851b9db8b752998918d2b608
 anim-shadow = 그림자
 # en: b7152342a267362add3c0d7f69f720f7a9c76c9e
@@ -1695,8 +1695,8 @@ anim-frame-earlier = 한 프레임 앞으로
 anim-frame-later = 한 프레임 뒤로
 # en: bb4f3c806dbc9e6d5247da5b492939d83c90cf2b
 anim-delete-this-frame = 이 프레임 삭제
-# en: d143b32e3626fd7a764a25937fcb176ba003e34a
-anim-draw-shapes-move-sets-them = 도형을 그리고, 이동으로 움직여요.
+# en: 406ce96669c44a0f4b79e02af1464b6aa7fbf232
+anim-draw-shapes-move-sets-them = 도형을 그린 다음 이동으로 움직임을 넣으세요.
 # en: b4d477d39704ecbf21ca422aeebffbad5a519fbb
 anim-nothing-here-yet-draw-something = 아직 아무것도 없어요. 먼저 무언가 그려 보세요.
 # en: 00f1eed948284854e29d59b2de928756b7f69388
@@ -1712,8 +1712,8 @@ anim-back-and-forth = 왕복
 anim-forward-then-back = 앞으로, 그다음 뒤로
 # en: e3e7a3833d19706ebf33b2c3baf8e05deeed7bca
 anim-frames = 프레임
-# en: b77ec601d62ce5f2db407a7e827811b75ad9e12b
-anim-frames-second = 초당 프레임
+# en: 0d0b09dfb5d45add0e2f90ec8b193d96ace76d0c
+anim-frames-second = 초당 프레임 수
 # en: 3570d228949889218e4c7fdb4ad8c942753530a1
 anim-how-large-shape-is-drawn = 도형을 얼마나 크게 그릴지 정해요. 1×는 그린 그대로예요.
 # en: c028f533678015b6ac2e606a9cafef7e050b11aa
@@ -1734,14 +1734,14 @@ anim-which-shape-is-in-front = 어떤 도형이 앞에 있는지 정해요. 가�
 anim-n-times = { $n }번
 # en: 4a84fdfdafe66c2c85e3e7d7c434de987984470f
 anim-s-s = { $s }초
-# en: 4403c08ebdf8c80a653ed6d343be64570f75f8ce
-anim-frame-back-frame-on = 한 프레임 뒤로, 한 프레임 앞으로
+# en: b78baea4121d1dfde75020adb28737da7ea84e59
+anim-frame-back-frame-on = 이전 또는 다음 프레임
 # en: ad3441e7c85b25bc4c7f46fd051345a6ba241e58
 anim-nudge-shapes-in-hand-with = 선택한 도형을 조금씩 옮기거나 한 프레임 이동
 # en: fe13ca0956192777b5060b354cf8e5dc5553c328
 anim-play-or-pause = 재생 또는 일시정지
-# en: 293cec535f254be8be69d7877fc790f95b4b7e07
-anim-first-frame-last = 첫 프레임, 마지막 프레임
+# en: d3b310dc90b3cc480984236a80101888836acfe9
+anim-first-frame-last = 처음 또는 마지막 프레임
 
 ## the Outliner
 
@@ -1770,8 +1770,8 @@ common-calculator = 계산기
 common-calendar = 캘린더
 # en: ab732cac31bba434b0b59309a30ce46956dc3d54
 outline-cancel-connecting = 연결 취소
-# en: 0b2cad8a7f348bc05529baaac65726b720eb10e1
-outline-change-it = 바꾸기
+# en: 5301648dcf6b53cefc9ed52999aaa92d4603cae0
+outline-change-it = 편집
 # en: 1ed0b58d18ef647be5de11840bb929ecc8e36446
 common-chosen-items = 선택한 항목
 # en: b65463cb6a42a17de514acc4659f7fd331e0876a
@@ -1802,16 +1802,16 @@ outline-draw-as-org-chart = 조직도로 그리기
 outline-empty = 비어 있음
 # en: 4a66d1480779180159cc25c1c5aa9d760467c6a7
 outline-everything = 전체
-# en: b6ba0db1f814179114ec82fbf188b2eb5be2596e
+# en: 9cf188d3a6779d63b36b10275b0228ae22ec97d6
 outline-fold = 접기
-# en: bc63322115af1769edf28f7dad3bb9e5653ce367
+# en: ec898362fe9593764e822dd17c78f1f972c20d90
 outline-fold-all = 모두 접기
 # en: ecdda59aea5ee67d7d854c969ccf7f4f4b4a4c54
 outline-item = 항목
 # en: 6f8c7dbc09548197b5d210f514dda19a015102b2
 outline-item-n = 항목 { $n }
-# en: 5a9bee4040efb910e5da699252a0dadd1201196a
-outline-kind-of-line = 선 종류
+# en: 120ee44bec923665b04dc825b0307fe159232ce9
+outline-kind-of-line = 선 스타일
 # en: 789062517bc27b8cb5c78b1e88041e5bef69b507
 common-launch-plan = 출시 계획
 # en: 72eee0aaa10010ae7d362761115dfd7e064dd4d4
@@ -1866,18 +1866,18 @@ outline-question-options-under-it-and = 질문, 그 아래 선택지, 선택지�
 common-trip-planner = 여행 플래너
 # en: 09ae5dce4d22019190e52d1611d1544becf36489
 outline-twenty-minutes-in-three-parts = 20분을 세 부분으로 나눠요. 문제, 아이디어, 그 의미예요. 슬라이드로 보면 최상위 항목마다 한 장이 돼요.
-# en: 895cc98efe76cab7188f62630904fbbfbfd0b496
-outline-unfold-all = 모두 펴기
-# en: 23f1aba9b0732d2f8c80a5130a2b8ef3d2d7a37a
-outline-unfold-n-inside = 펴기, 안에 { $n ->
-       *[other] { $n }개
-    }
+# en: 2af9d498f852995329b0033573277dce32d09ba0
+outline-unfold-all = 모두 펼치기
+# en: f5857a77d395db75bc57c2c76b92dc8fa4773053
+outline-unfold-n-inside = 펼치기({ $n ->
+       *[other] { $n }
+    }개 항목)
 # en: 621521f9a8788695ec292cbec54d2792cfdf0a7d
 common-untitled = 제목 없음
 # en: 1e65f823e3600c2c4cec7aff6db37af296fca073
 outline-view-as = 보기 방식
-# en: 4e6dde9299814981f3441740558666659d66e6e0
-outline-zoomed-in-on = 확대한 항목
+# en: 828c360c884f9246750461eea43fee4e42c6b52c
+outline-zoomed-in-on = 집중 보기
 # en: 38eca6735f66d186c0bd9c549873e774551dc35f
 outline-a-plain-line = 보통 선
 # en: 884abd948f43aba4e5851b71a20e97aed7a6c96e
@@ -1941,8 +1941,8 @@ outline-troubleshooting = 문제 해결
 outline-who-works-for-whom-at = 직원 아홉 명이 있는 빵집에서 누가 누구 밑에서 일하는지 역할과 함께 적었어요. 메뉴에서 조직도로 그려요.
 # en: 0c6266451117f0382231513e4c30d38fb976086e
 outline-pdf-sections-and-bullets = PDF: 섹션과 글머리 기호
-# en: 3c71fd388bfd921496968bc15422a0937a264ebc
-outline-fold-unfold = 접기, 펴기
+# en: 32897da2f696f1ddc73da9ef0575827530a80b1a
+outline-fold-unfold = 접기 또는 펼치기
 # en: 74341e3c271df3c784e595b804b1f90be0f80429
 outline-name-line = 라벨
 
@@ -2079,9 +2079,9 @@ deck-themes-color = 테마의 색
 # The bar
 # en: 4e9f7a31eef4c69e0aacb643f6856372cd6e3247
 common-present = 발표
-# en: 643c5e94af837cf718906c77e7324d1b5b8cc4ed
-deck-see-sheets-to-print = 인쇄할 용지 보기
-# en: 078bb433191da44555f4554b976669f8f188abf9
+# en: 3c47e73f6a8bcb018bdbe91d9312e8e1777050f7
+deck-see-sheets-to-print = 인쇄 레이아웃
+# en: ca742a9ecf2f35a59704398ead009f1d8e554a0c
 deck-back-to-pages = 페이지로 돌아가기
 # en: 442250df38e5e516ff1c2ce97d051b8997c7d976
 deck-headline = 표제
@@ -2197,10 +2197,10 @@ deck-inside-flap = 안쪽 날개
 deck-back = 뒷면
 # en: 3369aa225b34e01144a4c49dd350db04732a2720
 deck-badge-n = 명찰 { $n }
-# en: f5e3e387f05bd310e07849881a33ade59c373ba0
-deck-last-slide-added-for-you = 마지막 슬라이드는 자동으로 더했어요. 이 프레젠테이션 전체의 QR 코드예요
-# en: 4dc0f35f913f19ae2c1fc6bc2ee54835cf3e2b87
-deck-ends-with-qr-code-of = 이 프레젠테이션의 QR 코드로 끝나서 참석자가 집에 가져갈 수 있어요. QR 버튼으로 끌 수 있어요.
+# en: 9cc25309d07de0adfb989faaaaa74f7cb5a06e38
+deck-last-slide-added-for-you = 마지막 슬라이드: 이 프레젠테이션의 QR 코드
+# en: 03c90c8e6a7e028c2e9caeadc1961fb5c0ad4e57
+deck-ends-with-qr-code-of = 프레젠테이션이 QR 코드로 끝나서 청중이 가져갈 수 있어요. QR 버튼으로 끌 수 있어요.
 # en: 13c7cb226b093919972f5e423aeb0abae93960cf
 deck-qr-code-of-this-deck = 이 프레젠테이션의 QR 코드
 # en: 5d5bc5601280c776405941347bbf7e9c63dc3954
@@ -2239,9 +2239,9 @@ deck-slide-n-of-total = 슬라이드 { $n }/{ $total }
 common-notes = 노트
 # en: bd0dad7cbf71b13b2e545d8ce477027ffc106b45
 deck-n-hides-them = N을 누르면 숨겨요
-# en: 60eb1cc0c3e7bf9c9b2f070626da64fb304980a4
+# en: 45c44dc2566819f835fd788e2b7a6c5bee5177c4
 deck-take-this-deck-home = 이 프레젠테이션 가져가기
-# en: 627ec6260e317ce6d5af92ac3d6e31061b9befa1
+# en: acc1edc431e346786fab17d4f10e195ca72257d6
 deck-take-this-deck-home-title = 이 프레젠테이션 가져가기: { $title }
 # en: 7fc2d8c7fd4164039149b5a9f2063ddf7ab9d76a
 deck-scan-code-whole-deck-is = 코드를 스캔하세요. 프레젠테이션 전체가 링크에 들어 있어요.
@@ -2286,14 +2286,14 @@ deck-name-badges-for-meetup-one = 모임용 명찰이에요. 한 사람에 한 �
 deck-edit-this-deck = 이 프레젠테이션 편집
 # en: d5947c525ed0d53dce794385a2cc1cd6e2459dbd
 deck-new-slide = 새 슬라이드
-# en: 8b9576079143791f608e9188bd3af3109b059712
-deck-presenting-back = 발표: 뒤로
-# en: 4a6566c770849cfc7968fc4c508d36a865241a96
-deck-presenting-next-line-or-slide = 발표: 다음 줄이나 슬라이드
-# en: 28030fd585f8780188c944b5c309021930e5de0a
-deck-presenting-whole-slide = 발표: 슬라이드 전체
-# en: b97fb9456555822fb18ce45f920b4aad8ac6bfeb
-deck-slide-before-slide-after-on = 이전 슬라이드, 다음 슬라이드 (레일에서)
+# en: 720856fcb53d62f79a364c36d8cd2314121430a6
+deck-presenting-back = 뒤로(발표 중)
+# en: a212c73bb85a53b57609d239c50f170773e07d77
+deck-presenting-next-line-or-slide = 다음 줄 또는 슬라이드(발표 중)
+# en: e53a09169fa399b79b5b814de5e65669714f9165
+deck-presenting-whole-slide = 슬라이드 전체(발표 중)
+# en: 7722768d8b861ddedb1f6400352985ca0cfd4a08
+deck-slide-before-slide-after-on = 이전 또는 다음 슬라이드
 
 ## the Calendar app
 
@@ -2312,8 +2312,8 @@ cal-week-later = 한 주 뒤로
 cal-weekend-of-sessions-at-set = 주말 공연이에요. 정해진 시각에 열리고 자정을 넘기는 늦은 공연도 있어요.
 # en: 114574336ac7883aebd0653b3fc5e82f9262dc86
 cal-all-day = 종일
-# en: 6e151d3d8e88589b346af242f26ca028607edcaa
-cal-chart-scrolls-sideways = 차트, 옆으로 스크롤
+# en: cbf28df446643f9968f7fe68968bca51be5cf792
+cal-chart-scrolls-sideways = 차트(옆으로 스크롤)
 # en: a13d5b9d3da48c8bade3d645e0de9a9bb812c648
 cal-color-for-new-color = 새 일정 색상: { $color }
 # en: f6bb0f468a8569c67b3d6826e57e62c5500c3681
@@ -2332,8 +2332,8 @@ cal-choose-task = { $task } 선택
 cal-day-earlier = 하루 앞으로
 # en: 8d6915ee723c8b3c01f29002cfed7d597d56c2c7
 cal-day-later = 하루 뒤로
-# en: bb5227c5a97e3815cef2b5de296c6f4ff6d4eaef
-cal-dates = 날짜…
+# en: 66a755ea0d935aeac763da63deebb69b0eb54ba9
+cal-dates = 날짜 편집…
 # en: a2bb9d34b8a1a79665858d354585cf147e0dee4e
 cal-end = 끝
 # en: 89d10cd6c1e1437d6318d6fbb25a40e0aaaddd34
@@ -2361,8 +2361,8 @@ cal-how-many-times = 반복 횟수
 # same
 # en: 834c5ef85d6fd469b8be75d8685faf6f9e84eaa7
 cal-icalendar-ics = iCalendar (ICS)
-# en: ccdaa19305a493c44b407953b3d5dcf196bcf042
-cal-its-own-zone = 자체 시간대
+# en: 4bcc328bf3b5b886738db678a175936615491289
+cal-its-own-zone = 캘린더 시간대
 # en: 2a177256a408fa4fc557b301041589b798826d70
 cal-last-day = 마지막 날
 # en: 58ef633830b461aa76bf4ee90e3b2831ff588508
@@ -2371,7 +2371,7 @@ cal-lessons-birthdays-and-holidays-color = 수업, 생일, 휴일이 있고 사�
 cal-level = 단계
 # en: 082bc378cd60e17a38d99898b21955299c5b60c8
 cal-month = 월
-# en: f0b847840b1f79dc5663ee39966f60655c368614
+# en: 770d509550265dba792aa81868b856eb67225e41
 cal-my-zone = 내 시간대
 # en: 80c3052d33ccdee15ffaaa110c5c39072495fe63
 cal-never = 안 함
@@ -2419,23 +2419,23 @@ common-stops = 종료 조건
 cal-same-dates-as-gantt-chart = 같은 날짜를 간트 차트로
 # en: 7ea6dec71584012ab4044cc464dc601741ff2c50
 cal-this-calendar-is-written-in = 이 캘린더는 { $zone } 시간으로 쓰여 있어요.
-# en: 2138f0d946421979b807c4d1fe5bcdbc1374c3fd
-cal-this-calendar-names-no-time = 이 캘린더에는 시간대가 없어요. 시간은 내 시간대({ $zone })로 읽혀요.
+# en: e10c10f818ac8e510b74062cde201eae4e8d8c66
+cal-this-calendar-names-no-time = 이 캘린더에는 시간대가 없어서 시간이 내 시간대({ $zone })로 보여요.
 # en: 1b4785331db3b08cd8e3cfa4bd36216731a79e54
 cal-this-month = 이번 달
 # en: eea79afd832854a3b24153b928ee9c62c7457dbe
 cal-time-zone = 시간대
 # en: bf5efde33adface92f37d1888e904ab70c9ce272
 cal-times-in-zone = { $zone } 시간 기준
-# en: 3edde97331606aabe45ce5b8939e0018ced9087e
-cal-times-or-on = 번 또는 날짜
+# en: 650642b1d6b4b1ecc4ad7d38bbdf110d582c4baf
+cal-times-or-on = 번 또는 종료일까지
 # en: 69bd4ef9fbd0894a22759c3766b859defbdedbc8
 cal-view = 보기
 # en: 97211a8888128314d9ca34d1005f08cb83ed5d9c
 cal-what = 내용
 # en: 879e32326c5217968ac8e3a14e4a8a5214957264
 cal-year = 연
-# en: e620a387db0ec96358342b64750b0580249d3943
+# en: 6189fbfe149a418e2f6d1af4dd71b04f6aa0c50e
 cal-color-stands-for = { $color }의 의미
 # en: 63e5df0eb2fcd351c1d31f23cdf3bf4816e3def5
 cal-every-until-date = { $date }까지 { $every }
@@ -2523,35 +2523,35 @@ diagram-person = 사람
 diagram-step = 단계
 # en: 448ab73ba1c21e671e218fb91f2644c834f0c16f
 diagram-set = 집합
-# en: e0681542c880148c2dde0e8fe84d3a5aa9c21296
+# en: ecdda59aea5ee67d7d854c969ccf7f4f4b4a4c54
 diagram-thing = 항목
 # The picture, and the line editor over a thing
-# en: 47c7bb9dd540e2e06c7b404596702b3778aa1798
-diagram-tap-empty-space-for-thing = 빈 곳을 탭하면 항목이 생겨요. 바에서 연결을 누르고 두 항목을 고르면 이어져요. 하나를 다른 항목 위로 끌어도 돼요.
+# en: c2e45b49b02d2ac7e1baf25d9d0a2f5c257281ad
+diagram-tap-empty-space-for-thing = 빈 곳을 탭하면 항목이 추가돼요. 두 개를 연결하려면 연결을 누르고 둘 다 탭하거나, 하나를 다른 하나 위로 끌어요.
 # en: d4b16450c157188d2cf2e3968faee3709ebeca28
 diagram-tap-here-to-add-first = 여기를 탭해서 첫 { $thing }을(를) 추가하세요.
-# en: 15dd4a157f74190eb319f5623d0df46c173f661c
-diagram-tap-in-lane-to-add = 레인을 탭하면 거기에 단계가 추가돼요. 단계를 탭하면 글을 쓸 수 있어요. 다른 레인으로 끌거나 다른 단계 위로 끌면 그 뒤에 와요.
-# en: 09871908140008f25fcd1870035a392e225c44aa
-diagram-tap-thing-to-join-name = { $name }을(를) 이을 항목을 탭하세요. 그만두려면 빈 곳을 탭하세요.
-# en: b0449f9fd2bc63ae3f7f9cd6ae8434659ab5ffa0
-diagram-tap-first-thing-to-join = 이을 첫 항목을 탭하고 다른 항목을 탭하세요. 그만두려면 빈 곳을 탭하세요.
-# en: 2725e3e2092e4296202f5cd57bdfdceabf48844c
+# en: ccdb7bfa4c6b71a69f1931253fe6f892a2baf89b
+diagram-tap-in-lane-to-add = 레인을 탭하면 단계가 추가돼요. 단계를 탭해서 편집해요. 다른 레인으로 끌거나, 어떤 단계 위로 끌어 그 뒤에 둬요.
+# en: 639d02ad26e5be80f5baf69835b953dfc015178b
+diagram-tap-thing-to-join-name = { $name }을(를) 연결할 항목을 탭하세요. 빈 곳을 탭하면 취소돼요.
+# en: 5d36f27a0649ac9ae67fb2e66f5be89ebc4719c8
+diagram-tap-first-thing-to-join = 첫 항목을 탭한 다음 다른 항목을 탭하세요. 빈 곳을 탭하면 취소돼요.
+# en: 8953058d46b225514231aca0b8643f4e72547676
 diagram-this-thing = 이 항목
-# en: 2e14e11ce84b1892bcdec7356603f3a4377e464a
+# en: 53ea183a6bb5ad2942edd6884230b8f425c0eea6
 diagram-add-under-it = 아래에 추가
-# en: 87302651ba9b963dd8e390b315590274bc9f54dc
+# en: e9e7205b6f0bd7d9c8f1a1dfe85ef9d54979662f
 diagram-add-one-more = 하나 더 추가
-# en: 09e488b3a88425c020211d29a2dbb60a0d4fba79
+# en: be34070c33b5c14155fe70a18891828387dd399d
 diagram-add-after-it = 뒤에 추가
 # en: 90d24ab49426f19e75a2b6c3fd9196603c2e0852
 diagram-add-step = 단계 추가
 # en: e0d73143de80d17e82de2e017ac156ca3b9c4e01
 diagram-join = 연결
-# en: 6d38d1eb6fb326d6aaccf362ba404ed024b81102
-diagram-make-it-plain-line = 보통 선으로 바꾸기
-# en: d7c2f8db0073a31e8e0ded4d2a13d8076ba44fd6
-diagram-make-it-arrow = 화살표로 바꾸기
+# en: e45795fb6033ae4ecc1e2e3610273fce71a317d7
+diagram-make-it-plain-line = 일반 선
+# en: 3a4758c3cc8dac2d76026d0733816741f9b21d43
+diagram-make-it-arrow = 화살표
 # en: a07496767ed7e5caf20bb803434a1aa088aaa97b
 diagram-what-connection-says = 연결 라벨
 # en: 7d531617dd394cef59d3cf58fc32b3bc458f6744
@@ -2661,8 +2661,8 @@ diagram-water-cycle = 물의 순환
 diagram-three-generations-of-morenos-and = 모레노 가족 3대와 대자녀로 이어지는 점선.
 # en: 0e60bdf5cc3dbaa6c2018bd31c760c1e46e79ab1
 diagram-who-can-do-what = 누가 무엇을 할 수 있는지
-# en: 77612b6030acd5929dba4733671ebce9b6967f72
-diagram-tap-empty-space-for-branch = 빈 곳을 탭하면 가지가 생겨요. 아이디어를 탭해서 글을 쓰고 Enter로 다음으로 넘어가요. 하나를 다른 아이디어 위로 끌면 그 아래로 들어가요. 연결은 지도 가로질러 둘을 이어요.
+# en: b27a04f87f9d4657107a8dbd89d32eb1dedb41b7
+diagram-tap-empty-space-for-branch = 빈 곳을 탭하면 가지가 추가돼요. 아이디어를 탭해서 편집하고, Enter로 다음으로 가요. 하나를 다른 하나 위로 끌면 그 아래로 들어가요. 연결은 지도를 가로질러 둘을 이어요.
 # en: fd23500d007e121f9530bb8b530f367ed9e00825
 diagram-place-cards = 자리 카드
 # en: dd9ef7db14a8bdb18f7a266d6e91711443e71a29
@@ -2673,20 +2673,20 @@ diagram-print-place-cards-card-guest = 자리 카드 인쇄: 손님마다 카드
 diagram-guest = 손님
 # en: 5734dbf560e03e0dea1a1bd85af5088238d5d0e4
 diagram-new-idea = 새 아이디어
-# en: 5c01f4e98ebcc45730b787667c26e3d0c189d7f6
-diagram-tap-empty-space-for-person = 빈 곳을 탭하면 사람이 추가돼요. 사람을 탭해서 글을 쓰고, Shift+Enter로 이름 아래에 역할을 쓰고, Enter로 다음으로 넘어가요. 하나를 다른 사람 위로 끌면 그 아래로 들어가요.
-# en: 16d186d3c0b3d834fa9944fb99e4df830d8d604b
-diagram-tap-empty-space-for-event = 빈 곳을 탭하면 사건이 추가돼요. 언제인지 쓰고 Shift+Enter를 누른 다음 무슨 일이 있었는지 쓰세요. 연도와 날짜는 실제 간격대로 놓이고 기간은 띠로 보여요.
+# en: 32c6bde8aa4d539c3b773b1f4cf66e15aa427faa
+diagram-tap-empty-space-for-person = 빈 곳을 탭하면 사람이 추가돼요. 사람을 탭해서 편집하고, Shift+Enter로 역할을, Enter로 다음 사람을 넣어요. 한 사람을 다른 사람 위로 끌면 그 아래로 들어가요.
+# en: 5f7463cc9e2e8a2e25990127091710a286d9765a
+diagram-tap-empty-space-for-event = 빈 곳을 탭하면 사건이 추가돼요. 날짜를 입력하고 Shift+Enter 다음에 일어난 일을 써요. 날짜는 실제 간격대로 놓이고, 기간은 띠로 보여요.
 # en: b6395077670d276b6a207a6eadb6f5a17c1fa854
 diagram-lanes-name = 레인 이름
 # en: 769bb19e615b7f8e2809e5882e2d05a18f57a531
 diagram-when = 시기
-# en: 3df3b95b06bd3d9fba1d2c013d542de8ad0e434a
-diagram-tap-person-to-type-on = 사람을 탭해서 글을 쓰세요. 이름 뒤에 +를 쓰면 배우자, Shift+Enter로 이름 아래에 생몰 연도를 쓰고, Enter로 다음으로 넘어가요. 하나를 다른 사람 위로 끌면 그 아래로 들어가요. 연결은 둘 사이에 점선을 그어요.
-# en: c216a378071fd890d4e2a20f3922cd20970280ff
-diagram-tap-empty-space-for-table = 빈 곳을 탭하면 테이블이 추가돼요. 테이블이나 사람을 탭해서 글을 쓰고, 이름 뒤에 쉼표를 쓰면 다음 손님이에요. 사람을 다른 테이블로 끌 수 있어요.
-# en: 1a75ac2a6ce93723b5db1af25c849dbaefb29d06
-diagram-tap-inside-circles-to-add = 원 안을 탭해서 항목을 추가하고, 뒤에 쉼표를 쓰면 다음 항목이에요. 집합 이름을 탭하면 이름을 바꾸고, 항목을 다른 원으로 끌 수 있어요.
+# en: b23ea75ecf303b9756682c84abecebc7a010f2b1
+diagram-tap-person-to-type-on = 사람을 탭해서 편집해요. 배우자는 +와 이름을, 연도는 Shift+Enter로, 다음 사람은 Enter로 넣어요. 한 사람을 다른 사람 위로 끌면 그 아래로 들어가요. 연결은 점선을 그려요.
+# en: 14e56ce6d5f3d8d56d2ce979bf2eb20aaa9dd93d
+diagram-tap-empty-space-for-table = 빈 곳을 탭하면 테이블이 추가돼요. 테이블이나 사람을 탭해서 편집해요. 쉼표를 넣으면 다음 손님이 시작돼요. 사람을 다른 테이블로 끌 수 있어요.
+# en: 7049f105f3a76be9cb8c6d7b74eb3edf60d9a7da
+diagram-tap-inside-circles-to-add = 원 안을 탭하면 항목이 추가돼요. 쉼표를 넣으면 다음 항목이 시작돼요. 집합 이름을 탭해서 이름을 바꿔요. 항목을 원 사이로 끌 수 있어요.
 
 ## the Trip Planner
 
@@ -2703,8 +2703,8 @@ trip-geojson = GeoJSON
 # The bar and the map
 # en: 63746c80a9900aa0b9df832d6fe50b7318a88aab
 trip-a-place-by-name = 이름으로 장소 찾기…
-# en: 8779e1ba12906b75111edf21cd1ea027e656470c
-trip-stop-at-middle-of-map = 지도 중앙에 경유지 추가
+# en: c86d6e7640906afe6a57236c004f0b1af53b6ee8
+trip-stop-at-middle-of-map = 지도 가운데에 경유지 추가
 # en: a52fccf0e1e5beca9d5885f1638d5e9a6a2684f9
 trip-measure-in = 측정 단위
 # en: 2458f1444290ced8aefad04d5c947b17bf9a81fb
@@ -2713,8 +2713,8 @@ trip-hours-of-driving = 운전 시간
 trip-miles = 마일
 # en: 87bafdbb82c61625882d74515ef2c7e566177ea5
 trip-kilometers = 킬로미터
-# en: c2912ae51710dd393bab94a15f5691d0034f7e62
-trip-join-stops-in-order = 경유지를 순서대로 잇기
+# en: 8e49f86b47ba8e4ac259af7b5428623e7332489c
+trip-join-stops-in-order = 경유지를 순서대로 연결
 # en: 7bdcf970899e9519b75f2dc24d1909f670b283cb
 trip-show-whole-route = 전체 경로 보기
 # en: fa157c9ab413b3c415d7ada7457694a35c7869a1
@@ -2725,8 +2725,8 @@ trip-map = 지도
 trip-map-tap-to-add-stop = 지도: 탭해서 경유지 추가
 # en: 81920dbaea13a635abdf8e473b6a5f7c37a415e7
 trip-maps-pictures-come-from-openstreetmap = 지도가 보이는 동안 지도 이미지는 OpenStreetMap에서 가져와요.
-# en: 2cbbc3df3b8f862050dc915530000d4709906b6f
-trip-your-location-is-asked-for = 위치는 지도를 가운데에 맞추려고만 묻고 어디에도 기록하지 않아요.
+# en: dd1ac7c6150bf40973c618ac841d01f2281dea20
+trip-your-location-is-asked-for = 내 위치는 지도를 가운데로 맞추는 데만 쓰이고 저장되지 않아요.
 # en: 6c4827a34debc3c12e8a905f5e8025f0d22802cb
 trip-n-stops = 경유지 { $n ->
        *[other] { $n }
@@ -2761,8 +2761,8 @@ trip-town-address-museum = 마을, 주소, 박물관
 trip-search = 검색
 # en: 1a6a5ba8c23ddb672874a2996abaee1fe933abcd
 trip-searching = 검색하는 중…
-# en: 3a721e0216039aa707b02b551860b5397374adc2
-trip-searching-sends-words-you-type = 검색하면 입력한 글만 OpenStreetMap의 Nominatim에 보내고 다른 것은 보내지 않아요.
+# en: 07a4d61733e108a8ffa6e5753e09227b6a1a0f80
+trip-searching-sends-words-you-type = 검색하면 입력한 내용만 OpenStreetMap의 Nominatim으로 보내져요.
 # en: 2b36ec5f26fb5c35fccb5edd05776349d238b677
 trip-places-found = 찾은 장소
 # en: 6c70807e19d1f88aae7d66770719debbaf4ae89b
@@ -2826,17 +2826,17 @@ trip-wedding-on-lake-como = 코모 호수의 결혼식
 trip-for-guests-where-wedding-is = 하객을 위한 안내예요. 결혼식 장소, 숙소, 가는 방법.
 # en: 0fbbb28a6e64acfee9300ecf05016dcf149a5a19
 trip-presenting-trip = 여행 발표
-# en: defe00756135bd21e0d5e6f3da726b28d353e1a2
-trip-presenting-next-stop = 발표: 다음 경유지
-# en: 6c0c4c64c4cb03ee1c9ef8106668d7d2f3b97727
-trip-presenting-stop-before = 발표: 이전 경유지
+# en: 24848d1e92a4b831f8fdae547c2fbfdc0d1e441b
+trip-presenting-next-stop = 다음 경유지(발표 중)
+# en: a802f6e93c981ee6dd02df366f0141ca3aa085e0
+trip-presenting-stop-before = 이전 경유지(발표 중)
 # en: 3b14d20764a1fdef5ee74f4defab4ff20b0e7cce
 trip-put-stops-on-calendar-day = 경유지를 하루씩 캘린더에 넣기
-# en: e4f1afa8488566015d041fb325f7e0897148ccd1
-trip-first-last = 처음, 마지막
-# en: 054cc02718f75dc29ae702c1d5e635fb93d3f5b2
+# en: 16fa5ad4958332a6bbb1eae6d1a8c6ee6f2c7752
+trip-first-last = 처음 또는 마지막
+# en: 0aa341109cff3c75e204930fdeac94f52278bb67
 trip-next-stop = 다음 경유지
-# en: 0b315b14904297b902188306eb30d496ca34c7e2
+# en: 35bc0362a4899961a0e878990611c13021c1e549
 trip-stop-before = 이전 경유지
 
 ## shared: the Word Processor's looks, the header's Home, a money column's currency
@@ -2857,8 +2857,8 @@ calc-calculation = 계산
 # The tape is the list of lines worked out, as on a printing calculator. 'Calculator' and 'Numbers' are above.
 # en: ab4ea6f8fe06812a128297560bee7aff1be0c040
 calc-calculator-that-shows-its-work = 계산 과정을 남기는 계산기예요. 이름, 단위, 단위 변환, y = f(x) 그래프를 지원해요.
-# en: 2e1fea55cc9352b6b3de8581a14318b0739a3a6c
-calc-tape-text = 계산 기록 (텍스트)
+# en: f146f8e93fc9312f6b8003b048cd24d1574469af
+calc-tape-text = 계산 기록을 텍스트로
 # The bar
 # en: 9a7405ebcedde5be8d095a986ea8794e19ee84e2
 calc-graph = 그래프
@@ -2902,8 +2902,8 @@ calc-simplify = 간단히
 calc-tape = 계산 기록
 # en: 1acb1c0448ace57b632dc2d56121f45a18e646be
 calc-line-n = { $n }번째 줄
-# en: 35f7cd1164328099cf99c40ab3bc42984fa25cd5
-calc-put-answer-in-line = { $answer }을(를) 줄에 넣기
+# en: 43885eadc7bc789d89e6e81db680818d2dd1b223
+calc-put-answer-in-line = { $answer } 삽입
 # en: a9c16dd084ce3781568419133b0fa0c0f57aa727
 calc-no-answer = 답 없음
 # en: cf23123f857abeda1d28fc9b85cc7eba8d20f3b1
@@ -2926,10 +2926,10 @@ calc-keys = 키
 calc-backspace = 지우기
 # en: d1149c36a0edcfbeae98bf270da3f543b6c6a866
 calc-clear-line = 줄 지우기
-# en: 4716ff8f558cadc13c582104a818ee5abde9853c
+# en: 097a41c8c7e58b9b655d7b3e31a3673466595450
 calc-answer-before = 이전 답
-# en: ff4e4dbf3bb595e38f14ac19214f322e782f121b
-calc-type-sum-or-3-inch = 식이나 3 inch to cm를 입력하고 Enter를 누르세요. a = 12처럼 쓰면 답에 이름을 붙여 보관해요.
+# en: 2ee9e26d39d7113bd8fea80639d6257ab1bdf8cc
+calc-type-sum-or-3-inch = 계산식이나 3 inch to cm를 입력하고 Enter를 누르세요. a = 12는 답을 이름으로 저장해요.
 # en: 0bef86b24e006bd994db1509b268156522c7dc2c
 calc-type-curve-in-x-such = x^2나 sin(x) 같은 x의 곡선을 입력하고 Enter를 누르면 그려요.
 # The templates
@@ -3093,12 +3093,12 @@ qr-code-of-this-document = 이 문서의 QR 코드
 
 ## the keys, the shortcuts and the size of everything (kit/core/keys.ts, kit/ui/zoom.ts)
 
-# en: 3f3b2c1515692707509166286b837928fcc6486d
-keys-normal-size = 보통 크기
-# en: 1229caff41e35faa0a828560a25ea095ce975672
-keys-everything-larger = 전체를 크게
-# en: d1a6c5490cb95093a9fb9116f092d142b8a73ff6
-keys-everything-smaller = 전체를 작게
+# en: e5737972ceac5c184d5009e9ee1746c4b3292f26
+keys-normal-size = 확대/축소 초기화
+# en: 4fc05f2763ba31e2d3be5f08e7d0bab5d5dcbf78
+keys-everything-larger = 확대
+# en: a4ae4b24a1f5369c2bff61abdbc221170e4b27d8
+keys-everything-smaller = 축소
 # en: 67312061f24800b7dc75b07101329959c5c1af88
 keys-keep-this-document-on-device = 이 기기에 저장
 # en: 4d5e11a737e63d755f4127a0139f235f3794b6c6
@@ -3113,7 +3113,7 @@ find-not-found = 찾지 못했어요
 
 ## a menu narrowed by typing (kit/ui/menu.ts)
 
-# en: 6b402540edfb9bf7f30575ed784274bc3b5afed4
-menu-nothing-starts-q = “{ $q }”(으)로 시작하는 게 없어요
-# en: 44b790d6bf11cdcff6a339e5f61f3fdabcc14bb3
-menu-starting-q = “{ $q }”(으)로 시작
+# en: a9c25fead588babdd6b90b343a47f716f722312e
+menu-nothing-starts-q = “{ $q }”에 맞는 항목이 없어요
+# en: ddf17f8747a6b36489443d6b09c25b429a1ea675
+menu-starting-q = “{ $q }”에 맞는 항목

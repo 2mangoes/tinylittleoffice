@@ -71,7 +71,7 @@ export const TERMS: Term[] = [
   { term: 'Save in browser' },
   { term: 'password' },
   // The Calculator's keys are keys of a keyboard; an animation's key is a keyframe.
-  { term: 'key', not: ['Keys', /arrow keys|add a key here|key at \{s\}|remove this key/i] },
+  { term: 'key', not: ['Keys', /arrow keys/i] },
   // "Present" is to show a deck; "a present" is a gift.
   { term: 'Present', not: [/a present\b/i] },
   { term: 'Insert' },
@@ -101,7 +101,6 @@ const ALLOW: { lang: string; term: string; key?: string; why: string }[] = [
   { lang: 'de', term: 'Insert', key: 'trip-insert-place-by-name', why: 'einfügen is a separable verb: "Füge … ein"' },
   { lang: 'nl', term: 'Insert', key: 'trip-insert-place-by-name', why: 'invoegen is a separable verb: "Voeg … in"' },
   { lang: 'pt-br', term: 'Insert', key: 'trip-insert-place-by-name', why: 'the imperative of inserir is insira' },
-  { lang: 'nl', term: 'Print', key: 'deck-see-sheets-to-print', why: 'afdrukken is a separable verb: "af te drukken"' },
   { lang: 'fr', term: 'chart', key: 'cal-chart-scrolls-sideways', why: 'a Gantt chart: in French a diagramme de Gantt' },
   // Counted things: Japanese counts cards with 枚 and does not say the word.
   { lang: 'zh-hans', term: 'slide', key: 'deck-slide-n-of-total', why: 'counted with the counter 张 (第 {n} 张，共 {total} 张), the word left out' },

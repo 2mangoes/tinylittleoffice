@@ -81,7 +81,7 @@ test('motion: a shape drawn, then moved at the last moment, keys itself there', 
   await page.getByRole('button', { name: 'Settings' }).click();
   await page.getByRole('spinbutton', { name: 'Frames', exact: true }).fill('48');
   await page.keyboard.press('Enter');
-  await page.getByRole('spinbutton', { name: 'Frames a second' }).fill('12');
+  await page.getByRole('spinbutton', { name: 'Frames per second' }).fill('12');
   await page.keyboard.press('Enter');
   await expect(page.locator('.anim-secs')).toHaveText('4.0 s');
   await page.locator('.anim-loop > button').click();

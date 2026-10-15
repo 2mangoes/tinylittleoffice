@@ -59,7 +59,7 @@ test('Present flies stop to stop, a key a stop, naming each; the ends stay put; 
   await el.updateComplete;
   expect(words(el)).toBe('2 of 3 · Coimbra');
   expect(flights.length).toBe(5);
-  el.querySelector<HTMLButtonElement>('.trip-present button[aria-label="The next stop"]')!.click();
+  el.querySelector<HTMLButtonElement>('.trip-present button[aria-label="Next stop"]')!.click();
   await el.updateComplete;
   expect(words(el)).toBe('3 of 3 · Porto');
   key(box, 'Escape');

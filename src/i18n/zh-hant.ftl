@@ -95,8 +95,8 @@ home-templates-for-app-name = { $app }的範本：{ $name }
 home-templates-are-not-saved-in = 範本還沒有儲存在此瀏覽器中。連上網路即可查看。
 # en: 25d37d0580af5bc389b9332f3640f6d73ef93e48
 home-documents-found = 找到的文件
-# en: 7a5c1e9838dbef7c3cefc91f1dcc9c9410cea118
-home-no-document-here-has-those = 這裡沒有文件含有這些字
+# en: 5e46670f6fe68987a7e5c94f03e192aff635df77
+home-no-document-here-has-those = 沒有符合的文件
 # en: 1dfc2a61eb2345a48a2a91b7922b83f580553732
 home-search-your-documents = 搜尋你的文件
 # en: 4f5fbd7fb6a16b16ebe3c347bf43c9a2455a1560
@@ -165,12 +165,12 @@ drawer-documents = 文件
 drawer-find-app-template-or-command = 尋找應用程式、範本或指令
 # en: 45e5f3f72e961cb70134ba35f7a27a9620e515f7
 drawer-commands = 指令
-# en: 2cb8ae8266ed4a20c9dee5151f1a5232e3de77a4
-drawer-nothing-by-that-name = 沒有這個名稱的項目
+# en: b993b0c537190bfc94b21360ac5abe51e56be36f
+drawer-nothing-by-that-name = 沒有結果
 # en: 85773bc941e47b21f6cc345b225265e3144489be
 drawer-add-to-home-screen = 加到主畫面
-# en: dde10ff34344fa5b1c16c03d39a9cda035469fdd
-drawer-size-of-everything = 全部的大小
+# en: 9b3cbed5c490c07473546a88768ba29b787e9e52
+drawer-size-of-everything = 縮放
 # en: 943c5ac9fa7766d7c1ebecbc95c4e0d27b4ef9d4
 drawer-to-add-tiny-little-office = 要把小小辦公室加到主畫面：先按「分享」，再按「加入主畫面」。
 
@@ -546,7 +546,7 @@ common-select-all-words-of-box = 全選（先選這個欄位，再選整份文�
 common-back-to-words = 回到文字
 # en: 0c0b01d469faff60dc3b2d1c035ee0a7caa03852
 common-extend-selection = 延伸選取範圍
-# en: 6510e9982155a27498f4332337675f22d4592291
+# en: 11a8a25332234992a14424d8aad6fb9ce3d3b287
 common-next-or-one-before = 下一個或上一個
 # en: b4365b2ed2016713788d08335e5157985010ac28
 common-step-out-close-collapse-let = 關閉或取消選取
@@ -1175,8 +1175,8 @@ sheet-no-chart = 無圖表
 sheet-number = 數字
 # en: 80838be5576c4b333f764e352ef9e6c5292b2b78
 sheet-open-link = 開啟{ $link }
-# en: 348c4977d8bb453ba33998d5e64538c444c54c6e
-sheet-opens-when-clicked = 點選時開啟
+# en: 1d6f3ce763f138e0025747a9d3ae7f30efc75531
+sheet-opens-when-clicked = 點選開啟
 # en: ac556cf5938d2104533c38103305f6cf60ba245d
 sheet-percent = 百分比
 # en: 4f9fa8ea1af8cde7cca877c50ca723eeadee35dc
@@ -1226,10 +1226,10 @@ sheet-choices = 選項
 sheet-choices-for-ref = { $ref }的選項
 # en: a871e2c9206cb4854cc06c30bc6de95cb82f9700
 sheet-has-one = 工作表已經有圖表了
-# en: 5cc509a6f6fbd1ca18401f39e39b705757af20da
-sheet-edit-cell-caret-at-its = 編輯儲存格，游標在最後
-# en: a029b0313f2c7a4c819051865f98357f813460b3
-sheet-put-back-what-cell-held = 還原儲存格原本的內容
+# en: f0dfb92a1f16391ab3bd5478ce9d8c0f2d74bf95
+sheet-edit-cell-caret-at-its = 編輯儲存格，游標放在最後
+# en: 28d1a54d2e35ad87c0d19942f68d70ddbf67bcee
+sheet-put-back-what-cell-held = 還原儲存格的值
 # en: 2b69414b3787eaa8a38f2f1a9c4a48aff7dd78a5
 sheet-put-dated-rows-on-calendar = 把有日期的列放到行事曆上
 
@@ -1415,8 +1415,8 @@ draw-arrow = 箭頭
 draw-join-two-shapes = 連接兩個圖形
 # en: cf6c07e7054fad4d6a8affaf62f285e16525c46e
 draw-pen = 鋼筆
-# en: d979b2d654019a5591521248c86ac6d7a294694a
-draw-any-shape-tap-for-each = 任意形狀，每個轉角點一下
+# en: c72e323a57434ede3b6eb0cc235109eb76833c55
+draw-any-shape-tap-for-each = 多邊形：點一下每個角
 # en: 016a5405a0b425e7d1ac65317df59b45ce5fb1f5
 draw-freehand = 手繪
 # en: 8a48ec1f6c073fad0326a0e9251a18e4c88660b5
@@ -1504,8 +1504,8 @@ draw-what-does-this-drawing-show = 這張繪圖畫的是什麼？
 draw-diagram-of = 這是一張…的圖
 # en: 5a33f2e7e84274a5291191ca3105e62d897eee0e
 draw-read-aloud-to-people-who = 會唸給看不到的人聽，並且無論嵌入或下載到哪裡，都隨這張繪圖一起保存。
-# en: b97935a5b0e75f3b48c6e256e537e5c7f718a222
-draw-describe-from-shapes = 依圖形產生描述
+# en: 988c63b77eade4f718f9d469cb36e35bff976839
+draw-describe-from-shapes = 依圖形產生
 # en: ac302ae45938c985822f097507602d624128f1d0
 draw-tap-or-drag-to-paint = 點選或拖曳來畫；方向鍵移動，Enter 上色。
 # en: ea263dc45b04f2755ac61a51deecc96ade3fb6a9
@@ -1516,8 +1516,8 @@ draw-drag-to-draw-end-where = 拖曳來畫；在起點結束就會封閉成圖�
 draw-press-on-one-shape-and-let-go-on-another = 在一個圖形上按下，在另一個圖形上放開。
 # en: 1005cc8c1dafc1f9eb422bf2ac68290b492fdfd1
 draw-now-other-shape-tap-it = 現在選另一個圖形：點選它，或用方向鍵選擇後按 Enter。
-# en: 0a8818d4eb574b7edd32bbc8e27db44e556d1220
-draw-drag-to-move-them-together = 拖曳可一起移動；按住 Shift 再點選，可加入或取消一個圖形。
+# en: e3686f1c55ec91e31825e1d9510abf592d80b08a
+draw-drag-to-move-them-together = 拖曳可一起移動。Shift+點一下可加選或取消一個圖形。
 # en: eb36764c60ec7a17dd6ac3ec7dbbd22ee401778e
 draw-press-on-one-shape-and = 在一個圖形上按下，在另一個圖形上放開
 # en: 199f4e86afea4f2d42eb40b63ce8599168575e06
@@ -1532,8 +1532,8 @@ draw-pencil = 鉛筆
 draw-clear-grid = 清除格線
 # en: 45ecea7c16e725c14cfec68f5b12d1545f222a73
 draw-use-as-background = 用作背景
-# en: 037ae898000037d344a43cf8052a8c7843cbc599
-draw-grid-is-now-background-download = 格線現在是背景了。「下載」會把它存成圖案；任何頁面都可以用 tile: 來使用它。
+# en: 507f52dfd67fb731677bb9ae6971f9b5e891bc84
+draw-grid-is-now-background-download = 格線現在是背景了。可以把它當圖案下載，或在任何頁面用 tile: 使用。
 # en: 209a1a74ee8eec09b861bc34e5ddb08a1357a364
 draw-pixel-grid-n-by-n = 像素格線，{ $n }×{ $n }。方向鍵移動；Enter 用目前的顏色上色。
 # en: a9deda2292f9b3c9a827e2aa71e0da6b4db9f16e
@@ -1666,8 +1666,8 @@ anim-empty-stage = 空舞台
 # same
 # en: 64fe85d796d8c2eda594dbc0b7b3452a4a2c444b
 anim-3d = 3D
-# en: 798c40b3e9a56d7b4b393568ef6ca18ae4d0456b
-anim-add-key-here = 在此加入關鍵影格
+# en: fe12532bd63a2e75713ec69be11e92d48e9db3c8
+anim-add-key-here = 新增關鍵影格
 # en: 900aa998d3550d438fc20a414d3938fc3a1630ab
 anim-blur = 模糊
 # en: df0e298e356261439795d0d435ce0ce576604c65
@@ -1678,14 +1678,14 @@ anim-effects = 效果
 anim-frame-n-s-s = 第 { $n } 格，{ $s } 秒
 # en: 62036a7016ec20273ff717698fbad321c4ff002b
 anim-impact = 粗體大字
-# en: 4dde45e7f399fed3c04d3c8a5db7f69923d48380
-anim-key-at-s-s = { $s } 秒的關鍵影格
+# en: 4c0a5de85ac9512b6a503ba785c3f369b5cfbda2
+anim-key-at-s-s = { $s } 秒處的關鍵影格
 # en: 74adc5789ce92de7bbb5e3d84a287a1ce6d3e7f5
 anim-mirror = 鏡像
 # en: a7b93d2128e820f861fc8dfccd9f5521e89ad21f
 anim-mode = 模式
-# en: ed0cbe45b8abfebed8b8486dc9ceafe28d9e3bc5
-anim-moments = 時刻
+# en: 987e5e1f455e03766d3ef3740947f4db46336d53
+anim-moments = 關鍵影格
 # en: 76cdb950721642b6b8596d36d5a39f7705028b99
 anim-move = 移動
 # en: 00706b5e9ede7f2fb6145370efd20ef72969df11
@@ -1698,8 +1698,8 @@ anim-play = 播放
 anim-pixel-art-is-made-in = 像素畫在「繪圖」中製作；動畫工具讓圖形動起來。
 # en: b4a9395d25398654fd5d000e4b82a1d8273339bd
 anim-rainbow = 彩虹
-# en: 1344ac9ec86b807fe3e8f3e3a058c3be1aada95c
-anim-remove-this-key = 移除這個關鍵影格
+# en: 3d5096b70833fdae355f1ffcf32faf2066123467
+anim-remove-this-key = 移除關鍵影格
 # en: aa0e7e86b7aa21e9851b9db8b752998918d2b608
 anim-shadow = 陰影
 # en: b7152342a267362add3c0d7f69f720f7a9c76c9e
@@ -1728,8 +1728,8 @@ anim-frame-earlier = 往前移一格
 anim-frame-later = 往後移一格
 # en: bb4f3c806dbc9e6d5247da5b492939d83c90cf2b
 anim-delete-this-frame = 刪除這一格
-# en: d143b32e3626fd7a764a25937fcb176ba003e34a
-anim-draw-shapes-move-sets-them = 畫出圖形；「移動」讓它們動起來。
+# en: 406ce96669c44a0f4b79e02af1464b6aa7fbf232
+anim-draw-shapes-move-sets-them = 先畫圖形，再用「移動」讓它們動起來。
 # en: b4d477d39704ecbf21ca422aeebffbad5a519fbb
 anim-nothing-here-yet-draw-something = 這裡還沒有內容：先畫點東西。
 # en: 00f1eed948284854e29d59b2de928756b7f69388
@@ -1745,8 +1745,8 @@ anim-back-and-forth = 來回播放
 anim-forward-then-back = 先正向，再反向
 # en: e3e7a3833d19706ebf33b2c3baf8e05deeed7bca
 anim-frames = 影格
-# en: b77ec601d62ce5f2db407a7e827811b75ad9e12b
-anim-frames-second = 每秒影格數
+# en: 0d0b09dfb5d45add0e2f90ec8b193d96ace76d0c
+anim-frames-second = 每秒格數
 # en: 3570d228949889218e4c7fdb4ad8c942753530a1
 anim-how-large-shape-is-drawn = 圖形畫出來的大小：1× 就是原本的大小。
 # en: c028f533678015b6ac2e606a9cafef7e050b11aa
@@ -1767,14 +1767,14 @@ anim-which-shape-is-in-front = 哪個圖形在前面：近的圖形畫在遠的�
 anim-n-times = { $n } 次
 # en: 4a84fdfdafe66c2c85e3e7d7c434de987984470f
 anim-s-s = { $s } 秒
-# en: 4403c08ebdf8c80a653ed6d343be64570f75f8ce
-anim-frame-back-frame-on = 前一格、後一格
+# en: b78baea4121d1dfde75020adb28737da7ea84e59
+anim-frame-back-frame-on = 上一格或下一格
 # en: ad3441e7c85b25bc4c7f46fd051345a6ba241e58
 anim-nudge-shapes-in-hand-with = 微移已選取的圖形，或逐格前進
 # en: fe13ca0956192777b5060b354cf8e5dc5553c328
 anim-play-or-pause = 播放或暫停
-# en: 293cec535f254be8be69d7877fc790f95b4b7e07
-anim-first-frame-last = 第一格、最後一格
+# en: d3b310dc90b3cc480984236a80101888836acfe9
+anim-first-frame-last = 第一格或最後一格
 
 ## the Outliner
 
@@ -1803,8 +1803,8 @@ common-calculator = 計算機
 common-calendar = 行事曆
 # en: ab732cac31bba434b0b59309a30ce46956dc3d54
 outline-cancel-connecting = 取消連接
-# en: 0b2cad8a7f348bc05529baaac65726b720eb10e1
-outline-change-it = 更改
+# en: 5301648dcf6b53cefc9ed52999aaa92d4603cae0
+outline-change-it = 編輯
 # en: 1ed0b58d18ef647be5de11840bb929ecc8e36446
 common-chosen-items = 已選取的項目
 # en: b65463cb6a42a17de514acc4659f7fd331e0876a
@@ -1835,16 +1835,16 @@ outline-draw-as-org-chart = 畫成組織圖
 outline-empty = 空
 # en: 4a66d1480779180159cc25c1c5aa9d760467c6a7
 outline-everything = 全部
-# en: b6ba0db1f814179114ec82fbf188b2eb5be2596e
+# en: 9cf188d3a6779d63b36b10275b0228ae22ec97d6
 outline-fold = 摺疊
-# en: bc63322115af1769edf28f7dad3bb9e5653ce367
+# en: ec898362fe9593764e822dd17c78f1f972c20d90
 outline-fold-all = 全部摺疊
 # en: ecdda59aea5ee67d7d854c969ccf7f4f4b4a4c54
 outline-item = 項目
 # en: 6f8c7dbc09548197b5d210f514dda19a015102b2
 outline-item-n = 項目 { $n }
-# en: 5a9bee4040efb910e5da699252a0dadd1201196a
-outline-kind-of-line = 線條種類
+# en: 120ee44bec923665b04dc825b0307fe159232ce9
+outline-kind-of-line = 線條樣式
 # en: 789062517bc27b8cb5c78b1e88041e5bef69b507
 common-launch-plan = 上線計畫
 # en: 72eee0aaa10010ae7d362761115dfd7e064dd4d4
@@ -1899,18 +1899,18 @@ outline-question-options-under-it-and = 問題、底下的選項，以及每個�
 common-trip-planner = 旅程規劃
 # en: 09ae5dce4d22019190e52d1611d1544becf36489
 outline-twenty-minutes-in-three-parts = 三個部分共二十分鐘：問題、想法、意義；以簡報顯示時，每個頂層項目一張投影片。
-# en: 895cc98efe76cab7188f62630904fbbfbfd0b496
+# en: 2af9d498f852995329b0033573277dce32d09ba0
 outline-unfold-all = 全部展開
-# en: 23f1aba9b0732d2f8c80a5130a2b8ef3d2d7a37a
-outline-unfold-n-inside = 展開，{ $n ->
-       *[other] 內有 { $n } 項
-    }
+# en: f5857a77d395db75bc57c2c76b92dc8fa4773053
+outline-unfold-n-inside = 展開（{ $n ->
+       *[other] { $n } 項
+    }）
 # en: 621521f9a8788695ec292cbec54d2792cfdf0a7d
 common-untitled = 未命名
 # en: 1e65f823e3600c2c4cec7aff6db37af296fca073
 outline-view-as = 檢視方式
-# en: 4e6dde9299814981f3441740558666659d66e6e0
-outline-zoomed-in-on = 已放大到
+# en: 828c360c884f9246750461eea43fee4e42c6b52c
+outline-zoomed-in-on = 聚焦於
 # en: 38eca6735f66d186c0bd9c549873e774551dc35f
 outline-a-plain-line = 普通線條
 # en: 884abd948f43aba4e5851b71a20e97aed7a6c96e
@@ -1974,8 +1974,8 @@ outline-troubleshooting = 疑難排解
 outline-who-works-for-whom-at = 一家九人烘焙坊的上下隸屬，每人附職稱，從選單畫成組織圖。
 # en: 0c6266451117f0382231513e4c30d38fb976086e
 outline-pdf-sections-and-bullets = PDF：章節與項目符號
-# en: 3c71fd388bfd921496968bc15422a0937a264ebc
-outline-fold-unfold = 摺疊、展開
+# en: 32897da2f696f1ddc73da9ef0575827530a80b1a
+outline-fold-unfold = 摺疊或展開
 # en: 74341e3c271df3c784e595b804b1f90be0f80429
 outline-name-line = 標籤
 
@@ -2112,9 +2112,9 @@ deck-themes-color = 主題的顏色
 # The bar
 # en: 4e9f7a31eef4c69e0aacb643f6856372cd6e3247
 common-present = 播放
-# en: 643c5e94af837cf718906c77e7324d1b5b8cc4ed
-deck-see-sheets-to-print = 查看要列印的紙張
-# en: 078bb433191da44555f4554b976669f8f188abf9
+# en: 3c47e73f6a8bcb018bdbe91d9312e8e1777050f7
+deck-see-sheets-to-print = 列印版面
+# en: ca742a9ecf2f35a59704398ead009f1d8e554a0c
 deck-back-to-pages = 回到頁面
 # en: 442250df38e5e516ff1c2ce97d051b8997c7d976
 deck-headline = 大標題
@@ -2230,10 +2230,10 @@ deck-inside-flap = 內摺頁
 deck-back = 背面
 # en: 3369aa225b34e01144a4c49dd350db04732a2720
 deck-badge-n = 名牌 { $n }
-# en: f5e3e387f05bd310e07849881a33ade59c373ba0
-deck-last-slide-added-for-you = 最後一張投影片，已為你加上：整份簡報的 QR 碼
-# en: 4dc0f35f913f19ae2c1fc6bc2ee54835cf3e2b87
-deck-ends-with-qr-code-of = 結尾附上這份簡報的 QR 碼，讓現場的人可以帶回家。按 QR 按鈕可以關閉。
+# en: 9cc25309d07de0adfb989faaaaa74f7cb5a06e38
+deck-last-slide-added-for-you = 最後一張投影片：這份簡報的 QR 碼
+# en: 03c90c8e6a7e028c2e9caeadc1961fb5c0ad4e57
+deck-ends-with-qr-code-of = 簡報最後附上 QR 碼，讓觀眾可以帶走。QR 按鈕可以關閉這項功能。
 # en: 13c7cb226b093919972f5e423aeb0abae93960cf
 deck-qr-code-of-this-deck = 這份簡報的 QR 碼
 # en: 5d5bc5601280c776405941347bbf7e9c63dc3954
@@ -2272,10 +2272,10 @@ deck-slide-n-of-total = 第 { $n }／{ $total } 張投影片
 common-notes = 備忘稿
 # en: bd0dad7cbf71b13b2e545d8ce477027ffc106b45
 deck-n-hides-them = 按 N 隱藏
-# en: 60eb1cc0c3e7bf9c9b2f070626da64fb304980a4
-deck-take-this-deck-home = 把這份簡報帶回家
-# en: 627ec6260e317ce6d5af92ac3d6e31061b9befa1
-deck-take-this-deck-home-title = 把這份簡報帶回家：{ $title }
+# en: 45c44dc2566819f835fd788e2b7a6c5bee5177c4
+deck-take-this-deck-home = 把這份簡報帶走
+# en: acc1edc431e346786fab17d4f10e195ca72257d6
+deck-take-this-deck-home-title = 把這份簡報帶走：{ $title }
 # en: 7fc2d8c7fd4164039149b5a9f2063ddf7ab9d76a
 deck-scan-code-whole-deck-is = 掃描 QR 碼：整份簡報都在連結裡。
 # en: a0f82f698bc01f5dc90c760db684589e2d8277eb
@@ -2318,14 +2318,14 @@ deck-name-badges-for-meetup-one = 聚會用的名牌，每人一頁，每張紙�
 deck-edit-this-deck = 編輯這份簡報
 # en: d5947c525ed0d53dce794385a2cc1cd6e2459dbd
 deck-new-slide = 新投影片
-# en: 8b9576079143791f608e9188bd3af3109b059712
-deck-presenting-back = 播放中：返回
-# en: 4a6566c770849cfc7968fc4c508d36a865241a96
-deck-presenting-next-line-or-slide = 播放中：下一行或下一張投影片
-# en: 28030fd585f8780188c944b5c309021930e5de0a
-deck-presenting-whole-slide = 播放中：整張投影片
-# en: b97fb9456555822fb18ce45f920b4aad8ac6bfeb
-deck-slide-before-slide-after-on = 上一張投影片、下一張投影片（在側欄）
+# en: 720856fcb53d62f79a364c36d8cd2314121430a6
+deck-presenting-back = 返回（播放中）
+# en: a212c73bb85a53b57609d239c50f170773e07d77
+deck-presenting-next-line-or-slide = 下一行或下一張投影片（播放中）
+# en: e53a09169fa399b79b5b814de5e65669714f9165
+deck-presenting-whole-slide = 整張投影片（播放中）
+# en: 7722768d8b861ddedb1f6400352985ca0cfd4a08
+deck-slide-before-slide-after-on = 上一張或下一張投影片
 
 ## the Calendar app
 
@@ -2344,8 +2344,8 @@ cal-week-later = 延後一週
 cal-weekend-of-sessions-at-set = 週末的場次，各有固定時間，最後一場過了午夜。
 # en: 114574336ac7883aebd0653b3fc5e82f9262dc86
 cal-all-day = 整天
-# en: 6e151d3d8e88589b346af242f26ca028607edcaa
-cal-chart-scrolls-sideways = 圖表，可左右捲動
+# en: cbf28df446643f9968f7fe68968bca51be5cf792
+cal-chart-scrolls-sideways = 圖表（可左右捲動）
 # en: a13d5b9d3da48c8bade3d645e0de9a9bb812c648
 cal-color-for-new-color = 新增項目的顏色：{ $color }
 # en: f6bb0f468a8569c67b3d6826e57e62c5500c3681
@@ -2364,8 +2364,8 @@ cal-choose-task = 選取{ $task }
 cal-day-earlier = 提前一天
 # en: 8d6915ee723c8b3c01f29002cfed7d597d56c2c7
 cal-day-later = 延後一天
-# en: bb5227c5a97e3815cef2b5de296c6f4ff6d4eaef
-cal-dates = 日期…
+# en: 66a755ea0d935aeac763da63deebb69b0eb54ba9
+cal-dates = 編輯日期…
 # en: a2bb9d34b8a1a79665858d354585cf147e0dee4e
 cal-end = 結束
 # en: 89d10cd6c1e1437d6318d6fbb25a40e0aaaddd34
@@ -2392,8 +2392,8 @@ cal-festival-weekend = 音樂節週末
 cal-how-many-times = 重複幾次
 # en: 834c5ef85d6fd469b8be75d8685faf6f9e84eaa7
 cal-icalendar-ics = iCalendar（ICS）
-# en: ccdaa19305a493c44b407953b3d5dcf196bcf042
-cal-its-own-zone = 它自己的時區
+# en: 4bcc328bf3b5b886738db678a175936615491289
+cal-its-own-zone = 行事曆的時區
 # en: 2a177256a408fa4fc557b301041589b798826d70
 cal-last-day = 最後一天
 # en: 58ef633830b461aa76bf4ee90e3b2831ff588508
@@ -2402,7 +2402,7 @@ cal-lessons-birthdays-and-holidays-color = 課程、生日和假期，每個人�
 cal-level = 層級
 # en: 082bc378cd60e17a38d99898b21955299c5b60c8
 cal-month = 月
-# en: f0b847840b1f79dc5663ee39966f60655c368614
+# en: 770d509550265dba792aa81868b856eb67225e41
 cal-my-zone = 我的時區
 # en: 80c3052d33ccdee15ffaaa110c5c39072495fe63
 cal-never = 永不
@@ -2450,23 +2450,23 @@ common-stops = 停止於
 cal-same-dates-as-gantt-chart = 相同的日期，改用甘特圖顯示
 # en: 7ea6dec71584012ab4044cc464dc601741ff2c50
 cal-this-calendar-is-written-in = 這個行事曆以{ $zone }時間書寫。
-# en: 2138f0d946421979b807c4d1fe5bcdbc1374c3fd
-cal-this-calendar-names-no-time = 這個行事曆沒有指定時區：其中的時間按你的時區（{ $zone }）顯示。
+# en: e10c10f818ac8e510b74062cde201eae4e8d8c66
+cal-this-calendar-names-no-time = 此行事曆沒有設定時區，所以時間依你的時區顯示（{ $zone }）。
 # en: 1b4785331db3b08cd8e3cfa4bd36216731a79e54
 cal-this-month = 本月
 # en: eea79afd832854a3b24153b928ee9c62c7457dbe
 cal-time-zone = 時區
 # en: bf5efde33adface92f37d1888e904ab70c9ce272
 cal-times-in-zone = { $zone }時間
-# en: 3edde97331606aabe45ce5b8939e0018ced9087e
-cal-times-or-on = 時間，或在
+# en: 650642b1d6b4b1ecc4ad7d38bbdf110d582c4baf
+cal-times-or-on = 次，或直到
 # en: 69bd4ef9fbd0894a22759c3766b859defbdedbc8
 cal-view = 檢視
 # en: 97211a8888128314d9ca34d1005f08cb83ed5d9c
 cal-what = 內容
 # en: 879e32326c5217968ac8e3a14e4a8a5214957264
 cal-year = 年
-# en: e620a387db0ec96358342b64750b0580249d3943
+# en: 6189fbfe149a418e2f6d1af4dd71b04f6aa0c50e
 cal-color-stands-for = { $color }代表
 # en: 63e5df0eb2fcd351c1d31f23cdf3bf4816e3def5
 cal-every-until-date = { $every }，直到{ $date }
@@ -2554,35 +2554,35 @@ diagram-person = 人物
 diagram-step = 步驟
 # en: 448ab73ba1c21e671e218fb91f2644c834f0c16f
 diagram-set = 集合
-# en: e0681542c880148c2dde0e8fe84d3a5aa9c21296
+# en: ecdda59aea5ee67d7d854c969ccf7f4f4b4a4c54
 diagram-thing = 項目
 # The picture, and the line editor over a thing
-# en: 47c7bb9dd540e2e06c7b404596702b3778aa1798
-diagram-tap-empty-space-for-thing = 點選空白處新增一個項目；在工具列按「連接」，再點兩個項目就能連起來；或把一個拖到另一個上。
+# en: c2e45b49b02d2ac7e1baf25d9d0a2f5c257281ad
+diagram-tap-empty-space-for-thing = 點一下空白處即可新增項目。要連接兩個項目，按「連接」後點一下兩者，或把一個拖到另一個上。
 # en: d4b16450c157188d2cf2e3968faee3709ebeca28
 diagram-tap-here-to-add-first = 點這裡新增第一個{ $thing }。
-# en: 15dd4a157f74190eb319f5623d0df46c173f661c
-diagram-tap-in-lane-to-add = 點選泳道新增步驟；點選步驟輸入文字；拖到另一條泳道，或拖到某個步驟上就排在它後面。
-# en: 09871908140008f25fcd1870035a392e225c44aa
-diagram-tap-thing-to-join-name = 點選要連接{ $name }的項目；點選空白處結束。
-# en: b0449f9fd2bc63ae3f7f9cd6ae8434659ab5ffa0
-diagram-tap-first-thing-to-join = 先點要連接的第一個項目，再點另一個；點選空白處結束。
-# en: 2725e3e2092e4296202f5cd57bdfdceabf48844c
+# en: ccdb7bfa4c6b71a69f1931253fe6f892a2baf89b
+diagram-tap-in-lane-to-add = 在泳道中點一下即可新增步驟。點一下步驟即可編輯。把它拖到另一條泳道，或拖到某個步驟上排在它後面。
+# en: 639d02ad26e5be80f5baf69835b953dfc015178b
+diagram-tap-thing-to-join-name = 點一下要與 { $name } 連接的項目。點一下空白處可取消。
+# en: 5d36f27a0649ac9ae67fb2e66f5be89ebc4719c8
+diagram-tap-first-thing-to-join = 先點一下第一個項目，再點一下另一個。點一下空白處可取消。
+# en: 8953058d46b225514231aca0b8643f4e72547676
 diagram-this-thing = 這個項目
-# en: 2e14e11ce84b1892bcdec7356603f3a4377e464a
-diagram-add-under-it = 在它底下新增
-# en: 87302651ba9b963dd8e390b315590274bc9f54dc
+# en: 53ea183a6bb5ad2942edd6884230b8f425c0eea6
+diagram-add-under-it = 在下方新增
+# en: e9e7205b6f0bd7d9c8f1a1dfe85ef9d54979662f
 diagram-add-one-more = 再新增一個
-# en: 09e488b3a88425c020211d29a2dbb60a0d4fba79
-diagram-add-after-it = 在它後面新增
+# en: be34070c33b5c14155fe70a18891828387dd399d
+diagram-add-after-it = 在後面新增
 # en: 90d24ab49426f19e75a2b6c3fd9196603c2e0852
 diagram-add-step = 新增步驟
 # en: e0d73143de80d17e82de2e017ac156ca3b9c4e01
 diagram-join = 連接
-# en: 6d38d1eb6fb326d6aaccf362ba404ed024b81102
-diagram-make-it-plain-line = 改成普通線條
-# en: d7c2f8db0073a31e8e0ded4d2a13d8076ba44fd6
-diagram-make-it-arrow = 改成箭頭
+# en: e45795fb6033ae4ecc1e2e3610273fce71a317d7
+diagram-make-it-plain-line = 普通線條
+# en: 3a4758c3cc8dac2d76026d0733816741f9b21d43
+diagram-make-it-arrow = 箭頭
 # en: a07496767ed7e5caf20bb803434a1aa088aaa97b
 diagram-what-connection-says = 連線標籤
 # en: 7d531617dd394cef59d3cf58fc32b3bc458f6744
@@ -2692,8 +2692,8 @@ diagram-water-cycle = 水循環
 diagram-three-generations-of-morenos-and = 莫雷諾家的三代，以及一條通往教子的虛線。
 # en: 0e60bdf5cc3dbaa6c2018bd31c760c1e46e79ab1
 diagram-who-can-do-what = 誰能做什麼
-# en: 77612b6030acd5929dba4733671ebce9b6967f72
-diagram-tap-empty-space-for-branch = 點選空白處新增分支；點選想法輸入文字，按 Enter 換下一個；拖到另一個上就放在它底下；「連接」可連結地圖上的兩個想法。
+# en: b27a04f87f9d4657107a8dbd89d32eb1dedb41b7
+diagram-tap-empty-space-for-branch = 點一下空白處即可新增分支。點一下想法即可編輯，按 Enter 到下一個。把一個拖到另一個上即可放到它下面。「連接」可連起地圖上相隔的兩個。
 # en: fd23500d007e121f9530bb8b530f367ed9e00825
 diagram-place-cards = 座位卡
 # en: dd9ef7db14a8bdb18f7a266d6e91711443e71a29
@@ -2704,20 +2704,20 @@ diagram-print-place-cards-card-guest = 列印座位卡：一位賓客一張，�
 diagram-guest = 賓客
 # en: 5734dbf560e03e0dea1a1bd85af5088238d5d0e4
 diagram-new-idea = 新想法
-# en: 5c01f4e98ebcc45730b787667c26e3d0c189d7f6
-diagram-tap-empty-space-for-person = 點選空白處新增人物；點選人物輸入文字，按 Shift+Enter 在名字下方輸入職稱，按 Enter 換下一位；拖到另一位上就放在他底下。
-# en: 16d186d3c0b3d834fa9944fb99e4df830d8d604b
-diagram-tap-empty-space-for-event = 點選空白處新增事件：輸入時間，按 Shift+Enter，再輸入發生了什麼；年份和日期依實際時間隔開；一段期間是一條色帶。
+# en: 32c6bde8aa4d539c3b773b1f4cf66e15aa427faa
+diagram-tap-empty-space-for-person = 點一下空白處即可新增人員。點一下某人即可編輯，Shift+Enter 寫職位，Enter 到下一位。把一個人拖到另一個人上即可放到其下。
+# en: 5f7463cc9e2e8a2e25990127091710a286d9765a
+diagram-tap-empty-space-for-event = 點一下空白處即可新增事件。輸入日期，按 Shift+Enter，再寫發生了什麼。日期依比例排開，時間範圍顯示為色帶。
 # en: b6395077670d276b6a207a6eadb6f5a17c1fa854
 diagram-lanes-name = 泳道的名稱
 # en: 769bb19e615b7f8e2809e5882e2d05a18f57a531
 diagram-when = 時間
-# en: 3df3b95b06bd3d9fba1d2c013d542de8ad0e434a
-diagram-tap-person-to-type-on = 點選人物輸入文字，名字後面加 + 輸入伴侶，按 Shift+Enter 在名字下方輸入在世年份；按 Enter 換下一位；拖到另一位上就放在他底下；「連接」可在兩人之間畫一條虛線。
-# en: c216a378071fd890d4e2a20f3922cd20970280ff
-diagram-tap-empty-space-for-table = 點選空白處新增桌子；點選桌子或人物輸入文字，名字後加逗號再輸入下一位賓客；把人物拖到另一張桌子。
-# en: 1a75ac2a6ce93723b5db1af25c849dbaefb29d06
-diagram-tap-inside-circles-to-add = 點選圓圈內新增項目，後面加逗號再輸入下一個；點選集合的名稱可重新命名；把項目拖到其他圓圈。
+# en: b23ea75ecf303b9756682c84abecebc7a010f2b1
+diagram-tap-person-to-type-on = 點一下某人即可編輯。用 + 加名字新增伴侶，Shift+Enter 寫年份，Enter 到下一位。把一個人拖到另一個人上即可放到其下。「連接」會畫一條虛線。
+# en: 14e56ce6d5f3d8d56d2ce979bf2eb20aaa9dd93d
+diagram-tap-empty-space-for-table = 點一下空白處即可新增桌子。點一下桌子或人即可編輯。逗號開始下一位賓客。把人拖到另一張桌子。
+# en: 7049f105f3a76be9cb8c6d7b74eb3edf60d9a7da
+diagram-tap-inside-circles-to-add = 在圓圈內點一下即可新增項目。逗號開始下一項。點一下集合名稱即可重新命名。把項目拖到其他圓圈之間。
 
 ## the Trip Planner
 
@@ -2734,8 +2734,8 @@ trip-geojson = GeoJSON
 # The bar and the map
 # en: 63746c80a9900aa0b9df832d6fe50b7318a88aab
 trip-a-place-by-name = 依名稱找地點…
-# en: 8779e1ba12906b75111edf21cd1ea027e656470c
-trip-stop-at-middle-of-map = 在地圖中央加一個停靠點
+# en: c86d6e7640906afe6a57236c004f0b1af53b6ee8
+trip-stop-at-middle-of-map = 在地圖中央新增停靠點
 # en: a52fccf0e1e5beca9d5885f1638d5e9a6a2684f9
 trip-measure-in = 測量單位
 # en: 2458f1444290ced8aefad04d5c947b17bf9a81fb
@@ -2744,8 +2744,8 @@ trip-hours-of-driving = 駕駛時數
 trip-miles = 英里
 # en: 87bafdbb82c61625882d74515ef2c7e566177ea5
 trip-kilometers = 公里
-# en: c2912ae51710dd393bab94a15f5691d0034f7e62
-trip-join-stops-in-order = 依序連接各停靠點
+# en: 8e49f86b47ba8e4ac259af7b5428623e7332489c
+trip-join-stops-in-order = 依序連接停靠點
 # en: 7bdcf970899e9519b75f2dc24d1909f670b283cb
 trip-show-whole-route = 顯示整條路線
 # en: fa157c9ab413b3c415d7ada7457694a35c7869a1
@@ -2756,8 +2756,8 @@ trip-map = 地圖
 trip-map-tap-to-add-stop = 地圖：點選以新增停靠點
 # en: 81920dbaea13a635abdf8e473b6a5f7c37a415e7
 trip-maps-pictures-come-from-openstreetmap = 顯示時，地圖的圖片來自 OpenStreetMap。
-# en: 2cbbc3df3b8f862050dc915530000d4709906b6f
-trip-your-location-is-asked-for = 只有為了把地圖置中，才會詢問你的位置，而且絕不會寫到任何地方。
+# en: dd1ac7c6150bf40973c618ac841d01f2281dea20
+trip-your-location-is-asked-for = 你的位置只用來讓地圖置中，從不儲存。
 # en: 6c4827a34debc3c12e8a905f5e8025f0d22802cb
 trip-n-stops = { $n ->
        *[other] { $n } 個停靠點
@@ -2792,8 +2792,8 @@ trip-town-address-museum = 城鎮、地址、博物館
 trip-search = 搜尋
 # en: 1a6a5ba8c23ddb672874a2996abaee1fe933abcd
 trip-searching = 搜尋中…
-# en: 3a721e0216039aa707b02b551860b5397374adc2
-trip-searching-sends-words-you-type = 搜尋時，你輸入的文字會傳送給 OpenStreetMap 的 Nominatim，除此之外不會傳送任何東西。
+# en: 07a4d61733e108a8ffa6e5753e09227b6a1a0f80
+trip-searching-sends-words-you-type = 搜尋只會把你輸入的內容傳給 OpenStreetMap 的 Nominatim。
 # en: 2b36ec5f26fb5c35fccb5edd05776349d238b677
 trip-places-found = 找到的地點
 # en: 6c70807e19d1f88aae7d66770719debbaf4ae89b
@@ -2857,17 +2857,17 @@ trip-wedding-on-lake-como = 科莫湖畔的婚禮
 trip-for-guests-where-wedding-is = 給賓客的資訊：婚禮在哪裡、住哪裡、怎麼去。
 # en: 0fbbb28a6e64acfee9300ecf05016dcf149a5a19
 trip-presenting-trip = 播放旅程
-# en: defe00756135bd21e0d5e6f3da726b28d353e1a2
-trip-presenting-next-stop = 播放中：下一個停靠點
-# en: 6c0c4c64c4cb03ee1c9ef8106668d7d2f3b97727
-trip-presenting-stop-before = 播放中：上一個停靠點
+# en: 24848d1e92a4b831f8fdae547c2fbfdc0d1e441b
+trip-presenting-next-stop = 下一個停靠點（播放中）
+# en: a802f6e93c981ee6dd02df366f0141ca3aa085e0
+trip-presenting-stop-before = 上一個停靠點（播放中）
 # en: 3b14d20764a1fdef5ee74f4defab4ff20b0e7cce
 trip-put-stops-on-calendar-day = 把停靠點放到行事曆上，一天一個
-# en: e4f1afa8488566015d041fb325f7e0897148ccd1
-trip-first-last = 第一個、最後一個
-# en: 054cc02718f75dc29ae702c1d5e635fb93d3f5b2
+# en: 16fa5ad4958332a6bbb1eae6d1a8c6ee6f2c7752
+trip-first-last = 第一個或最後一個
+# en: 0aa341109cff3c75e204930fdeac94f52278bb67
 trip-next-stop = 下一個停靠點
-# en: 0b315b14904297b902188306eb30d496ca34c7e2
+# en: 35bc0362a4899961a0e878990611c13021c1e549
 trip-stop-before = 上一個停靠點
 
 ## shared: the Word Processor's looks, the header's Home, a money column's currency
@@ -2888,7 +2888,7 @@ calc-calculation = 計算
 # The tape is the list of lines worked out, as on a printing calculator. 'Calculator' and 'Numbers' are above.
 # en: ab4ea6f8fe06812a128297560bee7aff1be0c040
 calc-calculator-that-shows-its-work = 會保留算式過程的計算機：名稱、單位與換算，以及 y = f(x) 的圖形。
-# en: 2e1fea55cc9352b6b3de8581a14318b0739a3a6c
+# en: f146f8e93fc9312f6b8003b048cd24d1574469af
 calc-tape-text = 計算紀錄（文字）
 # The bar
 # en: 9a7405ebcedde5be8d095a986ea8794e19ee84e2
@@ -2933,8 +2933,8 @@ calc-simplify = 化簡
 calc-tape = 計算紀錄
 # en: 1acb1c0448ace57b632dc2d56121f45a18e646be
 calc-line-n = 第 { $n } 行
-# en: 35f7cd1164328099cf99c40ab3bc42984fa25cd5
-calc-put-answer-in-line = 把 { $answer } 放進這一行
+# en: 43885eadc7bc789d89e6e81db680818d2dd1b223
+calc-put-answer-in-line = 插入 { $answer }
 # en: a9c16dd084ce3781568419133b0fa0c0f57aa727
 calc-no-answer = 沒有答案
 # en: cf23123f857abeda1d28fc9b85cc7eba8d20f3b1
@@ -2958,10 +2958,10 @@ calc-keys = 按鍵
 calc-backspace = Backspace
 # en: d1149c36a0edcfbeae98bf270da3f543b6c6a866
 calc-clear-line = 清除這一行
-# en: 4716ff8f558cadc13c582104a818ee5abde9853c
-calc-answer-before = 上一個答案
-# en: ff4e4dbf3bb595e38f14ac19214f322e782f121b
-calc-type-sum-or-3-inch = 輸入算式，或像 3 inch to cm 這樣，再按 Enter。a = 12 會用名稱保留答案。
+# en: 097a41c8c7e58b9b655d7b3e31a3673466595450
+calc-answer-before = 上一個結果
+# en: 2ee9e26d39d7113bd8fea80639d6257ab1bdf8cc
+calc-type-sum-or-3-inch = 輸入一個算式，或 3 inch to cm，然後按 Enter。a = 12 會用名稱儲存一個結果。
 # en: 0bef86b24e006bd994db1509b268156522c7dc2c
 calc-type-curve-in-x-such = 輸入 x 的曲線，例如 x^2 或 sin(x)，再按 Enter 畫出來。
 # The templates
@@ -3125,12 +3125,12 @@ qr-code-of-this-document = 這份文件的 QR 碼
 
 ## the keys, the shortcuts and the size of everything (kit/core/keys.ts, kit/ui/zoom.ts)
 
-# en: 3f3b2c1515692707509166286b837928fcc6486d
-keys-normal-size = 正常大小
-# en: 1229caff41e35faa0a828560a25ea095ce975672
-keys-everything-larger = 全部放大
-# en: d1a6c5490cb95093a9fb9116f092d142b8a73ff6
-keys-everything-smaller = 全部縮小
+# en: e5737972ceac5c184d5009e9ee1746c4b3292f26
+keys-normal-size = 重設縮放
+# en: 4fc05f2763ba31e2d3be5f08e7d0bab5d5dcbf78
+keys-everything-larger = 放大
+# en: a4ae4b24a1f5369c2bff61abdbc221170e4b27d8
+keys-everything-smaller = 縮小
 # en: 67312061f24800b7dc75b07101329959c5c1af88
 keys-keep-this-document-on-device = 儲存到此裝置
 # en: 4d5e11a737e63d755f4127a0139f235f3794b6c6
@@ -3145,7 +3145,7 @@ find-not-found = 找不到
 
 ## a menu narrowed by typing (kit/ui/menu.ts)
 
-# en: 6b402540edfb9bf7f30575ed784274bc3b5afed4
-menu-nothing-starts-q = 沒有以「{ $q }」開頭的項目
-# en: 44b790d6bf11cdcff6a339e5f61f3fdabcc14bb3
-menu-starting-q = 以「{ $q }」開頭
+# en: a9c25fead588babdd6b90b343a47f716f722312e
+menu-nothing-starts-q = 沒有符合「{ $q }」的結果
+# en: ddf17f8747a6b36489443d6b09c25b429a1ea675
+menu-starting-q = 符合「{ $q }」的結果
