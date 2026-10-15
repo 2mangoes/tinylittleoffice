@@ -57,7 +57,7 @@ test('the daily brake and the size cap are said in words', async () => {
   expect(shortCost(LONG)).toBeLessThan(200);
   // The 101st of a day.
   for (let i = 0; i < 100; i++) await shorten(LONG, 3600, AT);
-  await expect(shorten(LONG, 3600, AT)).rejects.toThrow('A hundred links a day from one address; try tomorrow.');
+  await expect(shorten(LONG, 3600, AT)).rejects.toThrow('Limit reached: 100 short links a day per address. Try again tomorrow.');
 });
 
 test('how long a short link has left: days over a week are green, within a week amber, the last day red', () => {

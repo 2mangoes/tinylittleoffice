@@ -44,7 +44,7 @@ test('the Word Processor: the locked card, a tap asks for the password, opened i
   expect(document.querySelector('to-dialog.to-locked-unlock')).toBeNull();
   card.querySelector<HTMLButtonElement>('.to-locked-open')!.click();
   await tryPassword(document, 'nope');
-  await until(() => document.querySelector('to-dialog.to-locked-unlock .to-unlock-wrong')?.textContent?.startsWith('That password does not open this link.') === true);
+  await until(() => document.querySelector('to-dialog.to-locked-unlock .to-unlock-wrong')?.textContent?.startsWith('That password doesn’t open this link.') === true);
   await tryPassword(document, 'pw');
   await until(() => !card.querySelector('.to-locked-open'));
   expect(document.querySelector('to-dialog.to-locked-unlock')).toBeNull();
@@ -87,7 +87,7 @@ test('the embed view of a locked link: the locked card and Unlock; the password 
 test('the embed view of a link that cannot be read says so, rather than a blank page', async () => {
   const shell = await mount('#/v1/write.embed/zzzzzz');
   await until(() => !!shell.querySelector('.to-empty'));
-  expect(shell.querySelector('.to-empty')!.textContent).toContain('cannot be read');
+  expect(shell.querySelector('.to-empty')!.textContent).toContain('can’t be read');
   expect(shell.querySelector('.to-embed .to-display-page')).toBeNull();
 });
 

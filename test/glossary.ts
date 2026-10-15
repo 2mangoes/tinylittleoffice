@@ -18,6 +18,11 @@
 /** A term of the product: its English word, the senses of that word that are not the term (keys or patterns), and why. */
 export interface Term {
   term: string;
+  /**
+   * The term's word in each language, where no message is the term alone to align on ("Save" is only ever said with
+   * more): the glossary's own entry, which every short message holding the term must say.
+   */
+  words?: Record<string, string>;
   /** Keys (exactly) or patterns of keys where the word means something else: "Slide" is a transition, "Neon sign" a sign. */
   not?: (string | RegExp)[];
 }
@@ -127,7 +132,7 @@ export interface Drift {
  * One language's drift: for each term, its words (more than one is drift) and the short messages that say it otherwise.
  * `en` and `strings` are id → words, flat (scripts/ftl.ts); a term is looked for in the English.
  */
-export function drift(en: Record<string, string>, strings: Record<string, string>, terms: Term[]): Drift[] {
+export function drift(en: Record<string, string>, strings: Record<string, string>, terms: Term[], lang = ''): Drift[] {
   const out: Drift[] = [];
   for (const t of terms) {
     const found = new Map<string, string[]>();
@@ -145,6 +150,7 @@ export function drift(en: Record<string, string>, strings: Record<string, string
         found.set(value, [...ids, id]);
       } else found.get(like)!.push(id);
     }
+    if (!found.size && t.words?.[lang]) found.set(t.words[lang], []);
     if (!found.size) continue;
     const elsewhere: { id: string; key: string; value: string }[] = [];
     for (const [id, key] of Object.entries(en)) {

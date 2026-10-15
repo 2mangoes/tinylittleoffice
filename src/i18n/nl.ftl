@@ -18,8 +18,8 @@ common-untitled-noun = Zonder naam: { $noun }
 shell-download = Downloaden
 # en: 33ce417454bfd838897deaeee2355e818a5d4160
 shell-loading = Laden…
-# en: 49c3619264bdb73d79b02cf3e4e2a8c4c01920e0
-shell-this-link-holds-something-that = Deze link bevat iets wat niet te lezen is. Misschien is hij afgekapt bij het kopiëren.
+# en: 22456f903bcbdedb06221ade9b87febb47722e40
+shell-this-link-holds-something-that = Deze link is niet te lezen. Misschien is hij bij het kopiëren afgekapt.
 # en: 7dfd19fef00f41e899fb6e2753b71ae40ba59e6d
 shell-n-of-max-link-characters = nog { $n } van { $max } tekens voor de link
 # en: 134d73b30c18c4662e6a42e4a42fbb712bbbb10a
@@ -29,38 +29,38 @@ shell-n-characters-over-link-limit-short-link-holds-max = { $n } tekens boven de
 # en: e7722b7943884e579644a3f5bd2b605afd08a156
 shell-n-characters-over-what-short = { $n } tekens meer dan een korte link bevat
 # Before a document that lives nowhere but its link (Private, changed) is left for another place: the question and its three answers.
-# en: 270fcef56b6aa99fb049f9e94bf8062a08468b53
-shell-this-document-lives-in-its = Dit document leeft in zijn link
-# en: 35181431563f87ee230c27ad2906322b2e179863
-shell-nothing-is-saved-on-this = Er wordt niets op dit apparaat opgeslagen. Kopieer de link om het te bewaren, of bewaar het op dit apparaat; Terug brengt het ook terug.
-# en: 64508992f4c386a816b427ac54bb12a84d5ea444
+# en: f0bba930d38a38cacb48e472c8d4856caa4d8fa8
+shell-this-document-lives-in-its = Dit document is niet opgeslagen
+# en: 43454bfced276b8a1b83dea8a0bef1794a9bde60
+shell-nothing-is-saved-on-this = Het bestaat alleen in zijn link. Kopieer de link om het te bewaren, of sla het op in deze browser. Met Terug kom je er ook weer.
+# en: e0ef0b02c240e569b52e799771dbb4fb07b35818
 shell-copy-link-and-go = Link kopiëren en gaan
-# en: 3f330c650bbe812fc3d63aaafef9c41c466b434d
-shell-turn-on-save-in-browser = Opslaan in browser aanzetten en hier bewaren
-# en: e306ecf9d38e039a8fbdc3a0603e44798d6e8af9
-shell-go-without = Gaan zonder
-# en: a3dd9e2a9b73fb22a15d305fb2e4cc63f03c8738
-shell-save-in-browser-is-on = Opslaan in browser staat aan: deze browser bewaart de documenten die je opent. Zet het uit in het menu.
-# en: 8daf7106c5bd8c8c626a87c5294e823bbe63ebc7
-shell-another-version = Een andere versie
-# en: abd40babb99a3836871422c0527a53f8c830cb60
-shell-kept-on-this-device = Op dit apparaat bewaard
+# en: fdb4eeef33355eb9aed9f11d6ddcdfe0c08a29ea
+shell-turn-on-save-in-browser = Opslaan in browser en gaan
+# en: 634bae7c8177155bc24961f3493f425b66e88c16
+shell-go-without = Gaan zonder opslaan
+# en: ee7a39c93b7018b92bcff5511a92081df68dd3db
+shell-save-in-browser-is-on = Opslaan in browser staat aan. Documenten die je opent, worden hier opgeslagen. Zet het uit in het menu.
+# en: 97c669558589e3b0cf0917cb9caece8844ba65d9
+shell-another-version = Een andere opgeslagen versie
+# en: 87222e82bf5d208052c68fa66c93d131fa18fc67
+shell-kept-on-this-device = Opgeslagen op dit apparaat
 # en: 266695479a949eec44dea9db4e15fba00163f04e
 shell-keyboard-shortcuts = Sneltoetsen
-# en: fefdefdbb13a9f5232ca295a562ac9bfd73856bf
-shell-nothing-to-keep-yet = Nog niets om te bewaren
+# en: bc447a3151935ceff76e781c90fb02c45d25f004
+shell-nothing-to-keep-yet = Nog niets om op te slaan
 # en: 8c00f9130260156b1612126a7cf9a23bb3c553d6
 shell-open-it = Openen
-# en: 8ff3cdd0c2263817118652da96e25641dea6b658
-shell-save-in-browser-is-off = Opslaan in browser staat uit: deze browser bewaart geen documenten. Zet het aan in het menu om ze hier te bewaren.
+# en: ef6e207cc7cea57220ad9a73fc6040b0085bf63e
+shell-save-in-browser-is-off = Opslaan in browser staat uit, dus er wordt niets opgeslagen. Zet het aan in het menu.
 # en: 3939d97295147954c5488340b1f427ebbfa51e69
 shell-skip-to-apps = Naar de apps springen
 # en: 286b3810e407b3cef40b582c8ca4b373a58445bf
 shell-skip-to-document = Naar het document springen
-# en: d5f7c8150bac2e1eb13f0d14542e91f393f3dd5e
-shell-this-device-keeps-another-version = Dit apparaat bewaart een andere versie van “{ $title }”, van { $when }.
-# en: 41145b29c2301a0ab36898a2c8d394ca0c954543
-shell-this-link-was-made-by = Deze link is gemaakt door een nieuwere Piepklein Kantoortje. Laad de pagina opnieuw om hem te krijgen.
+# en: 03d9aea1885137ab8ab4d9c24250515cb44161f0
+shell-this-device-keeps-another-version = Er staat een andere versie van “{ $title }” ({ $when }) op dit apparaat opgeslagen.
+# en: 25c53c58cba7054a3a2ae9e9b575c7888716ae94
+shell-this-link-was-made-by = Deze link vraagt om een nieuwere versie. Laad de pagina opnieuw.
 
 ## the home page
 
@@ -72,11 +72,11 @@ common-templates = Sjablonen
 # The list of an app's documents kept on this device, under its tile: "Write documents"
 # en: c647789831582ba7f4b6aad72ea6f425b98aad6f
 home-app-documents = Documenten van { $app }
-# en: 03d5d801992763494a5afc12c2686567635ee5f7
-common-forget = Vergeten
+# en: f6fdbe48dc54dd86f63097a03bd24094dedd713a
+common-forget = Wissen
 # The button that forgets one kept document: "Forget Launch notes"
-# en: 2c861e55bb5c24d632ed2d44773732b9caa5f6e5
-home-forget-title = { $title } vergeten
+# en: bbc98cac8e5e1a213d5aa04b3618196a6d28bf49
+home-forget-title = { $title } wissen
 # Under an app's documents, the rest folded away: "3 more"
 # en: 84ab0eecfadb6332ee8b1ee5c67852b7df54e66f
 home-n-more = nog { $n }
@@ -191,21 +191,21 @@ leave-you-are-leaving-tiny-little = Je verlaat Piepklein Kantoortje voor
 leave-this-link-writes-email-to = Deze link schrijft een e-mail aan
 # en: 102dce223fdc2f3bbdda71f28108e2a6fdf21710
 leave-this-link-calls = Deze link belt
-# en: b19c139a72086dcd69391619ef14fa086876a096
-leave-not-secure-address-what-you = Geen beveiligd adres: wat je daarheen stuurt kan onderweg worden gelezen.
+# en: afb8b3199e929e5e9f886fdf382599c9d440c71f
+leave-not-secure-address-what-you = Geen beveiligd (HTTPS-)adres. Alles wat je verstuurt, kan onderweg worden meegelezen.
 # en: 003e4888e77a22c782047c7d26d028c5eca46f1c
 leave-whole-address = Het hele adres:
-# en: 9b85614da3512dbe9673a6105d2b46d08ffcfce7
-leave-someone-wrote-this-link-into = Iemand heeft deze link in het document gezet. De woorden die bij een link staan hoeven niet overeen te komen met waar hij heen gaat. Ga alleen als je vertrouwt waar hij naartoe leidt.
+# en: fdb31cf3fb383190c6864d4effd5fd6041b330cb
+leave-someone-wrote-this-link-into = Deze link is toegevoegd door wie het document schreef. De tekst van een link kan verschillen van het adres. Ga alleen verder als je hem vertrouwt.
 # en: 2e0b45f2a456e8db55f08d7b65e87593a3e9a140
 leave-go = Ga
-# en: 45d27855fa56c9d8302ede47fb6f273dc617fb32
-leave-links-of-this-kind-do = Links van dit soort openen hier niet.
+# en: c0f31f8a18b087fc577cbc50e9d37c68cb16c9ae
+leave-links-of-this-kind-do = Dit soort link kan hier niet worden geopend.
 # About's last line, a link to the source of the build the site runs: "Running commit abc1234".
 # en: 0eda2175601e6a4148c1c8b3f85c330bc7fbcabf
 leave-running-commit-commit = Versie { $commit } in gebruik
-# en: f65bd08db90631ce207f564637c9177ddccf0c9a
-leave-this-link-hides-characters-in = Deze link verbergt tekens in zijn adres.
+# en: 45469d1ce86c199fb2984929d6c2e408178f7032
+leave-this-link-hides-characters-in = Het adres van deze link bevat verborgen tekens.
 
 ## the copy kept on the device (status lines under the switch)
 
@@ -223,8 +223,8 @@ share-copy-into-new-document = Kopiëren naar een nieuw document
 share-copy-link = Link kopiëren
 # en: 6e9d1ebfe7124caf277155d2f57b5a6787f30198
 share-copy-of-title = Kopie van { $title }
-# en: de823f98bab4aa409d922bd0b1ab3a038dfed9a8
-share-encrypted-here-service-holds-only = Hier versleuteld: de dienst bewaart alleen versleutelde tekst, en alleen tot die tijd.
+# en: 367f9cb75618d64b28286bdc4a5b8a3f4d7092f0
+share-encrypted-here-service-holds-only = Versleuteld in je browser. Onze server bewaart alleen de versleutelde link en wist die zodra hij verloopt.
 # en: db4fb5a00a9a2172e9d45a362ff1b772884f64b5
 share-expires-in-n-days-date = Verloopt over { $n ->
         [one] { $n } dag
@@ -244,8 +244,8 @@ share-expires-in-n-minutes-date = Verloopt over { $n ->
 share-opens-as-pages-to-read = Opent als pagina’s om te lezen
 # en: 8744400a02796b44742f8f5e5b66216821eab90d
 share-opens-in-editor = Opent in de editor
-# en: 9b5861da44a8c139150b7bc7374fe209c2b3e34c
-common-whoever-opens-this-link-gets = Wie deze link opent, krijgt een eigen kopie. Wijzigingen staan in hun link, niet in de jouwe: vraag ze hun link terug te sturen.
+# en: 7fbbb75c4e853ef0e42da5fe316344fdf1a6143c
+common-whoever-opens-this-link-gets = Wie deze link opent, krijgt een eigen kopie. Hun wijzigingen verschijnen niet in de jouwe. Vraag ze hun link terug te sturen.
 # en: 94b01acececc033463cc7731d659fbcae11c2b47
 share-short-link-that-expires = Korte link die verloopt
 # en: fed3d23d480dd0bfe5a0cfff4d9f3dae7857fbe6
@@ -320,18 +320,18 @@ share-week = Een week
 share-month = Een maand
 # en: 38c22f9dbdb41d2131b4324b7722c45a1f543420
 share-make-short-link = Korte link maken
-# en: 840911d927a3bb76ae1906a51eda0ef4f4758871
-share-making = Maken…
-# en: 2e6ce772cf6bb857f9947fd1ed63fe3d7e886634
-share-hundred-links-day-from-one = Honderd links per dag vanaf één adres; probeer het morgen opnieuw.
-# en: e7e24818a74ce918c6c3ca6338d69fd06310cdea
-share-short-link-cannot-be-changed = Een korte link kan na het maken niet worden gewijzigd of ingetrokken; hij verloopt vanzelf.
+# en: 94d7d8ee473f817fa4b57737e7a01ec3cd13d4d4
+share-making = Bezig met maken…
+# en: 1c6c031b40782efe6b28678fc42d5569cc11e029
+share-hundred-links-day-from-one = Limiet bereikt: 100 korte links per dag per adres. Probeer het morgen opnieuw.
+# en: 0b5140c5b10a2b84301b5ef43056b7d89bd2187c
+share-short-link-cannot-be-changed = Een korte link kan niet worden bewerkt of gewist. Hij verloopt vanzelf.
 # en: 4d9182a72e391841c2817e9943cf2b07adf70220
 share-could-not-shorten-link = De link kon niet worden ingekort.
 # en: 4c0067d6b6bd96cdab1ae363ce342312a93834fd
 share-this-document-is-too-long = Dit document is te lang voor een korte link.
-# en: e0ff8e6b768c99612a5a06d385092732ee52dcc0
-share-up-to-hundred-links-day = Tot honderd links per dag vanaf één adres.
+# en: a4d0b704a911979249dd2629e81a0205fab0aa44
+share-up-to-hundred-links-day = Tot 100 korte links per dag per adres.
 # en: e963907dac5cd5c017869b4c96c18021c9bd058b
 share-remove = Weghalen
 # same
@@ -388,8 +388,8 @@ share-left = Links
 share-uses = Gebruik
 # en: 525f61b6729229b1a8854a9e50bcaa52ea96b131
 share-where = Waar
-# en: e54c097fa776a6b614aea31f6a2db3d3b8415700
-share-where-link-fits = Waar de link past
+# en: cdbfed741d905515df704d9585fc74781801a24d
+share-where-link-fits = Past deze link?
 # en: ddba25b7aa2e43ef1c94a2a8cfb8b839fb723ca2
 share-any-length = elke lengte
 # en: 23fd8ecdbffd82e04305d3cea5eae9cdb85ac9bf
@@ -398,20 +398,20 @@ share-n-over = { $n } te veel
 ## privacy (kit/share/privacy.ts, kit/ui/privacy-dialog.ts): the password, what the device holds
 
 # The Share dialog's head line: "Created 9 Oct 2026, 14:03 · by Paul".
-# en: 753c0c4d74e3315eb4d646ab3642348964e662d5
-privacy-anyone-with-link-will-need = Wie de link heeft, heeft het wachtwoord nodig om te openen. Niemand kan het resetten: kwijt is kwijt, en dan is het document weg.
+# en: 07fd5d289286fa4714b3f407db7875fac90b9952
+privacy-anyone-with-link-will-need = Iedereen met de link heeft het wachtwoord nodig om hem te openen. Het kan niet worden hersteld. Raak je het kwijt, dan is het document weg.
 # en: 8c684290ce0b8a8e6cee79a145e17554064a4760
 privacy-change-password = Wachtwoord wijzigen
 # en: 5be0d11b94b1ba25b2579314f6af69649a900cde
 privacy-created-date = Gemaakt op { $date }
 # en: 39e64aebf907392389952dded5e20ab4836d876a
 privacy-enter-password-to-open-this = Voer het wachtwoord in om dit document te openen.
-# en: 2533c986e139972e942e7e65fd2e1a6a6ee1e8f3
-privacy-forget-everything = Alles vergeten
+# en: 554393a215e479d023a30091a1394f7ca57690e1
+privacy-forget-everything = Alles wissen
 # en: 715727cdd46f1bd0703c9e846fcdd4f369ef8313
 privacy-preview-sent-with-link-to = Een voorbeeld dat met een link naar een netwerk gaat, is een afbeelding van de eerste pagina, de titel en de eerste woorden, een maand leesbaar op onze server. Het document zelf komt daar nooit.
-# en: 94752883801be06c9a6e225a26573bb212998447
-privacy-forget-everything-this-site-keeps = Alles vergeten wat deze site hier bewaart, en voortaan niets meer bewaren? De documenten zelf leven in hun links.
+# en: a584ece11551d9b1a79856743236c51aba50c44f
+privacy-forget-everything-this-site-keeps = Alles wissen wat in deze browser is opgeslagen en stoppen met opslaan? Je documenten bestaan nog steeds in hun links.
 # en: a798882f1c31099bb9500e2da62c0874d8dbed78
 privacy-locked = Vergrendeld
 # en: a543040c9fee74b4b34282797abbf59e9d2c99b7
@@ -428,8 +428,8 @@ privacy-opening = Openen…
 common-password = Wachtwoord
 # en: 114bea5817640fe6b9eeec86b939ec0e9a7b6d76
 privacy-password-removed = Wachtwoord verwijderd
-# en: f30dc3d0115848030675e54c7d2d1f036862d2a7
-privacy-password-set-link-holds-only = Wachtwoord ingesteld: de link bevat alleen versleutelde tekst
+# en: ad1909e464528c140bf96a21ce9adda2464956c0
+privacy-password-set-link-holds-only = Wachtwoord ingesteld. De link is nu versleuteld.
 # en: dce69146962b392ae2b157aec604eface36e90c0
 privacy-password-ellipsis = Wachtwoord…
 # en: 9dfd349ebee555eb8d652be20dad971cae439eca
@@ -437,14 +437,14 @@ privacy-preferences = Voorkeuren
 # same
 # en: cf01481f626d5127ec7732fcbdb29504f08abefd
 privacy-privacy = Privacy
-# en: 21f9dfb5dda17d08b35d4200349b6f33f4f6ad93
-privacy-nothing-saved-in-this-browser = Niets opgeslagen in deze browser. Wat hier staat, geldt alleen voor dit bezoek.
+# en: cefceeebf3cd6d02ddc7aca8c769881a5341e829
+privacy-nothing-saved-in-this-browser = Er is niets opgeslagen in deze browser. De items in de lijst blijven alleen tijdens dit bezoek.
 # en: 626a605da9dbcd888eadcad13deebd3a64011c0a
 privacy-protected-by-password = Beveiligd met een wachtwoord
 # en: acef17d00b9a1b6e1e15e76d27ae53635928a7a6
 privacy-remove-password = Wachtwoord weghalen
-# en: c60513159f73aa6f6a1b2330b5f96b93fc0b4fab
-privacy-sealing = Verzegelen…
+# en: 788f55b0957b15918c6aba279f4f0377a5a1db90
+privacy-sealing = Bezig met versleutelen…
 # en: 94408e41c12e924b82da7ea6e79e5cb69ac9e042
 privacy-set-password = Wachtwoord instellen
 # en: f897cb67f049674308a073079bd85ad0649f8c82
@@ -453,12 +453,12 @@ privacy-short-links = Korte links
 privacy-set-password-in-share = Stel een wachtwoord in, bij Delen
 # en: e546afa59de2ec4b23ca6c4fafbaddac7bab9240
 privacy-short-links-made-here-until = De korte links die hier zijn gemaakt, tot ze verlopen.
-# en: f25e1c269ee979c4c6421db94967fded852e0e16
-privacy-their-names-and-links-for = Hun namen en links, voor de startpagina.
-# en: a32b9cf327471cc4cef625a9a55acf53fc4de3de
-privacy-theme-lifetime-of-short-links = Thema, de levensduur van korte links.
-# en: 5c4a8471c132625d7dd5c7a9e4c9a5da20111307
-privacy-this-document-has-password-link = Dit document heeft een wachtwoord. De link, en elke korte link daarvan, bevat alleen versleutelde tekst.
+# en: b556bf027f9123d39581babef7e15564c24866da
+privacy-their-names-and-links-for = Namen en links, getoond op de startpagina.
+# en: 5300fdca86b5b32fd463f73704e318a2b8fa9961
+privacy-theme-lifetime-of-short-links = Thema en instellingen voor korte links.
+# en: 0c6a2cfe53459957b6899930a2e5cd46b6541cec
+privacy-this-document-has-password-link = Dit document heeft een wachtwoord. De link, en elke korte link daarvan, is versleuteld.
 # en: 0d21e52aba49ee4331213463b46c2ece33ad3cf4
 common-this-document-is-locked = Dit document is vergrendeld
 # en: 1dc606b1828a1e2f5bbbed9ed30fa3a80712e3d8
@@ -467,16 +467,16 @@ privacy-this-document-is-locked-with = Dit document is met een wachtwoord vergre
 privacy-unlock = Ontgrendelen
 # en: 887b0828ec99930408eb32249f1209057b1b234c
 common-unlock-ellipsis = Ontgrendelen…
-# en: 6e36f0d04771b58ab61c808296aee03f962bef41
-privacy-what-this-device-holds = Wat dit apparaat bewaart
+# en: ce3661a255464b1b22e6f395685d0e6f9fa077da
+privacy-what-this-device-holds = Opgeslagen op dit apparaat
 # en: 8485be9e7b3e998c5f1eef5ce87d2aa67726e3cb
 privacy-your-documents = Je documenten
 # en: d21905a9907932f7976e1ca96129c0af871f2715
 privacy-your-browsers-history = De geschiedenis van je browser
-# en: 269988034e9a4b923026474a21d96d4af3695cff
-privacy-every-document-opened-here-in = Elk document dat hier is geopend, volledig, tenzij het een wachtwoord heeft.
-# en: c210c4b744aed5cf6e1817c2417729dfddb43b2f
-privacy-not-ours-to-clear = Niet aan ons om te wissen
+# en: cdff70e571d4ed7aeb1a43cedaf33299bdcd258e
+privacy-every-document-opened-here-in = Elk document dat je opent, volledig, tenzij het een wachtwoord heeft.
+# en: 18b8a03ed6567555edd5005aab5b090984f4b5bd
+privacy-not-ours-to-clear = Dit kunnen wij niet wissen
 # en: 3ca2d1d26637d42b974b313bb8ce231333179a9e
 privacy-by-name = door { $name }
 # en: a9e72cf83916d4381012a19b329292818f845a43
@@ -491,8 +491,8 @@ privacy-n-links = { $n ->
     }
 # en: 2ddd4097832d991c46023732a889beeb8ec4c29d
 privacy-n-set = { $n } ingesteld
-# en: f522e7a8504f4a47ae56d7bfbcc403510037eda3
-privacy-copy-this-and-send-it = Kopieer het en stuur het via een andere weg dan de link. Het kan niet nog eens getoond worden.
+# en: a97ce1edde4ad396d1cff34063087d0bf5d0e1a8
+privacy-copy-this-and-send-it = Kopieer dit wachtwoord en stuur het los van de link. Het wordt niet opnieuw getoond.
 # en: 7640428ae16fc2b673d689ddf6b1ea15eed407d3
 privacy-make-another = Maak een ander
 # en: 9a0081f0b2bff82fac1961a403734134b9a3b170
@@ -515,8 +515,8 @@ locked-document = vergrendeld document
 # A placed document whose link cannot be read (cut short when it was copied).
 # en: 0c45986cb6755e463398a592a861baaf44018954
 locked-this-document-cannot-be-read = Dit document kan niet worden gelezen.
-# en: 5a1e9ab40b695d3286aa033757aeb41cfa066ea3
-locked-that-password-does-not-open = Dat wachtwoord opent deze link niet. Weet je het zeker, dan is de link misschien afgekapt bij het kopiëren: vraag er opnieuw om, of om een korte link.
+# en: a2a127edeb3eed5dc264fc299b034db6493e1636
+locked-that-password-does-not-open = Dat wachtwoord opent deze link niet. Weet je zeker dat het klopt, dan is de link misschien bij het kopiëren afgekapt. Vraag er opnieuw om, of vraag om een korte link.
 
 ## words several apps share
 
@@ -678,8 +678,8 @@ editor-bold-italic-and-links = Vet, cursief en links
 editor-one-of-words-column-holds = Een van de woorden die de kolom bevat, of een nieuw
 # en: e31d972229de381b461860014dd710856361917a
 editor-option = Keuze
-# en: 9120f2a9192f0a751456f7a9ea9b8dd6351c39cc
-editor-this-browser-lets-page-paste = Deze browser laat een pagina alleen plakken via het toetsenbord: gebruik daar ‘Plakken’.
+# en: eb883fb88ed57f39b760fee6ee8f5a04a8cdc7ba
+editor-this-browser-lets-page-paste = Deze browser staat plakken alleen toe via het toetsenbord of het menu Plakken.
 
 ## the example in the kit's own documentation
 
@@ -1224,7 +1224,7 @@ common-row-n = Rij { $n }
 # en: 7d69f57d4baecc18e3e40be8d939c9d2cbc2e2f1
 common-row-n-lowercase = rij { $n }
 # en: 8fcfbe7f09950cb9105bd4280c43ee2524090dcf
-common-row-n-insert-or-delete = Rij { $n }: rijen invoegen of verwijderen
+common-row-n-insert-or-delete = Rij { $n }: rijen invoegen of wissen
 # en: 767a59f7f0079a019b266853b864269f92d10d82
 common-rows-b = rijen { $a }–{ $b }
 # en: b92fe41ac34453cd0368f0fa5d00d1e9b0279c12
@@ -3164,12 +3164,12 @@ compare-n-put-in = { $n ->
 open-opened-name = { $name } geopend
 # en: 90dd520de97cc996176f013da9d5f056fd05ac19
 open-that-file-is-not-words = Dat bestand bevat geen woorden die Piepklein Kantoortje kan lezen.
-# en: 728560affd455ad8c5e533a5332422736feb1e1f
-open-that-file-is-too-large = Dat bestand is te groot om hier een document te zijn.
-# en: 1708824a828efcd52e571a4754c61010bd0757be
-open-keep-them-on-this-device = Op dit apparaat bewaren
-# en: 1d39ec95bbaaddaabf29fa35565930e6e75423db
-open-nothing-is-saved-on-this = Er wordt nu niets op dit apparaat opgeslagen. Bewaar ze hier, of open er een.
+# en: 1d08903947cc83b648f8ad96b1e23466a2dbed11
+open-that-file-is-too-large = Dat bestand is te groot.
+# en: 8f432852569edbf7610713a6554e7a61396327d5
+open-keep-them-on-this-device = Op dit apparaat opslaan
+# en: c4fe6d8b035f6108e8a7e0037667dacf3d6cca25
+open-nothing-is-saved-on-this = Er is niets opgeslagen op dit apparaat. Sla ze hier op, of open er een.
 # en: 0826daee1d616f7de3a2b205eb2360fcaccc77ef
 open-first = Het eerste openen
 # en: 59d36bf6c42ab3ae1481fe62abbc67ffef7a8b22
@@ -3177,8 +3177,8 @@ open-saving-in-this-browser-n = Opslaan in deze browser: { $n ->
         [one] { $n } document bewaard
        *[other] { $n } documenten bewaard
     }
-# en: f76190784e6e3d15f4a90859346a0722ece04c62
-open-that-zip-holds-no-documents = Die zip bevat geen documenten die Piepklein Kantoortje kan lezen.
+# en: 4fc6621d5b53d413dd1fd42cf7e7834ee3ecba5a
+open-that-zip-holds-no-documents = Geen leesbare documenten gevonden in die zip.
 # en: ed5d2e1ab481efa92392820d83922b25c236c730
 open-n-documents-kept = { $n ->
         [one] { $n } document bewaard
@@ -3201,8 +3201,8 @@ keys-normal-size = Normale grootte
 keys-everything-larger = Alles groter
 # en: d1a6c5490cb95093a9fb9116f092d142b8a73ff6
 keys-everything-smaller = Alles kleiner
-# en: 8071b6dbf75196fe4d4789865513507da287cbb4
-keys-keep-this-document-on-device = Dit document op het apparaat bewaren
+# en: 67312061f24800b7dc75b07101329959c5c1af88
+keys-keep-this-document-on-device = Opslaan op dit apparaat
 # en: 4d5e11a737e63d755f4127a0139f235f3794b6c6
 keys-show-these-shortcuts = Deze sneltoetsen tonen
 # en: da05037a43419e15395f52f0ed4dcb0c7f75c1f2

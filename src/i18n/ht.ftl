@@ -17,8 +17,8 @@ common-untitled-noun = { $noun } san tit
 shell-download = Telechaje
 # en: 33ce417454bfd838897deaeee2355e818a5d4160
 shell-loading = Ap chaje…
-# en: 49c3619264bdb73d79b02cf3e4e2a8c4c01920e0
-shell-this-link-holds-something-that = Lyen sa a gen yon bagay ki pa ka li. Li ka koupe lè yo te kopye l.
+# en: 22456f903bcbdedb06221ade9b87febb47722e40
+shell-this-link-holds-something-that = Nou pa ka li lyen sa a. Petèt li te koupe lè yo te kopye l.
 # en: 7dfd19fef00f41e899fb6e2753b71ae40ba59e6d
 shell-n-of-max-link-characters = Rete { $n } sou { $max } karaktè nan lyen an
 # en: 134d73b30c18c4662e6a42e4a42fbb712bbbb10a
@@ -28,38 +28,38 @@ shell-n-characters-over-link-limit-short-link-holds-max = { $n } karaktè depase
 # en: e7722b7943884e579644a3f5bd2b605afd08a156
 shell-n-characters-over-what-short = { $n } karaktè plis pase sa yon lyen kout kenbe
 # Before a document that lives nowhere but its link (Private, changed) is left for another place: the question and its three answers.
-# en: 270fcef56b6aa99fb049f9e94bf8062a08468b53
-shell-this-document-lives-in-its = Dokiman sa a rete nan lyen li a
-# en: 35181431563f87ee230c27ad2906322b2e179863
-shell-nothing-is-saved-on-this = Pa gen anyen ki anrejistre sou aparèy sa a. Kopye lyen an pou kenbe l, oswa kenbe l sou aparèy sa a; bouton Retounen an ap ramene l tou.
-# en: 64508992f4c386a816b427ac54bb12a84d5ea444
-shell-copy-link-and-go = Kopye lyen an epi ale
-# en: 3f330c650bbe812fc3d63aaafef9c41c466b434d
-shell-turn-on-save-in-browser = Limen Anrejistre nan navigatè a epi kenbe l isit la
-# en: e306ecf9d38e039a8fbdc3a0603e44798d6e8af9
-shell-go-without = Ale san sa
-# en: a3dd9e2a9b73fb22a15d305fb2e4cc63f03c8738
-shell-save-in-browser-is-on = Anrejistre nan navigatè a limen: navigatè sa a kenbe dokiman ou louvri yo. Etenn li nan meni an.
-# en: 8daf7106c5bd8c8c626a87c5294e823bbe63ebc7
-shell-another-version = Yon lòt vèsyon
-# en: abd40babb99a3836871422c0527a53f8c830cb60
-shell-kept-on-this-device = Kenbe sou aparèy sa a
+# en: f0bba930d38a38cacb48e472c8d4856caa4d8fa8
+shell-this-document-lives-in-its = Dokiman sa a pa anrejistre
+# en: 43454bfced276b8a1b83dea8a0bef1794a9bde60
+shell-nothing-is-saved-on-this = Li egziste sèlman nan lyen li a. Kopye lyen an pou kenbe l, oswa anrejistre l nan navigatè sa a. Bouton Retounen an ap mennen w tounen sou li tou.
+# en: e0ef0b02c240e569b52e799771dbb4fb07b35818
+shell-copy-link-and-go = Kopye lyen an epi kite
+# en: fdb4eeef33355eb9aed9f11d6ddcdfe0c08a29ea
+shell-turn-on-save-in-browser = Anrejistre nan navigatè a epi kite
+# en: 634bae7c8177155bc24961f3493f425b66e88c16
+shell-go-without = Kite san anrejistre
+# en: ee7a39c93b7018b92bcff5511a92081df68dd3db
+shell-save-in-browser-is-on = Anrejistre nan navigatè a limen. Dokiman ou louvri yo anrejistre isit la. Fèmen l nan meni an.
+# en: 97c669558589e3b0cf0917cb9caece8844ba65d9
+shell-another-version = Yon lòt vèsyon ki anrejistre
+# en: 87222e82bf5d208052c68fa66c93d131fa18fc67
+shell-kept-on-this-device = Anrejistre sou aparèy sa a
 # en: 266695479a949eec44dea9db4e15fba00163f04e
 shell-keyboard-shortcuts = Rakousi klavye
-# en: fefdefdbb13a9f5232ca295a562ac9bfd73856bf
-shell-nothing-to-keep-yet = Poko gen anyen pou kenbe
+# en: bc447a3151935ceff76e781c90fb02c45d25f004
+shell-nothing-to-keep-yet = Poko gen anyen pou anrejistre
 # en: 8c00f9130260156b1612126a7cf9a23bb3c553d6
 shell-open-it = Louvri l
-# en: 8ff3cdd0c2263817118652da96e25641dea6b658
-shell-save-in-browser-is-off = Anrejistre nan navigatè a etenn: navigatè sa a pa kenbe okenn dokiman. Limen l nan meni an pou kenbe yo isit la.
+# en: ef6e207cc7cea57220ad9a73fc6040b0085bf63e
+shell-save-in-browser-is-off = Anrejistre nan navigatè a fèmen, kidonk anyen pa anrejistre. Limen l nan meni an.
 # en: 3939d97295147954c5488340b1f427ebbfa51e69
 shell-skip-to-apps = Ale nan aplikasyon yo
 # en: 286b3810e407b3cef40b582c8ca4b373a58445bf
 shell-skip-to-document = Ale nan dokiman an
-# en: d5f7c8150bac2e1eb13f0d14542e91f393f3dd5e
-shell-this-device-keeps-another-version = Aparèy sa a kenbe yon lòt vèsyon “{ $title }”, soti { $when }.
-# en: 41145b29c2301a0ab36898a2c8d394ca0c954543
-shell-this-link-was-made-by = Yon vèsyon Tiny Little Office ki pi nouvo te fè lyen sa a. Chaje paj la ankò pou jwenn li.
+# en: 03d9aea1885137ab8ab4d9c24250515cb44161f0
+shell-this-device-keeps-another-version = Gen yon lòt vèsyon “{ $title }” ({ $when }) ki anrejistre sou aparèy sa a.
+# en: 25c53c58cba7054a3a2ae9e9b575c7888716ae94
+shell-this-link-was-made-by = Lyen sa a bezwen yon vèsyon ki pi nouvo. Rechaje paj la.
 
 ## the home page
 
@@ -71,11 +71,11 @@ common-templates = Modèl
 # The list of an app's documents kept on this device, under its tile: "Write documents"
 # en: c647789831582ba7f4b6aad72ea6f425b98aad6f
 home-app-documents = Dokiman { $app }
-# en: 03d5d801992763494a5afc12c2686567635ee5f7
-common-forget = Bliye
+# en: f6fdbe48dc54dd86f63097a03bd24094dedd713a
+common-forget = Efase
 # The button that forgets one kept document: "Forget Launch notes"
-# en: 2c861e55bb5c24d632ed2d44773732b9caa5f6e5
-home-forget-title = Bliye { $title }
+# en: bbc98cac8e5e1a213d5aa04b3618196a6d28bf49
+home-forget-title = Efase { $title }
 # Under an app's documents, the rest folded away: "3 more"
 # en: 84ab0eecfadb6332ee8b1ee5c67852b7df54e66f
 home-n-more = { $n } lòt
@@ -191,21 +191,21 @@ leave-you-are-leaving-tiny-little = Ou ap kite Tiny Little Office pou
 leave-this-link-writes-email-to = Lyen sa a ekri yon imèl bay
 # en: 102dce223fdc2f3bbdda71f28108e2a6fdf21710
 leave-this-link-calls = Lyen sa a rele
-# en: b19c139a72086dcd69391619ef14fa086876a096
-leave-not-secure-address-what-you = Se pa yon adrès ki an sekirite: sa w voye la a ka li pandan wout la.
+# en: afb8b3199e929e5e9f886fdf382599c9d440c71f
+leave-not-secure-address-what-you = Se pa yon adrès ki an sekirite (HTTPS). Moun ka li tout sa ou voye pandan l ap pase.
 # en: 003e4888e77a22c782047c7d26d028c5eca46f1c
 leave-whole-address = Adrès la nèt:
-# en: 9b85614da3512dbe9673a6105d2b46d08ffcfce7
-leave-someone-wrote-this-link-into = Yon moun te ekri lyen sa a nan dokiman an. Mo yo montre pou yon lyen pa oblije koresponn ak kote l ale. Ale sèlman si ou fè kote l mennen an konfyans.
+# en: fdb31cf3fb383190c6864d4effd5fd6041b330cb
+leave-someone-wrote-this-link-into = Moun ki ekri dokiman an te mete lyen sa a. Tèks yon lyen ka diferan de adrès li. Kontinye sèlman si ou fè l konfyans.
 # en: 2e0b45f2a456e8db55f08d7b65e87593a3e9a140
 leave-go = Ale
-# en: 45d27855fa56c9d8302ede47fb6f273dc617fb32
-leave-links-of-this-kind-do = Lyen konsa pa louvri isit la.
+# en: c0f31f8a18b087fc577cbc50e9d37c68cb16c9ae
+leave-links-of-this-kind-do = Yo pa ka louvri kalite lyen sa a isit la.
 # About's last line, a link to the source of the build the site runs: "Running commit abc1234".
 # en: 0eda2175601e6a4148c1c8b3f85c330bc7fbcabf
 leave-running-commit-commit = Kòmit k ap mache: { $commit }
-# en: f65bd08db90631ce207f564637c9177ddccf0c9a
-leave-this-link-hides-characters-in = Lyen sa a kache karaktè nan adrès li.
+# en: 45469d1ce86c199fb2984929d6c2e408178f7032
+leave-this-link-hides-characters-in = Adrès lyen sa a gen karaktè ki kache.
 
 ## the copy kept on the device (status lines under the switch)
 
@@ -223,8 +223,8 @@ share-copy-into-new-document = Kopye nan yon nouvo dokiman
 share-copy-link = Kopye lyen
 # en: 6e9d1ebfe7124caf277155d2f57b5a6787f30198
 share-copy-of-title = Kopi { $title }
-# en: de823f98bab4aa409d922bd0b1ab3a038dfed9a8
-share-encrypted-here-service-holds-only = Chifre isit la: sèvis la kenbe sèlman tèks chifre, e sèlman jiskaske lyen an ekspire.
+# en: 367f9cb75618d64b28286bdc4a5b8a3f4d7092f0
+share-encrypted-here-service-holds-only = Chifre nan navigatè w. Sèvè nou an kenbe sèlman lyen chifre a, epi li efase l lè li ekspire.
 # en: db4fb5a00a9a2172e9d45a362ff1b772884f64b5
 share-expires-in-n-days-date = Ekspire nan { $n ->
         [one] { $n } jou
@@ -244,8 +244,8 @@ share-expires-in-n-minutes-date = Ekspire nan { $n ->
 share-opens-as-pages-to-read = Louvri kòm paj pou li
 # en: 8744400a02796b44742f8f5e5b66216821eab90d
 share-opens-in-editor = Louvri nan editè a
-# en: 9b5861da44a8c139150b7bc7374fe209c2b3e34c
-common-whoever-opens-this-link-gets = Nenpòt moun ki louvri lyen sa a jwenn pwòp kopi pa l. Sa yo chanje rete nan lyen pa yo, pa nan pa w: mande yo voye pa yo ba ou.
+# en: 7fbbb75c4e853ef0e42da5fe316344fdf1a6143c
+common-whoever-opens-this-link-gets = Nenpòt moun ki louvri lyen sa a jwenn pwòp kopi pa l. Chanjman yo p ap parèt nan pa w. Mande yo voye lyen pa yo ba ou.
 # en: 94b01acececc033463cc7731d659fbcae11c2b47
 share-short-link-that-expires = Lyen kout ki ekspire
 # en: fed3d23d480dd0bfe5a0cfff4d9f3dae7857fbe6
@@ -320,18 +320,18 @@ share-week = Yon semèn
 share-month = Yon mwa
 # en: 38c22f9dbdb41d2131b4324b7722c45a1f543420
 share-make-short-link = Fè yon lyen kout
-# en: 840911d927a3bb76ae1906a51eda0ef4f4758871
-share-making = Ap fè l…
-# en: 2e6ce772cf6bb857f9947fd1ed63fe3d7e886634
-share-hundred-links-day-from-one = San lyen pa jou soti nan yon sèl adrès; eseye ankò demen.
-# en: e7e24818a74ce918c6c3ca6338d69fd06310cdea
-share-short-link-cannot-be-changed = Yon lyen kout pa ka chanje ni retire yon fwa li fèt; li ekspire pou kont li.
+# en: 94d7d8ee473f817fa4b57737e7a01ec3cd13d4d4
+share-making = N ap kreye…
+# en: 1c6c031b40782efe6b28678fc42d5569cc11e029
+share-hundred-links-day-from-one = Limit la rive: 100 lyen kout pa jou pou chak adrès. Eseye ankò demen.
+# en: 0b5140c5b10a2b84301b5ef43056b7d89bd2187c
+share-short-link-cannot-be-changed = Ou pa ka modifye ni efase yon lyen kout. Li ekspire otomatikman.
 # en: 4d9182a72e391841c2817e9943cf2b07adf70220
 share-could-not-shorten-link = Pa t ka fè lyen an pi kout.
 # en: 4c0067d6b6bd96cdab1ae363ce342312a93834fd
 share-this-document-is-too-long = Dokiman sa a twò long pou yon lyen kout.
-# en: e0ff8e6b768c99612a5a06d385092732ee52dcc0
-share-up-to-hundred-links-day = Jiska san lyen pa jou soti nan yon sèl adrès.
+# en: a4d0b704a911979249dd2629e81a0205fab0aa44
+share-up-to-hundred-links-day = Jiska 100 lyen kout pa jou pou chak adrès.
 # en: e963907dac5cd5c017869b4c96c18021c9bd058b
 share-remove = Retire
 # en: d0517071aa376e797705058bbad4b658954b9930
@@ -387,8 +387,8 @@ share-left = Agòch
 share-uses = Itilizasyon
 # en: 525f61b6729229b1a8854a9e50bcaa52ea96b131
 share-where = Ki kote
-# en: e54c097fa776a6b614aea31f6a2db3d3b8415700
-share-where-link-fits = Kote lyen an antre
+# en: cdbfed741d905515df704d9585fc74781801a24d
+share-where-link-fits = Èske lyen sa a ap antre?
 # en: ddba25b7aa2e43ef1c94a2a8cfb8b839fb723ca2
 share-any-length = nenpòt longè
 # en: 23fd8ecdbffd82e04305d3cea5eae9cdb85ac9bf
@@ -397,20 +397,20 @@ share-n-over = { $n } anplis
 ## privacy (kit/share/privacy.ts, kit/ui/privacy-dialog.ts): the password, what the device holds
 
 # The Share dialog's head line: "Created 9 Oct 2026, 14:03 · by Paul".
-# en: 753c0c4d74e3315eb4d646ab3642348964e662d5
-privacy-anyone-with-link-will-need = Tout moun ki gen lyen an ap bezwen modpas la pou louvri l. Pesonn pa ka reyinisyalize l: si w pèdi l, dokiman an pèdi.
+# en: 07fd5d289286fa4714b3f407db7875fac90b9952
+privacy-anyone-with-link-will-need = Nenpòt moun ki gen lyen an ap bezwen modpas la pou louvri l. Yo pa ka reyinisyalize l. Si w pèdi l, dokiman an pèdi.
 # en: 8c684290ce0b8a8e6cee79a145e17554064a4760
 privacy-change-password = Chanje modpas
 # en: 5be0d11b94b1ba25b2579314f6af69649a900cde
 privacy-created-date = Kreye { $date }
 # en: 39e64aebf907392389952dded5e20ab4836d876a
 privacy-enter-password-to-open-this = Antre modpas la pou louvri dokiman sa a.
-# en: 2533c986e139972e942e7e65fd2e1a6a6ee1e8f3
-privacy-forget-everything = Bliye tout
+# en: 554393a215e479d023a30091a1394f7ca57690e1
+privacy-forget-everything = Efase tout
 # en: 715727cdd46f1bd0703c9e846fcdd4f369ef8313
 privacy-preview-sent-with-link-to = Yon apèsi ou voye ak yon lyen bay yon rezo se yon foto premye paj la, tit la ak premye mo yo, ki rete lizib sou sèvè nou an pandan yon mwa. Dokiman an li menm pa janm ale la.
-# en: 94752883801be06c9a6e225a26573bb212998447
-privacy-forget-everything-this-site-keeps = Bliye tout sa sit sa a kenbe isit la, epi pa kenbe anyen depi kounye a? Dokiman yo menm rete nan lyen yo.
+# en: a584ece11551d9b1a79856743236c51aba50c44f
+privacy-forget-everything-this-site-keeps = Efase tout sa ki anrejistre nan navigatè sa a epi sispann anrejistre? Dokiman ou yo toujou egziste nan lyen yo.
 # en: a798882f1c31099bb9500e2da62c0874d8dbed78
 privacy-locked = Bloke
 # en: a543040c9fee74b4b34282797abbf59e9d2c99b7
@@ -427,22 +427,22 @@ privacy-opening = Ap louvri…
 common-password = Modpas
 # en: 114bea5817640fe6b9eeec86b939ec0e9a7b6d76
 privacy-password-removed = Modpas retire
-# en: f30dc3d0115848030675e54c7d2d1f036862d2a7
-privacy-password-set-link-holds-only = Modpas mete: lyen an kenbe sèlman tèks chifre
+# en: ad1909e464528c140bf96a21ce9adda2464956c0
+privacy-password-set-link-holds-only = Modpas la mete. Lyen an chifre kounye a.
 # en: dce69146962b392ae2b157aec604eface36e90c0
 privacy-password-ellipsis = Modpas…
 # en: 9dfd349ebee555eb8d652be20dad971cae439eca
 privacy-preferences = Preferans
 # en: cf01481f626d5127ec7732fcbdb29504f08abefd
 privacy-privacy = Vi prive
-# en: 21f9dfb5dda17d08b35d4200349b6f33f4f6ad93
+# en: cefceeebf3cd6d02ddc7aca8c769881a5341e829
 privacy-nothing-saved-in-this-browser = Anyen pa anrejistre nan navigatè sa a. Sa ki nan lis la dire pou vizit sa a sèlman.
 # en: 626a605da9dbcd888eadcad13deebd3a64011c0a
 privacy-protected-by-password = Pwoteje ak yon modpas
 # en: acef17d00b9a1b6e1e15e76d27ae53635928a7a6
 privacy-remove-password = Retire modpas
-# en: c60513159f73aa6f6a1b2330b5f96b93fc0b4fab
-privacy-sealing = Ap sele…
+# en: 788f55b0957b15918c6aba279f4f0377a5a1db90
+privacy-sealing = N ap chifre…
 # en: 94408e41c12e924b82da7ea6e79e5cb69ac9e042
 privacy-set-password = Mete modpas
 # en: f897cb67f049674308a073079bd85ad0649f8c82
@@ -451,12 +451,12 @@ privacy-short-links = Lyen kout
 privacy-set-password-in-share = Mete yon modpas, nan Pataje
 # en: e546afa59de2ec4b23ca6c4fafbaddac7bab9240
 privacy-short-links-made-here-until = Lyen kout ki fèt isit la, jiskaske yo ekspire.
-# en: f25e1c269ee979c4c6421db94967fded852e0e16
-privacy-their-names-and-links-for = Non yo ak lyen yo, pou paj akèy la.
-# en: a32b9cf327471cc4cef625a9a55acf53fc4de3de
-privacy-theme-lifetime-of-short-links = Tèm, dire lyen kout yo.
-# en: 5c4a8471c132625d7dd5c7a9e4c9a5da20111307
-privacy-this-document-has-password-link = Dokiman sa a gen yon modpas. Lyen an, ak nenpòt lyen kout yo fè ak li, kenbe sèlman tèks chifre.
+# en: b556bf027f9123d39581babef7e15564c24866da
+privacy-their-names-and-links-for = Non ak lyen, ki parèt sou paj akèy la.
+# en: 5300fdca86b5b32fd463f73704e318a2b8fa9961
+privacy-theme-lifetime-of-short-links = Tèm ak paramèt lyen kout yo.
+# en: 0c6a2cfe53459957b6899930a2e5cd46b6541cec
+privacy-this-document-has-password-link = Dokiman sa a gen yon modpas. Lyen an, ak nenpòt lyen kout yo fè ak li, chifre.
 # en: 0d21e52aba49ee4331213463b46c2ece33ad3cf4
 common-this-document-is-locked = Dokiman sa a bloke
 # en: 1dc606b1828a1e2f5bbbed9ed30fa3a80712e3d8
@@ -465,16 +465,16 @@ privacy-this-document-is-locked-with = Dokiman sa a bloke ak yon modpas.
 privacy-unlock = Debloke
 # en: 887b0828ec99930408eb32249f1209057b1b234c
 common-unlock-ellipsis = Debloke…
-# en: 6e36f0d04771b58ab61c808296aee03f962bef41
-privacy-what-this-device-holds = Sa aparèy sa a kenbe
+# en: ce3661a255464b1b22e6f395685d0e6f9fa077da
+privacy-what-this-device-holds = Estoke sou aparèy sa a
 # en: 8485be9e7b3e998c5f1eef5ce87d2aa67726e3cb
 privacy-your-documents = Dokiman ou yo
 # en: d21905a9907932f7976e1ca96129c0af871f2715
 privacy-your-browsers-history = Istwa navigatè ou a
-# en: 269988034e9a4b923026474a21d96d4af3695cff
-privacy-every-document-opened-here-in = Chak dokiman ki louvri isit la, an antye, sof si li gen yon modpas.
-# en: c210c4b744aed5cf6e1817c2417729dfddb43b2f
-privacy-not-ours-to-clear = Se pa nou ki ka efase l
+# en: cdff70e571d4ed7aeb1a43cedaf33299bdcd258e
+privacy-every-document-opened-here-in = Chak dokiman ou louvri, nèt, sof si li gen yon modpas.
+# en: 18b8a03ed6567555edd5005aab5b090984f4b5bd
+privacy-not-ours-to-clear = Nou pa ka efase sa a
 # en: 3ca2d1d26637d42b974b313bb8ce231333179a9e
 privacy-by-name = pa { $name }
 # en: a9e72cf83916d4381012a19b329292818f845a43
@@ -489,8 +489,8 @@ privacy-n-links = { $n ->
     }
 # en: 2ddd4097832d991c46023732a889beeb8ec4c29d
 privacy-n-set = { $n } mete
-# en: f522e7a8504f4a47ae56d7bfbcc403510037eda3
-privacy-copy-this-and-send-it = Kopye l epi voye l yon lòt fason pase lyen an. Yo pa ka montre l ankò.
+# en: a97ce1edde4ad396d1cff34063087d0bf5d0e1a8
+privacy-copy-this-and-send-it = Kopye modpas sa a epi voye l apa lyen an. Li p ap parèt ankò.
 # en: 7640428ae16fc2b673d689ddf6b1ea15eed407d3
 privacy-make-another = Fè yon lòt
 # en: 9a0081f0b2bff82fac1961a403734134b9a3b170
@@ -513,8 +513,8 @@ locked-document = dokiman bloke
 # A placed document whose link cannot be read (cut short when it was copied).
 # en: 0c45986cb6755e463398a592a861baaf44018954
 locked-this-document-cannot-be-read = Dokiman sa a pa ka li.
-# en: 5a1e9ab40b695d3286aa033757aeb41cfa066ea3
-locked-that-password-does-not-open = Modpas sa a pa louvri lyen sa a. Si ou sèten de li, petèt yo te koupe lyen an lè yo te kopye l: mande l ankò, oswa mande yon lyen kout.
+# en: a2a127edeb3eed5dc264fc299b034db6493e1636
+locked-that-password-does-not-open = Modpas sa a pa louvri lyen sa a. Si w sèten li bon, petèt lyen an te koupe lè yo te kopye l. Mande l ankò, oswa mande yon lyen kout.
 
 ## words several apps share
 
@@ -675,8 +675,8 @@ editor-bold-italic-and-links = Gra, italik ak lyen
 editor-one-of-words-column-holds = Youn nan mo kolòn nan genyen, oswa yon nouvo
 # en: e31d972229de381b461860014dd710856361917a
 editor-option = Opsyon
-# en: 9120f2a9192f0a751456f7a9ea9b8dd6351c39cc
-editor-this-browser-lets-page-paste = Navigatè sa a pèmèt yon paj kole sèlman ak klavye a: sèvi ak Kole li a.
+# en: eb883fb88ed57f39b760fee6ee8f5a04a8cdc7ba
+editor-this-browser-lets-page-paste = Navigatè sa a pèmèt kole sèlman ak klavye a oswa meni Kole a.
 
 ## the example in the kit's own documentation
 
@@ -3132,12 +3132,12 @@ compare-n-put-in = { $n ->
 open-opened-name = { $name } louvri
 # en: 90dd520de97cc996176f013da9d5f056fd05ac19
 open-that-file-is-not-words = Fichye sa a pa gen mo Tiny Little Office ka li.
-# en: 728560affd455ad8c5e533a5332422736feb1e1f
-open-that-file-is-too-large = Fichye sa a twò gwo pou l ta yon dokiman isit la.
-# en: 1708824a828efcd52e571a4754c61010bd0757be
-open-keep-them-on-this-device = Kenbe yo sou aparèy sa a
-# en: 1d39ec95bbaaddaabf29fa35565930e6e75423db
-open-nothing-is-saved-on-this = Pa gen anyen ki anrejistre sou aparèy sa a kounye a. Kenbe yo isit la, oswa louvri youn.
+# en: 1d08903947cc83b648f8ad96b1e23466a2dbed11
+open-that-file-is-too-large = Fichye sa a twò gwo.
+# en: 8f432852569edbf7610713a6554e7a61396327d5
+open-keep-them-on-this-device = Anrejistre yo sou aparèy sa a
+# en: c4fe6d8b035f6108e8a7e0037667dacf3d6cca25
+open-nothing-is-saved-on-this = Pa gen anyen ki anrejistre sou aparèy sa a. Anrejistre yo isit la, oswa louvri youn.
 # en: 0826daee1d616f7de3a2b205eb2360fcaccc77ef
 open-first = Louvri premye a
 # en: 59d36bf6c42ab3ae1481fe62abbc67ffef7a8b22
@@ -3145,8 +3145,8 @@ open-saving-in-this-browser-n = Ap anrejistre nan navigatè sa a: { $n ->
         [one] { $n } dokiman kenbe
        *[other] { $n } dokiman kenbe
     }
-# en: f76190784e6e3d15f4a90859346a0722ece04c62
-open-that-zip-holds-no-documents = Zip sa a pa gen okenn dokiman Tiny Little Office ka li.
+# en: 4fc6621d5b53d413dd1fd42cf7e7834ee3ecba5a
+open-that-zip-holds-no-documents = Nou pa jwenn okenn dokiman ki ka li nan zip sa a.
 # en: ed5d2e1ab481efa92392820d83922b25c236c730
 open-n-documents-kept = { $n ->
         [one] { $n } dokiman kenbe
@@ -3169,8 +3169,8 @@ keys-normal-size = Gwosè nòmal
 keys-everything-larger = Tout bagay pi gwo
 # en: d1a6c5490cb95093a9fb9116f092d142b8a73ff6
 keys-everything-smaller = Tout bagay pi piti
-# en: 8071b6dbf75196fe4d4789865513507da287cbb4
-keys-keep-this-document-on-device = Kenbe dokiman sa a sou aparèy la
+# en: 67312061f24800b7dc75b07101329959c5c1af88
+keys-keep-this-document-on-device = Anrejistre sou aparèy sa a
 # en: 4d5e11a737e63d755f4127a0139f235f3794b6c6
 keys-show-these-shortcuts = Montre rakousi sa yo
 # en: da05037a43419e15395f52f0ed4dcb0c7f75c1f2

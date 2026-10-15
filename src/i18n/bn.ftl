@@ -14,8 +14,8 @@ common-untitled-noun = নামহীন { $noun }
 shell-download = ডাউনলোড
 # en: 33ce417454bfd838897deaeee2355e818a5d4160
 shell-loading = লোড হচ্ছে…
-# en: 49c3619264bdb73d79b02cf3e4e2a8c4c01920e0
-shell-this-link-holds-something-that = এই লিংকে এমন কিছু আছে যা পড়া যাচ্ছে না। কপি করার সময় হয়তো লিংকটি কেটে গেছে।
+# en: 22456f903bcbdedb06221ade9b87febb47722e40
+shell-this-link-holds-something-that = এই লিংকটি পড়া যাচ্ছে না। কপি করার সময় হয়তো এটি কেটে গেছে।
 # en: 7dfd19fef00f41e899fb6e2753b71ae40ba59e6d
 shell-n-of-max-link-characters = লিংকে আর { $n }টি অক্ষর বাকি ({ $max }-এর মধ্যে)
 # en: 134d73b30c18c4662e6a42e4a42fbb712bbbb10a
@@ -24,18 +24,18 @@ shell-n-characters-over-link-limit = লিংকের সীমার চে�
 shell-n-characters-over-link-limit-short-link-holds-max = লিংকের সীমার চেয়ে { $n }টি অক্ষর বেশি; ছোট লিংকে { $max }টি ধরে
 # en: e7722b7943884e579644a3f5bd2b605afd08a156
 shell-n-characters-over-what-short = ছোট লিংকে যা ধরে তার চেয়ে { $n }টি অক্ষর বেশি
-# en: 270fcef56b6aa99fb049f9e94bf8062a08468b53
-shell-this-document-lives-in-its = এই নথি তার লিংকেই থাকে
-# en: 35181431563f87ee230c27ad2906322b2e179863
-shell-nothing-is-saved-on-this = এই ডিভাইসে কিছু সংরক্ষিত নেই। নথিটি রাখতে লিংক কপি করুন, অথবা এই ডিভাইসে রাখুন; “ব্যাক” চাপলেও ফিরে পাবেন।
-# en: 64508992f4c386a816b427ac54bb12a84d5ea444
-shell-copy-link-and-go = লিংক কপি করে যান
-# en: 3f330c650bbe812fc3d63aaafef9c41c466b434d
-shell-turn-on-save-in-browser = “ব্রাউজারে সংরক্ষণ” চালু করে এখানে রাখুন
-# en: e306ecf9d38e039a8fbdc3a0603e44798d6e8af9
-shell-go-without = এমনিই যান
-# en: a3dd9e2a9b73fb22a15d305fb2e4cc63f03c8738
-shell-save-in-browser-is-on = “ব্রাউজারে সংরক্ষণ” চালু আছে: এই ব্রাউজার আপনার খোলা নথিগুলো রাখে। মেনু থেকে এটি বন্ধ করুন।
+# en: f0bba930d38a38cacb48e472c8d4856caa4d8fa8
+shell-this-document-lives-in-its = এই নথিটি সংরক্ষিত নয়
+# en: 43454bfced276b8a1b83dea8a0bef1794a9bde60
+shell-nothing-is-saved-on-this = এটি শুধু এর লিংকেই আছে। রাখতে লিংক কপি করুন, অথবা এই ব্রাউজারে সংরক্ষণ করুন। “ব্যাক” চাপলেও এখানে ফিরে আসবেন।
+# en: e0ef0b02c240e569b52e799771dbb4fb07b35818
+shell-copy-link-and-go = লিংক কপি করে বেরিয়ে যান
+# en: fdb4eeef33355eb9aed9f11d6ddcdfe0c08a29ea
+shell-turn-on-save-in-browser = ব্রাউজারে সংরক্ষণ করে বেরিয়ে যান
+# en: 634bae7c8177155bc24961f3493f425b66e88c16
+shell-go-without = সংরক্ষণ না করে বেরিয়ে যান
+# en: ee7a39c93b7018b92bcff5511a92081df68dd3db
+shell-save-in-browser-is-on = “ব্রাউজারে সংরক্ষণ” চালু আছে। আপনি যে নথি খোলেন তা এখানে সংরক্ষিত হয়। মেনু থেকে বন্ধ করুন।
 
 ## the home page
 
@@ -45,10 +45,10 @@ home-blank = খালি
 common-templates = টেমপ্লেট
 # en: c647789831582ba7f4b6aad72ea6f425b98aad6f
 home-app-documents = { $app } নথি
-# en: 03d5d801992763494a5afc12c2686567635ee5f7
-common-forget = বাদ দিন
-# en: 2c861e55bb5c24d632ed2d44773732b9caa5f6e5
-home-forget-title = “{ $title }” বাদ দিন
+# en: f6fdbe48dc54dd86f63097a03bd24094dedd713a
+common-forget = মুছুন
+# en: bbc98cac8e5e1a213d5aa04b3618196a6d28bf49
+home-forget-title = “{ $title }” মুছুন
 # en: 84ab0eecfadb6332ee8b1ee5c67852b7df54e66f
 home-n-more = আরও { $n }টি
 # en: 7f2352058be05faa9a191d7ac6eb2cf0a15b228f
@@ -142,19 +142,19 @@ leave-you-are-leaving-tiny-little = আপনি Tiny Little Office ছেড়
 leave-this-link-writes-email-to = এই লিংক ইমেইল লিখবে এই ঠিকানায়
 # en: 102dce223fdc2f3bbdda71f28108e2a6fdf21710
 leave-this-link-calls = এই লিংক ফোন করবে
-# en: b19c139a72086dcd69391619ef14fa086876a096
-leave-not-secure-address-what-you = নিরাপদ ঠিকানা নয়: সেখানে যা পাঠাবেন পথে তা পড়ে ফেলা যেতে পারে।
+# en: afb8b3199e929e5e9f886fdf382599c9d440c71f
+leave-not-secure-address-what-you = এটি নিরাপদ (HTTPS) ঠিকানা নয়। আপনি যা পাঠাবেন, পথে কেউ তা পড়তে পারে।
 # en: 003e4888e77a22c782047c7d26d028c5eca46f1c
 leave-whole-address = পুরো ঠিকানা:
-# en: 9b85614da3512dbe9673a6105d2b46d08ffcfce7
-leave-someone-wrote-this-link-into = কেউ এই লিংকটি নথিতে বসিয়েছেন। লিংকের জায়গায় যে শব্দ দেখানো হয় তা আসল গন্তব্যের সঙ্গে না-ও মিলতে পারে। গন্তব্যকে বিশ্বাস করলে তবেই যান।
+# en: fdb31cf3fb383190c6864d4effd5fd6041b330cb
+leave-someone-wrote-this-link-into = যিনি নথিটি লিখেছেন, তিনিই এই লিংক যোগ করেছেন। লিংকের লেখা আর ঠিকানা আলাদা হতে পারে। ভরসা থাকলে তবেই এগোন।
 # en: 2e0b45f2a456e8db55f08d7b65e87593a3e9a140
 leave-go = যান
-# en: 45d27855fa56c9d8302ede47fb6f273dc617fb32
-leave-links-of-this-kind-do = এ ধরনের লিংক এখানে খোলে না।
+# en: c0f31f8a18b087fc577cbc50e9d37c68cb16c9ae
+leave-links-of-this-kind-do = এই ধরনের লিংক এখানে খোলা যায় না।
 # en: 0eda2175601e6a4148c1c8b3f85c330bc7fbcabf
 leave-running-commit-commit = চলছে কমিট { $commit }
-# en: f65bd08db90631ce207f564637c9177ddccf0c9a
+# en: 45469d1ce86c199fb2984929d6c2e408178f7032
 leave-this-link-hides-characters-in = এই লিংকের ঠিকানায় লুকানো অক্ষর আছে।
 
 ## the copy kept on the device (status lines under the switch)
@@ -173,8 +173,8 @@ share-copy-into-new-document = নতুন নথিতে কপি করু�
 share-copy-link = লিংক কপি করুন
 # en: 6e9d1ebfe7124caf277155d2f57b5a6787f30198
 share-copy-of-title = { $title }-এর কপি
-# en: de823f98bab4aa409d922bd0b1ab3a038dfed9a8
-share-encrypted-here-service-holds-only = এখানেই এনক্রিপ্ট করা: সার্ভিসে শুধু এনক্রিপ্ট করা লেখা থাকে, তা-ও শুধু ততদিন।
+# en: 367f9cb75618d64b28286bdc4a5b8a3f4d7092f0
+share-encrypted-here-service-holds-only = আপনার ব্রাউজারেই এনক্রিপ্ট করা হয়। আমাদের সার্ভার শুধু এনক্রিপ্ট করা লিংকটি রাখে, আর মেয়াদ শেষ হলে মুছে ফেলে।
 # en: db4fb5a00a9a2172e9d45a362ff1b772884f64b5
 share-expires-in-n-days-date = { $n ->
         [one] { $n }
@@ -194,8 +194,8 @@ share-expires-in-n-minutes-date = { $n ->
 share-opens-as-pages-to-read = পড়ার পাতা হিসেবে খোলে
 # en: 8744400a02796b44742f8f5e5b66216821eab90d
 share-opens-in-editor = এডিটরে খোলে
-# en: 9b5861da44a8c139150b7bc7374fe209c2b3e34c
-common-whoever-opens-this-link-gets = এই লিংক যিনিই খুলুন, তিনি নিজের একটা কপি পাবেন। তিনি যা বদলাবেন তা থাকবে তাঁর লিংকে, আপনার লিংকে নয়: তাঁকে বলুন তাঁর লিংকটা আপনাকে পাঠিয়ে দিতে।
+# en: 7fbbb75c4e853ef0e42da5fe316344fdf1a6143c
+common-whoever-opens-this-link-gets = যিনিই এই লিংক খুলবেন, তিনি নিজের একটি কপি পাবেন। তাঁর বদলগুলো আপনার কপিতে আসবে না। তাঁকে তাঁর লিংক ফেরত পাঠাতে বলুন।
 # en: 94b01acececc033463cc7731d659fbcae11c2b47
 share-short-link-that-expires = মেয়াদি ছোট লিংক
 # en: fed3d23d480dd0bfe5a0cfff4d9f3dae7857fbe6
@@ -270,18 +270,18 @@ share-week = এক সপ্তাহ পর
 share-month = এক মাস পর
 # en: 38c22f9dbdb41d2131b4324b7722c45a1f543420
 share-make-short-link = ছোট লিংক বানান
-# en: 840911d927a3bb76ae1906a51eda0ef4f4758871
-share-making = বানানো হচ্ছে…
-# en: 2e6ce772cf6bb857f9947fd1ed63fe3d7e886634
-share-hundred-links-day-from-one = একটি ঠিকানা থেকে দিনে একশোটি লিংক; কাল আবার চেষ্টা করুন।
-# en: e7e24818a74ce918c6c3ca6338d69fd06310cdea
-share-short-link-cannot-be-changed = ছোট লিংক একবার বানানো হলে আর বদলানো বা ফিরিয়ে নেওয়া যায় না; মেয়াদ শেষে নিজেই বাতিল হয়।
+# en: 94d7d8ee473f817fa4b57737e7a01ec3cd13d4d4
+share-making = তৈরি হচ্ছে…
+# en: 1c6c031b40782efe6b28678fc42d5569cc11e029
+share-hundred-links-day-from-one = সীমা পূর্ণ: প্রতি ঠিকানা থেকে দিনে ১০০টি ছোট লিংক। আগামীকাল আবার চেষ্টা করুন।
+# en: 0b5140c5b10a2b84301b5ef43056b7d89bd2187c
+share-short-link-cannot-be-changed = ছোট লিংক সম্পাদনা বা মুছে ফেলা যায় না। এর মেয়াদ নিজে থেকেই শেষ হয়।
 # en: 4d9182a72e391841c2817e9943cf2b07adf70220
 share-could-not-shorten-link = লিংক ছোট করা যায়নি।
 # en: 4c0067d6b6bd96cdab1ae363ce342312a93834fd
 share-this-document-is-too-long = ছোট লিংকের জন্য এই নথি অনেক বড়।
-# en: e0ff8e6b768c99612a5a06d385092732ee52dcc0
-share-up-to-hundred-links-day = একটি ঠিকানা থেকে দিনে একশোটি পর্যন্ত লিংক।
+# en: a4d0b704a911979249dd2629e81a0205fab0aa44
+share-up-to-hundred-links-day = প্রতি ঠিকানা থেকে দিনে ১০০টি পর্যন্ত ছোট লিংক।
 # en: e963907dac5cd5c017869b4c96c18021c9bd058b
 share-remove = সরান
 # en: d0517071aa376e797705058bbad4b658954b9930
@@ -333,20 +333,20 @@ share-your-mastodon-server = আপনার Mastodon সার্ভার
 
 ## privacy (kit/share/privacy.ts, kit/ui/privacy-dialog.ts): the password, what the device holds
 
-# en: 753c0c4d74e3315eb4d646ab3642348964e662d5
-privacy-anyone-with-link-will-need = লিংক থাকলেও খুলতে পাসওয়ার্ড লাগবে। কেউ এটি রিসেট করতে পারে না: হারালে নথিটিও হারিয়ে যাবে।
+# en: 07fd5d289286fa4714b3f407db7875fac90b9952
+privacy-anyone-with-link-will-need = লিংক যার কাছে আছে, খুলতে তাঁর পাসওয়ার্ড লাগবে। এটি রিসেট করা যায় না। হারিয়ে ফেললে নথিটিও হারিয়ে যাবে।
 # en: 8c684290ce0b8a8e6cee79a145e17554064a4760
 privacy-change-password = পাসওয়ার্ড বদলান
 # en: 5be0d11b94b1ba25b2579314f6af69649a900cde
 privacy-created-date = তৈরি হয়েছে { $date }
 # en: 39e64aebf907392389952dded5e20ab4836d876a
 privacy-enter-password-to-open-this = এই নথি খুলতে পাসওয়ার্ড লিখুন।
-# en: 2533c986e139972e942e7e65fd2e1a6a6ee1e8f3
-privacy-forget-everything = সব বাদ দিন
+# en: 554393a215e479d023a30091a1394f7ca57690e1
+privacy-forget-everything = সব মুছুন
 # en: 715727cdd46f1bd0703c9e846fcdd4f369ef8313
 privacy-preview-sent-with-link-to = কোনো নেটওয়ার্কে লিংকের সঙ্গে পাঠানো প্রিভিউ হলো প্রথম পাতার ছবি, শিরোনাম আর প্রথম কয়েকটি শব্দ, যা এক মাস আমাদের সার্ভারে পড়া যায়। নথিটি নিজে কখনো সেখানে যায় না।
-# en: 94752883801be06c9a6e225a26573bb212998447
-privacy-forget-everything-this-site-keeps = এই সাইট এখানে যা রেখেছে সব বাদ দিয়ে এখন থেকে কিছুই রাখবেন না? নথিগুলো নিজেদের লিংকেই থাকে।
+# en: a584ece11551d9b1a79856743236c51aba50c44f
+privacy-forget-everything-this-site-keeps = এই ব্রাউজারে সংরক্ষিত সব মুছে ফেলে সংরক্ষণ বন্ধ করবেন? আপনার নথিগুলো তাদের লিংকে থেকেই যাবে।
 # en: a798882f1c31099bb9500e2da62c0874d8dbed78
 privacy-locked = তালা দেওয়া
 # en: a543040c9fee74b4b34282797abbf59e9d2c99b7
@@ -363,22 +363,22 @@ privacy-opening = খোলা হচ্ছে…
 common-password = পাসওয়ার্ড
 # en: 114bea5817640fe6b9eeec86b939ec0e9a7b6d76
 privacy-password-removed = পাসওয়ার্ড সরানো হয়েছে
-# en: f30dc3d0115848030675e54c7d2d1f036862d2a7
-privacy-password-set-link-holds-only = পাসওয়ার্ড দেওয়া হয়েছে: লিংকে শুধু এনক্রিপ্ট করা লেখা থাকে
+# en: ad1909e464528c140bf96a21ce9adda2464956c0
+privacy-password-set-link-holds-only = পাসওয়ার্ড সেট হয়েছে। লিংকটি এখন এনক্রিপ্ট করা।
 # en: dce69146962b392ae2b157aec604eface36e90c0
 privacy-password-ellipsis = পাসওয়ার্ড…
 # en: 9dfd349ebee555eb8d652be20dad971cae439eca
 privacy-preferences = পছন্দ
 # en: cf01481f626d5127ec7732fcbdb29504f08abefd
 privacy-privacy = গোপনীয়তা
-# en: 21f9dfb5dda17d08b35d4200349b6f33f4f6ad93
-privacy-nothing-saved-in-this-browser = এই ব্রাউজারে কিছুই সংরক্ষিত নয়। তালিকায় যা আছে তা শুধু এই ভিজিটের জন্য।
+# en: cefceeebf3cd6d02ddc7aca8c769881a5341e829
+privacy-nothing-saved-in-this-browser = এই ব্রাউজারে কিছুই সংরক্ষিত নেই। তালিকার জিনিসগুলো শুধু এই ভিজিটের জন্য থাকে।
 # en: 626a605da9dbcd888eadcad13deebd3a64011c0a
 privacy-protected-by-password = পাসওয়ার্ড দিয়ে সুরক্ষিত
 # en: acef17d00b9a1b6e1e15e76d27ae53635928a7a6
 privacy-remove-password = পাসওয়ার্ড সরান
-# en: c60513159f73aa6f6a1b2330b5f96b93fc0b4fab
-privacy-sealing = সিল করা হচ্ছে…
+# en: 788f55b0957b15918c6aba279f4f0377a5a1db90
+privacy-sealing = এনক্রিপ্ট হচ্ছে…
 # en: 94408e41c12e924b82da7ea6e79e5cb69ac9e042
 privacy-set-password = পাসওয়ার্ড দিন
 # en: f897cb67f049674308a073079bd85ad0649f8c82
@@ -387,12 +387,12 @@ privacy-short-links = ছোট লিংক
 privacy-set-password-in-share = পাসওয়ার্ড দিন, শেয়ারে
 # en: e546afa59de2ec4b23ca6c4fafbaddac7bab9240
 privacy-short-links-made-here-until = এখানে বানানো ছোট লিংকগুলো, মেয়াদ শেষ হওয়া পর্যন্ত।
-# en: f25e1c269ee979c4c6421db94967fded852e0e16
-privacy-their-names-and-links-for = হোম পাতাের জন্য এগুলোর নাম ও লিংক।
-# en: a32b9cf327471cc4cef625a9a55acf53fc4de3de
-privacy-theme-lifetime-of-short-links = থিম, ছোট লিংকের মেয়াদ।
-# en: 5c4a8471c132625d7dd5c7a9e4c9a5da20111307
-privacy-this-document-has-password-link = এই নথিতে পাসওয়ার্ড আছে। লিংকে এবং এর থেকে বানানো ছোট লিংকে শুধু এনক্রিপ্ট করা লেখা থাকে।
+# en: b556bf027f9123d39581babef7e15564c24866da
+privacy-their-names-and-links-for = নাম ও লিংক, হোম পাতায় দেখানো হয়।
+# en: 5300fdca86b5b32fd463f73704e318a2b8fa9961
+privacy-theme-lifetime-of-short-links = থিম ও ছোট লিংকের সেটিংস।
+# en: 0c6a2cfe53459957b6899930a2e5cd46b6541cec
+privacy-this-document-has-password-link = এই নথিতে পাসওয়ার্ড আছে। লিংকটি, এবং এর থেকে বানানো যেকোনো ছোট লিংক, এনক্রিপ্ট করা।
 # en: 0d21e52aba49ee4331213463b46c2ece33ad3cf4
 common-this-document-is-locked = এই নথিতে তালা দেওয়া
 # en: 1dc606b1828a1e2f5bbbed9ed30fa3a80712e3d8
@@ -401,16 +401,16 @@ privacy-this-document-is-locked-with = এই নথিতে পাসওয়
 privacy-unlock = খুলুন
 # en: 887b0828ec99930408eb32249f1209057b1b234c
 common-unlock-ellipsis = খুলুন…
-# en: 6e36f0d04771b58ab61c808296aee03f962bef41
-privacy-what-this-device-holds = এই ডিভাইসে কী আছে
+# en: ce3661a255464b1b22e6f395685d0e6f9fa077da
+privacy-what-this-device-holds = এই ডিভাইসে যা রাখা আছে
 # en: 8485be9e7b3e998c5f1eef5ce87d2aa67726e3cb
 privacy-your-documents = আপনার নথি
 # en: d21905a9907932f7976e1ca96129c0af871f2715
 privacy-your-browsers-history = আপনার ব্রাউজারের হিস্ট্রি
-# en: 269988034e9a4b923026474a21d96d4af3695cff
-privacy-every-document-opened-here-in = এখানে খোলা প্রতিটি নথি, পুরোটা, যদি না তাতে পাসওয়ার্ড থাকে।
-# en: c210c4b744aed5cf6e1817c2417729dfddb43b2f
-privacy-not-ours-to-clear = এটি মোছা আমাদের হাতে নেই
+# en: cdff70e571d4ed7aeb1a43cedaf33299bdcd258e
+privacy-every-document-opened-here-in = আপনি যে নথিই খোলেন, পুরোটাই, যদি না তাতে পাসওয়ার্ড থাকে।
+# en: 18b8a03ed6567555edd5005aab5b090984f4b5bd
+privacy-not-ours-to-clear = আমরা এটি মুছতে পারি না
 # en: 3ca2d1d26637d42b974b313bb8ce231333179a9e
 privacy-by-name = { $name }-এর
 # en: a9e72cf83916d4381012a19b329292818f845a43
@@ -425,8 +425,8 @@ privacy-n-links = { $n ->
     }টি লিংক
 # en: 2ddd4097832d991c46023732a889beeb8ec4c29d
 privacy-n-set = { $n }টি দেওয়া
-# en: f522e7a8504f4a47ae56d7bfbcc403510037eda3
-privacy-copy-this-and-send-it = এটি কপি করুন আর লিংক ছাড়া অন্য কোনো উপায়ে পাঠান। এটি আর দেখানো যাবে না।
+# en: a97ce1edde4ad396d1cff34063087d0bf5d0e1a8
+privacy-copy-this-and-send-it = এই পাসওয়ার্ড কপি করে লিংক থেকে আলাদাভাবে পাঠান। এটি আর দেখানো হবে না।
 # en: 7640428ae16fc2b673d689ddf6b1ea15eed407d3
 privacy-make-another = আরেকটি বানান
 
@@ -444,8 +444,8 @@ locked-document-locked-with-password = পাসওয়ার্ডের ত�
 locked-document = তালা দেওয়া নথি
 # en: 0c45986cb6755e463398a592a861baaf44018954
 locked-this-document-cannot-be-read = এই নথি পড়া যাচ্ছে না।
-# en: 5a1e9ab40b695d3286aa033757aeb41cfa066ea3
-locked-that-password-does-not-open = এই পাসওয়ার্ডে এই লিংক খোলে না। আপনি নিশ্চিত হলে, হয়তো কপি করার সময় লিংকটি কেটে গেছে: আবার চেয়ে নিন, বা একটি ছোট লিংক চান।
+# en: a2a127edeb3eed5dc264fc299b034db6493e1636
+locked-that-password-does-not-open = এই পাসওয়ার্ডে লিংকটি খোলে না। আপনি নিশ্চিত হলে, কপি করার সময় লিংকটি হয়তো কেটে গেছে। আবার চেয়ে নিন, বা একটি ছোট লিংক চান।
 
 ## words several apps share
 
@@ -480,7 +480,7 @@ common-find-app-doc-template-or = অ্যাপ, নথি, টেমপ্ল
 # en: 5b221e9c2a451799d8f37e2b9874409d5e03ab05
 download-print = প্রিন্ট
 # en: f304fc6dd3e87a37a6c53cb62344c10a789a7ad9
-common-print-or-save-as-pdf = প্রিন্ট করুন, বা PDF হিসেবে সেভ করুন
+common-print-or-save-as-pdf = প্রিন্ট করুন, বা PDF হিসেবে সংরক্ষণ করুন
 # en: 473b3126e859286ef98d231328fa11a3216823a1
 download-picture-png = ছবি (PNG)
 # en: 3ad1b6c4e3dcf07e9ac0c95d5303f7ca4f89e55e
@@ -2855,8 +2855,8 @@ anim-frame-back-frame-on = এক ফ্রেম পেছনে, এক ফ্
 deck-new-slide = নতুন স্লাইড
 # en: 85773bc941e47b21f6cc345b225265e3144489be
 drawer-add-to-home-screen = হোম স্ক্রিনে যোগ করুন
-# en: 8daf7106c5bd8c8c626a87c5294e823bbe63ebc7
-shell-another-version = আরেকটি সংস্করণ
+# en: 97c669558589e3b0cf0917cb9caece8844ba65d9
+shell-another-version = আরেকটি সংরক্ষিত সংস্করণ
 # en: 3f3b2c1515692707509166286b837928fcc6486d
 keys-normal-size = স্বাভাবিক মাপ
 # en: 25d37d0580af5bc389b9332f3640f6d73ef93e48
@@ -2873,10 +2873,10 @@ common-in-this-document = এই নথিতে খুঁজুন
 outline-fold-unfold = ভাঁজ করুন, খুলুন
 # en: 79bd41f9cdc59faf8130a3ce243ae52e11b1af38
 common-indent-or-bring-out-in = তালিকায় ভেতরে বা বাইরে সরান; গ্রিডে পরের ঘর
-# en: 8071b6dbf75196fe4d4789865513507da287cbb4
-keys-keep-this-document-on-device = এই নথি ডিভাইসে রাখুন
-# en: abd40babb99a3836871422c0527a53f8c830cb60
-shell-kept-on-this-device = এই ডিভাইসে রাখা আছে
+# en: 67312061f24800b7dc75b07101329959c5c1af88
+keys-keep-this-document-on-device = এই ডিভাইসে সংরক্ষণ করুন
+# en: 87222e82bf5d208052c68fa66c93d131fa18fc67
+shell-kept-on-this-device = এই ডিভাইসে সংরক্ষিত
 # en: 266695479a949eec44dea9db4e15fba00163f04e
 shell-keyboard-shortcuts = কীবোর্ড শর্টকাট
 # en: 8ae1c34bd37fad49cc5f8e02da648a78e89c3ed8
@@ -2889,8 +2889,8 @@ home-no-document-here-has-those = এখানে কোনো নথিতে �
 find-not-found = পাওয়া যায়নি
 # en: 6b402540edfb9bf7f30575ed784274bc3b5afed4
 menu-nothing-starts-q = “{ $q }” দিয়ে শুরু কিছু নেই
-# en: fefdefdbb13a9f5232ca295a562ac9bfd73856bf
-shell-nothing-to-keep-yet = রাখার মতো কিছু এখনও নেই
+# en: bc447a3151935ceff76e781c90fb02c45d25f004
+shell-nothing-to-keep-yet = সংরক্ষণ করার মতো কিছু এখনও নেই
 # en: 7256d5b09fad0e23fb5730f55a3997b80a4e35fe
 common-nudge-shapes-in-hand = হাতের আকারগুলো সামান্য সরান
 # en: bd3f0aa379bfdd2a10e53da305ea0443a7299029
@@ -2917,8 +2917,8 @@ trip-presenting-stop-before = প্রেজেন্ট: আগের বি�
 diagram-print-place-cards = নামের কার্ড প্রিন্ট করুন
 # en: 030e26916d4c1d1ca0c41b3b447dde54ed891dbd
 diagram-print-place-cards-card-guest = নামের কার্ড প্রিন্ট করুন: অতিথি প্রতি একটি, লেটার শিটে আটটি, কেটে নেওয়ার জন্য
-# en: 8ff3cdd0c2263817118652da96e25641dea6b658
-shell-save-in-browser-is-off = “ব্রাউজারে সংরক্ষণ” বন্ধ: এই ব্রাউজার কোনো নথি রাখে না। এখানে রাখতে মেনু থেকে এটি চালু করুন।
+# en: ef6e207cc7cea57220ad9a73fc6040b0085bf63e
+shell-save-in-browser-is-off = “ব্রাউজারে সংরক্ষণ” বন্ধ, তাই কিছুই সংরক্ষিত হয় না। মেনু থেকে চালু করুন।
 # en: a029b0313f2c7a4c819051865f98357f813460b3
 sheet-put-back-what-cell-held = ঘরে যা ছিল তা ফিরিয়ে দিন
 # en: 2b69414b3787eaa8a38f2f1a9c4a48aff7dd78a5
@@ -2946,8 +2946,8 @@ deck-presenting-whole-slide = প্রেজেন্ট: পুরো স্�
 trip-first-last = প্রথমটি, শেষটি
 # en: 6510e9982155a27498f4332337675f22d4592291
 common-next-or-one-before = পরেরটি বা আগেরটি
-# en: 9120f2a9192f0a751456f7a9ea9b8dd6351c39cc
-editor-this-browser-lets-page-paste = এই ব্রাউজার পাতাকে শুধু কীবোর্ড থেকে পেস্ট করতে দেয়: এর পেস্ট ব্যবহার করুন।
+# en: eb883fb88ed57f39b760fee6ee8f5a04a8cdc7ba
+editor-this-browser-lets-page-paste = এই ব্রাউজারে শুধু কিবোর্ড বা “পেস্ট” মেনু থেকে পেস্ট করা যায়।
 # en: dde10ff34344fa5b1c16c03d39a9cda035469fdd
 drawer-size-of-everything = সবকিছুর মাপ
 # en: 3939d97295147954c5488340b1f427ebbfa51e69
@@ -2966,10 +2966,10 @@ trip-next-stop = পরের বিরতি
 deck-slide-before-slide-after-on = আগের স্লাইড, পরের স্লাইড (পাশের সারিতে)
 # en: 0b315b14904297b902188306eb30d496ca34c7e2
 trip-stop-before = আগের বিরতি
-# en: d5f7c8150bac2e1eb13f0d14542e91f393f3dd5e
-shell-this-device-keeps-another-version = এই ডিভাইসে “{ $title }”-এর আরেকটি সংস্করণ রাখা আছে, { $when } থেকে।
-# en: 41145b29c2301a0ab36898a2c8d394ca0c954543
-shell-this-link-was-made-by = এই লিংক Tiny Little Office-এর নতুন সংস্করণে বানানো। পাতা রিলোড করে নতুনটি নিন।
+# en: 03d9aea1885137ab8ab4d9c24250515cb44161f0
+shell-this-device-keeps-another-version = “{ $title }”-এর একটি ভিন্ন সংস্করণ ({ $when }) এই ডিভাইসে সংরক্ষিত আছে।
+# en: 25c53c58cba7054a3a2ae9e9b575c7888716ae94
+shell-this-link-was-made-by = এই লিংকের জন্য নতুন সংস্করণ দরকার। পাতাটি রিলোড করুন।
 # en: da05037a43419e15395f52f0ed4dcb0c7f75c1f2
 keys-this-page = এই পাতা
 # en: fb2997642419cda8393061543f140d40a9323957
@@ -2982,8 +2982,8 @@ common-too-long-for-qr-code = QR কোডের জন্য অনেক ব�
 share-uses = ব্যবহার
 # en: 525f61b6729229b1a8854a9e50bcaa52ea96b131
 share-where = কোথায়
-# en: e54c097fa776a6b614aea31f6a2db3d3b8415700
-share-where-link-fits = লিংক কোথায় ধরে
+# en: cdbfed741d905515df704d9585fc74781801a24d
+share-where-link-fits = লিংকটি কি আঁটবে?
 # en: ddba25b7aa2e43ef1c94a2a8cfb8b839fb723ca2
 share-any-length = যেকোনো দৈর্ঘ্য
 # en: 4f5fbd7fb6a16b16ebe3c347bf43c9a2455a1560
@@ -3037,10 +3037,10 @@ export-download-ext = .{ $ext } ডাউনলোড করুন
 export-share-ext = .{ $ext } শেয়ার করুন…
 # en: f9b579ae7d7104f25e1800d18a5b3e89343618cb
 export-view-ext = .{ $ext } দেখুন
-# en: 1708824a828efcd52e571a4754c61010bd0757be
-open-keep-them-on-this-device = ডিভাইসে রাখুন
-# en: 1d39ec95bbaaddaabf29fa35565930e6e75423db
-open-nothing-is-saved-on-this = এখন এই ডিভাইসে কিছু সংরক্ষিত নেই। এখানে রাখুন, বা একটি খুলুন।
+# en: 8f432852569edbf7610713a6554e7a61396327d5
+open-keep-them-on-this-device = এগুলো এই ডিভাইসে সংরক্ষণ করুন
+# en: c4fe6d8b035f6108e8a7e0037667dacf3d6cca25
+open-nothing-is-saved-on-this = এই ডিভাইসে কিছু সংরক্ষিত নেই। এগুলো এখানে সংরক্ষণ করুন, বা একটি খুলুন।
 # en: 0826daee1d616f7de3a2b205eb2360fcaccc77ef
 open-first = প্রথমটি খুলুন
 # en: 59d36bf6c42ab3ae1481fe62abbc67ffef7a8b22
@@ -3048,8 +3048,8 @@ open-saving-in-this-browser-n = এই ব্রাউজারে সংরক�
         [one] { $n }
        *[other] { $n }
     }টি নথি রাখা আছে
-# en: f76190784e6e3d15f4a90859346a0722ece04c62
-open-that-zip-holds-no-documents = এই zip-এ Tiny Little Office পড়তে পারে এমন কোনো নথি নেই।
+# en: 4fc6621d5b53d413dd1fd42cf7e7834ee3ecba5a
+open-that-zip-holds-no-documents = ওই zip ফাইলে পড়ার মতো কোনো নথি পাওয়া যায়নি।
 # en: ed5d2e1ab481efa92392820d83922b25c236c730
 open-n-documents-kept = { $n ->
         [one] { $n }
@@ -3103,5 +3103,5 @@ compare-n-put-in = { $n ->
 open-opened-name = { $name } খোলা হয়েছে
 # en: 90dd520de97cc996176f013da9d5f056fd05ac19
 open-that-file-is-not-words = এই ফাইল Tiny Little Office পড়তে পারে এমন লেখা নয়।
-# en: 728560affd455ad8c5e533a5332422736feb1e1f
-open-that-file-is-too-large = এই ফাইল এখানে নথি হওয়ার জন্য অনেক বড়।
+# en: 1d08903947cc83b648f8ad96b1e23466a2dbed11
+open-that-file-is-too-large = ফাইলটি খুব বড়।

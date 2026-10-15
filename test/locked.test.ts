@@ -87,6 +87,6 @@ test('a link cut short by ten characters does not open with the right password, 
   const cut = sealed.slice(0, -10);
   expect(await unseal('pw', sealed)).not.toBeNull();
   expect(await unseal('pw', cut)).toBeNull();
-  expect(notOpened()).toBe('That password does not open this link. If you are sure of it, the link may have been cut short when it was copied: ask for it again, or for a short link.');
+  expect(notOpened()).toBe('That password doesn’t open this link. If you’re sure it’s right, the link may have been cut off when it was copied. Ask for it again, or for a short link.');
   expect(notOpened()).not.toMatch(/^Wrong password/);
 });

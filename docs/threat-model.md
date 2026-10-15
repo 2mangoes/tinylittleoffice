@@ -91,7 +91,7 @@ link, which asks before it opens (above).
 
 **A lost phone with Save in browser on.** Off is the default and writes nothing to the device but two preferences
 that say nothing of a document: the size of everything (`tinyoffice.size`) and the theme (`to-theme`), both
-cleared by Forget everything. Nothing is written to the device for the language, in either state: the link
+cleared by Delete everything. Nothing is written to the device for the language, in either state: the link
 carries it. With Save in browser on, the
 device keeps the preferences, the documents opened there (`src/kit/share/library.ts`),
 the short links made there, and the site's own files for offline (which say nothing of any document). A document under a password is kept as its

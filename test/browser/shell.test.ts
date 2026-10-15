@@ -377,7 +377,7 @@ test('a link at /c/<id> opens its document and the address becomes the app’s p
 test('an unreadable link is said so, not thrown', async () => {
   const shell = await mount('#/v1/write/yNOTREALLY');
   await shell.updateComplete;
-  expect(shell.querySelector('.to-empty')!.textContent).toContain('cannot be read');
+  expect(shell.querySelector('.to-empty')!.textContent).toContain('can’t be read');
   expect(shell.querySelector('.to-empty a')!.getAttribute('href')).toBe('#/v1/write');
 });
 
@@ -590,7 +590,7 @@ test('a Display Link that arrived says once that it is a copy; one made here doe
   const line = (s: ToShell) => s.querySelector<HTMLElement>('.to-copies');
   let display = await mount(`#/v1/write/${encodeDoc(words)}?d`);
   await until(() => !!display.querySelector('.to-display-page svg'));
-  expect(line(display)!.textContent).toContain('Whoever opens this link gets their own copy.');
+  expect(line(display)!.textContent).toContain('Anyone who opens this link gets their own copy.');
   // Under the header, above the pages; a line, not a dialog.
   expect(line(display)!.previousElementSibling!.matches('.to-display-head')).toBe(true);
   expect(line(display)!.closest('dialog')).toBeNull();
@@ -648,7 +648,7 @@ test('the copies line and Share’s sentence follow the language: Haitian Creole
   const remove = vi.spyOn(Storage.prototype, 'removeItem').mockImplementation(() => {});
   await setLanguage('ht');
   try {
-    const ht = 'Nenpòt moun ki louvri lyen sa a jwenn pwòp kopi pa l. Sa yo chanje rete nan lyen pa yo, pa nan pa w: mande yo voye pa yo ba ou.';
+    const ht = 'Nenpòt moun ki louvri lyen sa a jwenn pwòp kopi pa l. Chanjman yo p ap parèt nan pa w. Mande yo voye lyen pa yo ba ou.';
     const display = await mount(`#/v1/write/${encodeDoc('Mo ki rive.\n')}?d`);
     await until(() => !!display.querySelector('.to-display-page svg'));
     expect(display.querySelector('.to-copies p')!.textContent).toBe(ht);

@@ -15,8 +15,8 @@ common-untitled-noun = 제목 없는 { $noun }
 shell-download = 다운로드
 # en: 33ce417454bfd838897deaeee2355e818a5d4160
 shell-loading = 불러오는 중…
-# en: 49c3619264bdb73d79b02cf3e4e2a8c4c01920e0
-shell-this-link-holds-something-that = 이 링크에 읽을 수 없는 내용이 들어 있어요. 복사하다가 중간에 잘렸을 수 있어요.
+# en: 22456f903bcbdedb06221ade9b87febb47722e40
+shell-this-link-holds-something-that = 이 링크를 읽을 수 없어요. 복사할 때 잘렸을 수 있어요.
 # en: 7dfd19fef00f41e899fb6e2753b71ae40ba59e6d
 shell-n-of-max-link-characters = 링크 글자 { $n }/{ $max }자 남음
 # en: 134d73b30c18c4662e6a42e4a42fbb712bbbb10a
@@ -26,38 +26,38 @@ shell-n-characters-over-link-limit-short-link-holds-max = 링크 한도를 { $n 
 # en: e7722b7943884e579644a3f5bd2b605afd08a156
 shell-n-characters-over-what-short = 짧은 링크에 들어가는 양보다 { $n }자 많아요
 # Before a document that lives nowhere but its link (Private, changed) is left for another place: the question and its three answers.
-# en: 270fcef56b6aa99fb049f9e94bf8062a08468b53
-shell-this-document-lives-in-its = 이 문서는 링크 안에만 있어요
-# en: 35181431563f87ee230c27ad2906322b2e179863
-shell-nothing-is-saved-on-this = 이 기기에는 아무것도 저장되어 있지 않아요. 링크를 복사해 두거나 이 기기에 보관하세요. 뒤로 가기를 눌러도 다시 열 수 있어요.
-# en: 64508992f4c386a816b427ac54bb12a84d5ea444
-shell-copy-link-and-go = 링크를 복사하고 이동
-# en: 3f330c650bbe812fc3d63aaafef9c41c466b434d
-shell-turn-on-save-in-browser = 브라우저에 저장을 켜고 여기에 보관
-# en: e306ecf9d38e039a8fbdc3a0603e44798d6e8af9
-shell-go-without = 그냥 이동
-# en: a3dd9e2a9b73fb22a15d305fb2e4cc63f03c8738
-shell-save-in-browser-is-on = 브라우저에 저장이 켜졌어요. 이 브라우저가 연 문서를 남겨요. 끄려면 메뉴에서 끄세요.
-# en: 8daf7106c5bd8c8c626a87c5294e823bbe63ebc7
-shell-another-version = 다른 버전
-# en: abd40babb99a3836871422c0527a53f8c830cb60
-shell-kept-on-this-device = 이 기기에 보관됨
+# en: f0bba930d38a38cacb48e472c8d4856caa4d8fa8
+shell-this-document-lives-in-its = 이 문서는 저장되지 않았어요
+# en: 43454bfced276b8a1b83dea8a0bef1794a9bde60
+shell-nothing-is-saved-on-this = 이 문서는 링크 안에만 있어요. 링크를 복사해 두거나 이 브라우저에 저장하세요. 뒤로 가기를 눌러도 다시 돌아올 수 있어요.
+# en: e0ef0b02c240e569b52e799771dbb4fb07b35818
+shell-copy-link-and-go = 링크 복사하고 나가기
+# en: fdb4eeef33355eb9aed9f11d6ddcdfe0c08a29ea
+shell-turn-on-save-in-browser = 브라우저에 저장하고 나가기
+# en: 634bae7c8177155bc24961f3493f425b66e88c16
+shell-go-without = 저장하지 않고 나가기
+# en: ee7a39c93b7018b92bcff5511a92081df68dd3db
+shell-save-in-browser-is-on = 브라우저에 저장이 켜져 있어요. 여는 문서는 여기에 저장돼요. 메뉴에서 끌 수 있어요.
+# en: 97c669558589e3b0cf0917cb9caece8844ba65d9
+shell-another-version = 저장된 다른 버전
+# en: 87222e82bf5d208052c68fa66c93d131fa18fc67
+shell-kept-on-this-device = 이 기기에 저장됨
 # en: 266695479a949eec44dea9db4e15fba00163f04e
 shell-keyboard-shortcuts = 키보드 단축키
-# en: fefdefdbb13a9f5232ca295a562ac9bfd73856bf
-shell-nothing-to-keep-yet = 아직 보관할 게 없어요
+# en: bc447a3151935ceff76e781c90fb02c45d25f004
+shell-nothing-to-keep-yet = 아직 저장할 게 없어요
 # en: 8c00f9130260156b1612126a7cf9a23bb3c553d6
 shell-open-it = 열기
-# en: 8ff3cdd0c2263817118652da96e25641dea6b658
-shell-save-in-browser-is-off = 브라우저에 저장이 꺼져 있어요. 이 브라우저는 문서를 보관하지 않아요. 여기에 보관하려면 메뉴에서 켜세요.
+# en: ef6e207cc7cea57220ad9a73fc6040b0085bf63e
+shell-save-in-browser-is-off = 브라우저에 저장이 꺼져 있어서 아무것도 저장되지 않아요. 메뉴에서 켜세요.
 # en: 3939d97295147954c5488340b1f427ebbfa51e69
 shell-skip-to-apps = 앱으로 건너뛰기
 # en: 286b3810e407b3cef40b582c8ca4b373a58445bf
 shell-skip-to-document = 문서로 건너뛰기
-# en: d5f7c8150bac2e1eb13f0d14542e91f393f3dd5e
-shell-this-device-keeps-another-version = 이 기기에 { $when }에 보관한 “{ $title }”의 다른 버전이 있어요.
-# en: 41145b29c2301a0ab36898a2c8d394ca0c954543
-shell-this-link-was-made-by = 이 링크는 더 새로운 Tiny Little Office에서 만들었어요. 페이지를 새로고침해서 업데이트하세요.
+# en: 03d9aea1885137ab8ab4d9c24250515cb44161f0
+shell-this-device-keeps-another-version = “{ $title }”의 다른 버전({ $when })이 이 기기에 저장되어 있어요.
+# en: 25c53c58cba7054a3a2ae9e9b575c7888716ae94
+shell-this-link-was-made-by = 이 링크는 새 버전이 필요해요. 페이지를 새로고침하세요.
 
 ## the home page
 
@@ -69,11 +69,11 @@ common-templates = 템플릿
 # The list of an app's documents kept on this device, under its tile: "Write documents"
 # en: c647789831582ba7f4b6aad72ea6f425b98aad6f
 home-app-documents = { $app } 문서
-# en: 03d5d801992763494a5afc12c2686567635ee5f7
-common-forget = 지우기
+# en: f6fdbe48dc54dd86f63097a03bd24094dedd713a
+common-forget = 삭제
 # The button that forgets one kept document: "Forget Launch notes"
-# en: 2c861e55bb5c24d632ed2d44773732b9caa5f6e5
-home-forget-title = { $title } 지우기
+# en: bbc98cac8e5e1a213d5aa04b3618196a6d28bf49
+home-forget-title = { $title } 삭제
 # Under an app's documents, the rest folded away: "3 more"
 # en: 84ab0eecfadb6332ee8b1ee5c67852b7df54e66f
 home-n-more = { $n }개 더
@@ -187,21 +187,21 @@ leave-you-are-leaving-tiny-little = Tiny Little Office를 떠나 이동할 곳
 leave-this-link-writes-email-to = 이 링크는 이메일을 써요. 받는 사람
 # en: 102dce223fdc2f3bbdda71f28108e2a6fdf21710
 leave-this-link-calls = 이 링크는 전화를 걸어요
-# en: b19c139a72086dcd69391619ef14fa086876a096
-leave-not-secure-address-what-you = 보안 주소가 아니에요. 보낸 내용을 중간에 읽을 수 있어요.
+# en: afb8b3199e929e5e9f886fdf382599c9d440c71f
+leave-not-secure-address-what-you = 안전한(HTTPS) 주소가 아니에요. 보내는 내용이 중간에 읽힐 수 있어요.
 # en: 003e4888e77a22c782047c7d26d028c5eca46f1c
 leave-whole-address = 전체 주소:
-# en: 9b85614da3512dbe9673a6105d2b46d08ffcfce7
-leave-someone-wrote-this-link-into = 누군가 이 링크를 문서에 넣었어요. 링크로 보이는 글과 실제 가는 곳이 다를 수 있어요. 가는 곳을 믿을 수 있을 때만 이동하세요.
+# en: fdb31cf3fb383190c6864d4effd5fd6041b330cb
+leave-someone-wrote-this-link-into = 이 링크는 문서를 쓴 사람이 넣은 거예요. 링크 글자와 실제 주소는 다를 수 있어요. 믿을 수 있을 때만 계속하세요.
 # en: 2e0b45f2a456e8db55f08d7b65e87593a3e9a140
 leave-go = 이동
-# en: 45d27855fa56c9d8302ede47fb6f273dc617fb32
-leave-links-of-this-kind-do = 이런 링크는 여기서 열리지 않아요.
+# en: c0f31f8a18b087fc577cbc50e9d37c68cb16c9ae
+leave-links-of-this-kind-do = 이런 종류의 링크는 여기서 열 수 없어요.
 # About's last line, a link to the source of the build the site runs: "Running commit abc1234".
 # en: 0eda2175601e6a4148c1c8b3f85c330bc7fbcabf
 leave-running-commit-commit = 실행 중인 커밋 { $commit }
-# en: f65bd08db90631ce207f564637c9177ddccf0c9a
-leave-this-link-hides-characters-in = 이 링크는 주소 안에 문자를 숨기고 있어요.
+# en: 45469d1ce86c199fb2984929d6c2e408178f7032
+leave-this-link-hides-characters-in = 이 링크의 주소에 숨겨진 문자가 있어요.
 
 ## the copy kept on the device (status lines under the switch)
 
@@ -219,8 +219,8 @@ share-copy-into-new-document = 새 문서로 복사
 share-copy-link = 링크 복사
 # en: 6e9d1ebfe7124caf277155d2f57b5a6787f30198
 share-copy-of-title = { $title } 사본
-# en: de823f98bab4aa409d922bd0b1ab3a038dfed9a8
-share-encrypted-here-service-holds-only = 여기서 암호화돼요. 서비스에는 암호문만, 그것도 만료될 때까지만 있어요.
+# en: 367f9cb75618d64b28286bdc4a5b8a3f4d7092f0
+share-encrypted-here-service-holds-only = 브라우저에서 암호화돼요. 서버에는 암호화된 링크만 저장되고, 만료되면 삭제돼요.
 # en: db4fb5a00a9a2172e9d45a362ff1b772884f64b5
 share-expires-in-n-days-date = { $n }일 후 만료 ({ $date })
 # en: ae9d408cb75f0f6745c4a64cb802e6442cc299f4
@@ -231,8 +231,8 @@ share-expires-in-n-minutes-date = { $n }분 후 만료 ({ $date })
 share-opens-as-pages-to-read = 읽는 페이지로 열려요
 # en: 8744400a02796b44742f8f5e5b66216821eab90d
 share-opens-in-editor = 편집기로 열려요
-# en: 9b5861da44a8c139150b7bc7374fe209c2b3e34c
-common-whoever-opens-this-link-gets = 이 링크를 여는 사람은 저마다 자기 사본을 받아요. 그 사람이 고친 내용은 내 링크가 아니라 그 사람 링크에 남아요. 고친 걸 보려면 링크를 다시 보내 달라고 하세요.
+# en: 7fbbb75c4e853ef0e42da5fe316344fdf1a6143c
+common-whoever-opens-this-link-gets = 이 링크를 여는 사람은 저마다 자기 사본을 받아요. 그 사람의 수정은 내 사본에 나타나지 않아요. 링크를 다시 보내 달라고 하세요.
 # en: 94b01acececc033463cc7731d659fbcae11c2b47
 share-short-link-that-expires = 만료되는 짧은 링크
 # en: fed3d23d480dd0bfe5a0cfff4d9f3dae7857fbe6
@@ -295,18 +295,18 @@ share-week = 1주일
 share-month = 1개월
 # en: 38c22f9dbdb41d2131b4324b7722c45a1f543420
 share-make-short-link = 짧은 링크 만들기
-# en: 840911d927a3bb76ae1906a51eda0ef4f4758871
+# en: 94d7d8ee473f817fa4b57737e7a01ec3cd13d4d4
 share-making = 만드는 중…
-# en: 2e6ce772cf6bb857f9947fd1ed63fe3d7e886634
-share-hundred-links-day-from-one = 한 주소에서 하루에 링크 100개까지예요. 내일 다시 해 보세요.
-# en: e7e24818a74ce918c6c3ca6338d69fd06310cdea
-share-short-link-cannot-be-changed = 짧은 링크는 만든 뒤에는 바꾸거나 취소할 수 없어요. 기한이 되면 저절로 만료돼요.
+# en: 1c6c031b40782efe6b28678fc42d5569cc11e029
+share-hundred-links-day-from-one = 한도에 도달했어요. 주소 하나당 하루에 짧은 링크 100개까지예요. 내일 다시 시도하세요.
+# en: 0b5140c5b10a2b84301b5ef43056b7d89bd2187c
+share-short-link-cannot-be-changed = 짧은 링크는 수정하거나 삭제할 수 없어요. 자동으로 만료돼요.
 # en: 4d9182a72e391841c2817e9943cf2b07adf70220
 share-could-not-shorten-link = 링크를 줄이지 못했어요.
 # en: 4c0067d6b6bd96cdab1ae363ce342312a93834fd
 share-this-document-is-too-long = 이 문서는 짧은 링크로 만들기에는 너무 길어요.
-# en: e0ff8e6b768c99612a5a06d385092732ee52dcc0
-share-up-to-hundred-links-day = 한 주소에서 하루에 링크 100개까지 만들 수 있어요.
+# en: a4d0b704a911979249dd2629e81a0205fab0aa44
+share-up-to-hundred-links-day = 주소 하나당 하루에 짧은 링크 100개까지.
 # en: e963907dac5cd5c017869b4c96c18021c9bd058b
 share-remove = 제거
 # en: d0517071aa376e797705058bbad4b658954b9930
@@ -362,8 +362,8 @@ share-left = 왼쪽
 share-uses = 쓰는 곳
 # en: 525f61b6729229b1a8854a9e50bcaa52ea96b131
 share-where = 위치
-# en: e54c097fa776a6b614aea31f6a2db3d3b8415700
-share-where-link-fits = 링크를 쓸 수 있는 곳
+# en: cdbfed741d905515df704d9585fc74781801a24d
+share-where-link-fits = 이 링크가 들어갈까요?
 # en: ddba25b7aa2e43ef1c94a2a8cfb8b839fb723ca2
 share-any-length = 길이 제한 없음
 # en: 23fd8ecdbffd82e04305d3cea5eae9cdb85ac9bf
@@ -372,20 +372,20 @@ share-n-over = { $n } 초과
 ## privacy (kit/share/privacy.ts, kit/ui/privacy-dialog.ts): the password, what the device holds
 
 # The Share dialog's head line: "Created 9 Oct 2026, 14:03 · by Paul".
-# en: 753c0c4d74e3315eb4d646ab3642348964e662d5
-privacy-anyone-with-link-will-need = 링크를 가진 사람은 열 때 비밀번호가 필요해요. 아무도 재설정할 수 없으니 잃어버리면 문서도 사라져요.
+# en: 07fd5d289286fa4714b3f407db7875fac90b9952
+privacy-anyone-with-link-will-need = 링크가 있는 사람은 누구든 열려면 비밀번호가 필요해요. 비밀번호는 재설정할 수 없어요. 잃어버리면 문서도 사라져요.
 # en: 8c684290ce0b8a8e6cee79a145e17554064a4760
 privacy-change-password = 비밀번호 변경
 # en: 5be0d11b94b1ba25b2579314f6af69649a900cde
 privacy-created-date = { $date } 만듦
 # en: 39e64aebf907392389952dded5e20ab4836d876a
 privacy-enter-password-to-open-this = 이 문서를 열려면 비밀번호를 입력하세요.
-# en: 2533c986e139972e942e7e65fd2e1a6a6ee1e8f3
-privacy-forget-everything = 모두 지우기
+# en: 554393a215e479d023a30091a1394f7ca57690e1
+privacy-forget-everything = 모두 삭제
 # en: 715727cdd46f1bd0703c9e846fcdd4f369ef8313
 privacy-preview-sent-with-link-to = 링크와 함께 소셜 네트워크로 보내는 미리보기는 첫 페이지 그림, 제목, 첫 단어들이며, 한 달 동안 서버에서 읽을 수 있어요. 문서 자체는 절대 서버로 가지 않아요.
-# en: 94752883801be06c9a6e225a26573bb212998447
-privacy-forget-everything-this-site-keeps = 이 사이트가 여기에 둔 모든 것을 지우고, 지금부터 아무것도 보관하지 않을까요? 문서 자체는 각 링크 안에 있어요.
+# en: a584ece11551d9b1a79856743236c51aba50c44f
+privacy-forget-everything-this-site-keeps = 이 브라우저에 저장된 모든 것을 삭제하고 저장을 멈출까요? 문서는 각자의 링크 안에 그대로 있어요.
 # en: a798882f1c31099bb9500e2da62c0874d8dbed78
 privacy-locked = 잠김
 # en: a543040c9fee74b4b34282797abbf59e9d2c99b7
@@ -402,22 +402,22 @@ privacy-opening = 여는 중…
 common-password = 비밀번호
 # en: 114bea5817640fe6b9eeec86b939ec0e9a7b6d76
 privacy-password-removed = 비밀번호를 없앴어요
-# en: f30dc3d0115848030675e54c7d2d1f036862d2a7
-privacy-password-set-link-holds-only = 비밀번호를 설정했어요. 링크에는 암호문만 있어요
+# en: ad1909e464528c140bf96a21ce9adda2464956c0
+privacy-password-set-link-holds-only = 비밀번호를 설정했어요. 이제 링크가 암호화됐어요.
 # en: dce69146962b392ae2b157aec604eface36e90c0
 privacy-password-ellipsis = 비밀번호…
 # en: 9dfd349ebee555eb8d652be20dad971cae439eca
 privacy-preferences = 설정
 # en: cf01481f626d5127ec7732fcbdb29504f08abefd
 privacy-privacy = 개인정보
-# en: 21f9dfb5dda17d08b35d4200349b6f33f4f6ad93
-privacy-nothing-saved-in-this-browser = 이 브라우저에 저장 안 함. 목록은 이번 방문 동안만 남아요.
+# en: cefceeebf3cd6d02ddc7aca8c769881a5341e829
+privacy-nothing-saved-in-this-browser = 이 브라우저에는 아무것도 저장되어 있지 않아요. 목록의 항목은 이번 방문 동안만 남아요.
 # en: 626a605da9dbcd888eadcad13deebd3a64011c0a
 privacy-protected-by-password = 비밀번호로 보호됨
 # en: acef17d00b9a1b6e1e15e76d27ae53635928a7a6
 privacy-remove-password = 비밀번호 없애기
-# en: c60513159f73aa6f6a1b2330b5f96b93fc0b4fab
-privacy-sealing = 봉인하는 중…
+# en: 788f55b0957b15918c6aba279f4f0377a5a1db90
+privacy-sealing = 암호화하는 중…
 # en: 94408e41c12e924b82da7ea6e79e5cb69ac9e042
 privacy-set-password = 비밀번호 설정
 # en: f897cb67f049674308a073079bd85ad0649f8c82
@@ -426,12 +426,12 @@ privacy-short-links = 짧은 링크
 privacy-set-password-in-share = 비밀번호는 공유에서 설정해요
 # en: e546afa59de2ec4b23ca6c4fafbaddac7bab9240
 privacy-short-links-made-here-until = 여기서 만든 짧은 링크예요. 만료될 때까지 남아 있어요.
-# en: f25e1c269ee979c4c6421db94967fded852e0e16
-privacy-their-names-and-links-for = 홈 화면에 보여 줄 이름과 링크예요.
-# en: a32b9cf327471cc4cef625a9a55acf53fc4de3de
-privacy-theme-lifetime-of-short-links = 테마, 짧은 링크의 유효 기간이에요.
-# en: 5c4a8471c132625d7dd5c7a9e4c9a5da20111307
-privacy-this-document-has-password-link = 이 문서에는 비밀번호가 있어요. 링크와 거기서 만든 짧은 링크에는 암호문만 들어 있어요.
+# en: b556bf027f9123d39581babef7e15564c24866da
+privacy-their-names-and-links-for = 이름과 링크, 홈 화면에 보여요.
+# en: 5300fdca86b5b32fd463f73704e318a2b8fa9961
+privacy-theme-lifetime-of-short-links = 테마와 짧은 링크 설정이에요.
+# en: 0c6a2cfe53459957b6899930a2e5cd46b6541cec
+privacy-this-document-has-password-link = 이 문서에는 비밀번호가 있어요. 링크와 거기서 만든 짧은 링크는 모두 암호화되어 있어요.
 # en: 0d21e52aba49ee4331213463b46c2ece33ad3cf4
 common-this-document-is-locked = 이 문서는 잠겨 있어요
 # en: 1dc606b1828a1e2f5bbbed9ed30fa3a80712e3d8
@@ -440,15 +440,15 @@ privacy-this-document-is-locked-with = 이 문서는 비밀번호로 잠겨 있�
 privacy-unlock = 잠금 해제
 # en: 887b0828ec99930408eb32249f1209057b1b234c
 common-unlock-ellipsis = 잠금 해제…
-# en: 6e36f0d04771b58ab61c808296aee03f962bef41
-privacy-what-this-device-holds = 이 기기에 있는 것
+# en: ce3661a255464b1b22e6f395685d0e6f9fa077da
+privacy-what-this-device-holds = 이 기기에 저장된 것
 # en: 8485be9e7b3e998c5f1eef5ce87d2aa67726e3cb
 privacy-your-documents = 내 문서
 # en: d21905a9907932f7976e1ca96129c0af871f2715
 privacy-your-browsers-history = 브라우저 기록
-# en: 269988034e9a4b923026474a21d96d4af3695cff
-privacy-every-document-opened-here-in = 여기서 연 모든 문서의 전체 내용. 비밀번호가 걸린 문서는 빼고요.
-# en: c210c4b744aed5cf6e1817c2417729dfddb43b2f
+# en: cdff70e571d4ed7aeb1a43cedaf33299bdcd258e
+privacy-every-document-opened-here-in = 내가 여는 모든 문서의 전체 내용이요. 비밀번호가 있는 문서는 빼고요.
+# en: 18b8a03ed6567555edd5005aab5b090984f4b5bd
 privacy-not-ours-to-clear = 저희가 지울 수 없어요
 # en: 3ca2d1d26637d42b974b313bb8ce231333179a9e
 privacy-by-name = { $name }
@@ -458,8 +458,8 @@ common-n-documents = 문서 { $n }개
 privacy-n-links = 링크 { $n }개
 # en: 2ddd4097832d991c46023732a889beeb8ec4c29d
 privacy-n-set = { $n }개 설정됨
-# en: f522e7a8504f4a47ae56d7bfbcc403510037eda3
-privacy-copy-this-and-send-it = 이것을 복사해서 링크와 다른 방법으로 보내세요. 다시 보여 줄 수 없어요.
+# en: a97ce1edde4ad396d1cff34063087d0bf5d0e1a8
+privacy-copy-this-and-send-it = 이 비밀번호를 복사해서 링크와 따로 보내세요. 다시 표시되지 않아요.
 # en: 7640428ae16fc2b673d689ddf6b1ea15eed407d3
 privacy-make-another = 다른 것 만들기
 # en: 9a0081f0b2bff82fac1961a403734134b9a3b170
@@ -482,8 +482,8 @@ locked-document = 잠긴 문서
 # A placed document whose link cannot be read (cut short when it was copied).
 # en: 0c45986cb6755e463398a592a861baaf44018954
 locked-this-document-cannot-be-read = 이 문서를 읽을 수 없어요.
-# en: 5a1e9ab40b695d3286aa033757aeb41cfa066ea3
-locked-that-password-does-not-open = 이 비밀번호로는 이 링크가 열리지 않아요. 비밀번호가 확실하다면, 복사할 때 링크가 잘렸을 수 있어요. 다시 보내 달라고 하거나 짧은 링크를 요청하세요.
+# en: a2a127edeb3eed5dc264fc299b034db6493e1636
+locked-that-password-does-not-open = 그 비밀번호로는 이 링크를 열 수 없어요. 비밀번호가 맞다면 복사할 때 링크가 잘렸을 수 있어요. 다시 보내 달라고 하거나 짧은 링크를 요청하세요.
 
 ## words several apps share
 
@@ -641,8 +641,8 @@ editor-bold-italic-and-links = 굵게, 기울임, 링크
 editor-one-of-words-column-holds = 열에 있는 값 중 하나나 새 값
 # en: e31d972229de381b461860014dd710856361917a
 editor-option = 선택
-# en: 9120f2a9192f0a751456f7a9ea9b8dd6351c39cc
-editor-this-browser-lets-page-paste = 이 브라우저는 키보드로만 붙여넣을 수 있어요. 붙여넣기 단축키를 쓰세요.
+# en: eb883fb88ed57f39b760fee6ee8f5a04a8cdc7ba
+editor-this-browser-lets-page-paste = 이 브라우저는 키보드나 붙여넣기 메뉴로만 붙여넣을 수 있어요.
 
 ## the example in the kit's own documentation
 
@@ -3064,20 +3064,20 @@ compare-n-put-in = { $n ->
 open-opened-name = { $name }을(를) 열었어요
 # en: 90dd520de97cc996176f013da9d5f056fd05ac19
 open-that-file-is-not-words = 이 파일은 Tiny Little Office가 읽을 수 있는 글이 아니에요.
-# en: 728560affd455ad8c5e533a5332422736feb1e1f
-open-that-file-is-too-large = 이 파일은 너무 커서 여기서 문서로 쓸 수 없어요.
-# en: 1708824a828efcd52e571a4754c61010bd0757be
-open-keep-them-on-this-device = 이 기기에 보관
-# en: 1d39ec95bbaaddaabf29fa35565930e6e75423db
-open-nothing-is-saved-on-this = 지금은 이 기기에 아무것도 저장되지 않아요. 여기에 보관하거나 하나를 여세요.
+# en: 1d08903947cc83b648f8ad96b1e23466a2dbed11
+open-that-file-is-too-large = 그 파일은 너무 커요.
+# en: 8f432852569edbf7610713a6554e7a61396327d5
+open-keep-them-on-this-device = 이 기기에 저장
+# en: c4fe6d8b035f6108e8a7e0037667dacf3d6cca25
+open-nothing-is-saved-on-this = 이 기기에는 아무것도 저장되어 있지 않아요. 여기에 저장하거나 하나를 여세요.
 # en: 0826daee1d616f7de3a2b205eb2360fcaccc77ef
 open-first = 첫 번째 열기
 # en: 59d36bf6c42ab3ae1481fe62abbc67ffef7a8b22
 open-saving-in-this-browser-n = 이 브라우저에 저장 중: 문서 { $n ->
        *[other] { $n }
     }개 보관됨
-# en: f76190784e6e3d15f4a90859346a0722ece04c62
-open-that-zip-holds-no-documents = 이 zip에는 Tiny Little Office가 읽을 수 있는 문서가 없어요.
+# en: 4fc6621d5b53d413dd1fd42cf7e7834ee3ecba5a
+open-that-zip-holds-no-documents = 그 zip 파일에서 읽을 수 있는 문서를 찾지 못했어요.
 # en: ed5d2e1ab481efa92392820d83922b25c236c730
 open-n-documents-kept = 문서 { $n ->
        *[other] { $n }
@@ -3099,8 +3099,8 @@ keys-normal-size = 보통 크기
 keys-everything-larger = 전체를 크게
 # en: d1a6c5490cb95093a9fb9116f092d142b8a73ff6
 keys-everything-smaller = 전체를 작게
-# en: 8071b6dbf75196fe4d4789865513507da287cbb4
-keys-keep-this-document-on-device = 이 문서를 기기에 보관
+# en: 67312061f24800b7dc75b07101329959c5c1af88
+keys-keep-this-document-on-device = 이 기기에 저장
 # en: 4d5e11a737e63d755f4127a0139f235f3794b6c6
 keys-show-these-shortcuts = 이 단축키 보기
 # en: da05037a43419e15395f52f0ed4dcb0c7f75c1f2

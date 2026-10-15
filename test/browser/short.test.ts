@@ -39,7 +39,7 @@ test('a short link made here: the lifetime from the row, the link big with Copy 
   const dialog = await open(shell);
   // The lifetimes end at a month, and the section says the link cannot be changed or recalled.
   expect([...section(shell).querySelectorAll('.to-ttl label')].map((l) => l.textContent)).toEqual(['An hour', 'A day', 'A week', 'A month']);
-  expect(section(shell).textContent).toContain('A short link cannot be changed or recalled once made; it expires on its own.');
+  expect(section(shell).textContent).toContain('A short link can’t be edited or deleted. It expires automatically.');
   expect(section(shell).querySelector(NOTHING_TO_OWN)).toBeNull();
   section(shell)
     .querySelector<HTMLInputElement>(`input[type=radio][value="${30 * 86400}"]`)!

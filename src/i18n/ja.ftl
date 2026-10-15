@@ -15,8 +15,8 @@ common-untitled-noun = 無題の{ $noun }
 shell-download = ダウンロード
 # en: 33ce417454bfd838897deaeee2355e818a5d4160
 shell-loading = 読み込み中…
-# en: 49c3619264bdb73d79b02cf3e4e2a8c4c01920e0
-shell-this-link-holds-something-that = このリンクには読み取れないものが入っています。コピーのときに途中で切れたのかもしれません。
+# en: 22456f903bcbdedb06221ade9b87febb47722e40
+shell-this-link-holds-something-that = このリンクは読み取れません。コピーしたときに途中で切れたのかもしれません。
 # en: 7dfd19fef00f41e899fb6e2753b71ae40ba59e6d
 shell-n-of-max-link-characters = リンクの残り文字数 { $n }/{ $max }
 # en: 134d73b30c18c4662e6a42e4a42fbb712bbbb10a
@@ -26,38 +26,38 @@ shell-n-characters-over-link-limit-short-link-holds-max = リンクの上限を{
 # en: e7722b7943884e579644a3f5bd2b605afd08a156
 shell-n-characters-over-what-short = 短縮リンクに入る量を{ $n }文字超えています
 # Before a document that lives nowhere but its link (Private, changed) is left for another place: the question and its three answers.
-# en: 270fcef56b6aa99fb049f9e94bf8062a08468b53
-shell-this-document-lives-in-its = この文書はリンクの中にだけあります
-# en: 35181431563f87ee230c27ad2906322b2e179863
-shell-nothing-is-saved-on-this = この端末には何も保存されていません。残すにはリンクをコピーするか、この端末に保存してください。「戻る」でも戻れます。
-# en: 64508992f4c386a816b427ac54bb12a84d5ea444
+# en: f0bba930d38a38cacb48e472c8d4856caa4d8fa8
+shell-this-document-lives-in-its = このドキュメントは保存されていません
+# en: 43454bfced276b8a1b83dea8a0bef1794a9bde60
+shell-nothing-is-saved-on-this = このドキュメントはリンクの中にだけあります。残すにはリンクをコピーするか、このブラウザに保存してください。「戻る」でもここに戻れます。
+# en: e0ef0b02c240e569b52e799771dbb4fb07b35818
 shell-copy-link-and-go = リンクをコピーして移動
-# en: 3f330c650bbe812fc3d63aaafef9c41c466b434d
-shell-turn-on-save-in-browser = 「ブラウザに保存」をオンにしてここに保管
-# en: e306ecf9d38e039a8fbdc3a0603e44798d6e8af9
+# en: fdb4eeef33355eb9aed9f11d6ddcdfe0c08a29ea
+shell-turn-on-save-in-browser = ブラウザに保存して移動
+# en: 634bae7c8177155bc24961f3493f425b66e88c16
 shell-go-without = 保存せずに移動
-# en: a3dd9e2a9b73fb22a15d305fb2e4cc63f03c8738
-shell-save-in-browser-is-on = 「ブラウザに保存」がオンになりました。開いたドキュメントをこのブラウザに保管します。オフにするにはメニューを開いてください。
-# en: 8daf7106c5bd8c8c626a87c5294e823bbe63ebc7
-shell-another-version = 別のバージョン
-# en: abd40babb99a3836871422c0527a53f8c830cb60
-shell-kept-on-this-device = この端末に保管済み
+# en: ee7a39c93b7018b92bcff5511a92081df68dd3db
+shell-save-in-browser-is-on = 「ブラウザに保存」がオンです。開いたドキュメントはここに保存されます。メニューでオフにできます。
+# en: 97c669558589e3b0cf0917cb9caece8844ba65d9
+shell-another-version = 別の保存済みバージョン
+# en: 87222e82bf5d208052c68fa66c93d131fa18fc67
+shell-kept-on-this-device = この端末に保存済み
 # en: 266695479a949eec44dea9db4e15fba00163f04e
 shell-keyboard-shortcuts = キーボードショートカット
-# en: fefdefdbb13a9f5232ca295a562ac9bfd73856bf
-shell-nothing-to-keep-yet = まだ保管するものがありません
+# en: bc447a3151935ceff76e781c90fb02c45d25f004
+shell-nothing-to-keep-yet = まだ保存するものがありません
 # en: 8c00f9130260156b1612126a7cf9a23bb3c553d6
 shell-open-it = 開く
-# en: 8ff3cdd0c2263817118652da96e25641dea6b658
-shell-save-in-browser-is-off = 「ブラウザに保存」はオフです。このブラウザはドキュメントを保管しません。ここに保管するにはメニューでオンにしてください。
+# en: ef6e207cc7cea57220ad9a73fc6040b0085bf63e
+shell-save-in-browser-is-off = 「ブラウザに保存」がオフなので、何も保存されません。メニューでオンにしてください。
 # en: 3939d97295147954c5488340b1f427ebbfa51e69
 shell-skip-to-apps = アプリへ移動
 # en: 286b3810e407b3cef40b582c8ca4b373a58445bf
 shell-skip-to-document = ドキュメントへ移動
-# en: d5f7c8150bac2e1eb13f0d14542e91f393f3dd5e
-shell-this-device-keeps-another-version = この端末には「{ $title }」の別のバージョン（{ $when }）が保管されています。
-# en: 41145b29c2301a0ab36898a2c8d394ca0c954543
-shell-this-link-was-made-by = このリンクは、より新しいちいさなちいさなオフィスで作られました。ページを再読み込みしてください。
+# en: 03d9aea1885137ab8ab4d9c24250515cb44161f0
+shell-this-device-keeps-another-version = 「{ $title }」の別のバージョン（{ $when }）がこの端末に保存されています。
+# en: 25c53c58cba7054a3a2ae9e9b575c7888716ae94
+shell-this-link-was-made-by = このリンクには新しいバージョンが必要です。ページを再読み込みしてください。
 
 ## the home page
 
@@ -69,11 +69,11 @@ common-templates = テンプレート
 # The list of an app's documents kept on this device, under its tile: "Write documents"
 # en: c647789831582ba7f4b6aad72ea6f425b98aad6f
 home-app-documents = { $app }のドキュメント
-# en: 03d5d801992763494a5afc12c2686567635ee5f7
-common-forget = 消去
+# en: f6fdbe48dc54dd86f63097a03bd24094dedd713a
+common-forget = 削除
 # The button that forgets one kept document: "Forget Launch notes"
-# en: 2c861e55bb5c24d632ed2d44773732b9caa5f6e5
-home-forget-title = { $title }を消去
+# en: bbc98cac8e5e1a213d5aa04b3618196a6d28bf49
+home-forget-title = { $title }を削除
 # Under an app's documents, the rest folded away: "3 more"
 # en: 84ab0eecfadb6332ee8b1ee5c67852b7df54e66f
 home-n-more = ほか{ $n }件
@@ -185,21 +185,21 @@ leave-you-are-leaving-tiny-little = ちいさなちいさなオフィスを離�
 leave-this-link-writes-email-to = このリンクは次の宛先へメールを書きます
 # en: 102dce223fdc2f3bbdda71f28108e2a6fdf21710
 leave-this-link-calls = このリンクは次の番号に電話をかけます
-# en: b19c139a72086dcd69391619ef14fa086876a096
-leave-not-secure-address-what-you = 安全でないアドレスです。送った内容は途中で読まれるおそれがあります。
+# en: afb8b3199e929e5e9f886fdf382599c9d440c71f
+leave-not-secure-address-what-you = 安全な（HTTPS）アドレスではありません。送った内容が途中で読まれるおそれがあります。
 # en: 003e4888e77a22c782047c7d26d028c5eca46f1c
 leave-whole-address = アドレス全体：
-# en: 9b85614da3512dbe9673a6105d2b46d08ffcfce7
-leave-someone-wrote-this-link-into = このリンクはドキュメントに書き込まれたものです。リンクに表示される文字と、実際の移動先が同じとは限りません。行き先を信頼できる場合だけ進んでください。
+# en: fdb31cf3fb383190c6864d4effd5fd6041b330cb
+leave-someone-wrote-this-link-into = このリンクは、ドキュメントを書いた人が入れたものです。リンクの文字とアドレスは違うことがあります。信頼できる場合だけ進んでください。
 # en: 2e0b45f2a456e8db55f08d7b65e87593a3e9a140
 leave-go = 移動
-# en: 45d27855fa56c9d8302ede47fb6f273dc617fb32
-leave-links-of-this-kind-do = この種類のリンクは、ここでは開けません。
+# en: c0f31f8a18b087fc577cbc50e9d37c68cb16c9ae
+leave-links-of-this-kind-do = この種類のリンクはここでは開けません。
 # About's last line, a link to the source of the build the site runs: "Running commit abc1234".
 # en: 0eda2175601e6a4148c1c8b3f85c330bc7fbcabf
 leave-running-commit-commit = コミット { $commit } で実行中
-# en: f65bd08db90631ce207f564637c9177ddccf0c9a
-leave-this-link-hides-characters-in = このリンクは、アドレスの中に文字を隠しています。
+# en: 45469d1ce86c199fb2984929d6c2e408178f7032
+leave-this-link-hides-characters-in = このリンクのアドレスには隠れた文字が含まれています。
 
 ## the copy kept on the device (status lines under the switch)
 
@@ -217,8 +217,8 @@ share-copy-into-new-document = 新しいドキュメントにコピー
 share-copy-link = リンクをコピー
 # en: 6e9d1ebfe7124caf277155d2f57b5a6787f30198
 share-copy-of-title = { $title }のコピー
-# en: de823f98bab4aa409d922bd0b1ab3a038dfed9a8
-share-encrypted-here-service-holds-only = 暗号化はここで行います。サービスが持つのは暗号文だけで、それも期限までです。
+# en: 367f9cb75618d64b28286bdc4a5b8a3f4d7092f0
+share-encrypted-here-service-holds-only = お使いのブラウザで暗号化されます。サーバーには暗号化されたリンクだけが保存され、期限が来ると削除されます。
 # en: db4fb5a00a9a2172e9d45a362ff1b772884f64b5
 share-expires-in-n-days-date = あと{ $n ->
        *[other] { $n }日
@@ -235,8 +235,8 @@ share-expires-in-n-minutes-date = あと{ $n ->
 share-opens-as-pages-to-read = ページとして読む形で開く
 # en: 8744400a02796b44742f8f5e5b66216821eab90d
 share-opens-in-editor = エディタで開く
-# en: 9b5861da44a8c139150b7bc7374fe209c2b3e34c
-common-whoever-opens-this-link-gets = このリンクを開いた人は、それぞれ自分のコピーを受け取ります。その人の変更は、あなたのリンクではなく、その人のリンクに残ります。変更を見るには、その人にリンクを送り返してもらってください。
+# en: 7fbbb75c4e853ef0e42da5fe316344fdf1a6143c
+common-whoever-opens-this-link-gets = このリンクを開いた人は、それぞれ自分のコピーを受け取ります。その人の変更はあなたのコピーには反映されません。リンクを送り返してもらってください。
 # en: 94b01acececc033463cc7731d659fbcae11c2b47
 share-short-link-that-expires = 期限付きの短縮リンク
 # en: fed3d23d480dd0bfe5a0cfff4d9f3dae7857fbe6
@@ -307,18 +307,18 @@ share-week = 1週間
 share-month = 1か月
 # en: 38c22f9dbdb41d2131b4324b7722c45a1f543420
 share-make-short-link = 短縮リンクを作る
-# en: 840911d927a3bb76ae1906a51eda0ef4f4758871
+# en: 94d7d8ee473f817fa4b57737e7a01ec3cd13d4d4
 share-making = 作成中…
-# en: 2e6ce772cf6bb857f9947fd1ed63fe3d7e886634
-share-hundred-links-day-from-one = 1つのアドレスから作れる短縮リンクは1日100件までです。明日もう一度お試しください。
-# en: e7e24818a74ce918c6c3ca6338d69fd06310cdea
-share-short-link-cannot-be-changed = 短縮リンクは、作ったあとで変更も取り消しもできません。期限が来ると自然に消えます。
+# en: 1c6c031b40782efe6b28678fc42d5569cc11e029
+share-hundred-links-day-from-one = 上限に達しました。1つのアドレスにつき1日100件の短縮リンクまでです。明日もう一度お試しください。
+# en: 0b5140c5b10a2b84301b5ef43056b7d89bd2187c
+share-short-link-cannot-be-changed = 短縮リンクは編集も削除もできません。期限が来ると自動で無効になります。
 # en: 4d9182a72e391841c2817e9943cf2b07adf70220
 share-could-not-shorten-link = リンクを短縮できませんでした。
 # en: 4c0067d6b6bd96cdab1ae363ce342312a93834fd
 share-this-document-is-too-long = このドキュメントは短縮リンクにするには長すぎます。
-# en: e0ff8e6b768c99612a5a06d385092732ee52dcc0
-share-up-to-hundred-links-day = 1つのアドレスから1日100件まで作れます。
+# en: a4d0b704a911979249dd2629e81a0205fab0aa44
+share-up-to-hundred-links-day = 1つのアドレスにつき1日100件の短縮リンクまで。
 # en: e963907dac5cd5c017869b4c96c18021c9bd058b
 share-remove = 外す
 # en: d0517071aa376e797705058bbad4b658954b9930
@@ -374,8 +374,8 @@ share-left = 左
 share-uses = 使用先
 # en: 525f61b6729229b1a8854a9e50bcaa52ea96b131
 share-where = 場所
-# en: e54c097fa776a6b614aea31f6a2db3d3b8415700
-share-where-link-fits = リンクが収まる場所
+# en: cdbfed741d905515df704d9585fc74781801a24d
+share-where-link-fits = このリンクは収まりますか？
 # en: ddba25b7aa2e43ef1c94a2a8cfb8b839fb723ca2
 share-any-length = 長さ自由
 # en: 23fd8ecdbffd82e04305d3cea5eae9cdb85ac9bf
@@ -384,20 +384,20 @@ share-n-over = { $n }超過
 ## privacy (kit/share/privacy.ts, kit/ui/privacy-dialog.ts): the password, what the device holds
 
 # The Share dialog's head line: "Created 9 Oct 2026, 14:03 · by Paul".
-# en: 753c0c4d74e3315eb4d646ab3642348964e662d5
-privacy-anyone-with-link-will-need = リンクを知っている人は、開くのにパスワードが必要です。パスワードは誰にもリセットできません。忘れるとドキュメントは開けなくなります。
+# en: 07fd5d289286fa4714b3f407db7875fac90b9952
+privacy-anyone-with-link-will-need = リンクを持っている人は、開くのにパスワードが必要です。パスワードはリセットできません。なくすとドキュメントは失われます。
 # en: 8c684290ce0b8a8e6cee79a145e17554064a4760
 privacy-change-password = パスワードを変更
 # en: 5be0d11b94b1ba25b2579314f6af69649a900cde
 privacy-created-date = 作成：{ $date }
 # en: 39e64aebf907392389952dded5e20ab4836d876a
 privacy-enter-password-to-open-this = このドキュメントを開くには、パスワードを入力してください。
-# en: 2533c986e139972e942e7e65fd2e1a6a6ee1e8f3
-privacy-forget-everything = すべて消去
+# en: 554393a215e479d023a30091a1394f7ca57690e1
+privacy-forget-everything = すべて削除
 # en: 715727cdd46f1bd0703c9e846fcdd4f369ef8313
 privacy-preview-sent-with-link-to = リンクと一緒にSNSへ送るプレビューは、1ページ目の画像、タイトル、冒頭の言葉で、1か月間サーバー上で読める状態になります。ドキュメントそのものが送られることはありません。
-# en: 94752883801be06c9a6e225a26573bb212998447
-privacy-forget-everything-this-site-keeps = このサイトがここに保管しているものをすべて消去し、今後は何も保管しないようにしますか？ドキュメントそのものはリンクの中にあります。
+# en: a584ece11551d9b1a79856743236c51aba50c44f
+privacy-forget-everything-this-site-keeps = このブラウザに保存されているものをすべて削除し、今後は保存しないようにしますか？ドキュメントはそれぞれのリンクの中に残ります。
 # en: a798882f1c31099bb9500e2da62c0874d8dbed78
 privacy-locked = ロック中
 # en: a543040c9fee74b4b34282797abbf59e9d2c99b7
@@ -414,22 +414,22 @@ privacy-opening = 開いています…
 common-password = パスワード
 # en: 114bea5817640fe6b9eeec86b939ec0e9a7b6d76
 privacy-password-removed = パスワードを外しました
-# en: f30dc3d0115848030675e54c7d2d1f036862d2a7
-privacy-password-set-link-holds-only = パスワードを設定しました。リンクには暗号文だけが入ります
+# en: ad1909e464528c140bf96a21ce9adda2464956c0
+privacy-password-set-link-holds-only = パスワードを設定しました。リンクは暗号化されています。
 # en: dce69146962b392ae2b157aec604eface36e90c0
 privacy-password-ellipsis = パスワード…
 # en: 9dfd349ebee555eb8d652be20dad971cae439eca
 privacy-preferences = 設定
 # en: cf01481f626d5127ec7732fcbdb29504f08abefd
 privacy-privacy = プライバシー
-# en: 21f9dfb5dda17d08b35d4200349b6f33f4f6ad93
-privacy-nothing-saved-in-this-browser = このブラウザには何も保存しません。一覧はこの訪問の間だけです。
+# en: cefceeebf3cd6d02ddc7aca8c769881a5341e829
+privacy-nothing-saved-in-this-browser = このブラウザには何も保存されていません。一覧の項目はこの訪問の間だけ残ります。
 # en: 626a605da9dbcd888eadcad13deebd3a64011c0a
 privacy-protected-by-password = パスワードで保護
 # en: acef17d00b9a1b6e1e15e76d27ae53635928a7a6
 privacy-remove-password = パスワードを外す
-# en: c60513159f73aa6f6a1b2330b5f96b93fc0b4fab
-privacy-sealing = 封印中…
+# en: 788f55b0957b15918c6aba279f4f0377a5a1db90
+privacy-sealing = 暗号化中…
 # en: 94408e41c12e924b82da7ea6e79e5cb69ac9e042
 privacy-set-password = パスワードを設定
 # en: f897cb67f049674308a073079bd85ad0649f8c82
@@ -438,12 +438,12 @@ privacy-short-links = 短縮リンク
 privacy-set-password-in-share = パスワードは「共有」で設定
 # en: e546afa59de2ec4b23ca6c4fafbaddac7bab9240
 privacy-short-links-made-here-until = ここで作った短縮リンク（期限が切れるまで）。
-# en: f25e1c269ee979c4c6421db94967fded852e0e16
-privacy-their-names-and-links-for = 名前とリンクです。ホームページに使います。
-# en: a32b9cf327471cc4cef625a9a55acf53fc4de3de
-privacy-theme-lifetime-of-short-links = テーマ、短縮リンクの有効期間です。
-# en: 5c4a8471c132625d7dd5c7a9e4c9a5da20111307
-privacy-this-document-has-password-link = このドキュメントにはパスワードがあります。リンクも、そこから作った短縮リンクも、中身は暗号文だけです。
+# en: b556bf027f9123d39581babef7e15564c24866da
+privacy-their-names-and-links-for = 名前とリンク。ホームページに表示されます。
+# en: 5300fdca86b5b32fd463f73704e318a2b8fa9961
+privacy-theme-lifetime-of-short-links = テーマと短縮リンクの設定。
+# en: 0c6a2cfe53459957b6899930a2e5cd46b6541cec
+privacy-this-document-has-password-link = このドキュメントにはパスワードがあります。リンクも、そこから作った短縮リンクも暗号化されています。
 # en: 0d21e52aba49ee4331213463b46c2ece33ad3cf4
 common-this-document-is-locked = このドキュメントはロックされています
 # en: 1dc606b1828a1e2f5bbbed9ed30fa3a80712e3d8
@@ -452,16 +452,16 @@ privacy-this-document-is-locked-with = このドキュメントはパスワー�
 privacy-unlock = ロック解除
 # en: 887b0828ec99930408eb32249f1209057b1b234c
 common-unlock-ellipsis = ロック解除…
-# en: 6e36f0d04771b58ab61c808296aee03f962bef41
-privacy-what-this-device-holds = この端末にあるもの
+# en: ce3661a255464b1b22e6f395685d0e6f9fa077da
+privacy-what-this-device-holds = この端末に保存されているもの
 # en: 8485be9e7b3e998c5f1eef5ce87d2aa67726e3cb
 privacy-your-documents = あなたのドキュメント
 # en: d21905a9907932f7976e1ca96129c0af871f2715
 privacy-your-browsers-history = ブラウザの履歴
-# en: 269988034e9a4b923026474a21d96d4af3695cff
-privacy-every-document-opened-here-in = ここで開いたすべてのドキュメントの全文。パスワードがあるものを除きます。
-# en: c210c4b744aed5cf6e1817c2417729dfddb43b2f
-privacy-not-ours-to-clear = 当サイトでは消せません
+# en: cdff70e571d4ed7aeb1a43cedaf33299bdcd258e
+privacy-every-document-opened-here-in = 開いたすべてのドキュメントの全文。パスワード付きのものは除きます。
+# en: 18b8a03ed6567555edd5005aab5b090984f4b5bd
+privacy-not-ours-to-clear = これは当サイトでは消せません
 # en: 3ca2d1d26637d42b974b313bb8ce231333179a9e
 privacy-by-name = { $name }による
 # en: a9e72cf83916d4381012a19b329292818f845a43
@@ -474,8 +474,8 @@ privacy-n-links = { $n ->
     }のリンク
 # en: 2ddd4097832d991c46023732a889beeb8ec4c29d
 privacy-n-set = { $n }件を設定
-# en: f522e7a8504f4a47ae56d7bfbcc403510037eda3
-privacy-copy-this-and-send-it = これをコピーして、リンクとは別の方法で送ってください。もう一度表示することはできません。
+# en: a97ce1edde4ad396d1cff34063087d0bf5d0e1a8
+privacy-copy-this-and-send-it = このパスワードをコピーし、リンクとは別に送ってください。二度と表示されません。
 # en: 7640428ae16fc2b673d689ddf6b1ea15eed407d3
 privacy-make-another = 別のものを作る
 # en: 9a0081f0b2bff82fac1961a403734134b9a3b170
@@ -498,8 +498,8 @@ locked-document = ロックされたドキュメント
 # A placed document whose link cannot be read (cut short when it was copied).
 # en: 0c45986cb6755e463398a592a861baaf44018954
 locked-this-document-cannot-be-read = このドキュメントは読み取れません。
-# en: 5a1e9ab40b695d3286aa033757aeb41cfa066ea3
-locked-that-password-does-not-open = このパスワードではこのリンクを開けません。パスワードに間違いがなければ、コピーの際にリンクが途中で切れたのかもしれません。もう一度送ってもらうか、短縮リンクを頼んでください。
+# en: a2a127edeb3eed5dc264fc299b034db6493e1636
+locked-that-password-does-not-open = そのパスワードではこのリンクを開けません。正しいはずなら、コピーしたときにリンクが途中で切れたのかもしれません。もう一度送ってもらうか、短縮リンクを頼んでください。
 
 ## words several apps share
 
@@ -659,8 +659,8 @@ editor-bold-italic-and-links = 太字、斜体、リンク
 editor-one-of-words-column-holds = 列にある言葉のどれか、または新しい言葉
 # en: e31d972229de381b461860014dd710856361917a
 editor-option = 選択肢
-# en: 9120f2a9192f0a751456f7a9ea9b8dd6351c39cc
-editor-this-browser-lets-page-paste = このブラウザーでは、ページはキーボードからしか貼り付けられません。キーボードの「貼り付け」を使ってください。
+# en: eb883fb88ed57f39b760fee6ee8f5a04a8cdc7ba
+editor-this-browser-lets-page-paste = このブラウザでは、キーボードか「貼り付け」メニューからしか貼り付けできません。
 
 ## the example in the kit's own documentation
 
@@ -3087,20 +3087,20 @@ compare-n-put-in = { $n ->
 open-opened-name = { $name }を開きました
 # en: 90dd520de97cc996176f013da9d5f056fd05ac19
 open-that-file-is-not-words = このファイルはちいさなちいさなオフィスが読める文章ではありません。
-# en: 728560affd455ad8c5e533a5332422736feb1e1f
-open-that-file-is-too-large = このファイルは、ここでドキュメントにするには大きすぎます。
-# en: 1708824a828efcd52e571a4754c61010bd0757be
+# en: 1d08903947cc83b648f8ad96b1e23466a2dbed11
+open-that-file-is-too-large = そのファイルは大きすぎます。
+# en: 8f432852569edbf7610713a6554e7a61396327d5
 open-keep-them-on-this-device = この端末に保存
-# en: 1d39ec95bbaaddaabf29fa35565930e6e75423db
-open-nothing-is-saved-on-this = 今はこの端末に何も保存されません。ここに保存するか、1つ開いてください。
+# en: c4fe6d8b035f6108e8a7e0037667dacf3d6cca25
+open-nothing-is-saved-on-this = この端末には何も保存されていません。ここに保存するか、1つ開いてください。
 # en: 0826daee1d616f7de3a2b205eb2360fcaccc77ef
 open-first = 最初のものを開く
 # en: 59d36bf6c42ab3ae1481fe62abbc67ffef7a8b22
 open-saving-in-this-browser-n = このブラウザに保存中：{ $n ->
        *[other] { $n }件
     }のドキュメントを保管済み
-# en: f76190784e6e3d15f4a90859346a0722ece04c62
-open-that-zip-holds-no-documents = このZIPにはちいさなちいさなオフィスが読めるドキュメントがありません。
+# en: 4fc6621d5b53d413dd1fd42cf7e7834ee3ecba5a
+open-that-zip-holds-no-documents = そのzipに読み込めるドキュメントは見つかりませんでした。
 # en: ed5d2e1ab481efa92392820d83922b25c236c730
 open-n-documents-kept = { $n ->
        *[other] { $n }件
@@ -3122,8 +3122,8 @@ keys-normal-size = 通常の大きさ
 keys-everything-larger = 全体を大きく
 # en: d1a6c5490cb95093a9fb9116f092d142b8a73ff6
 keys-everything-smaller = 全体を小さく
-# en: 8071b6dbf75196fe4d4789865513507da287cbb4
-keys-keep-this-document-on-device = このドキュメントを端末に保管
+# en: 67312061f24800b7dc75b07101329959c5c1af88
+keys-keep-this-document-on-device = この端末に保存
 # en: 4d5e11a737e63d755f4127a0139f235f3794b6c6
 keys-show-these-shortcuts = ショートカットを表示
 # en: da05037a43419e15395f52f0ed4dcb0c7f75c1f2

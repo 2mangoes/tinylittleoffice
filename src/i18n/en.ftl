@@ -27,28 +27,28 @@ common-new-noun = New { $noun }
 common-untitled-noun = Untitled { $noun }
 shell-download = Download
 shell-loading = Loading…
-shell-this-link-holds-something-that = This link holds something that cannot be read. It may have been cut short when it was copied.
+shell-this-link-holds-something-that = This link can’t be read. It may have been cut off when it was copied.
 shell-n-of-max-link-characters = { $n } of { $max } link characters left
 shell-n-characters-over-link-limit = { $n } characters over the link limit
 shell-n-characters-over-link-limit-short-link-holds-max = { $n } characters over the link limit; a short link holds { $max }
 shell-n-characters-over-what-short = { $n } characters over what a short link holds
 # Before a document that lives nowhere but its link (Private, changed) is left for another place: the question and its three answers.
-shell-this-document-lives-in-its = This document lives in its link
-shell-nothing-is-saved-on-this = Nothing is saved on this device. Copy the link to keep it, or keep it on this device; Back brings it too.
-shell-copy-link-and-go = Copy the link and go
-shell-turn-on-save-in-browser = Turn on Save in browser and keep it here
-shell-go-without = Go without
-shell-save-in-browser-is-on = Save in browser is on: this browser keeps the documents you open. Turn it off in the menu.
-shell-another-version = Another version
-shell-kept-on-this-device = Kept on this device
+shell-this-document-lives-in-its = This document isn’t saved
+shell-nothing-is-saved-on-this = It exists only in its link. Copy the link to keep it, or save it in this browser. Back will also return to it.
+shell-copy-link-and-go = Copy link and leave
+shell-turn-on-save-in-browser = Save in browser and leave
+shell-go-without = Leave without saving
+shell-save-in-browser-is-on = Save in browser is on. Documents you open are saved here. Turn it off in the menu.
+shell-another-version = Another saved version
+shell-kept-on-this-device = Saved on this device
 shell-keyboard-shortcuts = Keyboard shortcuts
-shell-nothing-to-keep-yet = Nothing to keep yet
+shell-nothing-to-keep-yet = Nothing to save yet
 shell-open-it = Open it
-shell-save-in-browser-is-off = Save in browser is off: this browser keeps no documents. Turn it on in the menu to keep them here.
+shell-save-in-browser-is-off = Save in browser is off, so nothing is saved. Turn it on in the menu.
 shell-skip-to-apps = Skip to the apps
 shell-skip-to-document = Skip to the document
-shell-this-device-keeps-another-version = This device keeps another version of “{ $title }”, from { $when }.
-shell-this-link-was-made-by = This link was made by a newer Tiny Little Office. Reload the page to get it.
+shell-this-device-keeps-another-version = A different version of “{ $title }” from { $when } is saved on this device.
+shell-this-link-was-made-by = This link needs a newer version. Reload the page.
 
 ## the home page
 
@@ -57,9 +57,9 @@ common-templates = Templates
 # The button under an app's tile, naming the template list: "Start Text from"
 # The list of an app's documents kept on this device, under its tile: "Write documents"
 home-app-documents = { $app } documents
-common-forget = Forget
+common-forget = Delete
 # The button that forgets one kept document: "Forget Launch notes"
-home-forget-title = Forget { $title }
+home-forget-title = Delete { $title }
 # Under an app's documents, the rest folded away: "3 more"
 home-n-more = { $n } more
 # The home page's foot: { $aboard } is the name Aboard, a link to aboard.com, said as it is in every language
@@ -131,14 +131,14 @@ leave-do-you-trust-this-link = Do you trust this link?
 leave-you-are-leaving-tiny-little = You are leaving Tiny Little Office for
 leave-this-link-writes-email-to = This link writes an email to
 leave-this-link-calls = This link calls
-leave-not-secure-address-what-you = Not a secure address: what you send there can be read on the way.
+leave-not-secure-address-what-you = Not a secure (HTTPS) address. Anything you send could be read in transit.
 leave-whole-address = The whole address:
-leave-someone-wrote-this-link-into = Someone wrote this link into the document. The words shown for a link need not match where it goes. Only go if you trust where it leads.
+leave-someone-wrote-this-link-into = This link was added by whoever wrote the document. Link text can differ from the address. Continue only if you trust it.
 leave-go = Go
-leave-links-of-this-kind-do = Links of this kind do not open here.
+leave-links-of-this-kind-do = This type of link can’t be opened here.
 # About's last line, a link to the source of the build the site runs: "Running commit abc1234".
 leave-running-commit-commit = Running commit { $commit }
-leave-this-link-hides-characters-in = This link hides characters in its address.
+leave-this-link-hides-characters-in = This link’s address contains hidden characters.
 
 ## the copy kept on the device (status lines under the switch)
 
@@ -150,7 +150,7 @@ share-present-link = Present link
 share-copy-into-new-document = Copy into a new document
 share-copy-link = Copy link
 share-copy-of-title = Copy of { $title }
-share-encrypted-here-service-holds-only = Encrypted here: the service holds only ciphertext, and only until then.
+share-encrypted-here-service-holds-only = Encrypted in your browser. Our server stores only the encrypted link and deletes it when it expires.
 share-expires-in-n-days-date = Expires in { $n ->
         [one] { $n } day
        *[other] { $n } days
@@ -165,7 +165,7 @@ share-expires-in-n-minutes-date = Expires in { $n ->
     } ({ $date })
 share-opens-as-pages-to-read = Opens as pages to read
 share-opens-in-editor = Opens in the editor
-common-whoever-opens-this-link-gets = Whoever opens this link gets their own copy. Changes they make are in their link, not in yours: ask them to send theirs back.
+common-whoever-opens-this-link-gets = Anyone who opens this link gets their own copy. Their changes won’t appear in yours. Ask them to send their link back.
 share-short-link-that-expires = Short link that expires
 share-this-link-expires-in-n = This link expires in { $n ->
         [one] { $n } day
@@ -209,12 +209,12 @@ share-day = A day
 share-week = A week
 share-month = A month
 share-make-short-link = Make a short link
-share-making = Making…
-share-hundred-links-day-from-one = A hundred links a day from one address; try tomorrow.
-share-short-link-cannot-be-changed = A short link cannot be changed or recalled once made; it expires on its own.
+share-making = Creating…
+share-hundred-links-day-from-one = Limit reached: 100 short links a day per address. Try again tomorrow.
+share-short-link-cannot-be-changed = A short link can’t be edited or deleted. It expires automatically.
 share-could-not-shorten-link = Could not shorten the link.
 share-this-document-is-too-long = This document is too long for a short link.
-share-up-to-hundred-links-day = Up to a hundred links a day from one address.
+share-up-to-hundred-links-day = Up to 100 short links a day per address.
 share-remove = Remove
 common-link = Link
 common-short-link = Short link
@@ -243,20 +243,20 @@ share-your-mastodon-server = Your Mastodon server
 share-left = Left
 share-uses = Uses
 share-where = Where
-share-where-link-fits = Where the link fits
+share-where-link-fits = Will this link fit?
 share-any-length = any length
 share-n-over = { $n } over
 
 ## privacy (kit/share/privacy.ts, kit/ui/privacy-dialog.ts): the password, what the device holds
 
 # The Share dialog's head line: "Created 9 Oct 2026, 14:03 · by Paul".
-privacy-anyone-with-link-will-need = Anyone with the link will need the password to open it. Nobody can reset it: lose it and the document is gone.
+privacy-anyone-with-link-will-need = Anyone with the link will need the password to open it. It can’t be reset. If you lose it, the document is gone.
 privacy-change-password = Change password
 privacy-created-date = Created { $date }
 privacy-enter-password-to-open-this = Enter the password to open this document.
-privacy-forget-everything = Forget everything
+privacy-forget-everything = Delete everything
 privacy-preview-sent-with-link-to = A preview sent with a link to a network is a picture of the first page, the title and the first words, readable on our server for a month. The document itself never goes there.
-privacy-forget-everything-this-site-keeps = Forget everything this site keeps here, and keep nothing from now on? The documents themselves live in their links.
+privacy-forget-everything-this-site-keeps = Delete everything saved in this browser and stop saving? Your documents still exist in their links.
 privacy-locked = Locked
 common-locked-document = Locked document
 privacy-new-password = New password
@@ -265,30 +265,30 @@ privacy-none = None
 privacy-opening = Opening…
 common-password = Password
 privacy-password-removed = Password removed
-privacy-password-set-link-holds-only = Password set: the link holds only ciphertext
+privacy-password-set-link-holds-only = Password set. The link is now encrypted.
 privacy-password-ellipsis = Password…
 privacy-preferences = Preferences
 privacy-privacy = Privacy
-privacy-nothing-saved-in-this-browser = Nothing saved in this browser. What is listed lasts for this visit.
+privacy-nothing-saved-in-this-browser = Nothing is saved in this browser. The items listed last only for this visit.
 privacy-protected-by-password = Protected by a password
 privacy-remove-password = Remove password
-privacy-sealing = Sealing…
+privacy-sealing = Encrypting…
 privacy-set-password = Set password
 privacy-short-links = Short links
 privacy-set-password-in-share = Set a password, in Share
 privacy-short-links-made-here-until = The short links made here, until they expire.
-privacy-their-names-and-links-for = Their names and links, for the home page.
-privacy-theme-lifetime-of-short-links = Theme, the lifetime of short links.
-privacy-this-document-has-password-link = This document has a password. The link, and any short link made from it, holds only ciphertext.
+privacy-their-names-and-links-for = Names and links, shown on the home page.
+privacy-theme-lifetime-of-short-links = Theme and short-link settings.
+privacy-this-document-has-password-link = This document has a password. The link, and any short link made from it, is encrypted.
 common-this-document-is-locked = This document is locked
 privacy-this-document-is-locked-with = This document is locked with a password.
 privacy-unlock = Unlock
 common-unlock-ellipsis = Unlock…
-privacy-what-this-device-holds = What this device holds
+privacy-what-this-device-holds = Stored on this device
 privacy-your-documents = Your documents
 privacy-your-browsers-history = Your browser’s history
-privacy-every-document-opened-here-in = Every document opened here, in full, unless it has a password.
-privacy-not-ours-to-clear = Not ours to clear
+privacy-every-document-opened-here-in = Every document you open, in full, unless it has a password.
+privacy-not-ours-to-clear = We can’t clear this
 privacy-by-name = by { $name }
 common-n-documents = { $n ->
         [one] { $n } document
@@ -299,7 +299,7 @@ privacy-n-links = { $n ->
        *[other] { $n } links
     }
 privacy-n-set = { $n } set
-privacy-copy-this-and-send-it = Copy this and send it another way than the link. It cannot be shown again.
+privacy-copy-this-and-send-it = Copy this password and send it separately from the link. It won’t be shown again.
 privacy-make-another = Make another
 privacy-password-copied = Password copied
 
@@ -315,7 +315,7 @@ locked-document = locked document
 # A placed document whose link cannot be read (cut short when it was copied).
 locked-this-document-cannot-be-read = This document cannot be read.
 # A password that does not open a sealed link: wrong, or the link cut short in a chat (the two cannot be told apart).
-locked-that-password-does-not-open = That password does not open this link. If you are sure of it, the link may have been cut short when it was copied: ask for it again, or for a short link.
+locked-that-password-does-not-open = That password doesn’t open this link. If you’re sure it’s right, the link may have been cut off when it was copied. Ask for it again, or for a short link.
 
 ## words several apps share
 
@@ -409,7 +409,7 @@ editor-not-done = not done
 editor-bold-italic-and-links = Bold, italic and links
 editor-one-of-words-column-holds = One of the words the column holds, or a new one
 editor-option = Option
-editor-this-browser-lets-page-paste = This browser lets a page paste only from the keyboard: use its Paste.
+editor-this-browser-lets-page-paste = This browser only allows pasting from the keyboard or the Paste menu.
 
 ## the example in the kit's own documentation
 
@@ -1699,15 +1699,15 @@ compare-n-put-in = { $n ->
 
 open-opened-name = Opened { $name }
 open-that-file-is-not-words = That file is not words Tiny Little Office can read.
-open-that-file-is-too-large = That file is too large to be a document here.
-open-keep-them-on-this-device = Keep them on this device
-open-nothing-is-saved-on-this = Nothing is saved on this device now. Keep them here, or open one.
+open-that-file-is-too-large = That file is too large.
+open-keep-them-on-this-device = Save them to this device
+open-nothing-is-saved-on-this = Nothing is saved on this device. Save them here, or open one.
 open-first = Open the first
 open-saving-in-this-browser-n = Saving in this browser: { $n ->
         [one] { $n } document kept
        *[other] { $n } documents kept
     }
-open-that-zip-holds-no-documents = That zip holds no documents Tiny Little Office can read.
+open-that-zip-holds-no-documents = No readable documents found in that zip.
 open-n-documents-kept = { $n ->
         [one] { $n } document kept
        *[other] { $n } documents kept
@@ -1725,7 +1725,7 @@ qr-code-of-this-document = A QR code of this document
 keys-normal-size = Normal size
 keys-everything-larger = Everything larger
 keys-everything-smaller = Everything smaller
-keys-keep-this-document-on-device = Keep this document on the device
+keys-keep-this-document-on-device = Save to this device
 keys-show-these-shortcuts = Show these shortcuts
 keys-this-page = This page
 

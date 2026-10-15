@@ -21,7 +21,7 @@ afterEach(() => {
   history.replaceState(null, '', location.pathname);
 });
 
-const NOT_OPENED = 'That password does not open this link. If you are sure of it, the link may have been cut short when it was copied: ask for it again, or for a short link.';
+const NOT_OPENED = 'That password doesn’t open this link. If you’re sure it’s right, the link may have been cut off when it was copied. Ask for it again, or for a short link.';
 const payload = () => parseHash(location.hash).payload;
 const pill = (shell: ToShell) => shell.querySelector<HTMLButtonElement>('.to-header .to-trust')!;
 const dialog = (shell: ToShell, cls: string) => shell.querySelector<ToDialog>(`to-dialog.${cls}`)!;
@@ -120,7 +120,7 @@ test('Password… shows a password the app made, with no field to type one; Set 
   expect(box.readOnly).toBe(true);
   expect(box.value).toMatch(/^[^-]{5}-[^-]{5}-[^-]{5}-[^-]{5}$/);
   expect(box.getAttribute('aria-label')).toBe('Password');
-  expect(pd.querySelector('.to-password-send')!.textContent).toBe('Copy this and send it another way than the link. It cannot be shown again.');
+  expect(pd.querySelector('.to-password-send')!.textContent).toBe('Copy this password and send it separately from the link. It won’t be shown again.');
   // No strength line, no second field, nothing to compare.
   expect(pd.querySelector('.to-password-cost, .to-password-differ, .to-password-new, .to-password-generate')).toBeNull();
   const password = box.value;
@@ -262,8 +262,8 @@ test("What this device holds names the browser's history: not ours to clear, eve
   await until(() => !!privacy.querySelector('.to-held'));
   const row = privacy.querySelector('.to-held-history')!;
   expect(row.querySelector('b')!.textContent).toBe('Your browser’s history');
-  expect(row.querySelector('small')!.textContent).toBe('Every document opened here, in full, unless it has a password.');
-  expect(row.querySelector('.to-held-now')!.textContent).toBe('Not ours to clear');
+  expect(row.querySelector('small')!.textContent).toBe('Every document you open, in full, unless it has a password.');
+  expect(row.querySelector('.to-held-now')!.textContent).toBe('We can’t clear this');
   expect(row.querySelector('.to-held-forget')).toBeNull();
 });
 

@@ -16,8 +16,8 @@ common-untitled-noun = 未命名{ $noun }
 shell-download = 下载
 # en: 33ce417454bfd838897deaeee2355e818a5d4160
 shell-loading = 加载中…
-# en: 49c3619264bdb73d79b02cf3e4e2a8c4c01920e0
-shell-this-link-holds-something-that = 此链接的内容无法读取，可能是复制时被截断了。
+# en: 22456f903bcbdedb06221ade9b87febb47722e40
+shell-this-link-holds-something-that = 无法读取此链接。它可能在复制时被截断了。
 # en: 7dfd19fef00f41e899fb6e2753b71ae40ba59e6d
 shell-n-of-max-link-characters = 链接还剩 { $n } / { $max } 个字符
 # en: 134d73b30c18c4662e6a42e4a42fbb712bbbb10a
@@ -27,38 +27,38 @@ shell-n-characters-over-link-limit-short-link-holds-max = 超出链接上限 { $
 # en: e7722b7943884e579644a3f5bd2b605afd08a156
 shell-n-characters-over-what-short = 超出短链接容量 { $n } 个字符
 # Before a document that lives nowhere but its link (Private, changed) is left for another place: the question and its three answers.
-# en: 270fcef56b6aa99fb049f9e94bf8062a08468b53
-shell-this-document-lives-in-its = 这份文档只存在于它的链接中
-# en: 35181431563f87ee230c27ad2906322b2e179863
-shell-nothing-is-saved-on-this = 此设备上没有保存任何内容。复制链接即可留住它，或把它保存在此设备上；按“返回”也能回到它。
-# en: 64508992f4c386a816b427ac54bb12a84d5ea444
+# en: f0bba930d38a38cacb48e472c8d4856caa4d8fa8
+shell-this-document-lives-in-its = 这份文档尚未保存
+# en: 43454bfced276b8a1b83dea8a0bef1794a9bde60
+shell-nothing-is-saved-on-this = 它只存在于自己的链接中。复制链接即可留住它，或把它保存在此浏览器中。按“返回”也能回到这里。
+# en: e0ef0b02c240e569b52e799771dbb4fb07b35818
 shell-copy-link-and-go = 复制链接并离开
-# en: 3f330c650bbe812fc3d63aaafef9c41c466b434d
-shell-turn-on-save-in-browser = 打开“在浏览器中保存”并保留在这里
-# en: e306ecf9d38e039a8fbdc3a0603e44798d6e8af9
-shell-go-without = 直接离开
-# en: a3dd9e2a9b73fb22a15d305fb2e4cc63f03c8738
-shell-save-in-browser-is-on = “在浏览器中保存”已打开：此浏览器会保留你打开的文档。可在菜单中关闭。
-# en: 8daf7106c5bd8c8c626a87c5294e823bbe63ebc7
-shell-another-version = 另一个版本
-# en: abd40babb99a3836871422c0527a53f8c830cb60
-shell-kept-on-this-device = 已保留在此设备上
+# en: fdb4eeef33355eb9aed9f11d6ddcdfe0c08a29ea
+shell-turn-on-save-in-browser = 在浏览器中保存并离开
+# en: 634bae7c8177155bc24961f3493f425b66e88c16
+shell-go-without = 不保存并离开
+# en: ee7a39c93b7018b92bcff5511a92081df68dd3db
+shell-save-in-browser-is-on = “在浏览器中保存”已打开。你打开的文档会保存在这里。可在菜单中关闭。
+# en: 97c669558589e3b0cf0917cb9caece8844ba65d9
+shell-another-version = 另一个已保存的版本
+# en: 87222e82bf5d208052c68fa66c93d131fa18fc67
+shell-kept-on-this-device = 已保存到此设备
 # en: 266695479a949eec44dea9db4e15fba00163f04e
 shell-keyboard-shortcuts = 键盘快捷键
-# en: fefdefdbb13a9f5232ca295a562ac9bfd73856bf
-shell-nothing-to-keep-yet = 还没有可保留的内容
+# en: bc447a3151935ceff76e781c90fb02c45d25f004
+shell-nothing-to-keep-yet = 还没有可保存的内容
 # en: 8c00f9130260156b1612126a7cf9a23bb3c553d6
 shell-open-it = 打开它
-# en: 8ff3cdd0c2263817118652da96e25641dea6b658
-shell-save-in-browser-is-off = “在浏览器中保存”已关闭：此浏览器不保留任何文档。在菜单中打开它，即可把文档保留在这里。
+# en: ef6e207cc7cea57220ad9a73fc6040b0085bf63e
+shell-save-in-browser-is-off = “在浏览器中保存”已关闭，因此不会保存任何内容。请在菜单中打开它。
 # en: 3939d97295147954c5488340b1f427ebbfa51e69
 shell-skip-to-apps = 跳到应用
 # en: 286b3810e407b3cef40b582c8ca4b373a58445bf
 shell-skip-to-document = 跳到文档
-# en: d5f7c8150bac2e1eb13f0d14542e91f393f3dd5e
-shell-this-device-keeps-another-version = 此设备上保留着“{ $title }”的另一个版本，来自{ $when }。
-# en: 41145b29c2301a0ab36898a2c8d394ca0c954543
-shell-this-link-was-made-by = 这个链接由更新版本的 小小办公室 生成。请重新加载页面。
+# en: 03d9aea1885137ab8ab4d9c24250515cb44161f0
+shell-this-device-keeps-another-version = 此设备上保存了“{ $title }”的另一个版本（{ $when }）。
+# en: 25c53c58cba7054a3a2ae9e9b575c7888716ae94
+shell-this-link-was-made-by = 此链接需要更新的版本。请重新加载页面。
 
 ## the home page
 
@@ -70,11 +70,11 @@ common-templates = 模板
 # The list of an app's documents kept on this device, under its tile: "Write documents"
 # en: c647789831582ba7f4b6aad72ea6f425b98aad6f
 home-app-documents = { $app }文档
-# en: 03d5d801992763494a5afc12c2686567635ee5f7
-common-forget = 忘记
+# en: f6fdbe48dc54dd86f63097a03bd24094dedd713a
+common-forget = 删除
 # The button that forgets one kept document: "Forget Launch notes"
-# en: 2c861e55bb5c24d632ed2d44773732b9caa5f6e5
-home-forget-title = 忘记{ $title }
+# en: bbc98cac8e5e1a213d5aa04b3618196a6d28bf49
+home-forget-title = 删除{ $title }
 # Under an app's documents, the rest folded away: "3 more"
 # en: 84ab0eecfadb6332ee8b1ee5c67852b7df54e66f
 home-n-more = 还有 { $n } 个
@@ -186,21 +186,21 @@ leave-you-are-leaving-tiny-little = 你即将离开 小小办公室，前往
 leave-this-link-writes-email-to = 此链接会向以下地址写一封邮件
 # en: 102dce223fdc2f3bbdda71f28108e2a6fdf21710
 leave-this-link-calls = 此链接会拨打
-# en: b19c139a72086dcd69391619ef14fa086876a096
-leave-not-secure-address-what-you = 不是安全地址：你发送到那里的内容可能在传输中被读取。
+# en: afb8b3199e929e5e9f886fdf382599c9d440c71f
+leave-not-secure-address-what-you = 这不是安全（HTTPS）地址。你发送的任何内容都可能在传输途中被读取。
 # en: 003e4888e77a22c782047c7d26d028c5eca46f1c
 leave-whole-address = 完整地址：
-# en: 9b85614da3512dbe9673a6105d2b46d08ffcfce7
-leave-someone-wrote-this-link-into = 这个链接是别人写进文档的。链接上显示的文字不一定与它的去向相符。只有信任目的地时才继续。
+# en: fdb31cf3fb383190c6864d4effd5fd6041b330cb
+leave-someone-wrote-this-link-into = 这个链接是文档作者加进去的。链接文字可能与实际地址不同。只有在你信任它时才继续。
 # en: 2e0b45f2a456e8db55f08d7b65e87593a3e9a140
 leave-go = 前往
-# en: 45d27855fa56c9d8302ede47fb6f273dc617fb32
-leave-links-of-this-kind-do = 这类链接无法在此打开。
+# en: c0f31f8a18b087fc577cbc50e9d37c68cb16c9ae
+leave-links-of-this-kind-do = 这类链接无法在这里打开。
 # About's last line, a link to the source of the build the site runs: "Running commit abc1234".
 # en: 0eda2175601e6a4148c1c8b3f85c330bc7fbcabf
 leave-running-commit-commit = 运行版本 { $commit }
-# en: f65bd08db90631ce207f564637c9177ddccf0c9a
-leave-this-link-hides-characters-in = 这个链接在地址里藏了字符。
+# en: 45469d1ce86c199fb2984929d6c2e408178f7032
+leave-this-link-hides-characters-in = 此链接的地址中含有隐藏字符。
 
 ## the copy kept on the device (status lines under the switch)
 
@@ -218,8 +218,8 @@ share-copy-into-new-document = 复制为新文档
 share-copy-link = 复制链接
 # en: 6e9d1ebfe7124caf277155d2f57b5a6787f30198
 share-copy-of-title = { $title }的副本
-# en: de823f98bab4aa409d922bd0b1ab3a038dfed9a8
-share-encrypted-here-service-holds-only = 已在本地加密：服务只保存密文，而且只保存到到期为止。
+# en: 367f9cb75618d64b28286bdc4a5b8a3f4d7092f0
+share-encrypted-here-service-holds-only = 在你的浏览器中加密。我们的服务器只保存加密后的链接，并在它过期时删除。
 # en: db4fb5a00a9a2172e9d45a362ff1b772884f64b5
 share-expires-in-n-days-date = { $n ->
        *[other] { $n } 天
@@ -236,8 +236,8 @@ share-expires-in-n-minutes-date = { $n ->
 share-opens-as-pages-to-read = 以页面形式打开阅读
 # en: 8744400a02796b44742f8f5e5b66216821eab90d
 share-opens-in-editor = 在编辑器中打开
-# en: 9b5861da44a8c139150b7bc7374fe209c2b3e34c
-common-whoever-opens-this-link-gets = 打开这个链接的每个人都会得到自己的一份副本。他们的修改留在他们自己的链接里，不在你的链接里：请他们把自己的链接发回给你。
+# en: 7fbbb75c4e853ef0e42da5fe316344fdf1a6143c
+common-whoever-opens-this-link-gets = 打开这个链接的每个人都会得到自己的一份副本。他们的修改不会出现在你的副本中。请他们把自己的链接发回给你。
 # en: 94b01acececc033463cc7731d659fbcae11c2b47
 share-short-link-that-expires = 会过期的短链接
 # en: fed3d23d480dd0bfe5a0cfff4d9f3dae7857fbe6
@@ -308,18 +308,18 @@ share-week = 一周
 share-month = 一个月
 # en: 38c22f9dbdb41d2131b4324b7722c45a1f543420
 share-make-short-link = 生成短链接
-# en: 840911d927a3bb76ae1906a51eda0ef4f4758871
-share-making = 生成中…
-# en: 2e6ce772cf6bb857f9947fd1ed63fe3d7e886634
-share-hundred-links-day-from-one = 同一个地址每天最多生成一百个链接；请明天再试。
-# en: e7e24818a74ce918c6c3ca6338d69fd06310cdea
-share-short-link-cannot-be-changed = 短链接一经生成，就不能修改，也不能撤回；到期后会自动失效。
+# en: 94d7d8ee473f817fa4b57737e7a01ec3cd13d4d4
+share-making = 正在创建…
+# en: 1c6c031b40782efe6b28678fc42d5569cc11e029
+share-hundred-links-day-from-one = 已达上限：每个地址每天最多 100 个短链接。请明天再试。
+# en: 0b5140c5b10a2b84301b5ef43056b7d89bd2187c
+share-short-link-cannot-be-changed = 短链接无法编辑或删除。它会自动过期。
 # en: 4d9182a72e391841c2817e9943cf2b07adf70220
 share-could-not-shorten-link = 无法缩短链接。
 # en: 4c0067d6b6bd96cdab1ae363ce342312a93834fd
 share-this-document-is-too-long = 此文档太长，无法生成短链接。
-# en: e0ff8e6b768c99612a5a06d385092732ee52dcc0
-share-up-to-hundred-links-day = 同一个地址每天最多可生成一百个链接。
+# en: a4d0b704a911979249dd2629e81a0205fab0aa44
+share-up-to-hundred-links-day = 每个地址每天最多 100 个短链接。
 # en: e963907dac5cd5c017869b4c96c18021c9bd058b
 share-remove = 移除
 # en: d0517071aa376e797705058bbad4b658954b9930
@@ -375,8 +375,8 @@ share-left = 左
 share-uses = 用途
 # en: 525f61b6729229b1a8854a9e50bcaa52ea96b131
 share-where = 位置
-# en: e54c097fa776a6b614aea31f6a2db3d3b8415700
-share-where-link-fits = 链接放得下的地方
+# en: cdbfed741d905515df704d9585fc74781801a24d
+share-where-link-fits = 这个链接放得下吗？
 # en: ddba25b7aa2e43ef1c94a2a8cfb8b839fb723ca2
 share-any-length = 任意长度
 # en: 23fd8ecdbffd82e04305d3cea5eae9cdb85ac9bf
@@ -385,20 +385,20 @@ share-n-over = 超出 { $n }
 ## privacy (kit/share/privacy.ts, kit/ui/privacy-dialog.ts): the password, what the device holds
 
 # The Share dialog's head line: "Created 9 Oct 2026, 14:03 · by Paul".
-# en: 753c0c4d74e3315eb4d646ab3642348964e662d5
-privacy-anyone-with-link-will-need = 任何拿到链接的人都需要密码才能打开。没人能重置密码：丢了，文档就找不回来了。
+# en: 07fd5d289286fa4714b3f407db7875fac90b9952
+privacy-anyone-with-link-will-need = 任何拿到链接的人都需要密码才能打开。密码无法重置。一旦丢失，文档就没了。
 # en: 8c684290ce0b8a8e6cee79a145e17554064a4760
 privacy-change-password = 更改密码
 # en: 5be0d11b94b1ba25b2579314f6af69649a900cde
 privacy-created-date = 创建于 { $date }
 # en: 39e64aebf907392389952dded5e20ab4836d876a
 privacy-enter-password-to-open-this = 输入密码以打开此文档。
-# en: 2533c986e139972e942e7e65fd2e1a6a6ee1e8f3
-privacy-forget-everything = 忘记全部
+# en: 554393a215e479d023a30091a1394f7ca57690e1
+privacy-forget-everything = 全部删除
 # en: 715727cdd46f1bd0703c9e846fcdd4f369ef8313
 privacy-preview-sent-with-link-to = 随链接发到社交网络的预览是第一页的图片、标题和开头的文字，在我们的服务器上以可读形式保存一个月。文档本身从不会传到那里。
-# en: 94752883801be06c9a6e225a26573bb212998447
-privacy-forget-everything-this-site-keeps = 忘记本站在此保存的一切，并且从现在起不再保留任何内容？文档本身存在各自的链接里。
+# en: a584ece11551d9b1a79856743236c51aba50c44f
+privacy-forget-everything-this-site-keeps = 删除此浏览器中保存的所有内容，并停止保存？你的文档仍然存在于各自的链接里。
 # en: a798882f1c31099bb9500e2da62c0874d8dbed78
 privacy-locked = 已锁定
 # en: a543040c9fee74b4b34282797abbf59e9d2c99b7
@@ -415,22 +415,22 @@ privacy-opening = 打开中…
 common-password = 密码
 # en: 114bea5817640fe6b9eeec86b939ec0e9a7b6d76
 privacy-password-removed = 密码已移除
-# en: f30dc3d0115848030675e54c7d2d1f036862d2a7
-privacy-password-set-link-holds-only = 密码已设置：链接里只有密文
+# en: ad1909e464528c140bf96a21ce9adda2464956c0
+privacy-password-set-link-holds-only = 密码已设置。链接现已加密。
 # en: dce69146962b392ae2b157aec604eface36e90c0
 privacy-password-ellipsis = 密码…
 # en: 9dfd349ebee555eb8d652be20dad971cae439eca
 privacy-preferences = 偏好设置
 # en: cf01481f626d5127ec7732fcbdb29504f08abefd
 privacy-privacy = 隐私
-# en: 21f9dfb5dda17d08b35d4200349b6f33f4f6ad93
-privacy-nothing-saved-in-this-browser = 此浏览器中不保存任何内容。列出的内容只在这次访问中有效。
+# en: cefceeebf3cd6d02ddc7aca8c769881a5341e829
+privacy-nothing-saved-in-this-browser = 此浏览器中没有保存任何内容。列出的项目只在这次访问中保留。
 # en: 626a605da9dbcd888eadcad13deebd3a64011c0a
 privacy-protected-by-password = 受密码保护
 # en: acef17d00b9a1b6e1e15e76d27ae53635928a7a6
 privacy-remove-password = 移除密码
-# en: c60513159f73aa6f6a1b2330b5f96b93fc0b4fab
-privacy-sealing = 加密中…
+# en: 788f55b0957b15918c6aba279f4f0377a5a1db90
+privacy-sealing = 正在加密…
 # en: 94408e41c12e924b82da7ea6e79e5cb69ac9e042
 privacy-set-password = 设置密码
 # en: f897cb67f049674308a073079bd85ad0649f8c82
@@ -439,12 +439,12 @@ privacy-short-links = 短链接
 privacy-set-password-in-share = 设置密码，请在“分享”中操作
 # en: e546afa59de2ec4b23ca6c4fafbaddac7bab9240
 privacy-short-links-made-here-until = 在这里生成的短链接，保留到过期为止。
-# en: f25e1c269ee979c4c6421db94967fded852e0e16
-privacy-their-names-and-links-for = 它们的名称和链接，用于主页。
-# en: a32b9cf327471cc4cef625a9a55acf53fc4de3de
-privacy-theme-lifetime-of-short-links = 主题、短链接的有效期。
-# en: 5c4a8471c132625d7dd5c7a9e4c9a5da20111307
-privacy-this-document-has-password-link = 此文档设有密码。链接以及由它生成的任何短链接里都只有密文。
+# en: b556bf027f9123d39581babef7e15564c24866da
+privacy-their-names-and-links-for = 名称和链接，显示在主页上。
+# en: 5300fdca86b5b32fd463f73704e318a2b8fa9961
+privacy-theme-lifetime-of-short-links = 主题和短链接设置。
+# en: 0c6a2cfe53459957b6899930a2e5cd46b6541cec
+privacy-this-document-has-password-link = 此文档设有密码。链接以及由它生成的任何短链接都已加密。
 # en: 0d21e52aba49ee4331213463b46c2ece33ad3cf4
 common-this-document-is-locked = 此文档已锁定
 # en: 1dc606b1828a1e2f5bbbed9ed30fa3a80712e3d8
@@ -453,16 +453,16 @@ privacy-this-document-is-locked-with = 此文档已用密码锁定。
 privacy-unlock = 解锁
 # en: 887b0828ec99930408eb32249f1209057b1b234c
 common-unlock-ellipsis = 解锁…
-# en: 6e36f0d04771b58ab61c808296aee03f962bef41
-privacy-what-this-device-holds = 此设备保存了什么
+# en: ce3661a255464b1b22e6f395685d0e6f9fa077da
+privacy-what-this-device-holds = 此设备上存储的内容
 # en: 8485be9e7b3e998c5f1eef5ce87d2aa67726e3cb
 privacy-your-documents = 你的文档
 # en: d21905a9907932f7976e1ca96129c0af871f2715
 privacy-your-browsers-history = 浏览器的历史记录
-# en: 269988034e9a4b923026474a21d96d4af3695cff
-privacy-every-document-opened-here-in = 在这里打开过的每个文档，内容完整，除非它设有密码。
-# en: c210c4b744aed5cf6e1817c2417729dfddb43b2f
-privacy-not-ours-to-clear = 我们无法清除
+# en: cdff70e571d4ed7aeb1a43cedaf33299bdcd258e
+privacy-every-document-opened-here-in = 你打开的每一份文档的全部内容，设有密码的除外。
+# en: 18b8a03ed6567555edd5005aab5b090984f4b5bd
+privacy-not-ours-to-clear = 我们无法清除这一项
 # en: 3ca2d1d26637d42b974b313bb8ce231333179a9e
 privacy-by-name = 由{ $name }
 # en: a9e72cf83916d4381012a19b329292818f845a43
@@ -475,8 +475,8 @@ privacy-n-links = { $n ->
     }
 # en: 2ddd4097832d991c46023732a889beeb8ec4c29d
 privacy-n-set = 已设置 { $n } 项
-# en: f522e7a8504f4a47ae56d7bfbcc403510037eda3
-privacy-copy-this-and-send-it = 复制它，并用链接以外的途径发送。它无法再次显示。
+# en: a97ce1edde4ad396d1cff34063087d0bf5d0e1a8
+privacy-copy-this-and-send-it = 复制这个密码，并与链接分开发送。它不会再次显示。
 # en: 7640428ae16fc2b673d689ddf6b1ea15eed407d3
 privacy-make-another = 再生成一个
 # en: 9a0081f0b2bff82fac1961a403734134b9a3b170
@@ -499,8 +499,8 @@ locked-document = 已锁定的文档
 # A placed document whose link cannot be read (cut short when it was copied).
 # en: 0c45986cb6755e463398a592a861baaf44018954
 locked-this-document-cannot-be-read = 无法读取此文档。
-# en: 5a1e9ab40b695d3286aa033757aeb41cfa066ea3
-locked-that-password-does-not-open = 这个密码打不开此链接。如果你确定密码没错，链接可能在复制时被截断了：请对方重新发送，或要一个短链接。
+# en: a2a127edeb3eed5dc264fc299b034db6493e1636
+locked-that-password-does-not-open = 这个密码打不开此链接。如果你确定密码没错，链接可能在复制时被截断了。请再要一次，或要一个短链接。
 
 ## words several apps share
 
@@ -560,7 +560,7 @@ common-n-of-count = { $n } / { $count }
 # en: 5b221e9c2a451799d8f37e2b9874409d5e03ab05
 download-print = 打印
 # en: f304fc6dd3e87a37a6c53cb62344c10a789a7ad9
-common-print-or-save-as-pdf = 打印或存为 PDF
+common-print-or-save-as-pdf = 打印或保存为 PDF
 # en: 473b3126e859286ef98d231328fa11a3216823a1
 download-picture-png = 图片（PNG）
 # en: 3ad1b6c4e3dcf07e9ac0c95d5303f7ca4f89e55e
@@ -660,8 +660,8 @@ editor-bold-italic-and-links = 粗体、斜体和链接
 editor-one-of-words-column-holds = 此列已有的词之一，或一个新词
 # en: e31d972229de381b461860014dd710856361917a
 editor-option = 选项
-# en: 9120f2a9192f0a751456f7a9ea9b8dd6351c39cc
-editor-this-browser-lets-page-paste = 此浏览器只允许页面通过键盘粘贴：请使用键盘上的“粘贴”。
+# en: eb883fb88ed57f39b760fee6ee8f5a04a8cdc7ba
+editor-this-browser-lets-page-paste = 此浏览器只允许通过键盘或“粘贴”菜单粘贴。
 
 ## the example in the kit's own documentation
 
@@ -3092,20 +3092,20 @@ compare-n-put-in = { $n ->
 open-opened-name = 已打开{ $name }
 # en: 90dd520de97cc996176f013da9d5f056fd05ac19
 open-that-file-is-not-words = 这个文件里的文字 小小办公室 读不了。
-# en: 728560affd455ad8c5e533a5332422736feb1e1f
-open-that-file-is-too-large = 这个文件太大，不能作为文档。
-# en: 1708824a828efcd52e571a4754c61010bd0757be
-open-keep-them-on-this-device = 保存在此设备上
-# en: 1d39ec95bbaaddaabf29fa35565930e6e75423db
-open-nothing-is-saved-on-this = 此设备现在不保存任何内容。将它们保存在这里，或打开其中一份。
+# en: 1d08903947cc83b648f8ad96b1e23466a2dbed11
+open-that-file-is-too-large = 那个文件太大了。
+# en: 8f432852569edbf7610713a6554e7a61396327d5
+open-keep-them-on-this-device = 保存到此设备
+# en: c4fe6d8b035f6108e8a7e0037667dacf3d6cca25
+open-nothing-is-saved-on-this = 此设备上没有保存任何内容。把它们保存在这里，或打开其中一份。
 # en: 0826daee1d616f7de3a2b205eb2360fcaccc77ef
 open-first = 打开第一份
 # en: 59d36bf6c42ab3ae1481fe62abbc67ffef7a8b22
 open-saving-in-this-browser-n = 正在此浏览器中保存：已保存 { $n ->
        *[other] { $n } 份文档
     }
-# en: f76190784e6e3d15f4a90859346a0722ece04c62
-open-that-zip-holds-no-documents = 这个 zip 里没有 小小办公室 能读的文档。
+# en: 4fc6621d5b53d413dd1fd42cf7e7834ee3ecba5a
+open-that-zip-holds-no-documents = 在那个 zip 中没有找到可读取的文档。
 # en: ed5d2e1ab481efa92392820d83922b25c236c730
 open-n-documents-kept = 已保存 { $n ->
        *[other] { $n } 份文档
@@ -3127,8 +3127,8 @@ keys-normal-size = 正常大小
 keys-everything-larger = 整体放大
 # en: d1a6c5490cb95093a9fb9116f092d142b8a73ff6
 keys-everything-smaller = 整体缩小
-# en: 8071b6dbf75196fe4d4789865513507da287cbb4
-keys-keep-this-document-on-device = 把这份文档保留在设备上
+# en: 67312061f24800b7dc75b07101329959c5c1af88
+keys-keep-this-document-on-device = 保存到此设备
 # en: 4d5e11a737e63d755f4127a0139f235f3794b6c6
 keys-show-these-shortcuts = 显示这些快捷键
 # en: da05037a43419e15395f52f0ed4dcb0c7f75c1f2

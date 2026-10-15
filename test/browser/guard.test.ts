@@ -99,7 +99,7 @@ test('a javascript: link never opens: a toast says so', async () => {
   shell.append(bad);
   bad.click();
   await until(() => !!shell.querySelector('.to-toast.shown'));
-  expect(shell.querySelector('.to-toast')!.textContent).toBe('Links of this kind do not open here.');
+  expect(shell.querySelector('.to-toast')!.textContent).toBe('This type of link can’t be opened here.');
   expect(document.title).not.toBe('pwned');
   expect(guardShut()).toBe(true);
 });
@@ -238,7 +238,7 @@ test('the guard describes itself: its dialog’s description is what the link do
   const said = ids.map((id) => document.getElementById(id)?.textContent ?? '').join(' ');
   expect(said).toContain('You are leaving Tiny Little Office for');
   expect(said).toContain('plain.example');
-  expect(said).toContain('Not a secure address');
+  expect(said).toContain('Not a secure (HTTPS) address');
   // A dialog that names no description has none.
   const other = document.createElement('to-dialog') as ToDialog;
   document.body.append(other);

@@ -120,7 +120,7 @@ test('a zip of one document opens it, as that file would; a zip of none says so'
   expect(document.querySelector('to-dialog.to-zip-dialog')?.querySelector('dialog')?.open ?? false).toBe(false);
   await mount('');
   dropFile(zipFile({ 'README.txt': 'hi\n' }));
-  await until(() => toast() === 'That zip holds no documents Tiny Little Office can read.');
+  await until(() => toast() === 'No readable documents found in that zip.');
   expect(location.hash).toBe('');
 });
 

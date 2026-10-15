@@ -217,7 +217,7 @@ test('Mod+S keeps the document under Save in browser, and says why not while it 
     const again = await mount(`#/v1/write/${NOTES}`);
     await until(() => !!again.querySelector('to-write-editor'));
     key('s');
-    await until(() => toastSays(again) === 'Kept on this device');
+    await until(() => toastSays(again) === 'Saved on this device');
     expect(library().map((k) => [k.title, k.hash])).toEqual([['Harbour notes', `#/v1/write/${NOTES}`]]);
     expect((history.state as { kept: string }).kept).toBe(library()[0].id);
   });
@@ -330,7 +330,7 @@ test('opened from a link while the library keeps another version of the same doc
     const shell = await mount(`#/v1/write/${NOTES}`);
     await until(() => !!shell.querySelector('.to-other'));
     const line = shell.querySelector('.to-other')!;
-    expect(line.textContent).toContain('This device keeps another version of “Harbour notes”, from 1 hour ago.');
+    expect(line.textContent).toContain('A different version of “Harbour notes” from 1 hour ago is saved on this device.');
     expect(line.querySelector<HTMLAnchorElement>('.to-other-open')!.getAttribute('href')).toBe(newer);
     line.querySelector<HTMLButtonElement>('[aria-label=Close]')!.click();
     await until(() => !shell.querySelector('.to-other'));
@@ -346,7 +346,7 @@ test('opened from a link while the library keeps another version of the same doc
 test('a link from a newer Tiny Little Office says so', async () => {
   const shell = await mount(`#/v2/write/${NOTES}`);
   await shell.updateComplete;
-  expect(shell.textContent).toContain('This link was made by a newer Tiny Little Office. Reload the page to get it.');
+  expect(shell.textContent).toContain('This link needs a newer version. Reload the page.');
 });
 
 test('the Share dialog’s head line: where the link fits with Copy, the rooms in a popover on a tap, red past the limit', async () => {

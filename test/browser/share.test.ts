@@ -107,7 +107,7 @@ test('Share says a link is a copy: one sentence under the link, before the ways 
   const shell = await written(null!);
   const d = await open(shell);
   const line = d.querySelector<HTMLElement>('.to-share-copies')!;
-  expect(line.textContent).toBe('Whoever opens this link gets their own copy. Changes they make are in their link, not in yours: ask them to send theirs back.');
+  expect(line.textContent).toBe('Anyone who opens this link gets their own copy. Their changes won’t appear in yours. Ask them to send their link back.');
   expect(line.previousElementSibling!.matches('.to-share-fit')).toBe(true);
   expect(line.nextElementSibling!.matches('.to-share-links')).toBe(true);
 });
@@ -141,9 +141,9 @@ test('Make calls the short service and shows the link in a read-only field with 
   });
   const d = await open(shell);
   // Said where the lifetime is chosen: it cannot be changed or recalled, and how many a day.
-  expect(d.querySelector('.to-share-short .to-short-fixed')!.textContent).toBe('A short link cannot be changed or recalled once made; it expires on its own.');
+  expect(d.querySelector('.to-share-short .to-short-fixed')!.textContent).toBe('A short link can’t be edited or deleted. It expires automatically.');
   expect(d.querySelector('.to-share-short .to-short-fixed + .to-hint')!.textContent).toBe(
-    'Encrypted here: the service holds only ciphertext, and only until then. Up to a hundred links a day from one address.',
+    'Encrypted in your browser. Our server stores only the encrypted link and deletes it when it expires. Up to 100 short links a day per address.',
   );
   d.querySelector<HTMLButtonElement>('.to-make')!.click();
   await until(() => !!d.querySelector('.to-short-field'));

@@ -36,7 +36,36 @@ export const TERMS: Term[] = [
   { term: 'Redo' },
   { term: 'Keep' },
   { term: 'Kept' },
-  { term: 'Forget' },
+  // Paul's four words (2026-10-15): delete, not "take away" or "forget"; save, not "keep"; select, not "choose" or
+  // "in hand"; outdent, not "bring out".
+  { term: 'Delete' },
+  {
+    term: 'save',
+    words: {
+      ar: 'حفظ',
+      bn: 'সংরক্ষণ',
+      de: 'speichern',
+      es: 'guardar',
+      fr: 'enregistrer',
+      // The root's two letters: שמירה, לשמור, נשמר.
+      he: 'שמ',
+      hi: 'सेव',
+      ht: 'anrejistre',
+      it: 'salva',
+      ja: '保存',
+      ko: '저장',
+      // opslaan, opgeslagen, op te slaan.
+      nl: 'sla',
+      pl: 'zapis',
+      'pt-br': 'salvar',
+      ru: 'сохран',
+      uk: 'збер',
+      ur: 'محفوظ',
+      yi: 'היט',
+      'zh-hans': '保存',
+      'zh-hant': '儲存',
+    },
+  },
   { term: 'Save in browser' },
   { term: 'password' },
   // The Calculator's keys are keys of a keyboard; an animation's key is a keyframe.
@@ -151,7 +180,7 @@ for (const [lang, path] of files) {
     const strings = flatMessages(readFileSync(path, 'utf8'), lang);
     const problems: string[] = [];
     const used = new Set<string>();
-    for (const d of drift(en, strings, TERMS)) {
+    for (const d of drift(en, strings, TERMS, lang)) {
       if (d.words.size > 1) {
         if (allowed(lang, d.term)) used.add(`${d.term}|`);
         else problems.push(`"${d.term}" is said two ways: ${[...d.words].map(([w, ids]) => `"${w}" (${ids.join(', ')})`).join(' and ')}`);

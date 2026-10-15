@@ -17,8 +17,8 @@ common-untitled-noun = { $noun } bez tytułu
 shell-download = Pobierz
 # en: 33ce417454bfd838897deaeee2355e818a5d4160
 shell-loading = Wczytuję…
-# en: 49c3619264bdb73d79b02cf3e4e2a8c4c01920e0
-shell-this-link-holds-something-that = Ten link zawiera coś, czego nie da się odczytać. Mógł zostać ucięty przy kopiowaniu.
+# en: 22456f903bcbdedb06221ade9b87febb47722e40
+shell-this-link-holds-something-that = Nie można odczytać tego linku. Mógł zostać ucięty przy kopiowaniu.
 # en: 7dfd19fef00f41e899fb6e2753b71ae40ba59e6d
 shell-n-of-max-link-characters = Zostało { $n } z { $max } znaków linku
 # en: 134d73b30c18c4662e6a42e4a42fbb712bbbb10a
@@ -28,38 +28,38 @@ shell-n-characters-over-link-limit-short-link-holds-max = { $n } znaków ponad l
 # en: e7722b7943884e579644a3f5bd2b605afd08a156
 shell-n-characters-over-what-short = { $n } znaków więcej, niż mieści krótki link
 # Before a document that lives nowhere but its link (Private, changed) is left for another place: the question and its three answers.
-# en: 270fcef56b6aa99fb049f9e94bf8062a08468b53
-shell-this-document-lives-in-its = Ten dokument żyje w swoim linku
-# en: 35181431563f87ee230c27ad2906322b2e179863
-shell-nothing-is-saved-on-this = Na tym urządzeniu nic nie jest zapisane. Skopiuj link, żeby go zachować, albo zachowaj dokument na tym urządzeniu. „Wstecz” też go przywróci.
-# en: 64508992f4c386a816b427ac54bb12a84d5ea444
+# en: f0bba930d38a38cacb48e472c8d4856caa4d8fa8
+shell-this-document-lives-in-its = Ten dokument nie jest zapisany
+# en: 43454bfced276b8a1b83dea8a0bef1794a9bde60
+shell-nothing-is-saved-on-this = Istnieje tylko w swoim linku. Skopiuj link, żeby go zachować, albo zapisz go w tej przeglądarce. „Wstecz” też do niego wróci.
+# en: e0ef0b02c240e569b52e799771dbb4fb07b35818
 shell-copy-link-and-go = Skopiuj link i wyjdź
-# en: 3f330c650bbe812fc3d63aaafef9c41c466b434d
-shell-turn-on-save-in-browser = Włącz „Zapisuj w przeglądarce” i zachowaj tutaj
-# en: e306ecf9d38e039a8fbdc3a0603e44798d6e8af9
-shell-go-without = Wyjdź bez zapisu
-# en: a3dd9e2a9b73fb22a15d305fb2e4cc63f03c8738
-shell-save-in-browser-is-on = „Zapisuj w przeglądarce” jest włączone: ta przeglądarka zachowuje otwierane dokumenty. Wyłączysz to w menu.
-# en: 8daf7106c5bd8c8c626a87c5294e823bbe63ebc7
-shell-another-version = Inna wersja
-# en: abd40babb99a3836871422c0527a53f8c830cb60
-shell-kept-on-this-device = Zachowano na tym urządzeniu
+# en: fdb4eeef33355eb9aed9f11d6ddcdfe0c08a29ea
+shell-turn-on-save-in-browser = Zapisz w przeglądarce i wyjdź
+# en: 634bae7c8177155bc24961f3493f425b66e88c16
+shell-go-without = Wyjdź bez zapisywania
+# en: ee7a39c93b7018b92bcff5511a92081df68dd3db
+shell-save-in-browser-is-on = „Zapisuj w przeglądarce” jest włączone. Otwierane dokumenty są tu zapisywane. Wyłącz to w menu.
+# en: 97c669558589e3b0cf0917cb9caece8844ba65d9
+shell-another-version = Inna zapisana wersja
+# en: 87222e82bf5d208052c68fa66c93d131fa18fc67
+shell-kept-on-this-device = Zapisano na tym urządzeniu
 # en: 266695479a949eec44dea9db4e15fba00163f04e
 shell-keyboard-shortcuts = Skróty klawiszowe
-# en: fefdefdbb13a9f5232ca295a562ac9bfd73856bf
-shell-nothing-to-keep-yet = Jeszcze nic do zachowania
+# en: bc447a3151935ceff76e781c90fb02c45d25f004
+shell-nothing-to-keep-yet = Jeszcze nic do zapisania
 # en: 8c00f9130260156b1612126a7cf9a23bb3c553d6
 shell-open-it = Otwórz
-# en: 8ff3cdd0c2263817118652da96e25641dea6b658
-shell-save-in-browser-is-off = „Zapisuj w przeglądarce” jest wyłączone: ta przeglądarka nie zachowuje dokumentów. Włącz to w menu, żeby je tu zachować.
+# en: ef6e207cc7cea57220ad9a73fc6040b0085bf63e
+shell-save-in-browser-is-off = „Zapisuj w przeglądarce” jest wyłączone, więc nic nie jest zapisywane. Włącz to w menu.
 # en: 3939d97295147954c5488340b1f427ebbfa51e69
 shell-skip-to-apps = Przejdź do aplikacji
 # en: 286b3810e407b3cef40b582c8ca4b373a58445bf
 shell-skip-to-document = Przejdź do dokumentu
-# en: d5f7c8150bac2e1eb13f0d14542e91f393f3dd5e
-shell-this-device-keeps-another-version = To urządzenie trzyma inną wersję „{ $title }” z { $when }.
-# en: 41145b29c2301a0ab36898a2c8d394ca0c954543
-shell-this-link-was-made-by = Ten link utworzyła nowsza wersja Tiny Little Office. Odśwież stronę, żeby go otworzyć.
+# en: 03d9aea1885137ab8ab4d9c24250515cb44161f0
+shell-this-device-keeps-another-version = Na tym urządzeniu zapisano inną wersję „{ $title }” ({ $when }).
+# en: 25c53c58cba7054a3a2ae9e9b575c7888716ae94
+shell-this-link-was-made-by = Ten link wymaga nowszej wersji. Odśwież stronę.
 
 ## the home page
 
@@ -71,11 +71,11 @@ common-templates = Szablony
 # The list of an app's documents kept on this device, under its tile: "Write documents"
 # en: c647789831582ba7f4b6aad72ea6f425b98aad6f
 home-app-documents = Dokumenty: { $app }
-# en: 03d5d801992763494a5afc12c2686567635ee5f7
-common-forget = Zapomnij
+# en: f6fdbe48dc54dd86f63097a03bd24094dedd713a
+common-forget = Usuń
 # The button that forgets one kept document: "Forget Launch notes"
-# en: 2c861e55bb5c24d632ed2d44773732b9caa5f6e5
-home-forget-title = Zapomnij: { $title }
+# en: bbc98cac8e5e1a213d5aa04b3618196a6d28bf49
+home-forget-title = Usuń: { $title }
 # Under an app's documents, the rest folded away: "3 more"
 # en: 84ab0eecfadb6332ee8b1ee5c67852b7df54e66f
 home-n-more = Jeszcze { $n }
@@ -193,21 +193,21 @@ leave-you-are-leaving-tiny-little = Opuszczasz Tiny Little Office i idziesz na
 leave-this-link-writes-email-to = Ten link pisze e-mail do
 # en: 102dce223fdc2f3bbdda71f28108e2a6fdf21710
 leave-this-link-calls = Ten link dzwoni do
-# en: b19c139a72086dcd69391619ef14fa086876a096
-leave-not-secure-address-what-you = To nie jest bezpieczny adres: to, co tam wyślesz, można przeczytać po drodze.
+# en: afb8b3199e929e5e9f886fdf382599c9d440c71f
+leave-not-secure-address-what-you = To nie jest bezpieczny adres (HTTPS). Wszystko, co wyślesz, może zostać odczytane po drodze.
 # en: 003e4888e77a22c782047c7d26d028c5eca46f1c
 leave-whole-address = Cały adres:
-# en: 9b85614da3512dbe9673a6105d2b46d08ffcfce7
-leave-someone-wrote-this-link-into = Ktoś wpisał ten link do dokumentu. Słowa pokazane jako link nie muszą zgadzać się z tym, dokąd prowadzi. Idź tylko wtedy, gdy ufasz temu miejscu.
+# en: fdb31cf3fb383190c6864d4effd5fd6041b330cb
+leave-someone-wrote-this-link-into = Ten link dodała osoba, która napisała dokument. Tekst linku może się różnić od adresu. Przejdź dalej tylko, jeśli mu ufasz.
 # en: 2e0b45f2a456e8db55f08d7b65e87593a3e9a140
 leave-go = Idź
-# en: 45d27855fa56c9d8302ede47fb6f273dc617fb32
-leave-links-of-this-kind-do = Linki tego rodzaju nie otwierają się tutaj.
+# en: c0f31f8a18b087fc577cbc50e9d37c68cb16c9ae
+leave-links-of-this-kind-do = Linku tego typu nie można tu otworzyć.
 # About's last line, a link to the source of the build the site runs: "Running commit abc1234".
 # en: 0eda2175601e6a4148c1c8b3f85c330bc7fbcabf
 leave-running-commit-commit = Działa commit { $commit }
-# en: f65bd08db90631ce207f564637c9177ddccf0c9a
-leave-this-link-hides-characters-in = Ten link ukrywa znaki w swoim adresie.
+# en: 45469d1ce86c199fb2984929d6c2e408178f7032
+leave-this-link-hides-characters-in = Adres tego linku zawiera ukryte znaki.
 
 ## the copy kept on the device (status lines under the switch)
 
@@ -225,8 +225,8 @@ share-copy-into-new-document = Kopiuj do nowego dokumentu
 share-copy-link = Kopiuj link
 # en: 6e9d1ebfe7124caf277155d2f57b5a6787f30198
 share-copy-of-title = Kopia: { $title }
-# en: de823f98bab4aa409d922bd0b1ab3a038dfed9a8
-share-encrypted-here-service-holds-only = Zaszyfrowane tutaj: usługa trzyma tylko szyfrogram i tylko do tego czasu.
+# en: 367f9cb75618d64b28286bdc4a5b8a3f4d7092f0
+share-encrypted-here-service-holds-only = Szyfrowane w Twojej przeglądarce. Nasz serwer przechowuje tylko zaszyfrowany link i usuwa go, gdy wygaśnie.
 # en: db4fb5a00a9a2172e9d45a362ff1b772884f64b5
 share-expires-in-n-days-date = Wygasa za { $n ->
         [one] { $n } dzień
@@ -252,8 +252,8 @@ share-expires-in-n-minutes-date = Wygasa za { $n ->
 share-opens-as-pages-to-read = Otwiera się jako strony do czytania
 # en: 8744400a02796b44742f8f5e5b66216821eab90d
 share-opens-in-editor = Otwiera się w edytorze
-# en: 9b5861da44a8c139150b7bc7374fe209c2b3e34c
-common-whoever-opens-this-link-gets = Każdy, kto otworzy ten link, dostaje własną kopię. Zmiany, które wprowadzi, są w jego linku, nie w Twoim: poproś, żeby odesłał Ci swój.
+# en: 7fbbb75c4e853ef0e42da5fe316344fdf1a6143c
+common-whoever-opens-this-link-gets = Każdy, kto otworzy ten link, dostaje własną kopię. Jego zmiany nie pojawią się w Twojej. Poproś, żeby odesłał Ci swój link.
 # en: 94b01acececc033463cc7731d659fbcae11c2b47
 share-short-link-that-expires = Krótki link, który wygasa
 # en: fed3d23d480dd0bfe5a0cfff4d9f3dae7857fbe6
@@ -336,18 +336,18 @@ share-week = Tydzień
 share-month = Miesiąc
 # en: 38c22f9dbdb41d2131b4324b7722c45a1f543420
 share-make-short-link = Zrób krótki link
-# en: 840911d927a3bb76ae1906a51eda0ef4f4758871
-share-making = Robię…
-# en: 2e6ce772cf6bb857f9947fd1ed63fe3d7e886634
-share-hundred-links-day-from-one = Sto linków dziennie z jednego adresu; spróbuj jutro.
-# en: e7e24818a74ce918c6c3ca6338d69fd06310cdea
-share-short-link-cannot-be-changed = Krótkiego linku nie można zmienić ani wycofać po utworzeniu; wygasa sam.
+# en: 94d7d8ee473f817fa4b57737e7a01ec3cd13d4d4
+share-making = Tworzenie…
+# en: 1c6c031b40782efe6b28678fc42d5569cc11e029
+share-hundred-links-day-from-one = Osiągnięto limit: 100 krótkich linków dziennie z jednego adresu. Spróbuj jutro.
+# en: 0b5140c5b10a2b84301b5ef43056b7d89bd2187c
+share-short-link-cannot-be-changed = Krótkiego linku nie można edytować ani usunąć. Wygasa automatycznie.
 # en: 4d9182a72e391841c2817e9943cf2b07adf70220
 share-could-not-shorten-link = Nie udało się skrócić linku.
 # en: 4c0067d6b6bd96cdab1ae363ce342312a93834fd
 share-this-document-is-too-long = Ten dokument jest za długi na krótki link.
-# en: e0ff8e6b768c99612a5a06d385092732ee52dcc0
-share-up-to-hundred-links-day = Do stu linków dziennie z jednego adresu.
+# en: a4d0b704a911979249dd2629e81a0205fab0aa44
+share-up-to-hundred-links-day = Do 100 krótkich linków dziennie z jednego adresu.
 # en: e963907dac5cd5c017869b4c96c18021c9bd058b
 share-remove = Usuń
 # same
@@ -404,8 +404,8 @@ share-left = W lewo
 share-uses = Używa
 # en: 525f61b6729229b1a8854a9e50bcaa52ea96b131
 share-where = Gdzie
-# en: e54c097fa776a6b614aea31f6a2db3d3b8415700
-share-where-link-fits = Gdzie zmieści się link
+# en: cdbfed741d905515df704d9585fc74781801a24d
+share-where-link-fits = Czy ten link się zmieści?
 # en: ddba25b7aa2e43ef1c94a2a8cfb8b839fb723ca2
 share-any-length = dowolna długość
 # en: 23fd8ecdbffd82e04305d3cea5eae9cdb85ac9bf
@@ -414,20 +414,20 @@ share-n-over = { $n } za dużo
 ## privacy (kit/share/privacy.ts, kit/ui/privacy-dialog.ts): the password, what the device holds
 
 # The Share dialog's head line: "Created 9 Oct 2026, 14:03 · by Paul".
-# en: 753c0c4d74e3315eb4d646ab3642348964e662d5
-privacy-anyone-with-link-will-need = Każdy, kto ma link, będzie potrzebował hasła, żeby otworzyć dokument. Nikt nie może go zresetować: jeśli je zgubisz, dokument przepada.
+# en: 07fd5d289286fa4714b3f407db7875fac90b9952
+privacy-anyone-with-link-will-need = Każdy, kto ma link, będzie potrzebował hasła, żeby go otworzyć. Nie da się go zresetować. Jeśli je zgubisz, dokument przepadnie.
 # en: 8c684290ce0b8a8e6cee79a145e17554064a4760
 privacy-change-password = Zmień hasło
 # en: 5be0d11b94b1ba25b2579314f6af69649a900cde
 privacy-created-date = Utworzono { $date }
 # en: 39e64aebf907392389952dded5e20ab4836d876a
 privacy-enter-password-to-open-this = Wpisz hasło, żeby otworzyć ten dokument.
-# en: 2533c986e139972e942e7e65fd2e1a6a6ee1e8f3
-privacy-forget-everything = Zapomnij wszystko
+# en: 554393a215e479d023a30091a1394f7ca57690e1
+privacy-forget-everything = Usuń wszystko
 # en: 715727cdd46f1bd0703c9e846fcdd4f369ef8313
 privacy-preview-sent-with-link-to = Podgląd wysłany z linkiem do sieci społecznościowej to obraz pierwszej strony, tytuł i pierwsze słowa, czytelne na naszym serwerze przez miesiąc. Sam dokument nigdy tam nie trafia.
-# en: 94752883801be06c9a6e225a26573bb212998447
-privacy-forget-everything-this-site-keeps = Zapomnieć wszystko, co ta strona tu trzyma, i odtąd nic nie zachowywać? Same dokumenty żyją w swoich linkach.
+# en: a584ece11551d9b1a79856743236c51aba50c44f
+privacy-forget-everything-this-site-keeps = Usunąć wszystko, co zapisano w tej przeglądarce, i przestać zapisywać? Twoje dokumenty nadal istnieją w swoich linkach.
 # en: a798882f1c31099bb9500e2da62c0874d8dbed78
 privacy-locked = Zablokowany
 # en: a543040c9fee74b4b34282797abbf59e9d2c99b7
@@ -444,22 +444,22 @@ privacy-opening = Otwieram…
 common-password = Hasło
 # en: 114bea5817640fe6b9eeec86b939ec0e9a7b6d76
 privacy-password-removed = Hasło usunięte
-# en: f30dc3d0115848030675e54c7d2d1f036862d2a7
-privacy-password-set-link-holds-only = Hasło ustawione: link zawiera tylko szyfrogram
+# en: ad1909e464528c140bf96a21ce9adda2464956c0
+privacy-password-set-link-holds-only = Hasło ustawione. Link jest teraz zaszyfrowany.
 # en: dce69146962b392ae2b157aec604eface36e90c0
 privacy-password-ellipsis = Hasło…
 # en: 9dfd349ebee555eb8d652be20dad971cae439eca
 privacy-preferences = Ustawienia
 # en: cf01481f626d5127ec7732fcbdb29504f08abefd
 privacy-privacy = Prywatność
-# en: 21f9dfb5dda17d08b35d4200349b6f33f4f6ad93
-privacy-nothing-saved-in-this-browser = Nic nie jest zapisywane w tej przeglądarce. To, co widać na liście, zostaje tylko na tę wizytę.
+# en: cefceeebf3cd6d02ddc7aca8c769881a5341e829
+privacy-nothing-saved-in-this-browser = W tej przeglądarce nic nie jest zapisane. Elementy z listy zostają tylko na tę wizytę.
 # en: 626a605da9dbcd888eadcad13deebd3a64011c0a
 privacy-protected-by-password = Chroniony hasłem
 # en: acef17d00b9a1b6e1e15e76d27ae53635928a7a6
 privacy-remove-password = Usuń hasło
-# en: c60513159f73aa6f6a1b2330b5f96b93fc0b4fab
-privacy-sealing = Pieczętuję…
+# en: 788f55b0957b15918c6aba279f4f0377a5a1db90
+privacy-sealing = Szyfrowanie…
 # en: 94408e41c12e924b82da7ea6e79e5cb69ac9e042
 privacy-set-password = Ustaw hasło
 # en: f897cb67f049674308a073079bd85ad0649f8c82
@@ -468,12 +468,12 @@ privacy-short-links = Krótkie linki
 privacy-set-password-in-share = Ustaw hasło w Udostępnij
 # en: e546afa59de2ec4b23ca6c4fafbaddac7bab9240
 privacy-short-links-made-here-until = Krótkie linki utworzone tutaj, do czasu ich wygaśnięcia.
-# en: f25e1c269ee979c4c6421db94967fded852e0e16
-privacy-their-names-and-links-for = Ich nazwy i linki, na stronę główną.
-# en: a32b9cf327471cc4cef625a9a55acf53fc4de3de
-privacy-theme-lifetime-of-short-links = Motyw, czas życia krótkich linków.
-# en: 5c4a8471c132625d7dd5c7a9e4c9a5da20111307
-privacy-this-document-has-password-link = Ten dokument ma hasło. Link i każdy krótki link z niego zawierają tylko szyfrogram.
+# en: b556bf027f9123d39581babef7e15564c24866da
+privacy-their-names-and-links-for = Nazwy i linki, widoczne na stronie głównej.
+# en: 5300fdca86b5b32fd463f73704e318a2b8fa9961
+privacy-theme-lifetime-of-short-links = Motyw i ustawienia krótkich linków.
+# en: 0c6a2cfe53459957b6899930a2e5cd46b6541cec
+privacy-this-document-has-password-link = Ten dokument ma hasło. Link i każdy krótki link z niego są zaszyfrowane.
 # en: 0d21e52aba49ee4331213463b46c2ece33ad3cf4
 common-this-document-is-locked = Ten dokument jest zablokowany
 # en: 1dc606b1828a1e2f5bbbed9ed30fa3a80712e3d8
@@ -482,16 +482,16 @@ privacy-this-document-is-locked-with = Ten dokument jest zablokowany hasłem.
 privacy-unlock = Odblokuj
 # en: 887b0828ec99930408eb32249f1209057b1b234c
 common-unlock-ellipsis = Odblokuj…
-# en: 6e36f0d04771b58ab61c808296aee03f962bef41
-privacy-what-this-device-holds = Co przechowuje to urządzenie
+# en: ce3661a255464b1b22e6f395685d0e6f9fa077da
+privacy-what-this-device-holds = Przechowywane na tym urządzeniu
 # en: 8485be9e7b3e998c5f1eef5ce87d2aa67726e3cb
 privacy-your-documents = Twoje dokumenty
 # en: d21905a9907932f7976e1ca96129c0af871f2715
 privacy-your-browsers-history = Historia Twojej przeglądarki
-# en: 269988034e9a4b923026474a21d96d4af3695cff
-privacy-every-document-opened-here-in = Każdy otwarty tu dokument, w całości, chyba że ma hasło.
-# en: c210c4b744aed5cf6e1817c2417729dfddb43b2f
-privacy-not-ours-to-clear = Nie nam ją czyścić
+# en: cdff70e571d4ed7aeb1a43cedaf33299bdcd258e
+privacy-every-document-opened-here-in = Każdy otwierany dokument, w całości, chyba że ma hasło.
+# en: 18b8a03ed6567555edd5005aab5b090984f4b5bd
+privacy-not-ours-to-clear = Nie możemy tego wyczyścić
 # en: 3ca2d1d26637d42b974b313bb8ce231333179a9e
 privacy-by-name = autor: { $name }
 # en: a9e72cf83916d4381012a19b329292818f845a43
@@ -510,8 +510,8 @@ privacy-n-links = { $n ->
     }
 # en: 2ddd4097832d991c46023732a889beeb8ec4c29d
 privacy-n-set = { $n } ustawione
-# en: f522e7a8504f4a47ae56d7bfbcc403510037eda3
-privacy-copy-this-and-send-it = Skopiuj je i wyślij inną drogą niż link. Nie da się go pokazać ponownie.
+# en: a97ce1edde4ad396d1cff34063087d0bf5d0e1a8
+privacy-copy-this-and-send-it = Skopiuj to hasło i wyślij je osobno, nie razem z linkiem. Nie zostanie pokazane ponownie.
 # en: 7640428ae16fc2b673d689ddf6b1ea15eed407d3
 privacy-make-another = Utwórz inne
 # en: 9a0081f0b2bff82fac1961a403734134b9a3b170
@@ -534,8 +534,8 @@ locked-document = zablokowany dokument
 # A placed document whose link cannot be read (cut short when it was copied).
 # en: 0c45986cb6755e463398a592a861baaf44018954
 locked-this-document-cannot-be-read = Tego dokumentu nie da się odczytać.
-# en: 5a1e9ab40b695d3286aa033757aeb41cfa066ea3
-locked-that-password-does-not-open = To hasło nie otwiera tego linku. Jeśli jesteś go pewien, link mógł zostać ucięty przy kopiowaniu: poproś o niego jeszcze raz albo o krótki link.
+# en: a2a127edeb3eed5dc264fc299b034db6493e1636
+locked-that-password-does-not-open = To hasło nie otwiera tego linku. Jeśli na pewno jest dobre, link mógł zostać ucięty przy kopiowaniu. Poproś o niego jeszcze raz albo o krótki link.
 
 ## words several apps share
 
@@ -699,8 +699,8 @@ editor-bold-italic-and-links = Pogrubienie, kursywa i linki
 editor-one-of-words-column-holds = Jedno ze słów, które zawiera kolumna, albo nowe
 # en: e31d972229de381b461860014dd710856361917a
 editor-option = Opcja
-# en: 9120f2a9192f0a751456f7a9ea9b8dd6351c39cc
-editor-this-browser-lets-page-paste = Ta przeglądarka pozwala stronie wklejać tylko z klawiatury: użyj jej Wklej.
+# en: eb883fb88ed57f39b760fee6ee8f5a04a8cdc7ba
+editor-this-browser-lets-page-paste = Ta przeglądarka pozwala wklejać tylko z klawiatury lub z menu Wklej.
 
 ## the example in the kit's own documentation
 
@@ -3186,12 +3186,12 @@ compare-n-put-in = { $n ->
 open-opened-name = Otwarto { $name }
 # en: 90dd520de97cc996176f013da9d5f056fd05ac19
 open-that-file-is-not-words = Ten plik to nie tekst, który Tiny Little Office potrafi odczytać.
-# en: 728560affd455ad8c5e533a5332422736feb1e1f
-open-that-file-is-too-large = Ten plik jest za duży, by być tu dokumentem.
-# en: 1708824a828efcd52e571a4754c61010bd0757be
-open-keep-them-on-this-device = Zachowaj je na tym urządzeniu
-# en: 1d39ec95bbaaddaabf29fa35565930e6e75423db
-open-nothing-is-saved-on-this = Na tym urządzeniu nic teraz nie jest zapisane. Zachowaj je tutaj albo otwórz jeden.
+# en: 1d08903947cc83b648f8ad96b1e23466a2dbed11
+open-that-file-is-too-large = Ten plik jest za duży.
+# en: 8f432852569edbf7610713a6554e7a61396327d5
+open-keep-them-on-this-device = Zapisz je na tym urządzeniu
+# en: c4fe6d8b035f6108e8a7e0037667dacf3d6cca25
+open-nothing-is-saved-on-this = Na tym urządzeniu nic nie jest zapisane. Zapisz je tutaj albo otwórz jeden.
 # en: 0826daee1d616f7de3a2b205eb2360fcaccc77ef
 open-first = Otwórz pierwszy
 # en: 59d36bf6c42ab3ae1481fe62abbc67ffef7a8b22
@@ -3201,8 +3201,8 @@ open-saving-in-this-browser-n = Zapisywanie w tej przeglądarce: { $n ->
         [many] { $n } dokumentów zachowanych
        *[other] { $n } dokumentu zachowanego
     }
-# en: f76190784e6e3d15f4a90859346a0722ece04c62
-open-that-zip-holds-no-documents = Ten zip nie zawiera dokumentów, które Tiny Little Office potrafi odczytać.
+# en: 4fc6621d5b53d413dd1fd42cf7e7834ee3ecba5a
+open-that-zip-holds-no-documents = W tym pliku zip nie znaleziono dokumentów do odczytania.
 # en: ed5d2e1ab481efa92392820d83922b25c236c730
 open-n-documents-kept = { $n ->
         [one] { $n } dokument zachowany
@@ -3227,8 +3227,8 @@ keys-normal-size = Normalny rozmiar
 keys-everything-larger = Wszystko większe
 # en: d1a6c5490cb95093a9fb9116f092d142b8a73ff6
 keys-everything-smaller = Wszystko mniejsze
-# en: 8071b6dbf75196fe4d4789865513507da287cbb4
-keys-keep-this-document-on-device = Zachowaj ten dokument na urządzeniu
+# en: 67312061f24800b7dc75b07101329959c5c1af88
+keys-keep-this-document-on-device = Zapisz na tym urządzeniu
 # en: 4d5e11a737e63d755f4127a0139f235f3794b6c6
 keys-show-these-shortcuts = Pokaż te skróty
 # en: da05037a43419e15395f52f0ed4dcb0c7f75c1f2

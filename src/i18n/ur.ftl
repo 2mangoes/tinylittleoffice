@@ -16,8 +16,8 @@ common-untitled-noun = بے نام { $noun }
 shell-download = ڈاؤن لوڈ
 # en: 33ce417454bfd838897deaeee2355e818a5d4160
 shell-loading = لوڈ ہو رہا ہے…
-# en: 49c3619264bdb73d79b02cf3e4e2a8c4c01920e0
-shell-this-link-holds-something-that = اس لنک میں کچھ ایسا ہے جو پڑھا نہیں جا سکتا۔ ہو سکتا ہے کاپی کرتے وقت یہ کٹ گیا ہو۔
+# en: 22456f903bcbdedb06221ade9b87febb47722e40
+shell-this-link-holds-something-that = یہ لنک پڑھا نہیں جا سکتا۔ ہو سکتا ہے کاپی کرتے وقت یہ کٹ گیا ہو۔
 # en: 7dfd19fef00f41e899fb6e2753b71ae40ba59e6d
 shell-n-of-max-link-characters = لنک میں { $max } میں سے { $n } حروف باقی ہیں
 # en: 134d73b30c18c4662e6a42e4a42fbb712bbbb10a
@@ -27,38 +27,38 @@ shell-n-characters-over-link-limit-short-link-holds-max = لنک کی حد سے 
 # en: e7722b7943884e579644a3f5bd2b605afd08a156
 shell-n-characters-over-what-short = مختصر لنک کی گنجائش سے { $n } حروف زیادہ
 # Before a document that lives nowhere but its link (Private, changed) is left for another place: the question and its three answers.
-# en: 270fcef56b6aa99fb049f9e94bf8062a08468b53
-shell-this-document-lives-in-its = یہ دستاویز اپنے لنک میں رہتی ہے
-# en: 35181431563f87ee230c27ad2906322b2e179863
-shell-nothing-is-saved-on-this = اس ڈیوائس پر کچھ محفوظ نہیں ہے۔ لنک کاپی کر لیں تاکہ دستاویز رہے، یا اسے اس ڈیوائس پر رکھ لیں؛ واپس جانے سے بھی یہ مل جاتی ہے۔
-# en: 64508992f4c386a816b427ac54bb12a84d5ea444
-shell-copy-link-and-go = لنک کاپی کریں اور جائیں
-# en: 3f330c650bbe812fc3d63aaafef9c41c466b434d
-shell-turn-on-save-in-browser = "براؤزر میں محفوظ کریں" آن کریں اور اسے یہاں رکھیں
-# en: e306ecf9d38e039a8fbdc3a0603e44798d6e8af9
-shell-go-without = ایسے ہی جائیں
-# en: a3dd9e2a9b73fb22a15d305fb2e4cc63f03c8738
-shell-save-in-browser-is-on = "براؤزر میں محفوظ کریں" آن ہے: یہ براؤزر آپ کی کھولی ہوئی دستاویزات رکھتا ہے۔ اسے مینو میں بند کریں۔
-# en: 8daf7106c5bd8c8c626a87c5294e823bbe63ebc7
-shell-another-version = ایک اور ورژن
-# en: abd40babb99a3836871422c0527a53f8c830cb60
-shell-kept-on-this-device = اس ڈیوائس پر رکھی ہوئی
+# en: f0bba930d38a38cacb48e472c8d4856caa4d8fa8
+shell-this-document-lives-in-its = یہ دستاویز محفوظ نہیں ہے
+# en: 43454bfced276b8a1b83dea8a0bef1794a9bde60
+shell-nothing-is-saved-on-this = یہ صرف اپنے لنک میں موجود ہے۔ اسے رکھنے کے لیے لنک کاپی کریں، یا اسے اس براؤزر میں محفوظ کریں۔ واپس جانے سے بھی آپ اس پر لوٹ آئیں گے۔
+# en: e0ef0b02c240e569b52e799771dbb4fb07b35818
+shell-copy-link-and-go = لنک کاپی کر کے جائیں
+# en: fdb4eeef33355eb9aed9f11d6ddcdfe0c08a29ea
+shell-turn-on-save-in-browser = براؤزر میں محفوظ کریں اور جائیں
+# en: 634bae7c8177155bc24961f3493f425b66e88c16
+shell-go-without = محفوظ کیے بغیر جائیں
+# en: ee7a39c93b7018b92bcff5511a92081df68dd3db
+shell-save-in-browser-is-on = "براؤزر میں محفوظ کریں" آن ہے۔ آپ جو دستاویزات کھولتے ہیں وہ یہاں محفوظ ہوتی ہیں۔ اسے مینو میں بند کریں۔
+# en: 97c669558589e3b0cf0917cb9caece8844ba65d9
+shell-another-version = ایک اور محفوظ ورژن
+# en: 87222e82bf5d208052c68fa66c93d131fa18fc67
+shell-kept-on-this-device = اس ڈیوائس پر محفوظ ہے
 # en: 266695479a949eec44dea9db4e15fba00163f04e
 shell-keyboard-shortcuts = کی بورڈ شارٹ کٹس
-# en: fefdefdbb13a9f5232ca295a562ac9bfd73856bf
-shell-nothing-to-keep-yet = ابھی رکھنے کو کچھ نہیں
+# en: bc447a3151935ceff76e781c90fb02c45d25f004
+shell-nothing-to-keep-yet = ابھی محفوظ کرنے کو کچھ نہیں
 # en: 8c00f9130260156b1612126a7cf9a23bb3c553d6
 shell-open-it = اسے کھولیں
-# en: 8ff3cdd0c2263817118652da96e25641dea6b658
-shell-save-in-browser-is-off = "براؤزر میں محفوظ کریں" بند ہے: یہ براؤزر کوئی دستاویز نہیں رکھتا۔ انہیں یہاں رکھنے کے لیے مینو میں اسے آن کریں۔
+# en: ef6e207cc7cea57220ad9a73fc6040b0085bf63e
+shell-save-in-browser-is-off = "براؤزر میں محفوظ کریں" بند ہے، اس لیے کچھ محفوظ نہیں ہوتا۔ اسے مینو میں آن کریں۔
 # en: 3939d97295147954c5488340b1f427ebbfa51e69
 shell-skip-to-apps = ایپس پر جائیں
 # en: 286b3810e407b3cef40b582c8ca4b373a58445bf
 shell-skip-to-document = دستاویز پر جائیں
-# en: d5f7c8150bac2e1eb13f0d14542e91f393f3dd5e
-shell-this-device-keeps-another-version = اس ڈیوائس پر “{ $title }” کا ایک اور ورژن رکھا ہے، { $when } سے۔
-# en: 41145b29c2301a0ab36898a2c8d394ca0c954543
-shell-this-link-was-made-by = یہ لنک Tiny Little Office کے نئے ورژن نے بنایا ہے۔ اسے پانے کے لیے صفحہ ری لوڈ کریں۔
+# en: 03d9aea1885137ab8ab4d9c24250515cb44161f0
+shell-this-device-keeps-another-version = “{ $title }” کا ایک اور ورژن ({ $when }) اس ڈیوائس پر محفوظ ہے۔
+# en: 25c53c58cba7054a3a2ae9e9b575c7888716ae94
+shell-this-link-was-made-by = اس لنک کے لیے نیا ورژن چاہیے۔ صفحہ دوبارہ لوڈ کریں۔
 
 ## the home page
 
@@ -70,11 +70,11 @@ common-templates = ٹیمپلیٹ
 # The list of an app's documents kept on this device, under its tile: "Write documents"
 # en: c647789831582ba7f4b6aad72ea6f425b98aad6f
 home-app-documents = { $app } کی دستاویزات
-# en: 03d5d801992763494a5afc12c2686567635ee5f7
-common-forget = بھلا دیں
+# en: f6fdbe48dc54dd86f63097a03bd24094dedd713a
+common-forget = حذف کریں
 # The button that forgets one kept document: "Forget Launch notes"
-# en: 2c861e55bb5c24d632ed2d44773732b9caa5f6e5
-home-forget-title = { $title } بھلا دیں
+# en: bbc98cac8e5e1a213d5aa04b3618196a6d28bf49
+home-forget-title = { $title } حذف کریں
 # Under an app's documents, the rest folded away: "3 more"
 # en: 84ab0eecfadb6332ee8b1ee5c67852b7df54e66f
 home-n-more = { $n } اور
@@ -189,21 +189,21 @@ leave-you-are-leaving-tiny-little = آپ Tiny Little Office سے باہر جا �
 leave-this-link-writes-email-to = یہ لنک ای میل لکھتا ہے، اس کو
 # en: 102dce223fdc2f3bbdda71f28108e2a6fdf21710
 leave-this-link-calls = یہ لنک کال کرتا ہے
-# en: b19c139a72086dcd69391619ef14fa086876a096
-leave-not-secure-address-what-you = محفوظ پتہ نہیں: جو آپ وہاں بھیجیں گے وہ راستے میں پڑھا جا سکتا ہے۔
+# en: afb8b3199e929e5e9f886fdf382599c9d440c71f
+leave-not-secure-address-what-you = یہ محفوظ (HTTPS) پتہ نہیں ہے۔ آپ جو کچھ بھیجیں گے وہ راستے میں پڑھا جا سکتا ہے۔
 # en: 003e4888e77a22c782047c7d26d028c5eca46f1c
 leave-whole-address = پورا پتہ:
-# en: 9b85614da3512dbe9673a6105d2b46d08ffcfce7
-leave-someone-wrote-this-link-into = یہ لنک کسی نے دستاویز میں لکھا ہے۔ لنک کے لیے دکھائے گئے الفاظ کا اس کی منزل سے میل کھانا ضروری نہیں۔ صرف تب جائیں جب آپ کو منزل پر بھروسا ہو۔
+# en: fdb31cf3fb383190c6864d4effd5fd6041b330cb
+leave-someone-wrote-this-link-into = یہ لنک دستاویز لکھنے والے نے شامل کیا ہے۔ لنک کا متن اس کے پتے سے مختلف ہو سکتا ہے۔ صرف تب آگے بڑھیں جب آپ کو اس پر بھروسا ہو۔
 # en: 2e0b45f2a456e8db55f08d7b65e87593a3e9a140
 leave-go = جائیں
-# en: 45d27855fa56c9d8302ede47fb6f273dc617fb32
-leave-links-of-this-kind-do = اس قسم کے لنکس یہاں نہیں کھلتے۔
+# en: c0f31f8a18b087fc577cbc50e9d37c68cb16c9ae
+leave-links-of-this-kind-do = اس قسم کا لنک یہاں نہیں کھولا جا سکتا۔
 # About's last line, a link to the source of the build the site runs: "Running commit abc1234".
 # en: 0eda2175601e6a4148c1c8b3f85c330bc7fbcabf
 leave-running-commit-commit = چل رہا کمٹ { $commit }
-# en: f65bd08db90631ce207f564637c9177ddccf0c9a
-leave-this-link-hides-characters-in = یہ لنک اپنے پتے میں حروف چھپاتا ہے۔
+# en: 45469d1ce86c199fb2984929d6c2e408178f7032
+leave-this-link-hides-characters-in = اس لنک کے پتے میں چھپے ہوئے حروف ہیں۔
 
 ## the copy kept on the device (status lines under the switch)
 
@@ -221,8 +221,8 @@ share-copy-into-new-document = نئی دستاویز میں کاپی کریں
 share-copy-link = لنک کاپی کریں
 # en: 6e9d1ebfe7124caf277155d2f57b5a6787f30198
 share-copy-of-title = { $title } کی کاپی
-# en: de823f98bab4aa409d922bd0b1ab3a038dfed9a8
-share-encrypted-here-service-holds-only = یہیں انکرپٹ ہوا: سروس کے پاس صرف انکرپٹڈ متن ہے، اور وہ بھی صرف تب تک۔
+# en: 367f9cb75618d64b28286bdc4a5b8a3f4d7092f0
+share-encrypted-here-service-holds-only = آپ کے براؤزر میں ہی انکرپٹ ہوتا ہے۔ ہمارا سرور صرف انکرپٹڈ لنک رکھتا ہے اور میعاد ختم ہونے پر اسے حذف کر دیتا ہے۔
 # en: db4fb5a00a9a2172e9d45a362ff1b772884f64b5
 share-expires-in-n-days-date = { $n ->
         [one] { $n } دن
@@ -242,8 +242,8 @@ share-expires-in-n-minutes-date = { $n ->
 share-opens-as-pages-to-read = پڑھنے کے لیے صفحات کی صورت میں کھلتا ہے
 # en: 8744400a02796b44742f8f5e5b66216821eab90d
 share-opens-in-editor = ایڈیٹر میں کھلتا ہے
-# en: 9b5861da44a8c139150b7bc7374fe209c2b3e34c
-common-whoever-opens-this-link-gets = جو بھی یہ لنک کھولے، اسے اپنی الگ کاپی ملتی ہے۔ اس کی تبدیلیاں اس کے لنک میں رہتی ہیں، آپ کے لنک میں نہیں: اس سے کہیں کہ اپنا لنک آپ کو واپس بھیجے۔
+# en: 7fbbb75c4e853ef0e42da5fe316344fdf1a6143c
+common-whoever-opens-this-link-gets = جو بھی یہ لنک کھولے، اسے اپنی الگ کاپی ملتی ہے۔ اس کی تبدیلیاں آپ کی کاپی میں نظر نہیں آئیں گی۔ اس سے کہیں کہ اپنا لنک آپ کو واپس بھیجے۔
 # en: 94b01acececc033463cc7731d659fbcae11c2b47
 share-short-link-that-expires = ختم ہو جانے والا مختصر لنک
 # en: fed3d23d480dd0bfe5a0cfff4d9f3dae7857fbe6
@@ -318,18 +318,18 @@ share-week = ایک ہفتہ
 share-month = ایک مہینہ
 # en: 38c22f9dbdb41d2131b4324b7722c45a1f543420
 share-make-short-link = مختصر لنک بنائیں
-# en: 840911d927a3bb76ae1906a51eda0ef4f4758871
+# en: 94d7d8ee473f817fa4b57737e7a01ec3cd13d4d4
 share-making = بن رہا ہے…
-# en: 2e6ce772cf6bb857f9947fd1ed63fe3d7e886634
-share-hundred-links-day-from-one = ایک پتے سے دن میں سو لنکس؛ کل دوبارہ کوشش کریں۔
-# en: e7e24818a74ce918c6c3ca6338d69fd06310cdea
-share-short-link-cannot-be-changed = مختصر لنک بننے کے بعد نہ بدلا جا سکتا ہے نہ واپس لیا جا سکتا ہے؛ اس کی میعاد خود ہی ختم ہو جاتی ہے۔
+# en: 1c6c031b40782efe6b28678fc42d5569cc11e029
+share-hundred-links-day-from-one = حد پوری ہو گئی: ہر پتے سے روزانہ 100 مختصر لنکس۔ کل دوبارہ کوشش کریں۔
+# en: 0b5140c5b10a2b84301b5ef43056b7d89bd2187c
+share-short-link-cannot-be-changed = مختصر لنک میں ترمیم یا اسے حذف نہیں کیا جا سکتا۔ اس کی میعاد خود بخود ختم ہو جاتی ہے۔
 # en: 4d9182a72e391841c2817e9943cf2b07adf70220
 share-could-not-shorten-link = لنک چھوٹا نہیں ہو سکا۔
 # en: 4c0067d6b6bd96cdab1ae363ce342312a93834fd
 share-this-document-is-too-long = یہ دستاویز مختصر لنک کے لیے بہت لمبی ہے۔
-# en: e0ff8e6b768c99612a5a06d385092732ee52dcc0
-share-up-to-hundred-links-day = ایک پتے سے دن میں سو لنکس تک۔
+# en: a4d0b704a911979249dd2629e81a0205fab0aa44
+share-up-to-hundred-links-day = ہر پتے سے روزانہ 100 مختصر لنکس تک۔
 # en: e963907dac5cd5c017869b4c96c18021c9bd058b
 share-remove = ہٹائیں
 # en: d0517071aa376e797705058bbad4b658954b9930
@@ -385,8 +385,8 @@ share-left = بایاں
 share-uses = استعمال
 # en: 525f61b6729229b1a8854a9e50bcaa52ea96b131
 share-where = کہاں
-# en: e54c097fa776a6b614aea31f6a2db3d3b8415700
-share-where-link-fits = لنک کہاں سماتا ہے
+# en: cdbfed741d905515df704d9585fc74781801a24d
+share-where-link-fits = کیا یہ لنک سما جائے گا؟
 # en: ddba25b7aa2e43ef1c94a2a8cfb8b839fb723ca2
 share-any-length = کسی بھی لمبائی کی
 # en: 23fd8ecdbffd82e04305d3cea5eae9cdb85ac9bf
@@ -395,20 +395,20 @@ share-n-over = { $n } زیادہ
 ## privacy (kit/share/privacy.ts, kit/ui/privacy-dialog.ts): the password, what the device holds
 
 # The Share dialog's head line: "Created 9 Oct 2026, 14:03 · by Paul".
-# en: 753c0c4d74e3315eb4d646ab3642348964e662d5
-privacy-anyone-with-link-will-need = جس کے پاس بھی لنک ہو اسے کھولنے کے لیے پاس ورڈ چاہیے ہوگا۔ اسے کوئی ری سیٹ نہیں کر سکتا: کھو گیا تو دستاویز گئی۔
+# en: 07fd5d289286fa4714b3f407db7875fac90b9952
+privacy-anyone-with-link-will-need = جس کے پاس بھی لنک ہو، اسے کھولنے کے لیے پاس ورڈ چاہیے ہوگا۔ اسے ری سیٹ نہیں کیا جا سکتا۔ اگر یہ کھو گیا تو دستاویز بھی گئی۔
 # en: 8c684290ce0b8a8e6cee79a145e17554064a4760
 privacy-change-password = پاس ورڈ بدلیں
 # en: 5be0d11b94b1ba25b2579314f6af69649a900cde
 privacy-created-date = بنائی گئی { $date }
 # en: 39e64aebf907392389952dded5e20ab4836d876a
 privacy-enter-password-to-open-this = اس دستاویز کو کھولنے کے لیے پاس ورڈ لکھیں۔
-# en: 2533c986e139972e942e7e65fd2e1a6a6ee1e8f3
-privacy-forget-everything = سب کچھ بھلا دیں
+# en: 554393a215e479d023a30091a1394f7ca57690e1
+privacy-forget-everything = سب کچھ حذف کریں
 # en: 715727cdd46f1bd0703c9e846fcdd4f369ef8313
 privacy-preview-sent-with-link-to = کسی نیٹ ورک کو لنک کے ساتھ بھیجا گیا پیش منظر پہلے صفحے کی تصویر، عنوان اور پہلے الفاظ ہوتا ہے، جو ایک مہینے تک ہمارے سرور پر پڑھے جا سکتے ہیں۔ دستاویز خود وہاں کبھی نہیں جاتی۔
-# en: 94752883801be06c9a6e225a26573bb212998447
-privacy-forget-everything-this-site-keeps = اس سائٹ نے یہاں جو کچھ رکھا ہے سب بھلا دیں، اور اب سے کچھ نہ رکھیں؟ دستاویزات خود اپنے لنکس میں رہتی ہیں۔
+# en: a584ece11551d9b1a79856743236c51aba50c44f
+privacy-forget-everything-this-site-keeps = اس براؤزر میں محفوظ سب کچھ حذف کر دیں اور محفوظ کرنا بند کر دیں؟ آپ کی دستاویزات اپنے لنکس میں موجود رہیں گی۔
 # en: a798882f1c31099bb9500e2da62c0874d8dbed78
 privacy-locked = مقفل
 # en: a543040c9fee74b4b34282797abbf59e9d2c99b7
@@ -425,22 +425,22 @@ privacy-opening = کھل رہا ہے…
 common-password = پاس ورڈ
 # en: 114bea5817640fe6b9eeec86b939ec0e9a7b6d76
 privacy-password-removed = پاس ورڈ ہٹا دیا گیا
-# en: f30dc3d0115848030675e54c7d2d1f036862d2a7
-privacy-password-set-link-holds-only = پاس ورڈ لگ گیا: لنک میں صرف انکرپٹڈ متن ہے
+# en: ad1909e464528c140bf96a21ce9adda2464956c0
+privacy-password-set-link-holds-only = پاس ورڈ لگ گیا۔ لنک اب انکرپٹڈ ہے۔
 # en: dce69146962b392ae2b157aec604eface36e90c0
 privacy-password-ellipsis = پاس ورڈ…
 # en: 9dfd349ebee555eb8d652be20dad971cae439eca
 privacy-preferences = ترجیحات
 # en: cf01481f626d5127ec7732fcbdb29504f08abefd
 privacy-privacy = رازداری
-# en: 21f9dfb5dda17d08b35d4200349b6f33f4f6ad93
-privacy-nothing-saved-in-this-browser = اس براؤزر میں کچھ محفوظ نہیں۔ جو فہرست میں ہے وہ صرف اس بار کے لیے ہے۔
+# en: cefceeebf3cd6d02ddc7aca8c769881a5341e829
+privacy-nothing-saved-in-this-browser = اس براؤزر میں کچھ محفوظ نہیں ہے۔ فہرست کی چیزیں صرف اس بار کے لیے رہتی ہیں۔
 # en: 626a605da9dbcd888eadcad13deebd3a64011c0a
 privacy-protected-by-password = پاس ورڈ سے محفوظ
 # en: acef17d00b9a1b6e1e15e76d27ae53635928a7a6
 privacy-remove-password = پاس ورڈ ہٹائیں
-# en: c60513159f73aa6f6a1b2330b5f96b93fc0b4fab
-privacy-sealing = سیل ہو رہا ہے…
+# en: 788f55b0957b15918c6aba279f4f0377a5a1db90
+privacy-sealing = انکرپٹ ہو رہا ہے…
 # en: 94408e41c12e924b82da7ea6e79e5cb69ac9e042
 privacy-set-password = پاس ورڈ لگائیں
 # en: f897cb67f049674308a073079bd85ad0649f8c82
@@ -449,12 +449,12 @@ privacy-short-links = مختصر لنکس
 privacy-set-password-in-share = پاس ورڈ لگائیں، "شیئر" میں
 # en: e546afa59de2ec4b23ca6c4fafbaddac7bab9240
 privacy-short-links-made-here-until = یہاں بنائے گئے مختصر لنکس، ان کی میعاد ختم ہونے تک۔
-# en: f25e1c269ee979c4c6421db94967fded852e0e16
-privacy-their-names-and-links-for = ان کے نام اور لنکس، ہوم پیج کے لیے۔
-# en: a32b9cf327471cc4cef625a9a55acf53fc4de3de
-privacy-theme-lifetime-of-short-links = تھیم، مختصر لنکس کی میعاد۔
-# en: 5c4a8471c132625d7dd5c7a9e4c9a5da20111307
-privacy-this-document-has-password-link = اس دستاویز پر پاس ورڈ ہے۔ لنک میں، اور اس سے بنے ہر مختصر لنک میں، صرف انکرپٹڈ متن ہے۔
+# en: b556bf027f9123d39581babef7e15564c24866da
+privacy-their-names-and-links-for = نام اور لنکس، جو ہوم پیج پر دکھائی دیتے ہیں۔
+# en: 5300fdca86b5b32fd463f73704e318a2b8fa9961
+privacy-theme-lifetime-of-short-links = تھیم اور مختصر لنکس کی سیٹنگز۔
+# en: 0c6a2cfe53459957b6899930a2e5cd46b6541cec
+privacy-this-document-has-password-link = اس دستاویز پر پاس ورڈ ہے۔ لنک، اور اس سے بنا ہر مختصر لنک، انکرپٹڈ ہے۔
 # en: 0d21e52aba49ee4331213463b46c2ece33ad3cf4
 common-this-document-is-locked = یہ دستاویز مقفل ہے
 # en: 1dc606b1828a1e2f5bbbed9ed30fa3a80712e3d8
@@ -463,16 +463,16 @@ privacy-this-document-is-locked-with = یہ دستاویز پاس ورڈ سے م
 privacy-unlock = کھولیں
 # en: 887b0828ec99930408eb32249f1209057b1b234c
 common-unlock-ellipsis = کھولیں…
-# en: 6e36f0d04771b58ab61c808296aee03f962bef41
-privacy-what-this-device-holds = اس ڈیوائس میں کیا ہے
+# en: ce3661a255464b1b22e6f395685d0e6f9fa077da
+privacy-what-this-device-holds = اس ڈیوائس پر محفوظ
 # en: 8485be9e7b3e998c5f1eef5ce87d2aa67726e3cb
 privacy-your-documents = آپ کی دستاویزات
 # en: d21905a9907932f7976e1ca96129c0af871f2715
 privacy-your-browsers-history = آپ کے براؤزر کی ہسٹری
-# en: 269988034e9a4b923026474a21d96d4af3695cff
-privacy-every-document-opened-here-in = یہاں کھولی گئی ہر دستاویز، پوری کی پوری، جب تک اس پر پاس ورڈ نہ ہو۔
-# en: c210c4b744aed5cf6e1817c2417729dfddb43b2f
-privacy-not-ours-to-clear = اسے مٹانا ہمارے بس میں نہیں
+# en: cdff70e571d4ed7aeb1a43cedaf33299bdcd258e
+privacy-every-document-opened-here-in = آپ جو بھی دستاویز کھولیں، پوری کی پوری، جب تک اس پر پاس ورڈ نہ ہو۔
+# en: 18b8a03ed6567555edd5005aab5b090984f4b5bd
+privacy-not-ours-to-clear = ہم اسے مٹا نہیں سکتے
 # en: 3ca2d1d26637d42b974b313bb8ce231333179a9e
 privacy-by-name = { $name } کی طرف سے
 # en: a9e72cf83916d4381012a19b329292818f845a43
@@ -487,8 +487,8 @@ privacy-n-links = { $n ->
     }
 # en: 2ddd4097832d991c46023732a889beeb8ec4c29d
 privacy-n-set = { $n } مقرر
-# en: f522e7a8504f4a47ae56d7bfbcc403510037eda3
-privacy-copy-this-and-send-it = اسے کاپی کریں اور لنک کے علاوہ کسی اور طریقے سے بھیجیں۔ یہ دوبارہ نہیں دکھایا جا سکتا۔
+# en: a97ce1edde4ad396d1cff34063087d0bf5d0e1a8
+privacy-copy-this-and-send-it = یہ پاس ورڈ کاپی کریں اور اسے لنک سے الگ بھیجیں۔ یہ دوبارہ نہیں دکھایا جائے گا۔
 # en: 7640428ae16fc2b673d689ddf6b1ea15eed407d3
 privacy-make-another = دوسرا بنائیں
 # en: 9a0081f0b2bff82fac1961a403734134b9a3b170
@@ -511,8 +511,8 @@ locked-document = مقفل دستاویز
 # A placed document whose link cannot be read (cut short when it was copied).
 # en: 0c45986cb6755e463398a592a861baaf44018954
 locked-this-document-cannot-be-read = یہ دستاویز پڑھی نہیں جا سکتی۔
-# en: 5a1e9ab40b695d3286aa033757aeb41cfa066ea3
-locked-that-password-does-not-open = یہ پاس ورڈ اس لنک کو نہیں کھولتا۔ اگر آپ کو اس کا یقین ہے تو شاید کاپی کرتے وقت لنک کٹ گیا ہو: اسے دوبارہ مانگیں، یا مختصر لنک مانگیں۔
+# en: a2a127edeb3eed5dc264fc299b034db6493e1636
+locked-that-password-does-not-open = یہ پاس ورڈ اس لنک کو نہیں کھولتا۔ اگر آپ کو یقین ہے کہ یہ درست ہے تو شاید کاپی کرتے وقت لنک کٹ گیا ہو۔ اسے دوبارہ مانگیں، یا مختصر لنک مانگیں۔
 
 ## words several apps share
 
@@ -673,8 +673,8 @@ editor-bold-italic-and-links = بولڈ، ترچھا اور لنکس
 editor-one-of-words-column-holds = کالم میں موجود الفاظ میں سے ایک، یا نیا
 # en: e31d972229de381b461860014dd710856361917a
 editor-option = اختیار
-# en: 9120f2a9192f0a751456f7a9ea9b8dd6351c39cc
-editor-this-browser-lets-page-paste = یہ براؤزر صفحے کو صرف کی بورڈ سے پیسٹ کرنے دیتا ہے: اس کا پیسٹ استعمال کریں۔
+# en: eb883fb88ed57f39b760fee6ee8f5a04a8cdc7ba
+editor-this-browser-lets-page-paste = یہ براؤزر صرف کی بورڈ یا "پیسٹ" مینو سے پیسٹ کرنے دیتا ہے۔
 
 ## the example in the kit's own documentation
 
@@ -3118,12 +3118,12 @@ compare-n-put-in = { $n ->
 open-opened-name = { $name } کھل گئی
 # en: 90dd520de97cc996176f013da9d5f056fd05ac19
 open-that-file-is-not-words = یہ فائل ایسے الفاظ نہیں جو Tiny Little Office پڑھ سکے۔
-# en: 728560affd455ad8c5e533a5332422736feb1e1f
-open-that-file-is-too-large = یہ فائل یہاں دستاویز بننے کے لیے بہت بڑی ہے۔
-# en: 1708824a828efcd52e571a4754c61010bd0757be
-open-keep-them-on-this-device = انہیں اس ڈیوائس پر رکھیں
-# en: 1d39ec95bbaaddaabf29fa35565930e6e75423db
-open-nothing-is-saved-on-this = اب اس ڈیوائس پر کچھ محفوظ نہیں۔ انہیں یہاں رکھیں، یا کوئی ایک کھولیں۔
+# en: 1d08903947cc83b648f8ad96b1e23466a2dbed11
+open-that-file-is-too-large = یہ فائل بہت بڑی ہے۔
+# en: 8f432852569edbf7610713a6554e7a61396327d5
+open-keep-them-on-this-device = انہیں اس ڈیوائس پر محفوظ کریں
+# en: c4fe6d8b035f6108e8a7e0037667dacf3d6cca25
+open-nothing-is-saved-on-this = اس ڈیوائس پر کچھ محفوظ نہیں ہے۔ انہیں یہاں محفوظ کریں، یا کوئی ایک کھولیں۔
 # en: 0826daee1d616f7de3a2b205eb2360fcaccc77ef
 open-first = پہلا کھولیں
 # en: 59d36bf6c42ab3ae1481fe62abbc67ffef7a8b22
@@ -3131,8 +3131,8 @@ open-saving-in-this-browser-n = اس براؤزر میں محفوظ ہو رہا 
         [one] { $n } دستاویز رکھی ہے
        *[other] { $n } دستاویزات رکھی ہیں
     }
-# en: f76190784e6e3d15f4a90859346a0722ece04c62
-open-that-zip-holds-no-documents = اس zip میں ایسی کوئی دستاویز نہیں جو Tiny Little Office پڑھ سکے۔
+# en: 4fc6621d5b53d413dd1fd42cf7e7834ee3ecba5a
+open-that-zip-holds-no-documents = اس zip میں کوئی پڑھنے کے قابل دستاویز نہیں ملی۔
 # en: ed5d2e1ab481efa92392820d83922b25c236c730
 open-n-documents-kept = { $n ->
         [one] { $n } دستاویز رکھی ہے
@@ -3155,8 +3155,8 @@ keys-normal-size = عام سائز
 keys-everything-larger = سب کچھ بڑا
 # en: d1a6c5490cb95093a9fb9116f092d142b8a73ff6
 keys-everything-smaller = سب کچھ چھوٹا
-# en: 8071b6dbf75196fe4d4789865513507da287cbb4
-keys-keep-this-document-on-device = اس دستاویز کو ڈیوائس پر رکھیں
+# en: 67312061f24800b7dc75b07101329959c5c1af88
+keys-keep-this-document-on-device = اس ڈیوائس پر محفوظ کریں
 # en: 4d5e11a737e63d755f4127a0139f235f3794b6c6
 keys-show-these-shortcuts = یہ شارٹ کٹس دکھائیں
 # en: da05037a43419e15395f52f0ed4dcb0c7f75c1f2
