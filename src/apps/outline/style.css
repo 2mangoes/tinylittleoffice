@@ -189,6 +189,29 @@
     white-space: nowrap;
     cursor: pointer;
   }
+  .ol-task {
+    flex-shrink: 0;
+    align-self: center;
+    display: grid;
+    place-items: center;
+    width: 1.125rem;
+    height: 1.125rem;
+    margin: 0 0.375rem 0 0.125rem;
+    padding: 0;
+    border: 0.0938rem solid var(--to-ink-3);
+    border-radius: 0.25rem;
+    background: var(--to-surface);
+    color: var(--to-on-accent);
+    cursor: pointer;
+  }
+  .ol-task[aria-checked='true'] {
+    background: var(--to-accent);
+    border-color: var(--to-accent);
+  }
+  .ol-task:focus-visible {
+    outline: 0.125rem solid var(--to-accent);
+    outline-offset: 1px;
+  }
   .ol-due {
     flex-shrink: 0;
     align-self: center;

@@ -869,6 +869,16 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
     const s = this.statuses.find((x) => x.name === it.status) ?? { name: it.status, color: STATUS_COLORS.gray };
     return html`<button type="button" class="ol-status" style="--ol-status:${s.color}" aria-label=${t('Status {status}: tap for the next', { status: s.name })} title=${t('Status')} @mousedown=${(e: Event) => e.preventDefault()} @click=${() => this.cycleStatus(at)}>${s.name}</button>`;
   }
+  /**
+   * A task's box, drawn in the row (the words' own marker is hidden in a row, style.css, so without this a task showed
+   * nothing; Paul, 2026-10-15: "What happened to statuses on the outliner and checkboxes"): a checkbox, tapped to check
+   * or uncheck, the status following (tick).
+   */
+  private taskBox(at: number, block: Block | undefined) {
+    if (block?.k !== 'li' || block.done === undefined) return nothing;
+    const done = !!block.done;
+    return html`<button type="button" class="ol-task" role="checkbox" aria-checked=${String(done)} aria-label=${t('Check or uncheck a task')} @mousedown=${(e: Event) => e.preventDefault()} @click=${() => this.tickAt(at)}>${done ? icon(UI.check, 12) : nothing}</button>`;
+  }
   cycleStatus(at: number) {
     const st = this.statuses;
     const it = this.itemAt(at);
@@ -1001,7 +1011,7 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
         ${kids ? html`<button type="button" class="ol-fold" aria-label=${shut ? t('Unfold, {n|one inside|# inside}', { n: inside }) : t('Fold')} aria-expanded=${shut ? 'false' : 'true'} @mousedown=${(e: Event) => e.preventDefault()} @click=${() => this.fold(at)}>${icon(shut ? ChevronRight : ChevronDown, 14)}</button>` : nothing}
       </span>
       ${ends ? html`<span class="ol-bullet">${this.bullet(at, ends, n)}</span>${this.chip(at, it.label)}` : html`<span class="ol-bullet" @click=${(e: MouseEvent) => e.shiftKey && this.rows.choose(at, true)}><span class="ol-kind root" aria-hidden="true">${n ? html`<b class="ol-n">${n}.</b>` : html`<span></span>`}</span></span>`}
-      ${asDoc ? nothing : this.statusChip(at, it)}
+      ${asDoc ? nothing : this.statusChip(at, it)}${asDoc ? nothing : this.taskBox(at, block)}
       ${
         asDoc
           ? this.renderDoc(it)

@@ -1041,6 +1041,16 @@ test('statuses: a pill before the words, tapped to the next; a due chip after th
   tx.tx.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', ctrlKey: true, bubbles: true, cancelable: true }));
   await el.updateComplete;
   expect(write(docOf(el))).toContain('- [ ] Draft {status=TODO}');
+  // The task's box is drawn in the row (the words' own marker is hidden there): a tap checks it, and the status follows.
+  const boxes = () => [...el.querySelectorAll<HTMLButtonElement>('.ol-task')].map((b) => b.getAttribute('aria-checked'));
+  expect(boxes()).toEqual(['false']);
+  el.querySelector<HTMLButtonElement>('.ol-task')!.click();
+  await el.updateComplete;
+  expect(boxes()).toEqual(['true']);
+  expect(write(docOf(el))).toContain('- [x] Draft {status=DONE}');
+  el.querySelector<HTMLButtonElement>('.ol-task')!.click();
+  await el.updateComplete;
+  expect(write(docOf(el))).toContain('- [ ] Draft {status=TODO}');
   // The row with no status shows no pill and no chip; the words are untouched throughout.
   expect(row(el, 2).querySelector('.ol-status, .ol-due')).toBeNull();
   expect(write(docOf(el))).toContain('  - Quotes\n');
