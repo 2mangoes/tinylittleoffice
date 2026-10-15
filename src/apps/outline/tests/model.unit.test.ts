@@ -420,7 +420,7 @@ test('a mind map gets the tree and its joins as cross-links; an org chart its jo
   );
   expect(deck).toBe('## Launch {.title}\n\n---\n\n## Product\n\n- Pricing\n- Onboarding\n\n---\n\n## Pricing\n\n- Tiers\n\n---\n\n## Marketing\n\n- Press\n\n---\n\n```sheet\na | b\n--- | ---\n```\n');
   expect(outlineToDeck(readOutline(parse('- A\n  - a1\n- B\n  - b1\n')))).toBe('## A\n\n- a1\n\n---\n\n## B\n\n- b1\n');
-  expect(def.handoffs!.map((h) => h.to)).toEqual(['deck', 'diagram', 'diagram', 'diagram', 'diagram']);
+  expect(def.handoffs!.map((h) => h.to)).toEqual(['deck', 'diagram', 'diagram', 'diagram', 'diagram', 'cal']);
   expect(def.handoffs![0].convert('---\ntitle: Plan\n---\n' + TREE)).toBe('---\ntitle: Plan\n---\n## Launch {.title}\n\n---\n\n## Product\n\n- Pricing\n');
 });
 
@@ -742,4 +742,15 @@ test('Enter beside a task with a status and a day makes the next item a task too
   expect(write(applyAll(doc, enterAt(doc, v, 1).ops))).toContain('- Plain\n-\n');
   const gone = parse('- a {status=Odd}\n');
   expect(write(applyAll(gone, enterAt(gone, readOutline(gone), 0).ops))).toBe('- a {status=Odd}\n-  {status=Odd}\n');
+});
+
+test('the outline as a calendar: a dated item a day’s event in its status’s color, the statuses the legend; the undated stay behind', async () => {
+  const { outlineToCal } = await import('../model.ts');
+  const doc = parse(
+    '---\ntitle: Launch\nstatuses: TODO=red, DOING=yellow, DONE=green, Later=gray\n---\n- [ ] Draft {status=DOING due=2026-10-20}\n  - Quotes {status=TODO}\n- Press list {due=2026-10-22}\n- Party {status=Later due=2026-11-01}\n',
+  );
+  expect(outlineToCal(readOutline(doc), doc.head)).toBe(
+    '---\ntitle: Launch\nred: TODO\norange: DOING\ngreen: DONE\n---\n- 2026-10-20: Draft {color=orange}\n- 2026-10-22: Press list\n- 2026-11-01: Party\n',
+  );
+  expect(outlineToCal(readOutline(parse('- a\n')), {})).toBe('\n');
 });

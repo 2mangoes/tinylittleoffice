@@ -11,7 +11,7 @@ import type { ToOutlineEditor } from '../editor.ts';
 import type { ToText } from '../../../kit/text/text.ts';
 import { caret } from '../../../kit/text/textops.ts';
 import { until, tick } from '../../../../test/browser/helpers.ts';
-import { encodeDoc } from '../../../kit/core/codec.ts';
+import { decodeDoc, encodeDoc } from '../../../kit/core/codec.ts';
 import { write, type Doc } from '../../../doc/index.ts';
 import { remScale } from '../../../kit/ui/zoom.ts';
 
@@ -170,17 +170,10 @@ test('the bullet opens the kinds of line, each named for the items it joins; the
   bullet().click();
   await until(() => !!document.querySelector('[popover]:popover-open'));
   const items = [...document.querySelectorAll<HTMLElement>('[popover]:popover-open [role^=menuitem]')];
-  expect(items.map((x) => x.textContent!.trim())).toEqual([
-    'Plain line',
-    'Arrow from Product to Pricing',
-    'Arrow from Pricing to Product',
-    'Arrows both ways',
-    'Name the line',
-    'Edit statuses…',
-    'Due date…',
-  ]);
+  // The item's own things first; the kinds of line last, under the parent's name alone (Paul, 2026-10-15).
+  expect(items.map((x) => x.textContent!.trim())).toEqual(['Edit statuses…', 'Due date…', 'Name the line', 'Plain line', 'Arrow from Product', 'Arrow to Product', 'Arrows both ways']);
   expect(document.querySelector('[popover]:popover-open [role=menuitemcheckbox][aria-checked=true]')!.textContent!.trim()).toBe('Plain line');
-  items[1].click();
+  items[4].click();
   await el.updateComplete;
   expect(last()!.split('\n')[2]).toBe('    - Pricing {.from}');
   expect(bullet().getAttribute('aria-label')).toBe('Line from Product to Pricing: an arrow from the parent. Change it');
@@ -1139,4 +1132,70 @@ test('Statuses opens the set to edit: renamed, one taken away, Done writes the h
   el.querySelector<HTMLButtonElement>('.ol-statuses-done')!.click();
   await until(() => (write(docOf(el)) ?? '').includes('status=Soon'));
   expect(write(docOf(el))).toBe('---\nstatuses: Soon=red, DONE=green\n---\n- Plan\n  - Press list {status=Soon}\n');
+});
+
+// View as ▾'s agenda and by-status (Paul, 2026-10-15): the things to do as a table sorted by status or day, and grouped by
+// status; a tap lands on the item with the caret. Find shows only the matching rows and a tap on one lands there too.
+test('As an agenda lists the things to do, sorted by status or by day; By status groups them; a tap lands on the item', async () => {
+  const { el } = await editor(
+    '---\nstatuses: TODO=red, DOING=yellow, DONE=green\n---\n- Plan {status=DONE due=2027-03-09}\n  - [ ] Draft {status=TODO due=2027-03-01}\n  - Quotes {status=DOING}\n- Nothing here\n',
+  );
+  await pick(el, el.querySelector<HTMLButtonElement>('.ol-view-as button')!, 'As an agenda');
+  await until(() => !!el.querySelector('to-dialog.ol-agenda dialog[open] .ol-agenda-table'));
+  const names = () => [...el.querySelectorAll<HTMLElement>('.ol-agenda-table tbody .ol-agenda-item')].map((b) => b.textContent!.trim());
+  expect(names()).toEqual(['Plan', 'Draft', 'Quotes']);
+  el.querySelector<HTMLButtonElement>('.ol-agenda-table th[aria-sort] button')!.click();
+  await el.updateComplete;
+  expect(names()).toEqual(['Draft', 'Quotes', 'Plan']);
+  [...el.querySelectorAll<HTMLButtonElement>('.ol-agenda-table th button')].at(-1)!.click();
+  await el.updateComplete;
+  expect(names()).toEqual(['Draft', 'Plan', 'Quotes']);
+  el.querySelectorAll<HTMLButtonElement>('.ol-agenda-table tbody .ol-agenda-item')[1].click();
+  await until(() => !el.querySelector('to-dialog.ol-agenda dialog[open]'));
+  await until(() => textOf(el, 0)?.hasFocus() === true);
+  await pick(el, el.querySelector<HTMLButtonElement>('.ol-view-as button')!, 'By status');
+  await until(() => !!el.querySelector('to-dialog.ol-by-status dialog[open] .ol-by-status-group'));
+  expect([...el.querySelectorAll<HTMLElement>('.ol-by-status-group h3')].map((h) => h.textContent!.replace(/\s+/g, ' ').trim())).toEqual(['TODO 1', 'DOING 1', 'DONE 1']);
+  el.querySelector<HTMLButtonElement>('.ol-by-status-group .ol-agenda-item')!.click();
+  await until(() => !el.querySelector('to-dialog.ol-by-status dialog[open]'));
+  // As a calendar: the dated items handed to the Calendar in a new tab, the statuses its legend.
+  const opened: string[] = [];
+  const open = window.open;
+  window.open = ((url?: string | URL) => (opened.push(String(url)), null)) as typeof window.open;
+  try {
+    await pick(el, el.querySelector<HTMLButtonElement>('.ol-view-as button')!, 'As a calendar');
+    await until(() => opened.length === 1);
+    expect(opened[0]).toMatch(/#\/v1\/cal\//);
+    expect(decodeDoc(opened[0].slice(opened[0].indexOf('#/v1/cal/') + '#/v1/cal/'.length))).toBe(
+      '---\nred: TODO\norange: DOING\ngreen: DONE\n---\n- 2027-03-09: Plan {color=green}\n- 2027-03-01: Draft {color=red}\n',
+    );
+  } finally {
+    window.open = open;
+  }
+});
+
+test('Find shows only the rows whose words hold the terms; a tap on one lifts the filter, zooms to it and gives it the caret', async () => {
+  const { el } = await editor('- Launch\n  - Press list\n    - Local press\n  - Marketing\n- Press party\n');
+  const found = el.find(['press']);
+  await el.updateComplete;
+  expect(found.count).toBe(3);
+  expect(rows(el)).toEqual([1, 2, 4]);
+  found.go(0);
+  await el.updateComplete;
+  // A tap on a row: the filter lifts; the item with a family is zoomed to, its words with the caret.
+  row(el, 1).dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
+  await el.updateComplete;
+  await until(() => el.zoom === 1 && textOf(el, 1)?.hasFocus() === true);
+  expect(rows(el)).toEqual([1, 2]);
+  // Cleared: everything back.
+  el.zoomOut();
+  el.zoomOut();
+  await el.updateComplete;
+  const again = el.find(['nothing']);
+  await el.updateComplete;
+  expect(again.count).toBe(0);
+  expect(rows(el)).toEqual([]);
+  again.clear!();
+  await el.updateComplete;
+  expect(rows(el)).toEqual([0, 1, 2, 3, 4]);
 });

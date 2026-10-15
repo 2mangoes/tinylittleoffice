@@ -6,7 +6,7 @@
  * the arrows between rows at the edge of a row's words. A key acts on the row it is typed in; a button on the row
  * that has the caret. Rows chosen whole are the rows controller's (kit/text/rows-commands.ts).
  */
-import { ArrowDown, ArrowUp, Eye, FoldVertical, Link2, ListOrdered, Plus, Tag, UnfoldVertical, ZoomIn, ZoomOut } from 'lucide';
+import { ArrowDown, ArrowUp, Eye, FoldVertical, Link2, ListChecks, ListOrdered, Plus, Tag, UnfoldVertical, ZoomIn, ZoomOut } from 'lucide';
 import { appOf, apps } from '../../kit/core/apps.ts';
 import { register, type Command, commandsOf } from '../../kit/core/commands.ts';
 import { t } from '../../kit/core/i18n.ts';
@@ -71,6 +71,9 @@ const OUTLINE: Command<O>[] = [
   cmd('connect', (o) => (o?.connecting ? t('Cancel connecting') : t('Connect')), { icon: Link2, where: ['bar'], pressed: (o) => !!o.connecting, does: (o) => o.connect() }),
   cmd('view', 'View as', { icon: Eye, menu: 'view', where: ['bar'], document: true, takesFocus: true, does: () => undefined }),
   cmd('view.page', 'As a page', { icon: UI.print, where: ['menu:view'], does: (o) => o.showPage() }),
+  // The compound bullet's views (Paul, 2026-10-15): the things to do as a table, sorted by status or by day; the items by status.
+  cmd('view.agenda', 'As an agenda', { icon: ListChecks, where: ['menu:view'], document: true, does: (o) => o.showAgenda() }),
+  cmd('view.status', 'By status', { icon: Tag, where: ['menu:view'], document: true, does: (o) => o.showByStatus() }),
   ...(def.handoffs ?? []).map((h, i) => cmd(`view.${h.to}${i}`, () => h.label(), { icon: appOf(h.to)?.icon, where: ['menu:view'], when: () => !!appOf(h.to), does: (o) => o.openAs(h) })),
   cmd('tick', 'Check or uncheck a task', { at: 'words', keys: 'Mod+Enter', where: ['keys-only'], does: (o, e) => o.tickAt(at(o, e)) }),
   cmd('fold', 'Fold, unfold', {

@@ -251,6 +251,75 @@
   .ol-statuses-row select {
     font: inherit;
   }
+  .ol-swatches {
+    display: inline-flex;
+    gap: 0.125rem;
+  }
+  /* The agenda: a table of the things to do, its headings the sorts; by status: a section a status. A tap lands on the item. */
+  .ol-agenda-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9375rem;
+  }
+  .ol-agenda-table th,
+  .ol-agenda-table td {
+    text-align: start;
+    padding: 0.375rem 0.5rem;
+    border-bottom: 1px solid var(--to-line);
+    vertical-align: middle;
+  }
+  .ol-agenda-sort {
+    font: inherit;
+    font-weight: 600;
+    border: 0;
+    background: none;
+    color: var(--to-ink);
+    padding: 0;
+    cursor: pointer;
+  }
+  .ol-agenda-sort[aria-pressed='true']::after {
+    content: ' ↓';
+    color: var(--to-accent);
+  }
+  .ol-agenda-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    font: inherit;
+    border: 0;
+    background: none;
+    color: var(--to-ink);
+    padding: 0;
+    text-align: start;
+    cursor: pointer;
+  }
+  .ol-agenda-item:hover {
+    text-decoration: underline;
+  }
+  .ol-by-status-group h3 {
+    font-size: 0.875rem;
+    margin: 0.75rem 0 0.25rem;
+  }
+  .ol-by-status-group h3 small {
+    color: var(--to-ink-3);
+    font-weight: 400;
+  }
+  .ol-by-status-group ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .ol-by-status-group li {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: 0.25rem 0;
+    border-bottom: 1px solid var(--to-line);
+  }
+  .ol-by-status-due {
+    color: var(--to-ink-3);
+    white-space: nowrap;
+  }
   .ol-statuses-foot {
     display: flex;
     justify-content: space-between;

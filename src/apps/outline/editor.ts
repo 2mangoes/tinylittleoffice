@@ -34,6 +34,9 @@ import { lastCopied, Rows, type Clip, type RowItem, type RowRange, type RowSpan 
 import { decodeDoc, encodeDoc, isSealed } from '../../kit/core/codec.ts';
 import { LOCKED_LANG, lockedFence, placedLink } from '../../kit/share/locked.ts';
 import type { ToDialog } from '../../kit/ui/dialog.ts';
+import { highlights, rangesIn, type Found } from '../../kit/ui/find.ts';
+import { fold } from '../../kit/share/search.ts';
+import { reveal } from '../../kit/ui/scroll.ts';
 import { editFence, makeDoc } from '../../kit/ui/doc-dialog.ts';
 import { pageSvg } from '../../kit/draw/draw.ts';
 import { DocElement, firstAt, type Entry } from '../../kit/core/element.ts';
@@ -114,6 +117,13 @@ import '../../kit/text/text.ts';
 import '../../kit/ui/context.ts';
 import './style.css';
 
+/** A few words of an item, for a menu or a label: the first four, or 28 characters, then an ellipsis. */
+function short(words: string): string {
+  const w = words.replace(/\s+/g, ' ').trim();
+  const cut = w.split(' ').slice(0, 4).join(' ').slice(0, 28);
+  return cut.length < w.length ? `${cut.replace(/[\s,;:.]+$/, '')}…` : w;
+}
+
 /** A status color's name, by its word (the Calendar's names, with yellow and gray). */
 const COLOR_NAMES: Record<string, () => string> = {
   red: () => t('Red'),
@@ -165,6 +175,10 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
     naming: { state: true },
     dating: { state: true },
     statusDraft: { state: true },
+    filter: { state: true },
+    agenda: { state: true },
+    agendaSort: { state: true },
+    byStatus: { state: true },
     showing: { state: true },
   };
   /** Items folded shut, by block index: the document's own (`{.shut}`, model.ts SHUT), so the link carries the folds and an undo brings them back. */
@@ -185,6 +199,12 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
   declare dating: number;
   /** The statuses as they are being edited in their dialog (`was`: the name before, for the items that carry it); null while it is closed. */
   declare statusDraft: { name: string; word: string; was: string }[] | null;
+  /** Find's terms while it is open: only the rows whose words hold every one are shown (sparse); null otherwise. */
+  declare filter: string[] | null;
+  /** The agenda dialog open, and its order: by status (the set's order), by due day, or the outline's. */
+  declare agenda: boolean;
+  declare agendaSort: 'status' | 'due' | null;
+  declare byStatus: boolean;
   /** The outline shown as a page, in a dialog. */
   declare showing: boolean;
   /** The row editor last focused: what the bar's text tools act on. */
@@ -230,6 +250,10 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
     this.naming = -1;
     this.dating = -1;
     this.statusDraft = null;
+    this.filter = null;
+    this.agenda = false;
+    this.agendaSort = null;
+    this.byStatus = false;
     this.showing = false;
   }
   protected read(doc: Doc) {
@@ -299,13 +323,17 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
     return this.items[indexAt(this.view, at)];
   }
 
-  /** The rows on screen: those inside the zoom, not hidden under a fold. */
+  /** The rows on screen: those inside the zoom, not hidden under a fold; with Find open, only those whose words hold every term, folds aside. */
   visible(): Item[] {
     const items = this.items;
     const z = indexAt(this.view, this.zoom);
     const from = z >= 0 ? z : 0;
     const to = z >= 0 ? familyEnd(items, z) : items.length;
     const out: Item[] = [];
+    if (this.filter) {
+      for (let i = from; i < to; i++) if (this.matchesFind(items[i])) out.push(items[i]);
+      return out;
+    }
     let hideBelow = Infinity;
     for (let i = from; i < to; i++) {
       if (items[i].depth > hideBelow) continue;
@@ -615,13 +643,13 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
   /** The two ends of a line: an item's parent and the item, or a join's. */
   private endsOf(at: number): Ends | null {
     const b = this.doc.blocks[at];
-    if (b?.k === 'edge') return { from: b.from, to: b.to, dir: b.dir, label: b.label, edge: true };
+    if (b?.k === 'edge') return { from: short(b.from), to: short(b.to), dir: b.dir, label: b.label, edge: true };
     const i = indexAt(this.view, at);
     if (i < 0) return null;
     const it = this.items[i];
     const p = parentOf(this.items, i);
     if (p < 0) return null;
-    return { from: plainText(this.items[p].runs).trim() || t('the item above'), to: plainText(it.runs).trim() || t('this item'), dir: it.dir ?? '--', label: it.label, edge: false };
+    return { from: short(plainText(this.items[p].runs)) || t('the item above'), to: short(plainText(it.runs)) || t('this item'), dir: it.dir ?? '--', label: it.label, edge: false };
   }
   private setDir(at: number, dir: Dir) {
     const b = this.doc.blocks[at];
@@ -631,20 +659,22 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
     const at = this.menuFor;
     const ends = at >= 0 ? this.endsOf(at) : null;
     if (!ends) return [];
-    const said = ends.edge ? t('Connection from {from} to {to}', ft(ends)) : t('Line from {from} to {to}', ft(ends));
+    // The item's own things first (its status, its due day, its line's name, the zoom); the kinds of line last, under the
+    // parent's name alone, a few words of it (Paul, 2026-10-15: the menu named both items in full, a sentence each).
+    const said = ends.edge ? t('Connection from {from} to {to}', ft(ends)) : t('Line to {parent}', { parent: ends.from });
     const kinds: [Dir, string][] = [
       ['--', t('Plain line')],
-      ['->', t('Arrow from {from} to {to}', { from: ends.from, to: ends.to })],
-      ['<-', t('Arrow from {from} to {to}', { from: ends.to, to: ends.from })],
+      ['->', ends.edge ? t('Arrow from {from} to {to}', { from: ends.from, to: ends.to }) : t('Arrow from {parent}', { parent: ends.from })],
+      ['<-', ends.edge ? t('Arrow from {from} to {to}', { from: ends.to, to: ends.from }) : t('Arrow to {parent}', { parent: ends.from })],
       ['<->', t('Arrows both ways')],
     ];
     const i = indexAt(this.view, at);
     return [
-      ...kinds.map(([dir, label]) => ({ group: said, label, icon: DIR_ICON[dir] ?? Minus, checked: ends.dir === dir, does: () => this.setDir(at, dir) })),
-      { label: t('Name the line'), icon: UI.pen, hint: ends.label, does: () => this.openNaming(at) },
       ...this.statusItems(at),
+      { label: t('Name the line'), icon: UI.pen, hint: ends.label, does: () => this.openNaming(at) },
       ...(i >= 0 && hasChildren(this.items, i) ? [{ label: t('Zoom in'), icon: ZoomIn, does: () => this.zoomTo(at) }] : []),
       ...(ends.edge ? [{ label: t('Take the connection away'), icon: UI.trash, does: () => this.edit(unlink(this.doc, at)) }] : []),
+      ...kinds.map(([dir, label]) => ({ group: said, label, icon: DIR_ICON[dir] ?? Minus, checked: ends.dir === dir, does: () => this.setDir(at, dir) })),
     ];
   }
   /**
@@ -665,6 +695,10 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
     this.naming = -1;
     this.dating = -1;
     this.statusDraft = null;
+    this.filter = null;
+    this.agenda = false;
+    this.agendaSort = null;
+    this.byStatus = false;
     const b = this.doc.blocks[at];
     const label = value.replace(/\s+/g, ' ').trim();
     if (keep && label !== (this.endsOf(at)?.label ?? '')) this.edit(b?.k === 'edge' ? setLink(this.doc, at, { label }) : setLine(this.doc, this.view, at, { label }));
@@ -959,6 +993,10 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
     if (at < 0) return;
     this.dating = -1;
     this.statusDraft = null;
+    this.filter = null;
+    this.agenda = false;
+    this.agendaSort = null;
+    this.byStatus = false;
     if (keep) this.edit(setDue(this.doc, at, value || undefined));
     void this.updateComplete.then(() => this.focusRow(at));
   }
@@ -1003,9 +1041,7 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
         ${draft.map(
           (s, i) => html`<div class="ol-statuses-row" role="listitem">
             <input type="text" .value=${s.name} aria-label=${t('Name')} autocomplete="off" spellcheck="false" @input=${(e: Event) => set(i, { name: (e.target as HTMLInputElement).value })} />
-            <select aria-label=${t('Color')} .value=${s.word} @change=${(e: Event) => set(i, { word: (e.target as HTMLSelectElement).value })}>
-              ${colors.map((w) => html`<option value=${w} ?selected=${w === s.word}>${COLOR_NAMES[w]()}</option>`)}
-            </select>
+            <span class="ol-swatches" role="group" aria-label=${t('Color')}>${colors.map((w) => html`<button type="button" class="to-btn to-tool ol-swatch" aria-pressed=${String(w === s.word)} aria-label=${COLOR_NAMES[w]()} title=${COLOR_NAMES[w]()} @click=${() => set(i, { word: w })}><span class="to-swatch" style="--swatch:${STATUS_COLORS[w]}" aria-hidden="true"></span></button>`)}</span>
             <span class="ol-status" style="--ol-status:${STATUS_COLORS[s.word] ?? STATUS_COLORS.gray}" aria-hidden="true">${s.name || '…'}</span>
             ${tool({ label: t('Remove'), icon: UI.close, does: () => (this.statusDraft = draft.filter((_, k) => k !== i)) })}
           </div>`,
@@ -1031,6 +1067,10 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
     if (ops.length) this.edit(ops);
     this.querySelector<ToDialog>('to-dialog.ol-statuses')?.close();
     this.statusDraft = null;
+    this.filter = null;
+    this.agenda = false;
+    this.agendaSort = null;
+    this.byStatus = false;
   }
   /** Another document under an item: its app and first line, a way to open it in its own app, and the way back (its link pasted over the card). */
   private renderDoc(it: Item) {
@@ -1068,6 +1108,7 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
       aria-selected=${ranged || (at === this.sel && !this.rows.range) ? 'true' : 'false'}
       style="--d:${it.depth - this.base}"
       @focusin=${() => (this.sel = at)}
+      @click=${() => this.filter && this.land(at)}
     >
       <span class="ol-gutter">
         <button type="button" class="ol-handle to-rows-handle" aria-label=${t('Move this item: drag it onto another')} title=${t('Drag to move')} tabindex="-1">${icon(GripVertical, 14)}</button>
@@ -1154,7 +1195,132 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
       <to-menu class="ol-line-menu" .label=${t('Kind of line')} .items=${this.lineItems()}></to-menu>
       ${this.renderNotes()}
       ${this.renderPageDialog()}
-      <to-dialog class="ol-statuses" heading=${t('Statuses')} @to-close=${() => (this.statusDraft = null)} .body=${this.statusesBody()}></to-dialog>`;
+      <to-dialog class="ol-statuses" heading=${t('Statuses')} @to-close=${() => (this.statusDraft = null)} .body=${this.statusesBody()}></to-dialog>
+      <to-dialog class="ol-agenda" heading=${t('As an agenda')} @to-close=${() => (this.agenda = false)} .body=${this.agenda ? this.agendaBody() : nothing}></to-dialog>
+      <to-dialog class="ol-by-status" heading=${t('By status')} @to-close=${() => (this.byStatus = false)} .body=${this.byStatus ? this.byStatusBody() : nothing}></to-dialog>`;
+  }
+
+  /* ---------- the views of the compound bullet: an agenda, the items by status (Paul, 2026-10-15) ---------- */
+
+  /** The row's element, by its block. */
+  private rowEl(at: number): HTMLElement | null {
+    return at < 0 ? null : this.querySelector<HTMLElement>(`.ol-row[data-at="${at}"]`);
+  }
+  /** The items with something to do: a task, a status or a due day; never a document. */
+  private todo(): Item[] {
+    return this.items.filter((it) => !it.doc && (it.status || it.due || (this.doc.blocks[it.at] as { done?: boolean }).done !== undefined));
+  }
+  showAgenda() {
+    this.agenda = true;
+    void this.updateComplete.then(() => this.querySelector<ToDialog>('to-dialog.ol-agenda')?.show());
+  }
+  showByStatus() {
+    this.byStatus = true;
+    void this.updateComplete.then(() => this.querySelector<ToDialog>('to-dialog.ol-by-status')?.show());
+  }
+  /** A row of a view tapped: the dialog closes and the item has the caret, as the central thing. */
+  private goTo(at: number) {
+    this.agenda = false;
+    this.byStatus = false;
+    this.querySelector<ToDialog>('to-dialog.ol-agenda')?.close();
+    this.querySelector<ToDialog>('to-dialog.ol-by-status')?.close();
+    this.unhide(indexAt(this.view, at));
+    void this.updateComplete.then(() => this.focusRow(at));
+  }
+  private agendaBody() {
+    const st = this.statuses;
+    const rank = new Map(st.map((s, i) => [s.name, i]));
+    const items = [...this.todo()];
+    const sort = this.agendaSort;
+    if (sort === 'status') items.sort((a, b) => (rank.get(a.status ?? '') ?? st.length) - (rank.get(b.status ?? '') ?? st.length));
+    else if (sort === 'due') items.sort((a, b) => (a.due ?? '9999').localeCompare(b.due ?? '9999'));
+    if (!items.length) return html`<p class="to-hint">${t('Nothing to do yet: a task, a status or a due date on an item puts it here.')}</p>`;
+    const head = (key: 'status' | 'due', label: string) =>
+      html`<th scope="col" aria-sort=${sort === key ? 'ascending' : 'none'}><button type="button" class="ol-agenda-sort" aria-pressed=${String(sort === key)} @click=${() => (this.agendaSort = sort === key ? null : key)}>${label}</button></th>`;
+    return html`<table class="ol-agenda-table">
+      <thead><tr><th scope="col">${t('Item')}</th>${head('status', t('Status'))}${head('due', t('Due date'))}</tr></thead>
+      <tbody>${items.map((it) => {
+        const b = this.doc.blocks[it.at] as { done?: boolean };
+        const s = st.find((x) => x.name === it.status);
+        return html`<tr>
+          <td><button type="button" class="ol-agenda-item" @click=${() => this.goTo(it.at)}>${b.done !== undefined ? html`<span class="ol-task" role="checkbox" aria-checked=${String(!!b.done)} aria-hidden="true">${b.done ? icon(UI.check, 12) : nothing}</span>` : nothing}${plainText(it.runs).trim() || t('Untitled')}</button></td>
+          <td>${it.status ? html`<span class="ol-status" style="--ol-status:${s?.color ?? STATUS_COLORS.gray}">${it.status}</span>` : nothing}</td>
+          <td>${it.due ? this.dayWords(it.due) : nothing}</td>
+        </tr>`;
+      })}</tbody>
+    </table>`;
+  }
+  private byStatusBody() {
+    const st = this.statuses;
+    const items = this.todo();
+    const groups = [
+      ...st.map((s) => ({ name: s.name, color: s.color, items: items.filter((it) => it.status === s.name) })),
+      { name: t('No status'), color: STATUS_COLORS.gray, items: items.filter((it) => !it.status || !st.some((s) => s.name === it.status)) },
+    ];
+    if (!items.length) return html`<p class="to-hint">${t('Nothing to do yet: a task, a status or a due date on an item puts it here.')}</p>`;
+    return html`<div class="ol-by-status-groups">${groups
+      .filter((g) => g.items.length)
+      .map(
+        (g) => html`<section class="ol-by-status-group">
+          <h3><span class="ol-status" style="--ol-status:${g.color}">${g.name}</span> <small>${g.items.length}</small></h3>
+          <ul>${g.items.map((it) => html`<li><button type="button" class="ol-agenda-item" @click=${() => this.goTo(it.at)}>${plainText(it.runs).trim() || t('Untitled')}</button>${it.due ? html`<small class="ol-by-status-due">${this.dayWords(it.due)}</small>` : nothing}</li>`)}</ul>
+        </section>`,
+      )}</div>`;
+  }
+
+  /* ---------- Find: the matching rows alone, the terms marked; a tap lands on one (Paul, 2026-10-15) ---------- */
+
+  /** Whether an item's words hold every term (case and accents aside, as the find bar reads them). */
+  private matchesFind(it: Item): boolean {
+    if (!this.filter?.length || it.doc) return false;
+    const f = fold(plainText(it.runs));
+    return this.filter.every((term) => f.includes(term));
+  }
+  /** The find bar's search: the rows that match are the ones shown, the terms marked in them; each in turn brought into view. */
+  find(terms: string[]): Found {
+    this.filter = terms;
+    const rows = this.visible();
+    const hl = highlights();
+    let now = -1;
+    const mark = () => {
+      const tree = this.querySelector('.ol-tree');
+      if (!tree) return;
+      hl?.set('to-find', new Highlight(...rangesIn(tree, terms)));
+    };
+    void this.updateComplete.then(mark);
+    return {
+      count: rows.length,
+      go: (i) => {
+        now = i;
+        void this.updateComplete.then(() => {
+          mark();
+          const row = this.rowEl(rows[i]?.at ?? -1);
+          if (!row) return;
+          const own = rangesIn(row, terms);
+          if (own.length) hl?.set('to-find-now', new Highlight(...own));
+          reveal(row, { block: 'center' });
+        });
+      },
+      clear: () => {
+        hl?.delete('to-find');
+        hl?.delete('to-find-now');
+        this.filter = null;
+      },
+      leave: () => {
+        const at = rows[now]?.at;
+        if (at !== undefined) this.land(at);
+      },
+    };
+  }
+  /** A row tapped while Find shows the matches: the filter lifts, the item is zoomed to, and its words have the caret. */
+  land(at: number) {
+    this.filter = null;
+    highlights()?.delete('to-find');
+    highlights()?.delete('to-find-now');
+    const i = indexAt(this.view, at);
+    if (i >= 0 && hasChildren(this.items, i)) this.zoomTo(at);
+    else this.unhide(i);
+    void this.updateComplete.then(() => this.focusRow(at));
   }
 
   /* ---------- the footnotes, under the outline ---------- */

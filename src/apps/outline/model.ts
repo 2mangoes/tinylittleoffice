@@ -108,6 +108,24 @@ export function statusesOf(doc: Doc): Status[] {
   }
   return out;
 }
+/** A status color's word as the Calendar names it ('' where the Calendar has no such color: its default). */
+const CAL_WORD: Record<string, string> = { red: 'red', orange: 'orange', yellow: 'orange', green: 'green', blue: 'blue', purple: 'purple' };
+/**
+ * The outline as a Calendar (View as ▾ As a calendar; Paul, 2026-10-15): every item with a due day is a day's event in
+ * its words, colored by its status, the statuses the legend; the rest of the outline is not a date and stays behind.
+ */
+export function outlineToCal(v: OutlineView, head: Doc['head'] = {}): string {
+  const statuses = statusesOf({ head, blocks: [] });
+  const colorOf = (name?: string) => CAL_WORD[statuses.find((s) => s.name === name)?.word ?? ''] ?? '';
+  const legend = statuses.flatMap((s) => (CAL_WORD[s.word] ? [`${CAL_WORD[s.word]}: ${s.name}`] : []));
+  const lines = v.items.flatMap((it) => {
+    if (!it.due || it.doc) return [];
+    const color = colorOf(it.status);
+    return [`- ${it.due}: ${plainText(it.runs).trim() || '…'}${color ? ` {color=${color}}` : ''}`];
+  });
+  const front = [...(head.title ? [`title: ${head.title}`] : []), ...legend];
+  return `${front.length ? `---\n${front.join('\n')}\n---\n` : ''}${lines.join('\n')}\n`;
+}
 /** The head's line for a set of statuses: `TODO=red, DOING=yellow`. */
 export const writeStatuses = (list: { name: string; word: string }[]): string => list.map((s) => `${s.name}=${STATUS_COLORS[s.word] ? s.word : 'gray'}`).join(', ');
 /**
