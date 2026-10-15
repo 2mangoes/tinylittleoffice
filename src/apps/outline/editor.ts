@@ -899,7 +899,8 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
   }
   /** A line's name, as a chip before the words; tapped, its name is typed there. */
   private chip(at: number, label?: string) {
-    if (this.naming === at)
+    // -1 is "no row is naming" and also the empty document's ghost row: the ghost never shows the field.
+    if (this.naming === at && at >= 0)
       return html`<input class="ol-label ol-label-in" aria-label=${t('Name of the line')} placeholder=${t('e.g. owns, feeds, reports to')} .value=${label ?? ''} autocomplete="off" spellcheck="false"
         @keydown=${(e: KeyboardEvent) => {
           e.stopPropagation();
@@ -964,7 +965,8 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
   }
   /** The due day, a chip after the words; tapped, a date field where it was. */
   private dueChip(at: number, it: Item) {
-    if (this.dating === at)
+    // -1 is "no row is dating" and also the empty document's ghost row, which showed a date field on every new outline (Paul, 2026-10-15).
+    if (this.dating === at && at >= 0)
       return html`<input type="date" class="ol-due-in" aria-label=${t('Due date')} .value=${it.due ?? defaultDue(this.view, indexAt(this.view, at))} autocomplete="off"
         @keydown=${(e: KeyboardEvent) => {
           e.stopPropagation();
