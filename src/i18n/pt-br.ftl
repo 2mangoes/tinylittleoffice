@@ -143,15 +143,15 @@ drawer-dark = Escuro
 # en: 6b21fb791ac05170893860c248401cd24a59b732
 drawer-about = Sobre
 # en: 515e0d24040d094379cfdc94e3c6c2f63a26f1f6
-common-tiny-little-office = Pequeno Escritoriozinho
+common-tiny-little-office = Escritório Pequenininho
 # en: 399d4aacd52f76ac8090ce08a31e550e2123645d
-drawer-about-tiny-little-office = Sobre o Pequeno Escritoriozinho
+drawer-about-tiny-little-office = Sobre o Escritório Pequenininho
 # en: 6218d1c0ab69084ed45fb0f022b95f382310184a
-drawer-tiny-little-office-is-experiment = Pequeno Escritoriozinho é um experimento da { $aboard }, uma empresa de estratégia digital e de IA e desenvolvimento de software em Nova York.
+drawer-tiny-little-office-is-experiment = O Escritório Pequenininho é um experimento da { $aboard }, uma empresa de Nova York de estratégia digital, IA e desenvolvimento de software.
 # en: 04a1291dcc6e5d304f04516685710a331963f630
 drawer-to-reach-out-with-questions = Para tirar dúvidas, { $email }.
 # en: 522edc71559293b5713cff3f13c2dbafd37a56a3
-drawer-email-us = mande um e-mail para nós
+drawer-email-us = mande um e-mail
 # en: 98187f1688112fa57c00a326f526288fa3e6b023
 drawer-if-you-find-bugs-please = Se encontrar bugs, por favor registre-os no nosso { $github }.
 # en: c6651994b242228b647fbbd2a83eccefd957abca
@@ -177,20 +177,20 @@ drawer-add-to-home-screen = Adicionar à tela de início
 # en: 9b3cbed5c490c07473546a88768ba29b787e9e52
 drawer-size-of-everything = Zoom
 # en: 943c5ac9fa7766d7c1ebecbc95c4e0d27b4ef9d4
-drawer-to-add-tiny-little-office = Para adicionar o Pequeno Escritoriozinho à tela de início: Compartilhar, depois Adicionar à Tela de Início.
+drawer-to-add-tiny-little-office = Para adicionar o Escritório Pequenininho à tela de início: Compartilhar, depois Adicionar à Tela de Início.
 
 ## links that leave the site (kit/ui/link-guard.ts)
 
 # The menu button's tooltip: the Office mark is the menu.
 # en: 4a48e81d0d023913c2155eb30954f58853a5591d
-leave-tiny-little-office-menu = Menu do Pequeno Escritoriozinho
+leave-tiny-little-office-menu = Menu do Escritório Pequenininho
 # The question before a link that leaves the site: "You are leaving Tiny Little Office for" over the site's name, large.
 # en: 92ad7c004fe14dea34666631ff31b016eb39ee40
 leave-do-you-trust-this-link = Você confia neste link?
 # en: 8d85feca3f164857fc84014a8f2ed5cc4846d4c9
-leave-you-are-leaving-tiny-little = Você está saindo do Pequeno Escritoriozinho para
+leave-you-are-leaving-tiny-little = Você está saindo do Escritório Pequenininho para
 # en: 50ef68d5c205237951dae42aa775a66480171c46
-leave-this-link-writes-email-to = Este link escreve um e-mail para
+leave-this-link-writes-email-to = Este link cria um e-mail para
 # en: 102dce223fdc2f3bbdda71f28108e2a6fdf21710
 leave-this-link-calls = Este link liga para
 # en: afb8b3199e929e5e9f886fdf382599c9d440c71f
@@ -214,7 +214,7 @@ leave-this-link-hides-characters-in = O endereço deste link contém caracteres 
 ## sharing: the Share dialog (kit/core/shell.ts), where the link fits (kit/share/limits.ts), the arrival banner
 
 # en: 21697833514286cb120912c109ed55e870e44b01
-share-copy-opened-in-new-tab = Uma cópia aberta em nova aba
+share-copy-opened-in-new-tab = Uma cópia foi aberta em uma nova aba
 # en: ae7b279c96200b853008a352fa110ac2565f3dc5
 share-edit-link = Link de edição
 # en: 12355fc4c6eeb80306a7fe5199240b694bf2b85e
@@ -250,7 +250,7 @@ share-opens-as-pages-to-read = Abre como páginas para ler
 # en: 8744400a02796b44742f8f5e5b66216821eab90d
 share-opens-in-editor = Abre no editor
 # en: 7fbbb75c4e853ef0e42da5fe316344fdf1a6143c
-common-whoever-opens-this-link-gets = Quem abre este link recebe a própria cópia. As mudanças dessa pessoa não aparecem na sua. Peça para ela mandar o link dela de volta.
+common-whoever-opens-this-link-gets = Quem abrir este link recebe uma cópia própria. As mudanças dessa pessoa não aparecem na sua. Peça para ela mandar o link de volta.
 # en: 94b01acececc033463cc7731d659fbcae11c2b47
 share-short-link-that-expires = Link curto que expira
 # en: fed3d23d480dd0bfe5a0cfff4d9f3dae7857fbe6
@@ -280,7 +280,7 @@ share-discord-message = uma mensagem do Discord
 # en: 36dec9aa0b166bef869350675231f78529bbabd8
 share-a-qr-code = um código QR
 # en: 13be5551761c07ae1735af2e3fbcea08dae3dce3
-share-link-in-google-docs = um link no Documentos Google
+share-link-in-google-docs = um link no Google Docs
 # en: 66ab040bba28a1d3d5307879564a2bf9ff2ae108
 share-telegram-message = uma mensagem do Telegram
 # en: aba5163784cd5c92d1a33174634785cace589ca8
@@ -354,7 +354,7 @@ share-new-noun-date-n = { $noun } { $date } n.º { $n }
 # en: 1c2edb3104c7f2adce9ad2a77f3622d1beb0059a
 share-mastodon-server-like-mastodon-social = Um servidor Mastodon, como mastodon.social
 # en: 64fbd995d3b6b156ee26ae3c03e6516434c34c12
-share-change = Mudança
+share-change = Alterar
 # en: 2a07ce9a22d8e5dc1031e531518f04e50855319f
 share-copy-embed-code = Copiar código de incorporação
 # en: c3e1c83e5b4172d3c738e37cb69b76d93ce49b8b
@@ -384,7 +384,7 @@ share-picture-is-over-400-kb = a imagem passa de 400 KB
 # en: 398d796772eebe6fc3207881d76d2cf9f155da3f
 share-server-could-not-be-reached = não foi possível falar com o servidor
 # en: 686fd096a5f35bcfbcdcc5130d1be03e593d7bfa
-share-hundred-previews-day-from-one = cem prévias por dia de um mesmo endereço
+share-hundred-previews-day-from-one = o limite de 100 prévias por dia por endereço
 # en: 959db3cd3ff1a424890a809f9cf7445f37db3289
 share-server-refused-picture = o servidor recusou a imagem
 # en: af490175b729a82a4315134642a89f1f87681967
@@ -392,9 +392,9 @@ share-pages-in-frame-on-another = As páginas, num quadro em outro site, com um 
 # en: 9377de06278eacbdf4a297a82b8eb9aa3d4220c0
 share-your-mastodon-server = Seu servidor Mastodon
 # en: 8ae1c34bd37fad49cc5f8e02da648a78e89c3ed8
-share-left = Esquerda
+share-left = Restante
 # en: 62be4731dedfbbc70aa7fa30d6649d816af8ca4b
-share-uses = Usa
+share-uses = Uso
 # en: 525f61b6729229b1a8854a9e50bcaa52ea96b131
 share-where = Onde
 # en: cdbfed741d905515df704d9585fc74781801a24d
@@ -408,7 +408,7 @@ share-n-over = { $n } a mais
 
 # The Share dialog's head line: "Created 9 Oct 2026, 14:03 · by Paul".
 # en: 07fd5d289286fa4714b3f407db7875fac90b9952
-privacy-anyone-with-link-will-need = Quem tiver o link vai precisar da senha para abri-lo. Ela não pode ser redefinida. Se você perdê-la, o documento se perde.
+privacy-anyone-with-link-will-need = Quem tiver o link vai precisar da senha para abri-lo. Ela não pode ser redefinida. Se você perdê-la, perde o documento.
 # en: 8c684290ce0b8a8e6cee79a145e17554064a4760
 privacy-change-password = Trocar senha
 # en: 5be0d11b94b1ba25b2579314f6af69649a900cde
@@ -500,9 +500,9 @@ privacy-n-links = { $n ->
        *[other] { $n } links
     }
 # en: 2ddd4097832d991c46023732a889beeb8ec4c29d
-privacy-n-set = { $n } definidos
+privacy-n-set = { $n } definidas
 # en: a97ce1edde4ad396d1cff34063087d0bf5d0e1a8
-privacy-copy-this-and-send-it = Copie esta senha e envie separada do link. Ela não será mostrada de novo.
+privacy-copy-this-and-send-it = Copie esta senha e envie separadamente do link. Ela não será mostrada de novo.
 # en: 7640428ae16fc2b673d689ddf6b1ea15eed407d3
 privacy-make-another = Criar outra
 # en: 9a0081f0b2bff82fac1961a403734134b9a3b170
@@ -544,7 +544,7 @@ common-move-left = Mover para a esquerda
 common-move-right = Mover para a direita
 # The group heading the Calendar and the Trip Planner sit under on the home page.
 # en: ae2f98a099fe5855c31126233e9c13641ee7fdba
-common-plan = Planejar
+common-plan = Planejamento
 # en: 9985434cd07212b8dac01f8e015a1fa8adac9a99
 common-chosen-tasks = Tarefas selecionadas
 # A link that opens the document (kit/ui/compare.ts).
@@ -596,11 +596,11 @@ download-text-tlo = Texto (TLO)
 # en: 840a0fda84379bffc2a266a92bbb990672a7c8d2
 download-data-json = Dados (JSON)
 # en: f77017c03d9d2be93a74ef7ef7e099dd77976f01
-download-downloaded-name = { $name } baixado
+download-downloaded-name = Download concluído: { $name }
 # en: 01125e1be1f56cdaa47c6314a158e1219af819b3
 download-failed = Falha no download
 # en: e7f6a6728b280414756d238ae70084720018ba47
-common-open-in-tiny-little-office = Abrir no Pequeno Escritoriozinho
+common-open-in-tiny-little-office = Abrir no Escritório Pequenininho
 # Under a document cut off at a slide's foot: a link that opens it whole, in its own app.
 # en: c510d6c04c0951500c8e43f623e9f8886c378aec
 download-see-more = Ver mais
@@ -672,16 +672,16 @@ editor-set-link = Definir link
 # en: d2de1a2831e7fee28d6c8d214b66da0d1bed30c8
 editor-open-link = Abrir link
 # en: f377ac75602950b2c36449de5bceb3c12333ac77
-editor-change-link = Editar link
+editor-change-link = Alterar link
 # en: 8d48d1f9e74c4fecd89a67645ca3593ef0964710
 editor-remove-link = Remover link
 # The selection bubble's name: what can be done to the words selected.
 # en: 041a5dec481d6bf0724caeaa84bc135d7d9062d4
 common-format = Formatar
 # en: e5fd9cfe0e8039111d54b588e77b2bb0cad41c3a
-editor-done-lowercase = feito
+editor-done-lowercase = concluído
 # en: 4ed7199b77561b7a7c013f7a8504b6686496302d
-editor-not-done = a fazer
+editor-not-done = não concluído
 # en: 984cfca8d70e0b1e37a9e70c98a219bb12a05f23
 editor-bold-italic-and-links = Negrito, itálico e links
 # en: a983f10d71bb808f58795f6ae728a6e76f08ce78
@@ -711,7 +711,7 @@ write-document-lowercase = documento
 # en: d26d55c7f815c82cf430c3915b3bb833d3f02e5e
 common-words = Texto
 # en: 703864836e29b00a7c7490f714fd2d18474de840
-write-words-on-page-headings-lists = Palavras em uma página: títulos, listas, links e notas, uma tabela que soma, impresso em carta ou A4.
+write-words-on-page-headings-lists = Palavras numa página: títulos, listas, links e notas, uma tabela que soma, impressa em papel carta ou A4.
 # en: e214b8a29923056887b7edf6635d90dcbb2abe88
 write-document = Documento
 # en: 6e660ac1c8b81a53e302f6bb0298551ec820eceb
@@ -723,7 +723,7 @@ write-paragraph = Parágrafo
 # en: b4d812c8bee8056808c14f1b31b6765342c8437e
 common-bring-out = Diminuir recuo
 # en: aacf42132cce6cf5c1608a5d27f90fcbf93ae851
-common-indent = Recuar
+common-indent = Aumentar recuo
 # en: c83b0ec2d98a2ca38077be2f03102aedeb0ab261
 write-align = Alinhar
 # en: b442b455b6a5e55f249769068c3fcc4832aea89d
@@ -819,11 +819,11 @@ write-name-and-contact-experience-education = Nome e contato, experiência, form
 # en: 5a0ba3bb83f0992ba00ae94db6a7464210c40711
 write-contract = Contrato
 # en: 50899f480b3395ee509689b06672ad9d8719e082
-write-plain-words-agreement-what-each = Um acordo em palavras simples: o que cada parte faz, e como ele termina.
+write-plain-words-agreement-what-each = Um acordo em palavras simples: o que cada parte faz e como ele termina.
 # en: f9f38818c406d0878defb17a2356e1a2c658861a
 write-invoice = Fatura
 # en: 4e056cf73efd0995ce1e7c5fd88900894935896c
-write-who-what-and-how-much = Quem, o quê e quanto, as contas feitas na tabela; impressa como papel para enviar.
+write-who-what-and-how-much = Quem, o quê e quanto, as contas feitas na tabela; pronta para imprimir e enviar.
 # en: 80c40a5c8be53118fd8a9fc487b43f20c3014fbc
 write-cover-letter = Carta de apresentação
 # en: fe727759e1b85df4a1d71348a1a6dfd6ef8e135d
@@ -831,7 +831,7 @@ write-applying-for-job-position-what = Candidatura a um emprego: a vaga, o que v
 # en: 1fd79b9555ddf59862d60aa0aa3bb74fb74aae78
 write-memo = Memorando
 # en: cfa5a189ad757d015661acb500917a198d8a13e1
-write-to-from-date-and-subject = Para, de, data e assunto; a mudança em uma frase, o porquê e o que você precisa de volta.
+write-to-from-date-and-subject = Para, de, data e assunto; a mudança em uma frase, o porquê e o retorno que você precisa.
 # en: 092f99ea11a34a8490e7a767a83a42fc45634f82
 write-minutes = Ata
 # en: 34dbbbeddd62f120a000701c56adebc8bae95352
@@ -839,15 +839,15 @@ write-formal-meeting-who-came-treasurers = Uma reunião formal: quem veio, as co
 # en: e04a25d1f69061bfe7770b16891fca2c413bcbe0
 write-one-page-cv = Currículo de uma página
 # en: 11628c83c5de19d1338628ed7153b648f496b27c
-write-typewriter-set-cv-now-before = Um currículo em máquina de escrever: agora, antes, formação, idiomas e ferramentas.
+write-typewriter-set-cv-now-before = Um currículo com cara de máquina de escrever: agora, antes, formação, idiomas e ferramentas.
 # en: 6ed05e720ccc3ef269db1b38201da8b873acc895
 write-newsletter = Boletim
 # en: e583899cf44dbc07e6d8d4e7a252d39552e4e3d4
-write-block-associations-month-dates-in = O mês de uma associação de bairro: datas numa tabela, boas-vindas, notícias e agradecimentos.
+write-block-associations-month-dates-in = O mês de uma associação de moradores: datas numa tabela, boas-vindas, notícias e agradecimentos.
 # en: 1dcda804c96da3cc7e73e8a1672d4379a741f11a
 write-recipe = Receita
 # en: 72490fa559ee9ce5ed498b58b3e2cad900af7155
-write-what-you-need-in-table = O que você precisa, numa tabela que vai de quatro a seis porções, e como fazer, passo a passo.
+write-what-you-need-in-table = Os ingredientes, numa tabela que vai de quatro a seis porções, e o modo de preparo, passo a passo.
 # en: aa3ddab4d749b73414ddd65201f9c6553b98a49b
 write-questions-and-answers = Perguntas e respostas
 # en: 1854b96dd11603bed03cce723369ef661a6f34f8
@@ -855,7 +855,7 @@ write-questions-people-ask-each-heading = As perguntas que as pessoas fazem, cad
 # en: 6d234a17fecd5048e790eb4d1c415e17899a0e56
 write-press-release = Comunicado à imprensa
 # en: ba41d12bbba317bcacf230155abba7ce9e400379
-write-news-in-first-line-detail = A notícia na primeira linha, o detalhe, uma citação, os horários e quem procurar.
+write-news-in-first-line-detail = A notícia na primeira linha, os detalhes, uma citação, os horários e para quem ligar.
 # en: 0c30f8a886ae8207e0702b4daf5eda405b19a131
 write-news-article = Reportagem
 # en: 66280b179ec208e759c8fd7e05a4b1171c355c9f
@@ -887,15 +887,15 @@ write-course-when-and-where-what = Um curso: quando e onde, sobre o que é, as s
 # en: 3c847b9cd456626c998b9d2793f7701117ee4c80
 write-formal-complaint = Reclamação formal
 # en: f98daa2b60c626279045f82029a9e58dfcd90f4b
-write-what-happened-in-order-what = O que aconteceu, em ordem; o que você quer; e até quando, antes de ir adiante.
+write-what-happened-in-order-what = O que aconteceu, em ordem; o que você quer; e o prazo, antes de tomar outras medidas.
 # en: f74c6bc075b1961f73f45729ce6281dc84fb3ccf
 write-letter-to-politician = Carta a um político
 # en: 2e754026e13e7ebe41d9513e31f94d8268341243
-write-ask-your-representative-for-vote = Peça ao seu representante um voto: quem você é, por que importa aqui e uma pergunta.
+write-ask-your-representative-for-vote = Peça ao seu parlamentar um voto: quem você é, por que isso importa aqui e uma pergunta.
 # en: de21096f37522d15740e7a4acd69efc811f9b5ce
 write-love-letter = Carta de amor
 # en: a6977a11c96b06575fd8359e1bb9e3dea5a21fcf
-write-ordinary-things-missed-letter-across = Coisas simples, com saudade: uma carta através da distância, em serifa.
+write-ordinary-things-missed-letter-across = Coisas simples, com saudade: uma carta à distância, numa fonte serifada.
 # en: 1af339528a1814a5f1dc409f2d108e0308035b87
 write-wedding-speech = Discurso de casamento
 # en: b040a94a7bd386ebaee15aa4c4535da004fadc4c
@@ -907,7 +907,7 @@ write-life-in-few-minutes-where = Uma vida em poucos minutos: onde começou, que
 # en: 6c63ce6d4727a3fb46c16a62ac8d536b0b61fd08
 write-zine-essay = Ensaio de zine
 # en: ecce024c73aadb2150552b3419d5aa1c3cb72c17
-write-personal-essay-for-small-magazine = Um ensaio pessoal para uma revista pequena, datilografado.
+write-personal-essay-for-small-magazine = Um ensaio pessoal para uma pequena revista independente, datilografado.
 # en: 563a631aba8690962836c99d15886672eb96ef62
 write-petition = Abaixo-assinado
 # en: 6d3ace089783eb6cf5e5fe47a7d74a3ee5c21f39
@@ -915,7 +915,7 @@ write-what-you-ask-why-and = O que você pede, por quê, e os nomes de quem conc
 # en: a6a1d25b018c9318540556e3fe374fdf8b23aff8
 write-terms-of-service = Termos de serviço
 # en: 79b220d914e24eb7ac79428e72639e8547d8ab9a
-write-small-businesss-terms-in-plain = Os termos de um pequeno negócio em palavras simples: reservas, preços, chaves, e se, encerramento.
+write-small-businesss-terms-in-plain = Os termos de um pequeno negócio em palavras simples: reservas, preços, chaves, imprevistos, encerramento.
 # en: fe3b114dccf2739f949d65ac4101037eb8f92543
 write-open-as-outline = Abrir como estrutura de tópicos
 # same
@@ -929,17 +929,17 @@ write-name-this-column = Dar nome a esta coluna
 ## Insert's dialog (kit/ui/insert-dialogs.ts): Tiny Little Office Doc
 
 # en: d5674bb4dcb8c5fe378eb9cd0bb9d1849ed37581
-insert-tiny-little-office-link = Um link do Pequeno Escritoriozinho
+insert-tiny-little-office-link = Um link do Escritório Pequenininho
 # en: cdea71ff947c2b49dd7d7ea146fd3efeb9fa5677
 insert-opening-short-link = Abrindo o link curto…
 # en: 9d2d34c4b04d8410e0025beb7899a31d1bc57c04
-insert-paste-link-of-another-tiny = Cole o link de outro documento do Pequeno Escritoriozinho, longo ou curto: a primeira página aparece aqui.
+insert-paste-link-of-another-tiny = Cole o link de outro documento do Escritório Pequenininho, longo ou curto: a primeira página aparece aqui.
 # en: 7e4861cdc8de2c0c4cf87ca37c9130a92051b5b0
-insert-this-is-not-tiny-little = Este não é um link do Pequeno Escritoriozinho, ou ele expirou.
+insert-this-is-not-tiny-little = Este não é um link do Escritório Pequenininho, ou ele expirou.
 # en: 1eb05dc15f4e90a6a61c46b111812e974555cd81
-insert-tiny-little-office-doc = Documento do Pequeno Escritoriozinho
+insert-tiny-little-office-doc = Documento do Escritório Pequenininho
 # en: 7bb236efe4e244196e506d65542626cfe368bb09
-common-tiny-little-office-doc-ellipsis = Documento do Pequeno Escritoriozinho…
+common-tiny-little-office-doc-ellipsis = Documento do Escritório Pequenininho…
 # Insert ▾'s group of the apps a new document can be made in, inside this one.
 # en: f9f93f3f14cfa3eea1bfcfee97ae22cd15b25e0d
 common-new-document = Um novo documento
@@ -964,9 +964,9 @@ chart-flows-list = Fluxos: { $list }.
 # en: c6fd3870c86e7422a0146e1e2a052437fb8e51e2
 common-lines = Linhas
 # en: 5a2f5ac996eef952d239a22e8d68296faf975994
-chart-nothing-to-chart-yet = Nada para o gráfico ainda
+chart-nothing-to-chart-yet = Ainda não há dados para o gráfico
 # en: 7631740b7c7b5a09ad168ae28580b5c9ca4b8c06
-chart-nothing-to-chart-yet-rows = Nada para o gráfico ainda: linhas de De | Para | Valor
+chart-nothing-to-chart-yet-rows = Ainda não há dados para o gráfico: linhas de De | Para | Valor
 # en: 9318d4f63aeffddc47d4520c722ad70f0ec6c63a
 chart-pie = Pizza
 # en: 40c20d94e78fa142819df8cc9440d30e65329975
@@ -998,11 +998,11 @@ sheet-spreadsheet-with-formulas-named-cells = Uma planilha com fórmulas, célul
 # en: 7aeba4cd15b1afc5015285c0854f0edae2380d36
 sheet-budget = Orçamento
 # en: d99860b75cc866415325dd845f03e65f1b9fc648
-sheet-planned-against-actual-line-each = Planejado contra realizado, uma linha cada, com a diferença e os totais.
+sheet-planned-against-actual-line-each = Previsto x realizado, uma linha para cada, com a diferença e os totais.
 # en: 0a0a7c3be7656f55cd259d558c2d0eb59b893b88
 sheet-expense-log = Controle de despesas
 # en: c2effbb05c6382e67befb796de9be3ad264a1cbb
-sheet-date-what-how-much-which = Data, o quê, quanto, de que tipo; um total corrente no pé.
+sheet-date-what-how-much-which = Data, o quê, quanto, de que tipo; um total acumulado no fim.
 # en: a2d841e763d975477b0e1a51d15e6f25c9023d4a
 sheet-training-log = Diário de treino
 # en: d5b29b7fbac7da4d79a420a8108f0c98bb1ab61a
@@ -1012,13 +1012,13 @@ sheet-project-tracker = Acompanhamento de projeto
 # en: a9f287fb1ede11b35e739a207cac5eddcfd2116d
 sheet-tasks-with-owners-start-and = Tarefas com responsáveis, datas de início e entrega contadas a partir de hoje, dias de cada uma, como vai cada uma e um visto quando concluída.
 # en: 83c8cb0557f1a8ab76094b2801ae0b4cd23e4741
-sheet-loans-compared = Empréstimos comparados
+sheet-loans-compared = Comparativo de empréstimos
 # en: 8ae3fb1476eab673ec96c9e2614cad18cbd6f497
 sheet-amount-rate-and-years-for = Valor, taxa e anos de cada empréstimo; a parcela mensal (PMT), quanto custa no total e os juros.
 # en: 53f4e4eb1a489c6a14658993062fc985a80bd775
 sheet-subscription-business = Um negócio de assinaturas
 # en: f14ffb32b12ec6d73e3971054ddf5248de50852a
-sheet-visitors-who-sign-up-pay = Visitantes que se cadastram, pagam e ficam: um modelo em fluxos, com as hipóteses ao lado para mudar.
+sheet-visitors-who-sign-up-pay = Visitantes que se cadastram, pagam e ficam: um modelo em fluxos, com as premissas ao lado para você alterar.
 # en: 2f6636a8892aa5d7f9781b630c2131dc8652a7f1
 sheet-cafe = Um café
 # en: ce157b2ac144f603ec936234eb69d9d524c3354f
@@ -1034,19 +1034,19 @@ sheet-monthly-donors-and-one-off = Doadores mensais e doações avulsas enchem o
 # en: 992dbb972d7850082f91f3f43d7b68391091a32e
 sheet-month-by-month-with-chart = Mês a mês, com gráfico
 # en: 876c69fa93189c4e89f57aeec964d0573e61be81
-sheet-this-year-against-last-line = Este ano contra o ano passado, uma linha por mês, desenhado em linhas.
+sheet-this-year-against-last-line = Este ano comparado ao passado, uma linha por mês, num gráfico de linhas.
 # en: 467dda8775e7e01a3dacd9ff5d247da7caf931d3
 sheet-household-budget-by-month = Orçamento doméstico por mês
 # en: f61119c5b20c1ed2360f6aa2b583872a1fc9c474
-sheet-six-months-of-homes-bills = Seis meses de contas e gastos de uma casa, uma coluna por mês, somados nos dois sentidos contra o salário.
+sheet-six-months-of-homes-bills = Seis meses de contas e gastos de uma casa, uma coluna por mês, com totais nas linhas e colunas, comparados ao salário.
 # en: 2c2609efcdcac42f94b3d73758d40d3f2f79dfd8
 sheet-savings-goal = Meta de poupança
 # en: 49ff61e9d2d6e99106df2e02e7a626aa5186c112
-sheet-what-went-in-each-month = O que entrou a cada mês, o que já foi poupado e o que falta, com a meta ao lado para mudar.
+sheet-what-went-in-each-month = O que entrou a cada mês, o que já foi poupado e o que falta, com a meta ao lado para você alterar.
 # en: ca1ec97c50f7647ef3588d5de58af33939c01646
 sheet-habit-tracker = Controle de hábitos
 # en: 7a2638dee7c38146953a64566dbd8fc8ea77d8d4
-sheet-four-habits-checked-off-day = Quatro hábitos marcados dia a dia por duas semanas; quanto de cada dia foi cumprido e quantos dias cada um.
+sheet-four-habits-checked-off-day = Quatro hábitos marcados dia a dia por duas semanas; o quanto foi cumprido a cada dia e em quantos dias cada um.
 # en: d80f6ec7eac0c80248e2c7b452e21f89673449f2
 sheet-reading-list = Lista de leitura
 # en: c809293d68f1061cf7062072d2efc8fe95fe9262
@@ -1054,15 +1054,15 @@ sheet-books-read-being-read-and = Livros lidos, em leitura e os próximos, com o
 # en: 6e14850d9abea09c879f881a4773537f91cf2ac2
 sheet-workout-log = Diário de musculação
 # en: b2a1db48bce10aa5ac4b8eb894555098ecbaac30
-sheet-sets-reps-and-weight-for = Séries, repetições e carga de cada exercício, o volume calculado e como cada um pareceu.
+sheet-sets-reps-and-weight-for = Séries, repetições e carga de cada exercício, o volume calculado e a sensação de cada um.
 # en: 5be9810c81e208adc153f7aa0cc70f64c988d737
 sheet-time-sheet = Folha de horas
 # en: df9c77cdd1cdf96f00633ef7f822543a7185dbc6
-sheet-weeks-hours-by-client-and = As horas de uma semana por cliente e tarefa; as faturáveis precificadas ao seu valor, e os totais.
+sheet-weeks-hours-by-client-and = As horas de uma semana por cliente e tarefa; as faturáveis calculadas pelo valor de cada uma, e os totais.
 # en: da7a3e11a9c1686127720177adfd2bbfed7224e0
 sheet-trip-costs-split = Despesas de viagem divididas
 # en: bcc455f94ab37c41dad441a4152ac7961c3118ad
-sheet-who-paid-for-what-on = Quem pagou o quê numa viagem de quatro; a parte justa de cada um e o que cada um deve (negativo é dinheiro a receber).
+sheet-who-paid-for-what-on = Quem pagou o quê numa viagem de quatro pessoas; a parte justa de cada um e o que cada um deve (negativo é dinheiro a receber).
 # en: 3fcd3bd6c3c0517dc23b7c9c8a424a6ba7c30c9a
 sheet-schedule-with-dates = Cronograma com datas
 # en: 9cfdf52e38ee970ebd6feac438c7d2cb6abd25c5
@@ -1074,11 +1074,11 @@ sheet-classs-grades-for-essays-quizzes = As notas de uma turma em redações, te
 # en: 7d9ac107a69e997e571bd6906b535f6802bc5569
 sheet-membership-roll = Lista de sócios
 # en: 3bc0a32ca3d296ee9217f44adf3cf4d3c3dbd080
-sheet-who-belongs-their-plot-and = Quem faz parte, seu lote e tarefa, quando pagou e quando renova, quem tem chave, e as mensalidades recebidas.
+sheet-who-belongs-their-plot-and = Quem faz parte, seu canteiro e sua tarefa, quando pagou e quando renova, quem tem chave, e as mensalidades recebidas.
 # en: b884fda377a19ce445f8ec49bd90f2784834978c
 sheet-seating-count = Contagem de lugares
 # en: 4e00db4efd970061e8ff6cd63f723c7385ad1637
-sheet-tables-for-wedding-seats-guests = Mesas de um casamento: lugares, convidados, vagas livres e os pratos escolhidos, com uma conferência de que os pratos fecham.
+sheet-tables-for-wedding-seats-guests = Mesas de um casamento: lugares, convidados, vagas livres e os pratos escolhidos, com uma conferência de que os pratos batem.
 # en: 8a535a1def73648a0a55a9bfa21c9d370e434ce5
 sheet-poll-results = Resultado de enquete
 # en: df60ac32ce5b04bf11e53f97d296db53c2a2cda2
@@ -1086,7 +1086,7 @@ sheet-answers-and-votes-for-each = As respostas e os votos de cada uma, desenhad
 # en: bfee938677dd9bf5dab2de4f9558c07a06d616fd
 sheet-fundraising-thermometer = Termômetro de arrecadação
 # en: f6873b16e788104f3e409c1c06243db77d2a6e04
-sheet-what-has-come-in-week = O que entrou, semana a semana, contra a meta: um gráfico acima, o total até agora em destaque.
+sheet-what-has-come-in-week = O que entrou, semana a semana, comparado à meta: um gráfico acima, o total até agora em destaque.
 # en: 20ded69e290360ef0be6b1fd22e648ca398d7ed3
 sheet-invoice-ledger = Registro de faturas
 # en: 2404f6c1a633f188d6395d7b35f7dd1486c597b6
@@ -1094,23 +1094,23 @@ sheet-every-invoice-sent-when-to = Cada fatura enviada: quando, a quem, de quant
 # en: 300d29fd5f327e8c7a0f4614d4125d93570eeeff
 sheet-inventory = Estoque
 # en: cca3ceb6d79e8c2e922aa21c8675223c1b96c275
-sheet-stock-on-hand-against-point = O estoque disponível contra o ponto de reposição; o que pedir, quanto vale e um alerta quando está baixo.
+sheet-stock-on-hand-against-point = O estoque disponível comparado ao ponto de reposição; o que pedir, quanto vale e um alerta quando está baixo.
 # en: ba8d2875e56e1ee2a745057f4de807182be4bb9b
 sheet-petty-cash = Caixinha
 # en: 8c7a0a9d0703152466c522d2d8bbd55cfcea218d
-sheet-money-in-and-out-of = Dinheiro que entra e sai da lata, quem gastou e em quê, o saldo após cada um e um visto para o recibo.
+sheet-money-in-and-out-of = Dinheiro que entra e sai do caixa, quem gastou e com quê, o saldo após cada lançamento e um visto para o recibo.
 # en: dca1686c53daf52f46495f2a961a3346006e41ac
 sheet-rate-card = Tabela de preços
 # en: 1a3c8694038b9c6d56a26e131d62c3616e165a77
 sheet-freelancers-services-with-hours-each = Os serviços de um freelancer com as horas de cada um; preços e preços de urgência calculados a partir de um valor por hora.
 # en: b9d1a465f75615e0b55ff620ec057c608971b8ed
-sheet-mortgages-compared = Financiamentos comparados
+sheet-mortgages-compared = Comparativo de financiamentos
 # en: 43ecdf4a244c2e1c022c6c08a3ba1c07f107ece3
 sheet-four-offers-on-one-house = Quatro propostas para uma casa: o empréstimo após a entrada, a parcela mensal, o total com impostos e os juros.
 # en: 54695e5df6ef00663252186d998a600f9bac4c58
 sheet-unit-converter = Conversor de unidades
 # en: d2e0c086c77046805d1cc8934044bb315bf00aec
-sheet-miles-and-kilometers-pounds-and = Milhas e quilômetros, libras e quilogramas, fornos, xícaras e galões: digite uma quantidade, leia a outra unidade.
+sheet-miles-and-kilometers-pounds-and = Milhas e quilômetros, libras e quilogramas, temperaturas de forno, xícaras e galões: digite uma quantidade, leia a outra unidade.
 # en: 9d2911edf283fc08872808d554a1017460fbe86f
 sheet-tournament-bracket = Chave de torneio
 # en: ad907a82b59f9d64761c80d6b2fe13c2a3b04fc2
@@ -1268,7 +1268,7 @@ sheet-edit-cell-caret-at-its = Editar a célula com o cursor no fim
 # en: 28d1a54d2e35ad87c0d19942f68d70ddbf67bcee
 sheet-put-back-what-cell-held = Restaurar o valor da célula
 # en: 2b69414b3787eaa8a38f2f1a9c4a48aff7dd78a5
-sheet-put-dated-rows-on-calendar = Pôr as linhas com data num calendário
+sheet-put-dated-rows-on-calendar = Colocar as linhas com data num calendário
 
 ## downloads: hand-offs to another app (kit/file/exports.ts)
 
@@ -1375,7 +1375,7 @@ draw-background-tile = Ladrilho de fundo
 # en: e78fb3ca7b230e0df30391c85eec105bf55656bd
 draw-8-by-8-pattern-that = Um padrão de 8 por 8 que se repete: use como fundo de um desenho ou de qualquer página.
 # en: 99cb45a6f4e975a5a7be78811422b5933dd6598b
-draw-card-for-ninetieth-tilted-on = Um cartão para os noventa anos, inclinado sobre um fundo de confete: palavras grandes, flores, o carinho de todos.
+draw-card-for-ninetieth-tilted-on = Um cartão para os noventa anos, inclinado sobre um fundo de confete: letras grandes, flores, o carinho de todos.
 # en: 2020c98a00da0ecd8574350e226b7d4c448a451f
 draw-phone-screen-sketched-in-boxes = A tela de um celular esboçada em caixas antes que alguém a construa, com notas sobre por que cada parte está ali.
 # en: 106c289912d69f2f02f64b1c195daa945a29c19f
@@ -1387,7 +1387,7 @@ draw-badge = Crachá
 # en: 32787c0201e95e7dd6ca00aa5dd63210e278e3db
 common-birthday-card = Cartão de aniversário
 # en: be3883124104a86065f65c46fcf4edff20e0842f
-draw-can-we-refund-it-stores = Podemos reembolsar? A regra de devolução de uma loja em perguntas, respostas e o que fazer.
+draw-can-we-refund-it-stores = Podemos reembolsar? A política de devolução de uma loja em perguntas, respostas e o que fazer.
 # en: 619a6e052e5343b8fbad2bfbc5a35d0aa4ec763f
 draw-event-map = Mapa do evento
 # en: 6349ac251c1b86c4744c7e0361a5e72ea5e38402
@@ -1405,7 +1405,7 @@ draw-room-plan = Planta da sala
 # en: fcba7b3fe14a456c5dd428b4e0b28552efa25751
 draw-living-room-rearranged-sofa-rug = A sala reorganizada: sofá, tapete, estante e escrivaninha em escala, com o arco da porta desenhado.
 # en: 8640aa92343372c68f5d72660821c342598d8b38
-draw-three-ideas-for-coffee-roasters = Três ideias para a marca de um torrefador de café lado a lado, o nome em tamanho grande e uma data para escolher.
+draw-three-ideas-for-coffee-roasters = Três ideias para a marca de um torrefador de café lado a lado, o nome em tamanho grande e um prazo para a escolha.
 # en: 68224d905ee1bc5c63082121b1e80cf6fe7d08c1
 draw-weather-icons = Ícones de clima
 # en: 0d07d8bcde49fe88082ab75f75e2fd49bbcef253
@@ -1432,7 +1432,7 @@ draw-drawing-of-n-unlabeled-shapes = Um desenho de { $n ->
 # en: f33cdbb01b5b65fe3fe8928669d13ca09b3b5403
 draw-leads-to-b = { $a } leva a { $b }
 # en: b9e37b62382792094f5463a54183d523118a25a0
-draw-joins-b = { $a } liga { $b }
+draw-joins-b = { $a } se liga a { $b }
 # en: e0883468badf6a5f9c1cfe0ce209a16939a64683
 draw-empty-drawing = Um desenho vazio
 # en: 1f9c4a5ed21a39ed45db86eb13cbff389eede2cf
@@ -1496,7 +1496,7 @@ draw-sky = Celeste
 # en: 54076359fdc7f1f0e000b9ae15b96f8b09866acb
 draw-pink = Rosa
 # en: 168cbb2ea52b9e34d271accecfa7d7951e948a99
-draw-clear = limpar
+draw-clear = transparente
 # en: b1985e387405e4d4afb40d5dac9b2656f5d6f770
 draw-shapes = Formas
 # en: 4bab2d8fe13fa6ab57f80098b414f0f734c5dd25
@@ -1526,7 +1526,7 @@ common-edit = Editar
 # en: f6fdbe48dc54dd86f63097a03bd24094dedd713a
 common-delete = Excluir
 # en: d7bc7e98ec7a8acfd61dabe29e1e9156adf86fb9
-draw-put-icon-on-this-shape = Pôr um ícone nesta forma
+draw-put-icon-on-this-shape = Colocar um ícone nesta forma
 # en: 33bde816f0f7a53b8de67b8f8d6981f47e28159b
 draw-place-icon = Colocar um ícone
 # en: 4fc05f2763ba31e2d3be5f08e7d0bab5d5dcbf78
@@ -1565,7 +1565,7 @@ draw-drag-to-move-them-together = Arraste para movê-las juntas. Shift+toque adi
 # en: eb36764c60ec7a17dd6ac3ec7dbbd22ee401778e
 draw-press-on-one-shape-and = Pressione em uma forma e solte em outra
 # en: 199f4e86afea4f2d42eb40b63ce8599168575e06
-draw-tap-where-icon-goes = Toque onde o ícone vai.
+draw-tap-where-icon-goes = Toque onde o ícone deve ficar.
 # en: 86da5e24511bad8c1cace935e830c0625b04b607
 draw-drag-on-canvas-to-draw = Arraste na tela para desenhar, ou toque para colocar um.
 # en: a5742851f0f81d3bdcf184cb2a164390f3e989bb
@@ -1649,19 +1649,19 @@ anim-animation = animação
 # en: ec026663a7e4c23dd850c7f5a96deef71bf8bb81
 anim-lift-off = Decolagem
 # en: 5d15aaf0784e98385ffc925f574edbf1a0657292
-anim-rocket-climbs-away-with-its = Um foguete sobe com a sua sombra enquanto as palavras se elevam: duas formas, duas chaves cada.
+anim-rocket-climbs-away-with-its = Um foguete sobe com a sua sombra enquanto as palavras se elevam: duas formas, dois quadros-chave cada.
 # en: 1cc22feeb4a82e33a9fd435fbf7c4a927a0408e1
 anim-bouncing-ball = Bola quicando
 # en: 567b2c86aa06b4d0133474a39dc6545196754a25
-anim-ball-falls-faster-and-faster = Uma bola cai cada vez mais rápido até o chão enquanto a sombra cresce sob ela; tocada para frente e para trás, quica para sempre.
+anim-ball-falls-faster-and-faster = Uma bola cai cada vez mais rápido até o chão enquanto a sombra cresce sob ela; reproduzida para frente e para trás, quica para sempre.
 # en: 7296aa4a483797a1a82ec05a4598688ca056cd36
 anim-loading-spinner = Indicador de carregamento
 # en: ccf7f6eb9188fe228da413a1aaf39c5ee4994346
-anim-eight-dots-in-ring-each = Oito pontos em um anel, cada um inchando em sua vez, de modo que um ponto brilhante gira enquanto uma página salva.
+anim-eight-dots-in-ring-each = Oito pontos em um anel, cada um inchando em sua vez, de modo que um ponto brilhante gira enquanto uma página é salva.
 # en: 691f884e182237907640c6964bda657a5ffec1c0
 anim-title-card = Cartão de título
 # en: 56d07df6f27b468d9e3456707110962e1da029c6
-anim-red-curtains-part-on-opening = Cortinas vermelhas se abrem na noite de estreia e o nome do festival surge à frente: tocada uma vez, para no título.
+anim-red-curtains-part-on-opening = Cortinas vermelhas se abrem na noite de estreia e o nome do festival surge à frente: reproduzida uma vez, para no título.
 # en: 1383ce3b8f642f2c5946975ca61e868e4a504819
 anim-present-hops-stars-and-hearts = Um presente salta, estrelas e corações balançam ao redor, e a saudação brilha em letras de arco-íris.
 # en: fad7f01d931894b10da998319cdc82f1a7d7e4dc
@@ -1675,7 +1675,7 @@ anim-meme-in-two-lines-of = Um meme em duas linhas de fonte Impact e um troféu 
 # en: 98eb193445404588fd801a26b8383def925748ab
 anim-flash-card = Cartão de estudo
 # en: 864aea3fc448ba5b87612d5e8c4c6dafde49b09a
-anim-card-shows-spanish-word-turns = Um cartão mostra uma palavra em espanhol, vira para dar o inglês, e vira de volta: uma volta em torno do seu eixo vertical.
+anim-card-shows-spanish-word-turns = Um cartão mostra uma palavra em espanhol, vira para mostrar o inglês e vira de volta: uma volta em torno do seu eixo vertical.
 # en: 23015d1cbacca964e41f5cbb0021ed050964a9ed
 anim-weather-this-week = Clima da semana
 # en: 8dc082991f9eea4f537ecd34d66858c28b08bcb6
@@ -1683,19 +1683,19 @@ anim-four-days-of-weather-in = Quatro dias de clima em Lisboa, cada ícone vivo:
 # en: b8224dd56d927c2c68b1498f39b7a2ed20f88c57
 anim-new-year-countdown = Contagem regressiva do Ano Novo
 # en: 6b46f602f1762ee9ef676cfb3d455fba6a9a07df
-anim-three-two-one-second-each = Três, dois, um, um segundo cada, então o ano novo chega em letras de arco-íris: tocada uma vez, para na saudação.
+anim-three-two-one-second-each = Três, dois, um, um segundo cada, então o ano novo chega em letras de arco-íris: reproduzida uma vez, para na saudação.
 # en: e004a532912502de514d6c1801dcc60517d6007a
 anim-flight-path = Rota de voo
 # en: 69049056a83981f31dea9f7350b7356570e735b3
 anim-plane-crosses-dotted-route-from = Um avião cruza uma rota pontilhada de Nova York a Lisboa, subindo pelo caminho, com os horários do voo acima.
 # en: 7de4868fea7340b1b7e0779ba2e81218c703ab57
-anim-neon-sign = Letreiro de néon
+anim-neon-sign = Letreiro neon
 # en: c0cba8072586f9c04d65da0f16b714c865f261e1
 anim-cafes-sign-at-night-name = O letreiro de um café à noite: o nome pisca, o horário se destaca embaixo, e a xícara brilha e incha.
 # en: fadf71c7ea92e6416fd6d89969f8e78a115cd3c1
 anim-sunrise = Nascer do sol
 # en: 672c99d7a4f36fb3de226944eb862e3c9faa5663
-anim-sun-comes-up-from-behind = O sol surge atrás das colinas e a manhã desliza para dentro: profundidade, tamanho e um horizonte desenhado a caneta.
+anim-sun-comes-up-from-behind = O sol surge atrás das colinas e a manhã chega: profundidade, tamanho e um horizonte desenhado a caneta.
 # A key is a moment a shape is set at; between keys it travels. The effects (Impact … Blur) are meme looks.
 # en: dc6828c6d02be5a4b4480bdf9e7f606c74b5ffd1
 anim-animated-gif = GIF animado
@@ -1731,12 +1731,13 @@ anim-mode = Modo
 anim-moments = Quadros-chave
 # en: 76cdb950721642b6b8596d36d5a39f7705028b99
 anim-move = Mover
+# same
 # en: 00706b5e9ede7f2fb6145370efd20ef72969df11
-anim-neon = Néon
+anim-neon = Neon
 # en: 781961bc81c25697841ecce5d4d9dad9f6b261c6
 anim-pause = Pausar
 # en: 5d12bd53552cafc41ca6146c04870df2e1574e13
-anim-play = Tocar
+anim-play = Reproduzir
 # en: fa968bd1155bd76231814d479bf070ed96cca9bb
 anim-pixel-art-is-made-in = Pixel art é feita na Ferramenta de Desenho; o Animador move formas.
 # en: b4a9395d25398654fd5d000e4b82a1d8273339bd
@@ -1750,7 +1751,7 @@ common-size = Tamanho
 # en: 4a6c11ab8104f8bcbb26155a8f68688d181f8a4b
 anim-spin = Girar
 # en: 598549d7818087a7d04d49a7b9c00979c8a35c96
-anim-stage-alt-arrow-keys-move = Palco: { $alt }. As setas movem a forma selecionada (ou o tempo). Vírgula e ponto avançam um quadro. Espaço toca. K adiciona um quadro-chave.
+anim-stage-alt-arrow-keys-move = Palco: { $alt }. As setas movem a forma selecionada (ou o tempo). Vírgula e ponto avançam um quadro. Espaço reproduz. K adiciona um quadro-chave.
 # en: a4277f79218220e03e7d4ebb5b1417cbdff137dc
 anim-shapes-in-hand = Formas selecionadas
 # en: 6c82e6dd86807ee3db07e3c82bec1ae1ce00b08b
@@ -1797,7 +1798,7 @@ anim-length-speed-and-repeat = Duração, velocidade e repetição
 # en: 72f516ede84adba7283e1f7f5fd8eb787c7d33b0
 anim-loop-forever = Repetir para sempre
 # en: 41b5b25a66d56fd91f645cbe6f83603567c3c480
-anim-play-once = Tocar uma vez
+anim-play-once = Reproduzir uma vez
 # en: 368e8081b781aac177fd07c2415b694b1f878911
 anim-turn = Virar
 # en: b2343125992a36aa775f5740930f717a0d1a76d6
@@ -1816,7 +1817,7 @@ anim-frame-back-frame-on = Quadro anterior ou próximo
 # en: ad3441e7c85b25bc4c7f46fd051345a6ba241e58
 anim-nudge-shapes-in-hand-with = Mover um pouco as formas selecionadas, ou avançar um quadro
 # en: fe13ca0956192777b5060b354cf8e5dc5553c328
-anim-play-or-pause = Tocar ou pausar
+anim-play-or-pause = Reproduzir ou pausar
 # en: d3b310dc90b3cc480984236a80101888836acfe9
 anim-first-frame-last = Primeiro ou último quadro
 
@@ -1834,7 +1835,7 @@ common-talk = Uma palestra
 # en: 69d33e95f4f69c18d9591a8529f59a6703fc1f85
 outline-empty-outline = Uma estrutura de tópicos vazia
 # en: b972f73739624a697a0aa9bdde4289bafc5b6e4b
-outline-outliner-ideas-under-ideas-folded = Uma estrutura de tópicos: ideias sob ideias, recolhidas e expandidas, movidas e ligadas; a mesma árvore que uma apresentação ou um mapa mental lê.
+outline-outliner-ideas-under-ideas-folded = Uma estrutura de tópicos: ideias sob ideias, recolhidas e expandidas, movidas e ligadas; a mesma árvore que uma apresentação ou um mapa mental usa.
 # en: 3d47762769e98192ca611ea7fce028e70e16f174
 outline-arrow-from-from-to-to = Seta de { $from } para { $to }
 # en: 081c7d75d7a6b1052f5643338773de8ea68de0dd
@@ -1848,7 +1849,7 @@ common-calendar = Calendário
 # en: ab732cac31bba434b0b59309a30ce46956dc3d54
 outline-cancel-connecting = Cancelar a conexão
 # en: 5301648dcf6b53cefc9ed52999aaa92d4603cae0
-outline-change-it = Editar
+outline-change-it = Alterar
 # en: 1ed0b58d18ef647be5de11840bb929ecc8e36446
 common-chosen-items = Itens selecionados
 # en: b65463cb6a42a17de514acc4659f7fd331e0876a
@@ -1896,7 +1897,7 @@ common-launch-plan = Plano de lançamento
 # en: 72eee0aaa10010ae7d362761115dfd7e064dd4d4
 outline-line-from-from-to-to = Linha de { $from } para { $to }
 # en: 2859ccc92143006360893c2a9cb1aaaa13b3928f
-outline-line-named-label-change-it = Linha com o rótulo “{ $label }”: editar
+outline-line-named-label-change-it = Linha com o rótulo “{ $label }”: alterar
 # en: 52d55422c1936db72f18f5b9e960c2719a3560d7
 common-animator = Animador
 # en: 260ff8ae7182fc851337b6b2fdb25f8cac2b8d47
@@ -1947,7 +1948,7 @@ outline-due-date = Prazo
 # en: bfe11361dd8dc7cc66f5cd6f33d394a95c71c96c
 outline-due-date-ellipsis = Prazo…
 # en: 1cfca97d4ac1000c67f7b345992a5b58b3dac4b0
-outline-due-date-change-it = Prazo { $date }. Toque para alterar
+outline-due-date-change-it = Prazo: { $date }. Toque para alterar
 # en: 6cf55f3558276e2eefff5dd41ec206dc9780bebf
 outline-remove-due-date = Remover o prazo
 # same
@@ -1974,15 +1975,15 @@ outline-last-status-means-done = A última situação significa concluído. Tare
 # en: 7312a31a2c880f2d456663b6f91ad6da980b3a5e
 outline-take-connection-away = Remover conexão
 # en: 656e5c87ae5cd391807e13c85fb32635c2d441c2
-outline-tap-item-to-connect-from = Toque no item de onde conectar.
+outline-tap-item-to-connect-from = Toque no item de origem da conexão.
 # en: 7a717eefe223e502e86655b5bf8eb999b867a9dc
-outline-tap-item-to-connect-words = Toque no item ao qual conectar “{ $words }”.
+outline-tap-item-to-connect-words = Toque no item ao qual “{ $words }” será conectado.
 # en: 6ca2aebe7601f4f49f7f7df1ac23a0ac4a39abbc
-outline-question-options-under-it-and = A pergunta, as opções embaixo, e para cada uma o que fala a favor e contra.
+outline-question-options-under-it-and = A pergunta, as opções embaixo e, para cada uma, os prós e os contras.
 # en: da74cb6baba7a464fd8881af861a8c8d7952aff9
 common-trip-planner = Planejador de Viagens
 # en: 09ae5dce4d22019190e52d1611d1544becf36489
-outline-twenty-minutes-in-three-parts = Vinte minutos em três partes: o problema, a ideia, o que significa; um slide por item de topo quando mostrado como apresentação.
+outline-twenty-minutes-in-three-parts = Vinte minutos em três partes: o problema, a ideia, o que significa; um slide por item principal quando mostrado como apresentação.
 # en: 2af9d498f852995329b0033573277dce32d09ba0
 outline-unfold-all = Expandir tudo
 # en: f5857a77d395db75bc57c2c76b92dc8fa4773053
@@ -2039,25 +2040,25 @@ outline-essay-plan = Um plano de ensaio
 # en: d926d538e1be8112e81292507985514feac5e4c4
 outline-draw-as-family-tree = Desenhar como árvore genealógica
 # en: bfef6f97dfb8178f726a96b8861bc2536e8c6fb4
-outline-five-days-in-lisbon-packed = Cinco dias em Lisboa, organizados por categoria, com o que fazer antes de fechar a porta.
+outline-five-days-in-lisbon-packed = Cinco dias em Lisboa, a mala organizada por categoria, com o que fazer antes de sair de casa.
 # en: 987acdf86bb6a373c995aa374c004bb21bf2e576
-outline-indoors-or-out-for-saturday = Dentro ou fora para uma feira de sábado: as respostas de cada pergunta em suas linhas, sim e não.
+outline-indoors-or-out-for-saturday = Feira de sábado em local fechado ou ao ar livre: as respostas de cada pergunta em suas linhas, sim e não.
 # en: 61390a6b5d7d9268827d91b4a818c6a5fbe2011c
-outline-no-internet-at-home-question = Sem internet em casa: uma pergunta a cada passo, sim ou não, até a ligação a fazer.
+outline-no-internet-at-home-question = Sem internet em casa: uma pergunta a cada passo, sim ou não, até para quem ligar.
 # en: b431e4b41d5021ff680bdee33aebda8738cec5b0
 outline-packing-list = Lista de mala
 # en: 013532bb7e7d08afa22a3149f8e74b5ee4d9eaf5
 outline-parts-and-chapters-of-book = Partes e capítulos de um livro de ideias, com uma linha sob cada capítulo para o que ele defende.
 # en: 5f646cfc8f40ae2515c9d774ae5ad523f524b998
-outline-people-and-three-acts-of = As pessoas e três atos de capítulos, cada um com o que acontece nele, ligados onde uma pessoa muda de capítulo.
+outline-people-and-three-acts-of = Os personagens e três atos de capítulos, cada um com o que acontece nele, ligados onde um personagem muda um capítulo.
 # en: dbb00953c7a1565bffce71190cfb90220362c471
-outline-question-method-budget-that-adds = A pergunta, o método, um orçamento que se soma sozinho, um cronograma, os riscos e as leituras.
+outline-question-method-budget-that-adds = A pergunta, o método, um orçamento que soma sozinho, um cronograma, os riscos e as leituras.
 # en: 57b065618d9af543d6fcc5085edd94aa723f8403
 outline-three-generations-and-next-each = Três gerações e a próxima, cada uma com seus anos, desenhadas como árvore genealógica pelo menu.
 # en: 285ec850c11d78bac10f6bfa31b69a37f1b257c9
 outline-troubleshooting = Solução de problemas
 # en: c126bf3ee80a183d7c300cd69a01e39ab7dd8e53
-outline-who-works-for-whom-at = Quem trabalha para quem numa padaria de nove, cada um com seu cargo, desenhado como organograma pelo menu.
+outline-who-works-for-whom-at = Quem trabalha para quem numa padaria de nove funcionários, cada um com seu cargo, desenhado como organograma pelo menu.
 # en: 0c6266451117f0382231513e4c30d38fb976086e
 outline-pdf-sections-and-bullets = PDF: seções e marcadores
 # en: 32897da2f696f1ddc73da9ef0575827530a80b1a
@@ -2069,7 +2070,7 @@ outline-name-line = Rótulo
 
 # Its templates: the occasions and a second of each printed format.
 # en: 44467d7b18daac8d8100b68ebc482fe0ee0ac9b6
-deck-choirs-winter-concert-welcome-both = O concerto de inverno de um coral: as boas-vindas, os dois tempos, notas sobre a música, os cantores e a letra para cantar junto.
+deck-choirs-winter-concert-welcome-both = O concerto de inverno de um coral: as boas-vindas, as duas partes, notas sobre a música, os cantores e a letra para cantar junto.
 # en: a816093d69f08b81c457d818e6d1bd72e0915b10
 deck-lesson = Uma aula
 # en: e2d04797e440ee0933d032a29cfbfad5edbc99c7
@@ -2091,7 +2092,7 @@ deck-science-lesson-on-chalkboard-aims = Uma aula de ciências no quadro-negro: 
 # en: f3a66c7b2a6ebda85ea74938fce4c397eae2a131
 deck-seed-pitch-in-eight-slides = Um pitch de investimento inicial em oito slides: o problema, o produto, tração num gráfico, o negócio, a equipe, o pedido.
 # en: aab8da6eadee157bba3937e9dc00741cfe48b13f
-deck-bike-shops-quarter-for-its = O trimestre de uma loja para seus sócios: receita num gráfico, vitórias e falhas, os números que importam, o próximo trimestre.
+deck-bike-shops-quarter-for-its = O trimestre de uma loja de bicicletas para seus sócios: receita num gráfico, acertos e erros, os números que importam, o próximo trimestre.
 # en: d0fa5e5696edaf949dfe9e739a7a2eef0d433ae2
 deck-small-story-in-panels-about = Uma pequena história em quadros sobre emprestar algo a um vizinho.
 # en: 6c1ff81a2445a9eab1616588060b483cd5b6cde8
@@ -2121,9 +2122,9 @@ deck-seven-soups-for-cold-week = Sete sopas para uma semana fria, uma por págin
 # en: 44b5c7f041391d8b41a8ba365b6f13522877b478
 deck-their-story-for-reception-from = A história deles para a recepção, de como se conheceram até o pedido, com uma linha do tempo e um agradecimento.
 # en: 2aaeb944a6b05f452d512dc7dd5220adeee294ea
-deck-town-hall-notice = Aviso da prefeitura
+deck-town-hall-notice = Assembleia de moradores
 # en: 14444c384d263fff25ba48b195abb55def791b75
-deck-trivia-night = Noite de curiosidades
+deck-trivia-night = Noite de quiz
 # en: 0377beb012ed13e1986227ef8915aeab709ad5d9
 deck-wedding-slideshow = Slideshow de casamento
 # en: f34f4184c545fd4fec60bbc441ead88d1f1fdd1b
@@ -2150,7 +2151,7 @@ deck-big-icon = Ícone grande
 # en: 5298d08bb7ae7d01f4efcdbb94ff03fc487fd11c
 deck-fade = Esmaecer
 # en: 38d13bda5c40afc32d629f81dec6c156cbea328e
-common-cut = Corte
+common-cut = Recortar
 # en: a5d5b46a7720824b51da4be0af97f5cfd1168cd0
 deck-slide = Deslizar
 # same
@@ -2207,8 +2208,9 @@ deck-see-sheets-to-print = Layout para imprimir
 deck-back-to-pages = Voltar às páginas
 # en: 442250df38e5e516ff1c2ce97d051b8997c7d976
 deck-headline = Manchete
+# same
 # en: 1cd715cdb2322da76e4ce7f490064782c83337b2
-deck-layout-layout = Disposição: { $layout }
+deck-layout-layout = Layout: { $layout }
 # en: e85e5488b4184d6cfb4c0aa36e169a271068ec0f
 common-look-theme = Visual: { $theme }
 # en: 896afdc59964bf4da2b261b6056d23286d186427
@@ -2218,11 +2220,11 @@ deck-format-format = Formato: { $format }
 # en: f16eadab2a72ff13044cc806dbcf2c117b32244f
 deck-printing = Impressão
 # en: d5939283a7a53a72f09e4f327bc22f2872b64257
-deck-one-sided = Um lado
+deck-one-sided = Só frente
 # en: 256dd8b8869a6c72f553a2905aef393f2b39df0d
 deck-fold-and-cut = Dobrar e cortar
 # en: 8cb849ee6e612fbad8641d053d8e66b2ba560a1b
-deck-two-sided = Dois lados
+deck-two-sided = Frente e verso
 # en: b82a2c3204554a9c0a82b44aa7eb5f94916b1c13
 deck-cut-and-nest = Cortar e encaixar
 # en: 6e19d7b7deffd2974f632ec3e697646de978130e
@@ -2286,7 +2288,7 @@ deck-line-or-two-under-title = Uma ou duas linhas sob o título
 # en: 236bcf1c6a83d3b0f85a065c777d7948b22a0c22
 deck-what-this-page-says-type = Texto da página. Ele diminui para caber na página.
 # en: e80e281dac24d9c4c3f60dcdbf8700e9603b825e
-deck-panel-line-what-is-said = Um painel por linha: o que se diz | a legenda. Ícone dá uma imagem.
+deck-panel-line-what-is-said = Um painel por linha: o que se diz | a legenda. Ícone adiciona uma imagem.
 # en: 3d6e76c9325034deb76b92c8cc47a2d3c22fcdf3
 deck-speaker-notes = Notas do apresentador
 # en: f0ea152b4f68c54e5bc3476bae70301bc7fb2523
@@ -2309,11 +2311,11 @@ common-page-n = Página { $n }
 # en: dd19f9887573a9f06294de48329bfb1b3a5ad273
 deck-front = Frente
 # en: 6f453fd2a404a86955b0f23219d84f2bcb4e7d06
-deck-inside-left = Dentro à esquerda
+deck-inside-left = Interna esquerda
 # en: 4fe87c5667532867fc721531b92a7ca6b391eb8a
-deck-inside-middle = Dentro no meio
+deck-inside-middle = Interna central
 # en: 3e654f345b202e7b158b2c61ff91fe55b0d3d46d
-deck-inside-right = Dentro à direita
+deck-inside-right = Interna direita
 # en: 418bf9a5530258c65b3dbc1f932667dafa01469c
 deck-inside-flap = Aba interna
 # en: b52b36b7269fbfc58ec24bb724691951a3decbe8
@@ -2361,7 +2363,7 @@ deck-slide-n-of-total = Slide { $n } de { $total }
 # en: 70440046a3dc2e079f23ee1c57dfa76669b732aa
 common-notes = Notas
 # en: bd0dad7cbf71b13b2e545d8ce477027ffc106b45
-deck-n-hides-them = N as oculta
+deck-n-hides-them = N oculta as notas
 # en: 45c44dc2566819f835fd788e2b7a6c5bee5177c4
 deck-take-this-deck-home = Leve esta apresentação com você
 # en: acc1edc431e346786fab17d4f10e195ca72257d6
@@ -2378,9 +2380,9 @@ deck-powerpoint-pptx = PowerPoint (PPTX)
 # en: 7660a22bdc9507edd353dd61198b9aa86488d936
 deck-picture-of-every-slide-zip = Uma imagem de cada slide (ZIP de PNGs)
 # en: 98a41f54e049532b6032b88d7656348adc178c2a
-deck-animation-of-deck-gif = Um filme da apresentação (GIF)
+deck-animation-of-deck-gif = Uma animação da apresentação (GIF)
 # en: 3bab526d831e1024e6f8e7d197f9c3d72cc4f0e4
-deck-film-of-deck-webm = Um filme da apresentação (WebM)
+deck-film-of-deck-webm = Um vídeo da apresentação (WebM)
 
 # The templates
 # en: e5604bc465a212ad3d7f4e13ed282f030d9d3a6b
@@ -2388,13 +2390,13 @@ deck-title-agenda-three-points-with = Título, pauta, três pontos com notas par
 # en: 60c974074604818e661eff7940285669d1496647
 deck-status-update = Relatório de andamento
 # en: 34714be3698c31c72afb1d4d4b8a7b0c69f30fc5
-deck-done-and-next-side-by = Feito e próximo lado a lado, depois riscos, depois pedidos.
+deck-done-and-next-side-by = O que foi feito e o que vem a seguir lado a lado, depois riscos, depois pedidos.
 # en: e946db45d2689df95cbac9f8137664409c51f5d8
 deck-proposal = Uma proposta
 # en: 52ab7599cc26432ef9b492b401d04eee1ca5e699
 deck-what-you-heard-what-you = O que você ouviu, o que propõe, quando, quanto custa.
 # en: b8e1f28fed63f996c8915470a7ee9ce8aef9b75f
-deck-eight-small-pages-from-one = Oito pequenas páginas de uma folha de papel: imprima, dobre e corte, ou leia tocando no celular.
+deck-eight-small-pages-from-one = Oito páginas pequenas a partir de uma folha de papel: imprima, dobre e corte, ou leia tocando no celular.
 # en: 31b11edde49cd1bd80a198f240426c5b2d8cd65f
 deck-booklet-of-half-letter-pages = Um livreto de páginas meia-carta, de oito a vinte, diagramado para imprimir, encaixar e dobrar.
 # en: ae07389f7b537dbd7eb3007d3f2b36ca3c35c404
@@ -2432,7 +2434,7 @@ cal-week-earlier = Uma semana antes
 # en: 5e63d8681fdc3170ed99fc3abcc3668620f299ca
 cal-week-later = Uma semana depois
 # en: ab455a2fb151da1c7d0c39c7534c2f935e028ce9
-cal-weekend-of-sessions-at-set = Um fim de semana de sessões em horários fixos, uma apresentação tardia depois da meia-noite.
+cal-weekend-of-sessions-at-set = Um fim de semana de sessões em horários fixos, com um show depois da meia-noite.
 # en: 114574336ac7883aebd0653b3fc5e82f9262dc86
 cal-all-day = Dia inteiro
 # en: cbf28df446643f9968f7fe68968bca51be5cf792
@@ -2444,7 +2446,7 @@ cal-days = Dias
 # en: b50e483c45f8f17795b63f822127ff0171086900
 cal-days-and-times-on-month = Dias e horas em um mês, um ano ou um cronograma, em qualquer fuso horário.
 # en: 9ccd3e7bb11493f1e93950f7db9148a4794037b7
-cal-done = Concluído %
+cal-done = % concluído
 # en: a7028454f240815938eaf701823b7d55dbaf98a9
 cal-edit-event = Editar evento
 # en: 8a4d4e6eb9a367d616b8a4cbfa2792068482e884
@@ -2489,7 +2491,7 @@ cal-its-own-zone = Fuso horário do calendário
 # en: 2a177256a408fa4fc557b301041589b798826d70
 cal-last-day = Último dia
 # en: 58ef633830b461aa76bf4ee90e3b2831ff588508
-cal-lessons-birthdays-and-holidays-color = Aulas, aniversários e feriados, uma cor para cada pessoa, as coisas semanais se repetindo.
+cal-lessons-birthdays-and-holidays-color = Aulas, aniversários e feriados, uma cor para cada pessoa, os compromissos semanais se repetindo.
 # en: 7c7f5d049fad2569721d446c4a811f9bd5da5393
 cal-level = Nível
 # en: 082bc378cd60e17a38d99898b21955299c5b60c8
@@ -2509,9 +2511,9 @@ cal-next-month = Próximo mês
 # en: 22c6f667e4103029954aa28d43a1d4888122b35f
 cal-next-year = Próximo ano
 # en: 1562a21cadb04e59b670cb3e32fb54f1777db699
-cal-no-tasks-yet = Sem tarefas ainda
+cal-no-tasks-yet = Nenhuma tarefa ainda
 # en: 3b2069a4f745374e50f8992752888822ce851db4
-cal-no-tasks-yet-insert-task = Sem tarefas ainda. Insira uma tarefa.
+cal-no-tasks-yet-insert-task = Nenhuma tarefa ainda. Insira uma tarefa.
 # en: 855dec4a50f5117b51b7f32b59771f28855942ac
 cal-nothing-on-calendar-yet-tap = Nada no calendário ainda. Toque em um dia ou arraste por vários.
 # en: 27d7bd5f744f76fc1ad85bbe975e9fdca473eaeb
@@ -2523,7 +2525,7 @@ cal-previous-year = Ano anterior
 # en: 580110a84277d369b216be5a01a5ba50868d4d3f
 cal-project-plan = Plano do projeto
 # en: 6ae5ee3e66205a8b1a41c80c4db0dcc982e50f44
-cal-repeats = Repete
+cal-repeats = Repetição
 # en: 0a8adac9d6d5f4d14ee887d196cd8618f0f3391a
 cal-schedule = Cronograma
 # en: e7fe53f0503eb82f8c80f9b233fa566339a9f9e8
@@ -2541,7 +2543,7 @@ common-stops = Encerra
 # en: 480b9be2834a2278919632171f788a9a80d5d743
 cal-same-dates-as-gantt-chart = As mesmas datas como gráfico de Gantt
 # en: 7ea6dec71584012ab4044cc464dc601741ff2c50
-cal-this-calendar-is-written-in = Este calendário está escrito no horário de { $zone }.
+cal-this-calendar-is-written-in = Este calendário usa o horário de { $zone }.
 # en: e10c10f818ac8e510b74062cde201eae4e8d8c66
 cal-this-calendar-names-no-time = Este calendário não tem fuso horário, então os horários aparecem no seu ({ $zone }).
 # en: 1b4785331db3b08cd8e3cfa4bd36216731a79e54
@@ -2576,13 +2578,13 @@ cal-n-done = { $n }% concluído
 # en: 71428a822d08efae1d13babd6073592abec99d1f
 cal-bakerys-posts-and-newsletters-through = As publicações e boletins de uma padaria durante o inverno, uma história de advento por dia.
 # en: 91dad831b9be334af672cd6052e37dedde16d06e
-cal-youth-soccer-season-practice-every = Uma temporada de futebol juvenil: treino toda semana, em casa e fora com suas cores, os playoffs.
+cal-youth-soccer-season-practice-every = Uma temporada de futebol juvenil: treino toda semana, jogos em casa e fora com suas cores, o mata-mata.
 # en: d7bad656f3b06c3ee989a1f2960214ee15b2f788
 cal-small-teams-time-off-public = As folgas de uma equipe pequena, os feriados e o recesso de Natal em um só calendário.
 # en: cd6036648af6d0d5614f0ec65eb732300281e059
-cal-community-garden-plots-year-when = O ano de uma horta comunitária: quando semear, plantar, colher e podar, voltando todo ano.
+cal-community-garden-plots-year-when = O ano de uma horta comunitária: quando semear, plantar, colher e podar, repetindo todo ano.
 # en: 1b04e3c7d585a3d6297852d158919c9833538a01
-cal-fall-term-from-first-day = Um semestre de outono do primeiro dia até o Natal: recessos, clubes, o passeio, a reunião de pais.
+cal-fall-term-from-first-day = Um semestre letivo do primeiro dia até o Natal: recessos, clubes, o passeio, a reunião de pais.
 # en: f80b28faa22109c4d14cf7eb7994768abca09ca8
 cal-bills-and-renewals = Contas e renovações
 # en: 2223281ed9222907f9d00ef35ab71df263d06e46
@@ -2592,19 +2594,19 @@ cal-content-schedule = Cronograma de conteúdo
 # en: 072b8e4f3e23cdd58cf0a4b3f5c47437127f131b
 cal-editorial-calendar = Calendário editorial
 # en: 26f861d8db0e97575e814ce9799eaf1bcddec28b
-cal-every-autopay-on-its-day = Cada débito automático no seu dia de cada mês, as renovações anuais e o prazo do imposto.
+cal-every-autopay-on-its-day = Cada débito automático no seu dia do mês, as renovações anuais e os prazos de impostos.
 # en: 2185215436152ae5c1d9429385551e46587c7af8
 cal-garden-calendar = Calendário do jardim
 # en: 624b49bb82a8487f3ff77d2098b88b1e1ceb6695
 cal-vacation-planner = Planejador de férias
 # en: 1ceb786961989ab69eda934e08645ecb19fe5357
-cal-league-schedule = Jogos do campeonato
+cal-league-schedule = Tabela do campeonato
 # en: 5a94fcfb3e67abfdd4e3bab4c3d9a2683801245a
 cal-school-term = Período letivo
 # en: 2f88af7308e60cbfbe5482a13acec0983b020e09
 cal-training-plan = Plano de treino
 # en: 5ef83b6b17b42f15d49c31f33e46ca8d4427e6ae
-cal-twelve-weeks-to-half-marathon = Doze semanas até uma meia maratona como cronograma: base, construção, pico, redução, prova.
+cal-twelve-weeks-to-half-marathon = Doze semanas até uma meia maratona em cronograma: base, desenvolvimento, pico, polimento, prova.
 # en: fdab2603fde2488e117cca6335baee3c481231b9
 cal-two-days-of-talks-and = Dois dias de palestras e oficinas por hora, uma cor para cada sala.
 # en: c8bbdc31a9be182914dd6207c08837389224b33a
@@ -2705,7 +2707,7 @@ diagram-wedding-dinner = Um jantar de casamento
 # en: 1086ae322f0484af87b4a35b9537b35ad53ec68b
 diagram-year-of-dates-from-plans = Um ano de datas, da aprovação dos planos à abertura das portas.
 # en: c75834baf2bd8482dbb5a822f4466908244e65fa
-diagram-cats-and-dogs = Gatos e cães
+diagram-cats-and-dogs = Gatos e cachorros
 # en: 9e4600a93df1d0ffd290278244beed2111ac5cff
 diagram-computing-briefly = Computação, em resumo
 # en: 4944a571da52f0920a54f002e637dfc6e179603f
@@ -2713,7 +2715,7 @@ diagram-fast-cheap-good = Rápido, barato, bom
 # en: 77373004b00a68bf2cad476daa1ef0af2a7e26f0
 diagram-four-tables-and-who-sits = Quatro mesas e quem se senta em cada uma.
 # en: 1db47899ccb6eda1f1c46cee3c73acb1394c00ca
-diagram-from-lovelace-to-now-spaced = De Lovelace até hoje, espaçado como os anos caíram, com uma era ao pé.
+diagram-from-lovelace-to-now-spaced = De Lovelace até hoje, com o espaço proporcional aos anos e as eras ao longo da base.
 # en: c973a2e43350a1c09697af1bd39a17f3cfba2c36
 diagram-from-order-to-doorstep = Do pedido à porta
 # en: 91519d37fd9fe6f0c40b0429e0ed9f8eb8206006
@@ -2723,7 +2725,7 @@ diagram-grandparents-their-children-and-grandchildren = Avós, seus filhos e net
 # en: 347a51bd3c26ccac83baeca51966f318d5bb06c4
 diagram-hiring-someone = Contratar alguém
 # en: f30d75896062b87258051feec53d9f7c05059037
-diagram-how-app-hangs-together = Como um app se junta
+diagram-how-app-hangs-together = Como um app funciona por dentro
 # en: 70a97689961708e74a02157e6675bbcab893b7a4
 diagram-seven-people-who-reports-to = Sete pessoas, quem responde a quem, e uma linha pontilhada.
 # en: 45ccf051d72194e5207999d9eeabaf9311e07ec2
@@ -2731,9 +2733,9 @@ diagram-garden-this-year = O jardim deste ano
 # en: 3fa0b6c790e0b44a046fe73aa9cf77f99106074d
 diagram-three-generations = Três gerações
 # en: 206f4033c4733b2b04a85ee0de9d35b1a5acc692
-diagram-three-sets-and-every-overlap = Três conjuntos e cada sobreposição, com o que pertence a onde.
+diagram-three-sets-and-every-overlap = Três conjuntos e cada sobreposição, com o que fica em cada parte.
 # en: 762ecdafab9b2868da1121459828ec245b03ac5e
-diagram-two-sets-and-what-they = Dois conjuntos e o que partilham.
+diagram-two-sets-and-what-they = Dois conjuntos e o que têm em comum.
 # en: f02e532d172e25cb200306e2edda8e4331418dcd
 diagram-what-to-grow-and-jobs = O que plantar e as tarefas a fazer, como mapa mental.
 # en: a6847567865dbe1e5266bbcd7f1f4e0049ee9eb1
@@ -2747,11 +2749,11 @@ diagram-principal-her-assistant-principals-classroom = Uma diretora, suas vice-d
 # en: f25d2f240d3a52d5361d9b6dd4d8561290566159
 diagram-move-to-lisbon-by-march = Uma mudança para Lisboa até março: papéis, um apartamento, trabalho e vida, e o que precisa vir primeiro.
 # en: d2586903dd907f55b8076edbe00b87f4e45ab92f
-diagram-elementary-school = Uma escola primária
+diagram-elementary-school = Uma escola de ensino fundamental
 # en: 3eff234615aa3d538d44f11142e266d62b44ef43
 diagram-restaurant-kitchen = Uma cozinha de restaurante
 # en: 3fecd5a70de57bb7748a775d7d4c6072bace1e50
-diagram-router-and-everything-on-it = Um roteador e tudo o que há nele: notebook, celular, impressora, televisão e campainha.
+diagram-router-and-everything-on-it = Um roteador e tudo o que está conectado a ele: notebook, celular, impressora, televisão e campainha.
 # en: 949c596fb3177561b6f2515cbc92b6b68a4292c2
 diagram-team-by-its-skills-design = Uma equipe por suas habilidades: design, redação e código, e quem faz mais de uma.
 # en: eeb20483d989d9deef42a5ae150f171af0bc6201
@@ -2836,7 +2838,7 @@ trip-stop-at-middle-of-map = Parada no centro do mapa
 # en: a52fccf0e1e5beca9d5885f1638d5e9a6a2684f9
 trip-measure-in = Medir em
 # en: 2458f1444290ced8aefad04d5c947b17bf9a81fb
-trip-hours-of-driving = Horas de direção
+trip-hours-of-driving = Tempo de direção
 # en: 5fa6c4032be31076212eb57f2fe6ba44d445d501
 trip-miles = Milhas
 # en: 87bafdbb82c61625882d74515ef2c7e566177ea5
@@ -2877,7 +2879,7 @@ trip-note-for-stop-n = Nota da parada { $n }
 # en: 0a8abf5522e2f20b1f976982533aabd909645324
 trip-about-time-by-car = cerca de { $time } de carro
 # en: 7f85e32db6c77473c8b172d1ad1dab75462705a3
-trip-tap-map-to-add-first = Toque no mapa para adicionar a primeira parada, ou Insira um lugar pelo nome.
+trip-tap-map-to-add-first = Toque no mapa para adicionar a primeira parada, ou insira um lugar pelo nome.
 # en: 472fd6a8979384a06de401f16cafb9cfdd9a824c
 trip-insert-place-by-name = Insira um lugar pelo nome.
 # Finding a place by name
@@ -2909,7 +2911,7 @@ trip-san-francisco-to-los-angeles = De São Francisco a Los Angeles pela Highway
 # en: 8396776ccda695ac7d6e5f12a1eaa4dd3edecfac
 trip-scottish-highlands = As Terras Altas da Escócia
 # en: 7a3f06a64060636652afe5912e0a00016bc3d17f
-trip-loop-from-edinburgh-each-leg = Um circuito saindo de Edimburgo, cada trecho em horas de direção.
+trip-loop-from-edinburgh-each-leg = Um circuito saindo de Edimburgo, cada trecho em tempo de direção.
 # en: 9660e47a7aad398fbc88947cd22e8628b2a92115
 trip-rome-places-to-see = Roma, os lugares para ver
 # en: f01c658cc1c5b1dbfba8045b885174d2f5a3d154
@@ -2921,7 +2923,7 @@ trip-friday-night-to-sundays-train = Da noite de sexta ao trem de domingo, a pé
 # en: a5594e90d42f49b6ce9e2842193b64f380d1a10c
 trip-icelands-ring-road = A Ring Road da Islândia
 # en: b237aa87bc63dccebef93e19a8ef785d96ba69ce
-trip-ten-days-around-island-by = Dez dias em volta da ilha de carro, cada trecho em horas de direção.
+trip-ten-days-around-island-by = Dez dias em volta da ilha de carro, cada trecho em tempo de direção.
 # en: 89059cee91b704cf1c0e42de4225df2968a207e7
 trip-dublin-food-crawl = Um roteiro gastronômico em Dublin
 # en: b934fa6dfc063b38e47ce12ed4622e1cc0d55b75
@@ -2961,7 +2963,7 @@ trip-presenting-next-stop = Próxima parada (apresentando)
 # en: a802f6e93c981ee6dd02df366f0141ca3aa085e0
 trip-presenting-stop-before = Parada anterior (apresentando)
 # en: 3b14d20764a1fdef5ee74f4defab4ff20b0e7cce
-trip-put-stops-on-calendar-day = Pôr as paradas num calendário, um dia cada
+trip-put-stops-on-calendar-day = Colocar as paradas num calendário, um dia para cada
 # en: 16fa5ad4958332a6bbb1eae6d1a8c6ee6f2c7752
 trip-first-last = Primeiro ou último
 # en: 0aa341109cff3c75e204930fdeac94f52278bb67
@@ -2986,7 +2988,7 @@ looks-currency = Moeda
 calc-calculation = cálculo
 # The tape is the list of lines worked out, as on a printing calculator. 'Calculator' and 'Numbers' are above.
 # en: ab4ea6f8fe06812a128297560bee7aff1be0c040
-calc-calculator-that-shows-its-work = Uma calculadora que guarda as contas: nomes, unidades e conversões, e gráficos de y = f(x).
+calc-calculator-that-shows-its-work = Uma calculadora que mostra as contas: nomes, unidades e conversões, e gráficos de y = f(x).
 # en: f146f8e93fc9312f6b8003b048cd24d1574469af
 calc-tape-text = Fita como texto
 # The bar
@@ -3059,7 +3061,7 @@ calc-clear-line = Limpar a linha
 # en: 097a41c8c7e58b9b655d7b3e31a3673466595450
 calc-answer-before = Resultado anterior
 # en: 2ee9e26d39d7113bd8fea80639d6257ab1bdf8cc
-calc-type-sum-or-3-inch = Digite um cálculo, ou 3 inch to cm, e aperte Enter. a = 12 salva um resultado com um nome.
+calc-type-sum-or-3-inch = Digite um cálculo, ou 3 inch to cm, e pressione Enter. a = 12 salva um resultado com um nome.
 # en: 0bef86b24e006bd994db1509b268156522c7dc2c
 calc-type-curve-in-x-such = Digite uma curva em x, como x^2 ou sin(x), e pressione Enter para desenhá-la.
 # The templates
@@ -3074,15 +3076,15 @@ calc-tape-of-market-apples-and = Uma fita da feira: maçãs e queijo por peso, o
 # en: 56d12d641f4f4177e63e120c8bd10a8e7348357f
 calc-tax-on-price = Imposto sobre um preço
 # en: 8a7d0a08d1e03c2974f84aa039e7871c5b232245
-calc-new-york-city-sales-tax = O imposto de venda de Nova York somado a um preço, e retirado de um recibo.
+calc-new-york-city-sales-tax = O imposto sobre vendas de Nova York somado a um preço, e retirado de um recibo.
 # en: 80296be8eee3142eb634c0045f82e15b5e5373aa
 calc-percentage-change = Variação percentual
 # en: 93650e756cc879e41310d678219f483e5ce2cfd1
-calc-rent-up-from-1-450 = O aluguel de $1.450 para $1.595: quanto subiu, quantos por cento, e contra um aumento de salário.
+calc-rent-up-from-1-450 = O aluguel de $1.450 para $1.595: quanto subiu, quantos por cento, e comparado a um aumento de salário.
 # en: 9ff9fc7e0344944578d50820e0326f7bf34f1c8e
 calc-kitchen-conversions = Conversões de cozinha
 # en: c7ccdb52f144fcec56adb8ecb5264f35d03600c0
-calc-cups-ovens-spoons-and-weights = Xícaras, fornos, colheres e pesos, de uma medida para outra.
+calc-cups-ovens-spoons-and-weights = Xícaras, temperaturas de forno, colheres e pesos, de uma medida para outra.
 # en: 267b3d4696b05cc65039fcf4afb8cd9548ed5a29
 calc-scaling-recipe = Ajustar uma receita
 # en: a0e9dcbc29ed1364a4891c3671dd43675af64d11
@@ -3094,11 +3096,11 @@ calc-feet-to-centimeters-miles-to = Pés para centímetros, milhas para quilôme
 # en: 7b31203b4780df1cd410c84049ed4d031dacc8e3
 calc-currency-at-rate-you-type = Moeda a uma cotação que você digita
 # en: 5f4e47693383fd619db1b39871b821a7fccf86df
-calc-trip-priced-in-euros-and = Uma viagem orçada em euros e convertida em dólares, com a taxa do cartão por cima.
+calc-trip-priced-in-euros-and = Uma viagem orçada em euros e convertida em dólares, com a taxa do cartão somada.
 # en: 6645ae7e46c209b7ba6f5fb3b6aa707395a2c3d2
 calc-fuel-for-trip = Combustível para uma viagem
 # en: e2d3235c5cfd9ceffb4e54f0635e4f3841b0c0e1
-calc-boston-to-montreal-and-back = Boston a Montreal e volta: milhas, milhas por galão, o preço, de quatro jeitos.
+calc-boston-to-montreal-and-back = Boston a Montreal e volta: milhas, milhas por galão, o preço, dividido por quatro.
 # en: bb294d581aa3512dfdaf06cb5705338f026425ff
 calc-paint-for-room = Tinta para um cômodo
 # en: 8899142eaeb03e3a2cfc17f5e68f1977478e2ce5
@@ -3110,7 +3112,7 @@ calc-one-call-at-9-in = Uma reunião às 9 em Nova York, e a hora em Londres, Be
 # en: 4126383a0888802d508caf9f1e9a973554c6eb7e
 calc-running-pace = Ritmo de corrida
 # en: 73e59d9404aa7a32f2e7e9ae9ff609c2a74d14cb
-calc-10k-in-52-30-minutes = Uns 10 km em 52:30: minutos por quilômetro e por milha, e a meia e a maratona completa nesse ritmo.
+calc-10k-in-52-30-minutes = 10 km em 52:30: minutos por quilômetro e por milha, e a meia e a maratona completa nesse ritmo.
 # en: d1411ae3cdd27fda5ea57577c408be223f586cf0
 calc-body-mass-index = Índice de massa corporal
 # en: cf37a053ab6daf8527ff908a4479b6fb38654155
@@ -3130,22 +3132,22 @@ calc-24-000-at-6-9 = $24.000 a 6,9% em sessenta meses: a parcela mensal e os jur
 # en: 3c48bd272b7ad823e277ca649218ae107832bca4
 calc-compound-interest = Juros compostos
 # en: ce79ef1a5e051c360028ef440ccc8258554abe0a
-calc-5-000-and-200-month = $5.000 e $200 por mês a 5% por dez anos, contra o que foi investido.
+calc-5-000-and-200-month = $5.000 e $200 por mês a 5% por dez anos, comparados ao que foi investido.
 # en: 813161b07c2ed5cab82b09f8c31b3810800bcd26
 calc-break-even = Ponto de equilíbrio
 # en: bee9b48a097d165fe0d11f7c3a7175019c158c5e
-calc-costs-against-sales-for-coffee = Custos contra receitas de um carrinho de café: onde as linhas se cruzam estão os copos por dia de que ele precisa.
+calc-costs-against-sales-for-coffee = Custos x vendas de um carrinho de café: onde as linhas se cruzam está o número de copos por dia de que ele precisa.
 # en: a9047269b4f64dbbb2df8503315406b2b33fc4e9
 calc-curve-and-its-slope = Uma curva e sua inclinação
 # en: b5f43817a99082555a1fc4891fd2eb5bfaba6e10
-calc-x3-3x-its-derivative-and = x³ − 3x, sua derivada e a tangente plana no fundo da depressão.
+calc-x3-3x-its-derivative-and = x³ − 3x, sua derivada e a tangente horizontal no ponto de mínimo.
 # en: d4802215f2c0025bd9e3f3fe025230ceda4e830b
 calc-waves-adding-up = Ondas se somando
 # en: 9e46b2d75638fb2ebe905ad0c4be8059be6487cc
 calc-sine-waves-summed-on-their = Ondas senoidais somadas, a caminho de uma onda quadrada.
 # The grip on a line of the tape; the bar under lines chosen whole.
 # en: fd71cff4626f555a0e69c5b6801a591cabd1d173
-calc-choose-line-n-drag-it = Selecionar a linha { $n }, arraste para mover
+calc-choose-line-n-drag-it = Selecione a linha { $n }, arraste para mover
 # en: dab2e3d9cf8c3bfccd20fa34fac6fc738ce9aba7
 calc-chosen-lines = Linhas selecionadas
 
@@ -3158,13 +3160,13 @@ compare-compare = Comparar
 # en: 24512a18bc6d2c27213ad28b26ce9271d94175af
 compare-no-difference = Sem diferença
 # en: 8f0fb2d2ece91d9de4ed64f23a12b475c3e18970
-compare-not-link-to-tiny-little = Não é um link de documento do Pequeno Escritoriozinho
+compare-not-link-to-tiny-little = Não é um link de documento do Escritório Pequenininho
 # en: e82be1221a13b593fd3fd58ffe24f3c3ba58f783
 compare-paste-second-link-to-see = Cole um segundo link para ver o que mudou.
 # en: 442aef6fc360061295985657c4489b3c4d360cc3
 compare-paste-link-to-document-as = Cole o link do documento como está agora
 # en: 7fb07fcb91ba19442009f16f24be4ef85b3eca16
-compare-paste-link-to-document-as-it-was = Cole o link do documento como era
+compare-paste-link-to-document-as-it-was = Cole o link do documento como estava
 # en: 0ae84aa126111ee639f685e9ed05c6895e632a90
 compare-put-in = Adicionado:
 # en: 210dd62a81e43d19e22018878ba665485e0526cb
@@ -3195,9 +3197,9 @@ compare-n-put-in = { $n ->
 ## files and zips dropped on the page (kit/file/open.ts)
 
 # en: c99db7abba3f7227854d93a163ad3494de4e1571
-open-opened-name = { $name } aberto
+open-opened-name = Aberto: { $name }
 # en: f917dee4211bd4af58db8efec79e354e1ffb4912
-open-that-file-is-not-words = O Pequeno Escritoriozinho não consegue ler esse arquivo.
+open-that-file-is-not-words = O Escritório Pequenininho não consegue ler esse arquivo.
 # en: 1d08903947cc83b648f8ad96b1e23466a2dbed11
 open-that-file-is-too-large = Esse arquivo é grande demais.
 # en: 8f432852569edbf7610713a6554e7a61396327d5
@@ -3252,6 +3254,6 @@ find-not-found = Não encontrado
 ## a menu narrowed by typing (kit/ui/menu.ts)
 
 # en: a9c25fead588babdd6b90b343a47f716f722312e
-menu-nothing-starts-q = Nenhuma correspondência para “{ $q }”
+menu-nothing-starts-q = Nenhum resultado para “{ $q }”
 # en: ddf17f8747a6b36489443d6b09c25b429a1ea675
-menu-starting-q = Correspondências para “{ $q }”
+menu-starting-q = Resultados para “{ $q }”
