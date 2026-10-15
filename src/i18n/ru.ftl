@@ -351,7 +351,7 @@ common-link = Ссылка
 # en: b15dbf0da72e08fcfcf35d2aed0a937335b9cc5e
 common-short-link = Короткая ссылка
 # en: 9095e39b9975250b05476c852d1631a6651924d9
-share-new-noun-date-n = Новый { $noun } { $date } №{ $n }
+share-new-noun-date-n = Новый: { $noun } { $date } №{ $n }
 # Files, compare, posting and embedding: the agent and sharing surface.
 # en: 1c2edb3104c7f2adce9ad2a77f3622d1beb0059a
 share-mastodon-server-like-mastodon-social = Сервер Mastodon, например mastodon.social
