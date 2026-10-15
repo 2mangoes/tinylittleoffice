@@ -84,7 +84,7 @@ home-forget-title = מחיקת { $title }
 home-n-more = עוד { $n }
 # The home page's foot: { $aboard } is the name Aboard, a link to aboard.com, said as it is in every language
 # en: 7f2352058be05faa9a191d7ac6eb2cf0a15b228f
-home-aboard-project-made-with-respect = פרויקט של { $aboard }. נעשה בכבוד בעיר ניו יורק.
+home-aboard-project-made-with-respect = פרויקט של { $aboard }. נוצר מתוך כבוד בעיר ניו יורק.
 # en: a26ce4e876668bb8cdbd6db05cc668d436b73ba6
 home-beta-version = גרסת בטא
 # The foot's link to the repository on GitHub
@@ -127,7 +127,7 @@ drawer-save-in-browser = שמירה בדפדפן
 # en: dd8082be77e9211f033a55131c1a6360f12b0e1d
 drawer-what-is-this = מה זה?
 # en: fa7684f5e02290b9144d9d981add78ff873eb052
-drawer-turn-on-to-save-files = יש להפעיל כדי לשמור קבצים בדפדפן.
+drawer-turn-on-to-save-files = הפעלה שומרת קבצים בדפדפן.
 # en: af191ab94c0b2f93d5e90820805b9c7f419ce80d
 drawer-turn-off-to-remove-all = כיבוי מסיר את כל הקבצים וההגדרות.
 # en: db5f691e51583d80782a9c51e78f01c49ccefd02
@@ -141,7 +141,7 @@ drawer-language = שפה
 # en: a797e30923ac1be590300ce6b08e63b4e6dc6688
 common-theme = ערכת נושא
 # en: 15360c25a66578ad69e81e4c2fc3f0001e8a2258
-drawer-match-device = כמו במכשיר
+drawer-match-device = לפי המכשיר
 # en: a36ef8aba22905e2d2efbf1ac1d6230d5761859d
 drawer-light = בהיר
 # en: ae1ef01432946b8976b9b58575b3390ab7644db2
@@ -158,9 +158,9 @@ drawer-tiny-little-office-is-experiment = משרד קטנטן הוא ניסוי 
 # en: 04a1291dcc6e5d304f04516685710a331963f630
 drawer-to-reach-out-with-questions = לשאלות, { $email }.
 # en: 522edc71559293b5713cff3f13c2dbafd37a56a3
-drawer-email-us = כתבו לנו במייל
+drawer-email-us = אפשר לכתוב לנו במייל
 # en: 98187f1688112fa57c00a326f526288fa3e6b023
-drawer-if-you-find-bugs-please = אם מצאתם באגים, אנא דווחו עליהם ב{ $github } שלנו.
+drawer-if-you-find-bugs-please = על באגים אפשר לדווח ב{ $github } שלנו.
 # en: c6651994b242228b647fbbd2a83eccefd957abca
 drawer-github-repository = מאגר ה‑GitHub
 # en: 0fe421942f09b119f9019d2de286f5a43eefd4f3
@@ -191,11 +191,11 @@ drawer-to-add-tiny-little-office = כדי להוסיף את משרד קטנטן 
 leave-tiny-little-office-menu = התפריט של משרד קטנטן
 # The question before a link that leaves the site: "You are leaving Tiny Little Office for" over the site's name, large.
 # en: 92ad7c004fe14dea34666631ff31b016eb39ee40
-leave-do-you-trust-this-link = לסמוך על הקישור הזה?
+leave-do-you-trust-this-link = האם הקישור הזה אמין?
 # en: 8d85feca3f164857fc84014a8f2ed5cc4846d4c9
 leave-you-are-leaving-tiny-little = יציאה ממשרד קטנטן אל
 # en: 50ef68d5c205237951dae42aa775a66480171c46
-leave-this-link-writes-email-to = הקישור הזה כותב מייל אל
+leave-this-link-writes-email-to = הקישור הזה פותח מייל אל
 # en: 102dce223fdc2f3bbdda71f28108e2a6fdf21710
 leave-this-link-calls = הקישור הזה מתקשר אל
 # en: afb8b3199e929e5e9f886fdf382599c9d440c71f
@@ -323,7 +323,7 @@ share-this-document-is-n-bytes = המסמך הזה הוא { $n } בתים; קו�
 # en: 716ebea121ec7b8a4dd9ea47314131122cf0aab1
 share-this-document-is-n-characters = המסמך הזה הוא { $n } תווים; קישור מקוצר מכיל { $max }. אחרי קיצור של { $over } הוא ייכנס.
 # en: ae5014875f1eec5203f8744323723d2ee679d1cc
-share-expires-after = התוקף פג אחרי
+share-expires-after = תוקף למשך
 # en: 1e1c72c2e33894ad38b820f1d4ed17ef478067be
 share-hour = שעה
 # en: 4286c1f81faa848587ed38925e9b181e939f4998
@@ -335,9 +335,9 @@ share-month = חודש
 # en: 38c22f9dbdb41d2131b4324b7722c45a1f543420
 share-make-short-link = יצירת קישור מקוצר
 # en: 94d7d8ee473f817fa4b57737e7a01ec3cd13d4d4
-share-making = ביצירה…
+share-making = יוצר…
 # en: 1c6c031b40782efe6b28678fc42d5569cc11e029
-share-hundred-links-day-from-one = המגבלה הושגה: 100 קישורים מקוצרים ביום לכל כתובת. אפשר לנסות שוב מחר.
+share-hundred-links-day-from-one = המכסה מוצתה: 100 קישורים מקוצרים ביום לכל כתובת. אפשר לנסות שוב מחר.
 # en: 0b5140c5b10a2b84301b5ef43056b7d89bd2187c
 share-short-link-cannot-be-changed = אי אפשר לערוך או למחוק קישור מקוצר. התוקף שלו פג אוטומטית.
 # en: 4d9182a72e391841c2817e9943cf2b07adf70220
@@ -368,7 +368,7 @@ share-embed = הטמעה
 # en: 4eeede7134d362f371fd18b2d63d3199bb24f01a
 share-embed-code-copied = קוד ההטמעה הועתק
 # en: 682cbb0f328f16ee213c6b44d7012512b55506b7
-share-opens-deck-already-presenting = פותח את המצגת כשהיא כבר מוצגת.
+share-opens-deck-already-presenting = פותח את המצגת ישר במצב הצגה.
 # en: 7858ac3ff63354f37161bd349efe11edd13b89cb
 share-post = פרסום
 # en: c68fca11627c0ac342583c1782892518730cc40b
@@ -396,9 +396,9 @@ share-pages-in-frame-on-another = העמודים, במסגרת באתר אחר, 
 # en: 9377de06278eacbdf4a297a82b8eb9aa3d4220c0
 share-your-mastodon-server = שרת ה־Mastodon שלך
 # en: 8ae1c34bd37fad49cc5f8e02da648a78e89c3ed8
-share-left = שמאל
+share-left = נותרו
 # en: 62be4731dedfbbc70aa7fa30d6649d816af8ca4b
-share-uses = שימושים
+share-uses = בשימוש
 # en: 525f61b6729229b1a8854a9e50bcaa52ea96b131
 share-where = איפה
 # en: cdbfed741d905515df704d9585fc74781801a24d
@@ -412,7 +412,7 @@ share-n-over = חריגה של { $n }
 
 # The Share dialog's head line: "Created 9 Oct 2026, 14:03 · by Paul".
 # en: 07fd5d289286fa4714b3f407db7875fac90b9952
-privacy-anyone-with-link-will-need = כל מי שיש לו את הקישור יצטרך את הסיסמה כדי לפתוח אותו. אי אפשר לאפס אותה. אם היא אובדת, המסמך אבד.
+privacy-anyone-with-link-will-need = כדי לפתוח את הקישור צריך את הסיסמה. אי אפשר לאפס אותה. אם היא הולכת לאיבוד, המסמך אבד.
 # en: 8c684290ce0b8a8e6cee79a145e17554064a4760
 privacy-change-password = שינוי סיסמה
 # en: 5be0d11b94b1ba25b2579314f6af69649a900cde
@@ -456,7 +456,7 @@ privacy-protected-by-password = מוגן בסיסמה
 # en: acef17d00b9a1b6e1e15e76d27ae53635928a7a6
 privacy-remove-password = הסרת הסיסמה
 # en: 788f55b0957b15918c6aba279f4f0377a5a1db90
-privacy-sealing = בהצפנה…
+privacy-sealing = מצפין…
 # en: 94408e41c12e924b82da7ea6e79e5cb69ac9e042
 privacy-set-password = הגדרת סיסמה
 # en: f897cb67f049674308a073079bd85ad0649f8c82
@@ -488,7 +488,7 @@ privacy-your-browsers-history = ההיסטוריה של הדפדפן
 # en: cdff70e571d4ed7aeb1a43cedaf33299bdcd258e
 privacy-every-document-opened-here-in = כל מסמך שפותחים, במלואו, אלא אם יש לו סיסמה.
 # en: 18b8a03ed6567555edd5005aab5b090984f4b5bd
-privacy-not-ours-to-clear = איננו יכולים למחוק את זה
+privacy-not-ours-to-clear = אין לנו אפשרות למחוק את זה
 # en: 3ca2d1d26637d42b974b313bb8ce231333179a9e
 privacy-by-name = מאת { $name }
 # en: a9e72cf83916d4381012a19b329292818f845a43
@@ -508,7 +508,7 @@ privacy-n-set = { $n } הוגדרו
 # en: a97ce1edde4ad396d1cff34063087d0bf5d0e1a8
 privacy-copy-this-and-send-it = יש להעתיק את הסיסמה הזו ולשלוח אותה בנפרד מהקישור. היא לא תוצג שוב.
 # en: 7640428ae16fc2b673d689ddf6b1ea15eed407d3
-privacy-make-another = ליצור עוד אחת
+privacy-make-another = סיסמה אחרת
 # en: 9a0081f0b2bff82fac1961a403734134b9a3b170
 privacy-password-copied = הסיסמה הועתקה
 
@@ -601,14 +601,14 @@ download-text-tlo = טקסט (TLO)
 # en: 840a0fda84379bffc2a266a92bbb990672a7c8d2
 download-data-json = נתונים (JSON)
 # en: f77017c03d9d2be93a74ef7ef7e099dd77976f01
-download-downloaded-name = הורד: { $name }
+download-downloaded-name = ההורדה הושלמה: { $name }
 # en: 01125e1be1f56cdaa47c6314a158e1219af819b3
 download-failed = ההורדה נכשלה
 # en: e7f6a6728b280414756d238ae70084720018ba47
 common-open-in-tiny-little-office = פתיחה במשרד קטנטן
 # Under a document cut off at a slide's foot: a link that opens it whole, in its own app.
 # en: c510d6c04c0951500c8e43f623e9f8886c378aec
-download-see-more = ראו עוד
+download-see-more = להמשך
 
 ## the bar, shared by every app
 
@@ -671,7 +671,7 @@ common-done = סיום
 # en: d70f93df5e8f9b55be44fbeee9d203972e3383d4
 editor-address = כתובת
 # en: 74d3b25667541c75d79e0558305f4bda62229bd7
-editor-not-address = זו לא כתובת
+editor-not-address = כתובת לא תקינה
 # en: c8648f259049ce8bdb49529963c37a97f75e8d4b
 editor-set-link = הגדרת קישור
 # en: d2de1a2831e7fee28d6c8d214b66da0d1bed30c8
@@ -735,7 +735,7 @@ write-align = יישור
 # en: b442b455b6a5e55f249769068c3fcc4832aea89d
 write-align-left = יישור לשמאל
 # en: a2391118c8141b7f016207cb0da015ce9b3323e4
-write-center = מרכוז
+write-center = מירכוז
 # en: 9bb446b31da260be7a0206a0e15270eb6bf47255
 write-align-right = יישור לימין
 # en: 536d2746f7f2f88df35515a9cd5e44cb1582b9ca
@@ -746,7 +746,7 @@ write-paper-paper = נייר: { $paper }
 # en: c1ccf83eea101ddafb5de4e3dea5f3693ae473c0
 write-sans = סאנס
 # en: 2fa97b3a9a6621a3a887ef5686bf4604fa6804e6
-write-clean-and-plain-throughout = נקי ופשוט מתחילה ועד סוף
+write-clean-and-plain-throughout = נקי ופשוט לכל האורך
 # en: 56632c1841ab67cf1e7c7179b9c5ea0e32ea81c1
 write-bookish-serif-throughout = סריף ספרותי לכל האורך
 # en: 7daed9b46fb34186159d19a2dca5208daf510f54
@@ -832,7 +832,7 @@ write-who-what-and-how-much = מי, מה וכמה, הסכומים מחושבים
 # en: 80c40a5c8be53118fd8a9fc487b43f20c3014fbc
 write-cover-letter = מכתב מקדים
 # en: fe727759e1b85df4a1d71348a1a6dfd6ef8e135d
-write-applying-for-job-position-what = הגשת מועמדות לעבודה: התפקיד, מה עשית, למה דווקא הם, בארבע פסקאות קצרות.
+write-applying-for-job-position-what = הגשת מועמדות לעבודה: התפקיד, הניסיון שלך, למה דווקא שם, בארבע פסקאות קצרות.
 # en: 1fd79b9555ddf59862d60aa0aa3bb74fb74aae78
 write-memo = מזכר
 # en: cfa5a189ad757d015661acb500917a198d8a13e1
@@ -896,7 +896,7 @@ write-what-happened-in-order-what = מה קרה, לפי הסדר; מה רוצי�
 # en: f74c6bc075b1961f73f45729ce6281dc84fb3ccf
 write-letter-to-politician = מכתב לנבחר ציבור
 # en: 2e754026e13e7ebe41d9513e31f94d8268341243
-write-ask-your-representative-for-vote = לבקש מהנציג שלך להצביע: מי את או אתה, למה זה חשוב כאן, ושאלה.
+write-ask-your-representative-for-vote = בקשה מנבחר ציבור להצביע: היכרות קצרה, למה זה חשוב כאן, ושאלה.
 # en: de21096f37522d15740e7a4acd69efc811f9b5ce
 write-love-letter = מכתב אהבה
 # en: a6977a11c96b06575fd8359e1bb9e3dea5a21fcf
@@ -910,7 +910,7 @@ write-eulogy = הספד
 # en: cdc87e623e95678f786543dd272ba279df15e8ee
 write-life-in-few-minutes-where = חיים בכמה דקות: איפה הכול התחיל, מי הם היו, ממה נתגעגע.
 # en: 6c63ce6d4727a3fb46c16a62ac8d536b0b61fd08
-write-zine-essay = מאמר לזין
+write-zine-essay = מאמר לפנזין
 # en: ecce024c73aadb2150552b3419d5aa1c3cb72c17
 write-personal-essay-for-small-magazine = מאמר אישי למגזין קטן, בהקלדת מכונת כתיבה.
 # en: 563a631aba8690962836c99d15886672eb96ef62
@@ -1024,7 +1024,7 @@ sheet-amount-rate-and-years-for = סכום, ריבית ושנים לכל הלו�
 # en: 53f4e4eb1a489c6a14658993062fc985a80bd775
 sheet-subscription-business = עסק מבוסס מנויים
 # en: f14ffb32b12ec6d73e3971054ddf5248de50852a
-sheet-visitors-who-sign-up-pay = מבקרים שנרשמים, משלמים ונשארים: מודל של זרימות, וההנחות לידו כדי לשנות.
+sheet-visitors-who-sign-up-pay = מבקרים שנרשמים, משלמים ונשארים: מודל של זרימות, וההנחות לצדו, שאפשר לשנות.
 # en: 2f6636a8892aa5d7f9781b630c2131dc8652a7f1
 sheet-cafe = בית קפה
 # en: ce157b2ac144f603ec936234eb69d9d524c3354f
@@ -1048,11 +1048,11 @@ sheet-six-months-of-homes-bills = שישה חודשים של חשבונות וה
 # en: 2c2609efcdcac42f94b3d73758d40d3f2f79dfd8
 sheet-savings-goal = יעד חיסכון
 # en: 49ff61e9d2d6e99106df2e02e7a626aa5186c112
-sheet-what-went-in-each-month = כמה נכנס בכל חודש, כמה נחסך עד עכשיו וכמה עוד נשאר, והיעד לידו כדי לשנות.
+sheet-what-went-in-each-month = כמה נכנס בכל חודש, כמה נחסך עד עכשיו וכמה עוד נשאר, והיעד לצדו, שאפשר לשנות.
 # en: ca1ec97c50f7647ef3588d5de58af33939c01646
 sheet-habit-tracker = מעקב הרגלים
 # en: 7a2638dee7c38146953a64566dbd8fc8ea77d8d4
-sheet-four-habits-checked-off-day = ארבעה הרגלים שמסמנים יום אחר יום במשך שבועיים; כמה מכל יום נשמר, וכמה ימים לכל הרגל.
+sheet-four-habits-checked-off-day = ארבעה הרגלים שמסמנים יום אחר יום במשך שבועיים; כמה מהם נשמרו בכל יום, ובכמה ימים נשמר כל אחד.
 # en: d80f6ec7eac0c80248e2c7b452e21f89673449f2
 sheet-reading-list = רשימת קריאה
 # en: c809293d68f1061cf7062072d2efc8fe95fe9262
@@ -1108,7 +1108,7 @@ sheet-money-in-and-out-of = כסף שנכנס ויוצא מהקופה, מי הו
 # en: dca1686c53daf52f46495f2a961a3346006e41ac
 sheet-rate-card = מחירון
 # en: 1a3c8694038b9c6d56a26e131d62c3616e165a77
-sheet-freelancers-services-with-hours-each = השירותים של פרילנסר עם השעות שכל אחד לוקח; מחירים ומחירי דחוף שמחושבים מתעריף שעתי אחד.
+sheet-freelancers-services-with-hours-each = השירותים של פרילנסר עם השעות שכל אחד לוקח; מחירים רגילים ודחופים שמחושבים מתעריף שעתי אחד.
 # en: b9d1a465f75615e0b55ff620ec057c608971b8ed
 sheet-mortgages-compared = השוואת משכנתאות
 # en: 43ecdf4a244c2e1c022c6c08a3ba1c07f107ece3
@@ -1116,11 +1116,11 @@ sheet-four-offers-on-one-house = ארבע הצעות על אותו בית: הה�
 # en: 54695e5df6ef00663252186d998a600f9bac4c58
 sheet-unit-converter = ממיר יחידות
 # en: d2e0c086c77046805d1cc8934044bb315bf00aec
-sheet-miles-and-kilometers-pounds-and = מיילים וקילומטרים, פאונד וקילוגרם, תנורים, כוסות וגלונים: מקלידים כמות, וקוראים את היחידה השנייה.
+sheet-miles-and-kilometers-pounds-and = מיילים וקילומטרים, פאונד וקילוגרם, מעלות תנור, כוסות וגלונים: מקלידים כמות ורואים אותה ביחידה השנייה.
 # en: 9d2911edf283fc08872808d554a1017460fbe86f
 sheet-tournament-bracket = טבלת טורניר
 # en: ad907a82b59f9d64761c80d6b2fe13c2a3b04fc2
-sheet-eight-teams-single-elimination-each = שמונה קבוצות, בהדחה: התוצאה של כל משחק, המנצחת מחושבת, והמנצחות ממשיכות עד הגמר.
+sheet-eight-teams-single-elimination-each = שמונה קבוצות, בהדחה ישירה: התוצאה של כל משחק, המנצחת מחושבת, והמנצחות ממשיכות עד הגמר.
 # same
 # en: 0e2d6a433d926deb1903e03f166c76cd50bd542d
 sheet-excel-xlsx = Excel (XLSX)
@@ -1209,7 +1209,7 @@ common-name-of-column-c = השם של עמודה { $c }
 sheet-names-cell-to-its-right = שם לתא שמימין
 # A money column's currency (Money picked in a column's menu): the field's hint, and what it says of words it cannot read.
 # en: d02550533b8780a7e646803c3b7b9cb7a78ba756
-sheet-symbol-like-or-code-like = סמל, כמו $, או קוד, כמו USD. ריק הוא המטבע של המסמך.
+sheet-symbol-like-or-code-like = סמל, כמו $, או קוד, כמו USD. שדה ריק: המטבע של המסמך.
 # en: 1224b5538c873fc11d856120fedeb76e516529c6
 sheet-symbol-of-up-to-three = סמל של עד שלושה תווים, או קוד של שלוש אותיות.
 # en: 630470a61228c20119f270074f1e0b6a4c2d9151
@@ -1274,7 +1274,7 @@ sheet-edit-cell-caret-at-its = עריכת התא עם הסמן בסוף
 # en: 28d1a54d2e35ad87c0d19942f68d70ddbf67bcee
 sheet-put-back-what-cell-held = שחזור ערך התא
 # en: 2b69414b3787eaa8a38f2f1a9c4a48aff7dd78a5
-sheet-put-dated-rows-on-calendar = הצבת השורות עם תאריכים בלוח שנה
+sheet-put-dated-rows-on-calendar = העברת השורות עם תאריכים ללוח שנה
 
 ## downloads: hand-offs to another app (kit/file/exports.ts)
 
@@ -1283,7 +1283,7 @@ export-open-in = פתיחה ב־
 # en: 7f7b61c3d0574fa0bae27972834652c8b6f222e6
 export-pdf-file = קובץ PDF
 # en: 20ab05206208a4e9bea088d36c6640c781c6bf65
-export-copy-link-that-downloads-ext = העתקת קישור שמוריד את ה־.{ $ext }
+export-copy-link-that-downloads-ext = העתקת קישור להורדת ה־.{ $ext }
 # en: 389a8e30f70f547f507d418d67a8048c7eb2eda4
 export-could-not-share-ext = השיתוף של ה־.{ $ext } נכשל
 # en: 5869a7d435c371c52a7c02fe623f625c5062ba1c
@@ -1554,11 +1554,11 @@ draw-read-aloud-to-people-who = מוקרא בקול למי שלא יכול לר�
 # en: 988c63b77eade4f718f9d469cb36e35bff976839
 draw-describe-from-shapes = יצירה מהצורות
 # en: ac302ae45938c985822f097507602d624128f1d0
-draw-tap-or-drag-to-paint = הקשה או גרירה כדי לצבוע; מקשי החצים זזים, Enter צובע.
+draw-tap-or-drag-to-paint = הקשה או גרירה לצביעה; מקשי החצים מזיזים, Enter צובע.
 # en: ea263dc45b04f2755ac61a51deecc96ade3fb6a9
 draw-tap-each-corner-tap-first = הקשה על כל פינה; הקשה שוב על הראשונה, או Enter, כדי לסגור.
 # en: ccdc55c46a79ea604962ddda9cc010311bdca4fe
-draw-drag-to-draw-end-where = גרירה כדי לצייר; סיום בנקודת ההתחלה סוגר את זה לצורה.
+draw-drag-to-draw-end-where = גרירה כדי לצייר; סיום בנקודת ההתחלה סוגר את הקו לצורה.
 # en: ef5a6074bd843b506d359711212e8236802d80c4
 draw-press-on-one-shape-and-let-go-on-another = לוחצים על צורה אחת ומשחררים על אחרת.
 # en: 1005cc8c1dafc1f9eb422bf2ac68290b492fdfd1
@@ -1582,7 +1582,7 @@ draw-use-as-background = שימוש כרקע
 # en: 507f52dfd67fb731677bb9ae6971f9b5e891bc84
 draw-grid-is-now-background-download = הרשת היא עכשיו הרקע. אפשר להוריד אותה כאריח, או להשתמש בה בכל עמוד עם tile:.
 # en: 209a1a74ee8eec09b861bc34e5ddb08a1357a364
-draw-pixel-grid-n-by-n = רשת פיקסלים, { $n } על { $n }. מקשי החצים זזים; Enter צובע בצבע הנוכחי.
+draw-pixel-grid-n-by-n = רשת פיקסלים, { $n } על { $n }. מקשי החצים מזיזים; Enter צובע בצבע הנוכחי.
 # en: a9deda2292f9b3c9a827e2aa71e0da6b4db9f16e
 draw-row-y-column-x-ink = שורה { $y }, עמודה { $x }: { $ink }
 # en: d316afce8845f59e541c981d07d81bab22858d00
@@ -1654,7 +1654,7 @@ anim-animation = אנימציה
 # en: ec026663a7e4c23dd850c7f5a96deef71bf8bb81
 anim-lift-off = המראה
 # en: 5d15aaf0784e98385ffc925f574edbf1a0657292
-anim-rocket-climbs-away-with-its = טיל מתרומם עם הצל שלו כשהמילים עולות: שתי צורות, שני מפתחות לכל אחת.
+anim-rocket-climbs-away-with-its = טיל מתרומם עם הצל שלו כשהמילים עולות: שתי צורות, שני פריימי מפתח לכל אחת.
 # en: 1cc22feeb4a82e33a9fd435fbf7c4a927a0408e1
 anim-bouncing-ball = כדור קופץ
 # en: 567b2c86aa06b4d0133474a39dc6545196754a25
@@ -1680,11 +1680,11 @@ anim-meme-in-two-lines-of = מם בשתי שורות בגופן Impact, וגבי
 # en: 98eb193445404588fd801a26b8383def925748ab
 anim-flash-card = כרטיסיית לימוד
 # en: 864aea3fc448ba5b87612d5e8c4c6dafde49b09a
-anim-card-shows-spanish-word-turns = כרטיס מראה מילה בספרדית, מתהפך כדי לתת את האנגלית, וחוזר: סיבוב סביב הציר הזקוף שלו.
+anim-card-shows-spanish-word-turns = כרטיס מראה מילה בספרדית, מתהפך כדי לתת את האנגלית, וחוזר: סיבוב סביב הציר האנכי שלו.
 # en: 23015d1cbacca964e41f5cbb0021ed050964a9ed
 anim-weather-this-week = מזג האוויר השבוע
 # en: 8dc082991f9eea4f537ecd34d66858c28b08bcb6
-anim-four-days-of-weather-in = ארבעה ימים של מזג אוויר בליסבון, כל סמל חי: השמש מסתובבת, הענן נסחף, הברק מזנק.
+anim-four-days-of-weather-in = ארבעה ימים של מזג אוויר בליסבון, כל סמל חי: השמש מסתובבת, הענן נסחף, הברק מבזיק.
 # en: b8224dd56d927c2c68b1498f39b7a2ed20f88c57
 anim-new-year-countdown = ספירה לאחור לשנה החדשה
 # en: 6b46f602f1762ee9ef676cfb3d455fba6a9a07df
@@ -1743,7 +1743,7 @@ anim-pause = השהיה
 # en: 5d12bd53552cafc41ca6146c04870df2e1574e13
 anim-play = ניגון
 # en: fa968bd1155bd76231814d479bf070ed96cca9bb
-anim-pixel-art-is-made-in = פיקסל ארט נוצר בכלי ציור; כלי אנימציה מזיז צורות.
+anim-pixel-art-is-made-in = פיקסל ארט נוצר בכלי הציור; כלי האנימציה מזיז צורות.
 # en: b4a9395d25398654fd5d000e4b82a1d8273339bd
 anim-rainbow = קשת
 # en: 3d5096b70833fdae355f1ffcf32faf2066123467
@@ -1772,9 +1772,9 @@ anim-this-frame = הפריים הנוכחי
 # en: cac09d8898c2435fb48b3b387ff152da7929eab8
 anim-duplicate-this-frame = שכפול הפריים הזה
 # en: 885c46b03eaf682f7c9534f7791ddfc3da84cd6f
-anim-frame-earlier = פריים אחד קודם
+anim-frame-earlier = פריים אחורה
 # en: 2c3d7664e236cb8254795d8ffd3761741ccfff7d
-anim-frame-later = פריים אחד אחר כך
+anim-frame-later = פריים קדימה
 # en: bb4f3c806dbc9e6d5247da5b492939d83c90cf2b
 anim-delete-this-frame = מחיקת הפריים הזה
 # en: 406ce96669c44a0f4b79e02af1464b6aa7fbf232
@@ -1782,12 +1782,12 @@ anim-draw-shapes-move-sets-them = מציירים צורות, ואז משתמשי
 # en: b4d477d39704ecbf21ca422aeebffbad5a519fbb
 anim-nothing-here-yet-draw-something = עדיין אין כאן כלום: קודם מציירים משהו.
 # en: 00f1eed948284854e29d59b2de928756b7f69388
-anim-tap-shape-then-drag-it = הקשה על צורה, ואז גרירה שלה למקום שלה.
+anim-tap-shape-then-drag-it = הקשה על צורה, ואז גרירה למקום שלה.
 # en: e4cabeb67c10b273fc4a1cfba538ac893c850f68
 anim-drag-it-to-where-it = גרירה למקום שלה ב־{ $s } שנ׳.
 
 # en: b0d1915925616cc03de525611bfe58839cf5fdff
-anim-anything-from-drawing-tool-moving = כל דבר מכלי ציור, בתנועה: מיקום, עומק, גודל, סיבוב והיפוך לאורך זמן, עם אפקטים בשביל ממים.
+anim-anything-from-drawing-tool-moving = כל דבר מכלי הציור, בתנועה: מיקום, עומק, גודל, סיבוב והיפוך לאורך זמן, עם אפקטים בשביל ממים.
 # en: 739720909d046c563acd15a980c916ae9b0a75f7
 anim-back-and-forth = הלוך ושוב
 # en: 7753216f948c789b0cbd5cfb16d1f50c1717383b
@@ -1797,7 +1797,7 @@ anim-frames = פריימים
 # en: 0d0b09dfb5d45add0e2f90ec8b193d96ace76d0c
 anim-frames-second = פריימים לשנייה
 # en: 3570d228949889218e4c7fdb4ad8c942753530a1
-anim-how-large-shape-is-drawn = באיזה גודל הצורה מצוירת: 1× הוא כפי שצוירה.
+anim-how-large-shape-is-drawn = באיזה גודל הצורה מצוירת: 1× הוא הגודל המקורי.
 # en: c028f533678015b6ac2e606a9cafef7e050b11aa
 anim-length-speed-and-repeat = אורך, מהירות וחזרה
 # en: 72f516ede84adba7283e1f7f5fd8eb787c7d33b0
@@ -1807,7 +1807,7 @@ anim-play-once = ניגון פעם אחת
 # en: 368e8081b781aac177fd07c2415b694b1f878911
 anim-turn = היפוך
 # en: b2343125992a36aa775f5740930f717a0d1a76d6
-anim-turns-shape-about-its-upright = הופך את הצורה סביב הציר הזקוף שלה, כמו כרטיס: על הקצה ב־90°, ובמראה אחרי זה.
+anim-turns-shape-about-its-upright = הופך את הצורה סביב הציר האנכי שלה, כמו כרטיס: ב־90° רואים רק את הקצה, ומעבר לזה היא משתקפת.
 # en: dbe0717b0567202674ba26238e862ff18b3ffbbc
 anim-turns-shape-around-in-plane = מסובב את הצורה במישור הבמה, כמו גלגל.
 # en: df7db1873937e8acd60c26ebf93191ad27b738e6
@@ -1839,7 +1839,7 @@ common-talk = הרצאה
 # en: 69d33e95f4f69c18d9591a8529f59a6703fc1f85
 outline-empty-outline = ראשי פרקים ריקים
 # en: b972f73739624a697a0aa9bdde4289bafc5b6e4b
-outline-outliner-ideas-under-ideas-folded = עורך ראשי פרקים: רעיונות בתוך רעיונות, מקופלים ופתוחים, מוזזים ומחוברים; אותו עץ שמצגת או מפת חשיבה קוראים.
+outline-outliner-ideas-under-ideas-folded = עורך ראשי פרקים: רעיונות בתוך רעיונות, מקופלים ופתוחים, מוזזים ומחוברים; אותו עץ שממנו נבנים מצגת או מפת חשיבה.
 # en: 3d47762769e98192ca611ea7fce028e70e16f174
 outline-arrow-from-from-to-to = חץ מ־{ $from } אל { $to }
 # en: 081c7d75d7a6b1052f5643338773de8ea68de0dd
@@ -1952,7 +1952,7 @@ outline-due-date-ellipsis = תאריך יעד…
 # en: 1cfca97d4ac1000c67f7b345992a5b58b3dac4b0
 outline-due-date-change-it = יעד { $date }. הקשה לשינוי
 # en: 6cf55f3558276e2eefff5dd41ec206dc9780bebf
-outline-remove-due-date = להסיר את תאריך היעד
+outline-remove-due-date = הסרת תאריך היעד
 # en: 891e9d6d47f1bacfcba2dca1b282afcbcd25d94d
 outline-agenda = סדר יום
 # en: aa73cdd3260a16a41d572c06ee0da42cb4b85286
@@ -1972,7 +1972,7 @@ outline-add-status = הוספת סטטוס
 # en: 4f9beff18cc6852b012093ba97421788466bb3bf
 outline-gray = אפור
 # en: 23376bab580fd3f3d521c66a65a03e7753da54cc
-outline-last-status-means-done = הסטטוס האחרון פירושו בוצע. משימות עם הסטטוס הזה מסומנות כבוצעו.
+outline-last-status-means-done = הסטטוס האחרון מסמן שהמשימה בוצעה. משימות בסטטוס הזה מסומנות כבוצעו.
 # en: 7312a31a2c880f2d456663b6f91ad6da980b3a5e
 outline-take-connection-away = הסרת החיבור
 # en: 656e5c87ae5cd391807e13c85fb32635c2d441c2
@@ -1996,7 +1996,7 @@ outline-unfold-n-inside = פתיחה ({ $n ->
 # en: 621521f9a8788695ec292cbec54d2792cfdf0a7d
 common-untitled = ללא שם
 # en: 1e65f823e3600c2c4cec7aff6db37af296fca073
-outline-view-as = תצוגה בתור
+outline-view-as = תצוגה
 # en: 828c360c884f9246750461eea43fee4e42c6b52c
 outline-zoomed-in-on = במיקוד
 # en: 38eca6735f66d186c0bd9c549873e774551dc35f
@@ -2041,11 +2041,11 @@ outline-essay-plan = תוכנית לחיבור
 # en: d926d538e1be8112e81292507985514feac5e4c4
 outline-draw-as-family-tree = ציור כעץ משפחה
 # en: bfef6f97dfb8178f726a96b8861bc2536e8c6fb4
-outline-five-days-in-lisbon-packed = חמישה ימים בליסבון, ציוד לפי קטגוריה, ומה לעשות לפני שהדלת נסגרת.
+outline-five-days-in-lisbon-packed = חמישה ימים בליסבון, ציוד לפי קטגוריה, ומה לעשות לפני שיוצאים מהבית.
 # en: 987acdf86bb6a373c995aa374c004bb21bf2e576
 outline-indoors-or-out-for-saturday = בפנים או בחוץ לשוק של שבת: התשובות לכל שאלה על הקווים שלה, כן ולא.
 # en: 61390a6b5d7d9268827d91b4a818c6a5fbe2011c
-outline-no-internet-at-home-question = אין אינטרנט בבית: שאלה בכל שלב, כן או לא, עד לשיחה שצריך לעשות.
+outline-no-internet-at-home-question = אין אינטרנט בבית: שאלה בכל שלב, כן או לא, עד למי שצריך להתקשר אליו.
 # en: b431e4b41d5021ff680bdee33aebda8738cec5b0
 outline-packing-list = רשימת ציוד
 # en: 013532bb7e7d08afa22a3149f8e74b5ee4d9eaf5
@@ -2059,7 +2059,7 @@ outline-three-generations-and-next-each = שלושה דורות והדור הב�
 # en: 285ec850c11d78bac10f6bfa31b69a37f1b257c9
 outline-troubleshooting = פתרון תקלות
 # en: c126bf3ee80a183d7c300cd69a01e39ab7dd8e53
-outline-who-works-for-whom-at = מי עובד אצל מי במאפייה של תשעה, כל אחד עם התפקיד שלו, מצויר כתרשים ארגוני מהתפריט.
+outline-who-works-for-whom-at = מי עובד אצל מי במאפייה עם תשעה עובדים, כל אחד עם התפקיד שלו, מצויר כתרשים ארגוני מהתפריט.
 # en: 0c6266451117f0382231513e4c30d38fb976086e
 outline-pdf-sections-and-bullets = PDF: חלקים ותבליטים
 # en: 32897da2f696f1ddc73da9ef0575827530a80b1a
@@ -2099,7 +2099,7 @@ deck-small-story-in-panels-about = סיפור קטן במשבצות על השא�
 # en: 6c1ff81a2445a9eab1616588060b483cd5b6cde8
 deck-twenty-minute-talk-with-speaker = הרצאה של עשרים דקות עם הערות דובר בכל שקופית, תרשים של התוצאות, הערת שוליים והלקחים.
 # en: 1a2fac58a0b80e771b6d2e526e7d3fee2cf6ef85
-deck-badges-for-conference-each-with = תגים לכנס, כל אחד עם תפקיד ומאיפה האדם, במראה אוקיינוס.
+deck-badges-for-conference-each-with = תגים לכנס, בכל אחד תפקיד ומקום מוצא, במראה אוקיינוס.
 # en: 7aa6a43fffd387b34fc7d06c7845de3f5bef745a
 deck-comic-umbrella = קומיקס: המטרייה
 # en: 1796880ad702715de60aad7227c9bdca655f0fff
@@ -2117,9 +2117,9 @@ deck-product-launch = השקת מוצר
 # en: 68d708c4452b9eaca2d5d38e9d0a5848059fd138
 deck-quarterly-review = סקירה רבעונית
 # en: ca40a6181df561c65b71e9ebdf580ccae6b007b7
-deck-recipe-zine = זין מתכונים
+deck-recipe-zine = פנזין מתכונים
 # en: 02bfd82260b75fe685e4e972cb9a3ae9b0a42f5f
-deck-seven-soups-for-cold-week = שבעה מרקים לשבוע קר, אחד בכל עמוד, בזין שמקופל מגיליון נייר אחד.
+deck-seven-soups-for-cold-week = שבעה מרקים לשבוע קר, אחד בכל עמוד, בפנזין שמקופל מגיליון נייר אחד.
 # en: 44b5c7f041391d8b41a8ba365b6f13522877b478
 deck-their-story-for-reception-from = הסיפור שלהם לקבלת הפנים, מאיך שהכירו ועד ההצעה, עם ציר זמן ותודה.
 # en: 2aaeb944a6b05f452d512dc7dd5220adeee294ea
@@ -2139,7 +2139,7 @@ deck-chosen-slides = שקופיות שנבחרו
 # en: d7935967cfd3de8f11b33801800bece8d90cb55f
 deck-move-this-slide-drag-it = הזזת השקופית הזו: גרירה אל שקופית אחרת
 # en: 19926fc5c47a7a39dd1435da06e3fc4c027458ea
-deck-slides-titles-bullets-two-columns = שקופיות: כותרות, תבליטים, שני טורים, סמלים גדולים, מסמכים אחרים בשקופית; או זין, חוברת, עלון, קומיקס, פוסטר או תגי שם להדפסה ולקיפול.
+deck-slides-titles-bullets-two-columns = שקופיות: כותרות, תבליטים, שני טורים, סמלים גדולים, מסמכים אחרים בשקופית; או פנזין, חוברת, עלון, קומיקס, פוסטר או תגי שם להדפסה ולקיפול.
 
 # The layouts, the transitions, the formats
 # en: 7509c5747e5db3dfa3373afc42eca9f5b27a8599
@@ -2157,7 +2157,7 @@ deck-slide = החלקה
 # en: 9b3cbed5c490c07473546a88768ba29b787e9e52
 deck-zoom = זום
 # en: d4ff278598ebbd3f36cecf27e68c66de49d2f62f
-deck-zine = זין
+deck-zine = פנזין
 # en: 8ef5c45547ec6440e6dde4870e3f92d6c08dfbaf
 deck-booklet = חוברת
 # en: 80dceb58c1f9daca0ebaa066d80e670cfdf1123e
@@ -2195,7 +2195,7 @@ deck-chalkboard = לוח גיר
 # en: 5f941ab65fbabe87f41cd73c9136f5a4c97087e8
 deck-fun = כיף
 # en: 0bd48966c3fe51c025c34a472af7fac64b2292dc
-deck-themes-color = הצבע של ערכת העיצוב
+deck-themes-color = הצבע של ערכת הנושא
 
 # The bar
 # en: 4e9f7a31eef4c69e0aacb643f6856372cd6e3247
@@ -2279,7 +2279,7 @@ deck-right-column = טור ימני
 # en: 58952208e1b00c3e046eab00b1e20bb448262df9
 deck-one-bullet-line = תבליט אחד בכל שורה.
 # en: a32090c9358d8e112f4074c11a76811a50d53d5c
-deck-one-bullet-line-tab-steps = תבליט אחד בכל שורה. Tab מזיז פנימה.
+deck-one-bullet-line-tab-steps = תבליט אחד בכל שורה. Tab מגדיל כניסה.
 # en: f8948a4a523b4312c5567f9cff1f6788c757998f
 deck-line-or-two-under-title = שורה או שתיים מתחת לכותרת
 # en: 236bcf1c6a83d3b0f85a065c777d7948b22a0c22
@@ -2391,7 +2391,7 @@ deck-done-and-next-side-by = מה בוצע ומה הבא זה לצד זה, אח�
 # en: e946db45d2689df95cbac9f8137664409c51f5d8
 deck-proposal = הצעה
 # en: 52ab7599cc26432ef9b492b401d04eee1ca5e699
-deck-what-you-heard-what-you = מה שמעתם, מה אתם מציעים, מתי, כמה זה עולה.
+deck-what-you-heard-what-you = מה עלה בשיחות, מה מוצע, מתי, כמה זה עולה.
 # en: b8e1f28fed63f996c8915470a7ee9ce8aef9b75f
 deck-eight-small-pages-from-one = שמונה עמודים קטנים מגיליון נייר אחד: להדפיס, לקפל ולגזור, או לקרוא בהקשות בטלפון.
 # en: 31b11edde49cd1bd80a198f240426c5b2d8cd65f
@@ -2427,9 +2427,9 @@ cal-name-yours-say = שם (שלך, למשל)
 # en: e288d42e3bba2f9fc3b7f2287d2ea4f141e72236
 cal-schedule-phases-with-their-tasks = לוח זמנים: שלבים עם המשימות שלהם מתחתם, כמה כל אחת התקדמה, וההשקה בסוף.
 # en: f0424f3e15f33d07de80ddfd02a4b56f047767d7
-cal-week-earlier = שבוע קודם
+cal-week-earlier = שבוע אחורה
 # en: 5e63d8681fdc3170ed99fc3abcc3668620f299ca
-cal-week-later = שבוע אחר כך
+cal-week-later = שבוע קדימה
 # en: ab455a2fb151da1c7d0c39c7534c2f935e028ce9
 cal-weekend-of-sessions-at-set = סוף שבוע של מופעים בשעות קבועות, הופעה מאוחרת אחרי חצות.
 # en: 114574336ac7883aebd0653b3fc5e82f9262dc86
@@ -2451,9 +2451,9 @@ cal-edit-task = עריכת המשימה
 # en: 99570f85bb2bae0dbe3e8f2f3d6d6f765ee7c47e
 cal-choose-task = בחירת { $task }
 # en: 72b4644a41881ce4e156ce3283119c74f598cbea
-cal-day-earlier = יום קודם
+cal-day-earlier = יום אחורה
 # en: 8d6915ee723c8b3c01f29002cfed7d597d56c2c7
-cal-day-later = יום אחר כך
+cal-day-later = יום קדימה
 # en: 66a755ea0d935aeac763da63deebb69b0eb54ba9
 cal-dates = עריכת תאריכים…
 # en: a2bb9d34b8a1a79665858d354585cf147e0dee4e
@@ -2536,7 +2536,7 @@ cal-start-time = שעת התחלה
 # en: fc612a2fcc722bde9d98ae18bea42764812b6784
 cal-starts = מתחיל
 # en: 0e648419ea806b0cc4db81617f95870a094f3639
-common-stops = נעצר
+common-stops = עצירה
 # en: 480b9be2834a2278919632171f788a9a80d5d743
 cal-same-dates-as-gantt-chart = אותם תאריכים כתרשים גאנט
 # en: 7ea6dec71584012ab4044cc464dc601741ff2c50
@@ -2603,7 +2603,7 @@ cal-school-term = סמסטר
 # en: 2f88af7308e60cbfbe5482a13acec0983b020e09
 cal-training-plan = תוכנית אימונים
 # en: 5ef83b6b17b42f15d49c31f33e46ca8d4427e6ae
-cal-twelve-weeks-to-half-marathon = שנים־עשר שבועות לחצי מרתון כלוח זמנים: בסיס, בנייה, שיא, הורדה, מרוץ.
+cal-twelve-weeks-to-half-marathon = שנים־עשר שבועות לחצי מרתון כלוח זמנים: בסיס, בנייה, שיא, הפחתת עומס, מרוץ.
 # en: fdab2603fde2488e117cca6335baee3c481231b9
 cal-two-days-of-talks-and = יומיים של הרצאות וסדנאות לפי שעה, צבע לכל חדר.
 # en: c8bbdc31a9be182914dd6207c08837389224b33a
@@ -2619,7 +2619,7 @@ cal-who-does-which-shift-color = מי עושה איזו משמרת, צבע לכ�
 diagram-diagram = דיאגרמה
 # One app, eight kinds (mind map, org chart…); a 'thing' is whatever the kind is made of: an idea, a person, a step.
 # en: a6c5e06888a8fcbcb520ea2a9952009715b62e25
-diagram-mind-maps-org-charts-family = מפות חשיבה, תרשימים ארגוניים, עצי משפחה, מסלולי שחייה, צירי זמן, דיאגרמות ון, תרשימי ישיבה ורשתות, מצוירים מכמה שורות.
+diagram-mind-maps-org-charts-family = מפות חשיבה, תרשימים ארגוניים, עצי משפחה, תרשימי נתיבים, צירי זמן, דיאגרמות ון, תרשימי ישיבה ורשתות, מצוירים מכמה שורות.
 # en: 5c943d9da9c2dfa4508b7318865477cb55850904
 diagram-empty-diagram = דיאגרמה ריקה
 # The kinds, one of each kind's things (Insert's item), and how a line of each is written
@@ -2630,11 +2630,11 @@ diagram-org-chart = תרשים ארגוני
 # en: f78fddbccd57da0c8456fd39da6c21cdc0371020
 diagram-family-tree = עץ משפחה
 # en: 5a79fb6ed9e87efcbde2485d08845fe16296c303
-diagram-swimlanes = מסלולי שחייה
+diagram-swimlanes = תרשים נתיבים
 # en: 018514a3d58aa08353dd5e387ee29de45981c409
 diagram-timeline = ציר זמן
 # en: e5c282f3e15ca1cf6a0b7837f7c7cd8b2bc12783
-diagram-venn = ון
+diagram-venn = דיאגרמת ון
 # en: 840cfb1a1746bbb150371dbcf3ed341983a80c11
 diagram-seating-chart = תרשים ישיבה
 # en: 53ebc572b4a44802ba114729f07bdaaf5409a9d7
@@ -2714,7 +2714,7 @@ diagram-from-lovelace-to-now-spaced = מלאבלייס ועד היום, במרו
 # en: c973a2e43350a1c09697af1bd39a17f3cfba2c36
 diagram-from-order-to-doorstep = מההזמנה עד הדלת
 # en: 91519d37fd9fe6f0c40b0429e0ed9f8eb8206006
-diagram-from-job-description-to-yes = מתיאור התפקיד ועד "כן", מסלול אחר מסלול.
+diagram-from-job-description-to-yes = מתיאור התפקיד ועד "כן", נתיב אחר נתיב.
 # en: bfd1a142e965498fd2dbaa45ca87c1cbdc9071c9
 diagram-grandparents-their-children-and-grandchildren = סבים וסבתות, הילדים והנכדים שלהם, עם השנים.
 # en: 347a51bd3c26ccac83baeca51966f318d5bb06c4
@@ -2740,7 +2740,7 @@ diagram-classroom = כיתה
 # en: e491ee6c30111d9c51d83d4a19aba47a3c39c769
 diagram-family-with-godmother = משפחה עם סנדקית
 # en: c164cf0f878062c2b43b69bf4c1de2c3d6a1f94d
-diagram-principal-her-assistant-principals-classroom = מנהלת, סגניות המנהלת, המורים בכיתות והאב בית.
+diagram-principal-her-assistant-principals-classroom = מנהלת, סגניות המנהלת, מחנכי הכיתות ואב הבית.
 # en: f25d2f240d3a52d5361d9b6dd4d8561290566159
 diagram-move-to-lisbon-by-march = מעבר לליסבון עד מרץ: מסמכים, דירה, עבודה וחיים, ומה צריך לבוא קודם.
 # en: d2586903dd907f55b8076edbe00b87f4e45ab92f
@@ -2802,7 +2802,7 @@ diagram-tap-empty-space-for-person = הקשה על שטח ריק מוסיפה א
 # en: 5f7463cc9e2e8a2e25990127091710a286d9765a
 diagram-tap-empty-space-for-event = הקשה על שטח ריק מוסיפה אירוע. מקלידים את התאריך, Shift+Enter, ואז מה קרה. התאריכים מרווחים לפי קנה מידה, וטווח מוצג כרצועה.
 # en: b6395077670d276b6a207a6eadb6f5a17c1fa854
-diagram-lanes-name = השם של המסלול
+diagram-lanes-name = שם הנתיב
 # en: 769bb19e615b7f8e2809e5882e2d05a18f57a531
 diagram-when = מתי
 # en: b23ea75ecf303b9756682c84abecebc7a010f2b1
@@ -2921,13 +2921,13 @@ trip-ten-days-around-island-by = עשרה ימים מסביב לאי ברכב, �
 # en: 89059cee91b704cf1c0e42de4225df2968a207e7
 trip-dublin-food-crawl = סיור אוכל בדבלין
 # en: b934fa6dfc063b38e47ce12ed4622e1cc0d55b75
-trip-seven-places-to-eat-in = שבעה מקומות לאכול בהם באחר צהריים אחד, ממערב למזרח, הליכה קצרה בין כל אחד.
+trip-seven-places-to-eat-in = שבעה מקומות לאכול בהם באחר צהריים אחד, ממערב למזרח, הליכה קצרה מאחד לבא.
 # en: 2149c2c628bda1d9ea8522144f7ca59ce2a6bcc8
 trip-yosemites-mist-trail-loop = לולאת שביל מיסט ביוסמיטי
 # en: 056b43a68d915001b02640fbb4ec910045a406ad
 trip-two-waterfalls-on-day-hike = שני מפלים בטיול יום מהאפי איילס ובחזרה, במיילים.
 # en: b1365d430388f423cf7142e4a78c7470fed8a5fc
-trip-loire-by-bike = הלואר באופניים
+trip-loire-by-bike = הלואר על אופניים
 # en: e0fc4a0bf8e42cf48f5f6825bc3b8420df625254
 trip-orleans-to-saumur-in-six = מאורליאן לסומיר בשישה ימים, מטירה לטירה, בקילומטרים.
 # en: e68d998a80765bfa302dd2b477f31c97db0d51d2
@@ -2957,7 +2957,7 @@ trip-presenting-next-stop = העצירה הבאה (הצגה)
 # en: a802f6e93c981ee6dd02df366f0141ca3aa085e0
 trip-presenting-stop-before = העצירה הקודמת (הצגה)
 # en: 3b14d20764a1fdef5ee74f4defab4ff20b0e7cce
-trip-put-stops-on-calendar-day = הצבת העצירות בלוח שנה, יום לכל אחת
+trip-put-stops-on-calendar-day = העברת העצירות ללוח שנה, יום לכל אחת
 # en: 16fa5ad4958332a6bbb1eae6d1a8c6ee6f2c7752
 trip-first-last = הראשון או האחרון
 # en: 0aa341109cff3c75e204930fdeac94f52278bb67
@@ -3071,7 +3071,7 @@ calc-tape-of-market-apples-and = סרט של השוק: תפוחים וגבינה
 # en: 56d12d641f4f4177e63e120c8bd10a8e7348357f
 calc-tax-on-price = מס על מחיר
 # en: 8a7d0a08d1e03c2974f84aa039e7871c5b232245
-calc-new-york-city-sales-tax = מס המכירה של העיר ניו יורק נוסף למחיר, ומוצא בחזרה מקבלה.
+calc-new-york-city-sales-tax = מס המכירה של העיר ניו יורק, מתווסף למחיר ומחולץ מתוך קבלה.
 # en: 80296be8eee3142eb634c0045f82e15b5e5373aa
 calc-percentage-change = שינוי באחוזים
 # en: 93650e756cc879e41310d678219f483e5ce2cfd1
@@ -3079,23 +3079,23 @@ calc-rent-up-from-1-450 = שכר הדירה עלה מ־1,450$ ל־1,595$: בכמ
 # en: 9ff9fc7e0344944578d50820e0326f7bf34f1c8e
 calc-kitchen-conversions = המרות במטבח
 # en: c7ccdb52f144fcec56adb8ecb5264f35d03600c0
-calc-cups-ovens-spoons-and-weights = כוסות, תנורים, כפות ומשקלים, ממידה אחת לאחרת.
+calc-cups-ovens-spoons-and-weights = כוסות, מעלות תנור, כפות ומשקלים, ממידה אחת לאחרת.
 # en: 267b3d4696b05cc65039fcf4afb8cd9548ed5a29
 calc-scaling-recipe = הגדלת מתכון
 # en: a0e9dcbc29ed1364a4891c3671dd43675af64d11
-calc-banana-bread-for-eight-made = עוגת בננה לשמונה שנעשית לשנים־עשר: כל כמות כפול אחד וחצי.
+calc-banana-bread-for-eight-made = עוגת בננה לשמונה, מוגדלת לשנים־עשר: כל כמות כפול אחד וחצי.
 # en: 8639704eb84800c829b41e6fcd833d686dcb41f6
 calc-unit-conversions = המרת יחידות
 # en: 2aef2060ccb74d32576f5b1f936372bdd97252f3
 calc-feet-to-centimeters-miles-to = רגל לסנטימטרים, מיילים לקילומטרים, פאונד לקילוגרמים, פרנהייט לצלזיוס.
 # en: 7b31203b4780df1cd410c84049ed4d031dacc8e3
-calc-currency-at-rate-you-type = מטבע לפי שער שמקלידים
+calc-currency-at-rate-you-type = המרת מטבע לפי שער שמקלידים
 # en: 5f4e47693383fd619db1b39871b821a7fccf86df
-calc-trip-priced-in-euros-and = טיול שמתומחר ביורו ומומר לדולרים, עם עמלת הכרטיס מעל.
+calc-trip-priced-in-euros-and = טיול שמתומחר ביורו ומומר לדולרים, ועוד עמלת כרטיס האשראי.
 # en: 6645ae7e46c209b7ba6f5fb3b6aa707395a2c3d2
 calc-fuel-for-trip = דלק לטיול
 # en: e2d3235c5cfd9ceffb4e54f0635e4f3841b0c0e1
-calc-boston-to-montreal-and-back = מבוסטון למונטריאול ובחזרה: מיילים, מיילים לגלון, המחיר, לארבעה.
+calc-boston-to-montreal-and-back = מבוסטון למונטריאול ובחזרה: מיילים, מיילים לגלון, המחיר, מחולק לארבעה.
 # en: bb294d581aa3512dfdaf06cb5705338f026425ff
 calc-paint-for-room = צבע לחדר
 # en: 8899142eaeb03e3a2cfc17f5e68f1977478e2ce5
@@ -3131,7 +3131,7 @@ calc-5-000-and-200-month = 5,000$ ועוד 200$ בחודש ב־5% לעשר שנ�
 # en: 813161b07c2ed5cab82b09f8c31b3810800bcd26
 calc-break-even = נקודת איזון
 # en: bee9b48a097d165fe0d11f7c3a7175019c158c5e
-calc-costs-against-sales-for-coffee = עלויות מול מכירות לעגלת קפה: איפה שהקווים נחתכים, שם מספר הכוסות ביום שהיא צריכה.
+calc-costs-against-sales-for-coffee = עלויות מול מכירות לעגלת קפה: נקודת החיתוך של הקווים היא מספר הכוסות ביום שהיא צריכה למכור.
 # en: a9047269b4f64dbbb2df8503315406b2b33fc4e9
 calc-curve-and-its-slope = עקומה והשיפוע שלה
 # en: b5f43817a99082555a1fc4891fd2eb5bfaba6e10
@@ -3198,7 +3198,7 @@ open-that-file-is-not-words = משרד קטנטן לא יכול לקרוא את 
 # en: 1d08903947cc83b648f8ad96b1e23466a2dbed11
 open-that-file-is-too-large = הקובץ הזה גדול מדי.
 # en: 8f432852569edbf7610713a6554e7a61396327d5
-open-keep-them-on-this-device = לשמור אותם במכשיר הזה
+open-keep-them-on-this-device = שמירה במכשיר הזה
 # en: c4fe6d8b035f6108e8a7e0037667dacf3d6cca25
 open-nothing-is-saved-on-this = שום דבר לא שמור במכשיר הזה. אפשר לשמור אותם כאן, או לפתוח אחד.
 # en: 0826daee1d616f7de3a2b205eb2360fcaccc77ef
@@ -3237,7 +3237,7 @@ keys-everything-smaller = התרחקות
 # en: 67312061f24800b7dc75b07101329959c5c1af88
 keys-keep-this-document-on-device = שמירה במכשיר הזה
 # en: 4d5e11a737e63d755f4127a0139f235f3794b6c6
-keys-show-these-shortcuts = הצגת קיצורי הדרך האלה
+keys-show-these-shortcuts = הצגת קיצורי המקלדת
 # en: da05037a43419e15395f52f0ed4dcb0c7f75c1f2
 keys-this-page = העמוד הזה
 
