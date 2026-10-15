@@ -172,6 +172,53 @@
     cursor: pointer;
   }
 
+  /* The compound bullet: a status pill in its color before the words, a due day after them (a date field while typed). */
+  .ol-status {
+    flex-shrink: 0;
+    align-self: center;
+    margin: 0 0.25rem 0 0.125rem;
+    font: inherit;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    border-radius: var(--to-radius-pill);
+    padding: 1px 0.5rem;
+    border: 0;
+    background: var(--ol-status, var(--to-accent));
+    color: #fff;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+  .ol-due {
+    flex-shrink: 0;
+    align-self: center;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    margin: 0 0.125rem 0 0.25rem;
+    font: inherit;
+    font-size: 0.75rem;
+    border-radius: var(--to-radius-pill);
+    padding: 1px 0.5rem;
+    border: 0;
+    background: var(--to-surface-2);
+    color: var(--to-ink-2);
+    white-space: nowrap;
+    cursor: pointer;
+  }
+  .ol-due-in {
+    align-self: center;
+    margin: 0 0.125rem 0 0.25rem;
+    font: inherit;
+    font-size: 0.875rem;
+    color: var(--to-ink);
+  }
+  .ol-status:focus-visible,
+  .ol-due:focus-visible {
+    outline: 0.125rem solid var(--to-accent);
+    outline-offset: 1px;
+  }
+
   /* The shared menu's own button is never shown: it opens beside the bullet tapped. */
   .ol-line-menu > button {
     display: none;

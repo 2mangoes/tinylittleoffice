@@ -38,7 +38,7 @@ import { editFence, makeDoc } from '../../kit/ui/doc-dialog.ts';
 import { pageSvg } from '../../kit/draw/draw.ts';
 import { DocElement, firstAt, type Entry } from '../../kit/core/element.ts';
 import { icon, UI } from '../../kit/draw/icons.ts';
-import { t } from '../../kit/core/i18n.ts';
+import { language, t } from '../../kit/core/i18n.ts';
 import { noteMarks, type NoteMark, type ToNotes } from '../../kit/draw/notes.ts';
 import { askDocLink } from '../../kit/ui/insert-dialogs.ts';
 import type { MenuItem, ToMenu } from '../../kit/ui/menu.ts';
@@ -89,6 +89,16 @@ import {
   type Item,
   type Link,
   type OutlineView,
+  DEFAULT_STATUSES,
+  defaultDue,
+  followTick,
+  makeTask,
+  setDue,
+  setStatus,
+  STATUS_COLORS,
+  statusesOf,
+  tick,
+  type Status,
 } from './model.ts';
 import { appName, docGist, outlinePage } from './view.ts';
 import '../../kit/ui/bar.ts';
@@ -139,6 +149,7 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
     connecting: { state: true },
     menuFor: { state: true },
     naming: { state: true },
+    dating: { state: true },
     showing: { state: true },
   };
   /** Items folded shut, by block index. */
@@ -153,6 +164,8 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
   declare menuFor: number;
   /** The block whose line is being named, and the name so far; -1 when the dialog is closed. */
   declare naming: number;
+  /** The row whose due day is being typed (a date field where its chip was), -1 for none. */
+  declare dating: number;
   /** The outline shown as a page, in a dialog. */
   declare showing: boolean;
   /** The row editor last focused: what the bar's text tools act on. */
@@ -197,6 +210,7 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
     this.connecting = null;
     this.menuFor = -1;
     this.naming = -1;
+    this.dating = -1;
     this.showing = false;
   }
   protected read(doc: Doc) {
@@ -448,10 +462,13 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
     // Joins name items by their words, so they follow a renamed item.
     const now = after && isText(after) ? nameOf(after.runs) : '';
     const renames = was && now !== was ? renameIn(doc, readOutline(doc), was, now) : [];
+    // A task's box checked or unchecked in the words (a tap on it, Mod+Enter): the status follows it.
+    const before = this.doc.blocks[where];
+    const ticked = after?.k === 'li' && before?.k === 'li' && after.done !== undefined && after.done !== before.done ? followTick(doc, where) : [];
     // A Tiny Little Office link pasted as an item is that document, under this item.
     const link = after?.k === 'li' ? refOfLink(plainText(after.runs)) : null;
     const asDoc: Op[] = link && after?.k === 'li' ? [{ op: 'splice', at: where, n: 1, blocks: [docBlock(after.depth, link)] }] : [];
-    this.edit([...all, ...renames, ...asDoc], kind === 'type' && !asDoc.length ? `type:${where}` : undefined);
+    this.edit([...all, ...renames, ...ticked, ...asDoc], kind === 'type' && !asDoc.length ? `type:${where}` : undefined);
     if (ghost) this.focusRow(where, e.detail.sel.focus.offset);
     else if (asDoc.length) this.focusRow(where);
     // "1. " typed at the start of a row numbers its list: a step of its own, so an undo gives the marker back.
@@ -609,6 +626,7 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
     return [
       ...kinds.map(([dir, label]) => ({ group: said, label, icon: DIR_ICON[dir] ?? Minus, checked: ends.dir === dir, does: () => this.setDir(at, dir) })),
       { label: t('Name the line'), icon: UI.pen, hint: ends.label, does: () => this.openNaming(at) },
+      ...this.statusItems(at),
       ...(i >= 0 && hasChildren(this.items, i) ? [{ label: t('Zoom in'), icon: ZoomIn, does: () => this.zoomTo(at) }] : []),
       ...(ends.edge ? [{ label: t('Take the connection away'), icon: UI.trash, does: () => this.edit(unlink(this.doc, at)) }] : []),
     ];
@@ -629,6 +647,7 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
     const at = this.naming;
     if (at < 0) return;
     this.naming = -1;
+    this.dating = -1;
     const b = this.doc.blocks[at];
     const label = value.replace(/\s+/g, ' ').trim();
     if (keep && label !== (this.endsOf(at)?.label ?? '')) this.edit(b?.k === 'edge' ? setLink(this.doc, at, { label }) : setLine(this.doc, this.view, at, { label }));
@@ -839,6 +858,103 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
         @blur=${(e: FocusEvent) => this.saveName(true, (e.target as HTMLInputElement).value)} />`;
     return label ? html`<button type="button" class="ol-label" aria-label=${t('Line named “{label}”: change it', { label })} @click=${() => this.openNaming(at)}>${label}</button>` : nothing;
   }
+  /* ---------- the compound bullet: a status of the document's set, a task's box, a due day (Paul, 2026-10-15) ---------- */
+
+  /** The document's statuses, from its head. */
+  get statuses(): Status[] {
+    return statusesOf(this.doc);
+  }
+  /** The status, a pill before the words in its color; tapped, the next of the set (round the end). */
+  private statusChip(at: number, it: Item) {
+    if (!it.status) return nothing;
+    const s = this.statuses.find((x) => x.name === it.status) ?? { name: it.status, color: STATUS_COLORS.gray };
+    return html`<button type="button" class="ol-status" style="--ol-status:${s.color}" aria-label=${t('Status {status}: tap for the next', { status: s.name })} title=${t('Status')} @mousedown=${(e: Event) => e.preventDefault()} @click=${() => this.cycleStatus(at)}>${s.name}</button>`;
+  }
+  cycleStatus(at: number) {
+    const st = this.statuses;
+    const it = this.itemAt(at);
+    if (!st.length || !it) return;
+    const i = st.findIndex((x) => x.name === it.status);
+    this.edit(setStatus(this.doc, at, st[(i + 1) % st.length].name, st));
+  }
+  /** The line menu's rows for the status (the set, and none) and the due day. */
+  private statusItems(at: number): MenuItem[] {
+    const it = this.itemAt(at);
+    if (!it || it.doc) return [];
+    const st = this.statuses;
+    const due = it.due;
+    return [
+      ...st.map((s) => ({ group: t('Status'), label: s.name, checked: it.status === s.name, does: () => this.edit(setStatus(this.doc, at, s.name, st)) })),
+      ...(st.length ? [{ group: t('Status'), label: t('No status'), checked: !it.status, does: () => this.edit(setStatus(this.doc, at, undefined, st)) }] : []),
+      { label: due ? t('Due {date}: change it', { date: this.dayWords(due) }) : t('Due date…'), icon: UI.calendar, does: () => this.openDating(at) },
+      ...(due ? [{ label: t('Remove due date'), icon: UI.close, does: () => this.edit(setDue(this.doc, at, undefined)) }] : []),
+    ];
+  }
+  /** A day as the reader's language says it: "Oct 20", with the year when it is not this one. */
+  private dayWords(due: string): string {
+    const [y, m, d] = due.split('-').map(Number);
+    if (!y || !m || !d) return due;
+    const thisYear = new Date().getFullYear() === y;
+    return new Intl.DateTimeFormat(language(), { month: 'short', day: 'numeric', ...(thisYear ? {} : { year: 'numeric' }), timeZone: 'UTC' }).format(Date.UTC(y, m - 1, d));
+  }
+  /** The due day, a chip after the words; tapped, a date field where it was. */
+  private dueChip(at: number, it: Item) {
+    if (this.dating === at)
+      return html`<input type="date" class="ol-due-in" aria-label=${t('Due date')} .value=${it.due ?? defaultDue(this.view, indexAt(this.view, at))} autocomplete="off"
+        @keydown=${(e: KeyboardEvent) => {
+          e.stopPropagation();
+          if (e.key !== 'Enter' && e.key !== 'Escape') return;
+          e.preventDefault();
+          this.saveDue(e.key === 'Enter', (e.target as HTMLInputElement).value);
+        }}
+        @change=${(e: Event) => this.saveDue(true, (e.target as HTMLInputElement).value)}
+        @blur=${(e: FocusEvent) => this.saveDue(true, (e.target as HTMLInputElement).value)} />`;
+    return it.due
+      ? html`<button type="button" class="ol-due" aria-label=${t('Due {date}: change it', { date: this.dayWords(it.due) })} @mousedown=${(e: Event) => e.preventDefault()} @click=${() => this.openDating(at)}>${icon(UI.calendar, 12)}<span>${this.dayWords(it.due)}</span></button>`
+      : nothing;
+  }
+  private openDating(at: number) {
+    this.naming = -1;
+    this.dating = at;
+    this.performUpdate();
+    const box = this.querySelector<HTMLInputElement>('input.ol-due-in');
+    box?.focus({ preventScroll: true });
+    box?.showPicker?.();
+  }
+  private saveDue(keep: boolean, value: string) {
+    const at = this.dating;
+    if (at < 0) return;
+    this.dating = -1;
+    if (keep) this.edit(setDue(this.doc, at, value || undefined));
+    void this.updateComplete.then(() => this.focusRow(at));
+  }
+  /** Insert ▾: the item in hand a task (a box before its words), or, a task already, its box checked or unchecked. */
+  addTask() {
+    const it = this.itemAt(this.sel);
+    if (!it || it.doc) return;
+    const b = this.doc.blocks[it.at];
+    this.edit(b?.k === 'li' && b.done !== undefined ? tick(this.doc, it.at) : makeTask(this.doc, it.at, true));
+  }
+  /** Mod+Enter in a row: its task's box checked or unchecked (a row that is no task is left alone). */
+  tickAt(at: number) {
+    this.edit(tick(this.doc, at));
+  }
+  /** Insert ▾: a due day on the item in hand, starting from today or the nearest day to come above it, typed where it shows. */
+  addDue() {
+    const it = this.itemAt(this.sel);
+    if (!it || it.doc) return;
+    if (!it.due) this.edit(setDue(this.doc, it.at, defaultDue(this.view, indexAt(this.view, it.at))));
+    void this.updateComplete.then(() => this.openDating(it.at));
+  }
+  /** Insert ▾: the document's statuses, TODO, DOING and DONE, written once in its head when it has none; the item in hand gets the first. */
+  addStatuses() {
+    const ops: Op[] = this.statuses.length ? [] : [{ op: 'head', key: 'statuses', value: DEFAULT_STATUSES }];
+    const it = this.itemAt(this.sel);
+    const doc = ops.length ? applyAll(this.doc, ops) : this.doc;
+    const st = statusesOf(doc);
+    if (it && !it.doc && !it.status && st.length) ops.push(...setStatus(doc, it.at, st[0].name, st));
+    if (ops.length) this.edit(ops);
+  }
   /** Another document under an item: its app and first line, a way to open it in its own app, and the way back (its link pasted over the card). */
   private renderDoc(it: Item) {
     const { app, gist } = docGist(it.doc!);
@@ -881,11 +997,13 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
         ${kids ? html`<button type="button" class="ol-fold" aria-label=${shut ? t('Unfold, {n|one inside|# inside}', { n: inside }) : t('Fold')} aria-expanded=${shut ? 'false' : 'true'} @mousedown=${(e: Event) => e.preventDefault()} @click=${() => this.fold(at)}>${icon(shut ? ChevronRight : ChevronDown, 14)}</button>` : nothing}
       </span>
       ${ends ? html`<span class="ol-bullet">${this.bullet(at, ends, n)}</span>${this.chip(at, it.label)}` : html`<span class="ol-bullet" @click=${(e: MouseEvent) => e.shiftKey && this.rows.choose(at, true)}><span class="ol-kind root" aria-hidden="true">${n ? html`<b class="ol-n">${n}.</b>` : html`<span></span>`}</span></span>`}
+      ${asDoc ? nothing : this.statusChip(at, it)}
       ${
         asDoc
           ? this.renderDoc(it)
           : html`<to-text shape="line" notes .blocks=${this.blocksFor(block)} .noteStart=${noteStart} label=${t('Item {n}', { n: i + 1 })} placeholder=${placeholder} @text-ops=${(e: CustomEvent<TextOps>) => this.onOps(at, e)} @text-enter=${(e: Event) => (e.stopPropagation(), this.onEnter(at))} @text-exit=${(e: CustomEvent<{ dir: 'back' | 'forward' }>) => (e.stopPropagation(), this.onExit(at, e.detail.dir))} @text-selectall=${(e: Event) => (e.stopPropagation(), this.rows.selectAll())} @text-select=${(e: CustomEvent<Sel | null>) => this.onSelect(at, e)} @text-note=${(e: CustomEvent<NoteAt>) => this.onNote(at, e)} @focusin=${(e: FocusEvent) => (this.field = e.currentTarget as ToText)}></to-text>`
       }
+      ${asDoc ? nothing : this.dueChip(at, it)}
       ${kids && shut ? html`<span class="ol-count" aria-hidden="true">${inside}</span>` : nothing}
       ${c && words && !it.doc && at !== c.from ? html`<button type="button" class="ol-pick" aria-label=${c.from < 0 ? t('Connect from “{words}”', { words }) : t('Connect “{from}” to “{to}”', { from: plainText(this.itemAt(c.from)?.runs ?? []).trim(), to: words })} @click=${() => this.pick(at)}></button>` : nothing}
     </div>`;

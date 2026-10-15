@@ -6,7 +6,7 @@
  * the arrows between rows at the edge of a row's words. A key acts on the row it is typed in; a button on the row
  * that has the caret. Rows chosen whole are the rows controller's (kit/text/rows-commands.ts).
  */
-import { ArrowDown, ArrowUp, Eye, FoldVertical, Link2, ListOrdered, Plus, UnfoldVertical, ZoomIn, ZoomOut } from 'lucide';
+import { ArrowDown, ArrowUp, Eye, FoldVertical, Link2, ListOrdered, Plus, Tag, UnfoldVertical, ZoomIn, ZoomOut } from 'lucide';
 import { appOf, apps } from '../../kit/core/apps.ts';
 import { register, type Command, commandsOf } from '../../kit/core/commands.ts';
 import { t } from '../../kit/core/i18n.ts';
@@ -25,6 +25,10 @@ const words = (o: O) => !!o.itemAt(o.sel) && !o.itemAt(o.sel)!.doc;
 export const INSERTS: Command<O>[] = [
   cmd('insert.item', 'Item', { icon: Plus, where: ['menu:insert'], does: (o) => o.addItem() }),
   cmd('insert.doc', 'Tiny Little Office Doc…', { icon: UI.insert, where: ['menu:insert'], does: (o) => o.insertLinked() }),
+  // The compound bullet (Paul, 2026-10-15): a task's box, a status of the document's set, a due day.
+  cmd('insert.task', 'Task', { icon: UI.check, where: ['menu:insert'], disabled: (o) => !words(o), does: (o) => o.addTask() }),
+  cmd('insert.due', 'Due date', { icon: UI.calendar, where: ['menu:insert'], disabled: (o) => !words(o), does: (o) => o.addDue() }),
+  cmd('insert.statuses', 'Statuses', { icon: Tag, where: ['menu:insert'], does: (o) => o.addStatuses() }),
   ...apps()
     .filter((a) => a.id !== 'outline')
     .map((a) => cmd(`insert.app.${a.id}`, () => a.name, { icon: a.icon, data: true, heading: 'A new document', where: ['menu:insert'], does: (o) => o.insertApp(a.id) })),
@@ -68,6 +72,7 @@ const OUTLINE: Command<O>[] = [
   cmd('view', 'View as', { icon: Eye, menu: 'view', where: ['bar'], document: true, takesFocus: true, does: () => undefined }),
   cmd('view.page', 'As a page', { icon: UI.print, where: ['menu:view'], does: (o) => o.showPage() }),
   ...(def.handoffs ?? []).map((h, i) => cmd(`view.${h.to}${i}`, () => h.label(), { icon: appOf(h.to)?.icon, where: ['menu:view'], when: () => !!appOf(h.to), does: (o) => o.openAs(h) })),
+  cmd('tick', 'Check or uncheck a task', { at: 'words', keys: 'Mod+Enter', where: ['keys-only'], does: (o, e) => o.tickAt(at(o, e)) }),
   cmd('fold', 'Fold, unfold', {
     at: 'words',
     keys: 'Mod+Alt+ArrowUp / Mod+Alt+ArrowDown',

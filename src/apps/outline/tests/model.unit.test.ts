@@ -605,3 +605,72 @@ test('footnotes in the files: each an item right under its own, first among its 
   // The document itself is untouched: the notes stay inline.
   expect(write(parse(NOTED))).toBe(NOTED);
 });
+
+// The compound bullet (Paul, 2026-10-15): statuses set once in the head, a status and a due day as an item's attributes,
+// the task's box and the status keeping together; a document from before, or with attributes of its own, is left as it was.
+test('statuses come from the head, a name and a color each, the last the done one; a document without the line has none', async () => {
+  const { statusesOf, STATUS_COLORS, DEFAULT_STATUSES } = await import('../model.ts');
+  expect(statusesOf(parse('---\nstatuses: TODO=red, DOING=yellow, DONE=green\n---\n- a\n'))).toEqual([
+    { name: 'TODO', color: STATUS_COLORS.red },
+    { name: 'DOING', color: STATUS_COLORS.yellow },
+    { name: 'DONE', color: STATUS_COLORS.green },
+  ]);
+  // A color unknown is gray; no color is gray; a name twice is once; spaces are forgiven.
+  expect(statusesOf(parse('---\nstatuses: Later = mauve ,Now, Now, Soon=blue\n---\n'))).toEqual([
+    { name: 'Later', color: STATUS_COLORS.gray },
+    { name: 'Now', color: STATUS_COLORS.gray },
+    { name: 'Soon', color: STATUS_COLORS.blue },
+  ]);
+  expect(statusesOf(parse('- a\n'))).toEqual([]);
+  expect(statusesOf(parse(`---\nstatuses: ${DEFAULT_STATUSES}\n---\n`)).map((s) => s.name)).toEqual(['TODO', 'DOING', 'DONE']);
+});
+
+test('a status and a due day are the item’s attributes, kept beside the line’s own and anything else written there', async () => {
+  const { setStatus, setDue, makeTask, tick, followTick, defaultDue } = await import('../model.ts');
+  // (Blocks count from the first item: the head is no block.)
+  const doc = parse('---\nstatuses: TODO=red, DOING=yellow, DONE=green\n---\n- Draft {.from label=sets color=teal}\n  - [ ] Outline\n');
+  const v = readOutline(doc);
+  expect(v.items[0]).toMatchObject({ label: 'sets' });
+  expect(v.items[0].dir).toBeDefined();
+  expect(v.items[0].status).toBeUndefined();
+  let d = applyAll(doc, setStatus(doc, 0, 'DOING'));
+  expect(write(d)).toBe('---\nstatuses: TODO=red, DOING=yellow, DONE=green\n---\n- Draft {.from label=sets color=teal status=DOING}\n  - [ ] Outline\n');
+  expect(readOutline(d).items[0].status).toBe('DOING');
+  d = applyAll(d, setDue(d, 0, '2026-10-20'));
+  expect(write(d)).toContain('{.from label=sets color=teal status=DOING due=2026-10-20}');
+  expect(readOutline(d).items[0].due).toBe('2026-10-20');
+  // A day that is not one is no day; none takes it away.
+  expect(setDue(d, 0, 'tomorrow')).toEqual(setDue(d, 0, undefined));
+  d = applyAll(d, setDue(d, 0, undefined));
+  expect(write(d)).toContain('{.from label=sets color=teal status=DOING}');
+  // The last status checks a task's box; another unchecks it; a status on no task touches no box.
+  d = applyAll(d, setStatus(d, 1, 'DONE'));
+  expect(write(d)).toContain('- [x] Outline {status=DONE}');
+  d = applyAll(d, setStatus(d, 1, 'TODO'));
+  expect(write(d)).toContain('- [ ] Outline {status=TODO}');
+  expect(write(applyAll(d, setStatus(d, 0, 'DONE')))).toContain('- Draft {.from label=sets color=teal status=DONE}');
+  // The box checked goes to the last status; unchecked from the last, to the first; a document with no statuses has only the box.
+  d = applyAll(d, tick(d, 1));
+  expect(write(d)).toContain('- [x] Outline {status=DONE}');
+  d = applyAll(d, tick(d, 1));
+  expect(write(d)).toContain('- [ ] Outline {status=TODO}');
+  const plain = parse('- [x] a {status=x}\n');
+  expect(write(applyAll(plain, tick(plain, 0)))).toBe('- [ ] a {status=x}\n');
+  // Checked by the words' own editor, the status follows the same way.
+  const after = applyAll(d, [{ op: 'splice', at: 1, n: 1, blocks: [{ ...d.blocks[1], done: true } as (typeof d.blocks)[1]] }]);
+  expect(write(applyAll(after, followTick(after, 1)))).toContain('- [x] Outline {status=DONE}');
+  // A task made and unmade.
+  d = applyAll(d, makeTask(d, 0, true));
+  expect(write(d)).toContain('- [ ] Draft {.from label=sets color=teal status=DOING}');
+  d = applyAll(d, makeTask(d, 0, false));
+  expect(write(d)).toContain('- Draft {.from label=sets color=teal status=DOING}');
+  // The line's kind set afterwards keeps the box and the attributes.
+  const task = parse('- a\n  - [x] b {status=DONE due=2027-01-02}\n');
+  expect(write(applyAll(task, setLine(task, readOutline(task), 1, { dir: '->' })))).toBe('- a\n  - [x] b {.from status=DONE due=2027-01-02}\n');
+  // A due day to start from: the nearest day still to come above, else today.
+  const dated = readOutline(parse('- a {due=2026-10-20}\n- b {due=2026-01-01}\n- c\n- d {due=2026-11-05}\n- e\n'));
+  expect(defaultDue(dated, 4, '2026-10-15')).toBe('2026-11-05');
+  expect(defaultDue(dated, 2, '2026-10-15')).toBe('2026-10-20');
+  expect(defaultDue(dated, 0, '2026-10-15')).toBe('2026-10-15');
+  expect(defaultDue(dated, 4, '2026-12-01')).toBe('2026-12-01');
+});

@@ -12,6 +12,7 @@ import type { ToText } from '../../../kit/text/text.ts';
 import { caret } from '../../../kit/text/textops.ts';
 import { until, tick } from '../../../../test/browser/helpers.ts';
 import { encodeDoc } from '../../../kit/core/codec.ts';
+import { write, type Doc } from '../../../doc/index.ts';
 import { remScale } from '../../../kit/ui/zoom.ts';
 
 const TREE = '- Launch\n  - Product\n    - Pricing\n  - Marketing\n';
@@ -169,7 +170,7 @@ test('the bullet opens the kinds of line, each named for the items it joins; the
   bullet().click();
   await until(() => !!document.querySelector('[popover]:popover-open'));
   const items = [...document.querySelectorAll<HTMLElement>('[popover]:popover-open [role^=menuitem]')];
-  expect(items.map((x) => x.textContent!.trim())).toEqual(['Plain line', 'Arrow from Product to Pricing', 'Arrow from Pricing to Product', 'Arrows both ways', 'Name the line']);
+  expect(items.map((x) => x.textContent!.trim())).toEqual(['Plain line', 'Arrow from Product to Pricing', 'Arrow from Pricing to Product', 'Arrows both ways', 'Name the line', 'Due date…']);
   expect(document.querySelector('[popover]:popover-open [role=menuitemcheckbox][aria-checked=true]')!.textContent!.trim()).toBe('Plain line');
   items[1].click();
   await el.updateComplete;
@@ -1001,4 +1002,39 @@ test("§1 opens with the focus in the first row's words, the caret at their end,
   await blank.focusFirst();
   await until(() => !!blank.querySelector<ToText>('.ol-row to-text')?.hasFocus());
   expect(document.scrollingElement!.scrollTop).toBe(0);
+});
+
+// The compound bullet (Paul, 2026-10-15): a status pill before the words in its color, a tap the next of the set; a due
+// chip after them; a task's box and the status keeping together (Mod+Enter checks the box and the status goes to the last).
+test('statuses: a pill before the words, tapped to the next; a due chip after them; Mod+Enter checks the box and the status follows', async () => {
+  const { el } = await editor('---\nstatuses: TODO=red, DOING=yellow, DONE=green\n---\n- Plan {status=TODO due=2027-03-01}\n  - [ ] Draft {status=DOING}\n  - Quotes\n');
+  const docOf = (x: ToOutlineEditor) => (x as unknown as { doc: Doc }).doc;
+  const pills = () => [...el.querySelectorAll<HTMLButtonElement>('.ol-status')].map((b) => b.textContent!.trim());
+  expect(pills()).toEqual(['TODO', 'DOING']);
+  expect(el.querySelector<HTMLElement>('.ol-status')!.style.getPropertyValue('--ol-status')).toBe('#b3261e');
+  const due = el.querySelector<HTMLButtonElement>('.ol-due')!;
+  expect(due.textContent!.replace(/\s+/g, ' ').trim()).toMatch(/Mar 1/);
+  expect(due.getAttribute('aria-label')).toMatch(/^Due Mar 1, 2027: change it$/);
+  // A tap on the pill: the next status, round the end.
+  el.querySelector<HTMLButtonElement>('.ol-status')!.click();
+  await el.updateComplete;
+  expect(pills()).toEqual(['DOING', 'DOING']);
+  expect(write(docOf(el))).toContain('- Plan {status=DOING due=2027-03-01}');
+  el.querySelector<HTMLButtonElement>('.ol-status')!.click();
+  el.querySelector<HTMLButtonElement>('.ol-status')!.click();
+  await el.updateComplete;
+  expect(pills()[0]).toBe('TODO');
+  // Mod+Enter in the task's row: checked, and DONE; again: unchecked, and TODO.
+  // (Rows by their block: Plan 0, Draft 1, Quotes 2; the head is no block.)
+  const tx = textOf(el, 1);
+  tx.focus();
+  tx.tx.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', ctrlKey: true, bubbles: true, cancelable: true }));
+  await el.updateComplete;
+  expect(write(docOf(el))).toContain('- [x] Draft {status=DONE}');
+  tx.tx.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', ctrlKey: true, bubbles: true, cancelable: true }));
+  await el.updateComplete;
+  expect(write(docOf(el))).toContain('- [ ] Draft {status=TODO}');
+  // The row with no status shows no pill and no chip; the words are untouched throughout.
+  expect(row(el, 2).querySelector('.ol-status, .ol-due')).toBeNull();
+  expect(write(docOf(el))).toContain('  - Quotes\n');
 });

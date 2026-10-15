@@ -157,7 +157,9 @@ the formula engine. An invoice is a text whose fields are head keys (`from`, `to
 ```
 
 An item joins its parent plainly, or `{.from}`, `{.to}`, `{.both}`, with `label="…"`. A text of headings and
-paragraphs reads as a tree too.
+paragraphs reads as a tree too. An item may be a task (`- [ ]`, `- [x]`), carry a status of the document's own
+set, written once in the head (`statuses: TODO=red, DOING=yellow, DONE=green`, a name and a color each, the last
+the done one, which a task's box follows), `{status=DOING}`, and a due day, `{due=2026-10-20}`.
 
 **deck** (Presentation Builder): a slide between each `---`. `## :icon-name: Headline {.title}` (or `.two`,
 `.icon`); `- ` bullets; a paragraph `|` between the columns of a `.two` slide; `> ` speaker notes; a fence or a
