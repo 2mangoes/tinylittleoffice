@@ -540,9 +540,9 @@ common-indent-or-bring-out-in = 增加或減少清單項目的縮排；在表格
 common-move-selected-items-up-or = 把選取的項目上移或下移
 # en: 989fe994e413c509c03d3dd229b775a3ddc4707b
 common-nudge-shapes-in-hand = 微移已選取的圖形
-# en: 4a5e249fca3c45e7dcf1a7e41cf691e7ddef79d7
-common-select-all-words-of-box = 全選：先選方塊裡的文字，再選全部
-# en: 0720e9772b354dd120b32e908da11a661678feb3
+# en: b11d72438f1b00b65769e9b8597829583dc4d631
+common-select-all-words-of-box = 全選（先選這個欄位，再選整份文件）
+# en: be76d0b25853b431767ca5b5d57ef569bbc6ff2a
 common-back-to-words = 回到文字
 # en: 0c0b01d469faff60dc3b2d1c035ee0a7caa03852
 common-extend-selection = 延伸選取範圍
@@ -633,8 +633,8 @@ editor-connection = 連線
 editor-n-rows = { $n ->
        *[other] { $n } 列
     }
-# en: 5fd293bbb97b4a31a5ba14065ba2e1608b88f1ad
-editor-notes-words = 註腳的內容
+# en: 221e4b1822bb3e80534c57d63a89d0f58d85c77b
+editor-notes-words = 附註文字
 # en: e9b450d14bc2363d292c84f17cfad5cfbd58a458
 common-done = 完成
 # en: d70f93df5e8f9b55be44fbeee9d203972e3383d4
@@ -744,8 +744,8 @@ common-ok = 確定
 write-this-card = 這張卡片
 # en: 1e06557fc0660e50a99fa6eef90bff822411e3ae
 write-open-in-app = 在{ $app }中開啟
-# en: 53463fcefe7fa6abac99971c0c626ac924df17ff
-write-locked-worked-out-for-you = 已鎖定：由系統為你計算
+# en: 108add9c9b3eed03ee5eb57783d780a485840218
+write-locked-worked-out-for-you = 已鎖定：計算得出
 # en: ec0c3b76630fd745381cc215a284820af75a683a
 common-footnotes = 註腳
 # en: 5c71d5f47999af43b0a80e72abd8e5b79e736f80
@@ -766,8 +766,8 @@ write-rich-text-rtf = RTF 格式（RTF）
 # A table in the text: its heads, its handle, its column menu.
 # en: f4344253d823d09db13bc3877d37c9618588506a
 write-add-column-before = 在前面加一欄
-# en: e5dfecd5799f77f96f52282a8db4966dd1336fab
-write-column-c-what-it-holds = 第 { $c } 欄：欄的內容、命名、新增或移除欄
+# en: 9b3acfc74a5d37d699868ade0ed3d142024174cf
+write-column-c-what-it-holds = 第 { $c } 欄：類型、名稱、新增或移除
 # en: 1f01479a40aa348fc273d4d09636403f89eff717
 write-table-move-copy-or-take = 表格：移動、複製或刪除
 # The templates
@@ -1112,18 +1112,18 @@ sheet-checkbox = 核取方塊
 sheet-column-after = 後面的欄
 # en: 6d36997d9f52785865f243c2436502c328d12b1f
 common-column-c = 第 { $c } 欄
-# en: b4944b6f541b60bda00feb402803be5d6067675e
-common-column-c-holds = 第 { $c } 欄的內容
-# en: 4499854738b57ae07b0110d2b352f1a32d3b152d
-sheet-column-c-type-what-it = 第 { $c } 欄：{ $type }。設定內容、依它排序、新增或移除欄
+# en: b4a57f5f40871854cb181f17a04c4e72c5c4048a
+common-column-c-holds = 第 { $c } 欄的類型
+# en: b657e2a4e550834ea13d1026bf21694fb9a65c3c
+sheet-column-c-type-what-it = 第 { $c } 欄：{ $type }。類型、排序、新增或移除
 # en: cf723c59b62a173547c39c3d661c4ee7c240bab1
 common-columns = 欄
 # en: 40c14f884fe7e5b4e58ea4bd6f6d522bae43134b
 common-delete-which = 刪除{ $which }
 # en: 51f5ba33dabbc2c8aa4e3e640e0b27cb55aea1be
 common-drag-to-fill = 拖曳以填滿
-# en: 4300e1f370e83fbb06f1c9207abed5a7468b09d4
-sheet-abc-or-123-for-this = 此欄用 ABC 或 123
+# en: 87b8f44339c3a345782b1fa838bfa3b0406567b3
+sheet-abc-or-123-for-this = 欄類型
 # en: 69ff8ba19299f697ed3f5401bb7c03f0abbc4c67
 sheet-drag-to-resize-double-click = 拖曳調整大小，按兩下自動符合
 # en: 363a9922cf56c76397d7b72ae8425d30d0438b33
@@ -1152,8 +1152,8 @@ common-insert-n-rows-below = 在下方插入{ $n ->
 sheet-letters-keyboard = 字母鍵盤
 # en: 7177342b32d961e7d51feb4571231982a48a0772
 sheet-lock-these-cells-so-reader = 鎖定這些儲存格，讓讀者無法更改
-# en: b375da8098132564f70d56ad1eff132365d8b9d1
-sheet-locked-part-of-model = 已鎖定：模型的一部分
+# en: 893190219ca26f4bad6f2395b91da6295cab23b6
+sheet-locked-part-of-model = 已鎖定：屬於模型的公式
 # en: b1b588e8ffba9c37d560f4b4d63c6344d009ce2e
 sheet-low-to-high = 由低到高
 # en: 1dc043bb8eb5646851ff808477bb5d3573739f1c
@@ -1162,8 +1162,8 @@ sheet-money = 金額
 common-name = 名稱
 # en: 3f37ebdc04c6216818bd5bbf8724175546a880c8
 common-name-of-column-c = 第 { $c } 欄的名稱
-# en: 14722c54065ed256f2bf3a74d2970dada5bc258f
-sheet-names-cell-to-its-right = 為右邊的儲存格命名
+# en: c103a2458adcf85547000188a915ccb91f45ee9c
+sheet-names-cell-to-its-right = 右邊儲存格的名稱
 # A money column's currency (Money picked in a column's menu): the field's hint, and what it says of words it cannot read.
 # en: d02550533b8780a7e646803c3b7b9cb7a78ba756
 sheet-symbol-like-or-code-like = 符號（例如 $）或代碼（例如 USD）。留空則使用文件本身的設定。
@@ -1201,31 +1201,31 @@ common-rows-b = 第 { $a }–{ $b } 列
 sheet-selected-cells = 已選取的儲存格
 # en: 26b30f90bad8aab892824738a0dc60bd11d082be
 sheet-show-all-text = 顯示全部文字
-# en: a9b6a5a2efbec8d67861fd7ab52e6271418b8cd2
-sheet-shown-as-typed = 依輸入顯示
+# en: 9580fcbce0c31ceaa47eb583e5f7ce637fdc8a0a
+sheet-shown-as-typed = 純文字
 # en: c12db2695e9c15f7715a069ba77a45dd33c4683e
 sheet-sort-rows-by-it = 依它排序各列
 # en: ff87bd67a9f3709f0a4247baa8ba4de4a5bd5fd2
 sheet-suggested = 建議
-# en: 4050cbaac068275a61f69723f6c0b29ab966d7e8
-sheet-is-as-wide-as-it = 工作表已經到最寬：二十六欄。
-# en: bd9f4c72490e708697d5c6d7846ebfa62a711281
-sheet-is-full-its-last-rows = 工作表已滿：最後幾列有內容。
-# en: 7cb9220da44144deb85c13ec8e69fa644916724d
-sheet-three-at-least = 至少三個
+# en: eda0b8f3c389658a7369166fd4c36099e380adff
+sheet-is-as-wide-as-it = 工作表已達到最多 26 欄。
+# en: 0f54b98f336606a21f0bcbdc77afa4474b2b1966
+sheet-is-full-its-last-rows = 無法新增列：最後幾列不是空的。
+# en: 7a74dff615ee3bcbc90d8c31886f01082413c776
+sheet-three-at-least = 最少 3
 # en: c97ecbf8fed8c8a3a0d51412e2e9bd4c8539ba26
 sheet-unlock-these-cells = 解除鎖定這些儲存格
-# en: c14d4d98724cb0aa9a4c8a3a65d493c7f6406d9f
-sheet-what-it-holds-sort-columns = 內容、排序、欄
+# en: 7e592be640ccac5b2bdf24df5b74d19326b5094a
+sheet-what-it-holds-sort-columns = 類型、排序、欄
 # The Spreadsheet: any column removed, the Option column, rich cells, a chart put in from Insert.
-# en: 5077338712b6fc3d4b8edebc216ff1d65a65471d
-sheet-keeps-one-column = 工作表至少要保留一欄
+# en: 63362bbc585e9e03cbf63abe945bcf99aa4d8cc5
+sheet-keeps-one-column = 工作表至少需要一欄
 # en: 7208e66f41dd004e736a1840e2a99d288a4c2060
 sheet-choices = 選項
 # en: 38b6d89278519f90efb25eb841096bc63d9095e0
 sheet-choices-for-ref = { $ref }的選項
-# en: bf229951b6c3aba975bc87a4c08a9c1449f86d97
-sheet-has-one = 工作表只有一個
+# en: a871e2c9206cb4854cc06c30bc6de95cb82f9700
+sheet-has-one = 工作表已經有圖表了
 # en: 5cc509a6f6fbd1ca18401f39e39b705757af20da
 sheet-edit-cell-caret-at-its = 編輯儲存格，游標在最後
 # en: a029b0313f2c7a4c819051865f98357f813460b3
@@ -1545,7 +1545,7 @@ draw-as-repeating-background = 作為重複的背景
 draw-dashed-line = 虛線
 # en: 8953b1fb5c8eeda2158dfd09bde1a766d4b9079d
 draw-dotted-line = 點線
-# en: b03ed9d95606c4c30929c4a88162bd884c738b86
+# en: 6597b9e38708468a6ada223bbd324b34dd9b8d23
 common-edit-words = 編輯文字
 # en: 73a03229ad334f953ab9119481b53f881218d015
 draw-extra-large-text = 特大字
@@ -1572,18 +1572,18 @@ draw-solid-fill = 實心填色
 draw-solid-line = 實線
 # en: b233a397b799e80f21b88a34ae7e30af0528d1c1
 draw-shape-in-hand = 已選取的圖形
-# en: 8b2897e25c2be27d9c96a9ef61306890918e2a8d
-draw-words-of-shape = 圖形的文字
-# en: 5349a3c3f38695d839d88888c187ce4536d3f2d3
-draw-type-words-enter-is-done = 輸入文字；Enter 完成，Shift+Enter 換行，Escape 還原。
+# en: 6be4ddf808de37e8c50aae4f621dd09b03f5a4e6
+draw-words-of-shape = 圖形文字
+# en: 1737205dd1aad709dc2209b2e892ffb8c4de0fc8
+draw-type-words-enter-is-done = 輸入文字。Enter 完成，Shift+Enter 換行，Escape 取消。
 # same
 # en: a2f9d0d16d02a20ef369e6029d9e5929c3d70d3e
 draw-xl = XL
 
-# en: 4c3ee506fc80d61c11840ef0193350a6af7c8f01
-draw-drag-to-move-corner-handle = 拖曳以移動；角落的控點調整大小，圓形的控點旋轉；按 Enter 或點兩下編輯文字。
-# en: 19dfa02a0be55dbab49b30d3c181e058d9f1d8c9
-draw-drawing-canvas-v-selects-r = 繪圖畫布。V 選取；R、E、D、L、A、T 繪製；方向鍵微調位置；[ 和 ] 旋轉；Enter 編輯文字；Delete 刪除。
+# en: aba6eb7da15924b741fdff98ff19be9915cd84f1
+draw-drag-to-move-corner-handle = 拖曳移動。角落的控點調整大小，圓形控點旋轉。按 Enter 或點兩下編輯文字。
+# en: 9cacab39109399036915a6b67336853e622472cd
+draw-drawing-canvas-v-selects-r = 繪圖畫布。V 選取；R、E、D、L、A、T 繪製；方向鍵微移；[ 和 ] 旋轉；Enter 編輯文字；Delete 移除。
 # en: 4421c5912fa5d727f23883b0a69028e195e3717b
 draw-tap-shape-to-select-it = 點一下圖形即可選取，或拖曳框住多個圖形。要繪圖，請選一個工具。
 # en: 6f72f3cd1255e9bb344a1f9adb5fc64770f07cd5
@@ -1849,8 +1849,8 @@ outline-kind-of-line = 線條種類
 common-launch-plan = 上線計畫
 # en: 72eee0aaa10010ae7d362761115dfd7e064dd4d4
 outline-line-from-from-to-to = 從{ $from }到{ $to }的線
-# en: 3ea1607fe3acfd1d168265a82ffd2b308d48d85c
-outline-line-named-label-change-it = 名為「{ $label }」的線：更改它
+# en: 2859ccc92143006360893c2a9cb1aaaa13b3928f
+outline-line-named-label-change-it = 標籤為「{ $label }」的線條：編輯
 # en: 52d55422c1936db72f18f5b9e960c2719a3560d7
 common-animator = 動畫
 # en: 260ff8ae7182fc851337b6b2fdb25f8cac2b8d47
@@ -1859,8 +1859,8 @@ common-move-down = 下移
 outline-move-this-item-drag-it = 移動這個項目：拖曳到另一個項目上
 # en: b4f57cd0cd5c7d88461c1718646713dea47a36c9
 common-move-up = 上移
-# en: c5e2a17fb694ffabd819ce32e509f8e355bae85a
-outline-name-of-line = 線的名稱
+# en: 5b2d4bd98ab95d9eae0b3c956cbf98aefe9d7793
+outline-name-of-line = 線條標籤
 # en: 3aea913567c437a81d3c153ce49d321f64099651
 outline-numbered = 編號
 # en: 89db2d16f087d4e687143e9a0071f77af473f9d8
@@ -1976,8 +1976,8 @@ outline-who-works-for-whom-at = 一家九人烘焙坊的上下隸屬，每人附
 outline-pdf-sections-and-bullets = PDF：章節與項目符號
 # en: 3c71fd388bfd921496968bc15422a0937a264ebc
 outline-fold-unfold = 摺疊、展開
-# en: de07d2d064ab6a1f60cc3fea17a94e703482f820
-outline-name-line = 為這條線命名
+# en: 74341e3c271df3c784e595b804b1f90be0f80429
+outline-name-line = 標籤
 
 ## the Presentation Builder
 
@@ -2194,8 +2194,8 @@ deck-one-bullet-line = 一行一個項目符號。
 deck-one-bullet-line-tab-steps = 一行一個項目符號。按 Tab 縮排。
 # en: f8948a4a523b4312c5567f9cff1f6788c757998f
 deck-line-or-two-under-title = 標題下方的一兩行字
-# en: 1913f859db14be9d00c8087bb16fd463e33117af
-deck-what-this-page-says-type = 這一頁要說的話。字級會自動縮小以符合頁面。
+# en: 236bcf1c6a83d3b0f85a065c777d7948b22a0c22
+deck-what-this-page-says-type = 頁面文字。它會縮小以符合頁面。
 # en: e80e281dac24d9c4c3f60dcdbf8700e9603b825e
 deck-panel-line-what-is-said = 一行一格：說的話 | 圖說。「圖示」可加上圖片。
 # en: 3d6e76c9325034deb76b92c8cc47a2d3c22fcdf3
@@ -2583,8 +2583,8 @@ diagram-join = 連接
 diagram-make-it-plain-line = 改成普通線條
 # en: d7c2f8db0073a31e8e0ded4d2a13d8076ba44fd6
 diagram-make-it-arrow = 改成箭頭
-# en: 0f4684c55b2233950d33177cd8b36afb2dff2c86
-diagram-what-connection-says = 這條連線代表什麼
+# en: a07496767ed7e5caf20bb803434a1aa088aaa97b
+diagram-what-connection-says = 連線標籤
 # en: 7d531617dd394cef59d3cf58fc32b3bc458f6744
 diagram-who = 誰
 # en: b48a4ad455ccc1431a4d3304864d95fb5de61df2
@@ -3094,8 +3094,8 @@ compare-n-put-in = { $n ->
 
 # en: c99db7abba3f7227854d93a163ad3494de4e1571
 open-opened-name = 已開啟 { $name }
-# en: 90dd520de97cc996176f013da9d5f056fd05ac19
-open-that-file-is-not-words = 小小辦公室讀不懂這個檔案的內容。
+# en: f917dee4211bd4af58db8efec79e354e1ffb4912
+open-that-file-is-not-words = Tiny Little Office 無法讀取那個檔案。
 # en: 1d08903947cc83b648f8ad96b1e23466a2dbed11
 open-that-file-is-too-large = 那個檔案太大了。
 # en: 8f432852569edbf7610713a6554e7a61396327d5

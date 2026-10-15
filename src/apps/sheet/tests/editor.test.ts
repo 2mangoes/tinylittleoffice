@@ -212,7 +212,7 @@ test('any column may go, whatever it holds: in one step undone, references into 
   await until(() => !!document.querySelector('[popover]:popover-open:not(.to-context)'));
   const remove = [...document.querySelectorAll<HTMLButtonElement>('[popover]:popover-open:not(.to-context) [role^=menuitem]')].find((x) => x.textContent!.includes('Remove this column'))!;
   expect(remove.disabled).toBe(true);
-  expect(remove.textContent).toContain('A sheet keeps one column');
+  expect(remove.textContent).toContain('A sheet needs at least one column');
   document.querySelector<HTMLElement>('[popover]:popover-open:not(.to-context)')!.hidePopover();
   await tick();
 });

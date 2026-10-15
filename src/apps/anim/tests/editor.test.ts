@@ -427,7 +427,7 @@ test("a shape in hand has the contextual bar under it, in the standard's order, 
   await tap(el, 96, 320);
   await until(() => ctx.querySelector('.to-context')!.matches(':popover-open'));
   const names = [...ctx.querySelectorAll('.to-context > *')].map((b) => (b.matches('[role=separator]') ? '|' : b.getAttribute('aria-label')));
-  expect(names).toEqual(['Add a key here', 'Remove this key', '|', 'Edit the words', 'Duplicate', '|', 'Copy', 'Cut', 'Paste', '|', 'Delete']);
+  expect(names).toEqual(['Add a key here', 'Remove this key', '|', 'Edit text', 'Duplicate', '|', 'Copy', 'Cut', 'Paste', '|', 'Delete']);
   // Under the shape.
   const box = el.querySelector('.anim-stage .hit.sel > rect')!.getBoundingClientRect();
   expect(ctx.querySelector('.to-context')!.getBoundingClientRect().top).toBeGreaterThanOrEqual(box.bottom - 1);

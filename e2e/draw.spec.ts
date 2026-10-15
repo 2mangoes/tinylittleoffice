@@ -90,7 +90,7 @@ test("draw: a shape tapped has its contextual bar inside the screen, and the bar
   const shape = (await canvas.locator('[data-idx="0"]').boundingBox())!;
   expect(r.y >= shape.y + shape.height - 1 || r.y + r.height <= shape.y + 1).toBe(true);
   // Its words, typed on the shape itself from the bar's Edit the words: the overlay has the focus at once.
-  const edit = bar.getByRole('button', { name: 'Edit the words' });
+  const edit = bar.getByRole('button', { name: 'Edit text' });
   if (touch) await edit.tap();
   else await edit.click();
   const words = page.locator('.draw-words .tx');

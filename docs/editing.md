@@ -215,7 +215,7 @@ whose rows are the document's own data (the sheet's column kinds, the formula fu
 | `Alt+ArrowUp` | Move up | keys only |
 | `Alt+ArrowDown` | Move down | keys only |
 | `Mod+Enter` | Check or uncheck a task | keys only |
-| `Mod+A` | Select all: the words of the box, then everything | keys only |
+| `Mod+A` | Select all (this field first, then the whole document) | keys only |
 
 ### Rows chosen whole (`rows`)
 
@@ -233,8 +233,8 @@ whose rows are the document's own data (the sheet's column kinds, the formula fu
 | `Mod+V` | Paste | context |
 | `Delete`, `Backspace` | Delete | context |
 | `Shift+ArrowUp`, `Shift+ArrowDown` | Extend selection | keys only |
-| `ArrowUp`, `ArrowDown`, `ArrowLeft`, `ArrowRight` | Back to the words | keys only |
-| `Mod+A` | Select all: the words of the box, then everything | keys only |
+| `ArrowUp`, `ArrowDown`, `ArrowLeft`, `ArrowRight` | Back to text | keys only |
+| `Mod+A` | Select all (this field first, then the whole document) | keys only |
 
 ### Word Processor (`write`)
 
@@ -266,8 +266,8 @@ whose rows are the document's own data (the sheet's column kinds, the formula fu
 | `Mod+X` | Cut | context, at: card |
 | `Mod+V` | Paste | context, at: card |
 | `Delete`, `Backspace` | Delete | context, at: card |
-| `Escape`, `ArrowDown`, `ArrowRight` | Back to the words | keys only, at: card |
-| `ArrowUp`, `ArrowLeft` | Back to the words | keys only, at: card |
+| `Escape`, `ArrowDown`, `ArrowRight` | Back to text | keys only, at: card |
+| `ArrowUp`, `ArrowLeft` | Back to text | keys only, at: card |
 
 ### Outliner (`outline`)
 
@@ -372,7 +372,7 @@ whose rows are the document's own data (the sheet's column kinds, the formula fu
 | `Alt+ArrowUp` | Move up | row ▾, at: cell |
 | `Alt+ArrowDown` | Move down | row ▾, at: cell |
 | `Mod+Alt+-` | Delete  | row ▾, at: cell |
-| `Mod+A` | Select all: the words of the box, then everything | keys only, at: cell |
+| `Mod+A` | Select all (this field first, then the whole document) | keys only, at: cell |
 | `Mod+Enter` | Done | keys only, at: cell |
 | `Tab`, `Shift+Tab` | Indent or outdent a list item; next cell in a table | keys only, at: cell |
 | `F2` | Edit the cell, the caret at its end | keys only, at: cell |
@@ -405,14 +405,14 @@ whose rows are the document's own data (the sheet's column kinds, the formula fu
 | `Enter` | Done | keys only, at: entry |
 | `ArrowUp`, `ArrowDown` | The next or the one before | keys only, at: entry |
 | `Escape` | Clear the line | keys only, at: entry |
-| `Mod+A` | Select all: the words of the box, then everything | keys only, at: entry |
+| `Mod+A` | Select all (this field first, then the whole document) | keys only, at: entry |
 | `Enter` | Done | keys only, at: line |
 | `Escape` | Close or deselect | keys only, at: line |
 | `Alt+ArrowUp`, `Alt+ArrowDown` | Move the selected items up or down | keys only, at: line |
 | `Shift+ArrowUp`, `Shift+ArrowDown` | Extend selection | keys only, at: line |
 | `ArrowUp`, `ArrowDown` | The next or the one before | keys only, at: line |
 | `Mod+D` | Duplicate | keys only, at: line |
-| `Mod+A` | Select all: the words of the box, then everything | keys only, at: line |
+| `Mod+A` | Select all (this field first, then the whole document) | keys only, at: line |
 | `Backspace` | Delete | keys only, at: line |
 
 ### Drawing Tool (`draw`)
@@ -467,7 +467,7 @@ whose rows are the document's own data (the sheet's column kinds, the formula fu
 |  | Align: left | context |
 | `[` | Rotate left | context, at: canvas |
 | `]` | Rotate right | context, at: canvas |
-| `Enter` | Edit the words | context, at: canvas |
+| `Enter` | Edit text | context, at: canvas |
 |  | Join two shapes | context |
 | `Mod+D` | Duplicate | context, arrange ▾, at: canvas |
 |  | Bring to front | context, arrange ▾ |
@@ -481,7 +481,7 @@ whose rows are the document's own data (the sheet's column kinds, the formula fu
 | `Backspace` | Delete | keys only, at: canvas |
 | `Escape` | Close or deselect | keys only, at: canvas |
 | `ArrowLeft`, `ArrowRight`, `ArrowUp`, `ArrowDown`, `Enter` | Join two shapes | keys only, at: canvas |
-| `Mod+A` | Select all: the words of the box, then everything | keys only, at: canvas |
+| `Mod+A` | Select all (this field first, then the whole document) | keys only, at: canvas |
 | `Mod+Shift+L` | Align: left | keys only, at: canvas |
 | `Mod+Shift+E` | Align: center | keys only, at: canvas |
 | `Mod+Shift+R` | Align: right | keys only, at: canvas |
@@ -565,7 +565,7 @@ whose rows are the document's own data (the sheet's column kinds, the formula fu
 |  | Loop forever | loop ▾ |
 | `K` | Add a key here | context, at: stage |
 |  | Remove this key | context |
-| `Enter` | Edit the words | context, at: stage |
+| `Enter` | Edit text | context, at: stage |
 | `Mod+D` | Duplicate | context, at: stage |
 | `Mod+C` | Copy | context, at: stage |
 | `Mod+X` | Cut | context, at: stage |
@@ -574,7 +574,7 @@ whose rows are the document's own data (the sheet's column kinds, the formula fu
 | `,`, `.` | A frame back, a frame on | keys only, at: stage |
 | `Home`, `End` | The first frame, the last | keys only, at: stage |
 | `ArrowLeft`, `ArrowRight`, `ArrowUp`, `ArrowDown`, `Shift+ArrowLeft`, `Shift+ArrowRight`, `Shift+ArrowUp`, `Shift+ArrowDown`, `Mod+ArrowLeft`, `Mod+ArrowRight`, `Mod+ArrowUp`, `Mod+ArrowDown` | Nudge selected shapes, or step one frame | keys only, at: stage |
-| `Mod+A` | Select all: the words of the box, then everything | keys only, at: stage |
+| `Mod+A` | Select all (this field first, then the whole document) | keys only, at: stage |
 | `Escape` | Close or deselect | keys only, at: stage |
 
 ### Calendar (`cal`)

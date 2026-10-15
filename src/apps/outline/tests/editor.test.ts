@@ -169,7 +169,7 @@ test('the bullet opens the kinds of line, each named for the items it joins; the
   bullet().click();
   await until(() => !!document.querySelector('[popover]:popover-open'));
   const items = [...document.querySelectorAll<HTMLElement>('[popover]:popover-open [role^=menuitem]')];
-  expect(items.map((x) => x.textContent!.trim())).toEqual(['Plain line', 'Arrow from Product to Pricing', 'Arrow from Pricing to Product', 'Arrows both ways', 'Name the line']);
+  expect(items.map((x) => x.textContent!.trim())).toEqual(['Plain line', 'Arrow from Product to Pricing', 'Arrow from Pricing to Product', 'Arrows both ways', 'Label']);
   expect(document.querySelector('[popover]:popover-open [role=menuitemcheckbox][aria-checked=true]')!.textContent!.trim()).toBe('Plain line');
   items[1].click();
   await el.updateComplete;
@@ -178,7 +178,7 @@ test('the bullet opens the kinds of line, each named for the items it joins; the
   await pick(el, bullet(), 'Arrows both');
   expect(last()!.split('\n')[2]).toBe('    - Pricing {.both}');
   // Named: typed where the name is shown, no dialog; Enter keeps it; the chip shows the name and, tapped, is typed on again; emptied, the chip goes.
-  await pick(el, bullet(), 'Name the line');
+  await pick(el, bullet(), 'Label');
   const box = () => row(el, 2).querySelector<HTMLInputElement>('input.ol-label-in')!;
   expect(document.activeElement).toBe(box());
   expect(el.querySelector('dialog[open]')).toBeNull();
@@ -227,7 +227,7 @@ test('Connect greys the outline until the other end is tapped; the join is turne
   expect(link().querySelector('button.ol-kind')!.getAttribute('aria-label')).toBe('Connection from Pricing to Marketing: a plain line. Change it');
   await pick(el, link().querySelector<HTMLButtonElement>('button.ol-kind')!, 'Arrow from Pricing to Marketing');
   expect(last()!.split('\n').at(-2)).toBe('~ Pricing -> Marketing');
-  await pick(el, link().querySelector<HTMLButtonElement>('button.ol-kind')!, 'Name the line');
+  await pick(el, link().querySelector<HTMLButtonElement>('button.ol-kind')!, 'Label');
   const box = link().querySelector<HTMLInputElement>('input.ol-label-in')!;
   expect(document.activeElement).toBe(box);
   box.value = 'feeds';
