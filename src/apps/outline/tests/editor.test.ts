@@ -486,8 +486,11 @@ test('Shift+Down chooses rows whole, a folded family with them; Backspace takes 
   expect(contextOpen(el)).toBe(false);
   await undo(el);
   expect(last()).toBe('- A\n- B {.shut}\n  - b1\n- C\n- D\n');
-  // (A fold is the document's: B came back shut, as it went.) Up past the anchor, the range turns.
+  // (A fold is the document's: B came back shut, as it went; opened again for the rest.) Up past the anchor, the range turns.
   expect(rows(el)).toEqual([0, 1, 3, 4]);
+  row(el, 1).querySelector<HTMLButtonElement>('.ol-fold')!.click();
+  await el.updateComplete;
+  expect(rows(el)).toEqual([0, 1, 2, 3, 4]);
   await choose(el, 3);
   await keyOn(el, 3, 'ArrowDown', { shiftKey: true });
   for (let i = 0; i < 3; i++) await treeKey(el, 'ArrowUp', { shiftKey: true });
