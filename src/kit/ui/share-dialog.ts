@@ -372,7 +372,7 @@ export class ToShare extends LitElement {
           <thead><tr><th scope="col">${t('share-where')}</th><th scope="col">${t('share-uses')}</th><th scope="col">${t('share-left')}</th></tr></thead>
           <tbody>${roomFor(this.link).map(
             (r) =>
-              html`<tr class=${r.left < 0 ? 'over' : ''}><th scope="row">${r.target.where()}</th><td>${n(r.used)} / ${n(r.target.max)}</td><td>${r.target.flat ? t('share-any-length') : r.left < 0 ? t('share-n-over', { n: n(-r.left) }) : n(r.left)}</td></tr>`,
+              html`<tr class=${r.left < 0 ? 'over' : ''}><th scope="row">${r.target.where()}</th><td>${n(r.used)} / ${n(r.target.max)}</td><td>${r.target.flat ? t('share-any-length') : r.left < 0 ? t('share-n-over', { n: -r.left }) : n(r.left)}</td></tr>`,
           )}</tbody>
         </table>
       </div>

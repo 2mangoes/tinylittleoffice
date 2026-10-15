@@ -19,7 +19,8 @@ afterAll(() => setLanguage(null));
 function drawAll(code: string, strings: Record<string, string>) {
   for (const [id, key] of Object.entries(en)) {
     const names = [...new Set(placeholders(key))];
-    const counted = new Set([...key.matchAll(/\{(\w+)\|/g)].map((m) => m[1]).concat(names.filter((n) => n === 'n')));
+    // A language may count a variable the English does not (Arabic's "of { $max } characters", Polish's bytes): its own plurals count too.
+    const counted = new Set([...key.matchAll(/\{(\w+)\|/g), ...(strings[id] ?? '').matchAll(/\{(\w+)\|/g)].map((m) => m[1]).concat(names.filter((n) => n === 'n')));
     for (const n of [0, 1, 2, 5, 21]) {
       const vars = Object.fromEntries(names.map((name) => [name, counted.has(name) ? n : name]));
       let out = '';

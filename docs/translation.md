@@ -89,7 +89,7 @@ never read by hand:
    product term, and the messages to do, each with its English, en.ftl's comment on it, its group, the old
    translation and the old English where the English moved, and the plural forms the language has. That is the
    whole context a translator, or an agent, needs.
-2. The translations are written as JSON, `{ "fr": { "<id>": "<words>" } }`, the words in the flat form the
+2. The translations are written as JSON, `{ "fr": { "<id>": "<words>" } }`, the words in the one-line form the
    worklist shows the English in (`{n|une diapositive|# diapositives}` for a plural); `{ "text": "…", "same": true }`
    where the words stay as the English on purpose.
 3. `npm run i18n:apply -- work.json` writes them into the files in place, each with its `# en:` hash and no draft
