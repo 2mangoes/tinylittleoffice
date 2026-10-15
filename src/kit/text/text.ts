@@ -85,6 +85,7 @@ import { TEXT_COMMANDS } from './text-commands.ts';
 import type { ToContext } from '../ui/context.ts';
 import { lookup } from '../core/app.ts';
 import { t } from '../core/i18n.ts';
+import { dateString } from '../core/dates.ts';
 import { icon, iconNamed, iconsComplete, isIconName, loadIcons, onIcons } from '../draw/icons.ts';
 import {
   align,
@@ -992,7 +993,7 @@ export class ToText extends LitElement {
         // An icon's name is an icon; an emoji (the picker's other set) is a character, typed in like any other.
         return arg ? go(insertRuns(model, sel, [isIconName(arg) ? { t: '', ic: arg } : { t: arg, ...this.fmt }])) : undefined;
       case 'date':
-        return go(insertRuns(model, sel, [{ t: new Date().toLocaleDateString(document.documentElement.lang || undefined, { dateStyle: 'long' }), ...this.fmt }]));
+        return go(insertRuns(model, sel, [{ t: dateString(new Date(), { dateStyle: 'long' }), ...this.fmt }]));
       case 'title':
       case 'h1':
       case 'h2':

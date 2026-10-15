@@ -30,7 +30,8 @@ import type { ToDialog } from '../../kit/ui/dialog.ts';
 import { DocElement, firstAt, type Entry } from '../../kit/core/element.ts';
 import { Rows, type Clip, type DropHow, type RowItem, type RowRange, type RowSpan } from '../../kit/text/rows.ts';
 import { icon, UI, type IconNode } from '../../kit/draw/icons.ts';
-import { language, t } from '../../kit/core/i18n.ts';
+import { t } from '../../kit/core/i18n.ts';
+import { dateWords } from '../../kit/core/dates.ts';
 import { caret } from '../../kit/text/textops.ts';
 import type { TextOps, ToText } from '../../kit/text/text.ts';
 import {
@@ -886,7 +887,7 @@ export class ToCalEditor extends DocElement<CalView> {
     });
   }
   private monthName(y: number, m: number) {
-    return new Intl.DateTimeFormat(language(), { month: 'long', year: 'numeric', timeZone: 'UTC' }).format(Date.UTC(y, m - 1, 1));
+    return dateWords({ month: 'long', year: 'numeric', timeZone: 'UTC' }).format(Date.UTC(y, m - 1, 1));
   }
   openZones = async () => {
     this.zones ??= allZones();
@@ -945,8 +946,8 @@ export class ToCalEditor extends DocElement<CalView> {
     const today = this.todayDay();
     // Each weekday's name in three lengths: the long for a reader and a pointer resting on it, the short where the
     // columns have the room, the narrow where they do not (the grid's container query, style.css).
-    const wdFmts = (['long', 'short', 'narrow'] as const).map((weekday) => new Intl.DateTimeFormat(language(), { weekday, timeZone: 'UTC' }));
-    const dayFmt = new Intl.DateTimeFormat(language(), { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'UTC' });
+    const wdFmts = (['long', 'short', 'narrow'] as const).map((weekday) => dateWords({ weekday, timeZone: 'UTC' }));
+    const dayFmt = dateWords({ weekday: 'long', day: 'numeric', month: 'long', timeZone: 'UTC' });
     const swept = this.drag?.moved ? this.drag : this.sweep;
     const range = swept ? [Math.min(swept.from, swept.to), Math.max(swept.from, swept.to)] : null;
     const roving = this.rovingDay(first, last);
@@ -992,10 +993,10 @@ export class ToCalEditor extends DocElement<CalView> {
   private whenWords(s: Draft): string {
     try {
       if (s.kind === 'd') {
-        const f = new Intl.DateTimeFormat(language(), { timeZone: 'UTC', month: 'short', day: 'numeric', year: 'numeric' });
+        const f = dateWords({ timeZone: 'UTC', month: 'short', day: 'numeric', year: 'numeric' });
         return s.dur > 1 ? f.formatRange(s.start * 86400000, (s.start + s.dur - 1) * 86400000) : f.format(s.start * 86400000);
       }
-      const f = new Intl.DateTimeFormat(language(), { timeZone: this.zone, month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
+      const f = dateWords({ timeZone: this.zone, month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
       return (s.dur > 0 ? f.formatRange(spanStartMs(s), spanEndMs(s)) : f.format(spanStartMs(s))) + ' ' + zoneAbbr(spanStartMs(s), this.zone);
     } catch {
       return '';
@@ -1030,9 +1031,9 @@ export class ToCalEditor extends DocElement<CalView> {
         for (let d = Math.max(a, from); d <= Math.min(b, to - 1); d++) if (!tint.has(d)) tint.set(d, CAL_COLORS[o.color]?.hex ?? CAL_COLORS[''].hex);
       }
     const today = this.todayDay();
-    const wdFmt = new Intl.DateTimeFormat(language(), { weekday: 'narrow', timeZone: 'UTC' });
-    const monthFmt = new Intl.DateTimeFormat(language(), { month: 'long', timeZone: 'UTC' });
-    const dayFmt = new Intl.DateTimeFormat(language(), { day: 'numeric', month: 'long', timeZone: 'UTC' });
+    const wdFmt = dateWords({ weekday: 'narrow', timeZone: 'UTC' });
+    const monthFmt = dateWords({ month: 'long', timeZone: 'UTC' });
+    const dayFmt = dateWords({ day: 'numeric', month: 'long', timeZone: 'UTC' });
     const openMonth = (m: number, day = -1) => {
       this.shown = { y, m };
       this.picked = day;
@@ -1072,7 +1073,7 @@ export class ToCalEditor extends DocElement<CalView> {
     const width = (to - from) * z;
     const height = HEAD + bars.length * ROW;
     const now = this.todayDay();
-    const months = new Intl.DateTimeFormat(language(), { month: 'short', year: 'numeric', timeZone: 'UTC' });
+    const months = dateWords({ month: 'short', year: 'numeric', timeZone: 'UTC' });
     const drag = this.bar;
     return html`<div class="cal-gantt">
       <ol class="cal-tasks" tabindex="-1" aria-label=${t('common-tasks')} style="--head:${HEAD / 16}rem">

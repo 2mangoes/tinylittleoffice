@@ -41,7 +41,8 @@ import { editFence, makeDoc } from '../../kit/ui/doc-dialog.ts';
 import { pageSvg } from '../../kit/draw/draw.ts';
 import { DocElement, firstAt, type Entry } from '../../kit/core/element.ts';
 import { icon, UI } from '../../kit/draw/icons.ts';
-import { language, t } from '../../kit/core/i18n.ts';
+import { t } from '../../kit/core/i18n.ts';
+import { dateWords } from '../../kit/core/dates.ts';
 import { noteMarks, type NoteMark, type ToNotes } from '../../kit/draw/notes.ts';
 import { askDocLink } from '../../kit/ui/insert-dialogs.ts';
 import type { MenuItem, ToMenu } from '../../kit/ui/menu.ts';
@@ -961,7 +962,7 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
     const [y, m, d] = due.split('-').map(Number);
     if (!y || !m || !d) return due;
     const thisYear = new Date().getFullYear() === y;
-    return new Intl.DateTimeFormat(language(), { month: 'short', day: 'numeric', ...(thisYear ? {} : { year: 'numeric' }), timeZone: 'UTC' }).format(Date.UTC(y, m - 1, d));
+    return dateWords({ month: 'short', day: 'numeric', ...(thisYear ? {} : { year: 'numeric' }), timeZone: 'UTC' }).format(Date.UTC(y, m - 1, d));
   }
   /** The due day, a chip after the words; tapped, a date field where it was. */
   private dueChip(at: number, it: Item) {

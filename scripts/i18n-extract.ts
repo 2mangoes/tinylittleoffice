@@ -31,6 +31,10 @@
  *                                            English, the English's comment, its group, the old translation and the old
  *                                            English where there are any, and the plural forms the language has. The
  *                                            whole context a translator needs, and nothing of the files themselves
+ *   node scripts/i18n-extract.ts --sheet fr [group…]   the review sheet, as JSON on stdout: the language's head, rules and
+ *                                            terms as --work gives them, then every message (of the groups named, or all),
+ *                                            each with its English, en.ftl's comment, its group and the language's words
+ *                                            as they stand, for a reader to improve; corrections come back as --apply's JSON
  *   node scripts/i18n-extract.ts --apply work.json   the translations written into the files, in place: { "fr": { "<id>":
  *                                            "<words>" | { "text": "<words>", "same": true } } }, the words in the flat
  *                                            form the worklist shows the English in; a message the language has is
@@ -360,6 +364,29 @@ export function work(enSource: string, source: string, code: string, old: Record
   return { head: file.head, ...(rules ? { rules } : {}), terms: termsFor(code, en, have), todo: [...missing, ...changed] };
 }
 
+/** A language's review sheet: as the worklist, with every message rather than the ones to do, each with its words as they stand. */
+export function sheet(enSource: string, source: string, code: string, doc = '', groups: string[] = []): Worklist & { messages: (Work & { words: string; same?: boolean })[] } {
+  const list = work(enSource, source, code, {}, doc);
+  const enFile = readFtl(enSource, 'en');
+  const have = Object.fromEntries(readFtl(source, code).entries.map((e) => [e.id, e]));
+  const messages = enFile.entries
+    .filter((e) => !groups.length || groups.some((g) => e.group.toLowerCase().includes(g.toLowerCase())))
+    .filter((e) => have[e.id])
+    .map((e) => {
+      const comment = e.comment.filter((l) => !l.startsWith('en: ') && l !== 'same');
+      return {
+        id: e.id,
+        en: e.flat,
+        ...(comment.length ? { comment } : {}),
+        group: e.group,
+        words: have[e.id].flat,
+        ...(have[e.id].same ? { same: true } : {}),
+        ...(/\{\w+\|/.test(e.flat) ? { forms: pluralCategories(code) } : {}),
+      };
+    });
+  return { ...list, messages };
+}
+
 /** A translation given to --apply: the words, or the words and that they stay as the English on purpose (a name, a loanword). */
 export type Given = string | { text: string; same?: boolean };
 
@@ -537,6 +564,19 @@ if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.ur
       if (list.todo.length) out[lang] = list;
     }
     console.log(JSON.stringify(out, null, 1));
+    process.exit(0);
+  }
+  const sh = process.argv.indexOf('--sheet');
+  if (sh >= 0) {
+    const [lang, ...groups] = process.argv.slice(sh + 1).filter((a) => !a.startsWith('--'));
+    const path = lang && join(root, 'src', 'i18n', `${lang}.ftl`);
+    if (!lang || lang === 'en' || !existsSync(path)) {
+      console.error('Usage: node scripts/i18n-extract.ts --sheet <code> [group…] (every message of the language beside its English)');
+      process.exit(1);
+    }
+    const enSource = readFileSync(join(root, 'src', 'i18n', 'en.ftl'), 'utf8');
+    const doc = readFileSync(join(root, 'docs', 'translation.md'), 'utf8');
+    console.log(JSON.stringify(sheet(enSource, readFileSync(path, 'utf8'), lang, doc, groups), null, 1));
     process.exit(0);
   }
   const ap = process.argv.indexOf('--apply');

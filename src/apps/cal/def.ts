@@ -8,7 +8,8 @@ import { apply, parse, write, type Doc as Kernel, type TextNode } from '../../do
 import { defineApp, type Doc } from '../../kit/core/app.ts';
 import { csvSeparator } from '../../kit/file/csv.ts';
 import { utf8 } from '../../kit/draw/draw.ts';
-import { language, t } from '../../kit/core/i18n.ts';
+import { t } from '../../kit/core/i18n.ts';
+import { dateWords } from '../../kit/core/dates.ts';
 import { calPages, calToCsv, calToIcs } from './view.ts';
 import { readCal, repeatText, spanDays, spanEndMs, spanStartMs } from './model.ts';
 import { clockString, utcToParts } from './tz.ts';
@@ -23,7 +24,7 @@ const DAY_MS = 86_400_000;
 function calText(doc: Kernel): TextNode[] {
   const v = readCal(doc);
   const zone = v.zone || 'UTC';
-  const date = new Intl.DateTimeFormat(language(), { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+  const date = dateWords({ weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
   const clock = (ms: number) => clockString(utcToParts(ms, zone));
   const out: TextNode[] = [];
   let last: number | null = null;

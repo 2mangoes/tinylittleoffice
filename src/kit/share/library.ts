@@ -5,7 +5,8 @@
  * is still, entirely, its link.
  */
 import { keeping, store } from '../core/store.ts';
-import { t } from '../core/i18n.ts';
+import { language, t } from '../core/i18n.ts';
+import { dateString } from '../core/dates.ts';
 import type { AppDef } from '../core/app.ts';
 
 export interface Kept {
@@ -105,7 +106,7 @@ export function ago(at: number, lang?: string, now = Date.now()): string {
   if (Math.abs(s) < 86400) return rtf.format(Math.round(s / 3600), 'hour');
   if (Math.abs(s) < 7 * 86400) return rtf.format(Math.round(s / 86400), 'day');
   const d = new Date(at);
-  return d.toLocaleDateString(lang || undefined, { day: 'numeric', month: 'short', ...(d.getFullYear() !== new Date(now).getFullYear() ? { year: 'numeric' } : {}) });
+  return dateString(d, { day: 'numeric', month: 'short', ...(d.getFullYear() !== new Date(now).getFullYear() ? { year: 'numeric' } : {}) }, lang || language());
 }
 
 /** A day as "2026-10-09", in the device's own time zone. */

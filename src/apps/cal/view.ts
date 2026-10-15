@@ -7,15 +7,16 @@ import { dayToYmd, ymdToDay, type Doc } from '../../doc/index.ts';
 import type { Page } from '../../kit/core/app.ts';
 import { csv } from '../../kit/file/csv.ts';
 import { ACCENT, FAINT, INK, LINE, MUTED, SHADE, clip, r, rect, text } from '../../kit/draw/draw.ts';
-import { language, t } from '../../kit/core/i18n.ts';
+import { t } from '../../kit/core/i18n.ts';
+import { dateWords } from '../../kit/core/dates.ts';
 import { icsDate, icsStamp, icsText, vcalendar } from '../../kit/file/ics.ts';
 import { CAL_COLORS, clockMinutes, ganttBars, ganttRange, occurrences, readCal, repeatText, spanDays, spanEndMs, spanStartMs, type CalView, type Every } from './model.ts';
 import { clockString, dayString, pad2, utcToParts } from './tz.ts';
 
 const CW = 100;
 const CH = 84;
-const monthName = (y: number, m: number) => new Intl.DateTimeFormat(language(), { month: 'long', year: 'numeric', timeZone: 'UTC' }).format(Date.UTC(y, m - 1, 1));
-const weekday = (wd: number) => new Intl.DateTimeFormat(language(), { weekday: 'short', timeZone: 'UTC' }).format(Date.UTC(2023, 0, 1 + wd));
+const monthName = (y: number, m: number) => dateWords({ month: 'long', year: 'numeric', timeZone: 'UTC' }).format(Date.UTC(y, m - 1, 1));
+const weekday = (wd: number) => dateWords({ weekday: 'short', timeZone: 'UTC' }).format(Date.UTC(2023, 0, 1 + wd));
 
 /**
  * The calendar as months: a page for each month that has something in it (`max` at most), every span on the

@@ -23,6 +23,7 @@ import { withHead } from '../../doc/tlo.ts';
 import { readEnvelope } from '../core/envelope.ts';
 import { ensureIcons, icon, iconNames, UI } from '../draw/icons.ts';
 import { chosenLanguage, t } from '../core/i18n.ts';
+import { dateWords } from '../core/dates.ts';
 import { picture, raster, saveFile, slug, utf8 } from '../file/exports.ts';
 import { parseHash, routeHash } from '../core/route.ts';
 import { fitLine, roomFor } from '../share/limits.ts';
@@ -204,9 +205,7 @@ export class ToShare extends LitElement {
     const env = readEnvelope(this.doc);
     const lang = document.documentElement.lang || undefined;
     const when =
-      env.created === null
-        ? ''
-        : t('privacy-created-date', { date: new Intl.DateTimeFormat(lang, { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }).format(env.created) });
+      env.created === null ? '' : t('privacy-created-date', { date: dateWords({ day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }, lang).format(env.created) });
     const by = env.by ? t('privacy-by-name', { name: env.by }) : '';
     return [when, by].filter(Boolean).join(' · ');
   }

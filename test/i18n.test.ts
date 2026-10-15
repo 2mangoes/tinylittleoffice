@@ -3,7 +3,7 @@ import { test, expect } from 'vitest';
 import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { t, register, setLanguage, browserLanguage, directionOf, languages } from '../src/kit/core/i18n.ts';
-import { apply, commandKeys, englishHash, languageFiles, main, placeholders, rulesFor, usedKeys, withMissing, work, MARK } from '../scripts/i18n-extract.ts';
+import { apply, commandKeys, englishHash, languageFiles, main, placeholders, rulesFor, sheet, usedKeys, withMissing, work, MARK } from '../scripts/i18n-extract.ts';
 import { flatMessages, readFtl } from '../scripts/ftl.ts';
 import { british } from './british.ts';
 import { bare } from '../scripts/ftl-plugin.ts';
@@ -237,4 +237,14 @@ test('--apply: a message the language has is replaced where it stands, a new one
   // A draft mark goes when the words are given.
   const drafted = FR.replace('# en: ' + englishHash('Save it') + '\ncommon-save', '# draft from common-keep\n# en: ' + englishHash('Save it') + '\ncommon-save');
   expect(apply(EN, drafted, 'fr', { 'common-save': 'Enregistrer' }).source).not.toContain('draft from');
+});
+
+test('--sheet: every message of a language beside its English, by group, with its words as they stand', () => {
+  const all = sheet(EN, FR, 'fr');
+  expect(all.messages.map((m) => m.id)).toEqual(['shell-menu', 'common-save', 'common-document', 'common-n-slides', 'outline-due-date']);
+  expect(all.messages[1]).toEqual({ id: 'common-save', en: 'Save', comment: ['A verb: the button that saves.'], group: 'the shell', words: 'Garder' });
+  expect(all.messages[0].same).toBe(true);
+  expect(all.messages[3].forms).toEqual(['one', 'many', 'other']);
+  expect(sheet(EN, FR, 'fr', '', ['outliner']).messages.map((m) => m.id)).toEqual(['outline-due-date']);
+  expect(all.todo.map((w) => w.id)).toEqual(['outline-agenda', 'common-save']);
 });

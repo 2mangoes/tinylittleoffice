@@ -6,7 +6,8 @@
  * make a hundred a day.
  */
 import { toBase64Url, fromBase64Url } from '../core/codec.ts';
-import { t } from '../core/i18n.ts';
+import { language, t } from '../core/i18n.ts';
+import { dateString } from '../core/dates.ts';
 import { origin } from '../core/network.ts';
 
 // The dev server sets VITE_TINIER (.env.development) to its own /tinier/, which it hands on to the shortener on this machine.
@@ -50,7 +51,7 @@ export function expiresSentence(expires: number, now = Date.now()): string {
 /** "Expires in 7 days (16 October)": the Share dialog's words under a short link. */
 export function expiresLine(expires: number, now = Date.now(), lang?: string): string {
   const { n, unit } = timeLeft(expires, now);
-  const date = new Date(expires).toLocaleDateString(lang || undefined, { day: 'numeric', month: 'long' });
+  const date = dateString(expires, { day: 'numeric', month: 'long' }, lang || language());
   return unit === 'day' ? t('share-expires-in-n-days-date', { n, date }) : unit === 'hour' ? t('share-expires-in-n-hours-date', { n, date }) : t('share-expires-in-n-minutes-date', { n, date });
 }
 

@@ -144,7 +144,8 @@ Yiddish (2026-10-12) are two more of the city's own.
   not a Sanskritized register; `आप`; Western digits.
 - **Urdu:** right to left; `آپ`; Western digits; set in Nastaliq (above).
 - **Haitian Creole:** the official orthography of 1979 (Kreyòl, *-syon*, *k*, `ou`, `yo`), no French spellings.
-  Intl has no Kreyòl months, so dates fall back to English month names; say a date with numbers where it matters.
+  Intl has no Kreyòl, so the kit writes a date's month and weekday itself (`kit/core/dates.ts`: janvye, fevriye…,
+  dimanch, lendi…), laid out day, month, year.
 - **Korean:** `합니다`-style polite forms on buttons and messages; a counter where Korean uses one (파일 3개).
 - **Hebrew:** the Hebrew of the city's Israeli and Hebrew-speaking New Yorkers, as Israeli software writes it: a
   button is a verbal noun (הורדה, שיתוף, העתקת קישור) or an infinitive (לשכוח), a sentence asks with "יש ל…" or
@@ -153,8 +154,9 @@ Yiddish (2026-10-12) are two more of the city's own.
   in their spelling rather than YIVO's: no vowel points (א, יי, פ where YIVO writes אַ, ײַ, פֿ), נישט, the
   Hebrew-origin words as always written, and the English loanwords of computing (לינק, פאסווארד, דאונלאודן). Buttons
   are infinitives; sentences say `איר`, as the community's papers address a stranger. Chromium's Intl has no Yiddish
-  of its own: it names the language in English (the kit names it ייִדיש itself) and writes dates in English, as for
-  Haitian Creole; WebKit writes them in Yiddish. The plural rules (one, other) are the same in both.
+  of its own: it names the language in English (the kit names it ייִדיש itself), and the kit writes a date's month
+  and weekday itself, in the community's spelling (`kit/core/dates.ts`: יאנואר, פעברואר…, זונטאג, מאנטאג…, שבת);
+  in every browser (WebKit's own Yiddish would spell them YIVO's way). The plural rules (one, other) are the same in both.
 - **Traditional Chinese:** its own translation for the Hong Kong and Taiwan usage of the city's communities,
   never a character conversion of the Simplified file (檔案, 連結, 範本, 投影片, 試算表), with full-width
   punctuation and 「」 for quotes.
