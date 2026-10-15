@@ -72,6 +72,8 @@ test('typing makes the first item, Enter the next, Tab puts it under, Shift+Tab 
   const { el, last } = await editor();
   expect(rows(el)).toEqual([-1]);
   expect(textOf(el, -1).placeholder).toBe('');
+  // The ghost row is -1, as are "no row is dating" and "no row is naming": it shows neither field (a new outline showed a date; Paul, 2026-10-15).
+  expect(el.querySelector('.ol-due-in, .ol-label-in')).toBeNull();
   await choose(el, -1, 0);
   // The first letter typed brings the item into the document; the row is then the document's.
   await typeIn(el, -1, 'L');
