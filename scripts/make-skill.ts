@@ -6,8 +6,10 @@
  * or whose plain link would not read back as itself, stops the build of the guide: it cannot teach a shape the
  * apps do not keep.
  *
- *   skill/tinyoffice/SKILL.md       the skill, whole
- *   public/llms-full.txt            the same, without the skill's front matter
+ *   skill/tinyoffice/SKILL.md       the skill: the guide's opening sections, which every document needs
+ *   skill/tinyoffice/references/    the rest of the guide, a file an app, one for the files and the API, one for the
+ *                                   editors' keys, each read when the task needs it (skillFolder)
+ *   public/llms-full.txt            the guide whole, without the skill's front matter
  *   public/llms.txt                 the short guide an agent fetches first, under 6 KB (makeShort)
  *   public/llms/<app>.txt           a page on one app, under 4 KB: its words and rules, its shapes, an example
  *   packages/doc/examples/<app>.json  each shape's example (scripts/shapes.ts), served at /examples/<app>.json
@@ -106,6 +108,93 @@ export async function makeSkill(): Promise<string> {
 
 /** /llms-full.txt: the same guide, without the skill's front matter. */
 export const makeLlms = (skill: string): string => skill.replace(/^---\n[\s\S]*?\n---\n\n/, '');
+
+/** A heading and its words, from its line to the next heading of its level (outside fences). */
+interface Piece {
+  heading: string;
+  text: string;
+}
+
+/**
+ * A text cut at its headings of one level (`## ` or `### `) outside fences: what is above the first, then a piece a
+ * heading. A fence is closed by a line of at least as many backticks (an example of four holds fences of three).
+ */
+function pieces(text: string, level: number): { above: string; parts: Piece[] } {
+  const mark = '#'.repeat(level) + ' ';
+  const parts: Piece[] = [];
+  let above: string[] = [];
+  let into = above;
+  let fence = 0;
+  for (const line of text.split('\n')) {
+    const ticks = /^(`{3,})/.exec(line)?.[1].length ?? 0;
+    if (fence) {
+      if (ticks >= fence && /^`+\s*$/.test(line)) fence = 0;
+    } else if (ticks) fence = ticks;
+    else if (line.startsWith(mark)) {
+      parts.push({ heading: line.slice(mark.length), text: '' });
+      into = [];
+    }
+    into.push(line);
+    if (parts.length && into !== above) parts[parts.length - 1].text = into.join('\n');
+  }
+  return { above: above.join('\n'), parts };
+}
+
+/** The guide's sections that are a reference of their own in the skill, by the file's name: its title, and the sections, in the guide's order. */
+const REFERENCES: Record<string, { title: string; sections: string[] }> = {
+  api: { title: 'Files, short links, the API and the command line', sections: ["Every app's files", 'Short links', 'Who made it', 'Without a browser'] },
+  editors: { title: 'Driving the editors', sections: ['Driving the editors'] },
+};
+
+/** A section's words with its heading raised to the top (`# `), and one blank line at the end. */
+const raised = (p: Piece, level: number) => p.text.replace(new RegExp(`^${'#'.repeat(level)} `), '# ').replace(/\n*$/, '\n');
+
+/**
+ * The skill's folder, as Claude Code reads one (the Agent Skills form; Paul, 2026-10-15, after Oskar Austegard's
+ * rewrite of the skill as a short SKILL.md with a reference an app: "make skills work like they are supposed to
+ * work"): SKILL.md is read whole when the skill is chosen, so it holds what every document needs, the link, the rules,
+ * the format, the apps and which reference to read; each app's section, the files and the API, and the editors' keys
+ * are references/<name>.md, read when the task needs them. Cut from the one guide at its headings, outside fences, so
+ * the skill and /llms-full.txt are the same words: every section of the guide is in exactly one file.
+ */
+export function skillFolder(guide: string): Record<string, string> {
+  const { above, parts } = pieces(guide, 2);
+  const files: Record<string, string> = {};
+  const kept: string[] = [above.replace(/\n*$/, '\n')];
+  const refs = new Map(Object.entries(REFERENCES).map(([name, r]) => [name, { ...r, found: [] as Piece[] }]));
+  for (const part of parts) {
+    const ref = [...refs.values()].find((r) => r.sections.includes(part.heading));
+    const own = pieces(part.text, 3).parts;
+    if (ref) ref.found.push(part);
+    else if (own.length) {
+      // A group of apps ("## Words": "### write: …", "### outline: …"): a reference an app.
+      for (const p of own) {
+        const id = /^([a-z]+): /.exec(p.heading)?.[1];
+        if (!id || !appOf(id)) throw new Error(`make-skill: "### ${p.heading}" under "## ${part.heading}" is not an app's section`);
+        files[`references/${id}.md`] = raised(p, 3);
+      }
+    } else kept.push(part.text.replace(/\n*$/, '\n'));
+  }
+  for (const [name, r] of refs) {
+    if (r.found.length !== r.sections.length) throw new Error(`make-skill: the guide lacks a section for references/${name}.md: ${r.sections.join(', ')}`);
+    files[`references/${name}.md`] = r.found.length === 1 ? raised(r.found[0], 2) : [`# ${r.title}`, '', ...r.found.map((p) => p.text.replace(/\n*$/, '\n'))].join('\n');
+  }
+  // After the apps' table: which reference to read, and when.
+  const at = kept.findIndex((t) => t.startsWith('## The apps\n'));
+  if (at < 0) throw new Error('make-skill: the guide has no section "The apps"');
+  kept[at] +=
+    `\nBefore writing for an app, read its reference, which says what it reads and gives one of its own templates as the example: ${apps()
+      .map((a) => `[${a.id}](references/${a.id}.md)`)
+      .join(', ')}. ` +
+    'The files every document downloads, short links, the API and the command line are in [references/api.md](references/api.md); the keys that drive the editors in a browser are in [references/editors.md](references/editors.md).\n';
+  return { 'SKILL.md': kept.join('\n'), ...Object.fromEntries(Object.entries(files).sort(([a], [b]) => a.localeCompare(b))) };
+}
+
+/** The skill's folder and /llms-full.txt, by their paths from the root: what `npm run skill` and `npm run commands` both write. */
+export const skillOutputs = (guide: string): Record<string, string> => ({
+  ...Object.fromEntries(Object.entries(skillFolder(guide)).map(([f, text]) => [`skill/tinyoffice/${f}`, text])),
+  'public/llms-full.txt': makeLlms(guide),
+});
 
 /** A `## ` section of the guide, its heading and words, up to the next. */
 function section(guide: string, heading: string): string {
@@ -231,8 +320,7 @@ async function skillFiles(): Promise<Record<string, string>> {
   const skill = fill(TEMPLATE(), all);
   const ex = await makeExamples(all);
   return {
-    'skill/tinyoffice/SKILL.md': skill,
-    'public/llms-full.txt': makeLlms(skill),
+    ...skillOutputs(skill),
     'public/llms.txt': await makeShort(skill, ex),
     ...Object.fromEntries(
       apps().flatMap((a) => [[`public/llms/${a.id}.txt`, makeAppPage(a.id, all, ex.get(a.id)!)] as const, [`packages/doc/examples/${a.id}.json`, examplesJson(a.id, ex.get(a.id)!)] as const]),

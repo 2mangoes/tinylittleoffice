@@ -6,18 +6,27 @@
  *                the layouts the lint reads, the examples) in one file; the package's import, `import { link }
  *                from 'tinylittleoffice'`, the Node twin of the site's /api.js
  *   --mode cli   packages/doc/dist/tinyoffice.js: the command line (packages/doc/tinyoffice.ts), importing ./api.js,
- *                and beside it dist/skill/tinyoffice/SKILL.md, the agent skill as `npm run skill` wrote it, which
- *                `tinyoffice skill` prints or installs (a package carries only what is in its own folder)
+ *                and beside it dist/skill/tinyoffice/, the agent skill's folder (SKILL.md and references/*.md) as
+ *                `npm run skill` wrote it, which `tinyoffice skill` prints or installs (a package carries only what
+ *                is in its own folder)
  *
  * `npm run build:cli` makes both; the deploy makes them before it publishes, and test/package.test.ts packs the
  * package and installs it. What only a browser loads (the editors and their styles) is in api.js too, never run.
  */
 import { defineConfig } from 'vite';
-import { readFileSync } from 'node:fs';
+import { readdirSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 const API = resolve(import.meta.dirname, 'src/api.ts');
-const SKILL = resolve(import.meta.dirname, 'skill/tinyoffice/SKILL.md');
+const SKILL = resolve(import.meta.dirname, 'skill/tinyoffice');
+/** The skill's files, by their paths in its folder: SKILL.md and references/*.md, never its template. */
+const skillFiles = () => [
+  'SKILL.md',
+  ...readdirSync(resolve(SKILL, 'references'))
+    .filter((f) => f.endsWith('.md'))
+    .sort()
+    .map((f) => `references/${f}`),
+];
 
 export default defineConfig(({ mode }) => ({
   publicDir: false,
@@ -29,7 +38,7 @@ export default defineConfig(({ mode }) => ({
           {
             name: 'skill',
             generateBundle() {
-              this.emitFile({ type: 'asset', fileName: 'skill/tinyoffice/SKILL.md', source: readFileSync(SKILL, 'utf8') });
+              for (const f of skillFiles()) this.emitFile({ type: 'asset', fileName: `skill/tinyoffice/${f}`, source: readFileSync(resolve(SKILL, f), 'utf8') });
             },
           },
         ],

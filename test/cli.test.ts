@@ -1,7 +1,7 @@
 // The command line (packages/doc/tinyoffice.ts): links from files and files from links, as Node 24 runs it.
 import { test, expect } from 'vitest';
 import { execFileSync, spawnSync } from 'node:child_process';
-import { mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdtempSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -188,22 +188,34 @@ test('file --as webm says the video is made in the browser and exits 2, and the 
   expect(run(['help'])).toMatch(/tinyoffice file <link>[^\n]*\n[^\n]*\n[^\n]*--as webm: made in the browser/);
 });
 
-// The skill an agent installs: the repository's skill/tinyoffice/SKILL.md (npm run skill writes it), printed as it is,
-// or written where Claude Code reads a skills folder, <dir>/tinyoffice/SKILL.md, never over a file already there
-// unless asked (Paul, 2026-10-12: "How are people supposed to install the skill or know it's there?").
-test('skill prints the skill; --into writes tinyoffice/SKILL.md, refuses a second time, and replaces it with --force', () => {
-  const skill = readFileSync(fileURLToPath(new URL('../skill/tinyoffice/SKILL.md', import.meta.url)), 'utf8');
+// The skill an agent installs: the repository's skill/tinyoffice/ (npm run skill writes it), its SKILL.md printed as it
+// is, or the folder written where Claude Code reads a skills folder, <dir>/tinyoffice/ (SKILL.md and references/*.md),
+// never over one already there unless asked (Paul, 2026-10-12: "How are people supposed to install the skill or know
+// it's there?"; 2026-10-15: the skill as a folder, "make skills work like they are supposed to work").
+test('skill prints SKILL.md; --into writes the folder, refuses a second time, and replaces it whole with --force', () => {
+  const root = fileURLToPath(new URL('../skill/tinyoffice/', import.meta.url));
+  const files = [
+    'SKILL.md',
+    ...readdirSync(join(root, 'references'))
+      .sort()
+      .map((f) => `references/${f}`),
+  ];
+  expect(files.length).toBeGreaterThan(10);
+  const skill = readFileSync(join(root, 'SKILL.md'), 'utf8');
   expect(run(['skill'])).toBe(skill);
   const dir = join(mkdtempSync(join(tmpdir(), 'tlo-skill-')), 'skills');
-  const to = join(dir, 'tinyoffice', 'SKILL.md');
-  expect(run(['skill', '--into', dir])).toBe(`${to}\n`);
-  expect(readFileSync(to, 'utf8')).toBe(skill);
+  const folder = join(dir, 'tinyoffice');
+  const to = join(folder, 'SKILL.md');
+  expect(run(['skill', '--into', dir])).toBe(files.map((f) => join(folder, f)).join('\n') + '\n');
+  for (const f of files) expect(readFileSync(join(folder, f), 'utf8'), f).toBe(readFileSync(join(root, f), 'utf8'));
   writeFileSync(to, 'a skill of my own\n');
+  writeFileSync(join(folder, 'references', 'gone.md'), 'a reference of an earlier version\n');
   const again = spawnSync(process.execPath, [CLI, 'skill', '--into', dir], { encoding: 'utf8' });
-  expect([again.status, again.stdout, again.stderr]).toStrictEqual([1, '', `tinyoffice: ${to} is there already; --force replaces it\n`]);
+  expect([again.status, again.stdout, again.stderr]).toStrictEqual([1, '', `tinyoffice: ${folder} is there already; --force replaces it\n`]);
   expect(readFileSync(to, 'utf8')).toBe('a skill of my own\n');
-  expect(run(['skill', '--force', '--into', dir])).toBe(`${to}\n`);
+  expect(run(['skill', '--force', '--into', dir])).toBe(files.map((f) => join(folder, f)).join('\n') + '\n');
   expect(readFileSync(to, 'utf8')).toBe(skill);
+  expect(existsSync(join(folder, 'references', 'gone.md'))).toBe(false);
   const where = spawnSync(process.execPath, [CLI, 'skill', '--into'], { encoding: 'utf8' });
   expect(where.status).toBe(2);
   // The help names it beside shapes, example and try, with the line that installs it for Claude Code.

@@ -27,14 +27,16 @@
  *                                                     failing formulas, and whether the link fits in a short
  *                                                     link (short: {fits, over}), as JSON
  *        (read --text, lint and measure also take <app> <file>, or <app> and stdin)
- *   tinyoffice skill [--into <dir>] [--force]         the agent skill, SKILL.md, on stdout; --into writes it to
- *                                                     <dir>/tinyoffice/SKILL.md, as Claude Code reads a skills folder
- * The skill is skill/tinyoffice/SKILL.md, written by `npm run skill` from its template; the package carries it as
- * dist/skill/tinyoffice/SKILL.md (vite.cli.config.ts copies it there), and this reads whichever sits beside it.
+ *   tinyoffice skill [--into <dir>] [--force]         the agent skill's SKILL.md on stdout; --into writes the skill's
+ *                                                     folder, <dir>/tinyoffice/ (SKILL.md and references/), as Claude
+ *                                                     Code reads a skills folder
+ * The skill is the folder skill/tinyoffice/ (SKILL.md and references/*.md), written by `npm run skill` from its
+ * template; the package carries it as dist/skill/tinyoffice/ (vite.cli.config.ts copies it there), and this reads
+ * whichever sits beside it.
  * In the published package (npm: tinylittleoffice) it is dist/tinyoffice.js, this file bundled with all it
  * imports (vite.cli.config.ts), since Node strips no types under node_modules. What it says to `help` is USAGE.
  */
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { apps, compare, example, file, fromJson, fromTlo, lint, link, markdown, measure, PASSWORD_REFUSED, plain, read, shapes, templates, toJson, tryDraft } from '../../src/api.ts';
@@ -67,9 +69,10 @@ const USAGE = `tinyoffice (or tinylittleoffice, as npx runs it):
                                                     every shape of the app's without one
   tinyoffice try <app> <file|-> [--json]            a draft in one call: its lint, its measures and its JSON
                                                     (exit 1 when the lint finds something)
-  tinyoffice skill [--into <dir>] [--force]         the agent skill (SKILL.md) on stdout; --into <dir> writes
-                                                    <dir>/tinyoffice/SKILL.md, refusing a file already there
-                                                    unless --force. For Claude Code:
+  tinyoffice skill [--into <dir>] [--force]         the agent skill's SKILL.md on stdout; --into <dir> writes the
+                                                    skill's folder, <dir>/tinyoffice/ (SKILL.md and references/,
+                                                    read as needed), refusing one already there unless --force.
+                                                    For Claude Code:
                                                     npx tinylittleoffice skill --into ~/.claude/skills
 `;
 
@@ -94,13 +97,20 @@ function die(message: string, code = 2): never {
 const words = (path?: string) => (path && path !== '-' ? (existsSync(path) ? readFileSync(path, 'utf8') : die(`no file ${path}`)) : readFileSync(0, 'utf8'));
 
 /**
- * The skill's text: dist/skill/tinyoffice/SKILL.md beside the built command line in the package, else the
- * repository's skill/tinyoffice/SKILL.md beside this file's folder in a checkout. Never a copy of its own.
+ * The skill's files, by their paths in its folder (SKILL.md, references/<name>.md): dist/skill/tinyoffice/ beside the
+ * built command line in the package, else the repository's skill/tinyoffice/ beside this file's folder in a checkout
+ * (its template left out). Never a copy of its own.
  */
-function skillText(): string {
+function skillFiles(): Record<string, string> {
   const here = dirname(fileURLToPath(import.meta.url));
-  const found = [join(here, 'skill', 'tinyoffice', 'SKILL.md'), join(here, '..', '..', 'skill', 'tinyoffice', 'SKILL.md')].find((p) => existsSync(p));
-  return found ? readFileSync(found, 'utf8') : die('the skill is not here: in a checkout, npm run skill writes it');
+  const dir = [join(here, 'skill', 'tinyoffice'), join(here, '..', '..', 'skill', 'tinyoffice')].find((p) => existsSync(join(p, 'SKILL.md')));
+  if (!dir) die('the skill is not here: in a checkout, npm run skill writes it');
+  const refs = existsSync(join(dir, 'references'))
+    ? readdirSync(join(dir, 'references'))
+        .filter((f) => f.endsWith('.md'))
+        .sort()
+    : [];
+  return Object.fromEntries(['SKILL.md', ...refs.map((f) => `references/${f}`)].map((f) => [f, readFileSync(join(dir, f), 'utf8')]));
 }
 
 /** A document from a link, a .tlo file, or an app and a file (or stdin). */
@@ -225,15 +235,23 @@ async function main() {
       return;
     }
     case 'skill': {
-      const text = skillText();
+      const files = skillFiles();
       const into = str('into');
       if (flags.into === true) die("--into which folder? (for Claude Code, ~/.claude/skills or a project's .claude/skills)");
-      if (!into) return void process.stdout.write(text);
-      const to = join(into, 'tinyoffice', 'SKILL.md');
-      if (existsSync(to) && !flags.force) die(`${to} is there already; --force replaces it`, 1);
-      mkdirSync(dirname(to), { recursive: true });
-      writeFileSync(to, text);
-      return out(to);
+      if (!into) return void process.stdout.write(files['SKILL.md']);
+      const folder = join(into, 'tinyoffice');
+      if (existsSync(join(folder, 'SKILL.md')) && !flags.force) die(`${folder} is there already; --force replaces it`, 1);
+      // Replaced whole: a reference of an earlier version that this one does not carry would be read as current.
+      if (existsSync(join(folder, 'references'))) for (const f of readdirSync(join(folder, 'references'))) if (f.endsWith('.md') && !files[`references/${f}`]) rmSync(join(folder, 'references', f));
+      for (const [f, text] of Object.entries(files)) {
+        mkdirSync(dirname(join(folder, f)), { recursive: true });
+        writeFileSync(join(folder, f), text);
+      }
+      return out(
+        Object.keys(files)
+          .map((f) => join(folder, f))
+          .join('\n'),
+      );
     }
     case '':
     case 'help':

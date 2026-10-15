@@ -49,7 +49,7 @@ Utterly fine with AI agents.
 - An agent has three ways in:
 1. [/llms.txt](public/llms.txt) for a fetch;
 2. `npx tinylittleoffice` with a runtime ([packages/doc](packages/doc/README.md));
-3. And, for Claude Code, the [skill](skill/tinyoffice/SKILL.md), installed with `npx tinylittleoffice skill --into ~/.claude/skills`.
+3. And, for Claude Code, the [skill](skill/tinyoffice/SKILL.md) (a short SKILL.md and a reference an app), installed with `npx tinylittleoffice skill --into ~/.claude/skills`.
 
 ## Developers
 

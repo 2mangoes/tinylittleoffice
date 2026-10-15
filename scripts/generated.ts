@@ -8,8 +8,8 @@
  *
  * test/lints.test.ts runs each script with --check (npm run lint, and the build, run that test).
  */
-import { existsSync, readFileSync, writeFileSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { dirname, resolve } from 'node:path';
 
 const ROOT = resolve(import.meta.dirname, '..');
 
@@ -28,5 +28,8 @@ export function generate(files: Record<string, string>, by: string, argv = proce
     if (stale.length) process.exit(1);
     return;
   }
-  for (const [path, text] of Object.entries(files)) writeFileSync(resolve(root, path), text);
+  for (const [path, text] of Object.entries(files)) {
+    mkdirSync(dirname(resolve(root, path)), { recursive: true });
+    writeFileSync(resolve(root, path), text);
+  }
 }

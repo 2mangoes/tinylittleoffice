@@ -293,7 +293,7 @@ Because `evaluate` takes any `Doc` and block index, a table block inside a Write
 
 ## 6. The decisions (2026-10-09)
 
-- The byte-stability gate is the corpus (test/doc/corpus.test.ts): every template, every example in docs/tlo.md and skill/tinyoffice/SKILL.md, and the apps' examples at the tag `v0-before-rebuild`: `write(parse(x)) === x`.
+- The byte-stability gate is the corpus (test/doc/corpus.test.ts): every template, every example in docs/tlo.md and the skill (skill/tinyoffice/, its references), and the apps' examples at the tag `v0-before-rebuild`: `write(parse(x)) === x`.
 - The editor's tests run in **Vitest browser mode**; `Pos↔offset`, ops and paste fitting are node tests.
 - There is no `execCommand` and no contenteditable outside `<to-text>`, ever.
 - Invoice is a **Write template**: a table block with an `Amount:money` column of formulas, evaluated in place by `evaluate(doc, at)`, drawn as paper by Write's print view; its fields (`from`, `to`, `number`, `date`, `due`, `tax`, `currency`, `terms`) are head fields (decided with Paul, 2026-10-09).

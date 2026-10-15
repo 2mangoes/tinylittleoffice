@@ -3,7 +3,7 @@
 // node_modules, so this is the test that the package carries what it runs.
 import { test, expect } from 'vitest';
 import { execFileSync } from 'node:child_process';
-import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 
@@ -36,11 +36,21 @@ test('packed and installed elsewhere, `tinylittleoffice` lints an example, gives
     expect(execFileSync(bin, ['lint', join(app, 'money.tlo')], { encoding: 'utf8' })).toBe('');
     expect(execFileSync(bin, ['example', 'sheet', 'money'], { encoding: 'utf8' })).toContain('The lint: clean');
     expect(execFileSync(join(app, 'node_modules/.bin/tinyoffice'), ['shapes', 'diagram'], { encoding: 'utf8' })).toContain('venn');
-    // The skill rides in the package, as `npm run skill` wrote it, and installs from there.
-    const skill = readFileSync(join(ROOT, 'skill/tinyoffice/SKILL.md'), 'utf8');
-    expect(execFileSync(bin, ['skill'], { encoding: 'utf8' })).toBe(skill);
-    expect(execFileSync(bin, ['skill', '--into', join(app, 'skills')], { encoding: 'utf8' }).trim()).toBe(join(app, 'skills/tinyoffice/SKILL.md'));
-    expect(readFileSync(join(app, 'skills/tinyoffice/SKILL.md'), 'utf8')).toBe(skill);
+    // The skill's folder rides in the package, as `npm run skill` wrote it, and installs from there, whole.
+    const files = [
+      'SKILL.md',
+      ...readdirSync(join(ROOT, 'skill/tinyoffice/references'))
+        .sort()
+        .map((f) => `references/${f}`),
+    ];
+    expect(execFileSync(bin, ['skill'], { encoding: 'utf8' })).toBe(readFileSync(join(ROOT, 'skill/tinyoffice/SKILL.md'), 'utf8'));
+    expect(
+      execFileSync(bin, ['skill', '--into', join(app, 'skills')], { encoding: 'utf8' })
+        .trim()
+        .split('\n'),
+    ).toStrictEqual(files.map((f) => join(app, 'skills/tinyoffice', f)));
+    for (const f of files) expect(readFileSync(join(app, 'skills/tinyoffice', f), 'utf8'), f).toBe(readFileSync(join(ROOT, 'skill/tinyoffice', f), 'utf8'));
+    expect(readdirSync(join(app, 'node_modules/tinylittleoffice/dist/skill/tinyoffice')).sort()).toStrictEqual(['SKILL.md', 'references']);
     const made = execFileSync(process.execPath, ['--input-type=module', '-e', "import { link, read } from 'tinylittleoffice'; console.log(read(link('outline', '- [ ] Milk\\n')).text)"], {
       cwd: app,
       encoding: 'utf8',

@@ -25,7 +25,7 @@ import '../src/apps/anim/commands.ts';
 import '../src/apps/cal/commands.ts';
 import '../src/apps/trip/commands.ts';
 import { generate } from './generated.ts';
-import { makeLlms, makeSkill } from './make-skill.ts';
+import { makeSkill, skillOutputs } from './make-skill.ts';
 
 const at = (p: string) => fileURLToPath(new URL(`../${p}`, import.meta.url));
 
@@ -106,6 +106,5 @@ function editingDoc(text = readFileSync(at('docs/editing.md'), 'utf8')): string 
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
-  const skill = await makeSkill();
-  generate({ 'docs/editing.md': editingDoc(), 'skill/tinyoffice/SKILL.md': skill, 'public/llms-full.txt': makeLlms(skill) }, 'npm run commands');
+  generate({ 'docs/editing.md': editingDoc(), ...skillOutputs(await makeSkill()) }, 'npm run commands');
 }

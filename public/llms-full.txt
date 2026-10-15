@@ -2,7 +2,7 @@
 
 Tiny Little Office (https://tinylittleoffice.com) is an office suite whose documents live entirely in their links. You make a document by writing a URL. Nothing is uploaded: opening the link shows the document in an editor, whoever opens it can change it, and the address follows every edit once the typing stops, so the new link is the new document. The document sits after the `#`, which browsers never send to a server. Save in browser is off by default, and then nothing is kept on the device; a person may turn it on, which keeps their documents in their own browser and never on a server; a short link (below) is the one thing a server holds, encrypted with a key the server never sees, until it expires.
 
-Every document is one text in one format, TLO: Markdown with a few additions. If you can write Markdown you can write any app below; each section says which shapes that app reads, with one of its own templates as the example.
+Every document is one text in one format, TLO: Markdown with a few additions. If you can write Markdown you can write any app below; each app's section says which shapes it reads, with one of its own templates as the example.
 
 <!-- This file is written by scripts/make-skill.ts from SKILL.tpl.md: edit the template, then `npm run skill`. -->
 
@@ -70,6 +70,14 @@ Write ordinary Markdown: `#` headings, paragraphs, `- ` and `1. ` lists nested b
 | `anim` | Animator | Anything from the Drawing Tool, moving: position, depth, size, spin and turn over time, with effects for memes. |
 | `cal` | Calendar | Days and times on a month, a year or a schedule, in any time zone. |
 | `trip` | Trip Planner | A route on a map: stops in order, each with a note, and how far between them. |
+
+## Choosing an app
+
+- Numbers, a table, a chart, a model: `sheet`. A quick sum or a conversion: `calc`.
+- Words to read or print: `write`. Notes in a tree: `outline`. Something to present: `deck`. A poster, a zine, badges: `deck` with a `format`.
+- Ideas branching from one topic: `diagram` `mind`. People and reporting lines: `org`. A process with handoffs: `lanes`. Dates along a line: `timeline`. Overlaps: `venn`. Who sits where: `seating`. What talks to what: `net`.
+- Days and times: `cal`; tasks over weeks: `cal` with `view: gantt`. Places in order: `trip`. Things to tick off: `- [ ]` tasks in `write` or `outline`.
+- Anything else visual: `draw`; moving: `anim`.
 
 ## Words
 
@@ -551,7 +559,7 @@ A page of your own can import `https://tinylittleoffice.com/tinyoffice.js` inste
 
 ## The skill
 
-This guide is also a skill for Claude Code: the same words, under front matter that says when to use them. The npm package carries it: `npx tinylittleoffice skill` prints it, and `npx tinylittleoffice skill --into ~/.claude/skills` installs it for every project (`--into .claude/skills` for one), as `tinyoffice/SKILL.md`; a file already there is left as it is unless `--force`. Its source is https://github.com/aboard-io/tinylittleoffice/blob/main/skill/tinyoffice/SKILL.md.
+This guide is also a skill for Claude Code: the same words, under front matter that says when to use them, as a folder, `tinyoffice/`: `SKILL.md` holds the sections every document needs, and `references/` the rest, a file an app (`references/deck.md`), one for the files and the API (`references/api.md`) and one for the editors' keys (`references/editors.md`), each read when the task needs it. The npm package carries it: `npx tinylittleoffice skill` prints `SKILL.md`, and `npx tinylittleoffice skill --into ~/.claude/skills` installs the folder for every project (`--into .claude/skills` for one); one already there is left as it is unless `--force`. Its source is https://github.com/aboard-io/tinylittleoffice/tree/main/skill/tinyoffice.
 
 ## Check it, do not look at it
 
@@ -572,6 +580,12 @@ Before you share a link, lint it: `tinyoffice lint <link or file.tlo>` (or `awai
 
 A diagram fenced on a slide is linted too, at its slide. `tinyoffice measure <link or file>` (`measure(app, text)`) gives the numbers behind them as JSON: per slide, the headline's and the words' sizes, the lines they wrapped to, what was cut and the bullets a document hides, what it shows (`shows`); per diagram, its things, its connections drawn and dropped, and each label's size, lines and whether it was cut; per table, its formulas and the ones that fail; `short`, whether the link fits in a short link; and for every document `words` and `headings`, what a reader meets. Set your words from these numbers. `read` gives back the text exactly as written, so what you wrote is what the link holds; `read --text` (`text(url)`) gives what it says, as a screen reader is given it on the Display Link (a diagram's things and connections, a calendar's days), to check that it reads. You never need a browser or a screenshot to check a document: the lint and the measures come from the same layout code that draws the pages. If you do open a development copy of the site, short links need its shortener (`npm run tinier:dev`).
 
+## Good practice
+
+- URL-encode `doc` and `title`; check that `#`, `&`, `%`, `+` and `=` in the content are encoded.
+- Give the link as a Markdown link with a plain description: `[Sales by quarter (chart)](https://...)`.
+- Say that the link is the document: editing it changes the link, and anyone with the link can read it.
+
 ## Driving the editors
 
 For an agent working in the editors in a browser: the keys each app answers, written from the apps' command registry (`Mod` is ⌘ on a Mac and Ctrl elsewhere; `at:` places are inside the app). Every command in force is also found by the menu's search (the hamburger), which Mod+K opens focused outside words.
@@ -589,17 +603,3 @@ For an agent working in the editors in a browser: the keys each app answers, wri
 - **Animator**: `Space` Play; `K` Add a key here; `Enter` Edit the words; `Mod+D` Duplicate; `Mod+C` Copy; `Mod+X` Cut; `Mod+V` Paste; `Delete`/`Backspace` Delete; `,`/`.` A frame back, a frame on; `Home`/`End` The first frame, the last; `ArrowLeft`/`ArrowRight`/`ArrowUp`/`ArrowDown`/`Shift+ArrowLeft`/`Shift+ArrowRight`/`Shift+ArrowUp`/`Shift+ArrowDown`/`Mod+ArrowLeft`/`Mod+ArrowRight`/`Mod+ArrowUp`/`Mod+ArrowDown` Nudge the shapes in hand; with none, step a frame; `Mod+A` Select all: the words of the box, then everything; `Escape` Step out: close, collapse, let go.
 - **Calendar**: `Mod+Alt+ArrowLeft` A day earlier; `Mod+Alt+ArrowRight` A day later; `Alt+Enter` Dates; `Tab`/`Shift+Tab` Indent or bring out in a list; the next cell in a grid; `Alt+ArrowUp`/`Alt+ArrowDown` Move the selected items up or down; `ArrowUp`/`ArrowDown` The next or the one before; `Mod+D` Duplicate; `Mod+Enter` Check or uncheck a task; `Mod+Alt+ArrowLeft` A day earlier; `Mod+Alt+ArrowRight` A day later; `Alt+Enter` Dates; `Enter` Event; `Escape` Step out: close, collapse, let go; `ArrowLeft`/`ArrowRight`/`ArrowUp`/`ArrowDown`/`Shift+ArrowLeft`/`Shift+ArrowRight`/`Shift+ArrowUp`/`Shift+ArrowDown`/`Home`/`End`/`PageUp`/`PageDown` The next or the one before; `Delete`/`Backspace` Delete; `Mod+D` Duplicate.
 - **Trip Planner**: `Mod+Alt+Enter` Present; `Alt+ArrowUp`/`Alt+ArrowDown` Move the selected items up or down; `Mod+D` Duplicate; `ArrowUp`/`ArrowDown` The next or the one before; `ArrowRight`/`Space`/`PageDown`/`Enter` Presenting: the next stop; `ArrowLeft`/`PageUp`/`Backspace` Presenting: the stop before; `Home`/`End` The first, the last; `Escape` Stop presenting; `ArrowLeft`/`ArrowRight`/`ArrowUp`/`ArrowDown`/`Shift+ArrowLeft`/`Shift+ArrowRight`/`Shift+ArrowUp`/`Shift+ArrowDown` Nudge the shapes in hand; `Delete`/`Backspace` Delete; `Escape` Step out: close, collapse, let go.
-
-## Choosing an app
-
-- Numbers, a table, a chart, a model: `sheet`. A quick sum or a conversion: `calc`.
-- Words to read or print: `write`. Notes in a tree: `outline`. Something to present: `deck`. A poster, a zine, badges: `deck` with a `format`.
-- Ideas branching from one topic: `diagram` `mind`. People and reporting lines: `org`. A process with handoffs: `lanes`. Dates along a line: `timeline`. Overlaps: `venn`. Who sits where: `seating`. What talks to what: `net`.
-- Days and times: `cal`; tasks over weeks: `cal` with `view: gantt`. Places in order: `trip`. Things to tick off: `- [ ]` tasks in `write` or `outline`.
-- Anything else visual: `draw`; moving: `anim`.
-
-## Good practice
-
-- URL-encode `doc` and `title`; check that `#`, `&`, `%`, `+` and `=` in the content are encoded.
-- Give the link as a Markdown link with a plain description: `[Sales by quarter (chart)](https://...)`.
-- Say that the link is the document: editing it changes the link, and anyone with the link can read it.

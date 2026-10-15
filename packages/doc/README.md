@@ -76,17 +76,19 @@ await example('sheet', 'money'); // [{ id, name, for, from, text, link, json, li
 await tryDraft('deck', text); // { lint, measure, json }
 ```
 
-The guide an agent reads first is `/llms.txt` (short); the guide to every app's format is the skill,
-`skill/tinyoffice/SKILL.md`, served as `/llms-full.txt`, with a page per app at `/llms/<app>.txt`.
+The guide an agent reads first is `/llms.txt` (short); the guide to every app's format is served whole as
+`/llms-full.txt`, with a page per app at `/llms/<app>.txt`, and is the skill below, cut into its folder.
 
 ## The skill
 
-The package carries the skill, `dist/skill/tinyoffice/SKILL.md`: the guide to every app's format, under front
-matter that tells Claude Code when to use it. `npm run skill` writes it from its template and `npm run build:cli`
-puts it in the package; nothing copies it by hand.
+The package carries the skill, the folder `dist/skill/tinyoffice/`, as Claude Code reads one: `SKILL.md`, under front
+matter that says when to use it, holds what every document needs (the link, the rules, the format, the apps, how to
+check), and `references/` the rest, a file an app (`deck.md`), one for the files and the API (`api.md`) and one for
+the editors' keys (`editors.md`), each read when the task needs it. `npm run skill` writes the folder from one
+template and `npm run build:cli` puts it in the package; nothing copies it by hand.
 
 ```sh
 npx tinylittleoffice skill                              # SKILL.md on stdout
-npx tinylittleoffice skill --into ~/.claude/skills      # installs ~/.claude/skills/tinyoffice/SKILL.md, for every project
-npx tinylittleoffice skill --into .claude/skills        # for this project alone; --force replaces a file already there
+npx tinylittleoffice skill --into ~/.claude/skills      # installs ~/.claude/skills/tinyoffice/, for every project
+npx tinylittleoffice skill --into .claude/skills        # for this project alone; --force replaces one already there
 ```
