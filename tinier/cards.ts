@@ -198,10 +198,14 @@ export async function cardPage(req: Request, id: string, store: CardStore, edge:
   return taggedPage(key, res, card, image, edge);
 }
 
-/** A page's HTML with the card's tags, kept at the edge under `key` for an hour. */
+/**
+ * A page's HTML with the card's tags, kept at the edge under `key` for an hour. no-transform, as the pages' own header
+ * says (public/_headers): without it Cloudflare wrote its analytics beacon into the page served at /c/<id> (seen live,
+ * 2026-10-15), a third party's script the policy blocks but the site never asks for.
+ */
 async function taggedPage(key: Request, res: Response, card: Card, image: string, edge: Edge): Promise<Response> {
   const headers = new Headers(res.headers);
-  headers.set('cache-control', 'public, max-age=3600');
+  headers.set('cache-control', 'public, max-age=3600, no-transform');
   for (const h of ['content-length', 'etag', 'last-modified']) headers.delete(h);
   const out = new Response(tagged(await res.text(), card, image), { status: 200, headers });
   await edge.put(key, out.clone());

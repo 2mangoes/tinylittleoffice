@@ -80,7 +80,7 @@ test('a document shared to Bluesky with its preview: the card is kept, the /c/<i
   // What a network's fetcher reads.
   const shared = await request.get(`${site}/c/${id}`);
   expect(shared.status()).toBe(200);
-  expect(shared.headers()['cache-control']).toBe('public, max-age=3600');
+  expect(shared.headers()['cache-control']).toBe('public, max-age=3600, no-transform');
   const html = await shared.text();
   expect(content(html, 'og:title')).toBe('Garden &quot;plan&quot;');
   expect(content(html, 'twitter:title')).toBe('Garden &quot;plan&quot;');

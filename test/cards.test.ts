@@ -135,7 +135,7 @@ test('an app page or the home page with ?c= carries the card in its tags, the ti
   for (const path of ['/', '/sheet/', '/write/']) {
     const res = await ask(get(`${path}?c=${id}`));
     expect(res.status, path).toBe(200);
-    expect(res.headers.get('cache-control')).toBe('public, max-age=3600');
+    expect(res.headers.get('cache-control')).toBe('public, max-age=3600, no-transform');
     expect(res.headers.get('content-type')).toMatch(/^text\/html/);
     const page = await res.text();
     const esc = 'Q3 &quot;plans&quot; &lt;draft&gt; &amp; more';
@@ -160,7 +160,7 @@ test('/c/<id> is the card’s app’s page with the card in its tags, cached an 
   const { id } = (await (await ask(post(body({ title: 'Trip "plans"', text: 'Day one.', app: 'trip' })))).json()) as { id: string };
   const res = await ask(get(`/c/${id}`));
   expect(res.status).toBe(200);
-  expect(res.headers.get('cache-control')).toBe('public, max-age=3600');
+  expect(res.headers.get('cache-control')).toBe('public, max-age=3600, no-transform');
   expect(res.headers.get('content-type')).toMatch(/^text\/html/);
   const page = await res.text();
   expect(content(page, 'og:title')).toBe('Trip &quot;plans&quot;');
@@ -173,7 +173,7 @@ test('/c/<id> is the card’s app’s page with the card in its tags, cached an 
   store.card = (i) => (reads++, card(i));
   await ask(get(`/c/${id}`));
   expect(reads).toBe(0);
-  expect(edge.kept.get(`${SITE}/c/${id}`)!.headers.get('cache-control')).toBe('public, max-age=3600');
+  expect(edge.kept.get(`${SITE}/c/${id}`)!.headers.get('cache-control')).toBe('public, max-age=3600, no-transform');
   // Gone, or never there: the home page, by a redirect that keeps the hash.
   for (const [path, now] of [
     ['/c/zzzzzzz', NOW],
@@ -227,7 +227,7 @@ test('the edge: a card and a page with it are read from the database once, howev
   }
   expect(reads).toBe(2);
   expect(edge.kept.get(`${SITE}/card/${id}.png`)!.headers.get('cache-control')).toBe(`public, max-age=${30 * 86400}`);
-  expect(edge.kept.get(`${SITE}/deck/?c=${id}`)!.headers.get('cache-control')).toBe('public, max-age=3600');
+  expect(edge.kept.get(`${SITE}/deck/?c=${id}`)!.headers.get('cache-control')).toBe('public, max-age=3600, no-transform');
 });
 
 test("the shortener's landing page with ?c= carries the card's tags the same way, the picture the site's; without, its own", async () => {
