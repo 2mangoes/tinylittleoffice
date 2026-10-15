@@ -1443,7 +1443,7 @@ common-purple = 紫
 # en: 3b4e294693563cc45de95b9db8b4abeabfac77db
 common-indigo = 藍
 # en: 3526f607bcd4f51ad0bc05f814579a42c2c0ba57
-draw-yellow = 黄
+common-yellow = 黄
 # en: b3d97fd6dece388a968e367f3ac4b9e64d739f52
 draw-sky = 空色
 # en: 54076359fdc7f1f0e000b9ae15b96f8b09866acb

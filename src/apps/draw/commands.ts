@@ -109,7 +109,7 @@ export const PIXEL_INKS: { k: string; name: string }[] = [
   { k: 'b', name: 'common-indigo' },
   { k: 'c', name: 'common-red' },
   { k: 'd', name: 'common-orange' },
-  { k: 'e', name: 'draw-yellow' },
+  { k: 'e', name: 'common-yellow' },
   { k: 'f', name: 'common-green' },
   { k: 'g', name: 'draw-sky' },
   { k: 'h', name: 'draw-pink' },

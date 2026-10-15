@@ -6,7 +6,7 @@
  * the arrows between rows at the edge of a row's words. A key acts on the row it is typed in; a button on the row
  * that has the caret. Rows chosen whole are the rows controller's (kit/text/rows-commands.ts).
  */
-import { ArrowDown, ArrowUp, Eye, FoldVertical, Link2, ListOrdered, Plus, Tag, UnfoldVertical, ZoomIn, ZoomOut } from 'lucide';
+import { ArrowDown, ArrowUp, Eye, FoldVertical, Link2, ListChecks, ListOrdered, Plus, Tag, UnfoldVertical, ZoomIn, ZoomOut } from 'lucide';
 import { appOf, apps } from '../../kit/core/apps.ts';
 import { register, type Command, commandsOf } from '../../kit/core/commands.ts';
 import { t } from '../../kit/core/i18n.ts';
@@ -28,7 +28,7 @@ export const INSERTS: Command<O>[] = [
   // The compound bullet (Paul, 2026-10-15): a task's box, a status of the document's set, a due day.
   cmd('insert.task', 'common-task', { icon: UI.check, where: ['menu:insert'], disabled: (o) => !words(o), does: (o) => o.addTask() }),
   cmd('insert.due', 'outline-due-date', { icon: UI.calendar, where: ['menu:insert'], disabled: (o) => !words(o), does: (o) => o.addDue() }),
-  cmd('insert.statuses', 'outline-statuses', { icon: Tag, where: ['menu:insert'], does: (o) => o.addStatuses() }),
+  cmd('insert.statuses', 'outline-statuses', { icon: Tag, where: ['menu:insert'], does: (o) => o.editStatuses() }),
   ...apps()
     .filter((a) => a.id !== 'outline')
     .map((a) => cmd(`insert.app.${a.id}`, () => a.name, { icon: a.icon, data: true, heading: 'common-new-document', where: ['menu:insert'], does: (o) => o.insertApp(a.id) })),
@@ -85,6 +85,9 @@ const OUTLINE: Command<O>[] = [
   cmd('connect', (o) => (o?.connecting ? t('outline-cancel-connecting') : t('outline-connect')), { icon: Link2, where: ['bar'], pressed: (o) => !!o.connecting, does: (o) => o.connect() }),
   cmd('view', 'outline-view-as', { icon: Eye, menu: 'view', where: ['bar'], document: true, takesFocus: true, does: () => undefined }),
   cmd('view.page', 'outline-as-page', { icon: UI.print, where: ['menu:view'], does: (o) => o.showPage() }),
+  // The compound bullet's views (Paul, 2026-10-15): the things to do as a table, sorted by status or by day; the items by status.
+  cmd('view.agenda', 'outline-agenda', { icon: ListChecks, where: ['menu:view'], document: true, does: (o) => o.showAgenda() }),
+  cmd('view.status', 'outline-by-status', { icon: Tag, where: ['menu:view'], document: true, does: (o) => o.showByStatus() }),
   ...(def.handoffs ?? []).map((h, i) => cmd(`view.${h.to}${i}`, () => h.label(), { icon: appOf(h.to)?.icon, where: ['menu:view'], when: () => !!appOf(h.to), does: (o) => o.openAs(h) })),
   cmd('tick', 'common-check-or-uncheck-task', { at: 'words', keys: 'Mod+Enter', where: ['keys-only'], does: (o, e) => o.tickAt(at(o, e)) }),
   cmd('fold', 'outline-fold-unfold', {

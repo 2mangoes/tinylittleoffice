@@ -420,7 +420,7 @@ test('a mind map gets the tree and its joins as cross-links; an org chart its jo
   );
   expect(deck).toBe('## Launch {.title}\n\n---\n\n## Product\n\n- Pricing\n- Onboarding\n\n---\n\n## Pricing\n\n- Tiers\n\n---\n\n## Marketing\n\n- Press\n\n---\n\n```sheet\na | b\n--- | ---\n```\n');
   expect(outlineToDeck(readOutline(parse('- A\n  - a1\n- B\n  - b1\n')))).toBe('## A\n\n- a1\n\n---\n\n## B\n\n- b1\n');
-  expect(def.handoffs!.map((h) => h.to)).toEqual(['deck', 'diagram', 'diagram', 'diagram', 'diagram']);
+  expect(def.handoffs!.map((h) => h.to)).toEqual(['deck', 'diagram', 'diagram', 'diagram', 'diagram', 'cal']);
   expect(def.handoffs![0].convert('---\ntitle: Plan\n---\n' + TREE)).toBe('---\ntitle: Plan\n---\n## Launch {.title}\n\n---\n\n## Product\n\n- Pricing\n');
 });
 
@@ -611,15 +611,15 @@ test('footnotes in the files: each an item right under its own, first among its 
 test('statuses come from the head, a name and a color each, the last the done one; a document without the line has none', async () => {
   const { statusesOf, STATUS_COLORS, DEFAULT_STATUSES } = await import('../model.ts');
   expect(statusesOf(parse('---\nstatuses: TODO=red, DOING=yellow, DONE=green\n---\n- a\n'))).toEqual([
-    { name: 'TODO', color: STATUS_COLORS.red },
-    { name: 'DOING', color: STATUS_COLORS.yellow },
-    { name: 'DONE', color: STATUS_COLORS.green },
+    { name: 'TODO', color: STATUS_COLORS.red, word: 'red' },
+    { name: 'DOING', color: STATUS_COLORS.yellow, word: 'yellow' },
+    { name: 'DONE', color: STATUS_COLORS.green, word: 'green' },
   ]);
   // A color unknown is gray; no color is gray; a name twice is once; spaces are forgiven.
   expect(statusesOf(parse('---\nstatuses: Later = mauve ,Now, Now, Soon=blue\n---\n'))).toEqual([
-    { name: 'Later', color: STATUS_COLORS.gray },
-    { name: 'Now', color: STATUS_COLORS.gray },
-    { name: 'Soon', color: STATUS_COLORS.blue },
+    { name: 'Later', color: STATUS_COLORS.gray, word: 'gray' },
+    { name: 'Now', color: STATUS_COLORS.gray, word: 'gray' },
+    { name: 'Soon', color: STATUS_COLORS.blue, word: 'blue' },
   ]);
   expect(statusesOf(parse('- a\n'))).toEqual([]);
   expect(statusesOf(parse(`---\nstatuses: ${DEFAULT_STATUSES}\n---\n`)).map((s) => s.name)).toEqual(['TODO', 'DOING', 'DONE']);
@@ -634,7 +634,8 @@ test('a status and a due day are the itemâ€™s attributes, kept beside the lineâ€
   expect(v.items[0].dir).toBeDefined();
   expect(v.items[0].status).toBeUndefined();
   let d = applyAll(doc, setStatus(doc, 0, 'DOING'));
-  expect(write(d)).toBe('---\nstatuses: TODO=red, DOING=yellow, DONE=green\n---\n- Draft {.from label=sets color=teal status=DOING}\n  - [ ] Outline\n');
+  // (A status brings the task's box: the compound bullet.)
+  expect(write(d)).toBe('---\nstatuses: TODO=red, DOING=yellow, DONE=green\n---\n- [ ] Draft {.from label=sets color=teal status=DOING}\n  - [ ] Outline\n');
   expect(readOutline(d).items[0].status).toBe('DOING');
   d = applyAll(d, setDue(d, 0, '2026-10-20'));
   expect(write(d)).toContain('{.from label=sets color=teal status=DOING due=2026-10-20}');
@@ -643,12 +644,12 @@ test('a status and a due day are the itemâ€™s attributes, kept beside the lineâ€
   expect(setDue(d, 0, 'tomorrow')).toEqual(setDue(d, 0, undefined));
   d = applyAll(d, setDue(d, 0, undefined));
   expect(write(d)).toContain('{.from label=sets color=teal status=DOING}');
-  // The last status checks a task's box; another unchecks it; a status on no task touches no box.
+  // The last status checks a task's box; another unchecks it; the last on an item that was no task makes it a checked one.
   d = applyAll(d, setStatus(d, 1, 'DONE'));
   expect(write(d)).toContain('- [x] Outline {status=DONE}');
   d = applyAll(d, setStatus(d, 1, 'TODO'));
   expect(write(d)).toContain('- [ ] Outline {status=TODO}');
-  expect(write(applyAll(d, setStatus(d, 0, 'DONE')))).toContain('- Draft {.from label=sets color=teal status=DONE}');
+  expect(write(applyAll(d, setStatus(d, 0, 'DONE')))).toContain('- [x] Draft {.from label=sets color=teal status=DONE}');
   // The box checked goes to the last status; unchecked from the last, to the first; a document with no statuses has only the box.
   d = applyAll(d, tick(d, 1));
   expect(write(d)).toContain('- [x] Outline {status=DONE}');
@@ -659,11 +660,11 @@ test('a status and a due day are the itemâ€™s attributes, kept beside the lineâ€
   // Checked by the words' own editor, the status follows the same way.
   const after = applyAll(d, [{ op: 'splice', at: 1, n: 1, blocks: [{ ...d.blocks[1], done: true } as (typeof d.blocks)[1]] }]);
   expect(write(applyAll(after, followTick(after, 1)))).toContain('- [x] Outline {status=DONE}');
-  // A task made and unmade.
-  d = applyAll(d, makeTask(d, 0, true));
-  expect(write(d)).toContain('- [ ] Draft {.from label=sets color=teal status=DOING}');
+  // A task unmade and made.
   d = applyAll(d, makeTask(d, 0, false));
   expect(write(d)).toContain('- Draft {.from label=sets color=teal status=DOING}');
+  d = applyAll(d, makeTask(d, 0, true));
+  expect(write(d)).toContain('- [ ] Draft {.from label=sets color=teal status=DOING}');
   // The line's kind set afterwards keeps the box and the attributes.
   const task = parse('- a\n  - [x] b {status=DONE due=2027-01-02}\n');
   expect(write(applyAll(task, setLine(task, readOutline(task), 1, { dir: '->' })))).toBe('- a\n  - [x] b {.from status=DONE due=2027-01-02}\n');
@@ -693,4 +694,64 @@ test('an item folded shut is its class, {.shut}, beside its other attributes; Fo
   // The line's kind set afterwards keeps the fold (a root has no line: the class alone).
   const shut = applyAll(doc, setShut(doc, 4, true));
   expect(write(applyAll(shut, setLine(shut, readOutline(shut), 4, { dir: '->' })))).toBe('- A {.from label=x}\n  - a1\n- B\n- C\n  - c1 {.shut .from}\n');
+});
+
+test('the set edited: the head rewritten, a renamed status followed by its items, one taken away cleared from them, the boxes left alone', async () => {
+  const { applyStatuses, writeStatuses } = await import('../model.ts');
+  expect(
+    writeStatuses([
+      { name: 'A', word: 'red' },
+      { name: 'B', word: 'mauve' },
+    ]),
+  ).toBe('A=red, B=gray');
+  const doc = parse('---\nstatuses: TODO=red, DOING=yellow, DONE=green\n---\n- [ ] a {status=TODO}\n- b {status=DOING}\n- [x] c {status=DONE}\n- d\n');
+  const v = readOutline(doc);
+  const d = applyAll(
+    doc,
+    applyStatuses(doc, v, [
+      { name: 'Later', word: 'gray', was: 'TODO' },
+      { name: 'DONE', word: 'green', was: 'DONE' },
+      { name: ' Soon ', word: 'blue', was: '' },
+      { name: '', word: 'red', was: '' },
+    ]),
+  );
+  expect(write(d)).toBe('---\nstatuses: Later=gray, DONE=green, Soon=blue\n---\n- [ ] a {status=Later}\n- b\n- [x] c {status=DONE}\n- d\n');
+  // Nothing to change: no ops. The set emptied: the head's line goes, and every status with it.
+  expect(
+    applyStatuses(d, readOutline(d), [
+      { name: 'Later', word: 'gray', was: 'Later' },
+      { name: 'DONE', word: 'green', was: 'DONE' },
+      { name: 'Soon', word: 'blue', was: 'Soon' },
+    ]),
+  ).toEqual([]);
+  expect(write(applyAll(d, applyStatuses(d, readOutline(d), [])))).toBe('- [ ] a\n- b\n- [x] c\n- d\n');
+});
+
+test('Enter beside a task with a status and a day makes the next item a task too, unchecked, with the first status and the same day', () => {
+  const doc = parse('---\nstatuses: TODO=red, DOING=yellow, DONE=green\n---\n- [x] Draft {status=DONE due=2026-10-20}\n- Plain\n');
+  const v = readOutline(doc);
+  // At the end: a sibling after it.
+  let r = enterAt(doc, v, 0);
+  expect(write(applyAll(doc, r.ops))).toBe('---\nstatuses: TODO=red, DOING=yellow, DONE=green\n---\n- [x] Draft {status=DONE due=2026-10-20}\n- [ ]  {status=TODO due=2026-10-20}\n- Plain\n');
+  // In the middle: the words after the caret go to the new item, which follows the same way.
+  r = enterAt(doc, v, 0, 2);
+  expect(write(applyAll(doc, r.ops))).toContain('- [x] Dr {status=DONE due=2026-10-20}\n- [ ] aft {status=TODO due=2026-10-20}\n');
+  // At the start: the empty item before follows too. (An empty item with attributes is written with its space kept.)
+  r = enterAt(doc, v, 0, 0);
+  expect(write(applyAll(doc, r.ops))).toContain('- [ ]  {status=TODO due=2026-10-20}\n- [x] Draft {status=DONE due=2026-10-20}\n');
+  // A plain item makes a plain item; a status with no set left keeps the item's own.
+  expect(write(applyAll(doc, enterAt(doc, v, 1).ops))).toContain('- Plain\n-\n');
+  const gone = parse('- a {status=Odd}\n');
+  expect(write(applyAll(gone, enterAt(gone, readOutline(gone), 0).ops))).toBe('- a {status=Odd}\n-  {status=Odd}\n');
+});
+
+test('the outline as a calendar: a dated item a dayâ€™s event in its statusâ€™s color, the statuses the legend; the undated stay behind', async () => {
+  const { outlineToCal } = await import('../model.ts');
+  const doc = parse(
+    '---\ntitle: Launch\nstatuses: TODO=red, DOING=yellow, DONE=green, Later=gray\n---\n- [ ] Draft {status=DOING due=2026-10-20}\n  - Quotes {status=TODO}\n- Press list {due=2026-10-22}\n- Party {status=Later due=2026-11-01}\n',
+  );
+  expect(outlineToCal(readOutline(doc), doc.head)).toBe(
+    '---\ntitle: Launch\nred: TODO\norange: DOING\ngreen: DONE\n---\n- 2026-10-20: Draft {color=orange}\n- 2026-10-22: Press list\n- 2026-11-01: Party\n',
+  );
+  expect(outlineToCal(readOutline(parse('- a\n')), {})).toBe('\n');
 });

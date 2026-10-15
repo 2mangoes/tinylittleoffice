@@ -90,9 +90,11 @@ export interface Status {
   name: string;
   /** The pill's color, a hex. */
   color: string;
+  /** The color's word, as the head writes it (a key of STATUS_COLORS). */
+  word: string;
 }
 /** The colors a status may name (the Calendar's words, with yellow and gray); an unknown word is gray. */
-export const STATUS_COLORS: Record<string, string> = { red: '#b3261e', orange: '#d55e00', yellow: '#a16207', green: '#009e73', blue: '#0072b2', purple: '#a05ca8', indigo: '#4f46e5', gray: '#6b7280' };
+export const STATUS_COLORS: Record<string, string> = { red: '#b3261e', orange: '#d55e00', yellow: '#eab308', green: '#009e73', blue: '#0072b2', purple: '#a05ca8', indigo: '#4f46e5', gray: '#6b7280' };
 /** What Insert ▾'s Statuses writes when the document has none. */
 export const DEFAULT_STATUSES = 'TODO=red, DOING=yellow, DONE=green';
 export function statusesOf(doc: Doc): Status[] {
@@ -101,9 +103,51 @@ export function statusesOf(doc: Doc): Status[] {
     const m = /^\s*([^=]+?)\s*(?:=\s*([A-Za-z]+)\s*)?$/.exec(part);
     const name = m?.[1].trim();
     if (!name || out.some((s) => s.name === name)) continue;
-    out.push({ name, color: STATUS_COLORS[(m![2] ?? '').toLowerCase()] ?? STATUS_COLORS.gray });
+    const word = (m![2] ?? '').toLowerCase();
+    out.push({ name, color: STATUS_COLORS[word] ?? STATUS_COLORS.gray, word: STATUS_COLORS[word] ? word : 'gray' });
   }
   return out;
+}
+/** A status color's word as the Calendar names it ('' where the Calendar has no such color: its default). */
+const CAL_WORD: Record<string, string> = { red: 'red', orange: 'orange', yellow: 'orange', green: 'green', blue: 'blue', purple: 'purple' };
+/**
+ * The outline as a Calendar (View as ▾ As a calendar; Paul, 2026-10-15): every item with a due day is a day's event in
+ * its words, colored by its status, the statuses the legend; the rest of the outline is not a date and stays behind.
+ */
+export function outlineToCal(v: OutlineView, head: Doc['head'] = {}): string {
+  const statuses = statusesOf({ head, blocks: [] });
+  const colorOf = (name?: string) => CAL_WORD[statuses.find((s) => s.name === name)?.word ?? ''] ?? '';
+  const legend = statuses.flatMap((s) => (CAL_WORD[s.word] ? [`${CAL_WORD[s.word]}: ${s.name}`] : []));
+  const lines = v.items.flatMap((it) => {
+    if (!it.due || it.doc) return [];
+    const color = colorOf(it.status);
+    return [`- ${it.due}: ${plainText(it.runs).trim() || '…'}${color ? ` {color=${color}}` : ''}`];
+  });
+  const front = [...(head.title ? [`title: ${head.title}`] : []), ...legend];
+  return `${front.length ? `---\n${front.join('\n')}\n---\n` : ''}${lines.join('\n')}\n`;
+}
+/** The head's line for a set of statuses: `TODO=red, DOING=yellow`. */
+export const writeStatuses = (list: { name: string; word: string }[]): string => list.map((s) => `${s.name}=${STATUS_COLORS[s.word] ? s.word : 'gray'}`).join(', ');
+/**
+ * The set edited (Paul, 2026-10-15: "Can I edit statuses"): the head's line rewritten (taken away when the set is
+ * empty), an item whose status was renamed (`was`, its name before) follows the new name, and one whose status is in
+ * the set no more loses it; a task's box is left as it is. Empty and repeated names are dropped.
+ */
+export function applyStatuses(doc: Doc, v: OutlineView, next: { name: string; word: string; was?: string }[]): Op[] {
+  const seen = new Set<string>();
+  const list = next.map((s) => ({ ...s, name: s.name.replace(/\s+/g, ' ').trim() })).filter((s) => s.name && !/[,=]/.test(s.name) && !seen.has(s.name) && (seen.add(s.name), true));
+  const line = writeStatuses(list);
+  const ops: Op[] = (doc.head.statuses ?? '') === line ? [] : [{ op: 'head', key: 'statuses', ...(line ? { value: line } : {}) }];
+  const renamed = new Map(list.flatMap((s) => (s.was && s.was !== s.name ? [[s.was, s.name] as const] : [])));
+  const names = new Set(list.map((s) => s.name));
+  for (const it of v.items) {
+    if (!it.status || it.doc) continue;
+    const b = doc.blocks[it.at];
+    if (b?.k !== 'li') continue;
+    const to = renamed.get(it.status) ?? (names.has(it.status) ? it.status : undefined);
+    if (to !== it.status) ops.push(...replaced(doc, it.at, withItem(b, { status: to })));
+  }
+  return ops;
 }
 /** A day as YYYY-MM-DD, the device's own calendar day. */
 const todayString = (now = new Date()): string => `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
@@ -140,12 +184,16 @@ function withItem(b: Block & { k: 'li' }, kv: Record<string, string | undefined>
 }
 const replaced = (doc: Doc, at: number, next: Block): Op[] =>
   write({ head: {}, blocks: [next] }) === write({ head: {}, blocks: [doc.blocks[at]] }) ? [] : [{ op: 'splice', at, n: 1, blocks: [next] }];
-/** The item's status set (undefined: none); a task's box follows: the last status checks it, another unchecks it. */
+/**
+ * The item's status set (undefined: none). A status brings the task's box with it (the compound bullet, Paul, 2026-10-15:
+ * "We lost the checkbox"): an item given a status is a task, checked when the status is the last, unchecked otherwise;
+ * a task's box follows a change the same way. The box stays when the status is taken away.
+ */
 export function setStatus(doc: Doc, at: number, name: string | undefined, statuses = statusesOf(doc)): Op[] {
   const b = doc.blocks[at];
   if (b?.k !== 'li') return [];
   const last = statuses[statuses.length - 1]?.name;
-  const done = b.done === undefined ? undefined : name !== undefined && name === last ? true : b.done ? false : undefined;
+  const done = name === undefined ? undefined : name === last ? true : b.done === undefined || b.done ? false : undefined;
   return replaced(doc, at, withItem(b, { status: name }, done));
 }
 /** The item's due day set (undefined: none). */
@@ -376,14 +424,30 @@ export function enterAt(doc: Doc, v: OutlineView, at: number, offset = Infinity,
   const end = family(doc, at, v.depths);
   const open = end > at + 1 && !folded;
   const len = wordsIn(b);
-  if (len > 0 && offset <= 0) return { ops: [{ op: 'splice', at, n: 0, blocks: [itemBlock(it.depth, [], undefined, undefined, undefined, isOrd(b))] }], at: at + 1, offset: 0 };
+  const { a, done } = follows(doc, b);
+  if (len > 0 && offset <= 0) return { ops: [{ op: 'splice', at, n: 0, blocks: [itemBlock(it.depth, [], undefined, undefined, a, isOrd(b), done)] }], at: at + 1, offset: 0 };
   const where = open ? at + 1 : end;
   const depth = open ? it.depth + 1 : it.depth;
   const ord = open ? isOrd(doc.blocks[at + 1]) : isOrd(b);
   const cut = len > 0 && offset < len && isText(b);
   const ops: Op[] = cut ? [{ op: 'text', at, from: offset, to: len, runs: [] }] : [];
-  ops.push({ op: 'splice', at: where, n: 0, blocks: [itemBlock(depth, cut ? sliceRuns(b.runs, offset, len) : [], undefined, undefined, undefined, ord)] });
+  ops.push({ op: 'splice', at: where, n: 0, blocks: [itemBlock(depth, cut ? sliceRuns(b.runs, offset, len) : [], undefined, undefined, a, ord, done)] });
   return { ops, at: where, offset: 0 };
+}
+/**
+ * What the item Enter makes next to one takes from it (Paul, 2026-10-15: "the next inserted element should also have a
+ * task, status, and date. The date should be the same. The task should be unset. The status should be the first status"):
+ * a task's box, unchecked; the first of the document's statuses where the item has one (its own where the set is gone);
+ * its due day.
+ */
+function follows(doc: Doc, b: Block | undefined): { a?: Attrs; done?: boolean } {
+  if (b?.k !== 'li') return {};
+  const kv: Record<string, string> = {};
+  const status = attr(b, 'status');
+  if (status) kv.status = statusesOf(doc)[0]?.name ?? status;
+  const due = attr(b, 'due');
+  if (due) kv.due = due;
+  return { ...(Object.keys(kv).length ? { a: { kv } } : {}), ...(b.done !== undefined ? { done: false } : {}) };
 }
 
 /** Two rows' words made one: `into`'s block keeps its place and its attributes and takes `from`'s words; `from`'s block alone goes (its children stay where they are). Joins naming `into` follow its new words. */

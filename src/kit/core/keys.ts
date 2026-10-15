@@ -165,7 +165,7 @@ export function shortcutGroups(def?: AppDef): { heading: string; keys: Command[]
 /** The dialog's body: a table a group. */
 export function renderShortcuts(def?: AppDef): TemplateResult {
   return html`${shortcutGroups(def).map(
-    (g) => html`<table class="to-keys">
+    (g) => html`<table class="to-table to-keys">
       <caption>${g.heading}</caption>
       <tbody>${g.keys.map((c) => html`<tr><th scope="row"><kbd>${keysText(c.keys!)}</kbd></th><td>${labelOf(c)}</td></tr>`)}</tbody>
     </table>`,

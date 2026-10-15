@@ -106,6 +106,7 @@
 
   /* The bullet: the line to the parent (a dot, or an arrow which way it points); tapped, it turns. */
   .ol-bullet {
+    order: -3;
     position: relative;
     flex: 0 0 var(--ol-step);
     height: var(--ol-row);
@@ -153,58 +154,57 @@
     border-radius: 50%;
   }
 
-  /* A line's name, once it has one: a chip before the words. */
-  .ol-label {
-    flex-shrink: 0;
-    align-self: center;
-    margin: 0 0.125rem 0 0.25rem;
-    font: inherit;
-    font-size: 0.75rem;
-    border-radius: var(--to-radius-pill);
-    max-width: 12em;
-    padding: 1px 0.5rem;
-    border: 0;
-    background: var(--to-accent-soft);
-    color: var(--to-accent);
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    cursor: pointer;
+  /* The row's chips are the kit's (.to-chip, kit.css): a line's name (accent), a status's pill (its colour's tint), a due
+     day (quiet). Only their places are the Outliner's: on a wide row the name and the status come before the box and the
+     words and the day after them (.ol-meta is nothing but its children, each ordered); on a narrow row (a phone) the
+     words keep the first line with the box, and the chips are a second line under them (Paul, 2026-10-15: "Alignment
+     is all screwed up here"). */
+  .ol-meta {
+    display: contents;
   }
-
-  /* The compound bullet: a status pill in its color before the words, a due day after them (a date field while typed). */
-  .ol-status {
-    flex-shrink: 0;
-    align-self: center;
-    margin: 0 0.25rem 0 0.125rem;
-    font: inherit;
-    font-size: 0.6875rem;
-    font-weight: 600;
-    letter-spacing: 0.02em;
-    border-radius: var(--to-radius-pill);
-    padding: 1px 0.5rem;
-    border: 0;
-    background: var(--ol-status, var(--to-accent));
-    color: #fff;
-    white-space: nowrap;
-    cursor: pointer;
+  .ol-row > .ol-meta > .ol-label {
+    order: -2;
+    margin-inline: 0.25rem 0.125rem;
   }
-  .ol-due {
-    flex-shrink: 0;
-    align-self: center;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.25rem;
-    margin: 0 0.125rem 0 0.25rem;
-    font: inherit;
-    font-size: 0.75rem;
-    border-radius: var(--to-radius-pill);
-    padding: 1px 0.5rem;
-    border: 0;
-    background: var(--to-surface-2);
-    color: var(--to-ink-2);
-    white-space: nowrap;
-    cursor: pointer;
+  .ol-row > .ol-meta > .ol-status {
+    order: -1;
+    margin-inline: 0.125rem 0.25rem;
+  }
+  .ol-row > .ol-task {
+    order: 0;
+  }
+  /* Each sits on the words' first line, whatever the words wrap to: its middle at the row's (--ol-row is a one-line row). */
+  .ol-row > .ol-task,
+  .ol-row > .ol-meta > .to-chip {
+    align-self: flex-start;
+    margin-top: calc((var(--ol-row) - 1.125rem) / 2);
+  }
+  .ol-row > .ol-meta > .ol-due {
+    order: 1;
+    margin-inline: 0.25rem 0.125rem;
+  }
+  @media (max-width: 36rem) {
+    .ol-row {
+      flex-wrap: wrap;
+    }
+    .ol-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.25rem;
+      flex-basis: 100%;
+      order: 2;
+      margin: -0.25rem 0 0.375rem var(--ol-step);
+    }
+    .ol-meta .ol-label,
+    .ol-meta .ol-status,
+    .ol-meta .ol-due {
+      align-self: center;
+      margin: 0;
+    }
+    .ol-meta .ol-due {
+      margin-left: auto;
+    }
   }
   .ol-due-in {
     align-self: center;
@@ -213,22 +213,151 @@
     font-size: 0.875rem;
     color: var(--to-ink);
   }
-  .ol-status:focus-visible,
-  .ol-due:focus-visible {
+  /* A task's box, in the row (the words' own marker is hidden in a row, below). */
+  .ol-task {
+    flex-shrink: 0;
+    align-self: center;
+    display: grid;
+    place-items: center;
+    width: 1.125rem;
+    height: 1.125rem;
+    margin: 0 0.375rem 0 0.125rem;
+    padding: 0;
+    border: 0.0938rem solid var(--to-ink-3);
+    border-radius: 0.25rem;
+    background: var(--to-surface);
+    color: var(--to-on-accent);
+    cursor: pointer;
+  }
+  .ol-task[aria-checked='true'] {
+    background: var(--to-accent);
+    border-color: var(--to-accent);
+  }
+  .ol-task:focus-visible,
+  .ol-crumbs button:focus-visible {
     outline: 0.125rem solid var(--to-accent);
     outline-offset: 1px;
   }
 
+  /* The statuses' dialog: a row a status, its name, its color and a sample pill. */
+  /* The statuses' dialog: a row a status, its name typed in a field washed in its colour (the field is the preview; Paul,
+     2026-10-15: "Just make the text entry area the color scheme of the color and let me edit the text"), the colour's dot, Remove. */
+  .ol-statuses-row {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0.375rem 0;
+  }
+  .ol-statuses-row input {
+    min-width: 0;
+    font: inherit;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    border-color: transparent;
+    background: color-mix(in oklab, var(--chip, var(--to-accent)) 20%, var(--to-surface));
+    color: color-mix(in oklab, var(--chip, var(--to-accent)) 70%, var(--to-ink));
+  }
+  /* The views (the agenda, by status): a row an item, lines between, the outline's own box and chips in it (each does
+     what it does in the outline), the words a button that closes the view and gives the item the caret. By status, the
+     rows are bulleted under their status. */
+  .ol-agenda-sorts {
+    display: flex;
+    gap: 0.375rem;
+    margin: 0 0 0.5rem;
+  }
+  .ol-agenda-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .ol-view-row {
+    --ol-row: 2.25rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.375rem;
+    padding: 0.125rem 0;
+    border-top: 1px solid var(--to-border);
+  }
+  .ol-view-row:first-child {
+    border-top: 0;
+  }
+  /* The box and the chips sit on the words' first line whatever the words wrap to, as in the outline's row. */
+  .ol-agenda-list.bulleted .ol-view-row::before,
+  .ol-view-row > .ol-task,
+  .ol-view-row > .to-chip {
+    flex: none;
+    align-self: flex-start;
+    margin: calc((var(--ol-row) - 1.125rem) / 2) 0 0;
+  }
+  .ol-agenda-list.bulleted .ol-view-row::before {
+    content: '•';
+    width: 1rem;
+    line-height: 1.125rem;
+    text-align: center;
+    color: var(--to-ink-3);
+  }
+  .ol-view-row > .ol-due {
+    margin-left: auto;
+  }
+  .ol-agenda-item {
+    flex: 1 1 auto;
+    min-width: 0;
+    font: inherit;
+    line-height: 1.5rem;
+    padding: calc((var(--ol-row) - 1.5rem) / 2) 0;
+    border: 0;
+    background: none;
+    color: var(--to-ink);
+    text-align: start;
+    cursor: pointer;
+  }
+  .ol-agenda-item:hover {
+    text-decoration: underline;
+  }
+  .ol-by-status-group h3 {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-size: 0.875rem;
+    margin: 1rem 0 0.25rem;
+  }
+  .ol-by-status-group:first-child h3 {
+    margin-top: 0;
+  }
+  .ol-by-status-group h3 .ol-status {
+    margin: 0;
+  }
+  .ol-by-status-group h3 small {
+    color: var(--to-ink-3);
+    font-weight: 400;
+  }
+  .ol-statuses-foot {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+  }
   /* The shared menu's own button is never shown: it opens beside the bullet tapped. */
   .ol-line-menu > button {
     display: none;
   }
 
   /* The words: the row's editor, its item drawn bare (the bullet is the row's). */
+  /* The words take what the chips leave, six ems at the least: on a narrow row the due day wraps to a second line (above), the words keep theirs. */
+  /* The words take their own width, six ems at the least and never more than the row, so the due day sits right after them;
+     a tap on the row's empty space beyond them still gives them the caret (renderRow's click). */
   .ol-row to-text {
-    flex: 1 1 auto;
-    min-width: 0;
+    flex: 0 1 auto;
+    min-width: 6em;
+    max-width: 100%;
     align-self: center;
+  }
+  /* On a narrow row the words take the first line's width beside the box; the chips are the line under (.ol-meta, above). */
+  @media (max-width: 36rem) {
+    .ol-row to-text {
+      flex: 1 1 0;
+    }
   }
   .ol-row to-text .tx {
     padding: 0.375rem 0.375rem 0.375rem 0.25rem;
@@ -242,6 +371,12 @@
   }
   .ol-row to-text .tx li::before {
     content: none;
+  }
+  /* A task's words: the row draws the box (.ol-task) and is its target, so the words keep neither the marker's room nor
+     its touch padding (text.css gives a task item both under a finger). */
+  .ol-row to-text .tx li[data-done] {
+    padding-left: 0;
+    min-height: 0;
   }
   .ol-row to-text .tx h1,
   .ol-row to-text .tx h2,
@@ -293,13 +428,10 @@
     margin-right: 0.375rem;
     color: var(--to-ink-3);
   }
-  .ol-kind:focus-visible,
-  .ol-label:focus-visible,
-  .ol-crumbs button:focus-visible {
+  .ol-kind:focus-visible {
     outline: 0.125rem solid var(--to-accent);
     outline-offset: 1px;
   }
-
   /* The space under the last item: a tap there starts the next one. */
   .ol-below {
     height: 2.75rem;
