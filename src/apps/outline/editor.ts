@@ -89,6 +89,7 @@ import {
   type Item,
   type Link,
   type OutlineView,
+  applyStatuses,
   DEFAULT_STATUSES,
   defaultDue,
   followTick,
@@ -112,6 +113,18 @@ import '../../kit/draw/notes.ts';
 import '../../kit/text/text.ts';
 import '../../kit/ui/context.ts';
 import './style.css';
+
+/** A status color's name, by its word (the Calendar's names, with yellow and gray). */
+const COLOR_NAMES: Record<string, () => string> = {
+  red: () => t('Red'),
+  orange: () => t('Orange'),
+  yellow: () => t('Yellow'),
+  green: () => t('Green'),
+  blue: () => t('Blue'),
+  purple: () => t('Purple'),
+  indigo: () => t('Indigo'),
+  gray: () => t('Gray'),
+};
 
 export const tag = 'to-outline-editor';
 
@@ -151,6 +164,7 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
     menuFor: { state: true },
     naming: { state: true },
     dating: { state: true },
+    statusDraft: { state: true },
     showing: { state: true },
   };
   /** Items folded shut, by block index: the document's own (`{.shut}`, model.ts SHUT), so the link carries the folds and an undo brings them back. */
@@ -169,6 +183,8 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
   declare naming: number;
   /** The row whose due day is being typed (a date field where its chip was), -1 for none. */
   declare dating: number;
+  /** The statuses as they are being edited in their dialog (`was`: the name before, for the items that carry it); null while it is closed. */
+  declare statusDraft: { name: string; word: string; was: string }[] | null;
   /** The outline shown as a page, in a dialog. */
   declare showing: boolean;
   /** The row editor last focused: what the bar's text tools act on. */
@@ -213,6 +229,7 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
     this.menuFor = -1;
     this.naming = -1;
     this.dating = -1;
+    this.statusDraft = null;
     this.showing = false;
   }
   protected read(doc: Doc) {
@@ -647,6 +664,7 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
     if (at < 0) return;
     this.naming = -1;
     this.dating = -1;
+    this.statusDraft = null;
     const b = this.doc.blocks[at];
     const label = value.replace(/\s+/g, ' ').trim();
     if (keep && label !== (this.endsOf(at)?.label ?? '')) this.edit(b?.k === 'edge' ? setLink(this.doc, at, { label }) : setLine(this.doc, this.view, at, { label }));
@@ -895,6 +913,7 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
     return [
       ...st.map((s) => ({ group: t('Status'), label: s.name, checked: it.status === s.name, does: () => this.edit(setStatus(this.doc, at, s.name, st)) })),
       ...(st.length ? [{ group: t('Status'), label: t('No status'), checked: !it.status, does: () => this.edit(setStatus(this.doc, at, undefined, st)) }] : []),
+      { group: t('Status'), label: t('Edit statuses…'), icon: UI.pen, does: () => this.editStatuses() },
       { label: due ? t('Due {date}: change it', { date: this.dayWords(due) }) : t('Due date…'), icon: UI.calendar, does: () => this.openDating(at) },
       ...(due ? [{ label: t('Remove due date'), icon: UI.close, does: () => this.edit(setDue(this.doc, at, undefined)) }] : []),
     ];
@@ -939,6 +958,7 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
     const at = this.dating;
     if (at < 0) return;
     this.dating = -1;
+    this.statusDraft = null;
     if (keep) this.edit(setDue(this.doc, at, value || undefined));
     void this.updateComplete.then(() => this.focusRow(at));
   }
@@ -960,14 +980,57 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
     if (!it.due) this.edit(setDue(this.doc, it.at, defaultDue(this.view, indexAt(this.view, it.at))));
     void this.updateComplete.then(() => this.openDating(it.at));
   }
-  /** Insert ▾: the document's statuses, TODO, DOING and DONE, written once in its head when it has none; the item in hand gets the first. */
-  addStatuses() {
-    const ops: Op[] = this.statuses.length ? [] : [{ op: 'head', key: 'statuses', value: DEFAULT_STATUSES }];
+  /**
+   * Insert ▾'s Statuses, and the line menu's Edit statuses…: the set in a dialog, a name and a color a row, to rename, recolor,
+   * add, take away and reorder by taking away and adding (Paul, 2026-10-15: "Can I edit statuses"). A document with no set
+   * gets TODO, DOING and DONE to start from, and the item in hand the first, once Done.
+   */
+  editStatuses() {
+    const st = this.statuses.length ? this.statuses : statusesOf({ head: { statuses: DEFAULT_STATUSES }, blocks: [] });
+    this.statusDraft = st.map((s) => ({ name: s.name, word: s.word, was: this.statuses.length ? s.name : '' }));
+    void this.updateComplete.then(async () => {
+      await this.querySelector<ToDialog>('to-dialog.ol-statuses')?.show();
+      this.querySelector<HTMLInputElement>('.ol-statuses-row input')?.focus();
+    });
+  }
+  private statusesBody() {
+    const draft = this.statusDraft;
+    if (!draft) return nothing;
+    const colors = Object.keys(STATUS_COLORS);
+    const set = (i: number, patch: Partial<{ name: string; word: string }>) => (this.statusDraft = draft.map((s, k) => (k === i ? { ...s, ...patch } : s)));
+    return html`<p class="to-hint">${t('The last status is the done one: a task with it is checked.')}</p>
+      <div class="ol-statuses-list" role="list">
+        ${draft.map(
+          (s, i) => html`<div class="ol-statuses-row" role="listitem">
+            <input type="text" .value=${s.name} aria-label=${t('Name')} autocomplete="off" spellcheck="false" @input=${(e: Event) => set(i, { name: (e.target as HTMLInputElement).value })} />
+            <select aria-label=${t('Color')} .value=${s.word} @change=${(e: Event) => set(i, { word: (e.target as HTMLSelectElement).value })}>
+              ${colors.map((w) => html`<option value=${w} ?selected=${w === s.word}>${COLOR_NAMES[w]()}</option>`)}
+            </select>
+            <span class="ol-status" style="--ol-status:${STATUS_COLORS[s.word] ?? STATUS_COLORS.gray}" aria-hidden="true">${s.name || '…'}</span>
+            ${tool({ label: t('Remove'), icon: UI.close, does: () => (this.statusDraft = draft.filter((_, k) => k !== i)) })}
+          </div>`,
+        )}
+      </div>
+      <div class="ol-statuses-foot">
+        <button type="button" class="to-btn" @click=${() => (this.statusDraft = [...draft, { name: '', word: colors[draft.length % colors.length], was: '' }])}>${icon(UI.insert, 16)}<span>${t('Add a status')}</span></button>
+        <button type="button" class="to-btn primary ol-statuses-done" @click=${() => this.saveStatuses()}>${t('Done')}</button>
+      </div>`;
+  }
+  private saveStatuses() {
+    const draft = this.statusDraft;
+    if (!draft) return;
+    const fresh = !this.statuses.length;
+    const ops = applyStatuses(this.doc, this.view, draft);
+    // A set made just now: the item in hand gets its first status.
     const it = this.itemAt(this.sel);
-    const doc = ops.length ? applyAll(this.doc, ops) : this.doc;
-    const st = statusesOf(doc);
-    if (it && !it.doc && !it.status && st.length) ops.push(...setStatus(doc, it.at, st[0].name, st));
+    if (fresh && ops.length && it && !it.doc && !it.status) {
+      const doc = applyAll(this.doc, ops);
+      const st = statusesOf(doc);
+      if (st.length) ops.push(...setStatus(doc, it.at, st[0].name, st));
+    }
     if (ops.length) this.edit(ops);
+    this.querySelector<ToDialog>('to-dialog.ol-statuses')?.close();
+    this.statusDraft = null;
   }
   /** Another document under an item: its app and first line, a way to open it in its own app, and the way back (its link pasted over the card). */
   private renderDoc(it: Item) {
@@ -1090,7 +1153,8 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
       ${this.rows.renderContext()}
       <to-menu class="ol-line-menu" .label=${t('Kind of line')} .items=${this.lineItems()}></to-menu>
       ${this.renderNotes()}
-      ${this.renderPageDialog()}`;
+      ${this.renderPageDialog()}
+      <to-dialog class="ol-statuses" heading=${t('Statuses')} @to-close=${() => (this.statusDraft = null)} .body=${this.statusesBody()}></to-dialog>`;
   }
 
   /* ---------- the footnotes, under the outline ---------- */

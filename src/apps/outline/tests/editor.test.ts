@@ -170,7 +170,15 @@ test('the bullet opens the kinds of line, each named for the items it joins; the
   bullet().click();
   await until(() => !!document.querySelector('[popover]:popover-open'));
   const items = [...document.querySelectorAll<HTMLElement>('[popover]:popover-open [role^=menuitem]')];
-  expect(items.map((x) => x.textContent!.trim())).toEqual(['Plain line', 'Arrow from Product to Pricing', 'Arrow from Pricing to Product', 'Arrows both ways', 'Name the line', 'Due date…']);
+  expect(items.map((x) => x.textContent!.trim())).toEqual([
+    'Plain line',
+    'Arrow from Product to Pricing',
+    'Arrow from Pricing to Product',
+    'Arrows both ways',
+    'Name the line',
+    'Edit statuses…',
+    'Due date…',
+  ]);
   expect(document.querySelector('[popover]:popover-open [role=menuitemcheckbox][aria-checked=true]')!.textContent!.trim()).toBe('Plain line');
   items[1].click();
   await el.updateComplete;
@@ -1064,6 +1072,9 @@ test('Insert ▾: Statuses, Task and Due date on the item in hand; a document fr
   expect(el.querySelector('.ol-status')).toBeNull();
   await choose(el, 1);
   await pick(el, el.querySelector<HTMLButtonElement>('to-insert button')!, 'Statuses');
+  // The set opens to edit, TODO, DOING and DONE to start from; Done writes it, and the item in hand gets the first.
+  await until(() => !!el.querySelector('to-dialog.ol-statuses dialog[open] .ol-statuses-done'));
+  el.querySelector<HTMLButtonElement>('.ol-statuses-done')!.click();
   await until(() => !!el.querySelector('.ol-status'));
   expect(write(docOf(el))).toBe('---\nstatuses: TODO=red, DOING=yellow, DONE=green\n---\n- Plan {due=2027-03-01}\n- Press list {status=TODO}\n');
   await pick(el, el.querySelector<HTMLButtonElement>('to-insert button')!, 'Task');
@@ -1095,4 +1106,37 @@ test('a document opened with an item shut starts folded there, and one from befo
   await el.updateComplete;
   await tick();
   expect(rows(el)).toEqual([0, 2, 3]);
+});
+
+// The statuses edited in their dialog (Paul, 2026-10-15: "Can I edit statuses"): Insert ▾'s Statuses opens it, with TODO,
+// DOING and DONE to start from; a name typed over, a row taken away, Done writes the set and the items follow.
+test('Statuses opens the set to edit: renamed, one taken away, Done writes the head and the items follow', async () => {
+  // (Press list under Plan: a root has no line menu, and the second opening comes from the line menu.)
+  const { el } = await editor('- Plan\n  - Press list\n');
+  const docOf = (x: ToOutlineEditor) => (x as unknown as { doc: Doc }).doc;
+  await choose(el, 1);
+  await pick(el, el.querySelector<HTMLButtonElement>('to-insert button')!, 'Statuses');
+  await until(() => !!el.querySelector('to-dialog.ol-statuses dialog[open] .ol-statuses-row input'));
+  const rows = () => [...el.querySelectorAll<HTMLInputElement>('.ol-statuses-row input')].map((i) => i.value);
+  expect(rows()).toEqual(['TODO', 'DOING', 'DONE']);
+  const first = el.querySelector<HTMLInputElement>('.ol-statuses-row input')!;
+  first.value = 'Later';
+  first.dispatchEvent(new Event('input', { bubbles: true }));
+  await el.updateComplete;
+  el.querySelectorAll<HTMLButtonElement>('.ol-statuses-row button[aria-label="Remove"]')[1].click();
+  await el.updateComplete;
+  expect(rows()).toEqual(['Later', 'DONE']);
+  el.querySelector<HTMLButtonElement>('.ol-statuses-done')!.click();
+  await until(() => !el.querySelector('to-dialog.ol-statuses dialog[open]'));
+  expect(write(docOf(el))).toBe('---\nstatuses: Later=red, DONE=green\n---\n- Plan\n  - Press list {status=Later}\n');
+  // Again, from the line menu's Status group: the set as it is; a rename follows on the item.
+  await pick(el, row(el, 1).querySelector<HTMLButtonElement>('.ol-kind')!, 'Edit statuses');
+  await until(() => !!el.querySelector('to-dialog.ol-statuses dialog[open] .ol-statuses-row input'));
+  expect(rows()).toEqual(['Later', 'DONE']);
+  const again = el.querySelector<HTMLInputElement>('.ol-statuses-row input')!;
+  again.value = 'Soon';
+  again.dispatchEvent(new Event('input', { bubbles: true }));
+  el.querySelector<HTMLButtonElement>('.ol-statuses-done')!.click();
+  await until(() => (write(docOf(el)) ?? '').includes('status=Soon'));
+  expect(write(docOf(el))).toBe('---\nstatuses: Soon=red, DONE=green\n---\n- Plan\n  - Press list {status=Soon}\n');
 });

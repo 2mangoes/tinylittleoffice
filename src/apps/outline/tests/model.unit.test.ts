@@ -611,15 +611,15 @@ test('footnotes in the files: each an item right under its own, first among its 
 test('statuses come from the head, a name and a color each, the last the done one; a document without the line has none', async () => {
   const { statusesOf, STATUS_COLORS, DEFAULT_STATUSES } = await import('../model.ts');
   expect(statusesOf(parse('---\nstatuses: TODO=red, DOING=yellow, DONE=green\n---\n- a\n'))).toEqual([
-    { name: 'TODO', color: STATUS_COLORS.red },
-    { name: 'DOING', color: STATUS_COLORS.yellow },
-    { name: 'DONE', color: STATUS_COLORS.green },
+    { name: 'TODO', color: STATUS_COLORS.red, word: 'red' },
+    { name: 'DOING', color: STATUS_COLORS.yellow, word: 'yellow' },
+    { name: 'DONE', color: STATUS_COLORS.green, word: 'green' },
   ]);
   // A color unknown is gray; no color is gray; a name twice is once; spaces are forgiven.
   expect(statusesOf(parse('---\nstatuses: Later = mauve ,Now, Now, Soon=blue\n---\n'))).toEqual([
-    { name: 'Later', color: STATUS_COLORS.gray },
-    { name: 'Now', color: STATUS_COLORS.gray },
-    { name: 'Soon', color: STATUS_COLORS.blue },
+    { name: 'Later', color: STATUS_COLORS.gray, word: 'gray' },
+    { name: 'Now', color: STATUS_COLORS.gray, word: 'gray' },
+    { name: 'Soon', color: STATUS_COLORS.blue, word: 'blue' },
   ]);
   expect(statusesOf(parse('- a\n'))).toEqual([]);
   expect(statusesOf(parse(`---\nstatuses: ${DEFAULT_STATUSES}\n---\n`)).map((s) => s.name)).toEqual(['TODO', 'DOING', 'DONE']);
@@ -693,4 +693,53 @@ test('an item folded shut is its class, {.shut}, beside its other attributes; Fo
   // The line's kind set afterwards keeps the fold (a root has no line: the class alone).
   const shut = applyAll(doc, setShut(doc, 4, true));
   expect(write(applyAll(shut, setLine(shut, readOutline(shut), 4, { dir: '->' })))).toBe('- A {.from label=x}\n  - a1\n- B\n- C\n  - c1 {.shut .from}\n');
+});
+
+test('the set edited: the head rewritten, a renamed status followed by its items, one taken away cleared from them, the boxes left alone', async () => {
+  const { applyStatuses, writeStatuses } = await import('../model.ts');
+  expect(
+    writeStatuses([
+      { name: 'A', word: 'red' },
+      { name: 'B', word: 'mauve' },
+    ]),
+  ).toBe('A=red, B=gray');
+  const doc = parse('---\nstatuses: TODO=red, DOING=yellow, DONE=green\n---\n- [ ] a {status=TODO}\n- b {status=DOING}\n- [x] c {status=DONE}\n- d\n');
+  const v = readOutline(doc);
+  const d = applyAll(
+    doc,
+    applyStatuses(doc, v, [
+      { name: 'Later', word: 'gray', was: 'TODO' },
+      { name: 'DONE', word: 'green', was: 'DONE' },
+      { name: ' Soon ', word: 'blue', was: '' },
+      { name: '', word: 'red', was: '' },
+    ]),
+  );
+  expect(write(d)).toBe('---\nstatuses: Later=gray, DONE=green, Soon=blue\n---\n- [ ] a {status=Later}\n- b\n- [x] c {status=DONE}\n- d\n');
+  // Nothing to change: no ops. The set emptied: the head's line goes, and every status with it.
+  expect(
+    applyStatuses(d, readOutline(d), [
+      { name: 'Later', word: 'gray', was: 'Later' },
+      { name: 'DONE', word: 'green', was: 'DONE' },
+      { name: 'Soon', word: 'blue', was: 'Soon' },
+    ]),
+  ).toEqual([]);
+  expect(write(applyAll(d, applyStatuses(d, readOutline(d), [])))).toBe('- [ ] a\n- b\n- [x] c\n- d\n');
+});
+
+test('Enter beside a task with a status and a day makes the next item a task too, unchecked, with the first status and the same day', () => {
+  const doc = parse('---\nstatuses: TODO=red, DOING=yellow, DONE=green\n---\n- [x] Draft {status=DONE due=2026-10-20}\n- Plain\n');
+  const v = readOutline(doc);
+  // At the end: a sibling after it.
+  let r = enterAt(doc, v, 0);
+  expect(write(applyAll(doc, r.ops))).toBe('---\nstatuses: TODO=red, DOING=yellow, DONE=green\n---\n- [x] Draft {status=DONE due=2026-10-20}\n- [ ]  {status=TODO due=2026-10-20}\n- Plain\n');
+  // In the middle: the words after the caret go to the new item, which follows the same way.
+  r = enterAt(doc, v, 0, 2);
+  expect(write(applyAll(doc, r.ops))).toContain('- [x] Dr {status=DONE due=2026-10-20}\n- [ ] aft {status=TODO due=2026-10-20}\n');
+  // At the start: the empty item before follows too. (An empty item with attributes is written with its space kept.)
+  r = enterAt(doc, v, 0, 0);
+  expect(write(applyAll(doc, r.ops))).toContain('- [ ]  {status=TODO due=2026-10-20}\n- [x] Draft {status=DONE due=2026-10-20}\n');
+  // A plain item makes a plain item; a status with no set left keeps the item's own.
+  expect(write(applyAll(doc, enterAt(doc, v, 1).ops))).toContain('- Plain\n-\n');
+  const gone = parse('- a {status=Odd}\n');
+  expect(write(applyAll(gone, enterAt(gone, readOutline(gone), 0).ops))).toBe('- a {status=Odd}\n-  {status=Odd}\n');
 });

@@ -28,7 +28,7 @@ export const INSERTS: Command<O>[] = [
   // The compound bullet (Paul, 2026-10-15): a task's box, a status of the document's set, a due day.
   cmd('insert.task', 'Task', { icon: UI.check, where: ['menu:insert'], disabled: (o) => !words(o), does: (o) => o.addTask() }),
   cmd('insert.due', 'Due date', { icon: UI.calendar, where: ['menu:insert'], disabled: (o) => !words(o), does: (o) => o.addDue() }),
-  cmd('insert.statuses', 'Statuses', { icon: Tag, where: ['menu:insert'], does: (o) => o.addStatuses() }),
+  cmd('insert.statuses', 'Statuses', { icon: Tag, where: ['menu:insert'], does: (o) => o.editStatuses() }),
   ...apps()
     .filter((a) => a.id !== 'outline')
     .map((a) => cmd(`insert.app.${a.id}`, () => a.name, { icon: a.icon, data: true, heading: 'A new document', where: ['menu:insert'], does: (o) => o.insertApp(a.id) })),
