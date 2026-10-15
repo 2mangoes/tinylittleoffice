@@ -35,7 +35,7 @@ const LAYOUT_OF: Record<string, Layout> = { title: 't', two: '2', icon: 'i' };
 export type Transition = '' | 'cut' | 'slide' | 'zoom';
 export const TRANSITIONS: { id: Transition; name: () => string }[] = [
   { id: '', name: () => t('deck-fade') },
-  { id: 'cut', name: () => t('common-cut') },
+  { id: 'cut', name: () => t('deck-cut') },
   { id: 'slide', name: () => t('deck-slide') },
   { id: 'zoom', name: () => t('deck-zoom') },
 ];

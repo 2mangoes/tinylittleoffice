@@ -19,8 +19,11 @@ shell-loading = लोड हो रहा है…
 shell-this-link-holds-something-that = यह लिंक पढ़ा नहीं जा सकता। हो सकता है कॉपी करते समय यह कट गया हो।
 # en: 7dfd19fef00f41e899fb6e2753b71ae40ba59e6d
 shell-n-of-max-link-characters = लिंक के { $max } में से { $n } अक्षर बचे
-# en: 134d73b30c18c4662e6a42e4a42fbb712bbbb10a
-shell-n-characters-over-link-limit = लिंक की सीमा से { $n } अक्षर ज़्यादा
+# en: 51a6857d24b72bee0d1e541448d0f9c8fd5b8697
+shell-n-characters-over-link-limit = { $n ->
+        [one] लिंक की सीमा से { $n } अक्षर ज़्यादा
+       *[other] लिंक की सीमा से { $n } अक्षर ज़्यादा
+    }
 # en: 1cfbe154225ecb3a01f463f1adde07279f1a454a
 shell-n-characters-over-link-limit-short-link-holds-max = लिंक की सीमा से { $n } अक्षर ज़्यादा; शॉर्ट लिंक में { $max } आते हैं
 # en: e7722b7943884e579644a3f5bd2b605afd08a156
@@ -2119,6 +2122,8 @@ deck-big-icon = बड़ा आइकन
 # en: 5298d08bb7ae7d01f4efcdbb94ff03fc487fd11c
 deck-fade = फ़ेड
 # en: 38d13bda5c40afc32d629f81dec6c156cbea328e
+deck-cut = कट
+# en: 38d13bda5c40afc32d629f81dec6c156cbea328e
 common-cut = कट
 # en: a5d5b46a7720824b51da4be0af97f5cfd1168cd0
 deck-slide = स्लाइड
@@ -2504,7 +2509,7 @@ cal-start-time = शुरू होने का समय
 # en: fc612a2fcc722bde9d98ae18bea42764812b6784
 cal-starts = शुरू होता है
 # en: 0e648419ea806b0cc4db81617f95870a094f3639
-common-stops = रुकता है
+cal-stops = खत्म होता है
 # en: 480b9be2834a2278919632171f788a9a80d5d743
 cal-same-dates-as-gantt-chart = वही तारीख़ें गैंट चार्ट में
 # en: 7ea6dec71584012ab4044cc464dc601741ff2c50
@@ -2830,6 +2835,8 @@ trip-stop-n = पड़ाव { $n }
 trip-stop-n-tap-chooses-it = पड़ाव { $n }: चुनने के लिए टैप करें, खिसकाने के लिए खींचें
 # en: 56f844200d56e1fc382c81f28972a39aab61e019
 trip-chosen-stops = चुने हुए पड़ाव
+# en: 0e648419ea806b0cc4db81617f95870a094f3639
+trip-stops = पड़ाव
 # en: a9d55cf1a8a7b85ab9e293fc1e40a440986b0725
 trip-show-on-map = नक्शे पर दिखाएँ
 # en: bdea0edfea6bebf4baf952432856faf7b3f43890

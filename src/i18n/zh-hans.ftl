@@ -20,8 +20,10 @@ shell-loading = 加载中…
 shell-this-link-holds-something-that = 无法读取此链接。它可能在复制时被截断了。
 # en: 7dfd19fef00f41e899fb6e2753b71ae40ba59e6d
 shell-n-of-max-link-characters = 链接还剩 { $n } / { $max } 个字符
-# en: 134d73b30c18c4662e6a42e4a42fbb712bbbb10a
-shell-n-characters-over-link-limit = 超出链接上限 { $n } 个字符
+# en: 51a6857d24b72bee0d1e541448d0f9c8fd5b8697
+shell-n-characters-over-link-limit = { $n ->
+       *[other] 超出链接上限 { $n } 个字符
+    }
 # en: 1cfbe154225ecb3a01f463f1adde07279f1a454a
 shell-n-characters-over-link-limit-short-link-holds-max = 超出链接上限 { $n } 个字符；短链接最多容纳 { $max }
 # en: e7722b7943884e579644a3f5bd2b605afd08a156
@@ -2098,6 +2100,8 @@ deck-big-icon = 大图标
 # en: 5298d08bb7ae7d01f4efcdbb94ff03fc487fd11c
 deck-fade = 淡入淡出
 # en: 38d13bda5c40afc32d629f81dec6c156cbea328e
+deck-cut = 切换
+# en: 38d13bda5c40afc32d629f81dec6c156cbea328e
 common-cut = 剪切
 # en: a5d5b46a7720824b51da4be0af97f5cfd1168cd0
 deck-slide = 滑动
@@ -2480,7 +2484,7 @@ cal-start-time = 开始时间
 # en: fc612a2fcc722bde9d98ae18bea42764812b6784
 cal-starts = 开始于
 # en: 0e648419ea806b0cc4db81617f95870a094f3639
-common-stops = 停止于
+cal-stops = 结束于
 # en: 480b9be2834a2278919632171f788a9a80d5d743
 cal-same-dates-as-gantt-chart = 同样的日期，画成甘特图
 # en: 7ea6dec71584012ab4044cc464dc601741ff2c50
@@ -2804,6 +2808,8 @@ trip-stop-n = 第 { $n } 站
 trip-stop-n-tap-chooses-it = 第 { $n } 站：点按选择，拖动移动
 # en: 56f844200d56e1fc382c81f28972a39aab61e019
 trip-chosen-stops = 选中的站点
+# en: 0e648419ea806b0cc4db81617f95870a094f3639
+trip-stops = 站点
 # en: a9d55cf1a8a7b85ab9e293fc1e40a440986b0725
 trip-show-on-map = 在地图上显示
 # en: bdea0edfea6bebf4baf952432856faf7b3f43890

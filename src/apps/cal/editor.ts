@@ -1183,7 +1183,7 @@ export class ToCalEditor extends DocElement<CalView> {
       </label>
       ${
         r
-          ? html`<div class="cal-field"><span>${t('common-stops')}</span><span class="cal-inputs">
+          ? html`<div class="cal-field"><span>${t('cal-stops')}</span><span class="cal-inputs">
             <input type="number" class="cal-times" min="1" max="999" inputmode="numeric" aria-label=${t('cal-how-many-times')} placeholder="∞" .value=${r.count ? String(r.count) : ''} @change=${(ev: Event) => this.setRepeat(r.every, { count: +(ev.target as HTMLInputElement).value })} />
             <span class="to-hint">${t('cal-times-or-on')}</span>
             <input type="date" aria-label=${t('cal-last-day')} .value=${r.until !== undefined ? dayString(r.until) : ''} @change=${(ev: Event) => this.setRepeat(r.every, { until: (ev.target as HTMLInputElement).value })} />

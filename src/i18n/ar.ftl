@@ -28,7 +28,7 @@ shell-n-of-max-link-characters = بقي { $n } من { $max ->
         [many] { $max } حرفًا
        *[other] { $max } حرف
     } في الرابط
-# en: 134d73b30c18c4662e6a42e4a42fbb712bbbb10a
+# en: 51a6857d24b72bee0d1e541448d0f9c8fd5b8697
 shell-n-characters-over-link-limit = تجاوز الرابط الحد بمقدار { $n ->
         [zero] { $n } حرف
         [one] حرف واحد
@@ -2248,7 +2248,9 @@ deck-big-icon = أيقونة كبيرة
 # en: 5298d08bb7ae7d01f4efcdbb94ff03fc487fd11c
 deck-fade = تلاشٍ
 # en: 38d13bda5c40afc32d629f81dec6c156cbea328e
-common-cut = قطع
+deck-cut = قطع مباشر
+# en: 38d13bda5c40afc32d629f81dec6c156cbea328e
+common-cut = قص
 # en: a5d5b46a7720824b51da4be0af97f5cfd1168cd0
 deck-slide = انزلاق
 # en: 9b3cbed5c490c07473546a88768ba29b787e9e52
@@ -2632,7 +2634,7 @@ cal-start-time = وقت البدء
 # en: fc612a2fcc722bde9d98ae18bea42764812b6784
 cal-starts = يبدأ
 # en: 0e648419ea806b0cc4db81617f95870a094f3639
-common-stops = يتوقف
+cal-stops = ينتهي
 # en: 480b9be2834a2278919632171f788a9a80d5d743
 cal-same-dates-as-gantt-chart = التواريخ نفسها كمخطط غانت
 # en: 7ea6dec71584012ab4044cc464dc601741ff2c50
@@ -2974,6 +2976,8 @@ trip-stop-n = المحطة { $n }
 trip-stop-n-tap-chooses-it = المحطة { $n }: انقر لتحديدها، واسحب لتحريكها
 # en: 56f844200d56e1fc382c81f28972a39aab61e019
 trip-chosen-stops = المحطات المحددة
+# en: 0e648419ea806b0cc4db81617f95870a094f3639
+trip-stops = المحطات
 # en: a9d55cf1a8a7b85ab9e293fc1e40a440986b0725
 trip-show-on-map = إظهار على الخريطة
 # en: bdea0edfea6bebf4baf952432856faf7b3f43890

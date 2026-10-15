@@ -926,7 +926,7 @@ export class ToTripEditor extends DocElement<TripView> {
         }
         ${
           n
-            ? html`<ol class="trip-stops" tabindex="-1" aria-label=${t('common-stops')}>${v.stops.map((s, i) => this.row(s, i))}</ol>`
+            ? html`<ol class="trip-stops" tabindex="-1" aria-label=${t('trip-stops')}>${v.stops.map((s, i) => this.row(s, i))}</ol>`
             : html`<p class="to-hint trip-empty">${this.showMap ? t('trip-tap-map-to-add-first') : t('trip-insert-place-by-name')}</p>`
         }
       </div>

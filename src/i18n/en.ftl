@@ -29,7 +29,10 @@ shell-download = Download
 shell-loading = Loading…
 shell-this-link-holds-something-that = This link can’t be read. It may have been cut off when it was copied.
 shell-n-of-max-link-characters = { $n } of { $max } link characters left
-shell-n-characters-over-link-limit = { $n } characters over the link limit
+shell-n-characters-over-link-limit = { $n ->
+        [one] { $n } character over the link limit
+       *[other] { $n } characters over the link limit
+    }
 shell-n-characters-over-link-limit-short-link-holds-max = { $n } characters over the link limit; a short link holds { $max }
 shell-n-characters-over-what-short = { $n } characters over what a short link holds
 # Before a document that lives nowhere but its link (Private, changed) is left for another place: the question and its three answers.
@@ -1170,6 +1173,9 @@ deck-bullets = Bullets
 deck-two-columns = Two columns
 deck-big-icon = Big icon
 deck-fade = Fade
+# The transition: a hard switch from one slide to the next, no fade (not the clipboard's Cut).
+deck-cut = Cut
+# The clipboard's Cut (Mod+X), in every app's menus.
 common-cut = Cut
 deck-slide = Slide
 deck-zoom = Zoom
@@ -1371,7 +1377,8 @@ cal-start = Start
 cal-start-date = Start date
 cal-start-time = Start time
 cal-starts = Starts
-common-stops = Stops
+# When a repeating event stops (ends), a field beside Starts.
+cal-stops = Stops
 cal-same-dates-as-gantt-chart = The same dates as a Gantt chart
 cal-this-calendar-is-written-in = This calendar is written in { $zone } time.
 cal-this-calendar-names-no-time = This calendar has no time zone, so times are shown in yours ({ $zone }).
@@ -1544,6 +1551,8 @@ trip-stop-n = Stop { $n }
 # A stop's number is its handle; the bar under stops chosen whole.
 trip-stop-n-tap-chooses-it = Stop { $n }: tap to select, drag to move
 trip-chosen-stops = Selected stops
+# The trip's list of stops, for screen readers (a noun).
+trip-stops = Stops
 trip-show-on-map = Show on the map
 trip-name-of-stop-n = Name of stop { $n }
 trip-note-for-stop-n = Note for stop { $n }

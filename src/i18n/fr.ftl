@@ -23,8 +23,12 @@ shell-loading = Chargement…
 shell-this-link-holds-something-that = Ce lien est illisible. Il a peut-être été coupé lors de la copie.
 # en: 7dfd19fef00f41e899fb6e2753b71ae40ba59e6d
 shell-n-of-max-link-characters = { $n } caractères de lien restants sur { $max }
-# en: 134d73b30c18c4662e6a42e4a42fbb712bbbb10a
-shell-n-characters-over-link-limit = { $n } caractères au-delà de la limite du lien
+# en: 51a6857d24b72bee0d1e541448d0f9c8fd5b8697
+shell-n-characters-over-link-limit = { $n ->
+        [one] { $n } caractère au-delà de la limite du lien
+        [many] { $n } de caractères au-delà de la limite du lien
+       *[other] { $n } caractères au-delà de la limite du lien
+    }
 # en: 1cfbe154225ecb3a01f463f1adde07279f1a454a
 shell-n-characters-over-link-limit-short-link-holds-max = { $n } caractères au-delà de la limite du lien ; un lien court en contient { $max }
 # en: e7722b7943884e579644a3f5bd2b605afd08a156
@@ -2166,6 +2170,8 @@ deck-big-icon = Grande icône
 # en: 5298d08bb7ae7d01f4efcdbb94ff03fc487fd11c
 deck-fade = Fondu
 # en: 38d13bda5c40afc32d629f81dec6c156cbea328e
+deck-cut = Coupe
+# en: 38d13bda5c40afc32d629f81dec6c156cbea328e
 common-cut = Couper
 # en: a5d5b46a7720824b51da4be0af97f5cfd1168cd0
 deck-slide = Glissement
@@ -2561,7 +2567,7 @@ cal-start-time = Heure de début
 # en: fc612a2fcc722bde9d98ae18bea42764812b6784
 cal-starts = Commence
 # en: 0e648419ea806b0cc4db81617f95870a094f3639
-common-stops = S’arrête
+cal-stops = Se termine
 # en: 480b9be2834a2278919632171f788a9a80d5d743
 cal-same-dates-as-gantt-chart = Les mêmes dates en diagramme de Gantt
 # en: 7ea6dec71584012ab4044cc464dc601741ff2c50
@@ -2892,6 +2898,8 @@ trip-stop-n = Arrêt { $n }
 trip-stop-n-tap-chooses-it = Arrêt { $n } : touchez pour sélectionner, glissez pour déplacer
 # en: 56f844200d56e1fc382c81f28972a39aab61e019
 trip-chosen-stops = Arrêts sélectionnés
+# en: 0e648419ea806b0cc4db81617f95870a094f3639
+trip-stops = Arrêts
 # en: a9d55cf1a8a7b85ab9e293fc1e40a440986b0725
 trip-show-on-map = Voir sur la carte
 # en: bdea0edfea6bebf4baf952432856faf7b3f43890

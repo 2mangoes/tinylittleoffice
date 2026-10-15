@@ -21,8 +21,12 @@ shell-loading = Cargando…
 shell-this-link-holds-something-that = No se puede leer este enlace. Quizá se cortó al copiarlo.
 # en: 7dfd19fef00f41e899fb6e2753b71ae40ba59e6d
 shell-n-of-max-link-characters = Quedan { $n } de { $max } caracteres del enlace
-# en: 134d73b30c18c4662e6a42e4a42fbb712bbbb10a
-shell-n-characters-over-link-limit = Hay { $n } caracteres de más en el enlace
+# en: 51a6857d24b72bee0d1e541448d0f9c8fd5b8697
+shell-n-characters-over-link-limit = { $n ->
+        [one] Hay { $n } carácter de más en el enlace
+        [many] Hay { $n } de caracteres de más en el enlace
+       *[other] Hay { $n } caracteres de más en el enlace
+    }
 # en: 1cfbe154225ecb3a01f463f1adde07279f1a454a
 shell-n-characters-over-link-limit-short-link-holds-max = Hay { $n } caracteres de más en el enlace; un enlace corto admite { $max }
 # en: e7722b7943884e579644a3f5bd2b605afd08a156
@@ -2148,7 +2152,9 @@ deck-big-icon = Icono grande
 # en: 5298d08bb7ae7d01f4efcdbb94ff03fc487fd11c
 deck-fade = Fundido
 # en: 38d13bda5c40afc32d629f81dec6c156cbea328e
-common-cut = Corte
+deck-cut = Corte
+# en: 38d13bda5c40afc32d629f81dec6c156cbea328e
+common-cut = Cortar
 # en: a5d5b46a7720824b51da4be0af97f5cfd1168cd0
 deck-slide = Deslizar
 # same
@@ -2535,7 +2541,7 @@ cal-start-time = Hora de inicio
 # en: fc612a2fcc722bde9d98ae18bea42764812b6784
 cal-starts = Empieza
 # en: 0e648419ea806b0cc4db81617f95870a094f3639
-common-stops = Se detiene
+cal-stops = Termina
 # en: 480b9be2834a2278919632171f788a9a80d5d743
 cal-same-dates-as-gantt-chart = Las mismas fechas como diagrama de Gantt
 # en: 7ea6dec71584012ab4044cc464dc601741ff2c50
@@ -2865,6 +2871,8 @@ trip-stop-n = Parada { $n }
 trip-stop-n-tap-chooses-it = Parada { $n }: toca para seleccionar, arrastra para mover
 # en: 56f844200d56e1fc382c81f28972a39aab61e019
 trip-chosen-stops = Paradas seleccionadas
+# en: 0e648419ea806b0cc4db81617f95870a094f3639
+trip-stops = Paradas
 # en: a9d55cf1a8a7b85ab9e293fc1e40a440986b0725
 trip-show-on-map = Mostrar en el mapa
 # en: bdea0edfea6bebf4baf952432856faf7b3f43890
