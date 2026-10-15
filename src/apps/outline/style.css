@@ -25,7 +25,6 @@
   .ol-row {
     position: relative;
     display: flex;
-    flex-wrap: wrap;
     align-items: flex-start;
     min-height: var(--ol-row);
     padding-left: calc(var(--d, 0) * var(--ol-step));
@@ -107,6 +106,7 @@
 
   /* The bullet: the line to the parent (a dot, or an arrow which way it points); tapped, it turns. */
   .ol-bullet {
+    order: -3;
     position: relative;
     flex: 0 0 var(--ol-step);
     height: var(--ol-row);
@@ -154,18 +154,57 @@
     border-radius: 50%;
   }
 
-  /* The row's chips are the kit's (.to-chip, kit.css): a line's name before the words (accent), a status's pill (solid, its
-     colour), a due day after them (quiet). Only their places in the row are the Outliner's. */
-  .ol-label {
-    margin: 0 0.125rem 0 0.25rem;
+  /* The row's chips are the kit's (.to-chip, kit.css): a line's name (accent), a status's pill (its colour's tint), a due
+     day (quiet). Only their places are the Outliner's: on a wide row the name and the status come before the box and the
+     words and the day after them (.ol-meta is nothing but its children, each ordered); on a narrow row (a phone) the
+     words keep the first line with the box, and the chips are a second line under them (Paul, 2026-10-15: "Alignment
+     is all screwed up here"). */
+  .ol-meta {
+    display: contents;
   }
-  .ol-status {
-    margin: 0 0.25rem 0 0.125rem;
+  .ol-row > .ol-meta > .ol-label {
+    order: -2;
+    margin-inline: 0.25rem 0.125rem;
   }
-  /* The due day sits at the row's end; where the words would be left less than eight ems (a phone), it goes to a second
-     line, still at the end, and the words keep their line. */
-  .ol-due {
-    margin: 0 0.125rem 0 auto;
+  .ol-row > .ol-meta > .ol-status {
+    order: -1;
+    margin-inline: 0.125rem 0.25rem;
+  }
+  .ol-row > .ol-task {
+    order: 0;
+  }
+  /* Each sits on the words' first line, whatever the words wrap to: its middle at the row's (--ol-row is a one-line row). */
+  .ol-row > .ol-task,
+  .ol-row > .ol-meta > .to-chip {
+    align-self: flex-start;
+    margin-top: calc((var(--ol-row) - 1.125rem) / 2);
+  }
+  .ol-row > .ol-meta > .ol-due {
+    order: 1;
+    margin-inline: 0.25rem 0.125rem;
+  }
+  @media (max-width: 36rem) {
+    .ol-row {
+      flex-wrap: wrap;
+    }
+    .ol-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.25rem;
+      flex-basis: 100%;
+      order: 2;
+      margin: -0.25rem 0 0.375rem var(--ol-step);
+    }
+    .ol-meta .ol-label,
+    .ol-meta .ol-status,
+    .ol-meta .ol-due {
+      align-self: center;
+      margin: 0;
+    }
+    .ol-meta .ol-due {
+      margin-left: auto;
+    }
   }
   .ol-due-in {
     align-self: center;
@@ -202,15 +241,19 @@
 
   /* The statuses' dialog: a row a status, its name, its color and a sample pill. */
   .ol-statuses-row {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr auto 6em auto;
     align-items: center;
     gap: 0.5rem;
     margin: 0.375rem 0;
   }
   .ol-statuses-row input {
-    flex: 1 1 8em;
     min-width: 0;
     font: inherit;
+  }
+  .ol-statuses-row .ol-status {
+    justify-self: center;
+    margin: 0;
   }
   /* The agenda is a .to-table of the things to do, its headings the sorts; by status, a section a status. A tap lands on the item. */
   .ol-agenda-table {
@@ -218,6 +261,11 @@
   }
   .ol-agenda-table td {
     vertical-align: middle;
+  }
+  .ol-agenda-table th:not(:first-child),
+  .ol-agenda-table td:not(:first-child) {
+    width: 1%;
+    white-space: nowrap;
   }
   .ol-agenda-sort {
     font: inherit;
@@ -284,10 +332,19 @@
 
   /* The words: the row's editor, its item drawn bare (the bullet is the row's). */
   /* The words take what the chips leave, six ems at the least: on a narrow row the due day wraps to a second line (above), the words keep theirs. */
+  /* The words take their own width, six ems at the least and never more than the row, so the due day sits right after them;
+     a tap on the row's empty space beyond them still gives them the caret (renderRow's click). */
   .ol-row to-text {
-    flex: 1 1 0;
+    flex: 0 1 auto;
     min-width: 6em;
+    max-width: 100%;
     align-self: center;
+  }
+  /* On a narrow row the words take the first line's width beside the box; the chips are the line under (.ol-meta, above). */
+  @media (max-width: 36rem) {
+    .ol-row to-text {
+      flex: 1 1 0;
+    }
   }
   .ol-row to-text .tx {
     padding: 0.375rem 0.375rem 0.375rem 0.25rem;

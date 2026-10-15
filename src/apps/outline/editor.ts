@@ -1111,20 +1111,20 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
       aria-selected=${ranged || (at === this.sel && !this.rows.range) ? 'true' : 'false'}
       style="--d:${it.depth - this.base}"
       @focusin=${() => (this.sel = at)}
-      @click=${() => this.filter && this.land(at)}
+      @click=${(e: MouseEvent) => (this.filter ? this.land(at) : e.target === e.currentTarget && this.focusRow(at))}
     >
       <span class="ol-gutter">
         <button type="button" class="ol-handle to-rows-handle" aria-label=${t('Move this item: drag it onto another')} title=${t('Drag to move')} tabindex="-1">${icon(GripVertical, 14)}</button>
         ${kids ? html`<button type="button" class="ol-fold" aria-label=${shut ? t('Unfold, {n|one inside|# inside}', { n: inside }) : t('Fold')} aria-expanded=${shut ? 'false' : 'true'} @mousedown=${(e: Event) => e.preventDefault()} @click=${() => this.fold(at)}>${icon(shut ? ChevronRight : ChevronDown, 14)}</button>` : nothing}
       </span>
-      ${ends ? html`<span class="ol-bullet">${this.bullet(at, ends, n)}</span>${this.chip(at, it.label)}` : html`<span class="ol-bullet" @click=${(e: MouseEvent) => e.shiftKey && this.rows.choose(at, true)}><span class="ol-kind root" aria-hidden="true">${n ? html`<b class="ol-n">${n}.</b>` : html`<span></span>`}</span></span>`}
-      ${asDoc ? nothing : this.statusChip(at, it)}${asDoc ? nothing : this.taskBox(at, block)}
+      ${ends ? html`<span class="ol-bullet">${this.bullet(at, ends, n)}</span>` : html`<span class="ol-bullet" @click=${(e: MouseEvent) => e.shiftKey && this.rows.choose(at, true)}><span class="ol-kind root" aria-hidden="true">${n ? html`<b class="ol-n">${n}.</b>` : html`<span></span>`}</span></span>`}
+      ${asDoc ? nothing : this.taskBox(at, block)}
       ${
         asDoc
           ? this.renderDoc(it)
           : html`<to-text shape="line" notes .blocks=${this.blocksFor(block)} .noteStart=${noteStart} label=${t('Item {n}', { n: i + 1 })} placeholder=${placeholder} @text-ops=${(e: CustomEvent<TextOps>) => this.onOps(at, e)} @text-enter=${(e: Event) => (e.stopPropagation(), this.onEnter(at))} @text-exit=${(e: CustomEvent<{ dir: 'back' | 'forward' }>) => (e.stopPropagation(), this.onExit(at, e.detail.dir))} @text-selectall=${(e: Event) => (e.stopPropagation(), this.rows.selectAll())} @text-select=${(e: CustomEvent<Sel | null>) => this.onSelect(at, e)} @text-note=${(e: CustomEvent<NoteAt>) => this.onNote(at, e)} @focusin=${(e: FocusEvent) => (this.field = e.currentTarget as ToText)}></to-text>`
       }
-      ${asDoc ? nothing : this.dueChip(at, it)}
+      ${asDoc ? nothing : html`<span class="ol-meta">${ends ? this.chip(at, it.label) : nothing}${this.statusChip(at, it)}${this.dueChip(at, it)}</span>`}
       ${kids && shut ? html`<span class="ol-count" aria-hidden="true">${inside}</span>` : nothing}
       ${c && words && !it.doc && at !== c.from ? html`<button type="button" class="ol-pick" aria-label=${c.from < 0 ? t('Connect from “{words}”', { words }) : t('Connect “{from}” to “{to}”', { from: plainText(this.itemAt(c.from)?.runs ?? []).trim(), to: words })} @click=${() => this.pick(at)}></button>` : nothing}
     </div>`;
