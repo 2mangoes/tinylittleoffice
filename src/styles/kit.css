@@ -229,6 +229,74 @@
     white-space: nowrap;
   }
 
+  /* ---- a chip: a few words in a pill beside a thing's words (an outline's line name, its status, its due day). A button
+     where a tap does something. accent: the site's; quiet: the surface's; solid: its own colour (--chip), white words. ---- */
+  .to-chip {
+    flex-shrink: 0;
+    align-self: center;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25em;
+    max-width: 12em;
+    padding: 1px 0.5em;
+    font: inherit;
+    font-size: 0.75rem;
+    border: 0;
+    border-radius: var(--to-radius-pill);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .to-chip.accent {
+    background: var(--to-accent-soft);
+    color: var(--to-accent);
+  }
+  .to-chip.quiet {
+    background: var(--to-surface-2);
+    color: var(--to-ink-2);
+  }
+  .to-chip.solid {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    background: var(--chip, var(--to-accent));
+    color: var(--to-on-accent);
+  }
+  button.to-chip {
+    cursor: pointer;
+  }
+  .to-chip:focus-visible {
+    outline: 0.125rem solid var(--to-accent);
+    outline-offset: 1px;
+  }
+
+  /* ---- a table of the chrome's (the shortcuts, where a link fits, an outline's agenda): words at the start, a line between rows, quiet headings ---- */
+  .to-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .to-table caption {
+    padding: 0.25em 0;
+    text-align: start;
+    font-weight: 600;
+  }
+  .to-table th,
+  .to-table td {
+    padding: 0.3125em 0.5em;
+    text-align: start;
+    vertical-align: top;
+    border-top: 1px solid var(--to-border);
+  }
+  .to-table thead th,
+  .to-table tr:first-child th,
+  .to-table tr:first-child td {
+    border-top: 0;
+  }
+  .to-table thead th {
+    color: var(--to-ink-3);
+    font-weight: 400;
+  }
+
   /* A colour as a dot, in a menu item or a bar button (--swatch is the colour). */
   .to-swatch {
     display: inline-block;
@@ -910,21 +978,15 @@
     padding: 0.6154em 0.9231em;
     font-size: calc(0.8125 * var(--to-scale));
   }
-  .to-rooms table {
-    border-collapse: collapse;
-  }
+  /* (A .to-table, compact, its numbers lined up.) */
   .to-rooms th,
   .to-rooms td {
     padding: 0.1875em 0.5em;
-    text-align: start;
+    border-top: 0;
     white-space: nowrap;
   }
   .to-rooms td {
     font-variant-numeric: tabular-nums;
-  }
-  .to-rooms thead th {
-    color: var(--to-ink-3);
-    font-weight: 400;
   }
   .to-rooms tr.over td,
   .to-rooms tr.over th {
@@ -2527,24 +2589,14 @@
     color: #18181b;
   }
 
-  /* ---- the keyboard shortcuts: a table a group ---- */
+  /* ---- the keyboard shortcuts: a .to-table a group ---- */
   .to-keys {
-    width: 100%;
     margin: 0 0 1.1429em;
-    border-collapse: collapse;
     font-size: calc(0.875 * var(--to-scale));
-  }
-  .to-keys caption {
-    padding: 0.25em 0;
-    text-align: start;
-    font-weight: 600;
   }
   .to-keys th,
   .to-keys td {
     padding: 0.3125em 0;
-    border-top: 1px solid var(--to-border);
-    text-align: start;
-    vertical-align: top;
   }
   .to-keys th {
     width: 45%;

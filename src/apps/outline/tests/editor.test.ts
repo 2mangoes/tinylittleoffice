@@ -1019,7 +1019,7 @@ test('statuses: a pill before the words, tapped to the next; a due chip after th
   const docOf = (x: ToOutlineEditor) => (x as unknown as { doc: Doc }).doc;
   const pills = () => [...el.querySelectorAll<HTMLButtonElement>('.ol-status')].map((b) => b.textContent!.trim());
   expect(pills()).toEqual(['TODO', 'DOING']);
-  expect(el.querySelector<HTMLElement>('.ol-status')!.style.getPropertyValue('--ol-status')).toBe('#b3261e');
+  expect(el.querySelector<HTMLElement>('.ol-status')!.style.getPropertyValue('--chip')).toBe('#b3261e');
   const due = el.querySelector<HTMLButtonElement>('.ol-due')!;
   expect(due.textContent!.replace(/\s+/g, ' ').trim()).toMatch(/Mar 1/);
   expect(due.getAttribute('aria-label')).toMatch(/^Due Mar 1, 2027: change it$/);

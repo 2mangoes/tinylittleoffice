@@ -369,7 +369,7 @@ export class ToShare extends LitElement {
       }}>${over > 0 ? t('{n} characters over the link limit', { n: n(over) }) : fitLine(this.link)}</button>
       <button type="button" class="to-btn to-tool to-fit-copy" aria-label=${t('Copy link')} title=${t('Copy link')} @click=${() => void this.copyLink(this.link)}>${icon(UI.copy, 18)}</button>
       <div id="to-rooms" class="to-rooms to-menu" popover="auto" role="dialog" aria-label=${t('Where the link fits')} @pointerleave=${(e: PointerEvent) => e.pointerType === 'mouse' && (e.currentTarget as HTMLElement).hidePopover()}>
-        <table>
+        <table class="to-table">
           <thead><tr><th scope="col">${t('Where')}</th><th scope="col">${t('Uses')}</th><th scope="col">${t('Left')}</th></tr></thead>
           <tbody>${roomFor(this.link).map(
             (r) =>

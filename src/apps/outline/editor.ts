@@ -908,7 +908,9 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
           this.saveName(e.key === 'Enter', (e.target as HTMLInputElement).value);
         }}
         @blur=${(e: FocusEvent) => this.saveName(true, (e.target as HTMLInputElement).value)} />`;
-    return label ? html`<button type="button" class="ol-label" aria-label=${t('Line named “{label}”: change it', { label })} @click=${() => this.openNaming(at)}>${label}</button>` : nothing;
+    return label
+      ? html`<button type="button" class="ol-label to-chip accent" aria-label=${t('Line named “{label}”: change it', { label })} @click=${() => this.openNaming(at)}>${label}</button>`
+      : nothing;
   }
   /* ---------- the compound bullet: a status of the document's set, a task's box, a due day (Paul, 2026-10-15) ---------- */
 
@@ -920,7 +922,7 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
   private statusChip(at: number, it: Item) {
     if (!it.status) return nothing;
     const s = this.statuses.find((x) => x.name === it.status) ?? { name: it.status, color: STATUS_COLORS.gray };
-    return html`<button type="button" class="ol-status" style="--ol-status:${s.color}" aria-label=${t('Status {status}: tap for the next', { status: s.name })} title=${t('Status')} @mousedown=${(e: Event) => e.preventDefault()} @click=${() => this.cycleStatus(at)}>${s.name}</button>`;
+    return html`<button type="button" class="ol-status to-chip solid" style="--chip:${s.color}" aria-label=${t('Status {status}: tap for the next', { status: s.name })} title=${t('Status')} @mousedown=${(e: Event) => e.preventDefault()} @click=${() => this.cycleStatus(at)}>${s.name}</button>`;
   }
   /**
    * A task's box, drawn in the row (the words' own marker is hidden in a row, style.css, so without this a task showed
@@ -973,7 +975,7 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
         @change=${(e: Event) => this.saveDue(true, (e.target as HTMLInputElement).value)}
         @blur=${(e: FocusEvent) => this.saveDue(true, (e.target as HTMLInputElement).value)} />`;
     return it.due
-      ? html`<button type="button" class="ol-due" aria-label=${t('Due {date}: change it', { date: this.dayWords(it.due) })} @mousedown=${(e: Event) => e.preventDefault()} @click=${() => this.openDating(at)}>${icon(UI.calendar, 12)}<span>${this.dayWords(it.due)}</span></button>`
+      ? html`<button type="button" class="ol-due to-chip quiet" aria-label=${t('Due {date}: change it', { date: this.dayWords(it.due) })} @mousedown=${(e: Event) => e.preventDefault()} @click=${() => this.openDating(at)}>${icon(UI.calendar, 12)}<span>${this.dayWords(it.due)}</span></button>`
       : nothing;
   }
   private openDating(at: number) {
@@ -1043,7 +1045,7 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
           (s, i) => html`<div class="ol-statuses-row" role="listitem">
             <input type="text" .value=${s.name} aria-label=${t('Name')} autocomplete="off" spellcheck="false" @input=${(e: Event) => set(i, { name: (e.target as HTMLInputElement).value })} />
             <to-menu class="ol-color-menu" .label=${COLOR_NAMES[s.word]()} caret .items=${colors.map((w) => ({ label: COLOR_NAMES[w](), swatch: STATUS_COLORS[w], checked: w === s.word, does: () => set(i, { word: w }) }))}></to-menu>
-            <span class="ol-status" style="--ol-status:${STATUS_COLORS[s.word] ?? STATUS_COLORS.gray}" aria-hidden="true">${s.name || '…'}</span>
+            <span class="ol-status to-chip solid" style="--chip:${STATUS_COLORS[s.word] ?? STATUS_COLORS.gray}" aria-hidden="true">${s.name || '…'}</span>
             ${tool({ label: t('Remove'), icon: UI.close, does: () => (this.statusDraft = draft.filter((_, k) => k !== i)) })}
           </div>`,
         )}
@@ -1238,14 +1240,14 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
     if (!items.length) return html`<p class="to-hint">${t('Nothing to do yet: a task, a status or a due date on an item puts it here.')}</p>`;
     const head = (key: 'status' | 'due', label: string) =>
       html`<th scope="col" aria-sort=${sort === key ? 'ascending' : 'none'}><button type="button" class="ol-agenda-sort" aria-pressed=${String(sort === key)} @click=${() => (this.agendaSort = sort === key ? null : key)}>${label}</button></th>`;
-    return html`<table class="ol-agenda-table">
+    return html`<table class="to-table ol-agenda-table">
       <thead><tr><th scope="col">${t('Item')}</th>${head('status', t('Status'))}${head('due', t('Due date'))}</tr></thead>
       <tbody>${items.map((it) => {
         const b = this.doc.blocks[it.at] as { done?: boolean };
         const s = st.find((x) => x.name === it.status);
         return html`<tr>
           <td><button type="button" class="ol-agenda-item" @click=${() => this.goTo(it.at)}>${b.done !== undefined ? html`<span class="ol-task" role="checkbox" aria-checked=${String(!!b.done)} aria-hidden="true">${b.done ? icon(UI.check, 12) : nothing}</span>` : nothing}${plainText(it.runs).trim() || t('Untitled')}</button></td>
-          <td>${it.status ? html`<span class="ol-status" style="--ol-status:${s?.color ?? STATUS_COLORS.gray}">${it.status}</span>` : nothing}</td>
+          <td>${it.status ? html`<span class="ol-status to-chip solid" style="--chip:${s?.color ?? STATUS_COLORS.gray}">${it.status}</span>` : nothing}</td>
           <td>${it.due ? this.dayWords(it.due) : nothing}</td>
         </tr>`;
       })}</tbody>
@@ -1263,7 +1265,7 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
       .filter((g) => g.items.length)
       .map(
         (g) => html`<section class="ol-by-status-group">
-          <h3><span class="ol-status" style="--ol-status:${g.color}">${g.name}</span> <small>${g.items.length}</small></h3>
+          <h3><span class="ol-status to-chip solid" style="--chip:${g.color}">${g.name}</span> <small>${g.items.length}</small></h3>
           <ul>${g.items.map((it) => html`<li><button type="button" class="ol-agenda-item" @click=${() => this.goTo(it.at)}>${plainText(it.runs).trim() || t('Untitled')}</button>${it.due ? html`<small class="ol-by-status-due">${this.dayWords(it.due)}</small>` : nothing}</li>`)}</ul>
         </section>`,
       )}</div>`;

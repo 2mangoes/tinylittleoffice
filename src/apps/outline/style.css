@@ -153,43 +153,16 @@
     border-radius: 50%;
   }
 
-  /* The chips of a row, one rule: a line's name before the words (accent), a status's pill (its color), a due day after
-     them (quiet). Each a button; tapped, the name is typed where it is, the status goes to the next, the day is picked. */
-  .ol-label,
-  .ol-status,
-  .ol-due {
-    flex-shrink: 0;
-    align-self: center;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.25rem;
-    margin: 0 0.125rem 0 0.25rem;
-    font: inherit;
-    font-size: 0.75rem;
-    border-radius: var(--to-radius-pill);
-    max-width: 12em;
-    padding: 1px 0.5rem;
-    border: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    cursor: pointer;
-  }
+  /* The row's chips are the kit's (.to-chip, kit.css): a line's name before the words (accent), a status's pill (solid, its
+     colour), a due day after them (quiet). Only their places in the row are the Outliner's. */
   .ol-label {
-    background: var(--to-accent-soft);
-    color: var(--to-accent);
+    margin: 0 0.125rem 0 0.25rem;
   }
   .ol-status {
     margin: 0 0.25rem 0 0.125rem;
-    font-size: 0.6875rem;
-    font-weight: 600;
-    letter-spacing: 0.02em;
-    background: var(--ol-status, var(--to-accent));
-    color: #fff;
   }
   .ol-due {
-    background: var(--to-surface-2);
-    color: var(--to-ink-2);
+    margin: 0 0.125rem 0 0.25rem;
   }
   .ol-due-in {
     align-self: center;
@@ -218,9 +191,6 @@
     background: var(--to-accent);
     border-color: var(--to-accent);
   }
-  .ol-label:focus-visible,
-  .ol-status:focus-visible,
-  .ol-due:focus-visible,
   .ol-task:focus-visible,
   .ol-crumbs button:focus-visible {
     outline: 0.125rem solid var(--to-accent);
@@ -239,17 +209,11 @@
     min-width: 0;
     font: inherit;
   }
-  /* The agenda: a table of the things to do, its headings the sorts; by status: a section a status. A tap lands on the item. */
+  /* The agenda is a .to-table of the things to do, its headings the sorts; by status, a section a status. A tap lands on the item. */
   .ol-agenda-table {
-    width: 100%;
-    border-collapse: collapse;
     font-size: 0.9375rem;
   }
-  .ol-agenda-table th,
   .ol-agenda-table td {
-    text-align: start;
-    padding: 0.375rem 0.5rem;
-    border-bottom: 1px solid var(--to-line);
     vertical-align: middle;
   }
   .ol-agenda-sort {
