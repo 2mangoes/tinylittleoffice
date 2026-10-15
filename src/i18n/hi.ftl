@@ -39,7 +39,7 @@ shell-go-without = सेव किए बिना जाएँ
 # en: ee7a39c93b7018b92bcff5511a92081df68dd3db
 shell-save-in-browser-is-on = “ब्राउज़र में सेव करें” चालू है। आप जो दस्तावेज़ खोलते हैं वे यहाँ सेव होते हैं। मेन्यू में इसे बंद करें।
 # en: 97c669558589e3b0cf0917cb9caece8844ba65d9
-shell-another-version = एक और सेव संस्करण
+shell-another-version = सेव किया हुआ एक और वर्शन
 # en: 87222e82bf5d208052c68fa66c93d131fa18fc67
 shell-kept-on-this-device = इस डिवाइस पर सेव है
 # en: 266695479a949eec44dea9db4e15fba00163f04e
@@ -55,9 +55,9 @@ shell-skip-to-apps = ऐप्स पर जाएँ
 # en: 286b3810e407b3cef40b582c8ca4b373a58445bf
 shell-skip-to-document = दस्तावेज़ पर जाएँ
 # en: 03d9aea1885137ab8ab4d9c24250515cb44161f0
-shell-this-device-keeps-another-version = “{ $title }” का एक अलग संस्करण ({ $when }) इस डिवाइस पर सेव है।
+shell-this-device-keeps-another-version = “{ $title }” का एक अलग वर्शन ({ $when }) इस डिवाइस पर सेव है।
 # en: 25c53c58cba7054a3a2ae9e9b575c7888716ae94
-shell-this-link-was-made-by = इस लिंक के लिए नया संस्करण चाहिए। पेज रीलोड करें।
+shell-this-link-was-made-by = इस लिंक के लिए नया वर्शन चाहिए। पेज रीलोड करें।
 
 ## the home page
 
@@ -68,7 +68,7 @@ common-templates = टेम्पलेट
 # The button under an app's tile, naming the template list: "Start Text from"
 # The list of an app's documents kept on this device, under its tile: "Write documents"
 # en: c647789831582ba7f4b6aad72ea6f425b98aad6f
-home-app-documents = { $app } दस्तावेज़
+home-app-documents = { $app } के दस्तावेज़
 # en: f6fdbe48dc54dd86f63097a03bd24094dedd713a
 common-forget = मिटाएँ
 # The button that forgets one kept document: "Forget Launch notes"
@@ -78,9 +78,9 @@ home-forget-title = { $title } मिटाएँ
 # en: 84ab0eecfadb6332ee8b1ee5c67852b7df54e66f
 home-n-more = { $n } और
 # en: 7f2352058be05faa9a191d7ac6eb2cf0a15b228f
-home-aboard-project-made-with-respect = { $aboard } की एक परियोजना। न्यूयॉर्क शहर में सम्मान के साथ बनाई गई।
+home-aboard-project-made-with-respect = { $aboard } का एक प्रोजेक्ट। न्यूयॉर्क सिटी में सम्मान के साथ बनाया गया।
 # en: a26ce4e876668bb8cdbd6db05cc668d436b73ba6
-home-beta-version = बीटा संस्करण
+home-beta-version = बीटा वर्शन
 # en: 84add5b2952787581cb9a8851eef63d1ec75d22b
 home-email = ईमेल
 # en: 5b5d9a510b8eb3d8ca42591036a5fb8c0402a674
@@ -132,9 +132,9 @@ common-theme = थीम
 # en: 15360c25a66578ad69e81e4c2fc3f0001e8a2258
 drawer-match-device = डिवाइस जैसा
 # en: a36ef8aba22905e2d2efbf1ac1d6230d5761859d
-drawer-light = हल्का
+drawer-light = लाइट
 # en: ae1ef01432946b8976b9b58575b3390ab7644db2
-drawer-dark = गहरा
+drawer-dark = डार्क
 # en: 6b21fb791ac05170893860c248401cd24a59b732
 drawer-about = जानकारी
 # The name itself is translated too (Paul, 2026-10-10): each language says it in its own words.
@@ -143,13 +143,13 @@ common-tiny-little-office = नन्हा सा दफ़्तर
 # en: 399d4aacd52f76ac8090ce08a31e550e2123645d
 drawer-about-tiny-little-office = नन्हा सा दफ़्तर के बारे में
 # en: 6218d1c0ab69084ed45fb0f022b95f382310184a
-drawer-tiny-little-office-is-experiment = नन्हा सा दफ़्तर { $aboard } का एक प्रयोग है, जो न्यूयॉर्क शहर की एक डिजिटल और AI रणनीति और सॉफ़्टवेयर विकास कंपनी है।
+drawer-tiny-little-office-is-experiment = नन्हा सा दफ़्तर { $aboard } का एक प्रयोग है, जो न्यूयॉर्क सिटी की एक डिजिटल और AI स्ट्रैटेजी और सॉफ़्टवेयर डेवलपमेंट कंपनी है।
 # en: 04a1291dcc6e5d304f04516685710a331963f630
-drawer-to-reach-out-with-questions = सवाल हों तो { $email }।
+drawer-to-reach-out-with-questions = कोई सवाल हो तो { $email }।
 # en: 522edc71559293b5713cff3f13c2dbafd37a56a3
 drawer-email-us = हमें ईमेल करें
 # en: 98187f1688112fa57c00a326f526288fa3e6b023
-drawer-if-you-find-bugs-please = अगर आपको बग मिलें, तो कृपया उन्हें हमारे { $github } में दर्ज करें।
+drawer-if-you-find-bugs-please = अगर आपको कोई बग मिले, तो कृपया हमारी { $github } में रिपोर्ट करें।
 # en: c6651994b242228b647fbbd2a83eccefd957abca
 drawer-github-repository = GitHub रिपॉज़िटरी
 # en: 0fe421942f09b119f9019d2de286f5a43eefd4f3
@@ -210,7 +210,7 @@ leave-this-link-hides-characters-in = इस लिंक के पते म�
 # en: 21697833514286cb120912c109ed55e870e44b01
 share-copy-opened-in-new-tab = एक कॉपी नए टैब में खुली
 # en: ae7b279c96200b853008a352fa110ac2565f3dc5
-share-edit-link = संपादन लिंक
+share-edit-link = एडिट लिंक
 # en: 12355fc4c6eeb80306a7fe5199240b694bf2b85e
 share-present-link = प्रेज़ेंट करने का लिंक
 # en: bba41b4c62a01956942830c32fc1498945c30fcd
@@ -305,7 +305,7 @@ share-this-document-is-n-bytes = यह दस्तावेज़ { $n } ब�
 # en: 716ebea121ec7b8a4dd9ea47314131122cf0aab1
 share-this-document-is-n-characters = यह दस्तावेज़ { $n } अक्षरों का है; शॉर्ट लिंक में { $max } आते हैं। इसे { $over } छोटा करें तो यह आ जाएगा।
 # en: ae5014875f1eec5203f8744323723d2ee679d1cc
-share-expires-after = इतने के बाद खत्म
+share-expires-after = इतने समय बाद खत्म
 # en: 1e1c72c2e33894ad38b820f1d4ed17ef478067be
 share-hour = एक घंटा
 # en: 4286c1f81faa848587ed38925e9b181e939f4998
@@ -340,7 +340,7 @@ share-new-noun-date-n = नया: { $noun } { $date } #{ $n }
 # en: 1c2edb3104c7f2adce9ad2a77f3622d1beb0059a
 share-mastodon-server-like-mastodon-social = कोई Mastodon सर्वर, जैसे mastodon.social
 # en: 64fbd995d3b6b156ee26ae3c03e6516434c34c12
-share-change = बदलाव
+share-change = बदलें
 # en: 2a07ce9a22d8e5dc1031e531518f04e50855319f
 share-copy-embed-code = एम्बेड कोड कॉपी करें
 # en: c3e1c83e5b4172d3c738e37cb69b76d93ce49b8b
@@ -362,7 +362,7 @@ share-picture-of-first-page-and = पहले पेज की तस्वी�
 # en: 6a46f4b4b3f001e64ef9652412aa1ddbdeabc489
 share-shared-without-preview-reason = प्रीव्यू के बिना शेयर हुआ: { $reason }
 # en: 4def5924266f682e91bcdff1e5ba510a20a36902
-share-making-preview = पूर्वावलोकन बन रहा है…
+share-making-preview = प्रीव्यू बन रहा है…
 # en: b0e8d8d6d97acaeed4ad09f7b25699817638ae6b
 share-page-could-not-be-drawn = पेज बनाया नहीं जा सका
 # en: b3dcb32d0d95afbd62938ff614915e68ba996861
@@ -374,11 +374,11 @@ share-hundred-previews-day-from-one = एक पते से दिन मे�
 # en: 959db3cd3ff1a424890a809f9cf7445f37db3289
 share-server-refused-picture = सर्वर ने तस्वीर लेने से मना कर दिया
 # en: af490175b729a82a4315134642a89f1f87681967
-share-pages-in-frame-on-another = पन्ने, किसी दूसरी साइट पर एक फ़्रेम में, उन्हें यहाँ खोलने के लिए एक लिंक के साथ।
+share-pages-in-frame-on-another = पेज, किसी दूसरी साइट पर एक फ़्रेम में, साथ में उन्हें यहाँ खोलने का लिंक।
 # en: 9377de06278eacbdf4a297a82b8eb9aa3d4220c0
 share-your-mastodon-server = आपका Mastodon सर्वर
 # en: 8ae1c34bd37fad49cc5f8e02da648a78e89c3ed8
-share-left = बायाँ
+share-left = बाकी
 # en: 62be4731dedfbbc70aa7fa30d6649d816af8ca4b
 share-uses = इस्तेमाल
 # en: 525f61b6729229b1a8854a9e50bcaa52ea96b131
@@ -428,7 +428,7 @@ privacy-password-set-link-holds-only = पासवर्ड सेट हो �
 # en: dce69146962b392ae2b157aec604eface36e90c0
 privacy-password-ellipsis = पासवर्ड…
 # en: 9dfd349ebee555eb8d652be20dad971cae439eca
-privacy-preferences = पसंद
+privacy-preferences = सेटिंग्स
 # en: cf01481f626d5127ec7732fcbdb29504f08abefd
 privacy-privacy = प्राइवेसी
 # en: cefceeebf3cd6d02ddc7aca8c769881a5341e829
@@ -498,7 +498,7 @@ privacy-password-copied = पासवर्ड कॉपी हो गया
 # en: db4307e70c2d2722c2af2f79643b28e73325e9be
 common-with-password = पासवर्ड से लॉक
 # en: fa27fac915c0c87aec9006392ae6422f59857f5d
-locked-app-document-locked-with-password = { $app } दस्तावेज़, पासवर्ड से लॉक
+locked-app-document-locked-with-password = { $app } का दस्तावेज़, पासवर्ड से लॉक
 # en: 49db1d83c8636baba474ad11626b5a7c5260976f
 locked-with-password-unlock = पासवर्ड से लॉक। अनलॉक…
 # en: 507e778ae244911abcb05b73967febd0edb425a5
@@ -521,7 +521,7 @@ common-this-document = यह दस्तावेज़
 # en: 15f18f71eefc9fedc6fedd434c2edc6a919bf130
 common-done-task = हो गया: { $task }
 # en: 00c65041972e0368c2c8b452d60c0a0754fcc9bd
-common-drag-to-move-tap-to = हिलाने के लिए खींचें, चुनने के लिए टैप करें
+common-drag-to-move-tap-to = खिसकाने के लिए खींचें, चुनने के लिए टैप करें
 # en: 525df57dc3610e74377113b92951476bb9387e4d
 common-move-left = बाएँ ले जाएँ
 # en: 3a43e56f34dece6eb3d79dee1eff7b2f87db6040
@@ -553,11 +553,11 @@ common-select-all-words-of-box = सब चुनें (पहले यह फ
 # en: be76d0b25853b431767ca5b5d57ef569bbc6ff2a
 common-back-to-words = टेक्स्ट पर लौटें
 # en: 0c0b01d469faff60dc3b2d1c035ee0a7caa03852
-common-extend-selection = चुनाव बढ़ाएँ
+common-extend-selection = सिलेक्शन बढ़ाएँ
 # en: 11a8a25332234992a14424d8aad6fb9ce3d3b287
 common-next-or-one-before = अगला या पिछला
 # en: b4365b2ed2016713788d08335e5157985010ac28
-common-step-out-close-collapse-let = बंद करें या चुनाव हटाएँ
+common-step-out-close-collapse-let = बंद करें या सिलेक्शन हटाएँ
 # en: fb2997642419cda8393061543f140d40a9323957
 common-check-or-uncheck-task = काम पर टिक करें या हटाएँ
 # en: 0a4adf12f01d48ecdb89f5eddf5f19fd89d94522
@@ -570,7 +570,7 @@ common-n-of-count = { $count } में से { $n }
 # en: 5b221e9c2a451799d8f37e2b9874409d5e03ab05
 download-print = प्रिंट
 # en: f304fc6dd3e87a37a6c53cb62344c10a789a7ad9
-common-print-or-save-as-pdf = प्रिंट करें, या PDF सेव करें
+common-print-or-save-as-pdf = प्रिंट करें, या PDF में सेव करें
 # en: 473b3126e859286ef98d231328fa11a3216823a1
 download-picture-png = तस्वीर (PNG)
 # en: 3ad1b6c4e3dcf07e9ac0c95d5303f7ca4f89e55e
@@ -693,13 +693,13 @@ write-document-lowercase = दस्तावेज़
 # en: d26d55c7f815c82cf430c3915b3bb833d3f02e5e
 common-words = शब्द
 # en: 703864836e29b00a7c7490f714fd2d18474de840
-write-words-on-page-headings-lists = पन्ने पर शब्द: हेडिंग, सूचियाँ, लिंक और नोट, जोड़ करने वाली टेबल, लेटर या A4 पर प्रिंट।
+write-words-on-page-headings-lists = पेज पर शब्द: हेडिंग, सूचियाँ, लिंक और नोट, जोड़ लगाने वाली टेबल, लेटर या A4 पर प्रिंट।
 # en: e214b8a29923056887b7edf6635d90dcbb2abe88
 write-document = दस्तावेज़
 # en: 6e660ac1c8b81a53e302f6bb0298551ec820eceb
 write-here = यहाँ लिखें।
 # en: 6b8ad00f4398c3aa47f82637d019dad9e4f9da0c
-write-subheading = उप-शीर्षक
+write-subheading = सबहेडिंग
 # en: 05058e0b630498611ebc41894f7b1670dcd5870e
 write-paragraph = पैराग्राफ़
 # en: b4d812c8bee8056808c14f1b31b6765342c8437e
@@ -744,7 +744,7 @@ write-newspaper = अख़बार
 # en: ed0ae2181b2137e6b9f63fdbaeed415ac7e73502
 write-narrow-headline-two-columns = एक तंग हेडलाइन, दो कॉलम
 # en: 62fb6cfda0506f0ed73ad066151086d3eed2296d
-write-horizontal-rule = क्षैतिज रेखा
+write-horizontal-rule = आड़ी लाइन
 # Insert ▾'s rule in a document: what follows starts the next page.
 # en: 830b8871f026d13b7b94d6723471f2b4e152e360
 write-page-break = पेज ब्रेक
@@ -782,12 +782,12 @@ write-add-column-before = पहले कॉलम जोड़ें
 # en: 9b3acfc74a5d37d699868ade0ed3d142024174cf
 write-column-c-what-it-holds = कॉलम { $c }: प्रकार, नाम, जोड़ें या हटाएँ
 # en: 1f01479a40aa348fc273d4d09636403f89eff717
-write-table-move-copy-or-take = टेबल: हिलाएँ, कॉपी करें या मिटाएँ
+write-table-move-copy-or-take = टेबल: खिसकाएँ, कॉपी करें या मिटाएँ
 # The templates
 # en: cfd76febbb671e54b2f280128fb5c317389758a7
 write-a-letter = चिट्ठी
 # en: 7456f1ce5f81c497b66302751f617f60612306f6
-write-your-address-date-greeting-point = आपका पता, तारीख़, संबोधन, असली बात, अंत में अभिवादन।
+write-your-address-date-greeting-point = आपका पता, तारीख़, शुरुआती अभिवादन, असली बात, और आख़िर में आपका नाम।
 # en: ae3cd6584a49de52c70c1e00ae0a02c8abab166b
 write-meeting-notes = मीटिंग के नोट
 # en: 7bbe470d4a5d9510c0fcb6844b519d118681beb7
@@ -795,7 +795,7 @@ write-agenda-what-was-said-what = एजेंडा, क्या कहा ग
 # en: 9fb58963c66db0c8ca7c638f491e82246e226d30
 write-resume = रिज़्यूमे
 # en: 3f3c7baad1c18a4ab23412f60d65b5179346006d
-write-name-and-contact-experience-education = नाम और संपर्क, अनुभव, पढ़ाई, हुनर: एक पन्ने में समाया रिज़्यूमे।
+write-name-and-contact-experience-education = नाम और संपर्क, अनुभव, पढ़ाई, हुनर: एक पेज में आने वाला रिज़्यूमे।
 # en: 5a0ba3bb83f0992ba00ae94db6a7464210c40711
 write-contract = कॉन्ट्रैक्ट
 # en: 50899f480b3395ee509689b06672ad9d8719e082
@@ -803,7 +803,7 @@ write-plain-words-agreement-what-each = सीधी-सादी भाषा �
 # en: f9f38818c406d0878defb17a2356e1a2c658861a
 write-invoice = इनवॉइस
 # en: 4e056cf73efd0995ce1e7c5fd88900894935896c
-write-who-what-and-how-much = किसे, क्या और कितना, जोड़ टेबल में हुआ; भेजने के लिए कागज़ की तरह प्रिंट।
+write-who-what-and-how-much = किसे, क्या और कितना, हिसाब टेबल में; भेजने के लिए कागज़ पर प्रिंट।
 # en: 80c40a5c8be53118fd8a9fc487b43f20c3014fbc
 write-cover-letter = कवर लेटर
 # en: fe727759e1b85df4a1d71348a1a6dfd6ef8e135d
@@ -815,7 +815,7 @@ write-to-from-date-and-subject = किसे, किसकी ओर से, �
 # en: 092f99ea11a34a8490e7a767a83a42fc45634f82
 write-minutes = मिनट्स
 # en: 34dbbbeddd62f120a000701c56adebc8bae95352
-write-formal-meeting-who-came-treasurers = औपचारिक मीटिंग: कौन आया, कोषाध्यक्ष का हिसाब, एक प्रस्ताव और उसका वोट, आगे के काम।
+write-formal-meeting-who-came-treasurers = औपचारिक मीटिंग: कौन आया, खजांची का हिसाब, एक प्रस्ताव और उस पर वोट, आगे के काम।
 # en: e04a25d1f69061bfe7770b16891fca2c413bcbe0
 write-one-page-cv = एक पेज का CV
 # en: 11628c83c5de19d1338628ed7153b648f496b27c
@@ -823,7 +823,7 @@ write-typewriter-set-cv-now-before = टाइपराइटर वाला CV
 # en: 6ed05e720ccc3ef269db1b38201da8b873acc895
 write-newsletter = न्यूज़लेटर
 # en: e583899cf44dbc07e6d8d4e7a252d39552e4e3d4
-write-block-associations-month-dates-in = मोहल्ला संघ का महीना: तारीख़ें टेबल में, स्वागत, खबरें और शुक्रिया।
+write-block-associations-month-dates-in = ब्लॉक एसोसिएशन का महीना: तारीख़ें टेबल में, स्वागत, खबरें और शुक्रिया।
 # en: 1dcda804c96da3cc7e73e8a1672d4379a741f11a
 write-recipe = रेसिपी
 # en: 72490fa559ee9ce5ed498b58b3e2cad900af7155
@@ -833,11 +833,11 @@ write-questions-and-answers = सवाल और जवाब
 # en: 1854b96dd11603bed03cce723369ef661a6f34f8
 write-questions-people-ask-each-heading = लोग जो सवाल पूछते हैं, हर एक हेडिंग और उसके नीचे जवाब।
 # en: 6d234a17fecd5048e790eb4d1c415e17899a0e56
-write-press-release = प्रेस विज्ञप्ति
+write-press-release = प्रेस रिलीज़
 # en: ba41d12bbba317bcacf230155abba7ce9e400379
 write-news-in-first-line-detail = खबर पहली पंक्ति में, ब्योरा, एक उद्धरण, समय, और किसे फ़ोन करें।
 # en: 0c30f8a886ae8207e0702b4daf5eda405b19a131
-write-news-article = समाचार लेख
+write-news-article = न्यूज़ आर्टिकल
 # en: 66280b179ec208e759c8fd7e05a4b1171c355c9f
 write-headline-byline-story-in-two = हेडलाइन, बाइलाइन, कागज़ पर दो कॉलम में खबर, और आँकड़ों का एक चार्ट।
 # en: 19ad8ec7231e0cc9d9ea7e0684742672018e1f05
@@ -847,17 +847,17 @@ write-introduction-then-questions-and-answers = एक परिचय, फि�
 # en: 94a18e60341a34b6feec02442ec2d70ee1244900
 write-book-review = किताब की समीक्षा
 # en: a8ccbb45148f664a9800e533e32902524ce8217a
-write-book-stars-what-it-is = किताब, सितारे, किस बारे में है, क्या अच्छा लगा और क्या नहीं।
+write-book-stars-what-it-is = किताब, स्टार रेटिंग, किस बारे में है, क्या अच्छा लगा और क्या नहीं।
 # en: 1eb36cb79b31a29c161965efdbb310289b4e5814
 write-music-review = संगीत की समीक्षा
 # en: 75857043416829c78af6afbfcd886ea90847e06c
-write-album-label-and-length-stars = एक एल्बम: लेबल और लंबाई, सितारे, गाने, सबसे अच्छे ट्रैक।
+write-album-label-and-length-stars = एक एल्बम: लेबल और लंबाई, स्टार रेटिंग, गाने, सबसे अच्छे ट्रैक।
 # en: fae48a8f67fd81fb5d54b5a9c2d60929cd5da2f7
-write-thesis = शोध-प्रबंध
+write-thesis = थीसिस
 # en: 8dd8017f140560c80229f7d051a8fb2376183e9a
-write-title-page-abstract-chapters-with = शीर्षक पृष्ठ, सार, फ़ुटनोट और टेबल वाले अध्याय, और संदर्भ-सूची, किताब की तरह सजे।
+write-title-page-abstract-chapters-with = टाइटल पेज, सार, फ़ुटनोट और टेबल वाले चैप्टर, और संदर्भ सूची, किताब की तरह सजे।
 # en: 42921f1b739a62eb82bc6f16ce47ff5ce5fd4da4
-write-grant-proposal = अनुदान प्रस्ताव
+write-grant-proposal = ग्रांट का प्रस्ताव
 # en: 381d823ac8ecdff832331120748c151a113b2464
 write-ask-need-plan-budget-that = माँग, ज़रूरत, योजना, जोड़ मिलता हुआ बजट, और कैसे पता चलेगा कि काम हुआ।
 # en: 1b731d688386e2e229d1c2b671e96c2bfce768a4
@@ -867,11 +867,11 @@ write-course-when-and-where-what = एक कोर्स: कब और कह�
 # en: 3c847b9cd456626c998b9d2793f7701117ee4c80
 write-formal-complaint = औपचारिक शिकायत
 # en: f98daa2b60c626279045f82029a9e58dfcd90f4b
-write-what-happened-in-order-what = क्या हुआ, क्रम से; आप क्या चाहते हैं; और आगे बढ़ने से पहले कब तक।
+write-what-happened-in-order-what = क्या हुआ, क्रम से; आप क्या चाहते हैं; और कब तक, इससे पहले कि आप बात आगे ले जाएँ।
 # en: f74c6bc075b1961f73f45729ce6281dc84fb3ccf
 write-letter-to-politician = नेता को चिट्ठी
 # en: 2e754026e13e7ebe41d9513e31f94d8268341243
-write-ask-your-representative-for-vote = अपने प्रतिनिधि से वोट माँगें: आप कौन हैं, यह यहाँ क्यों मायने रखता है, और एक सवाल।
+write-ask-your-representative-for-vote = अपने प्रतिनिधि से किसी वोट पर साथ माँगें: आप कौन हैं, यहाँ इसकी अहमियत क्यों है, और एक सवाल।
 # en: de21096f37522d15740e7a4acd69efc811f9b5ce
 write-love-letter = प्रेम-पत्र
 # en: a6977a11c96b06575fd8359e1bb9e3dea5a21fcf
@@ -879,7 +879,7 @@ write-ordinary-things-missed-letter-across = रोज़ की छोटी �
 # en: 1af339528a1814a5f1dc409f2d108e0308035b87
 write-wedding-speech = शादी का भाषण
 # en: b040a94a7bd386ebaee15aa4c4535da004fadc4c
-write-how-they-met-what-you = वे कैसे मिले, तब से आपने क्या देखा, दोनों के लिए एक-एक बात, और जाम।
+write-how-they-met-what-you = वे कैसे मिले, तब से आपने क्या देखा, दोनों के लिए एक-एक बात, और टोस्ट।
 # en: c88c994e6c6c50db17576753df90aac55138155f
 write-eulogy = श्रद्धांजलि
 # en: cdc87e623e95678f786543dd272ba279df15e8ee
@@ -887,7 +887,7 @@ write-life-in-few-minutes-where = कुछ ही मिनटों में 
 # en: 6c63ce6d4727a3fb46c16a62ac8d536b0b61fd08
 write-zine-essay = ज़ीन निबंध
 # en: ecce024c73aadb2150552b3419d5aa1c3cb72c17
-write-personal-essay-for-small-magazine = छोटी पत्रिका के लिए एक निजी निबंध, टाइपराइटर में।
+write-personal-essay-for-small-magazine = छोटी पत्रिका के लिए एक निजी निबंध, टाइपराइटर से लिखा।
 # en: 563a631aba8690962836c99d15886672eb96ef62
 write-petition = याचिका
 # en: 6d3ace089783eb6cf5e5fe47a7d74a3ee5c21f39
@@ -992,9 +992,9 @@ sheet-project-tracker = प्रोजेक्ट ट्रैकर
 # en: a9f287fb1ede11b35e739a207cac5eddcfd2116d
 sheet-tasks-with-owners-start-and = काम, उनके ज़िम्मेदार, आज से गिनी शुरू और आखिरी तारीख़ें, हर एक के दिन, कैसा चल रहा है, और पूरा होने पर टिक।
 # en: 83c8cb0557f1a8ab76094b2801ae0b4cd23e4741
-sheet-loans-compared = कर्ज़ों की तुलना
+sheet-loans-compared = लोन की तुलना
 # en: 8ae3fb1476eab673ec96c9e2614cad18cbd6f497
-sheet-amount-rate-and-years-for = हर कर्ज़ की रकम, दर और साल; महीने की किस्त (PMT), कुल कितना पड़ेगा, और ब्याज।
+sheet-amount-rate-and-years-for = हर लोन की रकम, दर और साल; महीने की किस्त (PMT), कुल कितना पड़ेगा, और ब्याज।
 # en: 53f4e4eb1a489c6a14658993062fc985a80bd775
 sheet-subscription-business = सब्सक्रिप्शन का कारोबार
 # en: f14ffb32b12ec6d73e3971054ddf5248de50852a
@@ -1010,7 +1010,7 @@ sheet-hours-rate-and-weeks-make = घंटे, दर और हफ़्ते
 # en: 53ca3d56131df7985cdd58b24a369278bce0d723
 sheet-mutual-aid-fund = आपसी मदद का फ़ंड
 # en: 4df80f44a8c21f77f84393546555c9ab3224fe85
-sheet-monthly-donors-and-one-off = महीने के दानदाता और एकबारगी तोहफ़े फ़ंड भरते हैं; उसमें से अनुदान, थोड़ा प्रशासन और एक रिज़र्व निकलता है।
+sheet-monthly-donors-and-one-off = हर महीने के दानदाता और एक बार के दान फ़ंड भरते हैं; उसमें से ग्रांट, थोड़ा एडमिन खर्च और एक रिज़र्व निकलता है।
 # en: 992dbb972d7850082f91f3f43d7b68391091a32e
 sheet-month-by-month-with-chart = महीने-दर-महीने, चार्ट के साथ
 # en: 876c69fa93189c4e89f57aeec964d0573e61be81
@@ -1050,15 +1050,15 @@ sheet-job-in-steps-each-starting = कदमों में बँटा एक
 # en: 2a3b772f6e347425b5a235a2e956004ed5177213
 sheet-grade-book = ग्रेड बुक
 # en: 0e6fce40b16529c27d306da8834f33a391a5ca5b
-sheet-classs-grades-for-essays-quizzes = एक क्लास के निबंध, क्विज़ और प्रोजेक्ट के नंबर; हर विद्यार्थी का औसत और ग्रेड, और क्लास का औसत।
+sheet-classs-grades-for-essays-quizzes = एक क्लास के निबंध, क्विज़ और प्रोजेक्ट के नंबर; हर स्टूडेंट का औसत और ग्रेड, और क्लास का औसत।
 # en: 7d9ac107a69e997e571bd6906b535f6802bc5569
 sheet-membership-roll = सदस्यों की सूची
 # en: 3bc0a32ca3d296ee9217f44adf3cf4d3c3dbd080
-sheet-who-belongs-their-plot-and = कौन सदस्य है, उसका प्लॉट और काम, कब पैसे दिए और कब नवीनीकरण होगा, किसके पास चाबी है, और आया हुआ चंदा।
+sheet-who-belongs-their-plot-and = कौन सदस्य है, उसका प्लॉट और काम, कब पैसे दिए और कब रिन्यू करना है, किसके पास चाबी है, और आया हुआ चंदा।
 # en: b884fda377a19ce445f8ec49bd90f2784834978c
 sheet-seating-count = बैठने की गिनती
 # en: 4e00db4efd970061e8ff6cd63f723c7385ad1637
-sheet-tables-for-wedding-seats-guests = शादी की मेज़ें: सीटें, मेहमान, खाली जगहें और चुने हुए खाने, और जाँच कि खाने पूरे जुड़ते हैं।
+sheet-tables-for-wedding-seats-guests = शादी की टेबलें: सीटें, मेहमान, खाली जगहें और चुना हुआ खाना, और जाँच कि खाने की गिनती पूरी मिलती है।
 # en: 8a535a1def73648a0a55a9bfa21c9d370e434ce5
 sheet-poll-results = पोल के नतीजे
 # en: df60ac32ce5b04bf11e53f97d296db53c2a2cda2
@@ -1076,9 +1076,9 @@ sheet-inventory = इन्वेंटरी
 # en: cca3ceb6d79e8c2e922aa21c8675223c1b96c275
 sheet-stock-on-hand-against-point = हाथ में माल बनाम दोबारा मँगाने का बिंदु; क्या मँगाना है, उसकी कीमत, और कम होने पर निशान।
 # en: ba8d2875e56e1ee2a745057f4de807182be4bb9b
-sheet-petty-cash = छोटा कैश
+sheet-petty-cash = पेटी कैश
 # en: 8c7a0a9d0703152466c522d2d8bbd55cfcea218d
-sheet-money-in-and-out-of = डिब्बे में आना-जाना, किसने कहाँ खर्चा, हर बार के बाद बचा हुआ, और रसीद पर टिक।
+sheet-money-in-and-out-of = कैश बॉक्स में आया और गया पैसा, किसने किस पर खर्च किया, हर बार के बाद बचा हुआ, और रसीद पर टिक।
 # en: dca1686c53daf52f46495f2a961a3346006e41ac
 sheet-rate-card = रेट कार्ड
 # en: 1a3c8694038b9c6d56a26e131d62c3616e165a77
@@ -1088,9 +1088,9 @@ sheet-mortgages-compared = मॉर्गेज की तुलना
 # en: 43ecdf4a244c2e1c022c6c08a3ba1c07f107ece3
 sheet-four-offers-on-one-house = एक घर पर चार ऑफ़र: डाउन पेमेंट के बाद का लोन, महीने की किस्त, टैक्स समेत कुल, और ब्याज।
 # en: 54695e5df6ef00663252186d998a600f9bac4c58
-sheet-unit-converter = इकाई बदलें
+sheet-unit-converter = यूनिट कन्वर्टर
 # en: d2e0c086c77046805d1cc8934044bb315bf00aec
-sheet-miles-and-kilometers-pounds-and = मील और किलोमीटर, पाउंड और किलोग्राम, ओवन, कप और गैलन: रकम लिखें, दूसरी इकाई पढ़ें।
+sheet-miles-and-kilometers-pounds-and = मील और किलोमीटर, पाउंड और किलोग्राम, ओवन, कप और गैलन: मात्रा लिखें, दूसरी यूनिट में देखें।
 # en: 9d2911edf283fc08872808d554a1017460fbe86f
 sheet-tournament-bracket = टूर्नामेंट ब्रैकेट
 # en: ad907a82b59f9d64761c80d6b2fe13c2a3b04fc2
@@ -1168,7 +1168,7 @@ sheet-letters-keyboard = अक्षरों वाला कीबोर्�
 # en: 7177342b32d961e7d51feb4571231982a48a0772
 sheet-lock-these-cells-so-reader = इन सेल को लॉक करें ताकि पढ़ने वाले इन्हें बदल न सकें
 # en: 893190219ca26f4bad6f2395b91da6295cab23b6
-sheet-locked-part-of-model = लॉक: मॉडल के सूत्रों का हिस्सा
+sheet-locked-part-of-model = लॉक: मॉडल के फ़ॉर्मूलों का हिस्सा
 # en: b1b588e8ffba9c37d560f4b4d63c6344d009ce2e
 sheet-low-to-high = कम से ज़्यादा
 # en: 1dc043bb8eb5646851ff808477bb5d3573739f1c
@@ -1187,7 +1187,7 @@ sheet-symbol-of-up-to-three = तीन अक्षर तक का चिह�
 # en: 630470a61228c20119f270074f1e0b6a4c2d9151
 sheet-no-chart = कोई चार्ट नहीं
 # en: b7baa1d40c4ea29afc9098732bffee2a861a6c44
-sheet-number = संख्या
+sheet-number = नंबर
 # en: 80838be5576c4b333f764e352ef9e6c5292b2b78
 sheet-open-link = { $link } खोलें
 # en: 1d6f3ce763f138e0025747a9d3ae7f30efc75531
@@ -1219,7 +1219,7 @@ sheet-show-all-text = पूरा टेक्स्ट दिखाएँ
 # en: 9580fcbce0c31ceaa47eb583e5f7ce637fdc8a0a
 sheet-shown-as-typed = सादा टेक्स्ट
 # en: a2a5bdeca9391be1e0cdff1c19895bae7fadc2c2
-sheet-sort-rows-by-it = इसके अनुसार क्रम
+sheet-sort-rows-by-it = इसके हिसाब से सॉर्ट
 # en: ff87bd67a9f3709f0a4247baa8ba4de4a5bd5fd2
 sheet-suggested = सुझाया हुआ
 # en: eda0b8f3c389658a7369166fd4c36099e380adff
@@ -1242,9 +1242,9 @@ sheet-choices-for-ref = { $ref } के विकल्प
 # en: a871e2c9206cb4854cc06c30bc6de95cb82f9700
 sheet-has-one = शीट में पहले से एक चार्ट है
 # en: f0dfb92a1f16391ab3bd5478ce9d8c0f2d74bf95
-sheet-edit-cell-caret-at-its = कर्सर आखिर में रखकर सेल बदलें
+sheet-edit-cell-caret-at-its = कर्सर आख़िर में रखकर सेल एडिट करें
 # en: 28d1a54d2e35ad87c0d19942f68d70ddbf67bcee
-sheet-put-back-what-cell-held = सेल का मान वापस लाएँ
+sheet-put-back-what-cell-held = सेल की पुरानी वैल्यू वापस लाएँ
 # en: 2b69414b3787eaa8a38f2f1a9c4a48aff7dd78a5
 sheet-put-dated-rows-on-calendar = तारीख़ वाली पंक्तियाँ कैलेंडर पर रखें
 
@@ -1357,13 +1357,13 @@ draw-phone-screen-sketched-in-boxes = किसी के बनाने से
 # en: 106c289912d69f2f02f64b1c195daa945a29c19f
 draw-rosette-with-ribbons-for-volunteer = साल के वॉलंटियर के लिए रिबन वाला रोज़ेट, प्रिंट करने, काटने और पिन करने के लिए।
 # en: c9c7469b74c0a43646cb4a46279d9930b271ca19
-draw-block-party-from-above-stage = ऊपर से मोहल्ले का मेला: स्टेज, स्टॉल, फ़र्स्ट एड और खो जाएँ तो कहाँ मिलें।
+draw-block-party-from-above-stage = ऊपर से ब्लॉक पार्टी: स्टेज, स्टॉल, फ़र्स्ट एड और खो जाएँ तो कहाँ मिलें।
 # en: 6d12c8adbefeaeacac0d48274df3a195ca9a1d17
 draw-badge = बैज
 # en: 32787c0201e95e7dd6ca00aa5dd63210e278e3db
 common-birthday-card = जन्मदिन कार्ड
 # en: be3883124104a86065f65c46fcf4edff20e0842f
-draw-can-we-refund-it-stores = क्या हम रिफ़ंड कर सकते हैं? दुकान की वापसी का नियम सवालों, जवाबों और करने लायक बातों में।
+draw-can-we-refund-it-stores = क्या हम रिफ़ंड कर सकते हैं? दुकान की रिटर्न पॉलिसी सवालों, जवाबों और करने लायक बातों में।
 # en: 619a6e052e5343b8fbad2bfbc5a35d0aa4ec763f
 draw-event-map = इवेंट का नक्शा
 # en: 6349ac251c1b86c4744c7e0361a5e72ea5e38402
@@ -1379,9 +1379,9 @@ draw-pip-frog-32-by-32 = मेंढक पिप, लाल मफ़लर �
 # en: d8cca3dd62ad1e4c37a8b10c054464bbcb13e3c9
 draw-room-plan = कमरे का प्लान
 # en: fcba7b3fe14a456c5dd428b4e0b28552efa25751
-draw-living-room-rearranged-sofa-rug = बैठक नई तरह सजी: सोफ़ा, कालीन, अलमारी और मेज़ नाप के हिसाब से, दरवाज़े का खुलना भी खिंचा।
+draw-living-room-rearranged-sofa-rug = लिविंग रूम नए ढंग से सजा: सोफ़ा, कालीन, किताबों की अलमारी और डेस्क नाप के हिसाब से, दरवाज़े का खुलना भी बना हुआ।
 # en: 8640aa92343372c68f5d72660821c342598d8b38
-draw-three-ideas-for-coffee-roasters = कॉफ़ी रोस्टर के निशान के तीन आइडिया साथ-साथ, नाम बड़ा लिखा, और चुनने की तारीख़।
+draw-three-ideas-for-coffee-roasters = कॉफ़ी रोस्टर के लोगो के तीन आइडिया साथ-साथ, नाम बड़ा लिखा, और चुनने की तारीख़।
 # en: 68224d905ee1bc5c63082121b1e80cf6fe7d08c1
 draw-weather-icons = मौसम के आइकन
 # en: 0d07d8bcde49fe88082ab75f75e2fd49bbcef253
@@ -1401,10 +1401,10 @@ draw-drawing-of-things = { $things } की एक ड्रॉइंग।
 # en: 2759692cb0d64c0c370b6516074bb1de744a31a2
 draw-drawing-of-n-unlabeled-shapes = { $n ->
         [one] बिना लेबल की एक आकृति
-       *[other] बिना लेबल की { $n } आकृतियाँ
-    } की एक ड्रॉइंग।
+       *[other] बिना लेबल की { $n } आकृतियों
+    } की ड्रॉइंग।
 # en: f33cdbb01b5b65fe3fe8928669d13ca09b3b5403
-draw-leads-to-b = { $a } से { $b } तक
+draw-leads-to-b = { $a } से { $b } की ओर
 # en: b9e37b62382792094f5463a54183d523118a25a0
 draw-joins-b = { $a } और { $b } जुड़े हैं
 # en: e0883468badf6a5f9c1cfe0ce209a16939a64683
@@ -1495,7 +1495,7 @@ draw-send-to-back = पीछे भेजें
 # en: 972d57379db3e5be76d4ead709fef1ad71ff03d6
 common-duplicate = डुप्लिकेट
 # en: 5301648dcf6b53cefc9ed52999aaa92d4603cae0
-common-edit = बदलें
+common-edit = एडिट करें
 # en: f6fdbe48dc54dd86f63097a03bd24094dedd713a
 common-delete = मिटाएँ
 # en: d7bc7e98ec7a8acfd61dabe29e1e9156adf86fb9
@@ -1522,9 +1522,9 @@ draw-diagram-of = इसका एक डायग्राम…
 # en: 5a33f2e7e84274a5291191ca3105e62d897eee0e
 draw-read-aloud-to-people-who = जो देख नहीं सकते उन्हें पढ़कर सुनाया जाता है, और ड्रॉइंग जहाँ भी एम्बेड या डाउनलोड हो, उसके साथ रहता है।
 # en: 988c63b77eade4f718f9d469cb36e35bff976839
-draw-describe-from-shapes = आकृतियों से बनाएँ
+draw-describe-from-shapes = आकृतियों से लिखें
 # en: ac302ae45938c985822f097507602d624128f1d0
-draw-tap-or-drag-to-paint = रंगने के लिए टैप करें या खींचें; ऐरो कुंजियाँ चलाती हैं, Enter रंगती है।
+draw-tap-or-drag-to-paint = रंगने के लिए टैप करें या खींचें; ऐरो की से आगे बढ़ें, Enter से रंग भरें।
 # en: ea263dc45b04f2755ac61a51deecc96ade3fb6a9
 draw-tap-each-corner-tap-first = हर कोने पर टैप करें; बंद करने के लिए पहले कोने पर फिर टैप करें, या Enter दबाएँ।
 # en: ccdc55c46a79ea604962ddda9cc010311bdca4fe
@@ -1534,7 +1534,7 @@ draw-press-on-one-shape-and-let-go-on-another = एक आकृति पर �
 # en: 1005cc8c1dafc1f9eb422bf2ac68290b492fdfd1
 draw-now-other-shape-tap-it = अब दूसरी आकृति: उस पर टैप करें, या ऐरो से चुनकर Enter दबाएँ।
 # en: e3686f1c55ec91e31825e1d9510abf592d80b08a
-draw-drag-to-move-them-together = सबको साथ हिलाने के लिए खींचें। Shift+टैप से आकृति जुड़ती या हटती है।
+draw-drag-to-move-them-together = सबको साथ खिसकाने के लिए खींचें। Shift+टैप से आकृति जुड़ती या हटती है।
 # en: eb36764c60ec7a17dd6ac3ec7dbbd22ee401778e
 draw-press-on-one-shape-and = एक आकृति पर दबाएँ और दूसरी पर छोड़ें
 # en: 199f4e86afea4f2d42eb40b63ce8599168575e06
@@ -1552,18 +1552,18 @@ draw-use-as-background = बैकग्राउंड की तरह इस�
 # en: 507f52dfd67fb731677bb9ae6971f9b5e891bc84
 draw-grid-is-now-background-download = ग्रिड अब बैकग्राउंड है। इसे टाइल के रूप में डाउनलोड करें, या tile: से किसी भी पेज पर इस्तेमाल करें।
 # en: 209a1a74ee8eec09b861bc34e5ddb08a1357a364
-draw-pixel-grid-n-by-n = पिक्सेल ग्रिड, { $n } बाय { $n }। ऐरो कुंजियाँ चलाती हैं; Enter मौजूदा रंग से रंगता है।
+draw-pixel-grid-n-by-n = पिक्सल ग्रिड, { $n } बाई { $n }। ऐरो की से आगे बढ़ें; Enter मौजूदा रंग भरता है।
 # en: a9deda2292f9b3c9a827e2aa71e0da6b4db9f16e
 draw-row-y-column-x-ink = पंक्ति { $y }, कॉलम { $x }: { $ink }
 # en: d316afce8845f59e541c981d07d81bab22858d00
 draw-as-repeating-background = दोहराते बैकग्राउंड की तरह
 # The contextual bar under a shape, and its words typed on it.
 # en: 27bb3dadbebca64cec249a9811a07cd3ea25a520
-draw-dashed-line = टूटी लाइन
+draw-dashed-line = डैश वाली लाइन
 # en: 8953b1fb5c8eeda2158dfd09bde1a766d4b9079d
-draw-dotted-line = बिंदीदार लाइन
+draw-dotted-line = डॉट वाली लाइन
 # en: 6597b9e38708468a6ada223bbd324b34dd9b8d23
-common-edit-words = टेक्स्ट बदलें
+common-edit-words = टेक्स्ट एडिट करें
 # en: 73a03229ad334f953ab9119481b53f881218d015
 draw-extra-large-text = बहुत बड़ा टेक्स्ट
 # en: a489f3e9ff96e710da6f0dad589e2e4f58ba2dde
@@ -1586,7 +1586,7 @@ draw-small-text = छोटा टेक्स्ट
 # en: 6e9a379022a3fda2be5039485a0a092130c73f70
 draw-solid-fill = ठोस भराव
 # en: dcfb9c041348e0d62c058f37225ad2185472edc8
-draw-solid-line = सीधी लाइन
+draw-solid-line = सॉलिड लाइन
 # en: b233a397b799e80f21b88a34ae7e30af0528d1c1
 draw-shape-in-hand = चुनी हुई आकृति
 # en: 6be4ddf808de37e8c50aae4f621dd09b03f5a4e6
@@ -1598,7 +1598,7 @@ draw-type-words-enter-is-done = टेक्स्ट टाइप करें�
 draw-xl = XL
 
 # en: aba6eb7da15924b741fdff98ff19be9915cd84f1
-draw-drag-to-move-corner-handle = हिलाने के लिए खींचें। कोने का हैंडल साइज़ बदलता है, गोल हैंडल घुमाता है। Enter या डबल टैप से टेक्स्ट बदलें।
+draw-drag-to-move-corner-handle = खिसकाने के लिए खींचें। कोने का हैंडल साइज़ बदलता है, गोल हैंडल घुमाता है। Enter या डबल टैप से टेक्स्ट एडिट करें।
 # en: 9cacab39109399036915a6b67336853e622472cd
 draw-drawing-canvas-v-selects-r = ड्रॉइंग कैनवस। V चुनता है; R, E, D, L, A, T बनाते हैं; ऐरो थोड़ा खिसकाते हैं; [ और ] घुमाते हैं; Enter टेक्स्ट बदलता है; Delete हटाता है।
 # en: 4421c5912fa5d727f23883b0a69028e195e3717b
@@ -1624,7 +1624,7 @@ anim-animation = एनिमेशन
 # en: ec026663a7e4c23dd850c7f5a96deef71bf8bb81
 anim-lift-off = उड़ान
 # en: 5d15aaf0784e98385ffc925f574edbf1a0657292
-anim-rocket-climbs-away-with-its = एक रॉकेट अपनी परछाईं के साथ ऊपर चढ़ता है और शब्द उठते हैं: दो आकृतियाँ, हर एक की दो कुंजियाँ।
+anim-rocket-climbs-away-with-its = एक रॉकेट अपनी परछाईं के साथ ऊपर चढ़ता है और शब्द उठते हैं: दो आकृतियाँ, हर एक के दो कीफ़्रेम।
 # en: 1cc22feeb4a82e33a9fd435fbf7c4a927a0408e1
 anim-bouncing-ball = उछलती गेंद
 # en: 567b2c86aa06b4d0133474a39dc6545196754a25
@@ -1632,11 +1632,11 @@ anim-ball-falls-faster-and-faster = एक गेंद फ़र्श की �
 # en: 7296aa4a483797a1a82ec05a4598688ca056cd36
 anim-loading-spinner = लोडिंग स्पिनर
 # en: ccf7f6eb9188fe228da413a1aaf39c5ee4994346
-anim-eight-dots-in-ring-each = एक छल्ले में आठ बिंदु, हर एक बारी-बारी फूलता है, तो पेज सेव होते समय एक चमकता धब्बा घूमता है।
+anim-eight-dots-in-ring-each = एक छल्ले में आठ बिंदु, हर एक बारी-बारी फूलता है, जिससे पेज सेव होते समय एक चमकता बिंदु घूमता दिखता है।
 # en: 691f884e182237907640c6964bda657a5ffec1c0
 anim-title-card = टाइटल कार्ड
 # en: 56d07df6f27b468d9e3456707110962e1da029c6
-anim-red-curtains-part-on-opening = शुरुआती रात को लाल पर्दे हटते हैं और महोत्सव का नाम सामने आता है: एक बार चले तो टाइटल पर टिक जाता है।
+anim-red-curtains-part-on-opening = शुरुआती रात को लाल पर्दे हटते हैं और फ़ेस्टिवल का नाम सामने आता है: एक बार चले तो टाइटल पर टिक जाता है।
 # en: 1383ce3b8f642f2c5946975ca61e868e4a504819
 anim-present-hops-stars-and-hearts = एक तोहफ़ा उछलता है, तारे और दिल उसके चारों ओर झूलते हैं, और बधाई इंद्रधनुषी अक्षरों में चमकती है।
 # en: fad7f01d931894b10da998319cdc82f1a7d7e4dc
@@ -1644,7 +1644,7 @@ anim-quick-standup = झटपट स्टैंडअप
 # en: 79d688c0e9e1f3c402c3d6bedae252cfdd0b27aa
 anim-meme-with-caption-above-and = एक मीम जिसमें ऊपर एक कैप्शन और नीचे एक, और बीच में एक घड़ी जो घूमती और डगमगाती है।
 # en: 7e9b34abf6e91127f94374508015ad795c91268b
-anim-build-is-green = बिल्ड हरा है
+anim-build-is-green = बिल्ड ग्रीन है
 # en: 2015347d0927e36755702bf7ae8677fa8d565545
 anim-meme-in-two-lines-of = इम्पैक्ट फ़ॉन्ट की दो पंक्तियों वाला मीम, और एक ट्रॉफ़ी जो घूमती आती है, उतरती है और चमकती है।
 # en: 98eb193445404588fd801a26b8383def925748ab
@@ -1654,7 +1654,7 @@ anim-card-shows-spanish-word-turns = एक कार्ड पर स्पै�
 # en: 23015d1cbacca964e41f5cbb0021ed050964a9ed
 anim-weather-this-week = इस हफ़्ते का मौसम
 # en: 8dc082991f9eea4f537ecd34d66858c28b08bcb6
-anim-four-days-of-weather-in = लिस्बन में चार दिन का मौसम, हर आइकन जीवित: सूरज घूमता है, बादल सरकता है, बिजली कौंधती है।
+anim-four-days-of-weather-in = लिस्बन में चार दिन का मौसम, हर आइकन में जान: सूरज घूमता है, बादल सरकता है, बिजली कौंधती है।
 # en: b8224dd56d927c2c68b1498f39b7a2ed20f88c57
 anim-new-year-countdown = नए साल की उल्टी गिनती
 # en: 6b46f602f1762ee9ef676cfb3d455fba6a9a07df
@@ -1670,7 +1670,7 @@ anim-cafes-sign-at-night-name = रात में एक कैफ़े क�
 # en: fadf71c7ea92e6416fd6d89969f8e78a115cd3c1
 anim-sunrise = सूर्योदय
 # en: 672c99d7a4f36fb3de226944eb862e3c9faa5663
-anim-sun-comes-up-from-behind = सूरज पहाड़ियों के पीछे से निकलता है और सुबह खिसककर आती है: गहराई, साइज़ और कलम से खिंचा क्षितिज।
+anim-sun-comes-up-from-behind = सूरज पहाड़ियों के पीछे से निकलता है और सुबह खिसककर आती है: गहराई, साइज़ और पेन से बनी स्काईलाइन।
 # A key is a moment a shape is set at; between keys it travels. The effects (Impact … Blur) are meme looks.
 # en: dc6828c6d02be5a4b4480bdf9e7f606c74b5ffd1
 anim-animated-gif = एनिमेटेड GIF
@@ -1679,7 +1679,7 @@ anim-video-webm = वीडियो (WebM)
 # en: e643c3f72a4f8b13abefb3c30793c8dbb2e124d4
 anim-animated-svg = एनिमेटेड SVG
 # en: 3b906156eac7b4b957d3a83ab79a3846fa2c900f
-anim-empty-stage = खाली मंच
+anim-empty-stage = खाली स्टेज
 # same
 # en: 64fe85d796d8c2eda594dbc0b7b3452a4a2c444b
 anim-3d = 3D
@@ -1704,7 +1704,7 @@ anim-mode = मोड
 # en: 987e5e1f455e03766d3ef3740947f4db46336d53
 anim-moments = कीफ़्रेम
 # en: 76cdb950721642b6b8596d36d5a39f7705028b99
-anim-move = हिलाएँ
+anim-move = खिसकाएँ
 # en: 00706b5e9ede7f2fb6145370efd20ef72969df11
 anim-neon = नियॉन
 # en: 781961bc81c25697841ecce5d4d9dad9f6b261c6
@@ -1712,7 +1712,7 @@ anim-pause = रोकें
 # en: 5d12bd53552cafc41ca6146c04870df2e1574e13
 anim-play = चलाएँ
 # en: fa968bd1155bd76231814d479bf070ed96cca9bb
-anim-pixel-art-is-made-in = पिक्सल आर्ट ड्रॉइंग टूल में बनता है; एनिमेटर आकृतियों को हिलाता है।
+anim-pixel-art-is-made-in = पिक्सल आर्ट ड्रॉइंग टूल में बनता है; एनिमेटर आकृतियों को चलाता है।
 # en: b4a9395d25398654fd5d000e4b82a1d8273339bd
 anim-rainbow = इंद्रधनुष
 # en: 3d5096b70833fdae355f1ffcf32faf2066123467
@@ -1724,7 +1724,7 @@ common-size = साइज़
 # en: 4a6c11ab8104f8bcbb26155a8f68688d181f8a4b
 anim-spin = घुमाव
 # en: 598549d7818087a7d04d49a7b9c00979c8a35c96
-anim-stage-alt-arrow-keys-move = मंच: { $alt }। ऐरो कुंजियाँ चुनी हुई आकृति (या समय) को हिलाती हैं। कॉमा और पूर्ण विराम एक फ़्रेम आगे-पीछे जाते हैं। Space चलाता है। K एक कीफ़्रेम जोड़ता है।
+anim-stage-alt-arrow-keys-move = स्टेज: { $alt }। ऐरो की चुनी हुई आकृति (या समय) को खिसकाती हैं। कॉमा और फ़ुल स्टॉप एक फ़्रेम आगे-पीछे जाते हैं। Space चलाता है। K एक कीफ़्रेम जोड़ता है।
 # en: a4277f79218220e03e7d4ebb5b1417cbdff137dc
 anim-shapes-in-hand = चुनी हुई आकृतियाँ
 # en: 6c82e6dd86807ee3db07e3c82bec1ae1ce00b08b
@@ -1746,7 +1746,7 @@ anim-frame-later = एक फ़्रेम बाद
 # en: bb4f3c806dbc9e6d5247da5b492939d83c90cf2b
 anim-delete-this-frame = यह फ़्रेम मिटाएँ
 # en: 406ce96669c44a0f4b79e02af1464b6aa7fbf232
-anim-draw-shapes-move-sets-them = आकृतियाँ बनाएँ, फिर “हिलाएँ” से उन्हें चलाएँ।
+anim-draw-shapes-move-sets-them = आकृतियाँ बनाएँ, फिर “खिसकाएँ” से उन्हें एनिमेट करें।
 # en: b4d477d39704ecbf21ca422aeebffbad5a519fbb
 anim-nothing-here-yet-draw-something = यहाँ अभी कुछ नहीं: पहले कुछ बनाएँ।
 # en: 00f1eed948284854e29d59b2de928756b7f69388
@@ -1777,7 +1777,7 @@ anim-turn = पलटना
 # en: b2343125992a36aa775f5740930f717a0d1a76d6
 anim-turns-shape-about-its-upright = आकृति को उसकी खड़ी धुरी पर घुमाता है, कार्ड की तरह: 90° पर किनारा सामने, उसके आगे उलटी।
 # en: dbe0717b0567202674ba26238e862ff18b3ffbbc
-anim-turns-shape-around-in-plane = आकृति को मंच के तल में घुमाता है, पहिये की तरह।
+anim-turns-shape-around-in-plane = आकृति को स्टेज की सतह पर घुमाता है, पहिये की तरह।
 # en: df7db1873937e8acd60c26ebf93191ad27b738e6
 anim-which-shape-is-in-front = कौन-सी आकृति आगे है: पास वाली आकृति दूर वाली के ऊपर बनती है, और दूर वाली थोड़ी फीकी। गहराई साइज़ कभी नहीं बदलती।
 # en: 2931befb0fbc6bdabcff5b420bf41435e4315548
@@ -1808,7 +1808,7 @@ common-talk = एक भाषण
 # en: 69d33e95f4f69c18d9591a8529f59a6703fc1f85
 outline-empty-outline = खाली आउटलाइन
 # en: b972f73739624a697a0aa9bdde4289bafc5b6e4b
-outline-outliner-ideas-under-ideas-folded = एक आउटलाइनर: विचारों के नीचे विचार, मोड़े और खोले हुए, इधर-उधर किए और जोड़े हुए; वही पेड़ जिसे डेक या माइंड मैप पढ़ता है।
+outline-outliner-ideas-under-ideas-folded = एक आउटलाइनर: विचारों के नीचे विचार, समेटे और खोले हुए, इधर-उधर किए और जोड़े हुए; वही ढाँचा जिसे डेक या माइंड मैप पढ़ता है।
 # en: 3d47762769e98192ca611ea7fce028e70e16f174
 outline-arrow-from-from-to-to = { $from } से { $to } तक तीर
 # en: 081c7d75d7a6b1052f5643338773de8ea68de0dd
@@ -1820,17 +1820,17 @@ common-calculator = कैलकुलेटर
 # en: adab5090ac6a1b7b5420faac7be86c41721ba27c
 common-calendar = कैलेंडर
 # en: ab732cac31bba434b0b59309a30ce46956dc3d54
-outline-cancel-connecting = जोड़ना रद्द करें
+outline-cancel-connecting = कनेक्ट करना रद्द करें
 # en: 5301648dcf6b53cefc9ed52999aaa92d4603cae0
-outline-change-it = बदलें
+outline-change-it = एडिट करें
 # en: 1ed0b58d18ef647be5de11840bb929ecc8e36446
 common-chosen-items = चुने हुए आइटम
 # en: b65463cb6a42a17de514acc4659f7fd331e0876a
-outline-connect = जोड़ें
+outline-connect = कनेक्ट करें
 # en: f2ea879cf86d5519e3459e15ee70080a4a1306ab
-outline-connect-from-words = “{ $words }” से जोड़ें
+outline-connect-from-words = “{ $words }” से कनेक्ट करें
 # en: abfb16b3d00afef63f7ed53ad9ababbf2328b5d9
-outline-connect-from-to-to = “{ $from }” को “{ $to }” से जोड़ें
+outline-connect-from-to-to = “{ $from }” को “{ $to }” से कनेक्ट करें
 # en: 378e916868a3e40a71abc67a748f7faacc94be85
 outline-connection-from-from-to-to = { $from } से { $to } तक कनेक्शन
 # en: 8f3509b64e0ea82c53329cb49a7756bd1ced3566
@@ -1842,7 +1842,7 @@ common-presentation-builder = प्रेज़ेंटेशन बिल्�
 # en: 20dcb3b3184067197035f08a5a3955d51fcd94a3
 common-diagram-maker = डायग्राम मेकर
 # en: 0d84b3e5992959bf9adbeef94468228a5827605f
-common-drag-to-move = हिलाने के लिए खींचें
+common-drag-to-move = खिसकाने के लिए खींचें
 # en: 52db9dc3ff903f6d241a91adcbd83848467106c2
 outline-draw-as-mind-map = माइंड मैप की तरह बनाएँ
 # en: 03683dee41f9db7fad6f8d06c6c6bd776b528ba0
@@ -1862,23 +1862,23 @@ outline-item = आइटम
 # en: 6f8c7dbc09548197b5d210f514dda19a015102b2
 outline-item-n = आइटम { $n }
 # en: 120ee44bec923665b04dc825b0307fe159232ce9
-outline-kind-of-line = रेखा की शैली
+outline-kind-of-line = लाइन का स्टाइल
 # en: 789062517bc27b8cb5c78b1e88041e5bef69b507
-common-launch-plan = लॉन्च की योजना
+common-launch-plan = लॉन्च प्लान
 # en: 72eee0aaa10010ae7d362761115dfd7e064dd4d4
 outline-line-from-from-to-to = { $from } से { $to } तक लाइन
 # en: 2859ccc92143006360893c2a9cb1aaaa13b3928f
-outline-line-named-label-change-it = “{ $label }” लेबल वाली रेखा: बदलें
+outline-line-named-label-change-it = “{ $label }” लेबल वाली लाइन: एडिट करें
 # en: 52d55422c1936db72f18f5b9e960c2719a3560d7
 common-animator = एनिमेटर
 # en: 260ff8ae7182fc851337b6b2fdb25f8cac2b8d47
 common-move-down = नीचे ले जाएँ
 # en: 8a58f7b7ea514cbdf9bb23a231ad4d03f0cd0ca7
-outline-move-this-item-drag-it = इस आइटम को हिलाएँ: इसे दूसरे पर खींचें
+outline-move-this-item-drag-it = इस आइटम को खिसकाएँ: इसे दूसरे पर खींचें
 # en: b4f57cd0cd5c7d88461c1718646713dea47a36c9
 common-move-up = ऊपर ले जाएँ
 # en: 5b2d4bd98ab95d9eae0b3c956cbf98aefe9d7793
-outline-name-of-line = रेखा का लेबल
+outline-name-of-line = लाइन का लेबल
 # en: 3aea913567c437a81d3c153ce49d321f64099651
 outline-numbered = नंबर वाली
 # en: 89db2d16f087d4e687143e9a0071f77af473f9d8
@@ -1907,27 +1907,27 @@ outline-take-away-connection-from-from = { $from } से { $to } का कन�
 outline-take-it-away = हटाएँ
 # The compound bullet (Paul, 2026-10-15): the statuses a document sets in its head, a status's pill, a due day's chip.
 # en: e92aab82fce62899699581b5597abdda8175f2dd
-outline-statuses = स्थितियाँ
+outline-statuses = स्टेटस
 # en: bae7d5be70820ed56467bd9a63744e23b47bd711
-outline-status = स्थिति
+outline-status = स्टेटस
 # en: c206561903295f2cf5944906fdfc55f1e8a5d45b
-outline-no-status = कोई स्थिति नहीं
+outline-no-status = कोई स्टेटस नहीं
 # en: 1bcdd54c54c2bbd162c6353f5157804ce2270af5
-outline-status-status-tap-for-next = { $status }। स्थिति बदलने के लिए टैप करें
+outline-status-status-tap-for-next = { $status }। स्टेटस बदलने के लिए टैप करें
 # en: 4c1aeebc433bcb8eb4b05434619ea3136b785ea8
-outline-due-date = नियत तारीख़
+outline-due-date = आख़िरी तारीख़
 # en: bfe11361dd8dc7cc66f5cd6f33d394a95c71c96c
-outline-due-date-ellipsis = नियत तारीख़…
+outline-due-date-ellipsis = आख़िरी तारीख़…
 # en: 1cfca97d4ac1000c67f7b345992a5b58b3dac4b0
-outline-due-date-change-it = नियत { $date }। बदलने के लिए टैप करें
+outline-due-date-change-it = आख़िरी तारीख़ { $date }। बदलने के लिए टैप करें
 # en: 6cf55f3558276e2eefff5dd41ec206dc9780bebf
-outline-remove-due-date = नियत तारीख़ हटाएँ
+outline-remove-due-date = आख़िरी तारीख़ हटाएँ
 # en: 891e9d6d47f1bacfcba2dca1b282afcbcd25d94d
 outline-agenda = एजेंडा
 # en: aa73cdd3260a16a41d572c06ee0da42cb4b85286
-outline-by-status = स्थिति के अनुसार
+outline-by-status = स्टेटस के हिसाब से
 # en: 0e719dcbe720c315d66c977072f10251b56bd994
-outline-nothing-to-do-yet = अभी करने को कुछ नहीं है। जिन आइटम में काम, स्थिति या नियत तारीख़ हो, वे यहाँ दिखते हैं।
+outline-nothing-to-do-yet = अभी करने को कुछ नहीं है। जिन आइटम में काम, स्टेटस या आख़िरी तारीख़ हो, वे यहाँ दिखते हैं।
 # en: 064c87e25e9cca38db987bafd98c9fc9b3003456
 outline-line-to-parent = “{ $parent }” तक लाइन
 # en: 99fec066e5bc2f5acc70261b4b5dd4b171fb491a
@@ -1935,13 +1935,13 @@ outline-arrow-to-parent-item = “{ $parent }” की ओर तीर
 # en: e37f9b066587aa06d9d2f6df504727599d9f5e4a
 outline-arrow-from-parent-item = “{ $parent }” से तीर
 # en: 27228d1a3266064e49da7e3949d339b08473e294
-outline-edit-statuses = स्थितियाँ बदलें…
+outline-edit-statuses = स्टेटस एडिट करें…
 # en: 70dfe3298343e43d0c29f07274084a4ce961dd7a
-outline-add-status = स्थिति जोड़ें
+outline-add-status = स्टेटस जोड़ें
 # en: 4f9beff18cc6852b012093ba97421788466bb3bf
 outline-gray = स्लेटी
 # en: 23376bab580fd3f3d521c66a65a03e7753da54cc
-outline-last-status-means-done = आख़िरी स्थिति का मतलब है पूरा। इस स्थिति वाले काम पर निशान लग जाता है।
+outline-last-status-means-done = आख़िरी स्टेटस का मतलब है पूरा। इस स्टेटस वाले काम पर टिक लग जाता है।
 # en: 7312a31a2c880f2d456663b6f91ad6da980b3a5e
 outline-take-connection-away = कनेक्शन हटाएँ
 # en: 656e5c87ae5cd391807e13c85fb32635c2d441c2
@@ -1966,7 +1966,7 @@ common-untitled = बिना नाम
 # en: 1e65f823e3600c2c4cec7aff6db37af296fca073
 outline-view-as = ऐसे देखें
 # en: 828c360c884f9246750461eea43fee4e42c6b52c
-outline-zoomed-in-on = इस पर केंद्रित
+outline-zoomed-in-on = इस पर फ़ोकस
 # en: 38eca6735f66d186c0bd9c549873e774551dc35f
 outline-a-plain-line = सादी लाइन
 # en: 884abd948f43aba4e5851b71a20e97aed7a6c96e
@@ -1976,7 +1976,7 @@ outline-arrow-to-parent = पैरेंट की ओर एक तीर
 # en: 54406ea0a263efcf4d3204fff2200f7f4d982c90
 outline-arrows-both-ways-lowercase = दोनों तरफ़ तीर
 # en: 0048342aeabb8b2918689354650579bb2108a957
-outline-e-g-owns-feeds-reports = जैसे मालिक है, खिलाता है, को रिपोर्ट करता है
+outline-e-g-owns-feeds-reports = जैसे: मालिक है, डेटा देता है, रिपोर्ट करता है
 # en: e7292866259d82c2071011b0e5de8b80407998e7
 outline-item-above = ऊपर वाला आइटम
 # en: 973c239ffbd8d0522cea9cfa9e2664d2a96a2e01
@@ -1989,7 +1989,7 @@ outline-decision-tree = एक डिसीज़न ट्री
 # en: c59b4e8c614eaaf02a0ac81499bc50947192118e
 outline-family = एक परिवार
 # en: 3ac1f9e665cb59f3a08ee0fba150dbbf4aab85a8
-outline-five-minute-retirement-toast-opening = रिटायरमेंट पर पाँच मिनट का जाम: शुरुआत, तीन किस्से, जाम, हर हिस्से का समय उसकी पंक्ति पर।
+outline-five-minute-retirement-toast-opening = रिटायरमेंट पर पाँच मिनट का टोस्ट: शुरुआत, तीन किस्से, टोस्ट, हर हिस्से का समय उसकी लाइन पर।
 # en: 9ed550a11b44d369413c1b004a5008d3c127a6c1
 outline-novel = एक उपन्यास
 # en: 35c9710d58daeb1aebb2143cfaeda278f0f67311
@@ -2009,11 +2009,11 @@ outline-essay-plan = निबंध की योजना
 # en: d926d538e1be8112e81292507985514feac5e4c4
 outline-draw-as-family-tree = फ़ैमिली ट्री की तरह बनाएँ
 # en: bfef6f97dfb8178f726a96b8861bc2536e8c6fb4
-outline-five-days-in-lisbon-packed = लिस्बन में पाँच दिन, श्रेणी के हिसाब से पैक, और दरवाज़ा बंद होने से पहले क्या करना है।
+outline-five-days-in-lisbon-packed = लिस्बन में पाँच दिन, कैटेगरी के हिसाब से पैकिंग, और घर से निकलने से पहले क्या करना है।
 # en: 987acdf86bb6a373c995aa374c004bb21bf2e576
 outline-indoors-or-out-for-saturday = शनिवार के बाज़ार के लिए अंदर या बाहर: हर सवाल के जवाब उसकी लाइनों पर, हाँ और ना।
 # en: 61390a6b5d7d9268827d91b4a818c6a5fbe2011c
-outline-no-internet-at-home-question = घर पर इंटरनेट नहीं: हर कदम पर एक सवाल, हाँ या ना, कौन-सा फ़ोन करना है वहाँ तक।
+outline-no-internet-at-home-question = घर पर इंटरनेट नहीं: हर कदम पर एक सवाल, हाँ या ना, आख़िर में किसे फ़ोन करना है, वहाँ तक।
 # en: b431e4b41d5021ff680bdee33aebda8738cec5b0
 outline-packing-list = पैकिंग की सूची
 # en: 013532bb7e7d08afa22a3149f8e74b5ee4d9eaf5
@@ -2039,13 +2039,13 @@ outline-name-line = लेबल
 
 # Its templates: the occasions and a second of each printed format.
 # en: 44467d7b18daac8d8100b68ebc482fe0ee0ac9b6
-deck-choirs-winter-concert-welcome-both = एक कोरस की सर्दी का कॉन्सर्ट: स्वागत, दोनों भाग, संगीत के नोट, गायक, और साथ गाने के बोल।
+deck-choirs-winter-concert-welcome-both = एक कोरस का सर्दियों का कॉन्सर्ट: स्वागत, दोनों भाग, संगीत के बारे में नोट, गायक, और साथ गाने के बोल।
 # en: a816093d69f08b81c457d818e6d1bd72e0915b10
 deck-lesson = एक पाठ
 # en: e2d04797e440ee0933d032a29cfbfad5edbc99c7
 deck-lost-pet-poster-in-red = लाल रंग में खोए पालतू का पोस्टर: नाम, वह कैसी दिखती है, कहाँ देखी गई, फ़ोन करने का नंबर।
 # en: 4d44cafa1d032ca3ceda90fa9830717ea5cf8491
-deck-morning-workshop-schedule-checklist-of = सुबह की एक वर्कशॉप: समय-सारणी, क्या लाना है उसकी चेकलिस्ट, कदम, और आगे कहाँ जाना है।
+deck-morning-workshop-schedule-checklist-of = सुबह की एक वर्कशॉप: शेड्यूल, क्या लाना है उसकी चेकलिस्ट, कदम, और आगे कहाँ जाना है।
 # en: 7dc13283809d7ed9c506873aee1486fd988cfe5c
 deck-pick-your-own-farm-what = खुद तोड़ने वाला फ़ार्म: कब क्या उगता है, कैसे चलता है, दाम, खलिहान और कैसे पहुँचें।
 # en: b822b42bfed453711aed6a262083b2a7aef5cd89
@@ -2061,7 +2061,7 @@ deck-science-lesson-on-chalkboard-aims = ब्लैकबोर्ड पर �
 # en: f3a66c7b2a6ebda85ea74938fce4c397eae2a131
 deck-seed-pitch-in-eight-slides = आठ स्लाइड में सीड पिच: समस्या, प्रोडक्ट, चार्ट पर रफ़्तार, कारोबार, टीम, माँग।
 # en: aab8da6eadee157bba3937e9dc00741cfe48b13f
-deck-bike-shops-quarter-for-its = एक दुकान की तिमाही उसके साझीदारों के लिए: चार्ट पर आमदनी, जीत और चूक, ज़रूरी आँकड़े, अगली तिमाही।
+deck-bike-shops-quarter-for-its = एक साइकिल की दुकान की तिमाही, उसके पार्टनरों के लिए: चार्ट पर कमाई, जीत और चूक, ज़रूरी आँकड़े, अगली तिमाही।
 # en: d0fa5e5696edaf949dfe9e739a7a2eef0d433ae2
 deck-small-story-in-panels-about = पड़ोसी को कुछ उधार देने के बारे में पैनलों में एक छोटी कहानी।
 # en: 6c1ff81a2445a9eab1616588060b483cd5b6cde8
@@ -2087,13 +2087,13 @@ deck-quarterly-review = तिमाही समीक्षा
 # en: ca40a6181df561c65b71e9ebdf580ccae6b007b7
 deck-recipe-zine = रेसिपी ज़ीन
 # en: 02bfd82260b75fe685e4e972cb9a3ae9b0a42f5f
-deck-seven-soups-for-cold-week = ठंडे हफ़्ते के लिए सात सूप, एक पन्ने पर एक, एक शीट से मोड़ी ज़ीन में।
+deck-seven-soups-for-cold-week = ठंडे हफ़्ते के लिए सात सूप, हर पेज पर एक, एक शीट से मोड़ी ज़ीन में।
 # en: 44b5c7f041391d8b41a8ba365b6f13522877b478
-deck-their-story-for-reception-from = रिसेप्शन के लिए उनकी कहानी, कैसे मिले से सवाल तक, एक टाइमलाइन और शुक्रिया के साथ।
+deck-their-story-for-reception-from = रिसेप्शन के लिए उनकी कहानी, पहली मुलाक़ात से प्रपोज़ करने तक, एक टाइमलाइन और शुक्रिया के साथ।
 # en: 2aaeb944a6b05f452d512dc7dd5220adeee294ea
-deck-town-hall-notice = टाउन-हॉल सूचना
+deck-town-hall-notice = टाउन हॉल का नोटिस
 # en: 14444c384d263fff25ba48b195abb55def791b75
-deck-trivia-night = ट्रिविया नाइट
+deck-trivia-night = क्विज़ नाइट
 # en: 0377beb012ed13e1986227ef8915aeab709ad5d9
 deck-wedding-slideshow = शादी का स्लाइडशो
 # en: f34f4184c545fd4fec60bbc441ead88d1f1fdd1b
@@ -2105,7 +2105,7 @@ deck-slides = स्लाइड
 # en: 5075541433d31fb8cf207ced97577686ac3fe961
 deck-chosen-slides = चुनी हुई स्लाइड
 # en: d7935967cfd3de8f11b33801800bece8d90cb55f
-deck-move-this-slide-drag-it = इस स्लाइड को हिलाएँ: इसे दूसरी पर खींचें
+deck-move-this-slide-drag-it = इस स्लाइड को खिसकाएँ: इसे दूसरी पर खींचें
 # en: 19926fc5c47a7a39dd1435da06e3fc4c027458ea
 deck-slides-titles-bullets-two-columns = स्लाइड: शीर्षक, बुलेट, दो कॉलम, बड़े आइकन, स्लाइड पर दूसरे दस्तावेज़; या ज़ीन, बुकलेट, ब्रोशर, कॉमिक, पोस्टर या नेम बैज, प्रिंट करने और मोड़ने के लिए।
 
@@ -2296,11 +2296,11 @@ deck-qr-code-of-this-deck = इस डेक का QR कोड
 # en: 5d5bc5601280c776405941347bbf7e9c63dc3954
 deck-sheet-side-n = शीट, तरफ़ { $n }
 # en: 1982f74c2102a55783a4774ddd4895dc7fec26f0
-deck-cut-along-dashes-this-half = बिंदीदार लाइन पर काटें · यह आधा बाहर जाता है
+deck-cut-along-dashes-this-half = डैश वाली लाइन पर काटें · यह आधा बाहर जाता है
 # en: 0fc0c2932d66df46e1af55ac50d98be2bccd63c3
 deck-print-on-back-flipped-on = पीछे प्रिंट करें, लंबे किनारे पर पलटकर
 # en: e0226944c5e9e4df97a3bf718ac488a8a51118fa
-deck-cut-along-dashes-fold-along = बिंदीदार लाइन पर काटें · बिंदुओं पर मोड़ें
+deck-cut-along-dashes-fold-along = डैश वाली लाइन पर काटें · बिंदुओं पर मोड़ें
 # en: b0ccda7ec0d37c14d00e5e9f57eeadcb1045ebd7
 deck-print-it-double-sided-on = इसे लेटर पेपर पर दोनों तरफ़ प्रिंट करें, लंबे किनारे पर पलटकर, असली साइज़ में। डैश पर काटें, ऊपर का आधा हिस्सा नीचे के आधे पर रखें, और दोनों को बीच से साथ मोड़ें।
 # en: 7d7f71d31c8968c0555f49f9430133796d626c4f
@@ -2345,15 +2345,15 @@ deck-powerpoint-pptx = PowerPoint (PPTX)
 # en: 7660a22bdc9507edd353dd61198b9aa86488d936
 deck-picture-of-every-slide-zip = हर स्लाइड की तस्वीर (PNG की ZIP)
 # en: 98a41f54e049532b6032b88d7656348adc178c2a
-deck-animation-of-deck-gif = डेक की फ़िल्म (GIF)
+deck-animation-of-deck-gif = डेक का एनिमेशन (GIF)
 # en: 3bab526d831e1024e6f8e7d197f9c3d72cc4f0e4
-deck-film-of-deck-webm = डेक की फ़िल्म (WebM)
+deck-film-of-deck-webm = डेक का वीडियो (WebM)
 
 # The templates
 # en: e5604bc465a212ad3d7f4e13ed282f030d9d3a6b
-deck-title-agenda-three-points-with = शीर्षक, एजेंडा, वक्ता के नोट्स के साथ तीन बातें, और समापन।
+deck-title-agenda-three-points-with = शीर्षक, एजेंडा, स्पीकर नोट्स के साथ तीन बातें, और आख़िर में समापन।
 # en: 60c974074604818e661eff7940285669d1496647
-deck-status-update = स्थिति की अपडेट
+deck-status-update = स्टेटस अपडेट
 # en: 34714be3698c31c72afb1d4d4b8a7b0c69f30fc5
 deck-done-and-next-side-by = हो चुका और आगे का साथ-साथ, फिर जोखिम, फिर माँगें।
 # en: e946db45d2689df95cbac9f8137664409c51f5d8
@@ -2361,9 +2361,9 @@ deck-proposal = एक प्रस्ताव
 # en: 52ab7599cc26432ef9b492b401d04eee1ca5e699
 deck-what-you-heard-what-you = आपने क्या सुना, आप क्या सुझाते हैं, कब, कितना खर्च।
 # en: b8e1f28fed63f996c8915470a7ee9ce8aef9b75f
-deck-eight-small-pages-from-one = कागज़ की एक शीट से आठ छोटे पन्ने: प्रिंट करें, मोड़ें और काटें, या फ़ोन पर टैप करके पढ़ें।
+deck-eight-small-pages-from-one = कागज़ की एक शीट से आठ छोटे पेज: प्रिंट करें, मोड़ें और काटें, या फ़ोन पर टैप करके पढ़ें।
 # en: 31b11edde49cd1bd80a198f240426c5b2d8cd65f
-deck-booklet-of-half-letter-pages = आधे लेटर के पन्नों की बुकलेट, आठ से बीस, प्रिंट, जमाने और मोड़ने के हिसाब से सजी।
+deck-booklet-of-half-letter-pages = आधे लेटर साइज़ के पेजों की बुकलेट, आठ से बीस, प्रिंट करने, जमाने और मोड़ने के हिसाब से सजी।
 # en: ae07389f7b537dbd7eb3007d3f2b36ca3c35c404
 deck-trifold-brochure-six-panels-on = तीन तह वाला ब्रोशर: एक शीट के दोनों तरफ़ छह पैनल, हर एक वहाँ जहाँ तह को चाहिए।
 # en: 88c71dbca35b2e7c498adce21174cb1102af384e
@@ -2373,7 +2373,7 @@ deck-poster-or-flyer-headline-and = पोस्टर या फ़्लाय
 # en: ec024ffdc152af00e77f7219a5293545bdd3bb65
 deck-name-badges-for-meetup-one = मीटअप के लिए नेम बैज, हर व्यक्ति का एक पेज, एक शीट पर छह, काटने को तैयार।
 # en: 9a51ba7142888f3e0199896de291a1fb4b4298f1
-deck-edit-this-deck = यह डेक बदलें
+deck-edit-this-deck = यह डेक एडिट करें
 # en: d5947c525ed0d53dce794385a2cc1cd6e2459dbd
 deck-new-slide = नई स्लाइड
 # en: 720856fcb53d62f79a364c36d8cd2314121430a6
@@ -2399,11 +2399,11 @@ cal-week-earlier = एक हफ़्ता पहले
 # en: 5e63d8681fdc3170ed99fc3abcc3668620f299ca
 cal-week-later = एक हफ़्ता बाद
 # en: ab455a2fb151da1c7d0c39c7534c2f935e028ce9
-cal-weekend-of-sessions-at-set = तय समय पर सेशनों वाला सप्ताहांत, आधी रात के बाद एक देर का सेट।
+cal-weekend-of-sessions-at-set = तय समय पर सेशनों वाला वीकेंड, आधी रात के बाद एक देर रात का सेट।
 # en: 114574336ac7883aebd0653b3fc5e82f9262dc86
 cal-all-day = पूरा दिन
 # en: cbf28df446643f9968f7fe68968bca51be5cf792
-cal-chart-scrolls-sideways = चार्ट (बगल में स्क्रोल होता है)
+cal-chart-scrolls-sideways = चार्ट (दाएँ-बाएँ स्क्रोल होता है)
 # en: a13d5b9d3da48c8bade3d645e0de9a9bb812c648
 cal-color-for-new-color = नए के लिए रंग: { $color }
 # en: f6bb0f468a8569c67b3d6826e57e62c5500c3681
@@ -2413,9 +2413,9 @@ cal-days-and-times-on-month = महीने, साल या शेड्य�
 # en: 9ccd3e7bb11493f1e93950f7db9148a4794037b7
 cal-done = पूरा %
 # en: a7028454f240815938eaf701823b7d55dbaf98a9
-cal-edit-event = इवेंट बदलें
+cal-edit-event = इवेंट एडिट करें
 # en: 8a4d4e6eb9a367d616b8a4cbfa2792068482e884
-cal-edit-task = काम बदलें
+cal-edit-task = काम एडिट करें
 # en: 99570f85bb2bae0dbe3e8f2f3d6d6f765ee7c47e
 cal-choose-task = { $task } चुनें
 # en: 72b4644a41881ce4e156ce3283119c74f598cbea
@@ -2425,11 +2425,11 @@ cal-day-later = एक दिन बाद
 # en: 66a755ea0d935aeac763da63deebb69b0eb54ba9
 cal-dates = तारीख़ें बदलें…
 # en: a2bb9d34b8a1a79665858d354585cf147e0dee4e
-cal-end = अंत
+cal-end = खत्म
 # en: 89d10cd6c1e1437d6318d6fbb25a40e0aaaddd34
-cal-end-date = अंत की तारीख़
+cal-end-date = खत्म होने की तारीख़
 # en: cd7800da7f4ff94a0e14445d7f94b6345d1b7b8a
-cal-end-time = अंत का समय
+cal-end-time = खत्म होने का समय
 # en: 91856dcb7d93f9c6725649160ab6abe379d8e5c9
 cal-ends = खत्म
 # en: ad8919ace091b14011c6439cfd5e1707b58f5abd
@@ -2445,7 +2445,7 @@ cal-every-year = हर साल
 # en: 557ea666ac9eafe1543ea9c4423073c8be815d79
 cal-family-calendar = परिवार का कैलेंडर
 # en: 05061b43a7c1a210598d8a217347a96fdb45df8d
-cal-festival-weekend = महोत्सव का सप्ताहांत
+cal-festival-weekend = फ़ेस्टिवल वीकेंड
 # en: a3f5851f7cb29b64859b01ec6429ea85811bb192
 cal-how-many-times = कितनी बार
 # same
@@ -2456,7 +2456,7 @@ cal-its-own-zone = कैलेंडर का टाइम ज़ोन
 # en: 2a177256a408fa4fc557b301041589b798826d70
 cal-last-day = आखिरी दिन
 # en: 58ef633830b461aa76bf4ee90e3b2831ff588508
-cal-lessons-birthdays-and-holidays-color = पाठ, जन्मदिन और छुट्टियाँ, हर व्यक्ति का एक रंग, हफ़्ते की चीज़ें दोहराती हुईं।
+cal-lessons-birthdays-and-holidays-color = क्लास, जन्मदिन और छुट्टियाँ, हर व्यक्ति का एक रंग, हर हफ़्ते की चीज़ें दोहराती हुईं।
 # en: 7c7f5d049fad2569721d446c4a811f9bd5da5393
 cal-level = स्तर
 # en: 082bc378cd60e17a38d99898b21955299c5b60c8
@@ -2498,9 +2498,9 @@ cal-show-times-in = समय दिखाएँ
 # en: 952f375412e89ff213a8aca383d18e5691354347
 cal-start = शुरू
 # en: ff99f5b5f7948dfa71fd545b3d99f5f00856ea29
-cal-start-date = शुरू की तारीख़
+cal-start-date = शुरू होने की तारीख़
 # en: 88d8206d586abe4c8e35c8e9adcc649d07c99a1e
-cal-start-time = शुरू का समय
+cal-start-time = शुरू होने का समय
 # en: fc612a2fcc722bde9d98ae18bea42764812b6784
 cal-starts = शुरू होता है
 # en: 0e648419ea806b0cc4db81617f95870a094f3639
@@ -2540,17 +2540,17 @@ cal-n-days = { $n ->
 cal-n-done = { $n }% पूरा
 # The templates: each name, then its line on the home page.
 # en: 71428a822d08efae1d13babd6073592abec99d1f
-cal-bakerys-posts-and-newsletters-through = सर्दियों भर एक बेकरी के पोस्ट और न्यूज़लेटर, हर दिन एक आगमन कहानी।
+cal-bakerys-posts-and-newsletters-through = सर्दियों भर एक बेकरी के पोस्ट और न्यूज़लेटर, क्रिसमस तक हर दिन एक एडवेंट कहानी।
 # en: 91dad831b9be334af672cd6052e37dedde16d06e
-cal-youth-soccer-season-practice-every = युवा फ़ुटबॉल का एक सीज़न: हर हफ़्ते प्रैक्टिस, अपने रंगों में घर और बाहर, प्लेऑफ़।
+cal-youth-soccer-season-practice-every = बच्चों की सॉकर लीग का एक सीज़न: हर हफ़्ते प्रैक्टिस, अपने रंगों में होम और अवे मैच, प्लेऑफ़।
 # en: d7bad656f3b06c3ee989a1f2960214ee15b2f788
 cal-small-teams-time-off-public = एक छोटी टीम की छुट्टियाँ, सरकारी छुट्टियाँ और क्रिसमस की बंदी एक कैलेंडर पर।
 # en: cd6036648af6d0d5614f0ec65eb732300281e059
-cal-community-garden-plots-year-when = एक कियारी का साल: कब बोना, लगाना, काटना और छाँटना है, हर साल लौटते हुए।
+cal-community-garden-plots-year-when = कम्युनिटी गार्डन के एक प्लॉट का साल: कब बोना, लगाना, फ़सल काटना और छँटाई करनी है, हर साल दोहराते हुए।
 # en: 1b04e3c7d585a3d6297852d158919c9833538a01
-cal-fall-term-from-first-day = पहले दिन से क्रिसमस तक पतझड़ का टर्म: बंदी, क्लब, सैर, पैरेंट्स की शाम।
+cal-fall-term-from-first-day = पहले दिन से क्रिसमस तक फ़ॉल का टर्म: स्कूल बंद के दिन, क्लब, ट्रिप, पैरेंट-टीचर मीटिंग।
 # en: f80b28faa22109c4d14cf7eb7994768abca09ca8
-cal-bills-and-renewals = बिल और नवीनीकरण
+cal-bills-and-renewals = बिल और रिन्यूअल
 # en: 2223281ed9222907f9d00ef35ab71df263d06e46
 cal-conference-agenda = कॉन्फ़्रेंस का एजेंडा
 # en: 87695adec8581b20111f35794592bb162c32e800
@@ -2558,7 +2558,7 @@ cal-content-schedule = कंटेंट शेड्यूल
 # en: 072b8e4f3e23cdd58cf0a4b3f5c47437127f131b
 cal-editorial-calendar = संपादकीय कैलेंडर
 # en: 26f861d8db0e97575e814ce9799eaf1bcddec28b
-cal-every-autopay-on-its-day = हर डायरेक्ट डेबिट महीने में अपने दिन पर, साल के नवीनीकरण और टैक्स की आखिरी तारीख़।
+cal-every-autopay-on-its-day = हर ऑटोपे महीने में अपने दिन पर, साल के रिन्यूअल और टैक्स की आख़िरी तारीख़ें।
 # en: 2185215436152ae5c1d9429385551e46587c7af8
 cal-garden-calendar = बगीचे का कैलेंडर
 # en: 624b49bb82a8487f3ff77d2098b88b1e1ceb6695
@@ -2572,11 +2572,11 @@ cal-training-plan = ट्रेनिंग प्लान
 # en: 5ef83b6b17b42f15d49c31f33e46ca8d4427e6ae
 cal-twelve-weeks-to-half-marathon = हाफ़ मैराथन के लिए बारह हफ़्ते शेड्यूल की तरह: बेस, बिल्ड, पीक, टेपर, रेस।
 # en: fdab2603fde2488e117cca6335baee3c481231b9
-cal-two-days-of-talks-and = दो दिन के भाषण और वर्कशॉप घंटे के हिसाब से, हर कमरे का एक रंग।
+cal-two-days-of-talks-and = दो दिन के टॉक और वर्कशॉप घंटे के हिसाब से, हर कमरे का एक रंग।
 # en: c8bbdc31a9be182914dd6207c08837389224b33a
 cal-two-issues-of-quarterly-from = एक तिमाही पत्रिका के दो अंक कॉपी से बिक्री तक, महीने की मीटिंग और लॉन्च।
 # en: 0e4753002a6b042b841f5296f0cdb7c71110377b
-cal-volunteer-schedule = वॉलंटियर रोटा
+cal-volunteer-schedule = वॉलंटियर शेड्यूल
 # en: f6003458ea2ce51dfa0efa7d0819ccb57ac35bd1
 cal-who-does-which-shift-color = क्रिसमस से पहले एक फ़ूड बैंक में कौन-सी शिफ़्ट कौन करता है, हर व्यक्ति का एक रंग।
 
@@ -2618,11 +2618,11 @@ diagram-set = सेट
 diagram-thing = आइटम
 # The picture, and the line editor over a thing
 # en: c2e45b49b02d2ac7e1baf25d9d0a2f5c257281ad
-diagram-tap-empty-space-for-thing = आइटम जोड़ने के लिए खाली जगह पर टैप करें। दो को जोड़ने के लिए “जोड़ें” दबाकर दोनों पर टैप करें, या एक को दूसरे पर खींचें।
+diagram-tap-empty-space-for-thing = आइटम जोड़ने के लिए खाली जगह पर टैप करें। दो को कनेक्ट करने के लिए “कनेक्ट” दबाकर दोनों पर टैप करें, या एक को दूसरे पर खींचें।
 # en: d4b16450c157188d2cf2e3968faee3709ebeca28
-diagram-tap-here-to-add-first = पहली { $thing } जोड़ने के लिए यहाँ टैप करें।
+diagram-tap-here-to-add-first = पहला { $thing } जोड़ने के लिए यहाँ टैप करें।
 # en: ccdb7bfa4c6b71a69f1931253fe6f892a2baf89b
-diagram-tap-in-lane-to-add = चरण जोड़ने के लिए किसी लेन में टैप करें। बदलने के लिए किसी चरण पर टैप करें। उसे दूसरी लेन में खींचें, या किसी चरण पर ताकि वह उसके बाद आए।
+diagram-tap-in-lane-to-add = कदम जोड़ने के लिए किसी लेन में टैप करें। एडिट करने के लिए किसी कदम पर टैप करें। उसे दूसरी लेन में खींचें, या किसी कदम पर, ताकि वह उसके बाद आए।
 # en: 639d02ad26e5be80f5baf69835b953dfc015178b
 diagram-tap-thing-to-join-name = जिस आइटम से { $name } को जोड़ना है, उस पर टैप करें। रद्द करने के लिए खाली जगह पर टैप करें।
 # en: 5d36f27a0649ac9ae67fb2e66f5be89ebc4719c8
@@ -2638,9 +2638,9 @@ diagram-add-after-it = बाद में जोड़ें
 # en: 90d24ab49426f19e75a2b6c3fd9196603c2e0852
 diagram-add-step = कदम जोड़ें
 # en: e0d73143de80d17e82de2e017ac156ca3b9c4e01
-diagram-join = जोड़ें
+diagram-join = कनेक्ट
 # en: e45795fb6033ae4ecc1e2e3610273fce71a317d7
-diagram-make-it-plain-line = सादी रेखा
+diagram-make-it-plain-line = सादी लाइन
 # en: 3a4758c3cc8dac2d76026d0733816741f9b21d43
 diagram-make-it-arrow = तीर
 # en: a07496767ed7e5caf20bb803434a1aa088aaa97b
@@ -2657,7 +2657,7 @@ diagram-empty-kind-to-start-from = शुरू करने के लिए �
 # en: cc9cfe196eaec8bbe041a0f648039cf31df71bc7
 diagram-browser-api-database-cache-and = एक ब्राउज़र, एक API, एक डेटाबेस, एक कैश और एक वर्कर, और वे कैसे बात करते हैं।
 # en: 87796704431b42da8083f869f5ed707dae8cf8fe
-diagram-building-project = एक निर्माण परियोजना
+diagram-building-project = एक बिल्डिंग प्रोजेक्ट
 # en: 5accd00ffa799aafee66a6e2e7a77c3e89abdd38
 diagram-launch-and-everything-that-branches = एक लॉन्च और उससे निकलने वाली हर चीज़: प्रोडक्ट, मार्केटिंग, सपोर्ट।
 # en: 9261260de34a3ec89f2846b1c6a53b8adc25bb35
@@ -2675,9 +2675,9 @@ diagram-computing-briefly = कंप्यूटिंग, संक्षे�
 # en: 4944a571da52f0920a54f002e637dfc6e179603f
 diagram-fast-cheap-good = तेज़, सस्ता, अच्छा
 # en: 77373004b00a68bf2cad476daa1ef0af2a7e26f0
-diagram-four-tables-and-who-sits = चार मेज़ें और हर एक के आसपास कौन बैठता है।
+diagram-four-tables-and-who-sits = चार टेबल और हर एक के आसपास कौन बैठता है।
 # en: 1db47899ccb6eda1f1c46cee3c73acb1394c00ca
-diagram-from-lovelace-to-now-spaced = लवलेस से आज तक, साल जैसे पड़े वैसी दूरी पर, नीचे एक युग के साथ।
+diagram-from-lovelace-to-now-spaced = लवलेस से आज तक, साल जैसे पड़े वैसी दूरी पर, नीचे युगों की पट्टी के साथ।
 # en: c973a2e43350a1c09697af1bd39a17f3cfba2c36
 diagram-from-order-to-doorstep = ऑर्डर से दरवाज़े तक
 # en: 91519d37fd9fe6f0c40b0429e0ed9f8eb8206006
@@ -2685,7 +2685,7 @@ diagram-from-job-description-to-yes = नौकरी के विवरण स
 # en: bfd1a142e965498fd2dbaa45ca87c1cbdc9071c9
 diagram-grandparents-their-children-and-grandchildren = दादा-दादी, उनके बच्चे और पोते-पोतियाँ, सालों के साथ।
 # en: 347a51bd3c26ccac83baeca51966f318d5bb06c4
-diagram-hiring-someone = किसी को भर्ती करना
+diagram-hiring-someone = किसी को नौकरी पर रखना
 # en: f30d75896062b87258051feec53d9f7c05059037
 diagram-how-app-hangs-together = एक ऐप कैसे जुड़ा होता है
 # en: 70a97689961708e74a02157e6675bbcab893b7a4
@@ -2697,17 +2697,17 @@ diagram-three-generations = तीन पीढ़ियाँ
 # en: 206f4033c4733b2b04a85ee0de9d35b1a5acc692
 diagram-three-sets-and-every-overlap = तीन सेट और हर ओवरलैप, कि क्या कहाँ आता है।
 # en: 762ecdafab9b2868da1121459828ec245b03ac5e
-diagram-two-sets-and-what-they = दो सेट और जो वे साझा करते हैं।
+diagram-two-sets-and-what-they = दो सेट और उनमें क्या एक जैसा है।
 # en: f02e532d172e25cb200306e2edda8e4331418dcd
 diagram-what-to-grow-and-jobs = क्या उगाना है और कौन-से काम करने हैं, माइंड मैप की तरह।
 # en: a6847567865dbe1e5266bbcd7f1f4e0049ee9eb1
-diagram-biology-final-in-december-topic = दिसंबर में जीव-विज्ञान का फ़ाइनल, विषय-दर-विषय, और पढ़ाई कैसे होगी।
+diagram-biology-final-in-december-topic = दिसंबर में बायोलॉजी का फ़ाइनल, टॉपिक-दर-टॉपिक, और पढ़ाई कैसे होगी।
 # en: e32c422ee266430ea9dd0cd2cc78750a1342302a
-diagram-classroom = एक कक्षा
+diagram-classroom = एक क्लासरूम
 # en: e491ee6c30111d9c51d83d4a19aba47a3c39c769
-diagram-family-with-godmother = मौसी-गॉडमदर वाला एक परिवार
+diagram-family-with-godmother = गॉडमदर वाला एक परिवार
 # en: c164cf0f878062c2b43b69bf4c1de2c3d6a1f94d
-diagram-principal-her-assistant-principals-classroom = एक प्रधानाचार्य, उसकी उप-प्रधानाचार्य, कक्षा अध्यापक और साइट मैनेजर।
+diagram-principal-her-assistant-principals-classroom = एक प्रिंसिपल, उनकी असिस्टेंट प्रिंसिपल, क्लास टीचर और कस्टोडियन।
 # en: f25d2f240d3a52d5361d9b6dd4d8561290566159
 diagram-move-to-lisbon-by-march = मार्च तक लिस्बन जाना: कागज़ात, एक फ़्लैट, काम और ज़िंदगी, और क्या पहले आना है।
 # en: d2586903dd907f55b8076edbe00b87f4e45ab92f
@@ -2719,23 +2719,23 @@ diagram-router-and-everything-on-it = एक राउटर और उस प�
 # en: 949c596fb3177561b6f2515cbc92b6b68a4292c2
 diagram-team-by-its-skills-design = एक टीम अपने हुनर से: डिज़ाइन, लेखन और कोड, और कौन एक से ज़्यादा करता है।
 # en: eeb20483d989d9deef42a5ae150f171af0bc6201
-diagram-expense-report = खर्च का दावा
+diagram-expense-report = खर्च की रिपोर्ट
 # en: ded9774849cab88a3dd08936595ffe270dd397a2
 diagram-apollo-11 = अपोलो 11
 # en: b5723994f111884ca2f9a82ecb525fb6992e44c8
 diagram-board-game-night = बोर्ड गेम की रात
 # en: d69e423520fc900afc06f3d31ab286694fb7d67b
-diagram-class-4b-at-four-tables = क्लास 4B चार मेज़ों पर रंग के हिसाब से, और पढ़ने का कोना।
+diagram-class-4b-at-four-tables = क्लास 4B चार टेबलों पर रंग के हिसाब से, और पढ़ने का कोना।
 # en: d8d0862686b742040e32f8f3235084ad61fcef28
-diagram-eight-days-in-july-1969 = जुलाई 1969 के आठ दिन, दिन-दर-दिन, प्रक्षेपण से समुद्र में उतरने तक।
+diagram-eight-days-in-july-1969 = जुलाई 1969 के आठ दिन, दिन-दर-दिन, लॉन्च से समुद्र में उतरने तक।
 # en: ce31ba59543ea424a6019bc67976ace141d62d09
-diagram-four-games-table-each-and = चार गेम, हर एक की एक मेज़, और कौन क्या खेल रहा है।
+diagram-four-games-table-each-and = चार गेम, हर एक की एक टेबल, और कौन क्या खेल रहा है।
 # en: 9d35a9836a6bb4c6180f6c2880c8c19c22ed4ea0
 diagram-from-photo-of-receipt-to = रसीद की फ़ोटो से पे-स्लिप तक, मैनेजर और फ़ाइनेंस से होकर।
 # en: 1f1489585228c4bf2d9599bdff9fef70f59b4a60
 diagram-moving-abroad = विदेश जाना
 # en: a04755781fd967ec44d2f47f1ebf6ff83b2fe909
-diagram-patrick-and-maria-their-six = पैट्रिक और मारिया, उनके छह बच्चे अपने जीवन-वर्षों के साथ, और वह मौसी जिसने उन्हें पाला।
+diagram-patrick-and-maria-their-six = पैट्रिक और मारिया, उनके छह बच्चे और उनके जीवन के साल, और वह मौसी जिसने उन्हें पाला।
 # en: 56aa5ec3b6a5e62a57ce1e1223c5f1f8148a7e02
 diagram-studying-for-exam = इम्तिहान की तैयारी
 # en: d7cda8e6bd3d07fe1968c61d6b068203911ae45c
@@ -2743,7 +2743,7 @@ diagram-sea-clouds-mountains-rivers-groundwater = समुद्र, बाद�
 # en: a1da7a04adf4a0189219b39bddb2518c44ba382f
 diagram-brontes = ब्रॉन्टी परिवार
 # en: 0c2311a818005e4508a11aa6a888f61a45bd9a3b
-diagram-brigade-under-head-chef-front = हेड शेफ़ के नीचे का दल, उसके बगल में फ़्रंट ऑफ़ हाउस।
+diagram-brigade-under-head-chef-front = हेड शेफ़ के नीचे किचन की टीम, उसके बगल में फ़्रंट ऑफ़ हाउस।
 # en: 0c62114de8628cfe00011bba9cc35f003279ac83
 diagram-house-network = घर का नेटवर्क
 # en: 1fcf7cc436a073faa316df56cf1a4d3ec2b87d6e
@@ -2753,7 +2753,7 @@ diagram-three-generations-of-morenos-and = मोरेनो परिवार
 # en: 0e60bdf5cc3dbaa6c2018bd31c760c1e46e79ab1
 diagram-who-can-do-what = कौन क्या कर सकता है
 # en: b27a04f87f9d4657107a8dbd89d32eb1dedb41b7
-diagram-tap-empty-space-for-branch = शाखा जोड़ने के लिए खाली जगह पर टैप करें। किसी विचार को बदलने के लिए उस पर टैप करें, अगले के लिए Enter। एक को दूसरे पर खींचकर उसके नीचे रखें। “जोड़ें” नक्शे के आर-पार दो को जोड़ता है।
+diagram-tap-empty-space-for-branch = ब्रांच जोड़ने के लिए खाली जगह पर टैप करें। किसी विचार को एडिट करने के लिए उस पर टैप करें, अगले के लिए Enter। एक को दूसरे पर खींचकर उसके नीचे रखें। “कनेक्ट” मैप के आर-पार दो को जोड़ता है।
 # en: fd23500d007e121f9530bb8b530f367ed9e00825
 diagram-place-cards = प्लेस कार्ड
 # en: dd9ef7db14a8bdb18f7a266d6e91711443e71a29
@@ -2767,17 +2767,17 @@ diagram-new-idea = नया विचार
 # en: 32c6bde8aa4d539c3b773b1f4cf66e15aa427faa
 diagram-tap-empty-space-for-person = व्यक्ति जोड़ने के लिए खाली जगह पर टैप करें। बदलने के लिए किसी पर टैप करें, उनकी भूमिका के लिए Shift+Enter, अगले के लिए Enter। एक को दूसरे पर खींचकर उसके नीचे रखें।
 # en: 5f7463cc9e2e8a2e25990127091710a286d9765a
-diagram-tap-empty-space-for-event = घटना जोड़ने के लिए खाली जगह पर टैप करें। तारीख़ लिखें, Shift+Enter, फिर क्या हुआ। तारीख़ें पैमाने के हिसाब से दूर-दूर रहती हैं, और एक अवधि पट्टी की तरह दिखती है।
+diagram-tap-empty-space-for-event = इवेंट जोड़ने के लिए खाली जगह पर टैप करें। तारीख़ लिखें, Shift+Enter, फिर क्या हुआ। तारीख़ें पैमाने के हिसाब से दूर-दूर रहती हैं, और एक अवधि पट्टी की तरह दिखती है।
 # en: b6395077670d276b6a207a6eadb6f5a17c1fa854
 diagram-lanes-name = लेन का नाम
 # en: 769bb19e615b7f8e2809e5882e2d05a18f57a531
 diagram-when = कब
 # en: b23ea75ecf303b9756682c84abecebc7a010f2b1
-diagram-tap-person-to-type-on = बदलने के लिए किसी व्यक्ति पर टैप करें। साथी के लिए + और एक नाम लिखें, सालों के लिए Shift+Enter, अगले के लिए Enter। एक को दूसरे पर खींचकर उसके नीचे रखें। “जोड़ें” बिंदुओं वाली रेखा खींचता है।
+diagram-tap-person-to-type-on = एडिट करने के लिए किसी व्यक्ति पर टैप करें। साथी के लिए + और एक नाम लिखें, सालों के लिए Shift+Enter, अगले के लिए Enter। एक को दूसरे पर खींचकर उसके नीचे रखें। “कनेक्ट” बिंदुओं वाली लाइन खींचता है।
 # en: 14e56ce6d5f3d8d56d2ce979bf2eb20aaa9dd93d
 diagram-tap-empty-space-for-table = टेबल जोड़ने के लिए खाली जगह पर टैप करें। बदलने के लिए किसी टेबल या व्यक्ति पर टैप करें। कॉमा से अगला मेहमान शुरू होता है। किसी व्यक्ति को दूसरी टेबल पर खींचें।
 # en: 7049f105f3a76be9cb8c6d7b74eb3edf60d9a7da
-diagram-tap-inside-circles-to-add = आइटम जोड़ने के लिए किसी गोले के अंदर टैप करें। कॉमा से अगला शुरू होता है। नाम बदलने के लिए किसी समूह के नाम पर टैप करें। आइटम को गोलों के बीच खींचें।
+diagram-tap-inside-circles-to-add = आइटम जोड़ने के लिए किसी गोले के अंदर टैप करें। कॉमा से अगला शुरू होता है। नाम बदलने के लिए किसी सेट के नाम पर टैप करें। आइटम को गोलों के बीच खींचें।
 
 ## the Trip Planner
 
@@ -2827,7 +2827,7 @@ trip-n-stops = { $n ->
 trip-stop-n = पड़ाव { $n }
 # A stop's number is its handle; the bar under stops chosen whole.
 # en: 372c19ab2c53f7582cdbe3823523a8760d0f2807
-trip-stop-n-tap-chooses-it = पड़ाव { $n }: चुनने के लिए टैप करें, हिलाने के लिए खींचें
+trip-stop-n-tap-chooses-it = पड़ाव { $n }: चुनने के लिए टैप करें, खिसकाने के लिए खींचें
 # en: 56f844200d56e1fc382c81f28972a39aab61e019
 trip-chosen-stops = चुने हुए पड़ाव
 # en: a9d55cf1a8a7b85ab9e293fc1e40a440986b0725
@@ -2848,7 +2848,7 @@ trip-place-by-name = नाम से कोई जगह
 # en: 7d7388a1d59910888c95c66fed24ad82cb5edbf2
 trip-find-place = कोई जगह खोजें
 # en: 57d3470391ec96a8442196a4ff85cf39e4f65e98
-trip-town-address-museum = कोई शहर, पता, संग्रहालय
+trip-town-address-museum = कोई शहर, पता, म्यूज़ियम
 # en: bce06414177f72ab70e6387b6af9f8ceef0d6049
 trip-search = खोजें
 # en: 1a6a5ba8c23ddb672874a2996abaee1fe933abcd
@@ -2877,7 +2877,7 @@ trip-rome-places-to-see = रोम, देखने की जगहें
 # en: f01c658cc1c5b1dbfba8045b885174d2f5a3d154
 trip-places-as-dots-not-route = जगहें बिंदुओं की तरह, रास्ता नहीं: क्या देखें और कब जाएँ।
 # en: e50e4931f42687faef4a226f93981bb38a937ce9
-trip-weekend-in-copenhagen = कोपेनहेगन में एक सप्ताहांत
+trip-weekend-in-copenhagen = कोपेनहेगन में एक वीकेंड
 # en: 402e0be1180f76470536e904cec4f7242211bb15
 trip-friday-night-to-sundays-train = शुक्रवार की रात से रविवार की ट्रेन तक, पैदल, किलोमीटर में।
 # en: a5594e90d42f49b6ce9e2842193b64f380d1a10c
@@ -2893,13 +2893,13 @@ trip-yosemites-mist-trail-loop = योसेमिटी का मिस्ट
 # en: 056b43a68d915001b02640fbb4ec910045a406ad
 trip-two-waterfalls-on-day-hike = हैप्पी आइल्स से जाने-आने के दिन के हाइक में दो झरने, मील में।
 # en: b1365d430388f423cf7142e4a78c7470fed8a5fc
-trip-loire-by-bike = लोआर साइकिल से
+trip-loire-by-bike = साइकिल से लोआर
 # en: e0fc4a0bf8e42cf48f5f6825bc3b8420df625254
 trip-orleans-to-saumur-in-six = ऑरलेआं से सोम्यूर छह दिन में, महल-से-महल, किलोमीटर में।
 # en: e68d998a80765bfa302dd2b477f31c97db0d51d2
-trip-college-tour = कॉलेज का दौरा
+trip-college-tour = कॉलेज टूर
 # en: 02b9d4cf509b27e9011826d208a7831782bb08a6
-trip-six-campuses-in-new-england = एक हफ़्ते में न्यू इंग्लैंड के छह कैंपस, हर जगह एक दौरा बुक।
+trip-six-campuses-in-new-england = एक हफ़्ते में न्यू इंग्लैंड के छह कैंपस, हर जगह एक टूर बुक।
 # en: 651b0f889a962febf3a80370511cbc08abac73da
 trip-japan-by-rail = रेल से जापान
 # en: f687060ca9b759a7ed4bca61f7a2bf96764f2f8e
@@ -2948,7 +2948,7 @@ looks-currency = करेंसी
 calc-calculation = हिसाब
 # The tape is the list of lines worked out, as on a printing calculator. 'Calculator' and 'Numbers' are above.
 # en: ab4ea6f8fe06812a128297560bee7aff1be0c040
-calc-calculator-that-shows-its-work = एक कैलकुलेटर जो अपना हिसाब रखता है: नाम, इकाइयाँ और बदलाव, और y = f(x) के ग्राफ़।
+calc-calculator-that-shows-its-work = एक कैलकुलेटर जो अपना हिसाब दिखाता है: नाम, यूनिट और कन्वर्ज़न, और y = f(x) के ग्राफ़।
 # en: f146f8e93fc9312f6b8003b048cd24d1574469af
 calc-tape-text = टेप टेक्स्ट के रूप में
 # The bar
@@ -2968,25 +2968,25 @@ calc-cosine = कोसाइन
 # en: 7ef1446b5f4ac08a82f28ef66bf019af3ed9c3c5
 calc-tangent = टैंजेंट
 # en: f90781f1beba7ea766ef6fddf4672221c99da01f
-calc-natural-log = प्राकृतिक लॉग
+calc-natural-log = नैचुरल लॉग
 # en: c4607860d3bb073b2fe96de25c2566b33f6e5610
 calc-log-base-ten = लॉग बेस दस
 # en: 47a3278f023594b94c900b5d792366be2e8b3d39
 calc-square-root = वर्गमूल
 # en: 35e4a1a9ace5e53c1521b13130f3b1fce0bb312b
-calc-absolute-value = निरपेक्ष मान
+calc-absolute-value = एब्सोल्यूट वैल्यू
 # en: 8e4e872b30d442c4d7f1edf2cabdff971300b607
 calc-factorial = फ़ैक्टोरियल
 # en: c584662e0778e58334ec2e9f7fc7f58a98d4dca8
-calc-e-number = e, यह संख्या
+calc-e-number = e (संख्या)
 # en: f3afae23c74a7d1a42a52c0c47bfeb1191b6b6e9
 calc-x-for-graph = x, ग्राफ़ के लिए
 # en: 1cfd7bfc7d3d79d7ea28a91bdc6e032559103831
-calc-units-and-algebra = इकाइयाँ और बीजगणित
+calc-units-and-algebra = यूनिट और अलजेब्रा
 # en: de1e4faaa9758db564ba458c3956824881efcd9c
 calc-convert-to = इसमें बदलें
 # en: 95562b515314072f0bc7658aa71f2ef77371d893
-calc-derivative = अवकलज
+calc-derivative = डेरिवेटिव
 # en: 965a00d9ba9665ad57ca3edefdcca07a61d3ca95
 calc-simplify = सरल करें
 # The tape, the line being typed, the keys; { $answer } is a result such as 42 or 7.62 cm
@@ -3013,26 +3013,26 @@ calc-y-equals-ellipsis = y = …
 # en: 71f2d6a97665cb72b50a6384a06af3e014b96db5
 calc-at-x-1-answer = x = 1 पर: { $answer }
 # en: e5651c683f14c95aa972cfdbc300d9fecfe02019
-calc-keys = कुंजियाँ
+calc-keys = बटन
 # en: 88d130a66de8e5db01660642d9f23e1f0eef97dd
 calc-backspace = बैकस्पेस
 # en: d1149c36a0edcfbeae98bf270da3f543b6c6a866
 calc-clear-line = लाइन साफ़ करें
 # en: 097a41c8c7e58b9b655d7b3e31a3673466595450
-calc-answer-before = पिछला उत्तर
+calc-answer-before = पिछला जवाब
 # en: 2ee9e26d39d7113bd8fea80639d6257ab1bdf8cc
-calc-type-sum-or-3-inch = कोई हिसाब लिखें, या 3 inch to cm, और Enter दबाएँ। a = 12 किसी उत्तर को नाम से सेव करता है।
+calc-type-sum-or-3-inch = कोई हिसाब लिखें, या 3 inch to cm, और Enter दबाएँ। a = 12 किसी जवाब को नाम से सेव करता है।
 # en: 0bef86b24e006bd994db1509b268156522c7dc2c
-calc-type-curve-in-x-such = x में कोई वक्र लिखें, जैसे x^2 या sin(x), और बनाने के लिए Enter दबाएँ।
+calc-type-curve-in-x-such = x में कोई कर्व लिखें, जैसे x^2 या sin(x), और बनाने के लिए Enter दबाएँ।
 # The templates
 # en: bcb584ffecef3a17141a771a3ceedbbe6d474ca1
 calc-splitting-bill = बिल बाँटना
 # en: 0a45fc60c975ea141733f982179ead17af8767b6
-calc-food-drinks-and-18-tip = खाना, पेय और 18% टिप, छह में बँटा, हर कदम नाम से रखा।
+calc-food-drinks-and-18-tip = खाना, ड्रिंक्स और 18% टिप, छह में बँटा, हर कदम नाम से रखा।
 # en: 2c9e678b58314997051ff2c13d56c92ea6bce7d7
-calc-shopping-total = खरीदारी का कुल
+calc-shopping-total = खरीदारी का कुल जोड़
 # en: d8719443b912bfaadd4f5d8fb2f1fc095f58ff52
-calc-tape-of-market-apples-and = बाज़ार का एक टेप: सेब और पनीर वज़न से, कुल, और $60 में से बचे पैसे।
+calc-tape-of-market-apples-and = बाज़ार का एक टेप: सेब और चीज़ वज़न से, कुल, और $60 में से बचे पैसे।
 # en: 56d12d641f4f4177e63e120c8bd10a8e7348357f
 calc-tax-on-price = दाम पर टैक्स
 # en: 8a7d0a08d1e03c2974f84aa039e7871c5b232245
@@ -3050,7 +3050,7 @@ calc-scaling-recipe = रेसिपी को बढ़ाना
 # en: a0e9dcbc29ed1364a4891c3671dd43675af64d11
 calc-banana-bread-for-eight-made = आठ के लिए बनाना ब्रेड बारह के लिए: हर मात्रा डेढ़ गुना।
 # en: 8639704eb84800c829b41e6fcd833d686dcb41f6
-calc-unit-conversions = इकाइयों में बदलाव
+calc-unit-conversions = यूनिट कन्वर्ज़न
 # en: 2aef2060ccb74d32576f5b1f936372bdd97252f3
 calc-feet-to-centimeters-miles-to = फ़ीट से सेंटीमीटर, मील से किलोमीटर, पाउंड से किलोग्राम, फ़ारेनहाइट से सेल्सियस।
 # en: 7b31203b4780df1cd410c84049ed4d031dacc8e3
@@ -3082,11 +3082,11 @@ calc-dose-by-weight = वज़न के हिसाब से खुराक
 # en: a2cdd7739e2ff2b4f1ee78074c5c7981d1b877f9
 calc-milligrams-kilogram-turned-into-milliliters = मिलीग्राम प्रति किलोग्राम, सिरप के मिलीलीटर में बदला; हर खुराक किसी फ़ार्मासिस्ट से जँचवा लें।
 # en: 4699da98e2d343e04aa2465082aedd4d5053aa11
-calc-electricity-for-appliance = उपकरण की बिजली
+calc-electricity-for-appliance = किसी उपकरण का बिजली खर्च
 # en: d1b1126c73c13b523ce30bd2f563ad1a7b1c0210
 calc-watts-hours-day-and-price = वाट, रोज़ के घंटे और एक किलोवाट-घंटे का दाम: हीटर महीने में कितने का पड़ता है।
 # en: 96aeea666f6bd696d83ef3dee80fff1fcc3ff896
-calc-loan-payment = कर्ज़ की किस्त
+calc-loan-payment = लोन की किस्त
 # en: 9c2f158098b8fc30f79ae0d1db9391a68d8aea9a
 calc-24-000-at-6-9 = साठ महीने के लिए 6.9% पर $24,000: महीने की किस्त और कुल ब्याज।
 # en: 3c48bd272b7ad823e277ca649218ae107832bca4
@@ -3096,18 +3096,18 @@ calc-5-000-and-200-month = $5,000 और महीने के $200, 5% पर 
 # en: 813161b07c2ed5cab82b09f8c31b3810800bcd26
 calc-break-even = ब्रेक-ईवन
 # en: bee9b48a097d165fe0d11f7c3a7175019c158c5e
-calc-costs-against-sales-for-coffee = कॉफ़ी की गाड़ी की लागत बनाम कमाई: जहाँ लाइनें मिलती हैं वही रोज़ के उतने कप हैं जो चाहिए।
+calc-costs-against-sales-for-coffee = कॉफ़ी कार्ट की लागत बनाम बिक्री: जहाँ लाइनें मिलती हैं, वही रोज़ के उतने कप हैं जितने चाहिए।
 # en: a9047269b4f64dbbb2df8503315406b2b33fc4e9
-calc-curve-and-its-slope = एक वक्र और उसकी ढलान
+calc-curve-and-its-slope = एक कर्व और उसकी ढलान
 # en: b5f43817a99082555a1fc4891fd2eb5bfaba6e10
-calc-x3-3x-its-derivative-and = x³ − 3x, उसका अवकलज, और गड्ढे के तल पर सपाट स्पर्शरेखा।
+calc-x3-3x-its-derivative-and = x³ − 3x, उसका डेरिवेटिव, और गड्ढे के तल पर सपाट टैंजेंट।
 # en: d4802215f2c0025bd9e3f3fe025230ceda4e830b
 calc-waves-adding-up = जुड़ती हुई तरंगें
 # en: 9e46b2d75638fb2ebe905ad0c4be8059be6487cc
-calc-sine-waves-summed-on-their = साइन तरंगों का जोड़, चौकोर तरंग की राह में।
+calc-sine-waves-summed-on-their = साइन वेव का जोड़, जो स्क्वेयर वेव की ओर बढ़ता है।
 # The grip on a line of the tape; the bar under lines chosen whole.
 # en: fd71cff4626f555a0e69c5b6801a591cabd1d173
-calc-choose-line-n-drag-it = लाइन { $n } चुनें, हिलाने के लिए खींचें
+calc-choose-line-n-drag-it = लाइन { $n } चुनें, खिसकाने के लिए खींचें
 # en: dab2e3d9cf8c3bfccd20fa34fac6fc738ce9aba7
 calc-chosen-lines = चुनी हुई लाइनें
 
