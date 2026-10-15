@@ -152,6 +152,43 @@ test('an app page or the home page with ?c= carries the card in its tags, the ti
   }
 });
 
+// The page a shared link opens (2026-10-15): the card's app's page, tagged, at /c/<id>; the one page the Worker runs for.
+test('/c/<id> is the card’s app’s page with the card in its tags, cached an hour; unknown, expired or malformed goes home, keeping the hash', async () => {
+  const store = new MemStore();
+  const edge = new MemEdge();
+  const ask = site(store, edge);
+  const { id } = (await (await ask(post(body({ title: 'Trip "plans"', text: 'Day one.', app: 'trip' })))).json()) as { id: string };
+  const res = await ask(get(`/c/${id}`));
+  expect(res.status).toBe(200);
+  expect(res.headers.get('cache-control')).toBe('public, max-age=3600');
+  expect(res.headers.get('content-type')).toMatch(/^text\/html/);
+  const page = await res.text();
+  expect(content(page, 'og:title')).toBe('Trip &quot;plans&quot;');
+  expect(content(page, 'og:description')).toBe('Day one.');
+  expect(content(page, 'og:image')).toBe(`${SITE}/card/${id}.png`);
+  for (const tag of CARD_TAGS) expect(tagCount(page, tag), tag).toBe(1);
+  // Read once, kept at the edge.
+  let reads = 0;
+  const card = store.card.bind(store);
+  store.card = (i) => (reads++, card(i));
+  await ask(get(`/c/${id}`));
+  expect(reads).toBe(0);
+  expect(edge.kept.get(`${SITE}/c/${id}`)!.headers.get('cache-control')).toBe('public, max-age=3600');
+  // Gone, or never there: the home page, by a redirect that keeps the hash.
+  for (const [path, now] of [
+    ['/c/zzzzzzz', NOW],
+    [`/c/${id}`, NOW + 30 * DAY + 1],
+  ] as const) {
+    const gone = await site(store, new MemEdge(), now)(get(path));
+    expect(gone.status, path).toBe(302);
+    expect(gone.headers.get('location'), path).toBe(`${SITE}/`);
+  }
+  // Not a card's id: the assets' own answer. A POST is no card.
+  expect((await ask(get('/c/not-an-id'))).status).toBe(404);
+  expect((await ask(get('/c/'))).status).toBe(404);
+  expect((await ask(new Request(`${SITE}/c/${id}`, { method: 'POST' }))).status).toBe(404);
+});
+
 test('an unknown or expired card, or none, serves the page as built; another query is the page too', async () => {
   const store = new MemStore();
   const { id } = (await (await site(store)(post(body()))).json()) as { id: string };
@@ -230,10 +267,10 @@ test('the sweep forgets expired cards with expired links; a card a month old is 
 
 // The pages are static assets, never the Worker's: on launch day (2026-10-15) every visit through the Worker passed the
 // free plan's 100,000 requests a day and the pages answered 429. Only the cards run it.
-test("the site's Worker runs first only for the cards: a page, with or without ?c=, is a static asset", () => {
+test("the site's Worker runs first only for the cards and a shared link's /c/<id> page: an app's page, with or without ?c=, is a static asset", () => {
   const jsonc = readFileSync(new URL('../wrangler.jsonc', import.meta.url), 'utf8');
   const first = JSON.parse(/"run_worker_first": (\[[^\]]*\])/.exec(jsonc)![1]);
-  expect(first).toEqual(['/card', '/card/*']);
+  expect(first).toEqual(['/c/*', '/card', '/card/*']);
   for (const a of apps()) expect(first).not.toContain(`/${a.id}/`);
   expect(jsonc).toMatch(/"main": "site\/worker\.ts"/);
   expect(jsonc).toMatch(/"binding": "ASSETS"/);
@@ -256,7 +293,8 @@ test("what a document's card says: its title, then its first 200 characters of w
   expect(said.text.endsWith('…')).toBe(true);
   expect(cardWords(write, '', '').text).toBe(write.blurb);
   expect(cardWords(write, '', 'x'.repeat(200)).title.length).toBeLessThanOrEqual(CARD_TITLE_MAX);
-  expect(withCardId(`${SITE}/write/#/v1/write/abc?lang=fr`, 'k8hwicw')).toBe(`${SITE}/write/?c=k8hwicw#/v1/write/abc?lang=fr`);
+  expect(withCardId(`${SITE}/write/#/v1/write/abc?lang=fr`, 'k8hwicw', `${SITE}/`)).toBe(`${SITE}/c/k8hwicw#/v1/write/abc?lang=fr`);
+  expect(withCardId(`${SITE}/office/sheet/#/v1/sheet/abc`, 'k8hwicw', `${SITE}/office/`)).toBe(`${SITE}/office/c/k8hwicw#/v1/sheet/abc`);
 });
 
 /* ---------- the generic cards ---------- */

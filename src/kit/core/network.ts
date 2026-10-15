@@ -51,7 +51,7 @@ export const NETWORK = {
     host: 'tinylittleoffice.com',
     what: 'The service worker, /sw.js, with Save in browser on: it keeps the pages, the app file, its stylesheet, the Latin faces and each file a page fetches after, so the site opens offline',
     when: 'after a tap',
-    carries: 'Which file, as the pages ask; never the document, which is after the "#" and never reaches the worker, and never a page’s "?c=" card',
+    carries: 'Which file, as the pages ask; never the document, which is after the "#" and never reaches the worker, and never a shared link’s "/c/<id>" page with its card',
     stops: 'Save in browser, turned off: the worker is unregistered and everything it kept is deleted; while it is off there is none',
     by: 'kit/share/offline.ts, sw.ts',
   },

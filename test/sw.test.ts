@@ -141,6 +141,7 @@ test('a page is the network’s while there is one, kept afresh at its address; 
   await w.wait('install');
   expect(await w.ask(`${ROOT}write/`, { mode: 'same-origin' })).toBe(`fresh ${ROOT}write/`);
   expect(await w.ask(`${ROOT}write/?c=abc123`)).toBe(`fresh ${ROOT}write/?c=abc123`);
+  expect(await w.ask(`${ROOT}c/abc1234`)).toBe(`fresh ${ROOT}c/abc1234`);
   expect(w.kept()).toStrictEqual([ROOT, `${ROOT}write/`]);
   w.net.online = false;
   expect(await w.ask(`${ROOT}write/`)).toBe(`fresh ${ROOT}write/`);

@@ -178,6 +178,28 @@ export async function withCard(req: Request, id: string, store: CardStore, edge:
   if (!card || card.exp < now) return page();
   const res = await page();
   if (res.status !== 200 || !(res.headers.get('content-type') ?? '').startsWith('text/html')) return res;
+  return taggedPage(key, res, card, image, edge);
+}
+
+/**
+ * The page a link shared with a network opens, `/c/<id>` (kit/share/card.ts withCardId): the card's app's own page
+ * (`pageOf(app)`), its tags saying the card, kept at the edge for an hour. The document is the hash's, which never
+ * reaches here; the shell moves the address to the app's page. An unknown or expired card, or a page that does not
+ * come, is sent to `home` (a 302 keeps the hash, so the document still opens there).
+ */
+export async function cardPage(req: Request, id: string, store: CardStore, edge: Edge, now: number, image: string, pageOf: (app: string) => Promise<Response>, home: string): Promise<Response> {
+  const key = new Request(req.url);
+  const hit = await edge.match(key);
+  if (hit) return hit;
+  const card = await store.card(id);
+  if (!card || card.exp < now) return Response.redirect(home, 302);
+  const res = await pageOf(card.app);
+  if (res.status !== 200 || !(res.headers.get('content-type') ?? '').startsWith('text/html')) return Response.redirect(home, 302);
+  return taggedPage(key, res, card, image, edge);
+}
+
+/** A page's HTML with the card's tags, kept at the edge under `key` for an hour. */
+async function taggedPage(key: Request, res: Response, card: Card, image: string, edge: Edge): Promise<Response> {
   const headers = new Headers(res.headers);
   headers.set('cache-control', 'public, max-age=3600');
   for (const h of ['content-length', 'etag', 'last-modified']) headers.delete(h);

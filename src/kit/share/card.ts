@@ -5,8 +5,10 @@
  * document's first page (or the page its app puts on a card: a sheet's chart, by ViewOpts.card) is drawn by its
  * app's own view() on the card's ground (kit/draw/card.ts) as a PNG of 1200 by 630, and posted with the title and the first words to the site's own /card (tinier/cards.ts, the site's Worker),
  * which keeps them readable for a month so the network can fetch them; the document itself is not sent. The link
- * shared then carries the card's id as `?c=<id>` before the "#". Copy link and Email make none, nor does a document
- * with a password, which says nothing of itself.
+ * shared then carries the card's id in its path, `/c/<id>` before the "#": the one page the site's Worker serves
+ * (site/site.ts, with the card's tags), every other page being a static file (2026-10-15, when the Worker in front
+ * of every page passed the free plan's requests a day; before that the id rode as `?c=` on the app's page, which the
+ * shell still reads). Copy link and Email make none, nor does a document with a password, which says nothing of itself.
  *
  * A card is drawn once per document state: kept in memory by the link's text, so pressing two networks uploads one.
  */
@@ -58,11 +60,9 @@ const base64 = (bytes: Uint8Array) => {
   return btoa(s);
 };
 
-/** The link with the card's id before the "#": what a network's fetcher reads. */
-export function withCardId(link: string, id: string): string {
-  const u = new URL(link);
-  u.searchParams.set('c', id);
-  return u.href;
+/** The link with the card's id in its path, `<site>c/<id>` before the "#": what a network's fetcher reads. `site` is the site's own address, ending in "/". */
+export function withCardId(link: string, id: string, site: string): string {
+  return `${site}c/${id}${new URL(link).hash}`;
 }
 
 const made = new Map<string, Promise<string>>();

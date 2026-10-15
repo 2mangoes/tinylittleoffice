@@ -34,19 +34,19 @@ nothing of a document, below) and nothing on any server; the link is the documen
 storage, never on a server. It also keeps the site itself for offline: a service worker (`src/sw.ts`, registered by
 `src/kit/share/offline.ts`) keeps the site's own files in the browser's cache (the pages, the app file and its
 stylesheet, the Latin faces, and each templates file, language or face a page fetches afterwards), never a document,
-which is after the "#" and never reaches it, and never a link's `?c=` page with its card's words. Turning Save in
+which is after the "#" and never reaches it, and never a shared link's `/c/<id>` page with its card's words. Turning Save in
 browser off unregisters the worker and deletes its caches; while it is off none is registered. A short link is the one thing a server holds of a document: the document, encrypted with a key the
 server never sees, until it expires.
 
 **A preview card is readable on the server, by the person's choice.** Sharing with a network from Share (Bluesky,
 Mastodon, X, LinkedIn or the device's share sheet) with "Show a preview of the first page" on, which it is unless
 turned off, sends a picture of the document's first page, its title and its first 200 characters to the site's
-`/card`, and the link shared carries the card's id (`?c=<id>`, before the `#`). The card is not encrypted, because
-the network must read it: it is kept readable for a month, to anyone with its id, then deleted. Since 2026-10-15
-the page the network's fetcher opens is the page as built, with the app's own tags: the Worker that wrote the
-card's tags on it ran for every visit, past the free plan's requests a day on launch day, so it runs for the
-cards alone now, and a network's preview is the app's generic card until the Worker is put back in front of the
-pages on a paid plan. The document itself and its link are never sent. Edit link, Present link and Email make no card, nor does a
+`/card`, and the link shared carries the card's id in its path (`/c/<id>`, before the `#`): the one page the site's
+Worker serves, the app's page with the card's tags, which the shell moves to the app's own address as it opens. The
+card is not encrypted, because the network must read it: it is kept readable for a month, to anyone with its id,
+then deleted. (Until 2026-10-15 the id rode as `?c=` on the app's page and the Worker ran for every page, past the
+free plan's requests a day on launch day; such a link still opens, the shell reading the hash, and previews as the
+app's card.) The document itself and its link are never sent. Edit link, Present link and Email make no card, nor does a
 document with a password. A link with no card previews as its app's generic card, whose page is gray shapes.
 
 There is no shared document: every link is a copy. Whoever opens one has their own, and what they change is in
@@ -189,9 +189,8 @@ whatever reaches any of them, Cloudflare and the account's operator could see.
   Cloudflare keeps its own aggregate traffic counts for the account, as for any site it serves; per-request
   Worker logs are off (`wrangler.jsonc`, held by `test/tinier.test.ts`).
 - **The cards.** For each preview a person chose to send: the picture, the title, the first words and the app, in
-  the shortener's D1 database for a month, readable at `/card/<id>.png` (and, where the Worker runs for the pages,
-  in the tags of a page asked for with `?c=<id>`); counted against the same hundred a day from one address, under
-  the site Worker's own `BRAKE_KEY`.
+  the shortener's D1 database for a month, readable at `/card/<id>.png` and in the tags of the shared link's page,
+  `/c/<id>`; counted against the same hundred a day from one address, under the site Worker's own `BRAKE_KEY`.
 - **The shortener.** For each short link: the ciphertext, its IV and its expiry, kept in Cloudflare D1
   until it expires. For two days, for each address that made a link: a count, under
   `sha256(BRAKE_KEY ‖ day ‖ address)`, where `BRAKE_KEY` is a secret of the deployment (a Worker secret,

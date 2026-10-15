@@ -265,7 +265,13 @@ async function press(d: ToDialog, service: string, opened: { mock: { calls: unkn
 /** The link inside a compose box's address. */
 const linkIn = (compose: string) => /https?:\/\/\S+/.exec(new URL(compose).searchParams.get('text') ?? new URL(compose).searchParams.get('url') ?? '')![0];
 
-test('with the switch on (it is, unless turned off), Bluesky uploads one card of the first page and posts the link with ?c= before the #; X then uploads nothing more', async () => {
+/** The link a network gets: the card's id in the path, /c/<id>, before the hash (kit/share/card.ts withCardId). */
+const cardLink = (link: string, id: string) => {
+  const u = new URL(link);
+  return `${u.origin}${u.pathname.replace(/[^/]*$/, '')}c/${id}${u.hash}`;
+};
+
+test('with the switch on (it is, unless turned off), Bluesky uploads one card of the first page and posts the link with /c/<id> before the #; X then uploads nothing more', async () => {
   const shell = await written(null!, '---\ntitle: Garden plan\n---\n# Garden plan\n\nTomatoes by the fence, beans on the trellis.\n');
   const posted = cards();
   const opened = vi.spyOn(window, 'open').mockImplementation(() => null);
@@ -290,7 +296,7 @@ test('with the switch on (it is, unless turned off), Bluesky uploads one card of
   expect([bitmap.width, bitmap.height]).toEqual([1200, 630]);
   expect(png.length).toBeLessThanOrEqual(400 * 1024);
   const link = linkIn(bluesky);
-  expect(link).toBe(shell.link.replace('#', '?c=k8hwicw#'));
+  expect(link).toBe(cardLink(shell.link, 'k8hwicw'));
   // The same document to another network: the same card, nothing uploaded again.
   const x = await press(d, 'x', opened);
   expect(posted).toHaveLength(1);
@@ -317,7 +323,7 @@ test('at 1100 wide the two copies are side by side, equal, each name on one line
   }
 });
 
-test('with the switch off, nothing is uploaded and the link has no ?c=; the choice is kept; Edit link and Email never upload', async () => {
+test('with the switch off, nothing is uploaded and the link has no card; the choice is kept; Edit link and Email never upload', async () => {
   const shell = await written(null!, '---\ntitle: Quiet\n---\nNot for a feed.\n');
   const posted = cards();
   const opened = vi.spyOn(window, 'open').mockImplementation(() => null);
@@ -471,7 +477,7 @@ test('the share sheet carries the card too; a document with a password shows no 
   d.querySelector<HTMLButtonElement>('.to-share-native')!.click();
   await until(() => sent.length === 1, 20_000, 'the share sheet never got the link: the card is drawn and posted first, slowly under load');
   expect(posted).toHaveLength(1);
-  expect(sent[0].url).toBe(shell.link.replace('#', '?c=k8hwicw#'));
+  expect(sent[0].url).toBe(cardLink(shell.link, 'k8hwicw'));
   d.close();
   const locked = await sealedSheet('Private sums');
   const opened = vi.spyOn(window, 'open').mockImplementation(() => null);

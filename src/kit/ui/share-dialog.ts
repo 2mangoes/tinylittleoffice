@@ -6,7 +6,7 @@
  * the device's share sheet; Password (drawn by <to-privacy>, renderProtect, handed in as `protect`);
  * a short link that expires (the lifetimes as one row, Make, then the link with Copy; it cannot be changed or recalled
  * once made, so there is nothing more to do with it); posting the link to a service's compose box (through the link guard), under the
- * switch that sends a preview of the first page with it (kit/share/card.ts: the link then carries "?c=<id>"), a deck's show link; the QR code;
+ * switch that sends a preview of the first page with it (kit/share/card.ts: the link then carries "/c/<id>"), a deck's show link; the QR code;
  * the embed code; the short links kept here.
  *
  * It gets the document through properties (`app`, `doc`, `heading`, `locked`, `payloadLength`, and
@@ -258,7 +258,8 @@ export class ToShare extends LitElement {
     if (this.locked || !this.preview) return link;
     try {
       await ensureIcons(iconNames(this.doc));
-      return withCardId(link, await cardFor(`${location.origin}${siteDir()}card`, link, appOf(this.app)!, this.doc, this.heading));
+      const site = `${location.origin}${siteDir()}`;
+      return withCardId(link, await cardFor(`${site}card`, link, appOf(this.app)!, this.doc, this.heading), site);
     } catch (err) {
       toast(t('Shared without a preview: {reason}', { reason: err instanceof Error ? err.message : '' }));
       return link;

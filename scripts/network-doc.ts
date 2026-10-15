@@ -49,7 +49,8 @@ address.
   (tinier/tinier.ts).
 - **A preview.** Only when a person shares with a network from Share with "Show a preview of the first page" on:
   a picture of the first page, the title and the first words go to the site's own \`/card\`, and the link
-  shared carries the card's id (\`?c=\`) before the "#", where the network's fetcher reads it. The card is kept
+  shared carries the card's id in its path (\`/c/<id>\`, before the "#"): the one page the site's Worker serves, the
+  app's page with the card's tags, which the shell moves to the app's own address as it opens. The card is kept
   readable for a month, then forgotten (tinier/cards.ts); the document and its link are never sent.
 - **Sharing to a service.** Share's Bluesky, Mastodon, X and LinkedIn open that service's own compose box in
   a new tab, with the title and the link in it: no script of theirs runs here. The link is the document, so
@@ -62,7 +63,7 @@ address.
   and icons and the Latin faces when it is installed, and each file a page fetches afterwards (an app's templates,
   a language, a face). It asks only the site, and only for its files; a page is asked of the network first, so a
   visit online is never stale. It never keeps a document (the document is after the "#", which never reaches it)
-  nor a link's \`?c=\` page. Turning Save in browser off unregisters it and deletes everything it kept; while
+  nor a shared link's \`/c/<id>\` page. Turning Save in browser off unregisters it and deletes everything it kept; while
   it is off nothing registers.
 - **Links.** A link in a document that leaves the site opens only after the reader is shown where it goes
   and says Go (kit/ui/link-guard.ts), in a new tab with no referrer.

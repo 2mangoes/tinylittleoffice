@@ -12,7 +12,7 @@ not on this list is refused by the browser itself.
 | Host | What | When | What it carries | What stops it | Made by | Allowed by |
 | --- | --- | --- | --- | --- | --- | --- |
 | `tinylittleoffice.com` | The site’s own files: the page, the app file (every app, the English words, the icons, the emoji and the math), its stylesheet, an app’s templates when its list opens, a language when a page is in it, and the type (IBM Plex, a face when a page’s words need it), each fetched once and kept a year | while shown | Which file; never the document, which is after the "#" and stays in the browser | Nothing to stop but not opening the site: these files are the app itself | the whole site | `'self'` |
-| `tinylittleoffice.com` | The service worker, /sw.js, with Save in browser on: it keeps the pages, the app file, its stylesheet, the Latin faces and each file a page fetches after, so the site opens offline | after a tap | Which file, as the pages ask; never the document, which is after the "#" and never reaches the worker, and never a page’s "?c=" card | Save in browser, turned off: the worker is unregistered and everything it kept is deleted; while it is off there is none | kit/share/offline.ts, sw.ts | `'self'` |
+| `tinylittleoffice.com` | The service worker, /sw.js, with Save in browser on: it keeps the pages, the app file, its stylesheet, the Latin faces and each file a page fetches after, so the site opens offline | after a tap | Which file, as the pages ask; never the document, which is after the "#" and never reaches the worker, and never a shared link’s "/c/<id>" page with its card | Save in browser, turned off: the worker is unregistered and everything it kept is deleted; while it is off there is none | kit/share/offline.ts, sw.ts | `'self'` |
 | `tinylittleoffice.com` | A preview card, at the site’s own /card: posted when you share with a network (Bluesky, Mastodon, X, LinkedIn or the share sheet) with “Show a preview of the first page” on; fetched later by that network | on share | A picture of the first page, the title and the first words, kept readable for a month so the network can fetch them; never the document, never its link | The switch “Show a preview of the first page” in Share, turned off; Edit link, Present link and Email never make one, nor does a document with a password | kit/share/card.ts | `'self'` |
 | `tile.openstreetmap.org` | The map’s pictures (tiles), asked directly as OpenStreetMap’s policy asks: in the Trip Planner, and under a trip’s map drawn anywhere (a slide, a page, an item, a card, an export), only the tiles its box needs; a picture made of that map (a card, a PDF, a PNG, a PowerPoint) asks them again to write them into it | while shown | Which squares of the map are on the screen or in the picture, and the site’s name as the referrer (the origin alone, as OpenStreetMap’s tile policy asks of a web page; never the page’s path or anything of the document) | Map, in the Trip Planner’s bar, turned off: no map then asks for them, in the Trip Planner or anywhere a trip is drawn; the home page’s pictures of the templates never do | apps/trip/editor.ts, apps/trip/view.ts, kit/draw/raster.ts | `img-src`, `connect-src` |
 | `nominatim.openstreetmap.org` | Place search in the Trip Planner | after a tap | The words searched for, and the site’s name as the referrer (the origin alone, as Nominatim’s usage policy asks of an application; never the page’s path or anything of the document) | Not searching: typing a stop’s place by hand asks no one | apps/trip/editor.ts | `connect-src` |
@@ -46,7 +46,8 @@ address.
   (tinier/tinier.ts).
 - **A preview.** Only when a person shares with a network from Share with "Show a preview of the first page" on:
   a picture of the first page, the title and the first words go to the site's own `/card`, and the link
-  shared carries the card's id (`?c=`) before the "#", where the network's fetcher reads it. The card is kept
+  shared carries the card's id in its path (`/c/<id>`, before the "#"): the one page the site's Worker serves, the
+  app's page with the card's tags, which the shell moves to the app's own address as it opens. The card is kept
   readable for a month, then forgotten (tinier/cards.ts); the document and its link are never sent.
 - **Sharing to a service.** Share's Bluesky, Mastodon, X and LinkedIn open that service's own compose box in
   a new tab, with the title and the link in it: no script of theirs runs here. The link is the document, so
@@ -59,7 +60,7 @@ address.
   and icons and the Latin faces when it is installed, and each file a page fetches afterwards (an app's templates,
   a language, a face). It asks only the site, and only for its files; a page is asked of the network first, so a
   visit online is never stale. It never keeps a document (the document is after the "#", which never reaches it)
-  nor a link's `?c=` page. Turning Save in browser off unregisters it and deletes everything it kept; while
+  nor a shared link's `/c/<id>` page. Turning Save in browser off unregisters it and deletes everything it kept; while
   it is off nothing registers.
 - **Links.** A link in a document that leaves the site opens only after the reader is shown where it goes
   and says Go (kit/ui/link-guard.ts), in a new tab with no referrer.

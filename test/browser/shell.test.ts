@@ -344,6 +344,36 @@ test('a link with ?c= opens its document, routed by the hash alone, and the addr
   expect(location.search).toBe('?keep=1');
 });
 
+// Since 2026-10-15 the card's id is in the link's path, /c/<id>, the one page the site's Worker serves (with the card's
+// tags); the shell moves the address to the app's own page, the hash naming the app, so a link copied carries no card.
+test('a link at /c/<id> opens its document and the address becomes the app’s page; with no app in the hash, the site’s root', async () => {
+  const path = location.pathname;
+  const dir = path.replace(/[^/]*$/, '');
+  const arrive = async (address: string) => {
+    document.body.innerHTML = '';
+    history.replaceState(null, '', address);
+    const shell = document.createElement('to-shell') as ToShell;
+    document.body.append(shell);
+    await shell.updateComplete;
+    return shell;
+  };
+  try {
+    const doc = '---\ntitle: Shared\n---\nFrom a post.\n';
+    const shell = await arrive(`${dir}c/k8hwicw#/v1/write/${encodeDoc(doc)}`);
+    await until(() => !!shell.querySelector('to-write-editor to-text .tx p'));
+    expect(shell.querySelector('to-text .tx p')!.textContent).toBe('From a post.');
+    expect(location.pathname).toBe(`${dir}write/`);
+    expect(location.hash).toBe(`#/v1/write/${encodeDoc(doc)}`);
+    expect(new URL(shell.link).pathname).toBe(`${dir}write/`);
+    const home = await arrive(`${dir}c/k8hwicw`);
+    expect(home.querySelector('to-home')).not.toBeNull();
+    expect(location.pathname).toBe(dir);
+  } finally {
+    document.body.innerHTML = '';
+    history.replaceState(null, '', path);
+  }
+});
+
 test('an unreadable link is said so, not thrown', async () => {
   const shell = await mount('#/v1/write/yNOTREALLY');
   await shell.updateComplete;

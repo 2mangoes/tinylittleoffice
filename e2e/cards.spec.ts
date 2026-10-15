@@ -2,7 +2,7 @@
  * Preview cards through the dev Workers: the built site served by its own Worker (`wrangler dev`, as `npm run
  * site:dev` runs it) and the shortener (`wrangler dev -c tinier/wrangler.jsonc`), on one local D1 with the migrations
  * applied. A document's Share, Bluesky with the preview on: the browser draws the first page, the Worker keeps it, the
- * compose box gets the link with ?c=; the page with ?c= says the card in its tags, the picture decodes at 1200 by
+ * compose box gets the link with /c/<id>; that page says the card in its tags, the picture decodes at 1200 by
  * 630, and the shortener's landing page with the same ?c= says it too. Desktop Chromium only (one Worker pair). Run on
  * its own:
  *
@@ -52,7 +52,7 @@ test.afterAll(() => {
   if (dir) rmSync(dir, { recursive: true, force: true });
 });
 
-test('a document shared to Bluesky with its preview: the card is kept, the page with ?c= says it, the picture is 1200 by 630', async ({ page, request }, info) => {
+test('a document shared to Bluesky with its preview: the card is kept, the /c/<id> page says it, the picture is 1200 by 630', async ({ page, request }, info) => {
   test.skip(info.project.name !== 'desktop', 'desktop only');
   // The compose box is not opened: the address it would open at is kept instead.
   await page.addInitScript(() => {
@@ -70,15 +70,15 @@ test('a document shared to Bluesky with its preview: the card is kept, the page 
   await expect.poll(() => page.evaluate(() => (window as unknown as { opened?: string }).opened ?? '')).toMatch(/^https:\/\/bsky\.app\//);
   const compose = await page.evaluate(() => (window as unknown as { opened: string }).opened);
   const link = /https?:\/\/\S+/.exec(new URL(compose).searchParams.get('text')!)![0];
-  const id = /\?c=([a-z0-9]{7})#/.exec(link)?.[1];
+  const id = /\/c\/([a-z0-9]{7})#/.exec(link)?.[1];
   expect(id, link).toBeTruthy();
-  // The address the reader arrives at: the query is gone as the page starts, the document is there.
+  // The address the reader arrives at: the card is gone from it as the page starts, the document is there on the app's page.
   await page.goto(link.replace(/^https?:\/\/[^/]+/, site));
   await expect(page.locator('to-write-editor to-text .tx')).toContainText('Tomatoes by the fence');
-  expect(new URL(page.url()).search).toBe('');
+  expect(new URL(page.url()).pathname).toBe('/write/');
 
   // What a network's fetcher reads.
-  const shared = await request.get(`${site}/write/?c=${id}`);
+  const shared = await request.get(`${site}/c/${id}`);
   expect(shared.status()).toBe(200);
   expect(shared.headers()['cache-control']).toBe('public, max-age=3600');
   const html = await shared.text();

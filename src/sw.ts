@@ -8,7 +8,7 @@
  *     first time the page asks for one and served from the cache after: a hash never changes meaning.
  *   - A page, and anything else of the site's, is asked of the network first, so an online visit is never stale; the
  *     kept copy answers when the network does not. Only a page of the list is kept, at its address without a query:
- *     a link's "?c=" page carries a card's words, and nothing of a document is ever kept here (the document is after
+ *     a shared link's "/c/<id>" page carries a card's words, and nothing of a document is ever kept here (the document is after
  *     the "#", which never reaches the worker).
  *   - A new build is a new sw.js (its list and its cache's name change), which the browser installs on the next online
  *     visit; activated, it deletes the caches of the builds before it.

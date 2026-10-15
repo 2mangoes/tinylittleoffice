@@ -273,13 +273,18 @@ export class ToShell extends LitElement {
     // Every link that leaves the site asks first.
     installLinkGuard();
     installPlainCopy();
-    // A link shared with a network carries its preview card's id (?c=, kit/share/card.ts) for the network's fetcher
-    // alone; the document is the hash's. Gone from the address at once, so a link copied from here carries no stale card.
+    // A link shared with a network carries its preview card's id for the network's fetcher alone: in its path, "/c/<id>"
+    // (kit/share/card.ts; the site's Worker serves that page with the card's tags), or, before 2026-10-15, as ?c= on the
+    // app's page. The document is the hash's. Gone from the address at once, so a link copied from here carries no
+    // stale card: the path becomes the app's own page (the hash names the app), or the site's root.
     const here = new URL(location.href);
-    if (here.searchParams.has('c')) {
-      here.searchParams.delete('c');
-      history.replaceState(history.state, '', here.href);
+    const shared = /^(.*\/)c\/[a-z0-9]{7}$/.exec(here.pathname);
+    if (shared) {
+      const app = parseHash(here.hash).app;
+      here.pathname = `${shared[1]}${app && appOf(app) ? `${app}/` : ''}`;
     }
+    here.searchParams.delete('c');
+    if (here.href !== location.href) history.replaceState(history.state, '', here.href);
     this.onHash();
   }
   disconnectedCallback() {
