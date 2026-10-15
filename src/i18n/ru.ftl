@@ -8,7 +8,7 @@ shell-menu = Меню
 common-title = Название
 # A new document of the app, and one not yet named; { $noun } is the app's noun: "New presentation".
 # en: ef9b1a33245907a9a1d7b7c22053168ed660d014
-common-new-noun = Новый { $noun }
+common-new-noun = Новый: { $noun }
 # en: bd2ce96ba3cfd14a4c62847d4e6bb0b8a3c72d25
 common-untitled-noun = Без названия: { $noun }
 # en: a479c9c34e878d07b4d67a73a48f432ad7dc53c8
@@ -24,7 +24,7 @@ shell-n-characters-over-link-limit = Лишних символов в ссылк
 # en: 1cfbe154225ecb3a01f463f1adde07279f1a454a
 shell-n-characters-over-link-limit-short-link-holds-max = Лишних символов в ссылке: { $n }; в короткую ссылку помещается { $max }
 # en: e7722b7943884e579644a3f5bd2b605afd08a156
-shell-n-characters-over-what-short = Больше, чем помещается в короткую ссылку, на { $n } символов
+shell-n-characters-over-what-short = Лишних символов для короткой ссылки: { $n }
 # Before a document that lives nowhere but its link (Private, changed) is left for another place: the question and its three answers.
 # en: f0bba930d38a38cacb48e472c8d4856caa4d8fa8
 shell-this-document-lives-in-its = Этот документ не сохранён
@@ -37,7 +37,7 @@ shell-turn-on-save-in-browser = Сохранить в браузере и уйт
 # en: 634bae7c8177155bc24961f3493f425b66e88c16
 shell-go-without = Уйти без сохранения
 # en: ee7a39c93b7018b92bcff5511a92081df68dd3db
-shell-save-in-browser-is-on = «Сохранять в браузере» включено. Открытые документы сохраняются здесь. Выключите это в меню.
+shell-save-in-browser-is-on = «Сохранять в браузере» включено. Открытые документы сохраняются здесь. Выключить можно в меню.
 # en: 97c669558589e3b0cf0917cb9caece8844ba65d9
 shell-another-version = Другая сохранённая версия
 # en: 87222e82bf5d208052c68fa66c93d131fa18fc67
@@ -49,7 +49,7 @@ shell-nothing-to-keep-yet = Пока нечего сохранять
 # en: 8c00f9130260156b1612126a7cf9a23bb3c553d6
 shell-open-it = Открыть
 # en: ef6e207cc7cea57220ad9a73fc6040b0085bf63e
-shell-save-in-browser-is-off = «Сохранять в браузере» выключено, поэтому ничего не сохраняется. Включите это в меню.
+shell-save-in-browser-is-off = «Сохранять в браузере» выключено, поэтому ничего не сохраняется. Включить можно в меню.
 # en: 3939d97295147954c5488340b1f427ebbfa51e69
 shell-skip-to-apps = Перейти к приложениям
 # en: 286b3810e407b3cef40b582c8ca4b373a58445bf
@@ -186,9 +186,9 @@ leave-do-you-trust-this-link = Вы доверяете этой ссылке?
 # en: 8d85feca3f164857fc84014a8f2ed5cc4846d4c9
 leave-you-are-leaving-tiny-little = Вы покидаете Крошечный офис и переходите на
 # en: 50ef68d5c205237951dae42aa775a66480171c46
-leave-this-link-writes-email-to = Эта ссылка пишет письмо на адрес
+leave-this-link-writes-email-to = По этой ссылке откроется письмо на адрес
 # en: 102dce223fdc2f3bbdda71f28108e2a6fdf21710
-leave-this-link-calls = Эта ссылка звонит на номер
+leave-this-link-calls = По этой ссылке начнётся звонок на номер
 # en: afb8b3199e929e5e9f886fdf382599c9d440c71f
 leave-not-secure-address-what-you = Небезопасный адрес (не HTTPS). Всё, что вы отправите, могут прочитать по пути.
 # en: 003e4888e77a22c782047c7d26d028c5eca46f1c
@@ -356,7 +356,7 @@ share-new-noun-date-n = Новый: { $noun } { $date } №{ $n }
 # en: 1c2edb3104c7f2adce9ad2a77f3622d1beb0059a
 share-mastodon-server-like-mastodon-social = Сервер Mastodon, например mastodon.social
 # en: 64fbd995d3b6b156ee26ae3c03e6516434c34c12
-share-change = Изменение
+share-change = Изменить
 # en: 2a07ce9a22d8e5dc1031e531518f04e50855319f
 share-copy-embed-code = Скопировать код для вставки
 # en: c3e1c83e5b4172d3c738e37cb69b76d93ce49b8b
@@ -378,7 +378,7 @@ share-picture-of-first-page-and = Картинка первой страницы
 # en: 6a46f4b4b3f001e64ef9652412aa1ddbdeabc489
 share-shared-without-preview-reason = Отправлено без превью: { $reason }
 # en: 4def5924266f682e91bcdff1e5ba510a20a36902
-share-making-preview = Делаем превью…
+share-making-preview = Создание превью…
 # en: b0e8d8d6d97acaeed4ad09f7b25699817638ae6b
 share-page-could-not-be-drawn = не удалось нарисовать страницу
 # en: b3dcb32d0d95afbd62938ff614915e68ba996861
@@ -394,23 +394,23 @@ share-pages-in-frame-on-another = Страницы во фрейме на дру
 # en: 9377de06278eacbdf4a297a82b8eb9aa3d4220c0
 share-your-mastodon-server = Ваш сервер Mastodon
 # en: 8ae1c34bd37fad49cc5f8e02da648a78e89c3ed8
-share-left = Влево
+share-left = Осталось
 # en: 62be4731dedfbbc70aa7fa30d6649d816af8ca4b
-share-uses = Использует
+share-uses = Занято
 # en: 525f61b6729229b1a8854a9e50bcaa52ea96b131
 share-where = Где
 # en: cdbfed741d905515df704d9585fc74781801a24d
 share-where-link-fits = Поместится ли эта ссылка?
 # en: ddba25b7aa2e43ef1c94a2a8cfb8b839fb723ca2
-share-any-length = любой длины
+share-any-length = без ограничений
 # en: 23fd8ecdbffd82e04305d3cea5eae9cdb85ac9bf
-share-n-over = Больше на { $n }
+share-n-over = Лишних: { $n }
 
 ## privacy (kit/share/privacy.ts, kit/ui/privacy-dialog.ts): the password, what the device holds
 
 # The Share dialog's head line: "Created 9 Oct 2026, 14:03 · by Paul".
 # en: 07fd5d289286fa4714b3f407db7875fac90b9952
-privacy-anyone-with-link-will-need = Любому, у кого есть ссылка, понадобится пароль, чтобы её открыть. Его нельзя сбросить. Если вы его потеряете, документ пропадёт.
+privacy-anyone-with-link-will-need = Любому, у кого есть ссылка, понадобится пароль, чтобы открыть документ. Пароль нельзя сбросить. Если вы его потеряете, документ пропадёт.
 # en: 8c684290ce0b8a8e6cee79a145e17554064a4760
 privacy-change-password = Сменить пароль
 # en: 5be0d11b94b1ba25b2579314f6af69649a900cde
@@ -448,7 +448,7 @@ privacy-preferences = Настройки
 # en: cf01481f626d5127ec7732fcbdb29504f08abefd
 privacy-privacy = Конфиденциальность
 # en: cefceeebf3cd6d02ddc7aca8c769881a5341e829
-privacy-nothing-saved-in-this-browser = В этом браузере ничего не сохранено. Элементы списка хранятся только до конца этого визита.
+privacy-nothing-saved-in-this-browser = В этом браузере ничего не сохранено. Перечисленное ниже хранится только на время этого посещения.
 # en: 626a605da9dbcd888eadcad13deebd3a64011c0a
 privacy-protected-by-password = Защищён паролем
 # en: acef17d00b9a1b6e1e15e76d27ae53635928a7a6
@@ -508,7 +508,7 @@ privacy-n-set = Задано: { $n }
 # en: a97ce1edde4ad396d1cff34063087d0bf5d0e1a8
 privacy-copy-this-and-send-it = Скопируйте этот пароль и отправьте его отдельно от ссылки. Он больше не будет показан.
 # en: 7640428ae16fc2b673d689ddf6b1ea15eed407d3
-privacy-make-another = Создать другой
+privacy-make-another = Создать новый
 # en: 9a0081f0b2bff82fac1961a403734134b9a3b170
 privacy-password-copied = Пароль скопирован
 
@@ -581,7 +581,7 @@ common-step-out-close-collapse-let = Закрыть или снять выбор
 # en: fb2997642419cda8393061543f140d40a9323957
 common-check-or-uncheck-task = Отметить задачу или снять отметку
 # en: 0a4adf12f01d48ecdb89f5eddf5f19fd89d94522
-common-too-long-for-qr-code = Слишком длинно для QR-кода: сократите документ или поделитесь короткой ссылкой.
+common-too-long-for-qr-code = Документ слишком длинный для QR-кода: сократите его или поделитесь короткой ссылкой.
 # en: 1e14a1c5e931f6ef8ce8378377366f3c68cef56c
 common-n-of-count = { $n } из { $count }
 
@@ -746,9 +746,9 @@ write-paper-paper = Бумага: { $paper }
 # en: c1ccf83eea101ddafb5de4e3dea5f3693ae473c0
 write-sans = Без засечек
 # en: 2fa97b3a9a6621a3a887ef5686bf4604fa6804e6
-write-clean-and-plain-throughout = Чистый и простой везде
+write-clean-and-plain-throughout = Простой и чистый во всём тексте
 # en: 56632c1841ab67cf1e7c7179b9c5ea0e32ea81c1
-write-bookish-serif-throughout = Книжный шрифт с засечками везде
+write-bookish-serif-throughout = Книжный шрифт с засечками во всём тексте
 # en: 7daed9b46fb34186159d19a2dca5208daf510f54
 write-monospace-ragged-right = Моноширинный, с неровным правым краем
 # en: 9ec6ab25de9a050b550600a98c5a63e5b2c00bf8
@@ -805,7 +805,7 @@ common-markdown = Markdown
 write-rich-text-rtf = Rich Text (RTF)
 # A table in the text: its heads, its handle, its column menu.
 # en: f4344253d823d09db13bc3877d37c9618588506a
-write-add-column-before = Добавить столбец перед
+write-add-column-before = Добавить столбец слева
 # en: 9b3acfc74a5d37d699868ade0ed3d142024174cf
 write-column-c-what-it-holds = Столбец { $c }: тип, имя, добавить или убрать
 # en: 1f01479a40aa348fc273d4d09636403f89eff717
@@ -844,13 +844,13 @@ write-minutes = Протокол
 # en: 34dbbbeddd62f120a000701c56adebc8bae95352
 write-formal-meeting-who-came-treasurers = Официальное собрание: кто пришёл, расчёты казначея, предложение и голосование, поручения.
 # en: e04a25d1f69061bfe7770b16891fca2c413bcbe0
-write-one-page-cv = Резюме на странице
+write-one-page-cv = Резюме на одну страницу
 # en: 11628c83c5de19d1338628ed7153b648f496b27c
 write-typewriter-set-cv-now-before = Резюме в стиле пишущей машинки: сейчас, раньше, образование, языки и инструменты.
 # en: 6ed05e720ccc3ef269db1b38201da8b873acc895
 write-newsletter = Рассылка
 # en: e583899cf44dbc07e6d8d4e7a252d39552e4e3d4
-write-block-associations-month-dates-in = Месяц в жизни жилищной ассоциации: даты в таблице, приветствия, новости и благодарности.
+write-block-associations-month-dates-in = Месяц ассоциации жителей квартала: даты в таблице, приветствия, новости и благодарности.
 # en: 1dcda804c96da3cc7e73e8a1672d4379a741f11a
 write-recipe = Рецепт
 # en: 72490fa559ee9ce5ed498b58b3e2cad900af7155
@@ -898,13 +898,13 @@ write-what-happened-in-order-what = Что случилось, по порядк
 # en: f74c6bc075b1961f73f45729ce6281dc84fb3ccf
 write-letter-to-politician = Письмо депутату
 # en: 2e754026e13e7ebe41d9513e31f94d8268341243
-write-ask-your-representative-for-vote = Попросите своего представителя проголосовать: кто вы, почему это важно здесь и один вопрос.
+write-ask-your-representative-for-vote = Попросите своего депутата проголосовать: кто вы, почему это важно здесь, и один вопрос.
 # en: de21096f37522d15740e7a4acd69efc811f9b5ce
 write-love-letter = Любовное письмо
 # en: a6977a11c96b06575fd8359e1bb9e3dea5a21fcf
-write-ordinary-things-missed-letter-across = Обычные вещи, по которым скучаешь: письмо через расстояние, шрифтом с засечками.
+write-ordinary-things-missed-letter-across = Обычные вещи, по которым скучаешь: письмо издалека, шрифтом с засечками.
 # en: 1af339528a1814a5f1dc409f2d108e0308035b87
-write-wedding-speech = Тост на свадьбе
+write-wedding-speech = Свадебный тост
 # en: b040a94a7bd386ebaee15aa4c4535da004fadc4c
 write-how-they-met-what-you = Как они познакомились, что вы видели с тех пор, по слову каждому и сам тост.
 # en: c88c994e6c6c50db17576753df90aac55138155f
@@ -918,11 +918,11 @@ write-personal-essay-for-small-magazine = Личное эссе для мале�
 # en: 563a631aba8690962836c99d15886672eb96ef62
 write-petition = Петиция
 # en: 6d3ace089783eb6cf5e5fe47a7d74a3ee5c21f39
-write-what-you-ask-why-and = О чём вы просите, почему, и имена тех, кто согласен.
+write-what-you-ask-why-and = О чём вы просите и почему, и имена тех, кто согласен.
 # en: a6a1d25b018c9318540556e3fe374fdf8b23aff8
 write-terms-of-service = Условия обслуживания
 # en: 79b220d914e24eb7ac79428e72639e8547d8ab9a
-write-small-businesss-terms-in-plain = Условия небольшого бизнеса простыми словами: запись, цены, ключи, что если, расторжение.
+write-small-businesss-terms-in-plain = Условия небольшого бизнеса простыми словами: запись, цены, ключи, непредвиденные случаи, расторжение.
 # en: fe3b114dccf2739f949d65ac4101037eb8f92543
 write-open-as-outline = Открыть как структуру
 # same
@@ -1010,11 +1010,11 @@ sheet-planned-against-actual-line-each = План и факт, по строке
 # en: 0a0a7c3be7656f55cd259d558c2d0eb59b893b88
 sheet-expense-log = Учёт расходов
 # en: c2effbb05c6382e67befb796de9be3ad264a1cbb
-sheet-date-what-how-much-which = Дата, на что, сколько, какого рода; итог нарастающим счётом внизу.
+sheet-date-what-how-much-which = Дата, на что, сколько, какая категория; нарастающий итог внизу.
 # en: a2d841e763d975477b0e1a51d15e6f25c9023d4a
 sheet-training-log = Дневник тренировок
 # en: d5b29b7fbac7da4d79a420a8108f0c98bb1ab61a
-sheet-what-you-did-and-how = Что вы делали и сколько, по строке за раз; итог по каждому виду.
+sheet-what-you-did-and-how = Что вы делали и сколько, каждое в своей строке; итог по каждому виду.
 # en: 4d89a20e90ff128c4329c067414e272156b4b196
 sheet-project-tracker = Трекер проекта
 # en: a9f287fb1ede11b35e739a207cac5eddcfd2116d
@@ -1022,7 +1022,7 @@ sheet-tasks-with-owners-start-and = Задачи с исполнителями, 
 # en: 83c8cb0557f1a8ab76094b2801ae0b4cd23e4741
 sheet-loans-compared = Сравнение кредитов
 # en: 8ae3fb1476eab673ec96c9e2614cad18cbd6f497
-sheet-amount-rate-and-years-for = Сумма, ставка и срок каждого кредита; ежемесячный платёж (PMT), сколько он стоит в целом и проценты.
+sheet-amount-rate-and-years-for = Сумма, ставка и срок каждого кредита; ежемесячный платёж (PMT), во что он обойдётся в итоге и проценты.
 # en: 53f4e4eb1a489c6a14658993062fc985a80bd775
 sheet-subscription-business = Бизнес на подписке
 # en: f14ffb32b12ec6d73e3971054ddf5248de50852a
@@ -1034,7 +1034,7 @@ sheet-customers-day-what-they-spend = Посетителей в день, ско
 # en: 27f8244e11467491805da5dcaace666e1176df07
 sheet-freelancer = Фрилансер
 # en: c7da5aec39e9bdd23c061f2f34a9ecb65f9f20a2
-sheet-hours-rate-and-weeks-make = Часы, ставка и недели дают счета за год; расходы и налог вычитаются; остаётся то, что на руки.
+sheet-hours-rate-and-weeks-make = Часы, ставка и недели дают счета за год; расходы и налог вычитаются; остаток — доход на руки.
 # en: 53ca3d56131df7985cdd58b24a369278bce0d723
 sheet-mutual-aid-fund = Фонд взаимопомощи
 # en: 4df80f44a8c21f77f84393546555c9ab3224fe85
@@ -1042,11 +1042,11 @@ sheet-monthly-donors-and-one-off = Ежемесячные доноры и раз
 # en: 992dbb972d7850082f91f3f43d7b68391091a32e
 sheet-month-by-month-with-chart = Месяц за месяцем, с диаграммой
 # en: 876c69fa93189c4e89f57aeec964d0573e61be81
-sheet-this-year-against-last-line = Этот год против прошлого, по строке на месяц, нарисовано линиями.
+sheet-this-year-against-last-line = Этот год в сравнении с прошлым, по строке на месяц, в виде линий.
 # en: 467dda8775e7e01a3dacd9ff5d247da7caf931d3
 sheet-household-budget-by-month = Семейный бюджет по месяцам
 # en: f61119c5b20c1ed2360f6aa2b583872a1fc9c474
-sheet-six-months-of-homes-bills = Шесть месяцев счетов и трат семьи, столбец на месяц, итоги в обе стороны против зарплаты.
+sheet-six-months-of-homes-bills = Шесть месяцев счетов и трат семьи, столбец на месяц, итоги по строкам и столбцам в сравнении с зарплатой.
 # en: 2c2609efcdcac42f94b3d73758d40d3f2f79dfd8
 sheet-savings-goal = Цель накоплений
 # en: 49ff61e9d2d6e99106df2e02e7a626aa5186c112
@@ -1054,35 +1054,35 @@ sheet-what-went-in-each-month = Сколько откладывали кажды
 # en: ca1ec97c50f7647ef3588d5de58af33939c01646
 sheet-habit-tracker = Трекер привычек
 # en: 7a2638dee7c38146953a64566dbd8fc8ea77d8d4
-sheet-four-habits-checked-off-day = Четыре привычки с отметками по дням за две недели; какая часть каждого дня выполнена и сколько дней у каждой.
+sheet-four-habits-checked-off-day = Четыре привычки с отметками по дням за две недели; какая доля выполнена за каждый день и сколько дней у каждой.
 # en: d80f6ec7eac0c80248e2c7b452e21f89673449f2
 sheet-reading-list = Список для чтения
 # en: c809293d68f1061cf7062072d2efc8fe95fe9262
 sheet-books-read-being-read-and = Прочитанные, читаемые и следующие книги, сколько дней ушло на каждую и сколько страниц прочитано за год.
 # en: 6e14850d9abea09c879f881a4773537f91cf2ac2
-sheet-workout-log = Дневник силовых
+sheet-workout-log = Силовые тренировки
 # en: b2a1db48bce10aa5ac4b8eb894555098ecbaac30
 sheet-sets-reps-and-weight-for = Подходы, повторения и вес для каждого упражнения, посчитанный объём и как каждое далось.
 # en: 5be9810c81e208adc153f7aa0cc70f64c988d737
 sheet-time-sheet = Табель
 # en: df9c77cdd1cdf96f00633ef7f822543a7185dbc6
-sheet-weeks-hours-by-client-and = Часы за неделю по клиентам и задачам; оплачиваемые считаются по ставке, и итоги.
+sheet-weeks-hours-by-client-and = Часы за неделю по клиентам и задачам; оплачиваемые часы по ставке и итоги.
 # en: da7a3e11a9c1686127720177adfd2bbfed7224e0
-sheet-trip-costs-split = Раздел расходов в поездке
+sheet-trip-costs-split = Делим расходы на поездку
 # en: bcc455f94ab37c41dad441a4152ac7961c3118ad
 sheet-who-paid-for-what-on = Кто и за что заплатил в поездке вчетвером; справедливая доля каждого и кто сколько должен (минус — деньги к возврату).
 # en: 3fcd3bd6c3c0517dc23b7c9c8a424a6ba7c30c9a
 sheet-schedule-with-dates = График с датами
 # en: 9cfdf52e38ee970ebd6feac438c7d2cb6abd25c5
-sheet-job-in-steps-each-starting = Работа по шагам, каждый начинается, когда кончился прошлый: кто, сколько дней, дата окончания и рабочие дни.
+sheet-job-in-steps-each-starting = Работа по шагам, каждый начинается, когда закончился предыдущий: кто, сколько дней, дата окончания и рабочие дни.
 # en: 2a3b772f6e347425b5a235a2e956004ed5177213
 sheet-grade-book = Журнал оценок
 # en: 0e6fce40b16529c27d306da8834f33a391a5ca5b
 sheet-classs-grades-for-essays-quizzes = Оценки класса за сочинения, тесты и проект; средний балл и оценка каждого ученика и средняя по классу.
 # en: 7d9ac107a69e997e571bd6906b535f6802bc5569
-sheet-membership-roll = Список членов
+sheet-membership-roll = Список участников
 # en: 3bc0a32ca3d296ee9217f44adf3cf4d3c3dbd080
-sheet-who-belongs-their-plot-and = Кто состоит, их участок и дело, когда заплатили и когда продлевать, у кого ключ, и собранные взносы.
+sheet-who-belongs-their-plot-and = Кто состоит, их участок и обязанности, когда заплатили и когда продлевать, у кого ключ, и собранные взносы.
 # en: b884fda377a19ce445f8ec49bd90f2784834978c
 sheet-seating-count = Рассадка гостей
 # en: 4e00db4efd970061e8ff6cd63f723c7385ad1637
@@ -1094,7 +1094,7 @@ sheet-answers-and-votes-for-each = Ответы и голоса за кажды�
 # en: bfee938677dd9bf5dab2de4f9558c07a06d616fd
 sheet-fundraising-thermometer = Термометр сбора средств
 # en: f6873b16e788104f3e409c1c06243db77d2a6e04
-sheet-what-has-come-in-week = Сколько поступило, неделя за неделей, против цели: сверху диаграмма, итог на данный момент крупно.
+sheet-what-has-come-in-week = Сколько поступило, неделя за неделей, в сравнении с целью: сверху диаграмма, итог на данный момент крупно.
 # en: 20ded69e290360ef0be6b1fd22e648ca398d7ed3
 sheet-invoice-ledger = Журнал счетов
 # en: 2404f6c1a633f188d6395d7b35f7dd1486c597b6
@@ -1102,11 +1102,11 @@ sheet-every-invoice-sent-when-to = Каждый выставленный счё�
 # en: 300d29fd5f327e8c7a0f4614d4125d93570eeeff
 sheet-inventory = Склад
 # en: cca3ceb6d79e8c2e922aa21c8675223c1b96c275
-sheet-stock-on-hand-against-point = Остаток на складе против порога для заказа; что заказать, сколько это стоит и пометка, когда мало.
+sheet-stock-on-hand-against-point = Остаток на складе в сравнении с порогом дозаказа; что заказать, сколько это стоит и пометка, когда мало.
 # en: ba8d2875e56e1ee2a745057f4de807182be4bb9b
 sheet-petty-cash = Мелкая касса
 # en: 8c7a0a9d0703152466c522d2d8bbd55cfcea218d
-sheet-money-in-and-out-of = Деньги в коробке и из неё, кто и на что потратил, остаток после каждой траты и галочка за чек.
+sheet-money-in-and-out-of = Приход и расход кассы, кто и на что потратил, остаток после каждой операции и отметка о чеке.
 # en: dca1686c53daf52f46495f2a961a3346006e41ac
 sheet-rate-card = Прайс-лист
 # en: 1a3c8694038b9c6d56a26e131d62c3616e165a77
@@ -1118,7 +1118,7 @@ sheet-four-offers-on-one-house = Четыре предложения на оди
 # en: 54695e5df6ef00663252186d998a600f9bac4c58
 sheet-unit-converter = Конвертер единиц
 # en: d2e0c086c77046805d1cc8934044bb315bf00aec
-sheet-miles-and-kilometers-pounds-and = Мили и километры, фунты и килограммы, духовки, чашки и галлоны: введите число и прочтите в другой единице.
+sheet-miles-and-kilometers-pounds-and = Мили и километры, фунты и килограммы, духовки, чашки и галлоны: введите число и получите его в другой единице.
 # en: 9d2911edf283fc08872808d554a1017460fbe86f
 sheet-tournament-bracket = Турнирная сетка
 # en: ad907a82b59f9d64761c80d6b2fe13c2a3b04fc2
@@ -1213,7 +1213,7 @@ common-name-of-column-c = Название столбца { $c }
 sheet-names-cell-to-its-right = Имя для ячейки справа
 # A money column's currency (Money picked in a column's menu): the field's hint, and what it says of words it cannot read.
 # en: d02550533b8780a7e646803c3b7b9cb7a78ba756
-sheet-symbol-like-or-code-like = Символ, например $, или код, например USD. Пусто — как в документе.
+sheet-symbol-like-or-code-like = Символ, например $, или код, например USD. Если пусто — валюта документа.
 # en: 1224b5538c873fc11d856120fedeb76e516529c6
 sheet-symbol-of-up-to-three = Символ до трёх знаков или код из трёх букв.
 # en: 630470a61228c20119f270074f1e0b6a4c2d9151
@@ -1245,7 +1245,7 @@ common-row-n-insert-or-delete = Строка { $n }: добавить или у�
 # en: 767a59f7f0079a019b266853b864269f92d10d82
 common-rows-b = строки { $a }–{ $b }
 # en: b92fe41ac34453cd0368f0fa5d00d1e9b0279c12
-sheet-selected-cells = Выделенные ячейки
+sheet-selected-cells = Выбранные ячейки
 # en: 26b30f90bad8aab892824738a0dc60bd11d082be
 sheet-show-all-text = Показать весь текст
 # en: 9580fcbce0c31ceaa47eb583e5f7ce637fdc8a0a
@@ -1255,7 +1255,7 @@ sheet-sort-rows-by-it = Сортировать по
 # en: ff87bd67a9f3709f0a4247baa8ba4de4a5bd5fd2
 sheet-suggested = предложено
 # en: eda0b8f3c389658a7369166fd4c36099e380adff
-sheet-is-as-wide-as-it = В листе уже максимум — 26 столбцов.
+sheet-is-as-wide-as-it = На листе уже максимум столбцов — 26.
 # en: 0f54b98f336606a21f0bcbdc77afa4474b2b1966
 sheet-is-full-its-last-rows = Нельзя добавить строки: последние строки не пустые.
 # en: 7a74dff615ee3bcbc90d8c31886f01082413c776
@@ -1266,19 +1266,19 @@ sheet-unlock-these-cells = Разблокировать эти ячейки
 sheet-what-it-holds-sort-columns = Тип, сортировка, столбцы
 # The Spreadsheet: any column removed, the Option column, rich cells, a chart put in from Insert.
 # en: 63362bbc585e9e03cbf63abe945bcf99aa4d8cc5
-sheet-keeps-one-column = В листе должен быть хотя бы один столбец
+sheet-keeps-one-column = На листе должен быть хотя бы один столбец
 # en: 7208e66f41dd004e736a1840e2a99d288a4c2060
 sheet-choices = Варианты
 # en: 38b6d89278519f90efb25eb841096bc63d9095e0
 sheet-choices-for-ref = Варианты для { $ref }
 # en: a871e2c9206cb4854cc06c30bc6de95cb82f9700
-sheet-has-one = В листе уже есть диаграмма
+sheet-has-one = На листе уже есть диаграмма
 # en: f0dfb92a1f16391ab3bd5478ce9d8c0f2d74bf95
 sheet-edit-cell-caret-at-its = Изменить ячейку, курсор в конце
 # en: 28d1a54d2e35ad87c0d19942f68d70ddbf67bcee
 sheet-put-back-what-cell-held = Вернуть значение ячейки
 # en: 2b69414b3787eaa8a38f2f1a9c4a48aff7dd78a5
-sheet-put-dated-rows-on-calendar = Поместить строки с датами в календарь
+sheet-put-dated-rows-on-calendar = Перенести строки с датами в календарь
 
 ## downloads: hand-offs to another app (kit/file/exports.ts)
 
@@ -1308,7 +1308,7 @@ icons-favorites = Избранное
 # en: a8b63bb6a000ce6560e6126bf0fade0a56fef128
 icons-search-icons = Искать значки
 # en: 7fcd8d44c6f295423534073543e6050ddd8cf497
-icons-suggested = Предложено
+icons-suggested = Рекомендуемые
 # en: edb8f6c14252759cd8673c61a24376d32e17b93a
 common-icons = Значки
 # en: 7d9b3876b6aa451cf6a99a0323e97ba79d6a4a27
@@ -1373,7 +1373,7 @@ draw-phone-and-laptop-api-database = Телефон и ноутбук, API, ба
 # en: d5786d3d397a91b189e23529401c4f8d35cd09b0
 draw-floor-plan = План квартиры
 # en: fddd68346c75bb66ad003c667e573feb965f7ca4
-draw-one-bedroom-apartment-from-above = Квартира с одной спальней сверху: комнаты прямоугольниками, подписанные, двери — просветами.
+draw-one-bedroom-apartment-from-above = Квартира с одной спальней, вид сверху: комнаты — подписанные прямоугольники, двери — просветы.
 # en: 38a0d171dc9e21d8e32aacfbb8a170dad9977d9c
 draw-pixel-heart = Пиксельное сердце
 # en: 7f51a7b112b9965b1cf5d78f9b43f76de5ad8f0d
@@ -1383,19 +1383,19 @@ draw-background-tile = Фоновая плитка
 # en: e78fb3ca7b230e0df30391c85eec105bf55656bd
 draw-8-by-8-pattern-that = Узор 8 на 8, который повторяется: используйте его как фон рисунка или любой страницы.
 # en: 99cb45a6f4e975a5a7be78811422b5933dd6598b
-draw-card-for-ninetieth-tilted-on = Открытка к девяностолетию, наклонённая на фоне конфетти: крупные слова, цветы, любовь от всех.
+draw-card-for-ninetieth-tilted-on = Открытка к 90-летию, под наклоном на фоне конфетти: крупные слова, цветы и любовь от всех.
 # en: 2020c98a00da0ecd8574350e226b7d4c448a451f
-draw-phone-screen-sketched-in-boxes = Экран телефона, набросанный блоками до того, как его начали делать, с заметками, зачем нужна каждая часть.
+draw-phone-screen-sketched-in-boxes = Экран телефона, набросанный блоками до того, как его начнут делать, с заметками, зачем нужна каждая часть.
 # en: 106c289912d69f2f02f64b1c195daa945a29c19f
-draw-rosette-with-ribbons-for-volunteer = Розетка с лентами для волонтёра года: распечатать, вырезать и приколоть.
+draw-rosette-with-ribbons-for-volunteer = Наградной значок с лентами для волонтёра года: распечатать, вырезать и приколоть.
 # en: c9c7469b74c0a43646cb4a46279d9930b271ca19
-draw-block-party-from-above-stage = Уличный праздник сверху: сцена, лотки, первая помощь и место встречи, если потерялись.
+draw-block-party-from-above-stage = Уличный праздник, вид сверху: сцена, лотки, первая помощь и место встречи, если потерялись.
 # en: 6d12c8adbefeaeacac0d48274df3a195ca9a1d17
-draw-badge = Значок-бейдж
+draw-badge = Бейдж
 # en: 32787c0201e95e7dd6ca00aa5dd63210e278e3db
 common-birthday-card = Открытка ко дню рождения
 # en: be3883124104a86065f65c46fcf4edff20e0842f
-draw-can-we-refund-it-stores = Можем вернуть деньги? Правило возврата магазина в вопросах, ответах и что делать.
+draw-can-we-refund-it-stores = Можно вернуть деньги? Правила возврата магазина: вопросы, ответы и что делать.
 # en: 619a6e052e5343b8fbad2bfbc5a35d0aa4ec763f
 draw-event-map = Карта мероприятия
 # en: 6349ac251c1b86c4744c7e0361a5e72ea5e38402
@@ -1407,13 +1407,13 @@ draw-logo-sketch = Набросок логотипа
 # en: 26dbc52edd1d138f4ab006d860b56dee54bf919f
 draw-order-to-doorstep = От заказа до двери
 # en: 9bdb2a0b447519986c24ccc21eaf68976587c9fc
-draw-pip-frog-32-by-32 = Пип-лягушонок, герой 32 на 32 в красном шарфе, с контуром и готовый к анимации.
+draw-pip-frog-32-by-32 = Лягушонок Пип, герой 32 на 32 в красном шарфе, с контуром, готов к анимации.
 # en: d8cca3dd62ad1e4c37a8b10c054464bbcb13e3c9
 draw-room-plan = План комнаты
 # en: fcba7b3fe14a456c5dd428b4e0b28552efa25751
 draw-living-room-rearranged-sofa-rug = Гостиная после перестановки: диван, ковёр, книжный шкаф и стол в масштабе, дверь с дугой открывания.
 # en: 8640aa92343372c68f5d72660821c342598d8b38
-draw-three-ideas-for-coffee-roasters = Три идеи знака для обжарщика кофе рядом, название крупно и дата, к которой нужно выбрать.
+draw-three-ideas-for-coffee-roasters = Три варианта логотипа кофеобжарочной рядом, название крупно и дата, к которой нужно выбрать.
 # en: 68224d905ee1bc5c63082121b1e80cf6fe7d08c1
 draw-weather-icons = Значки погоды
 # en: 0d07d8bcde49fe88082ab75f75e2fd49bbcef253
@@ -1432,7 +1432,7 @@ draw-animate-this-drawing = Анимировать этот рисунок
 draw-drawing-of-things = Рисунок: { $things }.
 # en: 2759692cb0d64c0c370b6516074bb1de744a31a2
 draw-drawing-of-n-unlabeled-shapes = Рисунок: { $n ->
-        [one] одна фигура без подписи
+        [one] { $n } фигура без подписи
         [few] { $n } фигуры без подписи
         [many] { $n } фигур без подписи
        *[other] { $n } фигуры без подписи
@@ -1440,7 +1440,7 @@ draw-drawing-of-n-unlabeled-shapes = Рисунок: { $n ->
 # en: f33cdbb01b5b65fe3fe8928669d13ca09b3b5403
 draw-leads-to-b = { $a } ведёт к { $b }
 # en: b9e37b62382792094f5463a54183d523118a25a0
-draw-joins-b = { $a } соединён с { $b }
+draw-joins-b = { $a } соединяется с { $b }
 # en: e0883468badf6a5f9c1cfe0ce209a16939a64683
 draw-empty-drawing = Пустой рисунок
 # en: 1f9c4a5ed21a39ed45db86eb13cbff389eede2cf
@@ -1469,11 +1469,11 @@ draw-join-two-shapes = Соединить две фигуры
 # en: cf6c07e7054fad4d6a8affaf62f285e16525c46e
 draw-pen = Перо
 # en: c72e323a57434ede3b6eb0cc235109eb76833c55
-draw-any-shape-tap-for-each = Многоугольник: нажмите каждый угол
+draw-any-shape-tap-for-each = Многоугольник: коснитесь каждого угла
 # en: 016a5405a0b425e7d1ac65317df59b45ce5fb1f5
 draw-freehand = От руки
 # en: 8a48ec1f6c073fad0326a0e9251a18e4c88660b5
-draw-drag-to-draw-line-or = Тяните, чтобы нарисовать линию или фигуру
+draw-drag-to-draw-line-or = Потяните, чтобы нарисовать линию или фигуру
 # en: dcd096d38fc0be24bd96ac76246e98341b853208
 draw-rounded-box = Скруглённый блок
 # en: 08596d60c57fd87e530cbdd2a06052b06d8c4137
@@ -1505,7 +1505,7 @@ draw-sky = Голубой
 # en: 54076359fdc7f1f0e000b9ae15b96f8b09866acb
 draw-pink = Розовый
 # en: 168cbb2ea52b9e34d271accecfa7d7951e948a99
-draw-clear = убрать
+draw-clear = пусто
 # en: b1985e387405e4d4afb40d5dac9b2656f5d6f770
 draw-shapes = Фигуры
 # en: 4bab2d8fe13fa6ab57f80098b414f0f734c5dd25
@@ -1564,19 +1564,19 @@ draw-tap-or-drag-to-paint = Коснитесь или потяните, чтоб
 # en: ea263dc45b04f2755ac61a51deecc96ade3fb6a9
 draw-tap-each-corner-tap-first = Коснитесь каждого угла; коснитесь первого ещё раз или нажмите Enter, чтобы замкнуть.
 # en: ccdc55c46a79ea604962ddda9cc010311bdca4fe
-draw-drag-to-draw-end-where = Тяните, чтобы рисовать; закончите там, где начали, чтобы замкнуть фигуру.
+draw-drag-to-draw-end-where = Потяните, чтобы рисовать; закончите там, где начали, чтобы замкнуть фигуру.
 # en: ef5a6074bd843b506d359711212e8236802d80c4
 draw-press-on-one-shape-and-let-go-on-another = Нажмите на одну фигуру и отпустите на другой.
 # en: 1005cc8c1dafc1f9eb422bf2ac68290b492fdfd1
 draw-now-other-shape-tap-it = Теперь другая фигура: коснитесь её или выберите стрелками и нажмите Enter.
 # en: e3686f1c55ec91e31825e1d9510abf592d80b08a
-draw-drag-to-move-them-together = Тяните, чтобы двигать их вместе. Shift+касание добавляет или убирает фигуру.
+draw-drag-to-move-them-together = Потяните, чтобы двигать их вместе. Shift+касание добавляет или убирает фигуру.
 # en: eb36764c60ec7a17dd6ac3ec7dbbd22ee401778e
 draw-press-on-one-shape-and = Нажмите на одну фигуру и отпустите на другой
 # en: 199f4e86afea4f2d42eb40b63ce8599168575e06
 draw-tap-where-icon-goes = Коснитесь места для значка.
 # en: 86da5e24511bad8c1cace935e830c0625b04b607
-draw-drag-on-canvas-to-draw = Тяните по холсту, чтобы нарисовать, или коснитесь, чтобы поставить одну.
+draw-drag-on-canvas-to-draw = Потяните по холсту, чтобы нарисовать, или коснитесь, чтобы поставить.
 # en: a5742851f0f81d3bdcf184cb2a164390f3e989bb
 draw-eraser = Ластик
 # en: 5136ae1b5bfe9175a6ed64915e648bdc240443a7
@@ -1595,9 +1595,9 @@ draw-row-y-column-x-ink = Строка { $y }, столбец { $x }: { $ink }
 draw-as-repeating-background = Как повторяющийся фон
 # The contextual bar under a shape, and its words typed on it.
 # en: 27bb3dadbebca64cec249a9811a07cd3ea25a520
-draw-dashed-line = Штриховая линия
+draw-dashed-line = Пунктирная линия
 # en: 8953b1fb5c8eeda2158dfd09bde1a766d4b9079d
-draw-dotted-line = Пунктирная линия
+draw-dotted-line = Точечная линия
 # en: 6597b9e38708468a6ada223bbd324b34dd9b8d23
 common-edit-words = Изменить текст
 # en: 73a03229ad334f953ab9119481b53f881218d015
@@ -1634,17 +1634,17 @@ draw-type-words-enter-is-done = Введите текст. Enter заверша�
 draw-xl = XL
 
 # en: aba6eb7da15924b741fdff98ff19be9915cd84f1
-draw-drag-to-move-corner-handle = Тяните, чтобы двигать. Угловая ручка меняет размер, круглая вращает. Enter или двойное касание правит текст.
+draw-drag-to-move-corner-handle = Потяните, чтобы двигать. Угловая ручка меняет размер, круглая вращает. Enter или двойное касание правит текст.
 # en: 9cacab39109399036915a6b67336853e622472cd
 draw-drawing-canvas-v-selects-r = Холст для рисования. V выбирает; R, E, D, L, A, T рисуют; стрелки сдвигают; [ и ] вращают; Enter правит текст; Delete убирает.
 # en: 4421c5912fa5d727f23883b0a69028e195e3717b
-draw-tap-shape-to-select-it = Нажмите на фигуру, чтобы выбрать её, или обведите несколько. Чтобы рисовать, возьмите инструмент.
+draw-tap-shape-to-select-it = Нажмите на фигуру, чтобы выбрать её, или обведите несколько. Чтобы рисовать, выберите инструмент.
 # en: 6f72f3cd1255e9bb344a1f9adb5fc64770f07cd5
 draw-rotate-left = Повернуть влево
 # en: b75f23d1d0e44603289911e22ad5efd66157913a
 draw-rotate-right = Повернуть вправо
 # en: 4e41a56fa9e8996a27760c0b9c78c126b0892d19
-draw-pixels-n-n = Пикселей: { $n }×{ $n }
+draw-pixels-n-n = Пиксели { $n }×{ $n }
 # en: 6469ebd3a4fdb9e64f402eed612d2bfc0e0bf746
 draw-align-center = Выравнивание: по центру
 # en: b25d3dd496584e2c6258aa9c77cc555dfd5988a4
@@ -1660,19 +1660,19 @@ anim-animation = анимация
 # en: ec026663a7e4c23dd850c7f5a96deef71bf8bb81
 anim-lift-off = Взлёт
 # en: 5d15aaf0784e98385ffc925f574edbf1a0657292
-anim-rocket-climbs-away-with-its = Ракета уходит вверх вместе с тенью, пока поднимаются слова: две фигуры, по два ключа.
+anim-rocket-climbs-away-with-its = Ракета уходит вверх вместе с тенью, пока поднимаются слова: две фигуры, по два ключевых кадра у каждой.
 # en: 1cc22feeb4a82e33a9fd435fbf7c4a927a0408e1
 anim-bouncing-ball = Прыгающий мяч
 # en: 567b2c86aa06b4d0133474a39dc6545196754a25
-anim-ball-falls-faster-and-faster = Мяч падает на пол всё быстрее, а тень под ним растёт; туда и обратно он прыгает без конца.
+anim-ball-falls-faster-and-faster = Мяч падает на пол всё быстрее, а тень под ним растёт; если проигрывать вперёд и назад, он прыгает без конца.
 # en: 7296aa4a483797a1a82ec05a4598688ca056cd36
 anim-loading-spinner = Индикатор загрузки
 # en: ccf7f6eb9188fe228da413a1aaf39c5ee4994346
-anim-eight-dots-in-ring-each = Восемь точек по кругу, каждая по очереди набухает, и яркое пятно бежит по кругу, пока страница сохраняется.
+anim-eight-dots-in-ring-each = Восемь точек по кругу, каждая по очереди увеличивается, и яркое пятно бежит по кругу, пока страница сохраняется.
 # en: 691f884e182237907640c6964bda657a5ffec1c0
 anim-title-card = Титульный кадр
 # en: 56d07df6f27b468d9e3456707110962e1da029c6
-anim-red-curtains-part-on-opening = На премьере раздвигаются красные занавесы, и выходит название фестиваля: показывается один раз и остаётся на названии.
+anim-red-curtains-part-on-opening = На премьере раздвигается красный занавес, и выходит название фестиваля: проигрывается один раз и замирает на названии.
 # en: 1383ce3b8f642f2c5946975ca61e868e4a504819
 anim-present-hops-stars-and-hearts = Подарок подпрыгивает, вокруг качаются звёзды и сердечки, а поздравление сияет радужными буквами.
 # en: fad7f01d931894b10da998319cdc82f1a7d7e4dc
@@ -1682,11 +1682,11 @@ anim-meme-with-caption-above-and = Мем с подписью сверху и с
 # en: 7e9b34abf6e91127f94374508015ad795c91268b
 anim-build-is-green = Сборка зелёная
 # en: 2015347d0927e36755702bf7ae8677fa8d565545
-anim-meme-in-two-lines-of = Мем из двух строк шрифтом Impact и кубок, который влетает, крутясь, садится и сияет.
+anim-meme-in-two-lines-of = Мем из двух строк шрифтом Impact и кубок, который влетает, крутясь, приземляется и сияет.
 # en: 98eb193445404588fd801a26b8383def925748ab
 anim-flash-card = Карточка для заучивания
 # en: 864aea3fc448ba5b87612d5e8c4c6dafde49b09a
-anim-card-shows-spanish-word-turns = Карточка показывает испанское слово, переворачивается и даёт английское, потом обратно: поворот вокруг вертикальной оси.
+anim-card-shows-spanish-word-turns = Карточка показывает испанское слово, переворачивается, показывая английское, и обратно: поворот вокруг вертикальной оси.
 # en: 23015d1cbacca964e41f5cbb0021ed050964a9ed
 anim-weather-this-week = Погода на неделе
 # en: 8dc082991f9eea4f537ecd34d66858c28b08bcb6
@@ -1694,7 +1694,7 @@ anim-four-days-of-weather-in = Четыре дня погоды в Лиссаб�
 # en: b8224dd56d927c2c68b1498f39b7a2ed20f88c57
 anim-new-year-countdown = Обратный отсчёт до Нового года
 # en: 6b46f602f1762ee9ef676cfb3d455fba6a9a07df
-anim-three-two-one-second-each = Три, два, один, по секунде, и приходит новый год радужными буквами: показывается один раз и остаётся на поздравлении.
+anim-three-two-one-second-each = Три, два, один, по секунде, и приходит новый год радужными буквами: проигрывается один раз и замирает на поздравлении.
 # en: e004a532912502de514d6c1801dcc60517d6007a
 anim-flight-path = Маршрут полёта
 # en: 69049056a83981f31dea9f7350b7356570e735b3
@@ -1747,9 +1747,9 @@ anim-neon = Неон
 # en: 781961bc81c25697841ecce5d4d9dad9f6b261c6
 anim-pause = Пауза
 # en: 5d12bd53552cafc41ca6146c04870df2e1574e13
-anim-play = Играть
+anim-play = Пуск
 # en: fa968bd1155bd76231814d479bf070ed96cca9bb
-anim-pixel-art-is-made-in = Пиксель-арт делают в графическом редакторе; аниматор двигает фигуры.
+anim-pixel-art-is-made-in = Пиксель-арт делают в графическом редакторе; в аниматоре двигают фигуры.
 # en: b4a9395d25398654fd5d000e4b82a1d8273339bd
 anim-rainbow = Радуга
 # en: 3d5096b70833fdae355f1ffcf32faf2066123467
@@ -1802,7 +1802,7 @@ anim-frames = Кадры
 # en: 0d0b09dfb5d45add0e2f90ec8b193d96ace76d0c
 anim-frames-second = Кадров в секунду
 # en: 3570d228949889218e4c7fdb4ad8c942753530a1
-anim-how-large-shape-is-drawn = Насколько крупно нарисована фигура: 1× — как нарисована.
+anim-how-large-shape-is-drawn = Насколько крупно рисуется фигура: 1× — как нарисована.
 # en: c028f533678015b6ac2e606a9cafef7e050b11aa
 anim-length-speed-and-repeat = Длина, скорость и повтор
 # en: 72f516ede84adba7283e1f7f5fd8eb787c7d33b0
@@ -1818,7 +1818,12 @@ anim-turns-shape-around-in-plane = Вращает фигуру в плоскос
 # en: df7db1873937e8acd60c26ebf93191ad27b738e6
 anim-which-shape-is-in-front = Какая фигура впереди: ближняя рисуется поверх дальней, а дальняя чуть темнее. Глубина размер не меняет.
 # en: 2931befb0fbc6bdabcff5b420bf41435e4315548
-anim-n-times = { $n } раз
+anim-n-times = { $n ->
+        [one] { $n } раз
+        [few] { $n } раза
+        [many] { $n } раз
+       *[other] { $n } раза
+    }
 # en: 4a84fdfdafe66c2c85e3e7d7c434de987984470f
 anim-s-s = { $s } с
 # en: b78baea4121d1dfde75020adb28737da7ea84e59
@@ -1826,7 +1831,7 @@ anim-frame-back-frame-on = Предыдущий или следующий кад
 # en: ad3441e7c85b25bc4c7f46fd051345a6ba241e58
 anim-nudge-shapes-in-hand-with = Сдвинуть выбранные фигуры или перейти на кадр
 # en: fe13ca0956192777b5060b354cf8e5dc5553c328
-anim-play-or-pause = Играть или пауза
+anim-play-or-pause = Пуск или пауза
 # en: d3b310dc90b3cc480984236a80101888836acfe9
 anim-first-frame-last = Первый или последний кадр
 
@@ -1834,7 +1839,7 @@ anim-first-frame-last = Первый или последний кадр
 
 # The bullet is the line to the parent; a join between any two items is a connection. { $from } and { $to } are items' words.
 # en: e8fb468f67bca1564ff499175d1b146c6ccd5d3a
-outline-named-label = , названная «{ $label }»
+outline-named-label = , с подписью «{ $label }»
 # en: 02d7116f49a426f4a9dba7a6582ae90478795f7d
 outline-book = Книга
 # en: 8f9c05748f1616a4649174a8917da3ee5f3217e5
@@ -1864,7 +1869,7 @@ common-chosen-items = Выбранные пункты
 # en: b65463cb6a42a17de514acc4659f7fd331e0876a
 outline-connect = Соединить
 # en: f2ea879cf86d5519e3459e15ee70080a4a1306ab
-outline-connect-from-words = Соединить с «{ $words }»
+outline-connect-from-words = Соединить «{ $words }» с…
 # en: abfb16b3d00afef63f7ed53ad9ababbf2328b5d9
 outline-connect-from-to-to = Соединить «{ $from }» с «{ $to }»
 # en: 378e916868a3e40a71abc67a748f7faacc94be85
@@ -1878,7 +1883,7 @@ common-presentation-builder = Конструктор презентаций
 # en: 20dcb3b3184067197035f08a5a3955d51fcd94a3
 common-diagram-maker = Редактор схем
 # en: 0d84b3e5992959bf9adbeef94468228a5827605f
-common-drag-to-move = Тяните, чтобы переместить
+common-drag-to-move = Потяните, чтобы переместить
 # en: 52db9dc3ff903f6d241a91adcbd83848467106c2
 outline-draw-as-mind-map = Показать как карту идей
 # en: 03683dee41f9db7fad6f8d06c6c6bd776b528ba0
@@ -1963,7 +1968,7 @@ outline-agenda = Расписание
 # en: aa73cdd3260a16a41d572c06ee0da42cb4b85286
 outline-by-status = По статусу
 # en: 0e719dcbe720c315d66c977072f10251b56bd994
-outline-nothing-to-do-yet = Пока делать нечего. Здесь появятся пункты с задачей, статусом или сроком.
+outline-nothing-to-do-yet = Пока задач нет. Здесь появятся пункты с задачей, статусом или сроком.
 # en: 064c87e25e9cca38db987bafd98c9fc9b3003456
 outline-line-to-parent = Линия к «{ $parent }»
 # en: 99fec066e5bc2f5acc70261b4b5dd4b171fb491a
@@ -1981,7 +1986,7 @@ outline-last-status-means-done = Последний статус означае�
 # en: 7312a31a2c880f2d456663b6f91ad6da980b3a5e
 outline-take-connection-away = Убрать соединение
 # en: 656e5c87ae5cd391807e13c85fb32635c2d441c2
-outline-tap-item-to-connect-from = Коснитесь пункта, от которого соединить.
+outline-tap-item-to-connect-from = Коснитесь пункта, от которого провести связь.
 # en: 7a717eefe223e502e86655b5bf8eb999b867a9dc
 outline-tap-item-to-connect-words = Коснитесь пункта, с которым соединить «{ $words }».
 # en: 6ca2aebe7601f4f49f7f7df1ac23a0ac4a39abbc
@@ -2014,7 +2019,7 @@ outline-arrow-to-parent = стрелка к родителю
 # en: 54406ea0a263efcf4d3204fff2200f7f4d982c90
 outline-arrows-both-ways-lowercase = стрелки в обе стороны
 # en: 0048342aeabb8b2918689354650579bb2108a957
-outline-e-g-owns-feeds-reports = напр.: владеет, питает, подчиняется
+outline-e-g-owns-feeds-reports = напр.: владеет, снабжает, подчиняется
 # en: e7292866259d82c2071011b0e5de8b80407998e7
 outline-item-above = пункт выше
 # en: 973c239ffbd8d0522cea9cfa9e2664d2a96a2e01
@@ -2027,7 +2032,7 @@ outline-decision-tree = Дерево решений
 # en: c59b4e8c614eaaf02a0ac81499bc50947192118e
 outline-family = Семья
 # en: 3ac1f9e665cb59f3a08ee0fba150dbbf4aab85a8
-outline-five-minute-retirement-toast-opening = Пятиминутный тост на проводах на пенсию: вступление, три истории, сам тост, у каждой части на строке время.
+outline-five-minute-retirement-toast-opening = Пятиминутный тост на проводах на пенсию: вступление, три истории, сам тост, у каждой части своё время.
 # en: 9ed550a11b44d369413c1b004a5008d3c127a6c1
 outline-novel = Роман
 # en: 35c9710d58daeb1aebb2143cfaeda278f0f67311
@@ -2039,33 +2044,33 @@ outline-speech = Речь
 # en: f081caaa6b5cd7b0858a4a87cc6f81bdb215fd30
 outline-syllabus = Программа курса
 # en: 5b163ae0d9a3fd9b5ab6a8b6c27374091ceb25de
-outline-ten-week-course-when-and = Десятинедельный курс: когда и где, пронумерованная тема на неделю, как оцениваются и что читать.
+outline-ten-week-course-when-and = Десятинедельный курс: когда и где, пронумерованная тема на неделю, как ставятся оценки и что читать.
 # en: 9cea5f42a5742d9eef722836a7a7b59c6a5c0c5a
-outline-thesis-two-arguments-with-their = Тезис, два довода с доказательствами, возражение и ответ на него, и выход.
+outline-thesis-two-arguments-with-their = Тезис, два довода с доказательствами, возражение и ответ на него, и вывод.
 # en: e5f2a2c3f76b55d5786f1c311773def62d6920f3
 outline-essay-plan = План эссе
 # en: d926d538e1be8112e81292507985514feac5e4c4
 outline-draw-as-family-tree = Показать как семейное дерево
 # en: bfef6f97dfb8178f726a96b8861bc2536e8c6fb4
-outline-five-days-in-lisbon-packed = Пять дней в Лиссабоне, вещи по категориям и что сделать, прежде чем закрыть дверь.
+outline-five-days-in-lisbon-packed = Пять дней в Лиссабоне: вещи по категориям и что сделать перед выходом из дома.
 # en: 987acdf86bb6a373c995aa374c004bb21bf2e576
-outline-indoors-or-out-for-saturday = Рынок в субботу, в помещении или на улице: ответы на каждый вопрос на строках, да и нет.
+outline-indoors-or-out-for-saturday = Субботний рынок: в помещении или на улице? Ответы на каждый вопрос на своих строках, да и нет.
 # en: 61390a6b5d7d9268827d91b4a818c6a5fbe2011c
-outline-no-internet-at-home-question = В доме нет интернета: вопрос на каждом шаге, да или нет, до звонка, который нужно сделать.
+outline-no-internet-at-home-question = Дома нет интернета: вопрос на каждом шаге, да или нет, вплоть до того, куда позвонить.
 # en: b431e4b41d5021ff680bdee33aebda8738cec5b0
 outline-packing-list = Список вещей в дорогу
 # en: 013532bb7e7d08afa22a3149f8e74b5ee4d9eaf5
-outline-parts-and-chapters-of-book = Части и главы книги идей, под каждой главой строка о том, что она доказывает.
+outline-parts-and-chapters-of-book = Части и главы научно-популярной книги, под каждой главой строка о том, что она доказывает.
 # en: 5f646cfc8f40ae2515c9d774ae5ad523f524b998
-outline-people-and-three-acts-of = Герои и три акта из глав, в каждой что происходит, со связями там, где человек меняет главу.
+outline-people-and-three-acts-of = Герои и три акта из глав, в каждой что происходит, со связями там, где герой меняет ход главы.
 # en: dbb00953c7a1565bffce71190cfb90220362c471
-outline-question-method-budget-that-adds = Вопрос, метод, бюджет, который сам складывается, график, риски и чтение.
+outline-question-method-budget-that-adds = Вопрос, метод, бюджет, который считается сам, график, риски и литература.
 # en: 57b065618d9af543d6fcc5085edd94aa723f8403
-outline-three-generations-and-next-each = Три поколения и следующее, у каждого годы жизни, рисуется как семейное дерево из меню.
+outline-three-generations-and-next-each = Три поколения и следующее, у каждого годы жизни; через меню можно показать как семейное дерево.
 # en: 285ec850c11d78bac10f6bfa31b69a37f1b257c9
 outline-troubleshooting = Устранение неполадок
 # en: c126bf3ee80a183d7c300cd69a01e39ab7dd8e53
-outline-who-works-for-whom-at = Кто на кого работает в пекарне на девять человек, у каждого должность, рисуется как оргструктура из меню.
+outline-who-works-for-whom-at = Кто на кого работает в пекарне на девять человек, у каждого должность; через меню можно показать как оргструктуру.
 # en: 0c6266451117f0382231513e4c30d38fb976086e
 outline-pdf-sections-and-bullets = PDF: разделы и пункты
 # en: 32897da2f696f1ddc73da9ef0575827530a80b1a
@@ -2081,7 +2086,7 @@ deck-choirs-winter-concert-welcome-both = Зимний концерт хора: 
 # en: a816093d69f08b81c457d818e6d1bd72e0915b10
 deck-lesson = Урок
 # en: e2d04797e440ee0933d032a29cfbfad5edbc99c7
-deck-lost-pet-poster-in-red = Плакат о пропавшем питомце в красном: имя, как она выглядит, где её видели, номер для звонка.
+deck-lost-pet-poster-in-red = Объявление о пропавшем питомце в красных тонах: кличка, как она выглядит, где её видели, номер для звонка.
 # en: 4d44cafa1d032ca3ceda90fa9830717ea5cf8491
 deck-morning-workshop-schedule-checklist-of = Утренний мастер-класс: расписание, чек-лист того, что взять с собой, шаги и куда идти дальше.
 # en: 7dc13283809d7ed9c506873aee1486fd988cfe5c
@@ -2093,13 +2098,13 @@ deck-product-in-sentence-what-it = Продукт одним предложен�
 # en: a46e6eb74ae783d7eb35ae76afc5ab984683886f
 deck-trivia-night-in-four-rounds = Вечер викторины в четыре раунда, таблица результатов и ответы на последнем слайде.
 # en: efebc637859160a6f694e66576eebb294de14712
-deck-residents-meeting-about-new-playground = Собрание жильцов о новой детской площадке: зачем, что предлагается, бюджет кругом, когда, как высказаться.
+deck-residents-meeting-about-new-playground = Собрание жильцов о новой детской площадке: зачем, что предлагается, бюджет круговой диаграммой, когда, как высказаться.
 # en: 02e7a62fc65ed26cb0751706a5ea8f5783414eda
 deck-science-lesson-on-chalkboard-aims = Урок естествознания на меловой доске: цели, что ребята знают, модель, проверка, домашнее задание; заметки учителя под каждым слайдом.
 # en: f3a66c7b2a6ebda85ea74938fce4c397eae2a131
 deck-seed-pitch-in-eight-slides = Питч для первого раунда в восьми слайдах: проблема, продукт, рост на диаграмме, бизнес, команда, запрос.
 # en: aab8da6eadee157bba3937e9dc00741cfe48b13f
-deck-bike-shops-quarter-for-its = Квартал магазина для партнёров: выручка на диаграмме, удачи и промахи, важные цифры, следующий квартал.
+deck-bike-shops-quarter-for-its = Квартал веломагазина для партнёров: выручка на диаграмме, удачи и промахи, важные цифры, следующий квартал.
 # en: d0fa5e5696edaf949dfe9e739a7a2eef0d433ae2
 deck-small-story-in-panels-about = Маленькая история в картинках о том, как одолжить что-то соседу.
 # en: 6c1ff81a2445a9eab1616588060b483cd5b6cde8
@@ -2133,7 +2138,7 @@ deck-town-hall-notice = Объявление для жильцов
 # en: 14444c384d263fff25ba48b195abb55def791b75
 deck-trivia-night = Викторина
 # en: 0377beb012ed13e1986227ef8915aeab709ad5d9
-deck-wedding-slideshow = Свадебный слайд-шоу
+deck-wedding-slideshow = Свадебное слайд-шоу
 # en: f34f4184c545fd4fec60bbc441ead88d1f1fdd1b
 deck-workshop-agenda = Повестка мастер-класса
 # en: e4c8d951f1cc300d96873c7cfc850ad0f0ddaab4
@@ -2157,7 +2162,7 @@ deck-big-icon = Большой значок
 # en: 5298d08bb7ae7d01f4efcdbb94ff03fc487fd11c
 deck-fade = Затухание
 # en: 38d13bda5c40afc32d629f81dec6c156cbea328e
-common-cut = Резкая смена
+common-cut = Вырезать
 # en: a5d5b46a7720824b51da4be0af97f5cfd1168cd0
 deck-slide = Сдвиг
 # en: 9b3cbed5c490c07473546a88768ba29b787e9e52
@@ -2223,11 +2228,11 @@ deck-format-format = Формат: { $format }
 # en: f16eadab2a72ff13044cc806dbcf2c117b32244f
 deck-printing = Печать
 # en: d5939283a7a53a72f09e4f327bc22f2872b64257
-deck-one-sided = С одной стороны
+deck-one-sided = Односторонняя
 # en: 256dd8b8869a6c72f553a2905aef393f2b39df0d
 deck-fold-and-cut = Сложить и разрезать
 # en: 8cb849ee6e612fbad8641d053d8e66b2ba560a1b
-deck-two-sided = С двух сторон
+deck-two-sided = Двусторонняя
 # en: b82a2c3204554a9c0a82b44aa7eb5f94916b1c13
 deck-cut-and-nest = Разрезать и вложить
 # en: 6e19d7b7deffd2974f632ec3e697646de978130e
@@ -2342,9 +2347,9 @@ deck-cut-along-dashes-fold-along = разрежьте по пунктиру · �
 # en: b0ccda7ec0d37c14d00e5e9f57eeadcb1045ebd7
 deck-print-it-double-sided-on = Печатайте с двух сторон на бумаге Letter, переворачивая по длинной стороне, в натуральную величину. Разрежьте по пунктиру, положите верхнюю половину на нижнюю и сложите их вместе пополам.
 # en: 7d7f71d31c8968c0555f49f9430133796d626c4f
-deck-print-it-on-one-side = Печатайте с одной стороны на бумаге Letter, в натуральную величину. Сложите пополам вдоль, потом ещё раз на четверти; разрежьте пунктир посередине; сведите концы и сложите книжечкой.
+deck-print-it-on-one-side = Печатайте с одной стороны на бумаге Letter, в натуральную величину. Сложите пополам вдоль, потом ещё раз на четверти; разрежьте по пунктиру посередине; сведите концы и сложите книжечкой.
 # en: ce30358159a7953f092af19e48f7dad47608c83d
-deck-print-it-double-sided-on-letter-paper-flipping-on-short-edge-at-actual-size-stack-sheets-in-order-first-on-outside-and-fold-them-together-down-middle = Печатайте с двух сторон на бумаге Letter, переворачивая по короткой стороне, в натуральную величину. Сложите листы по порядку, первый снаружи, и сложите их вместе пополам.
+deck-print-it-double-sided-on-letter-paper-flipping-on-short-edge-at-actual-size-stack-sheets-in-order-first-on-outside-and-fold-them-together-down-middle = Печатайте с двух сторон на бумаге Letter, переворачивая по короткой стороне, в натуральную величину. Положите листы по порядку, первый снаружи, и согните их вместе пополам.
 # en: 96bf1a2ba3e6d649669efc225b3104521735ff25
 deck-print-it-double-sided-on-letter-paper-flipping-on-short-edge-at-actual-size-fold-right-third-in-then-left-third-over-it-front-is-on-top = Печатайте с двух сторон на бумаге Letter, переворачивая по короткой стороне, в натуральную величину. Сложите правую треть внутрь, затем левую треть поверх неё: обложка сверху.
 # en: 6d4cc8d4405840522000283a7e419c1c93e89392
@@ -2383,7 +2388,7 @@ deck-powerpoint-pptx = PowerPoint (PPTX)
 # en: 7660a22bdc9507edd353dd61198b9aa86488d936
 deck-picture-of-every-slide-zip = Картинка каждого слайда (ZIP из PNG)
 # en: 98a41f54e049532b6032b88d7656348adc178c2a
-deck-animation-of-deck-gif = Видео презентации (GIF)
+deck-animation-of-deck-gif = Анимация презентации (GIF)
 # en: 3bab526d831e1024e6f8e7d197f9c3d72cc4f0e4
 deck-film-of-deck-webm = Видео презентации (WebM)
 
@@ -2393,7 +2398,7 @@ deck-title-agenda-three-points-with = Название, повестка, три
 # en: 60c974074604818e661eff7940285669d1496647
 deck-status-update = Статус проекта
 # en: 34714be3698c31c72afb1d4d4b8a7b0c69f30fc5
-deck-done-and-next-side-by = Сделано и дальше рядом, потом риски, потом просьбы.
+deck-done-and-next-side-by = Сделанное и следующие шаги рядом, потом риски, потом просьбы.
 # en: e946db45d2689df95cbac9f8137664409c51f5d8
 deck-proposal = Предложение
 # en: 52ab7599cc26432ef9b492b401d04eee1ca5e699
@@ -2401,9 +2406,9 @@ deck-what-you-heard-what-you = Что вы услышали, что предла
 # en: b8e1f28fed63f996c8915470a7ee9ce8aef9b75f
 deck-eight-small-pages-from-one = Восемь маленьких страниц из одного листа бумаги: распечатайте, сложите и разрежьте или читайте на телефоне, листая касанием.
 # en: 31b11edde49cd1bd80a198f240426c5b2d8cd65f
-deck-booklet-of-half-letter-pages = Брошюра из страниц в полписьма, от восьми до двадцати, свёрстанная для печати, вкладывания и сгибания.
+deck-booklet-of-half-letter-pages = Брошюра из страниц в пол-листа Letter, от восьми до двадцати, свёрстанная, чтобы распечатать, вложить и сложить.
 # en: ae07389f7b537dbd7eb3007d3f2b36ca3c35c404
-deck-trifold-brochure-six-panels-on = Буклет с тремя сгибами: шесть панелей на двух сторонах листа, каждая там, где нужно по сгибу.
+deck-trifold-brochure-six-panels-on = Буклет в три сложения: шесть панелей на двух сторонах листа, каждая на своём месте для сгиба.
 # en: 88c71dbca35b2e7c498adce21174cb1102af384e
 deck-mini-comic-panels-with-picture = Мини-комикс: кадры с картинкой, репликой в облачке и подписью, сложенный из одного листа.
 # en: e610bb7f6eac1dd5622723ccc779e31e9d9ed190
@@ -2411,7 +2416,7 @@ deck-poster-or-flyer-headline-and = Постер или листовка: заг
 # en: ec024ffdc152af00e77f7219a5293545bdd3bb65
 deck-name-badges-for-meetup-one = Бейджи для встречи, по странице на человека, по шесть на лист, готовые к разрезанию.
 # en: 9a51ba7142888f3e0199896de291a1fb4b4298f1
-deck-edit-this-deck = Править эту презентацию
+deck-edit-this-deck = Изменить эту презентацию
 # en: d5947c525ed0d53dce794385a2cc1cd6e2459dbd
 deck-new-slide = Новый слайд
 # en: 720856fcb53d62f79a364c36d8cd2314121430a6
@@ -2437,7 +2442,7 @@ cal-week-earlier = На неделю раньше
 # en: 5e63d8681fdc3170ed99fc3abcc3668620f299ca
 cal-week-later = На неделю позже
 # en: ab455a2fb151da1c7d0c39c7534c2f935e028ce9
-cal-weekend-of-sessions-at-set = Выходные с выступлениями в точное время, поздний сет за полночь.
+cal-weekend-of-sessions-at-set = Выходные с выступлениями по расписанию, поздний сет после полуночи.
 # en: 114574336ac7883aebd0653b3fc5e82f9262dc86
 cal-all-day = Весь день
 # en: cbf28df446643f9968f7fe68968bca51be5cf792
@@ -2451,9 +2456,9 @@ cal-days-and-times-on-month = Дни и время на месяц, год ил�
 # en: 9ccd3e7bb11493f1e93950f7db9148a4794037b7
 cal-done = Готово, %
 # en: a7028454f240815938eaf701823b7d55dbaf98a9
-cal-edit-event = Править событие
+cal-edit-event = Изменить событие
 # en: 8a4d4e6eb9a367d616b8a4cbfa2792068482e884
-cal-edit-task = Править задачу
+cal-edit-task = Изменить задачу
 # en: 99570f85bb2bae0dbe3e8f2f3d6d6f765ee7c47e
 cal-choose-task = Выбрать: { $task }
 # en: 72b4644a41881ce4e156ce3283119c74f598cbea
@@ -2518,7 +2523,7 @@ cal-no-tasks-yet = Задач пока нет
 # en: 3b2069a4f745374e50f8992752888822ce851db4
 cal-no-tasks-yet-insert-task = Задач пока нет. Добавьте задачу.
 # en: 855dec4a50f5117b51b7f32b59771f28855942ac
-cal-nothing-on-calendar-yet-tap = В календаре пока ничего нет. Коснитесь дня или протяните через несколько.
+cal-nothing-on-calendar-yet-tap = В календаре пока ничего нет. Коснитесь дня или проведите по нескольким.
 # en: 27d7bd5f744f76fc1ad85bbe975e9fdca473eaeb
 cal-nothing-this-month = В этом месяце ничего нет.
 # en: 46a299215300b3a0de6931f926bc6b0f2283eb99
@@ -2546,7 +2551,7 @@ common-stops = Прекращается
 # en: 480b9be2834a2278919632171f788a9a80d5d743
 cal-same-dates-as-gantt-chart = Те же даты в виде диаграммы Ганта
 # en: 7ea6dec71584012ab4044cc464dc601741ff2c50
-cal-this-calendar-is-written-in = Этот календарь записан по времени: { $zone }.
+cal-this-calendar-is-written-in = Время в этом календаре указано по поясу { $zone }.
 # en: e10c10f818ac8e510b74062cde201eae4e8d8c66
 cal-this-calendar-names-no-time = У этого календаря нет часового пояса, поэтому время показано в вашем ({ $zone }).
 # en: 1b4785331db3b08cd8e3cfa4bd36216731a79e54
@@ -2556,7 +2561,7 @@ cal-time-zone = Часовой пояс
 # en: bf5efde33adface92f37d1888e904ab70c9ce272
 cal-times-in-zone = Время: { $zone }
 # en: 650642b1d6b4b1ecc4ad7d38bbdf110d582c4baf
-cal-times-or-on = раз, или до
+cal-times-or-on = раз или до
 # en: 69bd4ef9fbd0894a22759c3766b859defbdedbc8
 cal-view = Вид
 # en: 97211a8888128314d9ca34d1005f08cb83ed5d9c
@@ -2568,7 +2573,12 @@ cal-color-stands-for = { $color } означает
 # en: 63e5df0eb2fcd351c1d31f23cdf3bf4816e3def5
 cal-every-until-date = { $every } до { $date }
 # en: 519c383aaa892cfff62e992bb947ec79ed5dd57d
-cal-every-n-times = { $every }, { $n } раз
+cal-every-n-times = { $every }, { $n ->
+        [one] { $n } раз
+        [few] { $n } раза
+        [many] { $n } раз
+       *[other] { $n } раза
+    }
 # en: d69842d42eceddee8c62019d22d4f7ca383cf847
 cal-n-days = { $n ->
         [one] { $n } день
@@ -2584,11 +2594,11 @@ cal-bakerys-posts-and-newsletters-through = Посты и рассылки пе�
 # en: 91dad831b9be334af672cd6052e37dedde16d06e
 cal-youth-soccer-season-practice-every = Сезон детского футбола: тренировки каждую неделю, домашние и выездные матчи в своих цветах, плей-офф.
 # en: d7bad656f3b06c3ee989a1f2960214ee15b2f788
-cal-small-teams-time-off-public = Отпуска небольшой команды, праздники и рождественские каникулы в одном календаре.
+cal-small-teams-time-off-public = Отпуска небольшой команды, праздничные дни и закрытие на Рождество в одном календаре.
 # en: cd6036648af6d0d5614f0ec65eb732300281e059
-cal-community-garden-plots-year-when = Год на дачном участке: когда сеять, сажать, собирать и обрезать, по кругу каждый год.
+cal-community-garden-plots-year-when = Год на участке общественного огорода: когда сеять, сажать, собирать и обрезать, по кругу каждый год.
 # en: 1b04e3c7d585a3d6297852d158919c9833538a01
-cal-fall-term-from-first-day = Осенняя четверть от первого дня до Рождества: каникулы, кружки, поездка, родительское собрание.
+cal-fall-term-from-first-day = Осенний семестр от первого дня до Рождества: дни без занятий, кружки, экскурсия, встречи родителей с учителями.
 # en: f80b28faa22109c4d14cf7eb7994768abca09ca8
 cal-bills-and-renewals = Счета и продления
 # en: 2223281ed9222907f9d00ef35ab71df263d06e46
@@ -2598,7 +2608,7 @@ cal-content-schedule = График публикаций
 # en: 072b8e4f3e23cdd58cf0a4b3f5c47437127f131b
 cal-editorial-calendar = Редакционный календарь
 # en: 26f861d8db0e97575e814ce9799eaf1bcddec28b
-cal-every-autopay-on-its-day = Каждый автоплатёж в свой день месяца, ежегодные продления и срок уплаты налога.
+cal-every-autopay-on-its-day = Каждый автоплатёж в свой день месяца, ежегодные продления и сроки уплаты налогов.
 # en: 2185215436152ae5c1d9429385551e46587c7af8
 cal-garden-calendar = Календарь садовода
 # en: 624b49bb82a8487f3ff77d2098b88b1e1ceb6695
@@ -2606,11 +2616,11 @@ cal-vacation-planner = План отпуска
 # en: 1ceb786961989ab69eda934e08645ecb19fe5357
 cal-league-schedule = Расписание лиги
 # en: 5a94fcfb3e67abfdd4e3bab4c3d9a2683801245a
-cal-school-term = Учебная четверть
+cal-school-term = Учебный семестр
 # en: 2f88af7308e60cbfbe5482a13acec0983b020e09
 cal-training-plan = План тренировок
 # en: 5ef83b6b17b42f15d49c31f33e46ca8d4427e6ae
-cal-twelve-weeks-to-half-marathon = Двенадцать недель до полумарафона как график: база, нагрузка, пик, снижение, забег.
+cal-twelve-weeks-to-half-marathon = Двенадцать недель до полумарафона в виде графика: база, нагрузка, пик, снижение, забег.
 # en: fdab2603fde2488e117cca6335baee3c481231b9
 cal-two-days-of-talks-and = Два дня докладов и мастер-классов по часам, свой цвет у каждого зала.
 # en: c8bbdc31a9be182914dd6207c08837389224b33a
@@ -2618,7 +2628,7 @@ cal-two-issues-of-quarterly-from = Два номера квартального 
 # en: 0e4753002a6b042b841f5296f0cdb7c71110377b
 cal-volunteer-schedule = График волонтёров
 # en: f6003458ea2ce51dfa0efa7d0819ccb57ac35bd1
-cal-who-does-which-shift-color = Кто на какой смене, свой цвет у каждого, в банке продуктов перед Рождеством.
+cal-who-does-which-shift-color = Кто на какой смене, свой цвет у каждого, в продуктовом банке перед Рождеством.
 
 ## the Diagram Maker
 
@@ -2658,7 +2668,7 @@ diagram-set = Множество
 diagram-thing = Элемент
 # The picture, and the line editor over a thing
 # en: c2e45b49b02d2ac7e1baf25d9d0a2f5c257281ad
-diagram-tap-empty-space-for-thing = Нажмите на пустое место, чтобы добавить элемент. Чтобы соединить два, нажмите «Соединить» и оба элемента или перетащите один на другой.
+diagram-tap-empty-space-for-thing = Нажмите на пустое место, чтобы добавить элемент. Чтобы соединить два, нажмите «Соединить», затем оба элемента, или перетащите один на другой.
 # en: d4b16450c157188d2cf2e3968faee3709ebeca28
 diagram-tap-here-to-add-first = Коснитесь здесь, чтобы добавить первый элемент: { $thing }.
 # en: ccdb7bfa4c6b71a69f1931253fe6f892a2baf89b
@@ -2695,7 +2705,7 @@ diagram-empty = пусто
 # en: 8b0bc4ee7e0e6e592c5e8812fef8883b9cbc66de
 diagram-empty-kind-to-start-from = Пустая схема «{ $kind }» для начала.
 # en: cc9cfe196eaec8bbe041a0f648039cf31df71bc7
-diagram-browser-api-database-cache-and = Браузер, API, база данных, кэш и обработчик, и как они общаются.
+diagram-browser-api-database-cache-and = Браузер, API, база данных, кэш и обработчик, и как они взаимодействуют.
 # en: 87796704431b42da8083f869f5ed707dae8cf8fe
 diagram-building-project = Строительный проект
 # en: 5accd00ffa799aafee66a6e2e7a77c3e89abdd38
@@ -2707,7 +2717,7 @@ diagram-small-company = Небольшая компания
 # en: 6dea73ecffb81e3db543a664a3ba6e602d58683b
 diagram-wedding-dinner = Свадебный ужин
 # en: 1086ae322f0484af87b4a35b9537b35ad53ec68b
-diagram-year-of-dates-from-plans = Год дат: от одобрения планов до открытия дверей.
+diagram-year-of-dates-from-plans = Год в датах: от одобрения планов до открытия дверей.
 # en: c75834baf2bd8482dbb5a822f4466908244e65fa
 diagram-cats-and-dogs = Кошки и собаки
 # en: 9e4600a93df1d0ffd290278244beed2111ac5cff
@@ -2717,7 +2727,7 @@ diagram-fast-cheap-good = Быстро, дёшево, хорошо
 # en: 77373004b00a68bf2cad476daa1ef0af2a7e26f0
 diagram-four-tables-and-who-sits = Четыре стола и кто сидит за каждым.
 # en: 1db47899ccb6eda1f1c46cee3c73acb1394c00ca
-diagram-from-lovelace-to-now-spaced = От Лавлейс до наших дней, расставлено по годам, с эпохой внизу.
+diagram-from-lovelace-to-now-spaced = От Ады Лавлейс до наших дней, по годам в масштабе, с эпохами внизу.
 # en: c973a2e43350a1c09697af1bd39a17f3cfba2c36
 diagram-from-order-to-doorstep = От заказа до двери
 # en: 91519d37fd9fe6f0c40b0429e0ed9f8eb8206006
@@ -2749,7 +2759,7 @@ diagram-family-with-godmother = Семья с крёстной
 # en: c164cf0f878062c2b43b69bf4c1de2c3d6a1f94d
 diagram-principal-her-assistant-principals-classroom = Директор, её заместители, классные руководители и завхоз.
 # en: f25d2f240d3a52d5361d9b6dd4d8561290566159
-diagram-move-to-lisbon-by-march = Переезд в Лиссабон к марту: документы, квартира, работа и жизнь, и что должно быть первым.
+diagram-move-to-lisbon-by-march = Переезд в Лиссабон к марту: документы, квартира, работа и жизнь, и что нужно сделать сначала.
 # en: d2586903dd907f55b8076edbe00b87f4e45ab92f
 diagram-elementary-school = Начальная школа
 # en: 3eff234615aa3d538d44f11142e266d62b44ef43
@@ -2757,7 +2767,7 @@ diagram-restaurant-kitchen = Кухня ресторана
 # en: 3fecd5a70de57bb7748a775d7d4c6072bace1e50
 diagram-router-and-everything-on-it = Роутер и всё, что к нему подключено: ноутбук, телефон, принтер, телевизор и дверной звонок.
 # en: 949c596fb3177561b6f2515cbc92b6b68a4292c2
-diagram-team-by-its-skills-design = Команда по навыкам: дизайн, тексты и код, и кто умеет больше одного.
+diagram-team-by-its-skills-design = Команда по навыкам: дизайн, тексты и код, и кто умеет больше чем одно.
 # en: eeb20483d989d9deef42a5ae150f171af0bc6201
 diagram-expense-report = Отчёт о расходах
 # en: ded9774849cab88a3dd08936595ffe270dd397a2
@@ -2771,7 +2781,7 @@ diagram-eight-days-in-july-1969 = Восемь дней июля 1969 года, 
 # en: ce31ba59543ea424a6019bc67976ace141d62d09
 diagram-four-games-table-each-and = Четыре игры, по столу на каждую, и кто во что играет.
 # en: 9d35a9836a6bb4c6180f6c2880c8c19c22ed4ea0
-diagram-from-photo-of-receipt-to = От фото чека до расчётного листка, мимо руководителя и бухгалтерии.
+diagram-from-photo-of-receipt-to = От фото чека до расчётного листка, через руководителя и бухгалтерию.
 # en: 1f1489585228c4bf2d9599bdff9fef70f59b4a60
 diagram-moving-abroad = Переезд за границу
 # en: a04755781fd967ec44d2f47f1ebf6ff83b2fe909
@@ -2783,7 +2793,7 @@ diagram-sea-clouds-mountains-rivers-groundwater = Море, облака, гор
 # en: a1da7a04adf4a0189219b39bddb2518c44ba382f
 diagram-brontes = Сёстры Бронте
 # en: 0c2311a818005e4508a11aa6a888f61a45bd9a3b
-diagram-brigade-under-head-chef-front = Бригада под началом шеф-повара, зал рядом.
+diagram-brigade-under-head-chef-front = Бригада под началом шеф-повара, рядом — работники зала.
 # en: 0c62114de8628cfe00011bba9cc35f003279ac83
 diagram-house-network = Домашняя сеть
 # en: 1fcf7cc436a073faa316df56cf1a4d3ec2b87d6e
@@ -2813,7 +2823,7 @@ diagram-lanes-name = Название дорожки
 # en: 769bb19e615b7f8e2809e5882e2d05a18f57a531
 diagram-when = Когда
 # en: b23ea75ecf303b9756682c84abecebc7a010f2b1
-diagram-tap-person-to-type-on = Нажмите на человека, чтобы изменить. Добавьте + и имя для супруга, Shift+Enter — годы, Enter — следующий. Перетащите одного на другого, чтобы поставить его ниже. «Соединить» рисует пунктир.
+diagram-tap-person-to-type-on = Нажмите на человека, чтобы изменить. + и имя добавляют супруга, Shift+Enter — годы, Enter — следующий. Перетащите одного на другого, чтобы поставить его ниже. «Соединить» рисует пунктир.
 # en: 14e56ce6d5f3d8d56d2ce979bf2eb20aaa9dd93d
 diagram-tap-empty-space-for-table = Нажмите на пустое место, чтобы добавить стол. Нажмите на стол или человека, чтобы изменить. Запятая начинает следующего гостя. Перетащите человека за другой стол.
 # en: 7049f105f3a76be9cb8c6d7b74eb3edf60d9a7da
@@ -2965,9 +2975,9 @@ trip-presenting-next-stop = Следующая остановка (показ)
 # en: a802f6e93c981ee6dd02df366f0141ca3aa085e0
 trip-presenting-stop-before = Предыдущая остановка (показ)
 # en: 3b14d20764a1fdef5ee74f4defab4ff20b0e7cce
-trip-put-stops-on-calendar-day = Поместить остановки в календарь, по дню на каждую
+trip-put-stops-on-calendar-day = Перенести остановки в календарь, по дню на каждую
 # en: 16fa5ad4958332a6bbb1eae6d1a8c6ee6f2c7752
-trip-first-last = Первый или последний
+trip-first-last = Первая или последняя
 # en: 0aa341109cff3c75e204930fdeac94f52278bb67
 trip-next-stop = Следующая остановка
 # en: 35bc0362a4899961a0e878990611c13021c1e549
@@ -2976,7 +2986,7 @@ trip-stop-before = Предыдущая остановка
 ## shared: the Word Processor's looks, the header's Home, a money column's currency
 
 # en: 958de540438a0fa530d47d2c072d0d9c22cd2af5
-looks-typewriter = Пишмашинка
+looks-typewriter = Машинопись
 # en: a5c78a86fab1c02cd981c23b8bad5dad3e7438e3
 looks-serif = С засечками
 # en: 70f8bb9a8a5393ef080507a89e4b98d139000d65
@@ -2990,9 +3000,9 @@ looks-currency = Валюта
 calc-calculation = вычисление
 # The tape is the list of lines worked out, as on a printing calculator. 'Calculator' and 'Numbers' are above.
 # en: ab4ea6f8fe06812a128297560bee7aff1be0c040
-calc-calculator-that-shows-its-work = Калькулятор, который хранит ход вычислений: имена, единицы и пересчёты, и графики y = f(x).
+calc-calculator-that-shows-its-work = Калькулятор, который показывает ход вычислений: имена, единицы и пересчёты, и графики y = f(x).
 # en: f146f8e93fc9312f6b8003b048cd24d1574469af
-calc-tape-text = Лента как текст
+calc-tape-text = Лента текстом
 # The bar
 # en: 9a7405ebcedde5be8d095a986ea8794e19ee84e2
 calc-graph = График
@@ -3045,7 +3055,7 @@ calc-take-away-line-n = Удалить строку { $n }
 # en: fc9ce14b28c6f2c3b72caf056ca604b2b96f7d2b
 calc-sum = Сумма
 # en: fdb6ecce95257d64ccde93310bf9a9adc8ad249e
-calc-type-or-tap = Печатайте или нажимайте
+calc-type-or-tap = Введите или нажмите
 # same
 # en: e1745e3e21e84b24c379af6f45a18e1a21e56577
 calc-y = y =
@@ -3090,7 +3100,7 @@ calc-cups-ovens-spoons-and-weights = Чашки, духовки, ложки и �
 # en: 267b3d4696b05cc65039fcf4afb8cd9548ed5a29
 calc-scaling-recipe = Пересчёт рецепта
 # en: a0e9dcbc29ed1364a4891c3671dd43675af64d11
-calc-banana-bread-for-eight-made = Банановый хлеб на восьмерых, сделанный на двенадцать: каждое количество умножено на полтора.
+calc-banana-bread-for-eight-made = Банановый хлеб: рецепт на восьмерых, пересчитанный на двенадцать, каждое количество умножено на полтора.
 # en: 8639704eb84800c829b41e6fcd833d686dcb41f6
 calc-unit-conversions = Единицы измерения
 # en: 2aef2060ccb74d32576f5b1f936372bdd97252f3
@@ -3102,7 +3112,7 @@ calc-trip-priced-in-euros-and = Поездка в евро, пересчитан
 # en: 6645ae7e46c209b7ba6f5fb3b6aa707395a2c3d2
 calc-fuel-for-trip = Бензин на поездку
 # en: e2d3235c5cfd9ceffb4e54f0635e4f3841b0c0e1
-calc-boston-to-montreal-and-back = Бостон — Монреаль и обратно: мили, мили на галлон, цена, четырьмя способами.
+calc-boston-to-montreal-and-back = Бостон — Монреаль и обратно: мили, мили на галлон, цена на четверых.
 # en: bb294d581aa3512dfdaf06cb5705338f026425ff
 calc-paint-for-room = Краска для комнаты
 # en: 8899142eaeb03e3a2cfc17f5e68f1977478e2ce5
@@ -3124,7 +3134,7 @@ calc-dose-by-weight = Доза по весу
 # en: a2cdd7739e2ff2b4f1ee78074c5c7981d1b877f9
 calc-milligrams-kilogram-turned-into-milliliters = Миллиграммы на килограмм, пересчитанные в миллилитры сиропа; каждую дозу проверяйте у фармацевта.
 # en: 4699da98e2d343e04aa2465082aedd4d5053aa11
-calc-electricity-for-appliance = Электричество для прибора
+calc-electricity-for-appliance = Расход электроэнергии прибора
 # en: d1b1126c73c13b523ce30bd2f563ad1a7b1c0210
 calc-watts-hours-day-and-price = Ватты, часы в день и цена киловатт-часа: сколько обогреватель стоит в месяц.
 # en: 96aeea666f6bd696d83ef3dee80fff1fcc3ff896
@@ -3134,11 +3144,11 @@ calc-24-000-at-6-9 = $24,000 под 6,9% на шестьдесят месяце�
 # en: 3c48bd272b7ad823e277ca649218ae107832bca4
 calc-compound-interest = Сложный процент
 # en: ce79ef1a5e051c360028ef440ccc8258554abe0a
-calc-5-000-and-200-month = $5,000 и $200 в месяц под 5% на десять лет, против вложенного.
+calc-5-000-and-200-month = $5,000 и $200 в месяц под 5% на десять лет в сравнении с вложенным.
 # en: 813161b07c2ed5cab82b09f8c31b3810800bcd26
 calc-break-even = Точка безубыточности
 # en: bee9b48a097d165fe0d11f7c3a7175019c158c5e
-calc-costs-against-sales-for-coffee = Расходы против выручки для кофейной тележки: где линии пересекаются, столько чашек в день ей нужно.
+calc-costs-against-sales-for-coffee = Расходы и выручка кофейной тележки: где линии пересекаются, столько чашек в день ей нужно продавать.
 # en: a9047269b4f64dbbb2df8503315406b2b33fc4e9
 calc-curve-and-its-slope = Кривая и её наклон
 # en: b5f43817a99082555a1fc4891fd2eb5bfaba6e10
@@ -3149,7 +3159,7 @@ calc-waves-adding-up = Сложение волн
 calc-sine-waves-summed-on-their = Синусоиды складываются на пути к прямоугольной волне.
 # The grip on a line of the tape; the bar under lines chosen whole.
 # en: fd71cff4626f555a0e69c5b6801a591cabd1d173
-calc-choose-line-n-drag-it = Выбрать строку { $n }, потянуть для перемещения
+calc-choose-line-n-drag-it = Выбрать строку { $n }; потяните, чтобы переместить
 # en: dab2e3d9cf8c3bfccd20fa34fac6fc738ce9aba7
 calc-chosen-lines = Выбранные строки
 
@@ -3209,7 +3219,7 @@ open-that-file-is-too-large = Этот файл слишком большой.
 # en: 8f432852569edbf7610713a6554e7a61396327d5
 open-keep-them-on-this-device = Сохранить их на этом устройстве
 # en: c4fe6d8b035f6108e8a7e0037667dacf3d6cca25
-open-nothing-is-saved-on-this = На этом устройстве ничего не сохранено. Сохраните их здесь или откройте один.
+open-nothing-is-saved-on-this = На этом устройстве ничего не сохранено. Сохраните их здесь или откройте один из них.
 # en: 0826daee1d616f7de3a2b205eb2360fcaccc77ef
 open-first = Открыть первый
 # en: 59d36bf6c42ab3ae1481fe62abbc67ffef7a8b22
