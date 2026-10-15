@@ -26,7 +26,7 @@ shell-n-characters-over-link-limit = Символів понад ліміт по
 # en: 1cfbe154225ecb3a01f463f1adde07279f1a454a
 shell-n-characters-over-link-limit-short-link-holds-max = Символів понад ліміт посилання: { $n }; коротке посилання вміщує { $max }
 # en: e7722b7943884e579644a3f5bd2b605afd08a156
-shell-n-characters-over-what-short = Більше, ніж вміщує коротке посилання, на { $n } символів
+shell-n-characters-over-what-short = Символів понад ліміт короткого посилання: { $n }
 # Before a document that lives nowhere but its link (Private, changed) is left for another place: the question and its three answers.
 # en: f0bba930d38a38cacb48e472c8d4856caa4d8fa8
 shell-this-document-lives-in-its = Цей документ не збережено
@@ -171,7 +171,7 @@ drawer-commands = Команди
 # en: b993b0c537190bfc94b21360ac5abe51e56be36f
 drawer-nothing-by-that-name = Нічого не знайдено
 # en: 85773bc941e47b21f6cc345b225265e3144489be
-drawer-add-to-home-screen = Додати на головний екран
+drawer-add-to-home-screen = Додати на початковий екран
 # en: 9b3cbed5c490c07473546a88768ba29b787e9e52
 drawer-size-of-everything = Масштаб
 # en: 943c5ac9fa7766d7c1ebecbc95c4e0d27b4ef9d4
@@ -188,11 +188,11 @@ leave-do-you-trust-this-link = Ви довіряєте цьому посилан
 # en: 8d85feca3f164857fc84014a8f2ed5cc4846d4c9
 leave-you-are-leaving-tiny-little = Ви залишаєте Крихітний офіс і переходите на
 # en: 50ef68d5c205237951dae42aa775a66480171c46
-leave-this-link-writes-email-to = Це посилання створює лист для
+leave-this-link-writes-email-to = Це посилання створює лист на адресу
 # en: 102dce223fdc2f3bbdda71f28108e2a6fdf21710
-leave-this-link-calls = Це посилання телефонує на
+leave-this-link-calls = Це посилання здійснює дзвінок на
 # en: afb8b3199e929e5e9f886fdf382599c9d440c71f
-leave-not-secure-address-what-you = Небезпечна адреса (не HTTPS). Усе, що ви надішлете, можуть прочитати дорогою.
+leave-not-secure-address-what-you = Небезпечна адреса (не HTTPS). Усе, що ви надішлете, можуть прочитати під час передавання.
 # en: 003e4888e77a22c782047c7d26d028c5eca46f1c
 leave-whole-address = Адреса повністю:
 # en: fdb31cf3fb383190c6864d4effd5fd6041b330cb
@@ -203,7 +203,7 @@ leave-go = Перейти
 leave-links-of-this-kind-do = Посилання такого типу тут не можна відкрити.
 # About's last line, a link to the source of the build the site runs: "Running commit abc1234".
 # en: 0eda2175601e6a4148c1c8b3f85c330bc7fbcabf
-leave-running-commit-commit = Працює коміт { $commit }
+leave-running-commit-commit = Поточний коміт: { $commit }
 # en: 45469d1ce86c199fb2984929d6c2e408178f7032
 leave-this-link-hides-characters-in = Адреса цього посилання містить приховані символи.
 
@@ -276,9 +276,9 @@ share-this-link-expires-in-n-minutes = Це посилання спливе че
        *[other] { $n } хвилини
     }
 # en: 04609a8df41f042b261ed7cf06b80c2667badd0e
-share-this-link-n-characters-fits = Це посилання: { $n } символів, вміститься в SMS
+share-this-link-n-characters-fits = Символів у посиланні: { $n }, вміститься в SMS
 # en: 822e1dca627d6149b0263bdae6477ca56c62a36c
-share-this-link-n-characters-too = Це посилання: { $n } символів, задовге для { $where }
+share-this-link-n-characters-too = Символів у посиланні: { $n } — забагато для { $where }
 # en: f9551d11c51a8da0015b0716e3aab327784b2ec2
 share-discord-message = повідомлення в Discord
 # en: 36dec9aa0b166bef869350675231f78529bbabd8
@@ -299,10 +299,10 @@ share-nfc-sticker = NFC-наліпки
 share-some-browsers = деяких браузерів
 # en: 77437a6dfcf7562798d4a066e19fd698b357c1a8
 share-n-short-links-kept-here = { $n ->
-        [one] { $n } коротке посилання залишено тут
-        [few] { $n } короткі посилання залишено тут
-        [many] { $n } коротких посилань залишено тут
-       *[other] { $n } короткого посилання залишено тут
+        [one] { $n } коротке посилання збережено тут
+        [few] { $n } короткі посилання збережено тут
+        [many] { $n } коротких посилань збережено тут
+       *[other] { $n } короткого посилання збережено тут
     }
 # en: fbdda8ea6ae4f71eb78a8bd78fa2746784806ffe
 share-display-link = Посилання для показу
@@ -319,13 +319,13 @@ common-qr-code = QR-код
 # en: 7f8c79bef572d079a2e70de568104a605b4050cf
 common-qr-code-of-this-document = QR-код цього документа
 # en: 5987984bd3953aa88448226f480b1c67ad98ab52
-share-this-document-is-n-bytes = Цей документ важить { $n } байт, а найбільший QR-код вміщує { $max }. Скоротіть його на { $over } байт, і він влізе.
+share-this-document-is-n-bytes = Цей документ важить { $n } байт, а найбільший QR-код вміщує { $max }. Скоротіть його на { $over } байт, і він поміститься.
 # en: 716ebea121ec7b8a4dd9ea47314131122cf0aab1
-share-this-document-is-n-characters = У цьому документі { $n } символів, а коротке посилання вміщує { $max }. Скоротіть його на { $over }, і він влізе.
+share-this-document-is-n-characters = У цьому документі { $n } символів, а коротке посилання вміщує { $max }. Скоротіть його на { $over }, і він поміститься.
 # en: ae5014875f1eec5203f8744323723d2ee679d1cc
 share-expires-after = Спливає через
 # en: 1e1c72c2e33894ad38b820f1d4ed17ef478067be
-share-hour = Година
+share-hour = Годину
 # en: 4286c1f81faa848587ed38925e9b181e939f4998
 share-day = День
 # en: 51e2a8b00255a6db1c49b306e7ac28f2e6ac9a23
@@ -356,17 +356,17 @@ common-short-link = Коротке посилання
 share-new-noun-date-n = Новий: { $noun } { $date } №{ $n }
 # Files, compare, posting and embedding: the agent and sharing surface.
 # en: 1c2edb3104c7f2adce9ad2a77f3622d1beb0059a
-share-mastodon-server-like-mastodon-social = Сервер Mastodon, як mastodon.social
+share-mastodon-server-like-mastodon-social = Сервер Mastodon, наприклад mastodon.social
 # en: 64fbd995d3b6b156ee26ae3c03e6516434c34c12
-share-change = Зміна
+share-change = Змінити
 # en: 2a07ce9a22d8e5dc1031e531518f04e50855319f
-share-copy-embed-code = Скопіювати код вбудови
+share-copy-embed-code = Скопіювати код вбудовування
 # en: c3e1c83e5b4172d3c738e37cb69b76d93ce49b8b
-share-copy-show-link = Скопіювати посилання на показ
+share-copy-show-link = Скопіювати посилання для показу
 # en: ad02e14e2841dfbd22ab2caa12b5541c5b01a53a
 share-embed = Вбудувати
 # en: 4eeede7134d362f371fd18b2d63d3199bb24f01a
-share-embed-code-copied = Код вбудови скопійовано
+share-embed-code-copied = Код вбудовування скопійовано
 # en: 682cbb0f328f16ee213c6b44d7012512b55506b7
 share-opens-deck-already-presenting = Відкриває презентацію одразу в показі.
 # en: 7858ac3ff63354f37161bd349efe11edd13b89cb
@@ -376,11 +376,11 @@ share-post-link = Опублікувати посилання
 # en: 82584c3ce64f57a310db6846c65628266a88c44d
 share-show-preview-of-first-page = Показувати прев’ю першої сторінки
 # en: ac1624e1fa626a4ba8b8ee419f0cf118d53fa480
-share-picture-of-first-page-and = Зображення першої сторінки й назва місяць зберігаються на нашому сервері у відкритому вигляді, щоб соцмережа могла їх забрати. Сам документ — ні.
+share-picture-of-first-page-and = Зображення першої сторінки й назва місяць зберігаються на нашому сервері у відкритому вигляді, щоб соцмережа могла їх отримати. Сам документ — ні.
 # en: 6a46f4b4b3f001e64ef9652412aa1ddbdeabc489
 share-shared-without-preview-reason = Надіслано без прев’ю: { $reason }
 # en: 4def5924266f682e91bcdff1e5ba510a20a36902
-share-making-preview = Створення попереднього перегляду…
+share-making-preview = Створення прев’ю…
 # en: b0e8d8d6d97acaeed4ad09f7b25699817638ae6b
 share-page-could-not-be-drawn = не вдалося намалювати сторінку
 # en: b3dcb32d0d95afbd62938ff614915e68ba996861
@@ -396,9 +396,9 @@ share-pages-in-frame-on-another = Сторінки в рамці на іншом
 # en: 9377de06278eacbdf4a297a82b8eb9aa3d4220c0
 share-your-mastodon-server = Ваш сервер Mastodon
 # en: 8ae1c34bd37fad49cc5f8e02da648a78e89c3ed8
-share-left = Ліворуч
+share-left = Залишок
 # en: 62be4731dedfbbc70aa7fa30d6649d816af8ca4b
-share-uses = Використовує
+share-uses = Використано
 # en: 525f61b6729229b1a8854a9e50bcaa52ea96b131
 share-where = Де
 # en: cdbfed741d905515df704d9585fc74781801a24d
@@ -406,7 +406,7 @@ share-where-link-fits = Чи поміститься це посилання?
 # en: ddba25b7aa2e43ef1c94a2a8cfb8b839fb723ca2
 share-any-length = будь-якої довжини
 # en: 23fd8ecdbffd82e04305d3cea5eae9cdb85ac9bf
-share-n-over = Понад: { $n }
+share-n-over = Понад ліміт: { $n }
 
 ## privacy (kit/share/privacy.ts, kit/ui/privacy-dialog.ts): the password, what the device holds
 
@@ -440,7 +440,7 @@ privacy-opening = Відкриття…
 # en: 8be3c943b1609fffbfc51aad666d0a04adf83c9d
 common-password = Пароль
 # en: 114bea5817640fe6b9eeec86b939ec0e9a7b6d76
-privacy-password-removed = Пароль прибрано
+privacy-password-removed = Пароль видалено
 # en: ad1909e464528c140bf96a21ce9adda2464956c0
 privacy-password-set-link-holds-only = Пароль установлено. Тепер посилання зашифроване.
 # en: dce69146962b392ae2b157aec604eface36e90c0
@@ -450,11 +450,11 @@ privacy-preferences = Налаштування
 # en: cf01481f626d5127ec7732fcbdb29504f08abefd
 privacy-privacy = Приватність
 # en: cefceeebf3cd6d02ddc7aca8c769881a5341e829
-privacy-nothing-saved-in-this-browser = У цьому браузері нічого не збережено. Елементи списку зберігаються лише до кінця цього візиту.
+privacy-nothing-saved-in-this-browser = У цьому браузері нічого не збережено. Перелічене зберігається лише до кінця цього відвідування.
 # en: 626a605da9dbcd888eadcad13deebd3a64011c0a
 privacy-protected-by-password = Захищено паролем
 # en: acef17d00b9a1b6e1e15e76d27ae53635928a7a6
-privacy-remove-password = Прибрати пароль
+privacy-remove-password = Видалити пароль
 # en: 788f55b0957b15918c6aba279f4f0377a5a1db90
 privacy-sealing = Шифрування…
 # en: 94408e41c12e924b82da7ea6e79e5cb69ac9e042
@@ -486,11 +486,11 @@ privacy-your-documents = Ваші документи
 # en: d21905a9907932f7976e1ca96129c0af871f2715
 privacy-your-browsers-history = Історія вашого браузера
 # en: cdff70e571d4ed7aeb1a43cedaf33299bdcd258e
-privacy-every-document-opened-here-in = Кожен документ, який ви відкриваєте, повністю, якщо в нього немає пароля.
+privacy-every-document-opened-here-in = Кожен відкритий документ повністю, якщо він не захищений паролем.
 # en: 18b8a03ed6567555edd5005aab5b090984f4b5bd
 privacy-not-ours-to-clear = Ми не можемо це очистити
 # en: 3ca2d1d26637d42b974b313bb8ce231333179a9e
-privacy-by-name = від { $name }
+privacy-by-name = автор: { $name }
 # en: a9e72cf83916d4381012a19b329292818f845a43
 common-n-documents = { $n ->
         [one] { $n } документ
@@ -532,7 +532,7 @@ locked-document = заблокований документ
 # en: 0c45986cb6755e463398a592a861baaf44018954
 locked-this-document-cannot-be-read = Цей документ не вдається прочитати.
 # en: a2a127edeb3eed5dc264fc299b034db6493e1636
-locked-that-password-does-not-open = Цей пароль не відкриває посилання. Якщо ви впевнені, що він правильний, можливо, посилання обрізалося під час копіювання. Попросіть його ще раз або попросіть коротке посилання.
+locked-that-password-does-not-open = Цей пароль не відкриває посилання. Якщо ви впевнені, що він правильний, можливо, посилання обрізалося під час копіювання. Попросіть надіслати його ще раз або дати коротке посилання.
 
 ## words several apps share
 
@@ -543,7 +543,7 @@ common-this-document = Цей документ
 # en: 15f18f71eefc9fedc6fedd434c2edc6a919bf130
 common-done-task = Готово: { $task }
 # en: 00c65041972e0368c2c8b452d60c0a0754fcc9bd
-common-drag-to-move-tap-to = Потягніть, щоб перемістити, торкніться, щоб вибрати
+common-drag-to-move-tap-to = Перетягніть, щоб перемістити; торкніться, щоб вибрати
 # en: 525df57dc3610e74377113b92951476bb9387e4d
 common-move-left = Ліворуч
 # en: 3a43e56f34dece6eb3d79dee1eff7b2f87db6040
@@ -567,7 +567,7 @@ common-in-this-document = Знайти в цьому документі
 # en: 733a5f2fb910bb704c7993cae3d8224558d405de
 common-indent-or-bring-out-in = Збільшити або зменшити відступ пункту списку; наступна клітинка в таблиці
 # en: bf6e36633c2362cb7fa31a0e8f833388a49ba28c
-common-move-selected-items-up-or = Пересунути обрані пункти вгору чи вниз
+common-move-selected-items-up-or = Пересунути вибрані пункти вгору чи вниз
 # en: 989fe994e413c509c03d3dd229b775a3ddc4707b
 common-nudge-shapes-in-hand = Зсунути вибрані фігури
 # en: b11d72438f1b00b65769e9b8597829583dc4d631
@@ -581,7 +581,7 @@ common-next-or-one-before = Наступний або попередній
 # en: b4365b2ed2016713788d08335e5157985010ac28
 common-step-out-close-collapse-let = Закрити або зняти вибір
 # en: fb2997642419cda8393061543f140d40a9323957
-common-check-or-uncheck-task = Відзначити чи зняти позначку завдання
+common-check-or-uncheck-task = Позначити завдання або зняти позначку
 # en: 0a4adf12f01d48ecdb89f5eddf5f19fd89d94522
 common-too-long-for-qr-code = Задовге для QR-коду: скоротіть документ або поділіться коротким посиланням.
 # en: 1e14a1c5e931f6ef8ce8378377366f3c68cef56c
@@ -731,7 +731,7 @@ write-paragraph = Абзац
 # en: b4d812c8bee8056808c14f1b31b6765342c8437e
 common-bring-out = Зменшити відступ
 # en: aacf42132cce6cf5c1608a5d27f90fcbf93ae851
-common-indent = Відступ
+common-indent = Збільшити відступ
 # en: c83b0ec2d98a2ca38077be2f03102aedeb0ab261
 write-align = Вирівняти
 # en: b442b455b6a5e55f249769068c3fcc4832aea89d
@@ -758,7 +758,7 @@ write-serif-and-sans = Із засічками й без
 # en: b3ca8ebc46d597ea38c5f4877cf7ae7bfb4e3d68
 write-serif-headings-sans-text = Заголовки із засічками, текст без
 # en: e0c6a397d49350373ed4d55573e9365c212631bc
-write-sans-and-serif = Без засічок і із засічками
+write-sans-and-serif = Без засічок і з засічками
 # en: d9d9d24d3963e4acfa41725ddd5a228f70b0869f
 write-sans-headings-serif-text = Заголовки без засічок, текст із засічками
 # en: f69f233005f15802770fd26fbf7ead52ec13d9e6
@@ -781,7 +781,7 @@ write-this-card = Ця картка
 # en: 1e06557fc0660e50a99fa6eef90bff822411e3ae
 write-open-in-app = Відкрити в { $app }
 # en: 108add9c9b3eed03ee5eb57783d780a485840218
-write-locked-worked-out-for-you = Заблоковано: обчислюється
+write-locked-worked-out-for-you = Заблоковано: обчислюється автоматично
 # en: ec0c3b76630fd745381cc215a284820af75a683a
 common-footnotes = Виноски
 # en: 5c71d5f47999af43b0a80e72abd8e5b79e736f80
@@ -806,7 +806,7 @@ common-markdown = Markdown
 write-rich-text-rtf = Rich Text (RTF)
 # A table in the text: its heads, its handle, its column menu.
 # en: f4344253d823d09db13bc3877d37c9618588506a
-write-add-column-before = Додати стовпець перед
+write-add-column-before = Додати стовпець ліворуч
 # en: 9b3acfc74a5d37d699868ade0ed3d142024174cf
 write-column-c-what-it-holds = Стовпець { $c }: тип, назва, додати чи прибрати
 # en: 1f01479a40aa348fc273d4d09636403f89eff717
@@ -831,11 +831,11 @@ write-plain-words-agreement-what-each = Угода простими словам
 # en: f9f38818c406d0878defb17a2356e1a2c658861a
 write-invoice = Рахунок
 # en: 4e056cf73efd0995ce1e7c5fd88900894935896c
-write-who-what-and-how-much = Кому, за що й скільки; суми рахуються в таблиці; друкується як папір для відправлення.
+write-who-what-and-how-much = Кому, за що й скільки; суми рахуються в таблиці; друкується, щоб надіслати.
 # en: 80c40a5c8be53118fd8a9fc487b43f20c3014fbc
 write-cover-letter = Супровідний лист
 # en: fe727759e1b85df4a1d71348a1a6dfd6ef8e135d
-write-applying-for-job-position-what = Заявка на роботу: посада, що ви робили, чому саме вони, у чотирьох коротких абзацах.
+write-applying-for-job-position-what = Відгук на вакансію: посада, що ви робили, чому саме ця компанія — у чотирьох коротких абзацах.
 # en: 1fd79b9555ddf59862d60aa0aa3bb74fb74aae78
 write-memo = Службова записка
 # en: cfa5a189ad757d015661acb500917a198d8a13e1
@@ -903,7 +903,7 @@ write-ask-your-representative-for-vote = Попросіть свого пред�
 # en: de21096f37522d15740e7a4acd69efc811f9b5ce
 write-love-letter = Любовний лист
 # en: a6977a11c96b06575fd8359e1bb9e3dea5a21fcf
-write-ordinary-things-missed-letter-across = Прості речі, за якими сумуєш: лист через відстань, із засічками.
+write-ordinary-things-missed-letter-across = Прості речі, за якими сумуєш: лист здалеку, шрифтом із засічками.
 # en: 1af339528a1814a5f1dc409f2d108e0308035b87
 write-wedding-speech = Весільна промова
 # en: b040a94a7bd386ebaee15aa4c4535da004fadc4c
@@ -923,7 +923,7 @@ write-what-you-ask-why-and = Чого ви просите, чому, і імен
 # en: a6a1d25b018c9318540556e3fe374fdf8b23aff8
 write-terms-of-service = Умови користування
 # en: 79b220d914e24eb7ac79428e72639e8547d8ab9a
-write-small-businesss-terms-in-plain = Умови маленького бізнесу простими словами: бронювання, ціни, ключі, що як, завершення.
+write-small-businesss-terms-in-plain = Умови маленького бізнесу простими словами: бронювання, ціни, ключі, що робити, якщо…, припинення.
 # en: fe3b114dccf2739f949d65ac4101037eb8f92543
 write-open-as-outline = Відкрити як структуру
 # same
@@ -944,7 +944,7 @@ insert-opening-short-link = Відкриття короткого посилан
 # en: 9d2d34c4b04d8410e0025beb7899a31d1bc57c04
 insert-paste-link-of-another-tiny = Вставте посилання на інший документ Крихітного офісу, довге чи коротке: його перша сторінка з’явиться тут.
 # en: 7e4861cdc8de2c0c4cf87ca37c9130a92051b5b0
-insert-this-is-not-tiny-little = Це не посилання Крихітного офісу, або воно вже прострочене.
+insert-this-is-not-tiny-little = Це не посилання Крихітного офісу, або термін його дії сплив.
 # en: 1eb05dc15f4e90a6a61c46b111812e974555cd81
 insert-tiny-little-office-doc = Документ Крихітного офісу
 # en: 7bb236efe4e244196e506d65542626cfe368bb09
@@ -973,9 +973,9 @@ chart-flows-list = Потоки: { $list }.
 # en: c6fd3870c86e7422a0146e1e2a052437fb8e51e2
 common-lines = Лінії
 # en: 5a2f5ac996eef952d239a22e8d68296faf975994
-chart-nothing-to-chart-yet = Поки немає що показувати
+chart-nothing-to-chart-yet = Поки немає даних для діаграми
 # en: 7631740b7c7b5a09ad168ae28580b5c9ca4b8c06
-chart-nothing-to-chart-yet-rows = Поки немає що показувати: рядки «Звідки | Куди | Сума»
+chart-nothing-to-chart-yet-rows = Поки немає даних для діаграми: потрібні рядки «Звідки | Куди | Сума»
 # en: 9318d4f63aeffddc47d4520c722ad70f0ec6c63a
 chart-pie = Кругова
 # en: 40c20d94e78fa142819df8cc9440d30e65329975
@@ -992,7 +992,7 @@ sheet-fit-this-column-to-its = Підігнати стовпець під тек
 # en: b92fe41ac34453cd0368f0fa5d00d1e9b0279c12
 sheet-cells-in-hand = Вибрані клітинки
 # en: 119faf17cd1de268ce34ade4f9bae4520774f640
-sheet-check-ref = Відзначити { $ref }
+sheet-check-ref = Позначити { $ref }
 # The column type that holds words as typed.
 # en: c3328c39b0e29f78e9ff45db674248b1d245887d
 common-text = Текст
@@ -1007,7 +1007,7 @@ sheet-spreadsheet-with-formulas-named-cells = Електронна таблиц�
 # en: 7aeba4cd15b1afc5015285c0854f0edae2380d36
 sheet-budget = Бюджет
 # en: d99860b75cc866415325dd845f03e65f1b9fc648
-sheet-planned-against-actual-line-each = План проти факту, по рядку на статтю, з різницею й підсумками.
+sheet-planned-against-actual-line-each = План і факт, по рядку на статтю, з різницею й підсумками.
 # en: 0a0a7c3be7656f55cd259d558c2d0eb59b893b88
 sheet-expense-log = Облік витрат
 # en: c2effbb05c6382e67befb796de9be3ad264a1cbb
@@ -1015,11 +1015,11 @@ sheet-date-what-how-much-which = Дата, що, скільки, який вид
 # en: a2d841e763d975477b0e1a51d15e6f25c9023d4a
 sheet-training-log = Журнал занять
 # en: d5b29b7fbac7da4d79a420a8108f0c98bb1ab61a
-sheet-what-you-did-and-how = Що ви робили і скільки, по рядку за раз; підсумок для кожного виду.
+sheet-what-you-did-and-how = Що ви робили і скільки, кожне заняття — окремий рядок; підсумок для кожного виду.
 # en: 4d89a20e90ff128c4329c067414e272156b4b196
 sheet-project-tracker = Трекер проєкту
 # en: a9f287fb1ede11b35e739a207cac5eddcfd2116d
-sheet-tasks-with-owners-start-and = Завдання з відповідальними, дати початку й терміни від сьогодні, дні на кожне, як воно йде, і галочка, коли готово.
+sheet-tasks-with-owners-start-and = Завдання з відповідальними, дати початку й терміни від сьогодні, днів на кожне, стан і галочка, коли виконано.
 # en: 83c8cb0557f1a8ab76094b2801ae0b4cd23e4741
 sheet-loans-compared = Порівняння кредитів
 # en: 8ae3fb1476eab673ec96c9e2614cad18cbd6f497
@@ -1043,11 +1043,11 @@ sheet-monthly-donors-and-one-off = Щомісячні донори й разов
 # en: 992dbb972d7850082f91f3f43d7b68391091a32e
 sheet-month-by-month-with-chart = Місяць за місяцем, з діаграмою
 # en: 876c69fa93189c4e89f57aeec964d0573e61be81
-sheet-this-year-against-last-line = Цей рік проти минулого, рядок на місяць, лініями.
+sheet-this-year-against-last-line = Цей рік порівняно з минулим, рядок на місяць, лініями.
 # en: 467dda8775e7e01a3dacd9ff5d247da7caf931d3
 sheet-household-budget-by-month = Домашній бюджет по місяцях
 # en: f61119c5b20c1ed2360f6aa2b583872a1fc9c474
-sheet-six-months-of-homes-bills = Шість місяців рахунків і витрат родини, стовпець на місяць, підсумки в обидва боки проти зарплати.
+sheet-six-months-of-homes-bills = Шість місяців рахунків і витрат родини, стовпець на місяць, підсумки в обидва боки порівняно із зарплатою.
 # en: 2c2609efcdcac42f94b3d73758d40d3f2f79dfd8
 sheet-savings-goal = Ціль заощаджень
 # en: 49ff61e9d2d6e99106df2e02e7a626aa5186c112
@@ -1055,7 +1055,7 @@ sheet-what-went-in-each-month = Що відклали щомісяця, скіл
 # en: ca1ec97c50f7647ef3588d5de58af33939c01646
 sheet-habit-tracker = Трекер звичок
 # en: 7a2638dee7c38146953a64566dbd8fc8ea77d8d4
-sheet-four-habits-checked-off-day = Чотири звички, відмічені день за днем упродовж двох тижнів; яку частку кожного дня дотримано і скільки днів на кожну.
+sheet-four-habits-checked-off-day = Чотири звички, відмічені день за днем упродовж двох тижнів: яку частку виконано щодня і скільки днів — кожну.
 # en: d80f6ec7eac0c80248e2c7b452e21f89673449f2
 sheet-reading-list = Список для читання
 # en: c809293d68f1061cf7062072d2efc8fe95fe9262
@@ -1067,7 +1067,7 @@ sheet-sets-reps-and-weight-for = Підходи, повтори й вага дл
 # en: 5be9810c81e208adc153f7aa0cc70f64c988d737
 sheet-time-sheet = Табель часу
 # en: df9c77cdd1cdf96f00633ef7f822543a7185dbc6
-sheet-weeks-hours-by-client-and = Години за тиждень по клієнтах і завданнях; оплачувані оцінено за ставкою, і підсумки.
+sheet-weeks-hours-by-client-and = Години за тиждень по клієнтах і завданнях; оплачувані — за ставкою, і підсумки.
 # en: da7a3e11a9c1686127720177adfd2bbfed7224e0
 sheet-trip-costs-split = Поділ витрат у поїздці
 # en: bcc455f94ab37c41dad441a4152ac7961c3118ad
@@ -1079,15 +1079,15 @@ sheet-job-in-steps-each-starting = Робота кроками, кожен по�
 # en: 2a3b772f6e347425b5a235a2e956004ed5177213
 sheet-grade-book = Журнал оцінок
 # en: 0e6fce40b16529c27d306da8834f33a391a5ca5b
-sheet-classs-grades-for-essays-quizzes = Оцінки класу за есе, тести й проєкт; середній бал і літера кожного учня, і середня по класу.
+sheet-classs-grades-for-essays-quizzes = Оцінки класу за есе, тести й проєкт; середній бал і літера кожного учня та середній бал класу.
 # en: 7d9ac107a69e997e571bd6906b535f6802bc5569
 sheet-membership-roll = Список членів
 # en: 3bc0a32ca3d296ee9217f44adf3cf4d3c3dbd080
-sheet-who-belongs-their-plot-and = Хто входить, їхня ділянка й справа, коли заплатили й коли поновлюють, хто має ключ, і зібрані внески.
+sheet-who-belongs-their-plot-and = Хто входить, їхня ділянка й обов’язок, коли заплатили й коли поновлюють членство, у кого є ключ, і зібрані внески.
 # en: b884fda377a19ce445f8ec49bd90f2784834978c
 sheet-seating-count = Підрахунок місць
 # en: 4e00db4efd970061e8ff6cd63f723c7385ad1637
-sheet-tables-for-wedding-seats-guests = Столи на весіллі: місця, гості, вільні місця й обрані страви, з перевіркою, що страв рівно стільки.
+sheet-tables-for-wedding-seats-guests = Столи на весіллі: місця, гості, вільні місця й обрані страви, з перевіркою, чи збігається кількість страв.
 # en: 8a535a1def73648a0a55a9bfa21c9d370e434ce5
 sheet-poll-results = Результати опитування
 # en: df60ac32ce5b04bf11e53f97d296db53c2a2cda2
@@ -1095,7 +1095,7 @@ sheet-answers-and-votes-for-each = Відповіді й голоси за ко�
 # en: bfee938677dd9bf5dab2de4f9558c07a06d616fd
 sheet-fundraising-thermometer = Термометр збору коштів
 # en: f6873b16e788104f3e409c1c06243db77d2a6e04
-sheet-what-has-come-in-week = Що надійшло по тижнях проти цілі: діаграма зверху, велика сума на цей час.
+sheet-what-has-come-in-week = Що надійшло по тижнях порівняно з ціллю: діаграма зверху, зібрана сума великими цифрами.
 # en: 20ded69e290360ef0be6b1fd22e648ca398d7ed3
 sheet-invoice-ledger = Журнал рахунків
 # en: 2404f6c1a633f188d6395d7b35f7dd1486c597b6
@@ -1103,11 +1103,11 @@ sheet-every-invoice-sent-when-to = Усі надіслані рахунки: к�
 # en: 300d29fd5f327e8c7a0f4614d4125d93570eeeff
 sheet-inventory = Інвентар
 # en: cca3ceb6d79e8c2e922aa21c8675223c1b96c275
-sheet-stock-on-hand-against-point = Запас на руках проти точки замовлення; що замовити, скільки це коштує, і позначка, коли мало.
+sheet-stock-on-hand-against-point = Запас у наявності порівняно з точкою дозамовлення; що замовити, скільки це коштує, і позначка, коли мало.
 # en: ba8d2875e56e1ee2a745057f4de807182be4bb9b
-sheet-petty-cash = Дрібна готівка
+sheet-petty-cash = Дрібні витрати
 # en: 8c7a0a9d0703152466c522d2d8bbd55cfcea218d
-sheet-money-in-and-out-of = Гроші в коробці й з неї, хто витратив і на що, залишок після кожної операції і галочка про чек.
+sheet-money-in-and-out-of = Надходження й витрати з каси, хто витратив і на що, залишок після кожної операції і галочка про чек.
 # en: dca1686c53daf52f46495f2a961a3346006e41ac
 sheet-rate-card = Прайс-лист
 # en: 1a3c8694038b9c6d56a26e131d62c3616e165a77
@@ -1119,7 +1119,7 @@ sheet-four-offers-on-one-house = Чотири пропозиції на один
 # en: 54695e5df6ef00663252186d998a600f9bac4c58
 sheet-unit-converter = Конвертер одиниць
 # en: d2e0c086c77046805d1cc8934044bb315bf00aec
-sheet-miles-and-kilometers-pounds-and = Милі й кілометри, фунти й кілограми, духовки, склянки й галони: введіть кількість, прочитайте іншу одиницю.
+sheet-miles-and-kilometers-pounds-and = Милі й кілометри, фунти й кілограми, температура духовки, склянки й галони: введіть кількість, отримайте значення в іншій одиниці.
 # en: 9d2911edf283fc08872808d554a1017460fbe86f
 sheet-tournament-bracket = Турнірна сітка
 # en: ad907a82b59f9d64761c80d6b2fe13c2a3b04fc2
@@ -1214,7 +1214,7 @@ common-name-of-column-c = Назва стовпця { $c }
 sheet-names-cell-to-its-right = Назва для клітинки праворуч
 # A money column's currency (Money picked in a column's menu): the field's hint, and what it says of words it cannot read.
 # en: d02550533b8780a7e646803c3b7b9cb7a78ba756
-sheet-symbol-like-or-code-like = Символ, як $, або код, як USD. Порожньо — власна валюта документа.
+sheet-symbol-like-or-code-like = Символ, наприклад $, або код, наприклад USD. Якщо порожньо — валюта документа.
 # en: 1224b5538c873fc11d856120fedeb76e516529c6
 sheet-symbol-of-up-to-three = Символ до трьох знаків або код з трьох літер.
 # en: 630470a61228c20119f270074f1e0b6a4c2d9151
@@ -1224,7 +1224,7 @@ sheet-number = Число
 # en: 80838be5576c4b333f764e352ef9e6c5292b2b78
 sheet-open-link = Відкрити { $link }
 # en: 1d6f3ce763f138e0025747a9d3ae7f30efc75531
-sheet-opens-when-clicked = Відкривається по клацанню
+sheet-opens-when-clicked = Відкривається клацанням
 # en: ac556cf5938d2104533c38103305f6cf60ba245d
 sheet-percent = Відсоток
 # en: 4f9fa8ea1af8cde7cca877c50ca723eeadee35dc
@@ -1246,7 +1246,7 @@ common-row-n-insert-or-delete = Рядок { $n }: вставити чи вид�
 # en: 767a59f7f0079a019b266853b864269f92d10d82
 common-rows-b = рядки { $a }–{ $b }
 # en: b92fe41ac34453cd0368f0fa5d00d1e9b0279c12
-sheet-selected-cells = Виділені клітинки
+sheet-selected-cells = Вибрані клітинки
 # en: 26b30f90bad8aab892824738a0dc60bd11d082be
 sheet-show-all-text = Показати весь текст
 # en: 9580fcbce0c31ceaa47eb583e5f7ce637fdc8a0a
@@ -1275,11 +1275,11 @@ sheet-choices-for-ref = Варіанти для { $ref }
 # en: a871e2c9206cb4854cc06c30bc6de95cb82f9700
 sheet-has-one = В аркуші вже є діаграма
 # en: f0dfb92a1f16391ab3bd5478ce9d8c0f2d74bf95
-sheet-edit-cell-caret-at-its = Змінити клітинку, курсор у кінці
+sheet-edit-cell-caret-at-its = Редагувати клітинку з курсором у кінці
 # en: 28d1a54d2e35ad87c0d19942f68d70ddbf67bcee
 sheet-put-back-what-cell-held = Повернути значення клітинки
 # en: 2b69414b3787eaa8a38f2f1a9c4a48aff7dd78a5
-sheet-put-dated-rows-on-calendar = Покласти рядки з датами в календар
+sheet-put-dated-rows-on-calendar = Перенести рядки з датами в календар
 
 ## downloads: hand-offs to another app (kit/file/exports.ts)
 
@@ -1374,7 +1374,7 @@ draw-phone-and-laptop-api-database = Телефон і ноутбук, API, ба
 # en: d5786d3d397a91b189e23529401c4f8d35cd09b0
 draw-floor-plan = План квартири
 # en: fddd68346c75bb66ad003c667e573feb965f7ca4
-draw-one-bedroom-apartment-from-above = Однокімнатна квартира згори: кімнати — прямокутники з підписами, двері — розриви.
+draw-one-bedroom-apartment-from-above = Квартира з однією спальнею згори: кімнати — прямокутники з підписами, двері — розриви.
 # en: 38a0d171dc9e21d8e32aacfbb8a170dad9977d9c
 draw-pixel-heart = Піксельне серце
 # en: 7f51a7b112b9965b1cf5d78f9b43f76de5ad8f0d
@@ -1384,9 +1384,9 @@ draw-background-tile = Фонова плитка
 # en: e78fb3ca7b230e0df30391c85eec105bf55656bd
 draw-8-by-8-pattern-that = Візерунок 8 на 8, що повторюється: використайте його як тло малюнка чи будь-якої сторінки.
 # en: 99cb45a6f4e975a5a7be78811422b5933dd6598b
-draw-card-for-ninetieth-tilted-on = Листівка до дев’яностоліття, нахилена, на тлі конфеті: великі слова, квіти, любов від усіх.
+draw-card-for-ninetieth-tilted-on = Листівка до 90-річчя, нахилена на тлі конфеті: великі слова, квіти, любов від усіх.
 # en: 2020c98a00da0ecd8574350e226b7d4c448a451f
-draw-phone-screen-sketched-in-boxes = Екран телефону, накиданий прямокутниками, поки його ніхто не будує, з нотатками, навіщо кожна частина.
+draw-phone-screen-sketched-in-boxes = Екран телефону, накиданий прямокутниками ще до розробки, з нотатками, навіщо кожна частина.
 # en: 106c289912d69f2f02f64b1c195daa945a29c19f
 draw-rosette-with-ribbons-for-volunteer = Розетка зі стрічками для волонтера року: надрукувати, вирізати й приколоти.
 # en: c9c7469b74c0a43646cb4a46279d9930b271ca19
@@ -1394,27 +1394,27 @@ draw-block-party-from-above-stage = Вуличне свято згори: сце
 # en: 6d12c8adbefeaeacac0d48274df3a195ca9a1d17
 draw-badge = Бейдж
 # en: 32787c0201e95e7dd6ca00aa5dd63210e278e3db
-common-birthday-card = Вітальна листівка
+common-birthday-card = Листівка на день народження
 # en: be3883124104a86065f65c46fcf4edff20e0842f
-draw-can-we-refund-it-stores = Чи можемо повернути гроші? Правило повернень магазину запитаннями, відповідями і що робити.
+draw-can-we-refund-it-stores = Чи можемо повернути гроші? Правила повернення в магазині: запитання, відповіді й що робити.
 # en: 619a6e052e5343b8fbad2bfbc5a35d0aa4ec763f
 draw-event-map = Карта події
 # en: 6349ac251c1b86c4744c7e0361a5e72ea5e38402
 draw-four-16-by-16-icons = Чотири значки 16 на 16 на одній сітці — сонце, хмара, дощ і гроза: скопіюйте для прогнозу чи кнопки.
 # en: 9c6396f6f0d3ea9cb4720d61fecd3ede243d72c8
-draw-game-sprite = Спрайт гри
+draw-game-sprite = Ігровий спрайт
 # en: 8752fbad4e546cb5ffe343544f280f98fc20d43f
 draw-logo-sketch = Ескіз логотипа
 # en: 26dbc52edd1d138f4ab006d860b56dee54bf919f
 draw-order-to-doorstep = Від замовлення до порога
 # en: 9bdb2a0b447519986c24ccc21eaf68976587c9fc
-draw-pip-frog-32-by-32 = Піп-жаба, герой 32 на 32 у червоному шарфі, з контуром, готовий до анімації.
+draw-pip-frog-32-by-32 = Жабка Піп, герой 32 на 32 у червоному шарфі, з контуром, готова до анімації.
 # en: d8cca3dd62ad1e4c37a8b10c054464bbcb13e3c9
 draw-room-plan = План кімнати
 # en: fcba7b3fe14a456c5dd428b4e0b28552efa25751
-draw-living-room-rearranged-sofa-rug = Вітальня переставлена: диван, килим, шафа з книжками й стіл у масштабі, з накресленим розчиненням дверей.
+draw-living-room-rearranged-sofa-rug = Нове розташування вітальні: диван, килим, книжкова шафа й стіл у масштабі, з дугою відчинення дверей.
 # en: 8640aa92343372c68f5d72660821c342598d8b38
-draw-three-ideas-for-coffee-roasters = Три ідеї знака для обсмажувача кави поруч, назва великими літерами і дата, до якої обрати.
+draw-three-ideas-for-coffee-roasters = Три ідеї логотипа для обсмажувальні кави поруч, назва великими літерами й дата, до якої обрати.
 # en: 68224d905ee1bc5c63082121b1e80cf6fe7d08c1
 draw-weather-icons = Значки погоди
 # en: 0d07d8bcde49fe88082ab75f75e2fd49bbcef253
@@ -1577,7 +1577,7 @@ draw-press-on-one-shape-and = Натисніть на одну фігуру й �
 # en: 199f4e86afea4f2d42eb40b63ce8599168575e06
 draw-tap-where-icon-goes = Торкніться там, де має бути значок.
 # en: 86da5e24511bad8c1cace935e830c0625b04b607
-draw-drag-on-canvas-to-draw = Проведіть по полотну, щоб намалювати, або торкніться, щоб поставити один.
+draw-drag-on-canvas-to-draw = Проведіть по полотну, щоб намалювати, або торкніться, щоб розмістити.
 # en: a5742851f0f81d3bdcf184cb2a164390f3e989bb
 draw-eraser = Гумка
 # en: 5136ae1b5bfe9175a6ed64915e648bdc240443a7
@@ -1659,21 +1659,21 @@ draw-align-right = Вирівнювання: праворуч
 anim-animation = анімація
 # The templates: what each motion is, in a line.
 # en: ec026663a7e4c23dd850c7f5a96deef71bf8bb81
-anim-lift-off = Старт
+anim-lift-off = Зліт
 # en: 5d15aaf0784e98385ffc925f574edbf1a0657292
 anim-rocket-climbs-away-with-its = Ракета злітає разом зі своєю тінню, поки слова піднімаються: дві фігури, по два ключових кадри.
 # en: 1cc22feeb4a82e33a9fd435fbf7c4a927a0408e1
 anim-bouncing-ball = М’яч, що підстрибує
 # en: 567b2c86aa06b4d0133474a39dc6545196754a25
-anim-ball-falls-faster-and-faster = М’яч падає на підлогу все швидше, а його тінь під ним росте; програється вперед і назад — і стрибає без кінця.
+anim-ball-falls-faster-and-faster = М’яч падає на підлогу все швидше, а його тінь під ним росте; якщо програвати вперед і назад, він стрибає без кінця.
 # en: 7296aa4a483797a1a82ec05a4598688ca056cd36
 anim-loading-spinner = Індикатор завантаження
 # en: ccf7f6eb9188fe228da413a1aaf39c5ee4994346
-anim-eight-dots-in-ring-each = Вісім крапок по колу, кожна по черзі пухне, тож яскрава пляма біжить колом, поки сторінка зберігається.
+anim-eight-dots-in-ring-each = Вісім крапок по колу, кожна по черзі збільшується, тож яскрава пляма біжить колом, поки сторінка зберігається.
 # en: 691f884e182237907640c6964bda657a5ffec1c0
 anim-title-card = Титульна картка
 # en: 56d07df6f27b468d9e3456707110962e1da029c6
-anim-red-curtains-part-on-opening = Червона завіса розсувається в день прем’єри, і виходить назва фестивалю: програється раз і зупиняється на назві.
+anim-red-curtains-part-on-opening = Червона завіса розсувається у вечір прем’єри, і з’являється назва фестивалю: програється один раз і зупиняється на назві.
 # en: 1383ce3b8f642f2c5946975ca61e868e4a504819
 anim-present-hops-stars-and-hearts = Подарунок підстрибує, навколо хитаються зірки й серця, а привітання сяє райдужними літерами.
 # en: fad7f01d931894b10da998319cdc82f1a7d7e4dc
@@ -1687,7 +1687,7 @@ anim-meme-in-two-lines-of = Мем у два рядки шрифтом Impact і
 # en: 98eb193445404588fd801a26b8383def925748ab
 anim-flash-card = Картка для вивчення
 # en: 864aea3fc448ba5b87612d5e8c4c6dafde49b09a
-anim-card-shows-spanish-word-turns = Картка показує іспанське слово, перевертається, щоб дати англійське, і перевертається назад: поворот навколо вертикальної осі.
+anim-card-shows-spanish-word-turns = Картка показує іспанське слово, перевертається, показуючи англійське, і повертається назад: поворот навколо вертикальної осі.
 # en: 23015d1cbacca964e41f5cbb0021ed050964a9ed
 anim-weather-this-week = Погода цього тижня
 # en: 8dc082991f9eea4f537ecd34d66858c28b08bcb6
@@ -1695,19 +1695,19 @@ anim-four-days-of-weather-in = Чотири дні погоди в Лісабо�
 # en: b8224dd56d927c2c68b1498f39b7a2ed20f88c57
 anim-new-year-countdown = Зворотний відлік до Нового року
 # en: 6b46f602f1762ee9ef676cfb3d455fba6a9a07df
-anim-three-two-one-second-each = Три, два, один, по секунді, і приходить новий рік райдужними літерами: програється раз і зупиняється на привітанні.
+anim-three-two-one-second-each = Три, два, один, по секунді, і райдужними літерами настає Новий рік: програється один раз і зупиняється на привітанні.
 # en: e004a532912502de514d6c1801dcc60517d6007a
 anim-flight-path = Маршрут рейсу
 # en: 69049056a83981f31dea9f7350b7356570e735b3
-anim-plane-crosses-dotted-route-from = Літак перетинає пунктирний маршрут з Нью-Йорка до Лісабона, набираючи висоту, а над ним часи рейсу.
+anim-plane-crosses-dotted-route-from = Літак перетинає пунктирний маршрут з Нью-Йорка до Лісабона, набираючи висоту, а над ним — час рейсу.
 # en: 7de4868fea7340b1b7e0779ba2e81218c703ab57
 anim-neon-sign = Неонова вивіска
 # en: c0cba8072586f9c04d65da0f16b714c865f261e1
-anim-cafes-sign-at-night-name = Вивіска кав’ярні вночі: назва мерехтить, години виділяються нижче, а чашка світиться й пульсує.
+anim-cafes-sign-at-night-name = Вивіска кав’ярні вночі: назва мерехтить, нижче чітко видно години роботи, а чашка світиться й пульсує.
 # en: fadf71c7ea92e6416fd6d89969f8e78a115cd3c1
 anim-sunrise = Схід сонця
 # en: 672c99d7a4f36fb3de226944eb862e3c9faa5663
-anim-sun-comes-up-from-behind = Сонце сходить з-за пагорбів, і ранок насувається: глибина, розмір і намальований пером обрій.
+anim-sun-comes-up-from-behind = Сонце сходить з-за пагорбів, і настає ранок: глибина, розмір і намальований пером силует міста.
 # A key is a moment a shape is set at; between keys it travels. The effects (Impact … Blur) are meme looks.
 # en: dc6828c6d02be5a4b4480bdf9e7f606c74b5ffd1
 anim-animated-gif = Анімований GIF
@@ -1803,13 +1803,13 @@ anim-frames = Кадри
 # en: 0d0b09dfb5d45add0e2f90ec8b193d96ace76d0c
 anim-frames-second = Кадрів на секунду
 # en: 3570d228949889218e4c7fdb4ad8c942753530a1
-anim-how-large-shape-is-drawn = Наскільки велика фігура: 1× — як намальовано.
+anim-how-large-shape-is-drawn = Розмір фігури: 1× — як намальовано.
 # en: c028f533678015b6ac2e606a9cafef7e050b11aa
 anim-length-speed-and-repeat = Довжина, швидкість і повторення
 # en: 72f516ede84adba7283e1f7f5fd8eb787c7d33b0
 anim-loop-forever = Повторювати без кінця
 # en: 41b5b25a66d56fd91f645cbe6f83603567c3c480
-anim-play-once = Одноразово
+anim-play-once = Один раз
 # en: 368e8081b781aac177fd07c2415b694b1f878911
 anim-turn = Поворот
 # en: b2343125992a36aa775f5740930f717a0d1a76d6
@@ -1819,7 +1819,12 @@ anim-turns-shape-around-in-plane = Обертає фігуру в площині
 # en: df7db1873937e8acd60c26ebf93191ad27b738e6
 anim-which-shape-is-in-front = Яка фігура попереду: ближча малюється поверх дальшої, а дальша трохи тьмяніша. Глибина ніколи не змінює розмір.
 # en: 2931befb0fbc6bdabcff5b420bf41435e4315548
-anim-n-times = Разів: { $n }
+anim-n-times = { $n ->
+        [one] { $n } раз
+        [few] { $n } рази
+        [many] { $n } разів
+       *[other] { $n } раза
+    }
 # en: 4a84fdfdafe66c2c85e3e7d7c434de987984470f
 anim-s-s = { $s } с
 # en: b78baea4121d1dfde75020adb28737da7ea84e59
@@ -1835,7 +1840,7 @@ anim-first-frame-last = Перший або останній кадр
 
 # The bullet is the line to the parent; a join between any two items is a connection. { $from } and { $to } are items' words.
 # en: e8fb468f67bca1564ff499175d1b146c6ccd5d3a
-outline-named-label = , названа «{ $label }»
+outline-named-label = , з назвою «{ $label }»
 # en: 02d7116f49a426f4a9dba7a6582ae90478795f7d
 outline-book = Книжка
 # en: 8f9c05748f1616a4649174a8917da3ee5f3217e5
@@ -1865,7 +1870,7 @@ common-chosen-items = Вибрані пункти
 # en: b65463cb6a42a17de514acc4659f7fd331e0876a
 outline-connect = З’єднати
 # en: f2ea879cf86d5519e3459e15ee70080a4a1306ab
-outline-connect-from-words = З’єднати від «{ $words }»
+outline-connect-from-words = Почати з’єднання від «{ $words }»
 # en: abfb16b3d00afef63f7ed53ad9ababbf2328b5d9
 outline-connect-from-to-to = З’єднати «{ $from }» з «{ $to }»
 # en: 378e916868a3e40a71abc67a748f7faacc94be85
@@ -1919,13 +1924,13 @@ outline-name-of-line = Підпис лінії
 # en: 3aea913567c437a81d3c153ce49d321f64099651
 outline-numbered = Нумерований
 # en: 89db2d16f087d4e687143e9a0071f77af473f9d8
-outline-opml-for-outliners = OPML (для структур)
+outline-opml-for-outliners = OPML (для редакторів структур)
 # en: b22f39c9558f672318bf617175bf3daaa236c71f
 common-open-in-new-tab = Відкрити в новій вкладці
 # en: cdd6290b6b2860663a3ff7c60cbe70af640e9c39
 common-outline = Структура
 # en: d7f6278b9a3a511b82633cbd63a4e86e91bab2d1
-outline-outliner = Структура
+outline-outliner = Редактор структур
 # en: e57362d579b61ac9d08f5012ee0adf6fde22a855
 outline-outline-lowercase = структура
 # en: db2483000d154ca9fd74d41fc4e063a4b28faa87
@@ -1956,15 +1961,15 @@ outline-due-date = Термін
 # en: bfe11361dd8dc7cc66f5cd6f33d394a95c71c96c
 outline-due-date-ellipsis = Термін…
 # en: 1cfca97d4ac1000c67f7b345992a5b58b3dac4b0
-outline-due-date-change-it = Термін { $date }. Торкніться, щоб змінити
+outline-due-date-change-it = Термін: { $date }. Торкніться, щоб змінити
 # en: 6cf55f3558276e2eefff5dd41ec206dc9780bebf
 outline-remove-due-date = Прибрати термін
 # en: 891e9d6d47f1bacfcba2dca1b282afcbcd25d94d
-outline-agenda = Розклад
+outline-agenda = Список справ
 # en: aa73cdd3260a16a41d572c06ee0da42cb4b85286
 outline-by-status = За статусом
 # en: 0e719dcbe720c315d66c977072f10251b56bd994
-outline-nothing-to-do-yet = Поки нічого робити. Тут з’являться пункти із завданням, статусом або терміном.
+outline-nothing-to-do-yet = Поки немає справ. Тут з’являться пункти із завданням, статусом або терміном.
 # en: 064c87e25e9cca38db987bafd98c9fc9b3003456
 outline-line-to-parent = Лінія до «{ $parent }»
 # en: 99fec066e5bc2f5acc70261b4b5dd4b171fb491a
@@ -1982,7 +1987,7 @@ outline-last-status-means-done = Останній статус означає «
 # en: 7312a31a2c880f2d456663b6f91ad6da980b3a5e
 outline-take-connection-away = Прибрати з’єднання
 # en: 656e5c87ae5cd391807e13c85fb32635c2d441c2
-outline-tap-item-to-connect-from = Торкніться пункту, від якого з’єднати.
+outline-tap-item-to-connect-from = Торкніться пункту, від якого провести з’єднання.
 # en: 7a717eefe223e502e86655b5bf8eb999b867a9dc
 outline-tap-item-to-connect-words = Торкніться пункту, з яким з’єднати «{ $words }».
 # en: 6ca2aebe7601f4f49f7f7df1ac23a0ac4a39abbc
@@ -1990,7 +1995,7 @@ outline-question-options-under-it-and = Питання, варіанти під 
 # en: da74cb6baba7a464fd8881af861a8c8d7952aff9
 common-trip-planner = Планувальник подорожі
 # en: 09ae5dce4d22019190e52d1611d1544becf36489
-outline-twenty-minutes-in-three-parts = Двадцять хвилин у трьох частинах: проблема, ідея, що це означає; слайд на кожен верхній пункт, коли показано як презентацію.
+outline-twenty-minutes-in-three-parts = Двадцять хвилин у трьох частинах: проблема, ідея, що це означає; у вигляді презентації — слайд на кожен пункт верхнього рівня.
 # en: 2af9d498f852995329b0033573277dce32d09ba0
 outline-unfold-all = Розгорнути все
 # en: f5857a77d395db75bc57c2c76b92dc8fa4773053
@@ -2009,13 +2014,13 @@ outline-zoomed-in-on = У фокусі
 # en: 38eca6735f66d186c0bd9c549873e774551dc35f
 outline-a-plain-line = проста лінія
 # en: 884abd948f43aba4e5851b71a20e97aed7a6c96e
-outline-arrow-from-parent = стрілка від батьківського
+outline-arrow-from-parent = стрілка від батьківського пункту
 # en: b1efb9ef91ffdf7d42595fb81fb8b74184a5efbc
-outline-arrow-to-parent = стрілка до батьківського
+outline-arrow-to-parent = стрілка до батьківського пункту
 # en: 54406ea0a263efcf4d3204fff2200f7f4d982c90
 outline-arrows-both-ways-lowercase = стрілки в обидва боки
 # en: 0048342aeabb8b2918689354650579bb2108a957
-outline-e-g-owns-feeds-reports = напр. володіє, живить, підпорядковується
+outline-e-g-owns-feeds-reports = напр.: володіє, постачає, підпорядковується
 # en: e7292866259d82c2071011b0e5de8b80407998e7
 outline-item-above = пункт вище
 # en: 973c239ffbd8d0522cea9cfa9e2664d2a96a2e01
@@ -2028,7 +2033,7 @@ outline-decision-tree = Дерево рішень
 # en: c59b4e8c614eaaf02a0ac81499bc50947192118e
 outline-family = Родина
 # en: 3ac1f9e665cb59f3a08ee0fba150dbbf4aab85a8
-outline-five-minute-retirement-toast-opening = П’ятихвилинний тост на пенсію: вступ, три історії, тост, кожна частина з часом у своєму рядку.
+outline-five-minute-retirement-toast-opening = П’ятихвилинний тост на проводах на пенсію: вступ, три історії, тост, кожна частина з часом у своєму рядку.
 # en: 9ed550a11b44d369413c1b004a5008d3c127a6c1
 outline-novel = Роман
 # en: 35c9710d58daeb1aebb2143cfaeda278f0f67311
@@ -2042,15 +2047,15 @@ outline-syllabus = Програма курсу
 # en: 5b163ae0d9a3fd9b5ab6a8b6c27374091ceb25de
 outline-ten-week-course-when-and = Десятитижневий курс: коли й де, пронумерована тема на тиждень, як оцінюють і що читати.
 # en: 9cea5f42a5742d9eef722836a7a7b59c6a5c0c5a
-outline-thesis-two-arguments-with-their = Теза, два аргументи з доказами, заперечення й відповідь на нього, і вихід.
+outline-thesis-two-arguments-with-their = Теза, два аргументи з доказами, заперечення й відповідь на нього, і висновок.
 # en: e5f2a2c3f76b55d5786f1c311773def62d6920f3
 outline-essay-plan = План есе
 # en: d926d538e1be8112e81292507985514feac5e4c4
 outline-draw-as-family-tree = Показати як родовід
 # en: bfef6f97dfb8178f726a96b8861bc2536e8c6fb4
-outline-five-days-in-lisbon-packed = П’ять днів у Лісабоні, зібрані за категоріями, з тим, що зробити, поки не зачинилися двері.
+outline-five-days-in-lisbon-packed = П’ять днів у Лісабоні: речі за категоріями і що зробити перед виходом з дому.
 # en: 987acdf86bb6a373c995aa374c004bb21bf2e576
-outline-indoors-or-out-for-saturday = У приміщенні чи на вулиці для суботнього ринку: відповіді на кожне питання на його лініях, так і ні.
+outline-indoors-or-out-for-saturday = У приміщенні чи надворі для суботнього ринку: відповіді на кожне питання на його лініях, так і ні.
 # en: 61390a6b5d7d9268827d91b4a818c6a5fbe2011c
 outline-no-internet-at-home-question = Немає інтернету вдома: питання на кожному кроці, так чи ні, аж до дзвінка, який треба зробити.
 # en: b431e4b41d5021ff680bdee33aebda8738cec5b0
@@ -2058,15 +2063,15 @@ outline-packing-list = Список речей
 # en: 013532bb7e7d08afa22a3149f8e74b5ee4d9eaf5
 outline-parts-and-chapters-of-book = Частини й розділи книжки ідей, під кожним розділом рядок про те, що він доводить.
 # en: 5f646cfc8f40ae2515c9d774ae5ad523f524b998
-outline-people-and-three-acts-of = Люди й три дії з розділів, у кожному — що відбувається, з’єднані там, де людина змінює розділ.
+outline-people-and-three-acts-of = Персонажі й розділи в трьох діях, у кожному — що відбувається; з’єднання там, де персонаж змінює хід розділу.
 # en: dbb00953c7a1565bffce71190cfb90220362c471
 outline-question-method-budget-that-adds = Питання, метод, бюджет, що сам себе рахує, графік, ризики й література.
 # en: 57b065618d9af543d6fcc5085edd94aa723f8403
-outline-three-generations-and-next-each = Три покоління й наступне, у кожного роки життя; з меню малюється як родовід.
+outline-three-generations-and-next-each = Три покоління й наступне, у кожного роки життя; через меню показується як родовід.
 # en: 285ec850c11d78bac10f6bfa31b69a37f1b257c9
 outline-troubleshooting = Усунення несправностей
 # en: c126bf3ee80a183d7c300cd69a01e39ab7dd8e53
-outline-who-works-for-whom-at = Хто на кого працює в пекарні з дев’яти людей, у кожного своя роль; з меню малюється як оргструктура.
+outline-who-works-for-whom-at = Хто на кого працює в пекарні з дев’яти людей, у кожного своя роль; через меню показується як оргструктура.
 # en: 0c6266451117f0382231513e4c30d38fb976086e
 outline-pdf-sections-and-bullets = PDF: розділи й маркери
 # en: 32897da2f696f1ddc73da9ef0575827530a80b1a
@@ -2086,7 +2091,7 @@ deck-lost-pet-poster-in-red = Червоне оголошення про заг�
 # en: 4d44cafa1d032ca3ceda90fa9830717ea5cf8491
 deck-morning-workshop-schedule-checklist-of = Ранковий воркшоп: розклад, чек-лист, що взяти, кроки і куди йти далі.
 # en: 7dc13283809d7ed9c506873aee1486fd988cfe5c
-deck-pick-your-own-farm-what = Ферма самозбору: що коли росте, як це працює, ціни, комора й як знайти.
+deck-pick-your-own-farm-what = Ферма самозбору: що коли росте, як це працює, ціни, стодола й як її знайти.
 # en: b822b42bfed453711aed6a262083b2a7aef5cd89
 deck-pitch = Пітч
 # en: a9964d2d4aae75e70e2e8dace25022b6679f25d7
@@ -2094,15 +2099,15 @@ deck-product-in-sentence-what-it = Продукт одним реченням, �
 # en: a46e6eb74ae783d7eb35ae76afc5ab984683886f
 deck-trivia-night-in-four-rounds = Вечір вікторини в чотири раунди, таблиця балів і відповіді на останньому слайді.
 # en: efebc637859160a6f694e66576eebb294de14712
-deck-residents-meeting-about-new-playground = Збори мешканців про новий дитячий майданчик: чому, що пропонують, бюджет колом, коли, як висловитися.
+deck-residents-meeting-about-new-playground = Збори мешканців про новий дитячий майданчик: чому, що пропонують, бюджет круговою діаграмою, коли, як висловитися.
 # en: 02e7a62fc65ed26cb0751706a5ea8f5783414eda
-deck-science-lesson-on-chalkboard-aims = Урок природознавства на крейдовій дошці: цілі, що вони знають, модель, перевірка, домашнє завдання; нотатки вчителя під кожним.
+deck-science-lesson-on-chalkboard-aims = Урок природознавства на крейдовій дошці: цілі, що учні вже знають, модель, перевірка, домашнє завдання; нотатки вчителя під кожним.
 # en: f3a66c7b2a6ebda85ea74938fce4c397eae2a131
-deck-seed-pitch-in-eight-slides = Seed-пітч у вісім слайдів: проблема, продукт, динаміка на діаграмі, бізнес, команда, прохання.
+deck-seed-pitch-in-eight-slides = Seed-пітч у вісім слайдів: проблема, продукт, динаміка на діаграмі, бізнес, команда, запит.
 # en: aab8da6eadee157bba3937e9dc00741cfe48b13f
-deck-bike-shops-quarter-for-its = Квартал магазину для партнерів: виручка на діаграмі, перемоги й промахи, важливі цифри, наступний квартал.
+deck-bike-shops-quarter-for-its = Квартальний звіт веломагазину для партнерів: виручка на діаграмі, успіхи й промахи, важливі цифри, наступний квартал.
 # en: d0fa5e5696edaf949dfe9e739a7a2eef0d433ae2
-deck-small-story-in-panels-about = Маленька історія в панелях про те, як позичити щось сусідові.
+deck-small-story-in-panels-about = Маленька історія в кадрах коміксу про те, як позичити щось сусідові.
 # en: 6c1ff81a2445a9eab1616588060b483cd5b6cde8
 deck-twenty-minute-talk-with-speaker = Двадцятихвилинна доповідь з нотатками доповідача на кожному слайді, діаграма результатів, виноска й висновки.
 # en: 1a2fac58a0b80e771b6d2e526e7d3fee2cf6ef85
@@ -2128,7 +2133,7 @@ deck-recipe-zine = Зін рецептів
 # en: 02bfd82260b75fe685e4e972cb9a3ae9b0a42f5f
 deck-seven-soups-for-cold-week = Сім супів на холодний тиждень, по одному на сторінку, у зіні, складеному з одного аркуша.
 # en: 44b5c7f041391d8b41a8ba365b6f13522877b478
-deck-their-story-for-reception-from = Їхня історія для прийняття: від знайомства до запитання, з часовою шкалою й подякою.
+deck-their-story-for-reception-from = Їхня історія для весільного банкету: від знайомства до освідчення, з часовою шкалою й подякою.
 # en: 2aaeb944a6b05f452d512dc7dd5220adeee294ea
 deck-town-hall-notice = Оголошення для зборів громади
 # en: 14444c384d263fff25ba48b195abb55def791b75
@@ -2178,7 +2183,7 @@ deck-name-badges = Бейджі
 
 # The themes (the Look menu) and the icon colors
 # en: 34118050b206b7ee3e5bcb8e4adbe8c17630020d
-deck-plain = Простий
+deck-plain = Проста
 # en: b6369ed60eb9bda1aa642868ddfb5053547f0206
 deck-boardroom = Зал засідань
 # en: 39973be20679a94e4c998a58c0f6c76daaf6cd11
@@ -2292,7 +2297,7 @@ deck-line-or-two-under-title = Рядок-два під заголовком
 # en: 236bcf1c6a83d3b0f85a065c777d7948b22a0c22
 deck-what-this-page-says-type = Текст сторінки. Він зменшується, щоб поміститися на сторінці.
 # en: e80e281dac24d9c4c3f60dcdbf8700e9603b825e
-deck-panel-line-what-is-said = Панель на рядок: що сказано | підпис. Кнопка «Значок» додає картинку.
+deck-panel-line-what-is-said = Кадр на рядок: що сказано | підпис. Кнопка «Значок» додає картинку.
 # en: 3d6e76c9325034deb76b92c8cc47a2d3c22fcdf3
 deck-speaker-notes = Нотатки доповідача
 # same
@@ -2315,11 +2320,11 @@ common-page-n = Сторінка { $n }
 # en: dd19f9887573a9f06294de48329bfb1b3a5ad273
 deck-front = Лицьова
 # en: 6f453fd2a404a86955b0f23219d84f2bcb4e7d06
-deck-inside-left = Всередині ліворуч
+deck-inside-left = Усередині ліворуч
 # en: 4fe87c5667532867fc721531b92a7ca6b391eb8a
-deck-inside-middle = Всередині посередині
+deck-inside-middle = Усередині по центру
 # en: 3e654f345b202e7b158b2c61ff91fe55b0d3d46d
-deck-inside-right = Всередині праворуч
+deck-inside-right = Усередині праворуч
 # en: 418bf9a5530258c65b3dbc1f932667dafa01469c
 deck-inside-flap = Внутрішня стулка
 # en: b52b36b7269fbfc58ec24bb724691951a3decbe8
@@ -2335,7 +2340,7 @@ deck-qr-code-of-this-deck = QR-код цієї презентації
 # en: 5d5bc5601280c776405941347bbf7e9c63dc3954
 deck-sheet-side-n = Аркуш, сторона { $n }
 # en: 1982f74c2102a55783a4774ddd4895dc7fec26f0
-deck-cut-along-dashes-this-half = розріжте по пунктиру · ця половина зовні
+deck-cut-along-dashes-this-half = розріжте по пунктиру · ця половина назовні
 # en: 0fc0c2932d66df46e1af55ac50d98be2bccd63c3
 deck-print-on-back-flipped-on = друкуйте на звороті, перевернувши по довгому краю
 # en: e0226944c5e9e4df97a3bf718ac488a8a51118fa
@@ -2343,11 +2348,11 @@ deck-cut-along-dashes-fold-along = розріжте по пунктиру · с�
 # en: b0ccda7ec0d37c14d00e5e9f57eeadcb1045ebd7
 deck-print-it-double-sided-on = Надрукуйте з обох боків на папері Letter, перевертаючи по довгому краю, у справжньому розмірі. Розріжте по пунктиру, покладіть верхню половину на нижню й складіть їх разом посередині.
 # en: 7d7f71d31c8968c0555f49f9430133796d626c4f
-deck-print-it-on-one-side = Надрукуйте з одного боку на папері Letter у справжньому розмірі. Складіть навпіл уздовж, потім учетверо; розріжте пунктири посередині; зведіть краї й складіть книжечку.
+deck-print-it-on-one-side = Надрукуйте з одного боку на папері Letter у справжньому розмірі. Складіть навпіл уздовж, потім учетверо; розріжте по пунктиру посередині; зведіть краї й складіть книжечку.
 # en: ce30358159a7953f092af19e48f7dad47608c83d
-deck-print-it-double-sided-on-letter-paper-flipping-on-short-edge-at-actual-size-stack-sheets-in-order-first-on-outside-and-fold-them-together-down-middle = Надрукуйте з обох боків на папері Letter, перевертаючи по короткому краю, у справжньому розмірі. Складіть аркуші по порядку, перший зовні, і складіть їх разом посередині.
+deck-print-it-double-sided-on-letter-paper-flipping-on-short-edge-at-actual-size-stack-sheets-in-order-first-on-outside-and-fold-them-together-down-middle = Надрукуйте з обох боків на папері Letter, перевертаючи по короткому краю, у справжньому розмірі. Покладіть аркуші по порядку, перший — зовні, і зігніть їх разом посередині.
 # en: 96bf1a2ba3e6d649669efc225b3104521735ff25
-deck-print-it-double-sided-on-letter-paper-flipping-on-short-edge-at-actual-size-fold-right-third-in-then-left-third-over-it-front-is-on-top = Надрукуйте з обох боків на папері Letter, перевертаючи по короткому краю, у справжньому розмірі. Загніть праву третину всередину, потім ліву поверх неї: титул зверху.
+deck-print-it-double-sided-on-letter-paper-flipping-on-short-edge-at-actual-size-fold-right-third-in-then-left-third-over-it-front-is-on-top = Надрукуйте з обох боків на папері Letter, перевертаючи по короткому краю, у справжньому розмірі. Загніть праву третину всередину, потім ліву поверх неї: лицьова сторона зверху.
 # en: 6d4cc8d4405840522000283a7e419c1c93e89392
 deck-print-it-on-letter-paper = Надрукуйте на папері Letter у справжньому розмірі.
 # en: f81a8cbfa80cae20e64c2c1dd92fec6cfefba6c9
@@ -2373,7 +2378,7 @@ deck-take-this-deck-home = Заберіть цю презентацію з со�
 # en: acc1edc431e346786fab17d4f10e195ca72257d6
 deck-take-this-deck-home-title = Заберіть цю презентацію з собою: { $title }
 # en: 7fc2d8c7fd4164039149b5a9f2063ddf7ab9d76a
-deck-scan-code-whole-deck-is = Скануйте код: уся презентація в посиланні.
+deck-scan-code-whole-deck-is = Відскануйте код: уся презентація в посиланні.
 # en: a0f82f698bc01f5dc90c760db684589e2d8277eb
 deck-a-qr-code-of-this-deck = QR-код цієї презентації
 
@@ -2384,9 +2389,9 @@ deck-powerpoint-pptx = PowerPoint (PPTX)
 # en: 7660a22bdc9507edd353dd61198b9aa86488d936
 deck-picture-of-every-slide-zip = Картинка кожного слайда (ZIP з PNG)
 # en: 98a41f54e049532b6032b88d7656348adc178c2a
-deck-animation-of-deck-gif = Фільм з презентації (GIF)
+deck-animation-of-deck-gif = Анімація презентації (GIF)
 # en: 3bab526d831e1024e6f8e7d197f9c3d72cc4f0e4
-deck-film-of-deck-webm = Фільм з презентації (WebM)
+deck-film-of-deck-webm = Відео презентації (WebM)
 
 # The templates
 # en: e5604bc465a212ad3d7f4e13ed282f030d9d3a6b
@@ -2394,7 +2399,7 @@ deck-title-agenda-three-points-with = Заголовок, порядок ден�
 # en: 60c974074604818e661eff7940285669d1496647
 deck-status-update = Звіт про стан
 # en: 34714be3698c31c72afb1d4d4b8a7b0c69f30fc5
-deck-done-and-next-side-by = Зроблене й наступне поруч, потім ризики, потім прохання.
+deck-done-and-next-side-by = Зроблене й наступне поруч, потім ризики, потім запити.
 # en: e946db45d2689df95cbac9f8137664409c51f5d8
 deck-proposal = Пропозиція
 # en: 52ab7599cc26432ef9b492b401d04eee1ca5e699
@@ -2402,15 +2407,15 @@ deck-what-you-heard-what-you = Що ви почули, що пропонуєте
 # en: b8e1f28fed63f996c8915470a7ee9ce8aef9b75f
 deck-eight-small-pages-from-one = Вісім маленьких сторінок з одного аркуша: надрукувати, скласти й розрізати, або читати дотиками на телефоні.
 # en: 31b11edde49cd1bd80a198f240426c5b2d8cd65f
-deck-booklet-of-half-letter-pages = Буклет зі сторінок півлиста, від восьми до двадцяти, розкладений для друку, вкладання й складання.
+deck-booklet-of-half-letter-pages = Буклет зі сторінок на половину аркуша Letter, від восьми до двадцяти, розкладений для друку, вкладання й складання.
 # en: ae07389f7b537dbd7eb3007d3f2b36ca3c35c404
-deck-trifold-brochure-six-panels-on = Брошура втричі: шість панелей на двох боках аркуша, кожна там, де потрібен згин.
+deck-trifold-brochure-six-panels-on = Тристулкова брошура: шість панелей на двох боках аркуша, кожна там, де потрібен згин.
 # en: 88c71dbca35b2e7c498adce21174cb1102af384e
-deck-mini-comic-panels-with-picture = Міні-комікс: панелі з картинкою, реплікою в бульбашці й підписом, складений з одного аркуша.
+deck-mini-comic-panels-with-picture = Міні-комікс: кадри з картинкою, реплікою в бульбашці й підписом, складений з одного аркуша.
 # en: e610bb7f6eac1dd5622723ccc779e31e9d9ed190
 deck-poster-or-flyer-headline-and = Плакат чи флаєр: заголовок і кілька рядків, якомога більші на одній сторінці.
 # en: ec024ffdc152af00e77f7219a5293545bdd3bb65
-deck-name-badges-for-meetup-one = Бейджі для зустрічі, сторінка на людину, шість на аркуш, готові до розрізання.
+deck-name-badges-for-meetup-one = Бейджі для зустрічі, сторінка на людину, по шість на аркуші, готові до розрізання.
 # en: 9a51ba7142888f3e0199896de291a1fb4b4298f1
 deck-edit-this-deck = Редагувати цю презентацію
 # en: d5947c525ed0d53dce794385a2cc1cd6e2459dbd
@@ -2432,13 +2437,13 @@ cal-calendar = календар
 # en: 11fcad4bfe2782393e5d2ac5e04d65349890ea94
 cal-name-yours-say = Ім’я (наприклад, ваше)
 # en: e288d42e3bba2f9fc3b7f2287d2ea4f141e72236
-cal-schedule-phases-with-their-tasks = Графік: етапи із завданнями під ними, наскільки просунулося кожне, запуск наприкінці.
+cal-schedule-phases-with-their-tasks = Графік: етапи із завданнями під ними, наскільки виконано кожен, запуск наприкінці.
 # en: f0424f3e15f33d07de80ddfd02a4b56f047767d7
 cal-week-earlier = На тиждень раніше
 # en: 5e63d8681fdc3170ed99fc3abcc3668620f299ca
 cal-week-later = На тиждень пізніше
 # en: ab455a2fb151da1c7d0c39c7534c2f935e028ce9
-cal-weekend-of-sessions-at-set = Вікенд виступів у призначений час, пізній сет після опівночі.
+cal-weekend-of-sessions-at-set = Вікенд виступів за розкладом, пізній сет після опівночі.
 # en: 114574336ac7883aebd0653b3fc5e82f9262dc86
 cal-all-day = Увесь день
 # en: cbf28df446643f9968f7fe68968bca51be5cf792
@@ -2448,7 +2453,7 @@ cal-color-for-new-color = Колір для нових: { $color }
 # en: f6bb0f468a8569c67b3d6826e57e62c5500c3681
 cal-days = Дні
 # en: b50e483c45f8f17795b63f822127ff0171086900
-cal-days-and-times-on-month = Дні й час на місяць, рік чи графік, у будь-якому часовому поясі.
+cal-days-and-times-on-month = Дні й час у вигляді місяця, року чи графіка, у будь-якому часовому поясі.
 # en: 9ccd3e7bb11493f1e93950f7db9148a4794037b7
 cal-done = Готово, %
 # en: a7028454f240815938eaf701823b7d55dbaf98a9
@@ -2517,9 +2522,9 @@ cal-next-year = Наступний рік
 # en: 1562a21cadb04e59b670cb3e32fb54f1777db699
 cal-no-tasks-yet = Завдань поки немає
 # en: 3b2069a4f745374e50f8992752888822ce851db4
-cal-no-tasks-yet-insert-task = Завдань поки немає. Вставте завдання.
+cal-no-tasks-yet-insert-task = Завдань поки немає. Додайте завдання через «Вставити».
 # en: 855dec4a50f5117b51b7f32b59771f28855942ac
-cal-nothing-on-calendar-yet-tap = У календарі поки нічого. Торкніться дня або проведіть через кілька.
+cal-nothing-on-calendar-yet-tap = У календарі поки нічого. Торкніться дня або проведіть по кількох.
 # en: 27d7bd5f744f76fc1ad85bbe975e9fdca473eaeb
 cal-nothing-this-month = Цього місяця нічого.
 # en: 46a299215300b3a0de6931f926bc6b0f2283eb99
@@ -2569,7 +2574,12 @@ cal-color-stands-for = { $color } означає
 # en: 63e5df0eb2fcd351c1d31f23cdf3bf4816e3def5
 cal-every-until-date = { $every } до { $date }
 # en: 519c383aaa892cfff62e992bb947ec79ed5dd57d
-cal-every-n-times = { $every }, разів: { $n }
+cal-every-n-times = { $every }, { $n ->
+        [one] { $n } раз
+        [few] { $n } рази
+        [many] { $n } разів
+       *[other] { $n } раза
+    }
 # en: d69842d42eceddee8c62019d22d4f7ca383cf847
 cal-n-days = { $n ->
         [one] { $n } день
@@ -2581,15 +2591,15 @@ cal-n-days = { $n ->
 cal-n-done = Готово: { $n }%
 # The templates: each name, then its line on the home page.
 # en: 71428a822d08efae1d13babd6073592abec99d1f
-cal-bakerys-posts-and-newsletters-through = Дописи й розсилки пекарні всю зиму, щодня історія з адвенту.
+cal-bakerys-posts-and-newsletters-through = Дописи й розсилки пекарні впродовж зими, щодня — адвент-історія.
 # en: 91dad831b9be334af672cd6052e37dedde16d06e
-cal-youth-soccer-season-practice-every = Сезон дитячого футболу: тренування щотижня, вдома й у гостях у своїх кольорах, плей-оф.
+cal-youth-soccer-season-practice-every = Сезон дитячого футболу: тренування щотижня, домашні й виїзні матчі в кольорах команд, плей-оф.
 # en: d7bad656f3b06c3ee989a1f2960214ee15b2f788
 cal-small-teams-time-off-public = Відпустки маленької команди, державні свята й різдвяне закриття в одному календарі.
 # en: cd6036648af6d0d5614f0ec65eb732300281e059
-cal-community-garden-plots-year-when = Рік городу: коли сіяти, садити, збирати й обрізати, щороку по колу.
+cal-community-garden-plots-year-when = Рік ділянки в громадському городі: коли сіяти, садити, збирати й обрізати, щороку по колу.
 # en: 1b04e3c7d585a3d6297852d158919c9833538a01
-cal-fall-term-from-first-day = Осінній семестр від першого дня до Різдва: закриття, гуртки, поїздка, батьківські збори.
+cal-fall-term-from-first-day = Осінній семестр від першого дня до Різдва: дні без занять, гуртки, поїздка, батьківські збори.
 # en: f80b28faa22109c4d14cf7eb7994768abca09ca8
 cal-bills-and-renewals = Рахунки й поновлення
 # en: 2223281ed9222907f9d00ef35ab71df263d06e46
@@ -2599,7 +2609,7 @@ cal-content-schedule = Графік контенту
 # en: 072b8e4f3e23cdd58cf0a4b3f5c47437127f131b
 cal-editorial-calendar = Редакційний календар
 # en: 26f861d8db0e97575e814ce9799eaf1bcddec28b
-cal-every-autopay-on-its-day = Кожен автоплатіж у свій день щомісяця, щорічні поновлення й термін податків.
+cal-every-autopay-on-its-day = Кожен автоплатіж у свій день щомісяця, щорічні поновлення й терміни сплати податків.
 # en: 2185215436152ae5c1d9429385551e46587c7af8
 cal-garden-calendar = Садовий календар
 # en: 624b49bb82a8487f3ff77d2098b88b1e1ceb6695
@@ -2611,7 +2621,7 @@ cal-school-term = Навчальний семестр
 # en: 2f88af7308e60cbfbe5482a13acec0983b020e09
 cal-training-plan = План тренувань
 # en: 5ef83b6b17b42f15d49c31f33e46ca8d4427e6ae
-cal-twelve-weeks-to-half-marathon = Дванадцять тижнів до півмарафону як графік: база, нарощування, пік, зниження, забіг.
+cal-twelve-weeks-to-half-marathon = Дванадцять тижнів до півмарафону в графіку: база, нарощування, пік, підводка, забіг.
 # en: fdab2603fde2488e117cca6335baee3c481231b9
 cal-two-days-of-talks-and = Два дні доповідей і воркшопів по годинах, колір для кожної зали.
 # en: c8bbdc31a9be182914dd6207c08837389224b33a
@@ -2689,14 +2699,14 @@ diagram-what-connection-says = Підпис з’єднання
 # en: 7d531617dd394cef59d3cf58fc32b3bc458f6744
 diagram-who = Хто
 # en: b48a4ad455ccc1431a4d3304864d95fb5de61df2
-diagram-connection = зв’язок
+diagram-connection = з’єднання
 # en: ad87109bfff0765f4dd8cf4943b04d16a4070fea
 diagram-empty = порожньо
 # The templates
 # en: 8b0bc4ee7e0e6e592c5e8812fef8883b9cbc66de
 diagram-empty-kind-to-start-from = Порожня заготовка: { $kind }.
 # en: cc9cfe196eaec8bbe041a0f648039cf31df71bc7
-diagram-browser-api-database-cache-and = Браузер, API, база даних, кеш і виконавець — і як вони спілкуються.
+diagram-browser-api-database-cache-and = Браузер, API, база даних, кеш і фоновий обробник — і як вони взаємодіють.
 # en: 87796704431b42da8083f869f5ed707dae8cf8fe
 diagram-building-project = Будівельний проєкт
 # en: 5accd00ffa799aafee66a6e2e7a77c3e89abdd38
@@ -2708,17 +2718,17 @@ diagram-small-company = Маленька компанія
 # en: 6dea73ecffb81e3db543a664a3ba6e602d58683b
 diagram-wedding-dinner = Весільна вечеря
 # en: 1086ae322f0484af87b4a35b9537b35ad53ec68b
-diagram-year-of-dates-from-plans = Рік дат, від затверджених планів до відкриття дверей.
+diagram-year-of-dates-from-plans = Рік дат, від затвердження планів до відкриття.
 # en: c75834baf2bd8482dbb5a822f4466908244e65fa
 diagram-cats-and-dogs = Коти й собаки
 # en: 9e4600a93df1d0ffd290278244beed2111ac5cff
-diagram-computing-briefly = Комп’ютери коротко
+diagram-computing-briefly = Коротко про комп’ютери
 # en: 4944a571da52f0920a54f002e637dfc6e179603f
 diagram-fast-cheap-good = Швидко, дешево, якісно
 # en: 77373004b00a68bf2cad476daa1ef0af2a7e26f0
 diagram-four-tables-and-who-sits = Чотири столи й хто за яким сидить.
 # en: 1db47899ccb6eda1f1c46cee3c73acb1394c00ca
-diagram-from-lovelace-to-now-spaced = Від Лавлейс до сьогодні, з інтервалами за роками, і ера внизу.
+diagram-from-lovelace-to-now-spaced = Від Лавлейс до сьогодні, з інтервалами за роками, з епохами внизу.
 # en: c973a2e43350a1c09697af1bd39a17f3cfba2c36
 diagram-from-order-to-doorstep = Від замовлення до порога
 # en: 91519d37fd9fe6f0c40b0429e0ed9f8eb8206006
@@ -2740,15 +2750,15 @@ diagram-three-sets-and-every-overlap = Три множини й усі пере�
 # en: 762ecdafab9b2868da1121459828ec245b03ac5e
 diagram-two-sets-and-what-they = Дві множини і що в них спільне.
 # en: f02e532d172e25cb200306e2edda8e4331418dcd
-diagram-what-to-grow-and-jobs = Що вирощувати і які роботи робити — як інтелект-карта.
+diagram-what-to-grow-and-jobs = Що вирощувати і що треба зробити — як інтелект-карта.
 # en: a6847567865dbe1e5266bbcd7f1f4e0049ee9eb1
-diagram-biology-final-in-december-topic = Підсумковий іспит з біології в грудні, тема за темою, і як відбувається підготовка.
+diagram-biology-final-in-december-topic = Підсумковий іспит з біології в грудні, тема за темою, і як до нього підготуватися.
 # en: e32c422ee266430ea9dd0cd2cc78750a1342302a
 diagram-classroom = Клас
 # en: e491ee6c30111d9c51d83d4a19aba47a3c39c769
 diagram-family-with-godmother = Родина з хрещеною
 # en: c164cf0f878062c2b43b69bf4c1de2c3d6a1f94d
-diagram-principal-her-assistant-principals-classroom = Директорка, її заступники, класні керівники й завгосп.
+diagram-principal-her-assistant-principals-classroom = Директорка, її заступники, вчителі й завгосп.
 # en: f25d2f240d3a52d5361d9b6dd4d8561290566159
 diagram-move-to-lisbon-by-march = Переїзд до Лісабона до березня: документи, квартира, робота й життя, і що має бути першим.
 # en: d2586903dd907f55b8076edbe00b87f4e45ab92f
@@ -2756,7 +2766,7 @@ diagram-elementary-school = Початкова школа
 # en: 3eff234615aa3d538d44f11142e266d62b44ef43
 diagram-restaurant-kitchen = Кухня ресторану
 # en: 3fecd5a70de57bb7748a775d7d4c6072bace1e50
-diagram-router-and-everything-on-it = Роутер і все на ньому: ноутбук, телефон, принтер, телевізор і дверний дзвінок.
+diagram-router-and-everything-on-it = Роутер і все, що до нього під’єднано: ноутбук, телефон, принтер, телевізор і дверний дзвінок.
 # en: 949c596fb3177561b6f2515cbc92b6b68a4292c2
 diagram-team-by-its-skills-design = Команда за навичками: дизайн, тексти й код, і хто вміє більше ніж одне.
 # en: eeb20483d989d9deef42a5ae150f171af0bc6201
@@ -2766,13 +2776,13 @@ diagram-apollo-11 = Аполлон-11
 # en: b5723994f111884ca2f9a82ecb525fb6992e44c8
 diagram-board-game-night = Вечір настільних ігор
 # en: d69e423520fc900afc06f3d31ab286694fb7d67b
-diagram-class-4b-at-four-tables = Клас 4Б за чотирма столами за кольором і куточок читання.
+diagram-class-4b-at-four-tables = Клас 4Б за чотирма столами за кольорами і куточок читання.
 # en: d8d0862686b742040e32f8f3235084ad61fcef28
 diagram-eight-days-in-july-1969 = Вісім днів липня 1969 року, день за днем, від старту до приводнення.
 # en: ce31ba59543ea424a6019bc67976ace141d62d09
 diagram-four-games-table-each-and = Чотири гри, по столу на кожну, і хто в що грає.
 # en: 9d35a9836a6bb4c6180f6c2880c8c19c22ed4ea0
-diagram-from-photo-of-receipt-to = Від фото чека до розрахункового листка, повз керівника й фінансовий відділ.
+diagram-from-photo-of-receipt-to = Від фото чека до розрахункового листка, через керівника й фінансовий відділ.
 # en: 1f1489585228c4bf2d9599bdff9fef70f59b4a60
 diagram-moving-abroad = Переїзд за кордон
 # en: a04755781fd967ec44d2f47f1ebf6ff83b2fe909
@@ -2794,13 +2804,13 @@ diagram-three-generations-of-morenos-and = Три покоління Морен�
 # en: 0e60bdf5cc3dbaa6c2018bd31c760c1e46e79ab1
 diagram-who-can-do-what = Хто що може
 # en: b27a04f87f9d4657107a8dbd89d32eb1dedb41b7
-diagram-tap-empty-space-for-branch = Торкніться порожнього місця, щоб додати гілку. Торкніться ідеї, щоб змінити її, Enter — наступна. Перетягніть одну на іншу, щоб вкласти. «З’єднати» пов’язує дві через усю мапу.
+diagram-tap-empty-space-for-branch = Торкніться порожнього місця, щоб додати гілку. Торкніться ідеї, щоб змінити її, Enter — наступна. Перетягніть одну на іншу, щоб вкласти. «З’єднати» пов’язує дві через усю карту.
 # en: fd23500d007e121f9530bb8b530f367ed9e00825
-diagram-place-cards = Картки місць
+diagram-place-cards = Картки розсадки
 # en: dd9ef7db14a8bdb18f7a266d6e91711443e71a29
-diagram-print-place-cards = Друкувати картки місць
+diagram-print-place-cards = Друкувати картки розсадки
 # en: 030e26916d4c1d1ca0c41b3b447dde54ed891dbd
-diagram-print-place-cards-card-guest = Друкувати картки місць: картка на гостя, вісім на аркуші Letter, щоб вирізати
+diagram-print-place-cards-card-guest = Друкувати картки розсадки: по картці на гостя, вісім на аркуші Letter, для вирізання
 # en: face83ee3014bdc8f98203cc94e2e89222452e90
 diagram-guest = Гість
 # en: 5734dbf560e03e0dea1a1bd85af5088238d5d0e4
@@ -2836,17 +2846,17 @@ trip-geojson = GeoJSON
 # en: 63746c80a9900aa0b9df832d6fe50b7318a88aab
 trip-a-place-by-name = Місце за назвою…
 # en: c86d6e7640906afe6a57236c004f0b1af53b6ee8
-trip-stop-at-middle-of-map = Зупинка в центрі мапи
+trip-stop-at-middle-of-map = Зупинка в центрі карти
 # en: a52fccf0e1e5beca9d5885f1638d5e9a6a2684f9
-trip-measure-in = Міряти в
+trip-measure-in = Одиниці
 # en: 2458f1444290ced8aefad04d5c947b17bf9a81fb
-trip-hours-of-driving = Годинах їзди
+trip-hours-of-driving = Години їзди
 # en: 5fa6c4032be31076212eb57f2fe6ba44d445d501
-trip-miles = Милях
+trip-miles = Милі
 # en: 87bafdbb82c61625882d74515ef2c7e566177ea5
-trip-kilometers = Кілометрах
+trip-kilometers = Кілометри
 # en: 8e49f86b47ba8e4ac259af7b5428623e7332489c
-trip-join-stops-in-order = З’єднати зупинки по черзі
+trip-join-stops-in-order = З’єднати зупинки по порядку
 # en: 7bdcf970899e9519b75f2dc24d1909f670b283cb
 trip-show-whole-route = Показати весь маршрут
 # en: fa157c9ab413b3c415d7ada7457694a35c7869a1
@@ -2858,7 +2868,7 @@ trip-map-tap-to-add-stop = Карта: торкніться, щоб додати
 # en: a481372d94c5d404a0bd0a597cda747c83e952a4
 trip-map-comes-from-openfreemap = Фрагменти карти завантажуються з OpenFreeMap, поки карту відкрито.
 # en: dd1ac7c6150bf40973c618ac841d01f2281dea20
-trip-your-location-is-asked-for = Ваше місцезнаходження потрібне лише для того, щоб відцентрувати мапу, і ніде не зберігається.
+trip-your-location-is-asked-for = Ваше місцезнаходження потрібне лише для того, щоб відцентрувати карту, і ніде не зберігається.
 # en: 6c4827a34debc3c12e8a905f5e8025f0d22802cb
 trip-n-stops = { $n ->
         [one] { $n } зупинка
@@ -2870,7 +2880,7 @@ trip-n-stops = { $n ->
 trip-stop-n = Зупинка { $n }
 # A stop's number is its handle; the bar under stops chosen whole.
 # en: 372c19ab2c53f7582cdbe3823523a8760d0f2807
-trip-stop-n-tap-chooses-it = Зупинка { $n }: торкніться, щоб вибрати, потягніть, щоб перемістити
+trip-stop-n-tap-chooses-it = Зупинка { $n }: торкніться, щоб вибрати, перетягніть, щоб перемістити
 # en: 56f844200d56e1fc382c81f28972a39aab61e019
 trip-chosen-stops = Вибрані зупинки
 # en: a9d55cf1a8a7b85ab9e293fc1e40a440986b0725
@@ -2880,7 +2890,7 @@ trip-name-of-stop-n = Назва зупинки { $n }
 # en: 4dad38541848da253722328a5517dffdda35b4ab
 trip-note-for-stop-n = Примітка до зупинки { $n }
 # en: 0a8abf5522e2f20b1f976982533aabd909645324
-trip-about-time-by-car = приблизно { $time } авто
+trip-about-time-by-car = приблизно { $time } автомобілем
 # en: 7f85e32db6c77473c8b172d1ad1dab75462705a3
 trip-tap-map-to-add-first = Торкніться карти, щоб додати першу зупинку, або вставте місце за назвою.
 # en: 472fd6a8979384a06de401f16cafb9cfdd9a824c
@@ -2930,7 +2940,7 @@ trip-ten-days-around-island-by = Десять днів довкола остро
 # en: 89059cee91b704cf1c0e42de4225df2968a207e7
 trip-dublin-food-crawl = Гастрономічна прогулянка Дубліном
 # en: b934fa6dfc063b38e47ce12ed4622e1cc0d55b75
-trip-seven-places-to-eat-in = Сім місць, де поїсти, за пів дня, із заходу на схід, між кожним коротка прогулянка.
+trip-seven-places-to-eat-in = Сім місць, де поїсти, за пів дня, із заходу на схід, між ними — недалеко пішки.
 # en: 2149c2c628bda1d9ea8522144f7ca59ce2a6bcc8
 trip-yosemites-mist-trail-loop = Петля Mist Trail в Йосеміті
 # en: 056b43a68d915001b02640fbb4ec910045a406ad
@@ -2940,7 +2950,7 @@ trip-loire-by-bike = Луара на велосипеді
 # en: e0fc4a0bf8e42cf48f5f6825bc3b8420df625254
 trip-orleans-to-saumur-in-six = З Орлеана до Сомюра за шість днів, від замку до замку, в кілометрах.
 # en: e68d998a80765bfa302dd2b477f31c97db0d51d2
-trip-college-tour = Огляд коледжів
+trip-college-tour = Поїздка по коледжах
 # en: 02b9d4cf509b27e9011826d208a7831782bb08a6
 trip-six-campuses-in-new-england = Шість кампусів у Новій Англії за тиждень, на кожному заброньований тур.
 # en: 651b0f889a962febf3a80370511cbc08abac73da
@@ -2948,13 +2958,13 @@ trip-japan-by-rail = Японія залізницею
 # en: f687060ca9b759a7ed4bca61f7a2bf96764f2f8e
 trip-tokyo-to-miyajima-in-cherry = З Токіо до Міядзіми в цвітіння сакури, швидкісним потягом.
 # en: afea6c128d27238aad4e11871dfff6f692334301
-trip-last-100-km-of-camino = Останні 100 км Камінo
+trip-last-100-km-of-camino = Останні 100 км Каміно
 # en: 33d01f381424bbc8bbd1b6a9487b3a53c38d07e9
 trip-sarria-to-santiago-on-foot = З Сар’ї до Сантьяго пішки, етап на день.
 # en: b15aca8406aa957e0b92331f3c94b96775672e6b
 trip-new-york-in-movies = Нью-Йорк у кіно
 # en: cdd506e6983757bd11c62cbbe6a0acbbd4002303
-trip-seven-film-and-tv-locations = Сім локацій кіно й телебачення, від верхів до низів міста, за один день.
+trip-seven-film-and-tv-locations = Сім локацій з фільмів і серіалів, від Аптауна до Даунтауна, за один день.
 # en: 2cf068b9c859d837fbc257f1dc20a64d0d96b2b0
 trip-wedding-on-lake-como = Весілля на озері Комо
 # en: a3dec1f6e3f5856eb26a70a9c329744d499a1afc
@@ -2966,9 +2976,9 @@ trip-presenting-next-stop = Наступна зупинка (показ)
 # en: a802f6e93c981ee6dd02df366f0141ca3aa085e0
 trip-presenting-stop-before = Попередня зупинка (показ)
 # en: 3b14d20764a1fdef5ee74f4defab4ff20b0e7cce
-trip-put-stops-on-calendar-day = Покласти зупинки в календар, по дню на кожну
+trip-put-stops-on-calendar-day = Перенести зупинки в календар, по дню на кожну
 # en: 16fa5ad4958332a6bbb1eae6d1a8c6ee6f2c7752
-trip-first-last = Перший або останній
+trip-first-last = Перша або остання
 # en: 0aa341109cff3c75e204930fdeac94f52278bb67
 trip-next-stop = Наступна зупинка
 # en: 35bc0362a4899961a0e878990611c13021c1e549
@@ -2991,7 +3001,7 @@ looks-currency = Валюта
 calc-calculation = обчислення
 # The tape is the list of lines worked out, as on a printing calculator. 'Calculator' and 'Numbers' are above.
 # en: ab4ea6f8fe06812a128297560bee7aff1be0c040
-calc-calculator-that-shows-its-work = Калькулятор, що зберігає хід обчислень: імена, одиниці й перетворення та графіки y = f(x).
+calc-calculator-that-shows-its-work = Калькулятор, що показує хід обчислень: іменовані значення, одиниці й перетворення, графіки y = f(x).
 # en: f146f8e93fc9312f6b8003b048cd24d1574469af
 calc-tape-text = Стрічка як текст
 # The bar
@@ -3021,13 +3031,13 @@ calc-absolute-value = Модуль
 # en: 8e4e872b30d442c4d7f1edf2cabdff971300b607
 calc-factorial = Факторіал
 # en: c584662e0778e58334ec2e9f7fc7f58a98d4dca8
-calc-e-number = e, число
+calc-e-number = Число e
 # en: f3afae23c74a7d1a42a52c0c47bfeb1191b6b6e9
 calc-x-for-graph = x для графіка
 # en: 1cfd7bfc7d3d79d7ea28a91bdc6e032559103831
 calc-units-and-algebra = Одиниці й алгебра
 # en: de1e4faaa9758db564ba458c3956824881efcd9c
-calc-convert-to = Перетворити на
+calc-convert-to = Перевести в
 # en: 95562b515314072f0bc7658aa71f2ef77371d893
 calc-derivative = Похідна
 # en: 965a00d9ba9665ad57ca3edefdcca07a61d3ca95
@@ -3070,7 +3080,7 @@ calc-type-sum-or-3-inch = Введіть обчислення або 3 inch to c
 calc-type-curve-in-x-such = Введіть криву через x, як-от x^2 чи sin(x), і натисніть Enter, щоб намалювати.
 # The templates
 # en: bcb584ffecef3a17141a771a3ceedbbe6d474ca1
-calc-splitting-bill = Розділити рахунок
+calc-splitting-bill = Поділ рахунку
 # en: 0a45fc60c975ea141733f982179ead17af8767b6
 calc-food-drinks-and-18-tip = Їжа, напої й 18% чайових, на шістьох, кожен крок під своїм іменем.
 # en: 2c9e678b58314997051ff2c13d56c92ea6bce7d7
@@ -3086,25 +3096,25 @@ calc-percentage-change = Зміна у відсотках
 # en: 93650e756cc879e41310d678219f483e5ce2cfd1
 calc-rent-up-from-1-450 = Оренда зросла з $1450 до $1595: на скільки, на скільки відсотків і порівняно з підвищенням зарплати.
 # en: 9ff9fc7e0344944578d50820e0326f7bf34f1c8e
-calc-kitchen-conversions = Кухонні перетворення
+calc-kitchen-conversions = Кухонні міри
 # en: c7ccdb52f144fcec56adb8ecb5264f35d03600c0
-calc-cups-ovens-spoons-and-weights = Склянки, духовки, ложки й вага, з однієї міри в іншу.
+calc-cups-ovens-spoons-and-weights = Склянки, температура духовки, ложки й вага: з однієї міри в іншу.
 # en: 267b3d4696b05cc65039fcf4afb8cd9548ed5a29
-calc-scaling-recipe = Масштаб рецепта
+calc-scaling-recipe = Перерахунок рецепта
 # en: a0e9dcbc29ed1364a4891c3671dd43675af64d11
-calc-banana-bread-for-eight-made = Банановий хліб на вісьмох, зроблений на дванадцятьох: кожна кількість помножена на півтора.
+calc-banana-bread-for-eight-made = Банановий хліб: рецепт на вісім порцій перераховано на дванадцять, кожна кількість помножена на півтора.
 # en: 8639704eb84800c829b41e6fcd833d686dcb41f6
-calc-unit-conversions = Перетворення одиниць
+calc-unit-conversions = Переведення одиниць
 # en: 2aef2060ccb74d32576f5b1f936372bdd97252f3
 calc-feet-to-centimeters-miles-to = Фути в сантиметри, милі в кілометри, фунти в кілограми, Фаренгейт у Цельсій.
 # en: 7b31203b4780df1cd410c84049ed4d031dacc8e3
 calc-currency-at-rate-you-type = Валюта за курсом, який ви вводите
 # en: 5f4e47693383fd619db1b39871b821a7fccf86df
-calc-trip-priced-in-euros-and = Поїздка, пораховано в євро й переведено в долари, з комісією картки зверху.
+calc-trip-priced-in-euros-and = Поїздка з цінами в євро, переведеними в долари, плюс комісія картки.
 # en: 6645ae7e46c209b7ba6f5fb3b6aa707395a2c3d2
 calc-fuel-for-trip = Пальне на поїздку
 # en: e2d3235c5cfd9ceffb4e54f0635e4f3841b0c0e1
-calc-boston-to-montreal-and-back = Бостон — Монреаль і назад: милі, милі на галон, ціна, чотири способи.
+calc-boston-to-montreal-and-back = Бостон — Монреаль і назад: милі, милі на галон, ціна, поділена на чотирьох.
 # en: bb294d581aa3512dfdaf06cb5705338f026425ff
 calc-paint-for-room = Фарба для кімнати
 # en: 8899142eaeb03e3a2cfc17f5e68f1977478e2ce5
@@ -3112,7 +3122,7 @@ calc-walls-less-door-and-windows = Стіни без дверей і вікон,
 # en: fa9aac4028931969e4e43d5926f21c1c02b03737
 calc-time-zones = Часові пояси
 # en: daa6b831387e404e18a932466e1b26486e942c1b
-calc-one-call-at-9-in = Один дзвінок о 9 у Нью-Йорку і година в Лондоні, Берліні, Мумбаї, Токіо й Сіднеї.
+calc-one-call-at-9-in = Один дзвінок о 9 у Нью-Йорку і котра тоді година в Лондоні, Берліні, Мумбаї, Токіо й Сіднеї.
 # en: 4126383a0888802d508caf9f1e9a973554c6eb7e
 calc-running-pace = Темп бігу
 # en: 73e59d9404aa7a32f2e7e9ae9ff609c2a74d14cb
@@ -3124,7 +3134,7 @@ calc-weight-over-height-squared-in = Вага, поділена на квадр�
 # en: 18c8c5aa1c31cb796ef6aa8086b794bc59e4d454
 calc-dose-by-weight = Доза за вагою
 # en: a2cdd7739e2ff2b4f1ee78074c5c7981d1b877f9
-calc-milligrams-kilogram-turned-into-milliliters = Міліграми на кілограм, переведені в мілілітри сиропу; перевіряйте кожну дозу з фармацевтом.
+calc-milligrams-kilogram-turned-into-milliliters = Міліграми на кілограм, переведені в мілілітри сиропу; перевіряйте кожну дозу у фармацевта.
 # en: 4699da98e2d343e04aa2465082aedd4d5053aa11
 calc-electricity-for-appliance = Електрика для приладу
 # en: d1b1126c73c13b523ce30bd2f563ad1a7b1c0210
@@ -3136,22 +3146,22 @@ calc-24-000-at-6-9 = $24 000 під 6,9% на шістдесят місяців:
 # en: 3c48bd272b7ad823e277ca649218ae107832bca4
 calc-compound-interest = Складні відсотки
 # en: ce79ef1a5e051c360028ef440ccc8258554abe0a
-calc-5-000-and-200-month = $5000 і $200 на місяць під 5% десять років проти вкладеного.
+calc-5-000-and-200-month = $5000 і $200 на місяць під 5% десять років порівняно з вкладеним.
 # en: 813161b07c2ed5cab82b09f8c31b3810800bcd26
 calc-break-even = Беззбитковість
 # en: bee9b48a097d165fe0d11f7c3a7175019c158c5e
-calc-costs-against-sales-for-coffee = Витрати проти виручки для кавового візка: де лінії перетинаються — стільки чашок на день потрібно.
+calc-costs-against-sales-for-coffee = Витрати й виручка кавового візка: точка перетину ліній — скільки чашок на день треба продавати.
 # en: a9047269b4f64dbbb2df8503315406b2b33fc4e9
 calc-curve-and-its-slope = Крива і її нахил
 # en: b5f43817a99082555a1fc4891fd2eb5bfaba6e10
 calc-x3-3x-its-derivative-and = x³ − 3x, її похідна і пласка дотична на дні западини.
 # en: d4802215f2c0025bd9e3f3fe025230ceda4e830b
-calc-waves-adding-up = Хвилі, що додаються
+calc-waves-adding-up = Додавання хвиль
 # en: 9e46b2d75638fb2ebe905ad0c4be8059be6487cc
 calc-sine-waves-summed-on-their = Синусоїди, складені на шляху до прямокутної хвилі.
 # The grip on a line of the tape; the bar under lines chosen whole.
 # en: fd71cff4626f555a0e69c5b6801a591cabd1d173
-calc-choose-line-n-drag-it = Вибрати рядок { $n }, потягнути для переміщення
+calc-choose-line-n-drag-it = Рядок { $n }: торкніться, щоб вибрати, перетягніть, щоб перемістити
 # en: dab2e3d9cf8c3bfccd20fa34fac6fc738ce9aba7
 calc-chosen-lines = Вибрані рядки
 
@@ -3162,7 +3172,7 @@ compare-changes = Зміни
 # en: 8d105cf44d3926289e65c1c83d8e37cb23fd049e
 compare-compare = Порівняти
 # en: 24512a18bc6d2c27213ad28b26ce9271d94175af
-compare-no-difference = Без різниці
+compare-no-difference = Відмінностей немає
 # en: 8f0fb2d2ece91d9de4ed64f23a12b475c3e18970
 compare-not-link-to-tiny-little = Це не посилання на документ Крихітного офісу
 # en: e82be1221a13b593fd3fd58ffe24f3c3ba58f783
@@ -3182,7 +3192,7 @@ compare-first-link = Перше посилання
 # en: 123bc4a6d63cd1415119c84ed21412a29ef9fbcc
 compare-second-link = Друге посилання
 # en: 010030de6a30e85dd769e07201d8373ebff655c8
-compare-two-links-to-documents-side = Два посилання на документи поруч: те, що змінило друге, позначено. Ніщо не залишає цю сторінку.
+compare-two-links-to-documents-side = Два посилання на документи поруч: те, що змінило друге, позначено. Дані не залишають цю сторінку.
 # en: 2053662dff5d94e9ea30321321ce6cd0df8f0027
 compare-different-apps = різні застосунки
 # en: f4e4b3a1d739ce43635eb9d75d97403c420c0642
@@ -3211,24 +3221,24 @@ open-that-file-is-too-large = Цей файл завеликий.
 # en: 8f432852569edbf7610713a6554e7a61396327d5
 open-keep-them-on-this-device = Зберегти їх на цьому пристрої
 # en: c4fe6d8b035f6108e8a7e0037667dacf3d6cca25
-open-nothing-is-saved-on-this = На цьому пристрої нічого не збережено. Збережіть їх тут або відкрийте один.
+open-nothing-is-saved-on-this = На цьому пристрої нічого не збережено. Збережіть їх тут або відкрийте один із них.
 # en: 0826daee1d616f7de3a2b205eb2360fcaccc77ef
 open-first = Відкрити перший
 # en: 59d36bf6c42ab3ae1481fe62abbc67ffef7a8b22
 open-saving-in-this-browser-n = Зберігається в цьому браузері: { $n ->
-        [one] { $n } документ залишено
-        [few] { $n } документи залишено
-        [many] { $n } документів залишено
-       *[other] { $n } документа залишено
+        [one] { $n } документ збережено
+        [few] { $n } документи збережено
+        [many] { $n } документів збережено
+       *[other] { $n } документа збережено
     }
 # en: 4fc6621d5b53d413dd1fd42cf7e7834ee3ecba5a
 open-that-zip-holds-no-documents = У цьому zip-архіві не знайдено документів, які можна прочитати.
 # en: ed5d2e1ab481efa92392820d83922b25c236c730
 open-n-documents-kept = { $n ->
-        [one] { $n } документ залишено
-        [few] { $n } документи залишено
-        [many] { $n } документів залишено
-       *[other] { $n } документа залишено
+        [one] { $n } документ збережено
+        [few] { $n } документи збережено
+        [many] { $n } документів збережено
+       *[other] { $n } документа збережено
     }
 
 ## a document's QR code (kit/draw/qr-picture.ts)
