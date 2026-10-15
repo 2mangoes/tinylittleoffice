@@ -955,7 +955,7 @@ test("editing surfaces: touch-action manipulation on the box; under a finger the
   expect(coarse.some((r) => r.includes('li[data-done]') && r.includes('var(--to-touch)'))).toBe(true);
 });
 
-test('two spaces at the end of a link end it: typing after a link stays in it, a second space steps out to plain words (Paul, 2026-10-11)', async () => {
+test('a space at the end of a link ends it: letters typed after a link stay in it, the space is plain and what follows is normal text (Paul, 2026-10-15; a phone has no second space, no Escape, no arrow)', async () => {
   // (A link with words beside it; a link alone on its line is words like any other.)
   const h = await mount('my site\n', 'doc', { anchor: { block: 0, offset: 3 }, focus: { block: 0, offset: 7 } });
   h.el.exec('link', 'https://x.y/');
@@ -963,15 +963,15 @@ test('two spaces at the end of a link end it: typing after a link stays in it, a
   expect(h.tlo).toBe('my [site](https://x.y/)\n');
   h.el.sel = caret(0, 7);
   await tick();
+  await typeIn(h, 's');
+  // A letter: the link's.
+  expect(h.doc.blocks[0]).toMatchObject({ runs: [{ t: 'my ' }, { t: 'sites', href: 'https://x.y/' }] });
   await typeIn(h, ' ');
-  // One space: still the link's (the writer closes a link before a trailing space, so the text reads the same).
-  expect(h.doc.blocks[0]).toMatchObject({ runs: [{ t: 'my ' }, { t: 'site ', href: 'https://x.y/' }] });
-  await typeIn(h, ' ');
-  // The second: the space is plain and the second is not written; what follows is normal text.
-  expect(h.doc.blocks[0]).toMatchObject({ runs: [{ t: 'my ' }, { t: 'site', href: 'https://x.y/' }, { t: ' ' }] });
+  // The space: plain, and what follows is normal text.
+  expect(h.doc.blocks[0]).toMatchObject({ runs: [{ t: 'my ' }, { t: 'sites', href: 'https://x.y/' }, { t: ' ' }] });
   await typeIn(h, 'now');
-  expect(h.tlo).toBe('my [site](https://x.y/) now\n');
-  expect(h.el.tx.querySelector('a')!.textContent).toBe('site');
+  expect(h.tlo).toBe('my [sites](https://x.y/) now\n');
+  expect(h.el.tx.querySelector('a')!.textContent).toBe('sites');
 });
 
 test('a list is a list to a screen reader: each item its level, its place and how many; a task says its state; the marks are not read', async () => {

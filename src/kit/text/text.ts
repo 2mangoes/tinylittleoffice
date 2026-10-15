@@ -701,15 +701,14 @@ export class ToText extends LitElement {
         this.emit(sp.ops, sp.sel, 'type');
         return this.emit(s.ops, s.sel, undefined, 'keep', false);
       }
-      // Two spaces at the end of a link end it (Paul, 2026-10-11): typing after a link stays in it, and a second space in
-      // a row steps out, the one space before the caret made plain and the second not written, so what comes next is
-      // normal text.
+      // A space at the end of a link ends it (Paul, 2026-10-15: "when I'm typing a link in the outliner and want to stop
+      // linking, there's no way out"): typing letters after a link stays in it (Mod+K or the bubble made it; the word
+      // typed next is its too), and the space typed at its end is plain, so what comes next is normal text, as in Gmail,
+      // Notes and Slack. It had taken two spaces (2026-10-11), which a phone never sends: iOS makes the second a period,
+      // and its keyboard has no Escape and no arrow. A space inside a link's words is the link's, as before.
       const [a] = ordered(sel);
-      const block = model[a.block];
-      const before = collapsed(sel) && a.offset > 0 && isWords(block) ? runAt(block.runs, a.offset - 1) : null;
-      if (this.fmt.href && before?.run.href && !isAtomic(before.run) && before.run.t.endsWith(' ') && before.start + before.run.t.length === a.offset) {
-        return this.emit([{ op: 'text', at: a.block, from: a.offset - 1, to: a.offset, runs: [{ t: ' ' }] }], caret(a.block, a.offset), 'type');
-      }
+      const link = collapsed(sel) && this.fmt.href ? this.linkSpan(a) : null;
+      if (link && a.offset === link.sel.focus.offset) return this.put(sel, [{ t: ' ' }]);
     }
     let words = data;
     if (data === '"' || data === "'") {
