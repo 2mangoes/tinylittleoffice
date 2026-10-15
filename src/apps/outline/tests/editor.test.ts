@@ -171,7 +171,7 @@ test('the bullet opens the kinds of line, each named for the items it joins; the
   await until(() => !!document.querySelector('[popover]:popover-open'));
   const items = [...document.querySelectorAll<HTMLElement>('[popover]:popover-open [role^=menuitem]')];
   // The item's own things first; the kinds of line last, under the parent's name alone (Paul, 2026-10-15).
-  expect(items.map((x) => x.textContent!.trim())).toEqual(['Edit statuses…', 'Due date…', 'Name the line', 'Plain line', 'Arrow from Product', 'Arrow to Product', 'Arrows both ways']);
+  expect(items.map((x) => x.textContent!.trim())).toEqual(['Edit statuses…', 'Due date…', 'Name the line', 'Plain line', 'Arrow from “Product”', 'Arrow to “Product”', 'Arrows both ways']);
   expect(document.querySelector('[popover]:popover-open [role=menuitemcheckbox][aria-checked=true]')!.textContent!.trim()).toBe('Plain line');
   items[4].click();
   await el.updateComplete;
@@ -1027,7 +1027,8 @@ test('statuses: a pill before the words, tapped to the next; a due chip after th
   el.querySelector<HTMLButtonElement>('.ol-status')!.click();
   await el.updateComplete;
   expect(pills()).toEqual(['DOING', 'DOING']);
-  expect(write(docOf(el))).toContain('- Plan {status=DOING due=2027-03-01}');
+  // (A status brings the task's box with it: Plan is a task now, unchecked.)
+  expect(write(docOf(el))).toContain('- [ ] Plan {status=DOING due=2027-03-01}');
   el.querySelector<HTMLButtonElement>('.ol-status')!.click();
   el.querySelector<HTMLButtonElement>('.ol-status')!.click();
   await el.updateComplete;
@@ -1044,12 +1045,12 @@ test('statuses: a pill before the words, tapped to the next; a due chip after th
   expect(write(docOf(el))).toContain('- [ ] Draft {status=TODO}');
   // The task's box is drawn in the row (the words' own marker is hidden there): a tap checks it, and the status follows.
   const boxes = () => [...el.querySelectorAll<HTMLButtonElement>('.ol-task')].map((b) => b.getAttribute('aria-checked'));
-  expect(boxes()).toEqual(['false']);
-  el.querySelector<HTMLButtonElement>('.ol-task')!.click();
+  expect(boxes()).toEqual(['false', 'false']);
+  row(el, 1).querySelector<HTMLButtonElement>('.ol-task')!.click();
   await el.updateComplete;
-  expect(boxes()).toEqual(['true']);
+  expect(boxes()).toEqual(['false', 'true']);
   expect(write(docOf(el))).toContain('- [x] Draft {status=DONE}');
-  el.querySelector<HTMLButtonElement>('.ol-task')!.click();
+  row(el, 1).querySelector<HTMLButtonElement>('.ol-task')!.click();
   await el.updateComplete;
   expect(write(docOf(el))).toContain('- [ ] Draft {status=TODO}');
   // The row with no status shows no pill and no chip; the words are untouched throughout.
@@ -1069,11 +1070,12 @@ test('Insert ▾: Statuses, Task and Due date on the item in hand; a document fr
   await until(() => !!el.querySelector('to-dialog.ol-statuses dialog[open] .ol-statuses-done'));
   el.querySelector<HTMLButtonElement>('.ol-statuses-done')!.click();
   await until(() => !!el.querySelector('.ol-status'));
-  expect(write(docOf(el))).toBe('---\nstatuses: TODO=red, DOING=yellow, DONE=green\n---\n- Plan {due=2027-03-01}\n- Press list {status=TODO}\n');
-  await pick(el, el.querySelector<HTMLButtonElement>('to-insert button')!, 'Task');
-  await until(() => (last() ?? '').includes('- [ ] Press list'));
+  // (The status brought the task's box; Task on a task checks it, and again unchecks it, the status following.)
+  expect(write(docOf(el))).toBe('---\nstatuses: TODO=red, DOING=yellow, DONE=green\n---\n- Plan {due=2027-03-01}\n- [ ] Press list {status=TODO}\n');
   await pick(el, el.querySelector<HTMLButtonElement>('to-insert button')!, 'Task');
   await until(() => (last() ?? '').includes('- [x] Press list {status=DONE}'));
+  await pick(el, el.querySelector<HTMLButtonElement>('to-insert button')!, 'Task');
+  await until(() => (last() ?? '').includes('- [ ] Press list {status=TODO}'));
   await pick(el, el.querySelector<HTMLButtonElement>('to-insert button')!, 'Due date');
   // The day to start from: the nearest day still to come above, Plan's; the field shows it, Enter keeps it.
   await until(() => !!el.querySelector<HTMLInputElement>('input.ol-due-in'));
@@ -1082,7 +1084,7 @@ test('Insert ▾: Statuses, Task and Due date on the item in hand; a document fr
   field.value = '2027-03-04';
   field.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true, cancelable: true }));
   await until(() => (last() ?? '').includes('due=2027-03-04'));
-  expect(write(docOf(el))).toBe('---\nstatuses: TODO=red, DOING=yellow, DONE=green\n---\n- Plan {due=2027-03-01}\n- [x] Press list {status=DONE due=2027-03-04}\n');
+  expect(write(docOf(el))).toBe('---\nstatuses: TODO=red, DOING=yellow, DONE=green\n---\n- Plan {due=2027-03-01}\n- [ ] Press list {status=TODO due=2027-03-04}\n');
   expect(el.querySelector('input.ol-due-in')).toBeNull();
 });
 
@@ -1121,7 +1123,7 @@ test('Statuses opens the set to edit: renamed, one taken away, Done writes the h
   expect(rows()).toEqual(['Later', 'DONE']);
   el.querySelector<HTMLButtonElement>('.ol-statuses-done')!.click();
   await until(() => !el.querySelector('to-dialog.ol-statuses dialog[open]'));
-  expect(write(docOf(el))).toBe('---\nstatuses: Later=red, DONE=green\n---\n- Plan\n  - Press list {status=Later}\n');
+  expect(write(docOf(el))).toBe('---\nstatuses: Later=red, DONE=green\n---\n- Plan\n  - [ ] Press list {status=Later}\n');
   // Again, from the line menu's Status group: the set as it is; a rename follows on the item.
   await pick(el, row(el, 1).querySelector<HTMLButtonElement>('.ol-kind')!, 'Edit statuses');
   await until(() => !!el.querySelector('to-dialog.ol-statuses dialog[open] .ol-statuses-row input'));
@@ -1131,7 +1133,7 @@ test('Statuses opens the set to edit: renamed, one taken away, Done writes the h
   again.dispatchEvent(new Event('input', { bubbles: true }));
   el.querySelector<HTMLButtonElement>('.ol-statuses-done')!.click();
   await until(() => (write(docOf(el)) ?? '').includes('status=Soon'));
-  expect(write(docOf(el))).toBe('---\nstatuses: Soon=red, DONE=green\n---\n- Plan\n  - Press list {status=Soon}\n');
+  expect(write(docOf(el))).toBe('---\nstatuses: Soon=red, DONE=green\n---\n- Plan\n  - [ ] Press list {status=Soon}\n');
 });
 
 // View as ▾'s agenda and by-status (Paul, 2026-10-15): the things to do as a table sorted by status or day, and grouped by

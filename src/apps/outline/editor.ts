@@ -661,11 +661,12 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
     if (!ends) return [];
     // The item's own things first (its status, its due day, its line's name, the zoom); the kinds of line last, under the
     // parent's name alone, a few words of it (Paul, 2026-10-15: the menu named both items in full, a sentence each).
-    const said = ends.edge ? t('Connection from {from} to {to}', ft(ends)) : t('Line to {parent}', { parent: ends.from });
+    // (A document's own words in a menu are quoted, as everywhere: “Building it…”.)
+    const said = ends.edge ? t('Connection from {from} to {to}', ft(ends)) : t('Line to “{parent}”', { parent: ends.from });
     const kinds: [Dir, string][] = [
       ['--', t('Plain line')],
-      ['->', ends.edge ? t('Arrow from {from} to {to}', { from: ends.from, to: ends.to }) : t('Arrow from {parent}', { parent: ends.from })],
-      ['<-', ends.edge ? t('Arrow from {from} to {to}', { from: ends.to, to: ends.from }) : t('Arrow to {parent}', { parent: ends.from })],
+      ['->', ends.edge ? t('Arrow from {from} to {to}', { from: ends.from, to: ends.to }) : t('Arrow from “{parent}”', { parent: ends.from })],
+      ['<-', ends.edge ? t('Arrow from {from} to {to}', { from: ends.to, to: ends.from }) : t('Arrow to “{parent}”', { parent: ends.from })],
       ['<->', t('Arrows both ways')],
     ];
     const i = indexAt(this.view, at);
@@ -1041,7 +1042,7 @@ export class ToOutlineEditor extends DocElement<OutlineView> {
         ${draft.map(
           (s, i) => html`<div class="ol-statuses-row" role="listitem">
             <input type="text" .value=${s.name} aria-label=${t('Name')} autocomplete="off" spellcheck="false" @input=${(e: Event) => set(i, { name: (e.target as HTMLInputElement).value })} />
-            <span class="ol-swatches" role="group" aria-label=${t('Color')}>${colors.map((w) => html`<button type="button" class="to-btn to-tool ol-swatch" aria-pressed=${String(w === s.word)} aria-label=${COLOR_NAMES[w]()} title=${COLOR_NAMES[w]()} @click=${() => set(i, { word: w })}><span class="to-swatch" style="--swatch:${STATUS_COLORS[w]}" aria-hidden="true"></span></button>`)}</span>
+            <to-menu class="ol-color-menu" .label=${COLOR_NAMES[s.word]()} caret .items=${colors.map((w) => ({ label: COLOR_NAMES[w](), swatch: STATUS_COLORS[w], checked: w === s.word, does: () => set(i, { word: w }) }))}></to-menu>
             <span class="ol-status" style="--ol-status:${STATUS_COLORS[s.word] ?? STATUS_COLORS.gray}" aria-hidden="true">${s.name || '…'}</span>
             ${tool({ label: t('Remove'), icon: UI.close, does: () => (this.statusDraft = draft.filter((_, k) => k !== i)) })}
           </div>`,

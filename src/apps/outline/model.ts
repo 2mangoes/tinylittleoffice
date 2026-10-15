@@ -184,12 +184,16 @@ function withItem(b: Block & { k: 'li' }, kv: Record<string, string | undefined>
 }
 const replaced = (doc: Doc, at: number, next: Block): Op[] =>
   write({ head: {}, blocks: [next] }) === write({ head: {}, blocks: [doc.blocks[at]] }) ? [] : [{ op: 'splice', at, n: 1, blocks: [next] }];
-/** The item's status set (undefined: none); a task's box follows: the last status checks it, another unchecks it. */
+/**
+ * The item's status set (undefined: none). A status brings the task's box with it (the compound bullet, Paul, 2026-10-15:
+ * "We lost the checkbox"): an item given a status is a task, checked when the status is the last, unchecked otherwise;
+ * a task's box follows a change the same way. The box stays when the status is taken away.
+ */
 export function setStatus(doc: Doc, at: number, name: string | undefined, statuses = statusesOf(doc)): Op[] {
   const b = doc.blocks[at];
   if (b?.k !== 'li') return [];
   const last = statuses[statuses.length - 1]?.name;
-  const done = b.done === undefined ? undefined : name !== undefined && name === last ? true : b.done ? false : undefined;
+  const done = name === undefined ? undefined : name === last ? true : b.done === undefined || b.done ? false : undefined;
   return replaced(doc, at, withItem(b, { status: name }, done));
 }
 /** The item's due day set (undefined: none). */

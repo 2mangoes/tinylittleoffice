@@ -634,7 +634,8 @@ test('a status and a due day are the itemâ€™s attributes, kept beside the lineâ€
   expect(v.items[0].dir).toBeDefined();
   expect(v.items[0].status).toBeUndefined();
   let d = applyAll(doc, setStatus(doc, 0, 'DOING'));
-  expect(write(d)).toBe('---\nstatuses: TODO=red, DOING=yellow, DONE=green\n---\n- Draft {.from label=sets color=teal status=DOING}\n  - [ ] Outline\n');
+  // (A status brings the task's box: the compound bullet.)
+  expect(write(d)).toBe('---\nstatuses: TODO=red, DOING=yellow, DONE=green\n---\n- [ ] Draft {.from label=sets color=teal status=DOING}\n  - [ ] Outline\n');
   expect(readOutline(d).items[0].status).toBe('DOING');
   d = applyAll(d, setDue(d, 0, '2026-10-20'));
   expect(write(d)).toContain('{.from label=sets color=teal status=DOING due=2026-10-20}');
@@ -643,12 +644,12 @@ test('a status and a due day are the itemâ€™s attributes, kept beside the lineâ€
   expect(setDue(d, 0, 'tomorrow')).toEqual(setDue(d, 0, undefined));
   d = applyAll(d, setDue(d, 0, undefined));
   expect(write(d)).toContain('{.from label=sets color=teal status=DOING}');
-  // The last status checks a task's box; another unchecks it; a status on no task touches no box.
+  // The last status checks a task's box; another unchecks it; the last on an item that was no task makes it a checked one.
   d = applyAll(d, setStatus(d, 1, 'DONE'));
   expect(write(d)).toContain('- [x] Outline {status=DONE}');
   d = applyAll(d, setStatus(d, 1, 'TODO'));
   expect(write(d)).toContain('- [ ] Outline {status=TODO}');
-  expect(write(applyAll(d, setStatus(d, 0, 'DONE')))).toContain('- Draft {.from label=sets color=teal status=DONE}');
+  expect(write(applyAll(d, setStatus(d, 0, 'DONE')))).toContain('- [x] Draft {.from label=sets color=teal status=DONE}');
   // The box checked goes to the last status; unchecked from the last, to the first; a document with no statuses has only the box.
   d = applyAll(d, tick(d, 1));
   expect(write(d)).toContain('- [x] Outline {status=DONE}');
@@ -659,11 +660,11 @@ test('a status and a due day are the itemâ€™s attributes, kept beside the lineâ€
   // Checked by the words' own editor, the status follows the same way.
   const after = applyAll(d, [{ op: 'splice', at: 1, n: 1, blocks: [{ ...d.blocks[1], done: true } as (typeof d.blocks)[1]] }]);
   expect(write(applyAll(after, followTick(after, 1)))).toContain('- [x] Outline {status=DONE}');
-  // A task made and unmade.
-  d = applyAll(d, makeTask(d, 0, true));
-  expect(write(d)).toContain('- [ ] Draft {.from label=sets color=teal status=DOING}');
+  // A task unmade and made.
   d = applyAll(d, makeTask(d, 0, false));
   expect(write(d)).toContain('- Draft {.from label=sets color=teal status=DOING}');
+  d = applyAll(d, makeTask(d, 0, true));
+  expect(write(d)).toContain('- [ ] Draft {.from label=sets color=teal status=DOING}');
   // The line's kind set afterwards keeps the box and the attributes.
   const task = parse('- a\n  - [x] b {status=DONE due=2027-01-02}\n');
   expect(write(applyAll(task, setLine(task, readOutline(task), 1, { dir: '->' })))).toBe('- a\n  - [x] b {.from status=DONE due=2027-01-02}\n');

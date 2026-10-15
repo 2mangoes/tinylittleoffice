@@ -153,10 +153,16 @@
     border-radius: 50%;
   }
 
-  /* A line's name, once it has one: a chip before the words. */
-  .ol-label {
+  /* The chips of a row, one rule: a line's name before the words (accent), a status's pill (its color), a due day after
+     them (quiet). Each a button; tapped, the name is typed where it is, the status goes to the next, the day is picked. */
+  .ol-label,
+  .ol-status,
+  .ol-due {
     flex-shrink: 0;
     align-self: center;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
     margin: 0 0.125rem 0 0.25rem;
     font: inherit;
     font-size: 0.75rem;
@@ -164,31 +170,35 @@
     max-width: 12em;
     padding: 1px 0.5rem;
     border: 0;
-    background: var(--to-accent-soft);
-    color: var(--to-accent);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     cursor: pointer;
   }
-
-  /* The compound bullet: a status pill in its color before the words, a due day after them (a date field while typed). */
+  .ol-label {
+    background: var(--to-accent-soft);
+    color: var(--to-accent);
+  }
   .ol-status {
-    flex-shrink: 0;
-    align-self: center;
     margin: 0 0.25rem 0 0.125rem;
-    font: inherit;
     font-size: 0.6875rem;
     font-weight: 600;
     letter-spacing: 0.02em;
-    border-radius: var(--to-radius-pill);
-    padding: 1px 0.5rem;
-    border: 0;
     background: var(--ol-status, var(--to-accent));
     color: #fff;
-    white-space: nowrap;
-    cursor: pointer;
   }
+  .ol-due {
+    background: var(--to-surface-2);
+    color: var(--to-ink-2);
+  }
+  .ol-due-in {
+    align-self: center;
+    margin: 0 0.125rem 0 0.25rem;
+    font: inherit;
+    font-size: 0.875rem;
+    color: var(--to-ink);
+  }
+  /* A task's box, in the row (the words' own marker is hidden in a row, below). */
   .ol-task {
     flex-shrink: 0;
     align-self: center;
@@ -208,34 +218,15 @@
     background: var(--to-accent);
     border-color: var(--to-accent);
   }
-  .ol-task:focus-visible {
+  .ol-label:focus-visible,
+  .ol-status:focus-visible,
+  .ol-due:focus-visible,
+  .ol-task:focus-visible,
+  .ol-crumbs button:focus-visible {
     outline: 0.125rem solid var(--to-accent);
     outline-offset: 1px;
   }
-  .ol-due {
-    flex-shrink: 0;
-    align-self: center;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.25rem;
-    margin: 0 0.125rem 0 0.25rem;
-    font: inherit;
-    font-size: 0.75rem;
-    border-radius: var(--to-radius-pill);
-    padding: 1px 0.5rem;
-    border: 0;
-    background: var(--to-surface-2);
-    color: var(--to-ink-2);
-    white-space: nowrap;
-    cursor: pointer;
-  }
-  .ol-due-in {
-    align-self: center;
-    margin: 0 0.125rem 0 0.25rem;
-    font: inherit;
-    font-size: 0.875rem;
-    color: var(--to-ink);
-  }
+
   /* The statuses' dialog: a row a status, its name, its color and a sample pill. */
   .ol-statuses-row {
     display: flex;
@@ -247,13 +238,6 @@
     flex: 1 1 8em;
     min-width: 0;
     font: inherit;
-  }
-  .ol-statuses-row select {
-    font: inherit;
-  }
-  .ol-swatches {
-    display: inline-flex;
-    gap: 0.125rem;
   }
   /* The agenda: a table of the things to do, its headings the sorts; by status: a section a status. A tap lands on the item. */
   .ol-agenda-table {
@@ -326,12 +310,6 @@
     gap: 0.5rem;
     margin-top: 0.75rem;
   }
-  .ol-status:focus-visible,
-  .ol-due:focus-visible {
-    outline: 0.125rem solid var(--to-accent);
-    outline-offset: 1px;
-  }
-
   /* The shared menu's own button is never shown: it opens beside the bullet tapped. */
   .ol-line-menu > button {
     display: none;
@@ -407,12 +385,6 @@
     color: var(--to-ink-3);
   }
   .ol-kind:focus-visible,
-  .ol-label:focus-visible,
-  .ol-crumbs button:focus-visible {
-    outline: 0.125rem solid var(--to-accent);
-    outline-offset: 1px;
-  }
-
   /* The space under the last item: a tap there starts the next one. */
   .ol-below {
     height: 2.75rem;
