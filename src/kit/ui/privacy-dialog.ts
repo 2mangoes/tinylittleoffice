@@ -32,7 +32,7 @@ import './dialog.ts';
 export function trustButton(sealed: boolean, locked: boolean, open: () => void): TemplateResult | typeof nothing {
   if (!sealed && !locked) return nothing;
   const words = sealed ? t('privacy-locked') : t('privacy-protected-by-password');
-  const tip = `${words} · ${keeping() ? t('drawer-saving-in-this-browser') : t('drawer-nothing-saved-in-this-browser')}`;
+  const tip = `${words} · ${keeping() ? t('common-saving-in-this-browser') : t('common-nothing-saved-in-this-browser')}`;
   return html`<button type="button" class="to-btn to-trust ${sealed ? 'locked' : 'quiet'}" aria-haspopup="dialog" aria-label=${tip} title=${tip} @click=${open}>
     ${icon(UI.lock, 18)}<span class="to-trust-words">${words}</span>
   </button>`;
@@ -160,7 +160,7 @@ export class ToPrivacy extends LitElement {
   private async forgetAll() {
     if (!confirm(t('privacy-forget-everything-this-site-keeps'))) return;
     await forgetEverything();
-    toast(t('drawer-nothing-saved-in-this-browser'));
+    toast(t('common-nothing-saved-in-this-browser'));
   }
 
   /* ---------- drawn ---------- */
@@ -175,13 +175,13 @@ export class ToPrivacy extends LitElement {
 
   private renderDevice(held: Holdings) {
     const row = (cls: string, what: string, about: string, now: string, forget: (() => void) | null) =>
-      html`<li class=${cls}><span class="to-held-words"><b>${what}</b><small>${about}</small></span><span class="to-held-now">${now}</span>${forget ? html`<button type="button" class="to-btn to-held-forget" @click=${forget}>${t('home-forget')}</button>` : nothing}</li>`;
+      html`<li class=${cls}><span class="to-held-words"><b>${what}</b><small>${about}</small></span><span class="to-held-now">${now}</span>${forget ? html`<button type="button" class="to-btn to-held-forget" @click=${forget}>${t('common-forget')}</button>` : nothing}</li>`;
     return html`<section class="to-privacy-section to-privacy-device" aria-labelledby="to-privacy-device-h">
       <h3 id="to-privacy-device-h">${t('privacy-what-this-device-holds')}</h3>
-      <p class="to-trust-line quiet">${icon(keeping() ? UI.device : UI.private, 18)}<span>${keeping() ? t('drawer-saving-in-this-browser') : t('privacy-nothing-saved-in-this-browser')}</span></p>
+      <p class="to-trust-line quiet">${icon(keeping() ? UI.device : UI.private, 18)}<span>${keeping() ? t('common-saving-in-this-browser') : t('privacy-nothing-saved-in-this-browser')}</span></p>
       <ul class="to-held">
         ${row('to-held-prefs', t('privacy-preferences'), t('privacy-theme-lifetime-of-short-links'), held.prefs ? t('privacy-n-set', { n: held.prefs }) : t('privacy-none'), held.prefs ? () => forgetPrefs() : null)}
-        ${row('to-held-docs', t('privacy-your-documents'), t('privacy-their-names-and-links-for'), t('privacy-n-documents', { n: held.documents }), held.documents ? () => forgetDocuments() : null)}
+        ${row('to-held-docs', t('privacy-your-documents'), t('privacy-their-names-and-links-for'), t('common-n-documents', { n: held.documents }), held.documents ? () => forgetDocuments() : null)}
         ${row('to-held-links', t('privacy-short-links'), t('privacy-short-links-made-here-until'), t('privacy-n-links', { n: held.links }), held.links ? () => forgetLinks() : null)}
         ${row('to-held-history', t('privacy-your-browsers-history'), t('privacy-every-document-opened-here-in'), t('privacy-not-ours-to-clear'), null)}
       </ul>
@@ -204,8 +204,8 @@ export class ToPrivacy extends LitElement {
     return html`<form class="to-password" @submit=${submit}>
       <p>${has ? t('privacy-this-document-has-password-link') : t('privacy-anyone-with-link-will-need')}</p>
       <div class="to-password-shown">
-        <input type="text" class="to-password-made" readonly .value=${this.made} aria-label=${has ? t('privacy-new-password') : t('privacy-password')} autocomplete="off" spellcheck="false" autocapitalize="off" @focus=${(e: Event) => (e.target as HTMLInputElement).select()} />
-        <button type="button" class="to-btn to-password-copy" @click=${() => void copyText(this.made, t('privacy-password-copied'))}>${icon(UI.copy, 16)}<span>${t('outline-copy')}</span></button>
+        <input type="text" class="to-password-made" readonly .value=${this.made} aria-label=${has ? t('privacy-new-password') : t('common-password')} autocomplete="off" spellcheck="false" autocapitalize="off" @focus=${(e: Event) => (e.target as HTMLInputElement).select()} />
+        <button type="button" class="to-btn to-password-copy" @click=${() => void copyText(this.made, t('privacy-password-copied'))}>${icon(UI.copy, 16)}<span>${t('common-copy')}</span></button>
       </div>
       <button type="button" class="to-btn to-password-another" ?disabled=${this.busy} @click=${() => (this.made = generatePassword())}>${icon(UI.key, 16)}<span>${t('privacy-make-another')}</span></button>
       <p class="to-password-send to-hint">${t('privacy-copy-this-and-send-it')}</p>
@@ -222,7 +222,7 @@ export class ToPrivacy extends LitElement {
    */
   renderProtect(has = this.protected): TemplateResult {
     return html`<section class="to-share-section to-share-protect" aria-labelledby="to-share-protect-h">
-      <h3 id="to-share-protect-h">${t('privacy-password')}</h3>
+      <h3 id="to-share-protect-h">${t('common-password')}</h3>
       <div class="to-share-protect-row">
         <p class="to-trust-line quiet">${icon(has ? UI.lock : UI.unlock, 18)}<span>${has ? t('privacy-protected-by-password') : t('privacy-no-password')}</span></p>
         <button type="button" class="to-btn to-password-open" aria-haspopup="dialog" @click=${(e: Event) => void this.passwordFrom(e.currentTarget as HTMLElement)}>${icon(UI.lock, 16)}<span>${t('privacy-password-ellipsis')}</span></button>
@@ -235,8 +235,8 @@ export class ToPrivacy extends LitElement {
     const privacy = html`<to-dialog class="to-privacy-dialog" heading=${t('privacy-privacy')} .body=${held ? html`${this.doc ? this.renderDoc() : nothing}${this.renderDevice(held)}` : nothing}></to-dialog>`;
     if (!this.doc) return privacy;
     const unlocking = unlockForm({ wrong: this.wrong, busy: this.busy, submit: (e) => void this.tryPassword(e), input: () => (this.wrong = false) });
-    return html`${privacy}<to-dialog class="to-unlock-dialog" heading=${t('privacy-this-document-is-locked')} .body=${unlocking}></to-dialog>
-      <to-dialog class="to-password-dialog" heading=${t('privacy-password')} .body=${this.renderPassword()}></to-dialog>`;
+    return html`${privacy}<to-dialog class="to-unlock-dialog" heading=${t('common-this-document-is-locked')} .body=${unlocking}></to-dialog>
+      <to-dialog class="to-password-dialog" heading=${t('common-password')} .body=${this.renderPassword()}></to-dialog>`;
   }
 }
 customElements.define('to-privacy', ToPrivacy);

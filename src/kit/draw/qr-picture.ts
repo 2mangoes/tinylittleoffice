@@ -24,11 +24,11 @@ const selfLink = () => self;
 export const qrBlock = (): Block => ({ k: 'fence', lang: QR_LANG, body: '' });
 
 /** The code of `link` as a page: the code on white, a line under it. Too long for a code, or no link yet: a sentence instead. */
-export function qrPage(link: string, caption = t('share-qr-code-of-this-document')): Page {
+export function qrPage(link: string, caption = t('common-qr-code-of-this-document')): Page {
   const W = 360;
   const bytes = new TextEncoder().encode(link);
   if (!link || bytes.length > QR_MAX_BYTES) {
-    const why = link ? t('common-too-long-for-qr-code') : t('share-qr-code-of-this-document');
+    const why = link ? t('common-too-long-for-qr-code') : t('common-qr-code-of-this-document');
     return { w: W, h: 120, svg: rect(0, 0, W, 120, '#fff', 'rx="8"') + text(W / 2, 66, why, { px: 13, fill: MUTED, anchor: 'middle' }), alt: why };
   }
   const code = qrSvg(bytes);
@@ -45,10 +45,10 @@ export function qrPage(link: string, caption = t('share-qr-code-of-this-document
 export const qrPicture: AppDef = {
   id: QR_LANG,
   get name() {
-    return t('share-qr-code');
+    return t('common-qr-code');
   },
   get noun() {
-    return t('share-qr-code');
+    return t('common-qr-code');
   },
   group: '',
   icon: QrCode,
@@ -62,5 +62,5 @@ export const qrPicture: AppDef = {
   retitle: (doc) => doc,
   view: (body) => [body.trim() ? qrPage(body.trim(), body.trim()) : qrPage(selfLink())],
   // What it is, and the address it holds (this document's own when it names none).
-  text: (body) => [{ k: 'p', runs: [{ t: `${t('share-qr-code')}: ` }, ...(body.trim() || selfLink() ? [{ t: body.trim() || selfLink(), href: body.trim() || selfLink() }] : [])] }],
+  text: (body) => [{ k: 'p', runs: [{ t: `${t('common-qr-code')}: ` }, ...(body.trim() || selfLink() ? [{ t: body.trim() || selfLink(), href: body.trim() || selfLink() }] : [])] }],
 };

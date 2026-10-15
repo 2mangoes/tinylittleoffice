@@ -9,10 +9,10 @@
 ## the shell: header
 
 shell-menu = מעניו
-shell-title = טיטל
+common-title = טיטל
 # A new document of the app, and one not yet named; { $noun } is the app's noun: "New presentation".
-shell-new-noun = ניי: { $noun }
-shell-untitled-noun = { $noun } אן א נאמען
+common-new-noun = ניי: { $noun }
+common-untitled-noun = { $noun } אן א נאמען
 shell-download = דאונלאודן
 shell-loading = לאדט…
 shell-this-link-holds-something-that = אין דעם לינק איז דא עפעס וואס מען קען נישט ליינען. אפשר איז ער אפגעשניטן געווארן ווען מען האט אים קאפירט.
@@ -27,15 +27,25 @@ shell-copy-link-and-go = קאפירן דעם לינק און גיין
 shell-turn-on-save-in-browser = אנצינדן היטן אין בראוזער און האלטן דא
 shell-go-without = גיין אזוי
 shell-save-in-browser-is-on = היטן אין בראוזער איז אן: דער בראוזער האלט די דאקומענטן וואס איר עפנט. איר קענט עס אויסלעשן אינעם מעניו.
+shell-another-version = אן אנדער ווערסיע
+shell-kept-on-this-device = געהאלטן אויף דעם מכשיר
+shell-keyboard-shortcuts = קיבאורד שארטקאטס
+shell-nothing-to-keep-yet = נאך גארנישט צו האלטן
+shell-open-it = עפענען
+shell-save-in-browser-is-off = היטן אין בראוזער איז אויס: דער בראוזער האלט נישט קיין דאקומענטן. צינדט עס אן אינעם מעניו זיי דא צו האלטן.
+shell-skip-to-apps = שפרינגען צו די עפס
+shell-skip-to-document = שפרינגען צום דאקומענט
+shell-this-device-keeps-another-version = דער מכשיר האלט אן אנדער ווערסיע פון "{ $title }", פון { $when }.
+shell-this-link-was-made-by = דער לינק איז געמאכט געווארן מיט א נייערן Tiny Little Office. לאדט איבער די זייט אים צו באקומען.
 
 ## the home page
 
 home-blank = ליידיג
-home-templates = מוסטערן
+common-templates = מוסטערן
 # The button under an app's tile, naming the template list: "Start Text from"
 # The list of an app's documents kept on this device, under its tile: "Write documents"
 home-app-documents = { $app } דאקומענטן
-home-forget = פארגעסן
+common-forget = פארגעסן
 # The button that forgets one kept document: "Forget Launch notes"
 home-forget-title = פארגעסן { $title }
 # Under an app's documents, the rest folded away: "3 more"
@@ -45,11 +55,23 @@ home-aboard-project-made-with-respect = א פראיעקט פון { $aboard }. ג
 home-beta-version = בעטא ווערסיע
 # The foot's link to the repository on GitHub
 home-email = אימעיל
+home-templates-for-app = מוסטערן פאר { $app }
+home-app-templates = { $app } מוסטערן
+home-templates-for-app-name = מוסטערן פאר { $app }: { $name }
+# Offline, where the templates' file was never kept by the service worker (kit/ui/home.ts).
+home-templates-are-not-saved-in = די מוסטערן זענען נאך נישט געהיט אין דעם בראוזער. פארבינדט זיך צום אינטערנעט זיי צו זען.
+home-documents-found = דאקומענטן געפונען
+home-no-document-here-has-those = קיין דאקומענט דא האט נישט די ווערטער
+home-search-your-documents = זוכן אין אייערע דאקומענטן
+home-n-documents-found = { $n ->
+        [one] איין דאקומענט געפונען
+       *[other] { $n } דאקומענטן געפונען
+    }
 
 ## the drawer (hamburger menu)
 
 drawer-apps = עפס
-drawer-close = צומאכן
+common-close = צומאכן
 # The language select's first option: { $name } is the device's own language, named in itself and never translated ("Default: Français").
 drawer-default-name = סטאנדארט: { $name }
 # The switch that keeps files and settings in this browser (off by default), and the line under it, on or off.
@@ -57,18 +79,18 @@ drawer-save-in-browser = היטן אין בראוזער
 drawer-what-is-this = וואָס איז דאָס?
 drawer-turn-on-to-save-files = צינדט אן כדי צו היטן פיילס אין אייער בראוזער.
 drawer-turn-off-to-remove-all = לעשט אויס כדי אראפצונעמען אלע פיילס און סעטינגס.
-drawer-nothing-saved-in-this-browser = גארנישט געהיט אין דעם בראוזער
-drawer-saving-in-this-browser = מען היט אין דעם בראוזער
+common-nothing-saved-in-this-browser = גארנישט געהיט אין דעם בראוזער
+common-saving-in-this-browser = מען היט אין דעם בראוזער
 drawer-remove-all-files-and-settings = אראפנעמען אלע פיילס און סעטינגס פון דעם בראוזער?
 drawer-language = שפראך
-drawer-theme = טעמע
+common-theme = טעמע
 drawer-match-device = ווי דער מכשיר
 drawer-light = ליכטיג
 drawer-dark = טונקל
 drawer-about = וועגן
 # The name itself is translated too (Paul, 2026-10-10): each language says it in its own words.
 # same
-drawer-tiny-little-office = Tiny Little Office
+common-tiny-little-office = Tiny Little Office
 drawer-about-tiny-little-office = וועגן Tiny Little Office
 drawer-tiny-little-office-is-experiment = Tiny Little Office איז אן עקספערימענט פון { $aboard }, א פירמע פאר דיגיטאלער און AI סטראטעגיע און סאפטוועיר אנטוויקלונג אין ניו יארק.
 drawer-to-reach-out-with-questions = מיט פראגן, { $email }.
@@ -78,6 +100,13 @@ drawer-github-repository = GitHub רעפאזיטארי
 drawer-all-of-these-notes-these = אלע די נאטיצן, די צייכענונגען און די זאצן געשריבן מיט א מארקער פארבלאסן מיט דער צייט. נאר דאס פארגייענדיקע בלייבט.
 drawer-eugene-ionesco-book = אזשען יאנעסקא, { $book }
 drawer-discoveries = אנטדעקונגען
+drawer-documents = דאקומענטן
+drawer-find-app-template-or-command = געפינען עפ, מוסטער, אדער באפעל
+drawer-commands = באפעלן
+drawer-nothing-by-that-name = גארנישט מיט דעם נאמען
+drawer-add-to-home-screen = צולייגן צום היים־סקרין
+drawer-size-of-everything = גרייס פון אלעס
+drawer-to-add-tiny-little-office = צוצולייגן Tiny Little Office צום היים־סקרין: Share, דערנאך Add to Home Screen.
 
 ## links that leave the site (kit/ui/link-guard.ts)
 
@@ -122,7 +151,7 @@ share-expires-in-n-minutes-date = גייט אויס אין { $n ->
     } ({ $date })
 share-opens-as-pages-to-read = עפנט זיך ווי זייטן צו ליינען
 share-opens-in-editor = עפנט זיך אינעם רעדאקטאר
-share-whoever-opens-this-link-gets = ווער עס עפנט דעם לינק באקומט זיין אייגענע קאפיע. ענדערונגען וואס זיי מאכן זענען אין זייער לינק, נישט אין אייערן: בעט זיי צוריקשיקן זייערס.
+common-whoever-opens-this-link-gets = ווער עס עפנט דעם לינק באקומט זיין אייגענע קאפיע. ענדערונגען וואס זיי מאכן זענען אין זייער לינק, נישט אין אייערן: בעט זיי צוריקשיקן זייערס.
 share-short-link-that-expires = קורצער לינק וואס גייט אויס
 share-this-link-expires-in-n = דער לינק גייט אויס אין { $n ->
         [one] { $n } טאג
@@ -155,9 +184,9 @@ share-display-link = ווייז־לינק
 share-opens = עפנט זיך
 share-link-copied = לינק קאפירט
 share-could-not-copy = נישט געקענט קאפירן
-share-share = שעירן…
-share-qr-code = QR קאוד
-share-qr-code-of-this-document = QR קאוד פון דעם דאקומענט
+common-share = שעירן…
+common-qr-code = QR קאוד
+common-qr-code-of-this-document = QR קאוד פון דעם דאקומענט
 share-this-document-is-n-bytes = דער דאקומענט איז { $n } בייטס; דער גרעסטער QR קאוד האלט { $max }. מאכט אים קירצער מיט { $over } בייטס און ער וועט אריינגיין.
 share-this-document-is-n-characters = דער דאקומענט איז { $n } אותיות; א קורצער לינק האלט { $max }. מאכט אים קירצער מיט { $over } און ער וועט אריינגיין.
 share-expires-after = גייט אויס נאך
@@ -173,8 +202,36 @@ share-could-not-shorten-link = נישט געקענט מאכן דעם לינק ק
 share-this-document-is-too-long = דער דאקומענט איז צו לאנג פאר א קורצן לינק.
 share-up-to-hundred-links-day = ביז הונדערט לינקס א טאג פון איין אדרעס.
 share-remove = אראפנעמען
-share-link = לינק
-share-short-link = קורצער לינק
+common-link = לינק
+common-short-link = קורצער לינק
+share-new-noun-date-n = { $noun } { $date } #{ $n }
+# Files, compare, posting and embedding: the agent and sharing surface.
+share-mastodon-server-like-mastodon-social = א Mastodon סערווער, ווי mastodon.social
+share-change = ענדערונג
+share-copy-embed-code = קאפירן איינשטעל־קאוד
+share-copy-show-link = קאפירן פרעזענטיר־לינק
+share-embed = איינשטעלן
+share-embed-code-copied = איינשטעל־קאוד קאפירט
+share-opens-deck-already-presenting = עפנט די פרעזענטאציע שוין פרעזענטירנדיג.
+share-post = פאוסטן
+share-post-link = פאוסטן דעם לינק
+share-show-preview-of-first-page = ווייזן א פרעוויו פון דער ערשטער זייט
+share-picture-of-first-page-and = א בילד פון דער ערשטער זייט און דער טיטל ווערן געהאלטן ליינבאר אויף אונזער סערווער א חודש לאנג כדי די נעטווערק זאל זיי קענען נעמען. דער דאקומענט אליין נישט.
+share-shared-without-preview-reason = געשעירט אן א פרעוויו: { $reason }
+share-making-preview = מען מאכט דעם פרעוויו…
+share-page-could-not-be-drawn = די זייט האט מען נישט געקענט צייכענען
+share-picture-is-over-400-kb = דאס בילד איז איבער 400 KB
+share-server-could-not-be-reached = מען האט נישט געקענט דערגרייכן דעם סערווער
+share-hundred-previews-day-from-one = הונדערט פרעוויוס א טאג פון איין אדרעס
+share-server-refused-picture = דער סערווער האט אפגעזאגט דאס בילד
+share-pages-in-frame-on-another = די זייטן, אין א ראם אויף אן אנדער סייט, מיט א לינק זיי צו עפענען דא.
+share-your-mastodon-server = אייער Mastodon סערווער
+share-left = לינקס
+share-uses = נוצט
+share-where = וואו
+share-where-link-fits = וואו דער לינק פאסט אריין
+share-any-length = סיי וועלכע לענג
+share-n-over = { $n } צו פיל
 
 ## privacy (kit/share/privacy.ts, kit/ui/privacy-dialog.ts): the password, what the device holds
 
@@ -187,12 +244,12 @@ privacy-forget-everything = פארגעסן אלעס
 privacy-preview-sent-with-link-to = א פרעוויו וואס מען שיקט מיט א לינק צו א נעטווערק איז א בילד פון דער ערשטער זייט, דער טיטל און די ערשטע ווערטער, וואס מען קען ליינען אויף אונזער סערווער א חודש לאנג. דער דאקומענט אליין גייט קיינמאל נישט אהין.
 privacy-forget-everything-this-site-keeps = פארגעסן אלעס וואס דער סייט האלט דא, און גארנישט האלטן פון יעצט אן? די דאקומענטן אליין וואוינען אין זייערע לינקס.
 privacy-locked = פארשלאסן
-privacy-locked-document = פארשלאסענער דאקומענט
+common-locked-document = פארשלאסענער דאקומענט
 privacy-new-password = נייער פאסווארד
 privacy-no-password = קיין פאסווארד
 privacy-none = קיינס
 privacy-opening = מען עפנט…
-privacy-password = פאסווארד
+common-password = פאסווארד
 privacy-password-removed = פאסווארד אראפגענומען
 privacy-password-set-link-holds-only = פאסווארד געשטעלט: דער לינק האלט נאר פארשליסלטע אותיות
 privacy-password-ellipsis = פאסווארד…
@@ -209,17 +266,17 @@ privacy-short-links-made-here-until = די קורצע לינקס וואס זענ
 privacy-their-names-and-links-for = זייערע נעמען און לינקס, פארן היים־בלאט.
 privacy-theme-lifetime-of-short-links = טעמע, ווי לאנג קורצע לינקס לעבן.
 privacy-this-document-has-password-link = דער דאקומענט האט א פאסווארד. דער לינק, און יעדער קורצער לינק פון אים, האלט נאר פארשליסלטע אותיות.
-privacy-this-document-is-locked = דער דאקומענט איז פארשלאסן
+common-this-document-is-locked = דער דאקומענט איז פארשלאסן
 privacy-this-document-is-locked-with = דער דאקומענט איז פארשלאסן מיט א פאסווארד.
 privacy-unlock = אויפשליסן
-privacy-unlock-ellipsis = אויפשליסן…
+common-unlock-ellipsis = אויפשליסן…
 privacy-what-this-device-holds = וואס דער מכשיר האלט
 privacy-your-documents = אייערע דאקומענטן
 privacy-your-browsers-history = אייער בראוזער'ס היסטאריע
 privacy-every-document-opened-here-in = יעדער דאקומענט וואס איז דא געעפנט געווארן, אינגאנצן, סיידן ער האט א פאסווארד.
 privacy-not-ours-to-clear = נישט אונזערס אויסצומעקן
 privacy-by-name = פון { $name }
-privacy-n-documents = { $n ->
+common-n-documents = { $n ->
         [one] { $n } דאקומענט
        *[other] { $n } דאקומענטן
     }
@@ -230,11 +287,12 @@ privacy-n-links = { $n ->
 privacy-n-set = { $n } געשטעלט
 privacy-copy-this-and-send-it = קאפירט דאס און שיקט עס אויף אן אנדער וועג ווי דעם לינק. מען קען עס מער נישט ווייזן.
 privacy-make-another = מאכן נאך איינס
+privacy-password-copied = פאסווארד קאפירט
 
 ## a document locked with a password, placed inside another (kit/share/locked.ts, kit/ui/locked-doc.ts)
 
 # The card drawn where it sits; { $app } is the app's name: "A Spreadsheet document, locked with a password".
-locked-with-password = פארשלאסן מיט א פאסווארד
+common-with-password = פארשלאסן מיט א פאסווארד
 locked-app-document-locked-with-password = א דאקומענט פון { $app }, פארשלאסן מיט א פאסווארד
 locked-with-password-unlock = פארשלאסן מיט א פאסווארד. אויפשליסן…
 locked-document-locked-with-password = א דאקומענט פארשלאסן מיט א פאסווארד
@@ -261,24 +319,37 @@ common-chosen-tasks = אויסגעקליבענע טאסקס
 common-open = עפענען
 common-task = טאסק
 common-tasks = טאסקס
+common-find-app-doc-template-or = געפינען עפ, דאקומענט, מוסטער, אדער באפעל
+common-in-this-document = געפינען אין דעם דאקומענט
+common-indent-or-bring-out-in = אריינרוקן אדער ארויסרוקן אין א ליסטע; דאס קומענדיגע קעסטל אין א נעץ
+common-move-selected-items-up-or = רוקן די אויסגעקליבענע זאכן ארויף אדער אראפ
+common-nudge-shapes-in-hand = רוקן א ביסל די פארמען אין דער האנט
+common-select-all-words-of-box = אויסקלייבן אלעס: די ווערטער פונעם קעסטל, דערנאך אלעס
+common-back-to-words = צוריק צו די ווערטער
+common-extend-selection = פארברייטערן די אויסקלייב
+common-next-or-one-before = דער קומענדיגער אדער דער פריערדיגער
+common-step-out-close-collapse-let = ארויסגיין: פארמאכן, צוזאמלייגן, לאזן
+common-check-or-uncheck-task = אפצייכענען אדער אראפנעמען דעם צייכן פון א טאסק
+common-too-long-for-qr-code = צו לאנג פאר א QR קאוד: מאכט דעם דאקומענט קירצער, אדער שעירט א קורצן לינק.
+common-n-of-count = { $n } פון { $count }
 
 ## downloads
 
 download-print = דרוקן
-download-print-or-save-as-pdf = דרוקן, אדער היטן ווי PDF
+common-print-or-save-as-pdf = דרוקן, אדער היטן ווי PDF
 download-picture-png = בילד (PNG)
-download-web-page-html = וועב זייט (HTML)
+common-web-page-html = וועב זייט (HTML)
 download-text-tlo = טעקסט (TLO)
 download-data-json = דאטא (JSON)
 download-downloaded-name = געדאונלאודט: { $name }
 download-failed = דאונלאוד נישט געלונגען
-download-open-in-tiny-little-office = עפענען אין Tiny Little Office
+common-open-in-tiny-little-office = עפענען אין Tiny Little Office
 # Under a document cut off at a slide's foot: a link that opens it whole, in its own app.
 download-see-more = זעט מער
 
 ## the bar, shared by every app
 
-bar-insert = אריינלייגן
+common-insert = אריינלייגן
 bar-bold = דיק
 bar-italic = שיף
 bar-underline = אונטערשטרייכן
@@ -287,21 +358,21 @@ bar-highlight = צייכענען
 bar-heading = קעפל
 bar-bulleted-list = ליסטע מיט פינטלעך
 bar-numbered-list = נומערירטע ליסטע
-bar-table = טאבעלע
+common-table = טאבעלע
 bar-footnote = הערה
-bar-date = דאטום
+common-date = דאטום
 bar-undo = צוריקנעמען
 bar-redo = ווידער טון
-bar-today = היינט
+common-today = היינט
 
 ## the editor (<to-text>): chips, cards and the bubbles
 
 # A footnote's mark, and its words where the notes are drawn, by its number: spoken.
-editor-footnote-n = הערה { $n }
+common-footnote-n = הערה { $n }
 # A card standing for another document held in this one, of a kind no app here reads: "abc document".
-editor-app-document = { $app } דאקומענט
+common-app-document = { $app } דאקומענט
 # The same card when its app is known; { $noun } is the app's noun: "A spreadsheet".
-editor-noun = { $noun }
+common-noun = { $noun }
 editor-code = קאוד
 editor-connection = פארבינדונג
 editor-n-rows = { $n ->
@@ -309,7 +380,7 @@ editor-n-rows = { $n ->
        *[other] { $n } שורות
     }
 editor-notes-words = די הערה'ס ווערטער
-editor-done = פארטיג
+common-done = פארטיג
 editor-address = אדרעס
 editor-not-address = נישט קיין אדרעס
 editor-set-link = שטעלן לינק
@@ -317,10 +388,14 @@ editor-open-link = עפענען לינק
 editor-change-link = טוישן לינק
 editor-remove-link = אראפנעמען לינק
 # The selection bubble's name: what can be done to the words selected.
-editor-format = פארמאט
+common-format = פארמאט
 # A task item's state, said before its words by a screen reader: "done, Buy milk"; "not done, Call the plumber".
 editor-done-lowercase = פארטיג
 editor-not-done = נישט פארטיג
+editor-bold-italic-and-links = דיק, שיף און לינקס
+editor-one-of-words-column-holds = איינס פון די ווערטער וואס דער קאלום האלט, אדער א נייעס
+editor-option = ברירה
+editor-this-browser-lets-page-paste = דער בראוזער לאזט א זייט אריינקלעבן נאר פון דער קיבאורד: נוצט זיין אייגענעם אריינקלעבן.
 
 ## the example in the kit's own documentation
 
@@ -331,18 +406,18 @@ example-n-slides = { $n ->
 
 ## the Word Processor
 
-write-word-processor = שרייב־פראגראם
+common-word-processor = שרייב־פראגראם
 # What one of its documents is called, in running text: "Untitled document"; each app's noun is in its section.
 write-document-lowercase = דאקומענט
 # The group heading the Word Processor sits under on the home page.
-write-words = ווערטער
+common-words = ווערטער
 write-words-on-page-headings-lists = ווערטער אויף א זייט: קעפלעך, ליסטעס, לינקס און הערות, א טאבעלע וואס רעכנט אויס, געדרוקט אויף Letter אדער A4.
 write-document = דאקומענט
 write-here = שרייבט דא.
 write-subheading = אונטער־קעפל
 write-paragraph = פאראגראף
-write-bring-out = ארויסרוקן
-write-indent = אריינרוקן
+common-bring-out = ארויסרוקן
+common-indent = אריינרוקן
 write-align = אויסגלייכן
 write-align-left = אויסגלייכן לינקס
 write-center = אין מיטן
@@ -365,11 +440,11 @@ write-narrow-headline-two-columns = א שמאלער קעפל, צוויי שפא�
 write-horizontal-rule = האָריזאָנטאַלע ליניע
 # Insert ▾'s rule in a document: what follows starts the next page.
 write-page-break = זייט־ברעך
-write-ok = גוט
+common-ok = גוט
 write-this-card = דער קארטל
 write-open-in-app = עפענען אין { $app }
 write-locked-worked-out-for-you = פארשלאסן: אויסגערעכנט פאר אייך
-write-footnotes = הערות
+common-footnotes = הערות
 write-back-to-footnote-n-in = צוריק צו הערה { $n } אינעם טעקסט
 write-back-to-text = צוריק צום טעקסט
 write-n-words = { $n ->
@@ -379,7 +454,7 @@ write-n-words = { $n ->
 # same
 write-word-docx = Word (DOCX)
 # same
-write-markdown = Markdown
+common-markdown = Markdown
 # same
 write-rich-text-rtf = Rich Text (RTF)
 # A table in the text: its heads, its handle, its column menu.
@@ -443,6 +518,12 @@ write-petition = פעטיציע
 write-what-you-ask-why-and = וואס איר בעט, פארוואס, און די נעמען פון די וואס שטימען מסכים.
 write-terms-of-service = תנאים פון באנוץ
 write-small-businesss-terms-in-plain = א קליינע ביזנעס'ס תנאים אין פשוטע ווערטער: באשטעלן, פרייזן, שליסלען, וואס אויב, ענדיגן.
+write-open-as-outline = עפענען ווי ראשי פרקים
+# same
+write-a4 = A4
+# same
+write-letter = Letter
+write-name-this-column = געבן א נאמען דעם קאלום
 
 ## Insert's dialog (kit/ui/insert-dialogs.ts): Tiny Little Office Doc
 
@@ -451,13 +532,13 @@ insert-opening-short-link = מען עפנט דעם קורצן לינק…
 insert-paste-link-of-another-tiny = קלעבט אריין דעם לינק פון אן אנדער Tiny Little Office דאקומענט, לאנג אדער קורץ: זיין ערשטע זייט וועט זיך ווייזן דא.
 insert-this-is-not-tiny-little = דאס איז נישט קיין Tiny Little Office לינק, אדער ער איז שוין אויסגעגאנגען.
 insert-tiny-little-office-doc = Tiny Little Office דאקומענט
-insert-tiny-little-office-doc-ellipsis = Tiny Little Office דאקומענט…
+common-tiny-little-office-doc-ellipsis = Tiny Little Office דאקומענט…
 # Insert ▾'s group of the apps a new document can be made in, inside this one.
-insert-new-document = א נייער דאקומענט
+common-new-document = א נייער דאקומענט
 
 ## another document edited in place (kit/ui/doc-dialog.ts); a table's size is Rows × Columns
 
-doc-cancel = קענסלען
+common-cancel = קענסלען
 doc-rows = שורות
 
 ## charts (kit/draw/chart.ts)
@@ -466,7 +547,7 @@ chart-empty-chart = א ליידיגער טשארט
 chart-bars = באלקנס
 chart-flows-sankey = שטראמען (Sankey)
 chart-flows-list = שטראמען: { $list }.
-chart-lines = ליניעס
+common-lines = ליניעס
 chart-nothing-to-chart-yet = נאך גארנישט צו ווייזן אין א טשארט
 chart-nothing-to-chart-yet-rows = נאך גארנישט צו ווייזן אין א טשארט: שורות פון פון | צו | סכום
 chart-pie = קוגל
@@ -480,10 +561,10 @@ sheet-fit-this-column-to-its = פאסן דעם קאלום צו זיין טעקס
 sheet-cells-in-hand = די אויסגעקליבענע קעסטלעך
 sheet-check-ref = קאנטראלירן { $ref }
 # The column type that holds words as typed.
-sheet-text = טעקסט
-sheet-spreadsheet = ספרעדשיט
+common-text = טעקסט
+common-spreadsheet = ספרעדשיט
 sheet-spreadsheet-lowercase = ספרעדשיט
-sheet-numbers = נומערן
+common-numbers = נומערן
 sheet-spreadsheet-with-formulas-named-cells = א ספרעדשיט מיט פארמולעס, קעסטלעך מיט נעמען און טשארטס; דריי קאלומס צום אנהייב, מער ווי איר דארפט.
 sheet-budget = בודזשעט
 sheet-planned-against-actual-line-each = פלאנירט קעגן בפועל, א שורה פאר יעדעס, מיטן אונטערשייד און סך הכל.
@@ -548,38 +629,38 @@ sheet-eight-teams-single-elimination-each = אכט טימס, איין פארלו
 # same
 sheet-excel-xlsx = Excel (XLSX)
 # same
-sheet-csv = CSV
+common-csv = CSV
 sheet-chart-svg = טשארט (SVG)
 sheet-chart-png = טשארט (PNG)
 sheet-empty-sheet = ליידיגער בלאט
 sheet-n-of-max-shown = ({ $n } פון { $max } געוויזן)
 sheet-50-more-rows = נאך 50 שורות
-sheet-add-column = צולייגן א קאלום
-sheet-add-column-after = צולייגן א קאלום נאכדעם
+common-add-column = צולייגן א קאלום
+common-add-column-after = צולייגן א קאלום נאכדעם
 sheet-chart = טשארט
 sheet-chart-of-table = טשארט פון דער טאבעלע
 sheet-checkbox = קעסטל צום אפצייכענען
 sheet-column-after = קאלום נאכדעם
-sheet-column-c = קאלום { $c }
-sheet-column-c-holds = קאלום { $c } האלט
+common-column-c = קאלום { $c }
+common-column-c-holds = קאלום { $c } האלט
 sheet-column-c-type-what-it = קאלום { $c }: { $type }. וואס ער האלט, סארטירן לויט אים, צולייגן אדער אראפנעמען א קאלום
-sheet-columns = קאלומס
-sheet-delete-which = אויסמעקן { $which }
-sheet-drag-to-fill = שלעפט צו אנפילן
+common-columns = קאלומס
+common-delete-which = אויסמעקן { $which }
+common-drag-to-fill = שלעפט צו אנפילן
 sheet-abc-or-123-for-this = ABC אדער 123, פאר דעם קאלום
 sheet-drag-to-resize-double-click = שלעפט צו טוישן די גרייס, צוויי מאל דריקן צו פאסן
 sheet-fill-down-from-top-row = אנפילן אראפ פון דער אויבערשטער שורה
 sheet-fill-right-from-first-column = אנפילן רעכטס פון דעם ערשטן קאלום
-sheet-fill-drag-to-carry-these = אנפילן: שלעפט צו פירן די קעסטלעך ווייטער
+common-fill-drag-to-carry-these = אנפילן: שלעפט צו פירן די קעסטלעך ווייטער
 sheet-fit-columns-to-page = פאסן די קאלומס צו דער זייט
 sheet-formula = פארמולע
 sheet-function = פונקציע
 sheet-high-to-low = פון הויך צו נידעריג
-sheet-insert-n-rows-above = אריינלייגן { $n ->
+common-insert-n-rows-above = אריינלייגן { $n ->
         [one] א שורה
        *[other] { $n } שורות
     } אויבן
-sheet-insert-n-rows-below = אריינלייגן { $n ->
+common-insert-n-rows-below = אריינלייגן { $n ->
         [one] א שורה
        *[other] { $n } שורות
     } אונטן
@@ -588,8 +669,8 @@ sheet-lock-these-cells-so-reader = פארשליסן די קעסטלעך, אז א
 sheet-locked-part-of-model = פארשלאסן: א טייל פון דעם מאדעל
 sheet-low-to-high = פון נידעריג צו הויך
 sheet-money = געלט
-sheet-name = נאמען
-sheet-name-of-column-c = נאמען פון קאלום { $c }
+common-name = נאמען
+common-name-of-column-c = נאמען פון קאלום { $c }
 sheet-names-cell-to-its-right = גיט א נאמען דעם קעסטל לעבן אים
 # A money column's currency (Money picked in a column's menu): the field's hint, and what it says of words it cannot read.
 sheet-symbol-like-or-code-like = א סימבאל, ווי $, אדער א קאוד, ווי USD. ליידיג איז דעם דאקומענט'ס אייגענע.
@@ -599,15 +680,15 @@ sheet-number = נומער
 sheet-open-link = עפענען { $link }
 sheet-opens-when-clicked = עפנט זיך ווען מען דריקט
 sheet-percent = פראצענט
-sheet-remove-this-column = אראפנעמען דעם קאלום
+common-remove-this-column = אראפנעמען דעם קאלום
 sheet-resize-column-c = טוישן די גרייס פון קאלום { $c }
 sheet-rich-text = רייכער טעקסט
 sheet-row-above = שורה אויבן
 sheet-row-below = שורה אונטן
-sheet-row-n = שורה { $n }
-sheet-row-n-lowercase = שורה { $n }
-sheet-row-n-insert-or-delete = שורה { $n }: אריינלייגן אדער אויסמעקן שורות
-sheet-rows-b = שורות { $a }–{ $b }
+common-row-n = שורה { $n }
+common-row-n-lowercase = שורה { $n }
+common-row-n-insert-or-delete = שורה { $n }: אריינלייגן אדער אויסמעקן שורות
+common-rows-b = שורות { $a }–{ $b }
 sheet-selected-cells = אויסגעקליבענע קעסטלעך
 sheet-show-all-text = ווייזן דעם גאנצן טעקסט
 sheet-shown-as-typed = געוויזן ווי געשריבן
@@ -618,22 +699,37 @@ sheet-is-full-its-last-rows = דער בלאט איז פול: זיינע לעצט
 sheet-three-at-least = דריי לכל הפחות
 sheet-unlock-these-cells = אויפשליסן די קעסטלעך
 sheet-what-it-holds-sort-columns = וואס ער האלט; סארטירן; קאלומס
+# The Spreadsheet: any column removed, the Option column, rich cells, a chart put in from Insert.
+sheet-keeps-one-column = א בלאט האלט איין קאלום
+sheet-choices = ברירות
+sheet-choices-for-ref = ברירות פאר { $ref }
+sheet-has-one = דער בלאט האט איינס
+sheet-edit-cell-caret-at-its = רעדאקטירן דאס קעסטל, דער קורסאר אינעם סוף
+sheet-put-back-what-cell-held = צוריקשטעלן וואס דאס קעסטל האט געהאלטן
+sheet-put-dated-rows-on-calendar = שטעלן די שורות מיט דאטומס אויף א קאלענדאר
 
 ## downloads: hand-offs to another app (kit/file/exports.ts)
 
 export-open-in = עפענען אין
+export-pdf-file = PDF פייל
+export-copy-link-that-downloads-ext = קאפירן א לינק וואס דאונלאודט דעם .{ $ext }
+export-could-not-share-ext = נישט געקענט שעירן דעם .{ $ext }
+export-could-not-show-ext = נישט געקענט ווייזן דעם .{ $ext }
+export-download-ext = דאונלאודן דעם .{ $ext }
+export-share-ext = שעירן דעם .{ $ext }…
+export-view-ext = זען דעם .{ $ext }
 
 ## the icon library (kit/ui/icons-picker.ts)
 
-icons-icon = אייקאן
+common-icon = אייקאן
 icons-favorites = פאוואריטן
 icons-search-icons = זוכן אייקאנס
 icons-suggested = פארגעשלאגן
-icons-icons = אייקאנס
+common-icons = אייקאנס
 icons-no-icons-match-q = קיין אייקאנס פאסן נישט צו "{ $q }".
 icons-search-by-name-or-by = זוכט לויטן נאמען אדער לויט וואס עס מיינט ("געלט", "וועטער", "ai") צו געפינען איינעם פון { $n } אייקאנס.
 icons-no-icon = קיין אייקאן
-icons-icon-or-emoji = אייקאן אדער עמאדזשי
+common-icon-or-emoji = אייקאן אדער עמאדזשי
 icons-search-icons-and-emoji = זוכן אייקאנס און עמאדזשיס
 icons-or-emoji = אייקאנס אדער עמאדזשיס
 icons-emoji = עמאדזשי
@@ -653,9 +749,9 @@ icons-flags = פאנען
 
 # The group heading the Drawing Tool sits under on the home page: Design. 'Draw' is the Animator's mode for drawing.
 draw-draw = צייכענען
-draw-drawing-tool = צייכן־געצייג
+common-drawing-tool = צייכן־געצייג
 draw-drawing = צייכענונג
-draw-design = דיזיין
+common-design = דיזיין
 draw-boxes-arrows-icons-and-labels = קעסטלעך, פיילן, אייקאנס און אויפשריפטן אויף א נעץ; אדער פיקסל־קונסט, וואס קען ווערן א הינטערגרונט קאכל.
 draw-request-flow = בקשה שטראם
 draw-browser-asks-server-which-reads = א בראוזער פרעגט א סערווער, וואס ליינט די דאטא: קעסטלעך פארבונדן מיט פיילן.
@@ -673,7 +769,7 @@ draw-phone-screen-sketched-in-boxes = א טעלעפאן סקרין געסקיצ�
 draw-rosette-with-ribbons-for-volunteer = א ראזעט מיט בענדער פארן פרייוויליגן פון יאר, צו דרוקן, אויסשניידן און צושפילען.
 draw-block-party-from-above-stage = א גאס־שמחה פון אויבן: די בינע, די בודקעס, ערשטע הילף און וואו זיך צו טרעפן אויב מען פארבלאנדזשעט.
 draw-badge = באדזש
-draw-birthday-card = געבורטסטאג קארטל
+common-birthday-card = געבורטסטאג קארטל
 draw-can-we-refund-it-stores = קענען מיר עס צוריקגעבן? א געשעפט'ס ריטערן פאליסי ווי פראגעס, תשובות און וואס צו טון.
 draw-event-map = אונטערנעמונג מאפע
 draw-four-16-by-16-icons = פיר אייקאנס פון 16 אויף 16 אויף איין נעץ, זון, וואלקן, רעגן און שטורעם, צו קאפירן פאר א וועטער פארויסזאג אדער א קנעפל.
@@ -687,7 +783,7 @@ draw-three-ideas-for-coffee-roasters = דריי אידעען פאר א קאוו�
 draw-weather-icons = וועטער אייקאנס
 draw-what-happens-to-package-from = וואס עס געשעט מיט א פעקל פון דעם מאמענט וואס מען קויפט עס: א פראצעס אין שריט, מיט אייקאנס און פארבינדונגען.
 draw-wireframe = סקרין סקעלעט
-draw-picture-svg = בילד (SVG)
+common-picture-svg = בילד (SVG)
 draw-background-tile-svg = הינטערגרונט קאכל (SVG)
 draw-background-tile-png = הינטערגרונט קאכל (PNG)
 draw-animate-this-drawing = אנימירן די צייכענונג
@@ -719,14 +815,14 @@ draw-rounded-box = קיילעכדיגער קעסטל
 draw-hexagon = זעקסעק
 draw-parallelogram = פאראלעלאגראם
 draw-cylinder = צילינדער
-draw-note = נאטיץ
-draw-black = שווארץ
-draw-red = רויט
-draw-orange = מאראנץ
-draw-green = גרין
-draw-blue = בלוי
-draw-purple = לילא
-draw-indigo = אינדיגא
+common-note = נאטיץ
+common-black = שווארץ
+common-red = רויט
+common-orange = מאראנץ
+common-green = גרין
+common-blue = בלוי
+common-purple = לילא
+common-indigo = אינדיגא
 draw-yellow = געל
 draw-sky = הימל
 draw-pink = ראזע
@@ -742,13 +838,13 @@ draw-no-fill = אן פילונג
 draw-fill = פילונג
 draw-bring-to-front = ברענגען צו פארנט
 draw-send-to-back = שיקן צו הינטן
-draw-duplicate = דופליקירן
-draw-edit = רעדאקטירן
-draw-delete = אויסמעקן
+common-duplicate = דופליקירן
+common-edit = רעדאקטירן
+common-delete = אויסמעקן
 draw-put-icon-on-this-shape = לייגן אן אייקאן אויף דער פארעם
 draw-place-icon = אוועקשטעלן אן אייקאן
-draw-zoom-in = נענטער
-draw-zoom-out = ווייטער
+common-zoom-in = נענטער
+common-zoom-out = ווייטער
 # same
 draw-alt = Alt
 draw-alt-text = בילד באשרייבונג
@@ -778,7 +874,7 @@ draw-as-repeating-background = ווי א הינטערגרונט וואס חזר'
 # The contextual bar under a shape, and its words typed on it.
 draw-dashed-line = געשטריכלטע ליניע
 draw-dotted-line = פינטלדיגע ליניע
-draw-edit-words = רעדאקטירן די ווערטער
+common-edit-words = רעדאקטירן די ווערטער
 draw-extra-large-text = גאר גרויסער טעקסט
 draw-gray-fill = גרויע פילונג
 # same
@@ -803,6 +899,10 @@ draw-drawing-canvas-v-selects-r = צייכן לייוונט. V קלייבט או
 draw-tap-shape-to-select-it = דריקט אויף א פארעם צו קלייבן זי, אדער שלעפט ארום פארמען צו קלייבן זיי; קלייבט א געצייג צו צייכענען.
 draw-rotate-left = דרייען לינקס
 draw-rotate-right = דרייען רעכטס
+draw-pixels-n-n = פיקסלען { $n }×{ $n }
+draw-align-center = אויסגלייכן: אין מיטן
+draw-align-left = אויסגלייכן: לינקס
+draw-align-right = אויסגלייכן: רעכטס
 
 ## the Animator
 
@@ -859,7 +959,7 @@ anim-pixel-art-is-made-in = פיקסל־קונסט מאכט מען אינעם צ
 anim-rainbow = רעגן־בויגן
 anim-remove-this-key = אראפנעמען דעם שליסל
 anim-shadow = שאטן
-anim-size = גרייס
+common-size = גרייס
 anim-spin = דרייען
 anim-stage-alt-arrow-keys-move = בינע: { $alt }. פייל־קנעפלעך רוקן די פארעם אין דער האנט (אדער די צייט), קאמע און פונקט שפרינגען א פריים, Space שפילט, K האלט א שליסל.
 anim-shapes-in-hand = די פארמען אין דער האנט
@@ -893,6 +993,10 @@ anim-turns-shape-around-in-plane = דרייט די פארעם ארום אויף 
 anim-which-shape-is-in-front = וועלכע פארעם איז פארנט: א נענטערע פארעם ווערט געצייכנט איבער א ווייטערע, און א ווייטע א ביסל בלאסער. טיפקייט טוישט קיינמאל נישט די גרייס.
 anim-n-times = { $n } מאל
 anim-s-s = { $s } סעק.
+anim-frame-back-frame-on = א פריים צוריק, א פריים פארויס
+anim-nudge-shapes-in-hand-with = רוקן א ביסל די פארמען אין דער האנט; אן קיינע, שפרינגען א פריים
+anim-play-or-pause = שפילן אדער פויזע
+anim-first-frame-last = דער ערשטער פריים, דער לעצטער
 
 ## the Outliner
 
@@ -900,26 +1004,26 @@ anim-s-s = { $s } סעק.
 outline-named-label = , מיטן נאמען "{ $label }"
 outline-book = א ספר
 outline-decision = א באשלוס
-outline-talk = א רעדע
+common-talk = א רעדע
 outline-empty-outline = ליידיגע ראשי פרקים
 outline-outliner-ideas-under-ideas-folded = א ראשי־פרקים־מאכער: אידעען אונטער אידעען, צוזאמגעלייגט און אויפגעלייגט, ארומגערוקט און פארבונדן; דער זעלבער בוים וואס א פרעזענטאציע אדער א מיינד־מעפ ליינט.
 outline-arrow-from-from-to-to = פייל פון { $from } צו { $to }
 outline-arrows-both-ways = פיילן אויף ביידע זייטן
 outline-as-page = ווי א זייט
-outline-calculator = קאלקולאטאר
-outline-calendar = קאלענדאר
+common-calculator = קאלקולאטאר
+common-calendar = קאלענדאר
 outline-cancel-connecting = קענסלען פארבינדן
 outline-change-it = טוישן
-outline-chosen-items = אויסגעקליבענע זאכן
+common-chosen-items = אויסגעקליבענע זאכן
 outline-connect = פארבינדן
 outline-connect-from-words = פארבינדן פון "{ $words }"
 outline-connect-from-to-to = פארבינדן "{ $from }" מיט "{ $to }"
 outline-connection-from-from-to-to = פארבינדונג פון { $from } צו { $to }
-outline-connections = פארבינדונגען
-outline-copy = קאפירן
-outline-presentation-builder = פרעזענטאציע־בויער
-outline-diagram-maker = דיאגראם־מאכער
-outline-drag-to-move = שלעפט צו רוקן
+common-connections = פארבינדונגען
+common-copy = קאפירן
+common-presentation-builder = פרעזענטאציע־בויער
+common-diagram-maker = דיאגראם־מאכער
+common-drag-to-move = שלעפט צו רוקן
 outline-draw-as-mind-map = צייכענען ווי א מיינד־מעפ
 outline-draw-as-network = צייכענען ווי א נעטווערק
 outline-draw-as-org-chart = צייכענען ווי אן ארג טשארט
@@ -930,24 +1034,24 @@ outline-fold-all = צוזאמלייגן אלעס
 outline-item = זאך
 outline-item-n = זאך { $n }
 outline-kind-of-line = סארט ליניע
-outline-launch-plan = לאנטש פלאן
+common-launch-plan = לאנטש פלאן
 outline-line-from-from-to-to = ליניע פון { $from } צו { $to }
 outline-line-named-label-change-it = ליניע מיטן נאמען "{ $label }": טוישן
-outline-animator = אנימאציע־מאכער
-outline-move-down = רוקן אראפ
+common-animator = אנימאציע־מאכער
+common-move-down = רוקן אראפ
 outline-move-this-item-drag-it = רוקן די זאך: שלעפט זי אויף אן אנדערע
-outline-move-up = רוקן ארויף
+common-move-up = רוקן ארויף
 outline-name-of-line = נאמען פון דער ליניע
 outline-numbered = נומערירט
 outline-opml-for-outliners = OPML (פאר ראשי־פרקים־מאכערס)
-outline-open-in-new-tab = עפענען אין א נייעם טאב
-outline-outline = ראשי פרקים
+common-open-in-new-tab = עפענען אין א נייעם טאב
+common-outline = ראשי פרקים
 outline-outliner = ראשי־פרקים־מאכער
 outline-outline-lowercase = ראשי פרקים
-outline-paste = אריינקלעבן
+common-paste = אריינקלעבן
 outline-plain-line = פשוטע ליניע
 outline-plain-text = פשוטער טעקסט
-outline-show-as-slides = ווייזן ווי סליידס
+common-show-as-slides = ווייזן ווי סליידס
 outline-show-as-outline = ווייזן ווי ראשי פרקים
 outline-take-away-connection-from-from = אוועקנעמען די פארבינדונג פון { $from } צו { $to }
 outline-take-it-away = אוועקנעמען
@@ -955,14 +1059,14 @@ outline-take-connection-away = אוועקנעמען די פארבינדונג
 outline-tap-item-to-connect-from = דריקט אויף דער זאך פון וואו צו פארבינדן.
 outline-tap-item-to-connect-words = דריקט אויף דער זאך וואו צו פארבינדן "{ $words }".
 outline-question-options-under-it-and = די פראגע, די ברירות אונטער איר, און ביי יעדע וואס רעדט פאר איר און קעגן איר.
-outline-trip-planner = רייזע־פלאנער
+common-trip-planner = רייזע־פלאנער
 outline-twenty-minutes-in-three-parts = צוואנציג מינוט אין דריי טיילן: די פראבלעם, די אידעע, וואס עס מיינט; א סלייד פאר יעדע אויבערשטע זאך ווען מען ווייזט עס ווי א פרעזענטאציע.
 outline-unfold-all = אויפלייגן אלעס
 outline-unfold-n-inside = אויפלייגן, { $n ->
         [one] איינס אינעווייניג
        *[other] { $n } אינעווייניג
     }
-outline-untitled = אן א נאמען
+common-untitled = אן א נאמען
 outline-view-as = ווייזן ווי
 outline-zoomed-in-on = נענטער אויף
 outline-a-plain-line = א פשוטע ליניע
@@ -996,6 +1100,9 @@ outline-question-method-budget-that-adds = די פראגע, דער מעטאד, �
 outline-three-generations-and-next-each = דריי דורות און דער קומענדיגער, יעדער מיט זיינע יארן, געצייכנט ווי א פאמיליע בוים פונעם מעניו.
 outline-troubleshooting = פראבלעמען לייזן
 outline-who-works-for-whom-at = ווער ארבעט פאר וועמען אין א בעקעריי פון ניין, יעדער מיט זיין ראלע, געצייכנט ווי אן ארג טשארט פונעם מעניו.
+outline-pdf-sections-and-bullets = PDF: אפטיילונגען און פינטלעך
+outline-fold-unfold = צוזאמלייגן, אויפלייגן
+outline-name-line = געבן א נאמען דער ליניע
 
 ## the Presentation Builder
 
@@ -1041,7 +1148,7 @@ deck-bullets = פינטלעך
 deck-two-columns = צוויי שפאלטן
 deck-big-icon = גרויסער אייקאן
 deck-fade = פארבלאסן
-deck-cut = שניידן
+common-cut = שניידן
 deck-slide = גליטשן
 deck-zoom = זום
 deck-zine = זין
@@ -1067,12 +1174,12 @@ deck-fun = פריילעך
 deck-themes-color = די טעמע'ס קאליר
 
 # The bar
-deck-present = פרעזענטירן
+common-present = פרעזענטירן
 deck-see-sheets-to-print = זען די בויגנס צום דרוקן
 deck-back-to-pages = צוריק צו די זייטן
 deck-headline = הויפט קעפל
 deck-layout-layout = אויסשטעל: { $layout }
-deck-look-theme = אויסזען: { $theme }
+common-look-theme = אויסזען: { $theme }
 deck-transition-transition = איבערגאנג: { $transition }
 deck-format-format = פארמאט: { $format }
 deck-printing = דרוקן
@@ -1100,11 +1207,11 @@ deck-big-icon-page = זייט מיט גרויסן אייקאן
 deck-four-more-pages = נאך פיר זייטן
 deck-on-slide = אויפן סלייד
 deck-on-page = אויף דער זייט
-deck-pages = זייטן
+common-pages = זייטן
 
 # The canvas
 deck-add-icon = צולייגן אן אייקאן
-deck-change-icon = טוישן דעם אייקאן
+common-change-icon = טוישן דעם אייקאן
 deck-pick-icon = אויסקלייבן אן אייקאן
 deck-left-column = לינקער שפאלט
 deck-right-column = רעכטער שפאלט
@@ -1123,7 +1230,7 @@ deck-remove-from-slide = אראפנעמען פונעם סלייד
 deck-slide-n = סלייד { $n }
 deck-front-cover = פארנטיגער טאוול
 deck-back-cover = הינטערשטער טאוול
-deck-page-n = זייט { $n }
+common-page-n = זייט { $n }
 deck-front = פארנט
 deck-inside-left = אינעווייניג לינקס
 deck-inside-middle = אינעווייניג אין מיטן
@@ -1147,11 +1254,11 @@ deck-print-it-on-letter-paper-at-actual-size-cut-along-dashes-six-badges-sheet =
 
 # Presenting, and the closing slide
 deck-presentation = פרעזענטאציע
-deck-previous = פריערדיגער
-deck-next = קומענדיגער
-deck-stop-presenting = אויפהערן פרעזענטירן
+common-previous = פריערדיגער
+common-next = קומענדיגער
+common-stop-presenting = אויפהערן פרעזענטירן
 deck-slide-n-of-total = סלייד { $n } פון { $total }
-deck-notes = נאטיצן
+common-notes = נאטיצן
 deck-n-hides-them = N באהאלט זיי
 deck-take-this-deck-home = נעמט די פרעזענטאציע אהיים
 deck-take-this-deck-home-title = נעמט די פרעזענטאציע אהיים: { $title }
@@ -1177,6 +1284,12 @@ deck-trifold-brochure-six-panels-on = א בראשור אין דריי: זעקס 
 deck-mini-comic-panels-with-picture = א מיני קאמיק: בילדלעך מיט א בילד, א רייד־בלאז און אן אונטערשריפט, צוזאמגעלייגט פון איין בויגן.
 deck-poster-or-flyer-headline-and = א פלאקאט אדער פלייער: א הויפט קעפל און עטליכע שורות, אזוי גרויס ווי איין זייט לאזט.
 deck-name-badges-for-meetup-one = נאמען באדזשעס פאר א צוזאמקום, איין זייט א מענטש, זעקס א בויגן, גרייט צו שניידן.
+deck-edit-this-deck = רעדאקטירן די פרעזענטאציע
+deck-new-slide = א נייער סלייד
+deck-presenting-back = פרעזענטירן: צוריק
+deck-presenting-next-line-or-slide = פרעזענטירן: די קומענדיגע שורה אדער סלייד
+deck-presenting-whole-slide = פרעזענטירן: דער גאנצער סלייד
+deck-slide-before-slide-after-on = דער סלייד פריער, דער סלייד נאכדעם (אויף דער זייט־לייסטע)
 
 ## the Calendar app
 
@@ -1203,7 +1316,7 @@ cal-end = סוף
 cal-end-date = ענד דאטום
 cal-end-time = ענד צייט
 cal-ends = ענדיגט זיך
-cal-event = אונטערנעמונג
+common-event = אונטערנעמונג
 cal-every-day = יעדן טאג
 cal-every-month = יעדן חודש
 cal-every-week = יעדע וואך
@@ -1239,7 +1352,7 @@ cal-start = אנהייב
 cal-start-date = אנהייב דאטום
 cal-start-time = אנהייב צייט
 cal-starts = הייבט זיך אן
-cal-stops = הערט אויף
+common-stops = הערט אויף
 cal-same-dates-as-gantt-chart = די זעלבע דאטומס ווי א גאנט טשארט
 cal-this-calendar-is-written-in = דער קאלענדאר איז געשריבן אין { $zone } צייט.
 cal-this-calendar-names-no-time = דער קאלענדאר נעמט נישט אן קיין צייט זאנע: זיינע צייטן ווערן געליינט אין אייערע, { $zone }.
@@ -1369,6 +1482,19 @@ diagram-house-network = די שטוב נעטווערק
 diagram-water-cycle = דער וואסער קרייז
 diagram-three-generations-of-morenos-and = דריי דורות פון די מארענאס, און א פינטלדיגע ליניע צו א קוואטער־קינד.
 diagram-who-can-do-what = ווער קען טון וואס
+diagram-tap-empty-space-for-branch = דריקט אויף א ליידיג ארט פאר א צווייג; דריקט אויף אן אידעע צו שרייבן אויף איר, Enter פאר דער קומענדיגער; שלעפט איינס אויף דער אנדערער עס אונטערצולייגן; פארבינדן פארבינדט צוויי איבער דער מעפ.
+diagram-place-cards = פלאץ קארטלעך
+diagram-print-place-cards = דרוקן פלאץ קארטלעך
+diagram-print-place-cards-card-guest = דרוקן פלאץ קארטלעך: א קארטל פאר יעדן גאסט, אכט אויף א Letter בויגן, אויסצושניידן
+diagram-guest = גאסט
+diagram-new-idea = נייע אידעע
+diagram-tap-empty-space-for-person = דריקט אויף א ליידיג ארט פאר א מענטש; דריקט אויף איינעם צו שרייבן אויף אים, Shift+Enter פאר זיין ראלע אונטערן נאמען, Enter פארן קומענדיגן; שלעפט איינעם אויף אן אנדערן אים אונטערצולייגן.
+diagram-tap-empty-space-for-event = דריקט אויף א ליידיג ארט פאר א געשעעניש: שרייבט ווען, Shift+Enter, דערנאך וואס איז געשען; יארן און דאטומס זענען אויסגעשטעלט ווי זיי זענען געפאלן; א צייט־שפאן איז א בענדל.
+diagram-lanes-name = דעם באן'ס נאמען
+diagram-when = ווען
+diagram-tap-person-to-type-on = דריקט אויף א מענטש צו שרייבן אויף אים, + נאכן נאמען פאר זיין פארטנער, Shift+Enter פאר זיינע יארן אונטערן נאמען; Enter פארן קומענדיגן; שלעפט איינעם אויף אן אנדערן אים אונטערצולייגן; פארבינדן צייכנט א פינטלדיגע ליניע צווישן צוויי.
+diagram-tap-empty-space-for-table = דריקט אויף א ליידיג ארט פאר א טיש; דריקט אויף א טיש אדער א מענטש צו שרייבן, א קאמע נאך א נאמען פארן קומענדיגן גאסט; שלעפט א מענטש צו אן אנדער טיש.
+diagram-tap-inside-circles-to-add = דריקט אינעווייניג אין די קרייזן צוצולייגן א זאך דארט, א קאמע נאך איר פאר דער קומענדיגער; דריקט אויף א גרופע'ס נאמען אים צו טוישן; שלעפט א זאך אין אנדערע קרייזן.
 
 ## the Trip Planner
 
@@ -1444,12 +1570,19 @@ trip-new-york-in-movies = ניו יארק אין די פילמען
 trip-seven-film-and-tv-locations = זיבן פילם און טעלעוויזיע ערטער, פון אפטאון ביז דאונטאון, אין איין טאג.
 trip-wedding-on-lake-como = א חתונה ביים קאמא אזערע
 trip-for-guests-where-wedding-is = פאר די געסט: וואו די חתונה איז, וואו צו שלאפן, ווי אהינצוקומען.
+trip-presenting-trip = מען פרעזענטירט די רייזע
+trip-presenting-next-stop = פרעזענטירן: דער קומענדיגער סטאפ
+trip-presenting-stop-before = פרעזענטירן: דער סטאפ פריער
+trip-put-stops-on-calendar-day = שטעלן די סטאפס אויף א קאלענדאר, א טאג יעדן
+trip-first-last = דער ערשטער, דער לעצטער
+trip-next-stop = דער קומענדיגער סטאפ
+trip-stop-before = דער סטאפ פריער
 
 ## shared: the Word Processor's looks, the header's Home, a money column's currency
 
 looks-typewriter = שרייבמאשין
 looks-serif = סעריף
-looks-home = היים
+common-home = היים
 looks-currency = וואלוטע
 
 ## the Calculator app
@@ -1539,73 +1672,25 @@ calc-curve-and-its-slope = א קרומע ליניע און איר שיפוע
 calc-x3-3x-its-derivative-and = x³ − 3x, איר דעריוואט, און דער פלאכער טאנגענט אונטן אין דער גרוב.
 calc-waves-adding-up = כוואליעס וואס קומען צוזאם
 calc-sine-waves-summed-on-their = סינוס כוואליעס צוזאמגערעכנט, אויפן וועג צו א קוואדראט כוואליע.
-
-## unsorted: added after the sections, each id named for where it is used
-
-home-templates-for-app = מוסטערן פאר { $app }
-home-app-templates = { $app } מוסטערן
-home-templates-for-app-name = מוסטערן פאר { $app }: { $name }
-# Offline, where the templates' file was never kept by the service worker (kit/ui/home.ts).
-home-templates-are-not-saved-in = די מוסטערן זענען נאך נישט געהיט אין דעם בראוזער. פארבינדט זיך צום אינטערנעט זיי צו זען.
 # The grip on a line of the tape; the bar under lines chosen whole.
 calc-choose-line-n-drag-it = אויסקלייבן שורה { $n }: שלעפט זי צו רוקן
 calc-chosen-lines = אויסגעקליבענע שורות
-# The Spreadsheet: any column removed, the Option column, rich cells, a chart put in from Insert.
-sheet-keeps-one-column = א בלאט האלט איין קאלום
-editor-bold-italic-and-links = דיק, שיף און לינקס
-sheet-choices = ברירות
-sheet-choices-for-ref = ברירות פאר { $ref }
-editor-one-of-words-column-holds = איינס פון די ווערטער וואס דער קאלום האלט, אדער א נייעס
-editor-option = ברירה
-sheet-has-one = דער בלאט האט איינס
-drawer-documents = דאקומענטן
-common-find-app-template = געפינען עפ, מוסטער
-drawer-find-app-doc-template-or = געפינען עפ, דאקומענט, מוסטער, אדער באפעל
-drawer-find-app-template-or-command = געפינען עפ, מוסטער, אדער באפעל
-drawer-commands = באפעלן
-share-new-noun-date-n = { $noun } { $date } #{ $n }
-drawer-nothing-by-that-name = גארנישט מיט דעם נאמען
-draw-pixels-n-n = פיקסלען { $n }×{ $n }
-# Files, compare, posting and embedding: the agent and sharing surface.
-share-mastodon-server-like-mastodon-social = א Mastodon סערווער, ווי mastodon.social
-share-change = ענדערונג
+
+## two links compared (kit/ui/compare.ts)
+
 compare-changes = ענדערונגען
 compare-compare = פארגלייכן
-share-copy-embed-code = קאפירן איינשטעל־קאוד
-share-copy-show-link = קאפירן פרעזענטיר־לינק
-deck-edit-this-deck = רעדאקטירן די פרעזענטאציע
-share-embed = איינשטעלן
-share-embed-code-copied = איינשטעל־קאוד קאפירט
 compare-no-difference = קיין אונטערשייד
 compare-not-link-to-tiny-little = נישט קיין לינק צו א Tiny Little Office דאקומענט
-open-opened-name = געעפנט { $name }
-share-opens-deck-already-presenting = עפנט די פרעזענטאציע שוין פרעזענטירנדיג.
-export-pdf-file = PDF פייל
-outline-pdf-sections-and-bullets = PDF: אפטיילונגען און פינטלעך
 compare-paste-second-link-to-see = קלעבט אריין א צווייטן לינק צו זען וואס האט זיך געטוישט.
 compare-paste-link-to-document-as = אריינקלעבן דעם לינק צום דאקומענט ווי ער איז יעצט
 compare-paste-link-to-document-as-it-was = אריינקלעבן דעם לינק צום דאקומענט ווי ער איז געווען
-share-post = פאוסטן
-share-post-link = פאוסטן דעם לינק
-share-show-preview-of-first-page = ווייזן א פרעוויו פון דער ערשטער זייט
-share-picture-of-first-page-and = א בילד פון דער ערשטער זייט און דער טיטל ווערן געהאלטן ליינבאר אויף אונזער סערווער א חודש לאנג כדי די נעטווערק זאל זיי קענען נעמען. דער דאקומענט אליין נישט.
-share-shared-without-preview-reason = געשעירט אן א פרעוויו: { $reason }
-share-making-preview = מען מאכט דעם פרעוויו…
-share-page-could-not-be-drawn = די זייט האט מען נישט געקענט צייכענען
-share-picture-is-over-400-kb = דאס בילד איז איבער 400 KB
-share-server-could-not-be-reached = מען האט נישט געקענט דערגרייכן דעם סערווער
-share-hundred-previews-day-from-one = הונדערט פרעוויוס א טאג פון איין אדרעס
-share-server-refused-picture = דער סערווער האט אפגעזאגט דאס בילד
 compare-put-in = אריינגעלייגט:
 compare-swap = אויסטוישן
 compare-taken-out = ארויסגענומען:
-open-that-file-is-not-words = דער פייל איז נישט קיין ווערטער וואס Tiny Little Office קען ליינען.
-open-that-file-is-too-large = דער פייל איז צו גרויס צו זיין א דאקומענט דא.
 compare-first-link = דער ערשטער לינק
-share-pages-in-frame-on-another = די זייטן, אין א ראם אויף אן אנדער סייט, מיט א לינק זיי צו עפענען דא.
 compare-second-link = דער צווייטער לינק
 compare-two-links-to-documents-side = צוויי לינקס צו דאקומענטן, זייט ביי זייט: וואס דער צווייטער האט געטוישט איז אנגעצייכנט. גארנישט פארלאזט די זייט.
-share-your-mastodon-server = אייער Mastodon סערווער
 compare-different-apps = פארשידענע עפס
 compare-n-blocks-taken-out = { $n ->
         [one] { $n } בלאק ארויסגענומען
@@ -1615,108 +1700,12 @@ compare-n-put-in = { $n ->
         [one] { $n } אריינגעלייגט
        *[other] { $n } אריינגעלייגט
     }
-diagram-tap-empty-space-for-branch = דריקט אויף א ליידיג ארט פאר א צווייג; דריקט אויף אן אידעע צו שרייבן אויף איר, Enter פאר דער קומענדיגער; שלעפט איינס אויף דער אנדערער עס אונטערצולייגן; פארבינדן פארבינדט צוויי איבער דער מעפ.
-# Restored around the document: search, Find in this document, the shortcuts and the apps' keys, Mod+S, the size of
-# everything, Add to home screen, another version kept here, where the link fits, Open in another app, the QR code
-# of this document, Insert narrowed by typing, Trip presenting, a seating chart's place cards
-qr-code-of-this-document = א QR קאוד פון דעם דאקומענט
-anim-frame-back-frame-on = א פריים צוריק, א פריים פארויס
-deck-new-slide = א נייער סלייד
-drawer-add-to-home-screen = צולייגן צום היים־סקרין
-shell-another-version = אן אנדער ווערסיע
-keys-normal-size = נארמאלע גרייס
-home-documents-found = דאקומענטן געפונען
-sheet-edit-cell-caret-at-its = רעדאקטירן דאס קעסטל, דער קורסאר אינעם סוף
-keys-everything-larger = אלעס גרעסער
-keys-everything-smaller = אלעס קלענער
-find-in-this-document = געפינען אין דעם דאקומענט
-outline-fold-unfold = צוזאמלייגן, אויפלייגן
-common-indent-or-bring-out-in = אריינרוקן אדער ארויסרוקן אין א ליסטע; דאס קומענדיגע קעסטל אין א נעץ
-keys-keep-this-document-on-device = האלטן דעם דאקומענט אויפן מכשיר
-shell-kept-on-this-device = געהאלטן אויף דעם מכשיר
-shell-keyboard-shortcuts = קיבאורד שארטקאטס
-share-left = לינקס
-common-move-selected-items-up-or = רוקן די אויסגעקליבענע זאכן ארויף אדער אראפ
-home-no-document-here-has-those = קיין דאקומענט דא האט נישט די ווערטער
-find-not-found = נישט געפונען
-menu-nothing-starts-q = גארנישט הייבט זיך אן מיט "{ $q }"
-shell-nothing-to-keep-yet = נאך גארנישט צו האלטן
-common-nudge-shapes-in-hand = רוקן א ביסל די פארמען אין דער האנט
-anim-nudge-shapes-in-hand-with = רוקן א ביסל די פארמען אין דער האנט; אן קיינע, שפרינגען א פריים
-write-open-as-outline = עפענען ווי ראשי פרקים
-shell-open-it = עפענען
-diagram-place-cards = פלאץ קארטלעך
-anim-play-or-pause = שפילן אדער פויזע
-trip-presenting-trip = מען פרעזענטירט די רייזע
-deck-presenting-back = פרעזענטירן: צוריק
-deck-presenting-next-line-or-slide = פרעזענטירן: די קומענדיגע שורה אדער סלייד
-trip-presenting-next-stop = פרעזענטירן: דער קומענדיגער סטאפ
-trip-presenting-stop-before = פרעזענטירן: דער סטאפ פריער
-diagram-print-place-cards = דרוקן פלאץ קארטלעך
-diagram-print-place-cards-card-guest = דרוקן פלאץ קארטלעך: א קארטל פאר יעדן גאסט, אכט אויף א Letter בויגן, אויסצושניידן
-shell-save-in-browser-is-off = היטן אין בראוזער איז אויס: דער בראוזער האלט נישט קיין דאקומענטן. צינדט עס אן אינעם מעניו זיי דא צו האלטן.
-sheet-put-back-what-cell-held = צוריקשטעלן וואס דאס קעסטל האט געהאלטן
-sheet-put-dated-rows-on-calendar = שטעלן די שורות מיט דאטומס אויף א קאלענדאר
-trip-put-stops-on-calendar-day = שטעלן די סטאפס אויף א קאלענדאר, א טאג יעדן
-home-search-your-documents = זוכן אין אייערע דאקומענטן
-common-select-all-words-of-box = אויסקלייבן אלעס: די ווערטער פונעם קעסטל, דערנאך אלעס
-keys-show-these-shortcuts = ווייזן די שארטקאטס
-# same
-write-a4 = A4
-# same
-write-letter = Letter
-common-back-to-words = צוריק צו די ווערטער
-common-extend-selection = פארברייטערן די אויסקלייב
-deck-presenting-whole-slide = פרעזענטירן: דער גאנצער סלייד
-trip-first-last = דער ערשטער, דער לעצטער
-common-next-or-one-before = דער קומענדיגער אדער דער פריערדיגער
-editor-this-browser-lets-page-paste = דער בראוזער לאזט א זייט אריינקלעבן נאר פון דער קיבאורד: נוצט זיין אייגענעם אריינקלעבן.
-drawer-size-of-everything = גרייס פון אלעס
-shell-skip-to-apps = שפרינגען צו די עפס
-shell-skip-to-document = שפרינגען צום דאקומענט
-menu-starting-q = הייבט זיך אן מיט "{ $q }"
-common-step-out-close-collapse-let = ארויסגיין: פארמאכן, צוזאמלייגן, לאזן
-anim-first-frame-last = דער ערשטער פריים, דער לעצטער
-trip-next-stop = דער קומענדיגער סטאפ
-deck-slide-before-slide-after-on = דער סלייד פריער, דער סלייד נאכדעם (אויף דער זייט־לייסטע)
-trip-stop-before = דער סטאפ פריער
-shell-this-device-keeps-another-version = דער מכשיר האלט אן אנדער ווערסיע פון "{ $title }", פון { $when }.
-shell-this-link-was-made-by = דער לינק איז געמאכט געווארן מיט א נייערן Tiny Little Office. לאדט איבער די זייט אים צו באקומען.
-keys-this-page = די זייט
-common-check-or-uncheck-task = אפצייכענען אדער אראפנעמען דעם צייכן פון א טאסק
-drawer-to-add-tiny-little-office = צוצולייגן Tiny Little Office צום היים־סקרין: Share, דערנאך Add to Home Screen.
-common-too-long-for-qr-code = צו לאנג פאר א QR קאוד: מאכט דעם דאקומענט קירצער, אדער שעירט א קורצן לינק.
-share-uses = נוצט
-share-where = וואו
-share-where-link-fits = וואו דער לינק פאסט אריין
-share-any-length = סיי וועלכע לענג
-home-n-documents-found = { $n ->
-        [one] איין דאקומענט געפונען
-       *[other] { $n } דאקומענטן געפונען
-    }
-common-n-of-count = { $n } פון { $count }
-share-n-over = { $n } צו פיל
-privacy-password-copied = פאסווארד קאפירט
-diagram-guest = גאסט
-outline-name-line = געבן א נאמען דער ליניע
-write-name-this-column = געבן א נאמען דעם קאלום
-diagram-new-idea = נייע אידעע
-diagram-tap-empty-space-for-person = דריקט אויף א ליידיג ארט פאר א מענטש; דריקט אויף איינעם צו שרייבן אויף אים, Shift+Enter פאר זיין ראלע אונטערן נאמען, Enter פארן קומענדיגן; שלעפט איינעם אויף אן אנדערן אים אונטערצולייגן.
-diagram-tap-empty-space-for-event = דריקט אויף א ליידיג ארט פאר א געשעעניש: שרייבט ווען, Shift+Enter, דערנאך וואס איז געשען; יארן און דאטומס זענען אויסגעשטעלט ווי זיי זענען געפאלן; א צייט־שפאן איז א בענדל.
-diagram-lanes-name = דעם באן'ס נאמען
-diagram-when = ווען
-draw-align-center = אויסגלייכן: אין מיטן
-draw-align-left = אויסגלייכן: לינקס
-draw-align-right = אויסגלייכן: רעכטס
-diagram-tap-person-to-type-on = דריקט אויף א מענטש צו שרייבן אויף אים, + נאכן נאמען פאר זיין פארטנער, Shift+Enter פאר זיינע יארן אונטערן נאמען; Enter פארן קומענדיגן; שלעפט איינעם אויף אן אנדערן אים אונטערצולייגן; פארבינדן צייכנט א פינטלדיגע ליניע צווישן צוויי.
-diagram-tap-empty-space-for-table = דריקט אויף א ליידיג ארט פאר א טיש; דריקט אויף א טיש אדער א מענטש צו שרייבן, א קאמע נאך א נאמען פארן קומענדיגן גאסט; שלעפט א מענטש צו אן אנדער טיש.
-diagram-tap-inside-circles-to-add = דריקט אינעווייניג אין די קרייזן צוצולייגן א זאך דארט, א קאמע נאך איר פאר דער קומענדיגער; דריקט אויף א גרופע'ס נאמען אים צו טוישן; שלעפט א זאך אין אנדערע קרייזן.
-export-copy-link-that-downloads-ext = קאפירן א לינק וואס דאונלאודט דעם .{ $ext }
-export-could-not-share-ext = נישט געקענט שעירן דעם .{ $ext }
-export-could-not-show-ext = נישט געקענט ווייזן דעם .{ $ext }
-export-download-ext = דאונלאודן דעם .{ $ext }
-export-share-ext = שעירן דעם .{ $ext }…
-export-view-ext = זען דעם .{ $ext }
+
+## files and zips dropped on the page (kit/file/open.ts)
+
+open-opened-name = געעפנט { $name }
+open-that-file-is-not-words = דער פייל איז נישט קיין ווערטער וואס Tiny Little Office קען ליינען.
+open-that-file-is-too-large = דער פייל איז צו גרויס צו זיין א דאקומענט דא.
 open-keep-them-on-this-device = האלטן זיי אויף דעם מכשיר
 open-nothing-is-saved-on-this = גארנישט איז יעצט נישט געהיט אויף דעם מכשיר. האלט זיי דא, אדער עפנט איינעם.
 open-first = עפענען דעם ערשטן
@@ -1729,3 +1718,28 @@ open-n-documents-kept = { $n ->
         [one] { $n } דאקומענט געהאלטן
        *[other] { $n } דאקומענטן געהאלטן
     }
+
+## a document's QR code (kit/draw/qr-picture.ts)
+
+# Restored around the document: search, Find in this document, the shortcuts and the apps' keys, Mod+S, the size of
+# everything, Add to home screen, another version kept here, where the link fits, Open in another app, the QR code
+# of this document, Insert narrowed by typing, Trip presenting, a seating chart's place cards
+qr-code-of-this-document = א QR קאוד פון דעם דאקומענט
+
+## the keys, the shortcuts and the size of everything (kit/core/keys.ts, kit/ui/zoom.ts)
+
+keys-normal-size = נארמאלע גרייס
+keys-everything-larger = אלעס גרעסער
+keys-everything-smaller = אלעס קלענער
+keys-keep-this-document-on-device = האלטן דעם דאקומענט אויפן מכשיר
+keys-show-these-shortcuts = ווייזן די שארטקאטס
+keys-this-page = די זייט
+
+## Find in this document (kit/ui/find.ts)
+
+find-not-found = נישט געפונען
+
+## a menu narrowed by typing (kit/ui/menu.ts)
+
+menu-nothing-starts-q = גארנישט הייבט זיך אן מיט "{ $q }"
+menu-starting-q = הייבט זיך אן מיט "{ $q }"

@@ -6,10 +6,10 @@
 
 # same
 shell-menu = Menu
-shell-title = Titolo
+common-title = Titolo
 # A new document of the app, and one not yet named; { $noun } is the app's noun: "New presentation".
-shell-new-noun = Nuovo: { $noun }
-shell-untitled-noun = { $noun } senza titolo
+common-new-noun = Nuovo: { $noun }
+common-untitled-noun = { $noun } senza titolo
 shell-download = Scarica
 shell-loading = Caricamento…
 shell-this-link-holds-something-that = Questo link contiene qualcosa che non si può leggere. Forse è stato tagliato quando è stato copiato.
@@ -24,15 +24,25 @@ shell-copy-link-and-go = Copia il link ed esci
 shell-turn-on-save-in-browser = Attiva Salva nel browser e tienilo qui
 shell-go-without = Esci senza
 shell-save-in-browser-is-on = Salva nel browser è attivo: questo browser conserva i documenti che apri. Puoi disattivarlo nel menu.
+shell-another-version = Un’altra versione
+shell-kept-on-this-device = Conservato su questo dispositivo
+shell-keyboard-shortcuts = Scorciatoie da tastiera
+shell-nothing-to-keep-yet = Ancora niente da conservare
+shell-open-it = Aprilo
+shell-save-in-browser-is-off = Salva nel browser è disattivato: questo browser non conserva documenti. Attivalo nel menu per tenerli qui.
+shell-skip-to-apps = Vai alle app
+shell-skip-to-document = Vai al documento
+shell-this-device-keeps-another-version = Questo dispositivo conserva un’altra versione di “{ $title }”, del { $when }.
+shell-this-link-was-made-by = Questo link è stato creato da una versione più recente di Ufficio Piccolo Piccolo. Ricarica la pagina per averla.
 
 ## the home page
 
 home-blank = Vuoto
-home-templates = Modelli
+common-templates = Modelli
 # The button under an app's tile, naming the template list: "Start Text from"
 # The list of an app's documents kept on this device, under its tile: "Write documents"
 home-app-documents = { $app }: documenti
-home-forget = Dimentica
+common-forget = Dimentica
 # The button that forgets one kept document: "Forget Launch notes"
 home-forget-title = Dimentica { $title }
 # Under an app's documents, the rest folded away: "3 more"
@@ -41,26 +51,38 @@ home-aboard-project-made-with-respect = Un progetto { $aboard }. Fatto con rispe
 home-beta-version = Versione beta
 # same
 home-email = Email
+home-templates-for-app = Modelli per { $app }
+home-app-templates = Modelli per { $app }
+home-templates-for-app-name = Modelli per { $app }: { $name }
+home-templates-are-not-saved-in = I modelli non sono ancora salvati in questo browser. Connettiti a Internet per vederli.
+home-documents-found = Documenti trovati
+home-no-document-here-has-those = Nessun documento qui contiene quelle parole
+home-search-your-documents = Cerca nei tuoi documenti
+home-n-documents-found = { $n ->
+        [one] Un documento trovato
+        [many] { $n } di documenti trovati
+       *[other] { $n } documenti trovati
+    }
 
 ## the drawer (hamburger menu)
 
 drawer-apps = App
-drawer-close = Chiudi
+common-close = Chiudi
 drawer-default-name = Predefinita: { $name }
 drawer-save-in-browser = Salva nel browser
 drawer-what-is-this = Che cos’è?
 drawer-turn-on-to-save-files = Attiva per salvare i file nel tuo browser.
 drawer-turn-off-to-remove-all = Disattiva per rimuovere tutti i file e le impostazioni.
-drawer-nothing-saved-in-this-browser = Niente salvato in questo browser
-drawer-saving-in-this-browser = Salvataggio in questo browser
+common-nothing-saved-in-this-browser = Niente salvato in questo browser
+common-saving-in-this-browser = Salvataggio in questo browser
 drawer-remove-all-files-and-settings = Rimuovere tutti i file e le impostazioni da questo browser?
 drawer-language = Lingua
-drawer-theme = Tema
+common-theme = Tema
 drawer-match-device = Come il dispositivo
 drawer-light = Chiaro
 drawer-dark = Scuro
 drawer-about = Info
-drawer-tiny-little-office = Ufficio Piccolo Piccolo
+common-tiny-little-office = Ufficio Piccolo Piccolo
 drawer-about-tiny-little-office = Informazioni su Ufficio Piccolo Piccolo
 drawer-tiny-little-office-is-experiment = Ufficio Piccolo Piccolo è un esperimento di { $aboard }, uno studio di strategia digitale e IA e sviluppo software a New York.
 drawer-to-reach-out-with-questions = Per qualsiasi domanda, { $email }.
@@ -71,6 +93,13 @@ drawer-all-of-these-notes-these = Tutti questi appunti, questi disegni e queste 
 # same
 drawer-eugene-ionesco-book = Eugène Ionesco, { $book }
 drawer-discoveries = Scoperte
+drawer-documents = Documenti
+drawer-find-app-template-or-command = Cerca app, modello o comando
+drawer-commands = Comandi
+drawer-nothing-by-that-name = Niente con quel nome
+drawer-add-to-home-screen = Aggiungi alla schermata Home
+drawer-size-of-everything = Dimensione di tutto
+drawer-to-add-tiny-little-office = Per aggiungere Ufficio Piccolo Piccolo alla schermata Home: Condividi, poi Aggiungi alla schermata Home.
 
 ## links that leave the site (kit/ui/link-guard.ts)
 
@@ -118,7 +147,7 @@ share-expires-in-n-minutes-date = Scade tra { $n ->
     } ({ $date })
 share-opens-as-pages-to-read = Si apre come pagine da leggere
 share-opens-in-editor = Si apre nell’editor
-share-whoever-opens-this-link-gets = Chi apre questo link riceve una copia tutta sua. Le modifiche che fa restano nel suo link, non nel tuo: chiedigli di rimandarti il suo.
+common-whoever-opens-this-link-gets = Chi apre questo link riceve una copia tutta sua. Le modifiche che fa restano nel suo link, non nel tuo: chiedigli di rimandarti il suo.
 share-short-link-that-expires = Link breve che scade
 share-this-link-expires-in-n = Questo link scade tra { $n ->
         [one] { $n } giorno
@@ -155,9 +184,9 @@ share-display-link = Link di lettura
 share-opens = Si apre
 share-link-copied = Link copiato
 share-could-not-copy = Copia non riuscita
-share-share = Condividi…
-share-qr-code = Codice QR
-share-qr-code-of-this-document = Codice QR del documento
+common-share = Condividi…
+common-qr-code = Codice QR
+common-qr-code-of-this-document = Codice QR del documento
 share-this-document-is-n-bytes = Questo documento è di { $n } byte; il codice QR più grande ne contiene { $max }. Accorcialo di { $over } byte e ci starà.
 share-this-document-is-n-characters = Questo documento è di { $n } caratteri; un link breve ne contiene { $max }. Accorcialo di { $over } e ci starà.
 share-expires-after = Scade dopo
@@ -174,8 +203,36 @@ share-this-document-is-too-long = Questo documento è troppo lungo per un link b
 share-up-to-hundred-links-day = Fino a cento link al giorno da uno stesso indirizzo.
 share-remove = Rimuovi
 # same
-share-link = Link
-share-short-link = Link breve
+common-link = Link
+common-short-link = Link breve
+share-new-noun-date-n = Nuovo: { $noun } { $date } #{ $n }
+# Files, compare, posting and embedding: the agent and sharing surface.
+share-mastodon-server-like-mastodon-social = Un server Mastodon, come mastodon.social
+share-change = Modifica
+share-copy-embed-code = Copia codice da incorporare
+share-copy-show-link = Copia il link di presentazione
+share-embed = Incorpora
+share-embed-code-copied = Codice da incorporare copiato
+share-opens-deck-already-presenting = Apre la presentazione già in corso.
+share-post = Pubblica
+share-post-link = Pubblica il link
+share-show-preview-of-first-page = Mostra un’anteprima della prima pagina
+share-picture-of-first-page-and = Un’immagine della prima pagina e il titolo restano leggibili sul nostro server per un mese, perché il social network possa recuperarli. Il documento in sé no.
+share-shared-without-preview-reason = Condiviso senza anteprima: { $reason }
+share-making-preview = Creazione dell’anteprima…
+share-page-could-not-be-drawn = non è stato possibile disegnare la pagina
+share-picture-is-over-400-kb = l’immagine supera i 400 KB
+share-server-could-not-be-reached = il server non è raggiungibile
+share-hundred-previews-day-from-one = cento anteprime al giorno da uno stesso indirizzo
+share-server-refused-picture = il server ha rifiutato l’immagine
+share-pages-in-frame-on-another = Le pagine, in una cornice su un altro sito, con un link per aprirle qui.
+share-your-mastodon-server = Il tuo server Mastodon
+share-left = A sinistra
+share-uses = Usa
+share-where = Dove
+share-where-link-fits = Dove sta il link
+share-any-length = qualsiasi lunghezza
+share-n-over = { $n } in più
 
 ## privacy (kit/share/privacy.ts, kit/ui/privacy-dialog.ts): the password, what the device holds
 
@@ -188,13 +245,13 @@ privacy-forget-everything = Dimentica tutto
 privacy-preview-sent-with-link-to = Un’anteprima inviata con un link a un social network è un’immagine della prima pagina, il titolo e le prime parole, leggibili sul nostro server per un mese. Il documento in sé non ci arriva mai.
 privacy-forget-everything-this-site-keeps = Dimenticare tutto ciò che questo sito conserva qui e non conservare più nulla d’ora in poi? I documenti stessi vivono nei loro link.
 privacy-locked = Bloccato
-privacy-locked-document = Documento bloccato
+common-locked-document = Documento bloccato
 privacy-new-password = Nuova password
 privacy-no-password = Nessuna password
 privacy-none = Nessuna
 privacy-opening = Apertura…
 # same
-privacy-password = Password
+common-password = Password
 privacy-password-removed = Password rimossa
 privacy-password-set-link-holds-only = Password impostata: il link contiene solo testo cifrato
 # same
@@ -213,17 +270,17 @@ privacy-short-links-made-here-until = I link brevi creati qui, finché non scado
 privacy-their-names-and-links-for = I loro nomi e link, per la pagina iniziale.
 privacy-theme-lifetime-of-short-links = Tema, la durata dei link brevi.
 privacy-this-document-has-password-link = Questo documento ha una password. Il link, e ogni link breve ricavato da esso, contiene solo testo cifrato.
-privacy-this-document-is-locked = Questo documento è bloccato
+common-this-document-is-locked = Questo documento è bloccato
 privacy-this-document-is-locked-with = Questo documento è bloccato da una password.
 privacy-unlock = Sblocca
-privacy-unlock-ellipsis = Sblocca…
+common-unlock-ellipsis = Sblocca…
 privacy-what-this-device-holds = Cosa conserva questo dispositivo
 privacy-your-documents = I tuoi documenti
 privacy-your-browsers-history = La cronologia del tuo browser
 privacy-every-document-opened-here-in = Ogni documento aperto qui, per intero, a meno che non abbia una password.
 privacy-not-ours-to-clear = Non sta a noi cancellarla
 privacy-by-name = di { $name }
-privacy-n-documents = { $n ->
+common-n-documents = { $n ->
         [one] { $n } documento
         [many] { $n } di documenti
        *[other] { $n } documenti
@@ -236,11 +293,12 @@ privacy-n-links = { $n ->
 privacy-n-set = { $n } impostati
 privacy-copy-this-and-send-it = Copiala e mandala per un’altra via, non con il link. Non si potrà più vedere.
 privacy-make-another = Creane un’altra
+privacy-password-copied = Password copiata
 
 ## a document locked with a password, placed inside another (kit/share/locked.ts, kit/ui/locked-doc.ts)
 
 # The card drawn where it sits; { $app } is the app's name: "A Spreadsheet document, locked with a password".
-locked-with-password = Bloccato da una password
+common-with-password = Bloccato da una password
 locked-app-document-locked-with-password = Un documento { $app }, bloccato da una password
 locked-with-password-unlock = Bloccato da una password. Sblocca…
 locked-document-locked-with-password = Un documento bloccato da una password
@@ -266,24 +324,37 @@ common-chosen-tasks = Attività scelte
 common-open = Apri
 common-task = Attività
 common-tasks = Attività
+common-find-app-doc-template-or = Cerca app, documento, modello o comando
+common-in-this-document = Cerca in questo documento
+common-indent-or-bring-out-in = Rientra o sporgi in un elenco; la cella successiva in una griglia
+common-move-selected-items-up-or = Sposta in su o in giù le voci selezionate
+common-nudge-shapes-in-hand = Sposta di poco le forme in mano
+common-select-all-words-of-box = Seleziona tutto: le parole della casella, poi tutto
+common-back-to-words = Torna al testo
+common-extend-selection = Estendi la selezione
+common-next-or-one-before = Il successivo o il precedente
+common-step-out-close-collapse-let = Esci: chiudi, comprimi, lascia
+common-check-or-uncheck-task = Spunta o togli la spunta a un’attività
+common-too-long-for-qr-code = Troppo lungo per un codice QR: accorcia il documento, o condividi un link breve.
+common-n-of-count = { $n } di { $count }
 
 ## downloads
 
 download-print = Stampa
-download-print-or-save-as-pdf = Stampa, o salva come PDF
+common-print-or-save-as-pdf = Stampa, o salva come PDF
 download-picture-png = Immagine (PNG)
-download-web-page-html = Pagina web (HTML)
+common-web-page-html = Pagina web (HTML)
 download-text-tlo = Testo (TLO)
 download-data-json = Dati (JSON)
 download-downloaded-name = Scaricato { $name }
 download-failed = Download non riuscito
-download-open-in-tiny-little-office = Apri in Ufficio Piccolo Piccolo
+common-open-in-tiny-little-office = Apri in Ufficio Piccolo Piccolo
 # Under a document cut off at a slide's foot: a link that opens it whole, in its own app.
 download-see-more = Vedi altro
 
 ## the bar, shared by every app
 
-bar-insert = Inserisci
+common-insert = Inserisci
 bar-bold = Grassetto
 bar-italic = Corsivo
 bar-underline = Sottolineato
@@ -292,21 +363,21 @@ bar-highlight = Evidenzia
 bar-heading = Titolo
 bar-bulleted-list = Elenco puntato
 bar-numbered-list = Elenco numerato
-bar-table = Tabella
+common-table = Tabella
 bar-footnote = Nota
-bar-date = Data
+common-date = Data
 bar-undo = Annulla
 bar-redo = Ripeti
-bar-today = Oggi
+common-today = Oggi
 
 ## the editor (<to-text>): chips, cards and the bubbles
 
 # A footnote's mark, and its words where the notes are drawn, by its number: spoken.
-editor-footnote-n = Nota { $n }
+common-footnote-n = Nota { $n }
 # A card standing for another document held in this one, of a kind no app here reads: "abc document".
-editor-app-document = Documento { $app }
+common-app-document = Documento { $app }
 # The same card when its app is known; { $noun } is the app's noun: "A spreadsheet".
-editor-noun = { $noun }
+common-noun = { $noun }
 editor-code = Codice
 editor-connection = Connessione
 editor-n-rows = { $n ->
@@ -315,7 +386,7 @@ editor-n-rows = { $n ->
        *[other] { $n } righe
     }
 editor-notes-words = Le parole della nota
-editor-done = Fatto
+common-done = Fatto
 editor-address = Indirizzo
 editor-not-address = Non è un indirizzo
 editor-set-link = Imposta link
@@ -323,9 +394,13 @@ editor-open-link = Apri link
 editor-change-link = Modifica link
 editor-remove-link = Rimuovi link
 # The selection bubble's name: what can be done to the words selected.
-editor-format = Formato
+common-format = Formato
 editor-done-lowercase = fatto
 editor-not-done = da fare
+editor-bold-italic-and-links = Grassetto, corsivo e link
+editor-one-of-words-column-holds = Una delle parole che la colonna contiene, o una nuova
+editor-option = Opzione
+editor-this-browser-lets-page-paste = Questo browser permette di incollare solo dalla tastiera: usa il suo «Incolla».
 
 ## the example in the kit's own documentation
 
@@ -337,18 +412,18 @@ example-n-slides = { $n ->
 
 ## the Word Processor
 
-write-word-processor = Videoscrittura
+common-word-processor = Videoscrittura
 # What one of its documents is called, in running text: "Untitled document"; each app's noun is in its section.
 write-document-lowercase = documento
 # The group heading the Word Processor sits under on the home page.
-write-words = Testo
+common-words = Testo
 write-words-on-page-headings-lists = Parole su una pagina: titoli, elenchi, link e note, una tabella che fa i conti, stampata su Letter o A4.
 write-document = Documento
 write-here = Scrivi qui.
 write-subheading = Sottotitolo
 write-paragraph = Paragrafo
-write-bring-out = Sporgi
-write-indent = Rientra
+common-bring-out = Sporgi
+common-indent = Rientra
 write-align = Allinea
 write-align-left = A sinistra
 write-center = Centra
@@ -372,11 +447,11 @@ write-horizontal-rule = Linea orizzontale
 # Insert ▾'s rule in a document: what follows starts the next page.
 write-page-break = Interruzione di pagina
 # same
-write-ok = OK
+common-ok = OK
 write-this-card = Questa scheda
 write-open-in-app = Apri in { $app }
 write-locked-worked-out-for-you = Bloccato: calcolato per te
-write-footnotes = Note
+common-footnotes = Note
 write-back-to-footnote-n-in = Torna alla nota { $n } nel testo
 write-back-to-text = Torna al testo
 write-n-words = { $n ->
@@ -387,7 +462,7 @@ write-n-words = { $n ->
 # same
 write-word-docx = Word (DOCX)
 # same
-write-markdown = Markdown
+common-markdown = Markdown
 # same
 write-rich-text-rtf = Rich Text (RTF)
 # A table in the text: its heads, its handle, its column menu.
@@ -451,6 +526,11 @@ write-petition = Petizione
 write-what-you-ask-why-and = Cosa chiedi, perché, e i nomi di chi è d’accordo.
 write-terms-of-service = Condizioni di servizio
 write-small-businesss-terms-in-plain = Le condizioni di una piccola impresa in parole semplici: prenotazione, prezzi, chiavi, cosa succede se, la fine.
+write-open-as-outline = Apri come scaletta
+# same
+write-a4 = A4
+write-letter = Lettera
+write-name-this-column = Dai un nome a questa colonna
 
 ## Insert's dialog (kit/ui/insert-dialogs.ts): Tiny Little Office Doc
 
@@ -459,13 +539,13 @@ insert-opening-short-link = Apertura del link breve…
 insert-paste-link-of-another-tiny = Incolla il link di un altro documento di Ufficio Piccolo Piccolo, lungo o breve: qui si vede la sua prima pagina.
 insert-this-is-not-tiny-little = Questo non è un link di Ufficio Piccolo Piccolo, oppure è scaduto.
 insert-tiny-little-office-doc = Documento Ufficio Piccolo Piccolo
-insert-tiny-little-office-doc-ellipsis = Documento Ufficio Piccolo Piccolo…
+common-tiny-little-office-doc-ellipsis = Documento Ufficio Piccolo Piccolo…
 # Insert ▾'s group of the apps a new document can be made in, inside this one.
-insert-new-document = Un nuovo documento
+common-new-document = Un nuovo documento
 
 ## another document edited in place (kit/ui/doc-dialog.ts); a table's size is Rows × Columns
 
-doc-cancel = Annulla
+common-cancel = Annulla
 doc-rows = Righe
 
 ## charts (kit/draw/chart.ts)
@@ -474,7 +554,7 @@ chart-empty-chart = Un grafico vuoto
 chart-bars = Barre
 chart-flows-sankey = Flussi (Sankey)
 chart-flows-list = Flussi: { $list }.
-chart-lines = Linee
+common-lines = Linee
 chart-nothing-to-chart-yet = Ancora niente da mostrare nel grafico
 chart-nothing-to-chart-yet-rows = Ancora niente da mostrare nel grafico: righe di Da | A | Importo
 chart-pie = Torta
@@ -488,10 +568,10 @@ sheet-fit-this-column-to-its = Adatta la colonna al testo
 sheet-cells-in-hand = Le celle in mano
 sheet-check-ref = Spunta { $ref }
 # The column type that holds words as typed.
-sheet-text = Testo
-sheet-spreadsheet = Foglio di calcolo
+common-text = Testo
+common-spreadsheet = Foglio di calcolo
 sheet-spreadsheet-lowercase = foglio di calcolo
-sheet-numbers = Numeri
+common-numbers = Numeri
 sheet-spreadsheet-with-formulas-named-cells = Un foglio di calcolo con formule, celle con nome e grafici; tre colonne per cominciare, altre quando servono.
 # same
 sheet-budget = Budget
@@ -557,40 +637,40 @@ sheet-eight-teams-single-elimination-each = Otto squadre a eliminazione: il punt
 # same
 sheet-excel-xlsx = Excel (XLSX)
 # same
-sheet-csv = CSV
+common-csv = CSV
 sheet-chart-svg = Grafico (SVG)
 sheet-chart-png = Grafico (PNG)
 sheet-empty-sheet = Foglio vuoto
 sheet-n-of-max-shown = ({ $n } di { $max } mostrate)
 sheet-50-more-rows = Altre 50 righe
-sheet-add-column = Aggiungi una colonna
-sheet-add-column-after = Aggiungi una colonna dopo
+common-add-column = Aggiungi una colonna
+common-add-column-after = Aggiungi una colonna dopo
 sheet-chart = Grafico
 sheet-chart-of-table = Grafico della tabella
 sheet-checkbox = Casella
 sheet-column-after = Colonna dopo
-sheet-column-c = Colonna { $c }
-sheet-column-c-holds = La colonna { $c } contiene
+common-column-c = Colonna { $c }
+common-column-c-holds = La colonna { $c } contiene
 sheet-column-c-type-what-it = Colonna { $c }: { $type }. Cosa contiene, ordina per essa, aggiungi o rimuovi una colonna
-sheet-columns = Colonne
-sheet-delete-which = Elimina { $which }
-sheet-drag-to-fill = Trascina per riempire
+common-columns = Colonne
+common-delete-which = Elimina { $which }
+common-drag-to-fill = Trascina per riempire
 sheet-abc-or-123-for-this = ABC o 123, per questa colonna
 sheet-drag-to-resize-double-click = Trascina per ridimensionare, doppio clic per adattare
 sheet-fill-down-from-top-row = Riempi in basso dalla prima riga
 sheet-fill-right-from-first-column = Riempi a destra dalla prima colonna
-sheet-fill-drag-to-carry-these = Riempi: trascina per portare avanti queste celle
+common-fill-drag-to-carry-these = Riempi: trascina per portare avanti queste celle
 sheet-fit-columns-to-page = Adatta le colonne alla pagina
 # same
 sheet-formula = Formula
 sheet-function = Funzione
 sheet-high-to-low = Dal più alto al più basso
-sheet-insert-n-rows-above = Inserisci { $n ->
+common-insert-n-rows-above = Inserisci { $n ->
         [one] una riga
         [many] { $n } di righe
        *[other] { $n } righe
     } sopra
-sheet-insert-n-rows-below = Inserisci { $n ->
+common-insert-n-rows-below = Inserisci { $n ->
         [one] una riga
         [many] { $n } di righe
        *[other] { $n } righe
@@ -600,8 +680,8 @@ sheet-lock-these-cells-so-reader = Blocca queste celle, così chi legge le lasci
 sheet-locked-part-of-model = Bloccato: parte del modello
 sheet-low-to-high = Dal più basso al più alto
 sheet-money = Denaro
-sheet-name = Nome
-sheet-name-of-column-c = Nome della colonna { $c }
+common-name = Nome
+common-name-of-column-c = Nome della colonna { $c }
 sheet-names-cell-to-its-right = Dà il nome alla cella alla sua destra
 # A money column's currency (Money picked in a column's menu): the field's hint, and what it says of words it cannot read.
 sheet-symbol-like-or-code-like = Un simbolo, come $, o un codice, come USD. Vuoto è quello del documento.
@@ -611,15 +691,15 @@ sheet-number = Numero
 sheet-open-link = Apri { $link }
 sheet-opens-when-clicked = Si apre al clic
 sheet-percent = Percentuale
-sheet-remove-this-column = Rimuovi questa colonna
+common-remove-this-column = Rimuovi questa colonna
 sheet-resize-column-c = Ridimensiona la colonna { $c }
 sheet-rich-text = Testo formattato
 sheet-row-above = Riga sopra
 sheet-row-below = Riga sotto
-sheet-row-n = Riga { $n }
-sheet-row-n-lowercase = riga { $n }
-sheet-row-n-insert-or-delete = Riga { $n }: inserisci o elimina righe
-sheet-rows-b = righe { $a }–{ $b }
+common-row-n = Riga { $n }
+common-row-n-lowercase = riga { $n }
+common-row-n-insert-or-delete = Riga { $n }: inserisci o elimina righe
+common-rows-b = righe { $a }–{ $b }
 sheet-selected-cells = Celle selezionate
 sheet-show-all-text = Mostra tutto il testo
 sheet-shown-as-typed = Mostrato come scritto
@@ -630,22 +710,37 @@ sheet-is-full-its-last-rows = Il foglio è pieno: le ultime righe contengono qua
 sheet-three-at-least = Almeno tre
 sheet-unlock-these-cells = Sblocca queste celle
 sheet-what-it-holds-sort-columns = Cosa contiene; ordina; colonne
+# The Spreadsheet: any column removed, the Option column, rich cells, a chart put in from Insert.
+sheet-keeps-one-column = Un foglio tiene una colonna
+sheet-choices = Scelte
+sheet-choices-for-ref = Scelte per { $ref }
+sheet-has-one = Il foglio ne ha una
+sheet-edit-cell-caret-at-its = Modifica la cella, con il cursore alla fine
+sheet-put-back-what-cell-held = Rimetti ciò che la cella conteneva
+sheet-put-dated-rows-on-calendar = Metti le righe con una data su un calendario
 
 ## downloads: hand-offs to another app (kit/file/exports.ts)
 
 export-open-in = Apri in
+export-pdf-file = File PDF
+export-copy-link-that-downloads-ext = Copia un link che scarica il .{ $ext }
+export-could-not-share-ext = Impossibile condividere il .{ $ext }
+export-could-not-show-ext = Impossibile mostrare il .{ $ext }
+export-download-ext = Scarica il .{ $ext }
+export-share-ext = Condividi il .{ $ext }…
+export-view-ext = Vedi il .{ $ext }
 
 ## the icon library (kit/ui/icons-picker.ts)
 
-icons-icon = Icona
+common-icon = Icona
 icons-favorites = Preferite
 icons-search-icons = Cerca icone
 icons-suggested = Suggerite
-icons-icons = Icone
+common-icons = Icone
 icons-no-icons-match-q = Nessuna icona corrisponde a “{ $q }”.
 icons-search-by-name-or-by = Cerca per nome o per significato (“soldi”, “meteo”, “ai”) per trovare una qualsiasi tra { $n } icone.
 icons-no-icon = Nessuna icona
-icons-icon-or-emoji = Icona o emoji
+common-icon-or-emoji = Icona o emoji
 icons-search-icons-and-emoji = Cerca icone ed emoji
 icons-or-emoji = Icone o emoji
 # same
@@ -666,10 +761,10 @@ icons-flags = Bandiere
 
 # The group heading the Drawing Tool sits under on the home page: Design. 'Draw' is the Animator's mode for drawing.
 draw-draw = Disegna
-draw-drawing-tool = Disegno
+common-drawing-tool = Disegno
 draw-drawing = disegno
 # same
-draw-design = Design
+common-design = Design
 draw-boxes-arrows-icons-and-labels = Riquadri, frecce, icone ed etichette su una griglia; oppure pixel art, che può diventare una tessera di sfondo.
 draw-request-flow = Flusso di una richiesta
 draw-browser-asks-server-which-reads = Un browser chiede a un server, che legge i dati: riquadri uniti da frecce.
@@ -687,7 +782,7 @@ draw-phone-screen-sketched-in-boxes = Lo schermo di un telefono abbozzato a riqu
 draw-rosette-with-ribbons-for-volunteer = Una coccarda con nastri per il volontario dell’anno, da stampare, ritagliare e appuntare.
 draw-block-party-from-above-stage = Una festa di strada vista dall’alto: il palco, le bancarelle, il primo soccorso e dove trovarsi se ci si perde.
 draw-badge = Distintivo
-draw-birthday-card = Biglietto di compleanno
+common-birthday-card = Biglietto di compleanno
 draw-can-we-refund-it-stores = Possiamo rimborsarlo? La regola dei resi di un negozio come domande, risposte e cosa fare.
 draw-event-map = Mappa dell’evento
 draw-four-16-by-16-icons = Quattro icone 16 per 16 su una griglia, sole, nuvola, pioggia e temporale, da copiare per un meteo o un pulsante.
@@ -702,7 +797,7 @@ draw-weather-icons = Icone del meteo
 draw-what-happens-to-package-from = Cosa succede a un pacco dal momento in cui viene comprato: un processo a tappe, con icone e collegamenti.
 # same
 draw-wireframe = Wireframe
-draw-picture-svg = Immagine (SVG)
+common-picture-svg = Immagine (SVG)
 draw-background-tile-svg = Tessera di sfondo (SVG)
 draw-background-tile-png = Tessera di sfondo (PNG)
 draw-animate-this-drawing = Anima questo disegno
@@ -736,14 +831,14 @@ draw-rounded-box = Riquadro arrotondato
 draw-hexagon = Esagono
 draw-parallelogram = Parallelogramma
 draw-cylinder = Cilindro
-draw-note = Nota
-draw-black = Nero
-draw-red = Rosso
-draw-orange = Arancione
-draw-green = Verde
-draw-blue = Blu
-draw-purple = Viola
-draw-indigo = Indaco
+common-note = Nota
+common-black = Nero
+common-red = Rosso
+common-orange = Arancione
+common-green = Verde
+common-blue = Blu
+common-purple = Viola
+common-indigo = Indaco
 draw-yellow = Giallo
 draw-sky = Azzurro
 draw-pink = Rosa
@@ -759,13 +854,13 @@ draw-no-fill = Nessun riempimento
 draw-fill = Riempimento
 draw-bring-to-front = Porta in primo piano
 draw-send-to-back = Manda in secondo piano
-draw-duplicate = Duplica
-draw-edit = Modifica
-draw-delete = Elimina
+common-duplicate = Duplica
+common-edit = Modifica
+common-delete = Elimina
 draw-put-icon-on-this-shape = Metti un’icona su questa forma
 draw-place-icon = Posiziona un’icona
-draw-zoom-in = Ingrandisci
-draw-zoom-out = Riduci
+common-zoom-in = Ingrandisci
+common-zoom-out = Riduci
 # same
 draw-alt = Alt
 draw-alt-text = Testo alternativo
@@ -795,7 +890,7 @@ draw-as-repeating-background = Come sfondo ripetuto
 # The contextual bar under a shape, and its words typed on it.
 draw-dashed-line = Linea tratteggiata
 draw-dotted-line = Linea punteggiata
-draw-edit-words = Modifica le parole
+common-edit-words = Modifica le parole
 draw-extra-large-text = Testo molto grande
 draw-gray-fill = Riempimento grigio
 # same
@@ -820,6 +915,10 @@ draw-drawing-canvas-v-selects-r = Tela di disegno. V seleziona; R, E, D, L, A, T
 draw-tap-shape-to-select-it = Tocca una forma per selezionarla, o trascina attorno alle forme per sceglierle; scegli uno strumento per disegnare.
 draw-rotate-left = Ruota a sinistra
 draw-rotate-right = Ruota a destra
+draw-pixels-n-n = Pixel { $n }×{ $n }
+draw-align-center = Allinea: al centro
+draw-align-left = Allinea: a sinistra
+draw-align-right = Allinea: a destra
 
 ## the Animator
 
@@ -878,7 +977,7 @@ anim-pixel-art-is-made-in = La pixel art si fa nel Disegno; l’Animatore muove 
 anim-rainbow = Arcobaleno
 anim-remove-this-key = Rimuovi questa chiave
 anim-shadow = Ombra
-anim-size = Dimensione
+common-size = Dimensione
 anim-spin = Rotazione
 anim-stage-alt-arrow-keys-move = Palco: { $alt }. I tasti freccia spostano la forma in mano (o il tempo), virgola e punto avanzano di un fotogramma, Spazio riproduce, K tiene una chiave.
 anim-shapes-in-hand = Le forme in mano
@@ -912,6 +1011,10 @@ anim-which-shape-is-in-front = Quale forma sta davanti: una forma più vicina è
 anim-n-times = { $n } volte
 # same
 anim-s-s = { $s } s
+anim-frame-back-frame-on = Un fotogramma indietro, uno avanti
+anim-nudge-shapes-in-hand-with = Sposta di poco le forme in mano; senza nessuna, avanza di un fotogramma
+anim-play-or-pause = Riproduci o metti in pausa
+anim-first-frame-last = Il primo fotogramma, l’ultimo
 
 ## the Outliner
 
@@ -919,26 +1022,26 @@ anim-s-s = { $s } s
 outline-named-label = , chiamata “{ $label }”
 outline-book = Un libro
 outline-decision = Una decisione
-outline-talk = Un intervento
+common-talk = Un intervento
 outline-empty-outline = Una scaletta vuota
 outline-outliner-ideas-under-ideas-folded = Una scaletta: idee sotto idee, chiuse e aperte, spostate e collegate; lo stesso albero che legge una presentazione o una mappa mentale.
 outline-arrow-from-from-to-to = Freccia da { $from } a { $to }
 outline-arrows-both-ways = Frecce in entrambi i sensi
 outline-as-page = Come pagina
-outline-calculator = Calcolatrice
-outline-calendar = Calendario
+common-calculator = Calcolatrice
+common-calendar = Calendario
 outline-cancel-connecting = Annulla il collegamento
 outline-change-it = Cambialo
-outline-chosen-items = Voci scelte
+common-chosen-items = Voci scelte
 outline-connect = Collega
 outline-connect-from-words = Collega da “{ $words }”
 outline-connect-from-to-to = Collega “{ $from }” a “{ $to }”
 outline-connection-from-from-to-to = Collegamento da { $from } a { $to }
-outline-connections = Collegamenti
-outline-copy = Copia
-outline-presentation-builder = Presentazioni
-outline-diagram-maker = Diagrammi
-outline-drag-to-move = Trascina per spostare
+common-connections = Collegamenti
+common-copy = Copia
+common-presentation-builder = Presentazioni
+common-diagram-maker = Diagrammi
+common-drag-to-move = Trascina per spostare
 outline-draw-as-mind-map = Disegna come mappa mentale
 outline-draw-as-network = Disegna come rete
 outline-draw-as-org-chart = Disegna come organigramma
@@ -949,24 +1052,24 @@ outline-fold-all = Chiudi tutto
 outline-item = Voce
 outline-item-n = Voce { $n }
 outline-kind-of-line = Tipo di linea
-outline-launch-plan = Piano di lancio
+common-launch-plan = Piano di lancio
 outline-line-from-from-to-to = Linea da { $from } a { $to }
 outline-line-named-label-change-it = Linea chiamata “{ $label }”: cambiala
-outline-animator = Animatore
-outline-move-down = Sposta giù
+common-animator = Animatore
+common-move-down = Sposta giù
 outline-move-this-item-drag-it = Sposta questa voce: trascinala su un’altra
-outline-move-up = Sposta su
+common-move-up = Sposta su
 outline-name-of-line = Nome della linea
 outline-numbered = Numerata
 outline-opml-for-outliners = OPML (per scalette)
-outline-open-in-new-tab = Apri in una nuova scheda
-outline-outline = Scaletta
+common-open-in-new-tab = Apri in una nuova scheda
+common-outline = Scaletta
 outline-outliner = Scaletta
 outline-outline-lowercase = scaletta
-outline-paste = Incolla
+common-paste = Incolla
 outline-plain-line = Linea semplice
 outline-plain-text = Testo semplice
-outline-show-as-slides = Mostra come diapositive
+common-show-as-slides = Mostra come diapositive
 outline-show-as-outline = Mostra come scaletta
 outline-take-away-connection-from-from = Togli il collegamento da { $from } a { $to }
 outline-take-it-away = Toglilo
@@ -974,7 +1077,7 @@ outline-take-connection-away = Togli il collegamento
 outline-tap-item-to-connect-from = Tocca la voce da cui collegare.
 outline-tap-item-to-connect-words = Tocca la voce a cui collegare “{ $words }”.
 outline-question-options-under-it-and = La domanda, le opzioni sotto, e per ognuna cosa parla a favore e cosa contro.
-outline-trip-planner = Viaggi
+common-trip-planner = Viaggi
 outline-twenty-minutes-in-three-parts = Venti minuti in tre parti: il problema, l’idea, cosa significa; una diapositiva per voce principale quando è mostrata come presentazione.
 outline-unfold-all = Apri tutto
 outline-unfold-n-inside = Apri, { $n ->
@@ -982,7 +1085,7 @@ outline-unfold-n-inside = Apri, { $n ->
         [many] { $n } di dentro
        *[other] { $n } dentro
     }
-outline-untitled = Senza titolo
+common-untitled = Senza titolo
 outline-view-as = Vedi come
 outline-zoomed-in-on = Ingrandita su
 outline-a-plain-line = una linea semplice
@@ -1016,6 +1119,9 @@ outline-question-method-budget-that-adds = La domanda, il metodo, un budget che 
 outline-three-generations-and-next-each = Tre generazioni e la prossima, ognuna con i suoi anni, disegnate come albero genealogico dal menu.
 outline-troubleshooting = Risoluzione dei problemi
 outline-who-works-for-whom-at = Chi lavora per chi in una panetteria di nove persone, ognuno con il suo ruolo, disegnato come organigramma dal menu.
+outline-pdf-sections-and-bullets = PDF: sezioni ed elenchi
+outline-fold-unfold = Chiudi, apri
+outline-name-line = Dai un nome alla linea
 
 ## the Presentation Builder
 
@@ -1061,7 +1167,7 @@ deck-bullets = Elenco
 deck-two-columns = Due colonne
 deck-big-icon = Icona grande
 deck-fade = Dissolvenza
-deck-cut = Stacco
+common-cut = Stacco
 deck-slide = Scorrimento
 # same
 deck-zoom = Zoom
@@ -1089,12 +1195,12 @@ deck-fun = Allegro
 deck-themes-color = Il colore del tema
 
 # The bar
-deck-present = Presenta
+common-present = Presenta
 deck-see-sheets-to-print = Vedi i fogli da stampare
 deck-back-to-pages = Torna alle pagine
 deck-headline = Titolone
 deck-layout-layout = Impaginazione: { $layout }
-deck-look-theme = Aspetto: { $theme }
+common-look-theme = Aspetto: { $theme }
 deck-transition-transition = Transizione: { $transition }
 deck-format-format = Formato: { $format }
 deck-printing = Stampa
@@ -1122,11 +1228,11 @@ deck-big-icon-page = Pagina con icona grande
 deck-four-more-pages = Altre quattro pagine
 deck-on-slide = Sulla diapositiva
 deck-on-page = Sulla pagina
-deck-pages = Pagine
+common-pages = Pagine
 
 # The canvas
 deck-add-icon = Aggiungi un’icona
-deck-change-icon = Cambia l’icona
+common-change-icon = Cambia l’icona
 deck-pick-icon = Scegli un’icona
 deck-left-column = Colonna sinistra
 deck-right-column = Colonna destra
@@ -1144,7 +1250,7 @@ deck-remove-from-slide = Togli dalla diapositiva
 deck-slide-n = Diapositiva { $n }
 deck-front-cover = Copertina
 deck-back-cover = Retro di copertina
-deck-page-n = Pagina { $n }
+common-page-n = Pagina { $n }
 deck-front = Fronte
 deck-inside-left = Dentro a sinistra
 deck-inside-middle = Dentro al centro
@@ -1169,11 +1275,11 @@ deck-print-it-on-letter-paper-at-actual-size-cut-along-dashes-six-badges-sheet =
 
 # Presenting, and the closing slide
 deck-presentation = Presentazione
-deck-previous = Precedente
-deck-next = Successiva
-deck-stop-presenting = Smetti di presentare
+common-previous = Precedente
+common-next = Successiva
+common-stop-presenting = Smetti di presentare
 deck-slide-n-of-total = Diapositiva { $n } di { $total }
-deck-notes = Note
+common-notes = Note
 deck-n-hides-them = N le nasconde
 deck-take-this-deck-home = Porta a casa questa presentazione
 deck-take-this-deck-home-title = Porta a casa questa presentazione: { $title }
@@ -1199,6 +1305,12 @@ deck-trifold-brochure-six-panels-on = Una brochure a tre ante: sei pannelli su d
 deck-mini-comic-panels-with-picture = Un mini fumetto: vignette con un’immagine, una nuvoletta e una didascalia, piegato da un solo foglio.
 deck-poster-or-flyer-headline-and = Un manifesto o volantino: un titolo e poche righe, grande quanto permette una pagina.
 deck-name-badges-for-meetup-one = Badge per un incontro, una pagina a persona, sei per foglio, pronti da tagliare.
+deck-edit-this-deck = Modifica questa presentazione
+deck-new-slide = Una nuova diapositiva
+deck-presenting-back = In presentazione: indietro
+deck-presenting-next-line-or-slide = In presentazione: la riga o la diapositiva successiva
+deck-presenting-whole-slide = In presentazione: la diapositiva intera
+deck-slide-before-slide-after-on = La diapositiva prima, la diapositiva dopo (sulla barra laterale)
 
 ## the Calendar app
 
@@ -1225,7 +1337,7 @@ cal-end = Fine
 cal-end-date = Data di fine
 cal-end-time = Ora di fine
 cal-ends = Finisce
-cal-event = Evento
+common-event = Evento
 cal-every-day = Ogni giorno
 cal-every-month = Ogni mese
 cal-every-week = Ogni settimana
@@ -1261,7 +1373,7 @@ cal-start = Inizio
 cal-start-date = Data di inizio
 cal-start-time = Ora di inizio
 cal-starts = Inizia
-cal-stops = Termina
+common-stops = Termina
 cal-same-dates-as-gantt-chart = Le stesse date come diagramma di Gantt
 cal-this-calendar-is-written-in = Questo calendario è scritto in ora { $zone }.
 cal-this-calendar-names-no-time = Questo calendario non indica un fuso orario: i suoi orari si leggono nel tuo, { $zone }.
@@ -1395,6 +1507,19 @@ diagram-house-network = La rete di casa
 diagram-water-cycle = Il ciclo dell’acqua
 diagram-three-generations-of-morenos-and = Tre generazioni dei Moreno, e una linea tratteggiata verso un figlioccio.
 diagram-who-can-do-what = Chi sa fare cosa
+diagram-tap-empty-space-for-branch = Tocca lo spazio vuoto per un ramo; tocca un’idea per scriverci sopra, Enter per la successiva; trascinane una su un’altra per metterla sotto; Unisci ne collega due sulla mappa.
+diagram-place-cards = Segnaposto
+diagram-print-place-cards = Stampa i segnaposto
+diagram-print-place-cards-card-guest = Stampa i segnaposto: un cartoncino a ospite, otto per foglio Letter, da ritagliare
+diagram-guest = Ospite
+diagram-new-idea = Nuova idea
+diagram-tap-empty-space-for-person = Tocca lo spazio vuoto per una persona; tocca una persona per scriverci sopra, Shift+Enter per il ruolo sotto il nome, Enter per la successiva; trascinane una su un’altra per metterla sotto.
+diagram-tap-empty-space-for-event = Tocca lo spazio vuoto per un evento: scrivi quando, Shift+Enter, poi cosa è successo; anni e date sono distanziati come sono caduti; un periodo è una fascia.
+diagram-lanes-name = Il nome della corsia
+diagram-when = Quando
+diagram-tap-person-to-type-on = Tocca una persona per scriverci sopra, + dopo il nome per il partner, Shift+Enter per i suoi anni sotto il nome; Enter per la successiva; trascinane una su un’altra per metterla sotto; Unisci traccia una linea tratteggiata tra due.
+diagram-tap-empty-space-for-table = Tocca lo spazio vuoto per un tavolo; tocca un tavolo o una persona per scrivere, una virgola dopo un nome per l’ospite successivo; trascina una persona a un altro tavolo.
+diagram-tap-inside-circles-to-add = Tocca dentro i cerchi per aggiungervi un elemento, una virgola dopo di esso per il successivo; tocca il nome di un insieme per rinominarlo; trascina un elemento in altri cerchi.
 
 ## the Trip Planner
 
@@ -1471,6 +1596,13 @@ trip-new-york-in-movies = New York nei film
 trip-seven-film-and-tv-locations = Sette luoghi di film e serie TV, da nord a sud, in un giorno.
 trip-wedding-on-lake-como = Un matrimonio sul Lago di Como
 trip-for-guests-where-wedding-is = Per gli ospiti: dov’è il matrimonio, dove dormire, come arrivarci.
+trip-presenting-trip = Presentazione del viaggio
+trip-presenting-next-stop = In presentazione: la tappa successiva
+trip-presenting-stop-before = In presentazione: la tappa precedente
+trip-put-stops-on-calendar-day = Metti le tappe su un calendario, un giorno ciascuna
+trip-first-last = Il primo, l’ultimo
+trip-next-stop = La tappa successiva
+trip-stop-before = La tappa precedente
 
 ## shared: the Word Processor's looks, the header's Home, a money column's currency
 
@@ -1478,7 +1610,7 @@ looks-typewriter = Macchina da scrivere
 # same
 looks-serif = Serif
 # same
-looks-home = Home
+common-home = Home
 looks-currency = Valuta
 
 ## the Calculator app
@@ -1568,72 +1700,25 @@ calc-curve-and-its-slope = Una curva e la sua pendenza
 calc-x3-3x-its-derivative-and = x³ − 3x, la sua derivata, e la tangente piatta in fondo alla valle.
 calc-waves-adding-up = Onde che si sommano
 calc-sine-waves-summed-on-their = Onde sinusoidali sommate, verso un’onda quadra.
-
-## unsorted: added after the sections, each id named for where it is used
-
-home-templates-for-app = Modelli per { $app }
-home-app-templates = Modelli per { $app }
-home-templates-for-app-name = Modelli per { $app }: { $name }
-home-templates-are-not-saved-in = I modelli non sono ancora salvati in questo browser. Connettiti a Internet per vederli.
 # The grip on a line of the tape; the bar under lines chosen whole.
 calc-choose-line-n-drag-it = Scegli la riga { $n }: trascinala per spostarla
 calc-chosen-lines = Righe scelte
-# The Spreadsheet: any column removed, the Option column, rich cells, a chart put in from Insert.
-sheet-keeps-one-column = Un foglio tiene una colonna
-editor-bold-italic-and-links = Grassetto, corsivo e link
-sheet-choices = Scelte
-sheet-choices-for-ref = Scelte per { $ref }
-editor-one-of-words-column-holds = Una delle parole che la colonna contiene, o una nuova
-editor-option = Opzione
-sheet-has-one = Il foglio ne ha una
-drawer-documents = Documenti
-common-find-app-template = Cerca app, modello
-drawer-find-app-doc-template-or = Cerca app, documento, modello o comando
-drawer-find-app-template-or-command = Cerca app, modello o comando
-drawer-commands = Comandi
-share-new-noun-date-n = Nuovo: { $noun } { $date } #{ $n }
-drawer-nothing-by-that-name = Niente con quel nome
-draw-pixels-n-n = Pixel { $n }×{ $n }
-# Files, compare, posting and embedding: the agent and sharing surface.
-share-mastodon-server-like-mastodon-social = Un server Mastodon, come mastodon.social
-share-change = Modifica
+
+## two links compared (kit/ui/compare.ts)
+
 compare-changes = Modifiche
 compare-compare = Confronta
-share-copy-embed-code = Copia codice da incorporare
-share-copy-show-link = Copia il link di presentazione
-deck-edit-this-deck = Modifica questa presentazione
-share-embed = Incorpora
-share-embed-code-copied = Codice da incorporare copiato
 compare-no-difference = Nessuna differenza
 compare-not-link-to-tiny-little = Non è un link a un documento di Ufficio Piccolo Piccolo
-open-opened-name = Aperto { $name }
-share-opens-deck-already-presenting = Apre la presentazione già in corso.
-export-pdf-file = File PDF
-outline-pdf-sections-and-bullets = PDF: sezioni ed elenchi
 compare-paste-second-link-to-see = Incolla un secondo link per vedere cosa è cambiato.
 compare-paste-link-to-document-as = Incolla il link al documento com’è adesso
 compare-paste-link-to-document-as-it-was = Incolla il link al documento com’era
-share-post = Pubblica
-share-post-link = Pubblica il link
-share-show-preview-of-first-page = Mostra un’anteprima della prima pagina
-share-picture-of-first-page-and = Un’immagine della prima pagina e il titolo restano leggibili sul nostro server per un mese, perché il social network possa recuperarli. Il documento in sé no.
-share-shared-without-preview-reason = Condiviso senza anteprima: { $reason }
-share-making-preview = Creazione dell’anteprima…
-share-page-could-not-be-drawn = non è stato possibile disegnare la pagina
-share-picture-is-over-400-kb = l’immagine supera i 400 KB
-share-server-could-not-be-reached = il server non è raggiungibile
-share-hundred-previews-day-from-one = cento anteprime al giorno da uno stesso indirizzo
-share-server-refused-picture = il server ha rifiutato l’immagine
 compare-put-in = Aggiunto:
 compare-swap = Scambia
 compare-taken-out = Tolto:
-open-that-file-is-not-words = Quel file non contiene parole che Ufficio Piccolo Piccolo possa leggere.
-open-that-file-is-too-large = Quel file è troppo grande per essere un documento qui.
 compare-first-link = Il primo link
-share-pages-in-frame-on-another = Le pagine, in una cornice su un altro sito, con un link per aprirle qui.
 compare-second-link = Il secondo link
 compare-two-links-to-documents-side = Due link a documenti, affiancati: ciò che ha cambiato il secondo è segnato. Niente lascia questa pagina.
-share-your-mastodon-server = Il tuo server Mastodon
 compare-different-apps = app diverse
 compare-n-blocks-taken-out = { $n ->
         [one] { $n } blocco tolto
@@ -1645,108 +1730,12 @@ compare-n-put-in = { $n ->
         [many] { $n } di aggiunti
        *[other] { $n } aggiunti
     }
-diagram-tap-empty-space-for-branch = Tocca lo spazio vuoto per un ramo; tocca un’idea per scriverci sopra, Enter per la successiva; trascinane una su un’altra per metterla sotto; Unisci ne collega due sulla mappa.
-# Restored around the document: search, Find in this document, the shortcuts and the apps' keys, Mod+S, the size of
-# everything, Add to home screen, another version kept here, where the link fits, Open in another app, the QR code
-# of this document, Insert narrowed by typing, Trip presenting, a seating chart's place cards
-qr-code-of-this-document = Un codice QR di questo documento
-anim-frame-back-frame-on = Un fotogramma indietro, uno avanti
-deck-new-slide = Una nuova diapositiva
-drawer-add-to-home-screen = Aggiungi alla schermata Home
-shell-another-version = Un’altra versione
-keys-normal-size = Dimensione normale
-home-documents-found = Documenti trovati
-sheet-edit-cell-caret-at-its = Modifica la cella, con il cursore alla fine
-keys-everything-larger = Tutto più grande
-keys-everything-smaller = Tutto più piccolo
-find-in-this-document = Cerca in questo documento
-outline-fold-unfold = Chiudi, apri
-common-indent-or-bring-out-in = Rientra o sporgi in un elenco; la cella successiva in una griglia
-keys-keep-this-document-on-device = Tieni questo documento sul dispositivo
-shell-kept-on-this-device = Conservato su questo dispositivo
-shell-keyboard-shortcuts = Scorciatoie da tastiera
-share-left = A sinistra
-common-move-selected-items-up-or = Sposta in su o in giù le voci selezionate
-home-no-document-here-has-those = Nessun documento qui contiene quelle parole
-find-not-found = Non trovato
-menu-nothing-starts-q = Niente comincia con “{ $q }”
-shell-nothing-to-keep-yet = Ancora niente da conservare
-common-nudge-shapes-in-hand = Sposta di poco le forme in mano
-anim-nudge-shapes-in-hand-with = Sposta di poco le forme in mano; senza nessuna, avanza di un fotogramma
-write-open-as-outline = Apri come scaletta
-shell-open-it = Aprilo
-diagram-place-cards = Segnaposto
-anim-play-or-pause = Riproduci o metti in pausa
-trip-presenting-trip = Presentazione del viaggio
-deck-presenting-back = In presentazione: indietro
-deck-presenting-next-line-or-slide = In presentazione: la riga o la diapositiva successiva
-trip-presenting-next-stop = In presentazione: la tappa successiva
-trip-presenting-stop-before = In presentazione: la tappa precedente
-diagram-print-place-cards = Stampa i segnaposto
-diagram-print-place-cards-card-guest = Stampa i segnaposto: un cartoncino a ospite, otto per foglio Letter, da ritagliare
-shell-save-in-browser-is-off = Salva nel browser è disattivato: questo browser non conserva documenti. Attivalo nel menu per tenerli qui.
-sheet-put-back-what-cell-held = Rimetti ciò che la cella conteneva
-sheet-put-dated-rows-on-calendar = Metti le righe con una data su un calendario
-trip-put-stops-on-calendar-day = Metti le tappe su un calendario, un giorno ciascuna
-home-search-your-documents = Cerca nei tuoi documenti
-common-select-all-words-of-box = Seleziona tutto: le parole della casella, poi tutto
-keys-show-these-shortcuts = Mostra queste scorciatoie
-# same
-write-a4 = A4
-write-letter = Lettera
-common-back-to-words = Torna al testo
-common-extend-selection = Estendi la selezione
-deck-presenting-whole-slide = In presentazione: la diapositiva intera
-trip-first-last = Il primo, l’ultimo
-common-next-or-one-before = Il successivo o il precedente
-editor-this-browser-lets-page-paste = Questo browser permette di incollare solo dalla tastiera: usa il suo «Incolla».
-drawer-size-of-everything = Dimensione di tutto
-shell-skip-to-apps = Vai alle app
-shell-skip-to-document = Vai al documento
-menu-starting-q = Che comincia con “{ $q }”
-common-step-out-close-collapse-let = Esci: chiudi, comprimi, lascia
-anim-first-frame-last = Il primo fotogramma, l’ultimo
-trip-next-stop = La tappa successiva
-deck-slide-before-slide-after-on = La diapositiva prima, la diapositiva dopo (sulla barra laterale)
-trip-stop-before = La tappa precedente
-shell-this-device-keeps-another-version = Questo dispositivo conserva un’altra versione di “{ $title }”, del { $when }.
-shell-this-link-was-made-by = Questo link è stato creato da una versione più recente di Ufficio Piccolo Piccolo. Ricarica la pagina per averla.
-keys-this-page = Questa pagina
-common-check-or-uncheck-task = Spunta o togli la spunta a un’attività
-drawer-to-add-tiny-little-office = Per aggiungere Ufficio Piccolo Piccolo alla schermata Home: Condividi, poi Aggiungi alla schermata Home.
-common-too-long-for-qr-code = Troppo lungo per un codice QR: accorcia il documento, o condividi un link breve.
-share-uses = Usa
-share-where = Dove
-share-where-link-fits = Dove sta il link
-share-any-length = qualsiasi lunghezza
-home-n-documents-found = { $n ->
-        [one] Un documento trovato
-        [many] { $n } di documenti trovati
-       *[other] { $n } documenti trovati
-    }
-common-n-of-count = { $n } di { $count }
-share-n-over = { $n } in più
-privacy-password-copied = Password copiata
-diagram-guest = Ospite
-outline-name-line = Dai un nome alla linea
-write-name-this-column = Dai un nome a questa colonna
-diagram-new-idea = Nuova idea
-diagram-tap-empty-space-for-person = Tocca lo spazio vuoto per una persona; tocca una persona per scriverci sopra, Shift+Enter per il ruolo sotto il nome, Enter per la successiva; trascinane una su un’altra per metterla sotto.
-diagram-tap-empty-space-for-event = Tocca lo spazio vuoto per un evento: scrivi quando, Shift+Enter, poi cosa è successo; anni e date sono distanziati come sono caduti; un periodo è una fascia.
-diagram-lanes-name = Il nome della corsia
-diagram-when = Quando
-draw-align-center = Allinea: al centro
-draw-align-left = Allinea: a sinistra
-draw-align-right = Allinea: a destra
-diagram-tap-person-to-type-on = Tocca una persona per scriverci sopra, + dopo il nome per il partner, Shift+Enter per i suoi anni sotto il nome; Enter per la successiva; trascinane una su un’altra per metterla sotto; Unisci traccia una linea tratteggiata tra due.
-diagram-tap-empty-space-for-table = Tocca lo spazio vuoto per un tavolo; tocca un tavolo o una persona per scrivere, una virgola dopo un nome per l’ospite successivo; trascina una persona a un altro tavolo.
-diagram-tap-inside-circles-to-add = Tocca dentro i cerchi per aggiungervi un elemento, una virgola dopo di esso per il successivo; tocca il nome di un insieme per rinominarlo; trascina un elemento in altri cerchi.
-export-copy-link-that-downloads-ext = Copia un link che scarica il .{ $ext }
-export-could-not-share-ext = Impossibile condividere il .{ $ext }
-export-could-not-show-ext = Impossibile mostrare il .{ $ext }
-export-download-ext = Scarica il .{ $ext }
-export-share-ext = Condividi il .{ $ext }…
-export-view-ext = Vedi il .{ $ext }
+
+## files and zips dropped on the page (kit/file/open.ts)
+
+open-opened-name = Aperto { $name }
+open-that-file-is-not-words = Quel file non contiene parole che Ufficio Piccolo Piccolo possa leggere.
+open-that-file-is-too-large = Quel file è troppo grande per essere un documento qui.
 open-keep-them-on-this-device = Tienili su questo dispositivo
 open-nothing-is-saved-on-this = Ora su questo dispositivo non viene salvato nulla. Tienili qui, o aprine uno.
 open-first = Apri il primo
@@ -1761,3 +1750,28 @@ open-n-documents-kept = { $n ->
         [many] { $n } di documenti conservati
        *[other] { $n } documenti conservati
     }
+
+## a document's QR code (kit/draw/qr-picture.ts)
+
+# Restored around the document: search, Find in this document, the shortcuts and the apps' keys, Mod+S, the size of
+# everything, Add to home screen, another version kept here, where the link fits, Open in another app, the QR code
+# of this document, Insert narrowed by typing, Trip presenting, a seating chart's place cards
+qr-code-of-this-document = Un codice QR di questo documento
+
+## the keys, the shortcuts and the size of everything (kit/core/keys.ts, kit/ui/zoom.ts)
+
+keys-normal-size = Dimensione normale
+keys-everything-larger = Tutto più grande
+keys-everything-smaller = Tutto più piccolo
+keys-keep-this-document-on-device = Tieni questo documento sul dispositivo
+keys-show-these-shortcuts = Mostra queste scorciatoie
+keys-this-page = Questa pagina
+
+## Find in this document (kit/ui/find.ts)
+
+find-not-found = Non trovato
+
+## a menu narrowed by typing (kit/ui/menu.ts)
+
+menu-nothing-starts-q = Niente comincia con “{ $q }”
+menu-starting-q = Che comincia con “{ $q }”

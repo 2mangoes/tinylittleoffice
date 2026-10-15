@@ -5,10 +5,10 @@
 ## the shell: header
 
 shell-menu = 選單
-shell-title = 標題
+common-title = 標題
 # A new document of the app, and one not yet named; { $noun } is the app's noun: "New presentation".
-shell-new-noun = 新增{ $noun }
-shell-untitled-noun = 未命名的{ $noun }
+common-new-noun = 新增{ $noun }
+common-untitled-noun = 未命名的{ $noun }
 shell-download = 下載
 shell-loading = 載入中…
 shell-this-link-holds-something-that = 這個連結的內容無法讀取，可能是複製時被截斷了。
@@ -23,15 +23,25 @@ shell-copy-link-and-go = 複製連結並離開
 shell-turn-on-save-in-browser = 開啟「在瀏覽器中儲存」並保留在這裡
 shell-go-without = 直接離開
 shell-save-in-browser-is-on = 「在瀏覽器中儲存」已開啟：此瀏覽器會保留你開啟的文件。可在選單中關閉。
+shell-another-version = 另一個版本
+shell-kept-on-this-device = 已保留在此裝置
+shell-keyboard-shortcuts = 鍵盤快速鍵
+shell-nothing-to-keep-yet = 目前沒有可保留的內容
+shell-open-it = 開啟
+shell-save-in-browser-is-off = 「在瀏覽器中儲存」已關閉：此瀏覽器不保留任何文件。在選單中開啟它，即可把文件保留在這裡。
+shell-skip-to-apps = 跳到應用程式
+shell-skip-to-document = 跳到文件
+shell-this-device-keeps-another-version = 此裝置保留了「{ $title }」的另一個版本，時間是{ $when }。
+shell-this-link-was-made-by = 這個連結是由較新版本的小小辦公室製作的。請重新載入頁面來取得新版。
 
 ## the home page
 
 home-blank = 空白
-home-templates = 範本
+common-templates = 範本
 # The button under an app's tile, naming the template list: "Start Text from"
 # The list of an app's documents kept on this device, under its tile: "Write documents"
 home-app-documents = { $app }文件
-home-forget = 清除
+common-forget = 清除
 # The button that forgets one kept document: "Forget Launch notes"
 home-forget-title = 清除「{ $title }」
 # Under an app's documents, the rest folded away: "3 more"
@@ -39,27 +49,37 @@ home-n-more = 還有 { $n } 個
 home-aboard-project-made-with-respect = { $aboard } 的專案。在紐約懷著敬意打造。
 home-beta-version = 測試版
 home-email = 電子郵件
+home-templates-for-app = { $app }的範本
+home-app-templates = { $app }範本
+home-templates-for-app-name = { $app }的範本：{ $name }
+home-templates-are-not-saved-in = 範本還沒有儲存在此瀏覽器中。連上網路即可查看。
+home-documents-found = 找到的文件
+home-no-document-here-has-those = 這裡沒有文件含有這些字
+home-search-your-documents = 搜尋你的文件
+home-n-documents-found = { $n ->
+       *[other] 找到 { $n } 份文件
+    }
 
 ## the drawer (hamburger menu)
 
 drawer-apps = 應用程式
-drawer-close = 關閉
+common-close = 關閉
 drawer-default-name = 預設：{ $name }
 drawer-save-in-browser = 在瀏覽器中儲存
 drawer-what-is-this = 這是什麼？
 drawer-turn-on-to-save-files = 開啟後會在瀏覽器中儲存檔案。
 drawer-turn-off-to-remove-all = 關閉後會移除所有檔案和設定。
-drawer-nothing-saved-in-this-browser = 此瀏覽器不儲存任何內容
-drawer-saving-in-this-browser = 正在此瀏覽器中儲存
+common-nothing-saved-in-this-browser = 此瀏覽器不儲存任何內容
+common-saving-in-this-browser = 正在此瀏覽器中儲存
 drawer-remove-all-files-and-settings = 要從此瀏覽器移除所有檔案和設定嗎？
 drawer-language = 語言
-drawer-theme = 主題
+common-theme = 主題
 drawer-match-device = 跟隨裝置
 drawer-light = 淺色
 drawer-dark = 深色
 drawer-about = 關於
 # The name itself is translated too (Paul, 2026-10-10): each language says it in its own words.
-drawer-tiny-little-office = 小小辦公室
+common-tiny-little-office = 小小辦公室
 drawer-about-tiny-little-office = 關於小小辦公室
 drawer-tiny-little-office-is-experiment = 小小辦公室是紐約的數位與 AI 策略及軟體開發公司 { $aboard } 的一項實驗。
 drawer-to-reach-out-with-questions = 如有疑問，請{ $email }。
@@ -69,6 +89,13 @@ drawer-github-repository = GitHub 儲存庫
 drawer-all-of-these-notes-these = 這些筆記、這些圖畫、這些用麥克筆寫下的句子，都會隨時間褪去。唯有短暫的才長存。
 drawer-eugene-ionesco-book = 尤金·尤涅斯柯，{ $book }
 drawer-discoveries = 《發現》
+drawer-documents = 文件
+drawer-find-app-template-or-command = 尋找應用程式、範本或指令
+drawer-commands = 指令
+drawer-nothing-by-that-name = 沒有這個名稱的項目
+drawer-add-to-home-screen = 加到主畫面
+drawer-size-of-everything = 全部的大小
+drawer-to-add-tiny-little-office = 要把小小辦公室加到主畫面：先按「分享」，再按「加入主畫面」。
 
 ## links that leave the site (kit/ui/link-guard.ts)
 
@@ -110,7 +137,7 @@ share-expires-in-n-minutes-date = { $n ->
     }後到期（{ $date }）
 share-opens-as-pages-to-read = 以分頁形式開啟供閱讀
 share-opens-in-editor = 在編輯器中開啟
-share-whoever-opens-this-link-gets = 打開這個連結的每個人，都會拿到自己的一份副本。他們的修改留在他們自己的連結裡，不在你的連結裡：請他們把自己的連結傳回給你。
+common-whoever-opens-this-link-gets = 打開這個連結的每個人，都會拿到自己的一份副本。他們的修改留在他們自己的連結裡，不在你的連結裡：請他們把自己的連結傳回給你。
 share-short-link-that-expires = 會到期的短連結
 share-this-link-expires-in-n = 此連結將在{ $n ->
        *[other] { $n } 天
@@ -139,9 +166,9 @@ share-display-link = 顯示連結
 share-opens = 開啟方式
 share-link-copied = 已複製連結
 share-could-not-copy = 無法複製
-share-share = 分享…
-share-qr-code = QR 碼
-share-qr-code-of-this-document = 此文件的 QR 碼
+common-share = 分享…
+common-qr-code = QR 碼
+common-qr-code-of-this-document = 此文件的 QR 碼
 share-this-document-is-n-bytes = 這份文件有 { $n } 位元組；最大的 QR 碼只能容納 { $max }。縮短 { $over } 位元組就能放得下。
 share-this-document-is-n-characters = 這份文件有 { $n } 個字元；短連結最多容納 { $max }。縮短 { $over } 個字元就能放得下。
 share-expires-after = 到期時間
@@ -157,8 +184,36 @@ share-could-not-shorten-link = 無法縮短連結。
 share-this-document-is-too-long = 這份文件太長，無法製成短連結。
 share-up-to-hundred-links-day = 同一個位址每天最多可製作一百個連結。
 share-remove = 移除
-share-link = 連結
-share-short-link = 短連結
+common-link = 連結
+common-short-link = 短連結
+share-new-noun-date-n = 新增{ $noun } { $date } #{ $n }
+# Files, compare, posting and embedding: the agent and sharing surface.
+share-mastodon-server-like-mastodon-social = Mastodon 伺服器，例如 mastodon.social
+share-change = 更改
+share-copy-embed-code = 複製嵌入程式碼
+share-copy-show-link = 複製顯示連結
+share-embed = 嵌入
+share-embed-code-copied = 已複製嵌入程式碼
+share-opens-deck-already-presenting = 開啟後直接進入播放。
+share-post = 發文
+share-post-link = 發布連結
+share-show-preview-of-first-page = 顯示第一頁的預覽
+share-picture-of-first-page-and = 第一頁的圖片和標題會在我們的伺服器上以可讀形式保存一個月，讓社群網路可以取得。文件本身不會。
+share-shared-without-preview-reason = 已分享，但沒有預覽：{ $reason }
+share-making-preview = 正在製作預覽…
+share-page-could-not-be-drawn = 無法繪製頁面
+share-picture-is-over-400-kb = 圖片超過 400 KB
+share-server-could-not-be-reached = 無法連線到伺服器
+share-hundred-previews-day-from-one = 同一個位址每天最多一百個預覽
+share-server-refused-picture = 伺服器拒絕了這張圖片
+share-pages-in-frame-on-another = 頁面放在其他網站的框架裡，並附一個連結可在這裡開啟。
+share-your-mastodon-server = 你的 Mastodon 伺服器
+share-left = 左
+share-uses = 用途
+share-where = 位置
+share-where-link-fits = 連結放得下的地方
+share-any-length = 任何長度
+share-n-over = 超出 { $n }
 
 ## privacy (kit/share/privacy.ts, kit/ui/privacy-dialog.ts): the password, what the device holds
 
@@ -171,12 +226,12 @@ privacy-forget-everything = 清除全部
 privacy-preview-sent-with-link-to = 隨連結傳到社群網路的預覽是第一頁的圖片、標題和開頭的文字，在我們的伺服器上以可讀形式保存一個月。文件本身從不會傳到那裡。
 privacy-forget-everything-this-site-keeps = 清除本站保留在這裡的所有內容，並且從現在起不再保留任何內容？文件本身仍存在於各自的連結裡。
 privacy-locked = 已鎖定
-privacy-locked-document = 已鎖定的文件
+common-locked-document = 已鎖定的文件
 privacy-new-password = 新密碼
 privacy-no-password = 沒有密碼
 privacy-none = 無
 privacy-opening = 開啟中…
-privacy-password = 密碼
+common-password = 密碼
 privacy-password-removed = 已移除密碼
 privacy-password-set-link-holds-only = 已設定密碼：連結裡只有密文
 privacy-password-ellipsis = 密碼…
@@ -193,17 +248,17 @@ privacy-short-links-made-here-until = 在這裡建立的短連結，保留到過
 privacy-their-names-and-links-for = 它們的名稱和連結，供首頁使用。
 privacy-theme-lifetime-of-short-links = 主題、短連結的有效期限。
 privacy-this-document-has-password-link = 這份文件設有密碼。連結和由它產生的任何短連結裡都只有密文。
-privacy-this-document-is-locked = 這份文件已鎖定
+common-this-document-is-locked = 這份文件已鎖定
 privacy-this-document-is-locked-with = 這份文件已用密碼鎖定。
 privacy-unlock = 解鎖
-privacy-unlock-ellipsis = 解鎖…
+common-unlock-ellipsis = 解鎖…
 privacy-what-this-device-holds = 此裝置保存了什麼
 privacy-your-documents = 你的文件
 privacy-your-browsers-history = 瀏覽器的瀏覽紀錄
 privacy-every-document-opened-here-in = 在這裡開啟過的每份文件，內容完整，除非它設有密碼。
 privacy-not-ours-to-clear = 我們無法清除
 privacy-by-name = 作者：{ $name }
-privacy-n-documents = { $n ->
+common-n-documents = { $n ->
        *[other] { $n } 份文件
     }
 privacy-n-links = { $n ->
@@ -212,11 +267,12 @@ privacy-n-links = { $n ->
 privacy-n-set = 已設定 { $n } 個
 privacy-copy-this-and-send-it = 複製它，並用連結以外的途徑傳送。它無法再次顯示。
 privacy-make-another = 再產生一個
+privacy-password-copied = 已複製密碼
 
 ## a document locked with a password, placed inside another (kit/share/locked.ts, kit/ui/locked-doc.ts)
 
 # The card drawn where it sits; { $app } is the app's name: "A Spreadsheet document, locked with a password".
-locked-with-password = 已用密碼鎖定
+common-with-password = 已用密碼鎖定
 locked-app-document-locked-with-password = 一份{ $app }文件，已用密碼鎖定
 locked-with-password-unlock = 已用密碼鎖定。解鎖…
 locked-document-locked-with-password = 已用密碼鎖定的文件
@@ -242,24 +298,37 @@ common-chosen-tasks = 已選取的任務
 common-open = 開啟
 common-task = 任務
 common-tasks = 任務
+common-find-app-doc-template-or = 尋找應用程式、文件、範本或指令
+common-in-this-document = 在這份文件中尋找
+common-indent-or-bring-out-in = 清單中縮排或強調；表格中到下一個儲存格
+common-move-selected-items-up-or = 把選取的項目上移或下移
+common-nudge-shapes-in-hand = 微調選取的圖形
+common-select-all-words-of-box = 全選：先選方塊裡的文字，再選全部
+common-back-to-words = 回到文字
+common-extend-selection = 延伸選取範圍
+common-next-or-one-before = 下一個或上一個
+common-step-out-close-collapse-let = 跳出：關閉、收合、放開
+common-check-or-uncheck-task = 勾選或取消勾選任務
+common-too-long-for-qr-code = 對 QR 碼來說太長：請縮短文件，或分享短連結。
+common-n-of-count = { $n }／{ $count }
 
 ## downloads
 
 download-print = 列印
-download-print-or-save-as-pdf = 列印，或另存為 PDF
+common-print-or-save-as-pdf = 列印，或另存為 PDF
 download-picture-png = 圖片（PNG）
-download-web-page-html = 網頁（HTML）
+common-web-page-html = 網頁（HTML）
 download-text-tlo = 文字（TLO）
 download-data-json = 資料（JSON）
 download-downloaded-name = 已下載 { $name }
 download-failed = 下載失敗
-download-open-in-tiny-little-office = 在小小辦公室開啟
+common-open-in-tiny-little-office = 在小小辦公室開啟
 # Under a document cut off at a slide's foot: a link that opens it whole, in its own app.
 download-see-more = 查看更多
 
 ## the bar, shared by every app
 
-bar-insert = 插入
+common-insert = 插入
 bar-bold = 粗體
 bar-italic = 斜體
 bar-underline = 底線
@@ -268,28 +337,28 @@ bar-highlight = 醒目提示
 bar-heading = 標題
 bar-bulleted-list = 項目符號清單
 bar-numbered-list = 編號清單
-bar-table = 表格
+common-table = 表格
 bar-footnote = 註腳
-bar-date = 日期
+common-date = 日期
 bar-undo = 復原
 bar-redo = 重做
-bar-today = 今天
+common-today = 今天
 
 ## the editor (<to-text>): chips, cards and the bubbles
 
 # A footnote's mark, and its words where the notes are drawn, by its number: spoken.
-editor-footnote-n = 註腳 { $n }
+common-footnote-n = 註腳 { $n }
 # A card standing for another document held in this one, of a kind no app here reads: "abc document".
-editor-app-document = { $app }文件
+common-app-document = { $app }文件
 # The same card when its app is known; { $noun } is the app's noun: "A spreadsheet".
-editor-noun = { $noun }
+common-noun = { $noun }
 editor-code = 程式碼
 editor-connection = 連線
 editor-n-rows = { $n ->
        *[other] { $n } 列
     }
 editor-notes-words = 註腳的內容
-editor-done = 完成
+common-done = 完成
 editor-address = 位址
 editor-not-address = 不是位址
 editor-set-link = 設定連結
@@ -297,9 +366,13 @@ editor-open-link = 開啟連結
 editor-change-link = 編輯連結
 editor-remove-link = 移除連結
 # The selection bubble's name: what can be done to the words selected.
-editor-format = 格式
+common-format = 格式
 editor-done-lowercase = 已完成
 editor-not-done = 未完成
+editor-bold-italic-and-links = 粗體、斜體和連結
+editor-one-of-words-column-holds = 這一欄已有的其中一個詞，或新增一個
+editor-option = 選項
+editor-this-browser-lets-page-paste = 這個瀏覽器只允許從鍵盤貼上：請使用它的「貼上」。
 
 ## the example in the kit's own documentation
 
@@ -309,18 +382,18 @@ example-n-slides = { $n ->
 
 ## the Word Processor
 
-write-word-processor = 文書處理
+common-word-processor = 文書處理
 # What one of its documents is called, in running text: "Untitled document"; each app's noun is in its section.
 write-document-lowercase = 文件
 # The group heading the Word Processor sits under on the home page.
-write-words = 文字
+common-words = 文字
 write-words-on-page-headings-lists = 頁面上的文字：標題、清單、連結和註腳，會自動計算的表格，可列印成 Letter 或 A4。
 write-document = 文件
 write-here = 在這裡書寫。
 write-subheading = 副標題
 write-paragraph = 段落
-write-bring-out = 強調
-write-indent = 縮排
+common-bring-out = 強調
+common-indent = 縮排
 write-align = 對齊
 write-align-left = 靠左對齊
 write-center = 置中
@@ -343,11 +416,11 @@ write-narrow-headline-two-columns = 窄版大標題，雙欄
 write-horizontal-rule = 水平線
 # Insert ▾'s rule in a document: what follows starts the next page.
 write-page-break = 分頁符號
-write-ok = 確定
+common-ok = 確定
 write-this-card = 這張卡片
 write-open-in-app = 在{ $app }中開啟
 write-locked-worked-out-for-you = 已鎖定：由系統為你計算
-write-footnotes = 註腳
+common-footnotes = 註腳
 write-back-to-footnote-n-in = 回到內文的註腳 { $n }
 write-back-to-text = 回到內文
 write-n-words = { $n ->
@@ -355,7 +428,7 @@ write-n-words = { $n ->
     }
 write-word-docx = Word（DOCX）
 # same
-write-markdown = Markdown
+common-markdown = Markdown
 write-rich-text-rtf = RTF 格式（RTF）
 # A table in the text: its heads, its handle, its column menu.
 write-add-column-before = 在前面加一欄
@@ -418,6 +491,12 @@ write-petition = 連署書
 write-what-you-ask-why-and = 你的訴求、原因，以及同意者的簽名。
 write-terms-of-service = 服務條款
 write-small-businesss-terms-in-plain = 小生意的條款，用白話寫成：預約、價格、鑰匙、萬一怎麼辦、終止。
+write-open-as-outline = 以大綱開啟
+# same
+write-a4 = A4
+# same
+write-letter = Letter
+write-name-this-column = 為這一欄命名
 
 ## Insert's dialog (kit/ui/insert-dialogs.ts): Tiny Little Office Doc
 
@@ -426,13 +505,13 @@ insert-opening-short-link = 正在開啟短連結…
 insert-paste-link-of-another-tiny = 貼上另一份小小辦公室文件的連結（長短皆可）：它的第一頁會顯示在這裡。
 insert-this-is-not-tiny-little = 這不是小小辦公室的連結，或已經到期。
 insert-tiny-little-office-doc = 小小辦公室文件
-insert-tiny-little-office-doc-ellipsis = 小小辦公室文件…
+common-tiny-little-office-doc-ellipsis = 小小辦公室文件…
 # Insert ▾'s group of the apps a new document can be made in, inside this one.
-insert-new-document = 新文件
+common-new-document = 新文件
 
 ## another document edited in place (kit/ui/doc-dialog.ts); a table's size is Rows × Columns
 
-doc-cancel = 取消
+common-cancel = 取消
 doc-rows = 列數
 
 ## charts (kit/draw/chart.ts)
@@ -441,7 +520,7 @@ chart-empty-chart = 空白圖表
 chart-bars = 長條圖
 chart-flows-sankey = 流量圖（桑基圖）
 chart-flows-list = 流向：{ $list }。
-chart-lines = 折線圖
+common-lines = 折線圖
 chart-nothing-to-chart-yet = 目前沒有可繪製的內容
 chart-nothing-to-chart-yet-rows = 目前沒有可繪製的內容：請填入「來源 | 去向 | 數量」各列
 chart-pie = 圓餅圖
@@ -455,10 +534,10 @@ sheet-fit-this-column-to-its = 依文字調整欄寬
 sheet-cells-in-hand = 已選取的儲存格
 sheet-check-ref = 勾選 { $ref }
 # The column type that holds words as typed.
-sheet-text = 文字
-sheet-spreadsheet = 試算表
+common-text = 文字
+common-spreadsheet = 試算表
 sheet-spreadsheet-lowercase = 試算表
-sheet-numbers = 數字
+common-numbers = 數字
 sheet-spreadsheet-with-formulas-named-cells = 有公式、命名儲存格和圖表的試算表；一開始三欄，需要時再增加。
 sheet-budget = 預算
 sheet-planned-against-actual-line-each = 預計與實際，每項一列，附差額與總計。
@@ -522,37 +601,37 @@ sheet-tournament-bracket = 淘汰賽對戰表
 sheet-eight-teams-single-elimination-each = 八支隊伍的淘汰賽：每場比分、算出的勝者，以及晉級決賽的勝者。
 sheet-excel-xlsx = Excel（XLSX）
 # same
-sheet-csv = CSV
+common-csv = CSV
 sheet-chart-svg = 圖表（SVG）
 sheet-chart-png = 圖表（PNG）
 sheet-empty-sheet = 空白工作表
 sheet-n-of-max-shown = （顯示 { $n }／{ $max }）
 sheet-50-more-rows = 再顯示 50 列
-sheet-add-column = 新增一欄
-sheet-add-column-after = 在後面新增一欄
+common-add-column = 新增一欄
+common-add-column-after = 在後面新增一欄
 sheet-chart = 圖表
 sheet-chart-of-table = 表格的圖表
 sheet-checkbox = 核取方塊
 sheet-column-after = 後面的欄
-sheet-column-c = 第 { $c } 欄
-sheet-column-c-holds = 第 { $c } 欄的內容
+common-column-c = 第 { $c } 欄
+common-column-c-holds = 第 { $c } 欄的內容
 sheet-column-c-type-what-it = 第 { $c } 欄：{ $type }。設定內容、依它排序、新增或移除欄
-sheet-columns = 欄
-sheet-delete-which = 刪除{ $which }
-sheet-drag-to-fill = 拖曳以填滿
+common-columns = 欄
+common-delete-which = 刪除{ $which }
+common-drag-to-fill = 拖曳以填滿
 sheet-abc-or-123-for-this = 此欄用 ABC 或 123
 sheet-drag-to-resize-double-click = 拖曳調整大小，按兩下自動符合
 sheet-fill-down-from-top-row = 從最上列向下填滿
 sheet-fill-right-from-first-column = 從第一欄向右填滿
-sheet-fill-drag-to-carry-these = 填滿：拖曳以延伸這些儲存格
+common-fill-drag-to-carry-these = 填滿：拖曳以延伸這些儲存格
 sheet-fit-columns-to-page = 讓各欄符合頁面寬度
 sheet-formula = 公式
 sheet-function = 函數
 sheet-high-to-low = 由高到低
-sheet-insert-n-rows-above = 在上方插入{ $n ->
+common-insert-n-rows-above = 在上方插入{ $n ->
        *[other] { $n } 列
     }
-sheet-insert-n-rows-below = 在下方插入{ $n ->
+common-insert-n-rows-below = 在下方插入{ $n ->
        *[other] { $n } 列
     }
 sheet-letters-keyboard = 字母鍵盤
@@ -560,8 +639,8 @@ sheet-lock-these-cells-so-reader = 鎖定這些儲存格，讀者就無法更動
 sheet-locked-part-of-model = 已鎖定：模型的一部分
 sheet-low-to-high = 由低到高
 sheet-money = 金額
-sheet-name = 名稱
-sheet-name-of-column-c = 第 { $c } 欄的名稱
+common-name = 名稱
+common-name-of-column-c = 第 { $c } 欄的名稱
 sheet-names-cell-to-its-right = 為右邊的儲存格命名
 # A money column's currency (Money picked in a column's menu): the field's hint, and what it says of words it cannot read.
 sheet-symbol-like-or-code-like = 符號（例如 $）或代碼（例如 USD）。留空則使用文件本身的設定。
@@ -571,15 +650,15 @@ sheet-number = 數字
 sheet-open-link = 開啟{ $link }
 sheet-opens-when-clicked = 點選時開啟
 sheet-percent = 百分比
-sheet-remove-this-column = 移除這一欄
+common-remove-this-column = 移除這一欄
 sheet-resize-column-c = 調整第 { $c } 欄的寬度
 sheet-rich-text = 格式化文字
 sheet-row-above = 上方的列
 sheet-row-below = 下方的列
-sheet-row-n = 第 { $n } 列
-sheet-row-n-lowercase = 第 { $n } 列
-sheet-row-n-insert-or-delete = 第 { $n } 列：插入或刪除列
-sheet-rows-b = 第 { $a }–{ $b } 列
+common-row-n = 第 { $n } 列
+common-row-n-lowercase = 第 { $n } 列
+common-row-n-insert-or-delete = 第 { $n } 列：插入或刪除列
+common-rows-b = 第 { $a }–{ $b } 列
 sheet-selected-cells = 已選取的儲存格
 sheet-show-all-text = 顯示全部文字
 sheet-shown-as-typed = 依輸入顯示
@@ -590,22 +669,37 @@ sheet-is-full-its-last-rows = 工作表已滿：最後幾列有內容。
 sheet-three-at-least = 至少三個
 sheet-unlock-these-cells = 解除鎖定這些儲存格
 sheet-what-it-holds-sort-columns = 內容、排序、欄
+# The Spreadsheet: any column removed, the Option column, rich cells, a chart put in from Insert.
+sheet-keeps-one-column = 工作表至少要保留一欄
+sheet-choices = 選項
+sheet-choices-for-ref = { $ref }的選項
+sheet-has-one = 工作表只有一個
+sheet-edit-cell-caret-at-its = 編輯儲存格，游標在最後
+sheet-put-back-what-cell-held = 還原儲存格原本的內容
+sheet-put-dated-rows-on-calendar = 把有日期的列放到行事曆上
 
 ## downloads: hand-offs to another app (kit/file/exports.ts)
 
 export-open-in = 開啟於
+export-pdf-file = PDF 檔
+export-copy-link-that-downloads-ext = 複製可下載 .{ $ext } 的連結
+export-could-not-share-ext = 無法分享 .{ $ext }
+export-could-not-show-ext = 無法顯示 .{ $ext }
+export-download-ext = 下載 .{ $ext }
+export-share-ext = 分享 .{ $ext }…
+export-view-ext = 檢視 .{ $ext }
 
 ## the icon library (kit/ui/icons-picker.ts)
 
-icons-icon = 圖示
+common-icon = 圖示
 icons-favorites = 我的最愛
 icons-search-icons = 搜尋圖示
 icons-suggested = 建議
-icons-icons = 圖示
+common-icons = 圖示
 icons-no-icons-match-q = 沒有符合「{ $q }」的圖示。
 icons-search-by-name-or-by = 輸入名稱或含義（「錢」、「天氣」、「ai」），從 { $n } 個圖示中找出你要的。
 icons-no-icon = 無圖示
-icons-icon-or-emoji = 圖示或表情符號
+common-icon-or-emoji = 圖示或表情符號
 icons-search-icons-and-emoji = 搜尋圖示和表情符號
 icons-or-emoji = 圖示或表情符號
 icons-emoji = 表情符號
@@ -625,9 +719,9 @@ icons-flags = 旗幟
 
 # The group heading the Drawing Tool sits under on the home page: Design. 'Draw' is the Animator's mode for drawing.
 draw-draw = 繪製
-draw-drawing-tool = 繪圖
+common-drawing-tool = 繪圖
 draw-drawing = 繪圖
-draw-design = 設計
+common-design = 設計
 draw-boxes-arrows-icons-and-labels = 方塊、箭頭、圖示和標籤排在格線上；或是可以變成背景圖案的像素畫。
 draw-request-flow = 請求流程
 draw-browser-asks-server-which-reads = 瀏覽器向伺服器提出請求，伺服器讀取資料：用箭頭連起來的方塊。
@@ -645,7 +739,7 @@ draw-phone-screen-sketched-in-boxes = 在動工之前，先用方塊畫出手機
 draw-rosette-with-ribbons-for-volunteer = 為年度志工做的緞帶徽章，可列印、剪下並別上。
 draw-block-party-from-above-stage = 從上方俯瞰的街頭派對：舞台、攤位、急救站，以及走失時的集合地點。
 draw-badge = 徽章
-draw-birthday-card = 生日卡片
+common-birthday-card = 生日卡片
 draw-can-we-refund-it-stores = 可以退款嗎？商店的退貨規定，用問題、答案和該怎麼做來呈現。
 draw-event-map = 活動地圖
 draw-four-16-by-16-icons = 同一個格線上有四個 16×16 圖示，太陽、雲、雨和風暴，可複製來做天氣預報或按鈕。
@@ -659,7 +753,7 @@ draw-three-ideas-for-coffee-roasters = 三個咖啡烘焙坊標誌的點子並�
 draw-weather-icons = 天氣圖示
 draw-what-happens-to-package-from = 包裹從購買那一刻起會經歷什麼：分步驟的流程，附圖示和連線。
 draw-wireframe = 線框圖
-draw-picture-svg = 圖片（SVG）
+common-picture-svg = 圖片（SVG）
 draw-background-tile-svg = 背景圖案（SVG）
 draw-background-tile-png = 背景圖案（PNG）
 draw-animate-this-drawing = 把這張繪圖做成動畫
@@ -689,14 +783,14 @@ draw-rounded-box = 圓角方塊
 draw-hexagon = 六邊形
 draw-parallelogram = 平行四邊形
 draw-cylinder = 圓柱
-draw-note = 註解
-draw-black = 黑
-draw-red = 紅
-draw-orange = 橙
-draw-green = 綠
-draw-blue = 藍
-draw-purple = 紫
-draw-indigo = 靛
+common-note = 註解
+common-black = 黑
+common-red = 紅
+common-orange = 橙
+common-green = 綠
+common-blue = 藍
+common-purple = 紫
+common-indigo = 靛
 draw-yellow = 黃
 draw-sky = 天藍
 draw-pink = 粉紅
@@ -712,13 +806,13 @@ draw-no-fill = 無填色
 draw-fill = 填色
 draw-bring-to-front = 移到最上層
 draw-send-to-back = 移到最下層
-draw-duplicate = 複製一份
-draw-edit = 編輯
-draw-delete = 刪除
+common-duplicate = 複製一份
+common-edit = 編輯
+common-delete = 刪除
 draw-put-icon-on-this-shape = 在這個圖形上放一個圖示
 draw-place-icon = 放置圖示
-draw-zoom-in = 放大
-draw-zoom-out = 縮小
+common-zoom-in = 放大
+common-zoom-out = 縮小
 # same
 draw-alt = Alt
 draw-alt-text = 替代文字
@@ -748,7 +842,7 @@ draw-as-repeating-background = 作為重複的背景
 # The contextual bar under a shape, and its words typed on it.
 draw-dashed-line = 虛線
 draw-dotted-line = 點線
-draw-edit-words = 編輯文字
+common-edit-words = 編輯文字
 draw-extra-large-text = 特大字
 draw-gray-fill = 灰色填色
 # same
@@ -773,6 +867,10 @@ draw-drawing-canvas-v-selects-r = 繪圖畫布。V 選取；R、E、D、L、A、
 draw-tap-shape-to-select-it = 點選圖形來選取，或在圖形周圍拖曳來框選；選擇工具即可繪製。
 draw-rotate-left = 向左旋轉
 draw-rotate-right = 向右旋轉
+draw-pixels-n-n = 像素 { $n }×{ $n }
+draw-align-center = 對齊：置中
+draw-align-left = 對齊：靠左
+draw-align-right = 對齊：靠右
 
 ## the Animator
 
@@ -828,7 +926,7 @@ anim-pixel-art-is-made-in = 像素畫在「繪圖」中製作；動畫工具讓�
 anim-rainbow = 彩虹
 anim-remove-this-key = 移除這個關鍵影格
 anim-shadow = 陰影
-anim-size = 大小
+common-size = 大小
 anim-spin = 旋轉
 anim-stage-alt-arrow-keys-move = 舞台：{ $alt }。方向鍵移動選取的圖形（或時間），逗號和句號逐格前進，空白鍵播放，K 保留關鍵影格。
 anim-shapes-in-hand = 選取的圖形
@@ -861,6 +959,10 @@ anim-turns-shape-around-in-plane = 讓圖形在舞台平面上轉動，像輪子
 anim-which-shape-is-in-front = 哪個圖形在前面：近的圖形畫在遠的上面，遠的稍微暗一點。景深不會改變大小。
 anim-n-times = { $n } 次
 anim-s-s = { $s } 秒
+anim-frame-back-frame-on = 前一格、後一格
+anim-nudge-shapes-in-hand-with = 微調選取的圖形；未選取時，前進一格
+anim-play-or-pause = 播放或暫停
+anim-first-frame-last = 第一格、最後一格
 
 ## the Outliner
 
@@ -868,26 +970,26 @@ anim-s-s = { $s } 秒
 outline-named-label = ，名稱為「{ $label }」
 outline-book = 一本書
 outline-decision = 一項決定
-outline-talk = 一場演講
+common-talk = 一場演講
 outline-empty-outline = 空白大綱
 outline-outliner-ideas-under-ideas-folded = 大綱工具：想法底下還有想法，可摺疊、展開、移動和連接；簡報或心智圖讀取的也是同一棵樹。
 outline-arrow-from-from-to-to = 從{ $from }到{ $to }的箭頭
 outline-arrows-both-ways = 雙向箭頭
 outline-as-page = 頁面
-outline-calculator = 計算機
-outline-calendar = 行事曆
+common-calculator = 計算機
+common-calendar = 行事曆
 outline-cancel-connecting = 取消連接
 outline-change-it = 更改
-outline-chosen-items = 已選取的項目
+common-chosen-items = 已選取的項目
 outline-connect = 連接
 outline-connect-from-words = 從「{ $words }」連接
 outline-connect-from-to-to = 把「{ $from }」連接到「{ $to }」
 outline-connection-from-from-to-to = 從{ $from }到{ $to }的連線
-outline-connections = 連線
-outline-copy = 複製
-outline-presentation-builder = 簡報
-outline-diagram-maker = 圖解
-outline-drag-to-move = 拖曳以移動
+common-connections = 連線
+common-copy = 複製
+common-presentation-builder = 簡報
+common-diagram-maker = 圖解
+common-drag-to-move = 拖曳以移動
 outline-draw-as-mind-map = 畫成心智圖
 outline-draw-as-network = 畫成網絡圖
 outline-draw-as-org-chart = 畫成組織圖
@@ -898,24 +1000,24 @@ outline-fold-all = 全部摺疊
 outline-item = 項目
 outline-item-n = 項目 { $n }
 outline-kind-of-line = 線條種類
-outline-launch-plan = 上線計畫
+common-launch-plan = 上線計畫
 outline-line-from-from-to-to = 從{ $from }到{ $to }的線
 outline-line-named-label-change-it = 名為「{ $label }」的線：更改它
-outline-animator = 動畫
-outline-move-down = 下移
+common-animator = 動畫
+common-move-down = 下移
 outline-move-this-item-drag-it = 移動這個項目：拖曳到另一個項目上
-outline-move-up = 上移
+common-move-up = 上移
 outline-name-of-line = 線的名稱
 outline-numbered = 編號
 outline-opml-for-outliners = OPML（給大綱工具用）
-outline-open-in-new-tab = 在新分頁開啟
-outline-outline = 大綱
+common-open-in-new-tab = 在新分頁開啟
+common-outline = 大綱
 outline-outliner = 大綱
 outline-outline-lowercase = 大綱
-outline-paste = 貼上
+common-paste = 貼上
 outline-plain-line = 普通線條
 outline-plain-text = 純文字
-outline-show-as-slides = 以投影片顯示
+common-show-as-slides = 以投影片顯示
 outline-show-as-outline = 以大綱顯示
 outline-take-away-connection-from-from = 移除從{ $from }到{ $to }的連線
 outline-take-it-away = 移除
@@ -923,13 +1025,13 @@ outline-take-connection-away = 移除連線
 outline-tap-item-to-connect-from = 點選要連出的項目。
 outline-tap-item-to-connect-words = 點選要把「{ $words }」連到的項目。
 outline-question-options-under-it-and = 問題、底下的選項，以及每個選項的優點和缺點。
-outline-trip-planner = 旅程規劃
+common-trip-planner = 旅程規劃
 outline-twenty-minutes-in-three-parts = 三個部分共二十分鐘：問題、想法、意義；以簡報顯示時，每個頂層項目一張投影片。
 outline-unfold-all = 全部展開
 outline-unfold-n-inside = 展開，{ $n ->
        *[other] 內有 { $n } 項
     }
-outline-untitled = 未命名
+common-untitled = 未命名
 outline-view-as = 檢視方式
 outline-zoomed-in-on = 已放大到
 outline-a-plain-line = 普通線條
@@ -963,6 +1065,9 @@ outline-question-method-budget-that-adds = 問題、方法、會自己加總的�
 outline-three-generations-and-next-each = 三代加下一代，各附年份，從選單畫成家族樹。
 outline-troubleshooting = 疑難排解
 outline-who-works-for-whom-at = 一家九人烘焙坊的上下隸屬，每人附職稱，從選單畫成組織圖。
+outline-pdf-sections-and-bullets = PDF：章節與項目符號
+outline-fold-unfold = 摺疊、展開
+outline-name-line = 為這條線命名
 
 ## the Presentation Builder
 
@@ -1008,7 +1113,7 @@ deck-bullets = 項目符號
 deck-two-columns = 雙欄
 deck-big-icon = 大圖示
 deck-fade = 淡入淡出
-deck-cut = 直接切換
+common-cut = 直接切換
 deck-slide = 滑入
 deck-zoom = 縮放
 deck-zine = 小誌
@@ -1034,12 +1139,12 @@ deck-fun = 趣味
 deck-themes-color = 主題的顏色
 
 # The bar
-deck-present = 播放
+common-present = 播放
 deck-see-sheets-to-print = 查看要列印的紙張
 deck-back-to-pages = 回到頁面
 deck-headline = 大標題
 deck-layout-layout = 版面配置：{ $layout }
-deck-look-theme = 外觀：{ $theme }
+common-look-theme = 外觀：{ $theme }
 deck-transition-transition = 轉場：{ $transition }
 deck-format-format = 格式：{ $format }
 deck-printing = 列印
@@ -1067,11 +1172,11 @@ deck-big-icon-page = 大圖示頁面
 deck-four-more-pages = 再四頁
 deck-on-slide = 投影片上
 deck-on-page = 頁面上
-deck-pages = 頁面
+common-pages = 頁面
 
 # The canvas
 deck-add-icon = 新增圖示
-deck-change-icon = 更換圖示
+common-change-icon = 更換圖示
 deck-pick-icon = 挑選圖示
 deck-left-column = 左欄
 deck-right-column = 右欄
@@ -1089,7 +1194,7 @@ deck-remove-from-slide = 從投影片移除
 deck-slide-n = 投影片 { $n }
 deck-front-cover = 封面
 deck-back-cover = 封底
-deck-page-n = 第 { $n } 頁
+common-page-n = 第 { $n } 頁
 deck-front = 正面
 deck-inside-left = 內頁左
 deck-inside-middle = 內頁中
@@ -1113,11 +1218,11 @@ deck-print-it-on-letter-paper-at-actual-size-cut-along-dashes-six-badges-sheet =
 
 # Presenting, and the closing slide
 deck-presentation = 簡報
-deck-previous = 上一張
-deck-next = 下一張
-deck-stop-presenting = 停止播放
+common-previous = 上一張
+common-next = 下一張
+common-stop-presenting = 停止播放
 deck-slide-n-of-total = 第 { $n }／{ $total } 張投影片
-deck-notes = 備忘稿
+common-notes = 備忘稿
 deck-n-hides-them = 按 N 隱藏
 deck-take-this-deck-home = 把這份簡報帶回家
 deck-take-this-deck-home-title = 把這份簡報帶回家：{ $title }
@@ -1142,6 +1247,12 @@ deck-trifold-brochure-six-panels-on = 三摺簡介手冊：一張紙兩面共六
 deck-mini-comic-panels-with-picture = 迷你漫畫：有圖片、對話框和圖說的分格，從一張紙摺成。
 deck-poster-or-flyer-headline-and = 海報或傳單：一個大標題和幾行字，盡量放大到一頁能容納的大小。
 deck-name-badges-for-meetup-one = 聚會用的名牌，每人一頁，每張紙六個，可以直接剪開。
+deck-edit-this-deck = 編輯這份簡報
+deck-new-slide = 新投影片
+deck-presenting-back = 播放中：返回
+deck-presenting-next-line-or-slide = 播放中：下一行或下一張投影片
+deck-presenting-whole-slide = 播放中：整張投影片
+deck-slide-before-slide-after-on = 上一張投影片、下一張投影片（在側欄）
 
 ## the Calendar app
 
@@ -1168,7 +1279,7 @@ cal-end = 結束
 cal-end-date = 結束日期
 cal-end-time = 結束時間
 cal-ends = 結束於
-cal-event = 活動
+common-event = 活動
 cal-every-day = 每天
 cal-every-month = 每月
 cal-every-week = 每週
@@ -1203,7 +1314,7 @@ cal-start = 開始
 cal-start-date = 開始日期
 cal-start-time = 開始時間
 cal-starts = 開始於
-cal-stops = 停止於
+common-stops = 停止於
 cal-same-dates-as-gantt-chart = 相同的日期，改用甘特圖顯示
 cal-this-calendar-is-written-in = 這個行事曆以{ $zone }時間書寫。
 cal-this-calendar-names-no-time = 這個行事曆沒有指定時區：其中的時間按你的時區（{ $zone }）顯示。
@@ -1332,6 +1443,19 @@ diagram-house-network = 家用網路
 diagram-water-cycle = 水循環
 diagram-three-generations-of-morenos-and = 莫雷諾家的三代，以及一條通往教子的虛線。
 diagram-who-can-do-what = 誰能做什麼
+diagram-tap-empty-space-for-branch = 點選空白處新增分支；點選想法輸入文字，按 Enter 換下一個；拖到另一個上就放在它底下；「連接」可連結地圖上的兩個想法。
+diagram-place-cards = 座位卡
+diagram-print-place-cards = 列印座位卡
+diagram-print-place-cards-card-guest = 列印座位卡：一位賓客一張，一張 Letter 紙八張，可剪下
+diagram-guest = 賓客
+diagram-new-idea = 新想法
+diagram-tap-empty-space-for-person = 點選空白處新增人物；點選人物輸入文字，按 Shift+Enter 在名字下方輸入職稱，按 Enter 換下一位；拖到另一位上就放在他底下。
+diagram-tap-empty-space-for-event = 點選空白處新增事件：輸入時間，按 Shift+Enter，再輸入發生了什麼；年份和日期依實際時間隔開；一段期間是一條色帶。
+diagram-lanes-name = 泳道的名稱
+diagram-when = 時間
+diagram-tap-person-to-type-on = 點選人物輸入文字，名字後面加 + 輸入伴侶，按 Shift+Enter 在名字下方輸入在世年份；按 Enter 換下一位；拖到另一位上就放在他底下；「連接」可在兩人之間畫一條虛線。
+diagram-tap-empty-space-for-table = 點選空白處新增桌子；點選桌子或人物輸入文字，名字後加逗號再輸入下一位賓客；把人物拖到另一張桌子。
+diagram-tap-inside-circles-to-add = 點選圓圈內新增項目，後面加逗號再輸入下一個；點選集合的名稱可重新命名；把項目拖到其他圓圈。
 
 ## the Trip Planner
 
@@ -1406,12 +1530,19 @@ trip-new-york-in-movies = 電影裡的紐約
 trip-seven-film-and-tv-locations = 一天走完七個電影和電視劇場景，由上城到下城。
 trip-wedding-on-lake-como = 科莫湖畔的婚禮
 trip-for-guests-where-wedding-is = 給賓客的資訊：婚禮在哪裡、住哪裡、怎麼去。
+trip-presenting-trip = 播放旅程
+trip-presenting-next-stop = 播放中：下一個停靠點
+trip-presenting-stop-before = 播放中：上一個停靠點
+trip-put-stops-on-calendar-day = 把停靠點放到行事曆上，一天一個
+trip-first-last = 第一個、最後一個
+trip-next-stop = 下一個停靠點
+trip-stop-before = 上一個停靠點
 
 ## shared: the Word Processor's looks, the header's Home, a money column's currency
 
 looks-typewriter = 打字機
 looks-serif = 襯線體
-looks-home = 首頁
+common-home = 首頁
 looks-currency = 貨幣
 
 ## the Calculator app
@@ -1501,72 +1632,25 @@ calc-curve-and-its-slope = 曲線與它的斜率
 calc-x3-3x-its-derivative-and = x³ − 3x、它的導數，以及低谷底部水平的切線。
 calc-waves-adding-up = 疊加的波
 calc-sine-waves-summed-on-their = 把正弦波疊加起來，逐步接近方波。
-
-## unsorted: added after the sections, each id named for where it is used
-
-home-templates-for-app = { $app }的範本
-home-app-templates = { $app }範本
-home-templates-for-app-name = { $app }的範本：{ $name }
-home-templates-are-not-saved-in = 範本還沒有儲存在此瀏覽器中。連上網路即可查看。
 # The grip on a line of the tape; the bar under lines chosen whole.
 calc-choose-line-n-drag-it = 選取第 { $n } 行：拖曳可移動
 calc-chosen-lines = 已選取的行
-# The Spreadsheet: any column removed, the Option column, rich cells, a chart put in from Insert.
-sheet-keeps-one-column = 工作表至少要保留一欄
-editor-bold-italic-and-links = 粗體、斜體和連結
-sheet-choices = 選項
-sheet-choices-for-ref = { $ref }的選項
-editor-one-of-words-column-holds = 這一欄已有的其中一個詞，或新增一個
-editor-option = 選項
-sheet-has-one = 工作表只有一個
-drawer-documents = 文件
-common-find-app-template = 尋找應用程式、範本
-drawer-find-app-doc-template-or = 尋找應用程式、文件、範本或指令
-drawer-find-app-template-or-command = 尋找應用程式、範本或指令
-drawer-commands = 指令
-share-new-noun-date-n = 新增{ $noun } { $date } #{ $n }
-drawer-nothing-by-that-name = 沒有這個名稱的項目
-draw-pixels-n-n = 像素 { $n }×{ $n }
-# Files, compare, posting and embedding: the agent and sharing surface.
-share-mastodon-server-like-mastodon-social = Mastodon 伺服器，例如 mastodon.social
-share-change = 更改
+
+## two links compared (kit/ui/compare.ts)
+
 compare-changes = 更改內容
 compare-compare = 比較
-share-copy-embed-code = 複製嵌入程式碼
-share-copy-show-link = 複製顯示連結
-deck-edit-this-deck = 編輯這份簡報
-share-embed = 嵌入
-share-embed-code-copied = 已複製嵌入程式碼
 compare-no-difference = 沒有差異
 compare-not-link-to-tiny-little = 不是小小辦公室文件的連結
-open-opened-name = 已開啟 { $name }
-share-opens-deck-already-presenting = 開啟後直接進入播放。
-export-pdf-file = PDF 檔
-outline-pdf-sections-and-bullets = PDF：章節與項目符號
 compare-paste-second-link-to-see = 貼上第二個連結，查看有什麼更動。
 compare-paste-link-to-document-as = 貼上文件現在版本的連結
 compare-paste-link-to-document-as-it-was = 貼上文件先前版本的連結
-share-post = 發文
-share-post-link = 發布連結
-share-show-preview-of-first-page = 顯示第一頁的預覽
-share-picture-of-first-page-and = 第一頁的圖片和標題會在我們的伺服器上以可讀形式保存一個月，讓社群網路可以取得。文件本身不會。
-share-shared-without-preview-reason = 已分享，但沒有預覽：{ $reason }
-share-making-preview = 正在製作預覽…
-share-page-could-not-be-drawn = 無法繪製頁面
-share-picture-is-over-400-kb = 圖片超過 400 KB
-share-server-could-not-be-reached = 無法連線到伺服器
-share-hundred-previews-day-from-one = 同一個位址每天最多一百個預覽
-share-server-refused-picture = 伺服器拒絕了這張圖片
 compare-put-in = 新增的：
 compare-swap = 對調
 compare-taken-out = 刪除的：
-open-that-file-is-not-words = 小小辦公室讀不懂這個檔案的內容。
-open-that-file-is-too-large = 這個檔案太大，無法當成文件。
 compare-first-link = 第一個連結
-share-pages-in-frame-on-another = 頁面放在其他網站的框架裡，並附一個連結可在這裡開啟。
 compare-second-link = 第二個連結
 compare-two-links-to-documents-side = 兩份文件的連結並排比較：第二份更動的地方會標出來。內容不會離開這個頁面。
-share-your-mastodon-server = 你的 Mastodon 伺服器
 compare-different-apps = 不同的應用程式
 compare-n-blocks-taken-out = { $n ->
        *[other] 刪除了 { $n } 個區塊
@@ -1574,107 +1658,12 @@ compare-n-blocks-taken-out = { $n ->
 compare-n-put-in = { $n ->
        *[other] 新增了 { $n } 個
     }
-diagram-tap-empty-space-for-branch = 點選空白處新增分支；點選想法輸入文字，按 Enter 換下一個；拖到另一個上就放在它底下；「連接」可連結地圖上的兩個想法。
-# Restored around the document: search, Find in this document, the shortcuts and the apps' keys, Mod+S, the size of
-# everything, Add to home screen, another version kept here, where the link fits, Open in another app, the QR code
-# of this document, Insert narrowed by typing, Trip presenting, a seating chart's place cards
-qr-code-of-this-document = 這份文件的 QR 碼
-anim-frame-back-frame-on = 前一格、後一格
-deck-new-slide = 新投影片
-drawer-add-to-home-screen = 加到主畫面
-shell-another-version = 另一個版本
-keys-normal-size = 正常大小
-home-documents-found = 找到的文件
-sheet-edit-cell-caret-at-its = 編輯儲存格，游標在最後
-keys-everything-larger = 全部放大
-keys-everything-smaller = 全部縮小
-find-in-this-document = 在這份文件中尋找
-outline-fold-unfold = 摺疊、展開
-common-indent-or-bring-out-in = 清單中縮排或強調；表格中到下一個儲存格
-keys-keep-this-document-on-device = 把這份文件保留在裝置上
-shell-kept-on-this-device = 已保留在此裝置
-shell-keyboard-shortcuts = 鍵盤快速鍵
-share-left = 左
-common-move-selected-items-up-or = 把選取的項目上移或下移
-home-no-document-here-has-those = 這裡沒有文件含有這些字
-find-not-found = 找不到
-menu-nothing-starts-q = 沒有以「{ $q }」開頭的項目
-shell-nothing-to-keep-yet = 目前沒有可保留的內容
-common-nudge-shapes-in-hand = 微調選取的圖形
-anim-nudge-shapes-in-hand-with = 微調選取的圖形；未選取時，前進一格
-write-open-as-outline = 以大綱開啟
-shell-open-it = 開啟
-diagram-place-cards = 座位卡
-anim-play-or-pause = 播放或暫停
-trip-presenting-trip = 播放旅程
-deck-presenting-back = 播放中：返回
-deck-presenting-next-line-or-slide = 播放中：下一行或下一張投影片
-trip-presenting-next-stop = 播放中：下一個停靠點
-trip-presenting-stop-before = 播放中：上一個停靠點
-diagram-print-place-cards = 列印座位卡
-diagram-print-place-cards-card-guest = 列印座位卡：一位賓客一張，一張 Letter 紙八張，可剪下
-shell-save-in-browser-is-off = 「在瀏覽器中儲存」已關閉：此瀏覽器不保留任何文件。在選單中開啟它，即可把文件保留在這裡。
-sheet-put-back-what-cell-held = 還原儲存格原本的內容
-sheet-put-dated-rows-on-calendar = 把有日期的列放到行事曆上
-trip-put-stops-on-calendar-day = 把停靠點放到行事曆上，一天一個
-home-search-your-documents = 搜尋你的文件
-common-select-all-words-of-box = 全選：先選方塊裡的文字，再選全部
-keys-show-these-shortcuts = 顯示這些快速鍵
-# same
-write-a4 = A4
-# same
-write-letter = Letter
-common-back-to-words = 回到文字
-common-extend-selection = 延伸選取範圍
-deck-presenting-whole-slide = 播放中：整張投影片
-trip-first-last = 第一個、最後一個
-common-next-or-one-before = 下一個或上一個
-editor-this-browser-lets-page-paste = 這個瀏覽器只允許從鍵盤貼上：請使用它的「貼上」。
-drawer-size-of-everything = 全部的大小
-shell-skip-to-apps = 跳到應用程式
-shell-skip-to-document = 跳到文件
-menu-starting-q = 以「{ $q }」開頭
-common-step-out-close-collapse-let = 跳出：關閉、收合、放開
-anim-first-frame-last = 第一格、最後一格
-trip-next-stop = 下一個停靠點
-deck-slide-before-slide-after-on = 上一張投影片、下一張投影片（在側欄）
-trip-stop-before = 上一個停靠點
-shell-this-device-keeps-another-version = 此裝置保留了「{ $title }」的另一個版本，時間是{ $when }。
-shell-this-link-was-made-by = 這個連結是由較新版本的小小辦公室製作的。請重新載入頁面來取得新版。
-keys-this-page = 這個頁面
-common-check-or-uncheck-task = 勾選或取消勾選任務
-drawer-to-add-tiny-little-office = 要把小小辦公室加到主畫面：先按「分享」，再按「加入主畫面」。
-common-too-long-for-qr-code = 對 QR 碼來說太長：請縮短文件，或分享短連結。
-share-uses = 用途
-share-where = 位置
-share-where-link-fits = 連結放得下的地方
-share-any-length = 任何長度
-home-n-documents-found = { $n ->
-       *[other] 找到 { $n } 份文件
-    }
-common-n-of-count = { $n }／{ $count }
-share-n-over = 超出 { $n }
-privacy-password-copied = 已複製密碼
-diagram-guest = 賓客
-outline-name-line = 為這條線命名
-write-name-this-column = 為這一欄命名
-diagram-new-idea = 新想法
-diagram-tap-empty-space-for-person = 點選空白處新增人物；點選人物輸入文字，按 Shift+Enter 在名字下方輸入職稱，按 Enter 換下一位；拖到另一位上就放在他底下。
-diagram-tap-empty-space-for-event = 點選空白處新增事件：輸入時間，按 Shift+Enter，再輸入發生了什麼；年份和日期依實際時間隔開；一段期間是一條色帶。
-diagram-lanes-name = 泳道的名稱
-diagram-when = 時間
-draw-align-center = 對齊：置中
-draw-align-left = 對齊：靠左
-draw-align-right = 對齊：靠右
-diagram-tap-person-to-type-on = 點選人物輸入文字，名字後面加 + 輸入伴侶，按 Shift+Enter 在名字下方輸入在世年份；按 Enter 換下一位；拖到另一位上就放在他底下；「連接」可在兩人之間畫一條虛線。
-diagram-tap-empty-space-for-table = 點選空白處新增桌子；點選桌子或人物輸入文字，名字後加逗號再輸入下一位賓客；把人物拖到另一張桌子。
-diagram-tap-inside-circles-to-add = 點選圓圈內新增項目，後面加逗號再輸入下一個；點選集合的名稱可重新命名；把項目拖到其他圓圈。
-export-copy-link-that-downloads-ext = 複製可下載 .{ $ext } 的連結
-export-could-not-share-ext = 無法分享 .{ $ext }
-export-could-not-show-ext = 無法顯示 .{ $ext }
-export-download-ext = 下載 .{ $ext }
-export-share-ext = 分享 .{ $ext }…
-export-view-ext = 檢視 .{ $ext }
+
+## files and zips dropped on the page (kit/file/open.ts)
+
+open-opened-name = 已開啟 { $name }
+open-that-file-is-not-words = 小小辦公室讀不懂這個檔案的內容。
+open-that-file-is-too-large = 這個檔案太大，無法當成文件。
 open-keep-them-on-this-device = 保留在此裝置
 open-nothing-is-saved-on-this = 此裝置目前沒有儲存任何內容。請把它們保留在這裡，或開啟其中一份。
 open-first = 開啟第一份
@@ -1685,3 +1674,28 @@ open-that-zip-holds-no-documents = 這個 zip 裡沒有小小辦公室讀得懂�
 open-n-documents-kept = { $n ->
        *[other] 已保留 { $n } 份文件
     }
+
+## a document's QR code (kit/draw/qr-picture.ts)
+
+# Restored around the document: search, Find in this document, the shortcuts and the apps' keys, Mod+S, the size of
+# everything, Add to home screen, another version kept here, where the link fits, Open in another app, the QR code
+# of this document, Insert narrowed by typing, Trip presenting, a seating chart's place cards
+qr-code-of-this-document = 這份文件的 QR 碼
+
+## the keys, the shortcuts and the size of everything (kit/core/keys.ts, kit/ui/zoom.ts)
+
+keys-normal-size = 正常大小
+keys-everything-larger = 全部放大
+keys-everything-smaller = 全部縮小
+keys-keep-this-document-on-device = 把這份文件保留在裝置上
+keys-show-these-shortcuts = 顯示這些快速鍵
+keys-this-page = 這個頁面
+
+## Find in this document (kit/ui/find.ts)
+
+find-not-found = 找不到
+
+## a menu narrowed by typing (kit/ui/menu.ts)
+
+menu-nothing-starts-q = 沒有以「{ $q }」開頭的項目
+menu-starting-q = 以「{ $q }」開頭

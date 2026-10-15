@@ -31,7 +31,7 @@ function nameFor(doc: Doc): string {
           .join('')
           .trim()
       : '') ||
-    t('shell-untitled-noun', { noun: t('outline-outline-lowercase') })
+    t('common-untitled-noun', { noun: t('outline-outline-lowercase') })
   );
 }
 
@@ -49,7 +49,7 @@ export default defineApp({
     return t('outline-outline-lowercase');
   },
   get group() {
-    return t('write-words');
+    return t('common-words');
   },
   icon: ListTree,
   get blurb() {
@@ -72,19 +72,19 @@ export default defineApp({
   exports: [
     { ext: 'opml', label: () => t('outline-opml-for-outliners'), mime: 'text/x-opml;charset=utf-8', shows: null, build: (doc) => utf8(toOpml(readOutline(parse(doc)), nameFor(doc))) },
     // Markdown as other readers know it: an item's notes a numbered list right under it (any other in reference form at the end).
-    { ext: 'md', label: () => t('write-markdown'), mime: 'text/markdown;charset=utf-8', shows: 'text', build: (doc) => utf8(write(notesAsItems(parse(doc)))) },
+    { ext: 'md', label: () => t('common-markdown'), mime: 'text/markdown;charset=utf-8', shows: 'text', build: (doc) => utf8(write(notesAsItems(parse(doc)))) },
     // The words as words: sections and bullets, selectable, linked, bookmarked (kit/file/textpdf.ts), in place of the kit's pictures of the page.
     {
       ext: 'pdf',
       label: () => t('outline-pdf-sections-and-bullets'),
       mime: 'application/pdf',
       shows: 'own',
-      build: (doc, ctx) => textPdf(outlineBlocks(readOutline(parse(doc)), ctx.title || titleOf(doc), t('deck-notes')), ctx.title || nameFor(doc)),
+      build: (doc, ctx) => textPdf(outlineBlocks(readOutline(parse(doc)), ctx.title || titleOf(doc), t('common-notes')), ctx.title || nameFor(doc)),
     },
     { ext: 'txt', label: () => t('outline-plain-text'), mime: 'text/plain;charset=utf-8', shows: 'text', build: (doc) => utf8(outlineText(readOutline(parse(doc)), appName)) },
   ],
   handoffs: [
-    { to: 'deck', label: () => t('outline-show-as-slides'), convert: convert(outlineToDeck) },
+    { to: 'deck', label: () => t('common-show-as-slides'), convert: convert(outlineToDeck) },
     { to: 'diagram', label: () => t('outline-draw-as-mind-map'), convert: convert(outlineToMind) },
     { to: 'diagram', label: () => t('outline-draw-as-org-chart'), convert: convert(outlineToOrg) },
     { to: 'diagram', label: () => t('outline-draw-as-family-tree'), convert: convert(outlineToFamily) },

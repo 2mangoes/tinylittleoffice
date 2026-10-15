@@ -5,10 +5,10 @@
 ## the shell: header
 
 shell-menu = Meni
-shell-title = Tit
+common-title = Tit
 # A new document of the app, and one not yet named; { $noun } is the app's noun: "New presentation".
-shell-new-noun = Nouvo { $noun }
-shell-untitled-noun = { $noun } san tit
+common-new-noun = Nouvo { $noun }
+common-untitled-noun = { $noun } san tit
 shell-download = Telechaje
 shell-loading = Ap chaje…
 shell-this-link-holds-something-that = Lyen sa a gen yon bagay ki pa ka li. Li ka koupe lè yo te kopye l.
@@ -23,15 +23,25 @@ shell-copy-link-and-go = Kopye lyen an epi ale
 shell-turn-on-save-in-browser = Limen Anrejistre nan navigatè a epi kenbe l isit la
 shell-go-without = Ale san sa
 shell-save-in-browser-is-on = Anrejistre nan navigatè a limen: navigatè sa a kenbe dokiman ou louvri yo. Etenn li nan meni an.
+shell-another-version = Yon lòt vèsyon
+shell-kept-on-this-device = Kenbe sou aparèy sa a
+shell-keyboard-shortcuts = Rakousi klavye
+shell-nothing-to-keep-yet = Poko gen anyen pou kenbe
+shell-open-it = Louvri l
+shell-save-in-browser-is-off = Anrejistre nan navigatè a etenn: navigatè sa a pa kenbe okenn dokiman. Limen l nan meni an pou kenbe yo isit la.
+shell-skip-to-apps = Ale nan aplikasyon yo
+shell-skip-to-document = Ale nan dokiman an
+shell-this-device-keeps-another-version = Aparèy sa a kenbe yon lòt vèsyon “{ $title }”, soti { $when }.
+shell-this-link-was-made-by = Yon vèsyon Tiny Little Office ki pi nouvo te fè lyen sa a. Chaje paj la ankò pou jwenn li.
 
 ## the home page
 
 home-blank = Vid
-home-templates = Modèl
+common-templates = Modèl
 # The button under an app's tile, naming the template list: "Start Text from"
 # The list of an app's documents kept on this device, under its tile: "Write documents"
 home-app-documents = Dokiman { $app }
-home-forget = Bliye
+common-forget = Bliye
 # The button that forgets one kept document: "Forget Launch notes"
 home-forget-title = Bliye { $title }
 # Under an app's documents, the rest folded away: "3 more"
@@ -39,28 +49,39 @@ home-n-more = { $n } lòt
 home-aboard-project-made-with-respect = Yon pwojè { $aboard }. Fèt avèk respè nan Nouyòk.
 home-beta-version = Vèsyon beta
 home-email = Imèl
+home-templates-for-app = Modèl pou { $app }
+home-app-templates = Modèl { $app }
+home-templates-for-app-name = Modèl pou { $app }: { $name }
+home-templates-are-not-saved-in = Modèl yo poko anrejistre nan navigatè sa a. Konekte sou entènèt pou w ka wè yo.
+home-documents-found = Dokiman jwenn
+home-no-document-here-has-those = Pa gen dokiman isit la ki gen mo sa yo
+home-search-your-documents = Chèche nan dokiman ou yo
+home-n-documents-found = { $n ->
+        [one] Yon dokiman jwenn
+       *[other] { $n } dokiman jwenn
+    }
 
 ## the drawer (hamburger menu)
 
 drawer-apps = Aplikasyon
-drawer-close = Fèmen
+common-close = Fèmen
 drawer-default-name = Pa defo: { $name }
 drawer-save-in-browser = Anrejistre nan navigatè a
 drawer-what-is-this = Kisa sa ye?
 drawer-turn-on-to-save-files = Limen l pou anrejistre fichye nan navigatè ou.
 drawer-turn-off-to-remove-all = Etenn li pou retire tout fichye ak paramèt.
-drawer-nothing-saved-in-this-browser = Anyen pa anrejistre nan navigatè sa a
-drawer-saving-in-this-browser = Ap anrejistre nan navigatè sa a
+common-nothing-saved-in-this-browser = Anyen pa anrejistre nan navigatè sa a
+common-saving-in-this-browser = Ap anrejistre nan navigatè sa a
 drawer-remove-all-files-and-settings = Retire tout fichye ak paramèt nan navigatè sa a?
 drawer-language = Lang
-drawer-theme = Tèm
+common-theme = Tèm
 drawer-match-device = Swiv aparèy la
 drawer-light = Klè
 drawer-dark = Fonse
 drawer-about = Apwopo
 # The name itself is translated too (Paul, 2026-10-10): each language says it in its own words.
 # same
-drawer-tiny-little-office = Tiny Little Office
+common-tiny-little-office = Tiny Little Office
 drawer-about-tiny-little-office = Apwopo Tiny Little Office
 drawer-tiny-little-office-is-experiment = Tiny Little Office se yon eksperyans { $aboard }, yon konpayi estrateji dijital ak AI ak devlopman lojisyèl nan Nouyòk.
 drawer-to-reach-out-with-questions = Si ou gen kesyon, { $email }.
@@ -71,6 +92,13 @@ drawer-all-of-these-notes-these = Tout nòt sa yo, desen sa yo, ak fraz sa yo ki
 # same
 drawer-eugene-ionesco-book = Eugène Ionesco, { $book }
 drawer-discoveries = Dekouvèt
+drawer-documents = Dokiman
+drawer-find-app-template-or-command = Chèche aplikasyon, modèl, oswa kòmand
+drawer-commands = Kòmand
+drawer-nothing-by-that-name = Pa gen anyen ak non sa a
+drawer-add-to-home-screen = Mete sou ekran dakèy
+drawer-size-of-everything = Gwosè tout bagay
+drawer-to-add-tiny-little-office = Pou mete Tiny Little Office sou ekran dakèy: Pataje, answit Add to Home Screen.
 
 ## links that leave the site (kit/ui/link-guard.ts)
 
@@ -115,7 +143,7 @@ share-expires-in-n-minutes-date = Ekspire nan { $n ->
     } ({ $date })
 share-opens-as-pages-to-read = Louvri kòm paj pou li
 share-opens-in-editor = Louvri nan editè a
-share-whoever-opens-this-link-gets = Nenpòt moun ki louvri lyen sa a jwenn pwòp kopi pa l. Sa yo chanje rete nan lyen pa yo, pa nan pa w: mande yo voye pa yo ba ou.
+common-whoever-opens-this-link-gets = Nenpòt moun ki louvri lyen sa a jwenn pwòp kopi pa l. Sa yo chanje rete nan lyen pa yo, pa nan pa w: mande yo voye pa yo ba ou.
 share-short-link-that-expires = Lyen kout ki ekspire
 share-this-link-expires-in-n = Lyen sa a ekspire nan { $n ->
         [one] { $n } jou
@@ -148,9 +176,9 @@ share-display-link = Lyen Afichaj
 share-opens = Louvri
 share-link-copied = Lyen kopye
 share-could-not-copy = Pa t ka kopye
-share-share = Pataje…
-share-qr-code = Kòd QR
-share-qr-code-of-this-document = Kòd QR dokiman sa a
+common-share = Pataje…
+common-qr-code = Kòd QR
+common-qr-code-of-this-document = Kòd QR dokiman sa a
 share-this-document-is-n-bytes = Dokiman sa a gen { $n } byte; pi gwo kòd QR a kenbe { $max }. Redui l ak { $over } byte epi l ap antre.
 share-this-document-is-n-characters = Dokiman sa a gen { $n } karaktè; yon lyen kout kenbe { $max }. Redui l ak { $over } epi l ap antre.
 share-expires-after = Ekspire apre
@@ -166,8 +194,36 @@ share-could-not-shorten-link = Pa t ka fè lyen an pi kout.
 share-this-document-is-too-long = Dokiman sa a twò long pou yon lyen kout.
 share-up-to-hundred-links-day = Jiska san lyen pa jou soti nan yon sèl adrès.
 share-remove = Retire
-share-link = Lyen
-share-short-link = Lyen kout
+common-link = Lyen
+common-short-link = Lyen kout
+share-new-noun-date-n = Nouvo { $noun } { $date } #{ $n }
+# Files, compare, posting and embedding: the agent and sharing surface.
+share-mastodon-server-like-mastodon-social = Yon sèvè Mastodon, tankou mastodon.social
+share-change = Chanjman
+share-copy-embed-code = Kopye kòd entegrasyon
+share-copy-show-link = Kopye lyen montre
+share-embed = Entegre
+share-embed-code-copied = Kòd entegrasyon kopye
+share-opens-deck-already-presenting = Li louvri prezantasyon an deja ap prezante.
+share-post = Pibliye
+share-post-link = Pibliye lyen an
+share-show-preview-of-first-page = Montre yon apèsi premye paj la
+share-picture-of-first-page-and = Yon foto premye paj la ak tit la rete lizib sou sèvè nou an pandan yon mwa pou rezo a ka pran yo. Dokiman an li menm, non.
+share-shared-without-preview-reason = Pataje san apèsi: { $reason }
+share-making-preview = Ap fè apèsi a…
+share-page-could-not-be-drawn = pa t ka desine paj la
+share-picture-is-over-400-kb = foto a depase 400 KB
+share-server-could-not-be-reached = pa t ka jwenn sèvè a
+share-hundred-previews-day-from-one = san apèsi pa jou soti nan yon sèl adrès
+share-server-refused-picture = sèvè a refize foto a
+share-pages-in-frame-on-another = Paj yo, nan yon kadr sou yon lòt sit, ak yon lyen pou louvri yo isit la.
+share-your-mastodon-server = Sèvè Mastodon ou
+share-left = Agòch
+share-uses = Itilizasyon
+share-where = Ki kote
+share-where-link-fits = Kote lyen an antre
+share-any-length = nenpòt longè
+share-n-over = { $n } anplis
 
 ## privacy (kit/share/privacy.ts, kit/ui/privacy-dialog.ts): the password, what the device holds
 
@@ -180,12 +236,12 @@ privacy-forget-everything = Bliye tout
 privacy-preview-sent-with-link-to = Yon apèsi ou voye ak yon lyen bay yon rezo se yon foto premye paj la, tit la ak premye mo yo, ki rete lizib sou sèvè nou an pandan yon mwa. Dokiman an li menm pa janm ale la.
 privacy-forget-everything-this-site-keeps = Bliye tout sa sit sa a kenbe isit la, epi pa kenbe anyen depi kounye a? Dokiman yo menm rete nan lyen yo.
 privacy-locked = Bloke
-privacy-locked-document = Dokiman bloke
+common-locked-document = Dokiman bloke
 privacy-new-password = Nouvo modpas
 privacy-no-password = Pa gen modpas
 privacy-none = Okenn
 privacy-opening = Ap louvri…
-privacy-password = Modpas
+common-password = Modpas
 privacy-password-removed = Modpas retire
 privacy-password-set-link-holds-only = Modpas mete: lyen an kenbe sèlman tèks chifre
 privacy-password-ellipsis = Modpas…
@@ -202,17 +258,17 @@ privacy-short-links-made-here-until = Lyen kout ki fèt isit la, jiskaske yo eks
 privacy-their-names-and-links-for = Non yo ak lyen yo, pou paj akèy la.
 privacy-theme-lifetime-of-short-links = Tèm, dire lyen kout yo.
 privacy-this-document-has-password-link = Dokiman sa a gen yon modpas. Lyen an, ak nenpòt lyen kout yo fè ak li, kenbe sèlman tèks chifre.
-privacy-this-document-is-locked = Dokiman sa a bloke
+common-this-document-is-locked = Dokiman sa a bloke
 privacy-this-document-is-locked-with = Dokiman sa a bloke ak yon modpas.
 privacy-unlock = Debloke
-privacy-unlock-ellipsis = Debloke…
+common-unlock-ellipsis = Debloke…
 privacy-what-this-device-holds = Sa aparèy sa a kenbe
 privacy-your-documents = Dokiman ou yo
 privacy-your-browsers-history = Istwa navigatè ou a
 privacy-every-document-opened-here-in = Chak dokiman ki louvri isit la, an antye, sof si li gen yon modpas.
 privacy-not-ours-to-clear = Se pa nou ki ka efase l
 privacy-by-name = pa { $name }
-privacy-n-documents = { $n ->
+common-n-documents = { $n ->
         [one] { $n } dokiman
        *[other] { $n } dokiman
     }
@@ -223,11 +279,12 @@ privacy-n-links = { $n ->
 privacy-n-set = { $n } mete
 privacy-copy-this-and-send-it = Kopye l epi voye l yon lòt fason pase lyen an. Yo pa ka montre l ankò.
 privacy-make-another = Fè yon lòt
+privacy-password-copied = Modpas kopye
 
 ## a document locked with a password, placed inside another (kit/share/locked.ts, kit/ui/locked-doc.ts)
 
 # The card drawn where it sits; { $app } is the app's name: "A Spreadsheet document, locked with a password".
-locked-with-password = Bloke ak yon modpas
+common-with-password = Bloke ak yon modpas
 locked-app-document-locked-with-password = Yon dokiman { $app }, bloke ak yon modpas
 locked-with-password-unlock = Bloke ak yon modpas. Debloke…
 locked-document-locked-with-password = Yon dokiman ki bloke ak yon modpas
@@ -253,24 +310,37 @@ common-chosen-tasks = Travay chwazi yo
 common-open = Louvri
 common-task = Travay
 common-tasks = Travay
+common-find-app-doc-template-or = Chèche aplikasyon, dokiman, modèl, oswa kòmand
+common-in-this-document = Chèche nan dokiman sa a
+common-indent-or-bring-out-in = Retire oswa mete anndan nan yon lis; selil pwochen nan yon grid
+common-move-selected-items-up-or = Monte oswa desann atik chwazi yo
+common-nudge-shapes-in-hand = Pouse fòm ki nan men an
+common-select-all-words-of-box = Chwazi tout: mo bwat la, answit tout bagay
+common-back-to-words = Retounen nan mo yo
+common-extend-selection = Elaji seleksyon an
+common-next-or-one-before = Pwochen an oswa anvan an
+common-step-out-close-collapse-let = Soti: fèmen, vlope, lage
+common-check-or-uncheck-task = Make oswa demake yon travay
+common-too-long-for-qr-code = Twò long pou yon kòd QR: rakousi dokiman an, oswa pataje yon lyen kout.
+common-n-of-count = { $n } sou { $count }
 
 ## downloads
 
 download-print = Enprime
-download-print-or-save-as-pdf = Enprime, oswa anrejistre kòm PDF
+common-print-or-save-as-pdf = Enprime, oswa anrejistre kòm PDF
 download-picture-png = Foto (PNG)
-download-web-page-html = Paj wèb (HTML)
+common-web-page-html = Paj wèb (HTML)
 download-text-tlo = Tèks (TLO)
 download-data-json = Done (JSON)
 download-downloaded-name = { $name } telechaje
 download-failed = Telechajman an echwe
-download-open-in-tiny-little-office = Louvri nan Tiny Little Office
+common-open-in-tiny-little-office = Louvri nan Tiny Little Office
 # Under a document cut off at a slide's foot: a link that opens it whole, in its own app.
 download-see-more = Wè plis
 
 ## the bar, shared by every app
 
-bar-insert = Ajoute
+common-insert = Ajoute
 bar-bold = Gra
 bar-italic = Italik
 bar-underline = Souliye
@@ -279,21 +349,21 @@ bar-highlight = Make
 bar-heading = Gwo tit
 bar-bulleted-list = Lis ak pwen
 bar-numbered-list = Lis ak nimewo
-bar-table = Tablo
+common-table = Tablo
 bar-footnote = Nòt anba paj
-bar-date = Dat
+common-date = Dat
 bar-undo = Anile
 bar-redo = Refè
-bar-today = Jodi a
+common-today = Jodi a
 
 ## the editor (<to-text>): chips, cards and the bubbles
 
 # A footnote's mark, and its words where the notes are drawn, by its number: spoken.
-editor-footnote-n = Nòt anba paj { $n }
+common-footnote-n = Nòt anba paj { $n }
 # A card standing for another document held in this one, of a kind no app here reads: "abc document".
-editor-app-document = Dokiman { $app }
+common-app-document = Dokiman { $app }
 # The same card when its app is known; { $noun } is the app's noun: "A spreadsheet".
-editor-noun = Yon { $noun }
+common-noun = Yon { $noun }
 editor-code = Kòd
 editor-connection = Koneksyon
 editor-n-rows = { $n ->
@@ -301,7 +371,7 @@ editor-n-rows = { $n ->
        *[other] { $n } ranje
     }
 editor-notes-words = Mo nan nòt la
-editor-done = Fini
+common-done = Fini
 editor-address = Adrès
 editor-not-address = Se pa yon adrès
 editor-set-link = Mete lyen
@@ -309,9 +379,13 @@ editor-open-link = Louvri lyen
 editor-change-link = Modifye lyen
 editor-remove-link = Retire lyen
 # The selection bubble's name: what can be done to the words selected.
-editor-format = Fòma
+common-format = Fòma
 editor-done-lowercase = fini
 editor-not-done = pa fini
+editor-bold-italic-and-links = Gra, italik ak lyen
+editor-one-of-words-column-holds = Youn nan mo kolòn nan genyen, oswa yon nouvo
+editor-option = Opsyon
+editor-this-browser-lets-page-paste = Navigatè sa a pèmèt yon paj kole sèlman ak klavye a: sèvi ak Kole li a.
 
 ## the example in the kit's own documentation
 
@@ -322,18 +396,18 @@ example-n-slides = { $n ->
 
 ## the Word Processor
 
-write-word-processor = Pwosesè Tèks
+common-word-processor = Pwosesè Tèks
 # What one of its documents is called, in running text: "Untitled document"; each app's noun is in its section.
 write-document-lowercase = dokiman
 # The group heading the Word Processor sits under on the home page.
-write-words = Mo
+common-words = Mo
 write-words-on-page-headings-lists = Mo sou yon paj: tit, lis, lyen ak nòt, yon tablo ki fè adisyon, enprime sou fòma letter oswa A4.
 write-document = Dokiman
 write-here = Ekri la a.
 write-subheading = Sou-tit
 write-paragraph = Paragraf
-write-bring-out = Mete an valè
-write-indent = Retrè
+common-bring-out = Mete an valè
+common-indent = Retrè
 write-align = Aliyen
 write-align-left = Aliyen agòch
 write-center = Santre
@@ -357,11 +431,11 @@ write-horizontal-rule = Liy orizontal
 # Insert ▾'s rule in a document: what follows starts the next page.
 write-page-break = Chanjman paj
 # same
-write-ok = OK
+common-ok = OK
 write-this-card = Fich sa a
 write-open-in-app = Louvri nan { $app }
 write-locked-worked-out-for-you = Bloke: kalkile pou ou
-write-footnotes = Nòt anba paj
+common-footnotes = Nòt anba paj
 write-back-to-footnote-n-in = Retounen nan nòt anba paj { $n } nan tèks la
 write-back-to-text = Retounen nan tèks la
 write-n-words = { $n ->
@@ -371,7 +445,7 @@ write-n-words = { $n ->
 # same
 write-word-docx = Word (DOCX)
 # same
-write-markdown = Markdown
+common-markdown = Markdown
 # same
 write-rich-text-rtf = Rich Text (RTF)
 # A table in the text: its heads, its handle, its column menu.
@@ -436,6 +510,12 @@ write-petition = Petisyon
 write-what-you-ask-why-and = Sa w mande, poukisa, ak non moun ki dakò yo.
 write-terms-of-service = Kondisyon sèvis
 write-small-businesss-terms-in-plain = Kondisyon yon ti biznis an mo senp: rezèvasyon, pri, kle, e si, fen.
+write-open-as-outline = Louvri kòm yon plan
+# same
+write-a4 = A4
+# same
+write-letter = Letter
+write-name-this-column = Bay kolòn sa a yon non
 
 ## Insert's dialog (kit/ui/insert-dialogs.ts): Tiny Little Office Doc
 
@@ -444,13 +524,13 @@ insert-opening-short-link = Ap louvri lyen kout la…
 insert-paste-link-of-another-tiny = Kole lyen yon lòt dokiman Tiny Little Office, long oswa kout: premye paj li parèt isit la.
 insert-this-is-not-tiny-little = Sa a pa yon lyen Tiny Little Office, oswa li ekspire.
 insert-tiny-little-office-doc = Dokiman Tiny Little Office
-insert-tiny-little-office-doc-ellipsis = Dokiman Tiny Little Office…
+common-tiny-little-office-doc-ellipsis = Dokiman Tiny Little Office…
 # Insert ▾'s group of the apps a new document can be made in, inside this one.
-insert-new-document = Yon nouvo dokiman
+common-new-document = Yon nouvo dokiman
 
 ## another document edited in place (kit/ui/doc-dialog.ts); a table's size is Rows × Columns
 
-doc-cancel = Anile
+common-cancel = Anile
 doc-rows = Ranje
 
 ## charts (kit/draw/chart.ts)
@@ -459,7 +539,7 @@ chart-empty-chart = Yon graf vid
 chart-bars = Ba
 chart-flows-sankey = Koule (Sankey)
 chart-flows-list = Koule: { $list }.
-chart-lines = Liy
+common-lines = Liy
 chart-nothing-to-chart-yet = Poko gen anyen pou fè graf
 chart-nothing-to-chart-yet-rows = Poko gen anyen pou fè graf: ranje De | Pou | Montan
 chart-pie = Gato
@@ -473,10 +553,10 @@ sheet-fit-this-column-to-its = Ajiste kolòn nan ak tèks li
 sheet-cells-in-hand = Selil yo nan men
 sheet-check-ref = Make { $ref }
 # The column type that holds words as typed.
-sheet-text = Tèks
-sheet-spreadsheet = Fèy Kalkil
+common-text = Tèks
+common-spreadsheet = Fèy Kalkil
 sheet-spreadsheet-lowercase = fèy kalkil
-sheet-numbers = Chif
+common-numbers = Chif
 sheet-spreadsheet-with-formulas-named-cells = Yon fèy kalkil ak fòmil, selil ki gen non ak graf; twa kolòn pou kòmanse, plis si w bezwen.
 sheet-budget = Bidjè
 sheet-planned-against-actual-line-each = Sa yo te planifye kont sa yo te depanse, yon liy chak, ak diferans lan ak total yo.
@@ -541,38 +621,38 @@ sheet-eight-teams-single-elimination-each = Uit ekip nan eliminasyon: nòt chak 
 # same
 sheet-excel-xlsx = Excel (XLSX)
 # same
-sheet-csv = CSV
+common-csv = CSV
 sheet-chart-svg = Graf (SVG)
 sheet-chart-png = Graf (PNG)
 sheet-empty-sheet = Fèy vid
 sheet-n-of-max-shown = ({ $n } sou { $max } montre)
 sheet-50-more-rows = 50 ranje anplis
-sheet-add-column = Ajoute yon kolòn
-sheet-add-column-after = Ajoute yon kolòn apre
+common-add-column = Ajoute yon kolòn
+common-add-column-after = Ajoute yon kolòn apre
 sheet-chart = Graf
 sheet-chart-of-table = Graf tablo a
 sheet-checkbox = Bwat pou make
 sheet-column-after = Kolòn apre
-sheet-column-c = Kolòn { $c }
-sheet-column-c-holds = Kolòn { $c } genyen
+common-column-c = Kolòn { $c }
+common-column-c-holds = Kolòn { $c } genyen
 sheet-column-c-type-what-it = Kolòn { $c }: { $type }. Sa l genyen, klase pa li, ajoute oswa retire yon kolòn
-sheet-columns = Kolòn
-sheet-delete-which = Efase { $which }
-sheet-drag-to-fill = Rale pou ranpli
+common-columns = Kolòn
+common-delete-which = Efase { $which }
+common-drag-to-fill = Rale pou ranpli
 sheet-abc-or-123-for-this = ABC oswa 123, pou kolòn sa a
 sheet-drag-to-resize-double-click = Rale pou chanje gwosè, double-klike pou ajiste
 sheet-fill-down-from-top-row = Ranpli anba depi premye ranje a
 sheet-fill-right-from-first-column = Ranpli adwat depi premye kolòn nan
-sheet-fill-drag-to-carry-these = Ranpli: rale pou pote selil sa yo pi lwen
+common-fill-drag-to-carry-these = Ranpli: rale pou pote selil sa yo pi lwen
 sheet-fit-columns-to-page = Ajiste kolòn yo sou paj la
 sheet-formula = Fòmil
 sheet-function = Fonksyon
 sheet-high-to-low = Wo a ba
-sheet-insert-n-rows-above = Ajoute { $n ->
+common-insert-n-rows-above = Ajoute { $n ->
         [one] yon ranje
        *[other] { $n } ranje
     } anlè
-sheet-insert-n-rows-below = Ajoute { $n ->
+common-insert-n-rows-below = Ajoute { $n ->
         [one] yon ranje
        *[other] { $n } ranje
     } anba
@@ -581,8 +661,8 @@ sheet-lock-these-cells-so-reader = Bloke selil sa yo, pou lektè a pa manyen yo
 sheet-locked-part-of-model = Bloke: pati nan modèl la
 sheet-low-to-high = Ba a wo
 sheet-money = Lajan
-sheet-name = Non
-sheet-name-of-column-c = Non kolòn { $c }
+common-name = Non
+common-name-of-column-c = Non kolòn { $c }
 sheet-names-cell-to-its-right = Bay selil adwat li a yon non
 # A money column's currency (Money picked in a column's menu): the field's hint, and what it says of words it cannot read.
 sheet-symbol-like-or-code-like = Yon senbòl, tankou $, oswa yon kòd, tankou USD. Vid, se pa dokiman an.
@@ -592,15 +672,15 @@ sheet-number = Nimewo
 sheet-open-link = Louvri { $link }
 sheet-opens-when-clicked = Louvri lè yo klike
 sheet-percent = Pousantaj
-sheet-remove-this-column = Retire kolòn sa a
+common-remove-this-column = Retire kolòn sa a
 sheet-resize-column-c = Chanje gwosè kolòn { $c }
 sheet-rich-text = Tèks anrichi
 sheet-row-above = Ranje anlè
 sheet-row-below = Ranje anba
-sheet-row-n = Ranje { $n }
-sheet-row-n-lowercase = ranje { $n }
-sheet-row-n-insert-or-delete = Ranje { $n }: ajoute oswa efase ranje
-sheet-rows-b = ranje { $a }–{ $b }
+common-row-n = Ranje { $n }
+common-row-n-lowercase = ranje { $n }
+common-row-n-insert-or-delete = Ranje { $n }: ajoute oswa efase ranje
+common-rows-b = ranje { $a }–{ $b }
 sheet-selected-cells = Selil chwazi yo
 sheet-show-all-text = Montre tout tèks la
 sheet-shown-as-typed = Montre jan l tape
@@ -611,22 +691,37 @@ sheet-is-full-its-last-rows = Fèy la plen: dènye ranje li yo gen yon bagay lad
 sheet-three-at-least = Twa omwen
 sheet-unlock-these-cells = Debloke selil sa yo
 sheet-what-it-holds-sort-columns = Sa l genyen; klase; kolòn
+# The Spreadsheet: any column removed, the Option column, rich cells, a chart put in from Insert.
+sheet-keeps-one-column = Yon fèy kenbe yon kolòn
+sheet-choices = Chwa
+sheet-choices-for-ref = Chwa pou { $ref }
+sheet-has-one = Fèy la gen youn
+sheet-edit-cell-caret-at-its = Modifye selil la, kurseur la nan fen li
+sheet-put-back-what-cell-held = Remèt sa selil la te genyen
+sheet-put-dated-rows-on-calendar = Mete ranje ki gen dat yo sou yon kalandriye
 
 ## downloads: hand-offs to another app (kit/file/exports.ts)
 
 export-open-in = Louvri nan
+export-pdf-file = Fichye PDF
+export-copy-link-that-downloads-ext = Kopye yon lyen ki telechaje .{ $ext }
+export-could-not-share-ext = Pa t ka pataje .{ $ext }
+export-could-not-show-ext = Pa t ka montre .{ $ext }
+export-download-ext = Telechaje .{ $ext }
+export-share-ext = Pataje .{ $ext }…
+export-view-ext = Gade .{ $ext }
 
 ## the icon library (kit/ui/icons-picker.ts)
 
-icons-icon = Ikòn
+common-icon = Ikòn
 icons-favorites = Favori
 icons-search-icons = Chèche ikòn
 icons-suggested = Sijere
-icons-icons = Ikòn
+common-icons = Ikòn
 icons-no-icons-match-q = Pa gen ikòn ki koresponn ak “{ $q }”.
 icons-search-by-name-or-by = Chèche pa non oswa pa sa l vle di (“lajan”, “move tan”, “ai”) pou jwenn nenpòt nan { $n } ikòn.
 icons-no-icon = Pa gen ikòn
-icons-icon-or-emoji = Ikòn oswa emoji
+common-icon-or-emoji = Ikòn oswa emoji
 icons-search-icons-and-emoji = Chèche ikòn ak emoji
 icons-or-emoji = Ikòn oswa emoji
 # same
@@ -647,9 +742,9 @@ icons-flags = Drapo
 
 # The group heading the Drawing Tool sits under on the home page: Design. 'Draw' is the Animator's mode for drawing.
 draw-draw = Desine
-draw-drawing-tool = Zouti Desen
+common-drawing-tool = Zouti Desen
 draw-drawing = desen
-draw-design = Konsepsyon
+common-design = Konsepsyon
 draw-boxes-arrows-icons-and-labels = Bwat, flèch, ikòn ak etikèt sou yon grid; oswa pixel art, ki ka vin yon tuile pou background.
 draw-request-flow = Koule demann lan
 draw-browser-asks-server-which-reads = Yon navigatè mande yon sèvè, ki li done yo: bwat ki lye ak flèch.
@@ -667,7 +762,7 @@ draw-phone-screen-sketched-in-boxes = Yon ekran telefòn desine an bwat anvan yo
 draw-rosette-with-ribbons-for-volunteer = Yon rozèt ak riban pou volontè ane a, pou enprime, koupe epi pike.
 draw-block-party-from-above-stage = Yon fèt lari wè anlè: sèn nan, kyòs yo, premye swen ak kote pou rankontre si w pèdi.
 draw-badge = Badj
-draw-birthday-card = Kat anivèsè
+common-birthday-card = Kat anivèsè
 draw-can-we-refund-it-stores = Èske nou ka ranbouse l? Règ retou yon boutik an kesyon, repons ak sa pou fè.
 draw-event-map = Kat evènman
 draw-four-16-by-16-icons = Kat ikòn 16 sou 16 sou yon sèl grid, solèy, nwaj, lapli ak tanpèt, pou kopye pou yon previzyon oswa yon bouton.
@@ -682,7 +777,7 @@ draw-weather-icons = Ikòn move tan
 draw-what-happens-to-package-from = Sa k pase yon kolis depi moman yo achte l: yon pwosesis an etap, ak ikòn ak lyezon.
 # same
 draw-wireframe = Wireframe
-draw-picture-svg = Foto (SVG)
+common-picture-svg = Foto (SVG)
 draw-background-tile-svg = Tuile background (SVG)
 draw-background-tile-png = Tuile background (PNG)
 draw-animate-this-drawing = Anime desen sa a
@@ -714,14 +809,14 @@ draw-rounded-box = Bwat won
 draw-hexagon = Egzagòn
 draw-parallelogram = Paralelogram
 draw-cylinder = Silenn
-draw-note = Nòt
-draw-black = Nwa
-draw-red = Wouj
-draw-orange = Zoranj
-draw-green = Vèt
-draw-blue = Ble
-draw-purple = Mov
-draw-indigo = Endigo
+common-note = Nòt
+common-black = Nwa
+common-red = Wouj
+common-orange = Zoranj
+common-green = Vèt
+common-blue = Ble
+common-purple = Mov
+common-indigo = Endigo
 draw-yellow = Jòn
 draw-sky = Ble syèl
 draw-pink = Woz
@@ -738,13 +833,13 @@ draw-no-fill = San ranpli
 draw-fill = Ranpli
 draw-bring-to-front = Mete devan
 draw-send-to-back = Mete dèyè
-draw-duplicate = Double
-draw-edit = Edite
-draw-delete = Efase
+common-duplicate = Double
+common-edit = Edite
+common-delete = Efase
 draw-put-icon-on-this-shape = Mete yon ikòn sou fòm sa a
 draw-place-icon = Mete yon ikòn
-draw-zoom-in = Zoum anlè
-draw-zoom-out = Zoum anba
+common-zoom-in = Zoum anlè
+common-zoom-out = Zoum anba
 # same
 draw-alt = Alt
 draw-alt-text = Tèks alt
@@ -774,7 +869,7 @@ draw-as-repeating-background = Kòm yon background ki repete
 # The contextual bar under a shape, and its words typed on it.
 draw-dashed-line = Liy tire
 draw-dotted-line = Liy pwen
-draw-edit-words = Modifye mo yo
+common-edit-words = Modifye mo yo
 draw-extra-large-text = Tèks trè gwo
 draw-gray-fill = Ranpli gri
 draw-l = G
@@ -796,6 +891,10 @@ draw-drawing-canvas-v-selects-r = Kanva desen. V chwazi; R, E, D, L, A, T trase;
 draw-tap-shape-to-select-it = Tape yon fòm pou chwazi l, oswa rale otou fòm yo pou chwazi yo; chwazi yon zouti pou trase.
 draw-rotate-left = Vire agòch
 draw-rotate-right = Vire adwat
+draw-pixels-n-n = Piksèl { $n }×{ $n }
+draw-align-center = Aliyen: nan mitan
+draw-align-left = Aliyen: agòch
+draw-align-right = Aliyen: adwat
 
 ## the Animator
 
@@ -852,7 +951,7 @@ anim-pixel-art-is-made-in = Yo fè pixel art nan Zouti Desen; Animatè a deplase
 anim-rainbow = Ark-en-syèl
 anim-remove-this-key = Retire kle sa a
 anim-shadow = Lonbraj
-anim-size = Gwosè
+common-size = Gwosè
 anim-spin = Vire
 anim-stage-alt-arrow-keys-move = Sèn: { $alt }. Flèch yo deplase fòm nan men an (oswa tan), vigil ak pwen avanse yon imaj, Space jwe, K kenbe yon kle.
 anim-shapes-in-hand = Fòm yo nan men an
@@ -886,6 +985,10 @@ anim-which-shape-is-in-front = Ki fòm ki devan: yon fòm ki pi pre trase sou yo
 anim-n-times = { $n } fwa
 # same
 anim-s-s = { $s } s
+anim-frame-back-frame-on = Yon imaj anvan, yon imaj pi lwen
+anim-nudge-shapes-in-hand-with = Pouse fòm ki nan men an; san youn, pase yon imaj
+anim-play-or-pause = Jwe oswa poze
+anim-first-frame-last = Premye imaj la, dènye a
 
 ## the Outliner
 
@@ -893,26 +996,26 @@ anim-s-s = { $s } s
 outline-named-label = , ki rele “{ $label }”
 outline-book = Yon liv
 outline-decision = Yon desizyon
-outline-talk = Yon konferans
+common-talk = Yon konferans
 outline-empty-outline = Yon plan vid
 outline-outliner-ideas-under-ideas-folded = Yon kreyatè plan: lide anba lide, plede ak deplede, deplase ak makònen; menm pyebwa yon prezantasyon oswa yon kat lide li.
 outline-arrow-from-from-to-to = Flèch soti nan { $from } rive nan { $to }
 outline-arrows-both-ways = Flèch de bò
 outline-as-page = Kòm yon paj
-outline-calculator = Kalkilatè
-outline-calendar = Kalandriye
+common-calculator = Kalkilatè
+common-calendar = Kalandriye
 outline-cancel-connecting = Anile koneksyon an
 outline-change-it = Chanje l
-outline-chosen-items = Atik chwazi yo
+common-chosen-items = Atik chwazi yo
 outline-connect = Konekte
 outline-connect-from-words = Konekte soti nan “{ $words }”
 outline-connect-from-to-to = Konekte “{ $from }” ak “{ $to }”
 outline-connection-from-from-to-to = Koneksyon soti nan { $from } rive nan { $to }
-outline-connections = Koneksyon
-outline-copy = Kopye
-outline-presentation-builder = Kreyatè Prezantasyon
-outline-diagram-maker = Kreyatè Dyagram
-outline-drag-to-move = Rale pou deplase
+common-connections = Koneksyon
+common-copy = Kopye
+common-presentation-builder = Kreyatè Prezantasyon
+common-diagram-maker = Kreyatè Dyagram
+common-drag-to-move = Rale pou deplase
 outline-draw-as-mind-map = Trase kòm yon kat lide
 outline-draw-as-network = Trase kòm yon rezo
 outline-draw-as-org-chart = Trase kòm yon òganigram
@@ -923,24 +1026,24 @@ outline-fold-all = Plede tout
 outline-item = Atik
 outline-item-n = Atik { $n }
 outline-kind-of-line = Kalite liy
-outline-launch-plan = Plan lansman
+common-launch-plan = Plan lansman
 outline-line-from-from-to-to = Liy soti nan { $from } rive nan { $to }
 outline-line-named-label-change-it = Liy ki rele “{ $label }”: chanje l
-outline-animator = Animatè
-outline-move-down = Desann
+common-animator = Animatè
+common-move-down = Desann
 outline-move-this-item-drag-it = Deplase atik sa a: rale l sou yon lòt
-outline-move-up = Monte
+common-move-up = Monte
 outline-name-of-line = Non liy lan
 outline-numbered = Nimewote
 outline-opml-for-outliners = OPML (pou kreyatè plan)
-outline-open-in-new-tab = Louvri nan yon nouvo onglè
-outline-outline = Plan
+common-open-in-new-tab = Louvri nan yon nouvo onglè
+common-outline = Plan
 outline-outliner = Kreyatè Plan
 outline-outline-lowercase = plan
-outline-paste = Kole
+common-paste = Kole
 outline-plain-line = Liy senp
 outline-plain-text = Tèks senp
-outline-show-as-slides = Montre kòm dyapozitiv
+common-show-as-slides = Montre kòm dyapozitiv
 outline-show-as-outline = Montre kòm plan
 outline-take-away-connection-from-from = Retire koneksyon soti nan { $from } rive nan { $to }
 outline-take-it-away = Retire l
@@ -948,14 +1051,14 @@ outline-take-connection-away = Retire koneksyon an
 outline-tap-item-to-connect-from = Tape atik pou konekte depi li a.
 outline-tap-item-to-connect-words = Tape atik pou konekte “{ $words }” ak li a.
 outline-question-options-under-it-and = Kesyon an, opsyon yo anba l, ak pou chak sa ki pale pou li ak sa ki pale kont li.
-outline-trip-planner = Planifikatè Vwayaj
+common-trip-planner = Planifikatè Vwayaj
 outline-twenty-minutes-in-three-parts = Ven minit nan twa pati: pwoblèm lan, lide a, sa l vle di; yon dyapozitiv pou chak gwo atik lè yo montre l kòm prezantasyon.
 outline-unfold-all = Deplede tout
 outline-unfold-n-inside = Deplede, { $n ->
         [one] yon sèl anndan
        *[other] { $n } anndan
     }
-outline-untitled = San tit
+common-untitled = San tit
 outline-view-as = Wè kòm
 outline-zoomed-in-on = Zoum sou
 outline-a-plain-line = yon liy senp
@@ -989,6 +1092,9 @@ outline-question-method-budget-that-adds = Kesyon an, metòd la, yon bidjè ki f
 outline-three-generations-and-next-each = Twa jenerasyon ak pwochen an, chak ak ane yo, trase kòm yon pyebwa jeneyalojik nan meni an.
 outline-troubleshooting = Depannaj
 outline-who-works-for-whom-at = Ki moun ki travay pou ki moun nan yon boulanjri nèf moun, chak ak wòl li, trase kòm yon òganigram nan meni an.
+outline-pdf-sections-and-bullets = PDF: seksyon ak pwen
+outline-fold-unfold = Plede, deplede
+outline-name-line = Bay liy lan yon non
 
 ## the Presentation Builder
 
@@ -1034,7 +1140,7 @@ deck-bullets = Pwen
 deck-two-columns = De kolòn
 deck-big-icon = Gwo ikòn
 deck-fade = Fondi
-deck-cut = Koupe
+common-cut = Koupe
 deck-slide = Glise
 deck-zoom = Zoum
 deck-zine = Zin
@@ -1060,12 +1166,12 @@ deck-fun = Amizan
 deck-themes-color = Koulè tèm lan
 
 # The bar
-deck-present = Prezante
+common-present = Prezante
 deck-see-sheets-to-print = Gade fèy pou enprime yo
 deck-back-to-pages = Retounen nan paj yo
 deck-headline = Gwo tit
 deck-layout-layout = Aranjman: { $layout }
-deck-look-theme = Aparans: { $theme }
+common-look-theme = Aparans: { $theme }
 deck-transition-transition = Tranzisyon: { $transition }
 deck-format-format = Fòma: { $format }
 deck-printing = Enpresyon
@@ -1093,11 +1199,11 @@ deck-big-icon-page = Paj gwo ikòn
 deck-four-more-pages = Kat lòt paj
 deck-on-slide = Sou dyapozitiv la
 deck-on-page = Sou paj la
-deck-pages = Paj
+common-pages = Paj
 
 # The canvas
 deck-add-icon = Ajoute yon ikòn
-deck-change-icon = Chanje ikòn lan
+common-change-icon = Chanje ikòn lan
 deck-pick-icon = Chwazi yon ikòn
 deck-left-column = Kolòn agòch
 deck-right-column = Kolòn adwat
@@ -1116,7 +1222,7 @@ deck-remove-from-slide = Retire nan dyapozitiv la
 deck-slide-n = Dyapozitiv { $n }
 deck-front-cover = Kouvèti devan
 deck-back-cover = Kouvèti dèyè
-deck-page-n = Paj { $n }
+common-page-n = Paj { $n }
 deck-front = Devan
 deck-inside-left = Anndan agòch
 deck-inside-middle = Anndan mitan
@@ -1140,11 +1246,11 @@ deck-print-it-on-letter-paper-at-actual-size-cut-along-dashes-six-badges-sheet =
 
 # Presenting, and the closing slide
 deck-presentation = Prezantasyon
-deck-previous = Anvan
-deck-next = Pwochen
-deck-stop-presenting = Sispann prezante
+common-previous = Anvan
+common-next = Pwochen
+common-stop-presenting = Sispann prezante
 deck-slide-n-of-total = Dyapozitiv { $n } sou { $total }
-deck-notes = Nòt
+common-notes = Nòt
 deck-n-hides-them = N kache yo
 deck-take-this-deck-home = Pote prezantasyon sa a lakay
 deck-take-this-deck-home-title = Pote prezantasyon sa a lakay: { $title }
@@ -1170,6 +1276,12 @@ deck-trifold-brochure-six-panels-on = Yon bwochi twa pli: sis panno sou de bò y
 deck-mini-comic-panels-with-picture = Yon mini komik: panno ak yon foto, yon bil dyalòg ak yon lejann, pliye nan yon sèl fèy.
 deck-poster-or-flyer-headline-and = Yon afich oswa flyer: yon gwo tit ak kèk liy, ankò pi gwo jan yon paj pèmèt.
 deck-name-badges-for-meetup-one = Badj non pou yon rankont, yon paj pou chak moun, sis pa fèy, pare pou koupe.
+deck-edit-this-deck = Modifye prezantasyon sa a
+deck-new-slide = Yon nouvo dyapozitiv
+deck-presenting-back = Prezante: anvan
+deck-presenting-next-line-or-slide = Prezante: liy oswa dyapozitiv pwochen an
+deck-presenting-whole-slide = Prezante: tout dyapozitiv la
+deck-slide-before-slide-after-on = Dyapozitiv anvan an, dyapozitiv apre a (sou ray la)
 
 ## the Calendar app
 
@@ -1196,7 +1308,7 @@ cal-end = Fen
 cal-end-date = Dat fen
 cal-end-time = Lè fen
 cal-ends = Fini
-cal-event = Evènman
+common-event = Evènman
 cal-every-day = Chak jou
 cal-every-month = Chak mwa
 cal-every-week = Chak semèn
@@ -1232,7 +1344,7 @@ cal-start = Kòmansman
 cal-start-date = Dat kòmansman
 cal-start-time = Lè kòmansman
 cal-starts = Kòmanse
-cal-stops = Sispann
+common-stops = Sispann
 cal-same-dates-as-gantt-chart = Menm dat yo kòm yon graf Gantt
 cal-this-calendar-is-written-in = Kalandriye sa a ekri nan lè { $zone }.
 cal-this-calendar-names-no-time = Kalandriye sa a pa bay okenn fizo orè: lè li yo li nan pa w, { $zone }.
@@ -1364,6 +1476,19 @@ diagram-house-network = Rezo kay la
 diagram-water-cycle = Sik dlo a
 diagram-three-generations-of-morenos-and = Twa jenerasyon Moreno yo, ak yon liy pwenteye bay yon fiyèl.
 diagram-who-can-do-what = Ki moun ki ka fè kisa
+diagram-tap-empty-space-for-branch = Tape yon espas vid pou yon branch; tape yon lide pou tape sou li, Enter pou pwochen an; rale youn sou yon lòt pou mete l anba; Lye makònen de nan kat la.
+diagram-place-cards = Kat plas
+diagram-print-place-cards = Enprime kat plas
+diagram-print-place-cards-card-guest = Enprime kat plas: yon kat pa envite, uit pa fèy letter, pou koupe
+diagram-guest = Envite
+diagram-new-idea = Nouvo lide
+diagram-tap-empty-space-for-person = Tape yon espas vid pou yon moun; tape youn pou tape sou li, Shift+Enter pou wòl li anba non an, Enter pou pwochen an; rale youn sou yon lòt pou mete l anba li.
+diagram-tap-empty-space-for-event = Tape yon espas vid pou yon evènman: tape ki lè, Shift+Enter, answit sa ki pase; ane ak dat yo espase jan yo te tonbe; yon peryòd se yon bann.
+diagram-lanes-name = Non liy nèt la
+diagram-when = Ki lè
+diagram-tap-person-to-type-on = Tape yon moun pou tape sou li, + apre non an pou patnè li, Shift+Enter pou ane li yo anba non an; Enter pou pwochen an; rale youn sou yon lòt pou mete l anba li; Lye trase yon liy pwenteye ant de.
+diagram-tap-empty-space-for-table = Tape yon espas vid pou yon tab; tape yon tab oswa yon moun pou tape, yon vigil apre yon non pou pwochen envite a; rale yon moun sou yon lòt tab.
+diagram-tap-inside-circles-to-add = Tape andedan sèk yo pou ajoute yon bagay la, yon vigil apre l pou pwochen an; tape non yon ansanm pou chanje l; rale yon bagay nan lòt sèk.
 
 ## the Trip Planner
 
@@ -1439,13 +1564,20 @@ trip-new-york-in-movies = New York nan sinema
 trip-seven-film-and-tv-locations = Sèt kote yo te filme fim ak televizyon, soti uptown rive downtown, nan yon jou.
 trip-wedding-on-lake-como = Yon maryaj bò Lake Como
 trip-for-guests-where-wedding-is = Pou envite yo: kote maryaj la ye, kote pou dòmi, ki jan pou rive.
+trip-presenting-trip = Ap prezante vwayaj la
+trip-presenting-next-stop = Prezante: pwochen arè a
+trip-presenting-stop-before = Prezante: arè anvan an
+trip-put-stops-on-calendar-day = Mete arè yo sou yon kalandriye, yon jou chak
+trip-first-last = Premye a, dènye a
+trip-next-stop = Pwochen arè a
+trip-stop-before = Arè anvan an
 
 ## shared: the Word Processor's looks, the header's Home, a money column's currency
 
 looks-typewriter = Machin a ekri
 # same
 looks-serif = Serif
-looks-home = Akèy
+common-home = Akèy
 looks-currency = Lajan
 
 ## the Calculator app
@@ -1534,72 +1666,25 @@ calc-curve-and-its-slope = Yon koub ak pant li
 calc-x3-3x-its-derivative-and = x³ − 3x, derive li a, ak tanjant plat la anba ti kre a.
 calc-waves-adding-up = Vag k ap adisyone
 calc-sine-waves-summed-on-their = Vag sinis adisyone, sou wout pou yon vag kare.
-
-## unsorted: added after the sections, each id named for where it is used
-
-home-templates-for-app = Modèl pou { $app }
-home-app-templates = Modèl { $app }
-home-templates-for-app-name = Modèl pou { $app }: { $name }
-home-templates-are-not-saved-in = Modèl yo poko anrejistre nan navigatè sa a. Konekte sou entènèt pou w ka wè yo.
 # The grip on a line of the tape; the bar under lines chosen whole.
 calc-choose-line-n-drag-it = Chwazi liy { $n }: rale l pou deplase l
 calc-chosen-lines = Liy chwazi yo
-# The Spreadsheet: any column removed, the Option column, rich cells, a chart put in from Insert.
-sheet-keeps-one-column = Yon fèy kenbe yon kolòn
-editor-bold-italic-and-links = Gra, italik ak lyen
-sheet-choices = Chwa
-sheet-choices-for-ref = Chwa pou { $ref }
-editor-one-of-words-column-holds = Youn nan mo kolòn nan genyen, oswa yon nouvo
-editor-option = Opsyon
-sheet-has-one = Fèy la gen youn
-drawer-documents = Dokiman
-common-find-app-template = Chèche aplikasyon, modèl
-drawer-find-app-doc-template-or = Chèche aplikasyon, dokiman, modèl, oswa kòmand
-drawer-find-app-template-or-command = Chèche aplikasyon, modèl, oswa kòmand
-drawer-commands = Kòmand
-share-new-noun-date-n = Nouvo { $noun } { $date } #{ $n }
-drawer-nothing-by-that-name = Pa gen anyen ak non sa a
-draw-pixels-n-n = Piksèl { $n }×{ $n }
-# Files, compare, posting and embedding: the agent and sharing surface.
-share-mastodon-server-like-mastodon-social = Yon sèvè Mastodon, tankou mastodon.social
-share-change = Chanjman
+
+## two links compared (kit/ui/compare.ts)
+
 compare-changes = Chanjman
 compare-compare = Konpare
-share-copy-embed-code = Kopye kòd entegrasyon
-share-copy-show-link = Kopye lyen montre
-deck-edit-this-deck = Modifye prezantasyon sa a
-share-embed = Entegre
-share-embed-code-copied = Kòd entegrasyon kopye
 compare-no-difference = Pa gen diferans
 compare-not-link-to-tiny-little = Se pa yon lyen yon dokiman Tiny Little Office
-open-opened-name = { $name } louvri
-share-opens-deck-already-presenting = Li louvri prezantasyon an deja ap prezante.
-export-pdf-file = Fichye PDF
-outline-pdf-sections-and-bullets = PDF: seksyon ak pwen
 compare-paste-second-link-to-see = Kole yon dezyèm lyen pou wè sa ki chanje.
 compare-paste-link-to-document-as = Kole lyen dokiman an jan l ye kounye a
 compare-paste-link-to-document-as-it-was = Kole lyen dokiman an jan l te ye
-share-post = Pibliye
-share-post-link = Pibliye lyen an
-share-show-preview-of-first-page = Montre yon apèsi premye paj la
-share-picture-of-first-page-and = Yon foto premye paj la ak tit la rete lizib sou sèvè nou an pandan yon mwa pou rezo a ka pran yo. Dokiman an li menm, non.
-share-shared-without-preview-reason = Pataje san apèsi: { $reason }
-share-making-preview = Ap fè apèsi a…
-share-page-could-not-be-drawn = pa t ka desine paj la
-share-picture-is-over-400-kb = foto a depase 400 KB
-share-server-could-not-be-reached = pa t ka jwenn sèvè a
-share-hundred-previews-day-from-one = san apèsi pa jou soti nan yon sèl adrès
-share-server-refused-picture = sèvè a refize foto a
 compare-put-in = Mete ladan l:
 compare-swap = Chanje
 compare-taken-out = Retire:
-open-that-file-is-not-words = Fichye sa a pa gen mo Tiny Little Office ka li.
-open-that-file-is-too-large = Fichye sa a twò gwo pou l ta yon dokiman isit la.
 compare-first-link = Premye lyen an
-share-pages-in-frame-on-another = Paj yo, nan yon kadr sou yon lòt sit, ak yon lyen pou louvri yo isit la.
 compare-second-link = Dezyèm lyen an
 compare-two-links-to-documents-side = De lyen dokiman kòt a kòt: sa dezyèm lan chanje make. Anyen pa kite paj sa a.
-share-your-mastodon-server = Sèvè Mastodon ou
 compare-different-apps = aplikasyon diferan
 compare-n-blocks-taken-out = { $n ->
         [one] { $n } blòk retire
@@ -1609,108 +1694,12 @@ compare-n-put-in = { $n ->
         [one] { $n } mete ladan l
        *[other] { $n } mete ladan l
     }
-diagram-tap-empty-space-for-branch = Tape yon espas vid pou yon branch; tape yon lide pou tape sou li, Enter pou pwochen an; rale youn sou yon lòt pou mete l anba; Lye makònen de nan kat la.
-# Restored around the document: search, Find in this document, the shortcuts and the apps' keys, Mod+S, the size of
-# everything, Add to home screen, another version kept here, where the link fits, Open in another app, the QR code
-# of this document, Insert narrowed by typing, Trip presenting, a seating chart's place cards
-qr-code-of-this-document = Yon kòd QR dokiman sa a
-anim-frame-back-frame-on = Yon imaj anvan, yon imaj pi lwen
-deck-new-slide = Yon nouvo dyapozitiv
-drawer-add-to-home-screen = Mete sou ekran dakèy
-shell-another-version = Yon lòt vèsyon
-keys-normal-size = Gwosè nòmal
-home-documents-found = Dokiman jwenn
-sheet-edit-cell-caret-at-its = Modifye selil la, kurseur la nan fen li
-keys-everything-larger = Tout bagay pi gwo
-keys-everything-smaller = Tout bagay pi piti
-find-in-this-document = Chèche nan dokiman sa a
-outline-fold-unfold = Plede, deplede
-common-indent-or-bring-out-in = Retire oswa mete anndan nan yon lis; selil pwochen nan yon grid
-keys-keep-this-document-on-device = Kenbe dokiman sa a sou aparèy la
-shell-kept-on-this-device = Kenbe sou aparèy sa a
-shell-keyboard-shortcuts = Rakousi klavye
-share-left = Agòch
-common-move-selected-items-up-or = Monte oswa desann atik chwazi yo
-home-no-document-here-has-those = Pa gen dokiman isit la ki gen mo sa yo
-find-not-found = Pa jwenn
-menu-nothing-starts-q = Anyen pa kòmanse ak “{ $q }”
-shell-nothing-to-keep-yet = Poko gen anyen pou kenbe
-common-nudge-shapes-in-hand = Pouse fòm ki nan men an
-anim-nudge-shapes-in-hand-with = Pouse fòm ki nan men an; san youn, pase yon imaj
-write-open-as-outline = Louvri kòm yon plan
-shell-open-it = Louvri l
-diagram-place-cards = Kat plas
-anim-play-or-pause = Jwe oswa poze
-trip-presenting-trip = Ap prezante vwayaj la
-deck-presenting-back = Prezante: anvan
-deck-presenting-next-line-or-slide = Prezante: liy oswa dyapozitiv pwochen an
-trip-presenting-next-stop = Prezante: pwochen arè a
-trip-presenting-stop-before = Prezante: arè anvan an
-diagram-print-place-cards = Enprime kat plas
-diagram-print-place-cards-card-guest = Enprime kat plas: yon kat pa envite, uit pa fèy letter, pou koupe
-shell-save-in-browser-is-off = Anrejistre nan navigatè a etenn: navigatè sa a pa kenbe okenn dokiman. Limen l nan meni an pou kenbe yo isit la.
-sheet-put-back-what-cell-held = Remèt sa selil la te genyen
-sheet-put-dated-rows-on-calendar = Mete ranje ki gen dat yo sou yon kalandriye
-trip-put-stops-on-calendar-day = Mete arè yo sou yon kalandriye, yon jou chak
-home-search-your-documents = Chèche nan dokiman ou yo
-common-select-all-words-of-box = Chwazi tout: mo bwat la, answit tout bagay
-keys-show-these-shortcuts = Montre rakousi sa yo
-# same
-write-a4 = A4
-# same
-write-letter = Letter
-common-back-to-words = Retounen nan mo yo
-common-extend-selection = Elaji seleksyon an
-deck-presenting-whole-slide = Prezante: tout dyapozitiv la
-trip-first-last = Premye a, dènye a
-common-next-or-one-before = Pwochen an oswa anvan an
-editor-this-browser-lets-page-paste = Navigatè sa a pèmèt yon paj kole sèlman ak klavye a: sèvi ak Kole li a.
-drawer-size-of-everything = Gwosè tout bagay
-shell-skip-to-apps = Ale nan aplikasyon yo
-shell-skip-to-document = Ale nan dokiman an
-menu-starting-q = Kòmanse ak “{ $q }”
-common-step-out-close-collapse-let = Soti: fèmen, vlope, lage
-anim-first-frame-last = Premye imaj la, dènye a
-trip-next-stop = Pwochen arè a
-deck-slide-before-slide-after-on = Dyapozitiv anvan an, dyapozitiv apre a (sou ray la)
-trip-stop-before = Arè anvan an
-shell-this-device-keeps-another-version = Aparèy sa a kenbe yon lòt vèsyon “{ $title }”, soti { $when }.
-shell-this-link-was-made-by = Yon vèsyon Tiny Little Office ki pi nouvo te fè lyen sa a. Chaje paj la ankò pou jwenn li.
-keys-this-page = Paj sa a
-common-check-or-uncheck-task = Make oswa demake yon travay
-drawer-to-add-tiny-little-office = Pou mete Tiny Little Office sou ekran dakèy: Pataje, answit Add to Home Screen.
-common-too-long-for-qr-code = Twò long pou yon kòd QR: rakousi dokiman an, oswa pataje yon lyen kout.
-share-uses = Itilizasyon
-share-where = Ki kote
-share-where-link-fits = Kote lyen an antre
-share-any-length = nenpòt longè
-home-n-documents-found = { $n ->
-        [one] Yon dokiman jwenn
-       *[other] { $n } dokiman jwenn
-    }
-common-n-of-count = { $n } sou { $count }
-share-n-over = { $n } anplis
-privacy-password-copied = Modpas kopye
-diagram-guest = Envite
-outline-name-line = Bay liy lan yon non
-write-name-this-column = Bay kolòn sa a yon non
-diagram-new-idea = Nouvo lide
-diagram-tap-empty-space-for-person = Tape yon espas vid pou yon moun; tape youn pou tape sou li, Shift+Enter pou wòl li anba non an, Enter pou pwochen an; rale youn sou yon lòt pou mete l anba li.
-diagram-tap-empty-space-for-event = Tape yon espas vid pou yon evènman: tape ki lè, Shift+Enter, answit sa ki pase; ane ak dat yo espase jan yo te tonbe; yon peryòd se yon bann.
-diagram-lanes-name = Non liy nèt la
-diagram-when = Ki lè
-draw-align-center = Aliyen: nan mitan
-draw-align-left = Aliyen: agòch
-draw-align-right = Aliyen: adwat
-diagram-tap-person-to-type-on = Tape yon moun pou tape sou li, + apre non an pou patnè li, Shift+Enter pou ane li yo anba non an; Enter pou pwochen an; rale youn sou yon lòt pou mete l anba li; Lye trase yon liy pwenteye ant de.
-diagram-tap-empty-space-for-table = Tape yon espas vid pou yon tab; tape yon tab oswa yon moun pou tape, yon vigil apre yon non pou pwochen envite a; rale yon moun sou yon lòt tab.
-diagram-tap-inside-circles-to-add = Tape andedan sèk yo pou ajoute yon bagay la, yon vigil apre l pou pwochen an; tape non yon ansanm pou chanje l; rale yon bagay nan lòt sèk.
-export-copy-link-that-downloads-ext = Kopye yon lyen ki telechaje .{ $ext }
-export-could-not-share-ext = Pa t ka pataje .{ $ext }
-export-could-not-show-ext = Pa t ka montre .{ $ext }
-export-download-ext = Telechaje .{ $ext }
-export-share-ext = Pataje .{ $ext }…
-export-view-ext = Gade .{ $ext }
+
+## files and zips dropped on the page (kit/file/open.ts)
+
+open-opened-name = { $name } louvri
+open-that-file-is-not-words = Fichye sa a pa gen mo Tiny Little Office ka li.
+open-that-file-is-too-large = Fichye sa a twò gwo pou l ta yon dokiman isit la.
 open-keep-them-on-this-device = Kenbe yo sou aparèy sa a
 open-nothing-is-saved-on-this = Pa gen anyen ki anrejistre sou aparèy sa a kounye a. Kenbe yo isit la, oswa louvri youn.
 open-first = Louvri premye a
@@ -1723,3 +1712,28 @@ open-n-documents-kept = { $n ->
         [one] { $n } dokiman kenbe
        *[other] { $n } dokiman kenbe
     }
+
+## a document's QR code (kit/draw/qr-picture.ts)
+
+# Restored around the document: search, Find in this document, the shortcuts and the apps' keys, Mod+S, the size of
+# everything, Add to home screen, another version kept here, where the link fits, Open in another app, the QR code
+# of this document, Insert narrowed by typing, Trip presenting, a seating chart's place cards
+qr-code-of-this-document = Yon kòd QR dokiman sa a
+
+## the keys, the shortcuts and the size of everything (kit/core/keys.ts, kit/ui/zoom.ts)
+
+keys-normal-size = Gwosè nòmal
+keys-everything-larger = Tout bagay pi gwo
+keys-everything-smaller = Tout bagay pi piti
+keys-keep-this-document-on-device = Kenbe dokiman sa a sou aparèy la
+keys-show-these-shortcuts = Montre rakousi sa yo
+keys-this-page = Paj sa a
+
+## Find in this document (kit/ui/find.ts)
+
+find-not-found = Pa jwenn
+
+## a menu narrowed by typing (kit/ui/menu.ts)
+
+menu-nothing-starts-q = Anyen pa kòmanse ak “{ $q }”
+menu-starting-q = Kòmanse ak “{ $q }”

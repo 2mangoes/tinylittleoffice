@@ -6,10 +6,10 @@ import { mount, until } from './helpers.ts';
 test('an in-memory Spanish file takes over the shell when chosen', async () => {
   register(
     'es',
-    `drawer-tiny-little-office = Oficinita Diminuta
+    `common-tiny-little-office = Oficinita Diminuta
 drawer-find-app-template-or-command = Buscar app, plantilla o comando
 shell-menu = Menú
-write-word-processor = Procesador de textos
+common-word-processor = Procesador de textos
 home-templates-for-app = Plantillas de { $app }
 drawer-language = Idioma
 drawer-match-device = Como el dispositivo

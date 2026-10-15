@@ -24,13 +24,13 @@ export const retitle = (doc: Doc, title: string): Doc => write(apply(headOf(doc)
 export default defineApp({
   id: 'sheet',
   get name() {
-    return t('sheet-spreadsheet');
+    return t('common-spreadsheet');
   },
   get noun() {
     return t('sheet-spreadsheet-lowercase');
   },
   get group() {
-    return t('sheet-numbers');
+    return t('common-numbers');
   },
   icon: Table2,
   get blurb() {
@@ -45,7 +45,7 @@ export default defineApp({
   exports: [
     { ext: 'xlsx', label: () => t('sheet-excel-xlsx'), mime: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', shows: null, build: (doc) => xlsx(doc) },
     // The byte order mark is how Excel knows a CSV is UTF-8.
-    { ext: 'csv', label: () => t('sheet-csv'), mime: 'text/csv;charset=utf-8', shows: 'text', build: (doc) => utf8('\ufeff' + sheetToCsv(parse(doc))) },
+    { ext: 'csv', label: () => t('common-csv'), mime: 'text/csv;charset=utf-8', shows: 'text', build: (doc) => utf8('\ufeff' + sheetToCsv(parse(doc))) },
     { ext: 'chart.svg', label: () => t('sheet-chart-svg'), mime: 'image/svg+xml', shows: 'own', build: (doc) => chartSvg(doc) },
     {
       ext: 'chart.png',

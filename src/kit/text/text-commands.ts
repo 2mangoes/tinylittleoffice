@@ -24,7 +24,7 @@ const lists = (x: ToText) => !x.marksOnly && x.shape !== 'line';
 const mark = (m: Mark, name: string, label: string, icon: IconNode, keys: string): Command<ToText> =>
   cmd(name, label, { icon, keys, where: ['bar', 'context'], group: 'marks', pressed: (x) => !!x.sel && !!x.marks[m], does: (x) => x.exec(m) });
 
-const CUT = cmd('cut', 'deck-cut', {
+const CUT = cmd('cut', 'common-cut', {
   icon: Scissors,
   keys: 'Mod+X',
   native: true,
@@ -34,7 +34,7 @@ const CUT = cmd('cut', 'deck-cut', {
   disabled: (x) => !ranged(x),
   does: (x) => x.copyOut(true),
 });
-const COPY = cmd('copy', 'outline-copy', {
+const COPY = cmd('copy', 'common-copy', {
   icon: Copy,
   keys: 'Mod+C',
   native: true,
@@ -44,14 +44,14 @@ const COPY = cmd('copy', 'outline-copy', {
   disabled: (x) => !ranged(x),
   does: (x) => x.copyOut(false),
 });
-const PASTE = cmd('paste', 'outline-paste', { icon: ClipboardPaste, keys: 'Mod+V', native: true, where: ['context'], group: 'clip', context: () => coarse(), does: (x) => x.pasteIn() });
+const PASTE = cmd('paste', 'common-paste', { icon: ClipboardPaste, keys: 'Mod+V', native: true, where: ['context'], group: 'clip', context: () => coarse(), does: (x) => x.pasteIn() });
 export const BOLD = mark('b', 'bold', 'bar-bold', UI.bold, 'Mod+B');
 export const ITALIC = mark('i', 'italic', 'bar-italic', UI.italic, 'Mod+I');
 export const UNDERLINE = mark('u', 'underline', 'bar-underline', UI.underline, 'Mod+U');
 export const STRIKE = mark('s', 'strike', 'bar-strikethrough', UI.strike, 'Mod+Shift+X');
 export const HIGHLIGHT = mark('h', 'highlight', 'bar-highlight', UI.highlight, 'Mod+Shift+H');
 export const CODE = mark('c', 'code', 'editor-code', UI.code, 'Mod+E');
-export const LINK = cmd('link', 'share-link', {
+export const LINK = cmd('link', 'common-link', {
   icon: UI.link,
   keys: 'Mod+K',
   where: ['bar', 'context'],
@@ -80,7 +80,7 @@ export const NUMBERS = cmd('numbers', 'bar-numbered-list', {
   does: (x) => x.exec('ol'),
 });
 /** Indent and Bring out: an item that can move moves; anywhere else Tab goes on to move the focus (never trapped). */
-export const OUTDENT = cmd('outdent', 'write-bring-out', {
+export const OUTDENT = cmd('outdent', 'common-bring-out', {
   icon: UI.outdent,
   keys: 'Shift+Tab',
   where: ['bar'],
@@ -88,7 +88,7 @@ export const OUTDENT = cmd('outdent', 'write-bring-out', {
   disabled: (x) => !x.sel || (x.kind !== 'ul' && x.kind !== 'ol'),
   does: (x, e) => (e instanceof KeyboardEvent ? x.shiftItem(-1) : x.exec('outdent')),
 });
-export const INDENT = cmd('indent', 'write-indent', {
+export const INDENT = cmd('indent', 'common-indent', {
   icon: UI.indent,
   keys: 'Tab',
   where: ['bar'],
@@ -114,8 +114,8 @@ export const TEXT_COMMANDS = register([
   NUMBERS,
   INDENT,
   OUTDENT,
-  cmd('up', 'outline-move-up', { keys: 'Alt+ArrowUp', where: ['keys-only'], when: (x) => x.shape !== 'line', does: (x) => x.moveItem(-1) }),
-  cmd('down', 'outline-move-down', { keys: 'Alt+ArrowDown', where: ['keys-only'], when: (x) => x.shape !== 'line', does: (x) => x.moveItem(1) }),
+  cmd('up', 'common-move-up', { keys: 'Alt+ArrowUp', where: ['keys-only'], when: (x) => x.shape !== 'line', does: (x) => x.moveItem(-1) }),
+  cmd('down', 'common-move-down', { keys: 'Alt+ArrowDown', where: ['keys-only'], when: (x) => x.shape !== 'line', does: (x) => x.moveItem(1) }),
   cmd('tick', 'common-check-or-uncheck-task', { keys: 'Mod+Enter', where: ['keys-only'], when: (x) => x.shape !== 'line', does: (x, e) => x.tick(e) }),
   cmd('all', 'common-select-all-words-of-box', { keys: 'Mod+A', where: ['keys-only'], does: (x) => x.selectAllKey() }),
 ]) as Command<ToText>[];

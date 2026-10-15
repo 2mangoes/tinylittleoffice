@@ -73,7 +73,7 @@ export const REDO = command<HasEditor>({
 export const SHARE = command<Page>({
   id: 'kit.share',
   scope: 'kit',
-  label: 'share-share',
+  label: 'common-share',
   icon: UI.share,
   keys: 'Mod+Shift+S',
   where: ['drawer'],
@@ -121,7 +121,7 @@ export const NORMAL_SIZE = command<unknown>({ id: 'kit.normal-size', scope: 'kit
 export const SEARCH = command<Pick<Page, 'search'>>({
   id: 'kit.search',
   scope: 'kit',
-  label: 'drawer-find-app-doc-template-or',
+  label: 'common-find-app-doc-template-or',
   icon: UI.search,
   keys: 'Mod+K',
   where: ['keys-only'],
@@ -136,7 +136,7 @@ export const KIT_COMMANDS = register([
   command<Page>({
     id: 'kit.find',
     scope: 'kit',
-    label: 'find-in-this-document',
+    label: 'common-in-this-document',
     icon: UI.search,
     keys: 'Mod+F',
     where: ['drawer'],
@@ -147,7 +147,7 @@ export const KIT_COMMANDS = register([
   command<Page>({ id: 'kit.keep', scope: 'kit', label: 'keys-keep-this-document-on-device', icon: UI.device, keys: 'Mod+S', where: ['keys-only'], when: (p) => p.editing, does: (p) => p.keep() }),
   SHARE,
   DOWNLOAD,
-  command<Page>({ id: 'kit.print', scope: 'kit', label: 'download-print-or-save-as-pdf', icon: UI.print, keys: 'Mod+P', where: ['keys-only'], when: (p) => p.doc, does: (p) => p.print() }),
+  command<Page>({ id: 'kit.print', scope: 'kit', label: 'common-print-or-save-as-pdf', icon: UI.print, keys: 'Mod+P', where: ['keys-only'], when: (p) => p.doc, does: (p) => p.print() }),
   command<Page>({ id: 'kit.shortcuts', scope: 'kit', label: 'keys-show-these-shortcuts', icon: UI.keys, keys: 'Mod+/', where: ['keys-only'], takesFocus: true, does: (p) => p.shortcuts() }),
   LARGER,
   SMALLER,
@@ -159,7 +159,7 @@ export const KIT_COMMANDS = register([
 export function shortcutGroups(def?: AppDef): { heading: string; keys: Command[] }[] {
   const keyed = (cmds: Command[]) => cmds.filter((c) => c.keys);
   const own = def ? keyed(inScope(def.id)) : [];
-  return [...(def && own.length ? [{ heading: def.name, keys: own }] : []), { heading: t('write-words'), keys: keyed(TEXT_COMMANDS) }, { heading: t('keys-this-page'), keys: keyed(KIT_COMMANDS) }];
+  return [...(def && own.length ? [{ heading: def.name, keys: own }] : []), { heading: t('common-words'), keys: keyed(TEXT_COMMANDS) }, { heading: t('keys-this-page'), keys: keyed(KIT_COMMANDS) }];
 }
 
 /** The dialog's body: a table a group. */

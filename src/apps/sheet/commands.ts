@@ -23,7 +23,7 @@ const here = (s: S) => s.here ?? { r: s.sel[0], c: s.sel[1], at: null };
 /** The rows a row's menu is for, said: "row 3", "rows 2–5". */
 const which = (s: S) => {
   const [r0, r1] = s.rowsFor(s.menuRow);
-  return r1 === r0 ? t('sheet-row-n-lowercase', { n: r0 + 1 }) : t('sheet-rows-b', { a: r0 + 1, b: r1 + 1 });
+  return r1 === r0 ? t('common-row-n-lowercase', { n: r0 + 1 }) : t('common-rows-b', { a: r0 + 1, b: r1 + 1 });
 };
 const rowsIn = (s: S) => s.rowsFor(s.menuRow)[1] - s.rowsFor(s.menuRow)[0] + 1;
 const rowHead = (s?: S) => {
@@ -43,7 +43,7 @@ const SHEET: Command<S>[] = [
     disabled: (s) => !s.numeric,
     does: (s) => s.toggleLetters(),
   }),
-  cmd('insert', 'bar-insert', { icon: Rows3, menu: 'insert', where: ['bar'], takesFocus: true, does: () => undefined }),
+  cmd('insert', 'common-insert', { icon: Rows3, menu: 'insert', where: ['bar'], takesFocus: true, does: () => undefined }),
   cmd('insert.above', 'sheet-row-above', {
     at: 'cell',
     icon: Rows3,
@@ -88,26 +88,26 @@ const SHEET: Command<S>[] = [
     pressed: (s) => s.locked(s.sel[0], s.sel[1]),
     does: (s) => s.toggleLock(),
   }),
-  cmd('copy', 'outline-copy', { at: 'cell', icon: Copy, keys: 'Mod+C', native: true, where: ['context'], group: 'clip', does: (s) => s.copyOut(false) }),
-  cmd('cut', 'deck-cut', { at: 'cell', icon: Scissors, keys: 'Mod+X', native: true, where: ['context'], group: 'clip', does: (s) => s.copyOut(true) }),
-  cmd('paste', 'outline-paste', { at: 'cell', icon: ClipboardPaste, keys: 'Mod+V', native: true, where: ['context'], group: 'clip', does: (s) => s.pasteFromClipboard() }),
+  cmd('copy', 'common-copy', { at: 'cell', icon: Copy, keys: 'Mod+C', native: true, where: ['context'], group: 'clip', does: (s) => s.copyOut(false) }),
+  cmd('cut', 'common-cut', { at: 'cell', icon: Scissors, keys: 'Mod+X', native: true, where: ['context'], group: 'clip', does: (s) => s.copyOut(true) }),
+  cmd('paste', 'common-paste', { at: 'cell', icon: ClipboardPaste, keys: 'Mod+V', native: true, where: ['context'], group: 'clip', does: (s) => s.pasteFromClipboard() }),
   cmd('clear', 'sheet-clear-these-cells', { at: 'cell', icon: Eraser, keys: 'Delete / Backspace', where: ['context'], group: 'clear', when: (s) => s.many, does: (s) => s.clear() }),
-  cmd('row', (s) => t('sheet-row-n', { n: (s?.menuRow ?? 0) + 1 }), { menu: 'row', where: ['in-doc'], does: () => undefined }),
-  cmd('row.above', (s) => t('sheet-insert-n-rows-above', { n: s ? rowsIn(s) : 1 }), {
+  cmd('row', (s) => t('common-row-n', { n: (s?.menuRow ?? 0) + 1 }), { menu: 'row', where: ['in-doc'], does: () => undefined }),
+  cmd('row.above', (s) => t('common-insert-n-rows-above', { n: s ? rowsIn(s) : 1 }), {
     icon: ArrowUp,
     heading: rowHead,
     where: ['menu:row'],
     disabled: (s) => s.view.used.rows > ROWS - rowsIn(s),
     does: (s) => s.insertRowsAt(false, s.menuRow),
   }),
-  cmd('row.below', (s) => t('sheet-insert-n-rows-below', { n: s ? rowsIn(s) : 1 }), {
+  cmd('row.below', (s) => t('common-insert-n-rows-below', { n: s ? rowsIn(s) : 1 }), {
     icon: ArrowDown,
     heading: rowHead,
     where: ['menu:row'],
     disabled: (s) => s.view.used.rows > ROWS - rowsIn(s),
     does: (s) => s.insertRowsAt(true, s.menuRow),
   }),
-  cmd('row.up', 'outline-move-up', {
+  cmd('row.up', 'common-move-up', {
     at: 'cell',
     icon: ArrowUp,
     keys: 'Alt+ArrowUp',
@@ -116,7 +116,7 @@ const SHEET: Command<S>[] = [
     disabled: (s) => !s.here && s.rowsFor(s.menuRow)[0] === 0,
     does: (s, e) => s.moveRowsBy(-1, e instanceof KeyboardEvent ? here(s).r : s.menuRow),
   }),
-  cmd('row.down', 'outline-move-down', {
+  cmd('row.down', 'common-move-down', {
     at: 'cell',
     icon: ArrowDown,
     keys: 'Alt+ArrowDown',
@@ -125,7 +125,7 @@ const SHEET: Command<S>[] = [
     disabled: (s) => !s.here && s.rowsFor(s.menuRow)[1] >= ROWS - 1,
     does: (s, e) => s.moveRowsBy(1, e instanceof KeyboardEvent ? here(s).r : s.menuRow),
   }),
-  cmd('row.delete', (s) => t('sheet-delete-which', { which: s ? which(s) : '' }), {
+  cmd('row.delete', (s) => t('common-delete-which', { which: s ? which(s) : '' }), {
     at: 'cell',
     icon: Trash2,
     keys: 'Mod+Alt+-',
@@ -134,7 +134,7 @@ const SHEET: Command<S>[] = [
     does: (s, e) => s.deleteRowsAt(e instanceof KeyboardEvent ? here(s).r : s.menuRow),
   }),
   cmd('all', 'common-select-all-words-of-box', { at: 'cell', keys: 'Mod+A', where: ['keys-only'], does: (s) => s.selectAllKey() }),
-  cmd('done', 'editor-done', { at: 'cell', keys: 'Mod+Enter', where: ['keys-only'], does: (s) => s.doneHere() }),
+  cmd('done', 'common-done', { at: 'cell', keys: 'Mod+Enter', where: ['keys-only'], does: (s) => s.doneHere() }),
   cmd('next', 'common-indent-or-bring-out-in', {
     at: 'cell',
     keys: 'Tab / Shift+Tab',

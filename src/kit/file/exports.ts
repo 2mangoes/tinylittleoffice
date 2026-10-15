@@ -114,7 +114,7 @@ export function htmlOf(pages: Page[], title: string, link = '', text = ''): stri
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${xml(title)}</title>
 <meta name="generator" content="TinyLittleOffice">
-<meta property="og:title" content="${xml(title)}">${link ? `\n<link rel="alternate" href="${xml(link)}" title="${xml(t('download-open-in-tiny-little-office'))}">` : ''}
+<meta property="og:title" content="${xml(title)}">${link ? `\n<link rel="alternate" href="${xml(link)}" title="${xml(t('common-open-in-tiny-little-office'))}">` : ''}
 <style>body{font:17px/1.6 ${FONT};color:${INK};max-width:46em;margin:2em auto;padding:0 1em}figure{margin:1em 0}figure svg{display:block;max-width:100%;height:auto;border:1px solid #d4d4d8;border-radius:8px}footer{color:${MUTED};font-size:.85em}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}</style>
 </head>
 <body>
@@ -124,7 +124,7 @@ export function htmlOf(pages: Page[], title: string, link = '', text = ''): stri
 <div class="pages" aria-hidden="true">
 ${pages.map((p) => `<figure>${pageSvg(p.alt ? p : { ...p, alt: title })}</figure>`).join('\n')}
 </div>
-</main>${link ? `\n<footer><p><a href="${xml(link)}">${xml(t('download-open-in-tiny-little-office'))}</a></p></footer>` : ''}
+</main>${link ? `\n<footer><p><a href="${xml(link)}">${xml(t('common-open-in-tiny-little-office'))}</a></p></footer>` : ''}
 </body>
 </html>
 `;
@@ -189,7 +189,7 @@ export interface Current {
 const STILL = { still: true } as const;
 
 /** The document's name, or what one of the app's documents is called when untitled: a file's title. */
-const titleOf = (doc: Doc, { def, title }: ExportContext) => title || def.title(doc) || t('shell-untitled-noun', { noun: def.noun });
+const titleOf = (doc: Doc, { def, title }: ExportContext) => title || def.title(doc) || t('common-untitled-noun', { noun: def.noun });
 
 /** The pages, drawn still where the format says so. */
 const pagesOf = (doc: Doc, ctx: ExportContext, still?: boolean) => ctx.def.view(doc, still ? STILL : undefined);
@@ -205,12 +205,12 @@ export const KIT_FORMATS: readonly Export[] = [
   { ext: 'png', label: () => t('download-picture-png'), mime: 'image/png', shows: 'own', still: true, build: async (doc, ctx) => drawn(await picture(pagesOf(doc, ctx, true))) },
   {
     ext: 'html',
-    label: () => t('download-web-page-html'),
+    label: () => t('common-web-page-html'),
     mime: 'text/html',
     shows: 'own',
     build: async (doc, ctx) => htmlOf(pagesOf(doc, ctx), titleOf(doc, ctx), ctx.link, textHtml(textLayer(ctx.def, doc))),
   },
-  { ext: 'md', label: () => t('write-markdown'), mime: 'text/markdown;charset=utf-8', shows: 'text', build: (doc) => write(referenceNotes(parse(doc))) },
+  { ext: 'md', label: () => t('common-markdown'), mime: 'text/markdown;charset=utf-8', shows: 'text', build: (doc) => write(referenceNotes(parse(doc))) },
   { ext: 'tlo', label: () => t('download-text-tlo'), mime: 'text/plain;charset=utf-8', shows: 'text', build: (doc, { def }) => tloText(def.id, doc) },
   {
     ext: 'json',
@@ -387,7 +387,7 @@ export function exportItems(def: AppDef, current: () => Current): MenuItem[] {
     does: () => {},
   });
   return [
-    { label: t('download-print-or-save-as-pdf'), icon: UI.print, keys: 'Mod+P', does: () => void run(() => printDoc(current())) },
+    { label: t('common-print-or-save-as-pdf'), icon: UI.print, keys: 'Mod+P', does: () => void run(() => printDoc(current())) },
     ...formatsOf(def).map(row),
     ...(def.handoffs ?? [])
       .filter((h) => appOf(h.to))

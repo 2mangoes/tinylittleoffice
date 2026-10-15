@@ -29,13 +29,13 @@ const tileSide = (tile: Tile) => tile.n * 16;
 export default defineApp({
   id: 'draw',
   get name() {
-    return t('draw-drawing-tool');
+    return t('common-drawing-tool');
   },
   get noun() {
     return t('draw-drawing');
   },
   get group() {
-    return t('draw-design');
+    return t('common-design');
   },
   icon: PenTool,
   get blurb() {
@@ -54,7 +54,7 @@ export default defineApp({
     return v.grid ? 0 : v.shapes.length;
   },
   exports: [
-    { ext: 'svg', label: () => t('draw-picture-svg'), mime: 'image/svg+xml', shows: 'own', build: (doc) => utf8(drawingToSvg(parse(doc))) },
+    { ext: 'svg', label: () => t('common-picture-svg'), mime: 'image/svg+xml', shows: 'own', build: (doc) => utf8(drawingToSvg(parse(doc))) },
     { ext: 'tile.svg', label: () => t('draw-background-tile-svg'), mime: 'image/svg+xml', shows: 'own', build: (doc) => utf8(tileSvg(tileOfDoc(doc), tileSide(tileOfDoc(doc)))) },
     {
       ext: 'tile.png',

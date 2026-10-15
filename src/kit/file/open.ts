@@ -156,21 +156,21 @@ async function offer(docs: InZip[]) {
     go(hash);
   };
   const byApp = [...new Set(docs.map((x) => x.app))].map((app) => ({ def: appOf(app)!, docs: docs.filter((x) => x.app === app) }));
-  d.heading = t('privacy-n-documents', { n: docs.length });
+  d.heading = t('common-n-documents', { n: docs.length });
   d.body = html`<p class="to-hint">${t('open-nothing-is-saved-on-this')}</p>
     ${byApp.map(
       ({ def, docs }) => html`<h3 class="to-zip-app">${def.name}</h3>
         <ul class="to-zip-docs">
           ${docs.map((x) => {
             const href = opens(x);
-            return html`<li><a href=${href} @click=${(e: Event) => (e.preventDefault(), open(href))}>${icon(def.icon, 16)}<span>${appOf(x.app)!.title(x.text) || x.title || t('outline-untitled')}</span></a></li>`;
+            return html`<li><a href=${href} @click=${(e: Event) => (e.preventDefault(), open(href))}>${icon(def.icon, 16)}<span>${appOf(x.app)!.title(x.text) || x.title || t('common-untitled')}</span></a></li>`;
           })}
         </ul>`,
     )}
     <div class="to-zip-acts">
       <button type="button" class="to-btn primary to-zip-keep" @click=${() => void keepThem()}>${icon(UI.device, 16)}<span>${t('open-keep-them-on-this-device')}</span></button>
       <button type="button" class="to-btn to-zip-first" @click=${() => open(opens(docs[0]))}><span>${t('open-first')}</span></button>
-      <button type="button" class="to-btn to-zip-cancel" @click=${() => d.close()}><span>${t('doc-cancel')}</span></button>
+      <button type="button" class="to-btn to-zip-cancel" @click=${() => d.close()}><span>${t('common-cancel')}</span></button>
     </div>`;
   await d.show();
 }

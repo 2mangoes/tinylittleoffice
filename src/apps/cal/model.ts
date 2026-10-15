@@ -100,12 +100,12 @@ export interface CalView {
 
 /** The colours a span may take: the key a span carries in the view, the word the document writes. */
 export const CAL_COLORS: Record<string, { word: string; name: () => string; hex: string }> = {
-  '': { word: 'indigo', name: () => t('draw-indigo'), hex: ACCENT },
-  r: { word: 'red', name: () => t('draw-red'), hex: '#b3261e' },
-  o: { word: 'orange', name: () => t('draw-orange'), hex: '#d55e00' },
-  g: { word: 'green', name: () => t('draw-green'), hex: '#009e73' },
-  b: { word: 'blue', name: () => t('draw-blue'), hex: '#0072b2' },
-  p: { word: 'purple', name: () => t('draw-purple'), hex: '#a05ca8' },
+  '': { word: 'indigo', name: () => t('common-indigo'), hex: ACCENT },
+  r: { word: 'red', name: () => t('common-red'), hex: '#b3261e' },
+  o: { word: 'orange', name: () => t('common-orange'), hex: '#d55e00' },
+  g: { word: 'green', name: () => t('common-green'), hex: '#009e73' },
+  b: { word: 'blue', name: () => t('common-blue'), hex: '#0072b2' },
+  p: { word: 'purple', name: () => t('common-purple'), hex: '#a05ca8' },
 };
 
 /** Each repeat as the document writes it. */

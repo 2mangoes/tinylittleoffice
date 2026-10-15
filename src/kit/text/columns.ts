@@ -15,16 +15,16 @@ import '../ui/dialog.ts';
 
 /** What a column may hold, in the person's language. */
 export const COLUMN_KINDS: { id: ColType; name: () => string; hint: () => string }[] = [
-  { id: 'text', name: () => t('sheet-text'), hint: () => t('sheet-shown-as-typed') },
+  { id: 'text', name: () => t('common-text'), hint: () => t('sheet-shown-as-typed') },
   { id: 'number', name: () => t('sheet-number'), hint: () => '1,234.5' },
   { id: 'money', name: () => t('sheet-money'), hint: () => '$1,234.50' },
   { id: 'percent', name: () => t('sheet-percent'), hint: () => '12.5%' },
-  { id: 'date', name: () => t('bar-date'), hint: () => '2027-03-01' },
-  { id: 'url', name: () => t('share-link'), hint: () => t('sheet-opens-when-clicked') },
+  { id: 'date', name: () => t('common-date'), hint: () => '2027-03-01' },
+  { id: 'url', name: () => t('common-link'), hint: () => t('sheet-opens-when-clicked') },
   { id: 'check', name: () => t('sheet-checkbox'), hint: () => '☑ ☐' },
   { id: 'option', name: () => t('editor-option'), hint: () => t('editor-one-of-words-column-holds') },
   { id: 'rich', name: () => t('sheet-rich-text'), hint: () => t('editor-bold-italic-and-links') },
-  { id: 'name', name: () => t('sheet-name'), hint: () => t('sheet-names-cell-to-its-right') },
+  { id: 'name', name: () => t('common-name'), hint: () => t('sheet-names-cell-to-its-right') },
 ];
 
 /**
@@ -78,7 +78,7 @@ function askCurrency(now = ''): Promise<string | null> {
         <label class="to-currency-label" for=${`${list}-field`}>${t('looks-currency')}</label>
         <div class="to-ask-row">
           <input id=${`${list}-field`} class="to-ask-url to-currency-field" type="text" list=${list} .value=${value} placeholder="$" aria-invalid=${ok() ? 'false' : 'true'} autocomplete="off" autocapitalize="characters" spellcheck="false" enterkeyhint="done" @input=${(e: Event) => ((value = (e.target as HTMLInputElement).value), draw())} />
-          <button type="submit" class="to-btn primary to-ask-ok" ?disabled=${!ok()}>${t('write-ok')}</button>
+          <button type="submit" class="to-btn primary to-ask-ok" ?disabled=${!ok()}>${t('common-ok')}</button>
         </div>
         <datalist id=${list}>${CURRENCIES.map((c) => html`<option value=${c}></option>`)}</datalist>
         ${ok() ? html`<p class="to-hint">${t('sheet-symbol-like-or-code-like')}</p>` : html`<p class="to-hint" role="alert">${t('sheet-symbol-of-up-to-three')}</p>`}

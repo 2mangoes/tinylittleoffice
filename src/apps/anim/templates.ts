@@ -111,7 +111,7 @@ export const templates = (): Template[] => [
   },
   {
     id: 'birthday',
-    name: t('draw-birthday-card'),
+    name: t('common-birthday-card'),
     blurb: t('anim-present-hops-stars-and-hearts'),
     doc: motion(
       {

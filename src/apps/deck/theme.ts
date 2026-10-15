@@ -158,12 +158,12 @@ export const themeOf = (id = ''): DeckTheme => THEMES[id] ?? THEMES[''];
 
 /** The colours a deck's icons can be, besides the theme's accent: the header says the name ("color: red"). */
 export const ICON_COLORS: Record<string, { name: () => string; hex: string }> = {
-  black: { name: () => t('draw-black'), hex: '#18181b' },
-  red: { name: () => t('draw-red'), hex: '#dc2626' },
-  orange: { name: () => t('draw-orange'), hex: '#ea580c' },
-  green: { name: () => t('draw-green'), hex: '#16a34a' },
-  blue: { name: () => t('draw-blue'), hex: '#2563eb' },
-  purple: { name: () => t('draw-purple'), hex: '#9333ea' },
+  black: { name: () => t('common-black'), hex: '#18181b' },
+  red: { name: () => t('common-red'), hex: '#dc2626' },
+  orange: { name: () => t('common-orange'), hex: '#ea580c' },
+  green: { name: () => t('common-green'), hex: '#16a34a' },
+  blue: { name: () => t('common-blue'), hex: '#2563eb' },
+  purple: { name: () => t('common-purple'), hex: '#9333ea' },
 };
 
 /* ---------- contrast, for the tests ---------- */

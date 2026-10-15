@@ -44,7 +44,7 @@ export const retitle = (doc: Doc, title: string): Doc => write(apply(parse(doc),
 export default defineApp({
   id: 'cal',
   get name() {
-    return t('outline-calendar');
+    return t('common-calendar');
   },
   get noun() {
     return t('cal-calendar');
@@ -67,6 +67,6 @@ export default defineApp({
   text: (doc) => calText(parse(doc)),
   exports: [
     { ext: 'ics', label: () => t('cal-icalendar-ics'), mime: 'text/calendar;charset=utf-8', shows: null, build: (doc) => utf8(calToIcs(parse(doc), Date.now())) },
-    { ext: 'csv', label: () => t('sheet-csv'), mime: 'text/csv;charset=utf-8', shows: 'text', build: (doc) => utf8('﻿' + calToCsv(parse(doc), csvSeparator())) },
+    { ext: 'csv', label: () => t('common-csv'), mime: 'text/csv;charset=utf-8', shows: 'text', build: (doc) => utf8('﻿' + calToCsv(parse(doc), csvSeparator())) },
   ],
 });

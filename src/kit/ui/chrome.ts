@@ -417,12 +417,12 @@ export class ToChrome extends LitElement {
   private renderArrival() {
     if (!this.expires) return nothing;
     const { urgency } = timeLeft(this.expires);
-    return html`<div class="to-arrival ${urgency} ${this.inDisplay ? 'in-display' : ''}" role="region" aria-label=${t('share-short-link')}>
+    return html`<div class="to-arrival ${urgency} ${this.inDisplay ? 'in-display' : ''}" role="region" aria-label=${t('common-short-link')}>
       <p class="to-arrival-words">${expiresSentence(this.expires)}</p>
       <div class="to-arrival-acts">
         <button type="button" class="to-btn to-arrival-copy" @click=${() => this.say('to-copy-new')}>${icon(UI.copy, 16)}<span>${t('share-copy-into-new-document')}</span></button>
       </div>
-      <button type="button" class="to-btn to-tool to-arrival-close" aria-label=${t('drawer-close')} title=${t('drawer-close')} @click=${() => this.say('to-arrival-close')}>${icon(UI.close, 20)}</button>
+      <button type="button" class="to-btn to-tool to-arrival-close" aria-label=${t('common-close')} title=${t('common-close')} @click=${() => this.say('to-arrival-close')}>${icon(UI.close, 20)}</button>
     </div>`;
   }
 
@@ -434,13 +434,13 @@ export class ToChrome extends LitElement {
     return html`<div class="to-other" role="region" aria-label=${t('shell-another-version')}>
       <p>${t('shell-this-device-keeps-another-version', { title: k.title, when: ago(k.at, document.documentElement.lang) })}</p>
       <a class="to-btn to-other-open" href=${k.hash}>${t('shell-open-it')}</a>
-      <button type="button" class="to-btn to-tool" aria-label=${t('drawer-close')} title=${t('drawer-close')} @click=${() => this.say('to-other-close')}>${icon(UI.close, 18)}</button>
+      <button type="button" class="to-btn to-tool" aria-label=${t('common-close')} title=${t('common-close')} @click=${() => this.say('to-other-close')}>${icon(UI.close, 18)}</button>
     </div>`;
   }
 
   /** The header's words for a document: the way home (the app's icon), the title (which has the room), the lock, the room left in the link (a tap: Share). */
   private renderDoc(d: DocHead) {
-    const home = t('looks-home');
+    const home = t('common-home');
     const here = html`<a class="to-here" href="#/" title=${home} aria-label=${home}>${icon(d.def.icon, 24)}</a>`;
     if (d.locked) return html`${here}<h1 class="to-title to-title-locked">${d.title}</h1>${d.trust}`;
     const prefix = `${location.origin}${location.pathname}${routeHash(d.def.id)}/`;
@@ -458,7 +458,7 @@ export class ToChrome extends LitElement {
           : t('shell-n-of-max-link-characters', { n: left, max: available });
     const share = () => this.say('to-share-open');
     return html`${here}<h1 class="sr-only">${d.title}</h1>
-      <input class="to-title" type="text" placeholder=${t('shell-untitled-noun', { noun: d.def.noun })} aria-label=${t('shell-title')} autocomplete="off" enterkeyhint="done" .value=${d.value} @change=${(e: Event) => this.say('to-retitle', (e.target as HTMLInputElement).value.trim())} />
+      <input class="to-title" type="text" placeholder=${t('common-untitled-noun', { noun: d.def.noun })} aria-label=${t('common-title')} autocomplete="off" enterkeyhint="done" .value=${d.value} @change=${(e: Event) => this.say('to-retitle', (e.target as HTMLInputElement).value.trim())} />
       ${d.trust}
       <button type="button" class="to-btn to-tool to-meter ${left < 0 ? 'over' : pct > 0.85 ? 'warn' : ''}" aria-label=${room} title=${room} @click=${share}>
         <svg class="to-icon" width="24" height="24" style="--i:1.5" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-opacity="0.25" stroke-width="3"/><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray=${`${c * pct} ${c}`} transform="rotate(-90 12 12)"/></svg>
@@ -469,16 +469,16 @@ export class ToChrome extends LitElement {
   private renderPlain(p: Plain) {
     const head =
       p.kind === 'embed'
-        ? html`<header class="to-embed-head"><span class="to-embed-title">${p.title}</span><a class="to-btn to-embed-open" href=${p.href} target="_blank" rel="noopener">${icon(UI.open, 16)}<span>${t('download-open-in-tiny-little-office')}</span></a></header>`
-        : html`<header class="to-display-head"><h1 class="to-display-title">${p.title}</h1>${p.trust}<button type="button" class="to-btn to-display-mode" @click=${() => this.say('to-display-text')}>${icon(p.reading ? UI.image : UI.text, 16)}<span>${p.reading ? t('deck-pages') : t('sheet-text')}</span></button>${p.present ? html`<a class="to-btn primary to-display-present" href=${p.present}>${icon(UI.play, 16)}<span>${t('deck-present')}</span></a>` : nothing}<a class="to-btn ${p.present ? '' : 'primary'} to-display-edit" href=${p.href}>${icon(UI.pen, 16)}<span>${t('draw-edit')}</span></a></header>`;
+        ? html`<header class="to-embed-head"><span class="to-embed-title">${p.title}</span><a class="to-btn to-embed-open" href=${p.href} target="_blank" rel="noopener">${icon(UI.open, 16)}<span>${t('common-open-in-tiny-little-office')}</span></a></header>`
+        : html`<header class="to-display-head"><h1 class="to-display-title">${p.title}</h1>${p.trust}<button type="button" class="to-btn to-display-mode" @click=${() => this.say('to-display-text')}>${icon(p.reading ? UI.image : UI.text, 16)}<span>${p.reading ? t('common-pages') : t('common-text')}</span></button>${p.present ? html`<a class="to-btn primary to-display-present" href=${p.present}>${icon(UI.play, 16)}<span>${t('common-present')}</span></a>` : nothing}<a class="to-btn ${p.present ? '' : 'primary'} to-display-edit" href=${p.href}>${icon(UI.pen, 16)}<span>${t('common-edit')}</span></a></header>`;
     const cls = p.kind === 'embed' ? `to-display to-embed ${p.locked ? 'to-embed-locked' : ''}` : 'to-display';
     // The pages scroll and hold nothing to tab to: the column itself is in the tab order, to scroll by the keys.
     // The pages are a picture to two fingers (kit/core/shell.ts pinchZoom): spatial, so the size of everything is not what a pinch here sets.
     // An <aside>: a landmark of its own, so a screen reader's landmark list and axe's region rule both place it.
     const copies = p.copies
       ? html`<aside class="to-copies">
-          <p>${t('share-whoever-opens-this-link-gets')}</p>
-          <button type="button" class="to-btn to-tool to-copies-close" aria-label=${t('drawer-close')} title=${t('drawer-close')} @click=${() => this.say('to-copies-close')}>${icon(UI.close, 18)}</button>
+          <p>${t('common-whoever-opens-this-link-gets')}</p>
+          <button type="button" class="to-btn to-tool to-copies-close" aria-label=${t('common-close')} title=${t('common-close')} @click=${() => this.say('to-copies-close')}>${icon(UI.close, 18)}</button>
         </aside>`
       : nothing;
     // Shown as words (the Display Link's Text), the column reflows: a pinch is the size of everything, as in a text.
@@ -492,9 +492,9 @@ export class ToChrome extends LitElement {
     // Share, at the menu button's inline start on every document, floating with it while the header has stepped aside (Paul, 2026-10-13: "Put the share menu to the left of the hamburger on every document — sharing is very important"); a locked document has no Share until it is opened.
     const share =
       this.doc && !this.doc.locked
-        ? html`<button type="button" class="to-btn to-tool to-share-btn" aria-label=${t('share-share')} title=${t('share-share')} aria-keyshortcuts=${keysAria(SHARE.keys)} aria-haspopup="dialog" @click=${() => this.say('to-share-open')}>${icon(UI.share, 24)}</button>`
+        ? html`<button type="button" class="to-btn to-tool to-share-btn" aria-label=${t('common-share')} title=${t('common-share')} aria-keyshortcuts=${keysAria(SHARE.keys)} aria-haspopup="dialog" @click=${() => this.say('to-share-open')}>${icon(UI.share, 24)}</button>`
         : nothing;
-    const head = html`<header class="to-header ${this.titling ? 'titling' : ''}" aria-label=${t('drawer-tiny-little-office')} @focusin=${this.openTitle} @focusout=${() => (this.titling = false)} @keydown=${this.titleKey}>${this.doc ? this.renderDoc(this.doc) : html`<a class="to-brand" href="#/">${t('drawer-tiny-little-office')}</a>`}</header>`;
+    const head = html`<header class="to-header ${this.titling ? 'titling' : ''}" aria-label=${t('common-tiny-little-office')} @focusin=${this.openTitle} @focusout=${() => (this.titling = false)} @keydown=${this.titleKey}>${this.doc ? this.renderDoc(this.doc) : html`<a class="to-brand" href="#/">${t('common-tiny-little-office')}</a>`}</header>`;
     // The column scrolls (the room below the last line sees to that even in a short document), so it is in the tab order and the keys scroll it, as the Display Link's column is; a scrollable box no key can reach fails axe's scrollable-region-focusable.
     return html`${share}${burger}${head}${this.renderArrival()}${this.renderOther()}<div class="to-column ${this.barred ? 'barred' : ''}">
       <main class=${this.mainClass} tabindex="0" aria-label=${this.label || nothing}>${this.main}</main>

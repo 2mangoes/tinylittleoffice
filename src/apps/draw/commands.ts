@@ -66,7 +66,7 @@ export const TOOLS: { id: Tool; name: string; hint?: string; icon: Icon; key: st
   { id: 'd', name: 'draw-diamond', icon: Diamond, key: 'D' },
   { id: 'l', name: 'draw-line', icon: Minus, key: 'L' },
   { id: 'a', name: 'draw-arrow', icon: MoveRight, key: 'A' },
-  { id: 't', name: 'sheet-text', icon: Type, key: 'T' },
+  { id: 't', name: 'common-text', icon: Type, key: 'T' },
   { id: 'k', name: 'draw-join-two-shapes', icon: Spline, key: 'K' },
   { id: 'v', name: 'draw-pen', hint: 'draw-any-shape-tap-for-each', icon: PenTool, key: 'P' },
   { id: 'f', name: 'draw-freehand', hint: 'draw-drag-to-draw-line-or', icon: Brush, key: 'F' },
@@ -80,16 +80,16 @@ const SHAPES: { id: Kind; name: string }[] = [
   { id: 'h', name: 'draw-hexagon' },
   { id: 'p', name: 'draw-parallelogram' },
   { id: 'c', name: 'draw-cylinder' },
-  { id: 'n', name: 'draw-note' },
-  { id: 't', name: 'sheet-text' },
+  { id: 'n', name: 'common-note' },
+  { id: 't', name: 'common-text' },
 ];
 const INKS: { c: Color | ''; name: string; hex: string }[] = [
-  { c: '', name: 'draw-black', hex: '#18181b' },
-  { c: 'r', name: 'draw-red', hex: COLORS.r },
-  { c: 'o', name: 'draw-orange', hex: COLORS.o },
-  { c: 'g', name: 'draw-green', hex: COLORS.g },
-  { c: 'b', name: 'draw-blue', hex: COLORS.b },
-  { c: 'p', name: 'draw-purple', hex: COLORS.p },
+  { c: '', name: 'common-black', hex: '#18181b' },
+  { c: 'r', name: 'common-red', hex: COLORS.r },
+  { c: 'o', name: 'common-orange', hex: COLORS.o },
+  { c: 'g', name: 'common-green', hex: COLORS.g },
+  { c: 'b', name: 'common-blue', hex: COLORS.b },
+  { c: 'p', name: 'common-purple', hex: COLORS.p },
 ];
 const SIZES: { z: TextSize; name: string; letter: string }[] = [
   { z: 1, name: 'draw-small-text', letter: 'draw-s' },
@@ -105,12 +105,12 @@ export const ALIGNS: { al: Align | ''; name: string; icon: Icon; key: string }[]
 ];
 /** The pixel inks, by letter, named. */
 export const PIXEL_INKS: { k: string; name: string }[] = [
-  { k: 'a', name: 'draw-black' },
-  { k: 'b', name: 'draw-indigo' },
-  { k: 'c', name: 'draw-red' },
-  { k: 'd', name: 'draw-orange' },
+  { k: 'a', name: 'common-black' },
+  { k: 'b', name: 'common-indigo' },
+  { k: 'c', name: 'common-red' },
+  { k: 'd', name: 'common-orange' },
   { k: 'e', name: 'draw-yellow' },
-  { k: 'f', name: 'draw-green' },
+  { k: 'f', name: 'common-green' },
   { k: 'g', name: 'draw-sky' },
   { k: 'h', name: 'draw-pink' },
 ];
@@ -192,7 +192,7 @@ export const ALIGN_KEYS: Command<Dr>[] = ALIGNS.map((x) =>
 const ACT: Command<Dr>[] = [
   cmd('left', 'draw-rotate-left', { at: 'canvas', icon: RotateCcw, keys: '[', where: ['context'], group: 'act', when: (d) => shapeAct(d) && d.turnable, does: (d) => d.turnBy(-TURN_STEP) }),
   cmd('right', 'draw-rotate-right', { at: 'canvas', icon: RotateCw, keys: ']', where: ['context'], group: 'act', when: (d) => shapeAct(d) && d.turnable, does: (d) => d.turnBy(TURN_STEP) }),
-  cmd('words', (d) => (d && held(d)?.k === 'i' ? t('deck-change-icon') : t('draw-edit-words')), {
+  cmd('words', (d) => (d && held(d)?.k === 'i' ? t('common-change-icon') : t('common-edit-words')), {
     at: 'canvas',
     icon: Tag,
     keys: 'Enter',
@@ -202,7 +202,7 @@ const ACT: Command<Dr>[] = [
     does: (d) => d.openWords(),
   }),
   cmd('join', 'draw-join-two-shapes', { icon: Spline, where: ['context'], group: 'act', when: (d) => shapeAct(d) && !!d.pair, does: (d) => d.join(d.pair![0], d.pair![1]) }),
-  cmd('duplicate', 'draw-duplicate', {
+  cmd('duplicate', 'common-duplicate', {
     at: 'canvas',
     icon: Copy,
     keys: 'Mod+D',
@@ -214,7 +214,7 @@ const ACT: Command<Dr>[] = [
   }),
   cmd('front', 'draw-bring-to-front', { icon: ArrowUpToLine, where: ['context', 'menu:arrange'], group: 'act', when: canvas, disabled: (d) => !d.selected, does: (d) => d.reorder(true) }),
   cmd('back', 'draw-send-to-back', { icon: ArrowDownToLine, where: ['context', 'menu:arrange'], group: 'act', when: canvas, disabled: (d) => !d.selected, does: (d) => d.reorder(false) }),
-  cmd('copy', 'outline-copy', {
+  cmd('copy', 'common-copy', {
     at: 'canvas',
     icon: UI.copy,
     keys: 'Mod+C',
@@ -225,7 +225,7 @@ const ACT: Command<Dr>[] = [
     disabled: (d) => isLink(held(d).k) && d.chosen.length < 2,
     does: (d) => d.copyOut(false),
   }),
-  cmd('cut', 'deck-cut', {
+  cmd('cut', 'common-cut', {
     at: 'canvas',
     icon: Scissors,
     keys: 'Mod+X',
@@ -236,7 +236,7 @@ const ACT: Command<Dr>[] = [
     disabled: (d) => isLink(held(d).k) && d.chosen.length < 2,
     does: (d) => d.copyOut(true),
   }),
-  cmd('paste', 'outline-paste', {
+  cmd('paste', 'common-paste', {
     at: 'canvas',
     icon: ClipboardPaste,
     keys: 'Mod+V',
@@ -247,7 +247,7 @@ const ACT: Command<Dr>[] = [
     when: (d) => canvas(d) && !typing(d),
     does: (d) => d.pasteIn(),
   }),
-  cmd('delete', 'draw-delete', {
+  cmd('delete', 'common-delete', {
     at: 'canvas',
     icon: Trash2,
     keys: 'Delete / Backspace',
@@ -261,9 +261,9 @@ const ACT: Command<Dr>[] = [
 
 const INSERTS: Command<Dr>[] = [
   ...SHAPES.map((s) => cmd(`insert.${s.id}`, s.name, { heading: 'draw-shapes', where: ['menu:insert'], does: (d) => d.insert(s.id) })),
-  cmd('insert.l', 'draw-line', { icon: Minus, heading: 'chart-lines', where: ['menu:insert'], does: (d) => d.insert('l') }),
-  cmd('insert.a', 'draw-arrow', { icon: MoveRight, heading: 'chart-lines', where: ['menu:insert'], does: (d) => d.insert('a') }),
-  cmd('insert.k', 'draw-join-two-shapes', { icon: Spline, hint: 'draw-press-on-one-shape-and', heading: 'chart-lines', where: ['menu:insert'], does: (d) => (d.tool = 'k') }),
+  cmd('insert.l', 'draw-line', { icon: Minus, heading: 'common-lines', where: ['menu:insert'], does: (d) => d.insert('l') }),
+  cmd('insert.a', 'draw-arrow', { icon: MoveRight, heading: 'common-lines', where: ['menu:insert'], does: (d) => d.insert('a') }),
+  cmd('insert.k', 'draw-join-two-shapes', { icon: Spline, hint: 'draw-press-on-one-shape-and', heading: 'common-lines', where: ['menu:insert'], does: (d) => (d.tool = 'k') }),
   cmd('insert.icon', 'draw-icon', { icon: Smile, heading: 'draw-more', where: ['menu:insert'], does: (d) => d.pickIcon() }),
   cmd('insert.pen', 'draw-pen', { icon: PenTool, hint: 'draw-any-shape-tap-for-each', heading: 'draw-more', where: ['menu:insert'], does: (d) => (d.tool = 'v') }),
   cmd('insert.free', 'draw-freehand', { icon: Brush, hint: 'draw-drag-to-draw-line-or', heading: 'draw-more', where: ['menu:insert'], does: (d) => (d.tool = 'f') }),
@@ -271,9 +271,9 @@ const INSERTS: Command<Dr>[] = [
 
 /** The canvas's own keys: a pen's, the Join tool's, a step out, the letters, and what acts on the shapes in hand. */
 const KEYS: Command<Dr>[] = [
-  cmd('pen.close', 'editor-done', { at: 'canvas', keys: 'Enter', where: ['keys-only'], when: (d) => d.pen.length > 0, does: (d) => d.closePen() }),
+  cmd('pen.close', 'common-done', { at: 'canvas', keys: 'Enter', where: ['keys-only'], when: (d) => d.pen.length > 0, does: (d) => d.closePen() }),
   cmd('pen.cancel', 'common-step-out-close-collapse-let', { at: 'canvas', keys: 'Escape', where: ['keys-only'], when: (d) => d.pen.length > 0, does: (d) => void (d.pen = []) }),
-  cmd('pen.back', 'draw-delete', { at: 'canvas', keys: 'Backspace', where: ['keys-only'], when: (d) => d.pen.length > 0, does: (d) => void (d.pen = d.pen.slice(0, -1)) }),
+  cmd('pen.back', 'common-delete', { at: 'canvas', keys: 'Backspace', where: ['keys-only'], when: (d) => d.pen.length > 0, does: (d) => void (d.pen = d.pen.slice(0, -1)) }),
   cmd('out', 'common-step-out-close-collapse-let', { at: 'canvas', keys: 'Escape', where: ['keys-only'], does: (d) => d.stepOut() }),
   cmd('joinkeys', 'draw-join-two-shapes', {
     at: 'canvas',
@@ -343,7 +343,7 @@ const TOOL_CMDS: Command<Dr>[] = [
 
 const DRAW: Command<Dr>[] = [
   ...TOOL_CMDS,
-  cmd('insert', 'bar-insert', { icon: UI.insert, menu: 'insert', where: ['bar'], takesFocus: true, when: canvas, does: () => undefined }),
+  cmd('insert', 'common-insert', { icon: UI.insert, menu: 'insert', where: ['bar'], takesFocus: true, when: canvas, does: () => undefined }),
   ...INSERTS,
   cmd('mode', (d) => (d?.view.grid ? t('draw-pixels-n-n', { n: d.view.grid }) : t('draw-shapes')), {
     icon: Shapes,
@@ -371,8 +371,8 @@ const DRAW: Command<Dr>[] = [
     when: canvas,
     does: (d) => d.openAlt(),
   }),
-  cmd('zoomout', 'draw-zoom-out', { icon: ZoomOut, where: ['bar'], document: true, takesFocus: true, when: canvas, disabled: (d) => d.zoom <= 0.5, does: (d) => d.zoomBy(-0.25) }),
-  cmd('zoomin', 'draw-zoom-in', { icon: ZoomIn, where: ['bar'], document: true, takesFocus: true, when: canvas, disabled: (d) => d.zoom >= 4, does: (d) => d.zoomBy(0.25) }),
+  cmd('zoomout', 'common-zoom-out', { icon: ZoomOut, where: ['bar'], document: true, takesFocus: true, when: canvas, disabled: (d) => d.zoom <= 0.5, does: (d) => d.zoomBy(-0.25) }),
+  cmd('zoomin', 'common-zoom-in', { icon: ZoomIn, where: ['bar'], document: true, takesFocus: true, when: canvas, disabled: (d) => d.zoom >= 4, does: (d) => d.zoomBy(0.25) }),
   ...INK,
   ...STYLES,
   ...SIZE,

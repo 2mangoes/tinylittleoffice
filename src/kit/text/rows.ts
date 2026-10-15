@@ -333,7 +333,7 @@ export class Rows<Id = number> implements ReactiveController {
   }
   /** The bar, for the host's template. */
   renderContext(): TemplateResult {
-    return html`<to-context class="to-rows-context ${this.o.contextClass ?? ''}" .label=${this.o.label ?? t('outline-chosen-items')} .items=${this.contextItems()}></to-context>`;
+    return html`<to-context class="to-rows-context ${this.o.contextClass ?? ''}" .label=${this.o.label ?? t('common-chosen-items')} .items=${this.contextItems()}></to-context>`;
   }
 
   /* ---------- keys ---------- */

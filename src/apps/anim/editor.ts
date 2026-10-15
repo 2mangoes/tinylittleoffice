@@ -781,7 +781,7 @@ export class ToAnimEditor extends DocElement<AnimView> {
         <input type="range" min=${min} max=${max} step=${step} aria-description=${tip} .value=${String(at[field] ?? 0)} @input=${(e: Event) => this.key({ [field]: parseFloat((e.target as HTMLInputElement).value) }, `${field}:${this.sels.join(',')}:${this.frame}`)} /></label>`;
     return html`<div class="anim-props">
       ${slider(t('anim-depth'), t('anim-which-shape-is-in-front'), 'z', -MAX_Z, MAX_Z, 1, `${Math.round(at.z)}`)}
-      ${slider(t('anim-size'), t('anim-how-large-shape-is-drawn'), 's', 0.2, 4, 0.1, `${at.s.toFixed(1)}×`)}
+      ${slider(t('common-size'), t('anim-how-large-shape-is-drawn'), 's', 0.2, 4, 0.1, `${at.s.toFixed(1)}×`)}
       ${slider(t('anim-spin'), t('anim-turns-shape-around-in-plane'), 'r', -360, 360, 1, `${Math.round(at.r)}°`)}
       ${slider(t('anim-turn'), t('anim-turns-shape-about-its-upright'), 'u', -360, 360, 1, `${Math.round(at.u ?? 0)}°`)}
       <to-menu class="anim-fx" keep .label=${labelOf(own('fx'), this)} .icon=${Sparkles} caret .items=${drawnIn(COMMANDS, 'menu:fx', this)}></to-menu>

@@ -3,10 +3,10 @@
 ## the shell: header
 
 shell-menu = メニュー
-shell-title = タイトル
+common-title = タイトル
 # A new document of the app, and one not yet named; { $noun } is the app's noun: "New presentation".
-shell-new-noun = 新しい{ $noun }
-shell-untitled-noun = 無題の{ $noun }
+common-new-noun = 新しい{ $noun }
+common-untitled-noun = 無題の{ $noun }
 shell-download = ダウンロード
 shell-loading = 読み込み中…
 shell-this-link-holds-something-that = このリンクには読み取れないものが入っています。コピーのときに途中で切れたのかもしれません。
@@ -21,15 +21,25 @@ shell-copy-link-and-go = リンクをコピーして移動
 shell-turn-on-save-in-browser = 「ブラウザに保存」をオンにしてここに保管
 shell-go-without = 保存せずに移動
 shell-save-in-browser-is-on = 「ブラウザに保存」がオンになりました。開いたドキュメントをこのブラウザに保管します。オフにするにはメニューを開いてください。
+shell-another-version = 別のバージョン
+shell-kept-on-this-device = この端末に保管済み
+shell-keyboard-shortcuts = キーボードショートカット
+shell-nothing-to-keep-yet = まだ保管するものがありません
+shell-open-it = 開く
+shell-save-in-browser-is-off = 「ブラウザに保存」はオフです。このブラウザはドキュメントを保管しません。ここに保管するにはメニューでオンにしてください。
+shell-skip-to-apps = アプリへ移動
+shell-skip-to-document = ドキュメントへ移動
+shell-this-device-keeps-another-version = この端末には「{ $title }」の別のバージョン（{ $when }）が保管されています。
+shell-this-link-was-made-by = このリンクは、より新しいちいさなちいさなオフィスで作られました。ページを再読み込みしてください。
 
 ## the home page
 
 home-blank = 空白
-home-templates = テンプレート
+common-templates = テンプレート
 # The button under an app's tile, naming the template list: "Start Text from"
 # The list of an app's documents kept on this device, under its tile: "Write documents"
 home-app-documents = { $app }のドキュメント
-home-forget = 消去
+common-forget = 消去
 # The button that forgets one kept document: "Forget Launch notes"
 home-forget-title = { $title }を消去
 # Under an app's documents, the rest folded away: "3 more"
@@ -37,26 +47,36 @@ home-n-more = ほか{ $n }件
 home-aboard-project-made-with-respect = { $aboard } のプロジェクト。ニューヨークで敬意をこめて制作。
 home-beta-version = ベータ版
 home-email = メール
+home-templates-for-app = { $app }のテンプレート
+home-app-templates = { $app }のテンプレート
+home-templates-for-app-name = { $app }のテンプレート：{ $name }
+home-templates-are-not-saved-in = テンプレートはまだこのブラウザに保存されていません。インターネットに接続すると表示されます。
+home-documents-found = 見つかったドキュメント
+home-no-document-here-has-those = その言葉を含むドキュメントはありません
+home-search-your-documents = ドキュメントを検索
+home-n-documents-found = { $n ->
+       *[other] { $n }件のドキュメントが見つかりました
+    }
 
 ## the drawer (hamburger menu)
 
 drawer-apps = アプリ
-drawer-close = 閉じる
+common-close = 閉じる
 drawer-default-name = デフォルト：{ $name }
 drawer-save-in-browser = ブラウザに保存
 drawer-what-is-this = これは何？
 drawer-turn-on-to-save-files = オンにすると、ファイルをブラウザに保存します。
 drawer-turn-off-to-remove-all = オフにすると、すべてのファイルと設定を削除します。
-drawer-nothing-saved-in-this-browser = このブラウザには何も保存しません
-drawer-saving-in-this-browser = このブラウザに保存中
+common-nothing-saved-in-this-browser = このブラウザには何も保存しません
+common-saving-in-this-browser = このブラウザに保存中
 drawer-remove-all-files-and-settings = このブラウザからすべてのファイルと設定を削除しますか？
 drawer-language = 言語
-drawer-theme = テーマ
+common-theme = テーマ
 drawer-match-device = 端末に合わせる
 drawer-light = ライト
 drawer-dark = ダーク
 drawer-about = 概要
-drawer-tiny-little-office = ちいさなちいさなオフィス
+common-tiny-little-office = ちいさなちいさなオフィス
 drawer-about-tiny-little-office = ちいさなちいさなオフィスについて
 drawer-tiny-little-office-is-experiment = ちいさなちいさなオフィスは、ニューヨークのデジタル・AI戦略とソフトウェア開発の会社 { $aboard } による実験です。
 drawer-to-reach-out-with-questions = ご質問は{ $email }。
@@ -66,6 +86,13 @@ drawer-github-repository = GitHub リポジトリ
 drawer-all-of-these-notes-these = これらのメモも、絵も、マーカーで書いた文も、時とともに薄れていく。残るのは、はかないものだけだ。
 drawer-eugene-ionesco-book = ウジェーヌ・イヨネスコ『{ $book }』
 drawer-discoveries = 発見
+drawer-documents = ドキュメント
+drawer-find-app-template-or-command = アプリ、テンプレート、コマンドを検索
+drawer-commands = コマンド
+drawer-nothing-by-that-name = その名前のものはありません
+drawer-add-to-home-screen = ホーム画面に追加
+drawer-size-of-everything = 全体の大きさ
+drawer-to-add-tiny-little-office = ちいさなちいさなオフィスをホーム画面に追加するには：共有、そして「ホーム画面に追加」。
 
 ## links that leave the site (kit/ui/link-guard.ts)
 
@@ -107,7 +134,7 @@ share-expires-in-n-minutes-date = あと{ $n ->
     }で期限切れ（{ $date }）
 share-opens-as-pages-to-read = ページとして読む形で開く
 share-opens-in-editor = エディタで開く
-share-whoever-opens-this-link-gets = このリンクを開いた人は、それぞれ自分のコピーを受け取ります。その人の変更は、あなたのリンクではなく、その人のリンクに残ります。変更を見るには、その人にリンクを送り返してもらってください。
+common-whoever-opens-this-link-gets = このリンクを開いた人は、それぞれ自分のコピーを受け取ります。その人の変更は、あなたのリンクではなく、その人のリンクに残ります。変更を見るには、その人にリンクを送り返してもらってください。
 share-short-link-that-expires = 期限付きの短縮リンク
 share-this-link-expires-in-n = このリンクはあと{ $n ->
        *[other] { $n }日
@@ -136,9 +163,9 @@ share-display-link = 表示用リンク
 share-opens = 開く先
 share-link-copied = リンクをコピーしました
 share-could-not-copy = コピーできませんでした
-share-share = 共有…
-share-qr-code = QRコード
-share-qr-code-of-this-document = ドキュメントのQRコード
+common-share = 共有…
+common-qr-code = QRコード
+common-qr-code-of-this-document = ドキュメントのQRコード
 share-this-document-is-n-bytes = このドキュメントは{ $n }バイトで、QRコードに入る最大は{ $max }バイトです。{ $over }バイト短くすれば収まります。
 share-this-document-is-n-characters = このドキュメントは{ $n }文字で、短縮リンクに入る最大は{ $max }文字です。{ $over }文字短くすれば収まります。
 share-expires-after = 期限
@@ -154,8 +181,36 @@ share-could-not-shorten-link = リンクを短縮できませんでした。
 share-this-document-is-too-long = このドキュメントは短縮リンクにするには長すぎます。
 share-up-to-hundred-links-day = 1つのアドレスから1日100件まで作れます。
 share-remove = 外す
-share-link = リンク
-share-short-link = 短縮リンク
+common-link = リンク
+common-short-link = 短縮リンク
+share-new-noun-date-n = 新しい{ $noun } { $date } #{ $n }
+# Files, compare, posting and embedding: the agent and sharing surface.
+share-mastodon-server-like-mastodon-social = mastodon.socialのようなMastodonサーバー
+share-change = 変更
+share-copy-embed-code = 埋め込みコードをコピー
+share-copy-show-link = 表示用リンクをコピー
+share-embed = 埋め込み
+share-embed-code-copied = 埋め込みコードをコピーしました
+share-opens-deck-already-presenting = 発表を始めた状態でデッキを開きます。
+share-post = 投稿
+share-post-link = リンクを投稿
+share-show-preview-of-first-page = 1ページ目のプレビューを表示
+share-picture-of-first-page-and = 1ページ目の画像とタイトルは、SNSが取得できるよう1か月間サーバー上で読める状態で保管されます。ドキュメントそのものは保管されません。
+share-shared-without-preview-reason = プレビューなしで共有しました（{ $reason }）
+share-making-preview = プレビューを作成中…
+share-page-could-not-be-drawn = ページを描画できませんでした
+share-picture-is-over-400-kb = 画像が400 KBを超えています
+share-server-could-not-be-reached = サーバーに接続できませんでした
+share-hundred-previews-day-from-one = 1つのアドレスからのプレビューは1日100件までです
+share-server-refused-picture = サーバーが画像を受け付けませんでした
+share-pages-in-frame-on-another = ほかのサイトのフレームにページを表示し、ここで開くリンクを付けます。
+share-your-mastodon-server = あなたのMastodonサーバー
+share-left = 左
+share-uses = 使用先
+share-where = 場所
+share-where-link-fits = リンクが収まる場所
+share-any-length = 長さ自由
+share-n-over = { $n }超過
 
 ## privacy (kit/share/privacy.ts, kit/ui/privacy-dialog.ts): the password, what the device holds
 
@@ -168,12 +223,12 @@ privacy-forget-everything = すべて消去
 privacy-preview-sent-with-link-to = リンクと一緒にSNSへ送るプレビューは、1ページ目の画像、タイトル、冒頭の言葉で、1か月間サーバー上で読める状態になります。ドキュメントそのものが送られることはありません。
 privacy-forget-everything-this-site-keeps = このサイトがここに保管しているものをすべて消去し、今後は何も保管しないようにしますか？ドキュメントそのものはリンクの中にあります。
 privacy-locked = ロック中
-privacy-locked-document = ロックされたドキュメント
+common-locked-document = ロックされたドキュメント
 privacy-new-password = 新しいパスワード
 privacy-no-password = パスワードなし
 privacy-none = なし
 privacy-opening = 開いています…
-privacy-password = パスワード
+common-password = パスワード
 privacy-password-removed = パスワードを外しました
 privacy-password-set-link-holds-only = パスワードを設定しました。リンクには暗号文だけが入ります
 privacy-password-ellipsis = パスワード…
@@ -190,17 +245,17 @@ privacy-short-links-made-here-until = ここで作った短縮リンク（期限
 privacy-their-names-and-links-for = 名前とリンクです。ホームページに使います。
 privacy-theme-lifetime-of-short-links = テーマ、短縮リンクの有効期間です。
 privacy-this-document-has-password-link = このドキュメントにはパスワードがあります。リンクも、そこから作った短縮リンクも、中身は暗号文だけです。
-privacy-this-document-is-locked = このドキュメントはロックされています
+common-this-document-is-locked = このドキュメントはロックされています
 privacy-this-document-is-locked-with = このドキュメントはパスワードでロックされています。
 privacy-unlock = ロック解除
-privacy-unlock-ellipsis = ロック解除…
+common-unlock-ellipsis = ロック解除…
 privacy-what-this-device-holds = この端末にあるもの
 privacy-your-documents = あなたのドキュメント
 privacy-your-browsers-history = ブラウザの履歴
 privacy-every-document-opened-here-in = ここで開いたすべてのドキュメントの全文。パスワードがあるものを除きます。
 privacy-not-ours-to-clear = 当サイトでは消せません
 privacy-by-name = { $name }による
-privacy-n-documents = { $n ->
+common-n-documents = { $n ->
        *[other] { $n }件
     }のドキュメント
 privacy-n-links = { $n ->
@@ -209,11 +264,12 @@ privacy-n-links = { $n ->
 privacy-n-set = { $n }件を設定
 privacy-copy-this-and-send-it = これをコピーして、リンクとは別の方法で送ってください。もう一度表示することはできません。
 privacy-make-another = 別のものを作る
+privacy-password-copied = パスワードをコピーしました
 
 ## a document locked with a password, placed inside another (kit/share/locked.ts, kit/ui/locked-doc.ts)
 
 # The card drawn where it sits; { $app } is the app's name: "A Spreadsheet document, locked with a password".
-locked-with-password = パスワードでロック
+common-with-password = パスワードでロック
 locked-app-document-locked-with-password = パスワードでロックされた{ $app }のドキュメント
 locked-with-password-unlock = パスワードでロック中。ロック解除…
 locked-document-locked-with-password = パスワードでロックされたドキュメント
@@ -239,24 +295,37 @@ common-chosen-tasks = 選択中のタスク
 common-open = 開く
 common-task = タスク
 common-tasks = タスク
+common-find-app-doc-template-or = アプリ、ドキュメント、テンプレート、コマンドを検索
+common-in-this-document = このドキュメント内を検索
+common-indent-or-bring-out-in = リストでは字下げ・字上げ、表では次のセル
+common-move-selected-items-up-or = 選択した項目を上下に移動
+common-nudge-shapes-in-hand = 選択中の図形を少し動かす
+common-select-all-words-of-box = すべて選択：まず枠の中の文字、次にすべて
+common-back-to-words = 文章に戻る
+common-extend-selection = 選択範囲を広げる
+common-next-or-one-before = 次、または前
+common-step-out-close-collapse-let = 抜け出す：閉じる、折りたたむ、離す
+common-check-or-uncheck-task = タスクをチェック、またはチェックを外す
+common-too-long-for-qr-code = QRコードには長すぎます。ドキュメントを短くするか、短縮リンクを共有してください。
+common-n-of-count = { $count }件中{ $n }件
 
 ## downloads
 
 download-print = 印刷
-download-print-or-save-as-pdf = 印刷またはPDFで保存
+common-print-or-save-as-pdf = 印刷またはPDFで保存
 download-picture-png = 画像（PNG）
-download-web-page-html = ウェブページ（HTML）
+common-web-page-html = ウェブページ（HTML）
 download-text-tlo = テキスト（TLO）
 download-data-json = データ（JSON）
 download-downloaded-name = { $name }をダウンロードしました
 download-failed = ダウンロードできませんでした
-download-open-in-tiny-little-office = ちいさなちいさなオフィスで開く
+common-open-in-tiny-little-office = ちいさなちいさなオフィスで開く
 # Under a document cut off at a slide's foot: a link that opens it whole, in its own app.
 download-see-more = もっと見る
 
 ## the bar, shared by every app
 
-bar-insert = 挿入
+common-insert = 挿入
 bar-bold = 太字
 bar-italic = 斜体
 bar-underline = 下線
@@ -265,28 +334,28 @@ bar-highlight = 蛍光ペン
 bar-heading = 見出し
 bar-bulleted-list = 箇条書き
 bar-numbered-list = 番号付きリスト
-bar-table = 表
+common-table = 表
 bar-footnote = 脚注
-bar-date = 日付
+common-date = 日付
 bar-undo = 元に戻す
 bar-redo = やり直し
-bar-today = 今日
+common-today = 今日
 
 ## the editor (<to-text>): chips, cards and the bubbles
 
 # A footnote's mark, and its words where the notes are drawn, by its number: spoken.
-editor-footnote-n = 脚注{ $n }
+common-footnote-n = 脚注{ $n }
 # A card standing for another document held in this one, of a kind no app here reads: "abc document".
-editor-app-document = { $app }ドキュメント
+common-app-document = { $app }ドキュメント
 # The same card when its app is known; { $noun } is the app's noun: "A spreadsheet".
-editor-noun = { $noun }
+common-noun = { $noun }
 editor-code = コード
 editor-connection = 接続
 editor-n-rows = { $n ->
        *[other] { $n }行
     }
 editor-notes-words = 注の本文
-editor-done = 完了
+common-done = 完了
 editor-address = アドレス
 editor-not-address = アドレスではありません
 editor-set-link = リンクを設定
@@ -294,9 +363,13 @@ editor-open-link = リンクを開く
 editor-change-link = リンクを編集
 editor-remove-link = リンクを外す
 # The selection bubble's name: what can be done to the words selected.
-editor-format = 書式
+common-format = 書式
 editor-done-lowercase = 完了
 editor-not-done = 未完了
+editor-bold-italic-and-links = 太字、斜体、リンク
+editor-one-of-words-column-holds = 列にある言葉のどれか、または新しい言葉
+editor-option = 選択肢
+editor-this-browser-lets-page-paste = このブラウザーでは、ページはキーボードからしか貼り付けられません。キーボードの「貼り付け」を使ってください。
 
 ## the example in the kit's own documentation
 
@@ -306,18 +379,18 @@ example-n-slides = { $n ->
 
 ## the Word Processor
 
-write-word-processor = ワープロ
+common-word-processor = ワープロ
 # What one of its documents is called, in running text: "Untitled document"; each app's noun is in its section.
 write-document-lowercase = ドキュメント
 # The group heading the Word Processor sits under on the home page.
-write-words = 文章
+common-words = 文章
 write-words-on-page-headings-lists = 見出し、リスト、リンク、注を使った文章。計算できる表も入れられ、レターまたはA4で印刷できます。
 write-document = ドキュメント
 write-here = ここに書く。
 write-subheading = 小見出し
 write-paragraph = 段落
-write-bring-out = 強調
-write-indent = 字下げ
+common-bring-out = 強調
+common-indent = 字下げ
 write-align = 配置
 write-align-left = 左揃え
 write-center = 中央揃え
@@ -341,11 +414,11 @@ write-horizontal-rule = 横線
 # Insert ▾'s rule in a document: what follows starts the next page.
 write-page-break = 改ページ
 # same
-write-ok = OK
+common-ok = OK
 write-this-card = このカード
 write-open-in-app = { $app }で開く
 write-locked-worked-out-for-you = ロック中：自動で計算
-write-footnotes = 脚注
+common-footnotes = 脚注
 write-back-to-footnote-n-in = 本文の脚注{ $n }に戻る
 write-back-to-text = 本文に戻る
 write-n-words = { $n ->
@@ -353,7 +426,7 @@ write-n-words = { $n ->
     }
 write-word-docx = Word（DOCX）
 # same
-write-markdown = Markdown
+common-markdown = Markdown
 write-rich-text-rtf = リッチテキスト（RTF）
 # A table in the text: its heads, its handle, its column menu.
 write-add-column-before = 前に列を追加
@@ -416,6 +489,11 @@ write-petition = 請願書
 write-what-you-ask-why-and = お願いしたいこと、その理由、賛同する人の名前。
 write-terms-of-service = 利用規約
 write-small-businesss-terms-in-plain = 小さなお店の規約を平易な言葉で：予約、料金、鍵、もしものとき、終了。
+write-open-as-outline = アウトラインとして開く
+# same
+write-a4 = A4
+write-letter = レター
+write-name-this-column = この列に名前を付ける
 
 ## Insert's dialog (kit/ui/insert-dialogs.ts): Tiny Little Office Doc
 
@@ -424,13 +502,13 @@ insert-opening-short-link = 短縮リンクを開いています…
 insert-paste-link-of-another-tiny = ほかのちいさなちいさなオフィスドキュメントのリンク（長いものでも短縮でも）を貼り付けてください。最初のページがここに表示されます。
 insert-this-is-not-tiny-little = ちいさなちいさなオフィスのリンクではないか、期限が切れています。
 insert-tiny-little-office-doc = ちいさなちいさなオフィスドキュメント
-insert-tiny-little-office-doc-ellipsis = ちいさなちいさなオフィスドキュメント…
+common-tiny-little-office-doc-ellipsis = ちいさなちいさなオフィスドキュメント…
 # Insert ▾'s group of the apps a new document can be made in, inside this one.
-insert-new-document = 新しいドキュメント
+common-new-document = 新しいドキュメント
 
 ## another document edited in place (kit/ui/doc-dialog.ts); a table's size is Rows × Columns
 
-doc-cancel = キャンセル
+common-cancel = キャンセル
 doc-rows = 行
 
 ## charts (kit/draw/chart.ts)
@@ -439,7 +517,7 @@ chart-empty-chart = 空のグラフ
 chart-bars = 棒
 chart-flows-sankey = フロー（サンキー）
 chart-flows-list = フロー：{ $list }。
-chart-lines = 折れ線
+common-lines = 折れ線
 chart-nothing-to-chart-yet = グラフにするものがまだありません
 chart-nothing-to-chart-yet-rows = グラフにするものがまだありません：「元 | 先 | 量」の行を入れてください
 chart-pie = 円
@@ -453,10 +531,10 @@ sheet-fit-this-column-to-its = この列を文字の幅に合わせる
 sheet-cells-in-hand = 選択中のセル
 sheet-check-ref = { $ref }にチェック
 # The column type that holds words as typed.
-sheet-text = テキスト
-sheet-spreadsheet = 表計算
+common-text = テキスト
+common-spreadsheet = 表計算
 sheet-spreadsheet-lowercase = 表計算
-sheet-numbers = 数値
+common-numbers = 数値
 sheet-spreadsheet-with-formulas-named-cells = 数式、名前付きセル、グラフが使える表計算。最初は3列で、必要に応じて増やせます。
 sheet-budget = 予算
 sheet-planned-against-actual-line-each = 予定と実績を1行ずつ並べ、差額と合計を出します。
@@ -520,37 +598,37 @@ sheet-tournament-bracket = トーナメント表
 sheet-eight-teams-single-elimination-each = 8チームのノックアウト方式：各試合のスコア、勝者の計算、決勝に進む勝者。
 sheet-excel-xlsx = Excel（XLSX）
 # same
-sheet-csv = CSV
+common-csv = CSV
 sheet-chart-svg = グラフ（SVG）
 sheet-chart-png = グラフ（PNG）
 sheet-empty-sheet = 空のシート
 sheet-n-of-max-shown = （{ $max }件中{ $n }件を表示）
 sheet-50-more-rows = さらに50行
-sheet-add-column = 列を追加
-sheet-add-column-after = 後ろに列を追加
+common-add-column = 列を追加
+common-add-column-after = 後ろに列を追加
 sheet-chart = グラフ
 sheet-chart-of-table = 表のグラフ
 sheet-checkbox = チェックボックス
 sheet-column-after = 後ろの列
-sheet-column-c = 列{ $c }
-sheet-column-c-holds = 列{ $c }の中身
+common-column-c = 列{ $c }
+common-column-c-holds = 列{ $c }の中身
 sheet-column-c-type-what-it = 列{ $c }：{ $type }。中身、並べ替え、列の追加・削除
-sheet-columns = 列
-sheet-delete-which = { $which }を削除
-sheet-drag-to-fill = ドラッグして埋める
+common-columns = 列
+common-delete-which = { $which }を削除
+common-drag-to-fill = ドラッグして埋める
 sheet-abc-or-123-for-this = この列で ABC か 123
 sheet-drag-to-resize-double-click = ドラッグで幅を変更、ダブルクリックで合わせる
 sheet-fill-down-from-top-row = 一番上の行から下へ埋める
 sheet-fill-right-from-first-column = 最初の列から右へ埋める
-sheet-fill-drag-to-carry-these = 埋める：ドラッグでこのセルを延ばす
+common-fill-drag-to-carry-these = 埋める：ドラッグでこのセルを延ばす
 sheet-fit-columns-to-page = 列をページに合わせる
 sheet-formula = 数式
 sheet-function = 関数
 sheet-high-to-low = 大きい順
-sheet-insert-n-rows-above = 上に{ $n ->
+common-insert-n-rows-above = 上に{ $n ->
        *[other] { $n }行
     }挿入
-sheet-insert-n-rows-below = 下に{ $n ->
+common-insert-n-rows-below = 下に{ $n ->
        *[other] { $n }行
     }挿入
 sheet-letters-keyboard = 文字キーボード
@@ -558,8 +636,8 @@ sheet-lock-these-cells-so-reader = このセルをロックして、読む人が
 sheet-locked-part-of-model = ロック中：モデルの一部
 sheet-low-to-high = 小さい順
 sheet-money = 金額
-sheet-name = 名前
-sheet-name-of-column-c = 列{ $c }の名前
+common-name = 名前
+common-name-of-column-c = 列{ $c }の名前
 sheet-names-cell-to-its-right = 右のセルに名前を付ける
 # A money column's currency (Money picked in a column's menu): the field's hint, and what it says of words it cannot read.
 sheet-symbol-like-or-code-like = $のような記号、またはUSDのようなコード。空にするとドキュメントの設定になります。
@@ -569,15 +647,15 @@ sheet-number = 数値
 sheet-open-link = { $link }を開く
 sheet-opens-when-clicked = クリックで開く
 sheet-percent = パーセント
-sheet-remove-this-column = この列を削除
+common-remove-this-column = この列を削除
 sheet-resize-column-c = 列{ $c }の幅を変更
 sheet-rich-text = リッチテキスト
 sheet-row-above = 上の行
 sheet-row-below = 下の行
-sheet-row-n = { $n }行目
-sheet-row-n-lowercase = { $n }行目
-sheet-row-n-insert-or-delete = { $n }行目：行の挿入・削除
-sheet-rows-b = { $a }～{ $b }行目
+common-row-n = { $n }行目
+common-row-n-lowercase = { $n }行目
+common-row-n-insert-or-delete = { $n }行目：行の挿入・削除
+common-rows-b = { $a }～{ $b }行目
 sheet-selected-cells = 選択中のセル
 sheet-show-all-text = 文字をすべて表示
 sheet-shown-as-typed = 入力したとおり表示
@@ -588,22 +666,37 @@ sheet-is-full-its-last-rows = シートがいっぱいです。最後の行に�
 sheet-three-at-least = 最低3つ
 sheet-unlock-these-cells = このセルのロックを解除
 sheet-what-it-holds-sort-columns = 中身、並べ替え、列
+# The Spreadsheet: any column removed, the Option column, rich cells, a chart put in from Insert.
+sheet-keeps-one-column = シートの列は1つだけ残ります
+sheet-choices = 選択肢
+sheet-choices-for-ref = { $ref }の選択肢
+sheet-has-one = シートにあります
+sheet-edit-cell-caret-at-its = セルを編集（文字の末尾にカーソル）
+sheet-put-back-what-cell-held = セルの中身を元に戻す
+sheet-put-dated-rows-on-calendar = 日付のある行をカレンダーに入れる
 
 ## downloads: hand-offs to another app (kit/file/exports.ts)
 
 export-open-in = 開く先
+export-pdf-file = PDFファイル
+export-copy-link-that-downloads-ext = .{ $ext }をダウンロードするリンクをコピー
+export-could-not-share-ext = .{ $ext }を共有できませんでした
+export-could-not-show-ext = .{ $ext }を表示できませんでした
+export-download-ext = .{ $ext }をダウンロード
+export-share-ext = .{ $ext }を共有…
+export-view-ext = .{ $ext }を表示
 
 ## the icon library (kit/ui/icons-picker.ts)
 
-icons-icon = アイコン
+common-icon = アイコン
 icons-favorites = お気に入り
 icons-search-icons = アイコンを検索
 icons-suggested = おすすめ
-icons-icons = アイコン
+common-icons = アイコン
 icons-no-icons-match-q = 「{ $q }」に合うアイコンはありません。
 icons-search-by-name-or-by = 名前や意味（「お金」「天気」「ai」など）で、{ $n }個のアイコンから探せます。
 icons-no-icon = アイコンなし
-icons-icon-or-emoji = アイコンまたは絵文字
+common-icon-or-emoji = アイコンまたは絵文字
 icons-search-icons-and-emoji = アイコンと絵文字を検索
 icons-or-emoji = アイコンまたは絵文字
 icons-emoji = 絵文字
@@ -623,9 +716,9 @@ icons-flags = 旗
 
 # The group heading the Drawing Tool sits under on the home page: Design. 'Draw' is the Animator's mode for drawing.
 draw-draw = 描く
-draw-drawing-tool = 作図ツール
+common-drawing-tool = 作図ツール
 draw-drawing = 作図
-draw-design = デザイン
+common-design = デザイン
 draw-boxes-arrows-icons-and-labels = グリッド上の箱、矢印、アイコン、ラベル。ピクセルアートも描け、背景タイルにもできます。
 draw-request-flow = リクエストの流れ
 draw-browser-asks-server-which-reads = ブラウザがサーバーに問い合わせ、サーバーがデータを読む：矢印でつないだ箱。
@@ -643,7 +736,7 @@ draw-phone-screen-sketched-in-boxes = 作る前に箱で描いたスマホ画面
 draw-rosette-with-ribbons-for-volunteer = 今年のボランティアに贈る、リボン付きのバラ飾り。印刷して切り抜き、ピンで留めます。
 draw-block-party-from-above-stage = 通りのパーティーを上から：ステージ、屋台、救護所、迷子になったときの集合場所。
 draw-badge = バッジ
-draw-birthday-card = バースデーカード
+common-birthday-card = バースデーカード
 draw-can-we-refund-it-stores = 返金できる？お店の返品ルールを、質問と答えと次の行動で。
 draw-event-map = イベントマップ
 draw-four-16-by-16-icons = 1つのグリッドに16×16のアイコンを4つ（太陽、雲、雨、嵐）。天気予報やボタンにコピーして使えます。
@@ -657,7 +750,7 @@ draw-three-ideas-for-coffee-roasters = コーヒー焙煎所のマークの案�
 draw-weather-icons = 天気アイコン
 draw-what-happens-to-package-from = 買った瞬間から荷物に起きること：アイコンと接続線で描く、手順どおりの流れ。
 draw-wireframe = ワイヤーフレーム
-draw-picture-svg = 画像（SVG）
+common-picture-svg = 画像（SVG）
 draw-background-tile-svg = 背景タイル（SVG）
 draw-background-tile-png = 背景タイル（PNG）
 draw-animate-this-drawing = この作図をアニメーションにする
@@ -687,14 +780,14 @@ draw-rounded-box = 角丸の箱
 draw-hexagon = 六角形
 draw-parallelogram = 平行四辺形
 draw-cylinder = 円柱
-draw-note = メモ
-draw-black = 黒
-draw-red = 赤
-draw-orange = オレンジ
-draw-green = 緑
-draw-blue = 青
-draw-purple = 紫
-draw-indigo = 藍
+common-note = メモ
+common-black = 黒
+common-red = 赤
+common-orange = オレンジ
+common-green = 緑
+common-blue = 青
+common-purple = 紫
+common-indigo = 藍
 draw-yellow = 黄
 draw-sky = 空色
 draw-pink = ピンク
@@ -710,13 +803,13 @@ draw-no-fill = 塗りなし
 draw-fill = 塗り
 draw-bring-to-front = 最前面へ
 draw-send-to-back = 最背面へ
-draw-duplicate = 複製
-draw-edit = 編集
-draw-delete = 削除
+common-duplicate = 複製
+common-edit = 編集
+common-delete = 削除
 draw-put-icon-on-this-shape = この図形にアイコンを付ける
 draw-place-icon = アイコンを置く
-draw-zoom-in = 拡大
-draw-zoom-out = 縮小
+common-zoom-in = 拡大
+common-zoom-out = 縮小
 draw-alt = 代替
 draw-alt-text = 代替テキスト
 draw-alt-text-alt = 代替テキスト：{ $alt }
@@ -745,7 +838,7 @@ draw-as-repeating-background = 繰り返しの背景として
 # The contextual bar under a shape, and its words typed on it.
 draw-dashed-line = 破線
 draw-dotted-line = 点線
-draw-edit-words = 文字を編集
+common-edit-words = 文字を編集
 draw-extra-large-text = 特大の文字
 draw-gray-fill = グレーの塗り
 draw-l = 大
@@ -766,6 +859,10 @@ draw-drawing-canvas-v-selects-r = 作図キャンバス。Vで選択、R・E・D
 draw-tap-shape-to-select-it = 図形をタップして選ぶか、図形のまわりをドラッグしてまとめて選びます。描くにはツールを選んでください。
 draw-rotate-left = 左に回転
 draw-rotate-right = 右に回転
+draw-pixels-n-n = ピクセル { $n }×{ $n }
+draw-align-center = 配置：中央
+draw-align-left = 配置：左
+draw-align-right = 配置：右
 
 ## the Animator
 
@@ -821,7 +918,7 @@ anim-pixel-art-is-made-in = ピクセルアートは作図ツールで作りま�
 anim-rainbow = レインボー
 anim-remove-this-key = このキーを削除
 anim-shadow = 影
-anim-size = 大きさ
+common-size = 大きさ
 anim-spin = 回転
 anim-stage-alt-arrow-keys-move = ステージ：{ $alt }。矢印キーで選択中の図形（または時間）を動かし、カンマとピリオドで1フレームずつ進め、スペースで再生、Kでキーを残します。
 anim-shapes-in-hand = 選択中の図形
@@ -854,6 +951,10 @@ anim-turns-shape-around-in-plane = 図形をステージの面で、車輪のよ
 anim-which-shape-is-in-front = どの図形を手前に置くか：近い図形が遠い図形の上に描かれ、遠いものは少し暗くなります。奥行きで大きさは変わりません。
 anim-n-times = { $n }回
 anim-s-s = { $s }秒
+anim-frame-back-frame-on = 1フレーム戻る、1フレーム進む
+anim-nudge-shapes-in-hand-with = 選択中の図形を少し動かす。何もなければ1フレーム進める
+anim-play-or-pause = 再生または一時停止
+anim-first-frame-last = 最初のフレーム、最後のフレーム
 
 ## the Outliner
 
@@ -861,26 +962,26 @@ anim-s-s = { $s }秒
 outline-named-label = 、名前は「{ $label }」
 outline-book = 本
 outline-decision = 決めごと
-outline-talk = 講演
+common-talk = 講演
 outline-empty-outline = 空のアウトライン
 outline-outliner-ideas-under-ideas-folded = アウトライナー：アイデアの下にアイデア、折りたたみと展開、移動とつなぎ。スライドやマインドマップが読むのと同じツリーです。
 outline-arrow-from-from-to-to = { $from }から{ $to }への矢印
 outline-arrows-both-ways = 双方向の矢印
 outline-as-page = ページとして
-outline-calculator = 電卓
-outline-calendar = カレンダー
+common-calculator = 電卓
+common-calendar = カレンダー
 outline-cancel-connecting = 接続をやめる
 outline-change-it = 変更
-outline-chosen-items = 選択中の項目
+common-chosen-items = 選択中の項目
 outline-connect = つなぐ
 outline-connect-from-words = 「{ $words }」からつなぐ
 outline-connect-from-to-to = 「{ $from }」を「{ $to }」につなぐ
 outline-connection-from-from-to-to = { $from }から{ $to }への接続
-outline-connections = 接続
-outline-copy = コピー
-outline-presentation-builder = プレゼンテーション
-outline-diagram-maker = ダイアグラム
-outline-drag-to-move = ドラッグして移動
+common-connections = 接続
+common-copy = コピー
+common-presentation-builder = プレゼンテーション
+common-diagram-maker = ダイアグラム
+common-drag-to-move = ドラッグして移動
 outline-draw-as-mind-map = マインドマップで描く
 outline-draw-as-network = ネットワークで描く
 outline-draw-as-org-chart = 組織図で描く
@@ -891,24 +992,24 @@ outline-fold-all = すべて折りたたむ
 outline-item = 項目
 outline-item-n = 項目{ $n }
 outline-kind-of-line = 線の種類
-outline-launch-plan = ローンチ計画
+common-launch-plan = ローンチ計画
 outline-line-from-from-to-to = { $from }から{ $to }への線
 outline-line-named-label-change-it = 「{ $label }」という線：変更
-outline-animator = アニメーター
-outline-move-down = 下へ移動
+common-animator = アニメーター
+common-move-down = 下へ移動
 outline-move-this-item-drag-it = この項目を移動：別の項目にドラッグします
-outline-move-up = 上へ移動
+common-move-up = 上へ移動
 outline-name-of-line = 線の名前
 outline-numbered = 番号付き
 outline-opml-for-outliners = OPML（アウトライナー用）
-outline-open-in-new-tab = 新しいタブで開く
-outline-outline = アウトライン
+common-open-in-new-tab = 新しいタブで開く
+common-outline = アウトライン
 outline-outliner = アウトライナー
 outline-outline-lowercase = アウトライン
-outline-paste = 貼り付け
+common-paste = 貼り付け
 outline-plain-line = ふつうの線
 outline-plain-text = プレーンテキスト
-outline-show-as-slides = スライドで表示
+common-show-as-slides = スライドで表示
 outline-show-as-outline = アウトラインで表示
 outline-take-away-connection-from-from = { $from }から{ $to }への接続を外す
 outline-take-it-away = 外す
@@ -916,13 +1017,13 @@ outline-take-connection-away = 接続を外す
 outline-tap-item-to-connect-from = つなぎ元の項目をタップします。
 outline-tap-item-to-connect-words = 「{ $words }」のつなぎ先の項目をタップします。
 outline-question-options-under-it-and = 問い、その下の選択肢、それぞれに賛成の理由と反対の理由。
-outline-trip-planner = 旅行プランナー
+common-trip-planner = 旅行プランナー
 outline-twenty-minutes-in-three-parts = 20分を3部構成で：問題、アイデア、その意味。デッキとして表示すると、最上位の項目が1枚のスライドになります。
 outline-unfold-all = すべて展開
 outline-unfold-n-inside = 展開、中に{ $n ->
        *[other] { $n }件
     }
-outline-untitled = 無題
+common-untitled = 無題
 outline-view-as = 表示形式
 outline-zoomed-in-on = 拡大表示中：
 outline-a-plain-line = ふつうの線
@@ -956,6 +1057,9 @@ outline-question-method-budget-that-adds = 問い、方法、自動で合計さ�
 outline-three-generations-and-next-each = 3世代とその次の世代、それぞれの生没年。メニューから家系図として描けます。
 outline-troubleshooting = トラブルシューティング
 outline-who-works-for-whom-at = 9人のパン屋で誰が誰の下で働くか。役割つきで、メニューから組織図として描けます。
+outline-pdf-sections-and-bullets = PDF：見出しと箇条書き
+outline-fold-unfold = 折りたたむ、展開する
+outline-name-line = 線に名前を付ける
 
 ## the Presentation Builder
 
@@ -1001,7 +1105,7 @@ deck-bullets = 箇条書き
 deck-two-columns = 2段組み
 deck-big-icon = 大きなアイコン
 deck-fade = フェード
-deck-cut = カット
+common-cut = カット
 deck-slide = スライド
 deck-zoom = ズーム
 deck-zine = ジン
@@ -1027,12 +1131,12 @@ deck-fun = ポップ
 deck-themes-color = テーマの色
 
 # The bar
-deck-present = 発表
+common-present = 発表
 deck-see-sheets-to-print = 印刷用のシートを見る
 deck-back-to-pages = ページに戻る
 deck-headline = 見出し
 deck-layout-layout = レイアウト：{ $layout }
-deck-look-theme = デザイン：{ $theme }
+common-look-theme = デザイン：{ $theme }
 deck-transition-transition = 切り替え：{ $transition }
 deck-format-format = 形式：{ $format }
 deck-printing = 印刷
@@ -1060,11 +1164,11 @@ deck-big-icon-page = 大きなアイコンのページ
 deck-four-more-pages = さらに4ページ
 deck-on-slide = スライド上
 deck-on-page = ページ上
-deck-pages = ページ
+common-pages = ページ
 
 # The canvas
 deck-add-icon = アイコンを追加
-deck-change-icon = アイコンを変更
+common-change-icon = アイコンを変更
 deck-pick-icon = アイコンを選ぶ
 deck-left-column = 左の列
 deck-right-column = 右の列
@@ -1082,7 +1186,7 @@ deck-remove-from-slide = スライドから外す
 deck-slide-n = スライド{ $n }
 deck-front-cover = 表紙
 deck-back-cover = 裏表紙
-deck-page-n = ページ{ $n }
+common-page-n = ページ{ $n }
 deck-front = おもて
 deck-inside-left = 内側（左）
 deck-inside-middle = 内側（中央）
@@ -1106,11 +1210,11 @@ deck-print-it-on-letter-paper-at-actual-size-cut-along-dashes-six-badges-sheet =
 
 # Presenting, and the closing slide
 deck-presentation = プレゼンテーション
-deck-previous = 前へ
-deck-next = 次へ
-deck-stop-presenting = 発表を終了
+common-previous = 前へ
+common-next = 次へ
+common-stop-presenting = 発表を終了
 deck-slide-n-of-total = スライド{ $n }/{ $total }
-deck-notes = ノート
+common-notes = ノート
 deck-n-hides-them = Nで隠す
 deck-take-this-deck-home = このデッキを持ち帰る
 deck-take-this-deck-home-title = このデッキを持ち帰る：{ $title }
@@ -1135,6 +1239,12 @@ deck-trifold-brochure-six-panels-on = 三つ折りのパンフレット：1枚�
 deck-mini-comic-panels-with-picture = ミニマンガ：絵、吹き出し、キャプションのあるコマを、1枚の紙から折ります。
 deck-poster-or-flyer-headline-and = ポスターまたはチラシ：見出しと数行を、1ページで入る限り大きく。
 deck-name-badges-for-meetup-one = 集まりのための名札。1人1ページ、1枚に6つ、そのまま切れます。
+deck-edit-this-deck = このデッキを編集
+deck-new-slide = 新しいスライド
+deck-presenting-back = 発表中：戻る
+deck-presenting-next-line-or-slide = 発表中：次の行またはスライド
+deck-presenting-whole-slide = 発表中：スライド全体
+deck-slide-before-slide-after-on = 前のスライド、次のスライド（レールで）
 
 ## the Calendar app
 
@@ -1161,7 +1271,7 @@ cal-end = 終了
 cal-end-date = 終了日
 cal-end-time = 終了時刻
 cal-ends = 終了
-cal-event = 予定
+common-event = 予定
 cal-every-day = 毎日
 cal-every-month = 毎月
 cal-every-week = 毎週
@@ -1196,7 +1306,7 @@ cal-start = 開始
 cal-start-date = 開始日
 cal-start-time = 開始時刻
 cal-starts = 開始
-cal-stops = 終了
+common-stops = 終了
 cal-same-dates-as-gantt-chart = 同じ日付をガントチャートで
 cal-this-calendar-is-written-in = このカレンダーは{ $zone }の時刻で書かれています。
 cal-this-calendar-names-no-time = このカレンダーにはタイムゾーンの指定がありません。時刻はあなたのタイムゾーン（{ $zone }）で表示されます。
@@ -1325,6 +1435,19 @@ diagram-house-network = 家のネットワーク
 diagram-water-cycle = 水の循環
 diagram-three-generations-of-morenos-and = モレノ家の3世代と、名付け子への点線。
 diagram-who-can-do-what = 誰が何をできるか
+diagram-tap-empty-space-for-branch = 空白をタップして枝を追加。アイデアをタップして入力、Enterで次へ。別のアイデアへドラッグするとその下に入り、「つなぐ」で地図上の2つをつなぎます。
+diagram-place-cards = 席札
+diagram-print-place-cards = 席札を印刷
+diagram-print-place-cards-card-guest = 席札を印刷：ゲスト1人に1枚、レターサイズ1枚に8枚、切り抜いて使います
+diagram-guest = ゲスト
+diagram-new-idea = 新しいアイデア
+diagram-tap-empty-space-for-person = 空白をタップして人を追加。人をタップして入力、Shift+Enterで名前の下に役割、Enterで次へ。別の人へドラッグするとその下に入ります。
+diagram-tap-empty-space-for-event = 空白をタップして出来事を追加。いつかを入力し、Shift+Enter、続けて何が起きたか。年や日付は実際の間隔で並び、期間は帯になります。
+diagram-lanes-name = レーンの名前
+diagram-when = いつ
+diagram-tap-person-to-type-on = 人をタップして入力、名前のあとに+でパートナー、Shift+Enterで名前の下に生没年、Enterで次へ。別の人へドラッグするとその下に入り、「つなぐ」で2人の間に点線を引きます。
+diagram-tap-empty-space-for-table = 空白をタップしてテーブルを追加。テーブルか人をタップして入力、名前のあとのカンマで次のゲスト。人を別のテーブルへドラッグします。
+diagram-tap-inside-circles-to-add = 円の中をタップして追加し、そのあとのカンマで次へ。集合の名前をタップして変更し、ものを別の円へドラッグします。
 
 ## the Trip Planner
 
@@ -1399,12 +1522,19 @@ trip-new-york-in-movies = 映画の中のニューヨーク
 trip-seven-film-and-tv-locations = 映画とドラマのロケ地7か所を、アップタウンからダウンタウンまで1日で。
 trip-wedding-on-lake-como = コモ湖での結婚式
 trip-for-guests-where-wedding-is = ゲスト向け：式の場所、泊まる場所、行き方。
+trip-presenting-trip = 旅行を発表中
+trip-presenting-next-stop = 発表中：次の立ち寄り先
+trip-presenting-stop-before = 発表中：前の立ち寄り先
+trip-put-stops-on-calendar-day = 立ち寄り先を1日ずつカレンダーに入れる
+trip-first-last = 最初、最後
+trip-next-stop = 次の立ち寄り先
+trip-stop-before = 前の立ち寄り先
 
 ## shared: the Word Processor's looks, the header's Home, a money column's currency
 
 looks-typewriter = タイプライター
 looks-serif = 明朝体
-looks-home = ホーム
+common-home = ホーム
 looks-currency = 通貨
 
 ## the Calculator app
@@ -1493,72 +1623,25 @@ calc-curve-and-its-slope = 曲線とその傾き
 calc-x3-3x-its-derivative-and = x³ − 3x、その導関数、谷の底の水平な接線。
 calc-waves-adding-up = 重なっていく波
 calc-sine-waves-summed-on-their = サイン波を足し合わせて、矩形波に近づけます。
-
-## unsorted: added after the sections, each id named for where it is used
-
-home-templates-for-app = { $app }のテンプレート
-home-app-templates = { $app }のテンプレート
-home-templates-for-app-name = { $app }のテンプレート：{ $name }
-home-templates-are-not-saved-in = テンプレートはまだこのブラウザに保存されていません。インターネットに接続すると表示されます。
 # The grip on a line of the tape; the bar under lines chosen whole.
 calc-choose-line-n-drag-it = { $n }行目を選ぶ：ドラッグで移動
 calc-chosen-lines = 選択中の行
-# The Spreadsheet: any column removed, the Option column, rich cells, a chart put in from Insert.
-sheet-keeps-one-column = シートの列は1つだけ残ります
-editor-bold-italic-and-links = 太字、斜体、リンク
-sheet-choices = 選択肢
-sheet-choices-for-ref = { $ref }の選択肢
-editor-one-of-words-column-holds = 列にある言葉のどれか、または新しい言葉
-editor-option = 選択肢
-sheet-has-one = シートにあります
-drawer-documents = ドキュメント
-common-find-app-template = アプリ、テンプレートを検索
-drawer-find-app-doc-template-or = アプリ、ドキュメント、テンプレート、コマンドを検索
-drawer-find-app-template-or-command = アプリ、テンプレート、コマンドを検索
-drawer-commands = コマンド
-share-new-noun-date-n = 新しい{ $noun } { $date } #{ $n }
-drawer-nothing-by-that-name = その名前のものはありません
-draw-pixels-n-n = ピクセル { $n }×{ $n }
-# Files, compare, posting and embedding: the agent and sharing surface.
-share-mastodon-server-like-mastodon-social = mastodon.socialのようなMastodonサーバー
-share-change = 変更
+
+## two links compared (kit/ui/compare.ts)
+
 compare-changes = 変更点
 compare-compare = 比較
-share-copy-embed-code = 埋め込みコードをコピー
-share-copy-show-link = 表示用リンクをコピー
-deck-edit-this-deck = このデッキを編集
-share-embed = 埋め込み
-share-embed-code-copied = 埋め込みコードをコピーしました
 compare-no-difference = 違いなし
 compare-not-link-to-tiny-little = ちいさなちいさなオフィスのドキュメントへのリンクではありません
-open-opened-name = { $name }を開きました
-share-opens-deck-already-presenting = 発表を始めた状態でデッキを開きます。
-export-pdf-file = PDFファイル
-outline-pdf-sections-and-bullets = PDF：見出しと箇条書き
 compare-paste-second-link-to-see = 2つ目のリンクを貼ると、何が変わったかが見えます。
 compare-paste-link-to-document-as = 今のドキュメントのリンクを貼り付けてください
 compare-paste-link-to-document-as-it-was = 前のドキュメントのリンクを貼り付けてください
-share-post = 投稿
-share-post-link = リンクを投稿
-share-show-preview-of-first-page = 1ページ目のプレビューを表示
-share-picture-of-first-page-and = 1ページ目の画像とタイトルは、SNSが取得できるよう1か月間サーバー上で読める状態で保管されます。ドキュメントそのものは保管されません。
-share-shared-without-preview-reason = プレビューなしで共有しました（{ $reason }）
-share-making-preview = プレビューを作成中…
-share-page-could-not-be-drawn = ページを描画できませんでした
-share-picture-is-over-400-kb = 画像が400 KBを超えています
-share-server-could-not-be-reached = サーバーに接続できませんでした
-share-hundred-previews-day-from-one = 1つのアドレスからのプレビューは1日100件までです
-share-server-refused-picture = サーバーが画像を受け付けませんでした
 compare-put-in = 追加：
 compare-swap = 入れ替え
 compare-taken-out = 削除：
-open-that-file-is-not-words = このファイルはちいさなちいさなオフィスが読める文章ではありません。
-open-that-file-is-too-large = このファイルは、ここでドキュメントにするには大きすぎます。
 compare-first-link = 1つ目のリンク
-share-pages-in-frame-on-another = ほかのサイトのフレームにページを表示し、ここで開くリンクを付けます。
 compare-second-link = 2つ目のリンク
 compare-two-links-to-documents-side = 2つのドキュメントのリンクを並べ、2つ目で変わったところに印を付けます。このページの外には何も送られません。
-share-your-mastodon-server = あなたのMastodonサーバー
 compare-different-apps = 別のアプリ
 compare-n-blocks-taken-out = { $n ->
        *[other] { $n }個のブロックを削除
@@ -1566,106 +1649,12 @@ compare-n-blocks-taken-out = { $n ->
 compare-n-put-in = { $n ->
        *[other] { $n }件を追加
     }
-diagram-tap-empty-space-for-branch = 空白をタップして枝を追加。アイデアをタップして入力、Enterで次へ。別のアイデアへドラッグするとその下に入り、「つなぐ」で地図上の2つをつなぎます。
-# Restored around the document: search, Find in this document, the shortcuts and the apps' keys, Mod+S, the size of
-# everything, Add to home screen, another version kept here, where the link fits, Open in another app, the QR code
-# of this document, Insert narrowed by typing, Trip presenting, a seating chart's place cards
-qr-code-of-this-document = このドキュメントのQRコード
-anim-frame-back-frame-on = 1フレーム戻る、1フレーム進む
-deck-new-slide = 新しいスライド
-drawer-add-to-home-screen = ホーム画面に追加
-shell-another-version = 別のバージョン
-keys-normal-size = 通常の大きさ
-home-documents-found = 見つかったドキュメント
-sheet-edit-cell-caret-at-its = セルを編集（文字の末尾にカーソル）
-keys-everything-larger = 全体を大きく
-keys-everything-smaller = 全体を小さく
-find-in-this-document = このドキュメント内を検索
-outline-fold-unfold = 折りたたむ、展開する
-common-indent-or-bring-out-in = リストでは字下げ・字上げ、表では次のセル
-keys-keep-this-document-on-device = このドキュメントを端末に保管
-shell-kept-on-this-device = この端末に保管済み
-shell-keyboard-shortcuts = キーボードショートカット
-share-left = 左
-common-move-selected-items-up-or = 選択した項目を上下に移動
-home-no-document-here-has-those = その言葉を含むドキュメントはありません
-find-not-found = 見つかりません
-menu-nothing-starts-q = 「{ $q }」で始まるものはありません
-shell-nothing-to-keep-yet = まだ保管するものがありません
-common-nudge-shapes-in-hand = 選択中の図形を少し動かす
-anim-nudge-shapes-in-hand-with = 選択中の図形を少し動かす。何もなければ1フレーム進める
-write-open-as-outline = アウトラインとして開く
-shell-open-it = 開く
-diagram-place-cards = 席札
-anim-play-or-pause = 再生または一時停止
-trip-presenting-trip = 旅行を発表中
-deck-presenting-back = 発表中：戻る
-deck-presenting-next-line-or-slide = 発表中：次の行またはスライド
-trip-presenting-next-stop = 発表中：次の立ち寄り先
-trip-presenting-stop-before = 発表中：前の立ち寄り先
-diagram-print-place-cards = 席札を印刷
-diagram-print-place-cards-card-guest = 席札を印刷：ゲスト1人に1枚、レターサイズ1枚に8枚、切り抜いて使います
-shell-save-in-browser-is-off = 「ブラウザに保存」はオフです。このブラウザはドキュメントを保管しません。ここに保管するにはメニューでオンにしてください。
-sheet-put-back-what-cell-held = セルの中身を元に戻す
-sheet-put-dated-rows-on-calendar = 日付のある行をカレンダーに入れる
-trip-put-stops-on-calendar-day = 立ち寄り先を1日ずつカレンダーに入れる
-home-search-your-documents = ドキュメントを検索
-common-select-all-words-of-box = すべて選択：まず枠の中の文字、次にすべて
-keys-show-these-shortcuts = ショートカットを表示
-# same
-write-a4 = A4
-write-letter = レター
-common-back-to-words = 文章に戻る
-common-extend-selection = 選択範囲を広げる
-deck-presenting-whole-slide = 発表中：スライド全体
-trip-first-last = 最初、最後
-common-next-or-one-before = 次、または前
-editor-this-browser-lets-page-paste = このブラウザーでは、ページはキーボードからしか貼り付けられません。キーボードの「貼り付け」を使ってください。
-drawer-size-of-everything = 全体の大きさ
-shell-skip-to-apps = アプリへ移動
-shell-skip-to-document = ドキュメントへ移動
-menu-starting-q = 「{ $q }」で始まる
-common-step-out-close-collapse-let = 抜け出す：閉じる、折りたたむ、離す
-anim-first-frame-last = 最初のフレーム、最後のフレーム
-trip-next-stop = 次の立ち寄り先
-deck-slide-before-slide-after-on = 前のスライド、次のスライド（レールで）
-trip-stop-before = 前の立ち寄り先
-shell-this-device-keeps-another-version = この端末には「{ $title }」の別のバージョン（{ $when }）が保管されています。
-shell-this-link-was-made-by = このリンクは、より新しいちいさなちいさなオフィスで作られました。ページを再読み込みしてください。
-keys-this-page = このページ
-common-check-or-uncheck-task = タスクをチェック、またはチェックを外す
-drawer-to-add-tiny-little-office = ちいさなちいさなオフィスをホーム画面に追加するには：共有、そして「ホーム画面に追加」。
-common-too-long-for-qr-code = QRコードには長すぎます。ドキュメントを短くするか、短縮リンクを共有してください。
-share-uses = 使用先
-share-where = 場所
-share-where-link-fits = リンクが収まる場所
-share-any-length = 長さ自由
-home-n-documents-found = { $n ->
-       *[other] { $n }件のドキュメントが見つかりました
-    }
-common-n-of-count = { $count }件中{ $n }件
-share-n-over = { $n }超過
-privacy-password-copied = パスワードをコピーしました
-diagram-guest = ゲスト
-outline-name-line = 線に名前を付ける
-write-name-this-column = この列に名前を付ける
-diagram-new-idea = 新しいアイデア
-diagram-tap-empty-space-for-person = 空白をタップして人を追加。人をタップして入力、Shift+Enterで名前の下に役割、Enterで次へ。別の人へドラッグするとその下に入ります。
-diagram-tap-empty-space-for-event = 空白をタップして出来事を追加。いつかを入力し、Shift+Enter、続けて何が起きたか。年や日付は実際の間隔で並び、期間は帯になります。
-diagram-lanes-name = レーンの名前
-diagram-when = いつ
-draw-align-center = 配置：中央
-draw-align-left = 配置：左
-draw-align-right = 配置：右
-diagram-tap-person-to-type-on = 人をタップして入力、名前のあとに+でパートナー、Shift+Enterで名前の下に生没年、Enterで次へ。別の人へドラッグするとその下に入り、「つなぐ」で2人の間に点線を引きます。
-diagram-tap-empty-space-for-table = 空白をタップしてテーブルを追加。テーブルか人をタップして入力、名前のあとのカンマで次のゲスト。人を別のテーブルへドラッグします。
-diagram-tap-inside-circles-to-add = 円の中をタップして追加し、そのあとのカンマで次へ。集合の名前をタップして変更し、ものを別の円へドラッグします。
-export-copy-link-that-downloads-ext = .{ $ext }をダウンロードするリンクをコピー
-export-could-not-share-ext = .{ $ext }を共有できませんでした
-export-could-not-show-ext = .{ $ext }を表示できませんでした
-export-download-ext = .{ $ext }をダウンロード
-export-share-ext = .{ $ext }を共有…
-export-view-ext = .{ $ext }を表示
+
+## files and zips dropped on the page (kit/file/open.ts)
+
+open-opened-name = { $name }を開きました
+open-that-file-is-not-words = このファイルはちいさなちいさなオフィスが読める文章ではありません。
+open-that-file-is-too-large = このファイルは、ここでドキュメントにするには大きすぎます。
 open-keep-them-on-this-device = この端末に保存
 open-nothing-is-saved-on-this = 今はこの端末に何も保存されません。ここに保存するか、1つ開いてください。
 open-first = 最初のものを開く
@@ -1676,3 +1665,28 @@ open-that-zip-holds-no-documents = このZIPにはちいさなちいさなオフ
 open-n-documents-kept = { $n ->
        *[other] { $n }件
     }のドキュメントを保管済み
+
+## a document's QR code (kit/draw/qr-picture.ts)
+
+# Restored around the document: search, Find in this document, the shortcuts and the apps' keys, Mod+S, the size of
+# everything, Add to home screen, another version kept here, where the link fits, Open in another app, the QR code
+# of this document, Insert narrowed by typing, Trip presenting, a seating chart's place cards
+qr-code-of-this-document = このドキュメントのQRコード
+
+## the keys, the shortcuts and the size of everything (kit/core/keys.ts, kit/ui/zoom.ts)
+
+keys-normal-size = 通常の大きさ
+keys-everything-larger = 全体を大きく
+keys-everything-smaller = 全体を小さく
+keys-keep-this-document-on-device = このドキュメントを端末に保管
+keys-show-these-shortcuts = ショートカットを表示
+keys-this-page = このページ
+
+## Find in this document (kit/ui/find.ts)
+
+find-not-found = 見つかりません
+
+## a menu narrowed by typing (kit/ui/menu.ts)
+
+menu-nothing-starts-q = 「{ $q }」で始まるものはありません
+menu-starting-q = 「{ $q }」で始まる

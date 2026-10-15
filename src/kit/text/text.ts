@@ -1241,7 +1241,7 @@ export class ToText extends LitElement {
       }
       if (r.fn !== undefined) {
         const n = notes();
-        return html`<sup class="fn" data-fn=${r.fn} data-atomic contenteditable="false" tabindex="0" role="button" aria-label=${t('editor-footnote-n', { n })}>${n}</sup>`;
+        return html`<sup class="fn" data-fn=${r.fn} data-atomic contenteditable="false" tabindex="0" role="button" aria-label=${t('common-footnote-n', { n })}>${n}</sup>`;
       }
       let node: unknown = this.words(r.t);
       if (r.c) node = html`<code>${node}</code>`;
@@ -1264,10 +1264,10 @@ export class ToText extends LitElement {
       case 'hr':
         return html`<div class="tx-card" data-k="hr" contenteditable="false" tabindex="0" role="separator"><hr /></div>`;
       case 'table':
-        return html`<div class="tx-card" data-k="table" contenteditable="false" tabindex="0" role="group" aria-label=${t('bar-table')}><span class="tx-card-kind">${t('bar-table')}</span><span class="tx-card-gist">${b.cols.map((c) => c.name).join(' · ')} — ${t('editor-n-rows', { n: b.rows.length })}</span></div>`;
+        return html`<div class="tx-card" data-k="table" contenteditable="false" tabindex="0" role="group" aria-label=${t('common-table')}><span class="tx-card-kind">${t('common-table')}</span><span class="tx-card-gist">${b.cols.map((c) => c.name).join(' · ')} — ${t('editor-n-rows', { n: b.rows.length })}</span></div>`;
       case 'fence': {
         const def = b.lang ? lookup.appOf(b.lang) : undefined;
-        const kind = def ? t('editor-noun', { noun: def.noun }) : b.lang ? t('editor-app-document', { app: b.lang }) : t('editor-code');
+        const kind = def ? t('common-noun', { noun: def.noun }) : b.lang ? t('common-app-document', { app: b.lang }) : t('editor-code');
         // A locked document's body is its sealed link: nothing to read (kit/share/locked.ts).
         const gist = b.lang === 'locked' ? '' : (b.body.split('\n').find((l) => l.trim() && !/^---/.test(l)) ?? '');
         return html`<div class="tx-card" data-k="fence" contenteditable="false" tabindex="0" role="group" aria-label=${kind}><span class="tx-card-kind">${kind}</span><span class="tx-card-gist">${gist.slice(0, 80)}</span></div>`;
@@ -1349,7 +1349,7 @@ export class ToText extends LitElement {
       >${repeat(parts, (p) => (places[p[0]] ? `list${keyAt(model[p[0]], p[0])}` : keyAt(model[p[0]], p[0])), part)}</div>
       <to-link-pop @link-set=${this.onLinkSet} @link-remove=${this.onLinkRemove} @link-cancel=${this.onLinkCancel}></to-link-pop>
       <to-complete @complete-pick=${this.onCompletePick} @complete-cancel=${this.onCompleteCancel}></to-complete>
-      <to-context class="tx-bubble" .label=${t('editor-format')}></to-context>`;
+      <to-context class="tx-bubble" .label=${t('common-format')}></to-context>`;
   }
 }
 if (!customElements.get('to-text')) customElements.define('to-text', ToText);

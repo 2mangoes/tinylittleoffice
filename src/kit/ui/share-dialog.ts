@@ -147,7 +147,7 @@ export class ToShare extends LitElement {
   }
   /** What the document is called where the link goes (a post, the embed's frame): "Locked document" for a locked one. */
   private get named(): string {
-    return this.locked ? t('privacy-locked-document') : this.heading;
+    return this.locked ? t('common-locked-document') : this.heading;
   }
   /** The link (or the Display Link) copied: said to the shell, which then no longer warns before the tab closes. */
   private copyLink = async (link: string) => void ((await copyText(link)) && this.say('to-link-copied', null));
@@ -224,11 +224,11 @@ export class ToShare extends LitElement {
     // A link is a copy, never a shared document (Paul, 2026-10-11: "docs are not collaborative like Google Docs: that's
     // fine. Communicate it in all the languages"): said under the link, before the ways of sending it.
     return html`${made ? html`<p class="to-share-made">${made}</p>` : nothing}${this.renderFit()}
-      <p class="to-hint to-share-copies">${t('share-whoever-opens-this-link-gets')}</p>
+      <p class="to-hint to-share-copies">${t('common-whoever-opens-this-link-gets')}</p>
       <div class="to-share-links">
         <button type="button" class="to-btn to-share-copy to-copy-link" @click=${() => void this.copyLink(this.link)}><span>${icon(UI.link, 18)}${t('share-edit-link')}</span><small>${t('share-opens-in-editor')}</small></button>
         <button type="button" class="to-btn to-share-copy to-copy-display" @click=${() => void this.copyLink(this.displayLink)}><span>${icon(UI.view, 18)}${t('share-present-link')}</span><small>${t('share-opens-as-pages-to-read')}</small></button>
-        ${canShareNative() ? html`<button type="button" class="to-btn to-share-native" @click=${() => void share()}>${icon(UI.share, 18)}<span>${t('share-share')}</span></button>` : nothing}
+        ${canShareNative() ? html`<button type="button" class="to-btn to-share-native" @click=${() => void share()}>${icon(UI.share, 18)}<span>${t('common-share')}</span></button>` : nothing}
       </div>
       ${this.protect}
       <section class="to-share-section to-share-short" aria-labelledby="to-share-short-h">
@@ -383,7 +383,7 @@ export class ToShare extends LitElement {
   /** Link or Display Link: a pair of buttons, the one chosen pressed. */
   private renderWhich(display: boolean, choose: (display: boolean) => void) {
     return html`<div class="to-seg to-which" role="group" aria-label=${t('share-opens')}>
-      <button type="button" class="to-btn" aria-pressed=${String(!display)} @click=${() => choose(false)}>${icon(UI.link, 16)}<span>${t('share-link')}</span></button>
+      <button type="button" class="to-btn" aria-pressed=${String(!display)} @click=${() => choose(false)}>${icon(UI.link, 16)}<span>${t('common-link')}</span></button>
       <button type="button" class="to-btn" aria-pressed=${String(display)} @click=${() => choose(true)}>${icon(UI.view, 16)}<span>${t('share-display-link')}</span></button>
     </div>`;
   }
@@ -397,7 +397,7 @@ export class ToShare extends LitElement {
   private renderField(link: string, cls: string, label: string) {
     return html`<div class="to-share-field">
       <input type="text" class=${cls} readonly .value=${link} aria-label=${label} @focus=${(e: Event) => (e.target as HTMLInputElement).select()} />
-      <button type="button" class="to-btn primary" @click=${() => void copyText(link)}>${icon(UI.copy, 16)}<span>${t('outline-copy')}</span></button>
+      <button type="button" class="to-btn primary" @click=${() => void copyText(link)}>${icon(UI.copy, 16)}<span>${t('common-copy')}</span></button>
     </div>`;
   }
   /**
@@ -416,7 +416,7 @@ export class ToShare extends LitElement {
   }
   /** Just made: the link to share, big, with Copy, and when it expires. */
   private renderMade(short: Shortened) {
-    return html`${this.renderField(short.short, 'to-short-field', t('share-short-link'))}
+    return html`${this.renderField(short.short, 'to-short-field', t('common-short-link'))}
       <p class="to-hint to-short-expires">${expiresLine(short.expires, Date.now(), document.documentElement.lang)}</p>`;
   }
   /** The QR code, drawn here when the link fits in one; else why not, in a sentence. */
@@ -425,11 +425,11 @@ export class ToShare extends LitElement {
     const fits = bytes.length <= QR_MAX_BYTES;
     const qr = fits ? qrSvg(bytes, 4) : '';
     return html`<section class="to-share-section to-share-qr" aria-labelledby="to-share-qr-h">
-      <h3 id="to-share-qr-h">${t('share-qr-code')}</h3>
+      <h3 id="to-share-qr-h">${t('common-qr-code')}</h3>
       ${
         fits
           ? html`${this.renderWhich(this.qrDisplay, (d) => (this.qrDisplay = d))}
-            <div class="to-qr-code" role="img" aria-label=${t('share-qr-code-of-this-document')}>${unsafeSVG(qr)}</div>
+            <div class="to-qr-code" role="img" aria-label=${t('common-qr-code-of-this-document')}>${unsafeSVG(qr)}</div>
             <div class="to-row">
               <button type="button" class="to-btn" @click=${() => void this.saveQr(qr, 'png')}>${icon(UI.download, 16)}<span>PNG</span></button>
               <button type="button" class="to-btn" @click=${() => void this.saveQr(qr, 'svg')}>${icon(UI.download, 16)}<span>SVG</span></button>

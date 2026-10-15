@@ -134,7 +134,7 @@ export class ToLinkPop extends LitElement {
             ${tool({ label: t('editor-open-link'), icon: UI.open, keep: true, does: () => this.open() })}
             ${tool({ label: t('editor-change-link'), icon: UI.pen, keys: 'Mod+K', keep: true, does: () => this.ask(this.rect!, this.href) })}
             ${tool({ label: t('editor-remove-link'), icon: UI.unlink, keep: true, does: () => (this.hide(), this.dispatchEvent(new CustomEvent('link-remove', { bubbles: true }))) })}`;
-    return html`<div class="to-link-pop" popover=${POPOVER ? 'manual' : nothing} role="dialog" aria-label=${t('share-link')} ?hidden=${!POPOVER && !this.shown}>${inner}</div>`;
+    return html`<div class="to-link-pop" popover=${POPOVER ? 'manual' : nothing} role="dialog" aria-label=${t('common-link')} ?hidden=${!POPOVER && !this.shown}>${inner}</div>`;
   }
 }
 if (!customElements.get('to-link-pop')) customElements.define('to-link-pop', ToLinkPop);

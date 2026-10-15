@@ -20,7 +20,7 @@ const unit = (u: Units, label: string) => cmd(`units.${u}`, label, { where: ['me
 const by = (e?: Event) => (e instanceof KeyboardEvent && e.key === 'ArrowUp' ? -1 : 1);
 
 const TRIP: Command<R>[] = [
-  cmd('insert', 'bar-insert', { icon: UI.insert, menu: 'insert', where: ['bar'], takesFocus: true, does: () => undefined }),
+  cmd('insert', 'common-insert', { icon: UI.insert, menu: 'insert', where: ['bar'], takesFocus: true, does: () => undefined }),
   cmd('insert.find', 'trip-a-place-by-name', { icon: UI.search, where: ['menu:insert'], disabled: full, does: (r) => r.findPlace() }),
   cmd('insert.middle', 'trip-stop-at-middle-of-map', { icon: Crosshair, where: ['menu:insert'], disabled: (r) => full(r) || !r.hasMap, does: (r) => r.addAtMiddle() }),
   cmd('units', 'trip-measure-in', { icon: Ruler, menu: 'units', where: ['bar'], document: true, takesFocus: true, does: () => undefined }),
@@ -31,7 +31,7 @@ const TRIP: Command<R>[] = [
   cmd('fit', 'trip-show-whole-route', { icon: Scan, where: ['bar'], document: true, disabled: (r) => !r.view.stops.length || !r.showMap, does: (r) => r.fit() }),
   cmd('locate', 'trip-where-i-am', { icon: LocateFixed, where: ['bar'], document: true, disabled: (r) => !r.showMap, does: (r) => r.locate() }),
   cmd('map', 'trip-map', { icon: MapIcon, where: ['bar'], document: true, pressed: (r) => r.showMap, does: (r) => r.toggleMap() }),
-  cmd('present', 'deck-present', { icon: UI.play, keys: 'Mod+Alt+Enter', where: ['bar'], document: true, takesFocus: true, disabled: (r) => !r.view.stops.length, does: (r) => r.present() }),
+  cmd('present', 'common-present', { icon: UI.play, keys: 'Mod+Alt+Enter', where: ['bar'], document: true, takesFocus: true, disabled: (r) => !r.view.stops.length, does: (r) => r.present() }),
   cmd('show', 'trip-show-on-map', { at: 'rows', icon: Crosshair, where: ['context'], disabled: (r) => !r.hasMap, does: (r) => r.showChosen() }),
   cmd('move', 'common-move-selected-items-up-or', {
     at: 'words',
@@ -40,7 +40,7 @@ const TRIP: Command<R>[] = [
     when: (r) => !!r.here,
     does: (r, e) => r.moveOne(r.here!.i, by(e), r.here!.field),
   }),
-  cmd('duplicate', 'draw-duplicate', { at: 'words', keys: 'Mod+D', where: ['keys-only'], when: (r) => !!r.here, does: (r) => r.duplicateOne(r.here!.i, r.here!.field) }),
+  cmd('duplicate', 'common-duplicate', { at: 'words', keys: 'Mod+D', where: ['keys-only'], when: (r) => !!r.here, does: (r) => r.duplicateOne(r.here!.i, r.here!.field) }),
   cmd('step', 'common-next-or-one-before', { at: 'words', keys: 'ArrowUp / ArrowDown', where: ['keys-only'], when: (r) => !!r.here, does: (r, e) => r.stepStop(by(e)) }),
   cmd('show.next', 'trip-presenting-next-stop', { at: 'show', keys: 'ArrowRight / Space / PageDown / Enter', where: ['keys-only'], does: (r) => r.goStop(r.presenting + 1) }),
   cmd('show.back', 'trip-presenting-stop-before', { at: 'show', keys: 'ArrowLeft / PageUp / Backspace', where: ['keys-only'], does: (r) => r.goStop(r.presenting - 1) }),
@@ -50,7 +50,7 @@ const TRIP: Command<R>[] = [
     where: ['keys-only'],
     does: (r, e) => r.goStop(e instanceof KeyboardEvent && e.key === 'Home' ? 0 : r.view.stops.length - 1),
   }),
-  cmd('show.stop', 'deck-stop-presenting', { at: 'show', icon: UI.close, keys: 'Escape', where: ['keys-only'], does: (r) => r.endPresenting() }),
+  cmd('show.stop', 'common-stop-presenting', { at: 'show', icon: UI.close, keys: 'Escape', where: ['keys-only'], does: (r) => r.endPresenting() }),
   cmd('pin.nudge', 'common-nudge-shapes-in-hand', {
     at: 'pin',
     keys: 'ArrowLeft / ArrowRight / ArrowUp / ArrowDown / Shift+ArrowLeft / Shift+ArrowRight / Shift+ArrowUp / Shift+ArrowDown',
@@ -58,7 +58,7 @@ const TRIP: Command<R>[] = [
     where: ['keys-only'],
     does: (r, e) => e instanceof KeyboardEvent && r.nudgePin(e),
   }),
-  cmd('pin.delete', 'draw-delete', { at: 'pin', keys: 'Delete / Backspace', when: (r) => r.pinAt >= 0, where: ['keys-only'], does: (r) => r.deleteStops([r.pinAt]) }),
+  cmd('pin.delete', 'common-delete', { at: 'pin', keys: 'Delete / Backspace', when: (r) => r.pinAt >= 0, where: ['keys-only'], does: (r) => r.deleteStops([r.pinAt]) }),
   cmd('pin.out', 'common-step-out-close-collapse-let', { at: 'pin', keys: 'Escape', when: (r) => r.pinAt >= 0, where: ['keys-only'], does: (r) => r.leavePin() }),
 ];
 export const AT = (at: string) => TRIP.filter((c) => c.at === at);

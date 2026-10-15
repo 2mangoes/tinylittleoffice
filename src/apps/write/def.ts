@@ -15,13 +15,13 @@ import { writeToDeck, writeToOutline } from './convert.ts';
 export default defineApp({
   id: 'write',
   get name() {
-    return t('write-word-processor');
+    return t('common-word-processor');
   },
   get noun() {
     return t('write-document-lowercase');
   },
   get group() {
-    return t('write-words');
+    return t('common-words');
   },
   icon: PenLine,
   get blurb() {
@@ -43,13 +43,13 @@ export default defineApp({
       shows: null,
       build: async (doc, ctx) => docToDocx(parse(doc), ctx),
     },
-    { ext: 'md', label: () => t('write-markdown'), mime: 'text/markdown;charset=utf-8', shows: 'text', build: (doc) => docToMarkdown(parse(doc)) },
+    { ext: 'md', label: () => t('common-markdown'), mime: 'text/markdown;charset=utf-8', shows: 'text', build: (doc) => docToMarkdown(parse(doc)) },
     { ext: 'rtf', label: () => t('write-rich-text-rtf'), mime: 'application/rtf', shows: null, build: async (doc, ctx) => utf8(docToRtf(parse(doc), ctx)) },
     // In place of the kit's pictures of the pages: the words still words, in a page anyone can read.
-    { ext: 'html', label: () => t('download-web-page-html'), mime: 'text/html', shows: 'own', build: async (doc, ctx) => docToHtml(parse(doc), ctx) },
+    { ext: 'html', label: () => t('common-web-page-html'), mime: 'text/html', shows: 'own', build: async (doc, ctx) => docToHtml(parse(doc), ctx) },
   ],
   handoffs: [
-    { to: 'deck', label: () => t('outline-show-as-slides'), convert: writeToDeck },
+    { to: 'deck', label: () => t('common-show-as-slides'), convert: writeToDeck },
     { to: 'outline', label: () => t('write-open-as-outline'), convert: writeToOutline },
   ],
   commands: () => import('./commands.ts'),

@@ -21,9 +21,9 @@ const fns = 'calc-functions';
 const more = 'calc-units-and-algebra';
 
 const CALC: Command<K>[] = [
-  cmd('calc', 'outline-calculator', { icon: Calculator, where: ['bar'], document: true, pressed: (k) => !graph(k), does: (k) => k.mode('calc') }),
+  cmd('calc', 'common-calculator', { icon: Calculator, where: ['bar'], document: true, pressed: (k) => !graph(k), does: (k) => k.mode('calc') }),
   cmd('graph', 'calc-graph', { icon: ChartSpline, where: ['bar'], document: true, pressed: graph, does: (k) => k.mode('graph') }),
-  cmd('insert', 'bar-insert', { icon: UI.insert, menu: 'insert', where: ['bar'], takesFocus: true, does: () => undefined }),
+  cmd('insert', 'common-insert', { icon: UI.insert, menu: 'insert', where: ['bar'], takesFocus: true, does: () => undefined }),
   typed('sin', 'calc-sine', 'sin(', fns),
   typed('cos', 'calc-cosine', 'cos(', fns),
   typed('tan', 'calc-tangent', 'tan(', fns),
@@ -38,7 +38,7 @@ const CALC: Command<K>[] = [
   typed('derivative', 'calc-derivative', 'derivative("x^2", "x")', more),
   typed('simplify', 'calc-simplify', 'simplify("2x + 3x")', more),
   cmd('clear', (k) => (graph(k) ? t('calc-clear-graph') : t('calc-clear-tape')), { icon: UI.trash, where: ['bar'], document: true, disabled: (k) => !k.view.lines.length, does: (k) => k.clearTape() }),
-  cmd('enter', 'editor-done', { at: 'entry', keys: 'Enter', where: ['keys-only'], does: (k) => k.enter() }),
+  cmd('enter', 'common-done', { at: 'entry', keys: 'Enter', where: ['keys-only'], does: (k) => k.enter() }),
   cmd('recall', 'common-next-or-one-before', {
     at: 'entry',
     keys: 'ArrowUp / ArrowDown',
@@ -47,7 +47,7 @@ const CALC: Command<K>[] = [
   }),
   cmd('wipe', 'calc-clear-line', { at: 'entry', keys: 'Escape', where: ['keys-only'], when: (k) => !!k.entry, does: (k) => k.setEntry('') }),
   cmd('all', 'common-select-all-words-of-box', { at: 'entry', keys: 'Mod+A', where: ['keys-only'], does: (k, e) => k.allKey(e) }),
-  cmd('line.done', 'editor-done', { at: 'line', keys: 'Enter', when: (k) => !!k.here, where: ['keys-only'], does: (k) => k.lineDone() }),
+  cmd('line.done', 'common-done', { at: 'line', keys: 'Enter', when: (k) => !!k.here, where: ['keys-only'], does: (k) => k.lineDone() }),
   cmd('line.back', 'common-step-out-close-collapse-let', { at: 'line', keys: 'Escape', when: (k) => !!k.here, where: ['keys-only'], does: (k) => k.lineBack() }),
   cmd('line.move', 'common-move-selected-items-up-or', {
     at: 'line',
@@ -64,9 +64,9 @@ const CALC: Command<K>[] = [
     where: ['keys-only'],
     does: (k, e) => k.lineStep(e instanceof KeyboardEvent && e.key === 'ArrowUp' ? -1 : 1),
   }),
-  cmd('line.duplicate', 'draw-duplicate', { at: 'line', keys: 'Mod+D', when: (k) => !!k.here, where: ['keys-only'], does: (k) => k.lineDuplicate() }),
+  cmd('line.duplicate', 'common-duplicate', { at: 'line', keys: 'Mod+D', when: (k) => !!k.here, where: ['keys-only'], does: (k) => k.lineDuplicate() }),
   cmd('line.all', 'common-select-all-words-of-box', { at: 'line', keys: 'Mod+A', where: ['keys-only'], does: (k, e) => k.allKey(e) }),
-  cmd('line.remove', 'draw-delete', { at: 'line', keys: 'Backspace', when: (k) => !!k.here, where: ['keys-only'], does: (k) => k.lineRemove() }),
+  cmd('line.remove', 'common-delete', { at: 'line', keys: 'Backspace', when: (k) => !!k.here, where: ['keys-only'], does: (k) => k.lineRemove() }),
 ];
 export const ENTRY = CALC.filter((c) => c.at === 'entry');
 export const LINE = CALC.filter((c) => c.at === 'line');

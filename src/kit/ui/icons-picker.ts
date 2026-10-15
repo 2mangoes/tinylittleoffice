@@ -56,7 +56,7 @@ export function chooseIcon(opts: IconChoice = {}): Promise<string | null> {
   const withEmoji = opts.emoji !== false;
   return new Promise((done) => {
     const dialog = document.createElement('to-dialog') as ToDialog;
-    dialog.heading = withEmoji ? t('icons-icon-or-emoji') : t('icons-icon');
+    dialog.heading = withEmoji ? t('common-icon-or-emoji') : t('common-icon');
     dialog.className = 'to-icons';
     let picked: string | null = null;
     let query = '';
@@ -76,7 +76,7 @@ export function chooseIcon(opts: IconChoice = {}): Promise<string | null> {
       return html`<button type="button" class="to-icon-btn to-emoji-btn" title=${name} aria-label=${name} @click=${() => pick(char)}>${char}</button>`;
     };
     const section = (name: string, items: string[], draw: (x: string) => unknown, count = true) =>
-      html`<section class="to-icons-section">${name ? html`<h3>${name}${count ? html` <span>${items.length}</span>` : nothing}</h3>` : nothing}<div class="to-icons-grid" role="group" aria-label=${name || t('icons-icons')}>${items.map(draw)}</div></section>`;
+      html`<section class="to-icons-section">${name ? html`<h3>${name}${count ? html` <span>${items.length}</span>` : nothing}</h3>` : nothing}<div class="to-icons-grid" role="group" aria-label=${name || t('common-icons')}>${items.map(draw)}</div></section>`;
     const body = (): TemplateResult => {
       const typed = query.trim();
       const suggested = opts.suggested?.filter((n) => iconNamed(n)) ?? [];
@@ -86,7 +86,7 @@ export function chooseIcon(opts: IconChoice = {}): Promise<string | null> {
       const sections: { name: string; items: string[]; emoji: boolean }[] = typed
         ? withEmoji
           ? (set === 'emoji' ? [1, 0] : [0, 1])
-              .map((k) => (k ? { name: t('icons-emoji'), items: emoji, emoji: true } : { name: t('icons-icons'), items: icons, emoji: false }))
+              .map((k) => (k ? { name: t('icons-emoji'), items: emoji, emoji: true } : { name: t('common-icons'), items: icons, emoji: false }))
               .filter((x) => x.items.length)
           : [{ name: '', items: icons, emoji: false }]
         : set === 'emoji'
@@ -98,7 +98,7 @@ export function chooseIcon(opts: IconChoice = {}): Promise<string | null> {
         ${
           withEmoji
             ? html`<div class="to-seg to-icons-sets" role="group" aria-label=${t('icons-or-emoji')}>
-              <button type="button" class="to-btn" aria-pressed=${String(set === 'icons')} @click=${() => ((set = 'icons'), draw())}>${t('icons-icons')}</button>
+              <button type="button" class="to-btn" aria-pressed=${String(set === 'icons')} @click=${() => ((set = 'icons'), draw())}>${t('common-icons')}</button>
               <button type="button" class="to-btn" aria-pressed=${String(set === 'emoji')} @click=${() => ((set = 'emoji'), draw())}>${t('icons-emoji')}</button>
             </div>`
             : nothing

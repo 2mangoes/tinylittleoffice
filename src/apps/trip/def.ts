@@ -27,7 +27,7 @@ function tripText(doc: Doc): TextNode[] {
 export default defineApp({
   id: 'trip',
   get name() {
-    return t('outline-trip-planner');
+    return t('common-trip-planner');
   },
   get noun() {
     return t('trip-trip');

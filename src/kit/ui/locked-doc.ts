@@ -27,7 +27,7 @@ export function unlockForm(o: { wrong: boolean; busy: boolean; submit: (e: Event
   return html`<form class="to-unlock" @submit=${o.submit}>
     <p>${t('privacy-enter-password-to-open-this')}</p>
     <div class="to-ask-row">
-      <input type="password" class="to-unlock-field" aria-label=${t('privacy-password')} autocomplete="current-password" aria-invalid=${String(o.wrong)} aria-describedby="to-unlock-wrong" @input=${o.input} />
+      <input type="password" class="to-unlock-field" aria-label=${t('common-password')} autocomplete="current-password" aria-invalid=${String(o.wrong)} aria-describedby="to-unlock-wrong" @input=${o.input} />
       <button type="submit" class="to-btn primary to-unlock-go" ?disabled=${o.busy}>${icon(UI.unlock, 16)}<span>${o.busy ? t('privacy-opening') : t('privacy-unlock')}</span></button>
     </div>
     <p id="to-unlock-wrong" class="to-unlock-wrong" role="alert">${o.wrong ? notOpened() : ''}</p>
@@ -40,7 +40,7 @@ type Opened = { app: string; payload: string; text: string; locker: Locker };
 function askUnlock(payload: string): Promise<{ text: string; locker: Locker } | null> {
   return new Promise((done) => {
     const d = document.createElement('to-dialog') as ToDialog;
-    d.heading = t('privacy-this-document-is-locked');
+    d.heading = t('common-this-document-is-locked');
     d.className = 'to-unlock-dialog to-locked-unlock';
     let wrong = false;
     let busy = false;
@@ -114,10 +114,10 @@ export class ToLockedDoc extends LitElement {
     const text = it ? openedText(it.payload) : undefined;
     const page = lockedPage(this.ref, { small: true, open: true });
     const drawn = html`<svg viewBox="0 0 ${page.w} ${page.h}" role="img" aria-label=${page.alt ?? ''}>${unsafeSVG(page.svg)}</svg>`;
-    const name = text !== undefined && def ? def.title(text) || def.name : t('privacy-locked-document');
+    const name = text !== undefined && def ? def.title(text) || def.name : t('common-locked-document');
     const caption = this.caption && def ? html`<figcaption><b>${name}</b><small>${def.name}</small></figcaption>` : nothing;
     if (!it || text !== undefined) return html`${drawn}${caption}`;
-    return html`<button type="button" class="to-locked-open" aria-label=${t('locked-with-password-unlock')} title=${t('privacy-unlock-ellipsis')} @click=${(e: Event) => (e.stopPropagation(), void openPlaced(this.ref))}>${drawn}</button>${caption}`;
+    return html`<button type="button" class="to-locked-open" aria-label=${t('locked-with-password-unlock')} title=${t('common-unlock-ellipsis')} @click=${(e: Event) => (e.stopPropagation(), void openPlaced(this.ref))}>${drawn}</button>${caption}`;
   }
 }
 if (!customElements.get('to-locked-doc')) customElements.define('to-locked-doc', ToLockedDoc);

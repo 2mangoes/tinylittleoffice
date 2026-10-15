@@ -388,12 +388,12 @@ export class ToWriteTable extends LitElement {
     const [r0, r1] = this.rowsFor(this.menuRow);
     const n = r1 - r0 + 1;
     const held = this.view?.table.rows.length ?? 0;
-    const which = n === 1 ? t('sheet-row-n-lowercase', { n: r0 + 1 }) : t('sheet-rows-b', { a: r0 + 1, b: r1 + 1 });
+    const which = n === 1 ? t('common-row-n-lowercase', { n: r0 + 1 }) : t('common-rows-b', { a: r0 + 1, b: r1 + 1 });
     const c = this.anchor[1];
     return [
-      { label: t('sheet-insert-n-rows-above', { n }), icon: ArrowUp, disabled: r0 >= held, does: () => this.do({ cmd: 'rowsIn', r: r0, n, focus: [r0, c] }) },
-      { label: t('sheet-insert-n-rows-below', { n }), icon: ArrowDown, disabled: r1 >= held - 1, does: () => this.do({ cmd: 'rowsIn', r: r1 + 1, n, focus: [r1 + 1, c] }) },
-      { label: t('sheet-delete-which', { which }), icon: Trash2, disabled: r0 >= held, does: () => this.do({ cmd: 'rowsOut', r0, r1, focus: [r0, c] }) },
+      { label: t('common-insert-n-rows-above', { n }), icon: ArrowUp, disabled: r0 >= held, does: () => this.do({ cmd: 'rowsIn', r: r0, n, focus: [r0, c] }) },
+      { label: t('common-insert-n-rows-below', { n }), icon: ArrowDown, disabled: r1 >= held - 1, does: () => this.do({ cmd: 'rowsIn', r: r1 + 1, n, focus: [r1 + 1, c] }) },
+      { label: t('common-delete-which', { which }), icon: Trash2, disabled: r0 >= held, does: () => this.do({ cmd: 'rowsOut', r0, r1, focus: [r0, c] }) },
     ];
   }
   private async openColMenu(c: number, from: HTMLElement) {
@@ -409,13 +409,13 @@ export class ToWriteTable extends LitElement {
     const c = this.menuCol;
     const n = this.cols.length;
     const r = this.anchor[0];
-    const cols = t('sheet-columns');
+    const cols = t('common-columns');
     return [
-      ...kindItems(this.cols[c], t('sheet-column-c-holds', { c: COL_NAMES[c] ?? '' }), (type, currency) => this.do({ cmd: 'type', c, type, currency, focus: [r, c] })),
+      ...kindItems(this.cols[c], t('common-column-c-holds', { c: COL_NAMES[c] ?? '' }), (type, currency) => this.do({ cmd: 'type', c, type, currency, focus: [r, c] })),
       { group: cols, label: t('write-name-this-column'), icon: Pencil, does: () => this.nameColumn(c) },
       { group: cols, label: t('write-add-column-before'), icon: ArrowLeft, disabled: n >= MAX_COLS, does: () => this.do({ cmd: 'colIn', c, focus: [r, c] }) },
-      { group: cols, label: t('sheet-add-column-after'), icon: ArrowRight, disabled: n >= MAX_COLS, does: () => this.do({ cmd: 'colIn', c: c + 1, focus: [r, c + 1] }) },
-      { group: cols, label: t('sheet-remove-this-column'), icon: Trash2, disabled: n < 2, does: () => this.do({ cmd: 'colOut', c, focus: [r, Math.max(0, c - 1)] }) },
+      { group: cols, label: t('common-add-column-after'), icon: ArrowRight, disabled: n >= MAX_COLS, does: () => this.do({ cmd: 'colIn', c: c + 1, focus: [r, c + 1] }) },
+      { group: cols, label: t('common-remove-this-column'), icon: Trash2, disabled: n < 2, does: () => this.do({ cmd: 'colOut', c, focus: [r, Math.max(0, c - 1)] }) },
     ];
   }
 
@@ -451,7 +451,7 @@ export class ToWriteTable extends LitElement {
     const many = this.many;
     const fill = this.fillTo;
     const name = (col: Column, c: number) => (isLetterName(col.name) ? COL_NAMES[c] : col.name);
-    return html`<table class="wt ${many ? 'selecting' : ''}" aria-label=${t('bar-table')} @copy=${this.onCopy} @cut=${this.onCopy} @paste=${this.onPaste}>
+    return html`<table class="wt ${many ? 'selecting' : ''}" aria-label=${t('common-table')} @copy=${this.onCopy} @cut=${this.onCopy} @paste=${this.onPaste}>
         <thead>
           <tr>
             ${this.commands ? this.renderHeads(cols) : cols.map((col, c) => html`<th scope="col" class=${isLetterName(col.name) ? 'letter' : ''}>${name(col, c)}</th>`)}
@@ -460,7 +460,7 @@ export class ToWriteTable extends LitElement {
         <tbody>
           ${Array.from({ length: rows }, (_, r) => {
             return html`<tr>
-              ${this.commands ? html`<th scope="row" class="wt-row"><button type="button" class="wt-num" aria-haspopup="menu" aria-expanded="false" aria-label=${t('sheet-row-n-insert-or-delete', { n: r + 1 })} @click=${(e: Event) => void this.openRowMenu(r, e.currentTarget as HTMLElement)}>${r + 1}</button></th>` : nothing}
+              ${this.commands ? html`<th scope="row" class="wt-row"><button type="button" class="wt-num" aria-haspopup="menu" aria-expanded="false" aria-label=${t('common-row-n-insert-or-delete', { n: r + 1 })} @click=${(e: Event) => void this.openRowMenu(r, e.currentTarget as HTMLElement)}>${r + 1}</button></th>` : nothing}
               ${cols.map((col, c) => {
                 const raw = v.table.rows[r]?.[c] ?? '';
                 const val = v.values[r]?.[c] ?? null;
@@ -510,7 +510,7 @@ export class ToWriteTable extends LitElement {
                           @keydown=${key}
                         ></textarea>`
                   }
-                  ${f && r === g.r1 && c === g.c1 ? html`<span class="wt-fill" role="button" aria-label=${t('sheet-fill-drag-to-carry-these')} title=${t('sheet-drag-to-fill')} @pointerdown=${this.onFillDown}></span>` : nothing}
+                  ${f && r === g.r1 && c === g.c1 ? html`<span class="wt-fill" role="button" aria-label=${t('common-fill-drag-to-carry-these')} title=${t('common-drag-to-fill')} @pointerdown=${this.onFillDown}></span>` : nothing}
                 </td>`;
               })}
               ${this.commands ? html`<td class="wt-pad"></td>` : nothing}
@@ -521,8 +521,8 @@ export class ToWriteTable extends LitElement {
       ${cols.map((col, c) => (col.type === 'option' ? html`<datalist id="${this.uid}-o${c}">${choicesOf(v.table.rows, c).map((x) => html`<option value=${x}></option>`)}</datalist>` : nothing))}
       ${
         this.commands
-          ? html`<to-menu class="wt-rowmenu" .label=${t('sheet-row-n', { n: this.menuRow + 1 })} .items=${this.rowItems()}></to-menu>
-            <to-menu class="wt-colmenu" .label=${t('sheet-column-c', { c: COL_NAMES[this.menuCol] ?? '' })} .items=${this.colItems()}></to-menu>`
+          ? html`<to-menu class="wt-rowmenu" .label=${t('common-row-n', { n: this.menuRow + 1 })} .items=${this.rowItems()}></to-menu>
+            <to-menu class="wt-colmenu" .label=${t('common-column-c', { c: COL_NAMES[this.menuCol] ?? '' })} .items=${this.colItems()}></to-menu>`
           : nothing
       }`;
   }
@@ -536,7 +536,7 @@ export class ToWriteTable extends LitElement {
         (col, c) => html`<th scope="col" class=${isLetterName(col.name) ? 'letter' : ''}>
           ${
             this.naming === c
-              ? html`<input class="wt-cn" aria-label=${t('sheet-name-of-column-c', { c: COL_NAMES[c] })} placeholder=${COL_NAMES[c]} .value=${isLetterName(col.name) ? '' : col.name} autocomplete="off" spellcheck="false"
+              ? html`<input class="wt-cn" aria-label=${t('common-name-of-column-c', { c: COL_NAMES[c] })} placeholder=${COL_NAMES[c]} .value=${isLetterName(col.name) ? '' : col.name} autocomplete="off" spellcheck="false"
                 @keydown=${(e: KeyboardEvent) => {
                   e.stopPropagation();
                   if (e.isComposing || (e.key !== 'Enter' && e.key !== 'Escape')) return;
@@ -549,7 +549,7 @@ export class ToWriteTable extends LitElement {
         </th>`,
       )}
       <td class="wt-add">
-        <button type="button" class="wt-add-col" aria-label=${t('sheet-add-column')} title=${t('sheet-add-column')} ?disabled=${cols.length >= MAX_COLS} @click=${() => this.do({ cmd: 'colIn', c: cols.length, focus: [this.anchor[0], cols.length] })}>${icon(UI.plus, 14)}</button>
+        <button type="button" class="wt-add-col" aria-label=${t('common-add-column')} title=${t('common-add-column')} ?disabled=${cols.length >= MAX_COLS} @click=${() => this.do({ cmd: 'colIn', c: cols.length, focus: [this.anchor[0], cols.length] })}>${icon(UI.plus, 14)}</button>
       </td>`;
   }
 }

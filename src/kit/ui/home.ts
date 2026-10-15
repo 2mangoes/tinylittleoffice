@@ -209,7 +209,7 @@ export class ToTemplates extends LitElement {
   render() {
     const chosen = this.list?.find((x) => x.id === this.chosen);
     // The button is the small arrow alone, no icon and no words (Paul, 2026-10-09: "don't use the word Blank over and over"; 2026-10-10: "just the small arrow to the right"); its name says what it holds.
-    const button = html`<button type="button" class="to-btn to-tool to-templates-btn" aria-haspopup="dialog" aria-expanded="false" aria-label=${chosen ? t('home-templates-for-app-name', { app: this.app.name, name: chosen.name }) : t('home-templates-for-app', { app: this.app.name })} title=${t('home-templates')} @click=${() => (this.via ? this.via(this.app) : this.show())}>
+    const button = html`<button type="button" class="to-btn to-tool to-templates-btn" aria-haspopup="dialog" aria-expanded="false" aria-label=${chosen ? t('home-templates-for-app-name', { app: this.app.name, name: chosen.name }) : t('home-templates-for-app', { app: this.app.name })} title=${t('common-templates')} @click=${() => (this.via ? this.via(this.app) : this.show())}>
         ${icon(UI.down, 18, 'to-caret')}
       </button>`;
     if (this.via) return button;
@@ -222,8 +222,8 @@ export class ToTemplates extends LitElement {
         @click=${this.onClick}
       >
         <div class="to-dialog-inner">
-          <header class="to-dialog-head to-listbox-head"><h2 id=${this.uid}>${t('home-app-templates', { app: this.app.name })}</h2><button type="button" class="to-btn to-tool to-listbox-close" aria-label=${t('drawer-close')} title=${t('drawer-close')} @click=${() => this.hide()}>${icon(UI.close, 18)}</button></header>
-          <div class="to-listbox" role="listbox" tabindex="-1" aria-label=${t('home-templates')} @keydown=${this.onKey}>
+          <header class="to-dialog-head to-listbox-head"><h2 id=${this.uid}>${t('home-app-templates', { app: this.app.name })}</h2><button type="button" class="to-btn to-tool to-listbox-close" aria-label=${t('common-close')} title=${t('common-close')} @click=${() => this.hide()}>${icon(UI.close, 18)}</button></header>
+          <div class="to-listbox" role="listbox" tabindex="-1" aria-label=${t('common-templates')} @keydown=${this.onKey}>
             ${this.drawn ? html`${this.app.blankInTemplates ? nothing : this.option(null)}${(this.list ?? []).map((tpl) => this.option(tpl))}` : nothing}
           </div>
           ${this.drawn && templatesUnreached(this.app) ? html`<p class="to-hint" role="status">${t('home-templates-are-not-saved-in')}</p>` : nothing}
@@ -295,10 +295,10 @@ export class ToHome extends LitElement {
     const lang = document.documentElement.lang;
     return html`<ul class="to-drive" aria-label=${t('home-app-documents', { app: app.name })}>
         ${shown.map((k) => {
-          const title = k.title || (isSealed(parseHash(k.hash).payload) ? t('privacy-locked-document') : t('outline-untitled'));
+          const title = k.title || (isSealed(parseHash(k.hash).payload) ? t('common-locked-document') : t('common-untitled'));
           return html`<li>
             <a class="to-drive-open" href=${k.hash}><to-preview hash=${k.hash}></to-preview><span class="to-drive-words"><span>${title}</span><small>${ago(k.at, lang)}</small></span></a>
-            <button type="button" class="to-btn to-tool" aria-label=${t('home-forget-title', { title })} title=${t('home-forget')} @click=${() => this.forget(k)}>${icon(UI.close, 16)}</button>
+            <button type="button" class="to-btn to-tool" aria-label=${t('home-forget-title', { title })} title=${t('common-forget')} @click=${() => this.forget(k)}>${icon(UI.close, 16)}</button>
           </li>`;
         })}
       </ul>
@@ -307,7 +307,7 @@ export class ToHome extends LitElement {
   /** The kept documents the search finds, the best first: the title and up to two lines, the words marked. */
   private renderFound(kept: Kept[]) {
     const names = new Map(apps().map((a) => [a.id, a]));
-    const docs = kept.filter((k) => names.has(k.app)).map((k) => ({ id: k.id, title: k.title || t('outline-untitled'), app: names.get(k.app)!.name, folder: '', lines: keptLines(k), at: k.at }));
+    const docs = kept.filter((k) => names.has(k.app)).map((k) => ({ id: k.id, title: k.title || t('common-untitled'), app: names.get(k.app)!.name, folder: '', lines: keptLines(k), at: k.at }));
     const found = search(docs, this.query);
     const byId = new Map(kept.map((k) => [k.id, k]));
     if (!found.length) return html`<p class="to-hint" role="status">${t('home-no-document-here-has-those')}</p>`;
@@ -331,7 +331,7 @@ export class ToHome extends LitElement {
     const kept = library();
     const want = this.query.trim();
     return html`<div class="to-home">
-      <h1 class="sr-only">${t('drawer-tiny-little-office')}</h1>
+      <h1 class="sr-only">${t('common-tiny-little-office')}</h1>
       ${
         keeping() && kept.length
           ? html`<input class="to-search" type="search" placeholder=${t('home-search-your-documents')} aria-label=${t('home-search-your-documents')} autocomplete="off" .value=${this.query} @input=${(e: Event) => (this.query = (e.target as HTMLInputElement).value)} @keydown=${(e: KeyboardEvent) => e.key === 'Enter' && (e.preventDefault(), this.querySelector<HTMLElement>('.to-found-docs a')?.click())} />`

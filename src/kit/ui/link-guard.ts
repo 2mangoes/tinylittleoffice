@@ -100,7 +100,7 @@ export async function ask(url: URL): Promise<void> {
     <code class="lg-url" dir="ltr">${url.href}</code>
     <p class="lg-note">${t('leave-someone-wrote-this-link-into')}</p>
     <div class="lg-buttons">
-      <button type="button" class="to-btn lg-cancel" autofocus @click=${() => d.close()}>${icon(UI.close, 18)}<span>${t('doc-cancel')}</span></button>
+      <button type="button" class="to-btn lg-cancel" autofocus @click=${() => d.close()}>${icon(UI.close, 18)}<span>${t('common-cancel')}</span></button>
       <button type="button" class="to-btn lg-go" @click=${go}><span>${t('leave-go')}</span>${icon(UI.open, 18)}</button>
     </div>`;
   await d.show();

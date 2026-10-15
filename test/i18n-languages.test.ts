@@ -39,7 +39,7 @@ test('the plural categories a language has: fr three, ja one, ar six, pl four', 
 test('the check: missing ids fail, extra ids warn, placeables once, a variant for each plural category, no sort-me group', () => {
   const base = {
     'shell-menu': 'Menu',
-    'share-share': 'Share',
+    'common-share': 'Share',
     'home-n-more': '{n} more',
     'example-n-slides': '{n|one slide|# slides}',
     'x-dot': '·',
@@ -47,7 +47,7 @@ test('the check: missing ids fail, extra ids warn, placeables once, a variant fo
   };
   const good = `# same
 shell-menu = Menu
-share-share = Partager
+common-share = Partager
 home-n-more = { $n } de plus
 example-n-slides = { $n ->
         [one] { $n } diapositive
@@ -75,7 +75,7 @@ draw-pixel-art-n-by-n = Pixel art, { $n } sur { $x }
 broken = { $n
 `,
   );
-  expect(bad.errors.join('\n')).toContain('1 missing (English would show):\n    share-share');
+  expect(bad.errors.join('\n')).toContain('1 missing (English would show):\n    common-share');
   expect(bad.errors.some((e) => e.startsWith('Fluent cannot read this:\n    broken'))).toBe(true);
   expect(bad.errors.some((e) => e.startsWith('{ $n } 2 times in home-n-more'))).toBe(true);
   expect(bad.errors).toContain('{ $n -> } in example-n-slides has [one], [other], where fr has [one], [many], [other]');
@@ -94,17 +94,17 @@ broken = { $n
   // A message left in English fails, unless its comment says it is meant ("# same") or it has no letters of its own.
   const english = ftlOf({ ...base, 'example-n-slides': '{n|eine Folie|# Folien}' }, 'de');
   expect(checkLanguage('de', base, english).errors).toEqual([
-    '4 the same as the English, not decided (translate it, or give it the comment "# same" where the English is the word):\n    shell-menu\n    share-share\n    home-n-more\n    draw-pixel-art-n-by-n',
+    '4 the same as the English, not decided (translate it, or give it the comment "# same" where the English is the word):\n    shell-menu\n    common-share\n    home-n-more\n    draw-pixel-art-n-by-n',
   ]);
-  const decided = english.replace(/^(shell-menu|share-share|home-n-more|draw-pixel-art-n-by-n) =/gm, '# same\n$1 =');
+  const decided = english.replace(/^(shell-menu|common-share|home-n-more|draw-pixel-art-n-by-n) =/gm, '# same\n$1 =');
   expect(checkLanguage('de', base, decided).errors).toEqual([]);
   // A mark on a message translated since is stale; a draft the memory offered and nobody read fails.
   const stale = decided
-    .replace('share-share = Share', 'share-share = Teilen')
+    .replace('common-share = Share', 'common-share = Teilen')
     .replace('home-n-more = { $n } more', 'home-n-more = { $n } mehr')
     .replace('Pixel art, { $n } by { $n }', 'Pixelkunst, { $n } mal { $n }');
   expect(checkLanguage('de', base, stale).errors).toEqual([
-    '3 marked "# same" but translated (take the mark off):\n    share-share: Share → Teilen\n    home-n-more: {n} more → {n} mehr\n    draw-pixel-art-n-by-n: Pixel art, {n} by {n} → Pixelkunst, {n} mal {n}',
+    '3 marked "# same" but translated (take the mark off):\n    common-share: Share → Teilen\n    home-n-more: {n} more → {n} mehr\n    draw-pixel-art-n-by-n: Pixel art, {n} by {n} → Pixelkunst, {n} mal {n}',
   ]);
   const draft = checkLanguage('de', { 'shell-menu': 'Menu' }, '# draft from shell-menus\nshell-menu = Menü\n');
   expect(draft.errors).toEqual(['1 "# draft from" left in (read each, make it right for its id, take the comment off):\n    shell-menu: draft from shell-menus']);
@@ -116,7 +116,7 @@ broken = { $n
   expect(checkLanguage('pt_BR', {}, '').errors).toEqual(['"pt_BR" is not a BCP 47 tag']);
   expect(checkLanguage('pt-BR', {}, '').errors).toEqual(['"pt-BR" is not a lowercase BCP 47 tag']);
   expect(gaps(base, good, 'fr')).toEqual([]);
-  expect(gaps(base, good.replace('share-share = Partager\n', ''), 'fr')).toEqual(['share-share = Share']);
+  expect(gaps(base, good.replace('common-share = Partager\n', ''), 'fr')).toEqual(['common-share = Share']);
 });
 
 test('the translation memory: a message whose English changed by a few words under a new id is offered its old translation as a draft, marked', () => {
@@ -166,11 +166,11 @@ test('in development, an id the language in use lacks is recorded, so a test can
   await setLanguage('xx-fallback');
   missed.clear();
   expect(t('shell-menu')).toBe('Mmm');
-  expect(t('share-share')).toBe('Share…');
-  expect([...missed]).toEqual(['share-share']);
+  expect(t('common-share')).toBe('Share…');
+  expect([...missed]).toEqual(['common-share']);
   await setLanguage(null);
   missed.clear();
-  t('share-share');
+  t('common-share');
   expect(missed.size).toBe(0);
 });
 

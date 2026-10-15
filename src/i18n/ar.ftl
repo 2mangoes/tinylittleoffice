@@ -5,10 +5,10 @@
 ## the shell: header
 
 shell-menu = القائمة
-shell-title = العنوان
+common-title = العنوان
 # A new document of the app, and one not yet named; { $noun } is the app's noun: "New presentation".
-shell-new-noun = { $noun } جديد
-shell-untitled-noun = { $noun } بلا عنوان
+common-new-noun = { $noun } جديد
+common-untitled-noun = { $noun } بلا عنوان
 shell-download = تنزيل
 shell-loading = جارٍ التحميل…
 shell-this-link-holds-something-that = يحتوي هذا الرابط على شيء لا يمكن قراءته. ربما قُطع أثناء نسخه.
@@ -23,15 +23,25 @@ shell-copy-link-and-go = نسخ الرابط والمغادرة
 shell-turn-on-save-in-browser = شغّل «الحفظ في المتصفح» واحفظه هنا
 shell-go-without = المغادرة دون حفظ
 shell-save-in-browser-is-on = «الحفظ في المتصفح» مفعّل: هذا المتصفح يحفظ المستندات التي تفتحها. أوقفه من القائمة.
+shell-another-version = نسخة أخرى
+shell-kept-on-this-device = محفوظ على هذا الجهاز
+shell-keyboard-shortcuts = اختصارات لوحة المفاتيح
+shell-nothing-to-keep-yet = لا شيء للحفظ بعد
+shell-open-it = افتحه
+shell-save-in-browser-is-off = «الحفظ في المتصفح» متوقف: هذا المتصفح لا يحفظ أي مستندات. شغّله من القائمة لتحفظها هنا.
+shell-skip-to-apps = تخطّ إلى التطبيقات
+shell-skip-to-document = تخطّ إلى المستند
+shell-this-device-keeps-another-version = يحتفظ هذا الجهاز بنسخة أخرى من «{ $title }»، من { $when }.
+shell-this-link-was-made-by = صُنع هذا الرابط في إصدار أحدث من مكتب صغير جدًا. أعد تحميل الصفحة للحصول عليه.
 
 ## the home page
 
 home-blank = فارغ
-home-templates = القوالب
+common-templates = القوالب
 # The button under an app's tile, naming the template list: "Start Text from"
 # The list of an app's documents kept on this device, under its tile: "Write documents"
 home-app-documents = مستندات { $app }
-home-forget = نسيان
+common-forget = نسيان
 # The button that forgets one kept document: "Forget Launch notes"
 home-forget-title = نسيان { $title }
 # Under an app's documents, the rest folded away: "3 more"
@@ -39,26 +49,41 @@ home-n-more = { $n } أخرى
 home-aboard-project-made-with-respect = مشروع من { $aboard }. صُنع باحترام في مدينة نيويورك.
 home-beta-version = نسخة تجريبية
 home-email = البريد الإلكتروني
+home-templates-for-app = قوالب { $app }
+home-app-templates = قوالب { $app }
+home-templates-for-app-name = قوالب { $app }: { $name }
+home-templates-are-not-saved-in = القوالب غير محفوظة في هذا المتصفح بعد. اتصل بالإنترنت لرؤيتها.
+home-documents-found = المستندات التي وُجدت
+home-no-document-here-has-those = لا مستند هنا فيه هذه الكلمات
+home-search-your-documents = ابحث في مستنداتك
+home-n-documents-found = { $n ->
+        [zero] لا مستندات وُجدت
+        [one] وُجد مستند واحد
+        [two] وُجد مستندان
+        [few] وُجدت { $n } مستندات
+        [many] وُجد { $n } مستندًا
+       *[other] وُجد { $n } مستند
+    }
 
 ## the drawer (hamburger menu)
 
 drawer-apps = التطبيقات
-drawer-close = إغلاق
+common-close = إغلاق
 drawer-default-name = الافتراضي: { $name }
 drawer-save-in-browser = الحفظ في المتصفح
 drawer-what-is-this = ما هذا؟
 drawer-turn-on-to-save-files = شغّله لحفظ الملفات في متصفحك.
 drawer-turn-off-to-remove-all = أوقفه لإزالة كل الملفات والإعدادات.
-drawer-nothing-saved-in-this-browser = لا شيء محفوظ في هذا المتصفح
-drawer-saving-in-this-browser = الحفظ في هذا المتصفح مفعّل
+common-nothing-saved-in-this-browser = لا شيء محفوظ في هذا المتصفح
+common-saving-in-this-browser = الحفظ في هذا المتصفح مفعّل
 drawer-remove-all-files-and-settings = إزالة كل الملفات والإعدادات من هذا المتصفح؟
 drawer-language = اللغة
-drawer-theme = المظهر
+common-theme = المظهر
 drawer-match-device = مطابقة الجهاز
 drawer-light = فاتح
 drawer-dark = داكن
 drawer-about = حول
-drawer-tiny-little-office = مكتب صغير جدًا
+common-tiny-little-office = مكتب صغير جدًا
 drawer-about-tiny-little-office = حول مكتب صغير جدًا
 drawer-tiny-little-office-is-experiment = مكتب صغير جدًا تجربة من { $aboard }، شركة للاستراتيجية الرقمية والذكاء الاصطناعي وتطوير البرمجيات في مدينة نيويورك.
 drawer-to-reach-out-with-questions = للتواصل معنا بأسئلتك، { $email }.
@@ -68,6 +93,13 @@ drawer-github-repository = مستودعنا على GitHub
 drawer-all-of-these-notes-these = كل هذه الملاحظات، وهذه الرسوم، وهذه الجمل المكتوبة بقلم التخطيط تتلاشى مع الوقت. وحده الزائل يدوم.
 drawer-eugene-ionesco-book = أوجين يونسكو، { $book }
 drawer-discoveries = اكتشافات
+drawer-documents = المستندات
+drawer-find-app-template-or-command = ابحث عن تطبيق أو قالب أو أمر
+drawer-commands = الأوامر
+drawer-nothing-by-that-name = لا شيء بهذا الاسم
+drawer-add-to-home-screen = إضافة إلى الشاشة الرئيسية
+drawer-size-of-everything = حجم كل شيء
+drawer-to-add-tiny-little-office = لإضافة مكتب صغير جدًا إلى الشاشة الرئيسية: مشاركة، ثم إضافة إلى الشاشة الرئيسية.
 
 ## links that leave the site (kit/ui/link-guard.ts)
 
@@ -124,7 +156,7 @@ share-expires-in-n-minutes-date = ينتهي خلال { $n ->
     } ({ $date })
 share-opens-as-pages-to-read = يُفتح كصفحات للقراءة
 share-opens-in-editor = يُفتح في المحرر
-share-whoever-opens-this-link-gets = كل من يفتح هذا الرابط يحصل على نسخته الخاصة. ما يغيّره يبقى في رابطه، لا في رابطك: اطلب منه أن يرسل إليك رابطه.
+common-whoever-opens-this-link-gets = كل من يفتح هذا الرابط يحصل على نسخته الخاصة. ما يغيّره يبقى في رابطه، لا في رابطك: اطلب منه أن يرسل إليك رابطه.
 share-short-link-that-expires = رابط قصير ينتهي
 share-this-link-expires-in-n = ينتهي هذا الرابط خلال { $n ->
         [zero] { $n } يوم
@@ -173,9 +205,9 @@ share-display-link = رابط العرض
 share-opens = يفتح
 share-link-copied = تم نسخ الرابط
 share-could-not-copy = تعذّر النسخ
-share-share = مشاركة…
-share-qr-code = رمز QR
-share-qr-code-of-this-document = رمز QR لهذا المستند
+common-share = مشاركة…
+common-qr-code = رمز QR
+common-qr-code-of-this-document = رمز QR لهذا المستند
 share-this-document-is-n-bytes = حجم هذا المستند { $n } بايت، وأكبر رمز QR يتسع لـ{ $max }. اختصره بمقدار { $over } بايت ليناسب.
 share-this-document-is-n-characters = حجم هذا المستند { $n } حرفًا، والرابط القصير يتسع لـ{ $max }. اختصره بمقدار { $over } ليناسب.
 share-expires-after = ينتهي بعد
@@ -191,8 +223,36 @@ share-could-not-shorten-link = تعذّر اختصار الرابط.
 share-this-document-is-too-long = هذا المستند أطول من أن يناسب رابطًا قصيرًا.
 share-up-to-hundred-links-day = حتى مئة رابط في اليوم من العنوان الواحد.
 share-remove = إزالة
-share-link = رابط
-share-short-link = رابط قصير
+common-link = رابط
+common-short-link = رابط قصير
+share-new-noun-date-n = { $noun } جديد { $date } #{ $n }
+# Files, compare, posting and embedding: the agent and sharing surface.
+share-mastodon-server-like-mastodon-social = خادم Mastodon، مثل mastodon.social
+share-change = تغيير
+share-copy-embed-code = نسخ شفرة التضمين
+share-copy-show-link = نسخ رابط العرض
+share-embed = تضمين
+share-embed-code-copied = تم نسخ شفرة التضمين
+share-opens-deck-already-presenting = يفتح العرض وهو يعرض بالفعل.
+share-post = نشر
+share-post-link = نشر الرابط
+share-show-preview-of-first-page = إظهار معاينة للصفحة الأولى
+share-picture-of-first-page-and = تبقى صورة الصفحة الأولى والعنوان مقروءة على خادمنا لمدة شهر ليتمكن موقع التواصل من جلبها. أما المستند نفسه فلا.
+share-shared-without-preview-reason = تمت المشاركة دون معاينة: { $reason }
+share-making-preview = جارٍ إنشاء المعاينة…
+share-page-could-not-be-drawn = تعذّر رسم الصفحة
+share-picture-is-over-400-kb = الصورة أكبر من 400 كيلوبايت
+share-server-could-not-be-reached = تعذّر الوصول إلى الخادم
+share-hundred-previews-day-from-one = مئة معاينة في اليوم من العنوان الواحد
+share-server-refused-picture = رفض الخادم الصورة
+share-pages-in-frame-on-another = الصفحات، في إطار على موقع آخر، مع رابط لفتحها هنا.
+share-your-mastodon-server = خادم Mastodon الخاص بك
+share-left = اليسار
+share-uses = يستخدم
+share-where = أين
+share-where-link-fits = أين يناسب الرابط
+share-any-length = أي طول
+share-n-over = زيادة { $n }
 
 ## privacy (kit/share/privacy.ts, kit/ui/privacy-dialog.ts): the password, what the device holds
 
@@ -205,12 +265,12 @@ privacy-forget-everything = نسيان كل شيء
 privacy-preview-sent-with-link-to = المعاينة المرسلة مع رابط إلى موقع تواصل هي صورة للصفحة الأولى والعنوان والكلمات الأولى، مقروءة على خادمنا لمدة شهر. أما المستند نفسه فلا يصل إليه أبدًا.
 privacy-forget-everything-this-site-keeps = تنسى كل ما يحتفظ به هذا الموقع هنا، ولا يُحفظ شيء من الآن؟ المستندات نفسها تبقى في روابطها.
 privacy-locked = مقفل
-privacy-locked-document = مستند مقفل
+common-locked-document = مستند مقفل
 privacy-new-password = كلمة مرور جديدة
 privacy-no-password = بلا كلمة مرور
 privacy-none = لا شيء
 privacy-opening = جارٍ الفتح…
-privacy-password = كلمة المرور
+common-password = كلمة المرور
 privacy-password-removed = أُزيلت كلمة المرور
 privacy-password-set-link-holds-only = عُيّنت كلمة المرور: لا يحمل الرابط إلا نصًا مشفرًا
 privacy-password-ellipsis = كلمة المرور…
@@ -227,17 +287,17 @@ privacy-short-links-made-here-until = الروابط القصيرة التي أ�
 privacy-their-names-and-links-for = أسماؤها وروابطها، للصفحة الرئيسية.
 privacy-theme-lifetime-of-short-links = المظهر ومدة بقاء الروابط القصيرة.
 privacy-this-document-has-password-link = لهذا المستند كلمة مرور. الرابط، وأي رابط قصير يُصنع منه، لا يحمل إلا نصًا مشفرًا.
-privacy-this-document-is-locked = هذا المستند مقفل
+common-this-document-is-locked = هذا المستند مقفل
 privacy-this-document-is-locked-with = هذا المستند مقفل بكلمة مرور.
 privacy-unlock = فتح القفل
-privacy-unlock-ellipsis = فتح القفل…
+common-unlock-ellipsis = فتح القفل…
 privacy-what-this-device-holds = ما يحتفظ به هذا الجهاز
 privacy-your-documents = مستنداتك
 privacy-your-browsers-history = سجل متصفحك
 privacy-every-document-opened-here-in = كل مستند فُتح هنا، كاملًا، ما لم تكن له كلمة مرور.
 privacy-not-ours-to-clear = ليس لنا أن نمحوه
 privacy-by-name = بواسطة { $name }
-privacy-n-documents = { $n ->
+common-n-documents = { $n ->
         [zero] لا مستندات
         [one] مستند واحد
         [two] مستندان
@@ -256,11 +316,12 @@ privacy-n-links = { $n ->
 privacy-n-set = { $n } معيّنة
 privacy-copy-this-and-send-it = انسخ هذه وأرسلها بطريقة غير الرابط. لا يمكن عرضها مرة أخرى.
 privacy-make-another = أنشئ غيرها
+privacy-password-copied = تم نسخ كلمة المرور
 
 ## a document locked with a password, placed inside another (kit/share/locked.ts, kit/ui/locked-doc.ts)
 
 # The card drawn where it sits; { $app } is the app's name: "A Spreadsheet document, locked with a password".
-locked-with-password = مقفل بكلمة مرور
+common-with-password = مقفل بكلمة مرور
 locked-app-document-locked-with-password = مستند { $app } مقفل بكلمة مرور
 locked-with-password-unlock = مقفل بكلمة مرور. فتح القفل…
 locked-document-locked-with-password = مستند مقفل بكلمة مرور
@@ -286,24 +347,37 @@ common-chosen-tasks = المهام المحددة
 common-open = فتح
 common-task = مهمة
 common-tasks = المهام
+common-find-app-doc-template-or = ابحث عن تطبيق أو مستند أو قالب أو أمر
+common-in-this-document = بحث في هذا المستند
+common-indent-or-bring-out-in = إزاحة أو إبراز في قائمة؛ الخلية التالية في شبكة
+common-move-selected-items-up-or = نقل العناصر المحددة لأعلى أو لأسفل
+common-nudge-shapes-in-hand = دفع الأشكال الحالية
+common-select-all-words-of-box = تحديد الكل: كلمات الصندوق ثم كل شيء
+common-back-to-words = العودة إلى النص
+common-extend-selection = توسيع التحديد
+common-next-or-one-before = التالي أو السابق
+common-step-out-close-collapse-let = الخروج: إغلاق، طي، ترك
+common-check-or-uncheck-task = تعليم مهمة أو إلغاء تعليمها
+common-too-long-for-qr-code = أطول من أن يناسب رمز QR: اختصر المستند، أو شارك رابطًا قصيرًا.
+common-n-of-count = { $n } من { $count }
 
 ## downloads
 
 download-print = طباعة
-download-print-or-save-as-pdf = طباعة أو حفظ بصيغة PDF
+common-print-or-save-as-pdf = طباعة أو حفظ بصيغة PDF
 download-picture-png = صورة (PNG)
-download-web-page-html = صفحة ويب (HTML)
+common-web-page-html = صفحة ويب (HTML)
 download-text-tlo = نص (TLO)
 download-data-json = بيانات (JSON)
 download-downloaded-name = تم تنزيل { $name }
 download-failed = فشل التنزيل
-download-open-in-tiny-little-office = فتح في مكتب صغير جدًا
+common-open-in-tiny-little-office = فتح في مكتب صغير جدًا
 # Under a document cut off at a slide's foot: a link that opens it whole, in its own app.
 download-see-more = عرض المزيد
 
 ## the bar, shared by every app
 
-bar-insert = إدراج
+common-insert = إدراج
 bar-bold = غامق
 bar-italic = مائل
 bar-underline = تسطير
@@ -312,21 +386,21 @@ bar-highlight = تمييز
 bar-heading = عنوان
 bar-bulleted-list = قائمة نقطية
 bar-numbered-list = قائمة مرقّمة
-bar-table = جدول
+common-table = جدول
 bar-footnote = حاشية
-bar-date = التاريخ
+common-date = التاريخ
 bar-undo = تراجع
 bar-redo = إعادة
-bar-today = اليوم
+common-today = اليوم
 
 ## the editor (<to-text>): chips, cards and the bubbles
 
 # A footnote's mark, and its words where the notes are drawn, by its number: spoken.
-editor-footnote-n = حاشية { $n }
+common-footnote-n = حاشية { $n }
 # A card standing for another document held in this one, of a kind no app here reads: "abc document".
-editor-app-document = مستند { $app }
+common-app-document = مستند { $app }
 # The same card when its app is known; { $noun } is the app's noun: "A spreadsheet".
-editor-noun = { $noun }
+common-noun = { $noun }
 editor-code = رمز برمجي
 editor-connection = اتصال
 editor-n-rows = { $n ->
@@ -338,7 +412,7 @@ editor-n-rows = { $n ->
        *[other] { $n } صف
     }
 editor-notes-words = كلمات الحاشية
-editor-done = تم
+common-done = تم
 editor-address = العنوان
 editor-not-address = ليس عنوانًا
 editor-set-link = تعيين الرابط
@@ -346,9 +420,13 @@ editor-open-link = فتح الرابط
 editor-change-link = تحرير الرابط
 editor-remove-link = إزالة الرابط
 # The selection bubble's name: what can be done to the words selected.
-editor-format = تنسيق
+common-format = تنسيق
 editor-done-lowercase = منجز
 editor-not-done = غير منجز
+editor-bold-italic-and-links = غامق ومائل وروابط
+editor-one-of-words-column-holds = إحدى الكلمات التي يحتويها العمود، أو كلمة جديدة
+editor-option = خيار
+editor-this-browser-lets-page-paste = هذا المتصفح لا يسمح للصفحة باللصق إلا من لوحة المفاتيح: استخدم «لصق» فيها.
 
 ## the example in the kit's own documentation
 
@@ -363,18 +441,18 @@ example-n-slides = { $n ->
 
 ## the Word Processor
 
-write-word-processor = معالج النصوص
+common-word-processor = معالج النصوص
 # What one of its documents is called, in running text: "Untitled document"; each app's noun is in its section.
 write-document-lowercase = مستند
 # The group heading the Word Processor sits under on the home page.
-write-words = الكلمات
+common-words = الكلمات
 write-words-on-page-headings-lists = كلمات على صفحة: عناوين وقوائم وروابط وحواشٍ، وجدول يحسب، يُطبع على ورق letter أو A4.
 write-document = مستند
 write-here = اكتب هنا.
 write-subheading = عنوان فرعي
 write-paragraph = فقرة
-write-bring-out = إبراز
-write-indent = إزاحة
+common-bring-out = إبراز
+common-indent = إزاحة
 write-align = محاذاة
 write-align-left = محاذاة لليسار
 write-center = توسيط
@@ -397,11 +475,11 @@ write-narrow-headline-two-columns = عنوان ضيق في عمودين
 write-horizontal-rule = خط أفقي
 # Insert ▾'s rule in a document: what follows starts the next page.
 write-page-break = فاصل صفحة
-write-ok = حسنًا
+common-ok = حسنًا
 write-this-card = هذه البطاقة
 write-open-in-app = فتح في { $app }
 write-locked-worked-out-for-you = مقفل: يُحسب لك
-write-footnotes = الحواشي
+common-footnotes = الحواشي
 write-back-to-footnote-n-in = العودة إلى الحاشية { $n } في النص
 write-back-to-text = العودة إلى النص
 write-n-words = { $n ->
@@ -415,7 +493,7 @@ write-n-words = { $n ->
 # same
 write-word-docx = Word (DOCX)
 # same
-write-markdown = Markdown
+common-markdown = Markdown
 # same
 write-rich-text-rtf = Rich Text (RTF)
 # A table in the text: its heads, its handle, its column menu.
@@ -479,6 +557,11 @@ write-petition = عريضة
 write-what-you-ask-why-and = ما تطلبه ولماذا وأسماء الموافقين.
 write-terms-of-service = شروط الخدمة
 write-small-businesss-terms-in-plain = شروط عمل صغير بكلمات بسيطة: الحجز والأسعار والمفاتيح وماذا لو وكيف ينتهي.
+write-open-as-outline = فتح كمخطط تفصيلي
+# same
+write-a4 = A4
+write-letter = ورق رسائل
+write-name-this-column = سمِّ هذا العمود
 
 ## Insert's dialog (kit/ui/insert-dialogs.ts): Tiny Little Office Doc
 
@@ -487,13 +570,13 @@ insert-opening-short-link = جارٍ فتح الرابط القصير…
 insert-paste-link-of-another-tiny = الصق رابط مستند آخر في مكتب صغير جدًا، طويلًا أو قصيرًا: تظهر صفحته الأولى هنا.
 insert-this-is-not-tiny-little = هذا ليس رابط مكتب صغير جدًا، أو انتهت صلاحيته.
 insert-tiny-little-office-doc = مستند مكتب صغير جدًا
-insert-tiny-little-office-doc-ellipsis = مستند مكتب صغير جدًا…
+common-tiny-little-office-doc-ellipsis = مستند مكتب صغير جدًا…
 # Insert ▾'s group of the apps a new document can be made in, inside this one.
-insert-new-document = مستند جديد
+common-new-document = مستند جديد
 
 ## another document edited in place (kit/ui/doc-dialog.ts); a table's size is Rows × Columns
 
-doc-cancel = إلغاء
+common-cancel = إلغاء
 doc-rows = الصفوف
 
 ## charts (kit/draw/chart.ts)
@@ -502,7 +585,7 @@ chart-empty-chart = مخطط فارغ
 chart-bars = أعمدة
 chart-flows-sankey = تدفقات (Sankey)
 chart-flows-list = تدفقات: { $list }.
-chart-lines = خطوط
+common-lines = خطوط
 chart-nothing-to-chart-yet = لا شيء لرسمه بعد
 chart-nothing-to-chart-yet-rows = لا شيء لرسمه بعد: صفوف من من | إلى | المقدار
 chart-pie = دائري
@@ -516,10 +599,10 @@ sheet-fit-this-column-to-its = ملاءمة هذا العمود لنصه
 sheet-cells-in-hand = الخلايا المحددة
 sheet-check-ref = تحديد { $ref }
 # The column type that holds words as typed.
-sheet-text = نص
-sheet-spreadsheet = جدول بيانات
+common-text = نص
+common-spreadsheet = جدول بيانات
 sheet-spreadsheet-lowercase = جدول بيانات
-sheet-numbers = أرقام
+common-numbers = أرقام
 sheet-spreadsheet-with-formulas-named-cells = جدول بيانات بصيغ وخلايا مسماة ومخططات؛ ثلاثة أعمدة للبداية، والمزيد عند الحاجة.
 sheet-budget = ميزانية
 sheet-planned-against-actual-line-each = المخطط مقابل الفعلي، سطر لكل بند، مع الفرق والمجاميع.
@@ -584,34 +667,34 @@ sheet-eight-teams-single-elimination-each = ثمانية فرق في خروج ا
 # same
 sheet-excel-xlsx = Excel (XLSX)
 # same
-sheet-csv = CSV
+common-csv = CSV
 sheet-chart-svg = مخطط (SVG)
 sheet-chart-png = مخطط (PNG)
 sheet-empty-sheet = ورقة فارغة
 sheet-n-of-max-shown = (يظهر { $n } من { $max })
 sheet-50-more-rows = 50 صفًا أخرى
-sheet-add-column = إضافة عمود
-sheet-add-column-after = إضافة عمود بعده
+common-add-column = إضافة عمود
+common-add-column-after = إضافة عمود بعده
 sheet-chart = مخطط
 sheet-chart-of-table = مخطط الجدول
 sheet-checkbox = مربع اختيار
 sheet-column-after = العمود بعده
-sheet-column-c = العمود { $c }
-sheet-column-c-holds = يحتوي العمود { $c } على
+common-column-c = العمود { $c }
+common-column-c-holds = يحتوي العمود { $c } على
 sheet-column-c-type-what-it = العمود { $c }: { $type }. ما يحتويه، افرز به، أضف عمودًا أو أزله
-sheet-columns = الأعمدة
-sheet-delete-which = حذف { $which }
-sheet-drag-to-fill = اسحب للتعبئة
+common-columns = الأعمدة
+common-delete-which = حذف { $which }
+common-drag-to-fill = اسحب للتعبئة
 sheet-abc-or-123-for-this = ABC أو 123، لهذا العمود
 sheet-drag-to-resize-double-click = اسحب لتغيير الحجم، وانقر مرتين للملاءمة
 sheet-fill-down-from-top-row = تعبئة لأسفل من الصف الأول
 sheet-fill-right-from-first-column = تعبئة لليسار من العمود الأول
-sheet-fill-drag-to-carry-these = التعبئة: اسحب لمواصلة هذه الخلايا
+common-fill-drag-to-carry-these = التعبئة: اسحب لمواصلة هذه الخلايا
 sheet-fit-columns-to-page = ملاءمة الأعمدة للصفحة
 sheet-formula = صيغة
 sheet-function = دالة
 sheet-high-to-low = من الأعلى إلى الأدنى
-sheet-insert-n-rows-above = إدراج { $n ->
+common-insert-n-rows-above = إدراج { $n ->
         [zero] لا صفوف
         [one] صف
         [two] صفين
@@ -619,7 +702,7 @@ sheet-insert-n-rows-above = إدراج { $n ->
         [many] { $n } صفًا
        *[other] { $n } صف
     } فوق
-sheet-insert-n-rows-below = إدراج { $n ->
+common-insert-n-rows-below = إدراج { $n ->
         [zero] لا صفوف
         [one] صف
         [two] صفين
@@ -632,8 +715,8 @@ sheet-lock-these-cells-so-reader = اقفل هذه الخلايا ليتركها
 sheet-locked-part-of-model = مقفلة: جزء من النموذج
 sheet-low-to-high = من الأدنى إلى الأعلى
 sheet-money = مال
-sheet-name = الاسم
-sheet-name-of-column-c = اسم العمود { $c }
+common-name = الاسم
+common-name-of-column-c = اسم العمود { $c }
 sheet-names-cell-to-its-right = يسمّي الخلية التي على يمينه
 # A money column's currency (Money picked in a column's menu): the field's hint, and what it says of words it cannot read.
 sheet-symbol-like-or-code-like = رمز مثل $، أو شفرة مثل USD. إن تُرك فارغًا فهو عملة المستند.
@@ -643,15 +726,15 @@ sheet-number = رقم
 sheet-open-link = فتح { $link }
 sheet-opens-when-clicked = يُفتح عند النقر
 sheet-percent = نسبة مئوية
-sheet-remove-this-column = إزالة هذا العمود
+common-remove-this-column = إزالة هذا العمود
 sheet-resize-column-c = تغيير حجم العمود { $c }
 sheet-rich-text = نص منسّق
 sheet-row-above = الصف الأعلى
 sheet-row-below = الصف الأدنى
-sheet-row-n = الصف { $n }
-sheet-row-n-lowercase = الصف { $n }
-sheet-row-n-insert-or-delete = الصف { $n }: إدراج صفوف أو حذفها
-sheet-rows-b = الصفوف { $a }–{ $b }
+common-row-n = الصف { $n }
+common-row-n-lowercase = الصف { $n }
+common-row-n-insert-or-delete = الصف { $n }: إدراج صفوف أو حذفها
+common-rows-b = الصفوف { $a }–{ $b }
 sheet-selected-cells = الخلايا المحددة
 sheet-show-all-text = إظهار النص كله
 sheet-shown-as-typed = يظهر كما كُتب
@@ -662,22 +745,37 @@ sheet-is-full-its-last-rows = الورقة ممتلئة: في آخر صفوفه�
 sheet-three-at-least = ثلاثة على الأقل
 sheet-unlock-these-cells = فتح قفل هذه الخلايا
 sheet-what-it-holds-sort-columns = ما يحتويه؛ فرز؛ أعمدة
+# The Spreadsheet: any column removed, the Option column, rich cells, a chart put in from Insert.
+sheet-keeps-one-column = الورقة تحتفظ بعمود واحد
+sheet-choices = خيارات
+sheet-choices-for-ref = خيارات { $ref }
+sheet-has-one = في الورقة واحد
+sheet-edit-cell-caret-at-its = تحرير الخلية، والمؤشر في آخرها
+sheet-put-back-what-cell-held = إعادة ما كانت تحتويه الخلية
+sheet-put-dated-rows-on-calendar = ضع الصفوف المؤرخة في تقويم
 
 ## downloads: hand-offs to another app (kit/file/exports.ts)
 
 export-open-in = فتح في
+export-pdf-file = ملف PDF
+export-copy-link-that-downloads-ext = نسخ رابط ينزّل ملف .{ $ext }
+export-could-not-share-ext = تعذّرت مشاركة ملف .{ $ext }
+export-could-not-show-ext = تعذّر عرض ملف .{ $ext }
+export-download-ext = تنزيل ملف .{ $ext }
+export-share-ext = مشاركة ملف .{ $ext }…
+export-view-ext = عرض ملف .{ $ext }
 
 ## the icon library (kit/ui/icons-picker.ts)
 
-icons-icon = أيقونة
+common-icon = أيقونة
 icons-favorites = المفضلة
 icons-search-icons = بحث عن أيقونات
 icons-suggested = مقترحة
-icons-icons = الأيقونات
+common-icons = الأيقونات
 icons-no-icons-match-q = لا أيقونات تطابق «{ $q }».
 icons-search-by-name-or-by = ابحث بالاسم أو بالمعنى («مال»، «طقس»، «ai») لتجد أيًّا من { $n } أيقونة.
 icons-no-icon = بلا أيقونة
-icons-icon-or-emoji = أيقونة أو إيموجي
+common-icon-or-emoji = أيقونة أو إيموجي
 icons-search-icons-and-emoji = بحث عن أيقونات وإيموجي
 icons-or-emoji = أيقونات أو إيموجي
 icons-emoji = إيموجي
@@ -697,9 +795,9 @@ icons-flags = الأعلام
 
 # The group heading the Drawing Tool sits under on the home page: Design. 'Draw' is the Animator's mode for drawing.
 draw-draw = رسم
-draw-drawing-tool = أداة الرسم
+common-drawing-tool = أداة الرسم
 draw-drawing = رسم
-draw-design = التصميم
+common-design = التصميم
 draw-boxes-arrows-icons-and-labels = مربعات وأسهم وأيقونات وتسميات على شبكة؛ أو فن البكسل، الذي يمكن أن يصبح بلاطة خلفية.
 draw-request-flow = مسار الطلب
 draw-browser-asks-server-which-reads = متصفح يطلب من خادم يقرأ البيانات: مربعات تصل بينها أسهم.
@@ -717,7 +815,7 @@ draw-phone-screen-sketched-in-boxes = شاشة هاتف مرسومة بمربع�
 draw-rosette-with-ribbons-for-volunteer = وردة شريطية لمتطوع العام، لتُطبع وتُقص وتُدبَّس.
 draw-block-party-from-above-stage = حفل شارع من الأعلى: المسرح والأكشاك والإسعاف ومكان اللقاء إن ضللت.
 draw-badge = شارة
-draw-birthday-card = بطاقة عيد ميلاد
+common-birthday-card = بطاقة عيد ميلاد
 draw-can-we-refund-it-stores = هل يمكن استرداده؟ قاعدة الإرجاع في متجر بأسئلة وأجوبة وما يجب فعله.
 draw-event-map = خريطة الفعالية
 draw-four-16-by-16-icons = أربع أيقونات 16 في 16 على شبكة واحدة: شمس وغيمة ومطر وعاصفة، لتنسخها لتوقعات الطقس أو زر.
@@ -731,7 +829,7 @@ draw-three-ideas-for-coffee-roasters = ثلاث أفكار لشعار محمصة
 draw-weather-icons = أيقونات الطقس
 draw-what-happens-to-package-from = ما يحدث لطرد منذ لحظة شرائه: عملية في خطوات، بأيقونات ووصلات.
 draw-wireframe = هيكل واجهة
-draw-picture-svg = صورة (SVG)
+common-picture-svg = صورة (SVG)
 draw-background-tile-svg = بلاطة خلفية (SVG)
 draw-background-tile-png = بلاطة خلفية (PNG)
 draw-animate-this-drawing = تحريك هذا الرسم
@@ -771,14 +869,14 @@ draw-rounded-box = مربع مستدير
 draw-hexagon = سداسي
 draw-parallelogram = متوازي أضلاع
 draw-cylinder = أسطوانة
-draw-note = ملاحظة
-draw-black = أسود
-draw-red = أحمر
-draw-orange = برتقالي
-draw-green = أخضر
-draw-blue = أزرق
-draw-purple = بنفسجي
-draw-indigo = نيلي
+common-note = ملاحظة
+common-black = أسود
+common-red = أحمر
+common-orange = برتقالي
+common-green = أخضر
+common-blue = أزرق
+common-purple = بنفسجي
+common-indigo = نيلي
 draw-yellow = أصفر
 draw-sky = سماوي
 draw-pink = وردي
@@ -794,13 +892,13 @@ draw-no-fill = بلا تعبئة
 draw-fill = تعبئة
 draw-bring-to-front = إلى الأمام
 draw-send-to-back = إلى الخلف
-draw-duplicate = تكرار
-draw-edit = تحرير
-draw-delete = حذف
+common-duplicate = تكرار
+common-edit = تحرير
+common-delete = حذف
 draw-put-icon-on-this-shape = ضع أيقونة على هذا الشكل
 draw-place-icon = ضع أيقونة
-draw-zoom-in = تكبير
-draw-zoom-out = تصغير
+common-zoom-in = تكبير
+common-zoom-out = تصغير
 # same
 draw-alt = Alt
 draw-alt-text = النص البديل
@@ -830,7 +928,7 @@ draw-as-repeating-background = كخلفية متكررة
 # The contextual bar under a shape, and its words typed on it.
 draw-dashed-line = خط متقطع
 draw-dotted-line = خط منقّط
-draw-edit-words = تحرير الكلمات
+common-edit-words = تحرير الكلمات
 draw-extra-large-text = نص كبير جدًا
 draw-gray-fill = تعبئة رمادية
 # same
@@ -855,6 +953,10 @@ draw-drawing-canvas-v-selects-r = لوحة الرسم. V للتحديد؛ R وE 
 draw-tap-shape-to-select-it = انقر شكلًا لتحديده، أو اسحب حول الأشكال لاختيارها؛ اختر أداة للرسم.
 draw-rotate-left = تدوير لليسار
 draw-rotate-right = تدوير لليمين
+draw-pixels-n-n = بكسل { $n }×{ $n }
+draw-align-center = المحاذاة: توسيط
+draw-align-left = المحاذاة: يسار
+draw-align-right = المحاذاة: يمين
 
 ## the Animator
 
@@ -910,7 +1012,7 @@ anim-pixel-art-is-made-in = يُصنع فن البكسل في أداة الرس�
 anim-rainbow = قوس قزح
 anim-remove-this-key = إزالة هذا المفتاح
 anim-shadow = ظل
-anim-size = الحجم
+common-size = الحجم
 anim-spin = دوران
 anim-stage-alt-arrow-keys-move = المسرح: { $alt }. مفاتيح الأسهم تحرك الشكل الحالي (أو الوقت)، والفاصلة والنقطة تنتقلان إطارًا، ومفتاح المسافة يشغّل، وK يحفظ مفتاحًا.
 anim-shapes-in-hand = الأشكال الحالية
@@ -943,6 +1045,10 @@ anim-turns-shape-around-in-plane = يدير الشكل في مستوى المس�
 anim-which-shape-is-in-front = أي شكل في المقدمة: الأقرب يُرسم فوق الأبعد، والبعيد أخفت قليلًا. العمق لا يغيّر الحجم أبدًا.
 anim-n-times = { $n } مرات
 anim-s-s = { $s } ث
+anim-frame-back-frame-on = إطار للخلف، إطار للأمام
+anim-nudge-shapes-in-hand-with = دفع الأشكال الحالية؛ وإن لم يكن شيء فانتقل إطارًا
+anim-play-or-pause = تشغيل أو إيقاف مؤقت
+anim-first-frame-last = الإطار الأول، الأخير
 
 ## the Outliner
 
@@ -950,26 +1056,26 @@ anim-s-s = { $s } ث
 outline-named-label = ، باسم «{ $label }»
 outline-book = كتاب
 outline-decision = قرار
-outline-talk = محاضرة
+common-talk = محاضرة
 outline-empty-outline = مخطط تفصيلي فارغ
 outline-outliner-ideas-under-ideas-folded = مخطط تفصيلي: أفكار تحت أفكار، تُطوى وتُبسط وتُنقل وتُوصل؛ وهي الشجرة نفسها التي يقرؤها العرض أو الخريطة الذهنية.
 outline-arrow-from-from-to-to = سهم من { $from } إلى { $to }
 outline-arrows-both-ways = سهمان في الاتجاهين
 outline-as-page = كصفحة
-outline-calculator = الحاسبة
-outline-calendar = التقويم
+common-calculator = الحاسبة
+common-calendar = التقويم
 outline-cancel-connecting = إلغاء الوصل
 outline-change-it = غيّره
-outline-chosen-items = العناصر المحددة
+common-chosen-items = العناصر المحددة
 outline-connect = وصل
 outline-connect-from-words = وصل من «{ $words }»
 outline-connect-from-to-to = وصل «{ $from }» بـ«{ $to }»
 outline-connection-from-from-to-to = وصلة من { $from } إلى { $to }
-outline-connections = الوصلات
-outline-copy = نسخ
-outline-presentation-builder = منشئ العروض التقديمية
-outline-diagram-maker = منشئ الرسوم التخطيطية
-outline-drag-to-move = اسحب للتحريك
+common-connections = الوصلات
+common-copy = نسخ
+common-presentation-builder = منشئ العروض التقديمية
+common-diagram-maker = منشئ الرسوم التخطيطية
+common-drag-to-move = اسحب للتحريك
 outline-draw-as-mind-map = رسم كخريطة ذهنية
 outline-draw-as-network = رسم كشبكة
 outline-draw-as-org-chart = رسم كهيكل تنظيمي
@@ -980,24 +1086,24 @@ outline-fold-all = طي الكل
 outline-item = عنصر
 outline-item-n = العنصر { $n }
 outline-kind-of-line = نوع الخط
-outline-launch-plan = خطة الإطلاق
+common-launch-plan = خطة الإطلاق
 outline-line-from-from-to-to = خط من { $from } إلى { $to }
 outline-line-named-label-change-it = خط باسم «{ $label }»: غيّره
-outline-animator = الرسوم المتحركة
-outline-move-down = نقل لأسفل
+common-animator = الرسوم المتحركة
+common-move-down = نقل لأسفل
 outline-move-this-item-drag-it = انقل هذا العنصر: اسحبه على آخر
-outline-move-up = نقل لأعلى
+common-move-up = نقل لأعلى
 outline-name-of-line = اسم الخط
 outline-numbered = مرقّم
 outline-opml-for-outliners = OPML (للمخططات التفصيلية)
-outline-open-in-new-tab = فتح في تبويب جديد
-outline-outline = مخطط تفصيلي
+common-open-in-new-tab = فتح في تبويب جديد
+common-outline = مخطط تفصيلي
 outline-outliner = المخطِّط التفصيلي
 outline-outline-lowercase = مخطط تفصيلي
-outline-paste = لصق
+common-paste = لصق
 outline-plain-line = خط عادي
 outline-plain-text = نص عادي
-outline-show-as-slides = عرض كشرائح
+common-show-as-slides = عرض كشرائح
 outline-show-as-outline = عرض كمخطط تفصيلي
 outline-take-away-connection-from-from = إزالة الوصلة من { $from } إلى { $to }
 outline-take-it-away = أزله
@@ -1005,7 +1111,7 @@ outline-take-connection-away = أزل الوصلة
 outline-tap-item-to-connect-from = انقر العنصر الذي يبدأ منه الوصل.
 outline-tap-item-to-connect-words = انقر العنصر الذي ستصل «{ $words }» به.
 outline-question-options-under-it-and = السؤال، والخيارات تحته، ولكل خيار ما يؤيده وما يعارضه.
-outline-trip-planner = مخطط الرحلات
+common-trip-planner = مخطط الرحلات
 outline-twenty-minutes-in-three-parts = عشرون دقيقة في ثلاثة أجزاء: المشكلة والفكرة ومعناها؛ شريحة لكل عنصر علوي عند العرض كشرائح.
 outline-unfold-all = بسط الكل
 outline-unfold-n-inside = بسط، { $n ->
@@ -1016,7 +1122,7 @@ outline-unfold-n-inside = بسط، { $n ->
         [many] { $n } بداخله
        *[other] { $n } بداخله
     }
-outline-untitled = بلا عنوان
+common-untitled = بلا عنوان
 outline-view-as = العرض بصفة
 outline-zoomed-in-on = مكبّر على
 outline-a-plain-line = خط عادي
@@ -1050,6 +1156,9 @@ outline-question-method-budget-that-adds = السؤال والمنهج وميز�
 outline-three-generations-and-next-each = ثلاثة أجيال والجيل التالي، لكل منهم سنواته، مرسومة شجرة عائلة من القائمة.
 outline-troubleshooting = استكشاف الأعطال
 outline-who-works-for-whom-at = من يعمل لدى من في مخبز من تسعة أشخاص، لكل منهم دوره، مرسوم هيكلًا تنظيميًا من القائمة.
+outline-pdf-sections-and-bullets = PDF: أقسام ونقاط
+outline-fold-unfold = طي، بسط
+outline-name-line = سمِّ الخط
 
 ## the Presentation Builder
 
@@ -1095,7 +1204,7 @@ deck-bullets = نقاط
 deck-two-columns = عمودان
 deck-big-icon = أيقونة كبيرة
 deck-fade = تلاشٍ
-deck-cut = قطع
+common-cut = قطع
 deck-slide = انزلاق
 deck-zoom = تكبير
 deck-zine = مجلة صغيرة
@@ -1121,12 +1230,12 @@ deck-fun = مرح
 deck-themes-color = لون السمة
 
 # The bar
-deck-present = عرض
+common-present = عرض
 deck-see-sheets-to-print = عرض أوراق الطباعة
 deck-back-to-pages = العودة إلى الصفحات
 deck-headline = عنوان رئيسي
 deck-layout-layout = التخطيط: { $layout }
-deck-look-theme = المظهر: { $theme }
+common-look-theme = المظهر: { $theme }
 deck-transition-transition = الانتقال: { $transition }
 deck-format-format = الصيغة: { $format }
 deck-printing = الطباعة
@@ -1154,11 +1263,11 @@ deck-big-icon-page = صفحة بأيقونة كبيرة
 deck-four-more-pages = أربع صفحات أخرى
 deck-on-slide = على الشريحة
 deck-on-page = على الصفحة
-deck-pages = الصفحات
+common-pages = الصفحات
 
 # The canvas
 deck-add-icon = إضافة أيقونة
-deck-change-icon = تغيير الأيقونة
+common-change-icon = تغيير الأيقونة
 deck-pick-icon = اختر أيقونة
 deck-left-column = العمود الأيسر
 deck-right-column = العمود الأيمن
@@ -1176,7 +1285,7 @@ deck-remove-from-slide = إزالة من الشريحة
 deck-slide-n = الشريحة { $n }
 deck-front-cover = الغلاف الأمامي
 deck-back-cover = الغلاف الخلفي
-deck-page-n = الصفحة { $n }
+common-page-n = الصفحة { $n }
 deck-front = الأمام
 deck-inside-left = الداخل يسارًا
 deck-inside-middle = الداخل وسطًا
@@ -1200,11 +1309,11 @@ deck-print-it-on-letter-paper-at-actual-size-cut-along-dashes-six-badges-sheet =
 
 # Presenting, and the closing slide
 deck-presentation = العرض التقديمي
-deck-previous = السابق
-deck-next = التالي
-deck-stop-presenting = إيقاف العرض
+common-previous = السابق
+common-next = التالي
+common-stop-presenting = إيقاف العرض
 deck-slide-n-of-total = الشريحة { $n } من { $total }
-deck-notes = الملاحظات
+common-notes = الملاحظات
 deck-n-hides-them = N تخفيها
 deck-take-this-deck-home = خذ هذا العرض معك
 deck-take-this-deck-home-title = خذ هذا العرض معك: { $title }
@@ -1230,6 +1339,12 @@ deck-trifold-brochure-six-panels-on = نشرة ثلاثية الطي: ست لو�
 deck-mini-comic-panels-with-picture = قصة مصورة صغيرة: إطارات بصورة وفقاعة كلام وتعليق، تُطوى من ورقة واحدة.
 deck-poster-or-flyer-headline-and = ملصق أو منشور: عنوان وبضعة أسطر، بأكبر حجم تتيحه صفحة واحدة.
 deck-name-badges-for-meetup-one = شارات أسماء للقاء، صفحة لكل شخص، ست في الورقة، جاهزة للقص.
+deck-edit-this-deck = تحرير هذا العرض
+deck-new-slide = شريحة جديدة
+deck-presenting-back = العرض: رجوع
+deck-presenting-next-line-or-slide = العرض: السطر أو الشريحة التالية
+deck-presenting-whole-slide = العرض: الشريحة كاملة
+deck-slide-before-slide-after-on = الشريحة السابقة، الشريحة التالية (على الشريط الجانبي)
 
 ## the Calendar app
 
@@ -1256,7 +1371,7 @@ cal-end = الانتهاء
 cal-end-date = تاريخ الانتهاء
 cal-end-time = وقت الانتهاء
 cal-ends = ينتهي
-cal-event = حدث
+common-event = حدث
 cal-every-day = كل يوم
 cal-every-month = كل شهر
 cal-every-week = كل أسبوع
@@ -1292,7 +1407,7 @@ cal-start = البدء
 cal-start-date = تاريخ البدء
 cal-start-time = وقت البدء
 cal-starts = يبدأ
-cal-stops = يتوقف
+common-stops = يتوقف
 cal-same-dates-as-gantt-chart = التواريخ نفسها كمخطط غانت
 cal-this-calendar-is-written-in = هذا التقويم مكتوب بتوقيت { $zone }.
 cal-this-calendar-names-no-time = لا يحدد هذا التقويم منطقة زمنية: تُقرأ أوقاته بمنطقتك، { $zone }.
@@ -1427,6 +1542,19 @@ diagram-house-network = شبكة البيت
 diagram-water-cycle = دورة الماء
 diagram-three-generations-of-morenos-and = ثلاثة أجيال من عائلة مورينو، وخط منقط إلى ابن معمودية.
 diagram-who-can-do-what = من يستطيع فعل ماذا
+diagram-tap-empty-space-for-branch = انقر مساحة فارغة لفرع؛ انقر فكرة للكتابة عليها، وEnter للتالية؛ اسحب واحدة على أخرى لوضعها تحتها؛ «وصل» يصل بين اثنتين عبر الخريطة.
+diagram-place-cards = بطاقات الأماكن
+diagram-print-place-cards = طباعة بطاقات الأماكن
+diagram-print-place-cards-card-guest = طباعة بطاقات الأماكن: بطاقة لكل ضيف، ثماني في ورقة letter، للقص
+diagram-guest = ضيف
+diagram-new-idea = فكرة جديدة
+diagram-tap-empty-space-for-person = انقر مساحة فارغة لشخص؛ انقر واحدًا للكتابة عليه، وShift+Enter لدوره تحت الاسم، وEnter للتالي؛ اسحب واحدًا على آخر لوضعه تحته.
+diagram-tap-empty-space-for-event = انقر مساحة فارغة لحدث: اكتب متى، ثم Shift+Enter، ثم ما جرى؛ السنوات والتواريخ تتباعد كما وقعت؛ والمدة شريط.
+diagram-lanes-name = اسم المسار
+diagram-when = متى
+diagram-tap-person-to-type-on = انقر شخصًا للكتابة عليه، و+ بعد الاسم لشريكه، وShift+Enter لسنواته تحت الاسم؛ Enter للتالي؛ اسحب واحدًا على آخر لوضعه تحته؛ «وصل» يرسم خطًا منقطًا بين اثنين.
+diagram-tap-empty-space-for-table = انقر مساحة فارغة لطاولة؛ انقر طاولة أو شخصًا للكتابة، وفاصلة بعد الاسم للضيف التالي؛ اسحب شخصًا إلى طاولة أخرى.
+diagram-tap-inside-circles-to-add = انقر داخل الدوائر لإضافة شيء فيها، وفاصلة بعده للتالي؛ انقر اسم مجموعة لتغيير اسمها؛ اسحب شيئًا إلى دوائر أخرى.
 
 ## the Trip Planner
 
@@ -1506,12 +1634,19 @@ trip-new-york-in-movies = نيويورك في الأفلام
 trip-seven-film-and-tv-locations = سبعة مواقع أفلام ومسلسلات، من أعلى المدينة إلى أسفلها، في يوم.
 trip-wedding-on-lake-como = زفاف على بحيرة كومو
 trip-for-guests-where-wedding-is = للضيوف: أين الزفاف وأين تنام وكيف تصل.
+trip-presenting-trip = عرض الرحلة
+trip-presenting-next-stop = العرض: المحطة التالية
+trip-presenting-stop-before = العرض: المحطة السابقة
+trip-put-stops-on-calendar-day = ضع المحطات في تقويم، يومًا لكل محطة
+trip-first-last = الأول، الأخير
+trip-next-stop = المحطة التالية
+trip-stop-before = المحطة السابقة
 
 ## shared: the Word Processor's looks, the header's Home, a money column's currency
 
 looks-typewriter = آلة كاتبة
 looks-serif = بزوائد
-looks-home = الرئيسية
+common-home = الرئيسية
 looks-currency = العملة
 
 ## the Calculator app
@@ -1601,72 +1736,25 @@ calc-curve-and-its-slope = منحنى وميله
 calc-x3-3x-its-derivative-and = x³ − 3x ومشتقتها، والمماس الأفقي في قاع المنخفض.
 calc-waves-adding-up = موجات تتراكم
 calc-sine-waves-summed-on-their = موجات جيبية تُجمع في طريقها إلى موجة مربعة.
-
-## unsorted: added after the sections, each id named for where it is used
-
-home-templates-for-app = قوالب { $app }
-home-app-templates = قوالب { $app }
-home-templates-for-app-name = قوالب { $app }: { $name }
-home-templates-are-not-saved-in = القوالب غير محفوظة في هذا المتصفح بعد. اتصل بالإنترنت لرؤيتها.
 # The grip on a line of the tape; the bar under lines chosen whole.
 calc-choose-line-n-drag-it = اختر السطر { $n }: اسحبه لتحريكه
 calc-chosen-lines = الأسطر المحددة
-# The Spreadsheet: any column removed, the Option column, rich cells, a chart put in from Insert.
-sheet-keeps-one-column = الورقة تحتفظ بعمود واحد
-editor-bold-italic-and-links = غامق ومائل وروابط
-sheet-choices = خيارات
-sheet-choices-for-ref = خيارات { $ref }
-editor-one-of-words-column-holds = إحدى الكلمات التي يحتويها العمود، أو كلمة جديدة
-editor-option = خيار
-sheet-has-one = في الورقة واحد
-drawer-documents = المستندات
-common-find-app-template = ابحث عن تطبيق أو قالب
-drawer-find-app-doc-template-or = ابحث عن تطبيق أو مستند أو قالب أو أمر
-drawer-find-app-template-or-command = ابحث عن تطبيق أو قالب أو أمر
-drawer-commands = الأوامر
-share-new-noun-date-n = { $noun } جديد { $date } #{ $n }
-drawer-nothing-by-that-name = لا شيء بهذا الاسم
-draw-pixels-n-n = بكسل { $n }×{ $n }
-# Files, compare, posting and embedding: the agent and sharing surface.
-share-mastodon-server-like-mastodon-social = خادم Mastodon، مثل mastodon.social
-share-change = تغيير
+
+## two links compared (kit/ui/compare.ts)
+
 compare-changes = التغييرات
 compare-compare = مقارنة
-share-copy-embed-code = نسخ شفرة التضمين
-share-copy-show-link = نسخ رابط العرض
-deck-edit-this-deck = تحرير هذا العرض
-share-embed = تضمين
-share-embed-code-copied = تم نسخ شفرة التضمين
 compare-no-difference = لا فرق
 compare-not-link-to-tiny-little = ليس رابطًا إلى مستند في مكتب صغير جدًا
-open-opened-name = تم فتح { $name }
-share-opens-deck-already-presenting = يفتح العرض وهو يعرض بالفعل.
-export-pdf-file = ملف PDF
-outline-pdf-sections-and-bullets = PDF: أقسام ونقاط
 compare-paste-second-link-to-see = الصق رابطًا ثانيًا لترى ما تغيّر.
 compare-paste-link-to-document-as = الصق رابط المستند كما هو الآن
 compare-paste-link-to-document-as-it-was = الصق رابط المستند كما كان
-share-post = نشر
-share-post-link = نشر الرابط
-share-show-preview-of-first-page = إظهار معاينة للصفحة الأولى
-share-picture-of-first-page-and = تبقى صورة الصفحة الأولى والعنوان مقروءة على خادمنا لمدة شهر ليتمكن موقع التواصل من جلبها. أما المستند نفسه فلا.
-share-shared-without-preview-reason = تمت المشاركة دون معاينة: { $reason }
-share-making-preview = جارٍ إنشاء المعاينة…
-share-page-could-not-be-drawn = تعذّر رسم الصفحة
-share-picture-is-over-400-kb = الصورة أكبر من 400 كيلوبايت
-share-server-could-not-be-reached = تعذّر الوصول إلى الخادم
-share-hundred-previews-day-from-one = مئة معاينة في اليوم من العنوان الواحد
-share-server-refused-picture = رفض الخادم الصورة
 compare-put-in = المضاف:
 compare-swap = تبديل
 compare-taken-out = المحذوف:
-open-that-file-is-not-words = هذا الملف ليس كلمات يستطيع مكتب صغير جدًا قراءتها.
-open-that-file-is-too-large = هذا الملف أكبر من أن يكون مستندًا هنا.
 compare-first-link = الرابط الأول
-share-pages-in-frame-on-another = الصفحات، في إطار على موقع آخر، مع رابط لفتحها هنا.
 compare-second-link = الرابط الثاني
 compare-two-links-to-documents-side = رابطان لمستندين جنبًا إلى جنب: ما غيّره الثاني معلَّم. لا شيء يغادر هذه الصفحة.
-share-your-mastodon-server = خادم Mastodon الخاص بك
 compare-different-apps = تطبيقات مختلفة
 compare-n-blocks-taken-out = { $n ->
         [zero] لا كتل محذوفة
@@ -1684,111 +1772,12 @@ compare-n-put-in = { $n ->
         [many] { $n } إضافة
        *[other] { $n } إضافة
     }
-diagram-tap-empty-space-for-branch = انقر مساحة فارغة لفرع؛ انقر فكرة للكتابة عليها، وEnter للتالية؛ اسحب واحدة على أخرى لوضعها تحتها؛ «وصل» يصل بين اثنتين عبر الخريطة.
-# Restored around the document: search, Find in this document, the shortcuts and the apps' keys, Mod+S, the size of
-# everything, Add to home screen, another version kept here, where the link fits, Open in another app, the QR code
-# of this document, Insert narrowed by typing, Trip presenting, a seating chart's place cards
-qr-code-of-this-document = رمز QR لهذا المستند
-anim-frame-back-frame-on = إطار للخلف، إطار للأمام
-deck-new-slide = شريحة جديدة
-drawer-add-to-home-screen = إضافة إلى الشاشة الرئيسية
-shell-another-version = نسخة أخرى
-keys-normal-size = الحجم العادي
-home-documents-found = المستندات التي وُجدت
-sheet-edit-cell-caret-at-its = تحرير الخلية، والمؤشر في آخرها
-keys-everything-larger = كل شيء أكبر
-keys-everything-smaller = كل شيء أصغر
-find-in-this-document = بحث في هذا المستند
-outline-fold-unfold = طي، بسط
-common-indent-or-bring-out-in = إزاحة أو إبراز في قائمة؛ الخلية التالية في شبكة
-keys-keep-this-document-on-device = إبقاء هذا المستند على الجهاز
-shell-kept-on-this-device = محفوظ على هذا الجهاز
-shell-keyboard-shortcuts = اختصارات لوحة المفاتيح
-share-left = اليسار
-common-move-selected-items-up-or = نقل العناصر المحددة لأعلى أو لأسفل
-home-no-document-here-has-those = لا مستند هنا فيه هذه الكلمات
-find-not-found = لم يُعثر عليه
-menu-nothing-starts-q = لا شيء يبدأ بـ«{ $q }»
-shell-nothing-to-keep-yet = لا شيء للحفظ بعد
-common-nudge-shapes-in-hand = دفع الأشكال الحالية
-anim-nudge-shapes-in-hand-with = دفع الأشكال الحالية؛ وإن لم يكن شيء فانتقل إطارًا
-write-open-as-outline = فتح كمخطط تفصيلي
-shell-open-it = افتحه
-diagram-place-cards = بطاقات الأماكن
-anim-play-or-pause = تشغيل أو إيقاف مؤقت
-trip-presenting-trip = عرض الرحلة
-deck-presenting-back = العرض: رجوع
-deck-presenting-next-line-or-slide = العرض: السطر أو الشريحة التالية
-trip-presenting-next-stop = العرض: المحطة التالية
-trip-presenting-stop-before = العرض: المحطة السابقة
-diagram-print-place-cards = طباعة بطاقات الأماكن
-diagram-print-place-cards-card-guest = طباعة بطاقات الأماكن: بطاقة لكل ضيف، ثماني في ورقة letter، للقص
-shell-save-in-browser-is-off = «الحفظ في المتصفح» متوقف: هذا المتصفح لا يحفظ أي مستندات. شغّله من القائمة لتحفظها هنا.
-sheet-put-back-what-cell-held = إعادة ما كانت تحتويه الخلية
-sheet-put-dated-rows-on-calendar = ضع الصفوف المؤرخة في تقويم
-trip-put-stops-on-calendar-day = ضع المحطات في تقويم، يومًا لكل محطة
-home-search-your-documents = ابحث في مستنداتك
-common-select-all-words-of-box = تحديد الكل: كلمات الصندوق ثم كل شيء
-keys-show-these-shortcuts = عرض هذه الاختصارات
-# same
-write-a4 = A4
-write-letter = ورق رسائل
-common-back-to-words = العودة إلى النص
-common-extend-selection = توسيع التحديد
-deck-presenting-whole-slide = العرض: الشريحة كاملة
-trip-first-last = الأول، الأخير
-common-next-or-one-before = التالي أو السابق
-editor-this-browser-lets-page-paste = هذا المتصفح لا يسمح للصفحة باللصق إلا من لوحة المفاتيح: استخدم «لصق» فيها.
-drawer-size-of-everything = حجم كل شيء
-shell-skip-to-apps = تخطّ إلى التطبيقات
-shell-skip-to-document = تخطّ إلى المستند
-menu-starting-q = يبدأ بـ«{ $q }»
-common-step-out-close-collapse-let = الخروج: إغلاق، طي، ترك
-anim-first-frame-last = الإطار الأول، الأخير
-trip-next-stop = المحطة التالية
-deck-slide-before-slide-after-on = الشريحة السابقة، الشريحة التالية (على الشريط الجانبي)
-trip-stop-before = المحطة السابقة
-shell-this-device-keeps-another-version = يحتفظ هذا الجهاز بنسخة أخرى من «{ $title }»، من { $when }.
-shell-this-link-was-made-by = صُنع هذا الرابط في إصدار أحدث من مكتب صغير جدًا. أعد تحميل الصفحة للحصول عليه.
-keys-this-page = هذه الصفحة
-common-check-or-uncheck-task = تعليم مهمة أو إلغاء تعليمها
-drawer-to-add-tiny-little-office = لإضافة مكتب صغير جدًا إلى الشاشة الرئيسية: مشاركة، ثم إضافة إلى الشاشة الرئيسية.
-common-too-long-for-qr-code = أطول من أن يناسب رمز QR: اختصر المستند، أو شارك رابطًا قصيرًا.
-share-uses = يستخدم
-share-where = أين
-share-where-link-fits = أين يناسب الرابط
-share-any-length = أي طول
-home-n-documents-found = { $n ->
-        [zero] لا مستندات وُجدت
-        [one] وُجد مستند واحد
-        [two] وُجد مستندان
-        [few] وُجدت { $n } مستندات
-        [many] وُجد { $n } مستندًا
-       *[other] وُجد { $n } مستند
-    }
-common-n-of-count = { $n } من { $count }
-share-n-over = زيادة { $n }
-privacy-password-copied = تم نسخ كلمة المرور
-diagram-guest = ضيف
-outline-name-line = سمِّ الخط
-write-name-this-column = سمِّ هذا العمود
-diagram-new-idea = فكرة جديدة
-diagram-tap-empty-space-for-person = انقر مساحة فارغة لشخص؛ انقر واحدًا للكتابة عليه، وShift+Enter لدوره تحت الاسم، وEnter للتالي؛ اسحب واحدًا على آخر لوضعه تحته.
-diagram-tap-empty-space-for-event = انقر مساحة فارغة لحدث: اكتب متى، ثم Shift+Enter، ثم ما جرى؛ السنوات والتواريخ تتباعد كما وقعت؛ والمدة شريط.
-diagram-lanes-name = اسم المسار
-diagram-when = متى
-draw-align-center = المحاذاة: توسيط
-draw-align-left = المحاذاة: يسار
-draw-align-right = المحاذاة: يمين
-diagram-tap-person-to-type-on = انقر شخصًا للكتابة عليه، و+ بعد الاسم لشريكه، وShift+Enter لسنواته تحت الاسم؛ Enter للتالي؛ اسحب واحدًا على آخر لوضعه تحته؛ «وصل» يرسم خطًا منقطًا بين اثنين.
-diagram-tap-empty-space-for-table = انقر مساحة فارغة لطاولة؛ انقر طاولة أو شخصًا للكتابة، وفاصلة بعد الاسم للضيف التالي؛ اسحب شخصًا إلى طاولة أخرى.
-diagram-tap-inside-circles-to-add = انقر داخل الدوائر لإضافة شيء فيها، وفاصلة بعده للتالي؛ انقر اسم مجموعة لتغيير اسمها؛ اسحب شيئًا إلى دوائر أخرى.
-export-copy-link-that-downloads-ext = نسخ رابط ينزّل ملف .{ $ext }
-export-could-not-share-ext = تعذّرت مشاركة ملف .{ $ext }
-export-could-not-show-ext = تعذّر عرض ملف .{ $ext }
-export-download-ext = تنزيل ملف .{ $ext }
-export-share-ext = مشاركة ملف .{ $ext }…
-export-view-ext = عرض ملف .{ $ext }
+
+## files and zips dropped on the page (kit/file/open.ts)
+
+open-opened-name = تم فتح { $name }
+open-that-file-is-not-words = هذا الملف ليس كلمات يستطيع مكتب صغير جدًا قراءتها.
+open-that-file-is-too-large = هذا الملف أكبر من أن يكون مستندًا هنا.
 open-keep-them-on-this-device = الحفظ على هذا الجهاز
 open-nothing-is-saved-on-this = لا شيء يُحفظ على هذا الجهاز الآن. احفظها هنا أو افتح واحدًا منها.
 open-first = فتح الأول
@@ -1809,3 +1798,28 @@ open-n-documents-kept = { $n ->
         [many] { $n } مستندًا محفوظًا
        *[other] { $n } مستند محفوظ
     }
+
+## a document's QR code (kit/draw/qr-picture.ts)
+
+# Restored around the document: search, Find in this document, the shortcuts and the apps' keys, Mod+S, the size of
+# everything, Add to home screen, another version kept here, where the link fits, Open in another app, the QR code
+# of this document, Insert narrowed by typing, Trip presenting, a seating chart's place cards
+qr-code-of-this-document = رمز QR لهذا المستند
+
+## the keys, the shortcuts and the size of everything (kit/core/keys.ts, kit/ui/zoom.ts)
+
+keys-normal-size = الحجم العادي
+keys-everything-larger = كل شيء أكبر
+keys-everything-smaller = كل شيء أصغر
+keys-keep-this-document-on-device = إبقاء هذا المستند على الجهاز
+keys-show-these-shortcuts = عرض هذه الاختصارات
+keys-this-page = هذه الصفحة
+
+## Find in this document (kit/ui/find.ts)
+
+find-not-found = لم يُعثر عليه
+
+## a menu narrowed by typing (kit/ui/menu.ts)
+
+menu-nothing-starts-q = لا شيء يبدأ بـ«{ $q }»
+menu-starting-q = يبدأ بـ«{ $q }»

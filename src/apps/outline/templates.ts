@@ -74,7 +74,7 @@ export const templates = (): Template[] => [
   },
   {
     id: 'launch',
-    name: t('outline-launch-plan'),
+    name: t('common-launch-plan'),
     blurb: t('outline-product-launch-product-marketing-and'),
     doc: outline(
       'Fieldnote 2.0 launch',
@@ -103,7 +103,7 @@ export const templates = (): Template[] => [
   },
   {
     id: 'talk',
-    name: t('outline-talk'),
+    name: t('common-talk'),
     blurb: t('outline-twenty-minutes-in-three-parts'),
     doc: outline(
       'The link is the document',

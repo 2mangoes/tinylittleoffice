@@ -41,11 +41,11 @@ test('another language: its words, its plural forms, its number', async () => {
         [many] { $n } slajdów
        *[other] { $n } slajdu
     }
-common-find-app-template = Znajdź aplikację
+drawer-find-app-template-or-command = Znajdź aplikację
 `,
   );
   await setLanguage('pl');
-  expect(t('common-find-app-template')).toBe('Znajdź aplikację');
+  expect(t('drawer-find-app-template-or-command')).toBe('Znajdź aplikację');
   expect(t('example-n-slides', { n: 1 })).toBe('1 slajd');
   expect(t('example-n-slides', { n: 3 })).toBe('3 slajdy');
   expect(t('example-n-slides', { n: 5 })).toBe('5 slajdów');
@@ -53,7 +53,7 @@ common-find-app-template = Znajdź aplikację
   // A message the language lacks is said in English.
   expect(t('shell-menu')).toBe('Menu');
   await setLanguage(null);
-  expect(t('common-find-app-template')).toBe('Find app, template');
+  expect(t('drawer-find-app-template-or-command')).toBe('Find app, template, or command');
 });
 
 test('the browser language is matched to what is present', () => {
@@ -106,8 +106,8 @@ test('npm run i18n:check passes: every id the code and the command files use is 
 });
 
 test('a command file’s words are ids without t(): a label, hint, heading or letter given as a string always, any other string only when en.ftl has it', () => {
-  const src = `cmd('bold', 'bar-bold', { heading: "editor-marks", keys: 'Mod+B' }); block('title', 'title', 'shell-title', UI.text); cmd('x', (c) => t('look'), {})`;
-  expect(commandKeys(src, new Set(['shell-title', 'bar-bold']))).toEqual(['editor-marks', 'bar-bold', 'shell-title']);
+  const src = `cmd('bold', 'bar-bold', { heading: "editor-marks", keys: 'Mod+B' }); block('title', 'title', 'common-title', UI.text); cmd('x', (c) => t('look'), {})`;
+  expect(commandKeys(src, new Set(['common-title', 'bar-bold']))).toEqual(['editor-marks', 'bar-bold', 'common-title']);
 });
 
 test('the extractor reads t() calls, and appends what is new at the end under the mark, its English to write', () => {

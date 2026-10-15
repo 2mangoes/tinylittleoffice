@@ -16,7 +16,7 @@ export class ToInsert extends ToMenu {
     this.filter = true;
   }
   protected labelText(): string {
-    return this.label || t('bar-insert');
+    return this.label || t('common-insert');
   }
 }
 customElements.define('to-insert', ToInsert);

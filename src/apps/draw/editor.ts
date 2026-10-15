@@ -527,7 +527,7 @@ export class ToDrawEditor extends DocElement<DrawView> {
       }
       return;
     }
-    const shape: Shape = { k: this.tool, x: snap(x), y: snap(y), w: 0, h: 0, f: 0, text: this.tool === 't' ? t('sheet-text') : this.tool === 'i' ? this.stamp : '' };
+    const shape: Shape = { k: this.tool, x: snap(x), y: snap(y), w: 0, h: 0, f: 0, text: this.tool === 't' ? t('common-text') : this.tool === 'i' ? this.stamp : '' };
     this.drag = { mode: 'draw', start: [snap(x), snap(y)], shape };
   }
 
@@ -1197,7 +1197,7 @@ export class ToDrawEditor extends DocElement<DrawView> {
       <p class="to-hint">${t('draw-read-aloud-to-people-who')}</p>
       <div class="to-row">
         ${suggestion ? html`<button type="button" class="to-btn" @click=${() => (this.altDraft = suggestion)}>${t('draw-describe-from-shapes')}</button>` : nothing}
-        <button type="button" class="to-btn primary draw-alt-done" @click=${() => this.saveAlt()}>${icon(UI.check, 16)}<span>${t('editor-done')}</span></button>
+        <button type="button" class="to-btn primary draw-alt-done" @click=${() => this.saveAlt()}>${icon(UI.check, 16)}<span>${t('common-done')}</span></button>
       </div>`}></to-dialog>`;
   }
 }

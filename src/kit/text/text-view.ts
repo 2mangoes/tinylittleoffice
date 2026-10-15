@@ -59,7 +59,7 @@ function node(n: TextNode): string {
     case 'doc':
       return `<section class="to-text-doc" aria-label="${xml(n.title || n.app)}">${textHtml(n.nodes)}</section>`;
     case 'notes':
-      return `<section class="to-text-notes" aria-label="${xml(t('write-footnotes'))}"><ol>${n.notes.map((r) => `<li>${runs(r)}</li>`).join('')}</ol></section>`;
+      return `<section class="to-text-notes" aria-label="${xml(t('common-footnotes'))}"><ol>${n.notes.map((r) => `<li>${runs(r)}</li>`).join('')}</ol></section>`;
     case 'break':
       return '<hr>';
   }

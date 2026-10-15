@@ -3,10 +3,10 @@
 ## the shell: header
 
 shell-menu = 메뉴
-shell-title = 제목
+common-title = 제목
 # A new document of the app, and one not yet named; { $noun } is the app's noun: "New presentation".
-shell-new-noun = 새 { $noun }
-shell-untitled-noun = 제목 없는 { $noun }
+common-new-noun = 새 { $noun }
+common-untitled-noun = 제목 없는 { $noun }
 shell-download = 다운로드
 shell-loading = 불러오는 중…
 shell-this-link-holds-something-that = 이 링크에 읽을 수 없는 내용이 들어 있어요. 복사하다가 중간에 잘렸을 수 있어요.
@@ -21,15 +21,25 @@ shell-copy-link-and-go = 링크를 복사하고 이동
 shell-turn-on-save-in-browser = 브라우저에 저장을 켜고 여기에 보관
 shell-go-without = 그냥 이동
 shell-save-in-browser-is-on = 브라우저에 저장이 켜졌어요. 이 브라우저가 연 문서를 남겨요. 끄려면 메뉴에서 끄세요.
+shell-another-version = 다른 버전
+shell-kept-on-this-device = 이 기기에 보관됨
+shell-keyboard-shortcuts = 키보드 단축키
+shell-nothing-to-keep-yet = 아직 보관할 게 없어요
+shell-open-it = 열기
+shell-save-in-browser-is-off = 브라우저에 저장이 꺼져 있어요. 이 브라우저는 문서를 보관하지 않아요. 여기에 보관하려면 메뉴에서 켜세요.
+shell-skip-to-apps = 앱으로 건너뛰기
+shell-skip-to-document = 문서로 건너뛰기
+shell-this-device-keeps-another-version = 이 기기에 { $when }에 보관한 “{ $title }”의 다른 버전이 있어요.
+shell-this-link-was-made-by = 이 링크는 더 새로운 Tiny Little Office에서 만들었어요. 페이지를 새로고침해서 업데이트하세요.
 
 ## the home page
 
 home-blank = 빈 문서
-home-templates = 템플릿
+common-templates = 템플릿
 # The button under an app's tile, naming the template list: "Start Text from"
 # The list of an app's documents kept on this device, under its tile: "Write documents"
 home-app-documents = { $app } 문서
-home-forget = 지우기
+common-forget = 지우기
 # The button that forgets one kept document: "Forget Launch notes"
 home-forget-title = { $title } 지우기
 # Under an app's documents, the rest folded away: "3 more"
@@ -37,28 +47,38 @@ home-n-more = { $n }개 더
 home-aboard-project-made-with-respect = { $aboard }의 프로젝트. 뉴욕에서 존중을 담아 만들었습니다.
 home-beta-version = 베타 버전
 home-email = 이메일
+home-templates-for-app = { $app } 템플릿
+home-app-templates = { $app } 템플릿
+home-templates-for-app-name = { $app } 템플릿: { $name }
+home-templates-are-not-saved-in = 템플릿이 아직 이 브라우저에 저장되지 않았어요. 인터넷에 연결하면 볼 수 있어요.
+home-documents-found = 찾은 문서
+home-no-document-here-has-those = 그 글이 들어 있는 문서가 없어요
+home-search-your-documents = 내 문서 검색
+home-n-documents-found = 문서 { $n ->
+       *[other] { $n }
+    }개를 찾았어요
 
 ## the drawer (hamburger menu)
 
 drawer-apps = 앱
-drawer-close = 닫기
+common-close = 닫기
 drawer-default-name = 기본값: { $name }
 drawer-save-in-browser = 브라우저에 저장
 drawer-what-is-this = 이게 뭔가요?
 drawer-turn-on-to-save-files = 켜면 브라우저에 파일을 저장해요.
 drawer-turn-off-to-remove-all = 끄면 모든 파일과 설정을 지워요.
-drawer-nothing-saved-in-this-browser = 이 브라우저에 저장 안 함
-drawer-saving-in-this-browser = 이 브라우저에 저장 중
+common-nothing-saved-in-this-browser = 이 브라우저에 저장 안 함
+common-saving-in-this-browser = 이 브라우저에 저장 중
 drawer-remove-all-files-and-settings = 이 브라우저에서 모든 파일과 설정을 지울까요?
 drawer-language = 언어
-drawer-theme = 테마
+common-theme = 테마
 drawer-match-device = 기기 설정에 맞춤
 drawer-light = 밝게
 drawer-dark = 어둡게
 drawer-about = 정보
 # The name itself is translated too (Paul, 2026-10-10): each language says it in its own words.
 # same
-drawer-tiny-little-office = Tiny Little Office
+common-tiny-little-office = Tiny Little Office
 drawer-about-tiny-little-office = Tiny Little Office 정보
 drawer-tiny-little-office-is-experiment = Tiny Little Office는 뉴욕의 디지털·AI 전략 및 소프트웨어 개발 회사 { $aboard }의 실험입니다.
 drawer-to-reach-out-with-questions = 궁금한 점이 있으면 { $email }.
@@ -68,6 +88,13 @@ drawer-github-repository = GitHub 저장소
 drawer-all-of-these-notes-these = 이 모든 메모와 그림, 마커로 쓴 이 문장들은 시간이 지나면 바랜다. 덧없는 것만이 남는다.
 drawer-eugene-ionesco-book = 외젠 이오네스코, { $book }
 drawer-discoveries = 발견
+drawer-documents = 문서
+drawer-find-app-template-or-command = 앱, 템플릿, 명령 찾기
+drawer-commands = 명령
+drawer-nothing-by-that-name = 그 이름은 없어요
+drawer-add-to-home-screen = 홈 화면에 추가
+drawer-size-of-everything = 전체 크기
+drawer-to-add-tiny-little-office = Tiny Little Office를 홈 화면에 추가하려면 공유를 누른 다음 홈 화면에 추가를 누르세요.
 
 ## links that leave the site (kit/ui/link-guard.ts)
 
@@ -103,7 +130,7 @@ share-expires-in-n-hours-date = { $n }시간 후 만료 ({ $date })
 share-expires-in-n-minutes-date = { $n }분 후 만료 ({ $date })
 share-opens-as-pages-to-read = 읽는 페이지로 열려요
 share-opens-in-editor = 편집기로 열려요
-share-whoever-opens-this-link-gets = 이 링크를 여는 사람은 저마다 자기 사본을 받아요. 그 사람이 고친 내용은 내 링크가 아니라 그 사람 링크에 남아요. 고친 걸 보려면 링크를 다시 보내 달라고 하세요.
+common-whoever-opens-this-link-gets = 이 링크를 여는 사람은 저마다 자기 사본을 받아요. 그 사람이 고친 내용은 내 링크가 아니라 그 사람 링크에 남아요. 고친 걸 보려면 링크를 다시 보내 달라고 하세요.
 share-short-link-that-expires = 만료되는 짧은 링크
 share-this-link-expires-in-n = 이 링크는 { $n }일 후 만료돼요
 share-this-link-expires-in-n-hours = 이 링크는 { $n }시간 후 만료돼요
@@ -124,9 +151,9 @@ share-display-link = 보기 링크
 share-opens = 열리는 방식
 share-link-copied = 링크를 복사했어요
 share-could-not-copy = 복사하지 못했어요
-share-share = 공유…
-share-qr-code = QR 코드
-share-qr-code-of-this-document = 이 문서의 QR 코드
+common-share = 공유…
+common-qr-code = QR 코드
+common-qr-code-of-this-document = 이 문서의 QR 코드
 share-this-document-is-n-bytes = 이 문서는 { $n }바이트인데 가장 큰 QR 코드에는 { $max }바이트까지 들어가요. { $over }바이트를 줄이면 들어가요.
 share-this-document-is-n-characters = 이 문서는 { $n }자인데 짧은 링크에는 { $max }자까지 들어가요. { $over }자를 줄이면 들어가요.
 share-expires-after = 만료까지
@@ -142,8 +169,36 @@ share-could-not-shorten-link = 링크를 줄이지 못했어요.
 share-this-document-is-too-long = 이 문서는 짧은 링크로 만들기에는 너무 길어요.
 share-up-to-hundred-links-day = 한 주소에서 하루에 링크 100개까지 만들 수 있어요.
 share-remove = 제거
-share-link = 링크
-share-short-link = 짧은 링크
+common-link = 링크
+common-short-link = 짧은 링크
+share-new-noun-date-n = 새 { $noun } { $date } #{ $n }
+# Files, compare, posting and embedding: the agent and sharing surface.
+share-mastodon-server-like-mastodon-social = mastodon.social 같은 마스토돈 서버
+share-change = 변경
+share-copy-embed-code = 삽입 코드 복사
+share-copy-show-link = 발표 링크 복사
+share-embed = 삽입
+share-embed-code-copied = 삽입 코드를 복사했어요
+share-opens-deck-already-presenting = 열면 바로 발표 상태가 돼요.
+share-post = 게시
+share-post-link = 링크 게시
+share-show-preview-of-first-page = 첫 페이지 미리보기 보여 주기
+share-picture-of-first-page-and = 첫 페이지 그림과 제목은 소셜 네트워크가 가져갈 수 있도록 한 달 동안 서버에서 읽을 수 있게 보관돼요. 문서 자체는 보관되지 않아요.
+share-shared-without-preview-reason = 미리보기 없이 공유했어요: { $reason }
+share-making-preview = 미리 보기 만드는 중…
+share-page-could-not-be-drawn = 페이지를 그리지 못했어요
+share-picture-is-over-400-kb = 그림이 400KB를 넘어요
+share-server-could-not-be-reached = 서버에 연결하지 못했어요
+share-hundred-previews-day-from-one = 한 주소에서 하루에 미리보기 100개까지예요
+share-server-refused-picture = 서버가 그림을 받지 않았어요
+share-pages-in-frame-on-another = 다른 사이트의 프레임 안에 페이지를 보여 주고, 여기서 열 수 있는 링크도 달아요.
+share-your-mastodon-server = 내 마스토돈 서버
+share-left = 왼쪽
+share-uses = 쓰는 곳
+share-where = 위치
+share-where-link-fits = 링크를 쓸 수 있는 곳
+share-any-length = 길이 제한 없음
+share-n-over = { $n } 초과
 
 ## privacy (kit/share/privacy.ts, kit/ui/privacy-dialog.ts): the password, what the device holds
 
@@ -156,12 +211,12 @@ privacy-forget-everything = 모두 지우기
 privacy-preview-sent-with-link-to = 링크와 함께 소셜 네트워크로 보내는 미리보기는 첫 페이지 그림, 제목, 첫 단어들이며, 한 달 동안 서버에서 읽을 수 있어요. 문서 자체는 절대 서버로 가지 않아요.
 privacy-forget-everything-this-site-keeps = 이 사이트가 여기에 둔 모든 것을 지우고, 지금부터 아무것도 보관하지 않을까요? 문서 자체는 각 링크 안에 있어요.
 privacy-locked = 잠김
-privacy-locked-document = 잠긴 문서
+common-locked-document = 잠긴 문서
 privacy-new-password = 새 비밀번호
 privacy-no-password = 비밀번호 없음
 privacy-none = 없음
 privacy-opening = 여는 중…
-privacy-password = 비밀번호
+common-password = 비밀번호
 privacy-password-removed = 비밀번호를 없앴어요
 privacy-password-set-link-holds-only = 비밀번호를 설정했어요. 링크에는 암호문만 있어요
 privacy-password-ellipsis = 비밀번호…
@@ -178,26 +233,27 @@ privacy-short-links-made-here-until = 여기서 만든 짧은 링크예요. 만�
 privacy-their-names-and-links-for = 홈 화면에 보여 줄 이름과 링크예요.
 privacy-theme-lifetime-of-short-links = 테마, 짧은 링크의 유효 기간이에요.
 privacy-this-document-has-password-link = 이 문서에는 비밀번호가 있어요. 링크와 거기서 만든 짧은 링크에는 암호문만 들어 있어요.
-privacy-this-document-is-locked = 이 문서는 잠겨 있어요
+common-this-document-is-locked = 이 문서는 잠겨 있어요
 privacy-this-document-is-locked-with = 이 문서는 비밀번호로 잠겨 있어요.
 privacy-unlock = 잠금 해제
-privacy-unlock-ellipsis = 잠금 해제…
+common-unlock-ellipsis = 잠금 해제…
 privacy-what-this-device-holds = 이 기기에 있는 것
 privacy-your-documents = 내 문서
 privacy-your-browsers-history = 브라우저 기록
 privacy-every-document-opened-here-in = 여기서 연 모든 문서의 전체 내용. 비밀번호가 걸린 문서는 빼고요.
 privacy-not-ours-to-clear = 저희가 지울 수 없어요
 privacy-by-name = { $name }
-privacy-n-documents = 문서 { $n }개
+common-n-documents = 문서 { $n }개
 privacy-n-links = 링크 { $n }개
 privacy-n-set = { $n }개 설정됨
 privacy-copy-this-and-send-it = 이것을 복사해서 링크와 다른 방법으로 보내세요. 다시 보여 줄 수 없어요.
 privacy-make-another = 다른 것 만들기
+privacy-password-copied = 비밀번호를 복사했어요
 
 ## a document locked with a password, placed inside another (kit/share/locked.ts, kit/ui/locked-doc.ts)
 
 # The card drawn where it sits; { $app } is the app's name: "A Spreadsheet document, locked with a password".
-locked-with-password = 비밀번호로 잠김
+common-with-password = 비밀번호로 잠김
 locked-app-document-locked-with-password = 비밀번호로 잠긴 { $app } 문서
 locked-with-password-unlock = 비밀번호로 잠겨 있어요. 잠금 해제…
 locked-document-locked-with-password = 비밀번호로 잠긴 문서
@@ -223,24 +279,37 @@ common-chosen-tasks = 선택한 할 일
 common-open = 열기
 common-task = 할 일
 common-tasks = 할 일
+common-find-app-doc-template-or = 앱, 문서, 템플릿, 명령 찾기
+common-in-this-document = 이 문서에서 찾기
+common-indent-or-bring-out-in = 목록에서는 들여쓰기나 내어쓰기, 표에서는 다음 셀
+common-move-selected-items-up-or = 선택한 항목을 위나 아래로 이동
+common-nudge-shapes-in-hand = 선택한 도형을 조금씩 이동
+common-select-all-words-of-box = 모두 선택: 상자의 글, 그다음 전체
+common-back-to-words = 글로 돌아가기
+common-extend-selection = 선택 범위 넓히기
+common-next-or-one-before = 다음 또는 이전
+common-step-out-close-collapse-let = 빠져나오기: 닫기, 접기, 놓기
+common-check-or-uncheck-task = 할 일 체크 또는 체크 해제
+common-too-long-for-qr-code = QR 코드에 넣기에는 너무 길어요. 문서를 줄이거나 짧은 링크를 공유하세요.
+common-n-of-count = { $count }개 중 { $n }
 
 ## downloads
 
 download-print = 인쇄
-download-print-or-save-as-pdf = 인쇄 또는 PDF로 저장
+common-print-or-save-as-pdf = 인쇄 또는 PDF로 저장
 download-picture-png = 그림 (PNG)
-download-web-page-html = 웹 페이지 (HTML)
+common-web-page-html = 웹 페이지 (HTML)
 download-text-tlo = 텍스트 (TLO)
 download-data-json = 데이터 (JSON)
 download-downloaded-name = { $name }을(를) 다운로드했어요
 download-failed = 다운로드하지 못했어요
-download-open-in-tiny-little-office = Tiny Little Office에서 열기
+common-open-in-tiny-little-office = Tiny Little Office에서 열기
 # Under a document cut off at a slide's foot: a link that opens it whole, in its own app.
 download-see-more = 더 보기
 
 ## the bar, shared by every app
 
-bar-insert = 삽입
+common-insert = 삽입
 bar-bold = 굵게
 bar-italic = 기울임
 bar-underline = 밑줄
@@ -249,26 +318,26 @@ bar-highlight = 강조
 bar-heading = 제목
 bar-bulleted-list = 글머리 기호 목록
 bar-numbered-list = 번호 목록
-bar-table = 표
+common-table = 표
 bar-footnote = 각주
-bar-date = 날짜
+common-date = 날짜
 bar-undo = 실행 취소
 bar-redo = 다시 실행
-bar-today = 오늘
+common-today = 오늘
 
 ## the editor (<to-text>): chips, cards and the bubbles
 
 # A footnote's mark, and its words where the notes are drawn, by its number: spoken.
-editor-footnote-n = 각주 { $n }
+common-footnote-n = 각주 { $n }
 # A card standing for another document held in this one, of a kind no app here reads: "abc document".
-editor-app-document = { $app } 문서
+common-app-document = { $app } 문서
 # The same card when its app is known; { $noun } is the app's noun: "A spreadsheet".
-editor-noun = { $noun }
+common-noun = { $noun }
 editor-code = 코드
 editor-connection = 연결
 editor-n-rows = { $n }행
 editor-notes-words = 각주 내용
-editor-done = 완료
+common-done = 완료
 editor-address = 주소
 editor-not-address = 주소가 아니에요
 editor-set-link = 링크 설정
@@ -276,9 +345,13 @@ editor-open-link = 링크 열기
 editor-change-link = 링크 편집
 editor-remove-link = 링크 제거
 # The selection bubble's name: what can be done to the words selected.
-editor-format = 서식
+common-format = 서식
 editor-done-lowercase = 완료
 editor-not-done = 미완료
+editor-bold-italic-and-links = 굵게, 기울임, 링크
+editor-one-of-words-column-holds = 열에 있는 값 중 하나나 새 값
+editor-option = 선택
+editor-this-browser-lets-page-paste = 이 브라우저는 키보드로만 붙여넣을 수 있어요. 붙여넣기 단축키를 쓰세요.
 
 ## the example in the kit's own documentation
 
@@ -286,18 +359,18 @@ example-n-slides = 슬라이드 { $n }장
 
 ## the Word Processor
 
-write-word-processor = 워드 프로세서
+common-word-processor = 워드 프로세서
 # What one of its documents is called, in running text: "Untitled document"; each app's noun is in its section.
 write-document-lowercase = 문서
 # The group heading the Word Processor sits under on the home page.
-write-words = 글
+common-words = 글
 write-words-on-page-headings-lists = 페이지 위의 글이에요. 제목, 목록, 링크, 각주, 합계가 계산되는 표를 넣고 Letter나 A4로 인쇄해요.
 write-document = 문서
 write-here = 여기에 쓰세요.
 write-subheading = 소제목
 write-paragraph = 본문
-write-bring-out = 내어쓰기
-write-indent = 들여쓰기
+common-bring-out = 내어쓰기
+common-indent = 들여쓰기
 write-align = 정렬
 write-align-left = 왼쪽 정렬
 write-center = 가운데 정렬
@@ -320,17 +393,17 @@ write-narrow-headline-two-columns = 좁은 표제, 두 단
 write-horizontal-rule = 가로줄
 # Insert ▾'s rule in a document: what follows starts the next page.
 write-page-break = 페이지 나누기
-write-ok = 확인
+common-ok = 확인
 write-this-card = 이 카드
 write-open-in-app = { $app }에서 열기
 write-locked-worked-out-for-you = 잠김: 자동으로 계산돼요
-write-footnotes = 각주
+common-footnotes = 각주
 write-back-to-footnote-n-in = 본문의 각주 { $n }(으)로 돌아가기
 write-back-to-text = 본문으로 돌아가기
 write-n-words = { $n }단어
 # same
 write-word-docx = Word (DOCX)
-write-markdown = 마크다운
+common-markdown = 마크다운
 write-rich-text-rtf = 서식 있는 텍스트 (RTF)
 # A table in the text: its heads, its handle, its column menu.
 write-add-column-before = 앞에 열 추가
@@ -393,6 +466,12 @@ write-petition = 청원서
 write-what-you-ask-why-and = 요청하는 내용, 이유, 동의하는 사람들의 이름.
 write-terms-of-service = 이용 약관
 write-small-businesss-terms-in-plain = 작은 가게의 약관을 쉬운 말로. 예약, 가격, 열쇠, 만약의 경우, 종료.
+write-open-as-outline = 개요로 열기
+# same
+write-a4 = A4
+# same
+write-letter = Letter
+write-name-this-column = 이 열 이름 짓기
 
 ## Insert's dialog (kit/ui/insert-dialogs.ts): Tiny Little Office Doc
 
@@ -401,13 +480,13 @@ insert-opening-short-link = 짧은 링크를 여는 중…
 insert-paste-link-of-another-tiny = 다른 Tiny Little Office 문서의 링크를 긴 것이든 짧은 것이든 붙여넣으세요. 첫 페이지가 여기에 나와요.
 insert-this-is-not-tiny-little = Tiny Little Office 링크가 아니거나 만료됐어요.
 insert-tiny-little-office-doc = Tiny Little Office 문서
-insert-tiny-little-office-doc-ellipsis = Tiny Little Office 문서…
+common-tiny-little-office-doc-ellipsis = Tiny Little Office 문서…
 # Insert ▾'s group of the apps a new document can be made in, inside this one.
-insert-new-document = 새 문서
+common-new-document = 새 문서
 
 ## another document edited in place (kit/ui/doc-dialog.ts); a table's size is Rows × Columns
 
-doc-cancel = 취소
+common-cancel = 취소
 doc-rows = 행
 
 ## charts (kit/draw/chart.ts)
@@ -416,7 +495,7 @@ chart-empty-chart = 빈 차트
 chart-bars = 막대
 chart-flows-sankey = 흐름 (생키)
 chart-flows-list = 흐름: { $list }.
-chart-lines = 선
+common-lines = 선
 chart-nothing-to-chart-yet = 아직 차트로 그릴 게 없어요
 chart-nothing-to-chart-yet-rows = 아직 차트로 그릴 게 없어요. 보내는 곳 | 받는 곳 | 금액 형식의 행이 필요해요
 chart-pie = 원형
@@ -430,10 +509,10 @@ sheet-fit-this-column-to-its = 이 열을 글자 너비에 맞추기
 sheet-cells-in-hand = 선택한 셀
 sheet-check-ref = { $ref } 체크
 # The column type that holds words as typed.
-sheet-text = 텍스트
-sheet-spreadsheet = 스프레드시트
+common-text = 텍스트
+common-spreadsheet = 스프레드시트
 sheet-spreadsheet-lowercase = 스프레드시트
-sheet-numbers = 숫자
+common-numbers = 숫자
 sheet-spreadsheet-with-formulas-named-cells = 수식, 이름 붙인 셀, 차트가 있는 스프레드시트예요. 열 세 개로 시작해서 필요하면 늘려요.
 sheet-budget = 예산
 sheet-planned-against-actual-line-each = 계획과 실제를 한 줄씩 비교하고 차이와 합계를 보여 줘요.
@@ -498,42 +577,42 @@ sheet-eight-teams-single-elimination-each = 8팀 토너먼트. 경기마다 점�
 # same
 sheet-excel-xlsx = Excel (XLSX)
 # same
-sheet-csv = CSV
+common-csv = CSV
 sheet-chart-svg = 차트 (SVG)
 sheet-chart-png = 차트 (PNG)
 sheet-empty-sheet = 빈 시트
 sheet-n-of-max-shown = ({ $max }개 중 { $n }개 표시)
 sheet-50-more-rows = 50행 더
-sheet-add-column = 열 추가
-sheet-add-column-after = 뒤에 열 추가
+common-add-column = 열 추가
+common-add-column-after = 뒤에 열 추가
 sheet-chart = 차트
 sheet-chart-of-table = 표 차트
 sheet-checkbox = 체크박스
 sheet-column-after = 뒤의 열
-sheet-column-c = { $c }열
-sheet-column-c-holds = { $c }열의 내용
+common-column-c = { $c }열
+common-column-c-holds = { $c }열의 내용
 sheet-column-c-type-what-it = { $c }열: { $type }. 담긴 내용, 정렬, 열 추가나 삭제
-sheet-columns = 열
-sheet-delete-which = { $which } 삭제
-sheet-drag-to-fill = 끌어서 채우기
+common-columns = 열
+common-delete-which = { $which } 삭제
+common-drag-to-fill = 끌어서 채우기
 sheet-abc-or-123-for-this = 이 열에서 ABC 또는 123
 sheet-drag-to-resize-double-click = 끌면 크기 조절, 더블클릭하면 맞춤
 sheet-fill-down-from-top-row = 맨 위 행에서 아래로 채우기
 sheet-fill-right-from-first-column = 첫 열에서 오른쪽으로 채우기
-sheet-fill-drag-to-carry-these = 채우기: 끌어서 이 셀을 이어 가요
+common-fill-drag-to-carry-these = 채우기: 끌어서 이 셀을 이어 가요
 sheet-fit-columns-to-page = 열을 페이지에 맞추기
 sheet-formula = 수식
 sheet-function = 함수
 sheet-high-to-low = 높은 순
-sheet-insert-n-rows-above = 위에 { $n }행 삽입
-sheet-insert-n-rows-below = 아래에 { $n }행 삽입
+common-insert-n-rows-above = 위에 { $n }행 삽입
+common-insert-n-rows-below = 아래에 { $n }행 삽입
 sheet-letters-keyboard = 문자 키보드
 sheet-lock-these-cells-so-reader = 읽는 사람이 건드리지 않게 이 셀 잠금
 sheet-locked-part-of-model = 잠김: 모델의 일부예요
 sheet-low-to-high = 낮은 순
 sheet-money = 금액
-sheet-name = 이름
-sheet-name-of-column-c = { $c }열 이름
+common-name = 이름
+common-name-of-column-c = { $c }열 이름
 sheet-names-cell-to-its-right = 오른쪽 셀의 이름이에요
 # A money column's currency (Money picked in a column's menu): the field's hint, and what it says of words it cannot read.
 sheet-symbol-like-or-code-like = $ 같은 기호나 USD 같은 코드를 쓰세요. 비워 두면 문서의 통화를 따라요.
@@ -543,15 +622,15 @@ sheet-number = 숫자
 sheet-open-link = { $link } 열기
 sheet-opens-when-clicked = 클릭하면 열려요
 sheet-percent = 퍼센트
-sheet-remove-this-column = 이 열 삭제
+common-remove-this-column = 이 열 삭제
 sheet-resize-column-c = { $c }열 크기 조절
 sheet-rich-text = 서식 있는 텍스트
 sheet-row-above = 위의 행
 sheet-row-below = 아래의 행
-sheet-row-n = { $n }행
-sheet-row-n-lowercase = { $n }행
-sheet-row-n-insert-or-delete = { $n }행: 행 삽입이나 삭제
-sheet-rows-b = { $a }–{ $b }행
+common-row-n = { $n }행
+common-row-n-lowercase = { $n }행
+common-row-n-insert-or-delete = { $n }행: 행 삽입이나 삭제
+common-rows-b = { $a }–{ $b }행
 sheet-selected-cells = 선택한 셀
 sheet-show-all-text = 글 전체 보기
 sheet-shown-as-typed = 입력한 그대로 표시
@@ -562,22 +641,37 @@ sheet-is-full-its-last-rows = 시트가 가득 찼어요. 마지막 행에 내�
 sheet-three-at-least = 최소 세 개
 sheet-unlock-these-cells = 이 셀 잠금 해제
 sheet-what-it-holds-sort-columns = 내용, 정렬, 열
+# The Spreadsheet: any column removed, the Option column, rich cells, a chart put in from Insert.
+sheet-keeps-one-column = 시트에는 열이 하나는 있어야 해요
+sheet-choices = 선택지
+sheet-choices-for-ref = { $ref }의 선택지
+sheet-has-one = 시트에 하나 있어요
+sheet-edit-cell-caret-at-its = 셀 편집, 커서는 끝에
+sheet-put-back-what-cell-held = 셀에 있던 내용 되돌리기
+sheet-put-dated-rows-on-calendar = 날짜가 있는 행을 캘린더에 넣기
 
 ## downloads: hand-offs to another app (kit/file/exports.ts)
 
 export-open-in = 다음에서 열기
+export-pdf-file = PDF 파일
+export-copy-link-that-downloads-ext = .{ $ext }을(를) 다운로드하는 링크 복사
+export-could-not-share-ext = .{ $ext }을(를) 공유하지 못했어요
+export-could-not-show-ext = .{ $ext }을(를) 표시하지 못했어요
+export-download-ext = .{ $ext } 다운로드
+export-share-ext = .{ $ext } 공유…
+export-view-ext = .{ $ext } 보기
 
 ## the icon library (kit/ui/icons-picker.ts)
 
-icons-icon = 아이콘
+common-icon = 아이콘
 icons-favorites = 즐겨찾기
 icons-search-icons = 아이콘 검색
 icons-suggested = 추천
-icons-icons = 아이콘
+common-icons = 아이콘
 icons-no-icons-match-q = “{ $q }”에 맞는 아이콘이 없어요.
 icons-search-by-name-or-by = 이름이나 뜻(“돈”, “날씨”, “ai”)으로 검색하면 { $n }개 아이콘 중에서 찾아요.
 icons-no-icon = 아이콘 없음
-icons-icon-or-emoji = 아이콘 또는 이모지
+common-icon-or-emoji = 아이콘 또는 이모지
 icons-search-icons-and-emoji = 아이콘과 이모지 검색
 icons-or-emoji = 아이콘 또는 이모지
 icons-emoji = 이모지
@@ -597,9 +691,9 @@ icons-flags = 깃발
 
 # The group heading the Drawing Tool sits under on the home page: Design. 'Draw' is the Animator's mode for drawing.
 draw-draw = 그리기
-draw-drawing-tool = 드로잉 도구
+common-drawing-tool = 드로잉 도구
 draw-drawing = 그림
-draw-design = 디자인
+common-design = 디자인
 draw-boxes-arrows-icons-and-labels = 격자 위에 상자, 화살표, 아이콘, 라벨을 그려요. 배경 타일이 될 수 있는 픽셀 아트도 돼요.
 draw-request-flow = 요청 흐름
 draw-browser-asks-server-which-reads = 브라우저가 서버에 요청하고 서버가 데이터를 읽어요. 화살표로 이은 상자예요.
@@ -617,7 +711,7 @@ draw-phone-screen-sketched-in-boxes = 만들기 전에 상자로 스케치한 �
 draw-rosette-with-ribbons-for-volunteer = 올해의 자원봉사자에게 주는 리본 달린 꽃 모양 배지예요. 인쇄해서 오려 달아 주세요.
 draw-block-party-from-above-stage = 동네 거리 축제를 위에서 본 모습. 무대, 가판, 응급 처치소, 길을 잃으면 만날 곳.
 draw-badge = 배지
-draw-birthday-card = 생일 카드
+common-birthday-card = 생일 카드
 draw-can-we-refund-it-stores = 환불할 수 있을까요? 가게의 반품 규정을 질문, 답, 해야 할 일로 정리했어요.
 draw-event-map = 행사 지도
 draw-four-16-by-16-icons = 16×16 아이콘 네 개를 한 격자에 담았어요. 해, 구름, 비, 폭풍이고 일기예보나 버튼에 복사해 쓰세요.
@@ -631,7 +725,7 @@ draw-three-ideas-for-coffee-roasters = 커피 로스터리 로고 시안 세 개
 draw-weather-icons = 날씨 아이콘
 draw-what-happens-to-package-from = 물건을 산 순간부터 택배가 거치는 과정을 아이콘과 연결선으로 단계별로 그렸어요.
 draw-wireframe = 와이어프레임
-draw-picture-svg = 그림 (SVG)
+common-picture-svg = 그림 (SVG)
 draw-background-tile-svg = 배경 타일 (SVG)
 draw-background-tile-png = 배경 타일 (PNG)
 draw-animate-this-drawing = 이 그림으로 애니메이션 만들기
@@ -657,14 +751,14 @@ draw-rounded-box = 둥근 상자
 draw-hexagon = 육각형
 draw-parallelogram = 평행사변형
 draw-cylinder = 원통
-draw-note = 메모
-draw-black = 검정
-draw-red = 빨강
-draw-orange = 주황
-draw-green = 초록
-draw-blue = 파랑
-draw-purple = 보라
-draw-indigo = 남색
+common-note = 메모
+common-black = 검정
+common-red = 빨강
+common-orange = 주황
+common-green = 초록
+common-blue = 파랑
+common-purple = 보라
+common-indigo = 남색
 draw-yellow = 노랑
 draw-sky = 하늘색
 draw-pink = 분홍
@@ -680,13 +774,13 @@ draw-no-fill = 채우기 없음
 draw-fill = 채우기
 draw-bring-to-front = 맨 앞으로 가져오기
 draw-send-to-back = 맨 뒤로 보내기
-draw-duplicate = 복제
-draw-edit = 편집
-draw-delete = 삭제
+common-duplicate = 복제
+common-edit = 편집
+common-delete = 삭제
 draw-put-icon-on-this-shape = 이 도형에 아이콘 넣기
 draw-place-icon = 아이콘 놓기
-draw-zoom-in = 확대
-draw-zoom-out = 축소
+common-zoom-in = 확대
+common-zoom-out = 축소
 draw-alt = 대체
 draw-alt-text = 대체 텍스트
 draw-alt-text-alt = 대체 텍스트: { $alt }
@@ -715,7 +809,7 @@ draw-as-repeating-background = 반복 배경으로
 # The contextual bar under a shape, and its words typed on it.
 draw-dashed-line = 파선
 draw-dotted-line = 점선
-draw-edit-words = 글 편집
+common-edit-words = 글 편집
 draw-extra-large-text = 아주 큰 글자
 draw-gray-fill = 회색 채우기
 # same
@@ -740,6 +834,10 @@ draw-drawing-canvas-v-selects-r = 그림 캔버스. V는 선택, R, E, D, L, A, 
 draw-tap-shape-to-select-it = 도형을 탭해 선택하거나 도형 둘레를 끌어 고르세요. 그리려면 도구를 고르세요.
 draw-rotate-left = 왼쪽으로 회전
 draw-rotate-right = 오른쪽으로 회전
+draw-pixels-n-n = 픽셀 { $n }×{ $n }
+draw-align-center = 정렬: 가운데
+draw-align-left = 정렬: 왼쪽
+draw-align-right = 정렬: 오른쪽
 
 ## the Animator
 
@@ -795,7 +893,7 @@ anim-pixel-art-is-made-in = 픽셀 아트는 드로잉 도구에서 만들어요
 anim-rainbow = 무지개
 anim-remove-this-key = 이 키 삭제
 anim-shadow = 그림자
-anim-size = 크기
+common-size = 크기
 anim-spin = 회전
 anim-stage-alt-arrow-keys-move = 무대: { $alt }. 화살표 키로 선택한 도형(또는 시간)을 움직이고, 쉼표와 마침표로 한 프레임씩 이동하고, Space로 재생하고, K로 키를 남겨요.
 anim-shapes-in-hand = 선택한 도형
@@ -828,6 +926,10 @@ anim-turns-shape-around-in-plane = 바퀴처럼 무대 평면 위에서 도형�
 anim-which-shape-is-in-front = 어떤 도형이 앞에 있는지 정해요. 가까운 도형이 먼 도형 위에 그려지고 먼 도형은 조금 어두워요. 깊이는 크기를 바꾸지 않아요.
 anim-n-times = { $n }번
 anim-s-s = { $s }초
+anim-frame-back-frame-on = 한 프레임 뒤로, 한 프레임 앞으로
+anim-nudge-shapes-in-hand-with = 선택한 도형을 조금씩 이동해요. 선택한 게 없으면 한 프레임씩 이동해요
+anim-play-or-pause = 재생 또는 일시정지
+anim-first-frame-last = 첫 프레임, 마지막 프레임
 
 ## the Outliner
 
@@ -835,26 +937,26 @@ anim-s-s = { $s }초
 outline-named-label = , 이름 “{ $label }”
 outline-book = 책
 outline-decision = 결정
-outline-talk = 발표
+common-talk = 발표
 outline-empty-outline = 빈 개요
 outline-outliner-ideas-under-ideas-folded = 생각 아래에 생각을 쌓는 개요 편집기예요. 접고 펴고, 옮기고 연결해요. 슬라이드나 마인드맵이 읽는 것과 같은 나무예요.
 outline-arrow-from-from-to-to = { $from }에서 { $to }(으)로 가는 화살표
 outline-arrows-both-ways = 양방향 화살표
 outline-as-page = 페이지로
-outline-calculator = 계산기
-outline-calendar = 캘린더
+common-calculator = 계산기
+common-calendar = 캘린더
 outline-cancel-connecting = 연결 취소
 outline-change-it = 바꾸기
-outline-chosen-items = 선택한 항목
+common-chosen-items = 선택한 항목
 outline-connect = 연결
 outline-connect-from-words = “{ $words }”에서 연결
 outline-connect-from-to-to = “{ $from }”을(를) “{ $to }”에 연결
 outline-connection-from-from-to-to = { $from }에서 { $to }(으)로의 연결
-outline-connections = 연결
-outline-copy = 복사
-outline-presentation-builder = 프레젠테이션
-outline-diagram-maker = 다이어그램 메이커
-outline-drag-to-move = 끌어서 이동
+common-connections = 연결
+common-copy = 복사
+common-presentation-builder = 프레젠테이션
+common-diagram-maker = 다이어그램 메이커
+common-drag-to-move = 끌어서 이동
 outline-draw-as-mind-map = 마인드맵으로 그리기
 outline-draw-as-network = 네트워크로 그리기
 outline-draw-as-org-chart = 조직도로 그리기
@@ -865,24 +967,24 @@ outline-fold-all = 모두 접기
 outline-item = 항목
 outline-item-n = 항목 { $n }
 outline-kind-of-line = 선 종류
-outline-launch-plan = 출시 계획
+common-launch-plan = 출시 계획
 outline-line-from-from-to-to = { $from }에서 { $to }(으)로 가는 선
 outline-line-named-label-change-it = 이름이 “{ $label }”인 선: 바꾸기
-outline-animator = 애니메이터
-outline-move-down = 아래로 이동
+common-animator = 애니메이터
+common-move-down = 아래로 이동
 outline-move-this-item-drag-it = 이 항목 이동: 다른 항목 위로 끌어 놓으세요
-outline-move-up = 위로 이동
+common-move-up = 위로 이동
 outline-name-of-line = 선 이름
 outline-numbered = 번호
 outline-opml-for-outliners = OPML (개요 편집기용)
-outline-open-in-new-tab = 새 탭에서 열기
-outline-outline = 개요
+common-open-in-new-tab = 새 탭에서 열기
+common-outline = 개요
 outline-outliner = 아웃라이너
 outline-outline-lowercase = 개요
-outline-paste = 붙여넣기
+common-paste = 붙여넣기
 outline-plain-line = 보통 선
 outline-plain-text = 일반 텍스트
-outline-show-as-slides = 슬라이드로 보기
+common-show-as-slides = 슬라이드로 보기
 outline-show-as-outline = 개요로 보기
 outline-take-away-connection-from-from = { $from }에서 { $to }(으)로의 연결 없애기
 outline-take-it-away = 없애기
@@ -890,13 +992,13 @@ outline-take-connection-away = 연결 없애기
 outline-tap-item-to-connect-from = 연결을 시작할 항목을 탭하세요.
 outline-tap-item-to-connect-words = “{ $words }”을(를) 연결할 항목을 탭하세요.
 outline-question-options-under-it-and = 질문, 그 아래 선택지, 선택지마다 찬성하는 이유와 반대하는 이유.
-outline-trip-planner = 여행 플래너
+common-trip-planner = 여행 플래너
 outline-twenty-minutes-in-three-parts = 20분을 세 부분으로 나눠요. 문제, 아이디어, 그 의미예요. 슬라이드로 보면 최상위 항목마다 한 장이 돼요.
 outline-unfold-all = 모두 펴기
 outline-unfold-n-inside = 펴기, 안에 { $n ->
        *[other] { $n }개
     }
-outline-untitled = 제목 없음
+common-untitled = 제목 없음
 outline-view-as = 보기 방식
 outline-zoomed-in-on = 확대한 항목
 outline-a-plain-line = 보통 선
@@ -930,6 +1032,9 @@ outline-question-method-budget-that-adds = 질문, 방법, 저절로 합계가 �
 outline-three-generations-and-next-each = 세 세대와 그다음 세대를 연도와 함께 적었어요. 메뉴에서 가계도로 그려요.
 outline-troubleshooting = 문제 해결
 outline-who-works-for-whom-at = 직원 아홉 명이 있는 빵집에서 누가 누구 밑에서 일하는지 역할과 함께 적었어요. 메뉴에서 조직도로 그려요.
+outline-pdf-sections-and-bullets = PDF: 섹션과 글머리 기호
+outline-fold-unfold = 접기, 펴기
+outline-name-line = 선 이름 짓기
 
 ## the Presentation Builder
 
@@ -975,7 +1080,7 @@ deck-bullets = 글머리 기호
 deck-two-columns = 두 단
 deck-big-icon = 큰 아이콘
 deck-fade = 페이드
-deck-cut = 컷
+common-cut = 컷
 deck-slide = 슬라이드 이동
 deck-zoom = 줌
 deck-zine = 소책자
@@ -1001,12 +1106,12 @@ deck-fun = 재미
 deck-themes-color = 테마의 색
 
 # The bar
-deck-present = 발표
+common-present = 발표
 deck-see-sheets-to-print = 인쇄할 용지 보기
 deck-back-to-pages = 페이지로 돌아가기
 deck-headline = 표제
 deck-layout-layout = 레이아웃: { $layout }
-deck-look-theme = 스타일: { $theme }
+common-look-theme = 스타일: { $theme }
 deck-transition-transition = 전환: { $transition }
 deck-format-format = 형식: { $format }
 deck-printing = 인쇄 방식
@@ -1034,11 +1139,11 @@ deck-big-icon-page = 큰 아이콘 페이지
 deck-four-more-pages = 페이지 네 개 더
 deck-on-slide = 슬라이드에
 deck-on-page = 페이지에
-deck-pages = 페이지
+common-pages = 페이지
 
 # The canvas
 deck-add-icon = 아이콘 추가
-deck-change-icon = 아이콘 바꾸기
+common-change-icon = 아이콘 바꾸기
 deck-pick-icon = 아이콘 고르기
 deck-left-column = 왼쪽 단
 deck-right-column = 오른쪽 단
@@ -1056,7 +1161,7 @@ deck-remove-from-slide = 슬라이드에서 빼기
 deck-slide-n = 슬라이드 { $n }
 deck-front-cover = 앞표지
 deck-back-cover = 뒤표지
-deck-page-n = { $n }페이지
+common-page-n = { $n }페이지
 deck-front = 앞면
 deck-inside-left = 안쪽 왼쪽
 deck-inside-middle = 안쪽 가운데
@@ -1080,11 +1185,11 @@ deck-print-it-on-letter-paper-at-actual-size-cut-along-dashes-six-badges-sheet =
 
 # Presenting, and the closing slide
 deck-presentation = 프레젠테이션
-deck-previous = 이전
-deck-next = 다음
-deck-stop-presenting = 발표 끝내기
+common-previous = 이전
+common-next = 다음
+common-stop-presenting = 발표 끝내기
 deck-slide-n-of-total = 슬라이드 { $n }/{ $total }
-deck-notes = 노트
+common-notes = 노트
 deck-n-hides-them = N을 누르면 숨겨요
 deck-take-this-deck-home = 이 프레젠테이션 가져가기
 deck-take-this-deck-home-title = 이 프레젠테이션 가져가기: { $title }
@@ -1110,6 +1215,12 @@ deck-trifold-brochure-six-panels-on = 3단 접이 브로슈어예요. 한 장의
 deck-mini-comic-panels-with-picture = 미니 만화예요. 그림, 말풍선, 설명이 있는 칸을 종이 한 장으로 접어 만들어요.
 deck-poster-or-flyer-headline-and = 포스터나 전단이에요. 표제와 몇 줄을 한 페이지에 최대한 크게 넣어요.
 deck-name-badges-for-meetup-one = 모임용 명찰이에요. 한 사람에 한 페이지, 한 장에 여섯 개, 바로 오려 쓸 수 있어요.
+deck-edit-this-deck = 이 프레젠테이션 편집
+deck-new-slide = 새 슬라이드
+deck-presenting-back = 발표: 뒤로
+deck-presenting-next-line-or-slide = 발표: 다음 줄이나 슬라이드
+deck-presenting-whole-slide = 발표: 슬라이드 전체
+deck-slide-before-slide-after-on = 이전 슬라이드, 다음 슬라이드 (레일에서)
 
 ## the Calendar app
 
@@ -1136,7 +1247,7 @@ cal-end = 끝
 cal-end-date = 종료일
 cal-end-time = 종료 시간
 cal-ends = 종료
-cal-event = 일정
+common-event = 일정
 cal-every-day = 매일
 cal-every-month = 매월
 cal-every-week = 매주
@@ -1172,7 +1283,7 @@ cal-start = 시작
 cal-start-date = 시작일
 cal-start-time = 시작 시간
 cal-starts = 시작
-cal-stops = 종료 조건
+common-stops = 종료 조건
 cal-same-dates-as-gantt-chart = 같은 날짜를 간트 차트로
 cal-this-calendar-is-written-in = 이 캘린더는 { $zone } 시간으로 쓰여 있어요.
 cal-this-calendar-names-no-time = 이 캘린더에는 시간대가 없어요. 시간은 내 시간대({ $zone })로 읽혀요.
@@ -1301,6 +1412,19 @@ diagram-house-network = 집 네트워크
 diagram-water-cycle = 물의 순환
 diagram-three-generations-of-morenos-and = 모레노 가족 3대와 대자녀로 이어지는 점선.
 diagram-who-can-do-what = 누가 무엇을 할 수 있는지
+diagram-tap-empty-space-for-branch = 빈 곳을 탭하면 가지가 생겨요. 아이디어를 탭해서 글을 쓰고 Enter로 다음으로 넘어가요. 하나를 다른 아이디어 위로 끌면 그 아래로 들어가요. 연결은 지도 가로질러 둘을 이어요.
+diagram-place-cards = 자리 카드
+diagram-print-place-cards = 자리 카드 인쇄
+diagram-print-place-cards-card-guest = 자리 카드 인쇄: 손님마다 카드 하나, Letter 용지 한 장에 여덟 장, 오려서 써요
+diagram-guest = 손님
+diagram-new-idea = 새 아이디어
+diagram-tap-empty-space-for-person = 빈 곳을 탭하면 사람이 추가돼요. 사람을 탭해서 글을 쓰고, Shift+Enter로 이름 아래에 역할을 쓰고, Enter로 다음으로 넘어가요. 하나를 다른 사람 위로 끌면 그 아래로 들어가요.
+diagram-tap-empty-space-for-event = 빈 곳을 탭하면 사건이 추가돼요. 언제인지 쓰고 Shift+Enter를 누른 다음 무슨 일이 있었는지 쓰세요. 연도와 날짜는 실제 간격대로 놓이고 기간은 띠로 보여요.
+diagram-lanes-name = 레인 이름
+diagram-when = 시기
+diagram-tap-person-to-type-on = 사람을 탭해서 글을 쓰세요. 이름 뒤에 +를 쓰면 배우자, Shift+Enter로 이름 아래에 생몰 연도를 쓰고, Enter로 다음으로 넘어가요. 하나를 다른 사람 위로 끌면 그 아래로 들어가요. 연결은 둘 사이에 점선을 그어요.
+diagram-tap-empty-space-for-table = 빈 곳을 탭하면 테이블이 추가돼요. 테이블이나 사람을 탭해서 글을 쓰고, 이름 뒤에 쉼표를 쓰면 다음 손님이에요. 사람을 다른 테이블로 끌 수 있어요.
+diagram-tap-inside-circles-to-add = 원 안을 탭해서 항목을 추가하고, 뒤에 쉼표를 쓰면 다음 항목이에요. 집합 이름을 탭하면 이름을 바꾸고, 항목을 다른 원으로 끌 수 있어요.
 
 ## the Trip Planner
 
@@ -1375,12 +1499,19 @@ trip-new-york-in-movies = 영화 속 뉴욕
 trip-seven-film-and-tv-locations = 영화와 TV 촬영지 일곱 곳을 하루에 업타운에서 다운타운까지.
 trip-wedding-on-lake-como = 코모 호수의 결혼식
 trip-for-guests-where-wedding-is = 하객을 위한 안내예요. 결혼식 장소, 숙소, 가는 방법.
+trip-presenting-trip = 여행 발표
+trip-presenting-next-stop = 발표: 다음 경유지
+trip-presenting-stop-before = 발표: 이전 경유지
+trip-put-stops-on-calendar-day = 경유지를 하루씩 캘린더에 넣기
+trip-first-last = 처음, 마지막
+trip-next-stop = 다음 경유지
+trip-stop-before = 이전 경유지
 
 ## shared: the Word Processor's looks, the header's Home, a money column's currency
 
 looks-typewriter = 타자기
 looks-serif = 명조
-looks-home = 홈
+common-home = 홈
 looks-currency = 통화
 
 ## the Calculator app
@@ -1469,72 +1600,25 @@ calc-curve-and-its-slope = 곡선과 기울기
 calc-x3-3x-its-derivative-and = x³ − 3x와 그 도함수, 오목한 바닥에서의 평평한 접선.
 calc-waves-adding-up = 더해지는 파동
 calc-sine-waves-summed-on-their = 사인파를 더해서 사각파에 가까워져요.
-
-## unsorted: added after the sections, each id named for where it is used
-
-home-templates-for-app = { $app } 템플릿
-home-app-templates = { $app } 템플릿
-home-templates-for-app-name = { $app } 템플릿: { $name }
-home-templates-are-not-saved-in = 템플릿이 아직 이 브라우저에 저장되지 않았어요. 인터넷에 연결하면 볼 수 있어요.
 # The grip on a line of the tape; the bar under lines chosen whole.
 calc-choose-line-n-drag-it = { $n }번째 줄 선택: 끌어서 이동해요
 calc-chosen-lines = 선택한 줄
-# The Spreadsheet: any column removed, the Option column, rich cells, a chart put in from Insert.
-sheet-keeps-one-column = 시트에는 열이 하나는 있어야 해요
-editor-bold-italic-and-links = 굵게, 기울임, 링크
-sheet-choices = 선택지
-sheet-choices-for-ref = { $ref }의 선택지
-editor-one-of-words-column-holds = 열에 있는 값 중 하나나 새 값
-editor-option = 선택
-sheet-has-one = 시트에 하나 있어요
-drawer-documents = 문서
-common-find-app-template = 앱, 템플릿 찾기
-drawer-find-app-doc-template-or = 앱, 문서, 템플릿, 명령 찾기
-drawer-find-app-template-or-command = 앱, 템플릿, 명령 찾기
-drawer-commands = 명령
-share-new-noun-date-n = 새 { $noun } { $date } #{ $n }
-drawer-nothing-by-that-name = 그 이름은 없어요
-draw-pixels-n-n = 픽셀 { $n }×{ $n }
-# Files, compare, posting and embedding: the agent and sharing surface.
-share-mastodon-server-like-mastodon-social = mastodon.social 같은 마스토돈 서버
-share-change = 변경
+
+## two links compared (kit/ui/compare.ts)
+
 compare-changes = 변경 사항
 compare-compare = 비교
-share-copy-embed-code = 삽입 코드 복사
-share-copy-show-link = 발표 링크 복사
-deck-edit-this-deck = 이 프레젠테이션 편집
-share-embed = 삽입
-share-embed-code-copied = 삽입 코드를 복사했어요
 compare-no-difference = 차이 없음
 compare-not-link-to-tiny-little = Tiny Little Office 문서 링크가 아니에요
-open-opened-name = { $name }을(를) 열었어요
-share-opens-deck-already-presenting = 열면 바로 발표 상태가 돼요.
-export-pdf-file = PDF 파일
-outline-pdf-sections-and-bullets = PDF: 섹션과 글머리 기호
 compare-paste-second-link-to-see = 두 번째 링크를 붙여넣으면 바뀐 점을 볼 수 있어요.
 compare-paste-link-to-document-as = 지금 상태의 문서 링크를 붙여넣으세요
 compare-paste-link-to-document-as-it-was = 이전 상태의 문서 링크를 붙여넣으세요
-share-post = 게시
-share-post-link = 링크 게시
-share-show-preview-of-first-page = 첫 페이지 미리보기 보여 주기
-share-picture-of-first-page-and = 첫 페이지 그림과 제목은 소셜 네트워크가 가져갈 수 있도록 한 달 동안 서버에서 읽을 수 있게 보관돼요. 문서 자체는 보관되지 않아요.
-share-shared-without-preview-reason = 미리보기 없이 공유했어요: { $reason }
-share-making-preview = 미리 보기 만드는 중…
-share-page-could-not-be-drawn = 페이지를 그리지 못했어요
-share-picture-is-over-400-kb = 그림이 400KB를 넘어요
-share-server-could-not-be-reached = 서버에 연결하지 못했어요
-share-hundred-previews-day-from-one = 한 주소에서 하루에 미리보기 100개까지예요
-share-server-refused-picture = 서버가 그림을 받지 않았어요
 compare-put-in = 추가됨:
 compare-swap = 서로 바꾸기
 compare-taken-out = 삭제됨:
-open-that-file-is-not-words = 이 파일은 Tiny Little Office가 읽을 수 있는 글이 아니에요.
-open-that-file-is-too-large = 이 파일은 너무 커서 여기서 문서로 쓸 수 없어요.
 compare-first-link = 첫 번째 링크
-share-pages-in-frame-on-another = 다른 사이트의 프레임 안에 페이지를 보여 주고, 여기서 열 수 있는 링크도 달아요.
 compare-second-link = 두 번째 링크
 compare-two-links-to-documents-side = 문서 링크 두 개를 나란히 놓고 두 번째에서 바뀐 곳을 표시해요. 이 페이지 밖으로 나가는 것은 없어요.
-share-your-mastodon-server = 내 마스토돈 서버
 compare-different-apps = 서로 다른 앱
 compare-n-blocks-taken-out = { $n ->
        *[other] { $n }
@@ -1542,107 +1626,12 @@ compare-n-blocks-taken-out = { $n ->
 compare-n-put-in = { $n ->
        *[other] { $n }
     }개 추가됨
-diagram-tap-empty-space-for-branch = 빈 곳을 탭하면 가지가 생겨요. 아이디어를 탭해서 글을 쓰고 Enter로 다음으로 넘어가요. 하나를 다른 아이디어 위로 끌면 그 아래로 들어가요. 연결은 지도 가로질러 둘을 이어요.
-# Restored around the document: search, Find in this document, the shortcuts and the apps' keys, Mod+S, the size of
-# everything, Add to home screen, another version kept here, where the link fits, Open in another app, the QR code
-# of this document, Insert narrowed by typing, Trip presenting, a seating chart's place cards
-qr-code-of-this-document = 이 문서의 QR 코드
-anim-frame-back-frame-on = 한 프레임 뒤로, 한 프레임 앞으로
-deck-new-slide = 새 슬라이드
-drawer-add-to-home-screen = 홈 화면에 추가
-shell-another-version = 다른 버전
-keys-normal-size = 보통 크기
-home-documents-found = 찾은 문서
-sheet-edit-cell-caret-at-its = 셀 편집, 커서는 끝에
-keys-everything-larger = 전체를 크게
-keys-everything-smaller = 전체를 작게
-find-in-this-document = 이 문서에서 찾기
-outline-fold-unfold = 접기, 펴기
-common-indent-or-bring-out-in = 목록에서는 들여쓰기나 내어쓰기, 표에서는 다음 셀
-keys-keep-this-document-on-device = 이 문서를 기기에 보관
-shell-kept-on-this-device = 이 기기에 보관됨
-shell-keyboard-shortcuts = 키보드 단축키
-share-left = 왼쪽
-common-move-selected-items-up-or = 선택한 항목을 위나 아래로 이동
-home-no-document-here-has-those = 그 글이 들어 있는 문서가 없어요
-find-not-found = 찾지 못했어요
-menu-nothing-starts-q = “{ $q }”(으)로 시작하는 게 없어요
-shell-nothing-to-keep-yet = 아직 보관할 게 없어요
-common-nudge-shapes-in-hand = 선택한 도형을 조금씩 이동
-anim-nudge-shapes-in-hand-with = 선택한 도형을 조금씩 이동해요. 선택한 게 없으면 한 프레임씩 이동해요
-write-open-as-outline = 개요로 열기
-shell-open-it = 열기
-diagram-place-cards = 자리 카드
-anim-play-or-pause = 재생 또는 일시정지
-trip-presenting-trip = 여행 발표
-deck-presenting-back = 발표: 뒤로
-deck-presenting-next-line-or-slide = 발표: 다음 줄이나 슬라이드
-trip-presenting-next-stop = 발표: 다음 경유지
-trip-presenting-stop-before = 발표: 이전 경유지
-diagram-print-place-cards = 자리 카드 인쇄
-diagram-print-place-cards-card-guest = 자리 카드 인쇄: 손님마다 카드 하나, Letter 용지 한 장에 여덟 장, 오려서 써요
-shell-save-in-browser-is-off = 브라우저에 저장이 꺼져 있어요. 이 브라우저는 문서를 보관하지 않아요. 여기에 보관하려면 메뉴에서 켜세요.
-sheet-put-back-what-cell-held = 셀에 있던 내용 되돌리기
-sheet-put-dated-rows-on-calendar = 날짜가 있는 행을 캘린더에 넣기
-trip-put-stops-on-calendar-day = 경유지를 하루씩 캘린더에 넣기
-home-search-your-documents = 내 문서 검색
-common-select-all-words-of-box = 모두 선택: 상자의 글, 그다음 전체
-keys-show-these-shortcuts = 이 단축키 보기
-# same
-write-a4 = A4
-# same
-write-letter = Letter
-common-back-to-words = 글로 돌아가기
-common-extend-selection = 선택 범위 넓히기
-deck-presenting-whole-slide = 발표: 슬라이드 전체
-trip-first-last = 처음, 마지막
-common-next-or-one-before = 다음 또는 이전
-editor-this-browser-lets-page-paste = 이 브라우저는 키보드로만 붙여넣을 수 있어요. 붙여넣기 단축키를 쓰세요.
-drawer-size-of-everything = 전체 크기
-shell-skip-to-apps = 앱으로 건너뛰기
-shell-skip-to-document = 문서로 건너뛰기
-menu-starting-q = “{ $q }”(으)로 시작
-common-step-out-close-collapse-let = 빠져나오기: 닫기, 접기, 놓기
-anim-first-frame-last = 첫 프레임, 마지막 프레임
-trip-next-stop = 다음 경유지
-deck-slide-before-slide-after-on = 이전 슬라이드, 다음 슬라이드 (레일에서)
-trip-stop-before = 이전 경유지
-shell-this-device-keeps-another-version = 이 기기에 { $when }에 보관한 “{ $title }”의 다른 버전이 있어요.
-shell-this-link-was-made-by = 이 링크는 더 새로운 Tiny Little Office에서 만들었어요. 페이지를 새로고침해서 업데이트하세요.
-keys-this-page = 이 페이지
-common-check-or-uncheck-task = 할 일 체크 또는 체크 해제
-drawer-to-add-tiny-little-office = Tiny Little Office를 홈 화면에 추가하려면 공유를 누른 다음 홈 화면에 추가를 누르세요.
-common-too-long-for-qr-code = QR 코드에 넣기에는 너무 길어요. 문서를 줄이거나 짧은 링크를 공유하세요.
-share-uses = 쓰는 곳
-share-where = 위치
-share-where-link-fits = 링크를 쓸 수 있는 곳
-share-any-length = 길이 제한 없음
-home-n-documents-found = 문서 { $n ->
-       *[other] { $n }
-    }개를 찾았어요
-common-n-of-count = { $count }개 중 { $n }
-share-n-over = { $n } 초과
-privacy-password-copied = 비밀번호를 복사했어요
-diagram-guest = 손님
-outline-name-line = 선 이름 짓기
-write-name-this-column = 이 열 이름 짓기
-diagram-new-idea = 새 아이디어
-diagram-tap-empty-space-for-person = 빈 곳을 탭하면 사람이 추가돼요. 사람을 탭해서 글을 쓰고, Shift+Enter로 이름 아래에 역할을 쓰고, Enter로 다음으로 넘어가요. 하나를 다른 사람 위로 끌면 그 아래로 들어가요.
-diagram-tap-empty-space-for-event = 빈 곳을 탭하면 사건이 추가돼요. 언제인지 쓰고 Shift+Enter를 누른 다음 무슨 일이 있었는지 쓰세요. 연도와 날짜는 실제 간격대로 놓이고 기간은 띠로 보여요.
-diagram-lanes-name = 레인 이름
-diagram-when = 시기
-draw-align-center = 정렬: 가운데
-draw-align-left = 정렬: 왼쪽
-draw-align-right = 정렬: 오른쪽
-diagram-tap-person-to-type-on = 사람을 탭해서 글을 쓰세요. 이름 뒤에 +를 쓰면 배우자, Shift+Enter로 이름 아래에 생몰 연도를 쓰고, Enter로 다음으로 넘어가요. 하나를 다른 사람 위로 끌면 그 아래로 들어가요. 연결은 둘 사이에 점선을 그어요.
-diagram-tap-empty-space-for-table = 빈 곳을 탭하면 테이블이 추가돼요. 테이블이나 사람을 탭해서 글을 쓰고, 이름 뒤에 쉼표를 쓰면 다음 손님이에요. 사람을 다른 테이블로 끌 수 있어요.
-diagram-tap-inside-circles-to-add = 원 안을 탭해서 항목을 추가하고, 뒤에 쉼표를 쓰면 다음 항목이에요. 집합 이름을 탭하면 이름을 바꾸고, 항목을 다른 원으로 끌 수 있어요.
-export-copy-link-that-downloads-ext = .{ $ext }을(를) 다운로드하는 링크 복사
-export-could-not-share-ext = .{ $ext }을(를) 공유하지 못했어요
-export-could-not-show-ext = .{ $ext }을(를) 표시하지 못했어요
-export-download-ext = .{ $ext } 다운로드
-export-share-ext = .{ $ext } 공유…
-export-view-ext = .{ $ext } 보기
+
+## files and zips dropped on the page (kit/file/open.ts)
+
+open-opened-name = { $name }을(를) 열었어요
+open-that-file-is-not-words = 이 파일은 Tiny Little Office가 읽을 수 있는 글이 아니에요.
+open-that-file-is-too-large = 이 파일은 너무 커서 여기서 문서로 쓸 수 없어요.
 open-keep-them-on-this-device = 이 기기에 보관
 open-nothing-is-saved-on-this = 지금은 이 기기에 아무것도 저장되지 않아요. 여기에 보관하거나 하나를 여세요.
 open-first = 첫 번째 열기
@@ -1653,3 +1642,28 @@ open-that-zip-holds-no-documents = 이 zip에는 Tiny Little Office가 읽을 �
 open-n-documents-kept = 문서 { $n ->
        *[other] { $n }
     }개 보관됨
+
+## a document's QR code (kit/draw/qr-picture.ts)
+
+# Restored around the document: search, Find in this document, the shortcuts and the apps' keys, Mod+S, the size of
+# everything, Add to home screen, another version kept here, where the link fits, Open in another app, the QR code
+# of this document, Insert narrowed by typing, Trip presenting, a seating chart's place cards
+qr-code-of-this-document = 이 문서의 QR 코드
+
+## the keys, the shortcuts and the size of everything (kit/core/keys.ts, kit/ui/zoom.ts)
+
+keys-normal-size = 보통 크기
+keys-everything-larger = 전체를 크게
+keys-everything-smaller = 전체를 작게
+keys-keep-this-document-on-device = 이 문서를 기기에 보관
+keys-show-these-shortcuts = 이 단축키 보기
+keys-this-page = 이 페이지
+
+## Find in this document (kit/ui/find.ts)
+
+find-not-found = 찾지 못했어요
+
+## a menu narrowed by typing (kit/ui/menu.ts)
+
+menu-nothing-starts-q = “{ $q }”(으)로 시작하는 게 없어요
+menu-starting-q = “{ $q }”(으)로 시작

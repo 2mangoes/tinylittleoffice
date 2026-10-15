@@ -135,7 +135,7 @@ export const templates = (): Template[] => [
   },
   {
     id: 'card',
-    name: t('draw-birthday-card'),
+    name: t('common-birthday-card'),
     blurb: t('draw-card-for-ninetieth-tilted-on'),
     doc: shapes(
       {

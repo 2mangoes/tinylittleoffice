@@ -80,7 +80,7 @@ function worded(): Set<string> {
 const RAISED: { key: string; slot: Slot; langs: string[]; why: string }[] = [
   // The menus' rows: a second line where the words cannot be fewer.
   {
-    key: 'insert-tiny-little-office-doc-ellipsis',
+    key: 'common-tiny-little-office-doc-ellipsis',
     slot: 'menu',
     langs: ['de', 'es', 'it', 'ja', 'nl', 'pt-br'],
     why: 'the name said in the language’s own words (Paul, 2026-10-10) and the word for a document: no shorter words keep both',
@@ -106,7 +106,7 @@ const RAISED: { key: string; slot: Slot; langs: string[]; why: string }[] = [
   { key: 'sheet-chart', slot: 'bar', langs: ['uk'], why: 'Ukrainian words run a third longer than English, as Russian’s do; the glossary’s term has no shorter form with the meaning' },
   { key: 'write-page-break', slot: 'menu', langs: ['uk'], why: 'Ukrainian words run a third longer than English, as Russian’s do; the glossary’s term has no shorter form with the meaning' },
   { key: 'write-align-right', slot: 'menu', langs: ['uk'], why: 'Ukrainian words run a third longer than English, as Russian’s do; the glossary’s term has no shorter form with the meaning' },
-  { key: 'share-link', slot: 'dialog', langs: ['uk'], why: 'Ukrainian words run a third longer than English, as Russian’s do; the glossary’s term has no shorter form with the meaning' },
+  { key: 'common-link', slot: 'dialog', langs: ['uk'], why: 'Ukrainian words run a third longer than English, as Russian’s do; the glossary’s term has no shorter form with the meaning' },
   { key: 'share-display-link', slot: 'dialog', langs: ['uk'], why: 'Ukrainian words run a third longer than English, as Russian’s do; the glossary’s term has no shorter form with the meaning' },
   { key: 'write-align-left', slot: 'menu', langs: ['ru'], why: 'Russian words are about a third longer than English; the glossary’s term has no shorter form with the meaning' },
   { key: 'write-align-right', slot: 'menu', langs: ['ru'], why: 'Russian words are about a third longer than English; the glossary’s term has no shorter form with the meaning' },

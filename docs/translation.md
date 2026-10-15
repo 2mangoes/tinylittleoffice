@@ -10,7 +10,7 @@ plan for this, before it was built, is [history/translation-plan.md](history/tra
 
 - Every string a person sees goes through `t('id')` (`src/kit/core/i18n.ts`), read from [Fluent](https://projectfluent.org)
   files by `@fluent/bundle` (Paul, 2026-10-15: "Use Fluent"). A message has a stable id, kebab-case, the group it
-  began in and its first words (`share-copy-link-and-go`, `sheet-insert-n-rows-above`): a change of wording keeps
+  began in and its first words (`shell-copy-link-and-go`, `sheet-row-above`): a change of wording keeps
   the id, and a new meaning is a new id. `src/i18n/en.ftl` is the source of every message, in groups
   (`## the Spreadsheet`), edited by hand, with a comment above any message whose meaning is not plain ("a verb on a
   button", "a noun"). A command's words in a command file (`label: 'bar-bold'`) are ids too, put through `t()` when

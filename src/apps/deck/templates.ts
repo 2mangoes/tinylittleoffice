@@ -273,7 +273,7 @@ const SPEAKERS = headed(
 );
 
 export const templates = (): Template[] => [
-  { id: 'talk', name: t('outline-talk'), blurb: t('deck-title-agenda-three-points-with'), doc: TALK },
+  { id: 'talk', name: t('common-talk'), blurb: t('deck-title-agenda-three-points-with'), doc: TALK },
   { id: 'status', name: t('deck-status-update'), blurb: t('deck-done-and-next-side-by'), doc: STATUS },
   { id: 'proposal', name: t('deck-proposal'), blurb: t('deck-what-you-heard-what-you'), doc: PROPOSAL },
   { id: 'pitch', name: t('deck-pitch'), blurb: t('deck-seed-pitch-in-eight-slides'), doc: PITCH },

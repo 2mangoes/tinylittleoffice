@@ -178,7 +178,7 @@ export class ToDrawer extends LitElement {
       return;
     }
     await setPrivate(keeping());
-    toast(keeping() ? t('drawer-saving-in-this-browser') : t('drawer-nothing-saved-in-this-browser'));
+    toast(keeping() ? t('common-saving-in-this-browser') : t('common-nothing-saved-in-this-browser'));
   }
 
   /**
@@ -233,10 +233,10 @@ export class ToDrawer extends LitElement {
     )}
       ${group(
         t('drawer-documents'),
-        docs.map(({ a, k }) => row(k.hash, a.icon, k.title || t('outline-untitled'), a.name, true)),
+        docs.map(({ a, k }) => row(k.hash, a.icon, k.title || t('common-untitled'), a.name, true)),
       )}
       ${group(
-        t('home-templates'),
+        t('common-templates'),
         templates.map(({ a, tpl }) => row(templateHash(a, tpl), a.icon, tpl.name, a.name)),
       )}
       ${group(t('drawer-commands'), cmds.map(command))}`;
@@ -245,9 +245,9 @@ export class ToDrawer extends LitElement {
   render() {
     const want = this.find.trim().toLowerCase();
     const kept = library();
-    const placeholder = kept.length ? t('drawer-find-app-doc-template-or') : t('drawer-find-app-template-or-command');
+    const placeholder = kept.length ? t('common-find-app-doc-template-or') : t('drawer-find-app-template-or-command');
     const chosen = chosenLanguage() ?? '';
-    return html`<dialog class="to-drawer" aria-label=${t('drawer-tiny-little-office')} @close=${this.onClose} @toggle=${{ handleEvent: this.onToggle, capture: true }} @click=${(e: Event) => e.target === this.dialog && this.close()}>
+    return html`<dialog class="to-drawer" aria-label=${t('common-tiny-little-office')} @close=${this.onClose} @toggle=${{ handleEvent: this.onToggle, capture: true }} @click=${(e: Event) => e.target === this.dialog && this.close()}>
       <div class="to-drawer-inner">
         <!-- The head is the language picker, then (away from home) the mark as the way home beside Close (Paul, 2026-10-12); the name is not said again here (2026-10-10). -->
         <header class="to-drawer-head">
@@ -257,8 +257,8 @@ export class ToDrawer extends LitElement {
               ${languages().map((c) => html`<option value=${c} ?selected=${c === chosen}>${languageName(c)}</option>`)}
             </select>
           </label>
-          ${this.def ? html`<a class="to-btn to-tool to-drawer-home" href="#/" aria-label=${t('looks-home')} title=${t('looks-home')} @click=${() => this.close()}>${unsafeSVG(mark(20))}</a>` : nothing}
-          <button type="button" class="to-btn to-tool" aria-label=${t('drawer-close')} title=${t('drawer-close')} @click=${() => this.close()}>${icon(UI.close)}</button>
+          ${this.def ? html`<a class="to-btn to-tool to-drawer-home" href="#/" aria-label=${t('common-home')} title=${t('common-home')} @click=${() => this.close()}>${unsafeSVG(mark(20))}</a>` : nothing}
+          <button type="button" class="to-btn to-tool" aria-label=${t('common-close')} title=${t('common-close')} @click=${() => this.close()}>${icon(UI.close)}</button>
         </header>
         <section class="to-drawer-section to-drawer-manual">
           <a class="to-btn to-drawer-whatis" href=${manualHash()} @click=${() => this.close()}>${icon(UI.help, 18)}<span>${t('drawer-what-is-this')}</span></a>
@@ -284,7 +284,7 @@ export class ToDrawer extends LitElement {
                 this.downloads
                   ? html`<section class="to-drawer-section to-drawer-doc" aria-label=${t('common-this-document')}>
                     <h3 class="to-drawer-head3">${t('common-this-document')}</h3>
-                    ${this.def ? html`<a class="to-btn to-drawer-new" href=${routeHash(this.def.id)} @click=${() => (startEditing(), this.close())}>${icon(this.def.icon, 18)}<span>${t('shell-new-noun', { noun: this.def.noun })}</span></a>` : nothing}
+                    ${this.def ? html`<a class="to-btn to-drawer-new" href=${routeHash(this.def.id)} @click=${() => (startEditing(), this.close())}>${icon(this.def.icon, 18)}<span>${t('common-new-noun', { noun: this.def.noun })}</span></a>` : nothing}
                     <button type="button" class="to-btn to-drawer-share" aria-keyshortcuts=${keysAria(SHARE.keys)} @click=${() => this.handOver(() => this.dispatchEvent(new CustomEvent('to-share-open', { bubbles: true })))}>${icon(SHARE.icon!, 18)}<span>${labelOf(SHARE)}</span>${keysKbd(SHARE.keys)}</button>
                     <to-menu class="to-drawer-download" .label=${labelOf(DOWNLOAD)} .icon=${DOWNLOAD.icon} .keys=${DOWNLOAD.keys} .items=${this.downloads}></to-menu>
                     ${this.renderPage()}
@@ -293,7 +293,7 @@ export class ToDrawer extends LitElement {
                   : nothing
               }
               <section class="to-drawer-section to-drawer-prefs">
-                <label class="to-field"><span class="to-field-words">${icon(theme() === 'dark' ? UI.moon : theme() === 'light' ? UI.sun : UI.auto, 18)}<span>${t('drawer-theme')}</span></span>
+                <label class="to-field"><span class="to-field-words">${icon(theme() === 'dark' ? UI.moon : theme() === 'light' ? UI.sun : UI.auto, 18)}<span>${t('common-theme')}</span></span>
                   <select @change=${(e: Event) => {
                     setTheme((e.target as HTMLSelectElement).value as Theme);
                     this.requestUpdate();

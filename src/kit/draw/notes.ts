@@ -130,7 +130,7 @@ export class ToNotes extends LitElement {
             class="to-note-words"
             shape="line"
             .blocks=${h.blocks}
-            label=${t('editor-footnote-n', { n: nth + 1 })}
+            label=${t('common-footnote-n', { n: nth + 1 })}
             placeholder=${t('editor-notes-words')}
             @text-ops=${(e: CustomEvent<TextOps>) => this.onOps(nth, e)}
             @text-enter=${(e: Event) => (stop(e), this.back(nth))}

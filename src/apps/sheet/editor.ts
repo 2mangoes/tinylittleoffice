@@ -653,14 +653,14 @@ export class ToSheetEditor extends DocElement<SheetView> {
     const letter = COL_NAMES[c];
     const may = removable(this.view, c);
     return [
-      ...kindItems(cols[c], t('sheet-column-c-holds', { c: letter }), (type, currency) => this.edit(setType(this.doc, c, type, currency))),
+      ...kindItems(cols[c], t('common-column-c-holds', { c: letter }), (type, currency) => this.edit(setType(this.doc, c, type, currency))),
       { group: t('sheet-sort-rows-by-it'), label: t('sheet-low-to-high'), icon: ArrowDown, does: () => this.edit(sortBy(this.doc, c, false)) },
       { group: t('sheet-sort-rows-by-it'), label: t('sheet-high-to-low'), icon: ArrowUp, does: () => this.edit(sortBy(this.doc, c, true)) },
-      { group: t('sheet-columns'), label: t('sheet-fit-this-column-to-its'), icon: MoveHorizontal, does: () => this.fitColumn(c) },
-      { group: t('sheet-columns'), label: t('sheet-add-column-after'), icon: UI.plus, disabled: this.cols >= MAX_COLS, does: () => this.addColumn(c + 1) },
+      { group: t('common-columns'), label: t('sheet-fit-this-column-to-its'), icon: MoveHorizontal, does: () => this.fitColumn(c) },
+      { group: t('common-columns'), label: t('common-add-column-after'), icon: UI.plus, disabled: this.cols >= MAX_COLS, does: () => this.addColumn(c + 1) },
       {
-        group: t('sheet-columns'),
-        label: t('sheet-remove-this-column'),
+        group: t('common-columns'),
+        label: t('common-remove-this-column'),
         icon: Trash2,
         disabled: !may,
         hint: may ? undefined : c < this.view.table.cols.length ? t('sheet-keeps-one-column') : t('sheet-three-at-least'),
@@ -1172,14 +1172,14 @@ export class ToSheetEditor extends DocElement<SheetView> {
                 </th>`,
               )}
               <td class="add-col" rowspan="2">
-                <button type="button" class="add-col-btn" aria-label=${t('sheet-add-column')} title=${t('sheet-add-column')} ?disabled=${n >= MAX_COLS} @click=${() => this.addColumn(n)}>${icon(UI.plus, 16)}</button>
+                <button type="button" class="add-col-btn" aria-label=${t('common-add-column')} title=${t('common-add-column')} ?disabled=${n >= MAX_COLS} @click=${() => this.addColumn(n)}>${icon(UI.plus, 16)}</button>
               </td>
             </tr>
             <tr class="names">
               <td class="corner"></td>
               ${cols.map(
                 (col, c) => html`<th scope="col">
-                  <input class="cn" aria-label=${t('sheet-name-of-column-c', { c: COL_NAMES[c] })} placeholder=${typeName(c, cols)} .value=${isLetterName(col.name) ? '' : col.name} autocomplete="off" spellcheck="false"
+                  <input class="cn" aria-label=${t('common-name-of-column-c', { c: COL_NAMES[c] })} placeholder=${typeName(c, cols)} .value=${isLetterName(col.name) ? '' : col.name} autocomplete="off" spellcheck="false"
                     @change=${(e: Event) => this.rename(c, (e.target as HTMLInputElement).value)}
                     @keydown=${(e: KeyboardEvent) => this.nameKey(e, c, isLetterName(col.name) ? '' : col.name)} />
                 </th>`,
@@ -1195,8 +1195,8 @@ export class ToSheetEditor extends DocElement<SheetView> {
       ${v.table.above ? nothing : figure}
       ${cols.map((col, c) => (col.type === 'option' ? html`<datalist id="${this.uid}-o${c}">${this.choices(c).map((x) => html`<option value=${x}></option>`)}</datalist>` : nothing))}
       <to-context class="sheet-context" .label=${t('sheet-cells-in-hand')} .items=${this.contextItems()}></to-context>
-      <to-menu class="sheet-rowmenu" .label=${t('sheet-row-n', { n: this.menuRow + 1 })} .items=${drawnIn(COMMANDS, 'menu:row', this)}></to-menu>
-      <to-menu class="sheet-colmenu" .label=${t('sheet-column-c', { c: COL_NAMES[this.menuCol] })} .items=${this.colItems()}></to-menu>`;
+      <to-menu class="sheet-rowmenu" .label=${t('common-row-n', { n: this.menuRow + 1 })} .items=${drawnIn(COMMANDS, 'menu:row', this)}></to-menu>
+      <to-menu class="sheet-colmenu" .label=${t('common-column-c', { c: COL_NAMES[this.menuCol] })} .items=${this.colItems()}></to-menu>`;
   }
 
   /** The words an option column offers: those its cells already hold, each once, in the order they first come (a formula's are its own). */
@@ -1218,7 +1218,7 @@ export class ToSheetEditor extends DocElement<SheetView> {
   private renderRow(r: number, cols: Column[], g: Range, fill: Range | null) {
     const [sr, sc] = this.sel;
     return html`<tr>
-      <th class="row" scope="row"><button type="button" class="row-num" aria-label=${t('sheet-row-n-insert-or-delete', { n: r + 1 })} aria-haspopup="menu" aria-expanded="false" @click=${(e: Event) => void this.openRowMenu(r, e.currentTarget as HTMLElement)}>${r + 1}</button></th>
+      <th class="row" scope="row"><button type="button" class="row-num" aria-label=${t('common-row-n-insert-or-delete', { n: r + 1 })} aria-haspopup="menu" aria-expanded="false" @click=${(e: Event) => void this.openRowMenu(r, e.currentTarget as HTMLElement)}>${r + 1}</button></th>
       ${cols.map((col, c) => {
         const raw = this.raw(r, c);
         const isSel = this.focused && r === sr && c === sc;
@@ -1229,7 +1229,7 @@ export class ToSheetEditor extends DocElement<SheetView> {
         const inFill = !!fill && r >= fill.r0 && r <= fill.r1 && c >= fill.c0 && c <= fill.c1;
         const fillHandle =
           r === g.r1 && c === g.c1
-            ? html`<span class="fill" role="button" aria-label=${t('sheet-fill-drag-to-carry-these')} title=${t('sheet-drag-to-fill')} @pointerdown=${this.onFillDown}></span>`
+            ? html`<span class="fill" role="button" aria-label=${t('common-fill-drag-to-carry-these')} title=${t('common-drag-to-fill')} @pointerdown=${this.onFillDown}></span>`
             : nothing;
         const pointed = !!this.pointed && this.focused && r === this.pointed[0] && c === this.pointed[1];
         const td = (inner: unknown) =>

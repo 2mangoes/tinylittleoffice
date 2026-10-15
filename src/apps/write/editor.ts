@@ -422,7 +422,7 @@ export class ToWriteEditor extends DocElement<Doc> {
   private editOf(at: number): ContextEntry | null {
     const b = this.doc.blocks[at];
     if (!b) return null;
-    if (b.k === 'table' || (b.k === 'fence' && b.lang && lookup.appOf(b.lang))) return { label: t('draw-edit'), icon: SquarePen, keys: 'Enter', does: () => void this.editCard(at) };
+    if (b.k === 'table' || (b.k === 'fence' && b.lang && lookup.appOf(b.lang))) return { label: t('common-edit'), icon: SquarePen, keys: 'Enter', does: () => void this.editCard(at) };
     return null;
   }
   /** The card's Edit, as its words say it ('' where it has none), and done: for the card's commands (commands.ts). */
@@ -451,7 +451,7 @@ export class ToWriteEditor extends DocElement<Doc> {
     const b = this.doc.blocks[at];
     if (b?.k !== 'fence' || !b.lang) return [];
     const link = fenceLink(b.lang, b.body, `${location.origin}${location.pathname}`);
-    return [{ label: t('outline-open-in-new-tab'), icon: UI.open, does: () => void window.open(link, '_blank', 'noopener') }];
+    return [{ label: t('common-open-in-new-tab'), icon: UI.open, does: () => void window.open(link, '_blank', 'noopener') }];
   }
   moveCard(at: number, by: 1 | -1) {
     const ops = moveBlock(this.doc, at, by);
@@ -560,7 +560,7 @@ export class ToWriteEditor extends DocElement<Doc> {
   private renderNotes() {
     const notes = noteMarks(this.doc.blocks).map((m) => m.fn);
     if (!notes.length) return nothing;
-    return html`<section class="write-notes" role="doc-endnotes" aria-label=${t('write-footnotes')}>
+    return html`<section class="write-notes" role="doc-endnotes" aria-label=${t('common-footnotes')}>
       <hr />
       <to-notes class="write-notes-list" backs .notes=${notes} @note-change=${this.onNoteChange} @note-back=${this.onNoteBack} @note-remove=${this.onNoteRemove}></to-notes>
     </section>`;

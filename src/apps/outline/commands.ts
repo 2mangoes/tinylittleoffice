@@ -24,18 +24,25 @@ const words = (o: O) => !!o.itemAt(o.sel) && !o.itemAt(o.sel)!.doc;
 
 export const INSERTS: Command<O>[] = [
   cmd('insert.item', 'outline-item', { icon: Plus, where: ['menu:insert'], does: (o) => o.addItem() }),
-  cmd('insert.doc', 'insert-tiny-little-office-doc-ellipsis', { icon: UI.insert, where: ['menu:insert'], does: (o) => o.insertLinked() }),
+  cmd('insert.doc', 'common-tiny-little-office-doc-ellipsis', { icon: UI.insert, where: ['menu:insert'], does: (o) => o.insertLinked() }),
   ...apps()
     .filter((a) => a.id !== 'outline')
-    .map((a) => cmd(`insert.app.${a.id}`, () => a.name, { icon: a.icon, data: true, heading: 'insert-new-document', where: ['menu:insert'], does: (o) => o.insertApp(a.id) })),
+    .map((a) => cmd(`insert.app.${a.id}`, () => a.name, { icon: a.icon, data: true, heading: 'common-new-document', where: ['menu:insert'], does: (o) => o.insertApp(a.id) })),
 ];
 
 const OUTLINE: Command<O>[] = [
-  cmd('insert', 'bar-insert', { icon: UI.insert, menu: 'insert', where: ['bar'], takesFocus: true, does: () => undefined }),
+  cmd('insert', 'common-insert', { icon: UI.insert, menu: 'insert', where: ['bar'], takesFocus: true, does: () => undefined }),
   ...INSERTS,
-  cmd('icon', 'icons-icon', { icon: UI.icon, where: ['bar'], disabled: (o) => !words(o), does: (o) => o.pickIcon() }),
-  cmd('indent', 'write-indent', { at: 'words', icon: UI.indent, keys: 'Tab', where: ['bar'], disabled: (o) => none(o) || !shiftItem(o.doc, o.view, o.sel, 1), does: (o, e) => o.shiftBy(at(o, e), 1) }),
-  cmd('outdent', 'write-bring-out', {
+  cmd('icon', 'common-icon', { icon: UI.icon, where: ['bar'], disabled: (o) => !words(o), does: (o) => o.pickIcon() }),
+  cmd('indent', 'common-indent', {
+    at: 'words',
+    icon: UI.indent,
+    keys: 'Tab',
+    where: ['bar'],
+    disabled: (o) => none(o) || !shiftItem(o.doc, o.view, o.sel, 1),
+    does: (o, e) => o.shiftBy(at(o, e), 1),
+  }),
+  cmd('outdent', 'common-bring-out', {
     at: 'words',
     icon: UI.outdent,
     keys: 'Shift+Tab',
@@ -43,7 +50,7 @@ const OUTLINE: Command<O>[] = [
     disabled: (o) => none(o) || !shiftItem(o.doc, o.view, o.sel, -1),
     does: (o, e) => o.shiftBy(at(o, e), -1),
   }),
-  cmd('up', 'outline-move-up', {
+  cmd('up', 'common-move-up', {
     at: 'words',
     icon: ArrowUp,
     keys: 'Alt+ArrowUp',
@@ -51,7 +58,7 @@ const OUTLINE: Command<O>[] = [
     disabled: (o) => none(o) || !moveItem(o.doc, o.view, o.sel, -1),
     does: (o, e) => o.moveBy(at(o, e), -1),
   }),
-  cmd('down', 'outline-move-down', {
+  cmd('down', 'common-move-down', {
     at: 'words',
     icon: ArrowDown,
     keys: 'Alt+ArrowDown',
@@ -60,8 +67,8 @@ const OUTLINE: Command<O>[] = [
     does: (o, e) => o.moveBy(at(o, e), 1),
   }),
   cmd('numbered', 'outline-numbered', { icon: ListOrdered, where: ['bar'], pressed: (o) => !!o.itemAt(o.sel)?.ord, disabled: (o) => !words(o), does: (o) => o.number() }),
-  cmd('zoomout', 'draw-zoom-out', { at: 'words', icon: ZoomOut, keys: 'Mod+Shift+,', where: ['bar'], document: true, when: (o) => o.zoom >= 0, does: (o) => o.zoomOut() }),
-  cmd('zoomin', 'draw-zoom-in', {
+  cmd('zoomout', 'common-zoom-out', { at: 'words', icon: ZoomOut, keys: 'Mod+Shift+,', where: ['bar'], document: true, when: (o) => o.zoom >= 0, does: (o) => o.zoomOut() }),
+  cmd('zoomin', 'common-zoom-in', {
     at: 'words',
     icon: ZoomIn,
     keys: 'Mod+Shift+.',
@@ -81,8 +88,8 @@ const OUTLINE: Command<O>[] = [
     where: ['keys-only'],
     does: (o, e) => o.fold(at(o, e), !(e instanceof KeyboardEvent) || e.key === 'ArrowUp'),
   }),
-  cmd('duplicate', 'draw-duplicate', { at: 'words', keys: 'Mod+D', where: ['keys-only'], does: (o, e) => o.duplicateRow(at(o, e)) }),
-  cmd('remove', 'draw-delete', { at: 'words', keys: 'Delete / Backspace', where: ['keys-only'], does: (o, e) => o.removeDocRow(at(o, e), e) }),
+  cmd('duplicate', 'common-duplicate', { at: 'words', keys: 'Mod+D', where: ['keys-only'], does: (o, e) => o.duplicateRow(at(o, e)) }),
+  cmd('remove', 'common-delete', { at: 'words', keys: 'Delete / Backspace', where: ['keys-only'], does: (o, e) => o.removeDocRow(at(o, e), e) }),
   cmd('step', 'common-next-or-one-before', { at: 'words', keys: 'ArrowUp / ArrowDown / ArrowLeft / ArrowRight', where: ['keys-only'], does: (o, e) => e instanceof KeyboardEvent && o.stepRow(e) }),
 ];
 

@@ -79,7 +79,7 @@ function sizeOf(def: AppDef): { w: number; h: number } {
 export function lockedCard(def: AppDef): Page {
   const { w, h } = sizeOf(def);
   const u = Math.max(0.5, Math.min(w, h) / 320);
-  const words = t('locked-with-password');
+  const words = t('common-with-password');
   const cy = h / 2;
   const lock = 40 * u;
   const appSize = 18 * u;
@@ -123,7 +123,7 @@ export function lockedPage(body: string, opts: ViewOpts = {}): Page {
 export const lockedDoc: AppDef = {
   id: LOCKED_LANG,
   get name() {
-    return t('privacy-locked-document');
+    return t('common-locked-document');
   },
   get noun() {
     return t('locked-document');
@@ -140,5 +140,5 @@ export const lockedDoc: AppDef = {
   retitle: (doc) => doc,
   view: (body, opts) => [lockedPage(body, opts)],
   // Nothing of what it holds: that it is locked.
-  text: () => [{ k: 'p', runs: [{ t: t('privacy-locked-document') }] }],
+  text: () => [{ k: 'p', runs: [{ t: t('common-locked-document') }] }],
 };

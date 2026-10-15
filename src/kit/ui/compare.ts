@@ -90,7 +90,7 @@ export class ToCompare extends LitElement {
       <label class="to-field cmp-field"><span>${label}</span>
         <input type="url" class="cmp-${which}" placeholder=${which === 'a' ? t('compare-paste-link-to-document-as-it-was') : t('compare-paste-link-to-document-as')} .value=${href} @change=${(e: Event) => this.set(which, (e.target as HTMLInputElement).value, e.target as HTMLInputElement)} />
       </label>
-      ${def ? html`<p class="cmp-meta">${icon(def.icon, 16)}<b>${def.title(text) || t('shell-untitled-noun', { noun: def.noun })}</b><span>· ${def.name}</span><a href=${routeHash(s!.app, s!.payload)}>${t('common-open')}</a></p>` : nothing}
+      ${def ? html`<p class="cmp-meta">${icon(def.icon, 16)}<b>${def.title(text) || t('common-untitled-noun', { noun: def.noun })}</b><span>· ${def.name}</span><a href=${routeHash(s!.app, s!.payload)}>${t('common-open')}</a></p>` : nothing}
     </div>`;
   }
 

@@ -58,7 +58,7 @@ function ask<T>(heading: string, cls: string, body: (f: Frame<T>) => TemplateRes
 function urlRow(o: { label: string; placeholder: string; value: string; ok: boolean; input: (v: string) => void }): TemplateResult {
   return html`<div class="to-ask-row">
     <input class="to-ask-url" type="url" inputmode="url" aria-label=${o.label} placeholder=${o.placeholder} .value=${o.value} autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="done" @input=${(e: Event) => o.input((e.target as HTMLInputElement).value)} />
-    <button type="submit" class="to-btn primary to-ask-ok" ?disabled=${!o.ok}>${t('write-ok')}</button>
+    <button type="submit" class="to-btn primary to-ask-ok" ?disabled=${!o.ok}>${t('common-ok')}</button>
   </div>`;
 }
 const form = (cls: string, submit: () => void, inner: TemplateResult) => html`<form class="to-ask ${cls}" novalidate @submit=${(e: Event) => (e.preventDefault(), submit())}>${inner}</form>`;
@@ -119,7 +119,7 @@ export function askDocLink(): Promise<Block | null> {
     const b = fence as Block | null;
     const def = b?.k === 'fence' ? lookup.appOf(b.lang) : undefined;
     const page = b?.k === 'fence' && def ? def.view(b.body, { small: true, still: true })[0] : null;
-    const name = b?.k === 'fence' ? def?.title(b.body) || (b.lang === LOCKED_LANG ? def!.name : t('shell-untitled-noun', { noun: def?.noun ?? b.lang })) : '';
+    const name = b?.k === 'fence' ? def?.title(b.body) || (b.lang === LOCKED_LANG ? def!.name : t('common-untitled-noun', { noun: def?.noun ?? b.lang })) : '';
     return form(
       'to-ask-doc-form',
       () => b && f.finish(b),

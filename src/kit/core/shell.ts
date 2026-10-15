@@ -605,17 +605,17 @@ export class ToShell extends LitElement {
     const def = this.def;
     // A QR code the document holds of itself is drawn from its link as it now is.
     setSelfLink(def ? this.link : '');
-    document.title = def ? `${this.outerTitle} · ${t('drawer-tiny-little-office')}` : t('drawer-tiny-little-office');
+    document.title = def ? `${this.outerTitle} · ${t('common-tiny-little-office')}` : t('common-tiny-little-office');
   }
   /** What the document is called: the name it was given, a new one's name, or "Untitled presentation" (a link that came with none). */
   private get docTitle(): string {
     const def = this.def;
-    if (def && this.sealed) return t('privacy-locked-document');
-    return def ? def.title(this.doc) || this.fresh || t('shell-untitled-noun', { noun: def.noun }) : t('drawer-tiny-little-office');
+    if (def && this.sealed) return t('common-locked-document');
+    return def ? def.title(this.doc) || this.fresh || t('common-untitled-noun', { noun: def.noun }) : t('common-tiny-little-office');
   }
   /** What the world outside the page is told the document is called (the tab, history, the share sheet): nothing of a locked one. */
   private get outerTitle(): string {
-    return this.def && (this.locker || this.sealed) ? t('privacy-locked-document') : this.docTitle;
+    return this.def && (this.locker || this.sealed) ? t('common-locked-document') : this.docTitle;
   }
   /** The link to share, the editing one: the address without the short link's query or the display flag; with the language chosen. */
   get link(): string {
@@ -750,7 +750,7 @@ export class ToShell extends LitElement {
   private pages = (def: AppDef, behind = false) =>
     html`<div class="to-display-pages" aria-hidden=${behind ? 'true' : nothing} ?hidden=${behind && this.reading}>${def
       .view(this.doc)
-      .map((p, i) => html`<div class="to-display-page" style="--page-w:${p.w / 16}rem" aria-label=${t('deck-page-n', { n: i + 1 })} role="group">${unsafeSVG(pageSvg(p))}</div>`)}</div>`;
+      .map((p, i) => html`<div class="to-display-page" style="--page-w:${p.w / 16}rem" aria-label=${t('common-page-n', { n: i + 1 })} role="group">${unsafeSVG(pageSvg(p))}</div>`)}</div>`;
 
   /**
    * The Display Link: the pages, to read or print, with Edit. The
@@ -763,7 +763,7 @@ export class ToShell extends LitElement {
       u.pathname = siteDir();
       u.hash = routeHash(def.id, payload, '', false, null, chosenLanguage());
       const main = this.sealed
-        ? html`<div class="to-display-page" role="group" aria-label=${t('privacy-locked-document')}>${unsafeSVG(pageSvg(lockedCard(def)))}</div><button type="button" class="to-btn primary to-unlock-open" @click=${this.askPassword}>${icon(UI.unlock, 16)}<span>${t('privacy-unlock-ellipsis')}</span></button>`
+        ? html`<div class="to-display-page" role="group" aria-label=${t('common-locked-document')}>${unsafeSVG(pageSvg(lockedCard(def)))}</div><button type="button" class="to-btn primary to-unlock-open" @click=${this.askPassword}>${icon(UI.unlock, 16)}<span>${t('common-unlock-ellipsis')}</span></button>`
         : this.pages(def);
       return html`<to-chrome .plain=${{ kind: 'embed', title: this.docTitle, href: u.href, locked: !!this.sealed }} .main=${main}></to-chrome>`;
     }
@@ -788,9 +788,9 @@ export class ToShell extends LitElement {
     if (this.comparing) return html`<to-compare .a=${this.comparing[0]} .b=${this.comparing[1]}></to-compare>`;
     if (!def) return html`<to-home></to-home>`;
     if (this.sealed)
-      return html`<div class="to-empty to-locked">${icon(UI.lock, 32)}<p>${t('privacy-this-document-is-locked-with')}</p><button type="button" class="to-btn primary to-unlock-open" @click=${this.askPassword}>${icon(UI.unlock, 16)}<span>${t('privacy-unlock-ellipsis')}</span></button></div>`;
+      return html`<div class="to-empty to-locked">${icon(UI.lock, 32)}<p>${t('privacy-this-document-is-locked-with')}</p><button type="button" class="to-btn primary to-unlock-open" @click=${this.askPassword}>${icon(UI.unlock, 16)}<span>${t('common-unlock-ellipsis')}</span></button></div>`;
     if (this.unreadable)
-      return html`<div class="to-empty"><p>${this.newer ? t('shell-this-link-was-made-by') : t('shell-this-link-holds-something-that')}</p><a class="to-btn primary" href=${routeHash(def.id)}>${t('shell-new-noun', { noun: def.noun })}</a></div>`;
+      return html`<div class="to-empty"><p>${this.newer ? t('shell-this-link-was-made-by') : t('shell-this-link-holds-something-that')}</p><a class="to-btn primary" href=${routeHash(def.id)}>${t('common-new-noun', { noun: def.noun })}</a></div>`;
     if (!this.tag) return html`<div class="to-empty to-loading" aria-busy="true">${t('shell-loading')}</div>`;
     const tag = unsafeStatic(this.tag);
     return staticHtml`<${tag} class="to-editor" .value=${this.edited} @docchange=${this.onDocChange}></${tag}>`;

@@ -394,7 +394,7 @@ const blank = (kind: KindId): Template => ({ id: kind, name: kindName(kind), blu
 
 export const templates = (): Template[] => [
   blank('mind'),
-  { id: 'mind-launch', name: t('outline-launch-plan'), blurb: t('diagram-launch-and-everything-that-branches'), doc: LAUNCH },
+  { id: 'mind-launch', name: t('common-launch-plan'), blurb: t('diagram-launch-and-everything-that-branches'), doc: LAUNCH },
   { id: 'mind-garden', name: t('diagram-garden-this-year'), blurb: t('diagram-what-to-grow-and-jobs'), doc: GARDEN },
   { id: 'mind-move', name: t('diagram-moving-abroad'), blurb: t('diagram-move-to-lisbon-by-march'), doc: LISBON },
   { id: 'mind-revision', name: t('diagram-studying-for-exam'), blurb: t('diagram-biology-final-in-december-topic'), doc: REVISION },

@@ -464,7 +464,7 @@ export class ToTripEditor extends DocElement<TripView> {
       <div class="trip-present-ctl">
         <button type="button" class="to-btn to-tool" aria-label=${t('trip-stop-before')} title=${t('trip-stop-before')} ?disabled=${this.presenting === 0} @click=${() => this.goStop(this.presenting - 1)}>${icon(UI.up, 20)}</button>
         <button type="button" class="to-btn to-tool" aria-label=${t('trip-next-stop')} title=${t('trip-next-stop')} ?disabled=${this.presenting >= n - 1} @click=${() => this.goStop(this.presenting + 1)}>${icon(UI.down, 20)}</button>
-        <button type="button" class="to-btn to-tool" aria-label=${t('deck-stop-presenting')} title=${t('deck-stop-presenting')} @click=${() => this.endPresenting()}>${icon(UI.close, 20)}</button>
+        <button type="button" class="to-btn to-tool" aria-label=${t('common-stop-presenting')} title=${t('common-stop-presenting')} @click=${() => this.endPresenting()}>${icon(UI.close, 20)}</button>
       </div>
     </div>`;
   }
@@ -825,7 +825,7 @@ export class ToTripEditor extends DocElement<TripView> {
       no-bubble
       .blocks=${this.blocksFor(s, field)}
       label=${field === 'name' ? t('trip-name-of-stop-n', { n }) : t('trip-note-for-stop-n', { n })}
-      placeholder=${field === 'name' ? t('sheet-name') : t('draw-note')}
+      placeholder=${field === 'name' ? t('common-name') : t('common-note')}
       @text-ops=${(e: CustomEvent<TextOps>) => this.onOps(e, i, field)}
       @text-enter=${(e: Event) => (e.stopPropagation(), this.onEnter(i, field))}
       @text-exit=${(e: CustomEvent<{ dir: 'back' | 'forward' }>) => (e.stopPropagation(), this.onExit(i, field, e.detail.dir))}
@@ -883,7 +883,7 @@ export class ToTripEditor extends DocElement<TripView> {
         }
         ${
           n
-            ? html`<ol class="trip-stops" tabindex="-1" aria-label=${t('cal-stops')}>${v.stops.map((s, i) => this.row(s, i))}</ol>`
+            ? html`<ol class="trip-stops" tabindex="-1" aria-label=${t('common-stops')}>${v.stops.map((s, i) => this.row(s, i))}</ol>`
             : html`<p class="to-hint trip-empty">${this.showMap ? t('trip-tap-map-to-add-first') : t('trip-insert-place-by-name')}</p>`
         }
       </div>

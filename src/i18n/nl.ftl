@@ -6,10 +6,10 @@
 
 # same
 shell-menu = Menu
-shell-title = Titel
+common-title = Titel
 # A new document of the app, and one not yet named; { $noun } is the app's noun: "New presentation".
-shell-new-noun = Nieuw: { $noun }
-shell-untitled-noun = Zonder naam: { $noun }
+common-new-noun = Nieuw: { $noun }
+common-untitled-noun = Zonder naam: { $noun }
 shell-download = Downloaden
 shell-loading = Laden…
 shell-this-link-holds-something-that = Deze link bevat iets wat niet te lezen is. Misschien is hij afgekapt bij het kopiëren.
@@ -24,15 +24,25 @@ shell-copy-link-and-go = Link kopiëren en gaan
 shell-turn-on-save-in-browser = Opslaan in browser aanzetten en hier bewaren
 shell-go-without = Gaan zonder
 shell-save-in-browser-is-on = Opslaan in browser staat aan: deze browser bewaart de documenten die je opent. Zet het uit in het menu.
+shell-another-version = Een andere versie
+shell-kept-on-this-device = Op dit apparaat bewaard
+shell-keyboard-shortcuts = Sneltoetsen
+shell-nothing-to-keep-yet = Nog niets om te bewaren
+shell-open-it = Openen
+shell-save-in-browser-is-off = Opslaan in browser staat uit: deze browser bewaart geen documenten. Zet het aan in het menu om ze hier te bewaren.
+shell-skip-to-apps = Naar de apps springen
+shell-skip-to-document = Naar het document springen
+shell-this-device-keeps-another-version = Dit apparaat bewaart een andere versie van “{ $title }”, van { $when }.
+shell-this-link-was-made-by = Deze link is gemaakt door een nieuwere Piepklein Kantoortje. Laad de pagina opnieuw om hem te krijgen.
 
 ## the home page
 
 home-blank = Leeg
-home-templates = Sjablonen
+common-templates = Sjablonen
 # The button under an app's tile, naming the template list: "Start Text from"
 # The list of an app's documents kept on this device, under its tile: "Write documents"
 home-app-documents = Documenten van { $app }
-home-forget = Vergeten
+common-forget = Vergeten
 # The button that forgets one kept document: "Forget Launch notes"
 home-forget-title = { $title } vergeten
 # Under an app's documents, the rest folded away: "3 more"
@@ -40,27 +50,38 @@ home-n-more = nog { $n }
 home-aboard-project-made-with-respect = Een project van { $aboard }. Met respect gemaakt in New York City.
 home-beta-version = Bètaversie
 home-email = E-mail
+home-templates-for-app = Sjablonen voor { $app }
+home-app-templates = Sjablonen voor { $app }
+home-templates-for-app-name = Sjablonen voor { $app }: { $name }
+home-templates-are-not-saved-in = De sjablonen staan nog niet in deze browser. Maak verbinding met internet om ze te zien.
+home-documents-found = Gevonden documenten
+home-no-document-here-has-those = Geen document hier heeft die woorden
+home-search-your-documents = Je documenten doorzoeken
+home-n-documents-found = { $n ->
+        [one] Eén document gevonden
+       *[other] { $n } documenten gevonden
+    }
 
 ## the drawer (hamburger menu)
 
 # same
 drawer-apps = Apps
-drawer-close = Sluiten
+common-close = Sluiten
 drawer-default-name = Standaard: { $name }
 drawer-save-in-browser = Opslaan in browser
 drawer-what-is-this = Wat is dit?
 drawer-turn-on-to-save-files = Zet aan om bestanden in je browser op te slaan.
 drawer-turn-off-to-remove-all = Zet uit om alle bestanden en instellingen te verwijderen.
-drawer-nothing-saved-in-this-browser = Niets opgeslagen in deze browser
-drawer-saving-in-this-browser = Opslaan in deze browser
+common-nothing-saved-in-this-browser = Niets opgeslagen in deze browser
+common-saving-in-this-browser = Opslaan in deze browser
 drawer-remove-all-files-and-settings = Alle bestanden en instellingen uit deze browser verwijderen?
 drawer-language = Taal
-drawer-theme = Thema
+common-theme = Thema
 drawer-match-device = Zoals het apparaat
 drawer-light = Licht
 drawer-dark = Donker
 drawer-about = Info
-drawer-tiny-little-office = Piepklein Kantoortje
+common-tiny-little-office = Piepklein Kantoortje
 drawer-about-tiny-little-office = Over Piepklein Kantoortje
 drawer-tiny-little-office-is-experiment = Piepklein Kantoortje is een experiment van { $aboard }, een bureau voor digitale en AI-strategie en softwareontwikkeling in New York City.
 drawer-to-reach-out-with-questions = Heb je vragen? { $email }.
@@ -71,6 +92,13 @@ drawer-all-of-these-notes-these = Al deze aantekeningen, deze tekeningen en deze
 # same
 drawer-eugene-ionesco-book = Eugène Ionesco, { $book }
 drawer-discoveries = Ontdekkingen
+drawer-documents = Documenten
+drawer-find-app-template-or-command = App, sjabloon of opdracht zoeken
+drawer-commands = Opdrachten
+drawer-nothing-by-that-name = Niets met die naam
+drawer-add-to-home-screen = Zet op beginscherm
+drawer-size-of-everything = Grootte van alles
+drawer-to-add-tiny-little-office = Om Piepklein Kantoortje aan het beginscherm toe te voegen: Delen, dan Zet op beginscherm.
 
 ## links that leave the site (kit/ui/link-guard.ts)
 
@@ -115,7 +143,7 @@ share-expires-in-n-minutes-date = Verloopt over { $n ->
     } ({ $date })
 share-opens-as-pages-to-read = Opent als pagina’s om te lezen
 share-opens-in-editor = Opent in de editor
-share-whoever-opens-this-link-gets = Wie deze link opent, krijgt een eigen kopie. Wijzigingen staan in hun link, niet in de jouwe: vraag ze hun link terug te sturen.
+common-whoever-opens-this-link-gets = Wie deze link opent, krijgt een eigen kopie. Wijzigingen staan in hun link, niet in de jouwe: vraag ze hun link terug te sturen.
 share-short-link-that-expires = Korte link die verloopt
 share-this-link-expires-in-n = Deze link verloopt over { $n ->
         [one] { $n } dag
@@ -148,9 +176,9 @@ share-display-link = Weergavelink
 share-opens = Opent
 share-link-copied = Link gekopieerd
 share-could-not-copy = Kopiëren mislukt
-share-share = Delen…
-share-qr-code = QR-code
-share-qr-code-of-this-document = QR-code van dit document
+common-share = Delen…
+common-qr-code = QR-code
+common-qr-code-of-this-document = QR-code van dit document
 share-this-document-is-n-bytes = Dit document is { $n } bytes; de grootste QR-code bevat { $max }. Maak het { $over } bytes korter en het past.
 share-this-document-is-n-characters = Dit document is { $n } tekens; een korte link bevat { $max }. Maak het { $over } korter en het past.
 share-expires-after = Verloopt na
@@ -167,8 +195,36 @@ share-this-document-is-too-long = Dit document is te lang voor een korte link.
 share-up-to-hundred-links-day = Tot honderd links per dag vanaf één adres.
 share-remove = Weghalen
 # same
-share-link = Link
-share-short-link = Korte link
+common-link = Link
+common-short-link = Korte link
+share-new-noun-date-n = { $noun } { $date } #{ $n }
+# Files, compare, posting and embedding: the agent and sharing surface.
+share-mastodon-server-like-mastodon-social = Een Mastodon-server, zoals mastodon.social
+share-change = Wijzigen
+share-copy-embed-code = Insluitcode kopiëren
+share-copy-show-link = Toonlink kopiëren
+share-embed = Insluiten
+share-embed-code-copied = Insluitcode gekopieerd
+share-opens-deck-already-presenting = Opent de presentatie al presenterend.
+share-post = Plaatsen
+share-post-link = De link plaatsen
+share-show-preview-of-first-page = Een voorbeeld van de eerste pagina tonen
+share-picture-of-first-page-and = Een afbeelding van de eerste pagina en de titel blijven een maand leesbaar op onze server, zodat het netwerk ze kan ophalen. Het document zelf niet.
+share-shared-without-preview-reason = Gedeeld zonder voorbeeld: { $reason }
+share-making-preview = Voorbeeld maken…
+share-page-could-not-be-drawn = de pagina kon niet worden getekend
+share-picture-is-over-400-kb = de afbeelding is groter dan 400 KB
+share-server-could-not-be-reached = de server was niet bereikbaar
+share-hundred-previews-day-from-one = honderd voorbeelden per dag vanaf één adres
+share-server-refused-picture = de server weigerde de afbeelding
+share-pages-in-frame-on-another = De pagina’s, in een frame op een andere site, met een link om ze hier te openen.
+share-your-mastodon-server = Je Mastodon-server
+share-left = Links
+share-uses = Gebruik
+share-where = Waar
+share-where-link-fits = Waar de link past
+share-any-length = elke lengte
+share-n-over = { $n } te veel
 
 ## privacy (kit/share/privacy.ts, kit/ui/privacy-dialog.ts): the password, what the device holds
 
@@ -181,12 +237,12 @@ privacy-forget-everything = Alles vergeten
 privacy-preview-sent-with-link-to = Een voorbeeld dat met een link naar een netwerk gaat, is een afbeelding van de eerste pagina, de titel en de eerste woorden, een maand leesbaar op onze server. Het document zelf komt daar nooit.
 privacy-forget-everything-this-site-keeps = Alles vergeten wat deze site hier bewaart, en voortaan niets meer bewaren? De documenten zelf leven in hun links.
 privacy-locked = Vergrendeld
-privacy-locked-document = Vergrendeld document
+common-locked-document = Vergrendeld document
 privacy-new-password = Nieuw wachtwoord
 privacy-no-password = Geen wachtwoord
 privacy-none = Geen
 privacy-opening = Openen…
-privacy-password = Wachtwoord
+common-password = Wachtwoord
 privacy-password-removed = Wachtwoord verwijderd
 privacy-password-set-link-holds-only = Wachtwoord ingesteld: de link bevat alleen versleutelde tekst
 privacy-password-ellipsis = Wachtwoord…
@@ -204,17 +260,17 @@ privacy-short-links-made-here-until = De korte links die hier zijn gemaakt, tot 
 privacy-their-names-and-links-for = Hun namen en links, voor de startpagina.
 privacy-theme-lifetime-of-short-links = Thema, de levensduur van korte links.
 privacy-this-document-has-password-link = Dit document heeft een wachtwoord. De link, en elke korte link daarvan, bevat alleen versleutelde tekst.
-privacy-this-document-is-locked = Dit document is vergrendeld
+common-this-document-is-locked = Dit document is vergrendeld
 privacy-this-document-is-locked-with = Dit document is met een wachtwoord vergrendeld.
 privacy-unlock = Ontgrendelen
-privacy-unlock-ellipsis = Ontgrendelen…
+common-unlock-ellipsis = Ontgrendelen…
 privacy-what-this-device-holds = Wat dit apparaat bewaart
 privacy-your-documents = Je documenten
 privacy-your-browsers-history = De geschiedenis van je browser
 privacy-every-document-opened-here-in = Elk document dat hier is geopend, volledig, tenzij het een wachtwoord heeft.
 privacy-not-ours-to-clear = Niet aan ons om te wissen
 privacy-by-name = door { $name }
-privacy-n-documents = { $n ->
+common-n-documents = { $n ->
         [one] { $n } document
        *[other] { $n } documenten
     }
@@ -225,11 +281,12 @@ privacy-n-links = { $n ->
 privacy-n-set = { $n } ingesteld
 privacy-copy-this-and-send-it = Kopieer het en stuur het via een andere weg dan de link. Het kan niet nog eens getoond worden.
 privacy-make-another = Maak een ander
+privacy-password-copied = Wachtwoord gekopieerd
 
 ## a document locked with a password, placed inside another (kit/share/locked.ts, kit/ui/locked-doc.ts)
 
 # The card drawn where it sits; { $app } is the app's name: "A Spreadsheet document, locked with a password".
-locked-with-password = Met een wachtwoord vergrendeld
+common-with-password = Met een wachtwoord vergrendeld
 locked-app-document-locked-with-password = Een { $app }-document, met een wachtwoord vergrendeld
 locked-with-password-unlock = Met een wachtwoord vergrendeld. Ontgrendelen…
 locked-document-locked-with-password = Een document met een wachtwoord vergrendeld
@@ -255,24 +312,37 @@ common-chosen-tasks = Gekozen taken
 common-open = Openen
 common-task = Taak
 common-tasks = Taken
+common-find-app-doc-template-or = App, document, sjabloon of opdracht zoeken
+common-in-this-document = Zoeken in dit document
+common-indent-or-bring-out-in = Inspringen of terug in een lijst; de volgende cel in een raster
+common-move-selected-items-up-or = De geselecteerde items omhoog of omlaag verplaatsen
+common-nudge-shapes-in-hand = De vormen in de hand verschuiven
+common-select-all-words-of-box = Alles selecteren: de woorden van het vak, dan alles
+common-back-to-words = Terug naar de tekst
+common-extend-selection = Selectie uitbreiden
+common-next-or-one-before = De volgende of de vorige
+common-step-out-close-collapse-let = Eruit stappen: sluiten, inklappen, loslaten
+common-check-or-uncheck-task = Een taak aan- of uitvinken
+common-too-long-for-qr-code = Te lang voor een QR-code: maak het document korter, of deel een korte link.
+common-n-of-count = { $n } van { $count }
 
 ## downloads
 
 download-print = Afdrukken
-download-print-or-save-as-pdf = Afdrukken, of opslaan als pdf
+common-print-or-save-as-pdf = Afdrukken, of opslaan als pdf
 download-picture-png = Afbeelding (PNG)
-download-web-page-html = Webpagina (HTML)
+common-web-page-html = Webpagina (HTML)
 download-text-tlo = Tekst (TLO)
 download-data-json = Gegevens (JSON)
 download-downloaded-name = { $name } gedownload
 download-failed = Downloaden mislukt
-download-open-in-tiny-little-office = Openen in Piepklein Kantoortje
+common-open-in-tiny-little-office = Openen in Piepklein Kantoortje
 # Under a document cut off at a slide's foot: a link that opens it whole, in its own app.
 download-see-more = Meer zien
 
 ## the bar, shared by every app
 
-bar-insert = Invoegen
+common-insert = Invoegen
 bar-bold = Vet
 bar-italic = Cursief
 bar-underline = Onderstreept
@@ -281,21 +351,21 @@ bar-highlight = Markeren
 bar-heading = Kop
 bar-bulleted-list = Opsomming
 bar-numbered-list = Genummerde lijst
-bar-table = Tabel
+common-table = Tabel
 bar-footnote = Voetnoot
-bar-date = Datum
+common-date = Datum
 bar-undo = Ongedaan maken
 bar-redo = Opnieuw
-bar-today = Vandaag
+common-today = Vandaag
 
 ## the editor (<to-text>): chips, cards and the bubbles
 
 # A footnote's mark, and its words where the notes are drawn, by its number: spoken.
-editor-footnote-n = Voetnoot { $n }
+common-footnote-n = Voetnoot { $n }
 # A card standing for another document held in this one, of a kind no app here reads: "abc document".
-editor-app-document = { $app }-document
+common-app-document = { $app }-document
 # The same card when its app is known; { $noun } is the app's noun: "A spreadsheet".
-editor-noun = Een { $noun }
+common-noun = Een { $noun }
 # same
 editor-code = Code
 editor-connection = Verbinding
@@ -304,7 +374,7 @@ editor-n-rows = { $n ->
        *[other] { $n } rijen
     }
 editor-notes-words = De woorden van de noot
-editor-done = Klaar
+common-done = Klaar
 editor-address = Adres
 editor-not-address = Geen adres
 editor-set-link = Link instellen
@@ -312,9 +382,13 @@ editor-open-link = Link openen
 editor-change-link = Link bewerken
 editor-remove-link = Link weghalen
 # The selection bubble's name: what can be done to the words selected.
-editor-format = Opmaak
+common-format = Opmaak
 editor-done-lowercase = gedaan
 editor-not-done = niet gedaan
+editor-bold-italic-and-links = Vet, cursief en links
+editor-one-of-words-column-holds = Een van de woorden die de kolom bevat, of een nieuw
+editor-option = Keuze
+editor-this-browser-lets-page-paste = Deze browser laat een pagina alleen plakken via het toetsenbord: gebruik daar ‘Plakken’.
 
 ## the example in the kit's own documentation
 
@@ -325,20 +399,20 @@ example-n-slides = { $n ->
 
 ## the Word Processor
 
-write-word-processor = Tekstverwerker
+common-word-processor = Tekstverwerker
 # What one of its documents is called, in running text: "Untitled document"; each app's noun is in its section.
 # same
 write-document-lowercase = document
 # The group heading the Word Processor sits under on the home page.
-write-words = Tekst
+common-words = Tekst
 write-words-on-page-headings-lists = Woorden op een pagina: koppen, lijsten, links en noten, een tabel die optelt, te printen op letter of A4.
 # same
 write-document = Document
 write-here = Schrijf hier.
 write-subheading = Subkop
 write-paragraph = Alinea
-write-bring-out = Benadrukken
-write-indent = Inspringen
+common-bring-out = Benadrukken
+common-indent = Inspringen
 write-align = Uitlijnen
 write-align-left = Links uitlijnen
 write-center = Centreren
@@ -363,11 +437,11 @@ write-horizontal-rule = Horizontale lijn
 # Insert ▾'s rule in a document: what follows starts the next page.
 write-page-break = Pagina-einde
 # same
-write-ok = OK
+common-ok = OK
 write-this-card = Deze kaart
 write-open-in-app = Openen in { $app }
 write-locked-worked-out-for-you = Vergrendeld: voor je uitgerekend
-write-footnotes = Voetnoten
+common-footnotes = Voetnoten
 write-back-to-footnote-n-in = Terug naar voetnoot { $n } in de tekst
 write-back-to-text = Terug naar de tekst
 write-n-words = { $n ->
@@ -377,7 +451,7 @@ write-n-words = { $n ->
 # same
 write-word-docx = Word (DOCX)
 # same
-write-markdown = Markdown
+common-markdown = Markdown
 # same
 write-rich-text-rtf = Rich Text (RTF)
 # A table in the text: its heads, its handle, its column menu.
@@ -444,6 +518,12 @@ write-petition = Petitie
 write-what-you-ask-why-and = Wat je vraagt, waarom, en de namen van wie het ermee eens is.
 write-terms-of-service = Algemene voorwaarden
 write-small-businesss-terms-in-plain = De voorwaarden van een klein bedrijf in gewone woorden: boeken, prijzen, sleutels, wat als, beëindigen.
+write-open-as-outline = Openen als overzicht
+# same
+write-a4 = A4
+# same
+write-letter = Letter
+write-name-this-column = Noem deze kolom
 
 ## Insert's dialog (kit/ui/insert-dialogs.ts): Tiny Little Office Doc
 
@@ -452,13 +532,13 @@ insert-opening-short-link = De korte link openen…
 insert-paste-link-of-another-tiny = Plak de link van een ander Piepklein Kantoortje-document, lang of kort: de eerste pagina verschijnt hier.
 insert-this-is-not-tiny-little = Dit is geen Piepklein Kantoortje-link, of hij is verlopen.
 insert-tiny-little-office-doc = Piepklein Kantoortje-document
-insert-tiny-little-office-doc-ellipsis = Piepklein Kantoortje-document…
+common-tiny-little-office-doc-ellipsis = Piepklein Kantoortje-document…
 # Insert ▾'s group of the apps a new document can be made in, inside this one.
-insert-new-document = Een nieuw document
+common-new-document = Een nieuw document
 
 ## another document edited in place (kit/ui/doc-dialog.ts); a table's size is Rows × Columns
 
-doc-cancel = Annuleren
+common-cancel = Annuleren
 doc-rows = Rijen
 
 ## charts (kit/draw/chart.ts)
@@ -467,7 +547,7 @@ chart-empty-chart = Een lege grafiek
 chart-bars = Staven
 chart-flows-sankey = Stromen (Sankey)
 chart-flows-list = Stromen: { $list }.
-chart-lines = Lijnen
+common-lines = Lijnen
 chart-nothing-to-chart-yet = Nog niets om te tekenen
 chart-nothing-to-chart-yet-rows = Nog niets om te tekenen: rijen met Van | Naar | Bedrag
 chart-pie = Taart
@@ -481,10 +561,10 @@ sheet-fit-this-column-to-its = Kolom aan de tekst aanpassen
 sheet-cells-in-hand = De cellen in de hand
 sheet-check-ref = { $ref } aanvinken
 # The column type that holds words as typed.
-sheet-text = Tekst
-sheet-spreadsheet = Rekenblad
+common-text = Tekst
+common-spreadsheet = Rekenblad
 sheet-spreadsheet-lowercase = rekenblad
-sheet-numbers = Cijfers
+common-numbers = Cijfers
 sheet-spreadsheet-with-formulas-named-cells = Een rekenblad met formules, benoemde cellen en grafieken; drie kolommen om mee te beginnen, meer als je ze nodig hebt.
 sheet-budget = Begroting
 sheet-planned-against-actual-line-each = Gepland tegenover werkelijk, een regel elk, met het verschil en totalen.
@@ -549,38 +629,38 @@ sheet-eight-teams-single-elimination-each = Acht teams in een knock-outronde: de
 # same
 sheet-excel-xlsx = Excel (XLSX)
 # same
-sheet-csv = CSV
+common-csv = CSV
 sheet-chart-svg = Grafiek (SVG)
 sheet-chart-png = Grafiek (PNG)
 sheet-empty-sheet = Leeg blad
 sheet-n-of-max-shown = ({ $n } van { $max } getoond)
 sheet-50-more-rows = 50 rijen meer
-sheet-add-column = Kolom toevoegen
-sheet-add-column-after = Kolom erna toevoegen
+common-add-column = Kolom toevoegen
+common-add-column-after = Kolom erna toevoegen
 sheet-chart = Grafiek
 sheet-chart-of-table = Grafiek van de tabel
 sheet-checkbox = Selectievakje
 sheet-column-after = Kolom erna
-sheet-column-c = Kolom { $c }
-sheet-column-c-holds = Kolom { $c } bevat
+common-column-c = Kolom { $c }
+common-column-c-holds = Kolom { $c } bevat
 sheet-column-c-type-what-it = Kolom { $c }: { $type }. Wat erin staat, sorteer erop, voeg een kolom toe of verwijder er een
-sheet-columns = Kolommen
-sheet-delete-which = { $which } wissen
-sheet-drag-to-fill = Sleep om te vullen
+common-columns = Kolommen
+common-delete-which = { $which } wissen
+common-drag-to-fill = Sleep om te vullen
 sheet-abc-or-123-for-this = ABC of 123, voor deze kolom
 sheet-drag-to-resize-double-click = Sleep om te vergroten, dubbelklik om aan te passen
 sheet-fill-down-from-top-row = Omlaag vullen vanaf de bovenste rij
 sheet-fill-right-from-first-column = Naar rechts vullen vanaf de eerste kolom
-sheet-fill-drag-to-carry-these = Vullen: sleep om deze cellen door te zetten
+common-fill-drag-to-carry-these = Vullen: sleep om deze cellen door te zetten
 sheet-fit-columns-to-page = Kolommen aan de pagina aanpassen
 sheet-formula = Formule
 sheet-function = Functie
 sheet-high-to-low = Hoog naar laag
-sheet-insert-n-rows-above = { $n ->
+common-insert-n-rows-above = { $n ->
         [one] Een rij
        *[other] { $n } rijen
     } erboven invoegen
-sheet-insert-n-rows-below = { $n ->
+common-insert-n-rows-below = { $n ->
         [one] Een rij
        *[other] { $n } rijen
     } eronder invoegen
@@ -589,8 +669,8 @@ sheet-lock-these-cells-so-reader = Deze cellen vergrendelen, zodat een lezer ze 
 sheet-locked-part-of-model = Vergrendeld: deel van het model
 sheet-low-to-high = Laag naar hoog
 sheet-money = Bedrag
-sheet-name = Naam
-sheet-name-of-column-c = Naam van kolom { $c }
+common-name = Naam
+common-name-of-column-c = Naam van kolom { $c }
 sheet-names-cell-to-its-right = Geeft de cel rechts ervan een naam
 # A money column's currency (Money picked in a column's menu): the field's hint, and what it says of words it cannot read.
 sheet-symbol-like-or-code-like = Een symbool, zoals $, of een code, zoals USD. Leeg is die van het document zelf.
@@ -600,15 +680,15 @@ sheet-number = Getal
 sheet-open-link = { $link } openen
 sheet-opens-when-clicked = Opent bij een klik
 sheet-percent = Procent
-sheet-remove-this-column = Deze kolom verwijderen
+common-remove-this-column = Deze kolom verwijderen
 sheet-resize-column-c = Breedte van kolom { $c }
 sheet-rich-text = Opgemaakte tekst
 sheet-row-above = Rij erboven
 sheet-row-below = Rij eronder
-sheet-row-n = Rij { $n }
-sheet-row-n-lowercase = rij { $n }
-sheet-row-n-insert-or-delete = Rij { $n }: rijen invoegen of verwijderen
-sheet-rows-b = rijen { $a }–{ $b }
+common-row-n = Rij { $n }
+common-row-n-lowercase = rij { $n }
+common-row-n-insert-or-delete = Rij { $n }: rijen invoegen of verwijderen
+common-rows-b = rijen { $a }–{ $b }
 sheet-selected-cells = Geselecteerde cellen
 sheet-show-all-text = Alle tekst tonen
 sheet-shown-as-typed = Getoond zoals getypt
@@ -619,22 +699,37 @@ sheet-is-full-its-last-rows = Het blad is vol: de laatste rijen bevatten iets.
 sheet-three-at-least = Minstens drie
 sheet-unlock-these-cells = Deze cellen ontgrendelen
 sheet-what-it-holds-sort-columns = Wat erin staat; sorteren; kolommen
+# The Spreadsheet: any column removed, the Option column, rich cells, a chart put in from Insert.
+sheet-keeps-one-column = Een blad houdt één kolom
+sheet-choices = Keuzes
+sheet-choices-for-ref = Keuzes voor { $ref }
+sheet-has-one = Het blad heeft er één
+sheet-edit-cell-caret-at-its = De cel bewerken, de cursor aan het eind
+sheet-put-back-what-cell-held = Terugzetten wat de cel bevatte
+sheet-put-dated-rows-on-calendar = De rijen met een datum op een kalender zetten
 
 ## downloads: hand-offs to another app (kit/file/exports.ts)
 
 export-open-in = Openen in
+export-pdf-file = Pdf-bestand
+export-copy-link-that-downloads-ext = Een link kopiëren die de .{ $ext } downloadt
+export-could-not-share-ext = Kon de .{ $ext } niet delen
+export-could-not-show-ext = Kon de .{ $ext } niet tonen
+export-download-ext = De .{ $ext } downloaden
+export-share-ext = De .{ $ext } delen…
+export-view-ext = De .{ $ext } bekijken
 
 ## the icon library (kit/ui/icons-picker.ts)
 
-icons-icon = Icoon
+common-icon = Icoon
 icons-favorites = Favorieten
 icons-search-icons = Iconen zoeken
 icons-suggested = Voorgesteld
-icons-icons = Iconen
+common-icons = Iconen
 icons-no-icons-match-q = Geen iconen voor “{ $q }”.
 icons-search-by-name-or-by = Zoek op naam of op wat het betekent (“geld”, “weer”, “ai”) om een van de { $n } iconen te vinden.
 icons-no-icon = Geen icoon
-icons-icon-or-emoji = Icoon of emoji
+common-icon-or-emoji = Icoon of emoji
 icons-search-icons-and-emoji = Iconen en emoji zoeken
 icons-or-emoji = Iconen of emoji
 # same
@@ -655,9 +750,9 @@ icons-flags = Vlaggen
 
 # The group heading the Drawing Tool sits under on the home page: Design. 'Draw' is the Animator's mode for drawing.
 draw-draw = Tekenen
-draw-drawing-tool = Tekentool
+common-drawing-tool = Tekentool
 draw-drawing = tekening
-draw-design = Ontwerp
+common-design = Ontwerp
 draw-boxes-arrows-icons-and-labels = Vakken, pijlen, iconen en labels op een raster; of pixelart, die een achtergrondtegel kan worden.
 draw-request-flow = Aanvraagstroom
 draw-browser-asks-server-which-reads = Een browser vraagt een server, die de gegevens leest: vakken verbonden met pijlen.
@@ -676,7 +771,7 @@ draw-rosette-with-ribbons-for-volunteer = Een rozet met linten voor de vrijwilli
 draw-block-party-from-above-stage = Een straatfeest van bovenaf: het podium, de kraampjes, EHBO en waar je afspreekt als je kwijt bent.
 # same
 draw-badge = Badge
-draw-birthday-card = Verjaardagskaart
+common-birthday-card = Verjaardagskaart
 draw-can-we-refund-it-stores = Kunnen we het terugbetalen? De retourregel van een winkel als vragen, antwoorden en wat te doen.
 draw-event-map = Evenementenkaart
 draw-four-16-by-16-icons = Vier iconen van 16 bij 16 op één raster, zon, wolk, regen en storm, om te kopiëren voor een weerbericht of een knop.
@@ -691,7 +786,7 @@ draw-weather-icons = Weericonen
 draw-what-happens-to-package-from = Wat er met een pakket gebeurt vanaf het moment dat het gekocht is: een proces in stappen, met iconen en verbindingen.
 # same
 draw-wireframe = Wireframe
-draw-picture-svg = Afbeelding (SVG)
+common-picture-svg = Afbeelding (SVG)
 draw-background-tile-svg = Achtergrondtegel (SVG)
 draw-background-tile-png = Achtergrondtegel (PNG)
 draw-animate-this-drawing = Deze tekening animeren
@@ -724,15 +819,15 @@ draw-rounded-box = Afgerond vak
 draw-hexagon = Zeshoek
 draw-parallelogram = Parallellogram
 draw-cylinder = Cilinder
-draw-note = Notitie
-draw-black = Zwart
-draw-red = Rood
-draw-orange = Oranje
-draw-green = Groen
-draw-blue = Blauw
-draw-purple = Paars
+common-note = Notitie
+common-black = Zwart
+common-red = Rood
+common-orange = Oranje
+common-green = Groen
+common-blue = Blauw
+common-purple = Paars
 # same
-draw-indigo = Indigo
+common-indigo = Indigo
 draw-yellow = Geel
 draw-sky = Lucht
 draw-pink = Roze
@@ -748,13 +843,13 @@ draw-no-fill = Geen vulling
 draw-fill = Vulling
 draw-bring-to-front = Naar voren
 draw-send-to-back = Naar achteren
-draw-duplicate = Dupliceren
-draw-edit = Bewerken
-draw-delete = Wissen
+common-duplicate = Dupliceren
+common-edit = Bewerken
+common-delete = Wissen
 draw-put-icon-on-this-shape = Een icoon op deze vorm zetten
 draw-place-icon = Een icoon plaatsen
-draw-zoom-in = Inzoomen
-draw-zoom-out = Uitzoomen
+common-zoom-in = Inzoomen
+common-zoom-out = Uitzoomen
 # same
 draw-alt = Alt
 draw-alt-text = Alt-tekst
@@ -784,7 +879,7 @@ draw-as-repeating-background = Als herhalende achtergrond
 # The contextual bar under a shape, and its words typed on it.
 draw-dashed-line = Gestreepte lijn
 draw-dotted-line = Stippellijn
-draw-edit-words = De woorden bewerken
+common-edit-words = De woorden bewerken
 draw-extra-large-text = Extra grote tekst
 draw-gray-fill = Grijze vulling
 # same
@@ -809,6 +904,11 @@ draw-drawing-canvas-v-selects-r = Tekencanvas. V selecteert; R, E, D, L, A, T te
 draw-tap-shape-to-select-it = Tik op een vorm om hem te selecteren, of sleep rond vormen om ze te kiezen; kies een gereedschap om te tekenen.
 draw-rotate-left = Naar links draaien
 draw-rotate-right = Naar rechts draaien
+# same
+draw-pixels-n-n = Pixels { $n }×{ $n }
+draw-align-center = Uitlijnen: midden
+draw-align-left = Uitlijnen: links
+draw-align-right = Uitlijnen: rechts
 
 ## the Animator
 
@@ -867,7 +967,7 @@ anim-pixel-art-is-made-in = Pixelart maak je in de Tekentool; de Animator beweeg
 anim-rainbow = Regenboog
 anim-remove-this-key = Sleutel wissen
 anim-shadow = Schaduw
-anim-size = Formaat
+common-size = Formaat
 anim-spin = Draaien
 anim-stage-alt-arrow-keys-move = Podium: { $alt }. Pijltoetsen verplaatsen de vorm in de hand (of de tijd), komma en punt stappen een beeld, spatie speelt af, K bewaart een sleutel.
 anim-shapes-in-hand = De vormen in de hand
@@ -901,6 +1001,10 @@ anim-which-shape-is-in-front = Welke vorm vooraan staat: een nabije vorm wordt o
 anim-n-times = { $n } keer
 # same
 anim-s-s = { $s } s
+anim-frame-back-frame-on = Een beeld terug, vooruit
+anim-nudge-shapes-in-hand-with = De vormen in de hand verschuiven; zonder, een beeld stappen
+anim-play-or-pause = Afspelen/pauzeren
+anim-first-frame-last = Het eerste beeld, het laatste
 
 ## the Outliner
 
@@ -908,26 +1012,26 @@ anim-s-s = { $s } s
 outline-named-label = , genaamd “{ $label }”
 outline-book = Een boek
 outline-decision = Een besluit
-outline-talk = Een lezing
+common-talk = Een lezing
 outline-empty-outline = Een leeg overzicht
 outline-outliner-ideas-under-ideas-folded = Een overzichtsmaker: ideeën onder ideeën, in- en uitgeklapt, verplaatst en verbonden; dezelfde boom die een presentatie of mindmap leest.
 outline-arrow-from-from-to-to = Pijl van { $from } naar { $to }
 outline-arrows-both-ways = Pijlen naar beide kanten
 outline-as-page = Als pagina
-outline-calculator = Rekenmachine
-outline-calendar = Kalender
+common-calculator = Rekenmachine
+common-calendar = Kalender
 outline-cancel-connecting = Verbinden annuleren
 outline-change-it = Wijzigen
-outline-chosen-items = Gekozen items
+common-chosen-items = Gekozen items
 outline-connect = Verbinden
 outline-connect-from-words = Verbinden vanaf “{ $words }”
 outline-connect-from-to-to = “{ $from }” verbinden met “{ $to }”
 outline-connection-from-from-to-to = Verbinding van { $from } naar { $to }
-outline-connections = Verbindingen
-outline-copy = Kopiëren
-outline-presentation-builder = Presentatiemaker
-outline-diagram-maker = Diagrammaker
-outline-drag-to-move = Sleep om te verplaatsen
+common-connections = Verbindingen
+common-copy = Kopiëren
+common-presentation-builder = Presentatiemaker
+common-diagram-maker = Diagrammaker
+common-drag-to-move = Sleep om te verplaatsen
 outline-draw-as-mind-map = Tekenen als mindmap
 outline-draw-as-network = Tekenen als netwerk
 outline-draw-as-org-chart = Tekenen als organigram
@@ -940,25 +1044,25 @@ outline-item = Item
 # same
 outline-item-n = Item { $n }
 outline-kind-of-line = Soort lijn
-outline-launch-plan = Lanceringsplan
+common-launch-plan = Lanceringsplan
 outline-line-from-from-to-to = Lijn van { $from } naar { $to }
 outline-line-named-label-change-it = Lijn genaamd “{ $label }”: wijzigen
 # same
-outline-animator = Animator
-outline-move-down = Omlaag
+common-animator = Animator
+common-move-down = Omlaag
 outline-move-this-item-drag-it = Dit item verplaatsen: sleep het op een ander
-outline-move-up = Omhoog
+common-move-up = Omhoog
 outline-name-of-line = Naam van de lijn
 outline-numbered = Genummerd
 outline-opml-for-outliners = OPML (voor overzichtsmakers)
-outline-open-in-new-tab = Openen in een nieuw tabblad
-outline-outline = Overzicht
+common-open-in-new-tab = Openen in een nieuw tabblad
+common-outline = Overzicht
 outline-outliner = Overzichtsmaker
 outline-outline-lowercase = overzicht
-outline-paste = Plakken
+common-paste = Plakken
 outline-plain-line = Gewone lijn
 outline-plain-text = Platte tekst
-outline-show-as-slides = Tonen als dia’s
+common-show-as-slides = Tonen als dia’s
 outline-show-as-outline = Tonen als overzicht
 outline-take-away-connection-from-from = De verbinding van { $from } naar { $to } weghalen
 outline-take-it-away = Weghalen
@@ -966,14 +1070,14 @@ outline-take-connection-away = De verbinding weghalen
 outline-tap-item-to-connect-from = Tik op het item om vanaf te verbinden.
 outline-tap-item-to-connect-words = Tik op het item om “{ $words }” mee te verbinden.
 outline-question-options-under-it-and = De vraag, de opties eronder, en bij elke wat ervoor pleit en wat ertegen.
-outline-trip-planner = Reisplanner
+common-trip-planner = Reisplanner
 outline-twenty-minutes-in-three-parts = Twintig minuten in drie delen: het probleem, het idee, wat het betekent; een dia per hoofditem als het als presentatie wordt getoond.
 outline-unfold-all = Alles open
 outline-unfold-n-inside = Open, { $n ->
         [one] één erin
        *[other] { $n } erin
     }
-outline-untitled = Zonder titel
+common-untitled = Zonder titel
 outline-view-as = Bekijken als
 outline-zoomed-in-on = Ingezoomd op
 outline-a-plain-line = een gewone lijn
@@ -1007,6 +1111,9 @@ outline-question-method-budget-that-adds = De vraag, de methode, een begroting d
 outline-three-generations-and-next-each = Drie generaties en de volgende, elk met hun jaren, als stamboom getekend vanuit het menu.
 outline-troubleshooting = Storingen oplossen
 outline-who-works-for-whom-at = Wie voor wie werkt bij een bakkerij van negen, elk met hun rol, als organigram getekend vanuit het menu.
+outline-pdf-sections-and-bullets = Pdf: secties en opsommingen
+outline-fold-unfold = In- en uitklappen
+outline-name-line = Noem de lijn
 
 ## the Presentation Builder
 
@@ -1052,7 +1159,7 @@ deck-bullets = Opsomming
 deck-two-columns = Twee kolommen
 deck-big-icon = Groot icoon
 deck-fade = Vervagen
-deck-cut = Direct
+common-cut = Direct
 deck-slide = Schuiven
 # same
 deck-zoom = Zoom
@@ -1085,12 +1192,12 @@ deck-fun = Fun
 deck-themes-color = De themakleur
 
 # The bar
-deck-present = Presenteren
+common-present = Presenteren
 deck-see-sheets-to-print = De vellen om af te drukken zien
 deck-back-to-pages = Terug naar de pagina’s
 deck-headline = Kop
 deck-layout-layout = Indeling: { $layout }
-deck-look-theme = Stijl: { $theme }
+common-look-theme = Stijl: { $theme }
 deck-transition-transition = Overgang: { $transition }
 deck-format-format = Formaat: { $format }
 deck-printing = Afdrukken
@@ -1118,11 +1225,11 @@ deck-big-icon-page = Groot-icoonpagina
 deck-four-more-pages = Vier pagina’s meer
 deck-on-slide = Op de dia
 deck-on-page = Op de pagina
-deck-pages = Pagina’s
+common-pages = Pagina’s
 
 # The canvas
 deck-add-icon = Icoon toevoegen
-deck-change-icon = Het icoon wijzigen
+common-change-icon = Het icoon wijzigen
 deck-pick-icon = Kies een icoon
 deck-left-column = Linkerkolom
 deck-right-column = Rechterkolom
@@ -1140,7 +1247,7 @@ deck-remove-from-slide = Van de dia verwijderen
 deck-slide-n = Dia { $n }
 deck-front-cover = Voorkant
 deck-back-cover = Achterkant
-deck-page-n = Pagina { $n }
+common-page-n = Pagina { $n }
 deck-front = Voor
 deck-inside-left = Binnenkant links
 deck-inside-middle = Binnenkant midden
@@ -1165,11 +1272,11 @@ deck-print-it-on-letter-paper-at-actual-size-cut-along-dashes-six-badges-sheet =
 
 # Presenting, and the closing slide
 deck-presentation = Presentatie
-deck-previous = Vorige
-deck-next = Volgende
-deck-stop-presenting = Stoppen met presenteren
+common-previous = Vorige
+common-next = Volgende
+common-stop-presenting = Stoppen met presenteren
 deck-slide-n-of-total = Dia { $n } van { $total }
-deck-notes = Notities
+common-notes = Notities
 deck-n-hides-them = N verbergt ze
 deck-take-this-deck-home = Neem de presentatie mee
 deck-take-this-deck-home-title = Neem mee: { $title }
@@ -1195,6 +1302,12 @@ deck-trifold-brochure-six-panels-on = Een driebladige brochure: zes panelen op t
 deck-mini-comic-panels-with-picture = Een minicomic: vakjes met een plaatje, een tekstballon en een bijschrift, gevouwen uit één vel.
 deck-poster-or-flyer-headline-and = Een poster of flyer: een kop en een paar regels, zo groot als één pagina toelaat.
 deck-name-badges-for-meetup-one = Naamkaartjes voor een meetup, een pagina per persoon, zes op een vel, klaar om te knippen.
+deck-edit-this-deck = Presentatie bewerken
+deck-new-slide = Een nieuwe dia
+deck-presenting-back = Presenteren: terug
+deck-presenting-next-line-or-slide = Presenteren: de volgende regel of dia
+deck-presenting-whole-slide = Presenteren: de hele dia
+deck-slide-before-slide-after-on = De vorige dia, de volgende dia (op de balk)
 
 ## the Calendar app
 
@@ -1221,7 +1334,7 @@ cal-end = Einde
 cal-end-date = Einddatum
 cal-end-time = Eindtijd
 cal-ends = Eindigt
-cal-event = Afspraak
+common-event = Afspraak
 cal-every-day = Elke dag
 cal-every-month = Elke maand
 cal-every-week = Elke week
@@ -1257,7 +1370,7 @@ cal-start = Begin
 cal-start-date = Begindatum
 cal-start-time = Begintijd
 cal-starts = Begint
-cal-stops = Stopt
+common-stops = Stopt
 cal-same-dates-as-gantt-chart = Dezelfde data als Gantt-diagram
 cal-this-calendar-is-written-in = Deze kalender is geschreven in tijd van { $zone }.
 cal-this-calendar-names-no-time = Deze kalender noemt geen tijdzone: de tijden gelden in die van jou, { $zone }.
@@ -1391,6 +1504,19 @@ diagram-house-network = Het huisnetwerk
 diagram-water-cycle = De waterkringloop
 diagram-three-generations-of-morenos-and = Drie generaties Moreno’s, en een stippellijn naar een petekind.
 diagram-who-can-do-what = Wie wat kan
+diagram-tap-empty-space-for-branch = Tik op lege ruimte voor een tak; tik op een idee om erop te typen, Enter voor het volgende; sleep het ene op het andere om het eronder te zetten; Verbinden koppelt er twee over de kaart.
+diagram-place-cards = Plaatskaartjes
+diagram-print-place-cards = Plaatskaartjes afdrukken
+diagram-print-place-cards-card-guest = Plaatskaartjes afdrukken: een kaartje per gast, acht op een vel letter, om uit te knippen
+diagram-guest = Gast
+diagram-new-idea = Nieuw idee
+diagram-tap-empty-space-for-person = Tik op lege ruimte voor een persoon; tik op een persoon om erop te typen, Shift+Enter voor hun rol onder de naam, Enter voor de volgende; sleep het ene op het andere om iemand eronder te zetten.
+diagram-tap-empty-space-for-event = Tik op lege ruimte voor een gebeurtenis: typ wanneer, Shift+Enter, dan wat er gebeurde; jaren en data staan op afstand zoals ze vielen; een periode is een band.
+diagram-lanes-name = De naam van de baan
+diagram-when = Wanneer
+diagram-tap-person-to-type-on = Tik op een persoon om erop te typen, + na de naam voor hun partner, Shift+Enter voor hun jaren onder de naam; Enter voor de volgende; sleep het ene op het andere om iemand eronder te zetten; Verbinden trekt een stippellijn tussen twee.
+diagram-tap-empty-space-for-table = Tik op lege ruimte voor een tafel; tik op een tafel of een persoon om te typen, een komma na een naam voor de volgende gast; sleep een persoon naar een andere tafel.
+diagram-tap-inside-circles-to-add = Tik in de cirkels om daar een ding toe te voegen, een komma erna voor het volgende; tik op de naam van een verzameling om hem te hernoemen; sleep een ding naar andere cirkels.
 
 ## the Trip Planner
 
@@ -1468,13 +1594,20 @@ trip-new-york-in-movies = New York in de film
 trip-seven-film-and-tv-locations = Zeven film- en tv-locaties, van uptown naar downtown, op één dag.
 trip-wedding-on-lake-como = Een bruiloft aan het Comomeer
 trip-for-guests-where-wedding-is = Voor de gasten: waar de bruiloft is, waar je slaapt, hoe je er komt.
+trip-presenting-trip = De reis presenteren
+trip-presenting-next-stop = Presenteren: de volgende stop
+trip-presenting-stop-before = Presenteren: de vorige stop
+trip-put-stops-on-calendar-day = De stops op een kalender zetten, een dag elk
+trip-first-last = De eerste, de laatste
+trip-next-stop = De volgende stop
+trip-stop-before = De vorige stop
 
 ## shared: the Word Processor's looks, the header's Home, a money column's currency
 
 looks-typewriter = Schrijfmachine
 # same
 looks-serif = Serif
-looks-home = Start
+common-home = Start
 looks-currency = Valuta
 
 ## the Calculator app
@@ -1565,73 +1698,25 @@ calc-curve-and-its-slope = Een kromme en zijn helling
 calc-x3-3x-its-derivative-and = x³ − 3x, de afgeleide, en de vlakke raaklijn onderin het dal.
 calc-waves-adding-up = Golven die optellen
 calc-sine-waves-summed-on-their = Sinusgolven bij elkaar opgeteld, op weg naar een blokgolf.
-
-## unsorted: added after the sections, each id named for where it is used
-
-home-templates-for-app = Sjablonen voor { $app }
-home-app-templates = Sjablonen voor { $app }
-home-templates-for-app-name = Sjablonen voor { $app }: { $name }
-home-templates-are-not-saved-in = De sjablonen staan nog niet in deze browser. Maak verbinding met internet om ze te zien.
 # The grip on a line of the tape; the bar under lines chosen whole.
 calc-choose-line-n-drag-it = Kies regel { $n }: sleep om te verplaatsen
 calc-chosen-lines = Gekozen regels
-# The Spreadsheet: any column removed, the Option column, rich cells, a chart put in from Insert.
-sheet-keeps-one-column = Een blad houdt één kolom
-editor-bold-italic-and-links = Vet, cursief en links
-sheet-choices = Keuzes
-sheet-choices-for-ref = Keuzes voor { $ref }
-editor-one-of-words-column-holds = Een van de woorden die de kolom bevat, of een nieuw
-editor-option = Keuze
-sheet-has-one = Het blad heeft er één
-drawer-documents = Documenten
-common-find-app-template = App, sjabloon zoeken
-drawer-find-app-doc-template-or = App, document, sjabloon of opdracht zoeken
-drawer-find-app-template-or-command = App, sjabloon of opdracht zoeken
-drawer-commands = Opdrachten
-share-new-noun-date-n = { $noun } { $date } #{ $n }
-drawer-nothing-by-that-name = Niets met die naam
-# same
-draw-pixels-n-n = Pixels { $n }×{ $n }
-# Files, compare, posting and embedding: the agent and sharing surface.
-share-mastodon-server-like-mastodon-social = Een Mastodon-server, zoals mastodon.social
-share-change = Wijzigen
+
+## two links compared (kit/ui/compare.ts)
+
 compare-changes = Wijzigingen
 compare-compare = Vergelijken
-share-copy-embed-code = Insluitcode kopiëren
-share-copy-show-link = Toonlink kopiëren
-deck-edit-this-deck = Presentatie bewerken
-share-embed = Insluiten
-share-embed-code-copied = Insluitcode gekopieerd
 compare-no-difference = Geen verschil
 compare-not-link-to-tiny-little = Geen link naar een Piepklein Kantoortje-document
-open-opened-name = { $name } geopend
-share-opens-deck-already-presenting = Opent de presentatie al presenterend.
-export-pdf-file = Pdf-bestand
-outline-pdf-sections-and-bullets = Pdf: secties en opsommingen
 compare-paste-second-link-to-see = Plak een tweede link om te zien wat er veranderd is.
 compare-paste-link-to-document-as = Plak de link naar het document zoals het nu is
 compare-paste-link-to-document-as-it-was = Plak de link naar het document zoals het was
-share-post = Plaatsen
-share-post-link = De link plaatsen
-share-show-preview-of-first-page = Een voorbeeld van de eerste pagina tonen
-share-picture-of-first-page-and = Een afbeelding van de eerste pagina en de titel blijven een maand leesbaar op onze server, zodat het netwerk ze kan ophalen. Het document zelf niet.
-share-shared-without-preview-reason = Gedeeld zonder voorbeeld: { $reason }
-share-making-preview = Voorbeeld maken…
-share-page-could-not-be-drawn = de pagina kon niet worden getekend
-share-picture-is-over-400-kb = de afbeelding is groter dan 400 KB
-share-server-could-not-be-reached = de server was niet bereikbaar
-share-hundred-previews-day-from-one = honderd voorbeelden per dag vanaf één adres
-share-server-refused-picture = de server weigerde de afbeelding
 compare-put-in = Erbij:
 compare-swap = Omwisselen
 compare-taken-out = Eruit:
-open-that-file-is-not-words = Dat bestand bevat geen woorden die Piepklein Kantoortje kan lezen.
-open-that-file-is-too-large = Dat bestand is te groot om hier een document te zijn.
 compare-first-link = De eerste link
-share-pages-in-frame-on-another = De pagina’s, in een frame op een andere site, met een link om ze hier te openen.
 compare-second-link = De tweede link
 compare-two-links-to-documents-side = Twee links naar documenten, naast elkaar: wat de tweede veranderde is gemarkeerd. Niets verlaat deze pagina.
-share-your-mastodon-server = Je Mastodon-server
 compare-different-apps = verschillende apps
 compare-n-blocks-taken-out = { $n ->
         [one] { $n } blok eruit
@@ -1641,108 +1726,12 @@ compare-n-put-in = { $n ->
         [one] { $n } erbij
        *[other] { $n } erbij
     }
-diagram-tap-empty-space-for-branch = Tik op lege ruimte voor een tak; tik op een idee om erop te typen, Enter voor het volgende; sleep het ene op het andere om het eronder te zetten; Verbinden koppelt er twee over de kaart.
-# Restored around the document: search, Find in this document, the shortcuts and the apps' keys, Mod+S, the size of
-# everything, Add to home screen, another version kept here, where the link fits, Open in another app, the QR code
-# of this document, Insert narrowed by typing, Trip presenting, a seating chart's place cards
-qr-code-of-this-document = Een QR-code van dit document
-anim-frame-back-frame-on = Een beeld terug, vooruit
-deck-new-slide = Een nieuwe dia
-drawer-add-to-home-screen = Zet op beginscherm
-shell-another-version = Een andere versie
-keys-normal-size = Normale grootte
-home-documents-found = Gevonden documenten
-sheet-edit-cell-caret-at-its = De cel bewerken, de cursor aan het eind
-keys-everything-larger = Alles groter
-keys-everything-smaller = Alles kleiner
-find-in-this-document = Zoeken in dit document
-outline-fold-unfold = In- en uitklappen
-common-indent-or-bring-out-in = Inspringen of terug in een lijst; de volgende cel in een raster
-keys-keep-this-document-on-device = Dit document op het apparaat bewaren
-shell-kept-on-this-device = Op dit apparaat bewaard
-shell-keyboard-shortcuts = Sneltoetsen
-share-left = Links
-common-move-selected-items-up-or = De geselecteerde items omhoog of omlaag verplaatsen
-home-no-document-here-has-those = Geen document hier heeft die woorden
-find-not-found = Niet gevonden
-menu-nothing-starts-q = Niets begint met “{ $q }”
-shell-nothing-to-keep-yet = Nog niets om te bewaren
-common-nudge-shapes-in-hand = De vormen in de hand verschuiven
-anim-nudge-shapes-in-hand-with = De vormen in de hand verschuiven; zonder, een beeld stappen
-write-open-as-outline = Openen als overzicht
-shell-open-it = Openen
-diagram-place-cards = Plaatskaartjes
-anim-play-or-pause = Afspelen/pauzeren
-trip-presenting-trip = De reis presenteren
-deck-presenting-back = Presenteren: terug
-deck-presenting-next-line-or-slide = Presenteren: de volgende regel of dia
-trip-presenting-next-stop = Presenteren: de volgende stop
-trip-presenting-stop-before = Presenteren: de vorige stop
-diagram-print-place-cards = Plaatskaartjes afdrukken
-diagram-print-place-cards-card-guest = Plaatskaartjes afdrukken: een kaartje per gast, acht op een vel letter, om uit te knippen
-shell-save-in-browser-is-off = Opslaan in browser staat uit: deze browser bewaart geen documenten. Zet het aan in het menu om ze hier te bewaren.
-sheet-put-back-what-cell-held = Terugzetten wat de cel bevatte
-sheet-put-dated-rows-on-calendar = De rijen met een datum op een kalender zetten
-trip-put-stops-on-calendar-day = De stops op een kalender zetten, een dag elk
-home-search-your-documents = Je documenten doorzoeken
-common-select-all-words-of-box = Alles selecteren: de woorden van het vak, dan alles
-keys-show-these-shortcuts = Deze sneltoetsen tonen
-# same
-write-a4 = A4
-# same
-write-letter = Letter
-common-back-to-words = Terug naar de tekst
-common-extend-selection = Selectie uitbreiden
-deck-presenting-whole-slide = Presenteren: de hele dia
-trip-first-last = De eerste, de laatste
-common-next-or-one-before = De volgende of de vorige
-editor-this-browser-lets-page-paste = Deze browser laat een pagina alleen plakken via het toetsenbord: gebruik daar ‘Plakken’.
-drawer-size-of-everything = Grootte van alles
-shell-skip-to-apps = Naar de apps springen
-shell-skip-to-document = Naar het document springen
-menu-starting-q = Beginnend met “{ $q }”
-common-step-out-close-collapse-let = Eruit stappen: sluiten, inklappen, loslaten
-anim-first-frame-last = Het eerste beeld, het laatste
-trip-next-stop = De volgende stop
-deck-slide-before-slide-after-on = De vorige dia, de volgende dia (op de balk)
-trip-stop-before = De vorige stop
-shell-this-device-keeps-another-version = Dit apparaat bewaart een andere versie van “{ $title }”, van { $when }.
-shell-this-link-was-made-by = Deze link is gemaakt door een nieuwere Piepklein Kantoortje. Laad de pagina opnieuw om hem te krijgen.
-keys-this-page = Deze pagina
-common-check-or-uncheck-task = Een taak aan- of uitvinken
-drawer-to-add-tiny-little-office = Om Piepklein Kantoortje aan het beginscherm toe te voegen: Delen, dan Zet op beginscherm.
-common-too-long-for-qr-code = Te lang voor een QR-code: maak het document korter, of deel een korte link.
-share-uses = Gebruik
-share-where = Waar
-share-where-link-fits = Waar de link past
-share-any-length = elke lengte
-home-n-documents-found = { $n ->
-        [one] Eén document gevonden
-       *[other] { $n } documenten gevonden
-    }
-common-n-of-count = { $n } van { $count }
-share-n-over = { $n } te veel
-privacy-password-copied = Wachtwoord gekopieerd
-diagram-guest = Gast
-outline-name-line = Noem de lijn
-write-name-this-column = Noem deze kolom
-diagram-new-idea = Nieuw idee
-diagram-tap-empty-space-for-person = Tik op lege ruimte voor een persoon; tik op een persoon om erop te typen, Shift+Enter voor hun rol onder de naam, Enter voor de volgende; sleep het ene op het andere om iemand eronder te zetten.
-diagram-tap-empty-space-for-event = Tik op lege ruimte voor een gebeurtenis: typ wanneer, Shift+Enter, dan wat er gebeurde; jaren en data staan op afstand zoals ze vielen; een periode is een band.
-diagram-lanes-name = De naam van de baan
-diagram-when = Wanneer
-draw-align-center = Uitlijnen: midden
-draw-align-left = Uitlijnen: links
-draw-align-right = Uitlijnen: rechts
-diagram-tap-person-to-type-on = Tik op een persoon om erop te typen, + na de naam voor hun partner, Shift+Enter voor hun jaren onder de naam; Enter voor de volgende; sleep het ene op het andere om iemand eronder te zetten; Verbinden trekt een stippellijn tussen twee.
-diagram-tap-empty-space-for-table = Tik op lege ruimte voor een tafel; tik op een tafel of een persoon om te typen, een komma na een naam voor de volgende gast; sleep een persoon naar een andere tafel.
-diagram-tap-inside-circles-to-add = Tik in de cirkels om daar een ding toe te voegen, een komma erna voor het volgende; tik op de naam van een verzameling om hem te hernoemen; sleep een ding naar andere cirkels.
-export-copy-link-that-downloads-ext = Een link kopiëren die de .{ $ext } downloadt
-export-could-not-share-ext = Kon de .{ $ext } niet delen
-export-could-not-show-ext = Kon de .{ $ext } niet tonen
-export-download-ext = De .{ $ext } downloaden
-export-share-ext = De .{ $ext } delen…
-export-view-ext = De .{ $ext } bekijken
+
+## files and zips dropped on the page (kit/file/open.ts)
+
+open-opened-name = { $name } geopend
+open-that-file-is-not-words = Dat bestand bevat geen woorden die Piepklein Kantoortje kan lezen.
+open-that-file-is-too-large = Dat bestand is te groot om hier een document te zijn.
 open-keep-them-on-this-device = Op dit apparaat bewaren
 open-nothing-is-saved-on-this = Er wordt nu niets op dit apparaat opgeslagen. Bewaar ze hier, of open er een.
 open-first = Het eerste openen
@@ -1755,3 +1744,28 @@ open-n-documents-kept = { $n ->
         [one] { $n } document bewaard
        *[other] { $n } documenten bewaard
     }
+
+## a document's QR code (kit/draw/qr-picture.ts)
+
+# Restored around the document: search, Find in this document, the shortcuts and the apps' keys, Mod+S, the size of
+# everything, Add to home screen, another version kept here, where the link fits, Open in another app, the QR code
+# of this document, Insert narrowed by typing, Trip presenting, a seating chart's place cards
+qr-code-of-this-document = Een QR-code van dit document
+
+## the keys, the shortcuts and the size of everything (kit/core/keys.ts, kit/ui/zoom.ts)
+
+keys-normal-size = Normale grootte
+keys-everything-larger = Alles groter
+keys-everything-smaller = Alles kleiner
+keys-keep-this-document-on-device = Dit document op het apparaat bewaren
+keys-show-these-shortcuts = Deze sneltoetsen tonen
+keys-this-page = Deze pagina
+
+## Find in this document (kit/ui/find.ts)
+
+find-not-found = Niet gevonden
+
+## a menu narrowed by typing (kit/ui/menu.ts)
+
+menu-nothing-starts-q = Niets begint met “{ $q }”
+menu-starting-q = Beginnend met “{ $q }”

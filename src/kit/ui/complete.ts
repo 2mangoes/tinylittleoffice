@@ -160,7 +160,7 @@ export class ToComplete extends LitElement {
             <span class="to-complete-glyph" aria-hidden="true">${node ? icon(node, 18) : c.value}</span><span class="to-complete-name">${c.name}</span>
           </div>`;
         });
-    return html`<div class="to-complete" id=${this.uid} popover=${POPOVER ? 'manual' : nothing} role="listbox" aria-label=${t('icons-icon-or-emoji')} ?hidden=${!POPOVER && !this.shown}>${rows}</div>`;
+    return html`<div class="to-complete" id=${this.uid} popover=${POPOVER ? 'manual' : nothing} role="listbox" aria-label=${t('common-icon-or-emoji')} ?hidden=${!POPOVER && !this.shown}>${rows}</div>`;
   }
 }
 if (!customElements.get('to-complete')) customElements.define('to-complete', ToComplete);

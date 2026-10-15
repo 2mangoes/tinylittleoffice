@@ -138,7 +138,7 @@ export function outlinePage(doc: Doc, w = 720, small = false): Page {
   const links = small ? [] : liveLinks(v);
   if (links.length) {
     y += 16;
-    svg += richText(margin, (y += px * 1.45) - px * 0.45, [{ t: t('outline-connections'), b: true }], px);
+    svg += richText(margin, (y += px * 1.45) - px * 0.45, [{ t: t('common-connections'), b: true }], px);
     for (const l of links) {
       const line = `${l.from}  ${ARROW[l.dir]}${l.label ? ' ' + l.label : ''}  ${l.to}`;
       for (const part of wrapRuns([{ t: line }], w - 2 * margin, px * 0.9)) svg += richText(margin + 12, (y += px * 1.35) - px * 0.4, part, px * 0.9);
@@ -152,18 +152,18 @@ export function outlinePage(doc: Doc, w = 720, small = false): Page {
 /** An app's id as a person reads it on a card. (The registry is not reachable from a view without a cycle; the few names are said here.) */
 export function appName(id: string): string {
   const names: Record<string, () => string> = {
-    sheet: () => t('sheet-spreadsheet'),
-    draw: () => t('draw-drawing-tool'),
-    text: () => t('sheet-text'),
-    write: () => t('write-word-processor'),
-    deck: () => t('outline-presentation-builder'),
+    sheet: () => t('common-spreadsheet'),
+    draw: () => t('common-drawing-tool'),
+    text: () => t('common-text'),
+    write: () => t('common-word-processor'),
+    deck: () => t('common-presentation-builder'),
     outline: () => t('outline-outliner'),
-    diagram: () => t('outline-diagram-maker'),
-    cal: () => t('outline-calendar'),
-    trip: () => t('outline-trip-planner'),
-    calc: () => t('outline-calculator'),
-    anim: () => t('outline-animator'),
-    locked: () => t('privacy-locked-document'),
+    diagram: () => t('common-diagram-maker'),
+    cal: () => t('common-calendar'),
+    trip: () => t('common-trip-planner'),
+    calc: () => t('common-calculator'),
+    anim: () => t('common-animator'),
+    locked: () => t('common-locked-document'),
   };
   return names[id]?.() ?? id;
 }

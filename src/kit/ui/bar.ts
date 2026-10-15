@@ -161,4 +161,4 @@ export interface DateNavOpts {
  * buttons with their names, Today words on a button.
  */
 export const dateNav = (o: DateNavOpts): TemplateResult =>
-  html`<span class="to-datenav" role="group" aria-label=${o.label}>${tool({ label: o.prev, icon: ChevronLeft, does: o.onPrev })}<span class="to-datenav-label" aria-live="polite">${o.label}</span>${tool({ label: o.next, icon: ChevronRight, does: o.onNext })}${btn({ label: t('bar-today'), cls: 'to-datenav-today', does: o.onToday })}</span>`;
+  html`<span class="to-datenav" role="group" aria-label=${o.label}>${tool({ label: o.prev, icon: ChevronLeft, does: o.onPrev })}<span class="to-datenav-label" aria-live="polite">${o.label}</span>${tool({ label: o.next, icon: ChevronRight, does: o.onNext })}${btn({ label: t('common-today'), cls: 'to-datenav-today', does: o.onToday })}</span>`;

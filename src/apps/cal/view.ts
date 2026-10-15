@@ -67,8 +67,8 @@ function monthPages(v: CalView, max = 3, now = new Date()): Page[] {
         const yy = top + 24 + line++ * 19;
         // A span over several days is one bar across them, named where it starts (and at each new week).
         svg += rect(x + (starts ? 4 : 0), yy, CW - (starts ? 4 : 0) - (day === b ? 4 : 0), 16, hex, `rx="${starts && day === b ? 4 : 0}" fill-opacity="${s.kind === 'd' ? 1 : 0.18}"`);
-        if (starts || i % 7 === 0) svg += text(x + 8, yy + 12, clip(time + (s.words || t('outline-untitled')), CW - 12, 11), { px: 11, fill: s.kind === 'd' ? '#fff' : INK });
-        if (starts && p.m === m) alt.push(`${p.d}: ${time}${s.words || t('outline-untitled')}`);
+        if (starts || i % 7 === 0) svg += text(x + 8, yy + 12, clip(time + (s.words || t('common-untitled')), CW - 12, 11), { px: 11, fill: s.kind === 'd' ? '#fff' : INK });
+        if (starts && p.m === m) alt.push(`${p.d}: ${time}${s.words || t('common-untitled')}`);
       }
     }
     let bottom = 84 + rows * CH;
@@ -138,7 +138,7 @@ export function calToIcs(doc: Doc, stampMs: number): string {
       const until = rp.until === undefined ? '' : s.kind === 'd' ? icsDate(dayString(rp.until)) : icsStamp(clockMinutes(rp.until, 23, 59, zone) * 60000);
       lines.push(`RRULE:FREQ=${FREQ[rp.every]}${rp.count ? `;COUNT=${rp.count}` : until ? `;UNTIL=${until}` : ''}`);
     }
-    lines.push(`SUMMARY:${icsText(s.words || t('outline-untitled'))}`);
+    lines.push(`SUMMARY:${icsText(s.words || t('common-untitled'))}`);
     if (s.done) lines.push(`DESCRIPTION:${icsText(t('cal-n-done', { n: s.done }))}`);
     lines.push('END:VEVENT');
     return lines;

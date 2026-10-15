@@ -23,7 +23,7 @@ import { ICON_COLORS, THEMES, themeOf } from './theme.ts';
 export type Layout = '' | 't' | '2' | 'i';
 export const LAYOUTS: { id: Layout; name: () => string }[] = [
   { id: '', name: () => t('deck-bullets') },
-  { id: 't', name: () => t('shell-title') },
+  { id: 't', name: () => t('common-title') },
   { id: '2', name: () => t('deck-two-columns') },
   { id: 'i', name: () => t('deck-big-icon') },
 ];
@@ -35,7 +35,7 @@ const LAYOUT_OF: Record<string, Layout> = { title: 't', two: '2', icon: 'i' };
 export type Transition = '' | 'cut' | 'slide' | 'zoom';
 export const TRANSITIONS: { id: Transition; name: () => string }[] = [
   { id: '', name: () => t('deck-fade') },
-  { id: 'cut', name: () => t('deck-cut') },
+  { id: 'cut', name: () => t('common-cut') },
   { id: 'slide', name: () => t('deck-slide') },
   { id: 'zoom', name: () => t('deck-zoom') },
 ];

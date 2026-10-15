@@ -16,13 +16,13 @@ export const retitle = (doc: Doc, title: string): Doc => write(apply(parse(doc),
 export default defineApp({
   id: 'calc',
   get name() {
-    return t('outline-calculator');
+    return t('common-calculator');
   },
   get noun() {
     return t('calc-calculation');
   },
   get group() {
-    return t('sheet-numbers');
+    return t('common-numbers');
   },
   icon: Calculator,
   get blurb() {

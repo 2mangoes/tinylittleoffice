@@ -12,7 +12,7 @@ import { t } from '../core/i18n.ts';
 export type ChartKind = 'bar' | 'line' | 'pie' | 'sankey';
 export const CHART_KINDS: { id: ChartKind; name: () => string }[] = [
   { id: 'bar', name: () => t('chart-bars') },
-  { id: 'line', name: () => t('chart-lines') },
+  { id: 'line', name: () => t('common-lines') },
   { id: 'pie', name: () => t('chart-pie') },
   { id: 'sankey', name: () => t('chart-flows-sankey') },
 ];

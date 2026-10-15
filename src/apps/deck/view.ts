@@ -210,8 +210,8 @@ export function subPage(doc: Doc, s: Slide, upTo?: number, open = false, still =
     return {
       w: 480,
       h: 40 + lines.length * 22,
-      svg: line(24, 28, t('editor-app-document', { app: b.lang }), { px: 13, fill: MUTED }) + lines.map((l, i) => line(24, 56 + i * 22, l, { px: 14 })).join(''),
-      alt: t('editor-app-document', { app: b.lang }),
+      svg: line(24, 28, t('common-app-document', { app: b.lang }), { px: 13, fill: MUTED }) + lines.map((l, i) => line(24, 56 + i * 22, l, { px: 14 })).join(''),
+      alt: t('common-app-document', { app: b.lang }),
     };
   }
   if (b.k === 'table') {
@@ -220,7 +220,7 @@ export function subPage(doc: Doc, s: Slide, upTo?: number, open = false, still =
     const body = write({ head: chart ? { chart } : {}, blocks: [{ k: 'table', cols: b.cols, rows: b.rows }] });
     if (sheet) return sheet.view(body, { small: true, ...(still ? { still } : {}) })[0];
     const rows = [b.cols.map((c) => c.name), ...b.rows];
-    return { w: 480, h: 24 + rows.length * 26, svg: rows.map((row, i) => line(24, 20 + i * 26, row.join('   '), { px: 14, bold: i === 0 })).join(''), alt: t('bar-table') };
+    return { w: 480, h: 24 + rows.length * 26, svg: rows.map((row, i) => line(24, 20 + i * 26, row.join('   '), { px: 14, bold: i === 0 })).join(''), alt: t('common-table') };
   }
   return null;
 }
@@ -715,7 +715,7 @@ export interface Geometry {
   how(two: boolean): string;
 }
 
-const pageName = (i: number, n: number) => (i === 0 ? t('deck-front-cover') : i === n - 1 ? t('deck-back-cover') : t('deck-page-n', { n: i + 1 }));
+const pageName = (i: number, n: number) => (i === 0 ? t('deck-front-cover') : i === n - 1 ? t('deck-back-cover') : t('common-page-n', { n: i + 1 }));
 
 export const ZINE: Geometry = {
   count: 8,
@@ -768,7 +768,7 @@ export const BOOKLET: Geometry = {
 export const BROCHURE: Geometry = {
   count: 6,
   size: () => ({ w: 352, h: 816 }),
-  name: (i) => [t('deck-front'), t('deck-inside-left'), t('deck-inside-middle'), t('deck-inside-right'), t('deck-inside-flap'), t('deck-back')][i] ?? t('deck-page-n', { n: i + 1 }),
+  name: (i) => [t('deck-front'), t('deck-inside-left'), t('deck-inside-middle'), t('deck-inside-right'), t('deck-inside-flap'), t('deck-back')][i] ?? t('common-page-n', { n: i + 1 }),
   // Outside: the flap that folds in, the back, the front. Inside: the three panels, left to right.
   sheets: (p) => [side(p, [[5, 6, 1]]), side(p, [[2, 3, 4]])],
   how: () => t('deck-print-it-double-sided-on-letter-paper-flipping-on-short-edge-at-actual-size-fold-right-third-in-then-left-third-over-it-front-is-on-top'),
@@ -1024,7 +1024,7 @@ footer{text-align:center;padding:0 12px 10px;font-size:13px}footer a{color:#a5b4
 <main id="pages" aria-live="polite">
 ${pages.map((p, i) => `<section${i ? '' : ' class="on"'} aria-label="${xml(name(i))}">${pageSvg(p, `role="img" aria-label="${xml(p.alt || name(i))}"`)}</section>`).join('\n')}
 </main>
-<nav aria-label="${xml(t('deck-pages'))}"><button id="back">${xml(t('deck-back'))}</button><span id="where"></span><button id="next">${xml(t('deck-next'))}</button></nav>${link ? `\n<footer><a href="${xml(link)}">${xml(t('download-open-in-tiny-little-office'))}</a></footer>` : ''}
+<nav aria-label="${xml(t('common-pages'))}"><button id="back">${xml(t('deck-back'))}</button><span id="where"></span><button id="next">${xml(t('common-next'))}</button></nav>${link ? `\n<footer><a href="${xml(link)}">${xml(t('common-open-in-tiny-little-office'))}</a></footer>` : ''}
 ${PLAYER}
 </body>
 </html>

@@ -3,10 +3,10 @@
 ## the shell: header
 
 shell-menu = Меню
-shell-title = Название
+common-title = Название
 # A new document of the app, and one not yet named; { $noun } is the app's noun: "New presentation".
-shell-new-noun = Новый { $noun }
-shell-untitled-noun = Без названия: { $noun }
+common-new-noun = Новый { $noun }
+common-untitled-noun = Без названия: { $noun }
 shell-download = Скачать
 shell-loading = Загрузка…
 shell-this-link-holds-something-that = В этой ссылке что-то, что не удаётся прочитать. Возможно, при копировании она оборвалась.
@@ -21,15 +21,25 @@ shell-copy-link-and-go = Скопировать ссылку и уйти
 shell-turn-on-save-in-browser = Включить «Сохранять в браузере» и хранить здесь
 shell-go-without = Уйти так
 shell-save-in-browser-is-on = «Сохранять в браузере» включено: этот браузер хранит открытые вами документы. Выключить можно в меню.
+shell-another-version = Другая версия
+shell-kept-on-this-device = Хранится на этом устройстве
+shell-keyboard-shortcuts = Сочетания клавиш
+shell-nothing-to-keep-yet = Пока нечего хранить
+shell-open-it = Открыть
+shell-save-in-browser-is-off = «Сохранять в браузере» выключено: этот браузер не хранит документы. Включите это в меню, чтобы хранить их здесь.
+shell-skip-to-apps = Перейти к приложениям
+shell-skip-to-document = Перейти к документу
+shell-this-device-keeps-another-version = На этом устройстве есть другая версия «{ $title }» от { $when }.
+shell-this-link-was-made-by = Эту ссылку сделала более новая версия Tiny Little Office. Перезагрузите страницу, чтобы её открыть.
 
 ## the home page
 
 home-blank = Пустой
-home-templates = Шаблоны
+common-templates = Шаблоны
 # The button under an app's tile, naming the template list: "Start Text from"
 # The list of an app's documents kept on this device, under its tile: "Write documents"
 home-app-documents = Документы: { $app }
-home-forget = Забыть
+common-forget = Забыть
 # The button that forgets one kept document: "Forget Launch notes"
 home-forget-title = Забыть «{ $title }»
 # Under an app's documents, the rest folded away: "3 more"
@@ -37,28 +47,41 @@ home-n-more = Ещё { $n }
 home-aboard-project-made-with-respect = Проект { $aboard }. Сделано с уважением в Нью-Йорке.
 home-beta-version = Бета-версия
 home-email = Эл. почта
+home-templates-for-app = Шаблоны: { $app }
+home-app-templates = Шаблоны: { $app }
+home-templates-for-app-name = Шаблоны для «{ $app }»: { $name }
+home-templates-are-not-saved-in = Шаблоны ещё не сохранены в этом браузере. Подключитесь к интернету, чтобы их увидеть.
+home-documents-found = Найдено документов
+home-no-document-here-has-those = Нет документа с такими словами
+home-search-your-documents = Искать по вашим документам
+home-n-documents-found = { $n ->
+        [one] Найден { $n } документ
+        [few] Найдено { $n } документа
+        [many] Найдено { $n } документов
+       *[other] Найдено { $n } документа
+    }
 
 ## the drawer (hamburger menu)
 
 drawer-apps = Приложения
-drawer-close = Закрыть
+common-close = Закрыть
 drawer-default-name = По умолчанию: { $name }
 drawer-save-in-browser = Сохранять в браузере
 drawer-what-is-this = Что это?
 drawer-turn-on-to-save-files = Включите, чтобы сохранять файлы в браузере.
 drawer-turn-off-to-remove-all = Выключите, чтобы удалить все файлы и настройки.
-drawer-nothing-saved-in-this-browser = В этом браузере ничего не сохраняется
-drawer-saving-in-this-browser = Сохраняется в этом браузере
+common-nothing-saved-in-this-browser = В этом браузере ничего не сохраняется
+common-saving-in-this-browser = Сохраняется в этом браузере
 drawer-remove-all-files-and-settings = Удалить все файлы и настройки из этого браузера?
 drawer-language = Язык
-drawer-theme = Тема
+common-theme = Тема
 drawer-match-device = Как на устройстве
 drawer-light = Светлая
 drawer-dark = Тёмная
 drawer-about = О приложении
 # The name itself is translated too (Paul, 2026-10-10): each language says it in its own words.
 # same
-drawer-tiny-little-office = Tiny Little Office
+common-tiny-little-office = Tiny Little Office
 drawer-about-tiny-little-office = О Tiny Little Office
 drawer-tiny-little-office-is-experiment = Tiny Little Office — эксперимент { $aboard }, компании по цифровой и ИИ-стратегии и разработке ПО в Нью-Йорке.
 drawer-to-reach-out-with-questions = Если есть вопросы, { $email }.
@@ -68,6 +91,13 @@ drawer-github-repository = репозитории на GitHub
 drawer-all-of-these-notes-these = Все эти заметки, эти рисунки, эти фразы, написанные фломастером, со временем стираются. Остаётся лишь мимолётное.
 drawer-eugene-ionesco-book = Эжен Ионеско, { $book }
 drawer-discoveries = Открытия
+drawer-documents = Документы
+drawer-find-app-template-or-command = Найти приложение, шаблон или команду
+drawer-commands = Команды
+drawer-nothing-by-that-name = С таким названием ничего нет
+drawer-add-to-home-screen = Добавить на главный экран
+drawer-size-of-everything = Размер всего
+drawer-to-add-tiny-little-office = Чтобы добавить Tiny Little Office на главный экран: «Поделиться», затем «На экран “Домой”».
 
 ## links that leave the site (kit/ui/link-guard.ts)
 
@@ -118,7 +148,7 @@ share-expires-in-n-minutes-date = Истекает через { $n ->
     } ({ $date })
 share-opens-as-pages-to-read = Открывается страницами для чтения
 share-opens-in-editor = Открывается в редакторе
-share-whoever-opens-this-link-gets = Каждый, кто откроет эту ссылку, получит свою копию. Его правки останутся в его ссылке, а не в вашей: попросите прислать вам свою.
+common-whoever-opens-this-link-gets = Каждый, кто откроет эту ссылку, получит свою копию. Его правки останутся в его ссылке, а не в вашей: попросите прислать вам свою.
 share-short-link-that-expires = Короткая ссылка со сроком
 share-this-link-expires-in-n = Эта ссылка истекает через { $n ->
         [one] { $n } день
@@ -159,9 +189,9 @@ share-display-link = Ссылка для показа
 share-opens = Открывается
 share-link-copied = Ссылка скопирована
 share-could-not-copy = Не удалось скопировать
-share-share = Поделиться…
-share-qr-code = QR-код
-share-qr-code-of-this-document = QR-код этого документа
+common-share = Поделиться…
+common-qr-code = QR-код
+common-qr-code-of-this-document = QR-код этого документа
 share-this-document-is-n-bytes = Этот документ весит { $n } байт, а в самый большой QR-код помещается { $max }. Сократите его на { $over } байт, и он поместится.
 share-this-document-is-n-characters = В этом документе { $n } символов, а в короткую ссылку помещается { $max }. Сократите его на { $over }, и он поместится.
 share-expires-after = Истекает через
@@ -177,8 +207,36 @@ share-could-not-shorten-link = Не удалось сократить ссылк
 share-this-document-is-too-long = Этот документ слишком длинный для короткой ссылки.
 share-up-to-hundred-links-day = До ста ссылок в день с одного адреса.
 share-remove = Убрать
-share-link = Ссылка
-share-short-link = Короткая ссылка
+common-link = Ссылка
+common-short-link = Короткая ссылка
+share-new-noun-date-n = Новый { $noun } { $date } №{ $n }
+# Files, compare, posting and embedding: the agent and sharing surface.
+share-mastodon-server-like-mastodon-social = Сервер Mastodon, например mastodon.social
+share-change = Изменение
+share-copy-embed-code = Скопировать код для вставки
+share-copy-show-link = Скопировать ссылку для показа
+share-embed = Встроить
+share-embed-code-copied = Код для вставки скопирован
+share-opens-deck-already-presenting = Открывает презентацию сразу в показе.
+share-post = Опубликовать
+share-post-link = Опубликовать ссылку
+share-show-preview-of-first-page = Показывать превью первой страницы
+share-picture-of-first-page-and = Картинка первой страницы и название месяц хранятся на нашем сервере в открытом виде, чтобы соцсеть могла их забрать. Сам документ — нет.
+share-shared-without-preview-reason = Отправлено без превью: { $reason }
+share-making-preview = Делаем превью…
+share-page-could-not-be-drawn = не удалось нарисовать страницу
+share-picture-is-over-400-kb = картинка больше 400 КБ
+share-server-could-not-be-reached = сервер недоступен
+share-hundred-previews-day-from-one = сто превью в день с одного адреса
+share-server-refused-picture = сервер отклонил картинку
+share-pages-in-frame-on-another = Страницы во фрейме на другом сайте со ссылкой, чтобы открыть их здесь.
+share-your-mastodon-server = Ваш сервер Mastodon
+share-left = Влево
+share-uses = Использует
+share-where = Где
+share-where-link-fits = Куда помещается ссылка
+share-any-length = любой длины
+share-n-over = Больше на { $n }
 
 ## privacy (kit/share/privacy.ts, kit/ui/privacy-dialog.ts): the password, what the device holds
 
@@ -191,12 +249,12 @@ privacy-forget-everything = Забыть всё
 privacy-preview-sent-with-link-to = Превью, отправленное со ссылкой в соцсеть, — это картинка первой страницы, название и первые слова; месяц они хранятся на нашем сервере в открытом виде. Сам документ туда никогда не попадает.
 privacy-forget-everything-this-site-keeps = Забыть всё, что этот сайт хранит здесь, и больше ничего не хранить? Сами документы живут в своих ссылках.
 privacy-locked = Заблокирован
-privacy-locked-document = Заблокированный документ
+common-locked-document = Заблокированный документ
 privacy-new-password = Новый пароль
 privacy-no-password = Без пароля
 privacy-none = Нет
 privacy-opening = Открываем…
-privacy-password = Пароль
+common-password = Пароль
 privacy-password-removed = Пароль убран
 privacy-password-set-link-holds-only = Пароль задан: в ссылке только зашифрованный текст
 privacy-password-ellipsis = Пароль…
@@ -213,17 +271,17 @@ privacy-short-links-made-here-until = Короткие ссылки, созда�
 privacy-their-names-and-links-for = Их названия и ссылки для главной страницы.
 privacy-theme-lifetime-of-short-links = Тема, срок жизни коротких ссылок.
 privacy-this-document-has-password-link = У этого документа есть пароль. В ссылке и в любой короткой ссылке из неё только зашифрованный текст.
-privacy-this-document-is-locked = Этот документ заблокирован
+common-this-document-is-locked = Этот документ заблокирован
 privacy-this-document-is-locked-with = Этот документ заблокирован паролем.
 privacy-unlock = Разблокировать
-privacy-unlock-ellipsis = Разблокировать…
+common-unlock-ellipsis = Разблокировать…
 privacy-what-this-device-holds = Что хранит это устройство
 privacy-your-documents = Ваши документы
 privacy-your-browsers-history = История вашего браузера
 privacy-every-document-opened-here-in = Каждый открытый здесь документ, целиком, если у него нет пароля.
 privacy-not-ours-to-clear = Не нам её очищать
 privacy-by-name = автор: { $name }
-privacy-n-documents = { $n ->
+common-n-documents = { $n ->
         [one] { $n } документ
         [few] { $n } документа
         [many] { $n } документов
@@ -238,11 +296,12 @@ privacy-n-links = { $n ->
 privacy-n-set = Задано: { $n }
 privacy-copy-this-and-send-it = Скопируйте его и передайте иначе, чем ссылку. Показать его снова нельзя.
 privacy-make-another = Создать другой
+privacy-password-copied = Пароль скопирован
 
 ## a document locked with a password, placed inside another (kit/share/locked.ts, kit/ui/locked-doc.ts)
 
 # The card drawn where it sits; { $app } is the app's name: "A Spreadsheet document, locked with a password".
-locked-with-password = Заблокирован паролем
+common-with-password = Заблокирован паролем
 locked-app-document-locked-with-password = Документ «{ $app }», заблокированный паролем
 locked-with-password-unlock = Заблокирован паролем. Разблокировать…
 locked-document-locked-with-password = Документ, заблокированный паролем
@@ -268,24 +327,37 @@ common-chosen-tasks = Выбранные задачи
 common-open = Открыть
 common-task = Задача
 common-tasks = Задачи
+common-find-app-doc-template-or = Найти приложение, документ, шаблон или команду
+common-in-this-document = Найти в этом документе
+common-indent-or-bring-out-in = Отступ или его снятие в списке; следующая ячейка в сетке
+common-move-selected-items-up-or = Сдвинуть выбранные пункты вверх или вниз
+common-nudge-shapes-in-hand = Сдвинуть выбранные фигуры
+common-select-all-words-of-box = Выделить всё: сначала слова в блоке, потом всё
+common-back-to-words = Назад к тексту
+common-extend-selection = Расширить выделение
+common-next-or-one-before = Следующий или предыдущий
+common-step-out-close-collapse-let = Выйти: закрыть, свернуть, отпустить
+common-check-or-uncheck-task = Отметить задачу или снять отметку
+common-too-long-for-qr-code = Слишком длинно для QR-кода: сократите документ или поделитесь короткой ссылкой.
+common-n-of-count = { $n } из { $count }
 
 ## downloads
 
 download-print = Печать
-download-print-or-save-as-pdf = Печать или сохранение в PDF
+common-print-or-save-as-pdf = Печать или сохранение в PDF
 download-picture-png = Картинка (PNG)
-download-web-page-html = Веб-страница (HTML)
+common-web-page-html = Веб-страница (HTML)
 download-text-tlo = Текст (TLO)
 download-data-json = Данные (JSON)
 download-downloaded-name = Скачано: { $name }
 download-failed = Не удалось скачать
-download-open-in-tiny-little-office = Открыть в Tiny Little Office
+common-open-in-tiny-little-office = Открыть в Tiny Little Office
 # Under a document cut off at a slide's foot: a link that opens it whole, in its own app.
 download-see-more = Показать ещё
 
 ## the bar, shared by every app
 
-bar-insert = Добавить
+common-insert = Добавить
 bar-bold = Жирный
 bar-italic = Курсив
 bar-underline = Подчёркнутый
@@ -294,21 +366,21 @@ bar-highlight = Выделение
 bar-heading = Заголовок
 bar-bulleted-list = Маркированный список
 bar-numbered-list = Нумерованный список
-bar-table = Таблица
+common-table = Таблица
 bar-footnote = Сноска
-bar-date = Дата
+common-date = Дата
 bar-undo = Отменить
 bar-redo = Повторить
-bar-today = Сегодня
+common-today = Сегодня
 
 ## the editor (<to-text>): chips, cards and the bubbles
 
 # A footnote's mark, and its words where the notes are drawn, by its number: spoken.
-editor-footnote-n = Сноска { $n }
+common-footnote-n = Сноска { $n }
 # A card standing for another document held in this one, of a kind no app here reads: "abc document".
-editor-app-document = Документ: { $app }
+common-app-document = Документ: { $app }
 # The same card when its app is known; { $noun } is the app's noun: "A spreadsheet".
-editor-noun = { $noun }
+common-noun = { $noun }
 editor-code = Код
 editor-connection = Связь
 editor-n-rows = { $n ->
@@ -318,7 +390,7 @@ editor-n-rows = { $n ->
        *[other] { $n } строки
     }
 editor-notes-words = Текст сноски
-editor-done = Готово
+common-done = Готово
 editor-address = Адрес
 editor-not-address = Это не адрес
 editor-set-link = Задать ссылку
@@ -326,9 +398,13 @@ editor-open-link = Открыть ссылку
 editor-change-link = Изменить ссылку
 editor-remove-link = Убрать ссылку
 # The selection bubble's name: what can be done to the words selected.
-editor-format = Формат
+common-format = Формат
 editor-done-lowercase = выполнено
 editor-not-done = не выполнено
+editor-bold-italic-and-links = Жирный, курсив и ссылки
+editor-one-of-words-column-holds = Одно из слов столбца или новое
+editor-option = Вариант
+editor-this-browser-lets-page-paste = Этот браузер разрешает вставку на странице только с клавиатуры: нажмите его «Вставить».
 
 ## the example in the kit's own documentation
 
@@ -341,18 +417,18 @@ example-n-slides = { $n ->
 
 ## the Word Processor
 
-write-word-processor = Текстовый редактор
+common-word-processor = Текстовый редактор
 # What one of its documents is called, in running text: "Untitled document"; each app's noun is in its section.
 write-document-lowercase = документ
 # The group heading the Word Processor sits under on the home page.
-write-words = Текст
+common-words = Текст
 write-words-on-page-headings-lists = Слова на странице: заголовки, списки, ссылки и сноски, таблица с подсчётом, печать на Letter или A4.
 write-document = Документ
 write-here = Пишите здесь.
 write-subheading = Подзаголовок
 write-paragraph = Абзац
-write-bring-out = Убрать отступ
-write-indent = Отступ
+common-bring-out = Убрать отступ
+common-indent = Отступ
 write-align = Выравнивание
 write-align-left = По левому краю
 write-center = По центру
@@ -376,11 +452,11 @@ write-horizontal-rule = Горизонтальная линия
 # Insert ▾'s rule in a document: what follows starts the next page.
 write-page-break = Разрыв страницы
 # same
-write-ok = OK
+common-ok = OK
 write-this-card = Эта карточка
 write-open-in-app = Открыть в «{ $app }»
 write-locked-worked-out-for-you = Заблокировано: посчитано за вас
-write-footnotes = Сноски
+common-footnotes = Сноски
 write-back-to-footnote-n-in = Назад к сноске { $n } в тексте
 write-back-to-text = Назад к тексту
 write-n-words = { $n ->
@@ -392,7 +468,7 @@ write-n-words = { $n ->
 # same
 write-word-docx = Word (DOCX)
 # same
-write-markdown = Markdown
+common-markdown = Markdown
 # same
 write-rich-text-rtf = Rich Text (RTF)
 # A table in the text: its heads, its handle, its column menu.
@@ -456,6 +532,12 @@ write-petition = Петиция
 write-what-you-ask-why-and = О чём вы просите, почему, и имена тех, кто согласен.
 write-terms-of-service = Условия обслуживания
 write-small-businesss-terms-in-plain = Условия небольшого бизнеса простыми словами: запись, цены, ключи, что если, расторжение.
+write-open-as-outline = Открыть как структуру
+# same
+write-a4 = A4
+# same
+write-letter = Letter
+write-name-this-column = Назвать этот столбец
 
 ## Insert's dialog (kit/ui/insert-dialogs.ts): Tiny Little Office Doc
 
@@ -464,13 +546,13 @@ insert-opening-short-link = Открываем короткую ссылку…
 insert-paste-link-of-another-tiny = Вставьте ссылку на другой документ Tiny Little Office, длинную или короткую: здесь покажется его первая страница.
 insert-this-is-not-tiny-little = Это не ссылка на Tiny Little Office, или её срок истёк.
 insert-tiny-little-office-doc = Документ Tiny Little Office
-insert-tiny-little-office-doc-ellipsis = Документ Tiny Little Office…
+common-tiny-little-office-doc-ellipsis = Документ Tiny Little Office…
 # Insert ▾'s group of the apps a new document can be made in, inside this one.
-insert-new-document = Новый документ
+common-new-document = Новый документ
 
 ## another document edited in place (kit/ui/doc-dialog.ts); a table's size is Rows × Columns
 
-doc-cancel = Отмена
+common-cancel = Отмена
 doc-rows = Строки
 
 ## charts (kit/draw/chart.ts)
@@ -479,7 +561,7 @@ chart-empty-chart = Пустая диаграмма
 chart-bars = Столбцы
 chart-flows-sankey = Потоки (диаграмма Санкея)
 chart-flows-list = Потоки: { $list }.
-chart-lines = Линии
+common-lines = Линии
 chart-nothing-to-chart-yet = Пока нечего показать на диаграмме
 chart-nothing-to-chart-yet-rows = Пока нечего показать на диаграмме: строки вида Откуда | Куда | Сколько
 chart-pie = Круговая
@@ -493,10 +575,10 @@ sheet-fit-this-column-to-its = Подогнать столбец под текс
 sheet-cells-in-hand = Выделенные ячейки
 sheet-check-ref = Отметить { $ref }
 # The column type that holds words as typed.
-sheet-text = Текст
-sheet-spreadsheet = Электронные таблицы
+common-text = Текст
+common-spreadsheet = Электронные таблицы
 sheet-spreadsheet-lowercase = электронная таблица
-sheet-numbers = Числа
+common-numbers = Числа
 sheet-spreadsheet-with-formulas-named-cells = Электронная таблица с формулами, именованными ячейками и диаграммами: сначала три столбца, потом сколько нужно.
 sheet-budget = Бюджет
 sheet-planned-against-actual-line-each = План и факт, по строке на статью, с разницей и итогами.
@@ -561,40 +643,40 @@ sheet-eight-teams-single-elimination-each = Восемь команд на вы�
 # same
 sheet-excel-xlsx = Excel (XLSX)
 # same
-sheet-csv = CSV
+common-csv = CSV
 sheet-chart-svg = Диаграмма (SVG)
 sheet-chart-png = Диаграмма (PNG)
 sheet-empty-sheet = Пустой лист
 sheet-n-of-max-shown = (показано { $n } из { $max })
 sheet-50-more-rows = Ещё 50 строк
-sheet-add-column = Добавить столбец
-sheet-add-column-after = Добавить столбец после
+common-add-column = Добавить столбец
+common-add-column-after = Добавить столбец после
 sheet-chart = Диаграмма
 sheet-chart-of-table = Диаграмма по таблице
 sheet-checkbox = Флажок
 sheet-column-after = Столбец после
-sheet-column-c = Столбец { $c }
-sheet-column-c-holds = В столбце { $c }
+common-column-c = Столбец { $c }
+common-column-c-holds = В столбце { $c }
 sheet-column-c-type-what-it = Столбец { $c }: { $type }. Что в нём, сортировка, добавить или убрать столбец
-sheet-columns = Столбцы
-sheet-delete-which = Удалить: { $which }
-sheet-drag-to-fill = Потяните, чтобы заполнить
+common-columns = Столбцы
+common-delete-which = Удалить: { $which }
+common-drag-to-fill = Потяните, чтобы заполнить
 sheet-abc-or-123-for-this = ABC или 123, для этого столбца
 sheet-drag-to-resize-double-click = Потяните, чтобы изменить ширину; двойной щелчок — по тексту
 sheet-fill-down-from-top-row = Заполнить вниз от верхней строки
 sheet-fill-right-from-first-column = Заполнить вправо от первого столбца
-sheet-fill-drag-to-carry-these = Заполнение: потяните, чтобы продолжить эти ячейки
+common-fill-drag-to-carry-these = Заполнение: потяните, чтобы продолжить эти ячейки
 sheet-fit-columns-to-page = Уместить столбцы на странице
 sheet-formula = Формула
 sheet-function = Функция
 sheet-high-to-low = По убыванию
-sheet-insert-n-rows-above = Добавить { $n ->
+common-insert-n-rows-above = Добавить { $n ->
         [one] строку
         [few] { $n } строки
         [many] { $n } строк
        *[other] { $n } строки
     } выше
-sheet-insert-n-rows-below = Добавить { $n ->
+common-insert-n-rows-below = Добавить { $n ->
         [one] строку
         [few] { $n } строки
         [many] { $n } строк
@@ -605,8 +687,8 @@ sheet-lock-these-cells-so-reader = Заблокировать эти ячейк�
 sheet-locked-part-of-model = Заблокировано: часть модели
 sheet-low-to-high = По возрастанию
 sheet-money = Деньги
-sheet-name = Имя
-sheet-name-of-column-c = Название столбца { $c }
+common-name = Имя
+common-name-of-column-c = Название столбца { $c }
 sheet-names-cell-to-its-right = Называет ячейку справа
 # A money column's currency (Money picked in a column's menu): the field's hint, and what it says of words it cannot read.
 sheet-symbol-like-or-code-like = Символ, например $, или код, например USD. Пусто — как в документе.
@@ -616,15 +698,15 @@ sheet-number = Число
 sheet-open-link = Открыть { $link }
 sheet-opens-when-clicked = Открывается по щелчку
 sheet-percent = Процент
-sheet-remove-this-column = Убрать этот столбец
+common-remove-this-column = Убрать этот столбец
 sheet-resize-column-c = Изменить ширину столбца { $c }
 sheet-rich-text = Форматированный текст
 sheet-row-above = Строка выше
 sheet-row-below = Строка ниже
-sheet-row-n = Строка { $n }
-sheet-row-n-lowercase = строка { $n }
-sheet-row-n-insert-or-delete = Строка { $n }: добавить или удалить строки
-sheet-rows-b = строки { $a }–{ $b }
+common-row-n = Строка { $n }
+common-row-n-lowercase = строка { $n }
+common-row-n-insert-or-delete = Строка { $n }: добавить или удалить строки
+common-rows-b = строки { $a }–{ $b }
 sheet-selected-cells = Выделенные ячейки
 sheet-show-all-text = Показать весь текст
 sheet-shown-as-typed = Как набрано
@@ -635,22 +717,37 @@ sheet-is-full-its-last-rows = Лист заполнен: в его послед�
 sheet-three-at-least = Хотя бы три
 sheet-unlock-these-cells = Разблокировать эти ячейки
 sheet-what-it-holds-sort-columns = Что в нём; сортировка; столбцы
+# The Spreadsheet: any column removed, the Option column, rich cells, a chart put in from Insert.
+sheet-keeps-one-column = В листе остаётся один столбец
+sheet-choices = Варианты
+sheet-choices-for-ref = Варианты для { $ref }
+sheet-has-one = В листе он один
+sheet-edit-cell-caret-at-its = Править ячейку, курсор в конце
+sheet-put-back-what-cell-held = Вернуть то, что было в ячейке
+sheet-put-dated-rows-on-calendar = Поместить строки с датами в календарь
 
 ## downloads: hand-offs to another app (kit/file/exports.ts)
 
 export-open-in = Открыть в
+export-pdf-file = Файл PDF
+export-copy-link-that-downloads-ext = Скопировать ссылку, по которой скачивается .{ $ext }
+export-could-not-share-ext = Не удалось поделиться файлом .{ $ext }
+export-could-not-show-ext = Не удалось показать файл .{ $ext }
+export-download-ext = Скачать .{ $ext }
+export-share-ext = Поделиться файлом .{ $ext }…
+export-view-ext = Посмотреть .{ $ext }
 
 ## the icon library (kit/ui/icons-picker.ts)
 
-icons-icon = Значок
+common-icon = Значок
 icons-favorites = Избранное
 icons-search-icons = Искать значки
 icons-suggested = Предложено
-icons-icons = Значки
+common-icons = Значки
 icons-no-icons-match-q = Значков по запросу «{ $q }» нет.
 icons-search-by-name-or-by = Ищите по названию или по смыслу («деньги», «погода», «ai»), чтобы найти любой из { $n } значков.
 icons-no-icon = Без значка
-icons-icon-or-emoji = Значок или эмодзи
+common-icon-or-emoji = Значок или эмодзи
 icons-search-icons-and-emoji = Искать значки и эмодзи
 icons-or-emoji = Значки или эмодзи
 icons-emoji = Эмодзи
@@ -670,9 +767,9 @@ icons-flags = Флаги
 
 # The group heading the Drawing Tool sits under on the home page: Design. 'Draw' is the Animator's mode for drawing.
 draw-draw = Рисовать
-draw-drawing-tool = Графический редактор
+common-drawing-tool = Графический редактор
 draw-drawing = рисунок
-draw-design = Дизайн
+common-design = Дизайн
 draw-boxes-arrows-icons-and-labels = Прямоугольники, стрелки, значки и подписи на сетке; или пиксель-арт, который может стать фоновой плиткой.
 draw-request-flow = Путь запроса
 draw-browser-asks-server-which-reads = Браузер обращается к серверу, который читает данные: блоки, соединённые стрелками.
@@ -690,7 +787,7 @@ draw-phone-screen-sketched-in-boxes = Экран телефона, наброс�
 draw-rosette-with-ribbons-for-volunteer = Розетка с лентами для волонтёра года: распечатать, вырезать и приколоть.
 draw-block-party-from-above-stage = Уличный праздник сверху: сцена, лотки, первая помощь и место встречи, если потерялись.
 draw-badge = Значок-бейдж
-draw-birthday-card = Открытка ко дню рождения
+common-birthday-card = Открытка ко дню рождения
 draw-can-we-refund-it-stores = Можем вернуть деньги? Правило возврата магазина в вопросах, ответах и что делать.
 draw-event-map = Карта мероприятия
 draw-four-16-by-16-icons = Четыре значка 16 на 16 на одной сетке — солнце, облако, дождь и гроза, чтобы скопировать для прогноза или кнопки.
@@ -704,7 +801,7 @@ draw-three-ideas-for-coffee-roasters = Три идеи знака для обж�
 draw-weather-icons = Значки погоды
 draw-what-happens-to-package-from = Что происходит с посылкой с момента покупки: процесс по шагам, со значками и соединениями.
 draw-wireframe = Макет экрана
-draw-picture-svg = Картинка (SVG)
+common-picture-svg = Картинка (SVG)
 draw-background-tile-svg = Фоновая плитка (SVG)
 draw-background-tile-png = Фоновая плитка (PNG)
 draw-animate-this-drawing = Анимировать этот рисунок
@@ -740,14 +837,14 @@ draw-rounded-box = Скруглённый блок
 draw-hexagon = Шестиугольник
 draw-parallelogram = Параллелограмм
 draw-cylinder = Цилиндр
-draw-note = Заметка
-draw-black = Чёрный
-draw-red = Красный
-draw-orange = Оранжевый
-draw-green = Зелёный
-draw-blue = Синий
-draw-purple = Фиолетовый
-draw-indigo = Индиго
+common-note = Заметка
+common-black = Чёрный
+common-red = Красный
+common-orange = Оранжевый
+common-green = Зелёный
+common-blue = Синий
+common-purple = Фиолетовый
+common-indigo = Индиго
 draw-yellow = Жёлтый
 draw-sky = Голубой
 draw-pink = Розовый
@@ -763,13 +860,13 @@ draw-no-fill = Без заливки
 draw-fill = Заливка
 draw-bring-to-front = На передний план
 draw-send-to-back = На задний план
-draw-duplicate = Дублировать
-draw-edit = Правка
-draw-delete = Удалить
+common-duplicate = Дублировать
+common-edit = Правка
+common-delete = Удалить
 draw-put-icon-on-this-shape = Поместить значок на эту фигуру
 draw-place-icon = Поместить значок
-draw-zoom-in = Приблизить
-draw-zoom-out = Отдалить
+common-zoom-in = Приблизить
+common-zoom-out = Отдалить
 # same
 draw-alt = Alt
 draw-alt-text = Альтернативный текст
@@ -799,7 +896,7 @@ draw-as-repeating-background = Как повторяющийся фон
 # The contextual bar under a shape, and its words typed on it.
 draw-dashed-line = Штриховая линия
 draw-dotted-line = Пунктирная линия
-draw-edit-words = Править текст
+common-edit-words = Править текст
 draw-extra-large-text = Очень крупный текст
 draw-gray-fill = Серая заливка
 # same
@@ -824,6 +921,10 @@ draw-drawing-canvas-v-selects-r = Холст рисунка. V выбирает;
 draw-tap-shape-to-select-it = Коснитесь фигуры, чтобы выбрать её, или обведите несколько; чтобы рисовать, выберите инструмент.
 draw-rotate-left = Повернуть влево
 draw-rotate-right = Повернуть вправо
+draw-pixels-n-n = Пикселей: { $n }×{ $n }
+draw-align-center = Выравнивание: по центру
+draw-align-left = Выравнивание: по левому краю
+draw-align-right = Выравнивание: по правому краю
 
 ## the Animator
 
@@ -880,7 +981,7 @@ anim-pixel-art-is-made-in = Пиксель-арт делают в графиче
 anim-rainbow = Радуга
 anim-remove-this-key = Убрать этот ключ
 anim-shadow = Тень
-anim-size = Размер
+common-size = Размер
 anim-spin = Вращение
 anim-stage-alt-arrow-keys-move = Сцена: { $alt }. Стрелки двигают выбранную фигуру (или время), запятая и точка — на кадр, пробел запускает, K ставит ключ.
 anim-shapes-in-hand = Выбранные фигуры
@@ -913,6 +1014,10 @@ anim-turns-shape-around-in-plane = Вращает фигуру в плоскос
 anim-which-shape-is-in-front = Какая фигура впереди: ближняя рисуется поверх дальней, а дальняя чуть темнее. Глубина размер не меняет.
 anim-n-times = { $n } раз
 anim-s-s = { $s } с
+anim-frame-back-frame-on = Кадр назад, кадр вперёд
+anim-nudge-shapes-in-hand-with = Сдвинуть выбранные фигуры; если их нет, перейти на кадр
+anim-play-or-pause = Играть или пауза
+anim-first-frame-last = Первый кадр, последний
 
 ## the Outliner
 
@@ -920,26 +1025,26 @@ anim-s-s = { $s } с
 outline-named-label = , названная «{ $label }»
 outline-book = Книга
 outline-decision = Решение
-outline-talk = Выступление
+common-talk = Выступление
 outline-empty-outline = Пустая структура
 outline-outliner-ideas-under-ideas-folded = Редактор структуры: идеи под идеями, свёрнутые и развёрнутые, переставленные и связанные; то же дерево читают презентация и карта идей.
 outline-arrow-from-from-to-to = Стрелка от «{ $from }» к «{ $to }»
 outline-arrows-both-ways = Стрелки в обе стороны
 outline-as-page = Как страница
-outline-calculator = Калькулятор
-outline-calendar = Календарь
+common-calculator = Калькулятор
+common-calendar = Календарь
 outline-cancel-connecting = Отменить соединение
 outline-change-it = Изменить
-outline-chosen-items = Выбранные пункты
+common-chosen-items = Выбранные пункты
 outline-connect = Соединить
 outline-connect-from-words = Соединить с «{ $words }»
 outline-connect-from-to-to = Соединить «{ $from }» с «{ $to }»
 outline-connection-from-from-to-to = Соединение от «{ $from }» к «{ $to }»
-outline-connections = Соединения
-outline-copy = Копировать
-outline-presentation-builder = Конструктор презентаций
-outline-diagram-maker = Редактор схем
-outline-drag-to-move = Тяните, чтобы переместить
+common-connections = Соединения
+common-copy = Копировать
+common-presentation-builder = Конструктор презентаций
+common-diagram-maker = Редактор схем
+common-drag-to-move = Тяните, чтобы переместить
 outline-draw-as-mind-map = Показать как карту идей
 outline-draw-as-network = Показать как сеть
 outline-draw-as-org-chart = Показать как оргструктуру
@@ -950,24 +1055,24 @@ outline-fold-all = Свернуть всё
 outline-item = Пункт
 outline-item-n = Пункт { $n }
 outline-kind-of-line = Вид линии
-outline-launch-plan = План запуска
+common-launch-plan = План запуска
 outline-line-from-from-to-to = Линия от «{ $from }» к «{ $to }»
 outline-line-named-label-change-it = Линия «{ $label }»: изменить
-outline-animator = Аниматор
-outline-move-down = Вниз
+common-animator = Аниматор
+common-move-down = Вниз
 outline-move-this-item-drag-it = Переместить пункт: перетащите его на другой
-outline-move-up = Вверх
+common-move-up = Вверх
 outline-name-of-line = Название линии
 outline-numbered = С номерами
 outline-opml-for-outliners = OPML (для редакторов структуры)
-outline-open-in-new-tab = Открыть в новой вкладке
-outline-outline = Структура
+common-open-in-new-tab = Открыть в новой вкладке
+common-outline = Структура
 outline-outliner = Редактор структуры
 outline-outline-lowercase = структура
-outline-paste = Вставить
+common-paste = Вставить
 outline-plain-line = Простая линия
 outline-plain-text = Простой текст
-outline-show-as-slides = Показать как слайды
+common-show-as-slides = Показать как слайды
 outline-show-as-outline = Показать как структуру
 outline-take-away-connection-from-from = Убрать соединение от «{ $from }» к «{ $to }»
 outline-take-it-away = Убрать
@@ -975,7 +1080,7 @@ outline-take-connection-away = Убрать соединение
 outline-tap-item-to-connect-from = Коснитесь пункта, от которого соединить.
 outline-tap-item-to-connect-words = Коснитесь пункта, с которым соединить «{ $words }».
 outline-question-options-under-it-and = Вопрос, варианты под ним и по каждому, что за и что против.
-outline-trip-planner = Планировщик поездок
+common-trip-planner = Планировщик поездок
 outline-twenty-minutes-in-three-parts = Двадцать минут в трёх частях: проблема, идея, что это значит; при показе как презентации каждый верхний пункт — слайд.
 outline-unfold-all = Развернуть всё
 outline-unfold-n-inside = Развернуть, { $n ->
@@ -984,7 +1089,7 @@ outline-unfold-n-inside = Развернуть, { $n ->
         [many] внутри { $n }
        *[other] внутри { $n }
     }
-outline-untitled = Без названия
+common-untitled = Без названия
 outline-view-as = Показать как
 outline-zoomed-in-on = Приближено к
 outline-a-plain-line = простая линия
@@ -1018,6 +1123,9 @@ outline-question-method-budget-that-adds = Вопрос, метод, бюдже�
 outline-three-generations-and-next-each = Три поколения и следующее, у каждого годы жизни, рисуется как семейное дерево из меню.
 outline-troubleshooting = Устранение неполадок
 outline-who-works-for-whom-at = Кто на кого работает в пекарне на девять человек, у каждого должность, рисуется как оргструктура из меню.
+outline-pdf-sections-and-bullets = PDF: разделы и пункты
+outline-fold-unfold = Свернуть, развернуть
+outline-name-line = Назвать линию
 
 ## the Presentation Builder
 
@@ -1063,7 +1171,7 @@ deck-bullets = Список
 deck-two-columns = Две колонки
 deck-big-icon = Большой значок
 deck-fade = Затухание
-deck-cut = Резкая смена
+common-cut = Резкая смена
 deck-slide = Сдвиг
 deck-zoom = Масштаб
 deck-zine = Зин
@@ -1089,12 +1197,12 @@ deck-fun = Весёлая
 deck-themes-color = Цвет темы
 
 # The bar
-deck-present = Показ
+common-present = Показ
 deck-see-sheets-to-print = Смотреть листы для печати
 deck-back-to-pages = Назад к страницам
 deck-headline = Крупный заголовок
 deck-layout-layout = Макет: { $layout }
-deck-look-theme = Стиль: { $theme }
+common-look-theme = Стиль: { $theme }
 deck-transition-transition = Переход: { $transition }
 deck-format-format = Формат: { $format }
 deck-printing = Печать
@@ -1122,11 +1230,11 @@ deck-big-icon-page = Страница с большим значком
 deck-four-more-pages = Ещё четыре страницы
 deck-on-slide = На слайде
 deck-on-page = На странице
-deck-pages = Страницы
+common-pages = Страницы
 
 # The canvas
 deck-add-icon = Добавить значок
-deck-change-icon = Сменить значок
+common-change-icon = Сменить значок
 deck-pick-icon = Выбрать значок
 deck-left-column = Левая колонка
 deck-right-column = Правая колонка
@@ -1145,7 +1253,7 @@ deck-remove-from-slide = Убрать со слайда
 deck-slide-n = Слайд { $n }
 deck-front-cover = Передняя обложка
 deck-back-cover = Задняя обложка
-deck-page-n = Страница { $n }
+common-page-n = Страница { $n }
 deck-front = Лицевая сторона
 deck-inside-left = Внутри слева
 deck-inside-middle = Внутри в середине
@@ -1169,11 +1277,11 @@ deck-print-it-on-letter-paper-at-actual-size-cut-along-dashes-six-badges-sheet =
 
 # Presenting, and the closing slide
 deck-presentation = Презентация
-deck-previous = Назад
-deck-next = Вперёд
-deck-stop-presenting = Закончить показ
+common-previous = Назад
+common-next = Вперёд
+common-stop-presenting = Закончить показ
 deck-slide-n-of-total = Слайд { $n } из { $total }
-deck-notes = Заметки
+common-notes = Заметки
 deck-n-hides-them = N скрывает их
 deck-take-this-deck-home = Заберите эту презентацию с собой
 deck-take-this-deck-home-title = Заберите эту презентацию с собой: { $title }
@@ -1199,6 +1307,12 @@ deck-trifold-brochure-six-panels-on = Буклет с тремя сгибами:
 deck-mini-comic-panels-with-picture = Мини-комикс: кадры с картинкой, репликой в облачке и подписью, сложенный из одного листа.
 deck-poster-or-flyer-headline-and = Постер или листовка: заголовок и несколько строк, как можно крупнее на одной странице.
 deck-name-badges-for-meetup-one = Бейджи для встречи, по странице на человека, по шесть на лист, готовые к разрезанию.
+deck-edit-this-deck = Править эту презентацию
+deck-new-slide = Новый слайд
+deck-presenting-back = Показ: назад
+deck-presenting-next-line-or-slide = Показ: следующая строка или слайд
+deck-presenting-whole-slide = Показ: слайд целиком
+deck-slide-before-slide-after-on = Слайд до, слайд после (на ленте)
 
 ## the Calendar app
 
@@ -1225,7 +1339,7 @@ cal-end = Конец
 cal-end-date = Дата окончания
 cal-end-time = Время окончания
 cal-ends = Заканчивается
-cal-event = Событие
+common-event = Событие
 cal-every-day = Каждый день
 cal-every-month = Каждый месяц
 cal-every-week = Каждую неделю
@@ -1261,7 +1375,7 @@ cal-start = Начало
 cal-start-date = Дата начала
 cal-start-time = Время начала
 cal-starts = Начинается
-cal-stops = Прекращается
+common-stops = Прекращается
 cal-same-dates-as-gantt-chart = Те же даты в виде диаграммы Ганта
 cal-this-calendar-is-written-in = Этот календарь записан по времени: { $zone }.
 cal-this-calendar-names-no-time = В этом календаре не указан часовой пояс: время читается по вашему, { $zone }.
@@ -1393,6 +1507,19 @@ diagram-house-network = Домашняя сеть
 diagram-water-cycle = Круговорот воды
 diagram-three-generations-of-morenos-and = Три поколения Морено и пунктирная линия к крестнику.
 diagram-who-can-do-what = Кто что умеет
+diagram-tap-empty-space-for-branch = Коснитесь пустого места для новой ветки; коснитесь идеи, чтобы писать на ней, Enter — к следующей; перетащите одну на другую, чтобы поместить под неё; «Соединить» связывает две через всю карту.
+diagram-place-cards = Карточки гостей
+diagram-print-place-cards = Распечатать карточки гостей
+diagram-print-place-cards-card-guest = Распечатать карточки гостей: карточка на гостя, по восемь на листе Letter, чтобы вырезать
+diagram-guest = Гость
+diagram-new-idea = Новая идея
+diagram-tap-empty-space-for-person = Коснитесь пустого места для человека; коснитесь человека, чтобы писать на нём, Shift+Enter — должность под именем, Enter — к следующему; перетащите одного на другого, чтобы поместить под него.
+diagram-tap-empty-space-for-event = Коснитесь пустого места для события: напишите когда, Shift+Enter, потом что случилось; годы и даты расставляются, как были; промежуток — это полоса.
+diagram-lanes-name = Название дорожки
+diagram-when = Когда
+diagram-tap-person-to-type-on = Коснитесь человека, чтобы писать на нём, + после имени — его партнёр, Shift+Enter — годы жизни под именем; Enter — к следующему; перетащите одного на другого, чтобы поместить под него; «Соединить» рисует пунктир между двумя.
+diagram-tap-empty-space-for-table = Коснитесь пустого места для стола; коснитесь стола или человека, чтобы писать, запятая после имени — следующий гость; перетащите человека за другой стол.
+diagram-tap-inside-circles-to-add = Коснитесь внутри кругов, чтобы добавить туда элемент, запятая после него — следующий; коснитесь названия множества, чтобы переименовать; перетащите элемент в другие круги.
 
 ## the Trip Planner
 
@@ -1470,12 +1597,19 @@ trip-new-york-in-movies = Нью-Йорк в кино
 trip-seven-film-and-tv-locations = Семь мест из фильмов и сериалов, от Аптауна до Даунтауна, за один день.
 trip-wedding-on-lake-como = Свадьба на озере Комо
 trip-for-guests-where-wedding-is = Для гостей: где свадьба, где ночевать, как добраться.
+trip-presenting-trip = Показ поездки
+trip-presenting-next-stop = Показ: следующая остановка
+trip-presenting-stop-before = Показ: предыдущая остановка
+trip-put-stops-on-calendar-day = Поместить остановки в календарь, по дню на каждую
+trip-first-last = Первый, последний
+trip-next-stop = Следующая остановка
+trip-stop-before = Предыдущая остановка
 
 ## shared: the Word Processor's looks, the header's Home, a money column's currency
 
 looks-typewriter = Пишмашинка
 looks-serif = С засечками
-looks-home = Главная
+common-home = Главная
 looks-currency = Валюта
 
 ## the Calculator app
@@ -1564,72 +1698,25 @@ calc-curve-and-its-slope = Кривая и её наклон
 calc-x3-3x-its-derivative-and = x³ − 3x, её производная и горизонтальная касательная на дне впадины.
 calc-waves-adding-up = Сложение волн
 calc-sine-waves-summed-on-their = Синусоиды складываются на пути к прямоугольной волне.
-
-## unsorted: added after the sections, each id named for where it is used
-
-home-templates-for-app = Шаблоны: { $app }
-home-app-templates = Шаблоны: { $app }
-home-templates-for-app-name = Шаблоны для «{ $app }»: { $name }
-home-templates-are-not-saved-in = Шаблоны ещё не сохранены в этом браузере. Подключитесь к интернету, чтобы их увидеть.
 # The grip on a line of the tape; the bar under lines chosen whole.
 calc-choose-line-n-drag-it = Выбрать строку { $n }: потяните, чтобы переместить
 calc-chosen-lines = Выбранные строки
-# The Spreadsheet: any column removed, the Option column, rich cells, a chart put in from Insert.
-sheet-keeps-one-column = В листе остаётся один столбец
-editor-bold-italic-and-links = Жирный, курсив и ссылки
-sheet-choices = Варианты
-sheet-choices-for-ref = Варианты для { $ref }
-editor-one-of-words-column-holds = Одно из слов столбца или новое
-editor-option = Вариант
-sheet-has-one = В листе он один
-drawer-documents = Документы
-common-find-app-template = Найти приложение, шаблон
-drawer-find-app-doc-template-or = Найти приложение, документ, шаблон или команду
-drawer-find-app-template-or-command = Найти приложение, шаблон или команду
-drawer-commands = Команды
-share-new-noun-date-n = Новый { $noun } { $date } №{ $n }
-drawer-nothing-by-that-name = С таким названием ничего нет
-draw-pixels-n-n = Пикселей: { $n }×{ $n }
-# Files, compare, posting and embedding: the agent and sharing surface.
-share-mastodon-server-like-mastodon-social = Сервер Mastodon, например mastodon.social
-share-change = Изменение
+
+## two links compared (kit/ui/compare.ts)
+
 compare-changes = Изменения
 compare-compare = Сравнить
-share-copy-embed-code = Скопировать код для вставки
-share-copy-show-link = Скопировать ссылку для показа
-deck-edit-this-deck = Править эту презентацию
-share-embed = Встроить
-share-embed-code-copied = Код для вставки скопирован
 compare-no-difference = Различий нет
 compare-not-link-to-tiny-little = Это не ссылка на документ Tiny Little Office
-open-opened-name = Открыт файл { $name }
-share-opens-deck-already-presenting = Открывает презентацию сразу в показе.
-export-pdf-file = Файл PDF
-outline-pdf-sections-and-bullets = PDF: разделы и пункты
 compare-paste-second-link-to-see = Вставьте вторую ссылку, чтобы увидеть, что изменилось.
 compare-paste-link-to-document-as = Вставьте ссылку на документ в нынешнем виде
 compare-paste-link-to-document-as-it-was = Вставьте ссылку на документ в прежнем виде
-share-post = Опубликовать
-share-post-link = Опубликовать ссылку
-share-show-preview-of-first-page = Показывать превью первой страницы
-share-picture-of-first-page-and = Картинка первой страницы и название месяц хранятся на нашем сервере в открытом виде, чтобы соцсеть могла их забрать. Сам документ — нет.
-share-shared-without-preview-reason = Отправлено без превью: { $reason }
-share-making-preview = Делаем превью…
-share-page-could-not-be-drawn = не удалось нарисовать страницу
-share-picture-is-over-400-kb = картинка больше 400 КБ
-share-server-could-not-be-reached = сервер недоступен
-share-hundred-previews-day-from-one = сто превью в день с одного адреса
-share-server-refused-picture = сервер отклонил картинку
 compare-put-in = Добавлено:
 compare-swap = Поменять местами
 compare-taken-out = Убрано:
-open-that-file-is-not-words = Этот файл — не тот текст, который читает Tiny Little Office.
-open-that-file-is-too-large = Этот файл слишком велик для документа здесь.
 compare-first-link = Первая ссылка
-share-pages-in-frame-on-another = Страницы во фрейме на другом сайте со ссылкой, чтобы открыть их здесь.
 compare-second-link = Вторая ссылка
 compare-two-links-to-documents-side = Две ссылки на документы рядом: то, что изменилось во второй, отмечено. Ничего не уходит с этой страницы.
-share-your-mastodon-server = Ваш сервер Mastodon
 compare-different-apps = разные приложения
 compare-n-blocks-taken-out = { $n ->
         [one] { $n } блок убран
@@ -1643,110 +1730,12 @@ compare-n-put-in = { $n ->
         [many] { $n } добавлено
        *[other] { $n } добавлено
     }
-diagram-tap-empty-space-for-branch = Коснитесь пустого места для новой ветки; коснитесь идеи, чтобы писать на ней, Enter — к следующей; перетащите одну на другую, чтобы поместить под неё; «Соединить» связывает две через всю карту.
-# Restored around the document: search, Find in this document, the shortcuts and the apps' keys, Mod+S, the size of
-# everything, Add to home screen, another version kept here, where the link fits, Open in another app, the QR code
-# of this document, Insert narrowed by typing, Trip presenting, a seating chart's place cards
-qr-code-of-this-document = QR-код этого документа
-anim-frame-back-frame-on = Кадр назад, кадр вперёд
-deck-new-slide = Новый слайд
-drawer-add-to-home-screen = Добавить на главный экран
-shell-another-version = Другая версия
-keys-normal-size = Обычный размер
-home-documents-found = Найдено документов
-sheet-edit-cell-caret-at-its = Править ячейку, курсор в конце
-keys-everything-larger = Всё крупнее
-keys-everything-smaller = Всё мельче
-find-in-this-document = Найти в этом документе
-outline-fold-unfold = Свернуть, развернуть
-common-indent-or-bring-out-in = Отступ или его снятие в списке; следующая ячейка в сетке
-keys-keep-this-document-on-device = Хранить этот документ на устройстве
-shell-kept-on-this-device = Хранится на этом устройстве
-shell-keyboard-shortcuts = Сочетания клавиш
-share-left = Влево
-common-move-selected-items-up-or = Сдвинуть выбранные пункты вверх или вниз
-home-no-document-here-has-those = Нет документа с такими словами
-find-not-found = Не найдено
-menu-nothing-starts-q = Ничего не начинается с «{ $q }»
-shell-nothing-to-keep-yet = Пока нечего хранить
-common-nudge-shapes-in-hand = Сдвинуть выбранные фигуры
-anim-nudge-shapes-in-hand-with = Сдвинуть выбранные фигуры; если их нет, перейти на кадр
-write-open-as-outline = Открыть как структуру
-shell-open-it = Открыть
-diagram-place-cards = Карточки гостей
-anim-play-or-pause = Играть или пауза
-trip-presenting-trip = Показ поездки
-deck-presenting-back = Показ: назад
-deck-presenting-next-line-or-slide = Показ: следующая строка или слайд
-trip-presenting-next-stop = Показ: следующая остановка
-trip-presenting-stop-before = Показ: предыдущая остановка
-diagram-print-place-cards = Распечатать карточки гостей
-diagram-print-place-cards-card-guest = Распечатать карточки гостей: карточка на гостя, по восемь на листе Letter, чтобы вырезать
-shell-save-in-browser-is-off = «Сохранять в браузере» выключено: этот браузер не хранит документы. Включите это в меню, чтобы хранить их здесь.
-sheet-put-back-what-cell-held = Вернуть то, что было в ячейке
-sheet-put-dated-rows-on-calendar = Поместить строки с датами в календарь
-trip-put-stops-on-calendar-day = Поместить остановки в календарь, по дню на каждую
-home-search-your-documents = Искать по вашим документам
-common-select-all-words-of-box = Выделить всё: сначала слова в блоке, потом всё
-keys-show-these-shortcuts = Показать эти сочетания
-# same
-write-a4 = A4
-# same
-write-letter = Letter
-common-back-to-words = Назад к тексту
-common-extend-selection = Расширить выделение
-deck-presenting-whole-slide = Показ: слайд целиком
-trip-first-last = Первый, последний
-common-next-or-one-before = Следующий или предыдущий
-editor-this-browser-lets-page-paste = Этот браузер разрешает вставку на странице только с клавиатуры: нажмите его «Вставить».
-drawer-size-of-everything = Размер всего
-shell-skip-to-apps = Перейти к приложениям
-shell-skip-to-document = Перейти к документу
-menu-starting-q = Начинается с «{ $q }»
-common-step-out-close-collapse-let = Выйти: закрыть, свернуть, отпустить
-anim-first-frame-last = Первый кадр, последний
-trip-next-stop = Следующая остановка
-deck-slide-before-slide-after-on = Слайд до, слайд после (на ленте)
-trip-stop-before = Предыдущая остановка
-shell-this-device-keeps-another-version = На этом устройстве есть другая версия «{ $title }» от { $when }.
-shell-this-link-was-made-by = Эту ссылку сделала более новая версия Tiny Little Office. Перезагрузите страницу, чтобы её открыть.
-keys-this-page = Эта страница
-common-check-or-uncheck-task = Отметить задачу или снять отметку
-drawer-to-add-tiny-little-office = Чтобы добавить Tiny Little Office на главный экран: «Поделиться», затем «На экран “Домой”».
-common-too-long-for-qr-code = Слишком длинно для QR-кода: сократите документ или поделитесь короткой ссылкой.
-share-uses = Использует
-share-where = Где
-share-where-link-fits = Куда помещается ссылка
-share-any-length = любой длины
-home-n-documents-found = { $n ->
-        [one] Найден { $n } документ
-        [few] Найдено { $n } документа
-        [many] Найдено { $n } документов
-       *[other] Найдено { $n } документа
-    }
-common-n-of-count = { $n } из { $count }
-share-n-over = Больше на { $n }
-privacy-password-copied = Пароль скопирован
-diagram-guest = Гость
-outline-name-line = Назвать линию
-write-name-this-column = Назвать этот столбец
-diagram-new-idea = Новая идея
-diagram-tap-empty-space-for-person = Коснитесь пустого места для человека; коснитесь человека, чтобы писать на нём, Shift+Enter — должность под именем, Enter — к следующему; перетащите одного на другого, чтобы поместить под него.
-diagram-tap-empty-space-for-event = Коснитесь пустого места для события: напишите когда, Shift+Enter, потом что случилось; годы и даты расставляются, как были; промежуток — это полоса.
-diagram-lanes-name = Название дорожки
-diagram-when = Когда
-draw-align-center = Выравнивание: по центру
-draw-align-left = Выравнивание: по левому краю
-draw-align-right = Выравнивание: по правому краю
-diagram-tap-person-to-type-on = Коснитесь человека, чтобы писать на нём, + после имени — его партнёр, Shift+Enter — годы жизни под именем; Enter — к следующему; перетащите одного на другого, чтобы поместить под него; «Соединить» рисует пунктир между двумя.
-diagram-tap-empty-space-for-table = Коснитесь пустого места для стола; коснитесь стола или человека, чтобы писать, запятая после имени — следующий гость; перетащите человека за другой стол.
-diagram-tap-inside-circles-to-add = Коснитесь внутри кругов, чтобы добавить туда элемент, запятая после него — следующий; коснитесь названия множества, чтобы переименовать; перетащите элемент в другие круги.
-export-copy-link-that-downloads-ext = Скопировать ссылку, по которой скачивается .{ $ext }
-export-could-not-share-ext = Не удалось поделиться файлом .{ $ext }
-export-could-not-show-ext = Не удалось показать файл .{ $ext }
-export-download-ext = Скачать .{ $ext }
-export-share-ext = Поделиться файлом .{ $ext }…
-export-view-ext = Посмотреть .{ $ext }
+
+## files and zips dropped on the page (kit/file/open.ts)
+
+open-opened-name = Открыт файл { $name }
+open-that-file-is-not-words = Этот файл — не тот текст, который читает Tiny Little Office.
+open-that-file-is-too-large = Этот файл слишком велик для документа здесь.
 open-keep-them-on-this-device = Хранить их на этом устройстве
 open-nothing-is-saved-on-this = Сейчас на этом устройстве ничего не сохраняется. Храните их здесь или откройте один.
 open-first = Открыть первый
@@ -1763,3 +1752,28 @@ open-n-documents-kept = { $n ->
         [many] { $n } документов хранится
        *[other] { $n } документа хранится
     }
+
+## a document's QR code (kit/draw/qr-picture.ts)
+
+# Restored around the document: search, Find in this document, the shortcuts and the apps' keys, Mod+S, the size of
+# everything, Add to home screen, another version kept here, where the link fits, Open in another app, the QR code
+# of this document, Insert narrowed by typing, Trip presenting, a seating chart's place cards
+qr-code-of-this-document = QR-код этого документа
+
+## the keys, the shortcuts and the size of everything (kit/core/keys.ts, kit/ui/zoom.ts)
+
+keys-normal-size = Обычный размер
+keys-everything-larger = Всё крупнее
+keys-everything-smaller = Всё мельче
+keys-keep-this-document-on-device = Хранить этот документ на устройстве
+keys-show-these-shortcuts = Показать эти сочетания
+keys-this-page = Эта страница
+
+## Find in this document (kit/ui/find.ts)
+
+find-not-found = Не найдено
+
+## a menu narrowed by typing (kit/ui/menu.ts)
+
+menu-nothing-starts-q = Ничего не начинается с «{ $q }»
+menu-starting-q = Начинается с «{ $q }»

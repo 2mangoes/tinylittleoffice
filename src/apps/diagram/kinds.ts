@@ -28,9 +28,9 @@ export const thingName = (k: KindId): string =>
     org: t('diagram-person'),
     family: t('diagram-person'),
     lanes: t('diagram-step'),
-    timeline: t('cal-event'),
+    timeline: t('common-event'),
     venn: t('diagram-set'),
-    seating: t('bar-table'),
+    seating: t('common-table'),
     net: t('diagram-thing'),
   })[k];
 
@@ -42,12 +42,12 @@ export const newWords = (k: KindId, item = false): string =>
       : t('diagram-thing')
     : {
         mind: t('diagram-new-idea'),
-        org: t('sheet-name'),
-        family: t('sheet-name'),
+        org: t('common-name'),
+        family: t('common-name'),
         lanes: t('diagram-step'),
         timeline: t('diagram-when'),
         venn: t('diagram-set'),
-        seating: t('bar-table'),
+        seating: t('common-table'),
         net: t('diagram-thing'),
       }[k];
 

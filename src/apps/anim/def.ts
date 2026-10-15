@@ -44,13 +44,13 @@ export async function animWebm(doc: Doc): Promise<Uint8Array | null> {
 export default defineApp({
   id: 'anim',
   get name() {
-    return t('outline-animator');
+    return t('common-animator');
   },
   get noun() {
     return t('anim-animation');
   },
   get group() {
-    return t('draw-design');
+    return t('common-design');
   },
   icon: Clapperboard,
   get blurb() {

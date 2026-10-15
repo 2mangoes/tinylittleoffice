@@ -8,10 +8,10 @@
 ## the shell: header
 
 shell-menu = תפריט
-shell-title = כותרת
+common-title = כותרת
 # A new document of the app, and one not yet named; { $noun } is the app's noun: "New presentation".
-shell-new-noun = יצירת { $noun }
-shell-untitled-noun = { $noun } ללא שם
+common-new-noun = יצירת { $noun }
+common-untitled-noun = { $noun } ללא שם
 shell-download = הורדה
 shell-loading = טוען…
 shell-this-link-holds-something-that = בקישור הזה יש משהו שאי אפשר לקרוא. ייתכן שהוא נקטע כשהועתק.
@@ -26,15 +26,25 @@ shell-copy-link-and-go = העתקת הקישור ויציאה
 shell-turn-on-save-in-browser = הפעלת שמירה בדפדפן ושמירה כאן
 shell-go-without = יציאה בלי לשמור
 shell-save-in-browser-is-on = השמירה בדפדפן פועלת: הדפדפן הזה שומר את המסמכים שנפתחים בו. אפשר לכבות אותה בתפריט.
+shell-another-version = גרסה אחרת
+shell-kept-on-this-device = נשמר במכשיר הזה
+shell-keyboard-shortcuts = קיצורי מקלדת
+shell-nothing-to-keep-yet = עדיין אין מה לשמור
+shell-open-it = לפתוח
+shell-save-in-browser-is-off = השמירה בדפדפן כבויה: הדפדפן הזה לא שומר מסמכים. כדי לשמור אותם כאן אפשר להפעיל אותה בתפריט.
+shell-skip-to-apps = דילוג לאפליקציות
+shell-skip-to-document = דילוג למסמך
+shell-this-device-keeps-another-version = במכשיר הזה שמורה גרסה אחרת של "{ $title }", מ־{ $when }.
+shell-this-link-was-made-by = הקישור הזה נוצר בגרסה חדשה יותר של Tiny Little Office. כדי לקבל אותה צריך לטעון מחדש את העמוד.
 
 ## the home page
 
 home-blank = ריק
-home-templates = תבניות
+common-templates = תבניות
 # The button under an app's tile, naming the template list: "Start Text from"
 # The list of an app's documents kept on this device, under its tile: "Write documents"
 home-app-documents = מסמכי { $app }
-home-forget = לשכוח
+common-forget = לשכוח
 # The button that forgets one kept document: "Forget Launch notes"
 home-forget-title = לשכוח את { $title }
 # Under an app's documents, the rest folded away: "3 more"
@@ -44,11 +54,24 @@ home-aboard-project-made-with-respect = פרויקט של { $aboard }. נעשה 
 home-beta-version = גרסת בטא
 # The foot's link to the repository on GitHub
 home-email = אימייל
+home-templates-for-app = תבניות ל־{ $app }
+home-app-templates = תבניות { $app }
+home-templates-for-app-name = תבניות ל־{ $app }: { $name }
+# Offline, where the templates' file was never kept by the service worker (kit/ui/home.ts).
+home-templates-are-not-saved-in = התבניות עדיין לא שמורות בדפדפן הזה. כדי לראות אותן צריך להתחבר לאינטרנט.
+home-documents-found = מסמכים שנמצאו
+home-no-document-here-has-those = אין כאן מסמך עם המילים האלה
+home-search-your-documents = חיפוש במסמכים שלך
+home-n-documents-found = { $n ->
+        [one] נמצא מסמך אחד
+        [two] נמצאו שני מסמכים
+       *[other] נמצאו { $n } מסמכים
+    }
 
 ## the drawer (hamburger menu)
 
 drawer-apps = אפליקציות
-drawer-close = סגירה
+common-close = סגירה
 # The language select's first option: { $name } is the device's own language, named in itself and never translated ("Default: Français").
 drawer-default-name = ברירת מחדל: { $name }
 # The switch that keeps files and settings in this browser (off by default), and the line under it, on or off.
@@ -56,18 +79,18 @@ drawer-save-in-browser = שמירה בדפדפן
 drawer-what-is-this = מה זה?
 drawer-turn-on-to-save-files = יש להפעיל כדי לשמור קבצים בדפדפן.
 drawer-turn-off-to-remove-all = כיבוי מסיר את כל הקבצים וההגדרות.
-drawer-nothing-saved-in-this-browser = שום דבר לא נשמר בדפדפן הזה
-drawer-saving-in-this-browser = נשמר בדפדפן הזה
+common-nothing-saved-in-this-browser = שום דבר לא נשמר בדפדפן הזה
+common-saving-in-this-browser = נשמר בדפדפן הזה
 drawer-remove-all-files-and-settings = להסיר את כל הקבצים וההגדרות מהדפדפן הזה?
 drawer-language = שפה
-drawer-theme = ערכת נושא
+common-theme = ערכת נושא
 drawer-match-device = כמו במכשיר
 drawer-light = בהיר
 drawer-dark = כהה
 drawer-about = אודות
 # The name itself is translated too (Paul, 2026-10-10): each language says it in its own words.
 # same
-drawer-tiny-little-office = Tiny Little Office
+common-tiny-little-office = Tiny Little Office
 drawer-about-tiny-little-office = אודות Tiny Little Office
 drawer-tiny-little-office-is-experiment = Tiny Little Office הוא ניסוי של { $aboard }, חברה לאסטרטגיה דיגיטלית ו‑AI ולפיתוח תוכנה בעיר ניו יורק.
 drawer-to-reach-out-with-questions = לשאלות, { $email }.
@@ -77,6 +100,13 @@ drawer-github-repository = מאגר ה‑GitHub
 drawer-all-of-these-notes-these = כל הרשימות האלה, הציורים האלה והמשפטים האלה שנכתבו בטוש דוהים עם הזמן. רק החולף נשאר.
 drawer-eugene-ionesco-book = אז׳ן יונסקו, { $book }
 drawer-discoveries = תגליות
+drawer-documents = מסמכים
+drawer-find-app-template-or-command = חיפוש אפליקציה, תבנית או פקודה
+drawer-commands = פקודות
+drawer-nothing-by-that-name = אין שום דבר בשם הזה
+drawer-add-to-home-screen = הוספה למסך הבית
+drawer-size-of-everything = הגודל של הכול
+drawer-to-add-tiny-little-office = כדי להוסיף את Tiny Little Office למסך הבית: שיתוף, ואז הוספה למסך הבית.
 
 ## links that leave the site (kit/ui/link-guard.ts)
 
@@ -124,7 +154,7 @@ share-expires-in-n-minutes-date = התוקף פג בעוד { $n ->
     } ({ $date })
 share-opens-as-pages-to-read = נפתח כעמודים לקריאה
 share-opens-in-editor = נפתח בעורך
-share-whoever-opens-this-link-gets = כל מי שפותח את הקישור הזה מקבל עותק משלו. השינויים שלהם נשמרים בקישור שלהם, לא בשלך: אפשר לבקש שישלחו אותו בחזרה.
+common-whoever-opens-this-link-gets = כל מי שפותח את הקישור הזה מקבל עותק משלו. השינויים שלהם נשמרים בקישור שלהם, לא בשלך: אפשר לבקש שישלחו אותו בחזרה.
 share-short-link-that-expires = קישור מקוצר עם תוקף
 share-this-link-expires-in-n = תוקף הקישור הזה יפוג בעוד { $n ->
         [one] יום אחד
@@ -161,9 +191,9 @@ share-display-link = קישור תצוגה
 share-opens = נפתח
 share-link-copied = הקישור הועתק
 share-could-not-copy = ההעתקה נכשלה
-share-share = שיתוף…
-share-qr-code = קוד QR
-share-qr-code-of-this-document = קוד QR של המסמך הזה
+common-share = שיתוף…
+common-qr-code = קוד QR
+common-qr-code-of-this-document = קוד QR של המסמך הזה
 share-this-document-is-n-bytes = המסמך הזה הוא { $n } בתים; קוד ה־QR הגדול ביותר מכיל { $max }. אחרי קיצור של { $over } בתים הוא ייכנס.
 share-this-document-is-n-characters = המסמך הזה הוא { $n } תווים; קישור מקוצר מכיל { $max }. אחרי קיצור של { $over } הוא ייכנס.
 share-expires-after = התוקף פג אחרי
@@ -179,8 +209,36 @@ share-could-not-shorten-link = לא הצלחנו לקצר את הקישור.
 share-this-document-is-too-long = המסמך הזה ארוך מדי בשביל קישור מקוצר.
 share-up-to-hundred-links-day = עד מאה קישורים ביום מכל כתובת.
 share-remove = הסרה
-share-link = קישור
-share-short-link = קישור מקוצר
+common-link = קישור
+common-short-link = קישור מקוצר
+share-new-noun-date-n = { $noun } מ־{ $date } #{ $n }
+# Files, compare, posting and embedding: the agent and sharing surface.
+share-mastodon-server-like-mastodon-social = שרת Mastodon, כמו mastodon.social
+share-change = שינוי
+share-copy-embed-code = העתקת קוד הטמעה
+share-copy-show-link = העתקת קישור למצגת
+share-embed = הטמעה
+share-embed-code-copied = קוד ההטמעה הועתק
+share-opens-deck-already-presenting = פותח את המצגת כשהיא כבר מוצגת.
+share-post = פרסום
+share-post-link = פרסום הקישור
+share-show-preview-of-first-page = הצגת תצוגה מקדימה של העמוד הראשון
+share-picture-of-first-page-and = תמונה של העמוד הראשון והכותרת נשמרות קריאות בשרת שלנו למשך חודש, כדי שהרשת החברתית תוכל לשלוף אותן. המסמך עצמו לא.
+share-shared-without-preview-reason = שותף בלי תצוגה מקדימה: { $reason }
+share-making-preview = מכין את התצוגה המקדימה…
+share-page-could-not-be-drawn = לא הצלחנו לצייר את העמוד
+share-picture-is-over-400-kb = התמונה גדולה מ־400KB
+share-server-could-not-be-reached = לא הצלחנו להגיע לשרת
+share-hundred-previews-day-from-one = מאה תצוגות מקדימות ביום מכל כתובת
+share-server-refused-picture = השרת דחה את התמונה
+share-pages-in-frame-on-another = העמודים, במסגרת באתר אחר, עם קישור לפתוח אותם כאן.
+share-your-mastodon-server = שרת ה־Mastodon שלך
+share-left = שמאל
+share-uses = שימושים
+share-where = איפה
+share-where-link-fits = איפה הקישור נכנס
+share-any-length = כל אורך
+share-n-over = חריגה של { $n }
 
 ## privacy (kit/share/privacy.ts, kit/ui/privacy-dialog.ts): the password, what the device holds
 
@@ -193,12 +251,12 @@ privacy-forget-everything = לשכוח הכול
 privacy-preview-sent-with-link-to = תצוגה מקדימה שנשלחת עם קישור לרשת חברתית היא תמונה של העמוד הראשון, הכותרת והמילים הראשונות, שאפשר לקרוא בשרת שלנו במשך חודש. המסמך עצמו אף פעם לא מגיע לשם.
 privacy-forget-everything-this-site-keeps = לשכוח את כל מה שהאתר הזה שומר כאן, ולא לשמור כלום מעכשיו? המסמכים עצמם חיים בקישורים שלהם.
 privacy-locked = נעול
-privacy-locked-document = מסמך נעול
+common-locked-document = מסמך נעול
 privacy-new-password = סיסמה חדשה
 privacy-no-password = בלי סיסמה
 privacy-none = ללא
 privacy-opening = פותח…
-privacy-password = סיסמה
+common-password = סיסמה
 privacy-password-removed = הסיסמה הוסרה
 privacy-password-set-link-holds-only = הסיסמה הוגדרה: הקישור מכיל רק טקסט מוצפן
 privacy-password-ellipsis = סיסמה…
@@ -215,17 +273,17 @@ privacy-short-links-made-here-until = הקישורים המקוצרים שנוצ
 privacy-their-names-and-links-for = השמות והקישורים שלהם, בשביל דף הבית.
 privacy-theme-lifetime-of-short-links = ערכת הנושא, תוקף הקישורים המקוצרים.
 privacy-this-document-has-password-link = למסמך הזה יש סיסמה. הקישור, וכל קישור מקוצר שנוצר ממנו, מכילים רק טקסט מוצפן.
-privacy-this-document-is-locked = המסמך הזה נעול
+common-this-document-is-locked = המסמך הזה נעול
 privacy-this-document-is-locked-with = המסמך הזה נעול בסיסמה.
 privacy-unlock = פתיחת הנעילה
-privacy-unlock-ellipsis = פתיחת הנעילה…
+common-unlock-ellipsis = פתיחת הנעילה…
 privacy-what-this-device-holds = מה שמור במכשיר הזה
 privacy-your-documents = המסמכים שלך
 privacy-your-browsers-history = ההיסטוריה של הדפדפן
 privacy-every-document-opened-here-in = כל מסמך שנפתח כאן, במלואו, אלא אם יש לו סיסמה.
 privacy-not-ours-to-clear = לא בידינו למחוק
 privacy-by-name = מאת { $name }
-privacy-n-documents = { $n ->
+common-n-documents = { $n ->
         [one] מסמך אחד
         [two] שני מסמכים
        *[other] { $n } מסמכים
@@ -238,11 +296,12 @@ privacy-n-links = { $n ->
 privacy-n-set = { $n } הוגדרו
 privacy-copy-this-and-send-it = כדאי להעתיק את זה ולשלוח בדרך אחרת, לא עם הקישור. אי אפשר להציג את זה שוב.
 privacy-make-another = ליצור עוד אחת
+privacy-password-copied = הסיסמה הועתקה
 
 ## a document locked with a password, placed inside another (kit/share/locked.ts, kit/ui/locked-doc.ts)
 
 # The card drawn where it sits; { $app } is the app's name: "A Spreadsheet document, locked with a password".
-locked-with-password = נעול בסיסמה
+common-with-password = נעול בסיסמה
 locked-app-document-locked-with-password = מסמך { $app }, נעול בסיסמה
 locked-with-password-unlock = נעול בסיסמה. פתיחת הנעילה…
 locked-document-locked-with-password = מסמך נעול בסיסמה
@@ -269,24 +328,37 @@ common-chosen-tasks = משימות שנבחרו
 common-open = פתיחה
 common-task = משימה
 common-tasks = משימות
+common-find-app-doc-template-or = חיפוש אפליקציה, מסמך, תבנית או פקודה
+common-in-this-document = חיפוש במסמך הזה
+common-indent-or-bring-out-in = הגדלה או הקטנה של כניסה ברשימה; התא הבא ברשת
+common-move-selected-items-up-or = הזזת הפריטים שנבחרו למעלה או למטה
+common-nudge-shapes-in-hand = הזזה קלה של הצורות שנבחרו
+common-select-all-words-of-box = בחירת הכול: המילים של התיבה, ואז הכול
+common-back-to-words = חזרה למילים
+common-extend-selection = הרחבת הבחירה
+common-next-or-one-before = הבא או הקודם
+common-step-out-close-collapse-let = יציאה: סגירה, קיפול, שחרור
+common-check-or-uncheck-task = סימון או ביטול סימון של משימה
+common-too-long-for-qr-code = ארוך מדי בשביל קוד QR: אפשר לקצר את המסמך, או לשתף קישור מקוצר.
+common-n-of-count = { $n } מתוך { $count }
 
 ## downloads
 
 download-print = הדפסה
-download-print-or-save-as-pdf = הדפסה, או שמירה כ־PDF
+common-print-or-save-as-pdf = הדפסה, או שמירה כ־PDF
 download-picture-png = תמונה (PNG)
-download-web-page-html = עמוד אינטרנט (HTML)
+common-web-page-html = עמוד אינטרנט (HTML)
 download-text-tlo = טקסט (TLO)
 download-data-json = נתונים (JSON)
 download-downloaded-name = הורד: { $name }
 download-failed = ההורדה נכשלה
-download-open-in-tiny-little-office = פתיחה ב־Tiny Little Office
+common-open-in-tiny-little-office = פתיחה ב־Tiny Little Office
 # Under a document cut off at a slide's foot: a link that opens it whole, in its own app.
 download-see-more = ראו עוד
 
 ## the bar, shared by every app
 
-bar-insert = הוספה
+common-insert = הוספה
 bar-bold = מודגש
 bar-italic = נטוי
 bar-underline = קו תחתון
@@ -295,21 +367,21 @@ bar-highlight = סימון
 bar-heading = כותרת
 bar-bulleted-list = רשימת תבליטים
 bar-numbered-list = רשימה ממוספרת
-bar-table = טבלה
+common-table = טבלה
 bar-footnote = הערת שוליים
-bar-date = תאריך
+common-date = תאריך
 bar-undo = ביטול פעולה
 bar-redo = ביצוע חוזר
-bar-today = היום
+common-today = היום
 
 ## the editor (<to-text>): chips, cards and the bubbles
 
 # A footnote's mark, and its words where the notes are drawn, by its number: spoken.
-editor-footnote-n = הערת שוליים { $n }
+common-footnote-n = הערת שוליים { $n }
 # A card standing for another document held in this one, of a kind no app here reads: "abc document".
-editor-app-document = מסמך { $app }
+common-app-document = מסמך { $app }
 # The same card when its app is known; { $noun } is the app's noun: "A spreadsheet".
-editor-noun = { $noun }
+common-noun = { $noun }
 editor-code = קוד
 editor-connection = חיבור
 editor-n-rows = { $n ->
@@ -318,7 +390,7 @@ editor-n-rows = { $n ->
        *[other] { $n } שורות
     }
 editor-notes-words = תוכן ההערה
-editor-done = סיום
+common-done = סיום
 editor-address = כתובת
 editor-not-address = זו לא כתובת
 editor-set-link = הגדרת קישור
@@ -326,10 +398,14 @@ editor-open-link = פתיחת קישור
 editor-change-link = שינוי קישור
 editor-remove-link = הסרת קישור
 # The selection bubble's name: what can be done to the words selected.
-editor-format = עיצוב
+common-format = עיצוב
 # A task item's state, said before its words by a screen reader: "done, Buy milk"; "not done, Call the plumber".
 editor-done-lowercase = בוצע
 editor-not-done = לא בוצע
+editor-bold-italic-and-links = מודגש, נטוי וקישורים
+editor-one-of-words-column-holds = אחת מהמילים שבעמודה, או מילה חדשה
+editor-option = אפשרות
+editor-this-browser-lets-page-paste = הדפדפן הזה מאפשר לעמוד להדביק רק מהמקלדת: אפשר להשתמש בהדבקה שלו.
 
 ## the example in the kit's own documentation
 
@@ -341,18 +417,18 @@ example-n-slides = { $n ->
 
 ## the Word Processor
 
-write-word-processor = מעבד תמלילים
+common-word-processor = מעבד תמלילים
 # What one of its documents is called, in running text: "Untitled document"; each app's noun is in its section.
 write-document-lowercase = מסמך
 # The group heading the Word Processor sits under on the home page.
-write-words = מילים
+common-words = מילים
 write-words-on-page-headings-lists = מילים על דף: כותרות, רשימות, קישורים והערות, טבלה שמחשבת סכומים, להדפסה על Letter או A4.
 write-document = מסמך
 write-here = כותבים כאן.
 write-subheading = כותרת משנה
 write-paragraph = פסקה
-write-bring-out = הקטנת כניסה
-write-indent = הגדלת כניסה
+common-bring-out = הקטנת כניסה
+common-indent = הגדלת כניסה
 write-align = יישור
 write-align-left = יישור לשמאל
 write-center = מרכוז
@@ -375,11 +451,11 @@ write-narrow-headline-two-columns = כותרת צרה, שני טורים
 write-horizontal-rule = קו אופקי
 # Insert ▾'s rule in a document: what follows starts the next page.
 write-page-break = מעבר עמוד
-write-ok = אישור
+common-ok = אישור
 write-this-card = הכרטיס הזה
 write-open-in-app = פתיחה ב־{ $app }
 write-locked-worked-out-for-you = נעול: מחושב בשבילך
-write-footnotes = הערות שוליים
+common-footnotes = הערות שוליים
 write-back-to-footnote-n-in = חזרה להערת שוליים { $n } בטקסט
 write-back-to-text = חזרה לטקסט
 write-n-words = { $n ->
@@ -390,7 +466,7 @@ write-n-words = { $n ->
 # same
 write-word-docx = Word (DOCX)
 # same
-write-markdown = Markdown
+common-markdown = Markdown
 # same
 write-rich-text-rtf = Rich Text (RTF)
 # A table in the text: its heads, its handle, its column menu.
@@ -454,6 +530,12 @@ write-petition = עצומה
 write-what-you-ask-why-and = מה מבקשים, למה, ושמות של מי שמסכים.
 write-terms-of-service = תנאי שימוש
 write-small-businesss-terms-in-plain = התנאים של עסק קטן במילים פשוטות: הזמנה, מחירים, מפתחות, מה אם, סיום.
+write-open-as-outline = פתיחה כראשי פרקים
+# same
+write-a4 = A4
+# same
+write-letter = Letter
+write-name-this-column = מתן שם לעמודה הזו
 
 ## Insert's dialog (kit/ui/insert-dialogs.ts): Tiny Little Office Doc
 
@@ -462,13 +544,13 @@ insert-opening-short-link = פותח את הקישור המקוצר…
 insert-paste-link-of-another-tiny = אפשר להדביק קישור של מסמך אחר מ־Tiny Little Office, ארוך או מקוצר: העמוד הראשון שלו יופיע כאן.
 insert-this-is-not-tiny-little = זה לא קישור של Tiny Little Office, או שהתוקף שלו פג.
 insert-tiny-little-office-doc = מסמך Tiny Little Office
-insert-tiny-little-office-doc-ellipsis = מסמך Tiny Little Office…
+common-tiny-little-office-doc-ellipsis = מסמך Tiny Little Office…
 # Insert ▾'s group of the apps a new document can be made in, inside this one.
-insert-new-document = מסמך חדש
+common-new-document = מסמך חדש
 
 ## another document edited in place (kit/ui/doc-dialog.ts); a table's size is Rows × Columns
 
-doc-cancel = ביטול
+common-cancel = ביטול
 doc-rows = שורות
 
 ## charts (kit/draw/chart.ts)
@@ -477,7 +559,7 @@ chart-empty-chart = תרשים ריק
 chart-bars = עמודות
 chart-flows-sankey = זרימות (Sankey)
 chart-flows-list = זרימות: { $list }.
-chart-lines = קווים
+common-lines = קווים
 chart-nothing-to-chart-yet = עדיין אין מה להציג בתרשים
 chart-nothing-to-chart-yet-rows = עדיין אין מה להציג בתרשים: שורות של מאת | אל | סכום
 chart-pie = עוגה
@@ -491,10 +573,10 @@ sheet-fit-this-column-to-its = התאמת העמודה הזו לטקסט שלה
 sheet-cells-in-hand = התאים שנבחרו
 sheet-check-ref = בדיקת { $ref }
 # The column type that holds words as typed.
-sheet-text = טקסט
-sheet-spreadsheet = גיליון אלקטרוני
+common-text = טקסט
+common-spreadsheet = גיליון אלקטרוני
 sheet-spreadsheet-lowercase = גיליון אלקטרוני
-sheet-numbers = מספרים
+common-numbers = מספרים
 sheet-spreadsheet-with-formulas-named-cells = גיליון אלקטרוני עם נוסחאות, תאים עם שמות ותרשימים; שלוש עמודות בהתחלה, ועוד לפי הצורך.
 sheet-budget = תקציב
 sheet-planned-against-actual-line-each = מתוכנן מול בפועל, שורה לכל דבר, עם ההפרש והסכומים.
@@ -559,39 +641,39 @@ sheet-eight-teams-single-elimination-each = שמונה קבוצות, בהדחה:
 # same
 sheet-excel-xlsx = Excel (XLSX)
 # same
-sheet-csv = CSV
+common-csv = CSV
 sheet-chart-svg = תרשים (SVG)
 sheet-chart-png = תרשים (PNG)
 sheet-empty-sheet = גיליון ריק
 sheet-n-of-max-shown = (מוצגים { $n } מתוך { $max })
 sheet-50-more-rows = עוד 50 שורות
-sheet-add-column = הוספת עמודה
-sheet-add-column-after = הוספת עמודה אחרי
+common-add-column = הוספת עמודה
+common-add-column-after = הוספת עמודה אחרי
 sheet-chart = תרשים
 sheet-chart-of-table = תרשים של הטבלה
 sheet-checkbox = תיבת סימון
 sheet-column-after = עמודה אחרי
-sheet-column-c = עמודה { $c }
-sheet-column-c-holds = עמודה { $c } מכילה
+common-column-c = עמודה { $c }
+common-column-c-holds = עמודה { $c } מכילה
 sheet-column-c-type-what-it = עמודה { $c }: { $type }. מה היא מכילה, מיון לפיה, הוספה או הסרה של עמודה
-sheet-columns = עמודות
-sheet-delete-which = מחיקת { $which }
-sheet-drag-to-fill = גרירה למילוי
+common-columns = עמודות
+common-delete-which = מחיקת { $which }
+common-drag-to-fill = גרירה למילוי
 sheet-abc-or-123-for-this = ABC או 123, לעמודה הזו
 sheet-drag-to-resize-double-click = גרירה לשינוי גודל, לחיצה כפולה להתאמה
 sheet-fill-down-from-top-row = מילוי למטה מהשורה העליונה
 sheet-fill-right-from-first-column = מילוי ימינה מהעמודה הראשונה
-sheet-fill-drag-to-carry-these = מילוי: גרירה כדי להמשיך את התאים האלה
+common-fill-drag-to-carry-these = מילוי: גרירה כדי להמשיך את התאים האלה
 sheet-fit-columns-to-page = התאמת העמודות לעמוד
 sheet-formula = נוסחה
 sheet-function = פונקציה
 sheet-high-to-low = מהגבוה לנמוך
-sheet-insert-n-rows-above = הוספת { $n ->
+common-insert-n-rows-above = הוספת { $n ->
         [one] שורה אחת
         [two] שתי שורות
        *[other] { $n } שורות
     } מעל
-sheet-insert-n-rows-below = הוספת { $n ->
+common-insert-n-rows-below = הוספת { $n ->
         [one] שורה אחת
         [two] שתי שורות
        *[other] { $n } שורות
@@ -601,8 +683,8 @@ sheet-lock-these-cells-so-reader = נעילת התאים האלה, כדי שהק
 sheet-locked-part-of-model = נעול: חלק מהמודל
 sheet-low-to-high = מהנמוך לגבוה
 sheet-money = כסף
-sheet-name = שם
-sheet-name-of-column-c = השם של עמודה { $c }
+common-name = שם
+common-name-of-column-c = השם של עמודה { $c }
 sheet-names-cell-to-its-right = נותן שם לתא שלידו
 # A money column's currency (Money picked in a column's menu): the field's hint, and what it says of words it cannot read.
 sheet-symbol-like-or-code-like = סמל, כמו $, או קוד, כמו USD. ריק הוא המטבע של המסמך.
@@ -612,15 +694,15 @@ sheet-number = מספר
 sheet-open-link = פתיחת { $link }
 sheet-opens-when-clicked = נפתח בלחיצה
 sheet-percent = אחוז
-sheet-remove-this-column = הסרת העמודה הזו
+common-remove-this-column = הסרת העמודה הזו
 sheet-resize-column-c = שינוי גודל עמודה { $c }
 sheet-rich-text = טקסט עשיר
 sheet-row-above = שורה מעל
 sheet-row-below = שורה מתחת
-sheet-row-n = שורה { $n }
-sheet-row-n-lowercase = שורה { $n }
-sheet-row-n-insert-or-delete = שורה { $n }: הוספה או מחיקה של שורות
-sheet-rows-b = שורות { $a }–{ $b }
+common-row-n = שורה { $n }
+common-row-n-lowercase = שורה { $n }
+common-row-n-insert-or-delete = שורה { $n }: הוספה או מחיקה של שורות
+common-rows-b = שורות { $a }–{ $b }
 sheet-selected-cells = תאים שנבחרו
 sheet-show-all-text = הצגת כל הטקסט
 sheet-shown-as-typed = מוצג כפי שהוקלד
@@ -631,22 +713,37 @@ sheet-is-full-its-last-rows = הגיליון מלא: יש משהו בשורות 
 sheet-three-at-least = שלוש לפחות
 sheet-unlock-these-cells = ביטול נעילת התאים האלה
 sheet-what-it-holds-sort-columns = מה היא מכילה; מיון; עמודות
+# The Spreadsheet: any column removed, the Option column, rich cells, a chart put in from Insert.
+sheet-keeps-one-column = בגיליון נשארת עמודה אחת
+sheet-choices = אפשרויות
+sheet-choices-for-ref = אפשרויות ל־{ $ref }
+sheet-has-one = בגיליון יש אחת
+sheet-edit-cell-caret-at-its = עריכת התא, עם הסמן בסופו
+sheet-put-back-what-cell-held = החזרת מה שהיה בתא
+sheet-put-dated-rows-on-calendar = הצבת השורות עם תאריכים בלוח שנה
 
 ## downloads: hand-offs to another app (kit/file/exports.ts)
 
 export-open-in = פתיחה ב־
+export-pdf-file = קובץ PDF
+export-copy-link-that-downloads-ext = העתקת קישור שמוריד את ה־.{ $ext }
+export-could-not-share-ext = השיתוף של ה־.{ $ext } נכשל
+export-could-not-show-ext = ההצגה של ה־.{ $ext } נכשלה
+export-download-ext = הורדת ה־.{ $ext }
+export-share-ext = שיתוף ה־.{ $ext }…
+export-view-ext = הצגת ה־.{ $ext }
 
 ## the icon library (kit/ui/icons-picker.ts)
 
-icons-icon = סמל
+common-icon = סמל
 icons-favorites = מועדפים
 icons-search-icons = חיפוש סמלים
 icons-suggested = מוצעים
-icons-icons = סמלים
+common-icons = סמלים
 icons-no-icons-match-q = אין סמלים שמתאימים ל־"{ $q }".
 icons-search-by-name-or-by = אפשר לחפש לפי שם או לפי משמעות ("כסף", "מזג אוויר", "ai") כדי למצוא כל אחד מ־{ $n } הסמלים.
 icons-no-icon = בלי סמל
-icons-icon-or-emoji = סמל או אימוג'י
+common-icon-or-emoji = סמל או אימוג'י
 icons-search-icons-and-emoji = חיפוש סמלים ואימוג'י
 icons-or-emoji = סמלים או אימוג'י
 icons-emoji = אימוג'י
@@ -666,9 +763,9 @@ icons-flags = דגלים
 
 # The group heading the Drawing Tool sits under on the home page: Design. 'Draw' is the Animator's mode for drawing.
 draw-draw = ציור
-draw-drawing-tool = כלי ציור
+common-drawing-tool = כלי ציור
 draw-drawing = ציור
-draw-design = עיצוב
+common-design = עיצוב
 draw-boxes-arrows-icons-and-labels = תיבות, חצים, סמלים ותוויות על רשת; או פיקסל ארט, שיכול להפוך לאריח רקע.
 draw-request-flow = זרימת בקשה
 draw-browser-asks-server-which-reads = דפדפן שואל שרת, שקורא את הנתונים: תיבות שמחוברות בחצים.
@@ -686,7 +783,7 @@ draw-phone-screen-sketched-in-boxes = מסך של טלפון משורטט בתי
 draw-rosette-with-ribbons-for-volunteer = רוזטה עם סרטים למתנדב או למתנדבת של השנה, להדפיס, לגזור ולהצמיד.
 draw-block-party-from-above-stage = מסיבת רחוב מלמעלה: הבמה, הדוכנים, עזרה ראשונה ואיפה נפגשים אם הולכים לאיבוד.
 draw-badge = תג
-draw-birthday-card = כרטיס יום הולדת
+common-birthday-card = כרטיס יום הולדת
 draw-can-we-refund-it-stores = אפשר לקבל החזר? מדיניות ההחזרות של חנות כשאלות, תשובות ומה עושים.
 draw-event-map = מפת אירוע
 draw-four-16-by-16-icons = ארבעה סמלים של 16 על 16 על רשת אחת, שמש, ענן, גשם וסערה, להעתקה לתחזית או לכפתור.
@@ -700,7 +797,7 @@ draw-three-ideas-for-coffee-roasters = שלושה רעיונות לסמל של �
 draw-weather-icons = סמלי מזג אוויר
 draw-what-happens-to-package-from = מה קורה לחבילה מרגע שקנו אותה: תהליך בשלבים, עם סמלים וחיבורים.
 draw-wireframe = שלד מסך
-draw-picture-svg = תמונה (SVG)
+common-picture-svg = תמונה (SVG)
 draw-background-tile-svg = אריח רקע (SVG)
 draw-background-tile-png = אריח רקע (PNG)
 draw-animate-this-drawing = אנימציה לציור הזה
@@ -734,14 +831,14 @@ draw-rounded-box = תיבה מעוגלת
 draw-hexagon = משושה
 draw-parallelogram = מקבילית
 draw-cylinder = גליל
-draw-note = פתק
-draw-black = שחור
-draw-red = אדום
-draw-orange = כתום
-draw-green = ירוק
-draw-blue = כחול
-draw-purple = סגול
-draw-indigo = אינדיגו
+common-note = פתק
+common-black = שחור
+common-red = אדום
+common-orange = כתום
+common-green = ירוק
+common-blue = כחול
+common-purple = סגול
+common-indigo = אינדיגו
 draw-yellow = צהוב
 draw-sky = תכלת
 draw-pink = ורוד
@@ -757,13 +854,13 @@ draw-no-fill = בלי מילוי
 draw-fill = מילוי
 draw-bring-to-front = הבאה לחזית
 draw-send-to-back = שליחה לרקע
-draw-duplicate = שכפול
-draw-edit = עריכה
-draw-delete = מחיקה
+common-duplicate = שכפול
+common-edit = עריכה
+common-delete = מחיקה
 draw-put-icon-on-this-shape = הוספת סמל לצורה הזו
 draw-place-icon = הצבת סמל
-draw-zoom-in = התקרבות
-draw-zoom-out = התרחקות
+common-zoom-in = התקרבות
+common-zoom-out = התרחקות
 # same
 draw-alt = Alt
 draw-alt-text = טקסט חלופי
@@ -793,7 +890,7 @@ draw-as-repeating-background = כרקע שחוזר על עצמו
 # The contextual bar under a shape, and its words typed on it.
 draw-dashed-line = קו מקווקו
 draw-dotted-line = קו מנוקד
-draw-edit-words = עריכת המילים
+common-edit-words = עריכת המילים
 draw-extra-large-text = טקסט גדול מאוד
 draw-gray-fill = מילוי אפור
 # same
@@ -818,6 +915,10 @@ draw-drawing-canvas-v-selects-r = משטח ציור. V בוחר; R, E, D, L, A, 
 draw-tap-shape-to-select-it = הקשה על צורה בוחרת אותה, או גרירה סביב צורות כדי לבחור אותן; בוחרים כלי כדי לצייר.
 draw-rotate-left = סיבוב שמאלה
 draw-rotate-right = סיבוב ימינה
+draw-pixels-n-n = פיקסלים { $n }×{ $n }
+draw-align-center = יישור: מרכז
+draw-align-left = יישור: שמאל
+draw-align-right = יישור: ימין
 
 ## the Animator
 
@@ -874,7 +975,7 @@ anim-pixel-art-is-made-in = פיקסל ארט נוצר בכלי ציור; כלי
 anim-rainbow = קשת
 anim-remove-this-key = הסרת המפתח הזה
 anim-shadow = צל
-anim-size = גודל
+common-size = גודל
 anim-spin = סיבוב
 anim-stage-alt-arrow-keys-move = במה: { $alt }. מקשי החצים מזיזים את הצורה שנבחרה (או את הזמן), פסיק ונקודה עוברים פריים, רווח מנגן, K שומר מפתח.
 anim-shapes-in-hand = הצורות שנבחרו
@@ -908,6 +1009,10 @@ anim-turns-shape-around-in-plane = מסובב את הצורה במישור הב�
 anim-which-shape-is-in-front = איזו צורה מלפנים: צורה קרובה מצוירת מעל צורה רחוקה, ורחוקה קצת עמומה יותר. העומק אף פעם לא משנה את הגודל.
 anim-n-times = { $n } פעמים
 anim-s-s = { $s } שנ׳
+anim-frame-back-frame-on = פריים אחורה, פריים קדימה
+anim-nudge-shapes-in-hand-with = הזזה קלה של הצורות שנבחרו; בלי צורות, מעבר פריים
+anim-play-or-pause = ניגון או השהיה
+anim-first-frame-last = הפריים הראשון, האחרון
 
 ## the Outliner
 
@@ -915,26 +1020,26 @@ anim-s-s = { $s } שנ׳
 outline-named-label = , בשם "{ $label }"
 outline-book = ספר
 outline-decision = החלטה
-outline-talk = הרצאה
+common-talk = הרצאה
 outline-empty-outline = ראשי פרקים ריקים
 outline-outliner-ideas-under-ideas-folded = עורך ראשי פרקים: רעיונות בתוך רעיונות, מקופלים ופתוחים, מוזזים ומחוברים; אותו עץ שמצגת או מפת חשיבה קוראים.
 outline-arrow-from-from-to-to = חץ מ־{ $from } אל { $to }
 outline-arrows-both-ways = חצים לשני הכיוונים
 outline-as-page = כעמוד
-outline-calculator = מחשבון
-outline-calendar = לוח שנה
+common-calculator = מחשבון
+common-calendar = לוח שנה
 outline-cancel-connecting = ביטול החיבור
 outline-change-it = לשנות
-outline-chosen-items = פריטים שנבחרו
+common-chosen-items = פריטים שנבחרו
 outline-connect = חיבור
 outline-connect-from-words = חיבור מ־"{ $words }"
 outline-connect-from-to-to = חיבור "{ $from }" אל "{ $to }"
 outline-connection-from-from-to-to = חיבור מ־{ $from } אל { $to }
-outline-connections = חיבורים
-outline-copy = העתקה
-outline-presentation-builder = בונה מצגות
-outline-diagram-maker = בונה דיאגרמות
-outline-drag-to-move = גרירה להזזה
+common-connections = חיבורים
+common-copy = העתקה
+common-presentation-builder = בונה מצגות
+common-diagram-maker = בונה דיאגרמות
+common-drag-to-move = גרירה להזזה
 outline-draw-as-mind-map = ציור כמפת חשיבה
 outline-draw-as-network = ציור כרשת
 outline-draw-as-org-chart = ציור כתרשים ארגוני
@@ -945,24 +1050,24 @@ outline-fold-all = קיפול הכול
 outline-item = פריט
 outline-item-n = פריט { $n }
 outline-kind-of-line = סוג הקו
-outline-launch-plan = תוכנית השקה
+common-launch-plan = תוכנית השקה
 outline-line-from-from-to-to = קו מ־{ $from } אל { $to }
 outline-line-named-label-change-it = קו בשם "{ $label }": לשנות
-outline-animator = כלי אנימציה
-outline-move-down = הזזה למטה
+common-animator = כלי אנימציה
+common-move-down = הזזה למטה
 outline-move-this-item-drag-it = הזזת הפריט הזה: גרירה אל פריט אחר
-outline-move-up = הזזה למעלה
+common-move-up = הזזה למעלה
 outline-name-of-line = השם של הקו
 outline-numbered = ממוספר
 outline-opml-for-outliners = OPML (לעורכי ראשי פרקים)
-outline-open-in-new-tab = פתיחה בכרטיסייה חדשה
-outline-outline = ראשי פרקים
+common-open-in-new-tab = פתיחה בכרטיסייה חדשה
+common-outline = ראשי פרקים
 outline-outliner = עורך ראשי פרקים
 outline-outline-lowercase = ראשי פרקים
-outline-paste = הדבקה
+common-paste = הדבקה
 outline-plain-line = קו פשוט
 outline-plain-text = טקסט פשוט
-outline-show-as-slides = הצגה כשקופיות
+common-show-as-slides = הצגה כשקופיות
 outline-show-as-outline = הצגה כראשי פרקים
 outline-take-away-connection-from-from = הסרת החיבור מ־{ $from } אל { $to }
 outline-take-it-away = להסיר
@@ -970,7 +1075,7 @@ outline-take-connection-away = הסרת החיבור
 outline-tap-item-to-connect-from = הקשה על הפריט שממנו מחברים.
 outline-tap-item-to-connect-words = הקשה על הפריט שאליו מחברים את "{ $words }".
 outline-question-options-under-it-and = השאלה, האפשרויות מתחתיה, ולכל אחת מה בעד ומה נגד.
-outline-trip-planner = מתכנן טיולים
+common-trip-planner = מתכנן טיולים
 outline-twenty-minutes-in-three-parts = עשרים דקות בשלושה חלקים: הבעיה, הרעיון, מה זה אומר; שקופית לכל פריט עליון כשמציגים כמצגת.
 outline-unfold-all = פתיחת הכול
 outline-unfold-n-inside = פתיחה, { $n ->
@@ -978,7 +1083,7 @@ outline-unfold-n-inside = פתיחה, { $n ->
         [two] שניים בפנים
        *[other] { $n } בפנים
     }
-outline-untitled = ללא שם
+common-untitled = ללא שם
 outline-view-as = תצוגה בתור
 outline-zoomed-in-on = בהתקרבות על
 outline-a-plain-line = קו פשוט
@@ -1012,6 +1117,9 @@ outline-question-method-budget-that-adds = השאלה, השיטה, תקציב ש
 outline-three-generations-and-next-each = שלושה דורות והדור הבא, כל אחד עם השנים שלו, מצויר כעץ משפחה מהתפריט.
 outline-troubleshooting = פתרון תקלות
 outline-who-works-for-whom-at = מי עובד אצל מי במאפייה של תשעה, כל אחד עם התפקיד שלו, מצויר כתרשים ארגוני מהתפריט.
+outline-pdf-sections-and-bullets = PDF: חלקים ותבליטים
+outline-fold-unfold = קיפול, פתיחה
+outline-name-line = מתן שם לקו
 
 ## the Presentation Builder
 
@@ -1057,7 +1165,7 @@ deck-bullets = תבליטים
 deck-two-columns = שני טורים
 deck-big-icon = סמל גדול
 deck-fade = דהייה
-deck-cut = חיתוך
+common-cut = חיתוך
 deck-slide = החלקה
 deck-zoom = זום
 deck-zine = זין
@@ -1083,12 +1191,12 @@ deck-fun = כיף
 deck-themes-color = הצבע של ערכת העיצוב
 
 # The bar
-deck-present = הצגה
+common-present = הצגה
 deck-see-sheets-to-print = הגיליונות להדפסה
 deck-back-to-pages = חזרה לעמודים
 deck-headline = כותרת ראשית
 deck-layout-layout = פריסה: { $layout }
-deck-look-theme = מראה: { $theme }
+common-look-theme = מראה: { $theme }
 deck-transition-transition = מעבר: { $transition }
 deck-format-format = פורמט: { $format }
 deck-printing = הדפסה
@@ -1116,11 +1224,11 @@ deck-big-icon-page = עמוד סמל גדול
 deck-four-more-pages = עוד ארבעה עמודים
 deck-on-slide = בשקופית
 deck-on-page = בעמוד
-deck-pages = עמודים
+common-pages = עמודים
 
 # The canvas
 deck-add-icon = הוספת סמל
-deck-change-icon = החלפת הסמל
+common-change-icon = החלפת הסמל
 deck-pick-icon = בחירת סמל
 deck-left-column = טור שמאלי
 deck-right-column = טור ימני
@@ -1139,7 +1247,7 @@ deck-remove-from-slide = הסרה מהשקופית
 deck-slide-n = שקופית { $n }
 deck-front-cover = כריכה קדמית
 deck-back-cover = כריכה אחורית
-deck-page-n = עמוד { $n }
+common-page-n = עמוד { $n }
 deck-front = חזית
 deck-inside-left = פנים שמאל
 deck-inside-middle = פנים אמצע
@@ -1163,11 +1271,11 @@ deck-print-it-on-letter-paper-at-actual-size-cut-along-dashes-six-badges-sheet =
 
 # Presenting, and the closing slide
 deck-presentation = מצגת
-deck-previous = הקודם
-deck-next = הבא
-deck-stop-presenting = סיום ההצגה
+common-previous = הקודם
+common-next = הבא
+common-stop-presenting = סיום ההצגה
 deck-slide-n-of-total = שקופית { $n } מתוך { $total }
-deck-notes = הערות
+common-notes = הערות
 deck-n-hides-them = N מסתיר אותן
 deck-take-this-deck-home = לקחת את המצגת הביתה
 deck-take-this-deck-home-title = לקחת את המצגת הביתה: { $title }
@@ -1193,6 +1301,12 @@ deck-trifold-brochure-six-panels-on = עלון מקופל לשלושה: שש מ�
 deck-mini-comic-panels-with-picture = מיני קומיקס: משבצות עם תמונה, בועת דיבור וכיתוב, מקופל מגיליון אחד.
 deck-poster-or-flyer-headline-and = פוסטר או פלאייר: כותרת ראשית וכמה שורות, גדול ככל שעמוד אחד מאפשר.
 deck-name-badges-for-meetup-one = תגי שם למפגש, עמוד לכל אדם, שישה בגיליון, מוכנים לגזירה.
+deck-edit-this-deck = עריכת המצגת הזו
+deck-new-slide = שקופית חדשה
+deck-presenting-back = הצגה: אחורה
+deck-presenting-next-line-or-slide = הצגה: השורה או השקופית הבאה
+deck-presenting-whole-slide = הצגה: כל השקופית
+deck-slide-before-slide-after-on = השקופית הקודמת, השקופית הבאה (בפס הצד)
 
 ## the Calendar app
 
@@ -1219,7 +1333,7 @@ cal-end = סוף
 cal-end-date = תאריך סיום
 cal-end-time = שעת סיום
 cal-ends = מסתיים
-cal-event = אירוע
+common-event = אירוע
 cal-every-day = כל יום
 cal-every-month = כל חודש
 cal-every-week = כל שבוע
@@ -1255,7 +1369,7 @@ cal-start = התחלה
 cal-start-date = תאריך התחלה
 cal-start-time = שעת התחלה
 cal-starts = מתחיל
-cal-stops = נעצר
+common-stops = נעצר
 cal-same-dates-as-gantt-chart = אותם תאריכים כתרשים גאנט
 cal-this-calendar-is-written-in = לוח השנה הזה כתוב לפי שעון { $zone }.
 cal-this-calendar-names-no-time = לוח השנה הזה לא מציין אזור זמן: השעות שלו נקראות לפי האזור שלך, { $zone }.
@@ -1386,6 +1500,19 @@ diagram-house-network = הרשת בבית
 diagram-water-cycle = מחזור המים
 diagram-three-generations-of-morenos-and = שלושה דורות של משפחת מורנו, וקו מקווקו לבן סנדקות.
 diagram-who-can-do-what = מי יכול לעשות מה
+diagram-tap-empty-space-for-branch = הקשה על מקום ריק יוצרת ענף; הקשה על רעיון כדי להקליד עליו, Enter לבא אחריו; גרירה של אחד על השני שמה אותו מתחתיו; חיבור מקשר בין שניים לרוחב המפה.
+diagram-place-cards = כרטיסי מקום
+diagram-print-place-cards = הדפסת כרטיסי מקום
+diagram-print-place-cards-card-guest = הדפסת כרטיסי מקום: כרטיס לכל אורח, שמונה בגיליון Letter, לגזירה
+diagram-guest = אורח
+diagram-new-idea = רעיון חדש
+diagram-tap-empty-space-for-person = הקשה על מקום ריק יוצרת אדם; הקשה על אחד כדי להקליד עליו, Shift+Enter לתפקיד מתחת לשם, Enter לבא אחריו; גרירה של אחד על השני שמה אותו מתחתיו.
+diagram-tap-empty-space-for-event = הקשה על מקום ריק יוצרת אירוע: מקלידים מתי, Shift+Enter, ואז מה קרה; שנים ותאריכים מרווחים לפי הזמן; טווח הוא רצועה.
+diagram-lanes-name = השם של המסלול
+diagram-when = מתי
+diagram-tap-person-to-type-on = הקשה על אדם כדי להקליד עליו, + אחרי השם לבן או לבת הזוג, Shift+Enter לשנים מתחת לשם; Enter לבא אחריו; גרירה של אחד על השני שמה אותו מתחתיו; חיבור מצייר קו מקווקו בין שניים.
+diagram-tap-empty-space-for-table = הקשה על מקום ריק יוצרת שולחן; הקשה על שולחן או על אדם כדי להקליד, פסיק אחרי שם לאורח הבא; גרירה של אדם לשולחן אחר.
+diagram-tap-inside-circles-to-add = הקשה בתוך העיגולים מוסיפה שם פריט, פסיק אחריו לבא; הקשה על שם של קבוצה כדי לשנות אותו; גרירה של פריט לעיגולים אחרים.
 
 ## the Trip Planner
 
@@ -1462,12 +1589,19 @@ trip-new-york-in-movies = ניו יורק בסרטים
 trip-seven-film-and-tv-locations = שבעה אתרי צילום של סרטים וטלוויזיה, מאפטאון לדאונטאון, ביום אחד.
 trip-wedding-on-lake-como = חתונה באגם קומו
 trip-for-guests-where-wedding-is = לאורחים: איפה החתונה, איפה לישון, איך להגיע.
+trip-presenting-trip = הצגת הטיול
+trip-presenting-next-stop = הצגה: העצירה הבאה
+trip-presenting-stop-before = הצגה: העצירה הקודמת
+trip-put-stops-on-calendar-day = הצבת העצירות בלוח שנה, יום לכל אחת
+trip-first-last = הראשון, האחרון
+trip-next-stop = העצירה הבאה
+trip-stop-before = העצירה הקודמת
 
 ## shared: the Word Processor's looks, the header's Home, a money column's currency
 
 looks-typewriter = מכונת כתיבה
 looks-serif = סריף
-looks-home = בית
+common-home = בית
 looks-currency = מטבע
 
 ## the Calculator app
@@ -1557,73 +1691,25 @@ calc-curve-and-its-slope = עקומה והשיפוע שלה
 calc-x3-3x-its-derivative-and = x³ − 3x, הנגזרת שלה, והמשיק השטוח בתחתית השקע.
 calc-waves-adding-up = גלים שמתחברים
 calc-sine-waves-summed-on-their = גלי סינוס מסוכמים, בדרך לגל ריבועי.
-
-## unsorted: added after the sections, each id named for where it is used
-
-home-templates-for-app = תבניות ל־{ $app }
-home-app-templates = תבניות { $app }
-home-templates-for-app-name = תבניות ל־{ $app }: { $name }
-# Offline, where the templates' file was never kept by the service worker (kit/ui/home.ts).
-home-templates-are-not-saved-in = התבניות עדיין לא שמורות בדפדפן הזה. כדי לראות אותן צריך להתחבר לאינטרנט.
 # The grip on a line of the tape; the bar under lines chosen whole.
 calc-choose-line-n-drag-it = בחירת שורה { $n }: גרירה כדי להזיז אותה
 calc-chosen-lines = שורות שנבחרו
-# The Spreadsheet: any column removed, the Option column, rich cells, a chart put in from Insert.
-sheet-keeps-one-column = בגיליון נשארת עמודה אחת
-editor-bold-italic-and-links = מודגש, נטוי וקישורים
-sheet-choices = אפשרויות
-sheet-choices-for-ref = אפשרויות ל־{ $ref }
-editor-one-of-words-column-holds = אחת מהמילים שבעמודה, או מילה חדשה
-editor-option = אפשרות
-sheet-has-one = בגיליון יש אחת
-drawer-documents = מסמכים
-common-find-app-template = חיפוש אפליקציה, תבנית
-drawer-find-app-doc-template-or = חיפוש אפליקציה, מסמך, תבנית או פקודה
-drawer-find-app-template-or-command = חיפוש אפליקציה, תבנית או פקודה
-drawer-commands = פקודות
-share-new-noun-date-n = { $noun } מ־{ $date } #{ $n }
-drawer-nothing-by-that-name = אין שום דבר בשם הזה
-draw-pixels-n-n = פיקסלים { $n }×{ $n }
-# Files, compare, posting and embedding: the agent and sharing surface.
-share-mastodon-server-like-mastodon-social = שרת Mastodon, כמו mastodon.social
-share-change = שינוי
+
+## two links compared (kit/ui/compare.ts)
+
 compare-changes = שינויים
 compare-compare = השוואה
-share-copy-embed-code = העתקת קוד הטמעה
-share-copy-show-link = העתקת קישור למצגת
-deck-edit-this-deck = עריכת המצגת הזו
-share-embed = הטמעה
-share-embed-code-copied = קוד ההטמעה הועתק
 compare-no-difference = אין הבדל
 compare-not-link-to-tiny-little = זה לא קישור למסמך של Tiny Little Office
-open-opened-name = נפתח: { $name }
-share-opens-deck-already-presenting = פותח את המצגת כשהיא כבר מוצגת.
-export-pdf-file = קובץ PDF
-outline-pdf-sections-and-bullets = PDF: חלקים ותבליטים
 compare-paste-second-link-to-see = אפשר להדביק קישור שני כדי לראות מה השתנה.
 compare-paste-link-to-document-as = הדבקת הקישור למסמך כפי שהוא עכשיו
 compare-paste-link-to-document-as-it-was = הדבקת הקישור למסמך כפי שהיה
-share-post = פרסום
-share-post-link = פרסום הקישור
-share-show-preview-of-first-page = הצגת תצוגה מקדימה של העמוד הראשון
-share-picture-of-first-page-and = תמונה של העמוד הראשון והכותרת נשמרות קריאות בשרת שלנו למשך חודש, כדי שהרשת החברתית תוכל לשלוף אותן. המסמך עצמו לא.
-share-shared-without-preview-reason = שותף בלי תצוגה מקדימה: { $reason }
-share-making-preview = מכין את התצוגה המקדימה…
-share-page-could-not-be-drawn = לא הצלחנו לצייר את העמוד
-share-picture-is-over-400-kb = התמונה גדולה מ־400KB
-share-server-could-not-be-reached = לא הצלחנו להגיע לשרת
-share-hundred-previews-day-from-one = מאה תצוגות מקדימות ביום מכל כתובת
-share-server-refused-picture = השרת דחה את התמונה
 compare-put-in = נוסף:
 compare-swap = החלפה
 compare-taken-out = הוסר:
-open-that-file-is-not-words = הקובץ הזה הוא לא מילים ש־Tiny Little Office יכול לקרוא.
-open-that-file-is-too-large = הקובץ הזה גדול מדי בשביל להיות מסמך כאן.
 compare-first-link = הקישור הראשון
-share-pages-in-frame-on-another = העמודים, במסגרת באתר אחר, עם קישור לפתוח אותם כאן.
 compare-second-link = הקישור השני
 compare-two-links-to-documents-side = שני קישורים למסמכים, זה לצד זה: מה שהשני שינה מסומן. שום דבר לא יוצא מהעמוד הזה.
-share-your-mastodon-server = שרת ה־Mastodon שלך
 compare-different-apps = אפליקציות שונות
 compare-n-blocks-taken-out = { $n ->
         [one] בלוק אחד הוסר
@@ -1635,109 +1721,12 @@ compare-n-put-in = { $n ->
         [two] שניים נוספו
        *[other] { $n } נוספו
     }
-diagram-tap-empty-space-for-branch = הקשה על מקום ריק יוצרת ענף; הקשה על רעיון כדי להקליד עליו, Enter לבא אחריו; גרירה של אחד על השני שמה אותו מתחתיו; חיבור מקשר בין שניים לרוחב המפה.
-# Restored around the document: search, Find in this document, the shortcuts and the apps' keys, Mod+S, the size of
-# everything, Add to home screen, another version kept here, where the link fits, Open in another app, the QR code
-# of this document, Insert narrowed by typing, Trip presenting, a seating chart's place cards
-qr-code-of-this-document = קוד QR של המסמך הזה
-anim-frame-back-frame-on = פריים אחורה, פריים קדימה
-deck-new-slide = שקופית חדשה
-drawer-add-to-home-screen = הוספה למסך הבית
-shell-another-version = גרסה אחרת
-keys-normal-size = גודל רגיל
-home-documents-found = מסמכים שנמצאו
-sheet-edit-cell-caret-at-its = עריכת התא, עם הסמן בסופו
-keys-everything-larger = הכול גדול יותר
-keys-everything-smaller = הכול קטן יותר
-find-in-this-document = חיפוש במסמך הזה
-outline-fold-unfold = קיפול, פתיחה
-common-indent-or-bring-out-in = הגדלה או הקטנה של כניסה ברשימה; התא הבא ברשת
-keys-keep-this-document-on-device = שמירת המסמך הזה במכשיר
-shell-kept-on-this-device = נשמר במכשיר הזה
-shell-keyboard-shortcuts = קיצורי מקלדת
-share-left = שמאל
-common-move-selected-items-up-or = הזזת הפריטים שנבחרו למעלה או למטה
-home-no-document-here-has-those = אין כאן מסמך עם המילים האלה
-find-not-found = לא נמצא
-menu-nothing-starts-q = שום דבר לא מתחיל ב־"{ $q }"
-shell-nothing-to-keep-yet = עדיין אין מה לשמור
-common-nudge-shapes-in-hand = הזזה קלה של הצורות שנבחרו
-anim-nudge-shapes-in-hand-with = הזזה קלה של הצורות שנבחרו; בלי צורות, מעבר פריים
-write-open-as-outline = פתיחה כראשי פרקים
-shell-open-it = לפתוח
-diagram-place-cards = כרטיסי מקום
-anim-play-or-pause = ניגון או השהיה
-trip-presenting-trip = הצגת הטיול
-deck-presenting-back = הצגה: אחורה
-deck-presenting-next-line-or-slide = הצגה: השורה או השקופית הבאה
-trip-presenting-next-stop = הצגה: העצירה הבאה
-trip-presenting-stop-before = הצגה: העצירה הקודמת
-diagram-print-place-cards = הדפסת כרטיסי מקום
-diagram-print-place-cards-card-guest = הדפסת כרטיסי מקום: כרטיס לכל אורח, שמונה בגיליון Letter, לגזירה
-shell-save-in-browser-is-off = השמירה בדפדפן כבויה: הדפדפן הזה לא שומר מסמכים. כדי לשמור אותם כאן אפשר להפעיל אותה בתפריט.
-sheet-put-back-what-cell-held = החזרת מה שהיה בתא
-sheet-put-dated-rows-on-calendar = הצבת השורות עם תאריכים בלוח שנה
-trip-put-stops-on-calendar-day = הצבת העצירות בלוח שנה, יום לכל אחת
-home-search-your-documents = חיפוש במסמכים שלך
-common-select-all-words-of-box = בחירת הכול: המילים של התיבה, ואז הכול
-keys-show-these-shortcuts = הצגת קיצורי הדרך האלה
-# same
-write-a4 = A4
-# same
-write-letter = Letter
-common-back-to-words = חזרה למילים
-common-extend-selection = הרחבת הבחירה
-deck-presenting-whole-slide = הצגה: כל השקופית
-trip-first-last = הראשון, האחרון
-common-next-or-one-before = הבא או הקודם
-editor-this-browser-lets-page-paste = הדפדפן הזה מאפשר לעמוד להדביק רק מהמקלדת: אפשר להשתמש בהדבקה שלו.
-drawer-size-of-everything = הגודל של הכול
-shell-skip-to-apps = דילוג לאפליקציות
-shell-skip-to-document = דילוג למסמך
-menu-starting-q = מתחיל ב־"{ $q }"
-common-step-out-close-collapse-let = יציאה: סגירה, קיפול, שחרור
-anim-first-frame-last = הפריים הראשון, האחרון
-trip-next-stop = העצירה הבאה
-deck-slide-before-slide-after-on = השקופית הקודמת, השקופית הבאה (בפס הצד)
-trip-stop-before = העצירה הקודמת
-shell-this-device-keeps-another-version = במכשיר הזה שמורה גרסה אחרת של "{ $title }", מ־{ $when }.
-shell-this-link-was-made-by = הקישור הזה נוצר בגרסה חדשה יותר של Tiny Little Office. כדי לקבל אותה צריך לטעון מחדש את העמוד.
-keys-this-page = העמוד הזה
-common-check-or-uncheck-task = סימון או ביטול סימון של משימה
-drawer-to-add-tiny-little-office = כדי להוסיף את Tiny Little Office למסך הבית: שיתוף, ואז הוספה למסך הבית.
-common-too-long-for-qr-code = ארוך מדי בשביל קוד QR: אפשר לקצר את המסמך, או לשתף קישור מקוצר.
-share-uses = שימושים
-share-where = איפה
-share-where-link-fits = איפה הקישור נכנס
-share-any-length = כל אורך
-home-n-documents-found = { $n ->
-        [one] נמצא מסמך אחד
-        [two] נמצאו שני מסמכים
-       *[other] נמצאו { $n } מסמכים
-    }
-common-n-of-count = { $n } מתוך { $count }
-share-n-over = חריגה של { $n }
-privacy-password-copied = הסיסמה הועתקה
-diagram-guest = אורח
-outline-name-line = מתן שם לקו
-write-name-this-column = מתן שם לעמודה הזו
-diagram-new-idea = רעיון חדש
-diagram-tap-empty-space-for-person = הקשה על מקום ריק יוצרת אדם; הקשה על אחד כדי להקליד עליו, Shift+Enter לתפקיד מתחת לשם, Enter לבא אחריו; גרירה של אחד על השני שמה אותו מתחתיו.
-diagram-tap-empty-space-for-event = הקשה על מקום ריק יוצרת אירוע: מקלידים מתי, Shift+Enter, ואז מה קרה; שנים ותאריכים מרווחים לפי הזמן; טווח הוא רצועה.
-diagram-lanes-name = השם של המסלול
-diagram-when = מתי
-draw-align-center = יישור: מרכז
-draw-align-left = יישור: שמאל
-draw-align-right = יישור: ימין
-diagram-tap-person-to-type-on = הקשה על אדם כדי להקליד עליו, + אחרי השם לבן או לבת הזוג, Shift+Enter לשנים מתחת לשם; Enter לבא אחריו; גרירה של אחד על השני שמה אותו מתחתיו; חיבור מצייר קו מקווקו בין שניים.
-diagram-tap-empty-space-for-table = הקשה על מקום ריק יוצרת שולחן; הקשה על שולחן או על אדם כדי להקליד, פסיק אחרי שם לאורח הבא; גרירה של אדם לשולחן אחר.
-diagram-tap-inside-circles-to-add = הקשה בתוך העיגולים מוסיפה שם פריט, פסיק אחריו לבא; הקשה על שם של קבוצה כדי לשנות אותו; גרירה של פריט לעיגולים אחרים.
-export-copy-link-that-downloads-ext = העתקת קישור שמוריד את ה־.{ $ext }
-export-could-not-share-ext = השיתוף של ה־.{ $ext } נכשל
-export-could-not-show-ext = ההצגה של ה־.{ $ext } נכשלה
-export-download-ext = הורדת ה־.{ $ext }
-export-share-ext = שיתוף ה־.{ $ext }…
-export-view-ext = הצגת ה־.{ $ext }
+
+## files and zips dropped on the page (kit/file/open.ts)
+
+open-opened-name = נפתח: { $name }
+open-that-file-is-not-words = הקובץ הזה הוא לא מילים ש־Tiny Little Office יכול לקרוא.
+open-that-file-is-too-large = הקובץ הזה גדול מדי בשביל להיות מסמך כאן.
 open-keep-them-on-this-device = לשמור אותם במכשיר הזה
 open-nothing-is-saved-on-this = שום דבר לא שמור עכשיו במכשיר הזה. אפשר לשמור אותם כאן, או לפתוח אחד.
 open-first = פתיחת הראשון
@@ -1752,3 +1741,28 @@ open-n-documents-kept = { $n ->
         [two] שני מסמכים שמורים
        *[other] { $n } מסמכים שמורים
     }
+
+## a document's QR code (kit/draw/qr-picture.ts)
+
+# Restored around the document: search, Find in this document, the shortcuts and the apps' keys, Mod+S, the size of
+# everything, Add to home screen, another version kept here, where the link fits, Open in another app, the QR code
+# of this document, Insert narrowed by typing, Trip presenting, a seating chart's place cards
+qr-code-of-this-document = קוד QR של המסמך הזה
+
+## the keys, the shortcuts and the size of everything (kit/core/keys.ts, kit/ui/zoom.ts)
+
+keys-normal-size = גודל רגיל
+keys-everything-larger = הכול גדול יותר
+keys-everything-smaller = הכול קטן יותר
+keys-keep-this-document-on-device = שמירת המסמך הזה במכשיר
+keys-show-these-shortcuts = הצגת קיצורי הדרך האלה
+keys-this-page = העמוד הזה
+
+## Find in this document (kit/ui/find.ts)
+
+find-not-found = לא נמצא
+
+## a menu narrowed by typing (kit/ui/menu.ts)
+
+menu-nothing-starts-q = שום דבר לא מתחיל ב־"{ $q }"
+menu-starting-q = מתחיל ב־"{ $q }"

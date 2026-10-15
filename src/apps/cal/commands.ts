@@ -25,14 +25,14 @@ const view = (id: 'month' | 'year' | 'gantt', label: string, icon: Command['icon
 
 const CAL: Command<C>[] = [
   cmd('prev', (c) => (gantt(c) ? t('cal-week-earlier') : year(c) ? t('cal-previous-year') : t('cal-previous-month')), { icon: ChevronLeft, where: ['bar'], document: true, does: (c) => c.page(-1) }),
-  cmd('today', 'bar-today', { where: ['bar'], document: true, does: (c) => c.toToday() }),
+  cmd('today', 'common-today', { where: ['bar'], document: true, does: (c) => c.toToday() }),
   cmd('next', (c) => (gantt(c) ? t('cal-week-later') : year(c) ? t('cal-next-year') : t('cal-next-month')), { icon: ChevronRight, where: ['bar'], document: true, does: (c) => c.page(1) }),
   cmd('view', 'cal-view', { icon: CalendarDays, menu: 'view', where: ['bar'], document: true, takesFocus: true, does: () => undefined }),
   view('month', 'cal-month', CalendarDays),
   view('year', 'cal-year', Grid3x3),
   view('gantt', 'cal-schedule', ChartGantt, 'cal-same-dates-as-gantt-chart'),
-  cmd('insert', 'bar-insert', { icon: UI.insert, menu: 'insert', where: ['bar'], takesFocus: true, does: () => undefined }),
-  cmd('insert.event', 'cal-event', { icon: UI.plus, where: ['menu:insert'], when: (c) => !gantt(c), does: (c) => c.createEvent() }),
+  cmd('insert', 'common-insert', { icon: UI.insert, menu: 'insert', where: ['bar'], takesFocus: true, does: () => undefined }),
+  cmd('insert.event', 'common-event', { icon: UI.plus, where: ['menu:insert'], when: (c) => !gantt(c), does: (c) => c.createEvent() }),
   cmd('insert.task', 'common-task', { icon: UI.plus, where: ['menu:insert'], when: gantt, does: (c) => c.createTask() }),
   cmd('ink', (c) => t('cal-color-for-new-color', { color: c ? (c.view.legend[c.ink] ?? CAL_COLORS[c.ink].name()) : '' }), { menu: 'ink', where: ['bar'], takesFocus: true, does: () => undefined }),
   ...Object.entries(CAL_COLORS).map(([k, ink]) =>
@@ -70,12 +70,12 @@ const CAL: Command<C>[] = [
     does: (c, e) => c.taskKey('move', e),
   }),
   cmd('task.step', 'common-next-or-one-before', { at: 'words', keys: 'ArrowUp / ArrowDown', when: (c) => c.here?.at !== undefined, where: ['keys-only'], does: (c, e) => c.taskKey('step', e) }),
-  cmd('task.duplicate', 'draw-duplicate', { at: 'words', keys: 'Mod+D', when: (c) => c.here?.at !== undefined, where: ['keys-only'], does: (c, e) => c.taskKey('duplicate', e) }),
+  cmd('task.duplicate', 'common-duplicate', { at: 'words', keys: 'Mod+D', when: (c) => c.here?.at !== undefined, where: ['keys-only'], does: (c, e) => c.taskKey('duplicate', e) }),
   cmd('task.tick', 'common-check-or-uncheck-task', { at: 'words', keys: 'Mod+Enter', when: (c) => c.here?.at !== undefined, where: ['keys-only'], does: (c, e) => c.taskKey('tick', e) }),
   cmd('task.earlier', 'cal-day-earlier', { at: 'words', keys: 'Mod+Alt+ArrowLeft', when: (c) => c.here?.at !== undefined, where: ['keys-only'], does: (c, e) => c.taskKey('earlier', e) }),
   cmd('task.later', 'cal-day-later', { at: 'words', keys: 'Mod+Alt+ArrowRight', when: (c) => c.here?.at !== undefined, where: ['keys-only'], does: (c, e) => c.taskKey('later', e) }),
   cmd('task.dates', 'cal-dates', { at: 'words', keys: 'Alt+Enter', when: (c) => c.here?.at !== undefined, where: ['keys-only'], does: (c, e) => c.taskKey('dates', e) }),
-  cmd('day.make', 'cal-event', { at: 'day', keys: 'Enter', where: ['keys-only'], when: (c) => !!c.sweep, does: (c) => c.makeSweep() }),
+  cmd('day.make', 'common-event', { at: 'day', keys: 'Enter', where: ['keys-only'], when: (c) => !!c.sweep, does: (c) => c.makeSweep() }),
   cmd('day.letgo', 'common-step-out-close-collapse-let', { at: 'day', keys: 'Escape', where: ['keys-only'], when: (c) => !!c.sweep, does: (c) => void (c.sweep = null) }),
   cmd('day.walk', 'common-next-or-one-before', {
     at: 'day',
@@ -84,8 +84,8 @@ const CAL: Command<C>[] = [
     where: ['keys-only'],
     does: (c, e) => e instanceof KeyboardEvent && c.walkDay(e),
   }),
-  cmd('entry.delete', 'draw-delete', { at: 'entry', keys: 'Delete / Backspace', when: (c) => !!c.here?.el, where: ['keys-only'], does: (c) => c.entryKey('delete') }),
-  cmd('entry.duplicate', 'draw-duplicate', { at: 'entry', keys: 'Mod+D', when: (c) => !!c.here?.el, where: ['keys-only'], does: (c) => c.entryKey('duplicate') }),
+  cmd('entry.delete', 'common-delete', { at: 'entry', keys: 'Delete / Backspace', when: (c) => !!c.here?.el, where: ['keys-only'], does: (c) => c.entryKey('delete') }),
+  cmd('entry.duplicate', 'common-duplicate', { at: 'entry', keys: 'Mod+D', when: (c) => !!c.here?.el, where: ['keys-only'], does: (c) => c.entryKey('duplicate') }),
 ];
 export const AT = (at: string) => CAL.filter((c) => c.at === at);
 

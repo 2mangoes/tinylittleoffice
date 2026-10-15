@@ -3,9 +3,9 @@
 ## the shell: header
 
 shell-menu = মেনু
-shell-title = শিরোনাম
-shell-new-noun = নতুন { $noun }
-shell-untitled-noun = নামহীন { $noun }
+common-title = শিরোনাম
+common-new-noun = নতুন { $noun }
+common-untitled-noun = নামহীন { $noun }
 shell-download = ডাউনলোড
 shell-loading = লোড হচ্ছে…
 shell-this-link-holds-something-that = এই লিংকে এমন কিছু আছে যা পড়া যাচ্ছে না। কপি করার সময় হয়তো লিংকটি কেটে গেছে।
@@ -23,35 +23,39 @@ shell-save-in-browser-is-on = “ব্রাউজারে সংরক্ষ�
 ## the home page
 
 home-blank = খালি
-home-templates = টেমপ্লেট
+common-templates = টেমপ্লেট
 home-app-documents = { $app } নথি
-home-forget = বাদ দিন
+common-forget = বাদ দিন
 home-forget-title = “{ $title }” বাদ দিন
 home-n-more = আরও { $n }টি
 home-aboard-project-made-with-respect = { $aboard }-এর একটি প্রকল্প। নিউ ইয়র্ক শহরে সম্মানের সঙ্গে তৈরি।
 home-beta-version = বিটা সংস্করণ
 home-email = ইমেল
+home-templates-for-app = { $app }-এর টেমপ্লেট
+home-app-templates = { $app } টেমপ্লেট
+home-templates-for-app-name = { $app }-এর টেমপ্লেট: { $name }
+home-templates-are-not-saved-in = টেমপ্লেটগুলো এখনো এই ব্রাউজারে সংরক্ষিত নেই। দেখতে ইন্টারনেটে সংযোগ করুন।
 
 ## the drawer (hamburger menu)
 
 drawer-apps = অ্যাপ
-drawer-close = বন্ধ করুন
+common-close = বন্ধ করুন
 drawer-default-name = ডিফল্ট: { $name }
 drawer-save-in-browser = ব্রাউজারে সংরক্ষণ
 drawer-what-is-this = এটা কী?
 drawer-turn-on-to-save-files = আপনার ব্রাউজারে ফাইল সংরক্ষণ করতে চালু করুন।
 drawer-turn-off-to-remove-all = সব ফাইল ও সেটিং মুছে ফেলতে বন্ধ করুন।
-drawer-nothing-saved-in-this-browser = এই ব্রাউজারে কিছুই সংরক্ষিত নয়
-drawer-saving-in-this-browser = এই ব্রাউজারে সংরক্ষণ হচ্ছে
+common-nothing-saved-in-this-browser = এই ব্রাউজারে কিছুই সংরক্ষিত নয়
+common-saving-in-this-browser = এই ব্রাউজারে সংরক্ষণ হচ্ছে
 drawer-remove-all-files-and-settings = এই ব্রাউজার থেকে সব ফাইল ও সেটিং মুছে ফেলবেন?
 drawer-language = ভাষা
-drawer-theme = থিম
+common-theme = থিম
 drawer-match-device = ডিভাইসের মতো
 drawer-light = হালকা
 drawer-dark = গাঢ়
 drawer-about = পরিচিতি
 # same
-drawer-tiny-little-office = Tiny Little Office
+common-tiny-little-office = Tiny Little Office
 drawer-about-tiny-little-office = Tiny Little Office সম্পর্কে
 drawer-tiny-little-office-is-experiment = Tiny Little Office হলো { $aboard }-এর একটি পরীক্ষা, নিউ ইয়র্ক শহরের একটি ডিজিটাল ও AI কৌশল এবং সফটওয়্যার নির্মাণ প্রতিষ্ঠান।
 drawer-to-reach-out-with-questions = প্রশ্ন থাকলে { $email }।
@@ -61,6 +65,10 @@ drawer-github-repository = GitHub রিপোজিটরি
 drawer-all-of-these-notes-these = এই সব নোট, এই আঁকাগুলো, মার্কার দিয়ে লেখা এই বাক্যগুলো সময়ের সঙ্গে মিলিয়ে যায়। কেবল ক্ষণস্থায়ীই টিকে থাকে।
 drawer-eugene-ionesco-book = ওজেন ইয়োনেস্কো, { $book }
 drawer-discoveries = আবিষ্কার
+drawer-documents = নথি
+drawer-find-app-template-or-command = অ্যাপ, টেমপ্লেট বা কমান্ড খুঁজুন
+drawer-commands = কমান্ড
+drawer-nothing-by-that-name = এই নামে কিছু নেই
 
 ## links that leave the site (kit/ui/link-guard.ts)
 
@@ -102,7 +110,7 @@ share-expires-in-n-minutes-date = { $n ->
     } মিনিটে মেয়াদ শেষ ({ $date })
 share-opens-as-pages-to-read = পড়ার পাতা হিসেবে খোলে
 share-opens-in-editor = এডিটরে খোলে
-share-whoever-opens-this-link-gets = এই লিংক যিনিই খুলুন, তিনি নিজের একটা কপি পাবেন। তিনি যা বদলাবেন তা থাকবে তাঁর লিংকে, আপনার লিংকে নয়: তাঁকে বলুন তাঁর লিংকটা আপনাকে পাঠিয়ে দিতে।
+common-whoever-opens-this-link-gets = এই লিংক যিনিই খুলুন, তিনি নিজের একটা কপি পাবেন। তিনি যা বদলাবেন তা থাকবে তাঁর লিংকে, আপনার লিংকে নয়: তাঁকে বলুন তাঁর লিংকটা আপনাকে পাঠিয়ে দিতে।
 share-short-link-that-expires = মেয়াদি ছোট লিংক
 share-this-link-expires-in-n = এই লিংকের মেয়াদ { $n ->
         [one] { $n }
@@ -135,9 +143,9 @@ share-display-link = ডিসপ্লে লিংক
 share-opens = খোলে
 share-link-copied = লিংক কপি হয়েছে
 share-could-not-copy = কপি করা যায়নি
-share-share = শেয়ার…
-share-qr-code = QR কোড
-share-qr-code-of-this-document = এই নথির QR কোড
+common-share = শেয়ার…
+common-qr-code = QR কোড
+common-qr-code-of-this-document = এই নথির QR কোড
 share-this-document-is-n-bytes = এই নথি { $n } বাইটের; সবচেয়ে বড় QR কোডে { $max } বাইট ধরে। { $over } বাইট ছোট করলে ধরবে।
 share-this-document-is-n-characters = এই নথি { $n }টি অক্ষরের; ছোট লিংকে { $max }টি ধরে। { $over }টি ছোট করলে ধরবে।
 share-expires-after = মেয়াদ শেষ হবে
@@ -153,8 +161,29 @@ share-could-not-shorten-link = লিংক ছোট করা যায়ন�
 share-this-document-is-too-long = ছোট লিংকের জন্য এই নথি অনেক বড়।
 share-up-to-hundred-links-day = একটি ঠিকানা থেকে দিনে একশোটি পর্যন্ত লিংক।
 share-remove = সরান
-share-link = লিংক
-share-short-link = ছোট লিংক
+common-link = লিংক
+common-short-link = ছোট লিংক
+share-new-noun-date-n = নতুন { $noun } { $date } #{ $n }
+share-mastodon-server-like-mastodon-social = একটি Mastodon সার্ভার, যেমন mastodon.social
+share-change = পরিবর্তন
+share-copy-embed-code = এমবেড কোড কপি করুন
+share-copy-show-link = শো লিংক কপি করুন
+share-embed = এমবেড
+share-embed-code-copied = এমবেড কোড কপি হয়েছে
+share-opens-deck-already-presenting = ডেক খুলেই প্রেজেন্ট শুরু হয়।
+share-post = পোস্ট
+share-post-link = লিংক পোস্ট করুন
+share-show-preview-of-first-page = প্রথম পাতার প্রিভিউ দেখান
+share-picture-of-first-page-and = প্রথম পাতার একটি ছবি আর শিরোনাম এক মাস আমাদের সার্ভারে পড়ার মতো রাখা থাকে, যাতে নেটওয়ার্ক সেগুলো নিতে পারে। নথিটি নিজে নয়।
+share-shared-without-preview-reason = প্রিভিউ ছাড়া শেয়ার হয়েছে: { $reason }
+share-making-preview = প্রিভিউ বানানো হচ্ছে…
+share-page-could-not-be-drawn = পাতাটি আঁকা যায়নি
+share-picture-is-over-400-kb = ছবিটি 400 KB-এর বেশি
+share-server-could-not-be-reached = সার্ভারে পৌঁছানো যায়নি
+share-hundred-previews-day-from-one = একটি ঠিকানা থেকে দিনে একশোটি প্রিভিউ
+share-server-refused-picture = সার্ভার ছবিটি নেয়নি
+share-pages-in-frame-on-another = পাতাগুলো অন্য সাইটের ফ্রেমে, এখানে খোলার লিংকসহ।
+share-your-mastodon-server = আপনার Mastodon সার্ভার
 
 ## privacy (kit/share/privacy.ts, kit/ui/privacy-dialog.ts): the password, what the device holds
 
@@ -166,12 +195,12 @@ privacy-forget-everything = সব বাদ দিন
 privacy-preview-sent-with-link-to = কোনো নেটওয়ার্কে লিংকের সঙ্গে পাঠানো প্রিভিউ হলো প্রথম পাতার ছবি, শিরোনাম আর প্রথম কয়েকটি শব্দ, যা এক মাস আমাদের সার্ভারে পড়া যায়। নথিটি নিজে কখনো সেখানে যায় না।
 privacy-forget-everything-this-site-keeps = এই সাইট এখানে যা রেখেছে সব বাদ দিয়ে এখন থেকে কিছুই রাখবেন না? নথিগুলো নিজেদের লিংকেই থাকে।
 privacy-locked = তালা দেওয়া
-privacy-locked-document = তালা দেওয়া নথি
+common-locked-document = তালা দেওয়া নথি
 privacy-new-password = নতুন পাসওয়ার্ড
 privacy-no-password = পাসওয়ার্ড নেই
 privacy-none = নেই
 privacy-opening = খোলা হচ্ছে…
-privacy-password = পাসওয়ার্ড
+common-password = পাসওয়ার্ড
 privacy-password-removed = পাসওয়ার্ড সরানো হয়েছে
 privacy-password-set-link-holds-only = পাসওয়ার্ড দেওয়া হয়েছে: লিংকে শুধু এনক্রিপ্ট করা লেখা থাকে
 privacy-password-ellipsis = পাসওয়ার্ড…
@@ -188,17 +217,17 @@ privacy-short-links-made-here-until = এখানে বানানো ছো�
 privacy-their-names-and-links-for = হোম পাতাের জন্য এগুলোর নাম ও লিংক।
 privacy-theme-lifetime-of-short-links = থিম, ছোট লিংকের মেয়াদ।
 privacy-this-document-has-password-link = এই নথিতে পাসওয়ার্ড আছে। লিংকে এবং এর থেকে বানানো ছোট লিংকে শুধু এনক্রিপ্ট করা লেখা থাকে।
-privacy-this-document-is-locked = এই নথিতে তালা দেওয়া
+common-this-document-is-locked = এই নথিতে তালা দেওয়া
 privacy-this-document-is-locked-with = এই নথিতে পাসওয়ার্ডের তালা দেওয়া।
 privacy-unlock = খুলুন
-privacy-unlock-ellipsis = খুলুন…
+common-unlock-ellipsis = খুলুন…
 privacy-what-this-device-holds = এই ডিভাইসে কী আছে
 privacy-your-documents = আপনার নথি
 privacy-your-browsers-history = আপনার ব্রাউজারের হিস্ট্রি
 privacy-every-document-opened-here-in = এখানে খোলা প্রতিটি নথি, পুরোটা, যদি না তাতে পাসওয়ার্ড থাকে।
 privacy-not-ours-to-clear = এটি মোছা আমাদের হাতে নেই
 privacy-by-name = { $name }-এর
-privacy-n-documents = { $n ->
+common-n-documents = { $n ->
         [one] { $n }
        *[other] { $n }
     }টি নথি
@@ -212,7 +241,7 @@ privacy-make-another = আরেকটি বানান
 
 ## a document locked with a password, placed inside another (kit/share/locked.ts, kit/ui/locked-doc.ts)
 
-locked-with-password = পাসওয়ার্ডের তালা দেওয়া
+common-with-password = পাসওয়ার্ডের তালা দেওয়া
 locked-app-document-locked-with-password = পাসওয়ার্ডের তালা দেওয়া একটি { $app } নথি
 locked-with-password-unlock = পাসওয়ার্ডের তালা দেওয়া। খুলুন…
 locked-document-locked-with-password = পাসওয়ার্ডের তালা দেওয়া একটি নথি
@@ -235,24 +264,25 @@ common-chosen-tasks = বাছাই করা কাজ
 common-open = খুলুন
 common-task = কাজ
 common-tasks = কাজ
+common-find-app-doc-template-or = অ্যাপ, নথি, টেমপ্লেট বা কমান্ড খুঁজুন
 
 ## downloads
 
 download-print = প্রিন্ট
-download-print-or-save-as-pdf = প্রিন্ট করুন, বা PDF হিসেবে সেভ করুন
+common-print-or-save-as-pdf = প্রিন্ট করুন, বা PDF হিসেবে সেভ করুন
 download-picture-png = ছবি (PNG)
-download-web-page-html = ওয়েব পাতা (HTML)
+common-web-page-html = ওয়েব পাতা (HTML)
 download-text-tlo = টেক্সট (TLO)
 download-data-json = ডেটা (JSON)
 download-downloaded-name = { $name } ডাউনলোড হয়েছে
 download-failed = ডাউনলোড হয়নি
-download-open-in-tiny-little-office = Tiny Little Office-এ খুলুন
+common-open-in-tiny-little-office = Tiny Little Office-এ খুলুন
 # Under a document cut off at a slide's foot: a link that opens it whole, in its own app.
 download-see-more = আরও দেখুন
 
 ## the bar, shared by every app
 
-bar-insert = যোগ করুন
+common-insert = যোগ করুন
 bar-bold = বোল্ড
 bar-italic = ইটালিক
 bar-underline = আন্ডারলাইন
@@ -261,18 +291,18 @@ bar-highlight = হাইলাইট
 bar-heading = শিরোনাম
 bar-bulleted-list = বুলেট তালিকা
 bar-numbered-list = নম্বর তালিকা
-bar-table = টেবিল
+common-table = টেবিল
 bar-footnote = পাদটীকা
-bar-date = তারিখ
+common-date = তারিখ
 bar-undo = আনডু
 bar-redo = রিডু
-bar-today = আজ
+common-today = আজ
 
 ## the editor (<to-text>): chips, cards and the bubbles
 
-editor-footnote-n = পাদটীকা { $n }
-editor-app-document = { $app } নথি
-editor-noun = একটি { $noun }
+common-footnote-n = পাদটীকা { $n }
+common-app-document = { $app } নথি
+common-noun = একটি { $noun }
 editor-code = কোড
 editor-connection = সংযোগ
 editor-n-rows = { $n ->
@@ -280,16 +310,19 @@ editor-n-rows = { $n ->
        *[other] { $n }
     }টি সারি
 editor-notes-words = টীকার কথা
-editor-done = হয়েছে
+common-done = হয়েছে
 editor-address = ঠিকানা
 editor-not-address = ঠিকানা নয়
 editor-set-link = লিংক দিন
 editor-open-link = লিংক খুলুন
 editor-change-link = লিংক বদলান
 editor-remove-link = লিংক সরান
-editor-format = ফরম্যাট
+common-format = ফরম্যাট
 editor-done-lowercase = সম্পন্ন
 editor-not-done = অসম্পন্ন
+editor-bold-italic-and-links = বোল্ড, ইটালিক ও লিংক
+editor-one-of-words-column-holds = কলামে থাকা একটি শব্দ, বা নতুন একটি
+editor-option = বিকল্প
 
 ## the example in the kit's own documentation
 
@@ -300,16 +333,16 @@ example-n-slides = { $n ->
 
 ## the Word Processor
 
-write-word-processor = ওয়ার্ড প্রসেসর
+common-word-processor = ওয়ার্ড প্রসেসর
 write-document-lowercase = নথি
-write-words = লেখা
+common-words = লেখা
 write-words-on-page-headings-lists = পাতায় লেখা: শিরোনাম, তালিকা, লিংক ও টীকা, হিসাব করা টেবিল, লেটার বা A4 কাগজে ছাপার জন্য।
 write-document = নথি
 write-here = এখানে লিখুন।
 write-subheading = উপশিরোনাম
 write-paragraph = অনুচ্ছেদ
-write-bring-out = বাইরে আনুন
-write-indent = ভেতরে সরান
+common-bring-out = বাইরে আনুন
+common-indent = ভেতরে সরান
 write-align = সারিবদ্ধ
 write-align-left = বাঁয়ে
 write-center = মাঝে
@@ -330,11 +363,11 @@ write-newspaper = সংবাদপত্র
 write-narrow-headline-two-columns = সরু শিরোনাম, দুই কলাম
 write-horizontal-rule = অনুভূমিক রেখা
 write-page-break = পাতা ভাঙা
-write-ok = ঠিক আছে
+common-ok = ঠিক আছে
 write-this-card = এই কার্ড
 write-open-in-app = { $app }-এ খুলুন
 write-locked-worked-out-for-you = তালা দেওয়া: আপনার জন্য হিসাব করা
-write-footnotes = পাদটীকা
+common-footnotes = পাদটীকা
 write-back-to-footnote-n-in = লেখার পাদটীকা { $n }-এ ফিরুন
 write-back-to-text = লেখায় ফিরুন
 write-n-words = { $n ->
@@ -344,7 +377,7 @@ write-n-words = { $n ->
 # same
 write-word-docx = Word (DOCX)
 # same
-write-markdown = Markdown
+common-markdown = Markdown
 # same
 write-rich-text-rtf = Rich Text (RTF)
 write-add-column-before = আগে কলাম যোগ করুন
@@ -415,9 +448,9 @@ insert-opening-short-link = ছোট লিংক খোলা হচ্ছে�
 insert-paste-link-of-another-tiny = Tiny Little Office-এর অন্য কোনো নথির লিংক, লম্বা বা ছোট, পেস্ট করুন: এর প্রথম পাতা এখানে দেখা যাবে।
 insert-this-is-not-tiny-little = এটি Tiny Little Office-এর লিংক নয়, অথবা এর মেয়াদ শেষ।
 insert-tiny-little-office-doc = Tiny Little Office নথি
-insert-tiny-little-office-doc-ellipsis = Tiny Little Office নথি…
-insert-new-document = নতুন নথি
-doc-cancel = বাতিল
+common-tiny-little-office-doc-ellipsis = Tiny Little Office নথি…
+common-new-document = নতুন নথি
+common-cancel = বাতিল
 doc-rows = সারি
 
 ## charts (kit/draw/chart.ts)
@@ -426,7 +459,7 @@ chart-empty-chart = খালি চার্ট
 chart-bars = বার
 chart-flows-sankey = প্রবাহ (সানকি)
 chart-flows-list = প্রবাহ: { $list }।
-chart-lines = রেখা
+common-lines = রেখা
 chart-nothing-to-chart-yet = চার্ট করার মতো কিছু এখনও নেই
 chart-nothing-to-chart-yet-rows = চার্ট করার মতো কিছু এখনও নেই: কোথা থেকে | কোথায় | পরিমাণ, এই ধাঁচের সারি দিন
 chart-pie = পাই
@@ -439,10 +472,10 @@ sheet-clear-these-cells = এই ঘরগুলো খালি করুন
 sheet-fit-this-column-to-its = কলামটি লেখার মাপে করুন
 sheet-cells-in-hand = হাতের ঘরগুলো
 sheet-check-ref = { $ref }-এ টিক দিন
-sheet-text = লেখা
-sheet-spreadsheet = স্প্রেডশিট
+common-text = লেখা
+common-spreadsheet = স্প্রেডশিট
 sheet-spreadsheet-lowercase = স্প্রেডশিট
-sheet-numbers = সংখ্যা
+common-numbers = সংখ্যা
 sheet-spreadsheet-with-formulas-named-cells = ফর্মুলা, নাম দেওয়া ঘর ও চার্টসহ স্প্রেডশিট; শুরুতে তিনটি কলাম, দরকারমতো আরও।
 sheet-budget = বাজেট
 sheet-planned-against-actual-line-each = পরিকল্পনা বনাম আসল, এক লাইনে একটি, পার্থক্য ও মোটসহ।
@@ -507,38 +540,38 @@ sheet-eight-teams-single-elimination-each = নকআউটে আটটি দ�
 # same
 sheet-excel-xlsx = Excel (XLSX)
 # same
-sheet-csv = CSV
+common-csv = CSV
 sheet-chart-svg = চার্ট (SVG)
 sheet-chart-png = চার্ট (PNG)
 sheet-empty-sheet = খালি শিট
 sheet-n-of-max-shown = ({ $max }-এর মধ্যে { $n }টি দেখানো হয়েছে)
 sheet-50-more-rows = আরও ৫০টি সারি
-sheet-add-column = কলাম যোগ করুন
-sheet-add-column-after = পরে কলাম যোগ করুন
+common-add-column = কলাম যোগ করুন
+common-add-column-after = পরে কলাম যোগ করুন
 sheet-chart = চার্ট
 sheet-chart-of-table = টেবিলের চার্ট
 sheet-checkbox = চেকবক্স
 sheet-column-after = পরে কলাম
-sheet-column-c = কলাম { $c }
-sheet-column-c-holds = কলাম { $c }-এ আছে
+common-column-c = কলাম { $c }
+common-column-c-holds = কলাম { $c }-এ আছে
 sheet-column-c-type-what-it = কলাম { $c }: { $type }। কী আছে, এর ভিত্তিতে সাজান, কলাম যোগ বা সরান
-sheet-columns = কলাম
-sheet-delete-which = { $which } মুছুন
-sheet-drag-to-fill = টেনে ভরুন
+common-columns = কলাম
+common-delete-which = { $which } মুছুন
+common-drag-to-fill = টেনে ভরুন
 sheet-abc-or-123-for-this = ABC বা 123, এই কলামের জন্য
 sheet-drag-to-resize-double-click = টেনে মাপ বদলান, ডাবল ক্লিকে মাপমতো করুন
 sheet-fill-down-from-top-row = ওপরের সারি থেকে নিচে ভরুন
 sheet-fill-right-from-first-column = প্রথম কলাম থেকে ডানে ভরুন
-sheet-fill-drag-to-carry-these = ভরা: ঘরগুলো টেনে এগিয়ে নিন
+common-fill-drag-to-carry-these = ভরা: ঘরগুলো টেনে এগিয়ে নিন
 sheet-fit-columns-to-page = কলামগুলো পাতার মাপে করুন
 sheet-formula = ফর্মুলা
 sheet-function = ফাংশন
 sheet-high-to-low = বেশি থেকে কম
-sheet-insert-n-rows-above = ওপরে { $n ->
+common-insert-n-rows-above = ওপরে { $n ->
         [one] { $n }
        *[other] { $n }
     }টি সারি যোগ করুন
-sheet-insert-n-rows-below = নিচে { $n ->
+common-insert-n-rows-below = নিচে { $n ->
         [one] { $n }
        *[other] { $n }
     }টি সারি যোগ করুন
@@ -547,8 +580,8 @@ sheet-lock-these-cells-so-reader = এই ঘরগুলোতে তালা 
 sheet-locked-part-of-model = তালা দেওয়া: মডেলের অংশ
 sheet-low-to-high = কম থেকে বেশি
 sheet-money = টাকা
-sheet-name = নাম
-sheet-name-of-column-c = কলাম { $c }-এর নাম
+common-name = নাম
+common-name-of-column-c = কলাম { $c }-এর নাম
 sheet-names-cell-to-its-right = ডানের ঘরটির নাম দেয়
 sheet-symbol-like-or-code-like = একটি চিহ্ন, যেমন $, বা কোড, যেমন USD। খালি রাখলে নথির নিজের মুদ্রা।
 sheet-symbol-of-up-to-three = তিন অক্ষর পর্যন্ত একটি চিহ্ন, বা তিন অক্ষরের কোড।
@@ -557,15 +590,15 @@ sheet-number = সংখ্যা
 sheet-open-link = { $link } খুলুন
 sheet-opens-when-clicked = ক্লিক করলে খোলে
 sheet-percent = শতাংশ
-sheet-remove-this-column = এই কলাম সরান
+common-remove-this-column = এই কলাম সরান
 sheet-resize-column-c = কলাম { $c }-এর মাপ বদলান
 sheet-rich-text = সমৃদ্ধ লেখা
 sheet-row-above = ওপরে সারি
 sheet-row-below = নিচে সারি
-sheet-row-n = সারি { $n }
-sheet-row-n-lowercase = সারি { $n }
-sheet-row-n-insert-or-delete = সারি { $n }: সারি যোগ করুন বা মুছুন
-sheet-rows-b = সারি { $a }–{ $b }
+common-row-n = সারি { $n }
+common-row-n-lowercase = সারি { $n }
+common-row-n-insert-or-delete = সারি { $n }: সারি যোগ করুন বা মুছুন
+common-rows-b = সারি { $a }–{ $b }
 sheet-selected-cells = বাছাই করা ঘর
 sheet-show-all-text = পুরো লেখা দেখান
 sheet-shown-as-typed = যেমন লেখা তেমন দেখানো
@@ -576,22 +609,27 @@ sheet-is-full-its-last-rows = শিট ভরে গেছে: শেষ সা
 sheet-three-at-least = অন্তত তিনটি
 sheet-unlock-these-cells = এই ঘরগুলোর তালা খুলুন
 sheet-what-it-holds-sort-columns = কী আছে; সাজান; কলাম
+sheet-keeps-one-column = শিটে অন্তত একটি কলাম থাকে
+sheet-choices = বিকল্প
+sheet-choices-for-ref = { $ref }-এর বিকল্প
+sheet-has-one = শিটে একটি আছে
 
 ## downloads: hand-offs to another app (kit/file/exports.ts)
 
 export-open-in = এতে খুলুন
+export-pdf-file = PDF ফাইল
 
 ## the icon library (kit/ui/icons-picker.ts)
 
-icons-icon = আইকন
+common-icon = আইকন
 icons-favorites = প্রিয়
 icons-search-icons = আইকন খুঁজুন
 icons-suggested = প্রস্তাবিত
-icons-icons = আইকন
+common-icons = আইকন
 icons-no-icons-match-q = “{ $q }”-এর সঙ্গে মেলে এমন আইকন নেই।
 icons-search-by-name-or-by = নাম বা অর্থ ধরে (“টাকা”, “আবহাওয়া”, “ai”) খুঁজে { $n }টি আইকনের যেকোনোটি পান।
 icons-no-icon = আইকন নেই
-icons-icon-or-emoji = আইকন বা ইমোজি
+common-icon-or-emoji = আইকন বা ইমোজি
 icons-search-icons-and-emoji = আইকন ও ইমোজি খুঁজুন
 icons-or-emoji = আইকন বা ইমোজি
 icons-emoji = ইমোজি
@@ -609,9 +647,9 @@ icons-flags = পতাকা
 ## the Drawing Tool
 
 draw-draw = আঁকুন
-draw-drawing-tool = ড্রয়িং টুল
+common-drawing-tool = ড্রয়িং টুল
 draw-drawing = ড্রয়িং
-draw-design = নকশা
+common-design = নকশা
 draw-boxes-arrows-icons-and-labels = গ্রিডে বাক্স, তীর, আইকন ও লেবেল; অথবা পিক্সেল আর্ট, যা ব্যাকগ্রাউন্ড টাইল হতে পারে।
 draw-request-flow = অনুরোধের প্রবাহ
 draw-browser-asks-server-which-reads = ব্রাউজার সার্ভারকে জিজ্ঞেস করে, সার্ভার ডেটা পড়ে: তীর দিয়ে জোড়া বাক্স।
@@ -629,7 +667,7 @@ draw-phone-screen-sketched-in-boxes = কেউ বানানোর আগে 
 draw-rosette-with-ribbons-for-volunteer = বছরের সেরা স্বেচ্ছাসেবকের জন্য ফিতাসহ রোজেট, ছেপে কেটে লাগানোর জন্য।
 draw-block-party-from-above-stage = ওপর থেকে পাড়ার উৎসব: মঞ্চ, স্টল, প্রাথমিক চিকিৎসা, আর হারিয়ে গেলে কোথায় দেখা হবে।
 draw-badge = ব্যাজ
-draw-birthday-card = জন্মদিনের কার্ড
+common-birthday-card = জন্মদিনের কার্ড
 draw-can-we-refund-it-stores = টাকা ফেরত দেওয়া যাবে? দোকানের ফেরত নীতি প্রশ্ন, উত্তর ও করণীয় হিসেবে।
 draw-event-map = অনুষ্ঠানের ম্যাপ
 draw-four-16-by-16-icons = এক গ্রিডে চারটি ১৬ × ১৬ আইকন: রোদ, মেঘ, বৃষ্টি ও ঝড়, পূর্বাভাস বা বোতামের জন্য কপি করতে।
@@ -643,7 +681,7 @@ draw-three-ideas-for-coffee-roasters = কফি রোস্টারের চ
 draw-weather-icons = আবহাওয়ার আইকন
 draw-what-happens-to-package-from = কেনার মুহূর্ত থেকে পার্সেলের কী হয়: ধাপে ধাপে প্রক্রিয়া, আইকন ও সংযোগসহ।
 draw-wireframe = ওয়্যারফ্রেম
-draw-picture-svg = ছবি (SVG)
+common-picture-svg = ছবি (SVG)
 draw-background-tile-svg = ব্যাকগ্রাউন্ড টাইল (SVG)
 draw-background-tile-png = ব্যাকগ্রাউন্ড টাইল (PNG)
 draw-animate-this-drawing = এই ড্রয়িং অ্যানিমেট করুন
@@ -675,14 +713,14 @@ draw-rounded-box = গোলাকার বাক্স
 draw-hexagon = ষড়ভুজ
 draw-parallelogram = সামান্তরিক
 draw-cylinder = চোঙ
-draw-note = নোট
-draw-black = কালো
-draw-red = লাল
-draw-orange = কমলা
-draw-green = সবুজ
-draw-blue = নীল
-draw-purple = বেগুনি
-draw-indigo = ঘন নীল
+common-note = নোট
+common-black = কালো
+common-red = লাল
+common-orange = কমলা
+common-green = সবুজ
+common-blue = নীল
+common-purple = বেগুনি
+common-indigo = ঘন নীল
 draw-yellow = হলুদ
 draw-sky = আকাশি
 draw-pink = গোলাপি
@@ -698,13 +736,13 @@ draw-no-fill = ভরাট নেই
 draw-fill = ভরাট
 draw-bring-to-front = সামনে আনুন
 draw-send-to-back = পেছনে পাঠান
-draw-duplicate = নকল করুন
-draw-edit = বদল
-draw-delete = মুছুন
+common-duplicate = নকল করুন
+common-edit = বদল
+common-delete = মুছুন
 draw-put-icon-on-this-shape = এই আকারে একটি আইকন বসান
 draw-place-icon = আইকন বসান
-draw-zoom-in = বড় করুন
-draw-zoom-out = ছোট করুন
+common-zoom-in = বড় করুন
+common-zoom-out = ছোট করুন
 draw-alt = বিকল্প
 draw-alt-text = বিকল্প লেখা
 draw-alt-text-alt = বিকল্প লেখা: { $alt }
@@ -732,7 +770,7 @@ draw-row-y-column-x-ink = সারি { $y }, কলাম { $x }: { $ink }
 draw-as-repeating-background = বারবার আসা ব্যাকগ্রাউন্ড হিসেবে
 draw-dashed-line = ড্যাশ রেখা
 draw-dotted-line = বিন্দু রেখা
-draw-edit-words = লেখা বদলান
+common-edit-words = লেখা বদলান
 draw-extra-large-text = অতি বড় লেখা
 draw-gray-fill = ধূসর ভরাট
 # same
@@ -757,6 +795,7 @@ draw-drawing-canvas-v-selects-r = ড্রয়িং ক্যানভাস
 draw-tap-shape-to-select-it = বাছতে আকারে ট্যাপ করুন, বা কয়েকটি আকার ঘিরে টেনে বেছে নিন; আঁকতে একটি টুল বাছুন।
 draw-rotate-left = বাঁয়ে ঘোরান
 draw-rotate-right = ডানে ঘোরান
+draw-pixels-n-n = পিক্সেল { $n }×{ $n }
 
 ## the Animator
 
@@ -810,7 +849,7 @@ anim-pixel-art-is-made-in = পিক্সেল আর্ট ড্রয়�
 anim-rainbow = রংধনু
 anim-remove-this-key = এই কী সরান
 anim-shadow = ছায়া
-anim-size = আকার
+common-size = আকার
 anim-spin = পাক
 anim-stage-alt-arrow-keys-move = মঞ্চ: { $alt }। অ্যারো কী হাতের আকার (বা সময়) সরায়, কমা ও ফুলস্টপ এক ফ্রেম এগোয়-পেছোয়, Space চালায়, K একটি কী রাখে।
 anim-shapes-in-hand = হাতের আকারগুলো
@@ -849,26 +888,26 @@ anim-s-s = { $s } সে.
 outline-named-label = , নাম “{ $label }”
 outline-book = একটি বই
 outline-decision = একটি সিদ্ধান্ত
-outline-talk = একটি বক্তৃতা
+common-talk = একটি বক্তৃতা
 outline-empty-outline = খালি আউটলাইন
 outline-outliner-ideas-under-ideas-folded = আউটলাইনার: ধারণার নিচে ধারণা, ভাঁজ ও খোলা, সরানো ও জোড়া; একই গাছ প্রেজেন্টেশন বা মাইন্ড ম্যাপ পড়ে।
 outline-arrow-from-from-to-to = { $from } থেকে { $to }-তে তীর
 outline-arrows-both-ways = দুই দিকেই তীর
 outline-as-page = পাতা হিসেবে
-outline-calculator = ক্যালকুলেটর
-outline-calendar = ক্যালেন্ডার
+common-calculator = ক্যালকুলেটর
+common-calendar = ক্যালেন্ডার
 outline-cancel-connecting = জোড়া বাতিল করুন
 outline-change-it = বদলান
-outline-chosen-items = বাছাই করা আইটেম
+common-chosen-items = বাছাই করা আইটেম
 outline-connect = জুড়ুন
 outline-connect-from-words = “{ $words }” থেকে জুড়ুন
 outline-connect-from-to-to = “{ $from }” ও “{ $to }” জুড়ুন
 outline-connection-from-from-to-to = { $from } থেকে { $to }-তে সংযোগ
-outline-connections = সংযোগ
-outline-copy = কপি
-outline-presentation-builder = প্রেজেন্টেশন বিল্ডার
-outline-diagram-maker = ডায়াগ্রাম মেকার
-outline-drag-to-move = টেনে সরান
+common-connections = সংযোগ
+common-copy = কপি
+common-presentation-builder = প্রেজেন্টেশন বিল্ডার
+common-diagram-maker = ডায়াগ্রাম মেকার
+common-drag-to-move = টেনে সরান
 outline-draw-as-mind-map = মাইন্ড ম্যাপ হিসেবে আঁকুন
 outline-draw-as-network = নেটওয়ার্ক হিসেবে আঁকুন
 outline-draw-as-org-chart = সাংগঠনিক চার্ট হিসেবে আঁকুন
@@ -879,24 +918,24 @@ outline-fold-all = সব ভাঁজ করুন
 outline-item = আইটেম
 outline-item-n = আইটেম { $n }
 outline-kind-of-line = রেখার ধরন
-outline-launch-plan = চালুর পরিকল্পনা
+common-launch-plan = চালুর পরিকল্পনা
 outline-line-from-from-to-to = { $from } থেকে { $to }-তে রেখা
 outline-line-named-label-change-it = “{ $label }” নামের রেখা: বদলান
-outline-animator = অ্যানিমেটর
-outline-move-down = নিচে সরান
+common-animator = অ্যানিমেটর
+common-move-down = নিচে সরান
 outline-move-this-item-drag-it = এই আইটেম সরান: অন্যটির ওপর টেনে নিন
-outline-move-up = ওপরে সরান
+common-move-up = ওপরে সরান
 outline-name-of-line = রেখার নাম
 outline-numbered = নম্বরযুক্ত
 outline-opml-for-outliners = OPML (আউটলাইনারের জন্য)
-outline-open-in-new-tab = নতুন ট্যাবে খুলুন
-outline-outline = আউটলাইন
+common-open-in-new-tab = নতুন ট্যাবে খুলুন
+common-outline = আউটলাইন
 outline-outliner = আউটলাইনার
 outline-outline-lowercase = আউটলাইন
-outline-paste = পেস্ট
+common-paste = পেস্ট
 outline-plain-line = সাধারণ রেখা
 outline-plain-text = সাধারণ লেখা
-outline-show-as-slides = স্লাইড হিসেবে দেখান
+common-show-as-slides = স্লাইড হিসেবে দেখান
 outline-show-as-outline = আউটলাইন হিসেবে দেখান
 outline-take-away-connection-from-from = { $from } থেকে { $to }-এর সংযোগ সরিয়ে দিন
 outline-take-it-away = সরিয়ে দিন
@@ -904,14 +943,14 @@ outline-take-connection-away = সংযোগ সরিয়ে দিন
 outline-tap-item-to-connect-from = যেখান থেকে জুড়বেন সেই আইটেমে ট্যাপ করুন।
 outline-tap-item-to-connect-words = “{ $words }” যার সঙ্গে জুড়বেন সেই আইটেমে ট্যাপ করুন।
 outline-question-options-under-it-and = প্রশ্ন, তার নিচে বিকল্পগুলো, আর প্রতিটির পক্ষে ও বিপক্ষে কী আছে।
-outline-trip-planner = ভ্রমণ পরিকল্পনা
+common-trip-planner = ভ্রমণ পরিকল্পনা
 outline-twenty-minutes-in-three-parts = তিন ভাগে বিশ মিনিট: সমস্যা, ধারণা, এর অর্থ; প্রেজেন্টেশন হিসেবে দেখালে প্রতিটি ওপরের আইটেম একটি স্লাইড।
 outline-unfold-all = সব খুলুন
 outline-unfold-n-inside = খুলুন, ভেতরে { $n ->
         [one] { $n }
        *[other] { $n }
     }টি
-outline-untitled = নামহীন
+common-untitled = নামহীন
 outline-view-as = এভাবে দেখুন
 outline-zoomed-in-on = বড় করে দেখা হচ্ছে
 outline-a-plain-line = সাধারণ রেখা
@@ -944,6 +983,7 @@ outline-question-method-budget-that-adds = প্রশ্ন, পদ্ধত�
 outline-three-generations-and-next-each = তিন প্রজন্ম আর পরেরটি, প্রত্যেকের সাল সহ, মেনু থেকে বংশলতিকা হিসেবে আঁকা।
 outline-troubleshooting = সমস্যা সমাধান
 outline-who-works-for-whom-at = নয় জনের বেকারিতে কে কার অধীনে, প্রত্যেকের ভূমিকাসহ, মেনু থেকে সাংগঠনিক চার্ট হিসেবে আঁকা।
+outline-pdf-sections-and-bullets = PDF: অংশ ও বুলেট
 
 ## the Presentation Builder
 
@@ -988,7 +1028,7 @@ deck-bullets = বুলেট
 deck-two-columns = দুই কলাম
 deck-big-icon = বড় আইকন
 deck-fade = মিলিয়ে যাওয়া
-deck-cut = কাট
+common-cut = কাট
 deck-slide = সরে আসা
 deck-zoom = জুম
 deck-zine = জিন
@@ -1014,12 +1054,12 @@ deck-fun = মজা
 deck-themes-color = থিমের রং
 
 # The bar
-deck-present = প্রেজেন্ট
+common-present = প্রেজেন্ট
 deck-see-sheets-to-print = প্রিন্টের শিট দেখুন
 deck-back-to-pages = পাতায় ফিরুন
 deck-headline = শিরোনাম
 deck-layout-layout = বিন্যাস: { $layout }
-deck-look-theme = লুক: { $theme }
+common-look-theme = লুক: { $theme }
 deck-transition-transition = ট্রানজিশন: { $transition }
 deck-format-format = ফরম্যাট: { $format }
 deck-printing = ছাপা
@@ -1047,11 +1087,11 @@ deck-big-icon-page = বড় আইকনের পাতা
 deck-four-more-pages = আরও চার পাতা
 deck-on-slide = স্লাইডে
 deck-on-page = পাতায়
-deck-pages = পাতা
+common-pages = পাতা
 
 # The canvas
 deck-add-icon = আইকন যোগ করুন
-deck-change-icon = আইকন বদলান
+common-change-icon = আইকন বদলান
 deck-pick-icon = আইকন বাছুন
 deck-left-column = বাঁ কলাম
 deck-right-column = ডান কলাম
@@ -1069,7 +1109,7 @@ deck-remove-from-slide = স্লাইড থেকে সরান
 deck-slide-n = স্লাইড { $n }
 deck-front-cover = সামনের মলাট
 deck-back-cover = পেছনের মলাট
-deck-page-n = পাতা { $n }
+common-page-n = পাতা { $n }
 deck-front = সামনে
 deck-inside-left = ভেতরে বাঁয়ে
 deck-inside-middle = ভেতরে মাঝে
@@ -1093,11 +1133,11 @@ deck-print-it-on-letter-paper-at-actual-size-cut-along-dashes-six-badges-sheet =
 
 # Presenting, and the closing slide
 deck-presentation = প্রেজেন্টেশন
-deck-previous = আগেরটি
-deck-next = পরেরটি
-deck-stop-presenting = প্রেজেন্ট বন্ধ করুন
+common-previous = আগেরটি
+common-next = পরেরটি
+common-stop-presenting = প্রেজেন্ট বন্ধ করুন
 deck-slide-n-of-total = { $total }টির মধ্যে স্লাইড { $n }
-deck-notes = নোট
+common-notes = নোট
 deck-n-hides-them = N চাপলে লুকায়
 deck-take-this-deck-home = এই ডেক বাড়ি নিয়ে যান
 deck-take-this-deck-home-title = এই ডেক বাড়ি নিয়ে যান: { $title }
@@ -1123,6 +1163,7 @@ deck-trifold-brochure-six-panels-on = তিন ভাঁজের ব্রশ�
 deck-mini-comic-panels-with-picture = ছোট কমিক: ছবি, কথার বেলুন ও ক্যাপশনসহ প্যানেল, এক শিট ভাঁজ করে।
 deck-poster-or-flyer-headline-and = পোস্টার বা লিফলেট: একটি শিরোনাম ও কয়েক লাইন, এক পাতায় যত বড় ধরে।
 deck-name-badges-for-meetup-one = মিটআপের নাম ব্যাজ, জনপ্রতি একটি, শিটে ছয়টি, কাটার জন্য তৈরি।
+deck-edit-this-deck = এই ডেক বদলান
 
 ## the Calendar app
 
@@ -1148,7 +1189,7 @@ cal-end = শেষ
 cal-end-date = শেষের তারিখ
 cal-end-time = শেষের সময়
 cal-ends = শেষ হয়
-cal-event = ইভেন্ট
+common-event = ইভেন্ট
 cal-every-day = প্রতিদিন
 cal-every-month = প্রতি মাসে
 cal-every-week = প্রতি সপ্তাহে
@@ -1184,7 +1225,7 @@ cal-start = শুরু
 cal-start-date = শুরুর তারিখ
 cal-start-time = শুরুর সময়
 cal-starts = শুরু হয়
-cal-stops = থামে
+common-stops = থামে
 cal-same-dates-as-gantt-chart = একই তারিখ গ্যান্ট চার্ট হিসেবে
 cal-this-calendar-is-written-in = এই ক্যালেন্ডার { $zone } সময়ে লেখা।
 cal-this-calendar-names-no-time = এই ক্যালেন্ডারে কোনো টাইম জোন নেই: এর সময় আপনার জোনে পড়া হয়, { $zone }।
@@ -1309,6 +1350,7 @@ diagram-house-network = বাড়ির নেটওয়ার্ক
 diagram-water-cycle = পানিচক্র
 diagram-three-generations-of-morenos-and = মোরেনো পরিবারের তিন প্রজন্ম, আর একজন ধর্মসন্তানের দিকে বিন্দু রেখা।
 diagram-who-can-do-what = কে কী করতে পারেন
+diagram-tap-empty-space-for-branch = শাখার জন্য ফাঁকা জায়গায় ট্যাপ করুন; লিখতে ধারণায় ট্যাপ করুন, পরেরটির জন্য Enter; নিচে বসাতে একটিকে অন্যটির ওপর টেনে নিন; “জুড়ুন” ম্যাপের দুই প্রান্ত জোড়ে।
 
 ## the Trip Planner
 
@@ -1384,7 +1426,7 @@ trip-for-guests-where-wedding-is = অতিথিদের জন্য: বি
 
 looks-typewriter = টাইপরাইটার
 looks-serif = সেরিফ
-looks-home = হোম
+common-home = হোম
 looks-currency = মুদ্রা
 
 ## the Calculator app
@@ -1468,79 +1510,8 @@ calc-curve-and-its-slope = একটি বক্ররেখা ও তার �
 calc-x3-3x-its-derivative-and = x³ − 3x, তার অন্তরক, আর নিচু জায়গার সমতল স্পর্শক।
 calc-waves-adding-up = তরঙ্গ যোগ হচ্ছে
 calc-sine-waves-summed-on-their = সাইন তরঙ্গের যোগফল, বর্গ তরঙ্গের দিকে এগোচ্ছে।
-
-## unsorted: added after the sections, each id named for where it is used
-
-home-templates-for-app = { $app }-এর টেমপ্লেট
-home-app-templates = { $app } টেমপ্লেট
-home-templates-for-app-name = { $app }-এর টেমপ্লেট: { $name }
-home-templates-are-not-saved-in = টেমপ্লেটগুলো এখনো এই ব্রাউজারে সংরক্ষিত নেই। দেখতে ইন্টারনেটে সংযোগ করুন।
 calc-choose-line-n-drag-it = লাইন { $n } বাছুন: সরাতে টানুন
 calc-chosen-lines = বাছাই করা লাইন
-sheet-keeps-one-column = শিটে অন্তত একটি কলাম থাকে
-editor-bold-italic-and-links = বোল্ড, ইটালিক ও লিংক
-sheet-choices = বিকল্প
-sheet-choices-for-ref = { $ref }-এর বিকল্প
-editor-one-of-words-column-holds = কলামে থাকা একটি শব্দ, বা নতুন একটি
-editor-option = বিকল্প
-sheet-has-one = শিটে একটি আছে
-drawer-documents = নথি
-common-find-app-template = অ্যাপ, টেমপ্লেট খুঁজুন
-drawer-find-app-doc-template-or = অ্যাপ, নথি, টেমপ্লেট বা কমান্ড খুঁজুন
-drawer-find-app-template-or-command = অ্যাপ, টেমপ্লেট বা কমান্ড খুঁজুন
-drawer-commands = কমান্ড
-share-new-noun-date-n = নতুন { $noun } { $date } #{ $n }
-drawer-nothing-by-that-name = এই নামে কিছু নেই
-draw-pixels-n-n = পিক্সেল { $n }×{ $n }
-share-mastodon-server-like-mastodon-social = একটি Mastodon সার্ভার, যেমন mastodon.social
-share-change = পরিবর্তন
-compare-changes = পরিবর্তন
-compare-compare = তুলনা
-share-copy-embed-code = এমবেড কোড কপি করুন
-share-copy-show-link = শো লিংক কপি করুন
-deck-edit-this-deck = এই ডেক বদলান
-share-embed = এমবেড
-share-embed-code-copied = এমবেড কোড কপি হয়েছে
-compare-no-difference = কোনো পার্থক্য নেই
-compare-not-link-to-tiny-little = এটি Tiny Little Office নথির লিংক নয়
-open-opened-name = { $name } খোলা হয়েছে
-share-opens-deck-already-presenting = ডেক খুলেই প্রেজেন্ট শুরু হয়।
-export-pdf-file = PDF ফাইল
-outline-pdf-sections-and-bullets = PDF: অংশ ও বুলেট
-compare-paste-second-link-to-see = কী বদলেছে দেখতে দ্বিতীয় লিংক পেস্ট করুন।
-compare-paste-link-to-document-as = নথির এখনকার লিংক পেস্ট করুন
-compare-paste-link-to-document-as-it-was = নথির আগের লিংক পেস্ট করুন
-share-post = পোস্ট
-share-post-link = লিংক পোস্ট করুন
-share-show-preview-of-first-page = প্রথম পাতার প্রিভিউ দেখান
-share-picture-of-first-page-and = প্রথম পাতার একটি ছবি আর শিরোনাম এক মাস আমাদের সার্ভারে পড়ার মতো রাখা থাকে, যাতে নেটওয়ার্ক সেগুলো নিতে পারে। নথিটি নিজে নয়।
-share-shared-without-preview-reason = প্রিভিউ ছাড়া শেয়ার হয়েছে: { $reason }
-share-making-preview = প্রিভিউ বানানো হচ্ছে…
-share-page-could-not-be-drawn = পাতাটি আঁকা যায়নি
-share-picture-is-over-400-kb = ছবিটি 400 KB-এর বেশি
-share-server-could-not-be-reached = সার্ভারে পৌঁছানো যায়নি
-share-hundred-previews-day-from-one = একটি ঠিকানা থেকে দিনে একশোটি প্রিভিউ
-share-server-refused-picture = সার্ভার ছবিটি নেয়নি
-compare-put-in = যোগ হয়েছে:
-compare-swap = অদলবদল
-compare-taken-out = বাদ গেছে:
-open-that-file-is-not-words = এই ফাইল Tiny Little Office পড়তে পারে এমন লেখা নয়।
-open-that-file-is-too-large = এই ফাইল এখানে নথি হওয়ার জন্য অনেক বড়।
-compare-first-link = প্রথম লিংক
-share-pages-in-frame-on-another = পাতাগুলো অন্য সাইটের ফ্রেমে, এখানে খোলার লিংকসহ।
-compare-second-link = দ্বিতীয় লিংক
-compare-two-links-to-documents-side = দুটি নথির লিংক পাশাপাশি: দ্বিতীয়টি যা বদলেছে তা চিহ্নিত। এই পাতা থেকে কিছুই বাইরে যায় না।
-share-your-mastodon-server = আপনার Mastodon সার্ভার
-compare-different-apps = ভিন্ন অ্যাপ
-compare-n-blocks-taken-out = { $n ->
-        [one] { $n }
-       *[other] { $n }
-    }টি ব্লক বাদ গেছে
-compare-n-put-in = { $n ->
-        [one] { $n }
-       *[other] { $n }
-    }টি যোগ হয়েছে
-diagram-tap-empty-space-for-branch = শাখার জন্য ফাঁকা জায়গায় ট্যাপ করুন; লিখতে ধারণায় ট্যাপ করুন, পরেরটির জন্য Enter; নিচে বসাতে একটিকে অন্যটির ওপর টেনে নিন; “জুড়ুন” ম্যাপের দুই প্রান্ত জোড়ে।
 
 ## restored round the document
 
@@ -1554,7 +1525,7 @@ home-documents-found = পাওয়া নথি
 sheet-edit-cell-caret-at-its = ঘর বদলান, কার্সর শেষে
 keys-everything-larger = সবকিছু বড়
 keys-everything-smaller = সবকিছু ছোট
-find-in-this-document = এই নথিতে খুঁজুন
+common-in-this-document = এই নথিতে খুঁজুন
 outline-fold-unfold = ভাঁজ করুন, খুলুন
 common-indent-or-bring-out-in = তালিকায় ভেতরে বা বাইরে সরান; গ্রিডে পরের ঘর
 keys-keep-this-document-on-device = এই নথি ডিভাইসে রাখুন
@@ -1653,3 +1624,34 @@ open-n-documents-kept = { $n ->
         [one] { $n }
        *[other] { $n }
     }টি নথি রাখা আছে
+
+## two links compared (kit/ui/compare.ts)
+
+compare-changes = পরিবর্তন
+compare-compare = তুলনা
+compare-no-difference = কোনো পার্থক্য নেই
+compare-not-link-to-tiny-little = এটি Tiny Little Office নথির লিংক নয়
+compare-paste-second-link-to-see = কী বদলেছে দেখতে দ্বিতীয় লিংক পেস্ট করুন।
+compare-paste-link-to-document-as = নথির এখনকার লিংক পেস্ট করুন
+compare-paste-link-to-document-as-it-was = নথির আগের লিংক পেস্ট করুন
+compare-put-in = যোগ হয়েছে:
+compare-swap = অদলবদল
+compare-taken-out = বাদ গেছে:
+compare-first-link = প্রথম লিংক
+compare-second-link = দ্বিতীয় লিংক
+compare-two-links-to-documents-side = দুটি নথির লিংক পাশাপাশি: দ্বিতীয়টি যা বদলেছে তা চিহ্নিত। এই পাতা থেকে কিছুই বাইরে যায় না।
+compare-different-apps = ভিন্ন অ্যাপ
+compare-n-blocks-taken-out = { $n ->
+        [one] { $n }
+       *[other] { $n }
+    }টি ব্লক বাদ গেছে
+compare-n-put-in = { $n ->
+        [one] { $n }
+       *[other] { $n }
+    }টি যোগ হয়েছে
+
+## files and zips dropped on the page (kit/file/open.ts)
+
+open-opened-name = { $name } খোলা হয়েছে
+open-that-file-is-not-words = এই ফাইল Tiny Little Office পড়তে পারে এমন লেখা নয়।
+open-that-file-is-too-large = এই ফাইল এখানে নথি হওয়ার জন্য অনেক বড়।

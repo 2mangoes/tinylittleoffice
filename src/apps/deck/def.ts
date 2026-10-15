@@ -36,7 +36,7 @@ async function deckWebm(doc: string): Promise<Uint8Array | null> {
 export default defineApp({
   id: 'deck',
   get name() {
-    return t('outline-presentation-builder');
+    return t('common-presentation-builder');
   },
   get noun() {
     return t('deck-presentation-lowercase');
@@ -59,10 +59,10 @@ export default defineApp({
     // In place of the kit's pictures of the pages: a page that plays the deck, a slide at a time, with its transition.
     {
       ext: 'html',
-      label: () => t('download-web-page-html'),
+      label: () => t('common-web-page-html'),
       mime: 'text/html',
       shows: 'own',
-      build: (doc, ctx) => deckToHtml(doc, ctx.title || titleOf(doc) || t('shell-untitled-noun', { noun: t('deck-presentation-lowercase') }), ctx.link),
+      build: (doc, ctx) => deckToHtml(doc, ctx.title || titleOf(doc) || t('common-untitled-noun', { noun: t('deck-presentation-lowercase') }), ctx.link),
     },
     {
       ext: 'zip',
