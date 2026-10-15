@@ -24,7 +24,7 @@ shell-n-characters-over-link-limit = リンクの上限を{ $n }文字超えて�
 # en: 1cfbe154225ecb3a01f463f1adde07279f1a454a
 shell-n-characters-over-link-limit-short-link-holds-max = リンクの上限を{ $n }文字超えています。短縮リンクには{ $max }文字まで入ります
 # en: e7722b7943884e579644a3f5bd2b605afd08a156
-shell-n-characters-over-what-short = 短縮リンクに入る量を{ $n }文字超えています
+shell-n-characters-over-what-short = 短縮リンクの上限を{ $n }文字超えています
 # Before a document that lives nowhere but its link (Private, changed) is left for another place: the question and its three answers.
 # en: f0bba930d38a38cacb48e472c8d4856caa4d8fa8
 shell-this-document-lives-in-its = このドキュメントは保存されていません
@@ -141,13 +141,13 @@ common-tiny-little-office = ちいさなちいさなオフィス
 # en: 399d4aacd52f76ac8090ce08a31e550e2123645d
 drawer-about-tiny-little-office = ちいさなちいさなオフィスについて
 # en: 6218d1c0ab69084ed45fb0f022b95f382310184a
-drawer-tiny-little-office-is-experiment = ちいさなちいさなオフィスは、ニューヨークのデジタル・AI戦略とソフトウェア開発の会社 { $aboard } による実験です。
+drawer-tiny-little-office-is-experiment = ちいさなちいさなオフィスは、ニューヨークでデジタル・AI戦略とソフトウェア開発を手がける会社、{ $aboard }による実験です。
 # en: 04a1291dcc6e5d304f04516685710a331963f630
 drawer-to-reach-out-with-questions = ご質問は{ $email }。
 # en: 522edc71559293b5713cff3f13c2dbafd37a56a3
 drawer-email-us = メールでお寄せください
 # en: 98187f1688112fa57c00a326f526288fa3e6b023
-drawer-if-you-find-bugs-please = バグを見つけたら、{ $github }に報告してください。
+drawer-if-you-find-bugs-please = バグを見つけたら、{ $github }でお知らせください。
 # en: c6651994b242228b647fbbd2a83eccefd957abca
 drawer-github-repository = GitHub リポジトリ
 # en: 0fe421942f09b119f9019d2de286f5a43eefd4f3
@@ -169,7 +169,7 @@ drawer-add-to-home-screen = ホーム画面に追加
 # en: 9b3cbed5c490c07473546a88768ba29b787e9e52
 drawer-size-of-everything = ズーム
 # en: 943c5ac9fa7766d7c1ebecbc95c4e0d27b4ef9d4
-drawer-to-add-tiny-little-office = ちいさなちいさなオフィスをホーム画面に追加するには：共有、そして「ホーム画面に追加」。
+drawer-to-add-tiny-little-office = ちいさなちいさなオフィスをホーム画面に追加するには、「共有」から「ホーム画面に追加」を選んでください。
 
 ## links that leave the site (kit/ui/link-guard.ts)
 
@@ -182,7 +182,7 @@ leave-do-you-trust-this-link = このリンクを信頼しますか？
 # en: 8d85feca3f164857fc84014a8f2ed5cc4846d4c9
 leave-you-are-leaving-tiny-little = ちいさなちいさなオフィスを離れて、次のサイトへ移動します
 # en: 50ef68d5c205237951dae42aa775a66480171c46
-leave-this-link-writes-email-to = このリンクは次の宛先へメールを書きます
+leave-this-link-writes-email-to = このリンクは次の宛先へのメールを作成します
 # en: 102dce223fdc2f3bbdda71f28108e2a6fdf21710
 leave-this-link-calls = このリンクは次の番号に電話をかけます
 # en: afb8b3199e929e5e9f886fdf382599c9d440c71f
@@ -232,7 +232,7 @@ share-expires-in-n-minutes-date = あと{ $n ->
        *[other] { $n }分
     }で期限切れ（{ $date }）
 # en: 0ef0475467d903f5adb0297bbc7979b7b0792d0c
-share-opens-as-pages-to-read = ページとして読む形で開く
+share-opens-as-pages-to-read = 閲覧用のページとして開く
 # en: 8744400a02796b44742f8f5e5b66216821eab90d
 share-opens-in-editor = エディタで開く
 # en: 7fbbb75c4e853ef0e42da5fe316344fdf1a6143c
@@ -240,17 +240,17 @@ common-whoever-opens-this-link-gets = このリンクを開いた人は、それ
 # en: 94b01acececc033463cc7731d659fbcae11c2b47
 share-short-link-that-expires = 期限付きの短縮リンク
 # en: fed3d23d480dd0bfe5a0cfff4d9f3dae7857fbe6
-share-this-link-expires-in-n = このリンクはあと{ $n ->
+share-this-link-expires-in-n = このリンクの有効期限はあと{ $n ->
        *[other] { $n }日
-    }で期限切れ
+    }です
 # en: 5f55ae03e19eebbbd3a277a7647d0b2ac27c4ec8
-share-this-link-expires-in-n-hours = このリンクはあと{ $n ->
+share-this-link-expires-in-n-hours = このリンクの有効期限はあと{ $n ->
        *[other] { $n }時間
-    }で期限切れ
+    }です
 # en: a37642996477c73f2e3335a1e06a28d577806b52
-share-this-link-expires-in-n-minutes = このリンクはあと{ $n ->
+share-this-link-expires-in-n-minutes = このリンクの有効期限はあと{ $n ->
        *[other] { $n }分
-    }で期限切れ
+    }です
 # en: 04609a8df41f042b261ed7cf06b80c2667badd0e
 share-this-link-n-characters-fits = このリンク：{ $n }文字、メッセージに収まります
 # en: 822e1dca627d6149b0263bdae6477ca56c62a36c
@@ -280,7 +280,7 @@ share-n-short-links-kept-here = ここに保管した短縮リンク { $n ->
 # en: fbdda8ea6ae4f71eb78a8bd78fa2746784806ffe
 share-display-link = 表示用リンク
 # en: 54c374d4a68f528c4c4022d195a62e22b4bf57bb
-share-opens = 開く先
+share-opens = 開き方
 # en: c2e98476efb5e35f50dae898c1b56d7085eee7da
 share-link-copied = リンクをコピーしました
 # en: 4dfbe46077fcd9769d6688a682515a0cf12a7d80
@@ -306,7 +306,7 @@ share-week = 1週間
 # en: 6d17c3840dec7c16f42f223c4a5472efbbff08c1
 share-month = 1か月
 # en: 38c22f9dbdb41d2131b4324b7722c45a1f543420
-share-make-short-link = 短縮リンクを作る
+share-make-short-link = 短縮リンクを作成
 # en: 94d7d8ee473f817fa4b57737e7a01ec3cd13d4d4
 share-making = 作成中…
 # en: 1c6c031b40782efe6b28678fc42d5569cc11e029
@@ -320,7 +320,7 @@ share-this-document-is-too-long = このドキュメントは短縮リンクに�
 # en: a4d0b704a911979249dd2629e81a0205fab0aa44
 share-up-to-hundred-links-day = 1つのアドレスにつき1日100件の短縮リンクまで。
 # en: e963907dac5cd5c017869b4c96c18021c9bd058b
-share-remove = 外す
+share-remove = 一覧から削除
 # en: d0517071aa376e797705058bbad4b658954b9930
 common-link = リンク
 # en: b15dbf0da72e08fcfcf35d2aed0a937335b9cc5e
@@ -341,7 +341,7 @@ share-embed = 埋め込み
 # en: 4eeede7134d362f371fd18b2d63d3199bb24f01a
 share-embed-code-copied = 埋め込みコードをコピーしました
 # en: 682cbb0f328f16ee213c6b44d7012512b55506b7
-share-opens-deck-already-presenting = 発表を始めた状態でデッキを開きます。
+share-opens-deck-already-presenting = 発表を始めた状態でプレゼンを開きます。
 # en: 7858ac3ff63354f37161bd349efe11edd13b89cb
 share-post = 投稿
 # en: c68fca11627c0ac342583c1782892518730cc40b
@@ -361,23 +361,23 @@ share-picture-is-over-400-kb = 画像が400 KBを超えています
 # en: 398d796772eebe6fc3207881d76d2cf9f155da3f
 share-server-could-not-be-reached = サーバーに接続できませんでした
 # en: 686fd096a5f35bcfbcdcc5130d1be03e593d7bfa
-share-hundred-previews-day-from-one = 1つのアドレスからのプレビューは1日100件までです
+share-hundred-previews-day-from-one = 1つのアドレスからのプレビューは1日100件まで
 # en: 959db3cd3ff1a424890a809f9cf7445f37db3289
 share-server-refused-picture = サーバーが画像を受け付けませんでした
 # en: af490175b729a82a4315134642a89f1f87681967
 share-pages-in-frame-on-another = ほかのサイトのフレームにページを表示し、ここで開くリンクを付けます。
 # en: 9377de06278eacbdf4a297a82b8eb9aa3d4220c0
-share-your-mastodon-server = あなたのMastodonサーバー
+share-your-mastodon-server = ご利用のMastodonサーバー
 # en: 8ae1c34bd37fad49cc5f8e02da648a78e89c3ed8
-share-left = 左
+share-left = 残り
 # en: 62be4731dedfbbc70aa7fa30d6649d816af8ca4b
-share-uses = 使用先
+share-uses = 使用量
 # en: 525f61b6729229b1a8854a9e50bcaa52ea96b131
-share-where = 場所
+share-where = 共有先
 # en: cdbfed741d905515df704d9585fc74781801a24d
 share-where-link-fits = このリンクは収まりますか？
 # en: ddba25b7aa2e43ef1c94a2a8cfb8b839fb723ca2
-share-any-length = 長さ自由
+share-any-length = 長さ制限なし
 # en: 23fd8ecdbffd82e04305d3cea5eae9cdb85ac9bf
 share-n-over = { $n }超過
 
@@ -395,7 +395,7 @@ privacy-enter-password-to-open-this = このドキュメントを開くには、
 # en: 554393a215e479d023a30091a1394f7ca57690e1
 privacy-forget-everything = すべて削除
 # en: 715727cdd46f1bd0703c9e846fcdd4f369ef8313
-privacy-preview-sent-with-link-to = リンクと一緒にSNSへ送るプレビューは、1ページ目の画像、タイトル、冒頭の言葉で、1か月間サーバー上で読める状態になります。ドキュメントそのものが送られることはありません。
+privacy-preview-sent-with-link-to = リンクと一緒にSNSへ送るプレビューは、1ページ目の画像、タイトル、冒頭の文章で、1か月間サーバー上で読める状態になります。ドキュメントそのものが送られることはありません。
 # en: a584ece11551d9b1a79856743236c51aba50c44f
 privacy-forget-everything-this-site-keeps = このブラウザに保存されているものをすべて削除し、今後は保存しないようにしますか？ドキュメントはそれぞれのリンクの中に残ります。
 # en: a798882f1c31099bb9500e2da62c0874d8dbed78
@@ -413,7 +413,7 @@ privacy-opening = 開いています…
 # en: 8be3c943b1609fffbfc51aad666d0a04adf83c9d
 common-password = パスワード
 # en: 114bea5817640fe6b9eeec86b939ec0e9a7b6d76
-privacy-password-removed = パスワードを外しました
+privacy-password-removed = パスワードを解除しました
 # en: ad1909e464528c140bf96a21ce9adda2464956c0
 privacy-password-set-link-holds-only = パスワードを設定しました。リンクは暗号化されています。
 # en: dce69146962b392ae2b157aec604eface36e90c0
@@ -423,11 +423,11 @@ privacy-preferences = 設定
 # en: cf01481f626d5127ec7732fcbdb29504f08abefd
 privacy-privacy = プライバシー
 # en: cefceeebf3cd6d02ddc7aca8c769881a5341e829
-privacy-nothing-saved-in-this-browser = このブラウザには何も保存されていません。一覧の項目はこの訪問の間だけ残ります。
+privacy-nothing-saved-in-this-browser = このブラウザには何も保存されていません。一覧の項目は、このページを開いている間だけ残ります。
 # en: 626a605da9dbcd888eadcad13deebd3a64011c0a
 privacy-protected-by-password = パスワードで保護
 # en: acef17d00b9a1b6e1e15e76d27ae53635928a7a6
-privacy-remove-password = パスワードを外す
+privacy-remove-password = パスワードを解除
 # en: 788f55b0957b15918c6aba279f4f0377a5a1db90
 privacy-sealing = 暗号化中…
 # en: 94408e41c12e924b82da7ea6e79e5cb69ac9e042
@@ -439,7 +439,7 @@ privacy-set-password-in-share = パスワードは「共有」で設定
 # en: e546afa59de2ec4b23ca6c4fafbaddac7bab9240
 privacy-short-links-made-here-until = ここで作った短縮リンク（期限が切れるまで）。
 # en: b556bf027f9123d39581babef7e15564c24866da
-privacy-their-names-and-links-for = 名前とリンク。ホームページに表示されます。
+privacy-their-names-and-links-for = 名前とリンク。ホームに表示されます。
 # en: 5300fdca86b5b32fd463f73704e318a2b8fa9961
 privacy-theme-lifetime-of-short-links = テーマと短縮リンクの設定。
 # en: 0c6a2cfe53459957b6899930a2e5cd46b6541cec
@@ -463,7 +463,7 @@ privacy-every-document-opened-here-in = 開いたすべてのドキュメント�
 # en: 18b8a03ed6567555edd5005aab5b090984f4b5bd
 privacy-not-ours-to-clear = これは当サイトでは消せません
 # en: 3ca2d1d26637d42b974b313bb8ce231333179a9e
-privacy-by-name = { $name }による
+privacy-by-name = 作成者：{ $name }
 # en: a9e72cf83916d4381012a19b329292818f845a43
 common-n-documents = { $n ->
        *[other] { $n }件
@@ -473,11 +473,11 @@ privacy-n-links = { $n ->
        *[other] { $n }件
     }のリンク
 # en: 2ddd4097832d991c46023732a889beeb8ec4c29d
-privacy-n-set = { $n }件を設定
+privacy-n-set = { $n }件設定済み
 # en: a97ce1edde4ad396d1cff34063087d0bf5d0e1a8
 privacy-copy-this-and-send-it = このパスワードをコピーし、リンクとは別に送ってください。二度と表示されません。
 # en: 7640428ae16fc2b673d689ddf6b1ea15eed407d3
-privacy-make-another = 別のものを作る
+privacy-make-another = 再生成
 # en: 9a0081f0b2bff82fac1961a403734134b9a3b170
 privacy-password-copied = パスワードをコピーしました
 
@@ -499,7 +499,7 @@ locked-document = ロックされたドキュメント
 # en: 0c45986cb6755e463398a592a861baaf44018954
 locked-this-document-cannot-be-read = このドキュメントは読み取れません。
 # en: a2a127edeb3eed5dc264fc299b034db6493e1636
-locked-that-password-does-not-open = そのパスワードではこのリンクを開けません。正しいはずなら、コピーしたときにリンクが途中で切れたのかもしれません。もう一度送ってもらうか、短縮リンクを頼んでください。
+locked-that-password-does-not-open = そのパスワードではこのリンクを開けません。パスワードが正しい場合は、コピーしたときにリンクが途中で切れた可能性があります。もう一度送ってもらうか、短縮リンクで送ってもらってください。
 
 ## words several apps share
 
@@ -517,7 +517,7 @@ common-move-left = 左へ移動
 common-move-right = 右へ移動
 # The group heading the Calendar and the Trip Planner sit under on the home page.
 # en: ae2f98a099fe5855c31126233e9c13641ee7fdba
-common-plan = 計画
+common-plan = 予定
 # en: 9985434cd07212b8dac01f8e015a1fa8adac9a99
 common-chosen-tasks = 選択中のタスク
 # A link that opens the document (kit/ui/compare.ts).
@@ -538,7 +538,7 @@ common-move-selected-items-up-or = 選択した項目を上下に移動
 # en: 989fe994e413c509c03d3dd229b775a3ddc4707b
 common-nudge-shapes-in-hand = 選択中の図形を少し動かす
 # en: b11d72438f1b00b65769e9b8597829583dc4d631
-common-select-all-words-of-box = すべて選択（まずこの欄、次に文書全体）
+common-select-all-words-of-box = すべて選択（まずこの欄、次にドキュメント全体）
 # en: be76d0b25853b431767ca5b5d57ef569bbc6ff2a
 common-back-to-words = テキストに戻る
 # en: 0c0b01d469faff60dc3b2d1c035ee0a7caa03852
@@ -643,9 +643,9 @@ editor-set-link = リンクを設定
 # en: d2de1a2831e7fee28d6c8d214b66da0d1bed30c8
 editor-open-link = リンクを開く
 # en: f377ac75602950b2c36449de5bceb3c12333ac77
-editor-change-link = リンクを編集
+editor-change-link = リンクを変更
 # en: 8d48d1f9e74c4fecd89a67645ca3593ef0964710
-editor-remove-link = リンクを外す
+editor-remove-link = リンクを削除
 # The selection bubble's name: what can be done to the words selected.
 # en: 041a5dec481d6bf0724caeaa84bc135d7d9062d4
 common-format = 書式
@@ -656,7 +656,7 @@ editor-not-done = 未完了
 # en: 984cfca8d70e0b1e37a9e70c98a219bb12a05f23
 editor-bold-italic-and-links = 太字、斜体、リンク
 # en: a983f10d71bb808f58795f6ae728a6e76f08ce78
-editor-one-of-words-column-holds = 列にある言葉のどれか、または新しい言葉
+editor-one-of-words-column-holds = 列にある値のいずれか、または新しい値
 # en: e31d972229de381b461860014dd710856361917a
 editor-option = 選択肢
 # en: eb883fb88ed57f39b760fee6ee8f5a04a8cdc7ba
@@ -680,11 +680,11 @@ write-document-lowercase = ドキュメント
 # en: d26d55c7f815c82cf430c3915b3bb833d3f02e5e
 common-words = 文章
 # en: 703864836e29b00a7c7490f714fd2d18474de840
-write-words-on-page-headings-lists = 見出し、リスト、リンク、注を使った文章。計算できる表も入れられ、レターまたはA4で印刷できます。
+write-words-on-page-headings-lists = 見出し、リスト、リンク、注を使った文章。計算できる表も入れられ、レターサイズまたはA4で印刷できます。
 # en: e214b8a29923056887b7edf6635d90dcbb2abe88
 write-document = ドキュメント
 # en: 6e660ac1c8b81a53e302f6bb0298551ec820eceb
-write-here = ここに書く。
+write-here = ここに入力
 # en: 6b8ad00f4398c3aa47f82637d019dad9e4f9da0c
 write-subheading = 小見出し
 # en: 05058e0b630498611ebc41894f7b1670dcd5870e
@@ -784,35 +784,35 @@ write-name-and-contact-experience-education = 氏名と連絡先、職歴、学�
 # en: 5a0ba3bb83f0992ba00ae94db6a7464210c40711
 write-contract = 契約書
 # en: 50899f480b3395ee509689b06672ad9d8719e082
-write-plain-words-agreement-what-each = 平易な言葉で書いた合意書。それぞれが何をするか、どう終わるか。
+write-plain-words-agreement-what-each = 平易な言葉で書いた合意書：それぞれの役割と、契約の終わり方。
 # en: f9f38818c406d0878defb17a2356e1a2c658861a
 write-invoice = 請求書
 # en: 4e056cf73efd0995ce1e7c5fd88900894935896c
-write-who-what-and-how-much = 相手、内容、金額。合計は表で計算し、送る用に紙の形で印刷します。
+write-who-what-and-how-much = 相手、内容、金額。合計は表で計算され、送付用に印刷できます。
 # en: 80c40a5c8be53118fd8a9fc487b43f20c3014fbc
-write-cover-letter = 応募の手紙
+write-cover-letter = カバーレター
 # en: fe727759e1b85df4a1d71348a1a6dfd6ef8e135d
 write-applying-for-job-position-what = 仕事に応募するときの手紙：職種、これまでの実績、その会社を選ぶ理由を、4つの短い段落で。
 # en: 1fd79b9555ddf59862d60aa0aa3bb74fb74aae78
 write-memo = 社内メモ
 # en: cfa5a189ad757d015661acb500917a198d8a13e1
-write-to-from-date-and-subject = 宛先、差出人、日付、件名。変更点を一文で、その理由、返事がほしいことを書きます。
+write-to-from-date-and-subject = 宛先、差出人、日付、件名。変更点を一文で、その理由、相手に求めること。
 # en: 092f99ea11a34a8490e7a767a83a42fc45634f82
 write-minutes = 議事録
 # en: 34dbbbeddd62f120a000701c56adebc8bae95352
-write-formal-meeting-who-came-treasurers = 正式な会議：出席者、会計の収支、動議と採決、決まった行動。
+write-formal-meeting-who-came-treasurers = 正式な会議：出席者、会計の収支、動議と採決、今後の対応。
 # en: e04a25d1f69061bfe7770b16891fca2c413bcbe0
-write-one-page-cv = 1ページ職務経歴書
+write-one-page-cv = 1ページの職務経歴書
 # en: 11628c83c5de19d1338628ed7153b648f496b27c
 write-typewriter-set-cv-now-before = タイプライター風の職務経歴書：現在、以前、学歴、言語とツール。
 # en: 6ed05e720ccc3ef269db1b38201da8b873acc895
 write-newsletter = 会報
 # en: e583899cf44dbc07e6d8d4e7a252d39552e4e3d4
-write-block-associations-month-dates-in = 町内会の1か月：日程を表に、歓迎、お知らせ、お礼。
+write-block-associations-month-dates-in = 町内会の1か月：日程の表、新しい方の紹介、お知らせ、お礼。
 # en: 1dcda804c96da3cc7e73e8a1672d4379a741f11a
 write-recipe = レシピ
 # en: 72490fa559ee9ce5ed498b58b3e2cad900af7155
-write-what-you-need-in-table = 必要なものを、4人分から6人分に増やせる表で。作り方は手順ごとに。
+write-what-you-need-in-table = 材料は4人分から6人分に変えられる表で、作り方は手順ごとに。
 # en: aa3ddab4d749b73414ddd65201f9c6553b98a49b
 write-questions-and-answers = 質問と回答
 # en: 1854b96dd11603bed03cce723369ef661a6f34f8
@@ -820,7 +820,7 @@ write-questions-people-ask-each-heading = よくある質問を見出しにし�
 # en: 6d234a17fecd5048e790eb4d1c415e17899a0e56
 write-press-release = プレスリリース
 # en: ba41d12bbba317bcacf230155abba7ce9e400379
-write-news-in-first-line-detail = 最初の1行にニュース、続けて詳細、コメント、時間、問い合わせ先。
+write-news-in-first-line-detail = 最初の1行にニュース、続けて詳細、コメント、日時、問い合わせ先。
 # en: 0c30f8a886ae8207e0702b4daf5eda405b19a131
 write-news-article = ニュース記事
 # en: 66280b179ec208e759c8fd7e05a4b1171c355c9f
@@ -844,19 +844,19 @@ write-title-page-abstract-chapters-with = 表紙、要旨、脚注と表のあ�
 # en: 42921f1b739a62eb82bc6f16ce47ff5ce5fd4da4
 write-grant-proposal = 助成金申請書
 # en: 381d823ac8ecdff832331120748c151a113b2464
-write-ask-need-plan-budget-that = お願いしたいこと、必要な理由、計画、収支の合う予算、成果の確かめ方。
+write-ask-need-plan-budget-that = 申請額、必要性、計画、収支の合う予算、成果の測り方。
 # en: 1b731d688386e2e229d1c2b671e96c2bfce768a4
 write-syllabus = シラバス
 # en: fc9a91d648763f9cd04a596f372b833e76f709f8
 write-course-when-and-where-what = 講座：日時と場所、内容、週ごとの計画、合計100%になる成績評価。
 # en: 3c847b9cd456626c998b9d2793f7701117ee4c80
-write-formal-complaint = 正式な苦情
+write-formal-complaint = 苦情申し立て書
 # en: f98daa2b60c626279045f82029a9e58dfcd90f4b
-write-what-happened-in-order-what = 起きたことを順に、望むこと、そして次に進む前の期限。
+write-what-happened-in-order-what = 起きたことを順に、求める対応、そして次の手段に移る前の期限。
 # en: f74c6bc075b1961f73f45729ce6281dc84fb3ccf
 write-letter-to-politician = 議員への手紙
 # en: 2e754026e13e7ebe41d9513e31f94d8268341243
-write-ask-your-representative-for-vote = 議員に採決を求める手紙：自分は誰か、この地域でなぜ大事か、そして質問。
+write-ask-your-representative-for-vote = 議員に投票をお願いする手紙：自己紹介、この地域にとってなぜ大切か、そして質問。
 # en: de21096f37522d15740e7a4acd69efc811f9b5ce
 write-love-letter = ラブレター
 # en: a6977a11c96b06575fd8359e1bb9e3dea5a21fcf
@@ -868,9 +868,9 @@ write-how-they-met-what-you = 2人の出会い、その後に見てきたこと�
 # en: c88c994e6c6c50db17576753df90aac55138155f
 write-eulogy = 弔辞
 # en: cdc87e623e95678f786543dd272ba279df15e8ee
-write-life-in-few-minutes-where = 数分で語る人生：始まり、どんな人だったか、惜しむこと。
+write-life-in-few-minutes-where = 数分で語る人生：どこで始まり、どんな人だったか、何を恋しく思うか。
 # en: 6c63ce6d4727a3fb46c16a62ac8d536b0b61fd08
-write-zine-essay = ジン用エッセイ
+write-zine-essay = ZINEエッセイ
 # en: ecce024c73aadb2150552b3419d5aa1c3cb72c17
 write-personal-essay-for-small-magazine = 小さな雑誌のための個人的なエッセイ。タイプライター風です。
 # en: 563a631aba8690962836c99d15886672eb96ef62
@@ -898,7 +898,7 @@ insert-tiny-little-office-link = ちいさなちいさなオフィスのリン�
 # en: cdea71ff947c2b49dd7d7ea146fd3efeb9fa5677
 insert-opening-short-link = 短縮リンクを開いています…
 # en: 9d2d34c4b04d8410e0025beb7899a31d1bc57c04
-insert-paste-link-of-another-tiny = ほかのちいさなちいさなオフィスドキュメントのリンク（長いものでも短縮でも）を貼り付けてください。最初のページがここに表示されます。
+insert-paste-link-of-another-tiny = ほかのちいさなちいさなオフィスのドキュメントのリンク（通常のリンクでも短縮リンクでも）を貼り付けてください。1ページ目がここに表示されます。
 # en: 7e4861cdc8de2c0c4cf87ca37c9130a92051b5b0
 insert-this-is-not-tiny-little = ちいさなちいさなオフィスのリンクではないか、期限が切れています。
 # en: 1eb05dc15f4e90a6a61c46b111812e974555cd81
@@ -955,7 +955,7 @@ common-text = テキスト
 # en: cc6fdf1b0963eceb567d2f5b641f4950751636eb
 common-spreadsheet = 表計算
 # en: 469342764c059045df7b47882a77d96ceb261898
-sheet-spreadsheet-lowercase = 表計算
+sheet-spreadsheet-lowercase = スプレッドシート
 # en: 7e53821f70ae16079c4a6a64c52a91fae645bc5f
 common-numbers = 数値
 # en: 05634091c29d83162cee95ca003dc222a3bab8ea
@@ -1003,7 +1003,7 @@ sheet-this-year-against-last-line = 今年と昨年を、1か月1行で比べ、
 # en: 467dda8775e7e01a3dacd9ff5d247da7caf931d3
 sheet-household-budget-by-month = 月別の家計簿
 # en: f61119c5b20c1ed2360f6aa2b583872a1fc9c474
-sheet-six-months-of-homes-bills = 家の6か月分の請求と支出。月ごとに1列で、収入に対する合計を縦横で出します。
+sheet-six-months-of-homes-bills = 家庭の6か月分の請求と支出。月ごとに1列で、縦横の合計を収入と比べます。
 # en: 2c2609efcdcac42f94b3d73758d40d3f2f79dfd8
 sheet-savings-goal = 貯金の目標
 # en: 49ff61e9d2d6e99106df2e02e7a626aa5186c112
@@ -1049,7 +1049,7 @@ sheet-poll-results = 投票結果
 # en: df60ac32ce5b04bf11e53f97d296db53c2a2cda2
 sheet-answers-and-votes-for-each = 回答とそれぞれの票数。上に円グラフで描きます。
 # en: bfee938677dd9bf5dab2de4f9558c07a06d616fd
-sheet-fundraising-thermometer = 募金の温度計
+sheet-fundraising-thermometer = 募金メーター
 # en: f6873b16e788104f3e409c1c06243db77d2a6e04
 sheet-what-has-come-in-week = 集まった額を週ごとに目標と比べます。上にグラフ、これまでの合計は大きく表示します。
 # en: 20ded69e290360ef0be6b1fd22e648ca398d7ed3
@@ -1071,15 +1071,15 @@ sheet-freelancers-services-with-hours-each = フリーランスのサービス�
 # en: b9d1a465f75615e0b55ff620ec057c608971b8ed
 sheet-mortgages-compared = 住宅ローン比較
 # en: 43ecdf4a244c2e1c022c6c08a3ba1c07f107ece3
-sheet-four-offers-on-one-house = 1軒の家への4つの提案：頭金を引いたローン額、月々の返済、税込みの総額、利息。
+sheet-four-offers-on-one-house = 1軒の家に対する4つのローン条件：頭金を引いた借入額、月々の返済、税込みの総額、利息。
 # en: 54695e5df6ef00663252186d998a600f9bac4c58
 sheet-unit-converter = 単位変換
 # en: d2e0c086c77046805d1cc8934044bb315bf00aec
-sheet-miles-and-kilometers-pounds-and = マイルとキロメートル、ポンドとキログラム、オーブン、カップ、ガロン：数量を入れると、もう一方の単位が読めます。
+sheet-miles-and-kilometers-pounds-and = マイルとキロメートル、ポンドとキログラム、オーブンの温度、カップ、ガロン：数量を入れると、もう一方の単位で表示されます。
 # en: 9d2911edf283fc08872808d554a1017460fbe86f
 sheet-tournament-bracket = トーナメント表
 # en: ad907a82b59f9d64761c80d6b2fe13c2a3b04fc2
-sheet-eight-teams-single-elimination-each = 8チームのノックアウト方式：各試合のスコア、勝者の計算、決勝に進む勝者。
+sheet-eight-teams-single-elimination-each = 8チームの勝ち抜き戦：各試合のスコア、勝者の判定、決勝へ勝ち上がるチーム。
 # en: 0e2d6a433d926deb1903e03f166c76cd50bd542d
 sheet-excel-xlsx = Excel（XLSX）
 # same
@@ -1118,17 +1118,17 @@ common-columns = 列
 # en: 40c14f884fe7e5b4e58ea4bd6f6d522bae43134b
 common-delete-which = { $which }を削除
 # en: 51f5ba33dabbc2c8aa4e3e640e0b27cb55aea1be
-common-drag-to-fill = ドラッグして埋める
+common-drag-to-fill = ドラッグしてコピー
 # en: 87b8f44339c3a345782b1fa838bfa3b0406567b3
 sheet-abc-or-123-for-this = 列の種類
 # en: 69ff8ba19299f697ed3f5401bb7c03f0abbc4c67
 sheet-drag-to-resize-double-click = ドラッグで幅を変更、ダブルクリックで合わせる
 # en: 363a9922cf56c76397d7b72ae8425d30d0438b33
-sheet-fill-down-from-top-row = 一番上の行から下へ埋める
+sheet-fill-down-from-top-row = 一番上の行から下方向へコピー
 # en: 549a401f55bc461388a4f5f8554db5e0749d0a28
-sheet-fill-right-from-first-column = 最初の列から右へ埋める
+sheet-fill-right-from-first-column = 最初の列から右方向へコピー
 # en: 51f5ba33dabbc2c8aa4e3e640e0b27cb55aea1be
-common-fill-drag-to-carry-these = ドラッグで埋める
+common-fill-drag-to-carry-these = ドラッグしてコピー
 # en: 4425eb9442fea0435d290b7a34f1ad8a6980e789
 sheet-fit-columns-to-page = 列をページに合わせる
 # en: 720f58fb1f9353ab3c904b888ccb774c40393e06
@@ -1148,7 +1148,7 @@ common-insert-n-rows-below = 下に{ $n ->
 # en: ae3b3fa65ff4f34adbaf5d76e694293bb2059fbf
 sheet-letters-keyboard = 文字キーボード
 # en: 7177342b32d961e7d51feb4571231982a48a0772
-sheet-lock-these-cells-so-reader = このセルをロックして、読む人が変更できないようにする
+sheet-lock-these-cells-so-reader = このセルをロックして、閲覧者が変更できないようにする
 # en: 893190219ca26f4bad6f2395b91da6295cab23b6
 sheet-locked-part-of-model = ロック中：モデルの数式の一部
 # en: b1b588e8ffba9c37d560f4b4d63c6344d009ce2e
@@ -1165,7 +1165,7 @@ sheet-names-cell-to-its-right = 右のセルの名前
 # en: d02550533b8780a7e646803c3b7b9cb7a78ba756
 sheet-symbol-like-or-code-like = $のような記号、またはUSDのようなコード。空にするとドキュメントの設定になります。
 # en: 1224b5538c873fc11d856120fedeb76e516529c6
-sheet-symbol-of-up-to-three = 3文字までの記号、または3文字のコードです。
+sheet-symbol-of-up-to-three = 3文字までの記号、または英字3文字のコードを入力してください。
 # en: 630470a61228c20119f270074f1e0b6a4c2d9151
 sheet-no-chart = グラフなし
 # en: b7baa1d40c4ea29afc9098732bffee2a861a6c44
@@ -1209,7 +1209,7 @@ sheet-is-as-wide-as-it = シートの列はすでに上限の26列です。
 # en: 0f54b98f336606a21f0bcbdc77afa4474b2b1966
 sheet-is-full-its-last-rows = 行を追加できません。最後の行が空ではありません。
 # en: 7a74dff615ee3bcbc90d8c31886f01082413c776
-sheet-three-at-least = 最小 3
+sheet-three-at-least = 3以上
 # en: c97ecbf8fed8c8a3a0d51412e2e9bd4c8539ba26
 sheet-unlock-these-cells = このセルのロックを解除
 # en: 7e592be640ccac5b2bdf24df5b74d19326b5094a
@@ -1228,12 +1228,12 @@ sheet-edit-cell-caret-at-its = カーソルを末尾にしてセルを編集
 # en: 28d1a54d2e35ad87c0d19942f68d70ddbf67bcee
 sheet-put-back-what-cell-held = セルの値を元に戻す
 # en: 2b69414b3787eaa8a38f2f1a9c4a48aff7dd78a5
-sheet-put-dated-rows-on-calendar = 日付のある行をカレンダーに入れる
+sheet-put-dated-rows-on-calendar = 日付のある行をカレンダーに追加
 
 ## downloads: hand-offs to another app (kit/file/exports.ts)
 
 # en: f03b6f674b16abfbc970946d0781228b3407655e
-export-open-in = 開く先
+export-open-in = ほかのアプリで開く
 # en: 7f7b61c3d0574fa0bae27972834652c8b6f222e6
 export-pdf-file = PDFファイル
 # en: 20ab05206208a4e9bea088d36c6640c781c6bf65
@@ -1301,7 +1301,7 @@ icons-flags = 旗
 
 # The group heading the Drawing Tool sits under on the home page: Design. 'Draw' is the Animator's mode for drawing.
 # en: bfa50c7a3838fc883b8f4fd701b280e77a3952ea
-draw-draw = 描く
+draw-draw = 描画
 # en: 51c99e5a9ce98b2b6990b55b10a46d2fd23a18f1
 common-drawing-tool = 作図ツール
 # en: f4f99578c04e974810cdd12ceb7ae902de7291d3
@@ -1309,11 +1309,11 @@ draw-drawing = 作図
 # en: 59b035367211a9382930b2a4c13637dbc33c4f32
 common-design = デザイン
 # en: 0077c4c9a2bcb4318b7a85a034bc75912afc3cb5
-draw-boxes-arrows-icons-and-labels = グリッド上の箱、矢印、アイコン、ラベル。ピクセルアートも描け、背景タイルにもできます。
+draw-boxes-arrows-icons-and-labels = グリッド上のボックス、矢印、アイコン、ラベル。ピクセルアートも描け、背景タイルにもできます。
 # en: b807ee7758852c19e577610f2c56bf3ee0fb29bb
 draw-request-flow = リクエストの流れ
 # en: 00cbc89498c2f280038a754777730896717e8071
-draw-browser-asks-server-which-reads = ブラウザがサーバーに問い合わせ、サーバーがデータを読む：矢印でつないだ箱。
+draw-browser-asks-server-which-reads = ブラウザがサーバーに問い合わせ、サーバーがデータを読む：矢印でつないだボックス。
 # en: 0b2cbbcb4742328b0a7288f1b69223de737b2d15
 draw-flowchart = フローチャート
 # en: f7a7e4b122a1c6db709d59b923a8e915ae67c9b3
@@ -1335,17 +1335,17 @@ draw-8-by-8-pattern-that = 8×8の繰り返しパターン。作図の背景に�
 # en: 99cb45a6f4e975a5a7be78811422b5933dd6598b
 draw-card-for-ninetieth-tilted-on = 90歳の誕生日のカードを、紙吹雪の背景に斜めに置いて：大きな文字、花、みんなからの愛を込めて。
 # en: 2020c98a00da0ecd8574350e226b7d4c448a451f
-draw-phone-screen-sketched-in-boxes = 作る前に箱で描いたスマホ画面。それぞれの部分がなぜあるかのメモ付き。
+draw-phone-screen-sketched-in-boxes = 作る前にボックスで描いたスマホ画面。それぞれの部分がなぜあるかのメモ付き。
 # en: 106c289912d69f2f02f64b1c195daa945a29c19f
-draw-rosette-with-ribbons-for-volunteer = 今年のボランティアに贈る、リボン付きのバラ飾り。印刷して切り抜き、ピンで留めます。
+draw-rosette-with-ribbons-for-volunteer = 今年のボランティアに贈る、リボン付きのロゼット。印刷して切り抜き、ピンで留めます。
 # en: c9c7469b74c0a43646cb4a46279d9930b271ca19
-draw-block-party-from-above-stage = 通りのパーティーを上から：ステージ、屋台、救護所、迷子になったときの集合場所。
+draw-block-party-from-above-stage = 町内のお祭りを上から：ステージ、屋台、救護所、迷子になったときの集合場所。
 # en: 6d12c8adbefeaeacac0d48274df3a195ca9a1d17
 draw-badge = バッジ
 # en: 32787c0201e95e7dd6ca00aa5dd63210e278e3db
 common-birthday-card = バースデーカード
 # en: be3883124104a86065f65c46fcf4edff20e0842f
-draw-can-we-refund-it-stores = 返金できる？お店の返品ルールを、質問と答えと次の行動で。
+draw-can-we-refund-it-stores = 返金できる？ お店の返品ルールを、質問・答え・対応の流れで。
 # en: 619a6e052e5343b8fbad2bfbc5a35d0aa4ec763f
 draw-event-map = イベントマップ
 # en: 6349ac251c1b86c4744c7e0361a5e72ea5e38402
@@ -1357,7 +1357,7 @@ draw-logo-sketch = ロゴのスケッチ
 # en: 26dbc52edd1d138f4ab006d860b56dee54bf919f
 draw-order-to-doorstep = 注文から玄関まで
 # en: 9bdb2a0b447519986c24ccc21eaf68976587c9fc
-draw-pip-frog-32-by-32 = 赤いスカーフのカエル、ピップ。32×32のヒーローで、輪郭つき、すぐ動かせます。
+draw-pip-frog-32-by-32 = 赤いスカーフのカエル、ピップ。32×32のヒーローで、輪郭つき、すぐにアニメーションにできます。
 # en: d8cca3dd62ad1e4c37a8b10c054464bbcb13e3c9
 draw-room-plan = 部屋の配置図
 # en: fcba7b3fe14a456c5dd428b4e0b28552efa25751
@@ -1381,13 +1381,13 @@ draw-animate-this-drawing = この作図をアニメーションにする
 # en: a42ec2578a2a55cc28dcfbd53e3c34dee5d31d78
 draw-drawing-of-things = { $things }の絵。
 # en: 2759692cb0d64c0c370b6516074bb1de744a31a2
-draw-drawing-of-n-unlabeled-shapes = { $n ->
+draw-drawing-of-n-unlabeled-shapes = ラベルのない図形{ $n ->
        *[other] { $n }個
-    }のラベルなしの図形の絵。
+    }の絵。
 # en: f33cdbb01b5b65fe3fe8928669d13ca09b3b5403
 draw-leads-to-b = { $a }から{ $b }へ
 # en: b9e37b62382792094f5463a54183d523118a25a0
-draw-joins-b = { $a }と{ $b }をつなぐ
+draw-joins-b = { $a }と{ $b }のつながり
 # en: e0883468badf6a5f9c1cfe0ce209a16939a64683
 draw-empty-drawing = 空の作図
 # en: 1f9c4a5ed21a39ed45db86eb13cbff389eede2cf
@@ -1419,7 +1419,7 @@ draw-freehand = フリーハンド
 # en: 8a48ec1f6c073fad0326a0e9251a18e4c88660b5
 draw-drag-to-draw-line-or = ドラッグして線や図形を描く
 # en: dcd096d38fc0be24bd96ac76246e98341b853208
-draw-rounded-box = 角丸の箱
+draw-rounded-box = 角丸四角形
 # en: 08596d60c57fd87e530cbdd2a06052b06d8c4137
 draw-hexagon = 六角形
 # en: b116d77a368034d3de6ca1dc0414de7dfd49400b
@@ -1441,15 +1441,15 @@ common-blue = 青
 # en: 32576f4fedc07f63020353af6a8aac66c4452c4c
 common-purple = 紫
 # en: 3b4e294693563cc45de95b9db8b4abeabfac77db
-common-indigo = 藍
+common-indigo = 藍色
 # en: 3526f607bcd4f51ad0bc05f814579a42c2c0ba57
-common-yellow = 黄
+common-yellow = 黄色
 # en: b3d97fd6dece388a968e367f3ac4b9e64d739f52
 draw-sky = 空色
 # en: 54076359fdc7f1f0e000b9ae15b96f8b09866acb
 draw-pink = ピンク
 # en: 168cbb2ea52b9e34d271accecfa7d7951e948a99
-draw-clear = クリア
+draw-clear = 透明
 # en: b1985e387405e4d4afb40d5dac9b2656f5d6f770
 draw-shapes = 図形
 # en: 4bab2d8fe13fa6ab57f80098b414f0f734c5dd25
@@ -1459,7 +1459,7 @@ draw-icon = アイコン…
 # en: 64dd60fe1a049fe6db3eb1369dec2e42bf428e21
 draw-background = 背景
 # en: e1946387893c804aeadc93e5df5af3416cf1dc53
-draw-remove-background-tile = 背景を外す
+draw-remove-background-tile = 背景を削除
 # en: 1d0c8304baedcf8e3a78982c2e7c0b04622bf2a0
 draw-color = 色
 # en: cfdd099c4751f2f9aef2491f411111906956e0f2
@@ -1487,19 +1487,19 @@ common-zoom-in = 拡大
 # en: a4ae4b24a1f5369c2bff61abdbc221170e4b27d8
 common-zoom-out = 縮小
 # en: e30eff925100b7c3e119ed678e39009e962455b0
-draw-alt = 代替
+draw-alt = ALT
 # en: f978200b112084eef0c088e1d0075ad2fbca39cf
 draw-alt-text = 代替テキスト
 # en: 5cb1c64554b7e1dc72e12360f2d04f33dc206b1d
 draw-alt-text-alt = 代替テキスト：{ $alt }
 # en: d039700b1af48db561cd71c056aed2737e8fae32
-draw-add-alt-text-describe-this = 代替テキストを追加：見えない人のために、この作図を説明します
+draw-add-alt-text-describe-this = 代替テキストを追加：目の見えない人のために、この作図を説明します
 # en: 676f1e162fc4f58007821f7c1a55b893e9a04715
 draw-what-does-this-drawing-show = この作図は何を表していますか？
 # en: c8636572fb4b9e79bae4c9fef82fc8109961c471
-draw-diagram-of = 次の図：
+draw-diagram-of = …の図
 # en: 5a33f2e7e84274a5291191ca3105e62d897eee0e
-draw-read-aloud-to-people-who = 見えない人に読み上げられます。埋め込んだりダウンロードしたりしても、作図と一緒に保たれます。
+draw-read-aloud-to-people-who = 目の見えない人には読み上げられ、埋め込んだりダウンロードしたりしても作図と一緒に残ります。
 # en: 988c63b77eade4f718f9d469cb36e35bff976839
 draw-describe-from-shapes = 図形から生成
 # en: ac302ae45938c985822f097507602d624128f1d0
@@ -1513,7 +1513,7 @@ draw-press-on-one-shape-and-let-go-on-another = 1つの図形を押して、別�
 # en: 1005cc8c1dafc1f9eb422bf2ac68290b492fdfd1
 draw-now-other-shape-tap-it = 次はもう一方の図形です。タップするか、矢印で選んでEnterを押します。
 # en: e3686f1c55ec91e31825e1d9510abf592d80b08a
-draw-drag-to-move-them-together = ドラッグでまとめて移動。Shift+タップで図形を追加・解除します。
+draw-drag-to-move-them-together = ドラッグでまとめて移動。Shift+タップで図形を選択に追加・解除します。
 # en: eb36764c60ec7a17dd6ac3ec7dbbd22ee401778e
 draw-press-on-one-shape-and = 1つの図形を押して、別の図形の上で離します
 # en: 199f4e86afea4f2d42eb40b63ce8599168575e06
@@ -1597,9 +1597,9 @@ draw-align-right = 配置：右
 anim-animation = アニメーション
 # The templates: what each motion is, in a line.
 # en: ec026663a7e4c23dd850c7f5a96deef71bf8bb81
-anim-lift-off = リフトオフ
+anim-lift-off = 打ち上げ
 # en: 5d15aaf0784e98385ffc925f574edbf1a0657292
-anim-rocket-climbs-away-with-its = ロケットが影を残して飛び立ち、文字が上がっていく：2つの図形、キーは各2つ。
+anim-rocket-climbs-away-with-its = ロケットが影を残して飛び立ち、文字が上がっていく：2つの図形、キーフレームは各2つ。
 # en: 1cc22feeb4a82e33a9fd435fbf7c4a927a0408e1
 anim-bouncing-ball = はずむボール
 # en: 567b2c86aa06b4d0133474a39dc6545196754a25
@@ -1615,13 +1615,13 @@ anim-red-curtains-part-on-opening = 初日の夜、赤い幕が左右に開き�
 # en: 1383ce3b8f642f2c5946975ca61e868e4a504819
 anim-present-hops-stars-and-hearts = プレゼントがはね、星とハートがまわりでゆれ、あいさつが虹色の文字で輝きます。
 # en: fad7f01d931894b10da998319cdc82f1a7d7e4dc
-anim-quick-standup = さくっとスタンドアップ
+anim-quick-standup = さくっと朝会
 # en: 79d688c0e9e1f3c402c3d6bedae252cfdd0b27aa
 anim-meme-with-caption-above-and = 上と下にキャプションのあるミーム。その間で時計が回ったり、ゆれたりします。
 # en: 7e9b34abf6e91127f94374508015ad795c91268b
 anim-build-is-green = ビルド成功
 # en: 2015347d0927e36755702bf7ae8677fa8d565545
-anim-meme-in-two-lines-of = インパクトのある2行のミームと、回って入り、着地して光るトロフィー。
+anim-meme-in-two-lines-of = Impact書体で2行のミームと、回りながら入ってきて着地し、光るトロフィー。
 # en: 98eb193445404588fd801a26b8383def925748ab
 anim-flash-card = フラッシュカード
 # en: 864aea3fc448ba5b87612d5e8c4c6dafde49b09a
@@ -1691,7 +1691,7 @@ anim-pixel-art-is-made-in = ピクセルアートは作図ツールで作りま�
 # en: b4a9395d25398654fd5d000e4b82a1d8273339bd
 anim-rainbow = レインボー
 # en: 3d5096b70833fdae355f1ffcf32faf2066123467
-anim-remove-this-key = キーフレームを外す
+anim-remove-this-key = キーフレームを削除
 # en: aa0e7e86b7aa21e9851b9db8b752998918d2b608
 anim-shadow = 影
 # en: b7152342a267362add3c0d7f69f720f7a9c76c9e
@@ -1734,17 +1734,17 @@ anim-anything-from-drawing-tool-moving = 作図ツールのものなら何でも
 # en: 739720909d046c563acd15a980c916ae9b0a75f7
 anim-back-and-forth = 往復
 # en: 7753216f948c789b0cbd5cfb16d1f50c1717383b
-anim-forward-then-back = 順に再生して戻る
+anim-forward-then-back = 再生して逆再生
 # en: e3e7a3833d19706ebf33b2c3baf8e05deeed7bca
 anim-frames = フレーム
 # en: 0d0b09dfb5d45add0e2f90ec8b193d96ace76d0c
-anim-frames-second = 毎秒のフレーム数
+anim-frames-second = 1秒あたりのフレーム数
 # en: 3570d228949889218e4c7fdb4ad8c942753530a1
 anim-how-large-shape-is-drawn = 図形を描く大きさ：1×が描いたままの大きさです。
 # en: c028f533678015b6ac2e606a9cafef7e050b11aa
 anim-length-speed-and-repeat = 長さ、速さ、繰り返し
 # en: 72f516ede84adba7283e1f7f5fd8eb787c7d33b0
-anim-loop-forever = ずっとくり返す
+anim-loop-forever = ずっと繰り返す
 # en: 41b5b25a66d56fd91f645cbe6f83603567c3c480
 anim-play-once = 1回だけ再生
 # en: 368e8081b781aac177fd07c2415b694b1f878911
@@ -1776,13 +1776,13 @@ outline-named-label = 、名前は「{ $label }」
 # en: 02d7116f49a426f4a9dba7a6582ae90478795f7d
 outline-book = 本
 # en: 8f9c05748f1616a4649174a8917da3ee5f3217e5
-outline-decision = 決めごと
+outline-decision = 意思決定
 # en: c35876d5fcc88c6a4c142c7c0e391dda3f92ca08
 common-talk = 講演
 # en: 69d33e95f4f69c18d9591a8529f59a6703fc1f85
 outline-empty-outline = 空のアウトライン
 # en: b972f73739624a697a0aa9bdde4289bafc5b6e4b
-outline-outliner-ideas-under-ideas-folded = アウトライナー：アイデアの下にアイデア、折りたたみと展開、移動とつなぎ。スライドやマインドマップが読むのと同じツリーです。
+outline-outliner-ideas-under-ideas-folded = アウトライナー：アイデアの下にアイデア、折りたたみと展開、移動とつなぎ。スライドやマインドマップと同じツリーを使います。
 # en: 3d47762769e98192ca611ea7fce028e70e16f174
 outline-arrow-from-from-to-to = { $from }から{ $to }への矢印
 # en: 081c7d75d7a6b1052f5643338773de8ea68de0dd
@@ -1794,7 +1794,7 @@ common-calculator = 電卓
 # en: adab5090ac6a1b7b5420faac7be86c41721ba27c
 common-calendar = カレンダー
 # en: ab732cac31bba434b0b59309a30ce46956dc3d54
-outline-cancel-connecting = 接続をやめる
+outline-cancel-connecting = 接続をキャンセル
 # en: 5301648dcf6b53cefc9ed52999aaa92d4603cae0
 outline-change-it = 編集
 # en: 1ed0b58d18ef647be5de11840bb929ecc8e36446
@@ -1868,7 +1868,7 @@ outline-outline-lowercase = アウトライン
 # en: db2483000d154ca9fd74d41fc4e063a4b28faa87
 common-paste = 貼り付け
 # en: e45795fb6033ae4ecc1e2e3610273fce71a317d7
-outline-plain-line = ふつうの線
+outline-plain-line = シンプルな線
 # en: 9580fcbce0c31ceaa47eb583e5f7ce637fdc8a0a
 outline-plain-text = プレーンテキスト
 # en: 67ea25b11508ee37fa6c09bc9d3a1d6aa9a30f96
@@ -1876,9 +1876,9 @@ common-show-as-slides = スライドで表示
 # en: 59df6d7de818cdbeb08aa7f083aff96c1bccd1f5
 outline-show-as-outline = アウトラインで表示
 # en: b306a7c32ba84dd4adea8612dccc99c15065eb53
-outline-take-away-connection-from-from = { $from }から{ $to }への接続を外す
+outline-take-away-connection-from-from = { $from }から{ $to }への接続を削除
 # en: e963907dac5cd5c017869b4c96c18021c9bd058b
-outline-take-it-away = 外す
+outline-take-it-away = 削除
 # The compound bullet (Paul, 2026-10-15): the statuses a document sets in its head, a status's pill, a due day's chip.
 # en: e92aab82fce62899699581b5597abdda8175f2dd
 outline-statuses = ステータス一覧
@@ -1917,7 +1917,7 @@ outline-gray = グレー
 # en: 23376bab580fd3f3d521c66a65a03e7753da54cc
 outline-last-status-means-done = 最後のステータスは完了を表します。そのステータスのタスクにはチェックが付きます。
 # en: 7312a31a2c880f2d456663b6f91ad6da980b3a5e
-outline-take-connection-away = 接続を外す
+outline-take-connection-away = 接続を削除
 # en: 656e5c87ae5cd391807e13c85fb32635c2d441c2
 outline-tap-item-to-connect-from = つなぎ元の項目をタップします。
 # en: 7a717eefe223e502e86655b5bf8eb999b867a9dc
@@ -1927,7 +1927,7 @@ outline-question-options-under-it-and = 問い、その下の選択肢、それ�
 # en: da74cb6baba7a464fd8881af861a8c8d7952aff9
 common-trip-planner = 旅行プランナー
 # en: 09ae5dce4d22019190e52d1611d1544becf36489
-outline-twenty-minutes-in-three-parts = 20分を3部構成で：問題、アイデア、その意味。デッキとして表示すると、最上位の項目が1枚のスライドになります。
+outline-twenty-minutes-in-three-parts = 20分を3部構成で：問題、アイデア、その意味。スライドとして表示すると、最上位の項目が1枚ずつのスライドになります。
 # en: 2af9d498f852995329b0033573277dce32d09ba0
 outline-unfold-all = すべて展開
 # en: f5857a77d395db75bc57c2c76b92dc8fa4773053
@@ -1941,7 +1941,7 @@ outline-view-as = 表示形式
 # en: 828c360c884f9246750461eea43fee4e42c6b52c
 outline-zoomed-in-on = フォーカス中
 # en: 38eca6735f66d186c0bd9c549873e774551dc35f
-outline-a-plain-line = ふつうの線
+outline-a-plain-line = シンプルな線
 # en: 884abd948f43aba4e5851b71a20e97aed7a6c96e
 outline-arrow-from-parent = 親からの矢印
 # en: b1efb9ef91ffdf7d42595fb81fb8b74184a5efbc
@@ -1976,7 +1976,7 @@ outline-syllabus = シラバス
 # en: 5b163ae0d9a3fd9b5ab6a8b6c27374091ceb25de
 outline-ten-week-course-when-and = 10週間の講座：日時と場所、毎週番号付きのテーマ、成績評価、読むもの。
 # en: 9cea5f42a5742d9eef722836a7a7b59c6a5c0c5a
-outline-thesis-two-arguments-with-their = 論文の主張、証拠を添えた2つの論点、反論とそれへの答え、そして出口。
+outline-thesis-two-arguments-with-their = 論文の主張、証拠を添えた2つの論点、反論とそれへの答え、そして結論。
 # en: e5f2a2c3f76b55d5786f1c311773def62d6920f3
 outline-essay-plan = エッセイの構成
 # en: d926d538e1be8112e81292507985514feac5e4c4
@@ -2032,15 +2032,15 @@ deck-residents-meeting-about-new-playground = 新しい遊び場についての�
 # en: 02e7a62fc65ed26cb0751706a5ea8f5783414eda
 deck-science-lesson-on-chalkboard-aims = 黒板で行う理科の授業：ねらい、知っていること、モデル、確認、宿題。各ページに先生用のメモ。
 # en: f3a66c7b2a6ebda85ea74938fce4c397eae2a131
-deck-seed-pitch-in-eight-slides = 8枚のシードピッチ：課題、製品、グラフで見せる成長、事業、チーム、お願い。
+deck-seed-pitch-in-eight-slides = 8枚のシードピッチ：課題、製品、グラフで見せる成長、事業、チーム、資金調達の依頼。
 # en: aab8da6eadee157bba3937e9dc00741cfe48b13f
-deck-bike-shops-quarter-for-its = お店の四半期をパートナー向けに：売上のグラフ、成功と失敗、大事な数字、次の四半期。
+deck-bike-shops-quarter-for-its = 自転車店の四半期をパートナー向けに：売上のグラフ、成功と失敗、大事な数字、次の四半期。
 # en: d0fa5e5696edaf949dfe9e739a7a2eef0d433ae2
 deck-small-story-in-panels-about = 隣の人に物を貸すことについての、コマ割りの小さな物語。
 # en: 6c1ff81a2445a9eab1616588060b483cd5b6cde8
 deck-twenty-minute-talk-with-speaker = 20分の講演。全スライドにスピーカーノート、結果のグラフ、脚注、学んだこと。
 # en: 1a2fac58a0b80e771b6d2e526e7d3fee2cf6ef85
-deck-badges-for-conference-each-with = カンファレンスのバッジ。役割と出身地つきで、海のデザイン。
+deck-badges-for-conference-each-with = カンファレンスのバッジ。役割と所属つきで、海のデザイン。
 # en: 7aa6a43fffd387b34fc7d06c7845de3f5bef745a
 deck-comic-umbrella = マンガ：かさ
 # en: 1796880ad702715de60aad7227c9bdca655f0fff
@@ -2058,15 +2058,15 @@ deck-product-launch = 製品発表
 # en: 68d708c4452b9eaca2d5d38e9d0a5848059fd138
 deck-quarterly-review = 四半期レビュー
 # en: ca40a6181df561c65b71e9ebdf580ccae6b007b7
-deck-recipe-zine = レシピのジン
+deck-recipe-zine = レシピZINE
 # en: 02bfd82260b75fe685e4e972cb9a3ae9b0a42f5f
-deck-seven-soups-for-cold-week = 寒い週のスープ7種。1ページに1つ、1枚の紙から折るジンで。
+deck-seven-soups-for-cold-week = 寒い週のスープ7種。1ページに1つ、1枚の紙から折るZINEで。
 # en: 44b5c7f041391d8b41a8ba365b6f13522877b478
 deck-their-story-for-reception-from = 披露宴で語る2人の物語：出会いからプロポーズまで、年表とお礼つき。
 # en: 2aaeb944a6b05f452d512dc7dd5220adeee294ea
-deck-town-hall-notice = 町内会のお知らせ
+deck-town-hall-notice = 住民説明会のお知らせ
 # en: 14444c384d263fff25ba48b195abb55def791b75
-deck-trivia-night = クイズの夜
+deck-trivia-night = クイズナイト
 # en: 0377beb012ed13e1986227ef8915aeab709ad5d9
 deck-wedding-slideshow = 結婚式のスライドショー
 # en: f34f4184c545fd4fec60bbc441ead88d1f1fdd1b
@@ -2080,7 +2080,7 @@ deck-chosen-slides = 選択中のスライド
 # en: d7935967cfd3de8f11b33801800bece8d90cb55f
 deck-move-this-slide-drag-it = このスライドを移動：別のスライドにドラッグします
 # en: 19926fc5c47a7a39dd1435da06e3fc4c027458ea
-deck-slides-titles-bullets-two-columns = スライド：タイトル、箇条書き、2段組み、大きなアイコン、スライド上のほかのドキュメント。印刷して折るジン、小冊子、パンフレット、マンガ、ポスター、名札も作れます。
+deck-slides-titles-bullets-two-columns = スライド：タイトル、箇条書き、2段組み、大きなアイコン、スライド上のほかのドキュメント。印刷して折るZINE、小冊子、パンフレット、マンガ、ポスター、名札も作れます。
 
 # The layouts, the transitions, the formats
 # en: 7509c5747e5db3dfa3373afc42eca9f5b27a8599
@@ -2098,7 +2098,7 @@ deck-slide = スライド
 # en: 9b3cbed5c490c07473546a88768ba29b787e9e52
 deck-zoom = ズーム
 # en: d4ff278598ebbd3f36cecf27e68c66de49d2f62f
-deck-zine = ジン
+deck-zine = ZINE
 # en: 8ef5c45547ec6440e6dde4870e3f92d6c08dfbaf
 deck-booklet = 小冊子
 # en: 80dceb58c1f9daca0ebaa066d80e670cfdf1123e
@@ -2166,7 +2166,7 @@ deck-two-sided = 両面
 # en: b82a2c3204554a9c0a82b44aa7eb5f94916b1c13
 deck-cut-and-nest = 切って重ねる
 # en: 6e19d7b7deffd2974f632ec3e697646de978130e
-deck-end-with-qr-code-of = このデッキのQRコードで終わる
+deck-end-with-qr-code-of = 最後にこのプレゼンのQRコードを表示
 # en: 0c7dca360d478b76246b0ddf594aed2299af3ef2
 deck-move-slide-up = スライドを上へ
 # en: 8e87a8ca3749be93e307f172d62814c1b58865b4
@@ -2244,9 +2244,9 @@ deck-front-cover = 表紙
 # en: 95842f717432a63230077bc5ea48addf5bc52947
 deck-back-cover = 裏表紙
 # en: 10e4725d5544e065501162abcf8a53b94451df0c
-common-page-n = ページ{ $n }
+common-page-n = { $n }ページ
 # en: dd19f9887573a9f06294de48329bfb1b3a5ad273
-deck-front = おもて
+deck-front = 表面
 # en: 6f453fd2a404a86955b0f23219d84f2bcb4e7d06
 deck-inside-left = 内側（左）
 # en: 4fe87c5667532867fc721531b92a7ca6b391eb8a
@@ -2256,17 +2256,17 @@ deck-inside-right = 内側（右）
 # en: 418bf9a5530258c65b3dbc1f932667dafa01469c
 deck-inside-flap = 内側（折り返し）
 # en: b52b36b7269fbfc58ec24bb724691951a3decbe8
-deck-back = うら
+deck-back = 裏面
 # en: 3369aa225b34e01144a4c49dd350db04732a2720
 deck-badge-n = バッジ{ $n }
 # en: 9cc25309d07de0adfb989faaaaa74f7cb5a06e38
-deck-last-slide-added-for-you = 最後のスライド：このデッキのQRコード
+deck-last-slide-added-for-you = 最後のスライド：このプレゼンのQRコード
 # en: 03c90c8e6a7e028c2e9caeadc1961fb5c0ad4e57
-deck-ends-with-qr-code-of = デッキの最後にQRコードが付き、聞き手が持ち帰れます。QRボタンでオフにできます。
+deck-ends-with-qr-code-of = プレゼンの最後にQRコードが付き、聞き手が持ち帰れます。QRボタンでオフにできます。
 # en: 13c7cb226b093919972f5e423aeb0abae93960cf
-deck-qr-code-of-this-deck = このデッキのQRコード
+deck-qr-code-of-this-deck = このプレゼンのQRコード
 # en: 5d5bc5601280c776405941347bbf7e9c63dc3954
-deck-sheet-side-n = シート、{ $n }面
+deck-sheet-side-n = 用紙の{ $n }面目
 # en: 1982f74c2102a55783a4774ddd4895dc7fec26f0
 deck-cut-along-dashes-this-half = 破線で切る・この半分が外側
 # en: 0fc0c2932d66df46e1af55ac50d98be2bccd63c3
@@ -2274,11 +2274,11 @@ deck-print-on-back-flipped-on = 裏に印刷（長辺でひっくり返す）
 # en: e0226944c5e9e4df97a3bf718ac488a8a51118fa
 deck-cut-along-dashes-fold-along = 破線で切る・点線で折る
 # en: b0ccda7ec0d37c14d00e5e9f57eeadcb1045ebd7
-deck-print-it-double-sided-on = レターサイズの用紙に両面印刷（長辺でひっくり返す）、実寸で。破線で切り、上半分を下半分に重ねて、まん中で一緒に折ります。
+deck-print-it-double-sided-on = レターサイズの用紙に両面印刷（長辺でひっくり返す）、実寸で。破線で切り、上半分を下半分に重ねて、真ん中で一緒に折ります。
 # en: 7d7f71d31c8968c0555f49f9430133796d626c4f
-deck-print-it-on-one-side = レターサイズの用紙の片面に、実寸で印刷します。長い辺で半分に折り、さらに4つに折ります。中央の破線を切り、両端を押し合わせて本の形に折ります。
+deck-print-it-on-one-side = レターサイズの用紙の片面に、実寸で印刷します。長辺に沿って半分に折り、さらに4つ折りにします。中央の破線を切り、両端を押し合わせて本の形に折ります。
 # en: ce30358159a7953f092af19e48f7dad47608c83d
-deck-print-it-double-sided-on-letter-paper-flipping-on-short-edge-at-actual-size-stack-sheets-in-order-first-on-outside-and-fold-them-together-down-middle = レターサイズの用紙に両面印刷（短辺でひっくり返す）、実寸で。シートを順に重ね、最初のものを外側にして、まん中で一緒に折ります。
+deck-print-it-double-sided-on-letter-paper-flipping-on-short-edge-at-actual-size-stack-sheets-in-order-first-on-outside-and-fold-them-together-down-middle = レターサイズの用紙に両面印刷（短辺でひっくり返す）、実寸で。用紙を順に重ね、最初の1枚を外側にして、真ん中で一緒に折ります。
 # en: 96bf1a2ba3e6d649669efc225b3104521735ff25
 deck-print-it-double-sided-on-letter-paper-flipping-on-short-edge-at-actual-size-fold-right-third-in-then-left-third-over-it-front-is-on-top = レターサイズの用紙に両面印刷（短辺でひっくり返す）、実寸で。右の3分の1を内側に折り、その上に左の3分の1を重ねます。表紙が一番上です。
 # en: 6d4cc8d4405840522000283a7e419c1c93e89392
@@ -2302,13 +2302,13 @@ common-notes = ノート
 # en: bd0dad7cbf71b13b2e545d8ce477027ffc106b45
 deck-n-hides-them = Nで隠す
 # en: 45c44dc2566819f835fd788e2b7a6c5bee5177c4
-deck-take-this-deck-home = このデッキを持ち帰る
+deck-take-this-deck-home = このプレゼンを持ち帰る
 # en: acc1edc431e346786fab17d4f10e195ca72257d6
-deck-take-this-deck-home-title = このデッキを持ち帰る：{ $title }
+deck-take-this-deck-home-title = このプレゼンを持ち帰る：{ $title }
 # en: 7fc2d8c7fd4164039149b5a9f2063ddf7ab9d76a
-deck-scan-code-whole-deck-is = コードを読み取ってください。デッキ全体がリンクの中にあります。
+deck-scan-code-whole-deck-is = コードを読み取ってください。プレゼン全体がリンクの中にあります。
 # en: a0f82f698bc01f5dc90c760db684589e2d8277eb
-deck-a-qr-code-of-this-deck = このデッキのQRコード
+deck-a-qr-code-of-this-deck = このプレゼンのQRコード
 
 # Downloads
 # en: a149055ecee5f95be2951f0b5454f3d1ef47c786
@@ -2316,9 +2316,9 @@ deck-powerpoint-pptx = PowerPoint（PPTX）
 # en: 7660a22bdc9507edd353dd61198b9aa86488d936
 deck-picture-of-every-slide-zip = 全スライドの画像（PNGのZIP）
 # en: 98a41f54e049532b6032b88d7656348adc178c2a
-deck-animation-of-deck-gif = デッキの動画（GIF）
+deck-animation-of-deck-gif = スライドのアニメーション（GIF）
 # en: 3bab526d831e1024e6f8e7d197f9c3d72cc4f0e4
-deck-film-of-deck-webm = デッキの動画（WebM）
+deck-film-of-deck-webm = スライドの動画（WebM）
 
 # The templates
 # en: e5604bc465a212ad3d7f4e13ed282f030d9d3a6b
@@ -2326,15 +2326,15 @@ deck-title-agenda-three-points-with = タイトル、議題、スピーカー用
 # en: 60c974074604818e661eff7940285669d1496647
 deck-status-update = 進捗報告
 # en: 34714be3698c31c72afb1d4d4b8a7b0c69f30fc5
-deck-done-and-next-side-by = 完了と次を並べて、そのあとリスク、そしてお願い。
+deck-done-and-next-side-by = 完了したことと次にやることを並べ、そのあとリスク、そして依頼事項。
 # en: e946db45d2689df95cbac9f8137664409c51f5d8
 deck-proposal = 提案書
 # en: 52ab7599cc26432ef9b492b401d04eee1ca5e699
-deck-what-you-heard-what-you = 聞いたこと、提案、時期、費用。
+deck-what-you-heard-what-you = ヒアリング内容、提案、時期、費用。
 # en: b8e1f28fed63f996c8915470a7ee9ce8aef9b75f
 deck-eight-small-pages-from-one = 1枚の紙から作る8つの小さなページ。印刷して折って切るか、スマホでタップして読みます。
 # en: 31b11edde49cd1bd80a198f240426c5b2d8cd65f
-deck-booklet-of-half-letter-pages = ハーフレターのページ8～20枚の小冊子。印刷して重ね、折れるように配置します。
+deck-booklet-of-half-letter-pages = ハーフレターサイズで8～20ページの小冊子。印刷して重ね、折れるように配置します。
 # en: ae07389f7b537dbd7eb3007d3f2b36ca3c35c404
 deck-trifold-brochure-six-panels-on = 三つ折りのパンフレット：1枚の両面に6つのパネル、折り目に合わせて配置。
 # en: 88c71dbca35b2e7c498adce21174cb1102af384e
@@ -2342,9 +2342,9 @@ deck-mini-comic-panels-with-picture = ミニマンガ：絵、吹き出し、キ
 # en: e610bb7f6eac1dd5622723ccc779e31e9d9ed190
 deck-poster-or-flyer-headline-and = ポスターまたはチラシ：見出しと数行を、1ページで入る限り大きく。
 # en: ec024ffdc152af00e77f7219a5293545bdd3bb65
-deck-name-badges-for-meetup-one = 集まりのための名札。1人1ページ、1枚に6つ、そのまま切れます。
+deck-name-badges-for-meetup-one = 集まりのための名札。1人1ページ、1枚に6つ、切るだけで使えます。
 # en: 9a51ba7142888f3e0199896de291a1fb4b4298f1
-deck-edit-this-deck = このデッキを編集
+deck-edit-this-deck = このプレゼンを編集
 # en: d5947c525ed0d53dce794385a2cc1cd6e2459dbd
 deck-new-slide = 新しいスライド
 # en: 720856fcb53d62f79a364c36d8cd2314121430a6
@@ -2362,13 +2362,13 @@ deck-slide-before-slide-after-on = 前または次のスライド
 cal-calendar = カレンダー
 # A span is an event on the calendar or a task on the schedule (the Gantt view); { $every } is "Every week" and the like.
 # en: 11fcad4bfe2782393e5d2ac5e04d65349890ea94
-cal-name-yours-say = 名前（たとえばあなた）
+cal-name-yours-say = 名前（例：自分の名前）
 # en: e288d42e3bba2f9fc3b7f2287d2ea4f141e72236
 cal-schedule-phases-with-their-tasks = スケジュール：段階ごとのタスク、それぞれの進み具合、最後にローンチ。
 # en: f0424f3e15f33d07de80ddfd02a4b56f047767d7
-cal-week-earlier = 1週間前
+cal-week-earlier = 前の週
 # en: 5e63d8681fdc3170ed99fc3abcc3668620f299ca
-cal-week-later = 1週間後
+cal-week-later = 次の週
 # en: ab455a2fb151da1c7d0c39c7534c2f935e028ce9
 cal-weekend-of-sessions-at-set = 週末のセッション。決まった時刻に始まり、真夜中をまたぐ遅いセットも。
 # en: 114574336ac7883aebd0653b3fc5e82f9262dc86
@@ -2390,9 +2390,9 @@ cal-edit-task = タスクを編集
 # en: 99570f85bb2bae0dbe3e8f2f3d6d6f765ee7c47e
 cal-choose-task = { $task }を選択
 # en: 72b4644a41881ce4e156ce3283119c74f598cbea
-cal-day-earlier = 1日前
+cal-day-earlier = 1日早める
 # en: 8d6915ee723c8b3c01f29002cfed7d597d56c2c7
-cal-day-later = 1日後
+cal-day-later = 1日遅らせる
 # en: 66a755ea0d935aeac763da63deebb69b0eb54ba9
 cal-dates = 日付を編集…
 # en: a2bb9d34b8a1a79665858d354585cf147e0dee4e
@@ -2426,7 +2426,7 @@ cal-its-own-zone = カレンダーのタイムゾーン
 # en: 2a177256a408fa4fc557b301041589b798826d70
 cal-last-day = 最終日
 # en: 58ef633830b461aa76bf4ee90e3b2831ff588508
-cal-lessons-birthdays-and-holidays-color = 習い事、誕生日、祝日。人ごとに色を分け、毎週のことはくり返します。
+cal-lessons-birthdays-and-holidays-color = 習い事、誕生日、祝日。人ごとに色を分け、毎週のことは繰り返します。
 # en: 7c7f5d049fad2569721d446c4a811f9bd5da5393
 cal-level = レベル
 # en: 082bc378cd60e17a38d99898b21955299c5b60c8
@@ -2442,9 +2442,9 @@ cal-new-event-on-day = { $day }の新しい予定
 # en: 17b2b838c5ce22c961a36736534a5029d6ba0087
 cal-new-task = 新しいタスク
 # en: 8abf7cf1d0b36ff16ebbe26b8285a65d9d1582f6
-cal-next-month = 来月
+cal-next-month = 次の月
 # en: 22c6f667e4103029954aa28d43a1d4888122b35f
-cal-next-year = 来年
+cal-next-year = 次の年
 # en: 1562a21cadb04e59b670cb3e32fb54f1777db699
 cal-no-tasks-yet = タスクはまだありません
 # en: 3b2069a4f745374e50f8992752888822ce851db4
@@ -2460,7 +2460,7 @@ cal-previous-year = 前の年
 # en: 580110a84277d369b216be5a01a5ba50868d4d3f
 cal-project-plan = プロジェクト計画
 # en: 6ae5ee3e66205a8b1a41c80c4db0dcc982e50f44
-cal-repeats = くり返し
+cal-repeats = 繰り返し
 # en: 0a8adac9d6d5f4d14ee887d196cd8618f0f3391a
 cal-schedule = スケジュール
 # en: e7fe53f0503eb82f8c80f9b233fa566339a9f9e8
@@ -2486,7 +2486,7 @@ cal-this-month = 今月
 # en: eea79afd832854a3b24153b928ee9c62c7457dbe
 cal-time-zone = タイムゾーン
 # en: bf5efde33adface92f37d1888e904ab70c9ce272
-cal-times-in-zone = 時刻は{ $zone }
+cal-times-in-zone = { $zone }の時刻
 # en: 650642b1d6b4b1ecc4ad7d38bbdf110d582c4baf
 cal-times-or-on = 回、または終了日
 # en: 69bd4ef9fbd0894a22759c3766b859defbdedbc8
@@ -2591,7 +2591,7 @@ diagram-tap-empty-space-for-thing = 空いている所をタップして項目�
 # en: d4b16450c157188d2cf2e3968faee3709ebeca28
 diagram-tap-here-to-add-first = ここをタップして最初の{ $thing }を追加します。
 # en: ccdb7bfa4c6b71a69f1931253fe6f892a2baf89b
-diagram-tap-in-lane-to-add = レーンをタップしてステップを追加します。ステップをタップして編集します。別のレーンにドラッグするか、ステップの上にドラッグしてその後ろに置きます。
+diagram-tap-in-lane-to-add = レーンをタップして手順を追加します。手順をタップすると編集できます。別のレーンにドラッグするか、手順の上にドラッグするとその後ろに置けます。
 # en: 639d02ad26e5be80f5baf69835b953dfc015178b
 diagram-tap-thing-to-join-name = { $name }をつなぐ項目をタップします。空いている所をタップすると取り消します。
 # en: 5d36f27a0649ac9ae67fb2e66f5be89ebc4719c8
@@ -2609,7 +2609,7 @@ diagram-add-step = 手順を追加
 # en: e0d73143de80d17e82de2e017ac156ca3b9c4e01
 diagram-join = つなぐ
 # en: e45795fb6033ae4ecc1e2e3610273fce71a317d7
-diagram-make-it-plain-line = ただの線
+diagram-make-it-plain-line = シンプルな線
 # en: 3a4758c3cc8dac2d76026d0733816741f9b21d43
 diagram-make-it-arrow = 矢印
 # en: a07496767ed7e5caf20bb803434a1aa088aaa97b
@@ -2622,7 +2622,7 @@ diagram-connection = 接続
 diagram-empty = 空
 # The templates
 # en: 8b0bc4ee7e0e6e592c5e8812fef8883b9cbc66de
-diagram-empty-kind-to-start-from = はじめるための空の{ $kind }。
+diagram-empty-kind-to-start-from = 空の{ $kind }から始めます。
 # en: cc9cfe196eaec8bbe041a0f648039cf31df71bc7
 diagram-browser-api-database-cache-and = ブラウザ、API、データベース、キャッシュ、ワーカー：その連携のしかた。
 # en: 87796704431b42da8083f869f5ed707dae8cf8fe
@@ -2636,7 +2636,7 @@ diagram-small-company = 小さな会社
 # en: 6dea73ecffb81e3db543a664a3ba6e602d58683b
 diagram-wedding-dinner = 結婚式のディナー
 # en: 1086ae322f0484af87b4a35b9537b35ad53ec68b
-diagram-year-of-dates-from-plans = 承認から開場までの1年の日付。
+diagram-year-of-dates-from-plans = 計画の承認から開業まで、1年の日程。
 # en: c75834baf2bd8482dbb5a822f4466908244e65fa
 diagram-cats-and-dogs = 猫と犬
 # en: 9e4600a93df1d0ffd290278244beed2111ac5cff
@@ -2654,7 +2654,7 @@ diagram-from-job-description-to-yes = 求人票から内定まで、レーンご
 # en: bfd1a142e965498fd2dbaa45ca87c1cbdc9071c9
 diagram-grandparents-their-children-and-grandchildren = 祖父母、その子ども、孫を、生没年つきで。
 # en: 347a51bd3c26ccac83baeca51966f318d5bb06c4
-diagram-hiring-someone = 人を採用する
+diagram-hiring-someone = 採用の流れ
 # en: f30d75896062b87258051feec53d9f7c05059037
 diagram-how-app-hangs-together = アプリの全体像
 # en: 70a97689961708e74a02157e6675bbcab893b7a4
@@ -2692,13 +2692,13 @@ diagram-expense-report = 経費精算
 # en: ded9774849cab88a3dd08936595ffe270dd397a2
 diagram-apollo-11 = アポロ11号
 # en: b5723994f111884ca2f9a82ecb525fb6992e44c8
-diagram-board-game-night = ボードゲームの夜
+diagram-board-game-night = ボードゲーム会
 # en: d69e423520fc900afc06f3d31ab286694fb7d67b
-diagram-class-4b-at-four-tables = 4年B組を色ごとの4つのテーブルと、読書コーナーに。
+diagram-class-4b-at-four-tables = 色分けした4つのテーブルに座る4年B組と、読書コーナー。
 # en: d8d0862686b742040e32f8f3235084ad61fcef28
 diagram-eight-days-in-july-1969 = 1969年7月の8日間を、打ち上げから着水まで日ごとに。
 # en: ce31ba59543ea424a6019bc67976ace141d62d09
-diagram-four-games-table-each-and = 4つのゲームとテーブルが1つずつ、誰が何を遊ぶか。
+diagram-four-games-table-each-and = 4つのゲームをテーブル1つずつで。誰が何を遊ぶか。
 # en: 9d35a9836a6bb4c6180f6c2880c8c19c22ed4ea0
 diagram-from-photo-of-receipt-to = レシートの写真から給与明細まで、上司と経理を経由して。
 # en: 1f1489585228c4bf2d9599bdff9fef70f59b4a60
@@ -2807,7 +2807,7 @@ trip-note-for-stop-n = 立ち寄り先{ $n }のメモ
 # en: 0a8abf5522e2f20b1f976982533aabd909645324
 trip-about-time-by-car = 車で約{ $time }
 # en: 7f85e32db6c77473c8b172d1ad1dab75462705a3
-trip-tap-map-to-add-first = 地図をタップして最初の立ち寄り先を追加するか、名前で場所を挿入してください。
+trip-tap-map-to-add-first = 地図をタップして最初の立ち寄り先を追加するか、「挿入」で名前から場所を追加してください。
 # en: 472fd6a8979384a06de401f16cafb9cfdd9a824c
 trip-insert-place-by-name = 名前で場所を挿入します。
 # Finding a place by name
@@ -2831,7 +2831,7 @@ trip-nothing-found = 見つかりませんでした。
 # en: ce482808305f25f4c7f63905061b0c411444f12c
 trip-week-in-portugal = ポルトガルの1週間
 # en: 3a4002be5f16560bb462d3f37d8b2caac8a65603
-trip-lisbon-to-porto-by-car = リスボンからポルトまで車で、キロメートル単位。立ち寄り先ごとにひとこと。
+trip-lisbon-to-porto-by-car = リスボンからポルトまで車で、キロメートル単位。立ち寄り先ごとにおすすめ情報つき。
 # en: 72fa00e64f1816bfe62cd5e5ebae7ddd8bbc1d59
 trip-down-pacific-coast = 太平洋岸を南へ
 # en: 6d871c8c9ed845cfaaafff0c18e335ce6da9ba42
@@ -2855,7 +2855,7 @@ trip-ten-days-around-island-by = 車で島を10日間かけて一周。区間ご
 # en: 89059cee91b704cf1c0e42de4225df2968a207e7
 trip-dublin-food-crawl = ダブリンの食べ歩き
 # en: b934fa6dfc063b38e47ce12ed4622e1cc0d55b75
-trip-seven-places-to-eat-in = 午後のうちに7軒を西から東へ食べ歩き。それぞれ短い散歩で移動します。
+trip-seven-places-to-eat-in = 午後のうちに7軒を西から東へ食べ歩き。店と店の間は歩いてすぐです。
 # en: 2149c2c628bda1d9ea8522144f7ca59ce2a6bcc8
 trip-yosemites-mist-trail-loop = ヨセミテのミスト・トレイル周回
 # en: 056b43a68d915001b02640fbb4ec910045a406ad
@@ -2918,7 +2918,7 @@ calc-calculation = 計算
 # en: ab4ea6f8fe06812a128297560bee7aff1be0c040
 calc-calculator-that-shows-its-work = 計算の過程を残す電卓：名前、単位と換算、y = f(x)のグラフ。
 # en: f146f8e93fc9312f6b8003b048cd24d1574469af
-calc-tape-text = 記録をテキストで
+calc-tape-text = 記録（テキスト）
 # The bar
 # en: 9a7405ebcedde5be8d095a986ea8794e19ee84e2
 calc-graph = グラフ
@@ -2948,7 +2948,7 @@ calc-factorial = 階乗
 # en: c584662e0778e58334ec2e9f7fc7f58a98d4dca8
 calc-e-number = e（ネイピア数）
 # en: f3afae23c74a7d1a42a52c0c47bfeb1191b6b6e9
-calc-x-for-graph = xはグラフ用
+calc-x-for-graph = x（グラフ用）
 # en: 1cfd7bfc7d3d79d7ea28a91bdc6e032559103831
 calc-units-and-algebra = 単位と代数
 # en: de1e4faaa9758db564ba458c3956824881efcd9c
@@ -3004,7 +3004,7 @@ calc-tape-of-market-apples-and = 市場の記録：りんごとチーズを重�
 # en: 56d12d641f4f4177e63e120c8bd10a8e7348357f
 calc-tax-on-price = 価格にかかる税
 # en: 8a7d0a08d1e03c2974f84aa039e7871c5b232245
-calc-new-york-city-sales-tax = ニューヨーク市の売上税を価格に足し、レシートから引き戻します。
+calc-new-york-city-sales-tax = ニューヨーク市の売上税を価格に足し、レシートの金額から逆算します。
 # en: 80296be8eee3142eb634c0045f82e15b5e5373aa
 calc-percentage-change = 変化率
 # en: 93650e756cc879e41310d678219f483e5ce2cfd1
@@ -3026,11 +3026,11 @@ calc-currency-at-rate-you-type = 入力したレートでの通貨換算
 # en: 5f4e47693383fd619db1b39871b821a7fccf86df
 calc-trip-priced-in-euros-and = ユーロで見積もった旅行をドルに直し、カード手数料を加えます。
 # en: 6645ae7e46c209b7ba6f5fb3b6aa707395a2c3d2
-calc-fuel-for-trip = 旅行の燃料
+calc-fuel-for-trip = 旅行のガソリン代
 # en: e2d3235c5cfd9ceffb4e54f0635e4f3841b0c0e1
-calc-boston-to-montreal-and-back = ボストンからモントリオールへの往復：マイル、ガロンあたりのマイル数、価格、4通り。
+calc-boston-to-montreal-and-back = ボストンからモントリオールへの往復：距離、燃費（マイル/ガロン）、価格、4人での割り勘。
 # en: bb294d581aa3512dfdaf06cb5705338f026425ff
-calc-paint-for-room = 部屋のペンキ
+calc-paint-for-room = 部屋に必要なペンキ
 # en: 8899142eaeb03e3a2cfc17f5e68f1977478e2ce5
 calc-walls-less-door-and-windows = 壁からドアと窓を引いて、2度塗り、1ガロン缶で。
 # en: fa9aac4028931969e4e43d5926f21c1c02b03737
@@ -3040,9 +3040,9 @@ calc-one-call-at-9-in = ニューヨークの9時の電話が、ロンドン、�
 # en: 4126383a0888802d508caf9f1e9a973554c6eb7e
 calc-running-pace = ランニングのペース
 # en: 73e59d9404aa7a32f2e7e9ae9ff609c2a74d14cb
-calc-10k-in-52-30-minutes = 10Kを52:30で：1キロと1マイルあたりの分数、そのペースでのハーフとフルマラソン。
+calc-10k-in-52-30-minutes = 10kmを52:30で：1キロと1マイルあたりの分数、そのペースでのハーフとフルマラソン。
 # en: d1411ae3cdd27fda5ea57577c408be223f586cf0
-calc-body-mass-index = ボディマス指数
+calc-body-mass-index = BMI（体格指数）
 # en: cf37a053ab6daf8527ff908a4479b6fb38654155
 calc-weight-over-height-squared-in = 体重を身長の2乗で割ります。キログラムとメートル、またはポンドとインチで。
 # en: 18c8c5aa1c31cb796ef6aa8086b794bc59e4d454
@@ -3090,11 +3090,11 @@ compare-no-difference = 違いなし
 # en: 8f0fb2d2ece91d9de4ed64f23a12b475c3e18970
 compare-not-link-to-tiny-little = ちいさなちいさなオフィスのドキュメントへのリンクではありません
 # en: e82be1221a13b593fd3fd58ffe24f3c3ba58f783
-compare-paste-second-link-to-see = 2つ目のリンクを貼ると、何が変わったかが見えます。
+compare-paste-second-link-to-see = 2つ目のリンクを貼り付けると、何が変わったかがわかります。
 # en: 442aef6fc360061295985657c4489b3c4d360cc3
-compare-paste-link-to-document-as = 今のドキュメントのリンクを貼り付けてください
+compare-paste-link-to-document-as = 変更後のドキュメントのリンクを貼り付けてください
 # en: 7fb07fcb91ba19442009f16f24be4ef85b3eca16
-compare-paste-link-to-document-as-it-was = 前のドキュメントのリンクを貼り付けてください
+compare-paste-link-to-document-as-it-was = 変更前のドキュメントのリンクを貼り付けてください
 # en: 0ae84aa126111ee639f685e9ed05c6895e632a90
 compare-put-in = 追加：
 # en: 210dd62a81e43d19e22018878ba665485e0526cb
@@ -3111,12 +3111,12 @@ compare-two-links-to-documents-side = 2つのドキュメントのリンクを�
 compare-different-apps = 別のアプリ
 # en: f4e4b3a1d739ce43635eb9d75d97403c420c0642
 compare-n-blocks-taken-out = { $n ->
-       *[other] { $n }個のブロックを削除
-    }
+       *[other] { $n }件
+    }のブロックを削除
 # en: 0041ce2f8795b8fbc93244ba17b668d115906ef3
 compare-n-put-in = { $n ->
-       *[other] { $n }件を追加
-    }
+       *[other] { $n }件
+    }追加
 
 ## files and zips dropped on the page (kit/file/open.ts)
 
@@ -3131,17 +3131,17 @@ open-keep-them-on-this-device = この端末に保存
 # en: c4fe6d8b035f6108e8a7e0037667dacf3d6cca25
 open-nothing-is-saved-on-this = この端末には何も保存されていません。ここに保存するか、1つ開いてください。
 # en: 0826daee1d616f7de3a2b205eb2360fcaccc77ef
-open-first = 最初のものを開く
+open-first = 最初のドキュメントを開く
 # en: 59d36bf6c42ab3ae1481fe62abbc67ffef7a8b22
 open-saving-in-this-browser-n = このブラウザに保存中：{ $n ->
        *[other] { $n }件
-    }のドキュメントを保管済み
+    }のドキュメントを保存済み
 # en: 4fc6621d5b53d413dd1fd42cf7e7834ee3ecba5a
-open-that-zip-holds-no-documents = そのzipに読み込めるドキュメントは見つかりませんでした。
+open-that-zip-holds-no-documents = そのZIPに読み込めるドキュメントは見つかりませんでした。
 # en: ed5d2e1ab481efa92392820d83922b25c236c730
 open-n-documents-kept = { $n ->
        *[other] { $n }件
-    }のドキュメントを保管済み
+    }のドキュメントを保存済み
 
 ## a document's QR code (kit/draw/qr-picture.ts)
 
