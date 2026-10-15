@@ -2,7 +2,7 @@
  * The .ftl files' shape, for the tooling (scripts/i18n-extract.ts, the tests) and never shipped: a file read into its
  * messages, a message written from its words, and the plural categories of a language. The app reads the files itself,
  * with @fluent/bundle (kit/core/i18n.ts); this reads them with @fluent/syntax, which keeps the comments the checks need
- * (the groups, `# same`, `# draft from`). No node imports: the browser tests use it too.
+ * (the groups, `# same`, `# draft from`, `# en:`). No node imports: the browser tests use it too.
  *
  * The checks compare a message as its words on one line, its flat form: `{name}` a variable, `{n|one slide|# slides}`
  * a plural on $n with a form for each of the language's categories in CLDR's order (zero, one, two, few, many, other),
@@ -53,7 +53,7 @@ export function pattern(flat: string, code: string): string {
   return edges(out + text(flat.slice(last)));
 }
 
-/** A message as lines of a file: its comment (`# ` a line), then `id = pattern`. */
+/** A message as lines of a file: its comment (`# ` a line, the English's hash among them), then `id = pattern`. */
 export function message(id: string, flat: string, code: string, comment: string[] = []): string {
   return [...comment.map((c) => (c ? `# ${c}` : '#')), `${id} = ${pattern(flat, code)}`].join('\n');
 }
@@ -127,6 +127,8 @@ export interface Entry {
   same: boolean;
   /** The translation memory offered it and nobody has read it yet: its comment's `draft from <id>`. */
   draft?: string;
+  /** The English it was translated from, as a hash: its comment's `en: <sha1>` (scripts/i18n-extract.ts `englishHash`). */
+  en?: string;
   message: Message;
 }
 
@@ -145,7 +147,11 @@ export function readFtl(source: string, code: string): { entries: Entry[]; group
     else if (e.type === 'Message') {
       const comment = e.comment ? e.comment.content.split('\n') : [];
       const draft = comment.find((l) => l.startsWith('draft from'));
-      entries.push({ id: e.id.name, flat: flatOf(e.value, code), comment, group, same: comment.includes('same'), draft, message: e });
+      const en = comment
+        .find((l) => l.startsWith('en: '))
+        ?.slice(4)
+        .trim();
+      entries.push({ id: e.id.name, flat: flatOf(e.value, code), comment, group, same: comment.includes('same'), draft, en, message: e });
     }
   }
   return { entries, groups, head, junk };

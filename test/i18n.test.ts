@@ -6,6 +6,7 @@ import { t, register, setLanguage, browserLanguage, directionOf, languages } fro
 import { commandKeys, languageFiles, main, placeholders, usedKeys, withMissing, MARK } from '../scripts/i18n-extract.ts';
 import { flatMessages, readFtl } from '../scripts/ftl.ts';
 import { british } from './british.ts';
+import { bare } from '../scripts/ftl-plugin.ts';
 
 const root = join(import.meta.dirname, '..');
 const en = flatMessages(readFileSync(join(root, 'src/i18n/en.ftl'), 'utf8'), 'en');
@@ -141,4 +142,13 @@ test('every language file has every id en.ftl has, and no English string is Brit
   expect(Object.values(en).flatMap((s, i) => british(s, `en ${i}`))).toEqual([]);
   // And the list knows a British string when it sees one.
   expect(british('Colour for new: {colour}', 'x')).toHaveLength(1);
+});
+
+test('a language as a page fetches it is its file without its comments, and says every message the same', () => {
+  for (const [code, path] of languageFiles(root)) {
+    const source = readFileSync(path, 'utf8');
+    const shipped = bare(source);
+    expect(shipped, code).not.toMatch(/^#/m);
+    expect(flatMessages(shipped, code), code).toEqual(flatMessages(source, code));
+  }
 });

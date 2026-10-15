@@ -9,7 +9,9 @@
 ### language still has a message this file has dropped whose English was the new one less a few words, its old
 ### translation comes as a draft, marked "# draft from <old id>": read it, make it right, take the mark off (the check
 ### fails while it is in). A message left the same as its English fails the check unless its comment has a line
-### "# same" (a name, a loanword): a decision per language and per message.
+### "# same" (a name, a loanword): a decision per language and per message. Each translation's comment has a line
+### "# en: <sha1>", the English it was translated from: change a message's English here and the check names every
+### translation behind it, to translate again (docs/translation.md).
 ###
 ### Length: measured, not counted. test/browser/label-widths.test.ts measures every command's words in its slot, in
 ### each language, with the font it is drawn in: a bar button's words a third wider than the English at most, a menu

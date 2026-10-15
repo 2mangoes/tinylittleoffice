@@ -10,7 +10,9 @@
  *     English as often in the translation, each plural a select with a variant for each of the language's plural
  *     categories and no other, *[other] its default, the number in one of them; no "sort me" group and no
  *     "# draft from" left in (en.ftl's own included); a message the same as its English fails unless its comment has a
- *     line "same" (a name, a loanword), a decision made per language and per message, so the list never grows unread.
+ *     line "same" (a name, a loanword), a decision made per language and per message, so the list never grows unread;
+ *     and a translation fails whose "# en: <sha1>" is not the hash of en.ftl's English now (englishHash): its English
+ *     changed under it, and it is translated again.
  *
  *   node scripts/i18n-extract.ts             write the missing ids into en.ftl, report the rest
  *   node scripts/i18n-extract.ts --check     write nothing; fail if an id is missing or a language's file is wrong
@@ -18,11 +20,16 @@
  *                                            ready to translate and paste in; where fr.ftl still has a message en.ftl
  *                                            has dropped whose English (en.ftl as last committed) was the new English
  *                                            less a few words, its translation is offered as a draft (the translation
- *                                            memory); with no fr.ftl, every message
+ *                                            memory); then the messages whose English changed since fr translated
+ *                                            them (their "# en:" hash), the translation as a draft; with no fr.ftl,
+ *                                            every message
+ *   node scripts/i18n-extract.ts --rehash fr <id>…   record in fr.ftl that these messages follow en.ftl's English as it
+ *                                            is now ("# en: <sha1>"), once they are translated again
  *
  * Messages are compared in their flat form (scripts/ftl.ts).
  */
 import { execFileSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
 import { existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -32,6 +39,32 @@ import { flatMessages, message, pluralCategories, readFtl, selects, type Entry }
 export const MARK = '## New — sort me into a section';
 /** A message the translation memory offered, or one the code asked for, that nobody has read yet. */
 const DRAFT = 'draft from';
+
+/**
+ * The English a translation follows, as its comment says it: `# en: <sha1>`, the SHA-1 of the English message in its
+ * flat form (scripts/ftl.ts). A change of wording keeps the id, so without this a translation would go on saying the old
+ * English unseen; with it, the check names every message whose English has changed since it was translated.
+ */
+export const englishHash = (flat: string): string => createHash('sha1').update(flat).digest('hex');
+
+/**
+ * A language's file with `# en:` recorded for the messages given (all, when none are), from en.ftl's English as it is
+ * now: what a translator runs once a message is translated again (`--rehash <code> <id>…`), and never to quiet the check.
+ */
+export function rehash(source: string, en: Record<string, string>, ids?: string[]): string {
+  const want = new Set(ids ?? Object.keys(en));
+  const lines = source.split('\n');
+  for (let i = 0; i < lines.length; i++) {
+    const id = /^([a-z][a-z0-9-]*) =/.exec(lines[i])?.[1];
+    if (!id || !want.has(id) || en[id] === undefined) continue;
+    const line = `# en: ${englishHash(en[id])}`;
+    let j = i - 1;
+    while (j >= 0 && /^#( |$)/.test(lines[j]) && !/^# en: /.test(lines[j])) j--;
+    if (j >= 0 && /^# en: /.test(lines[j])) lines[j] = line;
+    else lines.splice(i++, 0, line);
+  }
+  return lines.join('\n');
+}
 
 const unquote = (s: string) => s.replace(/\\(['"`\\])/g, '$1');
 
@@ -100,6 +133,8 @@ export function checkLanguage(code: string, en: Record<string, string>, source: 
   if (drafts.length) errors.push(`${drafts.length} "# ${DRAFT}" left in (read each, make it right for its id, take the comment off):\n    ${drafts.map((e) => `${e.id}: ${e.draft}`).join('\n    ')}`);
   const same: string[] = [];
   const stale: string[] = [];
+  const unhashed: string[] = [];
+  const changed: string[] = [];
   for (const e of entries) {
     const key = en[e.id];
     if (key === undefined) continue;
@@ -120,11 +155,15 @@ export function checkLanguage(code: string, en: Record<string, string>, source: 
     for (const m of value.matchAll(/\{(\w+)\|([^}]*)\}/g))
       if (!m[2].split('|').some((x) => x.includes('#'))) errors.push(`{ $${m[1]} -> } in ${e.id} says the number in none of its variants: ${value}`);
     if (code === 'en') continue;
+    if (!e.en) unhashed.push(e.id);
+    else if (e.en !== englishHash(key)) changed.push(`${e.id}: ${key}`);
     // The English is the English with the language's plural forms too (as i18n:gaps writes it).
     const english = value === key || value === withForms(code, key);
     if (english && /\p{L}/u.test(key.replace(/\{[^}]*\}/g, '')) && !e.same) same.push(e.id);
     if (!english && e.same) stale.push(`${e.id}: ${key} → ${value}`);
   }
+  if (unhashed.length) errors.push(`${unhashed.length} with no "# en:" line, the English each was translated from (npm run i18n:gaps writes it):\n    ${unhashed.join('\n    ')}`);
+  if (changed.length) errors.push(`${changed.length} whose English has changed since they were translated (translate each again: npm run i18n:gaps -- ${code}):\n    ${changed.join('\n    ')}`);
   if (same.length) errors.push(`${same.length} the same as the English, not decided (translate it, or give it the comment "# same" where the English is the word):\n    ${same.join('\n    ')}`);
   if (stale.length) errors.push(`${stale.length} marked "# same" but translated (take the mark off):\n    ${stale.join('\n    ')}`);
   return { errors, warnings };
@@ -168,12 +207,16 @@ export function nearest(key: string, olds: string[], at = LIKE): string | undefi
  * The messages a language lacks, as lines to paste in: the English, each plural with a variant for each of the
  * language's categories, for a translator to put in their words; or, where the language still has a message en.ftl has
  * dropped whose English (`old`: id → English, as en.ftl was) is this one less a few words, that message's translation,
- * marked "# draft from <old id>" for a reader (i18n:check fails while the mark is in). Never written into a file.
+ * marked "# draft from <old id>" for a reader. Then the messages whose English has changed since they were translated:
+ * the translation as it is, marked "# draft from <id>" with the English it followed where `old` still has it, to make
+ * right. Each with the "# en:" of the English now. i18n:check fails while a mark is in. Never written into a file.
  */
 export function gaps(en: Record<string, string>, source: string, code = 'en', old: Record<string, string> = {}): string[] {
-  const have = flatMessages(source, code);
+  const entries = readFtl(source, code).entries;
+  const have = Object.fromEntries(entries.map((e) => [e.id, e.flat]));
   const dropped = Object.keys(have).filter((k) => !(k in en) && old[k] !== undefined);
-  return Object.keys(en)
+  const hash = (k: string) => `en: ${englishHash(en[k])}`;
+  const missing = Object.keys(en)
     .filter((k) => !(k in have))
     .map((k) => {
       const from = nearest(
@@ -181,8 +224,16 @@ export function gaps(en: Record<string, string>, source: string, code = 'en', ol
         dropped.map((d) => old[d]),
       );
       const id = dropped.find((d) => old[d] === from);
-      return id ? message(k, have[id], code, [`${DRAFT} ${id}`]) : message(k, withForms(code, en[k]), code);
+      return id ? message(k, have[id], code, [hash(k), `${DRAFT} ${id}`]) : message(k, withForms(code, en[k]), code, [hash(k)]);
     });
+  if (code === 'en') return missing;
+  const changed = entries
+    .filter((e) => e.id in en && e.en && e.en !== englishHash(en[e.id]))
+    .map((e) => {
+      const was = old[e.id] !== undefined && englishHash(old[e.id]) === e.en ? `: its English was "${old[e.id]}", now "${en[e.id]}"` : `: its English is now "${en[e.id]}"`;
+      return message(e.id, e.flat, code, [hash(e.id), `${DRAFT} ${e.id}${was}`]);
+    });
+  return [...missing, ...changed];
 }
 
 /** The languages' files present: code → path. */
@@ -266,6 +317,18 @@ if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.ur
     const en = flatMessages(readFileSync(join(root, 'src', 'i18n', 'en.ftl'), 'utf8'), 'en');
     const lines = gaps(en, existsSync(path) ? readFileSync(path, 'utf8') : '', lang, committedEnglish(root));
     if (lines.length) console.log(lines.join('\n'));
+    process.exit(0);
+  }
+  const re = process.argv.indexOf('--rehash');
+  if (re >= 0) {
+    const [lang, ...ids] = process.argv.slice(re + 1);
+    const path = join(root, 'src', 'i18n', `${lang}.ftl`);
+    if (!lang || lang === 'en' || !existsSync(path)) {
+      console.error('Usage: node scripts/i18n-extract.ts --rehash <code> <id>… (the messages of <code> translated again)');
+      process.exit(1);
+    }
+    const en = flatMessages(readFileSync(join(root, 'src', 'i18n', 'en.ftl'), 'utf8'), 'en');
+    writeFileSync(path, rehash(readFileSync(path, 'utf8'), en, ids.length ? ids : undefined));
     process.exit(0);
   }
   process.exit(main(root, process.argv.includes('--check')));

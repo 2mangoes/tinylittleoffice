@@ -9,9 +9,9 @@ plan for this, before it was built, is [history/translation-plan.md](history/tra
 ## Strings
 
 - Every string a person sees goes through `t('id')` (`src/kit/core/i18n.ts`), read from [Fluent](https://projectfluent.org)
-  files by `@fluent/bundle` (Paul, 2026-10-15: "Use Fluent"). A message has a stable id, kebab-case, the group it
-  began in and its first words (`shell-copy-link-and-go`, `sheet-row-above`): a change of wording keeps
-  the id, and a new meaning is a new id. `src/i18n/en.ftl` is the source of every message, in groups
+  files by `@fluent/bundle` (Paul, 2026-10-15: "Use Fluent"). A message has a stable id, kebab-case: where it is used (an
+  app, a part of the kit, or `common-` where several use it) and its first words (`shell-copy-link-and-go`,
+  `sheet-row-above`, `common-delete`). A change of wording keeps the id, and a new meaning is a new id. `src/i18n/en.ftl` is the source of every message, in groups
   (`## the Spreadsheet`), edited by hand, with a comment above any message whose meaning is not plain ("a verb on a
   button", "a noun"). A command's words in a command file (`label: 'bar-bold'`) are ids too, put through `t()` when
   drawn.
@@ -32,17 +32,29 @@ plan for this, before it was built, is [history/translation-plan.md](history/tra
   A file's head (`###`) says, in that language, the voice it keeps: the form of address (French `vous`, Spanish `tú`,
   Russian `вы`, Hindi `आप`, Urdu `آپ`, Yiddish `איר`, Hebrew addressing nobody as a man or a woman), its quotation
   marks and spacing, and how buttons are worded.
-- A message left the same as its English (a name, a loanword: "Apps", "CSV") says so with the comment line `# same`
-  above it: a decision per language and per message.
+- Three comment lines above a message are the checks' marks, never shipped (a build strips every comment from a
+  language's file: `scripts/ftl-plugin.ts`):
+  - `# en: <sha1>`: on every message of a language but English, the SHA-1 of the English (en.ftl's message, on one
+    line as `scripts/ftl.ts` reads it) it was translated from. A change of English keeps the id, so this is what says a
+    translation is behind: `npm run i18n:check` names every message whose English has changed since, and
+    `npm run i18n:gaps -- <code>` offers each again. Once a message is translated again,
+    `node scripts/i18n-extract.ts --rehash <code> <id>…` records the English it now follows.
+  - `# same`: the message stays as its English (a name, a loanword: "Apps", "CSV"), a decision per language and per
+    message; a message the same as its English without it fails the check, and so does one marked and translated.
+  - `# draft from <id>`: words nobody has read yet, which the check fails while the mark is in: an old translation
+    the memory offered for a new id (`<id>` the old one), a translation whose English changed (`<id>` its own, with
+    the English it followed and the English now), or, in en.ftl, an id the code asked for whose English is not
+    written (`# draft from the code`). Read it, make it right, take the line off.
 - A message added to en.ftl is translated into all twenty other files in the same change, and so is one whose English
   changes. `npm run i18n:extract` lands an id the code uses and en.ftl lacks at the end of en.ftl, under a
   `## New — sort me into a section` group, marked `# draft from the code` until its English is written and it is
-  placed. `npm run i18n:gaps -- <code>` prints, ready to paste, every message a language lacks, in English, with a
-  variant for each of that language's plural categories, and offers an old translation as a draft
-  (`# draft from <old id>`) where an id was replaced by a new one whose English is alike. `npm run i18n:check` fails
-  on an id the code uses that en.ftl lacks, a file Fluent cannot read, a placeable that does not match, a plural
-  without the language's categories, a draft or a sort-me group left in, a message the same as its English and not
-  marked `# same`, or a language missing a message; it warns of an id nothing uses.
+  placed. `npm run i18n:gaps -- <code>` prints, ready to paste with their `# en:` lines, every message a language
+  lacks, in English, with a variant for each of that language's plural categories, offering an old translation as a
+  draft where an id was replaced by a new one whose English is alike; and then every message whose English changed.
+  `npm run i18n:check` fails on an id the code uses that en.ftl lacks, a file Fluent cannot read, a placeable that
+  does not match, a plural without the language's categories, a draft or a sort-me group left in, a message the same
+  as its English and not marked `# same`, a translation without `# en:` or behind its English, or a language missing
+  a message; it warns of an id nothing uses.
 - The English is American (Paul, 2026-10-11): color, center, organize, favorite, gray, license, ZIP code, cell
   phone, and the Letter paper that is the default. `test/american.test.ts` holds en.ftl and every template to a
   list of British spellings and words (`test/british.ts`); the README and the docs are held to the same list.

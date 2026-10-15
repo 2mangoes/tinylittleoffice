@@ -11,6 +11,7 @@
  */
 import { defineConfig } from 'vite';
 import { resolve } from 'node:path';
+import { ftlBare } from './scripts/ftl-plugin.ts';
 
 /**
  * What only a page uses: an app's editor and its commands, the chrome (kit/ui/, the icon picker among it), and the
@@ -21,6 +22,7 @@ const PAGE_ONLY = /\/src\/(apps\/[^/]+\/(editor|commands)\.ts|kit\/ui\/[^/]+\.ts
 export default defineConfig({
   base: './',
   publicDir: false,
+  plugins: [ftlBare()],
   build: {
     target: 'es2022',
     outDir: 'dist',

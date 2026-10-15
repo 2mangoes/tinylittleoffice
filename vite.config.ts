@@ -2,6 +2,7 @@ import { defineConfig, loadEnv, type Plugin } from 'vite';
 import { copyFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
+import { ftlBare } from './scripts/ftl-plugin.ts';
 import { fillHeaders, headersFor, inlineScripts, scriptHash } from './scripts/headers.ts';
 import { listed, writePages } from './scripts/seo.ts';
 import { writeWorker } from './scripts/sw-manifest.ts';
@@ -113,7 +114,7 @@ export default defineConfig(({ mode }) => ({
       '/card': { target: 'http://127.0.0.1:8789' },
     },
   },
-  plugins: [afterBuild(loadEnv(mode, import.meta.dirname).VITE_SITE_URL ?? ''), previewCache()],
+  plugins: [ftlBare(), afterBuild(loadEnv(mode, import.meta.dirname).VITE_SITE_URL ?? ''), previewCache()],
   build: {
     target: 'es2022',
     outDir: 'dist',

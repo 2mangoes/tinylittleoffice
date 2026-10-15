@@ -5,7 +5,7 @@ import { test, expect, afterAll } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { t, register, setLanguage, languages, languageName, missed } from '../src/kit/core/i18n.ts';
-import { checkLanguage, gaps, languageFiles, likeness, nearest, placeholders, tokens, withForms } from '../scripts/i18n-extract.ts';
+import { checkLanguage, englishHash, gaps, languageFiles, likeness, nearest, placeholders, rehash, tokens, withForms } from '../scripts/i18n-extract.ts';
 import { flatMessages, pluralCategories } from '../scripts/ftl.ts';
 import { ftlOf, pseudo, pseudoFtl } from './pseudo.ts';
 
@@ -57,7 +57,7 @@ example-n-slides = { $n ->
 x-dot = ·
 draw-pixel-art-n-by-n = Pixel art, { $n } sur { $n }
 `;
-  expect(checkLanguage('fr', base, good)).toEqual({ errors: [], warnings: [] });
+  expect(checkLanguage('fr', base, rehash(good, base))).toEqual({ errors: [], warnings: [] });
   const bad = checkLanguage(
     'fr',
     base,
@@ -93,30 +93,31 @@ broken = { $n
   expect(twice.errors).toEqual(expect.arrayContaining(['example-n-slides is given twice', '{ $n -> } in example-n-slides: the default is *[one], not *[other]']));
   // A message left in English fails, unless its comment says it is meant ("# same") or it has no letters of its own.
   const english = ftlOf({ ...base, 'example-n-slides': '{n|eine Folie|# Folien}' }, 'de');
-  expect(checkLanguage('de', base, english).errors).toEqual([
+  expect(checkLanguage('de', base, rehash(english, base)).errors).toEqual([
     '4 the same as the English, not decided (translate it, or give it the comment "# same" where the English is the word):\n    shell-menu\n    common-share\n    home-n-more\n    draw-pixel-art-n-by-n',
   ]);
   const decided = english.replace(/^(shell-menu|common-share|home-n-more|draw-pixel-art-n-by-n) =/gm, '# same\n$1 =');
-  expect(checkLanguage('de', base, decided).errors).toEqual([]);
+  expect(checkLanguage('de', base, rehash(decided, base)).errors).toEqual([]);
   // A mark on a message translated since is stale; a draft the memory offered and nobody read fails.
   const stale = decided
     .replace('common-share = Share', 'common-share = Teilen')
     .replace('home-n-more = { $n } more', 'home-n-more = { $n } mehr')
     .replace('Pixel art, { $n } by { $n }', 'Pixelkunst, { $n } mal { $n }');
-  expect(checkLanguage('de', base, stale).errors).toEqual([
+  expect(checkLanguage('de', base, rehash(stale, base)).errors).toEqual([
     '3 marked "# same" but translated (take the mark off):\n    common-share: Share → Teilen\n    home-n-more: {n} more → {n} mehr\n    draw-pixel-art-n-by-n: Pixel art, {n} by {n} → Pixelkunst, {n} mal {n}',
   ]);
-  const draft = checkLanguage('de', { 'shell-menu': 'Menu' }, '# draft from shell-menus\nshell-menu = Menü\n');
+  const draft = checkLanguage('de', { 'shell-menu': 'Menu' }, rehash('# draft from shell-menus\nshell-menu = Menü\n', { 'shell-menu': 'Menu' }));
   expect(draft.errors).toEqual(['1 "# draft from" left in (read each, make it right for its id, take the comment off):\n    shell-menu: draft from shell-menus']);
-  expect(checkLanguage('ja', { 'example-n-slides': '{n|one slide|# slides}' }, 'example-n-slides = { $n ->\n       *[other] { $n } 枚\n    }\n').errors).toEqual([]);
+  const slides = { 'example-n-slides': '{n|one slide|# slides}' };
+  expect(checkLanguage('ja', slides, rehash('example-n-slides = { $n ->\n       *[other] { $n } 枚\n    }\n', slides)).errors).toEqual([]);
   // A number's own variant beside the categories is Fluent's, and allowed.
   expect(
     checkLanguage('en', { 'example-n-slides': '{n|one slide|# slides}' }, 'example-n-slides = { $n ->\n        [0] no slides\n        [one] one slide\n       *[other] { $n } slides\n    }\n').errors,
   ).toEqual([]);
   expect(checkLanguage('pt_BR', {}, '').errors).toEqual(['"pt_BR" is not a BCP 47 tag']);
   expect(checkLanguage('pt-BR', {}, '').errors).toEqual(['"pt-BR" is not a lowercase BCP 47 tag']);
-  expect(gaps(base, good, 'fr')).toEqual([]);
-  expect(gaps(base, good.replace('common-share = Partager\n', ''), 'fr')).toEqual(['common-share = Share']);
+  expect(gaps(base, rehash(good, base), 'fr')).toEqual([]);
+  expect(gaps(base, rehash(good.replace('common-share = Partager\n', ''), base), 'fr')).toEqual([`# en: ${englishHash('Share')}\ncommon-share = Share`]);
 });
 
 test('the translation memory: a message whose English changed by a few words under a new id is offered its old translation as a draft, marked', () => {
@@ -136,11 +137,30 @@ test('the translation memory: a message whose English changed by a few words und
   const now = { 'share-copy-this-link': 'Copy this link', 'bar-undo': 'Undo' };
   const before = { 'share-copy-link': 'Copy the link', 'bar-redo': 'Redo' };
   const fr = 'share-copy-link = Copier le lien\nbar-redo = Rétablir\n';
-  expect(gaps(now, fr, 'fr', before)).toEqual(['# draft from share-copy-link\nshare-copy-this-link = Copier le lien', 'bar-undo = Undo']);
+  const h = (k: keyof typeof now) => `# en: ${englishHash(now[k])}`;
+  expect(gaps(now, fr, 'fr', before)).toEqual([`${h('share-copy-this-link')}\n# draft from share-copy-link\nshare-copy-this-link = Copier le lien`, `${h('bar-undo')}\nbar-undo = Undo`]);
   // An old id whose English the memory does not know offers nothing.
-  expect(gaps(now, fr, 'fr', {})).toEqual(['share-copy-this-link = Copy this link', 'bar-undo = Undo']);
+  expect(gaps(now, fr, 'fr', {})).toEqual([`${h('share-copy-this-link')}\nshare-copy-this-link = Copy this link`, `${h('bar-undo')}\nbar-undo = Undo`]);
   // The draft, pasted in, is what i18n:check stops on.
   expect(checkLanguage('fr', now, `${gaps(now, fr, 'fr', before)[0]}\nbar-undo = Annuler\n`).errors.some((e) => e.includes('# draft from'))).toBe(true);
+});
+
+test('a translation whose English changed since it was translated fails, and i18n:gaps offers it again, its old English named', () => {
+  const was = { 'shell-go-without': 'Go without' };
+  const now = { 'shell-go-without': 'Leave without saving' };
+  const fr = rehash('shell-go-without = Partir sans\n', was);
+  expect(fr).toBe(`# en: ${englishHash('Go without')}\nshell-go-without = Partir sans\n`);
+  expect(checkLanguage('fr', was, fr).errors).toEqual([]);
+  expect(checkLanguage('fr', now, fr).errors).toEqual([
+    '1 whose English has changed since they were translated (translate each again: npm run i18n:gaps -- fr):\n    shell-go-without: Leave without saving',
+  ]);
+  expect(gaps(now, fr, 'fr', was)).toEqual([
+    `# en: ${englishHash('Leave without saving')}\n# draft from shell-go-without: its English was "Go without", now "Leave without saving"\nshell-go-without = Partir sans`,
+  ]);
+  expect(gaps(now, fr, 'fr', {})).toEqual([`# en: ${englishHash('Leave without saving')}\n# draft from shell-go-without: its English is now "Leave without saving"\nshell-go-without = Partir sans`]);
+  // Translated again and rehashed, it passes; a message with no "# en:" at all fails.
+  expect(checkLanguage('fr', now, rehash('shell-go-without = Partir sans enregistrer\n', now)).errors).toEqual([]);
+  expect(checkLanguage('fr', now, 'shell-go-without = Partir sans enregistrer\n').errors[0]).toMatch(/^1 with no "# en:" line/);
 });
 
 test('en.ftl passes its own check: its plurals have English’s two categories and the number', () => {
@@ -149,7 +169,7 @@ test('en.ftl passes its own check: its plurals have English’s two categories a
 
 for (const code of ['en-xa', 'ar-xb']) {
   test(`the pseudo-language ${code} passes the check and draws every message`, async () => {
-    const source = pseudoFtl(code, en);
+    const source = rehash(pseudoFtl(code, en), en);
     expect(checkLanguage(code, en, source).errors).toEqual([]);
     register(code, source);
     expect(languages()).toContain(code);
@@ -225,7 +245,7 @@ test('the plural forms of the second nine and the two after: ru, uk, pl four (21
     ['zh-hant', '{n|# 個檔案}', { 1: '1 個檔案', 2: '2 個檔案', 5: '5 個檔案', 21: '21 個檔案' }],
   ];
   for (const [code, forms, want] of cases) {
-    const source = ftlOf({ 'x-n-files': forms }, code);
+    const source = rehash(ftlOf({ 'x-n-files': forms }, code), FILES);
     expect(checkLanguage(code, FILES, source).errors, code).toEqual([]);
     register(code, source);
     await setLanguage(code);
@@ -238,11 +258,12 @@ test('i18n:gaps writes a variant for each plural category a language has, and th
   const base = { 'x-n-files': '{n|one file|# files}', 'shell-menu': 'Menu' };
   expect(withForms('ru', '{n|one file|# files} left')).toBe('{n|one file|# files|# files|# files} left');
   expect(withForms('zh-hant', '{n|one file|# files}')).toBe('{n|# files}');
+  const h = (k: keyof typeof base) => `# en: ${englishHash(base[k])}\n`;
   expect(gaps(base, '', 'pl')).toEqual([
-    'x-n-files = { $n ->\n        [one] one file\n        [few] { $n } files\n        [many] { $n } files\n       *[other] { $n } files\n    }',
-    'shell-menu = Menu',
+    `${h('x-n-files')}x-n-files = { $n ->\n        [one] one file\n        [few] { $n } files\n        [many] { $n } files\n       *[other] { $n } files\n    }`,
+    `${h('shell-menu')}shell-menu = Menu`,
   ]);
-  expect(gaps(base, '', 'ko')).toEqual(['x-n-files = { $n ->\n       *[other] { $n } files\n    }', 'shell-menu = Menu']);
+  expect(gaps(base, '', 'ko')).toEqual([`${h('x-n-files')}x-n-files = { $n ->\n       *[other] { $n } files\n    }`, `${h('shell-menu')}shell-menu = Menu`]);
   const left = { 'x-n-files': '{n|one file|# files} left', 'shell-menu': '' };
   expect(checkLanguage('pl', left, gaps(left, '', 'pl').join('\n')).errors.join('\n')).toContain('1 the same as the English');
 });
