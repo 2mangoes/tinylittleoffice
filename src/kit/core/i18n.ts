@@ -23,8 +23,6 @@
  */
 import { FluentBundle, FluentResource, type FluentVariable } from '@fluent/bundle';
 
-/** The old dictionaries' shape (src/i18n/<code>.ts, English keys), kept only until test/i18n-fluent.test.ts has compared them and they go. */
-export type Strings = Record<string, string>;
 /** A language's Fluent file, or a loader of one (Vite's ?raw import: the file's text as its default). */
 type Loader = () => Promise<string | { default: string }>;
 /**

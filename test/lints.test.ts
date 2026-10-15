@@ -307,7 +307,6 @@ const STALE_OK: Record<string, string> = {
   'test/fixtures/lints/stale-words.md': 'the fixture the lint must catch',
   'src/kit/draw/icons-meta.ts': 'Lucide’s own tags for its icons ("signature", "kanban"), generated from its release',
   'src/i18n/fr.ftl': '"une signature" is French for a byline',
-  'src/i18n/fr.ts': '"une signature" is French for a byline (the old dictionary, until it goes)',
   'docs/self-host.md': '`npm audit signatures`, npm’s check of a package’s provenance',
 };
 
