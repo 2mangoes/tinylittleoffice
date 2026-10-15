@@ -275,6 +275,9 @@ whose rows are the document's own data (the sheet's column kinds, the formula fu
 |---|---|---|
 |  | Item | insert ▾ |
 |  | Tiny Little Office Doc… | insert ▾ |
+|  | Task | insert ▾ |
+|  | Due date | insert ▾ |
+|  | Statuses | insert ▾ |
 |  | Icon | bar |
 | `Tab` | Indent | bar, at: words |
 | `Shift+Tab` | Outdent | bar, at: words |
@@ -292,6 +295,7 @@ whose rows are the document's own data (the sheet's column kinds, the formula fu
 |  | Draw as an org chart | view ▾ |
 |  | Draw as a family tree | view ▾ |
 |  | Draw as a network | view ▾ |
+| `Mod+Enter` | Check or uncheck a task | keys only, at: words |
 | `Mod+Alt+ArrowUp`, `Mod+Alt+ArrowDown` | Collapse or expand | keys only, at: words |
 | `Mod+D` | Duplicate | keys only, at: words |
 | `Delete`, `Backspace` | Delete | keys only, at: words |

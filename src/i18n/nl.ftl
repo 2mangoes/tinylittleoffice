@@ -1933,6 +1933,24 @@ outline-show-as-outline = Tonen als overzicht
 outline-take-away-connection-from-from = De verbinding van { $from } naar { $to } weghalen
 # en: e963907dac5cd5c017869b4c96c18021c9bd058b
 outline-take-it-away = Weghalen
+# The compound bullet (Paul, 2026-10-15): the statuses a document sets in its head, a status's pill, a due day's chip.
+# en: e92aab82fce62899699581b5597abdda8175f2dd
+outline-statuses = Statussen
+# same
+# en: bae7d5be70820ed56467bd9a63744e23b47bd711
+outline-status = Status
+# en: c206561903295f2cf5944906fdfc55f1e8a5d45b
+outline-no-status = Geen status
+# en: 80f90adb4a5a3c907accd858ce3c33bc69421246
+outline-status-status-tap-for-next = Status { $status }: tik voor de volgende
+# en: 4c1aeebc433bcb8eb4b05434619ea3136b785ea8
+outline-due-date = Vervaldatum
+# en: bfe11361dd8dc7cc66f5cd6f33d394a95c71c96c
+outline-due-date-ellipsis = Vervaldatum…
+# en: ba24beb3bf28ae2b3e850c25e42aa7b075185d17
+outline-due-date-change-it = Vervalt { $date }: wijzigen
+# en: 6cf55f3558276e2eefff5dd41ec206dc9780bebf
+outline-remove-due-date = Vervaldatum verwijderen
 # en: 7312a31a2c880f2d456663b6f91ad6da980b3a5e
 outline-take-connection-away = Verbinding weghalen
 # en: 656e5c87ae5cd391807e13c85fb32635c2d441c2
@@ -2819,8 +2837,8 @@ trip-where-i-am = Waar ik ben
 trip-map = Kaart
 # en: 4fa4643900d7a129558f6c34b681a8d419a9ef9d
 trip-map-tap-to-add-stop = Kaart: tik voor een stop
-# en: 81920dbaea13a635abdf8e473b6a5f7c37a415e7
-trip-maps-pictures-come-from-openstreetmap = De kaartbeelden komen van OpenStreetMap zolang de kaart zichtbaar is.
+# en: 98cb31d07de0f880bc288c98784e8cb01ff17080
+trip-map-comes-from-openfreemap = De kaart komt van OpenFreeMap zolang hij wordt getoond.
 # en: dd1ac7c6150bf40973c618ac841d01f2281dea20
 trip-your-location-is-asked-for = Je locatie wordt alleen gebruikt om de kaart te centreren en wordt nooit bewaard.
 # en: 6c4827a34debc3c12e8a905f5e8025f0d22802cb

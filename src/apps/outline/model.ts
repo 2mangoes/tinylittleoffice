@@ -52,6 +52,7 @@ import {
   type Doc,
   type Op,
   type Run,
+  hasClass,
 } from '../../doc/index.ts';
 import type { TextBlock as PdfBlock } from '../../kit/file/textpdf.ts';
 
@@ -71,6 +72,108 @@ export interface Item {
   label?: string;
   /** Numbered: the item counts in a numbered list with its siblings. */
   ord?: true;
+  /** Folded shut, its family hidden: `{.shut}` (Paul, 2026-10-15: "the data model should track which nodes are open or shut, default is open"). */
+  shut?: true;
+  /** One of the document's statuses (statusesOf), `{status=DOING}`. */
+  status?: string;
+  /** When it is due, `{due=2026-10-20}`, a day as the Calendar writes one. */
+  due?: string;
+}
+
+/**
+ * A status of the document's own set, written once in its head (Paul, 2026-10-15: "settable statuses (one set per doc)
+ * like TODO, DOING, DONE (green, yellow red), a checkbox, and a date field"): `statuses: TODO=red, DOING=yellow,
+ * DONE=green`, a name and a color each, in the order a tap goes through them; the last is the done one, which a task's
+ * box and the status keep together (setStatus, tick). A document with no `statuses:` line shows none.
+ */
+export interface Status {
+  name: string;
+  /** The pill's color, a hex. */
+  color: string;
+}
+/** The colors a status may name (the Calendar's words, with yellow and gray); an unknown word is gray. */
+export const STATUS_COLORS: Record<string, string> = { red: '#b3261e', orange: '#d55e00', yellow: '#a16207', green: '#009e73', blue: '#0072b2', purple: '#a05ca8', indigo: '#4f46e5', gray: '#6b7280' };
+/** What Insert ▾'s Statuses writes when the document has none. */
+export const DEFAULT_STATUSES = 'TODO=red, DOING=yellow, DONE=green';
+export function statusesOf(doc: Doc): Status[] {
+  const out: Status[] = [];
+  for (const part of (doc.head.statuses ?? '').split(',')) {
+    const m = /^\s*([^=]+?)\s*(?:=\s*([A-Za-z]+)\s*)?$/.exec(part);
+    const name = m?.[1].trim();
+    if (!name || out.some((s) => s.name === name)) continue;
+    out.push({ name, color: STATUS_COLORS[(m![2] ?? '').toLowerCase()] ?? STATUS_COLORS.gray });
+  }
+  return out;
+}
+/** A day as YYYY-MM-DD, the device's own calendar day. */
+const todayString = (now = new Date()): string => `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+/** The due date a new one starts from: the nearest item above with a day still to come, else today (Paul: "defaulting to today or the most recently set future date above"). */
+export function defaultDue(v: OutlineView, i: number, today = todayString()): string {
+  for (let k = i - 1; k >= 0; k--) {
+    const d = v.items[k].due;
+    if (d && d >= today) return d;
+  }
+  return today;
+}
+/** The class that folds an item shut in the document: `{.shut}`; without it an item is open. */
+export const SHUT = 'shut';
+/** The item folded shut or open, written as its class, so the link, an undo and a reader all have it. */
+export function setShut(doc: Doc, at: number, shut: boolean): Op[] {
+  const b = doc.blocks[at];
+  if (b?.k !== 'li') return [];
+  const cls = (b.a?.cls ?? []).filter((c) => c !== SHUT);
+  if (shut) cls.push(SHUT);
+  const a: Attrs = { ...(b.a?.id ? { id: b.a.id } : {}), ...(cls.length ? { cls } : {}), ...(b.a?.kv && Object.keys(b.a.kv).length ? { kv: b.a.kv } : {}) };
+  const { a: _a, ...rest } = b;
+  return replaced(doc, at, { ...rest, ...(Object.keys(a).length ? { a } : {}) });
+}
+/** Every item with a family folded shut, or every one opened. */
+export const setShutAll = (doc: Doc, v: OutlineView, shut: boolean): Op[] => v.items.flatMap((it, i) => (hasChildren(v.items, i) || !shut ? setShut(doc, it.at, shut) : []));
+/** An item's block with attributes set (undefined takes one away) and, given, its task box set or taken away (null). */
+function withItem(b: Block & { k: 'li' }, kv: Record<string, string | undefined>, done?: boolean | null): Block {
+  const next = { ...b.a?.kv };
+  for (const [k, val] of Object.entries(kv)) val === undefined ? delete next[k] : (next[k] = val);
+  const a: Attrs = { ...(b.a?.id ? { id: b.a.id } : {}), ...(b.a?.cls?.length ? { cls: b.a.cls } : {}), ...(Object.keys(next).length ? { kv: next } : {}) };
+  const { done: was, a: _a, ...rest } = b;
+  const nowDone = done === undefined ? was : done === null ? undefined : done;
+  return { ...rest, ...(nowDone !== undefined ? { done: nowDone } : {}), ...(Object.keys(a).length ? { a } : {}) };
+}
+const replaced = (doc: Doc, at: number, next: Block): Op[] =>
+  write({ head: {}, blocks: [next] }) === write({ head: {}, blocks: [doc.blocks[at]] }) ? [] : [{ op: 'splice', at, n: 1, blocks: [next] }];
+/** The item's status set (undefined: none); a task's box follows: the last status checks it, another unchecks it. */
+export function setStatus(doc: Doc, at: number, name: string | undefined, statuses = statusesOf(doc)): Op[] {
+  const b = doc.blocks[at];
+  if (b?.k !== 'li') return [];
+  const last = statuses[statuses.length - 1]?.name;
+  const done = b.done === undefined ? undefined : name !== undefined && name === last ? true : b.done ? false : undefined;
+  return replaced(doc, at, withItem(b, { status: name }, done));
+}
+/** The item's due day set (undefined: none). */
+export function setDue(doc: Doc, at: number, due: string | undefined): Op[] {
+  const b = doc.blocks[at];
+  return b?.k === 'li' ? replaced(doc, at, withItem(b, { due: due && /^\d{4}-\d{2}-\d{2}$/.test(due) ? due : undefined })) : [];
+}
+/** The item a task (an unchecked box), or no task. */
+export function makeTask(doc: Doc, at: number, on: boolean): Op[] {
+  const b = doc.blocks[at];
+  return b?.k === 'li' ? replaced(doc, at, withItem(b, {}, on ? (b.done ?? false) : null)) : [];
+}
+/** A task's box checked or unchecked; with statuses, the status follows: checked is the last, unchecked from the last is the first. */
+export function tick(doc: Doc, at: number, statuses = statusesOf(doc)): Op[] {
+  const b = doc.blocks[at];
+  if (b?.k !== 'li' || b.done === undefined) return [];
+  const done = !b.done;
+  const last = statuses[statuses.length - 1]?.name;
+  const status = !statuses.length ? b.a?.kv?.status : done ? last : b.a?.kv?.status === last ? statuses[0].name : b.a?.kv?.status;
+  return replaced(doc, at, withItem(b, { status }, done));
+}
+/** After a task's box was checked or unchecked by the words' own editor: the status follows (tick's rule), as ops on `doc` as it is now. */
+export function followTick(doc: Doc, at: number, statuses = statusesOf(doc)): Op[] {
+  const b = doc.blocks[at];
+  if (b?.k !== 'li' || b.done === undefined || !statuses.length) return [];
+  const last = statuses[statuses.length - 1].name;
+  const status = b.done ? last : b.a?.kv?.status === last ? statuses[0].name : b.a?.kv?.status;
+  return replaced(doc, at, withItem(b, { status }));
 }
 
 /** A connection between any two items, named by their plain words. */
@@ -127,7 +230,19 @@ export function readOutline(doc: Doc): OutlineView {
       case 'li': {
         const dir = b.a?.cls?.map((c) => JOIN[c]).find(Boolean);
         const label = attr(b, 'label');
-        return add({ at, depth: pad + b.depth, runs: b.runs, ...(dir ? { dir } : {}), ...(label ? { label } : {}), ...(b.ord ? { ord: true as const } : {}) });
+        const status = attr(b, 'status');
+        const due = attr(b, 'due');
+        return add({
+          at,
+          depth: pad + b.depth,
+          runs: b.runs,
+          ...(dir ? { dir } : {}),
+          ...(label ? { label } : {}),
+          ...(b.ord ? { ord: true as const } : {}),
+          ...(hasClass(b, SHUT) ? { shut: true as const } : {}),
+          ...(status ? { status } : {}),
+          ...(due ? { due } : {}),
+        });
       }
       case 'fence': {
         const d = Number(attr(b, 'depth'));
@@ -159,14 +274,14 @@ export function readOutline(doc: Doc): OutlineView {
 }
 
 /** A list item with these words at this depth, its line to the parent as attributes. */
-export function itemBlock(depth: number, runs: Run[], dir?: Dir, label?: string, a?: Attrs, ord?: boolean): Block {
+export function itemBlock(depth: number, runs: Run[], dir?: Dir, label?: string, a?: Attrs, ord?: boolean, done?: boolean): Block {
   const cls = [...(a?.cls ?? []).filter((c) => !JOIN[c]), ...(depth && dir && CLASS[dir] ? [CLASS[dir]!] : [])];
   const kv = { ...a?.kv };
   delete kv.label;
   delete kv.depth;
   if (depth && label) kv.label = label;
   const attrs: Attrs = { ...(a?.id ? { id: a.id } : {}), ...(cls.length ? { cls } : {}), ...(Object.keys(kv).length ? { kv } : {}) };
-  return { k: 'li', depth, ...(ord ? { ord: true as const } : {}), runs, ...(Object.keys(attrs).length ? { a: attrs } : {}) };
+  return { k: 'li', depth, ...(ord ? { ord: true as const } : {}), ...(done !== undefined ? { done } : {}), runs, ...(Object.keys(attrs).length ? { a: attrs } : {}) };
 }
 /** A fence holding another document under an item, saying its depth. */
 export const docBlock = (depth: number, ref: string): Block => ({ ...refFence(ref), a: { kv: { depth: String(depth) } } });
@@ -479,7 +594,7 @@ export function setLine(doc: Doc, v: OutlineView, at: number, line: { dir?: Dir;
   const it = v.items[i];
   const dir = 'dir' in line ? line.dir : it.dir;
   const label = 'label' in line ? line.label?.trim() || undefined : it.label;
-  const next = itemBlock(b.depth, b.runs, dir === '--' ? undefined : dir, label, b.a, b.ord);
+  const next = itemBlock(b.depth, b.runs, dir === '--' ? undefined : dir, label, b.a, b.ord, b.done);
   return write({ head: {}, blocks: [next] }) === write({ head: {}, blocks: [b] }) ? [] : [{ op: 'splice', at, n: 1, blocks: [next] }];
 }
 

@@ -12,6 +12,7 @@ import type { ToText } from '../../../kit/text/text.ts';
 import { caret } from '../../../kit/text/textops.ts';
 import { until, tick } from '../../../../test/browser/helpers.ts';
 import { encodeDoc } from '../../../kit/core/codec.ts';
+import { write, type Doc } from '../../../doc/index.ts';
 import { remScale } from '../../../kit/ui/zoom.ts';
 
 const TREE = '- Launch\n  - Product\n    - Pricing\n  - Marketing\n';
@@ -169,7 +170,7 @@ test('the bullet opens the kinds of line, each named for the items it joins; the
   bullet().click();
   await until(() => !!document.querySelector('[popover]:popover-open'));
   const items = [...document.querySelectorAll<HTMLElement>('[popover]:popover-open [role^=menuitem]')];
-  expect(items.map((x) => x.textContent!.trim())).toEqual(['Plain line', 'Arrow from Product to Pricing', 'Arrow from Pricing to Product', 'Arrows both ways', 'Label']);
+  expect(items.map((x) => x.textContent!.trim())).toEqual(['Plain line', 'Arrow from Product to Pricing', 'Arrow from Pricing to Product', 'Arrows both ways', 'Label', 'Due date…']);
   expect(document.querySelector('[popover]:popover-open [role=menuitemcheckbox][aria-checked=true]')!.textContent!.trim()).toBe('Plain line');
   items[1].click();
   await el.updateComplete;
@@ -268,9 +269,12 @@ test('folding hides the family and counts it; Fold all and Unfold all; the zoom 
   expect(rows(el)).toEqual([0]);
   expect(fold().getAttribute('aria-label')).toBe('Expand (3 items)');
   expect(row(el, 0).querySelector('.ol-count')!.textContent).toBe('3');
+  // The fold is the document's (Paul, 2026-10-15: the model tracks open and shut; open is the default): written as the item's class.
+  expect(changes.at(-1)).toBe('- Launch {.shut}\n  - Product\n    - Pricing\n  - Marketing\n');
   fold().click();
   await el.updateComplete;
   expect(rows(el)).toEqual([0, 1, 2, 3]);
+  expect(changes.at(-1)).toBe(TREE);
   button(el, 'Collapse all').click();
   await el.updateComplete;
   expect(rows(el)).toEqual([0]);
@@ -302,7 +306,8 @@ test('folding hides the family and counts it; Fold all and Unfold all; the zoom 
   expect(el.querySelector('.ol-crumbs')).toBeNull();
   expect(button(el, 'Zoom out')).toBeNull();
   // None of this touched the document.
-  expect(changes).toEqual([]);
+  // Every change was a fold or an unfold: the words were never touched.
+  expect(changes.every((c) => c.replace(/ \{\.shut\}/g, '') === TREE)).toBe(true);
 });
 
 test('Insert puts a document under the chosen item; a tap below the last row starts an item; View as shows the page', async () => {
@@ -472,16 +477,19 @@ test('Shift+Down chooses rows whole, a folded family with them; Backspace takes 
   // B is folded: its child is chosen with it, though not shown.
   expect(ranged(el)).toEqual([0, 1]);
   expect(row(el, 1).getAttribute('aria-selected')).toBe('true');
-  // Typing does nothing to chosen rows.
+  // Typing does nothing to chosen rows (the last change is the fold itself, the item's class).
   await treeKey(el, 'x');
-  expect(last()).toBeUndefined();
+  expect(last()).toBe('- A\n- B {.shut}\n  - b1\n- C\n- D\n');
   await treeKey(el, 'Backspace');
   expect(last()).toBe('- C\n- D\n');
   expect(focusedRow()).toBe(0);
   expect(contextOpen(el)).toBe(false);
   await undo(el);
-  expect(last()).toBe('- A\n- B\n  - b1\n- C\n- D\n');
-  // (A fold is the view's: B came back open.) Up past the anchor, the range turns.
+  expect(last()).toBe('- A\n- B {.shut}\n  - b1\n- C\n- D\n');
+  // (A fold is the document's: B came back shut, as it went; opened again for the rest.) Up past the anchor, the range turns.
+  expect(rows(el)).toEqual([0, 1, 3, 4]);
+  row(el, 1).querySelector<HTMLButtonElement>('.ol-fold')!.click();
+  await el.updateComplete;
   expect(rows(el)).toEqual([0, 1, 2, 3, 4]);
   await choose(el, 3);
   await keyOn(el, 3, 'ArrowDown', { shiftKey: true });
@@ -1001,4 +1009,80 @@ test("§1 opens with the focus in the first row's words, the caret at their end,
   await blank.focusFirst();
   await until(() => !!blank.querySelector<ToText>('.ol-row to-text')?.hasFocus());
   expect(document.scrollingElement!.scrollTop).toBe(0);
+});
+
+// The compound bullet (Paul, 2026-10-15): a status pill before the words in its color, a tap the next of the set; a due
+// chip after them; a task's box and the status keeping together (Mod+Enter checks the box and the status goes to the last).
+test('statuses: a pill before the words, tapped to the next; a due chip after them; Mod+Enter checks the box and the status follows', async () => {
+  const { el } = await editor('---\nstatuses: TODO=red, DOING=yellow, DONE=green\n---\n- Plan {status=TODO due=2027-03-01}\n  - [ ] Draft {status=DOING}\n  - Quotes\n');
+  const docOf = (x: ToOutlineEditor) => (x as unknown as { doc: Doc }).doc;
+  const pills = () => [...el.querySelectorAll<HTMLButtonElement>('.ol-status')].map((b) => b.textContent!.trim());
+  expect(pills()).toEqual(['TODO', 'DOING']);
+  expect(el.querySelector<HTMLElement>('.ol-status')!.style.getPropertyValue('--ol-status')).toBe('#b3261e');
+  const due = el.querySelector<HTMLButtonElement>('.ol-due')!;
+  expect(due.textContent!.replace(/\s+/g, ' ').trim()).toMatch(/Mar 1/);
+  expect(due.getAttribute('aria-label')).toMatch(/^Due Mar 1, 2027: change it$/);
+  // A tap on the pill: the next status, round the end.
+  el.querySelector<HTMLButtonElement>('.ol-status')!.click();
+  await el.updateComplete;
+  expect(pills()).toEqual(['DOING', 'DOING']);
+  expect(write(docOf(el))).toContain('- Plan {status=DOING due=2027-03-01}');
+  el.querySelector<HTMLButtonElement>('.ol-status')!.click();
+  el.querySelector<HTMLButtonElement>('.ol-status')!.click();
+  await el.updateComplete;
+  expect(pills()[0]).toBe('TODO');
+  // Mod+Enter in the task's row: checked, and DONE; again: unchecked, and TODO.
+  // (Rows by their block: Plan 0, Draft 1, Quotes 2; the head is no block.)
+  const tx = textOf(el, 1);
+  tx.focus();
+  tx.tx.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', ctrlKey: true, bubbles: true, cancelable: true }));
+  await el.updateComplete;
+  expect(write(docOf(el))).toContain('- [x] Draft {status=DONE}');
+  tx.tx.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', ctrlKey: true, bubbles: true, cancelable: true }));
+  await el.updateComplete;
+  expect(write(docOf(el))).toContain('- [ ] Draft {status=TODO}');
+  // The row with no status shows no pill and no chip; the words are untouched throughout.
+  expect(row(el, 2).querySelector('.ol-status, .ol-due')).toBeNull();
+  expect(write(docOf(el))).toContain('  - Quotes\n');
+});
+
+// Insert ▾'s three: Statuses writes the set once (the item in hand gets the first), Task makes the item a task (again:
+// checks it), Due date starts a day from today or the nearest day to come above, typed where it shows.
+test('Insert ▾: Statuses, Task and Due date on the item in hand; a document from before has none of it until asked', async () => {
+  const { el, last } = await editor('- Plan {due=2027-03-01}\n- Press list\n');
+  const docOf = (x: ToOutlineEditor) => (x as unknown as { doc: Doc }).doc;
+  expect(el.querySelector('.ol-status')).toBeNull();
+  await choose(el, 1);
+  await pick(el, el.querySelector<HTMLButtonElement>('to-insert button')!, 'Statuses');
+  await until(() => !!el.querySelector('.ol-status'));
+  expect(write(docOf(el))).toBe('---\nstatuses: TODO=red, DOING=yellow, DONE=green\n---\n- Plan {due=2027-03-01}\n- Press list {status=TODO}\n');
+  await pick(el, el.querySelector<HTMLButtonElement>('to-insert button')!, 'Task');
+  await until(() => (last() ?? '').includes('- [ ] Press list'));
+  await pick(el, el.querySelector<HTMLButtonElement>('to-insert button')!, 'Task');
+  await until(() => (last() ?? '').includes('- [x] Press list {status=DONE}'));
+  await pick(el, el.querySelector<HTMLButtonElement>('to-insert button')!, 'Due date');
+  // The day to start from: the nearest day still to come above, Plan's; the field shows it, Enter keeps it.
+  await until(() => !!el.querySelector<HTMLInputElement>('input.ol-due-in'));
+  const field = el.querySelector<HTMLInputElement>('input.ol-due-in')!;
+  expect(field.value).toBe('2027-03-01');
+  field.value = '2027-03-04';
+  field.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true, cancelable: true }));
+  await until(() => (last() ?? '').includes('due=2027-03-04'));
+  expect(write(docOf(el))).toBe('---\nstatuses: TODO=red, DOING=yellow, DONE=green\n---\n- Plan {due=2027-03-01}\n- [x] Press list {status=DONE due=2027-03-04}\n');
+  expect(el.querySelector('input.ol-due-in')).toBeNull();
+});
+
+test('a document opened with an item shut starts folded there, and one from before, with no such class, starts open', async () => {
+  const { el, last } = await editor('- A {.shut}\n  - a1\n- B\n  - b1\n');
+  expect(rows(el)).toEqual([0, 2, 3]);
+  expect(row(el, 0).querySelector<HTMLButtonElement>('.ol-fold')!.getAttribute('aria-label')).toBe('Expand (1 item)');
+  row(el, 0).querySelector<HTMLButtonElement>('.ol-fold')!.click();
+  await el.updateComplete;
+  expect(rows(el)).toEqual([0, 1, 2, 3]);
+  expect(last()).toBe('- A\n  - a1\n- B\n  - b1\n');
+  // Undo brings the fold back: it is an edit like any other.
+  el.dispatchEvent(new CustomEvent('docundo', { cancelable: true }));
+  await el.updateComplete;
+  await tick();
+  expect(rows(el)).toEqual([0, 2, 3]);
 });

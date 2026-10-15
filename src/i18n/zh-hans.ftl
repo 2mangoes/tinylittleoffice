@@ -1884,6 +1884,23 @@ outline-show-as-outline = 显示为大纲
 outline-take-away-connection-from-from = 移除从{ $from }到{ $to }的连接
 # en: e963907dac5cd5c017869b4c96c18021c9bd058b
 outline-take-it-away = 移除
+# The compound bullet (Paul, 2026-10-15): the statuses a document sets in its head, a status's pill, a due day's chip.
+# en: e92aab82fce62899699581b5597abdda8175f2dd
+outline-statuses = 状态列表
+# en: bae7d5be70820ed56467bd9a63744e23b47bd711
+outline-status = 状态
+# en: c206561903295f2cf5944906fdfc55f1e8a5d45b
+outline-no-status = 无状态
+# en: 80f90adb4a5a3c907accd858ce3c33bc69421246
+outline-status-status-tap-for-next = 状态 { $status }：点按切换到下一个
+# en: 4c1aeebc433bcb8eb4b05434619ea3136b785ea8
+outline-due-date = 截止日期
+# en: bfe11361dd8dc7cc66f5cd6f33d394a95c71c96c
+outline-due-date-ellipsis = 截止日期…
+# en: ba24beb3bf28ae2b3e850c25e42aa7b075185d17
+outline-due-date-change-it = 截止 { $date }：更改
+# en: 6cf55f3558276e2eefff5dd41ec206dc9780bebf
+outline-remove-due-date = 移除截止日期
 # en: 7312a31a2c880f2d456663b6f91ad6da980b3a5e
 outline-take-connection-away = 移除连接
 # en: 656e5c87ae5cd391807e13c85fb32635c2d441c2
@@ -2751,8 +2768,8 @@ trip-where-i-am = 我的位置
 trip-map = 地图
 # en: 4fa4643900d7a129558f6c34b681a8d419a9ef9d
 trip-map-tap-to-add-stop = 地图：点按添加站点
-# en: 81920dbaea13a635abdf8e473b6a5f7c37a415e7
-trip-maps-pictures-come-from-openstreetmap = 地图显示时，图片来自 OpenStreetMap。
+# en: 98cb31d07de0f880bc288c98784e8cb01ff17080
+trip-map-comes-from-openfreemap = 地图显示期间来自 OpenFreeMap。
 # en: dd1ac7c6150bf40973c618ac841d01f2281dea20
 trip-your-location-is-asked-for = 你的位置只用于让地图居中，从不保存。
 # en: 6c4827a34debc3c12e8a905f5e8025f0d22802cb

@@ -1056,6 +1056,15 @@ common-show-as-slides = Show as slides
 outline-show-as-outline = Show as outline
 outline-take-away-connection-from-from = Remove the connection from { $from } to { $to }
 outline-take-it-away = Remove
+# The compound bullet (Paul, 2026-10-15): the statuses a document sets in its head, a status's pill, a due day's chip.
+outline-statuses = Statuses
+outline-status = Status
+outline-no-status = No status
+outline-status-status-tap-for-next = Status { $status }: tap for the next
+outline-due-date = Due date
+outline-due-date-ellipsis = Due date…
+outline-due-date-change-it = Due { $date }: change it
+outline-remove-due-date = Remove due date
 outline-take-connection-away = Remove connection
 outline-tap-item-to-connect-from = Tap the item to connect from.
 outline-tap-item-to-connect-words = Tap the item to connect “{ $words }” to.
@@ -1513,7 +1522,7 @@ trip-show-whole-route = Show the whole route
 trip-where-i-am = Where I am
 trip-map = Map
 trip-map-tap-to-add-stop = Map: tap to add a stop
-trip-maps-pictures-come-from-openstreetmap = The map’s pictures come from OpenStreetMap while it is shown.
+trip-map-comes-from-openfreemap = The map comes from OpenFreeMap while it is shown.
 trip-your-location-is-asked-for = Your location is used only to center the map and is never stored.
 trip-n-stops = { $n ->
         [one] one stop

@@ -1906,6 +1906,23 @@ outline-show-as-outline = आउटलाइन की तरह दिखाए
 outline-take-away-connection-from-from = { $from } से { $to } का कनेक्शन हटाएँ
 # en: e963907dac5cd5c017869b4c96c18021c9bd058b
 outline-take-it-away = हटाएँ
+# The compound bullet (Paul, 2026-10-15): the statuses a document sets in its head, a status's pill, a due day's chip.
+# en: e92aab82fce62899699581b5597abdda8175f2dd
+outline-statuses = स्थितियाँ
+# en: bae7d5be70820ed56467bd9a63744e23b47bd711
+outline-status = स्थिति
+# en: c206561903295f2cf5944906fdfc55f1e8a5d45b
+outline-no-status = कोई स्थिति नहीं
+# en: 80f90adb4a5a3c907accd858ce3c33bc69421246
+outline-status-status-tap-for-next = स्थिति { $status }: अगली के लिए टैप करें
+# en: 4c1aeebc433bcb8eb4b05434619ea3136b785ea8
+outline-due-date = नियत तारीख़
+# en: bfe11361dd8dc7cc66f5cd6f33d394a95c71c96c
+outline-due-date-ellipsis = नियत तारीख़…
+# en: ba24beb3bf28ae2b3e850c25e42aa7b075185d17
+outline-due-date-change-it = नियत { $date }: बदलें
+# en: 6cf55f3558276e2eefff5dd41ec206dc9780bebf
+outline-remove-due-date = नियत तारीख़ हटाएँ
 # en: 7312a31a2c880f2d456663b6f91ad6da980b3a5e
 outline-take-connection-away = कनेक्शन हटाएँ
 # en: 656e5c87ae5cd391807e13c85fb32635c2d441c2
@@ -2778,8 +2795,8 @@ trip-where-i-am = मैं कहाँ हूँ
 trip-map = नक्शा
 # en: 4fa4643900d7a129558f6c34b681a8d419a9ef9d
 trip-map-tap-to-add-stop = नक्शा: पड़ाव जोड़ने के लिए टैप करें
-# en: 81920dbaea13a635abdf8e473b6a5f7c37a415e7
-trip-maps-pictures-come-from-openstreetmap = नक्शे की तस्वीरें दिखाए जाते समय OpenStreetMap से आती हैं।
+# en: 98cb31d07de0f880bc288c98784e8cb01ff17080
+trip-map-comes-from-openfreemap = नक्शा दिखाए जाने के दौरान OpenFreeMap से आता है।
 # en: dd1ac7c6150bf40973c618ac841d01f2281dea20
 trip-your-location-is-asked-for = आपकी जगह सिर्फ़ नक्शे को बीच में लाने के लिए इस्तेमाल होती है और कभी सेव नहीं होती।
 # en: 6c4827a34debc3c12e8a905f5e8025f0d22802cb

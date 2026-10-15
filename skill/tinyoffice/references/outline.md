@@ -1,6 +1,6 @@
 # outline: an outliner
 
-A nested list, two spaces a level. An item's tie to its parent can be an arrow, `{.to}` (towards the parent) or `{.from}`, named with `label="…"`; any two items join with `~ Pricing -> Press: informs`. A fence named by any app's id (```` ```anim ````, `cal`, `diagram`, `sheet`, the lot) puts that document under an item, `{depth=2}` after its name saying how deep. The same tree opens as slides, a mind map, an org chart or a network.
+A nested list, two spaces a level. An item's tie to its parent can be an arrow, `{.to}` (towards the parent) or `{.from}`, named with `label="…"`; any two items join with `~ Pricing -> Press: informs`. An item may be a task (`- [ ]`, `- [x]`), carry a status from the document's own set (`statuses: TODO=red, DOING=yellow, DONE=green` in the head, a name and a color each: `red`, `orange`, `yellow`, `green`, `blue`, `purple`, `indigo`, `gray`; the last is the done one, and a task's box follows it), `{status=DOING}`, and a due day, `{due=2026-10-20}`; `{.shut}` folds its family away (an item is open otherwise). A fence named by any app's id (```` ```anim ````, `cal`, `diagram`, `sheet`, the lot) puts that document under an item, `{depth=2}` after its name saying how deep. The same tree opens as slides, a mind map, an org chart or a network.
 
 Launch plan:
 

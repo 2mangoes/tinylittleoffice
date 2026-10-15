@@ -1748,6 +1748,23 @@ outline-show-as-outline = আউটলাইন হিসেবে দেখা�
 outline-take-away-connection-from-from = { $from } থেকে { $to }-এর সংযোগ সরান
 # en: e963907dac5cd5c017869b4c96c18021c9bd058b
 outline-take-it-away = সরান
+# The compound bullet (Paul, 2026-10-15): the statuses a document sets in its head, a status's pill, a due day's chip.
+# en: e92aab82fce62899699581b5597abdda8175f2dd
+outline-statuses = অবস্থাসমূহ
+# en: bae7d5be70820ed56467bd9a63744e23b47bd711
+outline-status = অবস্থা
+# en: c206561903295f2cf5944906fdfc55f1e8a5d45b
+outline-no-status = কোনো অবস্থা নেই
+# en: 80f90adb4a5a3c907accd858ce3c33bc69421246
+outline-status-status-tap-for-next = অবস্থা { $status }: পরেরটির জন্য ট্যাপ করুন
+# en: 4c1aeebc433bcb8eb4b05434619ea3136b785ea8
+outline-due-date = নির্ধারিত তারিখ
+# en: bfe11361dd8dc7cc66f5cd6f33d394a95c71c96c
+outline-due-date-ellipsis = নির্ধারিত তারিখ…
+# en: ba24beb3bf28ae2b3e850c25e42aa7b075185d17
+outline-due-date-change-it = নির্ধারিত { $date }: বদলান
+# en: 6cf55f3558276e2eefff5dd41ec206dc9780bebf
+outline-remove-due-date = নির্ধারিত তারিখ সরান
 # en: 7312a31a2c880f2d456663b6f91ad6da980b3a5e
 outline-take-connection-away = সংযোগ সরান
 # en: 656e5c87ae5cd391807e13c85fb32635c2d441c2
@@ -2571,8 +2588,8 @@ trip-where-i-am = আমি কোথায়
 trip-map = ম্যাপ
 # en: 4fa4643900d7a129558f6c34b681a8d419a9ef9d
 trip-map-tap-to-add-stop = ম্যাপ: বিরতি যোগ করতে ট্যাপ করুন
-# en: 81920dbaea13a635abdf8e473b6a5f7c37a415e7
-trip-maps-pictures-come-from-openstreetmap = ম্যাপ দেখানোর সময় এর ছবি OpenStreetMap থেকে আসে।
+# en: 98cb31d07de0f880bc288c98784e8cb01ff17080
+trip-map-comes-from-openfreemap = মানচিত্রটি দেখানোর সময় OpenFreeMap থেকে আসে।
 # en: dd1ac7c6150bf40973c618ac841d01f2281dea20
 trip-your-location-is-asked-for = আপনার অবস্থান শুধু মানচিত্রকে মাঝখানে আনতে ব্যবহার হয়, কখনো সংরক্ষিত হয় না।
 # en: 6c4827a34debc3c12e8a905f5e8025f0d22802cb

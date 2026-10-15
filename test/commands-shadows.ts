@@ -21,6 +21,7 @@ export const SHADOWS: Record<string, string> = {
   'deck.onto ~ text.tick': `${LINE}: Mod+Enter in the headline goes on to the words, a line's "done"`,
   'diagram.done ~ text.tick': `${LINE}: Mod+Enter is done with a thing's words`,
   'cal.task.tick ~ text.tick': LINE,
+  'outline.tick ~ text.tick': `${LINE}: Mod+Enter in a row checks its task's box, and its status follows (the compound bullet, 2026-10-15)`,
   'sheet.cancel ~ sheet.letgo': 'Escape lets a block of cells go first (one step a press), then puts back what the cell held',
   'draw.pen.close ~ draw.words': 'Enter closes a pen’s shape while one is being drawn; otherwise it opens the words of the shape in hand',
   'draw.joinkeys ~ draw.words': 'with the Join tool in hand Enter takes an end of the join; otherwise it opens the words',

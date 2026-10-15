@@ -1854,6 +1854,23 @@ outline-show-as-outline = 개요로 보기
 outline-take-away-connection-from-from = { $from }에서 { $to }(으)로의 연결 빼기
 # en: e963907dac5cd5c017869b4c96c18021c9bd058b
 outline-take-it-away = 빼기
+# The compound bullet (Paul, 2026-10-15): the statuses a document sets in its head, a status's pill, a due day's chip.
+# en: e92aab82fce62899699581b5597abdda8175f2dd
+outline-statuses = 상태 목록
+# en: bae7d5be70820ed56467bd9a63744e23b47bd711
+outline-status = 상태
+# en: c206561903295f2cf5944906fdfc55f1e8a5d45b
+outline-no-status = 상태 없음
+# en: 80f90adb4a5a3c907accd858ce3c33bc69421246
+outline-status-status-tap-for-next = 상태 { $status }: 탭하여 다음으로
+# en: 4c1aeebc433bcb8eb4b05434619ea3136b785ea8
+outline-due-date = 마감일
+# en: bfe11361dd8dc7cc66f5cd6f33d394a95c71c96c
+outline-due-date-ellipsis = 마감일…
+# en: ba24beb3bf28ae2b3e850c25e42aa7b075185d17
+outline-due-date-change-it = 마감 { $date }: 변경
+# en: 6cf55f3558276e2eefff5dd41ec206dc9780bebf
+outline-remove-due-date = 마감일 제거
 # en: 7312a31a2c880f2d456663b6f91ad6da980b3a5e
 outline-take-connection-away = 연결 빼기
 # en: 656e5c87ae5cd391807e13c85fb32635c2d441c2
@@ -2723,8 +2740,8 @@ trip-where-i-am = 내 위치
 trip-map = 지도
 # en: 4fa4643900d7a129558f6c34b681a8d419a9ef9d
 trip-map-tap-to-add-stop = 지도: 탭해서 경유지 추가
-# en: 81920dbaea13a635abdf8e473b6a5f7c37a415e7
-trip-maps-pictures-come-from-openstreetmap = 지도가 보이는 동안 지도 이미지는 OpenStreetMap에서 가져와요.
+# en: 98cb31d07de0f880bc288c98784e8cb01ff17080
+trip-map-comes-from-openfreemap = 지도는 표시되는 동안 OpenFreeMap에서 가져옵니다.
 # en: dd1ac7c6150bf40973c618ac841d01f2281dea20
 trip-your-location-is-asked-for = 내 위치는 지도를 가운데로 맞추는 데만 쓰이고 저장되지 않아요.
 # en: 6c4827a34debc3c12e8a905f5e8025f0d22802cb

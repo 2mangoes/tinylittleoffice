@@ -1951,6 +1951,23 @@ outline-show-as-outline = Afficher en plan
 outline-take-away-connection-from-from = Retirer la connexion de { $from } à { $to }
 # en: e963907dac5cd5c017869b4c96c18021c9bd058b
 outline-take-it-away = Retirer
+# The compound bullet (Paul, 2026-10-15): the statuses a document sets in its head, a status's pill, a due day's chip.
+# en: e92aab82fce62899699581b5597abdda8175f2dd
+outline-statuses = Statuts
+# en: bae7d5be70820ed56467bd9a63744e23b47bd711
+outline-status = Statut
+# en: c206561903295f2cf5944906fdfc55f1e8a5d45b
+outline-no-status = Sans statut
+# en: 80f90adb4a5a3c907accd858ce3c33bc69421246
+outline-status-status-tap-for-next = Statut { $status } : touchez pour le suivant
+# en: 4c1aeebc433bcb8eb4b05434619ea3136b785ea8
+outline-due-date = Échéance
+# en: bfe11361dd8dc7cc66f5cd6f33d394a95c71c96c
+outline-due-date-ellipsis = Échéance…
+# en: ba24beb3bf28ae2b3e850c25e42aa7b075185d17
+outline-due-date-change-it = Échéance { $date } : la modifier
+# en: 6cf55f3558276e2eefff5dd41ec206dc9780bebf
+outline-remove-due-date = Retirer l’échéance
 # en: 7312a31a2c880f2d456663b6f91ad6da980b3a5e
 outline-take-connection-away = Retirer la connexion
 # en: 656e5c87ae5cd391807e13c85fb32635c2d441c2
@@ -2838,8 +2855,8 @@ trip-where-i-am = Où je suis
 trip-map = Carte
 # en: 4fa4643900d7a129558f6c34b681a8d419a9ef9d
 trip-map-tap-to-add-stop = Carte : touchez pour ajouter un arrêt
-# en: 81920dbaea13a635abdf8e473b6a5f7c37a415e7
-trip-maps-pictures-come-from-openstreetmap = Les images de la carte viennent d’OpenStreetMap tant qu’elle est affichée.
+# en: 98cb31d07de0f880bc288c98784e8cb01ff17080
+trip-map-comes-from-openfreemap = La carte vient d’OpenFreeMap tant qu’elle est affichée.
 # en: dd1ac7c6150bf40973c618ac841d01f2281dea20
 trip-your-location-is-asked-for = Votre position sert uniquement à centrer la carte et n’est jamais conservée.
 # en: 6c4827a34debc3c12e8a905f5e8025f0d22802cb
