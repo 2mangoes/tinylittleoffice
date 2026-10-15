@@ -266,7 +266,7 @@ export class ToShell extends LitElement {
     // The rest of Lucide joined (an icon outside the starter set): the editor is drawn again.
     const redraw = () => this.requestUpdate();
     this.offs.push(
-      onLanguage(() => (this.relang(this.app), this.setTitle(), redraw())),
+      onLanguage(() => (this.relang(this.app), this.rename(), this.setTitle(), redraw())),
       onIcons(() => (redraw(), (this.editor as (Editor & { requestUpdate?: () => void }) | null)?.requestUpdate?.())),
       onPrivacy(() => this.guard()),
     );
@@ -383,6 +383,10 @@ export class ToShell extends LitElement {
    * link opened from here, the library or a template keeps the page's language. `app` is the page's own app when its
    * address is empty ("/sheet/"), so the language joins a link to it and not to the home page.
    */
+  /** A new document's name was made before the language loaded; while the page is still blank it is made again in the language. */
+  private rename() {
+    if (this.def && this.fresh && this.doc === this.def.blank()) this.fresh = newName(this.def);
+  }
   private relang(app: string | null) {
     const lang = chosenLanguage();
     const next = withLang(location.hash || (lang && app ? routeHash(app) : ''), lang);
