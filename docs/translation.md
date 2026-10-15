@@ -79,6 +79,23 @@ plan for this, before it was built, is [history/translation-plan.md](history/tra
   words on the SVG pages, has a width per script (Latin, Cyrillic, Arabic, Devanagari, Bengali, Hangul, Han and
   kana; Hebrew's letters take the Latin width, which Plex Sans Hebrew meets), held within a tenth of the browser's own.
 
+## Translating in bulk
+
+Nobody holds twenty-one files in their head (Paul, 2026-10-15). The loop is three commands, and the files are
+never read by hand:
+
+1. `npm run i18n:work -- fr de` (every language, with no code) prints a worklist as JSON: for each language, the
+   register its file's head says it is written in, its translator's notes from this page, its word for each
+   product term, and the messages to do, each with its English, en.ftl's comment on it, its group, the old
+   translation and the old English where the English moved, and the plural forms the language has. That is the
+   whole context a translator, or an agent, needs.
+2. The translations are written as JSON, `{ "fr": { "<id>": "<words>" } }`, the words in the flat form the
+   worklist shows the English in (`{n|une diapositive|# diapositives}` for a plural); `{ "text": "…", "same": true }`
+   where the words stay as the English on purpose.
+3. `npm run i18n:apply -- work.json` writes them into the files in place, each with its `# en:` hash and no draft
+   mark, a new message where en.ftl's order puts it. A file that would fail the check is not written, and the
+   errors are named. `npm run i18n:check` then confirms the tree.
+
 ## Choosing a language
 
 The browser's language chooses the nearest one: each code is matched as itself (`ru-RU` finds `ru`), and a

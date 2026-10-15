@@ -8,86 +8,10 @@ import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { languageFiles } from '../scripts/i18n-extract.ts';
 import { flatMessages } from '../scripts/ftl.ts';
-import { alone, drift, holds, says, stem, type Term } from './glossary.ts';
+import { alone, drift, holds, says, stem } from './glossary.ts';
+import { TERMS } from '../scripts/terms.ts';
 
 const en = flatMessages(readFileSync(join(import.meta.dirname, '../src/i18n/en.ftl'), 'utf8'), 'en');
-
-/** The product's terms, and the senses of their English words that are something else. */
-export const TERMS: Term[] = [
-  { term: 'document' },
-  { term: 'link', not: [/quick links/i] },
-  { term: 'short link' },
-  { term: 'Display Link' },
-  { term: 'template' },
-  // A rate card, a birthday card, a title card, a flash card and a place card are things in a template, not the card that stands for a document in another.
-  { term: 'card', not: [/rate card|birthday card|title card|flash card|place card/i] },
-  // "Slide" alone is a transition (the deck's "Slide in"); "Slides" alone is the Presentation Builder's short name.
-  { term: 'slide', not: ['Slide', 'Slides'] },
-  { term: 'sheet' },
-  { term: 'cell' },
-  { term: 'row' },
-  // A page's columns (a layout of two columns, a left and a right column) are not a table's.
-  { term: 'column', not: [/two.columns?|left column|right column|one column/i] },
-  { term: 'page' },
-  { term: 'bar' },
-  { term: 'Share' },
-  { term: 'Download' },
-  { term: 'Undo' },
-  { term: 'Redo' },
-  { term: 'Keep' },
-  { term: 'Kept' },
-  // Paul's four words (2026-10-15): delete, not "take away" or "forget"; save, not "keep"; select, not "choose" or
-  // "in hand"; outdent, not "bring out".
-  { term: 'Delete' },
-  { term: 'select' },
-  { term: 'outdent' },
-  {
-    term: 'save',
-    words: {
-      ar: 'حفظ',
-      bn: 'সংরক্ষণ',
-      de: 'speichern',
-      es: 'guardar',
-      fr: 'enregistrer',
-      // The root's two letters: שמירה, לשמור, נשמר.
-      he: 'שמ',
-      hi: 'सेव',
-      ht: 'anrejistre',
-      it: 'salva',
-      ja: '保存',
-      ko: '저장',
-      // opslaan, opgeslagen, op te slaan.
-      nl: 'sla',
-      pl: 'zapis',
-      'pt-br': 'salvar',
-      ru: 'сохран',
-      uk: 'збер',
-      ur: 'محفوظ',
-      yi: 'היט',
-      'zh-hans': '保存',
-      'zh-hant': '儲存',
-    },
-  },
-  { term: 'Save in browser' },
-  { term: 'password' },
-  // The Calculator's keys are keys of a keyboard; an animation's key is a keyframe.
-  { term: 'key', not: ['Keys', /arrow keys/i] },
-  // "Present" is to show a deck; "a present" is a gift.
-  { term: 'Present', not: [/a present\b/i] },
-  { term: 'Insert' },
-  { term: 'Look' },
-  // "Paper" alone is a colour of the looks; "Paper: {paper}" is the size of the paper.
-  { term: 'paper', not: ['Paper'] },
-  { term: 'Print' },
-  // A copy of a document: the noun, where Copy alone is the verb.
-  { term: 'Copy', not: [/copy of/i] },
-  { term: 'Paste' },
-  // The page's theme (light, dark); "the theme" of a document's colours is its look.
-  { term: 'Theme', not: [/theme's color|as the theme is/i] },
-  { term: 'footnote' },
-  // An org chart and a seating chart are diagrams of their own; "to chart" is to draw.
-  { term: 'chart', not: [/org chart|seating chart|nothing to chart/i] },
-];
 
 /** Drift a language has on purpose: the term, the message's id (none: the term's two words), and why. */
 const ALLOW: { lang: string; term: string; key?: string; why: string }[] = [

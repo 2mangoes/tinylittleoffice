@@ -3,7 +3,7 @@ import { test, expect } from 'vitest';
 import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { t, register, setLanguage, browserLanguage, directionOf, languages } from '../src/kit/core/i18n.ts';
-import { commandKeys, languageFiles, main, placeholders, usedKeys, withMissing, MARK } from '../scripts/i18n-extract.ts';
+import { apply, commandKeys, englishHash, languageFiles, main, placeholders, rulesFor, usedKeys, withMissing, work, MARK } from '../scripts/i18n-extract.ts';
 import { flatMessages, readFtl } from '../scripts/ftl.ts';
 import { british } from './british.ts';
 import { bare } from '../scripts/ftl-plugin.ts';
@@ -151,4 +151,90 @@ test('a language as a page fetches it is its file without its comments, and says
     expect(shipped, code).not.toMatch(/^#/m);
     expect(flatMessages(shipped, code), code).toEqual(flatMessages(source, code));
   }
+});
+
+// The loop for translating in bulk (Paul, 2026-10-15, on holding the state of 21 files in a head: "avoid loading and
+// unloading tons of context every time we update translations"): --work says what each language has to do and nothing
+// else, --apply writes the words back where they go, and the check confirms them.
+const EN = `### The strings, in English.
+
+## the shell
+
+shell-menu = Menu
+# A verb: the button that saves.
+common-save = Save
+common-document = Document
+common-n-slides = { $n ->
+        [one] one slide
+       *[other] { $n } slides
+    }
+
+## the Outliner
+
+outline-agenda = Agenda
+outline-due-date = Due date
+`;
+const FR = `### Tiny Little Office en français.
+
+## the shell
+
+# same
+# en: ${englishHash('Menu')}
+shell-menu = Menu
+# en: ${englishHash('Save it')}
+common-save = Garder
+# same
+# en: ${englishHash('Document')}
+common-document = Document
+# en: ${englishHash('{n|one slide|# slides}')}
+common-n-slides = { $n ->
+        [one] une diapositive
+        [many] { $n } diapositives
+       *[other] { $n } diapositives
+    }
+
+## the Outliner
+
+# en: ${englishHash('Due date')}
+outline-due-date = Échéance
+`;
+
+test('--work: the messages a language lacks or whose English moved, with their comment, group, old words and plural forms; its head, rules and terms', () => {
+  const doc = `## For a translator\n\n- **French:** \`vous\`; the infinitive on buttons.\n- **German:** \`du\`.\n`;
+  const list = work(EN, FR, 'fr', { 'common-save': 'Save it' }, doc);
+  expect(list.head).toEqual(['Tiny Little Office en français.']);
+  expect(list.rules).toBe('`vous`; the infinitive on buttons.');
+  expect(list.terms).toEqual({ document: 'Document', save: 'enregistrer' });
+  expect(list.todo).toEqual([
+    { id: 'outline-agenda', en: 'Agenda', group: 'the Outliner' },
+    { id: 'common-save', en: 'Save', comment: ['A verb: the button that saves.'], group: 'the shell', old: 'Garder', was: 'Save it' },
+  ]);
+  expect(work(EN, FR, 'fr').todo.map((w) => w.id)).toEqual(['outline-agenda', 'common-save']);
+  // A plural to do says the language's forms.
+  expect(work(EN, FR.replace(/# en: .*\ncommon-n-slides[\s\S]*?\n    \}\n/, ''), 'fr').todo[0]).toMatchObject({ id: 'common-n-slides', forms: ['one', 'many', 'other'] });
+  expect(rulesFor('de', doc)).toBe('`du`.');
+  expect(rulesFor('xx', doc)).toBeUndefined();
+});
+
+test('--apply: a message the language has is replaced where it stands, a new one goes where en.ftl puts it, each hashed; a file that would fail is not returned', () => {
+  const r = apply(EN, FR, 'fr', { 'common-save': 'Enregistrer', 'outline-agenda': { text: 'Agenda', same: true } });
+  expect(r.errors).toEqual([]);
+  expect(r.written).toEqual(['common-save', 'outline-agenda']);
+  const out = r.source!;
+  // Replaced in place, its hash the English's now.
+  expect(out).toContain(`shell-menu = Menu\n# en: ${englishHash('Save')}\ncommon-save = Enregistrer\n# same\n# en: ${englishHash('Document')}\ncommon-document = Document`);
+  // New, after the message before it in en.ftl's order that the file has: the group's heading, since it is the group's first.
+  expect(out).toContain(`## the Outliner\n\n# same\n# en: ${englishHash('Agenda')}\noutline-agenda = Agenda\n# en: ${englishHash('Due date')}\noutline-due-date = Échéance`);
+  // The result passes the check, and nothing else moved.
+  expect(out.split('\n').length).toBe(FR.split('\n').length + 3);
+  expect(apply(EN, out, 'fr', {}).errors).toEqual([]);
+  // A translation that loses the placeable, or a message en.ftl lacks, is refused and the file is not returned.
+  expect(apply(EN, FR, 'fr', { 'common-n-slides': '{n|une diapo|# diapos|# diapos}' }).errors).toEqual([]);
+  const bad = apply(EN, FR, 'fr', { 'common-n-slides': 'des diapositives', 'no-such': 'x' });
+  expect(bad.source).toBeUndefined();
+  expect(bad.errors.some((e) => e.startsWith('no-such'))).toBe(true);
+  expect(bad.errors.some((e) => e.includes('common-n-slides'))).toBe(true);
+  // A draft mark goes when the words are given.
+  const drafted = FR.replace('# en: ' + englishHash('Save it') + '\ncommon-save', '# draft from common-keep\n# en: ' + englishHash('Save it') + '\ncommon-save');
+  expect(apply(EN, drafted, 'fr', { 'common-save': 'Enregistrer' }).source).not.toContain('draft from');
 });

@@ -37,6 +37,8 @@
     "i18n:check": "node scripts/i18n-extract.ts --check",
     "i18n:extract": "node scripts/i18n-extract.ts",
     "i18n:gaps": "node scripts/i18n-extract.ts --gaps",
+    "i18n:work": "node scripts/i18n-extract.ts --work",
+    "i18n:apply": "node scripts/i18n-extract.ts --apply",
     "docs:exports": "node scripts/exports-doc.ts",
     "docs:network": "node scripts/network-doc.ts",
     "docs:deps": "node scripts/dependencies.ts",
