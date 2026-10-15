@@ -39,7 +39,7 @@ shell-turn-on-save-in-browser = Anrejistre nan navigatè a epi kite
 # en: 634bae7c8177155bc24961f3493f425b66e88c16
 shell-go-without = Kite san anrejistre
 # en: ee7a39c93b7018b92bcff5511a92081df68dd3db
-shell-save-in-browser-is-on = Anrejistre nan navigatè a limen. Dokiman ou louvri yo anrejistre isit la. Fèmen l nan meni an.
+shell-save-in-browser-is-on = Anrejistre nan navigatè a limen. Dokiman ou louvri yo anrejistre isit la. Etenn li nan meni an.
 # en: 97c669558589e3b0cf0917cb9caece8844ba65d9
 shell-another-version = Yon lòt vèsyon ki anrejistre
 # en: 87222e82bf5d208052c68fa66c93d131fa18fc67
@@ -94,15 +94,15 @@ home-templates-for-app-name = Modèl pou { $app }: { $name }
 # en: 9b96d854dd8e79adb3ee6e1e0e419b50fc1aed43
 home-templates-are-not-saved-in = Modèl yo poko anrejistre nan navigatè sa a. Konekte sou entènèt pou w ka wè yo.
 # en: 25d37d0580af5bc389b9332f3640f6d73ef93e48
-home-documents-found = Dokiman jwenn
+home-documents-found = Dokiman yo jwenn
 # en: 5e46670f6fe68987a7e5c94f03e192aff635df77
 home-no-document-here-has-those = Pa gen dokiman ki koresponn
 # en: 1dfc2a61eb2345a48a2a91b7922b83f580553732
 home-search-your-documents = Chèche nan dokiman ou yo
 # en: 4f5fbd7fb6a16b16ebe3c347bf43c9a2455a1560
 home-n-documents-found = { $n ->
-        [one] Yon dokiman jwenn
-       *[other] { $n } dokiman jwenn
+        [one] Yo jwenn yon dokiman
+       *[other] Yo jwenn { $n } dokiman
     }
 
 ## the drawer (hamburger menu)
@@ -149,7 +149,7 @@ drawer-tiny-little-office-is-experiment = Ti Biwo Tou Piti se yon eksperyans { $
 # en: 04a1291dcc6e5d304f04516685710a331963f630
 drawer-to-reach-out-with-questions = Si ou gen kesyon, { $email }.
 # en: 522edc71559293b5713cff3f13c2dbafd37a56a3
-drawer-email-us = voye yon imel ban nou
+drawer-email-us = voye yon imèl ban nou
 # en: 98187f1688112fa57c00a326f526288fa3e6b023
 drawer-if-you-find-bugs-please = Si ou jwenn bug, tanpri siyale yo nan { $github } nou an.
 # en: c6651994b242228b647fbbd2a83eccefd957abca
@@ -211,7 +211,7 @@ leave-this-link-hides-characters-in = Adrès lyen sa a gen karaktè ki kache.
 ## sharing: the Share dialog (kit/core/shell.ts), where the link fits (kit/share/limits.ts), the arrival banner
 
 # en: 21697833514286cb120912c109ed55e870e44b01
-share-copy-opened-in-new-tab = Yon kopi ki louvri nan yon nouvo onglè
+share-copy-opened-in-new-tab = Yon kopi louvri nan yon lòt onglè
 # en: ae7b279c96200b853008a352fa110ac2565f3dc5
 share-edit-link = Lyen pou modifye
 # en: 12355fc4c6eeb80306a7fe5199240b694bf2b85e
@@ -286,8 +286,8 @@ share-nfc-sticker = yon stikè NFC
 share-some-browsers = kèk navigatè
 # en: 77437a6dfcf7562798d4a066e19fd698b357c1a8
 share-n-short-links-kept-here = { $n ->
-        [one] { $n } lyen kout kenbe isit la
-       *[other] { $n } lyen kout kenbe isit la
+        [one] { $n } lyen kout ki sere isit la
+       *[other] { $n } lyen kout ki sere isit la
     }
 # en: fbdda8ea6ae4f71eb78a8bd78fa2746784806ffe
 share-display-link = Lyen Afichaj
@@ -343,7 +343,7 @@ share-new-noun-date-n = Nouvo { $noun } { $date } #{ $n }
 # en: 1c2edb3104c7f2adce9ad2a77f3622d1beb0059a
 share-mastodon-server-like-mastodon-social = Yon sèvè Mastodon, tankou mastodon.social
 # en: 64fbd995d3b6b156ee26ae3c03e6516434c34c12
-share-change = Chanjman
+share-change = Chanje
 # en: 2a07ce9a22d8e5dc1031e531518f04e50855319f
 share-copy-embed-code = Kopye kòd entegrasyon
 # en: c3e1c83e5b4172d3c738e37cb69b76d93ce49b8b
@@ -353,7 +353,7 @@ share-embed = Entegre
 # en: 4eeede7134d362f371fd18b2d63d3199bb24f01a
 share-embed-code-copied = Kòd entegrasyon kopye
 # en: 682cbb0f328f16ee213c6b44d7012512b55506b7
-share-opens-deck-already-presenting = Li louvri prezantasyon an deja ap prezante.
+share-opens-deck-already-presenting = Li louvri prezantasyon an tou dwat nan mòd prezante.
 # en: 7858ac3ff63354f37161bd349efe11edd13b89cb
 share-post = Pibliye
 # en: c68fca11627c0ac342583c1782892518730cc40b
@@ -373,17 +373,17 @@ share-picture-is-over-400-kb = foto a depase 400 KB
 # en: 398d796772eebe6fc3207881d76d2cf9f155da3f
 share-server-could-not-be-reached = pa t ka jwenn sèvè a
 # en: 686fd096a5f35bcfbcdcc5130d1be03e593d7bfa
-share-hundred-previews-day-from-one = san apèsi pa jou soti nan yon sèl adrès
+share-hundred-previews-day-from-one = 100 apèsi pa jou soti nan yon sèl adrès
 # en: 959db3cd3ff1a424890a809f9cf7445f37db3289
 share-server-refused-picture = sèvè a refize foto a
 # en: af490175b729a82a4315134642a89f1f87681967
-share-pages-in-frame-on-another = Paj yo, nan yon kadr sou yon lòt sit, ak yon lyen pou louvri yo isit la.
+share-pages-in-frame-on-another = Paj yo, nan yon kad sou yon lòt sit, ak yon lyen pou louvri yo isit la.
 # en: 9377de06278eacbdf4a297a82b8eb9aa3d4220c0
 share-your-mastodon-server = Sèvè Mastodon ou
 # en: 8ae1c34bd37fad49cc5f8e02da648a78e89c3ed8
-share-left = Agòch
+share-left = Rete
 # en: 62be4731dedfbbc70aa7fa30d6649d816af8ca4b
-share-uses = Itilizasyon
+share-uses = Itilize
 # en: 525f61b6729229b1a8854a9e50bcaa52ea96b131
 share-where = Ki kote
 # en: cdbfed741d905515df704d9585fc74781801a24d
@@ -465,7 +465,7 @@ privacy-unlock = Debloke
 # en: 887b0828ec99930408eb32249f1209057b1b234c
 common-unlock-ellipsis = Debloke…
 # en: ce3661a255464b1b22e6f395685d0e6f9fa077da
-privacy-what-this-device-holds = Estoke sou aparèy sa a
+privacy-what-this-device-holds = Sa ki sou aparèy sa a
 # en: 8485be9e7b3e998c5f1eef5ce87d2aa67726e3cb
 privacy-your-documents = Dokiman ou yo
 # en: d21905a9907932f7976e1ca96129c0af871f2715
@@ -487,7 +487,7 @@ privacy-n-links = { $n ->
        *[other] { $n } lyen
     }
 # en: 2ddd4097832d991c46023732a889beeb8ec4c29d
-privacy-n-set = { $n } mete
+privacy-n-set = { $n } paramèt
 # en: a97ce1edde4ad396d1cff34063087d0bf5d0e1a8
 privacy-copy-this-and-send-it = Kopye modpas sa a epi voye l apa lyen an. Li p ap parèt ankò.
 # en: 7640428ae16fc2b673d689ddf6b1ea15eed407d3
@@ -511,7 +511,7 @@ locked-document-locked-with-password = Yon dokiman ki bloke ak yon modpas
 locked-document = dokiman bloke
 # A placed document whose link cannot be read (cut short when it was copied).
 # en: 0c45986cb6755e463398a592a861baaf44018954
-locked-this-document-cannot-be-read = Dokiman sa a pa ka li.
+locked-this-document-cannot-be-read = Nou pa ka li dokiman sa a.
 # en: a2a127edeb3eed5dc264fc299b034db6493e1636
 locked-that-password-does-not-open = Modpas sa a pa louvri lyen sa a. Si w sèten li bon, petèt lyen an te koupe lè yo te kopye l. Mande l ankò, oswa mande yon lyen kout.
 
@@ -585,7 +585,7 @@ download-data-json = Done (JSON)
 # en: f77017c03d9d2be93a74ef7ef7e099dd77976f01
 download-downloaded-name = { $name } telechaje
 # en: 01125e1be1f56cdaa47c6314a158e1219af819b3
-download-failed = Telechajman an echwe
+download-failed = Telechajman an pa mache
 # en: e7f6a6728b280414756d238ae70084720018ba47
 common-open-in-tiny-little-office = Louvri nan Ti Biwo Tou Piti
 # Under a document cut off at a slide's foot: a link that opens it whole, in its own app.
@@ -725,19 +725,19 @@ write-paper-paper = Papye: { $paper }
 # en: c1ccf83eea101ddafb5de4e3dea5f3693ae473c0
 write-sans = San serif
 # en: 2fa97b3a9a6621a3a887ef5686bf4604fa6804e6
-write-clean-and-plain-throughout = Pwòp e senp pou tout
+write-clean-and-plain-throughout = Pwòp epi senp toupatou
 # en: 56632c1841ab67cf1e7c7179b9c5ea0e32ea81c1
-write-bookish-serif-throughout = Yon serif tankou nan liv pou tout
+write-bookish-serif-throughout = Yon serif tankou nan liv toupatou
 # en: 7daed9b46fb34186159d19a2dca5208daf510f54
 write-monospace-ragged-right = Monospas, bò dwat pa aliyen
 # en: 9ec6ab25de9a050b550600a98c5a63e5b2c00bf8
-write-serif-and-sans = Serif ak sans
+write-serif-and-sans = Serif ak san serif
 # en: b3ca8ebc46d597ea38c5f4877cf7ae7bfb4e3d68
-write-serif-headings-sans-text = Tit an serif, tèks an sans
+write-serif-headings-sans-text = Tit an serif, tèks san serif
 # en: e0c6a397d49350373ed4d55573e9365c212631bc
-write-sans-and-serif = Sans ak serif
+write-sans-and-serif = San serif ak serif
 # en: d9d9d24d3963e4acfa41725ddd5a228f70b0869f
-write-sans-headings-serif-text = Tit an sans, tèks an serif
+write-sans-headings-serif-text = Tit san serif, tèks an serif
 # en: f69f233005f15802770fd26fbf7ead52ec13d9e6
 write-book = Liv
 # en: d242210a93b0f91c16b76df2eaf8efc7ae211585
@@ -750,7 +750,7 @@ write-narrow-headline-two-columns = Yon tit etwat, de kolòn
 write-horizontal-rule = Liy orizontal
 # Insert ▾'s rule in a document: what follows starts the next page.
 # en: 830b8871f026d13b7b94d6723471f2b4e152e360
-write-page-break = Chanjman paj
+write-page-break = Kase paj
 # same
 # en: 9ce3bd4224c8c1780db56b4125ecf3f24bf748b7
 common-ok = OK
@@ -836,11 +836,11 @@ write-what-you-need-in-table = Sa w bezwen, nan yon tablo ki ale de kat a sis, a
 # en: aa3ddab4d749b73414ddd65201f9c6553b98a49b
 write-questions-and-answers = Kesyon ak repons
 # en: 1854b96dd11603bed03cce723369ef661a6f34f8
-write-questions-people-ask-each-heading = Kesyon moun poze, chak yo se yon tit ak repons li anba l.
+write-questions-people-ask-each-heading = Kesyon moun poze, chak se yon tit ak repons li anba l.
 # en: 6d234a17fecd5048e790eb4d1c415e17899a0e56
 write-press-release = Kominike pou laprès
 # en: ba41d12bbba317bcacf230155abba7ce9e400379
-write-news-in-first-line-detail = Nouvèl la nan premye liy lan, detay yo, yon sitasyon, lè yo ye, ak ki moun pou rele.
+write-news-in-first-line-detail = Nouvèl la nan premye liy lan, detay yo, yon sitasyon, lè ouvèti yo, ak ki moun pou rele.
 # en: 0c30f8a886ae8207e0702b4daf5eda405b19a131
 write-news-article = Atik jounal
 # en: 66280b179ec208e759c8fd7e05a4b1171c355c9f
@@ -856,11 +856,11 @@ write-book-stars-what-it-is = Liv la, zetwal yo, sa l pale de li, sa ki mache ak
 # en: 1eb36cb79b31a29c161965efdbb310289b4e5814
 write-music-review = Kritik mizik
 # en: 75857043416829c78af6afbfcd886ea90847e06c
-write-album-label-and-length-stars = Yon albòm: etikèt la ak dire a, zetwal yo, chante yo, pi bon yo.
+write-album-label-and-length-stars = Yon albòm: etikèt la ak dire a, zetwal yo, chante yo, pi bon mòso yo.
 # en: fae48a8f67fd81fb5d54b5a9c2d60929cd5da2f7
 write-thesis = Tèz
 # en: 8dd8017f140560c80229f7d051a8fb2376183e9a
-write-title-page-abstract-chapters-with = Paj tit, rezime, chapit ak nòt anba paj ak yon tablo, ak yon byografi, prezante tankou yon liv.
+write-title-page-abstract-chapters-with = Paj tit, rezime, chapit ak nòt anba paj ak yon tablo, ak yon bibliyografi, prezante tankou yon liv.
 # en: 42921f1b739a62eb82bc6f16ce47ff5ce5fd4da4
 write-grant-proposal = Pwopozisyon pou sibvansyon
 # en: 381d823ac8ecdff832331120748c151a113b2464
@@ -988,7 +988,7 @@ sheet-planned-against-actual-line-each = Sa yo te planifye kont sa yo te depanse
 # en: 0a0a7c3be7656f55cd259d558c2d0eb59b893b88
 sheet-expense-log = Jounal depans
 # en: c2effbb05c6382e67befb796de9be3ad264a1cbb
-sheet-date-what-how-much-which = Dat, kisa, konbyen, ki kalite; yon total k ap monte nan pye a.
+sheet-date-what-how-much-which = Dat, kisa, konbyen, ki kalite; yon total k ap monte anba a.
 # en: a2d841e763d975477b0e1a51d15e6f25c9023d4a
 sheet-training-log = Jounal antrènman
 # en: d5b29b7fbac7da4d79a420a8108f0c98bb1ab61a
@@ -1024,7 +1024,7 @@ sheet-this-year-against-last-line = Ane sa a kont ane pase a, yon liy chak mwa, 
 # en: 467dda8775e7e01a3dacd9ff5d247da7caf931d3
 sheet-household-budget-by-month = Bidjè kay pa mwa
 # en: f61119c5b20c1ed2360f6aa2b583872a1fc9c474
-sheet-six-months-of-homes-bills = Sis mwa nan fakti ak depans yon kay, yon kolòn chak mwa, total de bò kont peyman an.
+sheet-six-months-of-homes-bills = Sis mwa fakti ak depans yon kay, yon kolòn chak mwa, total de bò kont salè a.
 # en: 2c2609efcdcac42f94b3d73758d40d3f2f79dfd8
 sheet-savings-goal = Objektif ekonomi
 # en: 49ff61e9d2d6e99106df2e02e7a626aa5186c112
@@ -1032,19 +1032,19 @@ sheet-what-went-in-each-month = Sa ki antre chak mwa, sa ki mete sou kote jiskap
 # en: ca1ec97c50f7647ef3588d5de58af33939c01646
 sheet-habit-tracker = Swivi abitid
 # en: 7a2638dee7c38146953a64566dbd8fc8ea77d8d4
-sheet-four-habits-checked-off-day = Kat abitid make jou apre jou pandan de semèn; konbe nan chak jou ki te respekte, ak konbe jou chak.
+sheet-four-habits-checked-off-day = Kat abitid make jou apre jou pandan de semèn; ki pousantaj chak jou te respekte, ak konbyen jou pou chak abitid.
 # en: d80f6ec7eac0c80248e2c7b452e21f89673449f2
 sheet-reading-list = Lis lekti
 # en: c809293d68f1061cf7062072d2efc8fe95fe9262
-sheet-books-read-being-read-and = Liv ki li, k ap li ak pwochen yo, ak konbe jou chak te pran ak paj yo li ane sa a.
+sheet-books-read-being-read-and = Liv ou li, liv w ap li ak pwochen yo, ak konbyen jou chak te pran ak paj ou li ane sa a.
 # en: 6e14850d9abea09c879f881a4773537f91cf2ac2
 sheet-workout-log = Jounal egzèsis
 # en: b2a1db48bce10aa5ac4b8eb894555098ecbaac30
-sheet-sets-reps-and-weight-for = Seri, repetisyon ak pwa pou chak mouvman, volim nan kalkile, ak ki jan chak te santi.
+sheet-sets-reps-and-weight-for = Seri, repetisyon ak pwa pou chak mouvman, volim nan kalkile, ak kijan ou te santi w pou chak.
 # en: 5be9810c81e208adc153f7aa0cc70f64c988d737
 sheet-time-sheet = Fèy lè
 # en: df9c77cdd1cdf96f00633ef7f822543a7185dbc6
-sheet-weeks-hours-by-client-and = Èdtan yon semèn pa kliyan ak travay; sa yo ka fakture ak pri yo, ak total yo.
+sheet-weeks-hours-by-client-and = Èdtan yon semèn pa kliyan ak travay; sa ou ka mete sou fakti yo kalkile ak to pa yo, ak total yo.
 # en: da7a3e11a9c1686127720177adfd2bbfed7224e0
 sheet-trip-costs-split = Depans vwayaj pataje
 # en: bcc455f94ab37c41dad441a4152ac7961c3118ad
@@ -1052,7 +1052,7 @@ sheet-who-paid-for-what-on = Ki moun ki peye kisa nan yon vwayaj pou kat moun; p
 # en: 3fcd3bd6c3c0517dc23b7c9c8a424a6ba7c30c9a
 sheet-schedule-with-dates = Orè ak dat
 # en: 9cfdf52e38ee970ebd6feac438c7d2cb6abd25c5
-sheet-job-in-steps-each-starting = Yon travay nan etap, chak kòmanse lè pwecedan an fini: ki moun, konbe jou, dat fen ak jou travay.
+sheet-job-in-steps-each-starting = Yon travay an etap, chak kòmanse lè sa ki anvan l lan fini: ki moun, konbyen jou, dat fen ak jou travay.
 # en: 2a3b772f6e347425b5a235a2e956004ed5177213
 sheet-grade-book = Kaye nòt
 # en: 0e6fce40b16529c27d306da8834f33a391a5ca5b
@@ -1076,11 +1076,11 @@ sheet-what-has-come-in-week = Sa ki antre, semèn pa semèn, kont objektif la: y
 # en: 20ded69e290360ef0be6b1fd22e648ca398d7ed3
 sheet-invoice-ledger = Rejis fakti
 # en: 2404f6c1a633f188d6395d7b35f7dd1486c597b6
-sheet-every-invoice-sent-when-to = Chak fakti voye: ki lè, bay ki moun, konbe, ki lè yo peye l, sa ki rete dwe ak konbe jou an reta.
+sheet-every-invoice-sent-when-to = Chak fakti voye: ki lè, bay ki moun, konbyen, ki lè yo peye l, sa ki rete dwe ak konbyen jou an reta.
 # en: 300d29fd5f327e8c7a0f4614d4125d93570eeeff
 sheet-inventory = Envantè
 # en: cca3ceb6d79e8c2e922aa21c8675223c1b96c275
-sheet-stock-on-hand-against-point = Stòk nan men kont pwen pou kòmande ankò; sa pou kòmande, konbe l vo, ak yon drapo lè l ba.
+sheet-stock-on-hand-against-point = Stòk nan men kont pwen pou kòmande ankò; sa pou kòmande, konbyen l vo, ak yon drapo lè l ba.
 # en: ba8d2875e56e1ee2a745057f4de807182be4bb9b
 sheet-petty-cash = Ti kès
 # en: 8c7a0a9d0703152466c522d2d8bbd55cfcea218d
@@ -1114,7 +1114,7 @@ sheet-chart-png = Graf (PNG)
 # en: 492630372c601d63c25590ebdc75ab6f34a2ff74
 sheet-empty-sheet = Fèy vid
 # en: 2decd02b722b692c9d30d7de5e0c1191d1968de7
-sheet-n-of-max-shown = ({ $n } sou { $max } montre)
+sheet-n-of-max-shown = ({ $n } sou { $max } ki parèt)
 # en: 9e85be5a97dd107512bd06368b695b4265a662c9
 sheet-50-more-rows = 50 ranje anplis
 # en: 46dd847f36799647b69659ed71327486c70728ea
@@ -1144,7 +1144,7 @@ common-drag-to-fill = Rale pou ranpli
 # en: 87b8f44339c3a345782b1fa838bfa3b0406567b3
 sheet-abc-or-123-for-this = Kalite kolòn
 # en: 69ff8ba19299f697ed3f5401bb7c03f0abbc4c67
-sheet-drag-to-resize-double-click = Rale pou chanje gwosè, double-klike pou ajiste
+sheet-drag-to-resize-double-click = Rale pou chanje gwosè, klike de fwa pou ajiste
 # en: 363a9922cf56c76397d7b72ae8425d30d0438b33
 sheet-fill-down-from-top-row = Ranpli anba depi premye ranje a
 # en: 549a401f55bc461388a4f5f8554db5e0749d0a28
@@ -1187,7 +1187,7 @@ common-name-of-column-c = Non kolòn { $c }
 sheet-names-cell-to-its-right = Non pou selil adwat la
 # A money column's currency (Money picked in a column's menu): the field's hint, and what it says of words it cannot read.
 # en: d02550533b8780a7e646803c3b7b9cb7a78ba756
-sheet-symbol-like-or-code-like = Yon senbòl, tankou $, oswa yon kòd, tankou USD. Vid, se pa dokiman an.
+sheet-symbol-like-or-code-like = Yon senbòl, tankou $, oswa yon kòd, tankou USD. Si l vid, se pa dokiman an.
 # en: 1224b5538c873fc11d856120fedeb76e516529c6
 sheet-symbol-of-up-to-three = Yon senbòl jiska twa karaktè, oswa yon kòd twa lèt.
 # en: 630470a61228c20119f270074f1e0b6a4c2d9151
@@ -1225,7 +1225,7 @@ sheet-show-all-text = Montre tout tèks la
 # en: 9580fcbce0c31ceaa47eb583e5f7ce637fdc8a0a
 sheet-shown-as-typed = Tèks senp
 # en: a2a5bdeca9391be1e0cdff1c19895bae7fadc2c2
-sheet-sort-rows-by-it = Klase pa
+sheet-sort-rows-by-it = Triye pa
 # en: ff87bd67a9f3709f0a4247baa8ba4de4a5bd5fd2
 sheet-suggested = sijere
 # en: eda0b8f3c389658a7369166fd4c36099e380adff
@@ -1334,7 +1334,7 @@ draw-drawing = desen
 # en: 59b035367211a9382930b2a4c13637dbc33c4f32
 common-design = Konsepsyon
 # en: 0077c4c9a2bcb4318b7a85a034bc75912afc3cb5
-draw-boxes-arrows-icons-and-labels = Bwat, flèch, ikòn ak etikèt sou yon grid; oswa pixel art, ki ka vin yon tuile pou background.
+draw-boxes-arrows-icons-and-labels = Bwat, flèch, ikòn ak etikèt sou yon griy; oswa pixel art, ki ka tounen yon kawo pou fon.
 # en: b807ee7758852c19e577610f2c56bf3ee0fb29bb
 draw-request-flow = Koule demann lan
 # en: 00cbc89498c2f280038a754777730896717e8071
@@ -1354,11 +1354,11 @@ draw-pixel-heart = Kè an piksèl
 # en: 7f51a7b112b9965b1cf5d78f9b43f76de5ad8f0d
 draw-16-by-16-heart-in = Yon kè 16 sou 16 an piksèl, pou kolorye oswa kòmanse ankò.
 # en: c65ee0720b3ba1dac7268415c7c987faabecc4a8
-draw-background-tile = Tuile background
+draw-background-tile = Kawo fon
 # en: e78fb3ca7b230e0df30391c85eec105bf55656bd
-draw-8-by-8-pattern-that = Yon motif 8 sou 8 ki repete: sèvi ak li kòm background yon desen, oswa nenpòt paj.
+draw-8-by-8-pattern-that = Yon motif 8 sou 8 ki repete: sèvi ak li kòm fon yon desen, oswa nenpòt paj.
 # en: 99cb45a6f4e975a5a7be78811422b5933dd6598b
-draw-card-for-ninetieth-tilted-on = Yon kat pou katre-ventyèm anivèsè, enkline sou yon background konfeti: gwo mo, flè, lanmou nan men tout moun.
+draw-card-for-ninetieth-tilted-on = Yon kat pou yon moun ki gen 90 an, panche sou yon fon konfeti: gwo mo, flè, lanmou tout moun.
 # en: 2020c98a00da0ecd8574350e226b7d4c448a451f
 draw-phone-screen-sketched-in-boxes = Yon ekran telefòn desine an bwat anvan yon moun konstwi l, ak nòt sou poukisa chak pati la.
 # en: 106c289912d69f2f02f64b1c195daa945a29c19f
@@ -1374,7 +1374,7 @@ draw-can-we-refund-it-stores = Èske nou ka ranbouse l? Règ retou yon boutik an
 # en: 619a6e052e5343b8fbad2bfbc5a35d0aa4ec763f
 draw-event-map = Kat evènman
 # en: 6349ac251c1b86c4744c7e0361a5e72ea5e38402
-draw-four-16-by-16-icons = Kat ikòn 16 sou 16 sou yon sèl grid, solèy, nwaj, lapli ak tanpèt, pou kopye pou yon previzyon oswa yon bouton.
+draw-four-16-by-16-icons = Kat ikòn 16 sou 16 sou yon sèl griy, solèy, nwaj, lapli ak tanpèt, pou kopye pou yon previzyon oswa yon bouton.
 # en: 9c6396f6f0d3ea9cb4720d61fecd3ede243d72c8
 draw-game-sprite = Sprite jwèt
 # en: 8752fbad4e546cb5ffe343544f280f98fc20d43f
@@ -1382,13 +1382,13 @@ draw-logo-sketch = Eskis logo
 # en: 26dbc52edd1d138f4ab006d860b56dee54bf919f
 draw-order-to-doorstep = Soti nan kòmand rive devan pòt
 # en: 9bdb2a0b447519986c24ccc21eaf68976587c9fc
-draw-pip-frog-32-by-32 = Pip krapo a, yon ewo 32 sou 32 ak yon echap wouj, ak kontou ladan l, pare pou anime.
+draw-pip-frog-32-by-32 = Pip krapo a, yon ewo 32 sou 32 ak yon echap wouj, ak kontou, pare pou anime.
 # en: d8cca3dd62ad1e4c37a8b10c054464bbcb13e3c9
 draw-room-plan = Plan chanm
 # en: fcba7b3fe14a456c5dd428b4e0b28552efa25751
 draw-living-room-rearranged-sofa-rug = Salon an ranje yon lòt jan: kanape, tapi, etajè ak biwo nan echèl, ak kote pòt la ouvè.
 # en: 8640aa92343372c68f5d72660821c342598d8b38
-draw-three-ideas-for-coffee-roasters = Twa lide pou mak yon tosteur kafe youn bò lòt, non an an gwo, ak yon dat pou chwazi anvan.
+draw-three-ideas-for-coffee-roasters = Twa lide pou mak yon griyè kafe youn bò lòt, non an ekri gwo, ak yon dat pou chwazi.
 # en: 68224d905ee1bc5c63082121b1e80cf6fe7d08c1
 draw-weather-icons = Ikòn move tan
 # en: 0d07d8bcde49fe88082ab75f75e2fd49bbcef253
@@ -1399,9 +1399,9 @@ draw-wireframe = Wireframe
 # en: 3e8785ece820edb3b53646af4cc1d4e3d40e13cb
 common-picture-svg = Foto (SVG)
 # en: 833ba107dc3d58db8b9f35a717d7bd43c83a0817
-draw-background-tile-svg = Tuile background (SVG)
+draw-background-tile-svg = Kawo fon (SVG)
 # en: 34f2e94dc9cb747e7afc204c645943fa3ab68196
-draw-background-tile-png = Tuile background (PNG)
+draw-background-tile-png = Kawo fon (PNG)
 # en: 75f5b48c5980dd2997738dd7416aa5fe8ca60e9a
 draw-animate-this-drawing = Anime desen sa a
 # en: a42ec2578a2a55cc28dcfbd53e3c34dee5d31d78
@@ -1414,7 +1414,7 @@ draw-drawing-of-n-unlabeled-shapes = Yon desen { $n ->
 # en: f33cdbb01b5b65fe3fe8928669d13ca09b3b5403
 draw-leads-to-b = { $a } mennen nan { $b }
 # en: b9e37b62382792094f5463a54183d523118a25a0
-draw-joins-b = { $a } makònen ak { $b }
+draw-joins-b = { $a } lye ak { $b }
 # en: e0883468badf6a5f9c1cfe0ce209a16939a64683
 draw-empty-drawing = Yon desen vid
 # en: 1f9c4a5ed21a39ed45db86eb13cbff389eede2cf
@@ -1447,7 +1447,7 @@ draw-freehand = Men lib
 # en: 8a48ec1f6c073fad0326a0e9251a18e4c88660b5
 draw-drag-to-draw-line-or = Rale pou trase yon liy oswa yon fòm
 # en: dcd096d38fc0be24bd96ac76246e98341b853208
-draw-rounded-box = Bwat won
+draw-rounded-box = Bwat kwen won
 # en: 08596d60c57fd87e530cbdd2a06052b06d8c4137
 draw-hexagon = Egzagòn
 # en: b116d77a368034d3de6ca1dc0414de7dfd49400b
@@ -1477,16 +1477,15 @@ draw-sky = Ble syèl
 # en: 54076359fdc7f1f0e000b9ae15b96f8b09866acb
 draw-pink = Woz
 # en: 168cbb2ea52b9e34d271accecfa7d7951e948a99
-draw-clear = klè
+draw-clear = transparan
 # en: b1985e387405e4d4afb40d5dac9b2656f5d6f770
 draw-shapes = Fòm
 # en: 4bab2d8fe13fa6ab57f80098b414f0f734c5dd25
 draw-more = Plis
 # en: 34f9968677e8b728f4405bf338fba32c66bd2a77
 draw-icon = Ikòn…
-# same
 # en: 64dd60fe1a049fe6db3eb1369dec2e42bf428e21
-draw-background = Background
+draw-background = Fon
 # en: e1946387893c804aeadc93e5df5af3416cf1dc53
 draw-remove-background-tile = Retire fon an
 # en: 1d0c8304baedcf8e3a78982c2e7c0b04622bf2a0
@@ -1512,9 +1511,9 @@ draw-put-icon-on-this-shape = Mete yon ikòn sou fòm sa a
 # en: 33bde816f0f7a53b8de67b8f8d6981f47e28159b
 draw-place-icon = Mete yon ikòn
 # en: 4fc05f2763ba31e2d3be5f08e7d0bab5d5dcbf78
-common-zoom-in = Zoum anlè
+common-zoom-in = Agrandi
 # en: a4ae4b24a1f5369c2bff61abdbc221170e4b27d8
-common-zoom-out = Zoum anba
+common-zoom-out = Rapetise
 # same
 # en: e30eff925100b7c3e119ed678e39009e962455b0
 draw-alt = Alt
@@ -1533,7 +1532,7 @@ draw-read-aloud-to-people-who = Li byen fò pou moun ki pa ka wè l, epi kenbe a
 # en: 988c63b77eade4f718f9d469cb36e35bff976839
 draw-describe-from-shapes = Fè l apati fòm yo
 # en: ac302ae45938c985822f097507602d624128f1d0
-draw-tap-or-drag-to-paint = Tape oswa rale pou penti; flèch yo deplase, Enter penti.
+draw-tap-or-drag-to-paint = Tape oswa rale pou pentire; flèch yo deplase, Enter pentire.
 # en: ea263dc45b04f2755ac61a51deecc96ade3fb6a9
 draw-tap-each-corner-tap-first = Tape chak kwen; tape premye a ankò, oswa peze Enter, pou fèmen l.
 # en: ccdc55c46a79ea604962ddda9cc010311bdca4fe
@@ -1549,23 +1548,23 @@ draw-press-on-one-shape-and = Peze sou yon fòm epi lage sou yon lòt
 # en: 199f4e86afea4f2d42eb40b63ce8599168575e06
 draw-tap-where-icon-goes = Tape kote ikòn lan ale.
 # en: 86da5e24511bad8c1cace935e830c0625b04b607
-draw-drag-on-canvas-to-draw = Rale sou kanva a pou trase l, oswa tape pou mete youn.
+draw-drag-on-canvas-to-draw = Rale sou twal la pou trase l, oswa tape pou mete youn.
 # en: a5742851f0f81d3bdcf184cb2a164390f3e989bb
 draw-eraser = Gonm
 # en: 5136ae1b5bfe9175a6ed64915e648bdc240443a7
 draw-pencil = Kreyon
 # en: d60e52fb8066ebf1bf1329750c068e7042c783fd
-draw-clear-grid = Efase grid la
+draw-clear-grid = Efase griy la
 # en: 45ecea7c16e725c14cfec68f5b12d1545f222a73
-draw-use-as-background = Sèvi ak li kòm background
+draw-use-as-background = Sèvi ak li kòm fon
 # en: 507f52dfd67fb731677bb9ae6971f9b5e891bc84
 draw-grid-is-now-background-download = Griy la se fon an kounye a. Telechaje l kòm yon kawo, oswa sèvi avè l sou nenpòt paj ak tile:.
 # en: 209a1a74ee8eec09b861bc34e5ddb08a1357a364
-draw-pixel-grid-n-by-n = Griy piksèl, { $n } sou { $n }. Flèch yo deplase; Enter pentire ak koulè kounye a.
+draw-pixel-grid-n-by-n = Griy piksèl, { $n } sou { $n }. Flèch yo deplase; Enter pentire ak koulè ki chwazi a.
 # en: a9deda2292f9b3c9a827e2aa71e0da6b4db9f16e
 draw-row-y-column-x-ink = Ranje { $y }, kolòn { $x }: { $ink }
 # en: d316afce8845f59e541c981d07d81bab22858d00
-draw-as-repeating-background = Kòm yon background ki repete
+draw-as-repeating-background = Kòm yon fon ki repete
 # The contextual bar under a shape, and its words typed on it.
 # en: 27bb3dadbebca64cec249a9811a07cd3ea25a520
 draw-dashed-line = Liy tire
@@ -1604,7 +1603,7 @@ draw-type-words-enter-is-done = Tape tèks la. Enter fini, Shift+Enter ajoute yo
 draw-xl = TG
 
 # en: aba6eb7da15924b741fdff98ff19be9915cd84f1
-draw-drag-to-move-corner-handle = Rale pou deplase. Manch kwen an chanje gwosè, manch won an vire. Enter oswa de tap edite tèks.
+draw-drag-to-move-corner-handle = Rale pou deplase. Manch nan kwen an chanje gwosè, manch won an fè l vire. Enter oswa tape de fwa pou edite tèks.
 # en: 9cacab39109399036915a6b67336853e622472cd
 draw-drawing-canvas-v-selects-r = Twal desen. V chwazi; R, E, D, L, A, T desine; flèch yo pouse; [ ak ] vire; Enter edite tèks; Delete retire.
 # en: 4421c5912fa5d727f23883b0a69028e195e3717b
@@ -1644,7 +1643,7 @@ anim-title-card = Fich tit
 # en: 56d07df6f27b468d9e3456707110962e1da029c6
 anim-red-curtains-part-on-opening = Rido wouj louvri nan swa ouvèti a epi non festival la vini devan: jwe yon fwa, li rete sou tit la.
 # en: 1383ce3b8f642f2c5946975ca61e868e4a504819
-anim-present-hops-stars-and-hearts = Yon kado ap sote, zetwal ak kè ap balanse alantou l, epi salitasyon an klere nan lèt ark-en-syèl.
+anim-present-hops-stars-and-hearts = Yon kado ap sote, zetwal ak kè ap balanse alantou l, epi salitasyon an klere nan lèt lakansyèl.
 # en: fad7f01d931894b10da998319cdc82f1a7d7e4dc
 anim-quick-standup = Stand-up rapid
 # en: 79d688c0e9e1f3c402c3d6bedae252cfdd0b27aa
@@ -1656,25 +1655,25 @@ anim-meme-in-two-lines-of = Yon meme nan de liy tèks Impact, ak yon twofe ki vi
 # en: 98eb193445404588fd801a26b8383def925748ab
 anim-flash-card = Fich revizyon
 # en: 864aea3fc448ba5b87612d5e8c4c6dafde49b09a
-anim-card-shows-spanish-word-turns = Yon fich montre yon mo panyòl, vire pou bay angle a, epi vire tounen: yon vire otou aks dwat li.
+anim-card-shows-spanish-word-turns = Yon fich montre yon mo panyòl, vire pou bay mo angle a, epi vire tounen: yon vire otou aks dwat li.
 # en: 23015d1cbacca964e41f5cbb0021ed050964a9ed
 anim-weather-this-week = Move tan semèn sa a
 # en: 8dc082991f9eea4f537ecd34d66858c28b08bcb6
-anim-four-days-of-weather-in = Kat jou move tan nan Lisbon, chak ikòn vivan: solèy la vire, nwaj la dewoute, zèklè a souke.
+anim-four-days-of-weather-in = Kat jou move tan nan Lisbon, chak ikòn vivan: solèy la vire, nwaj la ap flote, zèklè a souke.
 # en: b8224dd56d927c2c68b1498f39b7a2ed20f88c57
 anim-new-year-countdown = Konte pou Nouvèl Ane
 # en: 6b46f602f1762ee9ef676cfb3d455fba6a9a07df
-anim-three-two-one-second-each = Twa, de, youn, yon segonn chak, apre sa nouvèl ane a rive nan lèt ark-en-syèl: jwe yon fwa, li rete sou salitasyon an.
+anim-three-two-one-second-each = Twa, de, youn, yon segonn chak, apre sa nouvèl ane a rive nan lèt lakansyèl: jwe yon fwa, li rete sou salitasyon an.
 # en: e004a532912502de514d6c1801dcc60517d6007a
 anim-flight-path = Wout vòl
 # en: 69049056a83981f31dea9f7350b7356570e735b3
-anim-plane-crosses-dotted-route-from = Yon avyon travèse yon wout pwenteye soti New York rive Lisbon, ap monte pandan l ap ale, ak lè vòl la anlè.
+anim-plane-crosses-dotted-route-from = Yon avyon travèse yon wout an pwen soti Nouyòk rive Lisbon, l ap monte pandan l ap ale, ak lè vòl la anlè.
 # en: 7de4868fea7340b1b7e0779ba2e81218c703ab57
 anim-neon-sign = Ansèy neyon
 # en: c0cba8072586f9c04d65da0f16b714c865f261e1
-anim-cafes-sign-at-night-name = Ansèy yon kafe aswè: non an ap flikote, lè yo ye a parèt anba, epi tas la klere epi anfle.
+anim-cafes-sign-at-night-name = Ansèy yon kafe aswè: non an ap flikote, lè ouvèti yo parèt anba, epi tas la klere epi anfle.
 # en: fadf71c7ea92e6416fd6d89969f8e78a115cd3c1
-anim-sunrise = Soulèvan
+anim-sunrise = Solèy leve
 # en: 672c99d7a4f36fb3de226944eb862e3c9faa5663
 anim-sun-comes-up-from-behind = Solèy la leve dèyè ti mòn yo epi maten an glise antre: pwofondè, gwosè ak yon orizon trase ak plim.
 # A key is a moment a shape is set at; between keys it travels. The effects (Impact … Blur) are meme looks.
@@ -1721,7 +1720,7 @@ anim-play = Jwe
 # en: fa968bd1155bd76231814d479bf070ed96cca9bb
 anim-pixel-art-is-made-in = Yo fè pixel art nan Zouti Desen; Animatè a deplase fòm yo.
 # en: b4a9395d25398654fd5d000e4b82a1d8273339bd
-anim-rainbow = Ark-en-syèl
+anim-rainbow = Lakansyèl
 # en: 3d5096b70833fdae355f1ffcf32faf2066123467
 anim-remove-this-key = Retire imaj kle a
 # en: aa0e7e86b7aa21e9851b9db8b752998918d2b608
@@ -1731,7 +1730,7 @@ common-size = Gwosè
 # en: 4a6c11ab8104f8bcbb26155a8f68688d181f8a4b
 anim-spin = Vire
 # en: 598549d7818087a7d04d49a7b9c00979c8a35c96
-anim-stage-alt-arrow-keys-move = Sèn: { $alt }. Flèch yo deplase fòm chwazi a (oswa tan an). Vigil ak pwen avanse yon imaj. Space jwe. K ajoute yon imaj kle.
+anim-stage-alt-arrow-keys-move = Sèn: { $alt }. Flèch yo deplase fòm chwazi a (oswa tan an). Vigil ak pwen deplase yon imaj. Espas jwe. K ajoute yon imaj kle.
 # en: a4277f79218220e03e7d4ebb5b1417cbdff137dc
 anim-shapes-in-hand = Fòm chwazi yo
 # en: 6c82e6dd86807ee3db07e3c82bec1ae1ce00b08b
@@ -1762,7 +1761,7 @@ anim-tap-shape-then-drag-it = Tape yon fòm, apresa rale l kote l prale.
 anim-drag-it-to-where-it = Rale l kote l prale a { $s } s.
 
 # en: b0d1915925616cc03de525611bfe58839cf5fdff
-anim-anything-from-drawing-tool-moving = Nenpòt bagay nan Zouti Desen, k ap bouje: pozisyon, pwofondè, gwosè, vire ak vire sou tan, ak efè pou meme.
+anim-anything-from-drawing-tool-moving = Nenpòt bagay nan Zouti Desen, k ap bouje: pozisyon, pwofondè, gwosè, vire ak vire sou li ak tan, ak efè pou meme.
 # en: 739720909d046c563acd15a980c916ae9b0a75f7
 anim-back-and-forth = Ale retou
 # en: 7753216f948c789b0cbd5cfb16d1f50c1717383b
@@ -1776,7 +1775,7 @@ anim-how-large-shape-is-drawn = Ki gwosè yo trase fòm nan: 1× se jan l trase 
 # en: c028f533678015b6ac2e606a9cafef7e050b11aa
 anim-length-speed-and-repeat = Lonjè, vitès ak repetisyon
 # en: 72f516ede84adba7283e1f7f5fd8eb787c7d33b0
-anim-loop-forever = Bouk pou tout tan
+anim-loop-forever = Repete san rete
 # en: 41b5b25a66d56fd91f645cbe6f83603567c3c480
 anim-play-once = Jwe yon fwa
 # en: 368e8081b781aac177fd07c2415b694b1f878911
@@ -1786,7 +1785,7 @@ anim-turns-shape-about-its-upright = Vire fòm nan otou aks dwat li, tankou yon 
 # en: dbe0717b0567202674ba26238e862ff18b3ffbbc
 anim-turns-shape-around-in-plane = Vire fòm nan nan plan sèn nan, tankou yon wou.
 # en: df7db1873937e8acd60c26ebf93191ad27b738e6
-anim-which-shape-is-in-front = Ki fòm ki devan: yon fòm ki pi pre trase sou yon fòm ki pi lwen, e yon fòm lwen yon ti jan pi fonse. Pwofondè pa janm chanje gwosè.
+anim-which-shape-is-in-front = Ki fòm ki devan: yon fòm ki pi pre parèt sou yon fòm ki pi lwen, epi yon fòm ki lwen yon ti jan pi pal. Pwofondè pa janm chanje gwosè.
 # en: 2931befb0fbc6bdabcff5b420bf41435e4315548
 anim-n-times = { $n } fwa
 # same
@@ -1815,7 +1814,7 @@ common-talk = Yon konferans
 # en: 69d33e95f4f69c18d9591a8529f59a6703fc1f85
 outline-empty-outline = Yon plan vid
 # en: b972f73739624a697a0aa9bdde4289bafc5b6e4b
-outline-outliner-ideas-under-ideas-folded = Yon kreyatè plan: lide anba lide, plede ak deplede, deplase ak makònen; menm pyebwa yon prezantasyon oswa yon kat lide li.
+outline-outliner-ideas-under-ideas-folded = Yon kreyatè plan: lide anba lide, pliye ak depliye, deplase ak konekte; menm pyebwa yon prezantasyon oswa yon kat lide li.
 # en: 3d47762769e98192ca611ea7fce028e70e16f174
 outline-arrow-from-from-to-to = Flèch soti nan { $from } rive nan { $to }
 # en: 081c7d75d7a6b1052f5643338773de8ea68de0dd
@@ -1861,9 +1860,9 @@ outline-empty = Vid
 # en: 4a66d1480779180159cc25c1c5aa9d760467c6a7
 outline-everything = Tout
 # en: 9cf188d3a6779d63b36b10275b0228ae22ec97d6
-outline-fold = Plede
+outline-fold = Pliye
 # en: ec898362fe9593764e822dd17c78f1f972c20d90
-outline-fold-all = Plede tout
+outline-fold-all = Pliye tout
 # en: ecdda59aea5ee67d7d854c969ccf7f4f4b4a4c54
 outline-item = Atik
 # en: 6f8c7dbc09548197b5d210f514dda19a015102b2
@@ -1952,9 +1951,9 @@ outline-last-status-means-done = Dènye estati a vle di fini. Travay ki gen esta
 # en: 7312a31a2c880f2d456663b6f91ad6da980b3a5e
 outline-take-connection-away = Retire koneksyon an
 # en: 656e5c87ae5cd391807e13c85fb32635c2d441c2
-outline-tap-item-to-connect-from = Tape atik pou konekte depi li a.
+outline-tap-item-to-connect-from = Tape atik ou vle konekte a.
 # en: 7a717eefe223e502e86655b5bf8eb999b867a9dc
-outline-tap-item-to-connect-words = Tape atik pou konekte “{ $words }” ak li a.
+outline-tap-item-to-connect-words = Tape atik ou vle konekte “{ $words }” avè l la.
 # en: 6ca2aebe7601f4f49f7f7df1ac23a0ac4a39abbc
 outline-question-options-under-it-and = Kesyon an, opsyon yo anba l, ak pou chak sa ki pale pou li ak sa ki pale kont li.
 # en: da74cb6baba7a464fd8881af861a8c8d7952aff9
@@ -1962,9 +1961,9 @@ common-trip-planner = Planifikatè Vwayaj
 # en: 09ae5dce4d22019190e52d1611d1544becf36489
 outline-twenty-minutes-in-three-parts = Ven minit nan twa pati: pwoblèm lan, lide a, sa l vle di; yon dyapozitiv pou chak gwo atik lè yo montre l kòm prezantasyon.
 # en: 2af9d498f852995329b0033573277dce32d09ba0
-outline-unfold-all = Deplede tout
+outline-unfold-all = Depliye tout
 # en: f5857a77d395db75bc57c2c76b92dc8fa4773053
-outline-unfold-n-inside = Deplede ({ $n ->
+outline-unfold-n-inside = Depliye ({ $n ->
         [one] { $n } atik
        *[other] { $n } atik
     })
@@ -2010,13 +2009,13 @@ outline-syllabus = Yon pwogram kou
 # en: 5b163ae0d9a3fd9b5ab6a8b6c27374091ceb25de
 outline-ten-week-course-when-and = Yon kou dis semèn: ki lè ak ki kote, yon sijè ki gen nimewo chak semèn, ki jan yo mete nòt, ak sa pou li.
 # en: 9cea5f42a5742d9eef722836a7a7b59c6a5c0c5a
-outline-thesis-two-arguments-with-their = Yon tèz, de agiman ak prèv yo, objeksyon an ak repons ladan l, ak yon fason pou soti.
+outline-thesis-two-arguments-with-their = Yon tèz, de agiman ak prèv yo, objeksyon an ak repons pou li, ak konklizyon an.
 # en: e5f2a2c3f76b55d5786f1c311773def62d6920f3
 outline-essay-plan = Yon plan esè
 # en: d926d538e1be8112e81292507985514feac5e4c4
 outline-draw-as-family-tree = Trase kòm pyebwa fanmi
 # en: bfef6f97dfb8178f726a96b8861bc2536e8c6fb4
-outline-five-days-in-lisbon-packed = Senk jou Lisbon, ranje pa kategori, ak sa pou fè anvan pòt la fèmen.
+outline-five-days-in-lisbon-packed = Senk jou nan Lisbon, ranje pa kategori, ak sa pou fè anvan ou fèmen pòt la.
 # en: 987acdf86bb6a373c995aa374c004bb21bf2e576
 outline-indoors-or-out-for-saturday = Anndan oswa deyò pou yon mache samdi: repons chak kesyon sou liy li yo, wi ak non.
 # en: 61390a6b5d7d9268827d91b4a818c6a5fbe2011c
@@ -2026,11 +2025,11 @@ outline-packing-list = Lis valiz
 # en: 013532bb7e7d08afa22a3149f8e74b5ee4d9eaf5
 outline-parts-and-chapters-of-book = Pati ak chapit yon liv lide, ak yon liy anba chak chapit pou sa l defann.
 # en: 5f646cfc8f40ae2515c9d774ae5ad523f524b998
-outline-people-and-three-acts-of = Moun yo ak twa akt chapit, chak ak sa k pase ladan l, makònen kote yon moun chanje chapit.
+outline-people-and-three-acts-of = Moun yo ak chapit yo an twa zak, chak ak sa k pase ladan l, konekte kote yon moun chanje yon chapit.
 # en: dbb00953c7a1565bffce71190cfb90220362c471
 outline-question-method-budget-that-adds = Kesyon an, metòd la, yon bidjè ki fè kont li menm, yon kalandriye, risk yo ak lekti yo.
 # en: 57b065618d9af543d6fcc5085edd94aa723f8403
-outline-three-generations-and-next-each = Twa jenerasyon ak pwochen an, chak ak ane yo, trase kòm yon pyebwa jeneyalojik nan meni an.
+outline-three-generations-and-next-each = Twa jenerasyon ak pwochen an, chak ak ane yo, trase kòm yon pyebwa fanmi nan meni an.
 # en: 285ec850c11d78bac10f6bfa31b69a37f1b257c9
 outline-troubleshooting = Depannaj
 # en: c126bf3ee80a183d7c300cd69a01e39ab7dd8e53
@@ -2038,7 +2037,7 @@ outline-who-works-for-whom-at = Ki moun ki travay pou ki moun nan yon boulanjri 
 # en: 0c6266451117f0382231513e4c30d38fb976086e
 outline-pdf-sections-and-bullets = PDF: seksyon ak pwen
 # en: 32897da2f696f1ddc73da9ef0575827530a80b1a
-outline-fold-unfold = Plede oswa deplede
+outline-fold-unfold = Pliye oswa depliye
 # en: 74341e3c271df3c784e595b804b1f90be0f80429
 outline-name-line = Etikèt
 
@@ -2046,7 +2045,7 @@ outline-name-line = Etikèt
 
 # Its templates: the occasions and a second of each printed format.
 # en: 44467d7b18daac8d8100b68ebc482fe0ee0ac9b6
-deck-choirs-winter-concert-welcome-both = Konsè ivè yon koral: akèy la, de mitan yo, nòt sou mizik la, chantè yo, ak mo pou chante ansanm.
+deck-choirs-winter-concert-welcome-both = Konsè ivè yon koral: akèy la, de pati yo, nòt sou mizik la, chantè yo, ak mo pou chante ansanm.
 # en: a816093d69f08b81c457d818e6d1bd72e0915b10
 deck-lesson = Yon leson
 # en: e2d04797e440ee0933d032a29cfbfad5edbc99c7
@@ -2054,7 +2053,7 @@ deck-lost-pet-poster-in-red = Yon afich bèt pèdi an wouj: non an, ki jan li ye
 # en: 4d44cafa1d032ca3ceda90fa9830717ea5cf8491
 deck-morning-workshop-schedule-checklist-of = Yon atelye maten: orè a, yon lis kontwòl sa pou pote, etap yo, ak kote pou ale apre.
 # en: 7dc13283809d7ed9c506873aee1486fd988cfe5c
-deck-pick-your-own-farm-what = Yon ferm kote w pran tèt ou: kisa k pouse ki lè, ki jan sa mache, pri yo, depo a ak ki jan pou jwenn li.
+deck-pick-your-own-farm-what = Yon ferm kote ou keyi pou kont ou: kisa k pouse ki lè, ki jan sa mache, pri yo, depo a ak ki jan pou jwenn li.
 # en: b822b42bfed453711aed6a262083b2a7aef5cd89
 deck-pitch = Yon prezantasyon pou envestisè
 # en: a9964d2d4aae75e70e2e8dace25022b6679f25d7
@@ -2066,9 +2065,9 @@ deck-residents-meeting-about-new-playground = Yon reyinyon rezidan sou yon nouvo
 # en: 02e7a62fc65ed26cb0751706a5ea8f5783414eda
 deck-science-lesson-on-chalkboard-aims = Yon leson syans sou tablo nwa a: objektif, sa yo konnen deja, modèl la, yon verifikasyon, devwa; nòt pwofesè a anba chak.
 # en: f3a66c7b2a6ebda85ea74938fce4c397eae2a131
-deck-seed-pitch-in-eight-slides = Yon prezantasyon pou premye envestisman nan uit dyapozitiv: pwoblèm lan, pwodwi a, tirè sou yon graf, biznis la, ekip la, demann lan.
+deck-seed-pitch-in-eight-slides = Yon prezantasyon pou premye envestisman nan uit dyapozitiv: pwoblèm lan, pwodwi a, kwasans sou yon graf, biznis la, ekip la, demann lan.
 # en: aab8da6eadee157bba3937e9dc00741cfe48b13f
-deck-bike-shops-quarter-for-its = Trimès yon boutik pou patnè li yo: revni sou yon graf, viktwa ak echèk, chif ki konte, pwochen trimès.
+deck-bike-shops-quarter-for-its = Trimès yon boutik bisiklèt pou patnè li yo: revni sou yon graf, viktwa ak echèk, chif ki konte, pwochen trimès.
 # en: d0fa5e5696edaf949dfe9e739a7a2eef0d433ae2
 deck-small-story-in-panels-about = Yon ti istwa an panno sou prete yon bagay bay yon vwazen.
 # en: 6c1ff81a2445a9eab1616588060b483cd5b6cde8
@@ -2096,7 +2095,7 @@ deck-recipe-zine = Zin resèt
 # en: 02bfd82260b75fe685e4e972cb9a3ae9b0a42f5f
 deck-seven-soups-for-cold-week = Sèt soup pou yon semèn frèt, youn pa paj, nan yon zin ki pliye nan yon sèl fèy.
 # en: 44b5c7f041391d8b41a8ba365b6f13522877b478
-deck-their-story-for-reception-from = Istwa yo pou resepsyon an, depi kijan yo te rankontre jouk kesyon an, ak yon chronoloji ak yon remèsiman.
+deck-their-story-for-reception-from = Istwa yo pou resepsyon an, depi kijan yo te rankontre jouk kesyon an, ak yon kwonoloji ak yon remèsiman.
 # en: 2aaeb944a6b05f452d512dc7dd5220adeee294ea
 deck-town-hall-notice = Avi lakomin
 # en: 14444c384d263fff25ba48b195abb55def791b75
@@ -2164,7 +2163,7 @@ deck-ocean = Oseyan
 # en: 07a59415416c4f5915d5efbe6319ca69450f0a77
 deck-bubblegum = Chiklèt
 # en: bc727a101b60bbc2b4f96365ecf1ee4bd1db685a
-deck-arcade = Awkad
+deck-arcade = Akad
 # en: 5efe442a0ed9b1e51ec7e85696d66d6ac3db83a8
 deck-chalkboard = Tablo nwa
 # en: 5f941ab65fbabe87f41cd73c9136f5a4c97087e8
@@ -2200,7 +2199,7 @@ deck-two-sided = De bò
 # en: b82a2c3204554a9c0a82b44aa7eb5f94916b1c13
 deck-cut-and-nest = Koupe epi anboite
 # en: 6e19d7b7deffd2974f632ec3e697646de978130e
-deck-end-with-qr-code-of = Fini ak yon kòd QR dokiman sa a
+deck-end-with-qr-code-of = Fini ak yon kòd QR prezantasyon sa a
 # en: 0c7dca360d478b76246b0ddf594aed2299af3ef2
 deck-move-slide-up = Monte dyapozitiv la
 # en: 8e87a8ca3749be93e307f172d62814c1b58865b4
@@ -2254,7 +2253,7 @@ deck-right-column = Kolòn adwat
 # en: 58952208e1b00c3e046eab00b1e20bb448262df9
 deck-one-bullet-line = Yon pwen pa liy.
 # en: a32090c9358d8e112f4074c11a76811a50d53d5c
-deck-one-bullet-line-tab-steps = Yon pwen pa liy. Tab retire l anndan.
+deck-one-bullet-line-tab-steps = Yon pwen pa liy. Tab mete l pi anndan.
 # en: f8948a4a523b4312c5567f9cff1f6788c757998f
 deck-line-or-two-under-title = Yon liy oswa de anba tit la
 # en: 236bcf1c6a83d3b0f85a065c777d7948b22a0c22
@@ -2352,7 +2351,7 @@ deck-powerpoint-pptx = PowerPoint (PPTX)
 # en: 7660a22bdc9507edd353dd61198b9aa86488d936
 deck-picture-of-every-slide-zip = Yon foto chak dyapozitiv (ZIP PNG)
 # en: 98a41f54e049532b6032b88d7656348adc178c2a
-deck-animation-of-deck-gif = Yon fim prezantasyon an (GIF)
+deck-animation-of-deck-gif = Yon animasyon prezantasyon an (GIF)
 # en: 3bab526d831e1024e6f8e7d197f9c3d72cc4f0e4
 deck-film-of-deck-webm = Yon fim prezantasyon an (WebM)
 
@@ -2366,9 +2365,9 @@ deck-done-and-next-side-by = Sa ki fèt ak sa k pral fèt kòt a kòt, answit ri
 # en: e946db45d2689df95cbac9f8137664409c51f5d8
 deck-proposal = Yon pwopozisyon
 # en: 52ab7599cc26432ef9b492b401d04eee1ca5e699
-deck-what-you-heard-what-you = Sa w tande, sa w pwopoze, ki lè, konbe l koute.
+deck-what-you-heard-what-you = Sa w tande, sa w pwopoze, ki lè, konbyen l koute.
 # en: b8e1f28fed63f996c8915470a7ee9ce8aef9b75f
-deck-eight-small-pages-from-one = Uit ti paj nan yon sèl fèy papye: enprime, pliye epi koupe, oswa li l ak tap sou telefòn.
+deck-eight-small-pages-from-one = Uit ti paj nan yon sèl fèy papye: enprime, pliye epi koupe, oswa li l sou telefòn, tape pou vire paj.
 # en: 31b11edde49cd1bd80a198f240426c5b2d8cd65f
 deck-booklet-of-half-letter-pages = Yon ti liv paj demi-letter, uit a ven, pare pou enprime, anboite epi pliye.
 # en: ae07389f7b537dbd7eb3007d3f2b36ca3c35c404
@@ -2376,7 +2375,7 @@ deck-trifold-brochure-six-panels-on = Yon bwochi twa pli: sis panno sou de bò y
 # en: 88c71dbca35b2e7c498adce21174cb1102af384e
 deck-mini-comic-panels-with-picture = Yon mini komik: panno ak yon foto, yon bil dyalòg ak yon lejann, pliye nan yon sèl fèy.
 # en: e610bb7f6eac1dd5622723ccc779e31e9d9ed190
-deck-poster-or-flyer-headline-and = Yon afich oswa flyer: yon gwo tit ak kèk liy, ankò pi gwo jan yon paj pèmèt.
+deck-poster-or-flyer-headline-and = Yon afich oswa flyer: yon gwo tit ak kèk liy, osi gwo yon paj pèmèt.
 # en: ec024ffdc152af00e77f7219a5293545bdd3bb65
 deck-name-badges-for-meetup-one = Badj non pou yon rankont, yon paj pou chak moun, sis pa fèy, pare pou koupe.
 # en: 9a51ba7142888f3e0199896de291a1fb4b4298f1
@@ -2384,11 +2383,11 @@ deck-edit-this-deck = Modifye prezantasyon sa a
 # en: d5947c525ed0d53dce794385a2cc1cd6e2459dbd
 deck-new-slide = Yon nouvo dyapozitiv
 # en: 720856fcb53d62f79a364c36d8cd2314121430a6
-deck-presenting-back = Retounen (prezante)
+deck-presenting-back = Retounen (an prezantasyon)
 # en: a212c73bb85a53b57609d239c50f170773e07d77
-deck-presenting-next-line-or-slide = Pwochen liy oswa dyapozitiv (prezante)
+deck-presenting-next-line-or-slide = Pwochen liy oswa dyapozitiv (an prezantasyon)
 # en: e53a09169fa399b79b5b814de5e65669714f9165
-deck-presenting-whole-slide = Tout dyapozitiv la (prezante)
+deck-presenting-whole-slide = Tout dyapozitiv la (an prezantasyon)
 # en: 7722768d8b861ddedb1f6400352985ca0cfd4a08
 deck-slide-before-slide-after-on = Dyapozitiv anvan oswa apre
 
@@ -2454,7 +2453,7 @@ cal-family-calendar = Kalandriye fanmi
 # en: 05061b43a7c1a210598d8a217347a96fdb45df8d
 cal-festival-weekend = Wikenn festival
 # en: a3f5851f7cb29b64859b01ec6429ea85811bb192
-cal-how-many-times = Konbe fwa
+cal-how-many-times = Konbyen fwa
 # same
 # en: 834c5ef85d6fd469b8be75d8685faf6f9e84eaa7
 cal-icalendar-ics = iCalendar (ICS)
@@ -2471,7 +2470,7 @@ cal-month = Mwa
 # en: 770d509550265dba792aa81868b856eb67225e41
 cal-my-zone = Fizo orè pa m
 # en: 80c3052d33ccdee15ffaaa110c5c39072495fe63
-cal-never = Jamè
+cal-never = Pa janm
 # en: 2ef3795c979293106a6ccf13359d732165fb660a
 cal-new-event = Nouvo evènman
 # en: 25d3553217b2058be97b5339fbe6a576cfeb6856
@@ -2547,15 +2546,15 @@ cal-n-days = { $n ->
 cal-n-done = { $n }% fini
 # The templates: each name, then its line on the home page.
 # en: 71428a822d08efae1d13babd6073592abec99d1f
-cal-bakerys-posts-and-newsletters-through = Pòs ak bilten yon boulanjri pandan ivè a, yon istwa avan nwèl chak jou.
+cal-bakerys-posts-and-newsletters-through = Pòs ak bilten yon boulanjri pandan ivè a, yon istwa Lavan chak jou.
 # en: 91dad831b9be334af672cd6052e37dedde16d06e
 cal-youth-soccer-season-practice-every = Yon sezon foutbòl jèn: antrènman chak semèn, lakay ak deyò nan koulè yo, eliminatwa yo.
 # en: d7bad656f3b06c3ee989a1f2960214ee15b2f788
-cal-small-teams-time-off-public = Konje yon ti ekip, jou ferye ak fèmti nwèl sou yon sèl kalandriye.
+cal-small-teams-time-off-public = Konje yon ti ekip, jou ferye ak fèmti Nwèl sou yon sèl kalandriye.
 # en: cd6036648af6d0d5614f0ec65eb732300281e059
 cal-community-garden-plots-year-when = Ane yon jaden kominotè: ki lè pou simen, plante, rekòlte ak taye, k ap tounen chak ane.
 # en: 1b04e3c7d585a3d6297852d158919c9833538a01
-cal-fall-term-from-first-day = Yon trimès otòn depi premye jou jouk nwèl: fèmti, klib, ekskirsyon, reyinyon paran.
+cal-fall-term-from-first-day = Yon trimès otòn depi premye jou jouk Nwèl: fèmti, klib, ekskirsyon, reyinyon paran.
 # en: f80b28faa22109c4d14cf7eb7994768abca09ca8
 cal-bills-and-renewals = Fakti ak renouvèlman
 # en: 2223281ed9222907f9d00ef35ab71df263d06e46
@@ -2571,7 +2570,7 @@ cal-garden-calendar = Kalandriye jaden
 # en: 624b49bb82a8487f3ff77d2098b88b1e1ceb6695
 cal-vacation-planner = Planifikatè vakans
 # en: 1ceb786961989ab69eda934e08645ecb19fe5357
-cal-league-schedule = Match lig
+cal-league-schedule = Orè lig
 # en: 5a94fcfb3e67abfdd4e3bab4c3d9a2683801245a
 cal-school-term = Trimès lekòl
 # en: 2f88af7308e60cbfbe5482a13acec0983b020e09
@@ -2585,7 +2584,7 @@ cal-two-issues-of-quarterly-from = De nimewo yon magazin chak twa mwa depi tèks
 # en: 0e4753002a6b042b841f5296f0cdb7c71110377b
 cal-volunteer-schedule = Wotasyon volontè
 # en: f6003458ea2ce51dfa0efa7d0819ccb57ac35bd1
-cal-who-does-which-shift-color = Ki moun ki fè ki chif, yon koulè pou chak moun, nan yon labank manje anvan nwèl.
+cal-who-does-which-shift-color = Ki moun ki pran ki tou travay, yon koulè pou chak moun, nan yon bank manje anvan Nwèl.
 
 ## the Diagram Maker
 
@@ -2593,7 +2592,7 @@ cal-who-does-which-shift-color = Ki moun ki fè ki chif, yon koulè pou chak mou
 diagram-diagram = dyagram
 # One app, eight kinds (mind map, org chart…); a 'thing' is whatever the kind is made of: an idea, a person, a step.
 # en: a6c5e06888a8fcbcb520ea2a9952009715b62e25
-diagram-mind-maps-org-charts-family = Kat lide, òganigram, pyebwa jeneyalojik, liy nèt, liy tan, Venn, plan plas ak rezo, trase ak kèk liy.
+diagram-mind-maps-org-charts-family = Kat lide, òganigram, pyebwa fanmi, koulwa, liy tan, Venn, plan plas ak rezo, trase ak kèk liy.
 # en: 5c943d9da9c2dfa4508b7318865477cb55850904
 diagram-empty-diagram = Yon dyagram vid
 # The kinds, one of each kind's things (Insert's item), and how a line of each is written
@@ -2602,9 +2601,9 @@ diagram-mind-map = Kat lide
 # en: 2cd7504a5a56c5729f37aca4d0234b698e0c0afe
 diagram-org-chart = Òganigram
 # en: f78fddbccd57da0c8456fd39da6c21cdc0371020
-diagram-family-tree = Pyebwa jeneyalojik
+diagram-family-tree = Pyebwa fanmi
 # en: 5a79fb6ed9e87efcbde2485d08845fe16296c303
-diagram-swimlanes = Liy nèt
+diagram-swimlanes = Koulwa
 # en: 018514a3d58aa08353dd5e387ee29de45981c409
 diagram-timeline = Liy tan
 # same
@@ -2630,7 +2629,7 @@ diagram-tap-empty-space-for-thing = Tape yon espas vid pou ajoute yon atik. Pou 
 # en: d4b16450c157188d2cf2e3968faee3709ebeca28
 diagram-tap-here-to-add-first = Tape isit la pou ajoute premye { $thing } la.
 # en: ccdb7bfa4c6b71a69f1931253fe6f892a2baf89b
-diagram-tap-in-lane-to-add = Tape nan yon liy pou ajoute yon etap. Tape yon etap pou edite l. Rale l nan yon lòt liy, oswa sou yon etap pou l vin apre li.
+diagram-tap-in-lane-to-add = Tape nan yon koulwa pou ajoute yon etap. Tape yon etap pou edite l. Rale l nan yon lòt koulwa, oswa sou yon etap pou l vin apre li.
 # en: 639d02ad26e5be80f5baf69835b953dfc015178b
 diagram-tap-thing-to-join-name = Tape atik pou lye { $name } avè l la. Tape yon espas vid pou anile.
 # en: 5d36f27a0649ac9ae67fb2e66f5be89ebc4719c8
@@ -2689,7 +2688,7 @@ diagram-from-lovelace-to-now-spaced = Depi Lovelace jouk kounye a, espase jan an
 # en: c973a2e43350a1c09697af1bd39a17f3cfba2c36
 diagram-from-order-to-doorstep = Depi kòmand jouk devan pòt
 # en: 91519d37fd9fe6f0c40b0429e0ed9f8eb8206006
-diagram-from-job-description-to-yes = Depi deskripsyon travay la jouk yon wi, liy nèt pa liy nèt.
+diagram-from-job-description-to-yes = Depi deskripsyon travay la jouk yon wi, koulwa pa koulwa.
 # en: bfd1a142e965498fd2dbaa45ca87c1cbdc9071c9
 diagram-grandparents-their-children-and-grandchildren = Granparan, pitit yo ak pitit pitit, ak ane yo.
 # en: 347a51bd3c26ccac83baeca51966f318d5bb06c4
@@ -2697,7 +2696,7 @@ diagram-hiring-someone = Anboche yon moun
 # en: f30d75896062b87258051feec53d9f7c05059037
 diagram-how-app-hangs-together = Ki jan yon aplikasyon kenbe ansanm
 # en: 70a97689961708e74a02157e6675bbcab893b7a4
-diagram-seven-people-who-reports-to = Sèt moun, ki moun ki rapòte bay ki moun, ak yon liy pwenteye.
+diagram-seven-people-who-reports-to = Sèt moun, ki moun ki rapòte bay ki moun, ak yon liy an pwen.
 # en: 45ccf051d72194e5207999d9eeabaf9311e07ec2
 diagram-garden-this-year = Jaden ane sa a
 # en: 3fa0b6c790e0b44a046fe73aa9cf77f99106074d
@@ -2725,7 +2724,7 @@ diagram-restaurant-kitchen = Yon kwizin restoran
 # en: 3fecd5a70de57bb7748a775d7d4c6072bace1e50
 diagram-router-and-everything-on-it = Yon routè ak tout sa ki sou li: laptòp, telefòn, enprimant, televizyon ak sonèt.
 # en: 949c596fb3177561b6f2515cbc92b6b68a4292c2
-diagram-team-by-its-skills-design = Yon ekip dapre konpetans li: design, ekriti ak kòd, ak ki moun ki fè plis pase youn.
+diagram-team-by-its-skills-design = Yon ekip dapre konpetans li: konsepsyon, ekriti ak kòd, ak ki moun ki fè plis pase youn.
 # en: eeb20483d989d9deef42a5ae150f171af0bc6201
 diagram-expense-report = Yon demann ranbousman depans
 # same
@@ -2758,11 +2757,11 @@ diagram-house-network = Rezo kay la
 # en: 1fcf7cc436a073faa316df56cf1a4d3ec2b87d6e
 diagram-water-cycle = Sik dlo a
 # en: cdb628c70ae8584f4098828ec8a65f19d44697b8
-diagram-three-generations-of-morenos-and = Twa jenerasyon Moreno yo, ak yon liy pwenteye bay yon fiyèl.
+diagram-three-generations-of-morenos-and = Twa jenerasyon Moreno yo, ak yon liy an pwen bay yon fiyèl.
 # en: 0e60bdf5cc3dbaa6c2018bd31c760c1e46e79ab1
 diagram-who-can-do-what = Ki moun ki ka fè kisa
 # en: b27a04f87f9d4657107a8dbd89d32eb1dedb41b7
-diagram-tap-empty-space-for-branch = Tape yon espas vid pou ajoute yon branch. Tape yon ide pou edite l, Enter pou pwochen an. Rale youn sou yon lòt pou mete l anba li. Lye konekte de atravè kat la.
+diagram-tap-empty-space-for-branch = Tape yon espas vid pou ajoute yon branch. Tape yon lide pou edite l, Enter pou pwochen an. Rale youn sou yon lòt pou mete l anba li. Lye konekte de atravè kat la.
 # en: fd23500d007e121f9530bb8b530f367ed9e00825
 diagram-place-cards = Kat plas
 # en: dd9ef7db14a8bdb18f7a266d6e91711443e71a29
@@ -2778,11 +2777,11 @@ diagram-tap-empty-space-for-person = Tape yon espas vid pou ajoute yon moun. Tap
 # en: 5f7463cc9e2e8a2e25990127091710a286d9765a
 diagram-tap-empty-space-for-event = Tape yon espas vid pou ajoute yon evènman. Tape dat la, Shift+Enter, apre sa sa k te pase. Dat yo espase dapre echèl, epi yon peryòd parèt kòm yon bann.
 # en: b6395077670d276b6a207a6eadb6f5a17c1fa854
-diagram-lanes-name = Non liy nèt la
+diagram-lanes-name = Non koulwa a
 # en: 769bb19e615b7f8e2809e5882e2d05a18f57a531
 diagram-when = Ki lè
 # en: b23ea75ecf303b9756682c84abecebc7a010f2b1
-diagram-tap-person-to-type-on = Tape yon moun pou edite l. Ajoute + ak yon non pou yon patnè, Shift+Enter pou ane yo, Enter pou pwochen an. Rale youn sou yon lòt pou mete l anba li. Lye trase yon liy pwentiye.
+diagram-tap-person-to-type-on = Tape yon moun pou edite l. Ajoute + ak yon non pou yon patnè, Shift+Enter pou ane yo, Enter pou pwochen an. Rale youn sou yon lòt pou mete l anba li. Lye trase yon liy an pwen.
 # en: 14e56ce6d5f3d8d56d2ce979bf2eb20aaa9dd93d
 diagram-tap-empty-space-for-table = Tape yon espas vid pou ajoute yon tab. Tape yon tab oswa yon moun pou edite. Yon vigil kòmanse pwochen envite a. Rale yon moun sou yon lòt tab.
 # en: 7049f105f3a76be9cb8c6d7b74eb3edf60d9a7da
@@ -2804,7 +2803,7 @@ trip-geojson = GeoJSON
 # en: 63746c80a9900aa0b9df832d6fe50b7318a88aab
 trip-a-place-by-name = Yon kote pa non…
 # en: c86d6e7640906afe6a57236c004f0b1af53b6ee8
-trip-stop-at-middle-of-map = Arè nan mitan kat la
+trip-stop-at-middle-of-map = Mete yon arè nan mitan kat la
 # en: a52fccf0e1e5beca9d5885f1638d5e9a6a2684f9
 trip-measure-in = Mezire an
 # en: 2458f1444290ced8aefad04d5c947b17bf9a81fb
@@ -2886,7 +2885,7 @@ trip-rome-places-to-see = Wòm, kote pou wè
 # en: f01c658cc1c5b1dbfba8045b885174d2f5a3d154
 trip-places-as-dots-not-route = Kote kòm pwen, pa yon wout: sa pou wè ak ki lè pou ale.
 # en: e50e4931f42687faef4a226f93981bb38a937ce9
-trip-weekend-in-copenhagen = Yon wikenn Kopenhag
+trip-weekend-in-copenhagen = Yon wikenn nan Kopenhag
 # en: 402e0be1180f76470536e904cec4f7242211bb15
 trip-friday-night-to-sundays-train = Vandredi swa rive tren dimanch lan, a pye, an kilomèt.
 # en: a5594e90d42f49b6ce9e2842193b64f380d1a10c
@@ -2912,25 +2911,25 @@ trip-six-campuses-in-new-england = Sis kanpis nan New England nan yon semèn, yo
 # en: 651b0f889a962febf3a80370511cbc08abac73da
 trip-japan-by-rail = Japon nan tren
 # en: f687060ca9b759a7ed4bca61f7a2bf96764f2f8e
-trip-tokyo-to-miyajima-in-cherry = Tokyo rive Miyajima nan sezon flè sereziye, nan tren bal.
+trip-tokyo-to-miyajima-in-cherry = Tokyo rive Miyajima nan sezon flè seriz yo, nan tren gwo vitès.
 # en: afea6c128d27238aad4e11871dfff6f692334301
 trip-last-100-km-of-camino = Dènye 100 km Camino a
 # en: 33d01f381424bbc8bbd1b6a9487b3a53c38d07e9
 trip-sarria-to-santiago-on-foot = Sarria rive Santiago a pye, yon etap pa jou.
 # en: b15aca8406aa957e0b92331f3c94b96775672e6b
-trip-new-york-in-movies = New York nan sinema
+trip-new-york-in-movies = Nouyòk nan sinema
 # en: cdd506e6983757bd11c62cbbe6a0acbbd4002303
 trip-seven-film-and-tv-locations = Sèt kote yo te filme fim ak televizyon, soti uptown rive downtown, nan yon jou.
 # en: 2cf068b9c859d837fbc257f1dc20a64d0d96b2b0
-trip-wedding-on-lake-como = Yon maryaj bò Lake Como
+trip-wedding-on-lake-como = Yon maryaj bò Lak Como
 # en: a3dec1f6e3f5856eb26a70a9c329744d499a1afc
 trip-for-guests-where-wedding-is = Pou envite yo: kote maryaj la ye, kote pou dòmi, ki jan pou rive.
 # en: 0fbbb28a6e64acfee9300ecf05016dcf149a5a19
 trip-presenting-trip = Ap prezante vwayaj la
 # en: 24848d1e92a4b831f8fdae547c2fbfdc0d1e441b
-trip-presenting-next-stop = Pwochen arè (prezante)
+trip-presenting-next-stop = Pwochen arè (an prezantasyon)
 # en: a802f6e93c981ee6dd02df366f0141ca3aa085e0
-trip-presenting-stop-before = Arè anvan an (prezante)
+trip-presenting-stop-before = Arè anvan an (an prezantasyon)
 # en: 3b14d20764a1fdef5ee74f4defab4ff20b0e7cce
 trip-put-stops-on-calendar-day = Mete arè yo sou yon kalandriye, yon jou chak
 # en: 16fa5ad4958332a6bbb1eae6d1a8c6ee6f2c7752
@@ -2950,7 +2949,7 @@ looks-serif = Serif
 # en: 70f8bb9a8a5393ef080507a89e4b98d139000d65
 common-home = Akèy
 # en: e070de224434a2acd352b35cec46f34f9e08e1b2
-looks-currency = Lajan
+looks-currency = Deviz
 
 ## the Calculator app
 
@@ -2958,7 +2957,7 @@ looks-currency = Lajan
 calc-calculation = kalkil
 # The tape is the list of lines worked out, as on a printing calculator. 'Calculator' and 'Numbers' are above.
 # en: ab4ea6f8fe06812a128297560bee7aff1be0c040
-calc-calculator-that-shows-its-work = Yon kalkilatè ki kenbe travay li: non, inite ak konvèsyon, ak graf y = f(x).
+calc-calculator-that-shows-its-work = Yon kalkilatè ki montre travay li: non, inite ak konvèsyon, ak graf y = f(x).
 # en: f146f8e93fc9312f6b8003b048cd24d1574469af
 calc-tape-text = Bann nan kòm tèks
 # The bar
@@ -2988,7 +2987,7 @@ calc-absolute-value = Valè absoli
 # en: 8e4e872b30d442c4d7f1edf2cabdff971300b607
 calc-factorial = Faktoryèl
 # en: c584662e0778e58334ec2e9f7fc7f58a98d4dca8
-calc-e-number = e, nonm lan
+calc-e-number = e, nimewo a
 # en: f3afae23c74a7d1a42a52c0c47bfeb1191b6b6e9
 calc-x-for-graph = x, pou yon graf
 # en: 1cfd7bfc7d3d79d7ea28a91bdc6e032559103831
@@ -3013,7 +3012,7 @@ calc-take-away-line-n = Efase liy { $n }
 # en: fc9ce14b28c6f2c3b72caf056ca604b2b96f7d2b
 calc-sum = Sòm
 # en: fdb6ecce95257d64ccde93310bf9a9adc8ad249e
-calc-type-or-tap = Tape oswa tape sou ekran
+calc-type-or-tap = Ekri oswa tape
 # same
 # en: e1745e3e21e84b24c379af6f45a18e1a21e56577
 calc-y = y =
@@ -3021,7 +3020,7 @@ calc-y = y =
 # en: 97e60be18b1afcca3cde2fc6df4343208cefb0a1
 calc-y-equals-ellipsis = y = …
 # en: 71f2d6a97665cb72b50a6384a06af3e014b96db5
-calc-at-x-1-answer = a x = 1: { $answer }
+calc-at-x-1-answer = lè x = 1: { $answer }
 # en: e5651c683f14c95aa972cfdbc300d9fecfe02019
 calc-keys = Touch
 # en: 88d130a66de8e5db01660642d9f23e1f0eef97dd
@@ -3038,19 +3037,19 @@ calc-type-curve-in-x-such = Tape yon koub nan x, tankou x^2 oswa sin(x), epi pez
 # en: bcb584ffecef3a17141a771a3ceedbbe6d474ca1
 calc-splitting-bill = Pataje fakti a
 # en: 0a45fc60c975ea141733f982179ead17af8767b6
-calc-food-drinks-and-18-tip = Manje, bwason ak yon pousyè 18%, pataje pou sis moun, chak etap kenbe pa non.
+calc-food-drinks-and-18-tip = Manje, bwason ak yon poubwa 18%, pataje pou sis moun, chak etap kenbe ak non li.
 # en: 2c9e678b58314997051ff2c13d56c92ea6bce7d7
 calc-shopping-total = Total makèt
 # en: d8719443b912bfaadd4f5d8fb2f1fc095f58ff52
-calc-tape-of-market-apples-and = Yon bann nan mache a: pòm ak fwomaj pa pwa, total la, ak monnen soti nan $60.
+calc-tape-of-market-apples-and = Yon bann nan mache a: pòm ak fwomaj pa pwa, total la, ak monnen sou $60.
 # en: 56d12d641f4f4177e63e120c8bd10a8e7348357f
 calc-tax-on-price = Taks sou yon pri
 # en: 8a7d0a08d1e03c2974f84aa039e7871c5b232245
-calc-new-york-city-sales-tax = Taks lavant New York ajoute sou yon pri, epi retire nan yon resi.
+calc-new-york-city-sales-tax = Taks lavant Nouyòk ajoute sou yon pri, epi retire nan yon resi.
 # en: 80296be8eee3142eb634c0045f82e15b5e5373aa
 calc-percentage-change = Chanjman an pousantaj
 # en: 93650e756cc879e41310d678219f483e5ce2cfd1
-calc-rent-up-from-1-450 = Lwaye monte de $1,450 a $1,595: konbe, konbe pousan, ak kont yon ogmantasyon.
+calc-rent-up-from-1-450 = Lwaye monte de $1,450 a $1,595: konbyen, konbyen pousan, ak kont yon ogmantasyon.
 # en: 9ff9fc7e0344944578d50820e0326f7bf34f1c8e
 calc-kitchen-conversions = Konvèsyon kizin
 # en: c7ccdb52f144fcec56adb8ecb5264f35d03600c0
@@ -3058,13 +3057,13 @@ calc-cups-ovens-spoons-and-weights = Tas, fou, kiyè ak pwa, soti nan yon mezi n
 # en: 267b3d4696b05cc65039fcf4afb8cd9548ed5a29
 calc-scaling-recipe = Ogmante yon resèt
 # en: a0e9dcbc29ed1364a4891c3671dd43675af64d11
-calc-banana-bread-for-eight-made = Gato bannann pou uit fè pou douz: chak kantite fwa youn ak mwatye.
+calc-banana-bread-for-eight-made = Pen bannann pou uit moun fè pou douz: chak kantite fwa youn ak mwatye.
 # en: 8639704eb84800c829b41e6fcd833d686dcb41f6
 calc-unit-conversions = Konvèsyon inite
 # en: 2aef2060ccb74d32576f5b1f936372bdd97252f3
 calc-feet-to-centimeters-miles-to = Pye an santimèt, mil an kilomèt, liv an kilogram, Fahrenheit an Celsius.
 # en: 7b31203b4780df1cd410c84049ed4d031dacc8e3
-calc-currency-at-rate-you-type = Lajan nan yon to ou tape
+calc-currency-at-rate-you-type = Deviz nan yon to ou tape
 # en: 5f4e47693383fd619db1b39871b821a7fccf86df
 calc-trip-priced-in-euros-and = Yon vwayaj kalkile an ewo epi chanje an dola, ak frè kat la anplis.
 # en: 6645ae7e46c209b7ba6f5fb3b6aa707395a2c3d2
@@ -3078,7 +3077,7 @@ calc-walls-less-door-and-windows = Mi yo mwens pòt la ak fenèt yo, de kouch, n
 # en: fa9aac4028931969e4e43d5926f21c1c02b03737
 calc-time-zones = Fizo orè
 # en: daa6b831387e404e18a932466e1b26486e942c1b
-calc-one-call-at-9-in = Yon apèl a 9è nan New York, ak lè l ye a Lond, Bèlen, Mumbai, Tokyo ak Sydney.
+calc-one-call-at-9-in = Yon apèl a 9è nan Nouyòk, ak lè l ye a Lond, Bèlen, Mumbai, Tokyo ak Sydney.
 # en: 4126383a0888802d508caf9f1e9a973554c6eb7e
 calc-running-pace = Vitès kous
 # en: 73e59d9404aa7a32f2e7e9ae9ff609c2a74d14cb
@@ -3094,7 +3093,7 @@ calc-milligrams-kilogram-turned-into-milliliters = Miligram pa kilogram, chanje 
 # en: 4699da98e2d343e04aa2465082aedd4d5053aa11
 calc-electricity-for-appliance = Kouran pou yon aparèy
 # en: d1b1126c73c13b523ce30bd2f563ad1a7b1c0210
-calc-watts-hours-day-and-price = Wat, èdtan pa jou ak pri yon kilowat-èdtan: konbe yon chofaj koute pa mwa.
+calc-watts-hours-day-and-price = Wat, èdtan pa jou ak pri yon kilowat-èdtan: konbyen yon chofaj koute pa mwa.
 # en: 96aeea666f6bd696d83ef3dee80fff1fcc3ff896
 calc-loan-payment = Peman prè
 # en: 9c2f158098b8fc30f79ae0d1db9391a68d8aea9a
@@ -3106,7 +3105,7 @@ calc-5-000-and-200-month = $5,000 ak $200 pa mwa a 5% pandan dis ane, kont sa ki
 # en: 813161b07c2ed5cab82b09f8c31b3810800bcd26
 calc-break-even = Pwen ekilib
 # en: bee9b48a097d165fe0d11f7c3a7175019c158c5e
-calc-costs-against-sales-for-coffee = Depans kont resèt pou yon cha kafe: kote liy yo kwaze a se konbe tas pa jou li bezwen.
+calc-costs-against-sales-for-coffee = Depans kont lavant pou yon cha kafe: kote liy yo kwaze a se konbyen tas pa jou li bezwen.
 # en: a9047269b4f64dbbb2df8503315406b2b33fc4e9
 calc-curve-and-its-slope = Yon koub ak pant li
 # en: b5f43817a99082555a1fc4891fd2eb5bfaba6e10
@@ -3140,7 +3139,7 @@ compare-paste-link-to-document-as-it-was = Kole lyen dokiman an jan l te ye
 # en: 0ae84aa126111ee639f685e9ed05c6895e632a90
 compare-put-in = Ajoute:
 # en: 210dd62a81e43d19e22018878ba665485e0526cb
-compare-swap = Chanje
+compare-swap = Chanje plas
 # en: c331654dfaed937af3dc0e72f31b21fdfb1aa325
 compare-taken-out = Retire:
 # en: aec0a618ef67ca171ab77615fc7cab57405fea3f
@@ -3200,11 +3199,11 @@ qr-code-of-this-document = Yon kòd QR dokiman sa a
 ## the keys, the shortcuts and the size of everything (kit/core/keys.ts, kit/ui/zoom.ts)
 
 # en: e5737972ceac5c184d5009e9ee1746c4b3292f26
-keys-normal-size = Remete zoum nan
+keys-normal-size = Gwosè nòmal
 # en: 4fc05f2763ba31e2d3be5f08e7d0bab5d5dcbf78
-keys-everything-larger = Zoum anlè
+keys-everything-larger = Agrandi
 # en: a4ae4b24a1f5369c2bff61abdbc221170e4b27d8
-keys-everything-smaller = Zoum anba
+keys-everything-smaller = Rapetise
 # en: 67312061f24800b7dc75b07101329959c5c1af88
 keys-keep-this-document-on-device = Anrejistre sou aparèy sa a
 # en: 4d5e11a737e63d755f4127a0139f235f3794b6c6
