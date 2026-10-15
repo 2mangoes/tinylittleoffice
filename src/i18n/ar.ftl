@@ -20,13 +20,41 @@ shell-loading = جارٍ التحميل…
 # en: 22456f903bcbdedb06221ade9b87febb47722e40
 shell-this-link-holds-something-that = لا يمكن قراءة هذا الرابط. ربما قُطع جزء منه عند نسخه.
 # en: 7dfd19fef00f41e899fb6e2753b71ae40ba59e6d
-shell-n-of-max-link-characters = بقي { $n } من { $max } حرفًا في الرابط
+shell-n-of-max-link-characters = بقي { $n } من { $max ->
+        [zero] { $max } حرف
+        [one] حرف واحد
+        [two] حرفين
+        [few] { $max } أحرف
+        [many] { $max } حرفًا
+       *[other] { $max } حرف
+    } في الرابط
 # en: 134d73b30c18c4662e6a42e4a42fbb712bbbb10a
-shell-n-characters-over-link-limit = تجاوز الرابط الحد بمقدار { $n } حرفًا
+shell-n-characters-over-link-limit = تجاوز الرابط الحد بمقدار { $n ->
+        [zero] { $n } حرف
+        [one] حرف واحد
+        [two] حرفين
+        [few] { $n } أحرف
+        [many] { $n } حرفًا
+       *[other] { $n } حرف
+    }
 # en: 1cfbe154225ecb3a01f463f1adde07279f1a454a
-shell-n-characters-over-link-limit-short-link-holds-max = تجاوز الرابط الحد بمقدار { $n } حرفًا؛ والرابط القصير يتسع لـ{ $max }
+shell-n-characters-over-link-limit-short-link-holds-max = تجاوز الرابط الحد بمقدار { $n ->
+        [zero] { $n } حرف
+        [one] حرف واحد
+        [two] حرفين
+        [few] { $n } أحرف
+        [many] { $n } حرفًا
+       *[other] { $n } حرف
+    }؛ والرابط القصير يتسع لـ{ $max }
 # en: e7722b7943884e579644a3f5bd2b605afd08a156
-shell-n-characters-over-what-short = يزيد بمقدار { $n } حرفًا عما يتسع له الرابط القصير
+shell-n-characters-over-what-short = يزيد بمقدار { $n ->
+        [zero] { $n } حرف
+        [one] حرف واحد
+        [two] حرفين
+        [few] { $n } أحرف
+        [many] { $n } حرفًا
+       *[other] { $n } حرف
+    } عما يتسع له الرابط القصير
 # Before a document that lives nowhere but its link (Private, changed) is left for another place: the question and its three answers.
 # en: f0bba930d38a38cacb48e472c8d4856caa4d8fa8
 shell-this-document-lives-in-its = هذا المستند غير محفوظ
@@ -49,13 +77,13 @@ shell-keyboard-shortcuts = اختصارات لوحة المفاتيح
 # en: bc447a3151935ceff76e781c90fb02c45d25f004
 shell-nothing-to-keep-yet = لا شيء للحفظ بعد
 # en: 8c00f9130260156b1612126a7cf9a23bb3c553d6
-shell-open-it = افتحه
+shell-open-it = فتح
 # en: ef6e207cc7cea57220ad9a73fc6040b0085bf63e
 shell-save-in-browser-is-off = «الحفظ في المتصفح» متوقف، لذا لا يُحفظ شيء. شغّله من القائمة.
 # en: 3939d97295147954c5488340b1f427ebbfa51e69
-shell-skip-to-apps = تخطّ إلى التطبيقات
+shell-skip-to-apps = الانتقال إلى التطبيقات
 # en: 286b3810e407b3cef40b582c8ca4b373a58445bf
-shell-skip-to-document = تخطّ إلى المستند
+shell-skip-to-document = الانتقال إلى المستند
 # en: 03d9aea1885137ab8ab4d9c24250515cb44161f0
 shell-this-device-keeps-another-version = نسخة أخرى من «{ $title }» ({ $when }) محفوظة على هذا الجهاز.
 # en: 25c53c58cba7054a3a2ae9e9b575c7888716ae94
@@ -94,14 +122,14 @@ home-templates-for-app-name = قوالب { $app }: { $name }
 # en: 9b96d854dd8e79adb3ee6e1e0e419b50fc1aed43
 home-templates-are-not-saved-in = القوالب غير محفوظة في هذا المتصفح بعد. اتصل بالإنترنت لرؤيتها.
 # en: 25d37d0580af5bc389b9332f3640f6d73ef93e48
-home-documents-found = المستندات التي وُجدت
+home-documents-found = المستندات المطابقة
 # en: 5e46670f6fe68987a7e5c94f03e192aff635df77
 home-no-document-here-has-those = لا مستندات مطابقة
 # en: 1dfc2a61eb2345a48a2a91b7922b83f580553732
-home-search-your-documents = ابحث في مستنداتك
+home-search-your-documents = البحث في مستنداتك
 # en: 4f5fbd7fb6a16b16ebe3c347bf43c9a2455a1560
 home-n-documents-found = { $n ->
-        [zero] لا مستندات وُجدت
+        [zero] لم يُعثر على مستندات
         [one] وُجد مستند واحد
         [two] وُجد مستندان
         [few] وُجدت { $n } مستندات
@@ -136,7 +164,7 @@ drawer-language = اللغة
 # en: a797e30923ac1be590300ce6b08e63b4e6dc6688
 common-theme = المظهر
 # en: 15360c25a66578ad69e81e4c2fc3f0001e8a2258
-drawer-match-device = مطابقة الجهاز
+drawer-match-device = حسب الجهاز
 # en: a36ef8aba22905e2d2efbf1ac1d6230d5761859d
 drawer-light = فاتح
 # en: ae1ef01432946b8976b9b58575b3390ab7644db2
@@ -166,7 +194,7 @@ drawer-discoveries = اكتشافات
 # en: 687c82861c956e47456186f6522cfc8dbadb8ef6
 drawer-documents = المستندات
 # en: a5c79e56eede8d4e922d461872629a01dd41ab77
-drawer-find-app-template-or-command = ابحث عن تطبيق أو قالب أو أمر
+drawer-find-app-template-or-command = البحث عن تطبيق أو قالب أو أمر
 # en: 45e5f3f72e961cb70134ba35f7a27a9620e515f7
 drawer-commands = الأوامر
 # en: b993b0c537190bfc94b21360ac5abe51e56be36f
@@ -260,7 +288,7 @@ share-opens-in-editor = يُفتح في المحرر
 # en: 7fbbb75c4e853ef0e42da5fe316344fdf1a6143c
 common-whoever-opens-this-link-gets = كل من يفتح هذا الرابط يحصل على نسخته الخاصة. لن تظهر تغييراته في نسختك. اطلب منه أن يرسل إليك رابطه.
 # en: 94b01acececc033463cc7731d659fbcae11c2b47
-share-short-link-that-expires = رابط قصير ينتهي
+share-short-link-that-expires = رابط قصير مؤقت
 # en: fed3d23d480dd0bfe5a0cfff4d9f3dae7857fbe6
 share-this-link-expires-in-n = ينتهي هذا الرابط خلال { $n ->
         [zero] { $n } يوم
@@ -289,9 +317,23 @@ share-this-link-expires-in-n-minutes = ينتهي هذا الرابط خلال {
        *[other] { $n } دقيقة
     }
 # en: 04609a8df41f042b261ed7cf06b80c2667badd0e
-share-this-link-n-characters-fits = هذا الرابط: { $n } حرفًا، يناسب رسالة نصية
+share-this-link-n-characters-fits = هذا الرابط: { $n ->
+        [zero] { $n } حرف
+        [one] حرف واحد
+        [two] حرفان
+        [few] { $n } أحرف
+        [many] { $n } حرفًا
+       *[other] { $n } حرف
+    }، ويناسب رسالة نصية
 # en: 822e1dca627d6149b0263bdae6477ca56c62a36c
-share-this-link-n-characters-too = هذا الرابط: { $n } حرفًا، طويل جدًا على { $where }
+share-this-link-n-characters-too = هذا الرابط: { $n ->
+        [zero] { $n } حرف
+        [one] حرف واحد
+        [two] حرفان
+        [few] { $n } أحرف
+        [many] { $n } حرفًا
+       *[other] { $n } حرف
+    }، وهو طويل جدًا بالنسبة إلى { $where }
 # en: f9551d11c51a8da0015b0716e3aab327784b2ec2
 share-discord-message = رسالة ديسكورد
 # en: 36dec9aa0b166bef869350675231f78529bbabd8
@@ -322,7 +364,7 @@ share-n-short-links-kept-here = { $n ->
 # en: fbdda8ea6ae4f71eb78a8bd78fa2746784806ffe
 share-display-link = رابط العرض
 # en: 54c374d4a68f528c4c4022d195a62e22b4bf57bb
-share-opens = يفتح
+share-opens = طريقة الفتح
 # en: c2e98476efb5e35f50dae898c1b56d7085eee7da
 share-link-copied = تم نسخ الرابط
 # en: 4dfbe46077fcd9769d6688a682515a0cf12a7d80
@@ -336,7 +378,14 @@ common-qr-code-of-this-document = رمز QR لهذا المستند
 # en: 5987984bd3953aa88448226f480b1c67ad98ab52
 share-this-document-is-n-bytes = حجم هذا المستند { $n } بايت، وأكبر رمز QR يتسع لـ{ $max }. اختصره بمقدار { $over } بايت ليناسب.
 # en: 716ebea121ec7b8a4dd9ea47314131122cf0aab1
-share-this-document-is-n-characters = حجم هذا المستند { $n } حرفًا، والرابط القصير يتسع لـ{ $max }. اختصره بمقدار { $over } ليناسب.
+share-this-document-is-n-characters = طول هذا المستند { $n ->
+        [zero] { $n } حرف
+        [one] حرف واحد
+        [two] حرفان
+        [few] { $n } أحرف
+        [many] { $n } حرفًا
+       *[other] { $n } حرف
+    }، والرابط القصير يتسع لـ{ $max }. اختصره بمقدار { $over } ليناسب.
 # en: ae5014875f1eec5203f8744323723d2ee679d1cc
 share-expires-after = ينتهي بعد
 # en: 1e1c72c2e33894ad38b820f1d4ed17ef478067be
@@ -352,7 +401,7 @@ share-make-short-link = إنشاء رابط قصير
 # en: 94d7d8ee473f817fa4b57737e7a01ec3cd13d4d4
 share-making = جارٍ الإنشاء…
 # en: 1c6c031b40782efe6b28678fc42d5569cc11e029
-share-hundred-links-day-from-one = بلغت الحد: 100 رابط قصير يوميًا لكل عنوان. حاول مجددًا غدًا.
+share-hundred-links-day-from-one = تم بلوغ الحد: 100 رابط قصير يوميًا لكل عنوان. حاول مجددًا غدًا.
 # en: 0b5140c5b10a2b84301b5ef43056b7d89bd2187c
 share-short-link-cannot-be-changed = لا يمكن تعديل الرابط القصير أو حذفه. تنتهي صلاحيته تلقائيًا.
 # en: 4d9182a72e391841c2817e9943cf2b07adf70220
@@ -377,13 +426,13 @@ share-change = تغيير
 # en: 2a07ce9a22d8e5dc1031e531518f04e50855319f
 share-copy-embed-code = نسخ شفرة التضمين
 # en: c3e1c83e5b4172d3c738e37cb69b76d93ce49b8b
-share-copy-show-link = نسخ رابط العرض
+share-copy-show-link = نسخ رابط بدء العرض
 # en: ad02e14e2841dfbd22ab2caa12b5541c5b01a53a
 share-embed = تضمين
 # en: 4eeede7134d362f371fd18b2d63d3199bb24f01a
 share-embed-code-copied = تم نسخ شفرة التضمين
 # en: 682cbb0f328f16ee213c6b44d7012512b55506b7
-share-opens-deck-already-presenting = يفتح العرض وهو يعرض بالفعل.
+share-opens-deck-already-presenting = يفتح العرض التقديمي في وضع العرض مباشرةً.
 # en: 7858ac3ff63354f37161bd349efe11edd13b89cb
 share-post = نشر
 # en: c68fca11627c0ac342583c1782892518730cc40b
@@ -411,11 +460,11 @@ share-pages-in-frame-on-another = الصفحات، في إطار على موقع
 # en: 9377de06278eacbdf4a297a82b8eb9aa3d4220c0
 share-your-mastodon-server = خادم Mastodon الخاص بك
 # en: 8ae1c34bd37fad49cc5f8e02da648a78e89c3ed8
-share-left = اليسار
+share-left = المتبقي
 # en: 62be4731dedfbbc70aa7fa30d6649d816af8ca4b
-share-uses = يستخدم
+share-uses = المستخدَم
 # en: 525f61b6729229b1a8854a9e50bcaa52ea96b131
-share-where = أين
+share-where = المكان
 # en: cdbfed741d905515df704d9585fc74781801a24d
 share-where-link-fits = هل سيتسع هذا الرابط؟
 # en: ddba25b7aa2e43ef1c94a2a8cfb8b839fb723ca2
@@ -431,7 +480,7 @@ privacy-anyone-with-link-will-need = سيحتاج كل من لديه الراب�
 # en: 8c684290ce0b8a8e6cee79a145e17554064a4760
 privacy-change-password = تغيير كلمة المرور
 # en: 5be0d11b94b1ba25b2579314f6af69649a900cde
-privacy-created-date = أُنشئ { $date }
+privacy-created-date = أُنشئ في { $date }
 # en: 39e64aebf907392389952dded5e20ab4836d876a
 privacy-enter-password-to-open-this = أدخل كلمة المرور لفتح هذا المستند.
 # en: 554393a215e479d023a30091a1394f7ca57690e1
@@ -525,11 +574,11 @@ privacy-n-links = { $n ->
        *[other] { $n } رابط
     }
 # en: 2ddd4097832d991c46023732a889beeb8ec4c29d
-privacy-n-set = { $n } معيّنة
+privacy-n-set = مضبوطة: { $n }
 # en: a97ce1edde4ad396d1cff34063087d0bf5d0e1a8
 privacy-copy-this-and-send-it = انسخ كلمة المرور هذه وأرسلها بعيدًا عن الرابط. لن تظهر مرة أخرى.
 # en: 7640428ae16fc2b673d689ddf6b1ea15eed407d3
-privacy-make-another = أنشئ غيرها
+privacy-make-another = إنشاء كلمة أخرى
 # en: 9a0081f0b2bff82fac1961a403734134b9a3b170
 privacy-password-copied = تم نسخ كلمة المرور
 
@@ -580,7 +629,7 @@ common-task = مهمة
 # en: 090ec5f560fc50377fcd95e5cda128e91b276e98
 common-tasks = المهام
 # en: 1835508670fb85faefa88cd88d4f57d3cdb00716
-common-find-app-doc-template-or = ابحث عن تطبيق أو مستند أو قالب أو أمر
+common-find-app-doc-template-or = البحث عن تطبيق أو مستند أو قالب أو أمر
 # en: 0d47323c5ee8dde30a5ca28f6ed6103d42081b97
 common-in-this-document = بحث في هذا المستند
 # en: 733a5f2fb910bb704c7993cae3d8224558d405de
@@ -600,7 +649,7 @@ common-next-or-one-before = التالي أو السابق
 # en: b4365b2ed2016713788d08335e5157985010ac28
 common-step-out-close-collapse-let = إغلاق أو إلغاء التحديد
 # en: fb2997642419cda8393061543f140d40a9323957
-common-check-or-uncheck-task = تعليم مهمة أو إلغاء تعليمها
+common-check-or-uncheck-task = وضع علامة على مهمة أو إزالتها
 # en: 0a4adf12f01d48ecdb89f5eddf5f19fd89d94522
 common-too-long-for-qr-code = أطول من أن يناسب رمز QR: اختصر المستند، أو شارك رابطًا قصيرًا.
 # en: 1e14a1c5e931f6ef8ce8378377366f3c68cef56c
@@ -677,7 +726,7 @@ common-noun = { $noun }
 # en: adac69379a626c2436948a4ef1792c7d719ef929
 editor-code = رمز برمجي
 # en: 6512ee1541e9a6c52d5bf7cf465332e8df25ea3c
-editor-connection = اتصال
+editor-connection = وصلة
 # en: 86ccb2898e6f07a6967cf007c54e365e26ba776c
 editor-n-rows = { $n ->
         [zero] لا صفوف
@@ -700,7 +749,7 @@ editor-set-link = تعيين الرابط
 # en: d2de1a2831e7fee28d6c8d214b66da0d1bed30c8
 editor-open-link = فتح الرابط
 # en: f377ac75602950b2c36449de5bceb3c12333ac77
-editor-change-link = تحرير الرابط
+editor-change-link = تغيير الرابط
 # en: 8d48d1f9e74c4fecd89a67645ca3593ef0964710
 editor-remove-link = إزالة الرابط
 # The selection bubble's name: what can be done to the words selected.
@@ -842,7 +891,7 @@ write-a-letter = رسالة
 # en: 7456f1ce5f81c497b66302751f617f60612306f6
 write-your-address-date-greeting-point = عنوانك والتاريخ والتحية والمقصد والخاتمة.
 # en: ae3cd6584a49de52c70c1e00ae0a02c8abab166b
-write-meeting-notes = محضر اجتماع
+write-meeting-notes = ملاحظات اجتماع
 # en: 7bbe470d4a5d9510c0fcb6844b519d118681beb7
 write-agenda-what-was-said-what = جدول الأعمال وما قيل وما تقرر ومن يفعل ماذا.
 # en: 9fb58963c66db0c8ca7c638f491e82246e226d30
@@ -860,27 +909,27 @@ write-who-what-and-how-much = من وماذا وكم، والحسابات في �
 # en: 80c40a5c8be53118fd8a9fc487b43f20c3014fbc
 write-cover-letter = رسالة تقديم
 # en: fe727759e1b85df4a1d71348a1a6dfd6ef8e135d
-write-applying-for-job-position-what = التقدم لوظيفة: المنصب وما أنجزته ولماذا هم، في أربع فقرات قصيرة.
+write-applying-for-job-position-what = التقدم لوظيفة: المنصب وما أنجزته ولماذا هذه الجهة، في أربع فقرات قصيرة.
 # en: 1fd79b9555ddf59862d60aa0aa3bb74fb74aae78
 write-memo = مذكرة
 # en: cfa5a189ad757d015661acb500917a198d8a13e1
-write-to-from-date-and-subject = إلى ومن والتاريخ والموضوع؛ التغيير في جملة، ولماذا، وما تحتاجه في المقابل.
+write-to-from-date-and-subject = إلى ومن والتاريخ والموضوع؛ التغيير في جملة، ولماذا، وما تحتاجه من ردّ.
 # en: 092f99ea11a34a8490e7a767a83a42fc45634f82
-write-minutes = محضر رسمي
+write-minutes = محضر اجتماع
 # en: 34dbbbeddd62f120a000701c56adebc8bae95352
 write-formal-meeting-who-came-treasurers = اجتماع رسمي: من حضر وحسابات أمين الصندوق واقتراح وتصويته والمهام.
 # en: e04a25d1f69061bfe7770b16891fca2c413bcbe0
 write-one-page-cv = سيرة ذاتية في صفحة
 # en: 11628c83c5de19d1338628ed7153b648f496b27c
-write-typewriter-set-cv-now-before = سيرة ذاتية بحروف الآلة الكاتبة: الآن وقبلها والتعليم واللغات والأدوات.
+write-typewriter-set-cv-now-before = سيرة ذاتية بحروف الآلة الكاتبة: العمل الحالي والسابق والتعليم واللغات والأدوات.
 # en: 6ed05e720ccc3ef269db1b38201da8b873acc895
 write-newsletter = نشرة
 # en: e583899cf44dbc07e6d8d4e7a252d39552e4e3d4
-write-block-associations-month-dates-in = شهر جمعية حي: المواعيد في جدول وترحيب وأخبار وشكر.
+write-block-associations-month-dates-in = نشرة جمعية الحي الشهرية: المواعيد في جدول، وترحيب وأخبار وشكر.
 # en: 1dcda804c96da3cc7e73e8a1672d4379a741f11a
 write-recipe = وصفة
 # en: 72490fa559ee9ce5ed498b58b3e2cad900af7155
-write-what-you-need-in-table = ما تحتاجه، في جدول يتدرج من أربعة إلى ستة، وكيف تصنعه خطوة خطوة.
+write-what-you-need-in-table = ما تحتاجه، في جدول تتغير كمياته من أربع حصص إلى ست، وطريقة التحضير خطوة خطوة.
 # en: aa3ddab4d749b73414ddd65201f9c6553b98a49b
 write-questions-and-answers = أسئلة وأجوبة
 # en: 1854b96dd11603bed03cce723369ef661a6f34f8
@@ -892,7 +941,7 @@ write-news-in-first-line-detail = الخبر في السطر الأول، ثم �
 # en: 0c30f8a886ae8207e0702b4daf5eda405b19a131
 write-news-article = مقال إخباري
 # en: 66280b179ec208e759c8fd7e05a4b1171c355c9f
-write-headline-byline-story-in-two = عنوان وسطر التوقيع والقصة في عمودين على الورق، ومخطط للأرقام.
+write-headline-byline-story-in-two = عنوان واسم الكاتب والقصة في عمودين على الورق، ومخطط للأرقام.
 # en: 19ad8ec7231e0cc9d9ea7e0684742672018e1f05
 write-interview = مقابلة
 # en: a8d0cc9ab05d2f4925e897a47c9c9554e289fb4e
@@ -912,7 +961,7 @@ write-title-page-abstract-chapters-with = صفحة العنوان وملخص و�
 # en: 42921f1b739a62eb82bc6f16ce47ff5ce5fd4da4
 write-grant-proposal = طلب منحة
 # en: 381d823ac8ecdff832331120748c151a113b2464
-write-ask-need-plan-budget-that = الطلب والحاجة والخطة وميزانية تُحسب ومعرفة نجاح العمل.
+write-ask-need-plan-budget-that = الطلب والحاجة والخطة وميزانية تُحسب، وكيف ستعرف أن العمل نجح.
 # en: 1b731d688386e2e229d1c2b671e96c2bfce768a4
 write-syllabus = مفردات المقرر
 # en: fc9a91d648763f9cd04a596f372b833e76f709f8
@@ -920,15 +969,15 @@ write-course-when-and-where-what = مقرر دراسي: متى وأين وموض
 # en: 3c847b9cd456626c998b9d2793f7701117ee4c80
 write-formal-complaint = شكوى رسمية
 # en: f98daa2b60c626279045f82029a9e58dfcd90f4b
-write-what-happened-in-order-what = ما حدث بالترتيب؛ وما تريده؛ وبحلول متى، قبل أن تمضي أبعد.
+write-what-happened-in-order-what = ما حدث بالترتيب؛ وما تريده؛ والمهلة قبل أن تصعّد الأمر.
 # en: f74c6bc075b1961f73f45729ce6281dc84fb3ccf
 write-letter-to-politician = رسالة إلى سياسي
 # en: 2e754026e13e7ebe41d9513e31f94d8268341243
-write-ask-your-representative-for-vote = اطلب من ممثلك تصويتًا: من أنت ولماذا يهم هنا وسؤال.
+write-ask-your-representative-for-vote = اطلب من ممثلك أن يصوّت: من أنت، ولماذا يهم الأمر هنا، وسؤال.
 # en: de21096f37522d15740e7a4acd69efc811f9b5ce
 write-love-letter = رسالة حب
 # en: a6977a11c96b06575fd8359e1bb9e3dea5a21fcf
-write-ordinary-things-missed-letter-across = أشياء عادية مشتاق إليها: رسالة عبر المسافات بخط بزوائد.
+write-ordinary-things-missed-letter-across = أشياء عادية نشتاق إليها: رسالة عبر المسافة، بخط بزوائد.
 # en: 1af339528a1814a5f1dc409f2d108e0308035b87
 write-wedding-speech = كلمة حفل زفاف
 # en: b040a94a7bd386ebaee15aa4c4535da004fadc4c
@@ -938,7 +987,7 @@ write-eulogy = كلمة تأبين
 # en: cdc87e623e95678f786543dd272ba279df15e8ee
 write-life-in-few-minutes-where = حياة في بضع دقائق: أين بدأت ومن كان وما ستفتقده.
 # en: 6c63ce6d4727a3fb46c16a62ac8d536b0b61fd08
-write-zine-essay = مقال مجلة صغيرة
+write-zine-essay = مقال لمجلة مستقلة
 # en: ecce024c73aadb2150552b3419d5aa1c3cb72c17
 write-personal-essay-for-small-magazine = مقال شخصي لمجلة صغيرة، بحروف الآلة الكاتبة.
 # en: 563a631aba8690962836c99d15886672eb96ef62
@@ -948,16 +997,17 @@ write-what-you-ask-why-and = ما تطلبه ولماذا وأسماء المو�
 # en: a6a1d25b018c9318540556e3fe374fdf8b23aff8
 write-terms-of-service = شروط الخدمة
 # en: 79b220d914e24eb7ac79428e72639e8547d8ab9a
-write-small-businesss-terms-in-plain = شروط عمل صغير بكلمات بسيطة: الحجز والأسعار والمفاتيح وماذا لو وكيف ينتهي.
+write-small-businesss-terms-in-plain = شروط مشروع صغير بكلمات بسيطة: الحجز والأسعار والمفاتيح والحالات الطارئة والإنهاء.
 # en: fe3b114dccf2739f949d65ac4101037eb8f92543
 write-open-as-outline = فتح كمخطط تفصيلي
 # same
 # en: de69a629f9c30af3f481110f0f42a7c0c5efacfb
 write-a4 = A4
+# same
 # en: ee14050617b7b58e17aabccd61c241ccdafc6379
-write-letter = ورق رسائل
+write-letter = Letter
 # en: c036e85b63c6818f6732a2898cf85f30f8074bfb
-write-name-this-column = سمِّ هذا العمود
+write-name-this-column = تسمية هذا العمود
 
 ## Insert's dialog (kit/ui/insert-dialogs.ts): Tiny Little Office Doc
 
@@ -999,7 +1049,7 @@ common-lines = خطوط
 # en: 5a2f5ac996eef952d239a22e8d68296faf975994
 chart-nothing-to-chart-yet = لا شيء لرسمه بعد
 # en: 7631740b7c7b5a09ad168ae28580b5c9ca4b8c06
-chart-nothing-to-chart-yet-rows = لا شيء لرسمه بعد: صفوف من من | إلى | المقدار
+chart-nothing-to-chart-yet-rows = لا شيء لرسمه بعد: صفوف بصيغة من | إلى | المقدار
 # en: 9318d4f63aeffddc47d4520c722ad70f0ec6c63a
 chart-pie = دائري
 # en: 40c20d94e78fa142819df8cc9440d30e65329975
@@ -1016,7 +1066,7 @@ sheet-fit-this-column-to-its = ملاءمة هذا العمود لنصه
 # en: b92fe41ac34453cd0368f0fa5d00d1e9b0279c12
 sheet-cells-in-hand = الخلايا المحددة
 # en: 119faf17cd1de268ce34ade4f9bae4520774f640
-sheet-check-ref = تحديد { $ref }
+sheet-check-ref = وضع علامة في { $ref }
 # The column type that holds words as typed.
 # en: c3328c39b0e29f78e9ff45db674248b1d245887d
 common-text = نص
@@ -1041,15 +1091,15 @@ sheet-training-log = سجل التمرين
 # en: d5b29b7fbac7da4d79a420a8108f0c98bb1ab61a
 sheet-what-you-did-and-how = ما فعلته وكم، سطر في كل مرة؛ ومجموع لكل نوع.
 # en: 4d89a20e90ff128c4329c067414e272156b4b196
-sheet-project-tracker = متابع المشاريع
+sheet-project-tracker = متابعة المشروع
 # en: a9f287fb1ede11b35e739a207cac5eddcfd2116d
 sheet-tasks-with-owners-start-and = مهام بأصحابها وتواريخ بدء وموعد تُحسب من اليوم وعدد الأيام وحال كل مهمة، وعلامة عند الإنجاز.
 # en: 83c8cb0557f1a8ab76094b2801ae0b4cd23e4741
 sheet-loans-compared = مقارنة القروض
 # en: 8ae3fb1476eab673ec96c9e2614cad18cbd6f497
-sheet-amount-rate-and-years-for = المبلغ والفائدة والسنوات لكل قرض؛ والقسط الشهري (PMT) وكلفته الكلية والفائدة.
+sheet-amount-rate-and-years-for = المبلغ وسعر الفائدة والسنوات لكل قرض؛ والقسط الشهري (PMT) وكلفته الكلية والفائدة.
 # en: 53f4e4eb1a489c6a14658993062fc985a80bd775
-sheet-subscription-business = عمل قائم على الاشتراكات
+sheet-subscription-business = مشروع اشتراكات
 # en: f14ffb32b12ec6d73e3971054ddf5248de50852a
 sheet-visitors-who-sign-up-pay = زوار يسجّلون ويدفعون ويبقون: نموذج بتدفقات، وبجانبه الافتراضات لتغييرها.
 # en: 2f6636a8892aa5d7f9781b630c2131dc8652a7f1
@@ -1057,17 +1107,17 @@ sheet-cafe = مقهى
 # en: ce157b2ac144f603ec936234eb69d9d524c3354f
 sheet-customers-day-what-they-spend = زبائن في اليوم وما ينفقونه، وأين تذهب إيرادات الشهر: المؤن والإيجار والأجور والربح.
 # en: 27f8244e11467491805da5dcaace666e1176df07
-sheet-freelancer = مستقل
+sheet-freelancer = عامل مستقل
 # en: c7da5aec39e9bdd23c061f2f34a9ecb65f9f20a2
 sheet-hours-rate-and-weeks-make = الساعات والسعر والأسابيع تصنع فواتير السنة؛ تُخصم المصروفات والضريبة؛ وما يبقى هو صافي دخلك.
 # en: 53ca3d56131df7985cdd58b24a369278bce0d723
 sheet-mutual-aid-fund = صندوق تكافل
 # en: 4df80f44a8c21f77f84393546555c9ab3224fe85
-sheet-monthly-donors-and-one-off = المتبرعون الشهريون والتبرعات المفردة تملأ الصندوق؛ تخرج منه المنح وإدارة صغيرة واحتياطي.
+sheet-monthly-donors-and-one-off = المتبرعون الشهريون والتبرعات لمرة واحدة تملأ الصندوق؛ وتخرج منه المنح ونفقات إدارية قليلة واحتياطي.
 # en: 992dbb972d7850082f91f3f43d7b68391091a32e
 sheet-month-by-month-with-chart = شهرًا بشهر، مع مخطط
 # en: 876c69fa93189c4e89f57aeec964d0573e61be81
-sheet-this-year-against-last-line = هذه السنة مقابل الماضية، سطر لكل شهر، برسم خطوط.
+sheet-this-year-against-last-line = هذه السنة مقابل السابقة، سطر لكل شهر، في مخطط خطي.
 # en: 467dda8775e7e01a3dacd9ff5d247da7caf931d3
 sheet-household-budget-by-month = ميزانية المنزل بالشهر
 # en: f61119c5b20c1ed2360f6aa2b583872a1fc9c474
@@ -1077,9 +1127,9 @@ sheet-savings-goal = هدف الادخار
 # en: 49ff61e9d2d6e99106df2e02e7a626aa5186c112
 sheet-what-went-in-each-month = ما أُودع كل شهر، وما ادُّخر حتى الآن وما بقي، والهدف بجانبه لتغييره.
 # en: ca1ec97c50f7647ef3588d5de58af33939c01646
-sheet-habit-tracker = متابع العادات
+sheet-habit-tracker = متابعة العادات
 # en: 7a2638dee7c38146953a64566dbd8fc8ea77d8d4
-sheet-four-habits-checked-off-day = أربع عادات تُعلَّم يومًا بيوم لأسبوعين؛ كم حُفظ من كل يوم، وكم يومًا لكل عادة.
+sheet-four-habits-checked-off-day = أربع عادات تُعلَّم يومًا بيوم لأسبوعين؛ نسبة الالتزام في كل يوم، وعدد أيام كل عادة.
 # en: d80f6ec7eac0c80248e2c7b452e21f89673449f2
 sheet-reading-list = قائمة القراءة
 # en: c809293d68f1061cf7062072d2efc8fe95fe9262
@@ -1095,7 +1145,7 @@ sheet-weeks-hours-by-client-and = ساعات أسبوع بحسب العميل و
 # en: da7a3e11a9c1686127720177adfd2bbfed7224e0
 sheet-trip-costs-split = تقاسم تكاليف الرحلة
 # en: bcc455f94ab37c41dad441a4152ac7961c3118ad
-sheet-who-paid-for-what-on = من دفع ماذا في رحلة لأربعة؛ نصيب كل واحد العادل، وما يدين به (الناقص يعني مبلغًا يُسترد).
+sheet-who-paid-for-what-on = من دفع ماذا في رحلة لأربعة أشخاص؛ النصيب العادل لكل واحد، وما عليه (القيمة السالبة مبلغ يُردّ إليه).
 # en: 3fcd3bd6c3c0517dc23b7c9c8a424a6ba7c30c9a
 sheet-schedule-with-dates = جدول زمني بتواريخ
 # en: 9cfdf52e38ee970ebd6feac438c7d2cb6abd25c5
@@ -1107,11 +1157,11 @@ sheet-classs-grades-for-essays-quizzes = درجات صف في المقالات �
 # en: 7d9ac107a69e997e571bd6906b535f6802bc5569
 sheet-membership-roll = سجل الأعضاء
 # en: 3bc0a32ca3d296ee9217f44adf3cf4d3c3dbd080
-sheet-who-belongs-their-plot-and = من ينتمي وقطعته وعمله ومتى دفع ومتى يجدد ومن يحمل مفتاحًا والرسوم المقبوضة.
+sheet-who-belongs-their-plot-and = الأعضاء وقطعة كل منهم ومهمته، ومتى دفع ومتى يجدد، ومن يحمل مفتاحًا، والرسوم المحصّلة.
 # en: b884fda377a19ce445f8ec49bd90f2784834978c
 sheet-seating-count = عدد المقاعد
 # en: 4e00db4efd970061e8ff6cd63f723c7385ad1637
-sheet-tables-for-wedding-seats-guests = طاولات حفل زفاف: المقاعد والضيوف والأماكن الشاغرة والوجبات المختارة، مع تحقق من أن الوجبات تجمع صحيحًا.
+sheet-tables-for-wedding-seats-guests = طاولات حفل زفاف: المقاعد والضيوف والأماكن الشاغرة والوجبات المختارة، مع تحقق من تطابق مجموع الوجبات.
 # en: 8a535a1def73648a0a55a9bfa21c9d370e434ce5
 sheet-poll-results = نتائج استطلاع
 # en: df60ac32ce5b04bf11e53f97d296db53c2a2cda2
@@ -1119,7 +1169,7 @@ sheet-answers-and-votes-for-each = الإجابات والأصوات لكل من
 # en: bfee938677dd9bf5dab2de4f9558c07a06d616fd
 sheet-fundraising-thermometer = مقياس جمع التبرعات
 # en: f6873b16e788104f3e409c1c06243db77d2a6e04
-sheet-what-has-come-in-week = ما وصل أسبوعًا بأسبوع مقابل الهدف: مخطط فوقه، والمجموع حتى الآن بخط كبير.
+sheet-what-has-come-in-week = ما وصل أسبوعًا بأسبوع مقابل الهدف: مخطط في الأعلى، والمجموع حتى الآن بخط كبير.
 # en: 20ded69e290360ef0be6b1fd22e648ca398d7ed3
 sheet-invoice-ledger = دفتر الفواتير
 # en: 2404f6c1a633f188d6395d7b35f7dd1486c597b6
@@ -1129,9 +1179,9 @@ sheet-inventory = المخزون
 # en: cca3ceb6d79e8c2e922aa21c8675223c1b96c275
 sheet-stock-on-hand-against-point = المتوفر مقابل حد إعادة الطلب؛ ما يُطلب وقيمته وعلامة عند نقصه.
 # en: ba8d2875e56e1ee2a745057f4de807182be4bb9b
-sheet-petty-cash = مصروف نقدي صغير
+sheet-petty-cash = صندوق النثريات
 # en: 8c7a0a9d0703152466c522d2d8bbd55cfcea218d
-sheet-money-in-and-out-of = المال الداخل إلى العلبة والخارج منها، ومن أنفقه وعلى ماذا، والرصيد بعد كل حركة، وعلامة للإيصال.
+sheet-money-in-and-out-of = المال الداخل إلى صندوق النقد والخارج منه، ومن أنفقه وعلى ماذا، والرصيد بعد كل حركة، وعلامة للإيصال.
 # en: dca1686c53daf52f46495f2a961a3346006e41ac
 sheet-rate-card = قائمة الأسعار
 # en: 1a3c8694038b9c6d56a26e131d62c3616e165a77
@@ -1143,11 +1193,11 @@ sheet-four-offers-on-one-house = أربعة عروض لبيت واحد: القر
 # en: 54695e5df6ef00663252186d998a600f9bac4c58
 sheet-unit-converter = محوّل الوحدات
 # en: d2e0c086c77046805d1cc8934044bb315bf00aec
-sheet-miles-and-kilometers-pounds-and = الأميال والكيلومترات، والأرطال والكيلوغرامات، والأفران والأكواب والغالونات: اكتب مقدارًا واقرأ الوحدة الأخرى.
+sheet-miles-and-kilometers-pounds-and = الأميال والكيلومترات، والأرطال والكيلوغرامات، ودرجات حرارة الفرن والأكواب والغالونات: اكتب مقدارًا واقرأ الوحدة الأخرى.
 # en: 9d2911edf283fc08872808d554a1017460fbe86f
 sheet-tournament-bracket = جدول البطولة
 # en: ad907a82b59f9d64761c80d6b2fe13c2a3b04fc2
-sheet-eight-teams-single-elimination-each = ثمانية فرق في خروج المغلوب: نتيجة كل مباراة، والفائز محسوب، والفائزون ينتقلون إلى النهائي.
+sheet-eight-teams-single-elimination-each = ثمانية فرق بنظام خروج المغلوب: نتيجة كل مباراة، والفائز محسوب، والفائزون ينتقلون حتى النهائي.
 # same
 # en: 0e2d6a433d926deb1903e03f166c76cd50bd542d
 sheet-excel-xlsx = Excel (XLSX)
@@ -1163,7 +1213,7 @@ sheet-empty-sheet = ورقة فارغة
 # en: 2decd02b722b692c9d30d7de5e0c1191d1968de7
 sheet-n-of-max-shown = (يظهر { $n } من { $max })
 # en: 9e85be5a97dd107512bd06368b695b4265a662c9
-sheet-50-more-rows = 50 صفًا أخرى
+sheet-50-more-rows = 50 صفًا إضافيًا
 # en: 46dd847f36799647b69659ed71327486c70728ea
 common-add-column = إضافة عمود
 # en: dff758e7f1104295adde7af1bb92396f6c7c88a7
@@ -1195,7 +1245,7 @@ sheet-drag-to-resize-double-click = اسحب لتغيير الحجم، وانق�
 # en: 363a9922cf56c76397d7b72ae8425d30d0438b33
 sheet-fill-down-from-top-row = تعبئة لأسفل من الصف الأول
 # en: 549a401f55bc461388a4f5f8554db5e0749d0a28
-sheet-fill-right-from-first-column = تعبئة لليسار من العمود الأول
+sheet-fill-right-from-first-column = تعبئة أفقية من العمود الأول
 # en: 51f5ba33dabbc2c8aa4e3e640e0b27cb55aea1be
 common-fill-drag-to-carry-these = اسحب للتعبئة
 # en: 4425eb9442fea0435d290b7a34f1ad8a6980e789
@@ -1227,24 +1277,24 @@ common-insert-n-rows-below = إدراج { $n ->
 # en: ae3b3fa65ff4f34adbaf5d76e694293bb2059fbf
 sheet-letters-keyboard = لوحة مفاتيح الحروف
 # en: 7177342b32d961e7d51feb4571231982a48a0772
-sheet-lock-these-cells-so-reader = اقفل هذه الخلايا حتى لا يغيّرها القرّاء
+sheet-lock-these-cells-so-reader = قفل هذه الخلايا كي لا يغيّرها القرّاء
 # en: 893190219ca26f4bad6f2395b91da6295cab23b6
 sheet-locked-part-of-model = مقفل: جزء من صيغ النموذج
 # en: b1b588e8ffba9c37d560f4b4d63c6344d009ce2e
 sheet-low-to-high = من الأدنى إلى الأعلى
 # en: 1dc043bb8eb5646851ff808477bb5d3573739f1c
-sheet-money = مال
+sheet-money = مبلغ
 # en: 709a23220f2c3d64d1e1d6d18c4d5280f8d82fca
 common-name = الاسم
 # en: 3f37ebdc04c6216818bd5bbf8724175546a880c8
 common-name-of-column-c = اسم العمود { $c }
 # en: c103a2458adcf85547000188a915ccb91f45ee9c
-sheet-names-cell-to-its-right = اسم للخلية التي على اليمين
+sheet-names-cell-to-its-right = اسم للخلية المجاورة
 # A money column's currency (Money picked in a column's menu): the field's hint, and what it says of words it cannot read.
 # en: d02550533b8780a7e646803c3b7b9cb7a78ba756
-sheet-symbol-like-or-code-like = رمز مثل $، أو شفرة مثل USD. إن تُرك فارغًا فهو عملة المستند.
+sheet-symbol-like-or-code-like = رمز مثل $، أو اختصار مثل USD. إن تُرك فارغًا فهو عملة المستند.
 # en: 1224b5538c873fc11d856120fedeb76e516529c6
-sheet-symbol-of-up-to-three = رمز من ثلاثة أحرف على الأكثر، أو شفرة من ثلاثة أحرف.
+sheet-symbol-of-up-to-three = رمز من ثلاثة أحرف على الأكثر، أو اختصار من ثلاثة أحرف.
 # en: 630470a61228c20119f270074f1e0b6a4c2d9151
 sheet-no-chart = بلا مخطط
 # en: b7baa1d40c4ea29afc9098732bffee2a861a6c44
@@ -1307,7 +1357,7 @@ sheet-edit-cell-caret-at-its = تحرير الخلية والمؤشر في نه�
 # en: 28d1a54d2e35ad87c0d19942f68d70ddbf67bcee
 sheet-put-back-what-cell-held = استعادة قيمة الخلية
 # en: 2b69414b3787eaa8a38f2f1a9c4a48aff7dd78a5
-sheet-put-dated-rows-on-calendar = ضع الصفوف المؤرخة في تقويم
+sheet-put-dated-rows-on-calendar = وضع الصفوف المؤرخة في تقويم
 
 ## downloads: hand-offs to another app (kit/file/exports.ts)
 
@@ -1316,7 +1366,7 @@ export-open-in = فتح في
 # en: 7f7b61c3d0574fa0bae27972834652c8b6f222e6
 export-pdf-file = ملف PDF
 # en: 20ab05206208a4e9bea088d36c6640c781c6bf65
-export-copy-link-that-downloads-ext = نسخ رابط ينزّل ملف .{ $ext }
+export-copy-link-that-downloads-ext = نسخ رابط لتنزيل ملف .{ $ext }
 # en: 389a8e30f70f547f507d418d67a8048c7eb2eda4
 export-could-not-share-ext = تعذّرت مشاركة ملف .{ $ext }
 # en: 5869a7d435c371c52a7c02fe623f625c5062ba1c
@@ -1416,7 +1466,7 @@ draw-card-for-ninetieth-tilted-on = بطاقة لعيد ميلاد التسعي�
 # en: 2020c98a00da0ecd8574350e226b7d4c448a451f
 draw-phone-screen-sketched-in-boxes = شاشة هاتف مرسومة بمربعات قبل أن يبنيها أحد، مع ملاحظات عن سبب وجود كل جزء.
 # en: 106c289912d69f2f02f64b1c195daa945a29c19f
-draw-rosette-with-ribbons-for-volunteer = وردة شريطية لمتطوع العام، لتُطبع وتُقص وتُدبَّس.
+draw-rosette-with-ribbons-for-volunteer = وردة شريطية لمتطوع العام، لتُطبع وتُقص وتُثبَّت.
 # en: c9c7469b74c0a43646cb4a46279d9930b271ca19
 draw-block-party-from-above-stage = حفل شارع من الأعلى: المسرح والأكشاك والإسعاف ومكان اللقاء إن ضللت.
 # en: 6d12c8adbefeaeacac0d48274df3a195ca9a1d17
@@ -1424,7 +1474,7 @@ draw-badge = شارة
 # en: 32787c0201e95e7dd6ca00aa5dd63210e278e3db
 common-birthday-card = بطاقة عيد ميلاد
 # en: be3883124104a86065f65c46fcf4edff20e0842f
-draw-can-we-refund-it-stores = هل يمكن استرداده؟ قاعدة الإرجاع في متجر بأسئلة وأجوبة وما يجب فعله.
+draw-can-we-refund-it-stores = هل يمكن استرداده؟ سياسة الإرجاع في متجر، في صورة أسئلة وأجوبة وما يجب فعله.
 # en: 619a6e052e5343b8fbad2bfbc5a35d0aa4ec763f
 draw-event-map = خريطة الفعالية
 # en: 6349ac251c1b86c4744c7e0361a5e72ea5e38402
@@ -1436,11 +1486,11 @@ draw-logo-sketch = مسودة شعار
 # en: 26dbc52edd1d138f4ab006d860b56dee54bf919f
 draw-order-to-doorstep = من الطلب إلى الباب
 # en: 9bdb2a0b447519986c24ccc21eaf68976587c9fc
-draw-pip-frog-32-by-32 = بيب الضفدع، بطل 32 في 32 بوشاح أحمر، بحدود ومستعد للتحريك.
+draw-pip-frog-32-by-32 = بيب الضفدع، بطل 32 في 32 بوشاح أحمر، محدَّد الخطوط وجاهز للتحريك.
 # en: d8cca3dd62ad1e4c37a8b10c054464bbcb13e3c9
 draw-room-plan = مخطط غرفة
 # en: fcba7b3fe14a456c5dd428b4e0b28552efa25751
-draw-living-room-rearranged-sofa-rug = غرفة الاستقبال بعد إعادة ترتيبها: أريكة وسجادة ومكتبة ومكتب بمقياس رسم، وقوس فتح الباب مرسوم.
+draw-living-room-rearranged-sofa-rug = غرفة المعيشة بعد إعادة ترتيبها: أريكة وسجادة ومكتبة ومكتب بمقياس رسم، وقوس فتح الباب مرسوم.
 # en: 8640aa92343372c68f5d72660821c342598d8b38
 draw-three-ideas-for-coffee-roasters = ثلاث أفكار لشعار محمصة قهوة جنبًا إلى جنب، والاسم بخط كبير، وموعد للاختيار.
 # en: 68224d905ee1bc5c63082121b1e80cf6fe7d08c1
@@ -1458,12 +1508,12 @@ draw-background-tile-png = بلاطة خلفية (PNG)
 # en: 75f5b48c5980dd2997738dd7416aa5fe8ca60e9a
 draw-animate-this-drawing = تحريك هذا الرسم
 # en: a42ec2578a2a55cc28dcfbd53e3c34dee5d31d78
-draw-drawing-of-things = رسم لـ{ $things }.
+draw-drawing-of-things = رسم فيه { $things }.
 # en: 2759692cb0d64c0c370b6516074bb1de744a31a2
-draw-drawing-of-n-unlabeled-shapes = رسم لـ{ $n ->
+draw-drawing-of-n-unlabeled-shapes = رسم فيه { $n ->
         [zero] لا أشكال بلا تسمية
         [one] شكل واحد بلا تسمية
-        [two] شكلين بلا تسمية
+        [two] شكلان بلا تسمية
         [few] { $n } أشكال بلا تسمية
         [many] { $n } شكلًا بلا تسمية
        *[other] { $n } شكل بلا تسمية
@@ -1471,7 +1521,7 @@ draw-drawing-of-n-unlabeled-shapes = رسم لـ{ $n ->
 # en: f33cdbb01b5b65fe3fe8928669d13ca09b3b5403
 draw-leads-to-b = { $a } يؤدي إلى { $b }
 # en: b9e37b62382792094f5463a54183d523118a25a0
-draw-joins-b = { $a } يصل بـ{ $b }
+draw-joins-b = { $a } متصل بـ{ $b }
 # en: e0883468badf6a5f9c1cfe0ce209a16939a64683
 draw-empty-drawing = رسم فارغ
 # en: 1f9c4a5ed21a39ed45db86eb13cbff389eede2cf
@@ -1504,11 +1554,11 @@ draw-pen = قلم
 # en: c72e323a57434ede3b6eb0cc235109eb76833c55
 draw-any-shape-tap-for-each = مضلّع: انقر على كل زاوية
 # en: 016a5405a0b425e7d1ac65317df59b45ce5fb1f5
-draw-freehand = يد حرة
+draw-freehand = رسم حر
 # en: 8a48ec1f6c073fad0326a0e9251a18e4c88660b5
 draw-drag-to-draw-line-or = اسحب لرسم خط أو شكل
 # en: dcd096d38fc0be24bd96ac76246e98341b853208
-draw-rounded-box = مربع مستدير
+draw-rounded-box = مربع مستدير الزوايا
 # en: 08596d60c57fd87e530cbdd2a06052b06d8c4137
 draw-hexagon = سداسي
 # en: b116d77a368034d3de6ca1dc0414de7dfd49400b
@@ -1538,7 +1588,7 @@ draw-sky = سماوي
 # en: 54076359fdc7f1f0e000b9ae15b96f8b09866acb
 draw-pink = وردي
 # en: 168cbb2ea52b9e34d271accecfa7d7951e948a99
-draw-clear = مسح
+draw-clear = شفاف
 # en: b1985e387405e4d4afb40d5dac9b2656f5d6f770
 draw-shapes = أشكال
 # en: 4bab2d8fe13fa6ab57f80098b414f0f734c5dd25
@@ -1558,9 +1608,9 @@ draw-no-fill = بلا تعبئة
 # en: 7adb6736cf2c9ae017b128f98738ffbae0e58655
 draw-fill = تعبئة
 # en: 1f65ed95fba62cd5b74b58c2ca9ba63448117160
-draw-bring-to-front = إلى الأمام
+draw-bring-to-front = إحضار إلى الأمام
 # en: e259d4e19e695a41e2f10680f2e3f5693711382a
-draw-send-to-back = إلى الخلف
+draw-send-to-back = إرسال إلى الخلف
 # en: 972d57379db3e5be76d4ead709fef1ad71ff03d6
 common-duplicate = تكرار
 # en: 5301648dcf6b53cefc9ed52999aaa92d4603cae0
@@ -1568,9 +1618,9 @@ common-edit = تحرير
 # en: f6fdbe48dc54dd86f63097a03bd24094dedd713a
 common-delete = حذف
 # en: d7bc7e98ec7a8acfd61dabe29e1e9156adf86fb9
-draw-put-icon-on-this-shape = ضع أيقونة على هذا الشكل
+draw-put-icon-on-this-shape = وضع أيقونة على هذا الشكل
 # en: 33bde816f0f7a53b8de67b8f8d6981f47e28159b
-draw-place-icon = ضع أيقونة
+draw-place-icon = وضع أيقونة
 # en: 4fc05f2763ba31e2d3be5f08e7d0bab5d5dcbf78
 common-zoom-in = تكبير
 # en: a4ae4b24a1f5369c2bff61abdbc221170e4b27d8
@@ -1587,13 +1637,13 @@ draw-add-alt-text-describe-this = أضف نصًا بديلًا: صف هذا ال
 # en: 676f1e162fc4f58007821f7c1a55b893e9a04715
 draw-what-does-this-drawing-show = ماذا يُظهر هذا الرسم؟
 # en: c8636572fb4b9e79bae4c9fef82fc8109961c471
-draw-diagram-of = مخطط يُظهر…
+draw-diagram-of = رسم تخطيطي لـ…
 # en: 5a33f2e7e84274a5291191ca3105e62d897eee0e
-draw-read-aloud-to-people-who = يُقرأ بصوت عالٍ لمن لا يستطيع رؤيته، ويبقى مع الرسم أينما تضمّن أو نُزّل.
+draw-read-aloud-to-people-who = يُقرأ بصوت عالٍ لمن لا يستطيع رؤيته، ويبقى مع الرسم أينما ضُمِّن أو نُزِّل.
 # en: 988c63b77eade4f718f9d469cb36e35bff976839
 draw-describe-from-shapes = إنشاء من الأشكال
 # en: ac302ae45938c985822f097507602d624128f1d0
-draw-tap-or-drag-to-paint = انقر أو اسحب للتلوين؛ مفاتيح الأسهم تحرّك، وEnter يلوّن.
+draw-tap-or-drag-to-paint = انقر أو اسحب للتلوين؛ مفاتيح الأسهم للتنقل، وEnter يلوّن.
 # en: ea263dc45b04f2755ac61a51deecc96ade3fb6a9
 draw-tap-each-corner-tap-first = انقر كل زاوية؛ انقر الأولى مجددًا أو اضغط Enter لإغلاقه.
 # en: ccdc55c46a79ea604962ddda9cc010311bdca4fe
@@ -1607,9 +1657,9 @@ draw-drag-to-move-them-together = اسحب لتحريكها معًا. Shift+نق
 # en: eb36764c60ec7a17dd6ac3ec7dbbd22ee401778e
 draw-press-on-one-shape-and = اضغط على شكل ثم ارفع إصبعك على آخر
 # en: 199f4e86afea4f2d42eb40b63ce8599168575e06
-draw-tap-where-icon-goes = انقر حيث تذهب الأيقونة.
+draw-tap-where-icon-goes = انقر حيث تريد وضع الأيقونة.
 # en: 86da5e24511bad8c1cace935e830c0625b04b607
-draw-drag-on-canvas-to-draw = اسحب على اللوحة لرسمه، أو انقر لوضع واحد.
+draw-drag-on-canvas-to-draw = اسحب على اللوحة لرسمه، أو انقر لوضعه.
 # en: a5742851f0f81d3bdcf184cb2a164390f3e989bb
 draw-eraser = ممحاة
 # en: 5136ae1b5bfe9175a6ed64915e648bdc240443a7
@@ -1621,7 +1671,7 @@ draw-use-as-background = استخدام كخلفية
 # en: 507f52dfd67fb731677bb9ae6971f9b5e891bc84
 draw-grid-is-now-background-download = الشبكة الآن هي الخلفية. نزّلها كبلاطة، أو استخدمها في أي صفحة بـ tile:.
 # en: 209a1a74ee8eec09b861bc34e5ddb08a1357a364
-draw-pixel-grid-n-by-n = شبكة بكسلات، { $n } في { $n }. مفاتيح الأسهم تتحرك؛ وEnter يلوّن باللون الحالي.
+draw-pixel-grid-n-by-n = شبكة بكسلات، { $n } في { $n }. مفاتيح الأسهم للتنقل؛ وEnter يلوّن باللون الحالي.
 # en: a9deda2292f9b3c9a827e2aa71e0da6b4db9f16e
 draw-row-y-column-x-ink = الصف { $y }، العمود { $x }: { $ink }
 # en: d316afce8845f59e541c981d07d81bab22858d00
@@ -1709,11 +1759,11 @@ anim-red-curtains-part-on-opening = ستائر حمراء تنفرج في ليل
 # en: 1383ce3b8f642f2c5946975ca61e868e4a504819
 anim-present-hops-stars-and-hearts = هدية تقفز، ونجوم وقلوب تتمايل حولها، والتهنئة تتلألأ بحروف قوس قزح.
 # en: fad7f01d931894b10da998319cdc82f1a7d7e4dc
-anim-quick-standup = اجتماع سريع واقفًا
+anim-quick-standup = اجتماع يومي سريع
 # en: 79d688c0e9e1f3c402c3d6bedae252cfdd0b27aa
 anim-meme-with-caption-above-and = ميم بتعليق فوقه وآخر تحته، وساعة تدور وتهتز بينهما.
 # en: 7e9b34abf6e91127f94374508015ad795c91268b
-anim-build-is-green = البناء أخضر
+anim-build-is-green = البناء ناجح
 # en: 2015347d0927e36755702bf7ae8677fa8d565545
 anim-meme-in-two-lines-of = ميم في سطرين بخط عريض، وكأس تدور وتهبط وتتوهج.
 # en: 98eb193445404588fd801a26b8383def925748ab
@@ -1781,7 +1831,7 @@ anim-pause = إيقاف مؤقت
 # en: 5d12bd53552cafc41ca6146c04870df2e1574e13
 anim-play = تشغيل
 # en: fa968bd1155bd76231814d479bf070ed96cca9bb
-anim-pixel-art-is-made-in = يُصنع فن البكسل في أداة الرسم؛ أما الرسوم المتحركة فتحرّك الأشكال.
+anim-pixel-art-is-made-in = يُصنع فن البكسل في أداة الرسم؛ أما أداة التحريك فتحرّك الأشكال.
 # en: b4a9395d25398654fd5d000e4b82a1d8273339bd
 anim-rainbow = قوس قزح
 # en: 3d5096b70833fdae355f1ffcf32faf2066123467
@@ -1809,9 +1859,9 @@ anim-this-frame = الإطار الحالي
 # en: cac09d8898c2435fb48b3b387ff152da7929eab8
 anim-duplicate-this-frame = تكرار هذا الإطار
 # en: 885c46b03eaf682f7c9534f7791ddfc3da84cd6f
-anim-frame-earlier = إطارًا أبكر
+anim-frame-earlier = إطار للخلف
 # en: 2c3d7664e236cb8254795d8ffd3761741ccfff7d
-anim-frame-later = إطارًا أبعد
+anim-frame-later = إطار للأمام
 # en: bb4f3c806dbc9e6d5247da5b492939d83c90cf2b
 anim-delete-this-frame = حذف هذا الإطار
 # en: 406ce96669c44a0f4b79e02af1464b6aa7fbf232
@@ -1819,9 +1869,9 @@ anim-draw-shapes-move-sets-them = ارسم الأشكال، ثم استخدم «
 # en: b4d477d39704ecbf21ca422aeebffbad5a519fbb
 anim-nothing-here-yet-draw-something = لا شيء هنا بعد: ارسم شيئًا أولًا.
 # en: 00f1eed948284854e29d59b2de928756b7f69388
-anim-tap-shape-then-drag-it = انقر شكلًا ثم اسحبه إلى حيث يذهب.
+anim-tap-shape-then-drag-it = انقر شكلًا ثم اسحبه إلى موضعه الجديد.
 # en: e4cabeb67c10b273fc4a1cfba538ac893c850f68
-anim-drag-it-to-where-it = اسحبه إلى حيث يكون عند { $s } ث.
+anim-drag-it-to-where-it = اسحبه إلى موضعه عند { $s } ث.
 
 # en: b0d1915925616cc03de525611bfe58839cf5fdff
 anim-anything-from-drawing-tool-moving = أي شيء من أداة الرسم، متحركًا: الموضع والعمق والحجم والدوران والانقلاب عبر الزمن، مع مؤثرات للميمات.
@@ -1832,9 +1882,9 @@ anim-forward-then-back = للأمام ثم للخلف
 # en: e3e7a3833d19706ebf33b2c3baf8e05deeed7bca
 anim-frames = الإطارات
 # en: 0d0b09dfb5d45add0e2f90ec8b193d96ace76d0c
-anim-frames-second = إطارات في الثانية
+anim-frames-second = الإطارات في الثانية
 # en: 3570d228949889218e4c7fdb4ad8c942753530a1
-anim-how-large-shape-is-drawn = مدى كبر الشكل المرسوم: 1× كما رُسم.
+anim-how-large-shape-is-drawn = حجم الشكل عند رسمه: 1× هو حجمه الأصلي.
 # en: c028f533678015b6ac2e606a9cafef7e050b11aa
 anim-length-speed-and-repeat = المدة والسرعة والتكرار
 # en: 72f516ede84adba7283e1f7f5fd8eb787c7d33b0
@@ -1850,7 +1900,14 @@ anim-turns-shape-around-in-plane = يدير الشكل في مستوى المس�
 # en: df7db1873937e8acd60c26ebf93191ad27b738e6
 anim-which-shape-is-in-front = أي شكل في المقدمة: الأقرب يُرسم فوق الأبعد، والبعيد أخفت قليلًا. العمق لا يغيّر الحجم أبدًا.
 # en: 2931befb0fbc6bdabcff5b420bf41435e4315548
-anim-n-times = { $n } مرات
+anim-n-times = { $n ->
+        [zero] { $n } مرة
+        [one] مرة واحدة
+        [two] مرتان
+        [few] { $n } مرات
+        [many] { $n } مرة
+       *[other] { $n } مرة
+    }
 # en: 4a84fdfdafe66c2c85e3e7d7c434de987984470f
 anim-s-s = { $s } ث
 # en: b78baea4121d1dfde75020adb28737da7ea84e59
@@ -1938,7 +1995,7 @@ outline-line-from-from-to-to = خط من { $from } إلى { $to }
 # en: 2859ccc92143006360893c2a9cb1aaaa13b3928f
 outline-line-named-label-change-it = خط بتسمية «{ $label }»: تحرير
 # en: 52d55422c1936db72f18f5b9e960c2719a3560d7
-common-animator = الرسوم المتحركة
+common-animator = أداة التحريك
 # en: 260ff8ae7182fc851337b6b2fdb25f8cac2b8d47
 common-move-down = نقل لأسفل
 # en: 8a58f7b7ea514cbdf9bb23a231ad4d03f0cd0ca7
@@ -2036,15 +2093,15 @@ outline-unfold-n-inside = توسيع ({ $n ->
 # en: 621521f9a8788695ec292cbec54d2792cfdf0a7d
 common-untitled = بلا عنوان
 # en: 1e65f823e3600c2c4cec7aff6db37af296fca073
-outline-view-as = العرض بصفة
+outline-view-as = طريقة العرض
 # en: 828c360c884f9246750461eea43fee4e42c6b52c
 outline-zoomed-in-on = التركيز على
 # en: 38eca6735f66d186c0bd9c549873e774551dc35f
 outline-a-plain-line = خط عادي
 # en: 884abd948f43aba4e5851b71a20e97aed7a6c96e
-outline-arrow-from-parent = سهم من الأصل
+outline-arrow-from-parent = سهم من العنصر الأب
 # en: b1efb9ef91ffdf7d42595fb81fb8b74184a5efbc
-outline-arrow-to-parent = سهم إلى الأصل
+outline-arrow-to-parent = سهم إلى العنصر الأب
 # en: 54406ea0a263efcf4d3204fff2200f7f4d982c90
 outline-arrows-both-ways-lowercase = سهمان في الاتجاهين
 # en: 0048342aeabb8b2918689354650579bb2108a957
@@ -2069,7 +2126,7 @@ outline-product-launch-product-marketing-and = إطلاق منتج: المنتج
 # en: 79fd5c646ff9b077d10357db663c9b7d59acb64f
 outline-research-plan = خطة بحث
 # en: 6a1ae380627dbc8fe79ff6a208c76b89d230979e
-outline-speech = خطبة
+outline-speech = خطاب
 # en: f081caaa6b5cd7b0858a4a87cc6f81bdb215fd30
 outline-syllabus = مفردات المقرر
 # en: 5b163ae0d9a3fd9b5ab6a8b6c27374091ceb25de
@@ -2081,7 +2138,7 @@ outline-essay-plan = خطة مقال
 # en: d926d538e1be8112e81292507985514feac5e4c4
 outline-draw-as-family-tree = رسم كشجرة عائلة
 # en: bfef6f97dfb8178f726a96b8861bc2536e8c6fb4
-outline-five-days-in-lisbon-packed = خمسة أيام في لشبونة، مرتبة بحسب الفئة، وما يُفعل قبل إغلاق الباب.
+outline-five-days-in-lisbon-packed = أمتعة خمسة أيام في لشبونة مقسّمة حسب الفئة، وما يجب فعله قبل الخروج.
 # en: 987acdf86bb6a373c995aa374c004bb21bf2e576
 outline-indoors-or-out-for-saturday = في الداخل أم الخارج لسوق السبت: إجابات كل سؤال على سطوره، نعم ولا.
 # en: 61390a6b5d7d9268827d91b4a818c6a5fbe2011c
@@ -2089,11 +2146,11 @@ outline-no-internet-at-home-question = لا إنترنت في البيت: سؤا
 # en: b431e4b41d5021ff680bdee33aebda8738cec5b0
 outline-packing-list = قائمة التعبئة
 # en: 013532bb7e7d08afa22a3149f8e74b5ee4d9eaf5
-outline-parts-and-chapters-of-book = أجزاء وفصول كتاب أفكار، وتحت كل فصل سطر لما يحتج له.
+outline-parts-and-chapters-of-book = أجزاء كتاب أفكار وفصوله، وتحت كل فصل سطر لما يطرحه من حجة.
 # en: 5f646cfc8f40ae2515c9d774ae5ad523f524b998
-outline-people-and-three-acts-of = الشخصيات وثلاثة فصول من الأحداث، لكل منها ما يجري فيه، موصولة حيث يغيّر شخص فصلًا.
+outline-people-and-three-acts-of = الشخصيات، والفصول في ثلاثة أقسام، ولكل فصل ما يجري فيه، موصولةً حيث تغيّر شخصيةٌ مجرى فصل.
 # en: dbb00953c7a1565bffce71190cfb90220362c471
-outline-question-method-budget-that-adds = السؤال والمنهج وميزانية تُجمع وحدها وجدول زمني والمخاطر والقراءات.
+outline-question-method-budget-that-adds = السؤال والمنهج وميزانية تحسب مجموعها تلقائيًا وجدول زمني والمخاطر والقراءات.
 # en: 57b065618d9af543d6fcc5085edd94aa723f8403
 outline-three-generations-and-next-each = ثلاثة أجيال والجيل التالي، لكل منهم سنواته، مرسومة شجرة عائلة من القائمة.
 # en: 285ec850c11d78bac10f6bfa31b69a37f1b257c9
@@ -2115,7 +2172,7 @@ deck-choirs-winter-concert-welcome-both = حفل شتوي لجوقة: الترح
 # en: a816093d69f08b81c457d818e6d1bd72e0915b10
 deck-lesson = درس
 # en: e2d04797e440ee0933d032a29cfbfad5edbc99c7
-deck-lost-pet-poster-in-red = ملصق قطة مفقودة بالأحمر: الاسم وشكلها وأين رُئيت ورقم للاتصال.
+deck-lost-pet-poster-in-red = ملصق قطة مفقودة بالأحمر: الاسم وشكلها وأين شوهدت ورقم للاتصال.
 # en: 4d44cafa1d032ca3ceda90fa9830717ea5cf8491
 deck-morning-workshop-schedule-checklist-of = ورشة صباحية: الجدول وقائمة تحقق بما يُحضر والخطوات وأين تذهب بعدها.
 # en: 7dc13283809d7ed9c506873aee1486fd988cfe5c
@@ -2127,13 +2184,13 @@ deck-product-in-sentence-what-it = منتج في جملة، وما يفعله، 
 # en: a46e6eb74ae783d7eb35ae76afc5ab984683886f
 deck-trivia-night-in-four-rounds = أمسية مسابقة معلومات بأربع جولات، وجدول نتائج، والإجابات في الشريحة الأخيرة.
 # en: efebc637859160a6f694e66576eebb294de14712
-deck-residents-meeting-about-new-playground = اجتماع سكان عن ملعب جديد: لماذا وما المقترح والميزانية دائرية ومتى وكيف تبدي رأيك.
+deck-residents-meeting-about-new-playground = اجتماع سكان عن ملعب جديد: لماذا وما المقترح والميزانية في مخطط دائري ومتى وكيف تبدي رأيك.
 # en: 02e7a62fc65ed26cb0751706a5ea8f5783414eda
-deck-science-lesson-on-chalkboard-aims = درس علوم على السبورة: الأهداف وما يعرفونه والنموذج وتحقق والواجب؛ وملاحظات المعلم تحت كل شريحة.
+deck-science-lesson-on-chalkboard-aims = درس علوم على السبورة: الأهداف وما يعرفونه والنموذج واختبار فهم والواجب؛ وملاحظات المعلم تحت كل شريحة.
 # en: f3a66c7b2a6ebda85ea74938fce4c397eae2a131
-deck-seed-pitch-in-eight-slides = عرض تمويل أولي في ثماني شرائح: المشكلة والمنتج والزخم على مخطط والعمل والفريق والطلب.
+deck-seed-pitch-in-eight-slides = عرض تمويل أولي في ثماني شرائح: المشكلة والمنتج والزخم على مخطط ونموذج العمل والفريق والطلب.
 # en: aab8da6eadee157bba3937e9dc00741cfe48b13f
-deck-bike-shops-quarter-for-its = ربع سنة متجر لشركائه: الإيرادات على مخطط، والنجاحات والإخفاقات، والأرقام المهمة، والربع القادم.
+deck-bike-shops-quarter-for-its = ربع سنة لمتجر دراجات، لشركائه: الإيرادات على مخطط، والنجاحات والإخفاقات، والأرقام المهمة، والربع القادم.
 # en: d0fa5e5696edaf949dfe9e739a7a2eef0d433ae2
 deck-small-story-in-panels-about = قصة صغيرة في إطارات عن إعارة شيء لجار.
 # en: 6c1ff81a2445a9eab1616588060b483cd5b6cde8
@@ -2161,11 +2218,11 @@ deck-recipe-zine = مجلة وصفات صغيرة
 # en: 02bfd82260b75fe685e4e972cb9a3ae9b0a42f5f
 deck-seven-soups-for-cold-week = سبعة حساءات لأسبوع بارد، حساء في كل صفحة، في مجلة صغيرة تُطوى من ورقة واحدة.
 # en: 44b5c7f041391d8b41a8ba365b6f13522877b478
-deck-their-story-for-reception-from = قصتهما للحفل، من كيف التقيا حتى السؤال، مع خط زمني وكلمة شكر.
+deck-their-story-for-reception-from = قصتهما للحفل، من كيف التقيا حتى طلب الزواج، مع خط زمني وكلمة شكر.
 # en: 2aaeb944a6b05f452d512dc7dd5220adeee294ea
-deck-town-hall-notice = إعلان قاعة البلدة
+deck-town-hall-notice = إعلان اجتماع عام
 # en: 14444c384d263fff25ba48b195abb55def791b75
-deck-trivia-night = ليلة المعلومات
+deck-trivia-night = أمسية المسابقات
 # en: 0377beb012ed13e1986227ef8915aeab709ad5d9
 deck-wedding-slideshow = عرض صور الزفاف
 # en: f34f4184c545fd4fec60bbc441ead88d1f1fdd1b
@@ -2235,7 +2292,7 @@ deck-chalkboard = سبورة
 # en: 5f941ab65fbabe87f41cd73c9136f5a4c97087e8
 deck-fun = مرح
 # en: 0bd48966c3fe51c025c34a472af7fac64b2292dc
-deck-themes-color = لون السمة
+deck-themes-color = لون المظهر
 
 # The bar
 # en: 4e9f7a31eef4c69e0aacb643f6856372cd6e3247
@@ -2259,13 +2316,13 @@ deck-printing = الطباعة
 # en: d5939283a7a53a72f09e4f327bc22f2872b64257
 deck-one-sided = وجه واحد
 # en: 256dd8b8869a6c72f553a2905aef393f2b39df0d
-deck-fold-and-cut = اطوِ وقصّ
+deck-fold-and-cut = طي وقص
 # en: 8cb849ee6e612fbad8641d053d8e66b2ba560a1b
 deck-two-sided = وجهان
 # en: b82a2c3204554a9c0a82b44aa7eb5f94916b1c13
-deck-cut-and-nest = قصّ وأدخل
+deck-cut-and-nest = قص وتداخل
 # en: 6e19d7b7deffd2974f632ec3e697646de978130e
-deck-end-with-qr-code-of = اختم برمز QR لهذا العرض
+deck-end-with-qr-code-of = الختام برمز QR لهذا العرض
 # en: 0c7dca360d478b76246b0ddf594aed2299af3ef2
 deck-move-slide-up = نقل الشريحة لأعلى
 # en: 8e87a8ca3749be93e307f172d62814c1b58865b4
@@ -2311,7 +2368,7 @@ deck-add-icon = إضافة أيقونة
 # en: f68895d5ec9c6f1865e9ee69f1d423cbfd251599
 common-change-icon = تغيير الأيقونة
 # en: fd8de0a92eedac5ccdf6c587b3ae177b97da0ae0
-deck-pick-icon = اختر أيقونة
+deck-pick-icon = اختيار أيقونة
 # en: 3805391efb1ea53cff43e62a0dc134be9b14bd8d
 deck-left-column = العمود الأيسر
 # en: e8965b7c19d1ad62de75e624088e40b37d16f206
@@ -2399,7 +2456,7 @@ deck-slide-n-of-total = الشريحة { $n } من { $total }
 # en: 70440046a3dc2e079f23ee1c57dfa76669b732aa
 common-notes = الملاحظات
 # en: bd0dad7cbf71b13b2e545d8ce477027ffc106b45
-deck-n-hides-them = N تخفيها
+deck-n-hides-them = N يخفيها
 # en: 45c44dc2566819f835fd788e2b7a6c5bee5177c4
 deck-take-this-deck-home = خذ هذا العرض معك
 # en: acc1edc431e346786fab17d4f10e195ca72257d6
@@ -2416,7 +2473,7 @@ deck-powerpoint-pptx = PowerPoint (PPTX)
 # en: 7660a22bdc9507edd353dd61198b9aa86488d936
 deck-picture-of-every-slide-zip = صورة لكل شريحة (ZIP من ملفات PNG)
 # en: 98a41f54e049532b6032b88d7656348adc178c2a
-deck-animation-of-deck-gif = فيلم للعرض (GIF)
+deck-animation-of-deck-gif = رسم متحرك للعرض (GIF)
 # en: 3bab526d831e1024e6f8e7d197f9c3d72cc4f0e4
 deck-film-of-deck-webm = فيلم للعرض (WebM)
 
@@ -2434,7 +2491,7 @@ deck-what-you-heard-what-you = ما سمعته وما تقترحه ومتى وك
 # en: b8e1f28fed63f996c8915470a7ee9ce8aef9b75f
 deck-eight-small-pages-from-one = ثماني صفحات صغيرة من ورقة واحدة: اطبع واطوِ وقصّ، أو اقرأ بالنقر على الهاتف.
 # en: 31b11edde49cd1bd80a198f240426c5b2d8cd65f
-deck-booklet-of-half-letter-pages = كتيب بصفحات نصف letter، من ثمانٍ إلى عشرين، مرتب للطباعة والإدخال والطي.
+deck-booklet-of-half-letter-pages = كتيب بصفحات نصف letter، من ثمانٍ إلى عشرين، مرتب للطباعة والتداخل والطي.
 # en: ae07389f7b537dbd7eb3007d3f2b36ca3c35c404
 deck-trifold-brochure-six-panels-on = نشرة ثلاثية الطي: ست لوحات على وجهي ورقة، كل لوحة حيث يحتاجها الطي.
 # en: 88c71dbca35b2e7c498adce21174cb1102af384e
@@ -2466,23 +2523,23 @@ cal-name-yours-say = اسم (اسمك مثلًا)
 # en: e288d42e3bba2f9fc3b7f2287d2ea4f141e72236
 cal-schedule-phases-with-their-tasks = جدول زمني: مراحل تحتها مهامها، ومدى تقدم كل منها، والإطلاق في النهاية.
 # en: f0424f3e15f33d07de80ddfd02a4b56f047767d7
-cal-week-earlier = قبل أسبوع
+cal-week-earlier = الأسبوع السابق
 # en: 5e63d8681fdc3170ed99fc3abcc3668620f299ca
-cal-week-later = بعد أسبوع
+cal-week-later = الأسبوع التالي
 # en: ab455a2fb151da1c7d0c39c7534c2f935e028ce9
 cal-weekend-of-sessions-at-set = عطلة نهاية أسبوع من الجلسات في أوقات محددة، وجلسة متأخرة بعد منتصف الليل.
 # en: 114574336ac7883aebd0653b3fc5e82f9262dc86
 cal-all-day = اليوم كله
 # en: cbf28df446643f9968f7fe68968bca51be5cf792
-cal-chart-scrolls-sideways = مخطط (يتمرر جانبيًا)
+cal-chart-scrolls-sideways = مخطط (يُمرَّر أفقيًا)
 # en: a13d5b9d3da48c8bade3d645e0de9a9bb812c648
-cal-color-for-new-color = لون الجديد: { $color }
+cal-color-for-new-color = لون العناصر الجديدة: { $color }
 # en: f6bb0f468a8569c67b3d6826e57e62c5500c3681
 cal-days = الأيام
 # en: b50e483c45f8f17795b63f822127ff0171086900
 cal-days-and-times-on-month = أيام وأوقات على شهر أو سنة أو جدول زمني، في أي منطقة زمنية.
 # en: 9ccd3e7bb11493f1e93950f7db9148a4794037b7
-cal-done = % المنجز
+cal-done = نسبة الإنجاز
 # en: a7028454f240815938eaf701823b7d55dbaf98a9
 cal-edit-event = تحرير الحدث
 # en: 8a4d4e6eb9a367d616b8a4cbfa2792068482e884
@@ -2490,9 +2547,9 @@ cal-edit-task = تحرير المهمة
 # en: 99570f85bb2bae0dbe3e8f2f3d6d6f765ee7c47e
 cal-choose-task = تحديد { $task }
 # en: 72b4644a41881ce4e156ce3283119c74f598cbea
-cal-day-earlier = قبل يوم
+cal-day-earlier = تقديم يوم
 # en: 8d6915ee723c8b3c01f29002cfed7d597d56c2c7
-cal-day-later = بعد يوم
+cal-day-later = تأخير يوم
 # en: 66a755ea0d935aeac763da63deebb69b0eb54ba9
 cal-dates = تحرير التواريخ…
 # en: a2bb9d34b8a1a79665858d354585cf147e0dee4e
@@ -2601,7 +2658,14 @@ cal-color-stands-for = { $color } يعني
 # en: 63e5df0eb2fcd351c1d31f23cdf3bf4816e3def5
 cal-every-until-date = { $every } حتى { $date }
 # en: 519c383aaa892cfff62e992bb947ec79ed5dd57d
-cal-every-n-times = { $every }، { $n } مرات
+cal-every-n-times = { $every }، { $n ->
+        [zero] { $n } مرة
+        [one] مرة واحدة
+        [two] مرتين
+        [few] { $n } مرات
+        [many] { $n } مرة
+       *[other] { $n } مرة
+    }
 # en: d69842d42eceddee8c62019d22d4f7ca383cf847
 cal-n-days = { $n ->
         [zero] لا أيام
@@ -2617,13 +2681,13 @@ cal-n-done = أُنجز { $n }%
 # en: 71428a822d08efae1d13babd6073592abec99d1f
 cal-bakerys-posts-and-newsletters-through = منشورات مخبز ونشراته الإخبارية طوال الشتاء، وحكاية يومية لموسم المجيء.
 # en: 91dad831b9be334af672cd6052e37dedde16d06e
-cal-youth-soccer-season-practice-every = موسم كرة قدم للناشئين: تدريب كل أسبوع، ومباريات في الديار وخارجها بألوانها، والأدوار الإقصائية.
+cal-youth-soccer-season-practice-every = موسم كرة قدم للناشئين: تدريب كل أسبوع، والمباريات على أرضهم وخارجها بألوانهم، والأدوار الإقصائية.
 # en: d7bad656f3b06c3ee989a1f2960214ee15b2f788
 cal-small-teams-time-off-public = إجازات فريق صغير، والعطل الرسمية وإغلاق عيد الميلاد في تقويم واحد.
 # en: cd6036648af6d0d5614f0ec65eb732300281e059
-cal-community-garden-plots-year-when = سنة في قطعة أرض زراعية: متى تُبذر وتُغرس وتُحصد وتُقلَّم، وتعود كل عام.
+cal-community-garden-plots-year-when = سنة قطعة في حديقة مجتمعية: متى تُبذر وتُغرس وتُحصد وتُقلَّم، وتتكرر كل عام.
 # en: 1b04e3c7d585a3d6297852d158919c9833538a01
-cal-fall-term-from-first-day = فصل دراسي خريفي من اليوم الأول حتى عيد الميلاد: الإغلاقات والنوادي والرحلة وأمسية أولياء الأمور.
+cal-fall-term-from-first-day = فصل دراسي خريفي من اليوم الأول حتى عيد الميلاد: الإغلاقات والنوادي والرحلة ولقاءات أولياء الأمور والمعلمين.
 # en: f80b28faa22109c4d14cf7eb7994768abca09ca8
 cal-bills-and-renewals = الفواتير والتجديدات
 # en: 2223281ed9222907f9d00ef35ab71df263d06e46
@@ -2633,13 +2697,13 @@ cal-content-schedule = جدول المحتوى
 # en: 072b8e4f3e23cdd58cf0a4b3f5c47437127f131b
 cal-editorial-calendar = التقويم التحريري
 # en: 26f861d8db0e97575e814ce9799eaf1bcddec28b
-cal-every-autopay-on-its-day = كل خصم مباشر في يومه كل شهر، والتجديدات السنوية وموعد الضريبة.
+cal-every-autopay-on-its-day = كل خصم تلقائي في يومه كل شهر، والتجديدات السنوية ومواعيد الضرائب.
 # en: 2185215436152ae5c1d9429385551e46587c7af8
 cal-garden-calendar = تقويم الحديقة
 # en: 624b49bb82a8487f3ff77d2098b88b1e1ceb6695
 cal-vacation-planner = مخطط العطلة
 # en: 1ceb786961989ab69eda934e08645ecb19fe5357
-cal-league-schedule = مباريات الدوري
+cal-league-schedule = جدول مباريات الدوري
 # en: 5a94fcfb3e67abfdd4e3bab4c3d9a2683801245a
 cal-school-term = الفصل الدراسي
 # en: 2f88af7308e60cbfbe5482a13acec0983b020e09
@@ -2649,7 +2713,7 @@ cal-twelve-weeks-to-half-marathon = اثنا عشر أسبوعًا حتى نصف
 # en: fdab2603fde2488e117cca6335baee3c481231b9
 cal-two-days-of-talks-and = يومان من المحاضرات والورش بالساعة، ولكل قاعة لون.
 # en: c8bbdc31a9be182914dd6207c08837389224b33a
-cal-two-issues-of-quarterly-from = عددان من فصلية من المادة حتى البيع، والاجتماع الشهري والإطلاق.
+cal-two-issues-of-quarterly-from = عددان من مجلة فصلية، من التحرير حتى البيع، والاجتماع الشهري والإطلاق.
 # en: 0e4753002a6b042b841f5296f0cdb7c71110377b
 cal-volunteer-schedule = مناوبات المتطوعين
 # en: f6003458ea2ce51dfa0efa7d0819ccb57ac35bd1
@@ -2708,7 +2772,7 @@ diagram-this-thing = هذا العنصر
 # en: 53ea183a6bb5ad2942edd6884230b8f425c0eea6
 diagram-add-under-it = إضافة أسفله
 # en: e9e7205b6f0bd7d9c8f1a1dfe85ef9d54979662f
-diagram-add-one-more = إضافة واحد آخر
+diagram-add-one-more = إضافة عنصر آخر
 # en: be34070c33b5c14155fe70a18891828387dd399d
 diagram-add-after-it = إضافة بعده
 # en: 90d24ab49426f19e75a2b6c3fd9196603c2e0852
@@ -2729,9 +2793,9 @@ diagram-connection = وصلة
 diagram-empty = فارغ
 # The templates
 # en: 8b0bc4ee7e0e6e592c5e8812fef8883b9cbc66de
-diagram-empty-kind-to-start-from = { $kind } فارغ للبدء منه.
+diagram-empty-kind-to-start-from = { $kind } بلا محتوى، للبدء من الصفر.
 # en: cc9cfe196eaec8bbe041a0f648039cf31df71bc7
-diagram-browser-api-database-cache-and = متصفح وواجهة برمجية وقاعدة بيانات وذاكرة مؤقتة وعامل، وكيف يتخاطبون.
+diagram-browser-api-database-cache-and = متصفح وواجهة برمجية وقاعدة بيانات وذاكرة مؤقتة وعامل، وكيف تتواصل فيما بينها.
 # en: 87796704431b42da8083f869f5ed707dae8cf8fe
 diagram-building-project = مشروع بناء
 # en: 5accd00ffa799aafee66a6e2e7a77c3e89abdd38
@@ -2753,7 +2817,7 @@ diagram-fast-cheap-good = سريع ورخيص وجيد
 # en: 77373004b00a68bf2cad476daa1ef0af2a7e26f0
 diagram-four-tables-and-who-sits = أربع طاولات ومن يجلس حول كل منها.
 # en: 1db47899ccb6eda1f1c46cee3c73acb1394c00ca
-diagram-from-lovelace-to-now-spaced = من لوفلايس حتى اليوم، بمسافات كما وقعت السنوات، وحقبة على الذيل.
+diagram-from-lovelace-to-now-spaced = من لوفلايس حتى اليوم، بمسافات على قدر السنوات، والعصور على طول الأسفل.
 # en: c973a2e43350a1c09697af1bd39a17f3cfba2c36
 diagram-from-order-to-doorstep = من الطلب إلى الباب
 # en: 91519d37fd9fe6f0c40b0429e0ed9f8eb8206006
@@ -2763,7 +2827,7 @@ diagram-grandparents-their-children-and-grandchildren = الأجداد وأبن�
 # en: 347a51bd3c26ccac83baeca51966f318d5bb06c4
 diagram-hiring-someone = توظيف شخص
 # en: f30d75896062b87258051feec53d9f7c05059037
-diagram-how-app-hangs-together = كيف يتماسك تطبيق
+diagram-how-app-hangs-together = كيف تترابط أجزاء تطبيق
 # en: 70a97689961708e74a02157e6675bbcab893b7a4
 diagram-seven-people-who-reports-to = سبعة أشخاص، ومن يتبع من، وخط منقط واحد.
 # en: 45ccf051d72194e5207999d9eeabaf9311e07ec2
@@ -2771,7 +2835,7 @@ diagram-garden-this-year = الحديقة هذه السنة
 # en: 3fa0b6c790e0b44a046fe73aa9cf77f99106074d
 diagram-three-generations = ثلاثة أجيال
 # en: 206f4033c4733b2b04a85ee0de9d35b1a5acc692
-diagram-three-sets-and-every-overlap = ثلاث مجموعات وكل تقاطع، وما ينتمي إلى أين.
+diagram-three-sets-and-every-overlap = ثلاث مجموعات وكل تقاطع بينها، وموضع كل شيء.
 # en: 762ecdafab9b2868da1121459828ec245b03ac5e
 diagram-two-sets-and-what-they = مجموعتان وما تشتركان فيه.
 # en: f02e532d172e25cb200306e2edda8e4331418dcd
@@ -2781,9 +2845,9 @@ diagram-biology-final-in-december-topic = امتحان نهائي في الأح�
 # en: e32c422ee266430ea9dd0cd2cc78750a1342302a
 diagram-classroom = فصل دراسي
 # en: e491ee6c30111d9c51d83d4a19aba47a3c39c769
-diagram-family-with-godmother = عائلة بعرّابة
+diagram-family-with-godmother = عائلة وعرّابة
 # en: c164cf0f878062c2b43b69bf4c1de2c3d6a1f94d
-diagram-principal-her-assistant-principals-classroom = مديرة مدرسة ونائباتها ومعلمو الصفوف ومدير المبنى.
+diagram-principal-her-assistant-principals-classroom = مديرة مدرسة ونائباتها ومعلمو الصفوف وحارس المدرسة.
 # en: f25d2f240d3a52d5361d9b6dd4d8561290566159
 diagram-move-to-lisbon-by-march = انتقال إلى لشبونة بحلول مارس: الأوراق وشقة وعمل وحياة، وما يجب أن يأتي أولًا.
 # en: d2586903dd907f55b8076edbe00b87f4e45ab92f
@@ -2793,9 +2857,9 @@ diagram-restaurant-kitchen = مطبخ مطعم
 # en: 3fecd5a70de57bb7748a775d7d4c6072bace1e50
 diagram-router-and-everything-on-it = موجّه وكل ما عليه: حاسوب محمول وهاتف وطابعة وتلفاز وجرس باب.
 # en: 949c596fb3177561b6f2515cbc92b6b68a4292c2
-diagram-team-by-its-skills-design = فريق بمهاراته: التصميم والكتابة والبرمجة، ومن يفعل أكثر من واحد.
+diagram-team-by-its-skills-design = فريق بمهاراته: التصميم والكتابة والبرمجة، ومن يجمع بين أكثر من مهارة.
 # en: eeb20483d989d9deef42a5ae150f171af0bc6201
-diagram-expense-report = مطالبة بنفقات
+diagram-expense-report = تقرير نفقات
 # en: ded9774849cab88a3dd08936595ffe270dd397a2
 diagram-apollo-11 = أبولو 11
 # en: b5723994f111884ca2f9a82ecb525fb6992e44c8
@@ -2807,19 +2871,19 @@ diagram-eight-days-in-july-1969 = ثمانية أيام في يوليو 1969، �
 # en: ce31ba59543ea424a6019bc67976ace141d62d09
 diagram-four-games-table-each-and = أربع ألعاب، وطاولة لكل منها، ومن يلعب ماذا.
 # en: 9d35a9836a6bb4c6180f6c2880c8c19c22ed4ea0
-diagram-from-photo-of-receipt-to = من صورة الإيصال حتى قسيمة الراتب، مرورًا بمدير والمالية.
+diagram-from-photo-of-receipt-to = من صورة الإيصال حتى كشف الراتب، مرورًا بالمدير والمالية.
 # en: 1f1489585228c4bf2d9599bdff9fef70f59b4a60
 diagram-moving-abroad = الانتقال إلى الخارج
 # en: a04755781fd967ec44d2f47f1ebf6ff83b2fe909
 diagram-patrick-and-maria-their-six = باتريك وماريا، وأولادهما الستة بسنوات حياتهم، والعمة التي ربّتهم.
 # en: 56aa5ec3b6a5e62a57ce1e1223c5f1f8148a7e02
-diagram-studying-for-exam = المراجعة لامتحان
+diagram-studying-for-exam = المذاكرة لامتحان
 # en: d7cda8e6bd3d07fe1968c61d6b068203911ae45c
 diagram-sea-clouds-mountains-rivers-groundwater = بحر وغيوم وجبال وأنهار ومياه جوفية ونباتات، وكيف ينتقل الماء بينها.
 # en: a1da7a04adf4a0189219b39bddb2518c44ba382f
 diagram-brontes = عائلة برونتي
 # en: 0c2311a818005e4508a11aa6a888f61a45bd9a3b
-diagram-brigade-under-head-chef-front = الطاقم تحت الطاهي الرئيسي، وقاعة الاستقبال بجانبه.
+diagram-brigade-under-head-chef-front = طاقم المطبخ تحت الطاهي الرئيسي، وفريق الصالة بجانبه.
 # en: 0c62114de8628cfe00011bba9cc35f003279ac83
 diagram-house-network = شبكة البيت
 # en: 1fcf7cc436a073faa316df56cf1a4d3ec2b87d6e
@@ -2831,11 +2895,11 @@ diagram-who-can-do-what = من يستطيع فعل ماذا
 # en: b27a04f87f9d4657107a8dbd89d32eb1dedb41b7
 diagram-tap-empty-space-for-branch = انقر على مساحة فارغة لإضافة فرع. انقر على فكرة لتحريرها، وEnter للتالية. اسحب واحدة فوق أخرى لتضعها تحتها. «وصل» يربط اثنتين عبر الخريطة.
 # en: fd23500d007e121f9530bb8b530f367ed9e00825
-diagram-place-cards = بطاقات الأماكن
+diagram-place-cards = بطاقات الجلوس
 # en: dd9ef7db14a8bdb18f7a266d6e91711443e71a29
-diagram-print-place-cards = طباعة بطاقات الأماكن
+diagram-print-place-cards = طباعة بطاقات الجلوس
 # en: 030e26916d4c1d1ca0c41b3b447dde54ed891dbd
-diagram-print-place-cards-card-guest = طباعة بطاقات الأماكن: بطاقة لكل ضيف، ثماني في ورقة letter، للقص
+diagram-print-place-cards-card-guest = طباعة بطاقات الجلوس: بطاقة لكل ضيف، ثماني بطاقات في ورقة letter، للقص
 # en: face83ee3014bdc8f98203cc94e2e89222452e90
 diagram-guest = ضيف
 # en: 5734dbf560e03e0dea1a1bd85af5088238d5d0e4
@@ -2849,7 +2913,7 @@ diagram-lanes-name = اسم المسار
 # en: 769bb19e615b7f8e2809e5882e2d05a18f57a531
 diagram-when = متى
 # en: b23ea75ecf303b9756682c84abecebc7a010f2b1
-diagram-tap-person-to-type-on = انقر على شخص لتحريره. أضف + واسمًا للشريك، وShift+Enter للسنوات، وEnter للتالي. اسحب شخصًا فوق آخر لتضعه تحته. «وصل» يرسم خطًا منقطًا.
+diagram-tap-person-to-type-on = انقر على شخص لتحريره. اكتب + واسم الشريك، وShift+Enter للسنوات، وEnter للتالي. اسحب شخصًا فوق آخر لتضعه تحته. «وصل» يرسم خطًا منقطًا.
 # en: 14e56ce6d5f3d8d56d2ce979bf2eb20aaa9dd93d
 diagram-tap-empty-space-for-table = انقر على مساحة فارغة لإضافة طاولة. انقر على طاولة أو شخص لتحريره. الفاصلة تبدأ الضيف التالي. اسحب شخصًا إلى طاولة أخرى.
 # en: 7049f105f3a76be9cb8c6d7b74eb3edf60d9a7da
@@ -2858,7 +2922,7 @@ diagram-tap-inside-circles-to-add = انقر داخل دائرة لإضافة ع
 ## the Trip Planner
 
 # en: fdd91fbac0e5654a70026a229cc8a5d869157b24
-trip-trip = رحلة
+trip-trip = برنامج رحلة
 # A stop is a place on the route; { $n } is its number, { $time } a drive such as "1 hr 38 min". 'Trip Planner' and 'Plan' are above.
 # en: 46644fef83a4f92870b2bda5079d97dae8b05b1f
 trip-route-on-map-stops-in = مسار على خريطة: محطات بالترتيب، لكل منها ملاحظة، والمسافة بينها.
@@ -2885,7 +2949,7 @@ trip-join-stops-in-order = وصل المحطات بالترتيب
 # en: 7bdcf970899e9519b75f2dc24d1909f670b283cb
 trip-show-whole-route = إظهار المسار كله
 # en: fa157c9ab413b3c415d7ada7457694a35c7869a1
-trip-where-i-am = أين أنا
+trip-where-i-am = موقعي
 # en: ab478f3efc840eebab919dff1b9512286f70c10c
 trip-map = خريطة
 # en: 4fa4643900d7a129558f6c34b681a8d419a9ef9d
@@ -2926,7 +2990,7 @@ trip-insert-place-by-name = أدرج مكانًا بالاسم.
 # en: b75a19207f834200f4801a2db37886567baf25bc
 trip-place-by-name = مكان بالاسم
 # en: 7d7388a1d59910888c95c66fed24ad82cb5edbf2
-trip-find-place = ابحث عن مكان
+trip-find-place = البحث عن مكان
 # en: 57d3470391ec96a8442196a4ff85cf39e4f65e98
 trip-town-address-museum = مدينة أو عنوان أو متحف
 # en: bce06414177f72ab70e6387b6af9f8ceef0d6049
@@ -2936,7 +3000,7 @@ trip-searching = جارٍ البحث…
 # en: 07a4d61733e108a8ffa6e5753e09227b6a1a0f80
 trip-searching-sends-words-you-type = البحث يرسل ما تكتبه فقط إلى Nominatim التابع لـ OpenStreetMap.
 # en: 2b36ec5f26fb5c35fccb5edd05776349d238b677
-trip-places-found = الأماكن التي وُجدت
+trip-places-found = الأماكن المطابقة
 # en: 6c70807e19d1f88aae7d66770719debbaf4ae89b
 trip-nothing-found = لم يُعثر على شيء.
 # The templates
@@ -2945,17 +3009,17 @@ trip-week-in-portugal = أسبوع في البرتغال
 # en: 3a4002be5f16560bb462d3f37d8b2caac8a65603
 trip-lisbon-to-porto-by-car = من لشبونة إلى بورتو بالسيارة، بالكيلومترات، ونصيحة عند كل محطة.
 # en: 72fa00e64f1816bfe62cd5e5ebae7ddd8bbc1d59
-trip-down-pacific-coast = على ساحل الباسيفيك
+trip-down-pacific-coast = على طول ساحل المحيط الهادئ
 # en: 6d871c8c9ed845cfaaafff0c18e335ce6da9ba42
 trip-san-francisco-to-los-angeles = من سان فرانسيسكو إلى لوس أنجلوس على الطريق السريع 1، بالأميال.
 # en: 8396776ccda695ac7d6e5f12a1eaa4dd3edecfac
 trip-scottish-highlands = مرتفعات اسكتلندا
 # en: 7a3f06a64060636652afe5912e0a00016bc3d17f
-trip-loop-from-edinburgh-each-leg = حلقة من إدنبرة، كل مرحلة بساعات القيادة.
+trip-loop-from-edinburgh-each-leg = جولة دائرية من إدنبرة، كل مرحلة بساعات القيادة.
 # en: 9660e47a7aad398fbc88947cd22e8628b2a92115
 trip-rome-places-to-see = روما، أماكن للزيارة
 # en: f01c658cc1c5b1dbfba8045b885174d2f5a3d154
-trip-places-as-dots-not-route = أماكن كنقاط لا كمسار: ما يُرى ومتى تذهب.
+trip-places-as-dots-not-route = أماكن كنقاط لا كمسار: ما تراه ومتى تذهب.
 # en: e50e4931f42687faef4a226f93981bb38a937ce9
 trip-weekend-in-copenhagen = عطلة نهاية أسبوع في كوبنهاغن
 # en: 402e0be1180f76470536e904cec4f7242211bb15
@@ -2967,11 +3031,11 @@ trip-ten-days-around-island-by = عشرة أيام حول الجزيرة بال�
 # en: 89059cee91b704cf1c0e42de4225df2968a207e7
 trip-dublin-food-crawl = جولة طعام في دبلن
 # en: b934fa6dfc063b38e47ce12ed4622e1cc0d55b75
-trip-seven-places-to-eat-in = سبعة أماكن للأكل في عصر واحد، من الغرب إلى الشرق، ومشي قصير بين كل منها.
+trip-seven-places-to-eat-in = سبعة أماكن للأكل في عصر يوم واحد، من الغرب إلى الشرق، ومسافة مشي قصيرة بين كل منها.
 # en: 2149c2c628bda1d9ea8522144f7ca59ce2a6bcc8
-trip-yosemites-mist-trail-loop = حلقة ممر الضباب في يوسميتي
+trip-yosemites-mist-trail-loop = مسار ميست الدائري في يوسميتي
 # en: 056b43a68d915001b02640fbb4ec910045a406ad
-trip-two-waterfalls-on-day-hike = شلالان في نزهة يوم من هابي آيلز وإليها، بالأميال.
+trip-two-waterfalls-on-day-hike = شلالان في نزهة سير ليوم واحد، ذهابًا وإيابًا من هابي آيلز، بالأميال.
 # en: b1365d430388f423cf7142e4a78c7470fed8a5fc
 trip-loire-by-bike = اللوار بالدراجة
 # en: e0fc4a0bf8e42cf48f5f6825bc3b8420df625254
@@ -2985,7 +3049,7 @@ trip-japan-by-rail = اليابان بالقطار
 # en: f687060ca9b759a7ed4bca61f7a2bf96764f2f8e
 trip-tokyo-to-miyajima-in-cherry = من طوكيو إلى ميياجيما في موسم أزهار الكرز، بالقطار السريع.
 # en: afea6c128d27238aad4e11871dfff6f692334301
-trip-last-100-km-of-camino = آخر 100 كم من كامينو
+trip-last-100-km-of-camino = آخر 100 كم من طريق كامينو
 # en: 33d01f381424bbc8bbd1b6a9487b3a53c38d07e9
 trip-sarria-to-santiago-on-foot = من ساريا إلى سانتياغو سيرًا على الأقدام، مرحلة كل يوم.
 # en: b15aca8406aa957e0b92331f3c94b96775672e6b
@@ -3003,7 +3067,7 @@ trip-presenting-next-stop = المحطة التالية (العرض)
 # en: a802f6e93c981ee6dd02df366f0141ca3aa085e0
 trip-presenting-stop-before = المحطة السابقة (العرض)
 # en: 3b14d20764a1fdef5ee74f4defab4ff20b0e7cce
-trip-put-stops-on-calendar-day = ضع المحطات في تقويم، يومًا لكل محطة
+trip-put-stops-on-calendar-day = وضع المحطات في تقويم، يومًا لكل محطة
 # en: 16fa5ad4958332a6bbb1eae6d1a8c6ee6f2c7752
 trip-first-last = الأول أو الأخير
 # en: 0aa341109cff3c75e204930fdeac94f52278bb67
@@ -3025,10 +3089,10 @@ looks-currency = العملة
 ## the Calculator app
 
 # en: a0015ec89d8034b2ca4a8f0219350514e19294a0
-calc-calculation = عملية حسابية
+calc-calculation = حساب
 # The tape is the list of lines worked out, as on a printing calculator. 'Calculator' and 'Numbers' are above.
 # en: ab4ea6f8fe06812a128297560bee7aff1be0c040
-calc-calculator-that-shows-its-work = آلة حاسبة تحفظ عملها: أسماء ووحدات وتحويلات ورسوم بيانية لـ y = f(x).
+calc-calculator-that-shows-its-work = آلة حاسبة تُظهر خطوات عملها: أسماء ووحدات وتحويلات ورسوم بيانية لـ y = f(x).
 # en: f146f8e93fc9312f6b8003b048cd24d1574469af
 calc-tape-text = الشريط كنص
 # The bar
@@ -3125,11 +3189,11 @@ calc-rent-up-from-1-450 = ارتفع الإيجار من 1,450 دولارًا إ
 # en: 9ff9fc7e0344944578d50820e0326f7bf34f1c8e
 calc-kitchen-conversions = تحويلات المطبخ
 # en: c7ccdb52f144fcec56adb8ecb5264f35d03600c0
-calc-cups-ovens-spoons-and-weights = أكواب وأفران وملاعق وأوزان، من مقياس إلى آخر.
+calc-cups-ovens-spoons-and-weights = أكواب ودرجات حرارة الفرن وملاعق وأوزان، من مقياس إلى آخر.
 # en: 267b3d4696b05cc65039fcf4afb8cd9548ed5a29
 calc-scaling-recipe = تكبير وصفة
 # en: a0e9dcbc29ed1364a4891c3671dd43675af64d11
-calc-banana-bread-for-eight-made = خبز الموز لثمانية جُعل لاثني عشر: كل مقدار مضروب في واحد ونصف.
+calc-banana-bread-for-eight-made = خبز موز لثمانية أشخاص يصير لاثني عشر: كل مقدار مضروب في واحد ونصف.
 # en: 8639704eb84800c829b41e6fcd833d686dcb41f6
 calc-unit-conversions = تحويل الوحدات
 # en: 2aef2060ccb74d32576f5b1f936372bdd97252f3
@@ -3137,15 +3201,15 @@ calc-feet-to-centimeters-miles-to = من القدم إلى السنتيمتر، 
 # en: 7b31203b4780df1cd410c84049ed4d031dacc8e3
 calc-currency-at-rate-you-type = عملة بسعر صرف تكتبه
 # en: 5f4e47693383fd619db1b39871b821a7fccf86df
-calc-trip-priced-in-euros-and = رحلة محسوبة باليورو ومحوّلة إلى دولارات، مع رسم البطاقة فوقها.
+calc-trip-priced-in-euros-and = رحلة محسوبة باليورو ومحوّلة إلى دولارات، مع إضافة رسوم البطاقة.
 # en: 6645ae7e46c209b7ba6f5fb3b6aa707395a2c3d2
 calc-fuel-for-trip = وقود رحلة
 # en: e2d3235c5cfd9ceffb4e54f0635e4f3841b0c0e1
-calc-boston-to-montreal-and-back = من بوسطن إلى مونتريال والعودة: الأميال والأميال للغالون والسعر، بأربع طرق.
+calc-boston-to-montreal-and-back = من بوسطن إلى مونتريال والعودة: الأميال والأميال لكل غالون والسعر، مقسومًا على أربعة.
 # en: bb294d581aa3512dfdaf06cb5705338f026425ff
 calc-paint-for-room = دهان غرفة
 # en: 8899142eaeb03e3a2cfc17f5e68f1977478e2ce5
-calc-walls-less-door-and-windows = الجدران ناقص الباب والنوافذ، بطبقتين، في علب سعة غالون.
+calc-walls-less-door-and-windows = الجدران بعد طرح الباب والنوافذ، بطبقتين، في علب سعة غالون.
 # en: fa9aac4028931969e4e43d5926f21c1c02b03737
 calc-time-zones = المناطق الزمنية
 # en: daa6b831387e404e18a932466e1b26486e942c1b
@@ -3163,7 +3227,7 @@ calc-dose-by-weight = الجرعة بحسب الوزن
 # en: a2cdd7739e2ff2b4f1ee78074c5c7981d1b877f9
 calc-milligrams-kilogram-turned-into-milliliters = ملليغرامات لكل كيلوغرام، محوّلة إلى مليلترات من شراب؛ تحقق من كل جرعة مع الصيدلي.
 # en: 4699da98e2d343e04aa2465082aedd4d5053aa11
-calc-electricity-for-appliance = كهرباء جهاز
+calc-electricity-for-appliance = استهلاك جهاز للكهرباء
 # en: d1b1126c73c13b523ce30bd2f563ad1a7b1c0210
 calc-watts-hours-day-and-price = الواط وساعات اليوم وسعر الكيلوواط ساعة: كم تكلف المدفأة في الشهر.
 # en: 96aeea666f6bd696d83ef3dee80fff1fcc3ff896
@@ -3177,18 +3241,18 @@ calc-5-000-and-200-month = 5,000 دولار و200 دولار شهريًا بفا
 # en: 813161b07c2ed5cab82b09f8c31b3810800bcd26
 calc-break-even = نقطة التعادل
 # en: bee9b48a097d165fe0d11f7c3a7175019c158c5e
-calc-costs-against-sales-for-coffee = التكاليف مقابل الإيرادات لعربة قهوة: حيث يتقاطع الخطان تجد الأكواب التي تحتاجها يوميًا.
+calc-costs-against-sales-for-coffee = التكاليف مقابل المبيعات لعربة قهوة: نقطة تقاطع الخطين هي عدد الأكواب اللازم بيعها يوميًا.
 # en: a9047269b4f64dbbb2df8503315406b2b33fc4e9
 calc-curve-and-its-slope = منحنى وميله
 # en: b5f43817a99082555a1fc4891fd2eb5bfaba6e10
 calc-x3-3x-its-derivative-and = x³ − 3x ومشتقتها، والمماس الأفقي في قاع المنخفض.
 # en: d4802215f2c0025bd9e3f3fe025230ceda4e830b
-calc-waves-adding-up = موجات تتراكم
+calc-waves-adding-up = جمع الموجات
 # en: 9e46b2d75638fb2ebe905ad0c4be8059be6487cc
 calc-sine-waves-summed-on-their = موجات جيبية تُجمع في طريقها إلى موجة مربعة.
 # The grip on a line of the tape; the bar under lines chosen whole.
 # en: fd71cff4626f555a0e69c5b6801a591cabd1d173
-calc-choose-line-n-drag-it = تحديد السطر { $n }، واسحبه لتحريكه
+calc-choose-line-n-drag-it = تحديد السطر { $n }، والسحب للتحريك
 # en: dab2e3d9cf8c3bfccd20fa34fac6fc738ce9aba7
 calc-chosen-lines = الأسطر المحددة
 
@@ -3209,11 +3273,11 @@ compare-paste-link-to-document-as = الصق رابط المستند كما هو
 # en: 7fb07fcb91ba19442009f16f24be4ef85b3eca16
 compare-paste-link-to-document-as-it-was = الصق رابط المستند كما كان
 # en: 0ae84aa126111ee639f685e9ed05c6895e632a90
-compare-put-in = مضاف:
+compare-put-in = أُضيف:
 # en: 210dd62a81e43d19e22018878ba665485e0526cb
 compare-swap = تبديل
 # en: c331654dfaed937af3dc0e72f31b21fdfb1aa325
-compare-taken-out = محذوف:
+compare-taken-out = حُذف:
 # en: aec0a618ef67ca171ab77615fc7cab57405fea3f
 compare-first-link = الرابط الأول
 # en: 123bc4a6d63cd1415119c84ed21412a29ef9fbcc
@@ -3252,7 +3316,7 @@ open-that-file-is-too-large = هذا الملف كبير جدًا.
 # en: 8f432852569edbf7610713a6554e7a61396327d5
 open-keep-them-on-this-device = حفظها على هذا الجهاز
 # en: c4fe6d8b035f6108e8a7e0037667dacf3d6cca25
-open-nothing-is-saved-on-this = لا شيء محفوظ على هذا الجهاز. احفظها هنا، أو افتح واحدًا منها.
+open-nothing-is-saved-on-this = لا شيء محفوظ على هذا الجهاز. احفظها هنا، أو افتح أحدها.
 # en: 0826daee1d616f7de3a2b205eb2360fcaccc77ef
 open-first = فتح الأول
 # en: 59d36bf6c42ab3ae1481fe62abbc67ffef7a8b22
@@ -3302,7 +3366,7 @@ keys-this-page = هذه الصفحة
 ## Find in this document (kit/ui/find.ts)
 
 # en: 475c848673a3f79fa778f01c2bd5a721d4c41707
-find-not-found = لم يُعثر عليه
+find-not-found = لا نتائج
 
 ## a menu narrowed by typing (kit/ui/menu.ts)
 
