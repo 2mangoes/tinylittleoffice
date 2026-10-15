@@ -48,7 +48,7 @@ shell-keyboard-shortcuts = 键盘快捷键
 # en: bc447a3151935ceff76e781c90fb02c45d25f004
 shell-nothing-to-keep-yet = 还没有可保存的内容
 # en: 8c00f9130260156b1612126a7cf9a23bb3c553d6
-shell-open-it = 打开它
+shell-open-it = 打开
 # en: ef6e207cc7cea57220ad9a73fc6040b0085bf63e
 shell-save-in-browser-is-off = “在浏览器中保存”已关闭，因此不会保存任何内容。请在菜单中打开它。
 # en: 3939d97295147954c5488340b1f427ebbfa51e69
@@ -120,7 +120,7 @@ drawer-turn-on-to-save-files = 打开后会在浏览器中保存文件。
 # en: af191ab94c0b2f93d5e90820805b9c7f419ce80d
 drawer-turn-off-to-remove-all = 关闭后会移除所有文件和设置。
 # en: db5f691e51583d80782a9c51e78f01c49ccefd02
-common-nothing-saved-in-this-browser = 此浏览器中不保存任何内容
+common-nothing-saved-in-this-browser = 此浏览器中未保存任何内容
 # en: 15f47f2fab9454be9fab70ba4bd89293fdc40c0a
 common-saving-in-this-browser = 正在此浏览器中保存
 # en: 5e543c55dd0832d9cbbdccc9e22011d240080e50
@@ -140,7 +140,7 @@ drawer-about = 关于
 # en: 515e0d24040d094379cfdc94e3c6c2f63a26f1f6
 common-tiny-little-office = 小小办公室
 # en: 399d4aacd52f76ac8090ce08a31e550e2123645d
-drawer-about-tiny-little-office = 关于 小小办公室
+drawer-about-tiny-little-office = 关于小小办公室
 # en: 6218d1c0ab69084ed45fb0f022b95f382310184a
 drawer-tiny-little-office-is-experiment = 小小办公室是纽约的数字与 AI 战略及软件开发公司 { $aboard } 的一项实验。
 # en: 04a1291dcc6e5d304f04516685710a331963f630
@@ -170,18 +170,18 @@ drawer-add-to-home-screen = 添加到主屏幕
 # en: 9b3cbed5c490c07473546a88768ba29b787e9e52
 drawer-size-of-everything = 缩放
 # en: 943c5ac9fa7766d7c1ebecbc95c4e0d27b4ef9d4
-drawer-to-add-tiny-little-office = 要把 小小办公室 添加到主屏幕：点“分享”，再点“添加到主屏幕”。
+drawer-to-add-tiny-little-office = 要把小小办公室添加到主屏幕：点“分享”，再点“添加到主屏幕”。
 
 ## links that leave the site (kit/ui/link-guard.ts)
 
 # The menu button's tooltip: the Office mark is the menu.
 # en: 4a48e81d0d023913c2155eb30954f58853a5591d
-leave-tiny-little-office-menu = 小小办公室 菜单
+leave-tiny-little-office-menu = 小小办公室菜单
 # The question before a link that leaves the site: "You are leaving Tiny Little Office for" over the site's name, large.
 # en: 92ad7c004fe14dea34666631ff31b016eb39ee40
 leave-do-you-trust-this-link = 你信任这个链接吗？
 # en: 8d85feca3f164857fc84014a8f2ed5cc4846d4c9
-leave-you-are-leaving-tiny-little = 你即将离开 小小办公室，前往
+leave-you-are-leaving-tiny-little = 你即将离开小小办公室，前往
 # en: 50ef68d5c205237951dae42aa775a66480171c46
 leave-this-link-writes-email-to = 此链接会向以下地址写一封邮件
 # en: 102dce223fdc2f3bbdda71f28108e2a6fdf21710
@@ -207,7 +207,7 @@ leave-this-link-hides-characters-in = 此链接的地址中含有隐藏字符。
 ## sharing: the Share dialog (kit/core/shell.ts), where the link fits (kit/share/limits.ts), the arrival banner
 
 # en: 21697833514286cb120912c109ed55e870e44b01
-share-copy-opened-in-new-tab = 在新标签页中打开的副本
+share-copy-opened-in-new-tab = 已在新标签页中打开副本
 # en: ae7b279c96200b853008a352fa110ac2565f3dc5
 share-edit-link = 编辑链接
 # en: 12355fc4c6eeb80306a7fe5199240b694bf2b85e
@@ -253,7 +253,7 @@ share-this-link-expires-in-n-minutes = 此链接将在 { $n ->
        *[other] { $n } 分钟
     }后过期
 # en: 04609a8df41f042b261ed7cf06b80c2667badd0e
-share-this-link-n-characters-fits = 此链接：{ $n } 个字符，适合放进短信
+share-this-link-n-characters-fits = 此链接：{ $n } 个字符，可以放进短信
 # en: 822e1dca627d6149b0263bdae6477ca56c62a36c
 share-this-link-n-characters-too = 此链接：{ $n } 个字符，对{ $where }来说太长
 # en: f9551d11c51a8da0015b0716e3aab327784b2ec2
@@ -366,15 +366,15 @@ share-hundred-previews-day-from-one = 同一个地址每天最多一百个预览
 # en: 959db3cd3ff1a424890a809f9cf7445f37db3289
 share-server-refused-picture = 服务器拒绝了这张图片
 # en: af490175b729a82a4315134642a89f1f87681967
-share-pages-in-frame-on-another = 这些页面，放在另一个网站的框架里，并附链接可在这里打开。
+share-pages-in-frame-on-another = 在另一个网站的框架中显示这些页面，并附上在这里打开的链接。
 # en: 9377de06278eacbdf4a297a82b8eb9aa3d4220c0
 share-your-mastodon-server = 你的 Mastodon 服务器
 # en: 8ae1c34bd37fad49cc5f8e02da648a78e89c3ed8
-share-left = 左
+share-left = 剩余
 # en: 62be4731dedfbbc70aa7fa30d6649d816af8ca4b
-share-uses = 用途
+share-uses = 占用
 # en: 525f61b6729229b1a8854a9e50bcaa52ea96b131
-share-where = 位置
+share-where = 场合
 # en: cdbfed741d905515df704d9585fc74781801a24d
 share-where-link-fits = 这个链接放得下吗？
 # en: ddba25b7aa2e43ef1c94a2a8cfb8b839fb723ca2
@@ -436,7 +436,7 @@ privacy-set-password = 设置密码
 # en: f897cb67f049674308a073079bd85ad0649f8c82
 privacy-short-links = 短链接
 # en: c706d94b54ef0b520420dd58063cfc78bc88c7e3
-privacy-set-password-in-share = 设置密码，请在“分享”中操作
+privacy-set-password-in-share = 在“分享”中设置密码
 # en: e546afa59de2ec4b23ca6c4fafbaddac7bab9240
 privacy-short-links-made-here-until = 在这里生成的短链接，保留到过期为止。
 # en: b556bf027f9123d39581babef7e15564c24866da
@@ -464,7 +464,7 @@ privacy-every-document-opened-here-in = 你打开的每一份文档的全部内�
 # en: 18b8a03ed6567555edd5005aab5b090984f4b5bd
 privacy-not-ours-to-clear = 我们无法清除这一项
 # en: 3ca2d1d26637d42b974b313bb8ce231333179a9e
-privacy-by-name = 由{ $name }
+privacy-by-name = 作者：{ $name }
 # en: a9e72cf83916d4381012a19b329292818f845a43
 common-n-documents = { $n ->
        *[other] { $n } 份文档
@@ -533,7 +533,7 @@ common-find-app-doc-template-or = 查找应用、文档、模板或命令
 # en: 0d47323c5ee8dde30a5ca28f6ed6103d42081b97
 common-in-this-document = 在本文档中查找
 # en: 733a5f2fb910bb704c7993cae3d8224558d405de
-common-indent-or-bring-out-in = 增加或减少列表项的缩进；在表格中到下一个单元格
+common-indent-or-bring-out-in = 增加或减少列表项的缩进；在表格中跳到下一个单元格
 # en: bf6e36633c2362cb7fa31a0e8f833388a49ba28c
 common-move-selected-items-up-or = 把所选条目上移或下移
 # en: 989fe994e413c509c03d3dd229b775a3ddc4707b
@@ -574,7 +574,7 @@ download-downloaded-name = 已下载{ $name }
 # en: 01125e1be1f56cdaa47c6314a158e1219af819b3
 download-failed = 下载失败
 # en: e7f6a6728b280414756d238ae70084720018ba47
-common-open-in-tiny-little-office = 在 小小办公室 中打开
+common-open-in-tiny-little-office = 在小小办公室中打开
 # Under a document cut off at a slide's foot: a link that opens it whole, in its own app.
 # en: c510d6c04c0951500c8e43f623e9f8886c378aec
 download-see-more = 查看更多
@@ -622,7 +622,7 @@ common-footnote-n = 脚注 { $n }
 common-app-document = { $app }文档
 # The same card when its app is known; { $noun } is the app's noun: "A spreadsheet".
 # en: 3f77d60418ea2f6a04196c1e67715b3007390e77
-common-noun = 一个{ $noun }
+common-noun = { $noun }
 # en: adac69379a626c2436948a4ef1792c7d719ef929
 editor-code = 代码
 # en: 6512ee1541e9a6c52d5bf7cf465332e8df25ea3c
@@ -644,7 +644,7 @@ editor-set-link = 设置链接
 # en: d2de1a2831e7fee28d6c8d214b66da0d1bed30c8
 editor-open-link = 打开链接
 # en: f377ac75602950b2c36449de5bceb3c12333ac77
-editor-change-link = 编辑链接
+editor-change-link = 更改链接
 # en: 8d48d1f9e74c4fecd89a67645ca3593ef0964710
 editor-remove-link = 移除链接
 # The selection bubble's name: what can be done to the words selected.
@@ -726,7 +726,7 @@ write-sans-headings-serif-text = 标题用无衬线，正文用衬线
 # en: f69f233005f15802770fd26fbf7ead52ec13d9e6
 write-book = 图书
 # en: d242210a93b0f91c16b76df2eaf8efc7ae211585
-write-justified-indented-small-caps = 两端对齐，首行缩进，小型大写
+write-justified-indented-small-caps = 两端对齐，首行缩进，小型大写字母
 # en: 5ebe6500747dd5dbad08cc1b33d55fac89ccbe97
 write-newspaper = 报纸
 # en: ed0ae2181b2137e6b9f63fdbaeed415ac7e73502
@@ -743,7 +743,7 @@ write-this-card = 这张卡片
 # en: 1e06557fc0660e50a99fa6eef90bff822411e3ae
 write-open-in-app = 在{ $app }中打开
 # en: 108add9c9b3eed03ee5eb57783d780a485840218
-write-locked-worked-out-for-you = 已锁定：计算得出
+write-locked-worked-out-for-you = 已锁定：自动计算
 # en: ec0c3b76630fd745381cc215a284820af75a683a
 common-footnotes = 脚注
 # en: 5c71d5f47999af43b0a80e72abd8e5b79e736f80
@@ -752,7 +752,7 @@ write-back-to-footnote-n-in = 返回正文中的脚注 { $n }
 write-back-to-text = 返回正文
 # en: be51f46400fec04e375ba1ea35d98d05b69a1a2e
 write-n-words = { $n ->
-       *[other] { $n } 个字
+       *[other] { $n } 字
     }
 # en: 71d562b7d96e16456a25e7230f3bc08bb796552a
 write-word-docx = Word（DOCX）
@@ -856,7 +856,7 @@ write-what-happened-in-order-what = 按顺序写发生了什么、你想要什�
 # en: f74c6bc075b1961f73f45729ce6281dc84fb3ccf
 write-letter-to-politician = 致政界人士的信
 # en: 2e754026e13e7ebe41d9513e31f94d8268341243
-write-ask-your-representative-for-vote = 请你的代表投一票：你是谁、为何对本地重要，以及一个问题。
+write-ask-your-representative-for-vote = 请你的议员在表决中投支持票：你是谁、这件事为何对本地重要，再提一个问题。
 # en: de21096f37522d15740e7a4acd69efc811f9b5ce
 write-love-letter = 情书
 # en: a6977a11c96b06575fd8359e1bb9e3dea5a21fcf
@@ -870,9 +870,9 @@ write-eulogy = 悼词
 # en: cdc87e623e95678f786543dd272ba279df15e8ee
 write-life-in-few-minutes-where = 用几分钟讲一个人的一生：从哪里开始，他们是怎样的人，你会想念什么。
 # en: 6c63ce6d4727a3fb46c16a62ac8d536b0b61fd08
-write-zine-essay = 杂志散文
+write-zine-essay = 小志随笔
 # en: ecce024c73aadb2150552b3419d5aa1c3cb72c17
-write-personal-essay-for-small-magazine = 给小型杂志写的个人散文，打字机风格。
+write-personal-essay-for-small-magazine = 为一本独立小志写的个人随笔，打字机风格。
 # en: 563a631aba8690962836c99d15886672eb96ef62
 write-petition = 请愿书
 # en: 6d3ace089783eb6cf5e5fe47a7d74a3ee5c21f39
@@ -894,20 +894,20 @@ write-name-this-column = 给这一列命名
 ## Insert's dialog (kit/ui/insert-dialogs.ts): Tiny Little Office Doc
 
 # en: d5674bb4dcb8c5fe378eb9cd0bb9d1849ed37581
-insert-tiny-little-office-link = 小小办公室 链接
+insert-tiny-little-office-link = 小小办公室链接
 # en: cdea71ff947c2b49dd7d7ea146fd3efeb9fa5677
 insert-opening-short-link = 正在打开短链接…
 # en: 9d2d34c4b04d8410e0025beb7899a31d1bc57c04
-insert-paste-link-of-another-tiny = 粘贴另一份 小小办公室 文档的链接，长短均可：它的第一页会显示在这里。
+insert-paste-link-of-another-tiny = 粘贴另一份小小办公室文档的链接，长短均可：它的第一页会显示在这里。
 # en: 7e4861cdc8de2c0c4cf87ca37c9130a92051b5b0
-insert-this-is-not-tiny-little = 这不是 小小办公室 链接，或者已过期。
+insert-this-is-not-tiny-little = 这不是小小办公室链接，或者已过期。
 # en: 1eb05dc15f4e90a6a61c46b111812e974555cd81
-insert-tiny-little-office-doc = 小小办公室 文档
+insert-tiny-little-office-doc = 小小办公室文档
 # en: 7bb236efe4e244196e506d65542626cfe368bb09
-common-tiny-little-office-doc-ellipsis = 小小办公室 文档…
+common-tiny-little-office-doc-ellipsis = 小小办公室文档…
 # Insert ▾'s group of the apps a new document can be made in, inside this one.
 # en: f9f93f3f14cfa3eea1bfcfee97ae22cd15b25e0d
-common-new-document = 新文档
+common-new-document = 新建文档
 
 ## another document edited in place (kit/ui/doc-dialog.ts); a table's size is Rows × Columns
 
@@ -937,7 +937,7 @@ chart-pie = 饼图
 # en: 40c20d94e78fa142819df8cc9440d30e65329975
 chart-series = 数据系列
 # en: 79b2c4ce6295c191bf1031160055f59fb8174174
-chart-kind-chart-data = { $kind }图表。{ $data }
+chart-kind-chart-data = 图表：{ $kind }。{ $data }
 
 ## the Spreadsheet
 
@@ -1094,7 +1094,7 @@ sheet-empty-sheet = 空工作表
 # en: 2decd02b722b692c9d30d7de5e0c1191d1968de7
 sheet-n-of-max-shown = （显示 { $n } / { $max }）
 # en: 9e85be5a97dd107512bd06368b695b4265a662c9
-sheet-50-more-rows = 再来 50 行
+sheet-50-more-rows = 再显示 50 行
 # en: 46dd847f36799647b69659ed71327486c70728ea
 common-add-column = 添加一列
 # en: dff758e7f1104295adde7af1bb92396f6c7c88a7
@@ -1203,7 +1203,7 @@ sheet-shown-as-typed = 纯文本
 # en: a2a5bdeca9391be1e0cdff1c19895bae7fadc2c2
 sheet-sort-rows-by-it = 排序依据
 # en: ff87bd67a9f3709f0a4247baa8ba4de4a5bd5fd2
-sheet-suggested = 建议
+sheet-suggested = 推荐
 # en: eda0b8f3c389658a7369166fd4c36099e380adff
 sheet-is-as-wide-as-it = 工作表已达到最多 26 列。
 # en: 0f54b98f336606a21f0bcbdc77afa4474b2b1966
@@ -1258,7 +1258,7 @@ icons-favorites = 收藏
 # en: a8b63bb6a000ce6560e6126bf0fade0a56fef128
 icons-search-icons = 搜索图标
 # en: 7fcd8d44c6f295423534073543e6050ddd8cf497
-icons-suggested = 建议
+icons-suggested = 推荐
 # en: edb8f6c14252759cd8673c61a24376d32e17b93a
 common-icons = 图标
 # en: 7d9b3876b6aa451cf6a99a0323e97ba79d6a4a27
@@ -1363,7 +1363,7 @@ draw-room-plan = 房间布置图
 # en: fcba7b3fe14a456c5dd428b4e0b28552efa25751
 draw-living-room-rearranged-sofa-rug = 重新布置的客厅：沙发、地毯、书柜和书桌按比例绘制，并画出门的开合范围。
 # en: 8640aa92343372c68f5d72660821c342598d8b38
-draw-three-ideas-for-coffee-roasters = 并排的三个咖啡烘焙坊标志创意，名称用大字，并有选定的日期。
+draw-three-ideas-for-coffee-roasters = 并排的三个咖啡烘焙坊标志方案，名称用大字，并注明定稿的截止日期。
 # en: 68224d905ee1bc5c63082121b1e80cf6fe7d08c1
 draw-weather-icons = 天气图标
 # en: 0d07d8bcde49fe88082ab75f75e2fd49bbcef253
@@ -1387,7 +1387,7 @@ draw-drawing-of-n-unlabeled-shapes = 一幅绘图，含 { $n ->
 # en: f33cdbb01b5b65fe3fe8928669d13ca09b3b5403
 draw-leads-to-b = { $a }指向{ $b }
 # en: b9e37b62382792094f5463a54183d523118a25a0
-draw-joins-b = { $a }连着{ $b }
+draw-joins-b = { $a }与{ $b }相连
 # en: e0883468badf6a5f9c1cfe0ce209a16939a64683
 draw-empty-drawing = 空白绘图
 # en: 1f9c4a5ed21a39ed45db86eb13cbff389eede2cf
@@ -1449,7 +1449,7 @@ draw-sky = 天蓝
 # en: 54076359fdc7f1f0e000b9ae15b96f8b09866acb
 draw-pink = 粉色
 # en: 168cbb2ea52b9e34d271accecfa7d7951e948a99
-draw-clear = 清除
+draw-clear = 透明
 # en: b1985e387405e4d4afb40d5dac9b2656f5d6f770
 draw-shapes = 形状
 # en: 4bab2d8fe13fa6ab57f80098b414f0f734c5dd25
@@ -1473,13 +1473,13 @@ draw-bring-to-front = 置于顶层
 # en: e259d4e19e695a41e2f10680f2e3f5693711382a
 draw-send-to-back = 置于底层
 # en: 972d57379db3e5be76d4ead709fef1ad71ff03d6
-common-duplicate = 复制一份
+common-duplicate = 创建副本
 # en: 5301648dcf6b53cefc9ed52999aaa92d4603cae0
 common-edit = 编辑
 # en: f6fdbe48dc54dd86f63097a03bd24094dedd713a
 common-delete = 删除
 # en: d7bc7e98ec7a8acfd61dabe29e1e9156adf86fb9
-draw-put-icon-on-this-shape = 给这个形状加个图标
+draw-put-icon-on-this-shape = 为此形状添加图标
 # en: 33bde816f0f7a53b8de67b8f8d6981f47e28159b
 draw-place-icon = 放置图标
 # en: 4fc05f2763ba31e2d3be5f08e7d0bab5d5dcbf78
@@ -1498,7 +1498,7 @@ draw-add-alt-text-describe-this = 添加替代文字：为看不到的人描述�
 # en: 676f1e162fc4f58007821f7c1a55b893e9a04715
 draw-what-does-this-drawing-show = 这幅绘图展示了什么？
 # en: c8636572fb4b9e79bae4c9fef82fc8109961c471
-draw-diagram-of = 一张图示，内容是…
+draw-diagram-of = 一张示意图，展示…
 # en: 5a33f2e7e84274a5291191ca3105e62d897eee0e
 draw-read-aloud-to-people-who = 会读给看不到的人听，并且不论绘图被嵌入还是下载，都随它一起保存。
 # en: 988c63b77eade4f718f9d469cb36e35bff976839
@@ -1673,8 +1673,9 @@ anim-depth = 景深
 anim-effects = 效果
 # en: b10a3addcfc5d7372c3a6101402e1f910da21188
 anim-frame-n-s-s = 第 { $n } 帧，{ $s } 秒
+# same
 # en: 62036a7016ec20273ff717698fbad321c4ff002b
-anim-impact = 冲击
+anim-impact = Impact
 # en: 4c0a5de85ac9512b6a503ba785c3f369b5cfbda2
 anim-key-at-s-s = { $s } 秒处的关键帧
 # en: 74adc5789ce92de7bbb5e3d84a287a1ce6d3e7f5
@@ -1867,13 +1868,13 @@ common-open-in-new-tab = 在新标签页中打开
 # en: cdd6290b6b2860663a3ff7c60cbe70af640e9c39
 common-outline = 大纲
 # en: d7f6278b9a3a511b82633cbd63a4e86e91bab2d1
-outline-outliner = 大纲
+outline-outliner = 大纲工具
 # en: e57362d579b61ac9d08f5012ee0adf6fde22a855
 outline-outline-lowercase = 大纲
 # en: db2483000d154ca9fd74d41fc4e063a4b28faa87
 common-paste = 粘贴
 # en: e45795fb6033ae4ecc1e2e3610273fce71a317d7
-outline-plain-line = 普通线
+outline-plain-line = 普通线条
 # en: 9580fcbce0c31ceaa47eb583e5f7ce637fdc8a0a
 outline-plain-text = 纯文本
 # en: 67ea25b11508ee37fa6c09bc9d3a1d6aa9a30f96
@@ -1902,7 +1903,7 @@ outline-due-date-change-it = 截止 { $date }。点按更改
 # en: 6cf55f3558276e2eefff5dd41ec206dc9780bebf
 outline-remove-due-date = 移除截止日期
 # en: 891e9d6d47f1bacfcba2dca1b282afcbcd25d94d
-outline-agenda = 议程
+outline-agenda = 待办事项
 # en: aa73cdd3260a16a41d572c06ee0da42cb4b85286
 outline-by-status = 按状态
 # en: 0e719dcbe720c315d66c977072f10251b56bd994
@@ -1946,7 +1947,7 @@ outline-view-as = 查看方式
 # en: 828c360c884f9246750461eea43fee4e42c6b52c
 outline-zoomed-in-on = 聚焦于
 # en: 38eca6735f66d186c0bd9c549873e774551dc35f
-outline-a-plain-line = 普通线
+outline-a-plain-line = 普通线条
 # en: 884abd948f43aba4e5851b71a20e97aed7a6c96e
 outline-arrow-from-parent = 来自上级的箭头
 # en: b1efb9ef91ffdf7d42595fb81fb8b74184a5efbc
@@ -2039,7 +2040,7 @@ deck-science-lesson-on-chalkboard-aims = 黑板上的一堂科学课：目标、
 # en: f3a66c7b2a6ebda85ea74938fce4c397eae2a131
 deck-seed-pitch-in-eight-slides = 八张幻灯片的种子轮推介：问题、产品、图表里的增长、商业模式、团队、诉求。
 # en: aab8da6eadee157bba3937e9dc00741cfe48b13f
-deck-bike-shops-quarter-for-its = 一家店向合伙人汇报本季度：图表里的营收、成绩与失误、关键数字、下季度。
+deck-bike-shops-quarter-for-its = 一家自行车店向合伙人汇报本季度：图表里的营收、成绩与不足、关键数字、下季度。
 # en: d0fa5e5696edaf949dfe9e739a7a2eef0d433ae2
 deck-small-story-in-panels-about = 一个格子漫画小故事，讲向邻居借东西。
 # en: 6c1ff81a2445a9eab1616588060b483cd5b6cde8
@@ -2063,9 +2064,9 @@ deck-product-launch = 产品发布
 # en: 68d708c4452b9eaca2d5d38e9d0a5848059fd138
 deck-quarterly-review = 季度回顾
 # en: ca40a6181df561c65b71e9ebdf580ccae6b007b7
-deck-recipe-zine = 食谱小册子
+deck-recipe-zine = 食谱小志
 # en: 02bfd82260b75fe685e4e972cb9a3ae9b0a42f5f
-deck-seven-soups-for-cold-week = 寒冷一周的七道汤，一页一道，用一张纸折成小册子。
+deck-seven-soups-for-cold-week = 寒冷一周的七道汤，一页一道，做成一张纸折成的小志。
 # en: 44b5c7f041391d8b41a8ba365b6f13522877b478
 deck-their-story-for-reception-from = 他们的故事，用于婚宴：从怎么认识到那一问，附时间线和一段感谢。
 # en: 2aaeb944a6b05f452d512dc7dd5220adeee294ea
@@ -2079,13 +2080,13 @@ deck-workshop-agenda = 工作坊议程
 # en: e4c8d951f1cc300d96873c7cfc850ad0f0ddaab4
 deck-presentation-lowercase = 演示文稿
 # en: 1e35470a39e5b3ddca4d3b585c9011db9b4c4dc6
-deck-slides = 演示
+deck-slides = 幻灯片
 # en: 5075541433d31fb8cf207ced97577686ac3fe961
 deck-chosen-slides = 选中的幻灯片
 # en: d7935967cfd3de8f11b33801800bece8d90cb55f
 deck-move-this-slide-drag-it = 移动此幻灯片：把它拖到另一张上
 # en: 19926fc5c47a7a39dd1435da06e3fc4c027458ea
-deck-slides-titles-bullets-two-columns = 幻灯片：标题、要点、两栏、大图标，以及放在幻灯片上的其他文档；或者可打印折叠的小册子、手册、宣传册、漫画、海报或胸牌。
+deck-slides-titles-bullets-two-columns = 幻灯片：标题、要点、两栏、大图标，以及放在幻灯片上的其他文档；或者可打印折叠的小志、小册子、宣传册、漫画、海报或胸牌。
 
 # The layouts, the transitions, the formats
 # en: 7509c5747e5db3dfa3373afc42eca9f5b27a8599
@@ -2097,13 +2098,13 @@ deck-big-icon = 大图标
 # en: 5298d08bb7ae7d01f4efcdbb94ff03fc487fd11c
 deck-fade = 淡入淡出
 # en: 38d13bda5c40afc32d629f81dec6c156cbea328e
-common-cut = 切换
+common-cut = 剪切
 # en: a5d5b46a7720824b51da4be0af97f5cfd1168cd0
 deck-slide = 滑动
 # en: 9b3cbed5c490c07473546a88768ba29b787e9e52
 deck-zoom = 缩放
 # en: d4ff278598ebbd3f36cecf27e68c66de49d2f62f
-deck-zine = 杂志
+deck-zine = 小志
 # en: 8ef5c45547ec6440e6dde4870e3f92d6c08dfbaf
 deck-booklet = 小册子
 # en: 80dceb58c1f9daca0ebaa066d80e670cfdf1123e
@@ -2117,7 +2118,7 @@ deck-name-badges = 胸牌
 
 # The themes (the Look menu) and the icon colors
 # en: 34118050b206b7ee3e5bcb8e4adbe8c17630020d
-deck-plain = 朴素
+deck-plain = 简约
 # en: b6369ed60eb9bda1aa642868ddfb5053547f0206
 deck-boardroom = 会议室
 # en: 39973be20679a94e4c998a58c0f6c76daaf6cd11
@@ -2203,7 +2204,7 @@ deck-two-column-page = 两栏页
 # en: cfdc49e689f75ddfc0372d83f7c9a396b6616dd8
 deck-big-icon-page = 大图标页
 # en: 17a4bbb4cefcb0a1fccf38f1c561b2a18fe44456
-deck-four-more-pages = 再来四页
+deck-four-more-pages = 再加四页
 # en: a59879f8796236335931a0b95f1cb1a1db39e210
 deck-on-slide = 幻灯片上
 # en: 9bab04556dc2a912d86a00f7b4dcd7c540468b8b
@@ -2229,9 +2230,9 @@ deck-one-bullet-line-tab-steps = 每行一个要点。按 Tab 缩进。
 # en: f8948a4a523b4312c5567f9cff1f6788c757998f
 deck-line-or-two-under-title = 标题下的一两行
 # en: 236bcf1c6a83d3b0f85a065c777d7948b22a0c22
-deck-what-this-page-says-type = 页面文本。它会缩小以适应页面。
+deck-what-this-page-says-type = 页面文本。文字会自动缩小以适应页面。
 # en: e80e281dac24d9c4c3f60dcdbf8700e9603b825e
-deck-panel-line-what-is-said = 每行一个画面：说的话 | 图注。用“图标”给它配图。
+deck-panel-line-what-is-said = 每行一格：台词 | 图注。用“图标”给它配图。
 # en: 3d6e76c9325034deb76b92c8cc47a2d3c22fcdf3
 deck-speaker-notes = 演讲者备注
 # en: f0ea152b4f68c54e5bc3476bae70301bc7fb2523
@@ -2319,7 +2320,7 @@ deck-a-qr-code-of-this-deck = 本演示文稿的二维码
 # en: a149055ecee5f95be2951f0b5454f3d1ef47c786
 deck-powerpoint-pptx = PowerPoint（PPTX）
 # en: 7660a22bdc9507edd353dd61198b9aa86488d936
-deck-picture-of-every-slide-zip = 每张幻灯片的图片（PNG 的 ZIP）
+deck-picture-of-every-slide-zip = 每张幻灯片的图片（PNG，ZIP 打包）
 # en: 98a41f54e049532b6032b88d7656348adc178c2a
 deck-animation-of-deck-gif = 演示文稿的动画（GIF）
 # en: 3bab526d831e1024e6f8e7d197f9c3d72cc4f0e4
@@ -2469,7 +2470,7 @@ cal-repeats = 重复
 # en: 0a8adac9d6d5f4d14ee887d196cd8618f0f3391a
 cal-schedule = 日程表
 # en: e7fe53f0503eb82f8c80f9b233fa566339a9f9e8
-cal-show-times-in = 时间显示于
+cal-show-times-in = 显示时区
 # en: 952f375412e89ff213a8aca383d18e5691354347
 cal-start = 开始
 # en: ff99f5b5f7948dfa71fd545b3d99f5f00856ea29
@@ -2483,7 +2484,7 @@ common-stops = 停止于
 # en: 480b9be2834a2278919632171f788a9a80d5d743
 cal-same-dates-as-gantt-chart = 同样的日期，画成甘特图
 # en: 7ea6dec71584012ab4044cc464dc601741ff2c50
-cal-this-calendar-is-written-in = 此日历以{ $zone }时间书写。
+cal-this-calendar-is-written-in = 此日历使用{ $zone }时间。
 # en: e10c10f818ac8e510b74062cde201eae4e8d8c66
 cal-this-calendar-names-no-time = 此日历没有设置时区，所以时间按你的时区显示（{ $zone }）。
 # en: 1b4785331db3b08cd8e3cfa4bd36216731a79e54
@@ -2520,9 +2521,9 @@ cal-youth-soccer-season-practice-every = 一个青少年足球赛季：每周训
 # en: d7bad656f3b06c3ee989a1f2960214ee15b2f788
 cal-small-teams-time-off-public = 一个小团队的休假、公共假日和圣诞停工，都在一个日历上。
 # en: cd6036648af6d0d5614f0ec65eb732300281e059
-cal-community-garden-plots-year-when = 一块分配地的一年：何时播种、栽种、收获和修剪，年年轮回。
+cal-community-garden-plots-year-when = 社区菜园里一块地的一年：何时播种、栽种、收获和修剪，年年轮回。
 # en: 1b04e3c7d585a3d6297852d158919c9833538a01
-cal-fall-term-from-first-day = 秋季学期从第一天到圣诞：停课、社团、郊游、家长之夜。
+cal-fall-term-from-first-day = 秋季学期从第一天到圣诞：停课、社团、郊游、家长会。
 # en: f80b28faa22109c4d14cf7eb7994768abca09ca8
 cal-bills-and-renewals = 账单与续费
 # en: 2223281ed9222907f9d00ef35ab71df263d06e46
@@ -2629,13 +2630,13 @@ diagram-empty = 空
 # en: 8b0bc4ee7e0e6e592c5e8812fef8883b9cbc66de
 diagram-empty-kind-to-start-from = 一个空白的{ $kind }，从这里开始。
 # en: cc9cfe196eaec8bbe041a0f648039cf31df71bc7
-diagram-browser-api-database-cache-and = 浏览器、API、数据库、缓存和后台任务，以及它们怎样交流。
+diagram-browser-api-database-cache-and = 浏览器、API、数据库、缓存和后台任务，以及它们之间如何通信。
 # en: 87796704431b42da8083f869f5ed707dae8cf8fe
 diagram-building-project = 一个建筑项目
 # en: 5accd00ffa799aafee66a6e2e7a77c3e89abdd38
 diagram-launch-and-everything-that-branches = 一次发布及由它延伸出的一切：产品、营销、支持。
 # en: 9261260de34a3ec89f2846b1c6a53b8adc25bb35
-diagram-package-through-store-warehouse-and = 一个包裹经过商店、仓库和快递员，中间有一个判断。
+diagram-package-through-store-warehouse-and = 一个包裹经过商店、仓库和快递公司，中间有一个判断。
 # en: 0ef1081dd660cc404f38216048590ca0999c05d2
 diagram-small-company = 一家小公司
 # en: 6dea73ecffb81e3db543a664a3ba6e602d58683b
@@ -2661,7 +2662,7 @@ diagram-grandparents-their-children-and-grandchildren = 祖父母、他们的子
 # en: 347a51bd3c26ccac83baeca51966f318d5bb06c4
 diagram-hiring-someone = 招一个人
 # en: f30d75896062b87258051feec53d9f7c05059037
-diagram-how-app-hangs-together = 应用是怎样组合在一起的
+diagram-how-app-hangs-together = 一个应用的构成
 # en: 70a97689961708e74a02157e6675bbcab893b7a4
 diagram-seven-people-who-reports-to = 七个人，谁向谁汇报，以及一条虚线。
 # en: 45ccf051d72194e5207999d9eeabaf9311e07ec2
@@ -2681,7 +2682,7 @@ diagram-classroom = 一间教室
 # en: e491ee6c30111d9c51d83d4a19aba47a3c39c769
 diagram-family-with-godmother = 有一位教母的家庭
 # en: c164cf0f878062c2b43b69bf4c1de2c3d6a1f94d
-diagram-principal-her-assistant-principals-classroom = 一位校长、她的副手们、各班教师和后勤主管。
+diagram-principal-her-assistant-principals-classroom = 一位校长、她的几位副校长、各班教师和校工。
 # en: f25d2f240d3a52d5361d9b6dd4d8561290566159
 diagram-move-to-lisbon-by-march = 三月前搬到里斯本：证件、住处、工作和生活，以及什么必须先办。
 # en: d2586903dd907f55b8076edbe00b87f4e45ab92f
@@ -2727,7 +2728,7 @@ diagram-three-generations-of-morenos-and = 莫雷诺家的三代人，以及通�
 # en: 0e60bdf5cc3dbaa6c2018bd31c760c1e46e79ab1
 diagram-who-can-do-what = 谁能做什么
 # en: b27a04f87f9d4657107a8dbd89d32eb1dedb41b7
-diagram-tap-empty-space-for-branch = 点按空白处即可添加分支。点按想法即可编辑，按 Enter 到下一个。把一个拖到另一个上即可放到它下面。“连线”可连接地图上相隔的两个。
+diagram-tap-empty-space-for-branch = 点按空白处即可添加分支。点按想法即可编辑，按 Enter 到下一个。把一个拖到另一个上即可放到它下面。用“连线”可连接导图上不相邻的两个想法。
 # en: fd23500d007e121f9530bb8b530f367ed9e00825
 diagram-place-cards = 座位卡
 # en: dd9ef7db14a8bdb18f7a266d6e91711443e71a29
@@ -2751,7 +2752,7 @@ diagram-tap-person-to-type-on = 点按某人即可编辑。用 + 加名字添加
 # en: 14e56ce6d5f3d8d56d2ce979bf2eb20aaa9dd93d
 diagram-tap-empty-space-for-table = 点按空白处即可添加桌子。点按桌子或人即可编辑。逗号开始下一位客人。把人拖到另一张桌子。
 # en: 7049f105f3a76be9cb8c6d7b74eb3edf60d9a7da
-diagram-tap-inside-circles-to-add = 在圆圈内点按即可添加项目。逗号开始下一项。点按集合的名称即可重命名。把项目拖到其他圆圈之间。
+diagram-tap-inside-circles-to-add = 在圆圈内点按即可添加项目。逗号开始下一项。点按集合的名称即可重命名。可把项目在圆圈之间拖动。
 
 ## the Trip Planner
 
@@ -2771,7 +2772,7 @@ trip-a-place-by-name = 按名称找地点…
 # en: c86d6e7640906afe6a57236c004f0b1af53b6ee8
 trip-stop-at-middle-of-map = 在地图中心添加站点
 # en: a52fccf0e1e5beca9d5885f1638d5e9a6a2684f9
-trip-measure-in = 距离单位
+trip-measure-in = 计量方式
 # en: 2458f1444290ced8aefad04d5c947b17bf9a81fb
 trip-hours-of-driving = 驾车时长
 # en: 5fa6c4032be31076212eb57f2fe6ba44d445d501
@@ -2852,7 +2853,7 @@ trip-places-as-dots-not-route = 地点只是点，不是路线：看什么、何
 # en: e50e4931f42687faef4a226f93981bb38a937ce9
 trip-weekend-in-copenhagen = 哥本哈根周末游
 # en: 402e0be1180f76470536e904cec4f7242211bb15
-trip-friday-night-to-sundays-train = 从周五晚上到周日的火车，步行，单位公里。
+trip-friday-night-to-sundays-train = 从周五晚上到周日搭火车离开，步行游览，单位公里。
 # en: a5594e90d42f49b6ce9e2842193b64f380d1a10c
 trip-icelands-ring-road = 冰岛环岛公路
 # en: b237aa87bc63dccebef93e19a8ef785d96ba69ce
@@ -2876,7 +2877,7 @@ trip-six-campuses-in-new-england = 一周内参观新英格兰的六个校园，
 # en: 651b0f889a962febf3a80370511cbc08abac73da
 trip-japan-by-rail = 乘火车游日本
 # en: f687060ca9b759a7ed4bca61f7a2bf96764f2f8e
-trip-tokyo-to-miyajima-in-cherry = 樱花季里乘子弹头列车，从东京到宫岛。
+trip-tokyo-to-miyajima-in-cherry = 樱花季里乘新干线，从东京到宫岛。
 # en: afea6c128d27238aad4e11871dfff6f692334301
 trip-last-100-km-of-camino = 朝圣之路最后 100 公里
 # en: 33d01f381424bbc8bbd1b6a9487b3a53c38d07e9
@@ -2898,7 +2899,7 @@ trip-presenting-stop-before = 上一站（放映）
 # en: 3b14d20764a1fdef5ee74f4defab4ff20b0e7cce
 trip-put-stops-on-calendar-day = 把各站点放到日历上，每天一站
 # en: 16fa5ad4958332a6bbb1eae6d1a8c6ee6f2c7752
-trip-first-last = 第一个或最后一个
+trip-first-last = 第一站或最后一站
 # en: 0aa341109cff3c75e204930fdeac94f52278bb67
 trip-next-stop = 下一站
 # en: 35bc0362a4899961a0e878990611c13021c1e549
@@ -3007,7 +3008,7 @@ calc-shopping-total = 购物合计
 # en: d8719443b912bfaadd4f5d8fb2f1fc095f58ff52
 calc-tape-of-market-apples-and = 市场的计算纸带：按重量买苹果和奶酪，合计，以及 60 美元找回的零钱。
 # en: 56d12d641f4f4177e63e120c8bd10a8e7348357f
-calc-tax-on-price = 商品税
+calc-tax-on-price = 算销售税
 # en: 8a7d0a08d1e03c2974f84aa039e7871c5b232245
 calc-new-york-city-sales-tax = 把纽约市的销售税加到价格上，再从收据里扣回来。
 # en: 80296be8eee3142eb634c0045f82e15b5e5373aa
@@ -3019,7 +3020,7 @@ calc-kitchen-conversions = 厨房换算
 # en: c7ccdb52f144fcec56adb8ecb5264f35d03600c0
 calc-cups-ovens-spoons-and-weights = 杯、烤箱温度、勺和重量，从一种计量换成另一种。
 # en: 267b3d4696b05cc65039fcf4afb8cd9548ed5a29
-calc-scaling-recipe = 食谱放量
+calc-scaling-recipe = 调整食谱份量
 # en: a0e9dcbc29ed1364a4891c3671dd43675af64d11
 calc-banana-bread-for-eight-made = 八人份的香蕉面包做成十二人份：每种用量乘以一点五。
 # en: 8639704eb84800c829b41e6fcd833d686dcb41f6
@@ -3031,9 +3032,9 @@ calc-currency-at-rate-you-type = 按你输入的汇率换算货币
 # en: 5f4e47693383fd619db1b39871b821a7fccf86df
 calc-trip-priced-in-euros-and = 用欧元核算的一次旅行，换成美元，再加上刷卡手续费。
 # en: 6645ae7e46c209b7ba6f5fb3b6aa707395a2c3d2
-calc-fuel-for-trip = 旅行用油
+calc-fuel-for-trip = 旅行油费
 # en: e2d3235c5cfd9ceffb4e54f0635e4f3841b0c0e1
-calc-boston-to-montreal-and-back = 波士顿到蒙特利尔往返：英里数、每加仑英里数、油价，四种算法。
+calc-boston-to-montreal-and-back = 波士顿往返蒙特利尔：英里数、每加仑英里数、油价，四人分摊。
 # en: bb294d581aa3512dfdaf06cb5705338f026425ff
 calc-paint-for-room = 给房间刷漆
 # en: 8899142eaeb03e3a2cfc17f5e68f1977478e2ce5
@@ -3093,7 +3094,7 @@ compare-compare = 比较
 # en: 24512a18bc6d2c27213ad28b26ce9271d94175af
 compare-no-difference = 没有差别
 # en: 8f0fb2d2ece91d9de4ed64f23a12b475c3e18970
-compare-not-link-to-tiny-little = 不是 小小办公室 文档的链接
+compare-not-link-to-tiny-little = 不是小小办公室文档的链接
 # en: e82be1221a13b593fd3fd58ffe24f3c3ba58f783
 compare-paste-second-link-to-see = 粘贴第二个链接，查看改了什么。
 # en: 442aef6fc360061295985657c4489b3c4d360cc3
@@ -3128,9 +3129,9 @@ compare-n-put-in = { $n ->
 # en: c99db7abba3f7227854d93a163ad3494de4e1571
 open-opened-name = 已打开{ $name }
 # en: f917dee4211bd4af58db8efec79e354e1ffb4912
-open-that-file-is-not-words = 小小办公室 无法读取那个文件。
+open-that-file-is-not-words = 小小办公室无法读取这个文件。
 # en: 1d08903947cc83b648f8ad96b1e23466a2dbed11
-open-that-file-is-too-large = 那个文件太大了。
+open-that-file-is-too-large = 这个文件太大了。
 # en: 8f432852569edbf7610713a6554e7a61396327d5
 open-keep-them-on-this-device = 保存到此设备
 # en: c4fe6d8b035f6108e8a7e0037667dacf3d6cca25
@@ -3142,7 +3143,7 @@ open-saving-in-this-browser-n = 正在此浏览器中保存：已保存 { $n ->
        *[other] { $n } 份文档
     }
 # en: 4fc6621d5b53d413dd1fd42cf7e7834ee3ecba5a
-open-that-zip-holds-no-documents = 在那个 zip 中没有找到可读取的文档。
+open-that-zip-holds-no-documents = 这个 zip 中没有可读取的文档。
 # en: ed5d2e1ab481efa92392820d83922b25c236c730
 open-n-documents-kept = 已保存 { $n ->
        *[other] { $n } 份文档
@@ -3174,7 +3175,7 @@ keys-this-page = 此页面
 ## Find in this document (kit/ui/find.ts)
 
 # en: 475c848673a3f79fa778f01c2bd5a721d4c41707
-find-not-found = 没找到
+find-not-found = 未找到
 
 ## a menu narrowed by typing (kit/ui/menu.ts)
 
