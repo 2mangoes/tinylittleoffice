@@ -228,10 +228,13 @@ test('the sweep forgets expired cards with expired links; a card a month old is 
   expect(store.cards.size).toBe(0);
 });
 
-test("the site's Worker runs first only for the home page, each app's page and the cards", () => {
+// The pages are static assets, never the Worker's: on launch day (2026-10-15) every visit through the Worker passed the
+// free plan's 100,000 requests a day and the pages answered 429. Only the cards run it.
+test("the site's Worker runs first only for the cards: a page, with or without ?c=, is a static asset", () => {
   const jsonc = readFileSync(new URL('../wrangler.jsonc', import.meta.url), 'utf8');
   const first = JSON.parse(/"run_worker_first": (\[[^\]]*\])/.exec(jsonc)![1]);
-  expect(first).toEqual(['/', ...apps().map((a) => `/${a.id}/`), '/card', '/card/*']);
+  expect(first).toEqual(['/card', '/card/*']);
+  for (const a of apps()) expect(first).not.toContain(`/${a.id}/`);
   expect(jsonc).toMatch(/"main": "site\/worker\.ts"/);
   expect(jsonc).toMatch(/"binding": "ASSETS"/);
   // The cards are in the shortener's database: the same one, by its id.

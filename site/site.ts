@@ -1,11 +1,13 @@
 /**
  * The site's Worker, as a function of a request: the built site is static assets (dist/), and this answers only what
- * a static file cannot. wrangler.jsonc runs it first for the preview cards' paths and the pages a shared link opens
- * (`run_worker_first`: "/", each app's page, "/card" and "/card/*"); everything else is the assets alone.
+ * a static file cannot. wrangler.jsonc runs it first for the preview cards' paths alone (`run_worker_first`: "/card"
+ * and "/card/*"); everything else, the pages among them, is the assets alone, served without counting (since
+ * 2026-10-15, when every visit through the Worker passed the free plan's requests a day and the pages answered 429).
  *
  *   POST /card            a preview card kept for a month (tinier/cards.ts)
  *   GET  /card/<id>.png   its picture
- *   GET  /, /<app>/       with ?c=<id>, the page with its tags saying the card; without, the page as built
+ *   GET  /, /<app>/       with ?c=<id>, the page with its tags saying the card, where the Worker is run for the page
+ *                         (it is not, in production: the page comes as built, with the app's own tags)
  *
  * No logic of its own beyond the routing: the cards are tinier/cards.ts, the brake tinier/brake.ts, the rows
  * tinier/d1.ts, so the tests run all of it under node with a store in Maps (test/cards.test.ts).
