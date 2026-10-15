@@ -522,8 +522,8 @@ common-this-document = یہ دستاویز
 # { $task } is the task's words.
 # en: 15f18f71eefc9fedc6fedd434c2edc6a919bf130
 common-done-task = مکمل: { $task }
-# en: 8377cc96b3a0d3b623b2d7a0c1915eeeb5876df5
-common-drag-to-move-tap-to = ہلانے کے لیے کھینچیں؛ چننے کے لیے ٹیپ کریں
+# en: 00c65041972e0368c2c8b452d60c0a0754fcc9bd
+common-drag-to-move-tap-to = ہلانے کے لیے کھینچیں، چننے کے لیے ٹیپ کریں
 # en: 525df57dc3610e74377113b92951476bb9387e4d
 common-move-left = بائیں لے جائیں
 # en: 3a43e56f34dece6eb3d79dee1eff7b2f87db6040
@@ -531,7 +531,7 @@ common-move-right = دائیں لے جائیں
 # The group heading the Calendar and the Trip Planner sit under on the home page.
 # en: ae2f98a099fe5855c31126233e9c13641ee7fdba
 common-plan = منصوبہ
-# en: 738ad6ef5f79e370557f96bbc2a8518c13ee7e7c
+# en: 9985434cd07212b8dac01f8e015a1fa8adac9a99
 common-chosen-tasks = چنے ہوئے کام
 # A link that opens the document (kit/ui/compare.ts).
 # en: cf9b77061f7b3126b49d50a6fa68f7ca8c26b7a3
@@ -544,22 +544,22 @@ common-tasks = کام
 common-find-app-doc-template-or = ایپ، دستاویز، ٹیمپلیٹ، یا کمانڈ ڈھونڈیں
 # en: 0d47323c5ee8dde30a5ca28f6ed6103d42081b97
 common-in-this-document = اس دستاویز میں ڈھونڈیں
-# en: 79bd41f9cdc59faf8130a3ce243ae52e11b1af38
-common-indent-or-bring-out-in = فہرست میں انڈینٹ کریں یا باہر نکالیں؛ گرڈ میں اگلا خانہ
+# en: 733a5f2fb910bb704c7993cae3d8224558d405de
+common-indent-or-bring-out-in = فہرست کی چیز کا انڈینٹ بڑھائیں یا کم کریں؛ جدول میں اگلا خانہ
 # en: bf6e36633c2362cb7fa31a0e8f833388a49ba28c
 common-move-selected-items-up-or = منتخب چیزوں کو اوپر یا نیچے لے جائیں
-# en: 7256d5b09fad0e23fb5730f55a3997b80a4e35fe
-common-nudge-shapes-in-hand = ہاتھ والی شکلوں کو ہلکا سرکائیں
+# en: 989fe994e413c509c03d3dd229b775a3ddc4707b
+common-nudge-shapes-in-hand = چنی ہوئی شکلیں تھوڑا سرکائیں
 # en: 4a5e249fca3c45e7dcf1a7e41cf691e7ddef79d7
 common-select-all-words-of-box = سب چنیں: پہلے ڈبے کے الفاظ، پھر سب کچھ
 # en: 0720e9772b354dd120b32e908da11a661678feb3
 common-back-to-words = الفاظ پر واپس
-# en: 8ab47442433733491012bb2cb5980a22ca878f17
+# en: 0c0b01d469faff60dc3b2d1c035ee0a7caa03852
 common-extend-selection = انتخاب بڑھائیں
 # en: 6510e9982155a27498f4332337675f22d4592291
 common-next-or-one-before = اگلا یا پچھلا
-# en: 9bfd735084fcb7a62c2f5899d71f7a41dd40807d
-common-step-out-close-collapse-let = باہر نکلیں: بند کریں، سمیٹیں، چھوڑ دیں
+# en: b4365b2ed2016713788d08335e5157985010ac28
+common-step-out-close-collapse-let = بند کریں یا انتخاب ختم کریں
 # en: fb2997642419cda8393061543f140d40a9323957
 common-check-or-uncheck-task = کام پر ٹک لگائیں یا ہٹائیں
 # en: 0a4adf12f01d48ecdb89f5eddf5f19fd89d94522
@@ -704,8 +704,8 @@ write-here = یہاں لکھیں۔
 write-subheading = ذیلی سرخی
 # en: 05058e0b630498611ebc41894f7b1670dcd5870e
 write-paragraph = پیراگراف
-# en: d7ddc5a1e386a07686e19c683d52782a4c33327b
-common-bring-out = زور دیں
+# en: b4d812c8bee8056808c14f1b31b6765342c8437e
+common-bring-out = انڈینٹ کم کریں
 # en: aacf42132cce6cf5c1608a5d27f90fcbf93ae851
 common-indent = انڈینٹ
 # en: c83b0ec2d98a2ca38077be2f03102aedeb0ab261
@@ -781,8 +781,8 @@ write-rich-text-rtf = رچ ٹیکسٹ (RTF)
 write-add-column-before = پہلے ایک کالم شامل کریں
 # en: e5dfecd5799f77f96f52282a8db4966dd1336fab
 write-column-c-what-it-holds = کالم { $c }: اس میں کیا ہے، نام رکھیں، کالم شامل یا ہٹائیں
-# en: 87551f94e9562dbdaa01ae42c04c102660633aa8
-write-table-move-copy-or-take = جدول: ہلائیں، کاپی کریں یا نکال دیں
+# en: 1f01479a40aa348fc273d4d09636403f89eff717
+write-table-move-copy-or-take = جدول: ہلائیں، کاپی کریں یا حذف کریں
 # The templates
 # en: cfd76febbb671e54b2f280128fb5c317389758a7
 write-a-letter = خط
@@ -956,12 +956,12 @@ chart-kind-chart-data = { $kind } چارٹ۔ { $data }
 
 ## the Spreadsheet
 
-# en: 7d5c268bac3c70bda1867b5a6799c39f05c56633
-sheet-clear-these-cells = یہ خانے صاف کریں
+# en: 12acc4f41c4ad8ed5996ac33a2f066e024ba1c65
+sheet-clear-these-cells = خانے صاف کریں
 # en: c527ea0aeba3f2d0104802279fed7e595157b78e
 sheet-fit-this-column-to-its = اس کالم کو اس کے متن کے برابر کریں
-# en: 70993d4b59add9e2d4f3bf3ec2983973233e8fdc
-sheet-cells-in-hand = ہاتھ میں لیے خانے
+# en: b92fe41ac34453cd0368f0fa5d00d1e9b0279c12
+sheet-cells-in-hand = چنے ہوئے خانے
 # en: 119faf17cd1de268ce34ade4f9bae4520774f640
 sheet-check-ref = { $ref } پر ٹک لگائیں
 # The column type that holds words as typed.
@@ -1142,8 +1142,8 @@ sheet-drag-to-resize-double-click = سائز بدلنے کے لیے کھینچی
 sheet-fill-down-from-top-row = اوپر کی قطار سے نیچے بھریں
 # en: 549a401f55bc461388a4f5f8554db5e0749d0a28
 sheet-fill-right-from-first-column = پہلے کالم سے دائیں بھریں
-# en: b566111fc74cf76dc164b421a591acf545fc2f5c
-common-fill-drag-to-carry-these = بھریں: ان خانوں کو آگے بڑھانے کے لیے کھینچیں
+# en: 51f5ba33dabbc2c8aa4e3e640e0b27cb55aea1be
+common-fill-drag-to-carry-these = بھرنے کے لیے کھینچیں
 # en: 4425eb9442fea0435d290b7a34f1ad8a6980e789
 sheet-fit-columns-to-page = کالموں کو صفحے کے برابر کریں
 # en: 720f58fb1f9353ab3c904b888ccb774c40393e06
@@ -1164,8 +1164,8 @@ common-insert-n-rows-below = نیچے { $n ->
     } شامل کریں
 # en: ae3b3fa65ff4f34adbaf5d76e694293bb2059fbf
 sheet-letters-keyboard = حروف والا کی بورڈ
-# en: bb3f67c27160a8b68b663c5e3aa44a7785a01602
-sheet-lock-these-cells-so-reader = ان خانوں کو مقفل کریں، تاکہ پڑھنے والا انہیں نہ چھیڑے
+# en: 7177342b32d961e7d51feb4571231982a48a0772
+sheet-lock-these-cells-so-reader = ان خانوں کو مقفل کریں تاکہ پڑھنے والے انہیں بدل نہ سکیں
 # en: b375da8098132564f70d56ad1eff132365d8b9d1
 sheet-locked-part-of-model = مقفل: ماڈل کا حصہ
 # en: b1b588e8ffba9c37d560f4b4d63c6344d009ce2e
@@ -1477,8 +1477,8 @@ draw-more = مزید
 draw-icon = آئیکن…
 # en: 64dd60fe1a049fe6db3eb1369dec2e42bf428e21
 draw-background = پس منظر
-# en: bfd53e9376262ea83b6fd34f50a30dd9ef629dd8
-draw-remove-background-tile = پس منظر کی ٹائل ہٹائیں
+# en: e1946387893c804aeadc93e5df5af3416cf1dc53
+draw-remove-background-tile = پس منظر ہٹائیں
 # en: 1d0c8304baedcf8e3a78982c2e7c0b04622bf2a0
 draw-color = رنگ
 # en: cfdd099c4751f2f9aef2491f411111906956e0f2
@@ -1550,8 +1550,8 @@ draw-clear-grid = گرڈ صاف کریں
 draw-use-as-background = پس منظر کے طور پر استعمال کریں
 # en: 037ae898000037d344a43cf8052a8c7843cbc599
 draw-grid-is-now-background-download = گرڈ اب پس منظر ہے۔ ڈاؤن لوڈ اسے ٹائل کی صورت میں دیتا ہے؛ کوئی بھی صفحہ اسے tile: سے لگا سکتا ہے۔
-# en: e12ff604def1b90067e2b685397f8e7e967b62db
-draw-pixel-grid-n-by-n = پکسل گرڈ، { $n } ضرب { $n }۔ تیر والی کیز حرکت دیتی ہیں؛ Enter ہاتھ والی سیاہی سے خانہ بھرتا ہے۔
+# en: 209a1a74ee8eec09b861bc34e5ddb08a1357a364
+draw-pixel-grid-n-by-n = پکسل گرڈ، { $n } ضرب { $n }۔ تیر والی کیز سرکاتی ہیں؛ Enter موجودہ رنگ سے رنگتا ہے۔
 # en: a9deda2292f9b3c9a827e2aa71e0da6b4db9f16e
 draw-row-y-column-x-ink = قطار { $y }، کالم { $x }: { $ink }
 # en: d316afce8845f59e541c981d07d81bab22858d00
@@ -1586,8 +1586,8 @@ draw-small-text = چھوٹا متن
 draw-solid-fill = ٹھوس بھراؤ
 # en: dcfb9c041348e0d62c058f37225ad2185472edc8
 draw-solid-line = ٹھوس لکیر
-# en: 457ead1ee1219d6d1453519aae40aeebcde939ee
-draw-shape-in-hand = ہاتھ میں لی ہوئی شکل
+# en: b233a397b799e80f21b88a34ae7e30af0528d1c1
+draw-shape-in-hand = چنی ہوئی شکل
 # en: 8b2897e25c2be27d9c96a9ef61306890918e2a8d
 draw-words-of-shape = شکل کے الفاظ
 # en: 5349a3c3f38695d839d88888c187ce4536d3f2d3
@@ -1600,8 +1600,8 @@ draw-xl = XL
 draw-drag-to-move-corner-handle = ہلانے کے لیے کھینچیں؛ کونے کا ہینڈل سائز بدلتا ہے، گول والا گھماتا ہے؛ Enter یا ڈبل ٹیپ الفاظ بدلتا ہے۔
 # en: 19dfa02a0be55dbab49b30d3c181e058d9f1d8c9
 draw-drawing-canvas-v-selects-r = ڈرائنگ کینوس۔ V منتخب کرتا ہے؛ R، E، D، L، A، T بناتے ہیں؛ تیر ہلکا سرکاتے ہیں؛ [ اور ] گھماتے ہیں؛ Enter الفاظ بدلتا ہے؛ Delete ہٹاتا ہے۔
-# en: cfcc383bb946eac86b9f0166180ac9f9cfbe8d0a
-draw-tap-shape-to-select-it = چننے کے لیے شکل پر ٹیپ کریں، یا شکلوں کے گرد کھینچ کر چنیں؛ بنانے کے لیے ٹول چنیں۔
+# en: 4421c5912fa5d727f23883b0a69028e195e3717b
+draw-tap-shape-to-select-it = کسی شکل کو چننے کے لیے اس پر ٹیپ کریں، یا کئی کے گرد کھینچیں۔ ڈرا کرنے کے لیے کوئی ٹول لیں۔
 # en: 6f72f3cd1255e9bb344a1f9adb5fc64770f07cd5
 draw-rotate-left = بائیں گھمائیں
 # en: b75f23d1d0e44603289911e22ad5efd66157913a
@@ -1722,10 +1722,10 @@ anim-shadow = سایہ
 common-size = سائز
 # en: 4a6c11ab8104f8bcbb26155a8f68688d181f8a4b
 anim-spin = گھمائیں
-# en: db824810c0944690cca8014a6300681046b3812b
-anim-stage-alt-arrow-keys-move = اسٹیج: { $alt }۔ تیر والی کیز ہاتھ والی شکل (یا وقت) کو سرکاتی ہیں، کوما اور فل اسٹاپ ایک فریم چلتے ہیں، Space چلاتا ہے، K کی فریم رکھتا ہے۔
-# en: 044d465208b3bb30a2e616f2d2417f49dfb0cbb0
-anim-shapes-in-hand = ہاتھ والی شکلیں
+# en: 598549d7818087a7d04d49a7b9c00979c8a35c96
+anim-stage-alt-arrow-keys-move = اسٹیج: { $alt }۔ تیر والی کیز چنی ہوئی شکل (یا وقت) کو سرکاتی ہیں۔ کوما اور فل اسٹاپ ایک فریم چلتے ہیں۔ Space چلاتا ہے۔ K کی فریم شامل کرتا ہے۔
+# en: a4277f79218220e03e7d4ebb5b1417cbdff137dc
+anim-shapes-in-hand = چنی ہوئی شکلیں
 # en: 6c82e6dd86807ee3db07e3c82bec1ae1ce00b08b
 anim-time = وقت
 # en: 4ad8d1291a5b6b81cd03b1408570e1aae781c074
@@ -1734,8 +1734,8 @@ anim-wobble = ڈگمگانا
 anim-now-s-of-all-s = { $all } سیکنڈ میں سے { $now } سیکنڈ
 # en: c7f73bb54d928922c3838bb789ee9fb8a5b1eb37
 anim-settings = ترتیبات
-# en: b105feacbb414a398cea41273d68a571e5a59f14
-anim-this-frame = یہ فریم
+# en: 89798935dfbced66a46a24ee534e23bbf5281faf
+anim-this-frame = موجودہ فریم
 # en: cac09d8898c2435fb48b3b387ff152da7929eab8
 anim-duplicate-this-frame = اس فریم کی نقل بنائیں
 # en: 885c46b03eaf682f7c9534f7791ddfc3da84cd6f
@@ -1785,8 +1785,8 @@ anim-n-times = { $n } بار
 anim-s-s = { $s } سیکنڈ
 # en: 4403c08ebdf8c80a653ed6d343be64570f75f8ce
 anim-frame-back-frame-on = ایک فریم پیچھے، ایک فریم آگے
-# en: bd3f0aa379bfdd2a10e53da305ea0443a7299029
-anim-nudge-shapes-in-hand-with = ہاتھ والی شکلوں کو ہلکا سرکائیں؛ کوئی نہ ہو تو ایک فریم چلیں
+# en: ad3441e7c85b25bc4c7f46fd051345a6ba241e58
+anim-nudge-shapes-in-hand-with = چنی ہوئی شکلیں تھوڑا سرکائیں، یا ایک فریم آگے پیچھے جائیں
 # en: fe13ca0956192777b5060b354cf8e5dc5553c328
 anim-play-or-pause = چلائیں یا روکیں
 # en: 293cec535f254be8be69d7877fc790f95b4b7e07
@@ -1821,7 +1821,7 @@ common-calendar = کیلنڈر
 outline-cancel-connecting = جوڑنا منسوخ کریں
 # en: 0b2cad8a7f348bc05529baaac65726b720eb10e1
 outline-change-it = بدلیں
-# en: 35b59db93693472e27ac5a549388a1ade473a499
+# en: 1ed0b58d18ef647be5de11840bb929ecc8e36446
 common-chosen-items = چنی ہوئی چیزیں
 # en: b65463cb6a42a17de514acc4659f7fd331e0876a
 outline-connect = جوڑیں
@@ -1899,12 +1899,12 @@ outline-plain-text = سادہ متن
 common-show-as-slides = سلائیڈز کی صورت میں دکھائیں
 # en: 59df6d7de818cdbeb08aa7f083aff96c1bccd1f5
 outline-show-as-outline = آؤٹ لائن کی صورت میں دکھائیں
-# en: 3c9f741443be8a6583a4279ae6e77fca7cce2df8
-outline-take-away-connection-from-from = { $from } سے { $to } تک کا جوڑ ہٹا دیں
-# en: 07f68f99dd0e1cf2477cf26dc3cd35676e388c2b
-outline-take-it-away = ہٹا دیں
-# en: 77170ece38b5ca625735d8a9676da169d52a4823
-outline-take-connection-away = جوڑ ہٹا دیں
+# en: b306a7c32ba84dd4adea8612dccc99c15065eb53
+outline-take-away-connection-from-from = { $from } سے { $to } تک کا جوڑ ہٹائیں
+# en: e963907dac5cd5c017869b4c96c18021c9bd058b
+outline-take-it-away = ہٹائیں
+# en: 7312a31a2c880f2d456663b6f91ad6da980b3a5e
+outline-take-connection-away = جوڑ ہٹائیں
 # en: 656e5c87ae5cd391807e13c85fb32635c2d441c2
 outline-tap-item-to-connect-from = جس چیز سے جوڑنا ہے اس پر ٹیپ کریں۔
 # en: 7a717eefe223e502e86655b5bf8eb999b867a9dc
@@ -2063,7 +2063,7 @@ deck-workshop-agenda = ورکشاپ کا ایجنڈا
 deck-presentation-lowercase = پریزنٹیشن
 # en: 1e35470a39e5b3ddca4d3b585c9011db9b4c4dc6
 deck-slides = سلائیڈز
-# en: 8e3034bc68da7483264b2f4fa4a3e7b9022ca3f3
+# en: 5075541433d31fb8cf207ced97577686ac3fe961
 deck-chosen-slides = چنی ہوئی سلائیڈیں
 # en: d7935967cfd3de8f11b33801800bece8d90cb55f
 deck-move-this-slide-drag-it = اس سلائیڈ کو ہلائیں: اسے دوسری پر کھینچ کر چھوڑیں
@@ -2222,7 +2222,7 @@ deck-speaker-notes = اسپیکر نوٹس
 deck-n-total = { $n } / { $total }
 # en: 3b73ff036c4ba5dc509f9a2e55189b33fc8013bb
 deck-document-on-slide = سلائیڈ پر ایک دستاویز
-# en: a3d2a40edda8bb58665379e1ae4150330385b69d
+# en: 800ddde9b84d77765694212f6af1a9ed4329c77c
 deck-remove-from-slide = سلائیڈ سے ہٹائیں
 
 # The rail and the sheets
@@ -2376,7 +2376,7 @@ cal-done = مکمل %
 cal-edit-event = ایونٹ بدلیں
 # en: 8a4d4e6eb9a367d616b8a4cbfa2792068482e884
 cal-edit-task = کام بدلیں
-# en: 4d792ed94880381200a867006d51d6b04b0b0db2
+# en: 99570f85bb2bae0dbe3e8f2f3d6d6f765ee7c47e
 cal-choose-task = { $task } چنیں
 # en: 72b4644a41881ce4e156ce3283119c74f598cbea
 cal-day-earlier = ایک دن پہلے
@@ -2786,9 +2786,9 @@ trip-n-stops = { $n ->
 # en: 44896c642dce2a144eb35fdb61cedb762cc44ca1
 trip-stop-n = پڑاؤ { $n }
 # A stop's number is its handle; the bar under stops chosen whole.
-# en: 4c10525650ae11e374f96fb88f441154986c6a7e
-trip-stop-n-tap-chooses-it = پڑاؤ { $n }: ٹیپ سے چنیں، کھینچ کر ہلائیں
-# en: 9c5823de775344a40bea4a52b65ff319a5198cd7
+# en: 372c19ab2c53f7582cdbe3823523a8760d0f2807
+trip-stop-n-tap-chooses-it = پڑاؤ { $n }: چننے کے لیے ٹیپ کریں، ہلانے کے لیے کھینچیں
+# en: 56f844200d56e1fc382c81f28972a39aab61e019
 trip-chosen-stops = چنے ہوئے پڑاؤ
 # en: a9d55cf1a8a7b85ab9e293fc1e40a440986b0725
 trip-show-on-map = نقشے پر دکھائیں
@@ -2958,8 +2958,8 @@ calc-line-n = سطر { $n }
 calc-put-answer-in-line = { $answer } کو سطر میں رکھیں
 # en: a9c16dd084ce3781568419133b0fa0c0f57aa727
 calc-no-answer = کوئی جواب نہیں
-# en: 4548651eba30d8802e8ff67446e7a739d61aaacd
-calc-take-away-line-n = سطر { $n } ہٹا دیں
+# en: cf23123f857abeda1d28fc9b85cc7eba8d20f3b1
+calc-take-away-line-n = سطر { $n } حذف کریں
 # en: fc9ce14b28c6f2c3b72caf056ca604b2b96f7d2b
 calc-sum = میزان
 # en: fdb6ecce95257d64ccde93310bf9a9adc8ad249e
@@ -3066,9 +3066,9 @@ calc-waves-adding-up = لہریں جمع ہوتی ہوئی
 # en: 9e46b2d75638fb2ebe905ad0c4be8059be6487cc
 calc-sine-waves-summed-on-their = سائن لہریں جمع ہو کر، چوکور لہر کی طرف جاتی ہوئی۔
 # The grip on a line of the tape; the bar under lines chosen whole.
-# en: fbdad4400c9af0f1c0e219c320b7f12182f028a8
-calc-choose-line-n-drag-it = سطر { $n } چنیں: اسے ہلانے کے لیے کھینچیں
-# en: e19969dcad4f4dd667986da648ce8e7195f00de6
+# en: fd71cff4626f555a0e69c5b6801a591cabd1d173
+calc-choose-line-n-drag-it = سطر { $n } چنیں، ہلانے کے لیے کھینچیں
+# en: dab2e3d9cf8c3bfccd20fa34fac6fc738ce9aba7
 calc-chosen-lines = چنی ہوئی سطریں
 
 ## two links compared (kit/ui/compare.ts)
@@ -3087,12 +3087,12 @@ compare-paste-second-link-to-see = کیا بدلا یہ دیکھنے کے لیے
 compare-paste-link-to-document-as = دستاویز کا لنک پیسٹ کریں جیسی وہ اب ہے
 # en: 7fb07fcb91ba19442009f16f24be4ef85b3eca16
 compare-paste-link-to-document-as-it-was = دستاویز کا لنک پیسٹ کریں جیسی وہ پہلے تھی
-# en: 73b9be750071e572102d03b8785d449c2d01efab
-compare-put-in = شامل کیا:
+# en: 0ae84aa126111ee639f685e9ed05c6895e632a90
+compare-put-in = شامل کیا گیا:
 # en: 210dd62a81e43d19e22018878ba665485e0526cb
 compare-swap = ادل بدل
-# en: 5b48a02ea259c405a31a801e75e435644a9e2b54
-compare-taken-out = نکالا:
+# en: c331654dfaed937af3dc0e72f31b21fdfb1aa325
+compare-taken-out = ہٹایا گیا:
 # en: aec0a618ef67ca171ab77615fc7cab57405fea3f
 compare-first-link = پہلا لنک
 # en: 123bc4a6d63cd1415119c84ed21412a29ef9fbcc
@@ -3101,12 +3101,12 @@ compare-second-link = دوسرا لنک
 compare-two-links-to-documents-side = دو دستاویزات کے لنک، ساتھ ساتھ: دوسرے نے جو بدلا اس پر نشان ہے۔ اس صفحے سے کچھ باہر نہیں جاتا۔
 # en: 2053662dff5d94e9ea30321321ce6cd0df8f0027
 compare-different-apps = مختلف ایپس
-# en: 6f75146348fb76bffda5972336f4d0c46a25c1b7
+# en: f4e4b3a1d739ce43635eb9d75d97403c420c0642
 compare-n-blocks-taken-out = { $n ->
-        [one] { $n } بلاک نکالا گیا
-       *[other] { $n } بلاک نکالے گئے
+        [one] { $n } بلاک ہٹایا گیا
+       *[other] { $n } بلاک ہٹائے گئے
     }
-# en: ed786d33ee11a79a41e606e3c75cc6e58ef0a1b6
+# en: 0041ce2f8795b8fbc93244ba17b668d115906ef3
 compare-n-put-in = { $n ->
         [one] { $n } شامل کیا گیا
        *[other] { $n } شامل کیے گئے

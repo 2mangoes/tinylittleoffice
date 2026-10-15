@@ -135,9 +135,9 @@ test('Compare: two links side by side, what the second changed marked, Swap, a l
   second.dispatchEvent(new Event('change'));
   await until(() => location.hash === `#/compare/write/${a}/write/${b}`);
   await until(() => !!cmp.querySelector('.cmp-rows'));
-  expect(cmp.querySelector('.cmp-sum')!.textContent).toBe('1 block taken out, 2 put in');
-  expect([...cmp.querySelectorAll('del.cmp-del')].map((d) => d.textContent)).toEqual(['Taken out: - Hire']);
-  expect([...cmp.querySelectorAll('ins.cmp-add')].map((d) => d.textContent)).toEqual(['Put in: - Hire two', 'Put in: - Rest']);
+  expect(cmp.querySelector('.cmp-sum')!.textContent).toBe('1 block removed, 2 added');
+  expect([...cmp.querySelectorAll('del.cmp-del')].map((d) => d.textContent)).toEqual(['Removed: - Hire']);
+  expect([...cmp.querySelectorAll('ins.cmp-add')].map((d) => d.textContent)).toEqual(['Added: - Hire two', 'Added: - Rest']);
   // Side by side on a wide screen: the old block's cell left of the new; on a phone, the new under the old.
   const cells = () => {
     const row = cmp.querySelector('.cmp-row.changed')!;
@@ -152,7 +152,7 @@ test('Compare: two links side by side, what the second changed marked, Swap, a l
   expect(document.documentElement.scrollWidth).toBeLessThanOrEqual(390);
   cmp.querySelector<HTMLButtonElement>('.cmp-swap')!.click();
   await until(() => location.hash === `#/compare/write/${b}/write/${a}`);
-  await until(() => cmp.querySelector('.cmp-sum')!.textContent === '2 blocks taken out, 1 put in');
+  await until(() => cmp.querySelector('.cmp-sum')!.textContent === '2 blocks removed, 1 added');
   // Not a link of ours: said in the box, the address unchanged.
   second.value = 'https://example.com/';
   second.dispatchEvent(new Event('change'));

@@ -468,26 +468,26 @@ test("§5 a tree thing's bar has Indent and Bring out after its own items, disab
   const { el, last } = await editor('---\nkind: org\n---\n- Ada\n  - Ben\n    - Cy\n  - Eve\n');
   const labels = () => [...ctx(el).querySelectorAll('button, .to-context-sep')].map((b) => (b.classList.contains('to-context-sep') ? '|' : b.getAttribute('aria-label')));
   await tap(el, thing(el, 'Ben'));
-  expect(labels()).toEqual(['Move up', 'Move down', 'Add under it', 'Icon', 'Join', 'Indent', 'Bring out', 'Duplicate', '|', 'Copy', 'Cut', 'Paste', '|', 'Delete']);
+  expect(labels()).toEqual(['Move up', 'Move down', 'Add under it', 'Icon', 'Join', 'Indent', 'Outdent', 'Duplicate', '|', 'Copy', 'Cut', 'Paste', '|', 'Delete']);
   expect(action(el, 'Indent').disabled).toBe(true);
-  expect(action(el, 'Bring out').disabled).toBe(true);
+  expect(action(el, 'Outdent').disabled).toBe(true);
   await tap(el, thing(el, 'Cy')); // the first tap closes Ben's words
   await tap(el, thing(el, 'Cy'));
   expect(action(el, 'Indent').disabled).toBe(true);
-  expect(action(el, 'Bring out').disabled).toBe(false);
-  action(el, 'Bring out').click();
+  expect(action(el, 'Outdent').disabled).toBe(false);
+  action(el, 'Outdent').click();
   await settle(el);
   expect(last()).toContain('- Ada\n  - Ben\n  - Cy\n  - Eve\n');
   expect(isOpen(el)).toBe(true);
   expect(action(el, 'Indent').disabled).toBe(false);
-  expect(action(el, 'Bring out').disabled).toBe(true);
+  expect(action(el, 'Outdent').disabled).toBe(true);
   action(el, 'Indent').click();
   await settle(el);
   expect(last()).toContain('- Ada\n  - Ben\n    - Cy\n  - Eve\n');
   const net = await editor(NET);
   await tap(net.el, thing(net.el, 'API'));
   expect(action(net.el, 'Indent')).toBeUndefined();
-  expect(action(net.el, 'Bring out')).toBeUndefined();
+  expect(action(net.el, 'Outdent')).toBeUndefined();
 });
 
 test('§1 Mod+Alt+Left/Right: a step into the next lane', async () => {

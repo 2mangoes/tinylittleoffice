@@ -509,7 +509,7 @@ common-this-document = このドキュメント
 # { $task } is the task's words.
 # en: 15f18f71eefc9fedc6fedd434c2edc6a919bf130
 common-done-task = 完了：{ $task }
-# en: 8377cc96b3a0d3b623b2d7a0c1915eeeb5876df5
+# en: 00c65041972e0368c2c8b452d60c0a0754fcc9bd
 common-drag-to-move-tap-to = ドラッグで移動、タップで選択
 # en: 525df57dc3610e74377113b92951476bb9387e4d
 common-move-left = 左へ移動
@@ -518,7 +518,7 @@ common-move-right = 右へ移動
 # The group heading the Calendar and the Trip Planner sit under on the home page.
 # en: ae2f98a099fe5855c31126233e9c13641ee7fdba
 common-plan = 計画
-# en: 738ad6ef5f79e370557f96bbc2a8518c13ee7e7c
+# en: 9985434cd07212b8dac01f8e015a1fa8adac9a99
 common-chosen-tasks = 選択中のタスク
 # A link that opens the document (kit/ui/compare.ts).
 # en: cf9b77061f7b3126b49d50a6fa68f7ca8c26b7a3
@@ -531,22 +531,22 @@ common-tasks = タスク
 common-find-app-doc-template-or = アプリ、ドキュメント、テンプレート、コマンドを検索
 # en: 0d47323c5ee8dde30a5ca28f6ed6103d42081b97
 common-in-this-document = このドキュメント内を検索
-# en: 79bd41f9cdc59faf8130a3ce243ae52e11b1af38
-common-indent-or-bring-out-in = リストでは字下げ・字上げ、表では次のセル
+# en: 733a5f2fb910bb704c7993cae3d8224558d405de
+common-indent-or-bring-out-in = リストの項目を字下げ／字下げ解除。表では次のセルへ
 # en: bf6e36633c2362cb7fa31a0e8f833388a49ba28c
 common-move-selected-items-up-or = 選択した項目を上下に移動
-# en: 7256d5b09fad0e23fb5730f55a3997b80a4e35fe
+# en: 989fe994e413c509c03d3dd229b775a3ddc4707b
 common-nudge-shapes-in-hand = 選択中の図形を少し動かす
 # en: 4a5e249fca3c45e7dcf1a7e41cf691e7ddef79d7
 common-select-all-words-of-box = すべて選択：まず枠の中の文字、次にすべて
 # en: 0720e9772b354dd120b32e908da11a661678feb3
 common-back-to-words = 文章に戻る
-# en: 8ab47442433733491012bb2cb5980a22ca878f17
+# en: 0c0b01d469faff60dc3b2d1c035ee0a7caa03852
 common-extend-selection = 選択範囲を広げる
 # en: 6510e9982155a27498f4332337675f22d4592291
 common-next-or-one-before = 次、または前
-# en: 9bfd735084fcb7a62c2f5899d71f7a41dd40807d
-common-step-out-close-collapse-let = 抜け出す：閉じる、折りたたむ、離す
+# en: b4365b2ed2016713788d08335e5157985010ac28
+common-step-out-close-collapse-let = 閉じる、または選択を解除
 # en: fb2997642419cda8393061543f140d40a9323957
 common-check-or-uncheck-task = タスクをチェック、またはチェックを外す
 # en: 0a4adf12f01d48ecdb89f5eddf5f19fd89d94522
@@ -689,8 +689,8 @@ write-here = ここに書く。
 write-subheading = 小見出し
 # en: 05058e0b630498611ebc41894f7b1670dcd5870e
 write-paragraph = 段落
-# en: d7ddc5a1e386a07686e19c683d52782a4c33327b
-common-bring-out = 強調
+# en: b4d812c8bee8056808c14f1b31b6765342c8437e
+common-bring-out = 字下げ解除
 # en: aacf42132cce6cf5c1608a5d27f90fcbf93ae851
 common-indent = 字下げ
 # en: c83b0ec2d98a2ca38077be2f03102aedeb0ab261
@@ -766,7 +766,7 @@ write-rich-text-rtf = リッチテキスト（RTF）
 write-add-column-before = 前に列を追加
 # en: e5dfecd5799f77f96f52282a8db4966dd1336fab
 write-column-c-what-it-holds = 列{ $c }：入っているもの、名前の変更、列の追加・削除
-# en: 87551f94e9562dbdaa01ae42c04c102660633aa8
+# en: 1f01479a40aa348fc273d4d09636403f89eff717
 write-table-move-copy-or-take = 表：移動、コピー、削除
 # The templates
 # en: cfd76febbb671e54b2f280128fb5c317389758a7
@@ -941,11 +941,11 @@ chart-kind-chart-data = { $kind }グラフ。{ $data }
 
 ## the Spreadsheet
 
-# en: 7d5c268bac3c70bda1867b5a6799c39f05c56633
-sheet-clear-these-cells = このセルを消去
+# en: 12acc4f41c4ad8ed5996ac33a2f066e024ba1c65
+sheet-clear-these-cells = セルを消去
 # en: c527ea0aeba3f2d0104802279fed7e595157b78e
 sheet-fit-this-column-to-its = この列を文字の幅に合わせる
-# en: 70993d4b59add9e2d4f3bf3ec2983973233e8fdc
+# en: b92fe41ac34453cd0368f0fa5d00d1e9b0279c12
 sheet-cells-in-hand = 選択中のセル
 # en: 119faf17cd1de268ce34ade4f9bae4520774f640
 sheet-check-ref = { $ref }にチェック
@@ -1127,8 +1127,8 @@ sheet-drag-to-resize-double-click = ドラッグで幅を変更、ダブルク�
 sheet-fill-down-from-top-row = 一番上の行から下へ埋める
 # en: 549a401f55bc461388a4f5f8554db5e0749d0a28
 sheet-fill-right-from-first-column = 最初の列から右へ埋める
-# en: b566111fc74cf76dc164b421a591acf545fc2f5c
-common-fill-drag-to-carry-these = 埋める：ドラッグでこのセルを延ばす
+# en: 51f5ba33dabbc2c8aa4e3e640e0b27cb55aea1be
+common-fill-drag-to-carry-these = ドラッグで埋める
 # en: 4425eb9442fea0435d290b7a34f1ad8a6980e789
 sheet-fit-columns-to-page = 列をページに合わせる
 # en: 720f58fb1f9353ab3c904b888ccb774c40393e06
@@ -1147,8 +1147,8 @@ common-insert-n-rows-below = 下に{ $n ->
     }挿入
 # en: ae3b3fa65ff4f34adbaf5d76e694293bb2059fbf
 sheet-letters-keyboard = 文字キーボード
-# en: bb3f67c27160a8b68b663c5e3aa44a7785a01602
-sheet-lock-these-cells-so-reader = このセルをロックして、読む人が触れないようにする
+# en: 7177342b32d961e7d51feb4571231982a48a0772
+sheet-lock-these-cells-so-reader = このセルをロックして、読む人が変更できないようにする
 # en: b375da8098132564f70d56ad1eff132365d8b9d1
 sheet-locked-part-of-model = ロック中：モデルの一部
 # en: b1b588e8ffba9c37d560f4b4d63c6344d009ce2e
@@ -1458,8 +1458,8 @@ draw-more = その他
 draw-icon = アイコン…
 # en: 64dd60fe1a049fe6db3eb1369dec2e42bf428e21
 draw-background = 背景
-# en: bfd53e9376262ea83b6fd34f50a30dd9ef629dd8
-draw-remove-background-tile = 背景タイルを外す
+# en: e1946387893c804aeadc93e5df5af3416cf1dc53
+draw-remove-background-tile = 背景を外す
 # en: 1d0c8304baedcf8e3a78982c2e7c0b04622bf2a0
 draw-color = 色
 # en: cfdd099c4751f2f9aef2491f411111906956e0f2
@@ -1530,8 +1530,8 @@ draw-clear-grid = グリッドを空にする
 draw-use-as-background = 背景として使う
 # en: 037ae898000037d344a43cf8052a8c7843cbc599
 draw-grid-is-now-background-download = グリッドが背景になりました。ダウンロードするとタイルとして保存され、どのページでもtile:で使えます。
-# en: e12ff604def1b90067e2b685397f8e7e967b62db
-draw-pixel-grid-n-by-n = ピクセルグリッド、{ $n }×{ $n }。矢印キーで移動し、Enterで手持ちの色でマスを塗ります。
+# en: 209a1a74ee8eec09b861bc34e5ddb08a1357a364
+draw-pixel-grid-n-by-n = ピクセルグリッド（{ $n }×{ $n }）。矢印キーで移動、Enterで今の色で塗ります。
 # en: a9deda2292f9b3c9a827e2aa71e0da6b4db9f16e
 draw-row-y-column-x-ink = { $y }行目、{ $x }列目：{ $ink }
 # en: d316afce8845f59e541c981d07d81bab22858d00
@@ -1563,7 +1563,7 @@ draw-small-text = 小さい文字
 draw-solid-fill = ベタ塗り
 # en: dcfb9c041348e0d62c058f37225ad2185472edc8
 draw-solid-line = 実線
-# en: 457ead1ee1219d6d1453519aae40aeebcde939ee
+# en: b233a397b799e80f21b88a34ae7e30af0528d1c1
 draw-shape-in-hand = 選択中の図形
 # en: 8b2897e25c2be27d9c96a9ef61306890918e2a8d
 draw-words-of-shape = 図形の文字
@@ -1576,8 +1576,8 @@ draw-xl = 特大
 draw-drag-to-move-corner-handle = ドラッグで移動。角のハンドルで大きさを変え、丸いハンドルで回転します。Enterかダブルタップで文字を編集します。
 # en: 19dfa02a0be55dbab49b30d3c181e058d9f1d8c9
 draw-drawing-canvas-v-selects-r = 作図キャンバス。Vで選択、R・E・D・L・A・Tで描画、矢印で微調整、[と]で回転、Enterで文字を編集、Deleteで削除します。
-# en: cfcc383bb946eac86b9f0166180ac9f9cfbe8d0a
-draw-tap-shape-to-select-it = 図形をタップして選ぶか、図形のまわりをドラッグしてまとめて選びます。描くにはツールを選んでください。
+# en: 4421c5912fa5d727f23883b0a69028e195e3717b
+draw-tap-shape-to-select-it = 図形をタップして選択するか、複数を囲むようにドラッグします。描くにはツールを選びます。
 # en: 6f72f3cd1255e9bb344a1f9adb5fc64770f07cd5
 draw-rotate-left = 左に回転
 # en: b75f23d1d0e44603289911e22ad5efd66157913a
@@ -1698,9 +1698,9 @@ anim-shadow = 影
 common-size = 大きさ
 # en: 4a6c11ab8104f8bcbb26155a8f68688d181f8a4b
 anim-spin = 回転
-# en: db824810c0944690cca8014a6300681046b3812b
-anim-stage-alt-arrow-keys-move = ステージ：{ $alt }。矢印キーで選択中の図形（または時間）を動かし、カンマとピリオドで1フレームずつ進め、スペースで再生、Kでキーを残します。
-# en: 044d465208b3bb30a2e616f2d2417f49dfb0cbb0
+# en: 598549d7818087a7d04d49a7b9c00979c8a35c96
+anim-stage-alt-arrow-keys-move = ステージ：{ $alt }。矢印キーで選択中の図形（または時間）を動かします。カンマとピリオドで1フレームずつ進みます。スペースで再生。Kでキーフレームを追加します。
+# en: a4277f79218220e03e7d4ebb5b1417cbdff137dc
 anim-shapes-in-hand = 選択中の図形
 # en: 6c82e6dd86807ee3db07e3c82bec1ae1ce00b08b
 anim-time = 時間
@@ -1710,8 +1710,8 @@ anim-wobble = ゆれ
 anim-now-s-of-all-s = { $all }秒中{ $now }秒
 # en: c7f73bb54d928922c3838bb789ee9fb8a5b1eb37
 anim-settings = 設定
-# en: b105feacbb414a398cea41273d68a571e5a59f14
-anim-this-frame = このフレーム
+# en: 89798935dfbced66a46a24ee534e23bbf5281faf
+anim-this-frame = 現在のフレーム
 # en: cac09d8898c2435fb48b3b387ff152da7929eab8
 anim-duplicate-this-frame = このフレームを複製
 # en: 885c46b03eaf682f7c9534f7791ddfc3da84cd6f
@@ -1761,8 +1761,8 @@ anim-n-times = { $n }回
 anim-s-s = { $s }秒
 # en: 4403c08ebdf8c80a653ed6d343be64570f75f8ce
 anim-frame-back-frame-on = 1フレーム戻る、1フレーム進む
-# en: bd3f0aa379bfdd2a10e53da305ea0443a7299029
-anim-nudge-shapes-in-hand-with = 選択中の図形を少し動かす。何もなければ1フレーム進める
+# en: ad3441e7c85b25bc4c7f46fd051345a6ba241e58
+anim-nudge-shapes-in-hand-with = 選択中の図形を少し動かす、または1フレーム移動
 # en: fe13ca0956192777b5060b354cf8e5dc5553c328
 anim-play-or-pause = 再生または一時停止
 # en: 293cec535f254be8be69d7877fc790f95b4b7e07
@@ -1797,7 +1797,7 @@ common-calendar = カレンダー
 outline-cancel-connecting = 接続をやめる
 # en: 0b2cad8a7f348bc05529baaac65726b720eb10e1
 outline-change-it = 変更
-# en: 35b59db93693472e27ac5a549388a1ade473a499
+# en: 1ed0b58d18ef647be5de11840bb929ecc8e36446
 common-chosen-items = 選択中の項目
 # en: b65463cb6a42a17de514acc4659f7fd331e0876a
 outline-connect = つなぐ
@@ -1875,11 +1875,11 @@ outline-plain-text = プレーンテキスト
 common-show-as-slides = スライドで表示
 # en: 59df6d7de818cdbeb08aa7f083aff96c1bccd1f5
 outline-show-as-outline = アウトラインで表示
-# en: 3c9f741443be8a6583a4279ae6e77fca7cce2df8
+# en: b306a7c32ba84dd4adea8612dccc99c15065eb53
 outline-take-away-connection-from-from = { $from }から{ $to }への接続を外す
-# en: 07f68f99dd0e1cf2477cf26dc3cd35676e388c2b
+# en: e963907dac5cd5c017869b4c96c18021c9bd058b
 outline-take-it-away = 外す
-# en: 77170ece38b5ca625735d8a9676da169d52a4823
+# en: 7312a31a2c880f2d456663b6f91ad6da980b3a5e
 outline-take-connection-away = 接続を外す
 # en: 656e5c87ae5cd391807e13c85fb32635c2d441c2
 outline-tap-item-to-connect-from = つなぎ元の項目をタップします。
@@ -2038,7 +2038,7 @@ deck-workshop-agenda = ワークショップの進行表
 deck-presentation-lowercase = プレゼンテーション
 # en: 1e35470a39e5b3ddca4d3b585c9011db9b4c4dc6
 deck-slides = スライド
-# en: 8e3034bc68da7483264b2f4fa4a3e7b9022ca3f3
+# en: 5075541433d31fb8cf207ced97577686ac3fe961
 deck-chosen-slides = 選択中のスライド
 # en: d7935967cfd3de8f11b33801800bece8d90cb55f
 deck-move-this-slide-drag-it = このスライドを移動：別のスライドにドラッグします
@@ -2196,7 +2196,7 @@ deck-speaker-notes = スピーカーノート
 deck-n-total = { $n } / { $total }
 # en: 3b73ff036c4ba5dc509f9a2e55189b33fc8013bb
 deck-document-on-slide = スライド上のドキュメント
-# en: a3d2a40edda8bb58665379e1ae4150330385b69d
+# en: 800ddde9b84d77765694212f6af1a9ed4329c77c
 deck-remove-from-slide = スライドから外す
 
 # The rail and the sheets
@@ -2350,8 +2350,8 @@ cal-done = 完了%
 cal-edit-event = 予定を編集
 # en: 8a4d4e6eb9a367d616b8a4cbfa2792068482e884
 cal-edit-task = タスクを編集
-# en: 4d792ed94880381200a867006d51d6b04b0b0db2
-cal-choose-task = { $task }を選ぶ
+# en: 99570f85bb2bae0dbe3e8f2f3d6d6f765ee7c47e
+cal-choose-task = { $task }を選択
 # en: 72b4644a41881ce4e156ce3283119c74f598cbea
 cal-day-earlier = 1日前
 # en: 8d6915ee723c8b3c01f29002cfed7d597d56c2c7
@@ -2757,9 +2757,9 @@ trip-n-stops = { $n ->
 # en: 44896c642dce2a144eb35fdb61cedb762cc44ca1
 trip-stop-n = 立ち寄り先{ $n }
 # A stop's number is its handle; the bar under stops chosen whole.
-# en: 4c10525650ae11e374f96fb88f441154986c6a7e
+# en: 372c19ab2c53f7582cdbe3823523a8760d0f2807
 trip-stop-n-tap-chooses-it = 立ち寄り先{ $n }：タップで選択、ドラッグで移動
-# en: 9c5823de775344a40bea4a52b65ff319a5198cd7
+# en: 56f844200d56e1fc382c81f28972a39aab61e019
 trip-chosen-stops = 選択中の立ち寄り先
 # en: a9d55cf1a8a7b85ab9e293fc1e40a440986b0725
 trip-show-on-map = 地図で表示
@@ -2929,7 +2929,7 @@ calc-line-n = { $n }行目
 calc-put-answer-in-line = { $answer }を行に入れる
 # en: a9c16dd084ce3781568419133b0fa0c0f57aa727
 calc-no-answer = 答えなし
-# en: 4548651eba30d8802e8ff67446e7a739d61aaacd
+# en: cf23123f857abeda1d28fc9b85cc7eba8d20f3b1
 calc-take-away-line-n = { $n }行目を削除
 # en: fc9ce14b28c6f2c3b72caf056ca604b2b96f7d2b
 calc-sum = 合計
@@ -3037,9 +3037,9 @@ calc-waves-adding-up = 重なっていく波
 # en: 9e46b2d75638fb2ebe905ad0c4be8059be6487cc
 calc-sine-waves-summed-on-their = サイン波を足し合わせて、矩形波に近づけます。
 # The grip on a line of the tape; the bar under lines chosen whole.
-# en: fbdad4400c9af0f1c0e219c320b7f12182f028a8
-calc-choose-line-n-drag-it = { $n }行目を選ぶ：ドラッグで移動
-# en: e19969dcad4f4dd667986da648ce8e7195f00de6
+# en: fd71cff4626f555a0e69c5b6801a591cabd1d173
+calc-choose-line-n-drag-it = { $n }行目を選択、ドラッグで移動
+# en: dab2e3d9cf8c3bfccd20fa34fac6fc738ce9aba7
 calc-chosen-lines = 選択中の行
 
 ## two links compared (kit/ui/compare.ts)
@@ -3058,11 +3058,11 @@ compare-paste-second-link-to-see = 2つ目のリンクを貼ると、何が変�
 compare-paste-link-to-document-as = 今のドキュメントのリンクを貼り付けてください
 # en: 7fb07fcb91ba19442009f16f24be4ef85b3eca16
 compare-paste-link-to-document-as-it-was = 前のドキュメントのリンクを貼り付けてください
-# en: 73b9be750071e572102d03b8785d449c2d01efab
+# en: 0ae84aa126111ee639f685e9ed05c6895e632a90
 compare-put-in = 追加：
 # en: 210dd62a81e43d19e22018878ba665485e0526cb
 compare-swap = 入れ替え
-# en: 5b48a02ea259c405a31a801e75e435644a9e2b54
+# en: c331654dfaed937af3dc0e72f31b21fdfb1aa325
 compare-taken-out = 削除：
 # en: aec0a618ef67ca171ab77615fc7cab57405fea3f
 compare-first-link = 1つ目のリンク
@@ -3072,11 +3072,11 @@ compare-second-link = 2つ目のリンク
 compare-two-links-to-documents-side = 2つのドキュメントのリンクを並べ、2つ目で変わったところに印を付けます。このページの外には何も送られません。
 # en: 2053662dff5d94e9ea30321321ce6cd0df8f0027
 compare-different-apps = 別のアプリ
-# en: 6f75146348fb76bffda5972336f4d0c46a25c1b7
+# en: f4e4b3a1d739ce43635eb9d75d97403c420c0642
 compare-n-blocks-taken-out = { $n ->
        *[other] { $n }個のブロックを削除
     }
-# en: ed786d33ee11a79a41e606e3c75cc6e58ef0a1b6
+# en: 0041ce2f8795b8fbc93244ba17b668d115906ef3
 compare-n-put-in = { $n ->
        *[other] { $n }件を追加
     }

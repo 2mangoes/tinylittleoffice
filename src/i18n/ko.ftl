@@ -493,7 +493,7 @@ common-this-document = 이 문서
 # { $task } is the task's words.
 # en: 15f18f71eefc9fedc6fedd434c2edc6a919bf130
 common-done-task = 완료: { $task }
-# en: 8377cc96b3a0d3b623b2d7a0c1915eeeb5876df5
+# en: 00c65041972e0368c2c8b452d60c0a0754fcc9bd
 common-drag-to-move-tap-to = 끌면 이동, 탭하면 선택
 # en: 525df57dc3610e74377113b92951476bb9387e4d
 common-move-left = 왼쪽으로 이동
@@ -502,7 +502,7 @@ common-move-right = 오른쪽으로 이동
 # The group heading the Calendar and the Trip Planner sit under on the home page.
 # en: ae2f98a099fe5855c31126233e9c13641ee7fdba
 common-plan = 계획
-# en: 738ad6ef5f79e370557f96bbc2a8518c13ee7e7c
+# en: 9985434cd07212b8dac01f8e015a1fa8adac9a99
 common-chosen-tasks = 선택한 할 일
 # A link that opens the document (kit/ui/compare.ts).
 # en: cf9b77061f7b3126b49d50a6fa68f7ca8c26b7a3
@@ -515,22 +515,22 @@ common-tasks = 할 일
 common-find-app-doc-template-or = 앱, 문서, 템플릿, 명령 찾기
 # en: 0d47323c5ee8dde30a5ca28f6ed6103d42081b97
 common-in-this-document = 이 문서에서 찾기
-# en: 79bd41f9cdc59faf8130a3ce243ae52e11b1af38
-common-indent-or-bring-out-in = 목록에서는 들여쓰기나 내어쓰기, 표에서는 다음 셀
+# en: 733a5f2fb910bb704c7993cae3d8224558d405de
+common-indent-or-bring-out-in = 목록 항목 들여쓰기 또는 내어쓰기, 표에서는 다음 셀
 # en: bf6e36633c2362cb7fa31a0e8f833388a49ba28c
 common-move-selected-items-up-or = 선택한 항목을 위나 아래로 이동
-# en: 7256d5b09fad0e23fb5730f55a3997b80a4e35fe
-common-nudge-shapes-in-hand = 선택한 도형을 조금씩 이동
+# en: 989fe994e413c509c03d3dd229b775a3ddc4707b
+common-nudge-shapes-in-hand = 선택한 도형 조금씩 옮기기
 # en: 4a5e249fca3c45e7dcf1a7e41cf691e7ddef79d7
 common-select-all-words-of-box = 모두 선택: 상자의 글, 그다음 전체
 # en: 0720e9772b354dd120b32e908da11a661678feb3
 common-back-to-words = 글로 돌아가기
-# en: 8ab47442433733491012bb2cb5980a22ca878f17
+# en: 0c0b01d469faff60dc3b2d1c035ee0a7caa03852
 common-extend-selection = 선택 범위 넓히기
 # en: 6510e9982155a27498f4332337675f22d4592291
 common-next-or-one-before = 다음 또는 이전
-# en: 9bfd735084fcb7a62c2f5899d71f7a41dd40807d
-common-step-out-close-collapse-let = 빠져나오기: 닫기, 접기, 놓기
+# en: b4365b2ed2016713788d08335e5157985010ac28
+common-step-out-close-collapse-let = 닫기 또는 선택 해제
 # en: fb2997642419cda8393061543f140d40a9323957
 common-check-or-uncheck-task = 할 일 체크 또는 체크 해제
 # en: 0a4adf12f01d48ecdb89f5eddf5f19fd89d94522
@@ -669,7 +669,7 @@ write-here = 여기에 쓰세요.
 write-subheading = 소제목
 # en: 05058e0b630498611ebc41894f7b1670dcd5870e
 write-paragraph = 본문
-# en: d7ddc5a1e386a07686e19c683d52782a4c33327b
+# en: b4d812c8bee8056808c14f1b31b6765342c8437e
 common-bring-out = 내어쓰기
 # en: aacf42132cce6cf5c1608a5d27f90fcbf93ae851
 common-indent = 들여쓰기
@@ -743,7 +743,7 @@ write-rich-text-rtf = 서식 있는 텍스트 (RTF)
 write-add-column-before = 앞에 열 추가
 # en: e5dfecd5799f77f96f52282a8db4966dd1336fab
 write-column-c-what-it-holds = { $c }열: 담긴 내용, 이름 짓기, 열 추가나 삭제
-# en: 87551f94e9562dbdaa01ae42c04c102660633aa8
+# en: 1f01479a40aa348fc273d4d09636403f89eff717
 write-table-move-copy-or-take = 표: 이동, 복사 또는 삭제
 # The templates
 # en: cfd76febbb671e54b2f280128fb5c317389758a7
@@ -919,11 +919,11 @@ chart-kind-chart-data = { $kind } 차트. { $data }
 
 ## the Spreadsheet
 
-# en: 7d5c268bac3c70bda1867b5a6799c39f05c56633
-sheet-clear-these-cells = 이 셀 비우기
+# en: 12acc4f41c4ad8ed5996ac33a2f066e024ba1c65
+sheet-clear-these-cells = 셀 비우기
 # en: c527ea0aeba3f2d0104802279fed7e595157b78e
 sheet-fit-this-column-to-its = 이 열을 글자 너비에 맞추기
-# en: 70993d4b59add9e2d4f3bf3ec2983973233e8fdc
+# en: b92fe41ac34453cd0368f0fa5d00d1e9b0279c12
 sheet-cells-in-hand = 선택한 셀
 # en: 119faf17cd1de268ce34ade4f9bae4520774f640
 sheet-check-ref = { $ref } 체크
@@ -1106,8 +1106,8 @@ sheet-drag-to-resize-double-click = 끌면 크기 조절, 더블클릭하면 맞
 sheet-fill-down-from-top-row = 맨 위 행에서 아래로 채우기
 # en: 549a401f55bc461388a4f5f8554db5e0749d0a28
 sheet-fill-right-from-first-column = 첫 열에서 오른쪽으로 채우기
-# en: b566111fc74cf76dc164b421a591acf545fc2f5c
-common-fill-drag-to-carry-these = 채우기: 끌어서 이 셀을 이어 가요
+# en: 51f5ba33dabbc2c8aa4e3e640e0b27cb55aea1be
+common-fill-drag-to-carry-these = 끌어서 채우기
 # en: 4425eb9442fea0435d290b7a34f1ad8a6980e789
 sheet-fit-columns-to-page = 열을 페이지에 맞추기
 # en: 720f58fb1f9353ab3c904b888ccb774c40393e06
@@ -1122,8 +1122,8 @@ common-insert-n-rows-above = 위에 { $n }행 삽입
 common-insert-n-rows-below = 아래에 { $n }행 삽입
 # en: ae3b3fa65ff4f34adbaf5d76e694293bb2059fbf
 sheet-letters-keyboard = 문자 키보드
-# en: bb3f67c27160a8b68b663c5e3aa44a7785a01602
-sheet-lock-these-cells-so-reader = 읽는 사람이 건드리지 않게 이 셀 잠금
+# en: 7177342b32d961e7d51feb4571231982a48a0772
+sheet-lock-these-cells-so-reader = 읽는 사람이 바꿀 수 없게 이 셀 잠그기
 # en: b375da8098132564f70d56ad1eff132365d8b9d1
 sheet-locked-part-of-model = 잠김: 모델의 일부예요
 # en: b1b588e8ffba9c37d560f4b4d63c6344d009ce2e
@@ -1429,8 +1429,8 @@ draw-more = 더 보기
 draw-icon = 아이콘…
 # en: 64dd60fe1a049fe6db3eb1369dec2e42bf428e21
 draw-background = 배경
-# en: bfd53e9376262ea83b6fd34f50a30dd9ef629dd8
-draw-remove-background-tile = 배경 타일 없애기
+# en: e1946387893c804aeadc93e5df5af3416cf1dc53
+draw-remove-background-tile = 배경 빼기
 # en: 1d0c8304baedcf8e3a78982c2e7c0b04622bf2a0
 draw-color = 색상
 # en: cfdd099c4751f2f9aef2491f411111906956e0f2
@@ -1501,8 +1501,8 @@ draw-clear-grid = 격자 비우기
 draw-use-as-background = 배경으로 쓰기
 # en: 037ae898000037d344a43cf8052a8c7843cbc599
 draw-grid-is-now-background-download = 격자가 이제 배경이에요. 다운로드하면 타일로 받고, 어떤 페이지든 tile:로 쓸 수 있어요.
-# en: e12ff604def1b90067e2b685397f8e7e967b62db
-draw-pixel-grid-n-by-n = 픽셀 격자, { $n }×{ $n }. 화살표 키로 움직이고 Enter로 선택한 색을 칠해요.
+# en: 209a1a74ee8eec09b861bc34e5ddb08a1357a364
+draw-pixel-grid-n-by-n = 픽셀 격자, { $n } × { $n }. 화살표 키로 이동하고 Enter로 현재 색을 칠해요.
 # en: a9deda2292f9b3c9a827e2aa71e0da6b4db9f16e
 draw-row-y-column-x-ink = { $y }행 { $x }열: { $ink }
 # en: d316afce8845f59e541c981d07d81bab22858d00
@@ -1537,7 +1537,7 @@ draw-small-text = 작은 글자
 draw-solid-fill = 단색 채우기
 # en: dcfb9c041348e0d62c058f37225ad2185472edc8
 draw-solid-line = 실선
-# en: 457ead1ee1219d6d1453519aae40aeebcde939ee
+# en: b233a397b799e80f21b88a34ae7e30af0528d1c1
 draw-shape-in-hand = 선택한 도형
 # en: 8b2897e25c2be27d9c96a9ef61306890918e2a8d
 draw-words-of-shape = 도형의 글
@@ -1551,8 +1551,8 @@ draw-xl = XL
 draw-drag-to-move-corner-handle = 끌면 이동해요. 모서리 핸들은 크기 조절, 둥근 핸들은 회전이고 Enter나 더블 탭으로 글을 편집해요.
 # en: 19dfa02a0be55dbab49b30d3c181e058d9f1d8c9
 draw-drawing-canvas-v-selects-r = 그림 캔버스. V는 선택, R, E, D, L, A, T는 그리기, 화살표는 조금씩 이동, [ ]는 회전, Enter는 글 편집, Delete는 삭제예요.
-# en: cfcc383bb946eac86b9f0166180ac9f9cfbe8d0a
-draw-tap-shape-to-select-it = 도형을 탭해 선택하거나 도형 둘레를 끌어 고르세요. 그리려면 도구를 고르세요.
+# en: 4421c5912fa5d727f23883b0a69028e195e3717b
+draw-tap-shape-to-select-it = 도형을 탭해서 선택하거나 여러 개를 둘러싸듯 끌어요. 그리려면 도구를 고르세요.
 # en: 6f72f3cd1255e9bb344a1f9adb5fc64770f07cd5
 draw-rotate-left = 왼쪽으로 회전
 # en: b75f23d1d0e44603289911e22ad5efd66157913a
@@ -1673,10 +1673,10 @@ anim-shadow = 그림자
 common-size = 크기
 # en: 4a6c11ab8104f8bcbb26155a8f68688d181f8a4b
 anim-spin = 회전
-# en: db824810c0944690cca8014a6300681046b3812b
-anim-stage-alt-arrow-keys-move = 무대: { $alt }. 화살표 키로 선택한 도형(또는 시간)을 움직이고, 쉼표와 마침표로 한 프레임씩 이동하고, Space로 재생하고, K로 키를 남겨요.
-# en: 044d465208b3bb30a2e616f2d2417f49dfb0cbb0
-anim-shapes-in-hand = 선택한 도형
+# en: 598549d7818087a7d04d49a7b9c00979c8a35c96
+anim-stage-alt-arrow-keys-move = 무대: { $alt }. 화살표 키로 선택한 도형(또는 시간)을 움직여요. 쉼표와 마침표로 한 프레임씩 이동해요. Space로 재생해요. K로 키프레임을 추가해요.
+# en: a4277f79218220e03e7d4ebb5b1417cbdff137dc
+anim-shapes-in-hand = 선택한 도형들
 # en: 6c82e6dd86807ee3db07e3c82bec1ae1ce00b08b
 anim-time = 시간
 # en: 4ad8d1291a5b6b81cd03b1408570e1aae781c074
@@ -1685,8 +1685,8 @@ anim-wobble = 흔들림
 anim-now-s-of-all-s = { $all }초 중 { $now }초
 # en: c7f73bb54d928922c3838bb789ee9fb8a5b1eb37
 anim-settings = 설정
-# en: b105feacbb414a398cea41273d68a571e5a59f14
-anim-this-frame = 이 프레임
+# en: 89798935dfbced66a46a24ee534e23bbf5281faf
+anim-this-frame = 현재 프레임
 # en: cac09d8898c2435fb48b3b387ff152da7929eab8
 anim-duplicate-this-frame = 이 프레임 복제
 # en: 885c46b03eaf682f7c9534f7791ddfc3da84cd6f
@@ -1736,8 +1736,8 @@ anim-n-times = { $n }번
 anim-s-s = { $s }초
 # en: 4403c08ebdf8c80a653ed6d343be64570f75f8ce
 anim-frame-back-frame-on = 한 프레임 뒤로, 한 프레임 앞으로
-# en: bd3f0aa379bfdd2a10e53da305ea0443a7299029
-anim-nudge-shapes-in-hand-with = 선택한 도형을 조금씩 이동해요. 선택한 게 없으면 한 프레임씩 이동해요
+# en: ad3441e7c85b25bc4c7f46fd051345a6ba241e58
+anim-nudge-shapes-in-hand-with = 선택한 도형을 조금씩 옮기거나 한 프레임 이동
 # en: fe13ca0956192777b5060b354cf8e5dc5553c328
 anim-play-or-pause = 재생 또는 일시정지
 # en: 293cec535f254be8be69d7877fc790f95b4b7e07
@@ -1772,7 +1772,7 @@ common-calendar = 캘린더
 outline-cancel-connecting = 연결 취소
 # en: 0b2cad8a7f348bc05529baaac65726b720eb10e1
 outline-change-it = 바꾸기
-# en: 35b59db93693472e27ac5a549388a1ade473a499
+# en: 1ed0b58d18ef647be5de11840bb929ecc8e36446
 common-chosen-items = 선택한 항목
 # en: b65463cb6a42a17de514acc4659f7fd331e0876a
 outline-connect = 연결
@@ -1850,12 +1850,12 @@ outline-plain-text = 일반 텍스트
 common-show-as-slides = 슬라이드로 보기
 # en: 59df6d7de818cdbeb08aa7f083aff96c1bccd1f5
 outline-show-as-outline = 개요로 보기
-# en: 3c9f741443be8a6583a4279ae6e77fca7cce2df8
-outline-take-away-connection-from-from = { $from }에서 { $to }(으)로의 연결 없애기
-# en: 07f68f99dd0e1cf2477cf26dc3cd35676e388c2b
-outline-take-it-away = 없애기
-# en: 77170ece38b5ca625735d8a9676da169d52a4823
-outline-take-connection-away = 연결 없애기
+# en: b306a7c32ba84dd4adea8612dccc99c15065eb53
+outline-take-away-connection-from-from = { $from }에서 { $to }(으)로의 연결 빼기
+# en: e963907dac5cd5c017869b4c96c18021c9bd058b
+outline-take-it-away = 빼기
+# en: 7312a31a2c880f2d456663b6f91ad6da980b3a5e
+outline-take-connection-away = 연결 빼기
 # en: 656e5c87ae5cd391807e13c85fb32635c2d441c2
 outline-tap-item-to-connect-from = 연결을 시작할 항목을 탭하세요.
 # en: 7a717eefe223e502e86655b5bf8eb999b867a9dc
@@ -2013,7 +2013,7 @@ deck-workshop-agenda = 워크숍 일정
 deck-presentation-lowercase = 프레젠테이션
 # en: 1e35470a39e5b3ddca4d3b585c9011db9b4c4dc6
 deck-slides = 슬라이드
-# en: 8e3034bc68da7483264b2f4fa4a3e7b9022ca3f3
+# en: 5075541433d31fb8cf207ced97577686ac3fe961
 deck-chosen-slides = 선택한 슬라이드
 # en: d7935967cfd3de8f11b33801800bece8d90cb55f
 deck-move-this-slide-drag-it = 이 슬라이드 이동: 다른 슬라이드 위로 끌어 놓으세요
@@ -2171,7 +2171,7 @@ deck-speaker-notes = 발표자 노트
 deck-n-total = { $n } / { $total }
 # en: 3b73ff036c4ba5dc509f9a2e55189b33fc8013bb
 deck-document-on-slide = 슬라이드 위의 문서
-# en: a3d2a40edda8bb58665379e1ae4150330385b69d
+# en: 800ddde9b84d77765694212f6af1a9ed4329c77c
 deck-remove-from-slide = 슬라이드에서 빼기
 
 # The rail and the sheets
@@ -2326,7 +2326,7 @@ cal-done = 진행률 %
 cal-edit-event = 일정 편집
 # en: 8a4d4e6eb9a367d616b8a4cbfa2792068482e884
 cal-edit-task = 작업 편집
-# en: 4d792ed94880381200a867006d51d6b04b0b0db2
+# en: 99570f85bb2bae0dbe3e8f2f3d6d6f765ee7c47e
 cal-choose-task = { $task } 선택
 # en: 72b4644a41881ce4e156ce3283119c74f598cbea
 cal-day-earlier = 하루 앞으로
@@ -2734,9 +2734,9 @@ trip-n-stops = 경유지 { $n ->
 # en: 44896c642dce2a144eb35fdb61cedb762cc44ca1
 trip-stop-n = 경유지 { $n }
 # A stop's number is its handle; the bar under stops chosen whole.
-# en: 4c10525650ae11e374f96fb88f441154986c6a7e
+# en: 372c19ab2c53f7582cdbe3823523a8760d0f2807
 trip-stop-n-tap-chooses-it = 경유지 { $n }: 탭하면 선택, 끌면 이동
-# en: 9c5823de775344a40bea4a52b65ff319a5198cd7
+# en: 56f844200d56e1fc382c81f28972a39aab61e019
 trip-chosen-stops = 선택한 경유지
 # en: a9d55cf1a8a7b85ab9e293fc1e40a440986b0725
 trip-show-on-map = 지도에서 보기
@@ -2906,8 +2906,8 @@ calc-line-n = { $n }번째 줄
 calc-put-answer-in-line = { $answer }을(를) 줄에 넣기
 # en: a9c16dd084ce3781568419133b0fa0c0f57aa727
 calc-no-answer = 답 없음
-# en: 4548651eba30d8802e8ff67446e7a739d61aaacd
-calc-take-away-line-n = { $n }번째 줄 없애기
+# en: cf23123f857abeda1d28fc9b85cc7eba8d20f3b1
+calc-take-away-line-n = { $n }번째 줄 삭제
 # en: fc9ce14b28c6f2c3b72caf056ca604b2b96f7d2b
 calc-sum = 합계
 # en: fdb6ecce95257d64ccde93310bf9a9adc8ad249e
@@ -3014,9 +3014,9 @@ calc-waves-adding-up = 더해지는 파동
 # en: 9e46b2d75638fb2ebe905ad0c4be8059be6487cc
 calc-sine-waves-summed-on-their = 사인파를 더해서 사각파에 가까워져요.
 # The grip on a line of the tape; the bar under lines chosen whole.
-# en: fbdad4400c9af0f1c0e219c320b7f12182f028a8
-calc-choose-line-n-drag-it = { $n }번째 줄 선택: 끌어서 이동해요
-# en: e19969dcad4f4dd667986da648ce8e7195f00de6
+# en: fd71cff4626f555a0e69c5b6801a591cabd1d173
+calc-choose-line-n-drag-it = { $n }번째 줄 선택, 끌어서 이동
+# en: dab2e3d9cf8c3bfccd20fa34fac6fc738ce9aba7
 calc-chosen-lines = 선택한 줄
 
 ## two links compared (kit/ui/compare.ts)
@@ -3035,11 +3035,11 @@ compare-paste-second-link-to-see = 두 번째 링크를 붙여넣으면 바뀐 �
 compare-paste-link-to-document-as = 지금 상태의 문서 링크를 붙여넣으세요
 # en: 7fb07fcb91ba19442009f16f24be4ef85b3eca16
 compare-paste-link-to-document-as-it-was = 이전 상태의 문서 링크를 붙여넣으세요
-# en: 73b9be750071e572102d03b8785d449c2d01efab
+# en: 0ae84aa126111ee639f685e9ed05c6895e632a90
 compare-put-in = 추가됨:
 # en: 210dd62a81e43d19e22018878ba665485e0526cb
 compare-swap = 서로 바꾸기
-# en: 5b48a02ea259c405a31a801e75e435644a9e2b54
+# en: c331654dfaed937af3dc0e72f31b21fdfb1aa325
 compare-taken-out = 삭제됨:
 # en: aec0a618ef67ca171ab77615fc7cab57405fea3f
 compare-first-link = 첫 번째 링크
@@ -3049,11 +3049,11 @@ compare-second-link = 두 번째 링크
 compare-two-links-to-documents-side = 문서 링크 두 개를 나란히 놓고 두 번째에서 바뀐 곳을 표시해요. 이 페이지 밖으로 나가는 것은 없어요.
 # en: 2053662dff5d94e9ea30321321ce6cd0df8f0027
 compare-different-apps = 서로 다른 앱
-# en: 6f75146348fb76bffda5972336f4d0c46a25c1b7
+# en: f4e4b3a1d739ce43635eb9d75d97403c420c0642
 compare-n-blocks-taken-out = { $n ->
        *[other] { $n }
     }개 블록 삭제됨
-# en: ed786d33ee11a79a41e606e3c75cc6e58ef0a1b6
+# en: 0041ce2f8795b8fbc93244ba17b668d115906ef3
 compare-n-put-in = { $n ->
        *[other] { $n }
     }개 추가됨

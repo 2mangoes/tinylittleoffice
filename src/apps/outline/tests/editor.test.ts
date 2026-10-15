@@ -139,7 +139,7 @@ test('the bar arranges the chosen row: Indent, Move up, Bring out take the famil
   expect(last()).toBe('- Launch\n  - Product\n    - Marketing\n    - Pricing\n');
   expect(focusedRow()).toBe(2);
   // Brought out, Marketing takes Pricing (now below it) under it.
-  button(el, 'Bring out').click();
+  button(el, 'Outdent').click();
   await el.updateComplete;
   expect(last()).toBe('- Launch\n  - Product\n  - Marketing\n    - Pricing\n');
   // Alt+Down on Product puts it past Marketing's family; the caret follows.
@@ -518,11 +518,11 @@ test('chosen rows: Tab and Shift+Tab shift them all, Alt+arrows move them, the c
   expect(contextButton(el, 'Indent').disabled).toBe(true);
   await treeKey(el, 'Tab', { shiftKey: true });
   expect(last()).toBe('- A\n- B\n- C\n');
-  expect(contextButton(el, 'Bring out').disabled).toBe(true);
+  expect(contextButton(el, 'Outdent').disabled).toBe(true);
   contextButton(el, 'Indent').click();
   await el.updateComplete;
   expect(last()).toBe('- A\n  - B\n  - C\n');
-  contextButton(el, 'Bring out').click();
+  contextButton(el, 'Outdent').click();
   await el.updateComplete;
   // B alone, moved down past C, and back up with the bar.
   row(el, 1).querySelector<HTMLButtonElement>('.ol-handle')!.click();
@@ -854,7 +854,7 @@ test('“1. ” typed at the start of a row numbers its list, and an undo gives 
 test('the bar: Indent before Bring out as under chosen rows; Connect, Zoom out and the fold arrow keep the focus; the rows never zoom the page on a double tap', async () => {
   const { el } = await editor(TREE);
   const tools = [...el.querySelectorAll<HTMLButtonElement>('.ol-bar button[aria-label]')].map((b) => b.getAttribute('aria-label'));
-  expect(tools.indexOf('Indent')).toBeLessThan(tools.indexOf('Bring out'));
+  expect(tools.indexOf('Indent')).toBeLessThan(tools.indexOf('Outdent'));
   // Undo and Redo end the bar, off until there is something to do.
   expect(tools.slice(-2)).toEqual(['Undo', 'Redo']);
   expect(button(el, 'Undo').disabled).toBe(true);

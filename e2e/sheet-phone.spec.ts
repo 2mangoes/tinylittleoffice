@@ -107,7 +107,7 @@ test('sheet: under a finger, a tap selects a cell whole, heads and row numbers a
   const box = (await bar.boundingBox())!;
   expect(box.x).toBeGreaterThanOrEqual(0);
   expect(box.x + box.width).toBeLessThanOrEqual(390);
-  await bar.getByRole('button', { name: 'Clear these cells' }).tap();
+  await bar.getByRole('button', { name: 'Clear cells' }).tap();
   await expect(cell('A1')).toHaveValue('');
   // Undo from the bar brings it back. (On a phone the block's bar is the bottom row while the block is in hand, and the
   // app's bar, with its Undo, steps aside under it, kit/ui/context.ts docked: a tap on a cell lets the block go.)

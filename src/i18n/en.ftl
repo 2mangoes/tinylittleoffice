@@ -323,26 +323,26 @@ locked-that-password-does-not-open = That password doesn’t open this link. If 
 common-this-document = This document
 # { $task } is the task's words.
 common-done-task = Done: { $task }
-common-drag-to-move-tap-to = Drag to move; tap to choose
+common-drag-to-move-tap-to = Drag to move, tap to select
 common-move-left = Move left
 common-move-right = Move right
 # The group heading the Calendar and the Trip Planner sit under on the home page.
 common-plan = Plan
-common-chosen-tasks = Chosen tasks
+common-chosen-tasks = Selected tasks
 # A link that opens the document (kit/ui/compare.ts).
 common-open = Open
 common-task = Task
 common-tasks = Tasks
 common-find-app-doc-template-or = Find app, doc, template, or command
 common-in-this-document = Find in this document
-common-indent-or-bring-out-in = Indent or bring out in a list; the next cell in a grid
+common-indent-or-bring-out-in = Indent or outdent a list item; next cell in a table
 common-move-selected-items-up-or = Move the selected items up or down
-common-nudge-shapes-in-hand = Nudge the shapes in hand
+common-nudge-shapes-in-hand = Nudge selected shapes
 common-select-all-words-of-box = Select all: the words of the box, then everything
 common-back-to-words = Back to the words
-common-extend-selection = Extend the selection
+common-extend-selection = Extend selection
 common-next-or-one-before = The next or the one before
-common-step-out-close-collapse-let = Step out: close, collapse, let go
+common-step-out-close-collapse-let = Close or deselect
 common-check-or-uncheck-task = Check or uncheck a task
 common-too-long-for-qr-code = Too long for a QR code: shorten the document, or share a short link.
 common-n-of-count = { $n } of { $count }
@@ -430,7 +430,7 @@ write-document = Document
 write-here = Write here.
 write-subheading = Subheading
 write-paragraph = Paragraph
-common-bring-out = Bring out
+common-bring-out = Outdent
 common-indent = Indent
 write-align = Align
 write-align-left = Align left
@@ -472,7 +472,7 @@ write-rich-text-rtf = Rich Text (RTF)
 # A table in the text: its heads, its handle, its column menu.
 write-add-column-before = Add a column before
 write-column-c-what-it-holds = Column { $c }: what it holds, name it, add or remove a column
-write-table-move-copy-or-take = The table: move, copy or take it out
+write-table-move-copy-or-take = Table: move, copy or delete
 # The templates
 write-a-letter = A letter
 write-your-address-date-greeting-point = Your address, the date, the greeting, the point, the sign-off.
@@ -566,9 +566,9 @@ chart-kind-chart-data = { $kind } chart. { $data }
 
 ## the Spreadsheet
 
-sheet-clear-these-cells = Clear these cells
+sheet-clear-these-cells = Clear cells
 sheet-fit-this-column-to-its = Fit this column to its text
-sheet-cells-in-hand = The cells in hand
+sheet-cells-in-hand = Selected cells
 sheet-check-ref = Check { $ref }
 # The column type that holds words as typed.
 common-text = Text
@@ -659,7 +659,7 @@ sheet-abc-or-123-for-this = ABC or 123, for this column
 sheet-drag-to-resize-double-click = Drag to resize, double-click to fit
 sheet-fill-down-from-top-row = Fill down from the top row
 sheet-fill-right-from-first-column = Fill right from the first column
-common-fill-drag-to-carry-these = Fill: drag to carry these cells on
+common-fill-drag-to-carry-these = Drag to fill
 sheet-fit-columns-to-page = Fit the columns to the page
 sheet-formula = Formula
 sheet-function = Function
@@ -673,7 +673,7 @@ common-insert-n-rows-below = Insert { $n ->
        *[other] { $n } rows
     } below
 sheet-letters-keyboard = Letters keyboard
-sheet-lock-these-cells-so-reader = Lock these cells, so a reader leaves them be
+sheet-lock-these-cells-so-reader = Lock these cells so readers can’t change them
 sheet-locked-part-of-model = Locked: part of the model
 sheet-low-to-high = Low to high
 sheet-money = Money
@@ -839,7 +839,7 @@ draw-shapes = Shapes
 draw-more = More
 draw-icon = Icon…
 draw-background = Background
-draw-remove-background-tile = Remove the background tile
+draw-remove-background-tile = Remove background
 draw-color = Color
 draw-arrange = Arrange
 draw-no-fill = No fill
@@ -875,7 +875,7 @@ draw-pencil = Pencil
 draw-clear-grid = Clear the grid
 draw-use-as-background = Use as background
 draw-grid-is-now-background-download = The grid is now the background. Download gives it as a tile; any page can carry it as tile:.
-draw-pixel-grid-n-by-n = Pixel grid, { $n } by { $n }. The arrow keys move; Enter paints the square with the ink in hand.
+draw-pixel-grid-n-by-n = Pixel grid, { $n } by { $n }. Arrow keys move; Enter paints with the current color.
 draw-row-y-column-x-ink = Row { $y }, column { $x }: { $ink }
 draw-as-repeating-background = As a repeating background
 # The contextual bar under a shape, and its words typed on it.
@@ -892,14 +892,14 @@ draw-s = S
 draw-small-text = Small text
 draw-solid-fill = Solid fill
 draw-solid-line = Solid line
-draw-shape-in-hand = The shape in hand
+draw-shape-in-hand = Selected shape
 draw-words-of-shape = The words of the shape
 draw-type-words-enter-is-done = Type the words; Enter is done, Shift+Enter starts a new line, Escape puts them back.
 draw-xl = XL
 
 draw-drag-to-move-corner-handle = Drag to move; the corner handle resizes, the round one rotates; Enter or a double tap edits the words.
 draw-drawing-canvas-v-selects-r = Drawing canvas. V selects; R, E, D, L, A, T draw; arrows nudge; [ and ] rotate; Enter edits the words; Delete removes.
-draw-tap-shape-to-select-it = Tap a shape to select it, or drag around shapes to choose them; choose a tool to draw.
+draw-tap-shape-to-select-it = Tap a shape to select it, or drag around several. Pick a tool to draw.
 draw-rotate-left = Rotate left
 draw-rotate-right = Rotate right
 draw-pixels-n-n = Pixels { $n }×{ $n }
@@ -962,14 +962,14 @@ anim-remove-this-key = Remove this key
 anim-shadow = Shadow
 common-size = Size
 anim-spin = Spin
-anim-stage-alt-arrow-keys-move = Stage: { $alt }. Arrow keys move the shape in hand (or the time), comma and period step a frame, Space plays, K keeps a key.
-anim-shapes-in-hand = The shapes in hand
+anim-stage-alt-arrow-keys-move = Stage: { $alt }. Arrow keys move the selected shape (or the time). Comma and period step a frame. Space plays. K adds a keyframe.
+anim-shapes-in-hand = Selected shapes
 anim-time = Time
 anim-wobble = Wobble
 anim-now-s-of-all-s = { $now } s of { $all } s
 # The filmstrip's menu for the frame in hand, and Settings in the bar (the length, the speed and the repeat).
 anim-settings = Settings
-anim-this-frame = This frame
+anim-this-frame = Current frame
 anim-duplicate-this-frame = Duplicate this frame
 anim-frame-earlier = A frame earlier
 anim-frame-later = A frame later
@@ -995,7 +995,7 @@ anim-which-shape-is-in-front = Which shape is in front: a nearer shape is drawn 
 anim-n-times = { $n } times
 anim-s-s = { $s } s
 anim-frame-back-frame-on = A frame back, a frame on
-anim-nudge-shapes-in-hand-with = Nudge the shapes in hand; with none, step a frame
+anim-nudge-shapes-in-hand-with = Nudge selected shapes, or step one frame
 anim-play-or-pause = Play or pause
 anim-first-frame-last = The first frame, the last
 
@@ -1015,7 +1015,7 @@ common-calculator = Calculator
 common-calendar = Calendar
 outline-cancel-connecting = Cancel connecting
 outline-change-it = Change it
-common-chosen-items = Chosen items
+common-chosen-items = Selected items
 outline-connect = Connect
 outline-connect-from-words = Connect from “{ $words }”
 outline-connect-from-to-to = Connect “{ $from }” to “{ $to }”
@@ -1054,9 +1054,9 @@ outline-plain-line = Plain line
 outline-plain-text = Plain text
 common-show-as-slides = Show as slides
 outline-show-as-outline = Show as outline
-outline-take-away-connection-from-from = Take away the connection from { $from } to { $to }
-outline-take-it-away = Take it away
-outline-take-connection-away = Take the connection away
+outline-take-away-connection-from-from = Remove the connection from { $from } to { $to }
+outline-take-it-away = Remove
+outline-take-connection-away = Remove connection
 outline-tap-item-to-connect-from = Tap the item to connect from.
 outline-tap-item-to-connect-words = Tap the item to connect “{ $words }” to.
 outline-question-options-under-it-and = The question, the options under it, and for each what speaks for it and against it.
@@ -1140,7 +1140,7 @@ deck-wedding-slideshow = Wedding slideshow
 deck-workshop-agenda = Workshop agenda
 deck-presentation-lowercase = presentation
 deck-slides = Slides
-deck-chosen-slides = Chosen slides
+deck-chosen-slides = Selected slides
 deck-move-this-slide-drag-it = Move this slide: drag it onto another
 deck-slides-titles-bullets-two-columns = Slides: titles, bullets, two columns, big icons, other documents on a slide; or a zine, booklet, brochure, comic, poster or name badges to print and fold.
 
@@ -1224,7 +1224,7 @@ deck-panel-line-what-is-said = A panel a line: what is said | the caption. Icon 
 deck-speaker-notes = Speaker notes
 deck-n-total = { $n } / { $total }
 deck-document-on-slide = A document on the slide
-deck-remove-from-slide = Remove from the slide
+deck-remove-from-slide = Remove from slide
 
 # The rail and the sheets
 deck-slide-n = Slide { $n }
@@ -1307,7 +1307,7 @@ cal-days-and-times-on-month = Days and times on a month, a year or a schedule, i
 cal-done = Done %
 cal-edit-event = Edit event
 cal-edit-task = Edit task
-cal-choose-task = Choose { $task }
+cal-choose-task = Select { $task }
 cal-day-earlier = A day earlier
 cal-day-later = A day later
 cal-dates = Dates…
@@ -1521,8 +1521,8 @@ trip-n-stops = { $n ->
     }
 trip-stop-n = Stop { $n }
 # A stop's number is its handle; the bar under stops chosen whole.
-trip-stop-n-tap-chooses-it = Stop { $n }: a tap chooses it, a drag moves it
-trip-chosen-stops = Chosen stops
+trip-stop-n-tap-chooses-it = Stop { $n }: tap to select, drag to move
+trip-chosen-stops = Selected stops
 trip-show-on-map = Show on the map
 trip-name-of-stop-n = Name of stop { $n }
 trip-note-for-stop-n = Note for stop { $n }
@@ -1613,7 +1613,7 @@ calc-tape = Tape
 calc-line-n = Line { $n }
 calc-put-answer-in-line = Put { $answer } in the line
 calc-no-answer = No answer
-calc-take-away-line-n = Take away line { $n }
+calc-take-away-line-n = Delete line { $n }
 calc-sum = Sum
 calc-type-or-tap = Type or tap
 calc-y = y =
@@ -1667,8 +1667,8 @@ calc-x3-3x-its-derivative-and = x³ − 3x, its derivative, and the flat tangent
 calc-waves-adding-up = Waves adding up
 calc-sine-waves-summed-on-their = Sine waves summed, on their way to a square wave.
 # The grip on a line of the tape; the bar under lines chosen whole.
-calc-choose-line-n-drag-it = Choose line { $n }: drag it to move it
-calc-chosen-lines = Chosen lines
+calc-choose-line-n-drag-it = Select line { $n }, drag to move
+calc-chosen-lines = Selected lines
 
 ## two links compared (kit/ui/compare.ts)
 
@@ -1679,20 +1679,20 @@ compare-not-link-to-tiny-little = Not a link to a Tiny Little Office document
 compare-paste-second-link-to-see = Paste a second link to see what changed.
 compare-paste-link-to-document-as = Paste the link to the document as it is now
 compare-paste-link-to-document-as-it-was = Paste the link to the document as it was
-compare-put-in = Put in:
+compare-put-in = Added:
 compare-swap = Swap
-compare-taken-out = Taken out:
+compare-taken-out = Removed:
 compare-first-link = The first link
 compare-second-link = The second link
 compare-two-links-to-documents-side = Two links to documents, side by side: what the second changed is marked. Nothing leaves this page.
 compare-different-apps = different apps
 compare-n-blocks-taken-out = { $n ->
-        [one] { $n } block taken out
-       *[other] { $n } blocks taken out
+        [one] { $n } block removed
+       *[other] { $n } blocks removed
     }
 compare-n-put-in = { $n ->
-        [one] { $n } put in
-       *[other] { $n } put in
+        [one] { $n } added
+       *[other] { $n } added
     }
 
 ## files and zips dropped on the page (kit/file/open.ts)

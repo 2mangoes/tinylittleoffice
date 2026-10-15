@@ -243,7 +243,7 @@ const rows = new Rows<Id>(host, {
   rows(): { id: Id; el: HTMLElement; span: { from: number; to: number } }[],  // on screen, in order; span = the row's blocks with its family
   box(): HTMLElement | null,              // takes the focus while rows are chosen (tabindex=-1)
   handle: '.my-handle',                   // also given class to-rows-handle: touch-action none, 44px under a coarse pointer
-  nests?: boolean, fromWords?: boolean,   // Indent/Bring out and drops "under"; Shift+Up/Down and Escape in words choose the row
+  nests?: boolean, fromWords?: boolean,   // Indent/Outdent and drops "under"; Shift+Up/Down and Escape in words choose the row
   current?(): Id | null, span?(rows): RowSpan | null,
   edit(id, offset: number | 'end'),       // the caret into a row's words
   remove(span, ids), move(span, by), canMove(span, by), shift?(span, by), canShift?(span, by), duplicate(span),

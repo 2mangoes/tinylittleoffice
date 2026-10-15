@@ -646,7 +646,7 @@ test("the filmstrip's menu acts on the frame in hand: moved a frame earlier, dup
   el.querySelectorAll<HTMLButtonElement>('.anim-frame')[23].click();
   await el.updateComplete;
   const menu = () => el.querySelector<HTMLButtonElement>('.anim-frame-menu > button')!;
-  expect(menu().getAttribute('aria-label')).toBe('This frame');
+  expect(menu().getAttribute('aria-label')).toBe('Current frame');
   // The last frame: Later is off; Earlier changes places with the one before, and it stays in hand.
   menu().click();
   await until(() => !!document.querySelector('[popover]:popover-open'));

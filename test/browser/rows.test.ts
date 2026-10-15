@@ -135,7 +135,7 @@ test('a tap on a handle chooses the row; Shift+tap extends; the bar comes up und
   expect(document.activeElement).toBe(box(el));
   expect(barOpen(el)).toBe(true);
   const labels = [...el.querySelectorAll('.to-rows-context .to-context > *')].map((b) => (b.getAttribute('role') === 'separator' ? '|' : b.getAttribute('aria-label')));
-  expect(labels).toEqual(['Edit', 'Move up', 'Move down', 'Numbered', 'Indent', 'Bring out', 'Duplicate', '|', 'Copy', 'Cut', 'Paste', '|', 'Delete']);
+  expect(labels).toEqual(['Edit', 'Move up', 'Move down', 'Numbered', 'Indent', 'Outdent', 'Duplicate', '|', 'Copy', 'Cut', 'Paste', '|', 'Delete']);
   // The bar sits under the range.
   const bar = el.querySelector<HTMLElement>('.to-rows-context .to-context')!.getBoundingClientRect();
   expect(bar.top).toBeGreaterThanOrEqual(el.querySelector('.row[data-i="2"]')!.getBoundingClientRect().bottom - 1);
@@ -218,7 +218,7 @@ test('Delete, Tab and Shift+Tab, Alt+Up/Down and Mod+D act on the range; refused
   await settle(el);
   handle(el, 2).dispatchEvent(new MouseEvent('click', { bubbles: true, shiftKey: true }));
   await settle(el);
-  expect(barButton(el, 'Bring out').disabled).toBe(true);
+  expect(barButton(el, 'Outdent').disabled).toBe(true);
   await key(el, box(el), 'Tab');
   expect(ws(el)).toBe('a .b .c d');
   expect(ranged(el)).toEqual([1, 2]);

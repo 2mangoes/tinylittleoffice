@@ -211,7 +211,7 @@ whose rows are the document's own data (the sheet's column kinds, the formula fu
 |  | Bulleted list | bar, context |
 |  | Numbered list | bar, context |
 | `Tab` | Indent | bar |
-| `Shift+Tab` | Bring out | bar |
+| `Shift+Tab` | Outdent | bar |
 | `Alt+ArrowUp` | Move up | keys only |
 | `Alt+ArrowDown` | Move down | keys only |
 | `Mod+Enter` | Check or uncheck a task | keys only |
@@ -222,17 +222,17 @@ whose rows are the document's own data (the sheet's column kinds, the formula fu
 | Keys | Command | Where |
 |---|---|---|
 | `Enter` | Edit | context |
-| `Escape` | Step out: close, collapse, let go | keys only |
+| `Escape` | Close or deselect | keys only |
 | `Alt+ArrowUp` | Move up | context |
 | `Alt+ArrowDown` | Move down | context |
 | `Tab` | Indent | context |
-| `Shift+Tab` | Bring out | context |
+| `Shift+Tab` | Outdent | context |
 | `Mod+D` | Duplicate | context |
 | `Mod+C` | Copy | context |
 | `Mod+X` | Cut | context |
 | `Mod+V` | Paste | context |
 | `Delete`, `Backspace` | Delete | context |
-| `Shift+ArrowUp`, `Shift+ArrowDown` | Extend the selection | keys only |
+| `Shift+ArrowUp`, `Shift+ArrowDown` | Extend selection | keys only |
 | `ArrowUp`, `ArrowDown`, `ArrowLeft`, `ArrowRight` | Back to the words | keys only |
 | `Mod+A` | Select all: the words of the box, then everything | keys only |
 
@@ -277,7 +277,7 @@ whose rows are the document's own data (the sheet's column kinds, the formula fu
 |  | Tiny Little Office Doc… | insert ▾ |
 |  | Icon | bar |
 | `Tab` | Indent | bar, at: words |
-| `Shift+Tab` | Bring out | bar, at: words |
+| `Shift+Tab` | Outdent | bar, at: words |
 | `Alt+ArrowUp` | Move up | bar, at: words |
 | `Alt+ArrowDown` | Move down | bar, at: words |
 |  | Numbered | bar |
@@ -362,11 +362,11 @@ whose rows are the document's own data (the sheet's column kinds, the formula fu
 |  | Fill right from the first column | bar, context |
 |  | Fit the columns to the page | bar, drawer on a phone |
 |  | Show all the text | bar, drawer on a phone |
-|  | Lock these cells, so a reader leaves them be | bar |
+|  | Lock these cells so readers can’t change them | bar |
 | `Mod+C` | Copy | context, at: cell |
 | `Mod+X` | Cut | context, at: cell |
 | `Mod+V` | Paste | context, at: cell |
-| `Delete`, `Backspace` | Clear these cells | context, at: cell |
+| `Delete`, `Backspace` | Clear cells | context, at: cell |
 |  | Insert a row above | row ▾ |
 |  | Insert a row below | row ▾ |
 | `Alt+ArrowUp` | Move up | row ▾, at: cell |
@@ -374,11 +374,11 @@ whose rows are the document's own data (the sheet's column kinds, the formula fu
 | `Mod+Alt+-` | Delete  | row ▾, at: cell |
 | `Mod+A` | Select all: the words of the box, then everything | keys only, at: cell |
 | `Mod+Enter` | Done | keys only, at: cell |
-| `Tab`, `Shift+Tab` | Indent or bring out in a list; the next cell in a grid | keys only, at: cell |
+| `Tab`, `Shift+Tab` | Indent or outdent a list item; next cell in a table | keys only, at: cell |
 | `F2` | Edit the cell, the caret at its end | keys only, at: cell |
-| `Shift+ArrowUp`, `Shift+ArrowDown`, `Shift+ArrowLeft`, `Shift+ArrowRight` | Extend the selection | keys only, at: cell |
+| `Shift+ArrowUp`, `Shift+ArrowDown`, `Shift+ArrowLeft`, `Shift+ArrowRight` | Extend selection | keys only, at: cell |
 | `Space` | Check or uncheck a task | keys only, at: cell |
-| `Escape` | Step out: close, collapse, let go | keys only, at: cell |
+| `Escape` | Close or deselect | keys only, at: cell |
 | `Escape` | Put back what the cell held | keys only, at: cell |
 | `Enter`, `Shift+Enter`, `ArrowDown`, `ArrowUp`, `ArrowLeft`, `ArrowRight` | The next or the one before | keys only, at: cell |
 
@@ -407,9 +407,9 @@ whose rows are the document's own data (the sheet's column kinds, the formula fu
 | `Escape` | Clear the line | keys only, at: entry |
 | `Mod+A` | Select all: the words of the box, then everything | keys only, at: entry |
 | `Enter` | Done | keys only, at: line |
-| `Escape` | Step out: close, collapse, let go | keys only, at: line |
+| `Escape` | Close or deselect | keys only, at: line |
 | `Alt+ArrowUp`, `Alt+ArrowDown` | Move the selected items up or down | keys only, at: line |
-| `Shift+ArrowUp`, `Shift+ArrowDown` | Extend the selection | keys only, at: line |
+| `Shift+ArrowUp`, `Shift+ArrowDown` | Extend selection | keys only, at: line |
 | `ArrowUp`, `ArrowDown` | The next or the one before | keys only, at: line |
 | `Mod+D` | Duplicate | keys only, at: line |
 | `Mod+A` | Select all: the words of the box, then everything | keys only, at: line |
@@ -449,7 +449,7 @@ whose rows are the document's own data (the sheet's column kinds, the formula fu
 |  | Pixels 16×16 | mode ▾ |
 |  | Pixels 32×32 | mode ▾ |
 |  | Pixels 64×64 | mode ▾ |
-|  | Remove the background tile | mode ▾ |
+|  | Remove background | mode ▾ |
 |  | Place an icon | bar |
 |  | Add alt text: describe this drawing for people who cannot see it | bar, drawer on a phone |
 |  | Zoom out | bar, drawer on a phone |
@@ -477,16 +477,16 @@ whose rows are the document's own data (the sheet's column kinds, the formula fu
 | `Mod+V` | Paste | context, insert ▾, at: canvas |
 | `Delete`, `Backspace` | Delete | context, arrange ▾, at: canvas |
 | `Enter` | Done | keys only, at: canvas |
-| `Escape` | Step out: close, collapse, let go | keys only, at: canvas |
+| `Escape` | Close or deselect | keys only, at: canvas |
 | `Backspace` | Delete | keys only, at: canvas |
-| `Escape` | Step out: close, collapse, let go | keys only, at: canvas |
+| `Escape` | Close or deselect | keys only, at: canvas |
 | `ArrowLeft`, `ArrowRight`, `ArrowUp`, `ArrowDown`, `Enter` | Join two shapes | keys only, at: canvas |
 | `Mod+A` | Select all: the words of the box, then everything | keys only, at: canvas |
 | `Mod+Shift+L` | Align: left | keys only, at: canvas |
 | `Mod+Shift+E` | Align: center | keys only, at: canvas |
 | `Mod+Shift+R` | Align: right | keys only, at: canvas |
 | `Alt+ArrowUp`, `Alt+ArrowDown` | Move the selected items up or down | keys only, at: canvas |
-| `ArrowLeft`, `ArrowRight`, `ArrowUp`, `ArrowDown`, `Shift+ArrowLeft`, `Shift+ArrowRight`, `Shift+ArrowUp`, `Shift+ArrowDown`, `Mod+ArrowLeft`, `Mod+ArrowRight`, `Mod+ArrowUp`, `Mod+ArrowDown` | Nudge the shapes in hand | keys only, at: canvas |
+| `ArrowLeft`, `ArrowRight`, `ArrowUp`, `ArrowDown`, `Shift+ArrowLeft`, `Shift+ArrowRight`, `Shift+ArrowUp`, `Shift+ArrowDown`, `Mod+ArrowLeft`, `Mod+ArrowRight`, `Mod+ArrowUp`, `Mod+ArrowDown` | Nudge selected shapes | keys only, at: canvas |
 |  | Eraser | bar |
 |  | Pencil | bar |
 |  | Fill | bar |
@@ -520,7 +520,7 @@ whose rows are the document's own data (the sheet's column kinds, the formula fu
 |  | Join | context |
 |  | Make it an arrow | context |
 | `Tab` | Indent | context, at: thing |
-| `Shift+Tab` | Bring out | context, at: thing |
+| `Shift+Tab` | Outdent | context, at: thing |
 | `Mod+D` | Duplicate | context, at: thing |
 | `Mod+C` | Copy | context, at: thing |
 | `Mod+X` | Cut | context, at: thing |
@@ -531,7 +531,7 @@ whose rows are the document's own data (the sheet's column kinds, the formula fu
 | `Mod+Alt+ArrowRight` | Move right | keys only, at: thing |
 | `ArrowUp`, `ArrowDown`, `ArrowLeft`, `ArrowRight` | The next or the one before | keys only, at: thing |
 | `ArrowDown`, `ArrowRight` | The next or the one before | keys only, at: picture |
-| `Escape` | Step out: close, collapse, let go | keys only, at: picture |
+| `Escape` | Close or deselect | keys only, at: picture |
 | `Mod+Enter` | Done | keys only, at: words |
 
 ### Animator (`anim`)
@@ -573,9 +573,9 @@ whose rows are the document's own data (the sheet's column kinds, the formula fu
 | `Delete`, `Backspace` | Delete | context, at: stage |
 | `,`, `.` | A frame back, a frame on | keys only, at: stage |
 | `Home`, `End` | The first frame, the last | keys only, at: stage |
-| `ArrowLeft`, `ArrowRight`, `ArrowUp`, `ArrowDown`, `Shift+ArrowLeft`, `Shift+ArrowRight`, `Shift+ArrowUp`, `Shift+ArrowDown`, `Mod+ArrowLeft`, `Mod+ArrowRight`, `Mod+ArrowUp`, `Mod+ArrowDown` | Nudge the shapes in hand; with none, step a frame | keys only, at: stage |
+| `ArrowLeft`, `ArrowRight`, `ArrowUp`, `ArrowDown`, `Shift+ArrowLeft`, `Shift+ArrowRight`, `Shift+ArrowUp`, `Shift+ArrowDown`, `Mod+ArrowLeft`, `Mod+ArrowRight`, `Mod+ArrowUp`, `Mod+ArrowDown` | Nudge selected shapes, or step one frame | keys only, at: stage |
 | `Mod+A` | Select all: the words of the box, then everything | keys only, at: stage |
-| `Escape` | Step out: close, collapse, let go | keys only, at: stage |
+| `Escape` | Close or deselect | keys only, at: stage |
 
 ### Calendar (`cal`)
 
@@ -593,7 +593,7 @@ whose rows are the document's own data (the sheet's column kinds, the formula fu
 | `Mod+Alt+ArrowLeft` | A day earlier | context, at: rows |
 | `Mod+Alt+ArrowRight` | A day later | context, at: rows |
 | `Alt+Enter` | Dates… | context, at: rows |
-| `Tab`, `Shift+Tab` | Indent or bring out in a list; the next cell in a grid | keys only, at: words |
+| `Tab`, `Shift+Tab` | Indent or outdent a list item; next cell in a table | keys only, at: words |
 | `Alt+ArrowUp`, `Alt+ArrowDown` | Move the selected items up or down | keys only, at: words |
 | `ArrowUp`, `ArrowDown` | The next or the one before | keys only, at: words |
 | `Mod+D` | Duplicate | keys only, at: words |
@@ -602,7 +602,7 @@ whose rows are the document's own data (the sheet's column kinds, the formula fu
 | `Mod+Alt+ArrowRight` | A day later | keys only, at: words |
 | `Alt+Enter` | Dates… | keys only, at: words |
 | `Enter` | Event | keys only, at: day |
-| `Escape` | Step out: close, collapse, let go | keys only, at: day |
+| `Escape` | Close or deselect | keys only, at: day |
 | `ArrowLeft`, `ArrowRight`, `ArrowUp`, `ArrowDown`, `Shift+ArrowLeft`, `Shift+ArrowRight`, `Shift+ArrowUp`, `Shift+ArrowDown`, `Home`, `End`, `PageUp`, `PageDown` | The next or the one before | keys only, at: day |
 | `Delete`, `Backspace` | Delete | keys only, at: entry |
 | `Mod+D` | Duplicate | keys only, at: entry |
@@ -629,8 +629,8 @@ whose rows are the document's own data (the sheet's column kinds, the formula fu
 | `ArrowLeft`, `PageUp`, `Backspace` | Presenting: the stop before | keys only, at: show |
 | `Home`, `End` | The first, the last | keys only, at: show |
 | `Escape` | Stop presenting | keys only, at: show |
-| `ArrowLeft`, `ArrowRight`, `ArrowUp`, `ArrowDown`, `Shift+ArrowLeft`, `Shift+ArrowRight`, `Shift+ArrowUp`, `Shift+ArrowDown` | Nudge the shapes in hand | keys only, at: pin |
+| `ArrowLeft`, `ArrowRight`, `ArrowUp`, `ArrowDown`, `Shift+ArrowLeft`, `Shift+ArrowRight`, `Shift+ArrowUp`, `Shift+ArrowDown` | Nudge selected shapes | keys only, at: pin |
 | `Delete`, `Backspace` | Delete | keys only, at: pin |
-| `Escape` | Step out: close, collapse, let go | keys only, at: pin |
+| `Escape` | Close or deselect | keys only, at: pin |
 
 <!-- commands:end -->

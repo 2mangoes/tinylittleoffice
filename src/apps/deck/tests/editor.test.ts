@@ -804,7 +804,7 @@ test("the table on a slide: Insert ▾ Table opens the Spreadsheet at three by t
   el.querySelector<HTMLElement>('figure.deck-sub')!.click();
   await until(() => !!document.querySelector('to-menu.deck-submenu [popover]:popover-open [role^=menuitem]'));
   const items = [...document.querySelectorAll<HTMLElement>('to-menu.deck-submenu [popover]:popover-open [role^=menuitem]')];
-  expect(items.map((x) => x.textContent!.trim())).toEqual(['Edit', 'Remove from the slide']);
+  expect(items.map((x) => x.textContent!.trim())).toEqual(['Edit', 'Remove from slide']);
   items[0].click();
   await until(() => !!docDialog()?.querySelector('dialog[open] to-sheet-editor'));
   docDialog()!.querySelector<HTMLButtonElement>('.to-doc-dialog-cancel')!.click();
@@ -818,7 +818,7 @@ test('a document on a slide: Edit then Open in a new tab; Done writes it back, o
   el.querySelector<HTMLElement>('figure.deck-sub')!.click();
   await until(() => !!document.querySelector('to-menu.deck-submenu [popover]:popover-open [role^=menuitem]'));
   const items = [...document.querySelectorAll<HTMLElement>('to-menu.deck-submenu [popover]:popover-open [role^=menuitem]')];
-  expect(items.map((x) => x.textContent!.trim())).toEqual(['Edit', 'Open in a new tab', 'Remove from the slide']);
+  expect(items.map((x) => x.textContent!.trim())).toEqual(['Edit', 'Open in a new tab', 'Remove from slide']);
   items[0].click();
   await until(() => !!docDialog()?.querySelector('dialog[open] to-draw-editor'));
   docDialog()!

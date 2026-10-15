@@ -468,7 +468,7 @@ test('pixel mode: the menu sets the grid, taps paint squares, fill floods, Use a
   expect(doc).not.toContain('grid:');
   // Back in shapes mode, the tile is drawn behind the canvas, and the mode menu can take it away.
   expect(el.querySelector('svg.draw-canvas pattern#draw-tile')).not.toBeNull();
-  await pick(el, el.querySelector<HTMLButtonElement>('.draw-mode button')!, 'Remove the background');
+  await pick(el, el.querySelector<HTMLButtonElement>('.draw-mode button')!, 'Remove background');
   expect(last()).not.toContain('tile:');
 });
 

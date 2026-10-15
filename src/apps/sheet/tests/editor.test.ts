@@ -412,7 +412,7 @@ test('a block has the bar under it: fill, Copy, Cut, Paste, Clear, none taking t
     'Copy',
     'Cut',
     'Paste',
-    'Clear these cells',
+    'Clear cells',
   ]);
   const down = new MouseEvent('mousedown', { bubbles: true, cancelable: true });
   contextButton('Copy').dispatchEvent(down);
@@ -424,7 +424,7 @@ test('a block has the bar under it: fill, Copy, Cut, Paste, Clear, none taking t
   // Paste, from this page's own copy when the system's clipboard is refused, puts the cut cells back.
   contextButton('Paste').click();
   await until(() => last() === SHEET);
-  contextButton('Clear these cells').click();
+  contextButton('Clear cells').click();
   await el.updateComplete;
   expect(last()).toContain('Rent |\nFood |\n');
   // One cell is not a block: the bar goes.

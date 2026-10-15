@@ -80,7 +80,7 @@ test('diagram: on a phone, a tap on a thing opens its words with the context bar
   // Bring out by finger: the last idea comes out from under the second Launch, a branch of the first, its words still open.
   await page.locator('.dg-hint').tap();
   await page.locator('.dg-pic g.dg-thing[aria-label="Pricing"]').nth(3).tap();
-  await bar.getByRole('button', { name: 'Bring out' }).tap();
+  await bar.getByRole('button', { name: 'Outdent' }).tap();
   await expect.poll(value).toBe('- Launch\n  - Pricing\n  - Pricing\n  - Launch\n    - Pricing\n  - Pricing\n');
   await expect(line).toBeFocused();
   // A finger pans the picture and the browser never zooms it (a pinch there is the picture's own zoom, kit/ui/pinch.ts).

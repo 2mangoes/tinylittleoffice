@@ -39,6 +39,8 @@ export const TERMS: Term[] = [
   // Paul's four words (2026-10-15): delete, not "take away" or "forget"; save, not "keep"; select, not "choose" or
   // "in hand"; outdent, not "bring out".
   { term: 'Delete' },
+  { term: 'select' },
+  { term: 'outdent' },
   {
     term: 'save',
     words: {

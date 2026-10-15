@@ -150,7 +150,7 @@ test('a line of the tape changed where it stands (the lines after follow), empti
   await settle(el);
   expect(last()).toBe('a = 5\na + 1\na * 10\n');
   expect(answers(el)).toEqual(['= 5', '= 6', '= 50']);
-  el.querySelector<HTMLButtonElement>('button[aria-label="Take away line 2"]')!.click();
+  el.querySelector<HTMLButtonElement>('button[aria-label="Delete line 2"]')!.click();
   await settle(el);
   expect(last()).toBe('a = 5\na * 10\n');
   const now = el.querySelectorAll<HTMLInputElement>('.calc-line')[1];
@@ -333,7 +333,7 @@ test('Mod+Z in a box holding words not yet on the tape is the box’s own; with 
 
 test('undo puts the focus back where it was: a line taken away comes back focused; a line put on the tape gives the caret back to the line being typed', async () => {
   const { el, last } = await editor('a = 1\na + 1\na * 10\n');
-  const x = el.querySelector<HTMLButtonElement>('button[aria-label="Take away line 2"]')!;
+  const x = el.querySelector<HTMLButtonElement>('button[aria-label="Delete line 2"]')!;
   x.focus();
   x.click();
   await settle(el);
