@@ -168,7 +168,7 @@ drawer-commands = 指令
 # en: b993b0c537190bfc94b21360ac5abe51e56be36f
 drawer-nothing-by-that-name = 沒有結果
 # en: 85773bc941e47b21f6cc345b225265e3144489be
-drawer-add-to-home-screen = 加到主畫面
+drawer-add-to-home-screen = 加入主畫面
 # en: 9b3cbed5c490c07473546a88768ba29b787e9e52
 drawer-size-of-everything = 縮放
 # en: 943c5ac9fa7766d7c1ebecbc95c4e0d27b4ef9d4
@@ -191,7 +191,7 @@ leave-this-link-calls = 這個連結會撥打
 # en: afb8b3199e929e5e9f886fdf382599c9d440c71f
 leave-not-secure-address-what-you = 這不是安全（HTTPS）網址。你傳送的任何內容都可能在傳輸途中被讀取。
 # en: 003e4888e77a22c782047c7d26d028c5eca46f1c
-leave-whole-address = 完整位址：
+leave-whole-address = 完整網址：
 # en: fdb31cf3fb383190c6864d4effd5fd6041b330cb
 leave-someone-wrote-this-link-into = 這個連結是文件作者加進去的。連結文字可能與實際網址不同。只有在你信任它時才繼續。
 # en: 2e0b45f2a456e8db55f08d7b65e87593a3e9a140
@@ -235,7 +235,7 @@ share-expires-in-n-minutes-date = { $n ->
        *[other] { $n } 分鐘
     }後到期（{ $date }）
 # en: 0ef0475467d903f5adb0297bbc7979b7b0792d0c
-share-opens-as-pages-to-read = 以分頁形式開啟供閱讀
+share-opens-as-pages-to-read = 開啟為供閱讀的頁面
 # en: 8744400a02796b44742f8f5e5b66216821eab90d
 share-opens-in-editor = 在編輯器中開啟
 # en: 7fbbb75c4e853ef0e42da5fe316344fdf1a6143c
@@ -329,7 +329,7 @@ common-link = 連結
 # en: b15dbf0da72e08fcfcf35d2aed0a937335b9cc5e
 common-short-link = 短連結
 # en: 9095e39b9975250b05476c852d1631a6651924d9
-share-new-noun-date-n = 新增{ $noun } { $date } #{ $n }
+share-new-noun-date-n = 新{ $noun } { $date } #{ $n }
 # Files, compare, posting and embedding: the agent and sharing surface.
 # en: 1c2edb3104c7f2adce9ad2a77f3622d1beb0059a
 share-mastodon-server-like-mastodon-social = Mastodon 伺服器，例如 mastodon.social
@@ -338,7 +338,7 @@ share-change = 更改
 # en: 2a07ce9a22d8e5dc1031e531518f04e50855319f
 share-copy-embed-code = 複製嵌入程式碼
 # en: c3e1c83e5b4172d3c738e37cb69b76d93ce49b8b
-share-copy-show-link = 複製顯示連結
+share-copy-show-link = 複製播放連結
 # en: ad02e14e2841dfbd22ab2caa12b5541c5b01a53a
 share-embed = 嵌入
 # en: 4eeede7134d362f371fd18b2d63d3199bb24f01a
@@ -372,9 +372,9 @@ share-pages-in-frame-on-another = 頁面放在其他網站的框架裡，並附�
 # en: 9377de06278eacbdf4a297a82b8eb9aa3d4220c0
 share-your-mastodon-server = 你的 Mastodon 伺服器
 # en: 8ae1c34bd37fad49cc5f8e02da648a78e89c3ed8
-share-left = 左
+share-left = 剩餘
 # en: 62be4731dedfbbc70aa7fa30d6649d816af8ca4b
-share-uses = 用途
+share-uses = 已用
 # en: 525f61b6729229b1a8854a9e50bcaa52ea96b131
 share-where = 位置
 # en: cdbfed741d905515df704d9585fc74781801a24d
@@ -440,7 +440,7 @@ privacy-short-links = 短連結
 # en: c706d94b54ef0b520420dd58063cfc78bc88c7e3
 privacy-set-password-in-share = 在「分享」裡設定密碼
 # en: e546afa59de2ec4b23ca6c4fafbaddac7bab9240
-privacy-short-links-made-here-until = 在這裡建立的短連結，保留到過期為止。
+privacy-short-links-made-here-until = 在這裡建立的短連結，到期前都會保留。
 # en: b556bf027f9123d39581babef7e15564c24866da
 privacy-their-names-and-links-for = 名稱和連結，顯示在首頁上。
 # en: 5300fdca86b5b32fd463f73704e318a2b8fa9961
@@ -553,7 +553,7 @@ common-step-out-close-collapse-let = 關閉或取消選取
 # en: fb2997642419cda8393061543f140d40a9323957
 common-check-or-uncheck-task = 勾選或取消勾選任務
 # en: 0a4adf12f01d48ecdb89f5eddf5f19fd89d94522
-common-too-long-for-qr-code = 對 QR 碼來說太長：請縮短文件，或分享短連結。
+common-too-long-for-qr-code = 太長，無法製成 QR 碼：請縮短文件，或分享短連結。
 # en: 1e14a1c5e931f6ef8ce8378377366f3c68cef56c
 common-n-of-count = { $n }／{ $count }
 
@@ -638,15 +638,15 @@ editor-notes-words = 附註文字
 # en: e9b450d14bc2363d292c84f17cfad5cfbd58a458
 common-done = 完成
 # en: d70f93df5e8f9b55be44fbeee9d203972e3383d4
-editor-address = 位址
+editor-address = 網址
 # en: 74d3b25667541c75d79e0558305f4bda62229bd7
-editor-not-address = 不是位址
+editor-not-address = 不是有效的網址
 # en: c8648f259049ce8bdb49529963c37a97f75e8d4b
 editor-set-link = 設定連結
 # en: d2de1a2831e7fee28d6c8d214b66da0d1bed30c8
 editor-open-link = 開啟連結
 # en: f377ac75602950b2c36449de5bceb3c12333ac77
-editor-change-link = 編輯連結
+editor-change-link = 更改連結
 # en: 8d48d1f9e74c4fecd89a67645ca3593ef0964710
 editor-remove-link = 移除連結
 # The selection bubble's name: what can be done to the words selected.
@@ -762,7 +762,7 @@ write-word-docx = Word（DOCX）
 # en: 23e67fceae0d77dd571dd25695fc0499faf1bb77
 common-markdown = Markdown
 # en: d50fcd6f846a2616a90ec5dd1f67488a993c2743
-write-rich-text-rtf = RTF 格式（RTF）
+write-rich-text-rtf = 格式化文字（RTF）
 # A table in the text: its heads, its handle, its column menu.
 # en: f4344253d823d09db13bc3877d37c9618588506a
 write-add-column-before = 在前面加一欄
@@ -776,7 +776,7 @@ write-a-letter = 信件
 # en: 7456f1ce5f81c497b66302751f617f60612306f6
 write-your-address-date-greeting-point = 你的地址、日期、問候語、重點、結尾敬語。
 # en: ae3cd6584a49de52c70c1e00ae0a02c8abab166b
-write-meeting-notes = 會議記錄
+write-meeting-notes = 會議筆記
 # en: 7bbe470d4a5d9510c0fcb6844b519d118681beb7
 write-agenda-what-was-said-what = 議程、討論了什麼、決定了什麼、誰負責什麼。
 # en: 9fb58963c66db0c8ca7c638f491e82246e226d30
@@ -846,7 +846,7 @@ write-title-page-abstract-chapters-with = 像書一樣排版：封面、摘要�
 # en: 42921f1b739a62eb82bc6f16ce47ff5ce5fd4da4
 write-grant-proposal = 補助申請書
 # en: 381d823ac8ecdff832331120748c151a113b2464
-write-ask-need-plan-budget-that = 訴求、需求、計畫、算得出來的預算，以及如何知道有成效。
+write-ask-need-plan-budget-that = 訴求、需求、計畫、加總無誤的預算，以及如何判斷是否有成效。
 # en: 1b731d688386e2e229d1c2b671e96c2bfce768a4
 write-syllabus = 課程大綱
 # en: fc9a91d648763f9cd04a596f372b833e76f709f8
@@ -968,11 +968,11 @@ sheet-budget = 預算
 # en: d99860b75cc866415325dd845f03e65f1b9fc648
 sheet-planned-against-actual-line-each = 預計與實際，每項一列，附差額與總計。
 # en: 0a0a7c3be7656f55cd259d558c2d0eb59b893b88
-sheet-expense-log = 支出記錄
+sheet-expense-log = 支出紀錄
 # en: c2effbb05c6382e67befb796de9be3ad264a1cbb
 sheet-date-what-how-much-which = 日期、項目、金額、類別；底部有累計總額。
 # en: a2d841e763d975477b0e1a51d15e6f25c9023d4a
-sheet-training-log = 訓練記錄
+sheet-training-log = 訓練紀錄
 # en: d5b29b7fbac7da4d79a420a8108f0c98bb1ab61a
 sheet-what-you-did-and-how = 做了什麼、做了多少，一次一列；每一類的總計。
 # en: 4d89a20e90ff128c4329c067414e272156b4b196
@@ -994,7 +994,7 @@ sheet-customers-day-what-they-spend = 每天的客人數、客單價，以及這
 # en: 27f8244e11467491805da5dcaace666e1176df07
 sheet-freelancer = 自由工作者
 # en: c7da5aec39e9bdd23c061f2f34a9ecb65f9f20a2
-sheet-hours-rate-and-weeks-make = 時數、費率和週數算出全年的發票；扣掉支出和稅金，剩下的就是實收。
+sheet-hours-rate-and-weeks-make = 時數、費率和週數算出全年的請款總額；扣掉支出和稅金，剩下的就是實收。
 # en: 53ca3d56131df7985cdd58b24a369278bce0d723
 sheet-mutual-aid-fund = 互助基金
 # en: 4df80f44a8c21f77f84393546555c9ab3224fe85
@@ -1020,7 +1020,7 @@ sheet-reading-list = 閱讀清單
 # en: c809293d68f1061cf7062072d2efc8fe95fe9262
 sheet-books-read-being-read-and = 讀過的、正在讀的和接下來要讀的書，各花了幾天，以及今年讀了多少頁。
 # en: 6e14850d9abea09c879f881a4773537f91cf2ac2
-sheet-workout-log = 健身記錄
+sheet-workout-log = 健身紀錄
 # en: b2a1db48bce10aa5ac4b8eb894555098ecbaac30
 sheet-sets-reps-and-weight-for = 每個動作的組數、次數和重量，算出總訓練量，以及每次的感受。
 # en: 5be9810c81e208adc153f7aa0cc70f64c988d737
@@ -1125,7 +1125,7 @@ common-drag-to-fill = 拖曳以填滿
 # en: 87b8f44339c3a345782b1fa838bfa3b0406567b3
 sheet-abc-or-123-for-this = 欄類型
 # en: 69ff8ba19299f697ed3f5401bb7c03f0abbc4c67
-sheet-drag-to-resize-double-click = 拖曳調整大小，按兩下自動符合
+sheet-drag-to-resize-double-click = 拖曳調整大小，按兩下自動調整
 # en: 363a9922cf56c76397d7b72ae8425d30d0438b33
 sheet-fill-down-from-top-row = 從最上列向下填滿
 # en: 549a401f55bc461388a4f5f8554db5e0749d0a28
@@ -1452,7 +1452,7 @@ draw-sky = 天藍
 # en: 54076359fdc7f1f0e000b9ae15b96f8b09866acb
 draw-pink = 粉紅
 # en: 168cbb2ea52b9e34d271accecfa7d7951e948a99
-draw-clear = 清除
+draw-clear = 透明
 # en: b1985e387405e4d4afb40d5dac9b2656f5d6f770
 draw-shapes = 圖形
 # en: 4bab2d8fe13fa6ab57f80098b414f0f734c5dd25
@@ -1476,7 +1476,7 @@ draw-bring-to-front = 移到最上層
 # en: e259d4e19e695a41e2f10680f2e3f5693711382a
 draw-send-to-back = 移到最下層
 # en: 972d57379db3e5be76d4ead709fef1ad71ff03d6
-common-duplicate = 複製一份
+common-duplicate = 建立副本
 # en: 5301648dcf6b53cefc9ed52999aaa92d4603cae0
 common-edit = 編輯
 # en: f6fdbe48dc54dd86f63097a03bd24094dedd713a
@@ -1613,7 +1613,7 @@ anim-bouncing-ball = 彈跳球
 # en: 567b2c86aa06b4d0133474a39dc6545196754a25
 anim-ball-falls-faster-and-faster = 球越掉越快落向地板，影子在下方變大；來回播放，就會永遠彈跳下去。
 # en: 7296aa4a483797a1a82ec05a4598688ca056cd36
-anim-loading-spinner = 載入中轉圈
+anim-loading-spinner = 載入轉圈
 # en: ccf7f6eb9188fe228da413a1aaf39c5ee4994346
 anim-eight-dots-in-ring-each = 圓環上有八個點，依序脹大，讓一個亮點繞圈跑，頁面儲存時顯示。
 # en: 691f884e182237907640c6964bda657a5ffec1c0
@@ -1623,7 +1623,7 @@ anim-red-curtains-part-on-opening = 開幕夜紅色布幕拉開，電影節的�
 # en: 1383ce3b8f642f2c5946975ca61e868e4a504819
 anim-present-hops-stars-and-hearts = 禮物跳動，星星和愛心環繞擺動，祝福語閃著彩虹字母。
 # en: fad7f01d931894b10da998319cdc82f1a7d7e4dc
-anim-quick-standup = 快速站會
+anim-quick-standup = 快速站立會議
 # en: 79d688c0e9e1f3c402c3d6bedae252cfdd0b27aa
 anim-meme-with-caption-above-and = 一則迷因，上方和下方各有一行說明，中間有個轉動又搖晃的時鐘。
 # en: 7e9b34abf6e91127f94374508015ad795c91268b
@@ -1695,7 +1695,7 @@ anim-pause = 暫停
 # en: 5d12bd53552cafc41ca6146c04870df2e1574e13
 anim-play = 播放
 # en: fa968bd1155bd76231814d479bf070ed96cca9bb
-anim-pixel-art-is-made-in = 像素畫在「繪圖」中製作；動畫工具讓圖形動起來。
+anim-pixel-art-is-made-in = 像素畫在「繪圖」中製作；「動畫」讓圖形動起來。
 # en: b4a9395d25398654fd5d000e4b82a1d8273339bd
 anim-rainbow = 彩虹
 # en: 3d5096b70833fdae355f1ffcf32faf2066123467
@@ -1828,7 +1828,7 @@ common-drag-to-move = 拖曳以移動
 # en: 52db9dc3ff903f6d241a91adcbd83848467106c2
 outline-draw-as-mind-map = 畫成心智圖
 # en: 03683dee41f9db7fad6f8d06c6c6bd776b528ba0
-outline-draw-as-network = 畫成網絡圖
+outline-draw-as-network = 畫成網路圖
 # en: c01d65d48941d40cf0e4bad6bc84c525d99421da
 outline-draw-as-org-chart = 畫成組織圖
 # en: 3159fe421b3221381b3c778dc1c3c26e4540be37
@@ -1846,7 +1846,7 @@ outline-item-n = 項目 { $n }
 # en: 120ee44bec923665b04dc825b0307fe159232ce9
 outline-kind-of-line = 線條樣式
 # en: 789062517bc27b8cb5c78b1e88041e5bef69b507
-common-launch-plan = 上線計畫
+common-launch-plan = 上市計畫
 # en: 72eee0aaa10010ae7d362761115dfd7e064dd4d4
 outline-line-from-from-to-to = 從{ $from }到{ $to }的線
 # en: 2859ccc92143006360893c2a9cb1aaaa13b3928f
@@ -1905,7 +1905,7 @@ outline-due-date-change-it = 截止 { $date }。點按以變更
 # en: 6cf55f3558276e2eefff5dd41ec206dc9780bebf
 outline-remove-due-date = 移除截止日期
 # en: 891e9d6d47f1bacfcba2dca1b282afcbcd25d94d
-outline-agenda = 議程
+outline-agenda = 待辦總覽
 # en: aa73cdd3260a16a41d572c06ee0da42cb4b85286
 outline-by-status = 依狀態
 # en: 0e719dcbe720c315d66c977072f10251b56bd994
@@ -1984,7 +1984,7 @@ outline-syllabus = 課程大綱
 # en: 5b163ae0d9a3fd9b5ab6a8b6c27374091ceb25de
 outline-ten-week-course-when-and = 為期十週的課程：時間與地點、每週一個編號主題、如何評分，以及要讀什麼。
 # en: 9cea5f42a5742d9eef722836a7a7b59c6a5c0c5a
-outline-thesis-two-arguments-with-their = 一個論點、兩項論證與證據、反對意見與回應，以及出路。
+outline-thesis-two-arguments-with-their = 一個論點、兩項論證與證據、反對意見與回應，以及結論。
 # en: e5f2a2c3f76b55d5786f1c311773def62d6920f3
 outline-essay-plan = 論說文大綱
 # en: d926d538e1be8112e81292507985514feac5e4c4
@@ -2034,7 +2034,7 @@ deck-pitch = 一場提案
 # en: a9964d2d4aae75e70e2e8dace25022b6679f25d7
 deck-product-in-sentence-what-it = 用一句話說明產品、它的功能、表格裡的價格、上市日期，以及媒體聯絡人。
 # en: a46e6eb74ae783d7eb35ae76afc5ab984683886f
-deck-trivia-night-in-four-rounds = 四回合的知識問答之夜，另有計分表，答案放在最後一張投影片。
+deck-trivia-night-in-four-rounds = 四回合的益智問答之夜，另有計分表，答案放在最後一張投影片。
 # en: efebc637859160a6f694e66576eebb294de14712
 deck-residents-meeting-about-new-playground = 關於新遊樂場的住戶會議：為什麼、提案內容、圓餅圖預算、時間，以及如何表達意見。
 # en: 02e7a62fc65ed26cb0751706a5ea8f5783414eda
@@ -2042,7 +2042,7 @@ deck-science-lesson-on-chalkboard-aims = 黑板上的自然課：目標、他們
 # en: f3a66c7b2a6ebda85ea74938fce4c397eae2a131
 deck-seed-pitch-in-eight-slides = 八張投影片的種子輪募資簡報：問題、產品、圖表上的成長、商業模式、團隊、訴求。
 # en: aab8da6eadee157bba3937e9dc00741cfe48b13f
-deck-bike-shops-quarter-for-its = 商店給合夥人的季報：圖表上的營收、成功與失敗、重要的數字、下一季。
+deck-bike-shops-quarter-for-its = 單車店給合夥人的季報：圖表上的營收、成功與失誤、重要的數字、下一季。
 # en: d0fa5e5696edaf949dfe9e739a7a2eef0d433ae2
 deck-small-story-in-panels-about = 關於把東西借給鄰居的一則分格小故事。
 # en: 6c1ff81a2445a9eab1616588060b483cd5b6cde8
@@ -2064,7 +2064,7 @@ deck-lost-cat-poster = 走失貓咪海報
 # en: dd7cf099a356a9e69908104ae2d8c2743ba41fb7
 deck-product-launch = 產品上市
 # en: 68d708c4452b9eaca2d5d38e9d0a5848059fd138
-deck-quarterly-review = 季度檢討
+deck-quarterly-review = 季度回顧
 # en: ca40a6181df561c65b71e9ebdf580ccae6b007b7
 deck-recipe-zine = 食譜小誌
 # en: 02bfd82260b75fe685e4e972cb9a3ae9b0a42f5f
@@ -2138,7 +2138,7 @@ deck-ocean = 海洋
 # en: 07a59415416c4f5915d5efbe6319ca69450f0a77
 deck-bubblegum = 泡泡糖
 # en: bc727a101b60bbc2b4f96365ecf1ee4bd1db685a
-deck-arcade = 遊樂場
+deck-arcade = 電玩
 # en: 5efe442a0ed9b1e51ec7e85696d66d6ac3db83a8
 deck-chalkboard = 黑板
 # en: 5f941ab65fbabe87f41cd73c9136f5a4c97087e8
@@ -2232,7 +2232,7 @@ deck-one-bullet-line-tab-steps = 一行一個項目符號。按 Tab 縮排。
 # en: f8948a4a523b4312c5567f9cff1f6788c757998f
 deck-line-or-two-under-title = 標題下方的一兩行字
 # en: 236bcf1c6a83d3b0f85a065c777d7948b22a0c22
-deck-what-this-page-says-type = 頁面文字。它會縮小以符合頁面。
+deck-what-this-page-says-type = 頁面文字。文字會自動縮小以符合頁面。
 # en: e80e281dac24d9c4c3f60dcdbf8700e9603b825e
 deck-panel-line-what-is-said = 一行一格：說的話 | 圖說。「圖示」可加上圖片。
 # en: 3d6e76c9325034deb76b92c8cc47a2d3c22fcdf3
@@ -2276,11 +2276,11 @@ deck-qr-code-of-this-deck = 這份簡報的 QR 碼
 # en: 5d5bc5601280c776405941347bbf7e9c63dc3954
 deck-sheet-side-n = 紙張，第 { $n } 面
 # en: 1982f74c2102a55783a4774ddd4895dc7fec26f0
-deck-cut-along-dashes-this-half = 沿虛線剪開・這半邊朝外
+deck-cut-along-dashes-this-half = 沿虛線剪開‧這半邊朝外
 # en: 0fc0c2932d66df46e1af55ac50d98be2bccd63c3
 deck-print-on-back-flipped-on = 列印在背面，沿長邊翻面
 # en: e0226944c5e9e4df97a3bf718ac488a8a51118fa
-deck-cut-along-dashes-fold-along = 沿虛線剪開・沿點線摺疊
+deck-cut-along-dashes-fold-along = 沿虛線剪開‧沿點線摺疊
 # en: b0ccda7ec0d37c14d00e5e9f57eeadcb1045ebd7
 deck-print-it-double-sided-on = 用 Letter 紙雙面列印，沿長邊翻面，以實際大小列印。沿虛線剪開，把上半部疊在下半部上，再從中間對摺。
 # en: 7d7f71d31c8968c0555f49f9430133796d626c4f
@@ -2290,9 +2290,9 @@ deck-print-it-double-sided-on-letter-paper-flipping-on-short-edge-at-actual-size
 # en: 96bf1a2ba3e6d649669efc225b3104521735ff25
 deck-print-it-double-sided-on-letter-paper-flipping-on-short-edge-at-actual-size-fold-right-third-in-then-left-third-over-it-front-is-on-top = 用 Letter 紙雙面列印，沿短邊翻面，以實際大小列印。先把右邊三分之一摺進去，再把左邊三分之一蓋上去：封面在最上面。
 # en: 6d4cc8d4405840522000283a7e419c1c93e89392
-deck-print-it-on-letter-paper = 用 Letter 紙列印，以實際大小列印。
+deck-print-it-on-letter-paper = 以實際大小列印在 Letter 紙上。
 # en: f81a8cbfa80cae20e64c2c1dd92fec6cfefba6c9
-deck-print-it-on-letter-paper-at-actual-size-cut-along-dashes-six-badges-sheet = 用 Letter 紙列印，以實際大小列印。沿虛線剪開：每張紙六個名牌。
+deck-print-it-on-letter-paper-at-actual-size-cut-along-dashes-six-badges-sheet = 以實際大小列印在 Letter 紙上。沿虛線剪開：每張紙六個名牌。
 
 # Presenting, and the closing slide
 # en: 6e875951a6f9aa1374d93572de657c12ded57355
@@ -2324,7 +2324,7 @@ deck-powerpoint-pptx = PowerPoint（PPTX）
 # en: 7660a22bdc9507edd353dd61198b9aa86488d936
 deck-picture-of-every-slide-zip = 每張投影片的圖片（PNG 的 ZIP）
 # en: 98a41f54e049532b6032b88d7656348adc178c2a
-deck-animation-of-deck-gif = 簡報的動畫影片（GIF）
+deck-animation-of-deck-gif = 簡報的動畫（GIF）
 # en: 3bab526d831e1024e6f8e7d197f9c3d72cc4f0e4
 deck-film-of-deck-webm = 簡報的影片（WebM）
 
@@ -2334,7 +2334,7 @@ deck-title-agenda-three-points-with = 標題、議程、三個附講者備忘稿
 # en: 60c974074604818e661eff7940285669d1496647
 deck-status-update = 進度報告
 # en: 34714be3698c31c72afb1d4d4b8a7b0c69f30fc5
-deck-done-and-next-side-by = 已完成與接下來並排，接著是風險，再來是請求。
+deck-done-and-next-side-by = 已完成與接下來的事並排，接著是風險，再來是需要的協助。
 # en: e946db45d2689df95cbac9f8137664409c51f5d8
 deck-proposal = 提案
 # en: 52ab7599cc26432ef9b492b401d04eee1ca5e699
@@ -2486,7 +2486,7 @@ common-stops = 停止於
 # en: 480b9be2834a2278919632171f788a9a80d5d743
 cal-same-dates-as-gantt-chart = 相同的日期，改用甘特圖顯示
 # en: 7ea6dec71584012ab4044cc464dc601741ff2c50
-cal-this-calendar-is-written-in = 這個行事曆以{ $zone }時間書寫。
+cal-this-calendar-is-written-in = 這個行事曆使用{ $zone }時間。
 # en: e10c10f818ac8e510b74062cde201eae4e8d8c66
 cal-this-calendar-names-no-time = 此行事曆沒有設定時區，所以時間依你的時區顯示（{ $zone }）。
 # en: 1b4785331db3b08cd8e3cfa4bd36216731a79e54
@@ -2525,7 +2525,7 @@ cal-small-teams-time-off-public = 小團隊的休假、國定假日和聖誕休�
 # en: cd6036648af6d0d5614f0ec65eb732300281e059
 cal-community-garden-plots-year-when = 市民農園的一年：何時播種、定植、收成和修剪，年年循環。
 # en: 1b04e3c7d585a3d6297852d158919c9833538a01
-cal-fall-term-from-first-day = 秋季學期，從開學第一天到聖誕節：停課日、社團、校外教學、家長之夜。
+cal-fall-term-from-first-day = 秋季學期，從開學第一天到聖誕節：停課日、社團、校外教學、親師座談。
 # en: f80b28faa22109c4d14cf7eb7994768abca09ca8
 cal-bills-and-renewals = 帳單與續約
 # en: 2223281ed9222907f9d00ef35ab71df263d06e46
@@ -2551,7 +2551,7 @@ cal-twelve-weeks-to-half-marathon = 十二週準備半程馬拉松的時程：�
 # en: fdab2603fde2488e117cca6335baee3c481231b9
 cal-two-days-of-talks-and = 兩天的演講和工作坊，按小時排列，每個會議室一種顏色。
 # en: c8bbdc31a9be182914dd6207c08837389224b33a
-cal-two-issues-of-quarterly-from = 一份季刊的兩期，從稿件到發售，加上每月會議和上市。
+cal-two-issues-of-quarterly-from = 一份季刊的兩期，從稿件到發售，加上每月會議和創刊發表。
 # en: 0e4753002a6b042b841f5296f0cdb7c71110377b
 cal-volunteer-schedule = 志工輪值表
 # en: f6003458ea2ce51dfa0efa7d0819ccb57ac35bd1
@@ -2563,7 +2563,7 @@ cal-who-does-which-shift-color = 聖誕節前食物銀行的輪班，誰值哪�
 diagram-diagram = 圖解
 # One app, eight kinds (mind map, org chart…); a 'thing' is whatever the kind is made of: an idea, a person, a step.
 # en: a6c5e06888a8fcbcb520ea2a9952009715b62e25
-diagram-mind-maps-org-charts-family = 心智圖、組織圖、家族樹、泳道圖、時間軸、文氏圖、座位表和網絡圖，只要寫幾行就能畫出來。
+diagram-mind-maps-org-charts-family = 心智圖、組織圖、家族樹、泳道圖、時間軸、文氏圖、座位表和網路圖，只要寫幾行就能畫出來。
 # en: 5c943d9da9c2dfa4508b7318865477cb55850904
 diagram-empty-diagram = 空白圖解
 # The kinds, one of each kind's things (Insert's item), and how a line of each is written
@@ -2582,7 +2582,7 @@ diagram-venn = 文氏圖
 # en: 840cfb1a1746bbb150371dbcf3ed341983a80c11
 diagram-seating-chart = 座位表
 # en: 53ebc572b4a44802ba114729f07bdaaf5409a9d7
-diagram-network = 網絡圖
+diagram-network = 網路圖
 # en: bd69a4732fe12702d5ff5838852eb29e4a9e2e02
 diagram-idea = 想法
 # en: 8c41ae88467fe5bbad09fcd488662b25c3ec5333
@@ -2636,7 +2636,7 @@ diagram-browser-api-database-cache-and = 瀏覽器、API、資料庫、快取和
 # en: 87796704431b42da8083f869f5ed707dae8cf8fe
 diagram-building-project = 一個建築專案
 # en: 5accd00ffa799aafee66a6e2e7a77c3e89abdd38
-diagram-launch-and-everything-that-branches = 一次上線，以及由它延伸的一切：產品、行銷、客服。
+diagram-launch-and-everything-that-branches = 一場產品發表，以及由它延伸的一切：產品、行銷、客服。
 # en: 9261260de34a3ec89f2846b1c6a53b8adc25bb35
 diagram-package-through-store-warehouse-and = 一個包裹經過商店、倉庫和快遞，中間有一個決策。
 # en: 0ef1081dd660cc404f38216048590ca0999c05d2
@@ -2648,13 +2648,13 @@ diagram-year-of-dates-from-plans = 一整年的日期，從計畫核准到開門
 # en: c75834baf2bd8482dbb5a822f4466908244e65fa
 diagram-cats-and-dogs = 貓與狗
 # en: 9e4600a93df1d0ffd290278244beed2111ac5cff
-diagram-computing-briefly = 簡述電腦運算
+diagram-computing-briefly = 電腦簡史
 # en: 4944a571da52f0920a54f002e637dfc6e179603f
 diagram-fast-cheap-good = 快、便宜、好
 # en: 77373004b00a68bf2cad476daa1ef0af2a7e26f0
 diagram-four-tables-and-who-sits = 四張桌子，以及每桌坐了誰。
 # en: 1db47899ccb6eda1f1c46cee3c73acb1394c00ca
-diagram-from-lovelace-to-now-spaced = 從愛達・勒芙蕾絲到現在，依年份比例排列，底部標示時代。
+diagram-from-lovelace-to-now-spaced = 從愛達·勒芙蕾絲到現在，依年份比例排列，底部標示時代。
 # en: c973a2e43350a1c09697af1bd39a17f3cfba2c36
 diagram-from-order-to-doorstep = 從下單到送到家門口
 # en: 91519d37fd9fe6f0c40b0429e0ed9f8eb8206006
@@ -2662,7 +2662,7 @@ diagram-from-job-description-to-yes = 從職缺說明到錄取，一個泳道一
 # en: bfd1a142e965498fd2dbaa45ca87c1cbdc9071c9
 diagram-grandparents-their-children-and-grandchildren = 祖父母、他們的子女和孫輩，附年份。
 # en: 347a51bd3c26ccac83baeca51966f318d5bb06c4
-diagram-hiring-someone = 招聘一個人
+diagram-hiring-someone = 招募新人
 # en: f30d75896062b87258051feec53d9f7c05059037
 diagram-how-app-hangs-together = 應用程式如何組成
 # en: 70a97689961708e74a02157e6675bbcab893b7a4
@@ -2684,7 +2684,7 @@ diagram-classroom = 一間教室
 # en: e491ee6c30111d9c51d83d4a19aba47a3c39c769
 diagram-family-with-godmother = 有教母的一家人
 # en: c164cf0f878062c2b43b69bf4c1de2c3d6a1f94d
-diagram-principal-her-assistant-principals-classroom = 校長、她的副校長、各班導師和總務主任。
+diagram-principal-her-assistant-principals-classroom = 校長、她的副校長、各班導師和工友。
 # en: f25d2f240d3a52d5361d9b6dd4d8561290566159
 diagram-move-to-lisbon-by-march = 三月前搬到里斯本：文件、住處、工作與生活，以及什麼必須先做。
 # en: d2586903dd907f55b8076edbe00b87f4e45ab92f
@@ -2696,7 +2696,7 @@ diagram-router-and-everything-on-it = 一台路由器和上面的一切：筆電
 # en: 949c596fb3177561b6f2515cbc92b6b68a4292c2
 diagram-team-by-its-skills-design = 依專長看一個團隊：設計、寫作和程式，以及誰身兼數職。
 # en: eeb20483d989d9deef42a5ae150f171af0bc6201
-diagram-expense-report = 一份費用報銷
+diagram-expense-report = 一份費用報帳
 # en: ded9774849cab88a3dd08936595ffe270dd397a2
 diagram-apollo-11 = 阿波羅 11 號
 # en: b5723994f111884ca2f9a82ecb525fb6992e44c8
@@ -2754,7 +2754,7 @@ diagram-tap-person-to-type-on = 點一下某人即可編輯。用 + 加名字新
 # en: 14e56ce6d5f3d8d56d2ce979bf2eb20aaa9dd93d
 diagram-tap-empty-space-for-table = 點一下空白處即可新增桌子。點一下桌子或人即可編輯。逗號開始下一位賓客。把人拖到另一張桌子。
 # en: 7049f105f3a76be9cb8c6d7b74eb3edf60d9a7da
-diagram-tap-inside-circles-to-add = 在圓圈內點一下即可新增項目。逗號開始下一項。點一下集合名稱即可重新命名。把項目拖到其他圓圈之間。
+diagram-tap-inside-circles-to-add = 在圓圈內點一下即可新增項目。逗號開始下一項。點一下集合名稱即可重新命名。可把項目拖到另一個圓圈。
 
 ## the Trip Planner
 
@@ -2815,9 +2815,9 @@ trip-note-for-stop-n = 停靠點 { $n } 的註記
 # en: 0a8abf5522e2f20b1f976982533aabd909645324
 trip-about-time-by-car = 開車約 { $time }
 # en: 7f85e32db6c77473c8b172d1ad1dab75462705a3
-trip-tap-map-to-add-first = 點選地圖新增第一個停靠點，或用名稱插入一個地點。
+trip-tap-map-to-add-first = 點選地圖新增第一個停靠點，或用「插入」依名稱加入地點。
 # en: 472fd6a8979384a06de401f16cafb9cfdd9a824c
-trip-insert-place-by-name = 用名稱插入一個地點。
+trip-insert-place-by-name = 用「插入」依名稱加入地點。
 # Finding a place by name
 # en: b75a19207f834200f4801a2db37886567baf25bc
 trip-place-by-name = 依名稱找地點
@@ -2834,7 +2834,7 @@ trip-searching-sends-words-you-type = 搜尋只會把你輸入的內容傳給 Op
 # en: 2b36ec5f26fb5c35fccb5edd05776349d238b677
 trip-places-found = 找到的地點
 # en: 6c70807e19d1f88aae7d66770719debbaf4ae89b
-trip-nothing-found = 找不到。
+trip-nothing-found = 找不到結果。
 # The templates
 # en: ce482808305f25f4c7f63905061b0c411444f12c
 trip-week-in-portugal = 葡萄牙一週遊
@@ -3023,7 +3023,7 @@ calc-kitchen-conversions = 廚房換算
 # en: c7ccdb52f144fcec56adb8ecb5264f35d03600c0
 calc-cups-ovens-spoons-and-weights = 杯、烤箱、湯匙和重量，從一種計量換算成另一種。
 # en: 267b3d4696b05cc65039fcf4afb8cd9548ed5a29
-calc-scaling-recipe = 食譜放大
+calc-scaling-recipe = 食譜份量換算
 # en: a0e9dcbc29ed1364a4891c3671dd43675af64d11
 calc-banana-bread-for-eight-made = 八人份的香蕉麵包改做十二人份：每種用量都乘以一點五。
 # en: 8639704eb84800c829b41e6fcd833d686dcb41f6
@@ -3037,7 +3037,7 @@ calc-trip-priced-in-euros-and = 一趟旅行用歐元計價再換成美元，外
 # en: 6645ae7e46c209b7ba6f5fb3b6aa707395a2c3d2
 calc-fuel-for-trip = 旅程油費
 # en: e2d3235c5cfd9ceffb4e54f0635e4f3841b0c0e1
-calc-boston-to-montreal-and-back = 波士頓到蒙特婁往返：英里數、每加侖英里數、油價，四種算法。
+calc-boston-to-montreal-and-back = 波士頓到蒙特婁往返：英里數、每加侖英里數、油價，四人分攤。
 # en: bb294d581aa3512dfdaf06cb5705338f026425ff
 calc-paint-for-room = 房間油漆
 # en: 8899142eaeb03e3a2cfc17f5e68f1977478e2ce5
@@ -3132,7 +3132,7 @@ compare-n-put-in = { $n ->
 # en: c99db7abba3f7227854d93a163ad3494de4e1571
 open-opened-name = 已開啟 { $name }
 # en: f917dee4211bd4af58db8efec79e354e1ffb4912
-open-that-file-is-not-words = 小小辦公室 無法讀取那個檔案。
+open-that-file-is-not-words = 小小辦公室無法讀取那個檔案。
 # en: 1d08903947cc83b648f8ad96b1e23466a2dbed11
 open-that-file-is-too-large = 那個檔案太大了。
 # en: 8f432852569edbf7610713a6554e7a61396327d5
