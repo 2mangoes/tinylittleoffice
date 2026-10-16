@@ -1,6 +1,12 @@
 ---
 name: tinyoffice
-description: Make almost any small document as a shareable link by writing a Tiny Little Office URL: spreadsheets and charts, models of a small business, text, letters, résumés, contracts, invoices, slide decks, outlines, zines, booklets, brochures, comics, posters, name badges, drawings and pixel art, diagrams (mind map, org chart, family tree, swimlanes, timeline, Venn, seating chart, network), animations, calendars and Gantt schedules, trips on a map, and a calculator that keeps its working. Use when someone asks for any of these and a link they can open, edit and share would serve them better than a file.
+description: >-
+  Make almost any small document as a shareable link by writing a Tiny Little Office URL: spreadsheets and
+  charts, models of a small business, text, letters, résumés, contracts, invoices, slide decks, outlines,
+  zines, booklets, brochures, comics, posters, name badges, drawings and pixel art, diagrams (mind map, org
+  chart, family tree, swimlanes, timeline, Venn, seating chart, network), animations, calendars and Gantt
+  schedules, trips on a map, and a calculator that keeps its working. Use when someone asks for any of these
+  and a link they can open, edit and share would serve them better than a file.
 license: MIT
 ---
 
