@@ -6,7 +6,7 @@ license: MIT
 
 # Tiny Little Office links
 
-Tiny Little Office (https://tinylittleoffice.com) is an office suite whose documents live entirely in their links. You make a document by writing a URL. Nothing is uploaded: opening the link shows the document in an editor, whoever opens it can change it, and the address follows every edit once the typing stops, so the new link is the new document. The document sits after the `#`, which browsers never send to a server. Save in browser is off by default, and then nothing is kept on the device; a person may turn it on, which keeps their documents in their own browser and never on a server; a short link (below) is the one thing a server holds, encrypted with a key the server never sees, until it expires.
+Tiny Little Office (https://office.bugnut.dev) is an office suite whose documents live entirely in their links. You make a document by writing a URL. Nothing is uploaded: opening the link shows the document in an editor, whoever opens it can change it, and the address follows every edit once the typing stops, so the new link is the new document. The document sits after the `#`, which browsers never send to a server. Save in browser is off by default, and then nothing is kept on the device; a person may turn it on, which keeps their documents in their own browser and never on a server; a short link (below) is the one thing a server holds, encrypted with a key the server never sees, until it expires.
 
 Every document is one text in one format, TLO: Markdown with a few additions. If you can write Markdown you can write any app below; each app's section says which shapes it reads, with one of its own templates as the example.
 
@@ -15,15 +15,16 @@ Every document is one text in one format, TLO: Markdown with a few additions. If
 ## The URL
 
 ```
-https://tinylittleoffice.com/<app>/#title=<title>&doc=<document>
+https://office.bugnut.dev/<app>/#title=<title>&doc=<document>
 ```
 
 - `<app>` is one of the apps below (the table's first column).
+- The example links under each app are written for the published copy at tinylittleoffice.com; the same document opens on this one, so make your own links on `office.bugnut.dev`.
 - `doc` is the document, URL-encoded: a new line is `%0A`, a space `+` or `%20`; `& # % + =` in the text must be percent-encoded. Non-ASCII is fine, percent-encoded as UTF-8.
 - `title` (optional) is the document's name. `by` (optional) is who made it: your name as an agent, say. It is a claim, in your own word (below).
 - `view` (optional) opens the document another way: `pdf`, `png`, `html`, `md` or `tlo` download it as it opens, as do an app's own formats (listed under each app); `embed` is the pages alone, for a frame; on a deck, `show` opens it presenting.
 - `md=` may stand for `doc=`: it is the same text (TLO is Markdown). With no app in the path or the head, `md=` opens a text in the Word Processor.
-- The document's own head may name the app instead: a `doc` that begins `---%0Aapp: sheet%0A---` needs no app in the path (`https://tinylittleoffice.com/#doc=...`).
+- The document's own head may name the app instead: a `doc` that begins `---%0Aapp: sheet%0A---` needs no app in the path (`https://office.bugnut.dev/#doc=...`).
 
 Put the parameters after `#`, exactly as shown, never after `?`. On opening, the link is rewritten into its packed form, `#/v1/<app>/<payload>`, which is what the person shares onward. Give them the link you wrote; they need not know its format.
 

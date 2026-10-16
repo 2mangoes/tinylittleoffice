@@ -1,6 +1,6 @@
 # Tiny Little Office
 
-Tiny Little Office (https://tinylittleoffice.com) is an office suite whose documents live entirely in their links. You make a document by writing a URL.
+Tiny Little Office (https://office.bugnut.dev) is an office suite whose documents live entirely in their links. You make a document by writing a URL.
 
 The document is TLO (Markdown with a few additions), percent-encoded after `#doc=`; the site and the API’s `link` write it packed, `#/v1/<app>/<payload>`; both open:
 
